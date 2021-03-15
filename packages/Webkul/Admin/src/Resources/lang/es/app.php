@@ -79,7 +79,8 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'Descuento',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
@@ -237,7 +238,9 @@ return [
         'view' => 'Ver',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'Actualizar Estado'
+        'update-status' => 'Actualizar Estado',
+        'transaction-id' => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
 
     'account' => [
@@ -384,7 +387,8 @@ return [
             'total-due' => 'Total adeudado',
             'cancel-confirm-msg' => '¿Está seguro que desea cancelar este pedido?',
             'refund-btn-title' => 'El monto del reembolso no debe ser cero',
-            'refunds' => 'Reembolsos'
+            'refunds' => 'Reembolsos',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -461,6 +465,20 @@ return [
             'view-title' => 'Reembolso #:refund_id',
             'invalid-refund-amount-error' => 'El monto del reembolso no debe ser cero.'
 
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 
