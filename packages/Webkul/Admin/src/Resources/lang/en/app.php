@@ -82,7 +82,8 @@ return [
         'email-templates' => 'Email Templates',
         'events' => 'Events',
         'discount' => 'Discount',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
@@ -249,7 +250,9 @@ return [
         'ltr' => 'LTR',
         'update-status' => 'Update Status',
         'subject' => 'Subject',
-        'date' => 'Date'
+        'date' => 'Date',
+        'transaction-id' => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
 
     'account' => [
@@ -401,7 +404,8 @@ return [
             'submit-comment' => 'Submit Comment',
             'notify-customer' => 'Notify Customer',
             'customer-notified' => ':date | Customer <b>Notified</b>',
-            'customer-not-notified' => ':date | Customer <b>Not Notified</b>'
+            'customer-not-notified' => ':date | Customer <b>Not Notified</b>',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -478,6 +482,20 @@ return [
             'view-title' => 'Refund #:refund_id',
             'invalid-refund-amount-error' => 'Refund amount should be non zero.'
 
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 

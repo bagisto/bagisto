@@ -250,6 +250,15 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/refunds/view/{id}', 'Webkul\Admin\Http\Controllers\Sales\RefundController@view')->defaults('_config', [
                     'view' => 'admin::sales.refunds.view',
                 ])->name('admin.sales.refunds.view');
+
+                // Sales Transactions Routes
+                Route::get('/transactions', 'Webkul\Admin\Http\Controllers\Sales\TransactionController@index')->defaults('_config', [
+                    'view' => 'admin::sales.transactions.index',
+                ])->name('admin.sales.transactions.index');
+
+                Route::get('/transactions/view/{id}', 'Webkul\Admin\Http\Controllers\Sales\TransactionController@view')->defaults('_config', [
+                    'view' => 'admin::sales.transactions.view',
+                ])->name('admin.sales.transactions.view');
             });
 
             // Catalog Routes
