@@ -68,6 +68,16 @@ class Transaction
                     $this->orderTransactionRepository->create($transactionData);
                 }
             }
+        } else if ($invoice->order->payment->method == 'paypal_standard') {
+            $transactionData['transaction_id'] = $data['txn_id'];
+            $transactionData['status']         = $data['payment_status'];
+            $transactionData['type']           = $data['payment_type'];
+            $transactionData['payment_method'] = $invoice->order->payment->method;
+            $transactionData['order_id']       = $invoice->order->id;
+            $transactionData['invoice_id']     = $invoice->id;
+            $transactionData['data']           = json_encode ($data);
+
+            $this->orderTransactionRepository->create($transactionData);
         }
     }
 }

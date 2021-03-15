@@ -251,7 +251,7 @@ return [
         'update-status' => 'Actualizar Estado',
         'subject' => 'Asunto',
         'date' => 'Fecha',
-        'transaction-id' => 'ID de Transacción',
+        'transaction-id' => 'Transacción #',
         'transaction-date' => 'Fecha de Transacción',
     ],
 
@@ -486,8 +486,8 @@ return [
 
         'transactions' => [
             'title'               => 'Transacciones',
-            'id'                  => 'Id',
-            'transaction-id'      => 'ID de Transacción',
+            'id'                  => 'ID',
+            'transaction-id'      => 'Transacción #',
             'payment-method'      => 'Método de Pago',
             'action'              => 'Accción',
             'view-title'          => 'Transacciónn #:transaction_id',
