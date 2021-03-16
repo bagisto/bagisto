@@ -5,6 +5,7 @@ namespace Webkul\Product\Repositories;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Product\Models\Product;
 use Illuminate\Pagination\Paginator;
 use Webkul\Core\Eloquent\Repository;
@@ -213,11 +214,39 @@ class ProductRepository extends Repository
                 $priceRange = explode(',', $priceFilter);
                 if (count($priceRange) > 0) {
 
-                    $priceQuery = DB::raw('(CASE WHEN ' . DB::getTablePrefix() . 'catalog_rule_product_prices.price > 0 THEN ' . DB::getTablePrefix() . 'catalog_rule_product_prices.price ELSE ' . DB::getTablePrefix() . 'variants.min_price END)');
+                    $customerGroupId = null;
 
-                    $qb->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
-                    ->where($priceQuery, '>=',  core()->convertToBasePrice($priceRange[0]))
-                    ->where($priceQuery, '<=',  core()->convertToBasePrice(end($priceRange)));
+                    if (Cart::getCurrentCustomer()->check()) {
+                        $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
+                    } else {
+                        $customerGuestGroup = app('Webkul\Customer\Repositories\CustomerGroupRepository')->getCustomerGuestGroup();
+
+                        if ($customerGuestGroup) {
+                            $customerGroupId = $customerGuestGroup->id;
+                        }
+                    }
+
+                    $qb
+                        ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
+                        ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
+                        ->where(function ($qb) use ($priceRange, $customerGroupId) {
+                            $qb->where(function ($qb) use ($priceRange){
+                                $qb
+                                    ->where('variants.min_price', '>=',  core()->convertToBasePrice($priceRange[0]))
+                                    ->where('variants.min_price', '<=',  core()->convertToBasePrice(end($priceRange)));
+                            })
+                            ->orWhere(function ($qb) use ($priceRange) {
+                                $qb
+                                    ->where('catalog_rule_product_prices.price', '>=',  core()->convertToBasePrice($priceRange[0]))
+                                    ->where('catalog_rule_product_prices.price', '<=',  core()->convertToBasePrice(end($priceRange)));
+                            })
+                            ->orWhere(function ($qb) use ($priceRange, $customerGroupId) {
+                                $qb
+                                    ->where('product_customer_group_prices.value', '>=',  core()->convertToBasePrice($priceRange[0]))
+                                    ->where('product_customer_group_prices.value', '<=',  core()->convertToBasePrice(end($priceRange)))
+                                    ->where('product_customer_group_prices.customer_group_id', '=', $customerGroupId);
+                            });
+                        });
                 }
             }
 
