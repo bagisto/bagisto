@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Webkul\Velocity\Database\Seeders\VelocityMetaDataSeeder;
 use Webkul\Admin\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
