@@ -80,7 +80,8 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'Korting',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
@@ -391,6 +392,7 @@ return [
             'comment' => 'Comment',
             'submit-comment' => 'Submit Comment',
             'notify-customer' => 'Notify Customer',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -467,6 +469,20 @@ return [
             'view-title' => 'Terugbetaling #:refund_id',
             'invalid-refund-amount-error' => 'Het restitutiebedrag mag niet nul zijn.'
 
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 
