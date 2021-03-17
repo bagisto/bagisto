@@ -80,7 +80,8 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'Desconto',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
@@ -238,7 +239,9 @@ return [
         'view' => 'Visão',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'Atualizar o status'
+        'update-status' => 'Atualizar o status',
+        'transaction-id' => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
 
     'account' => [
@@ -390,6 +393,7 @@ return [
             'comment' => 'Comment',
             'submit-comment' => 'Submit Comment',
             'notify-customer' => 'Notify Customer',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -466,6 +470,20 @@ return [
             'view-title' => 'Reembolso #:refund_id',
             'invalid-refund-amount-error' => 'Refund amount should be non zero.'
 
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 

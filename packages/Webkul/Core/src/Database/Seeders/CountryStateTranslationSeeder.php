@@ -11,7 +11,7 @@ class CountryStateTranslationSeeder extends Seeder
     public function run()
     {
 
-        foreach (['ar', 'fa', 'pt_BR'] as $code) {
+        foreach (['ar', 'es', 'fa', 'pt_BR'] as $code) {
             DB::table('country_translations')->where('locale', $code)->delete();
 
             DB::table('country_state_translations')->where('locale', $code)->delete();

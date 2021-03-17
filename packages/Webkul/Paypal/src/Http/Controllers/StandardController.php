@@ -2,21 +2,21 @@
 
 namespace Webkul\Paypal\Http\Controllers;
 
+use Webkul\Paypal\Helpers\Ipn;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Paypal\Helpers\Ipn;
 
 class StandardController extends Controller
 {
     /**
-     * OrderRepository object
+     * OrderRepository $orderRepository
      *
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
-     * Ipn object
+     * IPN $ipnHelper
      *
      * @var \Webkul\Paypal\Helpers\Ipn
      */
@@ -62,7 +62,7 @@ class StandardController extends Controller
     }
 
     /**
-     * Success payment
+     * Success payment.
      *
      * @return \Illuminate\Http\Response
      */
@@ -78,7 +78,7 @@ class StandardController extends Controller
     }
 
     /**
-     * Paypal Ipn listener
+     * Paypal IPN listener.
      *
      * @return \Illuminate\Http\Response
      */

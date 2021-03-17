@@ -40,7 +40,7 @@ jobs:
       - name: Composer install
         run: |
           set -e
-          composer install --no-interaction --ansi --no-progress --no-suggest --optimize-autoloader
+          composer install --no-cache
 
       - name: Migrate database
         run: set -e && php artisan migrate --env=testing
