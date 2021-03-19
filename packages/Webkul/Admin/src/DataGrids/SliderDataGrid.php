@@ -52,7 +52,7 @@ class SliderDataGrid extends DataGrid
           ->where('ct.locale', app()->getLocale());
 
         if ($this->locale !== 'all') {
-            $queryBuilder->where('sl.locale', $this->locale);
+            $queryBuilder->whereRaw("find_in_set(?, sl.locale)", [$this->locale]);
         }
 
         if ($this->channel !== 'all') {

@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Carbon\Carbon;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SliderRepository;
 use Webkul\Product\Repositories\SearchRepository;
@@ -43,8 +44,8 @@ class HomeController extends Controller
 
     /**
      * loads the home page for the storefront
-     * 
-     * @return \Illuminate\View\View 
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -54,16 +55,28 @@ class HomeController extends Controller
 
         $sliderData = $this->sliderRepository
             ->where('channel_id', $currentChannel->id)
-            ->where('locale', $currentLocale->code)
+            ->whereRaw("find_in_set(?, locale)", [$currentLocale->code])
+            ->where(function ($query) {
+                $query->where('expired_at', '>=', Carbon::now()->format('Y-m-d'))
+                    ->orWhereNull('expired_at');
+            })
             ->get()
             ->toArray();
+
+        usort($sliderData, function ($a, $b) {
+            if ($a['sort_order'] == $b['sort_order']) {
+                return 0;
+            }
+
+            return ($a['sort_order'] < $b['sort_order']) ? -1 : 1;
+        });
 
         return view($this->_config['view'], compact('sliderData'));
     }
 
     /**
      * loads the home page for the storefront
-     * 
+     *
      * @return \Exception
      */
     public function notFound()
@@ -80,6 +93,6 @@ class HomeController extends Controller
     {
         $url = $this->searchRepository->uploadSearchImage(request()->all());
 
-        return $url; 
+        return $url;
     }
 }

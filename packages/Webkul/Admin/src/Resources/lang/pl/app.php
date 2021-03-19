@@ -862,7 +862,9 @@ return [
             'update-success' => 'Element suwaka pomyślnie zaktualizowany',
             'update-fail' => 'Nie można zaktualizować suwaka',
             'delete-success' => 'Nie można usunąć ostatniego elementu lidera',
-            'delete-fail' => 'Element suwaka został pomyślnie usunięty'
+            'delete-fail' => 'Element suwaka został pomyślnie usunięty',
+            'expired-at'  => 'Expire Date',
+            'sort-order'  => 'Sort Order'
         ],
 
         'tax-categories' => [
