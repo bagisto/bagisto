@@ -208,7 +208,7 @@
                                         <div class="product image">
                                             <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
 
-                                            <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
+                                            <img class="item-image" src="{{ $productBaseImage['small_image_url'] ?? asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.webp') }}" />
                                         </div>
 
                                         <div class="description do-not-cross-arrow">

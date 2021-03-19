@@ -78,7 +78,8 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'İndirim',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
@@ -236,7 +237,9 @@ return [
         'view' => 'Görüntüle',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'Durum Güncelle'
+        'update-status' => 'Durum Güncelle',
+        'transaction-id' => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
 
     'account' => [
@@ -388,7 +391,8 @@ return [
             'submit-comment' => 'Yorum Gönder',
             'notify-customer' => 'Müşteriyi Bilgilendir',
             'customer-notified' => ':date | Müşteri <b>Bilgilendirildi</b>',
-            'customer-not-notified' => ':date | Müşteri <b>Bilgilendirilmedi</b>'
+            'customer-not-notified' => ':date | Müşteri <b>Bilgilendirilmedi</b>',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -465,6 +469,20 @@ return [
             'view-title' => 'İade #:refund_id',
             'invalid-refund-amount-error' => 'Lütfen iade miktarını giriniz.'
 
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 

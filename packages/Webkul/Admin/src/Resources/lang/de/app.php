@@ -81,6 +81,7 @@ return [
         'tax-rates'                => 'Steuersätze',
         'discount'                 => 'Rabatt',
         'cms'                      => 'CMS',
+        'transactions'             => 'Transactions'
     ],
     'acl'           =>
     [
@@ -240,6 +241,8 @@ return [
         'rtl'              => 'RTL',
         'ltr'              => 'LTR',
         'update-status'    => 'Update-Status',
+        'transaction-id'   => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
     'account'       =>
     [
@@ -388,6 +391,7 @@ return [
             'cancel-confirm-msg' => 'Sind Sie sicher, dass Sie diese Bestellung stornieren möchten?',
             'refund-btn-title' => 'Rückerstattung',
             'refunds' => 'Erstattungen',
+            'transactions' => 'Transactions'
         ],
         'invoices' =>
         [
@@ -462,6 +466,20 @@ return [
             'view-title' => 'Rückerstattung #:refund_id',
             'invalid-refund-amount-error' => 'Der Rückerstattungsbetrag sollte nicht Null sein.',
         ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
+        ]
     ],
     'catalog' =>
     [

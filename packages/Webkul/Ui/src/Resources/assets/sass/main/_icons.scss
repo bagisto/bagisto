@@ -1,34 +1,40 @@
-// Left Side Menu Icon
 %menu-properties {
     width: 48px;
     height: 48px;
     display: inline-block;
     background-size: cover;
 }
+
 .icon {
     display: inline-block;
     background-size: cover;
 }
+
 .dashboard-icon {
     @extend %menu-properties;
     background-image: url("../images/Icon-Dashboard.svg");
 }
+
 .sales-icon {
     @extend %menu-properties;
     background-image: url("../images/Icon-Sales.svg");
 }
+
 .catalog-icon {
     @extend %menu-properties;
     background-image: url("../images/Icon-Catalog.svg");
 }
+
 .customer-icon {
     @extend %menu-properties;
     background-image: url("../images/Icon-Customers.svg");
 }
+
 .configuration-icon {
     @extend %menu-properties;
     background-image: url("../images/Icon-Configure.svg");
 }
+
 .settings-icon {
     @extend %menu-properties;
     background-image: url("../images/Icon-Settings.svg");
@@ -79,8 +85,21 @@
     width: 24px;
     height: 24px;
 }
+
 .accordian-down-icon {
     background-image: url("../images/Accordion-Arrow-Down.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.accordian-left-icon {
+    background-image: url("../images/chevron-left.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.accordian-right-icon {
+    background-image: url("../images/chevron-right.png");
     width: 24px;
     height: 24px;
 }
