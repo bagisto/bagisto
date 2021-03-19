@@ -873,7 +873,7 @@ return [
             'delete-success'  => 'Cannot delete last slider item',
             'delete-fail'     => 'Slider item successfully deleted',
             'expired-at'      => 'Expire Date',
-            'sort-order'      => 'Sort Order'
+            'sort-order'      => 'Sort Order',
         ],
 
         'tax-categories' => [
