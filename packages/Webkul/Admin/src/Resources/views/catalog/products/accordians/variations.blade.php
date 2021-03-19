@@ -159,23 +159,22 @@
             <td>
                 <div class="control-group" :class="[errors.has(variantInputName + '[images][' + index + ']') ? 'has-error' : '']">
                     <div v-for='(image, index) in items' class="image-wrapper">
-                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }" style="height: 100px; width: 100px; background-size: 100px 100px;">
+                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
                             <input type="hidden" :name="[variantInputName + '[images][' + image.id + ']']" v-if="! new_image[index]"/>
 
-                            <input type="file" v-validate="'mimes:image/*'" :name="[variantInputName + '[images][' + index + ']']" v-model="images[index]" accept="image/*" :ref="'imageInput' + index"   multiple="multiple" @change="addImageView($event, index)" :id="image.id"/>
+                            <input type="file" v-validate="'mimes:image/*'" :name="[variantInputName + '[images][' + index + ']']" accept="image/*" :ref="'imageInput' + index"   multiple="multiple" @change="addImageView($event, index)" :id="image.id"/>
 
                             <img class="preview" :src="imageData[index]" v-if="imageData[index]">
                         </label>
 
-                        <span class="icon trash-icon" @click="removeImage(image)" style="position: absolute; cursor: pointer; margin-top: 25%;"></span>
+                        <span class="icon trash-icon" @click="removeImage(image)"></span>
                     </div>
 
-                    <label class="btn btn-lg btn-primary" style="display: inline-block; width: auto" @click="createFileType">
+                    <label class="btn btn-lg btn-primary add-image" @click="createFileType">
                         {{ __('admin::app.catalog.products.add-image-btn-title') }}
                     </label>
                 </div>
             </td>
-
 
             <td v-for='(attribute, index) in superAttributes'>
                 <div class="control-group">
