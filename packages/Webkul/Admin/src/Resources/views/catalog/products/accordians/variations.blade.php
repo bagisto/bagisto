@@ -157,19 +157,17 @@
             </td>
 
             <td>
-                <div class="control-group" :class="[errors.has(variantInputName + '[images]') ? 'has-error' : '']">
+                <div class="control-group" :class="[errors.has(variantInputName + '[images][' + index + ']') ? 'has-error' : '']">
                     <div v-for='(image, index) in items' class="image-wrapper">
-                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
+                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }" style="height: 100px; width: 100px; background-size: 100px 100px;">
                             <input type="hidden" :name="[variantInputName + '[images][' + image.id + ']']" v-if="! new_image[index]"/>
 
-                            <input type="file" v-validate="'mimes:image/*'" :name="[variantInputName + '[images][' + index + ']']" v-model="images[index]" accept="image/*" ref="imageInput"   multiple="multiple" @change="addImageView($event, index)" :id="image.id"/>
+                            <input type="file" v-validate="'mimes:image/*'" :name="[variantInputName + '[images][' + index + ']']" v-model="images[index]" accept="image/*" :ref="'imageInput' + index"   multiple="multiple" @change="addImageView($event, index)" :id="image.id"/>
 
                             <img class="preview" :src="imageData[index]" v-if="imageData[index]">
-
-                            <label class="remove-image" @click="removeImage(image)">
-                                {{ __('admin::app.catalog.products.remove-image-btn-title') }}
-                            </label>
                         </label>
+
+                        <span class="icon trash-icon" @click="removeImage(image)" style="position: absolute; cursor: pointer; margin-top: 25%;"></span>
                     </div>
 
                     <label class="btn btn-lg btn-primary" style="display: inline-block; width: auto" @click="createFileType">
@@ -511,6 +509,8 @@
                     this.imageCount++;
 
                     this.items.push({'id': 'image_' + this.imageCount});
+
+                    this.imageData[this.imageData.length] = '';
                 },
 
                 removeImage (image) {
@@ -522,16 +522,13 @@
                 },
 
                 addImageView: function($event, index) {
-                    var imageInput = this.$refs.imageInput;
-                    var imageInput = imageInput[imageInput.length - 1];
+                    var ref = "imageInput" + index;
+                    var imageInput = this.$refs[ref][0];
 
                     if (imageInput.files && imageInput.files[0]) {
                         if (imageInput.files[0].type.includes('image/')) {
-                            this.readFile(imageInput.files[0], index)
+                            this.readFile(imageInput.files[0], index);
 
-                            if (imageInput.files.length > 1) {
-                                this.$emit('onImageSelected', imageInput)
-                            }
                         } else {
                             imageInput.value = "";
 
@@ -541,23 +538,15 @@
                 },
 
                 readFile: function(image, index) {
-                    var imageInput = this.$refs.imageInput;
-
                     var reader = new FileReader();
 
                     reader.onload = (e) => {
-                        var dataIndex = this.imageData.indexOf(this.imageData[index]);
-
-                        if (dataIndex >= 0) {
-                            this.imageData.splice(dataIndex, 1, e.target.result);
-                        } else {
-                            this.imageData.push(e.target.result);
-                        }
+                        this.imageData.splice(index, 1, e.target.result);
                     }
 
                     reader.readAsDataURL(image);
 
-                    this.new_image[imageInput.length-1] = 1;
+                    this.new_image[index] = 1;
                 },
             }
         });
