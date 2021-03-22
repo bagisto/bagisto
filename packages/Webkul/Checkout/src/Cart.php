@@ -1180,6 +1180,8 @@ class Cart
         array $shippingAddress
     ): void
     {
+        $shippingAddress['cart_id'] =  $billingAddress['cart_id'] = NULL;
+
         if (isset($data['billing']['save_as_address']) && $data['billing']['save_as_address']) {
             $this->customerAddressRepository->create($billingAddress);
         }
