@@ -158,7 +158,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(variantInputName + '[images][' + index + ']') ? 'has-error' : '']">
-                    <div v-for='(image, index) in items' class="image-wrapper">
+                    <div v-for='(image, index) in items' class="image-wrapper variant-image">
                         <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
                             <input type="hidden" :name="[variantInputName + '[images][' + image.id + ']']" v-if="! new_image[index]"/>
 

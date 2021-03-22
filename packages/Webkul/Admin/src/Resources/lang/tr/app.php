@@ -853,7 +853,9 @@ return [
             'update-success' => 'Slider başarıyla güncellendi.',
             'update-fail' => 'Slider güncellenemez.',
             'delete-success' => 'Slider başarıyla silindi.',
-            'delete-fail' => 'Slider silinirken hata oluştu.'
+            'delete-fail' => 'Slider silinirken hata oluştu.',
+            'expired-at'  => 'Expire Date',
+            'sort-order'  => 'Sort Order'
         ],
 
         'tax-categories' => [

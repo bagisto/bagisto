@@ -871,7 +871,9 @@ return [
             'update-success'  => 'Slider item successfully updated',
             'update-fail'     => 'Slider cannot be updated',
             'delete-success'  => 'Cannot delete last slider item',
-            'delete-fail'     => 'Slider item successfully deleted'
+            'delete-fail'     => 'Slider item successfully deleted',
+            'expired-at'      => 'Expire Date',
+            'sort-order'      => 'Sort Order',
         ],
 
         'tax-categories' => [

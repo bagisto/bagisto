@@ -861,7 +861,9 @@ return [
             'update-success' => 'Slider atualizado com sucesso',
             'update-fail' => 'Slider não pôde ser atualizado',
             'delete-success' => 'Não foi possível excluir o slider',
-            'delete-fail' => 'Slider excluído com sucesso'
+            'delete-fail' => 'Slider excluído com sucesso',
+            'expired-at'  => 'Expire Date',
+            'sort-order'  => 'Sort Order'
         ],
 
         'tax-categories' => [

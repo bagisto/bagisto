@@ -860,7 +860,9 @@ return [
             'update-success' => 'اسلایدر با موفقیت به روز شد',
             'update-fail' => 'امکان بروزرسانی اسلایدر وجود ندارد',
             'delete-success' => 'آخرین اسلایدر حذف نمی شود',
-            'delete-fail' => 'اسلایدر با موفقیت حذف شد'
+            'delete-fail' => 'اسلایدر با موفقیت حذف شد',
+            'expired-at'  => 'Expire Date',
+            'sort-order'  => 'Sort Order'
         ],
 
         'tax-categories' => [

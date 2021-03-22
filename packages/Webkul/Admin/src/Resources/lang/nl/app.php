@@ -859,7 +859,9 @@ return [
             'update-success' => 'Schuifitem is bijgewerkt',
             'update-fail' => 'Schuifregelaar kan niet worden bijgewerkt',
             'delete-success' => 'Kan laatste llider-item niet verwijderen',
-            'delete-fail' => 'Schuifitem is verwijderd'
+            'delete-fail' => 'Schuifitem is verwijderd',
+            'expired-at'  => 'Expire Date',
+            'sort-order'  => 'Sort Order'
         ],
 
         'tax-categories' => [

@@ -862,7 +862,9 @@ return [
             'update-success' => 'تم تحديث عنصر المزلق بنجاح',
             'update-fail' => 'المنزلق لا يمكن تحديثه',
             'delete-success' => 'لا يستطيع حذف الأخير عنصر',
-            'delete-fail' => 'تم حذف عنصر المزلق بنجاح'
+            'delete-fail' => 'تم حذف عنصر المزلق بنجاح',
+            'expired-at'  => 'Expire Date',
+            'sort-order'  => 'Sort Order'
         ],
 
         'tax-categories' => [
