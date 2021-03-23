@@ -8,17 +8,15 @@
     .toggle-aside-nav {
         position: absolute;
         top: 50px;
-        left: 78px;
+        right: -12px;
     }
 </style>
 
 <script>
 export default {
-    data: function() {
-        return {
-            iconClass: 'accordian-right-icon'
-        };
-    },
+    props: [
+        'iconClass',
+    ],
 
     methods: {
         toggle: function () {
@@ -33,20 +31,20 @@ export default {
             let self = this;
 
             $('.aside-nav').hide(function () {
-                self.iconClass = 'accordian-right-icon';
-
                 $('.content-wrapper').css({
                     marginLeft: 'unset'
                 });
+
+                $('#nav-expand-button').show();
             });
         },
 
         show: function () {
             let self = this;
 
-            $('.aside-nav').show(function () {
-                self.iconClass = 'accordian-left-icon';
+            $('#nav-expand-button').hide();
 
+            $('.aside-nav').show(function () {
                 $('.content-wrapper').css({
                     marginLeft: '280px'
                 });

@@ -153,7 +153,6 @@ body {
     }
 
     .aside-nav {
-        display: none;
         width: 280px;
         position: fixed;
         top: 60px;
@@ -190,6 +189,7 @@ body {
 
     .content-wrapper {
         padding: 25px 25px 25px 15px;
+        margin-left: 280px;
         margin-top:1px;
         background-color: $white;
     }

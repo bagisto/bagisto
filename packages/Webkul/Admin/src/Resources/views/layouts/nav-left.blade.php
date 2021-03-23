@@ -1,6 +1,7 @@
 <div class="navbar-left">
-    {{-- button for toggling aside nav --}}
-    <nav-slide-button></nav-slide-button>
+
+    {{-- button for expanding nav bar --}}
+    <nav-slide-button id="nav-expand-button" icon-class="accordian-right-icon" style="display: none;"></nav-slide-button>
 
     {{-- left menu bar --}}
     <ul class="menubar">
@@ -14,4 +15,5 @@
             </li>
         @endforeach
     </ul>
+
 </div>
