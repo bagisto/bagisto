@@ -730,19 +730,31 @@
                                 case "channel":
                                     obj.label = "Channel";
                                     if ('channels' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code == obj.val).name
+                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code == obj.val);
+
+                                        if (obj.prettyValue !== undefined) {
+                                            obj.prettyValue = obj.prettyValue.name;
+                                        }
                                     }
                                     break;
                                 case "locale":
                                     obj.label = "Locale";
                                     if ('locales' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['locales'].find(locale => locale.code === obj.val).name
+                                        obj.prettyValue = this.extraFilters['locales'].find(locale => locale.code === obj.val);
+
+                                        if (obj.prettyValue !== undefined) {
+                                            obj.prettyValue = obj.prettyValue.name;
+                                        }
                                     }
                                     break;
                                 case "customer_group":
                                     obj.label = "Customer Group";
                                     if ('customer_groups' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['customer_groups'].find(customer_group => customer_group.id === parseInt(obj.val, 10)).name
+                                        obj.prettyValue = this.extraFilters['customer_groups'].find(customer_group => customer_group.id === parseInt(obj.val, 10));
+
+                                        if (obj.prettyValue !== undefined) {
+                                            obj.prettyValue = obj.prettyValue.name;
+                                        }
                                     }
                                     break;
                                 case "sort":
