@@ -1,14 +1,14 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Webkul\Sales\Models\Invoice;
+use Webkul\Sales\Models\Shipment;
 use Illuminate\Support\Facades\DB;
+use Webkul\Sales\Models\OrderAddress;
 use Illuminate\Support\Facades\Schema;
 use Webkul\Checkout\Models\CartAddress;
+use Illuminate\Database\Schema\Blueprint;
 use Webkul\Checkout\Models\CartShippingRate;
-use Webkul\Sales\Models\Invoice;
-use Webkul\Sales\Models\OrderAddress;
-use Webkul\Sales\Models\Shipment;
+use Illuminate\Database\Migrations\Migration;
 
 class AddTableAddresses extends Migration
 {
@@ -20,9 +20,6 @@ class AddTableAddresses extends Migration
     public function up()
     {
         try {
-            // transaction is important to prevent loosing data on failure
-            DB::beginTransaction();
-
             Schema::create('addresses', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('address_type');
@@ -70,10 +67,7 @@ class AddTableAddresses extends Migration
             Schema::drop('order_address');
 
             Schema::enableForeignKeyConstraints();
-
-            DB::commit();
         } catch (Exception $e) {
-            DB::rollBack();
             throw $e;
         }
     }
@@ -85,7 +79,7 @@ class AddTableAddresses extends Migration
      */
     public function down()
     {
-        throw new Exception('you cannot revert this migration: data would be lost');
+        throw new Exception('You cannot revert this migration. Data would be lost.');
     }
 
     private function migrateCustomerAddresses(): void
