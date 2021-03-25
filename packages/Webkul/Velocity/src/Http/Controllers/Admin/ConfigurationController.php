@@ -158,9 +158,7 @@ class ConfigurationController extends Controller
                             $saveImage[substr($imageId, 6, 1)] = $path = request()->file($file)->store($dir);
                         }
 
-                        if ($image->getMimeType() === 'image/svg') {
-                            $this->sanitizeSVG($path);
-                        }
+                        $this->sanitizeSVG($path, $image->getMimeType());
                     }
                 } else {
                     if (isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
