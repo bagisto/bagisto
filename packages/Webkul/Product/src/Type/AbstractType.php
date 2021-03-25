@@ -743,7 +743,7 @@ abstract class AbstractType
      */
     public function prepareForCart($data)
     {
-        $data['quantity'] = $data['quantity'] ?? 1;
+        $data['quantity'] = (int) $data['quantity'] ?? 1;
 
         $data = $this->getQtyRequest($data);
 
