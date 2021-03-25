@@ -8,20 +8,41 @@ use enshrined\svgSanitize\Sanitizer as MainSanitizer;
 trait Sanitizer
 {
     /**
+     * List of mime types which needs to check.
+     */
+    public $mimeTypes = [
+        'image/svg',
+        'image/svg+xml'
+    ];
+
+    /**
      * Sanitize SVG file.
      *
      * @param  string  $path
      * @return void
      */
-    public function sanitizeSVG($path)
+    public function sanitizeSVG($path, $mimeType)
     {
-        /* sanitizer instance */
-        $sanitizer = new MainSanitizer();
+        if ($this->checkMimeType($mimeType)) {
+            /* sanitizer instance */
+            $sanitizer = new MainSanitizer();
 
-        /* grab svg file */
-        $dirtySVG = Storage::get($path);
+            /* grab svg file */
+            $dirtySVG = Storage::get($path);
 
-        /* save sanitized svg */
-        Storage::put($path, $sanitizer->sanitize($dirtySVG));
+            /* save sanitized svg */
+            Storage::put($path, $sanitizer->sanitize($dirtySVG));
+        }
+    }
+
+    /**
+     * Sanitize SVG file.
+     *
+     * @param  string  $path
+     * @return void
+     */
+    public function checkMimeType($mimeType)
+    {
+        return in_array($mimeType, $this->mimeTypes);
     }
 }

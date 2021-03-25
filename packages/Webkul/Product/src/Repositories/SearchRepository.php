@@ -54,9 +54,7 @@ class SearchRepository extends Repository
     {
         $path = request()->file('image')->store('product-search');
 
-        if ($data['image']->getMimeType() === 'image/svg') {
-            $this->sanitizeSVG($path);
-        }
+        $this->sanitizeSVG($path, $data['image']->getMimeType());
 
         return Storage::url($path);
     }
