@@ -69,8 +69,7 @@ return [
         ],
 
         'redis' => [
-
-            'client' => 'predis',
+            'driver' => 'redis',
 
             'clusters' => [
                 'default' => [
@@ -82,7 +81,6 @@ return [
                     ],
                 ],
             ],
-
         ],
 
     ],
