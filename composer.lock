@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee4b4b43aed4c15c9e87d95884e341ff",
+    "content-hash": "a89cde809f8fd811b54a9c0fee47837f",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -8684,16 +8684,16 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "4.1.1",
+            "version": "4.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "be584da4859baf34e05afd26fe4c587be4787ff0"
+                "reference": "138dc9345a81ec994dcd6b9680c501a752a37b00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/be584da4859baf34e05afd26fe4c587be4787ff0",
-                "reference": "be584da4859baf34e05afd26fe4c587be4787ff0",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/138dc9345a81ec994dcd6b9680c501a752a37b00",
+                "reference": "138dc9345a81ec994dcd6b9680c501a752a37b00",
                 "shasum": ""
             },
             "require": {
@@ -8705,7 +8705,7 @@
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "guzzlehttp/psr7": "~1.4",
-                "php": ">=5.6.0 <8.0",
+                "php": ">=5.6.0 <9.0",
                 "symfony/console": ">=2.7 <6.0",
                 "symfony/css-selector": ">=2.7 <6.0",
                 "symfony/event-dispatcher": ">=2.7 <6.0",
@@ -8723,7 +8723,7 @@
                 "monolog/monolog": "~1.8",
                 "squizlabs/php_codesniffer": "~2.0",
                 "symfony/process": ">=2.7 <6.0",
-                "vlucas/phpdotenv": "^2.0 | ^3.0 | ^4.0"
+                "vlucas/phpdotenv": "^2.0 | ^3.0 | ^4.0 | ^5.0"
             },
             "suggest": {
                 "codeception/specify": "BDD-style code blocks",
@@ -8767,9 +8767,15 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeception/Codeception/issues",
-                "source": "https://github.com/Codeception/Codeception/tree/4.0"
+                "source": "https://github.com/Codeception/Codeception/tree/4.1.19"
             },
-            "time": "2020-02-19T16:56:20+00:00"
+            "funding": [
+                {
+                    "url": "https://opencollective.com/codeception",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2021-03-28T13:26:08+00:00"
         },
         {
             "name": "codeception/lib-asserts",
