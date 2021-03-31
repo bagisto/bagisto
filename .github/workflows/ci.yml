@@ -5,7 +5,12 @@ on: [push, pull_request]
 jobs:
   tests:
     name: Run tests
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-versions: ['7.2', '8.0']
+    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-system }}
 
     services:
       mysql:
@@ -26,7 +31,7 @@ jobs:
       - name: Setup php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.3'
+          php-version: ${{ matrix.php-versions }}
           extensions: curl, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
 
       - name: Set environment
