@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'connection' => env('SESSION_DATABASE_CONNECTION', null),
+    'connection' => env('SESSION_CONNECTION', 'session'),
 
     /*
     |--------------------------------------------------------------------------
