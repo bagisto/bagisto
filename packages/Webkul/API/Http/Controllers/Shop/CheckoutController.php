@@ -176,7 +176,7 @@ class CheckoutController extends Controller
             'status' => ! $status ? false : true,
             'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) : 'Success',
             'data' => [
-                'cart'   => new CartResource($cart),
+                'cart'   => new CartResource(Cart::getCart()),
             ]
         ]);
     }
