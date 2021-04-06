@@ -215,7 +215,7 @@ Route::group(['prefix' => 'api'], function ($router) {
         ]);
 
 
-        //Invoice routes
+        //Shipment routes
         Route::get('shipments', 'ResourceController@index')->defaults('_config', [
             'repository' => 'Webkul\Sales\Repositories\ShipmentRepository',
             'resource' => 'Webkul\API\Http\Resources\Sales\Shipment',
@@ -228,6 +228,18 @@ Route::group(['prefix' => 'api'], function ($router) {
             'authorization_required' => true
         ]);
 
+        //Transaction routes
+        Route::get('transactions', 'TransactionController@index')->defaults('_config', [
+            'repository' => 'Webkul\Sales\Repositories\OrderTransactionRepository',
+            'resource' => 'Webkul\API\Http\Resources\Sales\OrderTransaction',
+            'authorization_required' => true
+        ]);
+
+        Route::get('transactions/{id}', 'TransactionController@get')->defaults('_config', [
+            'repository' => 'Webkul\Sales\Repositories\OrderTransactionRepository',
+            'resource' => 'Webkul\API\Http\Resources\Sales\OrderTransaction',
+            'authorization_required' => true
+        ]);
 
         //Wishlist routes
         Route::get('wishlist', 'ResourceController@index')->defaults('_config', [
