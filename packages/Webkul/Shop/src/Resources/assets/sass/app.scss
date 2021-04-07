@@ -2444,6 +2444,14 @@ section.product-detail {
                 margin-bottom: 10px;
             }
 
+            .image {
+                img {
+                    height: 50px;
+                    width: 50px;
+                    margin: 5px;
+                }
+            }
+
             .reviewer-details {
                 color: $review-details;
             }

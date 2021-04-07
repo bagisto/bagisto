@@ -140,6 +140,14 @@
                                 <span>{{ $review->comment }}</span>
                             </div>
 
+                            <div class="image col-lg-12">
+                                @if (count($review->images) > 0)
+                                    @foreach ($review->images as $image)
+                                        <img class="image" src="{{ $image->url }}" style="height: 50px; width: 50px; margin: 5px;">
+                                    @endforeach
+                                @endif
+                            </div>
+
                             <div class="col-lg-12 mt5">
                                 <span>{{ __('velocity::app.products.review-by') }} -</span>
 
@@ -176,6 +184,14 @@
 
                         <div class="review-description col-lg-12">
                             <span>{{ $review->comment }}</span>
+                        </div>
+
+                        <div class="image col-lg-12">
+                            @if (count($review->images) > 0)
+                                @foreach ($review->images as $image)
+                                    <img class="image" src="{{ $image->url }}" style="height: 50px; width: 50px; margin: 5px;">
+                                @endforeach
+                            @endif
                         </div>
 
                         <div class="col-lg-12 mt5">
