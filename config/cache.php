@@ -73,12 +73,6 @@ return [
             'connection' => env('CACHE_CONNECTION', 'cache'),
         ],
 
-        'redis:session' => [
-            'driver' => 'redis',
-            'connection' => env('SESSION_CONNECTION', 'session'),
-            'prefix' => 'bagisto_session',
-        ]
-
     ],
 
     /*

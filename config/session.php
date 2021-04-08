@@ -96,7 +96,7 @@ return [
     |
     */
 
-    'store' => env('SESSION_STORE', 'redis:session'),
+    'store' => env('SESSION_STORE', NULL),
 
     /*
     |--------------------------------------------------------------------------
