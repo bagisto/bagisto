@@ -32,42 +32,54 @@ export default {
 
         maxDate: String,
 
-        hideRemoveButton: [Number, String],
+        hideRemoveButton: [Number, String]
     },
 
-    data() {
+    data: function() {
         return {
-            datepicker: null,
+            datepicker: null
         };
     },
 
-    mounted() {
-        var this_this = this;
-        var options = {
-            allowInput: true,
-            altFormat: "Y-m-d",
-            dateFormat: "Y-m-d",
-            weekNumbers: true,
-            onChange: function(selectedDates, dateStr, instance) {
-                this_this.$emit("onChange", dateStr);
-            },
-        };
+    mounted: function() {
+        let options = this.setOptions();
 
-        if (this.minDate) {
-            options.minDate = this.minDate;
-        }
-
-        if (this.maxDate) {
-            options.maxDate = this.maxDate;
-        }
-
-        var element = this.$el.getElementsByTagName("input")[0];
-        this.datepicker = new Flatpickr(element, options);
+        this.activate(options);
     },
+
     methods: {
-        clear() {
-            this.datepicker.clear();
+        setOptions: function() {
+            let self = this;
+
+            let options = {
+                allowInput: true,
+                altFormat: "Y-m-d",
+                dateFormat: "Y-m-d",
+                weekNumbers: true,
+                onChange: function(selectedDates, dateStr, instance) {
+                    self.$emit("onChange", dateStr);
+                }
+            };
+
+            if (this.minDate) {
+                options.minDate = this.minDate;
+            }
+
+            if (this.maxDate) {
+                options.maxDate = this.maxDate;
+            }
+
+            return options;
         },
-    },
+
+        activate: function(options) {
+            let element = this.$el.getElementsByTagName("input")[0];
+            this.datepicker = new Flatpickr(element, options);
+        },
+
+        clear: function() {
+            this.datepicker.clear();
+        }
+    }
 };
 </script>
