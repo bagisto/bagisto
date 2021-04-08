@@ -2465,6 +2465,12 @@ section.product-detail {
     }
 }
 
+.image-wrapper .image-item {
+    width: 150px !important;
+    height: 150px !important;
+    background-size: 75% !important;
+}
+
 /* cart pages and elements css begins here */
 section.cart {
     width: 100%;

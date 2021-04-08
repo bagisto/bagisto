@@ -994,8 +994,8 @@ i.within-circle {
     width: 100%;
 
     .image-item {
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
         margin-right: 20px;
         background: #F8F9FA;
         @include border-radius(3px);
@@ -1006,6 +1006,7 @@ i.within-circle {
         background-position: center;
         margin-bottom: 20px;
         float: left;
+        background-size: 75%;
 
         img.preview {
             width: 100%;
