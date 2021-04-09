@@ -27,7 +27,7 @@
         </div>
 
         <div class="slot-list table" v-else>
-            <accordian 
+            <accordian
                 v-for="(day, dayIndex) in week_days"
                 :key="dayIndex"
                 :title="day"
@@ -47,7 +47,7 @@
                                 <th class="actions"></th>
                             </tr>
                         </thead>
-                        
+
                         <tbody v-if="slots['different_for_week'][dayIndex] && slots['different_for_week'][dayIndex].length">
                             <slot-item
                                 v-for="(slot, slotIndex) in slots['different_for_week'][dayIndex]"
@@ -185,6 +185,14 @@
         props: ['slotItem', 'controlName'],
 
         inject: ['$validator'],
+
+        watch: {
+            'slotItem.to': function (val) {
+                if (val < this.slotItem.from) {
+                    alert("{{ __('bookingproduct::app.admin.catalog.products.time-error') }}")
+                }
+            }
+        },
 
         methods: {
             removeSlot: function() {

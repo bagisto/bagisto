@@ -63,7 +63,8 @@ return [
                 'day' => 'يوم',
                 'status' => 'الحالة',
                 'open' => 'افتح',
-                'close' => 'غلق'
+                'close' => 'غلق',
+                'time-error' => 'to should be greter than from time'
             ]
         ]
     ],

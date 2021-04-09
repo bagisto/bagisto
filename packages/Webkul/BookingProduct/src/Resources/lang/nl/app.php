@@ -63,7 +63,8 @@ return [
                 'day' => 'Dag',
                 'status' => 'Toestand',
                 'open' => 'Open',
-                'close' => 'Dichtbij'
+                'close' => 'Dichtbij',
+                'time-error' => 'to should be greter than from time'
             ]
         ]
     ],
