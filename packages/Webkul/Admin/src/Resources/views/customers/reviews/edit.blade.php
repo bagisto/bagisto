@@ -70,6 +70,20 @@
                                 <textarea  class="control" disabled> {{ $review->comment }}</textarea>
                             </div>
 
+                            @if (count($review->images) > 0)
+                                <div class="control-group">
+                                    <label for="images" >{{ __('admin::app.catalog.categories.image') }}</label>
+
+                                    <div class="image-wrapper">
+                                        @foreach ($review->images as $image)
+                                            <label class="image-item">
+                                                <img class="preview" src="{{ $image->url }}">
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
                         </div>
                     </accordian>
 
