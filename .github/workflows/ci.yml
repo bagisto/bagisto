@@ -62,7 +62,7 @@ jobs:
         run: set -e && vendor/bin/codecept run unit
 
       - name: Execute Functional Tests
-        run: set -e && vendor/bin/codecept run tests/functional/Checkout/Cart/CartCest.php
+        run: set -e && vendor/bin/codecept run functional
 
       - name: Execute Trigger Tests
         run: set -e && vendor/bin/codecept run trigger
