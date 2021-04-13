@@ -107,11 +107,11 @@ class TaxCest
         foreach ($this->scenario['expectedTaxRates'] as $taxRate => $taxAmount) {
             $I->assertTrue(array_key_exists($taxRate, $result));
 
-            $difference = abs($taxAmount - $result[$taxRate]);
+            $difference = abs($taxAmount - round($result[$taxRate], 2));
 
             /* just checking the small difference */
-            if ($difference != 0.01) {
-                $I->assertEquals($taxAmount, $result[$taxRate]);
+            if ($difference !== 0.01) {
+                $I->assertEquals($taxAmount, round($result[$taxRate], 2));
             }
         }
     }
