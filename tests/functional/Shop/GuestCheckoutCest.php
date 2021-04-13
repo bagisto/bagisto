@@ -49,30 +49,32 @@ class GuestCheckoutCest
      */
     public function testGuestCheckout(FunctionalTester $I, Example $example): void
     {
-        // $product = ($example['guest_product']) ? $this->productGuestCheckout : $this->productNoGuestCheckout;
+        $product = ($example['guest_product']) ? $this->productGuestCheckout : $this->productNoGuestCheckout;
 
-        // $I->amGoingTo('try to add products to cart with guest checkout turned on or off');
+        $I->amGoingTo('try to add products to cart with guest checkout turned on or off');
 
-        // $I->wantTo('test conjunction "' . $example['name'] . '" with globalConfig = ' . $example['globalConfig'] . ' && product config = ' . $product->getAttribute('guest_checkout'));
-        // $I->setConfigData(['catalog.products.guest-checkout.allow-guest-checkout' => $example['globalConfig']]);
-        // $I->assertEquals($example['globalConfig'],
-        //     core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout'));
-        // $I->amOnRoute('shop.home.index');
-        // $I->sendAjaxPostRequest('/checkout/cart/add/' . $product->id, [
-        //     '_token' => session('_token'),
-        //     'product_id' => $product->id,
-        //     'quantity' => 1
-        // ]);
+        $I->wantTo('test conjunction "' . $example['name'] . '" with globalConfig = ' . $example['globalConfig'] . ' && product config = ' . $product->getAttribute('guest_checkout'));
+        $I->setConfigData(['catalog.products.guest-checkout.allow-guest-checkout' => $example['globalConfig']]);
+        $I->assertEquals(
+            $example['globalConfig'],
+            core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')
+        );
+        $I->amOnRoute('shop.home.index');
+        $I->sendAjaxPostRequest('/checkout/cart/add/' . $product->id, [
+            '_token' => session('_token'),
+            'product_id' => $product->id,
+            'quantity' => 1
+        ]);
 
-        // $I->amOnRoute('shop.checkout.cart.index');
-        // $I->see('Shopping Cart', '//div[@class="title"]');
-        // $I->makeHtmlSnapshot('guestCheckout_' . $example['globalConfig'] . '_' . $product->getAttribute('guest_checkout'));
-        // $I->see($product->name, '//div[@class="item-title"]');
-        // $I->click(__('shop::app.checkout.cart.proceed-to-checkout'),
-        //     '//a[@href="' . route('shop.checkout.onepage.index') . '"]');
-        // $I->seeCurrentRouteIs($example['expectedRoute']);
-        // $cart = cart()->getCart();
-        // $I->assertTrue(cart()->removeItem($cart->items[0]->id));
+        $I->amOnRoute('shop.checkout.cart.index');
+        $I->seeInTitle('Shopping Cart');
+        $I->makeHtmlSnapshot('guestCheckout_' . $example['globalConfig'] . '_' . $product->getAttribute('guest_checkout'));
+        $I->seeInSource($product->name);
+        $I->amOnRoute('shop.checkout.onepage.index');
+        $I->seeCurrentRouteIs($example['expectedRoute']);
+        
+        $cart = cart()->getCart();
+        $I->assertTrue(cart()->removeItem($cart->items[0]->id));
     }
 
     protected function guestCheckoutProvider(): array

@@ -8,7 +8,6 @@ use Webkul\CartRule\Models\CartRule;
 
 class CartRuleCopyCest
 {
-
     public function testCartRuleCopy(FunctionalTester $I)
     {
         $I->loginAsAdmin();
