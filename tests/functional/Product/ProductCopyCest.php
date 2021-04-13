@@ -11,7 +11,6 @@ use Webkul\Product\Models\ProductAttributeValue;
 
 class ProductCopyCest
 {
-
     public function _before(FunctionalTester $I)
     {
         $I->loginAsAdmin();
