@@ -2,13 +2,13 @@
 
 namespace Tests\Acceptance\BookingProduct;
 
-use AcceptanceTester;
 use Carbon\Carbon;
 use Faker\Factory;
+use AcceptanceTester;
+use Webkul\Product\Models\Product;
+use Webkul\Core\Helpers\Laravel5Helper;
 use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\BookingProduct\Models\BookingProductEventTicket;
-use Webkul\Core\Helpers\Laravel5Helper;
-use Webkul\Product\Models\Product;
 
 class BookingProductEventTicketCest
 {
@@ -35,15 +35,20 @@ class BookingProductEventTicketCest
             'special_price' => 5
         ];
 
-        $ticket = $I->have(BookingProductEventTicket::class, array_merge(
-                ['booking_product_id' => $bookingProduct->id], $scenario['ticket'])
+        $ticket = $I->have(
+            BookingProductEventTicket::class,
+            array_merge(
+                ['booking_product_id' => $bookingProduct->id],
+                $scenario['ticket']
+            )
         );
 
         $I->amOnPage($product->url_key);
 
         $I->see(core()->currency($ticket->price), '//span[@class="regular-price"]');
-        $I->see(__('bookingproduct::app.shop.products.per-ticket-price', ['price' => core()->currency($ticket->special_price)]),
-                '//span[@class="special-price"]');
-
+        $I->see(
+            __('bookingproduct::app.shop.products.per-ticket-price', ['price' => core()->currency($ticket->special_price)]),
+            '//span[@class="special-price"]'
+        );
     }
 }

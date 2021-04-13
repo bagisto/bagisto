@@ -141,8 +141,8 @@ class CartTaxesCest
 
         $I->amOnPage('/checkout/cart');
         $I->amOnPage('/checkout/cart');
-        // $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
-        // $I->see(core()->currency($expectedTaxAmount1), '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate));
+        $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
+        $I->see(core()->currency($expectedTaxAmount1), '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate));
 
         $I->dontSee('Tax ' . $tax2->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax2->tax_rate));
         $I->dontSee(core()->currency($expectedTaxAmount2), '#basetaxamount-' . core()->taxRateAsIdentifier($tax2->tax_rate));
