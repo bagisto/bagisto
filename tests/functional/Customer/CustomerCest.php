@@ -4,6 +4,7 @@ namespace Tests\Functional\Customer;
 
 use Faker\Factory;
 use FunctionalTester;
+use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 
 class CustomerCest

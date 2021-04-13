@@ -89,10 +89,8 @@ class CartTaxesCest
         );
 
         $I->amOnPage('/checkout/cart');
-        $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount1),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate)
-        );
+        $I->seeInSource('Tax ' . $tax1->tax_rate . ' %');
+        $I->seeInSource(core()->currency($expectedTaxAmount1));
 
         Cart::addProduct($product1->id, [
             '_token'     => session('_token'),
@@ -107,10 +105,8 @@ class CartTaxesCest
         );
 
         $I->amOnPage('/checkout/cart');
-        $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount1),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate)
-        );
+        $I->seeInSource('Tax ' . $tax1->tax_rate . ' %');
+        $I->seeInSource(core()->currency($expectedTaxAmount1));
 
         Cart::addProduct($product2->id, [
             '_token'     => session('_token'),
@@ -125,12 +121,11 @@ class CartTaxesCest
         );
 
         $I->amOnPage('/checkout/cart');
-        $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount1), '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate));
+        $I->seeInSource('Tax ' . $tax1->tax_rate . ' %');
+        $I->seeInSource(core()->currency($expectedTaxAmount1));
 
-        $I->see('Tax ' . $tax2->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax2->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount2), '#basetaxamount-' . core()->taxRateAsIdentifier($tax2->tax_rate));
-
+        $I->seeInSource('Tax ' . $tax2->tax_rate . ' %');
+        $I->seeInSource(core()->currency($expectedTaxAmount2));
         $cart = Cart::getCart();
 
         $I->assertEquals(2, $cart->items_count);
@@ -141,11 +136,11 @@ class CartTaxesCest
 
         $I->amOnPage('/checkout/cart');
         $I->amOnPage('/checkout/cart');
-        $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount1), '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate));
+        $I->seeInSource('Tax ' . $tax1->tax_rate . ' %');
+        $I->seeInSource(core()->currency($expectedTaxAmount1));
 
-        $I->dontSee('Tax ' . $tax2->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax2->tax_rate));
-        $I->dontSee(core()->currency($expectedTaxAmount2), '#basetaxamount-' . core()->taxRateAsIdentifier($tax2->tax_rate));
+        $I->dontSeeInSource('Tax ' . $tax2->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount2));
 
         $cart = Cart::getCart();
 
@@ -293,28 +288,17 @@ class CartTaxesCest
         $I->wantToTest('customer address with postcode in range of 00000 - 49999');
         $I->amOnPage('/checkout/cart');
 
-        $I->see('Tax ' . $tax11->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax11->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount11),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate)
-        );
+        $I->seeInSource('Tax ' . $tax11->tax_rate . ' %');
+        $I->seeInSource(core()->currency($expectedTaxAmount11));
 
-        $I->dontSee('Tax ' . $tax12->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax12->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount12),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax12->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount12));
 
-        $I->dontSee('Tax ' . $tax21->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax21->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount21),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax21->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount21));
 
-        $I->dontSee('Tax ' . $tax22->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax22->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount22),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax22->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount22));
 
         Cart::addProduct($product2->id, [
             '_token'     => session('_token'),
@@ -324,30 +308,20 @@ class CartTaxesCest
 
         $I->amOnPage('/checkout/cart');
 
-        $I->see('Tax ' . $tax11->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax11->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount11),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate)
-        );
+        $I->seeInSource('Tax ' . $tax11->tax_rate . ' %');
+        $I->seeInSource(core()->currency($expectedTaxAmount11));
 
-        $I->dontSee('Tax ' . $tax12->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax12->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount12),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax12->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount12));
 
-        $I->see('Tax ' . $tax21->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax21->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount21),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate)
-        );
+        $I->seeInSource('Tax ' . $tax21->tax_rate . ' %');
+        $I->seeInSource(core()->currency($expectedTaxAmount21));
 
-        $I->dontSee('Tax ' . $tax22->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax22->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount22),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax22->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount22));
 
-        $I->see(core()->currency($expectedTaxAmount11), '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount21), '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate));
+        $I->seeInSource(core()->currency($expectedTaxAmount11));
+        $I->seeInSource(core()->currency($expectedTaxAmount21));
 
 
         $I->wantToTest('customer address with postcode in range of 50000 - 89999');
@@ -381,31 +355,20 @@ class CartTaxesCest
 
         $I->amOnPage('/checkout/cart');
 
-        $I->dontSee('Tax ' . $tax11->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax11->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount11),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax11->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount11));
 
-        $I->see('Tax ' . $tax12->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax12->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount12),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate)
-        );
+        $I->seeInSource('Tax ' . $tax12->tax_rate . ' %');
+        $I->seeInSource(core()->currency($expectedTaxAmount12));
 
-        $I->dontSee('Tax ' . $tax21->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax21->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount21),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax21->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount21));
 
-        $I->see('Tax ' . $tax22->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax22->tax_rate));
-        $I->see(
-            core()->currency(round($product2->price * $tax22->tax_rate / 100, 2)),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate)
-        );
+        $I->seeInSource('Tax ' . $tax22->tax_rate . ' %');
+        $I->seeInSource(core()->currency(round($product2->price * $tax22->tax_rate / 100, 2)));
 
-        $I->see(core()->currency($expectedTaxAmount12), '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount22), '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate));
+        $I->seeInSource(core()->currency($expectedTaxAmount12));
+        $I->seeInSource(core()->currency($expectedTaxAmount22));
 
         $I->wantToTest('customer address with postcode in range of 90000 - 99000');
         $I->wanttoTest('as we dont have any taxes in this zip range');
@@ -439,28 +402,16 @@ class CartTaxesCest
 
         $I->amOnPage('/checkout/cart');
 
-        $I->dontSee('Tax ' . $tax11->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax11->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount11),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax11->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount11));
 
-        $I->dontSee('Tax ' . $tax12->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax12->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount12),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax12->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount12));
 
-        $I->dontSee('Tax ' . $tax21->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax21->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount21),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax21->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount21));
 
-        $I->dontSee('Tax ' . $tax22->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax22->tax_rate));
-        $I->dontSee(
-            core()->currency($expectedTaxAmount22),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate)
-        );
+        $I->dontSeeInSource('Tax ' . $tax22->tax_rate . ' %');
+        $I->dontSeeInSource(core()->currency($expectedTaxAmount22));
     }
 }
