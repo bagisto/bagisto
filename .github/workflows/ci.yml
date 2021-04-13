@@ -27,13 +27,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup php
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: curl, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
 
-      - name: Set environment
+      - name: Set Environment
         run: |
           set -e
           sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env.testing
@@ -41,24 +41,33 @@ jobs:
           printf "the complete .env.testing ...\n\n"
           cat .env.testing
 
-      - name: Composer install
+      - name: Composer Install
         run: |
           set -e
           composer install --no-cache
 
-      - name: Migrate database
+      - name: Migrate Database
         run: set -e && php artisan migrate --env=testing
 
-      - name: Execute unit tests
+      - name: Seed Database
+        run: set -e && php artisan db:seed --env=testing
+
+      - name: Vendor Publish
+        run: set -e && php artisan vendor:publish --all --force --env=testing
+
+      - name: Optimize Stuffs
+        run: set -e && php artisan optimize --env=testing
+
+      - name: Execute Unit Tests
         run: set -e && vendor/bin/codecept run unit
 
-      - name: Execute functional tests
-        run: set -e && vendor/bin/codecept run functional
+      - name: Execute Functional Tests
+        run: set -e && vendor/bin/codecept run tests/functional/Checkout/Cart/CartCest.php
 
-      - name: Execute trigger tests
+      - name: Execute Trigger Tests
         run: set -e && vendor/bin/codecept run trigger
 
-      - name: Persist test artifacts
+      - name: Persist Test Artifacts
         uses: actions/upload-artifact@v1
         if: always()
         with:
