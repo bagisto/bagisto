@@ -322,48 +322,18 @@ abstract class DataGrid
      */
     public function getCollection()
     {
-        $parsedUrl = $this->getQueryStrings();
+        $queryStrings = $this->getQueryStrings();
 
-        foreach ($parsedUrl as $key => $value) {
-            if ($key === 'locale') {
-                if (!is_array($value)) {
-                    unset($parsedUrl[$key]);
-                }
-            } elseif (!is_array($value)) {
-                unset($parsedUrl[$key]);
-            }
-        }
-
-        if (count($parsedUrl)) {
+        if (count($queryStrings)) {
             $filteredOrSortedCollection = $this->sortOrFilterCollection(
                 $this->collection = $this->queryBuilder,
-                $parsedUrl
+                $queryStrings
             );
 
-            if ($this->paginate) {
-                if ($this->itemsPerPage > 0) {
-                    return $filteredOrSortedCollection->orderBy(
-                        $this->index,
-                        $this->sortOrder
-                    )->paginate($this->itemsPerPage)->appends(request()->except('page'));
-                }
-            } else {
-                return $filteredOrSortedCollection->orderBy($this->index, $this->sortOrder)->get();
-            }
+            return $this->generateResults($filteredOrSortedCollection);
         }
 
-        if ($this->paginate) {
-            if ($this->itemsPerPage > 0) {
-                $this->collection = $this->queryBuilder->orderBy(
-                    $this->index,
-                    $this->sortOrder
-                )->paginate($this->itemsPerPage)->appends(request()->except('page'));
-            }
-        } else {
-            $this->collection = $this->queryBuilder->orderBy($this->index, $this->sortOrder)->get();
-        }
-
-        return $this->collection;
+        return $this->collection = $this->generateResults($this->queryBuilder);
     }
 
     /**
@@ -787,13 +757,11 @@ abstract class DataGrid
 
         $parsedQueryStrings = $this->parseQueryStrings($queryString);
 
-        $parsedQueryStrings = $this->updateQueryStrings($parsedQueryStrings);
-
         $this->itemsPerPage = isset($parsedQueryStrings['perPage']) ? $parsedQueryStrings['perPage']['eq'] : $this->itemsPerPage;
 
         unset($parsedQueryStrings['perPage']);
 
-        return $parsedQueryStrings;
+        return $this->updateQueryStrings($parsedQueryStrings);
     }
 
     /**
@@ -843,7 +811,62 @@ abstract class DataGrid
             }
         }
 
+        foreach ($parsedQueryStrings as $key => $value) {
+            if (in_array($key, ['locale'])) {
+                if (! is_array($value)) {
+                    unset($parsedQueryStrings[$key]);
+                }
+            } else if (! is_array($value)) {
+                unset($parsedQueryStrings[$key]);
+            }
+        }
+
         return $parsedQueryStrings;
+    }
+
+    /**
+     * Generate full results.
+     *
+     * @param  object $queryBuilderOrCollection
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    private function generateResults($queryBuilderOrCollection)
+    {
+        if ($this->paginate) {
+            if ($this->itemsPerPage > 0) {
+                return $this->paginatedResults($queryBuilderOrCollection);
+            }
+        } else {
+            return $this->defaultResults($queryBuilderOrCollection);
+        }
+    }
+
+    /**
+     * Generate paginated results.
+     *
+     * @param  object $queryBuilderOrCollection
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    private function paginatedResults($queryBuilderOrCollection)
+    {
+        return $queryBuilderOrCollection->orderBy(
+            $this->index,
+            $this->sortOrder
+        )->paginate($this->itemsPerPage)->appends(request()->except('page'));
+    }
+
+    /**
+     * Generate default results.
+     *
+     * @param  object $queryBuilderOrCollection
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    private function defaultResults($queryBuilderOrCollection)
+    {
+        return $queryBuilderOrCollection->orderBy($this->index, $this->sortOrder)->get();
     }
 
     /**
