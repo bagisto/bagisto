@@ -4,14 +4,13 @@ namespace Tests\Functional\Checkout\Order;
 
 use Faker\Factory;
 use FunctionalTester;
-use Cart;
 use Webkul\Sales\Models\Order;
+use Webkul\Core\Models\Channel;
+use Webkul\Customer\Models\Customer;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderPayment;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartPayment;
-use Webkul\Customer\Models\Customer;
-use Webkul\Core\Models\Channel;
 
 /**
  * Class OrderCest
@@ -20,7 +19,6 @@ use Webkul\Core\Models\Channel;
  */
 class OrderCest
 {
-
     /**
      * @param \FunctionalTester $I
      */
@@ -46,10 +44,10 @@ class OrderCest
             'customer' => $customer,
         ]);
 
-        // assert that checkout can be reached and generate csrf token.
+        // assert that checkout can be reached and generate csrf token
         $I->amOnRoute('shop.checkout.onepage.index');
 
-        // simulate the entering of the address(es):
+        // simulate the entering of the address(es)
         $I->sendAjaxPostRequest(route('shop.checkout.save-address'), [
             '_token'   => csrf_token(),
             'billing'  => array_merge($addressData, [
@@ -100,8 +98,9 @@ class OrderCest
             'cart_id'      => $mocks['cart']->id,
         ]);
 
-        // simulate click on the 'place order' button at the last step:
-        $I->sendAjaxPostRequest(route('shop.checkout.save-order'),
+        // simulate click on the 'place order' button at the last step
+        $I->sendAjaxPostRequest(
+            route('shop.checkout.save-order'),
             ['_token' => csrf_token()]
         );
 
