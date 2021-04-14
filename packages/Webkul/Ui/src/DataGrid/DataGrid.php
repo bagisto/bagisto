@@ -415,29 +415,18 @@ abstract class DataGrid
 
         $this->prepareQueryBuilder();
 
-        $necessaryExtraFilters = [];
-        if (in_array('channels', $this->extraFilters)) {
-            $necessaryExtraFilters['channels'] = core()->getAllChannels();
-        }
-        if (in_array('locales', $this->extraFilters)) {
-            $necessaryExtraFilters['locales'] = core()->getAllLocales();
-        }
-        if (in_array('customer_groups', $this->extraFilters)) {
-            $necessaryExtraFilters['customer_groups'] = core()->getAllCustomerGroups();
-        }
-
         return view('ui::datagrid.table')->with('results', [
+            'index'             => $this->index,
             'records'           => $this->getCollection(),
             'columns'           => $this->completeColumnDetails,
             'actions'           => $this->actions,
             'massactions'       => $this->massActions,
-            'index'             => $this->index,
-            'enableMassActions' => $this->enableMassAction,
             'enableActions'     => $this->enableAction,
+            'enableMassActions' => $this->enableMassAction,
             'paginated'         => $this->paginate,
             'itemsPerPage'      => $this->itemsPerPage,
             'norecords'         => __('ui::app.datagrid.no-records'),
-            'extraFilters'      => $necessaryExtraFilters
+            'extraFilters'      => $this->getNecessaryExtraFilters()
         ]);
     }
 
@@ -913,6 +902,30 @@ abstract class DataGrid
                 }
             }
         }
+    }
+
+    /**
+     * Get necessary extra details.
+     *
+     * @return array
+     */
+    private function getNecessaryExtraFilters()
+    {
+        $necessaryExtraFilters = [];
+
+        $checks = [
+            'channels'        => core()->getAllChannels(),
+            'locales'         => core()->getAllLocales(),
+            'customer_groups' => core()->getAllCustomerGroups()
+        ];
+
+        foreach ($checks as $key => $val) {
+            if (in_array($key, $this->extraFilters)) {
+                $necessaryExtraFilters[$key] = $val;
+            }
+        }
+
+        return $necessaryExtraFilters;
     }
 
     /**
