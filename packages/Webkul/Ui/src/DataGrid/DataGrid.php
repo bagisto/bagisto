@@ -274,18 +274,12 @@ abstract class DataGrid
     {
         $currentRouteACL = $this->fetchCurrentRouteACL($action);
 
-        if (isset($action['title'])) {
-            $eventName = strtolower($action['title']);
-            $eventName = explode(' ', $eventName);
-            $eventName = implode('.', $eventName);
-        } else {
-            $eventName = null;
-        }
+        $eventName = isset($action['title']) ? $this->generateEventName($action['title']) : null;
 
         if (bouncer()->hasPermission($currentRouteACL['key'] ?? null) || $specialPermission) {
             $this->fireEvent('action.before.' . $eventName);
 
-            array_push($this->actions, $action);
+            $this->actions[] = $action;
             $this->enableAction = true;
 
             $this->fireEvent('action.after.' . $eventName);
@@ -309,13 +303,7 @@ abstract class DataGrid
 
         $currentRouteACL = $this->fetchCurrentRouteACL($massAction);
 
-        if (isset($massAction['label'])) {
-            $eventName = strtolower($massAction['label']);
-            $eventName = explode(' ', $eventName);
-            $eventName = implode('.', $eventName);
-        } else {
-            $eventName = null;
-        }
+        $eventName = isset($massAction['label']) ? $this->generateEventName($massAction['label']) : null;
 
         if (bouncer()->hasPermission($currentRouteACL['key'] ?? null) || $specialPermission) {
             $this->fireEvent('mass.action.before.' . $eventName);
@@ -771,6 +759,19 @@ abstract class DataGrid
 
             Event::dispatch($eventName, $this->invoker);
         }
+    }
+
+    /**
+     * Generate event name.
+     *
+     * @param  string  $titleOrLabel
+     *
+     * @return string
+     */
+    private function generateEventName($titleOrLabel)
+    {
+        $eventName = explode(' ', strtolower($titleOrLabel));
+        return implode('.', $eventName);
     }
 
     /**
