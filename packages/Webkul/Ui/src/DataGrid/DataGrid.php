@@ -54,9 +54,9 @@ abstract class DataGrid
      * Hold query builder instance of the query prepared by executing datagrid
      * class method `setQueryBuilder`.
      *
-     * @var array
+     * @var object
      */
-    protected $queryBuilder = [];
+    protected $queryBuilder;
 
     /**
      * Final result of the datagrid program that is collection object.
@@ -322,7 +322,7 @@ abstract class DataGrid
      */
     public function getCollection()
     {
-        $parsedUrl = $this->parseUrl();
+        $parsedUrl = $this->getQueryStrings();
 
         foreach ($parsedUrl as $key => $value) {
             if ($key === 'locale') {
@@ -775,41 +775,75 @@ abstract class DataGrid
     }
 
     /**
-     * Parse the URL and get it ready to be used.
+     * Parse the query strings and get it ready to be used.
      *
      * @return array
      */
-    private function parseUrl()
+    private function getQueryStrings()
     {
-        $parsedUrl = [];
-        $unparsed = url()->full();
-
         $route = request()->route() ? request()->route()->getName() : '';
 
-        if ($route == 'admin.datagrid.export') {
-            $unparsed = url()->previous();
+        $queryString = $this->grabQueryStrings($route == 'admin.datagrid.export' ? url()->previous() : url()->full());
+
+        $parsedQueryStrings = $this->parseQueryStrings($queryString);
+
+        $parsedQueryStrings = $this->updateQueryStrings($parsedQueryStrings);
+
+        $this->itemsPerPage = isset($parsedQueryStrings['perPage']) ? $parsedQueryStrings['perPage']['eq'] : $this->itemsPerPage;
+
+        unset($parsedQueryStrings['perPage']);
+
+        return $parsedQueryStrings;
+    }
+
+    /**
+     * Grab query strings from url.
+     *
+     * @param  string  $fullUrl
+     *
+     * @return string
+     */
+    private function grabQueryStrings($fullUrl)
+    {
+        return explode('?', $fullUrl)[1] ?? null;
+    }
+
+    /**
+     * Parse query strings.
+     *
+     * @param  string  $queryString
+     *
+     * @return array
+     */
+    private function parseQueryStrings($queryString)
+    {
+        $parsedQueryStrings = [];
+
+        if ($queryString) {
+            parse_str(urldecode($queryString), $parsedQueryStrings);
+
+            unset($parsedQueryStrings['page']);
         }
 
-        $getParametersArr = explode('?', $unparsed);
-        if (count($getParametersArr) > 1) {
-            $to_be_parsed = $getParametersArr[1];
-            $to_be_parsed = urldecode($to_be_parsed);
+        return $parsedQueryStrings;
+    }
 
-            parse_str($to_be_parsed, $parsedUrl);
-            unset($parsedUrl['page']);
-        }
-
-        if (isset($parsedUrl['grand_total'])) {
-            foreach ($parsedUrl['grand_total'] as $key => $value) {
-                $parsedUrl['grand_total'][$key] = str_replace(',', '.', $parsedUrl['grand_total'][$key]);
+    /**
+     * Update query strings.
+     *
+     * @param  array  $parsedQueryStrings
+     *
+     * @return array
+     */
+    private function updateQueryStrings($parsedQueryStrings)
+    {
+        if (isset($parsedQueryStrings['grand_total'])) {
+            foreach ($parsedQueryStrings['grand_total'] as $key => $value) {
+                $parsedQueryStrings['grand_total'][$key] = str_replace(',', '.', $parsedQueryStrings['grand_total'][$key]);
             }
         }
 
-        $this->itemsPerPage = isset($parsedUrl['perPage']) ? $parsedUrl['perPage']['eq'] : $this->itemsPerPage;
-
-        unset($parsedUrl['perPage']);
-
-        return $parsedUrl;
+        return $parsedQueryStrings;
     }
 
     /**
