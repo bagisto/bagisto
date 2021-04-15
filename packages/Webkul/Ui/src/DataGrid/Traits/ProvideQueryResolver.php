@@ -66,23 +66,6 @@ trait ProvideQueryResolver
     }
 
     /**
-     * Check filter value condition.
-     *
-     * @param  \Illuminate\Support\Collection  $collection
-     * @param  string                          $columnName
-     * @param  string                          $condition
-     * @param  string                          $filterValue
-     * @param  bool                            $nullCheck
-     * @return void
-     */
-    private function checkFilterValueCondition($collection, $columnName, $condition, $filterValue, $nullCheck = false)
-    {
-        $filterValue == 1
-            ? $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue, $nullCheck)
-            : $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue, ! $nullCheck);
-    }
-
-    /**
      * Resolve filter query.
      *
      * @param  \Illuminate\Support\Collection  $collection
@@ -103,5 +86,22 @@ trait ProvideQueryResolver
                 $query->$clause(($this->filterMap[$columnName]));
             }
         });
+    }
+
+    /**
+     * Check filter value condition.
+     *
+     * @param  \Illuminate\Support\Collection  $collection
+     * @param  string                          $columnName
+     * @param  string                          $condition
+     * @param  string                          $filterValue
+     * @param  bool                            $nullCheck
+     * @return void
+     */
+    private function checkFilterValueCondition($collection, $columnName, $condition, $filterValue, $nullCheck = false)
+    {
+        $filterValue == 1
+            ? $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue, $nullCheck)
+            : $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue, ! $nullCheck);
     }
 }
