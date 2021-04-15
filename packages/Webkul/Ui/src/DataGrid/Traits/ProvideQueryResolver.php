@@ -5,7 +5,7 @@ namespace Webkul\Ui\DataGrid\Traits;
 trait ProvideQueryResolver
 {
     /**
-     * Resolve query.
+     * Main resolve method.
      *
      * @param  \Illuminate\Support\Collection  $collection
      * @param  string                          $columnName
