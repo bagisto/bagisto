@@ -1,11 +1,10 @@
-**BUGS:**
+## Description
+<!--- Please mention issue #id and use comma if your PR solves multiple issues -->
+<!--- Please describe your changes in detail -->
 
->Please describe the issue that you solved if its not filed.
+## How to test this
+<!--- Please describe in detail how to test the changes made in this PR -->
 
->Otherwise please mention issue #id and use comma if your PR
->solves multiple issues.
-
-**For things other than bugs:**
-
-> Describe that thing in very short line, word limit is 200.
-> Otherwise use **issue #id** if the issue was filed as **feature** request.
+## Documentation
+- [ ] My pull request requires a update on the documentation repository.
+<!--- Please describe in detail what needs to be changed --->
