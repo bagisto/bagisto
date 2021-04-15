@@ -10,19 +10,19 @@ trait ProvideQueryResolver
      * @param  \Illuminate\Support\Collection  $collection
      * @param  string                          $columnName
      * @param  string                          $condition
-     * @param  string                          $filter_value
+     * @param  string                          $filterValue
      * @param  string                          $clause
      * @param  string                          $method
      * @return void
      */
-    private function resolve($collection, $columnName, $condition, $filter_value, $clause = 'where', $method = 'resolveQuery')
+    private function resolve($collection, $columnName, $condition, $filterValue, $clause = 'where', $method = 'resolveQuery')
     {
         if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
-            $this->$method($collection, $this->filterMap[$columnName], $condition, $filter_value, $clause);
+            $this->$method($collection, $this->filterMap[$columnName], $condition, $filterValue, $clause);
         } else if ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
-            $this->$method($collection, $columnName, $condition, $filter_value, $clause);
+            $this->$method($collection, $columnName, $condition, $filterValue, $clause);
         } else {
-            $this->$method($collection, $columnName, $condition, $filter_value, $clause);
+            $this->$method($collection, $columnName, $condition, $filterValue, $clause);
         }
     }
 
@@ -32,16 +32,16 @@ trait ProvideQueryResolver
      * @param  object        $query
      * @param  string        $columnName
      * @param  string        $condition
-     * @param  string        $filter_value
+     * @param  string        $filterValue
      * @param  null|boolean  $nullCheck
      * @return void
      */
-    private function resolveQuery($query, $columnName, $condition, $filter_value, $clause = 'where')
+    private function resolveQuery($query, $columnName, $condition, $filterValue, $clause = 'where')
     {
         $query->$clause(
             $columnName,
             $this->operators[$condition],
-            $filter_value
+            $filterValue
         );
     }
 
@@ -51,26 +51,35 @@ trait ProvideQueryResolver
      * @param  \Illuminate\Support\Collection  $collection
      * @param  string                          $columnName
      * @param  string                          $condition
-     * @param  string                          $filter_value
+     * @param  string                          $filterValue
      * @return void
      */
-    private function resolveBooleanQuery($collection, $columnName, $condition, $filter_value)
+    private function resolveBooleanQuery($collection, $columnName, $condition, $filterValue)
     {
         if ($this->operators[$condition] == '=') {
-            if ($filter_value == 1) {
-                $this->resolveFilterQuery($collection, $columnName, $condition, $filter_value, false);
-            } else {
-                $this->resolveFilterQuery($collection, $columnName, $condition, $filter_value, true);
-            }
+            $this->checkFilterValueCondition($collection, $columnName, $condition, $filterValue);
         } else if ($this->operators[$condition] == '<>') {
-            if ($filter_value == 1) {
-                $this->resolveFilterQuery($collection, $columnName, $condition, $filter_value, true);
-            } else {
-                $this->resolveFilterQuery($collection, $columnName, $condition, $filter_value, false);
-            }
+            $this->checkFilterValueCondition($collection, $columnName, $condition, $filterValue, true);
         } else {
-            $this->resolveFilterQuery($collection, $columnName, $condition, $filter_value);
+            $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue);
         }
+    }
+
+    /**
+     * Check filter value condition.
+     *
+     * @param  \Illuminate\Support\Collection  $collection
+     * @param  string                          $columnName
+     * @param  string                          $condition
+     * @param  string                          $filterValue
+     * @param  bool                            $nullCheck
+     * @return void
+     */
+    private function checkFilterValueCondition($collection, $columnName, $condition, $filterValue, $nullCheck = false)
+    {
+        $filterValue == 1
+            ? $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue, $nullCheck)
+            : $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue, ! $nullCheck);
     }
 
     /**
@@ -79,16 +88,16 @@ trait ProvideQueryResolver
      * @param  \Illuminate\Support\Collection  $collection
      * @param  string                          $columnName
      * @param  string                          $condition
-     * @param  string                          $filter_value
+     * @param  string                          $filterValue
      * @param  null|boolean                    $nullCheck
      * @return void
      */
-    private function resolveFilterQuery($collection, $columnName, $condition, $filter_value, $nullCheck = null)
+    private function resolveFilterQuery($collection, $columnName, $condition, $filterValue, $nullCheck = null)
     {
         $clause = is_null($nullCheck) ? null : ( $nullCheck ? 'orWhereNull' : 'orWhereNotNull' );
 
-        $collection->where(function ($query) use ($columnName, $condition, $filter_value, $clause) {
-            $this->resolveQuery($query, $columnName, $condition, $filter_value);
+        $collection->where(function ($query) use ($columnName, $condition, $filterValue, $clause) {
+            $this->resolveQuery($query, $columnName, $condition, $filterValue);
 
             if (! is_null($clause)) {
                 $query->$clause(($this->filterMap[$columnName]));

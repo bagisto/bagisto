@@ -45,7 +45,7 @@ trait ProvideCollection
             } else if ($key === 'search') {
                 $this->searchCollection($collection, $info);
             } else {
-                if ($this->exceptionCheckInColumns($collection, $columnName)) {
+                if ($this->exceptionCheckInColumns($columnName)) {
                     return $collection;
                 }
 
@@ -174,20 +174,20 @@ trait ProvideCollection
     private function filterCollection($collection, $info, $columnType, $columnName)
     {
         if (array_keys($info)[0] === 'like' || array_keys($info)[0] === 'nlike') {
-            foreach ($info as $condition => $filter_value) {
-                $this->resolve($collection, $columnName, $condition, '%' . $filter_value . '%');
+            foreach ($info as $condition => $filterValue) {
+                $this->resolve($collection, $columnName, $condition, '%' . $filterValue . '%');
             }
         } else {
-            foreach ($info as $condition => $filter_value) {
+            foreach ($info as $condition => $filterValue) {
 
                 $condition = ($condition === 'undefined') ? '=' : $condition;
 
                 if ($columnType === 'datetime') {
-                    $this->resolve($collection, $columnName, $condition, $filter_value, 'whereDate');
+                    $this->resolve($collection, $columnName, $condition, $filterValue, 'whereDate');
                 } else if ($columnType === 'boolean') {
-                    $this->resolve($collection, $columnName, $condition, $filter_value, 'where', 'resolveBooleanQuery');
+                    $this->resolve($collection, $columnName, $condition, $filterValue, 'where', 'resolveBooleanQuery');
                 } else {
-                    $this->resolve($collection, $columnName, $condition, $filter_value);
+                    $this->resolve($collection, $columnName, $condition, $filterValue);
                 }
             }
         }
@@ -196,11 +196,10 @@ trait ProvideCollection
     /**
      * Some exceptions check in column details.
      *
-     * @param  \Illuminate\Support\Collection  $collection
      * @param  string                          $columnName
      * @return bool
      */
-    private function exceptionCheckInColumns($collection, $columnName)
+    private function exceptionCheckInColumns($columnName)
     {
         foreach ($this->completeColumnDetails as $column) {
             if ($column['index'] === $columnName && ! $column['filterable']) {
