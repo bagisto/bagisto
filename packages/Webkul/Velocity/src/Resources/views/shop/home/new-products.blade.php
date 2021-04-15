@@ -12,7 +12,7 @@
     product-title="{{ __('shop::app.home.new-products') }}"
     product-route="{{ route('velocity.category.details', ['category-slug' => 'new-products', 'count' => $count]) }}"
     locale-direction="{{ $direction }}"
-    show-recently-viewed="{{ (Boolean) $showRecentlyViewed }}"
+    show-recently-viewed="{{ (Boolean) $showRecentlyViewed ? 'true' : 'false' }}"
     recently-viewed-title="{{ __('velocity::app.products.recently-viewed') }}"
     no-data-text="{{ __('velocity::app.products.not-available') }}">
 </product-collections>

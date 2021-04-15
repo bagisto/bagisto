@@ -320,23 +320,27 @@ class Cart
             return false;
         }
 
-        $this->cartItemRepository->delete($itemId);
+        if ($cartItem = $cart->items()->find($itemId)) {
+            $cartItem->delete();
 
-        if ($cart->items()->get()->count() == 0) {
-            $this->cartRepository->delete($cart->id);
+            if ($cart->items()->get()->count() == 0) {
+                $this->cartRepository->delete($cart->id);
 
-            if (session()->has('cart')) {
-                session()->forget('cart');
+                if (session()->has('cart')) {
+                    session()->forget('cart');
+                }
             }
+
+            Shipping::collectRates();
+
+            Event::dispatch('checkout.cart.delete.after', $itemId);
+
+            $this->collectTotals();
+
+            return true;
         }
 
-        Shipping::collectRates();
-
-        Event::dispatch('checkout.cart.delete.after', $itemId);
-
-        $this->collectTotals();
-
-        return true;
+        return false;
     }
 
     /**
@@ -1176,6 +1180,8 @@ class Cart
         array $shippingAddress
     ): void
     {
+        $shippingAddress['cart_id'] =  $billingAddress['cart_id'] = NULL;
+
         if (isset($data['billing']['save_as_address']) && $data['billing']['save_as_address']) {
             $this->customerAddressRepository->create($billingAddress);
         }

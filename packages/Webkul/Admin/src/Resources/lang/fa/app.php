@@ -80,7 +80,8 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'تخفیف',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
@@ -238,7 +239,9 @@ return [
         'view' => 'چشم انداز',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'وضعیت به روز رسانی'
+        'update-status' => 'وضعیت به روز رسانی',
+        'transaction-id' => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
 
     'account' => [
@@ -390,6 +393,7 @@ return [
             'comment' => 'Comment',
             'submit-comment' => 'Submit Comment',
             'notify-customer' => 'Notify Customer',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -466,6 +470,20 @@ return [
             'view-title' => ' #:refund_id بازپرداخت',
             'invalid-refund-amount-error' => 'مبلغ بازپرداخت باید صفر نباشد.'
 
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 
@@ -842,7 +860,9 @@ return [
             'update-success' => 'اسلایدر با موفقیت به روز شد',
             'update-fail' => 'امکان بروزرسانی اسلایدر وجود ندارد',
             'delete-success' => 'آخرین اسلایدر حذف نمی شود',
-            'delete-fail' => 'اسلایدر با موفقیت حذف شد'
+            'delete-fail' => 'اسلایدر با موفقیت حذف شد',
+            'expired-at'  => 'Expire Date',
+            'sort-order'  => 'Sort Order'
         ],
 
         'tax-categories' => [

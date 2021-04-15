@@ -30,7 +30,7 @@
             </div>
 
             <div class="review-form">
-                <form method="POST" action="{{ route('shop.reviews.store', $product->product_id ) }}" @submit.prevent="onSubmit">
+                <form method="POST" action="{{ route('shop.reviews.store', $product->product_id ) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
                     @csrf
 
                     <div class="heading mt-10 mb-25">
@@ -43,11 +43,9 @@
                         </label>
 
                         <div class="stars">
-                            <span class="star star-5" for="star-5" onclick="calculateRating(id)" id="1"></span>
-                            <span class="star star-4" for="star-4" onclick="calculateRating(id)" id="2"></span>
-                            <span class="star star-3" for="star-3" onclick="calculateRating(id)" id="3"></span>
-                            <span class="star star-2" for="star-2" onclick="calculateRating(id)" id="4"></span>
-                            <span class="star star-1" for="star-1" onclick="calculateRating(id)" id="5"></span>
+                            @for ($i = 1; $i <= 5; $i++)
+                                <span class="star star-{{ $i }}" for="star-{{ $i }}" onclick="calculateRating(id)" id="{{ $i }}"></span>
+                            @endfor
                         </div>
 
                         <input type="hidden" id="rating" name="rating" v-validate="'required'">
@@ -80,6 +78,19 @@
                         <textarea type="text" class="control" name="comment" v-validate="'required'" value="{{ old('comment') }}">
                         </textarea>
                         <span class="control-error" v-if="errors.has('comment')">@{{ errors.first('comment') }}</span>
+                    </div>
+
+                    <div class="control-group {!! $errors->has('images.*') ? 'has-error' : '' !!}">
+                        <label>{{ __('admin::app.catalog.categories.image') }}</label>
+
+                        <image-wrapper></image-wrapper>
+
+                        <span class="control-error" v-if="{!! $errors->has('images.*') !!}">
+                            @php $count=1 @endphp
+                            @foreach ($errors->get('images.*') as $key => $message)
+                                @php echo str_replace($key, 'Image'.$count, $message[0]); $count++ @endphp
+                            @endforeach
+                        </span>
                     </div>
 
                     <button type="submit" class="btn btn-lg btn-primary">

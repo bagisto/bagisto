@@ -34,18 +34,20 @@
 
                     {!! view_render_event('bagisto.admin.settings.slider.create.before') !!}
 
-                    <div class="control-group" :class="[errors.has('locale') ? 'has-error' : '']">
+                    <div class="control-group" :class="[errors.has('locale[]') ? 'has-error' : '']">
                         <label for="locale">{{ __('admin::app.datagrid.locale') }}</label>
 
-                        <select class="control" id="locale" name="locale" data-vv-as="&quot;{{ __('admin::app.datagrid.locale') }}&quot;" value="" v-validate="'required'">
+                        <select class="control" id="locale" name="locale[]" data-vv-as="&quot;{{ __('admin::app.datagrid.locale') }}&quot;" value="" v-validate="'required'" multiple>
                             @foreach (core()->getAllLocales() as $localeModel)
 
-                                <option value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                <option value="{{ $localeModel->code }}">
                                     {{ $localeModel->name }}
                                 </option>
 
                             @endforeach
                         </select>
+
+                        <span class="control-error" v-if="errors.has('locale[]')">@{{ errors.first('locale[]') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
@@ -65,6 +67,18 @@
                             @endforeach
                         </select>
                         <span class="control-error" v-if="errors.has('channel_id')">@{{ errors.first('channel_id') }}</span>
+                    </div>
+
+                    <div class="control-group date">
+                        <label for="expired_at">{{ __('admin::app.settings.sliders.expired-at') }}</label>
+                        <date>
+                            <input type="text" name="expired_at" class="control" value="{{ old('expired_at') }}"/>
+                        </date>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="sort_order">{{ __('admin::app.settings.sliders.sort-order') }}</label>
+                        <input type="text" class="control" id="sort_order" name="sort_order" value="{{ old('sort_order') ?? 0 }}"/>
                     </div>
 
                     <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">

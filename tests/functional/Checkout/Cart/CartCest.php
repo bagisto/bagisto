@@ -37,11 +37,13 @@ class CartCest
         ]);
 
         $I->amOnPage('/checkout/cart');
-        // $I->seeElement('#update_cart_button');
+        $I->seeElement('#update_cart_button');
     }
 
     public function checkCartWithoutQuantityBox(FunctionalTester $I): void
     {
+        $I->useDefaultTheme();
+
         cart()->addProduct($this->productWithoutQuantityBox->id, [
             '_token'     => session('_token'),
             'product_id' => $this->productWithoutQuantityBox->id,
@@ -52,5 +54,4 @@ class CartCest
         $I->amOnPage('/checkout/cart');
         $I->dontSeeElement('#update_cart_button');
     }
-
 }

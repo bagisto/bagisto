@@ -2,7 +2,6 @@
 
 namespace Tests\Functional\Shop;
 
-
 use Faker\Factory;
 use Faker\Generator;
 use FunctionalTester;

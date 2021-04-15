@@ -37,6 +37,22 @@
 
                     {!! view_render_event('bagisto.admin.settings.slider.edit.before') !!}
 
+                    <div class="control-group" :class="[errors.has('locale[]') ? 'has-error' : '']">
+                        <label for="locale">{{ __('admin::app.datagrid.locale') }}</label>
+
+                        <select class="control" id="locale" name="locale[]" data-vv-as="&quot;{{ __('admin::app.datagrid.locale') }}&quot;" value="" v-validate="'required'" multiple>
+                            @foreach (core()->getAllLocales() as $localeModel)
+
+                                <option value="{{ $localeModel->code }}" {{ in_array($localeModel->code, explode(',', $slider->locale)) ? 'selected' : ''}}>
+                                    {{ $localeModel->name }}
+                                </option>
+
+                            @endforeach
+                        </select>
+
+                        <span class="control-error" v-if="errors.has('locale[]')">@{{ errors.first('locale[]') }}</span>
+                    </div>
+
                     <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
                         <label for="title" class="required">{{ __('admin::app.settings.sliders.name') }}</label>
                         <input type="text" class="control" name="title" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.name') }}&quot;" value="{{ $slider->title ?: old('title') }}">
@@ -54,6 +70,18 @@
                             @endforeach
                         </select>
                         <span class="control-error" v-if="errors.has('channel_id')">@{{ errors.first('channel_id') }}</span>
+                    </div>
+
+                    <div class="control-group date">
+                        <label for="expired_at">{{ __('admin::app.settings.sliders.expired-at') }}</label>
+                        <date>
+                            <input type="text" name="expired_at" class="control" value="{{ old('expired_at') ?: $slider->expired_at }}"/>
+                        </date>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="sort_order">{{ __('admin::app.settings.sliders.sort-order') }}</label>
+                        <input type="text" class="control" id="sort_order" name="sort_order" value="{{ $slider->sort_order ?? old('sort_order') }}"/>
                     </div>
 
                     <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">

@@ -515,7 +515,7 @@
                     });
 
                     if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
-                        this.condition.operator = '{}';
+                        // this.condition.operator = '{}';
 
                         this.condition.value = this.condition.value == '' && this.condition.value != undefined
                                 ? []

@@ -20,7 +20,9 @@ class Slider extends Model implements SliderContract
         'path',
         'content',
         'channel_id',
-        'locale'
+        'locale',
+        'expired_at',
+        'sort_order'
     ];
 
     /**

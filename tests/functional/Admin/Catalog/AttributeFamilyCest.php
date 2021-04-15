@@ -2,7 +2,6 @@
 
 namespace Tests\Functional\Admin\Catalog;
 
-
 use FunctionalTester;
 use Webkul\Attribute\Models\AttributeFamily;
 
