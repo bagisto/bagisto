@@ -3,9 +3,13 @@
 namespace Webkul\Ui\DataGrid;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Ui\DataGrid\Traits\ProvideBouncer;
+use Webkul\Ui\DataGrid\Traits\ProvideCollection;
 
 abstract class DataGrid
 {
+    use ProvideBouncer, ProvideCollection;
+
     /**
      * Set index columns, ex: id.
      *
@@ -276,18 +280,14 @@ abstract class DataGrid
      */
     public function addAction($action, $specialPermission = false)
     {
-        $currentRouteACL = $this->fetchCurrentRouteACL($action);
-
-        $eventName = isset($action['title']) ? $this->generateEventName($action['title']) : null;
-
-        if (bouncer()->hasPermission($currentRouteACL['key'] ?? null) || $specialPermission) {
+        $this->checkPermissions($action, $specialPermission, function ($action, $eventName) {
             $this->fireEvent('action.before.' . $eventName);
 
             $this->actions[] = $action;
             $this->enableAction = true;
 
             $this->fireEvent('action.after.' . $eventName);
-        }
+        });
     }
 
     /**
@@ -303,83 +303,14 @@ abstract class DataGrid
     {
         $massAction['route'] = $this->getRouteNameFromUrl($massAction['action'], $massAction['method']);
 
-        $currentRouteACL = $this->fetchCurrentRouteACL($massAction);
-
-        $eventName = isset($massAction['label']) ? $this->generateEventName($massAction['label']) : null;
-
-        if (bouncer()->hasPermission($currentRouteACL['key'] ?? null) || $specialPermission) {
+        $this->checkPermissions($massAction, $specialPermission, function ($action, $eventName) {
             $this->fireEvent('mass.action.before.' . $eventName);
 
-            $this->massActions[] = $massAction;
+            $this->massActions[] = $action;
             $this->enableMassAction = true;
 
             $this->fireEvent('mass.action.after.' . $eventName);
-        }
-    }
-
-    /**
-     * Get collections.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getCollection()
-    {
-        $queryStrings = $this->getQueryStrings();
-
-        if (count($queryStrings)) {
-            $filteredOrSortedCollection = $this->sortOrFilterCollection(
-                $this->collection = $this->queryBuilder,
-                $queryStrings
-            );
-
-            return $this->generateResults($filteredOrSortedCollection);
-        }
-
-        return $this->collection = $this->generateResults($this->queryBuilder);
-    }
-
-    /**
-     * To find the alias of the column and by taking the column name.
-     *
-     * @param  array  $columnAlias
-     * @return array
-     */
-    public function findColumnType($columnAlias)
-    {
-        foreach ($this->completeColumnDetails as $column) {
-            if ($column['index'] == $columnAlias) {
-                return [$column['type'], $column['index']];
-            }
-        }
-    }
-
-    /**
-     * Sort or filter collection.
-     *
-     * @param  \Illuminate\Support\Collection  $collection
-     * @param  array                           $parseInfo
-     * @return \Illuminate\Support\Collection
-     */
-    public function sortOrFilterCollection($collection, $parseInfo)
-    {
-        foreach ($parseInfo as $key => $info) {
-            $columnType = $this->findColumnType($key)[0] ?? null;
-            $columnName = $this->findColumnType($key)[1] ?? null;
-
-            if ($key === 'sort') {
-                $this->sortCollection($collection, $info);
-            } else if ($key === 'search') {
-                $this->searchCollection($collection, $info);
-            } else {
-                if ($this->exceptionCheckInColumns($collection, $columnName)) {
-                    return $collection;
-                }
-
-                $this->filterCollection($collection, $info, $columnType, $columnName);
-            }
-        }
-
-        return $collection;
+        }, 'label');
     }
 
     /**
@@ -415,19 +346,7 @@ abstract class DataGrid
 
         $this->prepareQueryBuilder();
 
-        return view('ui::datagrid.table')->with('results', [
-            'index'             => $this->index,
-            'records'           => $this->getCollection(),
-            'columns'           => $this->completeColumnDetails,
-            'actions'           => $this->actions,
-            'massactions'       => $this->massActions,
-            'enableActions'     => $this->enableAction,
-            'enableMassActions' => $this->enableMassAction,
-            'paginated'         => $this->paginate,
-            'itemsPerPage'      => $this->itemsPerPage,
-            'norecords'         => __('ui::app.datagrid.no-records'),
-            'extraFilters'      => $this->getNecessaryExtraFilters()
-        ]);
+        return view('ui::datagrid.table')->with('results', $this->prepareViewData());
     }
 
     /**
@@ -448,6 +367,28 @@ abstract class DataGrid
         $this->prepareQueryBuilder();
 
         return $this->getCollection();
+    }
+
+    /**
+     * Prepare view data.
+     *
+     * @return array
+     */
+    public function prepareViewData()
+    {
+        return [
+            'index'             => $this->index,
+            'records'           => $this->getCollection(),
+            'columns'           => $this->completeColumnDetails,
+            'actions'           => $this->actions,
+            'enableActions'     => $this->enableAction,
+            'massactions'       => $this->massActions,
+            'enableMassActions' => $this->enableMassAction,
+            'paginated'         => $this->paginate,
+            'itemsPerPage'      => $this->itemsPerPage,
+            'norecords'         => __('ui::app.datagrid.no-records'),
+            'extraFilters'      => $this->getNecessaryExtraFilters()
+        ];
     }
 
     /**
@@ -472,332 +413,11 @@ abstract class DataGrid
     }
 
     /**
-     * Generate event name.
-     *
-     * @param  string  $titleOrLabel
-     * @return string
-     */
-    private function generateEventName($titleOrLabel)
-    {
-        $eventName = explode(' ', strtolower($titleOrLabel));
-        return implode('.', $eventName);
-    }
-
-    /**
-     * Parse the query strings and get it ready to be used.
-     *
-     * @return array
-     */
-    private function getQueryStrings()
-    {
-        $route = request()->route() ? request()->route()->getName() : '';
-
-        $queryString = $this->grabQueryStrings($route == 'admin.datagrid.export' ? url()->previous() : url()->full());
-
-        $parsedQueryStrings = $this->parseQueryStrings($queryString);
-
-        $this->itemsPerPage = isset($parsedQueryStrings['perPage']) ? $parsedQueryStrings['perPage']['eq'] : $this->itemsPerPage;
-
-        unset($parsedQueryStrings['perPage']);
-
-        return $this->updateQueryStrings($parsedQueryStrings);
-    }
-
-    /**
-     * Grab query strings from url.
-     *
-     * @param  string  $fullUrl
-     * @return string
-     */
-    private function grabQueryStrings($fullUrl)
-    {
-        return explode('?', $fullUrl)[1] ?? null;
-    }
-
-    /**
-     * Parse query strings.
-     *
-     * @param  string  $queryString
-     * @return array
-     */
-    private function parseQueryStrings($queryString)
-    {
-        $parsedQueryStrings = [];
-
-        if ($queryString) {
-            parse_str(urldecode($queryString), $parsedQueryStrings);
-
-            unset($parsedQueryStrings['page']);
-        }
-
-        return $parsedQueryStrings;
-    }
-
-    /**
-     * Update query strings.
-     *
-     * @param  array  $parsedQueryStrings
-     * @return array
-     */
-    private function updateQueryStrings($parsedQueryStrings)
-    {
-        if (isset($parsedQueryStrings['grand_total'])) {
-            foreach ($parsedQueryStrings['grand_total'] as $key => $value) {
-                $parsedQueryStrings['grand_total'][$key] = str_replace(',', '.', $parsedQueryStrings['grand_total'][$key]);
-            }
-        }
-
-        foreach ($parsedQueryStrings as $key => $value) {
-            if (in_array($key, ['locale'])) {
-                if (! is_array($value)) {
-                    unset($parsedQueryStrings[$key]);
-                }
-            } else if (! is_array($value)) {
-                unset($parsedQueryStrings[$key]);
-            }
-        }
-
-        return $parsedQueryStrings;
-    }
-
-    /**
-     * Generate full results.
-     *
-     * @param  object  $queryBuilderOrCollection
-     * @return \Illuminate\Support\Collection
-     */
-    private function generateResults($queryBuilderOrCollection)
-    {
-        if ($this->paginate) {
-            if ($this->itemsPerPage > 0) {
-                return $this->paginatedResults($queryBuilderOrCollection);
-            }
-        } else {
-            return $this->defaultResults($queryBuilderOrCollection);
-        }
-    }
-
-    /**
-     * Generate paginated results.
-     *
-     * @param  object  $queryBuilderOrCollection
-     * @return \Illuminate\Support\Collection
-     */
-    private function paginatedResults($queryBuilderOrCollection)
-    {
-        return $queryBuilderOrCollection->orderBy(
-            $this->index,
-            $this->sortOrder
-        )->paginate($this->itemsPerPage)->appends(request()->except('page'));
-    }
-
-    /**
-     * Generate default results.
-     *
-     * @param  object  $queryBuilderOrCollection
-     * @return \Illuminate\Support\Collection
-     */
-    private function defaultResults($queryBuilderOrCollection)
-    {
-        return $queryBuilderOrCollection->orderBy($this->index, $this->sortOrder)->get();
-    }
-
-    /**
-     * Sort collection.
-     *
-     * @param  \Illuminate\Support\Collection  $collection
-     * @param  array                           $info
-     * @return void
-     */
-    private function sortCollection($collection, $info)
-    {
-        $countKeys = count(array_keys($info));
-
-        if ($countKeys > 1) {
-            throw new \Exception('Fatal Error! Multiple sort keys found, please resolve the URL manually.');
-        }
-
-        $columnName = $this->findColumnType(array_keys($info)[0]);
-
-        $collection->orderBy(
-            $columnName[1],
-            array_values($info)[0]
-        );
-    }
-
-    /**
-     * Search collection.
-     *
-     * @param  \Illuminate\Support\Collection  $collection
-     * @param  array                           $info
-     * @return void
-     */
-    private function searchCollection($collection, $info)
-    {
-        $countKeys = count(array_keys($info));
-
-        if ($countKeys > 1) {
-            throw new \Exception('Multiple search keys found, please resolve the URL manually.');
-        }
-
-        if ($countKeys == 1) {
-            $collection->where(function ($collection) use ($info) {
-                foreach ($this->completeColumnDetails as $column) {
-                    if ($column['searchable'] == true) {
-                        $this->resolve($collection, $column['index'], 'like', '%' . $info['all'] . '%', 'orWhere');
-                    }
-                }
-            });
-        }
-    }
-
-    /**
-     * Some exceptions check in column details.
-     *
-     * @param  \Illuminate\Support\Collection  $collection
-     * @param  string                          $columnName
-     * @return bool
-     */
-    private function exceptionCheckInColumns($collection, $columnName)
-    {
-        foreach ($this->completeColumnDetails as $column) {
-            if ($column['index'] === $columnName && ! $column['filterable']) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Filter collection.
-     *
-     * @param  \Illuminate\Support\Collection  $collection
-     * @param  array                           $info
-     * @param  string                          $columnType
-     * @param  string                          $columnName
-     * @return void
-     */
-    private function filterCollection($collection, $info, $columnType, $columnName)
-    {
-        if (array_keys($info)[0] === 'like' || array_keys($info)[0] === 'nlike') {
-            foreach ($info as $condition => $filter_value) {
-                $this->resolve($collection, $columnName, $condition, '%' . $filter_value . '%');
-            }
-        } else {
-            foreach ($info as $condition => $filter_value) {
-
-                $condition = ($condition === 'undefined') ? '=' : $condition;
-
-                if ($columnType === 'datetime') {
-                    $this->resolve($collection, $columnName, $condition, $filter_value, 'whereDate');
-                } else if ($columnType === 'boolean') {
-                    $this->resolve($collection, $columnName, $condition, $filter_value, 'where', 'resolveBooleanQuery');
-                } else {
-                    $this->resolve($collection, $columnName, $condition, $filter_value);
-                }
-            }
-        }
-    }
-
-    /**
-     * Resolve query.
-     *
-     * @param  \Illuminate\Support\Collection  $collection
-     * @param  string                          $columnName
-     * @param  string                          $condition
-     * @param  string                          $filter_value
-     * @param  string                          $clause
-     * @param  string                          $method
-     * @return void
-     */
-    private function resolve($collection, $columnName, $condition, $filter_value, $clause = 'where', $method = 'resolveQuery')
-    {
-        if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
-            $this->$method($collection, $this->filterMap[$columnName], $condition, $filter_value, $clause);
-        } else if ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
-            $this->$method($collection, $columnName, $condition, $filter_value, $clause);
-        } else {
-            $this->$method($collection, $columnName, $condition, $filter_value, $clause);
-        }
-    }
-
-    /**
-     * Resolve boolean query.
-     *
-     * @param  \Illuminate\Support\Collection  $collection
-     * @param  string                          $columnName
-     * @param  string                          $condition
-     * @param  string                          $filter_value
-     * @return void
-     */
-    private function resolveBooleanQuery($collection, $columnName, $condition, $filter_value)
-    {
-        if ($this->operators[$condition] == '=') {
-            if ($filter_value == 1) {
-                $this->resolveFilterQuery($collection, $columnName, $condition, $filter_value, false);
-            } else {
-                $this->resolveFilterQuery($collection, $columnName, $condition, $filter_value, true);
-            }
-        } else if ($this->operators[$condition] == '<>') {
-            if ($filter_value == 1) {
-                $this->resolveFilterQuery($collection, $columnName, $condition, $filter_value, true);
-            } else {
-                $this->resolveFilterQuery($collection, $columnName, $condition, $filter_value, false);
-            }
-        } else {
-            $this->resolveFilterQuery($collection, $columnName, $condition, $filter_value);
-        }
-    }
-
-    /**
-     * Resolve filter query.
-     *
-     * @param  \Illuminate\Support\Collection  $collection
-     * @param  string                          $columnName
-     * @param  string                          $condition
-     * @param  string                          $filter_value
-     * @param  null|boolean                    $nullCheck
-     * @return void
-     */
-    private function resolveFilterQuery($collection, $columnName, $condition, $filter_value, $nullCheck = null)
-    {
-        $clause = is_null($nullCheck) ? null : ( $nullCheck ? 'orWhereNull' : 'orWhereNotNull' );
-
-        $collection->where(function ($query) use ($columnName, $condition, $filter_value, $clause) {
-            $this->resolveQuery($query, $columnName, $condition, $filter_value);
-
-            if (! is_null($clause)) {
-                $query->$clause(($this->filterMap[$columnName]));
-            }
-        });
-    }
-
-    /**
-     * Resolve query.
-     *
-     * @param  object        $query
-     * @param  string        $columnName
-     * @param  string        $condition
-     * @param  string        $filter_value
-     * @param  null|boolean  $nullCheck
-     * @return void
-     */
-    private function resolveQuery($query, $columnName, $condition, $filter_value, $clause = 'where')
-    {
-        $query->$clause(
-            $columnName,
-            $this->operators[$condition],
-            $filter_value
-        );
-    }
-
-    /**
      * Get necessary extra details.
      *
      * @return array
      */
-    private function getNecessaryExtraFilters()
+    protected function getNecessaryExtraFilters()
     {
         $necessaryExtraFilters = [];
 
@@ -814,31 +434,5 @@ abstract class DataGrid
         }
 
         return $necessaryExtraFilters;
-    }
-
-    /**
-     * Fetch current route acl. As no access to acl key, this will fetch acl by route name.
-     *
-     * @param  $action
-     * @return array
-     */
-    private function fetchCurrentRouteACL($action)
-    {
-        return collect(config('acl'))->filter(function ($acl) use ($action) {
-            return $acl['route'] === $action['route'];
-        })->first();
-    }
-
-    /**
-     * Fetch route name from full url, not the current one.
-     *
-     * @param  $action
-     * @return array
-     */
-    private function getRouteNameFromUrl($action, $method)
-    {
-        return app('router')->getRoutes()
-            ->match(app('request')->create(str_replace(url('/'), '', $action), $method))
-            ->getName();
     }
 }
