@@ -13,7 +13,8 @@ class Small implements FilterInterface
      */
     public function applyFilter(Image $image)
     {
-        $width = $height = 120;
+        $width = core()->getConfigData('catalog.products.cache-small-image.width') ?? 120;
+        $height = core()->getConfigData('catalog.products.cache-small-image.height') ?? 120;
 
         $image->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
