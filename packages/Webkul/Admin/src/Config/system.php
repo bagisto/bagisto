@@ -175,7 +175,7 @@ return [
     ], [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.admin.system.storefront',
-        'sort'   => 2,
+        'sort'   => 3,
         'fields' => [
             [
                 'name'          => 'mode',
@@ -230,9 +230,57 @@ return [
             ]
         ],
     ], [
+        'key'    => 'catalog.products.cache-small-image',
+        'name'   => 'admin::app.admin.system.cache-small-image',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name'  => 'width',
+                'title' => 'admin::app.admin.system.width',
+                'type'  => 'text',
+            ],
+            [
+                'name'  => 'height',
+                'title' => 'admin::app.admin.system.height',
+                'type'  => 'text',
+            ]
+        ],
+    ], [
+        'key'    => 'catalog.products.cache-medium-image',
+        'name'   => 'admin::app.admin.system.cache-medium-image',
+        'sort'   => 5,
+        'fields' => [
+            [
+                'name'  => 'width',
+                'title' => 'admin::app.admin.system.width',
+                'type'  => 'text',
+            ],
+            [
+                'name'  => 'height',
+                'title' => 'admin::app.admin.system.height',
+                'type'  => 'text',
+            ]
+        ],
+    ], [
+        'key'    => 'catalog.products.cache-large-image',
+        'name'   => 'admin::app.admin.system.cache-large-image',
+        'sort'   => 6,
+        'fields' => [
+            [
+                'name'  => 'width',
+                'title' => 'admin::app.admin.system.width',
+                'type'  => 'text',
+            ],
+            [
+                'name'  => 'height',
+                'title' => 'admin::app.admin.system.height',
+                'type'  => 'text',
+            ]
+        ],
+    ], [
         'key'    => 'catalog.products.review',
         'name'   => 'admin::app.admin.system.review',
-        'sort'   => 3,
+        'sort'   => 7,
         'fields' => [
             [
                 'name'  => 'guest_review',
@@ -243,7 +291,7 @@ return [
     ], [
         'key'    => 'catalog.products.attribute',
         'name'   => 'admin::app.admin.system.attribute',
-        'sort'   => 4,
+        'sort'   => 8,
         'fields' => [
             [
                 'name'  => 'image_attribute_upload_size',
