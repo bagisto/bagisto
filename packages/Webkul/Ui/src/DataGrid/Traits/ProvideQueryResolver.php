@@ -77,13 +77,13 @@ trait ProvideQueryResolver
      */
     private function resolveFilterQuery($collection, $columnName, $condition, $filterValue, $nullCheck = null)
     {
-        $clause = is_null($nullCheck) ? null : ( $nullCheck ? 'orWhereNull' : 'orWhereNotNull' );
+        $clause = is_null($nullCheck) ? null : ( $nullCheck ? 'orWhereNull' : 'whereNotNull' );
 
         $collection->where(function ($query) use ($columnName, $condition, $filterValue, $clause) {
             $this->resolveQuery($query, $columnName, $condition, $filterValue);
 
             if (! is_null($clause)) {
-                $query->$clause(($this->filterMap[$columnName]));
+                $query->$clause($columnName);
             }
         });
     }
