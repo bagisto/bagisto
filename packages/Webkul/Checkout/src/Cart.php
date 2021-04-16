@@ -692,7 +692,7 @@ class Cart
                     }
 
                     if (! $rate->is_zip) {
-                        if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode) {
+                        if (empty($rate->zip_code) || in_array($rate->zip_code, ['*', $address->postcode])) {
                             $haveTaxRate = true;
                         }
                     } else {
