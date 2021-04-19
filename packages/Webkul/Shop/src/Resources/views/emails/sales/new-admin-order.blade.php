@@ -52,7 +52,7 @@
                     </div>
 
                     <div>
-                        {{ $order->shipping_address->postcode ." " . $order->shipping_address->city }}
+                        {{ $order->shipping_address->postcode . " " . $order->shipping_address->city }}
                     </div>
 
                     <div>
@@ -97,7 +97,7 @@
                 </div>
 
                 <div>
-                    {{ $order->billing_address->postcode ." " . $order->billing_address->city }}
+                    {{ $order->billing_address->postcode . " " . $order->billing_address->city }}
                 </div>
 
                 <div>

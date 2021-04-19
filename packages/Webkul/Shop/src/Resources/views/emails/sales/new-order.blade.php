@@ -48,7 +48,7 @@
                     </div>
 
                     <div>
-                        {{ $order->shipping_address->postcode ." " . $order->shipping_address->city }}
+                        {{ $order->shipping_address->postcode . " " . $order->shipping_address->city }}
                     </div>
 
                     <div>

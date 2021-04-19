@@ -28,7 +28,7 @@
                                 </li><br />
 
                                 <li>
-                                    {{ $billingAddress->postcode ." " . $billingAddress->city }}
+                                    {{ $billingAddress->postcode . " " . $billingAddress->city }}
                                 </li><br />
 
                                 <li>
@@ -66,7 +66,7 @@
                                 </li><br/>
 
                                 <li>
-                                    {{ $shippingAddress->postcode ." " . $shippingAddress->city }}
+                                    {{ $shippingAddress->postcode . " " . $shippingAddress->city }}
                                 </li><br />
 
                                 <li>
