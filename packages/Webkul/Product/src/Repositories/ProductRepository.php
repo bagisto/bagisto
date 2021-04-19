@@ -33,21 +33,19 @@ class ProductRepository extends Repository
      *
      * @param \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
      * @param \Illuminate\Container\Container                    $app
-     *
      * @return void
      */
     public function __construct(
         AttributeRepository $attributeRepository,
         App $app
-    )
-    {
+    ) {
         $this->attributeRepository = $attributeRepository;
 
         parent::__construct($app);
     }
 
     /**
-     * Specify Model class name
+     * Specify model class name.
      *
      * @return string
      */
@@ -57,8 +55,9 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param array $data
+     * Create.
      *
+     * @param array $data
      * @return \Webkul\Product\Contracts\Product
      */
     public function create(array $data)
@@ -75,10 +74,11 @@ class ProductRepository extends Repository
     }
 
     /**
+     * Update.
+     *
      * @param array  $data
      * @param int    $id
      * @param string $attribute
-     *
      * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
@@ -99,8 +99,9 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param int $id
+     * Delete.
      *
+     * @param int $id
      * @return void
      */
     public function delete($id)
@@ -112,9 +113,10 @@ class ProductRepository extends Repository
         Event::dispatch('catalog.product.delete.after', $id);
     }
 
-     /**
-     * @param int $categoryId
+    /**
+     * Get products related to category.
      *
+     * @param int $categoryId
      * @return \Illuminate\Support\Collection
      */
     public function getProductsRelatedToCategory($categoryId = null)
@@ -130,8 +132,9 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param string $categoryId
+     * Get all products.
      *
+     * @param string $categoryId
      * @return \Illuminate\Support\Collection
      */
     public function getAll($categoryId = null)
@@ -141,9 +144,9 @@ class ProductRepository extends Repository
         if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
             $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
 
-            $perPage = isset($params['limit']) ? (! empty($params['limit']) ? $params['limit'] : 9) : current($pages);
+            $perPage = isset($params['limit']) ? (!empty($params['limit']) ? $params['limit'] : 9) : current($pages);
         } else {
-            $perPage = isset($params['limit']) && ! empty($params['limit']) ? $params['limit'] : 9;
+            $perPage = isset($params['limit']) && !empty($params['limit']) ? $params['limit'] : 9;
         }
 
         $page = Paginator::resolveCurrentPage('page');
@@ -164,10 +167,6 @@ class ProductRepository extends Repository
 
             if ($categoryId) {
                 $qb->whereIn('product_categories.category_id', explode(',', $categoryId));
-            }
-
-            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                $qb = $this->checkOutOfStockItem($qb);
             }
 
             if (is_null(request()->input('status'))) {
@@ -198,14 +197,14 @@ class ProductRepository extends Repository
                 $orderDirection = $params['order'];
             } else {
                 $sortOptions = $this->getDefaultSortByOption();
-                $orderDirection = ! empty($sortOptions) ? $sortOptions[1] : 'asc';
+                $orderDirection = !empty($sortOptions) ? $sortOptions[1] : 'asc';
             }
 
             if (isset($params['sort'])) {
                 $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
             } else {
                 $sortOptions = $this->getDefaultSortByOption();
-                if (! empty($sortOptions)) {
+                if (!empty($sortOptions)) {
                     $this->checkSortAttributeAndGenerateQuery($qb, $sortOptions[0], $orderDirection);
                 }
             }
@@ -230,22 +229,22 @@ class ProductRepository extends Repository
                         ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
                         ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
                         ->where(function ($qb) use ($priceRange, $customerGroupId) {
-                            $qb->where(function ($qb) use ($priceRange){
+                            $qb->where(function ($qb) use ($priceRange) {
                                 $qb
                                     ->where('variants.min_price', '>=',  core()->convertToBasePrice($priceRange[0]))
                                     ->where('variants.min_price', '<=',  core()->convertToBasePrice(end($priceRange)));
                             })
-                            ->orWhere(function ($qb) use ($priceRange) {
-                                $qb
-                                    ->where('catalog_rule_product_prices.price', '>=',  core()->convertToBasePrice($priceRange[0]))
-                                    ->where('catalog_rule_product_prices.price', '<=',  core()->convertToBasePrice(end($priceRange)));
-                            })
-                            ->orWhere(function ($qb) use ($priceRange, $customerGroupId) {
-                                $qb
-                                    ->where('product_customer_group_prices.value', '>=',  core()->convertToBasePrice($priceRange[0]))
-                                    ->where('product_customer_group_prices.value', '<=',  core()->convertToBasePrice(end($priceRange)))
-                                    ->where('product_customer_group_prices.customer_group_id', '=', $customerGroupId);
-                            });
+                                ->orWhere(function ($qb) use ($priceRange) {
+                                    $qb
+                                        ->where('catalog_rule_product_prices.price', '>=',  core()->convertToBasePrice($priceRange[0]))
+                                        ->where('catalog_rule_product_prices.price', '<=',  core()->convertToBasePrice(end($priceRange)));
+                                })
+                                ->orWhere(function ($qb) use ($priceRange, $customerGroupId) {
+                                    $qb
+                                        ->where('product_customer_group_prices.value', '>=',  core()->convertToBasePrice($priceRange[0]))
+                                        ->where('product_customer_group_prices.value', '<=',  core()->convertToBasePrice(end($priceRange)))
+                                        ->where('product_customer_group_prices.customer_group_id', '=', $customerGroupId);
+                                });
                         });
                 }
             }
@@ -273,20 +272,18 @@ class ProductRepository extends Repository
 
                                 $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
                                     foreach ($filterInputValues as $filterValue) {
-                                        if (! is_numeric($filterValue)) {
+                                        if (!is_numeric($filterValue)) {
                                             continue;
                                         }
                                         $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
                                     }
                                 });
-
                             } else {
                                 $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
                                     ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
                             }
                         });
                     }
-
                 });
 
                 # this is key! if a product has been filtered down to the same number of attributes that we filtered on,
@@ -296,7 +293,6 @@ class ProductRepository extends Repository
             }
 
             return $qb->groupBy('product_flat.id');
-
         });
 
         # apply scope query so we can fetch the raw sql and perform a count
@@ -325,11 +321,10 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Retrive product from slug
+     * Retrive product from slug.
      *
      * @param string $slug
      * @param string $columns
-     *
      * @return \Webkul\Product\Contracts\Product
      */
     public function findBySlugOrFail($slug, $columns = null)
@@ -340,9 +335,10 @@ class ProductRepository extends Repository
             'channel' => core()->getCurrentChannelCode(),
         ]);
 
-        if (! $product) {
+        if (!$product) {
             throw (new ModelNotFoundException)->setModel(
-                get_class($this->model), $slug
+                get_class($this->model),
+                $slug
             );
         }
 
@@ -350,10 +346,9 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Retrieve product from slug without throwing an exception (might return null)
+     * Retrieve product from slug without throwing an exception (might return null).
      *
      * @param string $slug
-     *
      * @return \Webkul\Product\Contracts\ProductFlat
      */
     public function findBySlug($slug)
@@ -366,7 +361,7 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Returns newly added product
+     * Returns newly added product.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -393,7 +388,7 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Returns featured product
+     * Returns featured product.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -420,10 +415,9 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Search Product by Attribute
+     * Search product by attribute.
      *
      * @param string $term
-     *
      * @return \Illuminate\Support\Collection
      */
     public function searchProductByAttribute($term)
@@ -466,7 +460,7 @@ class ProductRepository extends Repository
         } else {
             $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($term, $channel, $locale) {
 
-                if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                if (!core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
                     $query = $this->checkOutOfStockItem($query);
                 }
 
@@ -493,10 +487,9 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Returns product's super attribute with options
+     * Returns product's super attribute with options.
      *
      * @param \Webkul\Product\Contracts\Product $product
-     *
      * @return \Illuminate\Support\Collection
      */
     public function getSuperAttributes($product)
@@ -520,10 +513,9 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Search simple products for grouped product association
+     * Search simple products for grouped product association.
      *
      * @param string $term
-     *
      * @return \Illuminate\Support\Collection
      */
     public function searchSimpleProducts($term)
@@ -550,13 +542,14 @@ class ProductRepository extends Repository
      *
      * Always make the copy is inactive so the admin is able to configure it before setting it live.
      *
-     * @param int $sourceProductId the id of the product that should be copied
+     * @param int $sourceProductId (The `id` of the product that should be copied.)
+     * @return Product
      */
     public function copy(Product $originalProduct): Product
     {
         $this->fillOriginalProduct($originalProduct);
 
-        if (! $originalProduct->getTypeInstance()->canBeCopied()) {
+        if (!$originalProduct->getTypeInstance()->canBeCopied()) {
             throw new Exception(trans('admin::app.response.product-can-not-be-copied', ['type' => $originalProduct->type]));
         }
 
@@ -582,7 +575,7 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Get default sort by option
+     * Get default sort by option.
      *
      * @return array
      */
@@ -596,12 +589,11 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Check sort attribute and generate query
+     * Check sort attribute and generate query.
      *
      * @param object $query
      * @param string $sort
      * @param string $direction
-     *
      * @return object
      */
     private function checkSortAttributeAndGenerateQuery($query, $sort, $direction)
@@ -622,6 +614,12 @@ class ProductRepository extends Repository
         return $query;
     }
 
+    /**
+     * Fill original product.
+     *
+     * @param $originalProduct
+     * @return mixed
+     */
     private function fillOriginalProduct(Product &$sourceProduct): void
     {
         $sourceProduct
@@ -633,8 +631,9 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param $originalProduct
+     * Persist copied product.
      *
+     * @param $originalProduct
      * @return mixed
      */
     private function persistCopiedProduct($originalProduct): Product
@@ -655,6 +654,8 @@ class ProductRepository extends Repository
     /**
      * Gather the ids of the necessary product attributes.
      * Throw an Exception if one of these 'basic' attributes are missing for some reason.
+     *
+     * @return array
      */
     private function gatherAttributeIds(): array
     {
@@ -667,6 +668,13 @@ class ProductRepository extends Repository
         return $ids;
     }
 
+    /**
+     * Persist attribute values.
+     *
+     * @param $originalProduct
+     * @param $copiedProduct
+     * @return void
+     */
     private function persistAttributeValues(Product $originalProduct, Product $copiedProduct): void
     {
         $attributeIds = $this->gatherAttributeIds();
@@ -694,7 +702,8 @@ class ProductRepository extends Repository
             // change name of copied product
             if ($oldValue->attribute_id === $attributeIds['name']) {
                 $copyOf = trans('admin::app.copy-of');
-                $copiedName = sprintf('%s%s (%s)',
+                $copiedName = sprintf(
+                    '%s%s (%s)',
                     Str::startsWith($originalProduct->name, $copyOf) ? '' : $copyOf,
                     $originalProduct->name,
                     $randomSuffix
@@ -706,7 +715,8 @@ class ProductRepository extends Repository
             // change url_key of copied product
             if ($oldValue->attribute_id === $attributeIds['url_key']) {
                 $copyOfSlug = trans('admin::app.copy-of-slug');
-                $copiedSlug = sprintf('%s%s-%s',
+                $copiedSlug = sprintf(
+                    '%s%s-%s',
                     Str::startsWith($originalProduct->url_key, $copyOfSlug) ? '' : $copyOfSlug,
                     $originalProduct->url_key,
                     $randomSuffix
@@ -724,7 +734,8 @@ class ProductRepository extends Repository
             // change product number
             if ($oldValue->attribute_id === $attributeIds['product_number']) {
                 $copyProductNumber = trans('admin::app.copy-of-slug');
-                $copiedProductNumber = sprintf('%s%s-%s',
+                $copiedProductNumber = sprintf(
+                    '%s%s-%s',
                     Str::startsWith($originalProduct->product_number, $copyProductNumber) ? '' : $copyProductNumber,
                     $originalProduct->product_number,
                     $randomSuffix
@@ -740,21 +751,23 @@ class ProductRepository extends Repository
             }
 
             $copiedProduct->attribute_values()->save($newValue);
-
         }
 
         $newProductFlat->save();
     }
 
     /**
+     * Persist relations.
+     *
      * @param $originalProduct
      * @param $copiedProduct
+     * @return void
      */
     private function persistRelations($originalProduct, $copiedProduct): void
     {
         $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
 
-        if (! in_array('categories', $attributesToSkip)) {
+        if (!in_array('categories', $attributesToSkip)) {
             foreach ($originalProduct->categories as $category) {
                 DB::table('product_categories')->insert([
                     'product_id'  => $copiedProduct->id,
@@ -763,19 +776,19 @@ class ProductRepository extends Repository
             }
         }
 
-        if (! in_array('inventories', $attributesToSkip)) {
+        if (!in_array('inventories', $attributesToSkip)) {
             foreach ($originalProduct->inventories as $inventory) {
                 $copiedProduct->inventories()->save($inventory->replicate());
             }
         }
 
-        if (! in_array('customer_group_pricces', $attributesToSkip)) {
+        if (!in_array('customer_group_pricces', $attributesToSkip)) {
             foreach ($originalProduct->customer_group_prices as $customer_group_price) {
                 $copiedProduct->customer_group_prices()->save($customer_group_price->replicate());
             }
         }
 
-        if (! in_array('images', $attributesToSkip)) {
+        if (!in_array('images', $attributesToSkip)) {
             foreach ($originalProduct->images as $image) {
                 $copiedProductImage = $copiedProduct->images()->save($image->replicate());
 
@@ -783,7 +796,7 @@ class ProductRepository extends Repository
             }
         }
 
-        if (! in_array('videos', $attributesToSkip)) {
+        if (!in_array('videos', $attributesToSkip)) {
             foreach ($originalProduct->videos as $video) {
                 $copiedProductVideo = $copiedProduct->videos()->save($video->replicate());
 
@@ -791,19 +804,19 @@ class ProductRepository extends Repository
             }
         }
 
-        if (! in_array('super_attributes', $attributesToSkip)) {
+        if (!in_array('super_attributes', $attributesToSkip)) {
             foreach ($originalProduct->super_attributes as $super_attribute) {
                 $copiedProduct->super_attributes()->save($super_attribute);
             }
         }
 
-        if (! in_array('bundle_options', $attributesToSkip)) {
+        if (!in_array('bundle_options', $attributesToSkip)) {
             foreach ($originalProduct->bundle_options as $bundle_option) {
                 $copiedProduct->bundle_options()->save($bundle_option->replicate());
             }
         }
 
-        if (! in_array('variants', $attributesToSkip)) {
+        if (!in_array('variants', $attributesToSkip)) {
             foreach ($originalProduct->variants as $variant) {
                 $variant = $this->copy($variant);
                 $variant->parent_id = $copiedProduct->id;
@@ -820,15 +833,18 @@ class ProductRepository extends Repository
     }
 
     /**
+     * Copy image product.
+     *
      * @object $data
      * @object $copiedProduct
      * @object $copiedProductImageVideo
+     * @return void
      */
     private function copyProductImageVideo($data, $copiedProduct, $copiedProductImageVideo): void
     {
         $path = explode("/", $data->path);
 
-        $path = 'product/' . $copiedProduct->id .'/'. end($path);
+        $path = 'product/' . $copiedProduct->id . '/' . end($path);
 
         $copiedProductImageVideo->path = $path;
 
@@ -843,10 +859,10 @@ class ProductRepository extends Repository
      * Check out of stock items.
      *
      * @param Webkul\Product\Models\ProductFlat
-     *
      * @return Model
-    */
-    public function checkOutOfStockItem($query) {
+     */
+    public function checkOutOfStockItem($query)
+    {
         return $query
             ->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
             ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')

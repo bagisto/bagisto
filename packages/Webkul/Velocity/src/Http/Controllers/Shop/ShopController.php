@@ -285,8 +285,16 @@ class ShopController extends Controller
         /* sending response */
         return response()->json([
             'products' => collect($products->items())->map(function ($product) {
-                return $this->velocityHelper->formatProduct($product);
-            }),
+                if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                    return $this->velocityHelper->formatProduct($product);
+                } else {
+                    if ($product->isSaleable()) {
+                        return $this->velocityHelper->formatProduct($product);
+                    }
+                }
+            })->reject(function ($product) {
+                return is_null($product);
+            })->values(),
             'paginationHTML' => $products->appends(request()->input())->links()->toHtml()
         ]);
     }
