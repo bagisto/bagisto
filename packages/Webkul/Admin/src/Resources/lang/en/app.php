@@ -931,7 +931,7 @@ return [
     ],
 
     'customers' => [
-        'groups' =>[
+        'groups' => [
             'add-title'       => 'Add Group',
             'edit-title'      => 'Edit Group',
             'save-btn-title'  => 'Save Group',
@@ -1483,12 +1483,17 @@ return [
             'client-secret'             => 'Client Secret',
             'client-secret-info'        => 'Add your secret key here',
             'accepted-currencies'       => 'Accepted currencies',
-            'accepted-currencies-info'      => 'Add currency code comma seperated e.g. USD,INR,...',
-            'buy-now-button-display'        => 'Allow customers to directly buy products',
-            'order-number-generator-class'  => 'Order Number Generator',
-            'show-search-input-field'       => 'Show Search Input Field',
+            'accepted-currencies-info'              => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display'                => 'Allow customers to directly buy products',
+            'order-number-generator-class'          => 'Order Number Generator',
+            'show-search-input-field'               => 'Show Search Input Field',
             'allow-no-of-new-product-homepage'      => 'Allowed No of New Product in Homepage',
             'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
-       ]
+            'width' => 'Width',
+            'height' => 'Height',
+            'cache-small-image' => 'Small Image',
+            'cache-medium-image' => 'Medium Image',
+            'cache-large-image' => 'Large Image',
+        ]
     ]
 ];
