@@ -62,7 +62,7 @@
                                     {{ $shippingAddress->name }}
                                 </li><br/>
                                 <li>
-                                    {{ $shippingAddress->address1 }},<br/> {{ $shippingAddress->state }}
+                                    {{ $shippingAddress->address1 }},<br/>
                                 </li><br/>
 
                                 <li>
