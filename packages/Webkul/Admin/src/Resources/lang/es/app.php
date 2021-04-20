@@ -1489,7 +1489,12 @@ return [
             'client-secret-info' => 'Agrega tu clave secreta aquí',
             'accepted-currencies' => 'Monedas aceptadas',
             'accepted-currencies-info' => 'Agregue el código de moneda separado por comas, por ej. USD,INR,...',
-            'buy-now-button-display' => 'Permitir que los clientes compren productos directamente'
+            'buy-now-button-display' => 'Permitir que los clientes compren productos directamente',
+            'width' => 'Width',
+            'height' => 'Height',
+            'cache-small-image' => 'Small Image',
+            'cache-medium-image' => 'Medium Image',
+            'cache-large-image' => 'Large Image',
        ]
     ]
 ];

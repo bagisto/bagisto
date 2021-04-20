@@ -24,10 +24,19 @@
                                     {{ $billingAddress->name }}
                                 </li><br />
                                 <li>
-                                    {{ $billingAddress->address1 }}, <br />{{ $billingAddress->state }}
+                                    {{ $billingAddress->address1 }}, <br />
                                 </li><br />
+
                                 <li>
-                                    {{ core()->country_name($billingAddress->country) }} {{ $billingAddress->postcode }}
+                                    {{ $billingAddress->postcode . " " . $billingAddress->city }}
+                                </li><br />
+
+                                <li>
+                                    {{ $billingAddress->state }}
+                                </li><br />
+
+                                <li>
+                                    {{ core()->country_name($billingAddress->country) }}
                                 </li><br />
 
                                 <li>
@@ -53,11 +62,20 @@
                                     {{ $shippingAddress->name }}
                                 </li><br/>
                                 <li>
-                                    {{ $shippingAddress->address1 }},<br/> {{ $shippingAddress->state }}
+                                    {{ $shippingAddress->address1 }},<br/>
                                 </li><br/>
+
                                 <li>
-                                    {{ core()->country_name($shippingAddress->country) }} {{ $shippingAddress->postcode }}
-                                </li><br/>
+                                    {{ $shippingAddress->postcode . " " . $shippingAddress->city }}
+                                </li><br />
+
+                                <li>
+                                    {{ $shippingAddress->state }}
+                                </li><br />
+
+                                <li>
+                                    {{ core()->country_name($shippingAddress->country) }}
+                                </li><br />
 
                                 <li>
                                     {{ __('shop::app.checkout.onepage.contact') }} : {{ $shippingAddress->phone }}
