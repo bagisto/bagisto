@@ -27,7 +27,7 @@
         </div>
 
         <div class="slot-list table" v-else>
-            <accordian 
+            <accordian
                 v-for="(day, dayIndex) in week_days"
                 :key="dayIndex"
                 :title="day"
@@ -47,7 +47,7 @@
                                 <th class="actions"></th>
                             </tr>
                         </thead>
-                        
+
                         <tbody v-if="slots['different_for_week'][dayIndex] && slots['different_for_week'][dayIndex].length">
                             <slot-item
                                 v-for="(slot, slotIndex) in slots['different_for_week'][dayIndex]"
@@ -85,7 +85,7 @@
         <td>
             <div class="control-group date" :class="[errors.has(controlName + '[to]') ? 'has-error' : '']">
                 <time-component>
-                    <input type="text" v-validate="'required'" :name="controlName + '[to]'" v-model="slotItem.to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.to') }}&quot;">
+                    <input type="text" v-validate="{required: true, time_min: slotItem.from }" :name="controlName + '[to]'" v-model="slotItem.to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.to') }}&quot;">
                 </time-component>
 
                 <span class="control-error" v-if="errors.has(controlName + '[to]')">
@@ -192,4 +192,20 @@
             },
         }
     });
+
+    const time_validator = {
+        getMessage: (field) => {
+            return "{{ __('bookingproduct::app.admin.catalog.products.time-error') }}"
+        },
+
+        validate: (value, min) => {
+            if (Array.isArray(value) || value === null || value === undefined || value === '') {
+                return false;
+            }
+
+            return value > min;
+        }
+    };
+
+    VeeValidate.Validator.extend('time_min', time_validator);
 </script>

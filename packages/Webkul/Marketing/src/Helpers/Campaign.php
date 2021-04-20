@@ -61,8 +61,10 @@ class Campaign
     {
         $campaigns = $this->campaignRepository->getModel()
             ->leftJoin('marketing_events', 'marketing_campaigns.marketing_event_id', 'marketing_events.id')
+            ->leftJoin('marketing_templates', 'marketing_campaigns.marketing_template_id', 'marketing_templates.id')
             ->select('marketing_campaigns.*')
-            ->where('status', 1)
+            ->where('marketing_campaigns.status', 1)
+            ->where('marketing_templates.status', 'active')
             ->where(function ($query) {
                 $query->where('marketing_events.date', Carbon::now()->format('Y-m-d'))
                     ->orWhereNull('marketing_events.date');

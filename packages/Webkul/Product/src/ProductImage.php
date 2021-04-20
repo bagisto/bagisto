@@ -36,8 +36,14 @@ class ProductImage extends AbstractProduct
      */
     public function getGalleryImages($product)
     {
+        static $loadedGalleryImages = [];
+
         if (! $product) {
             return [];
+        }
+
+        if (array_key_exists($product->id, $loadedGalleryImages)) {
+            return $loadedGalleryImages[$product->id];
         }
 
         $images = [];
@@ -64,16 +70,69 @@ class ProductImage extends AbstractProduct
             ];
         }
 
-        return $images;
+        /*
+         * Product parent checked already above. If the case reached here that means the
+         * parent is available. So recursing the method for getting the parent image if
+         * images of the child are not found.
+         */
+        if (empty($images)) {
+            $images = $this->getGalleryImages($product->parent);
+        }
+
+        return $loadedGalleryImages[$product->id] = $images;
     }
 
     /**
-     * Get product's base image
+     * This method will first check whether the gallery images are already
+     * present or not. If not then it will load from the product.
+     *
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param array
+     * @return array
+     */
+    public function getProductBaseImage($product, array $galleryImages = null)
+    {
+        static $loadedBaseImages = [];
+
+        if ($product) {
+            if (array_key_exists($product->id, $loadedBaseImages)) {
+                return $loadedBaseImages[$product->id];
+            }
+
+            return $loadedBaseImages[$product->id] = $galleryImages
+                ? $galleryImages[0]
+                : $this->otherwiseLoadFromProduct($product);
+        }
+    }
+
+    /**
+     * Get product varient image if available otherwise product base image.
+     *
+     * @param  \Webkul\Customer\Contracts\Wishlist  $item
+     * @return array
+     */
+    public function getProductImage($item)
+    {
+        if ($item instanceof \Webkul\Customer\Contracts\Wishlist) {
+            if (isset($item->additional['selected_configurable_option'])) {
+                $product = $this->productRepository->find($item->additional['selected_configurable_option']);
+            } else {
+                $product = $item->product;
+            }
+        } else {
+            $product = $item->product;
+        }
+
+        return $this->getProductBaseImage($product);
+    }
+
+     /**
+     * Load product's base image.
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
      */
-    public function getProductBaseImage($product)
+    protected function otherwiseLoadFromProduct($product)
     {
         $images = $product ? $product->images : null;
 
@@ -94,26 +153,5 @@ class ProductImage extends AbstractProduct
         }
 
         return $image;
-    }
-
-    /**
-     * Get product varient image if available otherwise product base image
-     *
-     * @param  \Webkul\Customer\Contracts\Wishlist  $item
-     * @return array
-     */
-    public function getProductImage($item)
-    {
-        if ($item instanceof \Webkul\Customer\Contracts\Wishlist) {
-            if (isset($item->additional['selected_configurable_option'])) {
-                $product = $this->productRepository->find($item->additional['selected_configurable_option']);
-            } else {
-                $product = $item->product;
-            }
-        } else {
-            $product = $item->product;
-        }
-
-        return $this->getProductBaseImage($product);
     }
 }

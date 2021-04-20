@@ -10,7 +10,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.tax-rates.index') }}'"></i>
 
                         {{ __('admin::app.settings.tax-rates.edit.title') }}
                     </h1>
@@ -54,8 +54,8 @@
                         </div>
                     @else
                         <div class="control-group" :class="[errors.has('zip_code') ? 'has-error' : '']">
-                            <label for="zip_code" class="required">{{ __('admin::app.configuration.tax-rates.zip_code') }}</label>
-                            <input v-validate="'required'" class="control" id="zip_code" name="zip_code" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_code') }}&quot;" value="{{ old('zip_code') ?: $taxRate->zip_code }}" />
+                            <label for="zip_code">{{ __('admin::app.configuration.tax-rates.zip_code') }}</label>
+                            <input class="control" id="zip_code" name="zip_code" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_code') }}&quot;" value="{{ old('zip_code') ?: $taxRate->zip_code }}" />
                             <span class="control-error" v-if="errors.has('zip_code')">@{{ errors.first('zip_code') }}</span>
                         </div>
                     @endif

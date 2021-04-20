@@ -2,15 +2,15 @@
 @inject ('customHelper', 'Webkul\Velocity\Helpers\Helper')
 
 @php
+    $reviews = $reviewHelper->getReviews($product)->paginate(10);
+
     if (! isset($total)) {
         $total = $reviewHelper->getTotalReviews($product);
-
         $avgRatings = $reviewHelper->getAverageRating($product);
         $avgStarRating = round($avgRatings);
     }
 
     $percentageRatings = $reviewHelper->getPercentageRating($product);
-    $countRatings = $customHelper->getCountRating($product);
 @endphp
 
 {!! view_render_event('bagisto.shop.products.review.before', ['product' => $product]) !!}
@@ -127,7 +127,7 @@
                 </div>
 
                 <div class="customer-reviews" slot="body">
-                    @foreach ($reviewHelper->getReviews($product)->paginate(10) as $review)
+                    @foreach ($reviews as $review)
                         <div class="row">
                             <h4 class="col-lg-12 fs18">{{ $review->title }}</h4>
 
@@ -138,6 +138,14 @@
 
                             <div class="review-description col-lg-12">
                                 <span>{{ $review->comment }}</span>
+                            </div>
+
+                            <div class="image col-lg-12">
+                                @if (count($review->images) > 0)
+                                    @foreach ($review->images as $image)
+                                        <img class="image" src="{{ $image->url }}" style="height: 50px; width: 50px; margin: 5px;">
+                                    @endforeach
+                                @endif
                             </div>
 
                             <div class="col-lg-12 mt5">
@@ -165,7 +173,7 @@
             </h3>
 
             <div class="customer-reviews">
-                @foreach ($reviewHelper->getReviews($product)->paginate(10) as $review)
+                @foreach ($reviews as $review)
                     <div class="row">
                         <h4 class="col-lg-12 fs18">{{ $review->title }}</h4>
 
@@ -176,6 +184,14 @@
 
                         <div class="review-description col-lg-12">
                             <span>{{ $review->comment }}</span>
+                        </div>
+
+                        <div class="image col-lg-12">
+                            @if (count($review->images) > 0)
+                                @foreach ($review->images as $image)
+                                    <img class="image" src="{{ $image->url }}" style="height: 50px; width: 50px; margin: 5px;">
+                                @endforeach
+                            @endif
                         </div>
 
                         <div class="col-lg-12 mt5">

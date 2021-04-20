@@ -81,6 +81,7 @@ return [
         'tax-rates'                => 'Steuersätze',
         'discount'                 => 'Rabatt',
         'cms'                      => 'CMS',
+        'transactions'             => 'Transactions'
     ],
     'acl'           =>
     [
@@ -240,6 +241,8 @@ return [
         'rtl'              => 'RTL',
         'ltr'              => 'LTR',
         'update-status'    => 'Update-Status',
+        'transaction-id'   => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
     'account'       =>
     [
@@ -388,6 +391,7 @@ return [
             'cancel-confirm-msg' => 'Sind Sie sicher, dass Sie diese Bestellung stornieren möchten?',
             'refund-btn-title' => 'Rückerstattung',
             'refunds' => 'Erstattungen',
+            'transactions' => 'Transactions'
         ],
         'invoices' =>
         [
@@ -462,6 +466,20 @@ return [
             'view-title' => 'Rückerstattung #:refund_id',
             'invalid-refund-amount-error' => 'Der Rückerstattungsbetrag sollte nicht Null sein.',
         ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
+        ]
     ],
     'catalog' =>
     [
@@ -844,6 +862,8 @@ return [
             'update-fail'     => 'Slider kann nicht aktualisiert werden',
             'delete-success'  => 'Der letzte Slider kann nicht gelöscht werden',
             'delete-fail'     => 'Slider erfolgreich gelöscht',
+            'expired-at'      => 'Expire Date',
+            'sort-order'      => 'Sort Order'
         ],
         'tax-categories'    =>
         [
@@ -1438,7 +1458,12 @@ return [
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
             'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
-            'buy-now-button-display' => 'Allow customers to directly buy products'
+            'buy-now-button-display' => 'Allow customers to directly buy products',
+            'width' => 'Width',
+            'height' => 'Height',
+            'cache-small-image' => 'Small Image',
+            'cache-medium-image' => 'Medium Image',
+            'cache-large-image' => 'Large Image',
         ],
     ],
 ];

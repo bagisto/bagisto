@@ -3,8 +3,8 @@
 namespace Webkul\CatalogRule\Helpers;
 
 use Carbon\Carbon;
-use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 
 class CatalogRuleProductPrice
 {
@@ -161,7 +161,7 @@ class CatalogRuleProductPrice
 
             case 'by_fixed':
                 $price = max(0, $price - $rule->discount_amount);
-                
+
                 break;
 
             case 'by_percent':
@@ -191,7 +191,7 @@ class CatalogRuleProductPrice
     }
 
     /**
-     * Get catalog rules product price for specific date, channel and customer group
+     * Get catalog rules product price for specific date, channel and customer group.
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return array|void
@@ -201,7 +201,7 @@ class CatalogRuleProductPrice
         if ($this->getCurrentCustomer()->check()) {
             $customerGroupId = $this->getCurrentCustomer()->user()->customer_group_id;
         } else {
-            $customerGroup = $this->customerGroupRepository->findOneByField('code', 'guest');
+            $customerGroup = $this->customerGroupRepository->getCustomerGuestGroup();
 
             if (! $customerGroup) {
                 return;
@@ -210,11 +210,6 @@ class CatalogRuleProductPrice
             $customerGroupId = $customerGroup->id;
         }
 
-        return $this->catalogRuleProductPriceRepository->findOneWhere([
-            'product_id'        => $product->id,
-            'channel_id'        => core()->getCurrentChannel()->id,
-            'customer_group_id' => $customerGroupId,
-            'rule_date'         => Carbon::now()->format('Y-m-d'),
-        ]);
+        return $this->catalogRuleProductPriceRepository->checkInLoadedCatalogRulePrice($product, $customerGroupId);
     }
 }

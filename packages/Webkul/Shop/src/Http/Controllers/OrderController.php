@@ -2,12 +2,17 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use PDF;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
-use PDF;
 
 class OrderController extends Controller
 {
+    /**
+     * Current customer.
+     */
+    protected $currentCustomer;
+
     /**
      * OrderrRepository object
      *
@@ -36,6 +41,8 @@ class OrderController extends Controller
     {
         $this->middleware('customer');
 
+        $this->currentCustomer = auth()->guard('customer')->user();
+
         $this->orderRepository = $orderRepository;
 
         $this->invoiceRepository = $invoiceRepository;
@@ -62,7 +69,7 @@ class OrderController extends Controller
     public function view($id)
     {
         $order = $this->orderRepository->findOneWhere([
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => $this->currentCustomer->id,
             'id'          => $id,
         ]);
 
@@ -83,6 +90,10 @@ class OrderController extends Controller
     {
         $invoice = $this->invoiceRepository->findOrFail($id);
 
+        if ($invoice->order->customer_id !== $this->currentCustomer->id) {
+            abort(404);
+        }
+
         $pdf = PDF::loadView('shop::customers.account.orders.pdf', compact('invoice'))->setPaper('a4');
 
         return $pdf->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
@@ -96,7 +107,15 @@ class OrderController extends Controller
      */
     public function cancel($id)
     {
-        $result = $this->orderRepository->cancel($id);
+        /* find by order id in customer's order */
+        $order = $this->currentCustomer->all_orders()->find($id);
+
+        /* if order id not found then process should be aborted with 404 page */
+        if (! $order) {
+            abort(404);
+        }
+
+        $result = $this->orderRepository->cancel($order);
 
         if ($result) {
             session()->flash('success', trans('admin::app.response.cancel-success', ['name' => 'Order']));

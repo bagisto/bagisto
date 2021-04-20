@@ -2444,6 +2444,14 @@ section.product-detail {
                 margin-bottom: 10px;
             }
 
+            .image {
+                img {
+                    height: 50px;
+                    width: 50px;
+                    margin: 5px;
+                }
+            }
+
             .reviewer-details {
                 color: $review-details;
             }
@@ -2455,6 +2463,12 @@ section.product-detail {
             margin-bottom:15px;
         }
     }
+}
+
+.image-wrapper .image-item {
+    width: 150px !important;
+    height: 150px !important;
+    background-size: 75% !important;
 }
 
 /* cart pages and elements css begins here */

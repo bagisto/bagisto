@@ -162,24 +162,20 @@ class ExchangeRateController extends Controller
     {
         $exchangeRate = $this->exchangeRateRepository->findOrFail($id);
 
-        if ($this->exchangeRateRepository->count() == 1) {
-            session()->flash('error', trans('admin::app.settings.exchange_rates.last-delete-error'));
-        } else {
-            try {
-                Event::dispatch('core.exchange_rate.delete.before', $id);
+        try {
+            Event::dispatch('core.exchange_rate.delete.before', $id);
 
-                $this->exchangeRateRepository->delete($id);
+            $this->exchangeRateRepository->delete($id);
 
-                session()->flash('success', trans('admin::app.settings.exchange_rates.delete-success'));
+            session()->flash('success', trans('admin::app.settings.exchange_rates.delete-success'));
 
-                Event::dispatch('core.exchange_rate.delete.after', $id);
+            Event::dispatch('core.exchange_rate.delete.after', $id);
 
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                report($e);
-                
-                session()->flash('error', trans('admin::app.response.delete-error', ['name' => 'Exchange rate']));
-            }
+            return response()->json(['message' => true], 200);
+        } catch (\Exception $e) {
+            report($e);
+            
+            session()->flash('error', trans('admin::app.response.delete-error', ['name' => 'Exchange rate']));
         }
 
         return response()->json(['message' => false], 400);

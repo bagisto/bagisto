@@ -104,18 +104,24 @@
 
                                 <span class="stars">
                                     @for ($i = 1; $i <= 5; $i++)
-
-                                      @if($i <= $review->rating)
-                                        <span class="icon star-icon"></span>
-                                      @else
-                                        <span class="icon star-icon-blank"></span>
-                                      @endif
-
+                                        @if ($i <= $review->rating)
+                                            <span class="icon star-icon"></span>
+                                        @else
+                                            <span class="icon star-icon-blank"></span>
+                                        @endif
                                     @endfor
                                 </span>
 
                                 <div class="message">
                                     {{ $review->comment }}
+                                </div>
+
+                                <div class="image">
+                                    @if (count($review->images) > 0)
+                                        @foreach ($review->images as $image)
+                                            <img src="{{ $image->url }}">
+                                        @endforeach
+                                    @endif
                                 </div>
 
                                 <div class="reviewer-details">

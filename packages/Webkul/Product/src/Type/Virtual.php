@@ -71,4 +71,14 @@ class Virtual extends AbstractType
     {
         return $qty <= $this->totalQuantity() ? true : false;
     }
+
+    /**
+     * Get product maximam price
+     *
+     * @return float
+     */
+    public function getMaximamPrice()
+    {
+        return $this->product->price;
+    }
 }

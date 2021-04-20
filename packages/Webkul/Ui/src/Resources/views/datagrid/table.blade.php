@@ -1,12 +1,21 @@
 @php
+    /* all locales */
+    $locales = core()->getAllLocales();
+
+    /* request and fallback handling */
     $locale = request()->get('locale') ?: app()->getLocale();
     $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
     $customer_group = request()->get('customer_group');
 
-    if ($channel == 'all') {
-        $locales = core()->getAllLocales();
-    } else {
-        $locales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+    /* handling cases for new locale if not present in current channel */
+    if ($channel !== 'all') {
+        $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+
+        if ($channelLocales->contains('code', $locale)) {
+            $locales = $channelLocales;
+        } else {
+            $channel = 'all';
+        }
     }
 @endphp
 
@@ -35,7 +44,7 @@
                                         <option
                                             value="{{ $channelModel->code }}"
                                             {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
-                                            {{ $channelModel->name }}
+                                            {{ core()->getChannelName($channelModel) }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -721,19 +730,31 @@
                                 case "channel":
                                     obj.label = "Channel";
                                     if ('channels' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code == obj.val).name
+                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code == obj.val);
+
+                                        if (obj.prettyValue !== undefined) {
+                                            obj.prettyValue = obj.prettyValue.name;
+                                        }
                                     }
                                     break;
                                 case "locale":
                                     obj.label = "Locale";
                                     if ('locales' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['locales'].find(locale => locale.code === obj.val).name
+                                        obj.prettyValue = this.extraFilters['locales'].find(locale => locale.code === obj.val);
+
+                                        if (obj.prettyValue !== undefined) {
+                                            obj.prettyValue = obj.prettyValue.name;
+                                        }
                                     }
                                     break;
                                 case "customer_group":
                                     obj.label = "Customer Group";
                                     if ('customer_groups' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['customer_groups'].find(customer_group => customer_group.id === parseInt(obj.val, 10)).name
+                                        obj.prettyValue = this.extraFilters['customer_groups'].find(customer_group => customer_group.id === parseInt(obj.val, 10));
+
+                                        if (obj.prettyValue !== undefined) {
+                                            obj.prettyValue = obj.prettyValue.name;
+                                        }
                                     }
                                     break;
                                 case "sort":

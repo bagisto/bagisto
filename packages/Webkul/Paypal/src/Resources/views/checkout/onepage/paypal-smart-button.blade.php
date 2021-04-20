@@ -14,8 +14,14 @@
     </style>
 
     <script>
+        let messages = {
+            universalError: "{{ __('paypal::app.error.universal-error') }}",
+            sdkValidationError: "{{ __('paypal::app.error.sdk-validation-error') }}",
+            authorizationError: "{{ __('paypal::app.error.authorization-error') }}"
+        };
+
         window.onload = (function() {
-            eventBus.$on('after-payment-method-selected', function(payment) {
+            eventBus.$on('after-payment-method-selected', function (payment) {
                 if (payment.method != 'paypal_smart_button') {
                     $('.paypal-buttons').remove();
 
@@ -23,11 +29,7 @@
                 }
 
                 if (typeof paypal == 'undefined') {
-                    window.flashMessages = [{'type': 'alert-error', 'message': "SDK Validation error: 'client-id not recognized for either production or sandbox: {{core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id')}}'" }];
-
-                    window.flashMessages.alertMessage = "SDK Validation error: 'client-id not recognized for either production or sandbox: {{core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id')}}'";
-
-                    app.addFlashMessages();
+                    options.alertBox(messages.sdkValidationError);
 
                     return;
                 }
@@ -38,25 +40,40 @@
                         shape:   'rect',
                     },
 
+                    authorizationFailed: false,
+
                     enableStandardCardFields: false,
 
+                    alertBox: function (message) {
+                        window.flashMessages = [{'type': 'alert-error', 'message': message }];
+                        window.flashMessages.alertMessage = message;
+                        app.addFlashMessages();
+                    },
+
                     createOrder: function(data, actions) {
-                        return window.axios.get("{{ route('paypal.smart_button.details') }}")
+                        return window.axios.get("{{ route('paypal.smart-button.create-order') }}")
                             .then(function(response) {
                                 return response.data.result;
                             })
                             .then(function(orderData) {
                                 return orderData.id;
                             })
-                            .catch(function (error) {})
+                            .catch(function (error) {
+                                if (error.response.data.error === 'invalid_client') {
+                                    options.authorizationFailed = true;
+                                    options.alertBox(messages.authorizationError);
+                                }
+
+                                return error;
+                            });
                     },
 
                     onApprove: function(data, actions) {
                         app.showLoader();
 
-                        window.axios.post("{{ route('paypal.smart_button.save_order') }}", {
-                            '_token': "{{ csrf_token() }}",
-                            'data' : data
+                        window.axios.post("{{ route('paypal.smart-button.capture-order') }}", {
+                            _token: "{{ csrf_token() }}",
+                            orderData: data
                         })
                         .then(function(response) {
                             if (response.data.success) {
@@ -74,16 +91,10 @@
                         })
                     },
 
-                    onCancel: function (data) {
-                        console.log('Canceled payment...');
-                    },
-
-                    onError: function (err) {
-                        window.flashMessages = [{'type': 'alert-error', 'message': err }];
-
-                        window.flashMessages.alertMessage = err;
-
-                        app.addFlashMessages();
+                    onError: function (error) {
+                        if (! options.authorizationFailed) {
+                            options.alertBox(error);
+                        }
                     }
                 };
 

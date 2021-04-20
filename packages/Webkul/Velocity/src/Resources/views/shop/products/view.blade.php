@@ -32,7 +32,7 @@
         </script>
     @endif
 
-    <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
+    <?php $productBaseImage = productimage()->getProductBaseImage($product, $images); ?>
 
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -71,6 +71,11 @@
 
         .main-content-wrapper {
             margin-bottom: 0px;
+        }
+
+        .buynow {
+            height: 40px;
+            text-transform: uppercase;
         }
     </style>
 @endpush
@@ -199,19 +204,6 @@
             <div class="related-products">
                 @include('shop::products.view.related-products')
                 @include('shop::products.view.up-sells')
-            </div>
-
-            <div class="store-meta-images col-3">
-                @if(
-                    isset($velocityMetaData['product_view_images'])
-                    && $velocityMetaData['product_view_images']
-                )
-                    @foreach (json_decode($velocityMetaData['product_view_images'], true) as $image)
-                        @if ($image && $image !== '')
-                            <img src="{{ url()->to('/') }}/storage/{{ $image }}" alt=""/>
-                        @endif
-                    @endforeach
-                @endif
             </div>
         </div>
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}

@@ -81,7 +81,8 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'خصم',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
@@ -240,7 +241,9 @@ return [
         'view' => 'رأي',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'تحديث الحالة'
+        'update-status' => 'تحديث الحالة',
+        'transaction-id' => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
 
     'account' => [
@@ -392,6 +395,7 @@ return [
             'comment' => 'Comment',
             'submit-comment' => 'Submit Comment',
             'notify-customer' => 'Notify Customer',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -468,6 +472,20 @@ return [
             'action' => 'عمل',
             'view-title' => '#:refund_id إعادة مال',
             'invalid-refund-amount-error' => 'يجب ألا يكون المبلغ المسترد صفرًا'
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 
@@ -844,7 +862,9 @@ return [
             'update-success' => 'تم تحديث عنصر المزلق بنجاح',
             'update-fail' => 'المنزلق لا يمكن تحديثه',
             'delete-success' => 'لا يستطيع حذف الأخير عنصر',
-            'delete-fail' => 'تم حذف عنصر المزلق بنجاح'
+            'delete-fail' => 'تم حذف عنصر المزلق بنجاح',
+            'expired-at'  => 'Expire Date',
+            'sort-order'  => 'Sort Order'
         ],
 
         'tax-categories' => [
@@ -1462,7 +1482,12 @@ return [
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
             'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
-            'buy-now-button-display' => 'Allow customers to directly buy products'
+            'buy-now-button-display' => 'Allow customers to directly buy products',
+            'width' => 'Width',
+            'height' => 'Height',
+            'cache-small-image' => 'Small Image',
+            'cache-medium-image' => 'Medium Image',
+            'cache-large-image' => 'Large Image',
         ]
     ]
 ];

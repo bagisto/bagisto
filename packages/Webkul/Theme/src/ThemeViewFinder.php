@@ -20,7 +20,7 @@ class ThemeViewFinder extends FileViewFinder
         // Extract the $view and the $namespace parts
         list($namespace, $view) = $this->parseNamespaceSegments($name);
 
-        if (request()->route() !== null && ! Str::contains(request()->route()->uri, 'admin/')) {
+        if (request()->route() !== null && ! Str::contains(request()->route()->uri, config('app.admin_url') . '/')) {
             $paths = $this->addThemeNamespacePaths($namespace);
 
             try {

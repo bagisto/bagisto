@@ -1,48 +1,60 @@
 <template>
-    <div class="video-container" v-if="currentType == 'video'">
-        <video :key="activeImageVideoURL" width="100%" controls>
-            <source :src="activeImageVideoURL" type="video/mp4">
-        </video>
-    </div>
-    <div class="image-container" v-else>
-        <div class="magnifier">
-            <img :src="activeImageVideoURL" :data-zoom-image="activeImageVideoURL"
-                :class="[!isMobile() ? 'main-product-image' : 'vc-small-product-image']">
+    <div class="outer-assets-container">
+        <div class="video-container" v-if="currentType == 'video'">
+            <video :key="activeImageVideoURL" width="100%" controls>
+                <source :src="activeImageVideoURL" type="video/mp4">
+            </video>
+        </div>
+        <div class="image-container" v-else>
+            <div class="magnifier">
+                <img :src="activeImageVideoURL" :data-zoom-image="activeImageVideoURL"
+                    :class="[!isMobile() ? 'main-product-image' : 'vc-small-product-image']">
+            </div>
         </div>
     </div>
 </template>
 
 <style lang="scss">
-    .image-container {
-        .magnifier {
-            > img {
-                max-width: 100%;
-                min-height: 530px;
-                max-height: 530px;
+    .outer-assets-container {
+        height: 420px;
+
+        .image-container {
+            .magnifier {
+                > img {
+                    max-width: 100%;
+                    max-height: 420px;
+                }
+            }
+        }
+
+        @media only screen and (max-width: 992px) {
+            .image-container {
+                margin: 0 auto;
+
+                .magnifier {
+                    > img {
+                        width: 100%;
+                        max-height: 300px;
+                    }
+                }
+            }
+        }
+
+        .video-container {
+            top: 50%;
+            position: relative;
+            min-height: 420px;
+            max-height: 420px;
+
+            video {
+                transform: translateY(-50%);
             }
         }
     }
 
     @media only screen and (max-width: 992px) {
-        .image-container {
-            .magnifier {
-                > img {
-                    height: 100%;
-                    min-height: unset;
-                    max-height: unset;
-                }
-            }
-        }
-    }
-
-    .video-container {
-        min-height: 530px;
-        max-height: 530px;
-
-        video {
-            top: 50%;
-            position: relative;
-            transform: translateY(-50%);
+        .outer-assets-container {
+            height: 300px;
         }
     }
 </style>

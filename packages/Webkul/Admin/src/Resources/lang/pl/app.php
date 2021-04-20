@@ -79,7 +79,8 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'Rabat',
-        'cms' => 'System CMS'
+        'cms' => 'System CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
@@ -237,7 +238,9 @@ return [
         'view' => 'Widok',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'Aktualizcja statusu'
+        'update-status' => 'Aktualizcja statusu',
+        'transaction-id' => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
 
     'account' => [
@@ -390,7 +393,8 @@ return [
             'submit-comment' => 'Prześlij komentarz',
             'notify-customer' => 'Powiadom klienta',
             'customer-notified' => ':date | Klient <b>Powiadomiony</b>',
-            'customer-not-notified' => ':date | Klient <b>Nie powiadomiony</b>'
+            'customer-not-notified' => ':date | Klient <b>Nie powiadomiony</b>',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -467,6 +471,20 @@ return [
             'view-title' => 'Refundacja nr #:refund_id',
             'invalid-refund-amount-error' => 'Kwota zwrotu powinna być różna od zera.'
 
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 
@@ -844,7 +862,9 @@ return [
             'update-success' => 'Element suwaka pomyślnie zaktualizowany',
             'update-fail' => 'Nie można zaktualizować suwaka',
             'delete-success' => 'Nie można usunąć ostatniego elementu lidera',
-            'delete-fail' => 'Element suwaka został pomyślnie usunięty'
+            'delete-fail' => 'Element suwaka został pomyślnie usunięty',
+            'expired-at'  => 'Expire Date',
+            'sort-order'  => 'Sort Order'
         ],
 
         'tax-categories' => [
@@ -1443,7 +1463,12 @@ return [
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
             'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
-            'buy-now-button-display' => 'Allow customers to directly buy products'
+            'buy-now-button-display' => 'Allow customers to directly buy products',
+            'width' => 'Width',
+            'height' => 'Height',
+            'cache-small-image' => 'Small Image',
+            'cache-medium-image' => 'Medium Image',
+            'cache-large-image' => 'Large Image',
        ]
     ]
 ];
