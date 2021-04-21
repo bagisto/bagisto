@@ -79,7 +79,9 @@ class ProductController extends Controller
             'attribute_id' => $attributeId,
         ]);
 
-        return Storage::download($productAttribute['text_value']);
+        return isset($productAttribute['text_value'])
+            ? Storage::download($productAttribute['text_value'])
+            : null;
     }
 
     /**
