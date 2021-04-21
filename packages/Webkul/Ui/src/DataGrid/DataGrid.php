@@ -415,15 +415,42 @@ abstract class DataGrid
     /**
      * Get necessary extra details.
      *
+     * To Do (@devansh-webkul): Refactor when work completed.
+     *
      * @return array
      */
     protected function getNecessaryExtraFilters()
     {
-        $necessaryExtraFilters = [];
+        /* all locales */
+        $locales = core()->getAllLocales();
+
+        /* request and fallback handling */
+        $locale = request()->get('locale') ?: app()->getLocale();
+        $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+        $customer_group = request()->get('customer_group');
+
+        /* handling cases for new locale if not present in current channel */
+        if ($channel !== 'all') {
+            $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+
+            if ($channelLocales->contains('code', $locale)) {
+                $locales = $channelLocales;
+            } else {
+                $channel = 'all';
+            }
+        }
+
+        $necessaryExtraFilters = [
+            'current' => [
+                'locale' => $locale,
+                'channel' => $channel,
+                'customer_group' => $customer_group
+            ]
+        ];
 
         $checks = [
             'channels'        => core()->getAllChannels(),
-            'locales'         => core()->getAllLocales(),
+            'locales'         => $locales,
             'customer_groups' => core()->getAllCustomerGroups()
         ];
 
