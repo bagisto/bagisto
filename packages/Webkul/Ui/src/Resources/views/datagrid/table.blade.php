@@ -1,5 +1,6 @@
 <div class="table">
     <datagrid-filters
+        csrf="{{ csrf_token() }}"
         index="{{ $results['index'] }}"
         enable-actions="{{ $results['enableActions'] }}"
         enable-mass-actions="{{ $results['enableMassActions'] }}"
@@ -115,7 +116,6 @@
                                             </div>
                                         </li>
 
-                                        {{-- suitable for string columns --}}
                                         <li v-if='stringConditionSelect'>
                                             <div class="control-group">
                                                 <select class="control" v-model="stringCondition">
@@ -128,7 +128,6 @@
                                             </div>
                                         </li>
 
-                                        {{-- response fields based on the type of columns to be filtered --}}
                                         <li v-if='stringCondition != null'>
                                             <div class="control-group">
                                                 <input type="text" class="control response-string"
@@ -136,7 +135,6 @@
                                             </div>
                                         </li>
 
-                                        {{-- suitable for numeric columns --}}
                                         <li v-if='numberConditionSelect'>
                                             <div class="control-group">
                                                 <select class="control" v-model="numberCondition">
@@ -157,7 +155,6 @@
                                             </div>
                                         </li>
 
-                                        {{-- suitable for boolean columns --}}
                                         <li v-if='booleanConditionSelect'>
                                             <div class="control-group">
                                                 <select class="control" v-model="booleanCondition">
@@ -178,7 +175,6 @@
                                             </div>
                                         </li>
 
-                                        {{-- suitable for date/time columns --}}
                                         <li v-if='datetimeConditionSelect'>
                                             <div class="control-group">
                                                 <select class="control" v-model="datetimeCondition">
@@ -282,7 +278,55 @@
                             </tr>
                         </thead>
 
-                        @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns'],'enableMassActions' => $results['enableMassActions'], 'enableActions' => $results['enableActions'], 'norecords' => $results['norecords']])
+                        @php
+                            $records = $results['records'];
+                            $actions = $results['actions'];
+                            $index = $results['index'];
+                            $columns = $results['columns'];
+                            $enableMassActions = $results['enableMassActions'];
+                            $enableActions = $results['enableActions'];
+                            $norecords = $results['norecords'];
+                        @endphp
+
+                        <tbody>
+                            <template v-if="records.data.length">
+                                <tr v-for="record in records.data">
+                                    <td v-if="enableMassActions">
+                                        <span class="checkbox">
+                                            <input type="checkbox" v-model="dataIds" @change="select" :value="record[index]">
+
+                                            <label class="checkbox-view" for="checkbox"></label>
+                                        </span>
+                                    </td>
+
+                                    <td v-for="column in columns" v-text="record[column.index]"
+                                        :data-value="column.label">
+                                    </td>
+
+                                    <td class="actions" style="white-space: nowrap; width: 100px;" data-value="{{ __('ui::app.datagrid.actions') }}">
+                                        <div class="action">
+                                            <a v-for="action in actions" :href="action.route + record[typeof action.index !== 'undefined' && action.index ? action.index : index]"
+                                                :id="record[typeof action.index !== 'undefined' && action.index ? action.index : index]"
+                                                v-on:click="typeof action.function !== 'undefined' && action.function ? action.function : doAction($event)"
+                                                :data-method="action.method"
+                                                :data-action="action.route + record[typeof action.index !== 'undefined' && action.index ? action.index : index]"
+                                                :data-token="csrf"
+                                                :target="action.target"
+                                                :title="action.title">
+                                                <span :class="action.icon"></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template v-else>
+                                <tr>
+                                    <td colspan="10">
+                                        <p style="text-align: center;" v-text="norecords"></p>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
                     </table>
                 </div>
 
@@ -297,6 +341,7 @@
                 template: '#datagrid-filters',
 
                 props: [
+                    'csrf',
                     'index',
                     'records',
                     'columns',
@@ -312,6 +357,7 @@
                 ],
 
                 data: function() {
+                    console.log(this.records.data, this.records.data[0][this.index]);
                     return {
                         url: new URL(window.location.href),
                         filterIndex: this.index,
