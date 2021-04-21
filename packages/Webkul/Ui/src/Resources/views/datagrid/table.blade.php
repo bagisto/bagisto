@@ -13,6 +13,7 @@
         :actions="{{ json_encode($results['actions']) }}"
         :mass-actions="{{ json_encode($results['massactions']) }}"
         :extra-filters="{{ json_encode($results['extraFilters']) }}"
+        :translations="{{ json_encode($results['translations']) }}"
     ></datagrid-filters>
 
     @push('scripts')
@@ -24,9 +25,7 @@
                             <div class="dropdown-filters per-page" v-if="extraFilters.channels != undefined">
                                 <div class="control-group">
                                     <select class="control" id="channel-switcher" name="channel" onchange="reloadPage('channel', this.value)">
-                                        <option value="all" :selected="extraFilters.current.channel == 'all'">
-                                            {{ __('admin::app.admin.system.all-channels') }}
-                                        </option>
+                                        <option value="all" :selected="extraFilters.current.channel == 'all'" v-text="translations.allChannels"></option>
                                         <option v-for="channel in extraFilters.channels"
                                             v-text="channel.name"
                                             :value="channel.code"
@@ -39,9 +38,7 @@
                             <div class="dropdown-filters per-page" v-if="extraFilters.locales != undefined">
                                 <div class="control-group">
                                     <select class="control" id="locale-switcher" name="locale" onchange="reloadPage('locale', this.value)">
-                                        <option value="all" :selected="extraFilters.current.locale == 'all'">
-                                            {{ __('admin::app.admin.system.all-locales') }}
-                                        </option>
+                                        <option value="all" :selected="extraFilters.current.locale == 'all'" v-text="translations.allLocales"></option>
                                         <option v-for="locale in extraFilters.locales"
                                             v-text="locale.name"
                                             :value="locale.code"
@@ -54,9 +51,7 @@
                             <div class="dropdown-filters per-page" v-if="extraFilters.customer_groups != undefined">
                                 <div class="control-group">
                                     <select class="control" id="customer-group-switcher" name="customer_group" onchange="reloadPage('customer_group', this.value)">
-                                        <option value="all" :selected="extraFilters.current.customer_group == 'all'">
-                                            {{ __('admin::app.admin.system.all-customer-groups') }}
-                                        </option>
+                                        <option value="all" :selected="extraFilters.current.customer_group == 'all'" v-text="translations.allCustomerGroups"></option>
                                         <option v-for="customerGroup in extraFilters.customer_groups"
                                             v-text="customerGroup.name"
                                             :value="customerGroup.id"
@@ -72,7 +67,7 @@
                         <div class="filter-left">
                             <div class="search-filter">
                                 <input type="search" id="search-field" class="control"
-                                    placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue"
+                                    :placeholder="translations.search" v-model="searchValue"
                                     v-on:keyup.enter="searchCollection(searchValue)"/>
 
                                 <div class="icon-wrapper">
@@ -84,13 +79,11 @@
                         <div class="filter-right">
                             <div class="dropdown-filters per-page">
                                 <div class="control-group">
-                                    <label class="per-page-label" for="perPage">
-                                        {{ __('ui::app.datagrid.items-per-page') }}
-                                    </label>
+                                    <label class="per-page-label" for="perPage" v-text="translations.itemsPerPage"></label>
 
                                     <select id="perPage" name="perPage" class="control" v-model="perPage"
                                         v-on:change="paginate">
-                                        <option v-for="index in this.perPageProduct" :key="index" :value="index"> @{{ index }} </option>
+                                        <option v-for="index in this.perPageProduct" v-text="index" :key="index" :value="index"></option>
                                     </select>
                                 </div>
                             </div>
@@ -98,7 +91,7 @@
                             <div class="dropdown-filters">
                                 <div class="dropdown-toggle">
                                     <div class="grid-dropdown-header">
-                                        <span class="name">{{ __('ui::app.datagrid.filter') }}</span>
+                                        <span class="name" v-text="translations.filter"></span>
                                         <i class="icon arrow-down-icon active"></i>
                                     </div>
                                 </div>
@@ -109,7 +102,7 @@
                                             <div class="control-group">
                                                 <select class="filter-column-select control" v-model="filterColumn"
                                                         v-on:click="getColumnOrAlias(filterColumn)">
-                                                    <option selected disabled>{{ __('ui::app.datagrid.column') }}</option>
+                                                    <option v-text="translations.column" selected disabled></option>
                                                     <option v-for="column in columns" :value="column.index"
                                                         v-text="column.label" v-if="typeof column.filterable !== 'undefined' && column.filterable"></option>
                                                 </select>
@@ -119,11 +112,11 @@
                                         <li v-if='stringConditionSelect'>
                                             <div class="control-group">
                                                 <select class="control" v-model="stringCondition">
-                                                    <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
-                                                    <option value="like">{{ __('ui::app.datagrid.contains') }}</option>
-                                                    <option value="nlike">{{ __('ui::app.datagrid.ncontains') }}</option>
-                                                    <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
-                                                    <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
+                                                    <option v-text="translations.condition" selected disabled></option>
+                                                    <option v-text="translations.contains" value="like"></option>
+                                                    <option v-text="translations.ncontains" value="nlike"></option>
+                                                    <option v-text="translations.equals" value="eq"></option>
+                                                    <option v-text="translations.nequals" value="neqs"></option>
                                                 </select>
                                             </div>
                                         </li>
@@ -131,36 +124,38 @@
                                         <li v-if='stringCondition != null'>
                                             <div class="control-group">
                                                 <input type="text" class="control response-string"
-                                                    placeholder="{{ __('ui::app.datagrid.value-here') }}" v-model="stringValue"/>
+                                                    :placeholder="translations.valueHere" v-model="stringValue"/>
                                             </div>
                                         </li>
 
                                         <li v-if='numberConditionSelect'>
                                             <div class="control-group">
                                                 <select class="control" v-model="numberCondition">
-                                                    <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
-                                                    <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
-                                                    <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
-                                                    <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
-                                                    <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
-                                                    <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
-                                                    <option value="lte">{{ __('ui::app.datagrid.lesse') }}</option>
+                                                    <option v-text="translations.condition" selected disabled></option>
+                                                    <option v-text="translations.equals" value="eq"></option>
+                                                    <option v-text="translations.nequals" value="neqs"></option>
+                                                    <option v-text="translations.greater" value="gt"></option>
+                                                    <option v-text="translations.less" value="lt"></option>
+                                                    <option v-text="translations.greatere" value="gte"></option>
+                                                    <option v-text="translations.lesse" value="lte"></option>
                                                 </select>
                                             </div>
                                         </li>
 
                                         <li v-if='numberCondition != null'>
                                             <div class="control-group">
-                                                <input type="text" class="control response-number" v-on:input="filterNumberInput" placeholder="{{ __('ui::app.datagrid.numeric-value-here') }}"  v-model="numberValue"/>
+                                                <input type="text" class="control response-number"
+                                                    v-on:input="filterNumberInput" v-model="numberValue"
+                                                    :placeholder="translations.numericValueHere"/>
                                             </div>
                                         </li>
 
                                         <li v-if='booleanConditionSelect'>
                                             <div class="control-group">
                                                 <select class="control" v-model="booleanCondition">
-                                                    <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
-                                                    <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
-                                                    <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
+                                                    <option v-text="translations.condition" selected disabled></option>
+                                                    <option v-text="translations.equals" value="eq"></option>
+                                                    <option v-text="translations.nequals" value="neqs"></option>
                                                 </select>
                                             </div>
                                         </li>
@@ -168,9 +163,9 @@
                                         <li v-if='booleanCondition != null'>
                                             <div class="control-group">
                                                 <select class="control" v-model="booleanValue">
-                                                    <option selected disabled>{{ __('ui::app.datagrid.value') }}</option>
-                                                    <option value="1">{{ __('ui::app.datagrid.true') }}</option>
-                                                    <option value="0">{{ __('ui::app.datagrid.false') }}</option>
+                                                    <option v-text="translations.value" selected disabled></option>
+                                                    <option v-text="translations.true" value="1"></option>
+                                                    <option v-text="translations.false" value="0"></option>
                                                 </select>
                                             </div>
                                         </li>
@@ -178,13 +173,13 @@
                                         <li v-if='datetimeConditionSelect'>
                                             <div class="control-group">
                                                 <select class="control" v-model="datetimeCondition">
-                                                    <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
-                                                    <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
-                                                    <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
-                                                    <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
-                                                    <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
-                                                    <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
-                                                    <option value="lte">{{ __('ui::app.datagrid.lesse') }}</option>
+                                                    <option v-text="translations.condition" selected disabled></option>
+                                                    <option v-text="translations.equals" value="eq"></option>
+                                                    <option v-text="translations.nequals" value="neqs"></option>
+                                                    <option v-text="translations.greater" value="gt"></option>
+                                                    <option v-text="translations.less" value="lt"></option>
+                                                    <option v-text="translations.greatere" value="gte"></option>
+                                                    <option v-text="translations.lesse" value="lte"></option>
                                                 </select>
                                             </div>
                                         </li>
@@ -195,9 +190,7 @@
                                             </div>
                                         </li>
 
-                                        <button class="btn btn-sm btn-primary apply-filter" v-on:click="getResponse">
-                                            {{ __('ui::app.datagrid.apply') }}
-                                        </button>
+                                        <button v-text="translations.apply" class="btn btn-sm btn-primary apply-filter" v-on:click="getResponse"></button>
                                     </ul>
                                 </div>
                             </div>
@@ -208,14 +201,14 @@
                         <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters"
                             style="text-transform: capitalize;">
                             <span v-if="filter.column == 'perPage'">perPage</span>
-                            <span v-else>@{{ filter . label }}</span>
+                            <span v-else>@{{ filter.label }}</span>
 
                             <span class="wrapper" v-if="filter.prettyValue">
-                                @{{ filter . prettyValue }}
+                                @{{ filter.prettyValue }}
                                 <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
                             </span>
                             <span class="wrapper" v-else>
-                                @{{ decodeURIComponent(filter . val) }}
+                                @{{ decodeURIComponent(filter.val) }}
                                 <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
                             </span>
                         </span>
@@ -232,24 +225,23 @@
                                         </span>
 
                                         <form method="POST" id="mass-action-form" style="display: inline-flex;" action="" :onsubmit="`return confirm('${massActionConfirmText}')`">
-                                            @csrf()
-
+                                            <input type="hidden" name="_token" :value="csrf">
                                             <input type="hidden" id="indexes" name="indexes" v-model="dataIds">
 
                                             <div class="control-group">
                                                 <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type" required>
-                                                    <option v-for="(massAction, index) in massActions" :key="index" :value="massAction.type">@{{ massAction.label }}</option>
+                                                    <option v-for="(massAction, index) in massActions" v-text="massAction.label" :key="index" :value="massAction.type"></option>
                                                 </select>
                                             </div>
 
                                             <div class="control-group" style="margin-left: 10px;" v-if="massActionType == 'update'">
                                                 <select class="control" v-model="massActionUpdateValue" name="update-options" required>
-                                                    <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ id }}</option>
+                                                    <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue" v-text="id"></option>
                                                 </select>
                                             </div>
 
-                                            <button type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px;">
-                                                {{ __('ui::app.datagrid.submit') }}
+                                            <button v-text="translations.submit" type="submit" class="btn btn-sm btn-primary"
+                                                style="margin-left: 10px;">
                                             </button>
                                         </form>
                                     </div>
@@ -272,21 +264,9 @@
                                     v-on:click="typeof column.sortable !== 'undefined' && column.sortable ? sortCollection(column.index) : {}">
                                 </th>
 
-                                <th v-if="enableActions">
-                                    {{ __('ui::app.datagrid.actions') }}
-                                </th>
+                                <th v-if="enableActions" v-text="translations.actions"></th>
                             </tr>
                         </thead>
-
-                        @php
-                            $records = $results['records'];
-                            $actions = $results['actions'];
-                            $index = $results['index'];
-                            $columns = $results['columns'];
-                            $enableMassActions = $results['enableMassActions'];
-                            $enableActions = $results['enableActions'];
-                            $norecords = $results['norecords'];
-                        @endphp
 
                         <tbody>
                             <template v-if="records.data.length">
@@ -303,7 +283,7 @@
                                         :data-value="column.label">
                                     </td>
 
-                                    <td class="actions" style="white-space: nowrap; width: 100px;" data-value="{{ __('ui::app.datagrid.actions') }}">
+                                    <td class="actions" style="white-space: nowrap; width: 100px;" :data-value="translations.actions">
                                         <div class="action">
                                             <a v-for="action in actions" :href="action.route + record[typeof action.index !== 'undefined' && action.index ? action.index : index]"
                                                 :id="record[typeof action.index !== 'undefined' && action.index ? action.index : index]"
@@ -354,17 +334,17 @@
                     'itemsPerPage',
                     'norecords',
                     'extraFilters',
+                    'translations'
                 ],
 
                 data: function() {
-                    console.log(this.records.data, this.records.data[0][this.index]);
                     return {
                         url: new URL(window.location.href),
                         filterIndex: this.index,
                         gridCurrentData: this.records,
                         massActionsToggle: false,
                         massActionTarget: null,
-                        massActionConfirmText: '{{ __('ui::app.datagrid.click_on_action') }}',
+                        massActionConfirmText: this.translations.clickOnAction,
                         massActionType: null,
                         massActionValues: [],
                         massActionTargets: [],
@@ -526,7 +506,7 @@
                                 (this.numberValue === 0 || this.numberValue < 0)) {
                                 indexConditions = false;
 
-                                alert('{{ __('ui::app.datagrid.zero-index') }}');
+                                alert(this.translations.zeroIndex);
                             }
 
                             if (indexConditions) {
@@ -626,7 +606,7 @@
 
                         if (column === "" || condition === "" || response === "" ||
                             column === null || condition === null || response === null) {
-                            alert('{{ __('ui::app.datagrid.filter-fields-missing') }}');
+                            alert(this.translations.filterFieldsMissing);
 
                             return false;
                         } else {
@@ -878,9 +858,9 @@
 
                                             if (this.columns[colIndex].type === 'boolean') {
                                                 if (obj.val === '1') {
-                                                    obj.val = '{{ __('ui::app.datagrid.true') }}';
+                                                    obj.val = this.translations.true;
                                                 } else {
-                                                    obj.val = '{{ __('ui::app.datagrid.false') }}';
+                                                    obj.val = this.translations.false;
                                                 }
                                             }
                                         }

@@ -5,10 +5,11 @@ namespace Webkul\Ui\DataGrid;
 use Illuminate\Support\Facades\Event;
 use Webkul\Ui\DataGrid\Traits\ProvideBouncer;
 use Webkul\Ui\DataGrid\Traits\ProvideCollection;
+use Webkul\Ui\DataGrid\Traits\ProvideTranslations;
 
 abstract class DataGrid
 {
-    use ProvideBouncer, ProvideCollection;
+    use ProvideBouncer, ProvideCollection, ProvideTranslations;
 
     /**
      * Set index columns, ex: id.
@@ -387,7 +388,8 @@ abstract class DataGrid
             'paginated'         => $this->paginate,
             'itemsPerPage'      => $this->itemsPerPage,
             'norecords'         => __('ui::app.datagrid.no-records'),
-            'extraFilters'      => $this->getNecessaryExtraFilters()
+            'extraFilters'      => $this->getNecessaryExtraFilters(),
+            'translations'      => $this->getTranslations(),
         ];
     }
 
