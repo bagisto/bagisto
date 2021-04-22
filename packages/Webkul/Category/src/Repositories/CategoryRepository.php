@@ -149,7 +149,7 @@ class CategoryRepository extends Repository
         );
     }
     
-        /**
+    /**
      * Retrive category from slug.
      *
      * @param string $slug
