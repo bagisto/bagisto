@@ -34,6 +34,7 @@ trait ProvideTranslations
             'filterFieldsMissing' => __('ui::app.datagrid.filter-fields-missing'),
             'zeroIndex' => __('ui::app.datagrid.zero-index'),
             'clickOnAction' => __('ui::app.datagrid.click_on_action'),
+            'norecords' => __('ui::app.datagrid.no-records'),
         ];
     }
 }

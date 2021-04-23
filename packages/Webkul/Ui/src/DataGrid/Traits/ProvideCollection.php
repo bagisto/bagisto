@@ -28,6 +28,50 @@ trait ProvideCollection
     }
 
     /**
+     * Finalyze your collection here.
+     *
+     * @return void
+     */
+    public function formatCollection()
+    {
+        $this->collection->transform(function ($record, $key) {
+            foreach($this->columns as $column) {
+                if (isset($column['wrapper'])) {
+                    if (isset($column['closure']) && $column['closure'] == true) {
+                        $record->{$column['index']} = $column['wrapper']($record);
+                    } else {
+                        $record->{$column['index']} = $column['wrapper']($record);
+                    }
+                } else {
+                    if ($column['type'] == 'price') {
+                        if (isset($column['currencyCode'])) {
+                            $record->{$column['index']} = core()->formatPrice($record->{$column['index']}, $column['currencyCode']);
+                        } else {
+                            $record->{$column['index']} = core()->formatBasePrice($record->{$column['index']});
+                        }
+                    }
+                }
+            }
+
+            foreach($this->actions as $action) {
+                $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
+
+                $toDisplayKey = strtolower($action['title']) . '_to_display';
+                $record->$toDisplayKey = $toDisplay;
+
+                if ($toDisplay) {
+                    if ($action['method'] == 'GET') {
+                        $urlKey = strtolower($action['title']) . '_url';
+                        $record->$urlKey = route($action['route'], $record->{$action['index'] ?? $this->index});
+                    }
+                }
+            }
+
+            return $record;
+        });
+    }
+
+    /**
      * Sort or filter collection.
      *
      * @param  \Illuminate\Support\Collection  $collection

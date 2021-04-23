@@ -7,7 +7,6 @@
         items-per-page="{{ $results['itemsPerPage'] ?: 10 }}"
         paginated="{{ $results['paginated'] }}"
         pagination-html="{{ $results['records']->links()->render() }}"
-        norecords="{{ $results['norecords'] }}"
         :records="{{ json_encode($results['records']) }}"
         :columns="{{ json_encode($results['columns']) }}"
         :actions="{{ json_encode($results['actions']) }}"
@@ -251,7 +250,7 @@
 
                         <thead v-if="massActionsToggle == false">
                             <tr style="height: 65px;">
-                                <th class="grid_head" id="mastercheckbox" style="width: 50px;">
+                                <th v-if="enableMassActions" class="grid_head" id="mastercheckbox" style="width: 50px;">
                                     <span class="checkbox">
                                         <input type="checkbox" v-model="allSelected" v-on:change="selectAll">
 
@@ -285,14 +284,15 @@
 
                                     <td class="actions" style="white-space: nowrap; width: 100px;" :data-value="translations.actions">
                                         <div class="action">
-                                            <a v-for="action in actions" :href="action.route + record[typeof action.index !== 'undefined' && action.index ? action.index : index]"
+                                            <a v-for="action in actions" v-if="record[`${action.title.toLowerCase()}_to_display`]"
                                                 :id="record[typeof action.index !== 'undefined' && action.index ? action.index : index]"
-                                                v-on:click="typeof action.function !== 'undefined' && action.function ? action.function : doAction($event)"
+                                                :href="action.method == 'GET' ? record[`${action.title.toLowerCase()}_url`] : 'javascript:void(0);'"
+                                                v-on:click="action.method != 'GET' ? ( typeof action.function !== 'undefined' && action.function ? action.function : doAction($event) ) : {}"
                                                 :data-method="action.method"
                                                 :data-action="action.route + record[typeof action.index !== 'undefined' && action.index ? action.index : index]"
                                                 :data-token="csrf"
-                                                :target="action.target"
-                                                :title="action.title">
+                                                :target="typeof action.target !== 'undefined' && action.target ? action.target : ''"
+                                                :title="typeof action.title !== 'undefined' && action.title ? action.title : ''">
                                                 <span :class="action.icon"></span>
                                             </a>
                                         </div>
@@ -302,7 +302,7 @@
                             <template v-else>
                                 <tr>
                                     <td colspan="10">
-                                        <p style="text-align: center;" v-text="norecords"></p>
+                                        <p style="text-align: center;" v-text="translations.norecords"></p>
                                     </td>
                                 </tr>
                             </template>
@@ -332,7 +332,6 @@
                     'paginated',
                     'paginationHtml',
                     'itemsPerPage',
-                    'norecords',
                     'extraFilters',
                     'translations'
                 ],
@@ -407,7 +406,6 @@
                         'enableMassActions--> ', this.enableMassActions, '\n\n',
                         'paginated----------> ', this.paginated, '\n\n',
                         'itemsPerPage-------> ', this.itemsPerPage, '\n\n',
-                        'norecords----------> ', this.norecords, '\n\n',
                         'extraFilters-------> ', this.extraFilters, '\n\n',
                     );
                 },
@@ -975,6 +973,8 @@
                 if (message) {
                     element = e.target.parentElement;
                 }
+
+                message = message || 'Are you sure?';
 
                 if (confirm(message)) {
                     axios.post(element.getAttribute('data-action'), {

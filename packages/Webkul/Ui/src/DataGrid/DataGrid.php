@@ -66,9 +66,9 @@ abstract class DataGrid
     /**
      * Final result of the datagrid program that is collection object.
      *
-     * @var array
+     * @var object
      */
-    protected $collection = [];
+    protected $collection;
 
     /**
      * Set of handly click tools which you could be using for various operations.
@@ -347,6 +347,10 @@ abstract class DataGrid
 
         $this->prepareQueryBuilder();
 
+        $this->getCollection();
+
+        $this->formatCollection();
+
         return view('ui::datagrid.table')->with('results', $this->prepareViewData());
     }
 
@@ -379,7 +383,7 @@ abstract class DataGrid
     {
         return [
             'index'             => $this->index,
-            'records'           => $this->getCollection(),
+            'records'           => $this->collection,
             'columns'           => $this->completeColumnDetails,
             'actions'           => $this->actions,
             'enableActions'     => $this->enableAction,
@@ -387,7 +391,6 @@ abstract class DataGrid
             'enableMassActions' => $this->enableMassAction,
             'paginated'         => $this->paginate,
             'itemsPerPage'      => $this->itemsPerPage,
-            'norecords'         => __('ui::app.datagrid.no-records'),
             'extraFilters'      => $this->getNecessaryExtraFilters(),
             'translations'      => $this->getTranslations(),
         ];
