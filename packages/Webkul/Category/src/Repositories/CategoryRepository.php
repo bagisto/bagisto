@@ -148,6 +148,21 @@ class CategoryRepository extends Repository
             get_class($this->model), $slug
         );
     }
+    
+    /**
+     * Retrive category from slug.
+     *
+     * @param string $slug
+     * @return \Webkul\Category\Contracts\Category
+     */
+    public function findBySlug($slug)
+    {
+        $category = $this->model->whereTranslation('slug', $slug)->first();
+
+        if ($category) {
+            return $category;
+        }
+    }
 
     /**
      * Find by path.
