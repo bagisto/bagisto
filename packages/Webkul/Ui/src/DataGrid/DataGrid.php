@@ -412,7 +412,6 @@ abstract class DataGrid
             'massActions'       => $this->massActions,
             'enableMassActions' => $this->enableMassAction,
             'paginated'         => $this->paginate,
-            'paginationHtml'    => $this->collection->links()->render(),
             'itemsPerPage'      => $this->itemsPerPage,
             'extraFilters'      => $this->getNecessaryExtraFilters(),
             'translations'      => $this->getTranslations(),

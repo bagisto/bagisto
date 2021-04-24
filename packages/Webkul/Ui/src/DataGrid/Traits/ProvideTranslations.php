@@ -35,6 +35,7 @@ trait ProvideTranslations
             'zeroIndex' => __('ui::app.datagrid.zero-index'),
             'clickOnAction' => __('ui::app.datagrid.click_on_action'),
             'norecords' => __('ui::app.datagrid.no-records'),
+            'massActionDelete' => __('ui::app.datagrid.massaction.delete')
         ];
     }
 }
