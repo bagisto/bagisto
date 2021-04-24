@@ -65,6 +65,7 @@ Vue.filter('truncate', function (value, limit, trail) {
 });
 
 Vue.component('multiselect', Multiselect);
+Vue.component('datagrid-plus', require('./components/datagrid/datagrid-plus.vue'));
 
 require('flatpickr/dist/flatpickr.css');
 
