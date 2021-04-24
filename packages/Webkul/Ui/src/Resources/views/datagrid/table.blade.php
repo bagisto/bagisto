@@ -1,23 +1,12 @@
 <div class="table">
     <datagrid-filters
         csrf="{{ csrf_token() }}"
-        index="{{ $results['index'] }}"
-        enable-actions="{{ $results['enableActions'] }}"
-        enable-mass-actions="{{ $results['enableMassActions'] }}"
-        items-per-page="{{ $results['itemsPerPage'] ?: 10 }}"
-        paginated="{{ $results['paginated'] }}"
-        pagination-html="{{ $results['records']->links()->render() }}"
-        :records="{{ json_encode($results['records']) }}"
-        :columns="{{ json_encode($results['columns']) }}"
-        :actions="{{ json_encode($results['actions']) }}"
-        :mass-actions="{{ json_encode($results['massactions']) }}"
-        :extra-filters="{{ json_encode($results['extraFilters']) }}"
-        :translations="{{ json_encode($results['translations']) }}"
+        src="{{ route('ui.test1') }}"
     ></datagrid-filters>
 
     @push('scripts')
         <script type="text/x-template" id="datagrid-filters">
-            <div>
+            <div v-if="isDataLoaded" :key="dataGridIndex">
                 <div class="grid-container">
                     <div class="datagrid-filters">
                         <div class="filter-left">
@@ -322,28 +311,16 @@
 
                 props: [
                     'csrf',
-                    'index',
-                    'records',
-                    'columns',
-                    'actions',
-                    'enableActions',
-                    'massActions',
-                    'enableMassActions',
-                    'paginated',
-                    'paginationHtml',
-                    'itemsPerPage',
-                    'extraFilters',
-                    'translations'
+                    'src',
                 ],
 
                 data: function() {
                     return {
-                        url: new URL(window.location.href),
-                        filterIndex: this.index,
-                        gridCurrentData: this.records,
+                        url: this.src,
+                        isDataLoaded: false,
+                        dataGridIndex: 0,
                         massActionsToggle: false,
                         massActionTarget: null,
-                        massActionConfirmText: this.translations.clickOnAction,
                         massActionType: null,
                         massActionValues: [],
                         massActionTargets: [],
@@ -375,42 +352,62 @@
                         booleanConditionSelect: false,
                         numberConditionSelect: false,
                         datetimeConditionSelect: false,
-                        perPage: this.itemsPerPage,
                         perPageProduct: [10, 20, 30, 40, 50],
                     }
                 },
 
                 mounted: function() {
-                    this.setParamsAndUrl();
-
-                    if (this.filters.length) {
-                        for (let i = 0; i < this.filters.length; i++) {
-                            if (this.filters[i].column === 'perPage') {
-                                this.perPage = this.filters[i].val;
-                            }
-                        }
-                    }
-
-                    if (this.perPageProduct.indexOf(parseInt(this.perPage)) === -1) {
-                        this.perPageProduct.unshift(this.perPage);
-                    }
-
-                    /* testing log */
-                    console.log(
-                        'Index--------------> ', this.index, '\n\n',
-                        'Records------------> ', this.records, '\n\n',
-                        'columns------------> ', this.columns, '\n\n',
-                        'actions------------> ', this.actions, '\n\n',
-                        'enableActions------> ', this.enableActions, '\n\n',
-                        'massActions--------> ', this.massActions, '\n\n',
-                        'enableMassActions--> ', this.enableMassActions, '\n\n',
-                        'paginated----------> ', this.paginated, '\n\n',
-                        'itemsPerPage-------> ', this.itemsPerPage, '\n\n',
-                        'extraFilters-------> ', this.extraFilters, '\n\n',
-                    );
+                    this.hitUrl(this.initDatagrid);
                 },
 
                 methods: {
+                    hitUrl: function(callback) {
+                        let self = this;
+
+                        axios.get(this.url)
+                        .then(function(response) {
+                            if (response.status === 200 && response.statusText === 'OK') {
+                                let results = response.data;
+
+                                for (property in response.data) {
+                                    self[property] = response.data[property];
+                                }
+
+                                if (typeof callback === 'function') {
+                                    callback();
+
+                                    self.dataGridIndex += 1;
+                                }
+                            }
+                        }).catch(function(error) {});
+                    },
+
+                    initDatagrid: function() {
+                        this.setParamsAndUrl();
+
+                        this.initDataParams();
+                    },
+
+                    initDataParams: function() {
+                        if (this.filters.length) {
+                            for (let i = 0; i < this.filters.length; i++) {
+                                if (this.filters[i].column === 'perPage') {
+                                    this.perPage = this.filters[i].val;
+                                }
+                            }
+                        }
+
+                        if (this.perPageProduct.indexOf(parseInt(this.perPage)) === -1) {
+                            this.perPageProduct.unshift(this.perPage);
+                        }
+
+                        this.isDataLoaded = true;
+                        this.filterIndex = this.index;
+                        this.gridCurrentData = this.records;
+                        this.perPage = this.itemsPerPage;
+                        this.massActionConfirmText = this.translations.clickOnAction;
+                    },
+
                     getColumnOrAlias: function(columnOrAlias) {
                         this.columnOrAlias = columnOrAlias;
 
@@ -539,7 +536,7 @@
 
                     /* function triggered to check whether the query exists or not and then call the make filters from the url */
                     setParamsAndUrl: function() {
-                        params = (new URL(window.location.href)).search;
+                        params = (new URL(this.src)).search;
 
                         if (params.slice(1, params.length).length > 0) {
                             this.arrayFromUrl();
@@ -743,7 +740,6 @@
                         }
                     },
 
-                    /* make the url from the array and redirect */
                     makeURL: function() {
                         newParams = '';
 
@@ -772,11 +768,9 @@
                             }
                         }
 
-                        let uri = window.location.href.toString();
+                        this.url = this.src + newParams;
 
-                        let clean_uri = uri.substring(0, uri.indexOf("?")).trim();
-
-                        window.location.href = clean_uri + newParams;
+                        this.hitUrl(this.initDatagrid);
                     },
 
                     /* make the filter array from url after being redirected */
@@ -985,12 +979,12 @@
                         this.result = response;
 
                         if (response.data.redirect) {
-                            // window.location.href = response.data.redirect;
+                            window.location.href = response.data.redirect;
                         } else {
-                            // location.reload();
+                            location.reload();
                         }
                     }).catch(function(error) {
-                        // location.reload();
+                        location.reload();
                     });
 
                     e.preventDefault();

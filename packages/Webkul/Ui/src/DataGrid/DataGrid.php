@@ -355,6 +355,28 @@ abstract class DataGrid
     }
 
     /**
+     * Get json data.
+     *
+     * @return object
+     */
+    public function toJson()
+    {
+        $this->addColumns();
+
+        $this->prepareActions();
+
+        $this->prepareMassActions();
+
+        $this->prepareQueryBuilder();
+
+        $this->getCollection();
+
+        $this->formatCollection();
+
+        return response()->json($this->prepareViewData());
+    }
+
+    /**
      * Export.
      *
      * @return \Illuminate\Support\Collection
@@ -387,9 +409,10 @@ abstract class DataGrid
             'columns'           => $this->completeColumnDetails,
             'actions'           => $this->actions,
             'enableActions'     => $this->enableAction,
-            'massactions'       => $this->massActions,
+            'massActions'       => $this->massActions,
             'enableMassActions' => $this->enableMassAction,
             'paginated'         => $this->paginate,
+            'paginationHtml'    => $this->collection->links()->render(),
             'itemsPerPage'      => $this->itemsPerPage,
             'extraFilters'      => $this->getNecessaryExtraFilters(),
             'translations'      => $this->getTranslations(),
