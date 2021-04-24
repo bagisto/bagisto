@@ -349,8 +349,6 @@ abstract class DataGrid
 
         $this->getCollection();
 
-        $this->formatCollection();
-
         return view('ui::datagrid.table')->with('results', $this->prepareViewData());
     }
 

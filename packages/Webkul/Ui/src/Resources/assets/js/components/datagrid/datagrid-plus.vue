@@ -757,11 +757,11 @@ export default {
     },
 
     mounted: function() {
-        this.hitUrl(this.initDatagrid);
+        this.hitUrl();
     },
 
     methods: {
-        hitUrl: function(callback) {
+        hitUrl: function() {
             let self = this;
 
             axios
@@ -773,15 +773,11 @@ export default {
                     ) {
                         let results = response.data;
 
-                        for (let property in results) {
-                            self[property] = response.data[property];
-                        }
+                        self.initResponseProps(results);
 
-                        if (typeof callback === "function") {
-                            callback();
+                        self.initDatagrid();
 
-                            self.dataGridIndex += 1;
-                        }
+                        self.dataGridIndex += 1;
                     }
                 })
                 .catch(function(error) {
@@ -793,6 +789,12 @@ export default {
             this.setParamsAndUrl();
 
             this.initDataParams();
+        },
+
+        initResponseProps: function(results) {
+            for (let property in results) {
+                this[property] = results[property];
+            }
         },
 
         initDataParams: function() {
@@ -818,7 +820,7 @@ export default {
         changePage: function(url) {
             if (url) {
                 this.url = url;
-                this.hitUrl(this.initDatagrid);
+                this.hitUrl();
             }
         },
 
@@ -827,7 +829,7 @@ export default {
             url.searchParams.set(key, event.target.value);
 
             this.url = url.href;
-            this.hitUrl(this.initDatagrid);
+            this.hitUrl();
         },
 
         getColumnOrAlias: function(columnOrAlias) {
@@ -1252,7 +1254,7 @@ export default {
 
             this.url = this.src + newParams;
 
-            this.hitUrl(this.initDatagrid);
+            this.hitUrl();
         },
 
         arrayFromUrl: function() {
