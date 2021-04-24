@@ -17,58 +17,14 @@ trait ProvideCollection
 
         if (count($queryStrings)) {
             $filteredOrSortedCollection = $this->sortOrFilterCollection(
-                $this->collection = $this->queryBuilder,
+                $this->queryBuilder,
                 $queryStrings
             );
 
-            return $this->generateResults($filteredOrSortedCollection);
+            return $this->collection = $this->generateResults($filteredOrSortedCollection);
         }
 
         return $this->collection = $this->generateResults($this->queryBuilder);
-    }
-
-    /**
-     * Finalyze your collection here.
-     *
-     * @return void
-     */
-    public function formatCollection()
-    {
-        $this->collection->transform(function ($record, $key) {
-            foreach($this->columns as $column) {
-                if (isset($column['wrapper'])) {
-                    if (isset($column['closure']) && $column['closure'] == true) {
-                        $record->{$column['index']} = $column['wrapper']($record);
-                    } else {
-                        $record->{$column['index']} = $column['wrapper']($record);
-                    }
-                } else {
-                    if ($column['type'] == 'price') {
-                        if (isset($column['currencyCode'])) {
-                            $record->{$column['index']} = core()->formatPrice($record->{$column['index']}, $column['currencyCode']);
-                        } else {
-                            $record->{$column['index']} = core()->formatBasePrice($record->{$column['index']});
-                        }
-                    }
-                }
-            }
-
-            foreach($this->actions as $action) {
-                $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
-
-                $toDisplayKey = strtolower($action['title']) . '_to_display';
-                $record->$toDisplayKey = $toDisplay;
-
-                if ($toDisplay) {
-                    if ($action['method'] == 'GET') {
-                        $urlKey = strtolower($action['title']) . '_url';
-                        $record->$urlKey = route($action['route'], $record->{$action['index'] ?? $this->index});
-                    }
-                }
-            }
-
-            return $record;
-        });
     }
 
     /**
@@ -98,6 +54,22 @@ trait ProvideCollection
         }
 
         return $collection;
+    }
+
+    /**
+     * Finalyze your collection here.
+     *
+     * @return void
+     */
+    public function formatCollection()
+    {
+        $this->collection->transform(function ($record) {
+            $this->transformActions($record);
+
+            $this->transformColumns($record);
+
+            return $record;
+        });
     }
 
     /**
@@ -238,9 +210,57 @@ trait ProvideCollection
     }
 
     /**
+     * Transform your columns.
+     *
+     * @parma  object  $record
+     * @return void
+     */
+    private function transformColumns($record)
+    {
+        foreach($this->columns as $column) {
+            if (isset($column['wrapper'])) {
+                if (isset($column['closure']) && $column['closure'] == true) {
+                    $record->{$column['index']} = $column['wrapper']($record);
+                } else {
+                    $record->{$column['index']} = htmlspecialchars($column['wrapper']($record));
+                }
+            } else {
+                if ($column['type'] == 'price') {
+                    if (isset($column['currencyCode'])) {
+                        $record->{$column['index']} = htmlspecialchars(core()->formatPrice($record->{$column['index']}, $column['currencyCode']));
+                    } else {
+                        $record->{$column['index']} = htmlspecialchars(core()->formatBasePrice($record->{$column['index']}));
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Transform your actions.
+     *
+     * @parma  object  $record
+     * @return void
+     */
+    private function transformActions($record)
+    {
+        foreach($this->actions as $action) {
+            $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
+
+            $toDisplayKey = $this->generateKeyFromActionTitle($action['title'], '_to_display');
+            $record->$toDisplayKey = $toDisplay;
+
+            if ($toDisplay) {
+                $urlKey = $this->generateKeyFromActionTitle($action['title'], '_url');
+                $record->$urlKey = route($action['route'], $record->{$action['index'] ?? $this->index});
+            }
+        }
+    }
+
+    /**
      * Some exceptions check in column details.
      *
-     * @param  string                          $columnName
+     * @param  string  $columnName
      * @return bool
      */
     private function exceptionCheckInColumns($columnName)
@@ -252,5 +272,19 @@ trait ProvideCollection
         }
 
         return false;
+    }
+
+    /**
+     * Generate unique key from title.
+     *
+     * @param  string  $title
+     * @param  string  $suffix
+     * @return string
+     */
+    private function generateKeyFromActionTitle($title, $suffix)
+    {
+        $validatedStrings = preg_replace('/[^A-Za-z0-9]+/', '_', $title);
+
+        return strtolower($validatedStrings) . $suffix;
     }
 }

@@ -278,7 +278,7 @@
                                         </span>
                                     </td>
 
-                                    <td v-for="column in columns" v-text="record[column.index]"
+                                    <td v-for="column in columns" v-html="record[column.index]"
                                         :data-value="column.label">
                                     </td>
 
@@ -289,7 +289,7 @@
                                                 :href="action.method == 'GET' ? record[`${action.title.toLowerCase()}_url`] : 'javascript:void(0);'"
                                                 v-on:click="action.method != 'GET' ? ( typeof action.function !== 'undefined' && action.function ? action.function : doAction($event) ) : {}"
                                                 :data-method="action.method"
-                                                :data-action="action.route + record[typeof action.index !== 'undefined' && action.index ? action.index : index]"
+                                                :data-action="record[`${action.title.toLowerCase()}_url`]"
                                                 :data-token="csrf"
                                                 :target="typeof action.target !== 'undefined' && action.target ? action.target : ''"
                                                 :title="typeof action.title !== 'undefined' && action.title ? action.title : ''">
@@ -969,6 +969,7 @@
 
             function doAction(e, message, type) {
                 let element = e.currentTarget;
+                console.log(element);
 
                 if (message) {
                     element = e.target.parentElement;
@@ -984,12 +985,12 @@
                         this.result = response;
 
                         if (response.data.redirect) {
-                            window.location.href = response.data.redirect;
+                            // window.location.href = response.data.redirect;
                         } else {
-                            location.reload();
+                            // location.reload();
                         }
                     }).catch(function(error) {
-                        location.reload();
+                        // location.reload();
                     });
 
                     e.preventDefault();
