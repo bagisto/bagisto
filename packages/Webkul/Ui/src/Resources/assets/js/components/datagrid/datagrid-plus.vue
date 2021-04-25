@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isDataLoaded" :key="dataGridIndex">
+    <div class="table" v-if="isDataLoaded" :key="dataGridIndex">
         <div class="grid-container">
             <div class="datagrid-filters">
                 <div class="filter-left">
@@ -685,7 +685,11 @@
 
         <div
             class="pagination shop mt-50"
-            v-if="typeof paginated !== 'undefined' && paginated"
+            v-if="
+                typeof paginated !== 'undefined' &&
+                    paginated &&
+                    records.data.length > 0
+            "
         >
             <a
                 v-for="(link, index) in records.links"
@@ -712,7 +716,7 @@
 
 <script>
 export default {
-    props: ["csrf", "src"],
+    props: ["src"],
 
     data: function() {
         return {
@@ -757,6 +761,8 @@ export default {
     },
 
     mounted: function() {
+        this.getCsrf();
+        
         this.hitUrl();
     },
 
@@ -1484,6 +1490,16 @@ export default {
                 e.preventDefault();
             } else {
                 e.preventDefault();
+            }
+        },
+
+        getCsrf: function() {
+            let token = document.head.querySelector('meta[name="csrf-token"]');
+
+            if (token) {
+                this.csrf = token.content;
+            } else {
+                console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
             }
         }
     }
