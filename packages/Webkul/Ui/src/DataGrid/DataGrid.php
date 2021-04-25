@@ -5,11 +5,10 @@ namespace Webkul\Ui\DataGrid;
 use Illuminate\Support\Facades\Event;
 use Webkul\Ui\DataGrid\Traits\ProvideBouncer;
 use Webkul\Ui\DataGrid\Traits\ProvideCollection;
-use Webkul\Ui\DataGrid\Traits\ProvideTranslations;
 
 abstract class DataGrid
 {
-    use ProvideBouncer, ProvideCollection, ProvideTranslations;
+    use ProvideBouncer, ProvideCollection;
 
     /**
      * Set index columns, ex: id.
@@ -66,9 +65,9 @@ abstract class DataGrid
     /**
      * Final result of the datagrid program that is collection object.
      *
-     * @var object
+     * @var array
      */
-    protected $collection;
+    protected $collection = [];
 
     /**
      * Set of handly click tools which you could be using for various operations.
@@ -347,31 +346,7 @@ abstract class DataGrid
 
         $this->prepareQueryBuilder();
 
-        $this->getCollection();
-
         return view('ui::datagrid.table')->with('results', $this->prepareViewData());
-    }
-
-    /**
-     * Get json data.
-     *
-     * @return object
-     */
-    public function toJson()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        $this->getCollection();
-
-        $this->formatCollection();
-
-        return response()->json($this->prepareViewData());
     }
 
     /**
@@ -403,16 +378,16 @@ abstract class DataGrid
     {
         return [
             'index'             => $this->index,
-            'records'           => $this->collection,
+            'records'           => $this->getCollection(),
             'columns'           => $this->completeColumnDetails,
             'actions'           => $this->actions,
             'enableActions'     => $this->enableAction,
-            'massActions'       => $this->massActions,
+            'massactions'       => $this->massActions,
             'enableMassActions' => $this->enableMassAction,
             'paginated'         => $this->paginate,
             'itemsPerPage'      => $this->itemsPerPage,
-            'extraFilters'      => $this->getNecessaryExtraFilters(),
-            'translations'      => $this->getTranslations(),
+            'norecords'         => __('ui::app.datagrid.no-records'),
+            'extraFilters'      => $this->getNecessaryExtraFilters()
         ];
     }
 
@@ -440,42 +415,15 @@ abstract class DataGrid
     /**
      * Get necessary extra details.
      *
-     * To Do (@devansh-webkul): Refactor when work completed.
-     *
      * @return array
      */
     protected function getNecessaryExtraFilters()
     {
-        /* all locales */
-        $locales = core()->getAllLocales();
-
-        /* request and fallback handling */
-        $locale = request()->get('locale') ?: app()->getLocale();
-        $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
-        $customer_group = request()->get('customer_group');
-
-        /* handling cases for new locale if not present in current channel */
-        if ($channel !== 'all') {
-            $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
-
-            if ($channelLocales->contains('code', $locale)) {
-                $locales = $channelLocales;
-            } else {
-                $channel = 'all';
-            }
-        }
-
-        $necessaryExtraFilters = [
-            'current' => [
-                'locale' => $locale,
-                'channel' => $channel,
-                'customer_group' => $customer_group
-            ]
-        ];
+        $necessaryExtraFilters = [];
 
         $checks = [
             'channels'        => core()->getAllChannels(),
-            'locales'         => $locales,
+            'locales'         => core()->getAllLocales(),
             'customer_groups' => core()->getAllCustomerGroups()
         ];
 
