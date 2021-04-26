@@ -49,6 +49,19 @@ class ProductFlat
     protected $attribute;
 
     /**
+     * Attribute codes that can be fill during flat creation.
+     *
+     * @var string[]
+     */
+    protected $fillableAttributeCodes = [
+        'sku',
+        'name',
+        'price',
+        'weight',
+        'status',
+    ];
+
+    /**
      * @var array
      */
     public $attributeTypeFields = [
@@ -212,7 +225,7 @@ class ProductFlat
                     }
 
                     foreach ($familyAttributes[$product->attribute_family->id] as $attribute) {
-                        if ($parentProduct && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], ['sku', 'name', 'price', 'weight', 'status']))) {
+                        if ($parentProduct && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], $this->fillableAttributeCodes))) {
                             continue;
                         }
 

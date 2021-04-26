@@ -2,20 +2,21 @@
 
 namespace Webkul\CartRule\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap services.
+     * The event handler mappings for the application.
      *
-     * @return void
+     * @var array
      */
-    public function boot()
-    {
-        Event::listen('checkout.order.save.after', 'Webkul\CartRule\Listeners\Order@manageCartRule');
-
-        Event::listen('checkout.cart.collect.totals.before', 'Webkul\CartRule\Listeners\Cart@applyCartRules');
-    }
+    protected $listen = [
+      'checkout.order.save.after' => [
+          'Webkul\CartRule\Listeners\Order@manageCartRule'
+      ],
+      'checkout.cart.collect.totals.before' => [
+          'Webkul\CartRule\Listeners\Cart@applyCartRules'
+      ],
+    ];
 }
