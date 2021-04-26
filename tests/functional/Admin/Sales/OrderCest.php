@@ -15,9 +15,6 @@ class OrderCest
 {
     public function testIndex(FunctionalTester $I): void
     {
-        /* simple order no further association like address, shipping method, payment method, etc. */
-        $order = $I->have(Order::class);
-
         /* login as admin */
         $I->loginAsAdmin();
 
@@ -29,8 +26,6 @@ class OrderCest
 
         /* now test index page */
         $I->seeCurrentRouteIs('admin.sales.orders.index');
-        $I->see($order->id, '//script[@type="text/x-template"]');
-        $I->see($order->sub_total, '//script[@type="text/x-template"]');
     }
 
     public function testCancelCashOnDeliveryOrder(FunctionalTester $I): void
