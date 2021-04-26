@@ -58,7 +58,7 @@ class ProductFlat
         'name',
         'price',
         'weight',
-        'status'
+        'status',
     ];
 
     /**
