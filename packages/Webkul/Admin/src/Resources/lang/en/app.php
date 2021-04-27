@@ -1029,9 +1029,17 @@ return [
             'is_subscribed'  => 'Subscribed',
             'edit-btn-title' => 'Update Subscriber',
             'update-success' => 'Subscriber was successfully updated',
+            'update-failed' => 'Error! You cannot unsubscribe the subscriber',
+            'delete' => 'Subscriber was successfully deleted',
+            'delete-failed' => 'Error! Subscriber cannot be deleted',
             'update-failed'  => 'Error! You cannot unsubscribe the subscriber',
             'delete'         => 'Subscriber was successfully deleted',
             'delete-failed'  => 'Error! Subscriber cannot be deleted'
+        ],
+
+        'orders' => [
+            'list'  => ':customer_name\'s orders List',
+            'title' => 'Orders'
         ]
     ],
 
