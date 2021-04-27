@@ -11,17 +11,17 @@
 
     @if (core()->getConfigData('catalog.rich_snippets.products.enable'))
         <script type="application/ld+json">
-            {!! app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) !!}
+            {{ app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) }}
         </script>
     @endif
 
-    <?php $productBaseImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product); ?>
+    <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
     <meta name="twitter:card" content="summary_large_image" />
 
     <meta name="twitter:title" content="{{ $product->name }}" />
 
-    <meta name="twitter:description" content="{{ $product->description }}" />
+    <meta name="twitter:description" content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" />
 
     <meta name="twitter:image:alt" content="" />
 
@@ -33,7 +33,7 @@
 
     <meta property="og:image" content="{{ $productBaseImage['medium_image_url'] }}" />
 
-    <meta property="og:description" content="{{ $product->description }}" />
+    <meta property="og:description" content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" />
 
     <meta property="og:url" content="{{ route('shop.productOrCategory.index', $product->url_key) }}" />
 @stop
@@ -62,6 +62,14 @@
                         @include ('shop::products.review', ['product' => $product])
 
                         @include ('shop::products.price', ['product' => $product])
+
+                        @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
+                            <div class="regular-price">
+                                @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
+                                    <p> {{ $offers }} </p>
+                                @endforeach
+                            </div>
+                        @endif
 
                         @include ('shop::products.view.stock', ['product' => $product])
 
@@ -141,14 +149,15 @@
     <script type="text/x-template" id="quantity-changer-template">
         <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
             <label class="required">{{ __('shop::app.products.quantity') }}</label>
+            <span class="quantity-container">
+                <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
-            <button type="button" class="decrease" @click="decreaseQty()">-</button>
+                <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
 
-            <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+                <button type="button" class="increase" @click="increaseQty()">+</button>
 
-            <button type="button" class="increase" @click="increaseQty()">+</button>
-
-            <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
+                <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
+            </span>
         </div>
     </script>
 

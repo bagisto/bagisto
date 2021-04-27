@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.catalog.attributes.index') }}'"></i>
 
                         {{ __('admin::app.catalog.attributes.add-title') }}
                     </h1>
@@ -296,7 +296,10 @@
                             </td>
 
                             <td v-if="show_swatch && swatch_type == 'image'">
-                                <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
+                                <div class="control-group" :class="[errors.has('options[' + row.id + '][swatch_value]') ? 'has-error' : '']">
+                                    <input type="file" v-validate="'size:600'" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
+                                    <span class="control-error" v-if="errors.has('options[' + row.id + '][swatch_value]')">The image size must be less than 600 KB</span>
+                                </div>
                             </td>
 
                             <td>

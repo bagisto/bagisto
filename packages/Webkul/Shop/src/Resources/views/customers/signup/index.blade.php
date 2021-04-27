@@ -70,16 +70,20 @@
                 <span class="control-error" v-if="errors.has('agreement')">@{{ errors.first('agreement') }}</span>
             </div> --}}
 
+            {{-- <span class="checkbox">
+                <input type="checkbox" id="checkbox1" name="checkbox[]">
+                <label class="checkbox-view" for="checkbox1"></label>
+                Checkbox Value 1
+            </span> --}}
+
+            @if (core()->getConfigData('customer.settings.newsletter.subscription'))
+                <div class="control-group">
+                    <input type="checkbox" id="checkbox2" name="is_subscribed">
+                    <span>{{ __('shop::app.customer.signup-form.subscribe-to-newsletter') }}</span>
+                </div>
+            @endif
+
             {!! view_render_event('bagisto.shop.customers.signup_form_controls.after') !!}
-
-            {{-- <div class="control-group" :class="[errors.has('agreement') ? 'has-error' : '']">
-
-                <input type="checkbox" id="checkbox2" name="agreement" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.agreement') }}&quot;">
-                <span>{{ __('shop::app.customer.signup-form.agree') }}
-                    <a href="">{{ __('shop::app.customer.signup-form.terms') }}</a> & <a href="">{{ __('shop::app.customer.signup-form.conditions') }}</a> {{ __('shop::app.customer.signup-form.using') }}.
-                </span>
-                <span class="control-error" v-if="errors.has('agreement')">@{{ errors.first('agreement') }}</span>
-            </div> --}}
 
             <button class="btn btn-primary btn-lg" type="submit">
                 {{ __('shop::app.customer.signup-form.button_title') }}

@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Something went wrong, please try again later.',
+        'image-upload-limit' => 'De maximale uploadgrootte van de afbeelding is 2 MB',
         'no-result-found' => 'We could not find any records.'
     ],
 
@@ -71,7 +72,8 @@ return [
         'page-title' => config('app.name') . ' - Search',
         'found-results' => 'Search Results Found',
         'found-result' => 'Search Result Found',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -87,10 +89,23 @@ return [
         'star' => 'Ster',
         'percentage' => ':percentage %',
         'id-star' => 'star',
-        'name' => 'Name',
+        'name' => 'Naam',
     ],
 
     'customer' => [
+        'compare' => [
+            'text' => 'Compare',
+            'compare_similar_items' => 'Compare Similar Items',
+            'add-tooltip' => 'Voeg product toe aan vergelijkingslijst',
+            'added' => 'Item successfully added to compare list',
+            'already_added' => 'Item already added to compare list',
+            'removed' => 'Item successfully removed from compare list',
+            'removed-all' => 'All items successfully removed from compare list',
+            'empty-text' => "You don't have any items in your compare list",
+            'product_image' => 'Product afbeelding',
+            'actions' => 'Acties',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Heb je al een account?',
             'title' => 'Aanmelden'
@@ -111,22 +126,22 @@ return [
             'using' => 'by using this website',
             'agreement' => 'Agreement',
             'success' => 'Account succesvol aangemaakt.',
-            'success-verify' => 'Account created successfully, an e-mail has been sent for verification.',
-            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent.',
-            'failed' => 'Error! Can not create your account, pleae try again later.',
-            'already-verified' => 'Your account is already verified Or please try sending a new verification email again.',
-            'verification-not-sent' => 'Error! Problem in sending verification email, please try again later.',
-            'verification-sent' => 'Verification email sent',
+            'success-verify' => 'Account succesvol aangemaakt, er is een e-mail verzonden ter verificatie.',
+            'success-verify-email-unsent' => 'Account aangemaakt, maar de verificatie-e-mail is niet verzonden.',
+            'failed' => 'Fout! Kan uw account niet aanmaken, probeer het later opnieuw.',
+            'already-verified' => 'Je account is al geverifieerd.',
+            'verification-not-sent' => 'Fout! Probleem bij het verzenden van een verificatie-e-mail. Probeer het later opnieuw.',
+            'verification-sent' => 'Verificatie email verzonden',
             'verified' => 'Uw account is geverifieerd, probeer nu in te loggen.',
-            'verify-failed' => 'We cannot verify your mail account.',
+            'verify-failed' => 'We kunnen uw e-mailaccount niet verifiëren.',
             'dont-have-account' => 'U heeft geen account bij ons.',
-            'success' => 'Account Created Successfully',
-            'failed' => 'Error! Cannot Create Your Account, Try Again Later',
-            'already-verified' => 'Your Account is already verified Or Please Try Sending A New Verification Email Again',
-            'verification-not-sent' => 'Error! Problem In Sending Verification Email, Try Again Later',
-            'verify-failed' => 'We Cannot Verify Your Mail Account',
-            'dont-have-account' => 'You Do Not Have Account With Us',
-            'customer-registration' => 'Customer Registered Successfully'
+            'success' => 'Account succesvol aangemaakt',
+            'failed' => 'Fout! Kan uw account niet maken. Probeer het later opnieuw',
+            'already-verified' => 'Uw account is al geverifieerd of probeer nogmaals een nieuwe verificatie-e-mail te verzenden',
+            'verification-not-sent' => 'Fout! Probleem bij het verzenden van verificatie-e-mail, probeer het later opnieuw',
+            'verify-failed' => 'We kunnen uw e-mailaccount niet verifiëren',
+            'dont-have-account' => 'U heeft geen account bij ons',
+            'customer-registration' => 'Klant succesvol geregistreerd'
         ],
 
         'login-text' => [
@@ -141,19 +156,19 @@ return [
             'password' => 'Wachtwoord',
             'forgot_pass' => 'Wachtwoord vergeten?',
             'button_title' => 'Aanmelden',
-            'remember' => 'Remember Me',
+            'remember' => 'Onthoud me',
             'footer' => '© Copyright :year Webkul Software, All rights reserved',
-            'invalid-creds' => 'Please check your credentials and try again.',
-            'verify-first' => 'Verify your email account first.',
-            'not-activated' => 'Your activation seeks admin approval',
-            'resend-verification' => 'Resend verification mail again'
+            'invalid-creds' => 'Controleer uw inloggegevens en probeer het opnieuw.',
+            'verify-first' => 'Verifieer eerst uw e-mailaccount.',
+            'not-activated' => 'Uw activering vraagt om goedkeuring van de beheerder.',
+            'resend-verification' => 'Verzend de verificatie-e-mail opnieuw'
         ],
 
         'forgot-password' => [
-            'title' => 'Recover Password',
+            'title' => 'Wachtwoord herstellen',
             'email' => 'Email',
-            'submit' => 'Send Password Reset Email',
-            'page_title' => 'Forgot your password ?'
+            'submit' => 'Stuur wachtwoord reset e-mail',
+            'page_title' => 'Uw wachtwoord vergeten ?'
         ],
 
         'reset-password' => [
@@ -166,8 +181,13 @@ return [
         ],
 
         'account' => [
-            'dashboard' => 'Edit Profile',
+            'dashboard' => 'Profiel wijzigen',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'Nee',
+                'yes' => 'Ja',
+            ],
 
             'profile' => [
                 'index' => [
@@ -176,9 +196,9 @@ return [
                     'edit' => 'Wijzig',
                 ],
 
-                'edit-success' => 'Profile updated successfully.',
-                'edit-fail' => 'Error! Profile cannot be updated, please try again later.',
-                'unmatch' => 'The old password does not match.',
+                'edit-success' => 'Profiel succesvol bijgewerkt.',
+                'edit-fail' => 'Fout! Profiel kan niet worden bijgewerkt. Probeer het later opnieuw.',
+                'unmatch' => 'Het oude wachtwoord komt niet overeen.',
 
                 'fname' => 'Voornaam',
                 'lname' => 'Naam',
@@ -207,18 +227,18 @@ return [
                     'add' => 'Adres toevoegen',
                     'edit' => 'Wijzigen',
                     'empty' => 'U heeft hier geen opgeslagen adressen. Voeg minstens één adres toe door op de onderstaande link te klikken',
-                    'create' => 'Address toevoegen',
+                    'create' => 'Nieuw adres toevoegen',
                     'delete' => 'Verwijderen',
                     'make-default' => 'Maak standaard',
                     'default' => 'Standaard',
                     'contact' => 'Contact',
                     'confirm-delete' =>  'Wilt u dit adres echt verwijderen?',
-                    'default-delete' => 'Standaardadres kan niet worden gewijzigd.',
+                    'default-delete' => 'Het standaard adres kan niet worden gewijzigd.',
                     'enter-password' => 'Voer uw wachtwoord in.',
                 ],
 
                 'create' => [
-                    'page-title' => 'Add Address Form',
+                    'page-title' => 'Nieuw adres toevoegen',
                     'company_name' => 'Bedrijfsnaam',
                     'first_name' => 'Voornaam',
                     'last_name' => 'Naam',
@@ -227,7 +247,7 @@ return [
                     'title' => 'Adres toevoegen',
                     'street-address' => 'Adres',
                     'country' => 'Land',
-                    'state' => 'Staat / Provincie',
+                    'state' => 'Provincie',
                     'select-state' => 'Selecteer een regio, staat of provincie',
                     'city' => 'Gemeente',
                     'postcode' => 'Postcode',
@@ -293,17 +313,17 @@ return [
                     'total' => 'Total',
                     'subtotal' => 'Subtotaal',
                     'shipping-handling' => 'Verzending en afhandeling',
-                    'tax' => 'Belasting',
+                    'tax' => 'BTW',
                     'discount' => 'Korting',
-                    'tax-percent' => 'Belastingpercentage',
-                    'tax-amount' => 'Belastingbedrag',
+                    'tax-percent' => 'BTWpercentage',
+                    'tax-amount' => 'BTWbedrag',
                     'discount-amount' => 'Korting hoeveelheid',
                     'grand-total' => 'Eindtotaal',
                     'total-paid' => 'Totaal betaald',
                     'total-refunded' => 'Totaal terugbetaald ',
                     'total-due' => 'Totaal verschuldigd',
                     'shipping-address' => 'Verzendingsadres',
-                    'billing-address' => 'factuur adres',
+                    'billing-address' => 'Facturatie adres ',
                     'shipping-method' => 'Verzendmethode',
                     'payment-method' => 'Betalingswijze',
                     'individual-invoice' => 'Factuur #:invoice_id',
@@ -333,6 +353,8 @@ return [
                 'error' => 'Kan product niet toevoegen aan verlanglijstje vanwege onbekende problemen, kom later terug',
                 'add' => 'Item succesvol toegevoegd aan verlanglijstje',
                 'remove' => 'Item succesvol verwijderd van verlanglijstje',
+                'add-wishlist-text' => 'Toevoegen aan verlanglijst',
+                'remove-wishlist-text' => 'Remove product from wishlist',
                 'moved' => 'Artikel succesvol verplaatst naar winkelwagen',
                 'option-missing' => 'Productopties ontbreken, dus item kan niet naar de verlanglijst worden verplaatst.',
                 'move-error' => 'Item kan niet naar de verlanglijst worden verplaatst. Probeer het later opnieuw',
@@ -356,7 +378,8 @@ return [
                 'expired' => 'Expired',
                 'remaining-downloads' => 'Resterende downloads',
                 'unlimited' => 'Onbeperkt',
-                'download-error' => 'Downloadlink is verlopen.'
+                'download-error' => 'Downloadlink is verlopen.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -424,6 +447,8 @@ return [
         'available-for-order' => 'Beschikbaar voor bestelling',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [
@@ -468,6 +493,8 @@ return [
                 'success' => 'Artikel is succesvol toegevoegd aan winkelwagen.',
                 'success-remove' => 'Item is met succes uit de winkelwagen verwijderd.',
                 'error-add' => 'Item kan niet aan winkelwagen worden toegevoegd. Probeer het later opnieuw.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'Gevraagde hoeveelheid is niet beschikbaar.',
             'cart-subtotal' => 'Subtotaal',
@@ -476,7 +503,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'This event has been expired.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
@@ -486,7 +514,7 @@ return [
             'payment' => 'Betaling',
             'complete' => 'Complete',
             'review' => 'Beoordeling',
-            'billing-address' => 'Factuur adres',
+            'billing-address' => 'Facturatie adres ',
             'sign-in' => 'Inloggen',
             'company-name' => 'Bedrijfsnaam',
             'first-name' => 'Voornaam',
@@ -496,9 +524,9 @@ return [
             'city' => 'stad',
             'state' => 'Staat',
             'select-state' => 'Selecteer een regio, staat of provincie',
-            'postcode' => 'Zip/Postcode',
+            'postcode' => 'Postcode',
             'phone' => 'Telefoon',
-            'country' => 'buiten',
+            'country' => 'Land',
             'order-summary' => 'overzicht van de bestelling',
             'shipping-address' => 'Verzendingsadres',
             'use_for_shipping' => 'Verzenden naar dit adres',
@@ -509,7 +537,7 @@ return [
             'summary' => 'overzicht van de bestelling',
             'price' => 'Prijs',
             'quantity' => 'Aantal',
-            'billing-address' => 'factuur adres',
+            'billing-address' => 'Facturatie adres ',
             'shipping-address' => 'Verzendingsadres',
             'contact' => 'Contact',
             'place-order' => 'Plaats bestelling',
@@ -554,7 +582,7 @@ return [
         'success' => [
             'title' => 'Bestelling succesvol geplaatst',
             'thanks' => 'Bedankt voor je bestelling!',
-            'order-id-info' => 'Uw bestellings-ID is #:order_id',
+            'order-id-info' => 'Uw ordernummer is #:order_id',
             'info' => 'We sturen u een e-mail met uw bestelgegevens en trackinginformatie'
         ]
     ],
@@ -563,13 +591,13 @@ return [
         'order' => [
             'subject' => 'Nieuwe orderbevestiging',
             'heading' => 'Order bevestiging!',
-            'dear' => 'Lieve :customer_name',
-            'dear-admin' => 'Lieve :admin_name',
+            'dear' => 'Beste :customer_name',
+            'dear-admin' => 'Beste :admin_name',
             'greeting' => 'Bedankt voor je bestelling :order_id geplaatst op :created_at',
             'greeting-admin' => 'Order Id :order_id geplaatst op :created_at',
             'summary' => 'Samenvatting van de bestelling',
             'shipping-address' => 'Verzendingsadres',
-            'billing-address' => 'factuur adres',
+            'billing-address' => 'Facturatie adres ',
             'contact' => 'Contact',
             'shipping' => 'Verzendmethode',
             'payment' => 'Betalingswijze',
@@ -577,26 +605,35 @@ return [
             'quantity' => 'Aantal',
             'subtotal' => 'Subtotal',
             'shipping-handling' => 'Verzending en afhandeling',
-            'tax' => 'Belasting',
+            'tax' => 'BTW',
             'discount' => 'Korting',
             'grand-total' => 'Eindtotaal',
             'final-summary' => 'Bedankt voor het tonen van uw interesse in onze winkel.We sturen u een trackingnummer zodra het is verzonden',
             'help' => 'Als u hulp nodig heeft, neem dan contact met ons op via :support_email',
-            'thanks' => 'Thanks!',
+            'thanks' => 'Bedankt!',
+
+            'comment' => [
+                'subject' => 'Nieuwe opmerking toegevoegd aan uw bestelling #:order_id',
+                'dear' => 'Beste :customer_name',
+                'final-summary' => 'Bedankt voor het tonen van uw interesse in onze winkel',
+                'help' => 'Als u hulp nodig heeft, neem dan contact met ons op via :support_email',
+                'thanks' => 'Bedankt!',
+            ],
+
             'cancel' => [
                 'subject' => 'Order Annuleren Bevestiging',
                 'heading' => 'Bestelling geannuleerd',
-                'dear' => 'Lieve :customer_name',
-                'greeting' => 'U bestelt met order-ID #:order_id geplaatst op :created_at is geannuleerd',
+                'dear' => 'Beste :customer_name',
+                'greeting' => 'Uw bestelling met ordernummer #:order_id geplaatst op :created_at is geannuleerd',
                 'summary' => 'Samenvatting van de bestelling',
                 'shipping-address' => 'Verzendingsadres',
-                'billing-address' => 'factuur adres',
+                'billing-address' => 'Facturatie adres ',
                 'contact' => 'Contact',
                 'shipping' => 'Verzendmethode',
                 'payment' => 'Betalingswijze',
                 'subtotal' => 'Subtotaal',
                 'shipping-handling' => 'Verzending en afhandeling',
-                'tax' => 'Belasting',
+                'tax' => 'BTW',
                 'discount' => 'Korting',
                 'grand-total' => 'Eindtotaal',
                 'final-summary' => 'Bedankt voor het tonen van uw interesse in onze winkel',
@@ -612,7 +649,7 @@ return [
         ],
 
         'shipment' => [
-            'heading' => 'Verzending #:shipment_id  is gegenereerd voor Order #:order_id',
+            'heading' => 'Verzending #:shipment_id  is gegenereerd voor order #:order_id',
             'inventory-heading' => 'Nieuwe zending #:shipment_id was gegenereerd voor Order #:order_id',
             'subject' => 'Verzending voor uw bestelling #:order_id',
             'inventory-subject' => 'Er is een nieuwe zending gegenereerd voor de bestelling #:order_id',
@@ -632,16 +669,23 @@ return [
 
         'forget-password' => [
             'subject' => 'Klant reset wachtwoord',
-            'dear' => 'Lieve :name',
+            'dear' => 'Beste :name',
             'info' => 'U ontvangt deze e-mail omdat we een verzoek voor het opnieuw instellen van uw wachtwoord voor uw account hebben ontvangen',
             'reset-password' => 'Wachtwoord opnieuw instellen',
             'final-summary' => 'Als u geen wachtwoordherstel hebt aangevraagd, is er geen verdere actie vereist',
             'thanks' => 'Bedankt!'
         ],
 
+        'update-password' => [
+            'subject' => 'Wachtwoord bijgewerkt',
+            'dear' => 'Beste :name',
+            'info' => 'Je ontvangt deze e-mail omdat je je wachtwoord hebt bijgewerkt.',
+            'thanks' => 'Bedankt!'
+        ],
+
         'customer' => [
             'new' => [
-                'dear' => 'Lieve :customer_name',
+                'dear' => 'Beste :customer_name',
                 'username-email' => 'UserName/Email',
                 'subject' => 'Nieuwe klantenregistratie',
                 'password' => 'Wachtwoord',
@@ -653,7 +697,7 @@ return [
             'registration' => [
                 'subject' => 'Nieuwe klantenregistratie',
                 'customer-registration' => 'Klant succesvol geregistreerd',
-                'dear' => 'Lieve :customer_name',
+                'dear' => 'Beste :customer_name',
                 'greeting' => 'Welkom en bedankt voor uw registratie bij ons!',
                 'summary' => 'Uw account is nu succesvol aangemaakt en u kunt inloggen met uw e-mailadres en wachtwoordgegevens. Na het inloggen hebt u toegang tot andere services, waaronder het bekijken van eerdere bestellingen, verlanglijstjes en het bewerken van uw accountgegevens.',
                 'thanks' => 'Thanks!',

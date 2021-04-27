@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.index') }}'"></i>
 
                         {{ __('admin::app.customers.customers.title') }}
 
@@ -72,7 +72,7 @@
 
                     <div class="control-group" :class="[errors.has('date_of_birth') ? 'has-error' : '']">
                         <label for="dob">{{ __('admin::app.customers.customers.date_of_birth') }}</label>
-                        <input type="date" class="control" name="date_of_birth" v-validate="" value="{{ old('date_of_birth') }}"  data-vv-as="&quot;{{ __('admin::app.customers.customers.date_of_birth') }}&quot;">
+                        <input type="date" class="control" name="date_of_birth" v-validate="" value="{{ old('date_of_birth') }}" placeholder="{{ __('admin::app.customers.customers.date_of_birth_placeholder') }}" data-vv-as="&quot;{{ __('admin::app.customers.customers.date_of_birth') }}&quot;">
                         <span class="control-error" v-if="errors.has('date_of_birth')">@{{ errors.first('date_of_birth') }}</span>
                     </div>
 

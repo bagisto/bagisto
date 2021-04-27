@@ -2,6 +2,7 @@
 
 namespace Webkul\BookingProduct\Repositories;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
 
@@ -18,12 +19,16 @@ class BookingProductEventTicketRepository extends Repository
     }
 
     /**
-     * @param  array  $data
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
+     * @param array                                           $data
+     * @param \Webkul\BookingProduct\Contracts\BookingProduct $bookingProduct
+     *
      * @return void
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function saveEventTickets($data, $bookingProduct)
+    public function saveEventTickets($data, $bookingProduct): void
     {
+        Event::dispatch('booking_product.booking.event-ticket.save.before', ['data' => $data, 'bookingProduct' => $bookingProduct]);
+
         $previousTicketIds = $bookingProduct->event_tickets()->pluck('id');
 
         if (isset($data['tickets'])) {
@@ -54,7 +59,7 @@ class BookingProductEventTicketRepository extends Repository
                 }
 
                 if (Str::contains($ticketId, 'ticket_')) {
-                    $this->create(array_merge([
+                    $ticket = $this->create(array_merge([
                         'booking_product_id' => $bookingProduct->id,
                     ], $ticketInputs));
                 } else {
@@ -62,9 +67,14 @@ class BookingProductEventTicketRepository extends Repository
                         $previousTicketIds->forget($index);
                     }
 
-                    $this->update($ticketInputs, $ticketId);
+                    $ticket = $this->update($ticketInputs, $ticketId);
                 }
+
+                $savedTickets[$ticketId]['ticket'] = $ticket;
+                $savedTickets[$ticketId]['ticketInputs'] = $ticketInputs;
             }
+
+            Event::dispatch('booking_product.booking.event-ticket.save.after', ['tickets' => $savedTickets]);
         }
 
         foreach ($previousTicketIds as $previousTicketId) {

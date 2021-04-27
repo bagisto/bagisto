@@ -211,7 +211,7 @@ class DashboardController extends Controller
 
     /**
      * Returns top selling products
-     * 
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getTopSellingProducts()
@@ -235,12 +235,17 @@ class DashboardController extends Controller
      */
     public function getCustomerWithMostSales()
     {
+        $dbPrefix = DB::getTablePrefix();
+
         return $this->orderRepository->getModel()
-                    ->select(DB::raw('SUM(base_grand_total) as total_base_grand_total'))
-                    ->addSelect(DB::raw('COUNT(id) as total_orders'))
-                    ->addSelect('id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
+                    ->leftJoin('refunds', 'orders.id', 'refunds.order_id')
+                    ->select(DB::raw("(SUM({$dbPrefix}orders.base_grand_total) - SUM(IFNULL({$dbPrefix}refunds.base_grand_total, 0))) as total_base_grand_total"))
+                    ->addSelect(DB::raw("COUNT({$dbPrefix}orders.id) as total_orders"))
+                    ->addSelect('orders.id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
                     ->where('orders.created_at', '>=', $this->startDate)
                     ->where('orders.created_at', '<=', $this->endDate)
+                    ->where('orders.status', '<>', 'closed')
+                    ->where('orders.status', '<>', 'canceled')
                     ->groupBy('customer_email')
                     ->orderBy('total_base_grand_total', 'DESC')
                     ->limit(5)

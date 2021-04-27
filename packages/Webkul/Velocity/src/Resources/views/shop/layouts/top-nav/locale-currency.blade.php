@@ -25,7 +25,7 @@
 @endphp
 
 {!! view_render_event('bagisto.shop.layout.header.locale.before') !!}
-    <div class="pull-left">
+    <div class="d-inline-block">
         <div class="dropdown">
             @php
                 $localeImage = null;
@@ -41,15 +41,16 @@
 
             <div class="locale-icon">
                 @if ($localeImage)
-                    <img src="{{ asset('/storage/' . $localeImage) }}" onerror="this.src = '{{ asset($localeImage) }}'" />
+                    <img src="{{ asset('/storage/' . $localeImage) }}" onerror="this.src = '{{ asset($localeImage) }}'" alt="" width="20" height="20" />
                 @elseif (app()->getLocale() == 'en')
-                    <img src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
+                    <img src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" width="20" height="20" />
                 @endif
             </div>
 
             <select
                 class="btn btn-link dropdown-toggle control locale-switcher styled-select"
                 onchange="window.location.href = this.value"
+                aria-label="Locale"
                 @if (count(core()->getCurrentChannel()->locales) == 1)
                     disabled="disabled"
                 @endif>
@@ -78,11 +79,11 @@
 {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
 
     @if (core()->getCurrentChannel()->currencies->count() > 1)
-        <div class="pull-left">
+        <div class="d-inline-block">
             <div class="dropdown">
                <select
                     class="btn btn-link dropdown-toggle control locale-switcher styled-select"
-                    onchange="window.location.href = this.value">
+                    onchange="window.location.href = this.value" aria-label="Locale">
                     @foreach (core()->getCurrentChannel()->currencies as $currency)
                         @if (isset($searchQuery) && $searchQuery)
                             <option value="?{{ $searchQuery }}&currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>

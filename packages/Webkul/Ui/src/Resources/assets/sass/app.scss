@@ -1,10 +1,13 @@
-// Icon scss
-@import "icons";
-@import "variables";
-@import "components";
-@import "mixins";
-@import "animations";
+/* main imports */
+@import "main/icons";
+@import "main/variables";
+@import "main/mixins";
 
+/* includes */
+@import "includes/animations";
+@import "includes/components";
+
+/* start from here */
 * {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
@@ -15,7 +18,7 @@
     outline: none;
 }
 
-//margin bottom classes
+// margin bottom classes
 .mb-10 {
     margin-bottom: 10px;
 }
@@ -68,7 +71,7 @@
     margin-bottom: 90px;
 }
 
-//margin-top
+// margin-top
 .mt-5 {
     margin-top: 5px;
 }
@@ -141,8 +144,8 @@ a:active {
 
 ::selection {
     background-color: $selection-color;
-    color: $color-white;
-  }
+    color: $white-color;
+}
 
 textarea {
     resize: none;
@@ -198,7 +201,7 @@ h5 {
     );
     @include border-radius(3px);
     border: none;
-    color: #fff;
+    color: $white-color;
     cursor: pointer;
     transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font: inherit;
@@ -214,12 +217,15 @@ h5 {
     &.btn-sm {
         padding: 6px 12px;
     }
+
     &.btn-md {
         padding: 8px 16px;
     }
+
     &.btn-lg {
         padding: 10px 20px;
     }
+
     &.btn-xl {
         padding: 12px 24px;
         font-size: 16px;
@@ -227,17 +233,17 @@ h5 {
 
     &.btn-primary {
         background: $brand-color;
-        color: #ffffff;
+        color: $white-color;
     }
 
     &.btn-black {
-        background: #000;
-        color: #ffffff;
+        background: $black-color;
+        color: $white-color;
     }
 
     &.btn-white {
-        background: #ffffff;
-        color: #000;
+        background: $white-color;
+        color: $black-color;
     }
 
     &:disabled,
@@ -254,7 +260,7 @@ h5 {
 .dropdown-btn {
     min-width: 150px;
     text-align: left;
-    background: #ffffff;
+    background: $white-color;
     border: 2px solid $control-border-color;
     @include border-radius(3px);
     font-size: 14px;
@@ -293,7 +299,7 @@ h5 {
         0 0 9px 0 rgba(0, 0, 0, 0.16)
     );
     @include border-radius(3px);
-    background-color: #ffffff;
+    background-color: $white-color;
     position: absolute;
     display: none;
     z-index: 10;
@@ -303,14 +309,17 @@ h5 {
         top: 42px;
         left: 0px;
     }
+
     &.bottom-right {
         top: 42px;
         right: 0px;
     }
+
     &.top-left {
         bottom: 0px;
         left: 42px;
     }
+
     &.top-right {
         bottom: 0px;
         right: 42px;
@@ -321,7 +330,7 @@ h5 {
         border-bottom: 1px solid $border-color;
 
         .control {
-            background: #fff;
+            background: $white-color;
             border: 2px solid $control-border-color;
             @include border-radius(3px);
             width: 100%;
@@ -363,9 +372,10 @@ h5 {
                 a:active,
                 a:visited,
                 a:focus {
-                    color: #333333;
+                    color: $font-color;
                     display: block;
                 }
+
                 a:hover {
                     color: $brand-color;
                 }
@@ -392,11 +402,9 @@ h5 {
 }
 
 .section {
-    // font-size: 16px;
-
     .secton-title {
         font-size: 18px;
-        color: #8E8E8E;
+        color: $font-color;
         padding: 15px 0;
         border-bottom: 1px solid $border-color;
     }
@@ -427,7 +435,6 @@ h5 {
 
 .table {
     width: 100%;
-    // overflow-x: auto !important;
 
     table {
         border-collapse: collapse;
@@ -483,14 +490,14 @@ h5 {
 
 .pagination {
     .page-item {
-        background: #ffffff;
+        background: $white-color;
         border: 2px solid $control-border-color;
         @include border-radius(3px);
         padding: 7px 14px;
         margin-right: 5px;
         font-size: 16px;
         display: inline-block;
-        color: #8e8e8e;
+        color: $font-color;
         vertical-align: middle;
         text-decoration: none;
 
@@ -500,9 +507,9 @@ h5 {
         }
 
         &.active {
-            background: #0041ff;
-            color: #fff;
-            border-color: #0041ff;
+            background: $brand-color;
+            color: $white-color;
+            border-color: $brand-color;
         }
 
         .icon {
@@ -515,7 +522,6 @@ h5 {
 .checkbox {
     position: relative;
     display: block;
-    // vertical-align: middle;
 
     input {
         left: 0;
@@ -585,7 +591,7 @@ h5 {
     display: block;
     margin-bottom: 25px;
     font-size: 15px;
-    color: #333333;
+    color: $font-color;
     width: 750px;
     max-width: 100%;
     position: relative;
@@ -608,7 +614,7 @@ h5 {
     }
 
     .control {
-        background: #fff;
+        background: $white-color;
         border: 2px solid $control-border-color;
         @include border-radius(3px);
         width: 70%;
@@ -672,7 +678,7 @@ h5 {
 
     .control-error {
         display: none;
-        color: #ff5656;
+        color: $danger-color;
         margin-top: 5px;
     }
 
@@ -705,11 +711,15 @@ h5 {
         &.date, &.datetime {
             &::after {
                 top: 6px;
-                left: unset;
+                left: 100%;
             }
+        }
 
-            .cross-icon {
-                top: 10px;
+        &.has-error.date, &.has-error.date {
+            &.date, &.datetime {
+                &::after {
+                    top: 18px;
+                }
             }
         }
     }
@@ -740,11 +750,8 @@ h5 {
             &.date, &.datetime {
                 &::after {
                     right: unset !important;
+                    left: auto;
                 }
-            }
-
-            .cross-icon {
-                top: 10px;
             }
         }
     }
@@ -785,7 +792,7 @@ h5 {
         width: 26px;
         left: 4px;
         bottom: 4px;
-        background-color: $color-white;
+        background-color: $white-color;
         -webkit-transition: .2s;
         transition: .2s;
     }
@@ -804,7 +811,7 @@ h5 {
         transform: translateX(26px);
     }
 
-    /* Rounded sliders */
+    /* rounded sliders */
     .slider.round {
         border-radius: 34px;
         }
@@ -866,7 +873,7 @@ h5 {
         }
 
         p {
-            color: #ffffff;
+            color: $white-color;
             margin: 0px;
             padding: 0px;
             font-size: 15px;
@@ -886,7 +893,7 @@ h5 {
                 cursor: pointer;
                 margin: 0px 2px;
                 text-align: center;
-                color: #000311;
+                color: $black-color-shade;
                 display: block;
             }
 
@@ -1011,7 +1018,7 @@ h5 {
 .panel {
     @include box-shadow(0 2px 25px 0 rgba(0, 0, 0, 0.15));
     @include border-radius(5px);
-    background: #fff;
+    background: $white-color;
 
     .panel-content {
         padding: 20px;
@@ -1035,7 +1042,7 @@ modal {
     bottom: 0px;
     left: 0px;
     position: fixed;
-    background: #000;
+    background: $black-color;
     opacity: 0.7;
 }
 
@@ -1044,7 +1051,7 @@ modal {
 }
 
 .modal-container {
-    background: #ffffff;
+    background: $white-color;
     top: 100px;
     width: 600px;
     max-width: 80%;
@@ -1100,7 +1107,7 @@ modal {
     background: #E7E7E7;
     @include border-radius(2px);
     padding: 8px;
-    color: #000311;
+    color: $black-color-shade;
     display: inline-block;
 
     &.label-sm {
@@ -1159,7 +1166,7 @@ modal {
     }
 }
 
-//Image wrapper
+// image wrapper
 .image-wrapper {
     margin-bottom: 20px;
     margin-top: 10px;
@@ -1197,7 +1204,7 @@ modal {
             width: 100%;
             padding: 10px;
             text-align: center;
-            color: #fff;
+            color: $white-color;
             text-shadow: 0 1px 2px rgba(0,0,0,0.24);
             margin-right: 20px;
             cursor: pointer;
@@ -1235,4 +1242,86 @@ modal {
     left: 50%;
     margin-top: -24px;
     margin-left: -24px;
+}
+
+.tooltip {
+    display: block !important;
+    z-index: 10000;
+
+    .tooltip-inner {
+        background: black;
+        color: white;
+        border-radius: 4px;
+        padding: 5px 10px 4px;
+    }
+
+    .tooltip-arrow {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        position: absolute;
+        margin: 5px;
+        border-color: black;
+        z-index: 1;
+    }
+
+    &[x-placement^="top"] {
+        margin-bottom: 5px;
+
+        .tooltip-arrow {
+            border-width: 5px 5px 0 5px;
+            border-left-color: transparent !important;
+            border-right-color: transparent !important;
+            border-bottom-color: transparent !important;
+            bottom: -5px;
+            left: calc(50% - 5px);
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    &[x-placement^="bottom"] {
+        margin-top: 5px;
+
+        .tooltip-arrow {
+            border-width: 0 5px 5px 5px;
+            border-left-color: transparent !important;
+            border-right-color: transparent !important;
+            border-top-color: transparent !important;
+            top: -5px;
+            left: calc(50% - 5px);
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    &[x-placement^="right"] {
+        margin-left: 5px;
+
+        .tooltip-arrow {
+            border-width: 5px 5px 5px 0;
+            border-left-color: transparent !important;
+            border-top-color: transparent !important;
+            border-bottom-color: transparent !important;
+            left: -5px;
+            top: calc(50% - 5px);
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    &[x-placement^="left"] {
+        margin-right: 5px;
+
+        .tooltip-arrow {
+            border-width: 5px 0 5px 5px;
+            border-top-color: transparent !important;
+            border-right-color: transparent !important;
+            border-bottom-color: transparent !important;
+            right: -5px;
+            top: calc(50% - 5px);
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
 }

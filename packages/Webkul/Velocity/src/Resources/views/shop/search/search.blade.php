@@ -21,20 +21,59 @@
             position: absolute;
         }
 
-        
+
         @media only screen and (max-width: 992px) {
             .main-content-wrapper .vc-header {
                 box-shadow: unset;
             }
+
+             .toolbar-wrapper .col-4:last-child {
+                left: 175px;
+            }
+
+            .toolbar-wrapper .sorter {
+                left: 35px;
+                position: relative;
+            }
+
+            .quick-view-btn-container,
+            .rango-zoom-plus,
+            .quick-view-in-list {
+                display: none;
+            }
+
         }
     </style>
 @endpush
 
 @section('content-wrapper')
-    <div
-        style="padding-left: 50px !important;"
-        class="container category-page-wrapper"
-    >
+    <div class="container category-page-wrapper">
+        <search-component></search-component>
+    </div>
+@endsection
+
+@push('scripts')
+    <script type="text/x-template" id="image-search-result-component-template">
+        <div class="image-search-result">
+            <div class="searched-image">
+                <img :src="searchedImageUrl" alt=""/>
+            </div>
+
+            <div class="searched-terms">
+                <h3 class="fw6 fs20 mb-4">
+                    {{ __('shop::app.search.analysed-keywords') }}
+                </h3>
+
+                <div class="term-list">
+                    <a v-for="term in searched_terms" :href="'{{ route('shop.search.index') }}?term=' + term.slug">
+                        @{{ term.name }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="seach-component-template">
         <section class="search-container row category-container">
             @if (request('image-search'))
                 <image-search-result-component></image-search-result-component>
@@ -51,16 +90,16 @@
             @endif
 
             @if (! $results)
-                <h1 class="fw6 col-12">{{ __('shop::app.search.no-results') }}</h1>
+                <h2 class="fw6 col-12">{{ __('shop::app.search.no-results') }}</h2>
             @else
                 @if ($results->isEmpty())
-                    <h1 class="fw6 col-12">{{ __('shop::app.products.whoops') }}</h1>
+                    <h2 class="fw6 col-12">{{ __('shop::app.products.whoops') }}</h2>
                     <span class="col-12">{{ __('shop::app.search.no-results') }}</span>
                 @else
                     @if ($results->total() == 1)
-                        <h2 class="fw6 col-12 mb20">
+                        <h5 class="fw6 col-12 mb20">
                             {{ $results->total() }} {{ __('shop::app.search.found-result') }}
-                        </h2>
+                        </h5>
                     @else
                         <h2 class="fw6 col-12 mb20">
                             {{ $results->total() }} {{ __('shop::app.search.found-results') }}
@@ -82,31 +121,13 @@
                 @endif
             @endif
         </section>
-    </div>
-@endsection
-
-@push('scripts')
-    <script type="text/x-template" id="image-search-result-component-template">
-        <div class="image-search-result">
-            <div class="searched-image">
-                <img :src="searchedImageUrl"/>
-            </div>
-
-            <div class="searched-terms">
-                <h3 class="fw6 fs20 mb-4">
-                    {{ __('shop::app.search.analysed-keywords') }}
-                </h3>
-
-                <div class="term-list">
-                    <a v-for="term in searched_terms" :href="'{{ route('shop.search.index') }}?term=' + term.slug">
-                        @{{ term.name }}
-                    </a>
-                </div>
-            </div>
-        </div>
     </script>
 
     <script>
+        Vue.component('search-component', {
+            template: '#seach-component-template',
+        });
+
         Vue.component('image-search-result-component', {
             template: '#image-search-result-component-template',
 

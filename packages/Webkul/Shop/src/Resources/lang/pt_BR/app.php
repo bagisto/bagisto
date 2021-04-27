@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Algo deu errado, por favor, tente novamente mais tarde.',
+        'image-upload-limit' => 'O tamanho máximo de upload da imagem é 2 MB',
         'no-result-found' => 'We could not find any records.'
     ],
 
@@ -72,7 +73,8 @@ return [
         'page-title' => 'Buscar',
         'found-results' => 'Resultados da pesquisa encontrados',
         'found-result' => 'Resultado da pesquisa encontrado',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -92,6 +94,19 @@ return [
     ],
 
     'customer' => [
+        'compare' => [
+            'text' => 'Comparar',
+            'compare_similar_items' => 'Comparar itens semelhantes',
+            'add-tooltip' => 'Adicionar produto à lista de comparação',
+            'already_added' => 'Item já adicionado à lista de comparação',
+            'added' => 'Item adicionado com sucesso à lista de comparação',
+            'removed' => 'Item removido com sucesso da lista de comparação',
+            'removed-all' => 'Todos os itens removidos com sucesso da lista de comparação',
+            'empty-text' => "Você não possui nenhum item na sua lista de comparação",
+            'product_image' => 'Imagem do Produto',
+            'actions' => 'Ações',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Já tem uma conta',
             'title' => 'Entrar'
@@ -161,6 +176,11 @@ return [
         'account' => [
             'dashboard' => 'Cliente - Perfil',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'Não',
+                'yes' => 'sim',
+            ],
 
             'profile' => [
                 'index' => [
@@ -321,6 +341,8 @@ return [
                 'error' => 'Não é possível adicionar o produto a lista de Desejos devido a problemas desconhecidos, por favor tente mais tarde',
                 'add' => 'Item adicionado com sucesso a Lista de Desejos',
                 'remove' => 'Item removido com sucesso da Lista de Desejos',
+                'add-wishlist-text' => 'Adicionar produto à lista de desejos',
+                'remove-wishlist-text' => 'Remover produto da lista de desejos',
                 'moved' => 'Item movido com sucesso para Lista de Desejos',
                 'option-missing' => 'As opções do produto estão ausentes, portanto, o item não pode ser movido para a lista de desejos.',
                 'move-error' => 'Item não pode ser movido para Lista de Desejos, por favor, tente novamente mais tarde',
@@ -344,7 +366,8 @@ return [
                 'expired' => 'Expirado',
                 'remaining-downloads' => 'Downloads restantes',
                 'unlimited' => 'Ilimitado',
-                'download-error' => 'O link para download expirou.'
+                'download-error' => 'O link para download expirou.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -407,6 +430,8 @@ return [
         'available-for-order' => 'Disponível para encomenda',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [
@@ -453,6 +478,8 @@ return [
                 'success' => 'Item foi adicionado com sucesso ao carrinho',
                 'success-remove' => 'Item foi removido com sucesso do carrinho',
                 'error-add' => 'Item não pode ser adicionado ao carrinho, por favor, tente novamente mais tarde',
+                'inactive' => 'An item is inactive and was removed from cart',
+                'inactive-add' => 'Inactive item cannot be added to cart',
             ],
             'quantity-error' => 'Quantidade solicitada não está disponível',
             'cart-subtotal' => 'Subtotal do carrinho',
@@ -461,7 +488,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'This event has been expired.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
@@ -554,6 +582,15 @@ return [
             'final-summary' => 'Obrigado por mostrar o seu interesse em nossa loja nós lhe enviaremos o número de rastreamento assim que for despachado',
             'help' => 'Se você precisar de algum tipo de ajuda, por favor entre em contato conosco :support_email',
             'thanks' => 'Muito Obrigado!',
+
+            'comment' => [
+                'subject' => 'Novo comentário adicionado ao seu pedido #: order_id',
+                'dear' => 'Prezado :customer_name',
+                'final-summary' => 'Obrigado por mostrar seu interesse em nossa loja',
+                'help' => 'Se você precisar de algum tipo de ajuda, entre em contato conosco :support_email',
+                'thanks' => 'Obrigada!',
+            ],
+
             'cancel' => [
                 'subject' => 'Confirmação de Cancelamento de Pedido',
                 'heading' => 'Pedido Cancelado',
@@ -604,6 +641,13 @@ return [
             'info' => 'Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para sua conta',
             'reset-password' => 'Redefinir Senha',
             'final-summary' => 'Se você não solicitou uma redefinição de senha, nenhuma ação adicional é necessária',
+            'thanks' => 'Obrigado!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Senha atualizada',
+            'dear' => 'Caro :name',
+            'info' => 'Você está recebendo este e-mail porque atualizou sua senha.',
             'thanks' => 'Obrigado!'
         ],
 

@@ -75,7 +75,7 @@ Route::group(['prefix' => 'api'], function ($router) {
             'resource' => 'Webkul\API\Http\Resources\Catalog\ProductReview',
             'authorization_required' => true
         ]);
-        
+
 
         //Channel routes
         Route::get('channels', 'ResourceController@index')->defaults('_config', [
@@ -154,7 +154,7 @@ Route::group(['prefix' => 'api'], function ($router) {
 
         Route::post('customer/register', 'CustomerController@create');
 
-        Route::get('customers/{id}', 'ResourceController@get')->defaults('_config', [
+        Route::get('customers/{id}', 'CustomerController@get')->defaults('_config', [
             'repository' => 'Webkul\Customer\Repositories\CustomerRepository',
             'resource' => 'Webkul\API\Http\Resources\Customer\Customer',
             'authorization_required' => true
@@ -202,20 +202,20 @@ Route::group(['prefix' => 'api'], function ($router) {
 
 
         //Invoice routes
-        Route::get('invoices', 'ResourceController@index')->defaults('_config', [
+        Route::get('invoices', 'InvoiceController@index')->defaults('_config', [
             'repository' => 'Webkul\Sales\Repositories\InvoiceRepository',
             'resource' => 'Webkul\API\Http\Resources\Sales\Invoice',
             'authorization_required' => true
         ]);
 
-        Route::get('invoices/{id}', 'ResourceController@get')->defaults('_config', [
+        Route::get('invoices/{id}', 'InvoiceController@get')->defaults('_config', [
             'repository' => 'Webkul\Sales\Repositories\InvoiceRepository',
             'resource' => 'Webkul\API\Http\Resources\Sales\Invoice',
             'authorization_required' => true
         ]);
 
 
-        //Invoice routes
+        //Shipment routes
         Route::get('shipments', 'ResourceController@index')->defaults('_config', [
             'repository' => 'Webkul\Sales\Repositories\ShipmentRepository',
             'resource' => 'Webkul\API\Http\Resources\Sales\Shipment',
@@ -228,6 +228,18 @@ Route::group(['prefix' => 'api'], function ($router) {
             'authorization_required' => true
         ]);
 
+        //Transaction routes
+        Route::get('transactions', 'TransactionController@index')->defaults('_config', [
+            'repository' => 'Webkul\Sales\Repositories\OrderTransactionRepository',
+            'resource' => 'Webkul\API\Http\Resources\Sales\OrderTransaction',
+            'authorization_required' => true
+        ]);
+
+        Route::get('transactions/{id}', 'TransactionController@get')->defaults('_config', [
+            'repository' => 'Webkul\Sales\Repositories\OrderTransactionRepository',
+            'resource' => 'Webkul\API\Http\Resources\Sales\OrderTransaction',
+            'authorization_required' => true
+        ]);
 
         //Wishlist routes
         Route::get('wishlist', 'ResourceController@index')->defaults('_config', [
@@ -246,7 +258,6 @@ Route::group(['prefix' => 'api'], function ($router) {
 
         Route::get('wishlist/add/{id}', 'WishlistController@create');
 
-
         //Checkout routes
         Route::group(['prefix' => 'checkout'], function ($router) {
             Route::post('cart/add/{id}', 'CartController@store');
@@ -259,6 +270,10 @@ Route::group(['prefix' => 'api'], function ($router) {
 
             Route::get('cart/remove-item/{id}', 'CartController@destroyItem');
 
+            Route::post('cart/coupon', 'CartController@applyCoupon');
+
+            Route::delete('cart/coupon', 'CartController@removeCoupon');
+
             Route::get('cart/move-to-wishlist/{id}', 'CartController@moveToWishlist');
 
             Route::post('save-address', 'CheckoutController@saveAddress');
@@ -266,6 +281,8 @@ Route::group(['prefix' => 'api'], function ($router) {
             Route::post('save-shipping', 'CheckoutController@saveShipping');
 
             Route::post('save-payment', 'CheckoutController@savePayment');
+
+            Route::post('check-minimum-order', 'CheckoutController@checkMinimumOrder');
 
             Route::post('save-order', 'CheckoutController@saveOrder');
         });

@@ -6,8 +6,6 @@
 
 @section('content-wrapper')
     <div class="account-content">
-        @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
         @include('shop::customers.account.partials.sidemenu')
 
         @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
@@ -38,7 +36,7 @@
                                     $image = $item->product->getTypeInstance()->getBaseImage($item);
                                 @endphp
 
-                                <img class="media" src="{{ $image['small_image_url'] }}" />
+                                <img class="media" src="{{ $image['small_image_url'] }}" alt="" />
 
                                 <div class="info">
                                     <div class="product-name">

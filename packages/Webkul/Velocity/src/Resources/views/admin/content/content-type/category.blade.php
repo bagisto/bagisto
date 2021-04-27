@@ -7,16 +7,17 @@
     </label>
 
     @php
-       $pageTarget = isset($locale) ? (old($locale)['page_link'] ?? (isset($content) ? $content->translate($locale)['page_link'] : '')) : '';
+       $pageTarget = isset($locale) ? (old($locale)['page_link'] ?? (isset($content) ? $content->translate($locale) ? $content->translate($locale)['page_link'] : '' : '')) : '';
     @endphp
 
     <input
         type="text"
         id="page_link"
         class="control"
+        value="{{ $pageTarget }}"
         name="{{$locale}}[page_link]"
         v-validate="'required|max:150'"
-        value="{{ $pageTarget }}"
+        @input="$event.target.value=$event.target.value.toLowerCase()"
         data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.category-slug') }}&quot;" />
 
     <span class="control-error" v-if="errors.has('{!!$locale!!}[page_link]')">
@@ -30,7 +31,7 @@
     </label>
 
     @php
-       $linkTarget = isset($locale) ? (old($locale)['link_target'] ?? (isset($content) ? $content->translate($locale)['link_target'] : '')) : '';
+       $linkTarget = isset($locale) ? (old($locale)['link_target'] ?? (isset($content) ? $content->translate($locale) ? $content->translate($locale)['link_target'] : '' : '')) : '';
     @endphp
 
     <select class="control" id="link_target" name="{{$locale}}[link_target]" value="">

@@ -74,6 +74,14 @@ class OnepageController extends Controller
             return redirect()->route('customer.session.index');
         }
 
+        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+
+        if (! $cart->checkMinimumOrder()) {
+            session()->flash('warning', trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
+
+            return redirect()->back();
+        }
+
         Cart::collectTotals();
 
         return view($this->_config['view'], compact('cart'));
@@ -228,6 +236,12 @@ class OnepageController extends Controller
     {
         $cart = Cart::getCart();
 
+        $minimumOrderAmount = core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+
+        if (! $cart->checkMinimumOrder()) {
+            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
+        }
+
         if ($cart->haveStockableItems() && ! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));
         }
@@ -343,5 +357,22 @@ class OnepageController extends Controller
                 'data'    => null,
             ], 422);
         }
+    }
+
+    /**
+     * Check for minimum order.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkMinimumOrder()
+    {
+        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+
+        $status = Cart::checkMinimumOrder();
+
+        return response()->json([
+            'status' => ! $status ? false : true,
+            'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) : 'Success',
+        ]);
     }
 }

@@ -2,20 +2,25 @@
 
 namespace Webkul\Core\Providers;
 
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\AliasLoader;
-use Webkul\Core\Console\Commands\BookingCron;
 use Webkul\Core\Core;
 use Webkul\Core\Exceptions\Handler;
-use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\Models\SliderProxy;
-use Webkul\Core\Observers\SliderObserver;
-use Webkul\Core\Console\Commands\BagistoVersion;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\ServiceProvider;
+use Webkul\Theme\ViewRenderEventManager;
+use Illuminate\Support\Facades\Validator;
 use Webkul\Core\Console\Commands\Install;
+use Webkul\Core\Observers\SliderObserver;
+use Webkul\Core\Console\Commands\UpCommand;
+use Webkul\Core\Facades\Core as CoreFacade;
+use Webkul\Core\Console\Commands\BookingCron;
+use Webkul\Core\Console\Commands\DownCommand;
+use Webkul\Core\View\Compilers\BladeCompiler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Webkul\Core\Console\Commands\BagistoVersion;
 use Webkul\Core\Console\Commands\ExchangeRateUpdate;
+use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -43,6 +48,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->publishes([
             dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),
+            dirname(__DIR__) . '/Config/scout.php' => config_path('scout.php'),
         ]);
 
         $this->app->bind(
@@ -51,6 +57,24 @@ class CoreServiceProvider extends ServiceProvider
         );
 
         SliderProxy::observe(SliderObserver::class);
+
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
+
+        Event::listen('bagisto.shop.layout.body.after', static function(ViewRenderEventManager $viewRenderEventManager) {
+            $viewRenderEventManager->addTemplate('core::blade.tracer.style');
+        });
+
+        Event::listen('bagisto.admin.layout.head', static function(ViewRenderEventManager $viewRenderEventManager) {
+            $viewRenderEventManager->addTemplate('core::blade.tracer.style');
+        });
+
+        $this->app->extend('command.down', function () {
+            return new DownCommand;
+        });
+
+        $this->app->extend('command.up', function () {
+            return new UpCommand;
+        });
     }
 
     /**
@@ -63,6 +87,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerFacades();
 
         $this->registerCommands();
+
+        $this->registerBladeCompiler();
     }
 
     /**
@@ -108,5 +134,17 @@ class CoreServiceProvider extends ServiceProvider
     protected function registerEloquentFactoriesFrom($path): void
     {
         $this->app->make(EloquentFactory::class)->load($path);
+    }
+
+    /**
+     * Register the Blade compiler implementation.
+     *
+     * @return void
+     */
+    public function registerBladeCompiler()
+    {
+        $this->app->singleton('blade.compiler', function ($app) {
+            return new BladeCompiler($app['files'], $app['config']['view.compiled']);
+        });
     }
 }

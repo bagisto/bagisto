@@ -2,34 +2,42 @@
 
 namespace Webkul\Paypal\Helpers;
 
+use Webkul\Paypal\Payment\Standard;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 
 class Ipn
 {
     /**
-     * Ipn post data
+     * IPN post data.
      *
      * @var array
      */
     protected $post;
 
     /**
-     * Order object
+     * Standard $paypalStandard
+     *
+     * @var \Webkul\Paypal\Payment\Standard
+     */
+    protected $paypalStandard;
+
+    /**
+     * Order $order
      *
      * @var \Webkul\Sales\Contracts\Order
      */
     protected $order;
 
     /**
-     * OrderRepository object
+     * OrderRepository $orderRepository
      *
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
-     * InvoiceRepository object
+     * InvoiceRepository $invoiceRepository
      *
      * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
@@ -40,20 +48,24 @@ class Ipn
      *
      * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
      * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
+     * @param  \Webkul\Paypal\Payment\Standard  $paypalStandard
      * @return void
      */
     public function __construct(
+        Standard $paypalStandard,
         OrderRepository $orderRepository,
         InvoiceRepository $invoiceRepository
     )
     {
+        $this->paypalStandard = $paypalStandard;
+
         $this->orderRepository = $orderRepository;
 
         $this->invoiceRepository = $invoiceRepository;
     }
 
     /**
-     * This function process the ipn sent from paypal end
+     * This function process the IPN sent from paypal end.
      *
      * @param  array  $post
      * @return null|void|\Exception
@@ -80,7 +92,7 @@ class Ipn
     }
 
     /**
-     * Load order via ipn invoice id
+     * Load order via IPN invoice id.
      *
      * @return void
      */
@@ -92,7 +104,7 @@ class Ipn
     }
 
     /**
-     * Process order and create invoice
+     * Process order and create invoice.
      *
      * @return void
      */
@@ -105,22 +117,20 @@ class Ipn
                 $this->orderRepository->update(['status' => 'processing'], $this->order->id);
 
                 if ($this->order->canInvoice()) {
-                    $this->invoiceRepository->create($this->prepareInvoiceData());
+                    $invoice = $this->invoiceRepository->create($this->prepareInvoiceData());
                 }
             }
         }
     }
 
     /**
-     * Prepares order's invoice data for creation
+     * Prepares order's invoice data for creation.
      *
      * @return array
      */
     protected function prepareInvoiceData()
     {
-        $invoiceData = [
-            "order_id" => $this->order->id,
-        ];
+        $invoiceData = ['order_id' => $this->order->id];
 
         foreach ($this->order->items as $item) {
             $invoiceData['invoice']['items'][$item->id] = $item->qty_to_invoice;
@@ -130,24 +140,20 @@ class Ipn
     }
 
     /**
-     * Post back to PayPal to check whether this request is a valid one
+     * Post back to PayPal to check whether this request is a valid one.
      *
      * @return bool
      */
     protected function postBack()
     {
-        if (array_key_exists('test_ipn', $this->post) && 1 === (int) $this->post['test_ipn']) {
-            $url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-        } else {
-            $url = 'https://www.paypal.com/cgi-bin/webscr';
-        }
+        $url = $this->paypalStandard->getIPNUrl();
 
         $request = curl_init();
 
         curl_setopt_array($request, [
             CURLOPT_URL            => $url,
             CURLOPT_POST           => TRUE,
-            CURLOPT_POSTFIELDS     => http_build_query(array('cmd' => '_notify-validate') + $this->post),
+            CURLOPT_POSTFIELDS     => http_build_query(['cmd' => '_notify-validate'] + $this->post),
             CURLOPT_RETURNTRANSFER => TRUE,
             CURLOPT_HEADER         => FALSE,
         ]);

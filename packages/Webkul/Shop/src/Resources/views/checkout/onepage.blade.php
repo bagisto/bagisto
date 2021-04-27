@@ -88,9 +88,11 @@
                     </review-section>
 
                     <div class="button-group">
-                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button" v-if="selected_payment_method.method != 'paypal_smart_button'">
                             {{ __('shop::app.checkout.onepage.place-order') }}
                         </button>
+
+                        <div class="paypal-button-container"></div>
                     </div>
                 </div>
             </div>
@@ -217,10 +219,10 @@
                     return false;
                 },
 
-                validateForm: function(scope) {
+                validateForm: async function(scope) {
                     var this_this = this;
 
-                    this.$validator.validateAll(scope).then(function (result) {
+                    await this.$validator.validateAll(scope).then(function (result) {
                         if (result) {
                             if (scope == 'address-form') {
                                 this_this.saveAddress();
@@ -284,7 +286,7 @@
                         .catch(function (error) {})
                 },
 
-                saveAddress: function() {
+                saveAddress: async function() {
                     var this_this = this;
 
                     this.disable_button = true;
@@ -325,7 +327,7 @@
                         })
                 },
 
-                saveShipping: function() {
+                saveShipping: async function() {
                     var this_this = this;
 
                     this.disable_button = true;
@@ -349,7 +351,7 @@
                         })
                 },
 
-                savePayment: function() {
+                savePayment: async function() {
                     var this_this = this;
 
                     this.disable_button = true;
@@ -371,7 +373,7 @@
                     });
                 },
 
-                placeOrder: function() {
+                placeOrder: async function() {
                     var this_this = this;
 
                     this.disable_button = true;
@@ -482,7 +484,7 @@
                 methodSelected: function() {
                     this.$emit('onShippingMethodSelected', this.selected_shipping_method)
 
-                    eventBus.$emit('after-shipping-method-selected');
+                    eventBus.$emit('after-shipping-method-selected', this.selected_shipping_method);
                 }
             }
         })
@@ -533,9 +535,11 @@
 
             methods: {
                 methodSelected: function() {
-                    this.$emit('onPaymentMethodSelected', this.payment)
+                    this.$emit('onPaymentMethodSelected', this.payment);
 
-                    eventBus.$emit('after-payment-method-selected');
+                    $('.paypal-button-container').empty();
+
+                    eventBus.$emit('after-payment-method-selected', this.payment);
                 }
             }
         })

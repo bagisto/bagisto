@@ -2,8 +2,8 @@
     <div class="navbar-top-left">
         <div class="brand-logo">
             <a href="{{ route('admin.dashboard.index') }}">
-                @if (core()->getConfigData('general.design.admin_logo.logo_image'))
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url(core()->getConfigData('general.design.admin_logo.logo_image')) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
+                @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
                 @else
                     <img src="{{ asset('vendor/webkul/ui/assets/images/logo.png') }}" alt="{{ config('app.name') }}"/>
                 @endif
@@ -32,7 +32,7 @@
 
                 <div class="dropdown-list bottom-right">
                     <span class="app-version">{{ __('admin::app.layouts.app-version', ['version' => 'v' . config('app.version')]) }}</span>
-                    
+
                     <div class="dropdown-container">
                         <label>Account</label>
                         <ul>

@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Product\Repositories\ProductReviewImageRepository;
 
 class ReviewController extends Controller
 {
@@ -22,19 +23,30 @@ class ReviewController extends Controller
     protected $productReviewRepository;
 
     /**
+     * ProductReviewImageRepository object
+     *
+     * @var \Webkul\Product\Repositories\ProductReviewImageRepository
+     */
+    protected $productReviewImageRepository;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
+     * @param  \Webkul\Product\Repositories\ProductReviewImageRepository  $productReviewImageRepository
      * @return void
      */
     public function __construct(
         ProductRepository $productRepository,
-        ProductReviewRepository $productReviewRepository
+        ProductReviewRepository $productReviewRepository,
+        ProductReviewImageRepository $productReviewImageRepository
     ) {
         $this->productRepository = $productRepository;
 
         $this->productReviewRepository = $productReviewRepository;
+
+        $this->productReviewImageRepository = $productReviewImageRepository;
 
         parent::__construct();
     }
@@ -80,7 +92,9 @@ class ReviewController extends Controller
         $data['status'] = 'pending';
         $data['product_id'] = $id;
 
-        $this->productReviewRepository->create($data);
+        $review = $this->productReviewRepository->create($data);
+
+        $this->productReviewImageRepository->uploadImages($data, $review);
 
         session()->flash('success', trans('shop::app.response.submit-success', ['name' => 'Product Review']));
 

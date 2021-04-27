@@ -2,9 +2,11 @@
 
 namespace Webkul\CartRule\Http\Controllers;
 
+use Exception;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Validation\ValidationException;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 
@@ -87,7 +89,7 @@ class CartRuleController extends Controller
             ->replicate()
             ->fill([
                 'status' => 0,
-                'name'   => __('admin::app.copy-of') . ' ' . $originalCartRule->name,
+                'name'   => __('admin::app.copy-of') . $originalCartRule->name,
             ]);
 
         $copiedCartRule->save();
@@ -112,30 +114,39 @@ class CartRuleController extends Controller
      */
     public function store()
     {
-        $this->validate(request(), [
-            'name'                => 'required',
-            'channels'            => 'required|array|min:1',
-            'customer_groups'     => 'required|array|min:1',
-            'coupon_type'         => 'required',
-            'use_auto_generation' => 'required_if:coupon_type,==,1',
-            'coupon_code'         => 'required_if:use_auto_generation,==,0',
-            'starts_from'         => 'nullable|date',
-            'ends_till'           => 'nullable|date|after_or_equal:starts_from',
-            'action_type'         => 'required',
-            'discount_amount'     => 'required|numeric',
-        ]);
+        try {
+            $this->validate(request(), [
+                'name'                => 'required',
+                'channels'            => 'required|array|min:1',
+                'customer_groups'     => 'required|array|min:1',
+                'coupon_type'         => 'required',
+                'use_auto_generation' => 'required_if:coupon_type,==,1',
+                'coupon_code'         => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code',
+                'starts_from'         => 'nullable|date',
+                'ends_till'           => 'nullable|date|after_or_equal:starts_from',
+                'action_type'         => 'required',
+                'discount_amount'     => 'required|numeric',
+            ]);
 
-        $data = request()->all();
+            $data = request()->all();
 
-        Event::dispatch('promotions.cart_rule.create.before');
+            Event::dispatch('promotions.cart_rule.create.before');
 
-        $cartRule = $this->cartRuleRepository->create($data);
+            $cartRule = $this->cartRuleRepository->create($data);
 
-        Event::dispatch('promotions.cart_rule.create.after', $cartRule);
+            Event::dispatch('promotions.cart_rule.create.after', $cartRule);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Cart Rule']));
+            session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Cart Rule']));
 
-        return redirect()->route($this->_config['redirect']);
+            return redirect()->route($this->_config['redirect']);
+        } catch (ValidationException $e) {
+
+            if ($firstError = collect($e->errors())->first()) {
+                session()->flash('error', $firstError[0]);
+            }
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -162,30 +173,50 @@ class CartRuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate(request(), [
-            'name'                => 'required',
-            'channels'            => 'required|array|min:1',
-            'customer_groups'     => 'required|array|min:1',
-            'coupon_type'         => 'required',
-            'use_auto_generation' => 'required_if:coupon_type,==,1',
-            'coupon_code'         => 'required_if:use_auto_generation,==,0',
-            'starts_from'         => 'nullable|date',
-            'ends_till'           => 'nullable|date|after_or_equal:starts_from',
-            'action_type'         => 'required',
-            'discount_amount'     => 'required|numeric',
-        ]);
+        try {
+            $this->validate(request(), [
+                'name'                => 'required',
+                'channels'            => 'required|array|min:1',
+                'customer_groups'     => 'required|array|min:1',
+                'coupon_type'         => 'required',
+                'use_auto_generation' => 'required_if:coupon_type,==,1',
+                'starts_from'         => 'nullable|date',
+                'ends_till'           => 'nullable|date|after_or_equal:starts_from',
+                'action_type'         => 'required',
+                'discount_amount'     => 'required|numeric',
+            ]);
 
-        $cartRule = $this->cartRuleRepository->findOrFail($id);
+            $cartRule = $this->cartRuleRepository->findOrFail($id);
 
-        Event::dispatch('promotions.cart_rule.update.before', $cartRule);
+            if ($cartRule->coupon_type) {
+                if ($cartRule->cart_rule_coupon) {
+                    $this->validate(request(), [
+                        'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code,' . $cartRule->cart_rule_coupon->id,
+                    ]);
+                } else {
+                    $this->validate(request(), [
+                        'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code',
+                    ]);
+                }
+            }
 
-        $cartRule = $this->cartRuleRepository->update(request()->all(), $id);
+            Event::dispatch('promotions.cart_rule.update.before', $cartRule);
 
-        Event::dispatch('promotions.cart_rule.update.after', $cartRule);
+            $cartRule = $this->cartRuleRepository->update(request()->all(), $id);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Cart Rule']));
+            Event::dispatch('promotions.cart_rule.update.after', $cartRule);
 
-        return redirect()->route($this->_config['redirect']);
+            session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Cart Rule']));
+
+            return redirect()->route($this->_config['redirect']);
+        } catch (ValidationException $e) {
+
+            if ($firstError = collect($e->errors())->first()) {
+                session()->flash('error', $firstError[0]);
+            }
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -209,7 +240,7 @@ class CartRuleController extends Controller
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Cart Rule']));
 
             return response()->json(['message' => true], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Cart Rule']));
         }
 

@@ -8,8 +8,10 @@ use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\Product\Models\Product;
 
 $factory->define(BookingProduct::class, function (Faker $faker, array $attributes) {
+    $bookingTypes = ['event'];
+
     return [
-        'type' => array_rand(['event']),
+        'type' => $bookingTypes[array_rand(['event'])],
         'qty' => $faker->randomNumber(2),
         'available_from' => Carbon::yesterday(),
         'available_to' => Carbon::tomorrow(),

@@ -58,7 +58,7 @@ class SliderController extends Controller
         $channels = core()->getAllChannels();
 
         $locale = request()->get('locale') ?: core()->getCurrentLocale();
-        
+
         return view($this->_config['view'])->with("locale", $locale);
     }
 
@@ -72,10 +72,18 @@ class SliderController extends Controller
         $this->validate(request(), [
             'title'      => 'string|required',
             'channel_id' => 'required',
-            'image.*'    => 'required|mimes:jpeg,bmp,png,jpg',
+            'expired_at' => 'nullable|date',
+            'image.*'    => 'required|mimes:bmp,jpeg,jpg,png,webp',
         ]);
 
-        $result = $this->sliderRepository->save(request()->all());
+        $data = request()->all();
+        $data['expired_at'] = $data['expired_at'] ?: null;
+
+        if (isset($data['locale'])) {
+            $data['locale'] = implode(',', $data['locale']);
+        }
+
+        $result = $this->sliderRepository->save($data);
 
         if ($result) {
             session()->flash('success', trans('admin::app.settings.sliders.created-success'));
@@ -109,16 +117,24 @@ class SliderController extends Controller
         $this->validate(request(), [
             'title'      => 'string|required',
             'channel_id' => 'required',
-            'image.*'    => 'sometimes|mimes:jpeg,bmp,png,jpg',
+            'expired_at' => 'nullable|date',
+            'image.*'    => 'sometimes|mimes:bmp,jpeg,jpg,png,webp',
         ]);
+
+        $data = request()->all();
+        $data['expired_at'] = $data['expired_at'] ?: null;
+
+        if (isset($data['locale'])) {
+            $data['locale'] = implode(',', $data['locale']);
+        }
 
         if ( is_null(request()->image)) {
             session()->flash('error', trans('admin::app.settings.sliders.update-fail'));
-            
+
             return redirect()->back();
         }
 
-        $result = $this->sliderRepository->updateItem(request()->all(), $id);
+        $result = $this->sliderRepository->updateItem($data, $id);
 
         if ($result) {
             session()->flash('success', trans('admin::app.settings.sliders.update-success'));

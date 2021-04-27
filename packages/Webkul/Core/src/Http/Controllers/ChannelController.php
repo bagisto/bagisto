@@ -8,7 +8,7 @@ use Webkul\Core\Repositories\ChannelRepository;
 class ChannelController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
@@ -61,35 +61,40 @@ class ChannelController extends Controller
      */
     public function store()
     {
-        $this->validate(request(), [
-            'code'              => ['required', 'unique:channels,code', new \Webkul\Core\Contracts\Validations\Code],
-            'name'              => 'required',
-            'locales'           => 'required|array|min:1',
-            'default_locale_id' => 'required|in_array:locales.*',
-            'currencies'        => 'required|array|min:1',
-            'base_currency_id'  => 'required|in_array:currencies.*',
-            'root_category_id'  => 'required',
-            'logo.*'            => 'mimes:jpeg,jpg,bmp,png',
-            'favicon.*'         => 'mimes:jpeg,jpg,bmp,png',
-            'seo_title'         => 'required|string',
-            'seo_description'   => 'required|string',
-            'seo_keywords'      => 'required|string',
-            'hostname'          => 'unique:channels,hostname',
+        $data = $this->validate(request(), [
+            /* general */
+            'code'                  => ['required', 'unique:channels,code', new \Webkul\Core\Contracts\Validations\Code],
+            'name'                  => 'required',
+            'description'           => 'nullable',
+            'inventory_sources'     => 'required|array|min:1',
+            'root_category_id'      => 'required',
+            'hostname'              => 'unique:channels,hostname',
+
+            /* currencies and locales */
+            'locales'               => 'required|array|min:1',
+            'default_locale_id'     => 'required|in_array:locales.*',
+            'currencies'            => 'required|array|min:1',
+            'base_currency_id'      => 'required|in_array:currencies.*',
+
+            /* design */
+            'theme'                 => 'nullable',
+            'home_page_content'     => 'nullable',
+            'footer_content'        => 'nullable',
+            'logo.*'                => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'favicon.*'             => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+
+            /* seo */
+            'seo_title'             => 'required|string',
+            'seo_description'       => 'required|string',
+            'seo_keywords'          => 'required|string',
+
+            /* maintenance mode */
+            'is_maintenance_on'     => 'boolean',
+            'maintenance_mode_text' => 'nullable',
+            'allowed_ips'           => 'nullable'
         ]);
 
-        $data = request()->all();
-
-        $data['seo']['meta_title'] = $data['seo_title'];
-        $data['seo']['meta_description'] = $data['seo_description'];
-        $data['seo']['meta_keywords'] = $data['seo_keywords'];
-
-        unset($data['seo_title']);
-        unset($data['seo_description']);
-        unset($data['seo_keywords']);
-
-        $data['home_seo'] = json_encode($data['seo']);
-
-        unset($data['seo']);
+        $data = $this->setSEOContent($data);
 
         Event::dispatch('core.channel.create.before');
 
@@ -123,35 +128,50 @@ class ChannelController extends Controller
      */
     public function update($id)
     {
-        $this->validate(request(), [
-            'code'              => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'name'              => 'required',
-            'locales'           => 'required|array|min:1',
-            'inventory_sources' => 'required|array|min:1',
-            'default_locale_id' => 'required|in_array:locales.*',
-            'currencies'        => 'required|array|min:1',
-            'base_currency_id'  => 'required|in_array:currencies.*',
-            'root_category_id'  => 'required',
-            'logo.*'            => 'mimes:jpeg,jpg,bmp,png',
-            'favicon.*'         => 'mimes:jpeg,jpg,bmp,png',
-            'hostname'          => 'unique:channels,hostname,' . $id,
+        $locale = request()->get('locale') ?: app()->getLocale();
+
+        $data = $this->validate(request(), [
+            /* general */
+            'code'                             => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            $locale . '.name'                  => 'required',
+            $locale . '.description'           => 'nullable',
+            'inventory_sources'                => 'required|array|min:1',
+            'root_category_id'                 => 'required',
+            'hostname'                         => 'unique:channels,hostname,' . $id,
+
+            /* currencies and locales */
+            'locales'                          => 'required|array|min:1',
+            'default_locale_id'                => 'required|in_array:locales.*',
+            'currencies'                       => 'required|array|min:1',
+            'base_currency_id'                 => 'required|in_array:currencies.*',
+
+            /* design */
+            'theme'                            => 'nullable',
+            $locale . '.home_page_content'     => 'nullable',
+            $locale . '.footer_content'        => 'nullable',
+            'logo.*'                           => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'favicon.*'                        => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+
+            /* seo */
+            $locale . '.seo_title'             => 'nullable',
+            $locale . '.seo_description'       => 'nullable',
+            $locale . '.seo_keywords'          => 'nullable',
+
+            /* maintenance mode */
+            'is_maintenance_on'                => 'boolean',
+            $locale . '.maintenance_mode_text' => 'nullable',
+            'allowed_ips'                      => 'nullable'
         ]);
 
-        $data = request()->all();
-
-        $data['seo']['meta_title'] = $data['seo_title'];
-        $data['seo']['meta_description'] = $data['seo_description'];
-        $data['seo']['meta_keywords'] = $data['seo_keywords'];
-
-        unset($data['seo_title']);
-        unset($data['seo_description']);
-        unset($data['seo_keywords']);
-
-        $data['home_seo'] = json_encode($data['seo']);
+        $data = $this->setSEOContent($data, $locale);
 
         Event::dispatch('core.channel.update.before', $id);
 
         $channel = $this->channelRepository->update($data, $id);
+
+        if ($channel->base_currency->code !== session()->get('currency')) {
+            session()->put('currency', $channel->base_currency->code);
+        }
 
         Event::dispatch('core.channel.update.after', $channel);
 
@@ -184,11 +204,55 @@ class ChannelController extends Controller
 
                 return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
-                // session()->flash('warning', trans($e->getMessage()));
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Channel']));
             }
         }
 
         return response()->json(['message' => false], 400);
+    }
+
+    /**
+     * Set the seo content and return back the updated array.
+     *
+     * @param  array  $data
+     * @param  string  $locale
+     * @return array
+     */
+    private function setSEOContent(array $data, $locale = null)
+    {
+        $editedData = $data;
+
+        if ($locale) {
+            $editedData = $data[$locale];
+        }
+
+        $editedData['home_seo']['meta_title'] = $editedData['seo_title'];
+        $editedData['home_seo']['meta_description'] = $editedData['seo_description'];
+        $editedData['home_seo']['meta_keywords'] = $editedData['seo_keywords'];
+        $editedData['home_seo'] = json_encode($editedData['home_seo']);
+
+        $editedData = $this->unsetKeys($editedData, ['seo_title', 'seo_description', 'seo_keywords']);
+
+        if ($locale) {
+            $data[$locale] = $editedData;
+            $editedData = $data;
+        }
+
+        return $editedData;
+    }
+
+    /**
+     * Unset keys.
+     *
+     * @param  array  $keys
+     * @return array
+     */
+    private function unsetKeys($data, $keys)
+    {
+        foreach ($keys as $key) {
+            unset($data[$key]);
+        }
+
+        return $data;
     }
 }

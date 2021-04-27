@@ -2,13 +2,19 @@
 
 namespace Tests\Functional\Customer;
 
+use Faker\Factory;
+use FunctionalTester;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
-use FunctionalTester;
 
 class CustomerCest
 {
     public $fields = [];
+
+    public function _before(FunctionalTester $I): void
+    {
+        $I->useDefaultTheme();
+    }
 
     public function updateCustomerProfile(FunctionalTester $I): void
     {
@@ -32,8 +38,8 @@ class CustomerCest
 
     public function updateCustomerAddress(FunctionalTester $I): void
     {
-        $I->wantTo('Instantiate a european faker factory to have the vat provider available');
-        $faker = \Faker\Factory::create('at_AT');
+        // instantiate a european faker factory to have the vat provider available
+        $faker = Factory::create('at_AT');
 
         $formCssSelector = '#customer-address-form';
 
@@ -59,8 +65,8 @@ class CustomerCest
         ];
 
         foreach ($this->fields as $key => $value) {
-            // the following fields are rendered via javascript so we ignore them:
-            if (! in_array($key, [
+            // the following fields are rendered via javascript so we ignore them
+            if (!in_array($key, [
                 'country',
                 'state',
             ])) {
@@ -72,8 +78,10 @@ class CustomerCest
         $I->wantTo('Ensure that the company_name field is being displayed');
         $I->seeElement('.account-table-content > div:nth-child(2) > input:nth-child(2)');
 
-        // we need to use this css selector to hit the correct <form>. There is another one at the
-        // page header (search)
+        /*
+            We need to use this css selector to hit the correct <form>. There is another one at the
+            page header (search).
+        */
         $I->submitForm($formCssSelector, $this->fields);
         $I->seeInSource('The given vat id has a wrong format');
 

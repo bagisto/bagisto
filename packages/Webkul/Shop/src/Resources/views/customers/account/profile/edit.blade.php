@@ -12,7 +12,7 @@
         <div class="account-layout">
 
             <div class="account-head mb-10">
-                <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
+                <span class="back-icon"><a href="{{ route('customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
 
                 <span class="account-heading">{{ __('shop::app.customer.account.profile.edit-profile.title') }}</span>
 
@@ -76,6 +76,14 @@
 
                     {!! view_render_event('bagisto.shop.customers.account.profile.edit.email.after') !!}
 
+                    <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
+                        <label for="phone">{{ __('shop::app.customer.account.profile.phone') }}</label>
+                        <input type="text" class="control" name="phone" value="{{ old('phone') ?? $customer->phone }}" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.phone') }}&quot;">
+                        <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
+                    </div>
+
+                    {!! view_render_event('bagisto.shop.customers.account.profile.edit.phone.after') !!}
+
                     <div class="control-group" :class="[errors.has('oldpassword') ? 'has-error' : '']">
                         <label for="password">{{ __('shop::app.customer.account.profile.opassword') }}</label>
                         <input type="password" class="control" name="oldpassword" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.opassword') }}&quot;" v-validate="'min:6'">
@@ -87,7 +95,7 @@
                     <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                         <label for="password">{{ __('shop::app.customer.account.profile.password') }}</label>
 
-                        <input type="password" id="password" class="control" name="password" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.password') }}&quot;" v-validate="'min:6'">
+                        <input type="password" id="password" class="control" name="password" ref="password" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.password') }}&quot;" v-validate="'min:6'">
                         <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                     </div>
 
@@ -99,6 +107,13 @@
                         <input type="password" id="password_confirmation" class="control" name="password_confirmation" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.cpassword') }}&quot;" v-validate="'min:6|confirmed:password'">
                         <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
                     </div>
+
+                    @if (core()->getConfigData('customer.settings.newsletter.subscription'))
+                        <div class="control-group">
+                            <input type="checkbox" id="checkbox2" name="subscribed_to_news_letter"@if (isset($customer->subscription)) value="{{ $customer->subscription->is_subscribed }}" {{ $customer->subscription->is_subscribed ? 'checked' : ''}} @endif>
+                            <span>{{ __('shop::app.customer.signup-form.subscribe-to-newsletter') }}</span>
+                        </div>
+                    @endif
 
                     {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.after', ['customer' => $customer]) !!}
 

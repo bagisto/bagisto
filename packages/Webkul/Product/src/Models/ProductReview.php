@@ -34,4 +34,12 @@ class ProductReview extends Model implements ProductReviewContract
     {
         return $this->belongsTo(ProductProxy::modelClass());
     }
+
+    /**
+     * The images that belong to the review.
+     */
+    public function images()
+    {
+        return $this->hasMany(ProductReviewImageProxy::modelClass(), 'review_id');
+    }
 }

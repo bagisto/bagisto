@@ -98,6 +98,7 @@ return [
             'footer-left-content' => 'Contenuti Footer Sinistra',
             'subscription-content' => 'Conenuti Subscription bar',
             'sidebar-categories' => 'Categorie Sidebar',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>Ci piace personalizzare software e risolvere problemi del mondo reale. Siamo fortemente  to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.</p>',
             'slider-path' => 'Percorso Slider',
             'category-logo' => 'Logo Categoria',
@@ -113,7 +114,17 @@ return [
             'advertisement-three' => 'Advertisement Three Images',
             'images' => 'Immmagini',
             'general' => 'Generale',
-            'add-image-btn-title' => 'Aggiungi Immagine'
+            'add-image-btn-title' => 'Aggiungi Immagine',
+            'footer-middle' => [
+                'about-us'  => 'About Us',
+                'customer-service' => 'Customer Service',
+                'whats-new' => 'What\'s New',
+                'contact-us' => 'Contact Us',
+                'order-and-returns' => 'Order and Returns',
+                'payment-policy' => 'Payment Policy',
+                'shipping-policy' => 'Shipping Policy',
+                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+            ]
         ],
         'category' => [
             'save-btn-title' => 'Salva Menu',
@@ -198,9 +209,11 @@ return [
         'compare' => [
             'text'                  => 'Compara',
             'compare_similar_items' => 'Compara articoli simili',
+            'add-tooltip'           => 'Aggiungi prodotto per confrontare l\'elenco',
             'added'                 => 'Articolo aggiunto alla lista di comparazione',
             'already_added'         => 'Articolo già aggiunto alla lista di comparazione',
             'removed'               => 'Articolo rimosso dalla lista di comparazione',
+            'removed-all'           => 'Tutti gli elementi rimossi correttamente dall\'elenco di confronto',
             'empty-text'            => "Non hai articoli nella tua lista di comparazione",
         ],
         'login-form' => [
@@ -222,7 +235,10 @@ return [
             'forgot-password' => 'Password dimenticata',
             'recover-password' => 'Recupera Password',
             'recover-password-text' => 'Se hai dimenticato la password, recuperala inserendo il tuo indirizzo email.',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'Tutti gli articoli dalla tua lista dei desideri sono stati rimossi',
+        ],
     ],
 
     'error' => [
@@ -273,6 +289,8 @@ return [
             'downloadables' => 'Prodotti Scaricabili',
             'confirm-new-password' => 'Conferma nuova password',
             'enter-current-password' => 'Inserisci la password attuale',
+            'download' => 'Scarica',
+            'no-file-available' => 'Nessun file disponibile!',
 
             'alert' => [
                 'info' => 'Info',

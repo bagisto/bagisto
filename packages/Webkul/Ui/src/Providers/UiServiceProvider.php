@@ -2,8 +2,8 @@
 
 namespace Webkul\Ui\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\ServiceProvider;
 
 class UiServiceProvider extends ServiceProvider
 {
@@ -25,7 +25,7 @@ class UiServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'ui');
 
         Paginator::defaultView('ui::partials.pagination');
-        
+
         Paginator::defaultSimpleView('ui::partials.pagination');
     }
 

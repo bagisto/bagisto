@@ -1,5 +1,4 @@
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @extends('shop::layouts.master')
 
@@ -17,6 +16,12 @@
             width: unset;
             float: right;
         }
+
+        .alert-wishlist {
+            display: inline-block;
+            position: relative;
+            top: -2px;
+        }
     </style>
 @endpush
 
@@ -26,7 +31,7 @@
     <script type="text/x-template" id="cart-template">
         <div class="container">
             <section class="cart-details row no-margin col-12">
-                <h1 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h1>
+                <h2 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h2>
 
                 @if ($cart)
                     <div class="cart-details-header col-lg-6 col-md-12">
@@ -84,7 +89,7 @@
                                                     :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`">
                                             </a>
 
-                                            <div class="product-details-content col-7 pr0">
+                                            <div class="product-details-content col-6 pr0">
                                                 <div class="row item-title no-margin">
                                                     <a
                                                         href="{{ route('shop.productOrCategory.index', $url_key) }}"
@@ -109,51 +114,56 @@
                                                 @endif
 
                                                 <div class="row col-12 no-padding no-margin">
-                                                    @include ('shop::products.price', ['product' => $product])
+                                                    <div class="product-price">
+                                                        <span>{{ core()->currency($item->base_price) }}</span>
+                                                    </div>
                                                 </div>
 
                                                 @php
                                                     $moveToWishlist = trans('shop::app.checkout.cart.move-to-wishlist');
+
+                                                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                                                 @endphp
 
                                                 <div class="no-padding col-12 cursor-pointer fs16">
                                                     @auth('customer')
-                                                        @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                            @include('shop::products.wishlist', [
-                                                                'route' => route('shop.movetowishlist', $item->id),
-                                                                'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
-                                                            ])
-                                                        @else
-                                                            @include('shop::products.wishlist', [
-                                                                'route' => route('shop.movetowishlist', $item->child->id),
-                                                                'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
-                                                            ])
+                                                        @if ($showWishlist)
+                                                            @if ($item->parent_id != 'null' ||$item->parent_id != null)
+                                                                <div @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')" class="alert-wishlist">
+                                                                    @include('shop::products.wishlist', [
+                                                                        'route' => route('shop.movetowishlist', $item->id),
+                                                                        'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
+                                                                    ])
+                                                                </div>
+                                                            @else
+                                                                <div @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')" class="alert-wishlist">
+                                                                    @include('shop::products.wishlist', [
+                                                                        'route' => route('shop.movetowishlist', $item->child->id),
+                                                                        'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
+                                                                    ])
+                                                                </div>
+                                                            @endif
                                                         @endif
                                                     @endauth
 
-                                                    @guest('customer')
-                                                        @include('shop::products.wishlist', [
-                                                            'isMoveToWishlist' => route('shop.checkout.cart.remove', ['id' => $item->id]),
-                                                            'text' => "<span class='align-vertical-top'>$moveToWishlist</span>"
-                                                        ])
-                                                    @endguest
+                                                    <div class="d-inline-block">
+                                                        <a
+                                                            class="unset
+                                                                @auth('customer')
+                                                                    ml10
+                                                                @endauth
+                                                            "
+                                                            href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
+                                                            @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 
-                                                    <a
-                                                        class="unset
-                                                            @auth('customer')
-                                                                ml10
-                                                            @endauth
-                                                        "
-                                                        href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
-                                                        @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
-
-                                                        <span class="rango-delete fs24"></span>
-                                                        <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
-                                                    </a>
+                                                            <span class="rango-delete fs24"></span>
+                                                            <span class="align-vertical-super">{{ __('shop::app.checkout.cart.remove') }}</span>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div class="product-quantity col-2 no-padding">
+                                            <div class="product-quantity col-3 no-padding">
                                                 <quantity-changer
                                                     :control-name="'qty[{{$item->id}}]'"
                                                     quantity="{{ $item->quantity }}">
@@ -238,7 +248,7 @@
 
                                     <button
                                         type="submit"
-                                        class="theme-btn light mr15 pull-right unset">
+                                        class="theme-btn light mr15 float-right unset">
 
                                         {{ __('shop::app.checkout.cart.update-cart') }}
                                     </button>

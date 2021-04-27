@@ -13,7 +13,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.cms.index') }}'"></i>
 
                         {{ __('admin::app.cms.pages.edit-title') }}
                     </h1>
@@ -66,7 +66,7 @@
                                 <select type="text" class="control" name="channels[]" v-validate="'required'" value="{{ old('channel[]') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.channel') }}&quot;" multiple="multiple">
                                     @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                         <option value="{{ $channel->id }}" {{ in_array($channel->id, $selectedOptionIds) ? 'selected' : '' }}>
-                                            {{ $channel->name }}
+                                            {{ core()->getChannelName($channel) }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -130,8 +130,8 @@
                 selector: 'textarea#content',
                 height: 200,
                 width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code',
+                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr | numlist bullist outdent indent  | removeformat | code | table',
                 image_advtab: true,
                 valid_elements : '*[*]'
             });

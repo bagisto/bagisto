@@ -20,6 +20,7 @@ class UserDataGrid extends DataGrid
         $this->addFilter('user_id', 'u.id');
         $this->addFilter('user_name', 'u.name');
         $this->addFilter('role_name', 'ro.name');
+        $this->addFilter('status', 'u.status');
 
         $this->setQueryBuilder($queryBuilder);
     }

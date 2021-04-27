@@ -2,9 +2,9 @@
 
 namespace Webkul\Sales\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Webkul\Core\Providers\CoreModuleServiceProvider;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     protected $models = [
         \Webkul\Sales\Models\Order::class,
@@ -19,5 +19,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Sales\Models\ShipmentItem::class,
         \Webkul\Sales\Models\Refund::class,
         \Webkul\Sales\Models\RefundItem::class,
+        \Webkul\Sales\Models\OrderTransaction::class,
     ];
 }

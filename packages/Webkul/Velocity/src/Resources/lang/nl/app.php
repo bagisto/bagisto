@@ -97,6 +97,7 @@ return [
             'footer-left-content' => 'Inhoud voettekst links',
             'subscription-content' => 'Abonnementsbalk Inhoud',
             'sidebar-categories' => 'Sidebar categorieën',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>We houden ervan om software te maken en de echte wereldproblemen met de binaire bestanden op te lossen. We zijn zeer toegewijd aan onze doelen. We investeren onze middelen om gebruiksvriendelijke software en applicaties van wereldklasse te creëren met de allerbeste, geavanceerde technologie-expertise.</p>',
             'slider-path' => 'Schuifpad',
             'category-logo' => 'Category logo',
@@ -110,7 +111,17 @@ return [
             'advertisement-three' => 'Advertisement Three Images',
             'images' => 'Images',
             'general' => 'General',
-            'add-image-btn-title' => 'Add Image'
+            'add-image-btn-title' => 'Add Image',
+            'footer-middle' => [
+                'about-us'  => 'About Us',
+                'customer-service' => 'Customer Service',
+                'whats-new' => 'What\'s New',
+                'contact-us' => 'Contact Us',
+                'order-and-returns' => 'Order and Returns',
+                'payment-policy' => 'Payment Policy',
+                'shipping-policy' => 'Shipping Policy',
+                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+            ]
         ],
         'category' => [
             'save-btn-title' => 'Save Menu',
@@ -194,9 +205,11 @@ return [
         'compare' => [
             'text' => 'Compare',
             'compare_similar_items' => 'Compare Similar Items',
+            'add-tooltip' => 'Voeg product toe aan vergelijkingslijst',
             'added' => 'Item successfully added to compare list',
             'already_added' => 'Item already added to compare list',
             'removed' => 'Item successfully removed from compare list',
+            'removed-all' => 'Alle items zijn met succes verwijderd uit de vergelijkingslijst',
             'empty-text' => "You don't have any items in your compare list",
             'product_image' => 'Product Image',
             'actions' => 'Actions',
@@ -220,7 +233,10 @@ return [
             'forgot-password' => 'Forgot Password',
             'recover-password' => 'Recover Password',
             'recover-password-text' => 'Als u uw wachtwoord bent vergeten, kan u dit herstellen door uw e-mailadres in te voeren..',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'Alle items van je verlanglijst zijn verwijderd',
+        ],
     ],
 
     'error' => [
@@ -265,12 +281,14 @@ return [
             'update' => 'Bijwerken',
             'reviews' => 'Reviews',
             'addresses' => 'Adressen',
+            'download' => 'Downloaden',
             'currencies' => 'Currencies',
             'top-brands' => 'Top merken',
             'new-password' => 'Nieuw wachtwoord',
             'downloadables' => 'Downloadable Products',
-            'confirm-new-password' => 'Bevestig uw nieuw wachtwoord',
             'enter-current-password' => 'Huidig wachtwoord',
+            'no-file-available' => 'Geen bestand beschikbaar!',
+            'confirm-new-password' => 'Bevestig uw nieuw wachtwoord',
 
             'alert' => [
                 'info' => 'Info',

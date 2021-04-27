@@ -13,7 +13,8 @@ class Medium implements FilterInterface
      */
     public function applyFilter(Image $image)
     {
-        $width = $height = 280;
+        $width = core()->getConfigData('catalog.products.cache-medium-image.width') ?? 280;
+        $height = core()->getConfigData('catalog.products.cache-medium-image.height') ?? 280;
 
         $image->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();

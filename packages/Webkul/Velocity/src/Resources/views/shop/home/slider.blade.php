@@ -8,14 +8,14 @@
 
 @push('scripts')
     <script type="text/x-template" id="slider-template">
-        <div class="slides-container ltr">
+        <div class="slides-container {{ $direction }}">
             <carousel-component
                 loop="true"
                 timeout="5000"
                 autoplay="true"
                 slides-per-page="1"
                 navigation-enabled="hide"
-                :slider-direction="direction == 'rtl' ? 'backward' : 'forward'"
+                :locale-direction="direction"
                 :slides-count="{{ ! empty($sliderData) ? sizeof($sliderData) : 1 }}">
 
                 @if (! empty($sliderData))
@@ -24,7 +24,7 @@
                     @php
                         $textContent = str_replace("\r\n", '', $slider['content']);
                     @endphp
-                        <slide slot="slide-{{ $index }}">
+                        <slide slot="slide-{{ $index }}" title=" ">
                             <a @if($slider['slider_path']) href="{{ $slider['slider_path'] }}" @endif>
                                 <img
                                     class="col-12 no-padding banner-icon"
@@ -41,7 +41,8 @@
                         <img
                             loading="lazy"
                             class="col-12 no-padding banner-icon"
-                            src="{{ asset('/themes/velocity/assets/images/banner.png') }}" />
+                            src="{{ asset('/themes/velocity/assets/images/banner.webp') }}"
+                            alt=""/>
                     </slide>
                 @endif
 

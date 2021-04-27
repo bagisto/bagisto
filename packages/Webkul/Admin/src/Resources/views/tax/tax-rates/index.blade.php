@@ -25,7 +25,7 @@
                     </span>
                 </div>
 
-                <a href="{{ route('admin.tax-rates.show') }}" class="btn btn-lg btn-primary">
+                <a href="{{ route('admin.tax-rates.create') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.settings.tax-rates.add-title') }}
                 </a>
             </div>

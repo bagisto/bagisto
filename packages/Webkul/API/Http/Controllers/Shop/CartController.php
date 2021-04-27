@@ -2,15 +2,17 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
+use Cart;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
-use Cart;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
 
 class CartController extends Controller
 {
@@ -70,7 +72,7 @@ class CartController extends Controller
     }
 
     /**
-     * Get customer cart
+     * Get customer cart.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -142,22 +144,28 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update()
+    public function update(Request $request)
     {
-        foreach (request()->get('qty') as $qty) {
+        $this->validate($request, [
+            'qty' => 'required|array',
+        ]);
+
+        $requestedQuantity = $request->get('qty');
+
+        foreach ($requestedQuantity as $qty) {
             if ($qty <= 0) {
                 return response()->json([
                     'message' => trans('shop::app.checkout.cart.quantity.illegal'),
-                ], 401);
+                ], Response::HTTP_UNAUTHORIZED);
             }
         }
 
-        foreach (request()->get('qty') as $itemId => $qty) {
+        foreach ($requestedQuantity as $itemId => $qty) {
             $item = $this->cartItemRepository->findOneByField('id', $itemId);
 
             Event::dispatch('checkout.cart.item.update.before', $itemId);
 
-            Cart::updateItems(request()->all());
+            Cart::updateItems(['qty' => $requestedQuantity]);
 
             Event::dispatch('checkout.cart.item.update.after', $item);
         }
@@ -240,6 +248,57 @@ class CartController extends Controller
         return response()->json([
             'message' => __('shop::app.checkout.cart.move-to-wishlist-success'),
             'data'    => $cart ? new CartResource($cart) : null,
+        ]);
+    }
+
+    /**
+     * Apply coupon code.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function applyCoupon()
+    {
+        $couponCode = request()->get('code');
+
+        try {
+            if (strlen($couponCode)) {
+                Cart::setCouponCode($couponCode)->collectTotals();
+
+                if (Cart::getCart()->coupon_code == $couponCode) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => trans('shop::app.checkout.total.success-coupon'),
+                    ]);
+                }
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.total.invalid-coupon'),
+            ]);
+        } catch (\Exception $e) {
+            report($e);
+
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.total.coupon-apply-issue'),
+            ]);
+        }
+
+    }
+
+    /**
+     * Remove coupon code.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeCoupon()
+    {
+        Cart::removeCouponCode()->collectTotals();
+
+        return response()->json([
+            'success' => true,
+            'message' => trans('shop::app.checkout.total.remove-coupon'),
         ]);
     }
 }

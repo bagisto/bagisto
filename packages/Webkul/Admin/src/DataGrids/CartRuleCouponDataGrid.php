@@ -13,9 +13,13 @@ class CartRuleCouponDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
+        $route = request()->route() ? request()->route()->getName() : "" ;
+
+        $cartRuleId = $route == 'admin.cart-rules.edit' ? collect(request()->segments())->last() : last(explode("/", url()->previous()));
+
         $queryBuilder = DB::table('cart_rule_coupons')
-            ->addSelect('id', 'code', 'created_at', 'expired_at', 'times_used')
-            ->where('cart_rule_coupons.cart_rule_id', collect(request()->segments())->last());
+                ->addSelect('id', 'code', 'created_at', 'expired_at', 'times_used')
+                ->where('cart_rule_coupons.cart_rule_id', $cartRuleId);
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -74,7 +78,7 @@ class CartRuleCouponDataGrid extends DataGrid
             'type'   => 'delete',
             'action' => route('admin.cart-rule-coupons.mass-delete'),
             'label'  => trans('admin::app.datagrid.delete'),
-            'method' => 'DELETE',
+            'method' => 'POST',
         ]);
     }
 }

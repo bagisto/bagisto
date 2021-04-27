@@ -67,7 +67,7 @@ class ExchangeRates extends ExchangeRate
             $result = json_decode($result->getBody()->getContents(), true);
 
             if (isset($result['success']) && ! $result['success']) {
-                throw new E\xception(
+                throw new \Exception(
                     isset($result['error']['info'])
                     ? $result['error']['info']
                     : $result['error']['type'], 1);

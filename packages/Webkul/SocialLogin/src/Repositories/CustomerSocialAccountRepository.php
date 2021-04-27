@@ -67,15 +67,11 @@ class CustomerSocialAccountRepository extends Repository
             'provider_name' => $provider,
             'provider_id'   => $providerUser->getId(),
         ]);
-
-        $data['customer_group_id'] = $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id;
-
-        dd($data);
-        
+  
         if ($account) {
             return $account->customer;
         } else {
-            $customer = $this->customerRepository->findOneByField('email', $providerUser->getEmail());
+            $customer = $providerUser->getEmail() ? $this->customerRepository->findOneByField('email', $providerUser->getEmail()) : null;
  
             if (! $customer) {
                 $names = $this->getFirstLastName($providerUser->getName());

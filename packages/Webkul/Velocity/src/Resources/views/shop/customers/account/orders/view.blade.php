@@ -28,7 +28,7 @@
 
                 @if ($order->canCancel())
                     <span class="account-action">
-                        <a href="{{ route('customer.orders.cancel', $order->id) }}" class="theme-btn light unset pull-right" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right">
+                        <a href="{{ route('customer.orders.cancel', $order->id) }}" class="theme-btn light unset float-right" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right">
                             {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
                         </a>
                     </span>
@@ -167,6 +167,9 @@
                                             @if ($order->base_discount_amount > 0)
                                                 <tr>
                                                     <td>{{ __('shop::app.customer.account.order.view.discount') }}
+                                                        @if ($order->coupon_code)
+                                                            ({{ $order->coupon_code }})
+                                                        @endif
                                                         <span class="dash-icon">-</span>
                                                     </td>
                                                     <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
@@ -205,7 +208,12 @@
                                                 <td>{{ __('shop::app.customer.account.order.view.total-due') }}
                                                     <span class="dash-icon">-</span>
                                                 </td>
-                                                <td>{{ core()->formatPrice($order->total_due, $order->order_currency_code) }}</td>
+
+                                                @if($order->status !== 'canceled')
+                                                    <td>{{ core()->formatPrice($order->total_due, $order->order_currency_code) }}</td>
+                                                @else
+                                                    <td>{{ core()->formatPrice(0.00, $order->order_currency_code) }}</td>
+                                                @endif
                                             </tr>
                                         <tbody>
                                     </table>
@@ -223,7 +231,7 @@
                                     <div class="section-title">
                                         <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->id]) }}</span>
 
-                                        <a href="{{ route('customer.orders.print', $invoice->id) }}" class="pull-right">
+                                        <a href="{{ route('customer.orders.print', $invoice->id) }}" class="float-right">
                                             {{ __('shop::app.customer.account.order.view.print') }}
                                         </a>
                                     </div>
@@ -550,6 +558,15 @@
 
                                 <div class="box-content">
                                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+
+                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                                    @if (! empty($additionalDetails))
+                                        <div class="instructions">
+                                            <label>{{ $additionalDetails['title'] }}</label>
+                                            <p>{{ $additionalDetails['value'] }}</p>
+                                        </div>
+                                    @endif
 
                                     {!! view_render_event('bagisto.shop.customers.account.orders.view.payment-method.after', ['order' => $order]) !!}
                                 </div>

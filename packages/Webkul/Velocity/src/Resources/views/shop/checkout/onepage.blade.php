@@ -67,6 +67,7 @@
                                         class="theme-btn"
                                         @click="placeOrder()"
                                         :disabled="!isPlaceOrderEnabled"
+                                        v-if="selected_payment_method.method != 'paypal_smart_button'"
                                         id="checkout-place-order-button">
                                         {{ __('shop::app.checkout.onepage.place-order') }}
                                     </button>
@@ -78,6 +79,8 @@
 
                 <div class="col-lg-4 col-md-12 offset-lg-1 order-summary-container top pt0">
                     <summary-section :key="summeryComponentKey"></summary-section>
+
+                    <div class="paypal-button-container mt10"></div>
                 </div>
             </div>
         </div>
@@ -129,8 +132,8 @@
                         new_shipping_address: false,
                         selected_payment_method: '',
                         selected_shipping_method: '',
-                        country: @json(core()->countries()),
-                        countryStates: @json(core()->groupedStatesByCountries()),
+                        countries: [],
+                        countryStates: [],
 
                         step_numbers: {
                             'information': 1,
@@ -142,7 +145,7 @@
                         address: {
                             billing: {
                                 address1: [''],
-
+                                save_as_address: false,
                                 use_for_shipping: true,
                             },
 
@@ -154,6 +157,10 @@
                 },
 
                 created: function () {
+                    this.fetchCountries();
+
+                    this.fetchCountryStates();
+
                     this.getOrderSummary();
 
                     if (! customerAddress) {
@@ -170,11 +177,11 @@
                         } else {
                             this.allAddress = customerAddress;
 
-                            for (var country in this.country) {
-                                for (var code in this.allAddress) {
+                            for (let country in this.countries) {
+                                for (let code in this.allAddress) {
                                     if (this.allAddress[code].country) {
-                                        if (this.allAddress[code].country == this.country[country].code) {
-                                            this.allAddress[code]['country'] = this.country[country].name;
+                                        if (this.allAddress[code].country == this.countries[country].code) {
+                                            this.allAddress[code]['country'] = this.countries[country].name;
                                         }
                                     }
                                 }
@@ -191,6 +198,26 @@
                         }
                     },
 
+                    fetchCountries: function () {
+                        let countriesEndPoint = `${this.$root.baseUrl}/api/countries?pagination=0`;
+
+                        this.$http.get(countriesEndPoint)
+                            .then(response => {
+                                this.countries = response.data.data;
+                            })
+                            .catch(function (error) {});
+                    },
+
+                    fetchCountryStates: function () {
+                        let countryStateEndPoint = `${this.$root.baseUrl}/api/country-states?pagination=0`;
+
+                        this.$http.get(countryStateEndPoint)
+                            .then(response => {
+                                this.countryStates = response.data.data;
+                            })
+                            .catch(function (error) {});
+                    },
+
                     haveStates: function (addressType) {
                         if (this.countryStates[this.address[addressType].country] && this.countryStates[this.address[addressType].country].length)
                             return true;
@@ -198,7 +225,7 @@
                         return false;
                     },
 
-                    validateForm: function (scope) {
+                    validateForm: async function (scope) {
                         var isManualValidationFail = false;
 
                         if (scope == 'address-form') {
@@ -206,13 +233,18 @@
                         }
 
                         if (! isManualValidationFail) {
-                            this.$validator.validateAll(scope)
+                            await this.$validator.validateAll(scope)
                             .then(result => {
                                 if (result) {
-                                    this.$root.showLoader();
-
                                     switch (scope) {
                                         case 'address-form':
+                                            /* loader will activate only when save as address is clicked */
+                                            if (this.address.billing.save_as_address) {
+                                                this.$root.showLoader();
+                                            }
+
+                                            /* this is outside because save as address also calling for
+                                               saving the address in the order only */
                                             this.saveAddress();
                                             break;
 
@@ -333,7 +365,7 @@
                             .catch(function (error) {})
                     },
 
-                    saveAddress: function () {
+                    saveAddress: async function () {
                         this.disable_button = true;
 
                         if (this.allAddress.length > 0) {
@@ -406,7 +438,7 @@
                             })
                     },
 
-                    saveShipping: function () {
+                    saveShipping: async function () {
                         this.disable_button = true;
 
                         this.$http.post("{{ route('shop.checkout.save-shipping') }}", {'shipping_method': this.selected_shipping_method})
@@ -436,7 +468,7 @@
                             })
                     },
 
-                    savePayment: function () {
+                    savePayment: async function () {
                         this.disable_button = true;
 
                         if (this.isCheckPayment) {
@@ -466,7 +498,7 @@
                         }
                     },
 
-                    placeOrder: function () {
+                    placeOrder: async function () {
                         if (this.isPlaceOrderEnabled) {
                             this.disable_button = false;
                             this.isPlaceOrderEnabled = false;
@@ -584,7 +616,7 @@
 
                         this.$emit('onShippingMethodSelected', this.selected_shipping_method)
 
-                        eventBus.$emit('after-shipping-method-selected');
+                        eventBus.$emit('after-shipping-method-selected', this.selected_shipping_method);
                     }
                 }
             })
@@ -630,7 +662,7 @@
 
                         this.$emit('onPaymentMethodSelected', this.payment)
 
-                        eventBus.$emit('after-payment-method-selected');
+                        eventBus.$emit('after-payment-method-selected', this.payment);
                     }
                 }
             })

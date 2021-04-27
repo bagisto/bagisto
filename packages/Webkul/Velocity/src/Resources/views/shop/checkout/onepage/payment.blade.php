@@ -17,7 +17,7 @@
 
                     <div class="row col-12">
                         <div>
-                            <label class="radio-container">
+                            <label class="radio-container" style="position: absolute;">
                                 <input
                                     type="radio"
                                     name="payment[method]"
@@ -32,7 +32,7 @@
                             </label>
                         </div>
 
-                        <div class="pl30">
+                        <div class="pl40">
                             <div class="row">
                                 <span class="payment-method method-label">
                                     <b>{{ $payment['method_title'] }}</b>
@@ -42,6 +42,15 @@
                             <div class="row">
                                 <span class="method-summary">{{ __($payment['description']) }}</span>
                             </div>
+
+                            <?php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($payment['method']); ?>
+
+                            @if (! empty($additionalDetails))
+                                <div class="instructions" v-show="payment.method == '{{$payment['method']}}'">
+                                    <label>{{ $additionalDetails['title'] }}</label>
+                                    <p>{{ $additionalDetails['value'] }}</p>
+                                </div>
+                            @endif
                         </div>
                     </div>
 

@@ -6,8 +6,16 @@
 
 @section('content')
     <div class="content">
-        <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
-        <?php $channel = request()->get('channel') ?: core()->getDefaultChannelCode(); ?>
+        @php
+            $locale = request()->get('locale') ?: app()->getLocale();
+            $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
+
+            $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+
+            if (! $channelLocales->contains('code', $locale)) {
+                $locale = config('app.fallback_locale');
+            }
+        @endphp
 
         {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
@@ -18,7 +26,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link"
-                           onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                           onclick="window.location = '{{ route('admin.catalog.products.index') }}'"></i>
 
                         {{ __('admin::app.catalog.products.edit-title') }}
                     </h1>
@@ -29,7 +37,7 @@
 
                                 <option
                                     value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
-                                    {{ $channelModel->name }}
+                                    {{ core()->getChannelName($channelModel) }}
                                 </option>
 
                             @endforeach
@@ -38,7 +46,7 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" name="locale">
-                            @foreach (core()->getAllLocales() as $localeModel)
+                            @foreach ($channelLocales as $localeModel)
 
                                 <option
                                     value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
@@ -89,6 +97,16 @@
 
                                         if ($attribute->type == 'price') {
                                             array_push($validations, 'decimal');
+                                        }
+
+                                        if ($attribute->type == 'file') {
+                                            $retVal = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048' ;
+                                            array_push($validations, 'size:' . $retVal);
+                                        }
+
+                                        if ($attribute->type == 'image') {
+                                            $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048' ;
+                                            array_push($validations, 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp');
                                         }
 
                                         array_push($validations, $attribute->validation);
@@ -189,6 +207,13 @@
         $(document).ready(function () {
             $('#channel-switcher, #locale-switcher').on('change', function (e) {
                 $('#channel-switcher').val()
+
+                if (event.target.id == 'channel-switcher') {
+                    let locale = "{{ app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales->first()->code }}";
+
+                    $('#locale-switcher').val(locale);
+                }
+
                 var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
 
                 window.location.href = "{{ route('admin.catalog.products.edit', $product->id)  }}" + query;

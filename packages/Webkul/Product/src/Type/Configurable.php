@@ -2,9 +2,14 @@
 
 namespace Webkul\Product\Type;
 
+use Webkul\Customer\Contracts\CartItem;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Facades\ProductImage;
 use Illuminate\Support\Str;
+use Webkul\Checkout\Models\CartItem as CartItemModel;
+use Illuminate\Support\Facades\DB;
 
 class Configurable extends AbstractType
 {
@@ -25,7 +30,8 @@ class Configurable extends AbstractType
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.variations',
         'admin::catalog.products.accordians.channels',
-        'admin::catalog.products.accordians.product-links'
+        'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**
@@ -90,8 +96,9 @@ class Configurable extends AbstractType
     public function update(array $data, $id, $attribute = "id")
     {
         $product = parent::update($data, $id, $attribute);
+        $route = request()->route() ? request()->route()->getName() : '';
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if ($route != 'admin.catalog.products.massupdate') {
             $previousVariantIds = $product->variants->pluck('id');
 
             if (isset($data['variants'])) {
@@ -351,14 +358,16 @@ class Configurable extends AbstractType
     {
         $minPrices = [];
 
+        /* method is calling many time so using variable */
+        $tablePrefix = DB::getTablePrefix();
+
         $result = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
             ->distinct()
             ->where('products.parent_id', $this->product->id)
-            ->selectRaw('IF( product_flat.special_price_from IS NOT NULL
-            AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
-            AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS min_price')
+            ->selectRaw("IF( {$tablePrefix}product_flat.special_price_from IS NOT NULL
+            AND {$tablePrefix}product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= {$tablePrefix}product_flat.special_price_from
+            AND NOW( ) <= {$tablePrefix}product_flat.special_price_to, IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , {$tablePrefix}product_flat.price ) , IF( {$tablePrefix}product_flat.special_price_from IS NULL , IF( {$tablePrefix}product_flat.special_price_to IS NULL , IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , IF( NOW( ) <= {$tablePrefix}product_flat.special_price_to, IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , {$tablePrefix}product_flat.price ) ) , IF( {$tablePrefix}product_flat.special_price_to IS NULL , IF( NOW( ) >= {$tablePrefix}product_flat.special_price_from, IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , {$tablePrefix}product_flat.price ) , {$tablePrefix}product_flat.price ) ) ) AS min_price")
             ->where('product_flat.channel', core()->getCurrentChannelCode())
-            ->where('product_flat.locale', app()->getLocale())
             ->get();
 
         foreach ($result as $price) {
@@ -373,6 +382,49 @@ class Configurable extends AbstractType
     }
 
     /**
+     * Get product offer price
+     *
+     * @return float
+     */
+    public function getOfferPrice() {
+        $rulePrices = $customerGroupPrices = [];
+
+        foreach ($this->product->variants as $variant) {
+            $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($variant);
+
+            if ($rulePrice) {
+                $rulePrices[] = $rulePrice->price;
+            }
+
+            $customerGroupPrices[] = $this->getCustomerGroupPrice($variant, 1);
+        }
+
+        if ($rulePrices || $customerGroupPrices) {
+            return min(array_merge($rulePrices, $customerGroupPrices));
+        }
+
+        return [];
+    }
+
+     /**
+     * Check for offer
+     *
+     * @return bool
+     */
+    public function haveOffer() {
+        $haveOffer = false;
+
+        $offerPrice = $this->getOfferPrice();
+        $minPrice   = $this->getMinimalPrice();
+
+        if ($offerPrice < $minPrice) {
+            $haveOffer = true;
+        }
+
+        return $haveOffer;
+    }
+
+    /**
      * Get product maximam price
      *
      * @return float
@@ -382,7 +434,7 @@ class Configurable extends AbstractType
         $productFlat = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
             ->distinct()
             ->where('products.parent_id', $this->product->id)
-            ->selectRaw('MAX(product_flat.price) AS max_price')
+            ->selectRaw('MAX('.DB::getTablePrefix().'product_flat.price) AS max_price')
             ->where('product_flat.channel', core()->getCurrentChannelCode())
             ->where('product_flat.locale', app()->getLocale())
             ->first();
@@ -397,9 +449,16 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+        if ($this->haveOffer()) {
+            return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
+            . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+            . '<span class="regular-price">' . core()->currency($this->getMinimalPrice()) . '</span>'
+            . '<span class="final-price">' . core()->currency($this->getOfferPrice()) . '</span>';
+        } else {
+            return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
             . ' '
             . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+        }
     }
 
     /**
@@ -528,25 +587,38 @@ class Configurable extends AbstractType
             if ($item instanceof \Webkul\Customer\Contracts\CartItem) {
                 $product = $item->child->product;
             } else {
-                $product = $item->product;
+                if (count($item->child->product->images)) {
+                    $product = $item->child->product;
+                } else {
+                    $product = $item->product;
+                }
             }
         }
 
-        return $this->productImageHelper->getProductBaseImage($product);
+        return ProductImage::getProductBaseImage($product);
     }
 
     /**
      * Validate cart item product price
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return float
+     * @param \Webkul\Product\Type\CartItem $item
+     *
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItemModel $item): CartItemValidationResult
     {
+        $result = new CartItemValidationResult();
+
+        if ($this->isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
+        }
+
         $price = $item->child->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         if ($price == $item->base_price) {
-            return;
+            return $result;
         }
 
         $item->base_price = $price;
@@ -556,9 +628,17 @@ class Configurable extends AbstractType
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+
+        return $result;
     }
 
-    //product options
+    /**
+     * Get product options.
+     *
+     * @param string $product
+     *
+     * @return array
+     */
     public function getProductOptions($product = "")
     {
         $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
@@ -571,7 +651,7 @@ class Configurable extends AbstractType
      * @param  int  $qty
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
 

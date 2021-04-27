@@ -2,15 +2,16 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
-use Webkul\Product\Helpers\ProductImage;
-use Webkul\Checkout\Models\CartItem;
 
 class Downloadable extends AbstractType
 {
@@ -18,14 +19,14 @@ class Downloadable extends AbstractType
      * ProductDownloadableLinkRepository instance
      *
      * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
-    */
+     */
     protected $productDownloadableLinkRepository;
 
     /**
      * ProductDownloadableSampleRepository instance
      *
      * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
-    */
+     */
     protected $productDownloadableSampleRepository;
 
     /**
@@ -45,7 +46,8 @@ class Downloadable extends AbstractType
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.downloadable',
         'admin::catalog.products.accordians.channels',
-        'admin::catalog.products.accordians.product-links'
+        'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**
@@ -56,6 +58,13 @@ class Downloadable extends AbstractType
     protected $isStockable = false;
 
     /**
+     * Show quantity box
+     *
+     * @var bool
+     */
+    protected $allowMultipleQty = false;
+
+    /**
      * getProductOptions
      */
     protected $getProductOptions = [];
@@ -63,14 +72,15 @@ class Downloadable extends AbstractType
     /**
      * Create a new product type instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
-     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
-     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
+     * @param \Webkul\Attribute\Repositories\AttributeRepository               $attributeRepository
+     * @param \Webkul\Product\Repositories\ProductRepository                   $productRepository
+     * @param \Webkul\Product\Repositories\ProductAttributeValueRepository     $attributeValueRepository
+     * @param \Webkul\Product\Repositories\ProductInventoryRepository          $productInventoryRepository
+     * @param \Webkul\Product\Repositories\ProductImageRepository              $productImageRepository
+     * @param \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
+     * @param \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
+     * @param \Webkul\Product\Repositories\ProductVideoRepository              $productVideoRepository
+     *
      * @return void
      */
     public function __construct(
@@ -81,7 +91,7 @@ class Downloadable extends AbstractType
         productImageRepository $productImageRepository,
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
-        ProductImage $productImageHelper
+        ProductVideoRepository $productVideoRepository
     )
     {
         parent::__construct(
@@ -90,7 +100,7 @@ class Downloadable extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper
+            $productVideoRepository
         );
 
         $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
@@ -99,16 +109,18 @@ class Downloadable extends AbstractType
     }
 
     /**
-     * @param  array  $data
-     * @param  int  $id
-     * @param  string  $attribute
+     * @param array  $data
+     * @param int    $id
+     * @param string $attribute
+     *
      * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
     {
         $product = parent::update($data, $id, $attribute);
+        $route = request()->route() ? request()->route()->getName() : '';
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if ($route != 'admin.catalog.products.massupdate') {
             $this->productDownloadableLinkRepository->saveLinks($data, $product);
 
             $this->productDownloadableSampleRepository->saveSamples($data, $product);
@@ -125,6 +137,11 @@ class Downloadable extends AbstractType
     public function isSaleable()
     {
         if (! $this->product->status) {
+            return false;
+        }
+
+        if (is_callable(config('products.isSaleable')) &&
+            call_user_func(config('products.isSaleable'), $this->product) === false) {
             return false;
         }
 
@@ -156,7 +173,8 @@ class Downloadable extends AbstractType
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return array
      */
     public function prepareForCart($data)
@@ -183,8 +201,9 @@ class Downloadable extends AbstractType
 
     /**
      *
-     * @param  array  $options1
-     * @param  array  $options2
+     * @param array $options1
+     * @param array $options2
+     *
      * @return bool
      */
     public function compareOptions($options1, $options2)
@@ -205,7 +224,8 @@ class Downloadable extends AbstractType
     /**
      * Returns additional information for items
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return array
      */
     public function getAdditionalOptions($data)
@@ -230,11 +250,20 @@ class Downloadable extends AbstractType
     /**
      * Validate cart item product price
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return float
+     * @param \Webkul\Checkout\Models\CartItem $item
+     *
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
+        $result = new CartItemValidationResult();
+
+        if (parent::isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
+        }
+
         $price = $item->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         foreach ($item->product->downloadable_links as $link) {
@@ -246,7 +275,7 @@ class Downloadable extends AbstractType
         }
 
         if ($price == $item->base_price) {
-            return;
+            return $result;
         }
 
         $item->base_price = $price;
@@ -256,5 +285,17 @@ class Downloadable extends AbstractType
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+
+        return $result;
+    }
+
+    /**
+     * Get product maximam price
+     *
+     * @return float
+     */
+    public function getMaximamPrice()
+    {
+        return $this->product->price;
     }
 }

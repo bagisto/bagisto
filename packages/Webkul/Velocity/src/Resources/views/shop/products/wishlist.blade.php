@@ -1,24 +1,25 @@
 @inject ('wishListHelper', 'Webkul\Customer\Helpers\Wishlist')
 
 {!! view_render_event('bagisto.shop.products.wishlist.before') !!}
+
     @auth('customer')
         @php
-            $isWished = $wishListHelper->getWishlistProduct($product);
+            /* search wishlist on the basis of product's id so that wishlist id can be catched */
+            $wishlist = $wishListHelper->getWishlistProduct($product);
+
+            /* link making */
+            $href = isset($route) ? $route : ($wishlist ? route('customer.wishlist.remove', $wishlist->id) : route('customer.wishlist.add', $product->product_id));
+
+            /* title */
+            $title = $wishlist ? __('velocity::app.shop.wishlist.remove-wishlist-text') : __('velocity::app.shop.wishlist.add-wishlist-text');
         @endphp
 
         <a
             class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
-            @if(isset($route))
-                href="{{ $route }}"
-            @elseif (! $isWished)
-                href="{{ route('customer.wishlist.add', $product->product_id) }}"
-                title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
-            @elseif (isset($itemId) && $itemId)
-                href="{{ route('customer.wishlist.remove', $itemId) }}"
-                title="{{ __('velocity::app.shop.wishlist.remove-wishlist-text') }}"
-            @endif>
+            href="{{ $href }}"
+            title="{{ $title }}">
 
-            <wishlist-component active="{{ !$isWished }}" is-customer="true"></wishlist-component>
+            <wishlist-component active="{{ $wishlist ? false : true }}"></wishlist-component>
 
             @if (isset($text))
                 {!! $text !!}
@@ -27,17 +28,12 @@
     @endauth
 
     @guest('customer')
-        <wishlist-component
-            active="false"
-            is-customer="false"
-            text="{{ $text ?? null }}"
-            product-id="{{ $product->id }}"
-            item-id="{{ $item->id ?? null}}"
-            product-slug="{{ $product->url_key }}"
-            add-class="{{ $addWishlistClass ?? '' }}"
-            move-to-wishlist="{{ $isMoveToWishlist ?? null}}"
-            added-text="{{ __('shop::app.customer.account.wishlist.add') }}"
-            remove-text="{{ __('shop::app.customer.account.wishlist.remove') }}">
-        </wishlist-component>
+        <a
+            class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
+            href="{{ route('customer.wishlist.add', $product->product_id) }}"
+            title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}">
+            <wishlist-component active="false"></wishlist-component>
+        </a>
     @endauth
+
 {!! view_render_event('bagisto.shop.products.wishlist.after') !!}

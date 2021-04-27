@@ -8,7 +8,7 @@
                         <span class="icon checkbox-dash-icon"></span>
                     </span>
 
-                    <form method="POST" id="mass-action-form" style="display: inline-flex;" action="" onsubmit="return confirm('{{ __('ui::app.datagrid.click_on_action') }}')">
+                    <form method="POST" id="mass-action-form" style="display: inline-flex;" action="" :onsubmit="`return confirm('${massActionConfirmText}')`">
                         @csrf()
 
                         <input type="hidden" id="indexes" name="indexes" v-model="dataIds">

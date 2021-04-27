@@ -2,15 +2,14 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Helpers\ProductImage;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductGroupedProductRepository;
 
 class Grouped extends AbstractType
 {
@@ -38,7 +37,8 @@ class Grouped extends AbstractType
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.grouped-products',
         'admin::catalog.products.accordians.channels',
-        'admin::catalog.products.accordians.product-links'
+        'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**
@@ -51,13 +51,13 @@ class Grouped extends AbstractType
     /**
      * Create a new product type instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository            $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository                $productRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
-     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository       $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository           $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
-     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
+     * @param  \Webkul\Product\Repositories\ProductVideoRepository           $productVideoRepository
      * @return void
      */
     public function __construct(
@@ -67,7 +67,7 @@ class Grouped extends AbstractType
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
         ProductGroupedProductRepository $productGroupedProductRepository,
-        ProductImage $productImageHelper
+        ProductVideoRepository $productVideoRepository
     )
     {
         parent::__construct(
@@ -76,7 +76,7 @@ class Grouped extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper
+            $productVideoRepository
         );
 
         $this->productGroupedProductRepository = $productGroupedProductRepository;
@@ -91,8 +91,9 @@ class Grouped extends AbstractType
     public function update(array $data, $id, $attribute = "id")
     {
         $product = parent::update($data, $id, $attribute);
+        $route = request()->route() ? request()->route()->getName() : '';
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if ($route != 'admin.catalog.products.massupdate') {
             $this->productGroupedProductRepository->saveGroupedProducts($data, $product);
         }
 
@@ -106,7 +107,7 @@ class Grouped extends AbstractType
      */
     public function getChildrenIds()
     {
-        return array_unique($this->product->grouped_products()->pluck('product_id')->toArray());
+        return array_unique($this->product->grouped_products()->pluck('associated_product_id')->toArray());
     }
 
     /**
@@ -140,15 +141,55 @@ class Grouped extends AbstractType
     }
 
     /**
+     * @return bool
+     */
+    public function isSaleable()
+    {
+        if (!$this->product->status) {
+            return false;
+        }
+
+        if (ProductFlat::query()->select('id')->whereIn('product_id', $this->getChildrenIds())->where('status', 0)->first()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get group product special price
+     *
+     * @return boolean
+     */
+    private function checkGroupProductHaveSpecialPrice()
+    {
+        $haveSpecialPrice = false;
+        foreach ($this->product->grouped_products as $groupOptionProduct) {
+            if ($groupOptionProduct->associated_product->getTypeInstance()->haveSpecialPrice()) {
+                $haveSpecialPrice = true;
+                break;
+            }
+        }
+        return $haveSpecialPrice;
+    }
+
+    /**
      * Get product minimal price
      *
      * @return string
      */
     public function getPriceHtml()
     {
-        return '<span class="price-label">' . trans('shop::app.products.starting-at') . '</span>'
-            . ' '
-            . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+        $html = '';
+
+        if ($this->checkGroupProductHaveSpecialPrice())
+            $html .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
+
+        $html .= '<span class="price-label">' . trans('shop::app.products.starting-at') . '</span>'
+        . ' '
+        . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+
+        return $html;
     }
 
     /**

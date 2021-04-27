@@ -1,5 +1,3 @@
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
 @extends('shop::layouts.master')
 
 @section('page_title')
@@ -13,7 +11,7 @@
         <div class="account-layout">
 
             <div class="account-head">
-                <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
+                <span class="back-icon"><a href="{{ route('customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
 
                 <span class="account-heading">{{ __('shop::app.customer.account.review.index.title') }}</span>
 
@@ -34,9 +32,9 @@
                     @foreach ($reviews as $review)
                         <div class="account-item-card mt-15 mb-15">
                             <div class="media-info">
-                                <?php $image = $productImageHelper->getProductBaseImage($review->product); ?>
+                                <?php $image = productimage()->getProductBaseImage($review->product); ?>
                                 <a href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}" title="{{ $review->product->name }}">
-                                    <img class="media" src="{{ $image['small_image_url'] }}"/>
+                                    <img class="media" src="{{ $image['small_image_url'] }}" alt=""/>
                                 </a>
 
                                 <div class="info">

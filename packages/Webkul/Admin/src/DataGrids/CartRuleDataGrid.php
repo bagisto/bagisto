@@ -15,6 +15,12 @@ class CartRuleDataGrid extends DataGrid
 
     protected $channel = 'all';
 
+    /** @var string[] contains the keys for which extra filters to show */
+    protected $extraFilters = [
+        'channels',
+        'customer_groups',
+    ];
+
     public function __construct()
     {
         parent::__construct();
@@ -55,6 +61,8 @@ class CartRuleDataGrid extends DataGrid
                 'cart_rules.id');
             $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
         }
+
+        $this->addFilter('status', 'status');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -116,8 +124,10 @@ class CartRuleDataGrid extends DataGrid
             'wrapper'    => function ($value) {
                 if ($value->status == 1) {
                     return trans('admin::app.datagrid.active');
-                } else {
+                } else if ($value->status == 0) {
                     return trans('admin::app.datagrid.inactive');
+                } else {
+                    return trans('admin::app.datagrid.draft');
                 }
             },
         ]);
@@ -145,7 +155,7 @@ class CartRuleDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
             'route'  => 'admin.cart-rules.copy',
-            'icon'   => 'icon note-icon',
+            'icon'   => 'icon copy-icon',
         ]);
 
         $this->addAction([

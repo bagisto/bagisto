@@ -15,7 +15,7 @@ class CustomerReviewDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('product_reviews as pr')
             ->leftjoin('product_flat as pf', 'pr.product_id', '=', 'pf.product_id')
-            ->select('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pf.name as product_name', 'pr.status as product_review_status')
+            ->select('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pf.name as product_name', 'pr.status as product_review_status', 'pr.rating')
             ->where('channel', core()->getCurrentChannelCode())
             ->where('locale', app()->getLocale());
 
@@ -50,6 +50,15 @@ class CustomerReviewDataGrid extends DataGrid
             'index'      => 'comment',
             'label'      => trans('admin::app.datagrid.comment'),
             'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'rating',
+            'label'      => trans('admin::app.customers.reviews.rating'),
+            'type'       => 'number',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
@@ -108,14 +117,14 @@ class CustomerReviewDataGrid extends DataGrid
             'type'  => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
             'action' => route('admin.customer.review.massdelete'),
-            'method' => 'DELETE',
+            'method' => 'POST',
         ]);
 
         $this->addMassAction([
             'type'    => 'update',
             'label'   => trans('admin::app.datagrid.update-status'),
             'action'  => route('admin.customer.review.massupdate'),
-            'method'  => 'PUT',
+            'method'  => 'POST',
             'options' => [
                 trans('admin::app.customers.reviews.pending')     => 0,
                 trans('admin::app.customers.reviews.approved')    => 1,

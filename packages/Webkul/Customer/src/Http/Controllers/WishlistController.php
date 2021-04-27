@@ -2,14 +2,14 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
+use Cart;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
-use Cart;
 
 class WishlistController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
@@ -57,7 +57,11 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        $wishlistItems = $this->wishlistRepository->getCustomerWhishlist();
+        $wishlistItems = $this->wishlistRepository->getCustomerWishlist();
+
+        if (! core()->getConfigData('general.content.shop.wishlist_option')) {
+            abort(404);
+        }
 
         return view($this->_config['view'])->with('items', $wishlistItems);
     }
@@ -87,7 +91,7 @@ class WishlistController extends Controller
             'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
-        //accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
+        // accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
         if ($product->parent_id != null) {
             $product = $this->productRepository->findOneByField('id', $product->parent_id);
             $data['product_id'] = $product->id;
@@ -148,9 +152,9 @@ class WishlistController extends Controller
     public function move($itemId)
     {
         $wishlistItem = $this->wishlistRepository->findOneWhere([
-                'id'          => $itemId,
-                'customer_id' => auth()->guard('customer')->user()->id,
-            ]);
+            'id'          => $itemId,
+            'customer_id' => auth()->guard('customer')->user()->id,
+        ]);
 
         if (! $wishlistItem) {
             abort(404);
@@ -178,7 +182,7 @@ class WishlistController extends Controller
     }
 
     /**
-     * Function to remove all of the items items in the customer's wishlist
+     * Function to remove all of the items items in the customer's wishlist.
      *
      * @return \Illuminate\Http\Response
      */

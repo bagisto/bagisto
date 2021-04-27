@@ -2,13 +2,13 @@
 
 namespace Webkul\Shop\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Webkul\Core\Tree;
 use Illuminate\Routing\Router;
 use Illuminate\Pagination\Paginator;
-use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;
+use Illuminate\Support\ServiceProvider;
+use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Currency;
-use Webkul\Core\Tree;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -19,24 +19,28 @@ class ShopServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
-        $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
-
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'shop');
-
+        /* publishers */
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
-        ], 'public');
+            __DIR__ . '/../Resources/views'       => resource_path('themes/default/views'),
+            __DIR__ . '/../Resources/lang'        => resource_path('lang/vendor/shop'),
+        ]);
 
+        /* loaders */
+        $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'shop');
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
 
+        /* aliases */
         $router->aliasMiddleware('locale', Locale::class);
         $router->aliasMiddleware('theme', Theme::class);
         $router->aliasMiddleware('currency', Currency::class);
 
+        /* view composers */
         $this->composeView();
 
+        /* paginators */
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
     }
@@ -52,7 +56,7 @@ class ShopServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bind the the data to the views
+     * Bind the the data to the views.
      *
      * @return void
      */

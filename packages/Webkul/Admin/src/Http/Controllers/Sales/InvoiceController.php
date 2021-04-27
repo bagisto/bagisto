@@ -2,10 +2,10 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
+use PDF;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
-use PDF;
 
 class InvoiceController extends Controller
 {
@@ -97,7 +97,7 @@ class InvoiceController extends Controller
         $data = request()->all();
 
         $haveProductToInvoice = false;
-        
+
         foreach ($data['invoice']['items'] as $itemId => $qty) {
             if ($qty) {
                 $haveProductToInvoice = true;
@@ -141,8 +141,30 @@ class InvoiceController extends Controller
     {
         $invoice = $this->invoiceRepository->findOrFail($id);
 
-        $pdf = PDF::loadView('admin::sales.invoices.pdf', compact('invoice'))->setPaper('a4');
+        $html = view('admin::sales.invoices.pdf', compact('invoice'))->render();
 
-        return $pdf->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
+        return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
+            ->setPaper('a4')
+            ->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
+    }
+
+    /**
+     * Adjust arabic and persian content.
+     *
+     * @param  string  $html
+     * @return string
+     */
+    private function adjustArabicAndPersianContent($html)
+    {
+        $arabic = new \ArPHP\I18N\Arabic();
+
+        $p = $arabic->arIdentify($html);
+
+        for ($i = count($p)-1; $i >= 0; $i -= 2) {
+            $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i-1], $p[$i] - $p[$i-1]));
+            $html   = substr_replace($html, $utf8ar, $p[$i-1], $p[$i] - $p[$i-1]);
+        }
+
+        return $html;
     }
 }

@@ -36,14 +36,14 @@
 
                                 <div class="col-10">
                                     <h5 class="card-title fw6">
-                                        @{{ allAddress.first_name }} @{{ allAddress.last_name }},
+                                        @{{ addresses.first_name }} @{{ addresses.last_name }},
                                     </h5>
 
                                     <ul type="none">
                                         <li>@{{ addresses.address1 }},</li>
-                                        <li>@{{ addresses.city }},</li>
+                                        <li>@{{ addresses.postcode }} @{{ addresses.city }},</li>
                                         <li>@{{ addresses.state }},</li>
-                                        <li>@{{ addresses.country }} @{{ addresses.postcode }}</li>
+                                        <li>@{{ addresses.country }}</li>
                                         <li>
                                             {{ __('shop::app.customer.account.address.index.contact') }} : @{{ addresses.phone }}
                                         </li>
@@ -81,14 +81,13 @@
                     <div class="mt10 mb10" v-if="address.billing.address_id">
                         <span class="checkbox fs16 display-inbl">
                             <input
-                                class="ml0"
                                 type="checkbox"
                                 id="billing[use_for_shipping]"
                                 name="billing[use_for_shipping]"
                                 @change="validateFormAfterAction"
                                 v-model="address.billing.use_for_shipping" />
 
-                            <span class="ml-5">
+                            <span>
                                 {{ __('shop::app.checkout.onepage.use_for_shipping') }}
                             </span>
                         </span>
@@ -113,7 +112,7 @@
                 @auth('customer')
                     @if(count(auth('customer')->user()->addresses))
                         <a
-                            class="theme-btn light pull-right text-up-14"
+                            class="theme-btn light float-right text-up-14"
                             @click="backToSavedBillingAddress()">
 
                             {{ __('shop::app.checkout.onepage.back') }}
@@ -166,7 +165,7 @@
 
                                 <div class="col-10">
                                     <h5 class="card-title fw6">
-                                        @{{ allAddress.first_name }} @{{ allAddress.last_name }},
+                                        @{{ addresses.first_name }} @{{ addresses.last_name }},
                                     </h5>
 
                                     <ul type="none">
@@ -226,7 +225,7 @@
                     @auth('customer')
                         @if(count(auth('customer')->user()->addresses))
                             <a
-                                class="theme-btn light pull-right text-up-14"
+                                class="theme-btn light float-right text-up-14"
                                 @click="backToSavedShippingAddress()">
 
                                 {{ __('shop::app.checkout.onepage.back') }}

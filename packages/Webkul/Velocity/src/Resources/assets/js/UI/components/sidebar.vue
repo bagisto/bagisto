@@ -26,13 +26,14 @@
 
                         <img
                             v-if="category.category_icon_path"
-                            :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" />
+                            :src="`${$root.baseUrl}/storage/${category.category_icon_path}`"
+                            width="20" height="20" />
                     </div>
 
                     <span class="category-title">{{ category['name'] }}</span>
 
                     <i
-                        class="rango-arrow-right pr15 pull-right"
+                        class="rango-arrow-right pr15 float-right"
                         @mouseout="toggleSidebar(id, $event, 'mouseout')"
                         @mouseover="toggleSidebar(id, $event, 'mouseover')"
                         v-if="category.children.length && category.children.length > 0">

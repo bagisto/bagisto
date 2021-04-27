@@ -2,24 +2,23 @@
 
 namespace Tests\Functional\Shop;
 
-use Codeception\Example;
-use FunctionalTester;
 use Faker\Factory;
-use Cart;
+use FunctionalTester;
+use Codeception\Example;
 use Webkul\Core\Helpers\Laravel5Helper;
 
 class GuestCheckoutCest
 {
-    private $faker,
-        $productNoGuestCheckout, $productGuestCheckout;
+    private $productNoGuestCheckout, $productGuestCheckout;
 
     function _before(FunctionalTester $I)
     {
+        $I->useDefaultTheme();
 
-        $this->faker = Factory::create();
+        $faker = Factory::create();
 
         $pConfigDefault = [
-            'productInventory' => ['qty' => $this->faker->numberBetween(1, 1000)],
+            'productInventory' => ['qty' => $faker->numberBetween(1, 1000)],
             'attributeValues'  => [
                 'status'         => true,
                 'new'            => 1,
@@ -27,7 +26,7 @@ class GuestCheckoutCest
             ],
         ];
         $pConfigGuestCheckout = [
-            'productInventory' => ['qty' => $this->faker->numberBetween(1, 1000)],
+            'productInventory' => ['qty' => $faker->numberBetween(1, 1000)],
             'attributeValues'  => [
                 'status'         => true,
                 'new'            => 1,
@@ -56,8 +55,10 @@ class GuestCheckoutCest
 
         $I->wantTo('test conjunction "' . $example['name'] . '" with globalConfig = ' . $example['globalConfig'] . ' && product config = ' . $product->getAttribute('guest_checkout'));
         $I->setConfigData(['catalog.products.guest-checkout.allow-guest-checkout' => $example['globalConfig']]);
-        $I->assertEquals($example['globalConfig'],
-            core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout'));
+        $I->assertEquals(
+            $example['globalConfig'],
+            core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')
+        );
         $I->amOnRoute('shop.home.index');
         $I->sendAjaxPostRequest('/checkout/cart/add/' . $product->id, [
             '_token' => session('_token'),
@@ -66,14 +67,14 @@ class GuestCheckoutCest
         ]);
 
         $I->amOnRoute('shop.checkout.cart.index');
-        $I->see('Shopping Cart', '//div[@class="title"]');
+        $I->seeInTitle('Shopping Cart');
         $I->makeHtmlSnapshot('guestCheckout_' . $example['globalConfig'] . '_' . $product->getAttribute('guest_checkout'));
-        $I->see($product->name, '//div[@class="item-title"]');
-        $I->click(__('shop::app.checkout.cart.proceed-to-checkout'),
-            '//a[@href="' . route('shop.checkout.onepage.index') . '"]');
+        $I->seeInSource($product->name);
+        $I->amOnRoute('shop.checkout.onepage.index');
         $I->seeCurrentRouteIs($example['expectedRoute']);
-        $cart = Cart::getCart();
-        $I->assertTrue(Cart::removeItem($cart->items[0]->id));
+        
+        $cart = cart()->getCart();
+        $I->assertTrue(cart()->removeItem($cart->items[0]->id));
     }
 
     protected function guestCheckoutProvider(): array

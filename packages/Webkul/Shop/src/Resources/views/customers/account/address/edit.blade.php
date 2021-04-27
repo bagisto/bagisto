@@ -12,7 +12,7 @@
         <div class="account-layout">
 
             <div class="account-head mb-15">
-                <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
+                <span class="back-icon"><a href="{{ route('customer.address.index') }}"><i class="icon icon-menu-back"></i></a></span>
                 <span class="account-heading">{{ __('shop::app.customer.account.address.edit.title') }}</span>
                 <span></span>
             </div>
@@ -86,7 +86,7 @@
 
                     <div class="control-group" :class="[errors.has('city') ? 'has-error' : '']">
                         <label for="city" class="required">{{ __('shop::app.customer.account.address.create.city') }}</label>
-                        <input type="text" class="control" name="city" v-validate="'required|alpha_spaces'" value="{{ old('city') ?: $address->city }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
+                        <input type="text" class="control" name="city" v-validate="'required|regex:^[a-zA-Z \-]*$'" value="{{ old('city') ?: $address->city }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
                         <span class="control-error" v-if="errors.has('city')">@{{ errors.first('city') }}</span>
                     </div>
 

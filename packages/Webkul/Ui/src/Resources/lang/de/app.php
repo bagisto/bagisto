@@ -9,6 +9,12 @@ return [
             'mass-update-status' => 'Möchten Sie den Status der ausgewählten :resource wirklich aktualisieren?',
             'delete' => 'Möchten Sie diese Aktion wirklich ausführen?',
             'edit' => 'Möchten Sie :resource wirklich bearbeiten?',
+            'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?'
+        ],
+
+        'error' => [
+            'multiple-sort-keys-error' => 'Fatal Error! Multiple sort keys found, please resolve the URL manually',
+            'multiple-search-keys-error' => 'Multiple search keys found, please resolve the URL manually',
         ],
 
         'zero-index' => 'Indexspalten können nur Werte größer als Null haben',

@@ -1,9 +1,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
+        {{-- meta tags --}}
         <meta http-equiv="Cache-control" content="no-cache">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+        {{-- lang supports inclusion --}}
         <style type="text/css">
+            @font-face {
+                font-family: 'Hind';
+                src: url({{ asset('vendor/webkul/ui/assets/fonts/Hind/Hind-Regular.ttf') }}) format('truetype');
+            }
+
+            @font-face {
+                font-family: 'Noto Sans';
+                src: url({{ asset('vendor/webkul/ui/assets/fonts/Noto/NotoSans-Regular.ttf') }}) format('truetype');
+            }
+        </style>
+
+        @php
+            /* main font will be set on locale based */
+            $mainFontFamily = app()->getLocale() === 'ar' ? 'DejaVu Sans' : 'Noto Sans';
+        @endphp
+
+        {{-- main css --}}
+        <style type="text/css">
+            * {
+                font-family: '{{ $mainFontFamily }}';
+            }
+
             body, th, td, h5 {
                 font-size: 12px;
                 color: #000;
@@ -48,7 +73,6 @@
                 border-left: solid 1px #d3d3d3;
                 color: #3A3A3A;
                 vertical-align: middle;
-                font-family: DejaVu Sans; sans-serif;
             }
 
             .table tbody td p {
@@ -66,17 +90,15 @@
 
             .sale-summary tr td {
                 padding: 3px 5px;
-                font-family: DejaVu Sans; sans-serif;
             }
 
             .sale-summary tr.bold {
-                font-family: DejaVu Sans; sans-serif;
                 font-weight: 700;
             }
 
             .label {
                 color: #000;
-                font-weight: 600;
+                font-weight: bold;
             }
 
             .logo {
@@ -84,6 +106,17 @@
                 width: 70px;
             }
 
+            .merchant-details {
+                margin-bottom: 5px;
+            }
+
+            .merchant-details-title {
+                font-weight: bold;
+            }
+
+            .text-center {
+                text-align: center;
+            }
         </style>
     </head>
 
@@ -91,16 +124,35 @@
         <div class="container">
 
             <div class="header">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-center">{{ __('admin::app.sales.invoices.invoice') }}</h1>
+                    </div>
+                </div>
                 @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.logo'))
                     <div class="image">
-                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}"/>
+                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}" alt=""/>
                     </div>
                 @endif
-
-                <div class="address">
-                    <p>
-                      <b> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.address') }} </b>
-                    </p>
+                <div class="merchant-details">
+                    <div><span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span></div>
+                    <div>{{ core()->getConfigData('sales.shipping.origin.address1') ? core()->getConfigData('sales.shipping.origin.address1') : '' }}</div>
+                    <div>
+                        <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ? core()->getConfigData('sales.shipping.origin.zipcode') : '' }}</span>
+                        <span>{{ core()->getConfigData('sales.shipping.origin.city') ? core()->getConfigData('sales.shipping.origin.city') : '' }}</span></div>
+                    <div>{{ core()->getConfigData('sales.shipping.origin.state') ? core()->getConfigData('sales.shipping.origin.state') : '' }}</div>
+                    <div>{{ core()->getConfigData('sales.shipping.origin.country') ?  core()->country_name(core()->getConfigData('sales.shipping.origin.country')) : '' }}</div>
+                </div>
+                <div class="merchant-details">
+                    @if (core()->getConfigData('sales.shipping.origin.contact'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.shipping.origin.vat_number'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.shipping.origin.bank_details'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.bank-details') }}:</span> {{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
+                    @endif
                 </div>
             </div>
 
@@ -108,17 +160,17 @@
 
                 <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }} -</span>
-                    <span class="value">{{ $invoice->id }}</span>
+                    <span class="value">#{{ $invoice->id }}</span>
                 </div>
 
                 <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }} -</span>
-                    <span class="value">{{ $invoice->order->increment_id }}</span>
+                    <span class="value">#{{ $invoice->order->increment_id }}</span>
                 </div>
 
                 <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.order-date') }} -</span>
-                    <span class="value">{{ core()->formatDate($invoice->order->created_at, 'M d, Y') }}</span>
+                    <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
                 </div>
 
                 <div class="table address">
@@ -179,6 +231,15 @@
                             <tr>
                                 <td>
                                     {{ core()->getConfigData('sales.paymentmethods.' . $invoice->order->payment->method . '.title') }}
+
+                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($invoice->order->payment->method); @endphp
+
+                                    @if (! empty($additionalDetails))
+                                        <div>
+                                            <label class="label">{{ $additionalDetails['title'] }}:</label>
+                                            <p class="value">{{ $additionalDetails['value'] }}</p>
+                                        </div>
+                                    @endif
                                 </td>
 
                                 @if ($invoice->order->shipping_address)

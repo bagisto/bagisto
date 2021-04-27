@@ -1,21 +1,33 @@
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 @inject ('wishListHelper', 'Webkul\Customer\Helpers\Wishlist')
 
 @php
-    $images = $productImageHelper->getGalleryImages($product);
+    $images = productimage()->getGalleryImages($product);
+    $videos = productvideo()->getVideos($product);
+
+    $videoData = $imageData = [];
+
+    foreach ($videos as $key => $video) {
+        $videoData[$key]['type'] = $video['type'];
+        $videoData[$key]['large_image_url'] = $videoData[$key]['small_image_url']= $videoData[$key]['medium_image_url']= $videoData[$key]['original_image_url'] = $video['video_url'];
+    }
+
+    foreach ($images as $key => $image) {
+        $imageData[$key]['type'] = '';
+        $imageData[$key]['large_image_url']    = $image['large_image_url'];
+        $imageData[$key]['small_image_url']    = $image['small_image_url'];
+        $imageData[$key]['medium_image_url']   = $image['medium_image_url'];
+        $imageData[$key]['original_image_url'] = $image['original_image_url'];
+    }
+
+    $images = array_merge($imageData, $videoData);
 @endphp
 
 {!! view_render_event('bagisto.shop.products.view.gallery.before', ['product' => $product]) !!}
 
     <div class="product-image-group">
         <div class="row col-12">
-            <magnify-image src="{{ $images[0]['large_image_url'] }}" v-if="!isMobile()">
+            <magnify-image src="{{ $images[0]['large_image_url'] }}" type="{{ $images[0]['type'] }}">
             </magnify-image>
-
-            <img
-                v-else
-                class="vc-small-product-image"
-                src="{{ $images[0]['large_image_url'] }}" />
         </div>
 
         <div class="row col-12">
@@ -42,14 +54,20 @@
 
             <slide :slot="`slide-${index}`" v-for="(thumb, index) in thumbs">
                 <li
-                    @click="changeImage({
+                    @mouseover="changeImage({
                         largeImageUrl: thumb.large_image_url,
                         originalImageUrl: thumb.original_image_url,
+                        currentType: thumb.type
                     })"
                     :class="`thumb-frame ${index + 1 == 4 ? '' : 'mr5'} ${thumb.large_image_url == currentLargeImageUrl ? 'active' : ''}`"
                     >
 
-                    <div
+                    <video v-if="thumb.type == 'video'" width="110" height="110" controls>
+                        <source :src="thumb.small_image_url" type="video/mp4">
+                        {{ __('admin::app.catalog.products.not-support-video') }}
+                    </video>
+
+                    <div v-else
                         class="bg-image"
                         :style="`background-image: url(${thumb.small_image_url})`">
                     </div>
@@ -77,6 +95,7 @@
                         galleryCarouselId: 'product-gallery-carousel',
                         currentLargeImageUrl: '',
                         currentOriginalImageUrl: '',
+                        currentType: '',
                         counter: {
                             up: 0,
                             down: 0,
@@ -90,6 +109,7 @@
                             this.changeImage({
                                 largeImageUrl: this.images[0]['large_image_url'],
                                 originalImageUrl: this.images[0]['original_image_url'],
+                                currentType: this.images[0]['type']
                             })
                         }
 
@@ -101,11 +121,12 @@
                     this.changeImage({
                         largeImageUrl: this.images[0]['large_image_url'],
                         originalImageUrl: this.images[0]['original_image_url'],
+                        currentType: this.images[0]['type']
                     });
 
                     eventBus.$on('configurable-variant-update-images-event', this.updateImages);
 
-                    this.prepareThumbs()
+                    this.prepareThumbs();
                 },
 
                 methods: {
@@ -121,13 +142,17 @@
                         });
                     },
 
-                    changeImage: function({largeImageUrl, originalImageUrl}) {
+                    changeImage: function({largeImageUrl, originalImageUrl, currentType}) {
                         this.currentLargeImageUrl = largeImageUrl;
 
                         this.currentOriginalImageUrl = originalImageUrl;
 
+                        this.currentType = currentType;
+
                         this.$root.$emit('changeMagnifiedImage', {
-                            smallImageUrl: this.currentOriginalImageUrl
+                            smallImageUrl: this.currentOriginalImageUrl,
+                            largeImageUrl: this.currentLargeImageUrl,
+                            currentType  : this.currentType
                         });
 
                         let productImage = $('.vc-small-product-image');

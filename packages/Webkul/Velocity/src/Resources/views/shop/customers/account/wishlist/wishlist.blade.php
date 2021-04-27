@@ -11,7 +11,7 @@
         <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
 
         @if (count($items))
-            <div class="account-action pull-right">
+            <div class="account-action float-right">
                 <a
                     class="remove-decoration theme-btn light"
                     href="{{ route('customer.wishlist.removeall') }}">
@@ -23,7 +23,7 @@
 
     {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $items]) !!}
 
-    <div class="account-items-list row wishlist-container">
+    <div class="wishlist-container">
 
         @if ($items->count())
             @foreach ($items as $item)
@@ -33,19 +33,23 @@
                 @endphp
 
                 @include ('shop::products.list.card', [
-                    'checkmode'         => true,
-                    'moveToCart'        => true,
-                    'addToCartForm'     => true,
-                    'removeWishlist'    => true,
-                    'reloadPage'        => true,
-                    'itemId'            => $item->id,
-                    'product'           => $item->product,
-                    'btnText'           => $moveToCartText,
-                    'addToCartBtnClass' => 'small-padding',
+                    'list'                 => true,
+                    'checkmode'            => true,
+                    'moveToCart'           => true,
+                    'wishlistMoveRoute'    => route('customer.wishlist.move', $item->id),
+                    'addToCartForm'        => true,
+                    'removeWishlist'       => true,
+                    'reloadPage'           => true,
+                    'itemId'               => $item->id,
+                    'item'                 => $item,
+                    'product'              => $item->product,
+                    'additionalAttributes' => true,
+                    'btnText'              => $moveToCartText,
+                    'addToCartBtnClass'    => 'small-padding',
                 ])
             @endforeach
 
-            <div class="bottom-toolbar">
+            <div>
                 {{ $items->links()  }}
             </div>
         @else

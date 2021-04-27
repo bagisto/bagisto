@@ -9,6 +9,12 @@ return [
             'mass-update-status' => 'هل تريد حقا تحديث الحالة من منتقى :resource?',
             'delete' => 'هل تريد حقا حذف هذا :resource?',
             'edit' => 'هل تريد حقا تحرير هذا :resource?',
+            'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?'
+        ],
+
+        'error' => [
+            'multiple-sort-keys-error' => 'Fatal Error! Multiple sort keys found, please resolve the URL manually',
+            'multiple-search-keys-error' => 'Multiple search keys found, please resolve the URL manually',
         ],
 
         'zero-index' => 'يمكن أن تحتوي أعمدة الفهرس على قيم أكبر من الصفر فقط',

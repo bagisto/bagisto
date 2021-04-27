@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Checkout\Cart\Models;
 
+use Cart;
 use UnitTester;
 use Faker\Factory;
 use Webkul\Core\Helpers\Laravel5Helper;
-use Cart;
 
 class CartModelCest
 {
@@ -58,6 +58,11 @@ class CartModelCest
 
         $I->wantTo('check function with cart, that contains a product with QuantityBox() == true');
         Cart::removeItem($cartItemIdOfProductWithoutQuantityBox);
+        Cart::addProduct($this->productWithQuantityBox->id, [
+            '_token'     => session('_token'),
+            'product_id' => $this->productWithQuantityBox->id,
+            'quantity'   => 1,
+        ]);
         $I->assertTrue(Cart::getCart()->hasProductsWithQuantityBox());
     }
 }

@@ -2,13 +2,16 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Container\Container as App;
-use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Traits\Sanitizer;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Container\Container as App;
 use Webkul\Product\Repositories\ProductRepository;
 
 class SearchRepository extends Repository
 {
+    use Sanitizer;
+
     /**
      * ProductRepository object
      *
@@ -50,6 +53,8 @@ class SearchRepository extends Repository
     public function uploadSearchImage($data)
     {
         $path = request()->file('image')->store('product-search');
+
+        $this->sanitizeSVG($path, $data['image']->getMimeType());
 
         return Storage::url($path);
     }

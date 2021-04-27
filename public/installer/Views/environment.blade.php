@@ -54,6 +54,7 @@
                                     <option value="nl">Dutch</option>
                                     <option value="en" selected>English</option>
                                     <option value="fr">French</option>
+                                    <option value="es">Español</option>
                                 </select>
                             </div>
 

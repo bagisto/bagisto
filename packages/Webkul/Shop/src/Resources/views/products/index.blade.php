@@ -31,7 +31,7 @@
             <div class="category-block" @if ($category->display_mode == 'description_only') style="width: 100%" @endif>
                 <div class="hero-image mb-35">
                     @if (!is_null($category->image))
-                        <img class="logo" src="{{ $category->image_url }}" />
+                        <img class="logo" src="{{ $category->image_url }}" alt="" />
                     @endif
                 </div>
 
@@ -46,9 +46,9 @@
                 @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
                     <?php $products = $productRepository->getAll($category->id); ?>
 
-                    @if ($products->count())
+                    @include ('shop::products.list.toolbar')
 
-                        @include ('shop::products.list.toolbar')
+                    @if ($products->count())
 
                         @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 

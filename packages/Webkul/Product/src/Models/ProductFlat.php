@@ -3,10 +3,13 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Webkul\Product\Contracts\ProductFlat as ProductFlatContract;
 
 class ProductFlat extends Model implements ProductFlatContract
 {
+    use Searchable;
+
     protected $table = 'product_flat';
 
     protected $guarded = [
@@ -16,6 +19,16 @@ class ProductFlat extends Model implements ProductFlatContract
     ];
 
     public $timestamps = false;
+
+    /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'products_index';
+    }
 
     /**
      * Retrieve type instance
@@ -86,11 +99,11 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * @param integer $qty
+     * @param int $qty
      *
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         return $this->product->haveSufficientQuantity($qty);
     }
@@ -108,9 +121,15 @@ class ProductFlat extends Model implements ProductFlatContract
      */
     public function images()
     {
-        return (ProductImageProxy::modelClass())
-            ::where('product_images.product_id', $this->product_id)
-            ->select('product_images.*');
+        return $this->hasMany(ProductImageProxy::modelClass(), 'product_id', 'product_id');
+    }
+
+    /**
+     * The videos that belong to the product.
+     */
+    public function videos()
+    {
+        return $this->product->videos();
     }
 
     /**

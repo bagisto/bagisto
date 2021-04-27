@@ -8,7 +8,6 @@
         }
     ],
     "require": {
-        "nwidart/laravel-modules": "^3.2",
         "bagisto/laravel-core": "dev-master"
     },
     "autoload": {

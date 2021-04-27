@@ -9,6 +9,12 @@ return [
             'mass-update-status' => 'Czy naprawdę chcesz zaktualizować status tych wybranych :resource?',
             'delete' => 'Czy naprawdę chcesz wykonać tę akcję?',
             'edit' => 'Czy naprawdę chcesz edytować :resource?',
+            'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?'
+        ],
+
+        'error' => [
+            'multiple-sort-keys-error' => 'Fatal Error! Multiple sort keys found, please resolve the URL manually',
+            'multiple-search-keys-error' => 'Multiple search keys found, please resolve the URL manually',
         ],
 
         'zero-index' => 'Kolumny indeksu mogą mieć wartości większe niż tylko zero',
@@ -36,3 +42,5 @@ return [
         'value-here' => 'Wartość tutaj',
         'numeric-value-here' => 'wartość liczbowa tutaj',
         'submit' => 'Prześlij'
+    ]
+];

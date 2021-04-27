@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.review.index') }}'"></i>
 
                         {{ __('admin::app.customers.reviews.edit-title') }}
                     </h1>
@@ -69,6 +69,20 @@
                                 <label for="name" >{{ __('admin::app.customers.reviews.comment') }}</label>
                                 <textarea  class="control" disabled> {{ $review->comment }}</textarea>
                             </div>
+
+                            @if (count($review->images) > 0)
+                                <div class="control-group">
+                                    <label for="images" >{{ __('admin::app.catalog.categories.image') }}</label>
+
+                                    <div class="image-wrapper">
+                                        @foreach ($review->images as $image)
+                                            <label class="image-item">
+                                                <img class="preview" src="{{ $image->url }}">
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
 
                         </div>
                     </accordian>

@@ -5,11 +5,14 @@ namespace Webkul\Velocity\Repositories\Product;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Container\Container as App;
 use Webkul\Product\Models\ProductAttributeValue;
+use Prettus\Repository\Traits\CacheableRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
 class ProductRepository extends Repository
 {
+    use CacheableRepository;
+
      /**
      * AttributeRepository object
      *
@@ -112,6 +115,10 @@ class ProductRepository extends Repository
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
             $locale = request()->get('locale') ?: app()->getLocale();
+
+            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                $query = app('Webkul\Product\Repositories\ProductRepository')->checkOutOfStockItem($query);
+            }
 
             $query = $query->distinct()
                            ->addSelect('product_flat.*')

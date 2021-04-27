@@ -19,11 +19,17 @@ class ProductFlatRepository extends Repository
      */
     public function getCategoryProductMaximumPrice($category = null)
     {
+        static $loadedCategoryMaxPrice = [];
+
         if (! $category) {
             return $this->model->max('max_price');
         }
 
-        return $this->model
+        if (array_key_exists($category->id, $loadedCategoryMaxPrice)) {
+            return $loadedCategoryMaxPrice[$category->id];
+        }
+
+        return $loadedCategoryMaxPrice[$category->id] = $this->model
                     ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
                     ->where('product_categories.category_id', $category->id)
                     ->max('max_price');
@@ -37,53 +43,118 @@ class ProductFlatRepository extends Repository
      */
     public function getCategoryProductAttribute($categoryId)
     {
-        $qb = $this->model
-                   ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-                   ->where('product_categories.category_id', $categoryId)
-                   ->where('product_flat.channel', core()->getCurrentChannelCode())
-                   ->where('product_flat.locale', app()->getLocale());
+        $qb = $this->categoryProductQuerybuilder($categoryId);
 
-        $productArrributes = $qb->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
-                                ->pluck('pa.attribute_id')
-                                ->toArray();
+        $productFlatIds   = $qb->pluck('id')->toArray();
+        $productIds       = $qb->pluck('product_flat.product_id')->toArray();
 
-        $productSuperArrributes = $qb->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
-                                     ->pluck('ps.attribute_id')
-                                     ->toArray();
+        $childProductIds = $this->model->distinct()
+                            ->whereIn('parent_id', $productFlatIds)
+                            ->pluck('product_id')->toArray();
 
-        $productCategoryArrributes = array_unique(array_merge($productArrributes, $productSuperArrributes));
+        $productIds = array_merge($productIds, $childProductIds);
 
-        return $productCategoryArrributes;
-    }
+        $attributeValues = $this->model
+                ->distinct()
+                ->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
+                ->leftJoin('attributes as at', 'pa.attribute_id', 'at.id')
+                ->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
+                ->select('pa.integer_value', 'pa.text_value', 'pa.attribute_id', 'ps.attribute_id as attributeId')
+                ->where('is_filterable', 1)
+                ->WhereIn('pa.product_id', $productIds)
+                ->get();
 
-    /**
-     * get Filterable Attributes.
-     *
-     * @param  array  $category
-     * @param  array  $products
-     * @return \Illuminate\Support\Collection
-     */
-    public function getFilterableAttributes($category, $products) {
-        $filterAttributes = [];
+        $attributeInfo['attributeOptions'] =  $attributeInfo['attributes'] = [];
 
-        if (count($category->filterableAttributes) > 0 ) {
-            $filterAttributes = $category->filterableAttributes;
-        } else {
-            $categoryProductAttributes = $this->getCategoryProductAttribute($category->id);
+        foreach ($attributeValues as $attribute) {
+            $attributeKeys = array_keys($attribute->toArray());
 
-            if ($categoryProductAttributes) {
-                foreach (app('Webkul\Attribute\Repositories\AttributeRepository')->getFilterAttributes() as $filterAttribute) {
-                    if (in_array($filterAttribute->id, $categoryProductAttributes)) {
-                        $filterAttributes[] = $filterAttribute;
-                    } else  if ($filterAttribute ['code'] == 'price') {
-                        $filterAttributes[] = $filterAttribute;
+            foreach ($attributeKeys as $key) {
+                if (! is_null($attribute[$key])) {
+                    if ($key == 'integer_value' && ! in_array($attribute[$key], $attributeInfo['attributeOptions'])) {
+                        array_push($attributeInfo['attributeOptions'], $attribute[$key]);
+                    } else if ($key == 'text_value' && ! in_array($attribute[$key], $attributeInfo['attributeOptions'])) {
+                        $multiSelectArrributes = explode(",", $attribute[$key]);
+
+                        foreach ($multiSelectArrributes as $multi) {
+                            if (! in_array($multi, $attributeInfo['attributeOptions'])) {
+                                array_push($attributeInfo['attributeOptions'], $multi);
+                            }
+                        }
+                    } else if (($key == 'attribute_id' || $key == 'attributeId') && ! in_array($attribute[$key], $attributeInfo['attributes'])) {
+                        array_push($attributeInfo['attributes'], $attribute[$key]);
                     }
                 }
-
-                $filterAttributes = collect($filterAttributes);
             }
         }
 
-        return $filterAttributes;
+        return $attributeInfo;
+    }
+
+    /**
+     * get Category Product Model
+     *
+     * @param  int  $categoryId
+     * @return \Illuminate\Support\Querybuilder
+    */
+    public function categoryProductQuerybuilder($categoryId) {
+
+        return $this->model
+            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+            ->where('product_categories.category_id', $categoryId)
+            ->where('product_flat.channel', core()->getCurrentChannelCode())
+            ->where('product_flat.locale', app()->getLocale());
+    }
+
+    /**
+     * filter attributes according to products
+     *
+     * @param  array  $category
+     * @return \Illuminate\Support\Collection
+     */
+    public function getProductsRelatedFilterableAttributes($category)
+    {
+        static $loadedCategoryAttributes = [];
+
+        if (array_key_exists($category->id, $loadedCategoryAttributes)) {
+            return $loadedCategoryAttributes[$category->id];
+        }
+
+        $productsCount = $this->categoryProductQuerybuilder($category->id)->count();
+
+        if ($productsCount > 0) {
+            $categoryFilterableAttributes = $category->filterableAttributes->pluck('id')->toArray();
+
+            $productCategoryArrributes = $this->getCategoryProductAttribute($category->id);
+
+            $allFilterableAttributes = array_filter(array_unique(array_intersect($categoryFilterableAttributes, $productCategoryArrributes['attributes'])));
+
+            $attributes = app('Webkul\Attribute\Repositories\AttributeRepository')->getModel()::with(['options' => function($query) use ($productCategoryArrributes) {
+                    return $query->whereIn('id', $productCategoryArrributes['attributeOptions'])
+                                ->orderBy('sort_order');
+                }
+            ])->whereIn('id', $allFilterableAttributes)->get();
+
+            return $loadedCategoryAttributes[$category->id] = $attributes;
+        } else {
+
+            return $loadedCategoryAttributes[$category->id] = $category->filterableAttributes;
+        }
+    }
+
+    /**
+     * update product_flat custom column
+     *
+     * @param \Webkul\Attribute\Models\Attribute $attribute
+     * @param \Webkul\Product\Listeners\ProductFlat $listener
+     */
+    public function updateAttributeColumn(
+        \Webkul\Attribute\Models\Attribute $attribute ,
+        \Webkul\Product\Listeners\ProductFlat $listener ) {
+        return $this->model
+            ->leftJoin('product_attribute_values as v', function($join) use ($attribute) {
+                $join->on('product_flat.id', '=', 'v.product_id')
+                    ->on('v.attribute_id', '=', \DB::raw($attribute->id));
+            })->update(['product_flat.'.$attribute->code => \DB::raw($listener->attributeTypeFields[$attribute->type] .'_value')]);
     }
 }
