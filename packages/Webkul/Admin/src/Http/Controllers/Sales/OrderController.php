@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\OrderDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use \Webkul\Sales\Repositories\OrderCommentRepository;
@@ -58,6 +59,10 @@ class OrderController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(OrderDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
