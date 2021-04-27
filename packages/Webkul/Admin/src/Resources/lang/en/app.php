@@ -978,7 +978,12 @@ return [
             'update-failed' => 'Error! You cannot unsubscribe the subscriber',
             'delete' => 'Subscriber was successfully deleted',
             'delete-failed' => 'Error! Subscriber cannot be deleted'
-        ]
+        ],
+
+        'orders' => [
+            'list'  => ':customer_name\'s orders List',
+            'title' => 'Orders'
+         ]
     ],
 
     'promotions' => [

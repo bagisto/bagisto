@@ -112,6 +112,11 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.addresses.index',
             ])->name('admin.customer.addresses.massdelete');
 
+           //customer's orders route
+            Route::get('customers/{id}/orders', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@orders')->defaults('_config', [
+                'view' => 'admin::customers.orders.index',
+            ])->name('admin.customer.orders.index');
+
             // Configuration routes
             Route::get('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
                 'view' => 'admin::configuration.index',

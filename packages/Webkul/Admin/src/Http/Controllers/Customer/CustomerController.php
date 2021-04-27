@@ -287,4 +287,17 @@ class CustomerController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Display a listing of the customer orders.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    public function orders($id)
+    {
+        $customer = $this->customerRepository->find($id);
+
+        return view($this->_config['view'], compact('customer'));
+    }
 }

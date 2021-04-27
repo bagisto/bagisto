@@ -148,6 +148,14 @@ class CustomerDataGrid extends DataGrid
             'icon'   => 'icon note-icon',
             'title'  => trans('admin::app.customers.note.help-title'),
         ]);
+
+        $this->addAction([
+            'type'   => 'Edit',
+            'method' => 'GET',
+            'route'  => 'admin.customer.orders.index',
+            'icon'   => 'icon list-icon',
+            'title'  => trans('admin::app.customers.orders.title'),
+        ]);
     }
 
     /**
