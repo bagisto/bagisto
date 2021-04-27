@@ -1,9 +1,17 @@
 <template>
-    <div class="accordian" :class="[isActive ? 'active' : '', className, ! isActive && hasError ? 'error' : '']" :id="id">
+    <div
+        :class="[
+            'accordian',
+            isActive ? 'active' : '',
+            className,
+            !isActive && hasError ? 'error' : ''
+        ]"
+        :id="id"
+    >
         <div class="accordian-header" @click="toggleAccordian()">
             <slot name="header">
                 {{ title }}
-                <i class="icon" :class="iconClass"></i>
+                <i :class="['icon', iconClass]"></i>
             </slot>
         </div>
 
@@ -14,59 +22,69 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            title: String,
-            id: String,
-            className: String,
-            active: Boolean
+export default {
+    props: {
+        title: String,
+        id: String,
+        className: String,
+        active: Boolean,
+        downIconClass: {
+            type: String,
+            default: "accordian-down-icon"
+        },
+        upIconClass: {
+            type: String,
+            default: "accordian-up-icon"
+        }
+    },
+
+    inject: ["$validator"],
+
+    data: function() {
+        return {
+            isActive: false,
+
+            imageData: "",
+
+            hasError: false
+        };
+    },
+
+    mounted: function() {
+        this.addHasErrorClass();
+
+        eventBus.$on("onFormError", this.addHasErrorClass);
+
+        this.isActive = this.active;
+    },
+
+    methods: {
+        toggleAccordian: function() {
+            this.isActive = !this.isActive;
         },
 
-        inject: ['$validator'],
+        addHasErrorClass: function() {
+            let self = this;
 
-        data: function() {
-            return {
-                isActive: false,
-
-                imageData: '',
-
-                hasError: false
-            }
-        },
-
-        mounted: function() {
-            this.addHasErrorClass()
-
-            eventBus.$on('onFormError', this.addHasErrorClass);
-
-            this.isActive = this.active;
-        },
-
-        methods: {
-            toggleAccordian: function() {
-                this.isActive = ! this.isActive;
-            },
-
-            addHasErrorClass: function() {
-                var this_this = this;
-
-                setTimeout(function() {
-                    $(this_this.$el).find('.control-group').each(function(index, element) {
-                        if ($(element).hasClass('has-error')) {
-                            this_this.hasError = true;
+            setTimeout(function() {
+                $(self.$el)
+                    .find(".control-group")
+                    .each(function(index, element) {
+                        if ($(element).hasClass("has-error")) {
+                            self.hasError = true;
                         }
                     });
-                }, 0);
-            }
-        },
+            }, 0);
+        }
+    },
 
-        computed: {
-            iconClass() {
-                return {
-                    'accordian-down-icon': ! this.isActive,
-                    'accordian-up-icon': this.isActive,
-                };
-            }
+    computed: {
+        iconClass: function() {
+            return {
+                [this.downIconClass]: !this.isActive,
+                [this.upIconClass]: this.isActive
+            };
         }
     }
+};
 </script>
