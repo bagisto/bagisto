@@ -476,6 +476,7 @@ header #search-form > *:focus {
     .main-category {
         padding: 8px 15px;
         border-top: 1px solid $border-common;
+        border-bottom: 5px solid transparent;
     }
 
     .content-list {
