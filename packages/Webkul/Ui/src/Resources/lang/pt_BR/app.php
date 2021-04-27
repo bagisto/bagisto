@@ -12,6 +12,11 @@ return [
             'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?'
         ],
 
+        'error' => [
+            'multiple-sort-keys-error' => 'Fatal Error! Multiple sort keys found, please resolve the URL manually',
+            'multiple-search-keys-error' => 'Multiple search keys found, please resolve the URL manually',
+        ],
+
         'zero-index' => 'Colunas do índice podem ter valores maiores que zero apenas',
         'no-records' => 'Nenhum registro foi encontrado',
         'filter-fields-missing' => 'Alguns dos campos obrigatórios são nulos, por favor verifique coluna, condição e valor corretamente',
