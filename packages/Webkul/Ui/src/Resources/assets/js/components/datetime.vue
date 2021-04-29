@@ -2,9 +2,9 @@
     <span>
         <slot>
             <input
+                class="control"
                 type="text"
                 :name="name"
-                class="control"
                 :value="value"
                 data-input
             />
@@ -27,6 +27,8 @@ export default {
         name: String,
 
         value: String,
+
+        disable: Array,
 
         minDate: String,
 
@@ -51,8 +53,11 @@ export default {
         setOptions: function() {
             let self = this;
 
-            let options = {
+            return {
                 allowInput: true,
+                disable: this.disable ?? [],
+                minDate: this.minDate ?? '',
+                maxDate: this.maxDate ?? '',
                 altFormat: "Y-m-d H:i:S",
                 dateFormat: "Y-m-d H:i:S",
                 enableTime: true,
@@ -62,16 +67,6 @@ export default {
                     self.$emit("onChange", dateStr);
                 }
             };
-
-            if (this.minDate) {
-                options.minDate = this.minDate;
-            }
-
-            if (this.maxDate) {
-                options.maxDate = this.maxDate;
-            }
-
-            return options;
         },
 
         activate: function(options) {
