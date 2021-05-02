@@ -201,7 +201,7 @@ class InvoiceRepository extends Repository
 
             $this->orderRepository->collectTotals($order);
 
-            if (isset($orderState)){
+            if (isset($orderState)) {
                 $this->orderRepository->updateOrderStatus($order, $orderState);
             } else {
                 $this->orderRepository->updateOrderStatus($order);
