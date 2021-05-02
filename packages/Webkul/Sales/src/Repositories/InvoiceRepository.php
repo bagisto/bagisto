@@ -83,7 +83,7 @@ class InvoiceRepository extends Repository
      * @param  array  $data
      * @return \Webkul\Sales\Contracts\Invoice
      */
-    public function create(array $data)
+    public function create(array $data, $invoiceState = null, $orderState = null)
     {
         DB::beginTransaction();
 
@@ -93,11 +93,17 @@ class InvoiceRepository extends Repository
             $order = $this->orderRepository->find($data['order_id']);
 
             $totalQty = array_sum($data['invoice']['items']);
+            
+            if (isset($invoiceState)) {
+                $state = $invoiceState;
+            } else {
+                $state = "paid";
+            }
 
             $invoice = $this->model->create([
                 'order_id'              => $order->id,
                 'total_qty'             => $totalQty,
-                'state'                 => 'paid',
+                'state'                 => $state,
                 'base_currency_code'    => $order->base_currency_code,
                 'channel_currency_code' => $order->channel_currency_code,
                 'order_currency_code'   => $order->order_currency_code,
@@ -195,7 +201,11 @@ class InvoiceRepository extends Repository
 
             $this->orderRepository->collectTotals($order);
 
-            $this->orderRepository->updateOrderStatus($order);
+            if (isset($orderState)){
+                $this->orderRepository->updateOrderStatus($order, $orderState);
+            } else {
+                $this->orderRepository->updateOrderStatus($order);
+            }
 
             Event::dispatch('sales.invoice.save.after', $invoice);
         } catch (\Exception $e) {
