@@ -306,7 +306,7 @@ class OrderRepository extends Repository
      */
     public function updateOrderStatus($order, $orderState = null)
     {
-        if (!empty($orderState)){
+        if (!empty($orderState)) {
             $status = $orderState;
         } else {
             $status = "processing";
