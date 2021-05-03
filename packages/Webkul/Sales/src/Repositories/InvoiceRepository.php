@@ -80,10 +80,10 @@ class InvoiceRepository extends Repository
     }
 
     /**
-     * @param  array  $data
-     * @return \Webkul\Sales\Contracts\Invoice
+     * @param  array  $data     
      * @param  string $invoiceState
      * @param  string $orderState
+     * @return \Webkul\Sales\Contracts\Invoice
      */
     public function create(array $data, $invoiceState = null, $orderState = null)
     {
