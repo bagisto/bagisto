@@ -156,7 +156,7 @@ class ShipmentRepository extends Repository
                 'inventory_source_name' => $shipment->inventory_source->name,
             ]);
 
-            if (isset($orderState)){
+            if (isset($orderState)) {
                 $this->orderRepository->updateOrderStatus($order, $orderState);
             } else {
                 $this->orderRepository->updateOrderStatus($order);
