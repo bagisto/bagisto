@@ -22,6 +22,7 @@ class CustomerReviewDataGrid extends DataGrid
         $this->addFilter('product_review_id', 'pr.id');
         $this->addFilter('product_review_status', 'pr.status');
         $this->addFilter('product_name', 'pf.name');
+        $this->addFilter('created_at', 'pr.created_at');
 
         $this->setQueryBuilder($queryBuilder);
     }
