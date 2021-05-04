@@ -419,7 +419,10 @@ return [
             'print' => 'Drukuj',
             'order-date' => 'Data zamówienia',
             'creation-error' => 'Tworzenie faktury za zamówienie jest niedozwolone.',
-            'product-error' => 'Faktury nie można utworzyć bez produktów.'
+            'product-error' => 'Faktury nie można utworzyć bez produktów.',
+            'status-overdue' => 'Overdue',
+            'status-pending' => 'Pending Payment',
+            'status-paid'    => 'Paid',
         ],
 
         'shipments' => [

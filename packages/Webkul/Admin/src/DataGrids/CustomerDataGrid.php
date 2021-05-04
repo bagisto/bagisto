@@ -2,11 +2,12 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
+use Webkul\Ui\DataGrid\DataGrid;
 
 class CustomerDataGrid extends DataGrid
 {
+
     protected $index = 'customer_id';
 
     protected $sortOrder = 'desc';
@@ -130,11 +131,10 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'type'   => 'Edit',
             'method' => 'GET',
-            'route'  => 'admin.customer.addresses.index',
-            'icon'   => 'icon list-icon',
-            'title'  => trans('admin::app.customers.customers.addresses'),
+            'route'  => 'admin.customer.note.create',
+            'icon'   => 'icon note-icon',
+            'title'  => trans('admin::app.customers.note.help-title'),
         ]);
 
         $this->addAction([
@@ -143,18 +143,8 @@ class CustomerDataGrid extends DataGrid
             'icon'   => 'icon trash-icon',
             'title'  => trans('admin::app.customers.customers.delete-help-title'),
         ]);
-
-        $this->addAction([
-            'method' => 'GET',
-            'route'  => 'admin.customer.note.create',
-            'icon'   => 'icon note-icon',
-            'title'  => trans('admin::app.customers.note.help-title'),
-        ]);
     }
 
-    /**
-     * Customer Mass Action To Delete And Change Their
-     */
     public function prepareMassActions()
     {
         $this->addMassAction([

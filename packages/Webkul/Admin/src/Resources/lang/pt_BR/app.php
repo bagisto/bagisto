@@ -418,7 +418,10 @@ return [
             'print' => 'Imprimir',
             'order-date' => 'Data do Pedido',
             'creation-error' => 'A criação de fatura de pedido não é permitida.',
-            'product-error' => 'A fatura não pode ser criada sem produtos.'
+            'product-error' => 'A fatura não pode ser criada sem produtos.',
+            'status-overdue' => 'Overdue',
+            'status-pending' => 'Pending Payment',
+            'status-paid'    => 'Paid',
         ],
 
         'shipments' => [

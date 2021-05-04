@@ -141,7 +141,7 @@ trait ProvideCollection
         $countKeys = count(array_keys($info));
 
         if ($countKeys > 1) {
-            throw new \Exception('Fatal Error! Multiple sort keys found, please resolve the URL manually.');
+            throw new \Exception(__('ui::app.datagrid.error.multiple-sort-keys-error'));
         }
 
         $columnName = $this->findColumnType(array_keys($info)[0]);
@@ -164,7 +164,7 @@ trait ProvideCollection
         $countKeys = count(array_keys($info));
 
         if ($countKeys > 1) {
-            throw new \Exception('Multiple search keys found, please resolve the URL manually.');
+            throw new \Exception(__('ui::app.datagrid.error.multiple-search-keys-error'));
         }
 
         if ($countKeys == 1) {

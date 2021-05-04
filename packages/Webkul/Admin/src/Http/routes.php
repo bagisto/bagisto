@@ -43,7 +43,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::dashboard.index',
             ])->name('admin.dashboard.index');
 
-            //Customer Management Routes
+            // Customer Management Routes
             Route::get('customers', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
                 'view' => 'admin::customers.index',
             ])->name('admin.customer.index');
@@ -82,7 +82,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.reviews.index',
             ])->name('admin.customer.review.index');
 
-            //Customer's addresses routes
+            // Customer's addresses routes
             Route::get('customers/{id}/addresses', 'Webkul\Admin\Http\Controllers\Customer\AddressController@index')->defaults('_config', [
                 'view' => 'admin::customers.addresses.index',
             ])->name('admin.customer.addresses.index');
@@ -111,6 +111,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('customers/{id}/addresses', 'Webkul\Admin\Http\Controllers\Customer\AddressController@massDestroy')->defaults('_config', [
                 'redirect' => 'admin.customer.addresses.index',
             ])->name('admin.customer.addresses.massdelete');
+
+            // Customer's invoices route
+            Route::get('customers/{id}/invoices', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@invoices')->name('admin.customer.invoices.data');
+
+            // Customer's orders route
+            Route::get('customers/{id}/orders', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@orders')->name('admin.customer.orders.data');
 
             // Configuration routes
             Route::get('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [

@@ -13,6 +13,9 @@ use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Admin\Mail\NewCustomerNotification;
 use Mail;
 
+use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
+use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
+
 class CustomerController extends Controller
 {
     /**
@@ -300,5 +303,31 @@ class CustomerController extends Controller
 
         session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customers']));
         return redirect()->back();
+    }
+
+    /**
+     * Retrieve all invoices from customer.
+     *
+     * @param  int  $id
+     * @return \Webkul\Admin\DataGrids\CustomersInvoicesDataGrid
+     */
+    public function invoices($id)
+    {
+        if (request()->ajax()) {
+            return app(CustomersInvoicesDataGrid::class)->toJson();
+        }
+    }
+
+    /**
+     * Retrieve all orders from customer.
+     *
+     * @param  int  $id
+     * @return \Webkul\Admin\DataGrids\CustomerOrderDataGrid
+     */
+    public function orders($id)
+    {
+        if (request()->ajax()) {
+            return app(CustomerOrderDataGrid::class)->toJson();
+        }
     }
 }

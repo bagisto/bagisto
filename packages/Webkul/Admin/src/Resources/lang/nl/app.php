@@ -417,7 +417,10 @@ return [
             'print' => 'Print',
             'order-date' => 'Besteldatum',
             'creation-error' => 'De bestelling staat niet toe dat er een factuur wordt aangemaakt.',
-            'product-error' => 'Zonder producten kan er geen factuur worden aangemaakt.'
+            'product-error' => 'Zonder producten kan er geen factuur worden aangemaakt.',
+            'status-overdue'  => 'Verlopen',
+            'status-pending' => 'Wachten op betaling',
+            'status-paid'    => 'Betaald',
         ],
 
         'shipments' => [

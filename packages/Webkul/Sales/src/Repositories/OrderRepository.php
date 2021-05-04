@@ -302,20 +302,25 @@ class OrderRepository extends Repository
      * Update order status.
      *
      * @param  \Webkul\Sales\Contracts\Order  $order
+     * @param  string $orderState
      * @return void
      */
-    public function updateOrderStatus($order)
+    public function updateOrderStatus($order, $orderState = null)
     {
-        $status = 'processing';
+        if (!empty($orderState)) {
+            $status = $orderState;
+        } else {
+            $status = "processing";
 
-        if ($this->isInCompletedState($order)) {
-            $status = 'completed';
-        }
+            if ($this->isInCompletedState($order)) {
+                $status = 'completed';
+            }
 
-        if ($this->isInCanceledState($order)) {
-            $status = 'canceled';
-        } elseif ($this->isInClosedState($order)) {
-            $status = 'closed';
+            if ($this->isInCanceledState($order)) {
+                $status = 'canceled';
+            } elseif ($this->isInClosedState($order)) {
+                $status = 'closed';
+            }
         }
 
         $order->status = $status;

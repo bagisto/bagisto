@@ -416,6 +416,9 @@ return [
             'order-date' => 'Bestell-Datum',
             'creation-error' => 'Die Erstellung einer Bestellrechnung ist nicht zulässig.',
             'product-error' => 'Eine Rechnung kann nicht ohne Produkte erstellt werden.',
+            'status-overdue' => 'Overdue',
+            'status-pending' => 'Pending Payment',
+            'status-paid'    => 'Paid',
         ],
         'shipments' =>
         [

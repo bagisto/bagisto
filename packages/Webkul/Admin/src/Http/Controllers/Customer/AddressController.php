@@ -102,7 +102,7 @@ class AddressController extends Controller
         if ($this->customerAddressRepository->create($data)) {
             session()->flash('success', trans('admin::app.customers.addresses.success-create'));
 
-            return redirect()->route('admin.customer.addresses.index', ['id' => $data['customer_id']]);
+            return redirect()->route('admin.customer.edit', ['id' => $data['customer_id']]);
         } else {
             session()->flash('success', trans('admin::app.customers.addresses.error-create'));
 

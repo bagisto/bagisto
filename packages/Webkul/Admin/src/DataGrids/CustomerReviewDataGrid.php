@@ -15,13 +15,14 @@ class CustomerReviewDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('product_reviews as pr')
             ->leftjoin('product_flat as pf', 'pr.product_id', '=', 'pf.product_id')
-            ->select('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pf.name as product_name', 'pr.status as product_review_status', 'pr.rating')
+            ->select('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pf.name as product_name', 'pr.status as product_review_status', 'pr.rating', 'pr.created_at')
             ->where('channel', core()->getCurrentChannelCode())
             ->where('locale', app()->getLocale());
 
         $this->addFilter('product_review_id', 'pr.id');
         $this->addFilter('product_review_status', 'pr.status');
         $this->addFilter('product_name', 'pf.name');
+        $this->addFilter('created_at', 'pr.created_at');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -91,6 +92,15 @@ class CustomerReviewDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.disapproved') . '</span>';
                 }
             },
+        ]);
+
+        $this->addColumn([
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.datagrid.date'),
+            'type'       => 'datetime',
+            'sortable'   => true,
+            'searchable' => false,
+            'filterable' => true,
         ]);
     }
 
