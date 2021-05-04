@@ -418,7 +418,10 @@ return [
             'print' => 'چاپ',
             'order-date' => 'تاریخ سفارش',
             'creation-error' => 'ایجاد فاکتور سفارش مجاز نیست.',
-            'product-error' => 'بدون محصولات نمی توان فاکتور ایجاد کرد.'
+            'product-error' => 'بدون محصولات نمی توان فاکتور ایجاد کرد.',
+            'status-overdue' => 'Overdue',
+            'status-pending' => 'Pending Payment',
+            'status-paid'    => 'Paid',
         ],
 
         'shipments' => [
