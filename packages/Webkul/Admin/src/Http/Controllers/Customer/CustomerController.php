@@ -13,6 +13,9 @@ use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Admin\Mail\NewCustomerNotification;
 use Mail;
 
+use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
+use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
+
 class CustomerController extends Controller
 {
     /**
@@ -303,15 +306,28 @@ class CustomerController extends Controller
     }
 
     /**
-     * Display a listing of the customer orders.
+     * Retrieve all invoices from customer.
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return \Webkul\Admin\DataGrids\CustomersInvoicesDataGrid
+     */
+    public function invoices($id)
+    {
+        if (request()->ajax()) {
+            return app(CustomersInvoicesDataGrid::class)->toJson();
+        }
+    }
+
+    /**
+     * Retrieve all orders from customer.
+     *
+     * @param  int  $id
+     * @return \Webkul\Admin\DataGrids\CustomerOrderDataGrid
      */
     public function orders($id)
     {
-        $customer = $this->customerRepository->find($id);
-
-        return view($this->_config['view'], compact('customer'));
+        if (request()->ajax()) {
+            return app(CustomerOrderDataGrid::class)->toJson();
+        }
     }
 }

@@ -13,6 +13,10 @@
                     {{ $customer->first_name . " " . $customer->last_name }}
                 </h1>
             </div>
+
+            <div class="page-action">
+
+            </div>
         </div>
 
         <tabs>
@@ -25,11 +29,38 @@
 
             <tab name="{{ __('admin::app.customers.customers.addresses') }}" :selected="false">
                 <div class="style:overflow: auto;">&nbsp;</div>
-                    {!! view_render_event('bagisto.admin.customer.addresses.list.before') !!}
-                    {!! app('Webkul\Admin\DataGrids\AddressDataGrid')->render() !!}
-                    {!! view_render_event('bagisto.admin.customer.addresses.list.after') !!}
+
+                <div style="float: right">
+                    <a href="{{ route('admin.customer.addresses.create', ['id' => $customer->id]) }}" class="btn btn-lg btn-primary">
+                        {{ __('admin::app.customers.addresses.create-btn-title') }}
+                    </a>
                 </div>
+
+                @inject('addressDataGrid', 'Webkul\Admin\DataGrids\AddressDataGrid')
+                {!! $addressDataGrid->render() !!}
+
             </tab>
+
+            <tab name="{{ __('admin::app.layouts.invoices') }}" :selected="false">
+                <div class="style:overflow: auto;">&nbsp;</div>
+
+                    {!! view_render_event('bagisto.admin.customer.invoices.list.before') !!}
+
+                    <datagrid-plus src="{{ route('admin.customer.invoices.data', $customer->id) }}"></datagrid-plus>
+
+                    {!! view_render_event('bagisto.admin.customer.invoices.list.after') !!}
+            </tab>
+
+            <tab name="{{ __('admin::app.customers.orders.title') }}" :selected="false">
+                <div class="style:overflow: auto;">&nbsp;</div>
+
+                    {!! view_render_event('bagisto.admin.customer.orders.list.before') !!}
+
+                    <datagrid-plus src="{{ route('admin.customer.orders.data', $customer->id) }}"></datagrid-plus>
+
+                    {!! view_render_event('bagisto.admin.customer.orders.list.after') !!}
+            </tab>
+
         {!! view_render_event('bagisto.admin.customer.edit.after', ['customer' => $customer]) !!}
         </tabs>
     </div>

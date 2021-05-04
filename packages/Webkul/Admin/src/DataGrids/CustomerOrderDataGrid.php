@@ -3,11 +3,15 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Sales\Models\OrderAddress;
 use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
+
+use Webkul\Sales\Models\OrderAddress;
 
 class CustomerOrderDataGrid extends DataGrid
 {
+    use ProvideDataGridPlus;
+
     protected $index = 'id';
 
     protected $sortOrder = 'desc';
@@ -48,24 +52,6 @@ class CustomerOrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'base_sub_total',
-            'label'      => trans('admin::app.datagrid.sub-total'),
-            'type'       => 'price',
-            'searchable' => false,
-            'sortable'   => true,
-            'filterable' => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.datagrid.grand-total'),
-            'type'       => 'price',
-            'searchable' => false,
-            'sortable'   => true,
-            'filterable' => true,
-        ]);
-
-        $this->addColumn([
             'index'      => 'created_at',
             'label'      => trans('admin::app.datagrid.order-date'),
             'type'       => 'datetime',
@@ -80,6 +66,24 @@ class CustomerOrderDataGrid extends DataGrid
             'type'       => 'string',
             'sortable'   => true,
             'searchable' => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'base_sub_total',
+            'label'      => trans('admin::app.datagrid.sub-total'),
+            'type'       => 'price',
+            'searchable' => false,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'base_grand_total',
+            'label'      => trans('admin::app.datagrid.grand-total'),
+            'type'       => 'price',
+            'searchable' => false,
+            'sortable'   => true,
             'filterable' => true,
         ]);
 
@@ -108,24 +112,6 @@ class CustomerOrderDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-danger">'. trans('admin::app.sales.orders.order-status-fraud') . '</span>';
                 }
             },
-        ]);
-
-        $this->addColumn([
-            'index'      => 'billed_to',
-            'label'      => trans('admin::app.datagrid.billed-to'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'shipped_to',
-            'label'      => trans('admin::app.datagrid.shipped-to'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
         ]);
     }
 
