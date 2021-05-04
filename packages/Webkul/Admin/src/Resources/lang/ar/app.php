@@ -420,7 +420,10 @@ return [
             'print' => 'اطبع',
             'order-date' => 'تاريخ الطلب',
             'creation-error' => 'لا يسمح بإنشاء الفواتير.',
-            'product-error' => 'ولا يمكن إعداد الفاتورة بدون منتجات.'
+            'product-error' => 'ولا يمكن إعداد الفاتورة بدون منتجات.',
+            'status-overdue' => 'Overdue',
+            'status-pending' => 'Pending Payment',
+            'status-paid'    => 'Paid',
         ],
 
         'shipments' => [
