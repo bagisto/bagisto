@@ -302,6 +302,7 @@ class OrderRepository extends Repository
      * Update order status.
      *
      * @param  \Webkul\Sales\Contracts\Order  $order
+     * @param  string $orderState
      * @return void
      */
     public function updateOrderStatus($order, $orderState = null)
