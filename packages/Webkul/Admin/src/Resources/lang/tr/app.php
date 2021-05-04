@@ -417,7 +417,10 @@ return [
             'print' => 'Yazdır',
             'order-date' => 'Sipariş Tarihi',
             'creation-error' => 'Fatura oluşturulmasına izin verilmedi.',
-            'product-error' => 'Fatura oluşturulması için ürün ekleyiniz.'
+            'product-error' => 'Fatura oluşturulması için ürün ekleyiniz.',
+            'status-overdue' => 'Overdue',
+            'status-pending' => 'Pending Payment',
+            'status-paid'    => 'Paid',
         ],
 
         'shipments' => [

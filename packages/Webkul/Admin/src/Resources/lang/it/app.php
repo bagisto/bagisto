@@ -421,7 +421,10 @@ return [
             'print' => 'Stampa',
             'order-date' => 'Data Ordine',
             'creation-error' => 'La creazione della fattura dell\'Ordine non è consentita.',
-            'product-error' => 'La fattura non può essere creata senza prodotti.'
+            'product-error' => 'La fattura non può essere creata senza prodotti.',
+            'status-overdue' => 'Pending',
+            'status-pending' => 'Pending Payment',
+            'status-paid'    => 'Paid',
         ],
 
         'shipments' => [
