@@ -31,7 +31,7 @@
                                     <input type="text" disabled :value="item.quantity" class="ml5" />
                                 </div>
                                 <span class="card-total-price fw6">
-                                    {{ item.base_total_with_tax }}
+                                    {{ isTaxInclusive == '1' ? item.base_total_with_tax : item.base_total }}
                                 </span>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                     {{ subtotalText }}
                 </h5>
 
-                <h5 class="col-6 text-right fw6 no-padding">{{ cartInformation.base_grand_total }}</h5>
+                <h5 class="col-6 text-right fw6 no-padding">{{ isTaxInclusive == '1' ? cartInformation.base_grand_total : cartInformation.base_sub_total }}</h5>
             </div>
 
             <div class="modal-footer">
@@ -73,6 +73,7 @@
 <script>
     export default {
         props: [
+            'isTaxInclusive',
             'cartText',
             'viewCart',
             'checkoutUrl',

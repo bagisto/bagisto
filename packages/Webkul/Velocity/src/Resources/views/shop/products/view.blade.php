@@ -126,9 +126,11 @@
                                         <div class="col-12 price">
                                             @include ('shop::products.price', ['product' => $product])
 
-                                            <span>
-                                                Inclusive of all taxes.
-                                            </span>
+                                            @if ((bool) core()->getConfigData('catalog.products.attribute.price_attribute_tax_inclusive'))
+                                                <span>
+                                                    Inclusive of all taxes.
+                                                </span>
+                                            @endif
                                         </div>
 
                                         @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
