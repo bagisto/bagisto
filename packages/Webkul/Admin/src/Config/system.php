@@ -301,6 +301,11 @@ return [
                 'name'  => 'file_attribute_upload_size',
                 'title' => 'admin::app.admin.system.file-upload-size',
                 'type'  => 'text',
+            ], [
+                'name'    => 'price_attribute_tax_inclusive',
+                'title'   => 'admin::app.admin.system.tax-inclusive',
+                'type'    => 'boolean',
+                'default' => false
             ]
         ],
     ], [
