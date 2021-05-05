@@ -1488,6 +1488,7 @@ return [
             'cache-small-image' => 'Small Image',
             'cache-medium-image' => 'Medium Image',
             'cache-large-image' => 'Large Image',
+            'tax-inclusive' => 'Tax inclusive',
         ]
     ]
 ];

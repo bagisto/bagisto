@@ -1385,6 +1385,7 @@ return [
             'attribute'                 => 'Attribute',
             'image-upload-size'         => 'Allowed Image Upload Size (in Kb)',
             'file-upload-size'          => 'Allowed File Upload Size (in Kb)',
+            'tax-inclusive'             => 'Tax inclusive',
             'review'                    => 'Review',
             'allow-guest-review'        => 'Allow Guest Review',
             'inventory'                 => 'Inventory',
