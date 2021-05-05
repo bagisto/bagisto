@@ -65,7 +65,7 @@
 
                         @if ((bool) core()->getConfigData('catalog.products.attribute.price_attribute_tax_inclusive'))
                             <div>
-                                Inclusive of all taxes.
+                                {{ __('shop::app.products.tax-inclusive') }}
                             </div>
                         @endif
 

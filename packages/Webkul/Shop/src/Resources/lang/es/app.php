@@ -445,6 +445,7 @@ return [
         'compare_options' => 'Comparar Optiones',
         'wishlist-options' => 'Opciones de Lista de Deseos',
         'offers' => 'Compre :qty por :price cada uno y ahorre :discount%',
+        'tax-inclusive' => 'Inclusive of all taxes',
     ],
 
     // 'reviews' => [
