@@ -98,7 +98,7 @@
 
         <div class="control-group {{ $field['type'] }}" @if ($field['type'] == 'multiselect') :class="[errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]') ? 'has-error' : '']" @else :class="[errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]') ? 'has-error' : '']" @endif>
 
-            <label for="{{ $name }}" {{ !isset($field['validation']) || preg_match('/\brequired\b/', $field['validation']) == false ? '' : 'class=required' }}>
+            <label for="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" {{ !isset($field['validation']) || preg_match('/\brequired\b/', $field['validation']) == false ? '' : 'class=required' }}>
 
                 {{ trans($field['title']) }}
 
