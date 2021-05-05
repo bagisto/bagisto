@@ -745,13 +745,23 @@ abstract class AbstractType
     {
         if ($this->haveSpecialPrice()) {
             $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-                . '<span class="regular-price">' . core()->currency($this->getTaxInclusiveRate($this->product->price)) . '</span>'
-                . '<span class="special-price">' . core()->currency($this->getTaxInclusiveRate($this->getSpecialPrice())) . '</span>';
+                . '<span class="regular-price">' . core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price) . '</span>'
+                . '<span class="special-price">' . core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getSpecialPrice()) : $this->getSpecialPrice()) . '</span>';
         } else {
-            $html = '<span>' . core()->currency($this->getTaxInclusiveRate($this->product->price)) . '</span>';
+            $html = '<span>' . core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price) . '</span>';
         }
 
         return $html;
+    }
+
+    /**
+     * Is tax inclusive enabled in backend.
+     *
+     * @return bool
+     */
+    public function isTaxInclusive(): bool
+    {
+        return (bool) core()->getConfigData('catalog.products.attribute.price_attribute_tax_inclusive');
     }
 
     /**

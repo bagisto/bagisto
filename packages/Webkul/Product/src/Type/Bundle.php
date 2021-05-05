@@ -363,23 +363,23 @@ class Bundle extends AbstractType
         return [
             'from' => [
                 'regular_price' => [
-                    'price'          => core()->convertPrice($this->getRegularMinimalPrice()),
-                    'formated_price' => core()->currency($this->getRegularMinimalPrice()),
+                    'price'          => core()->convertPrice($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getRegularMinimalPrice()) : $this->getRegularMinimalPrice()),
+                    'formated_price' => core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getRegularMinimalPrice()) : $this->getRegularMinimalPrice()),
                 ],
                 'final_price'   => [
-                    'price'          => core()->convertPrice($this->getMinimalPrice()),
-                    'formated_price' => core()->currency($this->getMinimalPrice()),
+                    'price'          => core()->convertPrice($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()),
+                    'formated_price' => core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()),
                 ]
             ],
 
             'to'   => [
                 'regular_price' => [
-                    'price'          => core()->convertPrice($this->getRegularMaximamPrice()),
-                    'formated_price' => core()->currency($this->getRegularMaximamPrice()),
+                    'price'          => core()->convertPrice($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getRegularMaximamPrice()) : $this->getRegularMaximamPrice()),
+                    'formated_price' => core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getRegularMaximamPrice()) : $this->getRegularMaximamPrice()),
                 ],
                 'final_price'   => [
-                    'price'          => core()->convertPrice($this->getMaximamPrice()),
-                    'formated_price' => core()->currency($this->getMaximamPrice()),
+                    'price'          => core()->convertPrice($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMaximamPrice()) : $this->getMaximamPrice()),
+                    'formated_price' => core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMaximamPrice()) : $this->getMaximamPrice()),
                 ]
             ]
         ];

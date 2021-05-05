@@ -182,12 +182,13 @@ class Grouped extends AbstractType
     {
         $html = '';
 
-        if ($this->checkGroupProductHaveSpecialPrice())
+        if ($this->checkGroupProductHaveSpecialPrice()) {
             $html .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
+        }
 
         $html .= '<span class="price-label">' . trans('shop::app.products.starting-at') . '</span>'
         . ' '
-        . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+        . '<span class="final-price">' . core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()) . '</span>';
 
         return $html;
     }
