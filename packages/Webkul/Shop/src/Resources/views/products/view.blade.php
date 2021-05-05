@@ -63,6 +63,12 @@
 
                         @include ('shop::products.price', ['product' => $product])
 
+                        @if ((bool) core()->getConfigData('catalog.products.attribute.price_attribute_tax_inclusive'))
+                            <div>
+                                Inclusive of all taxes.
+                            </div>
+                        @endif
+
                         @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
                             <div class="regular-price">
                                 @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)

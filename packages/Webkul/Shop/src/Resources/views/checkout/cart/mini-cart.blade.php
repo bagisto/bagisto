@@ -25,7 +25,11 @@
 
                         {!! view_render_event('bagisto.shop.checkout.cart-mini.subtotal.before', ['cart' => $cart]) !!}
 
-                        <b>{{ core()->currency($cart->base_sub_total) }}</b>
+                        @if ((bool) core()->getConfigData('catalog.products.attribute.price_attribute_tax_inclusive'))
+                            <b>{{ core()->currency($cart->base_grand_total) }}</b>
+                        @else
+                            <b>{{ core()->currency($cart->base_sub_total) }}</b>
+                        @endif
 
                         {!! view_render_event('bagisto.shop.checkout.cart-mini.subtotal.after', ['cart' => $cart]) !!}
                     </p>
@@ -67,7 +71,13 @@
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.price.before', ['item' => $item]) !!}
 
-                                <div class="item-price"><b>{{ core()->currency($item->base_total) }}</b></div>
+                                <div class="item-price">
+                                    @if ((bool) core()->getConfigData('catalog.products.attribute.price_attribute_tax_inclusive'))
+                                        <b>{{ core()->currency($item->base_total + $item->tax_amount) }}</b>
+                                    @else
+                                        <b>{{ core()->currency($item->base_total) }}</b>
+                                    @endif
+                                </div>
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.price.after', ['item' => $item]) !!}
 
