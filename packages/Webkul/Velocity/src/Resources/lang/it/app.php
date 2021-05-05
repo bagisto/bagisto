@@ -266,6 +266,7 @@ return [
         'short-description' => 'Descrizioni Brevi',
         'recently-viewed' => 'Prodotti visti di recente',
         'be-first-review' => 'Sii il primo a scrivere una review',
+        'tax-inclusive' => 'Inclusive of all taxes',
     ],
 
     'shop' => [

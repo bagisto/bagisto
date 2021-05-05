@@ -264,6 +264,7 @@ return [
         'short-description' => 'توضیحات کوتاه',
         'recently-viewed' => 'محصولات اخیرا مشاهده شده',
         'be-first-review' => 'اولین نفری باشید که نظر می دهد',
+        'tax-inclusive' => 'Inclusive of all taxes',
     ],
 
     'shop' => [

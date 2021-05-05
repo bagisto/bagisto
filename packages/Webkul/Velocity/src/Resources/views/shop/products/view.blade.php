@@ -128,7 +128,7 @@
 
                                             @if ((bool) core()->getConfigData('catalog.products.attribute.price_attribute_tax_inclusive'))
                                                 <span>
-                                                    Inclusive of all taxes.
+                                                    {{ __('velocity::app.products.tax-inclusive') }}
                                                 </span>
                                             @endif
                                         </div>
