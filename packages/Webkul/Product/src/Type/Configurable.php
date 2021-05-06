@@ -2,14 +2,14 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Customer\Contracts\CartItem;
-use Webkul\Product\Datatypes\CartItemValidationResult;
-use Webkul\Product\Models\ProductAttributeValue;
+use Illuminate\Support\Str;
+use Webkul\Tax\Helpers\Tax;
+use Illuminate\Support\Facades\DB;
 use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Facades\ProductImage;
-use Illuminate\Support\Str;
+use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
-use Illuminate\Support\Facades\DB;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 
 class Configurable extends AbstractType
 {

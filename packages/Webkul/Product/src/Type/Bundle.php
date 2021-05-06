@@ -2,17 +2,18 @@
 
 namespace Webkul\Product\Type;
 
+use Webkul\Tax\Helpers\Tax;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\Helpers\BundleOption;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Datatypes\CartItemValidationResult;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
-use Webkul\Product\Helpers\BundleOption;
-use Webkul\Checkout\Models\CartItem;
 
 class Bundle extends AbstractType
 {

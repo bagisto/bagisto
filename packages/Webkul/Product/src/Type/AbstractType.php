@@ -230,7 +230,7 @@ abstract class AbstractType
                 $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
             }
 
-            if (!isset($data[$attribute->code])) {
+            if (! isset($data[$attribute->code])) {
                 continue;
             }
 
@@ -259,7 +259,7 @@ abstract class AbstractType
                 'locale'       => $attribute->value_per_locale ? $data['locale'] : null,
             ]);
 
-            if (!$attributeValue) {
+            if (! $attributeValue) {
                 $this->attributeValueRepository->create([
                     'product_id'   => $product->id,
                     'attribute_id' => $attribute->id,
@@ -284,7 +284,7 @@ abstract class AbstractType
         $route = request()->route() ? request()->route()->getName() : "";
 
         if ($route !== 'admin.catalog.products.massupdate') {
-            if (!isset($data['categories'])) {
+            if (! isset($data['categories'])) {
                 $data['categories'] = [];
             }
 
@@ -351,7 +351,7 @@ abstract class AbstractType
      */
     public function isSaleable()
     {
-        if (!$this->product->status) {
+        if (! $this->product->status) {
             return false;
         }
 
@@ -503,7 +503,7 @@ abstract class AbstractType
             );
         }
 
-        if (!$group) {
+        if (! $group) {
             return $this->product->attribute_family->custom_attributes()->whereNotIn(
                 'attributes.code',
                 $this->skipAttributes
@@ -594,8 +594,8 @@ abstract class AbstractType
 
         $specialPrice = $this->product->special_price;
 
-        if ((is_null($specialPrice) || !(float) $specialPrice)
-            && !$rulePrice
+        if ((is_null($specialPrice) || ! (float) $specialPrice)
+            && ! $rulePrice
             && $customerGroupPrice == $this->product->price
         ) {
             return false;
@@ -603,7 +603,7 @@ abstract class AbstractType
 
         $haveSpecialPrice = false;
 
-        if (!(float) $specialPrice) {
+        if (! (float) $specialPrice) {
             if ($rulePrice && $rulePrice->price < $this->product->price) {
                 $this->product->special_price = $rulePrice->price;
 
@@ -665,7 +665,7 @@ abstract class AbstractType
 
         $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroupId);
 
-        if (!$customerGroupPrices->count()) {
+        if (! $customerGroupPrices->count()) {
             return $product->price;
         }
 
@@ -798,7 +798,7 @@ abstract class AbstractType
 
         $data = $this->getQtyRequest($data);
 
-        if (!$this->haveSufficientQuantity($data['quantity'])) {
+        if (! $this->haveSufficientQuantity($data['quantity'])) {
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
         }
 
@@ -858,9 +858,9 @@ abstract class AbstractType
                 } else {
                     return false;
                 }
-            } elseif (isset($options1['parent_id']) && !isset($options2['parent_id'])) {
+            } elseif (isset($options1['parent_id']) && ! isset($options2['parent_id'])) {
                 return false;
-            } elseif (isset($options2['parent_id']) && !isset($options1['parent_id'])) {
+            } elseif (isset($options2['parent_id']) && ! isset($options1['parent_id'])) {
                 return false;
             }
         }
