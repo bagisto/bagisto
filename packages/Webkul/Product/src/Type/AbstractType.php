@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Type;
 
+use Webkul\Tax\Helpers\Tax;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Illuminate\Support\Facades\Storage;
@@ -745,23 +746,13 @@ abstract class AbstractType
     {
         if ($this->haveSpecialPrice()) {
             $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-                . '<span class="regular-price">' . core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price) . '</span>'
-                . '<span class="special-price">' . core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getSpecialPrice()) : $this->getSpecialPrice()) . '</span>';
+                . '<span class="regular-price">' . core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price) . '</span>'
+                . '<span class="special-price">' . core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->getSpecialPrice()) : $this->getSpecialPrice()) . '</span>';
         } else {
-            $html = '<span>' . core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price) . '</span>';
+            $html = '<span>' . core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price) . '</span>';
         }
 
         return $html;
-    }
-
-    /**
-     * Is tax inclusive enabled in backend.
-     *
-     * @return bool
-     */
-    public function isTaxInclusive(): bool
-    {
-        return (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive');
     }
 
     /**
@@ -783,48 +774,12 @@ abstract class AbstractType
             }
 
             if ($address === null) {
-                $address = new class()
-                {
-                    public $country;
-                    public $state;
-                    public $postcode;
-
-                    function __construct()
-                    {
-                        $this->country = core()->getConfigData('taxes.catalogue.default-location-calculation.country') != '' ? core()->getConfigData('taxes.catalogue.default-location-calculation.country') : strtoupper(config('app.default_country'));
-                        $this->state = core()->getConfigData('taxes.catalogue.default-location-calculation.state');
-                        $this->postcode = core()->getConfigData('taxes.catalogue.default-location-calculation.post_code');
-                    }
-                };
+                $address = Tax::getDefaultAddress();
             }
 
-            $taxRates = $taxCategory->tax_rates()->where([
-                'country' => $address->country,
-            ])->orderBy('tax_rate', 'desc')->get();
-
-            if ($taxRates->count()) {
-                foreach ($taxRates as $rate) {
-                    $haveTaxRate = false;
-
-                    if ($rate->state != '' && $rate->state != $address->state) {
-                        continue;
-                    }
-
-                    if (!$rate->is_zip) {
-                        if (empty($rate->zip_code) || in_array($rate->zip_code, ['*', $address->postcode])) {
-                            $haveTaxRate = true;
-                        }
-                    } else {
-                        if ($address->postcode >= $rate->zip_from && $address->postcode <= $rate->zip_to) {
-                            $haveTaxRate = true;
-                        }
-                    }
-
-                    if ($haveTaxRate) {
-                        $totalPrice = round($totalPrice, 4) + round(($totalPrice * $rate->tax_rate) / 100, 4);
-                    }
-                }
-            }
+            Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use (&$totalPrice) {
+                $totalPrice = round($totalPrice, 4) + round(($totalPrice * $rate->tax_rate) / 100, 4);
+            });
         }
 
         return $totalPrice;

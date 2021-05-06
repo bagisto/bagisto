@@ -25,7 +25,7 @@
 
                         {!! view_render_event('bagisto.shop.checkout.cart-mini.subtotal.before', ['cart' => $cart]) !!}
 
-                        @if ((bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive'))
+                        @if (Webkul\Tax\Helpers\Tax::isTaxInclusive())
                             <b>{{ core()->currency($cart->base_grand_total) }}</b>
                         @else
                             <b>{{ core()->currency($cart->base_sub_total) }}</b>
@@ -72,7 +72,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.price.before', ['item' => $item]) !!}
 
                                 <div class="item-price">
-                                    @if ((bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive'))
+                                    @if (Webkul\Tax\Helpers\Tax::isTaxInclusive())
                                         <b>{{ core()->currency($item->base_total + $item->tax_amount) }}</b>
                                     @else
                                         <b>{{ core()->currency($item->base_total) }}</b>

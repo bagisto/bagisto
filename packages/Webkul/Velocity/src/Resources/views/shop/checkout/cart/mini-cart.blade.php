@@ -1,6 +1,6 @@
 <div class="mini-cart-container">
     <mini-cart
-        is-tax-inclusive="{{ (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive') }}"
+        is-tax-inclusive="{{ Webkul\Tax\Helpers\Tax::isTaxInclusive() }}"
         view-cart="{{ route('shop.checkout.cart.index') }}"
         cart-text="{{ __('shop::app.minicart.view-cart') }}"
         checkout-text="{{ __('shop::app.minicart.checkout') }}"

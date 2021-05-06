@@ -665,65 +665,29 @@ class Cart
             }
 
             if ($address === null) {
-                $address = new class() {
-                    public $country;
-                    public $state;
-                    public $postcode;
-
-                    function __construct()
-                    {
-                        $this->country = core()->getConfigData('taxes.catalogue.default-location-calculation.country') != '' ? core()->getConfigData('taxes.catalogue.default-location-calculation.country') : strtoupper(config('app.default_country'));
-                        $this->state = core()->getConfigData('taxes.catalogue.default-location-calculation.state');
-                        $this->postcode = core()->getConfigData('taxes.catalogue.default-location-calculation.post_code');
-                    }
-                };
+                $address = Tax::getDefaultAddress();
             }
-
-            $taxRates = $taxCategory->tax_rates()->where([
-                'country' => $address->country,
-            ])->orderBy('tax_rate', 'desc')->get();
 
             $item = $this->setItemTaxToZero($item);
 
-            if ($taxRates->count()) {
-                foreach ($taxRates as $rate) {
-                    $haveTaxRate = false;
+            Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use ($cart, $item) {
+                /* assigning tax percent */
+                $item->tax_percent = $rate->tax_rate;
 
-                    if ($rate->state != '' && $rate->state != $address->state) {
-                        continue;
-                    }
+                /* getting shipping rate for tax calculation */
+                $shippingPrice = $shippingBasePrice = 0;
 
-                    if (! $rate->is_zip) {
-                        if (empty($rate->zip_code) || in_array($rate->zip_code, ['*', $address->postcode])) {
-                            $haveTaxRate = true;
-                        }
-                    } else {
-                        if ($address->postcode >= $rate->zip_from && $address->postcode <= $rate->zip_to) {
-                            $haveTaxRate = true;
-                        }
-                    }
-
-                    if ($haveTaxRate) {
-                        $item->tax_percent = $rate->tax_rate;
-
-                        /* getting shipping rate for tax calculation */
-                        $shippingPrice = $shippingBasePrice = 0;
-
-                        if ($shipping = $cart->selected_shipping_rate) {
-                            if ($shipping->is_calculate_tax) {
-                                $shippingPrice = $shipping->price - $shipping->discount_amount;
-                                $shippingBasePrice = $shipping->base_price - $shipping->base_discount_amount;
-                            }
-                        }
-
-                        /* now assigning shipping prices for tax calculation */
-                        $item->tax_amount = round((($item->total + $shippingPrice) * $rate->tax_rate) / 100, 4);
-                        $item->base_tax_amount = round((($item->base_total + $shippingBasePrice) * $rate->tax_rate) / 100, 4);
-
-                        break;
+                if ($shipping = $cart->selected_shipping_rate) {
+                    if ($shipping->is_calculate_tax) {
+                        $shippingPrice = $shipping->price - $shipping->discount_amount;
+                        $shippingBasePrice = $shipping->base_price - $shipping->base_discount_amount;
                     }
                 }
-            }
+
+                /* now assigning shipping prices for tax calculation */
+                $item->tax_amount = round((($item->total + $shippingPrice) * $rate->tax_rate) / 100, 4);
+                $item->base_tax_amount = round((($item->base_total + $shippingBasePrice) * $rate->tax_rate) / 100, 4);
+            });
 
             $item->save();
         }

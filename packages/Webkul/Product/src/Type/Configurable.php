@@ -452,12 +452,12 @@ class Configurable extends AbstractType
         if ($this->haveOffer()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-            . '<span class="regular-price">' . core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()) . '</span>'
-            . '<span class="final-price">' . core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getOfferPrice()) : $this->getOfferPrice()) . '</span>';
+            . '<span class="regular-price">' . core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()) . '</span>'
+            . '<span class="final-price">' . core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->getOfferPrice()) : $this->getOfferPrice()) . '</span>';
         } else {
             return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
             . ' '
-            . '<span class="final-price">' . core()->currency($this->isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()) . '</span>';
+            . '<span class="final-price">' . core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()) . '</span>';
         }
     }
 
