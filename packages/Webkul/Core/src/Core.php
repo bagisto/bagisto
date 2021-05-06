@@ -1088,9 +1088,9 @@ class Core
      */
     public function getSenderEmailDetails()
     {
-        $sender_name = $this->getConfigData('general.general.email_settings.sender_name') ? $this->getConfigData('general.general.email_settings.sender_name') : config('mail.from.name');
+        $sender_name = $this->getConfigData('emails.configure.email_settings.sender_name') ? $this->getConfigData('emails.configure.email_settings.sender_name') : config('mail.from.name');
 
-        $sender_email = $this->getConfigData('general.general.email_settings.shop_email_from') ? $this->getConfigData('general.general.email_settings.shop_email_from') : config('mail.from.address');
+        $sender_email = $this->getConfigData('emails.configure.email_settings.shop_email_from') ? $this->getConfigData('emails.configure.email_settings.shop_email_from') : config('mail.from.address');
 
         return [
             'name'  => $sender_name,
