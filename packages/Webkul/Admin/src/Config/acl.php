@@ -325,6 +325,11 @@ return [
         'name'  => 'admin::app.acl.mass-delete',
         'route' => 'admin.customer.review.massdelete',
         'sort'  => 4,
+    ], [
+        'key'   => 'customers.orders',
+        'name'  => 'admin::app.acl.orders',
+        'route' => 'admin.customer.orders.data',
+        'sort'  => 7,
     ],
 
     /*

@@ -116,7 +116,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('customers/{id}/invoices', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@invoices')->name('admin.customer.invoices.data');
 
             // Customer's orders route
-            Route::get('customers/{id}/orders', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@orders')->name('admin.customer.orders.data');
+            Route::get('customers/{id}/orders', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@orders')->defaults('_config', [
+                'view' => 'admin::customers.orders.index',
+            ])->name('admin.customer.orders.data');
 
             // Configuration routes
             Route::get('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
