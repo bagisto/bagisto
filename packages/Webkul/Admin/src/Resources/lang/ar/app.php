@@ -371,7 +371,7 @@ return [
             'item-status' => 'حالة البند',
             'item-ordered' => '(:qty_ordered) سفارش ',
             'item-invoice' => '(:qty_invoiced) صورتحساب',
-            'item-shipped' => '(:qty_shipped) شحنت',
+            'item-shipped' =>'(:qty_shipped) شحنت',
             'item-canceled' => '(:qty_canceled)ملغاة',
             'item-refunded' => '(:qty_refunded) بازپرداخت',
             'price' => 'السعر',
@@ -926,7 +926,7 @@ return [
     ],
 
     'customers' => [
-        'groups' => [
+        'groups' =>[
             'add-title' => 'أضف المجموعة',
             'edit-title' => 'حرر المجموعة',
             'save-btn-title' => 'احفظ المجموعة',
@@ -1495,17 +1495,6 @@ return [
             'cache-small-image' => 'Small Image',
             'cache-medium-image' => 'Medium Image',
             'cache-large-image' => 'Large Image',
-
-            'taxes' => [
-                'taxes'                        => 'Taxes',
-                'catalogue'                    => 'Catalogue',
-                'pricing'                      => 'Pricing',
-                'tax-inclusive'                => 'Tax inclusive',
-                'default-location-calculation' => 'Default Location Calculation',
-                'default-country'              => 'Default Country',
-                'default-state'                => 'Default State',
-                'default-post-code'            => 'Default Post Code',
-            ],
         ]
     ]
 ];

@@ -924,7 +924,7 @@ return [
     ],
 
     'customers' => [
-        'groups' => [
+        'groups' =>[
             'add-title' => 'افزودن گروه',
             'edit-title' => 'ویرایش گروه',
             'save-btn-title' => 'ذخیره گروه',
@@ -1075,7 +1075,7 @@ return [
             'qty-in-cart' => 'کمیت در سبد خرید',
             'product-attribute' => 'ویژگی محصول',
             'attribute-name-children-only' => '(فقط کودکان) :attribute_name',
-            'attribute-name-parent-only' => '(فقط والدین) :attribute_name',
+            'attribute-name-parent-only' => '(فقط والدین) :attribute_name' ,
             'is-equal-to' => 'برابر است با',
             'is-not-equal-to' => 'مساوی نیست',
             'equals-or-greater-than' => 'برابر یا بیشتر از',
@@ -1320,7 +1320,7 @@ return [
         'delete-failed' => 'هنگام حذف :name خطایی روی داد.',
         'last-delete-error' => 'حداقل یک :name لازم است.',
         'user-define-error' => 'نمی توان :name سیستم را حذف کرد.',
-        'attribute-error' => 'در محصولات قابل تنظیم استفاده می شود :name ',
+        'attribute-error' => 'در محصولات قابل تنظیم استفاده می شود :name ' ,
         'attribute-product-error' => ' در محصولات استفاده می شود :name',
         'customer-associate' => ' نمی توان حذف کرد زیرا مشتری با این گروه در ارتباط است :name',
         'currency-delete-error' => 'این ارز به عنوان ارز پایه کانال تنظیم شده است بنابراین نمی توان آن را حذف کرد.',
@@ -1489,17 +1489,6 @@ return [
             'cache-small-image' => 'Small Image',
             'cache-medium-image' => 'Medium Image',
             'cache-large-image' => 'Large Image',
-            
-            'taxes' => [
-                'taxes'                        => 'Taxes',
-                'catalogue'                    => 'Catalogue',
-                'pricing'                      => 'Pricing',
-                'tax-inclusive'                => 'Tax inclusive',
-                'default-location-calculation' => 'Default Location Calculation',
-                'default-country'              => 'Default Country',
-                'default-state'                => 'Default State',
-                'default-post-code'            => 'Default Post Code',
-            ],
         ]
     ]
 ];

@@ -642,8 +642,8 @@ return [
             'add-attribute-title' => 'Aggiungi Attributi',
             'search' => 'Cerca',
             'group-exist-error' => 'Un gruppo con lo stesso nome esiste già.',
-            'actions' => 'Azioni',
-            'description' => 'Descrizione'
+	    'actions' => 'Azioni',
+	    'description' => 'Descrizione'
         ],
         'categories' => [
             'title' => 'Categorie',
@@ -928,7 +928,7 @@ return [
     ],
 
     'customers' => [
-        'groups' => [
+        'groups' =>[
             'add-title' => 'Aggiungi Gruppo',
             'edit-title' => 'Modifica Gruppo',
             'save-btn-title' => 'Salva Gruppo',
@@ -1492,17 +1492,6 @@ return [
             'cache-small-image' => 'Small Image',
             'cache-medium-image' => 'Medium Image',
             'cache-large-image' => 'Large Image',
-
-            'taxes' => [
-                'taxes'                        => 'Taxes',
-                'catalogue'                    => 'Catalogue',
-                'pricing'                      => 'Pricing',
-                'tax-inclusive'                => 'Tax inclusive',
-                'default-location-calculation' => 'Default Location Calculation',
-                'default-country'              => 'Default Country',
-                'default-state'                => 'Default State',
-                'default-post-code'            => 'Default Post Code',
-            ],
         ]
     ]
 ];
