@@ -329,5 +329,9 @@ class CustomerController extends Controller
         if (request()->ajax()) {
             return app(CustomerOrderDataGrid::class)->toJson();
         }
+
+        $customer = $this->customerRepository->find(request('id'));
+
+        return view($this->_config['view'], compact('customer'));
     }
 }
