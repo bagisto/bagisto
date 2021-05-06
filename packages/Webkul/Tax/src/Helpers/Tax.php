@@ -108,7 +108,7 @@ class Tax
     }
 
     /**
-     * This method is check tax for the current address. If applicable then
+     * This method will check tax for the current address. If applicable then
      * custom operation can be done.
      *
      * @param  object    $address
