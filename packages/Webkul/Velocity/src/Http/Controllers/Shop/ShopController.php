@@ -62,7 +62,7 @@ class ShopController extends Controller
         if (! $slug) {
             abort(404);
         }
-
+        
         switch ($slug) {
             case 'new-products':
             case 'featured-products':
