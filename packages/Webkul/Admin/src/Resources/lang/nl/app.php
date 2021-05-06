@@ -923,7 +923,7 @@ return [
     ],
 
     'customers' => [
-        'groups' =>[
+        'groups' => [
             'add-title' => 'Groep toevoegen',
             'edit-title' => 'Groep wijzigen',
             'save-btn-title' => 'Groep opslaan',
@@ -1486,6 +1486,17 @@ return [
             'cache-medium-image' => 'Medium Image',
             'cache-large-image' => 'Large Image',
             'tax-inclusive' => 'Tax inclusive',
+
+            'taxes' => [
+                'taxes'                        => 'Taxes',
+                'catalogue'                    => 'Catalogue',
+                'pricing'                      => 'Pricing',
+                'tax-inclusive'                => 'Tax inclusive',
+                'default-location-calculation' => 'Default Location Calculation',
+                'default-country'              => 'Default Country',
+                'default-state'                => 'Default State',
+                'default-post-code'            => 'Default Post Code',
+            ],
         ]
     ]
 ];

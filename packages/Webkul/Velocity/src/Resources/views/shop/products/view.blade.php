@@ -126,7 +126,7 @@
                                         <div class="col-12 price">
                                             @include ('shop::products.price', ['product' => $product])
 
-                                            @if ((bool) core()->getConfigData('catalog.products.attribute.price_attribute_tax_inclusive'))
+                                            @if ((bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive'))
                                                 <span>
                                                     {{ __('velocity::app.products.tax-inclusive') }}
                                                 </span>

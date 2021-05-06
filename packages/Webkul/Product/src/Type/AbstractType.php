@@ -761,7 +761,7 @@ abstract class AbstractType
      */
     public function isTaxInclusive(): bool
     {
-        return (bool) core()->getConfigData('catalog.products.attribute.price_attribute_tax_inclusive');
+        return (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive');
     }
 
     /**
@@ -791,7 +791,9 @@ abstract class AbstractType
 
                     function __construct()
                     {
-                        $this->country = strtoupper(config('app.default_country'));
+                        $this->country = core()->getConfigData('taxes.catalogue.default-location-calculation.country') != '' ? core()->getConfigData('taxes.catalogue.default-location-calculation.country') : strtoupper(config('app.default_country'));
+                        $this->state = core()->getConfigData('taxes.catalogue.default-location-calculation.state');
+                        $this->postcode = core()->getConfigData('taxes.catalogue.default-location-calculation.post_code');
                     }
                 };
             }

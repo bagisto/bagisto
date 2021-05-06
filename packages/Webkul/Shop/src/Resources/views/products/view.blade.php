@@ -63,7 +63,7 @@
 
                         @include ('shop::products.price', ['product' => $product])
 
-                        @if ((bool) core()->getConfigData('catalog.products.attribute.price_attribute_tax_inclusive'))
+                        @if ((bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive'))
                             <div>
                                 {{ __('shop::app.products.tax-inclusive') }}
                             </div>

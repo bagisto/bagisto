@@ -672,7 +672,9 @@ class Cart
 
                     function __construct()
                     {
-                        $this->country = strtoupper(config('app.default_country'));
+                        $this->country = core()->getConfigData('taxes.catalogue.default-location-calculation.country') != '' ? core()->getConfigData('taxes.catalogue.default-location-calculation.country') : strtoupper(config('app.default_country'));
+                        $this->state = core()->getConfigData('taxes.catalogue.default-location-calculation.state');
+                        $this->postcode = core()->getConfigData('taxes.catalogue.default-location-calculation.post_code');
                     }
                 };
             }

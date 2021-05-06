@@ -266,11 +266,6 @@ return [
                 'name'  => 'file_attribute_upload_size',
                 'title' => 'admin::app.admin.system.file-upload-size',
                 'type'  => 'text',
-            ], [
-                'name'    => 'price_attribute_tax_inclusive',
-                'title'   => 'admin::app.admin.system.tax-inclusive',
-                'type'    => 'boolean',
-                'default' => false
             ]
         ],
     ], [
@@ -391,9 +386,54 @@ return [
             ],
         ],
     ], [
+        'key'  => 'taxes',
+        'name' => 'admin::app.admin.system.taxes.taxes',
+        'sort' => 5,
+    ], [
+        'key'  => 'taxes.catalogue',
+        'name' => 'admin::app.admin.system.taxes.catalogue',
+        'sort' => 1,
+    ], [
+        'key'    => 'taxes.catalogue.pricing',
+        'name'   => 'admin::app.admin.system.taxes.pricing',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'    => 'tax_inclusive',
+                'title'   => 'admin::app.admin.system.taxes.tax-inclusive',
+                'type'    => 'boolean',
+                'validation' => 'required',
+                'default' => false
+            ]
+        ],
+    ], [
+        'key'    => 'taxes.catalogue.default-location-calculation',
+        'name'   => 'admin::app.admin.system.taxes.default-location-calculation',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'    => 'country',
+                'title'   => 'admin::app.admin.system.taxes.default-country',
+                'type'    => 'country',
+                'default' => '',
+            ],
+            [
+                'name'    => 'state',
+                'title'   => 'admin::app.admin.system.taxes.default-state',
+                'type'    => 'state',
+                'default' => '',
+            ],
+            [
+                'name'    => 'post_code',
+                'title'   => 'admin::app.admin.system.taxes.default-post-code',
+                'type'    => 'text',
+                'default' => '',
+            ]
+        ],
+    ], [
         'key'  => 'emails',
         'name' => 'admin::app.admin.emails.email',
-        'sort' => 5,
+        'sort' => 6,
     ], [
         'key'  => 'emails.configure',
         'name' => 'admin::app.admin.system.email-settings',
