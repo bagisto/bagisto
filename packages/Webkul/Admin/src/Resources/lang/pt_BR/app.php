@@ -195,6 +195,7 @@ return [
         'billed-to' => 'Cobrado de',
         'shipped-to' => 'Enviado para',
         'order-id' => 'Pedido Id',
+        'invoice-id' => 'Invoice Id',
         'invoice-date' => 'Data da Fatura',
         'total-qty' => 'Total Qtd',
         'inventory-source' => 'Fonte do Estoque',
@@ -477,16 +478,24 @@ return [
 
         'transactions' => [
             'title'               => 'Transactions',
+            'create-title'        => 'Add transaction',
             'id'                  => 'Id',
             'transaction-id'      => 'Transaction Id',
             'payment-method'      => 'Payment method',
+            'transaction-amount'  => 'Transaction amount',
             'action'              => 'Action',
             'view-title'          => 'Transaction #:transaction_id',
             'transaction-data'    => 'Transaction Data',
             'order-id'            => 'Order Id',
+            'invoice-id'          => 'Invoice Id',
             'status'              => 'Status',
             'created-at'          => 'Created At',
-            'transaction-details' => 'Transaction Details'
+            'transaction-details' => 'Transaction Details',
+            'response' => [
+                'invoice-missing'    => 'This invoice id does not exist',
+                'transaction-saved'  => 'The transaction has been saved',
+                'already-paid'       => 'This invoice has already been paid'
+            ]
         ]
     ],
 
