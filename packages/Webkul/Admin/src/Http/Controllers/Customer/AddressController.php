@@ -7,6 +7,8 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 
+use Webkul\Admin\DataGrids\AddressDataGrid;
+
 class AddressController extends Controller
 {
     /**
@@ -57,6 +59,10 @@ class AddressController extends Controller
      */
     public function index($id)
     {
+        if (request()->ajax()) {
+            return app(AddressDataGrid::class)->toJson();
+        }
+
         $customer = $this->customerRepository->find($id);
 
         return view($this->_config['view'], compact('customer'));
