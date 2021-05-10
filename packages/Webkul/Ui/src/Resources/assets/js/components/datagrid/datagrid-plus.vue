@@ -616,7 +616,7 @@
                                         v-for="(action, actionIndex) in actions"
                                         v-if="
                                             record[
-                                                `${action.title.toLowerCase()}_to_display`
+                                                `${action.key}_to_display`
                                             ]
                                         "
                                         :id="
@@ -630,7 +630,7 @@
                                         :href="
                                             action.method == 'GET'
                                                 ? record[
-                                                      `${action.title.toLowerCase()}_url`
+                                                      `${action.key}_url`
                                                   ]
                                                 : 'javascript:void(0);'
                                         "
@@ -646,7 +646,7 @@
                                         :data-method="action.method"
                                         :data-action="
                                             record[
-                                                `${action.title.toLowerCase()}_url`
+                                                `${action.key}_url`
                                             ]
                                         "
                                         :data-token="csrf"
@@ -762,7 +762,7 @@ export default {
 
     mounted: function() {
         this.getCsrf();
-        
+
         this.hitUrl();
     },
 
