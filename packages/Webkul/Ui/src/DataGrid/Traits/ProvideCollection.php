@@ -249,11 +249,11 @@ trait ProvideCollection
         foreach($this->actions as $action) {
             $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
 
-            $toDisplayKey = $this->generateKeyFromActionTitle($action['title'], '_to_display');
+            $toDisplayKey = $this->generateKeyFromActionTitle($action['key'], '_to_display');
             $record->$toDisplayKey = $toDisplay;
 
             if ($toDisplay) {
-                $urlKey = $this->generateKeyFromActionTitle($action['title'], '_url');
+                $urlKey = $this->generateKeyFromActionTitle($action['key'], '_url');
                 $record->$urlKey = route($action['route'], $record->{$action['index'] ?? $this->index});
             }
         }
@@ -285,8 +285,6 @@ trait ProvideCollection
      */
     private function generateKeyFromActionTitle($title, $suffix)
     {
-        $validatedStrings = Str::slug($title, '_');
-
-        return strtolower($validatedStrings) . $suffix;
+        return $title . $suffix;
     }
 }
