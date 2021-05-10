@@ -83,6 +83,7 @@ class CategoryDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
+            'title'  => trans('ui::app.datagrid.edit'),
             'type'   => 'Edit',
             'method' => 'GET',
             'route'  => 'velocity.admin.category.edit',
@@ -90,6 +91,7 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addAction([
+            'title'        => trans('ui::app.datagrid.delete'),
             'type'         => 'Delete',
             'method'       => 'POST',
             'route'        => 'velocity.admin.category.delete',

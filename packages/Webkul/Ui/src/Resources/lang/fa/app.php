@@ -41,6 +41,9 @@ return [
         'items-per-page' => 'موارد در هر صفحه',
         'value-here' => 'ارزش در اینجا',
         'numeric-value-here' => 'ارزش عددی در اینجا',
-        'submit' => 'ارسال'
+        'submit' => 'ارسال',
+        'edit' => 'ویرایش کنید',
+        'delete' => 'حذف',
+        'view' => 'چشم انداز',
     ]
 ];
