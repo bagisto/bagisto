@@ -104,7 +104,7 @@ class TransactionController extends Controller
 
         if ($invoice) {
 
-            if ($invoice->status = "paid") {
+            if ($invoice->status == "paid") {
                 session()->flash('info', trans('admin::app.sales.transactions.response.already-paid'));
                 return redirect(route('admin.sales.transactions.index'));
             }
