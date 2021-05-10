@@ -2,6 +2,8 @@
 
 namespace Webkul\Ui\DataGrid\Traits;
 
+use Illuminate\Support\Str;
+
 trait ProvideCollection
 {
     use ProvideQueryResolver, ProvideQueryStringParser;
@@ -283,7 +285,7 @@ trait ProvideCollection
      */
     private function generateKeyFromActionTitle($title, $suffix)
     {
-        $validatedStrings = preg_replace('/[^A-Za-z0-9]+/', '_', $title);
+        $validatedStrings = Str::slug($title, '_');
 
         return strtolower($validatedStrings) . $suffix;
     }
