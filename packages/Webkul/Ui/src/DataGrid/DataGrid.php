@@ -2,7 +2,6 @@
 
 namespace Webkul\Ui\DataGrid;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Event;
 use Webkul\Ui\DataGrid\Traits\ProvideBouncer;
 use Webkul\Ui\DataGrid\Traits\ProvideCollection;
@@ -283,8 +282,6 @@ abstract class DataGrid
     {
         $this->checkPermissions($action, $specialPermission, function ($action, $eventName) {
             $this->fireEvent('action.before.' . $eventName);
-
-            $action['key'] = Str::slug($action['title'], '_');
 
             $this->actions[] = $action;
             $this->enableAction = true;

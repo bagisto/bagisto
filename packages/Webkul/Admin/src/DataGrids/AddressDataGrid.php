@@ -7,8 +7,12 @@ use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Ui\DataGrid\DataGrid;
 use Webkul\Customer\Repositories\CustomerRepository;
 
+use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
+
 class AddressDataGrid extends DataGrid
 {
+    use ProvideDataGridPlus;
+
     /**
      * @var string
      */

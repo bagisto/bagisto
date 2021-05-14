@@ -36,9 +36,7 @@
                     </a>
                 </div>
 
-                @inject('addressDataGrid', 'Webkul\Admin\DataGrids\AddressDataGrid')
-                {!! $addressDataGrid->render() !!}
-
+                <datagrid-plus src="{{ route('admin.customer.addresses.index', $customer->id) }}"></datagrid-plus>
             </tab>
 
             <tab name="{{ __('admin::app.layouts.invoices') }}" :selected="false">

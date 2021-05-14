@@ -2,8 +2,8 @@
 return [
     'cashondelivery'  => [
         'code'        => 'cashondelivery',
-        'title'       => 'Cash On Delivery',
-        'description' => 'Cash On Delivery',
+        'title'       => 'Cash on delivery',
+        'description' => 'Cash on delivery',
         'class'       => 'Webkul\Payment\Payment\CashOnDelivery',
         'active'      => true,
         'sort'        => 1,
@@ -11,8 +11,8 @@ return [
 
     'moneytransfer'   => [
         'code'        => 'moneytransfer',
-        'title'       => 'Money Transfer',
-        'description' => 'Money Transfer',
+        'title'       => 'Money transfer',
+        'description' => 'Money transfer',
         'class'       => 'Webkul\Payment\Payment\MoneyTransfer',
         'active'      => true,
         'sort'        => 2,

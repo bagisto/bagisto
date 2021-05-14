@@ -41,9 +41,6 @@ return [
         'items-per-page' => 'مواد لكل صفحة',
         'value-here' => 'القيمة هنا',
         'numeric-value-here' => 'القيمة العددية هنا',
-        'submit' => 'إرسال',
-        'edit' => 'تعديل',
-        'delete' => 'حذف',
-        'view' => 'رأي',
+        'submit' => 'إرسال'
     ]
 ];

@@ -83,7 +83,6 @@ class OrderDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => trans('ui::app.datagrid.view'),
             'type'   => 'View',
             'method' => 'GET',
             'route'  => 'customer.orders.view',

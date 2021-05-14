@@ -41,9 +41,6 @@ return [
         'items-per-page' => 'Risultati per pagina',
         'value-here' => 'Valore qui',
         'numeric-value-here' => 'Valore numerico qui',
-        'submit' => 'Invia',
-        'edit' => 'Modifica',
-        'delete' => 'Elimina',
-        'view' => 'Vedi',
+        'submit' => 'Invia'
     ]
 ];

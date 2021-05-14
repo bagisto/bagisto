@@ -41,9 +41,6 @@ return [
         'items-per-page' => 'Sayfa Başına Kayıt',
         'value-here' => 'Değeri girin',
         'numeric-value-here' => 'Satusal değeri girin',
-        'submit' => 'Kaydet',
-        'edit' => 'Düzenle',
-        'delete' => 'Sil',
-        'view' => 'Görüntüle',
+        'submit' => 'Kaydet'
     ]
 ];

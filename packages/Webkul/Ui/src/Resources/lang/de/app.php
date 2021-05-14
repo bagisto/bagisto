@@ -41,9 +41,6 @@ return [
         'items-per-page' => 'Einträge pro Seite',
         'value-here' => 'Wert hier',
         'numeric-value-here' => 'Numerischer Wert hier',
-        'submit' => 'Bestätigen',
-        'view' => 'View',
-        'edit' => 'Bearbeiten',
-        'delete' => 'Löschen',
+        'submit' => 'Bestätigen'
     ]
 ];

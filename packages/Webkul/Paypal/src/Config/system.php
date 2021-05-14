@@ -12,13 +12,13 @@ return [
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'description',
                 'title'         => 'admin::app.admin.system.description',
                 'type'          => 'textarea',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based'  => true,
             ],  [
                 'name'          => 'business_account',
@@ -26,19 +26,21 @@ return [
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => false,
             ],  [
                 'name'          => 'active',
                 'title'         => 'admin::app.admin.system.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
-                'channel_based' => false,
-                'locale_based'  => true
+                'channel_based' => true,
+                'locale_based'  => false
             ], [
                 'name'          => 'sandbox',
                 'title'         => 'admin::app.admin.system.sandbox',
                 'type'          => 'boolean',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'    => 'sort',
                 'title'   => 'admin::app.admin.system.sort_order',
@@ -63,7 +65,7 @@ return [
     ], [
         'key'    => 'sales.paymentmethods.paypal_smart_button',
         'name'   => 'admin::app.admin.system.paypal-smart-button',
-        'sort'   => 0,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'          => 'title',
@@ -71,14 +73,14 @@ return [
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'          => 'description',
                 'title'         => 'admin::app.admin.system.description',
                 'type'          => 'textarea',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ],  [
                 'name'       => 'client_id',
                 'title'      => 'admin::app.admin.system.client-id',
@@ -86,6 +88,8 @@ return [
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => false,
             ],  [
                 'name'       => 'client_secret',
                 'title'      => 'admin::app.admin.system.client-secret',
@@ -93,6 +97,8 @@ return [
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => false,
             ],  [
                 'name'       => 'accepted_currencies',
                 'title'      => 'admin::app.admin.system.accepted-currencies',
@@ -100,19 +106,21 @@ return [
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => false,
             ],  [
                 'name'          => 'active',
                 'title'         => 'admin::app.admin.system.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
-                'channel_based' => false,
-                'locale_based'  => true
+                'channel_based' => true,
+                'locale_based'  => false
             ],  [
                 'name'          => 'sandbox',
                 'title'         => 'admin::app.admin.system.sandbox',
                 'type'          => 'boolean',
-                'channel_based' => false,
-                'locale_based'  => true,
+                'channel_based' => true,
+                'locale_based'  => false,
             ],  [
                 'name'    => 'sort',
                 'title'   => 'admin::app.admin.system.sort_order',

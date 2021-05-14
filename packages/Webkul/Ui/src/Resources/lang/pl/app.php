@@ -41,9 +41,6 @@ return [
         'items-per-page' => 'Przedmioty na stronę',
         'value-here' => 'Wartość tutaj',
         'numeric-value-here' => 'wartość liczbowa tutaj',
-        'submit' => 'Prześlij',
-        'edit' => 'Edit',
-        'delete' => 'Usuń',
-        'view' => 'Widok',
+        'submit' => 'Prześlij'
     ]
 ];
