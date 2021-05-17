@@ -41,6 +41,9 @@ return [
         'items-per-page' => 'Itens por página',
         'value-here' => 'Valor aqui',
         'numeric-value-here' => 'Valor numérico aqui',
-        'submit' => 'Enviar'
+        'submit' => 'Enviar',
+        'edit' => 'Editar',
+        'delete' => 'Excluir',
+        'view' => 'Visão',
     ]
 ];
