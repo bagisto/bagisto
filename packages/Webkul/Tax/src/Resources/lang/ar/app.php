@@ -5,7 +5,7 @@ return [
         'system' => [
             'taxes' => [
                 'taxes'                        => 'Taxes',
-                'catalogue'                    => 'Catalogue',
+                'catalogue'                    => 'Catalog',
                 'pricing'                      => 'Pricing',
                 'tax-inclusive'                => 'Tax inclusive',
                 'default-location-calculation' => 'Default Location Calculation',
