@@ -261,11 +261,14 @@ return [
                     'submit' => 'Zapisz adres',
                     'success' => 'Adres został zaktualizowany pomyślnie.',
                 ],
+
                 'delete' => [
                     'success' => 'Adres został usunięty pomyślnie.',
                     'failure' => 'Nie można usunąć adresu',
                     'wrong-password' => 'Błędne hasło!'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [

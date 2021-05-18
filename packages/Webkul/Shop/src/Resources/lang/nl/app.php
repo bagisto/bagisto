@@ -268,11 +268,14 @@ return [
                     'submit' => 'Opslaan',
                     'success' => 'Adres succesvol bijgewerkt..',
                 ],
+
                 'delete' => [
                     'success' => 'Adres succesvol verwijderd.',
                     'failure' => 'Adres kan niet verwijderd worden.',
                     'wrong-password' => 'Verkeerd wachtwoord !'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [

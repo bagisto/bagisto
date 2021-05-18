@@ -260,11 +260,14 @@ return [
                     'submit' => 'ذخیره آدرس',
                     'success' => 'آدرس با موفقیت به روز شد.',
                 ],
+
                 'delete' => [
                     'success' => 'آدرس با موفقیت حذف شد',
                     'failure' => 'آدرس حذف نمی شود',
                     'wrong-password' => 'گذرواژه اشتباه!'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [
