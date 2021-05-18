@@ -15,7 +15,7 @@
         "babenkoivan/elastic-scout-driver": "^1.1",
         "bagistobrasil/bagisto-product-social-share": "^0.1.2",
         "barryvdh/laravel-debugbar": "^3.1",
-        "barryvdh/laravel-dompdf": "^0.8",
+        "barryvdh/laravel-dompdf": "^0.8.5|^0.9.0",
         "doctrine/dbal": "^2.9",
         "enshrined/svg-sanitize": "^0.14.0",
         "facade/ignition": "^2.3.6",
@@ -37,7 +37,7 @@
         "maatwebsite/excel": "^3.1.26",
         "paypal/paypal-checkout-sdk": "1.0.1",
         "prettus/l5-repository": "^2.6",
-        "tymon/jwt-auth": "^1.0.0"
+        "tymon/jwt-auth": "1.0.x-dev"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
