@@ -9,22 +9,29 @@ use Webkul\Core\Repositories\ExchangeRateRepository;
 class ExchangeRates extends ExchangeRate
 {
     /**
-     * API endpoint
-     * 
-     * @var string 
+     * API key.
+     *
+     * @var string
+     */
+    protected $apiKey;
+
+    /**
+     * API endpoint.
+     *
+     * @var string
      */
     protected $apiEndPoint;
 
     /**
-     * Holds CurrencyRepository instance
-     * 
+     * CurrencyRepository $currencyRepository
+     *
      * @var \Webkul\Core\Repositories\CurrencyRepository
      */
     protected $currencyRepository;
 
     /**
-     * Holds ExchangeRateRepository instance
-     * 
+     * ExchangeRateRepository $exchangeRateRepository
+     *
      * @var \Webkul\Core\Repositories\ExchangeRateRepository
      */
     protected $exchangeRateRepository;
@@ -32,9 +39,9 @@ class ExchangeRates extends ExchangeRate
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
+     * @param  \Webkul\Core\Repositories\CurrencyRepository      $currencyRepository
      * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
-     * @return void
+     * @return  void
      */
     public function  __construct(
         CurrencyRepository $currencyRepository,
@@ -46,11 +53,13 @@ class ExchangeRates extends ExchangeRate
         $this->exchangeRateRepository = $exchangeRateRepository;
 
         $this->apiEndPoint = 'https://api.exchangeratesapi.io/latest';
+
+        $this->apiKey = config('services.exchange-api.exchange_rates.key');
     }
 
     /**
-     * Fetch rates and updates in currency_exchange_rates table
-     * 
+     * Fetch rates and updates in `currency_exchange_rates` table.
+     *
      * @return \Exception|void
      */
     public function updateRates()
@@ -62,15 +71,17 @@ class ExchangeRates extends ExchangeRate
                 continue;
             }
 
-            $result = $client->request('GET', $this->apiEndPoint . '?base=' . config('app.currency') . '&symbols=' . $currency->code);
-            
+            $result = $client->request('GET', $this->apiEndPoint . '?access_key='. $this->apiKey . '&base=' . config('app.currency') . '&symbols=' . $currency->code);
+
             $result = json_decode($result->getBody()->getContents(), true);
 
             if (isset($result['success']) && ! $result['success']) {
                 throw new \Exception(
                     isset($result['error']['info'])
-                    ? $result['error']['info']
-                    : $result['error']['type'], 1);
+                        ? $result['error']['info']
+                        : $result['error']['type'],
+                    1
+                );
             }
 
             if ($exchangeRate = $currency->exchange_rate) {
