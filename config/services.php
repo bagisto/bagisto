@@ -38,6 +38,7 @@ return [
         ],
 
         'exchange_rates' => [
+            'key' => env('EXCHANGE_RATES_API_KEY'),
             'class' => 'Webkul\Core\Helpers\Exchange\ExchangeRates'
         ],
     ],
