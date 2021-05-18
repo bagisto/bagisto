@@ -251,11 +251,14 @@ return [
                     'submit' => '保存する',
                     'success' => '住所が更新されました',
                 ],
+
                 'delete' => [
                     'success' => '住所が削除されました',
                     'failure' => '住所の削除に失敗しました。',
                     'wrong-password' => 'パスワードが正しくありません'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [
