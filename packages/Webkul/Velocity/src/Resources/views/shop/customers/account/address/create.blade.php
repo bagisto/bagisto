@@ -102,6 +102,14 @@
 
                 {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.after') !!}
 
+                <div class="control-group d-flex">
+                    <input type="checkbox" id="default_address" class="w-auto" name="default_address" {{ old('default_address') ? 'checked' : '' }}>
+
+                    <label class="checkbox-view" for="default_address"></label>
+
+                    {{ __('admin::app.customers.addresses.default-address') }}
+                </div>
+
                 <div class="button-group">
                     <button class="theme-btn" type="submit">
                         {{ __('shop::app.customer.account.address.create.submit') }}
