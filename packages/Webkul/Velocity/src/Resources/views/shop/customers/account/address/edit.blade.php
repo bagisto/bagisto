@@ -106,7 +106,7 @@
 
                 <label class="checkbox-view" for="default_address"></label>
 
-                {{ __('admin::app.customers.addresses.default-address') }}
+                {{ __('shop::app.customer.account.address.default-address') }}
             </div>
 
             <div class="button-group">
