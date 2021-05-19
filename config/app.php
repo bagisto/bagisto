@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE','Asia/Kolkata'),
+    'timezone' => env('APP_TIMEZONE', 'Asia/Kolkata'),
 
     /*
     |--------------------------------------------------------------------------
@@ -160,7 +160,7 @@ return [
     /*
         Code Editor
     */
-    'editor' =>'vscode',
+    'editor' => 'vscode',
 
     /*
         Application Version
