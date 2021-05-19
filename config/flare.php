@@ -34,6 +34,7 @@ return [
         'grouping_type' => null,
         'report_logs' => true,
         'maximum_number_of_collected_logs' => 200,
+        'censor_request_body_fields' => ['password'],
     ],
 
     /*
@@ -47,4 +48,15 @@ return [
     */
 
     'send_logs_as_events' => true,
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Censor request body fields
+    |--------------------------------------------------------------------------
+    |
+    | These fields will be censored from your request when sent to Flare. 
+    |
+    */
+    
+    'censor_request_body_fields' => ['password'],
 ];
