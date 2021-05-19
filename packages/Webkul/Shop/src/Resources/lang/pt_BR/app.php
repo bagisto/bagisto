@@ -256,11 +256,14 @@ return [
                     'submit' => 'Salvar Endereço',
                     'success' => 'Endereço Atualizado com sucesso.'
                 ],
+
                 'delete' => [
                     'success' => 'Endereço Excluído com sucesso',
                     'failure' => 'Endereço não pode ser adicionado',
                     'wrong-password' => 'Wrong Password !'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [

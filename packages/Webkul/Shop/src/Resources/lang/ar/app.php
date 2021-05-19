@@ -263,11 +263,14 @@ return [
                     'submit' => 'احفظ العنوان',
                     'success' => 'العنوان تم تحديثه بنجاح.'
                 ],
+
                 'delete' => [
                     'success' => 'تم حذف العنوان بنجاح.',
                     'failure' => 'لا يمكن حذف العنوان',
                     'wrong-password' => 'كلمة مرور خاطئة !'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [

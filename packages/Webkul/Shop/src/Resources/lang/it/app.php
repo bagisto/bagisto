@@ -261,11 +261,14 @@ return [
                     'submit' => 'Salva Indirizzo',
                     'success' => 'Indirizzo aggiornato con successo.',
                 ],
+
                 'delete' => [
                     'success' => 'Indirizzo eliminato con successo',
                     'failure' => 'L\'indirizzo non può essere eliminato',
                     'wrong-password' => 'Password errata !'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [

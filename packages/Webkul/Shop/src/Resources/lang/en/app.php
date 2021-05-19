@@ -264,11 +264,14 @@ return [
                     'submit' => 'Save Address',
                     'success' => 'Address updated successfully.',
                 ],
+
                 'delete' => [
                     'success' => 'Address successfully deleted',
                     'failure' => 'Address cannot be deleted',
                     'wrong-password' => 'Wrong Password !'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [
