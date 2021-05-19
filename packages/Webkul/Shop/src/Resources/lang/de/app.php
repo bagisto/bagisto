@@ -263,11 +263,14 @@ return [
                     'submit' => 'Adresse speichern',
                     'success' => 'Adresse erfolgreich aktualisiert.',
                 ],
+
                 'delete' => [
                     'success' => 'Adresse erfolgreich gelöscht',
                     'failure' => 'Adresse kann nicht gelöscht werden',
                     'wrong-password' => 'Falsches Passwort !'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [

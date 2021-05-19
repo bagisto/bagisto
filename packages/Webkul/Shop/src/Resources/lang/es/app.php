@@ -263,11 +263,14 @@ return [
                     'submit' => 'Guardar dirección',
                     'success' => 'Dirección actualizada exitosamente.',
                 ],
+
                 'delete' => [
                     'success' => 'Dirección eliminada correctamente',
                     'failure' => 'La dirección no puede ser eliminada',
                     'wrong-password' => 'Contraseña Incorrecta !'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [

@@ -260,11 +260,14 @@ return [
                     'submit' => 'Adres Kaydet',
                     'success' => 'Adres Başarıyla Güncellendi.',
                 ],
+
                 'delete' => [
                     'success' => 'Adres başarıyla silindi.',
                     'failure' => 'Adres silinirken hata oluştu!',
                     'wrong-password' => 'Parolanızı hatalı girdiniz!'
-                ]
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [
