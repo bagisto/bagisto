@@ -727,12 +727,12 @@ abstract class AbstractType
     {
         return [
             'regular_price' => [
-                'price'          => core()->convertPrice($this->product->price),
-                'formated_price' => core()->currency($this->product->price),
+                'price'          => core()->convertPrice(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price),
+                'formated_price' => core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price),
             ],
             'final_price'   => [
-                'price'          => core()->convertPrice($this->getMinimalPrice()),
-                'formated_price' => core()->currency($this->getMinimalPrice()),
+                'price'          => core()->convertPrice(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()),
+                'formated_price' => core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()),
             ],
         ];
     }
@@ -766,7 +766,9 @@ abstract class AbstractType
         /* this is added for future purpose like if shipping tax also added then case is needed */
         $address = null;
 
-        $taxCategory = app(TaxCategoryRepository::class)->find($this->product->tax_category_id);
+        $taxCategoryId = $this->product->parent ? $this->product->parent->tax_category_id : $this->product->tax_category_id;
+
+        $taxCategory = app(TaxCategoryRepository::class)->find($taxCategoryId);
 
         if ($taxCategory) {
             if ($address === null && auth()->guard('customer')->check()) {
