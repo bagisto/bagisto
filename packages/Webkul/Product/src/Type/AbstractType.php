@@ -164,7 +164,6 @@ abstract class AbstractType
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductVideoRepository          $productVideoRepository
-     *
      * @return void
      */
     public function __construct(
@@ -719,7 +718,7 @@ abstract class AbstractType
     }
 
     /**
-     * Returns product prices.
+     * Get product prices.
      *
      * @return array
      */
@@ -727,18 +726,18 @@ abstract class AbstractType
     {
         return [
             'regular_price' => [
-                'price'          => core()->convertPrice(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price),
-                'formated_price' => core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price),
+                'price'          => core()->convertPrice($this->evaluatePrice($this->product->price)),
+                'formated_price' => core()->currency($this->evaluatePrice($this->product->price)),
             ],
             'final_price'   => [
-                'price'          => core()->convertPrice(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()),
-                'formated_price' => core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->getMinimalPrice()) : $this->getMinimalPrice()),
+                'price'          => core()->convertPrice($this->evaluatePrice($this->getMinimalPrice())),
+                'formated_price' => core()->currency($this->evaluatePrice($this->getMinimalPrice())),
             ],
         ];
     }
 
     /**
-     * Get product minimal price.
+     * Get product price html.
      *
      * @return string
      */
@@ -746,10 +745,10 @@ abstract class AbstractType
     {
         if ($this->haveSpecialPrice()) {
             $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-                . '<span class="regular-price">' . core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price) . '</span>'
-                . '<span class="special-price">' . core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->getSpecialPrice()) : $this->getSpecialPrice()) . '</span>';
+                . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>'
+                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getSpecialPrice())) . '</span>';
         } else {
-            $html = '<span>' . core()->currency(Tax::isTaxInclusive() ? $this->getTaxInclusiveRate($this->product->price) : $this->product->price) . '</span>';
+            $html = '<span>' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>';
         }
 
         return $html;
@@ -785,6 +784,18 @@ abstract class AbstractType
         }
 
         return $totalPrice;
+    }
+
+    /**
+     * Evaluate price.
+     *
+     * @return array
+     */
+    public function evaluatePrice($price)
+    {
+        return Tax::isTaxInclusive()
+            ? $this->getTaxInclusiveRate($price)
+            : $price;
     }
 
     /**
