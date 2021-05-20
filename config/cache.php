@@ -72,7 +72,7 @@ return [
             'driver' => 'redis',
             'connection' => env('CACHE_CONNECTION', 'cache'),
         ],
-
+        
     ],
 
     /*
@@ -88,7 +88,7 @@ return [
 
     'prefix' => env(
         'CACHE_PREFIX',
-        \Illuminate\Support\Str::slug(env('APP_NAME', 'laravel'), '_').'_cache'
+        \Illuminate\Support\Str::slug(env('APP_NAME', 'laravel'), '_') . '_cache'
     ),
 
 ];
