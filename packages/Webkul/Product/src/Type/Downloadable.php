@@ -34,7 +34,7 @@ class Downloadable extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['width', 'height', 'depth', 'weight', 'guest_checkout'];
+    protected $skipAttributes = ['length', 'width', 'height', 'weight', 'guest_checkout'];
 
     /**
      * These blade files will be included in product edit page
