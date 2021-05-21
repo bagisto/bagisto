@@ -25,7 +25,7 @@ class Grouped extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'];
+    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'length', 'width', 'height', 'weight'];
 
     /**
      * These blade files will be included in product edit page
