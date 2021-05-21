@@ -504,6 +504,10 @@ class CartRule
                         continue;
                     }
 
+                    if (! $this->validator->validate($rule, $item)) {
+                        continue;
+                    }
+
                     $quantity = $rule->discount_quantity ? min($item->quantity, $rule->discount_quantity) : $item->quantity;
 
                     $totalBasePrice += $item->base_price * $quantity;
