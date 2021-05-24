@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Tax\Helpers\Tax;
 use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -131,7 +130,7 @@ class Grouped extends AbstractType
         $minPrices = [];
 
         foreach ($this->product->grouped_products as $groupOptionProduct) {
-            $minPrices[] = $groupOptionProduct->associated_product->getTypeInstance()->getMinimalPrice();
+            $minPrices[] = $this->evaluatePrice($groupOptionProduct->associated_product->getTypeInstance()->getMinimalPrice());
         }
 
         if (empty($minPrices)) {
@@ -189,7 +188,7 @@ class Grouped extends AbstractType
 
         $html .= '<span class="price-label">' . trans('shop::app.products.starting-at') . '</span>'
         . ' '
-        . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>';
+        . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
 
         return $html;
     }
