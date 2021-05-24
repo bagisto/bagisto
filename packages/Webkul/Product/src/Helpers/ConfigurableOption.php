@@ -47,10 +47,10 @@ class ConfigurableOption extends AbstractProduct
             'index'          => isset($options['index']) ? $options['index'] : [],
             'regular_price'  => [
                 'formated_price' => $productTypeInstance->haveOffer()
-                    ? core()->currency($productTypeInstance->getOfferPrice())
+                    ? core()->currency($productTypeInstance->evaluatePrice($productTypeInstance->getOfferPrice()))
                     : core()->currency($productTypeInstance->evaluatePrice($productTypeInstance->getMinimalPrice())),
                 'price'          => $productTypeInstance->haveOffer()
-                    ? $productTypeInstance->getOfferPrice()
+                    ? $productTypeInstance->evaluatePrice($productTypeInstance->getOfferPrice())
                     : $productTypeInstance->evaluatePrice($productTypeInstance->getMinimalPrice()),
             ],
             'variant_prices' => $this->getVariantPrices($product),
