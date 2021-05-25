@@ -3,6 +3,10 @@ import VeeValidate, { Validator } from 'vee-validate';
 import de from 'vee-validate/dist/locale/de';
 import ar from 'vee-validate/dist/locale/ar';
 import fa from 'vee-validate/dist/locale/fa';
+import fr from 'vee-validate/dist/locale/fr';
+import nl from 'vee-validate/dist/locale/nl';
+import tr from 'vee-validate/dist/locale/tr';
+
 
 import './bootstrap';
 
@@ -14,6 +18,9 @@ Vue.use(VeeValidate, {
         ar: ar,
         de: de,
 		fa: fa,
+		fr: fr,
+		nl: nl,
+		tr: tr,
     },
     events: 'input|change|blur',
 });
