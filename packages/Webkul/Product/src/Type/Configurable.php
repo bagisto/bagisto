@@ -3,7 +3,6 @@
 namespace Webkul\Product\Type;
 
 use Illuminate\Support\Str;
-use Webkul\Tax\Helpers\Tax;
 use Illuminate\Support\Facades\DB;
 use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Facades\ProductImage;

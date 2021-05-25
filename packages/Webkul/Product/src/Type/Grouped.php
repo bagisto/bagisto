@@ -121,7 +121,7 @@ class Grouped extends AbstractType
     }
 
     /**
-     * Get product minimal price
+     * Get product minimal price.
      *
      * @return float
      */
@@ -130,14 +130,14 @@ class Grouped extends AbstractType
         $minPrices = [];
 
         foreach ($this->product->grouped_products as $groupOptionProduct) {
-            $minPrices[] = $this->evaluatePrice($groupOptionProduct->associated_product->getTypeInstance()->getMinimalPrice());
+            $groupOptionProductTypeInstance = $groupOptionProduct->associated_product->getTypeInstance();
+
+            $groupOptionProductMinimalPrice = $groupOptionProductTypeInstance->getMinimalPrice();
+
+            $minPrices[] = $groupOptionProductTypeInstance->evaluatePrice($groupOptionProductMinimalPrice);
         }
 
-        if (empty($minPrices)) {
-            return 0;
-        }
-
-        return min($minPrices);
+        return empty($minPrices) ? 0 : min($minPrices);
     }
 
     /**

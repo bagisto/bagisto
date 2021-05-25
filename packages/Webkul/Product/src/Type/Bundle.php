@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Tax\Helpers\Tax;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\Helpers\BundleOption;
 use Webkul\Product\Repositories\ProductRepository;
