@@ -33,33 +33,23 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Returns the allowed variants JSON.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Models\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
      */
     public function getConfigurationConfig($product)
     {
-        $productTypeInstance = $product->getTypeInstance();
-
         $options = $this->getOptions($product, $this->getAllowedProducts($product));
 
         $config = [
             'attributes'     => $this->getAttributesData($product, $options),
             'index'          => isset($options['index']) ? $options['index'] : [],
-            'regular_price'  => [
-                'formated_price' => $productTypeInstance->haveOffer()
-                    ? core()->currency($productTypeInstance->evaluatePrice($productTypeInstance->getOfferPrice()))
-                    : core()->currency($productTypeInstance->evaluatePrice($productTypeInstance->getMinimalPrice())),
-                'price'          => $productTypeInstance->haveOffer()
-                    ? $productTypeInstance->evaluatePrice($productTypeInstance->getOfferPrice())
-                    : $productTypeInstance->evaluatePrice($productTypeInstance->getMinimalPrice()),
-            ],
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
             'variant_videos' => $this->getVariantVideos($product),
             'chooseText'     => trans('shop::app.products.choose-option'),
         ];
 
-        return $config;
+        return array_merge($config, $product->getTypeInstance()->getProductPrices());
     }
 
     /**

@@ -442,6 +442,25 @@ class Configurable extends AbstractType
     }
 
     /**
+     * Get product prices.
+     *
+     * @return array
+     */
+    public function getProductPrices()
+    {
+        return [
+            'regular_price'  => [
+                'formated_price' => $this->haveOffer()
+                    ? core()->currency($this->evaluatePrice($this->getOfferPrice()))
+                    : core()->currency($this->evaluatePrice($this->getMinimalPrice())),
+                'price'          => $this->haveOffer()
+                    ? $this->evaluatePrice($this->getOfferPrice())
+                    : $this->evaluatePrice($this->getMinimalPrice()),
+            ]
+        ];
+    }
+
+    /**
      * Get product minimal price
      *
      * @return string
