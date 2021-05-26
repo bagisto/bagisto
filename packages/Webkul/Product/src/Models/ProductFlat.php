@@ -207,6 +207,16 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
+     * Get the grouped products by `sort_order` key that owns the product.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function groupedProductsBySortOrder()
+    {
+        return $this->product->grouped_products()->orderBy('sort_order');
+    }
+
+    /**
      * Get the bundle options that owns the product.
      */
     public function bundle_options()

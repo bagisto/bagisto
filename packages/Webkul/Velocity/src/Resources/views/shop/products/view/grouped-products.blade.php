@@ -2,14 +2,14 @@
     {!! view_render_event('bagisto.shop.products.view.grouped_products.before', ['product' => $product]) !!}
 
     <div class="grouped-product-container">
-        @if ($product->grouped_products->count())
+        @if ($product->groupedProductsBySortOrder->count())
             <div class="grouped-product-list">
                 <ul type="none">
                     <li>
                         <span>{{ __('shop::app.products.name') }}</span>
                         <span>{{ __('shop::app.products.qty') }}</span>
                     </li>
-                    @foreach ($product->grouped_products as $groupedProduct)
+                    @foreach ($product->groupedProductsBySortOrder as $groupedProduct)
                         @if($groupedProduct->associated_product->getTypeInstance()->isSaleable())
                             <li>
                                 <span class="name">
