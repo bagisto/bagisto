@@ -6,6 +6,3 @@ contact_links:
 - name: ❔ Support Question
   url: https://bagisto.uvdesk.com/en/customer/create-ticket/
   about: This repository is only for reporting bugs or feature requests, please create a support ticket if you need any assistance from our team.
-- name: 🔒 Security Vulnerabilities
-  url: mailto:support@bagisto.com
-  about: Please don't disclose security vulnerabilities publicly. If you find any security vulnerability in Bagisto then please email us at support@bagisto.com.
