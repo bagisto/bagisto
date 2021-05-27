@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+- name: 💬 Community Forum
+  url: https://forums.bagisto.com
+  about: Ask the community for help on our forum.
+- name: ❔ Support Question
+  url: https://bagisto.uvdesk.com/en/customer/create-ticket/
+  about: This repository is only for reporting bugs or feature requests, please create a support ticket if you need any assistance from our team.
