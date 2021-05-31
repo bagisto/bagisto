@@ -758,18 +758,14 @@ abstract class AbstractType
      * Get inclusive tax rates.
      *
      * @param  float  $totalPrice
-     * @return array
+     * @return float
      */
     public function getTaxInclusiveRate($totalPrice)
     {
         /* this is added for future purpose like if shipping tax also added then case is needed */
         $address = null;
 
-        $taxCategoryId = $this->product->parent ? $this->product->parent->tax_category_id : $this->product->tax_category_id;
-
-        $taxCategory = app(TaxCategoryRepository::class)->find($taxCategoryId);
-
-        if ($taxCategory) {
+        if ($taxCategory = $this->getTaxCategory()) {
             if ($address === null && auth()->guard('customer')->check()) {
                 $address = auth()->guard('customer')->user()->addresses()->where('default_address', 1)->first();
             }
@@ -784,6 +780,18 @@ abstract class AbstractType
         }
 
         return $totalPrice;
+    }
+
+    /**
+     * Get tax category.
+     *
+     * @return \Webkul\Tax\Models\TaxCategory
+     */
+    public function getTaxCategory()
+    {
+        $taxCategoryId = $this->product->parent ? $this->product->parent->tax_category_id : $this->product->tax_category_id;
+
+        return app(TaxCategoryRepository::class)->find($taxCategoryId);
     }
 
     /**

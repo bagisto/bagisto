@@ -63,7 +63,7 @@
 
                         @include ('shop::products.price', ['product' => $product])
 
-                        @if (Webkul\Tax\Helpers\Tax::isTaxInclusive())
+                        @if (Webkul\Tax\Helpers\Tax::isTaxInclusive() && $product->getTypeInstance()->getTaxCategory())
                             <div>
                                 {{ __('shop::app.products.tax-inclusive') }}
                             </div>
