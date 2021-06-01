@@ -44,7 +44,7 @@ class ProductImageRepository extends Repository
     }
 
     /**
-     * Set product directory.
+     * Get product directory.
      *
      * @param  Webkul\Product\Models\Product $variant
      */
@@ -70,9 +70,9 @@ class ProductImageRepository extends Repository
     }
 
     /**
-     * Upload image.
+     * Upload.
      *
-     * @param  Webkul\Product\Models\Product $variant
+     * @param  Webkul\Product\Models\Product $product
      * @param  array
      * @return void
      */
