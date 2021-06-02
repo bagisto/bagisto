@@ -388,7 +388,7 @@ return [
     ], [
         'key'  => 'emails',
         'name' => 'admin::app.admin.emails.email',
-        'sort' => 5,
+        'sort' => 6,
     ], [
         'key'  => 'emails.configure',
         'name' => 'admin::app.admin.system.email-settings',

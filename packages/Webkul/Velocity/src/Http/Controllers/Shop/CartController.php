@@ -24,6 +24,7 @@ class CartController extends Controller
             $cartItems = $items->toArray();
 
             $cartDetails = [];
+            $cartDetails['base_grand_total'] = core()->currency($cart->base_grand_total);
             $cartDetails['base_sub_total'] = core()->currency($cart->base_sub_total);
 
             /* needed raw data for comparison */
@@ -35,6 +36,7 @@ class CartController extends Controller
                 $cartItems[$index]['images'] = $images;
                 $cartItems[$index]['url_key'] = $item->product->url_key;
                 $cartItems[$index]['base_total'] = core()->currency($item->base_total);
+                $cartItems[$index]['base_total_with_tax'] = core()->currency($item->base_total + $item->tax_amount);
             }
 
             $response = [

@@ -492,6 +492,25 @@ class Configurable extends AbstractType
     }
 
     /**
+     * Get product prices.
+     *
+     * @return array
+     */
+    public function getProductPrices()
+    {
+        return [
+            'regular_price'  => [
+                'formated_price' => $this->haveOffer()
+                    ? core()->currency($this->evaluatePrice($this->getOfferPrice()))
+                    : core()->currency($this->evaluatePrice($this->getMinimalPrice())),
+                'price'          => $this->haveOffer()
+                    ? $this->evaluatePrice($this->getOfferPrice())
+                    : $this->evaluatePrice($this->getMinimalPrice()),
+            ]
+        ];
+    }
+
+    /**
      * Get product minimal price.
      *
      * @return string
@@ -501,12 +520,12 @@ class Configurable extends AbstractType
         if ($this->haveOffer()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-            . '<span class="regular-price">' . core()->currency($this->getMinimalPrice()) . '</span>'
-            . '<span class="final-price">' . core()->currency($this->getOfferPrice()) . '</span>';
+            . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'
+            . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getOfferPrice())) . '</span>';
         } else {
             return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
             . ' '
-            . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+            . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>';
         }
     }
 

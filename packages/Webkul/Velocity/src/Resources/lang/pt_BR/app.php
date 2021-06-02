@@ -266,6 +266,7 @@ return [
         'view-all-reviews' => 'Ver todos os comentários',
         'recently-viewed' => 'Produtos vistos recentemente',
         'be-first-review' => 'Seja o primeiro a escrever um comentário',
+        'tax-inclusive' => 'Inclusive of all taxes',
     ],
 
     'shop' => [
