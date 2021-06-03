@@ -6,10 +6,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Event;
 use Webkul\Ui\DataGrid\Traits\ProvideBouncer;
 use Webkul\Ui\DataGrid\Traits\ProvideCollection;
+use Webkul\Ui\DataGrid\Traits\ProvideExceptionHandler;
 
 abstract class DataGrid
 {
-    use ProvideBouncer, ProvideCollection;
+    use ProvideBouncer, ProvideCollection, ProvideExceptionHandler;
 
     /**
      * Set index columns, ex: id.
@@ -237,6 +238,8 @@ abstract class DataGrid
      */
     public function addColumn($column)
     {
+        $this->checkRequiredColumnKeys($column);
+
         $this->fireEvent('add.column.before.' . $column['index']);
 
         $this->columns[] = $column;
@@ -281,6 +284,8 @@ abstract class DataGrid
      */
     public function addAction($action, $specialPermission = false)
     {
+        $this->checkRequiredActionKeys($action);
+
         $this->checkPermissions($action, $specialPermission, function ($action, $eventName) {
             $this->fireEvent('action.before.' . $eventName);
 
