@@ -125,6 +125,12 @@
 
                                         <div class="col-12 price">
                                             @include ('shop::products.price', ['product' => $product])
+
+                                            @if (Webkul\Tax\Helpers\Tax::isTaxInclusive() && $product->getTypeInstance()->getTaxCategory())
+                                                <span>
+                                                    {{ __('velocity::app.products.tax-inclusive') }}
+                                                </span>
+                                            @endif
                                         </div>
 
                                         @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)

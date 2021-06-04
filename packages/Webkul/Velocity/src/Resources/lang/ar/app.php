@@ -264,6 +264,7 @@ return [
         'short-description' => 'أوصاف قصيرة',
         'recently-viewed' => 'المنتجات المعروضة مؤخرا',
         'be-first-review' => 'كن أول من يكتب نقد',
+        'tax-inclusive' => 'Inclusive of all taxes',
     ],
 
     'shop' => [

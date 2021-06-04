@@ -3,17 +3,22 @@
 namespace Webkul\Core\Exceptions;
 
 use Throwable;
+use PDOException;
 use Illuminate\Auth\AuthenticationException;
-use Doctrine\DBAL\Driver\PDOException;
+use App\Exceptions\Handler as AppExceptionHandler;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use App\Exceptions\Handler as AppExceptionHandler;
 
 class Handler extends AppExceptionHandler
 {
+    /**
+     * Json errors.
+     *
+     * @var array
+     */
     protected $jsonErrorMessages = [
-        404 => 'Resource not found',
-        403 => '403 forbidden Error',
+        404 => 'Resource Not Found',
+        403 => '403 Forbidden Error',
         401 => 'Unauthenticated',
         500 => '500 Internal Server Error',
     ];
@@ -22,7 +27,7 @@ class Handler extends AppExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable   $exception
+     * @param  \Throwable  $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Throwable $exception)
@@ -58,18 +63,30 @@ class Handler extends AppExceptionHandler
         return redirect()->guest(route('customer.session.index'));
     }
 
+    /**
+     * Is admin uri.
+     *
+     * @return boolean
+     */
     private function isAdminUri()
     {
         return strpos(\Illuminate\Support\Facades\Request::path(), 'admin') !== false ? true : false;
     }
 
+    /**
+     * Response.
+     *
+     * @param  string  $path
+     * @param  int  $statusCode
+     * @return \Illuminate\Http\Response
+     */
     private function response($path, $statusCode)
     {
         if (request()->expectsJson()) {
             return response()->json([
                 'error' => isset($this->jsonErrorMessages[$statusCode])
-                           ? $this->jsonErrorMessages[$statusCode]
-                           : 'Something went wrong, please try again later.'
+                    ? $this->jsonErrorMessages[$statusCode]
+                    : 'Something went wrong, please try again later.'
             ], $statusCode);
         }
 

@@ -362,9 +362,9 @@
 <script type="text/x-template" id="state-template">
 
     <div>
-        <input type="text" v-validate="'required'" v-if="!haveStates()" class="control" v-model="state" :id="name" :name="name" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;"/>
+        <input type="text" v-validate="validations" v-if="!haveStates()" class="control" v-model="state" :id="name" :name="name" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;"/>
 
-        <select v-validate="'required'" v-if="haveStates()" class="control" v-model="state" :id="name" :name="name" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;" >
+        <select v-validate="validations" v-if="haveStates()" class="control" v-model="state" :id="name" :name="name" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;" >
 
             <option value="">{{ __('admin::app.customers.customers.select-state') }}</option>
 

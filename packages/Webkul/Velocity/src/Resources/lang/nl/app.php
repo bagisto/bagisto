@@ -264,6 +264,7 @@ return [
         'short-description' => 'Korte omschrijving',
         'recently-viewed' => 'Recent bekeken producten',
         'be-first-review' => 'Wees de eerste om een review te schrijven.',
+        'tax-inclusive' => 'Inclusive of all taxes',
     ],
 
     'shop' => [
