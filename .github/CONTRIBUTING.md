@@ -4,7 +4,7 @@
 ### **Bug Reporting**
 
 1. Verify that the bug was not already reported by searching on GitHub in the [Issues section](https://github.com/bagisto/bagisto/issues)
-If you're unable to find an open issue, [open a new one.](https://github.com/bagisto/bagisto/issues/new) Please be sure to follow the [issue template](https://github.com/bagisto/bagisto/blob/master/.github/ISSUE_TEMPLATE/1_Bug_report.md) as much as possible.
+If you're unable to find an open issue, [open a new one.](https://github.com/bagisto/bagisto/issues/new?assignees=&labels=&template=1_Bug_report.md).
 
 2. Verify that the bug you are reporting is a general issue and not specific to your individual setup.  
 For individual issues please use the [Community Forum](https:/forums.bagisto.com/).
