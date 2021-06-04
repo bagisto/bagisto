@@ -141,6 +141,15 @@ Please don't disclose security vulnerabilities publicly. If you find any securit
 
 ### Miscellaneous
 
+#### Contribute
+
+Bagisto is a community driven project, we appreciate every contribution from the community
+
+- If you found an issue that you think we should know about, or if you have a suggestion, please submit an issue.
+- If you want to submit a solution or offer a new feature
+
+Please read our [contributing guide](https://github.com/bagisto-europe/bagisto/blob/master/.github/CONTRIBUTING.md) for more info.
+
 #### Contributors
 
 This project is on [Open Collective](https://opencollective.com/bagisto) and it exists thanks to the people who contribute.
