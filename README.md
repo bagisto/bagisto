@@ -146,7 +146,7 @@ Please don't disclose security vulnerabilities publicly. If you find any securit
 Bagisto is a community driven project, we appreciate every contribution from the community
 
 - If you found an issue that you think we should know about, or if you have a suggestion, please submit an issue.
-- If you want to submit a solution or offer a new feature
+- If you want to submit a solution or offer a new feature, please create a pull request.
 
 Please read our [contributing guide](https://github.com/bagisto-europe/bagisto/blob/master/.github/CONTRIBUTING.md) for more info.
 
