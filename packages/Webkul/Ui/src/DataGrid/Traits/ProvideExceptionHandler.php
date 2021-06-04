@@ -52,6 +52,8 @@ trait ProvideExceptionHandler
      * Check required keys.
      *
      * @param  array  $requiredKeys
+     * @param  array  $actualKeys
+     * @param  \Closure  $operation
      * @return void|\Closure
      */
     public function checkRequiredKeys($requiredKeys, $actualKeys, $operation)
