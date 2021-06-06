@@ -124,7 +124,7 @@
                 <tbody>
 
                 <variant-item v-for='(variant, index) in variants' :variant="variant" :key="index"
-                              :index="variant.id"
+                              :index="index"
                               @onRemoveVariant="removeVariant($event)"></variant-item>
 
                 </tbody>
