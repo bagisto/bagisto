@@ -17,6 +17,42 @@
             </span>
 
             <div class="profile-info">
+                @php
+                    $allLocales = core()->getAllLocales()->pluck('name', 'code');
+
+                    $currentLocaleCode = request()->get('admin_locale') ?: app()->getLocale();
+                @endphp
+
+                <div class="dropdown-toggle">
+                    <div style="display: inline-block; vertical-align: middle;">
+                        <span class="name">
+                            {{ __('admin::app.datagrid.locale') }}
+                        </span>
+
+                        <span class="role">
+                            {{ $allLocales[$currentLocaleCode] }}
+                        </span>
+                    </div>
+
+                    <i class="icon arrow-down-icon active"></i>
+                </div>
+
+                <div class="dropdown-list bottom-right">
+                    <div class="dropdown-container">
+                        <ul>
+                            @foreach ($allLocales as $code => $name)
+                                <li>
+                                    <a href="{{ url()->current() . '?' . http_build_query(array_merge(request()->all(), ['admin_locale' => $code])) }}">
+                                        {{ $name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-info">
                 <div class="dropdown-toggle">
                     <div style="display: inline-block; vertical-align: middle;">
                         <span class="name">

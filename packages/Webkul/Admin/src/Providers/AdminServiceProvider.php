@@ -2,8 +2,10 @@
 
 namespace Webkul\Admin\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Tree;
+use Illuminate\Routing\Router;
+use Illuminate\Support\ServiceProvider;
+use Webkul\Admin\Http\Middleware\Locale;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -12,12 +14,13 @@ class AdminServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Router $router)
     {
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'admin');
-        $this->publishes([__DIR__.'/../Resources/lang' => resource_path('lang/vendor/admin')]);
+
+        $this->publishes([__DIR__ . '/../Resources/lang' => resource_path('lang/vendor/admin')]);
 
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets'),
@@ -28,6 +31,8 @@ class AdminServiceProvider extends ServiceProvider
         $this->composeView();
 
         $this->registerACL();
+
+        $router->aliasMiddleware('admin_locale', Locale::class);
 
         $this->app->register(EventServiceProvider::class);
     }
@@ -43,7 +48,7 @@ class AdminServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bind the the data to the views
+     * Bind the data to the views.
      *
      * @return void
      */
@@ -118,7 +123,7 @@ class AdminServiceProvider extends ServiceProvider
     }
 
     /**
-     * Create acl tree
+     * Create ACL tree.
      *
      * @return mixed
      */
@@ -149,15 +154,18 @@ class AdminServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/menu.php', 'menu.admin'
+            dirname(__DIR__) . '/Config/menu.php',
+            'menu.admin'
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/acl.php', 'acl'
+            dirname(__DIR__) . '/Config/acl.php',
+            'acl'
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php', 'core'
+            dirname(__DIR__) . '/Config/system.php',
+            'core'
         );
     }
 }
