@@ -7,13 +7,9 @@
 @section('content')
     <div class="content">
         @php
-            /* getting channel and locales */
-            $mainConfigurations = core()->getChannelCodeAndLocaleCode();
-
-            /* assigning */
-            $locale = $mainConfigurations['localeCode'];
-            $channel = $mainConfigurations['channelCode'];
-            $channelLocales = $mainConfigurations['channelLocales'];
+            $locale = core()->checkRequestedLocaleInChannel();
+            $channel = core()->getRequestedChannelCode();
+            $channelLocales = core()->getAllLocalesByRequestedChannelCode()['locales'];
         @endphp
 
         {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}

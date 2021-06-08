@@ -233,6 +233,16 @@ class Core
     }
 
     /**
+     * Get channel code from request.
+     *
+     * @return string
+     */
+    public function getRequestedChannelCode(): string
+    {
+        return request()->get('channel') ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
+    }
+
+    /**
      * Returns the channel name.
      *
      * @return string
@@ -245,7 +255,7 @@ class Core
     }
 
     /**
-     * Returns all locales
+     * Return all locales.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -258,6 +268,27 @@ class Core
         }
 
         return $locales = $this->localeRepository->all();
+    }
+
+    /**
+     * Return all locales which are present in requested channel.
+     *
+     * @return array
+     */
+    public function getAllLocalesByRequestedChannelCode()
+    {
+        static $data = [];
+
+        if (! empty($data)) {
+            return $data;
+        }
+
+        $channel = $this->channelRepository->findOneByField('code', $this->getRequestedChannelCode());
+
+        return $data = [
+            'channel' => $channel,
+            'locales' => $channel->locales
+        ];
     }
 
     /**
@@ -283,25 +314,29 @@ class Core
     }
 
     /**
-     * Get channel code and locale code based on the request.
+     * Get locale code from request.
      *
-     * @return array
+     * @return string
      */
-    public function getChannelCodeAndLocaleCode()
+    public function getRequestedLocaleCode(): string
     {
-        $both = [
-            'channelCode' => request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode()),
-            'localeCode' => request()->get('locale') ?: app()->getLocale()
-        ];
+        return request()->get('locale') ?: app()->getLocale();
+    }
 
-        $channel = $this->channelRepository->findOneByField('code', $both['channelCode']);
-        $both['channelLocales'] = $channel->locales;
+    /**
+     * Check requested locale in channel. If not found then set channel default locale.
+     *
+     * @return string
+     */
+    public function checkRequestedLocaleInChannel()
+    {
+        $localeCode = $this->getRequestedLocaleCode();
 
-        if (! $both['channelLocales']->contains('code', $both['localeCode'])) {
-            $both['localeCode'] = $channel->default_locale->code;
-        }
+        $channelLocales = $this->getAllLocalesByRequestedChannelCode();
 
-        return $both;
+        return ! $channelLocales['locales']->contains('code', $localeCode)
+            ? $channelLocales['channel']->default_locale->code
+            : $localeCode;
     }
 
     /**

@@ -7,13 +7,9 @@
 @section('content')
     <div class="content">
         @php
-            /* getting channel and locales */
-            $mainConfigurations = core()->getChannelCodeAndLocaleCode();
-
-            /* assigning */
-            $locale = $mainConfigurations['localeCode'];
-            $channel = $mainConfigurations['channelCode'];
-            $channelLocales = $mainConfigurations['channelLocales'];
+            $locale = core()->checkRequestedLocaleInChannel();
+            $channel = core()->getRequestedChannelCode();
+            $channelLocales = core()->getAllLocalesByRequestedChannelCode()['locales'];
         @endphp
 
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">

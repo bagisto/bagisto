@@ -41,12 +41,8 @@ class ConfigurationController extends Controller
         $this->velocityHelper = app('Webkul\Velocity\Helpers\Helper');
         $this->velocityMetaDataRepository = $velocityMetadataRepository;
 
-        /* getting channel and locales */
-        $mainConfigurations = core()->getChannelCodeAndLocaleCode();
-
-        /* assigning */
-        $this->locale = $mainConfigurations['localeCode'];
-        $this->channel = $mainConfigurations['channelCode'];
+        $this->locale = core()->checkRequestedLocaleInChannel();
+        $this->channel = core()->getRequestedChannelCode();
     }
 
     /**
