@@ -41,8 +41,12 @@ class ConfigurationController extends Controller
         $this->velocityHelper = app('Webkul\Velocity\Helpers\Helper');
         $this->velocityMetaDataRepository = $velocityMetadataRepository;
 
-        $this->locale = request()->get('locale') ?: app()->getLocale();
-        $this->channel = request()->get('channel') ?: 'default';
+        /* getting channel and locales */
+        $mainConfigurations = core()->getChannelCodeAndLocaleCode();
+
+        /* assigning */
+        $this->locale = $mainConfigurations['localeCode'];
+        $this->channel = $mainConfigurations['channelCode'];
     }
 
     /**
@@ -52,8 +56,6 @@ class ConfigurationController extends Controller
      */
     public function renderMetaData()
     {
-        $this->locale = request()->get('locale') ? request()->get('locale') : app()->getLocale();
-
         $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale, $this->channel, false);
 
         if (! $velocityMetaData) {
