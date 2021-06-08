@@ -20,7 +20,7 @@
                 @php
                     $allLocales = core()->getAllLocales()->pluck('name', 'code');
 
-                    $currentLocaleCode = core()->getRequestedLocaleCode();
+                    $currentLocaleCode = core()->getRequestedLocaleCode('admin_locale');
                 @endphp
 
                 <div class="dropdown-toggle">

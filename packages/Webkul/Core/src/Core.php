@@ -318,9 +318,9 @@ class Core
      *
      * @return string
      */
-    public function getRequestedLocaleCode(): string
+    public function getRequestedLocaleCode($localeCode = 'locale'): string
     {
-        return request()->get('locale') ?: app()->getLocale();
+        return request()->get($localeCode) ?: app()->getLocale();
     }
 
     /**
