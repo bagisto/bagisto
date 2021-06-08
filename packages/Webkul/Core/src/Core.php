@@ -283,6 +283,28 @@ class Core
     }
 
     /**
+     * Get channel code and locale code based on the request.
+     *
+     * @return array
+     */
+    public function getChannelCodeAndLocaleCode()
+    {
+        $both = [
+            'channelCode' => request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode()),
+            'localeCode' => request()->get('locale') ?: app()->getLocale()
+        ];
+
+        $channel = $this->channelRepository->findOneByField('code', $both['channelCode']);
+        $both['channelLocales'] = $channel->locales;
+
+        if (! $both['channelLocales']->contains('code', $both['localeCode'])) {
+            $both['localeCode'] = $channel->default_locale->code;
+        }
+
+        return $both;
+    }
+
+    /**
      * Returns all customer groups.
      *
      * @return \Illuminate\Support\Collection

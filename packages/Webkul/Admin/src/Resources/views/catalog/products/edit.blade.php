@@ -7,14 +7,13 @@
 @section('content')
     <div class="content">
         @php
-            $locale = request()->get('locale') ?: app()->getLocale();
-            $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
+            /* getting channel and locales */
+            $mainConfigurations = core()->getChannelCodeAndLocaleCode();
 
-            $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
-
-            if (! $channelLocales->contains('code', $locale)) {
-                $locale = config('app.fallback_locale');
-            }
+            /* assigning */
+            $locale = $mainConfigurations['localeCode'];
+            $channel = $mainConfigurations['channelCode'];
+            $channelLocales = $mainConfigurations['channelLocales'];
         @endphp
 
         {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}

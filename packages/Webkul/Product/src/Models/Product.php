@@ -391,9 +391,12 @@ class Product extends Model implements ProductContract
             return;
         }
 
-        $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+        /* getting channel and locales */
+        $mainConfigurations = core()->getChannelCodeAndLocaleCode();
 
-        $locale = request()->get('locale') ?: app()->getLocale();
+        /* assigning */
+        $locale = $mainConfigurations['localeCode'];
+        $channel = $mainConfigurations['channelCode'];
 
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
