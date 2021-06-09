@@ -237,9 +237,15 @@ class Core
      *
      * @return string
      */
-    public function getRequestedChannelCode(): string
+    public function getRequestedChannelCode($fallback = true)
     {
-        return request()->get('channel') ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
+        $channelCode = request()->get('channel');
+
+        if (! $fallback) {
+            return $channelCode;
+        }
+
+        return $channelCode ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
     }
 
     /**
@@ -356,6 +362,16 @@ class Core
         }
 
         return $customerGroups = $this->customerGroupRepository->all();
+    }
+
+    /**
+     * Get requested customer group code.
+     *
+     * @return null|string
+     */
+    public function getRequestedCustomerGroupCode()
+    {
+        return request()->get('customer_group');
     }
 
     /**
@@ -792,7 +808,7 @@ class Core
             $coreConfigValue = $loadedConfigs[$field];
         } else {
             if (null === $channel) {
-                $channel = request()->get('channel') ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
+                $channel = $this->getRequestedChannelCode();
             }
 
             if (null === $locale) {

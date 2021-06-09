@@ -56,7 +56,7 @@ class ProductRepository extends Repository
     public function getFeaturedProducts($count)
     {
         $results = app(ProductFlatRepository::class)->scopeQuery(function($query) {
-            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+            $channel = core()->getRequestedChannelCode();
 
             $locale = core()->getRequestedLocaleCode();
 
@@ -82,7 +82,7 @@ class ProductRepository extends Repository
     public function getNewProducts($count)
     {
         $results = app(ProductFlatRepository::class)->scopeQuery(function($query) {
-            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+            $channel = core()->getRequestedChannelCode();
 
             $locale = core()->getRequestedLocaleCode();
 
@@ -112,7 +112,7 @@ class ProductRepository extends Repository
         $categoryId = $params['category'] ?? '';
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function($query) use($term, $categoryId, $params) {
-            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+            $channel = core()->getRequestedChannelCode();
 
             $locale = core()->getRequestedLocaleCode();
 

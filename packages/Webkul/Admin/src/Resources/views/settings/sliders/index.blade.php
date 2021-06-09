@@ -10,7 +10,7 @@
 
         @php
             $locale = core()->getRequestedLocaleCode();
-            $channel = request()->get('channel') ?: null;
+            $channel = core()->getRequestedChannelCode();
         @endphp
 
         <div class="page-header">

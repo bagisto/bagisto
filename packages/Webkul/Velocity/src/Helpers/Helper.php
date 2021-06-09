@@ -191,7 +191,7 @@ class Helper extends Review
         }
 
         if (! $channel) {
-            $channel = request()->get('channel') ?: core()->getCurrentChannelCode() ?: 'default';
+            $channel = core()->getRequestedChannelCode();
         }
 
         try {
