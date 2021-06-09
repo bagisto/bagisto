@@ -324,11 +324,12 @@ class Core
     }
 
     /**
-     * Check requested locale in channel. If not found then set channel default locale.
+     * Check requested locale code in requested channel. If not found,
+     * then set channel default locale code.
      *
      * @return string
      */
-    public function checkRequestedLocaleInChannel()
+    public function checkRequestedLocaleCodeInRequestedChannel()
     {
         $localeCode = $this->getRequestedLocaleCode();
 

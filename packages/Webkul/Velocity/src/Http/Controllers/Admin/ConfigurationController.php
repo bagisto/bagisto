@@ -51,7 +51,7 @@ class ConfigurationController extends Controller
      */
     public function renderMetaData()
     {
-        $locale = core()->checkRequestedLocaleInChannel();
+        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
 
         $channel = core()->getRequestedChannelCode();
 
@@ -78,7 +78,7 @@ class ConfigurationController extends Controller
      */
     public function storeMetaData($id)
     {
-        $locale = core()->checkRequestedLocaleInChannel();
+        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
 
         /* check if radio button value */
         if (request()->get('slides') == "on") {
