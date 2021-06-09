@@ -187,7 +187,7 @@ class Helper extends Review
         }
 
         if (! $locale) {
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
         }
 
         if (! $channel) {

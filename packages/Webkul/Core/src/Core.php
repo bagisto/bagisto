@@ -796,7 +796,7 @@ class Core
             }
 
             if (null === $locale) {
-                $locale = request()->get('locale') ?: app()->getLocale();
+                $locale = $this->getRequestedLocaleCode();
             }
 
             $loadedConfigs[$field] = $coreConfigValue = $this->getCoreConfigValue($field, $channel, $locale);

@@ -85,7 +85,7 @@ trait ProvideDataGridPlus
         $locales = core()->getAllLocales();
 
         /* request and fallback handling */
-        $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = core()->getRequestedLocaleCode();
         $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
         $customer_group = request()->get('customer_group');
 

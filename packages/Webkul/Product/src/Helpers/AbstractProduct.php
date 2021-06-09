@@ -27,7 +27,7 @@ abstract class AbstractProduct
     {
         $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-        $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = core()->getRequestedLocaleCode();
 
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {

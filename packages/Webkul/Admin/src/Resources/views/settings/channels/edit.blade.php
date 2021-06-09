@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content">
-        @php $locale = request()->get('locale') ?: app()->getLocale(); @endphp
+        @php $locale = core()->getRequestedLocaleCode(); @endphp
 
         <form method="POST" action="{{ route('admin.channels.update', ['id' => $channel->id, 'locale' => $locale]) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">

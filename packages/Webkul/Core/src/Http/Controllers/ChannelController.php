@@ -128,7 +128,7 @@ class ChannelController extends Controller
      */
     public function update($id)
     {
-        $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = core()->getRequestedLocaleCode();
 
         $data = $this->validate(request(), [
             /* general */

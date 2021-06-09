@@ -151,7 +151,7 @@ class ProductRepository extends Repository
         $repository = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($params, $categoryId) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
 
             $qb = $query->distinct()
                 ->select('product_flat.*')
@@ -377,7 +377,7 @@ class ProductRepository extends Repository
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
 
             return $query->distinct()
                 ->addSelect('product_flat.*')
@@ -404,7 +404,7 @@ class ProductRepository extends Repository
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
 
             return $query->distinct()
                 ->addSelect('product_flat.*')
@@ -430,7 +430,7 @@ class ProductRepository extends Repository
     {
         $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-        $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = core()->getRequestedLocaleCode();
 
         if (config('scout.driver') == 'algolia') {
             $results = app(ProductFlatRepository::class)->getModel()::search('query', function ($searchDriver, string $query, array $options) use ($term, $channel, $locale) {
@@ -531,7 +531,7 @@ class ProductRepository extends Repository
         return app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($term) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
 
             return $query->distinct()
                 ->addSelect('product_flat.*')

@@ -8,8 +8,10 @@
 
     <div class="content">
 
-      <?php $locale = request()->get('locale') ?: null; ?>
-      <?php $channel = request()->get('channel') ?: null; ?>
+        @php
+            $locale = core()->getRequestedLocaleCode();
+            $channel = request()->get('channel') ?: null;
+        @endphp
 
         <div class="page-header">
             <div class="page-title">
