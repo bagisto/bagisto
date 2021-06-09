@@ -314,13 +314,15 @@ class Core
     }
 
     /**
-     * Get locale code from request.
+     * Get locale code from request. Here if you want to use admin locale,
+     * you can pass it as an argument.
      *
+     * @param  string  $localeKey  optional
      * @return string
      */
-    public function getRequestedLocaleCode($localeCode = 'locale'): string
+    public function getRequestedLocaleCode($localeKey = 'locale'): string
     {
-        return request()->get($localeCode) ?: app()->getLocale();
+        return request()->get($localeKey) ?: app()->getLocale();
     }
 
     /**
