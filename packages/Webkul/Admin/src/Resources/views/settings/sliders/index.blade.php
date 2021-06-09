@@ -9,8 +9,8 @@
     <div class="content">
 
         @php
-            $locale = core()->getRequestedLocaleCode();
-            $channel = core()->getRequestedChannelCode();
+            $locale = core()->getRequestedLocaleCode('locale', false);
+            $channel = core()->getRequestedChannelCode(false);
         @endphp
 
         <div class="page-header">

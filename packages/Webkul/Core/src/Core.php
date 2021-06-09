@@ -235,6 +235,7 @@ class Core
     /**
      * Get channel code from request.
      *
+     * @param  bool  $fallback  optional
      * @return string
      */
     public function getRequestedChannelCode($fallback = true)
@@ -324,11 +325,18 @@ class Core
      * you can pass it as an argument.
      *
      * @param  string  $localeKey  optional
+     * @param  bool  $fallback  optional
      * @return string
      */
-    public function getRequestedLocaleCode($localeKey = 'locale'): string
+    public function getRequestedLocaleCode($localeKey = 'locale', $fallback = true)
     {
-        return request()->get($localeKey) ?: app()->getLocale();
+        $localeCode = request()->get($localeKey);
+
+        if (! $fallback) {
+            return $localeCode;
+        }
+
+        return $localeCode ?: app()->getLocale();
     }
 
     /**
