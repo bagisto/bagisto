@@ -275,7 +275,7 @@ class Core
      *
      * @return array
      */
-    public function getAllLocalesByRequestedChannelCode()
+    public function getAllLocalesByRequestedChannel()
     {
         static $data = [];
 
@@ -333,7 +333,7 @@ class Core
     {
         $localeCode = $this->getRequestedLocaleCode();
 
-        $channelLocales = $this->getAllLocalesByRequestedChannelCode();
+        $channelLocales = $this->getAllLocalesByRequestedChannel();
 
         return ! $channelLocales['locales']->contains('code', $localeCode)
             ? $channelLocales['channel']->default_locale->code

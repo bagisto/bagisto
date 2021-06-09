@@ -7,7 +7,7 @@
 @php
     $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
     $channel = core()->getRequestedChannelCode();
-    $channelLocales = core()->getAllLocalesByRequestedChannelCode()['locales'];
+    $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
 @endphp
 
 @section('content')

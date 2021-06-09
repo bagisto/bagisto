@@ -9,7 +9,7 @@
         @php
             $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
             $channel = core()->getRequestedChannelCode();
-            $channelLocales = core()->getAllLocalesByRequestedChannelCode()['locales'];
+            $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
         @endphp
 
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">

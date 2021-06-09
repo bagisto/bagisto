@@ -9,7 +9,7 @@
         @php
             $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
             $channel = core()->getRequestedChannelCode();
-            $channelLocales = core()->getAllLocalesByRequestedChannelCode()['locales'];
+            $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
         @endphp
 
         {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
