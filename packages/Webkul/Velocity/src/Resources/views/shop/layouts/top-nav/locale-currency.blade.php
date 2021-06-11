@@ -27,23 +27,9 @@
 {!! view_render_event('bagisto.shop.layout.header.locale.before') !!}
     <div class="d-inline-block">
         <div class="dropdown">
-            @php
-                $localeImage = null;
-            @endphp
-
-            @foreach (core()->getCurrentChannel()->locales as $locale)
-                @if ($locale->code == app()->getLocale())
-                    @php
-                        $localeImage = $locale->locale_image;
-                    @endphp
-                @endif
-            @endforeach
-
             <div class="locale-icon">
-                @if ($localeImage)
-                    <img src="{{ asset('/storage/' . $localeImage) }}" onerror="this.src = '{{ asset($localeImage) }}'" alt="" width="20" height="20" />
-                @elseif (app()->getLocale() == 'en')
-                    <img src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" width="20" height="20" />
+                @if ($currentLocaleImageSource = app(\Webkul\Velocity\Helpers\Helper::class)->getCurrentLocaleImageSource())
+                    <img src="{{ $currentLocaleImageSource }}" alt="" width="20" height="20" />
                 @endif
             </div>
 
