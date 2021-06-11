@@ -83,9 +83,9 @@ return [
             ],
             'datagrid' => [
                 'id' => 'Id',
-                'title' => 'Title',
+                'title' => 'Titel',
                 'status' => 'Status',
-                'position' => 'Position',
+                'position' => 'Positie',
                 'content-type' => 'Content Type',
             ]
         ],
@@ -99,8 +99,8 @@ return [
             'sidebar-categories' => 'Sidebar categorieën',
             'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>We houden ervan om software te maken en de echte wereldproblemen met de binaire bestanden op te lossen. We zijn zeer toegewijd aan onze doelen. We investeren onze middelen om gebruiksvriendelijke software en applicaties van wereldklasse te creëren met de allerbeste, geavanceerde technologie-expertise.</p>',
-            'slider-path' => 'Schuifpad',
-            'category-logo' => 'Category logo',
+            'slider-path' => 'Slider link',
+            'category-logo' => 'Categorie logo',
             'product-policy' => 'Product Policy',
             'update-meta-data' => 'Update Meta Data',
             'product-view-image' => 'Product View Image',
@@ -109,18 +109,18 @@ return [
             'footer-middle-content' => 'Footer Middle Content',
             'advertisement-four' => 'Advertisement Four Images',
             'advertisement-three' => 'Advertisement Three Images',
-            'images' => 'Images',
-            'general' => 'General',
-            'add-image-btn-title' => 'Add Image',
+            'images' => 'Afbeeldingen',
+            'general' => 'Algemeen',
+            'add-image-btn-title' => 'Afbeelding toevoegen',
             'footer-middle' => [
-                'about-us'  => 'About Us',
-                'customer-service' => 'Customer Service',
-                'whats-new' => 'What\'s New',
-                'contact-us' => 'Contact Us',
-                'order-and-returns' => 'Order and Returns',
-                'payment-policy' => 'Payment Policy',
-                'shipping-policy' => 'Shipping Policy',
-                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+                'about-us'  => 'Over ons',
+                'customer-service' => 'Klantendienst',
+                'whats-new' => 'Laatste nieuws',
+                'contact-us' => 'Contacteer ons ',
+                'order-and-returns' => 'Bestellingen en retourneren',
+                'payment-policy' => 'Betalen ',
+                'shipping-policy' => 'Verzenden',
+                'privacy-and-cookies-policy' => 'Privacy- en cookiebeleid'
             ]
         ],
         'category' => [
@@ -203,16 +203,16 @@ return [
 
     'customer' => [
         'compare' => [
-            'text' => 'Compare',
-            'compare_similar_items' => 'Compare Similar Items',
-            'add-tooltip' => 'Voeg product toe aan vergelijkingslijst',
-            'added' => 'Item successfully added to compare list',
-            'already_added' => 'Item already added to compare list',
-            'removed' => 'Item successfully removed from compare list',
+            'text' => 'Vergelijken',
+            'compare_similar_items' => 'Vergelijk vergelijkbare items ',
+            'add-tooltip' => 'Voeg product toe aan de vergelijkingslijst',
+            'added' => 'Artikel succesvol toegevoegd aan de vergelijkingslijst ',
+            'already_added' => 'Dit artikel is al toegevoegd aan de vergelijkingslijst ',
+            'removed' => 'Item succesvol verwijderd uit vergelijkingslijst ',
             'removed-all' => 'Alle items zijn met succes verwijderd uit de vergelijkingslijst',
-            'empty-text' => "You don't have any items in your compare list",
-            'product_image' => 'Product Image',
-            'actions' => 'Actions',
+            'empty-text' => 'U heeft geen artikelen in uw vergelijkingslijst ',
+            'product_image' => 'Artikel afbeelding',
+            'actions' => 'Acties',
         ],
         'login-form' => [
             'sign-up' => 'Registreren',
@@ -251,7 +251,7 @@ return [
         'details' => 'Details',
         'reviews-title' => 'Reviews',
         'reviewed' => 'Reviewed',
-        'review-by' => 'Review by',
+        'review-by' => 'Review door',
         'quick-view' => 'Quick View',
         'not-available' => 'Niet beschikbaar',
         'submit-review' => 'Review versturen',
@@ -264,7 +264,7 @@ return [
         'short-description' => 'Korte omschrijving',
         'recently-viewed' => 'Recent bekeken producten',
         'be-first-review' => 'Wees de eerste om een review te schrijven.',
-        'tax-inclusive' => 'Inclusive of all taxes',
+        'tax-inclusive' => 'Inclusief BTW',
     ],
 
     'shop' => [
