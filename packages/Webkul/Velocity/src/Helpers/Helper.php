@@ -2,8 +2,8 @@
 
 namespace Webkul\Velocity\Helpers;
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Product\Helpers\Review;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductRepository;
@@ -16,63 +16,76 @@ use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 class Helper extends Review
 {
     /**
-     * productModel object
+     * Product model instance.
      *
      * @var \Webkul\Product\Contracts\Product
      */
-   protected $productModel;
+    protected $productModel;
 
     /**
-     * orderBrands object
+     * Order brands instance.
      *
      * @var \Webkul\Velocity\Repositories\OrderBrandsRepository
      */
     protected $orderBrandsRepository;
 
     /**
-     * ProductRepository object
+     * Product repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
-     * ProductFlatRepository object
+     * Product flat repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductFlatRepository
      */
     protected $productFlatRepository;
 
     /**
-     * productModel object
+     * Attribute option instance.
      *
      * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
      */
     protected $attributeOptionRepository;
 
     /**
-     * ProductReviewRepository object
+     * Product review repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductReviewRepository
      */
     protected $productReviewRepository;
 
     /**
-     * VelocityMetadata object
+     * Velocity metadata instance.
      *
      * @var \Webkul\Velocity\Repositories\VelocityMetadataRepository
      */
     protected $velocityMetadataRepository;
 
     /**
-     * Create a helper instamce
+     * List of all default locale images for velocity.
+     *
+     * @var array
+     */
+    protected $defaultLocaleImageSources = [
+        'de' => '/themes/velocity/assets/images/flags/de.png',
+        'en' => '/themes/velocity/assets/images/flags/en.png',
+        'es' => '/themes/velocity/assets/images/flags/es.png',
+        'fr' => '/themes/velocity/assets/images/flags/fr.png',
+        'nl' => '/themes/velocity/assets/images/flags/nl.png',
+        'tr' => '/themes/velocity/assets/images/flags/tr.png'
+    ];
+
+    /**
+     * Create a helper instance.
      *
      * @param  \Webkul\Product\Contracts\Product                        $productModel
      * @param  \Webkul\Velocity\Repositories\OrderBrandsRepository      $orderBrands
      * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository $attributeOptionRepository
      * @param  \Webkul\Product\Repositories\ProductReviewRepository     $productReviewRepository
      * @param  \Webkul\Velocity\Repositories\VelocityMetadataRepository $velocityMetadataRepository
-     *
      * @return void
      */
     public function __construct(
@@ -100,7 +113,9 @@ class Helper extends Review
     }
 
     /**
-     * @param  \Webkul\Sales\Contracts\Order $order
+     * Top brand.
+     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
      *
      * @return void
      */
@@ -118,11 +133,14 @@ class Helper extends Review
                     'product_id'    => $orderItem->product_id,
                     'brand'         => $products[$key]->brand,
                 ]);
-            } catch(\Exception $exception) {}
+            } catch (\Exception $exception) {
+            }
         }
     }
 
     /**
+     * Get brands with categories.
+     *
      * @return \Illuminate\Support\Collection|\Exception
      */
     public function getBrandsWithCategories()
@@ -139,11 +157,11 @@ class Helper extends Review
 
                 $categoryName = $brandName = $brandImplode = [];
 
-                foreach($product_categories as $totalData) {
+                foreach ($product_categories as $totalData) {
                     $brand = $this->attributeOptionRepository->findOneWhere(['id' => $totalData['brand']]);
 
                     foreach ($totalData['categories'] as $categories) {
-                        foreach($categories['translations'] as $catName) {
+                        foreach ($categories['translations'] as $catName) {
                             if (isset($brand->admin_name)) {
                                 $brandData[$brand->admin_name][] = $catName['name'];
                                 $categoryName[] = $catName['name'];
@@ -154,21 +172,21 @@ class Helper extends Review
 
                 $uniqueCategoryName = array_unique($categoryName);
 
-                foreach($uniqueCategoryName as $key => $categoryNameValue) {
-                    foreach($brandData as $brandDataKey => $brandDataValue) {
-                        if(in_array($categoryNameValue,$brandDataValue)) {
+                foreach ($uniqueCategoryName as $key => $categoryNameValue) {
+                    foreach ($brandData as $brandDataKey => $brandDataValue) {
+                        if (in_array($categoryNameValue, $brandDataValue)) {
                             $brandName[$categoryNameValue][] = $brandDataKey;
                         }
                     }
                 }
 
-                foreach($brandName as $brandKey => $brandvalue) {
-                    $brandImplode[$brandKey][] = implode(' | ',array_map("ucfirst", $brandvalue));
+                foreach ($brandName as $brandKey => $brandvalue) {
+                    $brandImplode[$brandKey][] = implode(' | ', array_map("ucfirst", $brandvalue));
                 }
 
                 return $brandImplode;
             }
-        } catch (Exception $exception){
+        } catch (\Exception $exception) {
             throw $exception;
         }
     }
@@ -213,21 +231,25 @@ class Helper extends Review
     }
 
     /**
+     * Get shop recent views.
+     *
      * @param  int  $reviewCount
      * @return \Illuminate\Support\Collection
      */
     public function getShopRecentReviews($reviewCount = 4)
     {
         $reviews = $this->productReviewRepository
-                        ->getModel()
-                        ->orderBy('id', 'desc')
-                        ->where('status', 'approved')
-                        ->take($reviewCount)->get();
+            ->getModel()
+            ->orderBy('id', 'desc')
+            ->where('status', 'approved')
+            ->take($reviewCount)->get();
 
         return $reviews;
     }
 
     /**
+     * Get json translations.
+     *
      * @return array
      */
     public function jsonTranslations()
@@ -248,6 +270,8 @@ class Helper extends Review
     }
 
     /**
+     * Format cart item.
+     *
      * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return array
      */
@@ -268,10 +292,11 @@ class Helper extends Review
     }
 
     /**
+     * Format product.
+     *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @param  bool                               $list
      * @param  array                              $metaInformation
-     *
      * @return array
      */
     public function formatProduct($product, $list = false, $metaInformation = [])
@@ -314,13 +339,13 @@ class Helper extends Review
                 'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
 
                 'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                       ? true : false,
+                    ? true : false,
 
                 'btnText'           => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
-                                       ? $metaInformation['btnText'] : null,
+                    ? $metaInformation['btnText'] : null,
 
                 'moveToCart'        => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
-                                       ? $metaInformation['moveToCart'] : null,
+                    ? $metaInformation['moveToCart'] : null,
 
                 'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
@@ -328,14 +353,13 @@ class Helper extends Review
     }
 
     /**
-     * Returns the count rating of the product
+     * Returns the count rating of the product.
      *
      * @param $items
      * @param $separator
-     *
      * @return array
      */
-    public function fetchProductCollection($items, $moveToCart = false, $separator='&')
+    public function fetchProductCollection($items, $moveToCart = false, $separator = '&')
     {
         $productIds = collect(explode($separator, $items));
 
@@ -358,5 +382,35 @@ class Helper extends Review
                 ]);
             }
         })->toArray();
+    }
+
+    /**
+     * Get current locale image source.
+     *
+     * @return string
+     */
+    public function getCurrentLocaleImageSource(): string
+    {
+        $localeImages = core()->getCurrentChannel()->locales()->pluck('locale_image', 'code');
+
+        $currentLocaleImage = $localeImages[app()->getLocale()] ?? null;
+
+        return $currentLocaleImage
+            ? Storage::url($currentLocaleImage)
+            : $this->getDefaultImageSourceOfCurrentLocale();
+    }
+
+    /**
+     * Get default image source of current locale.
+     *
+     * @return string
+     */
+    public function getDefaultImageSourceOfCurrentLocale(): string
+    {
+        $currentLocale = app()->getLocale();
+
+        return isset($this->defaultLocaleImageSources[$currentLocale])
+            ? asset($this->defaultLocaleImageSources[$currentLocale])
+            : '';
     }
 }
