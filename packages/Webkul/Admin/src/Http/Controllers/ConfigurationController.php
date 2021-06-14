@@ -2,31 +2,32 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
-use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Core\Tree;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Requests\ConfigurationForm;
+use Webkul\Core\Repositories\CoreConfigRepository;
 
 class ConfigurationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @var \Illuminate\Http\Response
      */
     protected $_config;
 
     /**
-     * CoreConfigRepository object
+     * Core config repository instance.
      *
      * @var \Webkul\Core\Repositories\CoreConfigRepository
      */
     protected $coreConfigRepository;
 
     /**
+     * Tree instance.
      *
-     * @var array
+     * @var \Webkul\Core\Tree
      */
     protected $configTree;
 
@@ -48,7 +49,7 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Prepares config tree
+     * Prepares config tree.
      *
      * @return void
      */
@@ -82,7 +83,7 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Returns slugs
+     * Returns slugs.
      *
      * @return array
      */
@@ -114,7 +115,7 @@ class ConfigurationController extends Controller
     {
         Event::dispatch('core.configuration.save.before');
 
-        $this->coreConfigRepository->create(request()->all());
+        $this->coreConfigRepository->create($request->except(['_token', 'admin_locale']));
 
         Event::dispatch('core.configuration.save.after');
 
@@ -124,7 +125,7 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * download the file for the specified resource.
+     * Download the file for the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -132,7 +133,7 @@ class ConfigurationController extends Controller
     {
         $path = request()->route()->parameters()['path'];
 
-        $fileName = 'configuration/'. $path;
+        $fileName = 'configuration/' . $path;
 
         $config = $this->coreConfigRepository->findOneByField('value', $fileName);
 
@@ -140,6 +141,8 @@ class ConfigurationController extends Controller
     }
 
     /**
+     * Get slugs.
+     *
      * @param  string  $secondItem
      * @return array
      */

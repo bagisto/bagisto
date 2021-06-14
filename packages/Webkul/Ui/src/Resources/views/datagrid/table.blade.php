@@ -782,7 +782,7 @@
                                     break;
                             }
 
-                            if (obj.column !== undefined && obj.val !== undefined) {
+                            if (obj.column !== undefined && obj.column !== 'admin_locale' && obj.val !== undefined) {
                                 this.filters.push(obj);
                             }
 

@@ -4,6 +4,7 @@ namespace Webkul\Velocity\Http\Controllers\Admin;
 
 use Illuminate\Support\Str;
 use Webkul\Core\Traits\Sanitizer;
+use Webkul\Velocity\Helpers\Helper;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
@@ -12,17 +13,14 @@ class ConfigurationController extends Controller
     use Sanitizer;
 
     /**
-     * Locale
+     * Velocity helper instance.
+     *
+     * @var \Webkul\Velocity\Helpers\Helper
      */
-    protected $locale;
+    protected $velocityHelper;
 
     /**
-     * Channel
-     */
-    protected $channel;
-
-    /**
-     * VelocityMetadataRepository $velocityMetaDataRepository
+     * Velocity meta data repository intance.
      *
      * @var \Webkul\Velocity\Repositories\VelocityMetadataRepository
      */
@@ -34,15 +32,16 @@ class ConfigurationController extends Controller
      * @param  \Webkul\Velocity\Repositories\MetadataRepository  $velocityMetaDataRepository
      * @return void
      */
-    public function __construct (VelocityMetadataRepository $velocityMetadataRepository)
+    public function __construct (
+        Helper $velocityHelper,
+        VelocityMetadataRepository $velocityMetadataRepository
+    )
     {
         $this->_config = request('_config');
 
-        $this->velocityHelper = app('Webkul\Velocity\Helpers\Helper');
-        $this->velocityMetaDataRepository = $velocityMetadataRepository;
+        $this->velocityHelper = $velocityHelper;
 
-        $this->locale = request()->get('locale') ?: app()->getLocale();
-        $this->channel = request()->get('channel') ?: 'default';
+        $this->velocityMetaDataRepository = $velocityMetadataRepository;
     }
 
     /**
@@ -52,14 +51,16 @@ class ConfigurationController extends Controller
      */
     public function renderMetaData()
     {
-        $this->locale = request()->get('locale') ? request()->get('locale') : app()->getLocale();
+        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
 
-        $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale, $this->channel, false);
+        $channel = core()->getRequestedChannelCode();
+
+        $velocityMetaData = $this->velocityHelper->getVelocityMetaData($locale, $channel, false);
 
         if (! $velocityMetaData) {
-            $this->createMetaData($this->locale, $this->channel);
+            $this->createMetaData($locale, $channel);
 
-            $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale, $this->channel);
+            $velocityMetaData = $this->velocityHelper->getVelocityMetaData($locale, $channel);
         }
 
         $velocityMetaData->advertisement = $this->manageAddImages(json_decode($velocityMetaData->advertisement, true) ?: []);
@@ -77,7 +78,9 @@ class ConfigurationController extends Controller
      */
     public function storeMetaData($id)
     {
-        // check if radio button value
+        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
+
+        /* check if radio button value */
         if (request()->get('slides') == "on") {
             $params = request()->all() + [
                 'slider' => 1,
@@ -118,14 +121,14 @@ class ConfigurationController extends Controller
         unset($params['images']);
         unset($params['slides']);
 
-        $params['locale'] = $this->locale;
+        $params['locale'] = $locale;
 
-        // update row
-        $product = $this->velocityMetaDataRepository->update($params, $id);
+        /* update row */
+        $this->velocityMetaDataRepository->update($params, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => trans('velocity::app.admin.meta-data.title')]));
 
-        return redirect()->route($this->_config['redirect'], ['locale' => $this->locale]);
+        return redirect()->route($this->_config['redirect'], ['locale' => $locale]);
     }
 
     /**
@@ -203,7 +206,6 @@ class ConfigurationController extends Controller
      * Manage add images.
      *
      * @param  array  $addImages
-     *
      * @return array
      */
     public function manageAddImages($addImages)
@@ -233,7 +235,6 @@ class ConfigurationController extends Controller
      *
      * @param  string  $locale
      * @param  string  $channel
-     *
      * @return array
      */
     private function createMetaData($locale, $channel)
