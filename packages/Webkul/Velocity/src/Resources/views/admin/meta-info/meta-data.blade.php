@@ -5,14 +5,9 @@
 @stop
 
 @php
-    $locale = request()->get('locale') ?: app()->getLocale();
-    $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
-
-    $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
-
-    if (! $channelLocales->contains('code', $locale)) {
-        $locale = config('app.fallback_locale');
-    }
+    $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
+    $channel = core()->getRequestedChannelCode();
+    $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
 @endphp
 
 @section('content')

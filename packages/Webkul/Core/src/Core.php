@@ -233,6 +233,16 @@ class Core
     }
 
     /**
+     * Get channel code from request.
+     *
+     * @return string
+     */
+    public function getRequestedChannelCode(): string
+    {
+        return request()->get('channel') ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
+    }
+
+    /**
      * Returns the channel name.
      *
      * @return string
@@ -245,7 +255,7 @@ class Core
     }
 
     /**
-     * Returns all locales
+     * Return all locales.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -258,6 +268,27 @@ class Core
         }
 
         return $locales = $this->localeRepository->all();
+    }
+
+    /**
+     * Return all locales which are present in requested channel.
+     *
+     * @return array
+     */
+    public function getAllLocalesByRequestedChannel()
+    {
+        static $data = [];
+
+        if (! empty($data)) {
+            return $data;
+        }
+
+        $channel = $this->channelRepository->findOneByField('code', $this->getRequestedChannelCode());
+
+        return $data = [
+            'channel' => $channel,
+            'locales' => $channel->locales
+        ];
     }
 
     /**
@@ -280,6 +311,35 @@ class Core
         }
 
         return $locale;
+    }
+
+    /**
+     * Get locale code from request. Here if you want to use admin locale,
+     * you can pass it as an argument.
+     *
+     * @param  string  $localeKey  optional
+     * @return string
+     */
+    public function getRequestedLocaleCode($localeKey = 'locale'): string
+    {
+        return request()->get($localeKey) ?: app()->getLocale();
+    }
+
+    /**
+     * Check requested locale code in requested channel. If not found,
+     * then set channel default locale code.
+     *
+     * @return string
+     */
+    public function checkRequestedLocaleCodeInRequestedChannel()
+    {
+        $localeCode = $this->getRequestedLocaleCode();
+
+        $channelLocales = $this->getAllLocalesByRequestedChannel();
+
+        return ! $channelLocales['locales']->contains('code', $localeCode)
+            ? $channelLocales['channel']->default_locale->code
+            : $localeCode;
     }
 
     /**

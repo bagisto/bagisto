@@ -194,7 +194,7 @@ class Helper extends Review
     /**
      * Returns the count rating of the product.
      *
-     * @return array
+     * @return \Webkul\Velocity\Repositories\VelocityMetadataRepository
      */
     public function getVelocityMetaData($locale = null, $channel = null, $default = true)
     {
