@@ -55,9 +55,7 @@ class SliderController extends Controller
      */
     public function create()
     {
-        $channels = core()->getAllChannels();
-
-        $locale = request()->get('locale') ?: core()->getCurrentLocale();
+        $locale = core()->getRequestedLocaleCode();
 
         return view($this->_config['view'])->with("locale", $locale);
     }

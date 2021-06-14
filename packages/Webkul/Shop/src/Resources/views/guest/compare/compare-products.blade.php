@@ -2,7 +2,7 @@
     $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeFamilyRepository');
     $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 
-    $locale = request()->get('locale') ?: app()->getLocale();
+    $locale = core()->getRequestedLocaleCode();
 
     $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
 @endphp

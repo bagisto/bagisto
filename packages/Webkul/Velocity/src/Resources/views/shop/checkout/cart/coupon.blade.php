@@ -42,7 +42,7 @@
                     error_message: '',
                     applied_coupon: "{{ $cart->coupon_code }}",
                     route_name: "{{ request()->route()->getName() }}",
-                    disable_button: ("{{ $cart->coupon_code }}" == "" ? false : true),
+                    disable_button: false,
                 }
             },
 

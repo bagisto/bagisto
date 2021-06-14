@@ -9,14 +9,14 @@ use Webkul\CMS\Repositories\CmsRepository;
 {
     /**
      * To hold the request variables from route file
-     * 
+     *
      * @var array
      */
     protected $_config;
 
     /**
      * To hold the CMSRepository instance
-     * 
+     *
      * @var \Webkul\CMS\Repositories\CmsRepository
      */
     protected $cmsRepository;
@@ -38,7 +38,7 @@ use Webkul\CMS\Repositories\CmsRepository;
 
     /**
      * Loads the index page showing the static pages resources
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function index()
@@ -71,7 +71,7 @@ use Webkul\CMS\Repositories\CmsRepository;
             'channels'     => 'required',
             'html_content' => 'required',
         ]);
-        
+
         $page = $this->cmsRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'page']));
@@ -100,7 +100,7 @@ use Webkul\CMS\Repositories\CmsRepository;
      */
     public function update($id)
     {
-        $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = core()->getRequestedLocaleCode();
 
         $this->validate(request(), [
             $locale . '.url_key'      => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {

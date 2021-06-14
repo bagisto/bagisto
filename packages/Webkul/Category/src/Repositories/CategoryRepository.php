@@ -148,7 +148,7 @@ class CategoryRepository extends Repository
             get_class($this->model), $slug
         );
     }
-    
+
     /**
      * Retrive category from slug.
      *
@@ -292,7 +292,7 @@ class CategoryRepository extends Repository
      */
     private function setSameAttributeValueToAllLocale(array $data, ...$attributeNames)
     {
-        $requestedLocale = request()->get('locale') ?: app()->getLocale();
+        $requestedLocale = core()->getRequestedLocaleCode();
 
         $model = app()->make($this->model());
 

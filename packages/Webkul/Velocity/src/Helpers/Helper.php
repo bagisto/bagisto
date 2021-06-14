@@ -194,7 +194,7 @@ class Helper extends Review
     /**
      * Returns the count rating of the product.
      *
-     * @return array
+     * @return \Webkul\Velocity\Repositories\VelocityMetadataRepository
      */
     public function getVelocityMetaData($locale = null, $channel = null, $default = true)
     {
@@ -205,11 +205,11 @@ class Helper extends Review
         }
 
         if (! $locale) {
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
         }
 
         if (! $channel) {
-            $channel = request()->get('channel') ?: core()->getCurrentChannelCode() ?: 'default';
+            $channel = core()->getRequestedChannelCode();
         }
 
         try {

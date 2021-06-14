@@ -119,7 +119,7 @@ class CategoryController extends Controller
      */
     public function update($id)
     {
-        $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = core()->getRequestedLocaleCode();
 
         $this->validate(request(), [
             $locale . '.slug' => ['required', function ($attribute, $value, $fail) use ($id) {
