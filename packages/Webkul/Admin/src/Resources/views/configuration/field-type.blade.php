@@ -1,20 +1,13 @@
 <?php
-    $validations = [];
-    $disabled = false;
-
-    if (isset($field['validation'])) {
-        array_push($validations, $field['validation']);
-    }
-
-    $validations = implode('|', array_filter($validations));
-
-    $key = $item['key'];
-    $key = explode(".", $key);
-    $firstField = current($key);
-    $secondField = next($key);
-    $thirdField  = end($key);
-
     $name = $item['key'] . '.' . $field['name'];
+
+    $coreConfigRepository = app('Webkul\Core\Repositories\CoreConfigRepository');
+
+    $nameField = $coreConfigRepository->getNameField($name);
+
+    $validations = $coreConfigRepository->getValidations($field);
+
+    $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $channel, $locale);
 
     if (isset($field['repository'])) {
         $temp = explode("@", $field['repository']);
@@ -23,31 +16,20 @@
         $value = $class->$method();
     }
 
-    $channel_locale = [];
-
-    if (isset($field['channel_based']) && $field['channel_based'])
-    {
-        array_push($channel_locale, $channel);
-    }
-
-    if (isset($field['locale_based']) && $field['locale_based']) {
-        array_push($channel_locale, $locale);
-    }
+    $key = $item['key'];
+    $key = explode(".", $key);
+    $firstField = current($key);
+    $secondField = next($key);
+    $thirdField  = end($key);
 ?>
 
     @if ($field['type'] == 'depends')
 
         <?php
-
             $depends = explode(":", $field['depend']);
             $dependField = current($depends);
-            $dependValue = end($depends);
 
-            if (count($channel_locale)) {
-                $channel_locale = implode(' - ', $channel_locale);
-            } else {
-                $channel_locale = '';
-            }
+            $dependValue = end($depends);
 
             if (isset($value) && $value) {
                 $i = 0;
@@ -70,7 +52,7 @@
 
         @if (strpos($field['validation'], 'required_if') !== false)
             <required-if
-                :name = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]'"
+                :name = "'{{ $nameField }}'"
                 :label = "'{{ trans($field['title']) }}'"
                 :info = "'{{ trans(isset($field['info']) ? $field['info'] : '') }}'"
                 :options = '@json($field['options'])'
@@ -78,17 +60,17 @@
                 :validations = "'{{ $validations }}'"
                 :depend = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $dependField }}]'"
                 :depend-result= "'{{ $dependSelectedOption }}'"
-                :channel_locale = "'{{ $channel_locale }}'"
+                :channel_locale = "'{{ $channelLocaleInfo }}'"
             ></required-if>
         @else
             <depends
                 :options = '@json($field['options'])'
-                :name = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]'"
+                :name = "'{{ $nameField }}'"
                 :validations = "'{{ $validations }}'"
                 :depend = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $dependField }}]'"
                 :value = "'{{ $dependValue }}'"
                 :field_name = "'{{ trans($field['title']) }}'"
-                :channel_locale = "'{{ $channel_locale }}'"
+                :channel_locale = "'{{ $channelLocaleInfo }}'"
                 :result = "'{{ $selectedOption }}'"
                 :depend-saved-value= "'{{ $dependSelectedOption }}'"
             ></depends>
@@ -96,42 +78,40 @@
 
     @else
 
-        <div class="control-group {{ $field['type'] }}" @if ($field['type'] == 'multiselect') :class="[errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]') ? 'has-error' : '']" @else :class="[errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]') ? 'has-error' : '']" @endif>
+        <div class="control-group {{ $field['type'] }}" @if ($field['type'] == 'multiselect') :class="[errors.has('{{ $nameField }}[]') ? 'has-error' : '']" @else :class="[errors.has('{{ $nameField }}') ? 'has-error' : '']" @endif>
 
-            <label for="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" {{ !isset($field['validation']) || preg_match('/\brequired\b/', $field['validation']) == false ? '' : 'class=required' }}>
+            <label for="{{ $nameField }}" {{ !isset($field['validation']) || preg_match('/\brequired\b/', $field['validation']) == false ? '' : 'class=required' }}>
 
                 {{ trans($field['title']) }}
 
-                @if (count($channel_locale))
-                    <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
-                @endif
+                <span class="locale">{{ $channelLocaleInfo }}</span>
 
             </label>
 
             @if ($field['type'] == 'text')
 
-                <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: (core()->getConfigData($name, $channel, $locale) ? core()->getConfigData($name, $channel, $locale) : (isset($field['default_value']) ? $field['default_value'] : '')) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
+                <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $nameField }}" name="{{ $nameField }}" value="{{ old($name) ?: (core()->getConfigData($name, $channel, $locale) ? core()->getConfigData($name, $channel, $locale) : (isset($field['default_value']) ? $field['default_value'] : '')) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
 
             @elseif ($field['type'] == 'password')
 
-                <input type="password" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
+                <input type="password" v-validate="'{{ $validations }}'" class="control" id="{{ $nameField }}" name="{{ $nameField }}" value="{{ old($name) ?: core()->getConfigData($name, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
 
             @elseif ($field['type'] == 'number')
 
-                <input type="number" min="0" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
+                <input type="number" min="0" v-validate="'{{ $validations }}'" class="control" id="{{ $nameField }}" name="{{ $nameField }}" value="{{ old($name) ?: core()->getConfigData($name, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
 
             @elseif ($field['type'] == 'color')
 
-                <input type="color" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
+                <input type="color" v-validate="'{{ $validations }}'" class="control" id="{{ $nameField }}" name="{{ $nameField }}" value="{{ old($name) ?: core()->getConfigData($name, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
 
 
             @elseif ($field['type'] == 'textarea')
 
-                <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">{{ old($name) ?: core()->getConfigData($name, $channel, $locale) ?: (isset($field['default_value']) ? $field['default_value'] : '') }}</textarea>
+                <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $nameField }}" name="{{ $nameField }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">{{ old($name) ?: core()->getConfigData($name, $channel, $locale) ?: (isset($field['default_value']) ? $field['default_value'] : '') }}</textarea>
 
             @elseif ($field['type'] == 'select')
 
-                <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ trans($field['title']) }}&quot;" >
+                <select v-validate="'{{ $validations }}'" class="control" id="{{ $nameField }}" name="{{ $nameField }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;" >
 
                     <?php
                         $selectedOption = core()->getConfigData($name, $channel, $locale) ?? '';
@@ -169,7 +149,7 @@
 
             @elseif ($field['type'] == 'multiselect')
 
-                <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]" data-vv-as="&quot;{{ trans($field['title']) }}&quot;"  multiple>
+                <select v-validate="'{{ $validations }}'" class="control" id="{{ $nameField }}" name="{{ $nameField }}[]" data-vv-as="&quot;{{ trans($field['title']) }}&quot;"  multiple>
 
                     <?php
                         $selectedOption = core()->getConfigData($name, $channel, $locale) ?? '';
@@ -214,7 +194,7 @@
                 <country
                     :country_code = "'{{ $countryCode }}'"
                     :validations = "'{{ $validations }}'"
-                    :name = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]'"
+                    :name = "'{{ $nameField }}'"
                 ></country>
 
             @elseif ($field['type'] == 'state')
@@ -226,7 +206,7 @@
                 <state
                     :state_code = "'{{ $stateCode }}'"
                     :validations = "'{{ $validations }}'"
-                    :name = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]'"
+                    :name = "'{{ $nameField }}'"
                 ></state>
 
             @elseif ($field['type'] == 'boolean')
@@ -234,8 +214,8 @@
                 <?php $selectedOption = core()->getConfigData($name, $channel, $locale) ?? (isset($field['default_value']) ? $field['default_value'] : ''); ?>
 
                 <label class="switch">
-                    <input type="hidden" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="0" />
-                    <input type="checkbox" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="1" {{ $selectedOption ? 'checked' : '' }}>
+                    <input type="hidden" name="{{ $nameField }}" value="0" />
+                    <input type="checkbox" id="{{ $nameField }}" name="{{ $nameField }}" value="1" {{ $selectedOption ? 'checked' : '' }}>
                     <span class="slider round"></span>
                 </label>
 
@@ -252,12 +232,12 @@
                     </a>
                 @endif
 
-                <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;" style="padding-top: 5px;">
+                <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $nameField }}" name="{{ $nameField }}" value="{{ old($name) ?: core()->getConfigData($name, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;" style="padding-top: 5px;">
 
                 @if ($result)
                     <div class="control-group" style="margin-top: 5px;">
                         <span class="checkbox">
-                            <input type="checkbox" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][delete]"  name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][delete]" value="1">
+                            <input type="checkbox" id="{{ $nameField }}[delete]"  name="{{ $nameField }}[delete]" value="1">
 
                             <label class="checkbox-view" for="delete"></label>
                                 {{ __('admin::app.configuration.delete') }}
@@ -279,12 +259,12 @@
                     </a>
                 @endif
 
-                <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;" style="padding-top: 5px;">
+                <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $nameField }}" name="{{ $nameField }}" value="{{ old($name) ?: core()->getConfigData($name, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;" style="padding-top: 5px;">
 
                 @if ($result)
                     <div class="control-group" style="margin-top: 5px;">
                         <span class="checkbox">
-                            <input type="checkbox" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][delete]"  name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][delete]" value="1">
+                            <input type="checkbox" id="{{ $nameField }}[delete]"  name="{{ $nameField }}[delete]" value="1">
 
                             <label class="checkbox-view" for="delete"></label>
                                 {{ __('admin::app.configuration.delete') }}
@@ -298,7 +278,7 @@
                 <span class="control-info mt-10">{{ trans($field['info']) }}</span>
             @endif
 
-            <span class="control-error" @if ($field['type'] == 'multiselect')  v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]')" @else  v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]')" @endif
+            <span class="control-error" @if ($field['type'] == 'multiselect')  v-if="errors.has('{{ $nameField }}[]')" @else  v-if="errors.has('{{ $nameField }}')" @endif
             >
             @if ($field['type'] == 'multiselect')
                 @{{ errors.first('{!! $firstField !!}[{!! $secondField !!}][{!! $thirdField !!}][{!! $field['name'] !!}][]') }}
@@ -425,7 +405,7 @@
     <div class="control-group"  :class="[errors.has(name) ? 'has-error' : '']" v-if="this.isVisible">
         <label :for="name" :class="[ isRequire ? 'required' : '']">
             @{{ field_name }}
-            <span class="locale"> [@{{ channel_locale }}] </span>
+            <span class="locale"> @{{ channel_locale }} </span>
         </label>
 
         <select v-if="this.options.length" v-validate= "validations" class="control" :id = "name" :name = "name" v-model="savedValue"

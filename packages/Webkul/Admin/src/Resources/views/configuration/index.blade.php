@@ -66,7 +66,7 @@
 
                                     @foreach ($item['fields'] as $field)
 
-                                        @include ('admin::configuration.field-type', ['field' => $field])
+                                        @include ('admin::configuration.field-type')
 
                                         @php ($hint = $field['title'] . '-hint')
                                         @if ($hint !== __($hint))
