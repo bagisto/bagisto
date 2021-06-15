@@ -67,9 +67,9 @@ class CategoryTableSeeder extends Seeder
                 'locale'           => 'fr',
             ],
             [
-                'name'             => 'Wortel',
+                'name'             => 'Hoofdcategorie',
                 'slug'             => 'root',
-                'description'      => 'Wortel',
+                'description'      => 'Hoofdcategorie',
                 'meta_title'       => '',
                 'meta_description' => '',
                 'meta_keywords'    => '',
