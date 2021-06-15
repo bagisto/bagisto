@@ -5,11 +5,12 @@ namespace Webkul\Core\Repositories;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Contracts\CoreConfig;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Traits\CoreConfigField;
 use Prettus\Repository\Traits\CacheableRepository;
 
 class CoreConfigRepository extends Repository
 {
-    use CacheableRepository;
+    use CoreConfigField, CacheableRepository;
 
     /**
      * Specify model class name.
@@ -165,38 +166,5 @@ class CoreConfigRepository extends Repository
         }
 
         return $return;
-    }
-
-    public function getNameField($key)
-    {
-        $nameField = '';
-
-        foreach (explode('.', $key) as $key => $field) {
-            $nameField .= $key === 0 ? $field : '[' . $field . ']';
-        }
-
-        return $nameField;
-    }
-
-    public function getValidations($field)
-    {
-        return isset($field['validation'])
-            ? $field['validation']
-            : '';
-    }
-
-    public function getChannelLocaleInfo($field, $channel, $locale)
-    {
-        $info = [];
-
-        if (isset($field['channel_based']) && $field['channel_based']) {
-            $info[] = $channel;
-        }
-
-        if (isset($field['locale_based']) && $field['locale_based']) {
-            $info[] = $locale;
-        }
-
-        return ! empty($info) ? '[' . implode(' - ', $info) . ']' : '';
     }
 }
