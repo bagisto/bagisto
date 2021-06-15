@@ -289,10 +289,10 @@
 
                 methods: {
                     haveStates: function () {
-                        var this_this = this;
+                        let self = this;
 
-                        this_this.$root.$on('countryCode', function (country) {
-                            this_this.country = country;
+                        self.$root.$on('countryCode', function (country) {
+                            self.country = country;
                         });
 
                         if (this.countryStates[this.country] && this.countryStates[this.country].length)

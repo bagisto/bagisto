@@ -77,17 +77,17 @@
             },
 
             mounted: function () {
-                var this_this = this;
+                let self = this;
 
-                this_this.savedValue = this_this.result;
+                self.savedValue = self.result;
 
-                if (this_this.validations || (this_this.validations.indexOf("required") != -1)) {
-                    this_this.isRequire = true;
+                if (self.validations || (self.validations.indexOf("required") != -1)) {
+                    self.isRequire = true;
                 }
 
                 $(document).ready(function(){
-                    var dependentElement = document.getElementById(this_this.depend);
-                    var dependValue = this_this.value;
+                    let dependentElement = document.getElementById(self.depend);
+                    let dependValue = self.value;
 
                     if (dependValue == 'true') {
                         dependValue = 1;
@@ -96,26 +96,26 @@
                     }
 
                     $(document).on("change", "select.control", function() {
-                        if (this_this.depend == this.name) {
-                            if (this_this.value == this.value) {
-                                this_this.isVisible = true;
+                        if (self.depend == this.name) {
+                            if (self.value == this.value) {
+                                self.isVisible = true;
                             } else {
-                                this_this.isVisible = false;
+                                self.isVisible = false;
                             }
                         }
                     })
 
                     if (dependentElement && dependentElement.value == dependValue) {
-                        this_this.isVisible = true;
+                        self.isVisible = true;
                     } else {
-                        this_this.isVisible = false;
+                        self.isVisible = false;
                     }
 
-                    if (this_this.result) {
-                        if (dependentElement.value == this_this.value) {
-                            this_this.isVisible = true;
+                    if (self.result) {
+                        if (dependentElement.value == self.value) {
+                            self.isVisible = true;
                         } else {
-                            this_this.isVisible = false;
+                            self.isVisible = false;
                         }
                     }
                 });
