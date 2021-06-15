@@ -149,9 +149,9 @@ class ProductRepository extends Repository
         $page = Paginator::resolveCurrentPage('page');
 
         $repository = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($params, $categoryId) {
-            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+            $channel = core()->getRequestedChannelCode();
 
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
 
             $qb = $query->distinct()
                 ->select('product_flat.*')
@@ -375,9 +375,9 @@ class ProductRepository extends Repository
         $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
-            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+            $channel = core()->getRequestedChannelCode();
 
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
 
             return $query->distinct()
                 ->addSelect('product_flat.*')
@@ -402,9 +402,9 @@ class ProductRepository extends Repository
         $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
-            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+            $channel = core()->getRequestedChannelCode();
 
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
 
             return $query->distinct()
                 ->addSelect('product_flat.*')
@@ -428,9 +428,9 @@ class ProductRepository extends Repository
      */
     public function searchProductByAttribute($term)
     {
-        $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+        $channel = core()->getRequestedChannelCode();
 
-        $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = core()->getRequestedLocaleCode();
 
         if (config('scout.driver') == 'algolia') {
             $results = app(ProductFlatRepository::class)->getModel()::search('query', function ($searchDriver, string $query, array $options) use ($term, $channel, $locale) {
@@ -529,9 +529,9 @@ class ProductRepository extends Repository
     public function searchSimpleProducts($term)
     {
         return app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($term) {
-            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+            $channel = core()->getRequestedChannelCode();
 
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
 
             return $query->distinct()
                 ->addSelect('product_flat.*')

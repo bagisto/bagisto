@@ -235,11 +235,18 @@ class Core
     /**
      * Get channel code from request.
      *
+     * @param  bool  $fallback  optional
      * @return string
      */
-    public function getRequestedChannelCode(): string
+    public function getRequestedChannelCode($fallback = true)
     {
-        return request()->get('channel') ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
+        $channelCode = request()->get('channel');
+
+        if (! $fallback) {
+            return $channelCode;
+        }
+
+        return $channelCode ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
     }
 
     /**
@@ -318,11 +325,18 @@ class Core
      * you can pass it as an argument.
      *
      * @param  string  $localeKey  optional
+     * @param  bool  $fallback  optional
      * @return string
      */
-    public function getRequestedLocaleCode($localeKey = 'locale'): string
+    public function getRequestedLocaleCode($localeKey = 'locale', $fallback = true)
     {
-        return request()->get($localeKey) ?: app()->getLocale();
+        $localeCode = request()->get($localeKey);
+
+        if (! $fallback) {
+            return $localeCode;
+        }
+
+        return $localeCode ?: app()->getLocale();
     }
 
     /**
@@ -356,6 +370,16 @@ class Core
         }
 
         return $customerGroups = $this->customerGroupRepository->all();
+    }
+
+    /**
+     * Get requested customer group code.
+     *
+     * @return null|string
+     */
+    public function getRequestedCustomerGroupCode()
+    {
+        return request()->get('customer_group');
     }
 
     /**
@@ -792,11 +816,11 @@ class Core
             $coreConfigValue = $loadedConfigs[$field];
         } else {
             if (null === $channel) {
-                $channel = request()->get('channel') ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
+                $channel = $this->getRequestedChannelCode();
             }
 
             if (null === $locale) {
-                $locale = request()->get('locale') ?: app()->getLocale();
+                $locale = $this->getRequestedLocaleCode();
             }
 
             $loadedConfigs[$field] = $coreConfigValue = $this->getCoreConfigValue($field, $channel, $locale);

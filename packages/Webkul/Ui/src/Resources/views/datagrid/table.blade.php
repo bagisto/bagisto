@@ -3,9 +3,9 @@
     $locales = core()->getAllLocales();
 
     /* request and fallback handling */
-    $locale = request()->get('locale') ?: app()->getLocale();
-    $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
-    $customer_group = request()->get('customer_group');
+    $locale = core()->getRequestedLocaleCode();
+    $channel = core()->getRequestedChannelCode();
+    $customer_group = core()->getRequestedCustomerGroupCode();
 
     /* handling cases for new locale if not present in current channel */
     if ($channel !== 'all') {
