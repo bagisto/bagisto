@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Webkul\Category\Repositories\CategoryRepository;
 
 /*
- * CategoryBulkTableSeeder
+ * Category bulk table seeder.
  *
  * Command: php artisan db:seed --class=Webkul\\Category\\Database\\Seeders\\CategoryBulkTableSeeder
  *
@@ -22,8 +22,7 @@ class CategoryBulkTableSeeder extends Seeder
     public function __construct(
         Faker $faker,
         CategoryRepository $categoryRepository
-    )
-    {
+    ) {
         $this->faker = $faker;
         $this->categoryRepository = $categoryRepository;
     }
