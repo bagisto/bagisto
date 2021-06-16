@@ -321,7 +321,7 @@ class Product extends Model implements ProductContract
     public function getAttribute($key)
     {
         if (! method_exists(static::class, $key)
-            && ! in_array($key, ['parent_id', 'attribute_family_id'])
+            && ! in_array($key, ['pivot', 'parent_id', 'attribute_family_id'])
             && ! isset($this->attributes[$key])
         ) {
             if (isset($this->id)) {
