@@ -2,7 +2,7 @@
     <div class="control-group"  :class="[errors.has(name) ? 'has-error' : '']">
         <label :for="name" :class="checkValidations">
             {{ label }}
-            <span class="locale"> {{ channel_locale ? `[${channel_locale}]` : '' }} </span>
+            <span class="locale"> {{ channel_locale }} </span>
         </label>
 
         <select v-if="this.options.length" v-validate="checkValidations" class="control" :id = "name" :name = "name" v-model="savedValue"
