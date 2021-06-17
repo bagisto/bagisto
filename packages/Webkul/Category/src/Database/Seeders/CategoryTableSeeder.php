@@ -2,10 +2,15 @@
 
 namespace Webkul\Category\Database\Seeders;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
+/*
+ * Category table seeder.
+ *
+ * Command: php artisan db:seed --class=Webkul\\Category\\Database\\Seeders\\CategoryTableSeeder
+ */
 class CategoryTableSeeder extends Seeder
 {
     public function run()
@@ -32,7 +37,6 @@ class CategoryTableSeeder extends Seeder
 
         DB::table('category_translations')->insert([
             [
-                'id'               => '1',
                 'name'             => 'Root',
                 'slug'             => 'root',
                 'description'      => 'Root',
@@ -41,6 +45,46 @@ class CategoryTableSeeder extends Seeder
                 'meta_keywords'    => '',
                 'category_id'      => '1',
                 'locale'           => 'en',
+            ],
+            [
+                'name'             => 'Raíz',
+                'slug'             => 'root',
+                'description'      => 'Raíz',
+                'meta_title'       => '',
+                'meta_description' => '',
+                'meta_keywords'    => '',
+                'category_id'      => '1',
+                'locale'           => 'es',
+            ],
+            [
+                'name'             => 'Racine',
+                'slug'             => 'root',
+                'description'      => 'Racine',
+                'meta_title'       => '',
+                'meta_description' => '',
+                'meta_keywords'    => '',
+                'category_id'      => '1',
+                'locale'           => 'fr',
+            ],
+            [
+                'name'             => 'Hoofdcategorie',
+                'slug'             => 'root',
+                'description'      => 'Hoofdcategorie',
+                'meta_title'       => '',
+                'meta_description' => '',
+                'meta_keywords'    => '',
+                'category_id'      => '1',
+                'locale'           => 'nl',
+            ],
+            [
+                'name'             => 'Kök',
+                'slug'             => 'root',
+                'description'      => 'Kök',
+                'meta_title'       => '',
+                'meta_description' => '',
+                'meta_keywords'    => '',
+                'category_id'      => '1',
+                'locale'           => 'tr',
             ]
         ]);
     }
