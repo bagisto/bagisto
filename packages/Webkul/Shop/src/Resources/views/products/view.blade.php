@@ -63,6 +63,12 @@
 
                         @include ('shop::products.price', ['product' => $product])
 
+                        @if (Webkul\Tax\Helpers\Tax::isTaxInclusive() && $product->getTypeInstance()->getTaxCategory())
+                            <div>
+                                {{ __('shop::app.products.tax-inclusive') }}
+                            </div>
+                        @endif
+
                         @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
                             <div class="regular-price">
                                 @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)

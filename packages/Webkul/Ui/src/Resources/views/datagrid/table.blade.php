@@ -3,9 +3,9 @@
     $locales = core()->getAllLocales();
 
     /* request and fallback handling */
-    $locale = request()->get('locale') ?: app()->getLocale();
-    $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
-    $customer_group = request()->get('customer_group');
+    $locale = core()->getRequestedLocaleCode();
+    $channel = core()->getRequestedChannelCode();
+    $customer_group = core()->getRequestedCustomerGroupCode();
 
     /* handling cases for new locale if not present in current channel */
     if ($channel !== 'all') {
@@ -782,7 +782,7 @@
                                     break;
                             }
 
-                            if (obj.column !== undefined && obj.val !== undefined) {
+                            if (obj.column !== undefined && obj.column !== 'admin_locale' && obj.val !== undefined) {
                                 this.filters.push(obj);
                             }
 

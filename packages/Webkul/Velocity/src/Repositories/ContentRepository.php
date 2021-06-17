@@ -98,7 +98,7 @@ class ContentRepository extends Repository
     {
         $results = [];
 
-        $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = core()->getRequestedLocaleCode();
 
         $content = $this->model->find($id);
 

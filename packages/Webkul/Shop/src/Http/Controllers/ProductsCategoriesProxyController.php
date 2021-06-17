@@ -1,44 +1,52 @@
 <?php
 
-
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Core\Repositories\SliderRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 
 class ProductsCategoriesProxyController extends Controller
 {
     /**
-     * CategoryRepository object
+     * Category repository instance.
      *
      * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
     /**
-     * ProductRepository object
+     * Product repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
+     * Slider repository instance.
+     *
+     * @var \Webkul\Core\Repositories\SliderRepository
+     */
+    protected $sliderRepository;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     *
      * @return void
      */
     public function __construct(
         CategoryRepository $categoryRepository,
-        ProductRepository $productRepository
-    )
-    {
+        ProductRepository $productRepository,
+        SliderRepository $sliderRepository
+    ) {
         $this->categoryRepository = $categoryRepository;
 
         $this->productRepository = $productRepository;
+
+        $this->sliderRepository = $sliderRepository;
 
         parent::__construct();
     }
@@ -73,13 +81,7 @@ class ProductsCategoriesProxyController extends Controller
             abort(404);
         }
 
-        $sliderRepository = app('Webkul\Core\Repositories\SliderRepository');
-
-        $sliderData = $sliderRepository
-            ->where('channel_id', core()->getCurrentChannel()->id)
-            ->where('locale', core()->getCurrentLocale()->code)
-            ->get()
-            ->toArray();
+        $sliderData = $this->sliderRepository->getActiveSliders();
 
         return view('shop::home.index', compact('sliderData'));
     }

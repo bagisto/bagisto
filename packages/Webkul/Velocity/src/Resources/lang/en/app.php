@@ -264,6 +264,7 @@ return [
         'short-description' => 'Short Descriptions',
         'recently-viewed'   => 'Recently Viewed Products',
         'be-first-review'   => 'Be the first to write a review',
+        'tax-inclusive'     => 'Inclusive of all taxes',
     ],
 
     'shop'          => [

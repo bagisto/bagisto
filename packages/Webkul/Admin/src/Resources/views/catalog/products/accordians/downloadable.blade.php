@@ -96,6 +96,7 @@
             <td>
                 <div class="control-group" style="margin-bottom: 10px;">
                     <select v-model="link.type" :name="[linkInputName + '[type]']" class="control">
+                        <option value=""></option>
                         <option value="file">{{ __('admin::app.catalog.products.upload-file') }}</option>
                         <option value="url">{{ __('admin::app.catalog.products.url') }}</option>
                     </select>

@@ -444,6 +444,7 @@ return [
         'compare_options' => 'قابلیت مقایشه محصولات',
         'wishlist-options' => 'قابلیت لیست علاقه مندیها',
         'offers' => 'Buy :qty for :price each and save :discount%',
+        'tax-inclusive' => 'Inclusive of all taxes',
     ],
 
     // 'reviews' => [

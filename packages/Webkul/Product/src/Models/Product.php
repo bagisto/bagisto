@@ -321,7 +321,7 @@ class Product extends Model implements ProductContract
     public function getAttribute($key)
     {
         if (! method_exists(static::class, $key)
-            && ! in_array($key, ['parent_id', 'attribute_family_id'])
+            && ! in_array($key, ['pivot', 'parent_id', 'attribute_family_id'])
             && ! isset($this->attributes[$key])
         ) {
             if (isset($this->id)) {
@@ -391,9 +391,8 @@ class Product extends Model implements ProductContract
             return;
         }
 
-        $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
-
-        $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
+        $channel = core()->getRequestedChannelCode();
 
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {

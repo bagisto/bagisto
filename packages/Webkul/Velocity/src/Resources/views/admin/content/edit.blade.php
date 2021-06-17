@@ -7,7 +7,7 @@
 @section('content')
     <div class="content">
         @php
-            $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = core()->getRequestedLocaleCode();
             $translation = $content->translations->where('locale', $locale)->first();
         @endphp
 

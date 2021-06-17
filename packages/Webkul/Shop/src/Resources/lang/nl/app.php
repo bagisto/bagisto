@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'invalid_vat_format' => 'The given vat id has a wrong format',
-    'security-warning' => 'Suspicious activity found!!!',
-    'nothing-to-delete' => 'Nothing to delete',
+    'invalid_vat_format' => 'Het opgegeven btw-nummer heeft een verkeerd formaat',
+    'security-warning' => 'Verdachte activiteit gevonden!',
+    'nothing-to-delete' => 'Er valt niets te verwijderen',
 
     'layouts' => [
         'my-account' => 'Mijn account',
@@ -16,9 +16,9 @@ return [
     ],
 
     'common' => [
-        'error' => 'Something went wrong, please try again later.',
+        'error' => 'Er is iets misgegaan, probeer het later opnieuw.',
         'image-upload-limit' => 'De maximale uploadgrootte van de afbeelding is 2 MB',
-        'no-result-found' => 'We could not find any records.'
+        'no-result-found' => 'We hebben geen records kunnen vinden.'
     ],
 
     'home' => [
@@ -426,7 +426,7 @@ return [
         'sale' => 'Uitverkoop',
         'new' => 'Nieuw',
         'empty' => 'Geen producten beschikbaar in deze categorie',
-        'add-to-cart' => 'Voeg toe aan winkelkar',
+        'add-to-cart' => 'In winkelwagen',
         'book-now' => 'boek nu',
         'buy-now' => 'Koop nu',
         'whoops' => 'Whoops!',
@@ -452,6 +452,7 @@ return [
         'compare_options' => 'Compare Options',
         'wishlist-options' => 'Wishlist Options',
         'offers' => 'Buy :qty for :price each and save :discount%',
+        'tax-inclusive' => 'Inclusief BTW',
     ],
 
     // 'reviews' => [
