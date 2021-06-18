@@ -153,5 +153,11 @@
         "optimize-autoloader": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "support": {
+        "issues": "https://github.com/bagisto/bagisto/issues",
+        "forum": "https://forums.bagisto.com",
+        "source": "https://github.com/bagisto/bagisto",
+        "docs": "https://devdocs.bagisto.com"
+    }
 }
