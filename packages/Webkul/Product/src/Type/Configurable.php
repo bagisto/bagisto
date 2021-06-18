@@ -66,6 +66,15 @@ class Configurable extends AbstractType
      */
     protected $productOptions = [];
 
+    /**
+     * Get default variant.
+     *
+     * @return \Webkul\Product\Models\Product
+     */
+    public function getDefaultVariant()
+    {
+        return $this->product->variants()->find($this->product->additional['default_variant_id'] ?? null);
+    }
 
     /**
      * Get default variant id.

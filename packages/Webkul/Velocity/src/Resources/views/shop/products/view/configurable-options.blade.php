@@ -3,6 +3,7 @@
     @inject ('configurableOptionHelper', 'Webkul\Product\Helpers\ConfigurableOption')
 
     @php
+        $defaultVariant = $product->getTypeInstance()->getDefaultVariant();
         $config = $configurableOptionHelper->getConfigurationConfig($product);
         $galleryImages = productimage()->getGalleryImages($product);
     @endphp
@@ -43,12 +44,13 @@
                             :disabled="attribute.disabled"
                             :id="['attribute_' + attribute.id]"
                             :name="['super_attribute[' + attribute.id + ']']"
-                            @change="configure(attribute, $event.target.value, $event)"
+                            @change="configure(attribute, $event.target.value)"
                             :data-vv-as="'&quot;' + attribute.label + '&quot;'">
 
                             <option
                                 :value="option.id"
-                                v-for='(option, index) in attribute.options'>
+                                v-for='(option, index) in attribute.options'
+                                :selected="index == attribute.selectedIndex">
                                 @{{ option.label }}
                             </option>
 
@@ -104,11 +106,22 @@
                     inject: ['$validator'],
                     data: function() {
                         return {
+                            defaultVariant: @json($defaultVariant),
                             galleryImages: [],
                             simpleProduct: null,
                             childAttributes: [],
                             selectedProductId: '',
                             config: @json($config),
+                        }
+                    },
+
+                    mounted: function () {
+                        if (this.defaultVariant) {
+                            this.childAttributes.forEach((attribute) => {
+                                let attributeValue = this.defaultVariant[attribute.code];
+
+                                this.configure(attribute, attributeValue);
+                            });
                         }
                     },
 
@@ -142,7 +155,7 @@
                     },
 
                     methods: {
-                        configure: function(attribute, value, event) {
+                        configure: function(attribute, value) {
                             this.simpleProduct = this.getSelectedProductId(attribute, value);
 
                             if (value) {
