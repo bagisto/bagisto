@@ -73,7 +73,7 @@ class Configurable extends AbstractType
      */
     public function getDefaultVariant()
     {
-        return $this->product->variants()->find($this->product->additional['default_variant_id'] ?? null);
+        return $this->product->variants()->find($this->getDefaultVariantId());
     }
 
     /**
