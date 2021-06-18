@@ -21,7 +21,7 @@
                     type="hidden"
                     :value="selectedProductId"
                     id="selected_configurable_option"
-                    name="selected_configurable_option" />
+                    name="selected_configurable_option"/>
 
                 <div
                     :key="index"
@@ -55,6 +55,7 @@
                             </option>
 
                         </select>
+
                         <div class="select-icon-container">
                             <span class="select-icon rango-arrow-down"></span>
                         </div>
@@ -74,7 +75,7 @@
                                 :name="['super_attribute[' + attribute.id + ']']"
                                 :id="['attribute_' + attribute.id + '_option_' + option.id]"
                                 :data-vv-as="'&quot;' + attribute.label + '&quot;'"
-                                @change="configure(attribute, $event.target.value)"/>
+                                @change="configure(attribute, $event.target.value)">
 
                             <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
 
@@ -99,62 +100,72 @@
 
         <script type="text/javascript">
             (() => {
-                var galleryImages = @json($galleryImages);
+                let galleryImages = @json($galleryImages);
 
                 Vue.component('product-options', {
                     template: '#product-options-template',
+
                     inject: ['$validator'],
+
                     data: function() {
                         return {
                             defaultVariant: @json($defaultVariant),
+                            config: @json($config),
                             galleryImages: [],
                             simpleProduct: null,
                             childAttributes: [],
                             selectedProductId: '',
-                            config: @json($config),
                         }
                     },
 
                     mounted: function () {
-                        if (this.defaultVariant) {
-                            this.childAttributes.forEach((attribute) => {
-                                let attributeValue = this.defaultVariant[attribute.code];
+                        this.init();
 
-                                this.configure(attribute, attributeValue);
-                            });
-                        }
-                    },
-
-                    created: function() {
-                        var config = @json($config);
-
-                        var childAttributes = this.childAttributes,
-                            attributes = config.attributes.slice(),
-                            index = attributes.length,
-                            attribute;
-
-                        while (index--) {
-                            attribute = attributes[index];
-
-                            attribute.options = [];
-
-                            if (index) {
-                                attribute.disabled = true;
-                            } else {
-                                this.fillSelect(attribute);
-                            }
-
-                            attribute = Object.assign(attribute, {
-                                childAttributes: childAttributes.slice(),
-                                prevAttribute: attributes[index - 1],
-                                nextAttribute: attributes[index + 1]
-                            });
-
-                            childAttributes.unshift(attribute);
-                        }
+                        this.initDefaultSelection();
                     },
 
                     methods: {
+                        init: function () {
+                            let config = @json($config);
+
+                            let childAttributes = this.childAttributes,
+                                attributes = config.attributes.slice(),
+                                index = attributes.length,
+                                attribute;
+
+                            while (index--) {
+                                attribute = attributes[index];
+
+                                attribute.options = [];
+
+                                if (index) {
+                                    attribute.disabled = true;
+                                } else {
+                                    this.fillSelect(attribute);
+                                }
+
+                                attribute = Object.assign(attribute, {
+                                    childAttributes: childAttributes.slice(),
+                                    prevAttribute: attributes[index - 1],
+                                    nextAttribute: attributes[index + 1]
+                                });
+
+                                childAttributes.unshift(attribute);
+                            }
+                        },
+
+                        initDefaultSelection: function() {
+                            console.log(this.defaultVariant);
+
+                            if (this.defaultVariant) {
+                                this.childAttributes.forEach((attribute) => {
+                                    let attributeValue = this.defaultVariant[attribute.code];
+
+                                    this.configure(attribute, attributeValue);
+                                });
+                            }
+                        },
+
                         configure: function(attribute, value) {
                             this.simpleProduct = this.getSelectedProductId(attribute, value);
 
@@ -181,7 +192,7 @@
                         },
 
                         getSelectedIndex: function(attribute, value) {
-                            var selectedIndex = 0;
+                            let selectedIndex = 0;
 
                             attribute.options.forEach(function(option, index) {
                                 if (option.id == value) {
@@ -193,7 +204,7 @@
                         },
 
                         getSelectedProductId: function(attribute, value) {
-                            var options = attribute.options,
+                            let options = attribute.options,
                                 matchedOptions;
 
                             matchedOptions = options.filter(function (option) {
@@ -208,12 +219,12 @@
                         },
 
                         fillSelect: function(attribute) {
-                            var options = this.getAttributeOptions(attribute.id);
-                            var prevOption;
-                            var index = 1;
-                            var allowedProducts;
-                            var i;
-                            var j;
+                            let options = this.getAttributeOptions(attribute.id);
+                            let prevOption;
+                            let index = 1;
+                            let allowedProducts;
+                            let i;
+                            let j;
 
                             this.clearSelect(attribute)
 
@@ -265,13 +276,13 @@
                                 || attribute.swatch_type == ''
                                 || attribute.swatch_type == 'dropdown'
                             ) {
-                                var element = document.getElementById(`attribute_${attribute.id}`);
+                                let element = document.getElementById(`attribute_${attribute.id}`);
 
                                 if (element) {
                                     element.selectedIndex = "0";
                                 }
                             } else {
-                                var elements = document.getElementsByName(`super_attribute[${attribute.id}]`);
+                                let elements = document.getElementsByName(`super_attribute[${attribute.id}]`);
 
                                 elements.forEach(function(element) {
                                     element.checked = false;
@@ -280,7 +291,7 @@
                         },
 
                         getAttributeOptions: function (attributeId) {
-                            var options;
+                            let options;
 
                             this.config.attributes.forEach(function(attribute, index) {
                                 if (attribute.id == attributeId) {
@@ -292,7 +303,7 @@
                         },
 
                         reloadPrice: function () {
-                            var selectedOptionCount = 0;
+                            let selectedOptionCount = 0;
 
                             this.childAttributes.forEach(function(attribute) {
                                 if (attribute.selectedIndex) {
@@ -300,9 +311,9 @@
                                 }
                             });
 
-                            var priceLabelElement = document.querySelector('.price-label');
-                            var priceElement = document.querySelector('.final-price');
-                            var regularPriceElement = document.querySelector('.regular-price');
+                            let priceLabelElement = document.querySelector('.price-label');
+                            let priceElement = document.querySelector('.final-price');
+                            let regularPriceElement = document.querySelector('.regular-price');
 
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
@@ -350,7 +361,7 @@
                         },
 
                         changeStock: function (productId) {
-                            var inStockElement = document.querySelector('.disable-box-shadow');
+                            let inStockElement = document.querySelector('.disable-box-shadow');
 
                             if (productId) {
                                 inStockElement.style.display= "block";
@@ -360,7 +371,7 @@
                         },
                     }
                 });
-            })()
+            })();
         </script>
     @endpush
 @endif
