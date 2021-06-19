@@ -195,6 +195,7 @@ return [
         'billed-to' => 'Cobrado de',
         'shipped-to' => 'Enviado para',
         'order-id' => 'Pedido Id',
+        'invoice-id' => 'Número da fatura',
         'invoice-date' => 'Data da Fatura',
         'total-qty' => 'Total Qtd',
         'inventory-source' => 'Fonte do Estoque',
@@ -476,17 +477,25 @@ return [
         ],
 
         'transactions' => [
-            'title'               => 'Transações',
-            'id'                  => 'ID',
-            'transaction-id'      => 'ID da Transação',
-            'payment-method'      => 'Método de pagamento',
-            'action'              => 'Ação',
-            'view-title'          => 'Transação #:transaction_id',
+            'title'               => 'Transactions',
+            'create-title'        => 'Add transaction',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'transaction-amount' => 'Transaction amount',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
             'transaction-data'    => 'Transaction Data',
-            'order-id'            => 'ID do Pedido',
+            'order-id'            => 'Order Id',
+            'invoice-id' => 'Invoice Id',
             'status'              => 'Status',
-            'created-at'          => 'Criado em',
-            'transaction-details' => 'Detalhes da transação'
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details',
+            'response' => [
+                'invoice-missing'    => 'This invoice id does not exist',
+                'transaction-saved'  => 'The transaction has been saved',
+                'already-paid'       => 'This invoice has already been paid'
+            ]
         ]
     ],
 
@@ -1490,6 +1499,10 @@ return [
             'cache-small-image' => 'Imagem pequena',
             'cache-medium-image' => 'Imagem média',
             'cache-large-image' => 'Imagem grande',
+            'generate-invoice'   => 'Automatically generate the invoice after placing an order',
+            'set-invoice-status' => 'Set the invoice status after creating the invoice to',
+            'set-order-status'   => 'Set the order status after creating the invoice to',
+            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
         ]
     ]
 ];
