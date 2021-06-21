@@ -585,12 +585,16 @@ class Configurable extends AbstractType
      * Add product. Returns error message if can't prepare product.
      *
      * @param  array  $data
-     * @return array
+     * @return array|string
      */
     public function prepareForCart($data)
     {
         if (! isset($data['selected_configurable_option']) || ! $data['selected_configurable_option']) {
-            return trans('shop::app.checkout.cart.integrity.missing_options');
+            if ($this->getDefaultVariantId()) {
+                $data['selected_configurable_option'] = $this->getDefaultVariantId();
+            } else {
+                return trans('shop::app.checkout.cart.integrity.missing_options');
+            }
         }
 
         $data = $this->getQtyRequest($data);
