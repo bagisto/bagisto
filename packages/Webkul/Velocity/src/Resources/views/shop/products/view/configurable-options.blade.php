@@ -110,10 +110,15 @@
                     data: function() {
                         return {
                             defaultVariant: @json($defaultVariant),
+
                             config: @json($config),
+
                             galleryImages: [],
+
                             simpleProduct: null,
+
                             childAttributes: [],
+
                             selectedProductId: '',
                         }
                     },
@@ -155,8 +160,6 @@
                         },
 
                         initDefaultSelection: function() {
-                            console.log(this.defaultVariant);
-
                             if (this.defaultVariant) {
                                 this.childAttributes.forEach((attribute) => {
                                     let attributeValue = this.defaultVariant[attribute.code];
