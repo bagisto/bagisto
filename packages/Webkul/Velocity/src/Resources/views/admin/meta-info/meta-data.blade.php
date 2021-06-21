@@ -69,7 +69,10 @@
             <accordian :title="'{{ __('velocity::app.admin.meta-data.general') }}'" :active="true">
                 <div slot="body">
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.activate-slider') }}</label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.activate-slider') }}
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
+                        </label>
 
                         <label class="switch">
                             <input
@@ -85,7 +88,10 @@
                     </div>
 
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.sidebar-categories') }}</label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.sidebar-categories') }}
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
+                        </label>
 
                         <input
                             type="number"
@@ -97,7 +103,10 @@
                     </div>
 
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.header_content_count') }}</label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.header_content_count') }}
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
+                        </label>
 
                         <input
                             type="number"
