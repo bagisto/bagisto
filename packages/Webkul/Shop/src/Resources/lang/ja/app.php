@@ -462,7 +462,7 @@ return [
             'cart-remove-action' => '手続きを進めますか。',
             'partial-cart-update' => 'Only some of the product(s) were updated',
             'link-missing' => '',
-            'minimum-order-message' => 'Minimum order amount is :amount'
+            'minimum-order-message' => '最小注文額は :amount'
         ],
 
         'onepage' => [
