@@ -500,7 +500,7 @@ return [
             'event' => [
                 'expired' => 'To wydarzenie wygasło.'
             ],
-            'minimum-order-message' => 'Minimum order amount is :amount'
+            'minimum-order-message' => 'Minimalna kwota zamówienia to :amount'
         ],
 
         'onepage' => [
