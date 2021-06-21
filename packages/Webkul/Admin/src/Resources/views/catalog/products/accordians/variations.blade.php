@@ -69,7 +69,7 @@
                 <div class="form-container">
 
                     <div v-for='(attribute, index) in super_attributes' class="control-group"
-                         :class="[errors.has('add-variant-form.' + attribute.code) ? 'has-error' : '']"
+                        :class="[errors.has('add-variant-form.' + attribute.code) ? 'has-error' : '']"
                     >
                         <label :for="attribute.code" class="required">@{{ attribute.admin_name
                             }}</label>
