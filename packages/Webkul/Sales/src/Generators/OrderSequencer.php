@@ -6,6 +6,11 @@ use Webkul\Sales\Models\Order;
 
 class OrderSequencer extends Sequencer
 {
+    /**
+     * Create order sequencer instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->setAllConfigs();

@@ -6,6 +6,11 @@ use Webkul\Sales\Models\Invoice;
 
 class InvoiceSequencer extends Sequencer
 {
+    /**
+     * Create invoice sequencer instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->setAllConfigs();
