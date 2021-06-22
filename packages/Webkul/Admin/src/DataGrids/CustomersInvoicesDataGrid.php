@@ -10,15 +10,31 @@ class CustomersInvoicesDataGrid extends DataGrid
 {
     use ProvideDataGridPlus;
 
+    /**
+     * Index column.
+     *
+     * @var int
+     */
     protected $index = 'id';
 
+    /**
+     * Default sort order of datagrid.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('invoices')
             ->leftJoin('orders as ors', 'invoices.order_id', '=', 'ors.id')
-            ->select('invoices.id as id', 'ors.increment_id as order_id', 'invoices.state as state', 'ors.channel_name as channel_name', 'invoices.base_grand_total as base_grand_total', 'invoices.created_at as created_at');
+            ->select('invoices.id as id', 'ors.increment_id as order_id', 'invoices.state as state', 'ors.channel_name as channel_name', 'invoices.base_grand_total as base_grand_total', 'invoices.created_at as created_at')
+            ->where('ors.customer_id', request('id'));
 
         $this->addFilter('id', 'invoices.id');
         $this->addFilter('order_id', 'ors.increment_id');
@@ -28,6 +44,11 @@ class CustomersInvoicesDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -66,7 +87,7 @@ class CustomersInvoicesDataGrid extends DataGrid
             'closure'    => true,
             'filterable' => true,
             'wrapper'    => function ($value) {
-                return '<a href="'. route('admin.sales.orders.view', $value->order_id). '">' . $value->order_id . '</a>';
+                return '<a href="' . route('admin.sales.orders.view', $value->order_id) . '">' . $value->order_id . '</a>';
             }
         ]);
 
@@ -101,6 +122,11 @@ class CustomersInvoicesDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([

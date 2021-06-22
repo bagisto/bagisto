@@ -504,7 +504,7 @@ return [
             'event' => [
                 'expired' => 'This event has been expired.'
             ],
-            'minimum-order-message' => 'Minimum order amount is :amount'
+            'minimum-order-message' => 'الحد الأدنى لمبلغ الطلب هو :amount'
         ],
 
         'onepage' => [
