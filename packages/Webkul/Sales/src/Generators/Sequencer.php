@@ -42,7 +42,40 @@ class Sequencer implements SequencerContract
     public $lastId = 0;
 
     /**
-     * Set order number generator class from the core config.
+     * Set length from the core config.
+     *
+     * @param  string  $configKey
+     * @return void
+     */
+    public function setLength($configKey)
+    {
+        $this->length = core()->getConfigData($configKey);
+    }
+
+    /**
+     * Set prefix from the core config.
+     *
+     * @param  string  $configKey
+     * @return void
+     */
+    public function setPrefix($configKey)
+    {
+        $this->prefix = core()->getConfigData($configKey);
+    }
+
+    /**
+     * Set suffix from the core config.
+     *
+     * @param  string  $configKey
+     * @return void
+     */
+    public function setSuffix($configKey)
+    {
+        $this->suffix = core()->getConfigData($configKey);
+    }
+
+    /**
+     * Set generator class from the core config.
      *
      * @param  string  $configKey
      * @return void
