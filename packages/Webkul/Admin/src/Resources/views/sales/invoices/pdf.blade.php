@@ -157,7 +157,7 @@
             <div class="invoice-summary">
                 <div class="row">
                     <span class="label">{{ __('admin::app.sales.invoices.invoice-id') }} -</span>
-                    <span class="value">#{{ $invoice->id }}</span>
+                    <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
                 </div>
 
                 <div class="row">

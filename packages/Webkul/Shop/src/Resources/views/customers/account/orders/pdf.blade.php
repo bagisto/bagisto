@@ -160,7 +160,7 @@
 
                 <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }} -</span>
-                    <span class="value">#{{ $invoice->id }}</span>
+                    <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
                 </div>
 
                 <div class="row">
