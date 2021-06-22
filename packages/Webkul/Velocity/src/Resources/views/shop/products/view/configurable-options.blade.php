@@ -75,7 +75,8 @@
                                 :name="['super_attribute[' + attribute.id + ']']"
                                 :id="['attribute_' + attribute.id + '_option_' + option.id]"
                                 :data-vv-as="'&quot;' + attribute.label + '&quot;'"
-                                @change="configure(attribute, $event.target.value)">
+                                @change="configure(attribute, $event.target.value)"
+                                :checked="index == attribute.selectedIndex">
 
                             <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
 
