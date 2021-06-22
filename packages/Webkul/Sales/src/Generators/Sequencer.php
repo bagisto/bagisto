@@ -86,7 +86,7 @@ class Sequencer implements SequencerContract
     }
 
     /**
-     * Resolve generated class.
+     * Resolve generator class.
      *
      * @return string
      */
