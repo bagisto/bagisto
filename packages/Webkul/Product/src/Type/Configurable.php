@@ -90,15 +90,13 @@ class Configurable extends AbstractType
      * Set default variant id.
      *
      * @param  int  $defaultVariantId
-     * @return bool
+     * @return void
      */
     public function setDefaultVariantId($defaultVariantId)
     {
         $this->product->additional = array_merge($this->product->additional ?? [], [
             'default_variant_id' => $defaultVariantId
         ]);
-
-        return $this->product->save();
     }
 
     /**
@@ -112,6 +110,8 @@ class Configurable extends AbstractType
 
         if ($defaultVariantId) {
             $this->setDefaultVariantId($defaultVariantId);
+
+            $this->product->save();
         }
     }
 
