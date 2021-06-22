@@ -216,7 +216,7 @@ class OrderRepository extends Repository
         /**
          * @var $generatorClass Sequencer
          */
-        $generatorClass = core()->getConfigData('sales.orderSettings.order_number.order_number_generator-class') ?: false;
+        $generatorClass = core()->getConfigData('sales.orderSettings.order_number.order_number_generator_class') ?: false;
 
         if ($generatorClass !== false
             && class_exists($generatorClass)

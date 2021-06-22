@@ -35,8 +35,46 @@ return [
                 'locale_based'  => true,
             ],
             [
-                'name'          => 'order_number_generator-class',
+                'name'          => 'order_number_generator_class',
                 'title'         => 'admin::app.admin.system.order-number-generator-class',
+                'type'          => 'text',
+                'validation'    => false,
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+        ]
+    ], [
+        'key'    => 'sales.orderSettings.invoice_number',
+        'name'   => 'admin::app.admin.system.invoice-number',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'invoice_number_prefix',
+                'title'         => 'admin::app.admin.system.invoice-number-prefix',
+                'type'          => 'text',
+                'validation'    => false,
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+            [
+                'name'          => 'invoice_number_length',
+                'title'         => 'admin::app.admin.system.invoice-number-length',
+                'type'          => 'text',
+                'validation'    => 'numeric',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+            [
+                'name'          => 'invoice_number_suffix',
+                'title'         => 'admin::app.admin.system.invoice-number-suffix',
+                'type'          => 'text',
+                'validation'    => false,
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+            [
+                'name'          => 'invoice_number_generator_class',
+                'title'         => 'admin::app.admin.system.invoice-number-generator-class',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
@@ -46,7 +84,7 @@ return [
     ], [
         'key'    => 'sales.orderSettings.minimum-order',
         'name'   => 'admin::app.admin.system.minimum-order',
-        'sort'   => 1,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'minimum_order_amount',
@@ -60,7 +98,7 @@ return [
     ], [
         'key'    => 'sales.orderSettings.invoice_slip_design',
         'name'   => 'admin::app.admin.system.invoice-slip-design',
-        'sort'   => 2,
+        'sort'   => 3,
         'fields' => [
             [
                 'name'          => 'logo',
