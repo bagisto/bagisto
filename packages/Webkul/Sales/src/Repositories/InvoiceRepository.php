@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Invoice;
+use Webkul\Sales\Generators\InvoiceSequencer;
 
 class InvoiceRepository extends Repository
 {
@@ -80,7 +81,7 @@ class InvoiceRepository extends Repository
     }
 
     /**
-     * @param  array  $data     
+     * @param  array  $data
      * @param  string $invoiceState
      * @param  string $orderState
      * @return \Webkul\Sales\Contracts\Invoice
@@ -95,7 +96,7 @@ class InvoiceRepository extends Repository
             $order = $this->orderRepository->find($data['order_id']);
 
             $totalQty = array_sum($data['invoice']['items']);
-            
+
             if (isset($invoiceState)) {
                 $state = $invoiceState;
             } else {
@@ -103,6 +104,7 @@ class InvoiceRepository extends Repository
             }
 
             $invoice = $this->model->create([
+                'increment_id'          => $this->generateIncrementId(),
                 'order_id'              => $order->id,
                 'total_qty'             => $totalQty,
                 'state'                 => $state,
@@ -219,6 +221,16 @@ class InvoiceRepository extends Repository
         DB::commit();
 
         return $invoice;
+    }
+
+    /**
+     * Generate increment id.
+     *
+     * @return int
+     */
+    public function generateIncrementId()
+    {
+        return app(InvoiceSequencer::class)->resolveGeneratorClass();
     }
 
     /**
