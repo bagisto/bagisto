@@ -1427,6 +1427,8 @@ return [
             'invoice-number-generator-class' => 'Fatura Numarası Oluşturucu',
             'payment-terms' => 'Ödeme şartları',
             'due-duration' => 'Vade Süresi',
+            'due-duration-day' => ':due-duration Gün',
+            'due-duration-days' => ':due-duration Günler',
             'invoice-slip-design' => 'Fatura Tasarımı',
             'logo' => 'logo',
             'default' => 'Varsayılan',

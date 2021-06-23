@@ -1441,6 +1441,8 @@ return [
             'invoice-number-generator-class' => 'Gerador de número de fatura',
             'payment-terms' => 'Termos de pagamento',
             'due-duration' => 'Duração devida',
+            'due-duration-day' => ':due-duration Dia',
+            'due-duration-days' => ':due-duration Dias',
             'invoice-slip-design' => 'Design da Nota do Pedido',
             'logo' => 'Logotipo',
             'default' => 'Padrão',

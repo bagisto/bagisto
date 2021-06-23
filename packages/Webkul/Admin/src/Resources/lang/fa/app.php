@@ -1435,6 +1435,8 @@ return [
             'invoice-number-generator-class' => 'تولید کننده شماره فاکتور',
             'payment-terms' => 'شرایط پرداخت',
             'due-duration' => 'مدت زمان مقرر',
+            'due-duration-day' => ':due-duration روز',
+            'due-duration-days' => ':due-duration روزها',
             'invoice-slip-design' => 'طرح لغزش فاکتور',
             'logo' => 'لوگو',
             'default' => 'پیش فرض',

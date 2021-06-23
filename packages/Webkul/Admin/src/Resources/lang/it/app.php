@@ -1443,6 +1443,8 @@ return [
             'invoice-number-generator-class' => 'Generatore di numeri di fattura',
             'payment-terms' => 'Termini di pagamento',
             'due-duration' => 'Durata dovuta',
+            'due-duration-day' => ':due-duration Giorno',
+            'due-duration-days' => ':due-duration giorni',
             'invoice-slip-design' => 'Design della Fattura',
             'logo' => 'Logo',
             'default' => 'Default',

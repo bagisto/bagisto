@@ -1437,6 +1437,8 @@ return [
             'invoice-number-generator-class' => 'Factuurnummergenerator',
             'payment-terms' => 'Betaalvoorwaarden',
             'due-duration' => 'Vervaltijd:',
+            'due-duration-day' => ':due-duration Dag',
+            'due-duration-days' => ':due-duration dagen',
             'invoice-slip-design' => 'Invoice Slip Design',
             'logo' => 'Logo',
             'default' => 'Standaard',

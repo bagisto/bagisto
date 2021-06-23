@@ -1443,6 +1443,8 @@ return [
             'invoice-number-generator-class' => 'مولد رقم الفاتورة',
             'payment-terms' => 'شروط الدفع',
             'due-duration' => 'مدة الاستحقاق',
+            'due-duration-day' => ':due-duration يوم',
+            'due-duration-days' => ':due-duration أيام',
             'invoice-slip-design' => 'تصميم قسيمة الفاتورة',
             'logo' => 'شعار',
             'default' => 'إفتراضي',

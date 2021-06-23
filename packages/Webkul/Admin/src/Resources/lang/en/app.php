@@ -202,7 +202,7 @@ return [
         'channel-name'     => 'Channel Name',
         'billed-to'        => 'Billed To',
         'shipped-to'       => 'Shipped To',
-        'order-id'         => 'Order Id',
+        'order-id'         => 'Order ID',
         'invoice-date'     => 'Invoice Date',
         'total-qty'        => 'Total Qty',
         'inventory-source' => 'Inventory Source',
@@ -251,7 +251,7 @@ return [
         'update-status'    => 'Update Status',
         'subject'          => 'Subject',
         'date'             => 'Date',
-        'transaction-id'   => 'Transaction Id',
+        'transaction-id'   => 'Transaction ID',
         'transaction-date' => 'Transaction Date',
     ],
 
@@ -410,11 +410,11 @@ return [
 
         'invoices' => [
             'title'                  => 'Invoices',
-            'id'                     => 'Id',
+            'id'                     => 'ID',
             'invoice'                => 'Invoice',
-            'invoice-id'             => 'Invoice Id',
+            'invoice-id'             => 'Invoice ID',
             'date'                   => 'Invoice Date',
-            'order-id'               => 'Order Id',
+            'order-id'               => 'Order ID',
             'customer-name'          => 'Customer Name',
             'status'                 => 'Status',
             'amount'                 => 'Amount',
@@ -438,9 +438,9 @@ return [
 
         'shipments' => [
             'title'             => 'Shipments',
-            'id'                => 'Id',
+            'id'                => 'ID',
             'date'              => 'Shipment Date',
-            'order-id'          => 'Order Id',
+            'order-id'          => 'Order ID',
             'order-date'        => 'Order date',
             'customer-name'     => 'Customer Name',
             'total-qty'         => 'Total Qty',
@@ -465,10 +465,10 @@ return [
 
         'refunds' => [
             'title'              => 'Refunds',
-            'id'                 => 'Id',
+            'id'                 => 'ID',
             'add-title'          => 'Create Refund',
             'save-btn-title'     => 'Refund',
-            'order-id'           => 'Order Id',
+            'order-id'           => 'Order ID',
             'qty-ordered'        => 'Qty Ordered',
             'qty-to-refund'      => 'Qty To Refund',
             'refund-shipping'    => 'Refund Shipping',
@@ -489,13 +489,13 @@ return [
 
         'transactions' => [
             'title'               => 'Transactions',
-            'id'                  => 'Id',
-            'transaction-id'      => 'Transaction Id',
+            'id'                  => 'ID',
+            'transaction-id'      => 'Transaction ID',
             'payment-method'      => 'Payment method',
             'action'              => 'Action',
             'view-title'          => 'Transaction #:transaction_id',
             'transaction-data'    => 'Transaction Data',
-            'order-id'            => 'Order Id',
+            'order-id'            => 'Order ID',
             'status'              => 'Status',
             'created-at'          => 'Created At',
             'transaction-details' => 'Transaction Details'
@@ -947,7 +947,7 @@ return [
 
         'addresses' => [
             'title'               => ':customer_name\'s Addresses List',
-            'vat_id'              => 'Vat id',
+            'vat_id'              => 'Vat ID',
             'create-title'        => 'Create Customer\'s Address',
             'edit-title'          => 'Update Customer\'s Address',
             'title-orders'        => ':customer_name\'s Orders List',
@@ -1460,6 +1460,8 @@ return [
             'invoice-number-generator-class'        => 'Invoice Number Generator',
             'payment-terms'                         => 'Payment Terms',
             'due-duration'                          => 'Due Duration',
+            'due-duration-day'                      => ':due-duration Day',
+            'due-duration-days'                     => ':due-duration Days',
             'invoice-slip-design'                   => 'Invoice Slip Design',
             'logo'                                  => 'Logo',
             'default'                               => 'Default',
@@ -1502,7 +1504,7 @@ return [
             'custom-css'                            => 'Custom CSS',
             'custom-javascript'                     => 'Custom Javascript',
             'paypal-smart-button'                   => 'PayPal',
-            'client-id'                             => 'Client Id',
+            'client-id'                             => 'Client ID',
             'client-id-info'                        => 'Use "sb" for testing.',
             'client-secret'                         => 'Client Secret',
             'client-secret-info'                    => 'Add your secret key here',

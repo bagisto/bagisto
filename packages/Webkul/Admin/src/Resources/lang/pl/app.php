@@ -1440,6 +1440,8 @@ return [
             'invoice-number-generator-class' => 'Generator numerów faktur',
             'payment-terms' => 'Zasady płatności',
             'due-duration' => 'Wymagany czas trwania',
+            'due-duration-day' => ':due-duration Dzień',
+            'due-duration-days' => ':due-duration Dni',
             'invoice-slip-design' => 'Wzór wydruku faktury',
             'logo' => 'Logo',
             'default' => 'Domyślna',

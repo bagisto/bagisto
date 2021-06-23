@@ -1455,6 +1455,8 @@ return [
             'invoice-number-generator-class' => 'Generador de números de facturas',
             'payment-terms' => 'Términos de pago',
             'due-duration' => 'Duración debida',
+            'due-duration-day' => ':due-duration Día',
+            'due-duration-days' => ':due-duration Días',
             'invoice-slip-design' => 'Diseño de Comprobande de Factura',
             'logo' => 'Logo',
             'default' => 'Predeterminado',

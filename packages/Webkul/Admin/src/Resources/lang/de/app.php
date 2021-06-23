@@ -1451,6 +1451,8 @@ return [
             'invoice-number-generator-class'        => 'Rechnungsnummerngenerator',
             'payment-terms'                         => 'Zahlungsbedingungen',
             'due-duration'                          => 'Fälligkeitsdauer',
+            'due-duration-day'                      => ':due-duration Tag',
+            'due-duration-days'                     => ':due-duration Tage',
             'invoice-slip-design'                   => 'Rechnungsdesign',
             'logo'                                  => 'Logo',
             'default'                               => 'Standard',
