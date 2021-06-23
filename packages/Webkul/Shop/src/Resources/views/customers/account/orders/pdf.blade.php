@@ -173,6 +173,13 @@
                     <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
                 </div>
 
+                @if ($invoice->hasPaymentTerm())
+                    <div class="row">
+                        <span class="label">{{ __('shop::app.customer.account.order.view.payment-terms') }} -</span>
+                        <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
+                    </div>
+                @endif
+
                 <div class="table address">
                     <table>
                         <thead>

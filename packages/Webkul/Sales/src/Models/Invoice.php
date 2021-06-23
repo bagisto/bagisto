@@ -4,11 +4,24 @@ namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\Invoice as InvoiceContract;
+use Webkul\Sales\Traits\PaymentTerm;
 
 class Invoice extends Model implements InvoiceContract
 {
+    use PaymentTerm;
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var string[]|bool
+     */
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    /**
+     * Invoice status.
+     *
+     * @var array
+     */
     protected $statusLabel = [
         'pending'  => 'Pending',
         'paid'     => 'Paid',
@@ -16,7 +29,7 @@ class Invoice extends Model implements InvoiceContract
     ];
 
     /**
-     * Returns the status label from status code
+     * Returns the status label from status code.
      */
     public function getStatusLabelAttribute()
     {
