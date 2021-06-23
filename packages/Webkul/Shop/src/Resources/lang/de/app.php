@@ -330,6 +330,7 @@ return [
                     'invoice-id' => 'Rechnungsnummer',
                     'order-id' => 'Auftragsnummer',
                     'order-date' => 'Bestelldatum',
+                    'payment-terms' => 'Zahlungsbedingungen',
                     'bill-to' => 'Rechnung an',
                     'ship-to' => 'Versenden an',
                     'contact' => 'Kontakt',

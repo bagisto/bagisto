@@ -327,6 +327,7 @@ return [
                     'invoice-id' => 'Fatura No',
                     'order-id' => 'Sipariş No',
                     'order-date' => 'Sipariş Tarihi',
+                    'payment-terms' => 'Ödeme şartları',
                     'bill-to' => 'Fatura Edilen',
                     'ship-to' => 'Teslim Edilen',
                     'contact' => 'İletişim',

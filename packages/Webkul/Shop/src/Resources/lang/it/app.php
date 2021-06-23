@@ -328,6 +328,7 @@ return [
                     'invoice-id' => 'Fattura Nro',
                     'order-id' => 'Ordine Nro',
                     'order-date' => 'Ordine Data',
+                    'payment-terms' => 'Termini di pagamento',
                     'bill-to' => 'Fatturato a',
                     'ship-to' => 'Spedito a',
                     'contact' => 'Contatto',

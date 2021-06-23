@@ -310,6 +310,7 @@ return [
                     'invoice-id' => '領収書番号',
                     'order-id' => '注文番号',
                     'order-date' => '注文日',
+                    'payment-terms' => '支払い条件',
                     'bill-to' => '請求先',
                     'ship-to' => '送り先',
                     'contact' => '連絡先',

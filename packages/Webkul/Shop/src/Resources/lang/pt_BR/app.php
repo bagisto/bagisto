@@ -323,6 +323,7 @@ return [
                     'invoice-id' => 'Fatura Id',
                     'order-id' => 'Pedido Id',
                     'order-date' => 'Pedido Date',
+                    'payment-terms' => 'Termos de pagamento',
                     'bill-to' => 'Cobrança de',
                     'ship-to' => 'Enviar para',
                     'contact' => 'Contato',
