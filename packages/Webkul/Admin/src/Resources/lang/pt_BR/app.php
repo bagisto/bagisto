@@ -1431,6 +1431,7 @@ return [
             'order-number-length' => 'Tamanho do Número do Pedido',
             'order-number-suffix' => 'Sufixo do Número de Pedido',
             'order-number-generator-class' => 'Gerador de número de pedido',
+            'invoice-settings' => 'Configurações de fatura',
             'invoice-number' => 'Configurações de número de fatura',
             'invoice-number-prefix' => 'Prefixo do número da fatura',
             'invoice-number-length' => 'Comprimento do número da fatura',

@@ -1441,6 +1441,7 @@ return [
             'order-number-length'                   => 'Auftragsnummer Länge',
             'order-number-suffix'                   => 'Auftragsnummer Suffix',
             'order-number-generator-class'          => 'Bestell nummern generator',
+            'invoice-settings'                      => 'Rechnungseinstellungen',
             'invoice-number'                        => 'Rechnungsnummerneinstellungen',
             'invoice-number-prefix'                 => 'Rechnungsnummer-Präfix',
             'invoice-number-length'                 => 'Länge der Rechnungsnummer',

@@ -1450,6 +1450,7 @@ return [
             'order-number-length'                   => 'Order Number Length',
             'order-number-suffix'                   => 'Order Number Suffix',
             'order-number-generator-class'          => 'Order Number Generator',
+            'invoice-settings'                      => 'Invoice Settings',
             'invoice-number'                        => 'Invoice Number Settings',
             'invoice-number-prefix'                 => 'Invoice Number Prefix',
             'invoice-number-length'                 => 'Invoice Number Length',

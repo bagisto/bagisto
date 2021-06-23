@@ -1433,6 +1433,7 @@ return [
             'order-number-length' => 'طول رقم الطلب',
             'order-number-suffix' => 'لاحقة رقم الطلب',
             'order-number-generator-class' => 'مولد رقم الطلب',
+            'invoice-settings' => 'إعدادات الفاتورة',
             'invoice-number' => 'إعدادات رقم الفاتورة',
             'invoice-number-prefix' => 'بادئة رقم الفاتورة',
             'invoice-number-length' => 'طول رقم الفاتورة',

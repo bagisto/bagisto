@@ -1433,6 +1433,7 @@ return [
             'order-number-length' => 'Lunghezza Numero Ordine',
             'order-number-suffix' => 'Suffisso Numero Ordine',
             'order-number-generator-class' => 'Generatore di numeri dordine',
+            'invoice-settings' => 'Impostazioni fattura',
             'invoice-number' => 'Impostazioni numero fattura',
             'invoice-number-prefix' => 'Prefisso numero fattura',
             'invoice-number-length' => 'Lunghezza numero fattura',

@@ -1417,6 +1417,7 @@ return [
             'order-number-length' => 'Numara Uzunluğu',
             'order-number-suffix' => 'Numara Son Eki',
             'order-number-generator-class' => 'Sipariş Numarası Üreticisi',
+            'invoice-settings' => 'Fatura Ayarları',
             'invoice-number' => 'Fatura Numarası Ayarları',
             'invoice-number-prefix' => 'Fatura Numarası Ön Eki',
             'invoice-number-length' => 'Fatura Numarası Uzunluğu',

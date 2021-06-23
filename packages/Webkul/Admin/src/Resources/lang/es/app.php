@@ -1445,6 +1445,7 @@ return [
             'order-number-length' => 'Largo para Pedido #',
             'order-number-suffix' => 'Sufijo para Pedido #',
             'order-number-generator-class' => 'Generado de Números de Pedido',
+            'invoice-settings' => 'Configuración de facturas',
             'invoice-number' => 'Configuración del número de factura',
             'invoice-number-prefix' => 'Prefijo de número de factura',
             'invoice-number-length' => 'Longitud del número de factura',

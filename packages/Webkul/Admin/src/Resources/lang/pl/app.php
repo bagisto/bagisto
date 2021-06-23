@@ -1430,6 +1430,7 @@ return [
             'order-number-length' => 'Długość numeru zamówienia',
             'order-number-suffix' => 'Sufiks numeru zamówienia”',
             'order-number-generator-class' => 'Generator numeru zamówienia',
+            'invoice-settings' => 'Ustawienia faktury',
             'invoice-number' => 'Ustawienia numeru faktury',
             'invoice-number-prefix' => 'Prefiks numeru faktury',
             'invoice-number-length' => 'Długość numeru faktury',

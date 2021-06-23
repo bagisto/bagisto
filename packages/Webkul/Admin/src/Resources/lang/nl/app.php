@@ -1427,6 +1427,7 @@ return [
             'order-number-length' => 'Bestelnummer Lengte',
             'order-number-suffix' => 'Achtervoegsel bestelnummer',
             'order-number-generator-class' => 'Ordernummer Generator',
+            'invoice-settings' => 'Factuurinstellingen',
             'invoice-number' => 'Instellingen factuurnummer',
             'invoice-number-prefix' => 'Voorvoegsel factuurnummer',
             'invoice-number-length' => 'Lengte factuurnummer',

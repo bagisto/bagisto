@@ -1425,6 +1425,7 @@ return [
             'order-number-length' => 'طول شماره سفارش',
             'order-number-suffix' => 'تعداد کافی شماره سفارش',
             'order-number-generator-class' => 'تولید کننده شماره سفارش',
+            'invoice-settings' => 'تنظیمات فاکتور',
             'invoice-number' => 'تنظیمات شماره فاکتور',
             'invoice-number-prefix' => 'پیش شماره شماره فاکتور',
             'invoice-number-length' => 'طول شماره فاکتور',
