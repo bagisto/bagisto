@@ -1,5 +1,6 @@
 @section('css')
     @parent
+
     <style>
         .table th.price, .table th.weight {
             width: 100px;
@@ -68,7 +69,7 @@
                 <div class="form-container">
 
                     <div v-for='(attribute, index) in super_attributes' class="control-group"
-                         :class="[errors.has('add-variant-form.' + attribute.code) ? 'has-error' : '']"
+                        :class="[errors.has('add-variant-form.' + attribute.code) ? 'has-error' : '']"
                     >
                         <label :for="attribute.code" class="required">@{{ attribute.admin_name
                             }}</label>
@@ -85,7 +86,7 @@
                             </option>
                         </select>
                         <span class="control-error"
-                              v-if="errors.has('add-variant-form.' + attribute.code)">@{{ errors.first('add-variant-form.' + attribute.code) }}</span>
+                            v-if="errors.has('add-variant-form.' + attribute.code)">@{{ errors.first('add-variant-form.' + attribute.code) }}</span>
                     </div>
 
                     <button type="submit" class="btn btn-lg btn-primary">
@@ -101,34 +102,31 @@
     <script type="text/x-template" id="variant-list-template">
         <div class="table" style="margin-top: 20px; overflow-x: auto;">
             <table>
-
                 <thead>
-                <tr>
-                    <th class="sku">{{ __('admin::app.catalog.products.sku') }}</th>
-                    <th>{{ __('admin::app.catalog.products.name') }}</th>
-                    <th>{{ __('admin::app.catalog.products.images') }}</th>
+                    <tr>
+                        <th class="is-default">{{ __('admin::app.catalog.products.is-default') }}</th>
+                        <th class="sku">{{ __('admin::app.catalog.products.sku') }}</th>
+                        <th>{{ __('admin::app.catalog.products.name') }}</th>
+                        <th>{{ __('admin::app.catalog.products.images') }}</th>
 
-                    @foreach ($product->super_attributes as $attribute)
-                        <th class="{{ $attribute->code }}"
-                            style="width: 150px">{{ $attribute->admin_name }}</th>
-                    @endforeach
+                        @foreach ($product->super_attributes as $attribute)
+                            <th class="{{ $attribute->code }}"
+                                style="width: 150px">{{ $attribute->admin_name }}</th>
+                        @endforeach
 
-                    <th class="qty">{{ __('admin::app.catalog.products.qty') }}</th>
-                    <th class="price">{{ __('admin::app.catalog.products.price') }}</th>
-                    <th class="weight">{{ __('admin::app.catalog.products.weight') }}</th>
-                    <th class="status">{{ __('admin::app.catalog.products.status') }}</th>
-                    <th class="actions"></th>
-                </tr>
+                        <th class="qty">{{ __('admin::app.catalog.products.qty') }}</th>
+                        <th class="price">{{ __('admin::app.catalog.products.price') }}</th>
+                        <th class="weight">{{ __('admin::app.catalog.products.weight') }}</th>
+                        <th class="status">{{ __('admin::app.catalog.products.status') }}</th>
+                        <th class="actions"></th>
+                    </tr>
                 </thead>
 
                 <tbody>
-
-                <variant-item v-for='(variant, index) in variants' :variant="variant" :key="index"
-                              :index="index"
-                              @onRemoveVariant="removeVariant($event)"></variant-item>
-
+                    <variant-item v-for='(variant, index) in variants' :key="index" :index="index"
+                        :variant="variant" @onRemoveVariant="removeVariant($event)">
+                    </variant-item>
                 </tbody>
-
             </table>
         </div>
     </script>
@@ -136,22 +134,32 @@
     <script type="text/x-template" id="variant-item-template">
         <tr>
             <td>
-                <div class="control-group"
-                     :class="[errors.has(variantInputName + '[sku]') ? 'has-error' : '']">
+                <div class="control-group">
+                    <span class="radio">
+                        <input type="radio" id="default_variant_id"
+                            name="default_variant_id" :value="variant.id"
+                            v-on:change="checkDefaultVariant(variant.id)" :checked="variant.id == default_variant_id">
+                        <label class="radio-view" :for="[variantInputName + '[default_variant_id]']"></label>
+                    </span>
+                </div>
+            </td>
+
+            <td>
+                <div class="control-group" :class="[errors.has(variantInputName + '[sku]') ? 'has-error' : '']">
                     <input type="text" v-validate="'required'" v-model="variant.sku"
-                           :name="[variantInputName + '[sku]']" class="control"
-                           data-vv-as="&quot;{{ __('admin::app.catalog.products.sku') }}&quot;"
-                           v-slugify/>
+                        :name="[variantInputName + '[sku]']" class="control"
+                        data-vv-as="&quot;{{ __('admin::app.catalog.products.sku') }}&quot;"
+                        v-slugify/>
                     <span class="control-error" v-if="errors.has(variantInputName + '[sku]')">@{{ errors.first(variantInputName + '[sku]') }}</span>
                 </div>
             </td>
 
             <td>
                 <div class="control-group"
-                     :class="[errors.has(variantInputName + '[name]') ? 'has-error' : '']">
+                    :class="[errors.has(variantInputName + '[name]') ? 'has-error' : '']">
                     <input type="text" v-validate="'required'" v-model="variant.name"
-                           :name="[variantInputName + '[name]']" class="control"
-                           data-vv-as="&quot;{{ __('admin::app.catalog.products.name') }}&quot;"/>
+                        :name="[variantInputName + '[name]']" class="control"
+                        data-vv-as="&quot;{{ __('admin::app.catalog.products.name') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(variantInputName + '[name]')">@{{ errors.first(variantInputName + '[name]') }}</span>
                 </div>
             </td>
@@ -179,9 +187,9 @@
             <td v-for='(attribute, index) in superAttributes'>
                 <div class="control-group">
                     <input type="hidden" :name="[variantInputName + '[' + attribute.code + ']']"
-                           :value="variant[attribute.code]"/>
+                        :value="variant[attribute.code]"/>
                     <input type="text" class="control" :value="optionName(variant[attribute.code])"
-                           readonly/>
+                        readonly/>
                 </div>
             </td>
 
@@ -196,15 +204,15 @@
                         <ul>
                             <li v-for='(inventorySource, index) in inventorySources'>
                                 <div class="control-group"
-                                     :class="[errors.has(variantInputName + '[inventories][' + inventorySource.id + ']') ? 'has-error' : '']">
+                                    :class="[errors.has(variantInputName + '[inventories][' + inventorySource.id + ']') ? 'has-error' : '']">
                                     <label>@{{ inventorySource.name }}</label>
                                     <input type="text" v-validate="'numeric|min:0'"
-                                           :name="[variantInputName + '[inventories][' + inventorySource.id + ']']"
-                                           v-model="inventories[inventorySource.id]" class="control"
-                                           v-on:keyup="updateTotalQty()"
-                                           :data-vv-as="'&quot;' + inventorySource.name  + '&quot;'"/>
+                                        :name="[variantInputName + '[inventories][' + inventorySource.id + ']']"
+                                        v-model="inventories[inventorySource.id]" class="control"
+                                        v-on:keyup="updateTotalQty()"
+                                        :data-vv-as="'&quot;' + inventorySource.name  + '&quot;'"/>
                                     <span class="control-error"
-                                          v-if="errors.has(variantInputName + '[inventories][' + inventorySource.id + ']')">@{{ errors.first(variantInputName + '[inventories][' + inventorySource.id + ']') }}</span>
+                                        v-if="errors.has(variantInputName + '[inventories][' + inventorySource.id + ']')">@{{ errors.first(variantInputName + '[inventories][' + inventorySource.id + ']') }}</span>
                                 </div>
                             </li>
                         </ul>
@@ -214,22 +222,22 @@
 
             <td>
                 <div class="control-group"
-                     :class="[errors.has(variantInputName + '[price]') ? 'has-error' : '']">
+                    :class="[errors.has(variantInputName + '[price]') ? 'has-error' : '']">
                     <input type="number" v-validate="'required'" v-model="variant.price"
-                           :name="[variantInputName + '[price]']" class="control"
-                           data-vv-as="&quot;{{ __('admin::app.catalog.products.price') }}&quot;"
-                           step="any"/>
+                        :name="[variantInputName + '[price]']" class="control"
+                        data-vv-as="&quot;{{ __('admin::app.catalog.products.price') }}&quot;"
+                        step="any"/>
                     <span class="control-error" v-if="errors.has(variantInputName + '[price]')">@{{ errors.first(variantInputName + '[price]') }}</span>
                 </div>
             </td>
 
             <td>
                 <div class="control-group"
-                     :class="[errors.has(variantInputName + '[weight]') ? 'has-error' : '']">
+                    :class="[errors.has(variantInputName + '[weight]') ? 'has-error' : '']">
                     <input type="number" v-validate="'required'" v-model="variant.weight"
-                           :name="[variantInputName + '[weight]']" class="control"
-                           data-vv-as="&quot;{{ __('admin::app.catalog.products.weight') }}&quot;"
-                           step="any"/>
+                        :name="[variantInputName + '[weight]']" class="control"
+                        data-vv-as="&quot;{{ __('admin::app.catalog.products.weight') }}&quot;"
+                        step="any"/>
                     <span class="control-error" v-if="errors.has(variantInputName + '[weight]')">@{{ errors.first(variantInputName + '[weight]') }}</span>
                 </div>
             </td>
@@ -239,9 +247,9 @@
                     <select type="text" v-model="variant.status"
                             :name="[variantInputName + '[status]']" class="control">
                         <option value="1"
-                                :selected="variant.status">{{ __('admin::app.catalog.products.enabled') }}</option>
+                            :selected="variant.status">{{ __('admin::app.catalog.products.enabled') }}</option>
                         <option value="0"
-                                :selected="!variant.status">{{ __('admin::app.catalog.products.disabled') }}</option>
+                            :selected="!variant.status">{{ __('admin::app.catalog.products.disabled') }}</option>
                     </select>
                 </div>
             </td>
@@ -263,11 +271,10 @@
             ];
         });
 
-        var super_attributes = @json(app('\Webkul\Product\Repositories\ProductRepository')->getSuperAttributes($product));
-        var variants = @json($product->variants);
+        let super_attributes = @json(app('\Webkul\Product\Repositories\ProductRepository')->getSuperAttributes($product));
+        let variants = @json($product->variants);
 
         Vue.component('variant-form', {
-
             data: function () {
                 return {
                     variant: {},
@@ -285,18 +292,18 @@
                 addVariant: function (formScope) {
                     this.$validator.validateAll(formScope).then((result) => {
                         if (result) {
-                            var this_this = this;
+                            let self = this;
 
-                            var filteredVariants = variants.filter(function (variant) {
-                                var matchCount = 0;
+                            let filteredVariants = variants.filter(function (variant) {
+                                let matchCount = 0;
 
-                                for (var key in this_this.variant) {
-                                    if (variant[key] == this_this.variant[key]) {
+                                for (let key in self.variant) {
+                                    if (variant[key] == self.variant[key]) {
                                         matchCount++;
                                     }
                                 }
 
-                                return matchCount == this_this.super_attributes.length;
+                                return matchCount == self.super_attributes.length;
                             })
 
                             if (filteredVariants.length) {
@@ -309,9 +316,9 @@
 
                                 this.$root.addFlashMessages()
                             } else {
-                                var optionIds = [];
-                                for (var key in this_this.variant) {
-                                    optionIds.push(this_this.variant[key]);
+                                let optionIds = [];
+                                for (let key in self.variant) {
+                                    optionIds.push(self.variant[key]);
                                 }
 
                                 variants.push(Object.assign({
@@ -331,17 +338,16 @@
                 },
 
                 resetModel: function () {
-                    var this_this = this;
+                    let self = this;
 
                     this.super_attributes.forEach(function (attribute) {
-                        this_this.variant[attribute.code] = '';
+                        self.variant[attribute.code] = '';
                     })
                 }
             }
         });
 
         Vue.component('variant-list', {
-
             template: '#variant-list-template',
 
             inject: ['$validator'],
@@ -357,15 +363,15 @@
             },
 
             created: function () {
-                var index = 0;
+                let index = 0;
 
-                for (var key in this.old_variants) {
-                    var variant = this.old_variants[key];
+                for (let key in this.old_variants) {
+                    let variant = this.old_variants[key];
 
                     if (key.indexOf('variant_') !== -1) {
-                        var inventories = [];
+                        let inventories = [];
 
-                        for (var inventorySourceId in variant['inventories']) {
+                        for (let inventorySourceId in variant['inventories']) {
                             inventories.push({
                                 'qty': variant['inventories'][inventorySourceId],
                                 'inventory_source_id': inventorySourceId
@@ -376,13 +382,13 @@
 
                         variants.push(variant);
                     } else {
-                        for (var code in variant) {
+                        for (let code in variant) {
                             if (code != 'inventories') {
                                 variants[index][code] = variant[code];
                             } else {
                                 variants[index][code] = [];
 
-                                for (var inventorySourceId in variant[code]) {
+                                for (let inventorySourceId in variant[code]) {
                                     variants[index][code].push({
                                         'qty': variant[code][inventorySourceId],
                                         'inventory_source_id': inventorySourceId
@@ -403,11 +409,9 @@
                     this.variants.splice(index, 1)
                 },
             }
-
         });
 
         Vue.component('variant-item', {
-
             template: '#variant-item-template',
 
             props: ['index', 'variant'],
@@ -416,6 +420,7 @@
 
             data: function () {
                 return {
+                    default_variant_id: parseInt('{{ $product->additional['default_variant_id'] ?? null }}'),
                     inventorySources: @json($inventorySources),
                     inventories: {},
                     totalQty: 0,
@@ -429,25 +434,25 @@
             },
 
             created: function () {
-                var this_this = this;
+                let self = this;
 
                 this.inventorySources.forEach(function (inventorySource) {
-                    this_this.inventories[inventorySource.id] = this_this.sourceInventoryQty(inventorySource.id)
-                    this_this.totalQty += parseInt(this_this.inventories[inventorySource.id]);
+                    self.inventories[inventorySource.id] = self.sourceInventoryQty(inventorySource.id)
+                    self.totalQty += parseInt(self.inventories[inventorySource.id]);
                 })
             },
 
             mounted () {
-                var this_this = this;
+                let self = this;
 
-                this_this.variant.images.forEach(function(image) {
-                    this_this.items.push(image)
-                    this_this.imageCount++;
+                self.variant.images.forEach(function(image) {
+                    self.items.push(image)
+                    self.imageCount++;
 
                     if (image.id && image.url) {
-                        this_this.imageData.push(image.url);
+                        self.imageData.push(image.url);
                     } else if (image.id && image.file) {
-                        this_this.readFile(image.file);
+                        self.readFile(image.file);
                     }
                 });
             },
@@ -463,11 +468,15 @@
 
             methods: {
                 removeVariant: function () {
-                    this.$emit('onRemoveVariant', this.variant)
+                    this.$emit('onRemoveVariant', this.variant);
+                },
+
+                checkDefaultVariant: function (variantId) {
+                    this.default_variant_id = variantId;
                 },
 
                 optionName: function (optionId) {
-                    var optionName = '';
+                    let optionName = '';
 
                     this.superAttributes.forEach(function (attribute) {
                         attribute.options.forEach(function (option) {
@@ -484,7 +493,7 @@
                     if (!Array.isArray(this.variant.inventories))
                         return 0;
 
-                    var inventories = this.variant.inventories.filter(function (inventory) {
+                    let inventories = this.variant.inventories.filter(function (inventory) {
                         return inventorySourceId === parseInt(inventory.inventory_source_id);
                     })
 
@@ -497,13 +506,13 @@
                 updateTotalQty: function () {
                     this.totalQty = 0;
 
-                    for (var key in this.inventories) {
+                    for (let key in this.inventories) {
                         this.totalQty += parseInt(this.inventories[key]);
                     }
                 },
 
                 createFileType: function() {
-                    var this_this = this;
+                    let self = this;
 
                     this.imageCount++;
 
@@ -521,8 +530,8 @@
                 },
 
                 addImageView: function($event, index) {
-                    var ref = "imageInput" + index;
-                    var imageInput = this.$refs[ref][0];
+                    let ref = "imageInput" + index;
+                    let imageInput = this.$refs[ref][0];
 
                     if (imageInput.files && imageInput.files[0]) {
                         if (imageInput.files[0].type.includes('image/')) {
@@ -537,7 +546,7 @@
                 },
 
                 readFile: function(image, index) {
-                    var reader = new FileReader();
+                    let reader = new FileReader();
 
                     reader.onload = (e) => {
                         this.imageData.splice(index, 1, e.target.result);

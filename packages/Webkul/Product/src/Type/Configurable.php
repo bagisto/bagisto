@@ -67,6 +67,55 @@ class Configurable extends AbstractType
     protected $productOptions = [];
 
     /**
+     * Get default variant.
+     *
+     * @return \Webkul\Product\Models\Product
+     */
+    public function getDefaultVariant()
+    {
+        return $this->product->variants()->find($this->getDefaultVariantId());
+    }
+
+    /**
+     * Get default variant id.
+     *
+     * @return int
+     */
+    public function getDefaultVariantId()
+    {
+        return $this->product->additional['default_variant_id'] ?? null;
+    }
+
+    /**
+     * Set default variant id.
+     *
+     * @param  int  $defaultVariantId
+     * @return void
+     */
+    public function setDefaultVariantId($defaultVariantId)
+    {
+        $this->product->additional = array_merge($this->product->additional ?? [], [
+            'default_variant_id' => $defaultVariantId
+        ]);
+    }
+
+    /**
+     * Update default variant id if present in request.
+     *
+     * @return void
+     */
+    public function updateDefaultVariantId()
+    {
+        $defaultVariantId = request()->get('default_variant_id');
+
+        if ($defaultVariantId) {
+            $this->setDefaultVariantId($defaultVariantId);
+
+            $this->product->save();
+        }
+    }
+
+    /**
      * Create configurable product.
      *
      * @param  array  $data
@@ -106,6 +155,9 @@ class Configurable extends AbstractType
     public function update(array $data, $id, $attribute = "id")
     {
         $product = parent::update($data, $id, $attribute);
+
+        $this->updateDefaultVariantId();
+
         $route = request()->route() ? request()->route()->getName() : '';
 
         if ($route != 'admin.catalog.products.massupdate') {
@@ -533,12 +585,16 @@ class Configurable extends AbstractType
      * Add product. Returns error message if can't prepare product.
      *
      * @param  array  $data
-     * @return array
+     * @return array|string
      */
     public function prepareForCart($data)
     {
         if (! isset($data['selected_configurable_option']) || ! $data['selected_configurable_option']) {
-            return trans('shop::app.checkout.cart.integrity.missing_options');
+            if ($this->getDefaultVariantId()) {
+                $data['selected_configurable_option'] = $this->getDefaultVariantId();
+            } else {
+                return trans('shop::app.checkout.cart.integrity.missing_options');
+            }
         }
 
         $data = $this->getQtyRequest($data);
@@ -670,8 +726,7 @@ class Configurable extends AbstractType
     /**
      * Validate cart item product price.
      *
-     * @param \Webkul\Product\Type\CartItem $item
-     *
+     * @param  \Webkul\Product\Type\CartItem  $item
      * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
     public function validateCartItem(CartItemModel $item): CartItemValidationResult
@@ -704,8 +759,7 @@ class Configurable extends AbstractType
     /**
      * Get product options.
      *
-     * @param string $product
-     *
+     * @param  string  $product
      * @return array
      */
     public function getProductOptions($product = "")
