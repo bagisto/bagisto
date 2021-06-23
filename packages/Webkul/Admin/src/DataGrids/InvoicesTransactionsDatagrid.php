@@ -4,11 +4,9 @@ namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
-use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class InvoicesTransactionsDatagrid extends DataGrid
 {
-    use ProvideDataGridPlus;
 
     protected $index = 'id';
 
