@@ -1,6 +1,9 @@
 <?php
 
 return [
+    /**
+     * Order Settings
+     */
     [
         'key'  => 'sales.orderSettings',
         'name' => 'admin::app.admin.system.order-settings',
@@ -44,9 +47,32 @@ return [
             ],
         ]
     ], [
-        'key'    => 'sales.orderSettings.invoice_number',
-        'name'   => 'admin::app.admin.system.invoice-number',
+        'key'    => 'sales.orderSettings.minimum-order',
+        'name'   => 'admin::app.admin.system.minimum-order',
         'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'minimum_order_amount',
+                'title'         => 'admin::app.admin.system.minimum-order-amount',
+                'type'          => 'text',
+                'validation'    => 'decimal',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+        ]
+    ],
+
+    /**
+     * Invoice Settings
+     */
+    [
+        'key'  => 'sales.invoice_setttings',
+        'name' => 'admin::app.admin.system.invoice-settings',
+        'sort' => 4,
+    ], [
+        'key'    => 'sales.invoice_setttings.invoice_number',
+        'name'   => 'admin::app.admin.system.invoice-number',
+        'sort'   => 0,
         'fields' => [
             [
                 'name'          => 'invoice_number_prefix',
@@ -82,23 +108,9 @@ return [
             ],
         ]
     ], [
-        'key'    => 'sales.orderSettings.minimum-order',
-        'name'   => 'admin::app.admin.system.minimum-order',
-        'sort'   => 2,
-        'fields' => [
-            [
-                'name'          => 'minimum_order_amount',
-                'title'         => 'admin::app.admin.system.minimum-order-amount',
-                'type'          => 'text',
-                'validation'    => 'decimal',
-                'channel_based' => true,
-                'locale_based'  => true,
-            ],
-        ]
-    ], [
-        'key'    => 'sales.orderSettings.invoice_slip_design',
+        'key'    => 'sales.invoice_setttings.invoice_slip_design',
         'name'   => 'admin::app.admin.system.invoice-slip-design',
-        'sort'   => 3,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'logo',
@@ -108,5 +120,5 @@ return [
                 'channel_based' => true,
             ],
         ]
-    ]
+    ],
 ];

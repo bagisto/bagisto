@@ -24,13 +24,13 @@ class InvoiceSequencer extends Sequencer
      */
     public function setAllConfigs()
     {
-        $this->prefix = core()->getConfigData('sales.orderSettings.invoice_number.invoice_number_prefix');
+        $this->prefix = core()->getConfigData('sales.invoice_setttings.invoice_number.invoice_number_prefix');
 
-        $this->length = core()->getConfigData('sales.orderSettings.invoice_number.invoice_number_length');
+        $this->length = core()->getConfigData('sales.invoice_setttings.invoice_number.invoice_number_length');
 
-        $this->suffix = core()->getConfigData('sales.orderSettings.invoice_number.invoice_number_suffix');
+        $this->suffix = core()->getConfigData('sales.invoice_setttings.invoice_number.invoice_number_suffix');
 
-        $this->generatorClass = core()->getConfigData('sales.orderSettings.invoice_number.invoice_number_generator_class');
+        $this->generatorClass = core()->getConfigData('sales.invoice_setttings.invoice_number.invoice_number_generator_class');
 
         $this->lastId = $this->getLastId();
     }
