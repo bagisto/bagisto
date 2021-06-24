@@ -1289,10 +1289,10 @@
 
                     switch (obj.column) {
                         case "search":
-                            obj.label = "Search";
+                            obj.label = this.translations.searchTitle;
                             break;
                         case "channel":
-                            obj.label = "Channel";
+                            obj.label = this.translations.channel;
                             if ("channels" in this.extraFilters) {
                                 obj.prettyValue = this.extraFilters[
                                     "channels"
@@ -1304,7 +1304,7 @@
                             }
                             break;
                         case "locale":
-                            obj.label = "Locale";
+                            obj.label = this.translations.locale;
                             if ("locales" in this.extraFilters) {
                                 obj.prettyValue = this.extraFilters["locales"].find(
                                     locale => locale.code === obj.val
@@ -1316,7 +1316,7 @@
                             }
                             break;
                         case "customer_group":
-                            obj.label = "Customer Group";
+                            obj.label = this.translations.customerGroup;
                             if ("customer_groups" in this.extraFilters) {
                                 obj.prettyValue = this.extraFilters[
                                     "customer_groups"
