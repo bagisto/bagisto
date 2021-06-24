@@ -413,6 +413,16 @@ body {
             .account-layout {
                 .account-table-content {
                     #datagrid-filters {
+                        .filter-left {
+                            .icon-wrapper {
+                                .search-btn {
+                                    float: left;
+                                    right: unset;
+                                    left: 5px;
+                                }
+                            }
+                        }
+
                         .per-page {
                             left: 0;
                             right: unset;
