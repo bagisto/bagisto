@@ -164,6 +164,11 @@
                 </div>
 
                 <div class="row">
+                    <span class="label">{{ __('shop::app.customer.account.order.view.invoice-date') }} -</span>
+                    <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
+                </div>
+
+                <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }} -</span>
                     <span class="value">#{{ $invoice->order->increment_id }}</span>
                 </div>
