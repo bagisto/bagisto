@@ -264,6 +264,12 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                     'view' => 'admin::sales.transactions.index',
                 ])->name('admin.sales.transactions.index');
 
+                Route::get('/transactions/create', 'Webkul\Admin\Http\Controllers\Sales\TransactionController@create')->defaults('_config', [
+                    'view' => 'admin::sales.transactions.create',
+                ])->name('admin.sales.transactions.create');
+
+                Route::post('/transactions/create', 'Webkul\Admin\Http\Controllers\Sales\TransactionController@store')->name('admin.sales.transactions.store');
+
                 Route::get('/transactions/view/{id}', 'Webkul\Admin\Http\Controllers\Sales\TransactionController@view')->defaults('_config', [
                     'view' => 'admin::sales.transactions.view',
                 ])->name('admin.sales.transactions.view');

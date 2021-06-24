@@ -53,6 +53,20 @@
                                     </span>
                                 </div>
 
+                                @if($transaction->invoice_id)
+                                <div class="row">
+                                    <span class="title">
+                                        {{ __('admin::app.sales.transactions.invoice-id') }}
+                                    </span>
+
+                                    <span class="value">
+                                        <a href="{{ route('admin.sales.invoices.view', $transaction->order_id)}}">
+                                            {{ $transaction->invoice_id }}
+                                        </a>
+                                    </span>
+                                </div>
+                                @endif
+
                                 <div class="row">
                                     <span class="title">
                                         {{ __('admin::app.sales.transactions.payment-method') }}
@@ -63,7 +77,7 @@
                                     </span>
                                 </div>
 
-                                {{-- <div class="row">
+                                <div class="row">
                                     <span class="title">
                                         {{ __('admin::app.sales.transactions.status') }}
                                     </span>
@@ -71,7 +85,7 @@
                                     <span class="value">
                                         {{ $transaction->status }}
                                     </span>
-                                </div> --}}
+                                </div>
 
                                 <div class="row">
                                     <span class="title">
