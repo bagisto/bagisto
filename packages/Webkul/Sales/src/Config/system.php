@@ -108,6 +108,19 @@ return [
             ],
         ]
     ], [
+        'key'    => 'sales.invoice_setttings.payment_terms',
+        'name'   => 'admin::app.admin.system.payment-terms',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'due_duration',
+                'title'         => 'admin::app.admin.system.due-duration',
+                'type'          => 'text',
+                'validation'    => 'numeric',
+                'channel_based' => true,
+            ],
+        ]
+    ], [
         'key'    => 'sales.invoice_setttings.invoice_slip_design',
         'name'   => 'admin::app.admin.system.invoice-slip-design',
         'sort'   => 2,

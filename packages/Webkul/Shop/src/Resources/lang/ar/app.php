@@ -330,6 +330,8 @@ return [
                     'invoice-id' => 'رقم الفاتورة',
                     'order-id' => 'ترتيب ',
                     'order-date' => 'تاريخ الطلب',
+                    'invoice-date' => 'تاريخ الفاتورة',
+                    'payment-terms' => 'شروط الدفع',
                     'bill-to' => 'الفاتورة إلى',
                     'ship-to' => 'يشحن إلى',
                     'contact' => 'معلومات الإتصال',
