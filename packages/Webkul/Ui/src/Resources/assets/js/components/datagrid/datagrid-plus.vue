@@ -987,7 +987,7 @@
             },
 
             searchCollection: function(searchValue) {
-                this.formURL("search", "all", searchValue, "Search");
+                this.formURL("search", "all", searchValue, this.translations.searchTitle);
             },
 
             setParamsAndUrl: function() {

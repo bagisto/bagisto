@@ -460,7 +460,7 @@
                     },
 
                     searchCollection: function (searchValue) {
-                        this.formURL("search", 'all', searchValue, 'Search');
+                        this.formURL("search", 'all', searchValue, '{{ __('ui::app.datagrid.search-title') }}');
                     },
 
                     // function triggered to check whether the query exists or not and then call the make filters from the url
