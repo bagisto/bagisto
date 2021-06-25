@@ -215,6 +215,8 @@
                             } else {
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
                             }
+                            
+                            this.$root.headerItemsCount++;
 
                             window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                         })
