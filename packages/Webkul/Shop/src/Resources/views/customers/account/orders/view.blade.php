@@ -194,7 +194,7 @@
 
                                             <tr class="bold">
                                                 <td>{{ __('shop::app.customer.account.order.view.total-due') }}</td>
-                                                
+
                                                 <td>-</td>
 
                                                 @if($order->status !== 'canceled')
@@ -217,7 +217,7 @@
 
                                 <div class="sale-section">
                                     <div class="secton-title">
-                                        <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->id]) }}</span>
+                                        <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}</span>
 
                                         <a href="{{ route('customer.orders.print', $invoice->id) }}" class="pull-right">
                                             {{ __('shop::app.customer.account.order.view.print') }}
