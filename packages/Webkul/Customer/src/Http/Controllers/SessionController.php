@@ -2,8 +2,8 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Cookie;
+use Illuminate\Support\Facades\Event;
 
 class SessionController extends Controller
 {
@@ -18,10 +18,10 @@ class SessionController extends Controller
      * Create a new Repository instance.
      *
      * @return void
-    */
+     */
     public function __construct()
     {
-        $this->middleware('customer')->except(['show','create']);
+        $this->middleware('customer')->except(['show', 'create']);
 
         $this->_config = request('_config');
     }
@@ -50,6 +50,7 @@ class SessionController extends Controller
         $this->validate(request(), [
             'email'    => 'required|email',
             'password' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
 
         if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
