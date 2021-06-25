@@ -490,7 +490,7 @@
                             <tbody>
                                 @foreach ($order->invoices as $invoice)
                                     <tr>
-                                        <td>#{{ $invoice->id }}</td>
+                                        <td>#{{ $invoice->increment_id ?? $invoice->id }}</td>
                                         <td>{{ $invoice->created_at }}</td>
                                         <td>#{{ $invoice->order->increment_id }}</td>
                                         <td>{{ $invoice->address->name }}</td>

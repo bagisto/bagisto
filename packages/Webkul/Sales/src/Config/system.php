@@ -1,6 +1,9 @@
 <?php
 
 return [
+    /**
+     * Order Settings
+     */
     [
         'key'  => 'sales.orderSettings',
         'name' => 'admin::app.admin.system.order-settings',
@@ -35,7 +38,7 @@ return [
                 'locale_based'  => true,
             ],
             [
-                'name'          => 'order_number_generator-class',
+                'name'          => 'order_number_generator_class',
                 'title'         => 'admin::app.admin.system.order-number-generator-class',
                 'type'          => 'text',
                 'validation'    => false,
@@ -57,8 +60,55 @@ return [
                 'locale_based'  => true,
             ],
         ]
+    ],
+
+    /**
+     * Invoice Settings
+     */
+    [
+        'key'  => 'sales.invoice_setttings',
+        'name' => 'admin::app.admin.system.invoice-settings',
+        'sort' => 4,
     ], [
-        'key'    => 'sales.orderSettings.invoice_slip_design',
+        'key'    => 'sales.invoice_setttings.invoice_number',
+        'name'   => 'admin::app.admin.system.invoice-number',
+        'sort'   => 0,
+        'fields' => [
+            [
+                'name'          => 'invoice_number_prefix',
+                'title'         => 'admin::app.admin.system.invoice-number-prefix',
+                'type'          => 'text',
+                'validation'    => false,
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+            [
+                'name'          => 'invoice_number_length',
+                'title'         => 'admin::app.admin.system.invoice-number-length',
+                'type'          => 'text',
+                'validation'    => 'numeric',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+            [
+                'name'          => 'invoice_number_suffix',
+                'title'         => 'admin::app.admin.system.invoice-number-suffix',
+                'type'          => 'text',
+                'validation'    => false,
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+            [
+                'name'          => 'invoice_number_generator_class',
+                'title'         => 'admin::app.admin.system.invoice-number-generator-class',
+                'type'          => 'text',
+                'validation'    => false,
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+        ]
+    ], [
+        'key'    => 'sales.invoice_setttings.invoice_slip_design',
         'name'   => 'admin::app.admin.system.invoice-slip-design',
         'sort'   => 2,
         'fields' => [
@@ -70,5 +120,5 @@ return [
                 'channel_based' => true,
             ],
         ]
-    ]
+    ],
 ];
