@@ -138,6 +138,10 @@
                             </span>
                         </div>
 
+                        {!! view_render_event('bagisto.shop.customers.signup_form_controls.password_confirmation.after') !!}
+
+                        {!! Captcha::render() !!}
+
                         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
                             <div class="control-group">
                                 <input type="checkbox" id="checkbox2" name="is_subscribed">
@@ -158,3 +162,9 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+
+{!! Captcha::renderJS() !!}
+
+@endpush
