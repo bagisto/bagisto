@@ -67,7 +67,7 @@ abstract class AbstractType
     /**
      * Product instance
      *
-     * @var \Webkul\Product\Contracts\Product
+     * @var \Webkul\Product\Models\Product
      */
     protected $product;
 

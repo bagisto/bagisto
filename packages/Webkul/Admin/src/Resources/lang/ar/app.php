@@ -197,6 +197,7 @@ return [
         'billed-to' => 'فاتورة إلى',
         'shipped-to' => 'تم شحنها إلي',
         'order-id' => 'رقم التعريف الخاص بالطلب',
+        'invoice-id'       => 'رقم الفاتورة',
         'invoice-date' => 'تاريخ الفاتورة',
         'total-qty' => 'إجمالي الكمية',
         'inventory-source' => 'مصدر الجرد',
@@ -479,16 +480,24 @@ return [
 
         'transactions' => [
             'title'               => 'Transactions',
+            'create-title'        => 'Add transaction',
             'id'                  => 'Id',
             'transaction-id'      => 'Transaction Id',
             'payment-method'      => 'Payment method',
+            'transaction-amount' => 'Transaction amount',
             'action'              => 'Action',
             'view-title'          => 'Transaction #:transaction_id',
             'transaction-data'    => 'Transaction Data',
             'order-id'            => 'Order Id',
+            'invoice-id' => 'Invoice Id',
             'status'              => 'Status',
             'created-at'          => 'Created At',
-            'transaction-details' => 'Transaction Details'
+            'transaction-details' => 'Transaction Details',
+            'response' => [
+                'invoice-missing'    => 'This invoice id does not exist',
+                'transaction-saved'  => 'The transaction has been saved',
+                'already-paid'       => 'This invoice has already been paid'
+            ]
         ]
     ],
 
@@ -1435,12 +1444,22 @@ return [
             'order-number-generator-class' => 'مولد رقم الطلب',
             'minimum-order' => 'الحد الأدنى من إعدادات الطلب',
             'minimum-order-amount' => 'الحد الأدنى للطلب',
+            'invoice-settings' => 'إعدادات الفاتورة',
+            'invoice-number' => 'إعدادات رقم الفاتورة',
+            'invoice-number-prefix' => 'بادئة رقم الفاتورة',
+            'invoice-number-length' => 'طول رقم الفاتورة',
+            'invoice-number-suffix' => 'لاحقة رقم الفاتورة',
+            'invoice-number-generator-class' => 'مولد رقم الفاتورة',
+            'payment-terms' => 'شروط الدفع',
+            'due-duration' => 'مدة الاستحقاق',
+            'due-duration-day' => ':due-duration يوم',
+            'due-duration-days' => ':due-duration أيام',
+            'invoice-slip-design' => 'تصميم قسيمة الفاتورة',
+            'logo' => 'شعار',
             'default' => 'إفتراضي',
             'sandbox' => 'صندوق الرمل',
             'all-channels' => 'الكل',
             'all-locales' => 'الكل',
-            'invoice-slip-design' => 'تصميم قسيمة الفاتورة',
-            'logo' => 'شعار',
             'storefront' => 'واجهة المحل',
             'default-list-mode' => 'وضع القائمة الافتراضي',
             'grid' => 'جريد',
@@ -1495,6 +1514,10 @@ return [
             'cache-small-image' => 'Small Image',
             'cache-medium-image' => 'Medium Image',
             'cache-large-image' => 'Large Image',
+            'generate-invoice'   => 'Automatically generate the invoice after placing an order',
+            'set-invoice-status' => 'Set the invoice status after creating the invoice to',
+            'set-order-status'   => 'Set the order status after creating the invoice to',
+            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
         ]
     ]
 ];

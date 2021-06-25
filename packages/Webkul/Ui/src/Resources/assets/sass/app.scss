@@ -559,10 +559,10 @@ h5 {
     margin: 10px 5px 5px 0px;
 
     input {
-        left: 0;
+        left: -4px;
         opacity: 0;
         position: absolute;
-        top: 0;
+        top: -1px;
         z-index: 100;
     }
 
@@ -584,6 +584,15 @@ h5 {
     input:disabled + .radio-view {
         opacity: 0.5;
         cursor: not-allowed;
+    }
+}
+
+.rtl {
+    .radio {
+        input {
+            left: unset;
+            right: 1px;
+        }
     }
 }
 

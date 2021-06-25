@@ -195,6 +195,7 @@ return [
         'billed-to' => 'Cobrado de',
         'shipped-to' => 'Enviado para',
         'order-id' => 'Pedido Id',
+        'invoice-id' => 'Número da fatura',
         'invoice-date' => 'Data da Fatura',
         'total-qty' => 'Total Qtd',
         'inventory-source' => 'Fonte do Estoque',
@@ -476,17 +477,25 @@ return [
         ],
 
         'transactions' => [
-            'title'               => 'Transações',
-            'id'                  => 'ID',
-            'transaction-id'      => 'ID da Transação',
-            'payment-method'      => 'Método de pagamento',
-            'action'              => 'Ação',
-            'view-title'          => 'Transação #:transaction_id',
+            'title'               => 'Transactions',
+            'create-title'        => 'Add transaction',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'transaction-amount' => 'Transaction amount',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
             'transaction-data'    => 'Transaction Data',
-            'order-id'            => 'ID do Pedido',
+            'order-id'            => 'Order Id',
+            'invoice-id' => 'Invoice Id',
             'status'              => 'Status',
-            'created-at'          => 'Criado em',
-            'transaction-details' => 'Detalhes da transação'
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details',
+            'response' => [
+                'invoice-missing'    => 'This invoice id does not exist',
+                'transaction-saved'  => 'The transaction has been saved',
+                'already-paid'       => 'This invoice has already been paid'
+            ]
         ]
     ],
 
@@ -1433,13 +1442,23 @@ return [
             'order-number-generator-class' => 'Gerador de número de pedido',
             'minimum-order' => 'Configurações de pedido mínimo ',
             'minimum-order-amount' => 'Quantidade Mínima do Pedido',
+            'invoice-settings' => 'Configurações de fatura',
+            'invoice-number' => 'Configurações de número de fatura',
+            'invoice-number-prefix' => 'Prefixo do número da fatura',
+            'invoice-number-length' => 'Comprimento do número da fatura',
+            'invoice-number-suffix' => 'Sufixo do número da fatura',
+            'invoice-number-generator-class' => 'Gerador de número de fatura',
+            'payment-terms' => 'Termos de pagamento',
+            'due-duration' => 'Duração devida',
+            'due-duration-day' => ':due-duration Dia',
+            'due-duration-days' => ':due-duration Dias',
+            'invoice-slip-design' => 'Design da Nota do Pedido',
+            'logo' => 'Logotipo',
             'default' => 'Padrão',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Todos',
             'all-locales' => 'Todos',
             'sandbox' => 'Sandbox',
-            'invoice-slip-design' => 'Design da Nota do Pedido',
-            'logo' => 'Logo',
             'storefront' => 'Storefront',
             'default-list-mode' => 'Default List Mode',
             'grid' => 'Grid',
@@ -1490,6 +1509,10 @@ return [
             'cache-small-image' => 'Imagem pequena',
             'cache-medium-image' => 'Imagem média',
             'cache-large-image' => 'Imagem grande',
+            'generate-invoice'   => 'Automatically generate the invoice after placing an order',
+            'set-invoice-status' => 'Set the invoice status after creating the invoice to',
+            'set-order-status'   => 'Set the order status after creating the invoice to',
+            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
         ]
     ]
 ];

@@ -203,6 +203,7 @@ return [
         'billed-to' => 'Facturado a',
         'shipped-to' => 'Enviado a',
         'order-id' => 'Pedido #',
+        'invoice-id' => 'Número de factura',
         'invoice-date' => 'Fecha de factura',
         'total-qty' => 'Cantidad total',
         'inventory-source' => 'Fuente de inventario',
@@ -488,17 +489,25 @@ return [
         ],
 
         'transactions' => [
-            'title'               => 'Transacciones',
-            'id'                  => 'ID',
-            'transaction-id'      => 'Transacción #',
-            'payment-method'      => 'Método de Pago',
-            'action'              => 'Accción',
-            'view-title'          => 'Transacciónn #:transaction_id',
-            'transaction-data'    => 'Fecha de Transacción',
-            'order-id'            => 'Pedido #',
-            'status'              => 'Estado',
-            'created-at'          => 'Creado En',
-            'transaction-details' => 'Detalles de la Transacción'
+            'title'               => 'Transactions',
+            'create-title'        => 'Add transaction',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'transaction-amount' => 'Transaction amount',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'invoice-id' => 'Invoice Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details',
+            'response' => [
+                'invoice-missing'    => 'This invoice id does not exist',
+                'transaction-saved'  => 'The transaction has been saved',
+                'already-paid'       => 'This invoice has already been paid'
+            ]
         ]
     ],
 
@@ -1447,13 +1456,23 @@ return [
             'order-number-generator-class' => 'Generado de Números de Pedido',
             'minimum-order' => 'Configuración de Pedido Mínimo',
             'minimum-order-amount' => 'Cantidad Mínima de Pedido',
+            'invoice-settings' => 'Configuración de facturas',
+            'invoice-number' => 'Configuración del número de factura',
+            'invoice-number-prefix' => 'Prefijo de número de factura',
+            'invoice-number-length' => 'Longitud del número de factura',
+            'invoice-number-suffix' => 'Sufijo de número de factura',
+            'invoice-number-generator-class' => 'Generador de números de facturas',
+            'payment-terms' => 'Términos de pago',
+            'due-duration' => 'Duración debida',
+            'due-duration-day' => ':due-duration Día',
+            'due-duration-days' => ':due-duration Días',
+            'invoice-slip-design' => 'Diseño de Comprobande de Factura',
+            'logo' => 'Logo',
             'default' => 'Predeterminado',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Todos los Canales',
             'all-locales' => 'Todos los Idiomas',
             'all-customer-groups' => 'Todos los grupos de Clientes',
-            'invoice-slip-design' => 'Diseño de Comprobande de Factura',
-            'logo' => 'Logo',
             'storefront' => 'Storefront',
             'default-list-mode' => 'Modo de Lista Predeterminado',
             'grid' => 'Cuadrícula',
@@ -1502,6 +1521,10 @@ return [
             'cache-small-image' => 'Small Image',
             'cache-medium-image' => 'Medium Image',
             'cache-large-image' => 'Large Image',
+            'generate-invoice'   => 'Automatically generate the invoice after placing an order',
+            'set-invoice-status' => 'Set the invoice status after creating the invoice to',
+            'set-order-status'   => 'Set the order status after creating the invoice to',
+            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
        ]
     ]
 ];

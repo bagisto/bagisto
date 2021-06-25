@@ -194,6 +194,7 @@ return [
         'billed-to' => 'Zapłacono za',
         'shipped-to' => 'Wysłane do',
         'order-id' => 'Identyfikator zamówienia',
+        'invoice-id' => 'numer faktury',
         'invoice-date' => 'Data faktury',
         'total-qty' => 'Ilość Całkowita',
         'inventory-source' => 'Źródło zapasów',
@@ -478,16 +479,24 @@ return [
 
         'transactions' => [
             'title'               => 'Transactions',
+            'create-title'        => 'Add transaction',
             'id'                  => 'Id',
             'transaction-id'      => 'Transaction Id',
             'payment-method'      => 'Payment method',
+            'transaction-amount' => 'Transaction amount',
             'action'              => 'Action',
             'view-title'          => 'Transaction #:transaction_id',
             'transaction-data'    => 'Transaction Data',
             'order-id'            => 'Order Id',
+            'invoice-id' => 'Invoice Id',
             'status'              => 'Status',
             'created-at'          => 'Created At',
-            'transaction-details' => 'Transaction Details'
+            'transaction-details' => 'Transaction Details',
+            'response' => [
+                'invoice-missing'    => 'This invoice id does not exist',
+                'transaction-saved'  => 'The transaction has been saved',
+                'already-paid'       => 'This invoice has already been paid'
+            ]
         ]
     ],
 
@@ -1432,13 +1441,23 @@ return [
             'order-number-generator-class' => 'Generator numeru zamówienia',
             'minimum-order' => 'Minimalne ustawienia zamówienia',
             'minimum-order-amount' => 'Minimalna kwota zamówienia',
+            'invoice-settings' => 'Ustawienia faktury',
+            'invoice-number' => 'Ustawienia numeru faktury',
+            'invoice-number-prefix' => 'Prefiks numeru faktury',
+            'invoice-number-length' => 'Długość numeru faktury',
+            'invoice-number-suffix' => 'Sufiks numeru faktury',
+            'invoice-number-generator-class' => 'Generator numerów faktur',
+            'payment-terms' => 'Zasady płatności',
+            'due-duration' => 'Wymagany czas trwania',
+            'due-duration-day' => ':due-duration Dzień',
+            'due-duration-days' => ':due-duration Dni',
+            'invoice-slip-design' => 'Wzór wydruku faktury',
+            'logo' => 'Logo',
             'default' => 'Domyślna',
             'sandbox' => 'Piaskownica',
             'all-channels' => 'Wszystkie kanały',
             'all-locales' => 'Wszystkie ustawienia regionalne',
             'all-customer-groups' => 'Wszystkie grupy klientów',
-            'invoice-slip-design' => 'Wzór wydruku faktury',
-            'logo' => 'Logo',
             'favicon' => 'Favicon',
             'seo' => 'SEO',
             'rich-snippets' => 'Rich Snippets',
@@ -1476,6 +1495,10 @@ return [
             'cache-small-image' => 'Small Image',
             'cache-medium-image' => 'Medium Image',
             'cache-large-image' => 'Large Image',
+            'generate-invoice'   => 'Automatically generate the invoice after placing an order',
+            'set-invoice-status' => 'Set the invoice status after creating the invoice to',
+            'set-order-status'   => 'Set the order status after creating the invoice to',
+            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
        ]
     ]
 ];

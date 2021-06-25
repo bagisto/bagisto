@@ -129,9 +129,9 @@
                         <h1 class="text-center">{{ __('admin::app.sales.invoices.invoice') }}</h1>
                     </div>
                 </div>
-                @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.logo'))
+                @if (core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo'))
                     <div class="image">
-                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}" alt=""/>
+                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo')) }}" alt=""/>
                     </div>
                 @endif
                 <div class="merchant-details">
@@ -160,7 +160,12 @@
 
                 <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }} -</span>
-                    <span class="value">#{{ $invoice->id }}</span>
+                    <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">{{ __('shop::app.customer.account.order.view.invoice-date') }} -</span>
+                    <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
                 </div>
 
                 <div class="row">
@@ -172,6 +177,13 @@
                     <span class="label">{{ __('shop::app.customer.account.order.view.order-date') }} -</span>
                     <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
                 </div>
+
+                @if ($invoice->hasPaymentTerm())
+                    <div class="row">
+                        <span class="label">{{ __('shop::app.customer.account.order.view.payment-terms') }} -</span>
+                        <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
+                    </div>
+                @endif
 
                 <div class="table address">
                     <table>
