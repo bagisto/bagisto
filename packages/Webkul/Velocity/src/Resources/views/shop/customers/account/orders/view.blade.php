@@ -229,7 +229,7 @@
 
                                 <div class="sale-section">
                                     <div class="section-title">
-                                        <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->id]) }}</span>
+                                        <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}</span>
 
                                         <a href="{{ route('customer.orders.print', $invoice->id) }}" class="float-right">
                                             {{ __('shop::app.customer.account.order.view.print') }}

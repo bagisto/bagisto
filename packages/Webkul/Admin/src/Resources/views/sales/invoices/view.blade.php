@@ -1,7 +1,7 @@
 @extends('admin::layouts.master')
 
 @section('page_title')
-    {{ __('admin::app.sales.invoices.view-title', ['invoice_id' => $invoice->id]) }}
+    {{ __('admin::app.sales.invoices.view-title', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}
 @stop
 
 @section('content-wrapper')
@@ -16,7 +16,7 @@
 
                     <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.sales.invoices.index') }}'"></i>
 
-                    {{ __('admin::app.sales.invoices.view-title', ['invoice_id' => $invoice->id]) }}
+                    {{ __('admin::app.sales.invoices.view-title', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}
 
                     {!! view_render_event('sales.invoice.title.after', ['order' => $order]) !!}
                 </h1>
