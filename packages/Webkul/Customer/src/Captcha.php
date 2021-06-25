@@ -119,7 +119,7 @@ class Captcha implements CaptchaContract
 
         $response = $client->post(static::SITE_VERIFY_ENDPOINT, [
             'query' => [
-                'secret' => '6LcUYlYbAAAAAKi3vUJ62a9QEk4JvPfbLoizTajz',
+                'secret' => $this->secretKey,
                 'response' => $response
             ]
         ]);
