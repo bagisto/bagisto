@@ -196,6 +196,7 @@ return [
         'billed-to' => 'Gefactureerd aan',
         'shipped-to' => 'Verzonden naar',
         'order-id' => 'Order Id',
+        'invoice-id' => 'Factuurnummer',
         'invoice-date' => 'Factuur datum',
         'total-qty' => 'Totale hoeveelheid',
         'inventory-source' => 'Voorraad bron',
@@ -476,16 +477,24 @@ return [
 
         'transactions' => [
             'title'               => 'Transacties',
+            'create-title'        => 'Transactie toevoegen',
             'id'                  => 'Id',
             'transaction-id'      => 'Transactie Id',
             'payment-method'      => 'Betalingswijze',
+            'transaction-amount'  => 'Transactiebedrag',
             'action'              => 'Actie',
             'view-title'          => 'Transactie #:transaction_id',
-            'transaction-data'    => 'Transacatie data',
+            'transaction-data'    => 'Transactie Data',
             'order-id'            => 'Order Id',
+            'invoice-id'          => 'Factuurnummer',
             'status'              => 'Status',
-            'created-at'          => 'Datum aangemaakt',
-            'transaction-details' => 'Transactie Details'
+            'created-at'          => 'Toegevoegd op',
+            'transaction-details' => 'Transactie details',
+            'response' => [
+                'invoice-missing'    => 'Dit factuurnummer bestaat niet',
+                'transaction-saved'  => 'De transactie is geregistreerd',
+                'already-paid'       => 'Dit factuur is al voldaan'
+            ]
         ]
     ],
 
@@ -1495,6 +1504,10 @@ return [
             'cache-small-image' => 'Small Image',
             'cache-medium-image' => 'Medium Image',
             'cache-large-image' => 'Large Image',
+            'generate-invoice'   => 'Automatically generate the invoice after placing an order',
+            'set-invoice-status' => 'Set the invoice status after creating the invoice to',
+            'set-order-status'   => 'Set the order status after creating the invoice to',
+            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
         ]
     ]
 ];
