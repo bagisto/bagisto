@@ -918,6 +918,21 @@
                 display: inline-flex;
                 justify-content: space-between;
 
+                .filter-left {
+                    .icon-wrapper {
+                        .search-btn {
+                            background-size: cover;
+                            width: 24px;
+                            height: 24px;
+                            background-image: url('../images/icon-search.svg');
+                            position: relative;
+                            float: right;
+                            top: -32px;
+                            right: 5px;
+                        }
+                    }
+                }
+
                 > * {
                     display: inline-block;
                     vertical-align: top;
@@ -2360,7 +2375,7 @@
 
 .pagination {
     width: 100%;
-    
+
     .page-item {
         padding: 0 10px;
 

@@ -29,7 +29,7 @@ class OrderInvoicesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.datagrid.invoice-id'),
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
@@ -46,6 +46,15 @@ class OrderInvoicesDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.datagrid.invoice-date'),
+            'type'       => 'datetime',
+            'searchable' => true,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
             'index'      => 'base_grand_total',
             'label'      => trans('admin::app.datagrid.grand-total'),
             'type'       => 'price',
@@ -55,13 +64,26 @@ class OrderInvoicesDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.datagrid.invoice-date'),
-            'type'       => 'datetime',
-            'searchable' => true,
+            'index'      => 'state',
+            'label'      => trans('admin::app.datagrid.status'),
+            'type'       => 'string',
             'sortable'   => true,
+            'searchable' => true,
+            'closure'    => true,
             'filterable' => true,
+            'wrapper' => function ($value) {
+                if ($value->state == 'paid') {
+                    return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.invoices.status-paid') . '</span>';
+                } elseif ($value->state == 'pending' || $value->state == 'pending_payment') {
+                    return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.invoices.status-pending') . '</span>';
+                } elseif ($value->state == 'overdue') {
+                    return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.invoices.status-overdue') . '</span>';
+                } else {
+                    return $value->state;
+                }
+            },
         ]);
+
     }
 
     public function prepareActions()

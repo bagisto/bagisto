@@ -80,7 +80,7 @@ class InvoiceRepository extends Repository
     }
 
     /**
-     * @param  array  $data     
+     * @param  array  $data
      * @param  string $invoiceState
      * @param  string $orderState
      * @return \Webkul\Sales\Contracts\Invoice
@@ -95,7 +95,7 @@ class InvoiceRepository extends Repository
             $order = $this->orderRepository->find($data['order_id']);
 
             $totalQty = array_sum($data['invoice']['items']);
-            
+
             if (isset($invoiceState)) {
                 $state = $invoiceState;
             } else {
@@ -267,5 +267,17 @@ class InvoiceRepository extends Repository
         $invoice->save();
 
         return $invoice;
+    }
+
+    /**
+     * @param \Webkul\Sales\Contracts\Invoice $invoice
+     * @return void
+     */
+    public function updateState($invoice, $status)
+    {
+        $invoice->state = $status;
+        $invoice->save();
+
+        return true;
     }
 }
