@@ -280,4 +280,16 @@ class InvoiceRepository extends Repository
 
         return $invoice;
     }
+
+    /**
+     * @param \Webkul\Sales\Contracts\Invoice $invoice
+     * @return void
+     */
+    public function updateState($invoice, $status)
+    {
+        $invoice->state = $status;
+        $invoice->save();
+
+        return true;
+    }
 }
