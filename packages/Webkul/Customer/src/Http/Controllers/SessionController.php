@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Event;
 class SessionController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * Create a new Repository instance.
+     * Create a new controller instance.
      *
      * @return void
      */
@@ -33,11 +33,9 @@ class SessionController extends Controller
      */
     public function show()
     {
-        if (auth()->guard('customer')->check()) {
-            return redirect()->route('customer.profile.index');
-        } else {
-            return view($this->_config['view']);
-        }
+        return auth()->guard('customer')->check()
+            ? redirect()->route('customer.profile.index')
+            : view($this->_config['view']);
     }
 
     /**
@@ -79,7 +77,9 @@ class SessionController extends Controller
             return redirect()->back();
         }
 
-        //Event passed to prepare cart after login
+        /**
+         * Event passed to prepare cart after login.
+         */
         Event::dispatch('customer.after.login', request('email'));
 
         return redirect()->intended(route($this->_config['redirect']));
