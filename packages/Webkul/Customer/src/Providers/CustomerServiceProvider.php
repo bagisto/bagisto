@@ -36,6 +36,8 @@ class CustomerServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerConfig();
+
         $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
 
         $this->app->singleton('captcha', function ($app) {
@@ -53,5 +55,18 @@ class CustomerServiceProvider extends ServiceProvider
     protected function registerEloquentFactoriesFrom($path): void
     {
         $this->app->make(EloquentFactory::class)->load($path);
+    }
+
+    /**
+     * Register package config.
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/system.php',
+            'core'
+        );
     }
 }

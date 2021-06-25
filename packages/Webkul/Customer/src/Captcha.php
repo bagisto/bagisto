@@ -27,9 +27,39 @@ class Captcha implements CaptchaContract
      */
     public function __construct()
     {
-        $this->siteKey = '6LcUYlYbAAAAALyF7D5IrwZgufgXBwBrjXlcndAt';
+        $this->siteKey = $this->getSiteKey();
 
-        $this->secretKey = '6LcUYlYbAAAAAKi3vUJ62a9QEk4JvPfbLoizTajz';
+        $this->secretKey = $this->getSecretKey();
+    }
+
+    /**
+     * Check whether captcha is active or not.
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return (bool) core()->getConfigData('customer.captcha.credentials.status');
+    }
+
+    /**
+     * Get site key from the core config.
+     *
+     * @return null|string
+     */
+    public function getSiteKey(): ?string
+    {
+        return core()->getConfigData('customer.captcha.credentials.site_key');
+    }
+
+    /**
+     * Get secret key from the core config.
+     *
+     * @return null|string
+     */
+    public function getSecretKey(): ?string
+    {
+        return core()->getConfigData('customer.captcha.credentials.secret_key');
     }
 
     /**
@@ -59,7 +89,9 @@ class Captcha implements CaptchaContract
      */
     public function renderJS(): string
     {
-        return '<script src="' . $this->getClientEndpoint() . '" async defer></script>';
+        return $this->isActive()
+            ? '<script src="' . $this->getClientEndpoint() . '" async defer></script>'
+            : '';
     }
 
     /**
@@ -71,7 +103,9 @@ class Captcha implements CaptchaContract
     {
         $htmlAttributes = $this->buildHTMLAttributes($this->getAttributes());
 
-        return "<div {$htmlAttributes}></div>";
+        return $this->isActive()
+            ? "<div {$htmlAttributes}></div>"
+            : '';
     }
 
     /**
