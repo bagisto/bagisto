@@ -460,7 +460,7 @@
                     },
 
                     searchCollection: function (searchValue) {
-                        this.formURL("search", 'all', searchValue, 'Search');
+                        this.formURL("search", 'all', searchValue, '{{ __('ui::app.datagrid.search-title') }}');
                     },
 
                     // function triggered to check whether the query exists or not and then call the make filters from the url
@@ -725,10 +725,10 @@
 
                             switch (obj.column) {
                                 case "search":
-                                    obj.label = "Search";
+                                    obj.label = "{{ __('ui::app.datagrid.search-title') }}";
                                     break;
                                 case "channel":
-                                    obj.label = "Channel";
+                                    obj.label = "{{ __('ui::app.datagrid.channel') }}";
                                     if ('channels' in this.extraFilters) {
                                         obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code == obj.val);
 
@@ -738,7 +738,7 @@
                                     }
                                     break;
                                 case "locale":
-                                    obj.label = "Locale";
+                                    obj.label = "{{ __('ui::app.datagrid.locale') }}";
                                     if ('locales' in this.extraFilters) {
                                         obj.prettyValue = this.extraFilters['locales'].find(locale => locale.code === obj.val);
 
@@ -748,7 +748,7 @@
                                     }
                                     break;
                                 case "customer_group":
-                                    obj.label = "Customer Group";
+                                    obj.label = "{{ __('ui::app.datagrid.customer-group') }}";
                                     if ('customer_groups' in this.extraFilters) {
                                         obj.prettyValue = this.extraFilters['customer_groups'].find(customer_group => customer_group.id === parseInt(obj.val, 10));
 
