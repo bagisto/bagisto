@@ -117,7 +117,7 @@ class Captcha implements CaptchaContract
     {
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->post(static::SITE_VERIFY_ENDPOINT, [
+        $response = $client->post($this->getSiteVerifyEndpoint(), [
             'query' => [
                 'secret' => $this->secretKey,
                 'response' => $response
