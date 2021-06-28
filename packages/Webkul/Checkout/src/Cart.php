@@ -4,19 +4,19 @@ namespace Webkul\Checkout;
 
 use Exception;
 use Illuminate\Support\Arr;
-use Webkul\Tax\Helpers\Tax;
 use Illuminate\Support\Facades\Event;
-use Webkul\Shipping\Facades\Shipping;
+use Webkul\Checkout\Models\Cart as CartModel;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartPayment;
-use Webkul\Checkout\Models\Cart as CartModel;
-use Webkul\Checkout\Repositories\CartRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Checkout\Repositories\CartAddressRepository;
+use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shipping\Facades\Shipping;
+use Webkul\Tax\Helpers\Tax;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Cart
 {
@@ -284,7 +284,7 @@ class Cart
     }
 
     /**
-     * Get cart item by product
+     * Get cart item by product.
      *
      * @param  array  $data
      * @return \Webkul\Checkout\Contracts\CartItem|void
@@ -296,7 +296,7 @@ class Cart
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (isset($data['additional']['parent_id'])) {
-                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, request()->all())) {
+                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, $data['additional'])) {
                         return $item;
                     }
                 } else {
