@@ -331,6 +331,8 @@ return [
                     'invoice-id' => 'Invoice Id',
                     'order-id' => 'Order Id',
                     'order-date' => 'Order Date',
+                    'invoice-date' => 'Invoice Date',
+                    'payment-terms' => 'Payment Terms',
                     'bill-to' => 'Bill to',
                     'ship-to' => 'Ship to',
                     'contact' => 'Contact',

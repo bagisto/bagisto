@@ -330,6 +330,8 @@ return [
                     'invoice-id' => 'Factura Id',
                     'order-id' => 'Pedido Id',
                     'order-date' => 'Fecha pedido',
+                    'invoice-date' => 'Fecha de la factura',
+                    'payment-terms' => 'Términos de pago',
                     'bill-to' => 'Facturar a',
                     'ship-to' => 'Envío a',
                     'contact' => 'Contacto',

@@ -327,6 +327,8 @@ return [
                     'invoice-id' => 'شناسه فاکتور',
                     'order-id' => 'شماره سفارش',
                     'order-date' => 'تاریخ سفارش',
+                    'invoice-date' => 'تاریخ فاکتور',
+                    'payment-terms' => 'شرایط پرداخت',
                     'bill-to' => 'بیل به',
                     'ship-to' => 'حمل به',
                     'contact' => 'تماس',

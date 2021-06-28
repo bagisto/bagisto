@@ -161,14 +161,26 @@
                 </div>
 
                 <div class="row">
+                    <span class="label">{{ __('admin::app.sales.invoices.date') }} -</span>
+                    <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
+                </div>
+
+                <div class="row">
                     <span class="label">{{ __('admin::app.sales.invoices.order-id') }} -</span>
                     <span class="value">#{{ $invoice->order->increment_id }}</span>
                 </div>
 
                 <div class="row">
-                    <span class="label">{{ __('admin::app.sales.invoices.order-date') }} </span>
+                    <span class="label">{{ __('admin::app.sales.invoices.order-date') }} -</span>
                     <span class="value">{{ $invoice->created_at->format('d-m-Y') }}</span>
                 </div>
+
+                @if ($invoice->hasPaymentTerm())
+                    <div class="row">
+                        <span class="label">{{ __('admin::app.admin.system.payment-terms') }} -</span>
+                        <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
+                    </div>
+                @endif
 
                 <div class="table address">
                     <table>

@@ -335,6 +335,8 @@ return [
                     'invoice-id' => 'Factuur-id',
                     'order-id' => 'Order ID',
                     'order-date' => 'Besteldatum',
+                    'invoice-date' => 'Factuur datum',
+                    'payment-terms' => 'Betaalvoorwaarden',
                     'bill-to' => 'Rekening naar',
                     'ship-to' => 'Verzend naar',
                     'contact' => 'Contact',

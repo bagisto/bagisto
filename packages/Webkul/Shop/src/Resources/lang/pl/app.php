@@ -328,6 +328,8 @@ return [
                     'invoice-id' => 'Identyfikator faktury',
                     'order-id' => 'Identyfikator zamówienia',
                     'order-date' => 'Data zamówienia',
+                    'invoice-date' => 'Data wystawienia faktury',
+                    'payment-terms' => 'Zasady płatności',
                     'bill-to' => 'Bill to',
                     'ship-to' => 'Dostawa do',
                     'contact' => 'Kontakt',
