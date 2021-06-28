@@ -12,7 +12,7 @@ return [
             ],
 
             'settings' => [
-                'channels'=> [
+                'channels' => [
                     'subscription_bar' => 'Subscription bar content'
                 ],
             ],
@@ -311,6 +311,4 @@ return [
             'greeting'  => 'Welcome, :customer !',
         ]
     ],
-]
-
-?>
+];
