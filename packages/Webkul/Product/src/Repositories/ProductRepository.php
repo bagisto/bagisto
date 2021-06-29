@@ -865,7 +865,6 @@ class ProductRepository extends Repository
                                 ->selectRaw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty)')
                                 ->from('product_flat')
                                 ->leftJoin('product_inventories', 'product_inventories.product_id', '=', 'product_flat.product_id')
-                                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
                                 ->whereRaw(DB::getTablePrefix() . 'product_flat.parent_id = variants.id');
                         }, '>', 0);
                     });
