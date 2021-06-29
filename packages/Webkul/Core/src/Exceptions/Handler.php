@@ -2,12 +2,12 @@
 
 namespace Webkul\Core\Exceptions;
 
-use Throwable;
-use PDOException;
-use Illuminate\Auth\AuthenticationException;
 use App\Exceptions\Handler as AppExceptionHandler;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use PDOException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Throwable;
 
 class Handler extends AppExceptionHandler
 {
@@ -32,16 +32,8 @@ class Handler extends AppExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        $path = $this->isAdminUri() ? 'admin' : 'shop';
-
-        if ($exception instanceof HttpException) {
-            $statusCode = in_array($exception->getStatusCode(), [401, 403, 404, 503]) ? $exception->getStatusCode() : 500;
-
-            return $this->response($path, $statusCode);
-        } elseif ($exception instanceof ModelNotFoundException) {
-            return $this->response($path, 404);
-        } elseif ($exception instanceof PDOException) {
-            return $this->response($path, 500);
+        if (! config('app.debug')) {
+            return $this->renderCustomResponse($request, $exception);
         }
 
         return parent::render($request, $exception);
@@ -71,6 +63,32 @@ class Handler extends AppExceptionHandler
     private function isAdminUri()
     {
         return strpos(\Illuminate\Support\Facades\Request::path(), 'admin') !== false ? true : false;
+    }
+
+    /**
+     * Render custom HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $exception
+     * @return \Illuminate\Http\Response|null
+     */
+    private function renderCustomResponse($request, Throwable $exception)
+    {
+        $path = $this->isAdminUri() ? 'admin' : 'shop';
+
+        if ($exception instanceof HttpException) {
+            $statusCode = in_array($exception->getStatusCode(), [401, 403, 404, 503])
+                ? $exception->getStatusCode()
+                : 500;
+
+            return $this->response($path, $statusCode);
+        } elseif ($exception instanceof ModelNotFoundException) {
+            return $this->response($path, 404);
+        } elseif ($exception instanceof PDOException) {
+            return $this->response($path, 500);
+        } else {
+            return parent::render($request, $exception);
+        }
     }
 
     /**
