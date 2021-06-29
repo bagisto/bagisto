@@ -840,13 +840,14 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Check out of stock items.
+     * Check out of stock items. This method needed `variants` alias in
+     * the `product_flat` query.
      *
-     * @param Webkul\Product\Models\ProductFlat
-     *
-     * @return Model
-    */
-    public function checkOutOfStockItem($query) {
+     * @param  Webkul\Product\Models\ProductFlat  $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function checkOutOfStockItem($query)
+    {
         return $query
             ->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
             ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
