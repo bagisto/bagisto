@@ -289,6 +289,11 @@ class Order extends Model implements OrderContract
         if ($this->status === self::STATUS_FRAUD) {
             return false;
         }
+        
+        $pendingInvoice = $this->invoices->where('state', 'pending')->first();
+        if ($pendingInvoice) {
+            return false;
+        }
 
         foreach ($this->items as $item) {
             if ($item->qty_to_refund > 0 && $item->order->status !== self::STATUS_CLOSED) {
