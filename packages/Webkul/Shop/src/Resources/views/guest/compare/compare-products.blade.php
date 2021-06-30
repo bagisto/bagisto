@@ -106,6 +106,11 @@
                                                 <span v-else class="fs16">__</span>
                                                 @break;
 
+                                            @case('multiselect')
+                                                <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'multiple')" class="fs16"></span>
+                                                <span v-else class="fs16">__</span>
+                                                @break
+
                                             @case ('file')
                                             @case ('image')
                                                 <a :href="`${baseUrl}/${product.url_key}`" class="unset">
