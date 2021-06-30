@@ -842,13 +842,14 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Check out of stock items.
+     * Check out of stock items. This method needed `variants` alias in
+     * the `product_flat` query.
      *
-     * @param Webkul\Product\Models\ProductFlat
-     *
-     * @return Model
-    */
-    public function checkOutOfStockItem($query) {
+     * @param  Webkul\Product\Models\ProductFlat  $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function checkOutOfStockItem($query)
+    {
         return $query
             ->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
             ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
@@ -867,7 +868,6 @@ class ProductRepository extends Repository
                                 ->selectRaw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty)')
                                 ->from('product_flat')
                                 ->leftJoin('product_inventories', 'product_inventories.product_id', '=', 'product_flat.product_id')
-                                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
                                 ->whereRaw(DB::getTablePrefix() . 'product_flat.parent_id = variants.id');
                         }, '>', 0);
                     });
