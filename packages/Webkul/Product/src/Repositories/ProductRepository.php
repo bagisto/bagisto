@@ -466,17 +466,19 @@ class ProductRepository extends Repository
         } else {
             $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($term, $channel, $locale) {
 
+                $query = $query->distinct()
+                    ->addSelect('product_flat.*')
+                    ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
+                    ->where('product_flat.channel', $channel)
+                    ->where('product_flat.locale', $locale)
+                    ->whereNotNull('product_flat.url_key');
+
                 if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
                     $query = $this->checkOutOfStockItem($query);
                 }
 
-                return $query->distinct()
-                    ->addSelect('product_flat.*')
-                    ->where('product_flat.status', 1)
+                return $query->where('product_flat.status', 1)
                     ->where('product_flat.visible_individually', 1)
-                    ->where('product_flat.channel', $channel)
-                    ->where('product_flat.locale', $locale)
-                    ->whereNotNull('product_flat.url_key')
                     ->where(function ($subQuery) use ($term) {
                         $queries = explode('_', $term);
 
