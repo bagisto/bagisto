@@ -4,33 +4,30 @@ namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
+use Webkul\Customer\Http\Requests\CustomerForgotPasswordRequest;
 
 class ForgotPasswordController extends Controller
 {
     use SendsPasswordResetEmails;
-    
+
     /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(CustomerForgotPasswordRequest $request)
     {
-        $this->validate(request(), [
-            'email' => 'required|email',
-        ]);
+        $request->validated();
 
-        $response = $this->broker()->sendResetLink(request(['email']));
+        $response = $this->broker()->sendResetLink($request->only(['email']));
 
-        if ($response == Password::RESET_LINK_SENT) {
-            return response()->json([
+        return $response == Password::RESET_LINK_SENT
+            ? response()->json([
                 'message' => trans($response),
+            ])
+            : response()->json([
+                'error' => trans($response),
             ]);
-        }
-
-        return response()->json([
-            'error' => trans($response),
-        ]);
     }
 
     /**
