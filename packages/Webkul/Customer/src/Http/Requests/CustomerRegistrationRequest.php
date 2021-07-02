@@ -49,7 +49,7 @@ class CustomerRegistrationRequest extends FormRequest
     public function messages()
     {
         return [
-            'g-recaptcha-response.required' => 'Please select CAPTCHA'
+            'g-recaptcha-response.required' => __('customer::app.admin.system.captcha.validations.required')
         ];
     }
 }

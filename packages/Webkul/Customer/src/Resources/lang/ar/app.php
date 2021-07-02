@@ -29,6 +29,10 @@ return [
                 'site-key' => 'مفتاح الموقع',
                 'secret-key' => 'المفتاح السري',
                 'status' => 'حالة',
+
+                'validations' => [
+                    'required' => 'الرجاء اختيار CAPTCHA'
+                ]
             ],
         ],
     ],

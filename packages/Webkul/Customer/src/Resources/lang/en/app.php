@@ -29,6 +29,10 @@ return [
                 'site-key' => 'Site Key',
                 'secret-key' => 'Secret Key',
                 'status' => 'Status',
+
+                'validations' => [
+                    'required' => 'Please select CAPTCHA'
+                ]
             ],
         ],
     ],

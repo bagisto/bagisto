@@ -29,6 +29,10 @@ return [
                 'site-key' => 'Sitesleutel',
                 'secret-key' => 'Geheime sleutel',
                 'status' => 'Toestand',
+
+                'validations' => [
+                    'required' => 'Selecteer CAPTCHA'
+                ]
             ],
         ],
     ],

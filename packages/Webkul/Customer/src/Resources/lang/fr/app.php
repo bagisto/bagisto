@@ -29,6 +29,10 @@ return [
                 'site-key' => 'Clé du site',
                 'secret-key' => 'Clef secrète',
                 'status' => 'Statut',
+
+                'validations' => [
+                    'required' => 'Veuillez sélectionner CAPTCHA'
+                ]
             ],
         ],
     ],
