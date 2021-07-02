@@ -106,9 +106,9 @@ class CartRule
         $cart = Cart::getCart();
         $appliedCartRuleIds = [];
 
-        $this->calculateCartItemTotals($cart->items()->get());
+        $this->calculateCartItemTotals($cart->items);
 
-        foreach ($cart->items()->get() as $item) {
+        foreach ($cart->items as $item) {
             $itemCartRuleIds = $this->process($item);
             $appliedCartRuleIds = array_merge($appliedCartRuleIds, $itemCartRuleIds);
 
