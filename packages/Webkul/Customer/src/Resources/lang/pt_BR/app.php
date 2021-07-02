@@ -31,7 +31,8 @@ return [
                 'status' => 'Status',
 
                 'validations' => [
-                    'required' => 'Selecione CAPTCHA'
+                    'required' => 'Selecione CAPTCHA',
+                    'captcha' => 'Algo deu errado! Por favor, tente novamente.',
                 ]
             ],
         ],

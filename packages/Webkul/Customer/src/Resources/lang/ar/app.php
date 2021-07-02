@@ -31,7 +31,8 @@ return [
                 'status' => 'حالة',
 
                 'validations' => [
-                    'required' => 'الرجاء اختيار CAPTCHA'
+                    'required' => 'الرجاء اختيار CAPTCHA',
+                    'captcha' => 'هناك خطأ ما! حاول مرة اخرى.',
                 ]
             ],
         ],

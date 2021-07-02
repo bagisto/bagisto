@@ -31,7 +31,8 @@ return [
                 'status' => 'Toestand',
 
                 'validations' => [
-                    'required' => 'Selecteer CAPTCHA'
+                    'required' => 'Selecteer CAPTCHA',
+                    'captcha' => 'Er is iets fout gegaan! Probeer het opnieuw.',
                 ]
             ],
         ],
