@@ -140,7 +140,11 @@
 
                         {!! view_render_event('bagisto.shop.customers.signup_form_controls.password_confirmation.after') !!}
 
-                        {!! Captcha::render() !!}
+                        <div class="control-group">
+
+                            {!! Captcha::render() !!}
+
+                        </div>
 
                         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
                             <div class="control-group">
