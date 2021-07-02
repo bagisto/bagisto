@@ -33,9 +33,7 @@ class CustomerForgotPasswordRequest extends FormRequest
      */
     public function rules()
     {
-        return Captcha::isActive()
-            ? array_merge($this->rules, ['g-recaptcha-response' => 'required|captcha'])
-            : $this->rules;
+        return Captcha::getValidations($this->rules);
     }
 
     /**
@@ -45,9 +43,6 @@ class CustomerForgotPasswordRequest extends FormRequest
      */
     public function messages()
     {
-        return [
-            'g-recaptcha-response.required' => __('customer::app.admin.system.captcha.validations.required'),
-            'g-recaptcha-response.captcha' => __('customer::app.admin.system.captcha.validations.captcha')
-        ];
+        return Captcha::getValidationMessages();
     }
 }

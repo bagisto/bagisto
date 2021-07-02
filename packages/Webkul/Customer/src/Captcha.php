@@ -126,6 +126,33 @@ class Captcha implements CaptchaContract
     }
 
     /**
+     * Get or merge existing validations with your captcha validations.
+     *
+     * @return array
+     */
+    public function getValidations($rules = []): array
+    {
+        return $this->isActive()
+            ? array_merge($rules, ['g-recaptcha-response' => 'required|captcha'])
+            : $rules;
+    }
+
+    /**
+     * Get or merge existing validation messages with your captcha validation messages.
+     *
+     * @return array
+     */
+    public function getValidationMessages($messages = []): array
+    {
+        return $this->isActive()
+            ? array_merge($messages, [
+                'g-recaptcha-response.required' => __('customer::app.admin.system.captcha.validations.required'),
+                'g-recaptcha-response.captcha' => __('customer::app.admin.system.captcha.validations.captcha')
+            ])
+            : $messages;
+    }
+
+    /**
      * Get attributes.
      *
      * @return array
