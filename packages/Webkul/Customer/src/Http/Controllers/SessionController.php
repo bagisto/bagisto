@@ -2,26 +2,27 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Cookie;
+use Illuminate\Support\Facades\Event;
+use Webkul\Customer\Http\Requests\CustomerLoginRequest;
 
 class SessionController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * Create a new Repository instance.
+     * Create a new controller instance.
      *
      * @return void
-    */
+     */
     public function __construct()
     {
-        $this->middleware('customer')->except(['show','create']);
+        $this->middleware('customer')->except(['show', 'create']);
 
         $this->_config = request('_config');
     }
@@ -33,26 +34,22 @@ class SessionController extends Controller
      */
     public function show()
     {
-        if (auth()->guard('customer')->check()) {
-            return redirect()->route('customer.profile.index');
-        } else {
-            return view($this->_config['view']);
-        }
+        return auth()->guard('customer')->check()
+            ? redirect()->route('customer.profile.index')
+            : view($this->_config['view']);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Webkul\Customer\Http\Requests\CustomerLoginRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CustomerLoginRequest $request)
     {
-        $this->validate(request(), [
-            'email'    => 'required|email',
-            'password' => 'required',
-        ]);
+        $request->validated();
 
-        if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
+        if (! auth()->guard('customer')->attempt($request->only(['email', 'password']))) {
             session()->flash('error', trans('shop::app.customer.login-form.invalid-creds'));
 
             return redirect()->back();
@@ -71,15 +68,17 @@ class SessionController extends Controller
 
             Cookie::queue(Cookie::make('enable-resend', 'true', 1));
 
-            Cookie::queue(Cookie::make('email-for-resend', request('email'), 1));
+            Cookie::queue(Cookie::make('email-for-resend', $request->get('email'), 1));
 
             auth()->guard('customer')->logout();
 
             return redirect()->back();
         }
 
-        //Event passed to prepare cart after login
-        Event::dispatch('customer.after.login', request('email'));
+        /**
+         * Event passed to prepare cart after login.
+         */
+        Event::dispatch('customer.after.login', $request->get('email'));
 
         return redirect()->intended(route($this->_config['redirect']));
     }
