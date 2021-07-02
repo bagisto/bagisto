@@ -40,4 +40,16 @@ class CustomerRegistrationRequest extends FormRequest
             ? array_merge($this->rules, ['g-recaptcha-response' => 'required|captcha'])
             : $this->rules;
     }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'g-recaptcha-response.required' => 'Please select CAPTCHA'
+        ];
+    }
 }

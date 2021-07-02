@@ -19,9 +19,11 @@ class CustomerServiceProvider extends ServiceProvider
     {
         $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'customer');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'customer');
 
         $this->app['validator']->extend('captcha', function ($attribute, $value, $parameters) {
             return $this->app['captcha']->validateResponse($value);

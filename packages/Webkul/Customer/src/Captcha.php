@@ -90,7 +90,7 @@ class Captcha implements CaptchaContract
     public function renderJS(): string
     {
         return $this->isActive()
-            ? '<script src="' . $this->getClientEndpoint() . '" async defer></script>'
+            ? $this->getCaptchaJSView()
             : '';
     }
 
@@ -101,10 +101,8 @@ class Captcha implements CaptchaContract
      */
     public function render(): string
     {
-        $htmlAttributes = $this->buildHTMLAttributes($this->getAttributes());
-
         return $this->isActive()
-            ? "<div {$htmlAttributes}></div>"
+            ? $this->getCaptchaView()
             : '';
     }
 
@@ -157,5 +155,31 @@ class Captcha implements CaptchaContract
         return count($htmlAttributes)
             ? implode(' ', $htmlAttributes)
             : '';
+    }
+
+    /**
+     * Get captcha view.
+     *
+     * @return string
+     */
+    protected function getCaptchaView()
+    {
+        $htmlAttributes = $this->buildHTMLAttributes($this->getAttributes());
+
+        return view('customer::captcha.view', [
+            'htmlAttributes' => $htmlAttributes
+        ])->render();
+    }
+
+    /**
+     * Get captcha script view.
+     *
+     * @return string
+     */
+    protected function getCaptchaJSView()
+    {
+        return view('customer::captcha.scripts', [
+            'clientEndPoint' => $this->getClientEndpoint()
+        ])->render();
     }
 }

@@ -91,7 +91,11 @@
                                 </div>
                             </div>
 
-                            {!! Captcha::render() !!}
+                            <div class="form-group">
+
+                                {!! Captcha::render() !!}
+
+                            </div>
 
                             {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
 
