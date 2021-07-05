@@ -108,11 +108,14 @@
 
                     @foreach ($results as $productFlat)
                         @if ($toolbarHelper->getCurrentMode() == 'grid')
-                            @include('shop::products.list.card', ['product' => $productFlat->product])
+                            @include('shop::products.list.card', [
+                                'cardClass' => 'category-product-image-container',
+                                'product' => $productFlat->product,
+                            ])
                         @else
                             @include('shop::products.list.card', [
                                 'list' => true,
-                                'product' => $productFlat->product
+                                'product' => $productFlat->product,
                             ])
                         @endif
                     @endforeach

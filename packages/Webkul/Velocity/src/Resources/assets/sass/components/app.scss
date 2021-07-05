@@ -235,6 +235,17 @@
     border: none !important;
     margin: 0 5px 10px 10px;
 
+    .category-product-image-container {
+        margin: 0 auto;
+        height: 190px;
+        position: relative;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
     .product-image-container {
         max-height: 190px;
         position: relative;
@@ -354,7 +365,7 @@
         display: block;
     }
 
-    .product-image-container {
+    .category-product-image-container, .product-image-container {
         overflow: hidden;
 
         img {

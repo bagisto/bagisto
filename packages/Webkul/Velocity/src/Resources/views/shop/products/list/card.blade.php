@@ -119,7 +119,7 @@
             <a
                 href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                 title="{{ $product->name }}"
-                class="product-image-container">
+                class="{{ $cardClass ?? 'product-image-container' }}">
 
                 <img
                     loading="lazy"
