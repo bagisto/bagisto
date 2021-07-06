@@ -57,7 +57,12 @@
                             </div>
 
                             <div class="operations">
-                                <a class="mb-50" href="{{ route('customer.review.delete', $review->id) }}"><span class="icon trash-icon"></span></a>
+                                <form id="deleteReviewForm" action="{{ route('customer.review.delete', $review->id) }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                </form>
+
+                                <a class="mb-50" href="javascript:void(0);" onclick="deleteReview('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}')"><span class="icon trash-icon"></span></a>
                             </div>
                         </div>
                         <div class="horizontal-rule mb-10 mt-10"></div>
@@ -78,3 +83,15 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function deleteReview(message) {
+            if (! confirm(message)) {
+                return;
+            }
+
+            $('#deleteReviewForm').submit();
+        }
+    </script>
+@endpush

@@ -290,7 +290,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 ])->name('customer.reviews.index');
 
                 //Customer review delete
-                Route::get('reviews/delete/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@destroy')->defaults('_config', [
+                Route::delete('reviews/delete/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@destroy')->defaults('_config', [
                     'redirect' => 'customer.reviews.index'
                 ])->name('customer.review.delete');
 
