@@ -281,7 +281,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                     'view' => 'shop::customers.account.orders.print'
                 ])->name('customer.orders.print');
 
-                Route::get('/orders/cancel/{id}', 'Webkul\Shop\Http\Controllers\OrderController@cancel')->name('customer.orders.cancel');
+                Route::post('/orders/cancel/{id}', 'Webkul\Shop\Http\Controllers\OrderController@cancel')->name('customer.orders.cancel');
 
                 /* Reviews route */
                 //Customer reviews
