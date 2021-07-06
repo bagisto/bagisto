@@ -59,7 +59,12 @@
                         </div>
 
                         <div class="col-2">
-                            <a class="unset" href="{{ route('customer.review.delete', $review->id) }}">
+                            <form id="deleteReviewForm" action="{{ route('customer.review.delete', $review->id) }}" method="post">
+                                @method('delete')
+                                @csrf
+                            </form>
+
+                            <a class="unset" href="javacript:void(0);" onclick="deleteReview('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}')">
                                 <span class="rango-delete fs24"></span>
                                 <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
                             </a>
@@ -84,6 +89,16 @@
 @endsection
 
 @push('scripts')
+    <script>
+        function deleteReview(message) {
+            if (! confirm(message)) {
+                return;
+            }
+
+            $('#deleteReviewForm').submit();
+        }
+    </script>
+
     <script type="text/x-template" id="load-more-template">
         <div class="col-12 row justify-content-center">
             <button type="button" class="theme-btn light" @click="loadNextPage">Load More</button>

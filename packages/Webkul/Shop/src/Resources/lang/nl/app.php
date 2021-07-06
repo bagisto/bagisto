@@ -395,7 +395,11 @@ return [
 
                 'view' => [
                     'page-tile' => 'Recensies #:id',
-                ]
+                ],
+
+                'delete' => [
+                    'confirmation-message' => 'Weet je zeker dat je deze recensie wilt verwijderen?',
+                ],
             ]
         ]
     ],

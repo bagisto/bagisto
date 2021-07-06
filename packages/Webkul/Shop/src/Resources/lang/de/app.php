@@ -388,7 +388,11 @@ return [
 
                 'view' => [
                     'page-tile' => 'Bewertung #:id',
-                ]
+                ],
+
+                'delete' => [
+                    'confirmation-message' => 'Möchten Sie diese Bewertung wirklich löschen?',
+                ],
             ]
         ]
     ],

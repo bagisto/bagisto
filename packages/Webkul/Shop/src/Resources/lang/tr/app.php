@@ -388,7 +388,11 @@ return [
 
                 'view' => [
                     'page-tile' => 'İnceleme #:id',
-                ]
+                ],
+
+                'delete' => [
+                    'confirmation-message' => 'Bu incelemeyi silmek istediğinizden emin misiniz?',
+                ],
             ]
         ]
     ],

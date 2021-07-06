@@ -383,7 +383,11 @@ return [
 
                 'view' => [
                     'page-tile' => 'Avaliação #:id',
-                ]
+                ],
+
+                'delete' => [
+                    'confirmation-message' => 'Tem certeza de que deseja excluir este comentário?',
+                ],
             ]
         ]
     ],

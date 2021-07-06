@@ -369,7 +369,11 @@ return [
 
                 'view' => [
                     'page-tile' => 'レビュー #:id',
-                ]
+                ],
+
+                'delete' => [
+                    'confirmation-message' => 'このレビューを削除してもよろしいですか？',
+                ],
             ]
         ]
     ],
