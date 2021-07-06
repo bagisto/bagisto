@@ -569,7 +569,6 @@
     <script>
         function cancelOrder(message) {
             if (! confirm(message)) {
-                event.preventDefault();
                 return;
             }
 
