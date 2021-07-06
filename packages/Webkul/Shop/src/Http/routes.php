@@ -247,7 +247,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 Route::get('addresses/default/{id}', 'Webkul\Customer\Http\Controllers\AddressController@makeDefault')->name('make.default.address');
 
                 //Customer Address Delete
-                Route::get('addresses/delete/{id}', 'Webkul\Customer\Http\Controllers\AddressController@destroy')->name('address.delete');
+                Route::delete('addresses/delete/{id}', 'Webkul\Customer\Http\Controllers\AddressController@destroy')->name('address.delete');
 
                 /* Wishlist route */
                 //Customer wishlist(listing)
