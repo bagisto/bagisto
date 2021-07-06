@@ -387,12 +387,17 @@ return [
             'review' => [
                 'index' => [
                     'title' => 'Reviews',
-                    'page-title' => 'Reviews'
+                    'page-title' => 'Reviews',
+
                 ],
 
                 'view' => [
                     'page-tile' => 'Review #:id',
-                ]
+                ],
+
+                'delete' => [
+                    'confirmation-message' => 'Are you sure you want to delete this review?',
+                ],
             ]
         ]
     ],

@@ -390,6 +390,10 @@ return [
                 'view' => [
                     'page-tile' => 'Avis n° :id',
                 ],
+
+                'delete' => [
+                    'confirmation-message' => 'Êtes-vous sûr de vouloir supprimer cet avis ?',
+                ],
             ],
         ],
     ],
