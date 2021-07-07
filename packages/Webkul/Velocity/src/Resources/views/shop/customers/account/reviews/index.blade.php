@@ -21,8 +21,8 @@
                     @csrf
                 </form>
 
-                <a href="javascript:void(0);" class="theme-btn light unset" onclick="confirm('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}') ? document.getElementById('deleteAllReviewForm').submit() : null;">
-                    {{ __('shop::app.customer.account.wishlist.deleteall') }}
+                <a href="javascript:void(0);" class="theme-btn light unset" onclick="confirm('{{ __('shop::app.customer.account.review.delete-all.confirmation-message') }}') ? document.getElementById('deleteAllReviewForm').submit() : null;">
+                    {{ __('shop::app.customer.account.review.delete-all.title') }}
                 </a>
             </div>
         @endif
