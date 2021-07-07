@@ -388,6 +388,11 @@ return [
                 'delete' => [
                     'confirmation-message' => 'Tem certeza de que deseja excluir este comentário?',
                 ],
+
+                'delete-all' => [
+                    'title' => 'Apagar tudo',
+                    'confirmation-message' => 'Tem certeza de que deseja excluir todos os comentários?',
+                ],
             ]
         ]
     ],

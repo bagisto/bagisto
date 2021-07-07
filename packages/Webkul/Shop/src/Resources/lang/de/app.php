@@ -393,6 +393,11 @@ return [
                 'delete' => [
                     'confirmation-message' => 'Möchten Sie diese Bewertung wirklich löschen?',
                 ],
+
+                'delete-all' => [
+                    'title' => 'Alles löschen',
+                    'confirmation-message' => 'Möchten Sie wirklich alle Bewertungen löschen?',
+                ],
             ]
         ]
     ],
