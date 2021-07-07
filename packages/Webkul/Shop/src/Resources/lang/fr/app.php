@@ -394,6 +394,11 @@ return [
                 'delete' => [
                     'confirmation-message' => 'Êtes-vous sûr de vouloir supprimer cet avis ?',
                 ],
+
+                'delete-all' => [
+                    'title' => 'Tout supprimer',
+                    'confirmation-message' => 'Êtes-vous sûr de vouloir supprimer tous les avis ?',
+                ],
             ],
         ],
     ],
