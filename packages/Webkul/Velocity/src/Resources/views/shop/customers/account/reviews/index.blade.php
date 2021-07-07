@@ -16,7 +16,12 @@
 
         @if (count($reviews) > 1)
             <div class="account-action float-right">
-                <a href="{{ route('customer.review.deleteall') }}" class="theme-btn light unset">
+                <form id="deleteAllReviewForm" action="{{ route('customer.review.deleteall') }}" method="post">
+                    @method('delete')
+                    @csrf
+                </form>
+
+                <a href="javascript:void(0);" class="theme-btn light unset" onclick="confirm('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}') ? document.getElementById('deleteAllReviewForm').submit() : null;">
                     {{ __('shop::app.customer.account.wishlist.deleteall') }}
                 </a>
             </div>
@@ -64,7 +69,7 @@
                                 @csrf
                             </form>
 
-                            <a class="unset" href="javacript:void(0);" onclick="deleteReview('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}')">
+                            <a class="unset" href="javascript:void(0);" onclick="confirm('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}') ? document.getElementById('deleteReviewForm').submit() : null;">
                                 <span class="rango-delete fs24"></span>
                                 <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
                             </a>
@@ -89,16 +94,6 @@
 @endsection
 
 @push('scripts')
-    <script>
-        function deleteReview(message) {
-            if (! confirm(message)) {
-                return;
-            }
-
-            $('#deleteReviewForm').submit();
-        }
-    </script>
-
     <script type="text/x-template" id="load-more-template">
         <div class="col-12 row justify-content-center">
             <button type="button" class="theme-btn light" @click="loadNextPage">Load More</button>
