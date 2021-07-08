@@ -389,7 +389,16 @@ return [
 
                 'view' => [
                     'page-tile' => 'Recenzja #:id',
-                ]
+                ],
+
+                'delete' => [
+                    'confirmation-message' => 'Czy na pewno chcesz usunąć tę recenzję?',
+                ],
+
+                'delete-all' => [
+                    'title' => 'Usuń wszystko',
+                    'confirmation-message' => 'Czy na pewno chcesz usunąć wszystkie opinie?',
+                ],
             ]
         ]
     ],

@@ -391,7 +391,16 @@ return [
 
                 'view' => [
                     'page-tile' => '#:id مراجعة',
-                ]
+                ],
+
+                'delete' => [
+                    'confirmation-message' => 'هل أنت متأكد أنك تريد حذف هذه المراجعة؟',
+                ],
+
+                'delete-all' => [
+                    'title' => 'حذف الكل',
+                    'confirmation-message' => 'هل أنت متأكد أنك تريد حذف جميع المراجعات؟',
+                ],
             ]
         ]
     ],
