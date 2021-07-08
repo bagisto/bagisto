@@ -247,7 +247,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 Route::get('addresses/default/{id}', 'Webkul\Customer\Http\Controllers\AddressController@makeDefault')->name('make.default.address');
 
                 //Customer Address Delete
-                Route::get('addresses/delete/{id}', 'Webkul\Customer\Http\Controllers\AddressController@destroy')->name('address.delete');
+                Route::delete('addresses/delete/{id}', 'Webkul\Customer\Http\Controllers\AddressController@destroy')->name('address.delete');
 
                 /* Wishlist route */
                 //Customer wishlist(listing)
@@ -281,7 +281,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                     'view' => 'shop::customers.account.orders.print'
                 ])->name('customer.orders.print');
 
-                Route::get('/orders/cancel/{id}', 'Webkul\Shop\Http\Controllers\OrderController@cancel')->name('customer.orders.cancel');
+                Route::post('/orders/cancel/{id}', 'Webkul\Shop\Http\Controllers\OrderController@cancel')->name('customer.orders.cancel');
 
                 /* Reviews route */
                 //Customer reviews
@@ -290,12 +290,12 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 ])->name('customer.reviews.index');
 
                 //Customer review delete
-                Route::get('reviews/delete/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@destroy')->defaults('_config', [
+                Route::delete('reviews/delete/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@destroy')->defaults('_config', [
                     'redirect' => 'customer.reviews.index'
                 ])->name('customer.review.delete');
 
                 //Customer all review delete
-                Route::get('reviews/all-delete', 'Webkul\Shop\Http\Controllers\ReviewController@deleteAll')->defaults('_config', [
+                Route::delete('reviews/all-delete', 'Webkul\Shop\Http\Controllers\ReviewController@deleteAll')->defaults('_config', [
                     'redirect' => 'customer.reviews.index'
                 ])->name('customer.review.deleteall');
             });

@@ -17,7 +17,14 @@
 
                 @if (count($reviews) > 1)
                     <div class="account-action">
-                        <a href="{{ route('customer.review.deleteall') }}">{{ __('shop::app.customer.account.wishlist.deleteall') }}</a>
+                        <form id="deleteAllReviewForm" action="{{ route('customer.review.deleteall') }}" method="post">
+                            @method('delete')
+                            @csrf
+                        </form>
+
+                        <a href="javascript:void(0);" onclick="confirm('{{ __('shop::app.customer.account.review.delete-all.confirmation-message') }}') ? document.getElementById('deleteAllReviewForm').submit() : null;">
+                            {{ __('shop::app.customer.account.review.delete-all.title') }}
+                        </a>
                     </div>
                 @endif
 
@@ -57,9 +64,17 @@
                             </div>
 
                             <div class="operations">
-                                <a class="mb-50" href="{{ route('customer.review.delete', $review->id) }}"><span class="icon trash-icon"></span></a>
+                                <form id="deleteReviewForm" action="{{ route('customer.review.delete', $review->id) }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                </form>
+
+                                <a class="mb-50" href="javascript:void(0);" onclick="confirm('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}') ? document.getElementById('deleteReviewForm').submit() : null;">
+                                    <span class="icon trash-icon"></span>
+                                </a>
                             </div>
                         </div>
+
                         <div class="horizontal-rule mb-10 mt-10"></div>
                     @endforeach
 

@@ -230,6 +230,7 @@
                         <tr>
                             <th>{{ __('admin::app.sales.orders.SKU') }}</th>
                             <th>{{ __('admin::app.sales.orders.product-name') }}</th>
+                            <th>{{ __('admin::app.sales.orders.price') }}</th>
                             <th>{{ __('admin::app.sales.orders.item-status') }}</th>
                             <th>{{ __('admin::app.sales.orders.subtotal') }}</th>
                             <th>{{ __('admin::app.sales.orders.tax-amount') }}</th>
@@ -261,6 +262,8 @@
                                     @endif
                                 </td>
 
+                                <td>{{ core()->formatBasePrice($item->base_price) }}</td>
+
                                 <td>
                                     <span class="qty-row">
                                         {{ $item->qty_ordered ? __('admin::app.sales.orders.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
@@ -283,7 +286,7 @@
                                     </span>
                                 </td>
 
-                                <td>{{ core()->formatBasePrice($item->base_price) }}</td>
+                                <td>{{ core()->formatBasePrice($item->base_total) }}</td>
 
                                 <td>{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
 

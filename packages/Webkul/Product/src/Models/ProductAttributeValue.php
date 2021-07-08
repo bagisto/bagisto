@@ -4,14 +4,20 @@ namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Attribute\Models\AttributeProxy;
-use Webkul\Channel\Models\ChannelProxy;
 use Webkul\Product\Contracts\ProductAttributeValue as ProductAttributeValueContract;
 
 class ProductAttributeValue extends Model implements ProductAttributeValueContract
 {
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
     /**
+     * Attribute type fields.
+     *
      * @var array
      */
     public static $attributeTypeFields = [
@@ -28,10 +34,14 @@ class ProductAttributeValue extends Model implements ProductAttributeValueContra
         'checkbox'    => 'text_value',
     ];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'product_id',
         'attribute_id',
-        'channel_id',
         'locale',
         'channel',
         'text_value',
@@ -57,13 +67,5 @@ class ProductAttributeValue extends Model implements ProductAttributeValueContra
     public function product()
     {
         return $this->belongsTo(ProductProxy::modelClass());
-    }
-
-    /**
-     * Get the channel that owns the attribute value.
-     */
-    public function channel()
-    {
-        return $this->belongsTo(ChannelProxy::modelClass());
     }
 }

@@ -391,7 +391,16 @@ return [
 
                 'view' => [
                     'page-tile' => 'Opinión #:id',
-                ]
+                ],
+
+                'delete' => [
+                    'confirmation-message' => '¿Seguro que quieres eliminar esta crítica?',
+                ],
+
+                'delete-all' => [
+                    'title' => 'Eliminar todos',
+                    'confirmation-message' => '¿Estás segura de que quieres eliminar todas las críticas?',
+                ],
             ]
         ]
     ],
