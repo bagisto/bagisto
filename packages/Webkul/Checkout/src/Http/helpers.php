@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('cart')) {
+if (! function_exists('cart')) {
     /**
      * Cart helper.
      *
