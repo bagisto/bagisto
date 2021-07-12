@@ -44,6 +44,8 @@
 }
 
 .material-icons {
+    max-width: 30px;
+    overflow: hidden;
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
@@ -60,6 +62,8 @@
 }
 
 .material-icons-outlined {
+    max-width: 30px;
+    overflow: hidden;
     font-family: 'Material Icons Outlined';
     font-weight: normal;
     font-style: normal;
