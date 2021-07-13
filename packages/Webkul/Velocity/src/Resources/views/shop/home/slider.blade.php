@@ -3,7 +3,9 @@
 @endphp
 
 @if ($velocityMetaData && $velocityMetaData->slider)
-    <slider-component direction="{{ $direction }}"></slider-component>
+    <div class="slider-container">
+        <slider-component direction="{{ $direction }}"></slider-component>
+    </div>
 @endif
 
 @push('scripts')
