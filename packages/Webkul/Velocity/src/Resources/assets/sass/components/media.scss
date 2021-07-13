@@ -1085,6 +1085,14 @@
     .slider-container {
         min-height: 100px;
     }
+
+    .advertisement-four-container {
+        min-height: 992px;
+
+        .offers-ct-panel {
+            min-height: 425px;
+        }
+    }
 }
 
 /* very small devices */
@@ -1104,5 +1112,13 @@
 
     .slider-container {
         min-height: 100px;
+    }
+
+    .advertisement-four-container {
+        min-height: 992px;
+
+        .offers-ct-panel {
+            min-height: 425px;
+        }
     }
 }
