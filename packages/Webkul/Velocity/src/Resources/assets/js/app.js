@@ -8,7 +8,7 @@ import accounting from 'accounting';
 import VueCarousel from 'vue-carousel';
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/index.css';
-import VeeValidate, { Validator } from 'vee-validate';
+import VeeValidate from 'vee-validate';
 
 /**
  * Lang imports.
