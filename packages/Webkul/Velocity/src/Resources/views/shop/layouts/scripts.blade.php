@@ -4,11 +4,6 @@
     src="{{ asset('themes/velocity/assets/js/velocity.js') }}">
 </script>
 
-{{-- <script
-    type="text/javascript"
-    src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}">
-</script> --}}
-
 <script type="text/javascript">
     (() => {
         window.showAlert = (messageType, messageLabel, message) => {

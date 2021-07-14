@@ -9,6 +9,8 @@
 @endsection
 
 @push('scripts')
+    <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
+    
     @include('shop::checkout.cart.coupon')
 
     <script type="text/x-template" id="checkout-template">
