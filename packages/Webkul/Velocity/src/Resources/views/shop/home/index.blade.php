@@ -23,7 +23,6 @@
 @endsection
 
 @section('head')
-
     @if (isset($homeSEO))
         @isset($metaTitle)
             <meta name="title" content="{{ $metaTitle }}" />
