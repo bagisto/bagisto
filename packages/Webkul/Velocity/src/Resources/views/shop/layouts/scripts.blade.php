@@ -4,10 +4,10 @@
     src="{{ asset('themes/velocity/assets/js/velocity.js') }}">
 </script>
 
-<script
+{{-- <script
     type="text/javascript"
     src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}">
-</script>
+</script> --}}
 
 <script type="text/javascript">
     (() => {
