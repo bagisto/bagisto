@@ -1,28 +1,42 @@
-import Vue from "vue";
-import accounting from "accounting";
-import VueCarousel from "vue-carousel";
-import VueToast from "vue-toast-notification";
-import "vue-toast-notification/dist/index.css";
-import de from "vee-validate/dist/locale/de";
-import ar from "vee-validate/dist/locale/ar";
-import fa from "vee-validate/dist/locale/fa";
-import fr from "vee-validate/dist/locale/fr";
-import nl from "vee-validate/dist/locale/nl";
-import tr from "vee-validate/dist/locale/tr";
-import VeeValidate, { Validator } from "vee-validate";
-import axios from "axios";
-import "lazysizes";
+/**
+ * Main imports.
+ */
+import 'lazysizes';
+import Vue from 'vue';
+import axios from 'axios';
+import accounting from 'accounting';
+import VueCarousel from 'vue-carousel';
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/index.css';
+import VeeValidate, { Validator } from 'vee-validate';
 
+/**
+ * Lang imports.
+ */
+import ar from 'vee-validate/dist/locale/ar';
+import de from 'vee-validate/dist/locale/de';
+import fa from 'vee-validate/dist/locale/fa';
+import fr from 'vee-validate/dist/locale/fr';
+import nl from 'vee-validate/dist/locale/nl';
+import tr from 'vee-validate/dist/locale/tr';
+
+/**
+ * Window assignation.
+ */
+window.Vue = Vue;
 window.axios = axios;
+window.eventBus = new Vue();
+window.Carousel = VueCarousel;
 window.VeeValidate = VeeValidate;
-window.jQuery = window.$ = require("jquery");
-window.BootstrapSass = require("bootstrap-sass");
+window.jQuery = window.$ = require('jquery');
+window.BootstrapSass = require('bootstrap-sass');
 
+/**
+ * Vue use.
+ */
 Vue.use(VueToast);
 Vue.use(VueCarousel);
 Vue.use(BootstrapSass);
-Vue.prototype.$http = axios;
-
 Vue.use(VeeValidate, {
     dictionary: {
         ar: ar,
@@ -34,61 +48,49 @@ Vue.use(VeeValidate, {
     }
 });
 
-Vue.filter("currency", function(value, argument) {
+/**
+ * Filters and prototype.
+ */
+Vue.prototype.$http = axios;
+
+Vue.filter('currency', function(value, argument) {
     return accounting.formatMoney(value, argument);
 });
 
-window.Vue = Vue;
-window.Carousel = VueCarousel;
+/**
+ * UI components.
+ **/
+Vue.component('vue-slider', require('vue-slider-component'));
+Vue.component('mini-cart', require('./UI/components/mini-cart'));
+Vue.component('modal-component', require('./UI/components/modal'));
+Vue.component('add-to-cart', require('./UI/components/add-to-cart'));
+Vue.component('star-ratings', require('./UI/components/star-rating'));
+Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
+Vue.component('proceed-to-checkout', require('./UI/components/proceed-to-checkout'));
+Vue.component('sidebar-component', require('./UI/components/sidebar'));
+Vue.component('product-card', require('./UI/components/product-card'));
+Vue.component('wishlist-component', require('./UI/components/wishlist'));
+Vue.component('carousel-component', require('./UI/components/carousel'));
+Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
+Vue.component('card-list-header', require('./UI/components/card-header'));
+Vue.component('magnify-image', require('./UI/components/image-magnifier'));
+Vue.component('compare-component', require('./UI/components/product-compare'));
+Vue.component('shimmer-component', require('./UI/components/shimmer-component'));
+Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
+Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
+Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
+Vue.component('recently-viewed', require('./UI/components/recently-viewed'));
+Vue.component('product-collections', require('./UI/components/product-collections'));
+Vue.component('hot-category', require('./UI/components/hot-category'));
+Vue.component('popular-category', require('./UI/components/popular-category'));
+Vue.component('velocity-overlay-loader', require('./UI/components/overlay-loader'));
 
-// UI components
-Vue.component("vue-slider", require("vue-slider-component"));
-Vue.component("mini-cart", require("./UI/components/mini-cart"));
-Vue.component("modal-component", require("./UI/components/modal"));
-Vue.component("add-to-cart", require("./UI/components/add-to-cart"));
-Vue.component("star-ratings", require("./UI/components/star-rating"));
-Vue.component("quantity-btn", require("./UI/components/quantity-btn"));
-Vue.component(
-    "proceed-to-checkout",
-    require("./UI/components/proceed-to-checkout")
-);
-Vue.component("sidebar-component", require("./UI/components/sidebar"));
-Vue.component("product-card", require("./UI/components/product-card"));
-Vue.component("wishlist-component", require("./UI/components/wishlist"));
-Vue.component("carousel-component", require("./UI/components/carousel"));
-Vue.component("child-sidebar", require("./UI/components/child-sidebar"));
-Vue.component("card-list-header", require("./UI/components/card-header"));
-Vue.component("magnify-image", require("./UI/components/image-magnifier"));
-Vue.component("compare-component", require("./UI/components/product-compare"));
-Vue.component(
-    "shimmer-component",
-    require("./UI/components/shimmer-component")
-);
-Vue.component(
-    "responsive-sidebar",
-    require("./UI/components/responsive-sidebar")
-);
-Vue.component(
-    "product-quick-view",
-    require("./UI/components/product-quick-view")
-);
-Vue.component(
-    "product-quick-view-btn",
-    require("./UI/components/product-quick-view-btn")
-);
-Vue.component("recently-viewed", require("./UI/components/recently-viewed"));
-Vue.component(
-    "product-collections",
-    require("./UI/components/product-collections")
-);
-Vue.component("hot-category", require("./UI/components/hot-category"));
-Vue.component("popular-category", require("./UI/components/popular-category"));
-
-window.eventBus = new Vue();
-
+/**
+ * Start from here.
+ **/
 $(document).ready(function() {
     // define a mixin object
-    Vue.mixin(require("./UI/components/trans"));
+    Vue.mixin(require('./UI/components/trans'));
 
     Vue.mixin({
         data: function() {
@@ -97,17 +99,17 @@ $(document).ready(function() {
                 navContainer: false,
                 headerItemsCount: 0,
                 sharedRootCategories: [],
-                responsiveSidebarTemplate: "",
+                responsiveSidebarTemplate: '',
                 responsiveSidebarKey: Math.random(),
                 baseUrl: document
                     .querySelector("script[src$='velocity.js']")
-                    .getAttribute("baseUrl")
+                    .getAttribute('baseUrl')
             };
         },
 
         methods: {
             redirect: function(route) {
-                route ? (window.location.href = route) : "";
+                route ? (window.location.href = route) : '';
             },
 
             debounceToggleSidebar: function(id, { target }, type) {
@@ -116,28 +118,28 @@ $(document).ready(function() {
 
             toggleSidebar: function(id, { target }, type) {
                 if (
-                    Array.from(target.classList)[0] == "main-category" ||
+                    Array.from(target.classList)[0] == 'main-category' ||
                     Array.from(target.parentElement.classList)[0] ==
-                        "main-category"
+                        'main-category'
                 ) {
                     let sidebar = $(`#sidebar-level-${id}`);
                     if (sidebar && sidebar.length > 0) {
-                        if (type == "mouseover") {
+                        if (type == 'mouseover') {
                             this.show(sidebar);
-                        } else if (type == "mouseout") {
+                        } else if (type == 'mouseout') {
                             this.hide(sidebar);
                         }
                     }
                 } else if (
-                    Array.from(target.classList)[0] == "category" ||
-                    Array.from(target.classList)[0] == "category-icon" ||
-                    Array.from(target.classList)[0] == "category-title" ||
-                    Array.from(target.classList)[0] == "category-content" ||
-                    Array.from(target.classList)[0] == "rango-arrow-right"
+                    Array.from(target.classList)[0] == 'category' ||
+                    Array.from(target.classList)[0] == 'category-icon' ||
+                    Array.from(target.classList)[0] == 'category-title' ||
+                    Array.from(target.classList)[0] == 'category-content' ||
+                    Array.from(target.classList)[0] == 'rango-arrow-right'
                 ) {
-                    let parentItem = target.closest("li");
+                    let parentItem = target.closest('li');
 
-                    if (target.id || parentItem.id.match("category-")) {
+                    if (target.id || parentItem.id.match('category-')) {
                         let subCategories = $(
                             `#${
                                 target.id ? target.id : parentItem.id
@@ -148,18 +150,18 @@ $(document).ready(function() {
                             let subCategories1 = Array.from(subCategories)[0];
                             subCategories1 = $(subCategories1);
 
-                            if (type == "mouseover") {
+                            if (type == 'mouseover') {
                                 this.show(subCategories1);
 
                                 let sidebarChild = subCategories1.find(
-                                    ".sidebar"
+                                    '.sidebar'
                                 );
                                 this.show(sidebarChild);
-                            } else if (type == "mouseout") {
+                            } else if (type == 'mouseout') {
                                 this.hide(subCategories1);
                             }
                         } else {
-                            if (type == "mouseout") {
+                            if (type == 'mouseout') {
                                 let sidebar = $(`#${id}`);
                                 sidebar.hide();
                             }
@@ -171,7 +173,7 @@ $(document).ready(function() {
             show: function(element) {
                 element.show();
                 element.mouseleave(({ target }) => {
-                    $(target.closest(".sidebar")).hide();
+                    $(target.closest('.sidebar')).hide();
                 });
             },
 
@@ -180,15 +182,15 @@ $(document).ready(function() {
             },
 
             toggleButtonDisability({ event, actionType }) {
-                let button = event.target.querySelector("button[type=submit]");
+                let button = event.target.querySelector('button[type=submit]');
 
-                button ? (button.disabled = actionType) : "";
+                button ? (button.disabled = actionType) : '';
             },
 
             onSubmit: function(event) {
                 this.toggleButtonDisability({ event, actionType: true });
 
-                if (typeof tinyMCE !== "undefined") tinyMCE.triggerSave();
+                if (typeof tinyMCE !== 'undefined') tinyMCE.triggerSave();
 
                 this.$validator.validateAll().then(result => {
                     if (result) {
@@ -199,7 +201,7 @@ $(document).ready(function() {
                             actionType: false
                         });
 
-                        eventBus.$emit("onFormError");
+                        eventBus.$emit('onFormError');
                     }
                 });
             },
@@ -223,11 +225,11 @@ $(document).ready(function() {
             },
 
             loadDynamicScript: function(src, onScriptLoaded) {
-                let dynamicScript = document.createElement("script");
-                dynamicScript.setAttribute("src", src);
+                let dynamicScript = document.createElement('script');
+                dynamicScript.setAttribute('src', src);
                 document.body.appendChild(dynamicScript);
 
-                dynamicScript.addEventListener("load", onScriptLoaded, false);
+                dynamicScript.addEventListener('load', onScriptLoaded, false);
             },
 
             getDynamicHTML: function(input) {
@@ -243,7 +245,7 @@ $(document).ready(function() {
                 try {
                     var output = render.call(this, this.$createElement);
                 } catch (exception) {
-                    console.log(this.__("error.something_went_wrong"));
+                    console.log(this.__('error.something_went_wrong'));
                 }
 
                 this.$options.staticRenderFns = _staticRenderFns;
@@ -270,7 +272,7 @@ $(document).ready(function() {
     });
 
     const app = new Vue({
-        el: "#app",
+        el: '#app',
         VueToast,
 
         data: function() {
@@ -285,14 +287,14 @@ $(document).ready(function() {
 
         created: function() {
             setTimeout(() => {
-                document.body.classList.remove("modal-open");
+                document.body.classList.remove('modal-open');
             }, 0);
 
-            window.addEventListener("click", () => {
-                let modals = document.getElementsByClassName("sensitive-modal");
+            window.addEventListener('click', () => {
+                let modals = document.getElementsByClassName('sensitive-modal');
 
                 Array.from(modals).forEach(modal => {
-                    modal.classList.add("hide");
+                    modal.classList.add('hide');
                 });
             });
         },
@@ -302,7 +304,7 @@ $(document).ready(function() {
                 this.addServerErrors();
             }, 0);
 
-            document.body.style.display = "block";
+            document.body.style.display = 'block';
             this.$validator.localize(document.documentElement.lang);
 
             this.loadCategories();
@@ -313,7 +315,7 @@ $(document).ready(function() {
             onSubmit: function(event) {
                 this.toggleButtonDisability({ event, actionType: true });
 
-                if (typeof tinyMCE !== "undefined") tinyMCE.triggerSave();
+                if (typeof tinyMCE !== 'undefined') tinyMCE.triggerSave();
 
                 this.$validator.validateAll().then(result => {
                     if (result) {
@@ -324,13 +326,13 @@ $(document).ready(function() {
                             actionType: false
                         });
 
-                        eventBus.$emit("onFormError");
+                        eventBus.$emit('onFormError');
                     }
                 });
             },
 
             toggleButtonDisable(value) {
-                var buttons = document.getElementsByTagName("button");
+                var buttons = document.getElementsByTagName('button');
 
                 for (var i = 0; i < buttons.length; i++) {
                     buttons[i].disabled = value;
@@ -340,15 +342,15 @@ $(document).ready(function() {
             addServerErrors: function(scope = null) {
                 for (var key in serverErrors) {
                     var inputNames = [];
-                    key.split(".").forEach(function(chunk, index) {
+                    key.split('.').forEach(function(chunk, index) {
                         if (index) {
-                            inputNames.push("[" + chunk + "]");
+                            inputNames.push('[' + chunk + ']');
                         } else {
                             inputNames.push(chunk);
                         }
                     });
 
-                    var inputName = inputNames.join("");
+                    var inputName = inputNames.join('');
 
                     const field = this.$validator.fields.find({
                         name: inputName,
@@ -383,10 +385,10 @@ $(document).ready(function() {
                         $(
                             `<style type='text/css'> .sub-categories{ min-height:${response
                                 .data.categories.length * 30}px;} </style>`
-                        ).appendTo("head");
+                        ).appendTo('head');
                     })
                     .catch(error => {
-                        console.log("failed to load categories");
+                        console.log('failed to load categories');
                     });
             },
 
@@ -404,17 +406,17 @@ $(document).ready(function() {
             },
 
             showLoader: function() {
-                $("#loader").show();
-                $(".overlay-loader").show();
+                $('#loader').show();
+                $('.overlay-loader').show();
 
-                document.body.classList.add("modal-open");
+                document.body.classList.add('modal-open');
             },
 
             hideLoader: function() {
-                $("#loader").hide();
-                $(".overlay-loader").hide();
+                $('#loader').hide();
+                $('.overlay-loader').hide();
 
-                document.body.classList.remove("modal-open");
+                document.body.classList.remove('modal-open');
             }
         }
     });
@@ -422,9 +424,9 @@ $(document).ready(function() {
     window.app = app;
 
     // for compilation of html coming from server
-    Vue.component("vnode-injector", {
+    Vue.component('vnode-injector', {
         functional: true,
-        props: ["nodes"],
+        props: ['nodes'],
         render(h, { props }) {
             return props.nodes;
         }

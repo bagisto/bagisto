@@ -105,7 +105,7 @@
             </div>
 
             <div class="modal-parent" id="loader" style="top: 0" v-show="showPageLoader">
-                <overlay-loader :is-open="true"></overlay-loader>
+                <velocity-overlay-loader :is-open="true"></velocity-overlay-loader>
             </div>
         </div>
 
