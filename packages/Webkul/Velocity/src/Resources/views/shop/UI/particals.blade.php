@@ -175,9 +175,6 @@
         </div>
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet" defer></script>
-
     <script type="text/x-template" id="image-search-component-template">
         <div class="d-inline-block image-search-container" v-if="image_search_status">
             <label for="image-search-container">
@@ -188,7 +185,7 @@
                     class="d-none"
                     ref="image_search_input"
                     id="image-search-container"
-                    v-on:change="uploadImage()" />
+                    v-on:change="loadLibrary()" />
 
                 <img
                     class="d-none"
@@ -368,6 +365,7 @@
 
             Vue.component('image-search-component', {
                 template: '#image-search-component-template',
+
                 data: function() {
                     return {
                         uploadedImageUrl: '',
@@ -376,6 +374,22 @@
                 },
 
                 methods: {
+                    /**
+                     * This method will dynamically load the scripts. Because image search library
+                     * only used when someone clicks or interact with the image button. This will
+                     * reduce some data usage for mobile user.
+                     */
+                    loadLibrary: function() {
+                        this.loadDynamicScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs', () => {
+                            this.loadDynamicScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet', () => {
+                                this.uploadImage();
+                            });
+                        });
+                    },
+
+                    /**
+                     * This method will analyze the image and load the sets on the bases of trained model.
+                     */
                     uploadImage: function() {
                         var imageInput = this.$refs.image_search_input;
 
@@ -467,9 +481,9 @@
                                 alert('Only images (.jpeg, .jpg, .png, ..) are allowed.');
                             }
                         }
-                    }
+                    },
                 }
             });
-        })()
+        })();
     </script>
 @endpush
