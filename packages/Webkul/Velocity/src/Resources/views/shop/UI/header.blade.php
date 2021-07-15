@@ -330,7 +330,10 @@
                             <i class="rango-toggle hamburger"></i>
                         </div>
 
-                        <logo-component></logo-component>
+                        <logo-component
+                            img-src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}"
+                            redirect-src="{{ route('shop.home.index') }}">
+                        </logo-component>
                     </div>
 
                     @php

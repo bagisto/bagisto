@@ -73,6 +73,7 @@ Vue.component('wishlist-component', require('./UI/components/wishlist'));
 Vue.component('carousel-component', require('./UI/components/carousel'));
 Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
 Vue.component('card-list-header', require('./UI/components/card-header'));
+Vue.component('logo-component', require('./UI/components/image-logo'));
 Vue.component('magnify-image', require('./UI/components/image-magnifier'));
 Vue.component('image-search-component', require('./UI/components/image-search'));
 Vue.component('compare-component', require('./UI/components/product-compare'));

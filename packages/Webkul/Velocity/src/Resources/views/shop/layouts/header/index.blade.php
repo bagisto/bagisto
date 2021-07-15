@@ -1,6 +1,10 @@
 <header class="sticky-header">
     <div class="row remove-padding-margin velocity-divide-page">
-        <logo-component add-class="navbar-brand"></logo-component>
+        <logo-component
+            add-class="navbar-brand"
+            img-src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}"
+            redirect-src="{{ route('shop.home.index') }}">
+        </logo-component>
         <searchbar-component></searchbar-component>
     </div>
 </header>

@@ -47,20 +47,6 @@
 @include('velocity::UI.header')
 
 @push('scripts')
-    <script type="text/x-template" id="logo-template">
-        <a
-            :class="`left ${addClass}`"
-            href="{{ route('shop.home.index') }}"
-            aria-label="Logo">
-
-            @if ($logo = core()->getCurrentChannel()->logo_url)
-                <img class="logo" src="{{ $logo }}" alt="" width="200" height="50" />
-            @else
-                <img class="logo" src="{{ asset('themes/velocity/assets/images/logo-text.png') }}" alt="" width="200" height="50" />
-            @endif
-        </a>
-    </script>
-
     <script type="text/x-template" id="searchbar-template">
         <div class="right searchbar">
             <div class="row">
@@ -266,11 +252,6 @@
                         this.$emit('onQtyUpdated', this.qty)
                     }
                 }
-            });
-
-            Vue.component('logo-component', {
-                template: '#logo-template',
-                props: ['addClass'],
             });
 
             Vue.component('searchbar-component', {
