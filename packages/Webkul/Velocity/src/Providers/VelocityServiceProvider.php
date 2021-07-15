@@ -108,13 +108,9 @@ class VelocityServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $velocityHelper = app(\Webkul\Velocity\Helpers\Helper::class);
 
-            $velocityMetaData = Cache::remember('velocityMetaData', 3600, function () use ($velocityHelper) {
-                return $velocityHelper->getVelocityMetaData();
-            });
-
             $view->with('showRecentlyViewed', true);
             $view->with('velocityHelper', $velocityHelper);
-            $view->with('velocityMetaData', $velocityMetaData);
+            $view->with('velocityMetaData', $velocityHelper->getVelocityMetaData());
         });
 
         return true;
