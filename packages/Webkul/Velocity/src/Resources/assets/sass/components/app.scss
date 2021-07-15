@@ -2229,9 +2229,8 @@
     position: relative;
 
     .VueCarousel-pagination {
-        bottom: 10px;
-        position: absolute;
-
+        display: none;
+        
         button:focus,
         button:active {
             outline: none;
