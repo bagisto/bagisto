@@ -89,7 +89,9 @@ Vue.component('velocity-overlay-loader', require('./UI/components/overlay-loader
  * Start from here.
  **/
 $(document).ready(function() {
-    // define a mixin object
+    /**
+     * Define a mixin object.
+     */
     Vue.mixin(require('./UI/components/trans'));
 
     Vue.mixin({
@@ -421,14 +423,33 @@ $(document).ready(function() {
         }
     });
 
-    window.app = app;
-
-    // for compilation of html coming from server
-    Vue.component('vnode-injector', {
+    /**
+     * For compilation of html coming from server.
+     */
+     Vue.component('vnode-injector', {
         functional: true,
         props: ['nodes'],
         render(h, { props }) {
             return props.nodes;
         }
     });
+
+    window.app = app;
+
+    window.showAlert = (messageType, messageLabel, message) => {
+        if (messageType && message !== '') {
+            let alertId = Math.floor(Math.random() * 1000);
+
+            let html = `<div class="alert ${messageType} alert-dismissible" id="${alertId}">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>${messageLabel ? messageLabel + '!' : ''} </strong> ${message}.
+            </div>`;
+
+            $('#alert-container').append(html).ready(() => {
+                window.setTimeout(() => {
+                    $(`#alert-container #${alertId}`).remove();
+                }, 5000);
+            });
+        }
+    };
 });

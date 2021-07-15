@@ -106,11 +106,14 @@ class VelocityServiceProvider extends ServiceProvider
     private function loadGloableVariables()
     {
         view()->composer('*', function ($view) {
-            $velocityMetaData = Cache::remember('velocityMetaData', 3600, function () {
-                return app(\Webkul\Velocity\Helpers\Helper::class)->getVelocityMetaData();
+            $velocityHelper = app(\Webkul\Velocity\Helpers\Helper::class);
+
+            $velocityMetaData = Cache::remember('velocityMetaData', 3600, function () use ($velocityHelper) {
+                return $velocityHelper->getVelocityMetaData();
             });
 
             $view->with('showRecentlyViewed', true);
+            $view->with('velocityHelper', $velocityHelper);
             $view->with('velocityMetaData', $velocityMetaData);
         });
 
