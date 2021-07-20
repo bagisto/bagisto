@@ -323,7 +323,7 @@ class Cart
         if ($cartItem = $cart->items()->find($itemId)) {
             $cartItem->delete();
 
-            if ($cart->items()->get()->count() == 0) {
+            if ($cart->items->count() == 0) {
                 $this->cartRepository->delete($cart->id);
 
                 if (session()->has('cart')) {
@@ -412,8 +412,7 @@ class Cart
                 'customer_id' => $this->getCurrentCustomer()->user()->id,
                 'is_active'   => 1,
             ]);
-
-        } elseif (session()->has('cart')) {
+        } else if (session()->has('cart')) {
             $cart = $this->cartRepository->find(session()->get('cart')->id);
         }
 
@@ -547,7 +546,7 @@ class Cart
         $cart->tax_total = $cart->base_tax_total = 0;
         $cart->discount_amount = $cart->base_discount_amount = 0;
 
-        foreach ($cart->items()->get() as $item) {
+        foreach ($cart->items as $item) {
             $cart->discount_amount += $item->discount_amount;
             $cart->base_discount_amount += $item->base_discount_amount;
 
@@ -646,7 +645,7 @@ class Cart
 
         Event::dispatch('checkout.cart.calculate.items.tax.before', $cart);
 
-        foreach ($cart->items()->get() as $item) {
+        foreach ($cart->items as $item) {
             $taxCategory = $this->taxCategoryRepository->find($item->product->tax_category_id);
 
             if (! $taxCategory) {
@@ -768,7 +767,7 @@ class Cart
 
                 $this->cartItemRepository->delete($item->id);
 
-                if ($cart->items()->get()->count() == 0) {
+                if ($cart->items->count() == 0) {
                     $this->cartRepository->delete($cart->id);
 
                     if (session()->has('cart')) {
@@ -992,7 +991,7 @@ class Cart
 
         $result = $this->cartItemRepository->delete($itemId);
 
-        if (! $cart->items()->count()) {
+        if (! $cart->items->count()) {
             $this->cartRepository->delete($cart->id);
         }
 
@@ -1085,7 +1084,13 @@ class Cart
      * @return bool
      */
     private function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool {
-        return $item->product->getTypeInstance()->isCartItemInactive($item);
+        static $loadedCartItem = [];
+
+        if (array_key_exists($item->product_id, $loadedCartItem)) {
+            return $loadedCartItem[$item->product_id];
+        }
+
+        return $loadedCartItem[$item->product_id] = $item->product->getTypeInstance()->isCartItemInactive($item);
     }
 
     /**
