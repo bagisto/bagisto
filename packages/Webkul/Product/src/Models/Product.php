@@ -44,6 +44,13 @@ class Product extends Model implements ProductContract
     protected $typeInstance;
 
     /**
+     * Loaded attribute values.
+     *
+     * @var $loadedAttributeValues
+     */
+    public static $loadedAttributeValues = [];
+
+    /**
      * The "booted" method of the model.
      *
      * @return void
@@ -63,6 +70,16 @@ class Product extends Model implements ProductContract
                 }
             }
         });
+    }
+
+    /**
+     * Refresh the loaded attribute values.
+     *
+     * @return void
+     */
+    public function refreshloadedAttributeValues()
+    {
+        self::$loadedAttributeValues = [];
     }
 
     /**
@@ -370,9 +387,7 @@ class Product extends Model implements ProductContract
      */
     public function getCustomAttributeValue($attribute)
     {
-        static $loadedAttributeValue = [];
-
-        if (!$attribute) {
+        if (! $attribute) {
             return;
         }
 
@@ -380,10 +395,10 @@ class Product extends Model implements ProductContract
         $channel = core()->getRequestedChannelCode();
 
         if (
-            array_key_exists($this->id, $loadedAttributeValue)
-            && array_key_exists($attribute->id, $loadedAttributeValue[$this->id])
+            array_key_exists($this->id, self::$loadedAttributeValues)
+            && array_key_exists($attribute->id, self::$loadedAttributeValues[$this->id])
         ) {
-            return $loadedAttributeValue[$this->id][$attribute->id];
+            return self::$loadedAttributeValues[$this->id][$attribute->id];
         }
 
         if ($attribute->value_per_channel) {
@@ -400,7 +415,7 @@ class Product extends Model implements ProductContract
             }
         }
 
-        return $loadedAttributeValue[$this->id][$attribute->id] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
+        return self::$loadedAttributeValues[$this->id][$attribute->id] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
     }
 
     /**
