@@ -370,12 +370,18 @@ class Product extends Model implements ProductContract
      */
     public function getCustomAttributeValue($attribute)
     {
+        static $loadedAttributeValue = [];
+
         if (! $attribute) {
             return;
         }
 
         $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
         $channel = core()->getRequestedChannelCode();
+
+        if (array_key_exists($this->id, $loadedAttributeValue)) {
+            return $loadedAttributeValue[$this->id];
+        }
 
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
@@ -391,7 +397,7 @@ class Product extends Model implements ProductContract
             }
         }
 
-        return $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
+        return $loadedAttributeValue[$this->id] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
     }
 
     /**
