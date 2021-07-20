@@ -78,8 +78,8 @@
                                     name="password_confirmation"
                                     v-validate="'required|min:6|confirmed:password'" />
 
-                                <span class="control-error" v-if="errors.has('confirm_password')">
-                                    @{{ errors.first('confirm_password') }}
+                                <span class="control-error" v-if="errors.has('password_confirmation')">
+                                    @{{ errors.first('password_confirmation') }}
                                 </span>
                             </div>
 
