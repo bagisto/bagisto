@@ -3,15 +3,15 @@
 namespace Webkul\Product\Models;
 
 use Exception;
-use Webkul\Product\Type\AbstractType;
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Category\Models\CategoryProxy;
-use Webkul\Attribute\Models\AttributeProxy;
-use Webkul\Product\Database\Eloquent\Builder;
 use Webkul\Attribute\Models\AttributeFamilyProxy;
-use Webkul\Inventory\Models\InventorySourceProxy;
+use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Category\Models\CategoryProxy;
+use Webkul\Inventory\Models\InventorySourceProxy;
 use Webkul\Product\Contracts\Product as ProductContract;
+use Webkul\Product\Database\Eloquent\Builder;
+use Webkul\Product\Type\AbstractType;
 
 class Product extends Model implements ProductContract
 {
@@ -44,6 +44,13 @@ class Product extends Model implements ProductContract
     protected $typeInstance;
 
     /**
+     * Loaded attribute values.
+     *
+     * @var $loadedAttributeValues
+     */
+    public static $loadedAttributeValues = [];
+
+    /**
      * The "booted" method of the model.
      *
      * @return void
@@ -63,6 +70,16 @@ class Product extends Model implements ProductContract
                 }
             }
         });
+    }
+
+    /**
+     * Refresh the loaded attribute values.
+     *
+     * @return void
+     */
+    public function refreshloadedAttributeValues()
+    {
+        self::$loadedAttributeValues = [];
     }
 
     /**
@@ -245,8 +262,9 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * @param integer $qty
+     * Get inventory source quantity.
      *
+     * @param integer $qty
      * @return bool
      */
     public function inventory_source_qty($inventorySourceId)
@@ -257,7 +275,7 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Retrieve type instance
+     * Get type instance.
      *
      * @return AbstractType
      */
@@ -281,8 +299,9 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * @param string $key
+     * Is saleable.
      *
+     * @param string $key
      * @return bool
      */
     public function isSaleable()
@@ -291,6 +310,8 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Total quantity.
+     *
      * @return integer
      */
     public function totalQuantity()
@@ -299,8 +320,9 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * @param int $qty
+     * Have sufficient quantity.
      *
+     * @param int $qty
      * @return bool
      */
     public function haveSufficientQuantity(int $qty): bool
@@ -309,6 +331,8 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Is stockable.
+     *
      * @return bool
      */
     public function isStockable()
@@ -317,23 +341,9 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Retrieve product attributes
-     *
-     * @param Group $group
-     * @param bool  $skipSuperAttribute
-     *
-     * @return Collection
-     */
-    public function getEditableAttributes($group = null, $skipSuperAttribute = true)
-    {
-        return $this->getTypeInstance()->getEditableAttributes($group, $skipSuperAttribute);
-    }
-
-    /**
      * Get an attribute from the model.
      *
      * @param string $key
-     *
      * @return mixed
      */
     public function getAttribute($key)
@@ -358,23 +368,59 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Check in loaded family attributes.
+     * Retrieve product attributes.
      *
-     * @return object
+     * @param Group $group
+     * @param bool  $skipSuperAttribute
+     *
+     * @return Collection
      */
-    public function checkInLoadedFamilyAttributes()
+    public function getEditableAttributes($group = null, $skipSuperAttribute = true)
     {
-        static $loadedFamilyAttributes = [];
-
-        if (array_key_exists($this->attribute_family_id, $loadedFamilyAttributes)) {
-            return $loadedFamilyAttributes[$this->attribute_family_id];
-        }
-
-        return $loadedFamilyAttributes[$this->attribute_family_id] = core()->getSingletonInstance(AttributeRepository::class)
-            ->getFamilyAttributes($this->attribute_family);
+        return $this->getTypeInstance()->getEditableAttributes($group, $skipSuperAttribute);
     }
 
     /**
+     * Get an product attribute value.
+     *
+     * @return mixed
+     */
+    public function getCustomAttributeValue($attribute)
+    {
+        if (! $attribute) {
+            return;
+        }
+
+        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
+        $channel = core()->getRequestedChannelCode();
+
+        if (
+            array_key_exists($this->id, self::$loadedAttributeValues)
+            && array_key_exists($attribute->id, self::$loadedAttributeValues[$this->id])
+        ) {
+            return self::$loadedAttributeValues[$this->id][$attribute->id];
+        }
+
+        if ($attribute->value_per_channel) {
+            if ($attribute->value_per_locale) {
+                $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
+            } else {
+                $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attribute->id)->first();
+            }
+        } else {
+            if ($attribute->value_per_locale) {
+                $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
+            } else {
+                $attributeValue = $this->attribute_values()->where('attribute_id', $attribute->id)->first();
+            }
+        }
+
+        return self::$loadedAttributeValues[$this->id][$attribute->id] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
+    }
+
+    /**
+     * Attributes to array.
+     *
      * @return array
      */
     public function attributesToArray()
@@ -396,37 +442,6 @@ class Product extends Model implements ProductContract
         }
 
         return $attributes;
-    }
-
-    /**
-     * Get an product attribute value.
-     *
-     * @return mixed
-     */
-    public function getCustomAttributeValue($attribute)
-    {
-        if (! $attribute) {
-            return;
-        }
-
-        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
-        $channel = core()->getRequestedChannelCode();
-
-        if ($attribute->value_per_channel) {
-            if ($attribute->value_per_locale) {
-                $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
-            } else {
-                $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attribute->id)->first();
-            }
-        } else {
-            if ($attribute->value_per_locale) {
-                $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
-            } else {
-                $attributeValue = $this->attribute_values()->where('attribute_id', $attribute->id)->first();
-            }
-        }
-
-        return $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
     }
 
     /**
@@ -454,5 +469,22 @@ class Product extends Model implements ProductContract
     public function getProductAttribute()
     {
         return $this;
+    }
+
+    /**
+     * Check in loaded family attributes.
+     *
+     * @return object
+     */
+    public function checkInLoadedFamilyAttributes()
+    {
+        static $loadedFamilyAttributes = [];
+
+        if (array_key_exists($this->attribute_family_id, $loadedFamilyAttributes)) {
+            return $loadedFamilyAttributes[$this->attribute_family_id];
+        }
+
+        return $loadedFamilyAttributes[$this->attribute_family_id] = core()->getSingletonInstance(AttributeRepository::class)
+            ->getFamilyAttributes($this->attribute_family);
     }
 }

@@ -36,6 +36,7 @@ class BookingCronCest
                 ['booking_product_id' => $bookingProducts[$i]->id]);
 
             $products[$i]->refresh();
+            $products[$i]->refreshloadedAttributeValues();
             $I->assertNotFalse($products[$i]->status);
         }
 
@@ -43,6 +44,7 @@ class BookingCronCest
 
         for ($i=0; $i<$index; $i++) {
             $products[$i]->refresh();
+            $products[$i]->refreshloadedAttributeValues();
 
             if ($bookingProducts[$i]->available_to < Carbon::now()) {
                 $I->assertEquals(0, $products[$i]->status);
