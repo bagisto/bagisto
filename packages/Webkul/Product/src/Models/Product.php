@@ -372,15 +372,18 @@ class Product extends Model implements ProductContract
     {
         static $loadedAttributeValue = [];
 
-        if (! $attribute) {
+        if (!$attribute) {
             return;
         }
 
         $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
         $channel = core()->getRequestedChannelCode();
 
-        if (array_key_exists($this->id, $loadedAttributeValue)) {
-            return $loadedAttributeValue[$this->id];
+        if (
+            array_key_exists($this->id, $loadedAttributeValue)
+            && array_key_exists($attribute->id, $loadedAttributeValue[$this->id])
+        ) {
+            return $loadedAttributeValue[$this->id][$attribute->id];
         }
 
         if ($attribute->value_per_channel) {
@@ -397,7 +400,7 @@ class Product extends Model implements ProductContract
             }
         }
 
-        return $loadedAttributeValue[$this->id] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
+        return $loadedAttributeValue[$this->id][$attribute->id] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
     }
 
     /**
