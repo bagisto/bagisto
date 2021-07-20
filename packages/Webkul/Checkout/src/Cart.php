@@ -1084,7 +1084,13 @@ class Cart
      * @return bool
      */
     private function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool {
-        return $item->product->getTypeInstance()->isCartItemInactive($item);
+        static $loadedCartItem = [];
+
+        if (array_key_exists($item->product_id, $loadedCartItem)) {
+            return $loadedCartItem[$item->product_id];
+        }
+
+        return $loadedCartItem[$item->product_id] = $item->product->getTypeInstance()->isCartItemInactive($item);
     }
 
     /**
