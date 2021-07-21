@@ -61,7 +61,7 @@
 
                         @foreach ($groups as $key => $item)
 
-                            <accordian :title="'{{ __($item['name']) }}'" :active="true">
+                            <accordian title="{{ __($item['name']) }}" :active="true">
                                 <div slot="body">
 
                                     @foreach ($item['fields'] as $field)
