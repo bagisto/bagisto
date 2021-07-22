@@ -100,7 +100,7 @@ class TransactionController extends Controller
             'amount'         => 'required|numeric'
         ]);
 
-        $invoice = $this->invoiceRepository->find($request->invoice_id);
+        $invoice = $this->invoiceRepository->where('increment_id', $request->invoice_id)->first();
 
         if ($invoice) {
 
@@ -121,7 +121,7 @@ class TransactionController extends Controller
             $transactionData['transaction_id'] = $transactionId;
             $transactionData['type']           = $request->payment_method;
             $transactionData['payment_method'] = $request->payment_method;
-            $transactionData['invoice_id']     = $request->invoice_id;
+            $transactionData['invoice_id']     = $invoice->id;
             $transactionData['order_id']       = $invoice->order_id;
             $transactionData['status']         = 'paid';
             $transactionData['data']           = json_encode($data);
