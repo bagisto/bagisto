@@ -182,26 +182,29 @@ class Product extends Model implements ProductContract
 
     /**
      * The related products that belong to the product.
+     * @var int $limit set number of products to get, -1 to get all
      */
-    public function related_products()
+    public function related_products(int $limit = 4)
     {
-        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id')->limit(4);
+        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id')->limit($limit);
     }
 
     /**
      * The up sells that belong to the product.
+     * @var int $limit set number of products to get, -1 to get all
      */
-    public function up_sells()
+    public function up_sells(int $limit = 4)
     {
-        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id')->limit(4);
+        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id')->limit($limit);
     }
 
     /**
      * The cross sells that belong to the product.
+     * @var int $limit set number of products to get, -1 to get all
      */
-    public function cross_sells()
+    public function cross_sells(int $limit = 4)
     {
-        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id')->limit(4);
+        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id')->limit($limit);
     }
 
     /**
@@ -338,9 +341,10 @@ class Product extends Model implements ProductContract
      */
     public function getAttribute($key)
     {
-        if (! method_exists(static::class, $key)
-            && ! in_array($key, ['pivot', 'parent_id', 'attribute_family_id'])
-            && ! isset($this->attributes[$key])
+        if (
+            !method_exists(static::class, $key)
+            && !in_array($key, ['pivot', 'parent_id', 'attribute_family_id'])
+            && !isset($this->attributes[$key])
         ) {
             if (isset($this->id)) {
                 $this->attributes[$key] = '';
@@ -405,7 +409,7 @@ class Product extends Model implements ProductContract
      */
     public function getCustomAttributeValue($attribute)
     {
-        if (! $attribute) {
+        if (!$attribute) {
             return;
         }
 
