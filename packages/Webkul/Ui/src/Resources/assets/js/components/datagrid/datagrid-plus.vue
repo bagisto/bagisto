@@ -173,7 +173,7 @@
                                         <select
                                                 class="filter-column-select control"
                                                 v-model="filterColumn"
-                                                v-on:click="
+                                                v-on:change="
                                                 getColumnOrAlias(filterColumn)
                                             "
                                         >
