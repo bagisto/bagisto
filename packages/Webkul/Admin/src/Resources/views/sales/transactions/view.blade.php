@@ -60,7 +60,7 @@
                                     </span>
 
                                     <span class="value">
-                                        <a href="{{ route('admin.sales.invoices.view', $transaction->order_id)}}">
+                                        <a href="{{ route('admin.sales.invoices.view', $transaction->invoice_id)}}">
                                             {{ $transaction->invoice_id }}
                                         </a>
                                     </span>
