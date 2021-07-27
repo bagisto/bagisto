@@ -71,6 +71,7 @@ Vue.component('sidebar-component', require('./UI/components/sidebar'));
 Vue.component('product-card', require('./UI/components/product-card'));
 Vue.component('wishlist-component', require('./UI/components/wishlist'));
 Vue.component('carousel-component', require('./UI/components/carousel'));
+Vue.component('slider-component', require('./UI/components/banners'));
 Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
 Vue.component('card-list-header', require('./UI/components/card-header'));
 Vue.component('logo-component', require('./UI/components/image-logo'));
@@ -84,7 +85,9 @@ Vue.component('product-quick-view-btn', require('./UI/components/product-quick-v
 Vue.component('recently-viewed', require('./UI/components/recently-viewed'));
 Vue.component('product-collections', require('./UI/components/product-collections'));
 Vue.component('hot-category', require('./UI/components/hot-category'));
+Vue.component('hot-categories', require('./UI/components/hot-categories'));
 Vue.component('popular-category', require('./UI/components/popular-category'));
+Vue.component('popular-categories', require('./UI/components/popular-categories'));
 Vue.component('velocity-overlay-loader', require('./UI/components/overlay-loader'));
 
 /**
@@ -105,9 +108,7 @@ $(document).ready(function() {
                 sharedRootCategories: [],
                 responsiveSidebarTemplate: '',
                 responsiveSidebarKey: Math.random(),
-                baseUrl: document
-                    .querySelector("script[src$='velocity.js']")
-                    .getAttribute('baseUrl')
+                baseUrl: document.querySelector('meta[name="base-url"]').content
             };
         },
 

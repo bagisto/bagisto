@@ -51,7 +51,7 @@
         props: {
             count: {
                 type: String,
-                default: 10
+                default: '10'
             },
             productId: {
                 type: String,
