@@ -107,9 +107,7 @@ $(document).ready(function() {
                 sharedRootCategories: [],
                 responsiveSidebarTemplate: '',
                 responsiveSidebarKey: Math.random(),
-                baseUrl: document
-                    .querySelector("script[src$='velocity.js']")
-                    .getAttribute('baseUrl')
+                baseUrl: document.querySelector('meta[name="base-url"]').content
             };
         },
 
