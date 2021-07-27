@@ -84,7 +84,9 @@ Vue.component('product-quick-view-btn', require('./UI/components/product-quick-v
 Vue.component('recently-viewed', require('./UI/components/recently-viewed'));
 Vue.component('product-collections', require('./UI/components/product-collections'));
 Vue.component('hot-category', require('./UI/components/hot-category'));
+Vue.component('hot-categories', require('./UI/components/hot-categories'));
 Vue.component('popular-category', require('./UI/components/popular-category'));
+Vue.component('popular-categories', require('./UI/components/popular-categories'));
 Vue.component('velocity-overlay-loader', require('./UI/components/overlay-loader'));
 
 /**
