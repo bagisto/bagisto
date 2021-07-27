@@ -53,7 +53,7 @@ return [
                     ], [
                         'title' => 'admin::app.sales.invoices.status-paid',
                         'value' => 'paid'
-                    ],
+                    ]
                 ],
                 'info'          => 'admin::app.admin.system.generate-invoice-applicable',
                 'channel_based' => true,
@@ -137,10 +137,10 @@ return [
                 'type'    => 'select',
                 'options' => [
                     [
-                        'title' => 'Pending',
+                        'title' => 'admin::app.sales.invoices.status-pending',
                         'value' => 'pending'
                     ], [
-                        'title' => 'Paid',
+                        'title' => 'admin::app.sales.invoices.status-paid',
                         'value' => 'paid'
                     ]
                 ],
@@ -151,10 +151,13 @@ return [
                 'type'    => 'select',
                 'options' => [
                     [
-                        'title' => 'Pending',
+                        'title' => 'admin::app.sales.orders.order-status-pending',
                         'value' => 'pending'
                     ], [
-                        'title' => 'Processing',
+                        'title' => 'admin::app.sales.orders.order-status-pending-payment',
+                        'value' => 'pending_payment'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-processing',
                         'value' => 'processing'
                     ]
                 ],
