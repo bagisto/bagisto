@@ -134,7 +134,7 @@
                                     <li>
                                         <div class="control-group">
                                             <select class="filter-column-select control" v-model="filterColumn"
-                                                    v-on:click="getColumnOrAlias(filterColumn)">
+                                                    v-on:change="getColumnOrAlias(filterColumn)">
                                                 <option selected disabled>{{ __('ui::app.datagrid.column') }}</option>
                                                 @foreach($results['columns'] as $column)
                                                     @if(isset($column['filterable']) && $column['filterable'])
