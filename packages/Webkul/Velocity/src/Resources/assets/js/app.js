@@ -71,6 +71,7 @@ Vue.component('sidebar-component', require('./UI/components/sidebar'));
 Vue.component('product-card', require('./UI/components/product-card'));
 Vue.component('wishlist-component', require('./UI/components/wishlist'));
 Vue.component('carousel-component', require('./UI/components/carousel'));
+Vue.component('slider-component', require('./UI/components/banners'));
 Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
 Vue.component('card-list-header', require('./UI/components/card-header'));
 Vue.component('logo-component', require('./UI/components/image-logo'));
