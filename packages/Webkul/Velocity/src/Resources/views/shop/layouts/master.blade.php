@@ -66,7 +66,14 @@
                                     :header-content="{{ json_encode($velocityContent) }}"
                                     heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
                                     category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
-                                ></mobile-header>
+                                >
+
+                                    {{-- this is default content if js is not loaded --}}
+                                    <a class="left" href="{{ route('shop.home.index') }}" aria-label="Logo">
+                                        <img class="logo" src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}" alt="" />
+                                    </a>
+
+                                </mobile-header>
                             </div>
 
                             <div>

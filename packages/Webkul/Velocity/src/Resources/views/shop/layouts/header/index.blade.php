@@ -1,11 +1,9 @@
 <header class="sticky-header">
     <div class="row remove-padding-margin velocity-divide-page">
-        <logo-component
-            add-class="navbar-brand"
-            img-src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}"
-            redirect-src="{{ route('shop.home.index') }}">
-        </logo-component>
-        
+        <a class="left navbar-brand" href="{{ route('shop.home.index') }}" aria-label="Logo">
+            <img class="logo" src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}" alt="" />
+        </a>
+
         <searchbar-component></searchbar-component>
     </div>
 </header>
@@ -22,6 +20,6 @@
                     document.querySelector('header').classList.remove('header-shadow');
                 }
             });
-        })()
+        })();
     </script>
 @endpush
