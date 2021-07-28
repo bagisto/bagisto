@@ -34,7 +34,7 @@
                 <div class="bundle-summary">
                     <h3 class="mb10">{{ __('shop::app.products.your-customization') }}</h3>
 
-                    <quantity-changer></quantity-changer>
+                    <quantity-changer quantity-text="{{ __('shop::app.products.quantity') }}"></quantity-changer>
 
                     <div class="control-group">
                         <label>{{ __('shop::app.products.total-amount') }}</label>
@@ -132,6 +132,7 @@
                         :control-name="'bundle_option_qty[' + option.id + ']'"
                         :validations="parseInt(selected_product) ? 'required|numeric|min_value:1' : ''"
                         :quantity="product_qty"
+                        quantity-text="{{ __('shop::app.products.quantity') }}"
                         @onQtyUpdated="qtyUpdated($event)">
                     </quantity-changer>
                 </div>

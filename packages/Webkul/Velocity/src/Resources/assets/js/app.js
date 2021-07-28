@@ -30,6 +30,22 @@ window.Carousel = VueCarousel;
 window.VeeValidate = VeeValidate;
 window.jQuery = window.$ = require('jquery');
 window.BootstrapSass = require('bootstrap-sass');
+window.showAlert = (messageType, messageLabel, message) => {
+    if (messageType && message !== '') {
+        let alertId = Math.floor(Math.random() * 1000);
+
+        let html = `<div class="alert ${messageType} alert-dismissible" id="${alertId}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>${messageLabel ? messageLabel + '!' : ''} </strong> ${message}.
+        </div>`;
+
+        $('#alert-container').append(html).ready(() => {
+            window.setTimeout(() => {
+                $(`#alert-container #${alertId}`).remove();
+            }, 5000);
+        });
+    }
+};
 
 /**
  * Vue use.
@@ -67,6 +83,7 @@ Vue.component('modal-component', require('./UI/components/modal'));
 Vue.component('add-to-cart', require('./UI/components/add-to-cart'));
 Vue.component('star-ratings', require('./UI/components/star-rating'));
 Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
+Vue.component('quantity-changer', require('./UI/components/quantity-changer'));
 Vue.component('proceed-to-checkout', require('./UI/components/proceed-to-checkout'));
 Vue.component('sidebar-component', require('./UI/components/sidebar'));
 Vue.component('product-card', require('./UI/components/product-card'));
@@ -94,7 +111,7 @@ Vue.component('velocity-overlay-loader', require('./UI/components/overlay-loader
 /**
  * Start from here.
  **/
-$(document).ready(function() {
+$(function() {
     /**
      * Define a mixin object.
      */
@@ -439,21 +456,4 @@ $(document).ready(function() {
     });
 
     window.app = app;
-
-    window.showAlert = (messageType, messageLabel, message) => {
-        if (messageType && message !== '') {
-            let alertId = Math.floor(Math.random() * 1000);
-
-            let html = `<div class="alert ${messageType} alert-dismissible" id="${alertId}">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>${messageLabel ? messageLabel + '!' : ''} </strong> ${message}.
-            </div>`;
-
-            $('#alert-container').append(html).ready(() => {
-                window.setTimeout(() => {
-                    $(`#alert-container #${alertId}`).remove();
-                }, 5000);
-            });
-        }
-    };
 });

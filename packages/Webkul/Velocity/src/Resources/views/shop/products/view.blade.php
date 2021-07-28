@@ -175,7 +175,7 @@
 
                                     @if ($product->getTypeInstance()->showQuantityBox())
                                         <div>
-                                            <quantity-changer></quantity-changer>
+                                            <quantity-changer quantity-text="{{ __('shop::app.products.quantity') }}"></quantity-changer>
                                         </div>
                                     @else
                                         <input type="hidden" name="quantity" value="1">
