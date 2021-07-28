@@ -5,6 +5,7 @@
             img-src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}"
             redirect-src="{{ route('shop.home.index') }}">
         </logo-component>
+        
         <searchbar-component></searchbar-component>
     </div>
 </header>

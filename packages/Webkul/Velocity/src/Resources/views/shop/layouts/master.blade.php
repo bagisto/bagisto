@@ -59,12 +59,39 @@
                             $velocityContent = app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents();
                         @endphp
 
-                        <content-header
-                            url="{{ url()->to('/') }}"
-                            :header-content="{{ json_encode($velocityContent) }}"
-                            heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
-                            category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
-                        ></content-header>
+                        <header class="row velocity-divide-page vc-header header-shadow active">
+                            <div class="vc-small-screen container">
+                                <mobile-header
+                                    url="{{ url()->to('/') }}"
+                                    :header-content="{{ json_encode($velocityContent) }}"
+                                    heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
+                                    category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
+                                ></mobile-header>
+                            </div>
+
+                            <div>
+                                <sidebar-header heading= "{{ __('velocity::app.menu-navbar.text-category') }}">
+
+                                    {{-- this is default content if js is not loaded --}}
+                                    <div class="main-category fs16 unselectable fw6 left">
+                                        <i class="rango-view-list text-down-4 align-vertical-top fs18"></i>
+
+                                        <span class="pl5">{{ __('velocity::app.menu-navbar.text-category') }}</span>
+                                    </div>
+
+                                </sidebar-header>
+                            </div>
+
+                            <div class="content-list right">
+                                <right-side-header :header-content="{{ json_encode($velocityContent) }}">
+
+                                    {{-- this is default content if js is not loaded --}}
+                                    <ul type="none" class="no-margin">
+                                    </ul>
+
+                                </right-side-header>
+                            </div>
+                        </header>
 
                         <div class="">
                             <div class="row col-12 remove-padding-margin">

@@ -85,6 +85,8 @@ Vue.component('star-ratings', require('./UI/components/star-rating'));
 Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
 Vue.component('quantity-changer', require('./UI/components/quantity-changer'));
 Vue.component('proceed-to-checkout', require('./UI/components/proceed-to-checkout'));
+Vue.component('sidebar-header', require('./UI/components/sidebar-header'));
+Vue.component('right-side-header', require('./UI/components/right-side-header'));
 Vue.component('sidebar-component', require('./UI/components/sidebar'));
 Vue.component('product-card', require('./UI/components/product-card'));
 Vue.component('wishlist-component', require('./UI/components/wishlist'));
