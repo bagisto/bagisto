@@ -37,7 +37,7 @@
     <body @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
-        @include('shop::UI.particals')
+        @include('velocity::UI.header')
 
         {{-- main app --}}
         <div id="app">

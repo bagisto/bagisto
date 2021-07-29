@@ -1,1 +1,0 @@
-@include('velocity::UI.header')

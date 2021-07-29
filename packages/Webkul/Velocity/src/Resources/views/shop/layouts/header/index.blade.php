@@ -49,6 +49,7 @@
 
                                 <wishlist-component-with-badge
                                     is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
+                                    is-text="true"
                                     src="{{ route('customer.wishlist.index') }}">
                                 </wishlist-component-with-badge>
 
@@ -66,6 +67,7 @@
 
                                 <compare-component-with-badge
                                     is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
+                                    is-text="true"
                                     src="{{ auth()->guard('customer')->check() ? route('velocity.customer.product.compare') : route('velocity.product.compare') }}">
                                 </compare-component-with-badge>
 

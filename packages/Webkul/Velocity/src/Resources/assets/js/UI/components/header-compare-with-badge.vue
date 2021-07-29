@@ -6,13 +6,13 @@
             <span class="badge" v-text="compareCount"></span>
         </div>
 
-        <span v-text="__('customer.compare.text')"></span>
+        <span v-text="__('customer.compare.text')" v-if="isText == 'true'"></span>
     </a>
 </template>
 
 <script type="text/javascript">
 export default {
-    props: ['isCustomer', 'src'],
+    props: ['isCustomer', 'isText', 'src'],
 
     data: function() {
         return {

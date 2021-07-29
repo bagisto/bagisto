@@ -19,7 +19,7 @@
                             <span>
                                 @guest('customer')
                                     <a class="unset" href="{{ route('customer.session.index') }}">
-                                    {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
+                                        {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
                                     </a>
                                 @endguest
 
@@ -343,38 +343,30 @@
                 </a>
             </div>
 
-            @php
-                $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
-                $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
-            @endphp
-
             <div class="right-vc-header col-6">
+
+                @php
+                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                @endphp
+
                 @if ($showCompare)
-                    <a
-                        class="compare-btn unset"
-                        @auth('customer')
-                            href="{{ route('velocity.customer.product.compare') }}"
-                        @endauth
-
-                        @guest('customer')
-                            href="{{ route('velocity.product.compare') }}"
-                        @endguest
-                        >
-
-                        <div class="badge-container" v-if="compareCount > 0">
-                            <span class="badge" v-text="compareCount"></span>
-                        </div>
-                        <i class="material-icons">compare_arrows</i>
-                    </a>
+                    <compare-component-with-badge
+                        is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
+                        is-text="false"
+                        src="{{ auth()->guard('customer')->check() ? route('velocity.customer.product.compare') : route('velocity.product.compare') }}">
+                    </compare-component-with-badge>
                 @endif
 
+                @php
+                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                @endphp
+
                 @if ($showWishlist)
-                    <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
-                        <div class="badge-container" v-if="wishlistCount > 0">
-                            <span class="badge" v-text="wishlistCount"></span>
-                        </div>
-                        <i class="material-icons">favorite_border</i>
-                    </a>
+                    <wishlist-component-with-badge
+                        is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
+                        is-text="false"
+                        src="{{ route('customer.wishlist.index') }}">
+                    </wishlist-component-with-badge>
                 @endif
 
                 <a class="unset cursor-pointer" @click="openSearchBar">
@@ -382,10 +374,11 @@
                 </a>
 
                 <a href="{{ route('shop.checkout.cart.index') }}" class="unset">
-                    <div class="badge-wrapper">
-                        <span class="badge">@{{ cartItemsCount }}</span>
-                    </div>
                     <i class="material-icons text-down-3">shopping_cart</i>
+
+                    <div class="badge-wrapper">
+                        <span class="badge" v-text="cartItemsCount"></span>
+                    </div>
                 </a>
             </div>
 
