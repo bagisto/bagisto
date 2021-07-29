@@ -8,6 +8,32 @@
     }
 @endphp
 
+@php
+    $currency = $locale = null;
+
+    $currentLocale = app()->getLocale();
+    $currentCurrency = core()->getCurrentCurrencyCode();
+
+    $allLocales = core()->getCurrentChannel()->locales;
+    $allCurrency = core()->getCurrentChannel()->currencies;
+@endphp
+
+@foreach ($allLocales as $appLocale)
+    @if ($appLocale->code == $currentLocale)
+        @php
+            $locale = $appLocale;
+        @endphp
+    @endif
+@endforeach
+
+@foreach ($allCurrency as $appCurrency)
+    @if ($appCurrency->code == $currentCurrency)
+        @php
+            $currency = $appCurrency;
+        @endphp
+    @endif
+@endforeach
+
 @push('scripts')
     <script type="text/x-template" id="mobile-header-template">
         <div class="row">
@@ -17,17 +43,7 @@
                         <div class="greeting drawer-section fw6">
                             <i class="material-icons">perm_identity</i>
                             <span>
-                                @guest('customer')
-                                    <a class="unset" href="{{ route('customer.session.index') }}">
-                                        {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
-                                    </a>
-                                @endguest
-
-                                @auth('customer')
-                                    <a class="unset" href="{{ route('customer.profile.index') }}">
-                                        {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
-                                    </a>
-                                @endauth
+                                <slot name="greetings"></slot>
 
                                 <i
                                     @click="closeDrawer()"
@@ -36,32 +52,6 @@
                                 </i>
                             </span>
                         </div>
-
-                        @php
-                            $currency = $locale = null;
-
-                            $currentLocale = app()->getLocale();
-                            $currentCurrency = core()->getCurrentCurrencyCode();
-
-                            $allLocales = core()->getCurrentChannel()->locales;
-                            $allCurrency = core()->getCurrentChannel()->currencies;
-                        @endphp
-
-                        @foreach ($allLocales as $appLocale)
-                            @if ($appLocale->code == $currentLocale)
-                                @php
-                                    $locale = $appLocale;
-                                @endphp
-                            @endif
-                        @endforeach
-
-                        @foreach ($allCurrency as $appCurrency)
-                            @if ($appCurrency->code == $currentCurrency)
-                                @php
-                                    $currency = $appCurrency;
-                                @endphp
-                            @endif
-                        @endforeach
 
                         <ul type="none" class="velocity-content" v-if="headerContent.length > 0">
                             <li :key="index" v-for="(content, index) in headerContent">
@@ -89,79 +79,25 @@
                             </li>
                         </ul>
 
-                        @auth('customer')
-                            <ul type="none" class="vc-customer-options">
-                                <li>
-                                    <a href="{{ route('customer.profile.index') }}" class="unset">
-                                        <i class="icon profile text-down-3"></i>
-                                        <span>{{ __('shop::app.header.profile') }}</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('customer.address.index') }}" class="unset">
-                                        <i class="icon address text-down-3"></i>
-                                        <span>{{ __('velocity::app.shop.general.addresses') }}</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('customer.reviews.index') }}" class="unset">
-                                        <i class="icon reviews text-down-3"></i>
-                                        <span>{{ __('velocity::app.shop.general.reviews') }}</span>
-                                    </a>
-                                </li>
-
-                                @if (core()->getConfigData('general.content.shop.wishlist_option'))
-                                    <li>
-                                        <a href="{{ route('customer.wishlist.index') }}" class="unset">
-                                            <i class="icon wishlist text-down-3"></i>
-                                            <span>{{ __('shop::app.header.wishlist') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (core()->getConfigData('general.content.shop.compare_option'))
-                                    <li>
-                                        <a href="{{ route('velocity.customer.product.compare') }}" class="unset">
-                                            <i class="icon compare text-down-3"></i>
-                                            <span>{{ __('shop::app.customer.compare.text') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                <li>
-                                    <a href="{{ route('customer.orders.index') }}" class="unset">
-                                        <i class="icon orders text-down-3"></i>
-                                        <span>{{ __('velocity::app.shop.general.orders') }}</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('customer.downloadable_products.index') }}" class="unset">
-                                        <i class="icon downloadables text-down-3"></i>
-                                        <span>{{ __('velocity::app.shop.general.downloadables') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        @endauth
+                        <slot name="customer-navigation"></slot>
 
                         <ul type="none" class="meta-wrapper">
                             <li>
-                                @if ($locale)
+                                <template v-if="locale">
                                     <div class="language-logo-wrapper">
-                                        @if ($locale->locale_image)
-                                            <img
-                                                class="language-logo"
-                                                src="{{ asset('/storage/' . $locale->locale_image) }}" alt="" />
-                                        @elseif ($locale->code == "en")
-                                            <img
-                                                class="language-logo"
-                                                src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" />
-                                        @endif
+                                        <img
+                                            class="language-logo"
+                                            :src="`${$root.baseUrl}/storage/${locale.locale_image}`"
+                                            alt="" v-if="locale.locale_image" />
+
+                                        <img
+                                            class="language-logo"
+                                            :src="`${$root.baseUrl}/themes/velocity/assets/images/flags/en.png`"
+                                            alt="" v-else-if="locale.code == 'en'" />
                                     </div>
-                                    <span>{{ $locale->name }}</span>
-                                @endif
+
+                                    <span v-text="locale.name"></span>
+                                </template>
 
                                 <i
                                     class="rango-arrow-right"
@@ -170,7 +106,7 @@
                             </li>
 
                             <li>
-                                <span>{{ $currency->code }}</span>
+                                <span v-text="currency.code"></span>
 
                                 <i
                                     class="rango-arrow-right"
@@ -178,33 +114,7 @@
                                 </i>
                             </li>
 
-                            <li>
-                                @auth('customer')
-                                    <a
-                                        class="unset"
-                                        href="{{ route('customer.session.destroy') }}">
-                                        <span>{{ __('shop::app.header.logout') }}</span>
-                                    </a>
-                                @endauth
-
-                                @guest('customer')
-                                    <a
-                                        class="unset"
-                                        href="{{ route('customer.session.create') }}">
-                                        <span>{{ __('shop::app.customer.login-form.title') }}</span>
-                                    </a>
-                                @endguest
-                            </li>
-
-                            <li>
-                                @guest('customer')
-                                    <a
-                                        class="unset"
-                                        href="{{ route('customer.register.index') }}">
-                                        <span>{{ __('shop::app.header.sign-up') }}</span>
-                                    </a>
-                                @endguest
-                            </li>
+                            <slot name="extra-navigation"></slot>
                         </ul>
                     </div>
 
@@ -212,7 +122,7 @@
                         <div class="drawer-section">
                             <i class="rango-arrow-left fs24 text-down-4" @click="toggleSubcategories('root')"></i>
 
-                            <h4 class="display-inbl">@{{ subCategory.name }}</h4>
+                            <h4 class="display-inbl" v-text="subCategory.name"></h4>
 
                             <i class="material-icons float-right text-dark" @click="closeDrawer()">
                                 cancel
@@ -234,7 +144,7 @@
                                             v-if="nestedSubCategory.category_icon_path"
                                             :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`" alt="" width="20" height="20" />
                                     </div>
-                                    <span>@{{ nestedSubCategory.name }}</span>
+                                    <span v-text="nestedSubCategory.name"></span>
                                 </a>
 
                                 <ul
@@ -255,7 +165,7 @@
                                                     v-if="thirdLevelCategory.category_icon_path"
                                                     :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`" alt="" width="20" height="20" />
                                             </div>
-                                            <span>@{{ thirdLevelCategory.name }}</span>
+                                            <span v-text="thirdLevelCategory.name"></span>
                                         </a>
                                     </li>
                                 </ul>
@@ -266,70 +176,48 @@
                     <div class="wrapper" v-else-if="languages">
                         <div class="drawer-section">
                             <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('languages')"></i>
-                            <h4 class="display-inbl">{{ __('velocity::app.responsive.header.languages') }}</h4>
+                            <h4 class="display-inbl" v-text="__('responsive.header.languages')"></h4>
                             <i class="material-icons float-right text-dark" @click="closeDrawer()">cancel</i>
                         </div>
 
                         <ul type="none">
-                            @foreach ($allLocales as $locale)
-                                <li>
-                                    <a
-                                        class="unset"
-                                        @if (isset($serachQuery))
-                                            href="?{{ $serachQuery }}&locale={{ $locale->code }}"
-                                        @else
-                                            href="?locale={{ $locale->code }}"
-                                        @endif>
+                            <li v-for="(locale, index) in allLocales" :key="index">
+                                <a
+                                    class="unset"
+                                    :href="`?locale=${locale.code}`">
+                                    <div class="category-logo">
+                                        <img
+                                            class="category-icon"
+                                            :src="`${$root.baseUrl}/themes/velocity/assets/images/flags/en.png`" alt=""
+                                            width="20" height="20" v-if="locale.code == 'en'" />
 
-                                        @if( $locale->code == 'en')
-                                            <div class="category-logo">
-                                                <img
-                                                class="category-icon"
-                                                src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" width="20" height="20" />
-                                            </div>
-                                        @else
+                                        <img
+                                            class="category-icon"
+                                            :src="`${$root.baseUrl}/storage/${locale.locale_image}`" alt=""
+                                            width="20" height="20" v-else />
+                                    </div>
 
-                                            <div class="category-logo">
-                                                <img
-                                                class="category-icon"
-                                                src="{{ asset('/storage/' . $locale->locale_image) }}" alt="" width="20" height="20" />
-                                            </div>
-                                        @endif
-
-                                        <span>
-                                            {{ isset($serachQuery) ? $locale->title : $locale->name }}
-                                        </span>
-                                    </a>
-                                </li>
-                            @endforeach
+                                    <span v-text="locale.name"></span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
                     <div class="wrapper" v-else-if="currencies">
                         <div class="drawer-section">
                             <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('currencies')"></i>
-                            <h4 class="display-inbl">{{ __('velocity::app.shop.general.currencies') }}</h4>
+                            <h4 class="display-inbl" v-text="__('shop.general.currencies')"></h4>
                             <i class="material-icons float-right text-dark" @click="closeDrawer()">cancel</i>
                         </div>
 
                         <ul type="none">
-                            @foreach ($allCurrency as $currency)
-                                <li>
-                                    @if (isset($serachQuery))
-                                        <a
-                                            class="unset"
-                                            href="?{{ $serachQuery }}&locale={{ $currency->code }}">
-                                            <span>{{ $currency->code }}</span>
-                                        </a>
-                                    @else
-                                        <a
-                                            class="unset"
-                                            href="?currency={{ $currency->code }}">
-                                            <span>{{ $currency->code }}</span>
-                                        </a>
-                                    @endif
-                                </li>
-                            @endforeach
+                            <li v-for="(currency, index) in allCurrencies" :key="index">
+                                <a
+                                    class="unset"
+                                    :href="`?currency=${currency.code}`">
+                                    <span v-text="currency.code"></span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -441,6 +329,10 @@
                         'cartItemsCount': '{{ $cartItemsCount }}',
                         'rootCategoriesCollection': this.$root.sharedRootCategories,
                         'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                        'locale': @json($locale),
+                        'currency': @json($currency),
+                        'allLocales': @json($allLocales),
+                        'allCurrencies': @json($allCurrency),
                     }
                 },
 
@@ -467,6 +359,8 @@
                 },
 
                 created: function () {
+                    console.log(this.allCurrencies, this.allLocales);
+
                     this.getMiniCartDetails();
                     this.updateHeaderItemsCount();
                 },
