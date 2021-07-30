@@ -37,8 +37,6 @@
     <body @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
-        @include('velocity::UI.header')
-
         {{-- main app --}}
         <div id="app">
             <product-quick-view v-if="$root.quickView"></product-quick-view>
@@ -61,17 +59,65 @@
 
                         <header class="row velocity-divide-page vc-header header-shadow active">
                             <div class="vc-small-screen container">
+                                @php
+                                    $cart = cart()->getCart();
+
+                                    $cartItemsCount = trans('shop::app.minicart.zero');
+
+                                    if ($cart) {
+                                        $cartItemsCount = $cart->items->count();
+                                    }
+                                @endphp
+
+                                @php
+                                    $currency = $locale = null;
+
+                                    $currentLocale = app()->getLocale();
+                                    $currentCurrency = core()->getCurrentCurrencyCode();
+
+                                    $allLocales = core()->getCurrentChannel()->locales;
+                                    $allCurrency = core()->getCurrentChannel()->currencies;
+                                @endphp
+
+                                @foreach ($allLocales as $appLocale)
+                                    @if ($appLocale->code == $currentLocale)
+                                        @php
+                                            $locale = $appLocale;
+                                        @endphp
+                                    @endif
+                                @endforeach
+
+                                @foreach ($allCurrency as $appCurrency)
+                                    @if ($appCurrency->code == $currentCurrency)
+                                        @php
+                                            $currency = $appCurrency;
+                                        @endphp
+                                    @endif
+                                @endforeach
+
                                 <mobile-header
-                                    url="{{ url()->to('/') }}"
-                                    :header-content="{{ json_encode($velocityContent) }}"
+                                    is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
                                     heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
+                                    :header-content="{{ json_encode($velocityContent) }}"
                                     category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
+                                    cart-items-count="{{ $cartItemsCount }}"
+                                    cart-route="{{ route('shop.checkout.cart.index') }}"
+                                    :locale="{{ json_encode($locale) }}"
+                                    :all-locales="{{ json_encode($allLocales) }}"
+                                    :currency="{{ json_encode($currency) }}"
+                                    :all-currencies="{{ json_encode($allCurrency) }}"
                                 >
 
                                     {{-- this is default content if js is not loaded --}}
-                                    <a class="left" href="{{ route('shop.home.index') }}" aria-label="Logo">
-                                        <img class="logo" src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}" alt="" />
-                                    </a>
+                                    <div>
+                                        <div class="hamburger-wrapper">
+                                            <i class="rango-toggle hamburger"></i>
+                                        </div>
+
+                                        <a class="left" href="{{ route('shop.home.index') }}" aria-label="Logo">
+                                            <img class="logo" src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}" alt="" />
+                                        </a>
+                                    </div>
 
                                     <template v-slot:greetings>
                                         @guest('customer')
@@ -174,6 +220,70 @@
                                                 </a>
                                             @endguest
                                         </li>
+                                    </template>
+
+                                    <template v-slot:logo>
+                                        <a class="left" href="{{ route('shop.home.index') }}" aria-label="Logo">
+                                            <img class="logo" src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}" alt="" />
+                                        </a>
+                                    </template>
+
+                                    <template v-slot:top-header>
+                                        @php
+                                            $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                                        @endphp
+
+                                        @if ($showCompare)
+                                            <compare-component-with-badge
+                                                is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
+                                                is-text="false"
+                                                src="{{ auth()->guard('customer')->check() ? route('velocity.customer.product.compare') : route('velocity.product.compare') }}">
+                                            </compare-component-with-badge>
+                                        @endif
+
+                                        @php
+                                            $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                                        @endphp
+
+                                        @if ($showWishlist)
+                                            <wishlist-component-with-badge
+                                                is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
+                                                is-text="false"
+                                                src="{{ route('customer.wishlist.index') }}">
+                                            </wishlist-component-with-badge>
+                                        @endif
+                                    </template>
+
+                                    <template v-slot:search-bar>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <form
+                                                        method="GET"
+                                                        role="search"
+                                                        id="search-form"
+                                                        action="{{ route('velocity.search.index') }}">
+                                                        <div
+                                                            class="btn-toolbar full-width search-form"
+                                                            role="toolbar">
+
+                                                            <searchbar-component>
+                                                                <template v-slot:image-search>
+                                                                    <image-search-component
+                                                                        status="{{core()->getConfigData('general.content.shop.image_search') == '1' ? 'true' : 'false'}}"
+                                                                        upload-src="{{ route('shop.image.search.upload') }}"
+                                                                        view-src="{{ route('shop.search.index') }}"
+                                                                        common-error="{{ __('shop::app.common.error') }}"
+                                                                        size-limit-error="{{ __('shop::app.common.image-upload-limit') }}">
+                                                                    </image-search-component>
+                                                                </template>
+                                                            </searchbar-component>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </template>
 
                                 </mobile-header>

@@ -88,8 +88,9 @@ Vue.component('proceed-to-checkout', require('./UI/components/proceed-to-checkou
 Vue.component('compare-component-with-badge', require('./UI/components/header-compare-with-badge'));
 Vue.component('searchbar-component', require('./UI/components/header-searchbar'));
 Vue.component('wishlist-component-with-badge', require('./UI/components/header-wishlist-with-badge'));
-Vue.component('sidebar-header', require('./UI/components/sidebar-header'));
-Vue.component('right-side-header', require('./UI/components/right-side-header'));
+Vue.component('mobile-header', require('./UI/components/header-mobile'));
+Vue.component('sidebar-header', require('./UI/components/header-sidebar'));
+Vue.component('right-side-header', require('./UI/components/header-right-side'));
 Vue.component('sidebar-component', require('./UI/components/sidebar'));
 Vue.component('product-card', require('./UI/components/product-card'));
 Vue.component('wishlist-component', require('./UI/components/wishlist'));
