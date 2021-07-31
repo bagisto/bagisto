@@ -1,7 +1,14 @@
 <script
     type="text/javascript"
-    src="{{ asset('themes/velocity/assets/js/velocity.js') }}">
+    src="{{ asset('themes/velocity/assets/js/velocity-core.js') }}">
 </script>
+
+@if (! $velocityHelper->isMobile())
+    <script
+        type="text/javascript"
+        src="{{ asset('themes/velocity/assets/js/velocity.js') }}">
+    </script>
+@endif
 
 <script type="text/javascript">
     (() => {

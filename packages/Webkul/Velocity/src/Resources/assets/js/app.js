@@ -1,14 +1,12 @@
 /**
  * Main imports.
  */
-import 'lazysizes';
-import Vue from 'vue';
-import axios from 'axios';
-import accounting from 'accounting';
+import Accounting from 'accounting';
+import VeeValidate from 'vee-validate';
 import VueCarousel from 'vue-carousel';
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/index.css';
-import VeeValidate from 'vee-validate';
+import 'lazysizes';
 
 /**
  * Lang imports.
@@ -21,34 +19,7 @@ import nl from 'vee-validate/dist/locale/nl';
 import tr from 'vee-validate/dist/locale/tr';
 
 /**
- * Window assignation.
- */
-window.Vue = Vue;
-window.axios = axios;
-window.eventBus = new Vue();
-window.Carousel = VueCarousel;
-window.VeeValidate = VeeValidate;
-window.jQuery = window.$ = require('jquery');
-window.BootstrapSass = require('bootstrap-sass');
-window.showAlert = (messageType, messageLabel, message) => {
-    if (messageType && message !== '') {
-        let alertId = Math.floor(Math.random() * 1000);
-
-        let html = `<div class="alert ${messageType} alert-dismissible" id="${alertId}">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>${messageLabel ? messageLabel + '!' : ''} </strong> ${message}.
-        </div>`;
-
-        $('#alert-container').append(html).ready(() => {
-            window.setTimeout(() => {
-                $(`#alert-container #${alertId}`).remove();
-            }, 5000);
-        });
-    }
-};
-
-/**
- * Vue use.
+ * Vue plugins.
  */
 Vue.use(VueToast);
 Vue.use(VueCarousel);
@@ -65,16 +36,14 @@ Vue.use(VeeValidate, {
 });
 
 /**
- * Filters and prototype.
+ * Filters.
  */
-Vue.prototype.$http = axios;
-
 Vue.filter('currency', function(value, argument) {
-    return accounting.formatMoney(value, argument);
+    return Accounting.formatMoney(value, argument);
 });
 
 /**
- * UI components.
+ * Global components.
  **/
 Vue.component('vue-slider', require('vue-slider-component'));
 Vue.component('mini-cart-button', require('./UI/components/mini-cart-button'));
@@ -84,13 +53,28 @@ Vue.component('add-to-cart', require('./UI/components/add-to-cart'));
 Vue.component('star-ratings', require('./UI/components/star-rating'));
 Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
 Vue.component('quantity-changer', require('./UI/components/quantity-changer'));
-Vue.component('proceed-to-checkout', require('./UI/components/proceed-to-checkout'));
-Vue.component('compare-component-with-badge', require('./UI/components/header-compare-with-badge'));
-Vue.component('searchbar-component', require('./UI/components/header-searchbar'));
-Vue.component('wishlist-component-with-badge', require('./UI/components/header-wishlist-with-badge'));
+Vue.component(
+    'proceed-to-checkout',
+    require('./UI/components/proceed-to-checkout')
+);
+Vue.component(
+    'compare-component-with-badge',
+    require('./UI/components/header-compare-with-badge')
+);
+Vue.component(
+    'searchbar-component',
+    require('./UI/components/header-searchbar')
+);
+Vue.component(
+    'wishlist-component-with-badge',
+    require('./UI/components/header-wishlist-with-badge')
+);
 Vue.component('mobile-header', require('./UI/components/header-mobile'));
 Vue.component('sidebar-header', require('./UI/components/header-sidebar'));
-Vue.component('right-side-header', require('./UI/components/header-right-side'));
+Vue.component(
+    'right-side-header',
+    require('./UI/components/header-right-side')
+);
 Vue.component('sidebar-component', require('./UI/components/sidebar'));
 Vue.component('product-card', require('./UI/components/product-card'));
 Vue.component('wishlist-component', require('./UI/components/wishlist'));
@@ -100,19 +84,43 @@ Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
 Vue.component('card-list-header', require('./UI/components/card-header'));
 Vue.component('logo-component', require('./UI/components/image-logo'));
 Vue.component('magnify-image', require('./UI/components/image-magnifier'));
-Vue.component('image-search-component', require('./UI/components/image-search'));
+Vue.component(
+    'image-search-component',
+    require('./UI/components/image-search')
+);
 Vue.component('compare-component', require('./UI/components/product-compare'));
-Vue.component('shimmer-component', require('./UI/components/shimmer-component'));
-Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
-Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
-Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
+Vue.component(
+    'shimmer-component',
+    require('./UI/components/shimmer-component')
+);
+Vue.component(
+    'responsive-sidebar',
+    require('./UI/components/responsive-sidebar')
+);
+Vue.component(
+    'product-quick-view',
+    require('./UI/components/product-quick-view')
+);
+Vue.component(
+    'product-quick-view-btn',
+    require('./UI/components/product-quick-view-btn')
+);
 Vue.component('recently-viewed', require('./UI/components/recently-viewed'));
-Vue.component('product-collections', require('./UI/components/product-collections'));
+Vue.component(
+    'product-collections',
+    require('./UI/components/product-collections')
+);
 Vue.component('hot-category', require('./UI/components/hot-category'));
 Vue.component('hot-categories', require('./UI/components/hot-categories'));
 Vue.component('popular-category', require('./UI/components/popular-category'));
-Vue.component('popular-categories', require('./UI/components/popular-categories'));
-Vue.component('velocity-overlay-loader', require('./UI/components/overlay-loader'));
+Vue.component(
+    'popular-categories',
+    require('./UI/components/popular-categories')
+);
+Vue.component(
+    'velocity-overlay-loader',
+    require('./UI/components/overlay-loader')
+);
 
 /**
  * Start from here.
@@ -453,7 +461,7 @@ $(function() {
     /**
      * For compilation of html coming from server.
      */
-     Vue.component('vnode-injector', {
+    Vue.component('vnode-injector', {
         functional: true,
         props: ['nodes'],
         render(h, { props }) {

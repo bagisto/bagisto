@@ -1,5 +1,7 @@
 {
-    "/js/velocity.js": "/js/velocity.js?id=2872721aea8bca68a99d",
+    "/js/velocity.js": "/js/velocity.js?id=7089e0b0dbad7152a0bc",
     "/css/velocity-admin.css": "/css/velocity-admin.css?id=4322502d80a0e4a0affd",
-    "/css/velocity.css": "/css/velocity.css?id=29a0849a44b50cc36048"
+    "/css/velocity.css": "/css/velocity.css?id=29a0849a44b50cc36048",
+    "/js/velocity-non-critical.js": "/js/velocity-non-critical.js?id=f93fb307a05eff3f394f",
+    "/js/velocity-core.js": "/js/velocity-core.js?id=ef4c3783bce7de5c7628"
 }
