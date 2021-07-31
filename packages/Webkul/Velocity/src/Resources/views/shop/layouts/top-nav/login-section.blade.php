@@ -2,7 +2,7 @@
 
     <div class="dropdown">
         <div id="account">
-            <div class="d-inline-block welcome-content" @click="togglePopup">
+            <div class="d-inline-block welcome-content toggle-popup">
                 <i class="material-icons align-vertical-top">perm_identity</i>
 
                 <span class="text-center">
@@ -25,8 +25,8 @@
                     <div class="modal-header no-border pb0">
                         <label class="fs18 grey">{{ __('shop::app.header.title') }}</label>
 
-                        <button type="button" class="close disable-box-shadow" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" class="white-text fs20" @click="togglePopup">×</span>
+                        <button type="button" class="close disable-box-shadow toggle-popup" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="white-text fs20">×</span>
                         </button>
                     </div>
 
@@ -107,6 +107,12 @@
 
 @push('scripts')
     <script>
+        $(document).ready(() => {
+            $('.toggle-popup').on('click', (e) => {
+                togglePopup(e);
+            });
+        });
+
         function togglePopup(event) {
             let accountModal = $('#account-modal');
 

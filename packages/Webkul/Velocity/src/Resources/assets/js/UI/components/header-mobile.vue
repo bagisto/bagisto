@@ -311,7 +311,7 @@
                 <i class="material-icons text-down-3">shopping_cart</i>
 
                 <div class="badge-wrapper">
-                    <span class="badge" v-text="cartItemsCount"></span>
+                    <span class="badge" v-text="updatedCartItemsCount"></span>
                 </div>
             </a>
         </div>
@@ -347,7 +347,8 @@ export default {
             subCategory: null,
             isSearchbar: false,
             rootCategories: true,
-            rootCategoriesCollection: this.$root.sharedRootCategories
+            rootCategoriesCollection: this.$root.sharedRootCategories,
+            updatedCartItemsCount: this.cartItemsCount
         };
     },
 
@@ -450,7 +451,7 @@ export default {
                 .get(`${this.$root.baseUrl}/mini-cart`)
                 .then(response => {
                     if (response.data.status) {
-                        this.cartItemsCount =
+                        this.updatedCartItemsCount =
                             response.data.mini_cart.cart_items.length;
                     }
                 })
