@@ -5,6 +5,17 @@ import Vue from 'vue';
 import axios from 'axios';
 
 /**
+ * Helper functions.
+ */
+import {
+    getBaseUrl,
+    isMobile,
+    loadDynamicScript,
+    showAlert,
+    removeTrailingSlash
+} from './app-helpers';
+
+/**
  * Vue prototype.
  */
 Vue.prototype.$http = axios;
@@ -22,54 +33,13 @@ window.jQuery = window.$ = require('jquery');
 
 window.BootstrapSass = require('bootstrap-sass');
 
-window.showAlert = (messageType, messageLabel, message) => {
-    if (messageType && message !== '') {
-        let alertId = Math.floor(Math.random() * 1000);
+window.getBaseUrl = getBaseUrl;
 
-        let html = `<div class="alert ${messageType} alert-dismissible" id="${alertId}">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>${
-                    messageLabel ? messageLabel + '!' : ''
-                } </strong> ${message}.
-        </div>`;
+window.isMobile = isMobile;
 
-        $('#alert-container')
-            .append(html)
-            .ready(() => {
-                window.setTimeout(() => {
-                    $(`#alert-container #${alertId}`).remove();
-                }, 5000);
-            });
-    }
-};
+window.loadDynamicScript = loadDynamicScript;
 
-/**
- * Helper functions.
- */
-function isMobile() {
-    if (
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i |
-        /mobi/i.test(navigator.userAgent)
-    ) {
-        return true;
-    }
-
-    return false;
-}
-
-function loadDynamicScript(src, onScriptLoaded) {
-    let dynamicScript = document.createElement('script');
-
-    dynamicScript.setAttribute('src', src);
-
-    document.body.appendChild(dynamicScript);
-
-    dynamicScript.addEventListener('load', onScriptLoaded, false);
-}
-
-function removeTrailingSlash(site) {
-    return site.replace(/\/$/, '');
-}
+window.showAlert = showAlert;
 
 /**
  * Dynamic loading for mobile.
@@ -78,7 +48,7 @@ $(function() {
     /**
      * Base url.
      */
-    let baseUrl = document.querySelector('meta[name="base-url"]').content;
+    let baseUrl = getBaseUrl();
 
     /**
      * Velocity JS path. Just make sure if you are renaming

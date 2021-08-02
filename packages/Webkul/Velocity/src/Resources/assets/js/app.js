@@ -108,7 +108,7 @@ $(function() {
                 sharedRootCategories: [],
                 responsiveSidebarTemplate: '',
                 responsiveSidebarKey: Math.random(),
-                baseUrl: document.querySelector('meta[name="base-url"]').content
+                baseUrl: getBaseUrl()
             };
         },
 
@@ -212,31 +212,11 @@ $(function() {
             },
 
             isMobile: function() {
-                if (
-                    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i |
-                    /mobi/i.test(navigator.userAgent)
-                ) {
-                    if (this.isMaxWidthCrossInLandScape()) {
-                        return false;
-                    }
-                    return true;
-                } else {
-                    return false;
-                }
-            },
-
-            isMaxWidthCrossInLandScape: function() {
-                return window.innerWidth > 900;
+                return isMobile();
             },
 
             loadDynamicScript: function(src, onScriptLoaded) {
-                let dynamicScript = document.createElement('script');
-
-                dynamicScript.setAttribute('src', src);
-
-                document.body.appendChild(dynamicScript);
-
-                dynamicScript.addEventListener('load', onScriptLoaded, false);
+                loadDynamicScript(src, onScriptLoaded);
             },
 
             getDynamicHTML: function(input) {

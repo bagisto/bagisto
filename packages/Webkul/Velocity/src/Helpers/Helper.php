@@ -443,14 +443,4 @@ class Helper extends Review
             ? asset($this->defaultLocaleImageSources[$currentLocale])
             : '';
     }
-
-    /**
-     * Mobile detection for velocity theme.
-     *
-     * @return bool
-     */
-    function isMobile(): bool
-    {
-        return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
-    }
 }
