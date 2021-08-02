@@ -46,6 +46,17 @@ window.showAlert = (messageType, messageLabel, message) => {
 /**
  * Helper functions.
  */
+function isMobile() {
+    if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i |
+        /mobi/i.test(navigator.userAgent)
+    ) {
+        return true;
+    }
+
+    return false;
+}
+
 function loadDynamicScript(src, onScriptLoaded) {
     let dynamicScript = document.createElement('script');
 
@@ -76,8 +87,9 @@ $(function() {
     let velocityJSPath = 'themes/velocity/assets/js/velocity.js';
 
     if (
+        isMobile() &&
         removeTrailingSlash(baseUrl) ===
-        removeTrailingSlash(window.location.href)
+            removeTrailingSlash(window.location.href)
     ) {
         /**
          * Event for mobile to check the user interaction for homepage.
