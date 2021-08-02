@@ -5,6 +5,11 @@ import Vue from 'vue';
 import axios from 'axios';
 
 /**
+ * Vue prototype.
+ */
+Vue.prototype.$http = axios;
+
+/**
  * Window assignation.
  */
 window.Vue = Vue;
@@ -38,32 +43,58 @@ window.showAlert = (messageType, messageLabel, message) => {
     }
 };
 
-window.loadDynamicScript = (src, onScriptLoaded) => {
-    let baseUrl = document.querySelector('meta[name="base-url"]').content;
-
+/**
+ * Helper functions.
+ */
+function loadDynamicScript(src, onScriptLoaded) {
     let dynamicScript = document.createElement('script');
-    dynamicScript.setAttribute('src', `${baseUrl}/${src}`);
+
+    dynamicScript.setAttribute('src', src);
+
     document.body.appendChild(dynamicScript);
 
     dynamicScript.addEventListener('load', onScriptLoaded, false);
-};
+}
 
-/**
- * Vue prototype.
- */
-Vue.prototype.$http = axios;
+function removeTrailingSlash(site) {
+    return site.replace(/\/$/, '');
+}
 
 /**
  * Dynamic loading for mobile.
  */
 $(function() {
-    document.addEventListener(
-        'touchstart',
-        function dynamicScript() {
-            loadDynamicScript(`themes/velocity/assets/js/velocity.js`, () => {
-                this.removeEventListener('touchstart', dynamicScript);
-            });
-        },
-        false
-    );
+    /**
+     * Base url.
+     */
+    let baseUrl = document.querySelector('meta[name="base-url"]').content;
+
+    /**
+     * Velocity JS path. Just make sure if you are renaming
+     * file then update this path also for mobile.
+     */
+    let velocityJSPath = 'themes/velocity/assets/js/velocity.js';
+
+    if (
+        removeTrailingSlash(baseUrl) ===
+        removeTrailingSlash(window.location.href)
+    ) {
+        /**
+         * Event for mobile to check the user interaction for homepage.
+         */
+        document.addEventListener(
+            'touchstart',
+            function dynamicScript() {
+                loadDynamicScript(`${baseUrl}/${velocityJSPath}`, () => {
+                    this.removeEventListener('touchstart', dynamicScript);
+                });
+            },
+            false
+        );
+    } else {
+        /**
+         * Else leave it default as previous.
+         */
+        loadDynamicScript(`${baseUrl}/${velocityJSPath}`, () => {});
+    }
 });
