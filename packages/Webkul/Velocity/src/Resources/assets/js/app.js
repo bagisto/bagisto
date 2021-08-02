@@ -108,7 +108,7 @@ $(function() {
                 sharedRootCategories: [],
                 responsiveSidebarTemplate: '',
                 responsiveSidebarKey: Math.random(),
-                baseUrl: getBaseUrl()
+                baseUrl: getBaseUrl(),
             };
         },
 
@@ -220,7 +220,8 @@ $(function() {
             },
 
             getDynamicHTML: function(input) {
-                var _staticRenderFns;
+                let _staticRenderFns, output;
+
                 const { render, staticRenderFns } = Vue.compile(input);
 
                 if (this.$options.staticRenderFns.length > 0) {
@@ -230,7 +231,7 @@ $(function() {
                 }
 
                 try {
-                    var output = render.call(this, this.$createElement);
+                    output = render.call(this, this.$createElement);
                 } catch (exception) {
                     console.log(this.__('error.something_went_wrong'));
                 }
@@ -265,36 +266,18 @@ $(function() {
 
         data: function() {
             return {
+                loading: false,
                 modalIds: {},
                 miniCartKey: 0,
                 quickView: false,
                 productDetails: [],
-                showPageLoader: false
             };
         },
 
-        created: function() {
-            setTimeout(() => {
-                document.body.classList.remove('modal-open');
-            }, 0);
-
-            window.addEventListener('click', () => {
-                let modals = document.getElementsByClassName('sensitive-modal');
-
-                Array.from(modals).forEach(modal => {
-                    modal.classList.add('hide');
-                });
-            });
-        },
-
         mounted: function() {
-            setTimeout(() => {
-                this.addServerErrors();
-            }, 0);
-
-            document.body.style.display = 'block';
             this.$validator.localize(document.documentElement.lang);
 
+            this.addServerErrors();
             this.loadCategories();
             this.addIntersectionObserver();
         },
@@ -320,16 +303,16 @@ $(function() {
             },
 
             toggleButtonDisable(value) {
-                var buttons = document.getElementsByTagName('button');
+                let buttons = document.getElementsByTagName('button');
 
-                for (var i = 0; i < buttons.length; i++) {
+                for (let i = 0; i < buttons.length; i++) {
                     buttons[i].disabled = value;
                 }
             },
 
             addServerErrors: function(scope = null) {
-                for (var key in serverErrors) {
-                    var inputNames = [];
+                for (let key in serverErrors) {
+                    let inputNames = [];
                     key.split('.').forEach(function(chunk, index) {
                         if (index) {
                             inputNames.push('[' + chunk + ']');
@@ -338,7 +321,7 @@ $(function() {
                         }
                     });
 
-                    var inputName = inputNames.join('');
+                    let inputName = inputNames.join('');
 
                     const field = this.$validator.fields.find({
                         name: inputName,
@@ -394,18 +377,22 @@ $(function() {
             },
 
             showLoader: function() {
-                $('#loader').show();
-                $('.overlay-loader').show();
-
-                document.body.classList.add('modal-open');
+                this.loading = true;
             },
 
             hideLoader: function() {
-                $('#loader').hide();
-                $('.overlay-loader').hide();
+                this.loading = false;
+            },
 
-                document.body.classList.remove('modal-open');
-            }
+            togglePopup: function() {
+                let accountModal = $('#account-modal');
+
+                let modal = $('#cart-modal-content');
+
+                if (modal) modal.addClass('hide');
+
+                accountModal.toggleClass('hide');
+            },
         }
     });
 

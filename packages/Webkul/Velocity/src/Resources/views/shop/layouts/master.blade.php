@@ -55,7 +55,7 @@
                     {!! view_render_event('bagisto.shop.layout.header.after') !!}
 
                     <div class="main-content-wrapper col-12 no-padding">
-                        
+
                         {{-- secondary header --}}
                         <header class="row velocity-divide-page vc-header header-shadow active">
 
@@ -103,9 +103,7 @@
             </div>
 
             {{-- overlay loader --}}
-            <div class="modal-parent" id="loader" style="top: 0" v-show="showPageLoader">
-                <velocity-overlay-loader :is-open="true"></velocity-overlay-loader>
-            </div>
+            <velocity-overlay-loader></velocity-overlay-loader>
         </div>
 
         {{-- footer --}}

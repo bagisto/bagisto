@@ -890,10 +890,12 @@ button[disabled] {
 }
 
 .modal-parent {
+    top: 0;
     width: 100%;
     height: 100%;
-    z-index: 5000;
     position: fixed;
+    background: rgba(256, 256, 256, 0.9);
+    z-index: 125;
 }
 
 .compare-icon,
