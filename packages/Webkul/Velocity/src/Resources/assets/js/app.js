@@ -53,28 +53,13 @@ Vue.component('add-to-cart', require('./UI/components/add-to-cart'));
 Vue.component('star-ratings', require('./UI/components/star-rating'));
 Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
 Vue.component('quantity-changer', require('./UI/components/quantity-changer'));
-Vue.component(
-    'proceed-to-checkout',
-    require('./UI/components/proceed-to-checkout')
-);
-Vue.component(
-    'compare-component-with-badge',
-    require('./UI/components/header-compare-with-badge')
-);
-Vue.component(
-    'searchbar-component',
-    require('./UI/components/header-searchbar')
-);
-Vue.component(
-    'wishlist-component-with-badge',
-    require('./UI/components/header-wishlist-with-badge')
-);
+Vue.component('proceed-to-checkout', require('./UI/components/proceed-to-checkout'));
+Vue.component('compare-component-with-badge', require('./UI/components/header-compare-with-badge'));
+Vue.component('searchbar-component', require('./UI/components/header-searchbar'));
+Vue.component('wishlist-component-with-badge', require('./UI/components/header-wishlist-with-badge'));
 Vue.component('mobile-header', require('./UI/components/header-mobile'));
 Vue.component('sidebar-header', require('./UI/components/header-sidebar'));
-Vue.component(
-    'right-side-header',
-    require('./UI/components/header-right-side')
-);
+Vue.component('right-side-header', require('./UI/components/header-right-side'));
 Vue.component('sidebar-component', require('./UI/components/sidebar'));
 Vue.component('product-card', require('./UI/components/product-card'));
 Vue.component('wishlist-component', require('./UI/components/wishlist'));
@@ -84,43 +69,26 @@ Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
 Vue.component('card-list-header', require('./UI/components/card-header'));
 Vue.component('logo-component', require('./UI/components/image-logo'));
 Vue.component('magnify-image', require('./UI/components/image-magnifier'));
-Vue.component(
-    'image-search-component',
-    require('./UI/components/image-search')
-);
+Vue.component('image-search-component', require('./UI/components/image-search'));
 Vue.component('compare-component', require('./UI/components/product-compare'));
-Vue.component(
-    'shimmer-component',
-    require('./UI/components/shimmer-component')
-);
-Vue.component(
-    'responsive-sidebar',
-    require('./UI/components/responsive-sidebar')
-);
-Vue.component(
-    'product-quick-view',
-    require('./UI/components/product-quick-view')
-);
-Vue.component(
-    'product-quick-view-btn',
-    require('./UI/components/product-quick-view-btn')
-);
+Vue.component('shimmer-component', require('./UI/components/shimmer-component'));
+Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
+Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
+Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
 Vue.component('recently-viewed', require('./UI/components/recently-viewed'));
-Vue.component(
-    'product-collections',
-    require('./UI/components/product-collections')
-);
+Vue.component('product-collections', require('./UI/components/product-collections'));
 Vue.component('hot-category', require('./UI/components/hot-category'));
 Vue.component('hot-categories', require('./UI/components/hot-categories'));
 Vue.component('popular-category', require('./UI/components/popular-category'));
-Vue.component(
-    'popular-categories',
-    require('./UI/components/popular-categories')
-);
-Vue.component(
-    'velocity-overlay-loader',
-    require('./UI/components/overlay-loader')
-);
+Vue.component('popular-categories', require('./UI/components/popular-categories'));
+Vue.component('velocity-overlay-loader', require('./UI/components/overlay-loader'));
+Vue.component('vnode-injector', {
+    functional: true,
+    props: ['nodes'],
+    render(h, { props }) {
+        return props.nodes;
+    }
+});
 
 /**
  * Start from here.
@@ -263,7 +231,9 @@ $(function() {
 
             loadDynamicScript: function(src, onScriptLoaded) {
                 let dynamicScript = document.createElement('script');
+
                 dynamicScript.setAttribute('src', src);
+
                 document.body.appendChild(dynamicScript);
 
                 dynamicScript.addEventListener('load', onScriptLoaded, false);
@@ -310,6 +280,7 @@ $(function() {
 
     const app = new Vue({
         el: '#app',
+
         VueToast,
 
         data: function() {
@@ -455,17 +426,6 @@ $(function() {
 
                 document.body.classList.remove('modal-open');
             }
-        }
-    });
-
-    /**
-     * For compilation of html coming from server.
-     */
-    Vue.component('vnode-injector', {
-        functional: true,
-        props: ['nodes'],
-        render(h, { props }) {
-            return props.nodes;
         }
     });
 
