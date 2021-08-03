@@ -139,6 +139,11 @@ Bagisto is a truly opensource E-Commerce framework which will always be free und
 ### Security Vulnerabilities
 Please don't disclose security vulnerabilities publicly. If you find any security vulnerability in Bagisto then please email us: mailto:support@bagisto.com.
 
+### Modules
+[Available Modules](https://store.webkul.com/Bagisto.html)
+
+Need something else? Email us at support@bagisto.com.
+
 ### Miscellaneous
 
 #### Contribute
