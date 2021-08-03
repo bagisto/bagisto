@@ -18,7 +18,8 @@
 4. [Installation & Configuration](#installation-and-configuration)
 5. [License](#license)
 6. [Security Vulnerabilities](#security-vulnerabilities)
-7. [Miscellaneous](#miscellaneous)
+7. [Modules](#modules)
+8. [Miscellaneous](#miscellaneous)
 
 ### Introduction
 
