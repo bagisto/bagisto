@@ -4,8 +4,6 @@
 import Accounting from 'accounting';
 import VeeValidate from 'vee-validate';
 import VueCarousel from 'vue-carousel';
-import VueToast from 'vue-toast-notification';
-import 'vue-toast-notification/dist/index.css';
 import 'lazysizes';
 
 /**
@@ -21,7 +19,6 @@ import tr from 'vee-validate/dist/locale/tr';
 /**
  * Vue plugins.
  */
-Vue.use(VueToast);
 Vue.use(VueCarousel);
 Vue.use(BootstrapSass);
 Vue.use(VeeValidate, {
@@ -261,8 +258,6 @@ $(function() {
 
     const app = new Vue({
         el: '#app',
-
-        VueToast,
 
         data: function() {
             return {
