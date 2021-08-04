@@ -62,12 +62,23 @@ $(function() {
             removeTrailingSlash(window.location.href)
     ) {
         /**
-         * Event for mobile to check the user interaction for homepage.
+         * Event for mobile to check the user interaction for the homepage. In mobile,
+         * if your viewport is having dynamic content then, feel free to override this.
+         * Else it is recommended to have some, static content in the viewport as the
+         * first impression to reduce LCP.
          */
         document.addEventListener(
             'touchstart',
             function dynamicScript() {
+                window.scrollTo(0, 0);
+
+                document.body.style.overflow = 'hidden';
+
                 loadDynamicScript(`${baseUrl}/${velocityJSPath}`, () => {
+                    window.scrollTo(0, 0);
+                    
+                    document.body.style.overflow = '';
+
                     this.removeEventListener('touchstart', dynamicScript);
                 });
             },
