@@ -17,14 +17,34 @@
 >
 
     {{-- this is default content if js is not loaded --}}
-    <div>
-        <div class="hamburger-wrapper">
-            <i class="rango-toggle hamburger"></i>
+    <div class="row">
+        <div class="col-6">
+            <div class="hamburger-wrapper">
+                <i class="rango-toggle hamburger"></i>
+            </div>
+
+            <a class="left" href="{{ route('shop.home.index') }}" aria-label="Logo">
+                <img class="logo" src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}" alt="" />
+            </a>
         </div>
 
-        <a class="left" href="{{ route('shop.home.index') }}" aria-label="Logo">
-            <img class="logo" src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}" alt="" />
-        </a>
+        <div class="right-vc-header col-6">
+            <a href="{{ auth()->guard('customer')->check() ? route('velocity.customer.product.compare') : route('velocity.product.compare') }}" class="compare-btn unset">
+                <i class="material-icons">compare_arrows</i>
+            </a>
+            <a href="{{ route('customer.wishlist.index') }}" class="wishlist-btn unset">
+                <i class="material-icons">favorite_border</i>
+            </a>
+            <a class="unset cursor-pointer">
+                <i class="material-icons">search</i>
+            </a>
+            <a href="{{ route('shop.checkout.cart.index') }}" class="unset">
+                <i class="material-icons text-down-3">shopping_cart</i>
+                <div class="badge-wrapper">
+                    <span class="badge">{{ $cartItemsCount }}</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <template v-slot:greetings>
