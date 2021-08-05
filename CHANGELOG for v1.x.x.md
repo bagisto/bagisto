@@ -4,187 +4,187 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v1.3.2 (6th of August 2021)** - *Release*
 
-* #5020 [feature] - Webvital
+* #5020 [feature] - Webvital score improvement.
 
-* #4855 [feature] - Quantity to shipped need to be auto filled from qty ordered
+* #4855 [feature] - Autofilling of quantity.
 
-* #4632 [feature] - Captcha must be implemented on User Registration so that Bot Registration can be eliminated.
+* #4632 [feature] - Gooogle captcha integration.
 
-* #4557 [feature] - There is no feature for sorting product review at customer's end.
+* #4557 [feature] - Feature for sorting product review at customer's end.
 
-* #4463 [feature] - Show prices with or without taxes
+* #4463 [feature] - Show prices with or without taxes.
 
-* #4257 [feature] - Multi-lang support in admin Admin
+* #4257 [feature] - Multi-lang support in admin.
 
-* #4102 [feature] - Add a payment history for orders
+* #4102 [feature] - Payment history for orders.
 
-* #3477 [feature] - Add image column in configurable products for variants
+* #3477 [feature] - Image column in configurable products for variants.
 
-* #4927 [enhancement] - Allow the admin to set a payment term for invoices
+* #4927 [enhancement] - Allow the admin to set a payment term for invoices.
 
-* #4926 [enhancement] - Allow admin to set a invoice prefix and the first invoice number
+* #4926 [enhancement] - Allow admin to set an invoice prefix and the first invoice number.
 
-* #4911 [enhancement] - By default variant selection is not there in the configurable product
+* #4911 [enhancement] - Default variant selection for configurable product.
 
-* #4901 [enhancement] - Issue in Configurable Product Addition
+* #4901 [enhancement] - Configurable product addition issue.
 
 * #4449 [enhancement] - Laravel 8 Support
 
-* #3834 [enhancement] - Make it possible to use multiple datagrids on one page
+* #3834 [enhancement] - Ability to use multiple datagrids on single page.
 
-* #3251 [enhancement] - Add orders list to the customers details view
+* #3251 [enhancement] - Add orders list to the customers details view.
 
-* #5033 [fixed] - order status options after invoice generation on payment methods
+* #5033 [fixed] - Order status options after invoice generation on payment methods.
 
-* #5029 [fixed] - header menu content list layout need to fix
+* #5029 [fixed] - Header menu content list layout need to fix.
 
-* #5027 [fixed] - Fix customer account menu visibility in safari browser
+* #5027 [fixed] - Fix customer account menu visibility in safari browser.
 
-* #5018 [fixed] - Invoice ID is not recognized in Transaction when invoice id contains custom prefix/suffix
+* #5018 [fixed] - Invoice ID is not recognized in transactions when invoice id contains custom prefix/suffix.
 
-* #5013 [fixed] - No warning visible when user password doesn't match on reset password page
+* #5013 [fixed] - No warning visible when user password doesn't match on the reset password page.
 
-* #5011 [fixed] - admin filter options are not working in Safari
+* #5011 [fixed] - Admin filter options are not working in Safari.
 
-* #4992 [fixed] - Products image are getting stretch on search page
+* #4992 [fixed] - Products image are getting stretch on search page.
 
-* #4989 [fixed] - In Sales module Create refund Subtotal is showing different
+* #4989 [fixed] - In sales, the module that creates refund subtotal is showing different.
 
-* #4977 [fixed] - configurable product are not visible in category page if allow out of stock is disabled
+* #4977 [fixed] - Configurable products are not visible on the category page if allow out of stock is disabled.
+.
+* #4969 [fixed] - Muliselect attribute options ID should not visible in compare product.
 
-* #4969 [fixed] - muliselect attribute options ID should not visible in compare product
+* #4965 [fixed] - Filter labels in datagrids are not translated.
 
-* #4965 [fixed] - Filter labels in datagrids are not translated
+* #4964 [fixed] - Search icon is missing in velocity theme Datagrid.
 
-* #4964 [fixed] - Search icon is missing in velocity theme datagrid
+* #4963 [fixed] - French locale translations are missing.
 
-* #4963 [fixed] - French locale translations are missing
+* #4962 [fixed] - Able to access downloadable products even I have not purchased.
 
-* #4962 [fixed] - Able to access downloadable product even i have not purchased
+* #4960 [fixed] - The invoice date is missing on invoices.
 
-* #4960 [fixed] - The invoice date is missing on invoices
+* #4959 [fixed] - Getting exception when merging guest cart with customer cart with the configurable item.
 
-* #4959 [fixed] - getting exception when merge guest cart with customer cart with configurable item
+* #4951 [fixed] - Real-time compare number is not decreased when deleting a product from compare page.
 
-* #4951 [fixed] - Realtime compare number is not decreased when deleting product from compare page
+* #4948 [fixed] - Translation issue for the minimum order at cart checkout.
 
-* #4948 [fixed] - translation issue for the minimum order at cart checkout
+* #4947 [fixed] - Getting all invoices (that are not linked to customer or customer's order) in the customer section in the admin panel.
 
-* #4947 [fixed] - Getting all invoices (that are not linked to customer or customer's order) in customer section in admin panel
+* #4941 [fixed] - The locale option should be visible with fields that are locale-based.
 
-* #4941 [fixed] - Locale option should be visible with field that are locale based
+* #4935 [fixed] - Slider is not removed from the store if slider date gets expired.
 
-* #4935 [fixed] - slider is not remove from the store if slider date get expired
+* #4931 [fixed] - Root category name is missing when admin locale is not en.
 
-* #4931 [fixed] - Root category name is missing when admin locale is not en
+* #4924 [fixed] - The coupon code button should not disable if one coupon code is already applied.
 
-* #4924 [fixed] - coupon code button should not disable if one coupon code is already applied
+* #4921 [fixed] - Flag icons are missing when the locale is not en.
 
-* #4921 [fixed] - Flag icons are missing when the locale is not en
+* #4903 [fixed] - Contribution guide is missing.
 
-* #4903 [fixed] - Contribution guide is missing
+* #4896 [fixed] - Group product sort order functionality is not working.
 
-* #4896 [fixed] - group product sort order functionality is not working
-
-* #4886 [fixed] - Make Sample optional for downloadable products
+* #4886 [fixed] - Make Sample optional for downloadable products.
 
 * #4885 [fixed] - Hide shipping for virtual products
 
-* #4854 [fixed] - filtering customer address page is always redirect to customer profile tab
+* #4854 [fixed] - Filtering customer address page is always redirect to the customer profile tab.
 
-* #4848 [fixed] - Fix selected filter options alignment at customer panel
+* #4848 [fixed] - Fix selected filter options alignment at customer panel.
 
-* #4847 [fixed] - add ACL for customer order list
+* #4847 [fixed] - Add ACL for customer order list.
 
-* #4840 [fixed] - pagination alignment issue on customer end
+* #4840 [fixed] - Pagination alignment issue on customer end.
 
-* #4827 [fixed] - Shop by category dissapears on hover
+* #4827 [fixed] - Shop by category disappears on hover.
 
-* #4823 [fixed] - UI Bug at customer Invoice page if multiple invoice exist for same order id
+* #4823 [fixed] - UI bug at customer Invoice page if multiple invoices exist for same order id.
 
-* #4818 [fixed] - getting qty error when move item to cart from the wishlist
+* #4818 [fixed] - Getting qty error when move item to cart from the wishlist.
 
-* #4813 [fixed] - Compare product in velocity theme showing duplicated attribute after adding a new attribute family
+* #4813 [fixed] - Compare product in velocity theme showing duplicated attribute after adding a new attribute family.
 
-* #4811 [fixed] - getting error when redirect on review page
+* #4811 [fixed] - Getting error when redirect on review page.
 
-* #4807 [fixed] - Category logo icon is missing in API
+* #4807 [fixed] - Category logo icon is missing in API.
 
-* #4806 [fixed] - Not able to see the configurable products in the API
+* #4806 [fixed] - Not able to see the configurable products in the API.
 
-* #4804 [fixed] - the city field is missing in order confirmation emails
+* #4804 [fixed] - The city field is missing in order confirmation emails.
 
-* #4800 [fixed] - filter is not working in customer grid
+* #4800 [fixed] - Filter is not working in customer grid.
 
-* #4799 [fixed] - Product image resizing
+* #4799 [fixed] - Product image resizing.
 
-* #4794 [fixed] - Admin logo is getting hidden when scroll down the menu bar
+* #4794 [fixed] - Admin logo is getting hidden when scrolling down the menu bar.
 
-* #4779 [fixed] - image search is not working when out of stock is disabled
+* #4779 [fixed] - Image search is not working when out of stock is disabled.
 
-* #4773 [fixed] - category condition is not getting set in catalog rule
+* #4773 [fixed] - Category condition is not getting set in catalog rule.
 
-* #4771 [fixed] - datetime component should be enhanced as date component in UI package Done Enhancement UI
+* #4771 [fixed] - Datetime component should be enhanced as date component in UI package.
 
-* #4758 [fixed] - BUG When adding an item twice in the cart from the API
+* #4758 [fixed] - Bug when adding an item twice in the cart from the API.
 
-* #4752 [fixed] - Add endpoints for transactions API Done Enhancement
+* #4752 [fixed] - Add endpoints for transactions API Done Enhancement.
 
-* #4751 [fixed] - side bar menu icon should be removed from admin
+* #4751 [fixed] - The sidebar menu icon should be removed from admin.
 
-* #4748 [fixed] - address is not saved on checkout
+* #4748 [fixed] - Address is not saved on checkout.
 
-* #4735 [fixed] - Price filter issue
+* #4735 [fixed] - Price filter issue.
 
-* #4730 [fixed] - All products are getting deleted when associated category is deleted
+* #4730 [fixed] - All products are getting deleted when the associated category is deleted.
 
-* #4729 [fixed] - Products do not exist inside a category, still they are visible on the category page
+* #4729 [fixed] - Products do not exist inside a category, still they are visible on the category page.
 
-* #4727 [fixed] - Error addToCartHtml is not defined on the compare page
+* #4727 [fixed] - Error `addToCartHtml` is not defined on the compare page.
 
-* #4722 [fixed] - getting exception on wishlist when add configurable item on wishlist
+* #4722 [fixed] - Getting exception on wishlist when adding a configurable item on wishlist.
 
-* #4715 [fixed] - product name is breaking in invoice PDF
+* #4715 [fixed] - Product name is breaking in invoice PDF.
 
-* #4713 [fixed] - Paypal IPN Issue Fixed - SA6
+* #4713 [fixed] - Paypal IPN Issue Fixed - SA6.
 
-* #4710 [fixed] - FIX: currencies "value"s and "phone" fields formated for API
+* #4710 [fixed] - Fixed currencies "value"s and "phone" fields formated for API.
 
-* #4709 [fixed] - getting exception when update inactive item on cart
+* #4709 [fixed] - Getting exception when update inactive item on cart.
 
-* #4708 [fixed] - getting issue while selecting variant with no image
+* #4708 [fixed] - Getting issue while selecting variant with no image.
 
-* #4707 [fixed] - Fixed admin theme not loading with custom admin url
+* #4707 [fixed] - Fixed admin theme not loading with custom admin URL.
 
-* #4702 [fixed] - Issue during exporting Customers data
+* #4702 [fixed] - Issue during exporting customers data.
 
-* #4698 [fixed] - category slug should not translation based
+* #4698 [fixed] - Category slug should not translation based.
 
-* #4691 [fixed] - distorted image issue
+* #4691 [fixed] - Distorted image issue.
 
-* #4690 [fixed] - variant images are not visible in a sorted manner as uploaded in backend
+* #4690 [fixed] - Variant images are not visible in a sorted manner as uploaded in the backend.
 
-* #4686 [fixed] - configurable item is still visible on search page when out of stock is disabled
+* #4686 [fixed] - Configurable item is still visible on the search page when out of stock is disabled.
 
-* #4685 [fixed] - blank space remains on the homepage when disabling out of stock item from backend
+* #4685 [fixed] - Blank space remains on the homepage when disabling out-of-stock items from the backend.
 
-* #4682 [fixed] - Catalog rules and product price filter
+* #4682 [fixed] - Catalog rules and product price filter.
 
-* #4680 [fixed] - Check out page extremely slow
+* #4680 [fixed] - Check out page extremely slow.
 
-* #4677 [fixed] - API addresses, returns an error on create + not all fields are manipulated API
+* #4677 [fixed] - API addresses, returns an error on create + not all fields are manipulated API.
 
-* #4668 [fixed] - customer profile header is missing in responsive view
+* #4668 [fixed] - Customer profile header is missing in responsive view.
 
-* #4564 [fixed] - getting exception on admin interface when setup using webinstaller
+* #4564 [fixed] - Getting exception on admin interface when setup using webinstaller.
 
-* #4519 [fixed] - Tax should not be state or Pincode-dependent. It should be product category dependent.
+* #4519 [fixed] - Tax should not be state or Pincode-dependent. It should be product category-dependent.
 
-* #3902 [fixed] - Duplicate Order number getting generated when placed order simultaneously
+* #3902 [fixed] - Duplicate order number getting generated when placed order simultaneously.
 
-* #3453 [fixed] - Invoice state is always set to paid
+* #3453 [fixed] - Invoice state is always set to paid.
 
-* #3196 [fixed] - L x W x H/D on product description
+* #3196 [fixed] - L x W x H/D on product description.
 
 ## **v1.3.1 (22nd of February 2021)** - *Release*
 
