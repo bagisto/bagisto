@@ -2,6 +2,58 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v1.3.2 (Comming Soon)** - *Release*
+
+* #5033 - order status options after invoice generation on payment methods Bug Bug Fixed
+
+* #5029 - header menu content list layout need to fix Bug Bug Fixed
+
+* #5027 - Fix customer account menu visibility in safari browser Bug Bug Fixed
+
+* #5018 - Invoice ID is not recognized in Transaction when invoice id contains custom prefix/suffix Bug Bug Fixed
+
+* #5013 - No warning visible when user password doesn't match on reset password page Bug Bug Fixed
+
+* #5011 - admin filter options are not working in Safari Bug Bug Fixed
+
+* #4992 - Products image are getting stretch on search page Bug Bug Fixed
+
+* #4989 - In Sales module Create refund Subtotal is showing different Bug Bug Fixed
+
+* #4977 - configurable product are not visible in category page if allow out of stock is disabled Bug Bug Fixed
+
+* #4969 - muliselect attribute options ID should not visible in compare product Bug Bug Fixed
+
+* #4965 - Filter labels in datagrids are not translated Bug Bug Fixed
+
+* #4964 - Search icon is missing in velocity theme datagrid Bug Bug Fixed Velocity
+
+* #4963 - French locale translations are missing Bug Bug Fixed
+
+* #4962 - Able to access downloadable product even i have not purchased Bug Bug Fixed
+
+* #4960 - The invoice date is missing on invoices Done Optimization
+
+* #4959 - getting exception when merge guest cart with customer cart with configurable item Bug Bug Fixed
+
+* #4951 - Realtime compare number is not decreased when deleting product from compare page Bug Bug Fixed Velocity
+
+* #4948 - translation issue for the minimum order at cart checkout
+
+* #4947 - Getting all invoices (that are not linked to customer or customer's order) in customer section in admin panel Bug Bug Fixed
+
+* #4943 - Virtual products are not buyable without inventory stock Bug Discussion
+
+* #4941 - Locale option should be visible with field that are locale based Done Optimization
+
+* #4935 - slider is not remove from the store if slider date get expired Bug Bug Fixed
+
+* #4931 - Root category name is missing when admin locale is not en Admin Bug Bug Fixed
+
+* #4927 - Allow the admin to set a payment term for invoices Done Enhancement
+
+* #4926 - Allow admin to set a invoice prefix and the first invoice number Done Enhancement
+
 ## **v1.3.1 (22nd of February 2021)** - *Release*
 
 * #4659 [fixed] - Only show defaults option in Shipping.
