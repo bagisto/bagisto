@@ -970,11 +970,11 @@ return [
             'create-btn-title' => 'اضف عنوان',
             'save-btn-title' => 'حفظ العنوان',
             'general' => 'جنرال لواء',
-            'success-create' => 'تم إنشاء عنوان العميل بنجاح Success:',
-            'success-update' => 'تم تحديث عنوان العميل بنجاح Success:',
-            'success-delete' => 'تم حذف عنوان العميل بنجاح Success:',
-            'success-mass-delete' => 'تم حذف العناوين المحددة بنجاح Success:',
-            'error-create' => 'لم يتم إنشاء عنوان العميل Error:',
+            'success-create' => 'تم إنشاء عنوان العميل بنجاح',
+            'success-update' => 'تم تحديث عنوان العميل بنجاح',
+            'success-delete' => 'تم حذف عنوان العميل بنجاح',
+            'success-mass-delete' => 'تم حذف العناوين المحددة بنجاح',
+            'error-create' => 'لم يتم إنشاء عنوان العميل',
         ],
 
         'note' => [
