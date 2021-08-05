@@ -2,7 +2,37 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.3.2 (Comming Soon)** - *Release*
+## **v1.3.2 (6th of August 2021)** - *Release*
+
+* #5020 [feature] - Webvital
+
+* #4855 [feature] - Quantity to shipped need to be auto filled from qty ordered
+
+* #4632 [feature] - Captcha must be implemented on User Registration so that Bot Registration can be eliminated.
+
+* #4557 [feature] - There is no feature for sorting product review at customer's end.
+
+* #4463 [feature] - Show prices with or without taxes
+
+* #4257 [feature] - Multi-lang support in admin Admin
+
+* #4102 [feature] - Add a payment history for orders
+
+* #3477 [feature] - Add image column in configurable products for variants
+
+* #4927 [enhancement] - Allow the admin to set a payment term for invoices
+
+* #4926 [enhancement] - Allow admin to set a invoice prefix and the first invoice number
+
+* #4911 [enhancement] - By default variant selection is not there in the configurable product
+
+* #4901 [enhancement] - Issue in Configurable Product Addition
+
+* #4449 [enhancement] - Laravel 8 Support
+
+* #3834 [enhancement] - Make it possible to use multiple datagrids on one page
+
+* #3251 [enhancement] - Add orders list to the customers details view
 
 * #5033 [fixed] - order status options after invoice generation on payment methods
 
@@ -48,27 +78,17 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #4931 [fixed] - Root category name is missing when admin locale is not en
 
-* #4927 [enhancement] - Allow the admin to set a payment term for invoices
-
-* #4926 [enhancement] - Allow admin to set a invoice prefix and the first invoice number
-
 * #4924 [fixed] - coupon code button should not disable if one coupon code is already applied
 
 * #4921 [fixed] - Flag icons are missing when the locale is not en
 
-* #4911 [enhancement] - By default variant selection is not there in the configurable product
-
 * #4903 [fixed] - Contribution guide is missing
-
-* #4901 [enhancement] - Issue in Configurable Product Addition Done Enhancement
 
 * #4896 [fixed] - group product sort order functionality is not working
 
 * #4886 [fixed] - Make Sample optional for downloadable products
 
 * #4885 [fixed] - Hide shipping for virtual products
-
-* #4855 [feature] - Quantity to shipped need to be auto filled from qty ordered
 
 * #4854 [fixed] - filtering customer address page is always redirect to customer profile tab
 
@@ -114,7 +134,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #4748 [fixed] - address is not saved on checkout
 
-* #4735 [fixed] - Price filter is not working,getting this issue because of Customer group pricing.Discount is applicable for logged in user only but in filter its filtering the product in same way for guest user also
+* #4735 [fixed] - Price filter issue
 
 * #4730 [fixed] - All products are getting deleted when associated category is deleted
 
@@ -156,31 +176,13 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #4668 [fixed] - customer profile header is missing in responsive view
 
-* #4632 [feature] - Captcha must be implemented on User Registration so that Bot Registration can be eliminated.
-
 * #4564 [fixed] - getting exception on admin interface when setup using webinstaller
-
-* #4557 [feature] - There is no feature for sorting product review at customer's end.
 
 * #4519 [fixed] - Tax should not be state or Pincode-dependent. It should be product category dependent.
 
-* #4463 [feature] - Show prices with or without taxes
-
-* #4449 [enhancement] - Laravel 8 Support
-
-* #4257 [feature] - Multi-lang support in admin Admin
-
-* #4102 [feature] - Add a payment history for orders
-
 * #3902 [fixed] - Duplicate Order number getting generated when placed order simultaneously
 
-* #3834 [enhancement] - Make it possible to use multiple datagrids on one page
-
-* #3477 [feature] - Add image column in configurable products for variants
-
 * #3453 [fixed] - Invoice state is always set to paid
-
-* #3251 [enhancement] - Add orders list to the customers details view
 
 * #3196 [fixed] - L x W x H/D on product description
 
