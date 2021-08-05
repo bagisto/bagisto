@@ -4,193 +4,185 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v1.3.2 (Comming Soon)** - *Release*
 
-* #5033 - order status options after invoice generation on payment methods Bug Bug Fixed
+* #5033 [fixed] - order status options after invoice generation on payment methods
 
-* #5029 - header menu content list layout need to fix Bug Bug Fixed
+* #5029 [fixed] - header menu content list layout need to fix
 
-* #5027 - Fix customer account menu visibility in safari browser Bug Bug Fixed
+* #5027 [fixed] - Fix customer account menu visibility in safari browser
 
-* #5018 - Invoice ID is not recognized in Transaction when invoice id contains custom prefix/suffix Bug Bug Fixed
+* #5018 [fixed] - Invoice ID is not recognized in Transaction when invoice id contains custom prefix/suffix
 
-* #5013 - No warning visible when user password doesn't match on reset password page Bug Bug Fixed
+* #5013 [fixed] - No warning visible when user password doesn't match on reset password page
 
-* #5011 - admin filter options are not working in Safari Bug Bug Fixed
+* #5011 [fixed] - admin filter options are not working in Safari
 
-* #4992 - Products image are getting stretch on search page Bug Bug Fixed
+* #4992 [fixed] - Products image are getting stretch on search page
 
-* #4989 - In Sales module Create refund Subtotal is showing different Bug Bug Fixed
+* #4989 [fixed] - In Sales module Create refund Subtotal is showing different
 
-* #4977 - configurable product are not visible in category page if allow out of stock is disabled Bug Bug Fixed
+* #4977 [fixed] - configurable product are not visible in category page if allow out of stock is disabled
 
-* #4969 - muliselect attribute options ID should not visible in compare product Bug Bug Fixed
+* #4969 [fixed] - muliselect attribute options ID should not visible in compare product
 
-* #4965 - Filter labels in datagrids are not translated Bug Bug Fixed
+* #4965 [fixed] - Filter labels in datagrids are not translated
 
-* #4964 - Search icon is missing in velocity theme datagrid Bug Bug Fixed Velocity
+* #4964 [fixed] - Search icon is missing in velocity theme datagrid
 
-* #4963 - French locale translations are missing Bug Bug Fixed
+* #4963 [fixed] - French locale translations are missing
 
-* #4962 - Able to access downloadable product even i have not purchased Bug Bug Fixed
+* #4962 [fixed] - Able to access downloadable product even i have not purchased
 
-* #4960 - The invoice date is missing on invoices Done Optimization
+* #4960 [fixed] - The invoice date is missing on invoices
 
-* #4959 - getting exception when merge guest cart with customer cart with configurable item Bug Bug Fixed
+* #4959 [fixed] - getting exception when merge guest cart with customer cart with configurable item
 
-* #4951 - Realtime compare number is not decreased when deleting product from compare page Bug Bug Fixed Velocity
+* #4951 [fixed] - Realtime compare number is not decreased when deleting product from compare page
 
-* #4948 - translation issue for the minimum order at cart checkout
+* #4948 [fixed] - translation issue for the minimum order at cart checkout
 
-* #4947 - Getting all invoices (that are not linked to customer or customer's order) in customer section in admin panel Bug Bug Fixed
+* #4947 [fixed] - Getting all invoices (that are not linked to customer or customer's order) in customer section in admin panel
 
-* #4943 - Virtual products are not buyable without inventory stock Bug Discussion
+* #4941 [fixed] - Locale option should be visible with field that are locale based
 
-* #4941 - Locale option should be visible with field that are locale based Done Optimization
+* #4935 [fixed] - slider is not remove from the store if slider date get expired
 
-* #4935 - slider is not remove from the store if slider date get expired Bug Bug Fixed
+* #4931 [fixed] - Root category name is missing when admin locale is not en
 
-* #4931 - Root category name is missing when admin locale is not en Admin Bug Bug Fixed
+* #4927 [enhancement] - Allow the admin to set a payment term for invoices
 
-* #4927 - Allow the admin to set a payment term for invoices Done Enhancement
+* #4926 [enhancement] - Allow admin to set a invoice prefix and the first invoice number
 
-* #4926 - Allow admin to set a invoice prefix and the first invoice number Done Enhancement
+* #4924 [fixed] - coupon code button should not disable if one coupon code is already applied
 
-* #4924 - coupon code button should not disable if one coupon code is already applied Bug Bug Fixed Velocity
+* #4921 [fixed] - Flag icons are missing when the locale is not en
 
-* #4921 - Flag icons are missing when the locale is not en Bug Bug Fixed Velocity
+* #4911 [enhancement] - By default variant selection is not there in the configurable product
 
-* #4911 - By default variant selection is not there in the configurable product Bug Fixed Enhancement
+* #4903 [fixed] - Contribution guide is missing
 
-* #4903 - Contribution guide is missing Bug Bug Fixed
+* #4901 [enhancement] - Issue in Configurable Product Addition Done Enhancement
 
-* #4901 - Issue in Configurable Product Addition Done Enhancement
+* #4896 [fixed] - group product sort order functionality is not working
 
-* #4896 - group product sort order functionality is not working Bug Bug Fixed
+* #4886 [fixed] - Make Sample optional for downloadable products
 
-* #4886 - Make Sample optional for downloadable products Done Optimization
+* #4885 [fixed] - Hide shipping for virtual products
 
-* #4885 - Hide shipping for virtual products Bug Bug Fixed
+* #4855 [feature] - Quantity to shipped need to be auto filled from qty ordered
 
-* #4855 - Quantity to shipped need to be auto filled from qty ordered Done Feature Request Optimization
+* #4854 [fixed] - filtering customer address page is always redirect to customer profile tab
 
-* #4854 - filtering customer address page is always redirect to customer profile tab Bug Bug Fixed
+* #4848 [fixed] - Fix selected filter options alignment at customer panel
 
-* #4853 - Sliders are not visible on store when save for multiple locale Bug Invalid
+* #4847 [fixed] - add ACL for customer order list
 
-* #4848 - Fix selected filter options alignment at customer panel Bug Bug Fixed UI
+* #4840 [fixed] - pagination alignment issue on customer end
 
-* #4847 - add ACL for customer order list Bug Bug Fixed
+* #4827 [fixed] - Shop by category dissapears on hover
 
-* #4840 - pagination alignment issue on customer end Bug Bug Fixed
+* #4823 [fixed] - UI Bug at customer Invoice page if multiple invoice exist for same order id
 
-* #4827 - Shop by category dissapears on hover
+* #4818 [fixed] - getting qty error when move item to cart from the wishlist
 
-* #4823 - UI Bug at customer Invoice page if multiple invoice exist for same order id Bug Bug Fixed UI/UX Mess
+* #4813 [fixed] - Compare product in velocity theme showing duplicated attribute after adding a new attribute family
 
-* #4818 - getting qty error when move item to cart from the wishlist Bug Bug Fixed
+* #4811 [fixed] - getting error when redirect on review page
 
-* #4813 - Compare product in velocity theme showing duplicated attribute after adding a new attribute family Bug Bug Fixed
+* #4807 [fixed] - Category logo icon is missing in API
 
-* #4811 - getting error when redirect on review page Bug Bug Fixed
+* #4806 [fixed] - Not able to see the configurable products in the API
 
-* #4807 - Category logo icon is missing in API API Bug Bug Fixed
+* #4804 [fixed] - the city field is missing in order confirmation emails
 
-* #4806 - Not able to see the configurable products in the API API Bug
+* #4800 [fixed] - filter is not working in customer grid
 
-* #4804 - the city field is missing in order confirmation emails Bug Bug Fixed Shop Velocity
+* #4799 [fixed] - Product image resizing
 
-* #4800 - filter is not working in customer grid Bug Bug Fixed
+* #4794 [fixed] - Admin logo is getting hidden when scroll down the menu bar
 
-* #4799 - Product image resizing Done Optimization Product
+* #4779 [fixed] - image search is not working when out of stock is disabled
 
-* #4794 - Admin logo is getting hidden when scroll down the menu bar Bug Bug Fixed
+* #4773 [fixed] - category condition is not getting set in catalog rule
 
-* #4779 - image search is not working when out of stock is disabled Bug Bug Fixed
+* #4771 [fixed] - datetime component should be enhanced as date component in UI package Done Enhancement UI
 
-* #4773 - category condition is not getting set in catalog rule Bug Bug Fixed
+* #4758 [fixed] - BUG When adding an item twice in the cart from the API
 
-* #4771 - datetime component should be enhanced as date component in UI package Done Enhancement UI
+* #4752 [fixed] - Add endpoints for transactions API Done Enhancement
 
-* #4758 - BUG When adding an item twice in the cart from the API Bug Bug Fixed
+* #4751 [fixed] - side bar menu icon should be removed from admin
 
-* #4752 - Add endpoints for transactions API Done Enhancement
+* #4748 [fixed] - address is not saved on checkout
 
-* #4751 - side bar menu icon should be removed from admin Done Optimization
+* #4735 [fixed] - Price filter is not working,getting this issue because of Customer group pricing.Discount is applicable for logged in user only but in filter its filtering the product in same way for guest user also
 
-* #4748 - address is not saved on checkout Bug Bug Fixed
+* #4730 [fixed] - All products are getting deleted when associated category is deleted
 
-* #4735 - Price filter is not working,getting this issue because of Customer group pricing.Discount is applicable for logged in user only but in filter its filtering the product in same way for guest user also Bug Bug Fixed
+* #4729 [fixed] - Products do not exist inside a category, still they are visible on the category page
 
-* #4730 - All products are getting deleted when associated category is deleted Bug Fixed Critical Bug
+* #4727 [fixed] - Error addToCartHtml is not defined on the compare page
 
-* #4729 - Products do not exist inside a category, still they are visible on the category page Bug Bug Fixed
+* #4722 [fixed] - getting exception on wishlist when add configurable item on wishlist
 
-* #4727 - Error addToCartHtml is not defined on the compare page Bug Fixed Critical Bug Shop
+* #4715 [fixed] - product name is breaking in invoice PDF
 
-* #4722 - getting exception on wishlist when add configurable item on wishlist Bug Fixed Critical Bug
+* #4713 [fixed] - Paypal IPN Issue Fixed - SA6
 
-* #4715 - product name is breaking in invoice PDF Bug Bug Fixed
+* #4710 [fixed] - FIX: currencies "value"s and "phone" fields formated for API
 
-* #4713 - Paypal IPN Issue Fixed - SA6
+* #4709 [fixed] - getting exception when update inactive item on cart
 
-* #4710 - FIX: currencies "value"s and "phone" fields formated for API
+* #4708 [fixed] - getting issue while selecting variant with no image
 
-* #4709 - getting exception when update inactive item on cart Bug Bug Fixed
+* #4707 [fixed] - Fixed admin theme not loading with custom admin url
 
-* #4708 - getting issue while selecting variant with no image Bug Bug Fixed
+* #4702 [fixed] - Issue during exporting Customers data
 
-* #4707 - Fixed admin theme not loading with custom admin url
+* #4698 [fixed] - category slug should not translation based
 
-* #4702 - Issue during exporting Customers data Bug Bug Fixed
+* #4691 [fixed] - distorted image issue
 
-* #4698 - category slug should not translation based Bug Bug Fixed
+* #4690 [fixed] - variant images are not visible in a sorted manner as uploaded in backend
 
-* #4694 - Possible bugs in the API API Bug
+* #4686 [fixed] - configurable item is still visible on search page when out of stock is disabled
 
-* #4692 - linked products are not visible on checkout Bug Invalid
+* #4685 [fixed] - blank space remains on the homepage when disabling out of stock item from backend
 
-* #4691 - distorted image issue
+* #4682 [fixed] - Catalog rules and product price filter
 
-* #4690 - variant images are not visible in a sorted manner as uploaded in backend Bug Bug Fixed
+* #4680 [fixed] - Check out page extremely slow
 
-* #4686 - configurable item is still visible on search page when out of stock is disabled Bug Bug Fixed
+* #4677 [fixed] - API addresses, returns an error on create + not all fields are manipulated API
 
-* #4685 - blank space remains on the homepage when disabling out of stock item from backend Bug Bug Fixed
+* #4668 [fixed] - customer profile header is missing in responsive view
 
-* #4682 - Catalog rules and product price filter Bug Bug Fixed
+* #4632 [feature] - Captcha must be implemented on User Registration so that Bot Registration can be eliminated.
 
-* #4680 - Check out page extremely slow Done Optimization
+* #4564 [fixed] - getting exception on admin interface when setup using webinstaller
 
-* #4677 - API addresses, returns an error on create + not all fields are manipulated API Bug Bug Fixed
+* #4557 [feature] - There is no feature for sorting product review at customer's end.
 
-* #4668 - customer profile header is missing in responsive view Bug Bug Fixed
+* #4519 [fixed] - Tax should not be state or Pincode-dependent. It should be product category dependent.
 
-* #4632 - Captcha must be implemented on User Registration so that Bot Registration can be eliminated. Done Enhancement
+* #4463 [feature] - Show prices with or without taxes
 
-* #4564 - getting exception on admin interface when setup using webinstaller Bug Fixed Critical Bug
+* #4449 [enhancement] - Laravel 8 Support
 
-* #4557 - There is no feature for sorting product review at customer's end. Done Enhancement Feature Request
+* #4257 [feature] - Multi-lang support in admin Admin
 
-* #4519 - Tax should not be state or Pincode-dependent. It should be product category dependent. Done Optimization Tax
+* #4102 [feature] - Add a payment history for orders
 
-* #4463 - Show prices with or without taxes Done Enhancement Feature Request
+* #3902 [fixed] - Duplicate Order number getting generated when placed order simultaneously
 
-* #4449 - Laravel 8 Support Done Enhancement
+* #3834 [enhancement] - Make it possible to use multiple datagrids on one page
 
-* #4257 - Multi-lang support in admin Admin Done Enhancement
+* #3477 [feature] - Add image column in configurable products for variants
 
-* #4102 - Add a payment history for orders Done Enhancement Feature Request
+* #3453 [fixed] - Invoice state is always set to paid
 
-* #3902 - Duplicate Order number getting generated when placed order simultaneously Bug Bug Fixed
+* #3251 [enhancement] - Add orders list to the customers details view
 
-* #3834 - Make it possible to use multiple datagrids on one page Done Enhancement UI
-
-* #3477 - Add image column in configurable products for variants Bug Fixed Enhancement
-
-* #3453 - Invoice state is always set to paid Bug Bug Fixed
-
-* #3251 - Add orders list to the customers details view Done Enhancement
-
-* #3196 - L x W x H/D on product description Done Optimization
+* #3196 [fixed] - L x W x H/D on product description
 
 ## **v1.3.1 (22nd of February 2021)** - *Release*
 
