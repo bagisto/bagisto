@@ -978,11 +978,11 @@ return [
             'create-btn-title'    => 'Add Address',
             'save-btn-title'      => 'Save Address',
             'general'             => 'General',
-            'success-create'      => 'Success: Customer address created successfully.',
-            'success-update'      => 'Success: Customer address updated successfully.',
-            'success-delete'      => 'Success: Customer address deleted successfully.',
-            'success-mass-delete' => 'Success: selected addresses deleted successfully.',
-            'error-create'        => 'Error: Customer address not created.',
+            'success-create'      => 'Customer address created successfully.',
+            'success-update'      => 'Customer address updated successfully.',
+            'success-delete'      => 'Customer address deleted successfully.',
+            'success-mass-delete' => 'Selected addresses deleted successfully.',
+            'error-create'        => 'Customer address not created.',
         ],
 
         'note' => [
