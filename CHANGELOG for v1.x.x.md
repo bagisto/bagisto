@@ -34,6 +34,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #3251 [enhancement] - Add orders list to the customers details view.
 
+* #5046 [fixed] - Add to cart button is not working in compare page for default theme.
+
+* #5045 [fixed] - Not getting product images where cache is exist.
+
+* #5042 [fixed] - Update the alert message when edit and save customer address.
+
 * #5033 [fixed] - Order status options after invoice generation on payment methods.
 
 * #5029 [fixed] - Header menu content list layout need to fix.
