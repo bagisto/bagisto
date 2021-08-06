@@ -972,11 +972,11 @@ return [
             'create-btn-title' => 'Aggiungi Indirizzo',
             'save-btn-title' => 'Salva Indirizzo',
             'general' => 'Generale',
-            'success-create' => 'Success: Indirizzo cliente creato con successo.',
-            'success-update' => 'Success: Indirizzo cliente aggiornato con successo.',
-            'success-delete' => 'Success: Indirizzo cliente eliminato con successo.',
-            'success-mass-delete' => 'Success: indirizzi selezionati eliminati con successo.',
-            'error-create' => 'Error: Indirizzo cliente non creato.',
+            'success-create' => 'Indirizzo cliente creato con successo.',
+            'success-update' => 'Indirizzo cliente aggiornato con successo.',
+            'success-delete' => 'Indirizzo cliente eliminato con successo.',
+            'success-mass-delete' => 'indirizzi selezionati eliminati con successo.',
+            'error-create' => 'Indirizzo cliente non creato.',
         ],
 
         'note' => [
