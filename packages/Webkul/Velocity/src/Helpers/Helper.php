@@ -2,15 +2,15 @@
 
 namespace Webkul\Velocity\Helpers;
 
-use Webkul\Product\Helpers\Review;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Product\Facades\ProductImage;
-use Webkul\Product\Models\Product as ProductModel;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductFlatRepository;
-use Webkul\Velocity\Repositories\OrderBrandsRepository;
-use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
+use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Helpers\Review;
+use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Product\Repositories\ProductFlatRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Velocity\Repositories\OrderBrandsRepository;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
 class Helper extends Review
@@ -245,6 +245,36 @@ class Helper extends Review
             ->take($reviewCount)->get();
 
         return $reviews;
+    }
+
+    /**
+     * Get messages from session.
+     *
+     * @return void
+     */
+    public function getMessage()
+    {
+        $message = [
+            'message' => '',
+            'messageType' => '',
+            'messageLabel' => '',
+        ];
+
+        if ($message['message'] = session('success')) {
+            $message['messageType'] = 'alert-success';
+            $message['messageLabel'] = __('velocity::app.shop.general.alert.success');
+        } else if ($message['message'] = session('warning')) {
+            $message['messageType'] = 'alert-warning';
+            $message['messageLabel'] = __('velocity::app.shop.general.alert.warning');
+        } else if ($message['message'] = session('error')) {
+            $message['messageType'] = 'alert-danger';
+            $message['messageLabel'] = __('velocity::app.shop.general.alert.error');
+        } else if ($message['message'] = session('info')) {
+            $message['messageType'] = 'alert-info';
+            $message['messageLabel'] = __('velocity::app.shop.general.alert.info');
+        }
+
+        return $message;
     }
 
     /**

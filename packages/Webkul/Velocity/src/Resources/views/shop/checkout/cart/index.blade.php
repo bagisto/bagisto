@@ -166,7 +166,8 @@
                                             <div class="product-quantity col-3 no-padding">
                                                 <quantity-changer
                                                     :control-name="'qty[{{$item->id}}]'"
-                                                    quantity="{{ $item->quantity }}">
+                                                    quantity="{{ $item->quantity }}"
+                                                    quantity-text="{{ __('shop::app.products.quantity') }}">
                                                 </quantity-changer>
                                             </div>
 
@@ -222,7 +223,8 @@
                                                     <div class="product-quantity col-lg-4 col-6 no-padding">
                                                         <quantity-changer
                                                             :control-name="'qty[{{$item->id}}]'"
-                                                            quantity="{{ $item->quantity }}">
+                                                            quantity="{{ $item->quantity }}"
+                                                            quantity-text="{{ __('shop::app.products.quantity') }}">
                                                         </quantity-changer>
                                                     </div>
 
