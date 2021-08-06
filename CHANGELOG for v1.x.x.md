@@ -28,9 +28,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #4901 [enhancement] - Configurable product addition issue.
 
-* #4767 [enhancement] - PHP 8 support
+* #4767 [enhancement] - PHP 8 Support.
 
-* #4449 [enhancement] - Laravel 8 Support
+* #4449 [enhancement] - Laravel 8 Support.
 
 * #3834 [enhancement] - Ability to use multiple datagrids on single page.
 
