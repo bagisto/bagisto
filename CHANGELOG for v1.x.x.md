@@ -20,6 +20,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #3477 [feature] - Image column in configurable products for variants.
 
+* #3453 [feature] - Automatic invoice generation.
+
 * #4927 [enhancement] - Allow the admin to set a payment term for invoices.
 
 * #4926 [enhancement] - Allow admin to set an invoice prefix and the first invoice number.
@@ -189,8 +191,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #4519 [fixed] - Tax should not be state or Pincode-dependent. It should be product category-dependent.
 
 * #3902 [fixed] - Duplicate order number getting generated when placed order simultaneously.
-
-* #3453 [fixed] - Invoice state is always set to paid.
 
 * #3196 [fixed] - L x W x H/D on product description.
 
@@ -707,8 +707,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #3458 [fixed] - not able to add (virtual,booking etc.) product to compare list by logged in user
 
 * #3457 [fixed] - number indicator are hidden on wishlist or compare icon RTL format
-
-* #3453 [fixed] - Invoice state is always set to paid
 
 * #3451 [fixed] - Change request regarding shipments
 
