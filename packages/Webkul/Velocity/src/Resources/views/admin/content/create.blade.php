@@ -44,7 +44,7 @@
                                 {{ __('velocity::app.admin.contents.page.title') }}
                             </label>
                             <input type="text" v-validate="'required|max:100'" class="control" id="title" name="title" value="" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
-                            <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
+                            <span class="control-error" v-if="errors.has('title')" v-text="errors.first('title')"></span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('position') ? 'has-error' : '']">
@@ -52,7 +52,7 @@
                                 {{ __('velocity::app.admin.contents.page.position') }}</span>
                             </label>
                             <input type="text" v-validate="'required|numeric|max:2'" class="control" id="position" name="position" value="" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.position') }}&quot;"/>
-                            <span class="control-error" v-if="errors.has('position')">@{{ errors.first('position') }}</span>
+                            <span class="control-error" v-if="errors.has('position')" v-text="errors.first('position')"></span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
@@ -65,7 +65,7 @@
                                     {{ __('velocity::app.admin.contents.inactive') }}
                                 </option>
                             </select>
-                            <span class="control-error" v-if="errors.has('status')">@{{ errors.first('status') }}</span>
+                            <span class="control-error" v-if="errors.has('status')" v-text="errors.first('status')"></span>
                         </div>
 
                         {!! view_render_event('bagisto.admin.content.create_form_accordian.page.controls.after') !!}
@@ -108,7 +108,7 @@
                 </label>
                 <input type="text" v-validate="'max:100'" class="control" id="custom_title" name="custom_title" value="" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.custom-title') }}&quot;"/>
 
-                <span class="control-error" v-if="errors.has('custom_title')">@{{ errors.first('custom_title') }}</span>
+                <span class="control-error" v-if="errors.has('custom_title')" v-text="errors.first('custom_title')"></span>
             </div>
 
             <div class="control-group" :class="[errors.has('custom_heading') ? 'has-error' : '']">
@@ -117,7 +117,7 @@
                 </label>
                 <input type="text" v-validate="'max:100'" class="control" id="custom_heading" name="custom_heading" value="" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.custom-heading') }}&quot;"/>
 
-                <span class="control-error" v-if="errors.has('custom_heading')">@{{ errors.first('custom_heading') }}</span>
+                <span class="control-error" v-if="errors.has('custom_heading')" v-text="errors.first('custom_heading')"></span>
             </div> --}}
 
             <div class="control-group" :class="[errors.has('content_type') ? 'has-error' : '']">
@@ -131,7 +131,7 @@
                     @endforeach
                 </select>
 
-                <span class="control-error" v-if="errors.has('content_type')">@{{ errors.first('content_type') }}</span>
+                <span class="control-error" v-if="errors.has('content_type')" v-text="errors.first('content_type')"></span>
             </div>
 
             <div v-if="content_type == 'link'">

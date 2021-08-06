@@ -122,9 +122,7 @@
                         </select>
                     </div>
 
-                    <span class="control-error" v-if="errors.has('bundle_options[' + option.id + '][]')">
-                        @{{ errors.first('bundle_options[' + option.id + '][]') }}
-                    </span>
+                    <span class="control-error" v-if="errors.has('bundle_options[' + option.id + '][]')" v-text="errors.first('bundle_options[' + option.id + '][]')"></span>
                 </div>
 
                 <div v-if="option.type == 'select' || option.type == 'radio'">

@@ -45,9 +45,7 @@
                                     value="{{ old('email') }}"
                                     v-validate="'required|email'" />
 
-                                <span class="control-error" v-if="errors.has('email')">
-                                    @{{ errors.first('email') }}
-                                </span>
+                                <span class="control-error" v-if="errors.has('email')" v-text="errors.first('email')"></span>
                             </div>
 
                             <div :class="`form-group ${errors.has('password') ? 'has-error' : ''}`">
@@ -62,9 +60,7 @@
                                     type="password"
                                     v-validate="'required|min:6'" />
 
-                                <span class="control-error" v-if="errors.has('password')">
-                                    @{{ errors.first('password') }}
-                                </span>
+                                <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
                             </div>
 
                             <div :class="`form-group ${errors.has('confirm_password') ? 'has-error' : ''}`">
@@ -78,9 +74,7 @@
                                     name="password_confirmation"
                                     v-validate="'required|min:6|confirmed:password'" />
 
-                                <span class="control-error" v-if="errors.has('password_confirmation')">
-                                    @{{ errors.first('password_confirmation') }}
-                                </span>
+                                <span class="control-error" v-if="errors.has('password_confirmation')" v-text="errors.first('password_confirmation')"></span>
                             </div>
 
                             {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.after') !!}

@@ -72,8 +72,8 @@
                 <div :class="`col-12 mt15 has-error ${errors.has('address-form.billing[address_id]') ? 'has-error' : ''}`">
                     <span
                         class="control-error"
-                        v-if="errors.has('address-form.billing[address_id]')">
-                        @{{ errors.first('address-form.billing[address_id]') }}
+                        v-if="errors.has('address-form.billing[address_id]')"
+                        v-text="errors.first('address-form.billing[address_id]')">
                     </span>
                 </div>
 
@@ -198,9 +198,7 @@
                     </div>
 
                     <div :class="`col-12 mt15 has-error pl0 ${errors.has('address-form.shipping[address_id]') ? 'has-error' : ''}`">
-                        <span class="control-error" v-if="errors.has('address-form.shipping[address_id]')">
-                            @{{ errors.first('address-form.shipping[address_id]') }}
-                        </span>
+                        <span class="control-error" v-if="errors.has('address-form.shipping[address_id]')" v-text="errors.first('address-form.shipping[address_id]')"></span>
                     </div>
                 </div>
             </accordian>

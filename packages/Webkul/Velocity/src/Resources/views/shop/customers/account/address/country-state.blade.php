@@ -20,9 +20,7 @@
                     <span class="select-icon rango-arrow-down"></span>
                 </div>
 
-                <span class="control-error" v-if="errors.has('country')">
-                    @{{ errors.first('country') }}
-                </span>
+                <span class="control-error" v-if="errors.has('country')" v-text="errors.first('country')"></span>
             </div>
 
             <div class="control-group" :class="[errors.has('state') ? 'has-error' : '']">
@@ -61,9 +59,7 @@
                     </div>
                 </template>
 
-                <span class="control-error" v-if="errors.has('state')">
-                    @{{ errors.first('state') }}
-                </span>
+                <span class="control-error" v-if="errors.has('state')" v-text="errors.first('state')"></span>
             </div>
         </div>
     </script>
