@@ -28,11 +28,19 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #4901 [enhancement] - Configurable product addition issue.
 
-* #4449 [enhancement] - Laravel 8 Support
+* #4767 [enhancement] - PHP 8 Support.
+
+* #4449 [enhancement] - Laravel 8 Support.
 
 * #3834 [enhancement] - Ability to use multiple datagrids on single page.
 
 * #3251 [enhancement] - Add orders list to the customers details view.
+
+* #5046 [fixed] - Add to cart button is not working in compare page for default theme.
+
+* #5045 [fixed] - Not getting product images where cache is exist.
+
+* #5042 [fixed] - Update the alert message when edit and save customer address.
 
 * #5033 [fixed] - Order status options after invoice generation on payment methods.
 
