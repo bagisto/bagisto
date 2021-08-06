@@ -93,9 +93,17 @@
                                                     @if ($showWishlist)
                                                         <span class="towishlist">
                                                             @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                                <a href="{{ route('shop.movetowishlist', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                                <a
+                                                                    href="javascript:void(0);"
+                                                                    onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->id) }}')">
+                                                                    {{ __('shop::app.checkout.cart.move-to-wishlist') }}
+                                                                </a>
                                                             @else
-                                                                <a href="{{ route('shop.movetowishlist', $item->child->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                                <a
+                                                                    href="javascript:void(0);"
+                                                                    onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->child->id) }}')">
+                                                                    {{ __('shop::app.checkout.cart.move-to-wishlist') }}
+                                                                </a>
                                                             @endif
                                                         </span>
                                                     @endif
@@ -249,8 +257,22 @@
         });
 
         function removeLink(message) {
-            if (!confirm(message))
-            event.preventDefault();
+            if (! confirm(message)) {
+                event.preventDefault();
+                return;
+            }
+        }
+
+        function moveToWishlist(message, route) {
+            if (! confirm(message)) {
+                event.preventDefault();
+                return;
+            }
+
+            axios.post(route, {'redirect': false})
+                .then((response) => {
+                    location.reload();
+                });
         }
 
         function updateCartQunatity(operation, index) {

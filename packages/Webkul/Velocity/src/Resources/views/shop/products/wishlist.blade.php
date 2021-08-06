@@ -15,13 +15,21 @@
         @endphp
 
         @if($wishlist)
-            <form id="wishlist-{{ $wishlist->id }}" action="{{ $href }}" method="POST">
+            <form
+                class="d-none"
+                id="wishlist-{{ $wishlist->id }}"
+                action="{{ $href }}"
+                method="POST">
                 @method('DELETE')
 
                 @csrf
             </form>
         @else
-            <form id="wishlist-{{ $product->product_id }}" action="{{ $href }}" method="POST">
+            <form
+                class="d-none"
+                id="wishlist-{{ $product->product_id }}"
+                action="{{ $href }}"
+                method="POST">
                 @csrf
             </form>
         @endif
@@ -41,7 +49,11 @@
     @endauth
 
     @guest('customer')
-        <form id="wishlist-{{ $product->product_id }}" action="{{ route('customer.wishlist.add', $product->product_id) }}" method="POST">
+        <form
+            class="d-none"
+            id="wishlist-{{ $product->product_id }}"
+            action="{{ route('customer.wishlist.add', $product->product_id) }}"
+            method="POST">
             @csrf
         </form>
 

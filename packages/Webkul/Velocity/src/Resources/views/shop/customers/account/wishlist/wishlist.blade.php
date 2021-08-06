@@ -12,7 +12,7 @@
 
         @if (count($items))
             <div class="account-action float-right">
-                <form id="remove-all-wishlist" action="{{ route('customer.wishlist.removeall') }}" method="POST">
+                <form id="remove-all-wishlist" class="d-none" action="{{ route('customer.wishlist.removeall') }}" method="POST">
                     @method('DELETE')
 
                     @csrf
