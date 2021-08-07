@@ -141,7 +141,7 @@ class CartController extends Controller
      * Function to move a already added product to wishlist will run only on customer authentication.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function moveToWishlist($id)
     {
@@ -153,7 +153,9 @@ class CartController extends Controller
             session()->flash('warning', trans('shop::app.checkout.cart.move-to-wishlist-error'));
         }
 
-        return redirect()->back();
+        return request()->get('redirect') !== false
+            ? redirect()->back()
+            : response()->json([]);
     }
 
     /**

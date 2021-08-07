@@ -12,9 +12,16 @@
 
         @if (count($items))
             <div class="account-action float-right">
+                <form id="remove-all-wishlist" class="d-none" action="{{ route('customer.wishlist.removeall') }}" method="POST">
+                    @method('DELETE')
+
+                    @csrf
+                </form>
+
                 <a
                     class="remove-decoration theme-btn light"
-                    href="{{ route('customer.wishlist.removeall') }}">
+                    href="javascript:void(0);"
+                    onclick="document.getElementById('remove-all-wishlist').submit();">
                     {{ __('shop::app.customer.account.wishlist.deleteall') }}
                 </a>
             </div>
