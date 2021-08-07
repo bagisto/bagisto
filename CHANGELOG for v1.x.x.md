@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.3.2 (6th of August 2021)** - *Release*
+## **v1.3.2 (7th of August 2021)** - *Release*
 
 * #5020 [feature] - Webvital score improvement.
 
@@ -37,6 +37,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #3834 [enhancement] - Ability to use multiple datagrids on single page.
 
 * #3251 [enhancement] - Add orders list to the customers details view.
+
+* #5053 [fixed] - showing validation on input fields while loading velocity
 
 * #5046 [fixed] - Add to cart button is not working in compare page for default theme.
 
