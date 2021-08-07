@@ -91,9 +91,7 @@
                         <span v-if="! attribute.options.length" class="no-options">{{ __('shop::app.products.select-above-options') }}</span>
                     </span>
 
-                    <span class="control-error" v-if="errors.has('super_attribute[' + attribute.id + ']')">
-                        @{{ errors.first('super_attribute[' + attribute.id + ']') }}
-                    </span>
+                    <span class="control-error" v-if="errors.has('super_attribute[' + attribute.id + ']')" v-text="errors.first('super_attribute[' + attribute.id + ']')"></span>
                 </div>
 
             </div>

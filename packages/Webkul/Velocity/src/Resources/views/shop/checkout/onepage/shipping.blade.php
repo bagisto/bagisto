@@ -50,9 +50,8 @@
 
                 <span
                     class="control-error"
-                    v-if="errors.has('shipping-form.shipping_method')">
-
-                    @{{ errors.first('shipping-form.shipping_method') }}
+                    v-if="errors.has('shipping-form.shipping_method')"
+                    v-text="errors.first('shipping-form.shipping_method')">
                 </span>
             </div>
         </accordian>

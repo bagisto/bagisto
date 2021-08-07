@@ -30,7 +30,7 @@
 
                 <div class="col-12">
                     <input value="{{ $customer->first_name }}" name="first_name" type="text" v-validate="'required'" />
-                    <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
+                    <span class="control-error" v-if="errors.has('first_name')" v-text="errors.first('first_name')"></span>
                 </div>
             </div>
 
@@ -90,7 +90,7 @@
                         <span class="select-icon rango-arrow-down"></span>
                     </div>
 
-                    <span class="control-error" v-if="errors.has('gender')">@{{ errors.first('gender') }}</span>
+                    <span class="control-error" v-if="errors.has('gender')" v-text="errors.first('gender')"></span>
                 </div>
             </div>
 
@@ -109,9 +109,7 @@
                         value="{{ old('date_of_birth') ?? $customer->date_of_birth }}"
                         v-validate="" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.dob') }}&quot;" />
 
-                        <span class="control-error" v-if="errors.has('date_of_birth')">
-                            @{{ errors.first('date_of_birth') }}
-                        </span>
+                        <span class="control-error" v-if="errors.has('date_of_birth')" v-text="errors.first('date_of_birth')"></span>
                 </div>
             </div>
 
@@ -124,7 +122,7 @@
 
                 <div class="col-12">
                     <input value="{{ $customer->email }}" name="email" type="text" v-validate="'required'" />
-                    <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
+                    <span class="control-error" v-if="errors.has('email')" v-text="errors.first('email')"></span>
                 </div>
             </div>
 
@@ -137,7 +135,7 @@
 
                 <div class="col-12">
                     <input value="{{ old('phone') ?? $customer->phone }}" name="phone" type="text"/>
-                    <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
+                    <span class="control-error" v-if="errors.has('phone')" v-text="errors.first('phone')"></span>
                 </div>
             </div>
 
@@ -168,9 +166,7 @@
                         type="password"
                         v-validate="'min:6|max:18'" />
 
-                    <span class="control-error" v-if="errors.has('password')">
-                        @{{ errors.first('password') }}
-                    </span>
+                    <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
                 </div>
             </div>
 
@@ -185,9 +181,7 @@
                     <input value="" name="password_confirmation" type="password"
                     v-validate="'min:6|confirmed:password'" data-vv-as="confirm password" />
 
-                    <span class="control-error" v-if="errors.has('password_confirmation')">
-                        @{{ errors.first('password_confirmation') }}
-                    </span>
+                    <span class="control-error" v-if="errors.has('password_confirmation')" v-text="errors.first('password_confirmation')"></span>
                 </div>
             </div>
 

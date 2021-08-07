@@ -53,9 +53,7 @@
                                 value="{{ old('first_name') }}"
                                 data-vv-as="&quot;{{ __('shop::app.customer.signup-form.firstname') }}&quot;" />
 
-                            <span class="control-error" v-if="errors.has('first_name')">
-                                @{{ errors.first('first_name') }}
-                            </span>
+                            <span class="control-error" v-if="errors.has('first_name')" v-text="errors.first('first_name')"></span>
                         </div>
 
                         {!! view_render_event('bagisto.shop.customers.signup_form_controls.firstname.after') !!}
@@ -73,9 +71,7 @@
                                 value="{{ old('last_name') }}"
                                 data-vv-as="&quot;{{ __('shop::app.customer.signup-form.lastname') }}&quot;" />
 
-                            <span class="control-error" v-if="errors.has('last_name')">
-                                @{{ errors.first('last_name') }}
-                            </span>
+                            <span class="control-error" v-if="errors.has('last_name')" v-text="errors.first('last_name')"></span>
                         </div>
 
                         {!! view_render_event('bagisto.shop.customers.signup_form_controls.lastname.after') !!}
@@ -93,9 +89,7 @@
                                 value="{{ old('email') }}"
                                 data-vv-as="&quot;{{ __('shop::app.customer.signup-form.email') }}&quot;" />
 
-                            <span class="control-error" v-if="errors.has('email')">
-                                @{{ errors.first('email') }}
-                            </span>
+                            <span class="control-error" v-if="errors.has('email')" v-text="errors.first('email')"></span>
                         </div>
 
                         {!! view_render_event('bagisto.shop.customers.signup_form_controls.email.after') !!}
@@ -114,9 +108,7 @@
                                 value="{{ old('password') }}"
                                 data-vv-as="&quot;{{ __('shop::app.customer.signup-form.password') }}&quot;" />
 
-                            <span class="control-error" v-if="errors.has('password')">
-                                @{{ errors.first('password') }}
-                            </span>
+                            <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
                         </div>
 
                         {!! view_render_event('bagisto.shop.customers.signup_form_controls.password.after') !!}
@@ -133,9 +125,7 @@
                                 v-validate="'required|min:6|confirmed:password'"
                                 data-vv-as="&quot;{{ __('shop::app.customer.signup-form.confirm_pass') }}&quot;" />
 
-                            <span class="control-error" v-if="errors.has('password_confirmation')">
-                                @{{ errors.first('password_confirmation') }}
-                            </span>
+                            <span class="control-error" v-if="errors.has('password_confirmation')" v-text="errors.first('password_confirmation')"></span>
                         </div>
 
                         {!! view_render_event('bagisto.shop.customers.signup_form_controls.password_confirmation.after') !!}
