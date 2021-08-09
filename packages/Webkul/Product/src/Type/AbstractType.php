@@ -565,7 +565,7 @@ abstract class AbstractType
      */
     public function getFinalPrice($qty = null)
     {
-        return $this->getMinimalPrice($qty);
+        return round($this->getMinimalPrice($qty), 2);
     }
 
     /**
@@ -825,7 +825,7 @@ abstract class AbstractType
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
         }
 
-        $price = round($this->getFinalPrice(), 2);
+        $price = $this->getFinalPrice();
 
         $products = [
             [

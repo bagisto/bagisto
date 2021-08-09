@@ -350,7 +350,7 @@ class Bundle extends AbstractType
      */
     public function getFinalPrice($qty = null)
     {
-        return 0;
+        return round(0, 2);
     }
 
     /**
