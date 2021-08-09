@@ -49,7 +49,6 @@ $jsURL = $actual_link . '/' . 'js/script.js';
     $installed = false;
 
     if (file_exists($envFile)) {
-
         // reading env content
         $data = file($envFile);
         $databaseArray = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_CONNECTION', 'DB_PORT', 'DB_PREFIX'];
