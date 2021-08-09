@@ -2,16 +2,16 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\Datatypes\CartItemValidationResult;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 
 class Downloadable extends AbstractType
 {
@@ -273,6 +273,8 @@ class Downloadable extends AbstractType
 
             $price += $link->price;
         }
+
+        $price = round($price, 2);
 
         if ($price == $item->base_price) {
             return $result;

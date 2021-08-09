@@ -2,23 +2,23 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Tax\Helpers\Tax;
+use Illuminate\Support\Facades\Storage;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
-use Illuminate\Support\Facades\Storage;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Datatypes\CartItemValidationResult;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Tax\Helpers\Tax;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 abstract class AbstractType
 {
@@ -801,9 +801,11 @@ abstract class AbstractType
      */
     public function evaluatePrice($price)
     {
+        $roundedOffPrice = round($price, 2);
+
         return Tax::isTaxInclusive()
-            ? $this->getTaxInclusiveRate($price)
-            : $price;
+            ? $this->getTaxInclusiveRate($roundedOffPrice)
+            : $roundedOffPrice;
     }
 
     /**
@@ -823,7 +825,7 @@ abstract class AbstractType
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
         }
 
-        $price = $this->getFinalPrice();
+        $price = round($this->getFinalPrice(), 2);
 
         $products = [
             [
@@ -938,7 +940,7 @@ abstract class AbstractType
             return $result;
         }
 
-        $price = $item->product->getTypeInstance()->getFinalPrice($item->quantity);
+        $price = round($item->product->getTypeInstance()->getFinalPrice($item->quantity), 2);
 
         if ($price == $item->base_price) {
             return $result;
