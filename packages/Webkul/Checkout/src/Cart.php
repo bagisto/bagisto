@@ -1069,7 +1069,9 @@ class Cart
         $cart->discount_amount = round($cart->discount_amount, 2);
         $cart->base_discount_amount = round($cart->base_discount_amount, 2);
 
-        $cart->grand_total = round($cart->grand_total, 2);
+        $cart->sub_total = round($cart->sub_total, 2);
+        $cart->base_sub_total = round($cart->base_sub_total, 2);
+
         $cart->grand_total = round($cart->grand_total, 2);
         $cart->base_grand_total = round($cart->base_grand_total, 2);
 
