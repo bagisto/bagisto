@@ -21,7 +21,7 @@
         {!! view_render_event('bagisto.admin.catalog.categories.list.before') !!}
 
         <div class="page-content">
-            {!! app('Webkul\Admin\DataGrids\CategoryDataGrid')->render() !!}
+            <datagrid-plus src="{{ route('admin.catalog.categories.index') }}"></datagrid-plus>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.categories.list.after') !!}
@@ -47,7 +47,7 @@
 
                 var indexes = formData.indexes;
             }
-            
+
             if (indexes) {
                 $.ajax({
                     type : 'POST',
