@@ -17,9 +17,9 @@ about: 'Report a general issue.'
 <!--- Please select the version of bagisto that you are using. -->
 #### Bagisto version
 - [ ] master branch
+- [ ] 1.3.2
 - [ ] 1.3.1
 - [ ] 1.3.0
-- [ ] 1.2.0
 
 ### Steps to reproduce
 <!--- It is important to provide a set of clear steps to reproduce this bug.If relevant please include code samples. -->
