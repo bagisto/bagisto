@@ -640,7 +640,7 @@
                                                       'undefined' &&
                                                   action.function
                                                     ? action.function
-                                                    : doAction($event)
+                                                    : doAction($event, typeof action.confirm_text !== 'undefined' && action.confirm_text ? action.confirm_text : null)
                                                 : {}
                                         "
                                         :data-method="action.method"
@@ -1475,8 +1475,6 @@
                             _method: element.getAttribute("data-method")
                         })
                         .then(function(response) {
-                            this.result = response;
-
                             if (response.data.redirect) {
                                 window.location.href = response.data.redirect;
                             } else {
