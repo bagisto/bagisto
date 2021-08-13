@@ -2,7 +2,6 @@
 
 namespace Webkul\Category\Http\Controllers;
 
-use Webkul\Admin\DataGrids\CategoryDataGrid;
 use Webkul\Core\Models\Channel;
 use Illuminate\Support\Facades\Event;
 use Webkul\Category\Repositories\CategoryRepository;
