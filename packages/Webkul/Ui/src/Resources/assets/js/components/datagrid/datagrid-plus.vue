@@ -640,7 +640,7 @@
                                                       'undefined' &&
                                                   action.function
                                                     ? action.function
-                                                    : doAction($event, typeof action.confirm_text !== 'undefined' && action.confirm_text ? action.confirm_text : null)
+                                                    : doAction($event)
                                                 : {}
                                         "
                                         :data-method="action.method"
