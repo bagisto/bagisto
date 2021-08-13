@@ -2,7 +2,6 @@
 
 namespace Webkul\Admin\Providers;
 
-use Webkul\Admin\Http\Middleware\CategoryIndex;
 use Webkul\Core\Tree;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -34,8 +33,6 @@ class AdminServiceProvider extends ServiceProvider
         $this->registerACL();
 
         $router->aliasMiddleware('admin_locale', Locale::class);
-
-        $router->aliasMiddleware('category_index', CategoryIndex::class);
 
         $this->app->register(EventServiceProvider::class);
     }

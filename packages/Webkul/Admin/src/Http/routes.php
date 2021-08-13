@@ -336,11 +336,9 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 ])->name('admin.catalog.products.file.download');
 
                 // Catalog Category Routes
-                Route::middleware([\Webkul\Admin\Http\Middleware\CategoryIndex::class])->group(function() {
-                    Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
-                        'view' => 'admin::catalog.categories.index',
-                    ])->name('admin.catalog.categories.index');
-                });
+                Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
+                    'view' => 'admin::catalog.categories.index',
+                ])->name('admin.catalog.categories.index');
 
                 Route::get('/categories/create', 'Webkul\Category\Http\Controllers\CategoryController@create')->defaults('_config', [
                     'view' => 'admin::catalog.categories.create',
