@@ -21,7 +21,8 @@
         {!! view_render_event('bagisto.admin.catalog.categories.list.before') !!}
 
         <div class="page-content">
-            <datagrid-plus src="{{ route('admin.catalog.categories.index') }}"></datagrid-plus>
+            @inject('products', 'Webkul\Admin\DataGrids\CategoryDataGrid')
+            {!! $products->render() !!}
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.categories.list.after') !!}
@@ -30,6 +31,13 @@
 
 @push('scripts')
     <script>
+        function reloadPage(getVar, getVal) {
+            let url = new URL(window.location.href);
+            url.searchParams.set(getVar, getVal);
+
+            window.location.href = url.href;
+        }
+
         $(document).ready(function(){
             $("input[type='checkbox']").change(deleteFunction);
         });
