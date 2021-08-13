@@ -9,7 +9,6 @@ use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class CategoryDataGrid extends DataGrid
 {
-    use ProvideDataGridPlus;
 
     protected $index = 'category_id';
 
