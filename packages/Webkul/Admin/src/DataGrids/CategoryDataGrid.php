@@ -9,7 +9,6 @@ use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class CategoryDataGrid extends DataGrid
 {
-
     protected $index = 'category_id';
 
     protected $sortOrder = 'desc';
@@ -29,7 +28,6 @@ class CategoryDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-
         if ($this->locale === 'all') {
             $whereInLocales = Locale::query()->pluck('code')->toArray();
         } else {
