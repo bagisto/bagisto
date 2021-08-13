@@ -12,10 +12,6 @@ class CategoryDataGrid extends DataGrid
 
     protected $sortOrder = 'desc';
 
-    protected $extraFilters = [
-        'locales'
-    ];
-
     protected $locale = 'all';
 
     public function __construct()

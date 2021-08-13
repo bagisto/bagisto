@@ -1,3 +1,5 @@
+@php( $locale = core()->getRequestedLocaleCode())
+
 @extends('admin::layouts.content')
 
 @section('page_title')
@@ -15,6 +17,20 @@
                 <a href="{{ route('admin.catalog.categories.create') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.catalog.categories.add-title') }}
                 </a>
+            </div>
+            <div class="control-group">
+                <select class="control" id="locale-switcher" name="locale"
+                        onchange="reloadPage('locale', this.value)">
+                    <option value="all" {{ ! isset($locale) ? 'selected' : '' }}>
+                        {{ __('admin::app.admin.system.all-locales') }}
+                    </option>
+                    @foreach (core()->getAllLocales() as $localeModel)
+                        <option
+                            value="{{ $localeModel->code }}" {{ (isset($locale) && ($localeModel->code) == $locale) ? 'selected' : '' }}>
+                            {{ $localeModel->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
         </div>
 
