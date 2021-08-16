@@ -203,7 +203,7 @@ class DashboardController extends Controller
      */
     public function getPercentageChange($previous, $current)
     {
-        if (!$previous) {
+        if (! $previous) {
             return $current ? 100 : 0;
         }
 
