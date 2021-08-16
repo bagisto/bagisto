@@ -138,6 +138,7 @@ return [
         'total-orders' => 'مجموع الطلبات',
         'total-sale' => 'مجموع المبيعات',
         'average-sale' => 'متوسط مبيعات الطلبات',
+        'total-unpaid-invoices' => 'إجمالي الفواتير غير المسددة',
         'increased' => ':progress% زيادة',
         'decreased' => ':progress% نقصان',
         'sales' => 'المبيعات',

@@ -138,6 +138,7 @@ return [
         'total-orders' => 'همه سفارشات',
         'total-sale' => 'مجموع فروش',
         'average-sale' => 'میانگین فروش',
+        'total-unpaid-invoices' => 'مجموع فاکتورهای پرداخت نشده',
         'increased' => ':progress%',
         'decreased' => ':progress%',
         'sales' => 'فروش ها',

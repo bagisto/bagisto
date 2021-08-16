@@ -137,6 +137,7 @@ return [
         'total-orders' => 'Total de Pedidos',
         'total-sale' => 'Total de Vendas',
         'average-sale' => 'Média por Pedido',
+        'total-unpaid-invoices' => 'Total de faturas não pagas',
         'increased' => ':progress% AumentoMai',
         'decreased' => ':progress% Redução',
         'sales' => 'Vendas',
