@@ -1,4 +1,4 @@
-@php( $locale = core()->getRequestedLocaleCode())
+@php($locale = core()->getRequestedLocaleCode())
 
 @extends('admin::layouts.content')
 
