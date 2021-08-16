@@ -20,63 +20,63 @@ class DashboardController extends Controller
     protected $_config;
 
     /**
-     * OrderRepository object
+     * Order repository instance.
      *
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
-     * OrderItemRepository object
+     * Order item repository instance.
      *
      * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
-     * InvoiceRepository object
+     * Invoice repository instance.
      *
      * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
     protected $invoiceRepository;
 
     /**
-     * CustomerRepository object
+     * Customer repository instance.
      *
      * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
-     * ProductInventoryRepository object
+     * Product inventory repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductInventoryRepository
      */
     protected $productInventoryRepository;
 
     /**
-     * string object
+     * Start date.
      *
      * @var \Illuminate\Support\Carbon
      */
     protected $startDate;
 
     /**
-     * string object
+     * Last start date.
      *
      * @var \Illuminate\Support\Carbon
      */
     protected $lastStartDate;
 
     /**
-     * string object
+     * End date.
      *
      * @var \Illuminate\Support\Carbon
      */
     protected $endDate;
 
     /**
-     * string object
+     * Last end date.
      *
      * @var \Illuminate\Support\Carbon
      */
@@ -97,8 +97,7 @@ class DashboardController extends Controller
         InvoiceRepository $invoiceRepository,
         CustomerRepository $customerRepository,
         ProductInventoryRepository $productInventoryRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
 
         $this->middleware('admin');
@@ -115,22 +114,6 @@ class DashboardController extends Controller
     }
 
     /**
-     * Returns percentage difference
-     *
-     * @param  int  $previous
-     * @param  int  $current
-     * @return int
-     */
-    public function getPercentageChange($previous, $current)
-    {
-        if (! $previous) {
-            return $current ? 100 : 0;
-        }
-
-        return ($current - $previous) / $previous * 100;
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
@@ -140,9 +123,12 @@ class DashboardController extends Controller
         $this->setStartEndDate();
 
         $statistics = [
+            /**
+             * These are the stats with percentage change.
+             */
             'total_customers'          => [
-                'previous' => $previous = $this->getCustomersBetweenDates($this->lastStartDate, $this->lastEndDate)->count(),
-                'current'  => $current = $this->getCustomersBetweenDates($this->startDate, $this->endDate)->count(),
+                'previous' => $previous = $this->getCustomersBetweenDates($this->lastStartDate, $this->lastEndDate),
+                'current'  => $current = $this->getCustomersBetweenDates($this->startDate, $this->endDate),
                 'progress' => $this->getPercentageChange($previous, $current),
             ],
             'total_orders'             =>  [
@@ -160,11 +146,11 @@ class DashboardController extends Controller
                 'current'  => $current = $this->currentOrders()->avg('base_grand_total_invoiced') - $this->currentOrders()->avg('base_grand_total_refunded'),
                 'progress' => $this->getPercentageChange($previous, $current),
             ],
-            'total_unpaid_invoices'   => [
-                'previous' => $previous = $this->getPendingInvoicesBetweenDate($this->lastStartDate, $this->lastEndDate),
-                'current'  => $current = $this->getPendingInvoicesBetweenDate($this->startDate, $this->endDate),
-                'progress' => $this->getPercentageChange($previous, $current),
-            ],
+
+            /**
+             * These are the normal stats.
+             */
+            'total_unpaid_invoices'    => $this->getTotalPendingInvoices(),
             'top_selling_categories'   => $this->getTopSellingCategories(),
             'top_selling_products'     => $this->getTopSellingProducts(),
             'customer_with_most_sales' => $this->getCustomerWithMostSales(),
@@ -184,92 +170,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Returns the list of top selling categories
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getTopSellingCategories()
-    {
-        return $this->orderItemRepository->getModel()
-                    ->leftJoin('products', 'order_items.product_id', 'products.id')
-                    ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
-                    ->leftJoin('categories', 'product_categories.category_id', 'categories.id')
-                    ->leftJoin('category_translations', 'categories.id', 'category_translations.category_id')
-                    ->where('category_translations.locale', app()->getLocale())
-                    ->where('order_items.created_at', '>=', $this->startDate)
-                    ->where('order_items.created_at', '<=', $this->endDate)
-                    ->addSelect(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
-                    ->addSelect(DB::raw('COUNT(' . DB::getTablePrefix() . 'products.id) as total_products'))
-                    ->addSelect('order_items.id', 'categories.id as category_id', 'category_translations.name')
-                    ->groupBy('categories.id')
-                    ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
-                    ->orderBy('total_qty_invoiced', 'DESC')
-                    ->limit(5)
-                    ->get();
-    }
-
-    /**
-     * Return stock threshold.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getStockThreshold()
-    {
-        return $this->productInventoryRepository->getModel()
-                    ->leftJoin('products', 'product_inventories.product_id', 'products.id')
-                    ->select(DB::raw('SUM(qty) as total_qty'))
-                    ->addSelect('product_inventories.product_id')
-                    ->groupBy('product_id')
-                    ->orderBy('total_qty', 'ASC')
-                    ->limit(5)
-                    ->get();
-    }
-
-    /**
-     * Returns top selling products
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getTopSellingProducts()
-    {
-        return $this->orderItemRepository->getModel()
-                    ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
-                    ->addSelect('id', 'product_id', 'product_type', 'name')
-                    ->where('order_items.created_at', '>=', $this->startDate)
-                    ->where('order_items.created_at', '<=', $this->endDate)
-                    ->whereNull('parent_id')
-                    ->groupBy('product_id')
-                    ->orderBy('total_qty_ordered', 'DESC')
-                    ->limit(5)
-                    ->get();
-    }
-
-    /**
-     * Returns top selling products
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getCustomerWithMostSales()
-    {
-        $dbPrefix = DB::getTablePrefix();
-
-        return $this->orderRepository->getModel()
-                    ->leftJoin('refunds', 'orders.id', 'refunds.order_id')
-                    ->select(DB::raw("(SUM({$dbPrefix}orders.base_grand_total) - SUM(IFNULL({$dbPrefix}refunds.base_grand_total, 0))) as total_base_grand_total"))
-                    ->addSelect(DB::raw("COUNT({$dbPrefix}orders.id) as total_orders"))
-                    ->addSelect('orders.id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
-                    ->where('orders.created_at', '>=', $this->startDate)
-                    ->where('orders.created_at', '<=', $this->endDate)
-                    ->where('orders.status', '<>', 'closed')
-                    ->where('orders.status', '<>', 'canceled')
-                    ->groupBy('customer_email')
-                    ->orderBy('total_base_grand_total', 'DESC')
-                    ->limit(5)
-                    ->get();
-    }
-
-    /**
-     * Sets start and end date
+     * Sets start and end date.
      *
      * @return void
      */
@@ -294,7 +195,108 @@ class DashboardController extends Controller
     }
 
     /**
-     * Returns previous order query
+     * Returns percentage difference
+     *
+     * @param  int  $previous
+     * @param  int  $current
+     * @return int
+     */
+    public function getPercentageChange($previous, $current)
+    {
+        if (!$previous) {
+            return $current ? 100 : 0;
+        }
+
+        return ($current - $previous) / $previous * 100;
+    }
+
+    /**
+     * Returns the list of top selling categories.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getTopSellingCategories()
+    {
+        return $this->orderItemRepository->getModel()
+            ->leftJoin('products', 'order_items.product_id', 'products.id')
+            ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
+            ->leftJoin('categories', 'product_categories.category_id', 'categories.id')
+            ->leftJoin('category_translations', 'categories.id', 'category_translations.category_id')
+            ->where('category_translations.locale', app()->getLocale())
+            ->where('order_items.created_at', '>=', $this->startDate)
+            ->where('order_items.created_at', '<=', $this->endDate)
+            ->addSelect(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
+            ->addSelect(DB::raw('COUNT(' . DB::getTablePrefix() . 'products.id) as total_products'))
+            ->addSelect('order_items.id', 'categories.id as category_id', 'category_translations.name')
+            ->groupBy('categories.id')
+            ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
+            ->orderBy('total_qty_invoiced', 'DESC')
+            ->limit(5)
+            ->get();
+    }
+
+    /**
+     * Return stock threshold.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getStockThreshold()
+    {
+        return $this->productInventoryRepository->getModel()
+            ->leftJoin('products', 'product_inventories.product_id', 'products.id')
+            ->select(DB::raw('SUM(qty) as total_qty'))
+            ->addSelect('product_inventories.product_id')
+            ->groupBy('product_id')
+            ->orderBy('total_qty', 'ASC')
+            ->limit(5)
+            ->get();
+    }
+
+    /**
+     * Returns top selling products.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getTopSellingProducts()
+    {
+        return $this->orderItemRepository->getModel()
+            ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+            ->addSelect('id', 'product_id', 'product_type', 'name')
+            ->where('order_items.created_at', '>=', $this->startDate)
+            ->where('order_items.created_at', '<=', $this->endDate)
+            ->whereNull('parent_id')
+            ->groupBy('product_id')
+            ->orderBy('total_qty_ordered', 'DESC')
+            ->limit(5)
+            ->get();
+    }
+
+    /**
+     * Returns cutomer with most sales.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getCustomerWithMostSales()
+    {
+        $dbPrefix = DB::getTablePrefix();
+
+        return $this->orderRepository->getModel()
+            ->leftJoin('refunds', 'orders.id', 'refunds.order_id')
+            ->select(DB::raw("(SUM({$dbPrefix}orders.base_grand_total) - SUM(IFNULL({$dbPrefix}refunds.base_grand_total, 0))) as total_base_grand_total"))
+            ->addSelect(DB::raw("COUNT({$dbPrefix}orders.id) as total_orders"))
+            ->addSelect('orders.id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
+            ->where('orders.created_at', '>=', $this->startDate)
+            ->where('orders.created_at', '<=', $this->endDate)
+            ->where('orders.status', '<>', 'closed')
+            ->where('orders.status', '<>', 'canceled')
+            ->groupBy('customer_email')
+            ->orderBy('total_base_grand_total', 'DESC')
+            ->limit(5)
+            ->get();
+    }
+
+    /**
+     * Returns previous order query.
      *
      * @return Illuminate\Database\Query\Builder
      */
@@ -304,7 +306,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Returns current order query
+     * Returns current order query.
      *
      * @return Illuminate\Database\Query\Builder
      */
@@ -313,17 +315,8 @@ class DashboardController extends Controller
         return $this->getOrdersBetweenDate($this->startDate, $this->endDate);
     }
 
-    private function getPendingInvoicesBetweenDate($start, $end)
-    {
-        return $this->invoiceRepository
-            ->where('invoices.created_at', '>=', $start)
-            ->where('invoices.created_at', '<=', $end)
-            ->where('state', 'pending')
-            ->sum('grand_total');
-    }
-
     /**
-     * Returns orders between two dates
+     * Returns orders between two dates.
      *
      * @param  \Illuminate\Support\Carbon  $start
      * @param  \Illuminate\Support\Carbon  $end
@@ -337,16 +330,31 @@ class DashboardController extends Controller
     }
 
     /**
-     * Returns customers between two dates
+     * Returns customers between two dates.
      *
      * @param  \Illuminate\Support\Carbon  $start
      * @param  \Illuminate\Support\Carbon  $end
-     * @return Illuminate\Database\Query\Builder
+     * @return int
      */
     private function getCustomersBetweenDates($start, $end)
     {
-        return $this->customerRepository->scopeQuery(function ($query) use ($start, $end) {
-            return $query->where('customers.created_at', '>=', $start)->where('customers.created_at', '<=', $end);
-        });
+        return $this->customerRepository
+            ->where('customers.created_at', '>=', $start)
+            ->where('customers.created_at', '<=', $end)
+            ->count();
+    }
+
+    /**
+     * Returns total pending invoices between two dates.
+     *
+     * @param  \Illuminate\Support\Carbon  $start
+     * @param  \Illuminate\Support\Carbon  $end
+     * @return string
+     */
+    private function getTotalPendingInvoices()
+    {
+        return $this->invoiceRepository
+            ->where('state', 'pending')
+            ->sum('grand_total');
     }
 }
