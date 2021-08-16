@@ -144,6 +144,7 @@ return [
         'total-orders' => 'Total Pedidos',
         'total-sale' => 'Total Ventas',
         'average-sale' => 'Promedio de pedidos vendidos',
+        'total-unpaid-invoices' => 'Facturas impagas totales',
         'increased' => ':progress%',
         'decreased' => ':progress%',
         'sales' => 'Ventas',

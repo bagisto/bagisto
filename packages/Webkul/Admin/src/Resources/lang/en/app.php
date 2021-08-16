@@ -144,6 +144,7 @@ return [
         'total-orders'              => 'Total Orders',
         'total-sale'                => 'Total Sale',
         'average-sale'              => 'Average Order Sale',
+        'total-unpaid-invoices'     => 'Total Unpaid Invoices',
         'increased'                 => ':progress%',
         'decreased'                 => ':progress%',
         'sales'                     => 'Sales',

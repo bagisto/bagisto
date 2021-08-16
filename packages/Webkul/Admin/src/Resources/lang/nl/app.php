@@ -137,6 +137,7 @@ return [
         'total-orders' => 'Totaal aantal bestellingen',
         'total-sale' => 'Verkooptotaal',
         'average-sale' => 'Gemiddelde orderwaarde',
+        'total-unpaid-invoices' => 'Totaal onbetaalde facturen',
         'increased' => ':progress%',
         'decreased' => ':progress%',
         'sales' => 'Verkopen',

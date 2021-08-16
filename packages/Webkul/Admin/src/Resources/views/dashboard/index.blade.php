@@ -125,6 +125,16 @@
                     </div>
                 </div>
 
+                <div class="dashboard-card">
+                    <div class="title">
+                        {{ __('admin::app.dashboard.total-unpaid-invoices') }}
+                    </div>
+
+                    <div class="data">
+                        {{ core()->formatBasePrice($statistics['total_unpaid_invoices']) }}
+                    </div>
+                </div>
+
             </div>
 
             <div class="graph-stats">

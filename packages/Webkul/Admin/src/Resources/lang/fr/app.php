@@ -144,6 +144,7 @@ return [
         'total-orders' => 'Total des commandes',
         'total-sale' => 'Vente totale',
         'average-sale' => 'Vente de commande moyenne',
+        'total-unpaid-invoices' => 'Total des factures impayées',
         'increased' => ':progress%',
         'decreased' => ':progress%',
         'sales' => 'Ventes',
@@ -166,7 +167,7 @@ return [
             'update-success' => 'Sélectionné :resource a été mise à jour avec succès',
             'no-resource' => 'La ressource prévue est insuffisante pour l\'action',
         ],
-        
+
         'id' => 'identifiant',
         'status' => 'Statut',
         'code' => 'Code',
