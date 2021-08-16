@@ -2,12 +2,13 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\OrderItemRepository;
+use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class DashboardController extends Controller
 {
@@ -31,6 +32,13 @@ class DashboardController extends Controller
      * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
+
+    /**
+     * InvoiceRepository object
+     *
+     * @var \Webkul\Sales\Repositories\InvoiceRepository
+     */
+    protected $invoiceRepository;
 
     /**
      * CustomerRepository object
@@ -86,6 +94,7 @@ class DashboardController extends Controller
     public function __construct(
         OrderRepository $orderRepository,
         OrderItemRepository $orderItemRepository,
+        InvoiceRepository $invoiceRepository,
         CustomerRepository $customerRepository,
         ProductInventoryRepository $productInventoryRepository
     )
@@ -97,6 +106,8 @@ class DashboardController extends Controller
         $this->orderRepository = $orderRepository;
 
         $this->orderItemRepository = $orderItemRepository;
+
+        $this->invoiceRepository = $invoiceRepository;
 
         $this->customerRepository = $customerRepository;
 
@@ -147,6 +158,11 @@ class DashboardController extends Controller
             'avg_sales'                =>  [
                 'previous' => $previous = $this->previousOrders()->avg('base_grand_total_invoiced') - $this->previousOrders()->avg('base_grand_total_refunded'),
                 'current'  => $current = $this->currentOrders()->avg('base_grand_total_invoiced') - $this->currentOrders()->avg('base_grand_total_refunded'),
+                'progress' => $this->getPercentageChange($previous, $current),
+            ],
+            'total_unpaid_invoices'   => [
+                'previous' => $previous = $this->getPendingInvoicesBetweenDate($this->lastStartDate, $this->lastEndDate),
+                'current'  => $current = $this->getPendingInvoicesBetweenDate($this->startDate, $this->endDate),
                 'progress' => $this->getPercentageChange($previous, $current),
             ],
             'top_selling_categories'   => $this->getTopSellingCategories(),
@@ -260,12 +276,12 @@ class DashboardController extends Controller
     public function setStartEndDate()
     {
         $this->startDate = request()->get('start')
-                           ? Carbon::createFromTimeString(request()->get('start') . " 00:00:01")
-                           : Carbon::createFromTimeString(Carbon::now()->subDays(30)->format('Y-m-d') . " 00:00:01");
+            ? Carbon::createFromTimeString(request()->get('start') . " 00:00:01")
+            : Carbon::createFromTimeString(Carbon::now()->subDays(30)->format('Y-m-d') . " 00:00:01");
 
         $this->endDate = request()->get('end')
-                         ? Carbon::createFromTimeString(request()->get('end') . " 23:59:59")
-                         : Carbon::now();
+            ? Carbon::createFromTimeString(request()->get('end') . " 23:59:59")
+            : Carbon::now();
 
         if ($this->endDate > Carbon::now()) {
             $this->endDate = Carbon::now();
@@ -275,7 +291,6 @@ class DashboardController extends Controller
         $this->lastEndDate = clone $this->startDate;
 
         $this->lastStartDate->subDays($this->startDate->diffInDays($this->endDate));
-        // $this->lastEndDate->subDays($this->lastStartDate->diffInDays($this->lastEndDate));
     }
 
     /**
@@ -296,6 +311,15 @@ class DashboardController extends Controller
     private function currentOrders()
     {
         return $this->getOrdersBetweenDate($this->startDate, $this->endDate);
+    }
+
+    private function getPendingInvoicesBetweenDate($start, $end)
+    {
+        return $this->invoiceRepository
+            ->where('invoices.created_at', '>=', $start)
+            ->where('invoices.created_at', '<=', $end)
+            ->where('state', 'pending')
+            ->sum('grand_total');
     }
 
     /**

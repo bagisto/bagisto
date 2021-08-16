@@ -125,6 +125,32 @@
                     </div>
                 </div>
 
+                <div class="dashboard-card">
+                    <div class="title">
+                        {{ __('admin::app.dashboard.total-unpaid-invoices') }}
+                    </div>
+
+                    <div class="data">
+                        {{ core()->formatBasePrice($statistics['total_unpaid_invoices']['current']) }}
+
+                        <span class="progress">
+                            @if ($statistics['total_unpaid_invoices']['progress'] < 0)
+                                <span class="icon graph-down-icon"></span>
+                                {{ __('admin::app.dashboard.decreased', [
+                                        'progress' => -number_format($statistics['total_unpaid_invoices']['progress'], 1)
+                                    ])
+                                }}
+                            @else
+                                <span class="icon graph-up-icon"></span>
+                                {{ __('admin::app.dashboard.increased', [
+                                        'progress' => number_format($statistics['total_unpaid_invoices']['progress'], 1)
+                                    ])
+                                }}
+                            @endif
+                        </span>
+                    </div>
+                </div>
+
             </div>
 
             <div class="graph-stats">
