@@ -300,7 +300,10 @@ return [
         'wishlist' => [
             'add-wishlist-text' => 'محصول را به لیست دلخواه اضافه کنید',
             'remove-wishlist-text' => 'محصول را از لیست دلخواه حذف کنید'
-        ]
+        ],
+        'overlay-loader' => [
+            'message' => 'در حال پیش رفت',
+        ],
     ],
 
     'responsive' => [
