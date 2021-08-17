@@ -150,7 +150,7 @@ return [
         'order-count' => 'سفارش :count',
         'revenue' => ':total درآمد',
         'stock-threshold' => 'تعداد کالای موجود',
-        'qty-left' => ':qty  سمت چپ',
+        'qty-left' => ':qty  باقی مانده',
     ],
 
     'datagrid' => [
@@ -575,12 +575,12 @@ return [
             'multiselect' => 'Multiselect',
             'new-option' => 'New Option',
             'is-default' => 'Is Default',
-            'remove-image-btn-title' => 'Remove Image',
-            'videos' => 'Videos',
-            'video' => 'Video',
-            'add-video-btn-title' => 'Add Video',
-            'remove-video-btn-title' => 'Remove Video',
-            'not-support-video' => 'Your browser does not support the video tag.',
+            'remove-image-btn-title' => 'حذف عکس',
+            'videos' => 'فیلم ها',
+            'video' => 'فیلم',
+            'add-video-btn-title' => 'اضافه کردن فیلم',
+            'remove-video-btn-title' => 'حذف فیلم',
+            'not-support-video' => 'مرورگر شما تگ ویدیو را پشتیبانی نمی کند',
         ],
 
         'attributes' => [
@@ -593,7 +593,7 @@ return [
             'type' => 'نوع ویژگی',
             'text' => 'Text',
             'textarea' => 'Textarea',
-            'price' => 'Price',
+            'price' => 'قیمت',
             'boolean' => 'Boolean',
             'select' => 'Select',
             'multiselect' => 'Multiselect',
