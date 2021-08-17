@@ -322,6 +322,10 @@ return [
             'add-wishlist-text' => 'Ajouter un produit à la liste de souhaits',
             'remove-wishlist-text' => 'Supprimer le produit de la liste de souhaits',
         ],
+
+        'overlay-loader' => [
+            'message' => 'En cours',
+        ],
     ],
 
     'responsive' => [

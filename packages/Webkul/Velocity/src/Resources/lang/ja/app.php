@@ -299,7 +299,10 @@ return [
         'wishlist'  => [
             'add-wishlist-text'     => '製品をウィッシュリストに追加',
             'remove-wishlist-text'  => 'ウィッシュリストから商品を削除',
-        ]
+        ],
+        'overlay-loader' => [
+            'message' => '進行中',
+        ],
     ],
 
     'responsive'  => [
