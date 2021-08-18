@@ -31,7 +31,7 @@
                     </a>
                 @endif
 
-                @if ($order->canInvoice())
+                @if ($order->canInvoice() && $order->payment->method !== 'paypal_standard')
                     <a href="{{ route('admin.sales.invoices.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.invoice-btn-title') }}
                     </a>
