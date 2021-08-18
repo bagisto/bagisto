@@ -77,10 +77,10 @@ return [
         'marketing' => 'بازاریابی',
         'promotions' => 'تبلیغات',
         'email-marketing' => 'بازاریابی ایمیل',
-        'campaigns' => 'Campaigns',
+        'campaigns' => 'کمپین ها',
         'email-templates' => 'قالب های ایمیل',
         'discount' => 'تخفیف',
-        'cms' => 'CMS',
+        'cms' => 'مدیری محتوا',
         'transactions' => 'پرداختی ها',
         'events' => 'رویداد ها'
     ],
@@ -100,7 +100,7 @@ return [
         'attributes' => 'ویژگی ها',
         'attribute-families' => 'نوع ویژگی',
         'customers' => 'مشتریان',
-        'addresses' => 'Addresses',
+        'addresses' => 'آدرس ها',
         'note' => 'Note',
         'groups' => 'گروه ها',
         'reviews' => 'بررسی ها',
@@ -122,8 +122,8 @@ return [
         'edit' => 'ویاریش',
         'create' => 'افزودن',
         'delete' => 'حذف',
-        'mass-delete' => 'Mass Delete',
-        'mass-update' => 'Mass Update',
+        'mass-delete' => 'حذف دسته ای',
+        'mass-update' => 'آپدیت دسته ای',
         'marketing' => 'بازاریابی',
         'promotions' => 'تبلیغات',
         'cart-rules' => 'قوانین سبد خرید',
@@ -150,7 +150,7 @@ return [
         'order-count' => 'سفارش :count',
         'revenue' => ':total درآمد',
         'stock-threshold' => 'تعداد کالای موجود',
-        'qty-left' => ':qty  سمت چپ',
+        'qty-left' => ':qty  باقی مانده',
     ],
 
     'datagrid' => [
@@ -575,12 +575,12 @@ return [
             'multiselect' => 'Multiselect',
             'new-option' => 'New Option',
             'is-default' => 'Is Default',
-            'remove-image-btn-title' => 'Remove Image',
-            'videos' => 'Videos',
-            'video' => 'Video',
-            'add-video-btn-title' => 'Add Video',
-            'remove-video-btn-title' => 'Remove Video',
-            'not-support-video' => 'Your browser does not support the video tag.',
+            'remove-image-btn-title' => 'حذف عکس',
+            'videos' => 'فیلم ها',
+            'video' => 'فیلم',
+            'add-video-btn-title' => 'اضافه کردن فیلم',
+            'remove-video-btn-title' => 'حذف فیلم',
+            'not-support-video' => 'مرورگر شما تگ ویدیو را پشتیبانی نمی کند',
         ],
 
         'attributes' => [
@@ -593,7 +593,7 @@ return [
             'type' => 'نوع ویژگی',
             'text' => 'Text',
             'textarea' => 'Textarea',
-            'price' => 'Price',
+            'price' => 'قیمت',
             'boolean' => 'Boolean',
             'select' => 'Select',
             'multiselect' => 'Multiselect',
@@ -1032,6 +1032,11 @@ return [
             'update-failed' => 'خطا! شما نمی توانید مشترک مشترک شوید',
             'delete' => 'مشترک با موفقیت حذف شد',
             'delete-failed' => 'خطا! مشترک نمی تواند حذف شود'
+        ],
+
+        'orders' => [
+            'list'  => ':customer_name\'s orders List',
+            'title' => 'سفارشات'
         ]
     ],
 
@@ -1069,7 +1074,7 @@ return [
             'choose-condition-to-add' => 'شرطی را برای اضافه کردن انتخاب کنید',
             'cart-attribute' => 'ویژگی سبد خرید',
             'subtotal' => 'جمع جز',
-            'additional' => 'Additional Information',
+            'additional' => 'اطلاعات تکمیلی',
             'total-items-qty' => 'تعداد کل موارد',
             'total-weight' => 'وزن کل',
             'payment-method' => 'روش پرداخت',
@@ -1123,7 +1128,7 @@ return [
         ],
 
         'catalog-rules' => [
-            'title' => 'قوانین فهرست',
+            'title' => 'قوانین کاتالوگ',
             'add-title' => 'اضافه کردن قانون جدید',
             'edit-title' => 'تنظیم قانون کاتالوگ',
             'save-btn-title' => 'ذخیره قانون کاتالوگ',
