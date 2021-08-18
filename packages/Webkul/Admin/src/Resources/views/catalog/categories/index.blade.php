@@ -1,3 +1,5 @@
+@php($locale = core()->getRequestedLocaleCode())
+
 @extends('admin::layouts.content')
 
 @section('page_title')
@@ -16,12 +18,27 @@
                     {{ __('admin::app.catalog.categories.add-title') }}
                 </a>
             </div>
+            <div class="control-group">
+                <select class="control" id="locale-switcher" name="locale"
+                        onchange="reloadPage('locale', this.value)">
+                    <option value="all" {{ ! isset($locale) ? 'selected' : '' }}>
+                        {{ __('admin::app.admin.system.all-locales') }}
+                    </option>
+                    @foreach (core()->getAllLocales() as $localeModel)
+                        <option
+                            value="{{ $localeModel->code }}" {{ (isset($locale) && ($localeModel->code) == $locale) ? 'selected' : '' }}>
+                            {{ $localeModel->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.categories.list.before') !!}
 
         <div class="page-content">
-            {!! app('Webkul\Admin\DataGrids\CategoryDataGrid')->render() !!}
+            @inject('categories', 'Webkul\Admin\DataGrids\CategoryDataGrid')
+            {!! $categories->render() !!}
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.categories.list.after') !!}
@@ -30,6 +47,13 @@
 
 @push('scripts')
     <script>
+        function reloadPage(getVar, getVal) {
+            let url = new URL(window.location.href);
+            url.searchParams.set(getVar, getVal);
+
+            window.location.href = url.href;
+        }
+
         $(document).ready(function(){
             $("input[type='checkbox']").change(deleteFunction);
         });
@@ -47,7 +71,7 @@
 
                 var indexes = formData.indexes;
             }
-            
+
             if (indexes) {
                 $.ajax({
                     type : 'POST',

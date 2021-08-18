@@ -3,6 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\Locale;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class CategoryDataGrid extends DataGrid
@@ -11,17 +12,32 @@ class CategoryDataGrid extends DataGrid
 
     protected $sortOrder = 'desc';
 
+    protected $locale = 'all';
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->locale = core()->getRequestedLocaleCode();
+    }
+
     public function prepareQueryBuilder()
     {
+        if ($this->locale === 'all') {
+            $whereInLocales = Locale::query()->pluck('code')->toArray();
+        } else {
+            $whereInLocales = [$this->locale];
+        }
+
         $queryBuilder = DB::table('categories as cat')
             ->select('cat.id as category_id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale',
             DB::raw('COUNT(DISTINCT ' . DB::getTablePrefix() . 'pc.product_id) as count'))
-            ->leftJoin('category_translations as ct', function($leftJoin) {
+            ->leftJoin('category_translations as ct', function($leftJoin) use($whereInLocales) {
                 $leftJoin->on('cat.id', '=', 'ct.category_id')
-                         ->where('ct.locale', app()->getLocale());
+                         ->whereIn('ct.locale', $whereInLocales);
             })
             ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
-            ->groupBy('cat.id');
+            ->groupBy('cat.id', 'ct.locale',);
 
 
         $this->addFilter('status', 'cat.status');
