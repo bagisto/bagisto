@@ -1,5 +1,13 @@
+/**
+ * Main imports.
+ */
 import Vue from 'vue';
-import VeeValidate, { Validator } from 'vee-validate';
+import VeeValidate from 'vee-validate';
+import './bootstrap';
+
+/**
+ * Lang imports.
+ */
 import de from 'vee-validate/dist/locale/de';
 import ar from 'vee-validate/dist/locale/ar';
 import fa from 'vee-validate/dist/locale/fa';
@@ -7,39 +15,50 @@ import fr from 'vee-validate/dist/locale/fr';
 import nl from 'vee-validate/dist/locale/nl';
 import tr from 'vee-validate/dist/locale/tr';
 
-
-import './bootstrap';
-
-window.Vue = Vue;
-window.VeeValidate = VeeValidate;
-
+/**
+ * Vue plugins.
+ */
 Vue.use(VeeValidate, {
     dictionary: {
         ar: ar,
         de: de,
-		fa: fa,
-		fr: fr,
-		nl: nl,
-		tr: tr,
+        fa: fa,
+        fr: fr,
+        nl: nl,
+        tr: tr
     },
-    events: 'input|change|blur',
+    events: 'input|change|blur'
 });
-Vue.prototype.$http = axios
 
-Vue.component('nav-slide-button', require('./components/navigation/nav-slide-button').default);
-Vue.component('required-if', require('./components/validators/required-if').default);
+/**
+ * Vue prototype.
+ */
+Vue.prototype.$http = axios;
 
+/**
+ * Window assignation.
+ */
+window.Vue = Vue;
 window.eventBus = new Vue();
+window.VeeValidate = VeeValidate;
 
-$(document).ready(function () {
-    Vue.config.ignoredElements = [
-        'option-wrapper',
-        'group-form',
-        'group-list'
-    ];
+/**
+ * Global components.
+ */
+Vue.component(
+    'nav-slide-button',
+    require('./components/navigation/nav-slide-button').default
+);
+Vue.component(
+    'required-if',
+    require('./components/validators/required-if').default
+);
 
-    var app = new Vue({
-        el: "#app",
+$(function() {
+    Vue.config.ignoredElements = ['option-wrapper', 'group-form', 'group-list'];
+
+    let app = new Vue({
+        el: '#app',
 
         data: {
             modalIds: {}
@@ -47,54 +66,93 @@ $(document).ready(function () {
 
         mounted() {
             this.addServerErrors();
+
             this.addFlashMessages();
 
             this.$validator.localize(document.documentElement.lang);
         },
 
         methods: {
-            onSubmit: function (e) {
+            onSubmit: function(e) {
                 this.toggleButtonDisable(true);
 
-                if(typeof tinyMCE !== 'undefined')
-                    tinyMCE.triggerSave();
+                if (typeof tinyMCE !== 'undefined') tinyMCE.triggerSave();
 
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         e.target.submit();
                     } else {
+                        this.activateAutoScroll();
+
                         this.toggleButtonDisable(false);
 
-                        eventBus.$emit('onFormError')
+                        eventBus.$emit('onFormError');
                     }
                 });
             },
 
-            toggleButtonDisable (value) {
-                var buttons = document.getElementsByTagName("button");
+            activateAutoScroll: function() {
+                /**
+                 * This is accordion element.
+                 */
+                const accordionElement = document.querySelector(
+                    '.accordian.error'
+                );
 
-                for (var i = 0; i < buttons.length; i++) {
+                /**
+                 * This is normal element.
+                 */
+                const normalElement = document.querySelector(
+                    '.control-error:first-of-type'
+                );
+
+                /**
+                 * Scroll configs.
+                 */
+                const scrollConfigs = {
+                    behavior: 'smooth',
+                    block: 'end',
+                    inline: 'nearest'
+                };
+
+                /**
+                 * If accordion error is not found then scroll will fall to the normal element.
+                 */
+                if (accordionElement) {
+                    accordionElement.scrollIntoView(scrollConfigs);
+                    return;
+                }
+
+                normalElement.scrollIntoView(scrollConfigs);
+            },
+
+            toggleButtonDisable: function(value) {
+                let buttons = document.getElementsByTagName('button');
+
+                for (let i = 0; i < buttons.length; i++) {
                     buttons[i].disabled = value;
                 }
             },
 
-            addServerErrors(scope = null) {
-                for (var key in serverErrors) {
-                    var inputNames = [];
-                    key.split('.').forEach(function(chunk, index) {
-                        if(index) {
-                            inputNames.push('[' + chunk + ']')
-                        } else {
-                            inputNames.push(chunk)
-                        }
-                    })
+            addServerErrors: function(scope = null) {
+                for (let key in serverErrors) {
+                    let inputNames = [];
 
-                    var inputName = inputNames.join('');
+                    key.split('.').forEach(function(chunk, index) {
+                        if (index) {
+                            inputNames.push('[' + chunk + ']');
+                        } else {
+                            inputNames.push(chunk);
+                        }
+                    });
+
+                    let inputName = inputNames.join('');
 
                     const field = this.$validator.fields.find({
                         name: inputName,
                         scope: scope
                     });
+
                     if (field) {
                         this.$validator.errors.add({
                             id: field.id,
@@ -106,10 +164,10 @@ $(document).ready(function () {
                 }
             },
 
-            addFlashMessages() {
+            addFlashMessages: function() {
                 if (typeof flashMessages == 'undefined') {
                     return;
-                };
+                }
 
                 const flashes = this.$refs.flashes;
 
@@ -118,7 +176,7 @@ $(document).ready(function () {
                 }, this);
             },
 
-            showModal(id) {
+            showModal: function(id) {
                 this.$set(this.modalIds, id, true);
             }
         }
