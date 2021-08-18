@@ -116,7 +116,7 @@ $(function() {
                 };
 
                 /**
-                 * If accordion is not active then scroll will fall to the normal element.
+                 * If accordion error is not found then scroll will fall to the normal element.
                  */
                 if (accordionElement) {
                     accordionElement.scrollIntoView(scrollConfigs);
