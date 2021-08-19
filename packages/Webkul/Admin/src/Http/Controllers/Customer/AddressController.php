@@ -174,7 +174,7 @@ class AddressController extends Controller
 
         session()->flash('success', trans('admin::app.customers.addresses.success-delete'));
 
-        return redirect()->route($this->_config['redirect']);
+        return response('success', 204);
     }
 
     /**

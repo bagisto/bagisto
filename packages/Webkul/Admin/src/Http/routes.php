@@ -103,9 +103,7 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 'redirect' => 'admin.customer.addresses.index',
             ])->name('admin.customer.addresses.update');
 
-            Route::post('customers/addresses/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\AddressController@destroy')->defaults('_config', [
-                'redirect' => 'admin.customer.addresses.index',
-            ])->name('admin.customer.addresses.delete');
+            Route::post('customers/addresses/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\AddressController@destroy')->name('admin.customer.addresses.delete');
 
             //mass destroy
             Route::post('customers/{id}/addresses', 'Webkul\Admin\Http\Controllers\Customer\AddressController@massDestroy')->defaults('_config', [
