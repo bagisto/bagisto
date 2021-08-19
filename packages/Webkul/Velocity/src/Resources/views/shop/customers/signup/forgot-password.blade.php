@@ -51,9 +51,7 @@
                                 class="form-style"
                                 v-validate="'required|email'" />
 
-                            <span class="control-error" v-if="errors.has('email')">
-                                @{{ errors.first('email') }}
-                            </span>
+                            <span class="control-error" v-if="errors.has('email')" v-text="errors.first('email')"></span>
                         </div>
 
                         <div class="control-group">

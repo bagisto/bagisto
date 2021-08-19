@@ -135,6 +135,7 @@ return [
         'total-orders' => 'Tplam Sipariş',
         'total-sale' => 'Tplam Satış',
         'average-sale' => 'Ortalama Satış',
+        'total-unpaid-invoices' => 'Toplam Ödenmemiş Faturalar',
         'increased' => ':progress%',
         'decreased' => ':progress%',
         'sales' => 'Satış',

@@ -17,7 +17,17 @@
 
                 @if (count($items))
                     <div class="account-action">
-                        <a href="{{ route('customer.wishlist.removeall') }}">{{ __('shop::app.customer.account.wishlist.deleteall') }}</a>
+                        <form id="remove-all-wishlist" action="{{ route('customer.wishlist.removeall') }}" method="POST">
+                            @method('DELETE')
+
+                            @csrf
+                        </form>
+
+                        <a
+                            href="javascript:void(0);"
+                            onclick="document.getElementById('remove-all-wishlist').submit();">
+                            {{ __('shop::app.customer.account.wishlist.deleteall') }}
+                        </a>
                     </div>
                 @endif
 
@@ -62,7 +72,16 @@
                             </div>
 
                             <div class="operations">
-                                <a class="mb-50" href="{{ route('customer.wishlist.remove', $item->id) }}">
+                                <form id="wishlist-{{ $item->id }}" action="{{ route('customer.wishlist.remove', $item->id) }}" method="POST">
+                                    @method('DELETE')
+
+                                    @csrf
+                                </form>
+
+                                <a
+                                    class="mb-50"
+                                    href="javascript:void(0);"
+                                    onclick="document.getElementById('wishlist-{{ $item->id }}').submit();">
                                     <span class="icon trash-icon"></span>
                                 </a>
 

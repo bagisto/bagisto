@@ -136,6 +136,7 @@ return [
         'total-orders' => 'Zamówienia ogółem',
         'total-sale' => 'Całkowita sprzedaż',
         'average-sale' => 'Średnia sprzedaż na zamówienie',
+        'total-unpaid-invoices' => 'Łącznie nieopłacone faktury',
         'increased' => ':progress%',
         'decreased' => ':progress%',
         'sales' => 'Sprzedaż',

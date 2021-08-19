@@ -137,6 +137,7 @@ return [
         'total-orders'              => 'Anzahl Aufträge',
         'total-sale'                => 'Gesamterlös',
         'average-sale'              => 'Durchschnitt pro Verkauf',
+        'total-unpaid-invoices'     => 'Gesamtzahl unbezahlter Rechnungen',
         'increased'                 => ':progress%',
         'decreased'                 => ':progress%',
         'sales'                     => 'Vertrieb',

@@ -1746,9 +1746,15 @@
     min-height: 65vh;
     position: relative;
 }
+
 .main-container-wrapper {
+    /**
+     * Sticky header for logo and search component. Just make sure
+     * this class should have height otherwise CLS score will reduce.
+     */
     .sticky-header {
         top: 0px;
+        height: 55px;
         z-index: 100;
         position: sticky;
         background: white;
@@ -1758,7 +1764,6 @@
         }
     }
 }
-
 
 .search-container {
     padding: 30px 20px;
@@ -2223,9 +2228,8 @@
     position: relative;
 
     .VueCarousel-pagination {
-        bottom: 10px;
-        position: absolute;
-
+        display: none;
+        
         button:focus,
         button:active {
             outline: none;

@@ -113,8 +113,8 @@ class Sequencer implements SequencerContract
         if ($this->length && ($this->prefix || $this->suffix)) {
             $number = ($this->prefix) . sprintf(
                 "%0{$this->length}d",
-                0
-            ) . ($this->lastId + 1) . ($this->suffix);
+                ($this->lastId + 1)
+            ) . ($this->suffix);
         } else {
             $number = $this->lastId + 1;
         }

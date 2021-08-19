@@ -1,6 +1,4 @@
 body {
-    display: none;
-    overflow-x: hidden;
     scroll-behavior: smooth;
 
     .container-margin {
@@ -463,8 +461,6 @@ header #search-form > *:focus {
 .main-content-wrapper {
     @extend .fs14;
 
-    margin: 0;
-    margin-bottom: 60px;
     display: inline-block;
 
     > .row {
@@ -712,6 +708,10 @@ body::after {
 
 .container {
     max-width: 1300px !important;
+}
+
+.slider-container {
+    min-height: 400px;
 }
 
 .remove-padding-margin {

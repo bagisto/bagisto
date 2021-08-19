@@ -303,6 +303,9 @@ return [
             'add-wishlist-text' => 'Adicionar produto à lista de desejos',
             'remove-wishlist-text' => 'Remover produto da lista de desejos',
         ],
+        'overlay-loader' => [
+            'message' => 'Em progresso',
+        ],
     ],
 
     'responsive' => [

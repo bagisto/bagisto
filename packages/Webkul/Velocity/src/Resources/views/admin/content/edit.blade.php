@@ -64,7 +64,7 @@
                             </label>
                             <input type="text" v-validate="'required|max:100'" class="control" id="title" name="{{$locale}}[title]" value="{{ old($locale)['title'] ?? isset($translation->title) ? $translation->title : '' }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
 
-                            <span class="control-error" v-if="errors.has('{{$locale}}[title]')">@{{ errors.first('{!!$locale!!}[title]') }}</span>
+                            <span class="control-error" v-if="errors.has('{{$locale}}[title]')" v-text="errors.first('{!!$locale!!}[title]')"></span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('position') ? 'has-error' : '']">
@@ -72,7 +72,7 @@
                                 {{ __('velocity::app.admin.contents.page.position') }}</span>
                             </label>
                             <input type="text" v-validate="'required|numeric|max:2'" class="control" id="position" name="position" value="{{ old('position') ?? $content->position }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.position') }}&quot;"/>
-                            <span class="control-error" v-if="errors.has('position')">@{{ errors.first('position') }}</span>
+                            <span class="control-error" v-if="errors.has('position')" v-text="errors.first('position')"></span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
@@ -85,7 +85,7 @@
                                     {{ __('velocity::app.admin.contents.active') }}
                                 </option>
                             </select>
-                            <span class="control-error" v-if="errors.has('status')">@{{ errors.first('status') }}</span>
+                            <span class="control-error" v-if="errors.has('status')" v-text="errors.first('status')"></span>
                         </div>
 
                         {!! view_render_event('bagisto.admin.content.edit_form_accordian.page.controls.after', ['content' => $content]) !!}
@@ -140,8 +140,8 @@
 
                 <span
                     class="control-error"
-                    v-if="errors.has('{{$locale}}[custom_title]')">
-                    @{{ errors.first('{!!$locale!!}[custom_title]') }}
+                    v-if="errors.has('{{$locale}}[custom_title]')"
+                    v-text="errors.first('{!!$locale!!}[custom_title]')">
                 </span>
             </div>
 
@@ -161,8 +161,8 @@
 
                 <span
                     class="control-error"
-                    v-if="errors.has('{{$locale}}[custom_heading]')">
-                    @{{ errors.first('{!!$locale!!}[custom_heading]') }}
+                    v-if="errors.has('{{$locale}}[custom_heading]')"
+                    v-text="errors.first('{!!$locale!!}[custom_heading]')">
                 </span>
             </div> --}}
 
@@ -200,8 +200,8 @@
 
                 <span
                     class="control-error"
-                    v-if="errors.has('content_type')">
-                    @{{ errors.first('content_type') }}
+                    v-if="errors.has('content_type')"
+                    v-text="errors.first('content_type')">
                 </span>
             </div>
 
@@ -225,8 +225,8 @@
 
                     <span
                         class="control-error"
-                        v-if="errors.has('{{$locale}}[page_link]')">
-                        @{{ errors.first('{!!$locale!!}[page_link]') }}
+                        v-if="errors.has('{{$locale}}[page_link]')"
+                        v-text="errors.first('{!!$locale!!}[page_link]')">
                     </span>
                 </div>
 
@@ -272,8 +272,8 @@
 
                     <span
                         class="control-error"
-                        v-if="errors.has('{{$locale}}[description]')">
-                        @{{ errors.first('{!!$locale!!}[description]') }}
+                        v-if="errors.has('{{$locale}}[description]')"
+                        v-text="errors.first('{!!$locale!!}[description]')">
                     </span>
                 </div>
 

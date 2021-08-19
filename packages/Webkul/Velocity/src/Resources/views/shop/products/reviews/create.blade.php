@@ -30,9 +30,7 @@
                                 {{ __('admin::app.customers.reviews.rating') }}
                             </label>
                             <star-ratings ratings="5" size="24" editable="true"></star-ratings>
-                            <span :class="`control-error ${errors.has('rating') ? '' : 'hide'}`" v-if="errors.has('rating')">
-                                @{{ errors.first('rating') }}
-                            </span>
+                            <span :class="`control-error ${errors.has('rating') ? '' : 'hide'}`" v-if="errors.has('rating')" v-text="errors.first('rating')"></span>
                         </div>
 
                         <div :class="`${errors.has('title') ? 'has-error' : ''}`">
@@ -46,9 +44,7 @@
                                 v-validate="'required'"
                                 value="{{ old('title') }}" />
 
-                            <span :class="`control-error ${errors.has('title') ? '' : 'hide'}`">
-                                @{{ errors.first('title') }}
-                            </span>
+                            <span :class="`control-error ${errors.has('title') ? '' : 'hide'}`" v-text="errors.first('title')"></span>
                         </div>
 
                         @if (core()->getConfigData('catalog.products.review.guest_review') && ! auth()->guard('customer')->user())
@@ -57,9 +53,7 @@
                                     {{ __('shop::app.reviews.name') }}
                                 </label>
                                 <input  type="text" class="control" name="name" v-validate="'required'" value="{{ old('name') }}">
-                                <span :class="`control-error ${errors.has('name') ? '' : 'hide'}`">
-                                    @{{ errors.first('name') }}
-                                </span>
+                                <span :class="`control-error ${errors.has('name') ? '' : 'hide'}`" v-text="errors.first('name')"></span>
                             </div>
                         @endif
 
@@ -74,9 +68,7 @@
                                 v-validate="'required'"
                                 value="{{ old('comment') }}">
                             </textarea>
-                            <span :class="`control-error ${errors.has('comment') ? '' : 'hide'}`">
-                                @{{ errors.first('comment') }}
-                            </span>
+                            <span :class="`control-error ${errors.has('comment') ? '' : 'hide'}`" v-text="errors.first('comment')"></span>
                         </div>
 
                         <div class="{!! $errors->has('images.*') ? 'has-error' : '' !!}">
@@ -111,3 +103,7 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
+@endpush

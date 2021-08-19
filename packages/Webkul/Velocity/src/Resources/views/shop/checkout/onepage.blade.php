@@ -9,12 +9,13 @@
 @endsection
 
 @push('scripts')
+    <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
+
     @include('shop::checkout.cart.coupon')
 
     <script type="text/x-template" id="checkout-template">
         <div class="container">
             <div id="checkout" class="checkout-process row offset-lg-1 col-lg-11 col-md-12">
-
                 <h1 class="col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
 
                 <div class="col-lg-7 col-md-12">
@@ -27,8 +28,11 @@
                         id="shipping-section"
                         v-if="showShippingSection">
 
-                        <shipping-section @onShippingMethodSelected="shippingMethodSelected($event)">
+                        <shipping-section
+                            :key="shippingComponentKey"
+                            @onShippingMethodSelected="shippingMethodSelected($event)">
                         </shipping-section>
+
                     </div>
 
                     <div
@@ -43,6 +47,7 @@
                             @onApplyCoupon="getOrderSummary"
                             @onRemoveCoupon="getOrderSummary">
                         </coupon-component>
+
                     </div>
 
                     <div
@@ -54,7 +59,7 @@
                             <div slot="summary-section">
                                 <summary-section
                                     discount="1"
-                                    :key="summeryComponentKey"
+                                    :key="summaryComponentKey"
                                     @onApplyCoupon="getOrderSummary"
                                     @onRemoveCoupon="getOrderSummary"
                                 ></summary-section>
@@ -74,11 +79,12 @@
                                 </div>
                             </div>
                         </review-section>
+
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-12 offset-lg-1 order-summary-container top pt0">
-                    <summary-section :key="summeryComponentKey"></summary-section>
+                    <summary-section :key="summaryComponentKey"></summary-section>
 
                     <div class="paypal-button-container mt10"></div>
                 </div>
@@ -122,8 +128,9 @@
                         isCheckPayment: true,
                         is_customer_exist: 0,
                         disable_button: false,
+                        shippingComponentKey: 0,
                         reviewComponentKey: 0,
-                        summeryComponentKey: 0,
+                        summaryComponentKey: 0,
                         showPaymentSection: false,
                         showSummarySection: false,
                         isPlaceOrderEnabled: false,
@@ -193,7 +200,7 @@
                 methods: {
                     navigateToStep: function (step) {
                         if (step <= this.completed_step) {
-                            this.current_step = step
+                            this.current_step = step;
                             this.completed_step = step - 1;
                         }
                     },
@@ -359,7 +366,7 @@
                             .then(response => {
                                 summaryHtml = Vue.compile(response.data.html)
 
-                                this.summeryComponentKey++;
+                                this.summaryComponentKey++;
                                 this.reviewComponentKey++;
                             })
                             .catch(function (error) {})
@@ -425,6 +432,8 @@
                                 }
 
                                 shippingMethods = response.data.shippingMethods;
+
+                                this.shippingComponentKey++;
 
                                 this.getOrderSummary();
 
@@ -756,7 +765,6 @@
                 }
             });
 
-        })()
+        })();
     </script>
-
 @endpush

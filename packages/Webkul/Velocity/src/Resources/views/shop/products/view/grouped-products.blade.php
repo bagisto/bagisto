@@ -23,6 +23,7 @@
                                         :control-name="'qty[{{$groupedProduct->associated_product_id}}]'"
                                         :validations="'required|numeric|min_value:0'"
                                         quantity="{{ $groupedProduct->qty }}"
+                                        quantity-text="{{ __('shop::app.products.quantity') }}"
                                         min-quantity="0">
                                     </quantity-changer>
                                 </span>

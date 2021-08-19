@@ -59,7 +59,7 @@
                     :title="product.name"
                     :href="`${baseUrl}/${product.slug}`">
 
-                    <span class="fs16">{{ product.name | truncate }}</span>
+                    <span class="fs16">{{ product.name }}</span>
                 </a>
             </div>
 

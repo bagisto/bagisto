@@ -7,20 +7,22 @@ use Webkul\Core\Repositories\SliderRepository;
 class SliderController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * SliderRepository
+     * Slider repository instance.
      *
      * @var \Webkul\Core\Repositories\SliderRepository
      */
     protected $sliderRepository;
 
     /**
+     * Channels.
+     *
      * @var array
      */
     protected $channels;
@@ -61,7 +63,7 @@ class SliderController extends Controller
     }
 
     /**
-     * Creates the new sider item.
+     * Creates the new slider item.
      *
      * @return \Illuminate\Http\Response
      */
@@ -75,6 +77,7 @@ class SliderController extends Controller
         ]);
 
         $data = request()->all();
+
         $data['expired_at'] = $data['expired_at'] ?: null;
 
         if (isset($data['locale'])) {
@@ -120,13 +123,14 @@ class SliderController extends Controller
         ]);
 
         $data = request()->all();
+        
         $data['expired_at'] = $data['expired_at'] ?: null;
 
         if (isset($data['locale'])) {
             $data['locale'] = implode(',', $data['locale']);
         }
 
-        if ( is_null(request()->image)) {
+        if (is_null(request()->image)) {
             session()->flash('error', trans('admin::app.settings.sliders.update-fail'));
 
             return redirect()->back();
@@ -144,14 +148,14 @@ class SliderController extends Controller
     }
 
     /**
-     * Delete a slider item and preserve the last one from deleting
+     * Delete the slider item and preserve the last one from deleting.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $slider = $this->sliderRepository->findOrFail($id);
+        $this->sliderRepository->findOrFail($id);
 
         try {
             $this->sliderRepository->delete($id);
@@ -159,7 +163,7 @@ class SliderController extends Controller
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Slider']));
 
             return response()->json(['message' => true], 200);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Slider']));
         }
 

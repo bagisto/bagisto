@@ -2,8 +2,9 @@
 
 namespace Webkul\Velocity\Providers;
 
-use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Velocity\Facades\Velocity as VelocityFacade;
 
@@ -55,11 +56,13 @@ class VelocityServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/admin-menu.php', 'menu.admin'
+            dirname(__DIR__) . '/Config/admin-menu.php',
+            'menu.admin'
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/acl.php', 'acl'
+            dirname(__DIR__) . '/Config/acl.php',
+            'acl'
         );
     }
 
@@ -90,7 +93,7 @@ class VelocityServiceProvider extends ServiceProvider
             __DIR__ . '/../Resources/views/shop' => resource_path('themes/velocity/views'),
         ]);
 
-        $this->publishes([__DIR__.'/../Resources/lang' => resource_path('lang/vendor/velocity')]);
+        $this->publishes([__DIR__ . '/../Resources/lang' => resource_path('lang/vendor/velocity')]);
 
         return true;
     }
@@ -103,11 +106,11 @@ class VelocityServiceProvider extends ServiceProvider
     private function loadGloableVariables()
     {
         view()->composer('*', function ($view) {
-            $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
-            $velocityMetaData = $velocityHelper->getVelocityMetaData();
+            $velocityHelper = app(\Webkul\Velocity\Helpers\Helper::class);
 
             $view->with('showRecentlyViewed', true);
-            $view->with('velocityMetaData', $velocityMetaData);
+            $view->with('velocityHelper', $velocityHelper);
+            $view->with('velocityMetaData', $velocityHelper->getVelocityMetaData());
         });
 
         return true;

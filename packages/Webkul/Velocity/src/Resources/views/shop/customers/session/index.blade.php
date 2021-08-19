@@ -56,9 +56,7 @@
                                     value="{{ old('email') }}"
                                     data-vv-as="&quot;{{ __('shop::app.customer.login-form.email') }}&quot;" />
 
-                                <span class="control-error" v-if="errors.has('email')">
-                                    @{{ errors.first('email') }}
-                                </span>
+                                <span class="control-error" v-if="errors.has('email')" v-text="errors.first('email')"></span>
                             </div>
 
                             <div class="form-group" :class="[errors.has('password') ? 'has-error' : '']">
@@ -74,9 +72,7 @@
                                     value="{{ old('password') }}"
                                     data-vv-as="&quot;{{ __('shop::app.customer.login-form.password') }}&quot;" />
 
-                                <span class="control-error" v-if="errors.has('password')">
-                                    @{{ errors.first('password') }}
-                                </span>
+                                <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
 
                                 <a href="{{ route('customer.forgot-password.create') }}" class="float-right">
                                     {{ __('shop::app.customer.login-form.forgot_pass') }}
