@@ -36,13 +36,14 @@
 
             {!! view_render_event('bagisto.shop.customers.account.profile.edit.first_name.after', ['customer' => $customer]) !!}
 
-            <div class="row">
-                <label class="col-12">
+            <div :class="`row ${errors.has('last_name') ? 'has-error' : ''}`">
+                <label class="col-12 mandatory">
                     {{ __('shop::app.customer.account.profile.lname') }}
                 </label>
 
                 <div class="col-12">
-                    <input value="{{ $customer->last_name }}" name="last_name" type="text" />
+                    <input value="{{ $customer->last_name }}" name="last_name" type="text" v-validate="'required'" />
+                    <span class="control-error" v-if="errors.has('last_name')" v-text="errors.first('last_name')"></span>
                 </div>
             </div>
 
