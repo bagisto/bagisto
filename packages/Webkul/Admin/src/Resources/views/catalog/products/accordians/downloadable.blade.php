@@ -56,7 +56,7 @@
 
                 <tbody>
 
-                    <downloadable-link-item 
+                    <downloadable-link-item
                         v-for='(link, index) in links'
                         :link="link"
                         :key="index"
@@ -136,7 +136,7 @@
                         <option value="url">{{ __('admin::app.catalog.products.url') }}</option>
                     </select>
                 </div>
-                
+
                 <div class="control-group" v-if="link.sample_type == 'file'">
                     <input type="hidden" :name="[linkInputName + '[sample_file]']" v-model="link.sample_file" data-vv-as="&quot;{{ __('admin::app.catalog.products.sampe-file') }}&quot;"/>
 
@@ -160,7 +160,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(linkInputName + '[downloads]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|min_value:0'" v-model="link.downloads" :name="[linkInputName + '[downloads]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.downloads') }}&quot;"/>
+                    <input type="text" v-validate="'required|numeric|min_value:0'" v-model="link.downloads" :name="[linkInputName + '[downloads]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.downloads') }}&quot;"/>
 
                     <span class="control-error" v-if="errors.has(linkInputName + '[downloads]')">@{{ errors.first(linkInputName + '[downloads]') }}</span>
                 </div>
@@ -168,8 +168,8 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(linkInputName + '[sort_order]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|numeric|min_value:0'" v-model="link.sort_order" :name="[linkInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
-                    
+                    <input type="text" v-validate="'required|numeric|min_value:0'" v-model="link.sort_order" :name="[linkInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
+
                     <span class="control-error" v-if="errors.has(linkInputName + '[sort_order]')">@{{ errors.first(linkInputName + '[sort_order]') }}</span>
                 </div>
             </td>
@@ -194,7 +194,7 @@
 
                 <tbody>
 
-                    <downloadable-sample-item 
+                    <downloadable-sample-item
                         v-for='(sample, index) in samples'
                         :sample="sample"
                         :key="index"
@@ -260,8 +260,8 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(sampleInputName + '[sort_order]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|numeric|min_value:0'" v-model="sample.sort_order" :name="[sampleInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
-                    
+                    <input type="text" v-validate="'required|numeric|min_value:0'" v-model="sample.sort_order" :name="[sampleInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
+
                     <span class="control-error" v-if="errors.has(sampleInputName + '[sort_order]')">@{{ errors.first(sampleInputName + '[sort_order]') }}</span>
                 </div>
             </td>
@@ -330,7 +330,7 @@
                         sort_order: 0
                     });
                 },
-                
+
                 removeLink: function(link) {
                     let index = this.links.indexOf(link)
 
@@ -408,7 +408,7 @@
                     let formData = new FormData();
 
                     formData.append(type, this[type]);
-        
+
                     this.$http.post("{{ route('admin.catalog.products.upload_link', $product->id) }}", formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                         .then(function(response) {
                             Object.assign(this_this.link, response.data);
@@ -468,7 +468,7 @@
                         sort_order: 0
                     });
                 },
-                
+
                 removeSample: function(sample) {
                     let index = this.samples.indexOf(sample)
 
@@ -521,7 +521,7 @@
                     let formData = new FormData();
 
                     formData.append(type, this.file);
-        
+
                     this.$http.post("{{ route('admin.catalog.products.upload_sample', $product->id) }}", formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                         .then(function(response) {
                             Object.assign(this_this.sample, response.data);
