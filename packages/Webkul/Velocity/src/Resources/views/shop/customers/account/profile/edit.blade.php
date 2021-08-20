@@ -29,7 +29,7 @@
                 </label>
 
                 <div class="col-12">
-                    <input value="{{ $customer->first_name }}" name="first_name" type="text" v-validate="'required'" />
+                    <input value="{{ $customer->first_name }}" name="first_name" type="text" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.fname') }}&quot;" />
                     <span class="control-error" v-if="errors.has('first_name')" v-text="errors.first('first_name')"></span>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 </label>
 
                 <div class="col-12">
-                    <input value="{{ $customer->last_name }}" name="last_name" type="text" v-validate="'required'" />
+                    <input value="{{ $customer->last_name }}" name="last_name" type="text" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.lname') }}&quot;" />
                     <span class="control-error" v-if="errors.has('last_name')" v-text="errors.first('last_name')"></span>
                 </div>
             </div>
