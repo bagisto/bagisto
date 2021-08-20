@@ -18,6 +18,7 @@
                     {{ __('admin::app.catalog.categories.add-title') }}
                 </a>
             </div>
+
             <div class="control-group">
                 <select class="control" id="locale-switcher" name="locale"
                         onchange="reloadPage('locale', this.value)">
@@ -38,6 +39,7 @@
 
         <div class="page-content">
             @inject('categories', 'Webkul\Admin\DataGrids\CategoryDataGrid')
+
             {!! $categories->render() !!}
         </div>
 
@@ -47,35 +49,34 @@
 
 @push('scripts')
     <script>
-        function reloadPage(getVar, getVal) {
-            let url = new URL(window.location.href);
-            url.searchParams.set(getVar, getVal);
-
-            window.location.href = url.href;
-        }
-
         $(document).ready(function(){
-            $("input[type='checkbox']").change(deleteFunction);
+            $("input[type='checkbox']").change(deleteCategory);
         });
 
-        var deleteFunction = function(e,type) {
+        /**
+         * Delete category function. This function name is present in category datagrid.
+         * So outside scope function should be loaded `onclick` rather than `v-on`.
+         */
+        let deleteCategory = function(e, type) {
+            let indexes;
+
             if (type == 'delete') {
-                var indexes = $(e.target).parent().attr('id');
+                indexes = $(e.target).parent().attr('id');
             } else {
                 $("input[type='checkbox']").attr('disabled', true);
 
-                var formData = {};
+                let formData = {};
                 $.each($('form').serializeArray(), function(i, field) {
                     formData[field.name] = field.value;
                 });
 
-                var indexes = formData.indexes;
+                indexes = formData.indexes;
             }
 
             if (indexes) {
                 $.ajax({
                     type : 'POST',
-                    url : '{{route("admin.catalog.categories.product.count")}}',
+                    url : '{{ route("admin.catalog.categories.product.count") }}',
                     data : {
                         _token: '{{csrf_token()}}',
                         indexes: indexes
@@ -83,14 +84,16 @@
                     success:function(data) {
                         $("input[type='checkbox']").attr('disabled', false);
                         if (data.product_count > 0) {
-                            var message = "{{trans('ui::app.datagrid.massaction.delete-category-product')}}";
+                            let message = "{{ trans('ui::app.datagrid.massaction.delete-category-product') }}";
+
                             if (type == 'delete') {
                                 doAction(e, message);
                             } else {
                                 $('form').attr('onsubmit', 'return confirm("'+message+'")');
                             }
                         } else {
-                            var message = "{{ __('ui::app.datagrid.click_on_action') }}";
+                            let message = "{{ __('ui::app.datagrid.click_on_action') }}";
+
                             if (type == 'delete') {
                                 doAction(e, message);
                             } else {
@@ -102,6 +105,52 @@
             } else {
                 $("input[type='checkbox']").attr('disabled', false);
             }
+        }
+
+        /**
+         * Do action function. Not directly calling the datagrid components.
+         * Instead taking a copy and using in this scope.
+         */
+        function doAction (e, message, type) {
+            let element = e.currentTarget;
+
+            if (message) {
+                element = e.target.parentElement;
+            }
+
+            message = message || '{{ __('ui::app.datagrid.massaction.delete') }}';
+
+            if (confirm(message)) {
+                axios.post(element.getAttribute('data-action'), {
+                    _token: element.getAttribute('data-token'),
+                    _method: element.getAttribute('data-method')
+                }).then(function (response) {
+                    this.result = response;
+
+                    if (response.data.redirect) {
+                        window.location.href = response.data.redirect;
+                    } else {
+                        location.reload();
+                    }
+                }).catch(function (error) {
+                    location.reload();
+                });
+
+                e.preventDefault();
+            } else {
+                e.preventDefault();
+            }
+        }
+
+        /**
+         * Reload page.
+         */
+        function reloadPage(getVar, getVal) {
+            let url = new URL(window.location.href);
+
+            url.searchParams.set(getVar, getVal);
+
+            window.location.href = url.href;
         }
     </script>
 @endpush
