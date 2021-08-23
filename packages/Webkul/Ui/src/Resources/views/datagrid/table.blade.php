@@ -97,12 +97,12 @@
                     <div class="filter-left">
                         <div class="search-filter">
                             <input type="search" id="search-field" class="control"
-                                   placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue"
-                                   v-on:keyup.enter="searchCollection(searchValue)"/>
+                                placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue"
+                                v-on:keyup.enter="searchCollection(searchValue)"/>
 
                             <div class="icon-wrapper">
                                 <span class="icon search-icon search-btn"
-                                      v-on:click="searchCollection(searchValue)"></span>
+                                    v-on:click="searchCollection(searchValue)"></span>
                             </div>
                         </div>
                     </div>
@@ -165,8 +165,8 @@
                                     <li v-if='stringCondition != null'>
                                         <div class="control-group">
                                             <input type="text" class="control response-string"
-                                                   placeholder="{{ __('ui::app.datagrid.value-here') }}"
-                                                   v-model="stringValue"/>
+                                                placeholder="{{ __('ui::app.datagrid.value-here') }}"
+                                                v-model="stringValue"/>
                                         </div>
                                     </li>
 
@@ -218,15 +218,13 @@
                                     <li v-if='datetimeConditionSelect'>
                                         <div class="control-group">
                                             <select class="control" v-model="datetimeCondition">
-                                                <option selected
-                                                        disabled>{{ __('ui::app.datagrid.condition') }}</option>
+                                                <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
                                                 <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
                                                 <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
                                                 <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
                                                 <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
                                                 <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
                                                 <option value="lte">{{ __('ui::app.datagrid.lesse') }}</option>
-                                                {{-- <option value="btw">{{ __('ui::app.datagrid.between') }}</option> --}}
                                             </select>
                                         </div>
                                     </li>
@@ -246,8 +244,7 @@
                 </div>
 
                 <div class="filtered-tags">
-                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters"
-                          style="text-transform: capitalize;">
+                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: capitalize;">
                         <span v-if="filter.column == 'perPage'">perPage</span>
                         <span v-else>@{{ filter.label }}</span>
 
@@ -348,7 +345,6 @@
                                 this.type = this.columns[column].type;
 
                                 switch (this.type) {
-
                                     case 'string': {
                                         this.stringConditionSelect = true;
                                         this.datetimeConditionSelect = false;
@@ -394,7 +390,6 @@
                                         this.nullify();
                                         break;
                                     }
-
                                 }
                             }
                         }
@@ -463,7 +458,10 @@
                         this.formURL("search", 'all', searchValue, '{{ __('ui::app.datagrid.search-title') }}');
                     },
 
-                    // function triggered to check whether the query exists or not and then call the make filters from the url
+                    /**
+                     * Function triggered to check whether the query exists or not and then
+                     * call the make filters from the url.
+                     */
                     setParamsAndUrl: function () {
                         params = (new URL(window.location.href)).search;
 
@@ -522,7 +520,9 @@
                         document.getElementById('mass-action-form').action = this.massActionTarget;
                     },
 
-                    //make array of filters, sort and search
+                    /**
+                     * Make array of filters, sort and search.
+                     */
                     formURL: function (column, condition, response, label) {
                         var obj = {};
 
@@ -665,7 +665,9 @@
                         }
                     },
 
-                    // make the url from the array and redirect
+                    /**
+                     * Make the url from the array and redirect.
+                     */
                     makeURL: function () {
                         newParams = '';
 
@@ -697,7 +699,9 @@
                         window.location.href = clean_uri + newParams;
                     },
 
-                    //make the filter array from url after being redirected
+                    /**
+                     * Make the filter array from url after being redirected.
+                     */
                     arrayFromUrl: function () {
 
                         let obj = {};
@@ -802,7 +806,9 @@
                         }
                     },
 
-                    //triggered when any select box is clicked in the datagrid
+                    /**
+                     * Triggered when any select box is clicked in the datagrid.
+                     */
                     select: function () {
                         this.allSelected = false;
 
@@ -814,7 +820,9 @@
                         }
                     },
 
-                    //triggered when master checkbox is clicked
+                    /**
+                     * Triggered when master checkbox is clicked.
+                     */
                     selectAll: function () {
                         this.dataIds = [];
 
@@ -873,40 +881,40 @@
                         this.filters.push({"column": "perPage", "cond": "eq", "val": e.target.value});
 
                         this.makeURL();
-                    }
-                }
-            });
+                    },
 
+                    doAction: function (e, message, type) {
+                        let element = e.currentTarget;
 
-            function doAction(e, message, type) {
-                var element = e.currentTarget;
-                if (message) {
-                    element = e.target.parentElement;
-                }
-
-                message = message || '{{__('ui::app.datagrid.massaction.delete') }}';
-
-                if (confirm(message)) {
-                    axios.post(element.getAttribute('data-action'), {
-                        _token: element.getAttribute('data-token'),
-                        _method: element.getAttribute('data-method')
-                    }).then(function (response) {
-                        this.result = response;
-
-                        if (response.data.redirect) {
-                            window.location.href = response.data.redirect;
-                        } else {
-                            location.reload();
+                        if (message) {
+                            element = e.target.parentElement;
                         }
-                    }).catch(function (error) {
-                        location.reload();
-                    });
 
-                    e.preventDefault();
-                } else {
-                    e.preventDefault();
-                }
-            }
+                        message = message || '{{__('ui::app.datagrid.massaction.delete') }}';
+
+                        if (confirm(message)) {
+                            axios.post(element.getAttribute('data-action'), {
+                                _token: element.getAttribute('data-token'),
+                                _method: element.getAttribute('data-method')
+                            }).then(function (response) {
+                                this.result = response;
+
+                                if (response.data.redirect) {
+                                    window.location.href = response.data.redirect;
+                                } else {
+                                    location.reload();
+                                }
+                            }).catch(function (error) {
+                                location.reload();
+                            });
+
+                            e.preventDefault();
+                        } else {
+                            e.preventDefault();
+                        }
+                    }
+                },
+            });
         </script>
     @endpush
 </div>

@@ -1,3 +1,7 @@
+@php
+    $currentCustomer = auth()->guard('customer')->user();
+@endphp
+
 @extends('shop::layouts.master')
 
 @section('page_title')
@@ -36,7 +40,7 @@
 
                     <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
                         <label for="first_name" class="required">{{ __('shop::app.customer.account.address.create.first_name') }}</label>
-                        <input value="{{ old('first_name') }}" type="text" class="control" name="first_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.first_name') }}&quot;">
+                        <input value="{{ old('first_name') ?? $currentCustomer->first_name }}" type="text" class="control" name="first_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.first_name') }}&quot;">
                         <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
                     </div>
 
@@ -44,7 +48,7 @@
 
                     <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
                         <label for="last_name" class="required">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
-                        <input value="{{ old('last_name') }}" type="text" class="control" name="last_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
+                        <input value="{{ old('last_name') ?? $currentCustomer->last_name }}" type="text" class="control" name="last_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
                         <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
                     </div>
 
