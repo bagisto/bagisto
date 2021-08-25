@@ -56,7 +56,7 @@
 
                                         @if ($action['method'] != 'GET')
                                             @if (isset($action['function']))
-                                                v-on:click="{{$action['function']}}"
+                                                onclick="{{ $action['function'] }}"
                                             @else
                                                 v-on:click="doAction($event)"
                                             @endif
