@@ -360,6 +360,7 @@ return [
             'order-status-pending-payment' => 'Pending Payment',
             'order-status-processing'      => 'Processing',
             'order-status-success'         => 'Completed',
+            'order-status-shipped'         => 'Shipped',
             'channel'                      => 'Channel',
             'customer-name'                => 'Customer Name',
             'email'                        => 'Email',
@@ -1532,6 +1533,7 @@ return [
             'generate-invoice'   => 'Automatically generate the invoice after placing an order',
             'set-invoice-status' => 'Set the invoice status after creating the invoice to',
             'set-order-status'   => 'Set the order status after creating the invoice to',
+            'set-order-shipping-status'   => 'Set the order status after sending the shipment',
             'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
         ]
     ]

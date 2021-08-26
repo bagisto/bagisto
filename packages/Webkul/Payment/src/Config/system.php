@@ -71,13 +71,42 @@ return [
                         'value' => 'pending_payment'
                     ], [
                         'title' => 'admin::app.sales.orders.order-status-processing',
+                        'value' => 'processing',
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-shipped',
+                        'value' => 'shipped'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-success',
+                        'value' => 'completed'
+                    ]
+                ],
+                'info'          => 'admin::app.admin.system.generate-invoice-applicable',
+            ], [
+                'name'    => 'shipping_status',
+                'title'   => 'admin::app.admin.system.set-order-shipping-status',
+                'type'    => 'select',
+                'options' => [
+                    [
+                        'title' => 'admin::app.sales.orders.order-status-pending',
+                        'value' => 'pending'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-pending-payment',
+                        'value' => 'pending_payment'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-processing',
                         'value' => 'processing'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-shipped',
+                        'value' => 'shipped'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-success',
+                        'value' => 'completed'
                     ]
                 ],
                 'info'          => 'admin::app.admin.system.generate-invoice-applicable',
                 'channel_based' => true,
                 'locale_based'  => false,
-            ], [
+            ],[
                 'name'          => 'active',
                 'title'         => 'admin::app.admin.system.status',
                 'type'          => 'boolean',
@@ -126,14 +155,14 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'generate_invoice',
-                'title'         => 'Automatically generate the invoice after placing an order',
+                'title'         => 'admin::app.admin.system.generate-invoice',
                 'type'          => 'boolean',
                 'default_value' => false,
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'    => 'invoice_status',
-                'title'   => 'Invoice status after creating the invoice',
+                'title'   => 'admin::app.admin.system.set-invoice-status',
                 'type'    => 'select',
                 'options' => [
                     [
@@ -147,7 +176,30 @@ return [
                 'info'          => 'admin::app.admin.system.generate-invoice-applicable',
             ], [
                 'name'    => 'order_status',
-                'title'   => 'Order status after creating the invoice',
+                'title'   => 'admin::app.admin.system.set-order-status',
+                'type'    => 'select',
+                'options' => [
+                    [
+                        'title' => 'admin::app.sales.orders.order-status-pending',
+                        'value' => 'pending'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-pending-payment',
+                        'value' => 'pending_payment'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-processing',
+                        'value' => 'processing',
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-shipped',
+                        'value' => 'shipped'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-success',
+                        'value' => 'completed'
+                    ]
+                ],
+                'info'          => 'admin::app.admin.system.generate-invoice-applicable',
+            ], [
+                'name'    => 'shipping_status',
+                'title'   => 'admin::app.admin.system.set-order-shipping-status',
                 'type'    => 'select',
                 'options' => [
                     [
@@ -159,9 +211,17 @@ return [
                     ], [
                         'title' => 'admin::app.sales.orders.order-status-processing',
                         'value' => 'processing'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-shipped',
+                        'value' => 'shipped'
+                    ], [
+                        'title' => 'admin::app.sales.orders.order-status-success',
+                        'value' => 'completed'
                     ]
                 ],
                 'info'          => 'admin::app.admin.system.generate-invoice-applicable',
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'          => 'mailing_address',
                 'title'         => 'admin::app.admin.system.mailing-address',

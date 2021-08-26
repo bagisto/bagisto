@@ -158,6 +158,10 @@ class ShipmentRepository extends Repository
 
             if (isset($orderState)) {
                 $this->orderRepository->updateOrderStatus($order, $orderState);
+            } elseif ($order->payment->method == 'cashondelivery' && core()->getConfigData('sales.paymentmethods.cashondelivery.generate_invoice')) {
+                $this->orderRepository->updateOrderStatus($order, core()->getConfigData('sales.paymentmethods.cashondelivery.shipping_status'));
+            } elseif ($order->payment->method == 'moneytransfer' && core()->getConfigData('sales.paymentmethods.moneytransfer.generate_invoice')) {
+                $this->orderRepository->updateOrderStatus($order, core()->getConfigData('sales.paymentmethods.moneytransfer.shipping_status'));
             } else {
                 $this->orderRepository->updateOrderStatus($order);
             }

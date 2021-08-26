@@ -4,7 +4,7 @@ return [
     [
         'key'    => 'sales.paymentmethods.paypal_standard',
         'name'   => 'admin::app.admin.system.paypal-standard',
-        'sort'   => 3,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'          => 'title',
@@ -31,6 +31,7 @@ return [
                 'title'         => 'admin::app.admin.system.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
+                'default_value' => false,
                 'channel_based' => false,
                 'locale_based'  => true
             ], [
@@ -63,7 +64,7 @@ return [
     ], [
         'key'    => 'sales.paymentmethods.paypal_smart_button',
         'name'   => 'admin::app.admin.system.paypal-smart-button',
-        'sort'   => 0,
+        'sort'   => 3,
         'fields' => [
             [
                 'name'          => 'title',
@@ -105,6 +106,7 @@ return [
                 'title'         => 'admin::app.admin.system.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
+                'default_value' => false,
                 'channel_based' => false,
                 'locale_based'  => true
             ],  [

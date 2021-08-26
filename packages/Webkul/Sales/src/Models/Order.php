@@ -11,6 +11,7 @@ class Order extends Model implements OrderContract
     public const STATUS_PENDING = 'pending';
     public const STATUS_PENDING_PAYMENT = 'pending_payment';
     public const STATUS_PROCESSING = 'processing';
+    public const STATUS_SHIPPED = 'shipped';
     public const STATUS_COMPLETED = 'completed';
     public const STATUS_CANCELED = 'canceled';
     public const STATUS_CLOSED = 'closed';
@@ -32,6 +33,7 @@ class Order extends Model implements OrderContract
         self::STATUS_PENDING         => 'Pending',
         self::STATUS_PENDING_PAYMENT => 'Pending Payment',
         self::STATUS_PROCESSING      => 'Processing',
+        self::STATUS_SHIPPED         => 'Shipped',
         self::STATUS_COMPLETED       => 'Completed',
         self::STATUS_CANCELED        => 'Canceled',
         self::STATUS_CLOSED          => 'Closed',
@@ -268,7 +270,7 @@ class Order extends Model implements OrderContract
         if ($this->payment->method == 'moneytransfer' && core()->getConfigData('sales.paymentmethods.moneytransfer.generate_invoice')) {
             return false;
         }
-        
+
         if ($this->status === self::STATUS_FRAUD) {
             return false;
         }
@@ -297,7 +299,7 @@ class Order extends Model implements OrderContract
         if ($this->status === self::STATUS_FRAUD) {
             return false;
         }
-        
+
         $pendingInvoice = $this->invoices->where('state', 'pending')->first();
         if ($pendingInvoice) {
             return false;
