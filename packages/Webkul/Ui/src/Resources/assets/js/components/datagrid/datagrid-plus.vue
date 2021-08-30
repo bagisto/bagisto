@@ -774,8 +774,7 @@
                     .get(this.url)
                     .then(function(response) {
                         if (
-                            response.status === 200 &&
-                            response.statusText === "OK"
+                            response.status === 200
                         ) {
                             let results = response.data;
 
