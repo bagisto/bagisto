@@ -286,5 +286,12 @@ Route::group(['prefix' => 'api'], function ($router) {
 
             Route::post('save-order', 'CheckoutController@saveOrder');
         });
+
+        // Product Search
+        // GET <HOST>/api/search?category=2&term=iphone
+        Route::get('search', 'ProductController@search')->defaults('_config', [
+            'repository' => 'Webkul\Category\Repositories\SearchRepository',
+            'resource' => 'Webkul\API\Http\Resources\Catalog\Search'
+        ]);
     });
 });
