@@ -108,7 +108,7 @@ class Themes
     }
 
     /**
-     * Prepare all themes
+     * Prepare all themes.
      *
      * @return \Webkul\Theme\Theme
      */
@@ -116,7 +116,7 @@ class Themes
     {
         $parentThemes = [];
 
-        if (request()->route() !== null && Str::contains(request()->route()->uri, 'admin/')) {
+        if (request()->route() !== null && Str::contains(request()->route()->uri, config('app.admin_url') . '/')) {
             $themes = config('themes.admin-themes', []);
         } else {
             $themes = config('themes.themes', []);
