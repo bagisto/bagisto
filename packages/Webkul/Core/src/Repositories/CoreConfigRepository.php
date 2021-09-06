@@ -91,7 +91,9 @@ class CoreConfigRepository extends Repository
                     ]);
                 } else {
                     foreach ($coreConfigValue as $coreConfig) {
-                        Storage::delete($coreConfig['value']);
+                        if (request()->hasFile($fieldName)) {
+                            Storage::delete($coreConfig['value']);
+                        }
 
                         if (isset($value['delete'])) {
                             $this->model->destroy($coreConfig['id']);
