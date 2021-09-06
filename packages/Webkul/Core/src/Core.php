@@ -1189,9 +1189,9 @@ class Core
      */
     public function getAdminEmailDetails()
     {
-        $admin_name = $this->getConfigData('general.general.email_settings.admin_name') ? $this->getConfigData('general.general.email_settings.admin_name') : config('mail.admin.name');
+        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ? $this->getConfigData('emails.configure.email_settings.admin_name') : config('mail.admin.name');
 
-        $admin_email = $this->getConfigData('general.general.email_settings.admin_email') ? $this->getConfigData('general.general.email_settings.admin_email') : config('mail.admin.address');
+        $admin_email = $this->getConfigData('emails.configure.email_settings.admin_email') ? $this->getConfigData('emails.configure.email_settings.admin_email') : config('mail.admin.address');
 
         return [
             'name'  => $admin_name,
