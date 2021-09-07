@@ -1459,6 +1459,8 @@
             },
 
             doAction: function(e, message, type) {
+                let self = this;
+
                 let element = e.currentTarget;
 
                 if (message) {
@@ -1474,10 +1476,19 @@
                             _method: element.getAttribute("data-method")
                         })
                         .then(function(response) {
+                            /**
+                             * If refirect is true, then pass redirect url in the response.
+                             *
+                             * Else, it will reload table only.
+                             */
                             if (response.data.redirect) {
-                                window.location.href = response.data.redirect;
+                                window.location.href = response.data.redirectUrl;
                             } else {
-                                location.reload();
+                                self.hitUrl();
+
+                                window.flashMessages.push({'type': 'alert-success', 'message': response.data.message });
+
+                                self.$root.addFlashMessages();
                             }
                         })
                         .catch(function(error) {
