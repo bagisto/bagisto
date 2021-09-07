@@ -101,7 +101,7 @@
 
                             <div class="control-group" :class="[errors.has('hostname') ? 'has-error' : '']">
                                 <label for="hostname">{{ __('admin::app.settings.channels.hostname') }}</label>
-                                <input type="text" v-validate="''" class="control" id="hostname" name="hostname" value="{{ $channel->hostname }}" placeholder="https://www.example.com"/>
+                                <input type="text" v-validate="''" class="control" id="hostname" name="hostname" value="{{ $channel->hostname }}" placeholder="{{ __('admin::app.settings.channels.hostname-placeholder') }}"/>
 
                                 <span class="control-error" v-if="errors.has('hostname')">@{{ errors.first('hostname') }}</span>
                             </div>

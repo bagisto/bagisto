@@ -843,6 +843,7 @@ return [
             'name'                   => 'Name',
             'description'            => 'Description',
             'hostname'               => 'Hostname',
+            'hostname-placeholder'   => 'https://www.example.com (Don\'t add slash in the end.)',
             'currencies-and-locales' => 'Currencies and Locales',
             'locales'                => 'Locales',
             'default-locale'         => 'Default Locale',

@@ -833,6 +833,7 @@ return [
             'name' => 'Nome',
             'description' => 'Descrição',
             'hostname' => 'Hostname',
+            'hostname-placeholder'   => 'https://www.example.com (Não adicione barra no final.)',
             'currencies-and-locales' => 'Moedas e Idiomas',
             'locales' => 'Idiomas',
             'default-locale' => 'Idioma Padrão',
