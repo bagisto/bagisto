@@ -208,7 +208,7 @@
                 class="control"
                 id="shipping[phone]"
                 name="shipping[phone]"
-                v-validate="'required'"
+                v-validate="'required|numeric'"
                 v-model="address.shipping.phone"
                 @change="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;" />
@@ -459,7 +459,7 @@
                 class="control"
                 id="billing[phone]"
                 name="billing[phone]"
-                v-validate="'required'"
+                v-validate="'required|numeric'"
                 v-model="address.billing.phone"
                 @change="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;" />
