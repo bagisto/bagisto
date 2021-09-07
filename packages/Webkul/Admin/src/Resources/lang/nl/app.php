@@ -831,6 +831,7 @@ return [
             'name' => 'Naam',
             'description' => 'Omschrijving',
             'hostname' => 'Hostnaam',
+            'hostname-placeholder'   => 'https://www.example.com (Voeg op het einde geen schuine streep toe.)',
             'currencies-and-locales' => 'Valuta en landinstellingen',
             'locales' => 'Landinstellingen',
             'default-locale' => 'Standaardlocale',

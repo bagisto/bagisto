@@ -836,6 +836,7 @@ return [
             'name' => 'Nome',
             'description' => 'Descrizione',
             'hostname' => 'Hostname',
+            'hostname-placeholder'   => 'https://www.example.com (Non aggiungere la barra alla fine.)',
             'currencies-and-locales' => 'Valute e localizzazioni',
             'locales' => 'Localizzazioni',
             'default-locale' => 'Localizzazione predefinita',

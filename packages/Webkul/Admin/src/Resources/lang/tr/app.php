@@ -825,6 +825,7 @@ return [
             'name' => 'Tanımı',
             'description' => 'Açıklama',
             'hostname' => 'Alan Adı',
+            'hostname-placeholder'   => 'https://www.example.com (Sonunda eğik çizgi eklemeyin.)',
             'currencies-and-locales' => 'Para Birimi ve Dil',
             'locales' => 'Dil Seçenekleri',
             'default-locale' => 'Varsayılan Dil',

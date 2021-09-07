@@ -832,6 +832,7 @@ return [
             'name' => 'نام',
             'description' => 'توضیحات',
             'hostname' => 'نام میزبان',
+            'hostname-placeholder'   => 'https://www.example.com (در پایان اسلش اضافه نکنید)',
             'currencies-and-locales' => 'ارز و منطقه ها',
             'locales' => 'منطقه ها',
             'default-locale' => 'منطقه پیش فرض',
