@@ -140,6 +140,10 @@ trait ProvideCollection
      */
     private function sortCollection($collection, $info)
     {
+        $availableOptions = ['asc', 'desc'];
+
+        $selectedSortOption = strtolower(array_values($info)[0]);
+
         $countKeys = count(array_keys($info));
 
         if ($countKeys > 1) {
@@ -150,7 +154,7 @@ trait ProvideCollection
 
         $collection->orderBy(
             $columnName[1],
-            array_values($info)[0]
+            in_array($selectedSortOption, $availableOptions) ? $selectedSortOption : 'asc'
         );
     }
 
