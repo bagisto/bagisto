@@ -3,10 +3,10 @@
 namespace Webkul\Core\Http\Middleware;
 
 use Closure;
-use Illuminate\Routing\Route;
 use Illuminate\Contracts\Foundation\Application;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Original;
+use Illuminate\Routing\Route;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CheckForMaintenanceMode extends Original
 {
@@ -49,32 +49,14 @@ class CheckForMaintenanceMode extends Original
         /* application */
         $this->app = $app;
 
+        /* current channel */
+        $this->channel = core()->getCurrentChannel();
+
         /* adding exception for admin routes */
         $this->except[] = env('APP_ADMIN_URL', 'admin') . '*';
 
         /* exclude ips */
         $this->setAllowedIps();
-    }
-
-    /**
-     * Check for the except routes.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return boolean
-     */
-    protected function shouldPassThrough($request)
-    {
-        foreach ($this->except as $except) {
-            if ($except !== '/') {
-                $except = trim($except, '/');
-            }
-
-            if ($request->is($except)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -103,8 +85,11 @@ class CheckForMaintenanceMode extends Original
                 }
             }
 
-            if ($this->shouldPassThrough($request))
-            {
+            if ($this->shouldPassThrough($request)) {
+                return $response;
+            }
+
+            if (! (bool) $this->channel->is_maintenance_on) {
                 return $response;
             }
 
@@ -121,10 +106,29 @@ class CheckForMaintenanceMode extends Original
      */
     protected function setAllowedIps()
     {
-        $this->channel = core()->getCurrentChannel();
-
         if ($this->channel) {
             $this->excludedIPs = array_map('trim', explode(',', $this->channel->allowed_ips));
         }
+    }
+
+    /**
+     * Check for the except routes.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return boolean
+     */
+    protected function shouldPassThrough($request)
+    {
+        foreach ($this->except as $except) {
+            if ($except !== '/') {
+                $except = trim($except, '/');
+            }
+
+            if ($request->is($except)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
