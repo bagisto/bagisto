@@ -9,18 +9,19 @@ use Illuminate\Support\Facades\Log;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Generators\OrderSequencer;
+use Webkul\Sales\Models\Order as OrderModel;
 
 class OrderRepository extends Repository
 {
     /**
-     * OrderItemRepository $orderItemRepository
+     * Order item repository instance.
      *
      * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
-     * DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
+     * Downloadable link purchased repository instance.
      *
      * @var \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository
      */
@@ -119,8 +120,10 @@ class OrderRepository extends Repository
             DB::rollBack();
 
             /* storing log for errors */
-            Log::error('OrderRepository:createOrderIfNotThenRetry: ' . $e->getMessage(),
-            ['data' => $data]);
+            Log::error(
+                'OrderRepository:createOrderIfNotThenRetry: ' . $e->getMessage(),
+                ['data' => $data]
+            );
 
             /* recalling */
             $this->createOrderIfNotThenRetry($data);
@@ -239,9 +242,19 @@ class OrderRepository extends Repository
             $totalQtyCanceled += $item->qty_canceled;
         }
 
-        if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled)
+        if (
+            $totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled)
             && $totalQtyOrdered == $totalQtyInvoiced + $totalQtyCanceled
-            && $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled) {
+            && $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled
+        ) {
+            return true;
+        }
+
+        /**
+         * If order is already completed and total quantity ordered is not equal to refunded
+         * then it can be considered as completed.
+         */
+        if ($order->status === OrderModel::STATUS_COMPLETED && $totalQtyOrdered != $totalQtyRefunded) {
             return true;
         }
 
@@ -294,7 +307,7 @@ class OrderRepository extends Repository
      */
     public function updateOrderStatus($order, $orderState = null)
     {
-        if (!empty($orderState)) {
+        if (! empty($orderState)) {
             $status = $orderState;
         } else {
             $status = "processing";
@@ -385,7 +398,7 @@ class OrderRepository extends Repository
      */
     private function resolveOrderInstance($orderOrId)
     {
-        return $orderOrId instanceof \Webkul\Sales\Models\Order
+        return $orderOrId instanceof OrderModel
             ? $orderOrId
             : $this->findOrFail($orderOrId);
     }
