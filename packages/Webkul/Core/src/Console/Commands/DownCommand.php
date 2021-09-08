@@ -7,6 +7,11 @@ use Webkul\Core\Models\Channel;
 
 class DownCommand extends OriginalCommand
 {
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
     public function handle()
     {
         $this->downAllChannels();
@@ -14,6 +19,11 @@ class DownCommand extends OriginalCommand
         parent::handle();
     }
 
+    /**
+     * Update all channels.
+     *
+     * @return mixed
+     */
     protected function downAllChannels()
     {
         $this->comment('All channels are down.');

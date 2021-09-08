@@ -8,14 +8,6 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Core\Console\Commands\BagistoVersion;
-use Webkul\Core\Console\Commands\BookingCron;
-use Webkul\Core\Console\Commands\DownChannelCommand;
-use Webkul\Core\Console\Commands\DownCommand;
-use Webkul\Core\Console\Commands\ExchangeRateUpdate;
-use Webkul\Core\Console\Commands\Install;
-use Webkul\Core\Console\Commands\UpChannelCommand;
-use Webkul\Core\Console\Commands\UpCommand;
 use Webkul\Core\Core;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
@@ -71,11 +63,11 @@ class CoreServiceProvider extends ServiceProvider
         });
 
         $this->app->extend('command.down', function () {
-            return new DownCommand;
+            return new \Webkul\Core\Console\Commands\DownCommand;
         });
 
         $this->app->extend('command.up', function () {
-            return new UpCommand;
+            return new \Webkul\Core\Console\Commands\UpCommand;
         });
     }
 
@@ -109,7 +101,7 @@ class CoreServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the console commands of this package
+     * Register the console commands of this package.
      *
      * @return void
      */
@@ -117,16 +109,16 @@ class CoreServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                BagistoVersion::class,
-                Install::class,
-                ExchangeRateUpdate::class,
-                BookingCron::class,
+                \Webkul\Core\Console\Commands\BagistoVersion::class,
+                \Webkul\Core\Console\Commands\Install::class,
+                \Webkul\Core\Console\Commands\ExchangeRateUpdate::class,
+                \Webkul\Core\Console\Commands\BookingCron::class,
             ]);
         }
 
         $this->commands([
-            DownChannelCommand::class,
-            UpChannelCommand::class,
+            \Webkul\Core\Console\Commands\DownChannelCommand::class,
+            \Webkul\Core\Console\Commands\UpChannelCommand::class,
         ]);
     }
 
@@ -134,7 +126,6 @@ class CoreServiceProvider extends ServiceProvider
      * Register factories.
      *
      * @param string $path
-     *
      * @return void
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */

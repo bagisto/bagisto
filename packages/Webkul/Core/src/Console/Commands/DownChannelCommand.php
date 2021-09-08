@@ -18,6 +18,13 @@ class DownChannelCommand extends OriginalCommand
                                          {--status=503 : The status code that should be used when returning the maintenance mode response}';
 
     /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Down channel command. Same as parent but database will not update.';
+
+    /**
      * Execute the console command.
      *
      * @return int

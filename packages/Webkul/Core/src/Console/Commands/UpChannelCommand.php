@@ -3,7 +3,6 @@
 namespace Webkul\Core\Console\Commands;
 
 use Illuminate\Foundation\Console\UpCommand as OriginalCommand;
-use Webkul\Core\Models\Channel;
 
 class UpChannelCommand extends OriginalCommand
 {
@@ -14,6 +13,18 @@ class UpChannelCommand extends OriginalCommand
      */
     protected $name = 'channel:up';
 
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Up channel command. Same as parent but database will not update.';
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
     public function handle()
     {
         parent::handle();

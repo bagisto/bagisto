@@ -7,6 +7,11 @@ use Webkul\Core\Models\Channel;
 
 class UpCommand extends OriginalCommand
 {
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
     public function handle()
     {
         $this->upAllChannels();
@@ -14,6 +19,11 @@ class UpCommand extends OriginalCommand
         parent::handle();
     }
 
+    /**
+     * Update all channels.
+     *
+     * @return mixed
+     */
     protected function upAllChannels()
     {
         $this->comment('Activating all channels.');
