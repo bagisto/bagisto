@@ -2,25 +2,27 @@
 
 namespace Webkul\Core\Providers;
 
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Database\Eloquent\Factory as EloquentFactory;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\ServiceProvider;
+use Webkul\Core\Console\Commands\BagistoVersion;
+use Webkul\Core\Console\Commands\BookingCron;
+use Webkul\Core\Console\Commands\DownChannelCommand;
+use Webkul\Core\Console\Commands\DownCommand;
+use Webkul\Core\Console\Commands\ExchangeRateUpdate;
+use Webkul\Core\Console\Commands\Install;
+use Webkul\Core\Console\Commands\UpChannelCommand;
+use Webkul\Core\Console\Commands\UpCommand;
 use Webkul\Core\Core;
 use Webkul\Core\Exceptions\Handler;
-use Webkul\Core\Models\SliderProxy;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\ServiceProvider;
-use Webkul\Theme\ViewRenderEventManager;
-use Illuminate\Support\Facades\Validator;
-use Webkul\Core\Console\Commands\Install;
-use Webkul\Core\Observers\SliderObserver;
-use Webkul\Core\Console\Commands\UpCommand;
 use Webkul\Core\Facades\Core as CoreFacade;
-use Webkul\Core\Console\Commands\BookingCron;
-use Webkul\Core\Console\Commands\DownCommand;
+use Webkul\Core\Models\SliderProxy;
+use Webkul\Core\Observers\SliderObserver;
 use Webkul\Core\View\Compilers\BladeCompiler;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Webkul\Core\Console\Commands\BagistoVersion;
-use Webkul\Core\Console\Commands\ExchangeRateUpdate;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
+use Webkul\Theme\ViewRenderEventManager;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -60,11 +62,11 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
 
-        Event::listen('bagisto.shop.layout.body.after', static function(ViewRenderEventManager $viewRenderEventManager) {
+        Event::listen('bagisto.shop.layout.body.after', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
         });
 
-        Event::listen('bagisto.admin.layout.head', static function(ViewRenderEventManager $viewRenderEventManager) {
+        Event::listen('bagisto.admin.layout.head', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
         });
 
@@ -118,9 +120,14 @@ class CoreServiceProvider extends ServiceProvider
                 BagistoVersion::class,
                 Install::class,
                 ExchangeRateUpdate::class,
-                BookingCron::class
+                BookingCron::class,
             ]);
         }
+
+        $this->commands([
+            DownChannelCommand::class,
+            UpChannelCommand::class,
+        ]);
     }
 
     /**

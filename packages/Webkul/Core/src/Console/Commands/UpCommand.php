@@ -9,14 +9,15 @@ class UpCommand extends OriginalCommand
 {
     public function handle()
     {
-        $this->upAllChannel();
-        
+        $this->upAllChannels();
+
         parent::handle();
     }
 
-    protected function upAllChannel()
+    protected function upAllChannels()
     {
         $this->comment('Activating all channels.');
+
         return Channel::query()->update(['is_maintenance_on' => 0]);
     }
 }

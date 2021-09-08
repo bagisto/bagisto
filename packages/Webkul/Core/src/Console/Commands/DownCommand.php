@@ -9,14 +9,15 @@ class DownCommand extends OriginalCommand
 {
     public function handle()
     {
-        $this->downAllChannel();
-        
+        $this->downAllChannels();
+
         parent::handle();
     }
 
-    protected function downAllChannel()
+    protected function downAllChannels()
     {
         $this->comment('All channels are down.');
+
         return Channel::query()->update(['is_maintenance_on' => 1]);
     }
 }
