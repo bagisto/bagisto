@@ -1342,6 +1342,7 @@ return [
             'notifications' => [
                 'verification' => 'Doğrulama Maili Gönder',
                 'registration' => 'Kayıt Maili Gönder',
+                'customer-registration-confirmation-mail-to-admin' => 'Müşteri kaydından sonra yöneticiye bir onay e-postası gönderin',
                 'customer' => 'Müşteriye Mail Gönder',
                 'new-order' => 'Sipariş Doğrulama Maili Gönder',
                 'new-admin' => 'Yönetici Davet Maili Gönder',
