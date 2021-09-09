@@ -795,6 +795,38 @@ class Cart
         return $item->product->getTypeInstance()->isItemHaveQuantity($item);
     }
 
+    public function mergeDeactivatedCart(): void
+    {
+        if (session()->has('deactivated_cart_id')) {
+            $deactivatedCartId = session()->get('deactivated_cart_id');
+
+            if ($this->getCart()) {
+                $deactivatedCart = $this->cartRepository->find($deactivatedCartId);
+                
+                foreach ($deactivatedCart->items as $deactivatedCartItem) {
+                    $this->addProduct($deactivatedCartItem->product_id, $deactivatedCartItem->additional);
+                }
+
+                $this->collectTotals();
+            } else {
+                $this->cartRepository->update(['is_active' => true], $deactivatedCartId);
+            }
+
+            session()->forget('deactivated_cart_id');
+        }
+    }
+
+    public function activateCartIfSessionHasDeactivatedCartId(): void
+    {
+        if (session()->has('deactivated_cart_id')) {
+            $deactivatedCartId = session()->get('deactivated_cart_id');
+
+            $this->cartRepository->update(['is_active' => true], $deactivatedCartId);
+
+            session()->forget('deactivated_cart_id');
+        }
+    }
+
     /**
      * Deactivates current cart
      *

@@ -68,6 +68,14 @@ class CartController extends Controller
     public function add($id)
     {
         try {
+            if (request()->get('is_buy_now')) {
+                if ($deactivatedCart = Cart::getCart()) {
+                    session()->put('deactivated_cart_id', $deactivatedCart->id);
+
+                    Cart::deActivateCart();
+                }
+            }
+
             $result = Cart::addProduct($id, request()->all());
 
             if ($this->onFailureAddingToCart($result)) {

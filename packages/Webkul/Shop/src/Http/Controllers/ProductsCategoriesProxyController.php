@@ -59,6 +59,8 @@ class ProductsCategoriesProxyController extends Controller
      */
     public function index(Request $request)
     {
+        \Cart::mergeDeactivatedCart();
+
         $slugOrPath = trim($request->getPathInfo(), '/');
 
         $slugOrPath = urldecode($slugOrPath);
