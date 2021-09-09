@@ -149,7 +149,9 @@ class RegistrationController extends Controller
             try {
                 if (core()->getConfigData('emails.general.notifications.emails.general.notifications.registration')) {
                     Mail::queue(new RegistrationEmail(request()->all(), 'customer'));
+                }
 
+                if (core()->getConfigData('emails.general.notifications.emails.general.notifications.customer-registration-confirmation-mail-to-admin')) {
                     Mail::queue(new RegistrationEmail(request()->all(), 'admin'));
                 }
 
