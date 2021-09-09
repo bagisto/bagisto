@@ -1381,6 +1381,7 @@ return [
             'notifications' => [
                 'verification' => 'Envoyer un e-mail de vérification après l\'enregistrement du client',
                 'registration' => 'Envoyer un e-mail de confirmation après l\'enregistrement du client',
+                'customer-registration-confirmation-mail-to-admin' => 'Envoyer un e-mail de confirmation à l\'administrateur après l\'enregistrement du client',
                 'customer' => 'Envoyer les informations d\'identification du compte client après l\'enregistrement',
                 'new-order' => 'Envoyer un e-mail de confirmation au client après avoir passé une nouvelle commande',
                 'new-admin' => 'Envoyer un e-mail de confirmation à l\'administrateur après avoir passé une nouvelle commande',

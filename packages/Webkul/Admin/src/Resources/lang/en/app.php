@@ -1372,16 +1372,17 @@ return [
             'email'              => 'Email',
             'notification_label' => 'Notifications',
             'notifications' => [
-                'verification'         => 'Send a verification e-mail after customer registration',
-                'registration'         => 'Send a confirmation e-mail after customer registration',
-                'customer'             => 'Send the customer account credentials after registration',
-                'new-order'            => 'Send a confirmation email to the customer after placing a new order',
-                'new-admin'            => 'Send a confirmation email to the admin after placing a new order',
-                'new-invoice'          => 'Send a notification e-mail after creating a new invoice',
-                'new-refund'           => 'Send a notification e-mail after creating a refund',
-                'new-shipment'         => 'Send a notification e-mail after creating a shipment',
-                'new-inventory-source' => 'Send a notification e-email after creating a new inventory source',
-                'cancel-order'         => 'Send a notification after canceling an order'
+                'verification'                                     => 'Send a verification e-mail after customer registration',
+                'registration'                                     => 'Send a confirmation e-mail after customer registration',
+                'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
+                'customer'                                         => 'Send the customer account credentials after registration',
+                'new-order'                                        => 'Send a confirmation email to the customer after placing a new order',
+                'new-admin'                                        => 'Send a confirmation email to the admin after placing a new order',
+                'new-invoice'                                      => 'Send a notification e-mail after creating a new invoice',
+                'new-refund'                                       => 'Send a notification e-mail after creating a refund',
+                'new-shipment'                                     => 'Send a notification e-mail after creating a shipment',
+                'new-inventory-source'                             => 'Send a notification e-email after creating a new inventory source',
+                'cancel-order'                                     => 'Send a notification after canceling an order'
             ],
 
         ],

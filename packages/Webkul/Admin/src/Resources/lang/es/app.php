@@ -1367,6 +1367,7 @@ return [
             'notifications' => [
                 'verification' => 'Enviar email de verificación',
                 'registration' => 'Enviar email de registro',
+                'customer-registration-confirmation-mail-to-admin' => 'Envíe un correo electrónico de confirmación al administrador después del registro del cliente',
                 'customer' => 'Enviar email de cliente',
                 'new-order' => 'Enviar email de confirmación de pedido',
                 'new-admin' => 'Enviar email de invitación de admin',
