@@ -96,6 +96,23 @@ trait CartTools
     }
 
     /**
+     * This method will deactivate the current cart if
+     * buy now is active.
+     *
+     * @return void
+     */
+    public function deactivateCurrentCartIfBuyNowIsActive()
+    {
+        if (request()->get('is_buy_now')) {
+            if ($deactivatedCart = $this->getCart()) {
+                session()->put('deactivated_cart_id', $deactivatedCart->id);
+
+                $this->deActivateCart();
+            }
+        }
+    }
+
+    /**
      * This method will reactivate the cart which is deactivated at the the time of buy now functionality.
      *
      * @return void
