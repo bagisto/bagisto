@@ -2,6 +2,32 @@
 
 Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function () {
     Route::namespace('Webkul\Velocity\Http\Controllers\Shop')->group(function () {
+
+        /**
+         * Cart merger middleware. This middleware will take care of the items
+         * which are deactivated at the time of buy now functionality. If somehow
+         * user redirects without completing the checkout then this will merge
+         * full cart.
+         *
+         * If some routes are not able to merge the cart, then place the route in this
+         * group.
+         */
+        Route::group(['middleware' => ['cart.merger']], function () {
+            Route::group(['middleware' => ['customer']], function () {
+                Route::get('/customer/account/comparison', 'ComparisonController@getComparisonList')
+                    ->name('velocity.customer.product.compare')
+                    ->defaults('_config', [
+                        'view' => 'shop::customers.account.compare.index'
+                    ]);
+            });
+
+            Route::put('/comparison', 'ComparisonController@addCompareProduct')
+                ->name('customer.product.add.compare');
+
+            Route::delete('/comparison', 'ComparisonController@deleteComparisonProduct')
+                ->name('customer.product.delete.compare');
+        });
+
         Route::get('/product-details/{slug}', 'ShopController@fetchProductDetails')
             ->name('velocity.shop.product');
 
@@ -33,20 +59,6 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
             ->defaults('_config', [
                 'view' => 'shop::guest.compare.index'
             ]);
-
-        Route::group(['middleware' => ['customer']], function () {
-            Route::get('/customer/account/comparison', 'ComparisonController@getComparisonList')
-                ->name('velocity.customer.product.compare')
-                ->defaults('_config', [
-                    'view' => 'shop::customers.account.compare.index'
-                ]);
-        });
-
-        Route::put('/comparison', 'ComparisonController@addCompareProduct')
-            ->name('customer.product.add.compare');
-
-        Route::delete('/comparison', 'ComparisonController@deleteComparisonProduct')
-            ->name('customer.product.delete.compare');
 
         Route::get('/items-count', 'ShopController@getItemsCount')
             ->name('velocity.product.item-count');
