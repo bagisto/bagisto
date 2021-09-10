@@ -153,6 +153,8 @@ trait CartTools
     public function activateCart($cartId): void
     {
         $this->cartRepository->update(['is_active' => true], $cartId);
+
+        $this->putCart($this->cartRepository->find($cartId));
     }
 
     /**
