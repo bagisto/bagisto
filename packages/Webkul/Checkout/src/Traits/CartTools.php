@@ -105,7 +105,7 @@ trait CartTools
         if (session()->has('deactivated_cart_id')) {
             $deactivatedCartId = session()->get('deactivated_cart_id');
 
-            $this->cartRepository->update(['is_active' => true], $deactivatedCartId);
+            $this->activateCart($deactivatedCartId);
 
             session()->forget('deactivated_cart_id');
         }
@@ -125,5 +125,101 @@ trait CartTools
                 session()->forget('cart');
             }
         }
+    }
+
+    /**
+     * Activate the cart by id.
+     *
+     * @param  int  $cartId
+     * @return void
+     */
+    public function activateCart($cartId): void
+    {
+        $this->cartRepository->update(['is_active' => true], $cartId);
+    }
+
+    /**
+     * Move a wishlist item to cart.
+     *
+     * @param  \Webkul\Customer\Contracts\WishlistItem  $wishlistItem
+     * @return bool
+     */
+    public function moveToCart($wishlistItem)
+    {
+        if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
+            return false;
+        }
+
+        if (! $wishlistItem->additional) {
+            $wishlistItem->additional = ['product_id' => $wishlistItem->product_id, 'quantity' => 1];
+        }
+
+        request()->merge($wishlistItem->additional);
+
+        $result = $this->addProduct($wishlistItem->product_id, $wishlistItem->additional);
+
+        if ($result) {
+            $this->wishlistRepository->delete($wishlistItem->id);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Function to move a already added product to wishlist will run only on customer
+     * authentication.
+     *
+     * @param  int  $itemId
+     * @return bool
+     */
+    public function moveToWishlist($itemId)
+    {
+        $cart = $this->getCart();
+
+        $cartItem = $cart->items()->find($itemId);
+
+        if (! $cartItem) {
+            return false;
+        }
+
+        $wishlistItems = $this->wishlistRepository->findWhere([
+            'customer_id' => $this->getCurrentCustomer()->user()->id,
+            'product_id'  => $cartItem->product_id,
+        ]);
+
+        $found = false;
+
+        foreach ($wishlistItems as $wishlistItem) {
+            $options = $wishlistItem->item_options;
+
+            if (! $options) {
+                $options = ['product_id' => $wishlistItem->product_id];
+            }
+
+            if ($cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
+                $found = true;
+            }
+        }
+
+        if (! $found) {
+            $this->wishlistRepository->create([
+                'channel_id'  => $cart->channel_id,
+                'customer_id' => $this->getCurrentCustomer()->user()->id,
+                'product_id'  => $cartItem->product_id,
+                'additional'  => $cartItem->additional,
+            ]);
+        }
+
+        $result = $this->cartItemRepository->delete($itemId);
+
+        if (! $cart->items->count()) {
+            $this->cartRepository->delete($cart->id);
+        }
+
+        $this->collectTotals();
+
+        return true;
     }
 }
