@@ -1358,6 +1358,7 @@ return [
             'notifications' => [
                 'verification' => 'ارسل ايميل التفعيل',
                 'registration' => 'إرسال بريد إلكتروني للتسجيل',
+                'customer-registration-confirmation-mail-to-admin' => 'إرسال بريد إلكتروني للتأكيد إلى المسؤول بعد تسجيل العميل',
                 'customer' => 'إرسال بريد إلكتروني للعميل',
                 'new-order' => 'إرسال بريد إلكتروني لتأكيد الطلب',
                 'new-admin' => 'إرسال بريد إلكتروني لدعوة المسؤول',
