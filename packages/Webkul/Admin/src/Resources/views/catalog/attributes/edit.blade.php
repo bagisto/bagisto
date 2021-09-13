@@ -130,7 +130,7 @@
 
                                 {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.before', ['attribute' => $attribute]) !!}
 
-                                <option-wrapper></option-wrapper>
+                                <option-wrapper src="{{ route('admin.catalog.attributes.options', $attribute->id) }}"></option-wrapper>
 
                                 {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.after', ['attribute' => $attribute]) !!}
 
@@ -306,7 +306,6 @@
 @push('scripts')
     <script type="text/x-template" id="options-template">
         <div>
-
             <div class="control-group" v-if="show_swatch">
                 <label for="swatch_type">{{ __('admin::app.catalog.attributes.swatch_type') }}</label>
                 <select class="control" id="swatch_type" name="swatch_type" v-model="swatch_type">
@@ -358,7 +357,6 @@
                     </thead>
 
                     <tbody>
-
                         <tr v-for="(row, index) in optionRows" :key="row.id">
                             <td v-if="show_swatch && swatch_type == 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
@@ -411,10 +409,13 @@
 
     <script>
         Vue.component('option-wrapper', {
-
             template: '#options-template',
 
             inject: ['$validator'],
+
+            props: [
+                'src'
+            ],
 
             data: function() {
                 return {
@@ -424,48 +425,71 @@
                     swatch_type: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
                     isNullOptionChecked: false,
                     idNullOption: null
+                };
+            },
+
+            watch: {
+                isNullOptionChecked: function (val) {
+                    if (val) {
+                        if (! this.idNullOption) {
+                            this.addOptionRow(true);
+                        }
+                    } else if(this.idNullOption !== null && typeof this.idNullOption !== 'undefined') {
+                        const row = this.optionRows.find(optionRow => optionRow.id === this.idNullOption);
+                        this.removeRow(row);
+                    }
                 }
             },
 
             created: function () {
-                @foreach ($attribute->options as $option)
-                    this.optionRowCount++;
-
-                    var row = {
-                            'id': @json($option->id),
-                            'admin_name': @json($option->admin_name),
-                            'sort_order': @json($option->sort_order),
-                            'swatch_value': @json($option->swatch_value),
-                            'swatch_value_url': @json($option->swatch_value_url),
-                            'notRequired': '',
-                            'locales': {}
-                        };
-
-                    @if (empty($option->label))
-                        this.isNullOptionChecked = true;
-                        this.idNullOption = @json($option->id);
-                        row['notRequired'] = true;
-                    @endif
-
-                    @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
-                        row['locales']['{{ $locale->code }}'] = @json($option->translate($locale->code)['label'] ?? '');
-                    @endforeach
-
-                    this.optionRows.push(row);
-                @endforeach
-
-                var this_this = this;
+                let self = this;
 
                 $('#type').on('change', function (e) {
                     if (['select'].indexOf($(e.target).val()) === -1) {
-                        this_this.show_swatch = false;
+                        self.show_swatch = false;
                     } else {
-                        this_this.show_swatch = true;
+                        self.show_swatch = true;
                     }
                 });
+
+                this.getAttributeOptions();
             },
 
             methods: {
+                getAttributeOptions: function (id) {
+                    let self = this;
+
+                    axios.get(this.src).then(function (response) {
+                        let options = response.data.data;
+
+                        options.forEach((option) => {
+                            self.optionRowCount++;
+
+                            let row = {
+                                'id': option.id,
+                                'admin_name': option.admin_name,
+                                'sort_order': option.sort_order,
+                                'swatch_value': option.swatch_value,
+                                'swatch_value_url': option.swatch_value_url,
+                                'notRequired': '',
+                                'locales': {}
+                            };
+
+                            if (option.label) {
+                                self.isNullOptionChecked = true;
+                                self.idNullOption = option.id;
+                                row['notRequired'] = true;
+                            }
+
+                            option.translations.forEach((translation) => {
+                                row['locales'][translation.locale] = translation.label ?? '';
+                            });
+
+                            self.optionRows.push(row);
+                        });
+                    });
+                },
+
                 addOptionRow: function (isNullOptionRow) {
                     const rowCount = this.optionRowCount++;
                     const id = 'option_' + rowCount;
@@ -515,19 +539,6 @@
                     return ('{{ app()->getLocale() }}' === localeCode) ? 'required' : '';
                 }
             },
-
-            watch: {
-                isNullOptionChecked: function (val) {
-                    if (val) {
-                        if (! this.idNullOption) {
-                            this.addOptionRow(true);
-                        }
-                    } else if(this.idNullOption !== null && typeof this.idNullOption !== 'undefined') {
-                        const row = this.optionRows.find(optionRow => optionRow.id === this.idNullOption);
-                        this.removeRow(row);
-                    }
-                }
-            }
         });
     </script>
 @endpush

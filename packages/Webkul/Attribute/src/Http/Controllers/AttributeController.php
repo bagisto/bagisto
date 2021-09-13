@@ -92,6 +92,19 @@ class AttributeController extends Controller
     }
 
     /**
+     * Get attribute options associated with attribute.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    public function getAttributeOptions($id)
+    {
+        $attribute = $this->attributeRepository->findOrFail($id);
+
+        return $attribute->options()->paginate(10);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
