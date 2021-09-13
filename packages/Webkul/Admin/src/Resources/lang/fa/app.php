@@ -1355,6 +1355,7 @@ return [
             'notifications' => [
                 'verification' => 'خدمات ارائه شده بفرست',
                 'registration' => 'ثبت نام از طریق ایمیل',
+                'customer-registration-confirmation-mail-to-admin' => 'پس از ثبت نام مشتری ، یک ایمیل تأیید به مدیر ارسال کنید',
                 'customer' => 'ارسال ایمیل به مشتری',
                 'new-order' => 'ارسال تأییدیه سفارش ایمیل',
                 'new-admin' => 'ارسال ایمیل دعوت نامه به مدیر',
