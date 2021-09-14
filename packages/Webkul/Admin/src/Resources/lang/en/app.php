@@ -646,7 +646,7 @@ return [
             'use_in_flat'          => "Create in Product Flat Table",
             'is_comparable'        => "Attribute is comparable",
             'default_null_option'  => 'Create default empty option',
-            'validations'          => [
+            'validation-messages'          => [
                 'max-size' => 'The image size must be less than 600 KB'
             ]
         ],

@@ -635,7 +635,7 @@ return [
             'use_in_flat' => "Crea in tabella Product flat",
             'is_comparable' => "L'attributo è comparabile",
             'default_null_option' => 'Crea opzione predefinita vuota',
-            'validations' => [
+            'validation-messages' => [
                 'max-size' => 'The image size must be less than 600 KB'
             ],
         ],

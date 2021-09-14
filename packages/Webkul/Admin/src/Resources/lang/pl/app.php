@@ -634,7 +634,7 @@ return [
             'use_in_flat' => "Utwórz w płaskiej tabeli produktu",
             'is_comparable' => "Atrybut jest porównywalny",
             'default_null_option' => 'Utwórz domyślną pustą opcję',
-            'validations' => [
+            'validation-messages' => [
                 'max-size' => 'The image size must be less than 600 KB'
             ],
         ],

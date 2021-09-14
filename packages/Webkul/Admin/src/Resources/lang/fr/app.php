@@ -645,7 +645,7 @@ return [
             'use_in_flat' => 'Créer dans la table plate du produit',
             'is_comparable' => 'L\'attribut est comparable',
             'default_null_option' => 'Créer une option vide par défaut',
-            'validations' => [
+            'validation-messages' => [
                 'max-size' => 'The image size must be less than 600 KB'
             ],
         ],

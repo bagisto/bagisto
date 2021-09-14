@@ -367,7 +367,7 @@
                                 <div class="control-group" :class="[errors.has('options[' + row.id + '][swatch_value]') ? 'has-error' : '']">
                                     <img style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;" v-if="row.swatch_value_url" :src="row.swatch_value_url"/>
                                     <input type="file" v-validate="'size:600'" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
-                                    <span class="control-error" v-if="errors.has('options[' + row.id + '][swatch_value]')" v-text="'{{ __('admin::app.catalog.attributes.validations.max-size') }}'"></span>
+                                    <span class="control-error" v-if="errors.has('options[' + row.id + '][swatch_value]')" v-text="'{{ __('admin::app.catalog.attributes.validation-messages.max-size') }}'"></span>
                                 </div>
                             </td>
 

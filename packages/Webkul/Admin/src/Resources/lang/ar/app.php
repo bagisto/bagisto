@@ -635,7 +635,7 @@ return [
             'use_in_flat' => "إنشاء في جدول المنتجات المسطحة",
             'is_comparable' => "السمة قابلة للمقارنة",
             'default_null_option' => 'إنشاء خيار فارغ افتراضي',
-            'validations' => [
+            'validation-messages' => [
                 'max-size' => 'The image size must be less than 600 KB'
             ],
         ],

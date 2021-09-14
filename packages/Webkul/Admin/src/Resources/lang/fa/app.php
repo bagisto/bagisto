@@ -635,7 +635,7 @@ return [
             'use_in_flat' => 'اضافه به جدول flat (product_flat)',
             'is_comparable' => "ویژگی قابل مقایسه است",
             'default_null_option' => 'گزینه پیش فرض خالی ایجاد کنید',
-            'validations' => [
+            'validation-messages' => [
                 'max-size' => 'The image size must be less than 600 KB'
             ],
         ],
