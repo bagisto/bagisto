@@ -398,7 +398,7 @@
             </div>
 
             <button type="button" class="btn btn-lg btn-primary" id="load-more-btm" style="margin-top: 20px" @click="loadMoreOptions()">
-                Load More Options
+                {{ __('admin::app.catalog.attributes.load-more-options-btn-title') }}
             </button>
 
             <button type="button" class="btn btn-lg btn-primary" id="add-option-btn" style="margin-top: 20px" @click="addOptionRow()">

@@ -604,6 +604,7 @@ return [
             'options' => 'گزینه ها',
             'position' => 'موقعیت',
             'add-option-btn-title' => 'افزودن گزینه',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'اعتبار سنجی ها',
             'input_validation' => 'اعتبار سنجی ورودی',
             'is_required' => 'مورد نیاز است',

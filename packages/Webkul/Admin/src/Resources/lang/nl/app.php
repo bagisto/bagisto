@@ -600,6 +600,7 @@ return [
             'options' => 'Opties',
             'position' => 'Positie',
             'add-option-btn-title' => 'Optie toevoegen',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Validations',
             'input_validation' => 'Input Validation',
             'is_required' => 'is verplicht',

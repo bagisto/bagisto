@@ -614,6 +614,7 @@ return [
             'options' => 'Options',
             'position' => 'Positionner',
             'add-option-btn-title' => 'Ajouter une option',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Validation',
             'input_validation' => 'Validation d\'entrée',
             'is_required' => 'Est requis',

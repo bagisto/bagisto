@@ -603,6 +603,7 @@ return [
             'options' => 'خيارات',
             'position' => 'موضع',
             'add-option-btn-title' => 'إضافة خيار',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'التصديقات',
             'input_validation' => 'التحقق من الإدخال',
             'is_required' => 'مطلوب',
