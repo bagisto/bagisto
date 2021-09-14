@@ -353,7 +353,10 @@
                     </thead>
 
                     <tbody>
+                        {{-- `v-show` used here, so that element remain inside the form. Don't use `v-if` here. --}}
                         <tr v-for="(row, index) in optionRows" :key="row.id" v-show="! row.isDelete">
+                            <input type="hidden" :name="'options[' + row.id + '][isNew]'" :value="row.isNew">
+
                             <input type="hidden" :name="'options[' + row.id + '][isDelete]'" :value="row.isDelete">
 
                             <td v-if="show_swatch && swatch_type == 'color'">
@@ -397,7 +400,7 @@
                 </table>
             </div>
 
-            <button type="button" class="btn btn-lg btn-primary" id="load-more-btm" style="margin-top: 20px" @click="loadMoreOptions()">
+            <button type="button" class="btn btn-lg btn-primary" id="load-more-btm" style="margin-top: 20px" @click="loadMoreOptions()" v-if="loadMore">
                 {{ __('admin::app.catalog.attributes.load-more-options-btn-title') }}
             </button>
 
@@ -424,6 +427,7 @@
                     optionPage: 1,
                     optionRowCount: 0,
                     optionRows: [],
+                    loadMore: true,
                     show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
                     swatch_type: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
                     isNullOptionChecked: false,
@@ -469,6 +473,10 @@
                     axios.get(`${this.src}?page=${this.optionPage}`).then(function (response) {
                         let options = response.data.data;
 
+                        if (response.data.current_page === response.data.last_page) {
+                            self.loadMore = false;
+                        }
+
                         options.forEach((option) => {
                             self.optionRowCount++;
 
@@ -480,6 +488,7 @@
                                 'swatch_value_url': option.swatch_value_url,
                                 'notRequired': '',
                                 'locales': {},
+                                'isNew': false,
                                 'isDelete': false,
                             };
 
@@ -507,7 +516,7 @@
                 addOptionRow: function (isNullOptionRow) {
                     const rowCount = this.optionRowCount++;
                     const id = 'option_' + rowCount;
-                    let row = {'id': id, 'locales': {}, 'isDelete': false};
+                    let row = {'id': id, 'locales': {}, 'isNew': true, 'isDelete': false};
 
                     this.allLocales.forEach((locale) => {
                         row['locales'][locale.code] = '';
@@ -530,7 +539,30 @@
                     }
 
                     const index = this.optionRows.indexOf(row);
-                    this.optionRows[index].isDelete = true;
+
+                    if (this.optionRows[index].isNew) {
+                        this.hardDeleteNewRow(index);
+                    } else {
+                        this.softDeleteExistingRow(index);
+                    }
+                },
+
+                hardDeleteNewRow: function (rowIndex) {
+                    Vue.delete(this.optionRows, rowIndex);
+                },
+
+                softDeleteExistingRow: function (rowIndex) {
+                    let self = this;
+
+                    this.optionRows[rowIndex].isDelete = true;
+
+                    let requiredKeys = ['admin_name', 'sort_order'];
+
+                    requiredKeys.forEach((key) => {
+                        if (self.optionRows[rowIndex][key] === undefined || self.optionRows[rowIndex][key] === '') {
+                            self.optionRows[rowIndex][key] = '0';
+                        }
+                    });
                 },
 
                 adminName: function (row) {
@@ -545,13 +577,13 @@
                     return 'options[' + row.id + '][sort_order]';
                 },
 
-                getOptionValidation: (row, localeCode) => {
+                getOptionValidation: function (row, localeCode) {
                     if (row.notRequired === true) {
                         return '';
                     }
 
                     return (this.appLocale === localeCode) ? 'required' : '';
-                }
+                },
             },
         });
     </script>

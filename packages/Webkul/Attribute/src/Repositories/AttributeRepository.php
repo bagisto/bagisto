@@ -4,7 +4,6 @@ namespace Webkul\Attribute\Repositories;
 
 use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Str;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Core\Eloquent\Repository;
 
@@ -94,7 +93,9 @@ class AttributeRepository extends Repository
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
             if (isset($data['options'])) {
                 foreach ($data['options'] as $optionId => $optionInputs) {
-                    if (Str::contains($optionId, 'option_')) {
+                    $isNew = $optionInputs['isNew'] == 'true' ? true : false;
+
+                    if ($isNew) {
                         $this->attributeOptionRepository->create(array_merge([
                             'attribute_id' => $attribute->id,
                         ], $optionInputs));
