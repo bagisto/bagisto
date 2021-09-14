@@ -627,6 +627,9 @@ return [
             'use_in_flat' => "Ürün Tablosu Oluştur",
             'is_comparable' => "Nitelik kıyaslanabilir",
             'default_null_option' => 'Varsayılan boş seçenek oluştur',
+            'validations' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'Küme',

@@ -645,6 +645,9 @@ return [
             'use_in_flat' => "Crear en tabla plana de productos",
             'is_comparable' => "El atributo es comparable",
             'default_null_option' => 'Crear opción vacía por defecto',
+            'validations' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'Familias',

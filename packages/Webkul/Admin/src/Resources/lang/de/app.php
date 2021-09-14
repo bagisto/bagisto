@@ -624,6 +624,9 @@ return [
             'use_in_flat'          => 'In Produkt Flat Tabelle erstellen',
             'is_comparable'        => 'Attribut ist vergleichbar',
             'default_null_option'  => 'Erstellen Sie eine leere Standardoption',
+            'validations'          => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families'   =>
         [
