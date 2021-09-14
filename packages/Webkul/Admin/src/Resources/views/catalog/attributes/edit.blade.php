@@ -1,3 +1,7 @@
+@php
+    $allLocales = app('Webkul\Core\Repositories\LocaleRepository')->all();
+@endphp
+
 @extends('admin::layouts.content')
 
 @section('page_title')
@@ -27,25 +31,29 @@
             <div class="page-content">
                 <div class="form-container">
                     @csrf()
+
                     <input name="_method" type="hidden" value="PUT">
 
                     {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.before', ['attribute' => $attribute]) !!}
 
                     <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="true">
                         <div slot="body">
-
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.controls.before', ['attribute' => $attribute]) !!}
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.catalog.attributes.code') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') ?: $attribute->code }}" disabled="disabled" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.code') }}&quot;" v-code/>
                                 <input type="hidden" name="code" value="{{ $attribute->code }}"/>
-                                <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
+                                <span class="control-error" v-if="errors.has('code')" v-text="errors.first('code')"></span>
                             </div>
 
                             <div class="control-group">
-                                <?php $selectedOption = old('type') ?: $attribute->type ?>
+                                @php
+                                    $selectedOption = old('type') ?: $attribute->type;
+                                @endphp
+
                                 <label for="type">{{ __('admin::app.catalog.attributes.type') }}</label>
+
                                 <select class="control" id="type" disabled="disabled">
                                     <option value="text" {{ $selectedOption == 'text' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.text') }}
@@ -81,6 +89,7 @@
                                         {{ __('admin::app.catalog.attributes.checkbox') }}
                                     </option>
                                 </select>
+
                                 <input type="hidden" name="type" value="{{ $attribute->type }}"/>
                             </div>
 
@@ -90,39 +99,32 @@
 
                     {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.after', ['attribute' => $attribute]) !!}
 
-
                     {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
 
                     <accordian :title="'{{ __('admin::app.catalog.attributes.label') }}'" :active="true">
                         <div slot="body">
-
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.controls.before', ['attribute' => $attribute]) !!}
 
                             <div class="control-group" :class="[errors.has('admin_name') ? 'has-error' : '']">
                                 <label for="admin_name" class="required">{{ __('admin::app.catalog.attributes.admin') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="admin_name" name="admin_name" value="{{ old('admin_name') ?: $attribute->admin_name }}" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('admin_name')">@{{ errors.first('admin_name') }}</span>
+                                <span class="control-error" v-if="errors.has('admin_name')" v-text="errors.first('admin_name')"></span>
                             </div>
 
-                            @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
-
+                            @foreach ($allLocales as $locale)
                                 <div class="control-group">
                                     <label for="locale-{{ $locale->code }}">{{ $locale->name . ' (' . $locale->code . ')' }}</label>
                                     <input type="text" class="control" id="locale-{{ $locale->code }}" name="<?php echo $locale->code; ?>[name]" value="{{ old($locale->code)['name'] ?? ($attribute->translate($locale->code)->name ?? '') }}"/>
                                 </div>
-
                             @endforeach
 
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.controls.after', ['attribute' => $attribute]) !!}
-
                         </div>
                     </accordian>
 
                     {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.after', ['attribute' => $attribute]) !!}
 
-
                     <div class="{{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hide' }}">
-
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.before', ['attribute' => $attribute]) !!}
 
                         <accordian :title="'{{ __('admin::app.catalog.attributes.options') }}'" :active="true" :id="'options'">
@@ -130,7 +132,10 @@
 
                                 {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.before', ['attribute' => $attribute]) !!}
 
-                                <option-wrapper src="{{ route('admin.catalog.attributes.options', $attribute->id) }}"></option-wrapper>
+                                <option-wrapper
+                                    src="{{ route('admin.catalog.attributes.options', $attribute->id) }}"
+                                    :all-locales="{{ $allLocales->toJson() }}"
+                                ></option-wrapper>
 
                                 {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.after', ['attribute' => $attribute]) !!}
 
@@ -138,14 +143,12 @@
                         </accordian>
 
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.after', ['attribute' => $attribute]) !!}
-
                     </div>
 
                     {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.before', ['attribute' => $attribute]) !!}
 
                     <accordian :title="'{{ __('admin::app.catalog.attributes.validations') }}'" :active="true">
                         <div slot="body">
-
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.before', ['attribute' => $attribute]) !!}
 
                             <div class="control-group">
@@ -190,18 +193,15 @@
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.after', ['attribute' => $attribute]) !!}
-
                         </div>
                     </accordian>
 
                     {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.after', ['attribute' => $attribute]) !!}
 
-
                     {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.before', ['attribute' => $attribute]) !!}
 
                     <accordian :title="'{{ __('admin::app.catalog.attributes.configuration') }}'" :active="true">
                         <div slot="body">
-
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.before', ['attribute' => $attribute]) !!}
 
                             <div class="control-group">
@@ -291,7 +291,6 @@
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.after', ['attribute' => $attribute]) !!}
-
                         </div>
                     </accordian>
 
@@ -332,6 +331,7 @@
                     <input type="checkbox" class="control" id="default-null-option" name="default-null-option" v-model="isNullOptionChecked">
 
                     <label class="checkbox-view" for="default-null-option"></label>
+
                     {{ __('admin::app.catalog.attributes.default_null_option') }}
                 </span>
             </div>
@@ -344,11 +344,7 @@
 
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
 
-                            @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
-
-                                <th>{{ $locale->name . ' (' . $locale->code . ')' }}</th>
-
-                            @endforeach
+                            <th v-for="locale in allLocales" v-text="`${locale.name} (${locale.code})`"></th>
 
                             <th>{{ __('admin::app.catalog.attributes.position') }}</th>
 
@@ -357,7 +353,9 @@
                     </thead>
 
                     <tbody>
-                        <tr v-for="(row, index) in optionRows" :key="row.id">
+                        <tr v-for="(row, index) in optionRows" :key="row.id" v-show="! row.isDelete">
+                            <input type="hidden" :name="'options[' + row.id + '][isDelete]'" :value="row.isDelete">
+
                             <td v-if="show_swatch && swatch_type == 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>
@@ -366,30 +364,28 @@
                                 <div class="control-group" :class="[errors.has('options[' + row.id + '][swatch_value]') ? 'has-error' : '']">
                                     <img style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;" v-if="row.swatch_value_url" :src="row.swatch_value_url"/>
                                     <input type="file" v-validate="'size:600'" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
-                                    <span class="control-error" v-if="errors.has('options[' + row.id + '][swatch_value]')">The image size must be less than 600 KB</span>
+                                    <span class="control-error" v-if="errors.has('options[' + row.id + '][swatch_value]')" v-text="'The image size must be less than 600 KB'"></span>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
                                     <input type="text" v-validate="'required'" v-model="row['admin_name']" :name="adminName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
-                                    <span class="control-error" v-if="errors.has(adminName(row))">@{{ errors.first(adminName(row)) }}</span>
+                                    <span class="control-error" v-if="errors.has(adminName(row))" v-text="errors.first(adminName(row))"></span>
                                 </div>
                             </td>
 
-                            @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
-                                <td>
-                                    <div class="control-group" :class="[errors.has(localeInputName(row, '{{ $locale->code }}')) ? 'has-error' : '']">
-                                        <input type="text" v-validate="getOptionValidation(row, '{{ $locale->code }}')" v-model="row['locales']['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
-                                        <span class="control-error" v-if="errors.has(localeInputName(row, '{{ $locale->code }}'))">@{{ errors.first(localeInputName(row, '{!! $locale->code !!}')) }}</span>
-                                    </div>
-                                </td>
-                            @endforeach
+                            <td v-for="locale in allLocales">
+                                <div class="control-group" :class="[errors.has(localeInputName(row, locale.code)) ? 'has-error' : '']">
+                                    <input type="text" v-validate="getOptionValidation(row, locale.code)" v-model="row['locales'][locale.code]" :name="localeInputName(row, locale.code)" class="control" :data-vv-as="`&quot;${locale.name} (${locale.code})&quot;`"/>
+                                    <span class="control-error" v-if="errors.has(localeInputName(row, locale.code))" v-text="errors.first(localeInputName(row, locale.code))"></span>
+                                </div>
+                            </td>
 
                             <td>
                                 <div class="control-group" :class="[errors.has(sortOrderName(row)) ? 'has-error' : '']">
                                     <input type="text" v-validate="'required|numeric'" v-model="row['sort_order']" :name="sortOrderName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.position') }}&quot;"/>
-                                    <span class="control-error" v-if="errors.has(sortOrderName(row))">@{{ errors.first(sortOrderName(row)) }}</span>
+                                    <span class="control-error" v-if="errors.has(sortOrderName(row))" v-text="errors.first(sortOrderName(row))"></span>
                                 </div>
                             </td>
 
@@ -400,6 +396,10 @@
                     </tbody>
                 </table>
             </div>
+
+            <button type="button" class="btn btn-lg btn-primary" id="load-more-btm" style="margin-top: 20px" @click="loadMoreOptions()">
+                Load More Options
+            </button>
 
             <button type="button" class="btn btn-lg btn-primary" id="add-option-btn" style="margin-top: 20px" @click="addOptionRow()">
                 {{ __('admin::app.catalog.attributes.add-option-btn-title') }}
@@ -414,11 +414,14 @@
             inject: ['$validator'],
 
             props: [
-                'src'
+                'src',
+                'allLocales'
             ],
 
             data: function() {
                 return {
+                    appLocale: '{{ app()->getLocale() }}',
+                    optionPage: 1,
                     optionRowCount: 0,
                     optionRows: [],
                     show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
@@ -442,24 +445,28 @@
             },
 
             created: function () {
-                let self = this;
-
-                $('#type').on('change', function (e) {
-                    if (['select'].indexOf($(e.target).val()) === -1) {
-                        self.show_swatch = false;
-                    } else {
-                        self.show_swatch = true;
-                    }
-                });
-
                 this.getAttributeOptions();
+
+                this.activateToggleSwatch();
             },
 
             methods: {
-                getAttributeOptions: function (id) {
+                activateToggleSwatch: function () {
                     let self = this;
 
-                    axios.get(this.src).then(function (response) {
+                    $('#type').on('change', function (e) {
+                        if (['select'].indexOf($(e.target).val()) === -1) {
+                            self.show_swatch = false;
+                        } else {
+                            self.show_swatch = true;
+                        }
+                    });
+                },
+
+                getAttributeOptions: function () {
+                    let self = this;
+
+                    axios.get(`${this.src}?page=${this.optionPage}`).then(function (response) {
                         let options = response.data.data;
 
                         options.forEach((option) => {
@@ -472,7 +479,8 @@
                                 'swatch_value': option.swatch_value,
                                 'swatch_value_url': option.swatch_value_url,
                                 'notRequired': '',
-                                'locales': {}
+                                'locales': {},
+                                'isDelete': false,
                             };
 
                             if (option.label) {
@@ -490,14 +498,20 @@
                     });
                 },
 
+                loadMoreOptions: function () {
+                    this.optionPage++;
+
+                    this.getAttributeOptions();
+                },
+
                 addOptionRow: function (isNullOptionRow) {
                     const rowCount = this.optionRowCount++;
                     const id = 'option_' + rowCount;
-                    let row = {'id': id, 'locales': {}};
+                    let row = {'id': id, 'locales': {}, 'isDelete': false};
 
-                    @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
-                        row['locales']['{{ $locale->code }}'] = '';
-                    @endforeach
+                    this.allLocales.forEach((locale) => {
+                        row['locales'][locale.code] = '';
+                    });
 
                     row['notRequired'] = '';
 
@@ -515,8 +529,8 @@
                         this.isNullOptionChecked = false;
                     }
 
-                    const index = this.optionRows.indexOf(row)
-                    Vue.delete(this.optionRows, index);
+                    const index = this.optionRows.indexOf(row);
+                    this.optionRows[index].isDelete = true;
                 },
 
                 adminName: function (row) {
@@ -536,7 +550,7 @@
                         return '';
                     }
 
-                    return ('{{ app()->getLocale() }}' === localeCode) ? 'required' : '';
+                    return (this.appLocale === localeCode) ? 'required' : '';
                 }
             },
         });

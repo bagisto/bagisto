@@ -88,8 +88,6 @@ class AttributeRepository extends Repository
 
         $attribute->update($data);
 
-        $previousOptionIds = $attribute->options()->pluck('id');
-
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
             if (isset($data['options'])) {
                 foreach ($data['options'] as $optionId => $optionInputs) {
@@ -98,18 +96,16 @@ class AttributeRepository extends Repository
                             'attribute_id' => $attribute->id,
                         ], $optionInputs));
                     } else {
-                        if (is_numeric($index = $previousOptionIds->search($optionId))) {
-                            $previousOptionIds->forget($index);
-                        }
+                        $isDelete = $optionInputs['isDelete'] == 'true' ? true : false;
 
-                        $this->attributeOptionRepository->update($optionInputs, $optionId);
+                        if ($isDelete) {
+                            $this->attributeOptionRepository->delete($optionId);
+                        } else {
+                            $this->attributeOptionRepository->update($optionInputs, $optionId);
+                        }
                     }
                 }
             }
-        }
-
-        foreach ($previousOptionIds as $optionId) {
-            $this->attributeOptionRepository->delete($optionId);
         }
 
         Event::dispatch('catalog.attribute.update.after', $attribute);
@@ -160,7 +156,7 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * 
+     *
      * @param  array  $codes
      * @return array
      */
