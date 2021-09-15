@@ -29,11 +29,11 @@
 
         <div class="page-content">
             @inject('products', 'Webkul\Admin\DataGrids\ProductDataGrid')
+
             {!! $products->render() !!}
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
-
     </div>
 
     <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
@@ -46,14 +46,34 @@
 
 @push('scripts')
     @include('admin::export.export', ['gridName' => $products])
-    <script>
 
+    <script>
         function reloadPage(getVar, getVal) {
             let url = new URL(window.location.href);
+
             url.searchParams.set(getVar, getVal);
 
             window.location.href = url.href;
         }
 
+        function showEditQuantityForm(productId) {
+            $(`#product-${productId}-quantity`).hide();
+
+            $(`#edit-product-${productId}-quantity-form-block`).show();
+        }
+
+        function cancelEditQuantityForm(productId) {
+            $(`#product-${productId}-quantity`).show();
+
+            $(`#edit-product-${productId}-quantity-form-block`).hide();
+        }
+
+        function saveEditQuantityForm(productId) {
+            let quantityFormData = $(`#edit-product-${productId}-quantity-form`).serializeArray();
+
+            console.log(quantityFormData);
+
+            alert(`${productId} Saved!`);
+        }
     </script>
 @endpush
