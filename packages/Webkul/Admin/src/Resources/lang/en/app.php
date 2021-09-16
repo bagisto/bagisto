@@ -592,9 +592,9 @@ return [
             'remove-video-btn-title'        => 'Remove Video',
             'not-support-video'             => 'Your browser does not support the video tag.',
             'variant-already-exist-message' => 'Variant with same attribute options already exists.',
-            'save' => 'Save',
-            'cancel' => 'Cancel',
-            'saved-inventory-message' => 'Product inventory saved successfully.',
+            'save'                          => 'Save',
+            'cancel'                        => 'Cancel',
+            'saved-inventory-message'       => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [
