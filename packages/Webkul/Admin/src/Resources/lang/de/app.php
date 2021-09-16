@@ -571,6 +571,9 @@ return [
             'add-video-btn-title' => 'Add Video',
             'remove-video-btn-title' => 'Remove Video',
             'not-support-video' => 'Your browser does not support the video tag.',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
         'attributes' =>
         [

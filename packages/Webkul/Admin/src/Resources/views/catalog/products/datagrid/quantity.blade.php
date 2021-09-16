@@ -31,7 +31,7 @@
             </div>
         @endforeach
 
-        <button class="btn btn-primary" onclick="saveEditQuantityForm('{{ route('admin.catalog.products.update-inventories', $product->id) }}', '{{ $product->id }}')">Save</button>
-        <button class="btn btn-danger" onclick="cancelEditQuantityForm('{{ $product->id }}')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveEditQuantityForm('{{ route('admin.catalog.products.update-inventories', $product->id) }}', '{{ $product->id }}')">{{ __('admin::app.catalog.products.save') }}</button>
+        <button class="btn btn-danger" onclick="cancelEditQuantityForm('{{ $product->id }}')">{{ __('admin::app.catalog.products.cancel') }}</button>
     </form>
 </span>

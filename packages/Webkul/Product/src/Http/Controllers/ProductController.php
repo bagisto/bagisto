@@ -262,7 +262,7 @@ class ProductController extends Controller
         $this->productInventoryRepository->saveInventories(request()->all(), $product);
 
         return response()->json([
-            'message' => 'Product inventory saved successfully.',
+            'message' => __('admin::app.catalog.products.saved-inventory-message'),
             'updatedTotal' => $this->productInventoryRepository->where('product_id', $product->id)->sum('qty')
         ]);
     }

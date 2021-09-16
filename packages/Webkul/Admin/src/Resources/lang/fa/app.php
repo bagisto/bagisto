@@ -581,6 +581,9 @@ return [
             'add-video-btn-title' => 'اضافه کردن فیلم',
             'remove-video-btn-title' => 'حذف فیلم',
             'not-support-video' => 'مرورگر شما تگ ویدیو را پشتیبانی نمی کند',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [
