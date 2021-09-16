@@ -592,6 +592,9 @@ return [
             'add-video-btn-title' => 'Agregar Video',
             'remove-video-btn-title' => 'Remover Video',
             'not-support-video' => 'Su navegador no soporta la etiqueta video.',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [

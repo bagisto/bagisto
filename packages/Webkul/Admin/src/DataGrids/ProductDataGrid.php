@@ -2,31 +2,85 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Core\Models\Locale;
-use Webkul\Core\Models\Channel;
-use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\Channel;
+use Webkul\Core\Models\Locale;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Ui\DataGrid\DataGrid;
 
 class ProductDataGrid extends DataGrid
 {
+    /**
+     * Default sort order of datagrid.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Set index columns, ex: id.
+     *
+     * @var string
+     */
     protected $index = 'product_id';
 
+    /**
+     * If paginated then value of pagination.
+     *
+     * @var int
+     */
     protected $itemsPerPage = 10;
 
+    /**
+     * Locale.
+     *
+     * @var string
+     */
     protected $locale = 'all';
 
+    /**
+     * Channel.
+     *
+     * @var string
+     */
     protected $channel = 'all';
 
-    /** @var string[] contains the keys for which extra filters to render */
+    /**
+     * Contains the keys for which extra filters to show.
+     *
+     * @var string[]
+     */
     protected $extraFilters = [
         'channels',
         'locales',
     ];
 
-    public function __construct()
-    {
+    /**
+     * Product repository instance.
+     *
+     * @var \Webkul\Product\Repositories\ProductRepository
+     */
+    protected $productRepository;
+
+    /**
+     * Inventory source repository instance.
+     *
+     * @var \Webkul\Inventory\Repositories\InventorySourceRepository
+     */
+    protected $inventorySourceRepository;
+
+    /**
+     * Create datagrid instance.
+     *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
+     * @return void
+     */
+    public function __construct(
+        ProductRepository $productRepository,
+        InventorySourceRepository $inventorySourceRepository
+    ) {
         parent::__construct();
 
         /* locale */
@@ -40,8 +94,17 @@ class ProductDataGrid extends DataGrid
             $this->channel = Channel::query()->find($this->channel);
             $this->channel = $this->channel ? $this->channel->code : 'all';
         }
+
+        $this->productRepository = $productRepository;
+
+        $this->inventorySourceRepository = $inventorySourceRepository;
     }
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         if ($this->channel === 'all') {
@@ -72,7 +135,7 @@ class ProductDataGrid extends DataGrid
                 'product_flat.status',
                 'product_flat.price',
                 'attribute_families.name as attribute_family',
-                DB::raw('SUM(DISTINCT ' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
+                DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
 
         $queryBuilder->groupBy('product_flat.product_id', 'product_flat.locale', 'product_flat.channel');
@@ -91,6 +154,11 @@ class ProductDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -179,16 +247,22 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => false,
-            'wrapper'    => function ($value) {
-                if (is_null($value->quantity)) {
+            'closure'    => true,
+            'wrapper'    => function ($row) {
+                if (is_null($row->quantity)) {
                     return 0;
                 } else {
-                    return $value->quantity;
+                    return $this->renderQuantityView($row);
                 }
             },
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
@@ -210,6 +284,11 @@ class ProductDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
     public function prepareMassActions()
     {
         $this->addAction([
@@ -236,5 +315,22 @@ class ProductDataGrid extends DataGrid
                 'Inactive' => 0,
             ],
         ]);
+    }
+
+    /**
+     * Render quantity view.
+     *
+     * @parma  object  $row
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    private function renderQuantityView($row)
+    {
+        $product = $this->productRepository->find($row->product_id);
+
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
+
+        $totalQuantity = $row->quantity;
+
+        return view('admin::catalog.products.datagrid.quantity', compact('product', 'inventorySources', 'totalQuantity'))->render();
     }
 }
