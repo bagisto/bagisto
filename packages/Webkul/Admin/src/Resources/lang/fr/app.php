@@ -591,6 +591,9 @@ return [
             'remove-video-btn-title' => 'Supprimer la vidéo',
             'not-support-video' => 'Votre navigateur ne prend pas en charge la balise vidéo.',
             'variant-already-exist-message' => 'Une variante avec les mêmes options d\'attribut existe déjà.',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [
