@@ -2,20 +2,19 @@
 
 namespace Webkul\Attribute\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
 class AttributeController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * AttributeRepository object
+     * Attribute repository instance.
      *
      * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
@@ -71,7 +70,7 @@ class AttributeController extends Controller
 
         $data['is_user_defined'] = 1;
 
-        $attribute = $this->attributeRepository->create($data);
+        $this->attributeRepository->create($data);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Attribute']));
 
@@ -92,6 +91,19 @@ class AttributeController extends Controller
     }
 
     /**
+     * Get attribute options associated with attribute.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    public function getAttributeOptions($id)
+    {
+        $attribute = $this->attributeRepository->findOrFail($id);
+
+        return $attribute->options()->paginate(50);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
@@ -105,7 +117,7 @@ class AttributeController extends Controller
             'type'       => 'required',
         ]);
 
-        $attribute = $this->attributeRepository->update(request()->all(), $id);
+        $this->attributeRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Attribute']));
 
@@ -131,7 +143,7 @@ class AttributeController extends Controller
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Attribute']));
 
                 return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Attribute']));
             }
         }
@@ -140,7 +152,7 @@ class AttributeController extends Controller
     }
 
     /**
-     * Remove the specified resources from database
+     * Remove the specified resources from database.
      *
      * @return \Illuminate\Http\Response
      */

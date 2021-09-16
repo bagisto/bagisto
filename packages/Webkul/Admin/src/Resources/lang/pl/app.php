@@ -605,6 +605,7 @@ return [
             'options' => 'Opcje',
             'position' => 'Pozycja',
             'add-option-btn-title' => 'Dodaj opcję',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Walidacje danych',
             'input_validation' => 'Sprawdzanie poprawności danych wejściowych',
             'is_required' => 'Jest wymagany',
@@ -636,6 +637,9 @@ return [
             'use_in_flat' => "Utwórz w płaskiej tabeli produktu",
             'is_comparable' => "Atrybut jest porównywalny",
             'default_null_option' => 'Utwórz domyślną pustą opcję',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'Rodziny atrybutów',

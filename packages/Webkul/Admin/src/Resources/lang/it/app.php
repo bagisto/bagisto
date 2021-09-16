@@ -607,6 +607,7 @@ return [
             'options' => 'Opzioni',
             'position' => 'Posizione',
             'add-option-btn-title' => 'Aggiungi Option',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Validazioni',
             'input_validation' => 'Validazione Input',
             'is_required' => 'È Richiesto',
@@ -637,6 +638,9 @@ return [
             'use_in_flat' => "Crea in tabella Product flat",
             'is_comparable' => "L'attributo è comparabile",
             'default_null_option' => 'Crea opzione predefinita vuota',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'Famiglie',

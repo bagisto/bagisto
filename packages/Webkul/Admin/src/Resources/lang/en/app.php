@@ -618,6 +618,7 @@ return [
             'options'              => 'Options',
             'position'             => 'Position',
             'add-option-btn-title' => 'Add Option',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations'          => 'Validations',
             'input_validation'     => 'Input Validation',
             'is_required'          => 'Is Required',
@@ -648,6 +649,9 @@ return [
             'use_in_flat'          => "Create in Product Flat Table",
             'is_comparable'        => "Attribute is comparable",
             'default_null_option'  => 'Create default empty option',
+            'validation-messages'          => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ]
         ],
         'families' => [
             'title'                => 'Families',

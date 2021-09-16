@@ -607,6 +607,7 @@ return [
             'options' => 'گزینه ها',
             'position' => 'موقعیت',
             'add-option-btn-title' => 'افزودن گزینه',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'اعتبار سنجی ها',
             'input_validation' => 'اعتبار سنجی ورودی',
             'is_required' => 'مورد نیاز است',
@@ -637,6 +638,9 @@ return [
             'use_in_flat' => 'اضافه به جدول flat (product_flat)',
             'is_comparable' => "ویژگی قابل مقایسه است",
             'default_null_option' => 'گزینه پیش فرض خالی ایجاد کنید',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'ویژگی ها',
