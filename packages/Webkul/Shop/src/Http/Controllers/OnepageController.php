@@ -206,6 +206,8 @@ class OnepageController extends Controller
 
         Cart::deActivateCart();
 
+        Cart::activateCartIfSessionHasDeactivatedCartId();
+
         session()->flash('order', $order);
 
         return response()->json([
