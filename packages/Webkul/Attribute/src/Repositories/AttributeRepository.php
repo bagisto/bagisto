@@ -2,16 +2,15 @@
 
 namespace Webkul\Attribute\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
+use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
-use Illuminate\Container\Container as App;
-use Illuminate\Support\Str;
+use Webkul\Core\Eloquent\Repository;
 
 class AttributeRepository extends Repository
 {
     /**
-     * AttributeOptionRepository object
+     * Attribute option repository instance.
      *
      * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
      */
@@ -26,24 +25,25 @@ class AttributeRepository extends Repository
     public function __construct(
         AttributeOptionRepository $attributeOptionRepository,
         App $app
-    )
-    {
+    ) {
         $this->attributeOptionRepository = $attributeOptionRepository;
 
         parent::__construct($app);
     }
 
     /**
-     * Specify Model class name
+     * Specify model class name.
      *
      * @return mixed
      */
-    function model()
+    public function model()
     {
         return 'Webkul\Attribute\Contracts\Attribute';
     }
 
     /**
+     * Create attribute.
+     *
      * @param  array  $data
      * @return \Webkul\Attribute\Contracts\Attribute
      */
@@ -73,6 +73,8 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * Update attribute.
+     *
      * @param  array  $data
      * @param  int $id
      * @param  string  $attribute
@@ -88,28 +90,26 @@ class AttributeRepository extends Repository
 
         $attribute->update($data);
 
-        $previousOptionIds = $attribute->options()->pluck('id');
-
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
             if (isset($data['options'])) {
                 foreach ($data['options'] as $optionId => $optionInputs) {
-                    if (Str::contains($optionId, 'option_')) {
+                    $isNew = $optionInputs['isNew'] == 'true' ? true : false;
+
+                    if ($isNew) {
                         $this->attributeOptionRepository->create(array_merge([
                             'attribute_id' => $attribute->id,
                         ], $optionInputs));
                     } else {
-                        if (is_numeric($index = $previousOptionIds->search($optionId))) {
-                            $previousOptionIds->forget($index);
-                        }
+                        $isDelete = $optionInputs['isDelete'] == 'true' ? true : false;
 
-                        $this->attributeOptionRepository->update($optionInputs, $optionId);
+                        if ($isDelete) {
+                            $this->attributeOptionRepository->delete($optionId);
+                        } else {
+                            $this->attributeOptionRepository->update($optionInputs, $optionId);
+                        }
                     }
                 }
             }
-        }
-
-        foreach ($previousOptionIds as $optionId) {
-            $this->attributeOptionRepository->delete($optionId);
         }
 
         Event::dispatch('catalog.attribute.update.after', $attribute);
@@ -118,6 +118,8 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * Delete attribute.
+     *
      * @param  int  $id
      * @return void
      */
@@ -131,6 +133,8 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * Validate user input.
+     *
      * @param  array  $data
      * @return array
      */
@@ -152,6 +156,8 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * Get filter attributes.
+     *
      * @return array
      */
     public function getFilterAttributes()
@@ -160,7 +166,8 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * 
+     * Get product default attributes.
+     *
      * @param  array  $codes
      * @return array
      */
@@ -189,6 +196,8 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * Get attribute by code.
+     *
      * @param  string  $code
      * @return \Webkul\Attribute\Contracts\Attribute
      */
@@ -204,6 +213,8 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * Get family attributes.
+     *
      * @param  \Webkul\Attribute\Contracts\AttributeFamily  $attributeFamily
      * @return \Webkul\Attribute\Contracts\Attribute
      */
@@ -219,6 +230,8 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * Get partials.
+     *
      * @return array
      */
     public function getPartial()
@@ -227,13 +240,13 @@ class AttributeRepository extends Repository
 
         $trimmed = [];
 
-        foreach($attributes as $key => $attribute) {
-            if ($attribute->code != 'tax_category_id'
-                && (
-                    $attribute->type == 'select'
+        foreach ($attributes as $key => $attribute) {
+            if (
+                $attribute->code != 'tax_category_id'
+                && ($attribute->type == 'select'
                     || $attribute->type == 'multiselect'
-                    || $attribute->code == 'sku'
-            )) {
+                    || $attribute->code == 'sku')
+            ) {
                 if ($attribute->options()->exists()) {
                     array_push($trimmed, [
                         'id'          => $attribute->id,
@@ -253,7 +266,6 @@ class AttributeRepository extends Repository
                         'options'     => null,
                     ]);
                 }
-
             }
         }
 
