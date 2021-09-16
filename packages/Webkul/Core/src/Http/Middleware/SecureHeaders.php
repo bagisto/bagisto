@@ -55,6 +55,10 @@ class SecureHeaders
      */
     private function removeUnwantedHeaders()
     {
+        if (headers_sent()) {
+            return;
+        }
+
         foreach ($this->unwantedHeaderList as $header) {
             header_remove($header);
         }

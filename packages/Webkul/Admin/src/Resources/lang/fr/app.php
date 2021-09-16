@@ -614,6 +614,7 @@ return [
             'options' => 'Options',
             'position' => 'Positionner',
             'add-option-btn-title' => 'Ajouter une option',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Validation',
             'input_validation' => 'Validation d\'entrée',
             'is_required' => 'Est requis',
@@ -644,6 +645,9 @@ return [
             'use_in_flat' => 'Créer dans la table plate du produit',
             'is_comparable' => 'L\'attribut est comparable',
             'default_null_option' => 'Créer une option vide par défaut',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
 
         'families' => [

@@ -371,6 +371,10 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                     'view' => 'admin::catalog.attributes.index',
                 ])->name('admin.catalog.attributes.index');
 
+                Route::get('/attributes/{id}/options', 'Webkul\Attribute\Http\Controllers\AttributeController@getAttributeOptions')->defaults('_config', [
+                    'view' => 'admin::catalog.attributes.options',
+                ])->name('admin.catalog.attributes.options');
+
                 Route::get('/attributes/create', 'Webkul\Attribute\Http\Controllers\AttributeController@create')->defaults('_config', [
                     'view' => 'admin::catalog.attributes.create',
                 ])->name('admin.catalog.attributes.create');
