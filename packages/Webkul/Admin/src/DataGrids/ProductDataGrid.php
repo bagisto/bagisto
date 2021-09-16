@@ -248,17 +248,11 @@ class ProductDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => false,
             'closure'    => true,
-            'wrapper'    => function ($value) {
-                if (is_null($value->quantity)) {
+            'wrapper'    => function ($row) {
+                if (is_null($row->quantity)) {
                     return 0;
                 } else {
-                    $product = $this->productRepository->find($value->product_id);
-
-                    $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
-
-                    $totalQuantity = $value->quantity;
-
-                    return view('admin::catalog.products.datagrid.quantity', compact('product', 'inventorySources', 'totalQuantity'))->render();
+                    return $this->renderQuantityView($row);
                 }
             },
         ]);
@@ -321,5 +315,22 @@ class ProductDataGrid extends DataGrid
                 'Inactive' => 0,
             ],
         ]);
+    }
+
+    /**
+     * Render quantity view.
+     *
+     * @parma  object  $row
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    private function renderQuantityView($row)
+    {
+        $product = $this->productRepository->find($row->product_id);
+
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
+
+        $totalQuantity = $row->quantity;
+
+        return view('admin::catalog.products.datagrid.quantity', compact('product', 'inventorySources', 'totalQuantity'))->render();
     }
 }

@@ -63,17 +63,25 @@
         }
 
         function cancelEditQuantityForm(productId) {
-            $(`#product-${productId}-quantity`).show();
-
             $(`#edit-product-${productId}-quantity-form-block`).hide();
+
+            $(`#product-${productId}-quantity`).show();
         }
 
-        function saveEditQuantityForm(productId) {
-            let quantityFormData = $(`#edit-product-${productId}-quantity-form`).serializeArray();
+        function saveEditQuantityForm(updateSource, productId) {
+            let quantityFormData = $(`#edit-product-${productId}-quantity-form`).serialize();
 
-            console.log(quantityFormData);
+            axios
+                .post(updateSource, quantityFormData)
+                .then(function (response) {
+                    let data = response.data;
 
-            alert(`${productId} Saved!`);
+                    $(`#edit-product-${productId}-quantity-form-block`).hide();
+
+                    $(`#product-${productId}-quantity-anchor`).text(data.updatedTotal);
+
+                    $(`#product-${productId}-quantity`).show();
+                });
         }
     </script>
 @endpush

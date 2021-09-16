@@ -304,6 +304,10 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                     'redirect' => 'admin.catalog.products.index',
                 ])->name('admin.catalog.products.update');
 
+                Route::put('/products/edit/{id}/inventories', 'Webkul\Product\Http\Controllers\ProductController@updateInventories')->defaults('_config', [
+                    'redirect' => 'admin.catalog.products.index',
+                ])->name('admin.catalog.products.update-inventories');
+
                 Route::post('/products/upload-file/{id}', 'Webkul\Product\Http\Controllers\ProductController@uploadLink')->name('admin.catalog.products.upload_link');
 
                 Route::post('/products/upload-sample/{id}', 'Webkul\Product\Http\Controllers\ProductController@uploadSample')->name('admin.catalog.products.upload_sample');

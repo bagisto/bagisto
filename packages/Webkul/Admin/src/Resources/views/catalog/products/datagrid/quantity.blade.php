@@ -1,10 +1,12 @@
 <span id="product-{{ $product->id }}-quantity">
-    <a href="javascript:void(0);" onclick="showEditQuantityForm('{{ $product->id }}')">{{ $totalQuantity }}</a>
+    <a id="product-{{ $product->id }}-quantity-anchor" href="javascript:void(0);" onclick="showEditQuantityForm('{{ $product->id }}')">{{ $totalQuantity }}</a>
 </span>
 
 <span id="edit-product-{{ $product->id }}-quantity-form-block" style="display: none;">
     <form id="edit-product-{{ $product->id }}-quantity-form" action="javascript:void(0);">
         @csrf
+
+        @method('PUT')
 
         @foreach ($inventorySources as $inventorySource)
             @php
@@ -29,7 +31,7 @@
             </div>
         @endforeach
 
-        <button class="btn btn-primary" onclick="saveEditQuantityForm('{{ $product->id }}')">Save</button>
+        <button class="btn btn-primary" onclick="saveEditQuantityForm('{{ route('admin.catalog.products.update-inventories', $product->id) }}', '{{ $product->id }}')">Save</button>
         <button class="btn btn-danger" onclick="cancelEditQuantityForm('{{ $product->id }}')">Cancel</button>
     </form>
 </span>
