@@ -38,6 +38,12 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 'redirect' => 'admin.session.create',
             ])->name('admin.session.destroy');
 
+            /**
+             * Tinymce file upload handler.
+             */
+            Route::post('tinymce/upload', 'Webkul\Admin\Http\Controllers\TinyMCEController@upload')
+                ->name('admin.tinymce.upload');
+
             // Dashboard Route
             Route::get('dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->defaults('_config', [
                 'view' => 'admin::dashboard.index',
