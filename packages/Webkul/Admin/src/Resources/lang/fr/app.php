@@ -1298,6 +1298,12 @@ return [
             'title' => 'Erreur non autorisée',
             'message' => 'La demande n\'a pas été appliquée car il manque des informations d\'authentification valides pour la ressource cible.',
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [

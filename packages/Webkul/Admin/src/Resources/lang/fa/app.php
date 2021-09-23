@@ -1275,6 +1275,12 @@ return [
             'title' => 'خطای غیرمجاز',
             'message' => 'درخواست اعمال نشده است زیرا فاقد اعتبار تأیید معتبر برای منبع مورد نظر است.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [

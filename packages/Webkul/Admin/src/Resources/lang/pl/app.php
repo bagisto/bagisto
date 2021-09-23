@@ -1275,6 +1275,12 @@ return [
             'title' => ' NIEAUTORYZOWANY DOSTĘP',
             'message' => 'Żądanie nie zostało zastosowane, ponieważ brakuje prawidłowych poświadczeń uwierzytelnienia dla zasobu docelowego.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [

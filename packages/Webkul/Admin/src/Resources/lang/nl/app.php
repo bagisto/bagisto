@@ -1272,6 +1272,12 @@ return [
             'title' => 'Ongeautoriseerde fout',
             'message' => 'Het verzoek is niet toegepast omdat het geen geldige verificatiereferenties heeft voor de doelresource.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [

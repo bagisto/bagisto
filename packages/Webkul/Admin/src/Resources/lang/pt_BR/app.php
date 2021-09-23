@@ -1274,6 +1274,12 @@ return [
             'title' => 'Erro não Autorizado',
             'message' => 'A solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [

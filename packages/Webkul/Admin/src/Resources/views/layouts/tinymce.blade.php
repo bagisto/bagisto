@@ -57,19 +57,19 @@
                 let json;
 
                 if (xhr.status === 403) {
-                    failure('HTTP Error: ' + xhr.status, { remove: true });
+                    failure('{{ __('admin::app.error.tinymce.http-error') }}', { remove: true });
                     return;
                 }
 
                 if (xhr.status < 200 || xhr.status >= 300) {
-                    failure('HTTP Error: ' + xhr.status);
+                    failure('{{ __('admin::app.error.tinymce.http-error') }}');
                     return;
                 }
 
                 json = JSON.parse(xhr.responseText);
 
                 if (! json || typeof json.location != 'string') {
-                    failure('Invalid JSON: ' + xhr.responseText);
+                    failure('{{ __('admin::app.error.tinymce.invalid-json') }} ' + xhr.responseText);
                     return;
                 }
 
@@ -77,7 +77,7 @@
             };
 
             xhr.onerror = function () {
-                failure('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+                failure('{{ __('admin::app.error.tinymce.upload-failed') }}');
             };
 
             formData = new FormData();
