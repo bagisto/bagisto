@@ -196,7 +196,7 @@
 @stop
 
 @push('scripts')
-    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+    @include('admin::layouts.tinymce')
 
     <script>
         $(document).ready(function () {
@@ -212,15 +212,17 @@
                 var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
 
                 window.location.href = "{{ route('admin.catalog.products.edit', $product->id)  }}" + query;
-            })
+            });
 
-            tinymce.init({
+            tinyMCEHelper.initTinyMCE({
                 selector: 'textarea#description, textarea#short_description',
                 height: 200,
                 width: "100%",
                 plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
-                image_advtab: true
+                image_advtab: true,
+                uploadRoute: '{{ route('admin.tinymce.upload') }}',
+                csrfToken: '{{ csrf_token() }}',
             });
         });
     </script>

@@ -1280,6 +1280,13 @@ return [
             'title'      => 'Unauthorisiert',
             'message'    => 'Die Anforderung wurde nicht angewendet, da keine gültigen Authentifizierungsdaten für die Zielressource vorhanden sind.',
         ],
+
+        'tinymce'       =>
+        [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
     'export'        =>
     [

@@ -1291,6 +1291,12 @@ return [
             'title'      => 'Unauthorized Error',
             'message'    => 'The request has not been applied because it lacks valid authentication credentials for the target resource.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [

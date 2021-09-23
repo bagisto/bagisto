@@ -1275,6 +1275,12 @@ return [
             'title' => 'خطأ غير مصرح به',
             'message' => 'ولم يطبق الطلب لأنه يفتقر إلى وثائق إثبات صحيحة للمورد المستهدف.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [

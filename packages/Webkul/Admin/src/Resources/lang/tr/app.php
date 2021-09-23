@@ -1262,6 +1262,12 @@ return [
             'title' => 'Yetkisiz Erişim',
             'message' => 'Erişmek istediğiniz sayfa için özel yetki gerekiyor!'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [

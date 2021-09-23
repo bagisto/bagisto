@@ -124,18 +124,20 @@
 @stop
 
 @push('scripts')
-    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+    @include('admin::layouts.tinymce')
 
     <script>
         $(document).ready(function () {
-            tinymce.init({
+            tinyMCEHelper.initTinyMCE({
                 selector: 'textarea#content',
                 height: 200,
                 width: "100%",
                 plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr | numlist bullist outdent indent  | removeformat | code | table',
                 image_advtab: true,
-                valid_elements : '*[*]'
+                valid_elements : '*[*]',
+                uploadRoute: '{{ route('admin.tinymce.upload') }}',
+                csrfToken: '{{ csrf_token() }}',
             });
         });
     </script>
