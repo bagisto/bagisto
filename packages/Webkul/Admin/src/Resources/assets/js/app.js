@@ -55,11 +55,6 @@ Vue.component(
 );
 
 $(function() {
-    /**
-     * Define a mixin object.
-     */
-    Vue.mixin(require('./mixins/tinymce-helpers'));
-
     Vue.config.ignoredElements = ['option-wrapper', 'group-form', 'group-list'];
 
     let app = new Vue({

@@ -109,11 +109,11 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+    @include('admin::layouts.tinymce')
 
     <script>
         $(document).ready(function () {
-            tinymce.init({
+            tinyMCEHelper.initTinyMCE({
                 selector: 'textarea#tiny',
                 height: 200,
                 width: "100%",
@@ -124,6 +124,8 @@
                     { title: 'Test template 1', content: 'Test 1' },
                     { title: 'Test template 2', content: 'Test 2' }
                 ],
+                uploadRoute: '{{ route('admin.tinymce.upload') }}',
+                csrfToken: '{{ csrf_token() }}',
             });
         });
     </script>

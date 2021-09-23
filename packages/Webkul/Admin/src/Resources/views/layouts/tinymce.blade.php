@@ -1,5 +1,7 @@
-module.exports = {
-    methods: {
+<script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+
+<script>
+    let tinyMCEHelper = {
         initTinyMCE: function (config) {
             let self = this;
 
@@ -84,5 +86,5 @@ module.exports = {
 
             xhr.send(formData);
         }
-    },
-};
+    };
+</script>

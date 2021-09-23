@@ -213,7 +213,7 @@
 @stop
 
 @push('scripts')
-    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+    @include('admin::layouts.tinymce')
 
     <script type="text/x-template" id="description-template">
         <div class="control-group" :class="[errors.has('{{$locale}}[description]') ? 'has-error' : '']">
@@ -234,15 +234,6 @@
             data: function() {
                 return {
                     isRequired: true,
-                    tinyMCEConfig: {
-                        selector: 'textarea#description',
-                        height: 200,
-                        width: "100%",
-                        plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
-                        uploadRoute: '{{ route('admin.tinymce.upload') }}',
-                        csrfToken: '{{ csrf_token() }}',
-                    }
                 }
             },
 
@@ -264,7 +255,15 @@
                         self.isRequired = false;
                     }
 
-                    self.initTinyMCE(self.tinyMCEConfig);
+                    tinyMCEHelper.initTinyMCE({
+                        selector: 'textarea#description',
+                        height: 200,
+                        width: "100%",
+                        plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
+                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
+                        uploadRoute: '{{ route('admin.tinymce.upload') }}',
+                        csrfToken: '{{ csrf_token() }}',
+                    });
                 });
             }
         });
