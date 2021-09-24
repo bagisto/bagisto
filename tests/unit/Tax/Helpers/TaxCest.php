@@ -109,6 +109,12 @@ class TaxCest
         foreach ($this->scenario['expectedTaxRates'] as $taxRate => $taxAmount) {
             $I->assertTrue(array_key_exists($taxRate, $result));
 
+            $difference = abs($taxAmount - round($result[$taxRate], 2));
+
+            if ($difference <= 0.01 && $difference >= 0.0001) {
+                continue;
+            }
+
             $I->assertEquals($taxAmount, $result[$taxRate]);
         }
     }
@@ -120,6 +126,12 @@ class TaxCest
             'getTaxTotal',
             [$this->scenario['cart'], false]
         );
+
+        $difference = abs($this->scenario['expectedTaxTotal'] - $result);
+
+        if ($difference <= 0.01 && $difference >= 0.0001) {
+            return;
+        }
 
         $I->assertEquals($this->scenario['expectedTaxTotal'], $result);
     }

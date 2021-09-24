@@ -591,6 +591,9 @@ return [
             'remove-video-btn-title' => 'Supprimer la vidéo',
             'not-support-video' => 'Votre navigateur ne prend pas en charge la balise vidéo.',
             'variant-already-exist-message' => 'Une variante avec les mêmes options d\'attribut existe déjà.',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [
@@ -614,6 +617,7 @@ return [
             'options' => 'Options',
             'position' => 'Positionner',
             'add-option-btn-title' => 'Ajouter une option',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Validation',
             'input_validation' => 'Validation d\'entrée',
             'is_required' => 'Est requis',
@@ -644,6 +648,9 @@ return [
             'use_in_flat' => 'Créer dans la table plate du produit',
             'is_comparable' => 'L\'attribut est comparable',
             'default_null_option' => 'Créer une option vide par défaut',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
 
         'families' => [
@@ -849,6 +856,7 @@ return [
             'name' => 'Nom',
             'description' => 'La description',
             'hostname' => 'Nom d\'hôte',
+            'hostname-placeholder'   => 'https://www.example.com (N\'ajoutez pas de slash à la fin.)',
             'currencies-and-locales' => 'Devises et paramètres régionaux',
             'locales' => 'Paramètres régionaux',
             'default-locale' => 'Paramètres régionaux par défaut',
@@ -1290,6 +1298,12 @@ return [
             'title' => 'Erreur non autorisée',
             'message' => 'La demande n\'a pas été appliquée car il manque des informations d\'authentification valides pour la ressource cible.',
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [
@@ -1380,6 +1394,7 @@ return [
             'notifications' => [
                 'verification' => 'Envoyer un e-mail de vérification après l\'enregistrement du client',
                 'registration' => 'Envoyer un e-mail de confirmation après l\'enregistrement du client',
+                'customer-registration-confirmation-mail-to-admin' => 'Envoyer un e-mail de confirmation à l\'administrateur après l\'enregistrement du client',
                 'customer' => 'Envoyer les informations d\'identification du compte client après l\'enregistrement',
                 'new-order' => 'Envoyer un e-mail de confirmation au client après avoir passé une nouvelle commande',
                 'new-admin' => 'Envoyer un e-mail de confirmation à l\'administrateur après avoir passé une nouvelle commande',

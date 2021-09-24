@@ -148,7 +148,11 @@ class RegistrationController extends Controller
         } else {
             try {
                 if (core()->getConfigData('emails.general.notifications.emails.general.notifications.registration')) {
-                    Mail::queue(new RegistrationEmail(request()->all()));
+                    Mail::queue(new RegistrationEmail(request()->all(), 'customer'));
+                }
+
+                if (core()->getConfigData('emails.general.notifications.emails.general.notifications.customer-registration-confirmation-mail-to-admin')) {
+                    Mail::queue(new RegistrationEmail(request()->all(), 'admin'));
                 }
 
                 session()->flash('success', trans('shop::app.customer.signup-form.success-verify'));

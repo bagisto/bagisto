@@ -19,9 +19,7 @@
         @yield('head')
 
         {{-- seo meta data --}}
-        @section('seo')
-            <meta name="description" content="{{ core()->getCurrentChannel()->description }}"/>
-        @show
+        @yield('seo')
 
         {{-- fav icon --}}
         @if ($favicon = core()->getCurrentChannel()->favicon_url)

@@ -579,6 +579,9 @@ return [
             'add-video-btn-title' => 'Add Video',
             'remove-video-btn-title' => 'Remove Video',
             'not-support-video' => 'Your browser does not support the video tag.',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [
@@ -602,6 +605,7 @@ return [
             'options' => 'Opcje',
             'position' => 'Pozycja',
             'add-option-btn-title' => 'Dodaj opcję',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Walidacje danych',
             'input_validation' => 'Sprawdzanie poprawności danych wejściowych',
             'is_required' => 'Jest wymagany',
@@ -633,6 +637,9 @@ return [
             'use_in_flat' => "Utwórz w płaskiej tabeli produktu",
             'is_comparable' => "Atrybut jest porównywalny",
             'default_null_option' => 'Utwórz domyślną pustą opcję',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'Rodziny atrybutów',
@@ -834,6 +841,7 @@ return [
             'name' => 'Nazwa',
             'description' => 'Opis',
             'hostname' => 'Nazwa hosta',
+            'hostname-placeholder'   => 'https://www.example.com (Nie dodawaj ukośnika na końcu.)',
             'currencies-and-locales' => 'Waluty i ustawienia regionalne',
             'locales' => 'Lokalizacje',
             'default-locale' => 'Domyślne ustawienia regionalne',
@@ -1267,6 +1275,12 @@ return [
             'title' => ' NIEAUTORYZOWANY DOSTĘP',
             'message' => 'Żądanie nie zostało zastosowane, ponieważ brakuje prawidłowych poświadczeń uwierzytelnienia dla zasobu docelowego.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [
@@ -1354,6 +1368,7 @@ return [
             'notifications' => [
                 'verification' => 'Wyślij e-mail weryfikacyjny',
                 'registration' => 'Wyślij e-mail rejestracyjny',
+                'customer-registration-confirmation-mail-to-admin' => 'Wyślij wiadomość e-mail z potwierdzeniem do administratora po rejestracji klienta',
                 'customer' => 'Wyślij e-mail klienta',
                 'new-order' => 'Wyślij e-mail z potwierdzeniem zamówienia',
                 'new-admin' => 'Wyślij e-mail z zaproszeniem administratora',

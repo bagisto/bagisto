@@ -577,6 +577,9 @@ return [
             'add-video-btn-title' => 'Add Video',
             'remove-video-btn-title' => 'Remove Video',
             'not-support-video' => 'Your browser does not support the video tag.',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [
@@ -600,6 +603,7 @@ return [
             'options' => 'Opties',
             'position' => 'Positie',
             'add-option-btn-title' => 'Optie toevoegen',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Validations',
             'input_validation' => 'Input Validation',
             'is_required' => 'is verplicht',
@@ -631,6 +635,9 @@ return [
             'use_in_flat' => "Create in Product Flat Table",
             'is_comparable' => "Attribuut is vergelijkbaar ",
             'default_null_option' => 'Create default empty option',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'Families',
@@ -831,6 +838,7 @@ return [
             'name' => 'Naam',
             'description' => 'Omschrijving',
             'hostname' => 'Hostnaam',
+            'hostname-placeholder'   => 'https://www.example.com (Voeg op het einde geen schuine streep toe.)',
             'currencies-and-locales' => 'Valuta en landinstellingen',
             'locales' => 'Landinstellingen',
             'default-locale' => 'Standaardlocale',
@@ -1264,6 +1272,12 @@ return [
             'title' => 'Ongeautoriseerde fout',
             'message' => 'Het verzoek is niet toegepast omdat het geen geldige verificatiereferenties heeft voor de doelresource.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [
@@ -1351,6 +1365,7 @@ return [
             'notifications' => [
                 'verification' => 'Stuur een verificatie-e-mail na registratie van de klant',
                 'registration' => 'Stuur een bevestigingsmail na registratie van de klant',
+                'customer-registration-confirmation-mail-to-admin' => 'Stuur een bevestigingsmail naar admin na klantregistratie',
                 'customer' => 'Stuur de account gegevens van de klant na registratie',
                 'new-order' => 'Stuur een notificatie naar de klant na het plaatsen van een nieuwe bestelling',
                 'new-admin' => 'Stuur een notificatie naar de beheerder na het plaatsen van een nieuwe bestelling',

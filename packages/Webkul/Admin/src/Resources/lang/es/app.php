@@ -592,6 +592,9 @@ return [
             'add-video-btn-title' => 'Agregar Video',
             'remove-video-btn-title' => 'Remover Video',
             'not-support-video' => 'Su navegador no soporta la etiqueta video.',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [
@@ -615,6 +618,7 @@ return [
             'options' => 'Opciones',
             'position' => 'Posición',
             'add-option-btn-title' => 'Agregar opción',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Validaciones',
             'input_validation' => 'Validación entrada',
             'is_required' => 'Es requerido',
@@ -645,6 +649,9 @@ return [
             'use_in_flat' => "Crear en tabla plana de productos",
             'is_comparable' => "El atributo es comparable",
             'default_null_option' => 'Crear opción vacía por defecto',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'Familias',
@@ -843,6 +850,7 @@ return [
             'name' => 'Nombre',
             'description' => 'Descripción',
             'hostname' => 'Hostname',
+            'hostname-placeholder'   => 'https://www.example.com (No agregue barra al final.)',
             'currencies-and-locales' => 'Monedas e Idiomas',
             'locales' => 'Idiomas',
             'default-locale' => 'Idioma predeterminado',
@@ -1276,6 +1284,12 @@ return [
             'title' => 'No autorizado',
             'message' => 'La solicitud no se ha aplicado porque carece de credenciales de autenticación válidas para el recurso de destino.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [
@@ -1366,6 +1380,7 @@ return [
             'notifications' => [
                 'verification' => 'Enviar email de verificación',
                 'registration' => 'Enviar email de registro',
+                'customer-registration-confirmation-mail-to-admin' => 'Envíe un correo electrónico de confirmación al administrador después del registro del cliente',
                 'customer' => 'Enviar email de cliente',
                 'new-order' => 'Enviar email de confirmación de pedido',
                 'new-admin' => 'Enviar email de invitación de admin',

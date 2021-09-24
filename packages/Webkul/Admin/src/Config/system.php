@@ -452,6 +452,11 @@ return [
                 'type'  => 'boolean',
             ],
             [
+                'name'  => 'emails.general.notifications.customer-registration-confirmation-mail-to-admin',
+                'title' => 'admin::app.admin.emails.notifications.customer-registration-confirmation-mail-to-admin',
+                'type'  => 'boolean',
+            ],
+            [
                 'name'  => 'emails.general.notifications.customer',
                 'title' => 'admin::app.admin.emails.notifications.customer',
                 'type'  => 'boolean',

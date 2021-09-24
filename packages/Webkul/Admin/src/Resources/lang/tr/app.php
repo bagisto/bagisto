@@ -574,6 +574,9 @@ return [
             'add-video-btn-title' => 'Add Video',
             'remove-video-btn-title' => 'Remove Video',
             'not-support-video' => 'Your browser does not support the video tag.',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [
@@ -597,6 +600,7 @@ return [
             'options' => 'Seçenekler',
             'position' => 'Konum',
             'add-option-btn-title' => 'Seçenek Ekle',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Doğrulamalar',
             'input_validation' => 'Giriş Doğrulaması',
             'is_required' => 'Zorunlu',
@@ -627,6 +631,9 @@ return [
             'use_in_flat' => "Ürün Tablosu Oluştur",
             'is_comparable' => "Nitelik kıyaslanabilir",
             'default_null_option' => 'Varsayılan boş seçenek oluştur',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'Küme',
@@ -825,6 +832,7 @@ return [
             'name' => 'Tanımı',
             'description' => 'Açıklama',
             'hostname' => 'Alan Adı',
+            'hostname-placeholder'   => 'https://www.example.com (Sonunda eğik çizgi eklemeyin.)',
             'currencies-and-locales' => 'Para Birimi ve Dil',
             'locales' => 'Dil Seçenekleri',
             'default-locale' => 'Varsayılan Dil',
@@ -1254,6 +1262,12 @@ return [
             'title' => 'Yetkisiz Erişim',
             'message' => 'Erişmek istediğiniz sayfa için özel yetki gerekiyor!'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [
@@ -1341,6 +1355,7 @@ return [
             'notifications' => [
                 'verification' => 'Doğrulama Maili Gönder',
                 'registration' => 'Kayıt Maili Gönder',
+                'customer-registration-confirmation-mail-to-admin' => 'Müşteri kaydından sonra yöneticiye bir onay e-postası gönderin',
                 'customer' => 'Müşteriye Mail Gönder',
                 'new-order' => 'Sipariş Doğrulama Maili Gönder',
                 'new-admin' => 'Yönetici Davet Maili Gönder',

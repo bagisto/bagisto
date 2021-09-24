@@ -6,9 +6,7 @@
 
 @section('content')
     <div class="content">
-
         <form method="POST" action="{{ route('admin.catalog.categories.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-
             <div class="page-header">
                 <div class="page-title">
                     <h1>
@@ -28,13 +26,13 @@
             <div class="page-content">
                 <div class="form-container">
                     @csrf()
+
                     <input type="hidden" name="locale" value="all"/>
 
                     {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.general.before') !!}
 
                     <accordian :title="'{{ __('admin::app.catalog.categories.general') }}'" :active="true">
                         <div slot="body">
-
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.general.controls.before') !!}
 
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
@@ -63,18 +61,15 @@
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.general.controls.after') !!}
-
                         </div>
                     </accordian>
 
                     {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.general.after') !!}
 
-
                     {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.before') !!}
 
                     <accordian :title="'{{ __('admin::app.catalog.categories.description-and-images') }}'" :active="true">
                         <div slot="body">
-
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.controls.before') !!}
 
                             <div class="control-group" :class="[errors.has('display_mode') ? 'has-error' : '']">
@@ -105,19 +100,15 @@
                                         @php echo str_replace($key, 'Image', $message[0]); @endphp
                                     @endforeach
                                 </span>
-
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.controls.after') !!}
-
                         </div>
                     </accordian>
 
                     {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.after') !!}
 
-
                     @if ($categories->count())
-
                         {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.parent_category.before') !!}
 
                         <accordian :title="'{{ __('admin::app.catalog.categories.parent-category') }}'" :active="true">
@@ -133,12 +124,10 @@
                         </accordian>
 
                         {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.parent_category.after') !!}
-
                     @endif
 
                     <accordian :title="'{{ __('admin::app.catalog.categories.filterable-attributes') }}'" :active="true">
                         <div slot="body">
-
                             <?php $selectedaAtributes = old('attributes') ? old('attributes') : ['11']  ?>
 
                             <div class="control-group" :class="[errors.has('attributes[]') ? 'has-error' : '']">
@@ -163,7 +152,6 @@
 
                     <accordian :title="'{{ __('admin::app.catalog.categories.seo') }}'" :active="true">
                         <div slot="body">
-
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.seo.controls.before') !!}
 
                             <div class="control-group">
@@ -188,46 +176,29 @@
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.seo.controls.after') !!}
-
                         </div>
                     </accordian>
 
                     {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.seo.after') !!}
-
                 </div>
             </div>
-
         </form>
     </div>
 @stop
 
 @push('scripts')
-    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+    @include('admin::layouts.tinymce')
 
     <script type="text/x-template" id="description-template">
-
         <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
             <label for="description" :class="isRequired ? 'required' : ''">{{ __('admin::app.catalog.categories.description') }}</label>
             <textarea v-validate="isRequired ? 'required' : ''"  class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old('description') }}</textarea>
             <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
         </div>
-
     </script>
 
     <script>
-        $(document).ready(function () {
-            tinymce.init({
-                selector: 'textarea#description',
-                height: 200,
-                width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
-                image_advtab: true
-            });
-        });
-
         Vue.component('description', {
-
             template: '#description-template',
 
             inject: ['$validator'],
@@ -239,18 +210,28 @@
             },
 
             created: function () {
-                var this_this = this;
+                let self = this;
 
                 $(document).ready(function () {
                     $('#display_mode').on('change', function (e) {
                         if ($('#display_mode').val() != 'products_only') {
-                            this_this.isRequired = true;
+                            self.isRequired = true;
                         } else {
-                            this_this.isRequired = false;
+                            self.isRequired = false;
                         }
-                    })
+                    });
+
+                    tinyMCEHelper.initTinyMCE({
+                        selector: 'textarea#description',
+                        height: 200,
+                        width: "100%",
+                        plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
+                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
+                        uploadRoute: '{{ route('admin.tinymce.upload') }}',
+                        csrfToken: '{{ csrf_token() }}',
+                    });
                 });
-            }
-        })
+            },
+        });
     </script>
 @endpush

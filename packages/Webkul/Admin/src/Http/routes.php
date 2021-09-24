@@ -38,6 +38,12 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 'redirect' => 'admin.session.create',
             ])->name('admin.session.destroy');
 
+            /**
+             * Tinymce file upload handler.
+             */
+            Route::post('tinymce/upload', 'Webkul\Admin\Http\Controllers\TinyMCEController@upload')
+                ->name('admin.tinymce.upload');
+
             // Dashboard Route
             Route::get('dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->defaults('_config', [
                 'view' => 'admin::dashboard.index',
@@ -304,6 +310,10 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                     'redirect' => 'admin.catalog.products.index',
                 ])->name('admin.catalog.products.update');
 
+                Route::put('/products/edit/{id}/inventories', 'Webkul\Product\Http\Controllers\ProductController@updateInventories')->defaults('_config', [
+                    'redirect' => 'admin.catalog.products.index',
+                ])->name('admin.catalog.products.update-inventories');
+
                 Route::post('/products/upload-file/{id}', 'Webkul\Product\Http\Controllers\ProductController@uploadLink')->name('admin.catalog.products.upload_link');
 
                 Route::post('/products/upload-sample/{id}', 'Webkul\Product\Http\Controllers\ProductController@uploadSample')->name('admin.catalog.products.upload_sample');
@@ -370,6 +380,10 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 Route::get('/attributes', 'Webkul\Attribute\Http\Controllers\AttributeController@index')->defaults('_config', [
                     'view' => 'admin::catalog.attributes.index',
                 ])->name('admin.catalog.attributes.index');
+
+                Route::get('/attributes/{id}/options', 'Webkul\Attribute\Http\Controllers\AttributeController@getAttributeOptions')->defaults('_config', [
+                    'view' => 'admin::catalog.attributes.options',
+                ])->name('admin.catalog.attributes.options');
 
                 Route::get('/attributes/create', 'Webkul\Attribute\Http\Controllers\AttributeController@create')->defaults('_config', [
                     'view' => 'admin::catalog.attributes.create',

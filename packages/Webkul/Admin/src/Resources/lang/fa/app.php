@@ -581,6 +581,9 @@ return [
             'add-video-btn-title' => 'اضافه کردن فیلم',
             'remove-video-btn-title' => 'حذف فیلم',
             'not-support-video' => 'مرورگر شما تگ ویدیو را پشتیبانی نمی کند',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [
@@ -604,6 +607,7 @@ return [
             'options' => 'گزینه ها',
             'position' => 'موقعیت',
             'add-option-btn-title' => 'افزودن گزینه',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'اعتبار سنجی ها',
             'input_validation' => 'اعتبار سنجی ورودی',
             'is_required' => 'مورد نیاز است',
@@ -634,6 +638,9 @@ return [
             'use_in_flat' => 'اضافه به جدول flat (product_flat)',
             'is_comparable' => "ویژگی قابل مقایسه است",
             'default_null_option' => 'گزینه پیش فرض خالی ایجاد کنید',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'ویژگی ها',
@@ -832,6 +839,7 @@ return [
             'name' => 'نام',
             'description' => 'توضیحات',
             'hostname' => 'نام میزبان',
+            'hostname-placeholder'   => 'https://www.example.com (در پایان اسلش اضافه نکنید)',
             'currencies-and-locales' => 'ارز و منطقه ها',
             'locales' => 'منطقه ها',
             'default-locale' => 'منطقه پیش فرض',
@@ -1267,6 +1275,12 @@ return [
             'title' => 'خطای غیرمجاز',
             'message' => 'درخواست اعمال نشده است زیرا فاقد اعتبار تأیید معتبر برای منبع مورد نظر است.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [
@@ -1354,6 +1368,7 @@ return [
             'notifications' => [
                 'verification' => 'خدمات ارائه شده بفرست',
                 'registration' => 'ثبت نام از طریق ایمیل',
+                'customer-registration-confirmation-mail-to-admin' => 'پس از ثبت نام مشتری ، یک ایمیل تأیید به مدیر ارسال کنید',
                 'customer' => 'ارسال ایمیل به مشتری',
                 'new-order' => 'ارسال تأییدیه سفارش ایمیل',
                 'new-admin' => 'ارسال ایمیل دعوت نامه به مدیر',

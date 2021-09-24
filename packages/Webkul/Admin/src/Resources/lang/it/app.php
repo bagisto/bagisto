@@ -581,6 +581,9 @@ return [
             'add-video-btn-title' => 'Add Video',
             'remove-video-btn-title' => 'Remove Video',
             'not-support-video' => 'Your browser does not support the video tag.',
+            'save' => 'Save',
+            'cancel' => 'Cancel',
+            'saved-inventory-message' => 'Product inventory saved successfully.',
         ],
 
         'attributes' => [
@@ -604,6 +607,7 @@ return [
             'options' => 'Opzioni',
             'position' => 'Posizione',
             'add-option-btn-title' => 'Aggiungi Option',
+            'load-more-options-btn-title' => 'Load More Options',
             'validations' => 'Validazioni',
             'input_validation' => 'Validazione Input',
             'is_required' => 'È Richiesto',
@@ -634,6 +638,9 @@ return [
             'use_in_flat' => "Crea in tabella Product flat",
             'is_comparable' => "L'attributo è comparabile",
             'default_null_option' => 'Crea opzione predefinita vuota',
+            'validation-messages' => [
+                'max-size' => 'The image size must be less than 600 KB'
+            ],
         ],
         'families' => [
             'title' => 'Famiglie',
@@ -836,6 +843,7 @@ return [
             'name' => 'Nome',
             'description' => 'Descrizione',
             'hostname' => 'Hostname',
+            'hostname-placeholder'   => 'https://www.example.com (Non aggiungere la barra alla fine.)',
             'currencies-and-locales' => 'Valute e localizzazioni',
             'locales' => 'Localizzazioni',
             'default-locale' => 'Localizzazione predefinita',
@@ -1270,6 +1278,12 @@ return [
             'title' => 'Errore non autorizzato',
             'message' => 'La richiesta non è stata applicata perchè manca di una valida autenticazione per accedere alla risorsa.'
         ],
+
+        'tinymce' => [
+            'http-error'    => 'HTTP error.',
+            'invalid-json'  => 'Invalid JSON.',
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+        ],
     ],
 
     'export' => [
@@ -1357,6 +1371,7 @@ return [
             'notifications' => [
                 'verification' => 'Invia email di verifica',
                 'registration' => 'Invia email di registrazione',
+                'customer-registration-confirmation-mail-to-admin' => 'Invia un\'e-mail di conferma all\'amministratore dopo la registrazione del cliente',
                 'customer' => 'Invia email a cliente',
                 'new-order' => 'Invia email di conferma Ordine',
                 'new-admin' => 'Invia email di invito ad Admin',
