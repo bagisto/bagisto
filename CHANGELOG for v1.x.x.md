@@ -2,6 +2,56 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v1.3.3 (27th of September 2021)** - *Release*
+
+* #5163 [enhancement] - Datagrid Enhancements
+
+* #5109 [enhancement] - Admin is not getting mail on customer registration
+
+* #5089 [enhancement] - on clinking Buy Now button cart items should not carried in checkout
+
+* #5061 [enhancement] - Option to add DB_prefix on web installer
+
+* #5173 [fixed] - Typo in type hinting
+
+* #5170 [fixed] - Admin Orders page doesn;t reload while clicking back
+
+* #5155 [fixed] - When product inventory is having same quantity then total qty on the listing page is not calculated properly
+
+* #5125 [fixed] - wrong order status showing at admin and customer end
+
+* #5122 [fixed] - Issue in Mobile number field
+
+* #5115 [fixed] - Getting exception in case admin change url by passing 0 in place of asc or desc
+
+* #5113 [fixed] - Error in Admin->Configuration after added Custom script
+
+* #5112 [fixed] - CMS Pages content issue
+
+* #5111 [fixed] - Meta description Error
+
+* #5110 [fixed] - If I change APP_ADMIN_URL in .env then the Admin Dashboard will not render properly
+
+* #5104 [fixed] - Last name should be mandatory field even while editing customer profile
+
+* #5101 [fixed] - Incorrect validation message for sort order and Download Allowed field in downloadable information section
+
+* #5100 [fixed] - While adding address, first and last name should auto populate at customer end
+
+* #5098 [fixed] - Delete customer address from admin panel - page not reload
+
+* #5091 [fixed] - Getting error while creating slider if db prefix has been added
+
+* #5088 [fixed] - Can not generate invoices
+
+* #5069 [fixed] - Category datagrid channel locale filter
+
+* #5067 [fixed] - Products is_wishlisted attribute is always false on API
+
+* #5065 [fixed] - Delete option does not work
+
+* #5057 [fixed] - Mysqli error on local by flywheeel install
+
 ## **v1.3.2 (7th of August 2021)** - *Release*
 
 * #5020 [feature] - Webvital score improvement.
