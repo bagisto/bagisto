@@ -7,10 +7,25 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class CustomerReviewDataGrid extends DataGrid
 {
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'product_review_id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('product_reviews as pr')
@@ -27,6 +42,11 @@ class CustomerReviewDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -82,8 +102,7 @@ class CustomerReviewDataGrid extends DataGrid
             'sortable'   => true,
             'width'      => '100px',
             'filterable' => true,
-            'closure'    => true,
-            'wrapper'    => function ($value) {
+            'closure'    => function ($value) {
                 if ($value->product_review_status == 'approved') {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.approved') . '</span>';
                 } elseif ($value->product_review_status == "pending") {
@@ -104,6 +123,11 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
@@ -121,6 +145,11 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
     public function prepareMassActions()
     {
         $this->addMassAction([

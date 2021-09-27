@@ -7,10 +7,25 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class InventorySourcesDataGrid extends DataGrid
 {
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('inventory_sources')->addSelect('id', 'code', 'name', 'priority', 'status');
@@ -20,6 +35,11 @@ class InventorySourcesDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -65,7 +85,7 @@ class InventorySourcesDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
-            'wrapper'    => function($value) {
+            'closure'    => function ($value) {
                 if ($value->status == 1) {
                     return trans('admin::app.datagrid.active');
                 } else {
@@ -75,6 +95,11 @@ class InventorySourcesDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([

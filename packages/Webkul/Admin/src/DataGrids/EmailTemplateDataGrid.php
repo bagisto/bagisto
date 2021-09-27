@@ -7,10 +7,25 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class EmailTemplateDataGrid extends DataGrid
 {
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('marketing_templates')->addSelect('id', 'name', 'status');
@@ -20,6 +35,11 @@ class EmailTemplateDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -47,7 +67,7 @@ class EmailTemplateDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
-            'wrapper'    => function ($value) {
+            'closure'    => function ($value) {
                 if ($value->status == 'active') {
                     return trans('admin::app.datagrid.active');
                 } else if ($value->status == 'inactive') {
@@ -59,6 +79,11 @@ class EmailTemplateDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([

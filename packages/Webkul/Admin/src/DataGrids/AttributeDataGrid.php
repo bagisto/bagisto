@@ -7,10 +7,25 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class AttributeDataGrid extends DataGrid
 {
+    /**
+     * Set index columns, ex: id.
+     *
+     * @var string
+     */
     protected $index = 'id';
 
+    /**
+     * Default sort order of datagrid.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('attributes')
@@ -24,6 +39,11 @@ class AttributeDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -68,7 +88,7 @@ class AttributeDataGrid extends DataGrid
             'type'       => 'boolean',
             'sortable'   => true,
             'searchable' => false,
-            'wrapper'    => function($value) {
+            'closure'    => function ($value) {
                 if ($value->is_required == 1) {
                     return trans('admin::app.datagrid.true');
                 } else {
@@ -84,7 +104,7 @@ class AttributeDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
-            'wrapper'    => function($value) {
+            'closure'    => function ($value) {
                 if ($value->is_unique == 1) {
                     return trans('admin::app.datagrid.true');
                 } else {
@@ -100,7 +120,7 @@ class AttributeDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
-            'wrapper'    => function($value) {
+            'closure'    => function ($value) {
                 if ($value->value_per_locale == 1) {
                     return trans('admin::app.datagrid.true');
                 } else {
@@ -116,7 +136,7 @@ class AttributeDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
-            'wrapper'    => function($value) {
+            'closure'    => function ($value) {
                 if ($value->value_per_channel == 1) {
                     return trans('admin::app.datagrid.true');
                 } else {
@@ -126,6 +146,11 @@ class AttributeDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
@@ -143,6 +168,11 @@ class AttributeDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
     public function prepareMassActions()
     {
         $this->addMassAction([

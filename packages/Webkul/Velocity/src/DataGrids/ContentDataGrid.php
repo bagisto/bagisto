@@ -7,17 +7,32 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class ContentDataGrid extends DataGrid
 {
-    protected $index = 'content_id'; //the column that needs to be treated as index column
+    /**
+     * Index.
+     *
+     * @var string
+     */
+    protected $index = 'content_id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
+    protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('velocity_contents as con')
             ->select('con.id as content_id', 'con_trans.title', 'con.position', 'con.content_type', 'con.status')
-            ->leftJoin('velocity_contents_translations as con_trans', function($leftJoin) {
+            ->leftJoin('velocity_contents_translations as con_trans', function ($leftJoin) {
                 $leftJoin->on('con.id', '=', 'con_trans.content_id')
-                         ->where('con_trans.locale', app()->getLocale());
+                    ->where('con_trans.locale', app()->getLocale());
             })
             ->groupBy('con.id');
 
@@ -27,6 +42,11 @@ class ContentDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -63,7 +83,7 @@ class ContentDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
-            'wrapper'    => function($value) {
+            'closure'    => function ($value) {
                 if ($value->status == 1) {
                     return 'Active';
                 } else {
@@ -79,7 +99,7 @@ class ContentDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => true,
             'filterable' => false,
-            'wrapper'    => function($value) {
+            'closure'    => function ($value) {
                 if ($value->content_type == 'category') {
                     return 'Category Slug';
                 } elseif ($value->content_type == 'link') {
@@ -93,7 +113,13 @@ class ContentDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
+    public function prepareActions()
+    {
         $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),
             'type'   => 'Edit',
@@ -112,6 +138,11 @@ class ContentDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
     public function prepareMassActions()
     {
         $this->addMassAction([

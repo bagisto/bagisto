@@ -7,10 +7,25 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class OrderInvoicesDataGrid extends DataGrid
 {
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $dbPrefix = DB::getTablePrefix();
@@ -28,6 +43,11 @@ class OrderInvoicesDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -72,9 +92,8 @@ class OrderInvoicesDataGrid extends DataGrid
             'type'       => 'string',
             'sortable'   => true,
             'searchable' => true,
-            'closure'    => true,
             'filterable' => true,
-            'wrapper' => function ($value) {
+            'closure' => function ($value) {
                 if ($value->state == 'paid') {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.invoices.status-paid') . '</span>';
                 } elseif ($value->state == 'pending' || $value->state == 'pending_payment') {
@@ -86,9 +105,13 @@ class OrderInvoicesDataGrid extends DataGrid
                 }
             },
         ]);
-
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([

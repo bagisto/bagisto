@@ -7,10 +7,25 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class LocalesDataGrid extends DataGrid
 {
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('locales')->addSelect('id', 'code', 'name', 'direction');
@@ -18,6 +33,11 @@ class LocalesDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -54,8 +74,7 @@ class LocalesDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
-            'closure'    => true,
-            'wrapper'    => function ($value) {
+            'closure'    => function ($value) {
                 if ($value->direction == 'ltr') {
                     return trans('admin::app.datagrid.ltr');
                 } else {
@@ -65,6 +84,11 @@ class LocalesDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([

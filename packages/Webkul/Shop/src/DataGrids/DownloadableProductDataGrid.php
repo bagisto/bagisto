@@ -7,10 +7,25 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class DownloadableProductDataGrid extends DataGrid
 {
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('downloadable_link_purchased')
@@ -28,6 +43,11 @@ class DownloadableProductDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -46,8 +66,7 @@ class DownloadableProductDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
-            'closure'    => true,
-            'wrapper'    => function ($value) {
+            'closure'    => function ($value) {
                 if ($value->status == 'pending' || $value->status == 'expired' || $value->invoice_state !== 'paid') {
                     return $value->product_name;
                 } else {
@@ -72,8 +91,7 @@ class DownloadableProductDataGrid extends DataGrid
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
-            'closure'    => true,
-            'wrapper'    => function ($value) {
+            'closure'    => function ($value) {
                 if ($value->status == 'pending') {
                     return trans('shop::app.customer.account.downloadable_products.pending');
                 } elseif ($value->status == 'available') {
@@ -91,9 +109,8 @@ class DownloadableProductDataGrid extends DataGrid
             'searchable' => false,
             'sortable'   => true,
             'filterable' => false,
-            'closure'    => true,
-            'wrapper'    => function ($value) {
-                if (! $value->download_bought) {
+            'closure'    => function ($value) {
+                if (!$value->download_bought) {
                     return trans('shop::app.customer.account.downloadable_products.unlimited');
                 }
 

@@ -84,9 +84,8 @@ class CustomersInvoicesDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'closure'    => true,
             'filterable' => true,
-            'wrapper'    => function ($value) {
+            'closure'    => function ($value) {
                 return '<a href="' . route('admin.sales.orders.view', $value->order_id) . '">' . $value->order_id . '</a>';
             }
         ]);
@@ -106,9 +105,8 @@ class CustomersInvoicesDataGrid extends DataGrid
             'type'       => 'string',
             'sortable'   => true,
             'searchable' => true,
-            'closure'    => true,
             'filterable' => true,
-            'wrapper' => function ($value) {
+            'closure' => function ($value) {
                 if ($value->state == 'paid') {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.invoices.status-paid') . '</span>';
                 } elseif ($value->state == 'pending' || $value->state == 'pending_payment') {
