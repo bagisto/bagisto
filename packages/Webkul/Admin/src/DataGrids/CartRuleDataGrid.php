@@ -7,20 +7,49 @@ use Illuminate\Support\Facades\DB;
 
 class CartRuleDataGrid extends DataGrid
 {
+    /**
+     * Set index columns, ex: id.
+     *
+     * @var string
+     */
     protected $index = 'id';
 
+    /**
+     * Default sort order of datagrid.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Customer group.
+     *
+     * @var string
+     */
     protected $customer_group = 'all';
 
+    /**
+     * Channel.
+     *
+     * @var string
+     */
     protected $channel = 'all';
 
-    /** @var string[] contains the keys for which extra filters to show */
+    /**
+     * Contains the keys for which extra filters to show.
+     *
+     * @var string[]
+     */
     protected $extraFilters = [
         'channels',
         'customer_groups',
     ];
 
+    /**
+     * Create a new datagrid instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
@@ -30,6 +59,11 @@ class CartRuleDataGrid extends DataGrid
         $this->channel = core()->getRequestedChannelCode(false) ?? 'all';
     }
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('cart_rules')
@@ -37,8 +71,15 @@ class CartRuleDataGrid extends DataGrid
                 $leftJoin->on('cart_rule_coupons.cart_rule_id', '=', 'cart_rules.id')
                     ->where('cart_rule_coupons.is_primary', 1);
             })
-            ->addSelect('cart_rules.id', 'name', 'cart_rule_coupons.code as coupon_code',
-                'status', 'starts_from', 'ends_till', 'sort_order');
+            ->addSelect(
+                'cart_rules.id',
+                'name',
+                'cart_rule_coupons.code as coupon_code',
+                'status',
+                'starts_from',
+                'ends_till',
+                'sort_order'
+            );
 
         $this->addFilter('id', 'cart_rules.id');
         $this->addFilter('coupon_code', 'cart_rule_coupons.code');
@@ -50,6 +91,7 @@ class CartRuleDataGrid extends DataGrid
                 '=',
                 'cart_rules.id'
             );
+
             $queryBuilder->where('cart_rule_customer_groups.customer_group_id', $this->customer_group);
         }
 
@@ -58,7 +100,9 @@ class CartRuleDataGrid extends DataGrid
                 'cart_rule_channels',
                 'cart_rule_channels.cart_rule_id',
                 '=',
-                'cart_rules.id');
+                'cart_rules.id'
+            );
+            
             $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
         }
 
@@ -67,6 +111,11 @@ class CartRuleDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -121,7 +170,7 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
-            'wrapper'    => function ($value) {
+            'closure'    => function ($value) {
                 if ($value->status == 1) {
                     return trans('admin::app.datagrid.active');
                 } else if ($value->status == 0) {
@@ -142,6 +191,11 @@ class CartRuleDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
@@ -164,6 +218,5 @@ class CartRuleDataGrid extends DataGrid
             'route'  => 'admin.cart-rules.delete',
             'icon'   => 'icon trash-icon',
         ]);
-
     }
 }
