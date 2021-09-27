@@ -14,7 +14,6 @@ about: 'Report a general issue.'
 
 ## Bagisto Version
 <!--- Please select the version of bagisto that you are using. -->
-
 - [ ] master branch
 - [ ] 1.3.3
 - [ ] 1.3.2
