@@ -222,7 +222,7 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
-            'wrapper'    => function ($value) {
+            'closure'    => function ($value) {
                 if ($value->status == 1) {
                     return trans('admin::app.datagrid.active');
                 } else {
@@ -247,8 +247,7 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => false,
-            'closure'    => true,
-            'wrapper'    => function ($row) {
+            'closure'    => function ($row) {
                 if (is_null($row->quantity)) {
                     return 0;
                 } else {

@@ -15,7 +15,7 @@ abstract class DataGrid
     /**
      * Set index columns, ex: id.
      *
-     * @var int
+     * @var string
      */
     protected $index;
 
@@ -232,8 +232,7 @@ abstract class DataGrid
     /**
      * Add column.
      *
-     * @param string  $column
-     *
+     * @param  array  $column
      * @return void
      */
     public function addColumn($column)
@@ -252,8 +251,7 @@ abstract class DataGrid
     /**
      * Set complete column details.
      *
-     * @param string  $column
-     *
+     * @param  array  $column
      * @return void
      */
     public function setCompleteColumnDetails($column)
@@ -264,8 +262,7 @@ abstract class DataGrid
     /**
      * Set query builder.
      *
-     * @param \Illuminate\Database\Query\Builder  $queryBuilder
-     *
+     * @param  \Illuminate\Database\Query\Builder  $queryBuilder
      * @return void
      */
     public function setQueryBuilder($queryBuilder)
