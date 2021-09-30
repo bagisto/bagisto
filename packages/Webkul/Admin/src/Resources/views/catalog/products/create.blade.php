@@ -4,7 +4,7 @@
     {{ __('admin::app.catalog.products.add-title') }}
 @stop
 
-@section('css')
+@push('css')
     <style>
         .table td .label {
             margin-right: 10px;
@@ -17,7 +17,7 @@
             cursor: pointer;
         }
     </style>
-@stop
+@endpush
 
 @section('content')
     <div class="content">
@@ -42,7 +42,9 @@
             <div class="page-content">
                 @csrf()
 
-                <?php $familyId = request()->input('family') ?>
+                @php
+                    $familyId = request()->input('family');
+                @endphp
 
                 {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.general.before') !!}
 

@@ -4,7 +4,7 @@
     {{ __('admin::app.users.forget-password.title') }}
 @stop
 
-@section('css')
+@push('css')
     <style>
         .button-group {
             margin-bottom: 25px;
@@ -13,16 +13,12 @@
             vertical-align: middle;
         }
     </style>
-@stop
+@endpush
 
 @section('content')
-
     <div class="panel">
-
         <div class="panel-content">
-
             <div class="form-container" style="text-align: left">
-
                 <h1>{{ __('admin::app.users.forget-password.header-title') }}</h1>
 
                 <form method="POST" action="{{ route('admin.forget-password.store') }}" @submit.prevent="onSubmit">
@@ -33,7 +29,7 @@
                         <input type="text" v-validate="'required'" class="control" id="email" name="email" data-vv-as="&quot;{{ __('admin::app.users.forget-password.email') }}&quot;" value="{{ old('email') }}"/>
                         <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                     </div>
-                    
+
                     <div class="button-group">
                         <button class="btn btn-xl btn-primary">{{ __('admin::app.users.forget-password.submit-btn-title') }}</button>
                     </div>
@@ -45,11 +41,7 @@
                         </a>
                     </div>
                 </form>
-
             </div>
-        
         </div>
-
     </div>
-
 @stop

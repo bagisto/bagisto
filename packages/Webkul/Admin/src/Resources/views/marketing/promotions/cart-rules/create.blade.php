@@ -6,15 +6,11 @@
 
 @section('content')
     <div class="content">
-
         <cart-rule></cart-rule>
-
     </div>
 @stop
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="cart-rule-template">
         <div>
             <form method="POST" action="{{ route('admin.cart-rules.store') }}" @submit.prevent="onSubmit">
@@ -368,7 +364,6 @@
 
     <script>
         Vue.component('cart-rule', {
-
             template: '#cart-rule-template',
 
             inject: ['$validator'],
@@ -417,7 +412,6 @@
         });
 
         Vue.component('cart-rule-condition-item', {
-
             template: '#cart-rule-condition-item-template',
 
             props: ['index', 'condition'],
@@ -587,12 +581,12 @@
                     if (this.condition.attribute == '')
                         return;
 
-                    var this_this = this;
+                    let self = this;
 
-                    var attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
+                    let attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
 
                     matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
-                        return attribute.key == this_this.condition.attribute;
+                        return attribute.key == self.condition.attribute;
                     });
 
                     if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
