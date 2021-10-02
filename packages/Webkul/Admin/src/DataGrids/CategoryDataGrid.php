@@ -8,12 +8,32 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class CategoryDataGrid extends DataGrid
 {
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'category_id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Locale.
+     *
+     * @var string
+     */
     protected $locale = 'all';
 
+    /**
+     * Create a new datagrid instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
@@ -21,6 +41,11 @@ class CategoryDataGrid extends DataGrid
         $this->locale = core()->getRequestedLocaleCode();
     }
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         if ($this->locale === 'all') {
@@ -30,11 +55,17 @@ class CategoryDataGrid extends DataGrid
         }
 
         $queryBuilder = DB::table('categories as cat')
-            ->select('cat.id as category_id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale',
-            DB::raw('COUNT(DISTINCT ' . DB::getTablePrefix() . 'pc.product_id) as count'))
-            ->leftJoin('category_translations as ct', function($leftJoin) use($whereInLocales) {
+            ->select(
+                'cat.id as category_id',
+                'ct.name',
+                'cat.position',
+                'cat.status',
+                'ct.locale',
+                DB::raw('COUNT(DISTINCT ' . DB::getTablePrefix() . 'pc.product_id) as count')
+            )
+            ->leftJoin('category_translations as ct', function ($leftJoin) use ($whereInLocales) {
                 $leftJoin->on('cat.id', '=', 'ct.category_id')
-                         ->whereIn('ct.locale', $whereInLocales);
+                    ->whereIn('ct.locale', $whereInLocales);
             })
             ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
             ->groupBy('cat.id', 'ct.locale',);
@@ -46,6 +77,11 @@ class CategoryDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -82,7 +118,7 @@ class CategoryDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
-            'wrapper'    => function($value) {
+            'closure'    => function ($value) {
                 if ($value->status == 1) {
                     return trans('admin::app.datagrid.active');
                 } else {
@@ -101,6 +137,11 @@ class CategoryDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
