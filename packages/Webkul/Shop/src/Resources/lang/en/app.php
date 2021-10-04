@@ -289,7 +289,7 @@ return [
                     'closed' => 'Closed',
                     'pending' => 'Pending',
                     'pending-payment' => 'Pending Payment',
-                    'fraud' => 'Fraud',
+                    'fraud' => 'Fraud'
                 ],
 
                 'view' => [
