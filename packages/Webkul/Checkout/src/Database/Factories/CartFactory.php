@@ -32,10 +32,8 @@ class CartFactory extends Factory
                        ->select('id')
                        ->first();
 
-        $customer    = Customer::factory()
-                               ->create();
-        $cartAddress = CartAddress::factory()
-                                  ->create();
+        $customer = Customer::factory()
+                            ->create();
 
         return [
             'is_guest'              => 0,

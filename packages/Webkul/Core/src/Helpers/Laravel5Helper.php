@@ -7,7 +7,7 @@ namespace Webkul\Core\Helpers;
 
 use StdClass;
 use Faker\Factory;
-use Codeception\Module\Laravel5;
+use Codeception\Module\Laravel;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Product\Models\Product;
 use Illuminate\Support\Facades\DB;
@@ -30,18 +30,22 @@ use Webkul\Product\Models\ProductDownloadableLinkTranslation;
  *
  * @package Webkul\Core\Helpers
  */
-class Laravel5Helper extends Laravel5
+class Laravel5Helper extends Laravel
 {
+
     public const SIMPLE_PRODUCT = 1;
+
     public const VIRTUAL_PRODUCT = 2;
+
     public const DOWNLOADABLE_PRODUCT = 3;
+
     public const BOOKING_EVENT_PRODUCT = 4;
 
     /**
      * Returns the field name of the given attribute in which a value should be saved inside
      * the 'product_attribute_values' table. Depends on the type.
      *
-     * @param string $type
+     * @param  string  $type
      *
      * @return string|null
      * @part ORM
@@ -85,10 +89,10 @@ class Laravel5Helper extends Laravel5
 
         if (isset($options['payment_method'])
             && $options['payment_method'] === 'free_of_charge') {
-            $grand_total = '0.0000';
+            $grand_total      = '0.0000';
             $base_grand_total = '0.0000';
         } else {
-            $grand_total = (string)$faker->numberBetween(1, 666);
+            $grand_total      = (string) $faker->numberBetween(1, 666);
             $base_grand_total = $grand_total;
         }
 
@@ -129,7 +133,7 @@ class Laravel5Helper extends Laravel5
 
         // actually set the cart to the user's session
         // when in an functional test:
-        $stub = new StdClass();
+        $stub     = new StdClass();
         $stub->id = $cart->id;
         $I->setSession(['cart' => $stub]);
 
@@ -146,7 +150,7 @@ class Laravel5Helper extends Laravel5
     /**
      * Set all session with the given key and value in the array.
      *
-     * @param array $keyValue
+     * @param  array  $keyValue
      */
     public function setSession(array $keyValue): void
     {
@@ -169,9 +173,9 @@ class Laravel5Helper extends Laravel5
      * By default, the product will be generated as saleable, this means it has a price,
      * weight, is active and has a positive inventory stock, if necessary.
      *
-     * @param int   $productType see constants in this class for usage
-     * @param array $configs
-     * @param array $productStates
+     * @param  int  $productType  see constants in this class for usage
+     * @param  array  $configs
+     * @param  array  $productStates
      *
      * @return \Webkul\Product\Models\Product
      * @part ORM
@@ -208,7 +212,7 @@ class Laravel5Helper extends Laravel5
     private function haveSimpleProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (! in_array('simple', $productStates)) {
+        if (!in_array('simple', $productStates)) {
             $productStates = array_merge($productStates, ['simple']);
         }
 
@@ -224,7 +228,7 @@ class Laravel5Helper extends Laravel5
     private function haveVirtualProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (! in_array('virtual', $productStates)) {
+        if (!in_array('virtual', $productStates)) {
             $productStates = array_merge($productStates, ['virtual']);
         }
 
@@ -240,7 +244,7 @@ class Laravel5Helper extends Laravel5
     private function haveDownloadableProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (! in_array('downloadable', $productStates)) {
+        if (!in_array('downloadable', $productStates)) {
             $productStates = array_merge($productStates, ['downloadable']);
         }
 
@@ -256,7 +260,7 @@ class Laravel5Helper extends Laravel5
     private function haveBookingEventProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (! in_array('booking', $productStates)) {
+        if (!in_array('booking', $productStates)) {
             $productStates = array_merge($productStates, ['booking']);
         }
 
@@ -271,7 +275,13 @@ class Laravel5Helper extends Laravel5
 
     private function createProduct(array $attributes = [], array $states = []): Product
     {
-        return factory(Product::class)->states($states)->create($attributes);
+        return Product::factory()
+                      ->state(function () use ($states) {
+                          return [
+                              'type' => $states[0],
+                          ];
+                      })
+                      ->create($attributes);
     }
 
     private function createInventory(int $productId, array $inventoryConfig = []): void
@@ -285,7 +295,7 @@ class Laravel5Helper extends Laravel5
 
     private function createDownloadableLink(int $productId): void
     {
-        $I = $this;
+        $I    = $this;
         $link = $I->have(ProductDownloadableLink::class, [
             'product_id' => $productId,
         ]);
@@ -297,7 +307,7 @@ class Laravel5Helper extends Laravel5
 
     private function createBookingEventProduct(int $productId): void
     {
-        $I = $this;
+        $I              = $this;
         $bookingProduct = $I->have(BookingProduct::class, [
             'product_id' => $productId,
         ]);
@@ -314,17 +324,16 @@ class Laravel5Helper extends Laravel5
         $faker = Factory::create();
 
         $brand = Attribute::query()
-            ->where(['code' => 'brand'])
-            ->firstOrFail(); // usually 25
+                          ->where(['code' => 'brand'])
+                          ->firstOrFail(); // usually 25
 
-        if (! AttributeOption::query()
-            ->where(['attribute_id' => $brand->id])
-            ->exists()) {
+        if (!AttributeOption::query()
+                            ->where(['attribute_id' => $brand->id])
+                            ->exists()) {
             AttributeOption::create([
                 'admin_name'   => 'Webkul Demo Brand (c) 2020',
                 'attribute_id' => $brand->id,
             ]);
-
         }
 
         /**
@@ -345,17 +354,19 @@ class Laravel5Helper extends Laravel5
             'special_price_to'     => null,
             'special_price'        => null,
             'price'                => $faker->randomFloat(2, 1, 1000),
-            'weight'               => '1.00', // necessary for shipping
-            'brand'                => AttributeOption::query()->firstWhere('attribute_id', $brand->id)->id,
+            'weight'               => '1.00',
+            // necessary for shipping
+            'brand'                => AttributeOption::query()
+                                                     ->firstWhere('attribute_id', $brand->id)->id,
         ];
 
         $attributeValues = array_merge($defaultAttributeValues, $attributeValues);
 
         /** @var array $possibleAttributeValues list of the possible attributes a product can have */
         $possibleAttributeValues = DB::table('attributes')
-            ->select('id', 'code', 'type')
-            ->get()
-            ->toArray();
+                                     ->select('id', 'code', 'type')
+                                     ->get()
+                                     ->toArray();
 
         foreach ($possibleAttributeValues as $attributeSet) {
             $data = [
@@ -374,14 +385,14 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param string $attributeCode
-     * @param array  $data
+     * @param  string  $attributeCode
+     * @param  array  $data
      *
      * @return array
      */
     private function appendAttributeDependencies(string $attributeCode, array $data): array
     {
-        $locale = core()->getCurrentLocale()->code;
+        $locale  = core()->getCurrentLocale()->code;
         $channel = core()->getCurrentChannelCode();
 
         $attributeSetDependencies = [
@@ -389,7 +400,7 @@ class Laravel5Helper extends Laravel5
                 'locale',
                 'channel',
             ],
-            'tax_category_id' => [
+            'tax_category_id'    => [
                 'channel',
             ],
             'short_description'  => [

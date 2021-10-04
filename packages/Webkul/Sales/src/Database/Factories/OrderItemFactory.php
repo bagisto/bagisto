@@ -32,6 +32,7 @@ class OrderItemFactory extends Factory
                               ->first();
         } else {
             $product = Product::factory()
+                              ->simple()
                               ->create();
         }
 

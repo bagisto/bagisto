@@ -32,7 +32,7 @@ class CategoryFactory extends Factory
     {
         return [
             'status'    => 1,
-            'position'  => $this->faker->randomDigit,
+            'position'  => $this->faker->randomDigit(),
             'parent_id' => 1,
         ];
     }

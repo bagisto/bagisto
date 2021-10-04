@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\CartRule\Database\Factories;
+namespace Webkul\Core\Database\Factories;
 
 use Illuminate\Support\Str;
 use Webkul\CartRule\Models\CartRule;

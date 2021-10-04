@@ -7,6 +7,7 @@ use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Category\Database\Factories\CategoryFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webkul\Category\Contracts\Category as CategoryContract;
 use Webkul\Attribute\Models\AttributeProxy;
@@ -69,7 +70,7 @@ class Category extends TranslatableModel implements CategoryContract
     /**
      * The filterable attributes that belong to the category.
      */
-    public function filterableAttributes()
+    public function filterableAttributes(): BelongsToMany
     {
         return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')
                     ->with([
@@ -82,28 +83,29 @@ class Category extends TranslatableModel implements CategoryContract
     /**
      * Getting the root category of a category
      *
-     * @return Category
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object
      */
-    public function getRootCategory(): Category
+    public function getRootCategory()
     {
-        return Category::where([
-            [
-                'parent_id',
-                '=',
-                null,
-            ],
-            [
-                '_lft',
-                '<=',
-                $this->_lft,
-            ],
-            [
-                '_rgt',
-                '>=',
-                $this->_rgt,
-            ],
-        ])
-                       ->first();
+        return self::query()
+                   ->where([
+                       [
+                           'parent_id',
+                           '=',
+                           null,
+                       ],
+                       [
+                           '_lft',
+                           '<=',
+                           $this->_lft,
+                       ],
+                       [
+                           '_rgt',
+                           '>=',
+                           $this->_rgt,
+                       ],
+                   ])
+                   ->first();
     }
 
     /**
@@ -156,7 +158,7 @@ class Category extends TranslatableModel implements CategoryContract
     /**
      * The products that belong to the category.
      */
-    public function products()
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(ProductProxy::modelClass(), 'product_categories');
     }

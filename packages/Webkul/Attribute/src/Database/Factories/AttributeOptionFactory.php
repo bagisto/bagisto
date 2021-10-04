@@ -25,7 +25,7 @@ class AttributeOptionFactory extends Factory
     {
         return [
             'admin_name'   => $this->faker->word,
-            'sort_order'   => $this->faker->randomDigit,
+            'sort_order'   => $this->faker->randomDigit(),
             'attribute_id' => Attribute::factory(['swatch_type' => 'text']),
             'swatch_value' => null,
         ];
