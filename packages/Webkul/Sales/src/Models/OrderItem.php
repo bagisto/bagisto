@@ -2,12 +2,21 @@
 
 namespace Webkul\Sales\Models;
 
+use Webkul\Product\Type\AbstractType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Webkul\Sales\Database\Factories\OrderItemFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Sales\Contracts\OrderItem as OrderItemContract;
-use Webkul\Product\Models\Product;
 
 class OrderItem extends Model implements OrderItemContract
 {
+
+    use HasFactory;
+
     protected $guarded = [
         'id',
         'child',
@@ -27,13 +36,13 @@ class OrderItem extends Model implements OrderItemContract
      *
      * @return AbstractType
      */
-    public function getTypeInstance()
+    public function getTypeInstance(): AbstractType
     {
         if ($this->typeInstance) {
             return $this->typeInstance;
         }
 
-        $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
+        $this->typeInstance = app(config('product_types.'.$this->type.'.class'));
 
         if ($this->product) {
             $this->typeInstance->setProduct($this);
@@ -45,17 +54,18 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * @return bool
      */
-    public function isStockable()
+    public function isStockable(): bool
     {
-        return $this->getTypeInstance()->isStockable();
+        return $this->getTypeInstance()
+                    ->isStockable();
     }
 
     /**
-     * Checks if new shipment is allow or not
+     * Checks if new shipment is allowed or not
      */
-    public function canShip()
+    public function canShip(): bool
     {
-        if (! $this->isStockable()) {
+        if (!$this->isStockable()) {
             return false;
         }
 
@@ -71,7 +81,7 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function getQtyToShipAttribute()
     {
-        if (! $this->isStockable()) {
+        if (!$this->isStockable()) {
             return 0;
         }
 
@@ -101,13 +111,9 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Checks if new cancel is allow or not
      */
-    public function canCancel()
+    public function canCancel(): bool
     {
-        if ($this->qty_to_cancel > 0) {
-            return true;
-        }
-
-        return false;
+        return $this->qty_to_cancel > 0;
     }
 
     /**
@@ -129,7 +135,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the order record associated with the order item.
      */
-    public function order()
+    public function order(): BelongsTo
     {
         return $this->belongsTo(OrderProxy::modelClass());
     }
@@ -137,7 +143,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the product record associated with the order item.
      */
-    public function product()
+    public function product(): MorphTo
     {
         return $this->morphTo();
     }
@@ -145,7 +151,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the child item record associated with the order item.
      */
-    public function child()
+    public function child(): HasOne
     {
         return $this->hasOne(OrderItemProxy::modelClass(), 'parent_id');
     }
@@ -153,7 +159,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the parent item record associated with the order item.
      */
-    public function parent()
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id');
     }
@@ -161,7 +167,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the children items.
      */
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id');
     }
@@ -169,7 +175,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the invoice items record associated with the order item.
      */
-    public function invoice_items()
+    public function invoice_items(): HasMany
     {
         return $this->hasMany(InvoiceItemProxy::modelClass());
     }
@@ -177,7 +183,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the shipment items record associated with the order item.
      */
-    public function shipment_items()
+    public function shipment_items(): HasMany
     {
         return $this->hasMany(ShipmentItemProxy::modelClass());
     }
@@ -185,7 +191,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the refund items record associated with the order item.
      */
-    public function refund_items()
+    public function refund_items(): HasMany
     {
         return $this->hasMany(RefundItemProxy::modelClass());
     }
@@ -193,7 +199,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Returns configurable option html
      */
-    public function downloadable_link_purchased()
+    public function downloadable_link_purchased(): HasMany
     {
         return $this->hasMany(DownloadableLinkPurchasedProxy::modelClass());
     }
@@ -201,7 +207,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = parent::toArray();
 
@@ -217,4 +223,15 @@ class OrderItem extends Model implements OrderItemContract
 
         return $array;
     }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return OrderItemFactory
+     */
+    protected static function newFactory(): OrderItemFactory
+    {
+        return OrderItemFactory::new();
+    }
+
 }

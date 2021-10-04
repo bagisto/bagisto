@@ -2,11 +2,18 @@
 
 namespace Webkul\Attribute\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Webkul\Core\Eloquent\TranslatableModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Attribute\Database\Factories\AttributeFactory;
 use Webkul\Attribute\Contracts\Attribute as AttributeContract;
 
 class Attribute extends TranslatableModel implements AttributeContract
 {
+
+    use HasFactory;
+
     public $translatedAttributes = ['name'];
 
     protected $fillable = [
@@ -33,7 +40,7 @@ class Attribute extends TranslatableModel implements AttributeContract
     /**
      * Get the options.
      */
-    public function options()
+    public function options(): HasMany
     {
         return $this->hasMany(AttributeOptionProxy::modelClass());
     }
@@ -41,11 +48,25 @@ class Attribute extends TranslatableModel implements AttributeContract
     /**
      * Scope a query to only include popular users.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeFilterableAttributes($query)
+    public function scopeFilterableAttributes(Builder $query): Builder
     {
-        return $query->where('is_filterable', 1)->where('swatch_type', '<>', 'image')->orderBy('position');
+        return $query->where('is_filterable', 1)
+                     ->where('swatch_type', '<>', 'image')
+                     ->orderBy('position');
     }
+
+    /**
+     * Create a new factory instance for the model
+     *
+     * @return AttributeFactory
+     */
+    protected static function newFactory(): AttributeFactory
+    {
+        return AttributeFactory::new();
+    }
+
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad18338e686e8f7ba9eaf04d9bfa2374",
+    "content-hash": "487d5fda315fc77479141cb31da7a32c",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -3060,62 +3060,6 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2021-05-11T14:00:02+00:00"
-        },
-        {
-            "name": "laravel/legacy-factories",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/legacy-factories.git",
-                "reference": "5e3fe2fd5fda64e20ea5c74c831a7346294e902a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/legacy-factories/zipball/5e3fe2fd5fda64e20ea5c74c831a7346294e902a",
-                "reference": "5e3fe2fd5fda64e20ea5c74c831a7346294e902a",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/macroable": "^8.0",
-                "php": "^7.3|^8.0",
-                "symfony/finder": "^3.4|^4.0|^5.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Illuminate\\Database\\Eloquent\\LegacyFactoryServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "helpers.php"
-                ],
-                "psr-4": {
-                    "Illuminate\\Database\\Eloquent\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "The legacy version of the Laravel Eloquent factories.",
-            "homepage": "http://laravel.com",
-            "support": {
-                "issues": "https://github.com/laravel/framework/issues",
-                "source": "https://github.com/laravel/framework"
-            },
-            "time": "2020-10-27T14:25:32+00:00"
         },
         {
             "name": "laravel/scout",
@@ -11594,5 +11538,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

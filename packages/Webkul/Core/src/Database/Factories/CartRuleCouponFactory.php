@@ -1,20 +1,37 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Webkul\CartRule\Database\Factories;
 
-use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 use Webkul\CartRule\Models\CartRule;
 use Webkul\CartRule\Models\CartRuleCoupon;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(CartRuleCoupon::class, function (Faker $faker) {
-    return [
-        'code'               => $faker->uuid(),
-        'usage_limit'        => 100,
-        'usage_per_customer' => 100,
-        'type'               => 0,
-        'is_primary'         => 1,
-        'cart_rule_id'       => static function () {
-            return factory(CartRule::class)->create()->id;
-        },
-    ];
-});
+class CartRuleCouponFactory extends Factory
+{
+
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = CartRuleCoupon::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'code'               => Str::uuid(),
+            'usage_limit'        => 100,
+            'usage_per_customer' => 100,
+            'type'               => 0,
+            'is_primary'         => 1,
+            'cart_rule_id'       => CartRule::factory(),
+        ];
+    }
+
+}

@@ -3,31 +3,38 @@
 namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Sales\Database\Factories\RefundFactory;
 use Webkul\Sales\Contracts\Refund as RefundContract;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Refund extends Model implements RefundContract
 {
+
+    use HasFactory;
+
     protected $guarded = [
         'id',
         'created_at',
         'updated_at',
     ];
 
-    protected $statusLabel = [
-    ];
+    protected $statusLabel = [];
 
     /**
      * Returns the status label from status code
      */
     public function getStatusLabelAttribute()
     {
-        return isset($this->statusLabel[$this->state]) ? $this->statusLabel[$this->state] : '';
+        return $this->statusLabel[$this->state] ?? '';
     }
 
     /**
      * Get the order that belongs to the Refund.
      */
-    public function order()
+    public function order(): BelongsTo
     {
         return $this->belongsTo(OrderProxy::modelClass());
     }
@@ -35,14 +42,16 @@ class Refund extends Model implements RefundContract
     /**
      * Get the Refund items record associated with the Refund.
      */
-    public function items() {
-        return $this->hasMany(RefundItemProxy::modelClass())->whereNull('parent_id');
+    public function items(): HasMany
+    {
+        return $this->hasMany(RefundItemProxy::modelClass())
+                    ->whereNull('parent_id');
     }
 
     /**
      * Get the customer record associated with the Refund.
      */
-    public function customer()
+    public function customer(): MorphTo
     {
         return $this->morphTo();
     }
@@ -50,7 +59,7 @@ class Refund extends Model implements RefundContract
     /**
      * Get the channel record associated with the Refund.
      */
-    public function channel()
+    public function channel(): MorphTo
     {
         return $this->morphTo();
     }
@@ -58,8 +67,19 @@ class Refund extends Model implements RefundContract
     /**
      * Get the addresses for the shipment.
      */
-    public function address()
+    public function address(): BelongsTo
     {
         return $this->belongsTo(OrderAddressProxy::modelClass(), 'order_address_id');
     }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return RefundFactory
+     */
+    protected static function newFactory(): RefundFactory
+    {
+        return RefundFactory::new();
+    }
+
 }

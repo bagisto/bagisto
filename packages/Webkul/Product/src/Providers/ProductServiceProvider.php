@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Providers;
 
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
@@ -16,23 +15,22 @@ use Webkul\Product\ProductVideo;
 
 class ProductServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap services.
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        include __DIR__ . '/../Http/helpers.php';
+        include __DIR__.'/../Http/helpers.php';
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
-        $this->app->make(EloquentFactory::class)->load(__DIR__ . '/../Database/Factories');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         $this->app->register(EventServiceProvider::class);
 
         $this->publishes([
-            dirname(__DIR__) . '/Config/imagecache.php' => config_path('imagecache.php'),
+            dirname(__DIR__).'/Config/imagecache.php' => config_path('imagecache.php'),
         ]);
 
         ProductProxy::observe(ProductObserver::class);
@@ -50,8 +48,6 @@ class ProductServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->registerFacades();
-
-        $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
     }
 
     /**
@@ -61,9 +57,7 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function registerConfig(): void
     {
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/product_types.php', 'product_types'
-        );
+        $this->mergeConfigFrom(dirname(__DIR__).'/Config/product_types.php', 'product_types');
     }
 
     /**
@@ -74,28 +68,19 @@ class ProductServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([PriceUpdate::class, GenerateProducts::class,]);
+            $this->commands([
+                PriceUpdate::class,
+                GenerateProducts::class,
+            ]);
         }
     }
-
-    /**
-     * Register factories.
-     *
-     * @param  string  $path
-     * @return void
-     */
-    protected function registerEloquentFactoriesFrom($path): void
-    {
-        $this->app->make(EloquentFactory::class)->load($path);
-    }
-
 
     /**
      * Register Bouncer as a singleton.
      *
      * @return void
      */
-    protected function registerFacades()
+    protected function registerFacades(): void
     {
         // Product image
         $loader = AliasLoader::getInstance();
@@ -112,4 +97,5 @@ class ProductServiceProvider extends ServiceProvider
             return app()->make(ProductVideo::class);
         });
     }
+
 }

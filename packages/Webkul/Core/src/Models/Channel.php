@@ -6,10 +6,15 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Models\CategoryProxy;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Inventory\Models\InventorySourceProxy;
+use Webkul\Core\Database\Factories\ChannelFactory;
 use Webkul\Core\Contracts\Channel as ChannelContract;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Channel extends TranslatableModel implements ChannelContract
 {
+
+    use HasFactory;
+
     protected $fillable = [
         'code',
         'name',
@@ -24,7 +29,7 @@ class Channel extends TranslatableModel implements ChannelContract
         'home_seo',
         'is_maintenance_on',
         'maintenance_mode_text',
-        'allowed_ips'
+        'allowed_ips',
     ];
 
     public $translatedAttributes = [
@@ -39,7 +44,7 @@ class Channel extends TranslatableModel implements ChannelContract
     /**
      * Get the channel locales.
      */
-    public function locales()
+    public function locales(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(LocaleProxy::modelClass(), 'channel_locales');
     }
@@ -47,7 +52,7 @@ class Channel extends TranslatableModel implements ChannelContract
     /**
      * Get the default locale
      */
-    public function default_locale()
+    public function default_locale(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(LocaleProxy::modelClass());
     }
@@ -55,7 +60,7 @@ class Channel extends TranslatableModel implements ChannelContract
     /**
      * Get the channel locales.
      */
-    public function currencies()
+    public function currencies(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(CurrencyProxy::modelClass(), 'channel_currencies');
     }
@@ -63,7 +68,7 @@ class Channel extends TranslatableModel implements ChannelContract
     /**
      * Get the channel inventory sources.
      */
-    public function inventory_sources()
+    public function inventory_sources(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(InventorySourceProxy::modelClass(), 'channel_inventory_sources');
     }
@@ -71,7 +76,7 @@ class Channel extends TranslatableModel implements ChannelContract
     /**
      * Get the base currency
      */
-    public function base_currency()
+    public function base_currency(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(CurrencyProxy::modelClass());
     }
@@ -79,7 +84,7 @@ class Channel extends TranslatableModel implements ChannelContract
     /**
      * Get the base currency
      */
-    public function root_category()
+    public function root_category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(CategoryProxy::modelClass(), 'root_category_id');
     }
@@ -89,7 +94,7 @@ class Channel extends TranslatableModel implements ChannelContract
      */
     public function logo_url()
     {
-        if (! $this->logo) {
+        if (!$this->logo) {
             return;
         }
 
@@ -109,7 +114,7 @@ class Channel extends TranslatableModel implements ChannelContract
      */
     public function favicon_url()
     {
-        if (! $this->favicon) {
+        if (!$this->favicon) {
             return;
         }
 
@@ -123,4 +128,15 @@ class Channel extends TranslatableModel implements ChannelContract
     {
         return $this->favicon_url();
     }
+
+    /**
+     * Create a new factory instance for the model
+     *
+     * @return ChannelFactory
+     */
+    protected static function newFactory(): ChannelFactory
+    {
+        return ChannelFactory::new();
+    }
+
 }

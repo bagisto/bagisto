@@ -3,7 +3,6 @@
 namespace Webkul\Core\Providers;
 
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
@@ -18,21 +17,19 @@ use Webkul\Theme\ViewRenderEventManager;
 
 class CoreServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap services.
      *
      * @return void
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function boot()
+    public function boot(): void
     {
-        include __DIR__ . '/../Http/helpers.php';
+        include __DIR__.'/../Http/helpers.php';
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
-        $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
-
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'core');
 
         Validator::extend('slug', 'Webkul\Core\Contracts\Validations\Slug@passes');
 
@@ -41,18 +38,15 @@ class CoreServiceProvider extends ServiceProvider
         Validator::extend('decimal', 'Webkul\Core\Contracts\Validations\Decimal@passes');
 
         $this->publishes([
-            dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),
-            dirname(__DIR__) . '/Config/scout.php' => config_path('scout.php'),
+            dirname(__DIR__).'/Config/concord.php' => config_path('concord.php'),
+            dirname(__DIR__).'/Config/scout.php'   => config_path('scout.php'),
         ]);
 
-        $this->app->bind(
-            ExceptionHandler::class,
-            Handler::class
-        );
+        $this->app->bind(ExceptionHandler::class, Handler::class);
 
         SliderProxy::observe(SliderObserver::class);
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'core');
 
         Event::listen('bagisto.shop.layout.body.after', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
@@ -76,7 +70,7 @@ class CoreServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->registerFacades();
 
@@ -90,7 +84,7 @@ class CoreServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerFacades()
+    protected function registerFacades(): void
     {
         $loader = AliasLoader::getInstance();
         $loader->alias('core', CoreFacade::class);
@@ -123,26 +117,15 @@ class CoreServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register factories.
-     *
-     * @param string $path
-     * @return void
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    protected function registerEloquentFactoriesFrom($path): void
-    {
-        $this->app->make(EloquentFactory::class)->load($path);
-    }
-
-    /**
      * Register the Blade compiler implementation.
      *
      * @return void
      */
-    public function registerBladeCompiler()
+    public function registerBladeCompiler(): void
     {
         $this->app->singleton('blade.compiler', function ($app) {
             return new BladeCompiler($app['files'], $app['config']['view.compiled']);
         });
     }
+
 }

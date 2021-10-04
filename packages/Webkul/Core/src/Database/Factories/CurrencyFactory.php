@@ -1,14 +1,32 @@
 <?php
 
+namespace Webkul\Core\Database\Factories;
+
 use Faker\Generator as Faker;
 use Webkul\Core\Models\Currency;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Currency::class, function (Faker $faker, array $attributes) {
+class CurrencyFactory extends Factory
+{
 
-    return [
-        'code' => $faker->unique()->currencyCode,
-        'name' => $faker->word,
-    ];
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Currency::class;
 
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'code' => $this->faker->unique()->currencyCode,
+            'name' => $this->faker->word,
+        ];
+    }
+
+}

@@ -29,7 +29,6 @@
         "khaled.alshamaa/ar-php": "^6.0.0",
         "konekt/concord": "^1.2",
         "laravel/framework": "^8.0",
-        "laravel/legacy-factories": "^1.1",
         "laravel/scout": "^8.0",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",

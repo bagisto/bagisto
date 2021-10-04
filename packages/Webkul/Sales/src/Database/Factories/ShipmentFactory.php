@@ -1,22 +1,39 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Webkul\Sales\Database\Factories;
 
-use Faker\Generator as Faker;
 use Webkul\Inventory\Models\InventorySource;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\Shipment;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Shipment::class, function (Faker $faker) {
-    $address = factory(OrderAddress::class)->create();
+class ShipmentFactory extends Factory
+{
 
-    return [
-        'total_qty'           => $faker->numberBetween(1, 20),
-        'order_id'            => $address->order_id,
-        'order_address_id'    => $address->id,
-        'inventory_source_id' => function () {
-            return factory(InventorySource::class)->create()->id;
-        },
-    ];
-});
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Shipment::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        $address = OrderAddress::factory()
+                               ->create();
+
+        return [
+            'total_qty'           => $this->faker->numberBetween(1, 20),
+            'order_id'            => $address->order_id,
+            'order_address_id'    => $address->id,
+            'inventory_source_id' => InventorySource::factory(),
+        ];
+    }
+
+}
 

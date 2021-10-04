@@ -5,15 +5,26 @@ namespace Webkul\Sales\Models;
 use Webkul\Checkout\Models\CartProxy;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\Order as OrderContract;
+use Webkul\Sales\Database\Factories\OrderFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model implements OrderContract
 {
+
+    use HasFactory;
+
     public const STATUS_PENDING = 'pending';
+
     public const STATUS_PENDING_PAYMENT = 'pending_payment';
+
     public const STATUS_PROCESSING = 'processing';
+
     public const STATUS_COMPLETED = 'completed';
+
     public const STATUS_CANCELED = 'canceled';
+
     public const STATUS_CLOSED = 'closed';
+
     public const STATUS_FRAUD = 'fraud';
 
     protected $guarded = [
@@ -41,9 +52,9 @@ class Order extends Model implements OrderContract
     /**
      * Get the order items record associated with the order.
      */
-    public function getCustomerFullNameAttribute()
+    public function getCustomerFullNameAttribute(): string
     {
-        return $this->customer_first_name . ' ' . $this->customer_last_name;
+        return $this->customer_first_name.' '.$this->customer_last_name;
     }
 
     /**
@@ -73,7 +84,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the associated cart that was used to create this order.
      */
-    public function cart()
+    public function cart(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(CartProxy::modelClass());
     }
@@ -81,15 +92,16 @@ class Order extends Model implements OrderContract
     /**
      * Get the order items record associated with the order.
      */
-    public function items()
+    public function items(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(OrderItemProxy::modelClass())->whereNull('parent_id');
+        return $this->hasMany(OrderItemProxy::modelClass())
+                    ->whereNull('parent_id');
     }
 
     /**
      * Get the comments record associated with the order.
      */
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(OrderCommentProxy::modelClass());
     }
@@ -97,7 +109,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order items record associated with the order.
      */
-    public function all_items()
+    public function all_items(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(OrderItemProxy::modelClass());
     }
@@ -105,7 +117,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order shipments record associated with the order.
      */
-    public function shipments()
+    public function shipments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(ShipmentProxy::modelClass());
     }
@@ -113,7 +125,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order invoices record associated with the order.
      */
-    public function invoices()
+    public function invoices(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(InvoiceProxy::modelClass());
     }
@@ -121,7 +133,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order refunds record associated with the order.
      */
-    public function refunds()
+    public function refunds(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(RefundProxy::modelClass());
     }
@@ -129,7 +141,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order transactions record associated with the order.
      */
-    public function transactions()
+    public function transactions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(OrderTransactionProxy::modelClass());
     }
@@ -137,7 +149,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the customer record associated with the order.
      */
-    public function customer()
+    public function customer(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo();
     }
@@ -145,7 +157,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the addresses for the order.
      */
-    public function addresses()
+    public function addresses(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(OrderAddressProxy::modelClass());
     }
@@ -153,17 +165,18 @@ class Order extends Model implements OrderContract
     /**
      * Get the payment for the order.
      */
-    public function payment()
+    public function payment(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(OrderPaymentProxy::modelClass());
     }
 
     /**
-     * Get the biling address for the order.
+     * Get the billing address for the order.
      */
-    public function billing_address()
+    public function billing_address(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->addresses()->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
+        return $this->addresses()
+                    ->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
     }
 
     /**
@@ -171,15 +184,17 @@ class Order extends Model implements OrderContract
      */
     public function getBillingAddressAttribute()
     {
-        return $this->billing_address()->first();
+        return $this->billing_address()
+                    ->first();
     }
 
     /**
      * Get the shipping address for the order.
      */
-    public function shipping_address()
+    public function shipping_address(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->addresses()->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
+        return $this->addresses()
+                    ->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
     }
 
     /**
@@ -187,7 +202,8 @@ class Order extends Model implements OrderContract
      */
     public function getShippingAddressAttribute()
     {
-        return $this->shipping_address()->first();
+        return $this->shipping_address()
+                    ->first();
     }
 
     /**
@@ -206,7 +222,8 @@ class Order extends Model implements OrderContract
     public function haveStockableItems(): bool
     {
         foreach ($this->items as $item) {
-            if ($item->getTypeInstance()->isStockable()) {
+            if ($item->getTypeInstance()
+                     ->isStockable()) {
                 return true;
             }
         }
@@ -268,12 +285,13 @@ class Order extends Model implements OrderContract
         if ($this->payment->method == 'moneytransfer' && core()->getConfigData('sales.paymentmethods.moneytransfer.generate_invoice')) {
             return false;
         }
-        
+
         if ($this->status === self::STATUS_FRAUD) {
             return false;
         }
 
-        $pendingInvoice = $this->invoices->where('state', 'pending')->first();
+        $pendingInvoice = $this->invoices->where('state', 'pending')
+                                         ->first();
         if ($pendingInvoice) {
             return true;
         }
@@ -297,8 +315,9 @@ class Order extends Model implements OrderContract
         if ($this->status === self::STATUS_FRAUD) {
             return false;
         }
-        
-        $pendingInvoice = $this->invoices->where('state', 'pending')->first();
+
+        $pendingInvoice = $this->invoices->where('state', 'pending')
+                                         ->first();
         if ($pendingInvoice) {
             return false;
         }
@@ -309,10 +328,22 @@ class Order extends Model implements OrderContract
             }
         }
 
-        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()->sum('base_adjustment_fee') > 0) {
+        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()
+                                                                                       ->sum('base_adjustment_fee') > 0) {
             return true;
         }
 
         return false;
     }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return OrderFactory
+     */
+    protected static function newFactory(): OrderFactory
+    {
+        return OrderFactory::new();
+    }
+
 }

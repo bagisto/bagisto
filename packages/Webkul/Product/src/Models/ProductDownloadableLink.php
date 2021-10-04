@@ -4,10 +4,15 @@ namespace Webkul\Product\Models;
 
 use Webkul\Core\Eloquent\TranslatableModel;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Product\Database\Factories\ProductDownloadableLinkFactory;
 use Webkul\Product\Contracts\ProductDownloadableLink as ProductDownloadableLinkContract;
 
 class ProductDownloadableLink extends TranslatableModel implements ProductDownloadableLinkContract
 {
+
+    use HasFactory;
+
     public $translatedAttributes = ['title'];
 
     protected $fillable = [
@@ -31,7 +36,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
     /**
      * Get the product that owns the image.
      */
-    public function product()
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ProductProxy::modelClass());
     }
@@ -39,7 +44,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
     /**
      * Get image url for the file.
      */
-    public function file_url()
+    public function file_url(): string
     {
         return Storage::url($this->path);
     }
@@ -47,7 +52,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
     /**
      * Get image url for the file.
      */
-    public function getFileUrlAttribute()
+    public function getFileUrlAttribute(): string
     {
         return $this->file_url();
     }
@@ -55,7 +60,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
     /**
      * Get image url for the sample file.
      */
-    public function sample_file_url()
+    public function sample_file_url(): string
     {
         return Storage::url($this->path);
     }
@@ -63,7 +68,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
     /**
      * Get image url for the sample file.
      */
-    public function getSampleFileUrlAttribute()
+    public function getSampleFileUrlAttribute(): string
     {
         return $this->sample_file_url();
     }
@@ -71,13 +76,13 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = parent::toArray();
 
         $translation = $this->translate(core()->getRequestedLocaleCode());
 
-        $array['title'] = $translation ? $translation->title : '';
+        $array['title'] = $translation->title ?? '';
 
         $array['file_url'] = $this->file ? Storage::url($this->file) : null;
 
@@ -85,4 +90,15 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
 
         return $array;
     }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return ProductDownloadableLinkFactory
+     */
+    protected static function newFactory(): ProductDownloadableLinkFactory
+    {
+        return ProductDownloadableLinkFactory::new();
+    }
+
 }
