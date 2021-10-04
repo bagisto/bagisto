@@ -15,7 +15,11 @@ class CartMerger
      */
     public function handle($request, Closure $next)
     {
-        \Cart::mergeDeactivatedCart();
+        /**
+         * Currently removing the buy now cart only because in live
+         * instance merging not happen properly need to check this.
+         */
+        \Cart::activateCartIfSessionHasDeactivatedCartId();
 
         return $next($request);
     }
