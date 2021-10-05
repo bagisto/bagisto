@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Webkul\Admin\Exports\DataGridExport;
 use Excel;
+use Webkul\Admin\Exports\DataGridExport;
 
 class ExportController extends Controller
 {
@@ -18,10 +18,10 @@ class ExportController extends Controller
     }
 
     /**
-     * function for export datagrid
+     * Export datagrid.
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function export()
     {
         $criteria = request()->all();
@@ -30,10 +30,10 @@ class ExportController extends Controller
 
         $gridName = explode('\\', $criteria['gridName']);
 
-        $path = '\Webkul\Admin\DataGrids'.'\\'.last($gridName);
+        $path = '\Webkul\Admin\DataGrids' . '\\' . last($gridName);
 
         $gridInstance = new $path;
-        
+
         $records = $gridInstance->export();
 
         if (! count($records)) {
@@ -43,11 +43,11 @@ class ExportController extends Controller
         }
 
         if ($format == 'csv') {
-            return Excel::download(new DataGridExport($records), last($gridName).'.csv');
+            return Excel::download(new DataGridExport($records), last($gridName) . '.csv');
         }
 
         if ($format == 'xls') {
-            return Excel::download(new DataGridExport($records), last($gridName).'.xlsx');
+            return Excel::download(new DataGridExport($records), last($gridName) . '.xlsx');
         }
 
         session()->flash('warning', trans('admin::app.export.illegal-format'));
