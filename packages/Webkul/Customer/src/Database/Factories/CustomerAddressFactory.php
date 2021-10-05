@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CustomerAddressFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -46,7 +45,6 @@ class CustomerAddressFactory extends Factory
             'address_type'    => CustomerAddress::ADDRESS_TYPE,
         ];
     }
-
 }
 
 

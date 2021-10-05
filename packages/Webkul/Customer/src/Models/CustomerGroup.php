@@ -9,7 +9,6 @@ use Webkul\Customer\Contracts\CustomerGroup as CustomerGroupContract;
 
 class CustomerGroup extends Model implements CustomerGroupContract
 {
-
     use HasFactory;
 
     protected $table = 'customer_groups';
@@ -37,5 +36,4 @@ class CustomerGroup extends Model implements CustomerGroupContract
     {
         return CustomerGroupFactory::new();
     }
-
 }

@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Invoice extends Model implements InvoiceContract
 {
-
     use PaymentTerm, HasFactory;
 
     /**
@@ -97,5 +96,4 @@ class Invoice extends Model implements InvoiceContract
     {
         return InvoiceFactory::new();
     }
-
 }

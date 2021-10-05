@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Locale extends Model implements LocaleContract
 {
-
     use HasFactory;
 
     /**
@@ -32,5 +31,4 @@ class Locale extends Model implements LocaleContract
     {
         return LocaleFactory::new();
     }
-
 }

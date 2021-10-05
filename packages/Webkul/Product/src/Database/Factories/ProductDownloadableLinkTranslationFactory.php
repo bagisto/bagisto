@@ -8,7 +8,6 @@ use Webkul\Product\Models\ProductDownloadableLinkTranslation;
 
 class ProductDownloadableLinkTranslationFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -29,5 +28,4 @@ class ProductDownloadableLinkTranslationFactory extends Factory
             'product_downloadable_link_id' => ProductDownloadableLink::factory(),
         ];
     }
-
 }

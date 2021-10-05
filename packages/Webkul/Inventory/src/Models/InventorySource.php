@@ -9,7 +9,6 @@ use Webkul\Inventory\Contracts\InventorySource as InventorySourceContract;
 
 class InventorySource extends Model implements InventorySourceContract
 {
-
     use HasFactory;
 
     protected $guarded = ['_token'];
@@ -23,5 +22,4 @@ class InventorySource extends Model implements InventorySourceContract
     {
         return InventorySourceFactory::new();
     }
-
 }

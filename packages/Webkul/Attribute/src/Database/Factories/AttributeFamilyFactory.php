@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AttributeFamilyFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -30,5 +29,4 @@ class AttributeFamilyFactory extends Factory
             'status'          => 0,
         ];
     }
-
 }

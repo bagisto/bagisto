@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvoiceFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -92,5 +91,4 @@ class InvoiceFactory extends Factory
             ];
         });
     }
-
 }

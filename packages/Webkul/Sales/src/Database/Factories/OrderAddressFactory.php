@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderAddressFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -60,5 +59,4 @@ class OrderAddressFactory extends Factory
             ];
         });
     }
-
 }

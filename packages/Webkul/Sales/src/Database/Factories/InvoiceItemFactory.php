@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvoiceItemFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -50,5 +49,4 @@ class InvoiceItemFactory extends Factory
             'invoice_id'      => Invoice::factory(),
         ];
     }
-
 }

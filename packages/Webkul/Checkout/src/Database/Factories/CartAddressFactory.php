@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CartAddressFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -29,5 +28,4 @@ class CartAddressFactory extends Factory
             'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
         ];
     }
-
 }

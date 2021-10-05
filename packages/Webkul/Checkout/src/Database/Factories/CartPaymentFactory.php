@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CartPaymentFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -30,7 +29,6 @@ class CartPaymentFactory extends Factory
             'updated_at' => $now,
         ];
     }
-
 }
 
 

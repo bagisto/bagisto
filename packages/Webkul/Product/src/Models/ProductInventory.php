@@ -11,7 +11,6 @@ use Webkul\Product\Contracts\ProductInventory as ProductInventoryContract;
 
 class ProductInventory extends Model implements ProductInventoryContract
 {
-
     use HasFactory;
 
     public $timestamps = false;
@@ -48,5 +47,4 @@ class ProductInventory extends Model implements ProductInventoryContract
     {
         return ProductInventoryFactory::new();
     }
-
 }

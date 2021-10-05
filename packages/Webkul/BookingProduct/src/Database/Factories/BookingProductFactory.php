@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BookingProductFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -34,5 +33,4 @@ class BookingProductFactory extends Factory
             'product_id'     => Product::factory(['type' => 'booking']),
         ];
     }
-
 }

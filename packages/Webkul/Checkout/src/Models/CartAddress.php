@@ -21,7 +21,6 @@ use Webkul\Core\Models\Address;
  */
 class CartAddress extends Address implements CartAddressContract
 {
-
     use HasFactory;
 
     public const ADDRESS_TYPE_SHIPPING = 'cart_shipping';
@@ -77,5 +76,4 @@ class CartAddress extends Address implements CartAddressContract
     {
         return CartAddressFactory::new();
     }
-
 }

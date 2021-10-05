@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductInventoryFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -30,5 +29,4 @@ class ProductInventoryFactory extends Factory
             'inventory_source_id' => InventorySource::factory(),
         ];
     }
-
 }

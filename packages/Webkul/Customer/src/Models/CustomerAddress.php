@@ -10,7 +10,6 @@ use Webkul\Customer\Contracts\CustomerAddress as CustomerAddressContract;
 
 class CustomerAddress extends Address implements CustomerAddressContract
 {
-
     use HasFactory;
 
     public const ADDRESS_TYPE = 'customer';
@@ -45,5 +44,4 @@ class CustomerAddress extends Address implements CustomerAddressContract
     {
         return CustomerAddressFactory::new();
     }
-
 }

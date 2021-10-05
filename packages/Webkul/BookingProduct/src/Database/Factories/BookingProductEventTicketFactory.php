@@ -8,7 +8,6 @@ use Webkul\BookingProduct\Models\BookingProductEventTicket;
 
 class BookingProductEventTicketFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -29,5 +28,4 @@ class BookingProductEventTicketFactory extends Factory
             'booking_product_id' => BookingProduct::factory(),
         ];
     }
-
 }

@@ -11,7 +11,6 @@ use Webkul\Attribute\Contracts\Attribute as AttributeContract;
 
 class Attribute extends TranslatableModel implements AttributeContract
 {
-
     use HasFactory;
 
     public $translatedAttributes = ['name'];
@@ -68,5 +67,4 @@ class Attribute extends TranslatableModel implements AttributeContract
     {
         return AttributeFactory::new();
     }
-
 }

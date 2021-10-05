@@ -10,7 +10,6 @@ use Webkul\Tax\Contracts\TaxCategory as TaxCategoryContract;
 
 class TaxCategory extends Model implements TaxCategoryContract
 {
-
     use HasFactory;
 
     /**
@@ -43,5 +42,4 @@ class TaxCategory extends Model implements TaxCategoryContract
     {
         return TaxCategoryFactory::new();
     }
-
 }

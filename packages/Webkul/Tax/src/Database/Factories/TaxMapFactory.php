@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaxMapFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -29,6 +28,5 @@ class TaxMapFactory extends Factory
             'tax_rate_id'     => TaxRate::factory(),
         ];
     }
-
 }
 

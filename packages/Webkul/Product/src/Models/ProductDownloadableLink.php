@@ -10,7 +10,6 @@ use Webkul\Product\Contracts\ProductDownloadableLink as ProductDownloadableLinkC
 
 class ProductDownloadableLink extends TranslatableModel implements ProductDownloadableLinkContract
 {
-
     use HasFactory;
 
     public $translatedAttributes = ['title'];
@@ -100,5 +99,4 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
     {
         return ProductDownloadableLinkFactory::new();
     }
-
 }

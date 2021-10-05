@@ -3,14 +3,12 @@
 namespace Webkul\BookingProduct\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\ProductProxy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\BookingProduct\Database\Factories\BookingProductFactory;
 use Webkul\BookingProduct\Contracts\BookingProduct as BookingProductContract;
 
 class BookingProduct extends Model implements BookingProductContract
 {
-
     use HasFactory;
 
     protected $fillable = [
@@ -86,5 +84,4 @@ class BookingProduct extends Model implements BookingProductContract
     {
         return BookingProductFactory::new();
     }
-
 }

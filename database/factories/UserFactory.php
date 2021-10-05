@@ -1,5 +1,6 @@
 <?php
 
+namespace Database\Factories;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,3 +12,13 @@
 | model instances for testing / seeding your application's database.
 |
 */
+
+class UserFactory extends \Illuminate\Database\Eloquent\Factories\Factory
+{
+
+    public function definition(): array
+    {
+        return [];
+    }
+
+}

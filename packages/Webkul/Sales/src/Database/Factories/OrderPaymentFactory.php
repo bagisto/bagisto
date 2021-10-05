@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderPaymentFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -26,6 +25,5 @@ class OrderPaymentFactory extends Factory
             'method' => 'cashondelivery',
         ];
     }
-
 }
 

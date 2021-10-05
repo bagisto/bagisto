@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductAttributeValueFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -29,5 +28,4 @@ class ProductAttributeValueFactory extends Factory
             'channel'    => 'default',
         ];
     }
-
 }

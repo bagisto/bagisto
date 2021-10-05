@@ -14,7 +14,6 @@ use Webkul\Sales\Contracts\InvoiceItem as InvoiceItemContract;
 
 class InvoiceItem extends Model implements InvoiceItemContract
 {
-
     use HasFactory;
 
     protected $guarded = [
@@ -94,5 +93,4 @@ class InvoiceItem extends Model implements InvoiceItemContract
     {
         return InvoiceItemFactory::new();
     }
-
 }

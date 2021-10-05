@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductReviewFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -31,5 +30,4 @@ class ProductReviewFactory extends Factory
             'product_id' => Product::factory(),
         ];
     }
-
 }

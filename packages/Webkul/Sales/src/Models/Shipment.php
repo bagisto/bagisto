@@ -13,7 +13,6 @@ use Webkul\Sales\Contracts\Shipment as ShipmentContract;
 
 class Shipment extends Model implements ShipmentContract
 {
-
     use HasFactory;
 
     protected $guarded = [
@@ -72,5 +71,4 @@ class Shipment extends Model implements ShipmentContract
     {
         return ShipmentFactory::new();
     }
-
 }

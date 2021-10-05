@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RefundFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -27,6 +26,5 @@ class RefundFactory extends Factory
             'order_id' => Order::factory(),
         ];
     }
-
 }
 

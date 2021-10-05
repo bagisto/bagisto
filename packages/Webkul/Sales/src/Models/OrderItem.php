@@ -14,7 +14,6 @@ use Webkul\Sales\Contracts\OrderItem as OrderItemContract;
 
 class OrderItem extends Model implements OrderItemContract
 {
-
     use HasFactory;
 
     protected $guarded = [
@@ -233,5 +232,4 @@ class OrderItem extends Model implements OrderItemContract
     {
         return OrderItemFactory::new();
     }
-
 }

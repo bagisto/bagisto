@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model implements OrderContract
 {
-
     use HasFactory;
 
     public const STATUS_PENDING = 'pending';
@@ -54,7 +53,7 @@ class Order extends Model implements OrderContract
      */
     public function getCustomerFullNameAttribute(): string
     {
-        return $this->customer_first_name.' '.$this->customer_last_name;
+        return $this->customer_first_name . ' ' . $this->customer_last_name;
     }
 
     /**
@@ -345,5 +344,4 @@ class Order extends Model implements OrderContract
     {
         return OrderFactory::new();
     }
-
 }

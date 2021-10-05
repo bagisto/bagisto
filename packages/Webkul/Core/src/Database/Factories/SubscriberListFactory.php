@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SubscriberListFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -28,6 +27,5 @@ class SubscriberListFactory extends Factory
             'channel_id'    => 1,
         ];
     }
-
 }
 

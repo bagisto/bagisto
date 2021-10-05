@@ -23,7 +23,6 @@ use Webkul\Product\Models\ProductProxy;
  */
 class Category extends TranslatableModel implements CategoryContract
 {
-
     use NodeTrait, HasFactory;
 
     public $translatedAttributes = [
@@ -171,5 +170,4 @@ class Category extends TranslatableModel implements CategoryContract
     {
         return CategoryFactory::new();
     }
-
 }

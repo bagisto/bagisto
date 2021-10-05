@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CurrencyFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -28,5 +27,4 @@ class CurrencyFactory extends Factory
             'name' => $this->faker->word,
         ];
     }
-
 }

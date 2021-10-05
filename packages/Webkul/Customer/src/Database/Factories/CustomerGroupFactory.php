@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CustomerGroupFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -31,5 +30,4 @@ class CustomerGroupFactory extends Factory
             'code'            => lcfirst($name),
         ];
     }
-
 }

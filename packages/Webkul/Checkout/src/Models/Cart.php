@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cart extends Model implements CartContract
 {
-
     use HasFactory;
 
     protected $table = 'cart';
@@ -193,9 +192,9 @@ class Cart extends Model implements CartContract
      */
     public function checkMinimumOrder(): bool
     {
-        $minimumOrderAmount = (float) (core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0);
+        $minimumOrderAmount = (float)(core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0);
 
-        $cartBaseSubTotal = (float) $this->base_sub_total;
+        $cartBaseSubTotal = (float)$this->base_sub_total;
 
         return $cartBaseSubTotal >= $minimumOrderAmount;
     }
@@ -210,5 +209,4 @@ class Cart extends Model implements CartContract
     {
         return CartFactory::new();
     }
-
 }

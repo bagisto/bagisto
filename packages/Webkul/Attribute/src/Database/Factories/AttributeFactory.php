@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AttributeFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -140,5 +139,4 @@ class AttributeFactory extends Factory
             ];
         });
     }
-
 }

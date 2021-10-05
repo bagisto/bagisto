@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Currency extends Model implements CurrencyContract
 {
-
     use HasFactory;
 
     /**
@@ -53,5 +52,4 @@ class Currency extends Model implements CurrencyContract
     {
         return CurrencyFactory::new();
     }
-
 }

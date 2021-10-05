@@ -9,7 +9,6 @@ use Webkul\Checkout\Contracts\CartPayment as CartPaymentContract;
 
 class CartPayment extends Model implements CartPaymentContract
 {
-
     use HasFactory;
 
     protected $table = 'cart_payment';
@@ -23,5 +22,4 @@ class CartPayment extends Model implements CartPaymentContract
     {
         return CartPaymentFactory::new();
     }
-
 }

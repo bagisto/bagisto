@@ -11,7 +11,6 @@ use Webkul\Core\Contracts\SubscribersList as SubscribersListContract;
 
 class SubscribersList extends Model implements SubscribersListContract
 {
-
     use HasFactory;
 
     /**
@@ -49,5 +48,4 @@ class SubscribersList extends Model implements SubscribersListContract
     {
         return SubscriberListFactory::new();
     }
-
 }

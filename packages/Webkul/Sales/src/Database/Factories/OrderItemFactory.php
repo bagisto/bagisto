@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderItemFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -59,5 +58,4 @@ class OrderItemFactory extends Factory
             'product_type' => Product::class,
         ];
     }
-
 }

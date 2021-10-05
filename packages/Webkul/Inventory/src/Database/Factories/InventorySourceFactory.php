@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InventorySourceFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -42,5 +41,4 @@ class InventorySourceFactory extends Factory
             'updated_at'     => $now,
         ];
     }
-
 }

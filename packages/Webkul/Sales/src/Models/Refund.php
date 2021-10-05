@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Refund extends Model implements RefundContract
 {
-
     use HasFactory;
 
     protected $guarded = [
@@ -81,5 +80,4 @@ class Refund extends Model implements RefundContract
     {
         return RefundFactory::new();
     }
-
 }

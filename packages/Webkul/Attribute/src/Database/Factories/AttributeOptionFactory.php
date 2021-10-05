@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AttributeOptionFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -30,5 +29,4 @@ class AttributeOptionFactory extends Factory
             'swatch_value' => null,
         ];
     }
-
 }

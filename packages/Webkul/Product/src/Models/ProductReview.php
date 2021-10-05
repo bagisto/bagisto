@@ -4,7 +4,6 @@ namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Customer\Models\CustomerProxy;
-use Webkul\Product\Models\Product;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +12,6 @@ use Webkul\Product\Contracts\ProductReview as ProductReviewContract;
 
 class ProductReview extends Model implements ProductReviewContract
 {
-
     use HasFactory;
 
     protected $fillable = [
@@ -59,5 +57,4 @@ class ProductReview extends Model implements ProductReviewContract
     {
         return ProductReviewFactory::new();
     }
-
 }

@@ -10,7 +10,6 @@ use Webkul\CartRule\Contracts\CartRuleCoupon as CartRuleCouponContract;
 
 class CartRuleCoupon extends Model implements CartRuleCouponContract
 {
-
     use HasFactory;
 
     protected $fillable = [
@@ -41,5 +40,4 @@ class CartRuleCoupon extends Model implements CartRuleCouponContract
     {
         return CartRuleCouponFactory::new();
     }
-
 }

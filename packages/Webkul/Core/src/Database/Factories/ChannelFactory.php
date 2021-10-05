@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ChannelFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -46,5 +45,4 @@ class ChannelFactory extends Factory
             'home_seo'          => json_encode($seoData, JSON_THROW_ON_ERROR),
         ];
     }
-
 }

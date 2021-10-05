@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ChannelInventorySourceFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -26,5 +25,4 @@ class ChannelInventorySourceFactory extends Factory
             'inventory_source_id' => 1,
         ];
     }
-
 }

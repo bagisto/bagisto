@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CartRuleCouponFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -33,5 +32,4 @@ class CartRuleCouponFactory extends Factory
             'cart_rule_id'       => CartRule::factory(),
         ];
     }
-
 }

@@ -9,7 +9,6 @@ use Webkul\Sales\Contracts\OrderPayment as OrderPaymentContract;
 
 class OrderPayment extends Model implements OrderPaymentContract
 {
-
     use HasFactory;
 
     protected $table = 'order_payment';
@@ -33,5 +32,4 @@ class OrderPayment extends Model implements OrderPaymentContract
     {
         return OrderPaymentFactory::new();
     }
-
 }

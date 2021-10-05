@@ -15,7 +15,6 @@ use Webkul\Checkout\Contracts\CartItem as CartItemContract;
 
 class CartItem extends Model implements CartItemContract
 {
-
     use HasFactory;
 
     protected $table = 'cart_items';
@@ -93,5 +92,4 @@ class CartItem extends Model implements CartItemContract
     {
         return CartItemFactory::new();
     }
-
 }

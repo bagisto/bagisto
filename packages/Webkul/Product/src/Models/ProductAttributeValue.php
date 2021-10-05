@@ -11,7 +11,6 @@ use Webkul\Product\Contracts\ProductAttributeValue as ProductAttributeValueContr
 
 class ProductAttributeValue extends Model implements ProductAttributeValueContract
 {
-
     use HasFactory;
 
     /**
@@ -84,5 +83,4 @@ class ProductAttributeValue extends Model implements ProductAttributeValueContra
     {
         return ProductAttributeValueFactory::new();
     }
-
 }

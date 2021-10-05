@@ -11,7 +11,6 @@ use Webkul\Attribute\Contracts\AttributeFamily as AttributeFamilyContract;
 
 class AttributeFamily extends Model implements AttributeFamilyContract
 {
-
     use HasFactory;
 
     public $timestamps = false;
@@ -87,5 +86,4 @@ class AttributeFamily extends Model implements AttributeFamilyContract
     {
         return AttributeFamilyFactory::new();
     }
-
 }

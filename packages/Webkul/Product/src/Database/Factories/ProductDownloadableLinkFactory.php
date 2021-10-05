@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductDownloadableLinkFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -29,7 +28,7 @@ class ProductDownloadableLinkFactory extends Factory
 
         return [
             'url'        => '',
-            'file'       => $filepath.$filename,
+            'file'       => $filepath . $filename,
             'file_name'  => $filename,
             'type'       => 'file',
             'price'      => 0.0000,
@@ -39,5 +38,4 @@ class ProductDownloadableLinkFactory extends Factory
             'updated_at' => $now,
         ];
     }
-
 }

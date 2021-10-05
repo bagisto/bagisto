@@ -11,7 +11,6 @@ use Webkul\Customer\Models\CustomerGroupProxy;
 
 class CartRule extends Model implements CartRuleContract
 {
-
     use HasFactory;
 
     protected $fillable = [
@@ -140,5 +139,4 @@ class CartRule extends Model implements CartRuleContract
     {
         return CartRuleFactory::new();
     }
-
 }

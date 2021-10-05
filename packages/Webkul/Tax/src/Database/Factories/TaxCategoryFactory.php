@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaxCategoryFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -28,5 +27,4 @@ class TaxCategoryFactory extends Factory
             'description' => $this->faker->sentence(10),
         ];
     }
-
 }

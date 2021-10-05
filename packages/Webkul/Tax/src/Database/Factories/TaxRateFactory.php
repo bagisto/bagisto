@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaxRateFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -33,5 +32,4 @@ class TaxRateFactory extends Factory
             'tax_rate'   => $this->faker->randomFloat(2, 3, 25),
         ];
     }
-
 }

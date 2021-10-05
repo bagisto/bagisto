@@ -9,7 +9,6 @@ use Webkul\BookingProduct\Contracts\BookingProductEventTicket as BookingProductE
 
 class BookingProductEventTicket extends TranslatableModel implements BookingProductEventTicketContract
 {
-
     use HasFactory;
 
     public $timestamps = false;
@@ -37,5 +36,4 @@ class BookingProductEventTicket extends TranslatableModel implements BookingProd
     {
         return BookingProductEventTicketFactory::new();
     }
-
 }

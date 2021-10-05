@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class OrderAddress extends Address implements OrderAddressContract
 {
-
     use HasFactory;
 
     public const ADDRESS_TYPE_SHIPPING = 'order_shipping';
@@ -80,5 +79,4 @@ class OrderAddress extends Address implements OrderAddressContract
     {
         return OrderAddressFactory::new();
     }
-
 }

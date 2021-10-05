@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Channel extends TranslatableModel implements ChannelContract
 {
-
     use HasFactory;
 
     protected $fillable = [
@@ -138,5 +137,4 @@ class Channel extends TranslatableModel implements ChannelContract
     {
         return ChannelFactory::new();
     }
-
 }

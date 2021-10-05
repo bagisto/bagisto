@@ -20,7 +20,6 @@ use Webkul\Customer\Database\Factories\CustomerAddressFactory;
 
 class Customer extends Authenticatable implements CustomerContract, JWTSubject
 {
-
     use Notifiable, HasFactory;
 
     protected $table = 'customers';
@@ -53,7 +52,7 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
      */
     public function getNameAttribute(): string
     {
-        return ucfirst($this->first_name).' '.ucfirst($this->last_name);
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
 
     /**
@@ -194,5 +193,4 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
     {
         return CustomerFactory::new();
     }
-
 }

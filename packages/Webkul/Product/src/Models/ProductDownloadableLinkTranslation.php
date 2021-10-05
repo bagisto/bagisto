@@ -9,7 +9,6 @@ use Webkul\Product\Contracts\ProductDownloadableLinkTranslation as ProductDownlo
 
 class ProductDownloadableLinkTranslation extends Model implements ProductDownloadableLinkTranslationContract
 {
-
     use HasFactory;
 
     public $timestamps = false;
@@ -25,5 +24,4 @@ class ProductDownloadableLinkTranslation extends Model implements ProductDownloa
     {
         return ProductDownloadableLinkTranslationFactory::new();
     }
-
 }
