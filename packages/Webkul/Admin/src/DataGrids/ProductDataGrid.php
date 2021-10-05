@@ -5,8 +5,6 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class ProductDataGrid extends DataGrid
@@ -57,32 +55,11 @@ class ProductDataGrid extends DataGrid
     ];
 
     /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * Inventory source repository instance.
-     *
-     * @var \Webkul\Inventory\Repositories\InventorySourceRepository
-     */
-    protected $inventorySourceRepository;
-
-    /**
      * Create datagrid instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @return void
      */
-    public function __construct(
-        ProductRepository $productRepository,
-        InventorySourceRepository $inventorySourceRepository
-    ) {
-        parent::__construct();
-
+    public function __construct() {
         /* locale */
         $this->locale = core()->getRequestedLocaleCode();
 
@@ -95,9 +72,8 @@ class ProductDataGrid extends DataGrid
             $this->channel = $this->channel ? $this->channel->code : 'all';
         }
 
-        $this->productRepository = $productRepository;
-
-        $this->inventorySourceRepository = $inventorySourceRepository;
+        /* parent constructor */
+        parent::__construct();
     }
 
     /**
@@ -281,6 +257,13 @@ class ProductDataGrid extends DataGrid
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon'         => 'icon trash-icon',
         ]);
+
+        $this->addAction([
+            'title'  => trans('admin::app.datagrid.copy'),
+            'method' => 'GET',
+            'route'  => 'admin.catalog.products.copy',
+            'icon'   => 'icon copy-icon',
+        ]);
     }
 
     /**
@@ -290,13 +273,6 @@ class ProductDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        $this->addAction([
-            'title'  => trans('admin::app.datagrid.copy'),
-            'method' => 'GET',
-            'route'  => 'admin.catalog.products.copy',
-            'icon'   => 'icon copy-icon',
-        ]);
-
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
@@ -319,14 +295,14 @@ class ProductDataGrid extends DataGrid
     /**
      * Render quantity view.
      *
-     * @parma  object  $row
+     * @param  object  $row
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     private function renderQuantityView($row)
     {
-        $product = $this->productRepository->find($row->product_id);
+        $product = app(\Webkul\Product\Repositories\ProductRepository::class)->find($row->product_id);
 
-        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
+        $inventorySources = app(\Webkul\Inventory\Repositories\InventorySourceRepository::class)->findWhere(['status' => 1]);
 
         $totalQuantity = $row->quantity;
 
