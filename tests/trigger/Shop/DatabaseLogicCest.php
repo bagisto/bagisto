@@ -15,6 +15,7 @@ class DatabaseLogicCest
 
     /** @var Locale $localeEn */
     private $localeEn;
+
     /** @var Locale $localeDe */
     private $localeDe;
 
@@ -37,9 +38,10 @@ class DatabaseLogicCest
     public function testGetUrlPathOfCategory(UnitTester $I)
     {
         $rootCategoryTranslation = $I->grabRecord(CategoryTranslation::class, [
-            'slug' => 'root',
+            'slug'   => 'root',
             'locale' => 'en',
         ]);
+
         $rootCategory = $I->grabRecord(Category::class, [
             'id' => $rootCategoryTranslation->category_id,
         ]);
@@ -51,43 +53,45 @@ class DatabaseLogicCest
             'position'            => 1,
             'status'              => 1,
             $this->localeEn->code => [
-                'name' => $parentCategoryName,
-                'slug' => strtolower($parentCategoryName),
+                'name'        => $parentCategoryName,
+                'slug'        => strtolower($parentCategoryName),
                 'description' => $parentCategoryName,
-                'locale_id' => $this->localeEn->id,
+                'locale_id'   => $this->localeEn->id,
             ],
             $this->localeDe->code => [
-                'name' => $parentCategoryName,
-                'slug' => strtolower($parentCategoryName),
+                'name'        => $parentCategoryName,
+                'slug'        => strtolower($parentCategoryName),
                 'description' => $parentCategoryName,
-                'locale_id' => $this->localeDe->id,
+                'locale_id'   => $this->localeDe->id,
             ],
         ];
 
-        $parentCategory = $I->make(Category::class, $parentCategoryAttributes)->first();
+        $parentCategory = $I->make(Category::class, $parentCategoryAttributes)
+                            ->first();
         $rootCategory->prependNode($parentCategory);
         $I->assertNotNull($parentCategory);
 
-        $categoryName = $this->faker->word;
+        $categoryName       = $this->faker->word;
         $categoryAttributes = [
             'position'            => 1,
             'status'              => 1,
             'parent_id'           => $parentCategory->id,
             $this->localeEn->code => [
-                'name' => $categoryName,
-                'slug' => strtolower($categoryName),
+                'name'        => $categoryName,
+                'slug'        => strtolower($categoryName),
                 'description' => $categoryName,
-                'locale_id' => $this->localeEn->id,
+                'locale_id'   => $this->localeEn->id,
             ],
             $this->localeDe->code => [
-                'name' => $categoryName,
-                'slug' => strtolower($categoryName),
+                'name'        => $categoryName,
+                'slug'        => strtolower($categoryName),
                 'description' => $categoryName,
-                'locale_id' => $this->localeDe->id,
+                'locale_id'   => $this->localeDe->id,
             ],
         ];
 
-        $category = $I->make(Category::class, $categoryAttributes)->first();
+        $category = $I->make(Category::class, $categoryAttributes)
+                      ->first();
         $parentCategory->prependNode($category);
         $I->assertNotNull($category);
 
@@ -114,12 +118,13 @@ class DatabaseLogicCest
             'status'              => 1,
             'parent_id'           => null,
             $this->localeEn->code => [
-                'name' => $this->faker->word,
-                'slug' => strtolower($this->faker->word),
+                'name'        => $this->faker->word,
+                'slug'        => strtolower($this->faker->word),
                 'description' => $this->faker->word,
-                'locale_id' => $this->localeEn->id,
+                'locale_id'   => $this->localeEn->id,
             ],
-        ])->first();
+        ])
+                           ->first();
         $root2Category->save();
 
         $I->assertNull($root2Category->refresh()->parent_id);

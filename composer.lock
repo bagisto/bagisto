@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8c13c4e3310a5c05c64b4137d4d314b",
+    "content-hash": "46b4c37f75642ba14f3a2913f0f345cd",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -9079,59 +9079,6 @@
                 "source": "https://github.com/Codeception/module-laravel/tree/2.1.0"
             },
             "time": "2021-09-10T04:19:09+00:00"
-        },
-        {
-            "name": "codeception/module-laravel5",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Codeception/module-laravel5.git",
-                "reference": "1d8a82f78a6e8c26f49af65d9001fa311785d54b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/module-laravel5/zipball/1d8a82f78a6e8c26f49af65d9001fa311785d54b",
-                "reference": "1d8a82f78a6e8c26f49af65d9001fa311785d54b",
-                "shasum": ""
-            },
-            "require": {
-                "codeception/codeception": "^4.0",
-                "codeception/lib-innerbrowser": "^1.0",
-                "php": ">=5.6.0 <9.0"
-            },
-            "require-dev": {
-                "codeception/module-asserts": "^1.0",
-                "codeception/module-rest": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jan-Henk Gerritsen"
-                },
-                {
-                    "name": "Michael Bodnarchuk"
-                }
-            ],
-            "description": "Codeception module for Laravel 5 framework",
-            "homepage": "http://codeception.com/",
-            "keywords": [
-                "codeception",
-                "laravel5"
-            ],
-            "support": {
-                "issues": "https://github.com/Codeception/module-laravel5/issues",
-                "source": "https://github.com/Codeception/module-laravel5/tree/1.1.1"
-            },
-            "time": "2020-10-28T07:00:17+00:00"
         },
         {
             "name": "codeception/module-webdriver",
