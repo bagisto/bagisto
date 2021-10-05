@@ -21,8 +21,7 @@ use Webkul\Customer\Database\Factories\CustomerAddressFactory;
 class Customer extends Authenticatable implements CustomerContract, JWTSubject
 {
 
-    use Notifiable;
-    use HasFactory;
+    use Notifiable, HasFactory;
 
     protected $table = 'customers';
 

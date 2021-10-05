@@ -14,8 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Invoice extends Model implements InvoiceContract
 {
 
-    use PaymentTerm;
-    use HasFactory;
+    use PaymentTerm, HasFactory;
 
     /**
      * The attributes that aren't mass assignable.

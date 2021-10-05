@@ -24,8 +24,7 @@ use Webkul\Product\Models\ProductProxy;
 class Category extends TranslatableModel implements CategoryContract
 {
 
-    use NodeTrait;
-    use HasFactory;
+    use NodeTrait, HasFactory;
 
     public $translatedAttributes = [
         'name',

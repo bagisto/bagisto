@@ -5,11 +5,12 @@ namespace Webkul\CartRule\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\CartRule\Database\Factories\CartRuleCouponFactory;
+use Webkul\Core\Database\Factories\CartRuleCouponFactory;
 use Webkul\CartRule\Contracts\CartRuleCoupon as CartRuleCouponContract;
 
 class CartRuleCoupon extends Model implements CartRuleCouponContract
 {
+
     use HasFactory;
 
     protected $fillable = [
