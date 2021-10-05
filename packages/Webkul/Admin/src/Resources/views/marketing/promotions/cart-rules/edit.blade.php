@@ -1,8 +1,3 @@
-<?php
-/** @var array $selectedOptionIds */
-/** @var \Webkul\CartRule\Models\CartRule $cartRule */
-?>
-
 @extends('admin::layouts.content')
 
 @section('page_title')
@@ -11,15 +6,11 @@
 
 @section('content')
     <div class="content">
-
         <cart-rule></cart-rule>
-
     </div>
 @stop
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="cart-rule-template">
         <div>
             <form method="POST" action="{{ route('admin.cart-rules.update', $cartRule->id) }}" @submit.prevent="onSubmit">
@@ -51,12 +42,15 @@
 
                                 <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                     <label for="name" class="required">{{ __('admin::app.promotions.cart-rules.name') }}</label>
+
                                     <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.name') }}&quot;" value="{{ old('name') ?: $cartRule->name }}"/>
+
                                     <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                                 </div>
 
                                 <div class="control-group">
                                     <label for="description">{{ __('admin::app.promotions.cart-rules.description') }}</label>
+
                                     <textarea class="control" id="description" name="description">{{ old('description') ?: $cartRule->description }}</textarea>
                                 </div>
 
@@ -72,7 +66,9 @@
                                 <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                     <label for="channels" class="required">{{ __('admin::app.promotions.cart-rules.channels') }}</label>
 
-                                    <?php $selectedOptionIds = old('channels') ?: $cartRule->channels->pluck('id')->toArray() ?>
+                                    @php
+                                        $selectedOptionIds = old('channels') ?: $cartRule->channels->pluck('id')->toArray();
+                                    @endphp
 
                                     <select class="control" id="channels" name="channels[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.channels') }}&quot;" multiple="multiple">
 
@@ -90,7 +86,9 @@
                                 <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
                                     <label for="customer_groups" class="required">{{ __('admin::app.promotions.cart-rules.customer-groups') }}</label>
 
-                                    <?php $selectedOptionIds = old('customer_groups') ?: $cartRule->customer_groups->pluck('id')->toArray() ?>
+                                    @php
+                                        $selectedOptionIds = old('customer_groups') ?: $cartRule->customer_groups->pluck('id')->toArray();
+                                    @endphp
 
                                     <select class="control" id="customer_groups" name="customer_groups[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.customer-groups') }}&quot;" multiple="multiple">
 
@@ -131,25 +129,31 @@
                                     <div v-if="! parseInt(use_auto_generation)">
                                         <div class="control-group" :class="[errors.has('coupon_code') ? 'has-error' : '']">
                                             <label for="coupon_code" class="required">{{ __('admin::app.promotions.cart-rules.coupon-code') }}</label>
+
                                             <input v-validate="'required'" class="control" id="coupon_code" name="coupon_code" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.coupon-code') }}&quot;" value="{{ old('coupon_code') ?: $cartRule->coupon_code }}"/>
+
                                             <span class="control-error" v-if="errors.has('coupon_code')">@{{ errors.first('coupon_code') }}</span>
                                         </div>
                                     </div>
 
                                     <div class="control-group">
                                         <label for="uses_per_coupon">{{ __('admin::app.promotions.cart-rules.uses-per-coupon') }}</label>
+
                                         <input class="control" id="uses_per_coupon" name="uses_per_coupon" value="{{ old('uses_per_coupon') ?: $cartRule->uses_per_coupon }}"/>
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label for="usage_per_customer">{{ __('admin::app.promotions.cart-rules.uses-per-customer') }}</label>
+
                                     <input class="control" id="usage_per_customer" name="usage_per_customer" value="{{ old('usage_per_customer') ?: $cartRule->usage_per_customer }}"/>
+
                                     <span class="control-info">{{ __('admin::app.promotions.cart-rules.uses-per-customer-control-info') }}</span>
                                 </div>
 
                                 <div class="control-group date">
                                     <label for="starts_from">{{ __('admin::app.promotions.cart-rules.from') }}</label>
+
                                     <datetime>
                                         <input type="text" name="starts_from" class="control" value="{{ old('starts_from') ?: $cartRule->starts_from }}"/>
                                     </datetime>
@@ -157,6 +161,7 @@
 
                                 <div class="control-group date">
                                     <label for="ends_till">{{ __('admin::app.promotions.cart-rules.to') }}</label>
+
                                     <datetime>
                                         <input type="text" name="ends_till" class="control" value="{{ old('ends_till') ?: $cartRule->ends_till }}"/>
                                     </datetime>
@@ -164,6 +169,7 @@
 
                                 <div class="control-group">
                                     <label for="sort_order">{{ __('admin::app.promotions.cart-rules.priority') }}</label>
+
                                     <input type="text" class="control" id="sort_order" name="sort_order" value="{{ $cartRule->sort_order }}" {{ $cartRule->sort_order ? 'checked' : '' }}/>
                                 </div>
 
@@ -209,18 +215,23 @@
                                 <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
                                     <label for="action_type" class="required">{{ __('admin::app.promotions.cart-rules.action-type') }}</label>
 
-                                    <?php $selectedOption = old('action_type') ?: $cartRule->action_type ?>
+                                    @php
+                                        $selectedOption = old('action_type') ?: $cartRule->action_type;
+                                    @endphp
 
                                     <select class="control" id="action_type" name="action_type" v-validate="'required'" v-model="action_type" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.action-type') }}&quot;">
                                         <option value="by_percent" {{ $selectedOption == 'by_percent' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.percentage-product-price') }}
                                         </option>
+
                                         <option value="by_fixed" {{ $selectedOption == 'by_fixed' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.fixed-amount') }}
                                         </option>
+
                                         <option value="cart_fixed" {{ $selectedOption == 'cart_fixed' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.fixed-amount-whole-cart') }}
                                         </option>
+
                                         <option value="buy_x_get_y" {{ $selectedOption == 'buy_x_get_y' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.buy-x-get-y-free') }}
                                         </option>
@@ -239,18 +250,22 @@
 
                                 <div class="control-group">
                                     <label for="discount_quantity">{{ __('admin::app.promotions.cart-rules.discount-quantity') }}</label>
+
                                     <input class="control" id="discount_quantity" name="discount_quantity" value="{{ old('discount_quantity') ?: $cartRule->discount_quantity }}"/>
                                 </div>
 
                                 <div class="control-group">
                                     <label for="discount_step">{{ __('admin::app.promotions.cart-rules.discount-step') }}</label>
+
                                     <input class="control" id="discount_step" name="discount_step" value="{{ old('discount_step') ?: $cartRule->discount_step }}"/>
                                 </div>
 
                                 <div class="control-group">
                                     <label for="apply_to_shipping">{{ __('admin::app.promotions.cart-rules.apply-to-shipping') }}</label>
 
-                                    <?php $selectedOption = old('apply_to_shipping') ?: $cartRule->apply_to_shipping ?>
+                                    @php
+                                        $selectedOption = old('apply_to_shipping') ?: $cartRule->apply_to_shipping;
+                                    @endphp
 
                                     <select class="control" id="apply_to_shipping" name="apply_to_shipping" :disabled="action_type == 'cart_fixed'">
                                         <option value="0" {{ ! $selectedOption ? 'selected' : '' }}>
@@ -266,7 +281,9 @@
                                 <div class="control-group">
                                     <label for="free_shipping">{{ __('admin::app.promotions.cart-rules.free-shipping') }}</label>
 
-                                    <?php $selectedOption = old('free_shipping') ?: $cartRule->free_shipping ?>
+                                    @php
+                                        $selectedOption = old('free_shipping') ?: $cartRule->free_shipping;
+                                    @endphp
 
                                     <select class="control" id="free_shipping" name="free_shipping">
                                         <option value="0" {{ ! $selectedOption ? 'selected' : '' }}>
@@ -282,7 +299,9 @@
                                 <div class="control-group">
                                     <label for="end_other_rules">{{ __('admin::app.promotions.cart-rules.end-other-rules') }}</label>
 
-                                    <?php $selectedOption = old('end_other_rules') ?: $cartRule->end_other_rules ?>
+                                    @php
+                                        $selectedOption = old('end_other_rules') ?: $cartRule->end_other_rules;
+                                    @endphp
 
                                     <select class="control" id="end_other_rules" name="end_other_rules">
                                         <option value="0" {{ ! $selectedOption ? 'selected' : '' }}>
@@ -305,9 +324,7 @@
 
             <accordian :title="'{{ __('admin::app.promotions.cart-rules.coupon-codes') }}'" :active="false" v-if="coupon_type && use_auto_generation">
                 <div slot="body">
-
                     <create-coupon-form></create-coupon-form>
-
                 </div>
             </accordian>
         </div>
@@ -457,7 +474,6 @@
 
             </form>
 
-
             <div class="content">
                 <div class="page-header">
                     <div class="page-action">
@@ -470,7 +486,6 @@
                     </div>
                 </div>
             </div>
-
 
             <modal id="downloadDataGrid" :is-open="this.$root.modalIds.downloadDataGrid">
                 <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
@@ -486,12 +501,11 @@
     </script>
 
     @push('scripts')
-       @include('admin::export.export', ['gridName' => $cartRuleCouponGrid])
-@endpush
+        @include('admin::export.export', ['gridName' => $cartRuleCouponGrid])
+    @endpush
 
     <script>
         Vue.component('cart-rule', {
-
             template: '#cart-rule-template',
 
             inject: ['$validator'],
@@ -536,7 +550,6 @@
         });
 
         Vue.component('cart-rule-condition-item', {
-
             template: '#cart-rule-condition-item-template',
 
             props: ['index', 'condition'],
@@ -706,12 +719,12 @@
                     if (this.condition.attribute == '')
                         return;
 
-                    var this_this = this;
+                    let self = this;
 
-                    var attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
+                    let attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
 
                     matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
-                        return attribute.key == this_this.condition.attribute;
+                        return attribute.key == self.condition.attribute;
                     });
 
                     if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
@@ -734,7 +747,6 @@
         });
 
         Vue.component('create-coupon-form', {
-
             template: '#create-coupon-form-template',
 
             inject: ['$validator'],
@@ -757,18 +769,18 @@
 
             methods: {
                 generateCopuns: function(formScope) {
-                    var this_this = this;
+                    let self = this;
 
                     this.$validator.validateAll(formScope).then(function (result) {
                         if (result) {
-                            this_this.$http.post("{{ route('admin.cart-rules.generate-coupons', $cartRule->id) }}", this_this.coupon_format)
+                            self.$http.post("{{ route('admin.cart-rules.generate-coupons', $cartRule->id) }}", self.coupon_format)
                                 .then(function(response) {
                                     window.flashMessages = [{
                                         'type': 'alert-success',
                                         'message': response.data.message
                                     }];
 
-                                    this_this.$root.addFlashMessages()
+                                    self.$root.addFlashMessages()
                                 })
                                 .catch(function (error) {
                                     window.flashMessages = [{
@@ -776,7 +788,7 @@
                                         'message': error.response.data.message
                                     }];
 
-                                    this_this.$root.addFlashMessages()
+                                    self.$root.addFlashMessages()
                                 })
                         }
                     });

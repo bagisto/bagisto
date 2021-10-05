@@ -1,6 +1,4 @@
-@section('css')
-    @parent
-
+@push('css')
     <style>
         .table th.price, .table th.weight {
             width: 100px;
@@ -18,7 +16,7 @@
             margin-right: 10px;
         }
     </style>
-@stop
+@endpush
 
 @php
     $variantImages = [];
@@ -59,8 +57,6 @@
 </modal>
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="variant-form-template">
         <form method="POST" action="{{ route('admin.catalog.products.store') }}"
               data-vv-scope="add-variant-form" @submit.prevent="addVariant('add-variant-form')">

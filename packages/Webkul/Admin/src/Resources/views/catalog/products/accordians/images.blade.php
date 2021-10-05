@@ -2,7 +2,6 @@
 
 <accordian :title="'{{ __('admin::app.catalog.products.images') }}'" :active="false">
     <div slot="body">
-
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.controls.before', ['product' => $product]) !!}
 
         <div class="control-group {!! $errors->has('images.*') ? 'has-error' : '' !!}">
@@ -11,23 +10,25 @@
             <product-image></product-image>
 
             <span class="control-error" v-if="{!! $errors->has('images.*') !!}">
-                @php $count=1 @endphp
+                @php $count = 1; @endphp
+
                 @foreach ($errors->get('images.*') as $key => $message)
-                    @php echo str_replace($key, 'Image'.$count, $message[0]); $count++ @endphp
+                    @php
+                        echo str_replace($key, 'Image'.$count, $message[0]);
+
+                        $count++;
+                    @endphp
                 @endforeach
             </span>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.controls.after', ['product' => $product]) !!}
-
     </div>
 </accordian>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.after', ['product' => $product]) !!}
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="product-image-template">
         <div>
             <div class="image-wrapper">
@@ -62,9 +63,8 @@
 
     <script>
         Vue.component('product-image', {
-
             template: '#product-image-template',
-            
+
             data: function() {
                 return {
                     images: @json($product->images),
@@ -82,18 +82,18 @@
             },
 
             created: function() {
-                var this_this = this;
+                let self = this;
 
                 this.images.forEach(function(image) {
-                    this_this.items.push(image)
+                    self.items.push(image)
 
-                    this_this.imageCount++;
+                    self.imageCount++;
                 });
             },
 
             methods: {
                 createFileType: function() {
-                    var this_this = this;
+                    let self = this;
 
                     this.imageCount++;
 
@@ -107,13 +107,13 @@
                 },
 
                 imageSelected: function(event) {
-                    var this_this = this;
+                    let self = this;
 
                     Array.from(event.files).forEach(function(image, index) {
                         if (index) {
-                            this_this.imageCount++;
+                            self.imageCount++;
 
-                            this_this.items.push({'id': 'image_' + this_this.imageCount, file: image});
+                            self.items.push({'id': 'image_' + self.imageCount, file: image});
                         }
                     });
                 }
@@ -121,7 +121,6 @@
         });
 
         Vue.component('product-image-item', {
-
             template: '#product-image-item-template',
 
             props: {
@@ -156,7 +155,7 @@
 
             methods: {
                 addImageView: function() {
-                    var imageInput = this.$refs.imageInput;
+                    let imageInput = this.$refs.imageInput;
 
                     if (imageInput.files && imageInput.files[0]) {
                         if (imageInput.files[0].type.includes('image/')) {
@@ -174,7 +173,7 @@
                 },
 
                 readFile: function(image) {
-                    var reader = new FileReader();
+                    let reader = new FileReader();
 
                     reader.onload = (e) => {
                         this.imageData = e.target.result;
@@ -191,5 +190,4 @@
             }
         });
     </script>
-
 @endpush

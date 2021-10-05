@@ -4,8 +4,7 @@
 
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.table.after', ['product' => $product]) !!}
 
-
-@section('css')
+@push('css')
     <style>
         .has-control-group .control-group {
             width: 50%;
@@ -20,11 +19,9 @@
             padding-left: 10px;
         }
     </style>
-@stop
+@endpush
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="default-booking-template">
         <div>
             <div class="control-group" :class="[errors.has('booking[booking_type]') ? 'has-error' : '']">
@@ -34,16 +31,16 @@
                     <option value="many">{{ __('bookingproduct::app.admin.catalog.products.many-bookings-for-one-day') }}</option>
                     <option value="one">{{ __('bookingproduct::app.admin.catalog.products.one-booking-for-many-days') }}</option>
                 </select>
-                
+
                 <span class="control-error" v-if="errors.has('booking[booking_type]')">@{{ errors.first('booking[booking_type]') }}</span>
             </div>
-            
+
             <div v-if="default_booking.booking_type == 'many'">
                 <div class="control-group" :class="[errors.has('booking[duration]') ? 'has-error' : '']">
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.slot-duration') }}</label>
 
                     <input type="text" v-validate="'required|min_value:1'" name="booking[duration]" v-model="default_booking.duration" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.slot-duration') }}&quot;"/>
-                    
+
                     <span class="control-error" v-if="errors.has('booking[duration]')">@{{ errors.first('booking[duration]') }}</span>
                 </div>
 
@@ -51,7 +48,7 @@
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.break-time') }}</label>
 
                     <input type="text" v-validate="'required|min_value:1'" name="booking[break_time]" v-model="default_booking.break_time" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.break-time') }}&quot;"/>
-                    
+
                     <span class="control-error" v-if="errors.has('booking[break_time]')">@{{ errors.first('booking[break_time]') }}</span>
                 </div>
             </div>
@@ -62,7 +59,6 @@
                 </div>
 
                 <div class="section-content">
-
                     <div class="slot-list table" v-if="default_booking.booking_type == 'many'">
                         <table>
                             <thead>
@@ -75,7 +71,6 @@
                             </thead>
 
                             <tbody>
-
                                 <tr v-for="(day, index) in days">
                                     <td>@{{ day }}</td>
 
@@ -109,18 +104,16 @@
                                                 <option value="1">{{ __('bookingproduct::app.admin.catalog.products.open') }}</option>
                                                 <option value="0">{{ __('bookingproduct::app.admin.catalog.products.close') }}</option>
                                             </select>
-                                            
+
                                             <span class="control-error" v-if="errors.has('booking[slots][' + index + '][status]')">@{{ errors.first('booking[slots][' + index + '][status]') }}</span>
                                         </div>
                                     </td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
 
                     <div class="slot-list table" v-if="default_booking.booking_type == 'one'">
-
                         <table>
                             <thead>
                                 <tr>
@@ -146,9 +139,7 @@
                         <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px" @click="addSlot()">
                             {{ __('bookingproduct::app.admin.catalog.products.add-slot') }}
                         </button>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -161,7 +152,7 @@
                     <select v-validate="'required'" :name="controlName + '[from_day]'" v-model="slotItem.from_day" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.day') }}&quot;">
                         <option v-for="(day, index) in $parent.days" :value="index">@{{ day }}</option>
                     </select>
-                    
+
                     <span class="control-error" v-if="errors.has(controlName + '[from_day]')">@{{ errors.first(controlName + '[from_day]') }}</span>
                 </div>
 
@@ -181,7 +172,7 @@
                     <select v-validate="'required'" :name="controlName + '[to_day]'" v-model="slotItem.to_day" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.day') }}&quot;">
                         <option v-for="(day, index) in $parent.days" :value="index">@{{ day }}</option>
                     </select>
-                    
+
                     <span class="control-error" v-if="errors.has(controlName + '[to_day]')">@{{ errors.first(controlName + '[to_day]') }}</span>
                 </div>
 
@@ -204,7 +195,6 @@
 
     <script>
         Vue.component('default-booking', {
-
             template: '#default-booking-template',
 
             inject: ['$validator'],
@@ -270,7 +260,6 @@
         });
 
         Vue.component('default-slot-item', {
-
             template: '#default-slot-item-template',
 
             props: ['slotItem', 'controlName'],
