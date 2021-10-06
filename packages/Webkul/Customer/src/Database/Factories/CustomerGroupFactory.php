@@ -25,9 +25,9 @@ class CustomerGroupFactory extends Factory
         $name = ucfirst($this->faker->word);
 
         return [
-            'name'            => $name,
+            'name' => $name,
             'is_user_defined' => $this->faker->boolean,
-            'code'            => lcfirst($name),
+            'code' => lcfirst($name),
         ];
     }
 }

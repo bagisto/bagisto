@@ -27,22 +27,22 @@ class CustomerAddressFactory extends Factory
         $fakerIt = \Faker\Factory::create('it_IT');
 
         return [
-            'customer_id'     => Customer::factory(),
-            'company_name'    => $this->faker->company,
-            'vat_id'          => $fakerIt->vatId(),
-            'first_name'      => $this->faker->firstName,
-            'last_name'       => $this->faker->lastName,
-            'address1'        => $this->faker->streetAddress,
-            'country'         => $this->faker->countryCode,
-            'state'           => $this->faker->state,
-            'city'            => $this->faker->city,
-            'postcode'        => $this->faker->postcode,
-            'phone'           => $this->faker->e164PhoneNumber,
+            'customer_id' => Customer::factory(),
+            'company_name' => $this->faker->company,
+            'vat_id' => $fakerIt->vatId(),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'address1' => $this->faker->streetAddress,
+            'country' => $this->faker->countryCode,
+            'state' => $this->faker->state,
+            'city' => $this->faker->city,
+            'postcode' => $this->faker->postcode,
+            'phone' => $this->faker->e164PhoneNumber,
             'default_address' => Arr::random([
                 0,
                 1,
             ]),
-            'address_type'    => CustomerAddress::ADDRESS_TYPE,
+            'address_type' => CustomerAddress::ADDRESS_TYPE,
         ];
     }
 }

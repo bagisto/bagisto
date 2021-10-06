@@ -26,23 +26,23 @@ class ChannelFactory extends Factory
      */
     public function definition(): array
     {
-        $seoTitle       = $this->faker->word;
+        $seoTitle = $this->faker->word;
         $seoDescription = $this->faker->words(10, true);
-        $seoKeywords    = $this->faker->words(3, true);
+        $seoKeywords = $this->faker->words(3, true);
 
         $seoData = [
-            'meta_title'       => $seoTitle,
+            'meta_title' => $seoTitle,
             'meta_description' => $seoDescription,
-            'meta_keywords'    => $seoKeywords,
+            'meta_keywords' => $seoKeywords,
         ];
 
         return [
-            'code'              => $this->faker->unique()->word,
-            'name'              => $this->faker->word,
+            'code' => $this->faker->unique()->word,
+            'name' => $this->faker->word,
             'default_locale_id' => Locale::factory(),
-            'base_currency_id'  => Currency::factory(),
-            'root_category_id'  => Category::factory(),
-            'home_seo'          => json_encode($seoData, JSON_THROW_ON_ERROR),
+            'base_currency_id' => Currency::factory(),
+            'root_category_id' => Category::factory(),
+            'home_seo' => json_encode($seoData, JSON_THROW_ON_ERROR),
         ];
     }
 }

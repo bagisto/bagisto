@@ -21,7 +21,7 @@ class ChannelInventorySourceFactory extends Factory
     public function definition(): array
     {
         return [
-            'channel_id'          => core()->getCurrentChannel()->id,
+            'channel_id' => core()->getCurrentChannel()->id,
             'inventory_source_id' => 1,
         ];
     }

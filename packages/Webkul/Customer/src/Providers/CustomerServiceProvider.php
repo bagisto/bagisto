@@ -10,21 +10,21 @@ use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 
 class CustomerServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap application services.
      *
+     * @param  \Illuminate\Routing\Router  $router
      * @return void
      */
-    public function boot(Router $router)
+    public function boot(Router $router): void
     {
         $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
-        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'customer');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'customer');
 
-        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'customer');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'customer');
 
         $this->app['validator']->extend('captcha', function ($attribute, $value, $parameters) {
             return $this->app['captcha']->validateResponse($value);
@@ -52,7 +52,6 @@ class CustomerServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): void
     {
-        $this->mergeConfigFrom(dirname(__DIR__).'/Config/system.php', 'core');
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/system.php', 'core');
     }
-
 }

@@ -38,7 +38,7 @@ class DatabaseLogicCest
     public function testGetUrlPathOfCategory(UnitTester $I)
     {
         $rootCategoryTranslation = $I->grabRecord(CategoryTranslation::class, [
-            'slug'   => 'root',
+            'slug' => 'root',
             'locale' => 'en',
         ]);
 
@@ -49,20 +49,20 @@ class DatabaseLogicCest
         $parentCategoryName = $this->faker->word;
 
         $parentCategoryAttributes = [
-            'parent_id'           => $rootCategory->id,
-            'position'            => 1,
-            'status'              => 1,
+            'parent_id' => $rootCategory->id,
+            'position' => 1,
+            'status' => 1,
             $this->localeEn->code => [
-                'name'        => $parentCategoryName,
-                'slug'        => strtolower($parentCategoryName),
+                'name' => $parentCategoryName,
+                'slug' => strtolower($parentCategoryName),
                 'description' => $parentCategoryName,
-                'locale_id'   => $this->localeEn->id,
+                'locale_id' => $this->localeEn->id,
             ],
             $this->localeDe->code => [
-                'name'        => $parentCategoryName,
-                'slug'        => strtolower($parentCategoryName),
+                'name' => $parentCategoryName,
+                'slug' => strtolower($parentCategoryName),
                 'description' => $parentCategoryName,
-                'locale_id'   => $this->localeDe->id,
+                'locale_id' => $this->localeDe->id,
             ],
         ];
 
@@ -71,22 +71,22 @@ class DatabaseLogicCest
         $rootCategory->prependNode($parentCategory);
         $I->assertNotNull($parentCategory);
 
-        $categoryName       = $this->faker->word;
+        $categoryName = $this->faker->word;
         $categoryAttributes = [
-            'position'            => 1,
-            'status'              => 1,
-            'parent_id'           => $parentCategory->id,
+            'position' => 1,
+            'status' => 1,
+            'parent_id' => $parentCategory->id,
             $this->localeEn->code => [
-                'name'        => $categoryName,
-                'slug'        => strtolower($categoryName),
+                'name' => $categoryName,
+                'slug' => strtolower($categoryName),
                 'description' => $categoryName,
-                'locale_id'   => $this->localeEn->id,
+                'locale_id' => $this->localeEn->id,
             ],
             $this->localeDe->code => [
-                'name'        => $categoryName,
-                'slug'        => strtolower($categoryName),
+                'name' => $categoryName,
+                'slug' => strtolower($categoryName),
                 'description' => $categoryName,
-                'locale_id'   => $this->localeDe->id,
+                'locale_id' => $this->localeDe->id,
             ],
         ];
 
@@ -114,14 +114,14 @@ class DatabaseLogicCest
         $I->assertEquals($expectedUrlPath, $urlPathQueryResult->url_path);
 
         $root2Category = $I->make(Category::class, [
-            'position'            => 1,
-            'status'              => 1,
-            'parent_id'           => null,
+            'position' => 1,
+            'status' => 1,
+            'parent_id' => null,
             $this->localeEn->code => [
-                'name'        => $this->faker->word,
-                'slug'        => strtolower($this->faker->word),
+                'name' => $this->faker->word,
+                'slug' => strtolower($this->faker->word),
                 'description' => $this->faker->word,
-                'locale_id'   => $this->localeEn->id,
+                'locale_id' => $this->localeEn->id,
             ],
         ])
                            ->first();

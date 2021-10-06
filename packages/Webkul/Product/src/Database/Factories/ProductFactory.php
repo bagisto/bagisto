@@ -32,7 +32,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'sku'                 => $this->faker->uuid,
+            'sku' => $this->faker->uuid,
             'attribute_family_id' => 1,
         ];
     }

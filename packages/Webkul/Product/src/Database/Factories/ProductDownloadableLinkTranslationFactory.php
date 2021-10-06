@@ -23,8 +23,8 @@ class ProductDownloadableLinkTranslationFactory extends Factory
     public function definition(): array
     {
         return [
-            'locale'                       => 'en',
-            'title'                        => $this->faker->word,
+            'locale' => 'en',
+            'title' => $this->faker->word,
             'product_downloadable_link_id' => ProductDownloadableLink::factory(),
         ];
     }

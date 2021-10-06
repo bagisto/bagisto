@@ -27,9 +27,9 @@ class ShipmentFactory extends Factory
                                ->create();
 
         return [
-            'total_qty'           => $this->faker->numberBetween(1, 20),
-            'order_id'            => $address->order_id,
-            'order_address_id'    => $address->id,
+            'total_qty' => $this->faker->numberBetween(1, 20),
+            'order_id' => $address->order_id,
+            'order_address_id' => $address->id,
             'inventory_source_id' => InventorySource::factory(),
         ];
     }

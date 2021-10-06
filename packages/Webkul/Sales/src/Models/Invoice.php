@@ -32,8 +32,8 @@ class Invoice extends Model implements InvoiceContract
      * @var array
      */
     protected $statusLabel = [
-        'pending'  => 'Pending',
-        'paid'     => 'Paid',
+        'pending' => 'Pending',
+        'paid' => 'Paid',
         'refunded' => 'Refunded',
     ];
 

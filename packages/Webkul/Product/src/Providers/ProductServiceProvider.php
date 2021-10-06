@@ -15,7 +15,6 @@ use Webkul\Product\ProductVideo;
 
 class ProductServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap services.
      *
@@ -23,14 +22,14 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        include __DIR__.'/../Http/helpers.php';
+        include __DIR__ . '/../Http/helpers.php';
 
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->app->register(EventServiceProvider::class);
 
         $this->publishes([
-            dirname(__DIR__).'/Config/imagecache.php' => config_path('imagecache.php'),
+            dirname(__DIR__) . '/Config/imagecache.php' => config_path('imagecache.php'),
         ]);
 
         ProductProxy::observe(ProductObserver::class);
@@ -57,7 +56,7 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function registerConfig(): void
     {
-        $this->mergeConfigFrom(dirname(__DIR__).'/Config/product_types.php', 'product_types');
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/product_types.php', 'product_types');
     }
 
     /**
@@ -97,5 +96,4 @@ class ProductServiceProvider extends ServiceProvider
             return app()->make(ProductVideo::class);
         });
     }
-
 }

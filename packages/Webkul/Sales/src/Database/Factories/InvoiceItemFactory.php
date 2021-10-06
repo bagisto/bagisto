@@ -24,7 +24,7 @@ class InvoiceItemFactory extends Factory
     public function definition(): array
     {
         $basePrice = $this->faker->randomFloat(2);
-        $quantity  = $this->faker->randomNumber();
+        $quantity = $this->faker->randomNumber();
 
         if (!isset($attributes['order_item_id'])) {
             $attributes['order_item_id'] = OrderItem::factory();
@@ -34,19 +34,19 @@ class InvoiceItemFactory extends Factory
                               ->find($attributes['order_item_id']);
 
         return [
-            'name'            => $this->faker->word,
-            'sku'             => $this->faker->unique()->ean13,
-            'qty'             => $quantity,
-            'price'           => $basePrice,
-            'base_price'      => $basePrice,
-            'total'           => $quantity * $basePrice,
-            'base_total'      => $quantity * $basePrice,
-            'tax_amount'      => 0,
+            'name' => $this->faker->word,
+            'sku' => $this->faker->unique()->ean13,
+            'qty' => $quantity,
+            'price' => $basePrice,
+            'base_price' => $basePrice,
+            'total' => $quantity * $basePrice,
+            'base_total' => $quantity * $basePrice,
+            'tax_amount' => 0,
             'base_tax_amount' => 0,
-            'product_id'      => $orderItem->product_id,
-            'product_type'    => $orderItem->product_type,
-            'order_item_id'   => $attributes['order_item_id'],
-            'invoice_id'      => Invoice::factory(),
+            'product_id' => $orderItem->product_id,
+            'product_type' => $orderItem->product_type,
+            'order_item_id' => $attributes['order_item_id'],
+            'invoice_id' => Invoice::factory(),
         ];
     }
 }

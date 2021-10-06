@@ -22,8 +22,8 @@ class TaxCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'code'        => $this->faker->uuid,
-            'name'        => $this->faker->words(2, true),
+            'code' => $this->faker->uuid,
+            'name' => $this->faker->words(2, true),
             'description' => $this->faker->sentence(10),
         ];
     }

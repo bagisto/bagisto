@@ -421,7 +421,7 @@ class Product extends Model implements ProductContract
             return;
         }
 
-        $locale  = core()->checkRequestedLocaleCodeInRequestedChannel();
+        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
         $channel = core()->getRequestedChannelCode();
 
         if (array_key_exists($this->id, self::$loadedAttributeValues)

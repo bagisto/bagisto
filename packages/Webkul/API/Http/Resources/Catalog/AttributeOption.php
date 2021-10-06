@@ -6,15 +6,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class AttributeOption extends JsonResource
 {
-
     /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request
-     *
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id'           => $this->id,
@@ -23,5 +21,4 @@ class AttributeOption extends JsonResource
             'swatch_value' => $this->swatch_value,
         ];
     }
-
 }

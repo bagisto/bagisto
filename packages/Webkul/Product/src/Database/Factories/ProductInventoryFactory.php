@@ -24,8 +24,8 @@ class ProductInventoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'qty'                 => $this->faker->numberBetween(100, 200),
-            'product_id'          => Product::factory(),
+            'qty' => $this->faker->numberBetween(100, 200),
+            'product_id' => Product::factory(),
             'inventory_source_id' => InventorySource::factory(),
         ];
     }

@@ -6,15 +6,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class Attribute extends JsonResource
 {
-
     /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request
-     *
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id'          => $this->id,
@@ -27,5 +25,4 @@ class Attribute extends JsonResource
             'updated_at'  => $this->updated_at,
         ];
     }
-
 }

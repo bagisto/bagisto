@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Webkul\Core\Models;
-
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +10,6 @@ use Webkul\Core\Contracts\Address as AddressContract;
 
 /**
  * Class Address
- *
  * @package Webkul\Core\Models
  *
  * @property string $address_type
@@ -41,7 +38,6 @@ use Webkul\Core\Contracts\Address as AddressContract;
  */
 abstract class Address extends Model implements AddressContract
 {
-
     protected $table = 'addresses';
 
     protected $guarded = [
@@ -82,7 +78,7 @@ abstract class Address extends Model implements AddressContract
      */
     public function getNameAttribute(): string
     {
-        return $this->first_name.' '.$this->last_name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     /**
@@ -92,5 +88,4 @@ abstract class Address extends Model implements AddressContract
     {
         return $this->belongsTo(Customer::class);
     }
-
 }

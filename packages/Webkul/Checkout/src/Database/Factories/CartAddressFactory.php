@@ -22,9 +22,9 @@ class CartAddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name'   => $this->faker->firstName(),
-            'last_name'    => $this->faker->lastName,
-            'email'        => $this->faker->email,
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName,
+            'email' => $this->faker->email,
             'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
         ];
     }

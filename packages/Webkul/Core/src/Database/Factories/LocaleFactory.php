@@ -35,8 +35,8 @@ class LocaleFactory extends Factory
                        ->exists());
 
         return [
-            'code'      => $languageCode,
-            'name'      => $this->faker->country,
+            'code' => $languageCode,
+            'name' => $this->faker->country,
             'direction' => 'ltr',
         ];
     }

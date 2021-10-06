@@ -6,10 +6,9 @@ use Illuminate\Support\ServiceProvider;
 
 class SalesServiceProvider extends ServiceProvider
 {
-
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
     /**
@@ -19,7 +18,6 @@ class SalesServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(dirname(__DIR__).'/Config/system.php', 'core');
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/system.php', 'core');
     }
-
 }

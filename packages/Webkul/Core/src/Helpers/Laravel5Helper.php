@@ -32,7 +32,6 @@ use Webkul\Product\Models\ProductDownloadableLinkTranslation;
  */
 class Laravel5Helper extends Laravel
 {
-
     public const SIMPLE_PRODUCT = 1;
 
     public const VIRTUAL_PRODUCT = 2;
@@ -89,10 +88,10 @@ class Laravel5Helper extends Laravel
 
         if (isset($options['payment_method'])
             && $options['payment_method'] === 'free_of_charge') {
-            $grand_total      = '0.0000';
+            $grand_total = '0.0000';
             $base_grand_total = '0.0000';
         } else {
-            $grand_total      = (string) $faker->numberBetween(1, 666);
+            $grand_total = (string)$faker->numberBetween(1, 666);
             $base_grand_total = $grand_total;
         }
 
@@ -133,7 +132,7 @@ class Laravel5Helper extends Laravel
 
         // actually set the cart to the user's session
         // when in an functional test:
-        $stub     = new StdClass();
+        $stub = new StdClass();
         $stub->id = $cart->id;
         $I->setSession(['cart' => $stub]);
 
@@ -295,7 +294,7 @@ class Laravel5Helper extends Laravel
 
     private function createDownloadableLink(int $productId): void
     {
-        $I    = $this;
+        $I = $this;
         $link = $I->have(ProductDownloadableLink::class, [
             'product_id' => $productId,
         ]);
@@ -307,7 +306,7 @@ class Laravel5Helper extends Laravel
 
     private function createBookingEventProduct(int $productId): void
     {
-        $I              = $this;
+        $I = $this;
         $bookingProduct = $I->have(BookingProduct::class, [
             'product_id' => $productId,
         ]);
@@ -392,7 +391,7 @@ class Laravel5Helper extends Laravel
      */
     private function appendAttributeDependencies(string $attributeCode, array $data): array
     {
-        $locale  = core()->getCurrentLocale()->code;
+        $locale = core()->getCurrentLocale()->code;
         $channel = core()->getCurrentChannelCode();
 
         $attributeSetDependencies = [
@@ -451,5 +450,4 @@ class Laravel5Helper extends Laravel
 
         return $data;
     }
-
 }

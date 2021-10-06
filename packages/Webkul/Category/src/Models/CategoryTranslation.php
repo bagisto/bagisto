@@ -14,7 +14,6 @@ use Webkul\Category\Contracts\CategoryTranslation as CategoryTranslationContract
  */
 class CategoryTranslation extends Model implements CategoryTranslationContract
 {
-
     public $timestamps = false;
 
     protected $fillable = [
@@ -26,5 +25,4 @@ class CategoryTranslation extends Model implements CategoryTranslationContract
         'meta_keywords',
         'locale_id',
     ];
-
 }

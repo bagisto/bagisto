@@ -38,16 +38,16 @@ class CartItemFactory extends Factory
         $fallbackPrice = $this->faker->randomFloat(4, 0, 1000);
 
         return [
-            'quantity'   => 1,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
-            'price'      => $product->price ?? $fallbackPrice,
+            'quantity' => 1,
+            'sku' => $product->sku,
+            'type' => $product->type,
+            'name' => $product->name,
+            'price' => $product->price ?? $fallbackPrice,
             'base_price' => $product->price ?? $fallbackPrice,
-            'total'      => $product->price ?? $fallbackPrice,
+            'total' => $product->price ?? $fallbackPrice,
             'base_total' => $product->price ?? $fallbackPrice,
             'product_id' => $product->id,
-            'cart_id'    => Cart::factory(),
+            'cart_id' => Cart::factory(),
             'created_at' => $now,
             'updated_at' => $now,
         ];

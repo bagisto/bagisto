@@ -6,7 +6,7 @@ use Konekt\Concord\BaseModuleServiceProvider;
 
 class CoreModuleServiceProvider extends BaseModuleServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         if ($this->areMigrationsEnabled()) {
             $this->registerMigrations();

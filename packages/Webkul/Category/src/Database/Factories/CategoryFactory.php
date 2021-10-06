@@ -30,8 +30,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'status'    => 1,
-            'position'  => $this->faker->randomDigit(),
+            'status' => 1,
+            'position' => $this->faker->randomDigit(),
             'parent_id' => 1,
         ];
     }

@@ -17,7 +17,6 @@ use Webkul\Theme\ViewRenderEventManager;
 
 class CoreServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap services.
      *
@@ -25,11 +24,11 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        include __DIR__.'/../Http/helpers.php';
+        include __DIR__ . '/../Http/helpers.php';
 
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
-        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'core');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
 
         Validator::extend('slug', 'Webkul\Core\Contracts\Validations\Slug@passes');
 
@@ -38,15 +37,15 @@ class CoreServiceProvider extends ServiceProvider
         Validator::extend('decimal', 'Webkul\Core\Contracts\Validations\Decimal@passes');
 
         $this->publishes([
-            dirname(__DIR__).'/Config/concord.php' => config_path('concord.php'),
-            dirname(__DIR__).'/Config/scout.php'   => config_path('scout.php'),
+            dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),
+            dirname(__DIR__) . '/Config/scout.php'   => config_path('scout.php'),
         ]);
 
         $this->app->bind(ExceptionHandler::class, Handler::class);
 
         SliderProxy::observe(SliderObserver::class);
 
-        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'core');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
 
         Event::listen('bagisto.shop.layout.body.after', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
@@ -127,5 +126,4 @@ class CoreServiceProvider extends ServiceProvider
             return new BladeCompiler($app['files'], $app['config']['view.compiled']);
         });
     }
-
 }

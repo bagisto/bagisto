@@ -23,10 +23,10 @@ class ProductReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'      => $this->faker->words(5, true),
-            'rating'     => $this->faker->numberBetween(0, 10),
-            'status'     => 1,
-            'comment'    => $this->faker->sentence(20),
+            'title' => $this->faker->words(5, true),
+            'rating' => $this->faker->numberBetween(0, 10),
+            'status' => 1,
+            'comment' => $this->faker->sentence(20),
             'product_id' => Product::factory(),
         ];
     }

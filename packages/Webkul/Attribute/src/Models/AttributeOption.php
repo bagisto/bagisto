@@ -40,7 +40,7 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
             return url('cache/small/' . $this->swatch_value);
         }
 
-        return;
+        return null;
     }
 
     /**

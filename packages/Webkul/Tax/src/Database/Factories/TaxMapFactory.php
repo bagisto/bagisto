@@ -25,7 +25,7 @@ class TaxMapFactory extends Factory
     {
         return [
             'tax_category_id' => TaxCategory::factory(),
-            'tax_rate_id'     => TaxRate::factory(),
+            'tax_rate_id' => TaxRate::factory(),
         ];
     }
 }

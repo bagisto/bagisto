@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class AttributeServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap services.
      *
@@ -16,5 +15,4 @@ class AttributeServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
     }
-
 }

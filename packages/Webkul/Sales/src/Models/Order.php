@@ -6,6 +6,10 @@ use Webkul\Checkout\Models\CartProxy;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\Order as OrderContract;
 use Webkul\Sales\Database\Factories\OrderFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model implements OrderContract
@@ -39,13 +43,13 @@ class Order extends Model implements OrderContract
     ];
 
     protected $statusLabel = [
-        self::STATUS_PENDING         => 'Pending',
+        self::STATUS_PENDING => 'Pending',
         self::STATUS_PENDING_PAYMENT => 'Pending Payment',
-        self::STATUS_PROCESSING      => 'Processing',
-        self::STATUS_COMPLETED       => 'Completed',
-        self::STATUS_CANCELED        => 'Canceled',
-        self::STATUS_CLOSED          => 'Closed',
-        self::STATUS_FRAUD           => 'Fraud',
+        self::STATUS_PROCESSING => 'Processing',
+        self::STATUS_COMPLETED => 'Completed',
+        self::STATUS_CANCELED => 'Canceled',
+        self::STATUS_CLOSED => 'Closed',
+        self::STATUS_FRAUD => 'Fraud',
     ];
 
     /**
@@ -83,7 +87,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the associated cart that was used to create this order.
      */
-    public function cart(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function cart(): BelongsTo
     {
         return $this->belongsTo(CartProxy::modelClass());
     }
@@ -91,7 +95,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order items record associated with the order.
      */
-    public function items(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function items(): HasMany
     {
         return $this->hasMany(OrderItemProxy::modelClass())
                     ->whereNull('parent_id');
@@ -100,7 +104,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the comments record associated with the order.
      */
-    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(OrderCommentProxy::modelClass());
     }
@@ -108,7 +112,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order items record associated with the order.
      */
-    public function all_items(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function all_items(): HasMany
     {
         return $this->hasMany(OrderItemProxy::modelClass());
     }
@@ -116,7 +120,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order shipments record associated with the order.
      */
-    public function shipments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function shipments(): HasMany
     {
         return $this->hasMany(ShipmentProxy::modelClass());
     }
@@ -124,7 +128,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order invoices record associated with the order.
      */
-    public function invoices(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function invoices(): HasMany
     {
         return $this->hasMany(InvoiceProxy::modelClass());
     }
@@ -132,7 +136,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order refunds record associated with the order.
      */
-    public function refunds(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function refunds(): HasMany
     {
         return $this->hasMany(RefundProxy::modelClass());
     }
@@ -140,7 +144,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order transactions record associated with the order.
      */
-    public function transactions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function transactions(): HasMany
     {
         return $this->hasMany(OrderTransactionProxy::modelClass());
     }
@@ -148,7 +152,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the customer record associated with the order.
      */
-    public function customer(): \Illuminate\Database\Eloquent\Relations\MorphTo
+    public function customer(): MorphTo
     {
         return $this->morphTo();
     }
@@ -156,7 +160,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the addresses for the order.
      */
-    public function addresses(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function addresses(): HasMany
     {
         return $this->hasMany(OrderAddressProxy::modelClass());
     }
@@ -164,7 +168,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the payment for the order.
      */
-    public function payment(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function payment(): HasOne
     {
         return $this->hasOne(OrderPaymentProxy::modelClass());
     }
@@ -172,7 +176,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the billing address for the order.
      */
-    public function billing_address(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function billing_address(): HasMany
     {
         return $this->addresses()
                     ->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
@@ -190,7 +194,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the shipping address for the order.
      */
-    public function shipping_address(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function shipping_address(): HasMany
     {
         return $this->addresses()
                     ->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);

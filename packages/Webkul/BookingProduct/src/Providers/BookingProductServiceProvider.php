@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class BookingProductServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap services.
      *
@@ -38,5 +37,4 @@ class BookingProductServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(dirname(__DIR__) . '/Config/product_types.php', 'product_types');
     }
-
 }

@@ -41,7 +41,7 @@ class OrderItem extends Model implements OrderItemContract
             return $this->typeInstance;
         }
 
-        $this->typeInstance = app(config('product_types.'.$this->type.'.class'));
+        $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
 
         if ($this->product) {
             $this->typeInstance->setProduct($this);
