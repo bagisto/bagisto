@@ -1,5 +1,4 @@
-@section('css')
-    @parent
+@push('css')
     <style>
         .table th.price, .table th.weight {
             width: 100px;
@@ -14,7 +13,7 @@
             margin-right: 10px;
         }
     </style>
-@stop
+@endpush
 
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.customer_group_prices.before', ['product' => $product]) !!}
 
@@ -23,13 +22,10 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.customer_group_prices.after', ['product' => $product]) !!}
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="customer-group-price-list-template">
         <div>
             <div class="table" style="margin-top: 20px; overflow-x: unset;">
                 <table>
-
                     <thead>
                         <tr>
                             <th>{{ __('admin::app.catalog.products.customer-group') }}</th>
@@ -40,11 +36,8 @@
                     </thead>
 
                     <tbody>
-
                         <customer-group-price-item v-for='(customerGroupPrice, index) in customer_group_prices' :customer-group-price="customerGroupPrice" :key="index" :index="index" @onRemoveCustomerGroupPrice="removeCustomerGroupPrice($event)"></customer-group-price-item>
-
                     </tbody>
-
                 </table>
 
                 <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px" @click="addCustomerGroupPrice()">
@@ -99,7 +92,6 @@
 
     <script>
         Vue.component('customer-group-price-list', {
-
             template: '#customer-group-price-list-template',
 
             inject: ['$validator'],
@@ -129,7 +121,6 @@
         });
 
         Vue.component('customer-group-price-item', {
-
             template: '#customer-group-price-item-template',
 
             props: ['index', 'customerGroupPrice'],

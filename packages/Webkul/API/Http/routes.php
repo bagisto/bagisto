@@ -200,6 +200,11 @@ Route::group(['prefix' => 'api'], function ($router) {
             'authorization_required' => true
         ]);
 
+        Route::post('orders/{id}/cancel', 'OrderController@cancel')->defaults('_config', [
+            'repository' => 'Webkul\Sales\Repositories\OrderRepository',
+            'resource' => 'Webkul\API\Http\Resources\Sales\Order',
+            'authorization_required' => true
+        ]);
 
         //Invoice routes
         Route::get('invoices', 'InvoiceController@index')->defaults('_config', [

@@ -6,15 +6,11 @@
 
 @section('content')
     <div class="content">
-
         <catalog-rule></catalog-rule>
-
     </div>
 @stop
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="catalog-rule-template">
         <div>
             <form method="POST" action="{{ route('admin.catalog-rules.update', $catalogRule->id) }}" @submit.prevent="onSubmit">
@@ -43,7 +39,6 @@
 
                         <accordian :title="'{{ __('admin::app.promotions.catalog-rules.rule-information') }}'" :active="true">
                             <div slot="body">
-
                                 <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                     <label for="name" class="required">{{ __('admin::app.promotions.catalog-rules.name') }}</label>
                                     <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.name') }}&quot;" value="{{ old('name') ?: $catalogRule->name }}"/>
@@ -67,7 +62,9 @@
                                 <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                     <label for="channels" class="required">{{ __('admin::app.promotions.catalog-rules.channels') }}</label>
 
-                                    <?php $selectedOptionIds = old('channels') ?: $catalogRule->channels->pluck('id')->toArray() ?>
+                                    @php
+                                        $selectedOptionIds = old('channels') ?: $catalogRule->channels->pluck('id')->toArray();
+                                    @endphp
 
                                     <select class="control" id="channels" name="channels[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.channels') }}&quot;" multiple="multiple">
 
@@ -85,7 +82,9 @@
                                 <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
                                     <label for="customer_groups" class="required">{{ __('admin::app.promotions.catalog-rules.customer-groups') }}</label>
 
-                                    <?php $selectedOptionIds = old('customer_groups') ?: $catalogRule->customer_groups->pluck('id')->toArray() ?>
+                                    @php
+                                        $selectedOptionIds = old('customer_groups') ?: $catalogRule->customer_groups->pluck('id')->toArray();
+                                    @endphp
 
                                     <select class="control" id="customer_groups" name="customer_groups[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.customer-groups') }}&quot;" multiple="multiple">
 
@@ -118,13 +117,11 @@
                                     <label for="sort_order">{{ __('admin::app.promotions.catalog-rules.priority') }}</label>
                                     <input type="text" class="control" id="sort_order" name="sort_order" value="{{ $catalogRule->sort_order }}" {{ $catalogRule->status ? 'checked' : '' }}/>
                                 </div>
-
                             </div>
                         </accordian>
 
                         <accordian :title="'{{ __('admin::app.promotions.catalog-rules.conditions') }}'" :active="false">
                             <div slot="body">
-
                                 <div class="control-group">
                                     <label for="condition_type">{{ __('admin::app.promotions.catalog-rules.condition-type') }}</label>
 
@@ -151,17 +148,17 @@
                                 <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px;" @click="addCondition">
                                     {{ __('admin::app.promotions.catalog-rules.add-condition') }}
                                 </button>
-
                             </div>
                         </accordian>
 
                         <accordian :title="'{{ __('admin::app.promotions.catalog-rules.actions') }}'" :active="false">
                             <div slot="body">
-
                                 <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
                                     <label for="action_type" class="required">{{ __('admin::app.promotions.catalog-rules.action-type') }}</label>
 
-                                    <?php $selectedOption = old('action_type') ?: $catalogRule->action_type ?>
+                                    @php
+                                        $selectedOption = old('action_type') ?: $catalogRule->action_type;
+                                    @endphp
 
                                     <select class="control" id="action_type" name="action_type" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.action-type') }}&quot;">
                                         <option value="by_percent" {{ $selectedOption == 'by_percent' ? 'selected' : '' }}>
@@ -186,7 +183,9 @@
                                 <div class="control-group">
                                     <label for="end_other_rules">{{ __('admin::app.promotions.catalog-rules.end-other-rules') }}</label>
 
-                                    <?php $selectedOption = old('end_other_rules') ?: $catalogRule->end_other_rules ?>
+                                    @php
+                                        $selectedOption = old('end_other_rules') ?: $catalogRule->end_other_rules;
+                                    @endphp
 
                                     <select class="control" id="end_other_rules" name="end_other_rules">
                                         <option value="0" {{ ! $selectedOption ? 'selected' : '' }}>
@@ -198,7 +197,6 @@
                                         </option>
                                     </select>
                                 </div>
-
                             </div>
                         </accordian>
 
@@ -301,7 +299,6 @@
 
     <script>
         Vue.component('catalog-rule', {
-
             template: '#catalog-rule-template',
 
             inject: ['$validator'],
@@ -340,7 +337,6 @@
         });
 
         Vue.component('catalog-rule-condition-item', {
-
             template: '#catalog-rule-condition-item-template',
 
             props: ['index', 'condition'],
@@ -506,12 +502,12 @@
                     if (this.condition.attribute == '')
                         return;
 
-                    var this_this = this;
+                    let self = this;
 
-                    var attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
+                    let attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
 
                     matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
-                        return attribute.key == this_this.condition.attribute;
+                        return attribute.key == self.condition.attribute;
                     });
 
                     if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
