@@ -259,7 +259,7 @@ class Laravel5Helper extends Laravel
     private function haveBookingEventProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('booking', $productStates)) {
+        if (! in_array('booking', $productStates)) {
             $productStates = array_merge($productStates, ['booking']);
         }
 

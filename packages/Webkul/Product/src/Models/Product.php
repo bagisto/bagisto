@@ -302,7 +302,7 @@ class Product extends Model implements ProductContract
 
         $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
 
-        if (!$this->typeInstance instanceof AbstractType) {
+        if (! $this->typeInstance instanceof AbstractType) {
             throw new Exception("Please ensure the product type '{$this->type}' is configured in your application.");
         }
 
@@ -372,13 +372,13 @@ class Product extends Model implements ProductContract
      */
     public function getAttribute($key)
     {
-        if (!method_exists(static::class, $key)
-            && !in_array($key, [
+        if (! method_exists(static::class, $key)
+            && ! in_array($key, [
                 'pivot',
                 'parent_id',
                 'attribute_family_id',
             ])
-            && !isset($this->attributes[$key])) {
+            && ! isset($this->attributes[$key])) {
             if (isset($this->id)) {
                 $this->attributes[$key] = '';
 
@@ -417,7 +417,7 @@ class Product extends Model implements ProductContract
      */
     public function getCustomAttributeValue($attribute)
     {
-        if (!$attribute) {
+        if (! $attribute) {
             return;
         }
 
