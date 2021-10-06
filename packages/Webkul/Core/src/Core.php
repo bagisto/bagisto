@@ -3,15 +3,15 @@
 namespace Webkul\Core;
 
 use Carbon\Carbon;
-use Webkul\Core\Models\Channel;
 use Illuminate\Support\Facades\Config;
-use Webkul\Core\Repositories\LocaleRepository;
+use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Core\Repositories\CountryRepository;
-use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\CoreConfigRepository;
+use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
+use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
+use Webkul\Core\Repositories\LocaleRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class Core
@@ -89,14 +89,14 @@ class Core
     /**
      * Create a new instance.
      *
-     * @param \Webkul\Core\Repositories\ChannelRepository       $channelRepository
-     * @param \Webkul\Core\Repositories\CurrencyRepository      $currencyRepository
-     * @param \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
-     * @param \Webkul\Core\Repositories\CountryRepository       $countryRepository
-     * @param \Webkul\Core\Repositories\CountryStateRepository  $countryStateRepository
-     * @param \Webkul\Core\Repositories\LocaleRepository        $localeRepository
-     * @param \Webkul\Core\Repositories\CustomerGroupRepository $customerGroupRepository
-     * @param \Webkul\Core\Repositories\CoreConfigRepository    $coreConfigRepository
+     * @param \Webkul\Core\Repositories\ChannelRepository           $channelRepository
+     * @param \Webkul\Core\Repositories\CurrencyRepository          $currencyRepository
+     * @param \Webkul\Core\Repositories\ExchangeRateRepository      $exchangeRateRepository
+     * @param \Webkul\Core\Repositories\CountryRepository           $countryRepository
+     * @param \Webkul\Core\Repositories\CountryStateRepository      $countryStateRepository
+     * @param \Webkul\Core\Repositories\LocaleRepository            $localeRepository
+     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository
+     * @param \Webkul\Core\Repositories\CoreConfigRepository        $coreConfigRepository
      *
      * @return void
      */
