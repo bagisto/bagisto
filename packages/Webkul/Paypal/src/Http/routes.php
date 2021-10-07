@@ -1,19 +1,23 @@
 <?php
 
+// Controllers
+use Webkul\Paypal\Http\Controllers\SmartButtonController;
+use Webkul\Paypal\Http\Controllers\StandardController;
+
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('paypal/standard')->group(function () {
-        Route::get('/redirect', 'Webkul\Paypal\Http\Controllers\StandardController@redirect')->name('paypal.standard.redirect');
+        Route::get('/redirect', [StandardController::class, 'redirect'])->name('paypal.standard.redirect');
 
-        Route::get('/success', 'Webkul\Paypal\Http\Controllers\StandardController@success')->name('paypal.standard.success');
+        Route::get('/success', [StandardController::class, 'success'])->name('paypal.standard.success');
 
-        Route::get('/cancel', 'Webkul\Paypal\Http\Controllers\StandardController@cancel')->name('paypal.standard.cancel');
+        Route::get('/cancel', [StandardController::class, 'cancel'])->name('paypal.standard.cancel');
     });
 
     Route::prefix('paypal/smart-button')->group(function () {
-        Route::get('/create-order', 'Webkul\Paypal\Http\Controllers\SmartButtonController@createOrder')->name('paypal.smart-button.create-order');
+        Route::get('/create-order', [SmartButtonController::class, 'createOrder'])->name('paypal.smart-button.create-order');
 
-        Route::post('/capture-order', 'Webkul\Paypal\Http\Controllers\SmartButtonController@captureOrder')->name('paypal.smart-button.capture-order');
+        Route::post('/capture-order', [SmartButtonController::class, 'captureOrder'])->name('paypal.smart-button.capture-order');
     });
 });
 
-Route::post('paypal/standard/ipn', 'Webkul\Paypal\Http\Controllers\StandardController@ipn')->name('paypal.standard.ipn');
+Route::post('paypal/standard/ipn', [StandardController::class, 'ipn'])->name('paypal.standard.ipn');
