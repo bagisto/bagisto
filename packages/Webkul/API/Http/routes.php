@@ -55,7 +55,7 @@ use Webkul\API\Http\Resources\Sales\Shipment;
 
 Route::group(['prefix' => 'api'], function ($router) {
 
-    Route::group(['namespace' => 'Webkul\API\Http\Controllers\Shop', 'middleware' => ['locale', 'theme', 'currency']], function ($router) {
+    Route::group(['middleware' => ['locale', 'theme', 'currency']], function ($router) {
         //Currency and Locale switcher
         Route::get('switch-currency', [CoreController::class, 'switchCurrency']);
 
