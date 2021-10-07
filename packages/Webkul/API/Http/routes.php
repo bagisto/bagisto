@@ -17,24 +17,6 @@ use Webkul\API\Http\Controllers\Shop\SessionController;
 use Webkul\API\Http\Controllers\Shop\TransactionController;
 use Webkul\API\Http\Controllers\Shop\WishlistController;
 
-// Repositories
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository;
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Core\Repositories\CountryRepository;
-use Webkul\Core\Repositories\CurrencyRepository;
-use Webkul\Core\Repositories\LocaleRepository;
-use Webkul\Core\Repositories\SliderRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Customer\Repositories\WishlistRepository;
-use Webkul\Product\Repositories\ProductReviewRepository;
-use Webkul\Sales\Repositories\InvoiceRepository;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\OrderTransactionRepository;
-use Webkul\Sales\Repositories\ShipmentRepository;
-
 // Resources
 use Webkul\API\Http\Resources\Catalog\Attribute;
 use Webkul\API\Http\Resources\Catalog\AttributeFamily;
@@ -52,6 +34,24 @@ use Webkul\API\Http\Resources\Sales\Invoice;
 use Webkul\API\Http\Resources\Sales\Order;
 use Webkul\API\Http\Resources\Sales\OrderTransaction;
 use Webkul\API\Http\Resources\Sales\Shipment;
+
+// Repositories
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Core\Repositories\CountryRepository;
+use Webkul\Core\Repositories\CurrencyRepository;
+use Webkul\Core\Repositories\LocaleRepository;
+use Webkul\Core\Repositories\SliderRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
+use Webkul\Sales\Repositories\ShipmentRepository;
 
 Route::group(['prefix' => 'api'], function ($router) {
 
