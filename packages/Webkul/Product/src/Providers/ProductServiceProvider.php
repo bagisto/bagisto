@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
 use Webkul\Product\Console\Commands\PriceUpdate;
-use Webkul\Product\Console\Commands\GenerateProducts;
 use Illuminate\Foundation\AliasLoader;
 use Webkul\Product\Facades\ProductImage as ProductImageFacade;
 use Webkul\Product\Facades\ProductVideo as ProductVideoFacade;
@@ -67,10 +66,7 @@ class ProductServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([
-                PriceUpdate::class,
-                GenerateProducts::class,
-            ]);
+            $this->commands([PriceUpdate::class]);
         }
     }
 

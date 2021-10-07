@@ -211,7 +211,7 @@ class Laravel5Helper extends Laravel
     private function haveSimpleProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('simple', $productStates)) {
+        if (! in_array('simple', $productStates)) {
             $productStates = array_merge($productStates, ['simple']);
         }
 
@@ -227,7 +227,7 @@ class Laravel5Helper extends Laravel
     private function haveVirtualProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('virtual', $productStates)) {
+        if (! in_array('virtual', $productStates)) {
             $productStates = array_merge($productStates, ['virtual']);
         }
 
@@ -243,7 +243,7 @@ class Laravel5Helper extends Laravel
     private function haveDownloadableProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('downloadable', $productStates)) {
+        if (! in_array('downloadable', $productStates)) {
             $productStates = array_merge($productStates, ['downloadable']);
         }
 
