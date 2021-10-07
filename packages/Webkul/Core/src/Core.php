@@ -145,7 +145,7 @@ class Core
     }
 
     /**
-     * Returns currenct channel models.
+     * Returns current channel models.
      *
      * @return \Webkul\Core\Contracts\Channel
      */

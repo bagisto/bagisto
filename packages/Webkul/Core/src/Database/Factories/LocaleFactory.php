@@ -1,22 +1,52 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Webkul\Core\Database\Factories;
+
 use Webkul\Core\Models\Locale;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Locale::class, function (Faker $faker, array $attributes) {
+class LocaleFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Locale::class;
 
-    do {
-        $languageCode = $faker->languageCode;
-    } while (Locale::query()->where('code', $languageCode)->exists());
-
-    return [
-        'code'      => $languageCode,
-        'name'      => $faker->country,
-        'direction' => 'ltr',
+    /**
+     * @var string[]
+     */
+    protected $states = [
+        'rtl',
     ];
-});
 
-$factory->state(Category::class, 'rtl', [
-    'direction' => 'rtl',
-]);
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        do {
+            $languageCode = $this->faker->languageCode;
+        } while (Locale::query()
+                       ->where('code', $languageCode)
+                       ->exists());
+
+        return [
+            'code' => $languageCode,
+            'name' => $this->faker->country,
+            'direction' => 'ltr',
+        ];
+    }
+
+    public function rtl(): LocaleFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'direction' => 'rtl',
+            ];
+        });
+    }
+}

@@ -13,6 +13,7 @@ use Webkul\CartRule\Models\CartRuleCoupon;
 use Webkul\Core\Helpers\Laravel5Helper;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
+use Illuminate\Contracts\Support\Arrayable;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
@@ -25,6 +26,7 @@ use Cart;
 class cartRuleWithCoupon
 {
     public $cartRule;
+
     public $coupon;
 
     public function __construct(CartRule $cartRule, CartRuleCoupon $coupon)
@@ -34,25 +36,40 @@ class cartRuleWithCoupon
     }
 }
 
-class expectedCartItem
+class expectedCartItem implements Arrayable
 {
     public const ITEM_DISCOUNT_AMOUNT_PRECISION = 4;
+
     public const ITEM_TAX_AMOUNT_PRECISION = 4;
 
     public $cart_id;
+
     public $product_id;
+
     public $quantity = 1;
+
     public $price = 0.0;
+
     public $base_price = 0.0;
+
     public $total = 0.0;
+
     public $base_total = 0.0;
+
     public $tax_percent = 0.0;
+
     public $tax_amount = 0.0;
+
     public $base_tax_amount = 0.0;
+
     public $coupon_code = null;
+
     public $discount_percent = 0.0;
+
     public $discount_amount = 0.0;
+
     public $base_discount_amount = 0.0;
+
     public $applied_cart_rule_ids = '';
 
     public function __construct(int $cartId, int $productId)
@@ -69,14 +86,8 @@ class expectedCartItem
 
     public function calcTaxAmounts(): void
     {
-        $this->tax_amount = round(
-            $this->quantity * $this->price * $this->tax_percent / 100,
-            self::ITEM_TAX_AMOUNT_PRECISION
-        );
-        $this->base_tax_amount = round(
-            $this->quantity * $this->price * $this->tax_percent / 100,
-            self::ITEM_TAX_AMOUNT_PRECISION
-        );
+        $this->tax_amount = round($this->quantity * $this->price * $this->tax_percent / 100, self::ITEM_TAX_AMOUNT_PRECISION);
+        $this->base_tax_amount = round($this->quantity * $this->price * $this->tax_percent / 100, self::ITEM_TAX_AMOUNT_PRECISION);
     }
 
     public function calcFixedDiscountAmounts(float $discount, float $baseDiscount, string $code, int $cartRuleId): void
@@ -90,16 +101,31 @@ class expectedCartItem
     public function calcPercentageDiscountAmounts(float $discount, string $code, int $cartRuleId): void
     {
         $this->discount_percent = $discount;
-        $this->discount_amount = round(
-            ($this->total + $this->tax_amount) * $this->discount_percent / 100,
-            self::ITEM_DISCOUNT_AMOUNT_PRECISION
-        );
-        $this->base_discount_amount = round(
-            ($this->base_total + $this->base_tax_amount) * $this->discount_percent / 100,
-            self::ITEM_DISCOUNT_AMOUNT_PRECISION
-        );
+        $this->discount_amount = round(($this->total + $this->tax_amount) * $this->discount_percent / 100, self::ITEM_DISCOUNT_AMOUNT_PRECISION);
+        $this->base_discount_amount = round(($this->base_total + $this->base_tax_amount) * $this->discount_percent / 100, self::ITEM_DISCOUNT_AMOUNT_PRECISION);
         $this->coupon_code = $code;
         $this->applied_cart_rule_ids = (string)$cartRuleId;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'cart_id' => $this->cart_id,
+            'product_id' => $this->product_id,
+            'quantity' => $this->quantity,
+            'price' => $this->price,
+            'base_price' => $this->base_price,
+            'total' => $this->total,
+            'base_total' => $this->base_total,
+            'tax_percent' => $this->tax_percent,
+            'tax_amount' => $this->tax_amount,
+            'base_tax_amount' => $this->base_tax_amount,
+            'coupon_code' => $this->coupon_code,
+            'discount_percent' => $this->discount_percent,
+            'discount_amount' => $this->discount_amount,
+            'base_discount_amount' => $this->base_discount_amount,
+            'applied_cart_rule_ids' => $this->applied_cart_rule_ids,
+        ];
     }
 }
 
@@ -108,18 +134,31 @@ class expectedCart
     public const CART_TOTAL_PRECISION = 2;
 
     public $customer_id;
+
     public $id;
+
     public $items_count = 0;
+
     public $items_qty = 0.0;
+
     public $sub_total = 0.0;
+
     public $tax_total = 0.0;
+
     public $discount_amount = 0.0;
+
     public $grand_total = 0.0;
+
     public $base_sub_total = 0.0;
+
     public $base_tax_total = 0.0;
+
     public $base_discount_amount = 0.0;
+
     public $base_grand_total = 0.0;
+
     public $coupon_code = null;
+
     public $applied_cart_rule_ids = '';
 
     public function __construct(int $cartId, int $customerId)
@@ -139,14 +178,12 @@ class expectedCart
         $this->sub_total = round($this->sub_total, self::CART_TOTAL_PRECISION);
         $this->tax_total = round($this->tax_total, self::CART_TOTAL_PRECISION);
         $this->discount_amount = round($this->discount_amount, self::CART_TOTAL_PRECISION);
-        $this->grand_total = round($this->sub_total + $this->tax_total - $this->discount_amount,
-            self::CART_TOTAL_PRECISION);
+        $this->grand_total = round($this->sub_total + $this->tax_total - $this->discount_amount, self::CART_TOTAL_PRECISION);
 
         $this->base_sub_total = round($this->base_sub_total, self::CART_TOTAL_PRECISION);
         $this->base_tax_total = round($this->base_tax_total, self::CART_TOTAL_PRECISION);
         $this->base_discount_amount = round($this->base_discount_amount, self::CART_TOTAL_PRECISION);
-        $this->base_grand_total = round($this->base_sub_total + $this->base_tax_total - $this->base_discount_amount,
-            self::CART_TOTAL_PRECISION);
+        $this->base_grand_total = round($this->base_sub_total + $this->base_tax_total - $this->base_discount_amount, self::CART_TOTAL_PRECISION);
     }
 
     public function toArray(): array
@@ -155,29 +192,50 @@ class expectedCart
     }
 }
 
-class expectedOrder
+class expectedOrder implements Arrayable
 {
     public $status;
+
     public $customer_email;
+
     public $customer_first_name;
+
     public $customer_vat_id;
+
     public $coupon_code;
+
     public $total_item_count;
+
     public $total_qty_ordered;
+
     public $grand_total;
+
     public $base_grand_total;
+
     public $sub_total;
+
     public $base_sub_total;
+
     public $discount_amount;
+
     public $base_discount_amount;
+
     public $tax_amount;
+
     public $base_tax_amount;
+
     public $customer_id;
+
     public $cart_id;
+
     public $applied_cart_rule_ids;
+
     public $shipping_method;
+
     public $shipping_amount;
+
     public $base_shipping_amount;
+
     public $shipping_discount_amount;
 
     public function __construct(expectedCart $expectedCart, Customer $customer, int $cartId)
@@ -205,38 +263,82 @@ class expectedOrder
         $this->base_shipping_amount = null;
         $this->shipping_discount_amount = null;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'status' => $this->status,
+            'customer_email' => $this->customer_email,
+            'customer_first_name' => $this->customer_first_name,
+            'customer_vat_id' => $this->customer_vat_id,
+            'coupon_code' => $this->coupon_code,
+            'total_item_count' => $this->total_item_count,
+            'total_qty_ordered' => $this->total_qty_ordered,
+            'grand_total' => $this->grand_total,
+            'base_grand_total' => $this->base_grand_total,
+            'sub_total' => $this->sub_total,
+            'base_sub_total' => $this->base_sub_total,
+            'discount_amount' => $this->discount_amount,
+            'base_discount_amount' => $this->base_discount_amount,
+            'tax_amount' => $this->tax_amount,
+            'base_tax_amount' => $this->base_tax_amount,
+            'customer_id' => $this->customer_id,
+            'cart_id' => $this->cart_id,
+            'applied_cart_rule_ids' => $this->applied_cart_rule_ids,
+            'shipping_method' => $this->shipping_method,
+            'shipping_amount' => $this->shipping_amount,
+            'base_shipping_amount' => $this->base_shipping_amount,
+            'shipping_discount_amount' => $this->shipping_discount_amount,
+        ];
+    }
 }
 
 class CartRuleCest
 {
     private $products;
+
     private $sessionToken;
 
     public const PRODUCT_PRICE = 13.57;
+
     public const REDUCED_PRODUCT_PRICE = 7.21;
+
     public const TAX_RATE = 18.5;
+
     public const REDUCED_TAX_RATE = 5.5;
 
     public const DISCOUNT_AMOUNT_FIX = 3.37;
+
     public const DISCOUNT_AMOUNT_PERCENT = 7.5;
+
     public const DISCOUNT_AMOUNT_FIX_FULL = 999999.99;
+
     public const DISCOUNT_AMOUNT_CART = 8.33;
 
     public const ACTION_TYPE_FIXED = "by_fixed";
+
     public const ACTION_TYPE_PERCENTAGE = "by_percent";
+
     public const ACTION_TYPE_CART_FIXED = "cart_fixed";
 
     public const PRODUCT_FREE = 0;
+
     public const PRODUCT_NOT_FREE = 1;
+
     public const PRODUCT_NOT_FREE_REDUCED_TAX = 2;
 
     public const TAX_CATEGORY = 0;
+
     public const TAX_REDUCED_CATEGORY = 1;
 
     public const COUPON_FIXED = 0;
+
     public const COUPON_FIXED_FULL = 1;
+
     public const COUPON_PERCENTAGE = 2;
+
     public const COUPON_PERCENTAGE_FULL = 3;
+
     public const COUPON_FIXED_CART = 4;
 
 
@@ -260,51 +362,51 @@ class CartRuleCest
             // ],
             //  ohne coupon
             [
-                'name'            => 'PRODUCT_FREE no coupon',
+                'name' => 'PRODUCT_FREE no coupon',
                 'productSequence' => [
                     self::PRODUCT_FREE,
                 ],
-                'withCoupon'      => false,
-                'checkOrder'      => false,
+                'withCoupon' => false,
+                'checkOrder' => false,
             ],
             [
-                'name'            => 'PRODUCT_NOT_FREE no coupon',
+                'name' => 'PRODUCT_NOT_FREE no coupon',
                 'productSequence' => [
                     self::PRODUCT_NOT_FREE,
                 ],
-                'withCoupon'      => false,
-                'checkOrder'      => false,
+                'withCoupon' => false,
+                'checkOrder' => false,
             ],
             // fixer Coupon für ein Produkt (Warenkorb wird nicht 0)
             [
-                'name'            => 'PRODUCT_NOT_FREE fix coupon',
+                'name' => 'PRODUCT_NOT_FREE fix coupon',
                 'productSequence' => [
                     self::PRODUCT_NOT_FREE,
                 ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
+                'withCoupon' => true,
+                'couponScenario' => [
                     'scenario' => self::COUPON_FIXED,
                     'products' => [
                         self::PRODUCT_NOT_FREE,
                     ],
                 ],
-                'checkOrder'      => false,
+                'checkOrder' => false,
             ],
             [
-                'name'            => 'check fix coupon on product with quantity=2',
+                'name' => 'check fix coupon on product with quantity=2',
                 'productSequence' => [
                     self::PRODUCT_NOT_FREE,
                     self::PRODUCT_NOT_FREE_REDUCED_TAX,
                     self::PRODUCT_NOT_FREE,
                 ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
+                'withCoupon' => true,
+                'couponScenario' => [
                     'scenario' => self::COUPON_FIXED,
                     'products' => [
                         self::PRODUCT_NOT_FREE,
                     ],
                 ],
-                'checkOrder'      => false,
+                'checkOrder' => false,
             ],
             // [
             //     'name'            => 'check fix coupon applied to two products',
@@ -325,34 +427,34 @@ class CartRuleCest
             // ],
             // prozenturaler Coupon für ein Produkt (Warenkorb wird nicht 0)
             [
-                'name'            => 'PRODUCT_NOT_FREE percentage coupon',
+                'name' => 'PRODUCT_NOT_FREE percentage coupon',
                 'productSequence' => [
                     self::PRODUCT_NOT_FREE,
                 ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
+                'withCoupon' => true,
+                'couponScenario' => [
                     'scenario' => self::COUPON_PERCENTAGE,
                     'products' => [
                         self::PRODUCT_NOT_FREE,
                     ],
                 ],
-                'checkOrder'      => false,
+                'checkOrder' => false,
             ],
             [
-                'name'            => 'check percentage coupon on product with quantity=2',
+                'name' => 'check percentage coupon on product with quantity=2',
                 'productSequence' => [
                     self::PRODUCT_NOT_FREE,
                     self::PRODUCT_NOT_FREE_REDUCED_TAX,
                     self::PRODUCT_NOT_FREE,
                 ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
+                'withCoupon' => true,
+                'couponScenario' => [
                     'scenario' => self::COUPON_PERCENTAGE,
                     'products' => [
                         self::PRODUCT_NOT_FREE,
                     ],
                 ],
-                'checkOrder'      => false,
+                'checkOrder' => false,
             ],
             // [
             //     'name'            => 'check percentage coupon applied to two products',
@@ -373,34 +475,34 @@ class CartRuleCest
             // ],
             // fixer Coupon für ein Produkt (Warenkorb wird 0)
             [
-                'name'            => 'PRODUCT_NON_SUB_NOT_FREE fix coupon to zero',
+                'name' => 'PRODUCT_NON_SUB_NOT_FREE fix coupon to zero',
                 'productSequence' => [
                     self::PRODUCT_NOT_FREE,
                 ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
+                'withCoupon' => true,
+                'couponScenario' => [
                     'scenario' => self::COUPON_FIXED_FULL,
                     'products' => [
                         self::PRODUCT_NOT_FREE,
                     ],
                 ],
-                'checkOrder'      => false,
+                'checkOrder' => false,
             ],
             [
-                'name'            => 'check fix coupon to zero on product with quantity=2',
+                'name' => 'check fix coupon to zero on product with quantity=2',
                 'productSequence' => [
                     self::PRODUCT_NOT_FREE,
                     self::PRODUCT_NOT_FREE_REDUCED_TAX,
                     self::PRODUCT_NOT_FREE,
                 ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
+                'withCoupon' => true,
+                'couponScenario' => [
                     'scenario' => self::COUPON_FIXED_FULL,
                     'products' => [
                         self::PRODUCT_NOT_FREE,
                     ],
                 ],
-                'checkOrder'      => false,
+                'checkOrder' => false,
             ],
             // [
             //     'name'            => 'check fix coupon to zero applied to two products',
@@ -421,34 +523,34 @@ class CartRuleCest
             // ],
             // prozenturaler Coupon für ein Produkt (Warenkorb wird 0)
             [
-                'name'            => 'PRODUCT_NOT_FREE percentage coupon to zero',
+                'name' => 'PRODUCT_NOT_FREE percentage coupon to zero',
                 'productSequence' => [
                     self::PRODUCT_NOT_FREE,
                 ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
+                'withCoupon' => true,
+                'couponScenario' => [
                     'scenario' => self::COUPON_PERCENTAGE_FULL,
                     'products' => [
                         self::PRODUCT_NOT_FREE,
                     ],
                 ],
-                'checkOrder'      => false,
+                'checkOrder' => false,
             ],
             [
-                'name'            => 'check percentage coupon to zero on product with quantity=2',
+                'name' => 'check percentage coupon to zero on product with quantity=2',
                 'productSequence' => [
                     self::PRODUCT_NOT_FREE,
                     self::PRODUCT_NOT_FREE_REDUCED_TAX,
                     self::PRODUCT_NOT_FREE,
                 ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
+                'withCoupon' => true,
+                'couponScenario' => [
                     'scenario' => self::COUPON_PERCENTAGE_FULL,
                     'products' => [
                         self::PRODUCT_NOT_FREE,
                     ],
                 ],
-                'checkOrder'      => false,
+                'checkOrder' => false,
             ],
             // [
             //     'name'            => 'check percentage coupon to zero applied to two products',
@@ -471,8 +573,8 @@ class CartRuleCest
     }
 
     /**
-     * @param \UnitTester          $I
-     * @param \Codeception\Example $scenario
+     * @param  \UnitTester  $I
+     * @param  \Codeception\Example  $scenario
      *
      * @dataProvider getCartWithCouponScenarios
      * @group        slow_unit
@@ -485,7 +587,9 @@ class CartRuleCest
         config(['app.default_country' => 'DE']);
 
         $customer = $I->have(Customer::class);
-        auth()->guard('customer')->loginUsingId($customer->id);
+        auth()
+            ->guard('customer')
+            ->loginUsingId($customer->id);
         Event::dispatch('customer.after.login', $customer['email']);
 
         $this->sessionToken = $faker->uuid;
@@ -501,9 +605,9 @@ class CartRuleCest
 
         foreach ($scenario['productSequence'] as $productIndex) {
             $data = [
-                '_token'     => session('_token'),
+                '_token' => session('_token'),
                 'product_id' => $this->products[$productIndex]->id,
-                'quantity'   => 1,
+                'quantity' => 1,
             ];
 
             cart()->addProduct($this->products[$productIndex]->id, $data);
@@ -512,7 +616,9 @@ class CartRuleCest
         if ($scenario['withCoupon']) {
             $expectedCartCoupon = $cartRuleWithCoupon->coupon->code;
             $I->comment('I try to use coupon code ' . $expectedCartCoupon);
-            cart()->setCouponCode($expectedCartCoupon)->collectTotals();
+            cart()
+                ->setCouponCode($expectedCartCoupon)
+                ->collectTotals();
         } else {
             $I->comment('I have no coupon');
             $expectedCartCoupon = null;
@@ -525,7 +631,11 @@ class CartRuleCest
         $expectedCartItems = $this->checkMaxDiscount($expectedCartItems);
 
         foreach ($expectedCartItems as $expectedCartItem) {
-            $I->seeRecord('cart_items', $expectedCartItem);
+            /**
+             * @var $expectedCartItem \Tests\Unit\CartRule\expectedCartItem
+             */
+
+            $I->seeRecord('cart_items', $expectedCartItem->toArray());
         }
 
         $expectedCart = $this->getExpectedCart($cart->id, $expectedCartItems, $cartRuleWithCoupon);
@@ -536,33 +646,33 @@ class CartRuleCest
 
             $customerAddress = $I->have(CustomerAddress::class, [
                 'first_name' => $customer->first_name,
-                'last_name'  => $customer->last_name,
-                'country'    => 'DE',
+                'last_name' => $customer->last_name,
+                'country' => 'DE',
             ]);
 
             $billing = [
-                'address1'         => $customerAddress->address1,
+                'address1' => $customerAddress->address1,
                 'use_for_shipping' => true,
-                'first_name'       => $customerAddress->first_name,
-                'last_name'        => $customerAddress->last_name,
-                'email'            => $customer->email,
-                'company_name'     => $customerAddress->company_name,
-                'city'             => $customerAddress->city,
-                'postcode'         => $customerAddress->postcode,
-                'country'          => $customerAddress->country,
-                'state'            => $customerAddress->state,
-                'phone'            => $customerAddress->phone,
+                'first_name' => $customerAddress->first_name,
+                'last_name' => $customerAddress->last_name,
+                'email' => $customer->email,
+                'company_name' => $customerAddress->company_name,
+                'city' => $customerAddress->city,
+                'postcode' => $customerAddress->postcode,
+                'country' => $customerAddress->country,
+                'state' => $customerAddress->state,
+                'phone' => $customerAddress->phone,
             ];
 
             $shipping = [
-                'address1'   => '',
+                'address1' => '',
                 'first_name' => $customerAddress->first_name,
-                'last_name'  => $customerAddress->last_name,
-                'email'      => $customer->email,
+                'last_name' => $customerAddress->last_name,
+                'email' => $customer->email,
             ];
 
             cart()->saveCustomerAddress([
-                'billing'  => $billing,
+                'billing' => $billing,
                 'shipping' => $shipping,
             ]);
 
@@ -571,15 +681,16 @@ class CartRuleCest
             $I->assertFalse(cart()->hasError());
             $orderItemRepository = new OrderItemRepository(app());
             $downloadableLinkRepository = new ProductDownloadableLinkRepository(app());
-            $downloadableLinkPurchasedRepository =
-                new DownloadableLinkPurchasedRepository($downloadableLinkRepository, app());
+            $downloadableLinkPurchasedRepository = new DownloadableLinkPurchasedRepository($downloadableLinkRepository, app());
             $orderRepository = new OrderRepository($orderItemRepository, $downloadableLinkPurchasedRepository, app());
 
             $orderRepository->create(cart()->prepareDataForOrder());
             $expectedOrder = new expectedOrder($expectedCart, $customer, $cart->id);
-            $I->seeRecord('orders', $expectedOrder);
+            $I->seeRecord('orders', $expectedOrder->toArray());
 
-            auth()->guard('customer')->logout();
+            auth()
+                ->guard('customer')
+                ->logout();
         }
     }
 
@@ -591,79 +702,87 @@ class CartRuleCest
 
         $customer = $I->have(Customer::class);
 
-        auth()->guard('customer')->loginUsingId($customer->id);
+        auth()
+            ->guard('customer')
+            ->loginUsingId($customer->id);
         Event::dispatch('customer.after.login', $customer['email']);
 
         $this->sessionToken = $faker->uuid;
         session(['_token' => $this->sessionToken]);
 
         $tax = $I->have(TaxRate::class, [
-            'country'  => 'DE',
+            'country' => 'DE',
             'tax_rate' => 19.0,
         ]);
 
         $taxCategorie = $I->have(TaxCategory::class);
 
         $I->have(TaxMap::class, [
-            'tax_rate_id'     => $tax->id,
+            'tax_rate_id' => $tax->id,
             'tax_category_id' => $taxCategorie->id,
         ]);
 
         $productConfig = [
             'attributeValues' => [
-                'price'           => 23.92,
+                'price' => 23.92,
                 'tax_category_id' => $taxCategorie->id,
             ],
         ];
         $product = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $productConfig);
 
         $ruleConfig = [
-            'action_type'     => self::ACTION_TYPE_PERCENTAGE,
+            'action_type' => self::ACTION_TYPE_PERCENTAGE,
             'discount_amount' => 100,
-            'conditions'      => [
+            'conditions' => [
                 [
-                    'attribute'      => 'product|sku',
-                    'value'          => $product->sku,
-                    'operator'       => '==',
+                    'attribute' => 'product|sku',
+                    'value' => $product->sku,
+                    'operator' => '==',
                     'attribute_type' => 'text',
                 ],
             ],
         ];
         $cartRule = $I->have(CartRule::class, $ruleConfig);
 
-        DB::table('cart_rule_channels')->insert([
-            'cart_rule_id' => $cartRule->id,
-            'channel_id'   => core()->getCurrentChannel()->id,
-        ]);
+        DB::table('cart_rule_channels')
+          ->insert([
+              'cart_rule_id' => $cartRule->id,
+              'channel_id' => core()->getCurrentChannel()->id,
+          ]);
 
         $guestCustomerGroup = $I->grabRecord('customer_groups', ['code' => 'guest']);
-        DB::table('cart_rule_customer_groups')->insert([
-            'cart_rule_id'      => $cartRule->id,
-            'customer_group_id' => $guestCustomerGroup['id'],
-        ]);
+        DB::table('cart_rule_customer_groups')
+          ->insert([
+              'cart_rule_id' => $cartRule->id,
+              'customer_group_id' => $guestCustomerGroup['id'],
+          ]);
 
         $generalCustomerGroup = $I->grabRecord('customer_groups', ['code' => 'general']);
-        DB::table('cart_rule_customer_groups')->insert([
-            'cart_rule_id'      => $cartRule->id,
-            'customer_group_id' => $generalCustomerGroup['id'],
-        ]);
+        DB::table('cart_rule_customer_groups')
+          ->insert([
+              'cart_rule_id' => $cartRule->id,
+              'customer_group_id' => $generalCustomerGroup['id'],
+          ]);
 
         $coupon = $I->have(CartRuleCoupon::class, [
-            'code'         => 'AWESOME',
+            'code' => 'AWESOME',
             'cart_rule_id' => $cartRule->id,
         ]);
 
 
         $data = [
-            '_token'            => session('_token'),
-            'product_id'        => $product->id,
-            'quantity'          => 1,
+            '_token' => session('_token'),
+            'product_id' => $product->id,
+            'quantity' => 1,
         ];
         cart()->addProduct($product->id, $data);
-        cart()->setCouponCode('AWESOME')->collectTotals();
+        cart()
+            ->setCouponCode('AWESOME')
+            ->collectTotals();
 
         $cart = cart()->getCart();
-        $cartItem = $cart->items()->first();
+        $cartItem = $cart->items()
+                         ->first();
 
         $I->assertEquals('AWESOME', $cartItem['coupon_code']);
         $I->assertEquals(23.92, $cartItem['price']);
@@ -680,9 +799,9 @@ class CartRuleCest
     }
 
     /**
-     * @param \Codeception\Example                    $scenario
-     * @param \Tests\Unit\Category\cartRuleWithCoupon $cartRuleWithCoupon
-     * @param int                                     $cartID
+     * @param  \Codeception\Example  $scenario
+     * @param  \Tests\Unit\Category\cartRuleWithCoupon  $cartRuleWithCoupon
+     * @param  int  $cartID
      *
      * @return array
      */
@@ -691,18 +810,10 @@ class CartRuleCest
         $cartItems = [];
 
         foreach ($scenario['productSequence'] as $key => $item) {
-            $pos = $this->array_find(
-                'product_id',
-                $this->products[$scenario['productSequence'][$key]]->id,
-                $cartItems
-            );
+            $pos = $this->array_find('product_id', $this->products[$scenario['productSequence'][$key]]->id, $cartItems);
 
             if ($pos === null) {
-                $cartItem = new expectedCartItem(
-                    $cartID,
-                    $this->products[$scenario['productSequence'][$key]]->id
-                );
-
+                $cartItem = new expectedCartItem($cartID, $this->products[$scenario['productSequence'][$key]]->id);
             } else {
                 $cartItem = $cartItems[$pos];
                 $cartItem->quantity++;
@@ -737,12 +848,7 @@ class CartRuleCest
                     case self::COUPON_FIXED:
                         foreach ($scenario['couponScenario']['products'] as $couponItem) {
                             if ($item === $couponItem) {
-                                $cartItem->calcFixedDiscountAmounts(
-                                    self::DISCOUNT_AMOUNT_FIX,
-                                    self::DISCOUNT_AMOUNT_FIX,
-                                    $cartRuleWithCoupon->coupon->code,
-                                    $cartRuleWithCoupon->cartRule->id
-                                );
+                                $cartItem->calcFixedDiscountAmounts(self::DISCOUNT_AMOUNT_FIX, self::DISCOUNT_AMOUNT_FIX, $cartRuleWithCoupon->coupon->code, $cartRuleWithCoupon->cartRule->id);
                                 continue;
                             }
                         }
@@ -751,12 +857,7 @@ class CartRuleCest
                     case self::COUPON_FIXED_FULL:
                         foreach ($scenario['couponScenario']['products'] as $couponItem) {
                             if ($item === $couponItem) {
-                                $cartItem->calcFixedDiscountAmounts(
-                                    self::DISCOUNT_AMOUNT_FIX_FULL,
-                                    self::DISCOUNT_AMOUNT_FIX_FULL,
-                                    $cartRuleWithCoupon->coupon->code,
-                                    $cartRuleWithCoupon->cartRule->id
-                                );
+                                $cartItem->calcFixedDiscountAmounts(self::DISCOUNT_AMOUNT_FIX_FULL, self::DISCOUNT_AMOUNT_FIX_FULL, $cartRuleWithCoupon->coupon->code, $cartRuleWithCoupon->cartRule->id);
                                 continue;
                             }
                         }
@@ -765,11 +866,7 @@ class CartRuleCest
                     case self::COUPON_PERCENTAGE:
                         foreach ($scenario['couponScenario']['products'] as $couponItem) {
                             if ($item === $couponItem) {
-                                $cartItem->calcPercentageDiscountAmounts(
-                                    self::DISCOUNT_AMOUNT_PERCENT,
-                                    $cartRuleWithCoupon->coupon->code,
-                                    $cartRuleWithCoupon->cartRule->id
-                                );
+                                $cartItem->calcPercentageDiscountAmounts(self::DISCOUNT_AMOUNT_PERCENT, $cartRuleWithCoupon->coupon->code, $cartRuleWithCoupon->cartRule->id);
                                 continue;
                             }
                         }
@@ -778,11 +875,7 @@ class CartRuleCest
                     case self::COUPON_PERCENTAGE_FULL:
                         foreach ($scenario['couponScenario']['products'] as $couponItem) {
                             if ($item === $couponItem) {
-                                $cartItem->calcPercentageDiscountAmounts(
-                                    100.0,
-                                    $cartRuleWithCoupon->coupon->code,
-                                    $cartRuleWithCoupon->cartRule->id
-                                );
+                                $cartItem->calcPercentageDiscountAmounts(100.0, $cartRuleWithCoupon->coupon->code, $cartRuleWithCoupon->cartRule->id);
                                 continue;
                             }
                         }
@@ -792,7 +885,6 @@ class CartRuleCest
 
             if ($pos === null) {
                 $cartItems[] = $cartItem;
-
             } else {
                 $cartItems[$pos] = $cartItem;
             }
@@ -809,7 +901,7 @@ class CartRuleCest
     private function calcTotals(array $cartItems): array
     {
         $result = [
-            'subTotal'     => 0.0,
+            'subTotal' => 0.0,
             'baseSubTotal' => 0.0,
         ];
         foreach ($cartItems as $expectedCartItem) {
@@ -832,16 +924,10 @@ class CartRuleCest
         // split coupon amount to cart items
         $length = count($cartItems) - 1;
         for ($i = 0; $i < $length; $i++) {
-            $cartItems[$i]->discount_amount = round(
-                self::DISCOUNT_AMOUNT_CART * $cartItems[$i]->total / $totals['subTotal'],
-                expectedCartItem::ITEM_DISCOUNT_AMOUNT_PRECISION
-            );
+            $cartItems[$i]->discount_amount = round(self::DISCOUNT_AMOUNT_CART * $cartItems[$i]->total / $totals['subTotal'], expectedCartItem::ITEM_DISCOUNT_AMOUNT_PRECISION);
             $discountAmount -= $cartItems[$i]->discount_amount;
 
-            $cartItems[$i]->base_discount_amount = round(
-                self::DISCOUNT_AMOUNT_CART * $cartItems[$i]->base_total / $totals['baseSubTotal'],
-                expectedCartItem::ITEM_DISCOUNT_AMOUNT_PRECISION
-            );
+            $cartItems[$i]->base_discount_amount = round(self::DISCOUNT_AMOUNT_CART * $cartItems[$i]->base_total / $totals['baseSubTotal'], expectedCartItem::ITEM_DISCOUNT_AMOUNT_PRECISION);
             $baseDiscountAmount -= $cartItems[$i]->discount_amount;
 
             $cartItems[$i]->coupon_code = $cartRuleWithCoupon->coupon->code;
@@ -858,21 +944,19 @@ class CartRuleCest
     }
 
     /**
-     * @param array $expectedCartItems
+     * @param  array  $expectedCartItems
      *
      * @return array
      */
     private function checkMaxDiscount(array $expectedCartItems): array
     {
         foreach ($expectedCartItems as $key => $cartItem) {
-            $itemGrandTotal = round($cartItem->total + $cartItem->tax_amount,
-                expectedCartItem::ITEM_DISCOUNT_AMOUNT_PRECISION);
+            $itemGrandTotal = round($cartItem->total + $cartItem->tax_amount, expectedCartItem::ITEM_DISCOUNT_AMOUNT_PRECISION);
             if ($cartItem->discount_amount > $itemGrandTotal) {
                 $expectedCartItems[$key]->discount_amount = $itemGrandTotal;
             }
 
-            $itemBaseGrandTotal = round($cartItem->base_total + $cartItem->base_tax_amount,
-                expectedCartItem::ITEM_DISCOUNT_AMOUNT_PRECISION);
+            $itemBaseGrandTotal = round($cartItem->base_total + $cartItem->base_tax_amount, expectedCartItem::ITEM_DISCOUNT_AMOUNT_PRECISION);
             if ($cartItem->base_discount_amount > $itemBaseGrandTotal) {
                 $expectedCartItems[$key]->base_discount_amount = $itemBaseGrandTotal;
             }
@@ -882,25 +966,21 @@ class CartRuleCest
     }
 
     /**
-     * @param int                                     $cartId
-     * @param array                                   $expectedCartItems
+     * @param  int  $cartId
+     * @param  array  $expectedCartItems
      *
-     * @param \Tests\Unit\Category\cartRuleWithCoupon $cartRuleWithCoupon
+     * @param  \Tests\Unit\Category\cartRuleWithCoupon  $cartRuleWithCoupon
      *
      * @return \Tests\Unit\Category\expectedCart
      */
     private function getExpectedCart(int $cartId, array $expectedCartItems, ?cartRuleWithCoupon $cartRuleWithCoupon): expectedCart
     {
-        $cart = new expectedCart(
-            $cartId,
-            auth()->guard('customer')->user()->id
-        );
+        $cart = new expectedCart($cartId, auth()
+            ->guard('customer')
+            ->user()->id);
 
         if ($cartRuleWithCoupon) {
-            $cart->applyCoupon(
-                $cartRuleWithCoupon->cartRule->id,
-                $cartRuleWithCoupon->coupon->code
-            );
+            $cart->applyCoupon($cartRuleWithCoupon->cartRule->id, $cartRuleWithCoupon->coupon->code);
         }
 
         foreach ($expectedCartItems as $cartItem) {
@@ -922,7 +1002,7 @@ class CartRuleCest
     }
 
     /**
-     * @param \UnitTester $I
+     * @param  \UnitTester  $I
      *
      * @return array
      */
@@ -932,14 +1012,14 @@ class CartRuleCest
         $country = strtoupper(Config::get('app.default_country')) ?? 'DE';
         foreach ($this->getTaxRateSpecifications() as $taxSpec => $taxRate) {
             $tax = $I->have(TaxRate::class, [
-                'country'  => $country,
+                'country' => $country,
                 'tax_rate' => $taxRate,
             ]);
 
             $taxCategorie = $I->have(TaxCategory::class);
 
             $I->have(TaxMap::class, [
-                'tax_rate_id'     => $tax->id,
+                'tax_rate_id' => $tax->id,
                 'tax_category_id' => $taxCategorie->id,
             ]);
 
@@ -950,9 +1030,9 @@ class CartRuleCest
     }
 
     /**
-     * @param \UnitTester $I
-     * @param array       $scenario
-     * @param array       $taxCategories
+     * @param  \UnitTester  $I
+     * @param  array  $scenario
+     * @param  array  $taxCategories
      *
      * @return array
      * @throws \Exception
@@ -971,8 +1051,8 @@ class CartRuleCest
     }
 
     /**
-     * @param \UnitTester $I
-     * @param array       $couponConfig
+     * @param  \UnitTester  $I
+     * @param  array  $couponConfig
      *
      * @return \Tests\Unit\Category\cartRuleWithCoupon
      */
@@ -981,44 +1061,39 @@ class CartRuleCest
         $faker = Factory::create();
 
         $couponSpecifications = $this->getCouponSpecifications();
-        $ruleConfig = $this->makeRuleConfig(
-            $couponSpecifications[$couponConfig['scenario']],
-            $this->products,
-            $couponConfig['products']
-        );
+        $ruleConfig = $this->makeRuleConfig($couponSpecifications[$couponConfig['scenario']], $this->products, $couponConfig['products']);
         $cartRule = $I->have(CartRule::class, $ruleConfig);
 
-        DB::table('cart_rule_channels')->insert([
-            'cart_rule_id' => $cartRule->id,
-            'channel_id'   => core()->getCurrentChannel()->id,
-        ]);
+        DB::table('cart_rule_channels')
+          ->insert([
+              'cart_rule_id' => $cartRule->id,
+              'channel_id' => core()->getCurrentChannel()->id,
+          ]);
 
         $guestCustomerGroup = $I->grabRecord('customer_groups', ['code' => 'guest']);
-        DB::table('cart_rule_customer_groups')->insert([
-            'cart_rule_id'      => $cartRule->id,
-            'customer_group_id' => $guestCustomerGroup['id'],
-        ]);
+        DB::table('cart_rule_customer_groups')
+          ->insert([
+              'cart_rule_id' => $cartRule->id,
+              'customer_group_id' => $guestCustomerGroup['id'],
+          ]);
 
         $generalCustomerGroup = $I->grabRecord('customer_groups', ['code' => 'general']);
-        DB::table('cart_rule_customer_groups')->insert([
-            'cart_rule_id'      => $cartRule->id,
-            'customer_group_id' => $generalCustomerGroup['id'],
-        ]);
+        DB::table('cart_rule_customer_groups')
+          ->insert([
+              'cart_rule_id' => $cartRule->id,
+              'customer_group_id' => $generalCustomerGroup['id'],
+          ]);
 
         $coupon = $I->have(CartRuleCoupon::class, [
             'cart_rule_id' => $cartRule->id,
         ]);
 
-        return new cartRuleWithCoupon(
-            $cartRule,
-            $coupon
-        );
-
+        return new cartRuleWithCoupon($cartRule, $coupon);
     }
 
     /**
-     * @param array $productSpec
-     * @param array $taxCategories
+     * @param  array  $productSpec
+     * @param  array  $taxCategories
      *
      * @return array
      */
@@ -1028,8 +1103,8 @@ class CartRuleCest
             'productInventory' => [
                 'qty' => 100,
             ],
-            'attributeValues'  => [
-                'price'           => 0.0,
+            'attributeValues' => [
+                'price' => 0.0,
                 'tax_category_id' => $taxCategories[self::TAX_CATEGORY],
             ],
         ];
@@ -1052,9 +1127,9 @@ class CartRuleCest
     }
 
     /**
-     * @param array $ruleSpec
-     * @param array $products
-     * @param array $couponableProducts
+     * @param  array  $ruleSpec
+     * @param  array  $products
+     * @param  array  $couponableProducts
      *
      * @return array
      */
@@ -1062,17 +1137,17 @@ class CartRuleCest
     {
         foreach ($couponableProducts as $item) {
             $conditions[] = [
-                'value'          => $products[$item]->sku,
-                'operator'       => '==',
-                'attribute'      => 'product|sku',
+                'value' => $products[$item]->sku,
+                'operator' => '==',
+                'attribute' => 'product|sku',
                 'attribute_type' => 'text',
             ];
         }
 
         $result = [
-            'action_type'     => $ruleSpec['actionType'],
+            'action_type' => $ruleSpec['actionType'],
             'discount_amount' => $ruleSpec['discountAmount'],
-            'conditions'      => $conditions ?? null,
+            'conditions' => $conditions ?? null,
         ];
 
         return $result;
@@ -1086,21 +1161,21 @@ class CartRuleCest
         return [
             [
                 'productScenario' => self::PRODUCT_FREE,
-                'productType'     => Laravel5Helper::SIMPLE_PRODUCT,
-                'freeOfCharge'    => true,
-                'reducedTax'      => false,
+                'productType' => Laravel5Helper::SIMPLE_PRODUCT,
+                'freeOfCharge' => true,
+                'reducedTax' => false,
             ],
             [
                 'productScenario' => self::PRODUCT_NOT_FREE,
-                'productType'     => Laravel5Helper::SIMPLE_PRODUCT,
-                'freeOfCharge'    => false,
-                'reducedTax'      => false,
+                'productType' => Laravel5Helper::SIMPLE_PRODUCT,
+                'freeOfCharge' => false,
+                'reducedTax' => false,
             ],
             [
                 'productScenario' => self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                'productType'     => Laravel5Helper::SIMPLE_PRODUCT,
-                'freeOfCharge'    => false,
-                'reducedTax'      => true,
+                'productType' => Laravel5Helper::SIMPLE_PRODUCT,
+                'freeOfCharge' => false,
+                'reducedTax' => true,
             ],
         ];
     }
@@ -1113,27 +1188,27 @@ class CartRuleCest
         return [
             [
                 'couponScenario' => self::COUPON_FIXED,
-                'actionType'     => self::ACTION_TYPE_FIXED,
+                'actionType' => self::ACTION_TYPE_FIXED,
                 'discountAmount' => self::DISCOUNT_AMOUNT_FIX,
             ],
             [
                 'couponScenario' => self::COUPON_FIXED_FULL,
-                'actionType'     => self::ACTION_TYPE_FIXED,
+                'actionType' => self::ACTION_TYPE_FIXED,
                 'discountAmount' => self::DISCOUNT_AMOUNT_FIX_FULL,
             ],
             [
                 'couponScenario' => self::COUPON_PERCENTAGE,
-                'actionType'     => self::ACTION_TYPE_PERCENTAGE,
+                'actionType' => self::ACTION_TYPE_PERCENTAGE,
                 'discountAmount' => self::DISCOUNT_AMOUNT_PERCENT,
             ],
             [
                 'couponScenario' => self::COUPON_PERCENTAGE_FULL,
-                'actionType'     => self::ACTION_TYPE_PERCENTAGE,
+                'actionType' => self::ACTION_TYPE_PERCENTAGE,
                 'discountAmount' => 100.0,
             ],
             [
                 'couponScenario' => self::COUPON_FIXED_CART,
-                'actionType'     => self::ACTION_TYPE_CART_FIXED,
+                'actionType' => self::ACTION_TYPE_CART_FIXED,
                 'discountAmount' => self::DISCOUNT_AMOUNT_CART,
             ],
         ];
@@ -1145,15 +1220,15 @@ class CartRuleCest
     private function getTaxRateSpecifications(): array
     {
         return [
-            self::TAX_CATEGORY         => self::TAX_RATE,
+            self::TAX_CATEGORY => self::TAX_RATE,
             self::TAX_REDUCED_CATEGORY => self::REDUCED_TAX_RATE,
         ];
     }
 
     /**
-     * @param string $param
+     * @param  string  $param
      * @param        $needleValue
-     * @param array  $data
+     * @param  array  $data
      *
      * @return int|null
      */
@@ -1167,6 +1242,4 @@ class CartRuleCest
 
         return null;
     }
-
-
 }

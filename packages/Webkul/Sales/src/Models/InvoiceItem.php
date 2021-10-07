@@ -2,12 +2,25 @@
 
 namespace Webkul\Sales\Models;
 
+use Webkul\Product\Type\AbstractType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Sales\Database\Factories\InvoiceItemFactory;
 use Webkul\Sales\Contracts\InvoiceItem as InvoiceItemContract;
 
 class InvoiceItem extends Model implements InvoiceItemContract
 {
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    use HasFactory;
+
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'additional' => 'array',
@@ -18,15 +31,15 @@ class InvoiceItem extends Model implements InvoiceItemContract
      *
      * @return AbstractType
      */
-    public function getTypeInstance()
+    public function getTypeInstance(): AbstractType
     {
         return $this->order_item->getTypeInstance();
     }
-    
+
     /**
      * Get the invoice record associated with the invoice item.
      */
-    public function invoice()
+    public function invoice(): BelongsTo
     {
         return $this->belongsTo(InvoiceProxy::modelClass());
     }
@@ -34,7 +47,7 @@ class InvoiceItem extends Model implements InvoiceItemContract
     /**
      * Get the order item record associated with the invoice item.
      */
-    public function order_item()
+    public function order_item(): BelongsTo
     {
         return $this->belongsTo(OrderItemProxy::modelClass());
     }
@@ -42,7 +55,7 @@ class InvoiceItem extends Model implements InvoiceItemContract
     /**
      * Get the invoice record associated with the invoice item.
      */
-    public function product()
+    public function product(): MorphTo
     {
         return $this->morphTo();
     }
@@ -50,7 +63,7 @@ class InvoiceItem extends Model implements InvoiceItemContract
     /**
      * Get the child item record associated with the invoice item.
      */
-    public function child()
+    public function child(): HasOne
     {
         return $this->hasOne(InvoiceItemProxy::modelClass(), 'parent_id');
     }
@@ -58,7 +71,7 @@ class InvoiceItem extends Model implements InvoiceItemContract
     /**
      * Get the children items.
      */
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id');
     }
@@ -69,5 +82,15 @@ class InvoiceItem extends Model implements InvoiceItemContract
     public function getTypeAttribute()
     {
         return $this->order_item->type;
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return InvoiceItemFactory
+     */
+    protected static function newFactory(): InvoiceItemFactory
+    {
+        return InvoiceItemFactory::new();
     }
 }

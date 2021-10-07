@@ -5,6 +5,9 @@ namespace Webkul\Category\Models;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Category\Database\Factories\CategoryFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webkul\Category\Contracts\Category as CategoryContract;
 use Webkul\Attribute\Models\AttributeProxy;
@@ -20,7 +23,7 @@ use Webkul\Product\Models\ProductProxy;
  */
 class Category extends TranslatableModel implements CategoryContract
 {
-    use NodeTrait;
+    use NodeTrait, HasFactory;
 
     public $translatedAttributes = [
         'name',
@@ -47,8 +50,9 @@ class Category extends TranslatableModel implements CategoryContract
      */
     public function image_url()
     {
-        if (! $this->image)
+        if (!$this->image) {
             return;
+        }
 
         return Storage::url($this->image);
     }
@@ -61,28 +65,45 @@ class Category extends TranslatableModel implements CategoryContract
         return $this->image_url();
     }
 
-     /**
+    /**
      * The filterable attributes that belong to the category.
      */
-    public function filterableAttributes()
+    public function filterableAttributes(): BelongsToMany
     {
-        return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')->with(['options' => function($query) {
-            $query->orderBy('sort_order');
-        }]);
+        return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')
+                    ->with([
+                        'options' => function ($query) {
+                            $query->orderBy('sort_order');
+                        },
+                    ]);
     }
 
     /**
      * Getting the root category of a category
      *
-     * @return Category
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object
      */
-    public function getRootCategory(): Category
+    public function getRootCategory()
     {
-        return Category::where([
-            ['parent_id', '=', null],
-            ['_lft', '<=', $this->_lft],
-            ['_rgt', '>=', $this->_rgt],
-        ])->first();
+        return self::query()
+                   ->where([
+                       [
+                           'parent_id',
+                           '=',
+                           null,
+                       ],
+                       [
+                           '_lft',
+                           '<=',
+                           $this->_lft,
+                       ],
+                       [
+                           '_rgt',
+                           '>=',
+                           $this->_rgt,
+                       ],
+                   ])
+                   ->first();
     }
 
     /**
@@ -97,7 +118,7 @@ class Category extends TranslatableModel implements CategoryContract
         $categories = [$category];
 
         while (isset($category->parent)) {
-            $category = $category->parent;
+            $category     = $category->parent;
             $categories[] = $category;
         }
 
@@ -109,18 +130,19 @@ class Category extends TranslatableModel implements CategoryContract
      * will search in root category by default
      * is used to minimize the numbers of sql queries for it only uses the already cached tree
      *
-     * @param Category[] $categoryTree
+     * @param  Category[]  $categoryTree
+     *
      * @return Category
      */
     public function findInTree($categoryTree = null): Category
     {
-        if (! $categoryTree) {
+        if (!$categoryTree) {
             $categoryTree = app(CategoryRepository::class)->getVisibleCategoryTree($this->getRootCategory()->id);
         }
 
         $category = $categoryTree->first();
 
-        if (! $category) {
+        if (!$category) {
             throw new NotFoundHttpException('category not found in tree');
         }
 
@@ -134,8 +156,18 @@ class Category extends TranslatableModel implements CategoryContract
     /**
      * The products that belong to the category.
      */
-    public function products()
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(ProductProxy::modelClass(), 'product_categories');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return CategoryFactory
+     */
+    protected static function newFactory(): CategoryFactory
+    {
+        return CategoryFactory::new();
     }
 }
