@@ -70,7 +70,7 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
             'view' => 'admin::users.reset-password.create',
         ])->name('admin.reset-password.create');
 
-        Route::post('/reset-password', [ResetPasswordController::clss, 'store'])->defaults('_config', [
+        Route::post('/reset-password', [ResetPasswordController::class, 'store'])->defaults('_config', [
             'redirect' => 'admin.dashboard.index',
         ])->name('admin.reset-password.store');
 
