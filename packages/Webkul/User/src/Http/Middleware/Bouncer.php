@@ -2,51 +2,72 @@
 
 namespace Webkul\User\Http\Middleware;
 
-use Closure;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class Bouncer
 {
     /**
-    * Handle an incoming request.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \Closure  $next
-    * @param  string|null  $guard
-    * @return mixed
-    */
-    public function handle($request, Closure $next, $guard = 'admin')
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  string|null  $guard
+     * @return mixed
+     */
+    public function handle($request, \Closure $next, $guard = 'admin')
     {
-        if (! Auth::guard($guard)->check()) {
+        if (! auth()->guard($guard)->check()) {
             return redirect()->route('admin.session.create');
         }
 
-        $this->checkIfAuthorized($request);
+        /**
+         * If somehow the user deleted all permissions, then it should be
+         * auto logged out and need to contact the administrator again.
+         */
+        if ($this->isPermissionsEmpty()) {
+            auth()->guard('admin')->logout();
+
+            return redirect()->route('admin.session.create');
+        }
 
         return $next($request);
     }
 
     /**
-    * Handle an incoming request.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return mixed
-    */
-    public function checkIfAuthorized($request)
+     * Check for user, if they have empty permissions or not except admin.
+     *
+     * @return bool
+     */
+    public function isPermissionsEmpty()
     {
         if (! $role = auth()->guard('admin')->user()->role) {
             abort(401, 'This action is unauthorized.');
         }
 
-        if ($role->permission_type == 'all') {
-            return;
-        } else {
-            $acl = app('acl');
+        if ($role->permission_type === 'all') {
+            return false;
+        }
 
-            if ($acl && isset($acl->roles[Route::currentRouteName()])) {
-                bouncer()->allow($acl->roles[Route::currentRouteName()]);
-            }
+        if ($role->permission_type !== 'all' && empty($role->permissions)) {
+            return true;
+        }
+
+        $this->checkIfAuthorized();
+
+        return false;
+    }
+
+    /**
+     * Check authorization.
+     *
+     * @return null
+     */
+    public function checkIfAuthorized()
+    {
+        $acl = app('acl');
+
+        if ($acl && isset($acl->roles[Route::currentRouteName()])) {
+            bouncer()->allow($acl->roles[Route::currentRouteName()]);
         }
     }
 }
