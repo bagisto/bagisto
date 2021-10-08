@@ -111,7 +111,7 @@
                             <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
                                 <label>{{ __('admin::app.catalog.categories.image') }}</label>
 
-                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false"  :images='"{{ $category->image_url }}"'></image-wrapper>
+                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false" :images='"{{ $category->image_url }}"'></image-wrapper>
 
                                 <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                                     @foreach ($errors->get('image.*') as $key => $message)
@@ -146,7 +146,8 @@
 
                     <accordian :title="'{{ __('admin::app.catalog.categories.filterable-attributes') }}'" :active="true">
                         <div slot="body">
-                            <?php $selectedaAtributes = old('attributes') ?? $category->filterableAttributes->pluck('id')->toArray() ?>
+                            <?php $selectedaAtributes = old('attributes') ?? $category->filterableAttributes->pluck('id')
+                                                                                                            ->toArray() ?>
 
                             <div class="control-group" :class="[errors.has('attributes[]') ? 'has-error' : '']">
                                 <label for="attributes" class="required">{{ __('admin::app.catalog.categories.attributes') }}</label>
@@ -183,7 +184,7 @@
                                 <label for="slug" class="required">{{ __('admin::app.catalog.categories.slug') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
-                                <input type="text" v-validate="'required'" class="control" id="slug" name="{{$locale}}[slug]" value="{{ old($locale)['slug'] ?? ($category->translate($locale)['slug'] ?? '') }}" data-vv-as="&quot;{{ __('admin::app.catalog.categories.slug') }}&quot;" v-slugify/>
+                                <input data-slug-args="category_translations:{{ $category->id }}:category_id" type="text" v-validate="'required'" class="control" id="slug" name="{{$locale}}[slug]" value="{{ old($locale)['slug'] ?? ($category->translate($locale)['slug'] ?? '') }}" data-vv-as="&quot;{{ __('admin::app.catalog.categories.slug') }}&quot;" v-slugify/>
                                 <span class="control-error" v-if="errors.has('{{$locale}}[slug]')">@{{ errors.first('{!!$locale!!}[slug]') }}</span>
                             </div>
 
@@ -231,7 +232,7 @@
 
             inject: ['$validator'],
 
-            data: function() {
+            data: function () {
                 return {
                     isRequired: true,
                 }

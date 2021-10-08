@@ -97,7 +97,7 @@
                             <div class="control-group" :class="[errors.has('{{$locale}}[url_key]') ? 'has-error' : '']">
                                 <label for="url-key" class="required">{{ __('admin::app.cms.pages.url-key') }}</label>
 
-                                <input type="text" class="control" name="{{$locale}}[url_key]" v-validate="'required'" value="{{ old($locale)['url_key'] ?? ($page->translate($locale)['url_key'] ?? '') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.url-key') }}&quot;">
+                                <input type="text" class="control" name="{{$locale}}[url_key]" v-validate="'required'" value="{{ old($locale)['url_key'] ?? ($page->translate($locale)['url_key'] ?? '') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.url-key') }}&quot;"  v-slugify data-slug-args="cms_page_translations:{{ $page->id }}:id">
 
                                 <span class="control-error" v-if="errors.has('{{$locale}}[url_key]')">@{{ errors.first('{!!$locale!!}[url_key]') }}</span>
                             </div>

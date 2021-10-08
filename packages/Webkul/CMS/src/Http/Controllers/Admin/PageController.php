@@ -5,7 +5,7 @@ namespace Webkul\CMS\Http\Controllers\Admin;
 use Webkul\CMS\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
 
- class PageController extends Controller
+class PageController extends Controller
 {
     /**
      * To hold the request variables from route file
@@ -25,6 +25,7 @@ use Webkul\CMS\Repositories\CmsRepository;
      * Create a new controller instance.
      *
      * @param  \Webkul\CMS\Repositories\CmsRepository  $cmsRepository
+     *
      * @return void
      */
     public function __construct(CmsRepository $cmsRepository)
@@ -66,9 +67,9 @@ use Webkul\CMS\Repositories\CmsRepository;
         $data = request()->all();
 
         $this->validate(request(), [
-            'url_key'      => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Contracts\Validations\Slug],
-            'page_title'   => 'required',
-            'channels'     => 'required',
+            'url_key' => ['required', 'slug', 'unique_slug:cms_page_translations,url_key'],
+            'page_title' => 'required',
+            'channels' => 'required',
             'html_content' => 'required',
         ]);
 
@@ -83,6 +84,7 @@ use Webkul\CMS\Repositories\CmsRepository;
      * To edit a previously created CMS page
      *
      * @param  int  $id
+     *
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -96,6 +98,7 @@ use Webkul\CMS\Repositories\CmsRepository;
      * To update the previously created CMS page in storage
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update($id)
@@ -103,14 +106,10 @@ use Webkul\CMS\Repositories\CmsRepository;
         $locale = core()->getRequestedLocaleCode();
 
         $this->validate(request(), [
-            $locale . '.url_key'      => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
-                if (! $this->cmsRepository->isUrlKeyUnique($id, $value)) {
-                    $fail(trans('admin::app.response.already-taken', ['name' => 'Page']));
-                }
-            }],
-            $locale . '.page_title'   => 'required',
+            $locale . '.url_key' => ['required', 'slug', 'unique_slug:cms_page_translations,' . $id . ',url_key'],
+            $locale . '.page_title' => 'required',
             $locale . '.html_content' => 'required',
-            'channels'                => 'required',
+            'channels' => 'required',
         ]);
 
         $this->cmsRepository->update(request()->all(), $id);
@@ -124,6 +123,7 @@ use Webkul\CMS\Repositories\CmsRepository;
      * To delete the previously create CMS page
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function delete($id)

@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Models\ProductFlatProxy;
 use Webkul\Category\Models\CategoryTranslationProxy;
+use Webkul\Product\Repositories\ProductFlatRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategoryRepository extends Repository
@@ -119,19 +121,24 @@ class CategoryRepository extends Repository
      * @param  string  $slug
      * @return bool
      */
-    public function isSlugUnique($id, $slug)
+    public function isSlugUnique(int $id, string $slug): bool
     {
-        $exists = CategoryTranslationProxy::modelClass()::where('category_id', '<>', $id)
+        $existsInCategories = CategoryTranslationProxy::modelClass()::where('category_id', '<>', $id)
             ->where('slug', $slug)
             ->limit(1)
             ->select(DB::raw(1))
             ->exists();
 
-        return $exists ? false : true;
+        $existsInProducts = ProductFlatProxy::modelClass()::where('url_key', $slug)
+            ->limit(1)
+            ->select(DB::raw(1))
+            ->exists();
+
+        return ! $existsInCategories && ! $existsInProducts;
     }
 
     /**
-     * Retrive category from slug.
+     * Retrieve category from slug.
      *
      * @param string $slug
      * @return \Webkul\Category\Contracts\Category
@@ -150,7 +157,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Retrive category from slug.
+     * Retrieve category from slug.
      *
      * @param string $slug
      * @return \Webkul\Category\Contracts\Category

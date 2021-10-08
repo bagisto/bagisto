@@ -2,6 +2,7 @@
 
 // Controllers
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Http\Controllers\SlugController;
 use Webkul\Admin\Http\Controllers\ConfigurationController;
 use Webkul\Admin\Http\Controllers\Customer\AddressController;
 use Webkul\Admin\Http\Controllers\Customer\CustomerController;
@@ -80,6 +81,12 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
             Route::get('/logout', [SessionController::class, 'destroy'])->defaults('_config', [
                 'redirect' => 'admin.session.create',
             ])->name('admin.session.destroy');
+
+            /**
+             * Slug validator
+             */
+            Route::post('slug/validate/{slugArgs?}', [SlugController::class,'validateSlug'])
+                 ->name('admin.slug.validateSlug');
 
             /**
              * Tinymce file upload handler.

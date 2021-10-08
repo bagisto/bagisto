@@ -2,8 +2,10 @@
 
 namespace Webkul\Category\Http\Controllers;
 
+use Exception;
 use Webkul\Core\Models\Channel;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Http\RedirectResponse;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
@@ -76,12 +78,12 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(): RedirectResponse
     {
         $this->validate(request(), [
-            'slug'        => ['required', 'unique:category_translations,slug'],
+            'slug'        => ['required', 'slug', 'unique_slug:category_translations,slug'],
             'name'        => 'required',
             'image.*'     => 'mimes:bmp,jpeg,jpg,png,webp',
             'description' => 'required_if:display_mode,==,description_only,products_and_description',
@@ -115,18 +117,15 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update(int $id): RedirectResponse
     {
         $locale = core()->getRequestedLocaleCode();
 
         $this->validate(request(), [
-            $locale . '.slug' => ['required', function ($attribute, $value, $fail) use ($id) {
-                if (! $this->categoryRepository->isSlugUnique($id, $value)) {
-                    $fail(trans('admin::app.response.already-taken', ['name' => 'Category']));
-                }
-            }],
+            $locale . '.slug' => ['required', 'slug', 'unique_slug:category_translations,slug,' . $id . ',category_id'],
             $locale . '.name' => 'required',
             'image.*'         => 'mimes:bmp,jpeg,jpg,png,webp',
         ]);
@@ -161,7 +160,7 @@ class CategoryController extends Controller
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
                 return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
             }
         }
@@ -194,7 +193,7 @@ class CategoryController extends Controller
                         $category->delete();
 
                         Event::dispatch('catalog.category.delete.after', $categoryId);
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
                     }
                 }
