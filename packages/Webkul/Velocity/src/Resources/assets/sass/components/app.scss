@@ -890,6 +890,10 @@
                 border: 1px solid $border-common;
             }
 
+            input[type=search] {
+                padding-left: 35px;
+            }
+
             input:active,
             input:focus,
             textarea:active,
@@ -936,9 +940,9 @@
                             height: 24px;
                             background-image: url('../images/icon-search.svg');
                             position: relative;
-                            float: right;
+                            float: left;
                             top: -32px;
-                            right: 5px;
+                            left: 6px;
                         }
                     }
                 }
