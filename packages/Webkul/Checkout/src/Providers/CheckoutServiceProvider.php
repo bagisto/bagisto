@@ -5,11 +5,10 @@ namespace Webkul\Checkout\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Webkul\Checkout\Facades\Cart;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class CheckoutServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         include __DIR__ . '/../Http/helpers.php';
 
@@ -18,8 +17,6 @@ class CheckoutServiceProvider extends ServiceProvider
         $this->app->register(ModuleServiceProvider::class);
 
         $this->app->register(EventServiceProvider::class);
-
-        $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
     }
 
     /**
@@ -27,7 +24,7 @@ class CheckoutServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->registerFacades();
     }
@@ -37,7 +34,7 @@ class CheckoutServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerFacades()
+    protected function registerFacades(): void
     {
         //to make the cart facade and bind the
         //alias to the class needed to be called.
@@ -50,17 +47,5 @@ class CheckoutServiceProvider extends ServiceProvider
         });
 
         $this->app->bind('cart', 'Webkul\Checkout\Cart');
-    }
-
-    /**
-     * Register factories.
-     *
-     * @param string $path
-     *
-     * @return void
-     */
-    protected function registerEloquentFactoriesFrom($path): void
-    {
-        $this->app->make(EloquentFactory::class)->load($path);
     }
 }

@@ -12,13 +12,13 @@ class AttributeOption extends JsonResource
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id'           => $this->id,
             'admin_name'   => $this->admin_name,
             'label'        => $this->label,
-            'swatch_value' => $this->swatch_value
+            'swatch_value' => $this->swatch_value,
         ];
     }
 }

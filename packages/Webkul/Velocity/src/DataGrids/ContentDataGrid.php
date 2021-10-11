@@ -151,5 +151,16 @@ class ContentDataGrid extends DataGrid
             'label'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
         ]);
+
+        $this->addMassAction([
+            'type'    => 'update',
+            'label'   => trans('admin::app.datagrid.update-status'),
+            'action'  => route('velocity.admin.content.mass-update'),
+            'method'  => 'POST',
+            'options' => [
+                'Active'   => 1,
+                'Inactive' => 0,
+            ],
+        ]);
     }
 }

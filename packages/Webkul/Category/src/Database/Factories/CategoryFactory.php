@@ -1,18 +1,62 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Webkul\Category\Database\Factories;
+
 use Webkul\Category\Models\Category;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Category::class, function (Faker $faker, array $attributes) {
+class CategoryFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Category::class;
 
-    return [
-        'status'    => 1,
-        'position'  => $faker->randomDigit,
-        'parent_id' => 1,
+    /**
+     * @var string[]
+     */
+    protected $states = [
+        'inactive',
+        'rtl',
     ];
-});
 
-$factory->state(Category::class, 'inactive', [
-    'status' => 0,
-]);
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'status' => 1,
+            'position' => $this->faker->randomDigit(),
+            'parent_id' => 1,
+        ];
+    }
+
+    /**
+     *
+     */
+    public function inactive(): CategoryFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => 0,
+            ];
+        });
+    }
+
+    /**
+     * Handle rtl state
+     */
+    public function rtl(): CategoryFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'direction' => 'rtl',
+            ];
+        });
+    }
+}

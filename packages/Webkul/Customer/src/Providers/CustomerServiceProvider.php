@@ -2,10 +2,10 @@
 
 namespace Webkul\Customer\Providers;
 
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Customer\Captcha;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 
 class CustomerServiceProvider extends ServiceProvider
@@ -13,9 +13,10 @@ class CustomerServiceProvider extends ServiceProvider
     /**
      * Bootstrap application services.
      *
+     * @param  \Illuminate\Routing\Router  $router
      * @return void
      */
-    public function boot(Router $router)
+    public function boot(Router $router): void
     {
         $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
@@ -34,13 +35,10 @@ class CustomerServiceProvider extends ServiceProvider
      * Register services.
      *
      * @return void
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function register()
+    public function register(): void
     {
         $this->registerConfig();
-
-        $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
 
         $this->app->singleton('captcha', function ($app) {
             return new Captcha();
@@ -48,27 +46,12 @@ class CustomerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register factories.
-     *
-     * @param  string  $path
-     * @return void
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    protected function registerEloquentFactoriesFrom($path): void
-    {
-        $this->app->make(EloquentFactory::class)->load($path);
-    }
-
-    /**
      * Register package config.
      *
      * @return void
      */
-    protected function registerConfig()
+    protected function registerConfig(): void
     {
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php',
-            'core'
-        );
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/system.php', 'core');
     }
 }

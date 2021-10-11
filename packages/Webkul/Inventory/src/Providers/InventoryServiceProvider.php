@@ -3,7 +3,6 @@
 namespace Webkul\Inventory\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class InventoryServiceProvider extends ServiceProvider
 {
@@ -12,11 +11,9 @@ class InventoryServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
-        $this->app->make(EloquentFactory::class)->load(__DIR__ . '/../Database/Factories');
     }
 
     /**
@@ -24,7 +21,7 @@ class InventoryServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
     }
 }

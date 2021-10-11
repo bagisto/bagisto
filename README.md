@@ -11,6 +11,12 @@
 <a href="#sponsors"><img src="https://opencollective.com/bagisto/sponsors/badge.svg" alt="Sponsors on Open Collective"></a>
 </p>
 
+## Hactoberfest Rules
+- On 4 successful PR merges, Bagisto will provide a T-Shirt, Stickers, Notebook, Pen, and Bagisto Elephant.
+- We have added 'Hactoberfest' label to the issues with difficulty level label.
+- Although we have added 'hactoberfest' topic in our repo, but we will consider only PRs whose issue is labeled with 'Hactoberfest'. Below is the link,
+- [Hacktoberfest Labelled Issues](https://github.com/bagisto/bagisto/issues?q=is%3Aopen+is%3Aissue+label%3AHacktoberfest)
+
 ## Topics
 1. [Introduction](#introduction)
 2. [Documentation](#documentation)

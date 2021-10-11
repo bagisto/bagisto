@@ -2,18 +2,18 @@
 
 namespace Webkul\Product\Database\Factories;
 
-use Webkul\Product\Models\Product;
-use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductDownloadableLink;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Product\Models\ProductDownloadableLinkTranslation;
 
-class ProductAttributeValueFactory extends Factory
+class ProductDownloadableLinkTranslationFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = ProductAttributeValue::class;
+    protected $model = ProductDownloadableLinkTranslation::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +23,9 @@ class ProductAttributeValueFactory extends Factory
     public function definition(): array
     {
         return [
-            //'product_id' => Product::factory(),
             'locale' => 'en',
-            'channel' => 'default',
+            'title' => $this->faker->word,
+            'product_downloadable_link_id' => ProductDownloadableLink::factory(),
         ];
     }
 }

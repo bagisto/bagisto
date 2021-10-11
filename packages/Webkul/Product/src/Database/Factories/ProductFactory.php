@@ -1,29 +1,75 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Webkul\Product\Database\Factories;
 
-use Faker\Generator as Faker;
 use Webkul\Product\Models\Product;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Product::class, function (Faker $faker) {
-    return [
-        'sku'                 => $faker->uuid,
-        'attribute_family_id' => 1,
+class ProductFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Product::class;
+
+    /**
+     * @var string[]
+     */
+    protected $states = [
+        'simple',
+        'virtual',
+        'downloadable',
+        'booking',
     ];
-});
 
-$factory->state(Product::class, 'simple', [
-    'type' => 'simple',
-]);
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'sku' => $this->faker->uuid,
+            'attribute_family_id' => 1,
+        ];
+    }
 
-$factory->state(Product::class, 'virtual', [
-    'type' => 'virtual',
-]);
+    public function simple(): ProductFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => 'simple',
+            ];
+        });
+    }
 
-$factory->state(Product::class, 'downloadable', [
-    'type' => 'downloadable',
-]);
+    public function virtual(): ProductFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => 'virtual',
+            ];
+        });
+    }
 
-$factory->state(Product::class, 'booking', [
-    'type' => 'booking',
-]);
+    public function downloadable(): ProductFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => 'downloadable',
+            ];
+        });
+    }
+
+    public function booking(): ProductFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => 'booking',
+            ];
+        });
+    }
+}

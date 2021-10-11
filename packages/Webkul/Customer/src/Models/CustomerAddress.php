@@ -4,10 +4,14 @@ namespace Webkul\Customer\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Webkul\Core\Models\Address;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Customer\Database\Factories\CustomerAddressFactory;
 use Webkul\Customer\Contracts\CustomerAddress as CustomerAddressContract;
 
 class CustomerAddress extends Address implements CustomerAddressContract
 {
+    use HasFactory;
+
     public const ADDRESS_TYPE = 'customer';
 
     /**
@@ -22,12 +26,22 @@ class CustomerAddress extends Address implements CustomerAddressContract
      *
      * @return void
      */
-    protected static function boot()
+    protected static function boot(): void
     {
         static::addGlobalScope('address_type', static function (Builder $builder) {
             $builder->where('address_type', self::ADDRESS_TYPE);
         });
 
         parent::boot();
+    }
+
+    /**
+     * Create a new factory instance for the model
+     *
+     * @return CustomerAddressFactory
+     */
+    protected static function newFactory(): CustomerAddressFactory
+    {
+        return CustomerAddressFactory::new();
     }
 }
