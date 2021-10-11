@@ -36,6 +36,10 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 'redirect' => 'velocity.admin.content.index'
             ])->name('velocity.admin.content.mass-delete');
 
+            Route::post('/content/masss-update', [ContentController::class, 'massUpdate'])->defaults('_config', [
+                'redirect' => 'velocity.admin.content.index'
+            ])->name('velocity.admin.content.mass-update');
+
             Route::get('/meta-data', [ConfigurationController::class, 'renderMetaData'])->defaults('_config', [
                 'view' => 'velocity::admin.meta-info.meta-data'
             ])->name('velocity.admin.meta-data');
