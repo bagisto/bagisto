@@ -13,8 +13,8 @@
 
 ## Hactoberfest Rules
 - On 4 successful PR merges, Bagisto will provide a T-Shirt, Stickers, Notebook, Pen, and Bagisto Elephant.
-- We have added 'Hactoberfest' label to the issues with difficulty level label.
-- Although we have added 'hactoberfest' topic in our repo, but we will consider only PRs whose issue is labeled with 'Hactoberfest'. Below is the link,
+- We have added 'Hactoberfest' label to the issues with the difficulty level label.
+- Although we have added 'hactoberfest' topic in our repo, we will consider only PRs whose issue is labeled with 'Hactoberfest'. Below is the link,
 - [Hacktoberfest Labelled Issues](https://github.com/bagisto/bagisto/issues?q=is%3Aopen+is%3Aissue+label%3AHacktoberfest)
 
 ## Topics
@@ -29,12 +29,12 @@
 
 ### Introduction
 
-[Bagisto](https://www.bagisto.com) is a hand tailored E-Commerce framework built on some of the hottest opensource technologies
+[Bagisto](https://www.bagisto.com) is a hand-tailored E-Commerce framework built on some of the hottest opensource technologies
 such as [Laravel](https://laravel.com) (a [PHP](https://secure.php.net/) framework) and [Vue.js](https://vuejs.org)
 a progressive Javascript framework.
 
 **Bagisto can help you to cut down your time, cost, and workforce for building online stores or migrating from physical stores
-to the ever demanding online world. Your business -- whether small or huge -- can benefit. And it's very simple to set it up.**
+to the ever-demanding online world. Your business -- whether small or huge -- can benefit. And it's very simple to set it up.**
 
 **Read our documentation: [Bagisto Docs](https://devdocs.bagisto.com/)**
 
@@ -114,7 +114,7 @@ In order to do that, run the command below:
 > composer install --no-dev
 
 ~~~
-Open the specified entry point in your hosts file in your browser or make an entry in hosts file if not done.
+Open the specified entry point in your host's file in your browser or make an entry in hosts file if not done.
 ~~~
 
 ##### On local:
@@ -133,15 +133,15 @@ email:admin@example.com
 password:admin123
 ~~~
 
-**How to log in as customer:**
+**How to log in as a customer:**
 
-*You can directly register as customer and then login.*
+*You can directly register as a customer and then log in.*
 
 > *http(s)://example.com/customer/register*
 
 
 ### License
-Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
+Bagisto is a truly open-source E-Commerce framework that will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
 
 ### Security Vulnerabilities
 Please don't disclose security vulnerabilities publicly. If you find any security vulnerability in Bagisto then please email us: mailto:support@bagisto.com.
@@ -155,7 +155,7 @@ Need something else? Email us at support@bagisto.com.
 
 #### Contribute
 
-Bagisto is a community driven project, we appreciate every contribution from the community
+Bagisto is a community-driven project, we appreciate every contribution from the community
 
 - If you found an issue that you think we should know about, or if you have a suggestion, please submit an issue.
 - If you want to submit a solution or offer a new feature, please create a pull request.
