@@ -13,7 +13,7 @@ class Decimal implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         return preg_match('/^\d*(\.\d{1,4})?$/', $value);
     }
@@ -23,7 +23,7 @@ class Decimal implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return trans('core::validation.decimal');
     }

@@ -30,13 +30,13 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
 
-        Validator::extend('slug', 'Webkul\Core\Contracts\Validations\Slug@passes');
+        Validator::extend('slug', 'Webkul\Core\Contracts\Validations\Slug@passes', trans('core::validation.slug'));
 
-        Validator::extend('unique_slug', 'Webkul\Core\Contracts\Validations\UniqueSlug@passes');
+        Validator::extend('unique_slug', 'Webkul\Core\Contracts\Validations\UniqueSlug@passes', trans('core::validation.unique_slug'));
 
-        Validator::extend('code', 'Webkul\Core\Contracts\Validations\Code@passes');
+        Validator::extend('code', 'Webkul\Core\Contracts\Validations\Code@passes', trans('core::validation.code'));
 
-        Validator::extend('decimal', 'Webkul\Core\Contracts\Validations\Decimal@passes');
+        Validator::extend('decimal', 'Webkul\Core\Contracts\Validations\Decimal@passes', trans('core::validation.decimal'));
 
         $this->publishes([
             dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),

@@ -13,7 +13,7 @@ class Code implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         return preg_match('/^[a-zA-Z]+[a-zA-Z0-9_]+$/', $value);
     }
