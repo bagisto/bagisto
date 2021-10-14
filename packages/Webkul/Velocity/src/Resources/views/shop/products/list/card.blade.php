@@ -51,26 +51,33 @@
     $links = [];
 
     if (core()->getConfigData('catalog.products.wishlist_social_share.facebook')) {
-        array_push($links, 'facebook');
+        $links[] = 'facebook';
     }
+
     if (core()->getConfigData('catalog.products.wishlist_social_share.instagram')) {
-        array_push($links, 'instagram');
+        $links[] = 'instagram';
     }
+
     if (core()->getConfigData('catalog.products.wishlist_social_share.twitter')) {
-        array_push($links, 'twitter');
+        $links[] = 'twitter';
     }
+
     if (core()->getConfigData('catalog.products.wishlist_social_share.pinterest')) {
-        array_push($links, 'pinterest');
+        $links[] = 'pinterest';
     }
+
     if (core()->getConfigData('catalog.products.wishlist_social_share.linkedin')) {
-        array_push($links, 'linkedin');
+        $links[] = 'linkedin';
     }
+
     if (core()->getConfigData('catalog.products.wishlist_social_share.whatsapp')) {
-        array_push($links, 'whatsapp');
+        $links[] = 'whatsapp';
     }
+
     if (core()->getConfigData('catalog.products.wishlist_social_share.email')) {
-        array_push($links, 'email');
+        $links[] = 'email';
     }
+
     $message = core()->getConfigData('catalog.products.wishlist_social_share.share_message');
 
     if (isset($checkmode) && $checkmode && $toolbarHelper->getCurrentMode() == "list") {
