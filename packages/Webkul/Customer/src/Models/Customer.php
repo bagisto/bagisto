@@ -53,7 +53,7 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
      */
     public function image_url()
     {
-        if (!$this->image) {
+        if (! $this->image) {
             return;
         }
 
