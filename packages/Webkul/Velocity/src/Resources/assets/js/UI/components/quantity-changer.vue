@@ -21,7 +21,8 @@
             :v-validate="validations"
             id="quantity-changer"
             :data-vv-as="`&quot;${quantityText}&quot;`"
-            readonly
+            v-on:keyup="setQty($event)"
+            
         />
 
         <button type="button" class="increase" @click="increaseQty()">+</button>
@@ -74,7 +75,8 @@ export default {
     watch: {
         quantity: function(val) {
             this.qty = val;
-
+            console.log(this.qty)
+            console.log(val)
             this.$emit('onQtyUpdated', this.qty);
         }
     },
@@ -90,7 +92,13 @@ export default {
             this.qty = parseInt(this.qty) + 1;
 
             this.$emit('onQtyUpdated', this.qty);
+        },
+
+        setQty: function(e) {        
+            this.qty = e.target.value;
+            this.$emit('onQtyUpdated', this.qty);
         }
+
     }
 };
 </script>
