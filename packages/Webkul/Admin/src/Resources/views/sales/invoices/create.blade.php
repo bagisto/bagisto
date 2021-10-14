@@ -6,7 +6,7 @@
 
 @section('content-wrapper')
     <div class="content full-page">
-        <form method="POST" action="{{ route('admin.sales.invoices.store', $order->id) }}" @submit.prevent="onSubmit">
+        <form method="POST" id="invoice-form" action="{{ route('admin.sales.invoices.store', $order->id) }}" @submit.prevent="onSubmit">
             @csrf()
 
             <div class="page-header">
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
+                    <button type="submit" class="btn btn-lg btn-primary" onclick="return confirmation();">
                         {{ __('admin::app.sales.invoices.save-btn-title') }}
                     </button>
                 </div>
@@ -266,3 +266,19 @@
         </form>
     </div>
 @stop
+
+@push('scripts')
+
+    <script>
+
+        function confirmation(){
+            if(confirm('Do you really want to perform this action?')){
+                document.getElementById('invoice-form').submit();
+            }else{
+                return false;
+            }   
+        }
+
+    </script>
+
+@endpush

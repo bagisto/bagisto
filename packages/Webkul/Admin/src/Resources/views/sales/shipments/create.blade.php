@@ -6,7 +6,7 @@
 
 @section('content-wrapper')
     <div class="content full-page">
-        <form method="POST" action="{{ route('admin.sales.shipments.store', $order->id) }}" @submit.prevent="onSubmit">
+        <form method="POST" id="shipment-form" action="{{ route('admin.sales.shipments.store', $order->id) }}" @submit.prevent="onSubmit">
             @csrf()
 
             <div class="page-header">
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
+                    <button type="submit" class="btn btn-lg btn-primary" onclick="return confirmation();">
                         {{ __('admin::app.sales.shipments.save-btn-title') }}
                     </button>
                 </div>
@@ -364,6 +364,18 @@
                 }
             }
         });
+    </script>
+
+    <script>
+
+        function confirmation(){
+            if(confirm('Fill all required fields & then confirm')){
+                document.getElementById('shipment-form').submit();
+            }else{
+                return false;
+            }   
+        }
+
     </script>
 
 @endpush
