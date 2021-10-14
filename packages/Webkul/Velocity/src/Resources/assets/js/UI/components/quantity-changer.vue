@@ -94,8 +94,9 @@ export default {
             this.$emit('onQtyUpdated', this.qty);
         },
 
-        setQty: function(e) {        
-            this.qty = e.target.value;
+        setQty: function({ target }) {        
+            this.qty = target.value;
+            
             this.$emit('onQtyUpdated', this.qty);
         }
 

@@ -158,7 +158,7 @@
             <span class="quantity-container">
                 <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
-                <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+                <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" v-on:keyup="setQty($event)">
 
                 <button type="button" class="increase" @click="increaseQty()">+</button>
 
@@ -256,6 +256,12 @@
                     this.qty = parseInt(this.qty) + 1;
 
                     this.$emit('onQtyUpdated', this.qty)
+                },
+
+                setQty: function({ target }) {        
+                    this.qty = target.value;
+            
+                    this.$emit('onQtyUpdated', this.qty);
                 }
             }
         });
