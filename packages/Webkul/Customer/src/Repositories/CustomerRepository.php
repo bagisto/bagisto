@@ -3,6 +3,7 @@
 namespace Webkul\Customer\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerRepository extends Repository
 {
@@ -47,5 +48,41 @@ class CustomerRepository extends Repository
         }
 
         return false;
+    }
+
+    /**
+     * Upload customer's images.
+     *
+     * @param  array  $data
+     * @param  \Webkul\Customer\Contracts\Customer  $customer
+     * @param  string $type
+     * @return void
+     */
+    public function uploadImages($data, $customer, $type = "image")
+    {
+        if (isset($data[$type])) {
+            $request = request();
+
+            foreach ($data[$type] as $imageId => $image) {
+                $file = $type . '.' . $imageId;
+                $dir = 'customer/' . $customer->id;
+
+                if ($request->hasFile($file)) {
+                    if ($customer->{$type}) {
+                        Storage::delete($customer->{$type});
+                    }
+
+                    $customer->{$type} = $request->file($file)->store($dir);
+                    $customer->save();
+                }
+            }
+        } else {
+            if ($customer->{$type}) {
+                Storage::delete($customer->{$type});
+            }
+
+            $customer->{$type} = null;
+            $customer->save();
+        }
     }
 }
