@@ -75,8 +75,7 @@ export default {
     watch: {
         quantity: function(val) {
             this.qty = val;
-            console.log(this.qty)
-            console.log(val)
+            
             this.$emit('onQtyUpdated', this.qty);
         }
     },
