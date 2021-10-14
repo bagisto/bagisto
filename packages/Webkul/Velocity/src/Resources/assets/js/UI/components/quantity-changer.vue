@@ -18,7 +18,7 @@
             :value="qty"
             class="control"
             :name="controlName"
-            :v-validate="validations"
+            v-validate="validations"
             id="quantity-changer"
             :data-vv-as="`&quot;${quantityText}&quot;`"
             v-on:keyup="setQty($event)"
