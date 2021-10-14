@@ -53,25 +53,25 @@
     $keysCollection = [
         [
             "config_key" => "catalog.products.wishlist_social_share.facebook",
-            "link"      => "facebook",
+            "link"       => "facebook",
         ], [
             "config_key" => "catalog.products.wishlist_social_share.instagram",
-            "link"      => "instagram",
+            "link"       => "instagram",
         ], [
             "config_key" => "catalog.products.wishlist_social_share.pinterest",
-            "link"      => "pinterest",
+            "link"       => "pinterest",
         ], [
             "config_key" => "catalog.products.wishlist_social_share.twitter",
-            "link"      => "twitter",
+            "link"       => "twitter",
         ], [
             "config_key" => "catalog.products.wishlist_social_share.linkedin",
-            "link"      => "linkedin",
+            "link"       => "linkedin",
         ], [
             "config_key" => "catalog.products.wishlist_social_share.whatsapp",
-            "link"      => "whatsapp",
+            "link"       => "whatsapp",
         ], [
             "config_key" => "catalog.products.wishlist_social_share.email",
-            "link"      => "email",
+            "link"       => "email",
         ]
     ];
 
