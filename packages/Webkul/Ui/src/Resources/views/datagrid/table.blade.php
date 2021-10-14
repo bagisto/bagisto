@@ -322,6 +322,7 @@
 
                 mounted: function () {
                     this.setParamsAndUrl();
+                    this.checkedSelectedCheckbox();
 
                     if (this.filters.length) {
                         for (let i = 0; i < this.filters.length; i++) {
@@ -809,14 +810,46 @@
                     /**
                      * Triggered when any select box is clicked in the datagrid.
                      */
-                    select: function () {
-                        this.allSelected = false;
+                    select: function (event) {
+                        var checkboxElement = event.target;
 
+                        if ( typeof(Storage) !== 'undefined' ) {
+                            if ( checkboxElement.checked ) {
+                                if (! this.dataIds.includes(checkboxElement.value) ) {
+                                    this.dataIds.push(checkboxElement.value);
+                                }
+                            } else {
+                                if ( this.dataIds.includes(checkboxElement.value) ) {
+                                    this.dataIds.pop(checkboxElement.value);
+                                }
+                            }
+
+                            localStorage.dataGridIndexes = JSON.stringify(this.dataIds);
+                        }
+
+                        this.allSelected = false;
                         if (this.dataIds.length === 0) {
                             this.massActionsToggle = false;
                             this.massActionType = null;
                         } else {
                             this.massActionsToggle = true;
+                        }
+                    },
+
+                    /**
+                     * Triggered when page load.
+                     */
+                    checkedSelectedCheckbox: function () {
+                        if ( typeof(Storage) !== 'undefined' ) {
+                            var selectedIndexes = localStorage.getItem("dataGridIndexes");
+                            this.dataIds = JSON.parse(selectedIndexes);
+                            
+                            this.massActionsToggle = true;
+                            this.allSelected = false;
+                            if (this.dataIds.length === 0) {
+                                this.massActionsToggle = false;
+                                this.massActionType = null;
+                            }
                         }
                     },
 
@@ -869,6 +902,8 @@
                         this.allSelected = false;
 
                         this.massActionType = null;
+
+                        localStorage.dataGridIndexes = [];
                     },
 
                     paginate: function (e) {

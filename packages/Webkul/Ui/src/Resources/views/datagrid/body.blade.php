@@ -4,8 +4,11 @@
             <tr>
                 @if ($enableMassActions)
                     <td>
+                        @php
+                            $record_id = $record->{$index};
+                        @endphp
                         <span class="checkbox">
-                            <input type="checkbox" v-model="dataIds" @change="select" value="{{ $record->{$index} }}">
+                            <input type="checkbox" v-model="dataIds" @change="select($event)" value="{{ $record_id }}" :checked="dataGridIndexes.includes('{{ $record_id }}')">
 
                             <label class="checkbox-view" for="checkbox"></label>
                         </span>
