@@ -823,8 +823,13 @@
                                     this.dataIds.pop(checkboxElement.value);
                                 }
                             }
+                            var routeArray = this.gridCurrentData.path.split('/');
+                            var getLastRoute = routeArray[routeArray.length - 1];
+                            
+                            var routeIndexObj = {};
+                            routeIndexObj[getLastRoute] = this.dataIds;
 
-                            localStorage.dataGridIndexes = JSON.stringify(this.dataIds);
+                            localStorage.dataGridIndexes = JSON.stringify(routeIndexObj);
                         }
 
                         this.allSelected = false;
@@ -840,16 +845,29 @@
                      * Triggered when page load.
                      */
                     checkedSelectedCheckbox: function () {
+                        var routeArray = this.gridCurrentData.path.split('/');
+                        var getLastRoute = routeArray[routeArray.length - 1];
+                        
                         if ( typeof(Storage) !== 'undefined' ) {
-                            var selectedIndexes = localStorage.getItem("dataGridIndexes");
-                            this.dataIds = JSON.parse(selectedIndexes);
-                            
-                            this.massActionsToggle = true;
-                            this.allSelected = false;
-                            if (this.dataIds.length === 0) {
-                                this.massActionsToggle = false;
-                                this.massActionType = null;
+                            var selectedIndexes = JSON.parse(localStorage.getItem("dataGridIndexes"));
+                            if ( Object.keys(selectedIndexes).length ) {
+                                for (key in selectedIndexes) {
+                                    if ( key === getLastRoute) {
+                                        this.dataIds = selectedIndexes[key];
+                                        
+                                        this.massActionsToggle = true;
+                                        this.allSelected = false;
+                                        if (this.dataIds.length === 0) {
+                                            this.massActionsToggle = false;
+                                            this.massActionType = null;
+                                        }
+                                    } else {
+                                        delete selectedIndexes[key];
+                                    }
+                                }
                             }
+                            
+                            localStorage.dataGridIndexes = JSON.stringify(selectedIndexes);
                         }
                     },
 
