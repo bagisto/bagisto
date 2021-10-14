@@ -77,7 +77,7 @@
 
     foreach($keysCollection as $key) {
         if (core()->getConfigData($key['config_key'])) {
-            array_push($links, $key['link']);
+            $links[] = $key['link'];
         }
     }
 
