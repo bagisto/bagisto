@@ -50,32 +50,35 @@
 @php
     $links = [];
 
-    if (core()->getConfigData('catalog.products.wishlist_social_share.facebook')) {
-        $links[] = 'facebook';
-    }
+    $keysCollection = [
+        [
+            "config_key" => "catalog.products.wishlist_social_share.facebook",
+            "link"      => "facebook",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.instagram",
+            "link"      => "instagram",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.pinterest",
+            "link"      => "pinterest",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.twitter",
+            "link"      => "twitter",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.linkedin",
+            "link"      => "linkedin",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.whatsapp",
+            "link"      => "whatsapp",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.email",
+            "link"      => "email",
+        ]
+    ];
 
-    if (core()->getConfigData('catalog.products.wishlist_social_share.instagram')) {
-        $links[] = 'instagram';
-    }
-
-    if (core()->getConfigData('catalog.products.wishlist_social_share.twitter')) {
-        $links[] = 'twitter';
-    }
-
-    if (core()->getConfigData('catalog.products.wishlist_social_share.pinterest')) {
-        $links[] = 'pinterest';
-    }
-
-    if (core()->getConfigData('catalog.products.wishlist_social_share.linkedin')) {
-        $links[] = 'linkedin';
-    }
-
-    if (core()->getConfigData('catalog.products.wishlist_social_share.whatsapp')) {
-        $links[] = 'whatsapp';
-    }
-
-    if (core()->getConfigData('catalog.products.wishlist_social_share.email')) {
-        $links[] = 'email';
+    foreach($keysCollection as $key) {
+        if (core()->getConfigData($key['config_key'])) {
+            array_push($links, $key['link']);
+        }
     }
 
     $message = core()->getConfigData('catalog.products.wishlist_social_share.share_message');
