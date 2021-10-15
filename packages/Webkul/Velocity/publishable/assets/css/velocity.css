@@ -1933,7 +1933,7 @@ button[disabled] {
 
 .filters-container .toolbar-wrapper>div select {
     cursor: pointer;
-    padding: 6px 16px;
+    padding: 6px 10px;
     color: rgba(0, 0, 0, .83);
     background-color: #fff
 }
@@ -4000,7 +4000,7 @@ button[disabled] {
 }
 
 .selective-div {
-    width: 150px;
+    width: 97px;
     -webkit-appearance: none
 }
 
