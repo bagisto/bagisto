@@ -123,13 +123,12 @@ class RoleController extends Controller
                 $role = $this->roleRepository->update(request()->all(), $id);
                 Event::dispatch('user.role.update.after', $role);
                 session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
+                if($this->adminRepository->findWhere(['id' => auth()->guard('admin')->user()->id, 'role_id' => $id], 'role_id')->count() > 0){
+                    auth()->guard('admin')->logout();
+                }
             }
             else{
-                session()->flash('error', trans('Role updated error.'));
-            }
-
-            if($this->adminRepository->findWhere(['id' => auth()->guard('admin')->user()->id, 'role_id' => $id], 'role_id')->count() > 0){
-                auth()->guard('admin')->logout();
+                session()->flash('error', trans('This is last Role with ALL permission.'));
             }
         }
         else{
@@ -155,6 +154,8 @@ class RoleController extends Controller
             session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
         } elseif($this->roleRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
+        } elseif($this->roleRepository->findWhere(['permission_type' => 'all'], 'permission_type')->count() > 1) {
+            session()->flash('error', trans('This is last Role with ALL permission.'));
         } else {
             try {
                 Event::dispatch('user.role.delete.before', $id);

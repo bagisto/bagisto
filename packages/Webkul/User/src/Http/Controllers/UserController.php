@@ -144,15 +144,30 @@ class UserController extends Controller
 
         Event::dispatch('user.admin.update.before', $id);
 
-        $admin = $this->adminRepository->update($data, $id);
-
-        if ($isPasswordChanged) {
-            Event::dispatch('user.admin.update-password', $admin);
+        $countAdmins = 0;
+        if ($this->roleRepository->find($data['role_id'])->permission_type != "all"){
+            foreach ($this->adminRepository->get('role_id') as $userRole){
+                if ($userRole->role_id == 1){
+                    $countAdmins++;
+                    if ($countAdmins > 1){
+                        break;
+                    }
+                }
+            }
+            if ($countAdmins == 1){
+                session()->flash('error', trans('This is last User with ALL permission.'));
+            }
         }
 
-        Event::dispatch('user.admin.update.after', $admin);
+        if ($countAdmins != 1){
+            $admin = $this->adminRepository->update($data, $id);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'User']));
+            if ($isPasswordChanged) {
+                Event::dispatch('user.admin.update-password', $admin);
+            }
+            Event::dispatch('user.admin.update.after', $admin);
+            session()->flash('success', trans('admin::app.response.update-success', ['name' => 'User']));
+        }
 
         return redirect()->route($this->_config['redirect']);
     }
