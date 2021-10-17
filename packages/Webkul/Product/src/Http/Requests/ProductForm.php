@@ -119,6 +119,7 @@ class ProductForm extends FormRequest
 
                 if ($attribute->type == 'price') {
                     array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
+                    array_push($validations,'between:0,9999999999.99');
                 }
 
                 if ($attribute->is_unique) {
@@ -146,7 +147,8 @@ class ProductForm extends FormRequest
     public function messages()
     {
         return [
-            'variants.*.sku.unique' => 'The sku has already been taken.',
+            'variants.*.sku.unique' => trans('admin::app.catalog.products.sku-taken'),
+            'price.between' => trans('admin::app.catalog.products.price-error')
         ];
     }
 }

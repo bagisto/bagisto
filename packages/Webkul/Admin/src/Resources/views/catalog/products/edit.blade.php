@@ -87,7 +87,8 @@
                                                 }
 
                                                 if ($attribute->type == 'price') {
-                                                    array_push($validations, 'decimal');
+                                                    array_push($validations, 'decimal:2');
+                                                    array_push($validations,'max:12');
                                                 }
 
                                                 array_push($validations, $attribute->validation);

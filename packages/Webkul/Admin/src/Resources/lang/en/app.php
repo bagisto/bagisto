@@ -462,7 +462,9 @@ return [
             'product-search-hint' => 'Start typing product name',
             'no-result-found' => 'Products not found with same name.',
             'searching' => 'Searching ...',
-            'channel' => 'Channels'
+            'channel' => 'Channels',
+            'price-error'  => 'Price should be in range 0 to 9999999999.99',
+            'sku-taken'    => 'The sku has already been taken.'
         ],
 
         'attributes' => [
