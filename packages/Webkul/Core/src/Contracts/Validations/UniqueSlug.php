@@ -13,7 +13,6 @@ class UniqueSlug implements Rule
      * @var string[]
      */
     private $tables = [
-        'cms_page_translations' => 'url_key',
         'product_flat' => 'url_key',
         'category_translations' => 'slug',
     ];
