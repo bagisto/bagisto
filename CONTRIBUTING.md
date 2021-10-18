@@ -2,7 +2,7 @@
 
 **BUGS:**
 
-To encourage active collaboration, Bagisto encourages pull requests, not just bug reports. "Bug reports" may also be sent in the form of a pull request containing negative test.
+To encourage active collaboration, Bagisto encourages pull requests, not just bug reports. "Bug reports" may also be sent in the form of a pull request containing a negative test.
 
 However, when filing a bug report, your issue should contain a title and a clear description of the issue. You should also include as much relevant information as possible and a code sample that demonstrates the issue. The goal of a bug report is to make it easy for yourself - and others - to replicate the bug and develop a fix.
 
@@ -40,7 +40,7 @@ If you are submitting a change that will affect a compiled file, such as most of
 
 **Code style:**
 
-Bagisto follow PSR-2 for coding standard and PSR-4 as of Laravel for autoloading standards.
+Bagisto follows PSR-2 for coding standard and PSR-4 as of Laravel for autoloading standards.
 
 **PHPDoc:**
 
