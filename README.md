@@ -13,8 +13,8 @@
 
 ## Hactoberfest Rules
 - On 4 successful PR merges, Bagisto will provide a T-Shirt, Stickers, Notebook, Pen, and Bagisto Elephant.
-- We have added 'Hactoberfest' label to the issues with the difficulty level label.
-- Although we have added 'hactoberfest' topic in our repo, we will consider only PRs whose issue is labeled with 'Hactoberfest'. Below is the link,
+- We have added the 'Hactoberfest' label to the issues with the difficulty level label.
+- Although we have added the 'hactoberfest' topic in our repo, we will consider only PRs whose issue is labeled with 'Hactoberfest'. Below is the link,
 - [Hacktoberfest Labelled Issues](https://github.com/bagisto/bagisto/issues?q=is%3Aopen+is%3Aissue+label%3AHacktoberfest)
 
 ## Topics
@@ -86,7 +86,7 @@ Take advantage of two of the hottest frameworks used in this project -- Laravel 
 
 [Download the latest release](https://github.com/bagisto/bagisto/releases/latest)
 
-##### b. Extract the contents of zip and execute the project in your browser:
+##### b. Extract the contents of the zip and execute the project in your browser:
 
 ~~~
 http(s)://example.com
