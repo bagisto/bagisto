@@ -26,7 +26,9 @@
     font-family: $font-family-pro;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     box-sizing: inherit;
 }
 
@@ -65,7 +67,11 @@ input[type=checkbox] {
     }
 }
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
     font-family: $font-family-pro;
     color: $font-color;
 }
@@ -111,7 +117,8 @@ body {
     padding: 6px 5px;
 }
 
-.btn-link:hover, .btn-link:focus {
+.btn-link:hover,
+.btn-link:focus {
     color: $font-color;
     text-decoration: none;
 }
@@ -214,7 +221,7 @@ body {
             }
         }
 
-        + .account-modal {
+        +.account-modal {
             top: 40px;
             right: 10px;
             z-index: 101;
@@ -253,11 +260,11 @@ body {
         }
     }
 
-    > div:last-child {
+    >div:last-child {
         height: 32px;
     }
 
-    > div {
+    >div {
         .default {
             padding: 5px;
             font-size: 14px;
@@ -294,7 +301,7 @@ body {
     border-top: 3px solid $border-primary;
     border-radius: 0px;
     background: $white-color;
-    @include box-shadow(11px 10px 17px 0 rgba(0,0,0,0.21));
+    @include box-shadow(11px 10px 17px 0 rgba(0, 0, 0, 0.21));
 
     li {
         a {
@@ -361,14 +368,17 @@ body {
         background: $button-primary-bg;
         border-color: $button-primary-bg;
     }
+
     &:focus {
         background: $button-primary-bg;
         border-color: $button-primary-bg;
     }
+
     &:active:hover {
         background: $button-primary-bg;
         border-color: $button-primary-bg;
     }
+
     &:active:focus {
         background: $button-primary-bg;
         border-color: $button-primary-bg;
@@ -384,14 +394,17 @@ body {
         background: $button-danger;
         border-color: $border-danger;
     }
+
     &:focus {
         background: $button-danger;
         border-color: $border-danger;
     }
+
     &:active:hover {
         background: $button-danger;
         border-color: $border-danger;
     }
+
     &:active:focus {
         background: $button-danger;
         border-color: $border-danger;
@@ -436,7 +449,7 @@ header {
                 border-radius: 2px 0px 0px 2px;
                 border: 1px solid $theme-color;
                 border-right: 0;
-                font-family:"Source Sans Pro", sans-serif;
+                font-family: "Source Sans Pro", sans-serif;
 
                 -webkit-appearance: none;
                 -moz-appearance: none;
@@ -505,7 +518,7 @@ header {
                 display: inline-block;
 
                 i {
-                    + span.cart-text {
+                    +span.cart-text {
                         padding-left: 0px;
                         vertical-align: text-bottom;
                     }
@@ -515,7 +528,7 @@ header {
                     padding-left: 5px;
                 }
 
-                + .down-arrow-container {
+                +.down-arrow-container {
                     .rango-arrow-down {
                         top: 8px;
                     }
@@ -527,7 +540,8 @@ header {
     .left-wrapper {
         float: right;
 
-        .compare-btn, .wishlist-btn {
+        .compare-btn,
+        .wishlist-btn {
             height: 50px;
             font-size: 18px;
             font-weight: 600;
@@ -623,6 +637,7 @@ header {
                             letter-spacing: 0;
                             text-align: left;
                         }
+
                         .item-price {
                             font-weight: 600;
                             font-size: 16px;
@@ -634,6 +649,7 @@ header {
                 }
             }
         }
+
         .dropdown-header {
             padding: 10px 10px 5px;
             border-top: 1px solid $border-common;
@@ -653,6 +669,7 @@ header {
                 text-align: right;
             }
         }
+
         .dropdown-footer {
             padding: 10px 10px 0px 10px;
             border-top: 1px solid $border-common;
@@ -663,6 +680,7 @@ header {
 
             .cart-link {
                 text-align: left;
+
                 a {
                     vertical-align: middle;
                 }
@@ -685,7 +703,7 @@ header {
         margin: 0px;
         font-family: SourceSansPro-Semibold;
         font-size: 16px;
-        color: rgba(0,0,0,0.83);
+        color: rgba(0, 0, 0, 0.83);
         letter-spacing: 0;
         cursor: pointer;
         min-height: 40px;
@@ -702,7 +720,7 @@ header {
                 display: inline-block;
                 padding: 5px 5px 5px 35px;
 
-                .material-icons{
+                .material-icons {
                     position: absolute;
                     left: 0;
                     top: 2px;
@@ -730,7 +748,7 @@ header {
                     position: relative;
                     font-weight: 600;
                     font-size: 14px;
-                    color: rgba(0,0,0,0.83);
+                    color: rgba(0, 0, 0, 0.83);
                     letter-spacing: 0;
                     font-weight: 600;
                     display: block;
@@ -917,7 +935,8 @@ i.within-circle {
 
 .center_div {
     margin: 0 auto;
-    width: 80%/* value of your choice which suits your alignment */
+    width: 80%
+        /* value of your choice which suits your alignment */
 }
 
 .form-style {
@@ -984,7 +1003,10 @@ i.within-circle {
     margin: 0 auto;
 }
 
-.row:before, .row:after {display: none !important;}
+.row:before,
+.row:after {
+    display: none !important;
+}
 
 // image wrapper
 .image-wrapper {
@@ -1018,7 +1040,7 @@ i.within-circle {
         }
 
         .remove-image {
-            background-image: linear-gradient(-180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.24) 100%);
+            background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.24) 100%);
             @include border-radius(0 0 4px 4px);
             position: absolute;
             bottom: 0;
@@ -1026,7 +1048,7 @@ i.within-circle {
             padding: 10px;
             text-align: center;
             color: $white-color;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.24);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
             margin-right: 20px;
             cursor: pointer;
         }
@@ -1044,4 +1066,35 @@ i.within-circle {
 .btn-primary {
     background-color: #26A37C !important;
     border-color: #26A37C !important;
+}
+
+/* Category Filter UI Responsivenes */
+.category-page-wrapper .category-container .filters-container {
+    left: 0;
+    top: 30px;
+    padding: 0;
+    width: 96%;
+    z-index: 9;
+    position: unset;
+    margin-left: 20px;
+    padding-bottom: 7px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .21);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .21)
+}
+
+.filters-container .toolbar-wrapper>div select {
+    cursor: pointer;
+    padding: 6px 10px;
+    color: rgba(0, 0, 0, .83);
+    background-color: #fff
+}
+
+.selective-div {
+    width: 97px;
+    -webkit-appearance: none
+}
+
+.filters-container .toolbar-wrapper>div {
+    margin: 0 10px 0 0;
 }
