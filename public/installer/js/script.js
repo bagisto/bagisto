@@ -2,7 +2,6 @@ window.onload = function() {
 
     var welcome = document.getElementById('welcome');
     var requirement = document.getElementById('requirement');
-    var permission = document.getElementById('permission');
     var environment = document.getElementById('environment');
     var migration = document.getElementById('migration');
     var admin =  document.getElementById('admin');
