@@ -75,7 +75,11 @@ class Install extends Command
 
         // removing the installer directory
         if (is_dir('public/installer')) {
-            shell_exec('rm -rf public/installer');
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                shell_exec('rmdir /s/q public\\installer');
+            } else {
+                shell_exec('rm -rf public/installer');
+            }
         }
 
         // final information
