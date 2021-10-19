@@ -1076,25 +1076,23 @@ i.within-circle {
     width: 96%;
     z-index: 9;
     position: unset;
-    margin-left: 20px;
+    margin-left: 7px;
     padding-bottom: 7px;
     background-color: #fff;
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .21);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .21)
 }
-
 .filters-container .toolbar-wrapper>div select {
     cursor: pointer;
     padding: 6px 10px;
     color: rgba(0, 0, 0, .83);
     background-color: #fff
 }
-
 .selective-div {
     width: 97px;
     -webkit-appearance: none
 }
-
-.filters-container .toolbar-wrapper>div {
+.filters-container .toolbar-wrapper>div
+{
     margin: 0 10px 0 0;
 }
