@@ -2,13 +2,13 @@
 
 namespace Webkul\Shop\Providers;
 
-use Webkul\Core\Tree;
-use Illuminate\Routing\Router;
 use Illuminate\Pagination\Paginator;
-use Webkul\Shop\Http\Middleware\Theme;
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Shop\Http\Middleware\Locale;
+use Webkul\Core\Tree;
 use Webkul\Shop\Http\Middleware\Currency;
+use Webkul\Shop\Http\Middleware\Locale;
+use Webkul\Shop\Http\Middleware\Theme;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -43,6 +43,9 @@ class ShopServiceProvider extends ServiceProvider
         /* paginators */
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
+
+        /* breadcrumbs */
+        require __DIR__ . '/../Http/breadcrumbs.php';
     }
 
     /**
