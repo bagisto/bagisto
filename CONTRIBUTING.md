@@ -28,7 +28,7 @@ Informal discussion regarding bugs, new features, and implementation of existing
 
 **Which branch you should target?**
 
-All bug fixes should be sent to the latest staging branch i.e development branch. Bug fixes should never be sent to the master branch unless they fix features that exist only in the upcoming release.
+All bug fixes should be sent to the latest staging branch i.e., development branch. Bug fixes should never be sent to the master branch unless they fix features that exist only in the upcoming release.
 
 Minor features that are fully backwards compatible with the current Laravel release may be sent to the latest stable branch.
 
@@ -36,7 +36,7 @@ Major new features should always be sent to the master branch, which contains th
 
 **Compiling assets:**
 
-If you are submitting a change that will affect a compiled file, such as most of the files in admin/resources/assets/sass or admin/resources/assets/js of the Bagisto repository, do not commit the compiled files. Due to their large size, they cannot realistically be reviewed by a maintainer. This could be exploited as a way to inject malicious code into Bagisto. In order to defensively prevent this, all compiled files will be generated and committed by Bagisto maintainers.
+If you are submitting a change that will affect a compiled file, such as most of the files in admin/resources/assets/sass or admin/resources/assets/js of the Bagisto repository, do not commit the compiled files. Due to their large size, they cannot realistically be reviewed by a maintainer. This could be exploited to inject malicious code into Bagisto. To defensively prevent this, all compiled files will be generated and committed by Bagisto maintainers.
 
 **Code style:**
 
