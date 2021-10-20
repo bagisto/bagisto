@@ -1,19 +1,12 @@
-@extends('shop::layouts.master')
+@extends('shop::customers.account.index')
 
 @section('page_title')
     {{ __('shop::app.customer.account.profile.index.title') }}
 @endsection
 
-@section('content-wrapper')
-
-<div class="account-content">
-
-    @include('shop::customers.account.partials.sidemenu')
-
+@section('account-content')
     <div class="account-layout">
-
         <div class="account-head">
-
             <span class="back-icon"><a href="{{ route('customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
 
             <span class="account-heading">{{ __('shop::app.customer.account.profile.index.title') }}</span>
@@ -25,14 +18,13 @@
             <div class="horizontal-rule"></div>
         </div>
 
-         {!! view_render_event('bagisto.shop.customers.account.profile.view.before', ['customer' => $customer]) !!}
+        {!! view_render_event('bagisto.shop.customers.account.profile.view.before', ['customer' => $customer]) !!}
 
         <div class="account-table-content" style="width: 50%;">
             <table style="color: #5E5E5E;">
                 <tbody>
-                    {!! view_render_event(
-                    'bagisto.shop.customers.account.profile.view.table.before', ['customer' => $customer])
-                    !!}
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.before', ['customer' => $customer]) !!}
+
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.fname') }}</td>
                         <td>{{ $customer->first_name }}</td>
@@ -65,21 +57,10 @@
                         <td>{{ __('shop::app.customer.account.profile.email') }}</td>
                         <td>{{ $customer->email }}</td>
                     </tr>
-                    {!! view_render_event(
-                    'bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer])
-                    !!}
 
-                    {{-- @if ($customer->subscribed_to_news_letter == 1)
-                        <tr>
-                            <td> {{ __('shop::app.footer.subscribe-newsletter') }}</td>
-                            <td>
-                                <a class="btn btn-sm btn-primary" href="{{ route('shop.unsubscribe', $customer->email) }}">{{ __('shop::app.subscription.unsubscribe') }} </a>
-                            </td>
-                        </tr>
-                    @endif --}}
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer]) !!}
                 </tbody>
             </table>
-
 
             <button type="submit" @click="showModal('deleteProfile')" class="btn btn-lg btn-primary mt-10">
                 {{ __('shop::app.customer.account.address.index.delete') }}
@@ -110,5 +91,4 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.view.after', ['customer' => $customer]) !!}
     </div>
-</div>
 @endsection

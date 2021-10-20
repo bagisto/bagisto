@@ -7,6 +7,8 @@
         </div>
 
         <div class="account-layout right mt10">
+            {{ Breadcrumbs::render() }}
+
             @yield('page-detail-wrapper')
         </div>
     </div>
