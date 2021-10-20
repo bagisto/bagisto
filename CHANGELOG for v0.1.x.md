@@ -198,7 +198,7 @@ This changelog consists of the bug & security fixes and new features included in
 
 * #973 [fixed] - Edit Slider, get wrong with: An invalid form control with name='image[image_0]' is not focusable.
 
-* #968 [fixed] - sorting is not working (price).
+* #968 [fixed] - Sorting is not working (price).
 
 * #778 [fixed] - Error when add item to cart.
 
@@ -324,7 +324,7 @@ This changelog consists of the bug & security fixes and new features included in
 
 * #897 [fixed] - Product gets saved without image if a used image is large. It should throw an error message.
 
-* #896 [fixed] - getVariantMinPrice does not look at special_price.
+* #896 [fixed] - GetVariantMinPrice does not look at special_price.
 
 * #894 [fixed] - Storage link command is missing when installing framework through 
 installer.
@@ -360,7 +360,7 @@ large, while saving the category.
 
 * #835 [fixed] - Parent Products show instock when all children have quantity 0.
 
-* #825 [fixed] - unable to update ( is_filterable ) in attributes.
+* #825 [fixed] - Unable to update ( is_filterable ) in attributes.
 
 * #818 [fixed] - Email should be sent to the respective inventory from which shipment has been created.
 
@@ -590,7 +590,7 @@ large, while saving the category.
 
 * #438 [fixed] - Simple Select Attribute Issue
 
-* #426 [fixed] - php artisan down does not work.
+* #426 [fixed] - PHP artisan down does not work.
 
 * #402 [fixed] - Change the validation message on moving product from wish-list to cart if product added in wish-list is out of stock.
 
@@ -692,7 +692,7 @@ large, while saving the category.
 
 * #264 [enhanced] Provide mass delete and mass update option in product grid
 
-* #263 [enhanced] filter for visible in menu is not working in Category grid.
+* #263 [enhanced] Filter for visible in menu is not working in Category grid.
 
 * #262 [fixed] System attributes are also getting deleted
 
@@ -700,7 +700,7 @@ large, while saving the category.
 
 * #238 [enhanced] Provide a mass selection option to approve a review
 
-* #228 [enhanced] bagisto icon should be clickable and by clicking on it, it should redirect to dashboard
+* #228 [enhanced] Bagisto icon should be clickable and by clicking on it, it should redirect to dashboard
 
 * #226 [fixed] Correct the spelling of "expensive" in Sort By
 
