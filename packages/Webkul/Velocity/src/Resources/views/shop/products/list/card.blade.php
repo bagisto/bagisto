@@ -11,10 +11,78 @@
             font-size: 18px;
             font-weight: 600;
         }
+
+        .bb-social-share {
+            padding: 1rem 0;
+        }
+
+        .bb-social-share__title {
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .bb-social-share__items {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .bb-social-share__item {
+            margin-right: 1rem;
+        }
+
+        .bb-social-share__item a {
+            text-decoration: none;
+        }
+
+        .bb-social-share__item a:hover {
+            text-decoration: none;
+        }
+
+        .bb-social-share__item a svg {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+        }
     </style>
 @endpush
 
 @php
+    $links = [];
+
+    $keysCollection = [
+        [
+            "config_key" => "catalog.products.wishlist_social_share.facebook",
+            "link"       => "facebook",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.instagram",
+            "link"       => "instagram",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.pinterest",
+            "link"       => "pinterest",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.twitter",
+            "link"       => "twitter",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.linkedin",
+            "link"       => "linkedin",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.whatsapp",
+            "link"       => "whatsapp",
+        ], [
+            "config_key" => "catalog.products.wishlist_social_share.email",
+            "link"       => "email",
+        ]
+    ];
+
+    foreach($keysCollection as $key) {
+        if (core()->getConfigData($key['config_key'])) {
+            $links[] = $key['link'];
+        }
+    }
+
+    $message = core()->getConfigData('catalog.products.wishlist_social_share.share_message');
+
     if (isset($checkmode) && $checkmode && $toolbarHelper->getCurrentMode() == "list") {
         $list = true;
     }
@@ -111,6 +179,24 @@
                                                    ? true : false,
                         ])
                     </div>
+
+                    @if ($wishlistShare)
+                        <div class="share-wishlist">
+                            <aside class="bb-social-share">
+                                <div class="bb-social-share__title">
+                                    {{ __('Share Now') }}
+                                </div>
+                                <ul class="bb-social-share__items">
+                                    @foreach($links as $link)
+                                        @include(
+                                            'social_share::links.' . $link,
+                                            compact('product', 'message')
+                                        )
+                                    @endforeach
+                                </ul>
+                            </aside>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

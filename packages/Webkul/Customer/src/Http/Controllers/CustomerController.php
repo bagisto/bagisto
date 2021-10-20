@@ -108,6 +108,7 @@ class CustomerController extends Controller
             'password'              => 'confirmed|min:6|required_with:oldpassword',
             'oldpassword'           => 'required_with:password',
             'password_confirmation' => 'required_with:password',
+            'image.*'               => 'mimes:bmp,jpeg,jpg,png,webp'
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
@@ -177,6 +178,8 @@ class CustomerController extends Controller
                     ], $subscription->id);
                 }
             }
+
+            $this->customerRepository->uploadImages($data, $customer);
 
             Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 

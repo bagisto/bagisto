@@ -16,7 +16,8 @@
     <form
         method="POST"
         @submit.prevent="onSubmit"
-        action="{{ route('customer.profile.store') }}">
+        action="{{ route('customer.profile.store') }}"
+        enctype="multipart/form-data">
 
         <div class="account-table-content">
             @csrf
@@ -141,6 +142,23 @@
             </div>
 
             {!! view_render_event('bagisto.shop.customers.account.profile.edit.phone.after', ['customer' => $customer]) !!}
+
+            <div class="row image-container {!! $errors->has('image.*') ? 'has-error' : '' !!}">
+                <label class="col-12">
+                    {{ __('admin::app.catalog.categories.image') }}
+                </label>
+                <div class="col-12">
+                    <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false" :images='"{{ $customer->image_url }}"'></image-wrapper>
+
+                    <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
+                        @foreach ($errors->get('image.*') as $key => $message)
+                            @php echo str_replace($key, 'Image', $message[0]); @endphp
+                        @endforeach
+                    </span>
+                </div>
+            </div>
+
+            {!! view_render_event('bagisto.shop.customers.account.profile.edit.image.after', ['customer' => $customer]) !!}
 
             <div class="row">
                 <label class="col-12">
