@@ -8,7 +8,7 @@ This changelog consists of the bug & security fixes and new features included in
 
 * #1939 [fixed] - Invalid coupon gets applied if clicking on apply coupon multiple times, although there is no discount amount but its displaying a message that coupon code applied successfully.
 
-* #1938 [fixed] - multiple cart rules are applied using only a single coupon.
+* #1938 [fixed] - Multiple cart rules are applied using only a single coupon.
 
 * #1935 [fixed] - Categories are not displaying if in condition Categories(children only) or Categories(Parent Only) is selected.
 
@@ -824,7 +824,7 @@ large, while saving the category.
 
 * #148 - [fixed] Search Functionality is not working in all grid of Admin panel
 
-* #146 - [fixed] tax is not added on product at checkout
+* #146 - [fixed] Tax is not added on product at checkout
 
 * #145 - [fixed] Edit Functionality of Tax Categories is not Working
 
@@ -850,7 +850,7 @@ large, while saving the category.
 
 * #125 - [fixed] Delete button is not available for mass delete of Products in Product Grid(mass actions will return in next release and the issue will remain open till next release)
 
-* #121 - [fixed] buy now button is not working on index page for some products
+* #121 - [fixed] Buy now button is not working on index page for some products
 
 * #120 - [fixed] After signup on the frontend, the customer is still not the signup page
 
@@ -864,7 +864,7 @@ large, while saving the category.
 
 * #98 - [fixed] No warning before removing the item from the cart
 
-* #97 - [fixed] client side validation / js validation is missing at login page
+* #97 - [fixed] Client side validation / js validation is missing at login page
 
 * #96 - [fixed] Search button does not work(@prashant-webkul)
 
@@ -872,9 +872,9 @@ large, while saving the category.
 
 * #94 - [fixed] Sign-in page shows signup text(@prashant-webkul)
 
-* [fixed] Email templates logo issue fixed(@jitendra-webkul)
+* [fixed] Email Templates logo issue fixed(@jitendra-webkul)
 
-* [fixed] Front search issue fixed due to hardcoded attribute code in search criteria(@jitendra-webkul)
+* [fixed] Front Search issue fixed due to hardcoded attribute code in search criteria(@jitendra-webkul)
 
 * [changed] Versioning of core packages
 
