@@ -324,7 +324,7 @@ This changelog consists of the bug & security fixes and new features included in
 
 * #897 [fixed] - Product gets saved without image if a used image is large. It should throw an error message.
 
-* #896 [fixed] - GetVariantMinPrice does not look at special_price.
+* #896 [fixed] - getVariantMinPrice does not look at special_price.
 
 * #894 [fixed] - Storage link command is missing when installing framework through 
 installer.
@@ -590,7 +590,7 @@ large, while saving the category.
 
 * #438 [fixed] - Simple Select Attribute Issue
 
-* #426 [fixed] - PHP artisan down does not work.
+* #426 [fixed] - php artisan down does not work.
 
 * #402 [fixed] - Change the validation message on moving product from wish-list to cart if product added in wish-list is out of stock.
 
