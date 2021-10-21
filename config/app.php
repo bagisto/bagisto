@@ -56,6 +56,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Admin URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL suffix is used to define the admin url for example
+    | admin/ or backend/
+    |
+    */
+
+    'admin_url' => env('APP_ADMIN_URL', 'admin'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
@@ -65,7 +77,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Kolkata',
+    'timezone' => env('APP_TIMEZONE', 'Asia/Kolkata'),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +90,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => env('APP_LOCALE', 'en'),
 
     /*
     |--------------------------------------------------------------------------
@@ -95,6 +107,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default Country
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the default country by country code.
+    | Ensure it is uppercase and reflects the 'code' column of the
+    | countries table.
+    |
+    | for example: DE EN FR
+    | (use capital letters!)
+    */
+
+    'default_country' => null,
+
+    /*
+    |--------------------------------------------------------------------------
     | Base Currency Code
     |--------------------------------------------------------------------------
     |
@@ -102,7 +129,7 @@ return [
     |
     */
 
-    'currency' => 'USD',
+    'currency' => env('APP_CURRENCY', 'USD'),
 
     /*
     |--------------------------------------------------------------------------
@@ -133,12 +160,12 @@ return [
     /*
         Code Editor
     */
-    'editor' =>'vscode',
+    'editor' => 'vscode',
 
     /*
         Application Version
     */
-    'version' => env('APP_VERSION', '0.1.6'),
+    'version' => env('APP_VERSION'),
 
     /**
      * Blacklisting attributes while debugging
@@ -202,7 +229,7 @@ return [
          * Package Service Providers...
          */
 
-        Dimsav\Translatable\TranslatableServiceProvider::class,
+        Astrotomic\Translatable\TranslatableServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -224,6 +251,7 @@ return [
         Konekt\Concord\ConcordServiceProvider::class,
         Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         //Webkul packages
         Webkul\Theme\Providers\ThemeServiceProvider::class,
@@ -233,6 +261,7 @@ return [
         Webkul\Category\Providers\CategoryServiceProvider::class,
         Webkul\Attribute\Providers\AttributeServiceProvider::class,
         Webkul\Core\Providers\CoreServiceProvider::class,
+        Webkul\Core\Providers\EnvValidatorServiceProvider::class,
         Webkul\Shop\Providers\ShopServiceProvider::class,
         Webkul\Customer\Providers\CustomerServiceProvider::class,
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
@@ -244,8 +273,15 @@ return [
         Webkul\Sales\Providers\SalesServiceProvider::class,
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\API\Providers\APIServiceProvider::class,
-        Webkul\Discount\Providers\DiscountServiceProvider::class,
-        Webkul\CMS\Providers\CMSServiceProvider::class
+        Webkul\CatalogRule\Providers\CatalogRuleServiceProvider::class,
+        Webkul\CartRule\Providers\CartRuleServiceProvider::class,
+        Webkul\Rule\Providers\RuleServiceProvider::class,
+        Webkul\CMS\Providers\CMSServiceProvider::class,
+        Webkul\Velocity\Providers\VelocityServiceProvider::class,
+        Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
+        Webkul\SocialLogin\Providers\SocialLoginServiceProvider::class,
+        Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
+        Webkul\Marketing\Providers\MarketingServiceProvider::class,
     ],
 
     /*
@@ -261,6 +297,11 @@ return [
 
     'aliases' => [
 
+        /**
+         * Laravel
+         *
+         * Place your aliases in alphabetical order.
+         */
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -294,15 +335,24 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
-        'ProductGrid' => Webkul\Ui\DataGrid\Facades\ProductGrid::class,
-        'Image' => Intervention\Image\Facades\Image::class,
+
+        /**
+         * Bagisto
+         *
+         * Place your aliases in alphabetical order.
+         */
+        'Captcha' => Webkul\Customer\Facades\Captcha::class,
         'Cart' => Webkul\Checkout\Facades\Cart::class,
-        'Core' => Webkul\Core\Facades\Core::class,
-        'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Concord' => Konekt\Concord\Facades\Concord::class,
-        'Helper'  => Konekt\Concord\Facades\Helper::class
+        'Core' => Webkul\Core\Facades\Core::class,
+        'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
+        'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'ProductImage' => Webkul\Product\Facades\ProductImage::class,
+        'ProductVideo' => Webkul\Product\Facades\ProductVideo::class,
     ],
 ];

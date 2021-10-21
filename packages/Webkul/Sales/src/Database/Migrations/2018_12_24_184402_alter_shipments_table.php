@@ -26,6 +26,9 @@ class AlterShipmentsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('shipments', function (Blueprint $table) {
+            $table->dropForeign('shipments_inventory_source_id_foreign')->references('id')->on('inventory_sources')->onDelete('set null');
+            $table->dropColumn('inventory_source_id');
+        });
     }
 }

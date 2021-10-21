@@ -37,15 +37,27 @@
                 </div>
 
                 <div>
+                    {{ $order->shipping_address->company_name ?? '' }}
+                </div>
+
+                <div>
                     {{ $order->shipping_address->name }}
                 </div>
 
                 <div>
-                    {{ $order->shipping_address->address1 }}, {{ $order->shipping_address->state }}
+                    {{ $order->shipping_address->address1 }}
                 </div>
 
                 <div>
-                    {{ core()->country_name($order->shipping_address->country) }} {{ $order->shipping_address->postcode }}
+                    {{ $order->shipping_address->postcode . " " . $order->shipping_address->city }}
+                </div>
+
+                <div>
+                    {{ $order->shipping_address->state }}
+                </div>
+
+                <div>
+                    {{ core()->country_name($order->shipping_address->country) }}
                 </div>
 
                 <div>---</div>
@@ -79,15 +91,27 @@
                 </div>
 
                 <div>
+                    {{ $order->billing_address->company_name ?? '' }}
+                </div>
+
+                <div>
                     {{ $order->billing_address->name }}
                 </div>
 
                 <div>
-                    {{ $order->billing_address->address1 }}, {{ $order->billing_address->state }}
+                    {{ $order->billing_address->address1 }}
                 </div>
 
                 <div>
-                    {{ core()->country_name($order->billing_address->country) }} {{ $order->billing_address->postcode }}
+                    {{ $order->billing_address->postcode . " " . $order->billing_address->city }}
+                </div>
+                
+                <div>
+                    {{ $order->billing_address->state }}
+                </div>
+
+                <div>
+                    {{ core()->country_name($order->billing_address->country) }}
                 </div>
 
                 <div>---</div>
@@ -96,11 +120,11 @@
                     {{ __('shop::app.mail.order.contact') }} : {{ $order->billing_address->phone }}
                 </div>
 
-                <div style="font-weight: bold;font-size: 16px; color: #242424;">
+                <div style="font-weight: bold; font-size: 16px; color: #242424;">
                     {{ __('shop::app.mail.order.payment') }}
                 </div>
 
-                <div style="font-weight: bold;font-size: 16px; color: #242424;">
+                <div style="font-weight: bold; font-size: 16px; color: #242424;">
                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                 </div>
             </div>
@@ -122,18 +146,25 @@
                     <tbody>
                         @foreach ($shipment->items as $item)
                             <tr>
-                                <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}" style="text-align: left;padding: 8px">{{ $item->child ? $item->child->sku : $item->sku }}</td>
-                                <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">{{ $item->name }}</td>
-                                <td data-value="{{ __('shop::app.customer.account.order.view.price') }}" style="text-align: left;padding: 8px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
-                                <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}" style="text-align: left;padding: 8px">{{ $item->qty }}</td>
+                                <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}" style="text-align: left;padding: 8px">{{ $item->sku }}</td>
 
-                                @if ($html = $item->getOptionDetailHtml())
-                                <div style="">
-                                    <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
-                                        {{ $html }}
-                                    </label>
-                                </div>
-                            @endif
+                                <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">
+                                    {{ $item->name }}
+
+                                    @if (isset($item->additional['attributes']))
+                                        <div class="item-options">
+
+                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
+                                </td>
+
+                                <td data-value="{{ __('shop::app.customer.account.order.view.price') }}" style="text-align: left;padding: 8px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
+
+                                <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}" style="text-align: left;padding: 8px">{{ $item->qty }}</td>
                             </tr>
 
                         @endforeach

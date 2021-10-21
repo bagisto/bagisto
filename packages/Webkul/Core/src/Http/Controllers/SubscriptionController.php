@@ -4,13 +4,8 @@ namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Core\Repositories\SubscribersListRepository as Subscribers;
-/**
- * Subscription controller
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
+use Webkul\Core\Repositories\SubscribersListRepository;
+
 class SubscriptionController extends Controller
 {
     /**
@@ -21,15 +16,21 @@ class SubscriptionController extends Controller
     protected $_config;
 
     /**
-     * Subscription repository instance
+     * SubscribersListRepository
      *
-     * @var instanceof SubscribersListRepository
+     * @var \Webkul\Core\Repositories\SubscribersListRepository
      */
-    protected $subscribers;
+    protected $subscribersListRepository;
 
-    public function __construct(Subscribers $subscribers)
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscribersListRepository
+     * @return void
+     */
+    public function __construct(SubscribersListRepository $subscribersListRepository)
     {
-        $this->subscribers = $subscribers;
+        $this->subscribersListRepository = $subscribersListRepository;
 
         $this->_config = request('_config');
     }
@@ -37,7 +38,7 @@ class SubscriptionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -47,12 +48,12 @@ class SubscriptionController extends Controller
     /**
      * To unsubscribe the user without deleting the resource of the subscribed user
      *
-     * @param integer $id
-     *
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\View\View
      */
-    public function edit($id) {
-        $subscriber = $this->subscribers->findOrFail($id);
+    public function edit($id)
+    {
+        $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         return view($this->_config['view'])->with('subscriber', $subscriber);
     }
@@ -60,22 +61,29 @@ class SubscriptionController extends Controller
     /**
      * To unsubscribe the user without deleting the resource of the subscribed user
      *
-     * @param integer $id
-     *
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update($id) {
+    public function update($id)
+    {
         $data = request()->all();
 
-        $subscriber = $this->subscribers->findOrFail($id);
+        $subscriber = $this->subscribersListRepository->findOrFail($id);
+
+        $customer = $subscriber->customer;
+
+        if (! is_null($customer)) {
+            $customer->subscribed_to_news_letter = $data['is_subscribed'];
+            $customer->save();
+        }
 
         $result = $subscriber->update($data);
 
-        if ($result)
+        if ($result) {
             session()->flash('success', trans('admin::app.customers.subscribers.update-success'));
-            // session()->flash('success', 'admin::app.customers.subscribers.delete-success');
-        else
+        } else {
             session()->flash('error', trans('admin::app.customers.subscribers.update-failed'));
+        }
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -88,15 +96,17 @@ class SubscriptionController extends Controller
      */
     public function destroy($id)
     {
-        $subscriber = $this->subscribers->findOrFail($id);
+        $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         try {
-            $this->subscribers->delete($id);
+            $this->subscribersListRepository->delete($id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Subscriber']));
 
             return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
+            report($e);
+
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Subscriber']));
         }
 

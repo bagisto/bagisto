@@ -1,10 +1,14 @@
-<accordian :title="'{{ __('admin::app.catalog.products.product-link') }}'" :active="true">
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.product_links.before', ['product' => $product]) !!}
+
+<accordian :title="'{{ __('admin::app.catalog.products.product-link') }}'" :active="false">
     <div slot="body">
 
         <linked-products></linked-products>
 
     </div>
 </accordian>
+
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.product_links.before', ['product' => $product]) !!}
 
 @push('scripts')
 
@@ -30,7 +34,7 @@
                         @{{ product.name }}
                     </li>
 
-                    <li v-if='!products[key].length && search_term[key].length && !is_searching[key]'>
+                    <li v-if='! products[key].length && search_term[key].length && ! is_searching[key]'>
                         {{ __('admin::app.catalog.products.no-result-found') }}
                     </li>
 
@@ -46,10 +50,12 @@
 
             <input type="hidden" name="related_products[]" v-for='(product, index) in addedProducts.related_products' v-if="(key == 'related_products') && addedProducts.related_products.length" :value="product.id"/>
 
-            <span class="filter-tag" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start" v-if="addedProducts[key].length">
-                <span class="wrapper" style="margin-left: 0px; margin-right: 10px;" v-for='(product, index) in addedProducts[key]'>
-                    @{{ product.name }}
-                <span class="icon cross-icon" @click="removeProduct(product, key)"></span>
+            <span class="filter-tag linked-product-filter-tag" v-if="addedProducts[key].length">
+                <span class="wrapper linked-product-wrapper " v-for='(product, index) in addedProducts[key]'>
+                    <span class="do-not-cross-linked-product-arrow">
+                        @{{ product.name }}
+                    </span>
+                    <span class="icon cross-icon" @click="removeProduct(product, key)"></span>
                 </span>
             </span>
         </div>

@@ -2,107 +2,169 @@
 
 namespace Webkul\Admin\DataGrids;
 
+use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\Locale;
 use Webkul\Ui\DataGrid\DataGrid;
-use DB;
 
-/**
- * CategoryDataGrid Class
- *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CategoryDataGrid extends DataGrid
 {
-    protected $index = 'category_id'; //the column that needs to be treated as index column
+    /**
+     * Index.
+     *
+     * @var string
+     */
+    protected $index = 'category_id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
+    protected $sortOrder = 'desc';
 
+    /**
+     * Locale.
+     *
+     * @var string
+     */
+    protected $locale = 'all';
+
+    /**
+     * Create a new datagrid instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->locale = core()->getRequestedLocaleCode();
+    }
+
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
+        if ($this->locale === 'all') {
+            $whereInLocales = Locale::query()->pluck('code')->toArray();
+        } else {
+            $whereInLocales = [$this->locale];
+        }
+
         $queryBuilder = DB::table('categories as cat')
-                ->select('cat.id as category_id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale',
-                DB::raw('COUNT(DISTINCT pc.product_id) as count'))
-                ->leftJoin('category_translations as ct', function($leftJoin) {
-                    $leftJoin->on('cat.id', '=', 'ct.category_id')
-                        ->where('ct.locale', app()->getLocale());
-                })
-                ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
-                ->groupBy('cat.id');
+            ->select(
+                'cat.id as category_id',
+                'ct.name',
+                'cat.position',
+                'cat.status',
+                'ct.locale',
+                DB::raw('COUNT(DISTINCT ' . DB::getTablePrefix() . 'pc.product_id) as count')
+            )
+            ->leftJoin('category_translations as ct', function ($leftJoin) use ($whereInLocales) {
+                $leftJoin->on('cat.id', '=', 'ct.category_id')
+                    ->whereIn('ct.locale', $whereInLocales);
+            })
+            ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
+            ->groupBy('cat.id', 'ct.locale',);
 
 
+        $this->addFilter('status', 'cat.status');
         $this->addFilter('category_id', 'cat.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'category_id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'category_id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
-            'filterable' => true
+            'sortable'   => true,
+            'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index' => 'name',
-            'label' => trans('admin::app.datagrid.name'),
-            'type' => 'string',
+            'index'      => 'name',
+            'label'      => trans('admin::app.datagrid.name'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
-            'filterable' => true
+            'sortable'   => true,
+            'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index' => 'position',
-            'label' => trans('admin::app.datagrid.position'),
-            'type' => 'number',
+            'index'      => 'position',
+            'label'      => trans('admin::app.datagrid.position'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
-            'filterable' => true
+            'sortable'   => true,
+            'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index' => 'status',
-            'label' => trans('admin::app.datagrid.status'),
-            'type' => 'boolean',
-            'sortable' => true,
+            'index'      => 'status',
+            'label'      => trans('admin::app.datagrid.status'),
+            'type'       => 'boolean',
+            'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
-            'wrapper' => function($value) {
-                if ($value->status == 1)
-                    return 'Active';
-                else
-                    return 'Inactive';
-            }
+            'closure'    => function ($value) {
+                if ($value->status == 1) {
+                    return trans('admin::app.datagrid.active');
+                } else {
+                    return trans('admin::app.datagrid.inactive');
+                }
+            },
         ]);
 
         $this->addColumn([
-            'index' => 'count',
-            'label' => trans('admin::app.datagrid.no-of-products'),
-            'type' => 'number',
-            'sortable' => true,
+            'index'      => 'count',
+            'label'      => trans('admin::app.datagrid.no-of-products'),
+            'type'       => 'number',
+            'sortable'   => true,
             'searchable' => false,
-            'filterable' => false
+            'filterable' => false,
         ]);
     }
 
-    public function prepareActions() {
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
+    public function prepareActions()
+    {
         $this->addAction([
-            'title' => 'Edit Category',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.catalog.categories.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'title'  => trans('admin::app.datagrid.edit'),
+            'method' => 'GET',
+            'route'  => 'admin.catalog.categories.edit',
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title' => 'Delete Category',
-            'method' => 'POST', // use GET request only for redirect purposes
-            'route' => 'admin.catalog.categories.delete',
+            'title'        => trans('admin::app.datagrid.delete'),
+            'method'       => 'POST',
+            'route'        => 'admin.catalog.categories.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
-            'icon' => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
+            'function'     => 'deleteCategory(event, "delete")'
+        ]);
+
+        $this->addMassAction([
+            'type'   => 'delete',
+            'label'  => trans('admin::app.datagrid.delete'),
+            'action' => route('admin.catalog.categories.massdelete'),
+            'method' => 'POST',
         ]);
     }
 }

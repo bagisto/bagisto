@@ -1,13 +1,13 @@
 {!! view_render_event('bagisto.shop.products.view.stock.before', ['product' => $product]) !!}
 
-@if ($product->type == 'simple')
-    <div class="stock-status {{! $product->haveSufficientQuantity(1) ? '' : 'active' }}">
-        {{ $product->haveSufficientQuantity(1) ? __('shop::app.products.in-stock') : __('shop::app.products.out-of-stock') }}
-    </div>
-@else
-    <div class="stock-status in-stock active" id="in-stock" style="display: none;">
+<div class="stock-status {{! $product->haveSufficientQuantity(1) ? '' : 'active' }}">
+    @if ( $product->haveSufficientQuantity(1) === true )
         {{ __('shop::app.products.in-stock') }}
-    </div>
-@endif
+    @elseif ( $product->haveSufficientQuantity(1) > 0 )
+        {{ __('shop::app.products.available-for-order') }}
+    @else
+        {{ __('shop::app.products.out-of-stock') }}
+    @endif
+</div>
 
 {!! view_render_event('bagisto.shop.products.view.stock.after', ['product' => $product]) !!}

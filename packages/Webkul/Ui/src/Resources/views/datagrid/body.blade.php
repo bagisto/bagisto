@@ -1,5 +1,5 @@
 <tbody>
-    @if (count($records))
+    @if ($records instanceof \Illuminate\Pagination\LengthAwarePaginator && count($records))
         @foreach ($records as $key => $record)
             <tr>
                 @if ($enableMassActions)
@@ -17,13 +17,26 @@
                         $columnIndex = explode('.', $column['index']);
 
                         $columnIndex = end($columnIndex);
+
+                        $supportedClosureKey = ['wrapper', 'closure'];
+
+                        $isClosure = ! empty(array_intersect($supportedClosureKey, array_keys($column)));
                     @endphp
 
-                    @if (isset($column['wrapper']))
-                        @if (isset($column['closure']) && $column['closure'] == true)
-                            <td data-value="{{ $column['label'] }}">{!! $column['wrapper']($record) !!}</td>
-                        @else
-                            <td data-value="{{ $column['label'] }}">{{ $column['wrapper']($record) }}</td>
+                    @if ($isClosure)
+                        {{--
+                            Depereciation Notice:
+                            The following key i.e. `wrapper` will remove in the later version. Use only `closure`
+                            key to manipulate the column. This will only hit the raw html.
+                        --}}
+                        @if (isset($column['wrapper']) && gettype($column['wrapper']) === 'object' && $column['wrapper'] instanceof \Closure)
+                            @if (isset($column['closure']) && $column['closure'] == true)
+                                <td data-value="{{ $column['label'] }}">{!! $column['wrapper']($record) !!}</td>
+                            @else
+                                <td data-value="{{ $column['label'] }}">{{ $column['wrapper']($record) }}</td>
+                            @endif
+                        @elseif (isset($column['closure']) && gettype($column['closure']) === 'object' && $column['closure'] instanceof \Closure)
+                            <td data-value="{{ $column['label'] }}">{!! $column['closure']($record) !!}</td>
                         @endif
                     @else
                         @if ($column['type'] == 'price')
@@ -39,27 +52,44 @@
                 @endforeach
 
                 @if ($enableActions)
-                    <td class="actions" style="width: 100px;" data-value="{{ __('ui::app.datagrid.actions') }}">
+                    <td class="actions" style="white-space: nowrap; width: 100px;" data-value="{{ __('ui::app.datagrid.actions') }}">
                         <div class="action">
                             @foreach ($actions as $action)
-                                <a
-                                @if ($action['method'] == 'GET')
-                                    href="{{ route($action['route'], $record->{$action['index'] ?? $index}) }}"
+                                @php
+                                    $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
+                                @endphp
+
+                                @if ($toDisplay)
+                                    <a
+                                        id="{{ $record->{$action['index'] ?? $index} }}"
+
+                                        @if ($action['method'] == 'GET')
+                                            href="{{ route($action['route'], $record->{$action['index'] ?? $index}) }}"
+                                        @endif
+
+                                        @if ($action['method'] != 'GET')
+                                            @if (isset($action['function']))
+                                                onclick="{{ $action['function'] }}"
+                                            @else
+                                                v-on:click="doAction($event)"
+                                            @endif
+                                        @endif
+
+                                        data-method="{{ $action['method'] }}"
+                                        data-action="{{ route($action['route'], $record->{$index}) }}"
+                                        data-token="{{ csrf_token() }}"
+
+                                        @if (isset($action['target']))
+                                            target="{{ $action['target'] }}"
+                                        @endif
+
+                                        @if (isset($action['title']))
+                                            title="{{ $action['title'] }}"
+                                        @endif
+                                    >
+                                        <span class="{{ $action['icon'] }}"></span>
+                                    </a>
                                 @endif
-
-                                @if ($action['method'] != 'GET')
-                                    v-on:click="doAction($event)"
-                                @endif
-
-                                data-method="{{ $action['method'] }}"
-                                data-action="{{ route($action['route'], $record->{$index}) }}"
-                                data-token="{{ csrf_token() }}"
-
-                                @if (isset($action['title']))
-                                    title="{{ $action['title'] }}"
-                                @endif>
-                                    <span class="{{ $action['icon'] }}"></span>
-                                </a>
                             @endforeach
                         </div>
                     </td>
@@ -68,7 +98,9 @@
         @endforeach
     @else
         <tr>
-            <td colspan="10" style="text-align: center;">{{ $norecords }}</td>
+            <td colspan="10">
+                <p style="text-align: center;">{{ $norecords }}</p>
+            </td>
         </tr>
     @endif
 </tbody>

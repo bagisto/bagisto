@@ -15,11 +15,11 @@ class AttributeFamily extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'code' => $this->code,
-            'name' => $this->name,
-            'status' => $this->status,
-            'groups' => AttributeGroup::collection($this->attribute_groups),
+            'id'         => $this->id,
+            'code'       => $this->code,
+            'name'       => $this->name,
+            'status'     => $this->status,
+            'groups'     => AttributeGroup::collection($this->attribute_groups),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

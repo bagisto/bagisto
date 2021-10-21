@@ -2,81 +2,83 @@
 
 namespace Webkul\Attribute\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
+use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
-use Illuminate\Container\Container as App;
+use Webkul\Core\Eloquent\Repository;
 
-/**
- * Attribute Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class AttributeRepository extends Repository
 {
     /**
-     * AttributeOptionRepository object
+     * Attribute option repository instance.
      *
-     * @var array
+     * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
      */
-    protected $attributeOption;
+    protected $attributeOptionRepository;
 
     /**
-     * Create a new controller instance.
+     * Create a new repository instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOption
+     * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
      * @return void
      */
-    public function __construct(AttributeOptionRepository $attributeOption, App $app)
-    {
-        $this->attributeOption = $attributeOption;
+    public function __construct(
+        AttributeOptionRepository $attributeOptionRepository,
+        App $app
+    ) {
+        $this->attributeOptionRepository = $attributeOptionRepository;
 
         parent::__construct($app);
     }
 
     /**
-     * Specify Model class name
+     * Specify model class name.
      *
      * @return mixed
      */
-    function model()
+    public function model()
     {
         return 'Webkul\Attribute\Contracts\Attribute';
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * Create attribute.
+     *
+     * @param  array  $data
+     * @return \Webkul\Attribute\Contracts\Attribute
      */
     public function create(array $data)
     {
-        Event::fire('catalog.attribute.create.before');
+        Event::dispatch('catalog.attribute.create.before');
 
         $data = $this->validateUserInput($data);
 
         $options = isset($data['options']) ? $data['options'] : [];
+
         unset($data['options']);
+
         $attribute = $this->model->create($data);
 
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox']) && count($options)) {
             foreach ($options as $optionInputs) {
-                $this->attributeOption->create(array_merge([
-                        'attribute_id' => $attribute->id
-                    ], $optionInputs));
+                $this->attributeOptionRepository->create(array_merge([
+                    'attribute_id' => $attribute->id,
+                ], $optionInputs));
             }
         }
 
-        Event::fire('catalog.attribute.create.after', $attribute);
+        Event::dispatch('catalog.attribute.create.after', $attribute);
 
         return $attribute;
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * Update attribute.
+     *
+     * @param  array  $data
+     * @param  int $id
+     * @param  string  $attribute
+     * @return \Webkul\Attribute\Contracts\Attribute
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -84,54 +86,56 @@ class AttributeRepository extends Repository
 
         $attribute = $this->find($id);
 
-        Event::fire('catalog.attribute.update.before', $id);
+        Event::dispatch('catalog.attribute.update.before', $id);
 
         $attribute->update($data);
-
-        $previousOptionIds = $attribute->options()->pluck('id');
 
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
             if (isset($data['options'])) {
                 foreach ($data['options'] as $optionId => $optionInputs) {
-                    if (str_contains($optionId, 'option_')) {
-                        $this->attributeOption->create(array_merge([
-                                'attribute_id' => $attribute->id,
-                            ], $optionInputs));
-                    } else {
-                        if (is_numeric($index = $previousOptionIds->search($optionId))) {
-                            $previousOptionIds->forget($index);
-                        }
+                    $isNew = $optionInputs['isNew'] == 'true' ? true : false;
 
-                        $this->attributeOption->update($optionInputs, $optionId);
+                    if ($isNew) {
+                        $this->attributeOptionRepository->create(array_merge([
+                            'attribute_id' => $attribute->id,
+                        ], $optionInputs));
+                    } else {
+                        $isDelete = $optionInputs['isDelete'] == 'true' ? true : false;
+
+                        if ($isDelete) {
+                            $this->attributeOptionRepository->delete($optionId);
+                        } else {
+                            $this->attributeOptionRepository->update($optionInputs, $optionId);
+                        }
                     }
                 }
             }
         }
 
-        foreach ($previousOptionIds as $optionId) {
-            $this->attributeOption->delete($optionId);
-        }
-
-        Event::fire('catalog.attribute.update.after', $attribute);
+        Event::dispatch('catalog.attribute.update.after', $attribute);
 
         return $attribute;
     }
 
     /**
-     * @param $id
+     * Delete attribute.
+     *
+     * @param  int  $id
      * @return void
      */
     public function delete($id)
     {
-        Event::fire('catalog.attribute.delete.before', $id);
+        Event::dispatch('catalog.attribute.delete.before', $id);
 
         parent::delete($id);
 
-        Event::fire('catalog.attribute.delete.after', $id);
+        Event::dispatch('catalog.attribute.delete.after', $id);
     }
 
     /**
-     * @param array $data
+     * Validate user input.
+     *
+     * @param  array  $data
      * @return array
      */
     public function validateUserInput($data)
@@ -140,7 +144,7 @@ class AttributeRepository extends Repository
             $data['value_per_channel'] = $data['value_per_locale'] = 0;
         }
 
-        if (! in_array($data['type'], ['select', 'multiselect', 'price'])) {
+        if (! in_array($data['type'], ['select', 'multiselect', 'price', 'checkbox'])) {
             $data['is_filterable'] = 0;
         }
 
@@ -152,6 +156,8 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * Get filter attributes.
+     *
      * @return array
      */
     public function getFilterAttributes()
@@ -160,13 +166,16 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * Get product default attributes.
+     *
+     * @param  array  $codes
      * @return array
      */
     public function getProductDefaultAttributes($codes = null)
     {
         $attributeColumns  = ['id', 'code', 'value_per_channel', 'value_per_locale', 'type', 'is_filterable'];
 
-        if (! is_array($codes) && !$codes)
+        if (! is_array($codes) && ! $codes)
             return $this->findWhereIn('code', [
                 'name',
                 'description',
@@ -176,71 +185,87 @@ class AttributeRepository extends Repository
                 'special_price',
                 'special_price_from',
                 'special_price_to',
-                'status'
+                'status',
             ], $attributeColumns);
 
-        if (in_array('*', $codes))
+        if (in_array('*', $codes)) {
             return $this->all($attributeColumns);
+        }
 
         return $this->findWhereIn('code', $codes, $attributeColumns);
     }
 
     /**
-     * @return Object
+     * Get attribute by code.
+     *
+     * @param  string  $code
+     * @return \Webkul\Attribute\Contracts\Attribute
      */
     public function getAttributeByCode($code)
     {
         static $attributes = [];
 
-        if (array_key_exists($code, $attributes))
+        if (array_key_exists($code, $attributes)) {
             return $attributes[$code];
+        }
 
         return $attributes[$code] = $this->findOneByField('code', $code);
     }
 
     /**
-     * @return Object
+     * Get family attributes.
+     *
+     * @param  \Webkul\Attribute\Contracts\AttributeFamily  $attributeFamily
+     * @return \Webkul\Attribute\Contracts\Attribute
      */
     public function getFamilyAttributes($attributeFamily)
     {
         static $attributes = [];
 
-        if (array_key_exists($attributeFamily->id, $attributes))
+        if (array_key_exists($attributeFamily->id, $attributes)) {
             return $attributes[$attributeFamily->id];
+        }
 
         return $attributes[$attributeFamily->id] = $attributeFamily->custom_attributes;
     }
 
     /**
-     * @return Object
+     * Get partials.
+     *
+     * @return array
      */
     public function getPartial()
     {
         $attributes = $this->model->all();
-        $trimmed = array();
 
-        foreach($attributes as $key => $attribute) {
-            if ($attribute->code != 'tax_category_id' && ($attribute->type == 'select' || $attribute->type == 'multiselect' || $attribute->code == 'sku')) {
+        $trimmed = [];
+
+        foreach ($attributes as $key => $attribute) {
+            if (
+                $attribute->code != 'tax_category_id'
+                && ($attribute->type == 'select'
+                    || $attribute->type == 'multiselect'
+                    || $attribute->code == 'sku')
+            ) {
                 if ($attribute->options()->exists()) {
                     array_push($trimmed, [
-                        'id' => $attribute->id,
-                        'name' => $attribute->admin_name,
-                        'type' => $attribute->type,
-                        'code' => $attribute->code,
+                        'id'          => $attribute->id,
+                        'name'        => $attribute->admin_name,
+                        'type'        => $attribute->type,
+                        'code'        => $attribute->code,
                         'has_options' => true,
-                        'options' => $attribute->options
+                        'options'     => $attribute->options,
                     ]);
                 } else {
                     array_push($trimmed, [
-                        'id' => $attribute->id,
-                        'name' => $attribute->admin_name,
-                        'type' => $attribute->type,
-                        'code' => $attribute->code,
+                        'id'          => $attribute->id,
+                        'name'        => $attribute->admin_name,
+                        'type'        => $attribute->type,
+                        'code'        => $attribute->code,
                         'has_options' => false,
-                        'options' => null
+                        'options'     => null,
                     ]);
                 }
-
             }
         }
 

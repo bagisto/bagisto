@@ -3,7 +3,6 @@
 namespace Webkul\Theme\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\AliasLoader;
 use Webkul\Theme\Themes;
 use Webkul\Theme\Facades\Themes as ThemeFacade;
 

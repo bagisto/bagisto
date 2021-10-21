@@ -26,7 +26,7 @@ class AddSwatchValueColumnsInAttributeOptionsTable extends Migration
     public function down()
     {
         Schema::table('attribute_options', function (Blueprint $table) {
-            //
+            $table->dropColumn('swatch_value');
         });
     }
 }

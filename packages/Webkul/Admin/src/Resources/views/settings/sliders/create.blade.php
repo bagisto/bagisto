@@ -6,11 +6,16 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.sliders.create') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
+        <form
+            method="POST"
+            @submit.prevent="onSubmit"
+            enctype="multipart/form-data"
+            action="{{ route('admin.sliders.create') }}">
+
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.sliders.index') }}'"></i>
 
                         {{ __('admin::app.settings.sliders.add-title') }}
                     </h1>
@@ -29,9 +34,25 @@
 
                     {!! view_render_event('bagisto.admin.settings.slider.create.before') !!}
 
+                    <div class="control-group" :class="[errors.has('locale[]') ? 'has-error' : '']">
+                        <label for="locale">{{ __('admin::app.datagrid.locale') }}</label>
+
+                        <select class="control" id="locale" name="locale[]" data-vv-as="&quot;{{ __('admin::app.datagrid.locale') }}&quot;" value="" v-validate="'required'" multiple>
+                            @foreach (core()->getAllLocales() as $localeModel)
+
+                                <option value="{{ $localeModel->code }}">
+                                    {{ $localeModel->name }}
+                                </option>
+
+                            @endforeach
+                        </select>
+
+                        <span class="control-error" v-if="errors.has('locale[]')">@{{ errors.first('locale[]') }}</span>
+                    </div>
+
                     <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
-                        <label for="title" class="required">{{ __('admin::app.settings.sliders.title') }}</label>
-                        <input type="text" class="control" name="title" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.title') }}&quot;">
+                        <label for="title" class="required">{{ __('admin::app.settings.sliders.name') }}</label>
+                        <input type="text" class="control" name="title" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.name') }}&quot;">
                         <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                     </div>
 
@@ -41,11 +62,23 @@
                         <select class="control" id="channel_id" name="channel_id" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.channels') }}&quot;">
                             @foreach ($channels as $channel)
                                 <option value="{{ $channel->id }}" @if ($channel->id == old('channel_id')) selected @endif>
-                                    {{ __($channel->name) }}
+                                    {{ __(core()->getChannelName($channel)) }}
                                 </option>
                             @endforeach
                         </select>
                         <span class="control-error" v-if="errors.has('channel_id')">@{{ errors.first('channel_id') }}</span>
+                    </div>
+
+                    <div class="control-group date">
+                        <label for="expired_at">{{ __('admin::app.settings.sliders.expired-at') }}</label>
+                        <date>
+                            <input type="text" name="expired_at" class="control" value="{{ old('expired_at') }}"/>
+                        </date>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="sort_order">{{ __('admin::app.settings.sliders.sort-order') }}</label>
+                        <input type="text" class="control" id="sort_order" name="sort_order" value="{{ old('sort_order') ?? 0 }}"/>
                     </div>
 
                     <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
@@ -76,21 +109,23 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+    @include('admin::layouts.tinymce')
 
     <script>
         $(document).ready(function () {
-            tinymce.init({
+            tinyMCEHelper.initTinyMCE({
                 selector: 'textarea#tiny',
                 height: 200,
                 width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
+                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code | table',
                 image_advtab: true,
                 templates: [
                     { title: 'Test template 1', content: 'Test 1' },
                     { title: 'Test template 2', content: 'Test 2' }
                 ],
+                uploadRoute: '{{ route('admin.tinymce.upload') }}',
+                csrfToken: '{{ csrf_token() }}',
             });
         });
     </script>

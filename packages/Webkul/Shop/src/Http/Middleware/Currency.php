@@ -2,8 +2,8 @@
 
 namespace Webkul\Shop\Http\Middleware;
 
-use Webkul\Core\Repositories\CurrencyRepository;
 use Closure;
+use Webkul\Core\Repositories\CurrencyRepository;
 
 class Currency
 {
@@ -40,6 +40,8 @@ class Currency
                 session()->put('currency', core()->getChannelBaseCurrencyCode());
             }
         }
+
+        unset($request['currency']);
 
         return $next($request);
     }

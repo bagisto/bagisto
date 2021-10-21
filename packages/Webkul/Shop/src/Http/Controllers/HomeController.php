@@ -4,42 +4,71 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SliderRepository;
+use Webkul\Product\Repositories\SearchRepository;
 
-/**
- * Home page controller
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
- class HomeController extends Controller
+class HomeController extends Controller
 {
-    protected $_config;
+    /**
+     * Slider repository instance.
+     *
+     * @var \Webkul\Core\Repositories\SliderRepository
+     */
     protected $sliderRepository;
-    protected $current_channel;
 
-    public function __construct(SliderRepository $sliderRepository)
-    {
-        $this->_config = request('_config');
+    /**
+     * Search repository instance.
+     *
+     * @var \Webkul\Core\Repositories\SearchRepository
+     */
+    protected $searchRepository;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Core\Repositories\SliderRepository  $sliderRepository
+     * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
+     * @return void
+     */
+    public function __construct(
+        SliderRepository $sliderRepository,
+        SearchRepository $searchRepository
+    ) {
         $this->sliderRepository = $sliderRepository;
+
+        $this->searchRepository = $searchRepository;
+
+        parent::__construct();
     }
 
     /**
-     * loads the home page for the storefront
+     * Loads the home page for the storefront.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        $currentChannel = core()->getCurrentChannel()->id;
-        $sliderData = $this->sliderRepository->findByField('channel_id', $currentChannel)->toArray();
+        $sliderData = $this->sliderRepository->getActiveSliders();
 
         return view($this->_config['view'], compact('sliderData'));
     }
 
     /**
-     * loads the home page for the storefront
+     * Loads the home page for the storefront if something wrong.
+     *
+     * @return \Exception
      */
     public function notFound()
     {
         abort(404);
+    }
+
+    /**
+     * Upload image for product search with machine learning.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function upload()
+    {
+        return $this->searchRepository->uploadSearchImage(request()->all());
     }
 }

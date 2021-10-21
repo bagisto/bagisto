@@ -2,17 +2,9 @@
 
 namespace Webkul\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Core\Repositories\CountryRepository as Country;
-use Webkul\Core\Repositories\CountryStateRepository as State;
+use Webkul\Core\Repositories\CountryRepository;
+use Webkul\Core\Repositories\CountryStateRepository;
 
-/**
- * Country controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CountryStateController extends Controller
 {
     /**
@@ -25,28 +17,32 @@ class CountryStateController extends Controller
     /**
      * CountryRepository object
      *
-     * @var array
+     * @var \Webkul\Core\Repositories\CountryRepository
      */
-    protected $country;
+    protected $countryRepository;
 
     /**
-     * StateRepository object
+     * CountryStateRepository object
      *
-     * @var array
+     * @var Webkul\Core\Repositories\CountryStateRepository
      */
-    protected $state;
+    protected $countryStateRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\CountryRepository  $country
+     * @param  \Webkul\Core\Repositories\CountryRepository       $countryRepository
+     * @param  \Webkul\Core\Repositories\CountryStateRepository  $countryStateRepository
      * @return void
      */
-    public function __construct(Country $country, State $state)
+    public function __construct(
+        CountryRepository $countryRepository,
+        CountryStateRepository $countryStateRepository
+    )
     {
-        $this->country = $country;
+        $this->countryRepository = $countryRepository;
 
-        $this->state = $state;
+        $this->countryStateRepository = $countryStateRepository;
 
         $this->_config = request('_config');
     }
@@ -54,12 +50,13 @@ class CountryStateController extends Controller
     /**
      * Function to retrieve states with respect to countries with codes and names for both of the countries and states.
      *
-     * @return array
+     * @return \Illuminate\View\View
      */
     public function getCountries()
     {
-        $countries = $this->country->all();
-        $states = $this->state->all();
+        $countries = $this->countryRepository->all();
+
+        $states = $this->countryStateRepository->all();
 
         $nestedArray = [];
 
@@ -74,10 +71,15 @@ class CountryStateController extends Controller
         return view($this->_config['view'])->with('statesCountries', $nestedArray);
     }
 
+    /**
+     *
+     * @return \Illuminate\View\View
+     */
     public function getStates($country)
     {
-        $countries = $this->country->all();
-        $states = $this->state->all();
+        $countries = $this->countryRepository->all();
+        
+        $states = $this->countryStateRepository->all();
 
         $nestedArray = [];
 

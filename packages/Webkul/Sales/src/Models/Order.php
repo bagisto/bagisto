@@ -2,27 +2,60 @@
 
 namespace Webkul\Sales\Models;
 
+use Webkul\Checkout\Models\CartProxy;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\Order as OrderContract;
+use Webkul\Sales\Database\Factories\OrderFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model implements OrderContract
 {
-    protected $guarded = ['id', 'items', 'shipping_address', 'billing_address', 'customer', 'channel', 'payment', 'created_at', 'updated_at'];
+    use HasFactory;
+
+    public const STATUS_PENDING = 'pending';
+
+    public const STATUS_PENDING_PAYMENT = 'pending_payment';
+
+    public const STATUS_PROCESSING = 'processing';
+
+    public const STATUS_COMPLETED = 'completed';
+
+    public const STATUS_CANCELED = 'canceled';
+
+    public const STATUS_CLOSED = 'closed';
+
+    public const STATUS_FRAUD = 'fraud';
+
+    protected $guarded = [
+        'id',
+        'items',
+        'shipping_address',
+        'billing_address',
+        'customer',
+        'channel',
+        'payment',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $statusLabel = [
-        'pending' => 'Pending',
-        'pending_payment' => 'Pending Payment',
-        'processing' => 'Processing',
-        'completed' => 'Completed',
-        'canceled' => 'Canceled',
-        'closed' => 'Closed',
-        'fraud' => 'Fraud'
+        self::STATUS_PENDING => 'Pending',
+        self::STATUS_PENDING_PAYMENT => 'Pending Payment',
+        self::STATUS_PROCESSING => 'Processing',
+        self::STATUS_COMPLETED => 'Completed',
+        self::STATUS_CANCELED => 'Canceled',
+        self::STATUS_CLOSED => 'Closed',
+        self::STATUS_FRAUD => 'Fraud',
     ];
 
     /**
      * Get the order items record associated with the order.
      */
-    public function getCustomerFullNameAttribute()
+    public function getCustomerFullNameAttribute(): string
     {
         return $this->customer_first_name . ' ' . $this->customer_last_name;
     }
@@ -52,17 +85,42 @@ class Order extends Model implements OrderContract
     }
 
     /**
+     * Get the associated cart that was used to create this order.
+     */
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(CartProxy::modelClass());
+    }
+
+    /**
      * Get the order items record associated with the order.
      */
-    public function items()
+    public function items(): HasMany
     {
-        return $this->hasMany(OrderItemProxy::modelClass())->whereNull('parent_id');
+        return $this->hasMany(OrderItemProxy::modelClass())
+                    ->whereNull('parent_id');
+    }
+
+    /**
+     * Get the comments record associated with the order.
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(OrderCommentProxy::modelClass());
+    }
+
+    /**
+     * Get the order items record associated with the order.
+     */
+    public function all_items(): HasMany
+    {
+        return $this->hasMany(OrderItemProxy::modelClass());
     }
 
     /**
      * Get the order shipments record associated with the order.
      */
-    public function shipments()
+    public function shipments(): HasMany
     {
         return $this->hasMany(ShipmentProxy::modelClass());
     }
@@ -70,7 +128,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the order invoices record associated with the order.
      */
-    public function invoices()
+    public function invoices(): HasMany
     {
         return $this->hasMany(InvoiceProxy::modelClass());
     }
@@ -78,15 +136,23 @@ class Order extends Model implements OrderContract
     /**
      * Get the order refunds record associated with the order.
      */
-    public function refunds()
+    public function refunds(): HasMany
     {
         return $this->hasMany(RefundProxy::modelClass());
     }
-    
+
+    /**
+     * Get the order transactions record associated with the order.
+     */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(OrderTransactionProxy::modelClass());
+    }
+
     /**
      * Get the customer record associated with the order.
      */
-    public function customer()
+    public function customer(): MorphTo
     {
         return $this->morphTo();
     }
@@ -94,7 +160,7 @@ class Order extends Model implements OrderContract
     /**
      * Get the addresses for the order.
      */
-    public function addresses()
+    public function addresses(): HasMany
     {
         return $this->hasMany(OrderAddressProxy::modelClass());
     }
@@ -102,17 +168,18 @@ class Order extends Model implements OrderContract
     /**
      * Get the payment for the order.
      */
-    public function payment()
+    public function payment(): HasOne
     {
         return $this->hasOne(OrderPaymentProxy::modelClass());
     }
 
     /**
-     * Get the biling address for the order.
+     * Get the billing address for the order.
      */
-    public function billing_address()
+    public function billing_address(): HasMany
     {
-        return $this->addresses()->where('address_type', 'billing');
+        return $this->addresses()
+                    ->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
     }
 
     /**
@@ -120,15 +187,17 @@ class Order extends Model implements OrderContract
      */
     public function getBillingAddressAttribute()
     {
-        return $this->billing_address()->first();
+        return $this->billing_address()
+                    ->first();
     }
 
     /**
      * Get the shipping address for the order.
      */
-    public function shipping_address()
+    public function shipping_address(): HasMany
     {
-        return $this->addresses()->where('address_type', 'shipping');
+        return $this->addresses()
+                    ->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
     }
 
     /**
@@ -136,7 +205,8 @@ class Order extends Model implements OrderContract
      */
     public function getShippingAddressAttribute()
     {
-        return $this->shipping_address()->first();
+        return $this->shipping_address()
+                    ->first();
     }
 
     /**
@@ -148,16 +218,37 @@ class Order extends Model implements OrderContract
     }
 
     /**
-     * Checks if new shipment is allow or not
+     * Checks if cart have stockable items
+     *
+     * @return boolean
      */
-    public function canShip()
+    public function haveStockableItems(): bool
     {
-        if ($this->status == 'fraud')
+        foreach ($this->items as $item) {
+            if ($item->getTypeInstance()
+                     ->isStockable()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if new shipment is allow or not
+     *
+     * @return bool
+     */
+    public function canShip(): bool
+    {
+        if ($this->status === self::STATUS_FRAUD) {
             return false;
+        }
 
         foreach ($this->items as $item) {
-            if ($item->qty_to_ship > 0)
+            if ($item->canShip() && $item->order->status !== self::STATUS_CLOSED) {
                 return true;
+            }
         }
 
         return false;
@@ -165,31 +256,53 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if new invoice is allow or not
+     *
+     * @return bool
      */
-    public function canInvoice()
+    public function canInvoice(): bool
     {
-        if ($this->status == 'fraud')
+        if ($this->status === self::STATUS_FRAUD) {
             return false;
-            
-        foreach ($this->items as $item) {
-            if ($item->qty_to_invoice > 0)
-                return true;
         }
-        
+
+        foreach ($this->items as $item) {
+            if ($item->canInvoice() && $item->order->status !== self::STATUS_CLOSED) {
+                return true;
+            }
+        }
+
         return false;
     }
 
     /**
      * Checks if order can be canceled or not
+     *
+     * @return bool
      */
-    public function canCancel()
+    public function canCancel(): bool
     {
-        if ($this->status == 'fraud')
+        if ($this->payment->method == 'cashondelivery' && core()->getConfigData('sales.paymentmethods.cashondelivery.generate_invoice')) {
             return false;
-            
+        }
+
+        if ($this->payment->method == 'moneytransfer' && core()->getConfigData('sales.paymentmethods.moneytransfer.generate_invoice')) {
+            return false;
+        }
+
+        if ($this->status === self::STATUS_FRAUD) {
+            return false;
+        }
+
+        $pendingInvoice = $this->invoices->where('state', 'pending')
+                                         ->first();
+        if ($pendingInvoice) {
+            return true;
+        }
+
         foreach ($this->items as $item) {
-            if ($item->qty_to_cancel > 0)
+            if ($item->canCancel() && $item->order->status !== self::STATUS_CLOSED) {
                 return true;
+            }
         }
 
         return false;
@@ -197,20 +310,42 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if order can be refunded or not
+     *
+     * @return bool
      */
-    public function canRefund()
+    public function canRefund(): bool
     {
-        if ($this->status == 'fraud')
+        if ($this->status === self::STATUS_FRAUD) {
             return false;
-            
-        foreach ($this->items as $item) {
-            if ($item->qty_to_refund > 0)
-                return true;
         }
 
-        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded > 0)
+        $pendingInvoice = $this->invoices->where('state', 'pending')
+                                         ->first();
+        if ($pendingInvoice) {
+            return false;
+        }
+
+        foreach ($this->items as $item) {
+            if ($item->qty_to_refund > 0 && $item->order->status !== self::STATUS_CLOSED) {
+                return true;
+            }
+        }
+
+        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()
+                                                                                       ->sum('base_adjustment_fee') > 0) {
             return true;
+        }
 
         return false;
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return OrderFactory
+     */
+    protected static function newFactory(): OrderFactory
+    {
+        return OrderFactory::new();
     }
 }

@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.catalog.attributes.index') }}'"></i>
 
                         {{ __('admin::app.catalog.attributes.add-title') }}
                     </h1>
@@ -83,7 +83,7 @@
 
                                 <div class="control-group">
                                     <label for="locale-{{ $locale->code }}">{{ $locale->name . ' (' . $locale->code . ')' }}</label>
-                                    <input type="text" class="control" id="locale-{{ $locale->code }}" name="<?php echo $locale->code; ?>[name]" value="{{ old($locale->code)['name'] }}"/>
+                                    <input type="text" class="control" id="locale-{{ $locale->code }}" name="<?php echo $locale->code; ?>[name]" value="{{ old($locale->code)['name'] ?? '' }}"/>
                                 </div>
 
                             @endforeach
@@ -213,6 +213,14 @@
                                 </select>
                             </div>
 
+                            <div class="control-group">
+                                <label for="is_comparable">{{ __('admin::app.catalog.attributes.is_comparable') }}</label>
+                                <select class="control" id="is_comparable" name="is_comparable">
+                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
+                                </select>
+                            </div>
+
                             {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.configuration.controls.after') !!}
 
                         </div>
@@ -252,6 +260,15 @@
                 </select>
             </div>
 
+            <div class="control-group">
+                <span class="checkbox">
+                    <input type="checkbox" class="control" id="default-null-option" name="default-null-option" v-model="isNullOptionChecked" >
+
+                    <label class="checkbox-view" for="default-null-option"></label>
+                    {{ __('admin::app.catalog.attributes.default_null_option') }}
+                </span>
+            </div>
+
             <div class="table">
                 <table>
                     <thead>
@@ -279,7 +296,10 @@
                             </td>
 
                             <td v-if="show_swatch && swatch_type == 'image'">
-                                <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
+                                <div class="control-group" :class="[errors.has('options[' + row.id + '][swatch_value]') ? 'has-error' : '']">
+                                    <input type="file" v-validate="'size:600'" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
+                                    <span class="control-error" v-if="errors.has('options[' + row.id + '][swatch_value]')">The image size must be less than 600 KB</span>
+                                </div>
                             </td>
 
                             <td>
@@ -292,7 +312,7 @@
                             @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
                                 <td>
                                     <div class="control-group" :class="[errors.has(localeInputName(row, '{{ $locale->code }}')) ? 'has-error' : '']">
-                                        <input type="text" v-validate="'{{ app()->getLocale() }}' == '{{ $locale->code }}' ? 'required': ''"  v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
+                                        <input type="text" v-validate="getOptionValidation(row, '{{ $locale->code }}')"  v-model="row['locales']['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
                                         <span class="control-error" v-if="errors.has(localeInputName(row, '{{ $locale->code }}'))">@{{ errors.first(localeInputName(row, '{!! $locale->code !!}')) }}</span>
                                     </div>
                                 </td>
@@ -313,7 +333,7 @@
                 </table>
             </div>
 
-            <button type="button" class="btn btn-lg btn-primary mt-20" id="add-option-btn" @click="addOptionRow()">
+            <button type="button" class="btn btn-lg btn-primary mt-20" id="add-option-btn" @click="addOptionRow(false)">
                 {{ __('admin::app.catalog.attributes.add-option-btn-title') }}
             </button>
         </div>
@@ -339,10 +359,12 @@
 
             data: function() {
                 return {
-                    optionRowCount: 0,
+                    optionRowCount: 1,
                     optionRows: [],
                     show_swatch: false,
-                    swatch_type: ''
+                    swatch_type: '',
+                    isNullOptionChecked: false,
+                    idNullOption: null
                 }
             },
 
@@ -361,19 +383,32 @@
             },
 
             methods: {
-                addOptionRow: function () {
-                    var rowCount = this.optionRowCount++;
-                    var row = {'id': 'option_' + rowCount};
+                addOptionRow: function (isNullOptionRow) {
+                    const rowCount = this.optionRowCount++;
+                    const id = 'option_' + rowCount;
+                    let row = {'id': id, 'locales': {}};
 
                     @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
-                        row['{{ $locale->code }}'] = '';
+                        row['locales']['{{ $locale->code }}'] = '';
                     @endforeach
+
+                    row['notRequired'] = '';
+
+                    if (isNullOptionRow) {
+                        this.idNullOption = id;
+                        row['notRequired'] = true;
+                    }
 
                     this.optionRows.push(row);
                 },
 
                 removeRow: function (row) {
-                    var index = this.optionRows.indexOf(row)
+                    if (row.id === this.idNullOption) {
+                        this.idNullOption = null;
+                        this.isNullOptionChecked = false;
+                    }
+
+                    const index = this.optionRows.indexOf(row);
                     Vue.delete(this.optionRows, index);
                 },
 
@@ -387,6 +422,28 @@
 
                 sortOrderName: function (row) {
                     return 'options[' + row.id + '][sort_order]';
+                },
+
+                getOptionValidation: (row, localeCode) => {
+                    if (row.notRequired === true) {
+                        return '';
+                    }
+
+                    return ('{{ app()->getLocale() }}' === localeCode) ? 'required' : '';
+                }
+            },
+
+
+            watch: {
+                isNullOptionChecked: function (val) {
+                    if (val) {
+                        if (! this.idNullOption) {
+                            this.addOptionRow(true);
+                        }
+                    } else if(this.idNullOption !== null && typeof this.idNullOption !== 'undefined') {
+                        const row = this.optionRows.find(optionRow => optionRow.id === this.idNullOption);
+                        this.removeRow(row);
+                    }
                 }
             }
         })

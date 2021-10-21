@@ -2,9 +2,9 @@
 
 namespace Webkul\Product\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Webkul\Core\Providers\CoreModuleServiceProvider;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     protected $models = [
         \Webkul\Product\Models\Product::class,
@@ -15,5 +15,14 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Product\Models\ProductOrderedInventory::class,
         \Webkul\Product\Models\ProductReview::class,
         \Webkul\Product\Models\ProductSalableInventory::class,
+        \Webkul\Product\Models\ProductDownloadableSample::class,
+        \Webkul\Product\Models\ProductDownloadableLink::class,
+        \Webkul\Product\Models\ProductGroupedProduct::class,
+        \Webkul\Product\Models\ProductBundleOption::class,
+        \Webkul\Product\Models\ProductBundleOptionTranslation::class,
+        \Webkul\Product\Models\ProductBundleOptionProduct::class,
+        \Webkul\Product\Models\ProductCustomerGroupPrice::class,
+        \Webkul\Product\Models\ProductVideo::class,
+        \Webkul\Product\Models\ProductReviewImage::class,
     ];
 }

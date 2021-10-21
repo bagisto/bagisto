@@ -12,7 +12,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.sales.invoices.index') }}'"></i>
 
                         {{ __('admin::app.sales.invoices.add-title') }}
                     </h1>
@@ -170,36 +170,52 @@
                                             {{ $order->order_currency_code }}
                                         </span>
                                     </div>
+
+                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                                    @if (! empty($additionalDetails))
+                                        <div class="row">
+                                            <span class="title">
+                                                {{ $additionalDetails['title'] }}
+                                            </span>
+
+                                            <span class="value">
+                                                {{ $additionalDetails['value'] }}
+                                            </span>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
 
-                            <div class="sale-section">
-                                <div class="secton-title">
-                                    <span>{{ __('admin::app.sales.orders.shipping-info') }}</span>
-                                </div>
-
-                                <div class="section-content">
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.shipping-method') }}
-                                        </span>
-
-                                        <span class="value">
-                                            {{ $order->shipping_title }}
-                                        </span>
+                            @if ($order->shipping_address)
+                                <div class="sale-section">
+                                    <div class="secton-title">
+                                        <span>{{ __('admin::app.sales.orders.shipping-info') }}</span>
                                     </div>
 
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.shipping-price') }}
-                                        </span>
+                                    <div class="section-content">
+                                        <div class="row">
+                                            <span class="title">
+                                                {{ __('admin::app.sales.orders.shipping-method') }}
+                                            </span>
 
-                                        <span class="value">
-                                            {{ core()->formatBasePrice($order->base_shipping_amount) }}
-                                        </span>
+                                            <span class="value">
+                                                {{ $order->shipping_title }}
+                                            </span>
+                                        </div>
+
+                                        <div class="row">
+                                            <span class="title">
+                                                {{ __('admin::app.sales.orders.shipping-price') }}
+                                            </span>
+
+                                            <span class="value">
+                                                {{ core()->formatBasePrice($order->base_shipping_amount) }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </accordian>
 
@@ -222,12 +238,18 @@
                                         @foreach ($order->items as $item)
                                             @if ($item->qty_to_invoice > 0)
                                                 <tr>
-                                                    <td>{{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}</td>
+                                                    <td>{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
                                                     <td>
                                                         {{ $item->name }}
 
-                                                        @if ($html = $item->getOptionDetailHtml())
-                                                            <p>{{ $html }}</p>
+                                                        @if (isset($item->additional['attributes']))
+                                                            <div class="item-options">
+
+                                                                @foreach ($item->additional['attributes'] as $attribute)
+                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                                @endforeach
+
+                                                            </div>
                                                         @endif
                                                     </td>
                                                     <td>{{ $item->qty_ordered }}</td>

@@ -6,8 +6,11 @@
 
 @section('content')
     <div class="content">
-        <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
-        <?php $channel = request()->get('channel') ?: core()->getDefaultChannelCode(); ?>
+        @php
+            $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
+            $channel = core()->getRequestedChannelCode();
+            $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
+        @endphp
 
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
@@ -23,7 +26,7 @@
                             @foreach (core()->getAllChannels() as $channelModel)
 
                                 <option value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
-                                    {{ $channelModel->name }}
+                                    {{ core()->getChannelName($channelModel) }}
                                 </option>
 
                             @endforeach
@@ -32,7 +35,7 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" name="locale">
-                            @foreach (core()->getAllLocales() as $localeModel)
+                            @foreach ($channelLocales as $localeModel)
 
                                 <option value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                     {{ $localeModel->name }}
@@ -54,16 +57,21 @@
                 <div class="form-container">
                     @csrf()
 
-                    @if ($groups = array_get($config->items, request()->route('slug') . '.children.' . request()->route('slug2') . '.children'))
+                    @if ($groups = \Illuminate\Support\Arr::get($config->items, request()->route('slug') . '.children.' . request()->route('slug2') . '.children'))
 
                         @foreach ($groups as $key => $item)
 
-                            <accordian :title="'{{ __($item['name']) }}'" :active="true">
+                            <accordian title="{{ __($item['name']) }}" :active="true">
                                 <div slot="body">
 
                                     @foreach ($item['fields'] as $field)
 
-                                        @include ('admin::configuration.field-type', ['field' => $field])
+                                        @include ('admin::configuration.field-type')
+
+                                        @php ($hint = $field['title'] . '-hint')
+                                        @if ($hint !== __($hint))
+                                            {{ __($hint) }}
+                                        @endif
 
                                     @endforeach
 

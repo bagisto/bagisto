@@ -2,29 +2,23 @@
 
 namespace Webkul\Paypal\Http\Controllers;
 
+use Webkul\Paypal\Helpers\Ipn;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Paypal\Helpers\Ipn;
 
-/**
- * Paypal Standard controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class StandardController extends Controller
 {
     /**
-     * OrderRepository object
+     * OrderRepository $orderRepository
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
-     * Ipn object
+     * IPN $ipnHelper
      *
-     * @var array
+     * @var \Webkul\Paypal\Helpers\Ipn
      */
     protected $ipnHelper;
 
@@ -32,6 +26,7 @@ class StandardController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Paypal\Helpers\Ipn  $ipnHelper
      * @return void
      */
     public function __construct(
@@ -47,7 +42,7 @@ class StandardController extends Controller
     /**
      * Redirects to the paypal.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function redirect()
     {
@@ -67,7 +62,7 @@ class StandardController extends Controller
     }
 
     /**
-     * Success payment
+     * Success payment.
      *
      * @return \Illuminate\Http\Response
      */
@@ -83,7 +78,7 @@ class StandardController extends Controller
     }
 
     /**
-     * Paypal Ipn listener
+     * Paypal IPN listener.
      *
      * @return \Illuminate\Http\Response
      */

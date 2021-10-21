@@ -2,11 +2,12 @@
 
 namespace Webkul\CMS\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Webkul\Core\Providers\CoreModuleServiceProvider;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     protected $models = [
-        \Webkul\CMS\Models\CMS::class
+        \Webkul\CMS\Models\CmsPage::class,
+        \Webkul\CMS\Models\CmsPageTranslation::class
     ];
 }

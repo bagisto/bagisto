@@ -2,55 +2,141 @@
 
 namespace Webkul\Admin\DataGrids;
 
+use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\Channel;
 use Webkul\Ui\DataGrid\DataGrid;
-use DB;
 
-/**
- * SliderDataGrid Class
- *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class SliderDataGrid extends DataGrid
 {
-    protected $index = 'slider_id';
+    /**
+     * Set index columns, ex: id.
+     *
+     * @var int
+     */
+    protected $index = 'id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    /**
+     * Default sort order of datagrid.
+     *
+     * @var string
+     */
+    protected $sortOrder = 'desc';
 
+    /**
+     * Locale.
+     *
+     * @var string
+     */
+    protected $locale = 'all';
+
+    /**
+     * Channel.
+     *
+     * @var string
+     */
+    protected $channel = 'all';
+
+    /**
+     * Contains the keys for which extra filters to render.
+     *
+     * @var string[]
+     */
+    protected $extraFilters = [
+        'channels',
+        'locales',
+    ];
+
+    /**
+     * Create datagrid instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        /* locale */
+        $this->locale = core()->getRequestedLocaleCode();
+
+        /* channel */
+        $this->channel = core()->getRequestedChannelCode();
+
+        /* finding channel code */
+        if ($this->channel !== 'all') {
+            $this->channel = Channel::query()->find($this->channel);
+            $this->channel = $this->channel ? $this->channel->code : 'all';
+        }
+    }
+
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id as slider_id', 'sl.title', 'ch.name')->leftJoin('channels as ch', 'sl.channel_id', '=',
-        'ch.id');
+        $dbPrefix = DB::getTablePrefix();
 
-        $this->addFilter('slider_id', 'sl.id');
-        $this->addFilter('channel_name', 'ch.name');
+        $queryBuilder = DB::table('sliders as sl')
+            ->select('sl.id', 'sl.title', 'sl.locale', 'ct.channel_id', 'ct.name', 'ch.code')
+            ->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id')
+            ->leftJoin('channel_translations as ct', 'ch.id', '=', 'ct.channel_id')
+            ->where('ct.locale', app()->getLocale());
+
+        if ($this->locale !== 'all') {
+            $queryBuilder->whereRaw("find_in_set(?, {$dbPrefix}sl.locale)", [$this->locale]);
+        }
+
+        if ($this->channel !== 'all') {
+            $queryBuilder->where('ch.code', $this->channel);
+        }
+
+        $this->addFilter('id', 'sl.id');
+        $this->addFilter('title', 'sl.title');
+        $this->addFilter('locale', 'sl.locale');
+        $this->addFilter('channel_name', 'ct.name');
+        $this->addFilter('code', 'ch.code');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'slider_id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
-            'filterable' => true
+            'sortable'   => true,
+            'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index' => 'title',
-            'label' => trans('admin::app.datagrid.title'),
-            'type' => 'string',
+            'index'      => 'title',
+            'label'      => trans('admin::app.datagrid.title'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
-            'filterable' => true
+            'sortable'   => true,
+            'filterable' => true,
         ]);
 
         $this->addColumn([
-            'index' => 'name',
-            'label' => trans('admin::app.datagrid.channel-name'),
+            'index'      => 'name',
+            'label'      => trans('admin::app.datagrid.channel-name'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
+            'index' => 'locale',
+            'label' => trans('admin::app.datagrid.locale'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -58,19 +144,25 @@ class SliderDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
+    public function prepareActions()
+    {
         $this->addAction([
-            'title' => 'Edit Slider',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.sliders.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'title'  => trans('admin::app.datagrid.edit'),
+            'method' => 'GET',
+            'route'  => 'admin.sliders.edit',
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title' => 'Delete Slider',
-            'method' => 'POST', // use GET request only for redirect purposes
-            'route' => 'admin.sliders.delete',
-            'icon' => 'icon trash-icon'
+            'title'  => trans('admin::app.datagrid.delete'),
+            'method' => 'POST',
+            'route'  => 'admin.sliders.delete',
+            'icon'   => 'icon trash-icon',
         ]);
     }
 }

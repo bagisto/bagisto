@@ -7,7 +7,11 @@ use Webkul\Sales\Contracts\RefundItem as RefundItemContract;
 
 class RefundItem extends Model implements RefundItemContract
 {
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'additional' => 'array',
@@ -43,22 +47,5 @@ class RefundItem extends Model implements RefundItemContract
     public function child()
     {
         return $this->hasOne(RefundItemProxy::modelClass(), 'parent_id');
-    }
-
-    /**
-     * Returns configurable option html
-     */
-    public function getOptionDetailHtml()
-    {
-
-        if ($this->type == 'configurable' && isset($this->additional['attributes'])) {
-            $labels = [];
-
-            foreach ($this->additional['attributes'] as $attribute) {
-                $labels[] = $attribute['attribute_name'] . ' : ' . $attribute['option_label'];
-            }
-
-            return implode(', ', $labels);
-        }
     }
 }

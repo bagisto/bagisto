@@ -29,7 +29,7 @@ class Locale
     */
     public function handle($request, Closure $next)
     {
-        $locale = request()->get('locale');
+        $locale = core()->getRequestedLocaleCode('locale', false);
 
         if ($locale) {
             if ($this->locale->findOneByField('code', $locale)) {
@@ -44,6 +44,8 @@ class Locale
                 app()->setLocale(core()->getDefaultChannel()->default_locale->code);
             }
         }
+
+        unset($request['locale']);
 
         return $next($request);
     }

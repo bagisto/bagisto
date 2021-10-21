@@ -2,22 +2,13 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
 
-/**
- * Admin forget password controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ForgetPasswordController extends Controller
 {
-
     use SendsPasswordResetEmails;
-
+    
     /**
      * Contains route related configuration
      *
@@ -38,11 +29,23 @@ class ForgetPasswordController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
-    {
-        return view($this->_config['view']);
+    {        
+        if (auth()->guard('admin')->check()) {
+            return redirect()->route('admin.dashboard.index');
+        } else {
+            if (strpos(url()->previous(), 'admin') !== false) {
+                $intendedUrl = url()->previous();
+            } else {
+                $intendedUrl = route('admin.dashboard.index');
+            }
+
+            session()->put('url.intended', $intendedUrl);
+
+            return view($this->_config['view']);
+        }
     }
 
     /**
@@ -52,25 +55,31 @@ class ForgetPasswordController extends Controller
      */
     public function store()
     {
-        $this->validate(request(), [
-            'email' => 'required|email'
-        ]);
+        try {
+            $this->validate(request(), [
+                'email' => 'required|email',
+            ]);
 
-        $response = $this->broker()->sendResetLink(
-            request(['email'])
-        );
-
-        if ($response == Password::RESET_LINK_SENT) {
-            session()->flash('success', trans($response));
-
-            return back();
-        }
-
-        return back()
-            ->withInput(request(['email']))
-            ->withErrors(
-                ['email' => trans($response)]
+            $response = $this->broker()->sendResetLink(
+                request(['email'])
             );
+
+            if ($response == Password::RESET_LINK_SENT) {
+                session()->flash('success', trans('customer::app.forget_password.reset_link_sent'));
+
+                return back();
+            }
+
+            return back()
+                ->withInput(request(['email']))
+                ->withErrors([
+                    'email' => trans('customer::app.forget_password.email_not_exist'),
+                ]);
+        } catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+
+            return redirect()->back();
+        }
     }
 
     /**

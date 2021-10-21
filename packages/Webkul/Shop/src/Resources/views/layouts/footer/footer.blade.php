@@ -18,7 +18,7 @@
                     <ul class="list-group">
                         @foreach ($categories as $key => $category)
                             <li>
-                                <a href="{{ route('shop.categories.index', $category->slug) }}">{{ $category->name }}</a>
+                                <a href="{{ route('shop.productOrCategory.index', $category->slug) }}">{{ $category->name }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -29,11 +29,11 @@
 
             <div class="list-container">
                 @if(core()->getConfigData('customer.settings.newsletter.subscription'))
-                    <span class="list-heading">{{ __('shop::app.footer.subscribe-newsletter') }}</span>
+                    <label class="list-heading" for="subscribe-field">{{ __('shop::app.footer.subscribe-newsletter') }}</label>
                     <div class="form-container">
                         <form action="{{ route('shop.subscribe') }}">
                             <div class="control-group" :class="[errors.has('subscriber_email') ? 'has-error' : '']">
-                                <input type="email" class="control subscribe-field" name="subscriber_email" placeholder="Email Address" required><br/>
+                                <input type="email" id="subscribe-field" class="control subscribe-field" name="subscriber_email" placeholder="Email Address" required><br/>
 
                                 <button class="btn btn-md btn-primary">{{ __('shop::app.subscription.subscribe') }}</button>
                             </div>
@@ -42,20 +42,17 @@
                 @endif
 
                 <?php
-                    $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-                    $searchTerm = explode("&", $query);
+                    $term = request()->input('term');
 
-                    foreach($searchTerm as $term){
-                        if (strpos($term, 'term') !== false) {
-                            $serachQuery = $term;
-                        }
+                    if (! is_null($term)) {
+                        $serachQuery = 'term='.request()->input('term');
                     }
                 ?>
 
-                <span class="list-heading">{{ __('shop::app.footer.locale') }}</span>
+                <label class="list-heading" for="locale-switcher">{{ __('shop::app.footer.locale') }}</label>
                 <div class="form-container">
                     <div class="control-group">
-                        <select class="control locale-switcher" onchange="window.location.href = this.value" @if (count(core()->getCurrentChannel()->locales) == 1) disabled="disabled" @endif>
+                        <select class="control locale-switcher" id="locale-switcher" onchange="window.location.href = this.value" @if (count(core()->getCurrentChannel()->locales) == 1) disabled="disabled" @endif>
 
                             @foreach (core()->getCurrentChannel()->locales as $locale)
                                 @if (isset($serachQuery))
@@ -70,10 +67,10 @@
                 </div>
 
                 <div class="currency">
-                    <span class="list-heading">{{ __('shop::app.footer.currency') }}</span>
+                    <label class="list-heading" for="currency-switcher">{{ __('shop::app.footer.currency') }}</label>
                     <div class="form-container">
                         <div class="control-group">
-                            <select class="control locale-switcher" onchange="window.location.href = this.value">
+                            <select class="control locale-switcher" id="currency-switcher" onchange="window.location.href = this.value">
 
                                 @foreach (core()->getCurrentChannel()->currencies as $currency)
                                     @if (isset($serachQuery))

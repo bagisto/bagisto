@@ -2,7 +2,10 @@
     <thead>
         <tr>
             @foreach ($columns as $key => $value)
-                <th>{{ $value }}</th>
+                <?php
+                   $title =  $value == 'increment_id' ? 'order_id' : $value;
+                ?>
+                <th>{{ $title }}</th>
             @endforeach
         </tr>
     </thead>
@@ -10,6 +13,10 @@
         @foreach ($records as $record)
             <tr>
                 @foreach($record as $column => $value)
+                    @php
+                        $value = preg_replace('/[^A-Za-z0-9@#$%^&*()_!+\-]/', '', $value);
+                    @endphp
+
                     <td>{{ $value }} </td>
                 @endforeach
             </tr>

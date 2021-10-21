@@ -2,102 +2,132 @@
 
 namespace Webkul\Product\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Exception;
 use Illuminate\Support\Facades\Event;
-use Webkul\Product\Http\Requests\ProductForm;
-use Webkul\Product\Repositories\ProductRepository as Product;
-use Webkul\Product\Repositories\ProductAttributeValueRepository as ProductAttributeValue;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
-use Webkul\Category\Repositories\CategoryRepository as Category;
-use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Core\Contracts\Validations\Slug;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Helpers\ProductType;
+use Webkul\Product\Http\Requests\ProductForm;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
+use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
-/**
- * Product controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * AttributeFamilyRepository object
+     * Category repository instance.
      *
-     * @var array
+     * @var \Webkul\Category\Repositories\CategoryRepository
      */
-    protected $attributeFamily;
+    protected $categoryRepository;
 
     /**
-     * CategoryRepository object
+     * Product repository instance.
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
-    protected $category;
+    protected $productRepository;
 
     /**
-     * InventorySourceRepository object
+     * Product downloadable link repository instance.
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
      */
-    protected $inventorySource;
+    protected $productDownloadableLinkRepository;
 
     /**
-     * ProductRepository object
+     * Product downloadable sample repository instance.
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
      */
-    protected $product;
+    protected $productDownloadableSampleRepository;
 
     /**
-     * ProductAttributeValueRepository object
+     * Attribute family repository instance.
      *
-     * @var array
+     * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
      */
-    protected $productAttributeValue;
+    protected $attributeFamilyRepository;
+
+    /**
+     * Inventory source repository instance.
+     *
+     * @var \Webkul\Inventory\Repositories\InventorySourceRepository
+     */
+    protected $inventorySourceRepository;
+
+    /**
+     * Product attribute value repository instance.
+     *
+     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
+     */
+    protected $productAttributeValueRepository;
+
+    /**
+     * Product inventory repository instance.
+     *
+     * @var \Webkul\Product\Repositories\ProductInventoryRepository
+     */
+    protected $productInventoryRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository     $attributeFamily
-     * @param  \Webkul\Category\Repositories\CategoryRepository             $category
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository     $inventorySource
-     * @param  \Webkul\Product\Repositories\ProductRepository               $product
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository $productAttributeValue
+     * @param  \Webkul\Category\Repositories\CategoryRepository                 $categoryRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository                   $productRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository         $attributeFamilyRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository         $inventorySourceRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository     $productAttributeValueRepository
      * @return void
      */
     public function __construct(
-        AttributeFamily $attributeFamily,
-        Category $category,
-        InventorySource $inventorySource,
-        Product $product,
-        ProductAttributeValue $productAttributeValue
-    )
-    {
-        $this->attributeFamily = $attributeFamily;
-
-        $this->category = $category;
-
-        $this->inventorySource = $inventorySource;
-
-        $this->product = $product;
-
-        $this->productAttributeValue = $productAttributeValue;
-
+        CategoryRepository $categoryRepository,
+        ProductRepository $productRepository,
+        ProductDownloadableLinkRepository $productDownloadableLinkRepository,
+        ProductDownloadableSampleRepository $productDownloadableSampleRepository,
+        AttributeFamilyRepository $attributeFamilyRepository,
+        InventorySourceRepository $inventorySourceRepository,
+        ProductAttributeValueRepository $productAttributeValueRepository,
+        ProductInventoryRepository $productInventoryRepository
+    ) {
         $this->_config = request('_config');
+
+        $this->categoryRepository = $categoryRepository;
+
+        $this->productRepository = $productRepository;
+
+        $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
+
+        $this->productDownloadableSampleRepository = $productDownloadableSampleRepository;
+
+        $this->attributeFamilyRepository = $attributeFamilyRepository;
+
+        $this->inventorySourceRepository = $inventorySourceRepository;
+
+        $this->productAttributeValueRepository = $productAttributeValueRepository;
+
+        $this->productInventoryRepository = $productInventoryRepository;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -107,16 +137,16 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        $families = $this->attributeFamily->all();
+        $families = $this->attributeFamilyRepository->all();
 
         $configurableFamily = null;
 
         if ($familyId = request()->get('family')) {
-            $configurableFamily = $this->attributeFamily->find($familyId);
+            $configurableFamily = $this->attributeFamilyRepository->find($familyId);
         }
 
         return view($this->_config['view'], compact('families', 'configurableFamily'));
@@ -129,23 +159,31 @@ class ProductController extends Controller
      */
     public function store()
     {
-        if (! request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
-            return redirect(url()->current() . '?family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
+        if (
+            ! request()->get('family')
+            && ProductType::hasVariants(request()->input('type'))
+            && request()->input('sku') != ''
+        ) {
+            return redirect(url()->current() . '?type=' . request()->input('type') . '&family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
         }
 
-        if (request()->input('type') == 'configurable' && (! request()->has('super_attributes') || ! count(request()->get('super_attributes')))) {
+        if (
+            ProductType::hasVariants(request()->input('type'))
+            && (! request()->has('super_attributes')
+                || ! count(request()->get('super_attributes')))
+        ) {
             session()->flash('error', trans('admin::app.catalog.products.configurable-error'));
 
             return back();
         }
 
         $this->validate(request(), [
-            'type' => 'required',
+            'type'                => 'required',
             'attribute_family_id' => 'required',
-            'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
+            'sku'                 => ['required', 'unique:products,sku', new Slug],
         ]);
 
-        $product = $this->product->create(request()->all());
+        $product = $this->productRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Product']));
 
@@ -156,15 +194,15 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $product = $this->product->with(['variants', 'variants.inventories'])->findOrFail($id);
+        $product = $this->productRepository->with(['variants', 'variants.inventories'])->findOrFail($id);
 
-        $categories = $this->category->getCategoryTree();
+        $categories = $this->categoryRepository->getCategoryTree();
 
-        $inventorySources = $this->inventorySource->all();
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
 
         return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }
@@ -172,17 +210,128 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Webkul\Product\Http\Requests\ProductForm $request
+     * @param  \Webkul\Product\Http\Requests\ProductForm  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(ProductForm $request, $id)
     {
-        $product = $this->product->update(request()->all(), $id);
+        $data = request()->all();
+
+        $multiselectAttributeCodes = array();
+
+        $productAttributes = $this->productRepository->findOrFail($id);
+
+        foreach ($productAttributes->attribute_family->attribute_groups as $attributeGroup) {
+            $customAttributes = $productAttributes->getEditableAttributes($attributeGroup);
+
+            if (count($customAttributes)) {
+                foreach ($customAttributes as $attribute) {
+                    if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
+                        array_push($multiselectAttributeCodes, $attribute->code);
+                    }
+                }
+            }
+        }
+
+        if (count($multiselectAttributeCodes)) {
+            foreach ($multiselectAttributeCodes as $multiselectAttributeCode) {
+                if (! isset($data[$multiselectAttributeCode])) {
+                    $data[$multiselectAttributeCode] = array();
+                }
+            }
+        }
+
+        $this->productRepository->update($data, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
 
         return redirect()->route($this->_config['redirect']);
+    }
+
+    /**
+     * Update inventories.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateInventories($id)
+    {
+        $product = $this->productRepository->findOrFail($id);
+
+        $this->productInventoryRepository->saveInventories(request()->all(), $product);
+
+        return response()->json([
+            'message' => __('admin::app.catalog.products.saved-inventory-message'),
+            'updatedTotal' => $this->productInventoryRepository->where('product_id', $product->id)->sum('qty')
+        ]);
+    }
+
+    /**
+     * Uploads downloadable file.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadLink($id)
+    {
+        return response()->json(
+            $this->productDownloadableLinkRepository->upload(request()->all(), $id)
+        );
+    }
+
+    /**
+     * Copy a given Product.
+     *
+     * @param  int  $productId
+     * @return \Illuminate\Http\Response
+     */
+    public function copy(int $productId)
+    {
+        $originalProduct = $this->productRepository->findOrFail($productId);
+
+        if (! $originalProduct->getTypeInstance()->canBeCopied()) {
+            session()->flash(
+                'error',
+                trans('admin::app.response.product-can-not-be-copied', [
+                    'type' => $originalProduct->type,
+                ])
+            );
+
+            return redirect()->to(route('admin.catalog.products.index'));
+        }
+
+        if ($originalProduct->parent_id) {
+            session()->flash(
+                'error',
+                trans('admin::app.catalog.products.variant-already-exist-message')
+            );
+
+            return redirect()->to(route('admin.catalog.products.index'));
+        }
+
+        $copiedProduct = $this->productRepository->copy($originalProduct);
+
+        if ($copiedProduct instanceof Product && $copiedProduct->id) {
+            session()->flash('success', trans('admin::app.response.product-copied'));
+        } else {
+            session()->flash('error', trans('admin::app.response.error-while-copying'));
+        }
+
+        return redirect()->to(route('admin.catalog.products.edit', ['id' => $copiedProduct->id]));
+    }
+
+    /**
+     * Uploads downloadable sample file.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadSample($id)
+    {
+        return response()->json(
+            $this->productDownloadableSampleRepository->upload(request()->all(), $id)
+        );
     }
 
     /**
@@ -193,15 +342,17 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = $this->product->findOrFail($id);
+        $product = $this->productRepository->findOrFail($id);
 
         try {
-            $this->product->delete($id);
+            $this->productRepository->delete($id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Product']));
 
             return response()->json(['message' => true], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
+            report($e);
+
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Product']));
         }
 
@@ -209,19 +360,19 @@ class ProductController extends Controller
     }
 
     /**
-     * Mass Delete the products
+     * Mass Delete the products.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {
         $productIds = explode(',', request()->input('indexes'));
 
         foreach ($productIds as $productId) {
-            $product = $this->product->find($productId);
+            $product = $this->productRepository->find($productId);
 
             if (isset($product)) {
-                $this->product->delete($productId);
+                $this->productRepository->delete($productId);
             }
         }
 
@@ -231,29 +382,29 @@ class ProductController extends Controller
     }
 
     /**
-     * Mass updates the products
+     * Mass updates the products.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massUpdate()
     {
         $data = request()->all();
 
-        if (!isset($data['massaction-type'])) {
+        if (! isset($data['massaction-type'])) {
             return redirect()->back();
         }
 
-        if (!$data['massaction-type'] == 'update') {
+        if (! $data['massaction-type'] == 'update') {
             return redirect()->back();
         }
 
         $productIds = explode(',', $data['indexes']);
 
         foreach ($productIds as $productId) {
-            $this->product->update([
+            $this->productRepository->update([
                 'channel' => null,
-                'locale' => null,
-                'status' => $data['update-options']
+                'locale'  => null,
+                'status'  => $data['update-options'],
             ], $productId);
         }
 
@@ -262,12 +413,14 @@ class ProductController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
-    /*
-     * To be manually invoked when data is seeded into products
+    /**
+     * To be manually invoked when data is seeded into products.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function sync()
     {
-        Event::fire('products.datagrid.sync', true);
+        Event::dispatch('products.datagrid.sync', true);
 
         return redirect()->route('admin.catalog.products.index');
     }
@@ -275,19 +428,19 @@ class ProductController extends Controller
     /**
      * Result of search product.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View|\Illuminate\Http\Response
      */
     public function productLinkSearch()
     {
         if (request()->ajax()) {
             $results = [];
 
-            foreach ($this->product->searchProductByAttribute(request()->input('query')) as $row) {
+            foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
                 $results[] = [
-                        'id' => $row->product_id,
-                        'sku' => $row->sku,
-                        'name' => $row->name,
-                    ];
+                    'id'   => $row->product_id,
+                    'sku'  => $row->sku,
+                    'name' => $row->name,
+                ];
             }
 
             return response()->json($results);
@@ -296,19 +449,32 @@ class ProductController extends Controller
         }
     }
 
-     /**
-     * Download image or file
+    /**
+     * Download image or file.
      *
-     * @param  int $productId, $attributeId
+     * @param  int  $productId
+     * @param  int  $attributeId
      * @return \Illuminate\Http\Response
      */
     public function download($productId, $attributeId)
     {
-        $productAttribute = $this->productAttributeValue->findOneWhere([
+        $productAttribute = $this->productAttributeValueRepository->findOneWhere([
             'product_id'   => $productId,
-            'attribute_id' => $attributeId
+            'attribute_id' => $attributeId,
         ]);
 
         return Storage::download($productAttribute['text_value']);
+    }
+
+    /**
+     * Search simple products.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchSimpleProducts()
+    {
+        return response()->json(
+            $this->productRepository->searchSimpleProducts(request()->input('query'))
+        );
     }
 }

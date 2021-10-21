@@ -3,15 +3,12 @@
 namespace Webkul\Core\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Prettus\Repository\Traits\CacheableRepository;
 
-/**
- * CountryState Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CountryStateRepository extends Repository
 {
+    use CacheableRepository;
+
     /**
      * Specify Model class name
      *

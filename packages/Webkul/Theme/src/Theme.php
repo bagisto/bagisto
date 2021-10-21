@@ -45,10 +45,10 @@ class Theme
     /**
      * Create a new Theme instance.
      *
-     * @param  string $code
-     * @param  string $name
-     * @param  string $assetsPath
-     * @param  string $viewsPath
+     * @param  string  $code
+     * @param  string  $name
+     * @param  string  $assetsPath
+     * @param  string  $viewsPath
      * @return void
      */
     public function __construct($code, $name = null, $assetsPath = null, $viewsPath = null)
@@ -65,6 +65,7 @@ class Theme
     /**
      * Sets the parent
      *
+     * @param  \Webkul\Theme\Theme
      * @return void
      */
     public function setParent(Theme $parent)
@@ -75,7 +76,7 @@ class Theme
     /**
      * Return the parent
      *
-     * @return mixed
+     * @return \Webkul\Theme\Theme
      */
     public function getParent()
     {
@@ -111,7 +112,9 @@ class Theme
     /**
      * Convert to asset url based on current theme
      *
-     * @return mixed
+     * @param  string  $url
+     * @param  bool|null  $secure
+     * @return string
      */
     public function url($url, $secure = null)
     {

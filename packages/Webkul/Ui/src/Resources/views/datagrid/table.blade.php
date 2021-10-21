@@ -1,3 +1,24 @@
+@php
+    /* all locales */
+    $locales = core()->getAllLocales();
+
+    /* request and fallback handling */
+    $locale = core()->getRequestedLocaleCode();
+    $channel = core()->getRequestedChannelCode();
+    $customer_group = core()->getRequestedCustomerGroupCode();
+
+    /* handling cases for new locale if not present in current channel */
+    if ($channel !== 'all') {
+        $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+
+        if ($channelLocales->contains('code', $locale)) {
+            $locales = $channelLocales;
+        } else {
+            $channel = 'all';
+        }
+    }
+@endphp
+
 <div class="table">
     <datagrid-filters></datagrid-filters>
 
@@ -8,137 +29,230 @@
     @push('scripts')
         <script type="text/x-template" id="datagrid-filters">
             <div class="grid-container">
-                <div class="filter-row-one" id="datagrid-filters">
-                    <div class="search-filter">
-                        <input type="search" id="search-field" class="control" placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue" v-on:keyup.enter="searchCollection(searchValue)" />
 
-                        <div class="icon-wrapper">
-                            <span class="icon search-icon search-btn" v-on:click="searchCollection(searchValue)"></span>
+                <div class="datagrid-filters">
+                    <div class="filter-left">
+                        @if (isset($results['extraFilters']['channels']))
+                        <div class="dropdown-filters per-page">
+                            <div class="control-group">
+                                <select class="control" id="channel-switcher" name="channel"
+                                        onchange="reloadPage('channel', this.value)">
+                                    <option value="all" {{ ! isset($channel) ? 'selected' : '' }}>
+                                        {{ __('admin::app.admin.system.all-channels') }}
+                                    </option>
+                                    @foreach ($results['extraFilters']['channels'] as $channelModel)
+                                        <option
+                                            value="{{ $channelModel->code }}"
+                                            {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
+                                            {{ core()->getChannelName($channelModel) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if (isset($results['extraFilters']['locales']))
+                        <div class="dropdown-filters per-page">
+                            <div class="control-group">
+                                <select class="control" id="locale-switcher" name="locale"
+                                        onchange="reloadPage('locale', this.value)">
+                                    <option value="all" {{ ! isset($locale) ? 'selected' : '' }}>
+                                        {{ __('admin::app.admin.system.all-locales') }}
+                                    </option>
+                                    @foreach ($locales as $localeModel)
+                                        <option
+                                            value="{{ $localeModel->code }}" {{ (isset($locale) && ($localeModel->code) == $locale) ? 'selected' : '' }}>
+                                            {{ $localeModel->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if (isset($results['extraFilters']['customer_groups']))
+                        <div class="dropdown-filters per-page">
+                            <div class="control-group">
+                                <select class="control" id="customer-group-switcher" name="customer_group"
+                                        onchange="reloadPage('customer_group', this.value)">
+                                    <option value="all" {{ ! isset($customer_group) ? 'selected' : '' }}>
+                                        {{ __('admin::app.admin.system.all-customer-groups') }}
+                                    </option>
+                                    @foreach ($results['extraFilters']['customer_groups'] as $customerGroupModel)
+                                        <option
+                                            value="{{ $customerGroupModel->id }}"
+                                            {{ (isset($customer_group) && ($customerGroupModel->id) == $customer_group) ? 'selected' : '' }}>
+                                            {{ $customerGroupModel->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="datagrid-filters" id="datagrid-filters">
+                    <div class="filter-left">
+                        <div class="search-filter">
+                            <input type="search" id="search-field" class="control"
+                                placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue"
+                                v-on:keyup.enter="searchCollection(searchValue)"/>
+
+                            <div class="icon-wrapper">
+                                <span class="icon search-icon search-btn"
+                                    v-on:click="searchCollection(searchValue)"></span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="dropdown-filters">
-                        <div class="dropdown-toggle">
-                            <div class="grid-dropdown-header">
-                                <span class="name">{{ __('ui::app.datagrid.filter') }}</span>
-                                <i class="icon arrow-down-icon active"></i>
+                    <div class="filter-right">
+                        <div class="dropdown-filters per-page">
+                            <div class="control-group">
+                                <label class="per-page-label" for="perPage">
+                                    {{ __('ui::app.datagrid.items-per-page') }}
+                                </label>
+
+                                <select id="perPage" name="perPage" class="control" v-model="perPage"
+                                        v-on:change="paginate">
+                                    <option v-for="index in this.perPageProduct" :key="index" :value="index"> @{{ index }} </option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="dropdown-list dropdown-container" style="display: none;">
-                            <ul>
-                                <li>
-                                    <div class="control-group">
-                                        <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
-                                            <option selected disabled>{{ __('ui::app.datagrid.column') }}</option>
-                                            @foreach($results['columns'] as $column)
-                                                @if(isset($column['filterable']) && $column['filterable'])
-                                                    <option value="{{ $column['index'] }}">
-                                                        {{ $column['label'] }}
-                                                    </option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </li>
+                        <div class="dropdown-filters">
+                            <div class="dropdown-toggle">
+                                <div class="grid-dropdown-header">
+                                    <span class="name">{{ __('ui::app.datagrid.filter') }}</span>
+                                    <i class="icon arrow-down-icon active"></i>
+                                </div>
+                            </div>
 
-                                {{-- suitable for string columns --}}
-                                <li v-if='stringConditionSelect'>
-                                    <div class="control-group">
-                                        <select class="control" v-model="stringCondition">
-                                            <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
-                                            <option value="like">{{ __('ui::app.datagrid.contains') }}</option>
-                                            <option value="nlike">{{ __('ui::app.datagrid.ncontains') }}</option>
-                                            <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
-                                            <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
-                                        </select>
-                                    </div>
-                                </li>
+                            <div class="dropdown-list dropdown-container" style="display: none;">
+                                <ul>
+                                    <li>
+                                        <div class="control-group">
+                                            <select class="filter-column-select control" v-model="filterColumn"
+                                                    v-on:change="getColumnOrAlias(filterColumn)">
+                                                <option selected disabled>{{ __('ui::app.datagrid.column') }}</option>
+                                                @foreach($results['columns'] as $column)
+                                                    @if(isset($column['filterable']) && $column['filterable'])
+                                                        <option value="{{ $column['index'] }}">
+                                                            {{ $column['label'] }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                {{-- Response fields based on the type of columns to be filtered --}}
-                                <li v-if='stringCondition != null'>
-                                    <div class="control-group">
-                                        <input type="text" class="control response-string" placeholder="Value here" v-model="stringValue" />
-                                    </div>
-                                </li>
+                                    {{-- suitable for string columns --}}
+                                    <li v-if='stringConditionSelect'>
+                                        <div class="control-group">
+                                            <select class="control" v-model="stringCondition">
+                                                <option selected
+                                                        disabled>{{ __('ui::app.datagrid.condition') }}</option>
+                                                <option value="like">{{ __('ui::app.datagrid.contains') }}</option>
+                                                <option value="nlike">{{ __('ui::app.datagrid.ncontains') }}</option>
+                                                <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
+                                                <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                {{-- suitable for numeric columns --}}
-                                <li v-if='numberConditionSelect'>
-                                    <div class="control-group">
-                                        <select class="control" v-model="numberCondition">
-                                            <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
-                                            <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
-                                            <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
-                                            <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
-                                            <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
-                                            <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
-                                            <option value="lte">{{ __('ui::app.datagrid.lesse') }}</option>
-                                        </select>
-                                    </div>
-                                </li>
+                                    {{-- Response fields based on the type of columns to be filtered --}}
+                                    <li v-if='stringCondition != null'>
+                                        <div class="control-group">
+                                            <input type="text" class="control response-string"
+                                                placeholder="{{ __('ui::app.datagrid.value-here') }}"
+                                                v-model="stringValue"/>
+                                        </div>
+                                    </li>
 
-                                <li v-if='numberCondition != null'>
-                                    <div class="control-group">
-                                        <input type="number" class="control response-number" placeholder="Numeric Value here"  v-model="numberValue"/>
-                                    </div>
-                                </li>
+                                    {{-- suitable for numeric columns --}}
+                                    <li v-if='numberConditionSelect'>
+                                        <div class="control-group">
+                                            <select class="control" v-model="numberCondition">
+                                                <option selected
+                                                        disabled>{{ __('ui::app.datagrid.condition') }}</option>
+                                                <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
+                                                <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
+                                                <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
+                                                <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
+                                                <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
+                                                <option value="lte">{{ __('ui::app.datagrid.lesse') }}</option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                {{-- suitable for boolean columns --}}
-                                <li v-if='booleanConditionSelect'>
-                                    <div class="control-group">
-                                        <select class="control" v-model="booleanCondition">
-                                            <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
-                                            <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
-                                            <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
-                                        </select>
-                                    </div>
-                                </li>
+                                    <li v-if='numberCondition != null'>
+                                        <div class="control-group">
+                                            <input type="text" class="control response-number" v-on:input="filterNumberInput" placeholder="{{ __('ui::app.datagrid.numeric-value-here') }}"  v-model="numberValue"/>
+                                        </div>
+                                    </li>
 
-                                <li v-if='booleanCondition != null'>
-                                    <div class="control-group">
-                                        <select class="control" v-model="booleanValue">
-                                            <option selected disabled>{{ __('ui::app.datagrid.value') }}</option>
-                                            <option value="1">{{ __('ui::app.datagrid.true') }}</option>
-                                            <option value="0">{{ __('ui::app.datagrid.false') }}</option>
-                                        </select>
-                                    </div>
-                                </li>
+                                    {{-- suitable for boolean columns --}}
+                                    <li v-if='booleanConditionSelect'>
+                                        <div class="control-group">
+                                            <select class="control" v-model="booleanCondition">
+                                                <option selected
+                                                        disabled>{{ __('ui::app.datagrid.condition') }}</option>
+                                                <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
+                                                <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                {{-- suitable for date/time columns --}}
-                                <li v-if='datetimeConditionSelect'>
-                                    <div class="control-group">
-                                        <select class="control" v-model="datetimeCondition">
-                                            <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
-                                            <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
-                                            <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
-                                            <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
-                                            <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
-                                            <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
-                                            <option value="lte">{{ __('ui::app.datagrid.lesse') }}</option>
-                                            {{-- <option value="btw">{{ __('ui::app.datagrid.between') }}</option> --}}
-                                        </select>
-                                    </div>
-                                </li>
+                                    <li v-if='booleanCondition != null'>
+                                        <div class="control-group">
+                                            <select class="control" v-model="booleanValue">
+                                                <option selected disabled>{{ __('ui::app.datagrid.value') }}</option>
+                                                <option value="1">{{ __('ui::app.datagrid.true') }}</option>
+                                                <option value="0">{{ __('ui::app.datagrid.false') }}</option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                <li v-if='datetimeCondition != null'>
-                                    <div class="control-group">
-                                        <input class="control" v-model="datetimeValue" type="date">
-                                    </div>
-                                </li>
+                                    {{-- suitable for date/time columns --}}
+                                    <li v-if='datetimeConditionSelect'>
+                                        <div class="control-group">
+                                            <select class="control" v-model="datetimeCondition">
+                                                <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
+                                                <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
+                                                <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
+                                                <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
+                                                <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
+                                                <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
+                                                <option value="lte">{{ __('ui::app.datagrid.lesse') }}</option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                <button class="btn btn-sm btn-primary apply-filter" v-on:click="getResponse">{{ __('ui::app.datagrid.apply') }}</button>
-                            </ul>
+                                    <li v-if='datetimeCondition != null'>
+                                        <div class="control-group">
+                                            <input class="control" v-model="datetimeValue" type="date">
+                                        </div>
+                                    </li>
+
+                                    <button class="btn btn-sm btn-primary apply-filter"
+                                            v-on:click="getResponse">{{ __('ui::app.datagrid.apply') }}</button>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="filter-row-two">
+                <div class="filtered-tags">
                     <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: capitalize;">
-                        <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
-                        <span v-else-if="filter.column == 'search'">Search</span>
+                        <span v-if="filter.column == 'perPage'">perPage</span>
                         <span v-else>@{{ filter.label }}</span>
 
-                        <span class="wrapper">
+                        <span class="wrapper" v-if="filter.prettyValue">
+                            @{{ filter.prettyValue }}
+                            <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
+                        </span>
+                        <span class="wrapper" v-else>
                             @{{ decodeURIComponent(filter.val) }}
                             <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
                         </span>
@@ -146,74 +260,9 @@
                 </div>
 
                 <table class="table">
-                    <thead v-if="massActionsToggle">
-                        @if (isset($results['massactions']))
-                            <tr class="mass-action" v-if="massActionsToggle" style="height: 65px;">
-                                <th colspan="100%">
-                                    <div class="mass-action-wrapper" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
+                    @include('ui::datagrid.partials.mass-action-header')
 
-                                        <span class="massaction-remove" v-on:click="removeMassActions" style="margin-right: 10px; margin-top: 3px;">
-                                            <span class="icon checkbox-dash-icon"></span>
-                                        </span>
-
-                                        <form method="POST" id="mass-action-form" style="display: inline-flex;" action="" onsubmit="return confirm('{{ __('ui::app.datagrid.click_on_action') }}')">
-                                            @csrf()
-
-                                            <input type="hidden" id="indexes" name="indexes" v-model="dataIds">
-
-                                            <div class="control-group">
-                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type" required>
-                                                    <option v-for="(massAction, index) in massActions" :key="index" :value="massAction.type">@{{ massAction.label }}</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="control-group" style="margin-left: 10px;" v-if="massActionType == 'update'">
-                                                <select class="control" v-model="massActionUpdateValue" name="update-options" required>
-                                                    <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ id }}</option>
-                                                </select>
-                                            </div>
-
-                                            <input type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px;">
-                                        </form>
-                                    </div>
-                                </th>
-                            </tr>
-                        @endif
-                    </thead>
-
-                    <thead v-if="massActionsToggle == false">
-                        <tr style="height: 65px;">
-                            @if (count($results['records']) && $results['enableMassActions'])
-                                <th class="grid_head" id="mastercheckbox" style="width: 50px;">
-                                    <span class="checkbox">
-                                        <input type="checkbox" v-model="allSelected" v-on:change="selectAll">
-
-                                        <label class="checkbox-view" for="checkbox"></label>
-                                    </span>
-                                </th>
-                            @endif
-
-                            @foreach($results['columns'] as $key => $column)
-                                <th class="grid_head"
-                                    @if(isset($column['width']))
-                                        style="width: {{ $column['width'] }}"
-                                    @endif
-
-                                    @if(isset($column['sortable']) && $column['sortable'])
-                                        v-on:click="sortCollection('{{ $column['index'] }}')"
-                                    @endif
-                                >
-                                    {{ $column['label'] }}
-                                </th>
-                            @endforeach
-
-                            @if ($results['enableActions'])
-                                <th>
-                                    {{ __('ui::app.datagrid.actions') }}
-                                </th>
-                            @endif
-                        </tr>
-                    </thead>
+                    @include('ui::datagrid.partials.default-header')
 
                     @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns'],'enableMassActions' => $results['enableMassActions'], 'enableActions' => $results['enableActions'], 'norecords' => $results['norecords']])
                 </table>
@@ -224,13 +273,14 @@
             Vue.component('datagrid-filters', {
                 template: '#datagrid-filters',
 
-                data: function() {
+                data: function () {
                     return {
                         filterIndex: @json($results['index']),
                         gridCurrentData: @json($results['records']),
                         massActions: @json($results['massactions']),
                         massActionsToggle: false,
                         massActionTarget: null,
+                        massActionConfirmText: '{{ __('ui::app.datagrid.click_on_action') }}',
                         massActionType: null,
                         massActionValues: [],
                         massActionTargets: [],
@@ -251,7 +301,7 @@
                         filters: [],
                         columnOrAlias: '',
                         type: null,
-                        columns : @json($results['columns']),
+                        columns: @json($results['columns']),
                         stringCondition: null,
                         booleanCondition: null,
                         numberCondition: null,
@@ -263,166 +313,204 @@
                         stringConditionSelect: false,
                         booleanConditionSelect: false,
                         numberConditionSelect: false,
-                        datetimeConditionSelect: false
+                        datetimeConditionSelect: false,
+                        perPage: {{ $results['itemsPerPage'] ?: 10 }},
+                        perPageProduct: [10, 20, 30, 40, 50],
+                        extraFilters: @json($results['extraFilters']),
                     }
                 },
 
-                mounted: function() {
+                mounted: function () {
                     this.setParamsAndUrl();
+
+                    if (this.filters.length) {
+                        for (let i = 0; i < this.filters.length; i++) {
+                            if (this.filters[i].column === 'perPage') {
+                                this.perPage = this.filters[i].val;
+                            }
+                        }
+                    }
+
+                    if (this.perPageProduct.indexOf(parseInt(this.perPage)) === -1) {
+                        this.perPageProduct.unshift(this.perPage);
+                    }
                 },
 
                 methods: {
-                    getColumnOrAlias: function(columnOrAlias) {
+                    getColumnOrAlias: function (columnOrAlias) {
                         this.columnOrAlias = columnOrAlias;
 
-                        for(column in this.columns) {
-                            if (this.columns[column].index == this.columnOrAlias) {
+                        for (column in this.columns) {
+                            if (this.columns[column].index === this.columnOrAlias) {
                                 this.type = this.columns[column].type;
 
-                                if (this.type == 'string') {
-                                    this.stringConditionSelect = true;
-                                    this.datetimeConditionSelect = false;
-                                    this.booleanConditionSelect = false;
-                                    this.numberConditionSelect = false;
+                                switch (this.type) {
+                                    case 'string': {
+                                        this.stringConditionSelect = true;
+                                        this.datetimeConditionSelect = false;
+                                        this.booleanConditionSelect = false;
+                                        this.numberConditionSelect = false;
 
-                                    this.nullify();
-                                } else if (this.type == 'datetime') {
-                                    this.datetimeConditionSelect = true;
-                                    this.stringConditionSelect = false;
-                                    this.booleanConditionSelect = false;
-                                    this.numberConditionSelect = false;
+                                        this.nullify();
+                                        break;
+                                    }
+                                    case 'datetime': {
+                                        this.datetimeConditionSelect = true;
+                                        this.stringConditionSelect = false;
+                                        this.booleanConditionSelect = false;
+                                        this.numberConditionSelect = false;
 
-                                    this.nullify();
-                                } else if (this.type == 'boolean') {
-                                    this.booleanConditionSelect = true;
-                                    this.datetimeConditionSelect = false;
-                                    this.stringConditionSelect = false;
-                                    this.numberConditionSelect = false;
+                                        this.nullify();
+                                        break;
+                                    }
+                                    case 'boolean': {
+                                        this.booleanConditionSelect = true;
+                                        this.datetimeConditionSelect = false;
+                                        this.stringConditionSelect = false;
+                                        this.numberConditionSelect = false;
 
-                                    this.nullify();
-                                } else if (this.type == 'number') {
-                                    this.numberConditionSelect = true;
-                                    this.booleanConditionSelect = false;
-                                    this.datetimeConditionSelect = false;
-                                    this.stringConditionSelect = false;
+                                        this.nullify();
+                                        break;
+                                    }
+                                    case 'number': {
+                                        this.numberConditionSelect = true;
+                                        this.booleanConditionSelect = false;
+                                        this.datetimeConditionSelect = false;
+                                        this.stringConditionSelect = false;
 
-                                    this.nullify();
-                                } else if (this.type == 'price') {
-                                    this.numberConditionSelect = true;
-                                    this.booleanConditionSelect = false;
-                                    this.datetimeConditionSelect = false;
-                                    this.stringConditionSelect = false;
+                                        this.nullify();
+                                        break;
+                                    }
+                                    case 'price': {
+                                        this.numberConditionSelect = true;
+                                        this.booleanConditionSelect = false;
+                                        this.datetimeConditionSelect = false;
+                                        this.stringConditionSelect = false;
 
-                                    this.nullify();
+                                        this.nullify();
+                                        break;
+                                    }
                                 }
                             }
                         }
                     },
 
-                    nullify: function() {
+                    nullify: function () {
                         this.stringCondition = null;
                         this.datetimeCondition = null;
                         this.booleanCondition = null;
                         this.numberCondition = null;
                     },
 
+                    filterNumberInput: function(e){
+                        this.numberValue = e.target.value.replace(/[^0-9\,\.]+/g, '');
+                    },
+
                     getResponse: function() {
                         label = '';
 
-                        for(colIndex in this.columns) {
-                            if(this.columns[colIndex].index == this.columnOrAlias) {
+                        for (let colIndex in this.columns) {
+                            if (this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
+                                break;
                             }
                         }
 
-                        if (this.type == 'string') {
-                            this.formURL(this.columnOrAlias, this.stringCondition, this.stringValue, label)
-                        } else if (this.type == 'number') {
+                        if (this.type === 'string' && this.stringValue !== null) {
+                            this.formURL(this.columnOrAlias, this.stringCondition, encodeURIComponent(this.stringValue), label)
+                        } else if (this.type === 'number') {
                             indexConditions = true;
 
-                            if (this.filterIndex == this.columnOrAlias && (this.numberValue == 0 || this.numberValue < 0)) {
+                            if (this.filterIndex === this.columnOrAlias
+                                && (this.numberValue === 0 || this.numberValue < 0)) {
                                 indexConditions = false;
 
                                 alert('{{__('ui::app.datagrid.zero-index')}}');
                             }
 
-                            if(indexConditions)
+                            if (indexConditions) {
                                 this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
-                        } else if (this.type == 'boolean') {
+                            }
+                        } else if (this.type === 'boolean') {
                             this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
-                        } else if (this.type == 'datetime') {
+                        } else if (this.type === 'datetime') {
                             this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue, label);
-                        } else if (this.type == 'price') {
+                        } else if (this.type === 'price') {
                             this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
                         }
                     },
 
-                    sortCollection: function(alias) {
-                        label = '';
+                    sortCollection: function (alias) {
+                        let label = '';
 
-                        for(colIndex in this.columns) {
-                            if(this.columns[colIndex].index == alias) {
+                        for (let colIndex in this.columns) {
+                            if (this.columns[colIndex].index === alias) {
                                 matched = 0;
                                 label = this.columns[colIndex].label;
+                                break;
                             }
                         }
 
                         this.formURL("sort", alias, this.sortAsc, label);
                     },
 
-                    searchCollection: function(searchValue) {
-                        label = 'Search';
-
-                        this.formURL("search", 'all', searchValue, label);
+                    searchCollection: function (searchValue) {
+                        this.formURL("search", 'all', searchValue, '{{ __('ui::app.datagrid.search-title') }}');
                     },
 
-                    // function triggered to check whether the query exists or not and then call the make filters from the url
-                    setParamsAndUrl: function() {
+                    /**
+                     * Function triggered to check whether the query exists or not and then
+                     * call the make filters from the url.
+                     */
+                    setParamsAndUrl: function () {
                         params = (new URL(window.location.href)).search;
 
                         if (params.slice(1, params.length).length > 0) {
                             this.arrayFromUrl();
                         }
 
-                        for(id in this.massActions) {
+                        for (let id in this.massActions) {
                             targetObj = {
                                 'type': this.massActions[id].type,
-                                'action': this.massActions[id].action
+                                'action': this.massActions[id].action,
+                                'confirm_text': this.massActions[id].confirm_text
                             };
 
                             this.massActionTargets.push(targetObj);
 
                             targetObj = {};
 
-                            if (this.massActions[id].type == 'update') {
+                            if (this.massActions[id].type === 'update') {
                                 this.massActionValues = this.massActions[id].options;
                             }
                         }
                     },
 
-                    findCurrentSort: function() {
-                        for(i in this.filters) {
-                            if (this.filters[i].column == 'sort') {
+                    findCurrentSort: function () {
+                        for (let i in this.filters) {
+                            if (this.filters[i].column === 'sort') {
                                 this.currentSort = this.filters[i].val;
                             }
                         }
                     },
 
-                    changeMassActionTarget: function() {
-                        if (this.massActionType == 'delete') {
-                            for(i in this.massActionTargets) {
-                                if (this.massActionTargets[i].type == 'delete') {
+                    changeMassActionTarget: function () {
+                        if (this.massActionType === 'delete') {
+                            for (let i in this.massActionTargets) {
+                                if (this.massActionTargets[i].type === 'delete') {
                                     this.massActionTarget = this.massActionTargets[i].action;
+                                    this.massActionConfirmText = this.massActionTargets[i].confirm_text ? this.massActionTargets[i].confirm_text : this.massActionConfirmText;
 
                                     break;
                                 }
                             }
                         }
 
-                        if (this.massActionType == 'update') {
-                            for(i in this.massActionTargets) {
-                                if (this.massActionTargets[i].type == 'update') {
+                        if (this.massActionType === 'update') {
+                            for (let i in this.massActionTargets) {
+                                if (this.massActionTargets[i].type === 'update') {
                                     this.massActionTarget = this.massActionTargets[i].action;
+                                    this.massActionConfirmText = this.massActionTargets[i].confirm_text ? this.massActionTargets[i].confirm_text : this.massActionConfirmText;
 
                                     break;
                                 }
@@ -432,27 +520,31 @@
                         document.getElementById('mass-action-form').action = this.massActionTarget;
                     },
 
-                    //make array of filters, sort and search
-                    formURL: function(column, condition, response, label) {
+                    /**
+                     * Make array of filters, sort and search.
+                     */
+                    formURL: function (column, condition, response, label) {
                         var obj = {};
 
-                        if (column == "" || condition == "" || response == "" || column == null || condition == null || response == null) {
+                        if (column === "" || condition === "" || response === ""
+                            || column === null || condition === null || response === null) {
                             alert('{{ __('ui::app.datagrid.filter-fields-missing') }}');
 
                             return false;
                         } else {
-                            if (this.filters.length > 0) {
-                                if (column != "sort" && column != "search") {
-                                    filterRepeated = 0;
 
-                                    for(j = 0; j < this.filters.length; j++) {
-                                        if (this.filters[j].column == column) {
-                                            if (this.filters[j].cond == condition && this.filters[j].val == response) {
-                                                filterRepeated = 1;
+                            if (this.filters.length > 0) {
+                                if (column !== "sort" && column !== "search") {
+                                    let filterRepeated = false;
+
+                                    for (let j = 0; j < this.filters.length; j++) {
+                                        if (this.filters[j].column === column) {
+                                            if (this.filters[j].cond === condition && this.filters[j].val === response) {
+                                                filterRepeated = true;
 
                                                 return false;
-                                            } else if(this.filters[j].cond == condition && this.filters[j].val != response) {
-                                                filterRepeated = 1;
+                                            } else if (this.filters[j].cond === condition && this.filters[j].val !== response) {
+                                                filterRepeated = true;
 
                                                 this.filters[j].val = response;
 
@@ -461,7 +553,7 @@
                                         }
                                     }
 
-                                    if (filterRepeated == 0) {
+                                    if (filterRepeated === false) {
                                         obj.column = column;
                                         obj.cond = condition;
                                         obj.val = response;
@@ -474,15 +566,15 @@
                                     }
                                 }
 
-                                if (column == "sort") {
-                                    sort_exists = 0;
+                                if (column === "sort") {
+                                    let sort_exists = false;
 
-                                    for (j = 0; j < this.filters.length; j++) {
-                                        if (this.filters[j].column == "sort") {
-                                            if (this.filters[j].column == column && this.filters[j].cond == condition) {
+                                    for (let j = 0; j < this.filters.length; j++) {
+                                        if (this.filters[j].column === "sort") {
+                                            if (this.filters[j].column === column && this.filters[j].cond === condition) {
                                                 this.findCurrentSort();
 
-                                                if (this.currentSort == "asc") {
+                                                if (this.currentSort === "asc") {
                                                     this.filters[j].column = column;
                                                     this.filters[j].cond = condition;
                                                     this.filters[j].val = this.sortDesc;
@@ -504,12 +596,12 @@
                                                 this.makeURL();
                                             }
 
-                                            sort_exists = 1;
+                                            sort_exists = true;
                                         }
                                     }
 
-                                    if (sort_exists == 0) {
-                                        if (this.currentSort == null)
+                                    if (sort_exists === false) {
+                                        if (this.currentSort === null)
                                             this.currentSort = this.sortAsc;
 
                                         obj.column = column;
@@ -525,30 +617,30 @@
                                     }
                                 }
 
-                                if (column == "search") {
-                                    search_found = 0;
+                                if (column === "search") {
+                                    let search_found = false;
 
-                                    for(j = 0; j < this.filters.length; j++) {
-                                        if (this.filters[j].column == "search") {
+                                    for (let j = 0; j < this.filters.length; j++) {
+                                        if (this.filters[j].column === "search") {
                                             this.filters[j].column = column;
                                             this.filters[j].cond = condition;
-                                            this.filters[j].val = response;
+                                            this.filters[j].val = encodeURIComponent(response);
                                             this.filters[j].label = label;
 
                                             this.makeURL();
                                         }
                                     }
 
-                                    for (j = 0;j < this.filters.length;j++) {
-                                        if (this.filters[j].column == "search") {
-                                            search_found = 1;
+                                    for (let j = 0; j < this.filters.length; j++) {
+                                        if (this.filters[j].column === "search") {
+                                            search_found = true;
                                         }
                                     }
 
-                                    if (search_found == 0) {
+                                    if (search_found === false) {
                                         obj.column = column;
                                         obj.cond = condition;
-                                        obj.val = response;
+                                        obj.val = encodeURIComponent(response);
                                         obj.label = label;
 
                                         this.filters.push(obj);
@@ -561,7 +653,7 @@
                             } else {
                                 obj.column = column;
                                 obj.cond = condition;
-                                obj.val = response;
+                                obj.val = encodeURIComponent(response);
                                 obj.label = label;
 
                                 this.filters.push(obj);
@@ -573,15 +665,30 @@
                         }
                     },
 
-                    // make the url from the array and redirect
-                    makeURL: function() {
+                    /**
+                     * Make the url from the array and redirect.
+                     */
+                    makeURL: function () {
                         newParams = '';
 
-                        for(i = 0; i < this.filters.length; i++) {
+                        for(let i = 0; i < this.filters.length; i++) {
+                            if (this.filters[i].column == 'status' || this.filters[i].column == 'value_per_locale' || this.filters[i].column == 'value_per_channel' || this.filters[i].column == 'is_unique') {
+                                if (this.filters[i].val.includes("True")) {
+                                    this.filters[i].val = 1;
+                                } else if (this.filters[i].val.includes("False")) {
+                                    this.filters[i].val = 0;
+                                }
+                            }
+
+                            let condition = '';
+                            if (this.filters[i].cond !== undefined) {
+                                condition = '[' + this.filters[i].cond + ']';
+                            }
+
                             if (i == 0) {
-                                newParams = '?' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
+                                newParams = '?' + this.filters[i].column + condition + '=' + this.filters[i].val;
                             } else {
-                                newParams = newParams + '&' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
+                                newParams = newParams + '&' + this.filters[i].column + condition + '=' + this.filters[i].val;
                             }
                         }
 
@@ -592,69 +699,106 @@
                         window.location.href = clean_uri + newParams;
                     },
 
-                    //make the filter array from url after being redirected
-                    arrayFromUrl: function() {
-                        var obj = {};
-                        processedUrl = this.url.search.slice(1, this.url.length);
-                        splitted = [];
-                        moreSplitted = [];
+                    /**
+                     * Make the filter array from url after being redirected.
+                     */
+                    arrayFromUrl: function () {
+
+                        let obj = {};
+                        const processedUrl = this.url.search.slice(1, this.url.length);
+                        let splitted = [];
+                        let moreSplitted = [];
 
                         splitted = processedUrl.split('&');
 
-                        for(i = 0; i < splitted.length; i++) {
+                        for (let i = 0; i < splitted.length; i++) {
                             moreSplitted.push(splitted[i].split('='));
                         }
 
-                        for(i = 0; i < moreSplitted.length; i++) {
-                            col = moreSplitted[i][0].replace(']', '').split('[')[0];
-                            cond = moreSplitted[i][0].replace(']', '').split('[')[1]
-                            val = moreSplitted[i][1];
+                        for (let i = 0; i < moreSplitted.length; i++) {
+                            const key = decodeURI(moreSplitted[i][0]);
+                            let value = decodeURI(moreSplitted[i][1]);
 
-                            label = 'cannotfindthislabel';
+                            if (value.includes('+')) {
+                                value = value.replace('+', ' ');
+                            }
 
-                            obj.column = col;
-                            obj.cond = cond;
-                            obj.val = val;
+                            obj.column = key.replace(']', '').split('[')[0];
+                            obj.cond = key.replace(']', '').split('[')[1]
+                            obj.val = value;
 
-                            if(col == "sort") {
-                                label = '';
+                            switch (obj.column) {
+                                case "search":
+                                    obj.label = "{{ __('ui::app.datagrid.search-title') }}";
+                                    break;
+                                case "channel":
+                                    obj.label = "{{ __('ui::app.datagrid.channel') }}";
+                                    if ('channels' in this.extraFilters) {
+                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code == obj.val);
 
-                                for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].index == obj.cond) {
-
-                                        obj.label = this.columns[colIndex].label;
+                                        if (obj.prettyValue !== undefined) {
+                                            obj.prettyValue = obj.prettyValue.name;
+                                        }
                                     }
-                                }
-                            } else if (col == "search") {
-                                obj.label = 'Search';
-                            } else {
-                                obj.label = '';
+                                    break;
+                                case "locale":
+                                    obj.label = "{{ __('ui::app.datagrid.locale') }}";
+                                    if ('locales' in this.extraFilters) {
+                                        obj.prettyValue = this.extraFilters['locales'].find(locale => locale.code === obj.val);
 
-                                for(colIndex in this.columns) {
-                                    if (this.columns[colIndex].index == obj.column) {
-                                        obj.label = this.columns[colIndex].label;
+                                        if (obj.prettyValue !== undefined) {
+                                            obj.prettyValue = obj.prettyValue.name;
+                                        }
+                                    }
+                                    break;
+                                case "customer_group":
+                                    obj.label = "{{ __('ui::app.datagrid.customer-group') }}";
+                                    if ('customer_groups' in this.extraFilters) {
+                                        obj.prettyValue = this.extraFilters['customer_groups'].find(customer_group => customer_group.id === parseInt(obj.val, 10));
 
-                                        if (this.columns[colIndex].type == 'boolean') {
-                                            if (obj.val == 1) {
-                                                obj.val = '{{ __('ui::app.datagrid.true') }}';
-                                            } else {
-                                                obj.val = '{{ __('ui::app.datagrid.false') }}';
+                                        if (obj.prettyValue !== undefined) {
+                                            obj.prettyValue = obj.prettyValue.name;
+                                        }
+                                    }
+                                    break;
+                                case "sort":
+                                    for (let colIndex in this.columns) {
+                                        if (this.columns[colIndex].index === obj.cond) {
+                                            obj.label = this.columns[colIndex].label;
+                                            break;
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    for (let colIndex in this.columns) {
+                                        if (this.columns[colIndex].index === obj.column) {
+                                            obj.label = this.columns[colIndex].label;
+
+                                            if (this.columns[colIndex].type === 'boolean') {
+                                                if (obj.val === '1') {
+                                                    obj.val = '{{ __('ui::app.datagrid.true') }}';
+                                                } else {
+                                                    obj.val = '{{ __('ui::app.datagrid.false') }}';
+                                                }
                                             }
                                         }
                                     }
-                                }
+                                    break;
                             }
 
-                            if (col != undefined && cond != undefined && val != undefined)
+                            if (obj.column !== undefined && obj.column !== 'admin_locale' && obj.val !== undefined) {
                                 this.filters.push(obj);
+                            }
 
                             obj = {};
                         }
                     },
 
-                    removeFilter: function(filter) {
-                        for(i in this.filters) {
-                            if (this.filters[i].col == filter.col && this.filters[i].cond == filter.cond && this.filters[i].val == filter.val) {
+                    removeFilter: function (filter) {
+                        for (let i in this.filters) {
+                            if (this.filters[i].column === filter.column
+                                && this.filters[i].cond === filter.cond
+                                && this.filters[i].val === filter.val) {
                                 this.filters.splice(i, 1);
 
                                 this.makeURL();
@@ -662,30 +806,37 @@
                         }
                     },
 
-                    //triggered when any select box is clicked in the datagrid
-                    select: function() {
+                    /**
+                     * Triggered when any select box is clicked in the datagrid.
+                     */
+                    select: function () {
                         this.allSelected = false;
 
-                        if(this.dataIds.length == 0)
+                        if (this.dataIds.length === 0) {
                             this.massActionsToggle = false;
-                        else
+                            this.massActionType = null;
+                        } else {
                             this.massActionsToggle = true;
+                        }
                     },
 
-                    //triggered when master checkbox is clicked
-                    selectAll: function() {
+                    /**
+                     * Triggered when master checkbox is clicked.
+                     */
+                    selectAll: function () {
                         this.dataIds = [];
 
                         this.massActionsToggle = true;
 
                         if (this.allSelected) {
                             if (this.gridCurrentData.hasOwnProperty("data")) {
-                                for (currentData in this.gridCurrentData.data) {
+                                for (let currentData in this.gridCurrentData.data) {
 
-                                    i = 0;
-                                    for(currentId in this.gridCurrentData.data[currentData]) {
-                                        if (i==0)
+                                    let i = 0;
+                                    for (let currentId in this.gridCurrentData.data[currentData]) {
+                                        if (i == 0) {
                                             this.dataIds.push(this.gridCurrentData.data[currentData][this.filterIndex]);
+                                        }
 
                                         i++;
                                     }
@@ -693,9 +844,9 @@
                             } else {
                                 for (currentData in this.gridCurrentData) {
 
-                                    i = 0;
-                                    for(currentId in this.gridCurrentData[currentData]) {
-                                        if (i==0)
+                                    let i = 0;
+                                    for (let currentId in this.gridCurrentData[currentData]) {
+                                        if (i === 0)
                                             this.dataIds.push(this.gridCurrentData[currentData][currentId]);
 
                                         i++;
@@ -705,16 +856,54 @@
                         }
                     },
 
-                    doAction: function(e) {
-                        var element = e.currentTarget;
+                    captureColumn: function (id) {
+                        element = document.getElementById(id);
 
-                        if (confirm('{{__('ui::app.datagrid.massaction.delete') }}')) {
+                    },
+
+                    removeMassActions: function () {
+                        this.dataIds = [];
+
+                        this.massActionsToggle = false;
+
+                        this.allSelected = false;
+
+                        this.massActionType = null;
+                    },
+
+                    paginate: function (e) {
+                        for (let i = 0; i < this.filters.length; i++) {
+                            if (this.filters[i].column == 'perPage') {
+                                this.filters.splice(i, 1);
+                            }
+                        }
+
+                        this.filters.push({"column": "perPage", "cond": "eq", "val": e.target.value});
+
+                        this.makeURL();
+                    },
+
+                    doAction: function (e, message, type) {
+                        let element = e.currentTarget;
+
+                        if (message) {
+                            element = e.target.parentElement;
+                        }
+
+                        message = message || '{{__('ui::app.datagrid.massaction.delete') }}';
+
+                        if (confirm(message)) {
                             axios.post(element.getAttribute('data-action'), {
-                                _token : element.getAttribute('data-token'),
-                                _method : element.getAttribute('data-method')
-                            }).then(function(response) {
+                                _token: element.getAttribute('data-token'),
+                                _method: element.getAttribute('data-method')
+                            }).then(function (response) {
                                 this.result = response;
-                                location.reload();
+
+                                if (response.data.redirect) {
+                                    window.location.href = response.data.redirect;
+                                } else {
+                                    location.reload();
+                                }
                             }).catch(function (error) {
                                 location.reload();
                             });
@@ -723,16 +912,8 @@
                         } else {
                             e.preventDefault();
                         }
-                    },
-
-                    removeMassActions: function() {
-                        this.dataIds = [];
-
-                        this.massActionsToggle = false;
-
-                        this.allSelected = false;
                     }
-                }
+                },
             });
         </script>
     @endpush

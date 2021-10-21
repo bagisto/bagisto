@@ -5,29 +5,16 @@
 @inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
 
 <?php
-    $filterAttributes = [];
+    $filterAttributes = $attributes = [];
+    $maxPrice = 0;
 
     if (isset($category)) {
-        $products = $productRepository->getAll($category->id);
+        $filterAttributes = $productFlatRepository->getProductsRelatedFilterableAttributes($category);
 
-        if (count($category->filterableAttributes) > 0 && count($products)) {
-            $filterAttributes = $category->filterableAttributes;
-        } else {
-            $categoryProductAttributes = $productFlatRepository->getCategoryProductAttribute($category->id);
+        $maxPrice = core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category));
+    }
 
-            if ($categoryProductAttributes) {
-                foreach ($attributeRepository->getFilterAttributes() as $filterAttribute) {
-                    if (in_array($filterAttribute->id, $categoryProductAttributes)) {
-                        $filterAttributes[] = $filterAttribute;
-                    } else  if ($filterAttribute ['code'] == 'price') {
-                        $filterAttributes[] = $filterAttribute;
-                    }
-                }
-
-                $filterAttributes = collect($filterAttributes);
-            }
-        }
-    } else {
+    if (! count($filterAttributes) > 0) {
         $filterAttributes = $attributeRepository->getFilterAttributes();
     }
 ?>
@@ -99,7 +86,7 @@
                         :tooltip-style="sliderConfig.tooltipStyle"
                         :max="sliderConfig.max"
                         :lazy="true"
-                        @callback="priceRangeUpdated($event)"
+                        @change="priceRangeUpdated($event)"
                     ></vue-slider>
                 </div>
 
@@ -116,18 +103,13 @@
             data: function() {
                 return {
                     attributes: @json($filterAttributes),
+
                     appliedFilters: {}
                 }
             },
 
             created: function () {
                 var urlParams = new URLSearchParams(window.location.search);
-
-                //var entries = urlParams.entries();
-
-                //for (let pair of entries) {
-                    //this.appliedFilters[pair[0]] = pair[1].split(',');
-                //}
 
                 var this_this = this;
 
@@ -151,7 +133,9 @@
                     var params = [];
 
                     for(key in this.appliedFilters) {
-                        params.push(key + '=' + this.appliedFilters[key].join(','))
+                        if (key != 'page') {
+                            params.push(key + '=' + this.appliedFilters[key].join(','))
+                        }
                     }
 
                     window.location.href = "?" + params.join('&');
@@ -166,6 +150,10 @@
             props: ['index', 'attribute', 'appliedFilterValues'],
 
             data: function() {
+                let maxPrice  = @json($maxPrice);
+
+                maxPrice = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
+
                 return {
                     appliedFilters: [],
 
@@ -176,7 +164,7 @@
                             0,
                             0
                         ],
-                        max: {{ isset($category) ? core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category->id)) : core()->convertPrice($productFlatRepository->getProductMaximumPrice()) }},
+                        max: maxPrice,
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
@@ -190,7 +178,7 @@
 
             created: function () {
                 if (!this.index)
-                    this.active = false;
+                    this.active = true;
 
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;

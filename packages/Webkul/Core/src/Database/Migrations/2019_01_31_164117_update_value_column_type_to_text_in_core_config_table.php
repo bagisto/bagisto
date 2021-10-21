@@ -25,6 +25,6 @@ class UpdateValueColumnTypeToTextInCoreConfigTable extends Migration
      */
     public function down()
     {
-
+        //
     }
 }

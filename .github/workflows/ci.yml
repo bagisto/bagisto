@@ -1,0 +1,75 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-versions: ['7.3', '7.4', '8.0']
+    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-system }}
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: bagisto_testing
+          MYSQL_USER: bagisto
+          MYSQL_PASSWORD: secret
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: curl, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
+
+      - name: Set Environment
+        run: |
+          set -e
+          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env.testing
+          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env.testing
+          printf "the complete .env.testing ...\n\n"
+          cat .env.testing
+
+      - name: Composer Install
+        run: |
+          set -e
+          composer install --no-cache
+
+      - name: Migrate Database
+        run: set -e && php artisan migrate --env=testing
+
+      - name: Seed Database
+        run: set -e && php artisan db:seed --env=testing
+
+      - name: Vendor Publish
+        run: set -e && php artisan vendor:publish --all --force --env=testing
+
+      - name: Optimize Stuffs
+        run: set -e && php artisan optimize --env=testing
+
+      - name: Execute Unit Tests
+        run: set -e && vendor/bin/codecept run unit
+
+      - name: Execute Functional Tests
+        run: set -e && vendor/bin/codecept run functional
+
+      - name: Execute Trigger Tests
+        run: set -e && vendor/bin/codecept run trigger
+
+      - name: Persist Test Artifacts
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: test_artifacts
+          path: tests/_output

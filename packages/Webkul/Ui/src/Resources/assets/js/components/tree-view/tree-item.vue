@@ -1,5 +1,4 @@
 <script>
-
     export default {
         name: 'tree-view',
 
@@ -40,12 +39,26 @@
                 type: Array,
                 required: false,
                 default: null
-            }
+            },
+
+            fallbackLocale: {
+                type: String,
+                required: false
+            },
         },
 
         created () {
-            let index = this.savedValues.indexOf(this.items[this.valueField])
-            if(index !== -1) {
+            if (! this.savedValues)
+                return;
+
+            var self = this;
+
+            var found = this.savedValues.filter(function(value) {
+                if (value == self.items[self.valueField])
+                    return true;
+            });
+
+            if(found.length) {
                 this.value.push(this.items);
             }
         },
@@ -53,6 +66,8 @@
         computed: {
             caption () {
                 return this.items[this.captionField]
+                    ? this.items[this.captionField]
+                    : this.items.translations.filter((translation) => translation.locale === this.fallbackLocale)[0][this.captionField];
             },
 
             allChildren () {
@@ -72,7 +87,7 @@
                 }
 
                 searchTree(this.items)
-                
+
                 return leafs;
             },
 
@@ -192,7 +207,8 @@
                         childrenField: this.childrenField,
                         valueField: this.valueField,
                         idField: this.idField,
-                        behavior: this.behavior
+                        behavior: this.behavior,
+                        fallbackLocale: this.fallbackLocale
                     }
                 })
             },

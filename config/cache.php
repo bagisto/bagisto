@@ -69,22 +69,10 @@ return [
         ],
 
         'redis' => [
-
-            'client' => 'predis',
-
-            'clusters' => [
-                'default' => [
-                    [
-                        'host' => env('REDIS_HOST', 'localhost'),
-                        'password' => env('REDIS_PASSWORD', null),
-                        'port' => env('REDIS_PORT', 6379),
-                        'database' => 0,
-                    ],
-                ],
-            ],
-
+            'driver' => 'redis',
+            'connection' => env('CACHE_CONNECTION', 'cache'),
         ],
-
+        
     ],
 
     /*
@@ -100,7 +88,7 @@ return [
 
     'prefix' => env(
         'CACHE_PREFIX',
-        str_slug(env('APP_NAME', 'laravel'), '_').'_cache'
+        \Illuminate\Support\Str::slug(env('APP_NAME', 'laravel'), '_') . '_cache'
     ),
 
 ];

@@ -26,7 +26,7 @@ class AddUseInFlatColumnInAttributesTable extends Migration
     public function down()
     {
         Schema::table('attributes', function (Blueprint $table) {
-            //
+            $table->dropColumn('use_in_flat');
         });
     }
 }

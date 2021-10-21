@@ -4,12 +4,6 @@ namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
 
-/**
- * Resource Controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ResourceController extends Controller
 {
     /**
@@ -18,7 +12,7 @@ class ResourceController extends Controller
      * @var array
      */
     protected $guard;
-    
+
     /**
      * Contains route related configuration
      *
@@ -29,7 +23,7 @@ class ResourceController extends Controller
     /**
      * Repository object
      *
-     * @var array
+     * @var \Webkul\Core\Eloquent\Repository
      */
     protected $repository;
 
@@ -51,7 +45,9 @@ class ResourceController extends Controller
             $this->middleware('auth:' . $this->guard);
         }
 
-        $this->repository = app($this->_config['repository']);
+        if ($this->_config) {
+            $this->repository = app($this->_config['repository']);
+        }
     }
 
     /**
@@ -62,6 +58,10 @@ class ResourceController extends Controller
     public function index()
     {
         $query = $this->repository->scopeQuery(function($query) {
+            if (isset($this->_config['authorization_required']) && $this->_config['authorization_required']) {
+                $query = $query->where('customer_id', auth()->user()->id );
+            }
+
             foreach (request()->except(['page', 'limit', 'pagination', 'sort', 'order', 'token']) as $input => $value) {
                 $query = $query->whereIn($input, array_map('trim', explode(',', $value)));
             }
@@ -87,18 +87,22 @@ class ResourceController extends Controller
     /**
      * Returns a individual resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function get($id)
     {
-        return new $this->_config['resource'](
-                $this->repository->findOrFail($id)
-            );
+        $query = isset($this->_config['authorization_required']) && $this->_config['authorization_required'] ?
+                $this->repository->where('customer_id', auth()->user()->id)->findOrFail($id) :
+                $this->repository->findOrFail($id);
+
+        return new $this->_config['resource']($query);
     }
 
     /**
      * Delete's a individual resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -106,9 +110,9 @@ class ResourceController extends Controller
         $wishlistProduct = $this->repository->findOrFail($id);
 
         $this->repository->delete($id);
-        
+
         return response()->json([
-                'message' => 'Item removed successfully.'
-            ]);
+            'message' => 'Item removed successfully.',
+        ]);
     }
 }

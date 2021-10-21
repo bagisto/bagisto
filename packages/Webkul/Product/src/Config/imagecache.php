@@ -52,9 +52,9 @@ return array(
     */
 
     'templates' => array(
-        'small' => 'Webkul\Product\CacheFilters\Small',
+        'small'  => 'Webkul\Product\CacheFilters\Small',
         'medium' => 'Webkul\Product\CacheFilters\Medium',
-        'large' => 'Webkul\Product\CacheFilters\Large',
+        'large'  => 'Webkul\Product\CacheFilters\Large',
     ),
 
     /*
@@ -66,6 +66,6 @@ return array(
     |
     */
 
-    'lifetime' => 43200,
+    'lifetime' => 525600,
 
 );

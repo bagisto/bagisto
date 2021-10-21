@@ -7,8 +7,8 @@ class View extends AbstractProduct
     /**
      * Returns the visible custom attributes
      *
-     * @param Product $product
-     * @return integer
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return void|array
      */
     public function getAdditionalData($product)
     {
@@ -27,18 +27,26 @@ class View extends AbstractProduct
 
             if ($attribute->type == 'boolean') {
                 $value = $value ? 'Yes' : 'No';
-            } else if($value) {
+            } elseif($value) {
                 if ($attribute->type == 'select') {
                     $attributeOption = $attributeOptionReposotory->find($value);
-                    if ($attributeOption)
-                        $value = $attributeOption->label ?? $attributeOption->admin_name;
-                } else if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
+
+                    if ($attributeOption) {
+                        $value = $attributeOption->label ?? null;
+
+                        if (! $value) {
+                            continue;
+                        }
+                    }
+                } elseif ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
                     $lables = [];
 
                     $attributeOptions = $attributeOptionReposotory->findWhereIn('id', explode(",", $value));
 
                     foreach ($attributeOptions as $attributeOption) {
-                        $lables[] = $attributeOption->label ?? $attributeOption->admin_name;
+                        if ($label = $attributeOption->label) {
+                            $lables[] = $label;
+                        }
                     }
 
                     $value = implode(", ", $lables);
@@ -46,12 +54,12 @@ class View extends AbstractProduct
             }
 
             $data[] = [
-                'id' => $attribute->id,
-                'code' => $attribute->code,
-                'label' => $attribute->name,
-                'value' => $value,
+                'id'         => $attribute->id,
+                'code'       => $attribute->code,
+                'label'      => $attribute->name,
+                'value'      => $value,
                 'admin_name' => $attribute->admin_name,
-                'type' => $attribute->type,
+                'type'       => $attribute->type,
             ];
         }
 

@@ -2,113 +2,83 @@
 
 namespace Webkul\Admin\DataGrids;
 
+use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
-use DB;
 
-/**
- * CMSPagesDataGrid class
- *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CMSPageDataGrid extends DataGrid
 {
-    protected $index = 'id'; //the column that needs to be treated as index column
+    protected $index = 'id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('cms_pages')->select('id', 'url_key', 'page_title', 'channel_id', 'locale_id');
+        $queryBuilder = DB::table('cms_pages')
+            ->select('cms_pages.id', 'cms_page_translations.page_title', 'cms_page_translations.url_key')
+            ->leftJoin('cms_page_translations', function($leftJoin) {
+                $leftJoin->on('cms_pages.id', '=', 'cms_page_translations.cms_page_id')
+                         ->where('cms_page_translations.locale', app()->getLocale());
+            });
+
+        $this->addFilter('id', 'cms_pages.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
     public function addColumns()
     {
-        $channels = app('Webkul\Core\Repositories\ChannelRepository');
-
-        $locales = app('Webkul\Core\Repositories\LocaleRepository');
-
         $this->addColumn([
-            'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
-            'filterable' => true
-        ]);
-
-        $this->addColumn([
-            'index' => 'url_key',
-            'label' => trans('admin::app.datagrid.url-key'),
-            'type' => 'string',
-            'searchable' => true,
-            'sortable' => true,
-            'filterable' => true
-        ]);
-
-        $this->addColumn([
-            'index' => 'page_title',
-            'label' => trans('admin::app.cms.pages.page-title'),
-            'type' => 'string',
-            'searchable' => true,
-            'sortable' => true,
-            'filterable' => true
-        ]);
-
-        $this->addColumn([
-            'index' => 'locale_id',
-            'label' => trans('admin::app.cms.pages.locale'),
-            'type' => 'number',
-            'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true,
-            'wrapper' => function($row) use($locales) {
-                $localeCode = $locales->find($row->locale_id)->code;
-
-                return $row->locale_id.' ('. $localeCode. ')';
-            }
         ]);
 
         $this->addColumn([
-            'index' => 'channel_id',
-            'label' => trans('admin::app.cms.pages.channel'),
-            'type' => 'number',
-            'searchable' => false,
-            'sortable' => true,
+            'index'      => 'page_title',
+            'label'      => trans('admin::app.cms.pages.page-title'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
             'filterable' => true,
-            'wrapper' => function($row) use($channels) {
-                $channelCode = $channels->find($row->channel_id)->name;
+        ]);
 
-                return $row->channel_id.' ('. $channelCode. ')';
-            }
+        $this->addColumn([
+            'index'      => 'url_key',
+            'label'      => trans('admin::app.datagrid.url-key'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+            'filterable' => true,
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
-            'title' => 'Edit CMSPage',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.cms.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'title'  => trans('admin::app.datagrid.edit'),
+            'method' => 'GET',
+            'route'  => 'admin.cms.edit',
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title' => 'Delete CMSPage',
-            'method' => 'POST', // use GET request only for redirect purposes
-            'route' => 'admin.cms.delete',
-            'icon' => 'icon trash-icon'
+            'title'  => trans('admin::app.datagrid.delete'),
+            'method' => 'POST',
+            'route'  => 'admin.cms.delete',
+            'icon'   => 'icon trash-icon',
         ]);
     }
 
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'type' => 'delete',
-            'label' => 'Delete',
+            'type'   => 'delete',
+            'label'  => trans('admin::app.datagrid.delete'),
             'action' => route('admin.cms.mass-delete'),
-            'method' => 'DELETE'
+            'method' => 'POST',
         ]);
     }
 }

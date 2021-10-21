@@ -61,9 +61,8 @@ abstract class Payment
     /**
      * Retrieve information from payment configuration
      *
-     * @param string $field
-     * @param int|string|null $channelId
-     *
+     * @param  string  $field
+     * @param  int|string|null  $channelId
      * @return mixed
      */
     public function getConfigData($field)
@@ -80,8 +79,9 @@ abstract class Payment
      */
     public function setCart()
     {
-        if (! $this->cart)
+        if (! $this->cart) {
             $this->cart = Cart::getCart();
+        }
     }
 
     /**
@@ -91,8 +91,9 @@ abstract class Payment
      */
     public function getCart()
     {
-        if (! $this->cart)
+        if (! $this->cart) {
             $this->setCart();
+        }
 
         return $this->cart;
     }
@@ -104,8 +105,9 @@ abstract class Payment
      */
     public function getCartItems()
     {
-        if (! $this->cart)
+        if (! $this->cart) {
             $this->setCart();
+        }
 
         return $this->cart->items;
     }
@@ -121,12 +123,21 @@ abstract class Payment
     }
 
     /**
-     * Returns default payment method.
+     * Returns payment method additional information
      *
-     * @return boolean
+     * @return array
      */
-    public function getDefaultMethod()
+    public function getAdditionalDetails()
     {
-        return $this->getConfigData('default');
+        if (! $this->getConfigData('instructions')
+            || $this->getConfigData('instructions') == ''
+        ) {
+            return [];
+        }
+
+        return [
+            'title' => trans('admin::app.admin.system.instructions'),
+            'value' => $this->getConfigData('instructions'),
+        ];
     }
 }

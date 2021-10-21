@@ -1,299 +1,381 @@
 <?php
 
+// Controllers
+use Webkul\CMS\Http\Controllers\Shop\PagePresenterController;
+use Webkul\Core\Http\Controllers\CountryStateController;
+use Webkul\Customer\Http\Controllers\AccountController;
+use Webkul\Customer\Http\Controllers\AddressController;
+use Webkul\Customer\Http\Controllers\CustomerController;
+use Webkul\Customer\Http\Controllers\ForgotPasswordController;
+use Webkul\Customer\Http\Controllers\RegistrationController;
+use Webkul\Customer\Http\Controllers\ResetPasswordController;
+use Webkul\Customer\Http\Controllers\SessionController;
+use Webkul\Customer\Http\Controllers\WishlistController;
+use Webkul\Shop\Http\Controllers\CartController;
+use Webkul\Shop\Http\Controllers\DownloadableProductController;
+use Webkul\Shop\Http\Controllers\HomeController;
+use Webkul\Shop\Http\Controllers\OnepageController;
+use Webkul\Shop\Http\Controllers\OrderController;
+use Webkul\Shop\Http\Controllers\ProductController;
+use Webkul\Shop\Http\Controllers\ReviewController;
+use Webkul\Shop\Http\Controllers\SearchController;
+use Webkul\Shop\Http\Controllers\SubscriptionController;
+
 Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function () {
-    //Store front home
-    Route::get('/', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
+    /**
+     * Store front home.
+     */
+    Route::get('/', [HomeController::class, 'index'])->defaults('_config', [
         'view' => 'shop::home.index'
     ])->name('shop.home.index');
 
-    //subscription
-    //subscribe
-    Route::get('/subscribe', 'Webkul\Shop\Http\Controllers\SubscriptionController@subscribe')->name('shop.subscribe');
-
-    //unsubscribe
-    Route::get('/unsubscribe/{token}', 'Webkul\Shop\Http\Controllers\SubscriptionController@unsubscribe')->name('shop.unsubscribe');
-
-    //Store front header nav-menu fetch
-    Route::get('/categories/{slug}', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
-        'view' => 'shop::products.index'
-    ])->name('shop.categories.index');
-
-    //Store front search
-    Route::get('/search', 'Webkul\Shop\Http\Controllers\SearchController@index')->defaults('_config', [
+    /**
+     * Store front search.
+     */
+    Route::get('/search', [SearchController::class, 'index'])->defaults('_config', [
         'view' => 'shop::search.search'
     ])->name('shop.search.index');
 
-    //Country State Selector
-    Route::get('get/countries', 'Webkul\Core\Http\Controllers\CountryStateController@getCountries')->defaults('_config', [
+    Route::post('/upload-search-image', [HomeController::class, 'upload'])->name('shop.image.search.upload');
+
+    /**
+     * Subscription.
+     */
+    Route::get('/subscribe', [SubscriptionController::class, 'subscribe'])->name('shop.subscribe');
+
+    Route::get('/unsubscribe/{token}', [SubscriptionController::class, 'unsubscribe'])->name('shop.unsubscribe');
+
+    /**
+     * Country-State selector.
+     */
+    Route::get('get/countries', [CountryStateController::class, 'getCountries'])->defaults('_config', [
         'view' => 'shop::test'
     ])->name('get.countries');
 
-    //Get States When Country is Passed
-    Route::get('get/states/{country}', 'Webkul\Core\Http\Controllers\CountryStateController@getStates')->defaults('_config', [
+    /**
+     * Get States when Country is passed.
+     */
+    Route::get('get/states/{country}', [CountryStateController::class, 'getStates'])->defaults('_config', [
         'view' => 'shop::test'
     ])->name('get.states');
 
-    //checkout and cart
-    //Cart Items(listing)
-    Route::get('checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@index')->defaults('_config', [
+    /**
+     * Cart, coupons and checkout.
+     */
+    // Cart items listing.
+    Route::get('checkout/cart', [CartController::class, 'index'])->defaults('_config', [
         'view' => 'shop::checkout.cart.index'
     ])->name('shop.checkout.cart.index');
 
-        Route::post('checkout/check/coupons', 'Webkul\Shop\Http\Controllers\OnepageController@applyCoupon')->name('shop.checkout.check.coupons');
-
-        Route::post('checkout/remove/coupon', 'Webkul\Shop\Http\Controllers\OnepageController@removeCoupon')->name('shop.checkout.remove.coupon');
-
-    //Cart Items Add
-    Route::post('checkout/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->defaults('_config', [
+    // Add cart items.
+    Route::post('checkout/cart/add/{id}', [CartController::class, 'add'])->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'
     ])->name('cart.add');
 
-    //Cart Items Add Configurable for more
-    Route::get('checkout/cart/addconfigurable/{slug}', 'Webkul\Shop\Http\Controllers\CartController@addConfigurable')->name('cart.add.configurable');
+    // Cart items remove.
+    Route::get('checkout/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
-    //Cart Items Remove
-    Route::get('checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->name('cart.remove');
-
-    //Cart Update Before Checkout
-    Route::post('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@updateBeforeCheckout')->defaults('_config', [
+    // Cart update before checkout.
+    Route::post('/checkout/cart', [CartController::class, 'updateBeforeCheckout'])->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'
     ])->name('shop.checkout.cart.update');
 
-    //Cart Items Remove
-    Route::get('/checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->defaults('_config', [
+    // Cart items remove.
+    Route::get('/checkout/cart/remove/{id}', [CartController::class, 'remove'])->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'
     ])->name('shop.checkout.cart.remove');
 
-    //Checkout Index page
-    Route::get('/checkout/onepage', 'Webkul\Shop\Http\Controllers\OnepageController@index')->defaults('_config', [
+    // Move item to wishlist from cart.
+    Route::post('move/wishlist/{id}', [CartController::class, 'moveToWishlist'])->name('shop.movetowishlist');
+
+    // Apply coupons.
+    Route::post('checkout/cart/coupon', [CartController::class, 'applyCoupon'])->name('shop.checkout.cart.coupon.apply');
+
+    // Remove coupons.
+    Route::delete('checkout/cart/coupon', [CartController::class, 'removeCoupon'])->name('shop.checkout.coupon.remove.coupon');
+
+    // Checkout index page.
+    Route::get('/checkout/onepage', [OnepageController::class, 'index'])->defaults('_config', [
         'view' => 'shop::checkout.onepage'
     ])->name('shop.checkout.onepage.index');
 
-    //Checkout Save Order
-    Route::get('/checkout/summary', 'Webkul\Shop\Http\Controllers\OnepageController@summary')->name('shop.checkout.summary');
+    // Checkout get summary.
+    Route::get('/checkout/summary',[OnepageController::class, 'summary'])->name('shop.checkout.summary');
 
-    //Checkout Save Address Form Store
-    Route::post('/checkout/save-address', 'Webkul\Shop\Http\Controllers\OnepageController@saveAddress')->name('shop.checkout.save-address');
+    // Checkout save address form.
+    Route::post('/checkout/save-address', [OnepageController::class, 'saveAddress'])->name('shop.checkout.save-address');
 
-    //Checkout Save Shipping Address Form Store
-    Route::post('/checkout/save-shipping', 'Webkul\Shop\Http\Controllers\OnepageController@saveShipping')->name('shop.checkout.save-shipping');
+    // Checkout save shipping address form.
+    Route::post('/checkout/save-shipping', [OnepageController::class, 'saveShipping'])->name('shop.checkout.save-shipping');
 
-    //Checkout Save Payment Method Form
-    Route::post('/checkout/save-payment', 'Webkul\Shop\Http\Controllers\OnepageController@savePayment')->name('shop.checkout.save-payment');
+    // Checkout save payment method form.
+    Route::post('/checkout/save-payment', [OnepageController::class, 'savePayment'])->name('shop.checkout.save-payment');
 
-    //Checkout Save Order
-    Route::post('/checkout/save-order', 'Webkul\Shop\Http\Controllers\OnepageController@saveOrder')->name('shop.checkout.save-order');
+    // Check minimum order.
+    Route::post('/checkout/check-minimum-order', [OnepageController::class, 'checkMinimumOrder'])->name('shop.checkout.check-minimum-order');
 
-    //Checkout Order Successfull
-    Route::get('/checkout/success', 'Webkul\Shop\Http\Controllers\OnepageController@success')->defaults('_config', [
+    // Checkout save order.
+    Route::post('/checkout/save-order', [OnepageController::class, 'saveOrder'])->name('shop.checkout.save-order');
+
+    // Checkout order successful.
+    Route::get('/checkout/success', [OnepageController::class, 'success'])->defaults('_config', [
         'view' => 'shop::checkout.success'
     ])->name('shop.checkout.success');
 
-    //Shop buynow button action
-    Route::get('buynow/{id}', 'Webkul\Shop\Http\Controllers\CartController@buyNow')->name('shop.product.buynow');
-
-    //Shop buynow button action
-    Route::get('move/wishlist/{id}', 'Webkul\Shop\Http\Controllers\CartController@moveToWishlist')->name('shop.movetowishlist');
-
-    //Show Product Details Page(For individually Viewable Product)
-    Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [
-        'view' => 'shop::products.view'
-    ])->name('shop.products.index');
-
-    // Show Product Review Form
-    Route::get('/reviews/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [
+    /**
+     * Product reviews.
+     */
+    // Show product review form.
+    Route::get('/reviews/{slug}', [ReviewController::class, 'show'])->defaults('_config', [
         'view' => 'shop::products.reviews.index'
     ])->name('shop.reviews.index');
 
-    // Show Product Review(listing)
-    Route::get('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@create')->defaults('_config', [
+    // Show product review listing.
+    Route::get('/product/{slug}/review', [ReviewController::class, 'create'])->defaults('_config', [
         'view' => 'shop::products.reviews.create'
     ])->name('shop.reviews.create');
 
-    // Show Product Review Form Store
-    Route::post('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
+    // Store product review.
+    Route::post('/product/{slug}/review', [ReviewController::class, 'store'])->defaults('_config', [
         'redirect' => 'shop.home.index'
     ])->name('shop.reviews.store');
 
-     // Download file or image
-    Route::get('/product/{id}/{attribute_id}', 'Webkul\Shop\Http\Controllers\ProductController@download')->defaults('_config', [
+    /**
+     * Downloadable products.
+     */
+    Route::get('/downloadable/download-sample/{type}/{id}', [ProductController::class, 'downloadSample'])->name('shop.downloadable.download_sample');
+
+    Route::get('/product/{id}/{attribute_id}', [ProductController::class, 'download'])->defaults('_config', [
         'view' => 'shop.products.index'
     ])->name('shop.product.file.download');
 
-    //customer routes starts here
+    /**
+     * These are the routes which are used during checkout for checking the customer.
+     * So, placed outside the cart merger middleware.
+     */
     Route::prefix('customer')->group(function () {
-        // forgot Password Routes
-        // Forgot Password Form Show
-        Route::get('/forgot-password', 'Webkul\Customer\Http\Controllers\ForgotPasswordController@create')->defaults('_config', [
-            'view' => 'shop::customers.signup.forgot-password'
-        ])->name('customer.forgot-password.create');
+        // For customer exist check.
+        Route::post('/customer/exist', [OnepageController::class, 'checkExistCustomer'])->name('customer.checkout.exist');
 
-        // Forgot Password Form Store
-        Route::post('/forgot-password', 'Webkul\Customer\Http\Controllers\ForgotPasswordController@store')->name('customer.forgot-password.store');
+        // For customer login checkout.
+        Route::post('/customer/checkout/login', [OnepageController::class, 'loginForCheckout'])->name('customer.checkout.login');
+    });
 
-        // Reset Password Form Show
-        Route::get('/reset-password/{token}', 'Webkul\Customer\Http\Controllers\ResetPasswordController@create')->defaults('_config', [
-            'view' => 'shop::customers.signup.reset-password'
-        ])->name('customer.reset-password.create');
+    /**
+     * Cart merger middleware. This middleware will take care of the items
+     * which are deactivated at the time of buy now functionality. If somehow
+     * user redirects without completing the checkout then this will merge
+     * full cart.
+     *
+     * If some routes are not able to merge the cart, then place the route in this
+     * group.
+     */
+    Route::group(['middleware' => ['cart.merger']], function () {
+        /**
+         * Customer routes.
+         */
+        Route::prefix('customer')->group(function () {
+            /**
+             * Forgot password routes.
+             */
+            // Show forgot password form.
+            Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->defaults('_config', [
+                'view' => 'shop::customers.signup.forgot-password'
+            ])->name('customer.forgot-password.create');
 
-        // Reset Password Form Store
-        Route::post('/reset-password', 'Webkul\Customer\Http\Controllers\ResetPasswordController@store')->defaults('_config', [
-            'redirect' => 'customer.profile.index'
-        ])->name('customer.reset-password.store');
+            // Store forgot password.
+            Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('customer.forgot-password.store');
 
-        // Login Routes
-        // Login form show
-        Route::get('login', 'Webkul\Customer\Http\Controllers\SessionController@show')->defaults('_config', [
-            'view' => 'shop::customers.session.index',
-        ])->name('customer.session.index');
+            // Reset password form.
+            Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->defaults('_config', [
+                'view' => 'shop::customers.signup.reset-password'
+            ])->name('customer.reset-password.create');
 
-        // Login form store
-        Route::post('login', 'Webkul\Customer\Http\Controllers\SessionController@create')->defaults('_config', [
-            'redirect' => 'customer.profile.index'
-        ])->name('customer.session.create');
+            // Store reset password.
+            Route::post('/reset-password',[ResetPasswordController::class, 'store'])->defaults('_config', [
+                'redirect' => 'customer.profile.index'
+            ])->name('customer.reset-password.store');
 
-        // Registration Routes
-        //registration form show
-        Route::get('register', 'Webkul\Customer\Http\Controllers\RegistrationController@show')->defaults('_config', [
-            'view' => 'shop::customers.signup.index'
-        ])->name('customer.register.index');
+            /**
+             * Login routes.
+             */
+            // Login form.
+            Route::get('login', [SessionController::class, 'show'])->defaults('_config', [
+                'view' => 'shop::customers.session.index',
+            ])->name('customer.session.index');
 
-        //registration form store
-        Route::post('register', 'Webkul\Customer\Http\Controllers\RegistrationController@create')->defaults('_config', [
-            'redirect' => 'customer.session.index',
-        ])->name('customer.register.create');
+            // Login.
+            Route::post('login', [SessionController::class, 'create'])->defaults('_config', [
+                'redirect' => 'customer.profile.index'
+            ])->name('customer.session.create');
 
-        //verify account
-        Route::get('/verify-account/{token}', 'Webkul\Customer\Http\Controllers\RegistrationController@verifyAccount')->name('customer.verify');
+            /**
+             * Registration routes.
+             */
+            // Show registration form.
+            Route::get('register', [RegistrationController::class, 'show'])->defaults('_config', [
+                'view' => 'shop::customers.signup.index'
+            ])->name('customer.register.index');
 
-        //resend verification email
-        Route::get('/resend/verification/{email}', 'Webkul\Customer\Http\Controllers\RegistrationController@resendVerificationEmail')->name('customer.resend.verification-email');
+            // Store new registered user.
+            Route::post('register', [RegistrationController::class, 'create'])->defaults('_config', [
+                'redirect' => 'customer.session.index',
+            ])->name('customer.register.create');
 
-        // Auth Routes
-        Route::group(['middleware' => ['customer']], function () {
+            // Verify account.
+            Route::get('/verify-account/{token}', [RegistrationController::class, 'verifyAccount'])->name('customer.verify');
 
-            //Customer logout
-            Route::get('logout', 'Webkul\Customer\Http\Controllers\SessionController@destroy')->defaults('_config', [
-                'redirect' => 'customer.session.index'
-            ])->name('customer.session.destroy');
+            // Resend verification email.
+            Route::get('/resend/verification/{email}', [RegistrationController::class, 'resendVerificationEmail'])->name('customer.resend.verification-email');
 
-            //Customer Wishlist add
-            Route::get('wishlist/add/{id}', 'Webkul\Customer\Http\Controllers\WishlistController@add')->name('customer.wishlist.add');
+            /**
+             * Customer authented routes. All the below routes only be accessible
+             * if customer is authenticated.
+             */
+            Route::group(['middleware' => ['customer']], function () {
+                /**
+                 * Logout.
+                 */
+                Route::get('logout', [SessionController::class, 'destroy'])->defaults('_config', [
+                    'redirect' => 'customer.session.index'
+                ])->name('customer.session.destroy');
 
-            //Customer Wishlist remove
-            Route::get('wishlist/remove/{id}', 'Webkul\Customer\Http\Controllers\WishlistController@remove')->name('customer.wishlist.remove');
+                /**
+                 * Wishlist.
+                 */
+                Route::post('wishlist/add/{id}', [WishlistController::class, 'add'])->name('customer.wishlist.add');
 
-            //Customer Wishlist remove
-            Route::get('wishlist/removeall', 'Webkul\Customer\Http\Controllers\WishlistController@removeAll')->name('customer.wishlist.removeall');
+                Route::delete('wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('customer.wishlist.remove');
 
-            //Customer Wishlist move to cart
-            Route::get('wishlist/move/{id}', 'Webkul\Customer\Http\Controllers\WishlistController@move')->name('customer.wishlist.move');
+                Route::delete('wishlist/removeall', [WishlistController::class, 'removeAll'])->name('customer.wishlist.removeall');
 
-            //customer account
-            Route::prefix('account')->group(function () {
-                //Customer Dashboard Route
-                Route::get('index', 'Webkul\Customer\Http\Controllers\AccountController@index')->defaults('_config', [
-                    'view' => 'shop::customers.account.index'
-                ])->name('customer.account.index');
+                Route::get('wishlist/move/{id}', [WishlistController::class, 'move'])->name('customer.wishlist.move');
 
-                //Customer Profile Show
-                Route::get('profile', 'Webkul\Customer\Http\Controllers\CustomerController@index')->defaults('_config', [
-                    'view' => 'shop::customers.account.profile.index'
-                ])->name('customer.profile.index');
+                /**
+                 * Customer account. All the below routes are related to
+                 * customer account details.
+                 */
+                Route::prefix('account')->group(function () {
+                    /**
+                     * Dashboard.
+                     */
+                    Route::get('index', [AccountController::class, 'index'])->defaults('_config', [
+                        'view' => 'shop::customers.account.index'
+                    ])->name('customer.account.index');
 
-                //Customer Profile Edit Form Show
-                Route::get('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@edit')->defaults('_config', [
-                    'view' => 'shop::customers.account.profile.edit'
-                ])->name('customer.profile.edit');
+                    /**
+                     * Profile.
+                     */
+                    Route::get('profile', [CustomerController::class, 'index'])->defaults('_config', [
+                        'view' => 'shop::customers.account.profile.index'
+                    ])->name('customer.profile.index');
 
-                //Customer Profile Edit Form Store
-                Route::post('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@update')->defaults('_config', [
-                    'redirect' => 'customer.profile.index'
-                ])->name('customer.profile.edit');
+                    Route::get('profile/edit', [CustomerController::class, 'edit'])->defaults('_config', [
+                        'view' => 'shop::customers.account.profile.edit'
+                    ])->name('customer.profile.edit');
 
-                //Customer Profile Delete Form Store
-                Route::post('profile/destroy', 'Webkul\Customer\Http\Controllers\CustomerController@destroy')->defaults('_config', [
-                    'redirect' => 'customer.profile.index'
-                ])->name('customer.profile.destroy');
+                    Route::post('profile/edit', [CustomerController::class, 'update'])->defaults('_config', [
+                        'redirect' => 'customer.profile.index'
+                    ])->name('customer.profile.store');
 
-                /*  Profile Routes Ends Here  */
+                    Route::post('profile/destroy', [CustomerController::class, 'destroy'])->defaults('_config', [
+                        'redirect' => 'customer.profile.index'
+                    ])->name('customer.profile.destroy');
 
-                /*    Routes for Addresses   */
-                //Customer Address Show
-                Route::get('addresses', 'Webkul\Customer\Http\Controllers\AddressController@index')->defaults('_config', [
-                    'view' => 'shop::customers.account.address.index'
-                ])->name('customer.address.index');
+                    /**
+                     * Addresses.
+                     */
+                    Route::get('addresses', [AddressController::class, 'index'])->defaults('_config', [
+                        'view' => 'shop::customers.account.address.index'
+                    ])->name('customer.address.index');
 
-                //Customer Address Create Form Show
-                Route::get('addresses/create', 'Webkul\Customer\Http\Controllers\AddressController@create')->defaults('_config', [
-                    'view' => 'shop::customers.account.address.create'
-                ])->name('customer.address.create');
+                    Route::get('addresses/create', [AddressController::class, 'create'])->defaults('_config', [
+                        'view' => 'shop::customers.account.address.create'
+                    ])->name('customer.address.create');
 
-                //Customer Address Create Form Store
-                Route::post('addresses/create', 'Webkul\Customer\Http\Controllers\AddressController@store')->defaults('_config', [
-                    'view' => 'shop::customers.account.address.address',
-                    'redirect' => 'customer.address.index'
-                ])->name('customer.address.create');
+                    Route::post('addresses/create', [AddressController::class, 'store'])->defaults('_config', [
+                        'view' => 'shop::customers.account.address.address',
+                        'redirect' => 'customer.address.index'
+                    ])->name('customer.address.store');
 
-                //Customer Address Edit Form Show
-                Route::get('addresses/edit/{id}', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
-                    'view' => 'shop::customers.account.address.edit'
-                ])->name('customer.address.edit');
+                    Route::get('addresses/edit/{id}', [AddressController::class, 'edit'])->defaults('_config', [
+                        'view' => 'shop::customers.account.address.edit'
+                    ])->name('customer.address.edit');
 
-                //Customer Address Edit Form Store
-                Route::put('addresses/edit/{id}', 'Webkul\Customer\Http\Controllers\AddressController@update')->defaults('_config', [
-                    'redirect' => 'customer.address.index'
-                ])->name('customer.address.edit');
+                    Route::put('addresses/edit/{id}', [AddressController::class, 'update'])->defaults('_config', [
+                        'redirect' => 'customer.address.index'
+                    ])->name('customer.address.update');
 
-                //Customer Address Make Default
-                Route::get('addresses/default/{id}', 'Webkul\Customer\Http\Controllers\AddressController@makeDefault')->name('make.default.address');
+                    Route::get('addresses/default/{id}', [AddressController::class, 'makeDefault'])->name('make.default.address');
 
-                //Customer Address Delete
-                Route::get('addresses/delete/{id}', 'Webkul\Customer\Http\Controllers\AddressController@destroy')->name('address.delete');
+                    Route::delete('addresses/delete/{id}', [AddressController::class, 'destroy'])->name('address.delete');
 
-                /* Wishlist route */
-                //Customer wishlist(listing)
-                Route::get('wishlist', 'Webkul\Customer\Http\Controllers\WishlistController@index')->defaults('_config', [
-                    'view' => 'shop::customers.account.wishlist.wishlist'
-                ])->name('customer.wishlist.index');
+                    /**
+                     * Wishlist.
+                     */
+                    Route::get('wishlist', [WishlistController::class, 'index'])->defaults('_config', [
+                        'view' => 'shop::customers.account.wishlist.wishlist'
+                    ])->name('customer.wishlist.index');
 
-                /* Orders route */
-                //Customer orders(listing)
-                Route::get('orders', 'Webkul\Shop\Http\Controllers\OrderController@index')->defaults('_config', [
-                    'view' => 'shop::customers.account.orders.index'
-                ])->name('customer.orders.index');
+                    /**
+                     * Orders.
+                     */
+                    Route::get('orders', [OrderController::class, 'index'])->defaults('_config', [
+                        'view' => 'shop::customers.account.orders.index'
+                    ])->name('customer.orders.index');
 
-                //Customer orders view summary and status
-                Route::get('orders/view/{id}', 'Webkul\Shop\Http\Controllers\OrderController@view')->defaults('_config', [
-                    'view' => 'shop::customers.account.orders.view'
-                ])->name('customer.orders.view');
+                    Route::get('orders/view/{id}', [OrderController::class, 'view'])->defaults('_config', [
+                        'view' => 'shop::customers.account.orders.view'
+                    ])->name('customer.orders.view');
 
-                //Prints invoice
-                Route::get('orders/print/{id}', 'Webkul\Shop\Http\Controllers\OrderController@print')->defaults('_config', [
-                    'view' => 'shop::customers.account.orders.print'
-                ])->name('customer.orders.print');
+                    Route::get('orders/print/{id}', [OrderController::class, 'print'])->defaults('_config', [
+                        'view' => 'shop::customers.account.orders.print'
+                    ])->name('customer.orders.print');
 
-                /* Reviews route */
-                //Customer reviews
-                Route::get('reviews', 'Webkul\Customer\Http\Controllers\CustomerController@reviews')->defaults('_config', [
-                    'view' => 'shop::customers.account.reviews.index'
-                ])->name('customer.reviews.index');
+                    Route::post('/orders/cancel/{id}', [OrderController::class, 'cancel'])->name('customer.orders.cancel');
 
-                //Customer review delete
-                Route::get('reviews/delete/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@destroy')->defaults('_config', [
-                    'redirect' => 'customer.reviews.index'
-                ])->name('customer.review.delete');
+                    /**
+                     * Downloadable products.
+                     */
+                    Route::get('downloadable-products', [DownloadableProductController::class, 'index'])->defaults('_config', [
+                        'view' => 'shop::customers.account.downloadable_products.index'
+                    ])->name('customer.downloadable_products.index');
 
-                //Customer all review delete
-                Route::get('reviews/all-delete', 'Webkul\Shop\Http\Controllers\ReviewController@deleteAll')->defaults('_config', [
-                    'redirect' => 'customer.reviews.index'
-                ])->name('customer.review.deleteall');
+                    Route::get('downloadable-products/download/{id}', [DownloadableProductController::class, 'download'])->defaults('_config', [
+                        'view' => 'shop::customers.account.downloadable_products.index'
+                    ])->name('customer.downloadable_products.download');
+
+                    /**
+                     * Reviews.
+                     */
+                    Route::get('reviews', [CustomerController::class, 'reviews'])->defaults('_config', [
+                        'view' => 'shop::customers.account.reviews.index'
+                    ])->name('customer.reviews.index');
+
+                    Route::delete('reviews/delete/{id}', [ReviewController::class, 'destroy'])->defaults('_config', [
+                        'redirect' => 'customer.reviews.index'
+                    ])->name('customer.review.delete');
+
+                    Route::delete('reviews/all-delete', [ReviewController::class, 'deleteAll'])->defaults('_config', [
+                        'redirect' => 'customer.reviews.index'
+                    ])->name('customer.review.deleteall');
+                });
             });
         });
+
+        /**
+         * CMS pages.
+         */
+        Route::get('page/{slug}', [PagePresenterController::class, 'presenter'])->name('shop.cms.page');
+
+        /**
+         * Fallback route.
+         */
+        Route::fallback(\Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController::class . '@index')
+            ->defaults('_config', [
+                'product_view' => 'shop::products.view',
+                'category_view' => 'shop::products.index'
+            ])
+            ->name('shop.productOrCategory.index');
     });
-    //customer routes end here
-
-    Route::get('pages/{slug}', 'Webkul\CMS\Http\Controllers\Shop\PagePresenterController@presenter')->name('shop.cms.page');
-
-    Route::fallback('Webkul\Shop\Http\Controllers\HomeController@notFound');
 });

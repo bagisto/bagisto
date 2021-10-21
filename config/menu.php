@@ -4,10 +4,8 @@ return [
     'admin' => [
 
     ],
-    
+
     'customer' => [
 
     ]
 ];
-
-?>

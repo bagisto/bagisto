@@ -2,79 +2,51 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Webkul\Shop\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Shop\Mail\SubscriptionEmail;
-use Webkul\Customer\Repositories\CustomerRepository as Customer;
-use Webkul\Core\Repositories\SubscribersListRepository as Subscription;
+use Webkul\Core\Repositories\SubscribersListRepository;
 
-/**
- * Subscription controller
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class SubscriptionController extends Controller
 {
     /**
-     * User object
+     * SubscribersListRepository
      *
-     * @var array
+     * @var \Webkul\Core\Repositories\SubscribersListRepository
      */
-    protected $user;
-
-    /**
-     * Customer Repository object
-     *
-     * @var array
-     */
-    protected $customer;
-
-    /**
-     * Subscription List Repository object
-     *
-     * @var array
-     */
-    protected $subscription;
+    protected $subscriptionRepository;
 
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscriptionRepository
      * @return void
      */
-    public function __construct(Customer $customer, Subscription $subscription)
+    public function __construct(SubscribersListRepository $subscriptionRepository)
     {
-        $this->subscription = $subscription;
+        $this->subscriptionRepository = $subscriptionRepository;
 
-        $this->_config = request('_config');
+        parent::__construct();
     }
 
     /**
      * Subscribes email to the email subscription list
      *
-     * @return Redirect
+     * @return \Illuminate\Http\Response
      */
     public function subscribe()
     {
         $this->validate(request(), [
-            'subscriber_email' => 'email|required'
+            'subscriber_email' => 'email|required',
         ]);
 
         $email = request()->input('subscriber_email');
 
         $unique = 0;
 
-        $alreadySubscribed = $this->subscription->findWhere(['email' => $email]);
+        $alreadySubscribed = $this->subscriptionRepository->findWhere(['email' => $email]);
 
         $unique = function () use ($alreadySubscribed) {
-            if ($alreadySubscribed->count() > 0) {
-                return 0;
-            } else {
-                return 1;
-            }
+            return $alreadySubscribed->count() > 0 ? 0 : 1;
         };
 
         if ($unique()) {
@@ -90,6 +62,7 @@ class SubscriptionController extends Controller
 
                 session()->flash('success', trans('shop::app.subscription.subscribed'));
             } catch (\Exception $e) {
+                report($e);
                 session()->flash('error', trans('shop::app.subscription.not-subscribed'));
 
                 $mailSent = false;
@@ -98,14 +71,14 @@ class SubscriptionController extends Controller
             $result = false;
 
             if ($mailSent) {
-                $result = $this->subscription->create([
-                    'email' => $email,
-                    'channel_id' => core()->getCurrentChannel()->id,
+                $result = $this->subscriptionRepository->create([
+                    'email'         => $email,
+                    'channel_id'    => core()->getCurrentChannel()->id,
                     'is_subscribed' => 1,
-                    'token' => $token
+                    'token'         => $token,
                 ]);
 
-                if (!$result) {
+                if (! $result) {
                     session()->flash('error', trans('shop::app.subscription.not-subscribed'));
 
                     return redirect()->back();
@@ -121,18 +94,20 @@ class SubscriptionController extends Controller
     /**
      * To unsubscribe from a the subcription list
      *
-     * @var string $token
+     * @param  string  $token
+     * @return \Illuminate\Http\Response
      */
     public function unsubscribe($token)
     {
-        $subscriber = $this->subscription->findOneByField('token', $token);
+        $subscriber = $this->subscriptionRepository->findOneByField('token', $token);
 
-        if (isset($subscriber))
+        if (isset($subscriber)) {
             if ($subscriber->count() > 0 && $subscriber->is_subscribed == 1 && $subscriber->update(['is_subscribed' => 0])) {
                 session()->flash('info', trans('shop::app.subscription.unsubscribed'));
             } else {
                 session()->flash('info', trans('shop::app.subscription.already-unsub'));
             }
+        }
 
         return redirect()->route('shop.home.index');
     }

@@ -11,11 +11,15 @@ class CancelOrderNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /*
-     * @var Order
-     * */
+    /**
+     * @var \Webkul\Sales\Contracts\Order
+     */
     public $order;
 
+    /**
+     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @return void
+     */
     public function __construct($order)
     {
         $this->order = $order;
@@ -23,8 +27,9 @@ class CancelOrderNotification extends Mailable
 
     public function build()
     {
-        return $this->to($this->order->customer_email, $this->order->customer_full_name)
-            ->subject(trans('shop::app.mail.order.cancel.subject'))
-            ->view('shop::emails.sales.order-cancel');
+        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
+                    ->to($this->order->customer_email, $this->order->customer_full_name)
+                    ->subject(trans('shop::app.mail.order.cancel.subject'))
+                    ->view('shop::emails.sales.order-cancel');
     }
 }

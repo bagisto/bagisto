@@ -7,11 +7,11 @@
 @section('content')
     <div class="content">
 
-        <form method="POST" action="{{ route('admin.currencies.store') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.currencies.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.currencies.index') }}'"></i>
 
                         {{ __('admin::app.settings.currencies.add-title') }}
                     </h1>
@@ -45,6 +45,10 @@
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
+                            <div class="control-group">
+                                <label for="symbol">{{ __('admin::app.settings.currencies.symbol') }}</label>
+                                <input class="control" id="symbol" name="symbol" value="{{ old('symbol') }}"/>
+                            </div>
                         </div>
                     </accordian>
 

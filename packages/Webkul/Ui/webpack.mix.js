@@ -30,6 +30,10 @@ mix.js(
         processCssUrls: false
     });
 
+if (!mix.inProduction()) {
+    mix.sourceMaps();
+}
+
 if (mix.inProduction()) {
     mix.version();
 }

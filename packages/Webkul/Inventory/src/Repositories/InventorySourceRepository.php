@@ -4,12 +4,6 @@ namespace Webkul\Inventory\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * Inventory Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class InventorySourceRepository extends Repository
 {
     /**
@@ -20,5 +14,25 @@ class InventorySourceRepository extends Repository
     function model()
     {
         return 'Webkul\Inventory\Contracts\InventorySource';
+    }
+
+    /**
+     * Returns channel inventory source ids.
+     *
+     * @return collection
+     */
+    public function getChannelInventorySourceIds()
+    {
+        static $channelInventorySourceIds;
+
+        if ($channelInventorySourceIds) {
+            return $channelInventorySourceIds;
+        }
+
+        $found = core()->getCurrentChannel()->inventory_sources()
+            ->where('status', 1)
+            ->pluck('id');
+
+        return $channelInventorySourceIds = ($found ? $found : collect([]));
     }
 }

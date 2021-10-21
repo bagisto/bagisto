@@ -2,16 +2,8 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Auth;
 
-/**
- * Admin user session controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class SessionController extends Controller
 {
     /**
@@ -38,7 +30,7 @@ class SessionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -65,8 +57,8 @@ class SessionController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'email' => 'required|email',
-            'password' => 'required'
+            'email'   => 'required|email',
+            'password' => 'required',
         ]);
 
         $remember = request('remember');

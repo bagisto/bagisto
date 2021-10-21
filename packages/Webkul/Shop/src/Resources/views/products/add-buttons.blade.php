@@ -1,22 +1,26 @@
+@inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
-    @if ($product->type == "configurable")
-        <div class="cart-wish-wrap">
-            <a href="{{ route('cart.add.configurable', $product->url_key) }}" class="btn btn-lg btn-primary addtocart">
-                {{ __('shop::app.products.add-to-cart') }}
-            </a>
+@php
+    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
 
-            @include('shop::products.wishlist')
-        </div>
-    @else
-        <div class="cart-wish-wrap">
-            <form action="{{ route('cart.add', $product->product_id) }}" method="POST">
-                @csrf
-                <input type="hidden" name="product" value="{{ $product->product_id }}">
-                <input type="hidden" name="quantity" value="1">
-                <input type="hidden" value="false" name="is_configurable">
-                <button class="btn btn-lg btn-primary addtocart" {{ $product->haveSufficientQuantity(1) ? '' : 'disabled' }}>{{ __('shop::app.products.add-to-cart') }}</button>
-            </form>
+    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+@endphp
 
-            @include('shop::products.wishlist')
-        </div>
+<div class="{{ $toolbarHelper->isModeActive('grid') ? 'cart-wish-wrap' : 'default-wrap' }}">
+    <form action="{{ route('cart.add', $product->product_id) }}" method="POST">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button class="btn btn-lg btn-primary addtocart" {{ $product->isSaleable() ? '' : 'disabled' }}>{{ ($product->type == 'booking') ?  __('shop::app.products.book-now') :  __('shop::app.products.add-to-cart') }}</button>
+    </form>
+
+    @if ($showWishlist)
+        @include('shop::products.wishlist')
     @endif
+
+    @if ($showCompare)
+        @include('shop::products.compare', [
+            'productId' => $product->id
+        ])
+    @endif
+</div>

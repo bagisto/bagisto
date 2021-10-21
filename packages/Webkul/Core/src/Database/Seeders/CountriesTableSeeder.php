@@ -2,8 +2,8 @@
 
 namespace Webkul\Core\Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use DB;
 
 class CountriesTableSeeder extends Seeder
 {

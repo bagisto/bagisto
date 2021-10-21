@@ -1,10 +1,10 @@
-<select v-validate="'{{$validations}}'" class="control" id="{{ $attribute->code }}" name="{{ $attribute->code }}" data-vv-as="&quot;{{ $attribute->admin_name }}&quot;" {{ $disabled ? 'disabled' : '' }}>
+<select v-validate="'{{$validations}}'" class="control" id="{{ $attribute->code }}" name="{{ $attribute->code }}" data-vv-as="&quot;{{ $attribute->admin_name }}&quot;">
 
     <?php $selectedOption = old($attribute->code) ?: $product[$attribute->code] ?>
 
     @if ($attribute->code != 'tax_category_id')
 
-        @foreach ($attribute->options as $option)
+        @foreach ($attribute->options()->orderBy('sort_order')->get() as $option)
             <option value="{{ $option->id }}" {{ $option->id == $selectedOption ? 'selected' : ''}}>
                 {{ $option->admin_name }}
             </option>

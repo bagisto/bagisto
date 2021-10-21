@@ -3,12 +3,10 @@
 namespace Webkul\Sales\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\Router;
-use Webkul\Sales\Providers\ModuleServiceProvider;
 
 class SalesServiceProvider extends ServiceProvider
 {
-    public function boot(Router $router)
+    public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
@@ -18,10 +16,8 @@ class SalesServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php', 'core'
-        );
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/system.php', 'core');
     }
 }

@@ -29,6 +29,10 @@ class AddLocaleIdInCategoryTranslations extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('category_translations', function (Blueprint $table) {
+            $table->dropForeign(['locale_id']);
+
+            $table->dropColumn('locale_id');
+        });
     }
 }

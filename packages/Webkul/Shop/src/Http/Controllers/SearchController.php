@@ -2,46 +2,39 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Webkul\Shop\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Webkul\Product\Repositories\SearchRepository;
 
-use Webkul\Product\Repositories\SearchRepository as Search;
-
-/**
- * Search controller
- *
- * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
-
- class SearchController extends controller
+ class SearchController extends Controller
 {
-    protected $_config;
+    /**
+     * SearchRepository object
+     *
+     * @var \Webkul\Product\Repositories\SearchRepository
+    */
+    protected $searchRepository;
 
-    protected $search;
-
-    public function __construct(Search $search)
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
+     * @return void
+    */
+    public function __construct(SearchRepository $searchRepository)
     {
-        $this->_config = request('_config');
+        $this->searchRepository = $searchRepository;
 
-        $this->search = $search;
+        parent::__construct();
     }
 
     /**
      * Index to handle the view loaded with the search results
+     * 
+     * @return \Illuminate\View\View 
      */
     public function index()
     {
-        $results = null;
+        $results = $this->searchRepository->search(request()->all());
 
-        $results = $this->search->search(request()->all());
-
-        if ($results->count()) {
-            return view($this->_config['view'])->with('results', $results);
-        } else {
-            return view($this->_config['view'])->with('results', null);
-        }
-
+        return view($this->_config['view'])->with('results', $results->count() ? $results : null);
     }
 }

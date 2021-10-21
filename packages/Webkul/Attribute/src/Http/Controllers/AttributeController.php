@@ -2,42 +2,33 @@
 
 namespace Webkul\Attribute\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-use Event;
+use Webkul\Attribute\Repositories\AttributeRepository;
 
-/**
- * Catalog attribute controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class AttributeController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * AttributeRepository object
+     * Attribute repository instance.
      *
-     * @var array
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
-    protected $attribute;
+    protected $attributeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attribute
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
-    public function __construct(Attribute $attribute)
+    public function __construct(AttributeRepository $attributeRepository)
     {
-        $this->attribute = $attribute;
+        $this->attributeRepository = $attributeRepository;
 
         $this->_config = request('_config');
     }
@@ -45,7 +36,7 @@ class AttributeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -55,7 +46,7 @@ class AttributeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -70,16 +61,16 @@ class AttributeController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Code],
+            'code'       => ['required', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Code],
             'admin_name' => 'required',
-            'type' => 'required'
+            'type'       => 'required',
         ]);
 
         $data = request()->all();
 
         $data['is_user_defined'] = 1;
 
-        $attribute = $this->attribute->create($data);
+        $this->attributeRepository->create($data);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Attribute']));
 
@@ -90,31 +81,43 @@ class AttributeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $attribute = $this->attribute->findOrFail($id);
+        $attribute = $this->attributeRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('attribute'));
     }
 
     /**
+     * Get attribute options associated with attribute.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    public function getAttributeOptions($id)
+    {
+        $attribute = $this->attributeRepository->findOrFail($id);
+
+        return $attribute->options()->paginate(50);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'code'       => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'admin_name' => 'required',
-            'type' => 'required'
+            'type'       => 'required',
         ]);
 
-        $attribute = $this->attribute->update(request()->all(), $id);
+        $this->attributeRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Attribute']));
 
@@ -129,18 +132,18 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
-        $attribute = $this->attribute->findOrFail($id);
+        $attribute = $this->attributeRepository->findOrFail($id);
 
         if (! $attribute->is_user_defined) {
             session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
         } else {
             try {
-                $this->attribute->delete($id);
+                $this->attributeRepository->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Attribute']));
 
                 return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Attribute']));
             }
         }
@@ -149,9 +152,9 @@ class AttributeController extends Controller
     }
 
     /**
-     * Remove the specified resources from database
+     * Remove the specified resources from database.
      *
-     * @return response \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {
@@ -161,25 +164,28 @@ class AttributeController extends Controller
             $indexes = explode(',', request()->input('indexes'));
 
             foreach ($indexes as $key => $value) {
-                $attribute = $this->attribute->find($value);
+                $attribute = $this->attributeRepository->find($value);
 
                 try {
-                    if (! $attribute->is_user_defined) {
-                        continue;
-                    } else {
-                        $this->attribute->delete($value);
+                    if ($attribute->is_user_defined) {
+                        $suppressFlash = true;
+
+                        $this->attributeRepository->delete($value);
                     }
                 } catch (\Exception $e) {
+                    report($e);
+
                     $suppressFlash = true;
 
                     continue;
                 }
             }
 
-            if (! $suppressFlash)
+            if ($suppressFlash) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
-            else
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'attributes']));
+            } else {
+                session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
+            }
 
             return redirect()->back();
         } else {

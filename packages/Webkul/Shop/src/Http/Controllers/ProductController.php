@@ -2,86 +2,131 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Product\Repositories\ProductRepository as Product;
-use Webkul\Product\Repositories\ProductAttributeValueRepository as ProductAttributeValue;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
+use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 
-/**
- * Product controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductController extends Controller
 {
-
-    /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
     /**
      * ProductRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
-    protected $product;
+    protected $productRepository;
 
     /**
      * ProductAttributeValueRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
      */
-    protected $productAttributeValue;
+    protected $productAttributeValueRepository;
+
+    /**
+     * ProductDownloadableSampleRepository object
+     *
+     * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
+     */
+    protected $productDownloadableSampleRepository;
+
+    /**
+     * ProductDownloadableLinkRepository object
+     *
+     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
+     */
+    protected $productDownloadableLinkRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository      $product
-     * @param  \Webkul\Product\Repositories\ProductAttributeValue  $productAttributeValue
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\productAttributeValueRepository  $productAttributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
      * @return void
      */
-    public function __construct(Product $product, ProductAttributeValue $productAttributeValue)
+    public function __construct(
+        ProductRepository $productRepository,
+        ProductAttributeValueRepository $productAttributeValueRepository,
+        ProductDownloadableSampleRepository $productDownloadableSampleRepository,
+        ProductDownloadableLinkRepository $productDownloadableLinkRepository
+    )
     {
-        $this->product = $product;
+        $this->productRepository = $productRepository;
 
-        $this->productAttributeValue = $productAttributeValue;
+        $this->productAttributeValueRepository = $productAttributeValueRepository;
 
-        $this->_config = request('_config');
-    }
+        $this->productDownloadableSampleRepository = $productDownloadableSampleRepository;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  string $slug
-     * @return \Illuminate\Http\Response
-     */
-    public function index($slug)
-    {
-        $product = $this->product->findBySlugOrFail($slug);
+        $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
 
-        $customer = auth()->guard('customer')->user();
-
-        return view($this->_config['view'], compact('product','customer'));
+        parent::__construct();
     }
 
     /**
      * Download image or file
      *
-     * @param  int $productId, $attributeId
+     * @param  int  $productId
+     * @param  int  $attributeId
      * @return \Illuminate\Http\Response
      */
     public function download($productId, $attributeId)
     {
-        $productAttribute = $this->productAttributeValue->findOneWhere([
+        $productAttribute = $this->productAttributeValueRepository->findOneWhere([
             'product_id'   => $productId,
-            'attribute_id' => $attributeId
+            'attribute_id' => $attributeId,
         ]);
 
-        return Storage::download($productAttribute['text_value']);
+        return isset($productAttribute['text_value'])
+            ? Storage::download($productAttribute['text_value'])
+            : null;
+    }
+
+    /**
+     * Download the for the specified resource.
+     *
+     * @return \Illuminate\Http\Response|\Exception
+     */
+    public function downloadSample()
+    {
+        try {
+            if (request('type') == 'link') {
+                $productDownloadableLink = $this->productDownloadableLinkRepository->findOrFail(request('id'));
+
+                if ($productDownloadableLink->sample_type == 'file') {
+                    $privateDisk = Storage::disk('private');
+
+                    return $privateDisk->exists($productDownloadableLink->sample_file)
+                        ? $privateDisk->download($productDownloadableLink->sample_file)
+                        : abort(404);
+                } else {
+                    $fileName = $name = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
+
+                    $tempImage = tempnam(sys_get_temp_dir(), $fileName);
+
+                    copy($productDownloadableLink->sample_url, $tempImage);
+
+                    return response()->download($tempImage, $fileName);
+                }
+            } else {
+                $productDownloadableSample = $this->productDownloadableSampleRepository->findOrFail(request('id'));
+
+                if ($productDownloadableSample->type == 'file') {
+                    return Storage::download($productDownloadableSample->file);
+                } else {
+                    $fileName = $name = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
+
+                    $tempImage = tempnam(sys_get_temp_dir(), $fileName);
+
+                    copy($productDownloadableSample->url, $tempImage);
+
+                    return response()->download($tempImage, $fileName);
+                }
+            }
+        } catch(\Exception $e) {
+            abort(404);
+        }
     }
 }

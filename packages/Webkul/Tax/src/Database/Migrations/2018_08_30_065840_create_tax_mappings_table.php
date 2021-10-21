@@ -37,6 +37,6 @@ class CreateTaxMappingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tax_map');
+        Schema::dropIfExists('tax_categories_tax_rates');
     }
 }

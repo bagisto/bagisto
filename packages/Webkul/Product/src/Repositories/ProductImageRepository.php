@@ -2,72 +2,124 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Container\Container as App;
+use Webkul\Product\Repositories\ProductRepository;
 
-/**
- * Product Image Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductImageRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Product repository object.
      *
-     * @return mixed
+     * @var Webkul\Product\Repositories\ProductRepository
      */
-    function model()
+    protected $productRepository;
+
+    /**
+     * Create a new repository instance.
+     *
+     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
+     * @param  \Illuminate\Container\Container                $app
+     * @return void
+     */
+    public function __construct(
+        ProductRepository $productRepository,
+        App $app
+    ) {
+        parent::__construct($app);
+
+        $this->productRepository = $productRepository;
+    }
+
+    /**
+     * Specify model class name.
+     *
+     * @return string
+     */
+    public function model(): string
     {
         return 'Webkul\Product\Contracts\ProductImage';
     }
 
     /**
-     * @param array $data
-     * @param mixed $product
-     * @return mixed
+     * Get product directory.
+     *
+     * @param  Webkul\Product\Models\Product $variant
      */
-    public function uploadImages($data, $product)
+    public function getProductDirectory($product): string
     {
-        $previousImageIds = $product->images()->pluck('id');
+        return 'product/' . $product->id;
+    }
 
-        if (isset($data['images'])) {
-            foreach ($data['images'] as $imageId => $image) {
-                $file = 'images.' . $imageId;
-                $dir = 'product/' . $product->id;
+    /**
+     * Upload images.
+     *
+     * @param  array  $data
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    public function uploadImages($data, $product): void
+    {
+        $this->upload($product, $data['images'] ?? null);
 
-                if (str_contains($imageId, 'image_')) {
-                    if (request()->hasFile($file)) {
-                        $this->create([
-                                'path' => request()->file($file)->store($dir),
-                                'product_id' => $product->id
-                            ]);
-                    }
+        if (isset($data['variants'])) {
+            $this->uploadVariantImages($data['variants']);
+        }
+    }
+
+    /**
+     * Upload.
+     *
+     * @param  Webkul\Product\Models\Product $product
+     * @param  array
+     * @return void
+     */
+    public function upload($product, $images): void
+    {
+        $previousVariantImageIds = $product->images()->pluck('id');
+
+        if ($images) {
+            foreach ($images as $imageId => $image) {
+                if ($image instanceof UploadedFile) {
+                    $this->create([
+                        'path'       => $image->store($this->getProductDirectory($product)),
+                        'product_id' => $product->id,
+                    ]);
                 } else {
-                    if (is_numeric($index = $previousImageIds->search($imageId))) {
-                        $previousImageIds->forget($index);
-                    }
-
-                    if (request()->hasFile($file)) {
-                        if ($imageModel = $this->find($imageId)) {
-                            Storage::delete($imageModel->path);
-                        }
-
-                        $this->update([
-                                'path' => request()->file($file)->store($dir)
-                            ], $imageId);
+                    if (is_numeric($index = $previousVariantImageIds->search($imageId))) {
+                        $previousVariantImageIds->forget($index);
                     }
                 }
             }
         }
 
-        foreach ($previousImageIds as $imageId) {
-            if ($imageModel = $this->find($imageId)) {
-                Storage::delete($imageModel->path);
+        foreach ($previousVariantImageIds as $imageId) {
+            if ($image = $this->find($imageId)) {
+                Storage::delete($image->path);
 
                 $this->delete($imageId);
             }
+        }
+    }
+
+    /**
+     * Upload variant images.
+     *
+     * @param  array $variants
+     * @return void
+     */
+    public function uploadVariantImages($variants): void
+    {
+        foreach ($variants as $variantsId => $variant) {
+            $product = $this->productRepository->find($variantsId);
+
+            if (! $product) {
+                break;
+            }
+
+            $this->upload($product, $variant['images'] ?? null);
         }
     }
 }

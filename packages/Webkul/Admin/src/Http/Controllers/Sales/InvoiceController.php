@@ -2,19 +2,11 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository as Order;
-use Webkul\Sales\Repositories\InvoiceRepository as Invoice;
 use PDF;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
-/**
- * Sales Invoice controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class InvoiceController extends Controller
 {
     /**
@@ -25,42 +17,43 @@ class InvoiceController extends Controller
     protected $_config;
 
     /**
-     * OrderRepository object
+     * Order repository instance.
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
-    protected $order;
+    protected $orderRepository;
 
     /**
-     * InvoiceRepository object
+     * Invoice repository instance.
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
-    protected $invoice;
+    protected $invoiceRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository   $order
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository $invoice
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
-    public function __construct(Invoice $invoice, Order $order)
-    {
+    public function __construct(
+        OrderRepository $orderRepository,
+        InvoiceRepository $invoiceRepository
+    ) {
         $this->middleware('admin');
 
         $this->_config = request('_config');
 
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
 
-        $this->invoice = $invoice;
-
+        $this->invoiceRepository = $invoiceRepository;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -70,12 +63,16 @@ class InvoiceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param int $orderId
-     * @return \Illuminate\Http\Response
+     * @param  int  $orderId
+     * @return \Illuminate\View\View
      */
     public function create($orderId)
     {
-        $order = $this->order->findOrFail($orderId);
+        $order = $this->orderRepository->findOrFail($orderId);
+
+        if ($order->payment->method === 'paypal_standard') {
+            abort(404);
+        }
 
         return view($this->_config['view'], compact('order'));
     }
@@ -83,13 +80,12 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $orderId
-     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $orderId
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $orderId)
+    public function store($orderId)
     {
-        $order = $this->order->findOrFail($orderId);
+        $order = $this->orderRepository->findOrFail($orderId);
 
         if (! $order->canInvoice()) {
             session()->flash('error', trans('admin::app.sales.invoices.creation-error'));
@@ -104,6 +100,7 @@ class InvoiceController extends Controller
         $data = request()->all();
 
         $haveProductToInvoice = false;
+
         foreach ($data['invoice']['items'] as $itemId => $qty) {
             if ($qty) {
                 $haveProductToInvoice = true;
@@ -117,7 +114,7 @@ class InvoiceController extends Controller
             return redirect()->back();
         }
 
-        $this->invoice->create(array_merge($data, ['order_id' => $orderId]));
+        $this->invoiceRepository->create(array_merge($data, ['order_id' => $orderId]));
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Invoice']));
 
@@ -128,11 +125,11 @@ class InvoiceController extends Controller
      * Show the view for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function view($id)
     {
-        $invoice = $this->invoice->findOrFail($id);
+        $invoice = $this->invoiceRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('invoice'));
     }
@@ -145,10 +142,32 @@ class InvoiceController extends Controller
      */
     public function print($id)
     {
-        $invoice = $this->invoice->findOrFail($id);
+        $invoice = $this->invoiceRepository->findOrFail($id);
 
-        $pdf = PDF::loadView('admin::sales.invoices.pdf', compact('invoice'))->setPaper('a4');
+        $html = view('admin::sales.invoices.pdf', compact('invoice'))->render();
 
-        return $pdf->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
+        return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
+            ->setPaper('a4')
+            ->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
+    }
+
+    /**
+     * Adjust arabic and persian content.
+     *
+     * @param  string  $html
+     * @return string
+     */
+    private function adjustArabicAndPersianContent($html)
+    {
+        $arabic = new \ArPHP\I18N\Arabic();
+
+        $p = $arabic->arIdentify($html);
+
+        for ($i = count($p) - 1; $i >= 0; $i -= 2) {
+            $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i - 1], $p[$i] - $p[$i - 1]));
+            $html   = substr_replace($html, $utf8ar, $p[$i - 1], $p[$i] - $p[$i - 1]);
+        }
+
+        return $html;
     }
 }

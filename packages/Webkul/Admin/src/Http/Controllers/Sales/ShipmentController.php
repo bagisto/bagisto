@@ -2,19 +2,11 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\ShipmentRepository as Shipment;
-use Webkul\Sales\Repositories\OrderRepository as Order;
-use Webkul\Sales\Repositories\OrderItemRepository as OrderItem;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\ShipmentRepository;
 
-/**
- * Sales Shipment controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ShipmentController extends Controller
 {
     /**
@@ -25,56 +17,55 @@ class ShipmentController extends Controller
     protected $_config;
 
     /**
-     * ShipmentRepository object
-     *
-     * @var mixed
-     */
-    protected $shipment;
-
-    /**
      * OrderRepository object
      *
-     * @var mixed
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
-    protected $order;
+    protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var mixed
+     * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
-    protected $orderItem;
+    protected $orderItemRepository;
+
+    /**
+     * ShipmentRepository object
+     *
+     * @var \Webkul\Sales\Repositories\ShipmentRepository
+     */
+    protected $shipmentRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\ShipmentRepository  $shipment
-     * @param  \Webkul\Sales\Repositories\OrderRepository     $order
-     * @param  \Webkul\Sales\Repositories\OrderitemRepository $orderItem
+     * @param  \Webkul\Sales\Repositories\ShipmentRepository   $shipmentRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderitemRepository  $orderItemRepository
      * @return void
      */
     public function __construct(
-        Shipment $shipment,
-        Order $order,
-        OrderItem $orderItem
+        ShipmentRepository $shipmentRepository,
+        OrderRepository $orderRepository,
+        OrderItemRepository $orderItemRepository
     )
     {
         $this->middleware('admin');
 
         $this->_config = request('_config');
 
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
 
-        $this->orderItem = $orderItem;
+        $this->orderItemRepository = $orderItemRepository;
 
-        $this->shipment = $shipment;
-
+        $this->shipmentRepository = $shipmentRepository;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -84,12 +75,12 @@ class ShipmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param int $orderId
-     * @return \Illuminate\Http\Response
+     * @param  int  $orderId
+     * @return \Illuminate\View\View
      */
     public function create($orderId)
     {
-        $order = $this->order->findOrFail($orderId);
+        $order = $this->orderRepository->findOrFail($orderId);
 
         if (! $order->channel || !$order->canShip()) {
             session()->flash('error', trans('admin::app.sales.shipments.creation-error'));
@@ -103,13 +94,12 @@ class ShipmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $orderId
-     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $orderId
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $orderId)
+    public function store($orderId)
     {
-        $order = $this->order->findOrFail($orderId);
+        $order = $this->orderRepository->findOrFail($orderId);
 
         if (! $order->canShip()) {
             session()->flash('error', trans('admin::app.sales.shipments.order-error'));
@@ -118,10 +108,8 @@ class ShipmentController extends Controller
         }
 
         $this->validate(request(), [
-            'shipment.carrier_title' => 'required',
-            'shipment.track_number' => 'required',
-            'shipment.source' => 'required',
-            'shipment.items.*.*' => 'required|numeric|min:0',
+            'shipment.source'        => 'required',
+            'shipment.items.*.*'     => 'required|numeric|min:0',
         ]);
 
         $data = request()->all();
@@ -132,7 +120,7 @@ class ShipmentController extends Controller
             return redirect()->back();
         }
 
-        $this->shipment->create(array_merge($data, ['order_id' => $orderId]));
+        $this->shipmentRepository->create(array_merge($data, ['order_id' => $orderId]));
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Shipment']));
 
@@ -142,30 +130,51 @@ class ShipmentController extends Controller
     /**
      * Checks if requested quantity available or not
      *
-     * @param array $data
-     * @return boolean
+     * @param  array  $data
+     * @return bool
      */
     public function isInventoryValidate(&$data)
     {
+        if (! isset($data['shipment']['items'])) {
+            return ;
+        }
+
         $valid = false;
 
-        if (! isset($data['shipment']['items']))
-            return ;
+        $inventorySourceId = $data['shipment']['source'];
 
         foreach ($data['shipment']['items'] as $itemId => $inventorySource) {
-            if ($qty = $inventorySource[$data['shipment']['source']]) {
-                $orderItem = $this->orderItem->find($itemId);
+            if ($qty = $inventorySource[$inventorySourceId]) {
+                $orderItem = $this->orderItemRepository->find($itemId);
 
-                $product = ($orderItem->type == 'configurable')
-                        ? $orderItem->child->product
-                        : $orderItem->product;
-
-                $availableQty = $product->inventories()
-                        ->where('inventory_source_id', $data['shipment']['source'])
-                        ->sum('qty');
-
-                if ($orderItem->qty_to_ship < $qty || $availableQty < $qty) {
+                if ($orderItem->qty_to_ship < $qty) {
                     return false;
+                }
+
+                if ($orderItem->getTypeInstance()->isComposite()) {
+                    foreach ($orderItem->children as $child) {
+                        if (! $child->qty_ordered) {
+                            continue;
+                        }
+
+                        $finalQty = ($child->qty_ordered / $orderItem->qty_ordered) * $qty;
+
+                        $availableQty = $child->product->inventories()
+                            ->where('inventory_source_id', $inventorySourceId)
+                            ->sum('qty');
+
+                        if ($child->qty_to_ship < $finalQty || $availableQty < $finalQty) {
+                            return false;
+                        }
+                    }
+                } else {
+                    $availableQty = $orderItem->product->inventories()
+                            ->where('inventory_source_id', $inventorySourceId)
+                            ->sum('qty');
+
+                    if ($orderItem->qty_to_ship < $qty || $availableQty < $qty) {
+                        return false;
+                    }
                 }
 
                 $valid = true;
@@ -181,11 +190,11 @@ class ShipmentController extends Controller
      * Show the view for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function view($id)
     {
-        $shipment = $this->shipment->findOrFail($id);
+        $shipment = $this->shipmentRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('shipment'));
     }

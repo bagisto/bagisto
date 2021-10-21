@@ -2,23 +2,14 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Str;
 
-/**
- * Admin reset password controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ResetPasswordController extends Controller
 {
-
     use ResetsPasswords;
 
     /**
@@ -43,15 +34,15 @@ class ResetPasswordController extends Controller
      *
      * If no token is present, display the link request form.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  string|null  $token
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create(Request $request, $token = null)
+    public function create($token = null)
     {
-        return view($this->_config['view'])->with(
-            ['token' => $token, 'email' => $request->email]
-        );
+        return view($this->_config['view'])->with([
+            'token' => $token,
+            'email' => request('email'),
+        ]);
     }
 
     /**
@@ -61,27 +52,33 @@ class ResetPasswordController extends Controller
      */
     public function store()
     {
-        $this->validate(request(), [
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed|min:6',
-        ]);
-
-        $response = $this->broker()->reset(
-            request(['email', 'password', 'password_confirmation', 'token']), function ($admin, $password) {
-                $this->resetPassword($admin, $password);
-            }
-        );
-
-        if ($response == Password::PASSWORD_RESET) {
-            return redirect()->route($this->_config['redirect']);
-        }
-        
-        return back()
-            ->withInput(request(['email']))
-            ->withErrors([
-                'email' => trans($response)
+        try {
+            $this->validate(request(), [
+                'token'    => 'required',
+                'email'    => 'required|email',
+                'password' => 'required|confirmed|min:6',
             ]);
+
+            $response = $this->broker()->reset(
+                request(['email', 'password', 'password_confirmation', 'token']), function ($admin, $password) {
+                    $this->resetPassword($admin, $password);
+                }
+            );
+
+            if ($response == Password::PASSWORD_RESET) {
+                return redirect()->route($this->_config['redirect']);
+            }
+
+            return back()
+                ->withInput(request(['email']))
+                ->withErrors([
+                    'email' => trans($response),
+                ]);
+        } catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+
+            return redirect()->back();
+        }
     }
 
     /**
@@ -113,5 +110,4 @@ class ResetPasswordController extends Controller
     {
         return Password::broker('admins');
     }
-
 }

@@ -23,12 +23,13 @@ class FlatRate extends AbstractShipping
     /**
      * Returns rate for flatrate
      *
-     * @return array
+     * @return CartShippingRate|false
      */
     public function calculate()
     {
-        if (! $this->isAvailable())
+        if (! $this->isAvailable()) {
             return false;
+        }
 
         $cart = Cart::getCart();
 
@@ -39,15 +40,21 @@ class FlatRate extends AbstractShipping
         $object->method = 'flatrate_flatrate';
         $object->method_title = $this->getConfigData('title');
         $object->method_description = $this->getConfigData('description');
+        $object->is_calculate_tax = $this->getConfigData('is_calculate_tax');
+        $object->price = 0;
+        $object->base_price = 0;
 
         if ($this->getConfigData('type') == 'per_unit') {
-            $object->price = core()->convertPrice($this->getConfigData('default_rate')) * $cart->items_qty;
-            $object->base_price = $this->getConfigData('default_rate') * $cart->items_qty;
+            foreach ($cart->items as $item) {
+                if ($item->product->getTypeInstance()->isStockable()) {
+                    $object->price += core()->convertPrice($this->getConfigData('default_rate')) * $item->quantity;
+                    $object->base_price += $this->getConfigData('default_rate') * $item->quantity;
+                }
+            }
         } else {
             $object->price = core()->convertPrice($this->getConfigData('default_rate'));
             $object->base_price = $this->getConfigData('default_rate');
         }
-
 
         return $object;
     }

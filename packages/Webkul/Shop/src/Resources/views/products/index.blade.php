@@ -1,12 +1,19 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ $category->meta_title ?? $category->name }}
+    {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
 @stop
 
 @section('seo')
-    <meta name="description" content="{{ $category->meta_description }}"/>
+    <meta name="description" content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"/>
+
     <meta name="keywords" content="{{ $category->meta_keywords }}"/>
+
+    @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
+        <script type="application/ld+json">
+            {!! app('Webkul\Product\Helpers\SEO')->getCategoryJsonLd($category) !!}
+        </script>
+    @endif
 @stop
 
 @section('content-wrapper')
@@ -24,7 +31,7 @@
             <div class="category-block" @if ($category->display_mode == 'description_only') style="width: 100%" @endif>
                 <div class="hero-image mb-35">
                     @if (!is_null($category->image))
-                        <img class="logo" src="{{ $category->image_url }}" />
+                        <img class="logo" src="{{ $category->image_url }}" alt="" />
                     @endif
                 </div>
 
@@ -39,9 +46,9 @@
                 @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
                     <?php $products = $productRepository->getAll($category->id); ?>
 
-                    @if ($products->count())
+                    @include ('shop::products.list.toolbar')
 
-                        @include ('shop::products.list.toolbar')
+                    @if ($products->count())
 
                         @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 

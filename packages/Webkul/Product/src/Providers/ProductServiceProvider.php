@@ -3,9 +3,17 @@
 namespace Webkul\Product\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Webkul\Product\Providers\EventServiceProvider;
-use Illuminate\Routing\Router;
-use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductProxy;
+
+use Webkul\Product\Observers\ProductObserver;
+use Webkul\Product\Console\Commands\PriceUpdate;
+use Illuminate\Foundation\AliasLoader;
+
+use Webkul\Product\Facades\ProductImage as ProductImageFacade;
+use Webkul\Product\Facades\ProductVideo as ProductVideoFacade;
+
+use Webkul\Product\ProductImage;
+use Webkul\Product\ProductVideo;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -14,17 +22,19 @@ class ProductServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot(): void
     {
+        include __DIR__ . '/../Http/helpers.php';
+
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->app->register(EventServiceProvider::class);
 
-        $this->composeView();
-
         $this->publishes([
             dirname(__DIR__) . '/Config/imagecache.php' => config_path('imagecache.php'),
         ]);
+
+        ProductProxy::observe(ProductObserver::class);
     }
 
     /**
@@ -32,30 +42,57 @@ class ProductServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->registerConfig();
+
+        $this->registerCommands();
+
+        $this->registerFacades();
     }
 
-    public function registerConfig() {
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/product-types.php', 'product-types'
-        );
+    /**
+     * Register Configuration
+     *
+     * @return void
+     */
+    public function registerConfig(): void
+    {
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/product_types.php', 'product_types');
     }
 
-    public function composeView() {
-        view()->composer(['admin::catalog.products.create'], function ($view) {
-            $items = array();
+    /**
+     * Register the console commands of this package
+     *
+     * @return void
+     */
+    protected function registerCommands(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([PriceUpdate::class]);
+        }
+    }
 
-            foreach (config('product-types') as $item) {
-                $item['children'] = [];
+    /**
+     * Register Bouncer as a singleton.
+     *
+     * @return void
+     */
+    protected function registerFacades(): void
+    {
+        // Product image
+        $loader = AliasLoader::getInstance();
+        $loader->alias('productimage', ProductImageFacade::class);
 
-                array_push($items, $item);
-            }
+        $this->app->singleton('productimage', function () {
+            return app()->make(ProductImage::class);
+        });
 
-            $types = core()->sortItems($items);
+        // Product video
+        $loader->alias('productvideo', ProductVideoFacade::class);
 
-            $view->with('productTypes', $types);
+        $this->app->singleton('productvideo', function () {
+            return app()->make(ProductVideo::class);
         });
     }
 }

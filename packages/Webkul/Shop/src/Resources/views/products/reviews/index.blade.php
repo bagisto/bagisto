@@ -9,35 +9,28 @@
     <section class="review">
 
         <div class="review-layouter">
-            @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
             @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
-            @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
 
-            <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
+            <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
             <div class="product-info">
                 <div class="product-image">
-                    <a href="{{ route('shop.products.index', $product->url_key) }}" title="{{ $product->name }}">
-                        <img src="{{ $productBaseImage['medium_image_url'] }}" />
+                    <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
+                        <img src="{{ $productBaseImage['medium_image_url'] }}" alt="" />
                     </a>
                 </div>
 
                 <div class="product-name mt-20">
-                    <a href="{{ url()->to('/').'/products/'.$product->url_key }}" title="{{ $product->name }}">
+                    <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
                         <span>{{ $product->name }}</span>
                     </a>
                 </div>
 
                 <div class="product-price mt-10">
-                    @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
-                    @if ($product->type == 'configurable')
-                        <span class="pro-price">{{ core()->currency($priceHelper->getMinimalPrice($product)) }}</span>
+                    @if ($product->getTypeInstance()->haveSpecialPrice())
+                        <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getSpecialPrice()) }}</span>
                     @else
-                        @if ($priceHelper->haveSpecialPrice($product))
-                            <span class="pro-price">{{ core()->currency($priceHelper->getSpecialPrice($product)) }}</span>
-                        @else
-                            <span class="pro-price">{{ core()->currency($product->price) }}</span>
-                        @endif
+                        <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getMinimalPrice()) }}</span>
                     @endif
                 </div>
             </div>
@@ -60,16 +53,20 @@
                         </span>
 
                         <span class="stars">
-                            @for ($i = 1; $i <= $reviewHelper->getAverageRating($product); $i++)
+                            @for ($i = 1; $i <= 5; $i++)
 
+                              @if($i <= round($reviewHelper->getAverageRating($product)))
                                 <span class="icon star-icon"></span>
+                              @else
+                                <span class="icon star-icon-blank"></span>
+                              @endif
 
                             @endfor
                         </span>
 
                         <div class="total-reviews mt-5">
                             {{ __('shop::app.reviews.ratingreviews', [
-                                'rating' => $reviewHelper->getTotalRating($product),
+                                'rating' => $reviewHelper->getAverageRating($product),
                                 'review' => $reviewHelper->getTotalReviews($product)])
                             }}
                         </div>
@@ -106,15 +103,25 @@
                                 </div>
 
                                 <span class="stars">
-                                    @for ($i = 1; $i <= $review->rating; $i++)
-
-                                        <span class="icon star-icon"></span>
-
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $review->rating)
+                                            <span class="icon star-icon"></span>
+                                        @else
+                                            <span class="icon star-icon-blank"></span>
+                                        @endif
                                     @endfor
                                 </span>
 
                                 <div class="message">
                                     {{ $review->comment }}
+                                </div>
+
+                                <div class="image">
+                                    @if (count($review->images) > 0)
+                                        @foreach ($review->images as $image)
+                                            <img src="{{ $image->url }}">
+                                        @endforeach
+                                    @endif
                                 </div>
 
                                 <div class="reviewer-details">

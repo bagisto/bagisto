@@ -15,7 +15,7 @@ class Decimal implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match('/^\d*(\.\d{1,2})?$/', $value);
+        return preg_match('/^\d*(\.\d{1,4})?$/', $value);
     }
 
     /**

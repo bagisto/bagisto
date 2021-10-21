@@ -46,7 +46,27 @@ class AddRemainingColumnInProductFlatTable extends Migration
     public function down()
     {
         Schema::table('product_flat', function (Blueprint $table) {
-
+            if (Schema::hasColumn('product_flat', 'short_description')) {
+                $table->dropColumn('short_description');
+            }
+            if (Schema::hasColumn('product_flat', 'meta_title')) {
+                $table->dropColumn('meta_title');
+            }
+            if (Schema::hasColumn('product_flat', 'meta_keywords')) {
+                $table->dropColumn('meta_keywords');
+            }
+            if (Schema::hasColumn('product_flat', 'meta_description')) {
+                $table->dropColumn('meta_description');
+            }
+            if (Schema::hasColumn('product_flat', 'width')) {
+                $table->dropColumn('width');
+            }
+            if (Schema::hasColumn('product_flat', 'height')) {
+                $table->dropColumn('height');
+            }
+            if (Schema::hasColumn('product_flat', 'depth')) {
+                $table->dropColumn('depth');
+            }
         });
     }
 }

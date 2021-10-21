@@ -6,11 +6,11 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.tax-categories.create') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.tax-categories.store') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.tax-categories.index') }}'"></i>
 
                         {{ __('admin::app.settings.tax-categories.add-title') }}
                     </h1>
@@ -25,22 +25,6 @@
             <div class="page-content">
                 <div class="form-container">
                     @csrf()
-
-                    <div class="control-group" :class="[errors.has('channel') ? 'has-error' : '']">
-                        <label for="channel" class="required">{{ __('admin::app.configuration.tax-categories.select-channel') }}</label>
-
-                        <select class="control" name="channel_id">
-                            @foreach (core()->getAllChannels() as $channelModel)
-
-                                <option value="{{ $channelModel->id }}">
-                                    {{ $channelModel->name }}
-                                </option>
-
-                            @endforeach
-                        </select>
-
-                        <span class="control-error" v-if="errors.has('channel')">@{{ errors.first('channel') }}</span>
-                    </div>
 
                     <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                         <label for="code" class="required">{{ __('admin::app.configuration.tax-categories.code') }}</label>
@@ -66,12 +50,16 @@
                         <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                     </div>
 
+                    <?php $selectedOptions = old('taxrates') ?: [] ?>
+
                     <div class="control-group" :class="[errors.has('taxrates[]') ? 'has-error' : '']">
                         <label for="taxrates" class="required">{{ __('admin::app.configuration.tax-categories.select-taxrates') }}</label>
 
-                        <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.select-taxrates') }}&quot;" value="{{ old('taxrates') }}">
+                        <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.select-taxrates') }}&quot;">
                             @foreach ($taxRates as $taxRate)
-                                <option value="{{ $taxRate['id'] }}">{{ $taxRate['identifier'] }}</option>
+                                <option value="{{ $taxRate->id }}" {{ in_array($taxRate['id'], $selectedOptions) ? 'selected' : '' }}>
+                                    {{ $taxRate['identifier'] }}
+                                </option>
                             @endforeach
                         </select>
 

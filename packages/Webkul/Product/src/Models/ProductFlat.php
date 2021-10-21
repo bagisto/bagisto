@@ -3,15 +3,42 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Webkul\Product\Contracts\ProductFlat as ProductFlatContract;
 
 class ProductFlat extends Model implements ProductFlatContract
 {
+    use Searchable;
+
     protected $table = 'product_flat';
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 
     public $timestamps = false;
+
+    /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'products_index';
+    }
+
+    /**
+     * Retrieve type instance
+     *
+     * @return AbstractType
+     */
+    public function getTypeInstance()
+    {
+        return $this->product->getTypeInstance();
+    }
 
     /**
      * Get the product attribute family that owns the product.
@@ -38,6 +65,14 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
+     * Get the product that owns the product.
+     */
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    /**
      * Get product type value from base product
      */
     public function getTypeAttribute()
@@ -52,13 +87,7 @@ class ProductFlat extends Model implements ProductFlatContract
      */
     public function isSaleable()
     {
-        if (! $this->status)
-            return false;
-
-        if ($this->haveSufficientQuantity(1))
-            return true;
-
-        return false;
+        return $this->product->isSaleable();
     }
 
     /**
@@ -70,13 +99,21 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * @param integer $qty
+     * @param int $qty
      *
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         return $this->product->haveSufficientQuantity($qty);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStockable()
+    {
+        return $this->product->isStockable();
     }
 
     /**
@@ -84,9 +121,15 @@ class ProductFlat extends Model implements ProductFlatContract
      */
     public function images()
     {
-        return (ProductImageProxy::modelClass())
-            ::where('product_images.product_id', $this->product_id)
-            ->select('product_images.*');
+        return $this->hasMany(ProductImageProxy::modelClass(), 'product_id', 'product_id');
+    }
+
+    /**
+     * The videos that belong to the product.
+     */
+    public function videos()
+    {
+        return $this->product->videos();
     }
 
     /**
@@ -137,5 +180,59 @@ class ProductFlat extends Model implements ProductFlatContract
     public function cross_sells()
     {
         return $this->product->cross_sells();
+    }
+
+    /**
+     * The images that belong to the product.
+     */
+    public function downloadable_samples()
+    {
+        return $this->product->downloadable_samples();
+    }
+
+    /**
+     * The images that belong to the product.
+     */
+    public function downloadable_links()
+    {
+        return $this->product->downloadable_links();
+    }
+
+    /**
+     * Get the grouped products that owns the product.
+     */
+    public function grouped_products()
+    {
+        return $this->product->grouped_products();
+    }
+
+    /**
+     * Get the grouped products by `sort_order` key that owns the product.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function groupedProductsBySortOrder()
+    {
+        return $this->product->grouped_products()->orderBy('sort_order');
+    }
+
+    /**
+     * Get the bundle options that owns the product.
+     */
+    public function bundle_options()
+    {
+        return $this->product->bundle_options();
+    }
+
+    /**
+     * Retrieve product attributes
+     *
+     * @param Group $group
+     * @param bool  $skipSuperAttribute
+     * @return Collection
+     */
+    public function getEditableAttributes($group = null, $skipSuperAttribute = true)
+    {
+        return $this->product->getEditableAttributes($groupId, $skipSuperAttribute);
     }
 }

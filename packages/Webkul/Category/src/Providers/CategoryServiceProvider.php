@@ -3,8 +3,8 @@
 namespace Webkul\Category\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Routing\Router;
+use Webkul\Category\Models\CategoryProxy;
+use Webkul\Category\Observers\CategoryObserver;
 
 class CategoryServiceProvider extends ServiceProvider
 {
@@ -13,18 +13,10 @@ class CategoryServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-    }
 
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-
+        CategoryProxy::observe(CategoryObserver::class);
     }
 }

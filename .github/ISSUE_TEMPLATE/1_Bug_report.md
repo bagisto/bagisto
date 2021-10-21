@@ -1,34 +1,30 @@
 ---
 name: "🐛 Bug Report"
-about: 'Report a general library issue.'
+about: 'Report a general issue.'
 ---
 
-# Bug report
+# Bug Report
+<!--- Before you open an issue, please check if the issue already has been reported. --->
 
-### Title
-    **Just a quick sentence to brief your trouble with Bagisto or something associated with it.**
+## Issue Description
+<!--- Provide a more detailed introduction to the issue itself. -->
 
-    Please be calm, short and emaphasize on points.
+## Preconditions
+<!--- Please provide as detailed information about your environment as possible. -->
 
-### Issue Description
-    **Description helps the developers to understand the bug. It describes the problem encountered or some after effect of some kind.**
+## Bagisto Version
+<!--- Please select the version of bagisto that you are using. -->
+- [ ] master branch
+- [ ] 1.3.3
+- [ ] 1.3.2
+- [ ] 1.3.1
+- [ ] 1.3.0
 
-### Preconditions
-    **Please provide as detailed information about your environment as possible.**
+## Steps To Reproduce
+<!--- It is important to provide a set of clear steps to reproduce this bug. If relevant please include code samples. -->
 
-    1. framework Version.
-    2. Commit id.
+## Actual Result
+<!--- Tell us what happens instead.-->
 
-### Steps to reproduce
-    **It is important to provide a set of clear steps to reproduce this bug.If relevant please include code samples.**
-
-    1. step1
-    2. step2
-
-### Expected result
-    **Tell us what should happen.**
-*    [Screenshots, logs or description]
-
-### Actual result
-    **Tell us what happens instead.**
-    * [Tell us what happens instead]
+## Expected Result
+<!--- Tell us what should happen. -->

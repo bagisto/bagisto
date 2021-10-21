@@ -12,7 +12,7 @@
                 <select type="text" v-validate="'required'" class="control" id="country" name="country" v-model="country" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.country') }}&quot;">
                     <option value=""></option>
                     @foreach (core()->countries() as $country)
-                        <option value="{{ $country->code }}">{{ $country->name }}</option>
+                        <option {{ $country->code === $defaultCountry ? 'selected' : '' }}  value="{{ $country->code }}">{{ $country->name }}</option>
                     @endforeach
                 </select>
 
@@ -53,9 +53,9 @@
 
             data() {
                 return {
-                    country: "{{ $countryCode  }}",
+                    country: "{{ $countryCode ?? $defaultCountry }}",
 
-                    state: "{{ $stateCode  }}",
+                    state: "{{ $stateCode }}",
 
                     countryStates: @json(core()->groupedStatesByCountries())
                 }

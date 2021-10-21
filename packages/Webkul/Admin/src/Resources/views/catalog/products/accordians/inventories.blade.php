@@ -1,5 +1,6 @@
-@if ($product->type != 'configurable')
-<accordian :title="'{{ __('admin::app.catalog.products.inventories') }}'" :active="true">
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.inventories.before', ['product' => $product]) !!}
+
+<accordian :title="'{{ __('admin::app.catalog.products.inventories') }}'" :active="false">
     <div slot="body">
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.inventories.controls.before', ['product' => $product]) !!}
@@ -32,4 +33,5 @@
 
     </div>
 </accordian>
-@endif
+
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.inventories.after', ['product' => $product]) !!}

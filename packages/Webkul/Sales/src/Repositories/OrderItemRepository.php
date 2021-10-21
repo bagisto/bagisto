@@ -3,22 +3,17 @@
 namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container as App;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\OrderItem;
-
-/**
- * OrderItem Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 
 class OrderItemRepository extends Repository
 {
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
     function model()
     {
@@ -26,8 +21,8 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Sales\Contracts\OrderItem
      */
     public function create(array $data)
     {
@@ -38,12 +33,12 @@ class OrderItemRepository extends Repository
             unset($data['product']);
         }
 
-        return $this->model->create($data);
+        return parent::create($data);
     }
 
     /**
-     * @param mixed $orderItem
-     * @return mixed
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
+     * @return \Webkul\Sales\Contracts\OrderItem
      */
     public function collectTotals($orderItem)
     {
@@ -51,7 +46,7 @@ class OrderItemRepository extends Repository
 
         $totalInvoiced = $baseTotalInvoiced = 0;
         $taxInvoiced = $baseTaxInvoiced = 0;
-        
+
         $totalRefunded = $baseTotalRefunded = 0;
         $taxRefunded = $baseTaxRefunded = 0;
 
@@ -101,61 +96,106 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * @param mixed $orderItem
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
      * @return void
      */
     public function manageInventory($orderItem)
     {
-        if (! $orderedQuantity = $orderItem->qty_ordered)
-            return;
+        $orderItems = [];
 
-        $product = $orderItem->type == 'configurable' ? $orderItem->child->product : $orderItem->product;
-
-        if (! $product)
-            return;
-
-
-        $orderedInventory = $product->ordered_inventories()
-            ->where('channel_id', $orderItem->order->channel->id)
-            ->first();
-
-        if ($orderedInventory) {
-            $orderedInventory->update([
-                    'qty' => $orderedInventory->qty + $orderItem->qty_ordered
-                ]);
+        if ($orderItem->getTypeInstance()->isComposite()) {
+            foreach ($orderItem->children as $child) {
+                $orderItems[] = $child;
+            }
         } else {
-            $product->ordered_inventories()->create([
-                    'qty' => $orderItem->qty_ordered,
-                    'product_id' => $product->id,
-                    'channel_id' => $orderItem->order->channel->id,
-                ]);
+            $orderItems[] = $orderItem;
+        }
+
+        foreach ($orderItems as $item) {
+            if (! $item->product) {
+                continue;
+            }
+
+            if ($item->product->inventories->count() > 0) {
+
+                $orderedInventory = $item->product->ordered_inventories()
+                    ->where('channel_id', $orderItem->order->channel_id)
+                    ->first();
+
+                if (isset($item->qty_ordered)) {
+                    $qty = $item->qty_ordered;
+                } else {
+                    Log::info('OrderItem has no qty_ordered', ['orderItem' => $item, 'product' => $item->product]);
+                    if (isset($item->parent->qty_ordered)) {
+                        $qty = $item->parent->qty_ordered;
+                    } else {
+                        Log::info('OrderItem has no parent with qty_ordered', [
+                            'orderItem' => $item,
+                            'parent' => $item->parent,
+                            'product' => $item->product
+                        ]);
+                        $qty = 1;
+                    }
+                }
+
+                if ($orderedInventory) {
+                    $orderedInventory->update([
+                        'qty' => $orderedInventory->qty + $qty,
+                    ]);
+                } else {
+                    $item->product->ordered_inventories()->create([
+                        'qty'        => $qty,
+                        'product_id' => $item->product_id,
+                        'channel_id' => $orderItem->order->channel->id,
+                    ]);
+                }
+            }
         }
     }
 
     /**
      * Returns qty to product inventory after order cancelation
      *
-     * @param mixed $orderItem
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
      * @return void
      */
     public function returnQtyToProductInventory($orderItem)
     {
-        if (! $product = $orderItem->product)
+        $orderedInventory = $orderItem->product->ordered_inventories()
+                                      ->where('channel_id', $orderItem->order->channel->id)
+                                      ->first();
+
+        if (! $orderedInventory) {
             return;
+        }
 
-        $orderedInventory = $product->ordered_inventories()
-                ->where('channel_id', $orderItem->order->channel->id)
-                ->first();
-
-        if (! $orderedInventory)
-            return ;
-
-        if (($qty = $orderedInventory->qty - $orderItem->qty_to_cancel) < 0) {
+        if (($qty = $orderedInventory->qty - ($orderItem->qty_ordered ? $orderItem->qty_to_cancel : $orderItem->parent->qty_ordered)) < 0) {
             $qty = 0;
         }
 
-        $orderedInventory->update([
-                'qty' => $qty
-            ]);
+        $orderedInventory->update(['qty' => $qty]);
+
+        if ($orderItem->getTypeInstance()->isStockable()) {
+            $shipmentItems = $orderItem->parent ? $orderItem->parent->shipment_items : $orderItem->shipment_items;
+
+            if ($shipmentItems) {
+                foreach ($shipmentItems as $shipmentItem) {
+                    if ($orderItem->parent) {
+                        $shippedQty = $orderItem->qty_ordered
+                                      ? ($orderItem->qty_ordered / $orderItem->parent->qty_ordered) * $shipmentItem->qty
+                                      : $orderItem->parent->qty_ordered;
+                    } else {
+                        $shippedQty = $shipmentItem->qty;
+                    }
+    
+                    $inventory = $orderItem->product->inventories()
+                    //  ->where('vendor_id', $data['vendor_id'])
+                     ->where('inventory_source_id', $shipmentItem->shipment->inventory_source_id)
+                     ->first();
+    
+                    $inventory->update(['qty' => $inventory->qty + $shippedQty]);                  
+                }
+            }
+        }
     }
 }

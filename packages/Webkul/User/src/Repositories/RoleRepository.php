@@ -4,12 +4,6 @@ namespace Webkul\User\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * Role Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class RoleRepository extends Repository
 {
     /**
@@ -20,5 +14,30 @@ class RoleRepository extends Repository
     function model()
     {
         return 'Webkul\User\Contracts\Role';
+    }
+
+    /**
+     * Update method.
+     *
+     * @param  array  $data
+     * @param  int  $id
+     *
+     * @return \Webkul\User\Model\Role
+     */
+    public function update(array $data, $id)
+    {
+        /* making collection for ease */
+        $requestedData = collect($data);
+
+        /* updating role data */
+        $role = $this->find($id);
+        $role->name = $requestedData['name'];
+        $role->description = $requestedData['description'];
+        $role->permission_type = $requestedData['permission_type'];
+        $role->permissions = $requestedData->has('permissions') ? $requestedData['permissions'] : [];
+        $role->update();
+
+        /* returning updated role */
+        return $role;
     }
 }

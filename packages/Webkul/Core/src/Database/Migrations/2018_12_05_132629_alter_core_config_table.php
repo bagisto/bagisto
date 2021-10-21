@@ -27,10 +27,6 @@ class AlterCoreConfigTable extends Migration
      */
     public function down()
     {
-        Schema::table('core_config', function (Blueprint $table) {
-            $table->string('channel_code')->nullable()->change();
-            $table->string('locale_code')->nullable();
-            $table->timestamps();
-        });
+        //
     }
 }

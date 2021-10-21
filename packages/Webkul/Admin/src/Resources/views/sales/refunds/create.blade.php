@@ -12,7 +12,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.sales.refunds.index') }}'"></i>
 
                         {{ __('admin::app.sales.refunds.add-title') }}
                     </h1>
@@ -43,7 +43,7 @@
                                         </span>
 
                                         <span class="value">
-                                            <a href="{{ route('admin.sales.orders.view', $order->id) }}">#{{ $order->id }}</a>
+                                            <a href="{{ route('admin.sales.orders.view', $order->id) }}">#{{ $order->increment_id }}</a>
                                         </span>
                                     </div>
 
@@ -110,37 +110,41 @@
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('admin::app.sales.orders.address') }}'" :active="true">
-                        <div slot="body">
+                    @if ($order->billing_address || $order->shipping_address)
+                        <accordian :title="'{{ __('admin::app.sales.orders.address') }}'" :active="true">
+                            <div slot="body">
 
-                            <div class="sale-section">
-                                <div class="secton-title">
-                                    <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
-                                </div>
+                                @if ($order->billing_address)
+                                    <div class="sale-section">
+                                        <div class="secton-title">
+                                            <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
+                                        </div>
 
-                                <div class="section-content">
+                                        <div class="section-content">
 
-                                    @include ('admin::sales.address', ['address' => $order->billing_address])
+                                            @include ('admin::sales.address', ['address' => $order->billing_address])
 
-                                </div>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if ($order->shipping_address)
+                                    <div class="sale-section">
+                                        <div class="secton-title">
+                                            <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
+                                        </div>
+
+                                        <div class="section-content">
+
+                                            @include ('admin::sales.address', ['address' => $order->shipping_address])
+
+                                        </div>
+                                    </div>
+                                @endif
+
                             </div>
-
-                            @if ($order->shipping_address)
-                                <div class="sale-section">
-                                    <div class="secton-title">
-                                        <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
-                                    </div>
-
-                                    <div class="section-content">
-
-                                        @include ('admin::sales.address', ['address' => $order->shipping_address])
-
-                                    </div>
-                                </div>
-                            @endif
-
-                        </div>
-                    </accordian>
+                        </accordian>
+                    @endif
 
                     <accordian :title="'{{ __('admin::app.sales.orders.payment-and-shipping') }}'" :active="true">
                         <div slot="body">
@@ -226,6 +230,8 @@
                         <tr>
                             <th>{{ __('admin::app.sales.orders.SKU') }}</th>
                             <th>{{ __('admin::app.sales.orders.product-name') }}</th>
+                            <th>{{ __('admin::app.sales.orders.price') }}</th>
+                            <th>{{ __('admin::app.sales.orders.item-status') }}</th>
                             <th>{{ __('admin::app.sales.orders.subtotal') }}</th>
                             <th>{{ __('admin::app.sales.orders.tax-amount') }}</th>
                             @if ($order->base_discount_amount > 0)
@@ -240,17 +246,47 @@
                     <tbody>
                         @foreach ($order->items as $item)
                             <tr>
-                                <td>{{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}</td>
+                                <td>{{ Webkul\Product\Helpers\ProductType::hasVariants($item->type) ? $item->child->sku : $item->sku }}</td>
 
                                 <td>
                                     {{ $item->name }}
 
-                                    @if ($html = $item->getOptionDetailHtml())
-                                        <p>{{ $html }}</p>
+                                    @if (isset($item->additional['attributes']))
+                                        <div class="item-options">
+
+                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                            @endforeach
+
+                                        </div>
                                     @endif
                                 </td>
 
                                 <td>{{ core()->formatBasePrice($item->base_price) }}</td>
+
+                                <td>
+                                    <span class="qty-row">
+                                        {{ $item->qty_ordered ? __('admin::app.sales.orders.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
+                                    </span>
+
+                                    <span class="qty-row">
+                                        {{ $item->qty_invoiced ? __('admin::app.sales.orders.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
+                                    </span>
+
+                                    <span class="qty-row">
+                                        {{ $item->qty_shipped ? __('admin::app.sales.orders.item-shipped', ['qty_shipped' => $item->qty_shipped]) : '' }}
+                                    </span>
+
+                                    <span class="qty-row">
+                                        {{ $item->qty_refunded ? __('admin::app.sales.orders.item-refunded', ['qty_refunded' => $item->qty_refunded]) : '' }}
+                                    </span>
+
+                                    <span class="qty-row">
+                                        {{ $item->qty_canceled ? __('admin::app.sales.orders.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
+                                    </span>
+                                </td>
+
+                                <td>{{ core()->formatBasePrice($item->base_total) }}</td>
 
                                 <td>{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
 
@@ -303,7 +339,7 @@
                     <td>-</td>
                     <td>
                         <div class="control-group" :class="[errors.has('refund[shipping]') ? 'has-error' : '']" style="width: 100px; margin-bottom: 0;">
-                            <input type="text" v-validate="'required|min_value:0|max_value:{{$order->base_shipping_invoiced - $order->base_shipping_refunded}}'" class="control" id="refund[shipping]" name="refund[shipping]" :value="refund.summary.shipping.price" data-vv-as="&quot;{{ __('admin::app.sales.refunds.refund-shipping') }}&quot;" style="width: 100%; margin: 0"/>
+                            <input type="text" v-validate="'required|min_value:0|max_value:{{$order->base_shipping_invoiced - $order->base_shipping_refunded}}'" class="control" id="refund[shipping]" name="refund[shipping]" v-model="refund.summary.shipping.price" data-vv-as="&quot;{{ __('admin::app.sales.refunds.refund-shipping') }}&quot;" style="width: 100%; margin: 0"/>
 
                             <span class="control-error" v-if="errors.has('refund[shipping]')">
                                 @{{ errors.first('refund[shipping]') }}
@@ -388,7 +424,7 @@
                             if (! response.data) {
                                 window.flashMessages = [{
                                     'type': 'alert-error',
-                                    'message': "{{ __('admin::app.sales.refunds.invalid-qty') }}" 
+                                    'message': "{{ __('admin::app.sales.refunds.invalid-qty') }}"
                                 }];
 
                                 this_this.$root.addFlashMessages()

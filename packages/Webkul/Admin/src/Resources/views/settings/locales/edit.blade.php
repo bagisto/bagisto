@@ -7,11 +7,11 @@
 @section('content')
     <div class="content">
 
-        <form method="POST" action="{{ route('admin.locales.update', $locale->id) }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.locales.update', $locale->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.locales.index') }}'"></i>
 
                         {{ __('admin::app.settings.locales.edit-title') }}
                     </h1>
@@ -28,7 +28,7 @@
                 <div class="form-container">
                     @csrf()
 
-                    {!! view_render_event('bagisto.admin.settings.locale.edit.before') !!}
+                    {!! view_render_event('bagisto.admin.settings.locale.edit.before', ['locale' => $locale]) !!}
 
                     <input name="_method" type="hidden" value="PUT">
 
@@ -37,7 +37,7 @@
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.locales.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.locales.code') }}&quot;" value="{{ $locale->code }}" disabled="disabled"/>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.locales.code') }}&quot;" value="{{ old('code') ?: $locale->code }}" disabled="disabled"/>
                                 <input type="hidden" name="code" value="{{ $locale->code }}"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
@@ -51,8 +51,8 @@
                             <div class="control-group" :class="[errors.has('direction') ? 'has-error' : '']">
                                 <label for="direction" class="required">{{ __('admin::app.settings.locales.direction') }}</label>
                                 <select v-validate="'required'" class="control" id="direction" name="direction" data-vv-as="&quot;{{ __('admin::app.settings.locales.direction') }}&quot;">
-                                    <option value="ltr" {{ old('direction') == 'ltr' ? 'selected' : '' }} title="Text direction left to right">ltr</option>
-                                    <option value="rtl" {{ old('direction') == 'rtl' ? 'selected' : '' }} title="Text direction right to left">rtl</option>
+                                    <option value="ltr" {{ (old('direction') ?: $locale->direction) == 'ltr' ? 'selected' : '' }}>LTR</option>
+                                    <option value="rtl" {{ (old('direction') ?: $locale->direction) == 'rtl' ? 'selected' : '' }}>RTL</option>
                                 </select>
                                 <span class="control-error" v-if="errors.has('direction')">@{{ errors.first('direction') }}</span>
                             </div>
@@ -60,7 +60,7 @@
                         </div>
                     </accordian>
 
-                    {!! view_render_event('bagisto.admin.settings.locale.edit.after') !!}
+                    {!! view_render_event('bagisto.admin.settings.locale.edit.after', ['locale' => $locale]) !!}
                 </div>
             </div>
         </form>

@@ -2,28 +2,81 @@
 
 namespace Webkul\Sales\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Webkul\Checkout\Models\CartAddress;
+use Webkul\Core\Models\Address;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Sales\Database\Factories\OrderAddressFactory;
 use Webkul\Sales\Contracts\OrderAddress as OrderAddressContract;
+use Illuminate\Database\Eloquent\Builder;
 
-class OrderAddress extends Model implements OrderAddressContract
+/**
+ * Class OrderAddress
+ *
+ * @package Webkul\Sales\Models
+ *
+ * @property integer $order_id
+ * @property Order $order
+ *
+ */
+class OrderAddress extends Address implements OrderAddressContract
 {
-    protected $table = 'order_address';
+    use HasFactory;
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    public const ADDRESS_TYPE_SHIPPING = 'order_shipping';
+
+    public const ADDRESS_TYPE_BILLING = 'order_billing';
 
     /**
-     * Get of the customer fullname.
+     * @var array default values
      */
-    public function getNameAttribute()
+    protected $attributes = [
+        'address_type' => self::ADDRESS_TYPE_BILLING,
+    ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot(): void
     {
-        return $this->first_name . ' ' . $this->last_name;
+        static::addGlobalScope('address_type', function (Builder $builder) {
+            $builder->whereIn('address_type', [
+                self::ADDRESS_TYPE_BILLING,
+                self::ADDRESS_TYPE_SHIPPING,
+            ]);
+        });
+
+        static::creating(static function ($address) {
+            switch ($address->address_type) {
+                case CartAddress::ADDRESS_TYPE_BILLING:
+                    $address->address_type = self::ADDRESS_TYPE_BILLING;
+                    break;
+                case CartAddress::ADDRESS_TYPE_SHIPPING:
+                    $address->address_type = self::ADDRESS_TYPE_SHIPPING;
+                    break;
+            }
+        });
+
+        parent::boot();
     }
 
     /**
-     * Get the customer record associated with the order.
+     * Get the order record associated with the address.
      */
-    public function customer()
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return OrderAddressFactory
+     */
+    protected static function newFactory(): OrderAddressFactory
+    {
+        return OrderAddressFactory::new();
     }
 }

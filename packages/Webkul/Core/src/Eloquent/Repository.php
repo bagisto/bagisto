@@ -2,30 +2,28 @@
 
 namespace Webkul\Core\Eloquent;
 
+use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Container\Container as App;
+use Prettus\Repository\Traits\CacheableRepository;
 
-/**
- * Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
-abstract class Repository extends BaseRepository {
+
+abstract class Repository extends BaseRepository implements CacheableInterface {
+
+    use CacheableRepository;
 
     /**
      * Find data by field and value
      *
-     * @param       $field
-     * @param       $value
-     * @param array $columns
-     *
+     * @param  string  $field
+     * @param  string  $value
+     * @param  array  $columns
      * @return mixed
      */
     public function findOneByField($field, $value = null, $columns = ['*'])
     {
-        $model = parent::findByField($field, $value, $columns = ['*']);
+        $model = $this->findByField($field, $value, $columns = ['*']);
 
         return $model->first();
     }
@@ -33,15 +31,14 @@ abstract class Repository extends BaseRepository {
     /**
      * Find data by field and value
      *
-     * @param       $field
-     * @param       $value
-     * @param array $columns
-     *
+     * @param  string  $field
+     * @param  string  $value
+     * @param  array  $columns
      * @return mixed
      */
     public function findOneWhere(array $where, $columns = ['*'])
     {
-        $model = parent::findWhere($where, $columns);
+        $model = $this->findWhere($where, $columns);
 
         return $model->first();
     }
@@ -49,9 +46,8 @@ abstract class Repository extends BaseRepository {
     /**
      * Find data by id
      *
-     * @param       $id
-     * @param array $columns
-     *
+     * @param  int  $id
+     * @param  array  $columns
      * @return mixed
      */
     public function find($id, $columns = ['*'])
@@ -67,9 +63,8 @@ abstract class Repository extends BaseRepository {
     /**
      * Find data by id
      *
-     * @param       $id
-     * @param array $columns
-     *
+     * @param  int  $id
+     * @param  array  $columns
      * @return mixed
      */
     public function findOrFail($id, $columns = ['*'])
@@ -82,21 +77,31 @@ abstract class Repository extends BaseRepository {
         return $this->parserResult($model);
     }
 
-    /**
-     * @return mixed
+     /**
+     * Count results of repository
+     *
+     * @param  array  $where
+     * @param  string  $columns
+     * @return int
      */
-    public function count()
+    public function count(array $where = [], $columns = '*')
     {
         $this->applyCriteria();
         $this->applyScope();
 
-        $total = $this->model->count();
-        $this->resetModel();
+        if ($where) {
+            $this->applyConditions($where);
+        }
 
-        return $total;
+        $result = $this->model->count($columns);
+        $this->resetModel();
+        $this->resetScope();
+
+        return $result;
     }
 
     /**
+     * @param  string  $columns
      * @return mixed
      */
     public function sum($columns)
@@ -111,6 +116,7 @@ abstract class Repository extends BaseRepository {
     }
 
     /**
+     * @param  string  $columns
      * @return mixed
      */
     public function avg($columns)

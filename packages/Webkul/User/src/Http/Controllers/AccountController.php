@@ -2,17 +2,9 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\User\Http\Controllers\Controller;
 use Hash;
+use Illuminate\Support\Facades\Event;
 
-/**
- * Admin user account controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class AccountController extends Controller
 {
     /**
@@ -35,7 +27,7 @@ class AccountController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit()
     {
@@ -51,13 +43,14 @@ class AccountController extends Controller
      */
     public function update()
     {
+        $isPasswordChanged = false;
         $user = auth()->guard('admin')->user();
 
         $this->validate(request(), [
-            'name' => 'required',
-            'email' => 'email|unique:admins,email,' . $user->id,
-            'password' => 'nullable|min:6|confirmed',
-            'current_password' => 'required|min:6'
+            'name'             => 'required',
+            'email'            => 'email|unique:admins,email,' . $user->id,
+            'password'         => 'nullable|min:6|confirmed',
+            'current_password' => 'required|min:6',
         ]);
 
         $data = request()->input();
@@ -68,12 +61,18 @@ class AccountController extends Controller
             return redirect()->back();
         }
 
-        if (! $data['password'])
+        if (! $data['password']) {
             unset($data['password']);
-        else
+        } else {
+            $isPasswordChanged = true;
             $data['password'] = bcrypt($data['password']);
+        }
 
         $user->update($data);
+
+        if ($isPasswordChanged) {
+            Event::dispatch('user.admin.update-password', $user);
+        }
 
         session()->flash('success', trans('admin::app.users.users.account-save'));
 

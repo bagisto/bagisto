@@ -26,7 +26,7 @@ class AlterCustomerIdInProductReviewsTable extends Migration
     public function down()
     {
         Schema::table('product_reviews', function (Blueprint $table) {
-            //
+            $table->dropColumn('customer_id');
         });
     }
 }

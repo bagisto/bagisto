@@ -1,9 +1,5 @@
 <?php
 return [
-    'one-col' => '<div class="mt-10">Use class: <b>"static-container one-column"</b> for one column layout.</div>',
-    'two-col' => '<div class="mt-10">Use class: <b>"static-container two-column"</b> for two column layout.</div>',
-    'three-col' => '<div class="mt-10">Use class: <b>"static-container three-column"</b> for three column layout.</div>',
-    'helper-classes' => 'Helper Classes',
     'datagrid' => [
         'actions' => 'Actions',
         'id' => 'Index columns have value greater than zero only',
@@ -13,6 +9,12 @@ return [
             'mass-update-status' => 'Do you really want to update status of these selected :resource?',
             'delete' => 'Do you really want to perform this action?',
             'edit' => 'Do you really want to edit this :resource?',
+            'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?'
+        ],
+
+        'error' => [
+            'multiple-sort-keys-error' => 'Fatal Error! Multiple sort keys found, please resolve the URL manually',
+            'multiple-search-keys-error' => 'Multiple search keys found, please resolve the URL manually',
         ],
 
         'zero-index' => 'Index columns can have values greater than zero only',
@@ -20,6 +22,10 @@ return [
         'filter-fields-missing' => 'Some of the required field is null, please check column, condition and value properly',
         'click_on_action' => 'Do you really want to perform this action?',
         'search' => 'Search Here...',
+        'search-title' => 'Search',
+        'channel' => 'Channel',
+        'locale' => 'Locale',
+        'customer-group' => 'Customer Group',
         'filter' => 'Filter',
         'column' => 'Select Column',
         'condition' => 'Select Condition',
@@ -35,6 +41,13 @@ return [
         'true' => 'True / Active',
         'false' => 'False / Inactive',
         'between' => 'Is between',
-        'apply' => 'Apply'
+        'apply' => 'Apply',
+        'items-per-page' => 'Items Per Page',
+        'value-here' => 'Value here',
+        'numeric-value-here' => 'Numeric Value here',
+        'submit' => 'Submit',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'view' => 'View',
     ]
 ];

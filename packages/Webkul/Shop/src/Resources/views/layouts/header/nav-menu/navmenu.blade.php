@@ -5,8 +5,9 @@
 $categories = [];
 
 foreach (app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id) as $category) {
-    if ($category->slug)
+    if ($category->slug) {
         array_push($categories, $category);
+    }
 }
 
 ?>
@@ -66,7 +67,7 @@ foreach (app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCateg
 
 <script type="text/x-template" id="category-item-template">
     <li>
-        <a :href="url+'/categories/'+this.item['translations'][0].slug">
+        <a :href="url+'/'+this.item['translations'][0].url_path">
             @{{ name }}&emsp;
             <i class="icon dropdown-right-icon" v-if="haveChildren && item.parent_id != null"></i>
         </a>

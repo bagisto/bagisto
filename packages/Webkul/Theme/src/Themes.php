@@ -3,6 +3,7 @@
 namespace Webkul\Theme;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Str;
 use Webkul\Theme\Theme;
 
 class Themes
@@ -35,7 +36,6 @@ class Themes
      */
     protected $defaultThemeCode = 'default';
 
-
     /**
      * Create a new Themes instance.
      *
@@ -43,9 +43,13 @@ class Themes
      */
     public function __construct()
     {
-        $this->laravelViewsPath = Config::get('view.paths');
+        if (request()->route() !== null && Str::contains(request()->route()->uri, config('app.admin_url') . '/')) {
+            $this->defaultThemeCode = Config::get('themes.admin-default', null);
+        } else {
+            $this->defaultThemeCode = Config::get('themes.default', null);
+        }
 
-        $this->defaultThemeCode = Config::get('themes.default', null);
+        $this->laravelViewsPath = Config::get('view.paths');
 
         $this->loadThemes();
     }
@@ -61,8 +65,35 @@ class Themes
     }
 
     /**
+     * Return list of registered themes
+     *
+     * @return array
+     */
+    public function getChannelThemes()
+    {
+        $themes = config('themes.themes', []);
+        $channelThemes = [];
+
+        foreach ($themes as $code => $data) {
+            $channelThemes[] = new Theme(
+                $code,
+                isset($data['name']) ? $data['name'] : '',
+                isset($data['assets_path']) ? $data['assets_path'] : '',
+                isset($data['views_path']) ? $data['views_path'] : ''
+            );
+
+            if (isset($data['parent']) && $data['parent']) {
+                $parentThemes[$code] = $data['parent'];
+            }
+        }
+
+        return $channelThemes;
+    }
+
+    /**
      * Check if specified exists
      *
+     * @param  string  $themeName
      * @return bool
      */
     public function exists($themeName)
@@ -72,20 +103,24 @@ class Themes
                 return true;
             }
         }
-        
+
         return false;
     }
 
-
     /**
-     * Prepare all themes
+     * Prepare all themes.
      *
-     * @return Theme
+     * @return \Webkul\Theme\Theme
      */
     public function loadThemes()
     {
         $parentThemes = [];
-        $themes = config('themes.themes', []);
+
+        if (request()->route() !== null && Str::contains(request()->route()->uri, config('app.admin_url') . '/')) {
+            $themes = config('themes.admin-themes', []);
+        } else {
+            $themes = config('themes.themes', []);
+        }
 
         foreach ($themes as $code => $data) {
             $this->themes[] = new Theme(
@@ -116,7 +151,8 @@ class Themes
     /**
      * Enable theme
      *
-     * @return Theme
+     * @param  string  $themeName
+     * @return \Webkul\Theme\Theme
      */
     public function set($themeName)
     {
@@ -139,6 +175,7 @@ class Themes
         Config::set('view.paths', $paths);
 
         $themeViewFinder = app('view.finder');
+
         $themeViewFinder->setPaths($paths);
 
         return $theme;
@@ -147,7 +184,7 @@ class Themes
     /**
      * Get current theme
      *
-     * @return Theme
+     * @return \Webkul\Theme\Theme
      */
     public function current()
     {
@@ -167,7 +204,8 @@ class Themes
     /**
      * Find a theme by it's name
      *
-     * @return Theme
+     * @param  string  $themeName
+     * @return \Webkul\Theme\Theme
      */
     public function find($themeName)
     {
@@ -179,7 +217,6 @@ class Themes
 
         throw new Exceptions\ThemeNotFound($themeName);
     }
-
 
     /**
      * Original view paths defined in config.view.php
@@ -194,6 +231,8 @@ class Themes
     /**
      * Return asset url of current theme
      *
+     * @param  string  $themeName
+     * @param  bool|null  $secure
      * @return string
      */
     public function url($filename, $secure = null)

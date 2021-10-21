@@ -23,15 +23,15 @@ class ViewRenderEventManager
     /**
      * Fires event for rendering template
      *
-     * @param string     $eventName
-     * @param array|null $params
+     * @param  string  $eventName
+     * @param  array|null  $params
      * @return string
      */
     public function handleRenderEvent($eventName, $params = null)
     {
         $this->params = $params ?? [];
 
-        Event::fire($eventName, $this);
+        Event::dispatch($eventName, $this);
 
         return $this->templates;
     }
@@ -49,8 +49,7 @@ class ViewRenderEventManager
     /**
      *  get param
      *
-     * @param $name
-     *
+     * @param  $name
      * @return mixed
      */
     public function getParam($name)
@@ -61,7 +60,7 @@ class ViewRenderEventManager
     /**
      * Add templates for render
      *
-     * @param string $template
+     * @param  string  $template
      * @return void
      */
     public function addTemplate($template)
@@ -77,16 +76,15 @@ class ViewRenderEventManager
     public function render()
     {
         $string = "";
-        
+
         foreach ($this->templates as $template) {
             if (view()->exists($template)) {
                 $string .= view($template , $this->params)->render();
-            }
-            elseif (is_string($template)) {
+            } elseif (is_string($template)) {
                 $string .= $template;
             }
         }
-        
+
         return $string;
     }
 }

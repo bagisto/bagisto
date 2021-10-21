@@ -70,8 +70,16 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('product_cross_sells');
+
+        Schema::dropIfExists('product_up_sells');
+
+        Schema::dropIfExists('product_super_attributes');
+
+        Schema::dropIfExists('product_relations');
 
         Schema::dropIfExists('product_categories');
+
+        Schema::dropIfExists('products');
     }
 }

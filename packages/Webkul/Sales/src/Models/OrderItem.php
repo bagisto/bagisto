@@ -2,24 +2,101 @@
 
 namespace Webkul\Sales\Models;
 
+use Webkul\Product\Type\AbstractType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Webkul\Sales\Database\Factories\OrderItemFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Sales\Contracts\OrderItem as OrderItemContract;
-use Webkul\Product\Models\Product;
 
 class OrderItem extends Model implements OrderItemContract
 {
-    protected $guarded = ['id', 'child', 'created_at', 'updated_at'];
+    use HasFactory;
+
+    protected $guarded = [
+        'id',
+        'child',
+        'children',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'additional' => 'array',
     ];
+
+    protected $typeInstance;
+
+    /**
+     * Retrieve type instance
+     *
+     * @return AbstractType
+     */
+    public function getTypeInstance(): AbstractType
+    {
+        if ($this->typeInstance) {
+            return $this->typeInstance;
+        }
+
+        $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
+
+        if ($this->product) {
+            $this->typeInstance->setProduct($this);
+        }
+
+        return $this->typeInstance;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStockable(): bool
+    {
+        return $this->getTypeInstance()
+                    ->isStockable();
+    }
+
+    /**
+     * Checks if new shipment is allowed or not
+     */
+    public function canShip(): bool
+    {
+        if (!$this->isStockable()) {
+            return false;
+        }
+
+        if ($this->qty_to_ship > 0) {
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Get remaining qty for shipping.
      */
     public function getQtyToShipAttribute()
     {
+        if (!$this->isStockable()) {
+            return 0;
+        }
+
         return $this->qty_ordered - $this->qty_shipped - $this->qty_refunded - $this->qty_canceled;
+    }
+
+    /**
+     * Checks if new invoice is allow or not
+     */
+    public function canInvoice()
+    {
+        if ($this->qty_to_invoice > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -28,6 +105,14 @@ class OrderItem extends Model implements OrderItemContract
     public function getQtyToInvoiceAttribute()
     {
         return $this->qty_ordered - $this->qty_invoiced - $this->qty_canceled;
+    }
+
+    /**
+     * Checks if new cancel is allow or not
+     */
+    public function canCancel(): bool
+    {
+        return $this->qty_to_cancel > 0;
     }
 
     /**
@@ -49,15 +134,15 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the order record associated with the order item.
      */
-    public function order()
+    public function order(): BelongsTo
     {
         return $this->belongsTo(OrderProxy::modelClass());
     }
 
     /**
-     * Get the order record associated with the order item.
+     * Get the product record associated with the order item.
      */
-    public function product()
+    public function product(): MorphTo
     {
         return $this->morphTo();
     }
@@ -65,15 +150,31 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the child item record associated with the order item.
      */
-    public function child()
+    public function child(): HasOne
     {
         return $this->hasOne(OrderItemProxy::modelClass(), 'parent_id');
     }
 
     /**
+     * Get the parent item record associated with the order item.
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    /**
+     * Get the children items.
+     */
+    public function children(): HasMany
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
+    /**
      * Get the invoice items record associated with the order item.
      */
-    public function invoice_items()
+    public function invoice_items(): HasMany
     {
         return $this->hasMany(InvoiceItemProxy::modelClass());
     }
@@ -81,7 +182,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the shipment items record associated with the order item.
      */
-    public function shipment_items()
+    public function shipment_items(): HasMany
     {
         return $this->hasMany(ShipmentItemProxy::modelClass());
     }
@@ -89,7 +190,7 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get the refund items record associated with the order item.
      */
-    public function refund_items()
+    public function refund_items(): HasMany
     {
         return $this->hasMany(RefundItemProxy::modelClass());
     }
@@ -97,24 +198,15 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Returns configurable option html
      */
-    public function getOptionDetailHtml()
+    public function downloadable_link_purchased(): HasMany
     {
-
-        if ($this->type == 'configurable' && isset($this->additional['attributes'])) {
-            $labels = [];
-
-            foreach ($this->additional['attributes'] as $attribute) {
-                $labels[] = $attribute['attribute_name'] . ' : ' . $attribute['option_label'];
-            }
-
-            return implode(', ', $labels);
-        }
+        return $this->hasMany(DownloadableLinkPurchasedProxy::modelClass());
     }
 
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = parent::toArray();
 
@@ -126,6 +218,18 @@ class OrderItem extends Model implements OrderItemContract
 
         $array['qty_to_refund'] = $this->qty_to_refund;
 
+        $array['downloadable_links'] = $this->downloadable_link_purchased;
+
         return $array;
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return OrderItemFactory
+     */
+    protected static function newFactory(): OrderItemFactory
+    {
+        return OrderItemFactory::new();
     }
 }

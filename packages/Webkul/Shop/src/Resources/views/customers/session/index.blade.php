@@ -5,7 +5,6 @@
 @endsection
 
 @section('content-wrapper')
-
     <div class="auth-content">
         <div class="sign-up-text">
             {{ __('shop::app.customer.login-text.no_account') }} - <a href="{{ route('customer.register.index') }}">{{ __('shop::app.customer.login-text.title') }}</a>
@@ -14,7 +13,9 @@
         {!! view_render_event('bagisto.shop.customers.login.before') !!}
 
         <form method="POST" action="{{ route('customer.session.create') }}" @submit.prevent="onSubmit">
+
             {{ csrf_field() }}
+
             <div class="login-form">
                 <div class="login-text">{{ __('shop::app.customer.login-form.title') }}</div>
 
@@ -28,11 +29,9 @@
 
                 <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                     <label for="password" class="required">{{ __('shop::app.customer.login-form.password') }}</label>
-                    <input type="password" class="control" name="password" v-validate="'required'" value="{{ old('password') }}" data-vv-as="&quot;{{ __('shop::app.customer.login-form.password') }}&quot;">
+                    <input type="password" v-validate="'required|min:6'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.sessions.password') }}&quot;" value=""/>
                     <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                 </div>
-
-                {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
 
                 <div class="forgot-password-link">
                     <a href="{{ route('customer.forgot-password.create') }}">{{ __('shop::app.customer.login-form.forgot_pass') }}</a>
@@ -46,11 +45,25 @@
                     </div>
                 </div>
 
+                <div class="control-group">
+
+                    {!! Captcha::render() !!}
+                    
+                </div>
+
+                {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
+
                 <input class="btn btn-primary btn-lg" type="submit" value="{{ __('shop::app.customer.login-form.button_title') }}">
             </div>
+
         </form>
 
         {!! view_render_event('bagisto.shop.customers.login.after') !!}
     </div>
+@stop
 
-@endsection
+@push('scripts')
+
+{!! Captcha::renderJS() !!}
+
+@endpush

@@ -1,5 +1,5 @@
 <script type="text/x-template" id="export-form-template">
-    <form method="POST" action="{{ route('admin.datagrid.export') }}">
+    <form method="POST" action="{{ route('admin.datagrid.export', ['locale' => core()->getRequestedLocaleCode()]) }}" @submit.prevent="onSubmit">
 
         <div class="page-content">
             <div class="form-container">
@@ -29,8 +29,17 @@
 
 <script>
     Vue.component('export-form', {
-
         template: '#export-form-template',
 
+        methods: {
+            onSubmit: function(e) {
+                var this_this = this;
+                e.target.submit();
+
+                setTimeout(function() {
+                    this_this.$root.$set(this_this.$root.modalIds, 'downloadDataGrid', false);
+                }, 0);
+            }
+        }
     });
 </script>

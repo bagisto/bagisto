@@ -1,36 +1,58 @@
-window.jQuery = window.$ = $ = require("jquery");
-window.Vue = require("vue");
-window.VeeValidate = require("vee-validate");
-window.axios = require("axios");
+import $ from 'jquery';
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
+import de from 'vee-validate/dist/locale/de';
+import ar from 'vee-validate/dist/locale/ar';
+import fa from 'vee-validate/dist/locale/fa';
+import fr from 'vee-validate/dist/locale/fr';
+import nl from 'vee-validate/dist/locale/nl';
+import tr from 'vee-validate/dist/locale/tr';
+import axios from 'axios';
+import VueSlider from 'vue-slider-component';
+import accounting from 'accounting';
+import ImageSlider from './components/image-slider';
+import 'lazysizes';
+
+window.jQuery = window.$ = $;
+window.Vue = Vue;
+window.VeeValidate = VeeValidate;
+window.axios = axios;
+
 require("./bootstrap");
 require("ez-plus/src/jquery.ez-plus.js");
 
-const dictionary = {
-    ar: {
-        required: (field) => 'حقل' + field + ' مطلوب',
-        email: (field) => + field + 'يجب ان يكون بريدا اليكتروني صحيح',
-    }
-};
-
 Vue.use(VeeValidate, {
     dictionary: {
-        ar: { messages: dictionary.ar}
-    }
+        ar: ar,
+        de: de,
+		fa: fa,
+		fr: fr,
+		nl: nl,
+		tr: tr,
+    },
+    events: 'input|change|blur',
 });
 
 Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
 
-Vue.component("image-slider", require("./components/image-slider.vue"));
-Vue.component("vue-slider", require("vue-slider-component"));
+Vue.component('image-slider', ImageSlider);
+Vue.component('vue-slider', VueSlider);
+Vue.component('proceed-to-checkout', require('./components/checkout/proceed-to-checkout').default);
+
+Vue.filter('currency', function (value, argument) {
+    return accounting.formatMoney(value, argument);
+})
 
 $(document).ready(function () {
     const app = new Vue({
         el: "#app",
 
         data: {
-            modalIds: {}
+            modalIds: {},
+
+            show_loader: false
         },
 
         mounted: function () {
@@ -52,6 +74,8 @@ $(document).ready(function () {
                         e.target.submit();
                     } else {
                         this.toggleButtonDisable(false);
+
+                        eventBus.$emit('onFormError')
                     }
                 });
             },
@@ -104,7 +128,17 @@ $(document).ready(function () {
 
             showModal(id) {
                 this.$set(this.modalIds, id, true);
+            },
+
+            showLoader() {
+                this.show_loader = true;
+            },
+
+            hideLoader() {
+                this.show_loader = false;
             }
         }
     });
+
+    window.app = app;
 });

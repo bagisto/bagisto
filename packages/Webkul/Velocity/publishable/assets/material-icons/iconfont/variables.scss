@@ -1,0 +1,8 @@
+@import 'codepoints.scss';
+
+$material-icons-font-path: '' !default;
+$material-icons-font-name: 'MaterialIcons-Regular' !default;
+$material-icons-font-size: 24px !default;
+$material-icons-font-family: 'Material Icons' !default;
+
+$material-icons-font-file: $material-icons-font-path + $material-icons-font-name;

@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="page-action">
-                    <button type="submi t" class="btn btn-lg btn-primary">
+                    <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.save') }}
                     </button>
                 </div>
@@ -32,13 +32,13 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.account.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ $user->name }}"  data-vv-as="&quot;{{ __('admin::app.account.name') }}&quot;"/>
+                                <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') ?: $user->name }}"  data-vv-as="&quot;{{ __('admin::app.account.name') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                                 <label for="email" class="required">{{ __('admin::app.account.email') }}</label>
-                                <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ $user->email }}"  data-vv-as="&quot;{{ __('admin::app.account.email') }}&quot;"/>
+                                <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ old('email') ?: $user->email }}"  data-vv-as="&quot;{{ __('admin::app.account.email') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                                 <label for="password">{{ __('admin::app.account.password') }}</label>
-                                <input type="password" v-validate="'min:6'" class="control" id="password" name="password"  data-vv-as="&quot;{{ __('admin::app.account.password') }}&quot;"/>
+                                <input type="password" v-validate="'min:6'" class="control" id="password" name="password" ref="password" data-vv-as="&quot;{{ __('admin::app.account.password') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                             </div>
 
@@ -63,7 +63,7 @@
                     <accordian :title="'{{ __('admin::app.account.current-password') }}'" :active="true">
                         <div slot="body">
                         <div class="control-group" :class="[errors.has('current_password') ? 'has-error' : '']">
-                            <label for="current_password">{{ __('admin::app.account.current-password') }}</label>
+                            <label for="current_password" class="required">{{ __('admin::app.account.current-password') }}</label>
                             <input type="password" v-validate="'required|min:6'" class="control" id="current_password" name="current_password" data-vv-as="&quot;{{ __('admin::app.account.current-password') }}&quot;"/>
                             <span class="control-error" v-if="errors.has('current_password')">@{{ errors.first('current_password') }}</span>
                         </div>

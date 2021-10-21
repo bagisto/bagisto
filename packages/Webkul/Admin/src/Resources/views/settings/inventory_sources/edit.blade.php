@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.inventory_sources.index') }}'"></i>
 
                         {{ __('admin::app.settings.inventory_sources.edit-title') }}
                     </h1>
@@ -69,11 +69,11 @@
 
                             <div class="control-group">
                                 <label for="status">{{ __('admin::app.settings.inventory_sources.status') }}</label>
-                                <span class="checkbox">
+
+                                <label class="switch">
                                     <input type="checkbox" id="status" name="status" value="{{ $inventorySource->status }}" {{ $inventorySource->status ? 'checked' : '' }}>
-                                    <label class="checkbox-view" for="status"></label>
-                                    {{ __('admin::app.settings.inventory_sources.source-is-active') }}
-                                </span>
+                                    <span class="slider round"></span>
+                                </label>
                             </div>
 
                         </div>

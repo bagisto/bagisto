@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'security-warning' => 'Suspicious Activity Found!!!',
+    'invalid_vat_format' => 'The given vat id has a wrong format',
+    'security-warning' => 'Suspicious activity found!!!',
     'nothing-to-delete' => 'Nothing to delete',
 
     'layouts' => [
@@ -11,18 +12,20 @@ return [
         'reviews' => 'Reviews',
         'wishlist' => 'Wishlist',
         'orders' => 'Orders',
+        'downloadable-products' => 'Downloadable Products'
     ],
 
     'common' => [
         'error' => 'Something went wrong, please try again later.',
+        'image-upload-limit' => 'Image max upload size is 2MB',
         'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [
-        'page-title' => 'Bagisto - Home',
+        'page-title' => config('app.name') . ' - Home',
         'featured-products' => 'Featured Products',
         'new-products' => 'New Products',
-        'verify-email' => 'Verify Your Email Account',
+        'verify-email' => 'Verify your email account',
         'resend-verify-email' => 'Resend Verification Email'
     ],
 
@@ -57,26 +60,28 @@ return [
     'subscription' => [
         'unsubscribe' => 'Unsubcribe',
         'subscribe' => 'Subscribe',
-        'subscribed' => 'You Are Now Subscribed To Subscription Emails',
-        'not-subscribed' => 'You Cannot Be Subscribed To Subscription Emails, Try Again After Some time',
-        'already' => 'You Are Already Subscribed To Our Subscription List',
-        'unsubscribed' => 'You Are Unsubscribed From Bagisto Subscription Mails',
-        'already-unsub' => 'You Are Already Unsubscribed',
-        'not-subscribed' => 'Error! Mail Cannot Be Sent Currently, Please Try Again Later'
+        'subscribed' => 'You are now subscribed to subscription emails.',
+        'not-subscribed' => 'You can not be subscribed to subscription emails, please try again later.',
+        'already' => 'You are already subscribed to our subscription list.',
+        'unsubscribed' => 'You are unsubscribed from subscription mails.',
+        'already-unsub' => 'You are already unsubscribed.',
+        'not-subscribed' => 'Error! Mail can not be sent currently, please try again later.'
     ],
 
     'search' => [
         'no-results' => 'No Results Found',
-        'page-title' => 'Bagisto - Search',
+        'page-title' => config('app.name') . ' - Search',
         'found-results' => 'Search Results Found',
-        'found-result' => 'Search Result Found'
+        'found-result' => 'Search Result Found',
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
         'title' => 'Title',
         'add-review-page-title' => 'Add Review',
         'write-review' => 'Write a review',
-        'review-title' => 'Give Your Review a Title',
+        'review-title' => 'Give your review a title',
         'product-review-page-title' => 'Product Review',
         'rating-reviews' => 'Rating & Reviews',
         'submit' => 'SUBMIT',
@@ -85,17 +90,30 @@ return [
         'star' => 'Star',
         'percentage' => ':percentage %',
         'id-star' => 'star',
-        'name' => 'Name'
+        'name' => 'Name',
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => 'Compare',
+            'compare_similar_items' => 'Compare Similar Items',
+            'add-tooltip'           => 'Add product to compare list',
+            'added'                 => 'Item successfully added to compare list',
+            'already_added'         => 'Item already added to compare list',
+            'removed'               => 'Item successfully removed from compare list',
+            'removed-all'           => 'All items successfully removed from compare list',
+            'empty-text'            => "You don't have any items in your compare list",
+            'product_image'         => 'Product Image',
+            'actions'               => 'Actions',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Already have an account',
             'title' => 'Sign In'
         ],
 
         'signup-form' => [
-            'page-title' => 'Customer - Registration Form',
+            'page-title' => 'Create New Customer Account',
             'title' => 'Sign Up',
             'firstname' => 'First Name',
             'lastname' => 'Last Name',
@@ -108,16 +126,17 @@ return [
             'conditions' => 'Conditions',
             'using' => 'by using this website',
             'agreement' => 'Agreement',
-            'success' => 'Account Created Successfully',
-            'success-verify' => 'Account Created Successfully, an e-mail has been sent for verification.',
-            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent',
-            'failed' => 'Error! Cannot Create Your Account, Try Again Later',
-            'already-verified' => 'Your Account is already verified Or Please Try Sending A New Verification Email Again',
-            'verification-not-sent' => 'Error! Problem In Sending Verification Email, Try Again Later',
-            'verification-sent' => 'Verification Email Sent',
-            'verified' => 'Your Account Has Been Verified, Try To Login Now',
-            'verify-failed' => 'We Cannot Verify Your Mail Account',
-            'dont-have-account' => 'You Do Not Have Account With Us',
+            'subscribe-to-newsletter' => 'Subscribe to newsletter',
+            'success' => 'Account created successfully.',
+            'success-verify' => 'Account created successfully, an e-mail has been sent for verification.',
+            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent.',
+            'failed' => 'Error! Can not create your account, pleae try again later.',
+            'already-verified' => 'Your account is already verified Or please try sending a new verification email again.',
+            'verification-not-sent' => 'Error! Problem in sending verification email, please try again later.',
+            'verification-sent' => 'Verification email sent',
+            'verified' => 'Your account has been verified, try to login now.',
+            'verify-failed' => 'We cannot verify your mail account.',
+            'dont-have-account' => 'You do not have account with us.',
             'customer-registration' => 'Customer Registered Successfully'
         ],
 
@@ -127,7 +146,7 @@ return [
         ],
 
         'login-form' => [
-            'page-title' => 'Customer - Login',
+            'page-title' => 'Customer Login',
             'title' => 'Sign In',
             'email' => 'Email',
             'password' => 'Password',
@@ -135,17 +154,17 @@ return [
             'button_title' => 'Sign In',
             'remember' => 'Remember Me',
             'footer' => '© Copyright :year Webkul Software, All rights reserved',
-            'invalid-creds' => 'Please Check Your Credentials And Try Again',
-            'verify-first' => 'Verify Your Email Account First',
+            'invalid-creds' => 'Please check your credentials and try again.',
+            'verify-first' => 'Verify your email account first.',
             'not-activated' => 'Your activation seeks admin approval',
-            'resend-verification' => 'Resend Verification Mail Again'
+            'resend-verification' => 'Resend verification mail again'
         ],
 
         'forgot-password' => [
             'title' => 'Recover Password',
             'email' => 'Email',
-            'submit' => 'Submit',
-            'page_title' => 'Customer - Forgot Password Form'
+            'submit' => 'Send Password Reset Email',
+            'page_title' => 'Forgot your password ?'
         ],
 
         'reset-password' => [
@@ -158,23 +177,31 @@ return [
         ],
 
         'account' => [
-            'dashboard' => 'Customer - Edit Profile',
+            'dashboard' => 'Edit Profile',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'No',
+                'yes' => 'Yes',
+            ],
 
             'profile' => [
                 'index' => [
-                    'page-title' => 'Customer - Profile',
+                    'page-title' => 'Profile',
                     'title' => 'Profile',
                     'edit' => 'Edit',
                 ],
 
-                'edit-success' => 'Profile Updated Successfully',
-                'edit-fail' => 'Error! Profile Cannot Be Updated, Please Try Again Later',
-                'unmatch' => 'The Old Password Does Not Match',
+                'edit-success' => 'Profile updated successfully.',
+                'edit-fail' => 'Error! Profile cannot be updated, please try again later.',
+                'unmatch' => 'The old password does not match.',
 
                 'fname' => 'First Name',
                 'lname' => 'Last Name',
                 'gender' => 'Gender',
+                'other' => 'Other',
+                'male' => 'Male',
+                'female' => 'Female',
                 'dob' => 'Date Of Birth',
                 'phone' => 'Phone',
                 'email' => 'Email',
@@ -185,28 +212,34 @@ return [
 
                 'edit-profile' => [
                     'title' => 'Edit Profile',
-                    'page-title' => 'Customer - Edit Profile Form'
+                    'page-title' => 'Edit Profile'
                 ]
             ],
 
             'address' => [
                 'index' => [
-                    'page-title' => 'Customer - Address',
+                    'page-title' => 'Address',
                     'title' => 'Address',
                     'add' => 'Add Address',
                     'edit' => 'Edit',
-                    'empty' => 'You do not have any saved addresses here, please try to create it by clicking the link below',
+                    'empty' => 'You do not have any saved addresses here, please try to create it by clicking the add button.',
                     'create' => 'Create Address',
                     'delete' => 'Delete',
                     'make-default' => 'Make Default',
                     'default' => 'Default',
                     'contact' => 'Contact',
                     'confirm-delete' =>  'Do you really want to delete this address?',
-                    'default-delete' => 'Default Address Cannot Be Changed'
+                    'default-delete' => 'Default address cannot be changed.',
+                    'enter-password' => 'Enter Your Password.',
                 ],
 
                 'create' => [
-                    'page-title' => 'Customer - Add Address Form',
+                    'page-title' => 'Add Address',
+                    'company_name' => 'Company name',
+                    'first_name' => 'First name',
+                    'last_name' => 'Last name',
+                    'vat_id' => 'Vat id',
+                    'vat_help_note' => '[Note: Use Country Code with VAT Id. Eg. INV01234567891]',
                     'title' => 'Add Address',
                     'street-address' => 'Street Address',
                     'country' => 'Country',
@@ -221,27 +254,42 @@ return [
                 ],
 
                 'edit' => [
-                    'page-title' => 'Customer - Edit Address',
+                    'page-title' => 'Edit Address',
+                    'company_name' => 'Company name',
+                    'first_name' => 'First name',
+                    'last_name' => 'Last name',
+                    'vat_id' => 'Vat id',
                     'title' => 'Edit Address',
                     'street-address' => 'Street Address',
                     'submit' => 'Save Address',
-                    'success' => 'Address Updated Successfully.',
+                    'success' => 'Address updated successfully.',
                 ],
+
                 'delete' => [
-                    'success' => 'Address Successfully Deleted',
-                    'failure' => 'Address Cannot Be Deleted'
-                ]
+                    'success' => 'Address successfully deleted',
+                    'failure' => 'Address cannot be deleted',
+                    'wrong-password' => 'Wrong Password !'
+                ],
+
+                'default-address' => 'Default Address',
             ],
 
             'order' => [
                 'index' => [
-                    'page-title' => 'Customer - Orders',
+                    'page-title' => 'Orders',
                     'title' => 'Orders',
                     'order_id' => 'Order ID',
                     'date' => 'Date',
                     'status' => 'Status',
                     'total' => 'Total',
-                    'order_number' => 'Order Number'
+                    'order_number' => 'Order Number',
+                    'processing' => 'Processing',
+                    'completed' => 'Completed',
+                    'canceled' => 'Canceled',
+                    'closed' => 'Closed',
+                    'pending' => 'Pending',
+                    'pending-payment' => 'Pending Payment',
+                    'fraud' => 'Fraud'
                 ],
 
                 'view' => [
@@ -283,6 +331,8 @@ return [
                     'invoice-id' => 'Invoice Id',
                     'order-id' => 'Order Id',
                     'order-date' => 'Order Date',
+                    'invoice-date' => 'Invoice Date',
+                    'payment-terms' => 'Payment Terms',
                     'bill-to' => 'Bill to',
                     'ship-to' => 'Ship to',
                     'contact' => 'Contact',
@@ -290,18 +340,69 @@ return [
                     'individual-refund' => 'Refund #:refund_id',
                     'adjustment-refund' => 'Adjustment Refund',
                     'adjustment-fee' => 'Adjustment Fee',
+                    'cancel-btn-title' => 'Cancel',
+                    'tracking-number' => 'Tracking Number',
+                    'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
                 ]
+            ],
+
+            'wishlist' => [
+                'page-title' => 'Wishlist',
+                'title' => 'Wishlist',
+                'deleteall' => 'Delete All',
+                'moveall' => 'Move All Products To Cart',
+                'move-to-cart' => 'Move To Cart',
+                'error' => 'Cannot add product to wishlist due to unknown problems, please checkback later',
+                'add' => 'Item successfully added to wishlist',
+                'remove' => 'Item successfully removed from wishlist',
+                'add-wishlist-text'     => 'Add product to wishlist',
+                'remove-wishlist-text'  => 'Remove product from wishlist',
+                'moved' => 'Item successfully moved To cart',
+                'option-missing' => 'Product options are missing, so item can not be moved to the wishlist.',
+                'move-error' => 'Item cannot be moved to wishlist, Please try again later',
+                'success' => 'Item successfully added to wishlist',
+                'failure' => 'Item cannot be added to wishlist, Please try again later',
+                'already' => 'Item already present in your wishlist',
+                'removed' => 'Item successfully removed from wishlist',
+                'remove-fail' => 'Item cannot Be removed from wishlist, Please try again later',
+                'empty' => 'You do not have any items in your wishlist',
+                'remove-all-success' => 'All the items from your wishlist have been removed',
+            ],
+
+            'downloadable_products' => [
+                'title' => 'Downloadable Products',
+                'order-id' => 'Order Id',
+                'date' => 'Date',
+                'name' => 'Title',
+                'status' => 'Status',
+                'pending' => 'Pending',
+                'available' => 'Available',
+                'expired' => 'Expired',
+                'remaining-downloads' => 'Remaining Downloads',
+                'unlimited' => 'Unlimited',
+                'download-error' => 'Download link has been expired.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
                 'index' => [
                     'title' => 'Reviews',
-                    'page-title' => 'Customer - Reviews'
+                    'page-title' => 'Reviews',
+
                 ],
 
                 'view' => [
                     'page-tile' => 'Review #:id',
-                ]
+                ],
+
+                'delete' => [
+                    'confirmation-message' => 'Are you sure you want to delete this review?',
+                ],
+
+                'delete-all' => [
+                    'title' => 'Delete All',
+                    'confirmation-message' => 'Are you sure you want to delete all the reviews?',
+                ],
             ]
         ]
     ],
@@ -310,6 +411,7 @@ return [
         'layered-nav-title' => 'Shop By',
         'price-label' => 'As low as',
         'remove-filter-link-title' => 'Clear All',
+        'filter-to' => 'to',
         'sort-by' => 'Sort By',
         'from-a-z' => 'From A-Z',
         'from-z-a' => 'From Z-A',
@@ -334,6 +436,7 @@ return [
         'new' => 'New',
         'empty' => 'No products available in this category',
         'add-to-cart' => 'Add To Cart',
+        'book-now' => 'Book Now',
         'buy-now' => 'Buy Now',
         'whoops' => 'Whoops!',
         'quantity' => 'Quantity',
@@ -341,26 +444,24 @@ return [
         'out-of-stock' => 'Out Of Stock',
         'view-all' => 'View All',
         'select-above-options' => 'Please select above options first.',
-        'less-quantity' => 'Quantity can not be less than one.'
-    ],
-
-    'wishlist' => [
-        'title' => 'Wishlist',
-        'deleteall' => 'Delete All',
-        'moveall' => 'Move All Products To Cart',
-        'move-to-cart' => 'Move To Cart',
-        'error' => 'Cannot add product to wishlist due to unknown problems, please checkback later',
-        'add' => 'Item successfully added to wishlist',
-        'remove' => 'Item successfully removed from wishlist',
-        'moved' => 'Item successfully moved To cart',
-        'move-error' => 'Item cannot be moved to wishlist, Please try again later',
-        'success' => 'Item successfully added to wishlist',
-        'failure' => 'Item cannot be added to wishlist, Please try again later',
-        'already' => 'Item already present in your wishlist',
-        'removed' => 'Item successfully removed from wishlist',
-        'remove-fail' => 'Item cannot Be removed from wishlist, Please try again later',
-        'empty' => 'You do not have any items in your wishlist',
-        'remove-all-success' => 'All the items from your wishlist have been removed',
+        'less-quantity' => 'Quantity can not be less than one.',
+        'samples' => 'Samples',
+        'links' => 'Links',
+        'sample' => 'Sample',
+        'name' => 'Name',
+        'qty' => 'Qty',
+        'starting-at' => 'Starting at',
+        'customize-options' => 'Customize Options',
+        'choose-selection' => 'Choose a selection',
+        'your-customization' => 'Your Customization',
+        'total-amount' => 'Total Amount',
+        'none' => 'None',
+        'available-for-order' => 'Available for Order',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
+        'tax-inclusive' => 'Inclusive of all taxes'
     ],
 
     // 'reviews' => [
@@ -368,45 +469,55 @@ return [
     // ]
 
     'buynow' => [
-        'no-options' => 'Please Select Options Before Buying This Product'
+        'no-options' => 'Please select options before buying this product.'
     ],
-
 
     'checkout' => [
         'cart' => [
             'integrity' => [
-                'missing_fields' =>'Cart System Integrity Violation, Some Required Fields Missing',
-                'missing_options' =>'Cart System Integrity Violation, Options Are Missing For Configurable Product',
+                'missing_fields' => 'Some required fields missing for this product.',
+                'missing_options' => 'Options are missing for this product.',
+                'missing_links' => 'Downloadable links are missing for this product.',
+                'qty_missing' => 'Atleast one product should have more than 1 quantity.',
+                'qty_impossible' => 'Cannot add more than one of these products to cart.'
             ],
-            'create-error' => 'Encountered Some Issue While Making Cart Instance',
+            'create-error' => 'Encountered some issue while making cart instance.',
             'title' => 'Shopping Cart',
-            'empty' => 'Your Shopping Cart Is Empty',
+            'empty' => 'Your shopping cart is empty',
             'update-cart' => 'Update Cart',
             'continue-shopping' => 'Continue Shopping',
             'proceed-to-checkout' => 'Proceed To Checkout',
             'remove' => 'Remove',
             'remove-link' => 'Remove',
             'move-to-wishlist' => 'Move to Wishlist',
-            'move-to-wishlist-success' => 'Item Moved To Wishlist',
-            'move-to-wishlist-error' => 'Cannot Move Item To Wishlist, Please Try Again Later',
-            'add-config-warning' => 'Please Select Option Before Adding To Cart',
+            'move-to-wishlist-success' => 'Item moved to wishlist successfully.',
+            'move-to-wishlist-error' => 'Cannot move item to wishlist, please try again later.',
+            'add-config-warning' => 'Please select option before adding to cart.',
             'quantity' => [
                 'quantity' => 'Quantity',
-                'success' => 'Cart Item(s) Successfully Updated',
-                'illegal' => 'Quantity Cannot Be Lesser Than One',
-                'inventory_warning' => 'The Requested Quantity Is Not Available, Please Try Again Later',
-                'error' => 'Cannot Update The Item(s) At The Moment, Please Try Again Later'
+                'success' => 'Cart Item(s) successfully updated.',
+                'illegal' => 'Quantity cannot be lesser than one.',
+                'inventory_warning' => 'The requested quantity is not available, please try again later.',
+                'error' => 'Cannot update the item(s) at the moment, please try again later.'
             ],
+
             'item' => [
-                'error_remove' => 'No Items To Remove From The Cart',
-                'success' => 'Item Was Successfully Added To Cart',
-                'success-remove' => 'Item Was Removed Successfully From The Cart',
-                'error-add' => 'Item Cannot Be Added To Cart, Please Try Again Later',
+                'error_remove' => 'No items to remove from the cart.',
+                'success' => 'Item was successfully added to cart.',
+                'success-remove' => 'Item was removed successfully from the cart.',
+                'error-add' => 'Item cannot be added to cart, please try again later.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
-            'quantity-error' => 'Requested Quantity Is Not Available',
+            'quantity-error' => 'Requested quantity is not available.',
             'cart-subtotal' => 'Cart Subtotal',
             'cart-remove-action' => 'Do you really want to do this ?',
             'partial-cart-update' => 'Only some of the product(s) were updated',
+            'link-missing' => '',
+            'event' => [
+                'expired' => 'This event has been expired.'
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
@@ -415,8 +526,10 @@ return [
             'shipping' => 'Shipping',
             'payment' => 'Payment',
             'complete' => 'Complete',
+            'review' => 'Review',
             'billing-address' => 'Billing Address',
             'sign-in' => 'Sign In',
+            'company-name' => 'Company Name',
             'first-name' => 'First Name',
             'last-name' => 'Last Name',
             'email' => 'Email',
@@ -442,7 +555,7 @@ return [
             'contact' => 'Contact',
             'place-order' => 'Place Order',
             'new-address' => 'Add New Address',
-            'save_as_address' => 'Save as Address',
+            'save_as_address' => 'Save this address',
             'apply-coupon' => 'Apply Coupon',
             'amt-payable' => 'Amount Payable',
             'got' => 'Got',
@@ -454,7 +567,10 @@ return [
             'money-desc' => 'Money Transfer',
             'paypal-desc' => 'Paypal Standard',
             'free-desc' => 'This is a free shipping',
-            'flat-desc' => 'This is a flat rate'
+            'flat-desc' => 'This is a flat rate',
+            'password' => 'Password',
+            'login-exist-message' => 'You already have an account with us, Sign in or continue as guest.',
+            'enter-coupon-code' => 'Enter Coupon Code'
         ],
 
         'total' => [
@@ -468,9 +584,12 @@ return [
             'disc-amount' => 'Amount discounted',
             'new-grand-total' => 'New Grand Total',
             'coupon' => 'Coupon',
-            'coupon-applied' => 'Coupon Applied',
+            'coupon-applied' => 'Applied Coupon',
             'remove-coupon' => 'Remove Coupon',
-            'cannot-apply-coupon' => 'Cannot Apply Coupon'
+            'cannot-apply-coupon' => 'Cannot Apply Coupon',
+            'invalid-coupon' => 'Coupon code is invalid.',
+            'success-coupon' => 'Coupon code applied successfully.',
+            'coupon-apply-issue' => 'Coupon code can\'t be applied.'
         ],
 
         'success' => [
@@ -505,11 +624,20 @@ return [
             'final-summary' => 'Thanks for showing your interest in our store we will send you tracking number once it shipped',
             'help' => 'If you need any kind of help please contact us at :support_email',
             'thanks' => 'Thanks!',
+
+            'comment' => [
+                'subject' => 'New comment added to your order #:order_id',
+                'dear' => 'Dear :customer_name',
+                'final-summary' => 'Thanks for showing your interest in our store',
+                'help' => 'If you need any kind of help please contact us at :support_email',
+                'thanks' => 'Thanks!',
+            ],
+
             'cancel' => [
                 'subject' => 'Order Cancel Confirmation',
                 'heading' => 'Order Cancelled',
                 'dear' => 'Dear :customer_name',
-                'greeting' => 'You Order with order id #:order_id placed on :created_at has been cancelled',
+                'greeting' => 'Your Order with order id :order_id placed on :created_at has been cancelled',
                 'summary' => 'Summary of Order',
                 'shipping-address' => 'Shipping Address',
                 'billing-address' => 'Billing Address',
@@ -526,21 +654,32 @@ return [
                 'thanks' => 'Thanks!',
             ]
         ],
+
         'invoice' => [
-            'heading' => 'Your Invoice #:invoice_id for Order #:order_id',
+            'heading' => 'Your invoice #:invoice_id for Order #:order_id',
             'subject' => 'Invoice for your order #:order_id',
             'summary' => 'Summary of Invoice',
         ],
+
         'shipment' => [
             'heading' => 'Shipment #:shipment_id  has been generated for Order #:order_id',
-            'inventory-heading' => 'New Shipment #:shipment_id had been generated for Order #:order_id',
+            'inventory-heading' => 'New shipment #:shipment_id has been generated for Order #:order_id',
             'subject' => 'Shipment for your order #:order_id',
-            'inventory-subject' => 'New Shipment had been generated for Order #:order_id',
+            'inventory-subject' => 'New shipment has been generated for Order #:order_id',
             'summary' => 'Summary of Shipment',
             'carrier' => 'Carrier',
             'tracking-number' => 'Tracking Number',
-            'greeting' => 'An Order :order_id has been placed on :created_at',
+            'greeting' => 'An order :order_id has been placed on :created_at',
         ],
+
+        'refund' => [
+            'heading' => 'Your Refund #:refund_id for Order #:order_id',
+            'subject' => 'Refund for your order #:order_id',
+            'summary' => 'Summary of Refund',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee'
+        ],
+
         'forget-password' => [
             'subject' => 'Customer Reset Password',
             'dear' => 'Dear :name',
@@ -549,13 +688,21 @@ return [
             'final-summary' => 'If you did not request a password reset, no further action is required',
             'thanks' => 'Thanks!'
         ],
+
+        'update-password' => [
+            'subject' => 'Password Updated',
+            'dear' => 'Dear :name',
+            'info' => 'You are receiving this email because you have updated your password.',
+            'thanks' => 'Thanks!'
+        ],
+
         'customer' => [
             'new' => [
                 'dear' => 'Dear :customer_name',
                 'username-email' => 'UserName/Email',
                 'subject' => 'New Customer Registration',
                 'password' => 'Password',
-                'summary' => 'Your account has been created in bagisto.
+                'summary' => 'Your account has been created.
                 Your account details are below: ',
                 'thanks' => 'Thanks!',
             ],
@@ -564,13 +711,15 @@ return [
                 'subject' => 'New Customer Registration',
                 'customer-registration' => 'Customer Registered Successfully',
                 'dear' => 'Dear :customer_name',
-                'greeting' => 'Welcome and thank you for registering at Bagisto!',
+                'dear-admin' => 'Dear :admin_name',
+                'greeting' => 'Welcome and thank you for registering with us!',
+                'greeting-admin' => 'You have one new customer registration.',
                 'summary' => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
                 'thanks' => 'Thanks!',
             ],
 
             'verification' => [
-                'heading' => 'Bagisto - Email Verification',
+                'heading' => config('app.name') . ' - Email Verification',
                 'subject' => 'Verification Mail',
                 'verify' => 'Verify Your Account',
                 'summary' => 'This is the mail to verify that the email address you entered is yours.
@@ -579,9 +728,9 @@ return [
 
             'subscription' => [
                 'subject' => 'Subscription Email',
-                'greeting' => ' Welcome to Bagisto - Email Subscription',
+                'greeting' => ' Welcome to ' . config('app.name') . ' - Email Subscription',
                 'unsubscribe' => 'Unsubscribe',
-                'summary' => 'Thanks for putting me into your inbox. It’s been a while since you’ve read Bagisto email, and we don’t want to overwhelm your inbox. If you still do not want to receive
+                'summary' => 'Thanks for putting me into your inbox. It’s been a while since you’ve read ' . config('app.name') . ' email, and we don’t want to overwhelm your inbox. If you still do not want to receive
                 the latest email marketing news then for sure click the button below.'
             ]
         ]

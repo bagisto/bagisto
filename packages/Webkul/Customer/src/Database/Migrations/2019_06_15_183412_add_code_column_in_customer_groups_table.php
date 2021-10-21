@@ -26,7 +26,7 @@ class AddCodeColumnInCustomerGroupsTable extends Migration
     public function down()
     {
         Schema::table('customer_groups', function (Blueprint $table) {
-            //
+            $table->dropColumn('code');
         });
     }
 }

@@ -2,19 +2,12 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * Product Inventory Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductInventoryRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return mixed
      */
@@ -24,27 +17,21 @@ class ProductInventoryRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param mixed $product
-     * @return mixed
+     * @param  array  $data
+     * @param  Webkul\Product\Contracts\Product  $product
+     * @return void
      */
     public function saveInventories(array $data, $product)
     {
-        if ($product->type == 'configurable')
-            return;
-
         if (isset($data['inventories'])) {
             foreach ($data['inventories'] as $inventorySourceId => $qty) {
-                if (is_null($qty)) {
-                    $qty = 0;
-                }
+                $qty = is_null($qty) ? 0 : $qty;
 
                 $productInventory = $this->findOneWhere([
-                        'product_id' => $product->id,
-                        'inventory_source_id' => $inventorySourceId,
-                        'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
-                    ]);
-
+                    'product_id'          => $product->id,
+                    'inventory_source_id' => $inventorySourceId,
+                    'vendor_id'           => isset($data['vendor_id']) ? $data['vendor_id'] : 0,
+                ]);
 
                 if ($productInventory) {
                     $productInventory->qty = $qty;
@@ -52,13 +39,29 @@ class ProductInventoryRepository extends Repository
                     $productInventory->save();
                 } else {
                     $this->create([
-                            'qty' => $qty,
-                            'product_id' => $product->id,
-                            'inventory_source_id' => $inventorySourceId,
-                            'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
-                        ]);
+                        'qty'                 => $qty,
+                        'product_id'          => $product->id,
+                        'inventory_source_id' => $inventorySourceId,
+                        'vendor_id'           => isset($data['vendor_id']) ? $data['vendor_id'] : 0,
+                    ]);
                 }
             }
         }
+    }
+
+    /**
+     * Check if product inventories are already loaded. If already loaded then load from it.
+     *
+     * @return object
+     */
+    public function checkInLoadedProductInventories($product)
+    {
+        static $productInventories = [];
+
+        if (array_key_exists($product->id, $productInventories)) {
+            return $productInventories[$product->id];
+        }
+
+        return $productInventories[$product->id] = $product->inventories;
     }
 }

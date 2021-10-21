@@ -2,150 +2,122 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Checkout\Repositories\CartRepository;
-use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Customer\Repositories\WishlistRepository;
-use Illuminate\Support\Facades\Event;
 use Cart;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
+use Webkul\Checkout\Contracts\Cart as CartModel;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
-/**
- * Cart controller for the customer and guest users for adding and
- * removing the products in the cart.
- *
- * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CartController extends Controller
 {
+    /**
+     * Wishlist repository instance.
+     *
+     * @var \Webkul\Customer\Repositories\WishlistRepository
+     */
+    protected $wishlistRepository;
 
     /**
-     * Protected Variables that holds instances of the repository classes.
+     * Product repository instance.
      *
-     * @param Array $_config
-     * @param $cart
-     * @param $cartItem
-     * @param $customer
-     * @param $product
-     * @param $productView
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
-    protected $_config;
-
-    protected $cart;
-
-    protected $cartItem;
-
-    protected $customer;
-
-    protected $product;
-
-    protected $suppressFlash = false;
+    protected $productRepository;
 
     /**
-     * WishlistRepository Repository object
+     * Create a new controller instance.
      *
-     * @var array
+     * @param  \Webkul\Customer\Repositories\CartItemRepository  $wishlistRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @return void
      */
-    protected $wishlist;
-
     public function __construct(
-        CartRepository $cart,
-        CartItemRepository $cartItem,
-        CustomerRepository $customer,
-        ProductRepository $product,
-        WishlistRepository $wishlist
-    )
-    {
+        WishlistRepository $wishlistRepository,
+        ProductRepository $productRepository
+    ) {
+        $this->middleware('throttle:5,1')->only('applyCoupon');
 
-        $this->middleware('customer')->only(['moveToWishlist']);
+        $this->middleware('customer')->only('moveToWishlist');
 
-        $this->customer = $customer;
+        $this->wishlistRepository = $wishlistRepository;
 
-        $this->cart = $cart;
+        $this->productRepository = $productRepository;
 
-        $this->cartItem = $cartItem;
-
-        $this->product = $product;
-
-        $this->wishlist = $wishlist;
-
-        $this->_config = request('_config');
+        parent::__construct();
     }
 
     /**
      * Method to populate the cart page which will be populated before the checkout process.
      *
-     * @return Mixed
+     * @return \Illuminate\View\View
      */
     public function index()
     {
+        Cart::collectTotals();
+
         return view($this->_config['view'])->with('cart', Cart::getCart());
     }
 
     /**
      * Function for guests user to add the product in the cart.
      *
-     * @return Mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function add($id)
     {
         try {
-            Event::fire('checkout.cart.add.before', $id);
+            Cart::deactivateCurrentCartIfBuyNowIsActive();
 
-            $result = Cart::add($id, request()->except('_token'));
+            $result = Cart::addProduct($id, request()->all());
 
-            Event::fire('checkout.cart.add.after', $result);
-
-            Cart::collectTotals();
-
-            if ($result) {
-                session()->flash('success', trans('shop::app.checkout.cart.item.success'));
-
-                if (auth()->guard('customer')->user()) {
-                    $customer = auth()->guard('customer')->user();
-
-                    if (count($customer->wishlist_items)) {
-                        foreach ($customer->wishlist_items as $wishlist) {
-                            if ($wishlist->product_id == $id) {
-                                $this->wishlist->delete($wishlist->id);
-                            }
-                        }
-                    }
-                }
-
-                return redirect()->back();
-            } else {
-                session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
-
+            if ($this->onFailureAddingToCart($result)) {
                 return redirect()->back();
             }
 
-            return redirect()->route($this->_config['redirect']);
+            if ($result instanceof CartModel) {
+                session()->flash('success', __('shop::app.checkout.cart.item.success'));
 
-        } catch(\Exception $e) {
-            session()->flash('error', trans($e->getMessage()));
+                if ($customer = auth()->guard('customer')->user()) {
+                    $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
+                }
 
-            return redirect()->back();
+                if (request()->get('is_buy_now')) {
+                    Event::dispatch('shop.item.buy-now', $id);
+
+                    return redirect()->route('shop.checkout.onepage.index');
+                }
+            }
+        } catch (\Exception $e) {
+            session()->flash('warning', __($e->getMessage()));
+
+            $product = $this->productRepository->find($id);
+
+            Log::error(
+                'Shop CartController: ' . $e->getMessage(),
+                ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]
+            );
+
+            return redirect()->route('shop.productOrCategory.index', $product->url_key);
         }
+
+        return redirect()->back();
     }
 
     /**
-     * Removes the item from the cart if it exists
+     * Removes the item from the cart if it exists.
      *
-     * @param integer $itemId
+     * @param  int  $itemId
+     * @return \Illuminate\Http\Response
      */
     public function remove($itemId)
     {
-        Event::fire('checkout.cart.delete.before', $itemId);
+        $result = Cart::removeItem($itemId);
 
-        Cart::removeItem($itemId);
-
-        Event::fire('checkout.cart.delete.after', $itemId);
-
-        Cart::collectTotals();
+        if ($result) {
+            session()->flash('success', trans('shop::app.checkout.cart.item.success-remove'));
+        }
 
         return redirect()->back();
     }
@@ -153,48 +125,17 @@ class CartController extends Controller
     /**
      * Updates the quantity of the items present in the cart.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function updateBeforeCheckout()
     {
         try {
-            $request = request()->except('_token');
+            $result = Cart::updateItems(request()->all());
 
-            foreach ($request['qty'] as $id => $quantity) {
-                if ($quantity <= 0) {
-                    session()->flash('warning', trans('shop::app.checkout.cart.quantity.illegal'));
-
-                    return redirect()->back();
-                }
+            if ($result) {
+                session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
             }
-
-            foreach ($request['qty'] as $key => $value) {
-                $item = $this->cartItem->findOneByField('id', $key);
-
-                $data['quantity'] = $value;
-
-                Event::fire('checkout.cart.update.before', $item);
-
-                $result = Cart::updateItem($item->product_id, $data, $key);
-
-                if ($result == false) {
-                    $this->suppressFlash = true;
-                }
-
-                Event::fire('checkout.cart.update.after', $item);
-
-                unset($item);
-                unset($data);
-            }
-
-            Cart::collectTotals();
-
-            if ($this->suppressFlash) {
-                session()->forget('success');
-                session()->forget('warning');
-                session()->flash('info', trans('shop::app.checkout.cart.partial-cart-update'));
-            }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
         }
 
@@ -202,60 +143,95 @@ class CartController extends Controller
     }
 
     /**
-     * Add the configurable product
-     * to the cart.
+     * Function to move a already added product to wishlist will run only on customer authentication.
      *
-     * @return response
-     */
-    public function addConfigurable($slug)
-    {
-        session()->flash('warning', trans('shop::app.checkout.cart.add-config-warning'));
-        return redirect()->route('shop.products.index', $slug);
-    }
-
-    public function buyNow($id, $quantity = 1)
-    {
-        try {
-            Event::fire('checkout.cart.add.before', $id);
-
-            $result = Cart::proceedToBuyNow($id, $quantity);
-
-            Event::fire('checkout.cart.add.after', $result);
-
-            Cart::collectTotals();
-
-            if (! $result) {
-                return redirect()->back();
-            } else {
-                return redirect()->route('shop.checkout.onepage.index');
-            }
-        } catch(\Exception $e) {
-            session()->flash('error', trans($e->getMessage()));
-
-            return redirect()->back();
-        }
-    }
-
-    /**
-     * Function to move a already added product to wishlist
-     * will run only on customer authentication.
-     *
-     * @param instance cartItem $id
+     * @param  int  $id
+     * @return mixed
      */
     public function moveToWishlist($id)
     {
         $result = Cart::moveToWishlist($id);
 
-        if (! $result) {
-            Cart::collectTotals();
-
-            session()->flash('success', trans('shop::app.wishlist.moved'));
-
-            return redirect()->back();
+        if ($result) {
+            session()->flash('success', trans('shop::app.checkout.cart.move-to-wishlist-success'));
         } else {
-            session()->flash('warning', trans('shop::app.wishlist.move-error'));
-
-            return redirect()->back();
+            session()->flash('warning', trans('shop::app.checkout.cart.move-to-wishlist-error'));
         }
+
+        return request()->get('redirect') !== false
+            ? redirect()->back()
+            : response()->json([]);
+    }
+
+    /**
+     * Apply coupon to the cart.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function applyCoupon()
+    {
+        $couponCode = request()->get('code');
+
+        try {
+            if (strlen($couponCode)) {
+                Cart::setCouponCode($couponCode)->collectTotals();
+
+                if (Cart::getCart()->coupon_code == $couponCode) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => trans('shop::app.checkout.total.success-coupon'),
+                    ]);
+                }
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.total.invalid-coupon'),
+            ]);
+        } catch (\Exception $e) {
+            report($e);
+
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.total.coupon-apply-issue'),
+            ]);
+        }
+    }
+
+    /**
+     * Remove applied coupon from the cart.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function removeCoupon()
+    {
+        Cart::removeCouponCode()->collectTotals();
+
+        return response()->json([
+            'success' => true,
+            'message' => trans('shop::app.checkout.total.remove-coupon'),
+        ]);
+    }
+
+    /**
+     * Returns true, if result of adding product to cart
+     * is an array and contains a key "warning" or "info".
+     *
+     * @param  array  $result
+     * @return boolean
+     */
+    private function onFailureAddingToCart($result): bool
+    {
+        if (is_array($result) && isset($result['warning'])) {
+            session()->flash('warning', $result['warning']);
+            return true;
+        }
+
+        if (is_array($result) && isset($result['info'])) {
+            session()->flash('info', $result['info']);
+            return true;
+        }
+
+        return false;
     }
 }

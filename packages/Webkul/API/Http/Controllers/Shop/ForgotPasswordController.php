@@ -4,13 +4,8 @@ namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
+use Webkul\Customer\Http\Requests\CustomerForgotPasswordRequest;
 
-/**
- * Forgot Password controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ForgotPasswordController extends Controller
 {
     use SendsPasswordResetEmails;
@@ -20,22 +15,18 @@ class ForgotPasswordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(CustomerForgotPasswordRequest $request)
     {
-        $this->validate(request(), [
-            'email' => 'required|email'
-        ]);
+        $request->validated();
 
-        $response = $this->broker()->sendResetLink(request(['email']));
+        $response = $this->broker()->sendResetLink($request->only(['email']));
 
-        if ($response == Password::RESET_LINK_SENT) {
-            return response()->json([
-                    'message' => trans($response)
-                ]);
-        }
-
-        return response()->json([
-                'error' => trans($response)
+        return $response == Password::RESET_LINK_SENT
+            ? response()->json([
+                'message' => trans($response),
+            ])
+            : response()->json([
+                'error' => trans($response),
             ]);
     }
 

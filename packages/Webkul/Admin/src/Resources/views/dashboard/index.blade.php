@@ -125,6 +125,16 @@
                     </div>
                 </div>
 
+                <div class="dashboard-card">
+                    <div class="title">
+                        {{ __('admin::app.dashboard.total-unpaid-invoices') }}
+                    </div>
+
+                    <div class="data">
+                        {{ core()->formatBasePrice($statistics['total_unpaid_invoices']) }}
+                    </div>
+                </div>
+
             </div>
 
             <div class="graph-stats">
@@ -164,7 +174,7 @@
                                                 <div class="info">
                                                     {{ __('admin::app.dashboard.product-count', ['count' => $item->total_products]) }}
                                                     &nbsp;.&nbsp;
-                                                    {{ __('admin::app.dashboard.sale-count', ['count' => $item->total_qty_ordered]) }}
+                                                    {{ __('admin::app.dashboard.sale-count', ['count' => $item->total_qty_invoiced]) }}
                                                 </div>
                                             </div>
 
@@ -192,8 +202,6 @@
 
             </div>
 
-            @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
             <div class="sale-stock">
                 <div class="card">
                     <div class="card-title">
@@ -208,20 +216,20 @@
                                 <li>
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
                                         <div class="product image">
-                                            <?php $productBaseImage = $productImageHelper->getProductBaseImage($item->product); ?>
+                                            <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
 
-                                            <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
+                                            <img class="item-image" src="{{ $productBaseImage['small_image_url'] ?? asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.webp') }}" />
                                         </div>
 
-                                        <div class="description">
-                                            <div class="name">
+                                        <div class="description do-not-cross-arrow">
+                                            <div class="name ellipsis">
                                                 @if (isset($item->name))
                                                     {{ $item->name }}
                                                 @endif
                                             </div>
 
                                             <div class="info">
-                                                {{ __('admin::app.dashboard.sale-count', ['count' => $item->total_qty_ordered]) }}
+                                                {{ __('admin::app.dashboard.sale-count', ['count' => $item->total_qty_invoiced]) }}
                                             </div>
                                         </div>
 
@@ -265,8 +273,8 @@
                                             <span class="icon profile-pic-icon"></span>
                                         </div>
 
-                                        <div class="description">
-                                            <div class="name">
+                                        <div class="description do-not-cross-arrow">
+                                            <div class="name ellipsis">
                                                 {{ $item->customer_full_name }}
                                             </div>
 
@@ -318,13 +326,13 @@
                                 <li>
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
                                         <div class="image">
-                                            <?php $productBaseImage = $productImageHelper->getProductBaseImage($item->product); ?>
+                                            <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
 
                                             <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
                                         </div>
 
-                                        <div class="description">
-                                            <div class="name">
+                                        <div class="description do-not-cross-arrow">
+                                            <div class="name ellipsis">
                                                 @if (isset($item->product->name))
                                                     {{ $item->product->name }}
                                                 @endif
@@ -369,11 +377,11 @@
     <script type="text/x-template" id="date-filter-template">
         <div>
             <div class="control-group date">
-                <date @onChange="applyFilter('start', $event)"><input type="text" class="control" id="start_date" value="{{ $startDate->format('Y-m-d') }}" placeholder="{{ __('admin::app.dashboard.from') }}" v-model="start"/></date>
+                <date @onChange="applyFilter('start', $event)" hide-remove-button="1"><input type="text" class="control" id="start_date" value="{{ $startDate->format('Y-m-d') }}" placeholder="{{ __('admin::app.dashboard.from') }}" v-model="start"/></date>
             </div>
 
             <div class="control-group date">
-                <date @onChange="applyFilter('end', $event)"><input type="text" class="control" id="end_date" value="{{ $endDate->format('Y-m-d') }}" placeholder="{{ __('admin::app.dashboard.to') }}" v-model="end"/></date>
+                <date @onChange="applyFilter('end', $event)" hide-remove-button="1"><input type="text" class="control" id="end_date" value="{{ $endDate->format('Y-m-d') }}" placeholder="{{ __('admin::app.dashboard.to') }}" v-model="end"/></date>
             </div>
         </div>
     </script>

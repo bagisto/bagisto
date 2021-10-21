@@ -11,7 +11,30 @@ return [
         'select-options' => 'Precisa selecionar opções antes de adicionar à lista de desejos',
         'remove-all-success' => 'Todos os itens da sua lista de desejos foram removidos',
     ],
+
     'reviews' => [
-        'empty' => 'Você não avaliou nenhum produto ainda'
-    ]
+        'empty' => 'Você não avaliou nenhum produto ainda',
+    ],
+
+    'forget_password' => [
+        'reset_link_sent' => 'Enviamos por e-mail o link de redefinição de senha.',
+        'email_not_exist' => "Não conseguimos encontrar um usuário com esse endereço de e-mail",
+    ],
+
+    'admin' => [
+        'system' => [
+            'captcha' => [
+                'title' => 'Captcha',
+                'credentials' => 'Credenciais',
+                'site-key' => 'Chave do Site',
+                'secret-key' => 'Chave secreta',
+                'status' => 'Status',
+
+                'validations' => [
+                    'required' => 'Selecione CAPTCHA',
+                    'captcha' => 'Algo deu errado! Por favor, tente novamente.',
+                ]
+            ],
+        ],
+    ],
 ];

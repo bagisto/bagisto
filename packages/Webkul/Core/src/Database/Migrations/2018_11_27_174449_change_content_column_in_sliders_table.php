@@ -25,8 +25,6 @@ class ChangeContentColumnInSlidersTable extends Migration
      */
     public function down()
     {
-        Schema::table('sliders', function (Blueprint $table) {
-            $table->string('content')->change();
-        });
+        //
     }
 }

@@ -3,23 +3,20 @@
 namespace Webkul\Checkout\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
-use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Checkout\Providers\ComposerServiceProvider;
 
 class CheckoutServiceProvider extends ServiceProvider
 {
-
-    public function boot(Router $router)
+    public function boot(): void
     {
         include __DIR__ . '/../Http/helpers.php';
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->app->register(ModuleServiceProvider::class);
+
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**
@@ -27,7 +24,7 @@ class CheckoutServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->registerFacades();
     }
@@ -37,7 +34,7 @@ class CheckoutServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerFacades()
+    protected function registerFacades(): void
     {
         //to make the cart facade and bind the
         //alias to the class needed to be called.

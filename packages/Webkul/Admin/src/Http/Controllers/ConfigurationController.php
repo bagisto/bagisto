@@ -2,60 +2,54 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Facades\Configuration;
-use Webkul\Core\Repositories\CoreConfigRepository as CoreConfig;
 use Webkul\Core\Tree;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Admin\Http\Requests\ConfigurationForm;
+use Webkul\Core\Repositories\CoreConfigRepository;
 
-/**
- * Configuration controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ConfigurationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @var \Illuminate\Http\Response
      */
     protected $_config;
 
     /**
-     * CoreConfigRepository object
+     * Core config repository instance.
      *
-     * @var array
+     * @var \Webkul\Core\Repositories\CoreConfigRepository
      */
-    protected $coreConfig;
+    protected $coreConfigRepository;
 
     /**
+     * Tree instance.
      *
-     * @var array
+     * @var \Webkul\Core\Tree
      */
     protected $configTree;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\CoreConfigRepository  $coreConfig
+     * @param  \Webkul\Core\Repositories\CoreConfigRepository  $coreConfigRepository
      * @return void
      */
-    public function __construct(CoreConfig $coreConfig)
+    public function __construct(CoreConfigRepository $coreConfigRepository)
     {
         $this->middleware('admin');
 
-        $this->coreConfig = $coreConfig;
+        $this->coreConfigRepository = $coreConfigRepository;
 
         $this->_config = request('_config');
 
         $this->prepareConfigTree();
-
     }
 
     /**
-     * Prepares config tree
+     * Prepares config tree.
      *
      * @return void
      */
@@ -75,7 +69,7 @@ class ConfigurationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -89,7 +83,7 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Returns slugs
+     * Returns slugs.
      *
      * @return array
      */
@@ -114,16 +108,16 @@ class ConfigurationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Webkul\Admin\Http\Requests\ConfigurationForm $request
+     * @param  \Webkul\Admin\Http\Requests\ConfigurationForm  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(ConfigurationForm $request)
     {
-        Event::fire('core.configuration.save.before');
+        Event::dispatch('core.configuration.save.before');
 
-        $this->coreConfig->create(request()->all());
+        $this->coreConfigRepository->create($request->except(['_token', 'admin_locale']));
 
-        Event::fire('core.configuration.save.after');
+        Event::dispatch('core.configuration.save.after');
 
         session()->flash('success', trans('admin::app.configuration.save-message'));
 
@@ -131,7 +125,7 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * download the file for the specified resource.
+     * Download the file for the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -139,16 +133,17 @@ class ConfigurationController extends Controller
     {
         $path = request()->route()->parameters()['path'];
 
-        $fileName = 'configuration/'. $path;
+        $fileName = 'configuration/' . $path;
 
-        $config = $this->coreConfig->findOneByField('value', $fileName);
+        $config = $this->coreConfigRepository->findOneByField('value', $fileName);
 
         return Storage::download($config['value']);
     }
 
     /**
-     * @param $secondItem
+     * Get slugs.
      *
+     * @param  string  $secondItem
      * @return array
      */
     private function getSlugs($secondItem): array

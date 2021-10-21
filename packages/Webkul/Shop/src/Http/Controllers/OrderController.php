@@ -2,92 +2,80 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use PDF;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
-use Auth;
-use PDF;
 
-/**
- * Customer controlller for the customer basically for the tasks of customers
- * which will be done after customer authenticastion.
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class OrderController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
+     * Current customer.
      */
-    protected $_config;
+    protected $currentCustomer;
 
     /**
      * OrderrRepository object
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
-    protected $order;
+    protected $orderRepository;
 
     /**
      * InvoiceRepository object
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
-    protected $invoice;
+    protected $invoiceRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Order\Repositories\OrderRepository   $order
-     * @param  \Webkul\Order\Repositories\InvoiceRepository $invoice
+     * @param  \Webkul\Order\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Order\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(
-        OrderRepository $order,
-        InvoiceRepository $invoice
+        OrderRepository $orderRepository,
+        InvoiceRepository $invoiceRepository
     )
     {
         $this->middleware('customer');
 
-        $this->_config = request('_config');
+        $this->currentCustomer = auth()->guard('customer')->user();
 
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
 
-        $this->invoice = $invoice;
+        $this->invoiceRepository = $invoiceRepository;
+
+        parent::__construct();
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
     */
-    public function index() {
-        $orders = $this->order->findWhere([
-            'customer_id' => auth()->guard('customer')->user()->id
-        ]);
-
-        return view($this->_config['view'], compact('orders'));
+    public function index()
+    {
+        return view($this->_config['view']);
     }
 
     /**
      * Show the view for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function view($id)
     {
-        $order = $this->order->findOneWhere([
-            'customer_id' => auth()->guard('customer')->user()->id,
-            'id' => $id
+        $order = $this->orderRepository->findOneWhere([
+            'customer_id' => $this->currentCustomer->id,
+            'id'          => $id,
         ]);
 
-        if (! $order)
+        if (! $order) {
             abort(404);
+        }
 
         return view($this->_config['view'], compact('order'));
     }
@@ -100,10 +88,41 @@ class OrderController extends Controller
      */
     public function print($id)
     {
-        $invoice = $this->invoice->findOrFail($id);
+        $invoice = $this->invoiceRepository->findOrFail($id);
+
+        if ($invoice->order->customer_id !== $this->currentCustomer->id) {
+            abort(404);
+        }
 
         $pdf = PDF::loadView('shop::customers.account.orders.pdf', compact('invoice'))->setPaper('a4');
 
         return $pdf->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
+    }
+
+    /**
+     * Cancel action for the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function cancel($id)
+    {
+        /* find by order id in customer's order */
+        $order = $this->currentCustomer->all_orders()->find($id);
+
+        /* if order id not found then process should be aborted with 404 page */
+        if (! $order) {
+            abort(404);
+        }
+
+        $result = $this->orderRepository->cancel($order);
+
+        if ($result) {
+            session()->flash('success', trans('admin::app.response.cancel-success', ['name' => 'Order']));
+        } else {
+            session()->flash('error', trans('admin::app.response.cancel-error', ['name' => 'Order']));
+        }
+
+        return redirect()->back();
     }
 }

@@ -3,25 +3,32 @@
 namespace Webkul\Core\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
-use Dimsav\Translatable\Translatable;
+use Astrotomic\Translatable\Translatable;
 use Webkul\Core\Models\Locale;
+use Webkul\Core\Helpers\Locales;
 
 class TranslatableModel extends Model
 {
     use Translatable;
 
+    protected function getLocalesHelper(): Locales
+    {
+        return app(Locales::class);
+    }
+
     /**
-     * @param string $key
-     *
+     * @param  string  $key
      * @return bool
      */
     protected function isKeyALocale($key)
     {
         $chunks = explode('-', $key);
+
         if (count($chunks) > 1) {
-            if (Locale::where('code', '=', end($chunks))->first())
+            if (Locale::where('code', '=', end($chunks))->first()) {
                 return true;
-        } else if (Locale::where('code', '=', $key)->first()) {
+            }
+        } elseif (Locale::where('code', '=', $key)->first()) {
             return true;
         }
 
@@ -40,13 +47,12 @@ class TranslatableModel extends Model
                 return $this->defaultLocale;
             }
 
-            return config('translatable.locale')
-                ?: app()->make('translator')->getLocale();
+            return config('translatable.locale') ?: app()->make('translator')->getLocale();
         }
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     protected function isChannelBased()
     {

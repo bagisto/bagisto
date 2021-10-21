@@ -21,10 +21,10 @@ if (! function_exists('view_render_event')) {
     {
         app()->singleton(ViewRenderEventManager::class);
 
-        $viewEventMagnager = app()->make(ViewRenderEventManager::class);
+        $viewEventManager = app()->make(ViewRenderEventManager::class);
 
-        $viewEventMagnager->handleRenderEvent($eventName, $params);
+        $viewEventManager->handleRenderEvent($eventName, $params);
 
-        return $viewEventMagnager->render();
+        return $viewEventManager->render();
     }
 }

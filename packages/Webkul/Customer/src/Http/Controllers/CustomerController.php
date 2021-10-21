@@ -2,73 +2,77 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Repositories\ProductReviewRepository as ProductReview;
-use Webkul\Customer\Models\Customer;
-use Auth;
 use Hash;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
+use Webkul\Shop\Mail\SubscriptionEmail;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Core\Repositories\SubscribersListRepository;
 
-/**
- * Customer controlller for the customer basically for the tasks of customers which will be
- * done after customer authentication.
- *
- * @author  Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CustomerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Contains route related configuration
      *
-     * @return \Illuminate\Http\Response
+     * @var array
      */
     protected $_config;
 
     /**
      * CustomerRepository object
      *
-     * @var array
-    */
-    protected $customer;
+     * @var \Webkul\Customer\Repositories\CustomerRepository
+     */
+    protected $customerRepository;
 
     /**
      * ProductReviewRepository object
      *
-     * @var array
-    */
-    protected $productReview;
+     * @var \Webkul\Customer\Repositories\ProductReviewRepository
+     */
+    protected $productReviewRepository;
 
     /**
-     * Create a new Repository instance.
+     * SubscribersListRepository
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository     $customer
-     * @param  \Webkul\Product\Repositories\ProductReviewRepository $productReview
+     * @var \Webkul\Core\Repositories\SubscribersListRepository
+     */
+    protected $subscriptionRepository;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
+     * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscriptionRepository
      * @return void
-    */
+     */
     public function __construct(
-        CustomerRepository $customer,
-        ProductReview $productReview
+        CustomerRepository $customerRepository,
+        ProductReviewRepository $productReviewRepository,
+        SubscribersListRepository $subscriptionRepository
     )
     {
         $this->middleware('customer');
 
         $this->_config = request('_config');
 
-        $this->customer = $customer;
+        $this->customerRepository = $customerRepository;
 
-        $this->productReview = $productReview;
+        $this->productReviewRepository = $productReviewRepository;
+
+        $this->subscriptionRepository = $subscriptionRepository;
     }
 
     /**
      * Taking the customer to profile details page
      *
-     * @return View
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        $customer = $this->customer->find(auth()->guard('customer')->user()->id);
+        $customer = $this->customerRepository->find(auth()->guard('customer')->user()->id);
 
         return view($this->_config['view'], compact('customer'));
     }
@@ -76,11 +80,11 @@ class CustomerController extends Controller
     /**
      * For loading the edit form page.
      *
-     * @return View
+     * @return \Illuminate\View\View
      */
     public function edit()
     {
-        $customer = $this->customer->find(auth()->guard('customer')->user()->id);
+        $customer = $this->customerRepository->find(auth()->guard('customer')->user()->id);
 
         return view($this->_config['view'], compact('customer'));
     }
@@ -88,41 +92,95 @@ class CustomerController extends Controller
     /**
      * Edit function for editing customer profile.
      *
-     * @return Redirect.
+     * @return \Illuminate\Http\Response
      */
     public function update()
     {
+        $isPasswordChanged = false;
         $id = auth()->guard('customer')->user()->id;
 
         $this->validate(request(), [
-            'first_name' => 'string',
-            'last_name' => 'string',
-            'gender' => 'required',
-            'date_of_birth' => 'date|before:today',
-            'email' => 'email|unique:customers,email,'.$id,
-            'oldpassword' => 'required_with:password',
-            'password' => 'confirmed|min:6'
+            'first_name'            => 'required|string',
+            'last_name'             => 'required|string',
+            'gender'                => 'required',
+            'date_of_birth'         => 'date|before:today',
+            'email'                 => 'email|unique:customers,email,' . $id,
+            'password'              => 'confirmed|min:6|required_with:oldpassword',
+            'oldpassword'           => 'required_with:password',
+            'password_confirmation' => 'required_with:password',
+            'image.*'               => 'mimes:bmp,jpeg,jpg,png,webp'
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
 
-        if ($data['date_of_birth'] == "") {
+        if (isset ($data['date_of_birth']) && $data['date_of_birth'] == "") {
             unset($data['date_of_birth']);
         }
 
-        if ($data['oldpassword'] != "" || $data['oldpassword'] != null) {
-            if(Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
-                $data['password'] = bcrypt($data['password']);
-            } else {
-                session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
+        $data['subscribed_to_news_letter'] = isset($data['subscribed_to_news_letter']) ? 1 : 0;
 
-                return redirect()->back();
+        if (isset ($data['oldpassword'])) {
+            if ($data['oldpassword'] != "" || $data['oldpassword'] != null) {
+                if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
+                    $isPasswordChanged = true;
+
+                    $data['password'] = bcrypt($data['password']);
+                } else {
+                    session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
+
+                    return redirect()->back();
+                }
+            } else {
+                unset($data['password']);
             }
-        } else {
-            unset($data['password']);
         }
 
-        if ($this->customer->update($data, $id)) {
+        Event::dispatch('customer.update.before');
+
+        if ($customer = $this->customerRepository->update($data, $id)) {
+            if ($isPasswordChanged) {
+                Event::dispatch('user.admin.update-password', $customer);
+            }
+
+            Event::dispatch('customer.update.after', $customer);
+
+            if ($data['subscribed_to_news_letter']) {
+                $subscription = $this->subscriptionRepository->findOneWhere(['email' => $data['email']]);
+
+                if ($subscription) {
+                    $this->subscriptionRepository->update([
+                        'customer_id'   => $customer->id,
+                        'is_subscribed' => 1,
+                    ], $subscription->id);
+                } else {
+                    $this->subscriptionRepository->create([
+                        'email'         => $data['email'],
+                        'customer_id'   => $customer->id,
+                        'channel_id'    => core()->getCurrentChannel()->id,
+                        'is_subscribed' => 1,
+                        'token'         => $token = uniqid(),
+                    ]);
+
+                    try {
+                        Mail::queue(new SubscriptionEmail([
+                            'email' => $data['email'],
+                            'token' => $token,
+                        ]));
+                    } catch (\Exception $e) { }
+                }
+            } else {
+                $subscription = $this->subscriptionRepository->findOneWhere(['email' => $data['email']]);
+
+                if ($subscription) {
+                    $this->subscriptionRepository->update([
+                        'customer_id'   => $customer->id,
+                        'is_subscribed' => 0,
+                    ], $subscription->id);
+                }
+            }
+
+            $this->customerRepository->uploadImages($data, $customer);
+
             Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
             return redirect()->route($this->_config['redirect']);
@@ -136,37 +194,52 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $id = auth()->guard('customer')->user()->id;
 
-        $customer = $this->customer->findorFail($id);
+        $data = request()->all();
+
+        $customerRepository = $this->customerRepository->findorFail($id);
 
         try {
-            $this->customer->delete($id);
+            if (Hash::check($data['password'], $customerRepository->password)) {
+                $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+                if ($orders) {
+                    session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customer']));
 
-            return redirect()->route($this->_config['redirect']);
-        } catch(\Exception $e) {
+                    return redirect()->route($this->_config['redirect']);
+                } else {
+                    $this->customerRepository->delete($id);
+
+                    session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+
+                    return redirect()->route('customer.session.index');
+                }
+            } else {
+                session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
+
+                return redirect()->back();
+            }
+        } catch (\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
 
             return redirect()->route($this->_config['redirect']);
         }
     }
 
-
     /**
      * Load the view for the customer account panel, showing approved reviews.
      *
-     * @return Mixed
+     * @return \Illuminate\View\View
      */
     public function reviews()
     {
-        $reviews = auth()->guard('customer')->user()->all_reviews;
+        $reviews = $this->productReviewRepository->getCustomerReview();
 
         return view($this->_config['view'], compact('reviews'));
     }

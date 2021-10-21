@@ -28,7 +28,9 @@ class AddDiscountColumnsInInvoiceItemsTable extends Migration
     public function down()
     {
         Schema::table('invoice_items', function (Blueprint $table) {
-            //
+            $table->dropColumn('discount_percent');
+            $table->dropColumn('discount_amount');
+            $table->dropColumn('base_discount_amount');
         });
     }
 }
