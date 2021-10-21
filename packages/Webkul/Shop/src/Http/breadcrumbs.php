@@ -73,7 +73,7 @@ Breadcrumbs::for('customer.reviews.index', function (BreadcrumbTrail $trail) {
  */
 Breadcrumbs::for('customer.address.index', function (BreadcrumbTrail $trail) {
     $trail->parent('customer.profile.index');
-    
+
     $trail->push(trans('shop::app.customer.account.address.index.page-title'), route('customer.address.index'));
 });
 
