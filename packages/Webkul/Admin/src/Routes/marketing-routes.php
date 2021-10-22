@@ -9,6 +9,9 @@ use Webkul\Marketing\Http\Controllers\CampaignController;
 use Webkul\Marketing\Http\Controllers\EventController;
 use Webkul\Marketing\Http\Controllers\TemplateController;
 
+/**
+ * Marketing routes.
+ */
 Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('promotions')->group(function () {
         /**
@@ -70,7 +73,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
         Route::post('catalog-rules/delete/{id}', [CatalogRuleController::class, 'destroy'])->name('admin.catalog-rules.delete');
 
         /**
-         * Marketing campaigns routes.
+         * Campaigns routes.
          */
         Route::get('campaigns', [CampaignController::class, 'index'])->defaults('_config', [
             'view' => 'admin::marketing.email-marketing.campaigns.index',

@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\ConfigurationController;
 
+/**
+ * Configuration routes.
+ */
 Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
-    /**
-     * Configuration routes.
-     */
     Route::get('configuration/{slug?}/{slug2?}', [ConfigurationController::class, 'index'])->defaults('_config', [
         'view' => 'admin::configuration.index',
     ])->name('admin.configuration.index');

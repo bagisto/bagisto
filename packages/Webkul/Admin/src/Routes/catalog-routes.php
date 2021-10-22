@@ -6,10 +6,10 @@ use Webkul\Attribute\Http\Controllers\AttributeFamilyController;
 use Webkul\Category\Http\Controllers\CategoryController;
 use Webkul\Product\Http\Controllers\ProductController;
 
+/**
+ * Catalog routes.
+ */
 Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
-    /**
-     * Catalog routes.
-     */
     Route::prefix('catalog')->group(function () {
         /**
          * Sync route.

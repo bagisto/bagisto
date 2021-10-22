@@ -7,10 +7,10 @@ use Webkul\Admin\Http\Controllers\Sales\RefundController;
 use Webkul\Admin\Http\Controllers\Sales\ShipmentController;
 use Webkul\Admin\Http\Controllers\Sales\TransactionController;
 
+/**
+ * Sales routes.
+ */
 Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
-    /**
-     * Sales routes.
-     */
     Route::prefix('sales')->group(function () {
         /**
          * Order routes.
@@ -72,7 +72,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
         ])->name('admin.sales.shipments.view');
 
         /**
-         * Redunds routes.
+         * Refunds routes.
          */
         Route::get('/refunds', [RefundController::class, 'index'])->defaults('_config', [
             'view' => 'admin::sales.refunds.index',

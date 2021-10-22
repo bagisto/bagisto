@@ -6,6 +6,9 @@ use Webkul\User\Http\Controllers\ForgetPasswordController;
 use Webkul\User\Http\Controllers\ResetPasswordController;
 use Webkul\User\Http\Controllers\SessionController;
 
+/**
+ * Auth routes.
+ */
 Route::group(['middleware' => ['web', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
     /**
      * Redirect route.

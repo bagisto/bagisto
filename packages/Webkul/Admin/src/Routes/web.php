@@ -16,7 +16,7 @@ require 'sales-routes.php';
 require 'catalog-routes.php';
 
 /**
- * Customer routes.
+ * Customers routes.
  */
 require 'customers-routes.php';
 

@@ -13,6 +13,9 @@ use Webkul\Tax\Http\Controllers\TaxRateController;
 use Webkul\User\Http\Controllers\RoleController;
 use Webkul\User\Http\Controllers\UserController;
 
+/**
+ * Settings routes.
+ */
 Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
     /**
      * Role routes.

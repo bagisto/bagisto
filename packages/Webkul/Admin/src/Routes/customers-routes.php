@@ -6,6 +6,9 @@ use Webkul\Admin\Http\Controllers\Customer\CustomerController;
 use Webkul\Admin\Http\Controllers\Customer\CustomerGroupController;
 use Webkul\Product\Http\Controllers\ReviewController;
 
+/**
+ * Customers routes.
+ */
 Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
     /**
      * Customer management routes.

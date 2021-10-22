@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Webkul\CMS\Http\Controllers\Admin\PageController;
 
+/**
+ * CMS routes.
+ */
 Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('cms')->group(function () {
         Route::get('/', [PageController::class, 'index'])->defaults('_config', [
