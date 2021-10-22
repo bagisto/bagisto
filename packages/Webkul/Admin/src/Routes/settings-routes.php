@@ -18,7 +18,7 @@ use Webkul\User\Http\Controllers\UserController;
  */
 Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
     /**
-     * Role routes.
+     * Roles routes.
      */
     Route::get('/roles', [RoleController::class, 'index'])->defaults('_config', [
         'view' => 'admin::users.roles.index',
@@ -43,7 +43,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
     Route::post('/roles/delete/{id}', [RoleController::class, 'destroy'])->name('admin.roles.delete');
 
     /**
-     * Locale routes.
+     * Locales routes.
      */
     Route::get('/locales', [LocaleController::class, 'index'])->defaults('_config', [
         'view' => 'admin::settings.locales.index',
@@ -68,7 +68,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
     Route::post('/locales/delete/{id}', [LocaleController::class, 'destroy'])->name('admin.locales.delete');
 
     /**
-     * Currency routes.
+     * Currencies routes.
      */
     Route::get('/currencies', [CurrencyController::class, 'index'])->defaults('_config', [
         'view' => 'admin::settings.currencies.index',
@@ -147,7 +147,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
     Route::post('/inventory_sources/delete/{id}', [InventorySourceController::class, 'destroy'])->name('admin.inventory_sources.delete');
 
     /**
-     * Channel routes.
+     * Channels routes.
      */
     Route::get('/channels', [ChannelController::class, 'index'])->defaults('_config', [
         'view' => 'admin::settings.channels.index',
@@ -172,7 +172,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
     Route::post('/channels/delete/{id}', [ChannelController::class, 'destroy'])->name('admin.channels.delete');
 
     /**
-     * User routes.
+     * Users routes.
      */
     Route::get('/users', [UserController::class, 'index'])->defaults('_config', [
         'view' => 'admin::users.users.index',
@@ -230,7 +230,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
     Route::post('slider/delete/{id}', [SliderController::class, 'destroy'])->name('admin.sliders.delete');
 
     /**
-     * Tax category routes.
+     * Tax categories routes.
      */
     Route::get('/tax-categories', [TaxController::class, 'index'])->defaults('_config', [
         'view' => 'admin::tax.tax-categories.index',

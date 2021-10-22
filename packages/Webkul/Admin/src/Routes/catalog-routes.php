@@ -17,7 +17,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
         Route::get('/sync', [ProductController::class, 'sync']);
 
         /**
-         * Product routes.
+         * Products routes.
          */
         Route::get('/products', [ProductController::class, 'index'])->defaults('_config', [
             'view' => 'admin::catalog.products.index',

@@ -13,7 +13,7 @@ use Webkul\Admin\Http\Controllers\Sales\TransactionController;
 Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('sales')->group(function () {
         /**
-         * Order routes.
+         * Orders routes.
          */
         Route::get('/orders', [OrderController::class, 'index'])->defaults('_config', [
             'view' => 'admin::sales.orders.index',
