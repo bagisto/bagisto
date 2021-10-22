@@ -2,10 +2,10 @@
 
 namespace Webkul\Admin\Providers;
 
-use Webkul\Core\Tree;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Admin\Http\Middleware\Locale;
+use Webkul\Core\Tree;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -16,17 +16,13 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'admin');
 
-        $this->publishes([__DIR__ . '/../Resources/lang' => resource_path('lang/vendor/admin')]);
-
-        $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets'),
-        ], 'public');
-
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
+
+        $this->loadPublishers();
 
         $this->composeView();
 
@@ -45,6 +41,41 @@ class AdminServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+    }
+
+    /**
+     * Register package config.
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/menu.php',
+            'menu.admin'
+        );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/acl.php',
+            'acl'
+        );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/system.php',
+            'core'
+        );
+    }
+
+    /**
+     * Load publishers.
+     *
+     * @return void
+     */
+    protected function loadPublishers(): void
+    {
+        $this->publishes([__DIR__ . '/../Resources/lang' => resource_path('lang/vendor/admin')]);
+
+        $this->publishes([__DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets')], 'public');
     }
 
     /**
@@ -111,11 +142,11 @@ class AdminServiceProvider extends ServiceProvider
     }
 
     /**
-     * Registers acl to entire application
+     * Register ACL to entire application.
      *
      * @return void
      */
-    public function registerACL()
+    protected function registerACL()
     {
         $this->app->singleton('acl', function () {
             return $this->createACL();
@@ -127,7 +158,7 @@ class AdminServiceProvider extends ServiceProvider
      *
      * @return mixed
      */
-    public function createACL()
+    protected function createACL()
     {
         static $tree;
 
@@ -144,28 +175,5 @@ class AdminServiceProvider extends ServiceProvider
         $tree->items = core()->sortItems($tree->items);
 
         return $tree;
-    }
-
-    /**
-     * Register package config.
-     *
-     * @return void
-     */
-    protected function registerConfig()
-    {
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/menu.php',
-            'menu.admin'
-        );
-
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/acl.php',
-            'acl'
-        );
-
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php',
-            'core'
-        );
     }
 }
