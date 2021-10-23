@@ -5,6 +5,7 @@ namespace Webkul\Core\Contracts\Validations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Contracts\Validation\Rule;
 
 class UniqueSlug implements Rule
@@ -55,7 +56,9 @@ class UniqueSlug implements Rule
                 $locale = DB::query()
                             ->from($parameters[0])
                             ->select('locale')
-                            ->where($key, $parameters[2])
+                            ->when(isset($parameters[2]), function (Builder $builder) use ($key, $parameters) {
+                                $builder->where($key, $parameters[2]);
+                            })
                             ->first()->locale;
                 foreach ($this->tables as $table => $column) {
                     $query = DB::query()

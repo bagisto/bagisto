@@ -67,7 +67,7 @@ class PageController extends Controller
         $data = request()->all();
 
         $this->validate(request(), [
-            'url_key' => ['required', 'slug', 'unique_slug:cms_page_translations,url_key'],
+            'url_key' => ['required', 'slug'],
             'page_title' => 'required',
             'channels' => 'required',
             'html_content' => 'required',
@@ -106,7 +106,7 @@ class PageController extends Controller
         $locale = core()->getRequestedLocaleCode();
 
         $this->validate(request(), [
-            $locale . '.url_key' => ['required', 'slug', 'unique_slug:cms_page_translations,' . $id . ',url_key'],
+            $locale . '.url_key' => ['required', 'slug'],
             $locale . '.page_title' => 'required',
             $locale . '.html_content' => 'required',
             'channels' => 'required',
