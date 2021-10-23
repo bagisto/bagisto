@@ -283,7 +283,7 @@ class Order extends Model implements OrderContract
     {
         $pendingInvoice = $this->invoices()->where('state', 'pending')
         ->orWhere('state', 'pending_payment')
-        ->get();
+        ->first();
 
         if ($pendingInvoice) {
             return true;
