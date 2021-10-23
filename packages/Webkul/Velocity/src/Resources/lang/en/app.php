@@ -60,6 +60,7 @@ return [
             'no-result-found' => 'No record found.',
             'search-hint' => 'Search product here...',
             'mass-delete-success' => 'Selected content deleted successfully.',
+            'mass-update-success' => 'Selected content updated successfully.',
             'tab' => [
                 'page' => 'Page Setting',
                 'content' => 'Content Setting',

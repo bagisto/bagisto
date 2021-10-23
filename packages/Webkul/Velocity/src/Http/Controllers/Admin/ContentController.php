@@ -181,4 +181,25 @@ class ContentController extends Controller
 
         return redirect()->route($this->_config['redirect']);
     }
+
+    /**
+     * To mass update the content
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function massUpdate()
+    {
+        $contentIds = explode(',', request()->input('indexes'));
+        $updateOption = request()->input('update-options');
+
+        foreach ($contentIds as $contentId) {
+            $content = $this->contentRepository->find($contentId);
+
+            $content->update(['status' => $updateOption]);
+        }
+
+        session()->flash('success', trans('velocity::app.admin.contents.mass-update-success'));
+
+        return redirect()->back();
+    }
 }

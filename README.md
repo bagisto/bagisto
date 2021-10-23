@@ -11,6 +11,12 @@
 <a href="#sponsors"><img src="https://opencollective.com/bagisto/sponsors/badge.svg" alt="Sponsors on Open Collective"></a>
 </p>
 
+## Hactoberfest Rules
+- On four successful PR merges, Bagisto will provide a T-Shirt, Stickers, Notebook, Pen, and Bagisto Elephant.
+- We have added the 'Hactoberfest' label to the issues with the difficulty level label.
+- Although we have added the 'hactoberfest' topic in our repo, we will consider only PRs whose issue is labelled with 'Hactoberfest'. Below is the link,
+- [Hacktoberfest Labelled Issues](https://github.com/bagisto/bagisto/issues?q=is%3Aopen+is%3Aissue+label%3AHacktoberfest)
+
 ## Topics
 1. [Introduction](#introduction)
 2. [Documentation](#documentation)
@@ -23,16 +29,16 @@
 
 ### Introduction
 
-[Bagisto](https://www.bagisto.com) is a hand tailored E-Commerce framework built on some of the hottest opensource technologies
+[Bagisto](https://www.bagisto.com) is a hand-tailored E-Commerce framework built on some of the hottest opensource technologies
 such as [Laravel](https://laravel.com) (a [PHP](https://secure.php.net/) framework) and [Vue.js](https://vuejs.org)
 a progressive Javascript framework.
 
-**Bagisto can help you to cut down your time, cost, and workforce for building online stores or migrating from physical stores
-to the ever demanding online world. Your business -- whether small or huge -- can benefit. And it's very simple to set it up.**
+**Bagisto can help you cut down your time, cost, and workforce for building online stores or migrating from physical stores
+to the ever-demanding online world. Your business -- whether small or huge -- can benefit. And it's straightforward to set it up.**
 
 **Read our documentation: [Bagisto Docs](https://devdocs.bagisto.com/)**
 
-**We also have a forum for any type of concerns, feature requests, or discussions. Please visit: [Bagisto Forums](https://forums.bagisto.com/)**
+**We also have a forum for any concerns, feature requests, or discussions. Please visit: [Bagisto Forums](https://forums.bagisto.com/)**
 
 # Visit our live [Demo](https://demo.bagisto.com)
 
@@ -56,7 +62,7 @@ It packs in lots of features that will allow your E-Commerce business to scale i
 * Check out [these features and more](https://bagisto.com/features/).
 
 **For Developers**:
-Take advantage of two of the hottest frameworks used in this project -- Laravel and Vue.js -- both of which have been used in Bagisto.
+Take advantage of two of the hottest frameworks used in this project -- Laravel and Vue.js -- both have been used in Bagisto.
 
 ### Documentation
 
@@ -80,7 +86,7 @@ Take advantage of two of the hottest frameworks used in this project -- Laravel 
 
 [Download the latest release](https://github.com/bagisto/bagisto/releases/latest)
 
-##### b. Extract the contents of zip and execute the project in your browser:
+##### b. Extract the contents of the zip and execute the project in your browser:
 
 ~~~
 http(s)://example.com
@@ -95,26 +101,26 @@ http(s)://example.com
 ~~~
 
 ~~~
-2. php artisan bagisto:install
+2. PHP artisan bagisto: install
 ~~~
 
 **To execute Bagisto**:
 
 ##### On server:
 
-Warning: Before going into production mode we recommend you uninstall developer dependencies.
-In order to do that, run the command below:
+Warning: Before going into production mode, we recommend you uninstall developer dependencies.
+To do that, run the command below:
 
 > composer install --no-dev
 
 ~~~
-Open the specified entry point in your hosts file in your browser or make an entry in hosts file if not done.
+If not done, open the specified entry point in your host's file in your browser or make an entry in the host file.
 ~~~
 
 ##### On local:
 
 ~~~
-php artisan serve
+PHP artisan serve
 ~~~
 
 
@@ -127,29 +133,29 @@ email:admin@example.com
 password:admin123
 ~~~
 
-**How to log in as customer:**
+**How to log in as a customer:**
 
-*You can directly register as customer and then login.*
+*You can directly register as a customer and then log in.*
 
 > *http(s)://example.com/customer/register*
 
 
 ### License
-Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
+Bagisto is a truly open-source E-Commerce framework that will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
 
 ### Security Vulnerabilities
-Please don't disclose security vulnerabilities publicly. If you find any security vulnerability in Bagisto then please email us: mailto:support@bagisto.com.
+Would you please not disclose security vulnerabilities publicly? If you find any security vulnerability in Bagisto, then please email us: mailto:support@bagisto.com.
 
 ### Modules
 [Available Modules](https://bagisto.com/en/extensions)
 
-Need something else? Email us at support@bagisto.com.
+Need something else? Please email us at support@bagisto.com.
 
 ### Miscellaneous
 
 #### Contribute
 
-Bagisto is a community driven project, we appreciate every contribution from the community
+Bagisto is a community-driven project; we appreciate every contribution from the community.
 
 - If you found an issue that you think we should know about, or if you have a suggestion, please submit an issue.
 - If you want to submit a solution or offer a new feature, please create a pull request.
@@ -158,7 +164,7 @@ Please read our [contributing guide](https://github.com/bagisto/bagisto/blob/mas
 
 #### Contributors
 
-This project is on [Open Collective](https://opencollective.com/bagisto) and it exists thanks to the people who contribute.
+This project is on [Open Collective](https://opencollective.com/bagisto), and it exists thanks to the people who contribute.
 
 <a href="https://github.com/bagisto/bagisto/graphs/contributors"><img src="https://opencollective.com/bagisto/contributors.svg?width=890&button=false"/></a>
 

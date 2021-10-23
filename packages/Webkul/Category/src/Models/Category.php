@@ -50,7 +50,7 @@ class Category extends TranslatableModel implements CategoryContract
      */
     public function image_url()
     {
-        if (!$this->image) {
+        if (! $this->image) {
             return;
         }
 

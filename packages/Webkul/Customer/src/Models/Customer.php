@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Customer\Database\Factories\CustomerFactory;
 use Webkul\Customer\Notifications\CustomerResetPassword;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Customer\Database\Factories\CustomerAddressFactory;
 
 class Customer extends Authenticatable implements CustomerContract, JWTSubject
@@ -46,6 +47,26 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
         'api_token',
         'remember_token',
     ];
+
+    /**
+     * Get image url for the customer image.
+     */
+    public function image_url()
+    {
+        if (! $this->image) {
+            return;
+        }
+
+        return Storage::url($this->image);
+    }
+
+    /**
+     * Get image url for the customer profile.
+     */
+    public function getImageUrlAttribute()
+    {
+        return $this->image_url();
+    }
 
     /**
      * Get the customer full name.
