@@ -123,17 +123,17 @@ class TransactionController extends Controller
             $transactionData['payment_method'] = $request->payment_method;
             $transactionData['invoice_id']     = $invoice->id;
             $transactionData['order_id']       = $invoice->order_id;
+            $transactionData['amount']         = $request->amount;
             $transactionData['status']         = 'paid';
             $transactionData['data']           = json_encode($data);
 
             $this->orderTransactionRepository->create($transactionData);
 
-            if ($invoice->base_grand_total == $request->amount) {
+            $transactionTotal = $this->orderTransactionRepository->where('invoice_id', $invoice->id)->sum('amount');
+
+            if ($transactionTotal >= $invoice->base_grand_total) {
                 $this->orderRepository->updateOrderStatus($order, 'processing');
                 $update = $this->invoiceRepository->updateState($invoice, "paid");
-            } else {
-                $this->orderRepository->updateOrderStatus($order, 'pending');
-                $update = $this->invoiceRepository->updateState($invoice, "pending");
             }
 
             session()->flash('success', trans('admin::app.sales.transactions.response.transaction-saved'));
