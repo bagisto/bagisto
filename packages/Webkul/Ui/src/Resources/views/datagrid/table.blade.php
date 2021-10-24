@@ -106,7 +106,11 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="filter-left records-count-container">
+                        <span class="datagrid-count">
+                            {{ $results['records']->total()  }}   {{ __('admin::app.admin.system.records-found') }}
+                        </span>
+                    </div>
                     <div class="filter-right">
                         <div class="dropdown-filters per-page">
                             <div class="control-group">
