@@ -109,10 +109,10 @@ class TransactionController extends Controller
                 return redirect(route('admin.sales.transactions.index'));
             }
 
-            $order = $this->orderRepository->find($invoice->id);
+            $order = $this->orderRepository->find($invoice->order_id);
 
             $data = [
-                "paidAmount" => $request->amount,
+                "paidAmount" => $request->amount
             ];
 
             $randomId = random_bytes(20);
@@ -132,9 +132,9 @@ class TransactionController extends Controller
             $transactionTotal = $this->orderTransactionRepository->where('invoice_id', $invoice->id)->sum('amount');
 
             if ($transactionTotal >= $invoice->base_grand_total) {
-                $shipments = $this->shipmentRepository->where('order_id', $invoice->order_id);
+                $shipments = $this->shipmentRepository->where('order_id', $invoice->order_id)->first();
 
-                if ($shipments) {
+                if (isset($shipments)) {
                     $this->orderRepository->updateOrderStatus($order, 'completed');
                 } else {
                     $this->orderRepository->updateOrderStatus($order, 'processing');
