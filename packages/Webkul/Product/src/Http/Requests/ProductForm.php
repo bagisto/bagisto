@@ -126,7 +126,7 @@ class ProductForm extends FormRequest
     public function messages()
     {
         return [
-            'variants.*.sku.unique' => 'The sku has already been taken.',
+            'variants.*.sku.unique' => trans('admin::app.catalog.products.sku-taken'),
             'price.between' => trans('admin::app.catalog.products.price-error')
         ];
     }
