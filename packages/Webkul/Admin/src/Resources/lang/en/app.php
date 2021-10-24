@@ -592,7 +592,6 @@ return [
             'remove-video-btn-title'        => 'Remove Video',
             'not-support-video'             => 'Your browser does not support the video tag.',
             'variant-already-exist-message' => 'Variant with same attribute options already exists.',
-
             'price-error'  => 'Price should be in range 0 to 9999999999.99',
             'sku-taken'    => 'The sku has already been taken.',
             'save'                          => 'Save',
