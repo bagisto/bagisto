@@ -91,7 +91,7 @@
                                         }
 
                                         if ($attribute->type == 'price') {
-                                            array_push($validations, 'decimal:2');
+                                            array_push($validations, 'decimal:4');
                                             array_push($validations,'max:12');      
                                         }
 
