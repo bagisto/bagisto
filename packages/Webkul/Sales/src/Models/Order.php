@@ -273,6 +273,24 @@ class Order extends Model implements OrderContract
 
         return false;
     }
+    
+    /**
+     * Verify if a invoice is still unpaid
+     *
+     * @return bool
+     */
+    public function hasOpenInvoice(): bool
+    {
+        $pendingInvoice = $this->invoices()->where('state', 'pending')
+        ->orWhere('state', 'pending_payment')
+        ->first();
+
+        if ($pendingInvoice) {
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Checks if order can be canceled or not
