@@ -106,11 +106,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filter-left records-count-container">
-                        <span class="datagrid-count">
-                            {{ $results['records']->total()  }}   {{ __('admin::app.admin.system.records-found') }}
-                        </span>
-                    </div>
+                    @if(isset($results['records']) && $results['records'] instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                        <div class="filter-left record-container">
+                            <span class="data {{ $results['records']['data']  }}">
+                                {{ $results['records']->total()  }}   {{ __('admin::app.admin.system.records-found') }}
+                            </span>
+                        </div>
+                    @endif
+                    
                     <div class="filter-right">
                         <div class="dropdown-filters per-page">
                             <div class="control-group">
