@@ -158,7 +158,14 @@
             <span class="quantity-container">
                 <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
-                <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+                <input
+                    ref="quantityChanger"
+                    :name="controlName"
+                    :model="qty"
+                    class="control"
+                    v-validate="validations"
+                    data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;"
+                    @keyup="setQty($event)">
 
                 <button type="button" class="increase" @click="increaseQty()">+</button>
 
@@ -236,26 +243,30 @@
                 }
             },
 
-            watch: {
-                quantity: function (val) {
-                    this.qty = val;
+            mounted: function() {
+                this.$refs.quantityChanger.value = this.minQuantity;
+            },
 
-                    this.$emit('onQtyUpdated', this.qty)
+            watch: {
+                qty: function (val) {
+                    this.$refs.quantityChanger.value = val;
+
+                    this.$emit('onQtyUpdated', this.qty);
                 }
             },
 
             methods: {
+                setQty: function({ target }) {
+                    this.qty = parseInt(target.value);
+                },
+
                 decreaseQty: function() {
                     if (this.qty > this.minQuantity)
                         this.qty = parseInt(this.qty) - 1;
-
-                    this.$emit('onQtyUpdated', this.qty)
                 },
 
                 increaseQty: function() {
                     this.qty = parseInt(this.qty) + 1;
-
-                    this.$emit('onQtyUpdated', this.qty)
                 }
             }
         });

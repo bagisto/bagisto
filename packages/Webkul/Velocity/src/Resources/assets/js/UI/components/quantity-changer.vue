@@ -15,13 +15,14 @@
         <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
         <input
-            :value="qty"
-            class="control"
+            ref="quantityChanger"
             :name="controlName"
-            :v-validate="validations"
+            :model="qty"
+            class="control"
             id="quantity-changer"
+            v-validate="validations"
             :data-vv-as="`&quot;${quantityText}&quot;`"
-            readonly
+            @keyup="setQty($event)"
         />
 
         <button type="button" class="increase" @click="increaseQty()">+</button>
@@ -71,25 +72,29 @@ export default {
         };
     },
 
+    mounted: function() {
+        this.$refs.quantityChanger.value = this.minQuantity;
+    },
+
     watch: {
-        quantity: function(val) {
-            this.qty = val;
+        qty: function(val) {
+            this.$refs.quantityChanger.value = val;
 
             this.$emit('onQtyUpdated', this.qty);
         }
     },
 
     methods: {
+        setQty: function({ target }) {
+            this.qty = parseInt(target.value);
+        },
+
         decreaseQty: function() {
             if (this.qty > this.minQuantity) this.qty = parseInt(this.qty) - 1;
-
-            this.$emit('onQtyUpdated', this.qty);
         },
 
         increaseQty: function() {
             this.qty = parseInt(this.qty) + 1;
-
-            this.$emit('onQtyUpdated', this.qty);
         }
     }
 };
