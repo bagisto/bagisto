@@ -1,30 +1,17 @@
-@inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
-@inject ('attributeRepository', 'Webkul\Attribute\Repositories\AttributeRepository')
 @inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
 <?php
-    $filterAttributes = $attributes = [];
-    $maxPrice = 0;
+    $filterAttributes = $productFlatRepository->getFilterAttributes($category);
 
-    if (isset($category)) {
-        $filterAttributes = $productFlatRepository->getProductsRelatedFilterableAttributes($category);
-
-        $maxPrice = core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category));
-    }
-
-    if (! count($filterAttributes) > 0) {
-        $filterAttributes = $attributeRepository->getFilterAttributes();
-    }
+    $maxPrice = $productFlatRepository->handleCategoryProductMaximumPrice($category);
 ?>
 
 <div class="layered-filter-wrapper left">
-
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
         <layered-navigation></layered-navigation>
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
-
 </div>
 
 @push('scripts')
