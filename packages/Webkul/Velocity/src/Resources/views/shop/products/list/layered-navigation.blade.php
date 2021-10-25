@@ -45,7 +45,6 @@
                         @onFilterAdded="addFilters(attribute.code, $event)"
                         :appliedFilterValues="appliedFilters[attribute.code]">
                     </filter-attribute-item>
-
                 </div>
             </div>
         </div>
@@ -70,7 +69,6 @@
                     <li
                         class="item"
                         v-for='(option, index) in attribute.options'>
-
                         <div
                             class="checkbox"
                             @click="optionClicked(option.id, $event)">
@@ -105,12 +103,13 @@
                             id="price_from" />
 
                         <label class="col text-center" for="to">{{ __('shop::app.products.filter-to') }}</label>
+
                         <input
-                        type="text"
-                        disabled
-                        name="price_to"
-                        :value="sliderConfig.priceTo"
-                        id="price_to">
+                            type="text"
+                            disabled
+                            name="price_to"
+                            :value="sliderConfig.priceTo"
+                            id="price_to">
                     </div>
                 </div>
             </div>
@@ -120,6 +119,7 @@
     <script>
         Vue.component('layered-navigation', {
             template: '#layered-navigation-template',
+
             data: function() {
                 return {
                     appliedFilters: {},
@@ -162,6 +162,7 @@
 
         Vue.component('filter-attribute-item', {
             template: '#filter-attribute-item-template',
+
             props: [
                 'index',
                 'attribute',
@@ -180,16 +181,13 @@
                     sliderConfig: {
                         max: maxPrice,
                         value: [ 0, 0 ],
-
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
-
                         tooltipStyle: {
                             "borderColor": "#FF6472",
                             "backgroundColor": "#FF6472",
                         },
-
                         priceTo: 0,
                         priceFrom: 0,
                     }
@@ -202,6 +200,7 @@
 
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;
+
                     if (this.attribute.type == 'price') {
                         this.sliderConfig.value = this.appliedFilterValues;
                         this.sliderConfig.priceFrom = this.appliedFilterValues[0];
@@ -234,6 +233,7 @@
 
                 optionClicked: function (id, {target}) {
                     let checkbox = $(`#${id}`);
+
                     if (checkbox && checkbox.length > 0 && target.type != "checkbox") {
                         checkbox = checkbox[0];
                         checkbox.checked = !checkbox.checked;
@@ -242,6 +242,7 @@
                             this.appliedFilters.push(id);
                         } else {
                             let idPosition = this.appliedFilters.indexOf(id);
+
                             if (idPosition == -1)
                                 idPosition = this.appliedFilters.indexOf(id.toString());
 
