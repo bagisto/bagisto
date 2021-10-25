@@ -1099,6 +1099,20 @@ i.within-circle {
         width: 97px;
         -webkit-appearance: none
     }
+
+    .nav-container {
+        top: 0px;
+        left: 0px;
+        width: 75%;
+        position: fixed !important;
+        opacity: 1;
+        z-index: 9999;
+        height: 100vh;
+        font-size: 16px;
+        overflow-y: scroll;
+        box-shadow: 5px 0 5px -5px #333;
+        background-color: #FFFFFF;
+    }
 }
 
 .account-content .account-layout .account-table-content.profile-page-content .table {
