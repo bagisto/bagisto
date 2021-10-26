@@ -12,6 +12,7 @@ use Webkul\Customer\Mail\RegistrationEmail;
 use Webkul\Customer\Mail\VerificationEmail;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Sales\Models\Order;
 use Webkul\Shop\Mail\SubscriptionEmail;
 
 class RegistrationController extends Controller
@@ -161,6 +162,8 @@ class RegistrationController extends Controller
 
                 session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
             }
+
+            Order::where('customer_email', $customer->email)->update(['customer_id' => $customer->id]);
 
             session()->flash('success', trans('shop::app.customer.signup-form.success'));
         }

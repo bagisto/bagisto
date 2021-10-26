@@ -486,6 +486,7 @@ return [
             'empty' => 'Your shopping cart is empty',
             'update-cart' => 'Update Cart',
             'continue-shopping' => 'Continue Shopping',
+            'continue-registration' => 'Continue Registration',
             'proceed-to-checkout' => 'Proceed To Checkout',
             'remove' => 'Remove',
             'remove-link' => 'Remove',

@@ -23,6 +23,11 @@
                 <a href="{{ route('shop.home.index') }}" class="theme-btn remove-decoration">
                     {{ __('shop::app.checkout.cart.continue-shopping') }}
                 </a>
+                @guest('customer')
+                    <a href="{{ route('customer.register.index') }}" class="theme-btn registration-btn remove-decoration">
+                        {{ __('shop::app.checkout.cart.continue-registration') }}
+                    </a>
+                @endguest
             </div>
 
             {{ view_render_event('bagisto.shop.checkout.continue-shopping.after', ['order' => $order]) }}
