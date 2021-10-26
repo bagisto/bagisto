@@ -1,11 +1,13 @@
 <?php
 
-    use Webkul\Velocity\Velocity;
-
-    if (! function_exists('velocity')) {
-        function velocity()
-        {
-            return app()->make(Velocity::class);
-        }
+if (! function_exists('velocity')) {
+    /**
+     * Velocity helper.
+     *
+     * @return \Webkul\Velocity\Velocity
+     */
+    function velocity()
+    {
+        return app()->make(\Webkul\Velocity\Velocity::class);
     }
-?>
+}
