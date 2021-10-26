@@ -2,9 +2,7 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
-use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
 
 class RoleController extends Controller
@@ -24,25 +22,16 @@ class RoleController extends Controller
     protected $roleRepository;
 
     /**
-     * AdminRepository object
-     *
-     * @var \Webkul\User\Repositories\AdminRepository
-     */
-    protected $adminRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\User\Repositories\RoleRepository  $roleRepository
-     * @param  \Webkul\User\Repositories\AdminRepository  $adminRepository
      * @return void
      */
-    public function __construct(RoleRepository $roleRepository, AdminRepository $adminRepository)
+    public function __construct(RoleRepository $roleRepository)
     {
         $this->middleware('admin');
 
         $this->roleRepository = $roleRepository;
-        $this->adminRepository = $adminRepository;
 
         $this->_config = request('_config');
     }
@@ -118,24 +107,11 @@ class RoleController extends Controller
 
         Event::dispatch('user.role.update.before', $id);
 
-        if (request()->permission_type != 'all'){
-            if ($this->roleRepository->findWhere(['permission_type' => 'all'], 'permission_type')->count() > 1){
-                $role = $this->roleRepository->update(request()->all(), $id);
-                Event::dispatch('user.role.update.after', $role);
-                session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
-                if($this->adminRepository->findWhere(['id' => auth()->guard('admin')->user()->id, 'role_id' => $id], 'role_id')->count() > 0){
-                    auth()->guard('admin')->logout();
-                }
-            }
-            else{
-                session()->flash('error', trans('This is last Role with ALL permission.'));
-            }
-        }
-        else{
-            $role = $this->roleRepository->update(request()->all(), $id);
-            Event::dispatch('user.role.update.after', $role);
-            session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
-        }
+        $role = $this->roleRepository->update(request()->all(), $id);
+
+        Event::dispatch('user.role.update.after', $role);
+
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -154,8 +130,6 @@ class RoleController extends Controller
             session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
         } elseif($this->roleRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
-        } elseif($this->roleRepository->findWhere(['permission_type' => 'all'], 'permission_type')->count() > 1) {
-            session()->flash('error', trans('This is last Role with ALL permission.'));
         } else {
             try {
                 Event::dispatch('user.role.delete.before', $id);
