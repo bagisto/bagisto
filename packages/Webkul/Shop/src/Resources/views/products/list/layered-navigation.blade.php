@@ -1,11 +1,3 @@
-@inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
-
-<?php
-    $filterAttributes = $productFlatRepository->getFilterAttributes($category);
-
-    $maxPrice = $productFlatRepository->handleCategoryProductMaximumPrice($category);
-?>
-
 <div class="layered-filter-wrapper">
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
@@ -25,11 +17,11 @@
                 <div class="filter-attributes">
                     <filter-attribute-item
                         v-for='(attribute, index) in attributes'
-                        :attribute="attribute"
                         :key="index"
                         :index="index"
-                        @onFilterAdded="addFilters(attribute.code, $event)"
-                        :appliedFilterValues="appliedFilters[attribute.code]">
+                        :attribute="attribute"
+                        :appliedFilterValues="appliedFilters[attribute.code]"
+                        @onFilterAdded="addFilters(attribute.code, $event)">
                     </filter-attribute-item>
                 </div>
             </div>
@@ -38,7 +30,7 @@
 
     <script type="text/x-template" id="filter-attribute-item-template">
         <div class="filter-attributes-item" :class="[active ? 'active' : '']">
-            <div class="filter-attributes-title" @click="active = !active">
+            <div class="filter-attributes-title" @click="active = ! active">
                 @{{ attribute.name ? attribute.name : attribute.admin_name }}
 
                 <div class="pull-right">
@@ -55,7 +47,9 @@
                     <li class="item" v-for='(option, index) in attribute.options'>
                         <span class="checkbox">
                             <input type="checkbox" :id="option.id" v-bind:value="option.id" v-model="appliedFilters" @change="addFilter($event)"/>
+
                             <label class="checkbox-view" :for="option.id"></label>
+
                             @{{ option.label ? option.label : option.admin_name }}
                         </span>
                     </li>
@@ -69,8 +63,8 @@
                         :tooltip-style="sliderConfig.tooltipStyle"
                         :max="sliderConfig.max"
                         :lazy="true"
-                        @change="priceRangeUpdated($event)"
-                    ></vue-slider>
+                        @change="priceRangeUpdated($event)">
+                    </vue-slider>
                 </div>
             </div>
         </div>
@@ -82,23 +76,34 @@
 
             data: function() {
                 return {
-                    attributes: @json($filterAttributes),
-
-                    appliedFilters: {}
+                    appliedFilters: {},
+                    attributes: [],
                 }
             },
 
             created: function () {
-                let urlParams = new URLSearchParams(window.location.search);
+                this.setFilterAttributes();
 
-                let self = this;
-
-                urlParams.forEach(function (value, index) {
-                    self.appliedFilters[index] = value.split(',');
-                });
+                this.setAppliedFilters();
             },
 
             methods: {
+                setFilterAttributes: function () {
+                    axios
+                        .get('{{ route('admin.catalog.products.get-filter-attributes', $category->id) }}')
+                        .then((response) => {
+                            this.attributes = response.data.filter_attributes;
+                        });
+                },
+
+                setAppliedFilters: function () {
+                    let urlParams = new URLSearchParams(window.location.search);
+
+                    urlParams.forEach((value, index) => {
+                        this.appliedFilters[index] = value.split(',');
+                    });
+                },
+
                 addFilters: function (attributeCode, filters) {
                     if (filters.length) {
                         this.appliedFilters[attributeCode] = filters;
@@ -129,18 +134,12 @@
             props: ['index', 'attribute', 'appliedFilterValues'],
 
             data: function() {
-                let maxPrice  = @json($maxPrice);
-
-                maxPrice = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
-
                 return {
                     appliedFilters: [],
-
                     active: false,
-
                     sliderConfig: {
                         value: [0, 0],
-                        max: maxPrice,
+                        max: 500,
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
@@ -153,7 +152,7 @@
             },
 
             created: function () {
-                if (!this.index) this.active = true;
+                if (! this.index) this.active = true;
 
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;
@@ -164,9 +163,21 @@
 
                     this.active = true;
                 }
+
+                this.setMaxPrice();
             },
 
             methods: {
+                setMaxPrice: function () {
+                    axios
+                        .get('{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id) }}')
+                        .then((response) => {
+                            let maxPrice  = response.data.max_price;
+
+                            this.sliderConfig.max = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
+                        });
+                },
+
                 addFilter: function (e) {
                     this.$emit('onFilterAdded', this.appliedFilters)
                 },

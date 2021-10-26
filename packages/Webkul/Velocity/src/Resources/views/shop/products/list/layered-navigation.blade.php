@@ -1,11 +1,3 @@
-@inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
-
-<?php
-    $filterAttributes = $productFlatRepository->getFilterAttributes($category);
-
-    $maxPrice = $productFlatRepository->handleCategoryProductMaximumPrice($category);
-?>
-
 <div class="layered-filter-wrapper left">
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
@@ -25,12 +17,12 @@
             <div class="filter-content">
                 <div class="filter-attributes">
                     <filter-attribute-item
+                        v-for='(attribute, index) in attributes'
                         :key="index"
                         :index="index"
                         :attribute="attribute"
-                        v-for='(attribute, index) in attributes'
-                        @onFilterAdded="addFilters(attribute.code, $event)"
-                        :appliedFilterValues="appliedFilters[attribute.code]">
+                        :appliedFilterValues="appliedFilters[attribute.code]"
+                        @onFilterAdded="addFilters(attribute.code, $event)">
                     </filter-attribute-item>
                 </div>
             </div>
@@ -39,7 +31,7 @@
 
     <script type="text/x-template" id="filter-attribute-item-template">
         <div :class="`cursor-pointer filter-attributes-item ${active ? 'active' : ''}`">
-            <div class="filter-attributes-title" @click="active = !active">
+            <div class="filter-attributes-title" @click="active = ! active">
                 <h6 class="fw6 display-inbl">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h6>
 
                 <div class="float-right display-table">
@@ -84,19 +76,19 @@
                     <div class="filter-input row col-12 no-padding">
                         <input
                             type="text"
-                            disabled
                             name="price_from"
                             :value="sliderConfig.priceFrom"
-                            id="price_from" />
+                            id="price_from"
+                            disabled>
 
                         <label class="col text-center" for="to">{{ __('shop::app.products.filter-to') }}</label>
 
                         <input
                             type="text"
-                            disabled
                             name="price_to"
                             :value="sliderConfig.priceTo"
-                            id="price_to">
+                            id="price_to"
+                            disabled>
                     </div>
                 </div>
             </div>
@@ -110,19 +102,33 @@
             data: function() {
                 return {
                     appliedFilters: {},
-                    attributes: @json($filterAttributes),
+                    attributes: [],
                 }
             },
 
             created: function () {
-                let urlParams = new URLSearchParams(window.location.search);
+                this.setFilterAttributes();
 
-                urlParams.forEach((value, index) => {
-                    this.appliedFilters[index] = value.split(',');
-                });
+                this.setAppliedFilters();
             },
 
             methods: {
+                setFilterAttributes: function () {
+                    axios
+                        .get('{{ route('admin.catalog.products.get-filter-attributes', $category->id) }}')
+                        .then((response) => {
+                            this.attributes = response.data.filter_attributes;
+                        });
+                },
+
+                setAppliedFilters: function () {
+                    let urlParams = new URLSearchParams(window.location.search);
+
+                    urlParams.forEach((value, index) => {
+                        this.appliedFilters[index] = value.split(',');
+                    });
+                },
+
                 addFilters: function (attributeCode, filters) {
                     if (filters.length) {
                         this.appliedFilters[attributeCode] = filters;
@@ -134,7 +140,7 @@
                 },
 
                 applyFilter: function () {
-                    var params = [];
+                    let params = [];
 
                     for (key in this.appliedFilters) {
                         if (key != 'page') {
@@ -158,16 +164,12 @@
             ],
 
             data: function() {
-                let maxPrice  = @json($maxPrice);
-
-                maxPrice = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
-
                 return {
                     active: false,
                     appliedFilters: [],
                     sliderConfig: {
-                        max: maxPrice,
-                        value: [ 0, 0 ],
+                        max: 500,
+                        value: [0, 0],
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
@@ -182,8 +184,7 @@
             },
 
             created: function () {
-                if (!this.index)
-                    this.active = false;
+                if (! this.index) this.active = false;
 
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;
@@ -196,9 +197,21 @@
 
                     this.active = true;
                 }
+
+                this.setMaxPrice();
             },
 
             methods: {
+                setMaxPrice: function () {
+                    axios
+                        .get('{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id) }}')
+                        .then((response) => {
+                            let maxPrice  = response.data.max_price;
+
+                            this.sliderConfig.max = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
+                        });
+                },
+                
                 addFilter: function (e) {
                     this.$emit('onFilterAdded', this.appliedFilters)
                 },
@@ -223,7 +236,7 @@
 
                     if (checkbox && checkbox.length > 0 && target.type != "checkbox") {
                         checkbox = checkbox[0];
-                        checkbox.checked = !checkbox.checked;
+                        checkbox.checked = ! checkbox.checked;
 
                         if (checkbox.checked) {
                             this.appliedFilters.push(id);

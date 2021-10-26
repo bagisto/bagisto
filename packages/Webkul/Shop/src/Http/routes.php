@@ -150,6 +150,13 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     ])->name('shop.product.file.download');
 
     /**
+     * Product related attributes.
+     */
+    Route::get('products/get-filter-attributes/{categoryId}', [ProductController::class, 'getFilterAttributes'])->name('admin.catalog.products.get-filter-attributes');
+
+    Route::get('products/get-category-product-maximum-price/{categoryId}', [ProductController::class, 'getCategoryProductMaximumPrice'])->name('admin.catalog.products.get-category-product-maximum-price');
+
+    /**
      * These are the routes which are used during checkout for checking the customer.
      * So, placed outside the cart merger middleware.
      */
