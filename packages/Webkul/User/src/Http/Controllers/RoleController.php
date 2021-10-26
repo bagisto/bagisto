@@ -125,18 +125,10 @@ class RoleController extends Controller
          */
         $isChangedFromAll = $params['permission_type'] == "custom" && $this->roleRepository->find($id)->permission_type == 'all';
 
-        if ($isChangedFromAll) {
-            $adminCountWithAllAccess = $this->adminRepository->getModel()
-                ->leftJoin('roles', 'admins.role_id', '=', 'roles.id')
-                ->where(["roles.permission_type" => "all"])
-                ->get()
-                ->count();
+        if ($isChangedFromAll && $this->adminRepository->countAdminsWithAllAccess() === 1) {
+            session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
 
-            if ($adminCountWithAllAccess == 1) {
-                session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
-
-                return redirect()->route($this->_config['redirect']);
-            }
+            return redirect()->route($this->_config['redirect']);
         }
 
         Event::dispatch('user.role.update.before', $id);

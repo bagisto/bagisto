@@ -3,30 +3,30 @@
 namespace Webkul\User\Http\Controllers;
 
 use Hash;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
 use Webkul\User\Http\Requests\UserForm;
-use Webkul\User\Repositories\RoleRepository;
 use Webkul\User\Repositories\AdminRepository;
+use Webkul\User\Repositories\RoleRepository;
 
 class UserController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * AdminRepository object
+     * Admin repository instance.
      *
      * @var \Webkul\User\Repositories\AdminRepository
      */
     protected $adminRepository;
 
     /**
-     * RoleRepository object
+     * Role repository instance.
      *
      * @var \Webkul\User\Repositories\RoleRepository
      */
@@ -42,8 +42,7 @@ class UserController extends Controller
     public function __construct(
         AdminRepository $adminRepository,
         RoleRepository $roleRepository
-    )
-    {
+    ) {
         $this->adminRepository = $adminRepository;
 
         $this->roleRepository = $roleRepository;
@@ -125,21 +124,39 @@ class UserController extends Controller
      */
     public function update(UserForm $request, $id)
     {
-        $isPasswordChanged = false;
-
         $data = $request->all();
+
+        $user = $this->adminRepository->find($id);
+
+        /**
+         * Is password changed.
+         */
+        $isPasswordChanged = false;
 
         if (! $data['password']) {
             unset($data['password']);
         } else {
             $isPasswordChanged = true;
+
             $data['password'] = bcrypt($data['password']);
         }
 
-        if (isset($data['status'])) {
-            $data['status'] = 1;
-        } else {
-            $data['status'] = 0;
+        /**
+         * Status update.
+         */
+        $data['status'] = isset($data['status']) ? 1 : 0;
+
+        /**
+         * Is user with `permission_type` all role changed.
+         */
+        $isRoleChanged = $user->role->permission_type === 'all'
+            && isset($data['role_id'])
+            && (int) $data['role_id'] !== $user->role_id;
+
+        if ($isRoleChanged && $this->adminRepository->countAdminsWithAllAccess() === 1) {
+            session()->flash('error', trans('admin::app.response.single-admin-present'));
+
+            return redirect()->route($this->_config['redirect']);
         }
 
         Event::dispatch('user.admin.update.before', $id);
@@ -186,7 +203,7 @@ class UserController extends Controller
                 Event::dispatch('user.admin.delete.after', $id);
 
                 return response()->json(['message' => true], 200);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Admin']));
             }
         }
@@ -208,7 +225,7 @@ class UserController extends Controller
     }
 
     /**
-     * destroy current after confirming
+     * Destroy current after confirming.
      *
      * @return \Illuminate\Http\Response
      */
