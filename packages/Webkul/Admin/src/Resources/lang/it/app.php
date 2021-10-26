@@ -1340,6 +1340,7 @@ return [
 
     'response' => [
         'being-used' => 'Questo resource :name is getting used in :source',
+        'single-admin-present' => 'Cannot change the role if only one admin with all access is present.',
         'cannot-delete-default' => 'Non è possibile eliminare il canale di default',
         'create-success' => ':name creato con successo.',
         'update-success' => ':name aggiornato con successo.',

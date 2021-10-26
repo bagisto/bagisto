@@ -1334,6 +1334,7 @@ return [
 
     'response' => [
         'being-used' => 'Deze bron :name is wennen :source',
+        'single-admin-present' => 'Cannot change the role if only one admin with all access is present.',
         'cannot-delete-default' => 'Kan het standaardkanaal niet verwijderen',
         'create-success' => ':name succesvol gemaakt.',
         'update-success' => ':name succesvol geupdatet.',

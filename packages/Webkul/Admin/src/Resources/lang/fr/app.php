@@ -1360,6 +1360,7 @@ return [
 
     'response' => [
         'being-used' => 'Cette ressource :name est utilisée dans :source',
+        'single-admin-present' => 'Cannot change the role if only one admin with all access is present.',
         'product-copied' => 'Le produit a été copié',
         'error-while-copying' => 'Une erreur s\'est produite lors de la tentative de copie du produit',
         'product-can-not-be-copied' => 'Les produits de type :type ne peuvent pas être copiés',

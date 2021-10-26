@@ -1337,6 +1337,7 @@ return [
 
     'response' => [
         'being-used'                => ':source في :name يتم استخدام هذا المورد',
+        'single-admin-present'      => 'Cannot change the role if only one admin with all access is present.',
         'product-copied'            => 'تم نسخ المنتج',
         'error-while-copying'       => 'خطأ في نسخ المنتج',
         'product-can-not-be-copied' => 'لا يمكن نسخ منتجات الحجز',

@@ -1336,6 +1336,7 @@ return [
 
     'response' => [
         'being-used' => 'Este recurso :name está sendo usado em :source',
+        'single-admin-present' => 'Cannot change the role if only one admin with all access is present.',
         'cannot-delete-default' => 'Não é possível excluir o canal padrão',
         'create-success' => ':name criado com sucesso.',
         'update-success' => ':name atualizaco com sucesso.',
