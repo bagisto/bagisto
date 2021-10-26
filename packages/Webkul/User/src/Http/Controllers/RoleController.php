@@ -22,8 +22,16 @@ class RoleController extends Controller
     protected $roleRepository;
 
     /**
+     * AdminRepository object
+     *
+     * @var \Webkul\User\Repositories\AdminRepository
+     */
+    protected $adminRepository;
+
+    /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\User\Repositories\AdminRepository  $adminRepository
      * @param  \Webkul\User\Repositories\RoleRepository  $roleRepository
      * @return void
      */
@@ -32,6 +40,8 @@ class RoleController extends Controller
         $this->middleware('admin');
 
         $this->roleRepository = $roleRepository;
+        
+        $this->adminRepository = $adminRepository;
 
         $this->_config = request('_config');
     }
@@ -105,9 +115,28 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
 
+        $params = request()->all();
+
+        // check for other admins if the role has been changed from all to custom
+        $isChangedFromAll = $params['permission_type'] == "custom" && $this->roleRepository->find($id)->permission_type == 'all';
+
+        if ($isChangedFromAll) {
+            $adminCountWithAllAccess = $this->adminRepository->getModel()
+                ->leftJoin('roles', 'admins.role_id', '=', 'roles.id')
+                ->where(["roles.permission_type" => "all"])
+                ->get()
+                ->count();
+            
+            if ($adminCountWithAllAccess == 1) {
+                session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
+
+                return redirect()->route($this->_config['redirect']);
+            }
+        }
+
         Event::dispatch('user.role.update.before', $id);
 
-        $role = $this->roleRepository->update(request()->all(), $id);
+        $role = $this->roleRepository->update($params, $id);
 
         Event::dispatch('user.role.update.after', $role);
 
