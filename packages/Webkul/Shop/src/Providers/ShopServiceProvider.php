@@ -27,7 +27,7 @@ class ShopServiceProvider extends ServiceProvider
         ]);
 
         /* loaders */
-        $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'shop');
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
@@ -45,7 +45,7 @@ class ShopServiceProvider extends ServiceProvider
         Paginator::defaultSimpleView('shop::partials.pagination');
 
         /* breadcrumbs */
-        require __DIR__ . '/../Http/breadcrumbs.php';
+        require __DIR__ . '/../Routes/breadcrumbs.php';
     }
 
     /**
