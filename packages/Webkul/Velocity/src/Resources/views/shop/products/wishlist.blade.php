@@ -26,7 +26,7 @@
             </form>
         @else
             <form
-                class="d-none"
+                class="d-none dd"
                 id="wishlist-{{ $product->product_id }}"
                 action="{{ $href }}"
                 method="POST">
@@ -38,7 +38,7 @@
             class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
             href="javascript:void(0);"
             title="{{ $title }}"
-            onclick="document.getElementById('wishlist-{{ $wishlist ? $wishlist->id : $product->product_id }}').submit();">
+            onclick="document.getElementById('wishlist-0').submit();">
 
             <wishlist-component active="{{ $wishlist ? false : true }}"></wishlist-component>
 
@@ -50,7 +50,7 @@
 
     @guest('customer')
         <form
-            class="d-none"
+            class="d-none dd"
             id="wishlist-{{ $product->product_id }}"
             action="{{ route('customer.wishlist.add', $product->product_id) }}"
             method="POST">

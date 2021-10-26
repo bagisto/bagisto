@@ -159,7 +159,7 @@
                         @endif
                     </div>
 
-                    <div class="product-price">
+                    <div class="product-price jj">
                         @include ('shop::products.price', ['product' => $product])
                     </div>
 

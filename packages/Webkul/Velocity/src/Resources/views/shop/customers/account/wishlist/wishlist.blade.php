@@ -31,7 +31,6 @@
     {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $items]) !!}
 
     <div class="wishlist-container">
-
         @if ($items->count())
             @foreach ($items as $item)
                 @php
@@ -55,7 +54,7 @@
                     'addToCartBtnClass'    => 'small-padding',
                     'wishlistShare'        => core()->getConfigData('catalog.products.wishlist_social_share.enabled')
                 ])
-            @endforeach
+            @endforeach 
 
             <div>
                 {{ $items->links()  }}
