@@ -1353,10 +1353,10 @@ return [
 
     'response' => [
         'being-used'                => 'This resource :name is getting used in :source',
-        'single-admin-present'      => 'Cannot change the role if only one admin with all access is present.',
         'product-copied'            => 'The Product has been copied',
         'error-while-copying'       => 'Something went wrong while trying to copy the product',
         'product-can-not-be-copied' => 'Products of type :type can not be copied',
+        'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'Cannot delete the default channel',
         'create-success'            => ':name created successfully.',
         'update-success'            => ':name updated successfully.',

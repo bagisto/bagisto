@@ -25,7 +25,22 @@ class AdminRepository extends Repository
     {
         return $this->getModel()
             ->leftJoin('roles', 'admins.role_id', '=', 'roles.id')
-            ->where(["roles.permission_type" => "all"])
+            ->where('roles.permission_type', 'all')
+            ->get()
+            ->count();
+    }
+
+    /**
+     * Count admins with all access and active status.
+     *
+     * @return int
+     */
+    public function countAdminsWithAllAccessAndActiveStatus(): int
+    {
+        return $this->getModel()
+            ->leftJoin('roles', 'admins.role_id', '=', 'roles.id')
+            ->where('admins.status', 1)
+            ->where('roles.permission_type', 'all')
             ->get()
             ->count();
     }

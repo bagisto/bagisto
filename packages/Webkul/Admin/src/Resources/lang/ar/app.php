@@ -1337,10 +1337,10 @@ return [
 
     'response' => [
         'being-used'                => ':source في :name يتم استخدام هذا المورد',
-        'single-admin-present'      => 'Cannot change the role if only one admin with all access is present.',
         'product-copied'            => 'تم نسخ المنتج',
         'error-while-copying'       => 'خطأ في نسخ المنتج',
         'product-can-not-be-copied' => 'لا يمكن نسخ منتجات الحجز',
+        'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'لا يمكن حذف القناة الافتراضية',
         'create-success'            => 'إنشاء الاسم بنجاح:name',
         'update-success'            => 'تحديث الاسم بنجاح :name ',

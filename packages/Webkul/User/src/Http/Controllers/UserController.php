@@ -124,46 +124,17 @@ class UserController extends Controller
      */
     public function update(UserForm $request, $id)
     {
-        $data = $request->all();
+        $data = $this->prepareUserData($request, $id);
 
-        $user = $this->adminRepository->find($id);
-
-        /**
-         * Is password changed.
-         */
-        $isPasswordChanged = false;
-
-        if (! $data['password']) {
-            unset($data['password']);
-        } else {
-            $isPasswordChanged = true;
-
-            $data['password'] = bcrypt($data['password']);
-        }
-
-        /**
-         * Status update.
-         */
-        $data['status'] = isset($data['status']) ? 1 : 0;
-
-        /**
-         * Is user with `permission_type` all role changed.
-         */
-        $isRoleChanged = $user->role->permission_type === 'all'
-            && isset($data['role_id'])
-            && (int) $data['role_id'] !== $user->role_id;
-
-        if ($isRoleChanged && $this->adminRepository->countAdminsWithAllAccess() === 1) {
-            session()->flash('error', trans('admin::app.response.single-admin-present'));
-
-            return redirect()->route($this->_config['redirect']);
+        if ($data instanceof \Illuminate\Http\RedirectResponse) {
+            return $data;
         }
 
         Event::dispatch('user.admin.update.before', $id);
 
         $admin = $this->adminRepository->update($data, $id);
 
-        if ($isPasswordChanged) {
+        if (isset($data['password']) && $data['password']) {
             Event::dispatch('user.admin.update-password', $admin);
         }
 
@@ -182,7 +153,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = $this->adminRepository->findOrFail($id);
+        $this->adminRepository->findOrFail($id);
 
         if ($this->adminRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Admin']));
@@ -254,5 +225,67 @@ class UserController extends Controller
 
             return redirect()->route($this->_config['redirect']);
         }
+    }
+
+    /**
+     * Validate user data.
+     *
+     * @param  \Webkul\User\Http\Requests\UserForm  $request
+     * @param  int  $id
+     * @return array|\Illuminate\Http\RedirectResponse
+     */
+    private function prepareUserData(UserForm $request, $id)
+    {
+        $data = $request->validated();
+
+        $user = $this->adminRepository->find($id);
+
+        /**
+         * Password check.
+         */
+        if (! $data['password']) {
+            unset($data['password']);
+        } else {
+            $data['password'] = bcrypt($data['password']);
+        }
+
+        /**
+         * Is user with `permission_type` all changed status.
+         */
+        $data['status'] = isset($data['status']) ? 1 : 0;
+
+        $isStatusChangedToInactive = (int) $data['status'] === 0 && (int) $user->status === 1;
+
+        if ($isStatusChangedToInactive && $this->adminRepository->countAdminsWithAllAccessAndActiveStatus() === 1) {
+            return $this->cannotChangeRedirectResponse('status');
+        }
+
+        /**
+         * Is user with `permission_type` all role changed.
+         */
+        $isRoleChanged = $user->role->permission_type === 'all'
+            && isset($data['role_id'])
+            && (int) $data['role_id'] !== $user->role_id;
+
+        if ($isRoleChanged && $this->adminRepository->countAdminsWithAllAccess() === 1) {
+            return $this->cannotChangeRedirectResponse('role');
+        }
+
+        return $data;
+    }
+
+    /**
+     * Cannot change redirect response.
+     *
+     * @param  string $columnName
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    private function cannotChangeRedirectResponse(string $columnName): \Illuminate\Http\RedirectResponse
+    {
+        session()->flash('error', trans('admin::app.response.cannot-change', [
+            'name' => $columnName
+        ]));
+
+        return redirect()->route($this->_config['redirect']);
     }
 }

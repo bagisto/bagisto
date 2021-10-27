@@ -1337,7 +1337,7 @@ return [
 
     'response' => [
         'being-used' => 'Ten zasób :name est używana w :source',
-        'single-admin-present' => 'Cannot change the role if only one admin with all access is present.',
+        'cannot-change' => 'Cannot change the :name.',
         'cannot-delete-default' => 'Nie można usunąć domyślnego kanału',
         'create-success' => ':name  została utworzona pomyślnie.',
         'update-success' => ':name została zaktualizowana pomyślnie.',

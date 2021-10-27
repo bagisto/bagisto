@@ -1337,7 +1337,7 @@ return [
 
     'response' => [
         'being-used' => ' مورد استفاده قرار می گیرد :source در :name این منبع',
-        'single-admin-present' => 'Cannot change the role if only one admin with all access is present.',
+        'cannot-change' => 'Cannot change the :name.',
         'cannot-delete-default' => 'کانال پیش فرض حذف نمی شود',
         'create-success' => ' با موفقیت ایجاد شد :name',
         'update-success' => ' با موفقیت به روز شد :name',

@@ -1344,10 +1344,10 @@ return [
     'response'      =>
     [
         'being-used'                => 'Diese Ressource :name wird verwendet in :source',
-        'single-admin-present'      => 'Cannot change the role if only one admin with all access is present.',
         'product-copied'            => 'Das Produkt wurde kopiert',
         'error-while-copying'       => 'Fehler beim Kopieren des Produkts',
         'product-can-not-be-copied' => 'Produkte vom Typ :type können nicht kopiert werden.',
+        'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'Der Standardkanal kann nicht gelöscht werden',
         'create-success'            => ':name erfolgreich erstellt.',
         'update-success'            => ':name erfolgreich aktualisiert.',

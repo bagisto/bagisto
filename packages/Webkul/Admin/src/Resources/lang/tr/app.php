@@ -1324,7 +1324,7 @@ return [
 
     'response' => [
         'being-used' => ':name isimli kaynak :source isimli kaynakta kullanılıyor.',
-        'single-admin-present' => 'Cannot change the role if only one admin with all access is present.',
+        'cannot-change' => 'Cannot change the :name.',
         'cannot-delete-default' => 'Varsayılan kanal silinemez.',
         'create-success' => ':name başarıyla oluşturuldu.',
         'update-success' => ':name başarıyla güncellendi.',
