@@ -1337,6 +1337,7 @@ return [
 
     'response' => [
         'being-used' => 'Ten zasób :name est używana w :source',
+        'cannot-change' => 'Cannot change the :name.',
         'cannot-delete-default' => 'Nie można usunąć domyślnego kanału',
         'create-success' => ':name  została utworzona pomyślnie.',
         'update-success' => ':name została zaktualizowana pomyślnie.',

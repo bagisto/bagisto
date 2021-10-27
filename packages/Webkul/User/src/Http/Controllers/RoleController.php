@@ -3,35 +3,48 @@
 namespace Webkul\User\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
 
 class RoleController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * RoleRepository object
+     * Role repository instance.
      *
      * @var \Webkul\User\Repositories\RoleRepository
      */
     protected $roleRepository;
 
     /**
+     * Admin repository instance.
+     *
+     * @var \Webkul\User\Repositories\AdminRepository
+     */
+    protected $adminRepository;
+
+    /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\User\Repositories\AdminRepository  $adminRepository
      * @param  \Webkul\User\Repositories\RoleRepository  $roleRepository
      * @return void
      */
-    public function __construct(RoleRepository $roleRepository)
-    {
+    public function __construct(
+        RoleRepository $roleRepository,
+        AdminRepository $adminRepository
+    ) {
         $this->middleware('admin');
 
         $this->roleRepository = $roleRepository;
+
+        $this->adminRepository = $adminRepository;
 
         $this->_config = request('_config');
     }
@@ -105,9 +118,22 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
 
+        $params = request()->all();
+
+        /**
+         * Check for other admins if the role has been changed from all to custom.
+         */
+        $isChangedFromAll = $params['permission_type'] == "custom" && $this->roleRepository->find($id)->permission_type == 'all';
+
+        if ($isChangedFromAll && $this->adminRepository->countAdminsWithAllAccess() === 1) {
+            session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
+
+            return redirect()->route($this->_config['redirect']);
+        }
+
         Event::dispatch('user.role.update.before', $id);
 
-        $role = $this->roleRepository->update(request()->all(), $id);
+        $role = $this->roleRepository->update($params, $id);
 
         Event::dispatch('user.role.update.after', $role);
 
@@ -128,7 +154,7 @@ class RoleController extends Controller
 
         if ($role->admins->count() >= 1) {
             session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
-        } elseif($this->roleRepository->count() == 1) {
+        } else if ($this->roleRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
         } else {
             try {
@@ -141,7 +167,7 @@ class RoleController extends Controller
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Role']));
 
                 return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Role']));
             }
         }

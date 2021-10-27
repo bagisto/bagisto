@@ -1363,6 +1363,7 @@ return [
         'product-copied' => 'Le produit a été copié',
         'error-while-copying' => 'Une erreur s\'est produite lors de la tentative de copie du produit',
         'product-can-not-be-copied' => 'Les produits de type :type ne peuvent pas être copiés',
+        'cannot-change' => 'Cannot change the :name.',
         'cannot-delete-default' => 'Impossible de supprimer la chaîne par défaut',
         'create-success' => ':name créé avec succès.',
         'update-success' => ':name mis à jour avec succès.',
