@@ -1,6 +1,6 @@
 <?php
 
-// Controllers
+use Illuminate\Support\Facades\Route;
 use Webkul\Velocity\Http\Controllers\Shop\CartController;
 use Webkul\Velocity\Http\Controllers\Shop\ComparisonController;
 use Webkul\Velocity\Http\Controllers\Shop\ShopController;

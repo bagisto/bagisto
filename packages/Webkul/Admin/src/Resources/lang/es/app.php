@@ -1346,9 +1346,10 @@ return [
 
     'response' => [
         'being-used' => 'Este recurso: :name está siendo usado en :source',
-        'product-copied'            => 'El Producto ha sido copiado',
-        'error-while-copying'       => 'Se produjo un error al intentar copiar el producto',
+        'product-copied' => 'El Producto ha sido copiado',
+        'error-while-copying' => 'Se produjo un error al intentar copiar el producto',
         'product-can-not-be-copied' => 'Productos del tipo :type no se pueden copiar',
+        'cannot-change' => 'Cannot change the :name.',
         'cannot-delete-default' => 'No puede borrar el canal predeterminado',
         'create-success' => ':name :name creado con éxito.',
         'update-success' => ':name actualizado con éxito.',

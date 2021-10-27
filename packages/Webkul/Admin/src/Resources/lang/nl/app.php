@@ -1334,6 +1334,7 @@ return [
 
     'response' => [
         'being-used' => 'Deze bron :name is wennen :source',
+        'cannot-change' => 'Cannot change the :name.',
         'cannot-delete-default' => 'Kan het standaardkanaal niet verwijderen',
         'create-success' => ':name succesvol gemaakt.',
         'update-success' => ':name succesvol geupdatet.',

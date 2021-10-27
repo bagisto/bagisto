@@ -1,28 +1,27 @@
 <?php
 
-// Controllers
+use Illuminate\Support\Facades\Route;
 use Webkul\Velocity\Http\Controllers\Admin\ConfigurationController;
 use Webkul\Velocity\Http\Controllers\Admin\ContentController;
 
 Route::group(['middleware' => ['web', 'admin_locale']], function () {
     Route::prefix(config('app.admin_url') . '/velocity')->group(function () {
         Route::group(['middleware' => ['admin']], function () {
-            // Content Pages Route
             Route::get('/content', [ContentController::class, 'index'])->defaults('_config', [
                 'view' => 'velocity::admin.content.index'
             ])->name('velocity.admin.content.index');
 
             Route::get('/content/search', [ContentController::class, 'search'])->name('velocity.admin.content.search');
 
-            Route::get('/content/create', [ContentController::class, 'create'])->defaults('_config',[
+            Route::get('/content/create', [ContentController::class, 'create'])->defaults('_config', [
                 'view' => 'velocity::admin.content.create'
             ])->name('velocity.admin.content.create');
 
-            Route::post('/content/create', [ContentController::class, 'store'])->defaults('_config',[
+            Route::post('/content/create', [ContentController::class, 'store'])->defaults('_config', [
                 'redirect' => 'velocity.admin.content.index'
             ])->name('velocity.admin.content.store');
 
-            Route::get('/content/edit/{id}', [ContentController::class, 'edit'])->defaults('_config',[
+            Route::get('/content/edit/{id}', [ContentController::class, 'edit'])->defaults('_config', [
                 'view' => 'velocity::admin.content.edit'
             ])->name('velocity.admin.content.edit');
 

@@ -1340,6 +1340,7 @@ return [
         'product-copied'            => 'تم نسخ المنتج',
         'error-while-copying'       => 'خطأ في نسخ المنتج',
         'product-can-not-be-copied' => 'لا يمكن نسخ منتجات الحجز',
+        'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'لا يمكن حذف القناة الافتراضية',
         'create-success'            => 'إنشاء الاسم بنجاح:name',
         'update-success'            => 'تحديث الاسم بنجاح :name ',

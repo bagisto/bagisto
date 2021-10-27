@@ -1,8 +1,6 @@
 <?php
 
-// Controllers
-use Webkul\CMS\Http\Controllers\Shop\PagePresenterController;
-use Webkul\Core\Http\Controllers\CountryStateController;
+use Illuminate\Support\Facades\Route;
 use Webkul\Customer\Http\Controllers\AccountController;
 use Webkul\Customer\Http\Controllers\AddressController;
 use Webkul\Customer\Http\Controllers\CustomerController;
@@ -11,156 +9,10 @@ use Webkul\Customer\Http\Controllers\RegistrationController;
 use Webkul\Customer\Http\Controllers\ResetPasswordController;
 use Webkul\Customer\Http\Controllers\SessionController;
 use Webkul\Customer\Http\Controllers\WishlistController;
-use Webkul\Shop\Http\Controllers\CartController;
 use Webkul\Shop\Http\Controllers\DownloadableProductController;
-use Webkul\Shop\Http\Controllers\HomeController;
-use Webkul\Shop\Http\Controllers\OnepageController;
 use Webkul\Shop\Http\Controllers\OrderController;
-use Webkul\Shop\Http\Controllers\ProductController;
-use Webkul\Shop\Http\Controllers\ReviewController;
-use Webkul\Shop\Http\Controllers\SearchController;
-use Webkul\Shop\Http\Controllers\SubscriptionController;
 
 Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function () {
-    /**
-     * Store front home.
-     */
-    Route::get('/', [HomeController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::home.index'
-    ])->name('shop.home.index');
-
-    /**
-     * Store front search.
-     */
-    Route::get('/search', [SearchController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::search.search'
-    ])->name('shop.search.index');
-
-    Route::post('/upload-search-image', [HomeController::class, 'upload'])->name('shop.image.search.upload');
-
-    /**
-     * Subscription.
-     */
-    Route::get('/subscribe', [SubscriptionController::class, 'subscribe'])->name('shop.subscribe');
-
-    Route::get('/unsubscribe/{token}', [SubscriptionController::class, 'unsubscribe'])->name('shop.unsubscribe');
-
-    /**
-     * Country-State selector.
-     */
-    Route::get('get/countries', [CountryStateController::class, 'getCountries'])->defaults('_config', [
-        'view' => 'shop::test'
-    ])->name('get.countries');
-
-    /**
-     * Get States when Country is passed.
-     */
-    Route::get('get/states/{country}', [CountryStateController::class, 'getStates'])->defaults('_config', [
-        'view' => 'shop::test'
-    ])->name('get.states');
-
-    /**
-     * Cart, coupons and checkout.
-     */
-    // Cart items listing.
-    Route::get('checkout/cart', [CartController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::checkout.cart.index'
-    ])->name('shop.checkout.cart.index');
-
-    // Add cart items.
-    Route::post('checkout/cart/add/{id}', [CartController::class, 'add'])->defaults('_config', [
-        'redirect' => 'shop.checkout.cart.index'
-    ])->name('cart.add');
-
-    // Cart items remove.
-    Route::get('checkout/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-
-    // Cart update before checkout.
-    Route::post('/checkout/cart', [CartController::class, 'updateBeforeCheckout'])->defaults('_config', [
-        'redirect' => 'shop.checkout.cart.index'
-    ])->name('shop.checkout.cart.update');
-
-    // Cart items remove.
-    Route::get('/checkout/cart/remove/{id}', [CartController::class, 'remove'])->defaults('_config', [
-        'redirect' => 'shop.checkout.cart.index'
-    ])->name('shop.checkout.cart.remove');
-
-    // Move item to wishlist from cart.
-    Route::post('move/wishlist/{id}', [CartController::class, 'moveToWishlist'])->name('shop.movetowishlist');
-
-    // Apply coupons.
-    Route::post('checkout/cart/coupon', [CartController::class, 'applyCoupon'])->name('shop.checkout.cart.coupon.apply');
-
-    // Remove coupons.
-    Route::delete('checkout/cart/coupon', [CartController::class, 'removeCoupon'])->name('shop.checkout.coupon.remove.coupon');
-
-    // Checkout index page.
-    Route::get('/checkout/onepage', [OnepageController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::checkout.onepage'
-    ])->name('shop.checkout.onepage.index');
-
-    // Checkout get summary.
-    Route::get('/checkout/summary',[OnepageController::class, 'summary'])->name('shop.checkout.summary');
-
-    // Checkout save address form.
-    Route::post('/checkout/save-address', [OnepageController::class, 'saveAddress'])->name('shop.checkout.save-address');
-
-    // Checkout save shipping address form.
-    Route::post('/checkout/save-shipping', [OnepageController::class, 'saveShipping'])->name('shop.checkout.save-shipping');
-
-    // Checkout save payment method form.
-    Route::post('/checkout/save-payment', [OnepageController::class, 'savePayment'])->name('shop.checkout.save-payment');
-
-    // Check minimum order.
-    Route::post('/checkout/check-minimum-order', [OnepageController::class, 'checkMinimumOrder'])->name('shop.checkout.check-minimum-order');
-
-    // Checkout save order.
-    Route::post('/checkout/save-order', [OnepageController::class, 'saveOrder'])->name('shop.checkout.save-order');
-
-    // Checkout order successful.
-    Route::get('/checkout/success', [OnepageController::class, 'success'])->defaults('_config', [
-        'view' => 'shop::checkout.success'
-    ])->name('shop.checkout.success');
-
-    /**
-     * Product reviews.
-     */
-    // Show product review form.
-    Route::get('/reviews/{slug}', [ReviewController::class, 'show'])->defaults('_config', [
-        'view' => 'shop::products.reviews.index'
-    ])->name('shop.reviews.index');
-
-    // Show product review listing.
-    Route::get('/product/{slug}/review', [ReviewController::class, 'create'])->defaults('_config', [
-        'view' => 'shop::products.reviews.create'
-    ])->name('shop.reviews.create');
-
-    // Store product review.
-    Route::post('/product/{slug}/review', [ReviewController::class, 'store'])->defaults('_config', [
-        'redirect' => 'shop.home.index'
-    ])->name('shop.reviews.store');
-
-    /**
-     * Downloadable products.
-     */
-    Route::get('/downloadable/download-sample/{type}/{id}', [ProductController::class, 'downloadSample'])->name('shop.downloadable.download_sample');
-
-    Route::get('/product/{id}/{attribute_id}', [ProductController::class, 'download'])->defaults('_config', [
-        'view' => 'shop.products.index'
-    ])->name('shop.product.file.download');
-
-    /**
-     * These are the routes which are used during checkout for checking the customer.
-     * So, placed outside the cart merger middleware.
-     */
-    Route::prefix('customer')->group(function () {
-        // For customer exist check.
-        Route::post('/customer/exist', [OnepageController::class, 'checkExistCustomer'])->name('customer.checkout.exist');
-
-        // For customer login checkout.
-        Route::post('/customer/checkout/login', [OnepageController::class, 'loginForCheckout'])->name('customer.checkout.login');
-    });
-
     /**
      * Cart merger middleware. This middleware will take care of the items
      * which are deactivated at the time of buy now functionality. If somehow
@@ -171,40 +23,31 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
      * group.
      */
     Route::group(['middleware' => ['cart.merger']], function () {
-        /**
-         * Customer routes.
-         */
         Route::prefix('customer')->group(function () {
             /**
              * Forgot password routes.
              */
-            // Show forgot password form.
             Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->defaults('_config', [
                 'view' => 'shop::customers.signup.forgot-password'
             ])->name('customer.forgot-password.create');
 
-            // Store forgot password.
             Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('customer.forgot-password.store');
 
-            // Reset password form.
             Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->defaults('_config', [
                 'view' => 'shop::customers.signup.reset-password'
             ])->name('customer.reset-password.create');
 
-            // Store reset password.
-            Route::post('/reset-password',[ResetPasswordController::class, 'store'])->defaults('_config', [
+            Route::post('/reset-password', [ResetPasswordController::class, 'store'])->defaults('_config', [
                 'redirect' => 'customer.profile.index'
             ])->name('customer.reset-password.store');
 
             /**
              * Login routes.
              */
-            // Login form.
             Route::get('login', [SessionController::class, 'show'])->defaults('_config', [
                 'view' => 'shop::customers.session.index',
             ])->name('customer.session.index');
 
-            // Login.
             Route::post('login', [SessionController::class, 'create'])->defaults('_config', [
                 'redirect' => 'customer.profile.index'
             ])->name('customer.session.create');
@@ -212,24 +55,23 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
             /**
              * Registration routes.
              */
-            // Show registration form.
             Route::get('register', [RegistrationController::class, 'show'])->defaults('_config', [
                 'view' => 'shop::customers.signup.index'
             ])->name('customer.register.index');
 
-            // Store new registered user.
             Route::post('register', [RegistrationController::class, 'create'])->defaults('_config', [
                 'redirect' => 'customer.session.index',
             ])->name('customer.register.create');
 
-            // Verify account.
+            /**
+             * Customer verification routes.
+             */
             Route::get('/verify-account/{token}', [RegistrationController::class, 'verifyAccount'])->name('customer.verify');
 
-            // Resend verification email.
             Route::get('/resend/verification/{email}', [RegistrationController::class, 'resendVerificationEmail'])->name('customer.resend.verification-email');
 
             /**
-             * Customer authented routes. All the below routes only be accessible
+             * Customer authenticated routes. All the below routes only be accessible
              * if customer is authenticated.
              */
             Route::group(['middleware' => ['customer']], function () {
@@ -362,20 +204,21 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 });
             });
         });
+    });
+
+    /**
+     * These are the routes which are used during checkout for checking the customer.
+     * So, placed outside the cart merger middleware.
+     */
+    Route::prefix('customer')->group(function () {
+        /**
+         * For customer exist check.
+         */
+        Route::post('/customer/exist', [OnepageController::class, 'checkExistCustomer'])->name('customer.checkout.exist');
 
         /**
-         * CMS pages.
+         * For customer login checkout.
          */
-        Route::get('page/{slug}', [PagePresenterController::class, 'presenter'])->name('shop.cms.page');
-
-        /**
-         * Fallback route.
-         */
-        Route::fallback(\Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController::class . '@index')
-            ->defaults('_config', [
-                'product_view' => 'shop::products.view',
-                'category_view' => 'shop::products.index'
-            ])
-            ->name('shop.productOrCategory.index');
+        Route::post('/customer/checkout/login', [OnepageController::class, 'loginForCheckout'])->name('customer.checkout.login');
     });
 });

@@ -3,58 +3,79 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
+use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
+use Webkul\Product\Repositories\ProductFlatRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {
     /**
-     * ProductRepository object
+     * Product repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
-     * ProductAttributeValueRepository object
+     * Product flat repository instance.
+     *
+     * @var \Webkul\Product\Repositories\ProductFlatRepository
+     */
+    protected $productFlatRepository;
+
+    /**
+     * Product attribute value repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
      */
     protected $productAttributeValueRepository;
 
     /**
-     * ProductDownloadableSampleRepository object
+     * Product downloadable sample repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
      */
     protected $productDownloadableSampleRepository;
 
     /**
-     * ProductDownloadableLinkRepository object
+     * Product downloadable link repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
      */
     protected $productDownloadableLinkRepository;
 
     /**
+     * Category repository instance.
+     *
+     * @var \Webkul\Category\Repositories\CategoryRepository
+     */
+    protected $categoryRepository;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\productAttributeValueRepository  $productAttributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
      * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @return void
      */
     public function __construct(
         ProductRepository $productRepository,
+        ProductFlatRepository $productFlatRepository,
         ProductAttributeValueRepository $productAttributeValueRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
-        ProductDownloadableLinkRepository $productDownloadableLinkRepository
-    )
-    {
+        ProductDownloadableLinkRepository $productDownloadableLinkRepository,
+        CategoryRepository $categoryRepository
+    ) {
         $this->productRepository = $productRepository;
+
+        $this->productFlatRepository = $productFlatRepository;
 
         $this->productAttributeValueRepository = $productAttributeValueRepository;
 
@@ -62,11 +83,13 @@ class ProductController extends Controller
 
         $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
 
+        $this->categoryRepository = $categoryRepository;
+
         parent::__construct();
     }
 
     /**
-     * Download image or file
+     * Download image or file.
      *
      * @param  int  $productId
      * @param  int  $attributeId
@@ -102,7 +125,7 @@ class ProductController extends Controller
                         ? $privateDisk->download($productDownloadableLink->sample_file)
                         : abort(404);
                 } else {
-                    $fileName = $name = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
+                    $fileName = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
 
                     $tempImage = tempnam(sys_get_temp_dir(), $fileName);
 
@@ -116,7 +139,7 @@ class ProductController extends Controller
                 if ($productDownloadableSample->type == 'file') {
                     return Storage::download($productDownloadableSample->file);
                 } else {
-                    $fileName = $name = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
+                    $fileName = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
 
                     $tempImage = tempnam(sys_get_temp_dir(), $fileName);
 
@@ -125,8 +148,48 @@ class ProductController extends Controller
                     return response()->download($tempImage, $fileName);
                 }
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             abort(404);
         }
+    }
+
+    /**
+     * Get filter attributes for product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getFilterAttributes($categoryId)
+    {
+        $category = $this->categoryRepository->find($categoryId);
+
+        if ($category) {
+            return response()->json([
+                'filter_attributes' => $this->productFlatRepository->getFilterAttributes($category)
+            ]);
+        }
+
+        return response()->json([
+            'filter_attributes' => []
+        ]);
+    }
+
+    /**
+     * Get category product maximum price.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getCategoryProductMaximumPrice($categoryId)
+    {
+        $category = $this->categoryRepository->find($categoryId);
+
+        if ($category) {
+            return response()->json([
+                'max_price' => $this->productFlatRepository->handleCategoryProductMaximumPrice($category)
+            ]);
+        }
+
+        return response()->json([
+            'max_price' => 0
+        ]);
     }
 }
