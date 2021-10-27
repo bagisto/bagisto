@@ -228,7 +228,7 @@ class UserController extends Controller
     }
 
     /**
-     * Validate user data.
+     * Prepare user data.
      *
      * @param  \Webkul\User\Http\Requests\UserForm  $request
      * @param  int  $id
