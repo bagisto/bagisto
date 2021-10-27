@@ -53,7 +53,6 @@
                     'additionalAttributes' => true,
                     'btnText'              => $moveToCartText,
                     'addToCartBtnClass'    => 'small-padding',
-                    'wishlistShare'        => core()->getConfigData('catalog.products.wishlist_social_share.enabled')
                 ])
             @endforeach
 
