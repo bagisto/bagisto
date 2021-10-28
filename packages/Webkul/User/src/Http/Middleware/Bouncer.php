@@ -21,6 +21,16 @@ class Bouncer
         }
 
         /**
+         * If user status is changed by admin. Then session should be
+         * logged out.
+         */
+        if (! (bool) auth()->guard($guard)->user()->status) {
+            auth()->guard($guard)->logout();
+
+            return redirect()->route('admin.session.create');
+        }
+
+        /**
          * If somehow the user deleted all permissions, then it should be
          * auto logged out and need to contact the administrator again.
          */
