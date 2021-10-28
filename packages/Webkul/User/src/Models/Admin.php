@@ -11,7 +11,7 @@ use Webkul\User\Notifications\AdminResetPassword;
 
 class Admin extends Authenticatable implements AdminContract
 {
-    use Notifiable, HasFactory;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
