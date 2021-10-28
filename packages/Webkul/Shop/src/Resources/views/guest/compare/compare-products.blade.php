@@ -8,7 +8,7 @@
 @endphp
 
 @push('scripts')
-    <script type="text/x-template" id="compare-product-template jjj">
+    <script type="text/x-template" id="compare-product-template">
         <section class="comparison-component">
             <h1>
                 {{ __('shop::app.customer.compare.compare_similar_items') }}
@@ -23,7 +23,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
 
-            <table class="compare-products jjj">
+            <table class="compare-products">
                 <template v-if="isProductListLoaded && products.length > 0">
                     @php
                         $comparableAttributes = $comparableAttributes->toArray();
