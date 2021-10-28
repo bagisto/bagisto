@@ -39,7 +39,7 @@ class InvoiceOverdueCron extends Command
     public function handle()
     {
         // Get 'overdue' invoices
-        Invoice::whereOverdueReminders()
+        Invoice::inOverdueAndRemindersLimit()
         ->get()
         ->each(function (Invoice $invoice) {
             $invoice->sendInvoiceReminder();

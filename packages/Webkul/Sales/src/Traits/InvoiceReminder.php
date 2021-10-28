@@ -57,8 +57,9 @@ trait InvoiceReminder
     /**
      * Scope a query to include only the overdue invoices and at the limit of reminders.
      */
-    public function scopeOverdueReminders($query)
+    public function scopeInOverdueAndRemindersLimit($query)
     {
+        $query->where('state', '=', 'overdue');
         if ($this->hasOverdueRemindersLimit()) {
             $limit = $this->getOverdueRemindersLimit();
             return $query->where('reminders', '<', $limit);
