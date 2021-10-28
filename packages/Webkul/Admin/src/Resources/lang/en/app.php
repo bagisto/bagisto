@@ -1491,6 +1491,8 @@ return [
             'invoice-slip-design'                   => 'Invoice Slip Design',
             'logo'                                  => 'Logo',
             'default'                               => 'Default',
+            'invoice-reminders'                     => 'Invoice Reminders',
+            'maximum-limit-of-reminders'               => 'Maximum limit of reminders',
             'sandbox'                               => 'Sandbox',
             'all-channels'                          => 'All Channels',
             'all-locales'                           => 'All Locales',

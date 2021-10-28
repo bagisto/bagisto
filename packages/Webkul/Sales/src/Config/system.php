@@ -133,5 +133,18 @@ return [
                 'channel_based' => true,
             ],
         ]
+    ], [
+        'key'    => 'sales.invoice_setttings.invoice_reminders',
+        'name'   => 'admin::app.admin.system.invoice-reminders',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'          => 'reminders_limit',
+                'title'         => 'admin::app.admin.system.maximum-limit-of-reminders',
+                'type'          => 'text',
+                'validation'    => 'numeric',
+                'channel_based' => true,
+            ],
+        ]
     ],
 ];
