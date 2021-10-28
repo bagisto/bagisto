@@ -655,6 +655,12 @@ return [
             'heading' => 'Tu factura #:invoice_id para el pedido#:order_id',
             'subject' => 'Factura de tu pedido #:order_id',
             'summary' => 'Resumen de pedido',
+            'reminder' => [
+                'subject' => 'Recordatorio de factura',
+                'your-invoice-is-overdue' => 'El pago de tu factura :invoice esta retrasado por :time.',
+                'please-make-your-payment-as-soon-as-possible' => 'Por favor haga su pago lo antes posible.',
+                'if-you-ve-already-paid-just-disregard-this-email' => 'Si ya ha pagado, simplemente ignore este correo electrónico.',
+            ],
         ],
         'shipment' => [
             'heading' => 'El Envío #:shipment_id  ha sido generado por el pedido #:order_id',
