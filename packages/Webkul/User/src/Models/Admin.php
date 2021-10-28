@@ -2,16 +2,16 @@
 
 namespace Webkul\User\Models;
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Webkul\User\Models\Role;
-use Webkul\User\Notifications\AdminResetPassword;
+use Illuminate\Notifications\Notifiable;
 use Webkul\User\Contracts\Admin as AdminContract;
-
+use Webkul\User\Database\Factories\AdminFactory;
+use Webkul\User\Notifications\AdminResetPassword;
 
 class Admin extends Authenticatable implements AdminContract
 {
-    use Notifiable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -40,21 +40,12 @@ class Admin extends Authenticatable implements AdminContract
 
     /**
      * Get the role that owns the admin.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function role()
     {
         return $this->belongsTo(RoleProxy::modelClass());
-    }
-
-    /**
-    * Send the password reset notification.
-    *
-    * @param  string  $token
-    * @return void
-    */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new AdminResetPassword($token));
     }
 
     /**
@@ -70,5 +61,26 @@ class Admin extends Authenticatable implements AdminContract
         }
 
         return in_array($permission, $this->role->permissions);
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPassword($token));
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return AdminFactory
+     */
+    protected static function newFactory(): AdminFactory
+    {
+        return AdminFactory::new();
     }
 }
