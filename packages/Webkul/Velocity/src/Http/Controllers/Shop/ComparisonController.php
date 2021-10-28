@@ -45,7 +45,6 @@ class ComparisonController extends Controller
                     'status'   => 'success',
                     'products' => $productCollection,
                 ];
-
             } else {
                 $response = view($this->_config['view']);
             }

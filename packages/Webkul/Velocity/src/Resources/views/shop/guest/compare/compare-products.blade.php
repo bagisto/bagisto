@@ -8,7 +8,7 @@
 @endphp
 
 @push('scripts')
-    <script type="text/x-template" id="compare-product-template hhh">
+    <script type="text/x-template" id="compare-product-template">
         <section class="cart-details row no-margin col-12">
             <h2 class="fw6 col-6">
                 {{ __('velocity::app.customer.compare.compare_similar_items') }}
@@ -24,7 +24,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
 
-            <table class="row compare-products hhh">
+            <table class="row compare-products">
                 <shimmer-component v-if="!isProductListLoaded && !isMobile()"></shimmer-component>
 
                 <template v-else-if="isProductListLoaded && products.length > 0">

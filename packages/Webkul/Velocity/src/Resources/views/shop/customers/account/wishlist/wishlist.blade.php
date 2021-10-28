@@ -53,7 +53,7 @@
                     'btnText'              => $moveToCartText,
                     'addToCartBtnClass'    => 'small-padding',
                 ])
-            @endforeach 
+            @endforeach
 
             <div>
                 {{ $items->links()  }}
