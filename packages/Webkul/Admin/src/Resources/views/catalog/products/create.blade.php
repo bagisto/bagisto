@@ -22,7 +22,6 @@
 @section('content')
     <div class="content">
         <form method="POST" action="" @submit.prevent="onSubmit">
-
             <div class="page-header">
                 <div class="page-title">
                     <h1>
@@ -50,7 +49,6 @@
 
                 <accordian :title="'{{ __('admin::app.catalog.products.general') }}'" :active="true">
                     <div slot="body">
-
                         {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.general.controls.before') !!}
 
                         <div class="control-group" :class="[errors.has('type') ? 'has-error' : '']">
@@ -93,19 +91,16 @@
                         </div>
 
                         {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.general.controls.after') !!}
-
                     </div>
                 </accordian>
 
                 {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.general.after') !!}
 
                 @if ($familyId)
-
                     {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.configurable_attributes.before') !!}
 
                     <accordian :title="'{{ __('admin::app.catalog.products.configurable-attributes') }}'" :active="true">
                         <div slot="body">
-
                             {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.configurable_attributes.controls.before') !!}
 
                             <div class="table">
@@ -140,20 +135,16 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-
                                 </table>
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.configurable_attributes.controls.after') !!}
-
                         </div>
                     </accordian>
 
                     {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.configurable_attributes.after') !!}
                 @endif
-
             </div>
-
         </form>
     </div>
 @stop
