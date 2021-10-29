@@ -479,6 +479,7 @@ return [
             'empty' => 'Votre panier est vide',
             'update-cart' => 'Mise à jour panier',
             'continue-shopping' => 'Continuer vos achats',
+            'continue-registration' => 'Continuer l inscription',
             'proceed-to-checkout' => 'Passer à la caisse',
             'remove' => 'Supprimer',
             'remove-link' => 'Supprimer',

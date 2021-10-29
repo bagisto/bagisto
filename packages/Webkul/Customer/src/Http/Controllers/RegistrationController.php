@@ -162,9 +162,6 @@ class RegistrationController extends Controller
 
                 session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
             }
-
-            Order::where('customer_email', $customer->email)->update(['customer_id' => $customer->id]);
-
             session()->flash('success', trans('shop::app.customer.signup-form.success'));
         }
 
@@ -183,6 +180,7 @@ class RegistrationController extends Controller
 
         if ($customer) {
             $customer->update(['is_verified' => 1, 'token' => 'NULL']);
+            Order::where('customer_email', $customer->email)->update(['customer_id' => $customer->id]);
 
             session()->flash('success', trans('shop::app.customer.signup-form.verified'));
         } else {

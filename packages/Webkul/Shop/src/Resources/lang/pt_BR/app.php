@@ -473,6 +473,7 @@ return [
             'empty' => 'Seu carrinho de compras está vazio',
             'update-cart' => 'Atualizar Carrinho',
             'continue-shopping' => 'Continuar Comprando',
+            'continue-registration' => 'Continuar o registro',
             'proceed-to-checkout' => 'Finalizar Compra',
             'remove' => 'Remover',
             'remove-link' => 'Remover',

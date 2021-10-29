@@ -485,6 +485,7 @@ return [
             'empty' => 'Tu carrito está vacía',
             'update-cart' => 'Actualizar carrito',
             'continue-shopping' => 'Seguir comprando',
+            'continue-registration' => 'Daŭrigu Registradon',
             'proceed-to-checkout' => 'Continuar con el pago',
             'remove' => 'Eliminar',
             'remove-link' => 'Eliminar',

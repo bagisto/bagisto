@@ -481,6 +481,7 @@ return [
             'empty' => 'Il tuo carrello è ancora vuoto',
             'update-cart' => 'Aggiorna Carrello',
             'continue-shopping' => 'Continua con i tuoi acquisti',
+            'continue-registration' => 'Continua la registrazione',
             'proceed-to-checkout' => 'Procedi alla Cassa',
             'remove' => 'Rimuovi',
             'remove-link' => 'Rimuovi',

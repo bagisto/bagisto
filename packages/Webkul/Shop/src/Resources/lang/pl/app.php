@@ -481,6 +481,7 @@ return [
             'empty' => 'Twój koszyk jest pusty',
             'update-cart' => 'Zaktualizuj koszyk',
             'continue-shopping' => 'Kontynuuj zakupy',
+            'continue-registration' => 'Kontynuuj rejestrację',
             'proceed-to-checkout' => 'Przejdź do kasy”',
             'remove' => 'Usuń',
             'remove-link' => 'Usuń',
