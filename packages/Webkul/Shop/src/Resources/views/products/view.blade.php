@@ -244,7 +244,9 @@
             },
 
             mounted: function() {
-                this.$refs.quantityChanger.value = this.minQuantity;
+                this.$refs.quantityChanger.value = this.qty > this.minQuantity
+                    ? this.qty
+                    : this.minQuantity;
             },
 
             watch: {
