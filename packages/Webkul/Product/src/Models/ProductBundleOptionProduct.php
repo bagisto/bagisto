@@ -23,7 +23,7 @@ class ProductBundleOptionProduct extends Model implements ProductBundleOptionPro
      */
     public function bundle_option()
     {
-        return $this->belongsTo(ProductBundleProductProxy::modelClass());
+        return $this->belongsTo(ProductBundleOptionProxy::modelClass());
     }
 
     /**
