@@ -145,6 +145,44 @@ return [
                 'validation'    => 'numeric',
                 'channel_based' => true,
             ],
+            [
+                'name'          => 'interval_between_reminders',
+                'title'         => 'admin::app.admin.system.interval-between-reminders',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => '1 day',
+                        'value' => 'P1D',
+                    ], [
+                        'title' => '2 days',
+                        'value' => 'P2D',
+                    ], [
+                        'title' => '3 days',
+                        'value' => 'P3D',
+                    ], [
+                        'title' => '4 days',
+                        'value' => 'P4D',
+                    ], [
+                        'title' => '5 days',
+                        'value' => 'P4D',
+                    ], [
+                        'title' => '6 days',
+                        'value' => 'P4D',
+                    ], [
+                        'title' => '7 days',
+                        'value' => 'P4D',
+                    ], [
+                        'title' => '2 weeks',
+                        'value' => 'P2W',
+                    ], [
+                        'title' => '3 weeks',
+                        'value' => 'P3W',
+                    ], [
+                        'title' => '4 weeks',
+                        'value' => 'P4W',
+                    ],
+                ],
+            ],
         ]
     ],
 ];
