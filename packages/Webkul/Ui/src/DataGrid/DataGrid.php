@@ -6,11 +6,12 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Event;
 use Webkul\Ui\DataGrid\Traits\ProvideBouncer;
 use Webkul\Ui\DataGrid\Traits\ProvideCollection;
+use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 use Webkul\Ui\DataGrid\Traits\ProvideExceptionHandler;
 
 abstract class DataGrid
 {
-    use ProvideBouncer, ProvideCollection, ProvideExceptionHandler;
+    use ProvideBouncer, ProvideCollection, ProvideExceptionHandler, ProvideDataGridPlus;
 
     /**
      * Set index columns, ex: id.

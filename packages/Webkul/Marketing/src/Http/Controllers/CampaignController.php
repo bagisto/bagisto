@@ -3,6 +3,7 @@
 namespace Webkul\Marketing\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\CampaignDataGrid;
 use Webkul\Marketing\Repositories\CampaignRepository;
 
 class CampaignController extends Controller
@@ -41,6 +42,10 @@ class CampaignController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CampaignDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 
+use Webkul\Admin\DataGrids\OrderTransactionsDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Payment\Facades\Payment;
 
@@ -73,6 +74,10 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(OrderTransactionsDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

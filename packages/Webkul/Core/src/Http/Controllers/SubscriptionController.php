@@ -4,6 +4,7 @@ namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Webkul\Admin\DataGrids\NewsLetterDataGrid;
 use Webkul\Core\Repositories\SubscribersListRepository;
 
 class SubscriptionController extends Controller
@@ -42,6 +43,9 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(NewsLetterDataGrid::class)->toJson();
+        }
         return view($this->_config['view']);
     }
 

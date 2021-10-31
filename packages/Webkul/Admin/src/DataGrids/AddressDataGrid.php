@@ -10,8 +10,6 @@ use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class AddressDataGrid extends DataGrid
 {
-    use ProvideDataGridPlus;
-
     /**
      * Index.
      *

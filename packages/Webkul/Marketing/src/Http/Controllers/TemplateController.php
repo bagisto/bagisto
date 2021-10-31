@@ -3,6 +3,7 @@
 namespace Webkul\Marketing\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\EmailTemplateDataGrid;
 use Webkul\Marketing\Repositories\TemplateRepository;
 
 class TemplateController extends Controller
@@ -41,6 +42,10 @@ class TemplateController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(EmailTemplateDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

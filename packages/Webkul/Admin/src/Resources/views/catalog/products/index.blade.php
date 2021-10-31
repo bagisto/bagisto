@@ -28,9 +28,9 @@
         {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
         <div class="page-content">
-            @inject('products', 'Webkul\Admin\DataGrids\ProductDataGrid')
 
-            {!! $products->render() !!}
+            <datagrid-plus src="{{ route('admin.catalog.products.index') }}"></datagrid-plus>
+
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
@@ -45,7 +45,7 @@
 @stop
 
 @push('scripts')
-    @include('admin::export.export', ['gridName' => $products])
+    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\ProductDataGrid')])
 
     <script>
         function reloadPage(getVar, getVal) {

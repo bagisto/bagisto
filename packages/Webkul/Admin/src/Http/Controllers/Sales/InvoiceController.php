@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use PDF;
+use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -57,6 +58,10 @@ class InvoiceController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(OrderInvoicesDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

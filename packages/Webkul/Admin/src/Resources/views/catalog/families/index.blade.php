@@ -22,11 +22,11 @@
 
         <div class="page-content">
 
-            {!! app('Webkul\Admin\DataGrids\AttributeFamilyDataGrid')->render() !!}
+            <datagrid-plus src="{{ route('admin.catalog.families.index') }}"></datagrid-plus>
 
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.families.list.after') !!}
-        
+
     </div>
 @stop

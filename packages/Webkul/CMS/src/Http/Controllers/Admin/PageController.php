@@ -2,6 +2,7 @@
 
 namespace Webkul\CMS\Http\Controllers\Admin;
 
+use Webkul\Admin\DataGrids\CMSPageDataGrid;
 use Webkul\CMS\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
 
@@ -43,6 +44,10 @@ use Webkul\CMS\Repositories\CmsRepository;
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CMSPageDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

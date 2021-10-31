@@ -38,9 +38,9 @@
         {!! view_render_event('bagisto.admin.catalog.categories.list.before') !!}
 
         <div class="page-content">
-            @inject('categories', 'Webkul\Admin\DataGrids\CategoryDataGrid')
 
-            {!! $categories->render() !!}
+            <datagrid-plus src="{{ route('admin.catalog.categories.index') }}"></datagrid-plus>
+
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.categories.list.after') !!}

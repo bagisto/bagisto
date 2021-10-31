@@ -26,9 +26,9 @@
         </div>
 
         <div class="page-content">
-            @inject('cmsGrid', 'Webkul\Admin\DataGrids\CMSPageDataGrid')
 
-            {!! $cmsGrid->render() !!}
+            <datagrid-plus src="{{ route('admin.cms.index') }}"></datagrid-plus>
+
         </div>
     </div>
 
@@ -41,6 +41,6 @@
 @stop
 
 @push('scripts')
-    @include('admin::export.export', ['gridName' => $cmsGrid])
+    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\CMSPageDataGrid')])
 @endpush
 

@@ -21,8 +21,9 @@
         </div>
 
         <div class="page-content">
-            @inject('subscribers','Webkul\Admin\DataGrids\NewsLetterDataGrid')
-            {!! $subscribers->render() !!}
+
+            <datagrid-plus src="{{ route('admin.customers.subscribers.index') }}"></datagrid-plus>
+
         </div>
     </div>
 @stop

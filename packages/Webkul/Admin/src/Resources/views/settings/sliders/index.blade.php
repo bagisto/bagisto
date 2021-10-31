@@ -26,8 +26,9 @@
         </div>
 
         <div class="page-content">
-            @inject('sliders','Webkul\Admin\DataGrids\SliderDataGrid')
-            {!! $sliders->render() !!}
+
+            <datagrid-plus src="{{ route('admin.sliders.index') }}"></datagrid-plus>
+
         </div>
     </div>
 @stop

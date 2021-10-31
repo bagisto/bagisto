@@ -19,8 +19,9 @@
         </div>
 
         <div class="page-content">
-            @inject('review','Webkul\Admin\DataGrids\CustomerReviewDataGrid')
-            {!! $review->render() !!}
+
+            <datagrid-plus src="{{ route('admin.customer.review.index') }}"></datagrid-plus>
+
         </div>
     </div>
 

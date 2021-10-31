@@ -24,8 +24,8 @@
 
         <div class="page-content">
 
-            {!! app('Webkul\Admin\DataGrids\ExchangeRatesDataGrid')->render() !!}
-            
+            <datagrid-plus src="{{ route('admin.exchange_rates.index') }}"></datagrid-plus>
+
         </div>
     </div>
 @stop

@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
+use Webkul\Admin\DataGrids\CartRuleDataGrid;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 
@@ -60,6 +61,10 @@ class CartRuleController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CartRuleDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

@@ -32,8 +32,9 @@
         </div>
 
         <div class="page-content">
-            @inject('taxRateGrid', 'Webkul\Admin\DataGrids\TaxRateDataGrid')
-            {!! $taxRateGrid->render() !!}
+
+            <datagrid-plus src="{{ route('admin.tax-rates.index') }}"></datagrid-plus>
+
         </div>
     </div>
 
@@ -69,5 +70,5 @@
 @endsection
 
 @push('scripts')
-    @include('admin::export.export', ['gridName' => $taxRateGrid])
+    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\TaxRateDataGrid')])
 @endpush

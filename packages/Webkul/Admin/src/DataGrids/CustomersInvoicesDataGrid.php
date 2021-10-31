@@ -8,8 +8,6 @@ use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class CustomersInvoicesDataGrid extends DataGrid
 {
-    use ProvideDataGridPlus;
-
     /**
      * Index column.
      *

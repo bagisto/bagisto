@@ -3,6 +3,7 @@
 namespace Webkul\User\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\RolesDataGrid;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
 
@@ -56,6 +57,10 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(RolesDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

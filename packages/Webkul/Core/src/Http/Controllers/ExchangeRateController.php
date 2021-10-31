@@ -3,6 +3,7 @@
 namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\ExchangeRatesDataGrid;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
 
@@ -57,6 +58,10 @@ class ExchangeRateController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(ExchangeRatesDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
@@ -174,7 +179,7 @@ class ExchangeRateController extends Controller
             return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
             report($e);
-            
+
             session()->flash('error', trans('admin::app.response.delete-error', ['name' => 'Exchange rate']));
         }
 

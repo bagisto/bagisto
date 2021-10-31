@@ -3,6 +3,7 @@
 namespace Webkul\Marketing\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\EventDataGrid;
 use Webkul\Marketing\Repositories\EventRepository;
 
 class EventController extends Controller
@@ -41,6 +42,10 @@ class EventController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(EventDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

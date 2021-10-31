@@ -20,8 +20,8 @@
 
         <div class="page-content">
 
-            @inject('datagrid','Webkul\Admin\DataGrids\UserDataGrid')
-            {!! $datagrid->render() !!}
+            <datagrid-plus src="{{ route('admin.users.index') }}"></datagrid-plus>
+
             {{-- <datetime></datetime> --}}
         </div>
     </div>

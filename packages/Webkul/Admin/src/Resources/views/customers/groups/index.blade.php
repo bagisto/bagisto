@@ -19,8 +19,9 @@
         </div>
 
         <div class="page-content">
-            @inject('customerGroup','Webkul\Admin\DataGrids\CustomerGroupDataGrid')
-            {!! $customerGroup->render() !!}
+
+            <datagrid-plus src="{{ route('admin.groups.index') }}"></datagrid-plus>
+
         </div>
     </div>
 

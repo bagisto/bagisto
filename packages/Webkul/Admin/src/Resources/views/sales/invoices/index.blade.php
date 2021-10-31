@@ -22,8 +22,9 @@
         </div>
 
         <div class="page-content">
-            @inject('orderInvoicesGrid', 'Webkul\Admin\DataGrids\OrderInvoicesDataGrid')
-            {!! $orderInvoicesGrid->render() !!}
+
+            <datagrid-plus src="{{ route('admin.sales.invoices.index') }}"></datagrid-plus>
+
         </div>
     </div>
 
@@ -37,5 +38,5 @@
 @stop
 
 @push('scripts')
-    @include('admin::export.export', ['gridName' => $orderInvoicesGrid])
+    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\OrderInvoicesDataGrid')])
 @endpush

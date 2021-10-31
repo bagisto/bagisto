@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\CustomerDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 
@@ -85,6 +86,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CustomerDataGrid::class)->toJson();
+        }
         return view($this->_config['view']);
     }
 

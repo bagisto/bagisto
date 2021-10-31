@@ -20,8 +20,8 @@
 
         <div class="page-content">
 
-            {!! app('Webkul\Admin\DataGrids\EmailTemplateDataGrid')->render() !!}
-            
+            <datagrid-plus src="{{ route('admin.email-templates.index') }}"></datagrid-plus>
+
         </div>
     </div>
 @stop

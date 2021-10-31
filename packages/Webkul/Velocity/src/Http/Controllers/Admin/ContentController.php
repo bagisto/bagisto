@@ -4,6 +4,7 @@ namespace Webkul\Velocity\Http\Controllers\Admin;
 
 use Illuminate\Http\Response;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Velocity\DataGrids\ContentDataGrid;
 use Webkul\Velocity\Repositories\ContentRepository;
 
 class ContentController extends Controller
@@ -46,6 +47,10 @@ class ContentController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(ContentDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

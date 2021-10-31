@@ -2,6 +2,7 @@
 
 namespace Webkul\Attribute\Http\Controllers;
 
+use Webkul\Admin\DataGrids\AttributeFamilyDataGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
@@ -54,6 +55,10 @@ class AttributeFamilyController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(AttributeFamilyDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

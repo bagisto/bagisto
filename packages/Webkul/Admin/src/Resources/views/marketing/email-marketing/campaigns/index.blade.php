@@ -20,8 +20,8 @@
 
         <div class="page-content">
 
-            {!! app('Webkul\Admin\DataGrids\CampaignDataGrid')->render() !!}
-            
+            <datagrid-plus src="{{ route('admin.campaigns.index') }}"></datagrid-plus>
+
         </div>
     </div>
 @stop

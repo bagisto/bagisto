@@ -26,9 +26,9 @@
         </div>
 
         <div class="page-content">
-            @inject('customerGrid','Webkul\Admin\DataGrids\CustomerDataGrid')
 
-            {!! $customerGrid->render() !!}
+            <datagrid-plus src="{{ route('admin.customer.index') }}"></datagrid-plus>
+
         </div>
     </div>
 
@@ -42,6 +42,6 @@
 @stop
 
 @push('scripts')
-    @include('admin::export.export', ['gridName' => $customerGrid])
+    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\CustomerDataGrid')])
 @endpush
 

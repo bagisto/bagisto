@@ -2,6 +2,8 @@
 
 namespace Webkul\Tax\Http\Controllers;
 
+use Webkul\Admin\DataGrids\TaxCategoryDataGrid;
+
 class TaxController extends Controller
 {
     /**
@@ -26,10 +28,14 @@ class TaxController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(TaxCategoryDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 }

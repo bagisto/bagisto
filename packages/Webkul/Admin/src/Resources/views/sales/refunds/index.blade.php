@@ -22,9 +22,9 @@
         </div>
 
         <div class="page-content">
-            @inject('refundGrid', 'Webkul\Admin\DataGrids\OrderRefundDataGrid')
-            
-            {!! $refundGrid->render() !!}
+
+            <datagrid-plus src="{{ route('admin.sales.refunds.index') }}"></datagrid-plus>
+
         </div>
     </div>
 
@@ -38,5 +38,5 @@
 @stop
 
 @push('scripts')
-    @include('admin::export.export', ['gridName' => $refundGrid])
+    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\OrderRefundDataGrid')])
 @endpush

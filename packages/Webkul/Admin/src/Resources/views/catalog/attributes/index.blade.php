@@ -22,8 +22,8 @@
 
         <div class="page-content">
 
-            {!! app('Webkul\Admin\DataGrids\AttributeDataGrid')->render() !!}
-            
+            <datagrid-plus src="{{ route('admin.catalog.attributes.index') }}"></datagrid-plus>
+
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.attributes.list.after') !!}

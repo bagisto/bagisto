@@ -3,6 +3,7 @@
 namespace Webkul\Inventory\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\InventorySourcesDataGrid;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 
 class InventorySourceController extends Controller
@@ -41,6 +42,10 @@ class InventorySourceController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(InventorySourcesDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
@@ -163,7 +168,7 @@ class InventorySourceController extends Controller
                 return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
                 report($e);
-                
+
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Inventory source']));
             }
         }

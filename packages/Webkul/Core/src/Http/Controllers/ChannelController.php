@@ -3,6 +3,7 @@
 namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\ChannelDataGrid;
 use Webkul\Core\Repositories\ChannelRepository;
 
 class ChannelController extends Controller
@@ -41,6 +42,10 @@ class ChannelController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(ChannelDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

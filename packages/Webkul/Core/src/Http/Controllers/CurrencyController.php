@@ -3,6 +3,7 @@
 namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\CurrencyDataGrid;
 use Webkul\Core\Repositories\CurrencyRepository;
 
 class CurrencyController extends Controller
@@ -41,6 +42,10 @@ class CurrencyController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CurrencyDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

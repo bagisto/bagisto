@@ -24,8 +24,9 @@
         </div>
 
         <div class="page-content">
-            @inject('cartRuleGrid','Webkul\Admin\DataGrids\CartRuleDataGrid')
-            {!! $cartRuleGrid->render() !!}
+
+            <datagrid-plus src="{{ route('admin.cart-rules.index') }}"></datagrid-plus>
+
         </div>
     </div>
 @endsection

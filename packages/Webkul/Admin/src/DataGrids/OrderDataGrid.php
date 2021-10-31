@@ -9,8 +9,6 @@ use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class OrderDataGrid extends DataGrid
 {
-    use ProvideDataGridPlus;
-
     /**
      * Index.
      *
