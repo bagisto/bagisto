@@ -5,7 +5,6 @@ namespace Webkul\Admin\DataGrids;
 use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Models\OrderAddress;
-use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class OrderDataGrid extends DataGrid
 {
