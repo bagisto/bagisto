@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Rule\Helpers\Validator;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\CartRule\Models\CartRuleProducts;
 use Illuminate\Database\Eloquent\Builder;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
@@ -294,25 +295,19 @@ class CartRule
                     break;
 
                 case 'buy_x_get_y':
-                    if (! $rule->discount_step || $rule->discount_amount > $rule->discount_step) {
+
+                    if (empty($rule->products)) {
                         break;
                     }
 
-                    $buyAndDiscountQty = $rule->discount_step + $rule->discount_amount;
-
-                    $qtyPeriod = floor($quantity / $buyAndDiscountQty);
-
-                    $freeQty = $quantity - $qtyPeriod * $buyAndDiscountQty;
-
-                    $discountQty = $qtyPeriod * $rule->discount_amount;
-
-                    if ($freeQty > $rule->discount_step) {
-                        $discountQty += $freeQty - $rule->discount_step;
+                    foreach ($rule->products as $product) {
+                        if (!empty($product['product_id']) && !empty($product['qty'])) {
+                            $rule_product = new CartRuleProducts();
+                            $rule_product->product_id = $product['product_id'];
+                            $rule_product->qty = $product['qty'];
+                            $rule_product->save();
+                        }
                     }
-
-                    $discountAmount = $discountQty * $item->price;
-
-                    $baseDiscountAmount = $discountQty * $item->base_price;
 
                     break;
             }
