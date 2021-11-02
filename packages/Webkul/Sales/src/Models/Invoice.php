@@ -10,10 +10,11 @@ use Webkul\Sales\Traits\PaymentTerm;
 use Webkul\Sales\Database\Factories\InvoiceFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Sales\Traits\InvoiceReminder;
 
 class Invoice extends Model implements InvoiceContract
 {
-    use PaymentTerm, HasFactory;
+    use PaymentTerm, InvoiceReminder, HasFactory;
 
     /**
      * The attributes that aren't mass assignable.

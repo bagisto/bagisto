@@ -652,6 +652,12 @@ return [
             'heading' => '#:order_id no\'lu siparişiniz için #:invoice_id no\'lu fatura oluşturuldu.',
             'subject' => '#:order_id no\'lu siparişinizin faturası',
             'summary' => 'Fatura Özeti',
+            'reminder' => [
+                'subject' => 'Invoice reminder',
+                'your-invoice-is-overdue' => 'Your invoice :invoice is overdue by :time.',
+                'please-make-your-payment-as-soon-as-possible' => 'Please make your payment as soon as possible.',
+                'if-you-ve-already-paid-just-disregard-this-email' => 'If you\'ve already paid, just disregard this email.',
+            ],
         ],
 
         'shipment' => [

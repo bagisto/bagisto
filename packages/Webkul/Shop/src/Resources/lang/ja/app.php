@@ -607,6 +607,12 @@ return [
             'heading' => '注文 #:order_idの領収書 （#:invoice_id）',
             'subject' => '注文 #:order_idの領収書',
             'summary' => '注文内容',
+            'reminder' => [
+                'subject' => 'Invoice reminder',
+                'your-invoice-is-overdue' => 'Your invoice :invoice is overdue by :time.',
+                'please-make-your-payment-as-soon-as-possible' => 'Please make your payment as soon as possible.',
+                'if-you-ve-already-paid-just-disregard-this-email' => 'If you\'ve already paid, just disregard this email.',
+            ],
         ],
         'shipment' => [
             'heading' => 'El Envío #:shipment_id  ha sido generado por el pedido #:order_id',

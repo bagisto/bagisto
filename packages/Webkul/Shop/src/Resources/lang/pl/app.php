@@ -653,6 +653,12 @@ return [
             'heading' => 'Twój numer faktury #:invoice_id dla numeru zamówienia #:order_id',
             'subject' => 'Faktura za zamówienie nr #:order_id',
             'summary' => 'Podsumowanie faktury',
+            'reminder' => [
+                'subject' => 'Invoice reminder',
+                'your-invoice-is-overdue' => 'Your invoice :invoice is overdue by :time.',
+                'please-make-your-payment-as-soon-as-possible' => 'Please make your payment as soon as possible.',
+                'if-you-ve-already-paid-just-disregard-this-email' => 'If you\'ve already paid, just disregard this email.',
+            ],
         ],
 
         'shipment' => [

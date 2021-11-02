@@ -661,6 +661,12 @@ return [
             'heading' => 'Je factuur #:invoice_id voor bestelling #:order_id',
             'subject' => 'Factuur voor uw bestelling #:order_id',
             'summary' => 'Samenvatting van factuur',
+            'reminder' => [
+                'subject' => 'Invoice reminder',
+                'your-invoice-is-overdue' => 'Your invoice :invoice is overdue by :time.',
+                'please-make-your-payment-as-soon-as-possible' => 'Please make your payment as soon as possible.',
+                'if-you-ve-already-paid-just-disregard-this-email' => 'If you\'ve already paid, just disregard this email.',
+            ],
         ],
 
         'shipment' => [

@@ -106,6 +106,7 @@ class CoreServiceProvider extends ServiceProvider
                 \Webkul\Core\Console\Commands\Install::class,
                 \Webkul\Core\Console\Commands\ExchangeRateUpdate::class,
                 \Webkul\Core\Console\Commands\BookingCron::class,
+                \Webkul\Core\Console\Commands\InvoiceOverdueCron::class,
             ]);
         }
 
