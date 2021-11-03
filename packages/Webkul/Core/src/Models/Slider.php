@@ -15,6 +15,18 @@ class Slider extends Model implements SliderContract
      */
     protected $table = 'sliders';
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['image_url'];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'title',
         'path',
@@ -27,11 +39,13 @@ class Slider extends Model implements SliderContract
 
     /**
      * Get image url for the category image.
+     *
+     * @return string
      */
     public function image_url()
     {
         if (! $this->path) {
-            return;
+            return '';
         }
 
         return Storage::url($this->path);
@@ -39,6 +53,8 @@ class Slider extends Model implements SliderContract
 
     /**
      * Get image url for the category image.
+     *
+     * @return string
      */
     public function getImageUrlAttribute()
     {

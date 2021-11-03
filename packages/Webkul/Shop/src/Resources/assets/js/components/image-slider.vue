@@ -77,7 +77,7 @@ export default {
 
             this.slides.forEach(function(slider) {
                 self.images.push({
-                    'path': self.public_path + '/storage/' + slider.path,
+                    'path': slider.image_url,
                     'title' : slider.title,
                     'slider_path': slider.slider_path ? slider.slider_path : null
                 });

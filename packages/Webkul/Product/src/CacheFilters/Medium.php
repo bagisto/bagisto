@@ -9,7 +9,7 @@ class Medium implements FilterInterface
 {
     /**
      * Apply filter.
-     * 
+     *
      * @param  \Intervention\Image\Image  $image
      * @return \Intervention\Image\Image
      */
