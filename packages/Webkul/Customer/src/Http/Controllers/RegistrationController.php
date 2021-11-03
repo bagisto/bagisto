@@ -180,6 +180,7 @@ class RegistrationController extends Controller
 
         if ($customer) {
             $customer->update(['is_verified' => 1, 'token' => 'NULL']);
+
             Order::where('customer_email', $customer->email)->update(['customer_id' => $customer->id]);
 
             session()->flash('success', trans('shop::app.customer.signup-form.verified'));
