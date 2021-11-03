@@ -26,7 +26,11 @@
                     >
                         <img
                             class="col-12 no-padding banner-icon"
-                            :src="`${$root.baseUrl}/storage/${banner.path}`"
+                            :src="
+                                banner.image_url != ''
+                                    ? banner.image_url
+                                    : defaultBanner
+                            "
                         />
 
                         <div
