@@ -446,6 +446,7 @@ return [
             'empty' => 'カートが空です。',
             'update-cart' => 'カートを更新する',
             'continue-shopping' => '買い物を続ける',
+            'continue-registration' => '登録を続ける',
             'proceed-to-checkout' => '購入手続きに進む',
             'remove' => '削除',
             'remove-link' => '削除',

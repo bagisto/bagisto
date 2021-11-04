@@ -488,6 +488,7 @@ return [
             'empty' => 'Uw winkelwagen is leeg',
             'update-cart' => 'Winkelwagen bijwerken',
             'continue-shopping' => 'Doorgaan met winkelen',
+            'continue-registration' => 'Doorgaan met registratie',
             'proceed-to-checkout' => 'Ga naar de kassa',
             'remove' => 'Verwijderen',
             'remove-link' => 'Verwijderen',

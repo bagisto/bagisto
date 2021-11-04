@@ -480,6 +480,7 @@ return [
             'empty' => 'Ihr Einkaufswagen ist leer',
             'update-cart' => 'Warenkorb aktualisieren',
             'continue-shopping' => 'Mit dem Einkaufen fortfahren',
+            'continue-registration' => 'Registrierung fortsetzen',
             'proceed-to-checkout' => 'Zur Kasse',
             'remove' => 'Entfernen',
             'remove-link' => 'Entfernen',

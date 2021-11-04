@@ -480,6 +480,7 @@ return [
             'empty' => 'سبد خرید شما خالی است',
             'update-cart' => 'به روز رسانی سبد خرید',
             'continue-shopping' => 'ادامه خرید',
+            'continue-registration' => 'ادامه ثبت نام',
             'proceed-to-checkout' => 'ادامه به پرداخت',
             'remove' => 'برداشتن',
             'remove-link' => 'برداشتن',

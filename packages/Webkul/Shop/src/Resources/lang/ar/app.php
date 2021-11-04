@@ -484,6 +484,7 @@ return [
             'empty' => 'عربة تسوقك فارغة',
             'update-cart' => 'تحديث عربة',
             'continue-shopping' => 'واصل التسوق',
+            'continue-registration' => 'متابعة التسجيل',
             'proceed-to-checkout' => 'انتقل إلى الخروج',
             'remove' => 'احذف',
             'remove-link' => 'احذف',

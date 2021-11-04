@@ -481,6 +481,7 @@ return [
             'empty' => 'Alışveriş sepetiniz boş',
             'update-cart' => 'Sepeti Güncelle',
             'continue-shopping' => 'Alışverişe Devam Et',
+            'continue-registration' => 'Kayda Devam Et',
             'proceed-to-checkout' => 'Satın Al',
             'remove' => 'Kaldır',
             'remove-link' => 'Kaldır',
