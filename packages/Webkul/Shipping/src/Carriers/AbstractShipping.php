@@ -2,8 +2,6 @@
 
 namespace Webkul\Shipping\Carriers;
 
-use Illuminate\Support\Facades\Config;
-
 abstract class AbstractShipping
 {
     abstract public function calculate();
@@ -49,7 +47,7 @@ abstract class AbstractShipping
      */
     public function getDescription()
     {
-        return $this->getConfigData('decription');
+        return $this->getConfigData('description');
     }
 
     /**
