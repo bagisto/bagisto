@@ -446,12 +446,13 @@ class Cart
             return false;
         }
 
-        $shippingMethods = Shipping::getShippingMethods();
+        $shippingMethods = Shipping::collectRates()['shippingMethods'];
         $isMethodAvailable = false;
         foreach ($shippingMethods as $shippingMethod) {
-            if ($shippingMethod['method'] == $shippingMethodCode) {
+            foreach ($shippingMethod['rates'] as $rate)
+            if ($rate->method == $shippingMethodCode) {
                 $isMethodAvailable = true;
-                break;
+                break 2;
             }
         }
         if (!$isMethodAvailable) {
