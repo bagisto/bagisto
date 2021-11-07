@@ -451,6 +451,7 @@ class Cart
         foreach ($shippingMethods as $shippingMethod) {
             if ($shippingMethod['method'] == $shippingMethodCode) {
                 $isMethodAvailable = true;
+                break;
             }
         }
         if (!$isMethodAvailable) {
