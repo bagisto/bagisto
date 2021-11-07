@@ -2,8 +2,6 @@
 
 namespace Webkul\Shipping\Carriers;
 
-use Illuminate\Support\Facades\Config;
-
 abstract class AbstractShipping
 {
     abstract public function calculate();
