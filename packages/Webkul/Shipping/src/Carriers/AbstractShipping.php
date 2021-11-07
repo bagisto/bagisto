@@ -49,7 +49,7 @@ abstract class AbstractShipping
      */
     public function getDescription()
     {
-        return $this->getConfigData('decription');
+        return $this->getConfigData('description');
     }
 
     /**
