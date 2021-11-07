@@ -446,6 +446,17 @@ class Cart
             return false;
         }
 
+        $shippingMethods = Shipping::getShippingMethods();
+        $isMethodAvailable = false;
+        foreach ($shippingMethods as $shippingMethod) {
+            if ($shippingMethod['method'] == $shippingMethodCode) {
+                $isMethodAvailable = true;
+            }
+        }
+        if (!$isMethodAvailable) {
+            return false;
+        }
+
         $cart->shipping_method = $shippingMethodCode;
         $cart->save();
 
