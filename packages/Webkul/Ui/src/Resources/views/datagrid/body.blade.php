@@ -7,6 +7,7 @@
                         @php
                             $record_id = $record->{$index};
                         @endphp
+
                         <span class="checkbox">
                             <input type="checkbox" v-model="dataIds" @change="select($event)" value="{{ $record_id }}">
 
