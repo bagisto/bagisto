@@ -1,23 +1,18 @@
 <p align="center">
-<a href="http://www.bagisto.com"><img src="https://bagisto.com/wp-content/themes/bagisto/images/logo.png" alt="Total Downloads"></a>
+    <a href="http://www.bagisto.com"><img src="https://bagisto.com/wp-content/themes/bagisto/images/logo.png" alt="Total Downloads"></a>
 </p>
 
 <p align="center">
-<a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/license.svg" alt="License"></a>
-<a href="https://github.com/bagisto/bagisto/actions"><img src="https://github.com/bagisto/bagisto/workflows/CI/badge.svg" alt="Backers on Open Collective"></a>
-<a href="#backers"><img src="https://opencollective.com/bagisto/backers/badge.svg" alt="Backers on Open Collective"></a>
-<a href="#sponsors"><img src="https://opencollective.com/bagisto/sponsors/badge.svg" alt="Sponsors on Open Collective"></a>
+    <a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/d/total.svg" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/v/stable.svg" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/license.svg" alt="License"></a>
+    <a href="https://github.com/bagisto/bagisto/actions"><img src="https://github.com/bagisto/bagisto/workflows/CI/badge.svg" alt="Backers on Open Collective"></a>
+    <a href="#backers"><img src="https://opencollective.com/bagisto/backers/badge.svg" alt="Backers on Open Collective"></a>
+    <a href="#sponsors"><img src="https://opencollective.com/bagisto/sponsors/badge.svg" alt="Sponsors on Open Collective"></a>
 </p>
 
-## Hactoberfest Rules
-- On four successful PR merges, Bagisto will provide a T-Shirt, Stickers, Notebook, Pen, and Bagisto Elephant.
-- We have added the 'Hactoberfest' label to the issues with the difficulty level label.
-- Although we have added the 'hactoberfest' topic in our repo, we will consider only PRs whose issue is labelled with 'Hactoberfest'. Below is the link,
-- [Hacktoberfest Labelled Issues](https://github.com/bagisto/bagisto/issues?q=is%3Aopen+is%3Aissue+label%3AHacktoberfest)
-
 ## Topics
+
 1. [Introduction](#introduction)
 2. [Documentation](#documentation)
 3. [Requirements](#requirements)
@@ -101,7 +96,7 @@ http(s)://example.com
 ~~~
 
 ~~~
-2. PHP artisan bagisto: install
+2. php artisan bagisto:install
 ~~~
 
 **To execute Bagisto**:
@@ -120,7 +115,7 @@ If not done, open the specified entry point in your host's file in your browser 
 ##### On local:
 
 ~~~
-PHP artisan serve
+php artisan serve
 ~~~
 
 
