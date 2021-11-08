@@ -14,12 +14,17 @@ use Webkul\Checkout\Facades\Cart;
 class FlatRate extends AbstractShipping
 {
     /**
-     * Shipping method code
+     * Shipping method carrier code
      *
      * @var string
      */
     protected $code = 'flatrate';
 
+    /**
+     * Shipping method code
+     *
+     * @var string
+     */
     protected $method = 'flatrate_flatrate';
 
     /**

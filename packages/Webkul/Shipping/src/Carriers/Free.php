@@ -13,12 +13,17 @@ use Webkul\Shipping\Facades\Shipping;
 class Free extends AbstractShipping
 {
     /**
-     * Shipping method code
+     * Shipping method carrier code
      *
      * @var string
      */
     protected $code = 'free';
 
+    /**
+     * Shipping method code
+     *
+     * @var string
+     */
     protected $method = 'free_free';
 
     /**

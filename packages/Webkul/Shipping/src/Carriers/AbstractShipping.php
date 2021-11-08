@@ -4,7 +4,18 @@ namespace Webkul\Shipping\Carriers;
 
 abstract class AbstractShipping
 {
+    /**
+     * Shipping method carrier code
+     *
+     * @var string
+     */
     protected $code;
+
+    /**
+     * Shipping method code
+     *
+     * @var string
+     */
     protected $method;
 
     abstract public function calculate();
