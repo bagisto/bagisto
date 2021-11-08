@@ -322,6 +322,7 @@
 
                 mounted: function () {
                     this.setParamsAndUrl();
+
                     this.checkedSelectedCheckbox();
 
                     if (this.filters.length) {
@@ -807,123 +808,6 @@
                         }
                     },
 
-                    /**
-                     * Triggered when any select box is clicked in the datagrid.
-                     */
-                    select: function (event) {
-                        var checkboxElement = event.target;
-
-                        if ( typeof(Storage) !== 'undefined' ) {
-                            if ( checkboxElement.checked ) {
-                                if (! this.dataIds.includes(checkboxElement.value) ) {
-                                    this.dataIds.push(checkboxElement.value);
-                                }
-                            } else {
-                                if ( this.dataIds.includes(checkboxElement.value) ) {
-                                    this.dataIds.pop(checkboxElement.value);
-                                }
-                            }
-                            var routeArray = this.gridCurrentData.path.split('/');
-                            var getLastRoute = routeArray[routeArray.length - 1];
-                            
-                            var routeIndexObj = {};
-                            routeIndexObj[getLastRoute] = this.dataIds;
-
-                            localStorage.dataGridIndexes = JSON.stringify(routeIndexObj);
-                        }
-
-                        this.allSelected = false;
-                        if (this.dataIds.length === 0) {
-                            this.massActionsToggle = false;
-                            this.massActionType = null;
-                        } else {
-                            this.massActionsToggle = true;
-                        }
-                    },
-
-                    /**
-                     * Triggered when page load.
-                     */
-                    checkedSelectedCheckbox: function () {
-                        var routeArray = this.gridCurrentData.path.split('/');
-                        var getLastRoute = routeArray[routeArray.length - 1];
-                        
-                        if ( typeof(Storage) !== 'undefined' ) {
-                            var selectedIndexes = JSON.parse(localStorage.getItem("dataGridIndexes"));
-                            if ( Object.keys(selectedIndexes).length ) {
-                                for (key in selectedIndexes) {
-                                    if ( key === getLastRoute) {
-                                        this.dataIds = selectedIndexes[key];
-                                        
-                                        this.massActionsToggle = true;
-                                        this.allSelected = false;
-                                        if (this.dataIds.length === 0) {
-                                            this.massActionsToggle = false;
-                                            this.massActionType = null;
-                                        }
-                                    } else {
-                                        delete selectedIndexes[key];
-                                    }
-                                }
-                            }
-                            
-                            localStorage.dataGridIndexes = JSON.stringify(selectedIndexes);
-                        }
-                    },
-
-                    /**
-                     * Triggered when master checkbox is clicked.
-                     */
-                    selectAll: function () {
-                        this.dataIds = [];
-
-                        this.massActionsToggle = true;
-
-                        if (this.allSelected) {
-                            if (this.gridCurrentData.hasOwnProperty("data")) {
-                                for (let currentData in this.gridCurrentData.data) {
-
-                                    let i = 0;
-                                    for (let currentId in this.gridCurrentData.data[currentData]) {
-                                        if (i == 0) {
-                                            this.dataIds.push(this.gridCurrentData.data[currentData][this.filterIndex]);
-                                        }
-
-                                        i++;
-                                    }
-                                }
-                            } else {
-                                for (currentData in this.gridCurrentData) {
-
-                                    let i = 0;
-                                    for (let currentId in this.gridCurrentData[currentData]) {
-                                        if (i === 0)
-                                            this.dataIds.push(this.gridCurrentData[currentData][currentId]);
-
-                                        i++;
-                                    }
-                                }
-                            }
-                        }
-                    },
-
-                    captureColumn: function (id) {
-                        element = document.getElementById(id);
-
-                    },
-
-                    removeMassActions: function () {
-                        this.dataIds = [];
-
-                        this.massActionsToggle = false;
-
-                        this.allSelected = false;
-
-                        this.massActionType = null;
-
-                        localStorage.dataGridIndexes = [];
-                    },
-
                     paginate: function (e) {
                         for (let i = 0; i < this.filters.length; i++) {
                             if (this.filters[i].column == 'perPage') {
@@ -936,6 +820,167 @@
                         this.makeURL();
                     },
 
+                    /**
+                     * Get current page ids.
+                     */
+                    getCurrentIds: function () {
+                        let currentIds = [];
+
+                        if (this.gridCurrentData.hasOwnProperty("data")) {
+                            for (let currentData in this.gridCurrentData.data) {
+                                currentIds.push(this.gridCurrentData.data[currentData][this.filterIndex]);
+                            }
+                        } else {
+                            for (let currentData in this.gridCurrentData) {
+                                let i = 0;
+                                for (let currentId in this.gridCurrentData[currentData]) {
+                                    if (i === 0) {
+                                        currentIds.push(this.gridCurrentData[currentData][currentId]);
+                                    }
+                                    i++;
+                                }
+                            }
+                        }
+
+                        return currentIds;
+                    },
+
+                    /**
+                     * Get page key.
+                     */
+                    getPageKey: function () {
+                        let routeSegments = this.gridCurrentData.path.split('/');
+
+                        return routeSegments[routeSegments.length - 1];
+                    },
+
+                    /**
+                     * Set selected indexes.
+                     */
+                    setSelectedIndexes: function () {
+                        let routeIndexObj = {};
+
+                        routeIndexObj[this.getPageKey()] = this.dataIds;
+
+                        localStorage.dataGridIndexes = JSON.stringify(routeIndexObj);
+                    },
+
+                    /**
+                     * Get selected indexes.
+                     */
+                    getSelectedIndexes: function () {
+                        let selectedIndexes = localStorage.getItem("dataGridIndexes");
+
+                        if (selectedIndexes !== null && selectedIndexes !== '') {
+                            return selectedIndexes;
+                        }
+
+                        return JSON.stringify({});
+                    },
+
+                    /**
+                     * Triggered when any select box is clicked in the datagrid.
+                     */
+                    select: function (event) {
+                        let checkboxElement = event.target;
+
+                        if (checkboxElement.checked) {
+                            if (! this.dataIds.includes(checkboxElement.value)) {
+                                this.dataIds.push(checkboxElement.value);
+                            }
+                        } else {
+                            if (this.dataIds.includes(checkboxElement.value)) {
+                                this.dataIds.pop(checkboxElement.value);
+                            }
+                        }
+
+                        this.allSelected = false;
+
+                        if (this.dataIds.length === 0) {
+                            this.massActionsToggle = false;
+                            this.massActionType = null;
+                        } else {
+                            this.massActionsToggle = true;
+                        }
+
+                        this.setSelectedIndexes();
+                    },
+
+                    /**
+                     * Triggered when master checkbox is clicked.
+                     */
+                    selectAll: function () {
+                        this.massActionsToggle = true;
+
+                        if (this.allSelected) {
+                            if (this.gridCurrentData.hasOwnProperty("data")) {
+                                for (let currentData in this.gridCurrentData.data) {
+                                    this.dataIds.push(this.gridCurrentData.data[currentData][this.filterIndex]);
+                                }
+                            } else {
+                                for (let currentData in this.gridCurrentData) {
+                                    let i = 0;
+                                    for (let currentId in this.gridCurrentData[currentData]) {
+                                        if (i === 0) {
+                                            this.dataIds.push(this.gridCurrentData[currentData][currentId]);
+                                        }
+                                        i++;
+                                    }
+                                }
+                            }
+
+                            this.setSelectedIndexes();
+                        }
+                    },
+
+                    /**
+                     * Triggered when master checkbox is unchecked.
+                     */
+                    removeMassActions: function () {
+                        let currentIds = this.getCurrentIds();
+
+                        this.dataIds = this.dataIds.filter(id => currentIds.indexOf(parseInt(id)) == -1);
+
+                        this.massActionsToggle = false;
+
+                        this.allSelected = false;
+
+                        this.massActionType = null;
+
+                        this.setSelectedIndexes();
+                    },
+
+                    /**
+                     * Triggered when page load for checking the selected ids.
+                     */
+                    checkedSelectedCheckbox: function () {
+                        let pageKey = this.getPageKey();
+
+                        let selectedIndexes = JSON.parse(this.getSelectedIndexes());
+
+                        if (Object.keys(selectedIndexes).length) {
+                            for (key in selectedIndexes) {
+                                if (key === pageKey) {
+                                    this.dataIds = selectedIndexes[key];
+                                    this.massActionsToggle = true;
+                                    this.allSelected = false;
+
+                                    if (this.dataIds.length === 0) {
+                                        this.massActionsToggle = false;
+                                        this.massActionType = null;
+                                    }
+                                } else {
+                                    delete selectedIndexes[key];
+                                }
+                            }
+                        }
+
+                        this.setSelectedIndexes();
+                    },
+
+                    /**
+                     * Do actions.
+                     */
                     doAction: function (e, message, type) {
                         let element = e.currentTarget;
 
