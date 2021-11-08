@@ -130,8 +130,9 @@ class Shipping
                 continue;
             }
 
-            $methods[] = [
-                'method'       => $object->getCode(),
+            $methods[$object->getMethod()] = [
+                'code'         => $object->getCode(),
+                'method'       => $object->getMethod(),
                 'method_title' => $object->getTitle(),
                 'description'  => $object->getDescription()
             ];

@@ -2,14 +2,15 @@
 
 namespace Webkul\Shipping\Carriers;
 
-use Illuminate\Support\Facades\Config;
-
 abstract class AbstractShipping
 {
+    protected $code;
+    protected $method;
+
     abstract public function calculate();
 
     /**
-     * Checks if payment method is available
+     * Checks if shipping method is available
      *
      * @return array
      */
@@ -19,7 +20,7 @@ abstract class AbstractShipping
     }
 
     /**
-     * Returns payment method code
+     * Returns shipping method code
      *
      * @return array
      */
@@ -32,8 +33,17 @@ abstract class AbstractShipping
         return $this->code;
     }
 
+    public function getMethod()
+    {
+        if (empty($this->method)) {
+            // throw exception
+        }
+
+        return $this->method;
+    }
+
     /**
-     * Returns payment method title
+     * Returns shipping method title
      *
      * @return array
      */
@@ -43,7 +53,7 @@ abstract class AbstractShipping
     }
 
     /**
-     * Returns payment method decription
+     * Returns shipping method description
      *
      * @return array
      */
@@ -53,10 +63,9 @@ abstract class AbstractShipping
     }
 
     /**
-     * Retrieve information from payment configuration
+     * Retrieve information from shipping configuration
      *
-     * @param  string  $field
-     * @param  int|string|null  $channelId
+     * @param string $field
      * @return mixed
      */
     public function getConfigData($field)
