@@ -75,7 +75,6 @@ return [
                 'name'       => 'type',
                 'title'      => 'admin::app.admin.system.type',
                 'type'       => 'select',
-                'depend'     => 'active:1',
                 'options'    => [
                     [
                         'title' => 'Per Unit',
@@ -85,7 +84,6 @@ return [
                         'value' => 'per_order',
                     ]
                 ],
-                'validation' => 'required_if:active,1'
             ], [
                 'name'          => 'active',
                 'title'         => 'admin::app.admin.system.status',
