@@ -322,6 +322,7 @@
 
                 mounted: function () {
                     this.setParamsAndUrl();
+                    this.checkedSelectedCheckbox();
 
                     if (this.filters.length) {
                         for (let i = 0; i < this.filters.length; i++) {
@@ -809,14 +810,64 @@
                     /**
                      * Triggered when any select box is clicked in the datagrid.
                      */
-                    select: function () {
-                        this.allSelected = false;
+                    select: function (event) {
+                        var checkboxElement = event.target;
 
+                        if ( typeof(Storage) !== 'undefined' ) {
+                            if ( checkboxElement.checked ) {
+                                if (! this.dataIds.includes(checkboxElement.value) ) {
+                                    this.dataIds.push(checkboxElement.value);
+                                }
+                            } else {
+                                if ( this.dataIds.includes(checkboxElement.value) ) {
+                                    this.dataIds.pop(checkboxElement.value);
+                                }
+                            }
+                            var routeArray = this.gridCurrentData.path.split('/');
+                            var getLastRoute = routeArray[routeArray.length - 1];
+                            
+                            var routeIndexObj = {};
+                            routeIndexObj[getLastRoute] = this.dataIds;
+
+                            localStorage.dataGridIndexes = JSON.stringify(routeIndexObj);
+                        }
+
+                        this.allSelected = false;
                         if (this.dataIds.length === 0) {
                             this.massActionsToggle = false;
                             this.massActionType = null;
                         } else {
                             this.massActionsToggle = true;
+                        }
+                    },
+
+                    /**
+                     * Triggered when page load.
+                     */
+                    checkedSelectedCheckbox: function () {
+                        var routeArray = this.gridCurrentData.path.split('/');
+                        var getLastRoute = routeArray[routeArray.length - 1];
+                        
+                        if ( typeof(Storage) !== 'undefined' ) {
+                            var selectedIndexes = JSON.parse(localStorage.getItem("dataGridIndexes"));
+                            if ( Object.keys(selectedIndexes).length ) {
+                                for (key in selectedIndexes) {
+                                    if ( key === getLastRoute) {
+                                        this.dataIds = selectedIndexes[key];
+                                        
+                                        this.massActionsToggle = true;
+                                        this.allSelected = false;
+                                        if (this.dataIds.length === 0) {
+                                            this.massActionsToggle = false;
+                                            this.massActionType = null;
+                                        }
+                                    } else {
+                                        delete selectedIndexes[key];
+                                    }
+                                }
+                            }
+                            
+                            localStorage.dataGridIndexes = JSON.stringify(selectedIndexes);
                         }
                     },
 
@@ -869,6 +920,8 @@
                         this.allSelected = false;
 
                         this.massActionType = null;
+
+                        localStorage.dataGridIndexes = [];
                     },
 
                     paginate: function (e) {
