@@ -74,7 +74,7 @@ return [
             ], [
                 'name'       => 'type',
                 'title'      => 'admin::app.admin.system.type',
-                'type'       => 'depends',
+                'type'       => 'select',
                 'depend'     => 'active:1',
                 'options'    => [
                     [
