@@ -446,6 +446,10 @@ class Cart
             return false;
         }
 
+        if (! array_key_exists($shippingMethodCode, Shipping::getShippingMethods())) {
+            return false;
+        }
+
         $cart->shipping_method = $shippingMethodCode;
         $cart->save();
 

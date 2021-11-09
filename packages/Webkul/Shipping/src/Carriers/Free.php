@@ -13,11 +13,18 @@ use Webkul\Shipping\Facades\Shipping;
 class Free extends AbstractShipping
 {
     /**
-     * Payment method code
+     * Shipping method carrier code
      *
      * @var string
      */
-    protected $code  = 'free';
+    protected $code = 'free';
+
+    /**
+     * Shipping method code
+     *
+     * @var string
+     */
+    protected $method = 'free_free';
 
     /**
      * Returns rate for flatrate
