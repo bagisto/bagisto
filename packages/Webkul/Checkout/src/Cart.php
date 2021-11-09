@@ -446,7 +446,7 @@ class Cart
             return false;
         }
 
-        if (! array_key_exists($shippingMethodCode, Shipping::getShippingMethods())) {
+        if (! Shipping::isMethodCodeExists($shippingMethodCode)) {
             return false;
         }
 

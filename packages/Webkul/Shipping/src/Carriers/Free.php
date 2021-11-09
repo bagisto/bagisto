@@ -2,32 +2,26 @@
 
 namespace Webkul\Shipping\Carriers;
 
-use Config;
 use Webkul\Checkout\Models\CartShippingRate;
-use Webkul\Shipping\Facades\Shipping;
 
-/**
- * Class Rate.
- *
- */
 class Free extends AbstractShipping
 {
     /**
-     * Shipping method carrier code
+     * Shipping method carrier code.
      *
      * @var string
      */
     protected $code = 'free';
 
     /**
-     * Shipping method code
+     * Shipping method code.
      *
      * @var string
      */
     protected $method = 'free_free';
 
     /**
-     * Returns rate for flatrate
+     * Calculate rate for free shipping.
      *
      * @return CartShippingRate|false
      */
@@ -37,17 +31,27 @@ class Free extends AbstractShipping
             return false;
         }
 
-        $object = new CartShippingRate;
+        return $this->getRate();
+    }
 
-        $object->carrier = 'free';
-        $object->carrier_title = $this->getConfigData('title');
-        $object->method = 'free_free';
-        $object->method_title = $this->getConfigData('title');
-        $object->method_description = $this->getConfigData('description');
-        $object->is_calculate_tax = $this->getConfigData('is_calculate_tax');
-        $object->price = 0;
-        $object->base_price = 0;
+    /**
+     * Get rate.
+     *
+     * @return \Webkul\Checkout\Models\CartShippingRate
+     */
+    public function getRate(): \Webkul\Checkout\Models\CartShippingRate
+    {
+        $cartShippingRate = new CartShippingRate;
 
-        return $object;
+        $cartShippingRate->carrier = $this->getCode();
+        $cartShippingRate->carrier_title = $this->getConfigData('title');
+        $cartShippingRate->method = $this->getMethod();
+        $cartShippingRate->method_title = $this->getConfigData('title');
+        $cartShippingRate->method_description = $this->getConfigData('description');
+        $cartShippingRate->is_calculate_tax = $this->getConfigData('is_calculate_tax');
+        $cartShippingRate->price = 0;
+        $cartShippingRate->base_price = 0;
+
+        return $cartShippingRate;
     }
 }

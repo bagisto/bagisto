@@ -2,35 +2,29 @@
 
 namespace Webkul\Shipping\Carriers;
 
-use Config;
-use Webkul\Checkout\Models\CartShippingRate;
-use Webkul\Shipping\Facades\Shipping;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Checkout\Models\CartShippingRate;
 
-/**
- * Class Rate.
- *
- */
 class FlatRate extends AbstractShipping
 {
     /**
-     * Shipping method carrier code
+     * Shipping method carrier code.
      *
      * @var string
      */
     protected $code = 'flatrate';
 
     /**
-     * Shipping method code
+     * Shipping method code.
      *
      * @var string
      */
     protected $method = 'flatrate_flatrate';
 
     /**
-     * Returns rate for flatrate
+     * Calculate rate for flatrate.
      *
-     * @return CartShippingRate|false
+     * @return \Webkul\Checkout\Models\CartShippingRate|false
      */
     public function calculate()
     {
@@ -38,31 +32,41 @@ class FlatRate extends AbstractShipping
             return false;
         }
 
+        return $this->getRate();
+    }
+
+    /**
+     * Get rate.
+     *
+     * @return \Webkul\Checkout\Models\CartShippingRate
+     */
+    public function getRate(): \Webkul\Checkout\Models\CartShippingRate
+    {
         $cart = Cart::getCart();
 
-        $object = new CartShippingRate;
+        $cartShippingRate = new CartShippingRate;
 
-        $object->carrier = 'flatrate';
-        $object->carrier_title = $this->getConfigData('title');
-        $object->method = $this->method;
-        $object->method_title = $this->getConfigData('title');
-        $object->method_description = $this->getConfigData('description');
-        $object->is_calculate_tax = $this->getConfigData('is_calculate_tax');
-        $object->price = 0;
-        $object->base_price = 0;
+        $cartShippingRate->carrier = $this->getCode();
+        $cartShippingRate->carrier_title = $this->getConfigData('title');
+        $cartShippingRate->method = $this->getMethod();
+        $cartShippingRate->method_title = $this->getConfigData('title');
+        $cartShippingRate->method_description = $this->getConfigData('description');
+        $cartShippingRate->is_calculate_tax = $this->getConfigData('is_calculate_tax');
+        $cartShippingRate->price = 0;
+        $cartShippingRate->base_price = 0;
 
         if ($this->getConfigData('type') == 'per_unit') {
             foreach ($cart->items as $item) {
                 if ($item->product->getTypeInstance()->isStockable()) {
-                    $object->price += core()->convertPrice($this->getConfigData('default_rate')) * $item->quantity;
-                    $object->base_price += $this->getConfigData('default_rate') * $item->quantity;
+                    $cartShippingRate->price += core()->convertPrice($this->getConfigData('default_rate')) * $item->quantity;
+                    $cartShippingRate->base_price += $this->getConfigData('default_rate') * $item->quantity;
                 }
             }
         } else {
-            $object->price = core()->convertPrice($this->getConfigData('default_rate'));
-            $object->base_price = $this->getConfigData('default_rate');
+            $cartShippingRate->price = core()->convertPrice($this->getConfigData('default_rate'));
+            $cartShippingRate->base_price = $this->getConfigData('default_rate');
         }
 
-        return $object;
+        return $cartShippingRate;
     }
 }
