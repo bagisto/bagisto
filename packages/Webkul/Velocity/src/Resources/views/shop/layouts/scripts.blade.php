@@ -35,17 +35,17 @@
             form.method = 'POST';
             form.action = action;
 
-        let element1 = document.createElement('input');
-            element1.type = 'hidden';
-            element1.name='_method';
-            element1.value= method;
-            form.appendChild(element1);
+        let _methodElement = document.createElement('input');
+            _methodElement.type = 'hidden';
+            _methodElement.name = '_method';
+            _methodElement.value = method;
+            form.appendChild(_methodElement);
 
-        let element2 = document.createElement('input');
-            element2.type = 'hidden';
-            element2.name='_token';
-            element2.value= csrfToken;
-            form.appendChild(element2);
+        let _tokenElement = document.createElement('input');
+            _tokenElement.type = 'hidden';
+            _tokenElement.name ='_token';
+            _tokenElement.value = csrfToken;
+            form.appendChild(_tokenElement);
 
         document.body.appendChild(form);
         form.submit();
