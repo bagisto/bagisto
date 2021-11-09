@@ -14,37 +14,23 @@
             $title = $wishlist ? __('velocity::app.shop.wishlist.remove-wishlist-text') : __('velocity::app.shop.wishlist.add-wishlist-text');
         @endphp
 
-        @if($wishlist)
-            <form
-                class="d-none"
-                id="wishlist-{{ $wishlist->id }}"
-                action="{{ $href }}"
-                method="POST">
-                @method('DELETE')
-
-                @csrf
-            </form>
-        @else
-            <form
-                class="d-none"
-                id="wishlist-{{ $product->product_id }}"
-                action="{{ $href }}"
-                method="POST">
-                @csrf
-            </form>
-        @endif
-
         <a
             class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
             href="javascript:void(0);"
             title="{{ $title }}"
-            onclick="document.getElementById('wishlist-{{ $wishlist ? $wishlist->id : $product->product_id }}').submit();">
+            onclick="submitWishlistForm(
+                '{{ $href }}',
+                '{{ $wishlist ? 'DELETE' : 'POST' }}',
+                '{{ csrf_token() }}'
+            )"
+        >
 
             <wishlist-component active="{{ $wishlist ? false : true }}"></wishlist-component>
 
             @if (isset($text))
                 {!! $text !!}
             @endif
+
         </a>
     @endauth
 
