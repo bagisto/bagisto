@@ -5,21 +5,17 @@ namespace Webkul\Shipping;
 use Illuminate\Support\Facades\Config;
 use Webkul\Checkout\Facades\Cart;
 
-/**
- * Class Shipping.
- *
- */
 class Shipping
 {
     /**
-     * Rates
+     * Rates.
      *
      * @var array
      */
     protected $rates = [];
 
     /**
-     * Collects rate from available shipping methods
+     * Collects rate from available shipping methods.
      *
      * @return array
      */
@@ -53,7 +49,7 @@ class Shipping
     }
 
     /**
-     * Persist shipping rate to database
+     * Remove all shipping rates.
      *
      * @return void
      */
@@ -69,7 +65,7 @@ class Shipping
     }
 
     /**
-     * Persist shipping rate to database
+     * Save all shipping rates.
      *
      * @return void
      */
@@ -92,7 +88,7 @@ class Shipping
     }
 
     /**
-     * Returns shipping rates, grouped by shipping method
+     * Returns shipping rates, grouped by shipping method.
      *
      * @return void
      */
@@ -115,7 +111,7 @@ class Shipping
     }
 
     /**
-     * Returns active shipping methods
+     * Returns active shipping methods.
      *
      * @return array
      */
@@ -130,7 +126,7 @@ class Shipping
                 continue;
             }
 
-            $methods[$object->getMethod()] = [
+            $methods[] = [
                 'code'         => $object->getCode(),
                 'method'       => $object->getMethod(),
                 'method_title' => $object->getTitle(),
@@ -139,5 +135,18 @@ class Shipping
         }
 
         return $methods;
+    }
+
+    /**
+     * Is method exist in active shipping methods.
+     *
+     * @param  string  $shippingMethodCode
+     * @return boolean
+     */
+    public function isMethodCodeExists($shippingMethodCode)
+    {
+        $activeShippingMethods = collect($this->getShippingMethods());
+
+        return $activeShippingMethods->contains('method', $shippingMethodCode);
     }
 }

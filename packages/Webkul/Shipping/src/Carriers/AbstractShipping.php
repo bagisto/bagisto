@@ -2,17 +2,19 @@
 
 namespace Webkul\Shipping\Carriers;
 
+use Webkul\Shipping\Exceptions\CarrierCodeException;
+
 abstract class AbstractShipping
 {
     /**
-     * Shipping method carrier code
+     * Shipping method carrier code.
      *
      * @var string
      */
     protected $code;
 
     /**
-     * Shipping method code
+     * Shipping method code.
      *
      * @var string
      */
@@ -21,7 +23,7 @@ abstract class AbstractShipping
     abstract public function calculate();
 
     /**
-     * Checks if shipping method is available
+     * Checks if shipping method is available.
      *
      * @return array
      */
@@ -31,30 +33,37 @@ abstract class AbstractShipping
     }
 
     /**
-     * Returns shipping method code
+     * Returns shipping method carrier code.
      *
-     * @return array
+     * @return string
      */
     public function getCode()
     {
         if (empty($this->code)) {
-            // throw exception
+            throw new CarrierCodeException('Carrier code should be initialized.');
         }
 
         return $this->code;
     }
 
+    /**
+     * Return shipping method code.
+     *
+     * @return string
+     */
     public function getMethod()
     {
         if (empty($this->method)) {
-            // throw exception
+            $code = $this->getCode();
+
+            return $code . '_' . $code;
         }
 
         return $this->method;
     }
 
     /**
-     * Returns shipping method title
+     * Returns shipping method title.
      *
      * @return array
      */
@@ -64,7 +73,7 @@ abstract class AbstractShipping
     }
 
     /**
-     * Returns shipping method description
+     * Returns shipping method description.
      *
      * @return array
      */
@@ -74,9 +83,9 @@ abstract class AbstractShipping
     }
 
     /**
-     * Retrieve information from shipping configuration
+     * Retrieve information from shipping configuration.
      *
-     * @param string $field
+     * @param  string  $field
      * @return mixed
      */
     public function getConfigData($field)
