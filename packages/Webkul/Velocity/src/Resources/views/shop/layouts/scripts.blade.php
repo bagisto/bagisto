@@ -22,6 +22,34 @@
         /* add translations */
         window._translations = @json($velocityHelper->jsonTranslations());
     })();
+
+    /**
+     * Wishist form will dynamically create and execute.
+     *
+     * @param {!string} action
+     * @param {!string} method
+     * @param {!string} csrfToken
+     */
+    function submitWishlistForm(action, method, csrfToken) {
+        let form = document.createElement('form');
+            form.method = 'POST';
+            form.action = action;
+
+        let element1 = document.createElement('input');
+            element1.type = 'hidden';
+            element1.name='_method';
+            element1.value= method;
+            form.appendChild(element1);
+
+        let element2 = document.createElement('input');
+            element2.type = 'hidden';
+            element2.name='_token';
+            element2.value= csrfToken;
+            form.appendChild(element2);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
 </script>
 
 @stack('scripts')
