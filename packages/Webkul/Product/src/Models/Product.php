@@ -281,7 +281,7 @@ class Product extends Model implements ProductContract
      *
      * @return bool
      */
-    public function inventory_source_qty($inventorySourceId): bool
+    public function inventory_source_qty($inventorySourceId)
     {
         return $this->inventories()
                     ->where('inventory_source_id', $inventorySourceId)
