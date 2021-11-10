@@ -1137,3 +1137,9 @@ i.within-circle {
 .main-content-wrapper .content-list ul {
     width: 101.2% !important;
 }
+
+.account-content .account-layout .table table tr td {
+    width: auto;
+    border-top: none;
+    border-right: 1px solid #CCCCCC !important;
+}
