@@ -1115,21 +1115,6 @@ i.within-circle {
     }
 }
 
-.account-content .account-layout .account-table-content.profile-page-content .table {
-    width: 100% !important;
-}
-
-.account-content .account-layout .table table tr {
-    margin-bottom: 20px;
-    border: 1px solid #CCCCCC;
-}
-
-.account-content .account-layout .table table tr td {
-    width: 100%;
-    border-top: none;
-    border-right: 1px solid #CCCCCC !important;
-}
-
 .velocity-divide-page .right {
     width: 99% !important;
 }
@@ -1138,8 +1123,27 @@ i.within-circle {
     width: 101.2% !important;
 }
 
-.account-content .account-layout .table table tr td {
-    width: auto;
-    border-top: none;
-    border-right: 1px solid #CCCCCC !important;
+.account-content {
+    .account-layout {
+        .account-table-content.profile-page-content {
+            .table {
+                width: 100% !important;
+            }
+        }
+
+        .table {
+            table {
+                tr {
+                    margin-bottom: 20px;
+                    border: 1px solid #CCCCCC;
+
+                    td {
+                        width: auto;
+                        border-top: none;
+                        border-right: 1px solid #CCCCCC !important;
+                    }
+                }
+            }
+        }
+    }
 }
