@@ -98,7 +98,7 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * Get default channel product.
+     * Get default product.
      *
      * @return \Webkul\Product\Models\ProductFlat
      */
