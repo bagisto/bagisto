@@ -67,7 +67,7 @@
                             <i
                                 class="rango-arrow-right"
                                 @click="toggleSubcategories(index, $event)"
-                                v-if="rootCategoriesCollection[index].children.length > 0"
+                                v-if="category.children.length > 0"
                             ></i>
                         </li>
                     </ul>
