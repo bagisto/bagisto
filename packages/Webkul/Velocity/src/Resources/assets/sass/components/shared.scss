@@ -765,6 +765,16 @@ a {
             margin-left: 5px;
         }
     }
+
+    .VueCarousel-navigation {
+        .VueCarousel-navigation-prev {
+            left: 10px;
+        }
+
+        .VueCarousel-navigation-next {
+            right: 12px;
+        }
+    }
 }
 
 .navigation-hide {

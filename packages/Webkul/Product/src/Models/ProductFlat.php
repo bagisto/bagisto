@@ -4,20 +4,47 @@ namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Contracts\ProductFlat as ProductFlatContract;
 
 class ProductFlat extends Model implements ProductFlatContract
 {
     use Searchable;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'product_flat';
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = [
         'id',
         'created_at',
         'updated_at',
     ];
 
+    /**
+     * Ignorable attributes.
+     *
+     * @var array
+     */
+    protected $ignorableAttributes = [
+        'pivot',
+        'parent_id',
+        'attribute_family_id',
+    ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var boolean
+     */
     public $timestamps = false;
 
     /**
@@ -31,25 +58,39 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * Retrieve type instance
+     * Get an attribute from the model.
      *
-     * @return AbstractType
+     * @param  string  $key
+     * @return mixed
      */
-    public function getTypeInstance()
+    public function getAttribute($key)
     {
-        return $this->product->getTypeInstance();
-    }
+        if (
+            ! method_exists(static::class, $key)
+            && ! in_array($key, $this->ignorableAttributes)
+            && ! isset($this->attributes[$key])
+            && isset($this->id)
+        ) {
+            $attribute = core()
+                ->getSingletonInstance(AttributeRepository::class)
+                ->getAttributeByCode($key);
 
-    /**
-     * Get the product attribute family that owns the product.
-     */
-    public function getAttributeFamilyAttribute()
-    {
-        return $this->product->attribute_family;
+            if ($attribute && ($attribute->value_per_channel || $attribute->value_per_locale)) {
+                $defaultProduct = $this->getDefaultProduct();
+
+                $this->attributes[$key] = $defaultProduct->$key;
+
+                return $this->getAttributeValue($key);
+            }
+        }
+
+        return parent::getAttribute($key);
     }
 
     /**
      * Get the product that owns the attribute value.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()
     {
@@ -57,15 +98,29 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * Get the product variants that owns the product.
+     * Get default product.
+     *
+     * @return \Webkul\Product\Models\ProductFlat
      */
-    public function variants()
+    public function getDefaultProduct()
     {
-        return $this->hasMany(static::class, 'parent_id');
+        static $loadedDefaultProducts = [];
+
+        if (array_key_exists($this->product_id, $loadedDefaultProducts)) {
+            return $loadedDefaultProducts[$this->product_id];
+        }
+
+        return $loadedDefaultProducts[$this->product_id] = $this->product
+            ->product_flats()
+            ->where('channel', core()->getDefaultChannelCode())
+            ->where('locale', config('app.fallback_locale'))
+            ->first();
     }
 
     /**
      * Get the product that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function parent()
     {
@@ -73,51 +128,29 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * Get product type value from base product
-     */
-    public function getTypeAttribute()
-    {
-        return $this->product->type;
-    }
-
-    /**
-     * @param string $key
+     * Get the product variants that owns the product.
      *
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function isSaleable()
+    public function variants()
     {
-        return $this->product->isSaleable();
+        return $this->hasMany(static::class, 'parent_id');
     }
 
     /**
-     * @return integer
-     */
-    public function totalQuantity()
-    {
-        return $this->product->totalQuantity();
-    }
-
-    /**
-     * @param int $qty
+     * Get all of the attributes for the attribute groups.
      *
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function haveSufficientQuantity(int $qty): bool
+    public function getImagesAttribute()
     {
-        return $this->product->haveSufficientQuantity($qty);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isStockable()
-    {
-        return $this->product->isStockable();
+        return $this->images()->get();
     }
 
     /**
      * The images that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function images()
     {
@@ -126,6 +159,8 @@ class ProductFlat extends Model implements ProductFlatContract
 
     /**
      * The videos that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function videos()
     {
@@ -133,15 +168,19 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * Get all of the attributes for the attribute groups.
+     * Get all of the reviews for the attribute groups.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getImagesAttribute()
+    public function getReviewsAttribute()
     {
-        return $this->images()->get();
+        return $this->reviews()->get();
     }
 
     /**
      * The reviews that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function reviews()
     {
@@ -151,15 +190,93 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * Get all of the reviews for the attribute groups.
+     * Get product type value from base product.
+     *
+     * @return string
      */
-    public function getReviewsAttribute()
+    public function getTypeAttribute()
     {
-        return $this->reviews()->get();
+        return $this->product->type;
+    }
+
+    /**
+     * Retrieve type instance.
+     *
+     * @return \Webkul\Product\Type\AbstractType
+     */
+    public function getTypeInstance()
+    {
+        return $this->product->getTypeInstance();
+    }
+
+    /**
+     * Get the product attribute family that owns the product.
+     *
+     * @return \Webkul\Attribute\Models\AttributeFamily
+     */
+    public function getAttributeFamilyAttribute()
+    {
+        return $this->product->attribute_family;
+    }
+
+    /**
+     * Retrieve product attributes.
+     *
+     * @param  Group $group
+     * @param  bool  $skipSuperAttribute
+     * @return Collection
+     */
+    public function getEditableAttributes($group = null, $skipSuperAttribute = true)
+    {
+        return $this->product->getEditableAttributes($group, $skipSuperAttribute);
+    }
+
+    /**
+     * Total quantity.
+     *
+     * @return integer
+     */
+    public function totalQuantity()
+    {
+        return $this->product->totalQuantity();
+    }
+
+    /**
+     * Is product have sufficient quantity.
+     *
+     * @param  int $qty
+     * @return bool
+     */
+    public function haveSufficientQuantity(int $qty): bool
+    {
+        return $this->product->haveSufficientQuantity($qty);
+    }
+
+    /**
+     * Is product saleable.
+     *
+     * @param  string $key
+     * @return bool
+     */
+    public function isSaleable()
+    {
+        return $this->product->isSaleable();
+    }
+
+    /**
+     * Is product stockable.
+     *
+     * @return bool
+     */
+    public function isStockable()
+    {
+        return $this->product->isStockable();
     }
 
     /**
      * The related products that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function related_products()
     {
@@ -168,6 +285,8 @@ class ProductFlat extends Model implements ProductFlatContract
 
     /**
      * The up sells that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function up_sells()
     {
@@ -176,6 +295,8 @@ class ProductFlat extends Model implements ProductFlatContract
 
     /**
      * The cross sells that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function cross_sells()
     {
@@ -184,6 +305,8 @@ class ProductFlat extends Model implements ProductFlatContract
 
     /**
      * The images that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function downloadable_samples()
     {
@@ -192,6 +315,8 @@ class ProductFlat extends Model implements ProductFlatContract
 
     /**
      * The images that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function downloadable_links()
     {
@@ -200,6 +325,8 @@ class ProductFlat extends Model implements ProductFlatContract
 
     /**
      * Get the grouped products that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function grouped_products()
     {
@@ -218,21 +345,11 @@ class ProductFlat extends Model implements ProductFlatContract
 
     /**
      * Get the bundle options that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function bundle_options()
     {
         return $this->product->bundle_options();
-    }
-
-    /**
-     * Retrieve product attributes
-     *
-     * @param Group $group
-     * @param bool  $skipSuperAttribute
-     * @return Collection
-     */
-    public function getEditableAttributes($group = null, $skipSuperAttribute = true)
-    {
-        return $this->product->getEditableAttributes($groupId, $skipSuperAttribute);
     }
 }
