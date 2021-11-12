@@ -1,23 +1,23 @@
 /* main imports */
-@import "main/rango";
-@import "main/icons";
-@import "main/mixins";
-@import "main/variables";
+@import 'main/rango';
+@import 'main/icons';
+@import 'main/mixins';
+@import 'main/variables';
 
 /* shared components */
-@import "components/shared";
+@import 'components/shared';
 
 /* components */
-@import "components/UI";
-@import "components/app";
-@import "components/home";
-@import "components/footer";
-@import "components/product-view";
-@import "components/media";
-@import "components/rtl";
+@import 'components/UI';
+@import 'components/app';
+@import 'components/home';
+@import 'components/footer';
+@import 'components/product-view';
+@import 'components/media';
+@import 'components/rtl';
 
 /* static */
-@import "static/material-icons";
+@import 'static/material-icons';
 
 /* starting */
 * {
@@ -39,7 +39,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #D8D8D8;
+    background: #d8d8d8;
 }
 
 /* Handle */
@@ -55,7 +55,7 @@
     font-family: $font-family-pro;
 }
 
-input[type=checkbox] {
+input[type='checkbox'] {
     width: 24px;
     height: 15px;
     margin-right: 10px;
@@ -214,14 +214,13 @@ body {
             text-align: right;
             padding-top: 5px;
 
-
             * {
                 display: table-cell;
                 vertical-align: middle;
             }
         }
 
-        +.account-modal {
+        + .account-modal {
             top: 40px;
             right: 10px;
             z-index: 101;
@@ -230,7 +229,7 @@ body {
             position: absolute !important;
 
             .theme-btn {
-                padding: .5rem .9rem;
+                padding: 0.5rem 0.9rem;
             }
 
             .modal-footer {
@@ -260,11 +259,11 @@ body {
         }
     }
 
-    >div:last-child {
+    > div:last-child {
         height: 32px;
     }
 
-    >div {
+    > div {
         .default {
             padding: 5px;
             font-size: 14px;
@@ -449,7 +448,7 @@ header {
                 border-radius: 2px 0px 0px 2px;
                 border: 1px solid $theme-color;
                 border-right: 0;
-                font-family: "Source Sans Pro", sans-serif;
+                font-family: 'Source Sans Pro', sans-serif;
 
                 -webkit-appearance: none;
                 -moz-appearance: none;
@@ -518,7 +517,7 @@ header {
                 display: inline-block;
 
                 i {
-                    +span.cart-text {
+                    + span.cart-text {
                         padding-left: 0px;
                         vertical-align: text-bottom;
                     }
@@ -528,7 +527,7 @@ header {
                     padding-left: 5px;
                 }
 
-                +.down-arrow-container {
+                + .down-arrow-container {
                     .rango-arrow-down {
                         top: 8px;
                     }
@@ -697,7 +696,7 @@ header {
     margin: 0;
     -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.24);
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.24);
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 
     .navbar {
         margin: 0px;
@@ -732,7 +731,7 @@ header {
         .category-dropdown {
             position: absolute;
             top: 40px;
-            background: #FFF;
+            background: #fff;
             left: 0;
             width: 100%;
             height: 525px;
@@ -740,7 +739,7 @@ header {
             li.category-list {
                 width: 100%;
                 display: inline-block;
-                background: #FFF;
+                background: #fff;
                 position: relative;
 
                 a {
@@ -760,7 +759,7 @@ header {
                     }
 
                     &:hover {
-                        color: #28557B;
+                        color: #28557b;
                         text-decoration: none;
                         background-color: $light-background;
                     }
@@ -769,7 +768,7 @@ header {
                 .child-container {
                     position: absolute;
                     top: 0;
-                    background-color: #CCC;
+                    background-color: #ccc;
                     left: 283px;
                     width: 250px;
                     height: 350px;
@@ -779,7 +778,7 @@ header {
     }
 
     .secondary-navbar {
-        background-color: #4D7EA8;
+        background-color: #4d7ea8;
         min-height: 40px;
         padding: 5px;
         vertical-align: middle;
@@ -896,12 +895,22 @@ header {
     border: 1px solid red;
 }
 
-.popular-products .second-row .popular-products-listing .product-buttons .add-to-cart-button .btn-primary {
+.popular-products
+    .second-row
+    .popular-products-listing
+    .product-buttons
+    .add-to-cart-button
+    .btn-primary {
     border: #26a37c !important;
     border-radius: 0px;
 }
 
-.popular-products .second-row .popular-products-listing .product-buttons .add-to-cart-button .addtocart {
+.popular-products
+    .second-row
+    .popular-products-listing
+    .product-buttons
+    .add-to-cart-button
+    .addtocart {
     text-transform: uppercase;
     background-color: #26a37c;
 }
@@ -916,7 +925,7 @@ header {
     background: $button-primary-bg;
     color: #fff;
     padding: 16px;
-    font: 18px "josefin sans", arial;
+    font: 18px 'josefin sans', arial;
 }
 
 .spacing {
@@ -935,8 +944,8 @@ i.within-circle {
 
 .center_div {
     margin: 0 auto;
-    width: 80%
-        /* value of your choice which suits your alignment */
+    width: 80%;
+    /* value of your choice which suits your alignment */
 }
 
 .form-style {
@@ -968,21 +977,23 @@ i.within-circle {
 }
 
 .w3-card-2 {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+        0 2px 10px 0 rgba(0, 0, 0, 0.12);
     float: right;
     height: 36px;
     width: 133px;
 }
 
 .w3-card-login {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+        0 2px 10px 0 rgba(0, 0, 0, 0.12);
     float: right;
     height: 36px;
     width: 71px;
 }
 
 .btn-new-customer-login {
-    color: #26A37C !important;
+    color: #26a37c !important;
     font-size: 16px;
     padding: 11px;
     text-decoration: none !important;
@@ -990,8 +1001,8 @@ i.within-circle {
 
 .btn-dark-green {
     color: #fff;
-    background-color: #26A37C;
-    border-color: #26A37C;
+    background-color: #26a37c;
+    border-color: #26a37c;
     height: 36px;
     border-radius: 0px !important;
 }
@@ -999,7 +1010,7 @@ i.within-circle {
 .login-text {
     height: 65px;
     width: 575px;
-    border: 1px #E5E5E5;
+    border: 1px #e5e5e5;
     margin: 0 auto;
 }
 
@@ -1019,11 +1030,11 @@ i.within-circle {
         width: 150px;
         height: 150px;
         margin-right: 20px;
-        background: #F8F9FA;
+        background: #f8f9fa;
         @include border-radius(3px);
         display: inline-block;
         position: relative;
-        background-image: url("../images/placeholder-icon.svg");
+        background-image: url('../images/placeholder-icon.svg');
         background-repeat: no-repeat;
         background-position: center;
         margin-bottom: 20px;
@@ -1040,7 +1051,11 @@ i.within-circle {
         }
 
         .remove-image {
-            background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.24) 100%);
+            background-image: linear-gradient(
+                -180deg,
+                rgba(0, 0, 0, 0.08) 0%,
+                rgba(0, 0, 0, 0.24) 100%
+            );
             @include border-radius(0 0 4px 4px);
             position: absolute;
             bottom: 0;
@@ -1064,8 +1079,8 @@ i.within-circle {
 }
 
 .btn-primary {
-    background-color: #26A37C !important;
-    border-color: #26A37C !important;
+    background-color: #26a37c !important;
+    border-color: #26a37c !important;
 }
 
 /* Category Filter UI Responsivenes */
@@ -1083,21 +1098,21 @@ i.within-circle {
     box-shadow: none;
 }
 
-.filters-container .toolbar-wrapper>div select {
+.filters-container .toolbar-wrapper > div select {
     cursor: pointer;
     padding: 6px 8px;
-    color: rgba(0, 0, 0, .83);
-    background-color: #fff
+    color: rgba(0, 0, 0, 0.83);
+    background-color: #fff;
 }
 
-.filters-container .toolbar-wrapper>div {
+.filters-container .toolbar-wrapper > div {
     margin: 0 8px 0 0;
 }
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
     .selective-div {
         width: 97px;
-        -webkit-appearance: none
+        -webkit-appearance: none;
     }
 
     .nav-container {
@@ -1111,7 +1126,7 @@ i.within-circle {
         font-size: 16px;
         overflow-y: scroll;
         box-shadow: 5px 0 5px -5px #333;
-        background-color: #FFFFFF;
+        background-color: #ffffff;
     }
 }
 
