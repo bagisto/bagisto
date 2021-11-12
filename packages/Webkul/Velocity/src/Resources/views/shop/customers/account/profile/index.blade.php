@@ -12,7 +12,6 @@
     </style>
 @endpush
 
-
 @section('page-detail-wrapper')
     <div class="account-head mb-0">
         <span class="back-icon">
@@ -20,6 +19,7 @@
                 <i class="icon icon-menu-back"></i>
             </a>
         </span>
+
         <span class="account-heading">
             {{ __('shop::app.customer.account.profile.index.title') }}
         </span>
@@ -37,12 +37,11 @@
         <div class="table">
             <table>
                 <tbody>
-                    {!! view_render_event(
-                    'bagisto.shop.customers.account.profile.view.table.before', ['customer' => $customer])
-                    !!}
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.before', ['customer' => $customer]) !!}
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.fname') }}</td>
+
                         <td>{{ $customer->first_name }}</td>
                     </tr>
 
@@ -50,6 +49,7 @@
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.lname') }}</td>
+
                         <td>{{ $customer->last_name }}</td>
                     </tr>
 
@@ -57,6 +57,7 @@
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.gender') }}</td>
+
                         <td>{{ $customer->gender ?? '-' }}</td>
                     </tr>
 
@@ -64,6 +65,7 @@
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.dob') }}</td>
+
                         <td>{{ $customer->date_of_birth ?? '-' }}</td>
                     </tr>
 
@@ -71,46 +73,64 @@
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.email') }}</td>
+
                         <td>{{ $customer->email }}</td>
                     </tr>
 
-                    {!! view_render_event(
-                    'bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer])
-                    !!}
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer]) !!}
                 </tbody>
             </table>
         </div>
 
         <button
             type="submit"
-            class="theme-btn mb20" @click="showModal('deleteProfile')" >
+            class="theme-btn mb20" @click="window.showDeleteProfileModal();">
             {{ __('shop::app.customer.account.address.index.delete') }}
         </button>
 
-        <form method="POST" action="{{ route('customer.profile.destroy') }}" @submit.prevent="onSubmit">
-            @csrf
+        <div id="deleteProfileForm" class="d-none">
+            <form method="POST" action="{{ route('customer.profile.destroy') }}" @submit.prevent="onSubmit">
+                @csrf
 
-            <modal id="deleteProfile" :is-open="modalIds.deleteProfile">
-                <h3 slot="header">{{ __('shop::app.customer.account.address.index.enter-password') }}
-                </h3>
-                <i class="rango-close"></i>
+                <modal id="deleteProfile" :is-open="modalIds.deleteProfile">
+                    <h3 slot="header">
+                        {{ __('shop::app.customer.account.address.index.enter-password') }}
+                    </h3>
 
-                <div slot="body">
-                    <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                        <label for="password" class="required">{{ __('admin::app.users.users.password') }}</label>
-                        <input type="password" v-validate="'required|min:6|max:18'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.users.password') }}&quot;"/>
-                        <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
+                    <i class="rango-close"></i>
+
+                    <div slot="body">
+                        <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
+                            <label for="password" class="required">{{ __('admin::app.users.users.password') }}</label>
+
+                            <input type="password" v-validate="'required|min:6|max:18'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.users.password') }}&quot;"/>
+
+                            <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
+                        </div>
+
+                        <div class="page-action">
+                            <button type="submit"  class="theme-btn mb20">
+                                {{ __('shop::app.customer.account.address.index.delete') }}
+                            </button>
+                        </div>
                     </div>
-
-                    <div class="page-action">
-                        <button type="submit"  class="theme-btn mb20">
-                        {{ __('shop::app.customer.account.address.index.delete') }}
-                        </button>
-                    </div>
-                </div>
-            </modal>
-        </form>
+                </modal>
+            </form>
+        </div>
     </div>
 
     {!! view_render_event('bagisto.shop.customers.account.profile.view.after', ['customer' => $customer]) !!}
 @endsection
+
+@push('scripts')
+    <script>
+        /**
+         * Show delete profile modal.
+         */
+        function showDeleteProfileModal() {
+            document.getElementById('deleteProfileForm').classList.remove('d-none');
+
+            window.app.showModal('deleteProfile');
+        }
+    </script>
+@endpush
