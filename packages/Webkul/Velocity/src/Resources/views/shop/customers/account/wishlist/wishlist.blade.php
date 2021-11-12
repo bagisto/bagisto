@@ -106,8 +106,12 @@
                         <div class="col-12">
                             <label>Shared Link</label>
 
-                            <div class="form-control">
-                                <a href="https://example.com">https://example.com</a>
+                            <div>
+                                @if ($isWishlistShared)
+                                    <a href="{{ $wishlistSharedLink ?? 'javascript:void(0);' }}" target="_blank">{{ $wishlistSharedLink }}</a>
+                                @else
+                                    <p class="alert alert-danger">Enable wishlist sharing to get the link.</p>
+                                @endif
                             </div>
                         </div>
                     </div>

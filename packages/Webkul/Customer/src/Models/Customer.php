@@ -205,6 +205,31 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
     }
 
     /**
+     * Get wishlist shared link.
+     *
+     * @return string|null
+     */
+    public function getWishlistSharedLink()
+    {
+        $firstSharedWishlist = $this->wishlist_items()->where('shared', 1)->first();
+
+        if (
+            $firstSharedWishlist
+            && $firstSharedWishlist->additional
+            && isset($firstSharedWishlist->additional['token'])
+        ) {
+            $sharedToken = $firstSharedWishlist->additional['token'];
+
+            return route('customer.wishlist.shared', [
+                'id' => $this->id,
+                'token' => $sharedToken
+            ]);
+        }
+
+        return;
+    }
+
+    /**
      * Get all cart inactive cart instance of a customer.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

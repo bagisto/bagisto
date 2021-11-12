@@ -47,8 +47,6 @@ class WishlistController extends Controller
         WishlistRepository $wishlistRepository,
         ProductRepository $productRepository
     ) {
-        $this->middleware('customer');
-
         $this->_config = request('_config');
 
         $this->wishlistRepository = $wishlistRepository;
@@ -73,7 +71,8 @@ class WishlistController extends Controller
 
         return view($this->_config['view'], [
             'items' => $wishlistItems,
-            'isWishlistShared' => $this->currentCustomer->isWishlistShared()
+            'isWishlistShared' => $this->currentCustomer->isWishlistShared(),
+            'wishlistSharedLink' => $this->currentCustomer->getWishlistSharedLink()
         ]);
     }
 
@@ -138,21 +137,40 @@ class WishlistController extends Controller
      */
     public function share()
     {
+        $sharedToken = \Illuminate\Support\Str::random(16);
+
         $data = $this->validate(request(), [
             'shared' => 'required|boolean'
         ]);
 
-        $updateCounts = $this->currentCustomer->wishlist_items()->update(['shared' => $data['shared']]);
+        $updateCounts = $this->currentCustomer->wishlist_items()->update([
+            'shared' => $data['shared'],
+            'additional' => [
+                'token' => $sharedToken
+            ]
+        ]);
 
         if ($updateCounts && $updateCounts > 0) {
-            if ($data['shared']) {
-                session()->flash('success', 'Wishlist shared successfully');
-            } else {
-                session()->flash('success', 'Wishlist sharing has been stopped');
-            }
+            session()->flash('success', 'Shared wishlist settings updated successfully');
+
+            return redirect()->back();
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * View of shared wishlist.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function shared()
+    {
+        if (! core()->getConfigData('general.content.shop.wishlist_option')) {
+            abort(404);
+        }
+
+        return view($this->_config['view']);
     }
 
     /**
