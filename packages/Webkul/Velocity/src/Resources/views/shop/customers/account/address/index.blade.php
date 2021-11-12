@@ -6,16 +6,21 @@
 
 @section('page-detail-wrapper')
     @if ($addresses->isEmpty())
-
         <a href="{{ route('customer.address.create') }}" class="theme-btn light unset address-button">
-
             {{ __('shop::app.customer.account.address.index.add') }}
         </a>
     @endif
 
-    <div class="account-head">
-        <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
-        <span class="account-heading">{{ __('shop::app.customer.account.address.index.title') }}</span>
+    <div class="account-head mt-3">
+        <span class="back-icon">
+            <a href="{{ route('customer.account.index') }}">
+                <i class="icon icon-menu-back"></i>
+            </a>
+        </span>
+
+        <span class="account-heading">
+            {{ __('shop::app.customer.account.address.index.title') }}
+        </span>
 
         @if (! $addresses->isEmpty())
             <span class="account-action">
