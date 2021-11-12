@@ -13,7 +13,7 @@ class WishlistRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Customer\Contracts\Wishlist';
+        return \Webkul\Customer\Contracts\Wishlist::class;
     }
 
     /**
@@ -75,7 +75,7 @@ class WishlistRepository extends Repository
                 ->where(function ($qb) {
                     $qb
                         ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
-                        ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty' , '>' , 0);
+                        ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
                 });
         }
 

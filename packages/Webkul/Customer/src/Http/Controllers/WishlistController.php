@@ -3,8 +3,8 @@
 namespace Webkul\Customer\Http\Controllers;
 
 use Cart;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class WishlistController extends Controller
 {
@@ -16,17 +16,24 @@ class WishlistController extends Controller
     protected $_config;
 
     /**
-     * ProductRepository object
+     * Current customer.
+     *
+     * @var \Webkul\Customer\Models\Customer
+     */
+    protected $currentCustomer;
+
+    /**
+     * Product repository instance.
      *
      * @var \Webkul\Customer\Repositories\WishlistRepository
-    */
+     */
     protected $wishlistRepository;
 
     /**
-     * WishlistRepository object
+     * Wishlist repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductRepository
-    */
+     */
     protected $productRepository;
 
     /**
@@ -39,8 +46,7 @@ class WishlistController extends Controller
     public function __construct(
         WishlistRepository $wishlistRepository,
         ProductRepository $productRepository
-    )
-    {
+    ) {
         $this->middleware('customer');
 
         $this->_config = request('_config');
@@ -48,6 +54,8 @@ class WishlistController extends Controller
         $this->wishlistRepository = $wishlistRepository;
 
         $this->productRepository = $productRepository;
+
+        $this->currentCustomer = auth()->guard('customer')->user();
     }
 
     /**
@@ -63,7 +71,10 @@ class WishlistController extends Controller
             abort(404);
         }
 
-        return view($this->_config['view'])->with('items', $wishlistItems);
+        return view($this->_config['view'], [
+            'items' => $wishlistItems,
+            'isWishlistShared' => $this->currentCustomer->isWishlistShared()
+        ]);
     }
 
     /**
@@ -82,16 +93,18 @@ class WishlistController extends Controller
         $data = [
             'channel_id'  => core()->getCurrentChannel()->id,
             'product_id'  => $itemId,
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => $this->currentCustomer->id,
         ];
 
         $checked = $this->wishlistRepository->findWhere([
             'channel_id'  => core()->getCurrentChannel()->id,
             'product_id'  => $itemId,
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => $this->currentCustomer->id,
         ]);
 
-        // accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
+        /**
+         * Accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
+         */
         if ($product->parent_id != null) {
             $product = $this->productRepository->findOneByField('id', $product->parent_id);
             $data['product_id'] = $product->id;
@@ -119,6 +132,30 @@ class WishlistController extends Controller
     }
 
     /**
+     * Share wishlist.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function share()
+    {
+        $data = $this->validate(request(), [
+            'shared' => 'required|boolean'
+        ]);
+
+        $updateCounts = $this->currentCustomer->wishlist_items()->update(['shared' => $data['shared']]);
+
+        if ($updateCounts && $updateCounts > 0) {
+            if ($data['shared']) {
+                session()->flash('success', 'Wishlist shared successfully');
+            } else {
+                session()->flash('success', 'Wishlist sharing has been stopped');
+            }
+        }
+
+        return redirect()->back();
+    }
+
+    /**
      * Function to remove item to the wishlist.
      *
      * @param  int  $itemId
@@ -126,7 +163,7 @@ class WishlistController extends Controller
      */
     public function remove($itemId)
     {
-        $customerWishlistItems = auth()->guard('customer')->user()->wishlist_items;
+        $customerWishlistItems = $this->currentCustomer->wishlist_items;
 
         foreach ($customerWishlistItems as $customerWishlistItem) {
             if ($itemId == $customerWishlistItem->id) {
@@ -153,7 +190,7 @@ class WishlistController extends Controller
     {
         $wishlistItem = $this->wishlistRepository->findOneWhere([
             'id'          => $itemId,
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => $this->currentCustomer->id,
         ]);
 
         if (! $wishlistItem) {
@@ -188,7 +225,7 @@ class WishlistController extends Controller
      */
     public function removeAll()
     {
-        $wishlistItems = auth()->guard('customer')->user()->wishlist_items;
+        $wishlistItems = $this->currentCustomer->wishlist_items;
 
         if ($wishlistItems->count() > 0) {
             foreach ($wishlistItems as $wishlistItem) {

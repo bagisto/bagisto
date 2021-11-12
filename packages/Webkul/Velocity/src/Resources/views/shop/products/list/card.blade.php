@@ -48,7 +48,6 @@
         'moveToCart'        => null,
         'addToCartBtnClass' => '',
     ])->render());
-
 @endphp
 
 {!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
@@ -69,7 +68,7 @@
             </div>
 
             <div class="product-information">
-                <div>
+                <div class="p-2">
                     <div class="product-name">
                         <a
                             href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
@@ -107,8 +106,7 @@
                             'addWishlistClass'  => 'pl10',
                             'product'           => $product,
                             'addToCartBtnClass' => 'medium-padding',
-                            'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                   ? true : false,
+                            'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false,
                         ])
                     </div>
                 </div>
@@ -134,7 +132,7 @@
 
             @if ($product->new)
                 <div class="sticker new">
-                   {{ __('shop::app.products.new') }}
+                    {{ __('shop::app.products.new') }}
                 </div>
             @endif
 
@@ -187,8 +185,7 @@
                         'reloadPage'        => $reloadPage ?? null,
                         'addToCartForm'     => $addToCartForm ?? false,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',
-                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                ? true : false,
+                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false,
                     ])
                 </div>
             </div>
