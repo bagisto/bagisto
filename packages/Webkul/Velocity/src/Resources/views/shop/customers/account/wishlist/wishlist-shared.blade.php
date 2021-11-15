@@ -17,19 +17,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="wishlist-container">
-                    @if ($wishlistItems->count())
-                        <h2 class="text-center">
-                            {{ __('shop::app.customer.account.wishlist.customer-name', ['name' => $customer->name]) }}
-                        </h2>
+                    <h2 class="text-center">
+                        {{ __('shop::app.customer.account.wishlist.customer-name', ['name' => $customer->name]) }}
+                    </h2>
 
-                        @foreach ($wishlistItems as $wishlistItem)
-                            @include ('shop::customers.account.wishlist.wishlist-products', ['wishlistItem' => $wishlistItem])
-                        @endforeach
-                    @else
-                        <div class="empty">
-                            {{ __('customer::app.wishlist.empty') }}
-                        </div>
-                    @endif
+                    @foreach ($wishlistItems as $wishlistItem)
+                        @include ('shop::customers.account.wishlist.wishlist-products', ['wishlistItem' => $wishlistItem])
+                    @endforeach
                 </div>
             </div>
         </div>

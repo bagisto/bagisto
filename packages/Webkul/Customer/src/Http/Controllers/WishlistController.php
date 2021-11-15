@@ -171,7 +171,14 @@ class WishlistController extends Controller
 
         $wishlistItems = $customer->wishlist_items()->where('shared', 1)->get();
 
-        return view($this->_config['view'], compact('customer', 'wishlistItems'));
+        if ($customer && $wishlistItems->isNotEmpty()) {
+            return view($this->_config['view'], compact('customer', 'wishlistItems'));
+        }
+
+        /**
+         * All remaining cases should be aborted with 404 page.
+         */
+        abort(404);
     }
 
     /**
