@@ -44,10 +44,11 @@
         'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
                                 ? true : false,
 
-        'btnText'           => $btnText ?? null,
-        'moveToCart'        => $moveToCart ?? null,
-        'addToCartBtnClass' => $addToCartBtnClass ?? '',
+        'btnText'           => null,
+        'moveToCart'        => null,
+        'addToCartBtnClass' => '',
     ])->render());
+
 @endphp
 
 {!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
@@ -68,7 +69,7 @@
             </div>
 
             <div class="product-information">
-                <div class="p-2">
+                <div>
                     <div class="product-name">
                         <a
                             href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
@@ -105,8 +106,9 @@
                         @include ('shop::products.add-to-cart', [
                             'addWishlistClass'  => 'pl10',
                             'product'           => $product,
-                            'addToCartBtnClass' => $addToCartBtnClass ?? 'medium-padding',
-                            'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false,
+                            'addToCartBtnClass' => 'medium-padding',
+                            'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
+                                                   ? true : false,
                         ])
                     </div>
                 </div>
@@ -125,13 +127,14 @@
                     alt="{{ $product->name }}"
                     src="{{ $productBaseImage['large_image_url'] }}"
                     :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
-                    
+
+                    {{-- <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn> --}}
                     <product-quick-view-btn :quick-view-details="{{ json_encode($product) }}"></product-quick-view-btn>
             </a>
 
             @if ($product->new)
                 <div class="sticker new">
-                    {{ __('shop::app.products.new') }}
+                   {{ __('shop::app.products.new') }}
                 </div>
             @endif
 
@@ -184,7 +187,8 @@
                         'reloadPage'        => $reloadPage ?? null,
                         'addToCartForm'     => $addToCartForm ?? false,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',
-                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false,
+                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
+                                                ? true : false,
                     ])
                 </div>
             </div>
