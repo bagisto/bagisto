@@ -1400,6 +1400,8 @@ return [
             'stock-options' => 'خيارات الأسهم',
             'allow-backorders' => 'السماح بأوامر العودة',
             'customer' => 'العملاء',
+            'wishlist' => 'Wishlist',
+            'wishlist-share' => 'Enable Sharing',
             'settings' => 'الإعدادات',
             'address' => 'عنوان',
             'street-lines' => 'خطوط في عنوان الشارع',

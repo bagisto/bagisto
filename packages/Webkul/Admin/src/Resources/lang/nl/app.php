@@ -1394,6 +1394,8 @@ return [
             'stock-options' => 'Aandelenopties',
             'allow-backorders' => 'Backorders toestaan',
             'customer' => 'Klant',
+            'wishlist' => 'Wishlist',
+            'wishlist-share' => 'Enable Sharing',
             'settings' => 'Instellingen',
             'address' => 'Adres',
             'street-lines' => 'Lijnen in een adres',

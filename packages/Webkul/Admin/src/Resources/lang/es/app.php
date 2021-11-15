@@ -1412,6 +1412,8 @@ return [
             'stock-options' => 'Opciones de stock',
             'allow-backorders' => 'Permitir backorders',
             'customer' => 'Cliente',
+            'wishlist' => 'Wishlist',
+            'wishlist-share' => 'Enable Sharing',
             'settings' => 'Ajustes',
             'address' => 'Dirección',
             'street-lines' => 'Líneas en la dirección',

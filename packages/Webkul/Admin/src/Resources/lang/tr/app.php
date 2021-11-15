@@ -1384,6 +1384,8 @@ return [
             'stock-options' => 'Stok Seçenekleri',
             'allow-backorders' => 'Stok Dışı Siparişe İzin Ver',
             'customer' => 'Müşteri',
+            'wishlist' => 'Wishlist',
+            'wishlist-share' => 'Enable Sharing',
             'settings' => 'Ayarlar',
             'address' => 'Adres',
             'street-lines' => 'Sokak Adresi Satır Sayısı',
