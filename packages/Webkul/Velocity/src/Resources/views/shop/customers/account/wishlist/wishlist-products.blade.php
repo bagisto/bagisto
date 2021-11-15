@@ -40,10 +40,10 @@
             <div class="cart-wish-wrap mt5">
                 <div class="mb-2">
                     <span class="fs16">
-                        Visibility:
+                        {{ __('velocity::app.customer.wishlist.visibility') }} :
 
                         <span class="badge {{ $wishlistItem->shared ? 'badge-success' : 'badge-danger' }}">
-                            {{ $wishlistItem->shared ? 'Public' : 'Private' }}
+                            {{ $wishlistItem->shared ? __('velocity::app.customer.wishlist.public') : __('velocity::app.customer.wishlist.private') }}
                         </span>
                     </span>
                 </div>

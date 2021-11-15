@@ -215,6 +215,19 @@ return [
             'product_image'         => 'Product Image',
             'actions'               => 'Actions',
         ],
+        'wishlist'          => [
+            'save'                 => 'Save',
+            'share'                => 'Share',
+            'share-wishlist'       => 'Share Wishlist',
+            'wishlist-sharing'     => 'Wishlist Sharing',
+            'shared-link'          => 'Shared Link',
+            'visibility'           => 'Visibility',
+            'public'               => 'Public',
+            'private'              => 'Private',
+            'customer-name'        => ':name\'s Shared Wishlist',
+            'enable-wishlist-info' => 'Enable wishlist sharing to get the link.',
+            'remove-all-success'   => 'All the items from your wishlist have been removed',
+        ],
         'login-form'        => [
             'sign-up'               => 'Sign up',
             'new-customer'          => 'New Customer',
@@ -234,9 +247,6 @@ return [
             'forgot-password'       => 'Forgot Password',
             'recover-password'      => 'Recover Password',
             'recover-password-text' => 'If you forgot your password, recover it by entering your email address.',
-        ],
-        'wishlist' => [
-            'remove-all-success' => 'All the items from your wishlist have been removed',
         ],
     ],
 
