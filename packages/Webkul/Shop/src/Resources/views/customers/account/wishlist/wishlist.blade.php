@@ -11,13 +11,19 @@
         <div class="account-head mb-15">
             <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
 
-            @if (count($items))
+            @if (count($wishlistItems))
                 <div class="account-action">
                     <form id="remove-all-wishlist" action="{{ route('customer.wishlist.removeall') }}" method="POST">
                         @method('DELETE')
 
                         @csrf
                     </form>
+
+                    <a
+                        href="javascript:void(0);"
+                        onclick="window.showShareWishlistModal();">
+                        {{ __('shop::app.customer.account.wishlist.share') }}
+                    </a>
 
                     <a
                         href="javascript:void(0);"
@@ -30,67 +36,18 @@
             <div class="horizontal-rule"></div>
         </div>
 
-        {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $items]) !!}
+        {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $wishlistItems]) !!}
 
         <div class="account-items-list">
-            @if ($items->count())
-                @foreach ($items as $item)
-                    <div class="account-item-card mt-15 mb-15">
-                        <div class="media-info">
-                            @php
-                                $image = $item->product->getTypeInstance()->getBaseImage($item);
-                            @endphp
-
-                            <img class="media" src="{{ $image['small_image_url'] }}" alt="" />
-
-                            <div class="info">
-                                <div class="product-name">
-                                    {{ $item->product->name }}
-
-                                    @if (isset($item->additional['attributes']))
-                                        <div class="item-options">
-
-                                            @foreach ($item->additional['attributes'] as $attribute)
-                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
-                                            @endforeach
-
-                                        </div>
-                                    @endif
-                                </div>
-
-                                <span class="stars" style="display: inline">
-                                    @for ($i = 1; $i <= $reviewHelper->getAverageRating($item->product); $i++)
-                                        <span class="icon star-icon"></span>
-                                    @endfor
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="operations">
-                            <form id="wishlist-{{ $item->id }}" action="{{ route('customer.wishlist.remove', $item->id) }}" method="POST">
-                                @method('DELETE')
-
-                                @csrf
-                            </form>
-
-                            <a
-                                class="mb-50"
-                                href="javascript:void(0);"
-                                onclick="document.getElementById('wishlist-{{ $item->id }}').submit();">
-                                <span class="icon trash-icon"></span>
-                            </a>
-
-                            <a href="{{ route('customer.wishlist.move', $item->id) }}" class="btn btn-primary btn-md">
-                                {{ __('shop::app.customer.account.wishlist.move-to-cart') }}
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="horizontal-rule mb-10 mt-10"></div>
+            @if ($wishlistItems->count())
+                @foreach ($wishlistItems as $wishlistItem)
+                    @include('shop::customers.account.wishlist.wishlist-product', [
+                        'wishlistItem' => $wishlistItem
+                    ])
                 @endforeach
 
                 <div class="bottom-toolbar">
-                    {{ $items->links()  }}
+                    {{ $wishlistItems->links()  }}
                 </div>
             @else
                 <div class="empty">
@@ -99,6 +56,74 @@
             @endif
         </div>
 
-        {!! view_render_event('bagisto.shop.customers.account.wishlist.list.after', ['wishlist' => $items]) !!}
+        <div id="shareWishlistModal" class="d-none">
+            <modal id="shareWishlist" :is-open="modalIds.shareWishlist">
+                <h3 slot="header">
+                    {{ __('shop::app.customer.account.wishlist.share-wishlist') }}
+                </h3>
+
+                <i class="rango-close"></i>
+
+                <div slot="body">
+                    <form method="POST" action="{{ route('customer.wishlist.share') }}">
+                        @csrf
+
+                        <div class="control-group">
+                            <label for="shared" class="required">{{ __('shop::app.customer.account.wishlist.wishlist-sharing') }}</label>
+
+                            <select name="shared" class="control">
+                                <option value="0" {{ $isWishlistShared ? '' : 'selected="selected"' }}>Disable</option>
+                                <option value="1" {{ $isWishlistShared ? 'selected="selected"' : '' }}>Enable</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="required">{{ __('shop::app.customer.account.wishlist.visibility') }}</label>
+
+                            <div class="mt-5">
+                                @if ($isWishlistShared)
+                                    <span class="badge badge-sm badge-success">{{ __('shop::app.customer.account.wishlist.public') }}</span>
+                                @else
+                                    <span class="badge badge-sm badge-danger">{{ __('shop::app.customer.account.wishlist.private') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="required">{{ __('shop::app.customer.account.wishlist.shared-link') }}</label>
+
+                            <div>
+                                @if ($isWishlistShared)
+                                    <a href="{{ $wishlistSharedLink ?? 'javascript:void(0);' }}" target="_blank">{{ $wishlistSharedLink }}</a>
+                                @else
+                                    <p>{{ __('shop::app.customer.account.wishlist.enable-wishlist-info') }}</p>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="page-action">
+                            <button type="submit"  class="btn btn-lg btn-primary mt-10 pull-right">
+                                {{ __('shop::app.customer.account.wishlist.save') }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </modal>
+        </div>
+
+        {!! view_render_event('bagisto.shop.customers.account.wishlist.list.after', ['wishlist' => $wishlistItems]) !!}
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        /**
+         * Show share wishlist modal.
+         */
+        function showShareWishlistModal() {
+            document.getElementById('shareWishlistModal').classList.remove('d-none');
+
+            window.app.showModal('shareWishlist');
+        }
+    </script>
+@endpush

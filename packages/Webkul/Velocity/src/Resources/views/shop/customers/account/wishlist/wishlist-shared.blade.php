@@ -1,7 +1,7 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ __('shop::app.customer.account.wishlist.page-title') }}
+    {{ __('shop::app.customer.account.wishlist.customer-name', ['name' => $customer->name]) }}
 @endsection
 
 @section('content-wrapper')
@@ -22,7 +22,7 @@
                     </h2>
 
                     @foreach ($wishlistItems as $wishlistItem)
-                        @include ('shop::customers.account.wishlist.wishlist-products', ['wishlistItem' => $wishlistItem])
+                        @include ('shop::customers.account.wishlist.wishlist-product', ['wishlistItem' => $wishlistItem])
                     @endforeach
                 </div>
             </div>

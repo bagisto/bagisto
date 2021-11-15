@@ -44,7 +44,7 @@
     <div class="wishlist-container">
         @if ($wishlistItems->count())
             @foreach ($wishlistItems as $wishlistItem)
-                @include ('shop::customers.account.wishlist.wishlist-products', ['wishlistItem' => $wishlistItem])
+                @include ('shop::customers.account.wishlist.wishlist-product', ['wishlistItem' => $wishlistItem])
             @endforeach
 
             <div>
