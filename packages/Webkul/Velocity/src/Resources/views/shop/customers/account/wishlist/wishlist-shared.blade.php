@@ -19,7 +19,7 @@
                 <div class="wishlist-container">
                     @if ($wishlistItems->count())
                         <h2 class="text-center">
-                            {{ __('velocity::app.customer.wishlist.customer-name', ['name' => $customer->name]) }}
+                            {{ __('shop::app.customer.account.wishlist.customer-name', ['name' => $customer->name]) }}
                         </h2>
 
                         @foreach ($wishlistItems as $wishlistItem)

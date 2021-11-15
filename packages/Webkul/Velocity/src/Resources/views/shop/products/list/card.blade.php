@@ -102,18 +102,6 @@
                     @endif
 
                     <div class="cart-wish-wrap mt5">
-                        @if (isset($wishlistItem) && $wishlistItem)
-                            <div class="mb-2">
-                                <span class="fs16">
-                                    Visibility:
-
-                                    <span class="badge {{ $wishlistItem->shared ? 'badge-success' : 'badge-danger' }}">
-                                        {{ $wishlistItem->shared ? 'Public' : 'Private' }}
-                                    </span>
-                                </span>
-                            </div>
-                        @endif
-
                         @include ('shop::products.add-to-cart', [
                             'addWishlistClass'  => 'pl10',
                             'product'           => $product,
@@ -137,8 +125,7 @@
                     alt="{{ $product->name }}"
                     src="{{ $productBaseImage['large_image_url'] }}"
                     :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
-
-                    {{-- <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn> --}}
+                    
                     <product-quick-view-btn :quick-view-details="{{ json_encode($product) }}"></product-quick-view-btn>
             </a>
 

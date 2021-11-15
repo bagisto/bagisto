@@ -216,16 +216,6 @@ return [
             'actions'               => 'Actions',
         ],
         'wishlist'          => [
-            'save'                 => 'Save',
-            'share'                => 'Share',
-            'share-wishlist'       => 'Share Wishlist',
-            'wishlist-sharing'     => 'Wishlist Sharing',
-            'shared-link'          => 'Shared Link',
-            'visibility'           => 'Visibility',
-            'public'               => 'Public',
-            'private'              => 'Private',
-            'customer-name'        => ':name\'s Shared Wishlist',
-            'enable-wishlist-info' => 'Enable wishlist sharing to get the link.',
             'remove-all-success'   => 'All the items from your wishlist have been removed',
         ],
         'login-form'        => [

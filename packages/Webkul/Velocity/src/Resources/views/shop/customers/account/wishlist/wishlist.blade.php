@@ -33,7 +33,7 @@
                     class="remove-decoration theme-btn light"
                     href="javascript:void(0);"
                     @click="window.showShareWishlistModal();">
-                    {{ __('velocity::app.customer.wishlist.share') }}
+                    {{ __('shop::app.customer.account.wishlist.share') }}
                 </a>
             </div>
         @endif
@@ -60,7 +60,7 @@
     <div id="shareWishlistModal" class="d-none">
         <modal id="shareWishlist" :is-open="modalIds.shareWishlist">
             <h3 slot="header">
-                {{ __('velocity::app.customer.wishlist.share-wishlist') }}
+                {{ __('shop::app.customer.account.wishlist.share-wishlist') }}
             </h3>
 
             <i class="rango-close"></i>
@@ -72,7 +72,7 @@
                     <div class="row">
                         <div class="col-12">
                             <label class="mandatory">
-                                {{ __('velocity::app.customer.wishlist.wishlist-sharing') }}
+                                {{ __('shop::app.customer.account.wishlist.wishlist-sharing') }}
                             </label>
 
                             <select name="shared" class="form-control">
@@ -85,14 +85,14 @@
                     <div class="row mt-2">
                         <div class="col-12">
                             <label class="mandatory">
-                                {{ __('velocity::app.customer.wishlist.visibility') }}
+                                {{ __('shop::app.customer.account.wishlist.visibility') }}
                             </label>
 
                             <div>
                                 @if ($isWishlistShared)
-                                    <span class="badge badge-success">{{ __('velocity::app.customer.wishlist.public') }}</span>
+                                    <span class="badge badge-success">{{ __('shop::app.customer.account.wishlist.public') }}</span>
                                 @else
-                                    <span class="badge badge-danger">{{ __('velocity::app.customer.wishlist.private') }}</span>
+                                    <span class="badge badge-danger">{{ __('shop::app.customer.account.wishlist.private') }}</span>
                                 @endif
                             </div>
                         </div>
@@ -101,14 +101,14 @@
                     <div class="row mt-2">
                         <div class="col-12">
                             <label class="mandatory">
-                                {{ __('velocity::app.customer.wishlist.shared-link') }}
+                                {{ __('shop::app.customer.account.wishlist.shared-link') }}
                             </label>
 
                             <div>
                                 @if ($isWishlistShared)
                                     <a href="{{ $wishlistSharedLink ?? 'javascript:void(0);' }}" target="_blank">{{ $wishlistSharedLink }}</a>
                                 @else
-                                    <p class="alert alert-danger">{{ __('velocity::app.customer.wishlist.enable-wishlist-info') }}</p>
+                                    <p class="alert alert-danger">{{ __('shop::app.customer.account.wishlist.enable-wishlist-info') }}</p>
                                 @endif
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                     <div class="row mt-2">
                         <div class="col-12">
                             <button type="submit"  class="theme-btn float-right">
-                                {{ __('velocity::app.customer.wishlist.save') }}
+                                {{ __('shop::app.customer.account.wishlist.save') }}
                             </button>
                         </div>
                     </div>
