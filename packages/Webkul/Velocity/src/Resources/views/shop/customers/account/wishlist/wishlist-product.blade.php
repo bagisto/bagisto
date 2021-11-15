@@ -4,7 +4,7 @@
      *
      * @var \Webkul\Product\Models\Product
      */
-    $product = $wishlistItem->product;
+    $product = $item->product;
 @endphp
 
 <div class="col-12 lg-card-container list-card product-card row">
@@ -42,14 +42,14 @@
                     <span class="fs16">
                         {{ __('shop::app.customer.account.wishlist.visibility') }} :
 
-                        <span class="badge {{ $wishlistItem->shared ? 'badge-success' : 'badge-danger' }}">
-                            {{ $wishlistItem->shared ? __('shop::app.customer.account.wishlist.public') : __('shop::app.customer.account.wishlist.private') }}
+                        <span class="badge {{ $item->shared ? 'badge-success' : 'badge-danger' }}">
+                            {{ $item->shared ? __('shop::app.customer.account.wishlist.public') : __('shop::app.customer.account.wishlist.private') }}
                         </span>
                     </span>
                 </div>
 
                 <div>
-                    @include ('shop::products.add-to-cart', [
+                    @include('shop::products.add-to-cart', [
                         'addWishlistClass'  => 'pl10',
                         'product'           => $product,
                         'addToCartBtnClass' => 'medium-padding',

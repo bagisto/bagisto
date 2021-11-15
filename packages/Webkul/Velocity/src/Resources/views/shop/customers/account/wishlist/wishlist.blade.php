@@ -10,7 +10,7 @@
     <div class="account-head">
         <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
 
-        @if (count($wishlistItems))
+        @if (count($items))
             <div class="account-action float-right">
                 <form id="remove-all-wishlist" class="d-none" action="{{ route('customer.wishlist.removeall') }}" method="POST">
                     @method('DELETE')
@@ -39,16 +39,16 @@
         @endif
     </div>
 
-    {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $wishlistItems]) !!}
+    {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $items]) !!}
 
     <div class="wishlist-container">
-        @if ($wishlistItems->count())
-            @foreach ($wishlistItems as $wishlistItem)
-                @include ('shop::customers.account.wishlist.wishlist-product', ['wishlistItem' => $wishlistItem])
+        @if ($items->count())
+            @foreach ($items as $item)
+                @include ('shop::customers.account.wishlist.wishlist-product', ['item' => $item])
             @endforeach
 
             <div>
-                {{ $wishlistItems->links()  }}
+                {{ $items->links()  }}
             </div>
         @else
             <div class="empty">
@@ -126,7 +126,7 @@
         </modal>
     </div>
 
-    {!! view_render_event('bagisto.shop.customers.account.wishlist.list.after', ['wishlist' => $wishlistItems]) !!}
+    {!! view_render_event('bagisto.shop.customers.account.wishlist.list.after', ['wishlist' => $items]) !!}
 @endsection
 
 @push('scripts')

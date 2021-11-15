@@ -15,10 +15,8 @@
         </div>
 
         <div class="account-items-list">
-            @foreach ($wishlistItems as $wishlistItem)
-                @include('shop::customers.account.wishlist.wishlist-product', [
-                    'wishlistItem' => $wishlistItem
-                ])
+            @foreach ($items as $item)
+                @include('shop::customers.account.wishlist.wishlist-product', ['item' => $item])
             @endforeach
         </div>
     </div>

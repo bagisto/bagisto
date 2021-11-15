@@ -9,20 +9,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="wishlist-container">
-
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="wishlist-container">
                     <h2 class="text-center">
                         {{ __('shop::app.customer.account.wishlist.customer-name', ['name' => $customer->name]) }}
                     </h2>
 
-                    @foreach ($wishlistItems as $wishlistItem)
-                        @include ('shop::customers.account.wishlist.wishlist-product', ['wishlistItem' => $wishlistItem])
+                    @foreach ($items as $item)
+                        @include('shop::customers.account.wishlist.wishlist-product', ['item' => $item])
                     @endforeach
                 </div>
             </div>

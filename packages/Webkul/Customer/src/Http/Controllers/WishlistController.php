@@ -64,14 +64,12 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        $wishlistItems = $this->wishlistRepository->getCustomerWishlist();
-
         if (! core()->getConfigData('general.content.shop.wishlist_option')) {
             abort(404);
         }
 
         return view($this->_config['view'], [
-            'wishlistItems' => $wishlistItems,
+            'items' => $this->wishlistRepository->getCustomerWishlist(),
             'isWishlistShared' => $this->currentCustomer->isWishlistShared(),
             'wishlistSharedLink' => $this->currentCustomer->getWishlistSharedLink()
         ]);
@@ -169,10 +167,10 @@ class WishlistController extends Controller
 
         $customer = $customerRepository->find(request()->get('id'));
 
-        $wishlistItems = $customer->wishlist_items()->where('shared', 1)->get();
+        $items = $customer->wishlist_items()->where('shared', 1)->get();
 
-        if ($customer && $wishlistItems->isNotEmpty()) {
-            return view($this->_config['view'], compact('customer', 'wishlistItems'));
+        if ($customer && $items->isNotEmpty()) {
+            return view($this->_config['view'], compact('customer', 'items'));
         }
 
         /**
