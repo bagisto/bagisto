@@ -44,9 +44,9 @@
         'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
                                 ? true : false,
 
-        'btnText'           => null,
-        'moveToCart'        => null,
-        'addToCartBtnClass' => '',
+        'btnText'           => $btnText ?? null,
+        'moveToCart'        => $moveToCart ?? null,
+        'addToCartBtnClass' => $addToCartBtnClass ?? '',
     ])->render());
 @endphp
 
@@ -102,10 +102,22 @@
                     @endif
 
                     <div class="cart-wish-wrap mt5">
+                        @if (isset($wishlistItem) && $wishlistItem)
+                            <div class="mb-2">
+                                <span class="fs16">
+                                    Visibility:
+
+                                    <span class="badge {{ $wishlistItem->shared ? 'badge-success' : 'badge-danger' }}">
+                                        {{ $wishlistItem->shared ? 'Public' : 'Private' }}
+                                    </span>
+                                </span>
+                            </div>
+                        @endif
+
                         @include ('shop::products.add-to-cart', [
                             'addWishlistClass'  => 'pl10',
                             'product'           => $product,
-                            'addToCartBtnClass' => 'medium-padding',
+                            'addToCartBtnClass' => $addToCartBtnClass ?? 'medium-padding',
                             'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false,
                         ])
                     </div>

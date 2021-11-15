@@ -10,7 +10,7 @@
     <div class="account-head">
         <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
 
-        @if (count($items))
+        @if (count($wishlistItems))
             <div class="account-action float-right">
                 <form id="remove-all-wishlist" class="d-none" action="{{ route('customer.wishlist.removeall') }}" method="POST">
                     @method('DELETE')
@@ -40,35 +40,16 @@
         @endif
     </div>
 
-    {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $items]) !!}
+    {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $wishlistItems]) !!}
 
     <div class="wishlist-container">
-        @if ($items->count())
-            @foreach ($items as $item)
-                @php
-                    $currentMode = $toolbarHelper->getCurrentMode();
-                    $moveToCartText = __('shop::app.customer.account.wishlist.move-to-cart');
-                @endphp
-
-                @include ('shop::products.list.card', [
-                    'list'                 => true,
-                    'checkmode'            => true,
-                    'moveToCart'           => true,
-                    'wishlistMoveRoute'    => route('customer.wishlist.move', $item->id),
-                    'addToCartForm'        => true,
-                    'removeWishlist'       => true,
-                    'reloadPage'           => true,
-                    'itemId'               => $item->id,
-                    'item'                 => $item,
-                    'product'              => $item->product,
-                    'additionalAttributes' => true,
-                    'btnText'              => $moveToCartText,
-                    'addToCartBtnClass'    => 'small-padding',
-                ])
+        @if ($wishlistItems->count())
+            @foreach ($wishlistItems as $wishlistItem)
+                @include ('shop::customers.account.wishlist.wishlist-products', ['wishlistItem' => $wishlistItem])
             @endforeach
 
             <div>
-                {{ $items->links()  }}
+                {{ $wishlistItems->links()  }}
             </div>
         @else
             <div class="empty">
@@ -104,7 +85,25 @@
 
                     <div class="row mt-2">
                         <div class="col-12">
-                            <label>Shared Link</label>
+                            <label class="mandatory">
+                                Visibility
+                            </label>
+
+                            <div>
+                                @if ($isWishlistShared)
+                                    <span class="badge badge-success">Public</span>
+                                @else
+                                    <span class="badge badge-danger">Private</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <label class="mandatory">
+                                Shared Link
+                            </label>
 
                             <div>
                                 @if ($isWishlistShared)
@@ -128,7 +127,7 @@
         </modal>
     </div>
 
-    {!! view_render_event('bagisto.shop.customers.account.wishlist.list.after', ['wishlist' => $items]) !!}
+    {!! view_render_event('bagisto.shop.customers.account.wishlist.list.after', ['wishlist' => $wishlistItems]) !!}
 @endsection
 
 @push('scripts')

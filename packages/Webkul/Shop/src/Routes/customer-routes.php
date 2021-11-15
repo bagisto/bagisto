@@ -91,7 +91,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
                 Route::get('wishlist/shared', [WishlistController::class, 'shared'])
                     ->defaults('_config', [
-                        'view' => 'shop::customers.account.wishlist.shared-wishlist'
+                        'view' => 'shop::customers.account.wishlist.wishlist-shared'
                     ])
                     ->withoutMiddleware('customer')
                     ->name('customer.wishlist.shared');

@@ -3,6 +3,7 @@
 namespace Webkul\Customer\Http\Controllers;
 
 use Cart;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -70,7 +71,7 @@ class WishlistController extends Controller
         }
 
         return view($this->_config['view'], [
-            'items' => $wishlistItems,
+            'wishlistItems' => $wishlistItems,
             'isWishlistShared' => $this->currentCustomer->isWishlistShared(),
             'wishlistSharedLink' => $this->currentCustomer->getWishlistSharedLink()
         ]);
@@ -137,18 +138,11 @@ class WishlistController extends Controller
      */
     public function share()
     {
-        $sharedToken = \Illuminate\Support\Str::random(16);
-
         $data = $this->validate(request(), [
             'shared' => 'required|boolean'
         ]);
 
-        $updateCounts = $this->currentCustomer->wishlist_items()->update([
-            'shared' => $data['shared'],
-            'additional' => [
-                'token' => $sharedToken
-            ]
-        ]);
+        $updateCounts = $this->currentCustomer->wishlist_items()->update(['shared' => $data['shared']]);
 
         if ($updateCounts && $updateCounts > 0) {
             session()->flash('success', 'Shared wishlist settings updated successfully');
@@ -164,13 +158,20 @@ class WishlistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function shared()
+    public function shared(CustomerRepository $customerRepository)
     {
-        if (! core()->getConfigData('general.content.shop.wishlist_option')) {
+        if (
+            ! request()->hasValidSignature()
+            || ! core()->getConfigData('general.content.shop.wishlist_option')
+        ) {
             abort(404);
         }
 
-        return view($this->_config['view']);
+        $customer = $customerRepository->find(request()->get('id'));
+
+        $wishlistItems = $customer->wishlist_items()->where('shared', 1)->get();
+
+        return view($this->_config['view'], compact('customer', 'wishlistItems'));
     }
 
     /**

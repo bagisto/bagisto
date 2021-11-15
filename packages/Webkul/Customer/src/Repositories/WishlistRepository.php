@@ -58,6 +58,20 @@ class WishlistRepository extends Repository
     }
 
     /**
+     * Get shared wishlist by customer's id.
+     *
+     * @param  int  $id
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function getSharedWishlistByCustomerId($id)
+    {
+        return $this
+            ->where('customer_id', $id)
+            ->where('shared', 1)
+            ->get();
+    }
+
+    /**
      * Get customer wishlist items.
      *
      * @return \Illuminate\Support\Collection

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Webkul\Checkout\Models\CartProxy;
 use Webkul\Core\Models\SubscribersListProxy;
@@ -199,9 +200,9 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
      */
     public function isWishlistShared(): bool
     {
-        $sharedWishlists = $this->wishlist_items()->where('shared', 1)->get();
-
-        return $sharedWishlists->count() > 0 ? true : false;
+        return $this->wishlist_items()->where('shared', 1)->first()
+            ? true
+            : false;
     }
 
     /**
@@ -211,22 +212,9 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
      */
     public function getWishlistSharedLink()
     {
-        $firstSharedWishlist = $this->wishlist_items()->where('shared', 1)->first();
-
-        if (
-            $firstSharedWishlist
-            && $firstSharedWishlist->additional
-            && isset($firstSharedWishlist->additional['token'])
-        ) {
-            $sharedToken = $firstSharedWishlist->additional['token'];
-
-            return route('customer.wishlist.shared', [
-                'id' => $this->id,
-                'token' => $sharedToken
-            ]);
-        }
-
-        return;
+        return $this->isWishlistShared()
+            ? URL::signedRoute('customer.wishlist.shared', ['id' => $this->id])
+            : null;
     }
 
     /**
