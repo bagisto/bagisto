@@ -19,6 +19,16 @@
                 @endif
             </div>
 
+            <div class="mb-2">
+                <span class="fs16">
+                    {{ __('shop::app.customer.account.wishlist.visibility') }} :
+
+                    <span class="badge badge-sm {{ $item->shared ? 'badge-success' : 'badge-danger' }}">
+                        {{ $item->shared ? __('shop::app.customer.account.wishlist.public') : __('shop::app.customer.account.wishlist.private') }}
+                    </span>
+                </span>
+            </div>
+
             <span class="stars" style="display: inline">
                 @for ($i = 1; $i <= $reviewHelper->getAverageRating($item->product); $i++)
                     <span class="icon star-icon"></span>
