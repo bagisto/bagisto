@@ -371,6 +371,8 @@ return [
                 'visibility'           => 'Visibility',
                 'public'               => 'Public',
                 'private'              => 'Private',
+                'enable'               => 'Enable',
+                'disable'              => 'Disable',
                 'customer-name'        => ':name\'s Shared Wishlist',
                 'enable-wishlist-info' => 'Enable wishlist sharing to get the link.',
             ],

@@ -76,8 +76,8 @@
                             </label>
 
                             <select name="shared" class="form-control">
-                                <option value="0" {{ $isWishlistShared ? '' : 'selected="selected"' }}>Disable</option>
-                                <option value="1" {{ $isWishlistShared ? 'selected="selected"' : '' }}>Enable</option>
+                                <option value="0" {{ $isWishlistShared ? '' : 'selected="selected"' }}>{{ __('shop::app.customer.account.wishlist.enable') }}</option>
+                                <option value="1" {{ $isWishlistShared ? 'selected="selected"' : '' }}>{{ __('shop::app.customer.account.wishlist.disable') }}</option>
                             </select>
                         </div>
                     </div>
