@@ -145,7 +145,7 @@ class WishlistController extends Controller
             $updateCounts = $this->currentCustomer->wishlist_items()->update(['shared' => $data['shared']]);
 
             if ($updateCounts && $updateCounts > 0) {
-                session()->flash('success', 'Shared wishlist settings updated successfully');
+                session()->flash('success', __('shop::app.customer.account.wishlist.update-message'));
 
                 return redirect()->back();
             }
