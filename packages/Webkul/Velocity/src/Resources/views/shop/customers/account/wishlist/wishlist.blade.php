@@ -6,20 +6,6 @@
     {{ __('shop::app.customer.account.wishlist.page-title') }}
 @endsection
 
-@push('css')
-    {{--
-        @devansh-webkul
-
-        - Handle it from scss when removing back icon.
-    --}}
-    <style>
-        .account-head {
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
-@endpush
-
 @section('page-detail-wrapper')
     <div class="account-head">
         <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
@@ -36,7 +22,7 @@
                     <a
                         class="remove-decoration theme-btn light"
                         href="javascript:void(0);"
-                        @click="window.showShareWishlistModal();">
+                        onclick="window.showShareWishlistModal();">
                         {{ __('shop::app.customer.account.wishlist.share') }}
                     </a>
 

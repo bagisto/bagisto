@@ -20,11 +20,9 @@
     <div class="account-content">
         <div class="account-layout">
             <div class="account-head">
-                <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
                 <span class="account-heading">
                     {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->increment_id]) }}
                 </span>
-                <span></span>
 
                 @if ($order->canCancel())
                     <span class="account-action">
