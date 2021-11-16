@@ -6,17 +6,42 @@
     {{ __('shop::app.customer.account.wishlist.page-title') }}
 @endsection
 
+@push('css')
+    {{--
+        @devansh-webkul
+
+        - Handle it from scss when removing back icon.
+    --}}
+    <style>
+        .account-head {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+@endpush
+
 @section('page-detail-wrapper')
     <div class="account-head">
         <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
 
         @if (count($items))
-            <div class="account-action float-right">
+            <span class="account-action">
                 <form id="remove-all-wishlist" class="d-none" action="{{ route('customer.wishlist.removeall') }}" method="POST">
                     @method('DELETE')
 
                     @csrf
                 </form>
+
+                @if ($isSharingEnabled)
+                    <a
+                        class="remove-decoration theme-btn light"
+                        href="javascript:void(0);"
+                        @click="window.showShareWishlistModal();">
+                        {{ __('shop::app.customer.account.wishlist.share') }}
+                    </a>
+
+                    &nbsp;
+                @endif
 
                 <a
                     class="remove-decoration theme-btn light"
@@ -24,20 +49,7 @@
                     onclick="document.getElementById('remove-all-wishlist').submit();">
                     {{ __('shop::app.customer.account.wishlist.deleteall') }}
                 </a>
-            </div>
-
-            <div class="account-action float-right w-10">&nbsp;</div>
-
-            @if ($isSharingEnabled)
-                <div class="account-action float-right">
-                    <a
-                        class="remove-decoration theme-btn light"
-                        href="javascript:void(0);"
-                        @click="window.showShareWishlistModal();">
-                        {{ __('shop::app.customer.account.wishlist.share') }}
-                    </a>
-                </div>
-            @endif
+            </span>
         @endif
     </div>
 
