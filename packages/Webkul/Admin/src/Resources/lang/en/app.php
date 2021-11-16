@@ -1417,6 +1417,8 @@ return [
             'stock-options'                         => 'Stock Options',
             'allow-backorders'                      => 'Allow Backorders',
             'customer'                              => 'Customer',
+            'wishlist'                              => 'Wishlist',
+            'wishlist-share'                        => 'Enable Sharing',
             'settings'                              => 'Settings',
             'address'                               => 'Address',
             'street-lines'                          => 'Lines in a Street Address',
@@ -1543,15 +1545,15 @@ return [
             'show-search-input-field'               => 'Show Search Input Field',
             'allow-no-of-new-product-homepage'      => 'Allowed No of New Product in Homepage',
             'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
-            'width' => 'Width',
-            'height' => 'Height',
-            'cache-small-image' => 'Small Image',
-            'cache-medium-image' => 'Medium Image',
-            'cache-large-image' => 'Large Image',
-            'generate-invoice'   => 'Automatically generate the invoice after placing an order',
-            'set-invoice-status' => 'Set the invoice status after creating the invoice to',
-            'set-order-status'   => 'Set the order status after creating the invoice to',
-            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
+            'width'                                 => 'Width',
+            'height'                                => 'Height',
+            'cache-small-image'                     => 'Small Image',
+            'cache-medium-image'                    => 'Medium Image',
+            'cache-large-image'                     => 'Large Image',
+            'generate-invoice'                      => 'Automatically generate the invoice after placing an order',
+            'set-invoice-status'                    => 'Set the invoice status after creating the invoice to',
+            'set-order-status'                      => 'Set the order status after creating the invoice to',
+            'generate-invoice-applicable'           => 'Applicable if automatic generate invoice is enabled'
         ]
     ]
 ];

@@ -181,6 +181,19 @@
     margin-left: 30px !important;
 }
 
+.w-0 {
+    width: 0px !important;
+}
+.w-5 {
+    width: 5px !important;
+}
+.w-10 {
+    width: 10px !important;
+}
+.w-15 {
+    width: 15px !important;
+}
+
 .body-blur {
     filter: blur(4px);
     -webkit-filter: blur(4px);
@@ -411,6 +424,15 @@
 
     &.grid-card,
     &.list-card {
+        .wishlist-icon i {
+            padding-left: 10px;
+        }
+
+        .product-price span:first-child, .product-price span:last-child {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
         .card-current-price {
             font-size: 18px;
         }

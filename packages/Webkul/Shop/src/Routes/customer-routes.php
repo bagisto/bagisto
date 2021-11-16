@@ -87,6 +87,15 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                  */
                 Route::post('wishlist/add/{id}', [WishlistController::class, 'add'])->name('customer.wishlist.add');
 
+                Route::post('wishlist/share', [WishlistController::class, 'share'])->name('customer.wishlist.share');
+
+                Route::get('wishlist/shared', [WishlistController::class, 'shared'])
+                    ->defaults('_config', [
+                        'view' => 'shop::customers.account.wishlist.wishlist-shared'
+                    ])
+                    ->withoutMiddleware('customer')
+                    ->name('customer.wishlist.shared');
+
                 Route::delete('wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('customer.wishlist.remove');
 
                 Route::delete('wishlist/removeall', [WishlistController::class, 'removeAll'])->name('customer.wishlist.removeall');

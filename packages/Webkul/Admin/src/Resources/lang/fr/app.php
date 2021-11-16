@@ -1424,6 +1424,8 @@ return [
             'stock-options' => 'Les options d\'achat d\'actions',
             'allow-backorders' => 'Autoriser les commandes en souffrance',
             'customer' => 'Client',
+            'wishlist' => 'Wishlist',
+            'wishlist-share' => 'Enable Sharing',
             'settings' => 'Paramètres',
             'address' => 'Adresse',
             'street-lines' => 'Lignes dans une adresse postale',

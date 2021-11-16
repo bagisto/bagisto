@@ -1397,6 +1397,8 @@ return [
             'stock-options' => 'Opcje zasobu',
             'allow-backorders' => 'Zezwalaj na zaległości',
             'customer' => 'Klient',
+            'wishlist' => 'Wishlist',
+            'wishlist-share' => 'Enable Sharing',
             'settings' => 'Ustawienia',
             'address' => 'Adres',
             'street-lines' => 'Linie adresowe',

@@ -1400,6 +1400,8 @@ return [
             'stock-options' => 'Opzioni Stock',
             'allow-backorders' => 'Consenti Backorders',
             'customer' => 'Cliente',
+            'wishlist' => 'Wishlist',
+            'wishlist-share' => 'Enable Sharing',
             'settings' => 'Impostazioni',
             'address' => 'Indirizzo',
             'street-lines' => 'Linee nell\'indirizzo',

@@ -351,9 +351,20 @@ return [
         'name' => 'admin::app.admin.system.settings',
         'sort' => 1,
     ], [
+        'key'    => 'customer.settings.wishlist',
+        'name'   => 'admin::app.admin.system.wishlist',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'  => 'share',
+                'title' => 'admin::app.admin.system.wishlist-share',
+                'type'  => 'boolean',
+            ],
+        ],
+    ], [
         'key'    => 'customer.settings.address',
         'name'   => 'admin::app.admin.system.address',
-        'sort'   => 1,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'street_lines',
@@ -366,7 +377,7 @@ return [
     ], [
         'key'    => 'customer.settings.newsletter',
         'name'   => 'admin::app.admin.system.newsletter',
-        'sort'   => 2,
+        'sort'   => 3,
         'fields' => [
             [
                 'name'  => 'subscription',
@@ -377,7 +388,7 @@ return [
     ], [
         'key'    => 'customer.settings.email',
         'name'   => 'admin::app.admin.system.email',
-        'sort'   => 3,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'  => 'verification',
@@ -388,7 +399,7 @@ return [
     ], [
         'key'  => 'emails',
         'name' => 'admin::app.admin.emails.email',
-        'sort' => 6,
+        'sort' => 5,
     ], [
         'key'  => 'emails.configure',
         'name' => 'admin::app.admin.system.email-settings',

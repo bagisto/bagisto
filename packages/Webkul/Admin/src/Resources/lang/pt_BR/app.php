@@ -1396,6 +1396,8 @@ return [
             'stock-options' => 'Opções de ações',
             'allow-backorders' => 'Permitir Pedidos pelo Admin',
             'customer' => 'Cliente',
+            'wishlist' => 'Wishlist',
+            'wishlist-share' => 'Enable Sharing',
             'settings' => 'Definições',
             'address' => 'Endereço',
             'street-lines' => 'Linhas em um endereço de rua',

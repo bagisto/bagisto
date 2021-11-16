@@ -2,26 +2,25 @@
 
 namespace Webkul\Customer\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Eloquent\Repository;
 
 class CustomerRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify model class name.
      *
      * @return mixed
      */
-
-    function model()
+    public function model()
     {
-        return 'Webkul\Customer\Contracts\Customer';
+        return \Webkul\Customer\Contracts\Customer::class;
     }
 
     /**
      * Check if customer has order pending or processing.
      *
-     * @param Webkul\Customer\Models\Customer
+     * @param  \Webkul\Customer\Models\Customer
      * @return boolean
      */
     public function checkIfCustomerHasOrderPendingOrProcessing($customer)
@@ -34,7 +33,7 @@ class CustomerRepository extends Repository
     /**
      * Check if bulk customers, if they have order pending or processing.
      *
-     * @param array
+     * @param  array
      * @return boolean
      */
     public function checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)
@@ -54,7 +53,7 @@ class CustomerRepository extends Repository
      * Upload customer's images.
      *
      * @param  array  $data
-     * @param  \Webkul\Customer\Contracts\Customer  $customer
+     * @param  \Webkul\Customer\Models\Customer  $customer
      * @param  string $type
      * @return void
      */

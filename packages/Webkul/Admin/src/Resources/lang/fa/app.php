@@ -1397,6 +1397,8 @@ return [
             'stock-options' => 'گزینه های موجودی',
             'allow-backorders' => 'اجازه به دره های پستی',
             'customer' => 'مشتری',
+            'wishlist' => 'Wishlist',
+            'wishlist-share' => 'Enable Sharing',
             'settings' => 'تنظیمات',
             'address' => 'آدرس',
             'street-lines' => 'تعداد خطوط در خیابان',
