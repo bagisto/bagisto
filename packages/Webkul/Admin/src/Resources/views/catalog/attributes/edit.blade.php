@@ -153,7 +153,7 @@
 
                             <div class="control-group">
                                 <label for="is_required">{{ __('admin::app.catalog.attributes.is_required') }}</label>
-                                <select class="control" id="is_required" name="is_required">
+                                <select class="control" id="is_required" name="is_required" {{ ! $attribute->is_user_defined ? 'disabled' : '' }}>
                                     <option value="0" {{ $attribute->is_required ? '' : 'selected' }}>{{ __('admin::app.catalog.attributes.no') }}</option>
                                     <option value="1" {{ $attribute->is_required ? 'selected' : '' }}>{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
@@ -175,7 +175,7 @@
                             <div class="control-group">
                                 <?php $selectedValidation = old('validation') ?: $attribute->validation ?>
                                 <label for="validation">{{ __('admin::app.catalog.attributes.input_validation') }}</label>
-                                <select class="control" id="validation" name="validation">
+                                <select class="control" id="validation" name="validation" {{ ! $attribute->is_user_defined ? 'disabled' : '' }}>
                                     <option value=""></option>
                                     <option value="numeric" {{ $selectedValidation == 'numeric' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.number') }}
