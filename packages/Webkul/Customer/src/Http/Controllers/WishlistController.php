@@ -70,6 +70,7 @@ class WishlistController extends Controller
 
         return view($this->_config['view'], [
             'items' => $this->wishlistRepository->getCustomerWishlist(),
+            'isSharingEnabled' => $this->isSharingEnabled(),
             'isWishlistShared' => $this->currentCustomer->isWishlistShared(),
             'wishlistSharedLink' => $this->currentCustomer->getWishlistSharedLink()
         ]);
@@ -136,16 +137,18 @@ class WishlistController extends Controller
      */
     public function share()
     {
-        $data = $this->validate(request(), [
-            'shared' => 'required|boolean'
-        ]);
+        if ($this->isSharingEnabled()) {
+            $data = $this->validate(request(), [
+                'shared' => 'required|boolean'
+            ]);
 
-        $updateCounts = $this->currentCustomer->wishlist_items()->update(['shared' => $data['shared']]);
+            $updateCounts = $this->currentCustomer->wishlist_items()->update(['shared' => $data['shared']]);
 
-        if ($updateCounts && $updateCounts > 0) {
-            session()->flash('success', 'Shared wishlist settings updated successfully');
+            if ($updateCounts && $updateCounts > 0) {
+                session()->flash('success', 'Shared wishlist settings updated successfully');
 
-            return redirect()->back();
+                return redirect()->back();
+            }
         }
 
         return redirect()->back();
@@ -159,7 +162,8 @@ class WishlistController extends Controller
     public function shared(CustomerRepository $customerRepository)
     {
         if (
-            ! request()->hasValidSignature()
+            ! $this->isSharingEnabled()
+            || ! request()->hasValidSignature()
             || ! core()->getConfigData('general.content.shop.wishlist_option')
         ) {
             abort(404);
@@ -260,5 +264,17 @@ class WishlistController extends Controller
         session()->flash('success', trans('customer::app.wishlist.remove-all-success'));
 
         return redirect()->back();
+    }
+
+    /**
+     * Is sharing enabled.
+     *
+     * @return bool
+     */
+    public function isSharingEnabled(): bool
+    {
+        return (bool) core()->getConfigData('customer.settings.wishlist.share')
+            ? true
+            : false;
     }
 }

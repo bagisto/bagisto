@@ -22,6 +22,15 @@
 
                     <span class="fs16">{{ $item->product->name }}</span>
                 </a>
+
+                @if (isset($item->product->additional['attributes']))
+                    <div class="item-options">
+                        @foreach ($item->product->additional['attributes'] as $attribute)
+                            <b>{{ $attribute['attribute_name'] }} : </b> {{ $attribute['option_label'] }}
+                            </br>
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
             <div class="product-price">
@@ -29,15 +38,17 @@
             </div>
 
             <div class="cart-wish-wrap mt5">
-                <div class="mb-2">
-                    <span class="fs16">
-                        {{ __('shop::app.customer.account.wishlist.visibility') }} :
+                @if ($visibility ?? false)
+                    <div class="mb-2">
+                        <span class="fs16">
+                            {{ __('shop::app.customer.account.wishlist.visibility') }} :
 
-                        <span class="badge {{ $item->shared ? 'badge-success' : 'badge-danger' }}">
-                            {{ $item->shared ? __('shop::app.customer.account.wishlist.public') : __('shop::app.customer.account.wishlist.private') }}
+                            <span class="badge {{ $item->shared ? 'badge-success' : 'badge-danger' }}">
+                                {{ $item->shared ? __('shop::app.customer.account.wishlist.public') : __('shop::app.customer.account.wishlist.private') }}
+                            </span>
                         </span>
-                    </span>
-                </div>
+                    </div>
+                @endif
 
                 <div>
                     @include('shop::products.add-to-cart', [

@@ -13,21 +13,24 @@
                 @if (isset($item->additional['attributes']))
                     <div class="item-options">
                         @foreach ($item->additional['attributes'] as $attribute)
-                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                            <b>{{ $attribute['attribute_name'] }} : </b> {{ $attribute['option_label'] }}
+                            </br>
                         @endforeach
                     </div>
                 @endif
             </div>
 
-            <div class="mb-2">
-                <span class="fs16">
-                    {{ __('shop::app.customer.account.wishlist.visibility') }} :
+            @if ($visibility ?? false)
+                <div class="mb-2">
+                    <span class="fs16">
+                        {{ __('shop::app.customer.account.wishlist.visibility') }} :
 
-                    <span class="badge badge-sm {{ $item->shared ? 'badge-success' : 'badge-danger' }}">
-                        {{ $item->shared ? __('shop::app.customer.account.wishlist.public') : __('shop::app.customer.account.wishlist.private') }}
+                        <span class="badge badge-sm {{ $item->shared ? 'badge-success' : 'badge-danger' }}">
+                            {{ $item->shared ? __('shop::app.customer.account.wishlist.public') : __('shop::app.customer.account.wishlist.private') }}
+                        </span>
                     </span>
-                </span>
-            </div>
+                </div>
+            @endif
 
             <span class="stars" style="display: inline">
                 @for ($i = 1; $i <= $reviewHelper->getAverageRating($item->product); $i++)
