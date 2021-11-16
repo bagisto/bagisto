@@ -900,6 +900,8 @@
         }
 
         .account-head {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 20px;
         }
 
@@ -1113,7 +1115,7 @@
                 }
 
                 .filter-right {
-                    top: -25px;
+                    top: -20px;
                     width: 70%;
                     float: right;
                     position: relative;
@@ -2523,7 +2525,9 @@
     width: 800px;
 }
 
-/* compare products */
+/**
+ * Compare products.
+ */
 .compare-products {
     width: 100%;
     cursor: pointer;
@@ -2598,6 +2602,23 @@
         right: 60px;
         position: absolute;
         display: inline-block;
+    }
+}
+
+/**
+ * Compare container specially for account section.
+ */
+.compare-container {
+    .cart-details {
+        padding: unset;
+
+        h2 {
+            padding: 0;
+        }
+    }
+
+    .compare-products .col, .compare-products .col-2 {
+        max-width: 25%;
     }
 }
 
