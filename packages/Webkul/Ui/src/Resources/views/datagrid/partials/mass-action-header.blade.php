@@ -15,11 +15,11 @@
 
                         <div class="control-group">
                             <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type" required>
-                                <option v-for="(massAction, index) in massActions" :key="index" :value="massAction.type">@{{ massAction.label }}</option>
+                                <option v-for="(massAction, index) in massActions" :key="index" :value="{ id: index, value: massAction.type}">@{{ massAction.label }}</option>
                             </select>
                         </div>
 
-                        <div class="control-group" style="margin-left: 10px;" v-if="massActionType == 'update'">
+                        <div class="control-group" style="margin-left: 10px;" v-if="massActionType.value == 'update'">
                             <select class="control" v-model="massActionUpdateValue" name="update-options" required>
                                 <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ id }}</option>
                             </select>

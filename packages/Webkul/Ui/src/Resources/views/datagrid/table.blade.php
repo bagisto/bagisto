@@ -281,7 +281,7 @@
                         massActionsToggle: false,
                         massActionTarget: null,
                         massActionConfirmText: '{{ __('ui::app.datagrid.click_on_action') }}',
-                        massActionType: null,
+                        massActionType: this.getDefaultMassActionType(),
                         massActionValues: [],
                         massActionTargets: [],
                         massActionUpdateValue: null,
@@ -472,19 +472,12 @@
                         }
 
                         for (let id in this.massActions) {
-                            targetObj = {
+                            this.massActionTargets.push({
+                                'id': parseInt(id),
                                 'type': this.massActions[id].type,
                                 'action': this.massActions[id].action,
                                 'confirm_text': this.massActions[id].confirm_text
-                            };
-
-                            this.massActionTargets.push(targetObj);
-
-                            targetObj = {};
-
-                            if (this.massActions[id].type === 'update') {
-                                this.massActionValues = this.massActions[id].options;
-                            }
+                            });
                         }
                     },
 
@@ -496,8 +489,23 @@
                         }
                     },
 
+                    /**
+                     * Reset mass action type.
+                     *
+                     * @return {!object}
+                     */
+                    getDefaultMassActionType: function () {
+                        return {
+                            id: null,
+                            value: null
+                        };
+                    },
+
+                    /**
+                     * Change mass action target.
+                     */
                     changeMassActionTarget: function () {
-                        if (this.massActionType === 'delete') {
+                        if (this.massActionType.value === 'delete') {
                             for (let i in this.massActionTargets) {
                                 if (this.massActionTargets[i].type === 'delete') {
                                     this.massActionTarget = this.massActionTargets[i].action;
@@ -508,9 +516,10 @@
                             }
                         }
 
-                        if (this.massActionType === 'update') {
+                        if (this.massActionType.value === 'update') {
                             for (let i in this.massActionTargets) {
                                 if (this.massActionTargets[i].type === 'update') {
+                                    this.massActionValues = this.massActions[this.massActionType.id].options;
                                     this.massActionTarget = this.massActionTargets[i].action;
                                     this.massActionConfirmText = this.massActionTargets[i].confirm_text ? this.massActionTargets[i].confirm_text : this.massActionConfirmText;
 
@@ -898,7 +907,7 @@
 
                         if (this.dataIds.length === 0) {
                             this.massActionsToggle = false;
-                            this.massActionType = null;
+                            this.massActionType = this.getDefaultMassActionType();
                         } else {
                             this.massActionsToggle = true;
                         }
@@ -945,7 +954,7 @@
 
                         this.allSelected = false;
 
-                        this.massActionType = null;
+                        this.massActionType = this.getDefaultMassActionType();
 
                         this.setSelectedIndexes();
                     },
@@ -967,7 +976,7 @@
 
                                     if (this.dataIds.length === 0) {
                                         this.massActionsToggle = false;
-                                        this.massActionType = null;
+                                        this.massActionType = this.getDefaultMassActionType();
                                     }
                                 } else {
                                     delete selectedIndexes[key];
