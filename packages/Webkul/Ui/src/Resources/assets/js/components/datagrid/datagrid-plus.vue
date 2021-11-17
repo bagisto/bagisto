@@ -490,7 +490,10 @@
                                                 index) in massActions"
                                                 v-text="massAction.label"
                                                 :key="index"
-                                                :value="massAction.type"
+                                                :value="{
+                                                    id: index,
+                                                    value: massAction.type
+                                                }"
                                             ></option>
                                         </select>
                                     </div>
@@ -498,7 +501,7 @@
                                     <div
                                         class="control-group"
                                         style="margin-left: 10px"
-                                        v-if="massActionType == 'update'"
+                                        v-if="massActionType.value == 'update'"
                                     >
                                         <select
                                             class="control"
@@ -719,7 +722,7 @@ export default {
             dataGridIndex: 0,
             massActionsToggle: false,
             massActionTarget: null,
-            massActionType: null,
+            massActionType: this.getDefaultMassActionType(),
             massActionValues: [],
             massActionTargets: [],
             massActionUpdateValue: null,
@@ -994,19 +997,12 @@ export default {
             }
 
             for (let id in this.massActions) {
-                let targetObj = {
+                this.massActionTargets.push({
+                    id: parseInt(id),
                     type: this.massActions[id].type,
                     action: this.massActions[id].action,
                     confirm_text: this.massActions[id].confirm_text
-                };
-
-                this.massActionTargets.push(targetObj);
-
-                targetObj = {};
-
-                if (this.massActions[id].type === 'update') {
-                    this.massActionValues = this.massActions[id].options;
-                }
+                });
             }
         },
 
@@ -1018,8 +1014,15 @@ export default {
             }
         },
 
+        getDefaultMassActionType: function() {
+            return {
+                id: null,
+                value: null
+            };
+        },
+
         changeMassActionTarget: function() {
-            if (this.massActionType === 'delete') {
+            if (this.massActionType.value === 'delete') {
                 for (let i in this.massActionTargets) {
                     if (this.massActionTargets[i].type === 'delete') {
                         this.massActionTarget = this.massActionTargets[
@@ -1035,9 +1038,12 @@ export default {
                 }
             }
 
-            if (this.massActionType === 'update') {
+            if (this.massActionType.value === 'update') {
                 for (let i in this.massActionTargets) {
                     if (this.massActionTargets[i].type === 'update') {
+                        this.massActionValues = this.massActions[
+                            this.massActionType.id
+                        ].options;
                         this.massActionTarget = this.massActionTargets[
                             i
                         ].action;
@@ -1368,7 +1374,7 @@ export default {
 
             if (this.dataIds.length === 0) {
                 this.massActionsToggle = false;
-                this.massActionType = null;
+                this.massActionType = this.getDefaultMassActionType();
             } else {
                 this.massActionsToggle = true;
             }
@@ -1426,7 +1432,7 @@ export default {
 
             this.allSelected = false;
 
-            this.massActionType = null;
+            this.massActionType = this.getDefaultMassActionType();
         },
 
         paginate: function(e) {
