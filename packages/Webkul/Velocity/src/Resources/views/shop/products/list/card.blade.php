@@ -2,40 +2,17 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
 @php
-    if (isset($checkmode) && $checkmode && $toolbarHelper->getCurrentMode() == "list") {
-        $list = true;
-    }
+    $list = $toolbarHelper->getCurrentMode() == 'list'
+        ? true
+        : false;
 
-    if (isset($item)) {
-        $productBaseImage = productimage()->getProductImage($item);
-    } else {
-        $productBaseImage = productimage()->getProductBaseImage($product);
-    }
+    $productBaseImage = isset($item)
+        ? productimage()->getProductImage($item)
+        : productimage()->getProductBaseImage($product);
 
     $totalReviews = $reviewHelper->getTotalReviews($product);
+
     $avgRatings = ceil($reviewHelper->getAverageRating($product));
-
-    $galleryImages = productimage()->getGalleryImages($product);
-    $priceHTML = view('shop::products.price', ['product' => $product])->render();
-
-    $product->__set('priceHTML', $priceHTML);
-    $product->__set('avgRating', $avgRatings);
-    $product->__set('totalReviews', $totalReviews);
-    $product->__set('galleryImages', $galleryImages);
-    $product->__set('shortDescription', $product->short_description);
-    $product->__set('firstReviewText', trans('velocity::app.products.be-first-review'));
-    $product->__set('addToCartHtml', view('shop::products.add-to-cart', [
-        'product'           => $product,
-        'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
-
-        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                ? true : false,
-
-        'btnText'           => null,
-        'moveToCart'        => null,
-        'addToCartBtnClass' => '',
-    ])->render());
-
 @endphp
 
 {!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
@@ -45,12 +22,12 @@
                 <a
                     title="{{ $product->name }}"
                     href="{{ route('shop.productOrCategory.index', $product->url_key) }}">
-
                     <img
                         src="{{ $productBaseImage['medium_image_url'] }}"
                         :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" alt="" />
+
                     <div class="quick-view-in-list">
-                        <product-quick-view-btn :quick-view-details="{{ json_encode($product) }}"></product-quick-view-btn>
+                        <product-quick-view-btn :quick-view-details="{{ json_encode($velocityHelper->formatProduct($product)) }}"></product-quick-view-btn>
                     </div>
                 </a>
             </div>
@@ -85,6 +62,7 @@
                     @if( $totalReviews )
                         <div class="product-rating">
                             <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
+
                             <span>{{ $totalReviews }} Ratings</span>
                         </div>
                     @endif
@@ -95,7 +73,7 @@
                             'product'           => $product,
                             'addToCartBtnClass' => 'medium-padding',
                             'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                   ? true : false,
+                                                    ? true : false,
                         ])
                     </div>
                 </div>
@@ -115,13 +93,12 @@
                     src="{{ $productBaseImage['large_image_url'] }}"
                     :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
 
-                    {{-- <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn> --}}
-                    <product-quick-view-btn :quick-view-details="{{ json_encode($product) }}"></product-quick-view-btn>
+                    <product-quick-view-btn :quick-view-details="{{ json_encode($velocityHelper->formatProduct($product)) }}"></product-quick-view-btn>
             </a>
 
             @if ($product->new)
                 <div class="sticker new">
-                   {{ __('shop::app.products.new') }}
+                    {{ __('shop::app.products.new') }}
                 </div>
             @endif
 
