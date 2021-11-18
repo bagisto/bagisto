@@ -78,7 +78,7 @@
 
         <button
             type="submit"
-            class="theme-btn mb20" @click="window.showDeleteProfileModal();">
+            class="theme-btn mb20" onclick="window.showDeleteProfileModal();">
             {{ __('shop::app.customer.account.address.index.delete') }}
         </button>
 
