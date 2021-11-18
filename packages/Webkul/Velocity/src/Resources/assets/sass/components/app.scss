@@ -197,8 +197,6 @@
     );
 
     .modal-header {
-        padding: 20px;
-
         h3 {
             display: inline-block;
             font-size: 20px;
@@ -207,15 +205,11 @@
         }
 
         .icon {
-            float: right;
             cursor: pointer;
 
             &.remove-icon {
                 width: 24px;
-                right: 20px;
                 height: 24px;
-                margin-right: 0;
-                position: absolute;
                 background-image: url('../images/Icon-remove.svg');
             }
         }
