@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3be28b0837010786448095b376770074",
+    "content-hash": "056f3768c1a082abfcfb881eed707fba",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -217,16 +217,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.204.0",
+            "version": "3.204.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "96ad45b95bfe4515623cec11576ec22c10dd22f3"
+                "reference": "15205059e901ca9406a57ba2716a0ae6a90df268"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/96ad45b95bfe4515623cec11576ec22c10dd22f3",
-                "reference": "96ad45b95bfe4515623cec11576ec22c10dd22f3",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/15205059e901ca9406a57ba2716a0ae6a90df268",
+                "reference": "15205059e901ca9406a57ba2716a0ae6a90df268",
                 "shasum": ""
             },
             "require": {
@@ -302,9 +302,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.204.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.204.1"
             },
-            "time": "2021-11-17T19:17:36+00:00"
+            "time": "2021-11-18T19:18:26+00:00"
         },
         {
             "name": "babenkoivan/elastic-adapter",
@@ -515,6 +515,56 @@
                 }
             ],
             "time": "2021-08-09T21:09:19+00:00"
+        },
+        {
+            "name": "bagisto/legacy-api",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bagisto/legacy-api.git",
+                "reference": "a404fbfb2b99bbf9de6502d77c90c6cfd53b97ce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bagisto/legacy-api/zipball/a404fbfb2b99bbf9de6502d77c90c6cfd53b97ce",
+                "reference": "a404fbfb2b99bbf9de6502d77c90c6cfd53b97ce",
+                "shasum": ""
+            },
+            "require": {
+                "php-open-source-saver/jwt-auth": "^1.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Webkul\\API\\Providers\\APIServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webkul\\API\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Prashant Singh",
+                    "email": "prashant.singh852@webkul.com"
+                },
+                {
+                    "name": "Devansh Bawari",
+                    "email": "devansh.bawari419@webkul.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/bagisto/legacy-api/issues",
+                "source": "https://github.com/bagisto/legacy-api/tree/v1.0.0"
+            },
+            "time": "2021-11-19T07:54:39+00:00"
         },
         {
             "name": "bagistobrasil/bagisto-product-social-share",

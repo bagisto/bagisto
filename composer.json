@@ -13,6 +13,7 @@
         "astrotomic/laravel-translatable": "^11.0.0",
         "aws/aws-sdk-php": "^3.171",
         "babenkoivan/elastic-scout-driver": "^1.1",
+        "bagisto/legacy-api": "^1.0",
         "bagistobrasil/bagisto-product-social-share": "^0.1.2",
         "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "^0.8.5|^0.9.0",
@@ -36,7 +37,6 @@
         "laravel/ui": "^3.0",
         "maatwebsite/excel": "^3.1.26",
         "paypal/paypal-checkout-sdk": "1.0.1",
-        "php-open-source-saver/jwt-auth": "^1.2",
         "prettus/l5-repository": "^2.6"
     },
     "require-dev": {
@@ -93,7 +93,6 @@
             "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
             "Webkul\\Sales\\": "packages/Webkul/Sales/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
-            "Webkul\\API\\": "packages/Webkul/API",
             "Webkul\\CatalogRule\\": "packages/Webkul/CatalogRule/src",
             "Webkul\\CartRule\\": "packages/Webkul/CartRule/src",
             "Webkul\\Rule\\": "packages/Webkul/Rule/src",
