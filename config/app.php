@@ -251,7 +251,6 @@ return [
         Konekt\Concord\ConcordServiceProvider::class,
         Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider::class,
 
         //Webkul packages
         Webkul\Theme\Providers\ThemeServiceProvider::class,
