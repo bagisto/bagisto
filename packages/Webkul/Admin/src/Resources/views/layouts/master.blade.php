@@ -130,8 +130,6 @@
                             countKeyUp = countKeyUp + pageUp;
 
                             $('.navbar-left').css("top", countKeyUp + "px");
-                        } else {
-                            $('.navbar-left').css("position", "fixed");
                         }
                     });
 
