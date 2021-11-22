@@ -5,36 +5,37 @@ namespace Webkul\Customer\Http\Controllers;
 use Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Shop\Mail\SubscriptionEmail;
+use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
+use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
-use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Shop\Mail\SubscriptionEmail;
 
 class CustomerController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * CustomerRepository object
+     * Customer repository instance.
      *
      * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
-     * ProductReviewRepository object
+     * Product review repository instance.
      *
      * @var \Webkul\Customer\Repositories\ProductReviewRepository
      */
     protected $productReviewRepository;
 
     /**
-     * SubscribersListRepository
+     * Subscribers list repository instance.
      *
      * @var \Webkul\Core\Repositories\SubscribersListRepository
      */
@@ -52,8 +53,7 @@ class CustomerController extends Controller
         CustomerRepository $customerRepository,
         ProductReviewRepository $productReviewRepository,
         SubscribersListRepository $subscriptionRepository
-    )
-    {
+    ) {
         $this->middleware('customer');
 
         $this->_config = request('_config');
@@ -66,7 +66,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Taking the customer to profile details page
+     * Taking the customer to profile details page.
      *
      * @return \Illuminate\View\View
      */
@@ -100,9 +100,9 @@ class CustomerController extends Controller
         $id = auth()->guard('customer')->user()->id;
 
         $this->validate(request(), [
-            'first_name'            => 'required|string',
-            'last_name'             => 'required|string',
-            'gender'                => 'required',
+            'first_name'            => ['required', new AlphaNumericSpace],
+            'last_name'             => ['required', new AlphaNumericSpace],
+            'gender'                => 'required|in:Other,Male,Female',
             'date_of_birth'         => 'date|before:today',
             'email'                 => 'email|unique:customers,email,' . $id,
             'password'              => 'confirmed|min:6|required_with:oldpassword',
@@ -113,13 +113,13 @@ class CustomerController extends Controller
 
         $data = collect(request()->input())->except('_token')->toArray();
 
-        if (isset ($data['date_of_birth']) && $data['date_of_birth'] == "") {
+        if (isset($data['date_of_birth']) && $data['date_of_birth'] == "") {
             unset($data['date_of_birth']);
         }
 
         $data['subscribed_to_news_letter'] = isset($data['subscribed_to_news_letter']) ? 1 : 0;
 
-        if (isset ($data['oldpassword'])) {
+        if (isset($data['oldpassword'])) {
             if ($data['oldpassword'] != "" || $data['oldpassword'] != null) {
                 if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
                     $isPasswordChanged = true;
@@ -166,7 +166,8 @@ class CustomerController extends Controller
                             'email' => $data['email'],
                             'token' => $token,
                         ]));
-                    } catch (\Exception $e) { }
+                    } catch (\Exception $e) {
+                    }
                 }
             } else {
                 $subscription = $this->subscriptionRepository->findOneWhere(['email' => $data['email']]);
