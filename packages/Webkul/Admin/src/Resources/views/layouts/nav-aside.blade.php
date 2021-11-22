@@ -1,7 +1,7 @@
 <div class="aside-nav">
 
     {{-- button for collapsing aside nav --}}
-    <nav-slide-button icon-class="accordian-left-icon"></nav-slide-button>
+    <nav-slide-button  @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl') icon-class="accordian-right-icon" :direction="'rtl'" @else icon-class="accordian-left-icon" @endif></nav-slide-button>
 
     <ul>
         @if (request()->route()->getName() != 'admin.configuration.index')

@@ -1,7 +1,7 @@
 <div class="navbar-left">
 
     {{-- button for expanding nav bar --}}
-    <nav-slide-button id="nav-expand-button" icon-class="accordian-right-icon" style="display: none;"></nav-slide-button>
+    <nav-slide-button id="nav-expand-button" style="display: none;" @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl') icon-class="accordian-left-icon" :direction="'rtl'" @else icon-class="accordian-right-icon" @endif></nav-slide-button>
 
     {{-- left menu bar --}}
     <ul class="menubar">
