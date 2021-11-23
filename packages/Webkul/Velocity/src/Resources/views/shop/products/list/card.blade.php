@@ -6,9 +6,7 @@
         ? true
         : false;
 
-    $productBaseImage = isset($item)
-        ? productimage()->getProductImage($item)
-        : productimage()->getProductBaseImage($product);
+    $productBaseImage = productimage()->getProductBaseImage($product);
 
     $totalReviews = $reviewHelper->getTotalReviews($product);
 
