@@ -59,6 +59,12 @@
             float: left;
             transform: rotate(180deg);
         }
+
+        .aside-nav:not(.active) {
+            + .content-wrapper {
+                margin-right: 0px;
+            }
+        }
     }
 
     .dashboard {
@@ -179,6 +185,14 @@
     }
 
     .pagination .page-item .icon {
+        transform: rotate(180deg);
+    }
+
+    .accordian-left-icon {
+        transform: rotate(180deg);
+    }
+
+    .accordian-right-icon {
         transform: rotate(180deg);
     }
 }

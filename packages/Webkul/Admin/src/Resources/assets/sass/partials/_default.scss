@@ -187,6 +187,12 @@ body {
         }
     }
 
+    .aside-nav:not(.active) {
+        + .content-wrapper {
+            margin-left: 0px;
+        }
+    }
+
     .content-wrapper {
         padding: 25px 25px 25px 15px;
         margin-left: 280px;
