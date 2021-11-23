@@ -1561,6 +1561,7 @@ return [
             'set-invoice-status' => 'Définissez le statut de la facture après la création de la facture sur',
             'set-order-status' => 'Définissez le statut de la commande après la création de la facture sur',
             'generate-invoice-applicable' => 'Applicable si la génération automatique de facture est activée',
+            'records-found'     => 'enregistrements trouvés'
         ],
     ],
 ];

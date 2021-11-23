@@ -1520,7 +1520,8 @@ return [
             'generate-invoice'   => 'Automatically generate the invoice after placing an order',
             'set-invoice-status' => 'Set the invoice status after creating the invoice to',
             'set-order-status'   => 'Set the order status after creating the invoice to',
-            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
+            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled',
+            'records-found'     => 'Record(s) found'
        ]
     ]
 ];
