@@ -5,11 +5,16 @@
 </template>
 
 <style scoped>
-    .toggle-aside-nav {
-        position: absolute;
-        top: 50px;
-        right: -12px;
-    }
+.toggle-aside-nav {
+    position: absolute;
+    top: 50px;
+    right: -12px;
+}
+
+.rtl .toggle-aside-nav {
+    left: -12px;
+    right: unset;
+}
 </style>
 
 <script>
@@ -20,7 +25,7 @@ export default {
 
     methods: {
         toggle: function () {
-            if ($('.aside-nav').is(':visible')) {
+            if ($('.aside-nav').hasClass('active')) {
                 this.hide();
             } else {
                 this.show();
@@ -28,26 +33,16 @@ export default {
         },
 
         hide: function () {
-            let self = this;
-
+            $('#nav-expand-button').show();
             $('.aside-nav').hide(function () {
-                $('.content-wrapper').css({
-                    marginLeft: 'unset'
-                });
-
-                $('#nav-expand-button').show();
+                $(this).removeClass('active');
             });
         },
 
         show: function () {
-            let self = this;
-
             $('#nav-expand-button').hide();
-
             $('.aside-nav').show(function () {
-                $('.content-wrapper').css({
-                    marginLeft: '280px'
-                });
+                $(this).addClass('active');
             });
         }
     }
