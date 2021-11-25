@@ -62,6 +62,8 @@ class Shipping
         foreach ($cart->shipping_rates()->get() as $rate) {
             $rate->delete();
         }
+
+        $this->rates = [];
     }
 
     /**
