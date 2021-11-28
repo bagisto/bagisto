@@ -3,14 +3,8 @@ export function getBaseUrl() {
 }
 
 export function isMobile() {
-    if (
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i |
-        /mobi/i.test(navigator.userAgent)
-    ) {
-        return true;
-    }
-
-    return false;
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i |
+              /mobi/i.test(navigator.userAgent);
 }
 
 export function loadDynamicScript(src, onScriptLoaded) {

@@ -1,7 +1,9 @@
-<script
-    type="text/javascript"
-    src="{{ asset('themes/velocity/assets/js/velocity-core.js') }}">
-</script>
+{{-- mix versioned compiled files --}}
+<script type="text/javascript" src="{{ asset(mix('/js/manifest.js', 'themes/velocity/assets')) }}"></script>
+
+<script type="text/javascript" src="{{ asset(mix('/js/velocity-core.js', 'themes/velocity/assets')) }}"></script>
+
+<script type="text/javascript" src="{{ asset(mix('/js/components.js', 'themes/velocity/assets')) }}"></script>
 
 <script type="text/javascript">
     (() => {
