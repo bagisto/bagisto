@@ -5,8 +5,8 @@ namespace Webkul\Customer\Http\Controllers;
 use Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
 use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Customer\Http\Requests\CustomerProfileRequest;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Mail\SubscriptionEmail;
@@ -94,33 +94,20 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(CustomerProfileRequest $customerProfileRequest)
     {
         $isPasswordChanged = false;
-        $id = auth()->guard('customer')->user()->id;
 
-        $this->validate(request(), [
-            'first_name'            => ['required', new AlphaNumericSpace],
-            'last_name'             => ['required', new AlphaNumericSpace],
-            'gender'                => 'required|in:Other,Male,Female',
-            'date_of_birth'         => 'date|before:today',
-            'email'                 => 'email|unique:customers,email,' . $id,
-            'password'              => 'confirmed|min:6|required_with:oldpassword',
-            'oldpassword'           => 'required_with:password',
-            'password_confirmation' => 'required_with:password',
-            'image.*'               => 'mimes:bmp,jpeg,jpg,png,webp'
-        ]);
+        $data = $customerProfileRequest->validated();
 
-        $data = collect(request()->input())->except('_token')->toArray();
-
-        if (isset($data['date_of_birth']) && $data['date_of_birth'] == "") {
+        if (isset($data['date_of_birth']) && $data['date_of_birth'] == '') {
             unset($data['date_of_birth']);
         }
 
         $data['subscribed_to_news_letter'] = isset($data['subscribed_to_news_letter']) ? 1 : 0;
 
         if (isset($data['oldpassword'])) {
-            if ($data['oldpassword'] != "" || $data['oldpassword'] != null) {
+            if ($data['oldpassword'] != '' || $data['oldpassword'] != null) {
                 if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
                     $isPasswordChanged = true;
 
@@ -137,7 +124,7 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.update.before');
 
-        if ($customer = $this->customerRepository->update($data, $id)) {
+        if ($customer = $this->customerRepository->update($data, auth()->guard('customer')->user()->id)) {
             if ($isPasswordChanged) {
                 Event::dispatch('user.admin.update-password', $customer);
             }
@@ -182,14 +169,14 @@ class CustomerController extends Controller
 
             $this->customerRepository->uploadImages($data, $customer);
 
-            Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
+            session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
             return redirect()->route($this->_config['redirect']);
-        } else {
-            Session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
-
-            return redirect()->back($this->_config['redirect']);
         }
+
+        session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
+
+        return redirect()->back($this->_config['redirect']);
     }
 
     /**
