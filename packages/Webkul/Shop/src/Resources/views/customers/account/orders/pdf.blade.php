@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
         {{-- lang supports inclusion --}}
-        <style type="text/css">
+        <style>
             @font-face {
                 font-family: 'Hind';
                 src: url({{ asset('vendor/webkul/ui/assets/fonts/Hind/Hind-Regular.ttf') }}) format('truetype');
@@ -24,7 +24,7 @@
         @endphp
 
         {{-- main css --}}
-        <style type="text/css">
+        <style>
             * {
                 font-family: '{{ $mainFontFamily }}';
             }
@@ -252,7 +252,7 @@
                                 <td>
                                     {{ core()->getConfigData('sales.paymentmethods.' . $invoice->order->payment->method . '.title') }}
 
-                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($invoice->order->payment->method); @endphp
+                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($invoice->order->payment->method) @endphp
 
                                     @if (! empty($additionalDetails))
                                         <div>
@@ -298,7 +298,7 @@
                                             <div class="item-options">
 
                                                 @foreach ($item->additional['attributes'] as $attribute)
-                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br/>
                                                 @endforeach
 
                                             </div>

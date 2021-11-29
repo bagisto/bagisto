@@ -28,7 +28,7 @@ class ProductCustomerGroupPriceRepository extends Repository
 
         if (isset($data['customer_group_prices'])) {
             foreach ($data['customer_group_prices'] as $customerGroupPriceId => $row) {
-                $row['customer_group_id'] = $row['customer_group_id'] == '' ? null : $row['customer_group_id'];
+                $row['customer_group_id'] = $row['customer_group_id'] === '' ? null : $row['customer_group_id'];
 
                 if (Str::contains($customerGroupPriceId, 'customer_group_price_')) {
                     $this->create(array_merge([

@@ -1,5 +1,5 @@
 <template>
-    <div class="d-inline-block image-search-container" v-if="status == 'true'">
+    <div class="d-inline-block image-search-container" v-if="status === 'true'">
         <label for="image-search-container">
             <i class="icon camera-icon"></i>
 

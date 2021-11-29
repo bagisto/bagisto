@@ -4,7 +4,7 @@
 
     $locale = core()->getRequestedLocaleCode();
 
-    $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
+    $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson()
 @endphp
 
 @push('scripts')
@@ -16,7 +16,7 @@
 
             <button
                 v-if="products.length > 0"
-                class="btn btn-primary btn-md {{ core()->getCurrentLocale()->direction == 'rtl' ? 'pull-left' : 'pull-right' }}"
+                class="btn btn-primary btn-md {{ core()->getCurrentLocale()->direction === 'rtl' ? 'pull-left' : 'pull-right' }}"
                 @click="removeProductCompare('all')">
                 {{ __('shop::app.customer.account.wishlist.deleteall') }}
             </button>
@@ -160,7 +160,7 @@
                     'isProductListLoaded': false,
                     'baseUrl': "{{ url()->to('/') }}",
                     'attributeOptions': JSON.parse(@json($attributeOptionTranslations)),
-                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' === "true",
                 }
             },
 
@@ -213,7 +213,7 @@
                     if (this.isCustomer) {
                         this.$http.delete(`${this.baseUrl}/comparison?productId=${productId}`)
                         .then(response => {
-                            if (productId == 'all') {
+                            if (productId === 'all') {
                                 this.$set(this, 'products', this.products.filter(product => false));
                             } else {
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
@@ -229,7 +229,7 @@
                     } else {
                         let existingItems = this.getStorageValue('compared_product');
 
-                        if (productId == "all") {
+                        if (productId === "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
                             window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('shop::app.customer.compare.removed-all') }}' }];
@@ -298,18 +298,18 @@
                     if (productDetails && attributeValues) {
                         var attributeItems;
 
-                        if (type == "multiple") {
+                        if (type === "multiple") {
                             attributeItems = productDetails[attributeValues].split(',');
-                        } else if (type == "single") {
+                        } else if (type === "single") {
                             attributeItems = productDetails[attributeValues];
                         }
 
                         attributeOptions = this.attributeOptions.filter(option => {
-                            if (type == "multiple") {
+                            if (type === "multiple") {
                                 if (attributeItems.indexOf(option.attribute_option_id.toString()) > -1) {
                                     return true;
                                 }
-                            } else if (type == "single") {
+                            } else if (type === "single") {
                                 if (attributeItems == option.attribute_option_id.toString()) {
                                     return true;
                                 }
@@ -329,7 +329,7 @@
                 },
 
                 'updateCompareCount': function () {
-                    if (this.isCustomer == "true" || this.isCustomer == true) {
+                    if (this.isCustomer === "true" || this.isCustomer == true) {
                         this.$http.get(`${this.baseUrl}/items-count`)
                         .then(response => {
                             $('#compare-items-count').html(response.data.compareProductsCount);

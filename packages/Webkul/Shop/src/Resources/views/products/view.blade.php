@@ -190,7 +190,7 @@
 
             methods: {
                 onSubmit: function(e) {
-                    if (e.target.getAttribute('type') != 'submit')
+                    if (e.target.getAttribute('type') !== 'submit')
                         return;
 
                     e.preventDefault();

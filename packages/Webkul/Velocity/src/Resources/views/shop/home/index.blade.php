@@ -19,7 +19,7 @@
 @endphp
 
 @section('page_title')
-    {{ isset($metaTitle) ? $metaTitle : "" }}
+    {{ $metaTitle ?? "" }}
 @endsection
 
 @section('head')
@@ -45,7 +45,7 @@
         <link rel="preload" as="image" href="{{ asset('/themes/velocity/assets/images/banner.webp') }}">
     @endif
     
-    <style type="text/css">
+    <style>
         .product-price span:first-child, .product-price span:last-child {
             font-size: 18px;
             font-weight: 600;

@@ -244,7 +244,7 @@ trait ProvideCollection
                     $record->{$column['index']} = $column['closure']($record);
                 }
             } else {
-                if ($column['type'] == 'price') {
+                if ($column['type'] === 'price') {
                     if (isset($column['currencyCode'])) {
                         $record->{$column['index']} = htmlspecialchars(core()->formatPrice($record->{$column['index']}, $column['currencyCode']));
                     } else {
@@ -266,7 +266,7 @@ trait ProvideCollection
     private function transformActions($record)
     {
         foreach($this->actions as $action) {
-            $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
+            $toDisplay = (isset($action['condition']) && gettype($action['condition']) === 'object') ? $action['condition']($record) : true;
 
             $toDisplayKey = $this->generateKeyFromActionTitle($action['title'], '_to_display');
             $record->$toDisplayKey = $toDisplay;

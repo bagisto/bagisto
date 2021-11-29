@@ -19,9 +19,9 @@
             @php
                 $subMenuCollection = [];
 
-                $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                $showCompare = core()->getConfigData('general.content.shop.compare_option') === "1";
 
-                $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') === "1";
 
                 try {
                     $subMenuCollection['profile'] = $menuItem['children']['profile'];
@@ -52,7 +52,7 @@
                     foreach ($menuItem['children'] as $key => $remainingChildren) {
                         $subMenuCollection[$key] = $remainingChildren;
                     }
-                } catch (\Exception $exception) {
+                } catch (Exception $exception) {
                     $subMenuCollection = $menuItem['children'];
                 }
             @endphp
@@ -61,7 +61,7 @@
                 <li class="{{ $menu->getActive($subMenuItem) }}" title="{{ trans($subMenuItem['name']) }}">
                     <a class="unset fw6 full-width" href="{{ $subMenuItem['url'] }}">
                         <i class="icon {{ $index }} text-down-3"></i>
-                        <span>{{ trans($subMenuItem['name']) }}<span>
+                        <span>{{ trans($subMenuItem['name']) }}</span>
                         <i class="rango-arrow-right float-right text-down-3"></i>
                     </a>
                 </li>
@@ -71,9 +71,9 @@
 </div>
 
 @push('css')
-    <style type="text/css">
+    <style>
         .main-content-wrapper {
-            margin-bottom: 0px;
+            margin-bottom: 0;
             min-height: 100vh;
         }
     </style>

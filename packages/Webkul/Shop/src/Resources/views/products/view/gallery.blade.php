@@ -36,7 +36,7 @@
                 </li>
 
                 <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']" id="thumb-frame">
-                    <video v-if="thumb.type == 'video'" width="100%" height="100%" onclick="this.paused ? this.play() : this.pause();">
+                    <video v-if="thumb.type === 'video'" width="100%" height="100%" onclick="this.paused ? this.play() : this.pause();">
                         <source :src="thumb.video_url" type="video/mp4">
                         {{ __('admin::app.catalog.products.not-support-video') }}
                     </video>
@@ -51,7 +51,7 @@
             </ul>
 
             <div class="product-hero-image" id="product-hero-image">
-                <video :key="currentVideoUrl" v-if="currentType == 'video'" width="100%" height="100%" controls>
+                <video :key="currentVideoUrl" v-if="currentType === 'video'" width="100%" height="100%" controls>
                     <source :src="currentVideoUrl" :data-image="currentOriginalImageUrl"  type="video/mp4">
                         {{ __('admin::app.catalog.products.not-support-video') }}
                 </video>
@@ -60,7 +60,7 @@
 
                 @auth('customer')
                     @php
-                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') === "1";
                     @endphp
 
                     @if ($showWishlist)
@@ -145,7 +145,7 @@
                 changeImage: function(image) {
                     this.currentType = image.type;
 
-                    if (image.type == 'video') {
+                    if (image.type === 'video') {
                         this.currentVideoUrl = image.video_url;
 
                         this.currentLargeImageUrl = image.large_image_url = image.video_url;

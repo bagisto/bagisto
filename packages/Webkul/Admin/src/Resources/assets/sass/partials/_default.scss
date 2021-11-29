@@ -60,14 +60,14 @@ body {
             text-align: left;
             min-width: 50px;
             position: relative;
-            padding: 12px 0px;
-            margin: 0px 25px 0px 30px;
+            padding: 12px 0;
+            margin: 0 25px 0 30px;
             font-size: 15px;
             cursor: pointer;
             position: relative;
 
             .app-version {
-                padding: 10px 20px 0px 20px;
+                padding: 10px 20px 0 20px;
                 margin-bottom: -10px;
                 display: block;
                 cursor: default;
@@ -76,7 +76,7 @@ body {
 
             .dropdown-list {
                 top: 63px;
-                right: 0px;
+                right: 0;
                 bottom: inherit !important;
             }
 
@@ -141,10 +141,10 @@ body {
     padding-left: 90px;
     position: absolute;
     margin-top: 60px;
-    top: 0px;
+    top: 0;
     right: 0;
     left: 0;
-    bottom: 0px;
+    bottom: 0;
     height: calc(100% - 60px);
     width: 100%;
 
@@ -189,7 +189,7 @@ body {
 
     .aside-nav:not(.active) {
         + .content-wrapper {
-            margin-left: 0px;
+            margin-left: 0;
         }
     }
 
@@ -210,7 +210,7 @@ body {
         .page-header {
             display: inline-block;
             width: 100%;
-            padding: 15px 10px 15px 0px;
+            padding: 15px 10px 15px 0;
             position: sticky;
             top: 50px;
             z-index: 3;
@@ -283,7 +283,7 @@ body {
         display: inline-block;
         vertical-align: middle;
         transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        padding: 0px 10px;
+        padding: 0 10px;
         font-size: 15px;
 
         &:focus {
@@ -295,8 +295,8 @@ body {
         cursor: pointer;
     }
 
-    .control-group::last-child {
-        margin-right: 0px;
+    .control-group:last-child {
+        margin-right: 0;
     }
 }
 

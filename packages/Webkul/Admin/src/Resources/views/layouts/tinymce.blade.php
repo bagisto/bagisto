@@ -68,7 +68,7 @@
 
                 json = JSON.parse(xhr.responseText);
 
-                if (! json || typeof json.location != 'string') {
+                if (! json || typeof json.location !== 'string') {
                     failure('{{ __('admin::app.error.tinymce.invalid-json') }} ' + xhr.responseText);
                     return;
                 }

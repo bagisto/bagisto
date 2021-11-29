@@ -273,7 +273,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
+                            <th v-if="show_swatch && (swatch_type === 'color' || swatch_type === 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
 
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
 
@@ -291,11 +291,11 @@
 
                     <tbody>
                         <tr v-for="row in optionRows">
-                            <td v-if="show_swatch && swatch_type == 'color'">
+                            <td v-if="show_swatch && swatch_type === 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>
 
-                            <td v-if="show_swatch && swatch_type == 'image'">
+                            <td v-if="show_swatch && swatch_type === 'image'">
                                 <div class="control-group" :class="[errors.has('options[' + row.id + '][swatch_value]') ? 'has-error' : '']">
                                     <input type="file" v-validate="'size:600'" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
                                     <span class="control-error" v-if="errors.has('options[' + row.id + '][swatch_value]')">The image size must be less than 600 KB</span>

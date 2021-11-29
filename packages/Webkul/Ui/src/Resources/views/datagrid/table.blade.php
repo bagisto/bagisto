@@ -251,7 +251,7 @@
 
                 <div class="filtered-tags">
                     <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: capitalize;">
-                        <span v-if="filter.column == 'perPage'">perPage</span>
+                        <span v-if="filter.column === 'perPage'">perPage</span>
                         <span v-else>@{{ filter.label }}</span>
 
                         <span class="wrapper" v-if="filter.prettyValue">
@@ -411,7 +411,7 @@
                     },
 
                     filterNumberInput: function(e){
-                        this.numberValue = e.target.value.replace(/[^0-9\,\.]+/g, '');
+                        this.numberValue = e.target.value.replace(/[^0-9,.]+/g, '');
                     },
 
                     getResponse: function() {
@@ -689,7 +689,7 @@
                         newParams = '';
 
                         for(let i = 0; i < this.filters.length; i++) {
-                            if (this.filters[i].column == 'status' || this.filters[i].column == 'value_per_locale' || this.filters[i].column == 'value_per_channel' || this.filters[i].column == 'is_unique') {
+                            if (this.filters[i].column === 'status' || this.filters[i].column === 'value_per_locale' || this.filters[i].column === 'value_per_channel' || this.filters[i].column === 'is_unique') {
                                 if (this.filters[i].val.includes("True")) {
                                     this.filters[i].val = 1;
                                 } else if (this.filters[i].val.includes("False")) {
@@ -702,7 +702,7 @@
                                 condition = '[' + this.filters[i].cond + ']';
                             }
 
-                            if (i == 0) {
+                            if (i === 0) {
                                 newParams = '?' + this.filters[i].column + condition + '=' + this.filters[i].val;
                             } else {
                                 newParams = newParams + '&' + this.filters[i].column + condition + '=' + this.filters[i].val;
@@ -751,7 +751,7 @@
                                 case "channel":
                                     obj.label = "{{ __('ui::app.datagrid.channel') }}";
                                     if ('channels' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code == obj.val);
+                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code === obj.val);
 
                                         if (obj.prettyValue !== undefined) {
                                             obj.prettyValue = obj.prettyValue.name;
@@ -825,7 +825,7 @@
 
                     paginate: function (e) {
                         for (let i = 0; i < this.filters.length; i++) {
-                            if (this.filters[i].column == 'perPage') {
+                            if (this.filters[i].column === 'perPage') {
                                 this.filters.splice(i, 1);
                             }
                         }
@@ -905,6 +905,8 @@
                             }
                         } else {
                             if (this.dataIds.includes(checkboxElement.value)) {
+                                // TODO fix: pop removes the last element,
+                                // TODO index of element should be searched, and then Array.splice(index)
                                 this.dataIds.pop(checkboxElement.value);
                             }
                         }
@@ -954,7 +956,7 @@
                     removeMassActions: function () {
                         let currentIds = this.getCurrentIds();
 
-                        this.dataIds = this.dataIds.filter(id => currentIds.indexOf(parseInt(id)) == -1);
+                        this.dataIds = this.dataIds.filter(id => currentIds.indexOf(parseInt(id)) === -1);
 
                         this.massActionsToggle = false;
 

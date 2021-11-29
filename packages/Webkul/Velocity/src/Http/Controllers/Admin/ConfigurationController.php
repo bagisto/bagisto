@@ -82,7 +82,7 @@ class ConfigurationController extends Controller
         $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
 
         /* check if radio button value */
-        if (request()->get('slides') == "on") {
+        if (request()->get('slides') === "on") {
             $params = request()->all() + [
                 'slider' => 1,
             ];
@@ -147,7 +147,7 @@ class ConfigurationController extends Controller
 
         $saveData = $advertisement;
         foreach ($data as $imageId => $image) {
-            if ($image != "") {
+            if ($image !== "") {
                 $file = 'images.' . $index . '.' . $imageId;
 
                 if (Str::contains($imageId, 'image_')) {
@@ -158,7 +158,7 @@ class ConfigurationController extends Controller
 
                             $saveImage[$size + 1] = $path = request()->file($file)->store($dir);
                         } else {
-                            $saveImage[substr($imageId, 6, 1)] = $path = request()->file($file)->store($dir);
+                            $saveImage[$filter_index] = $path = request()->file($file)->store($dir);
                         }
 
                         $this->sanitizeSVG($path, $image->getMimeType());
@@ -183,7 +183,7 @@ class ConfigurationController extends Controller
                     if (isset($advertisement[$index][$subIndex])) {
                         $saveImage[$subIndex] = $advertisement[$index][$subIndex];
 
-                        if (sizeof($advertisement[$index]) == 1) {
+                        if (count($advertisement[$index]) === 1) {
                             unset($advertisement[$index]);
                         } else {
                             unset($advertisement[$index][$subIndex]);

@@ -9,7 +9,7 @@
     }
 
     .path-hint-tooltip {
-        padding: 0px 10px;
+        padding: 0 10px;
         position: absolute;
         background: #000000;
         z-index: 10000;
@@ -37,9 +37,9 @@
     window.addEventListener("load", function(event) {
         $('.testing').each(function(index) {
             if ($(this).siblings(':not(.path-hint)').length == 1
-                && $(this).next().prop("tagName") != 'INPUT'
-                && $(this).next().prop("tagName") != 'TEXTAREA'
-                && $(this).next().prop("tagName") != 'SELECT'
+                && $(this).next().prop("tagName") !== 'INPUT'
+                && $(this).next().prop("tagName") !== 'TEXTAREA'
+                && $(this).next().prop("tagName") !== 'SELECT'
             ) {
                 $(this).next().addClass('path-hint');
 

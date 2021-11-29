@@ -155,7 +155,7 @@
     <script type="text/x-template" id="bundle-product-item-template">
         <tr>
             <td>
-                <div class="control-group" v-if="bundleOption.type == 'radio' || bundleOption.type == 'select'">
+                <div class="control-group" v-if="bundleOption.type === 'radio' || bundleOption.type === 'select'">
                     <span class="radio">
                         <input type="radio" :name="[inputName + '[is_default]']" :id="[inputName + '[is_default]']" :value="product.is_default" @click="checkProduct($event)" :checked="product.is_default">
                         <label class="radio-view" :for="[inputName + '[is_default]']"></label>
@@ -288,7 +288,7 @@
                     let alreadyAdded = false;
 
                     this.bundle_option_products.forEach(function(optionProduct) {
-                        if (item.id == optionProduct.product.id) {
+                        if (item.id === optionProduct.product.id) {
                             alreadyAdded = true;
                         }
                     });
@@ -341,10 +341,10 @@
                     let self = this;
 
                     this.bundle_option_products.forEach(function(product) {
-                        if (self.bundleOption.type == 'radio' || self.bundleOption.type == 'select') {
-                            product.is_default = product.product.id == productId ? 1 : 0;
+                        if (self.bundleOption.type === 'radio' || self.bundleOption.type === 'select') {
+                            product.is_default = product.product.id === productId ? 1 : 0;
                         } else {
-                            if (product.product.id == productId)
+                            if (product.product.id === productId)
                                 product.is_default = product.is_default ? 0 : 1;
                         }
                     });

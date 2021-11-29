@@ -5,9 +5,8 @@
 @endsection
 
 @php
-    $ratings = [
-        '', '', '', ''
-    ];
+    // immediately overridden (check & remove) :
+    // $ratings = [ '', '', '', '' ];
 
     $ratings = [
         10, 30, 20, 15, 25

@@ -7,7 +7,7 @@
 @section('content')
     <div class="content">
 
-        @php $locale = core()->getRequestedLocaleCode(); @endphp
+        @php $locale = core()->getRequestedLocaleCode() @endphp
 
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
@@ -49,7 +49,7 @@
 
                         <div class="control-group" :class="[errors.has('position') ? 'has-error' : '']">
                             <label for="position" class="required">
-                                {{ __('velocity::app.admin.contents.page.position') }}</span>
+                                {{ __('velocity::app.admin.contents.page.position') }}
                             </label>
                             <input type="text" v-validate="'required|numeric|max:2'" class="control" id="position" name="position" value="" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.position') }}&quot;"/>
                             <span class="control-error" v-if="errors.has('position')" v-text="errors.first('position')"></span>
@@ -134,16 +134,16 @@
                 <span class="control-error" v-if="errors.has('content_type')" v-text="errors.first('content_type')"></span>
             </div>
 
-            <div v-if="content_type == 'link'">
+            <div v-if="content_type === 'link'">
                 @include ('velocity::admin.content.content-type.link')
             </div>
-            <div v-else-if="content_type == 'product'">
+            <div v-else-if="content_type === 'product'">
                 @include ('velocity::admin.content.content-type.product')
             </div>
-            <div v-else-if="content_type == 'static'">
+            <div v-else-if="content_type === 'static'">
                 @include ('velocity::admin.content.content-type.static')
             </div>
-            <div v-else-if="content_type == 'category'">
+            <div v-else-if="content_type === 'category'">
                 @include ('velocity::admin.content.content-type.category')
             </div>
         </div>
@@ -165,7 +165,7 @@
                 loadFields(event) {
                     this.content_type = event.target.value;
 
-                    if (this.content_type == 'static') {
+                    if (this.content_type === 'static') {
                         $(document).ready(function () {
                             tinymce.init({
                                 selector: 'textarea#description',

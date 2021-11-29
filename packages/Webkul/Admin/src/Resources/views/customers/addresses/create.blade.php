@@ -103,8 +103,7 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
-                </accordian>
+                    </accordian>
 
                 </div>
             </div>

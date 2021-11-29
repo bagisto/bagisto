@@ -164,7 +164,6 @@ return [
 
     'header' => [
         'cart' => 'Winkelwagen',
-        'cart' => 'Winkelwagen',
         'guest' => 'Gast',
         'logout' => 'Afmelden',
         'title' => 'Account',
@@ -188,7 +187,6 @@ return [
     ],
 
     'checkout' => [
-        'qty' => 'Aantal',
         'checkout' => 'Checkout',
         'cart' => [
             'view-cart' => 'Bekijk winkelwagen',

@@ -19,7 +19,7 @@
                 <span class="control-error" v-if="errors.has('booking[renting_type]')">@{{ errors.first('booking[renting_type]') }}</span>
             </div>
 
-            <div v-if="rental_booking.renting_type == 'daily' || rental_booking.renting_type == 'daily_hourly'">
+            <div v-if="rental_booking.renting_type === 'daily' || rental_booking.renting_type === 'daily_hourly'">
                 <div class="control-group" :class="[errors.has('booking[daily_price]') ? 'has-error' : '']">
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.daily-price') }}</label>
 
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div v-if="rental_booking.renting_type == 'hourly' || rental_booking.renting_type == 'daily_hourly'">
+            <div v-if="rental_booking.renting_type === 'hourly' || rental_booking.renting_type === 'daily_hourly'">
                 <div class="control-group" :class="[errors.has('booking[hourly_price]') ? 'has-error' : '']">
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.hourly-price') }}</label>
 
@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <div v-if="rental_booking.renting_type == 'hourly' || rental_booking.renting_type == 'daily_hourly'">
+            <div v-if="rental_booking.renting_type === 'hourly' || rental_booking.renting_type === 'daily_hourly'">
                 <div class="control-group" :class="[errors.has('booking[same_slot_all_days]') ? 'has-error' : '']">
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.same-slot-all-days') }}</label>
 

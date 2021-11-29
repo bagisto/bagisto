@@ -13,5 +13,5 @@
     @endif
 
     data-vv-as="&quot;{{ $attribute->admin_name }}&quot;"
-    {{ in_array($attribute->code, ['url_key']) ? 'v-slugify' : '' }}
-    {{ $attribute->code == 'name' && ! $product[$attribute->code]  ? 'v-slugify-target=\'url_key\'' : ''  }}>
+    {{ $attribute->code === 'url_key' ? 'v-slugify' : '' }}
+    {{ $attribute->code === 'name' && ! $product[$attribute->code]  ? 'v-slugify-target=\'url_key\'' : ''  }}>

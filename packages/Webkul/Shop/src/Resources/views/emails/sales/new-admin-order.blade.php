@@ -122,7 +122,7 @@
                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                 </div>
 
-                @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+                @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method) @endphp
 
                 @if (! empty($additionalDetails))
                     <div style="font-size: 16px; color: #242424;">
@@ -160,7 +160,7 @@
                                         <div class="item-options">
 
                                             @foreach ($item->additional['attributes'] as $attribute)
-                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br/>
                                             @endforeach
 
                                         </div>

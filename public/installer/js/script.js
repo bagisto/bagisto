@@ -60,25 +60,25 @@ window.onload = function() {
     }
 
     function myFunction() {
-        if(this.id == 'welcome-check') {
+        if(this.id === 'welcome-check') {
             requirement.style.display = "block";
             welcome.style.display = "none";
-        } else if (this.id == 'requirement-check') {
+        } else if (this.id === 'requirement-check') {
             environment.style.display = "block";
             requirement.style.display = "none";
-        } else if (this.id == 'continue') {
+        } else if (this.id === 'continue') {
             migration.style.display = "none";
             admin.style.display ="block";
-        } else if (this.id == 'requirement-back') {
+        } else if (this.id === 'requirement-back') {
             welcome.style.display = "block";
             requirement.style.display = "none";
-        } else if (this.id == 'envronment-back') {
+        } else if (this.id === 'envronment-back') {
             environment.style.display ="none";
             requirement.style.display = "block";
-        } else if (this.id == 'migration-back') {
+        } else if (this.id === 'migration-back') {
             migration.style.display = "none";
             environment.style.display ="block";
-        } else if (this.id == 'requirements-refresh') {
+        } else if (this.id === 'requirements-refresh') {
             location.reload();
         }
     }

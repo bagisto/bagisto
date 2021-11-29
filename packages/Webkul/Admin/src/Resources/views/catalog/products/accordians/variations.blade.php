@@ -379,7 +379,7 @@
                         variants.push(variant);
                     } else {
                         for (let code in variant) {
-                            if (code != 'inventories') {
+                            if (code !== 'inventories') {
                                 variants[index][code] = variant[code];
                             } else {
                                 variants[index][code] = [];

@@ -1,5 +1,5 @@
 @php
-    $isCustomer = auth()->guard('customer')->check();
+    $isCustomer = auth()->guard('customer')->check()
 @endphp
 
     @if (isset($shipping) && $shipping)

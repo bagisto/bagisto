@@ -78,7 +78,7 @@ $jsURL = $actual_link . '/' . 'js/script.js';
         $port = $databaseData['DB_PORT'] ?? '';
         $connection = $databaseData['DB_CONNECTION'] ?? '';
 
-        if (isset($connection) && $connection == 'mysql') {
+        if (isset($connection) && $connection === 'mysql') {
             @$conn = new mysqli($servername, $username, $password, $dbname, (int) $port);
 
             if (! $conn->connect_error) {

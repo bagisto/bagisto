@@ -58,7 +58,7 @@
 
             <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
                 <label for="address_0" class="mandatory">{{ __('shop::app.customer.account.address.edit.street-address') }}</label>
-                <input type="text" class="control" name="address1[]" value="{{ isset($addresses[0]) ? $addresses[0] : '' }}" id="address_0" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
+                <input type="text" class="control" name="address1[]" value="{{ $addresses[0] ?? '' }}" id="address_0" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
                 <span class="control-error" v-if="errors.has('address1[]')" v-text="errors.first('address1[]')"></span>
             </div>
 

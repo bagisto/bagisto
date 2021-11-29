@@ -164,7 +164,6 @@ return [
 
     'header'        => [
         'cart'              => 'Carrito',
-        'cart'              => 'Carrito',
         'guest'             => 'Invitado',
         'logout'            => 'Cerrar Sesión',
         'title'             => 'Cuenta',
@@ -188,7 +187,6 @@ return [
     ],
 
     'checkout'      => [
-        'qty'       => 'Cant.',
         'checkout'  => 'Revisa tu Pedido',
         'cart'      => [
             'view-cart'     => 'Ver Carrito',

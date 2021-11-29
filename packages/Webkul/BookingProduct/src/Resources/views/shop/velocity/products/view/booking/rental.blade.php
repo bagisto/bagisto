@@ -5,7 +5,7 @@
         <div class="book-slots">
             <h3>{{ __('bookingproduct::app.shop.products.rent-an-item') }}</h3>
 
-            <div v-if="renting_type == 'daily_hourly'">
+            <div v-if="renting_type === 'daily_hourly'">
                 <div class="form-group">
                     <label>{{ __('bookingproduct::app.shop.products.choose-rent-option') }}</label>
 
@@ -24,7 +24,7 @@
                 </div>
             </div>
             
-            <div v-if="renting_type != 'daily' && sub_renting_type == 'hourly'">
+            <div v-if="renting_type !== 'daily' && sub_renting_type === 'hourly'">
                 
                 <div>
                     <label>{{ __('bookingproduct::app.shop.products.select-slot') }}</label>

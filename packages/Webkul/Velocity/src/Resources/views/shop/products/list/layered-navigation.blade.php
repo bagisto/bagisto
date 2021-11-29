@@ -44,7 +44,7 @@
             </div>
 
             <div class="filter-attributes-content">
-                <ul type="none" class="items ml15" v-if="attribute.type != 'price'">
+                <ul type="none" class="items ml15" v-if="attribute.type !== 'price'">
                     <li
                         class="item"
                         v-for='(option, index) in attribute.options'>
@@ -62,7 +62,7 @@
                     </li>
                 </ul>
 
-                <div class="price-range-wrapper" v-if="attribute.type == 'price'">
+                <div class="price-range-wrapper" v-if="attribute.type === 'price'">
                     <vue-slider
                         ref="slider"
                         v-model="sliderConfig.value"
@@ -143,7 +143,7 @@
                     let params = [];
 
                     for (key in this.appliedFilters) {
-                        if (key != 'page') {
+                        if (key !== 'page') {
                             params.push(key + '=' + this.appliedFilters[key].join(','))
                         }
                     }
@@ -189,7 +189,7 @@
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;
 
-                    if (this.attribute.type == 'price') {
+                    if (this.attribute.type === 'price') {
                         this.sliderConfig.value = this.appliedFilterValues;
                         this.sliderConfig.priceFrom = this.appliedFilterValues[0];
                         this.sliderConfig.priceTo = this.appliedFilterValues[1];
@@ -222,7 +222,7 @@
                 },
 
                 clearFilters: function () {
-                    if (this.attribute.type == 'price') {
+                    if (this.attribute.type === 'price') {
                         this.sliderConfig.value = [0, 0];
                     }
 
@@ -234,7 +234,7 @@
                 optionClicked: function (id, {target}) {
                     let checkbox = $(`#${id}`);
 
-                    if (checkbox && checkbox.length > 0 && target.type != "checkbox") {
+                    if (checkbox && checkbox.length > 0 && target.type !== "checkbox") {
                         checkbox = checkbox[0];
                         checkbox.checked = ! checkbox.checked;
 

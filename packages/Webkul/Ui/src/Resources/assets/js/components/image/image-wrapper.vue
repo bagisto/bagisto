@@ -73,7 +73,7 @@
 
                         this_this.imageCount++;
                     });
-                } else if (this.images.length == undefined && typeof this.images == 'object') {
+                } else if (this.images.length == undefined && typeof this.images === 'object') {
                     var images = Object.keys(this.images).map(key => { 
                         return this.images[key]; 
                     }); 
@@ -87,7 +87,7 @@
                     this.createFileType();
                 }
             } else {
-                if(this.images && this.images != '') {
+                if(this.images && this.images !== '') {
                     this.items.push({'id': 'image_' + this.imageCount, 'url': this.images})
 
                     this.imageCount++;

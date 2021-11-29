@@ -26,8 +26,7 @@
                 @if (isset($item->product->additional['attributes']))
                     <div class="item-options">
                         @foreach ($item->product->additional['attributes'] as $attribute)
-                            <b>{{ $attribute['attribute_name'] }} : </b> {{ $attribute['option_label'] }}
-                            </br>
+                            <b>{{ $attribute['attribute_name'] }} : </b> {{ $attribute['option_label'] }}<br/>
                         @endforeach
                     </div>
                 @endif
@@ -55,7 +54,7 @@
                         'addWishlistClass'  => 'pl10',
                         'product'           => $item->product,
                         'addToCartBtnClass' => 'medium-padding',
-                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false,
+                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') === "1",
                     ])
                 </div>
             </div>

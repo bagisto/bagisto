@@ -43,7 +43,7 @@
             </div>
 
             <div class="filter-attributes-content">
-                <ol class="items" v-if="attribute.type != 'price'">
+                <ol class="items" v-if="attribute.type !== 'price'">
                     <li class="item" v-for='(option, index) in attribute.options'>
                         <span class="checkbox">
                             <input type="checkbox" :id="option.id" v-bind:value="option.id" v-model="appliedFilters" @change="addFilter($event)"/>
@@ -55,7 +55,7 @@
                     </li>
                 </ol>
 
-                <div class="price-range-wrapper" v-if="attribute.type == 'price'">
+                <div class="price-range-wrapper" v-if="attribute.type === 'price'">
                     <vue-slider
                         ref="slider"
                         v-model="sliderConfig.value"
@@ -118,7 +118,7 @@
                     let params = [];
 
                     for(key in this.appliedFilters) {
-                        if (key != 'page') {
+                        if (key !== 'page') {
                             params.push(key + '=' + this.appliedFilters[key].join(','))
                         }
                     }
@@ -157,7 +157,7 @@
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;
 
-                    if (this.attribute.type == 'price') {
+                    if (this.attribute.type === 'price') {
                         this.sliderConfig.value = this.appliedFilterValues;
                     }
 
@@ -189,7 +189,7 @@
                 },
 
                 clearFilters: function () {
-                    if (this.attribute.type == 'price') {
+                    if (this.attribute.type === 'price') {
                         this.sliderConfig.value = [0, 0];
                     }
 

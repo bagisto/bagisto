@@ -187,7 +187,6 @@ return [
     ],
 
     'checkout' => [
-        'qty' => 'تعداد',
         'checkout' => 'وارسی',
         'cart' => [
             'view-cart' => 'مشاهده سبد خرید',

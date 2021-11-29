@@ -11,7 +11,7 @@
             <searchbar-component>
                 <template v-slot:image-search>
                     <image-search-component
-                        status="{{core()->getConfigData('general.content.shop.image_search') == '1' ? 'true' : 'false'}}"
+                        status="{{core()->getConfigData('general.content.shop.image_search') === '1' ? 'true' : 'false'}}"
                         upload-src="{{ route('shop.image.search.upload') }}"
                         view-src="{{ route('shop.search.index') }}"
                         common-error="{{ __('shop::app.common.error') }}"

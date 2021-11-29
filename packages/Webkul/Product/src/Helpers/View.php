@@ -25,10 +25,10 @@ class View extends AbstractProduct
                 $value = $product->{$attribute->code};
             }
 
-            if ($attribute->type == 'boolean') {
+            if ($attribute->type === 'boolean') {
                 $value = $value ? 'Yes' : 'No';
             } elseif($value) {
-                if ($attribute->type == 'select') {
+                if ($attribute->type === 'select') {
                     $attributeOption = $attributeOptionReposotory->find($value);
 
                     if ($attributeOption) {
@@ -38,7 +38,7 @@ class View extends AbstractProduct
                             continue;
                         }
                     }
-                } elseif ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
+                } elseif ($attribute->type === 'multiselect' || $attribute->type === 'checkbox') {
                     $lables = [];
 
                     $attributeOptions = $attributeOptionReposotory->findWhereIn('id', explode(",", $value));

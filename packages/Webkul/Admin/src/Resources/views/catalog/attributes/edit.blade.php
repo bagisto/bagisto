@@ -1,5 +1,5 @@
 @php
-    $allLocales = app('Webkul\Core\Repositories\LocaleRepository')->all();
+    $allLocales = app('Webkul\Core\Repositories\LocaleRepository')->all()
 @endphp
 
 @extends('admin::layouts.content')
@@ -55,37 +55,37 @@
                                 <label for="type">{{ __('admin::app.catalog.attributes.type') }}</label>
 
                                 <select class="control" id="type" disabled="disabled">
-                                    <option value="text" {{ $selectedOption == 'text' ? 'selected' : '' }}>
+                                    <option value="text" {{ $selectedOption === 'text' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.text') }}
                                     </option>
-                                    <option value="textarea" {{ $selectedOption == 'textarea' ? 'selected' : '' }}>
+                                    <option value="textarea" {{ $selectedOption === 'textarea' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.textarea') }}
                                     </option>
-                                    <option value="price" {{ $selectedOption == 'price' ? 'selected' : '' }}>
+                                    <option value="price" {{ $selectedOption === 'price' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.price') }}
                                     </option>
-                                    <option value="boolean" {{ $selectedOption == 'boolean' ? 'selected' : '' }}>
+                                    <option value="boolean" {{ $selectedOption === 'boolean' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.boolean') }}
                                     </option>
-                                    <option value="select" {{ $selectedOption == 'select' ? 'selected' : '' }}>
+                                    <option value="select" {{ $selectedOption === 'select' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.select') }}
                                     </option>
-                                    <option value="multiselect" {{ $selectedOption == 'multiselect' ? 'selected' : '' }}>
+                                    <option value="multiselect" {{ $selectedOption === 'multiselect' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.multiselect') }}
                                     </option>
-                                    <option value="datetime" {{ $selectedOption == 'datetime' ? 'selected' : '' }}>
+                                    <option value="datetime" {{ $selectedOption === 'datetime' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.datetime') }}
                                     </option>
-                                    <option value="date" {{ $selectedOption == 'date' ? 'selected' : '' }}>
+                                    <option value="date" {{ $selectedOption === 'date' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.date') }}
                                     </option>
-                                    <option value="image" {{ $selectedOption == 'image' ? 'selected' : '' }}>
+                                    <option value="image" {{ $selectedOption === 'image' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.image') }}
                                     </option>
-                                    <option value="file" {{ $selectedOption == 'file' ? 'selected' : '' }}>
+                                    <option value="file" {{ $selectedOption === 'file' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.file') }}
                                     </option>
-                                    <option value="checkbox" {{ $selectedOption == 'checkbox' ? 'selected' : '' }}>
+                                    <option value="checkbox" {{ $selectedOption === 'checkbox' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.checkbox') }}
                                     </option>
                                 </select>
@@ -177,16 +177,16 @@
                                 <label for="validation">{{ __('admin::app.catalog.attributes.input_validation') }}</label>
                                 <select class="control" id="validation" name="validation" {{ ! $attribute->is_user_defined ? 'disabled' : '' }}>
                                     <option value=""></option>
-                                    <option value="numeric" {{ $selectedValidation == 'numeric' ? 'selected' : '' }}>
+                                    <option value="numeric" {{ $selectedValidation === 'numeric' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.number') }}
                                     </option>
-                                    <option value="decimal" {{ $selectedValidation == 'decimal' ? 'selected' : '' }}>
+                                    <option value="decimal" {{ $selectedValidation === 'decimal' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.decimal') }}
                                     </option>
-                                    <option value="email" {{ $selectedValidation == 'email' ? 'selected' : '' }}>
+                                    <option value="email" {{ $selectedValidation === 'email' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.email') }}
                                     </option>
-                                    <option value="url" {{ $selectedValidation == 'url' ? 'selected' : '' }}>
+                                    <option value="url" {{ $selectedValidation === 'url' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.url') }}
                                     </option>
                                 </select>
@@ -340,7 +340,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
+                            <th v-if="show_swatch && (swatch_type === 'color' || swatch_type === 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
 
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
 
@@ -359,11 +359,11 @@
 
                             <input type="hidden" :name="'options[' + row.id + '][isDelete]'" :value="row.isDelete">
 
-                            <td v-if="show_swatch && swatch_type == 'color'">
+                            <td v-if="show_swatch && swatch_type === 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>
 
-                            <td style="white-space: nowrap;" v-if="show_swatch && swatch_type == 'image'">
+                            <td style="white-space: nowrap;" v-if="show_swatch && swatch_type === 'image'">
                                 <div class="control-group" :class="[errors.has('options[' + row.id + '][swatch_value]') ? 'has-error' : '']">
                                     <img style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;" v-if="row.swatch_value_url" :src="row.swatch_value_url"/>
                                     <input type="file" v-validate="'size:600'" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
@@ -428,8 +428,8 @@
                     optionRowCount: 0,
                     optionRows: [],
                     loadMore: true,
-                    show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
-                    swatch_type: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
+                    show_swatch: "{{ $attribute->type === 'select' }}",
+                    swatch_type: "{{ $attribute->swatch_type === '' ? 'dropdown' : $attribute->swatch_type }}",
                     isNullOptionChecked: false,
                     idNullOption: null
                 };

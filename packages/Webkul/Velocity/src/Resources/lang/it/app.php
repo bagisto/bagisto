@@ -167,7 +167,6 @@ return [
 
     'header' => [
         'cart' => 'Carrello',
-        'cart' => 'Carrello',
         'guest' => 'Guest',
         'logout' => 'Logout',
         'title' => 'Account',

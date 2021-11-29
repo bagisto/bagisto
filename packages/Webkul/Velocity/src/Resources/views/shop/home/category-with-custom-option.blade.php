@@ -4,7 +4,7 @@
     $category[0] = $categoryRepository->findByPath($category[0]);
     $category[1] = $categoryRepository->findByPath($category[1]);
     $category[2] = $categoryRepository->findByPath($category[2]);
-    $category[3] = $categoryRepository->findByPath($category[3]);
+    $category[3] = $categoryRepository->findByPath($category[3])
 @endphp
 
 <div class="container-fluid category-with-custom-options">

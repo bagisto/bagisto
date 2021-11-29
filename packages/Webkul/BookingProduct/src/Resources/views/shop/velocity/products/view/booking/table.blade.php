@@ -38,7 +38,7 @@
                         <td>
                             @if ($day['slots'] && count($day['slots']))
                                 @foreach ($day['slots'] as $slot)
-                                    {{ $slot['from'] . ' - ' . $slot['to'] }}</br>
+                                    {{ $slot['from'] . ' - ' . $slot['to'] }}<br/>
                                 @endforeach
                             @else
                                 <span class="text-danger">{{ __('bookingproduct::app.shop.products.closed') }}</span>

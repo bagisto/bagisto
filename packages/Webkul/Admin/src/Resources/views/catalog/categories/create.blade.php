@@ -97,7 +97,7 @@
 
                                 <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                                     @foreach ($errors->get('image.*') as $key => $message)
-                                        @php echo str_replace($key, 'Image', $message[0]); @endphp
+                                        @php echo str_replace($key, 'Image', $message[0]) @endphp
                                     @endforeach
                                 </span>
                             </div>
@@ -136,7 +136,7 @@
 
                                     @foreach ($attributes as $attribute)
                                         <option value="{{ $attribute->id }}" {{ in_array($attribute->id, $selectedaAtributes) ? 'selected' : ''}}>
-                                            {{ $attribute->name ? $attribute->name : $attribute->admin_name }}
+                                            {{ $attribute->name ?: $attribute->admin_name }}
                                         </option>
                                     @endforeach
 
@@ -214,7 +214,7 @@
 
                 $(document).ready(function () {
                     $('#display_mode').on('change', function (e) {
-                        if ($('#display_mode').val() != 'products_only') {
+                        if ($('#display_mode').val() !== 'products_only') {
                             self.isRequired = true;
                         } else {
                             self.isRequired = false;

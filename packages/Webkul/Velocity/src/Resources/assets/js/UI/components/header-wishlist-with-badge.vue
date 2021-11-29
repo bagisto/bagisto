@@ -6,7 +6,7 @@
             <span class="badge" v-text="wishlistCount"></span>
         </div>
 
-        <span v-text="__('header.wishlist')" v-if="isText == 'true'"></span>
+        <span v-text="__('header.wishlist')" v-if="isText === 'true'"></span>
     </a>
 </template>
 
@@ -32,7 +32,7 @@ export default {
 
     methods: {
         updateHeaderItemsCount: function() {
-            if (this.isCustomer == 'true') {
+            if (this.isCustomer === 'true') {
                 this.$http
                     .get(`${this.$root.baseUrl}/items-count`)
                     .then(response => {

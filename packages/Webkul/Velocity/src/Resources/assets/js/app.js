@@ -120,24 +120,24 @@ $(function() {
 
             toggleSidebar: function(id, { target }, type) {
                 if (
-                    Array.from(target.classList)[0] == 'main-category' ||
+                    Array.from(target.classList)[0] === 'main-category' ||
                     Array.from(target.parentElement.classList)[0] ==
                         'main-category'
                 ) {
                     let sidebar = $(`#sidebar-level-${id}`);
                     if (sidebar && sidebar.length > 0) {
-                        if (type == 'mouseover') {
+                        if (type === 'mouseover') {
                             this.show(sidebar);
-                        } else if (type == 'mouseout') {
+                        } else if (type === 'mouseout') {
                             this.hide(sidebar);
                         }
                     }
                 } else if (
-                    Array.from(target.classList)[0] == 'category' ||
-                    Array.from(target.classList)[0] == 'category-icon' ||
-                    Array.from(target.classList)[0] == 'category-title' ||
-                    Array.from(target.classList)[0] == 'category-content' ||
-                    Array.from(target.classList)[0] == 'rango-arrow-right'
+                    Array.from(target.classList)[0] === 'category' ||
+                    Array.from(target.classList)[0] === 'category-icon' ||
+                    Array.from(target.classList)[0] === 'category-title' ||
+                    Array.from(target.classList)[0] === 'category-content' ||
+                    Array.from(target.classList)[0] === 'rango-arrow-right'
                 ) {
                     let parentItem = target.closest('li');
 
@@ -152,18 +152,18 @@ $(function() {
                             let subCategories1 = Array.from(subCategories)[0];
                             subCategories1 = $(subCategories1);
 
-                            if (type == 'mouseover') {
+                            if (type === 'mouseover') {
                                 this.show(subCategories1);
 
                                 let sidebarChild = subCategories1.find(
                                     '.sidebar'
                                 );
                                 this.show(sidebarChild);
-                            } else if (type == 'mouseout') {
+                            } else if (type === 'mouseout') {
                                 this.hide(subCategories1);
                             }
                         } else {
-                            if (type == 'mouseout') {
+                            if (type === 'mouseout') {
                                 let sidebar = $(`#${id}`);
                                 sidebar.hide();
                             }
@@ -349,7 +349,7 @@ $(function() {
                     .then(response => {
                         this.sharedRootCategories = response.data.categories;
                         $(
-                            `<style type='text/css'> .sub-categories{ min-height:${response
+                            `<style> .sub-categories{ min-height:${response
                                 .data.categories.length * 30}px;} </style>`
                         ).appendTo('head');
                     })

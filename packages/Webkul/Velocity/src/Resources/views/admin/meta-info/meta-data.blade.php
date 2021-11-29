@@ -7,7 +7,7 @@
 @php
     $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
     $channel = core()->getRequestedChannelCode();
-    $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
+    $channelLocales = core()->getAllLocalesByRequestedChannel()['locales']
 @endphp
 
 @section('content')
@@ -367,7 +367,7 @@
             $('#channel-switcher, #locale-switcher').on('change', function (e) {
                 $('#channel-switcher').val()
 
-                if (event.target.id == 'channel-switcher') {
+                if (event.target.id === 'channel-switcher') {
                     let locale = "{{ $channelLocales->first()->code }}";
 
                     $('#locale-switcher').val(locale);

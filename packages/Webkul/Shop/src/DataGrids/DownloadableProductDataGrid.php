@@ -67,7 +67,7 @@ class DownloadableProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->status == 'pending' || $value->status == 'expired' || $value->invoice_state !== 'paid') {
+                if ($value->status === 'pending' || $value->status === 'expired' || $value->invoice_state !== 'paid') {
                     return $value->product_name;
                 } else {
                     return $value->product_name . ' ' . '<a href="' . route('customer.downloadable_products.download', $value->id) . '" target="_blank">' . $value->name . '</a>';
@@ -92,11 +92,11 @@ class DownloadableProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->status == 'pending') {
+                if ($value->status === 'pending') {
                     return trans('shop::app.customer.account.downloadable_products.pending');
-                } elseif ($value->status == 'available') {
+                } elseif ($value->status === 'available') {
                     return trans('shop::app.customer.account.downloadable_products.available');
-                } elseif ($value->status == 'expired') {
+                } elseif ($value->status === 'expired') {
                     return trans('shop::app.customer.account.downloadable_products.expired');
                 }
             },

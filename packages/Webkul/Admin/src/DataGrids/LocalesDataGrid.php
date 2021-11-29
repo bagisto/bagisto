@@ -75,7 +75,7 @@ class LocalesDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->direction == 'ltr') {
+                if ($value->direction === 'ltr') {
                     return trans('admin::app.datagrid.ltr');
                 } else {
                     return trans('admin::app.datagrid.rtl');

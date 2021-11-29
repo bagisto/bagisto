@@ -53,7 +53,7 @@
                 <input type="text" name="booking[location]" v-model="booking.location" class="control"/>
             </div>
 
-            <div class="control-group" :class="[errors.has('booking[qty]') ? 'has-error' : '']" v-if="booking.type == 'default' || booking.type == 'appointment' || booking.type == 'rental'">
+            <div class="control-group" :class="[errors.has('booking[qty]') ? 'has-error' : '']" v-if="booking.type === 'default' || booking.type === 'appointment' || booking.type === 'rental'">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.qty') }}</label>
 
                 <input type="text" v-validate="'required|numeric|min:0'" name="booking[qty]" v-model="booking.qty" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.qty') }}&quot;"/>
@@ -61,7 +61,7 @@
                 <span class="control-error" v-if="errors.has('booking[qty]')">@{{ errors.first('booking[qty]') }}</span>
             </div>
 
-            <div class="control-group" v-if="booking.type != 'event' && booking.type != 'default'" :class="[errors.has('booking[available_every_week]') ? 'has-error' : '']">
+            <div class="control-group" v-if="booking.type !== 'event' && booking.type !== 'default'" :class="[errors.has('booking[available_every_week]') ? 'has-error' : '']">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-every-week') }}</label>
 
                 <select v-validate="'required'" name="booking[available_every_week]" v-model="booking.available_every_week" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-every-week') }}&quot;">
@@ -94,23 +94,23 @@
                 </div>
             </div>
 
-            <div class="default-booking-section" v-if="booking.type == 'default'">
+            <div class="default-booking-section" v-if="booking.type === 'default'">
                 @include ('bookingproduct::admin.catalog.products.accordians.booking.default', ['bookingProduct' => $bookingProduct])
             </div>
 
-            <div class="appointment-booking-section" v-if="booking.type == 'appointment'">
+            <div class="appointment-booking-section" v-if="booking.type === 'appointment'">
                 @include ('bookingproduct::admin.catalog.products.accordians.booking.appointment', ['bookingProduct' => $bookingProduct])
             </div>
 
-            <div class="event-booking-section" v-if="booking.type == 'event'">
+            <div class="event-booking-section" v-if="booking.type === 'event'">
                 @include ('bookingproduct::admin.catalog.products.accordians.booking.event', ['bookingProduct' => $bookingProduct])
             </div>
 
-            <div class="rental-booking-section" v-if="booking.type == 'rental'">
+            <div class="rental-booking-section" v-if="booking.type === 'rental'">
                 @include ('bookingproduct::admin.catalog.products.accordians.booking.rental', ['bookingProduct' => $bookingProduct])
             </div>
 
-            <div class="table-booking-section" v-if="booking.type == 'table'">
+            <div class="table-booking-section" v-if="booking.type === 'table'">
                 @include ('bookingproduct::admin.catalog.products.accordians.booking.table', ['bookingProduct' => $bookingProduct])
             </div>
         </div>

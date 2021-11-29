@@ -1,6 +1,6 @@
 @php
     $cart = cart()->getCart();
-    $cartItemsCount = $cart ? $cart->items->count() : trans('shop::app.minicart.zero');
+    $cartItemsCount = $cart ? $cart->items->count() : trans('shop::app.minicart.zero')
 @endphp
 
 <mobile-header

@@ -34,7 +34,7 @@
                             <option value=""></option>
 
                             @foreach ($payment_methods["paymentMethods"] as $paymentMethod)
-                                @if($paymentMethod["method"] == "cashondelivery" || $paymentMethod["method"] == "moneytransfer")
+                                @if($paymentMethod["method"] === "cashondelivery" || $paymentMethod["method"] === "moneytransfer")
                                     <option value="{{ $paymentMethod["method"] }}">{{ $paymentMethod["method_title"] }}</option>
                                 @endif
                             @endforeach

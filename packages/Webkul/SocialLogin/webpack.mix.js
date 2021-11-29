@@ -1,6 +1,6 @@
 const mix = require("laravel-mix");
 
-if (mix == 'undefined') {
+if (mix === 'undefined') {
     const { mix } = require("laravel-mix");
 }
 

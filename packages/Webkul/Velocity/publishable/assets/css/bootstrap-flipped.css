@@ -970,11 +970,11 @@
   .btn-group .btn-group + .btn,
   .btn-group .btn-group + .btn-group {
     margin-right: -1px;
-    margin-left: 0px;
+    margin-left: 0;
   }
   .btn-toolbar {
     margin-right: -5px;
-    margin-left: 0px;
+    margin-left: 0;
   }
   .btn-toolbar .btn-group,
   .btn-toolbar .input-group {
@@ -984,7 +984,7 @@
   .btn-toolbar > .btn-group,
   .btn-toolbar > .input-group {
     margin-right: 5px;
-    margin-left: 0px;
+    margin-left: 0;
   }
   .btn-group > .btn:first-child {
     margin-right: 0;
@@ -1051,7 +1051,7 @@
     border-top-right-radius: 0;
   }
   .input-group-addon:first-child {
-    border-left: 0px;
+    border-left: 0;
     border-right: 1px solid;
   }
   .input-group .form-control:last-child,
@@ -1069,7 +1069,7 @@
   .input-group-addon:last-child {
     border-left-width: 1px;
     border-left-style: solid;
-    border-right: 0px;
+    border-right: 0;
   }
   .input-group-btn > .btn + .btn {
     margin-right: -1px;
@@ -1198,7 +1198,7 @@
   .pagination > li > span {
     float: right;
     margin-right: -1px;
-    margin-left: 0px;
+    margin-left: 0;
   }
   .pagination > li:first-child > a,
   .pagination > li:first-child > span {
@@ -1229,7 +1229,7 @@
     float: right;
   }
   .nav-pills > li > a > .badge {
-    margin-left: 0px;
+    margin-left: 0;
     margin-right: 3px;
   }
   .list-group-item > .badge {

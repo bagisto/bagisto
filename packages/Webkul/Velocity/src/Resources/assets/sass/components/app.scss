@@ -64,13 +64,13 @@
 
     .rating-bar {
         top: 12px;
-        padding: 0px;
+        padding: 0;
         height: 5px;
         position: relative;
         background-color: $light-background;
 
         > div {
-            width: 0px;
+            width: 0;
             height: 100%;
             background-color: $black-color;
         }
@@ -192,8 +192,8 @@
 
     @include border-radius(5px);
     @include box-shadow(
-        0px 15px 25px 0px rgba(0, 0, 0, 0.03),
-        0px 20px 45px 5px rgba(0, 0, 0, 0.2)
+        0 15px 25px 0 rgba(0, 0, 0, 0.03),
+        0 20px 45px 5px rgba(0, 0, 0, 0.2)
     );
 
     .modal-header {
@@ -315,7 +315,7 @@
 
             .btn-add-to-cart {
                 width: 100%;
-                max-width: 140px;
+                /* max-width: 140px; is overwritten */
                 max-width: 100% !important;
 
                 &.small-padding {
@@ -602,7 +602,7 @@
     .close {
         top: 12px;
         right: 15px;
-        padding: 0px;
+        padding: 0;
         position: relative;
     }
 
@@ -621,7 +621,7 @@
         padding: 0;
 
         .product-image-container {
-            margin: 10px 10px 10px 0px;
+            margin: 10px 10px 10px 0;
             border: 1px solid $border-light;
         }
 
@@ -639,7 +639,7 @@
         .rango-close {
             top: -10px;
             left: -10px;
-            padding: 0px 4px 3px 3px;
+            padding: 0 4px 3px 3px;
             font-size: 10px;
             max-height: 17px;
             line-height: 1.3rem;
@@ -786,9 +786,8 @@
                 .customer-name {
                     width: 60px;
                     height: 60px;
-                    margin: 0 auto;
                     font-size: 24px;
-                    margin-bottom: 5px;
+                    margin: 0 auto 5px;
                     display: inline-block;
                 }
 
@@ -865,8 +864,7 @@
 
     .account-layout {
         color: $font-color;
-        padding: 15px 20px;
-        padding-bottom: 60px;
+        padding: 15px 20px 60px;
 
         .account-table-content.profile-page-content {
             .table {
@@ -1702,7 +1700,7 @@
 
 #related-products-carousel {
     .product-card-new:first-child {
-        margin-left: 0px !important;
+        margin-left: 0 !important;
     }
 }
 
@@ -1795,7 +1793,7 @@
      * this class should have height otherwise CLS score will reduce.
      */
     .sticky-header {
-        top: 0px;
+        top: 0;
         height: 55px;
         z-index: 100;
         position: sticky;
@@ -1818,7 +1816,7 @@
     }
 
     :first-child {
-        margin-top: 0px;
+        margin-top: 0;
     }
 }
 
@@ -1902,7 +1900,7 @@
 
 .category-list-container {
     z-index: 10;
-    padding: 0px !important;
+    padding: 0 !important;
     background: $white-color;
     position: absolute !important;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -2232,7 +2230,7 @@
         left: 50%;
         width: 0;
         height: 0;
-        border: 5px solid transparent;
+        /* border: 5px solid transparent; is overwritten: */
         border: 6px solid transparent\0;
         border-top-color: inherit;
         transform: translate(-50%);

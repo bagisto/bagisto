@@ -80,7 +80,7 @@
                                 @foreach ($customAttributes as $attribute)
 
                                     <?php
-                                        if ($attribute->code == 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
+                                        if ($attribute->code === 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
                                             continue;
                                         }
 
@@ -90,16 +90,16 @@
                                             array_push($validations, 'required');
                                         }
 
-                                        if ($attribute->type == 'price') {
+                                        if ($attribute->type === 'price') {
                                             array_push($validations, 'decimal');
                                         }
 
-                                        if ($attribute->type == 'file') {
+                                        if ($attribute->type === 'file') {
                                             $retVal = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048' ;
                                             array_push($validations, 'size:' . $retVal);
                                         }
 
-                                        if ($attribute->type == 'image') {
+                                        if ($attribute->type === 'image') {
                                             $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048' ;
                                             array_push($validations, 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp');
                                         }
@@ -112,14 +112,14 @@
                                     @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
 
                                         <div class="control-group {{ $attribute->type }}"
-                                             @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']"
+                                             @if ($attribute->type === 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']"
                                              @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
 
                                             <label
                                                 for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
                                                 {{ $attribute->admin_name }}
 
-                                                @if ($attribute->type == 'price')
+                                                @if ($attribute->type === 'price')
                                                     <span class="currency-code">({{ core()->currencySymbol(core()->getBaseCurrencyCode()) }})</span>
                                                 @endif
 
@@ -143,9 +143,9 @@
                                             @include ($typeView)
 
                                             <span class="control-error"
-                                                  @if ($attribute->type == 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')"
+                                                  @if ($attribute->type === 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')"
                                                   @else  v-if="errors.has('{{ $attribute->code }}')"  @endif>
-                                                @if ($attribute->type == 'multiselect')
+                                                @if ($attribute->type === 'multiselect')
                                                     @{{ errors.first('{!! $attribute->code !!}[]') }}
                                                 @else
                                                     @{{ errors.first('{!! $attribute->code !!}') }}
@@ -157,7 +157,7 @@
 
                                 @endforeach
 
-                                @if ($attributeGroup->name == 'Price')
+                                @if ($attributeGroup->name === 'Price')
 
                                     @include ('admin::catalog.products.accordians.customer-group-price')
 
@@ -203,7 +203,7 @@
             $('#channel-switcher, #locale-switcher').on('change', function (e) {
                 $('#channel-switcher').val()
 
-                if (event.target.id == 'channel-switcher') {
+                if (event.target.id === 'channel-switcher') {
                     let locale = "{{ app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales->first()->code }}";
 
                     $('#locale-switcher').val(locale);

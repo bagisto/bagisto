@@ -2,7 +2,7 @@
 
     <?php $selectedOption = old($attribute->code) ?: $product[$attribute->code] ?>
 
-    @if ($attribute->code != 'tax_category_id')
+    @if ($attribute->code !== 'tax_category_id')
 
         @foreach ($attribute->options()->orderBy('sort_order')->get() as $option)
             <option value="{{ $option->id }}" {{ $option->id == $selectedOption ? 'selected' : ''}}>

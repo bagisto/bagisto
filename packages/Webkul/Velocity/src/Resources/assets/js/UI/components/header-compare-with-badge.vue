@@ -6,7 +6,7 @@
             <span class="badge" v-text="compareCount"></span>
         </div>
 
-        <span v-text="__('customer.compare.text')" v-if="isText == 'true'"></span>
+        <span v-text="__('customer.compare.text')" v-if="isText === 'true'"></span>
     </a>
 </template>
 

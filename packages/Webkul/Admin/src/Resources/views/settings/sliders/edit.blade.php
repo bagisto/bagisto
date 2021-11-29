@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content">
-        @php $locale = core()->getRequestedLocaleCode(); @endphp
+        @php $locale = core()->getRequestedLocaleCode() @endphp
 
         <form method="POST" action="{{ route('admin.sliders.update', $slider->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
@@ -91,7 +91,7 @@
 
                         <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                             @foreach ($errors->get('image.*') as $key => $message)
-                                @php echo str_replace($key, 'Image', $message[0]); @endphp
+                                @php echo str_replace($key, 'Image', $message[0]) @endphp
                             @endforeach
                         </span>
                     </div>

@@ -54,7 +54,7 @@
                                 </div>
                                 <span class="card-total-price fw6">
                                     {{
-                                        isTaxInclusive == '1'
+                                        isTaxInclusive === '1'
                                             ? item.base_total_with_tax
                                             : item.base_total
                                     }}
@@ -72,7 +72,7 @@
 
                 <h5 class="col-6 text-right fw6 no-padding">
                     {{
-                        isTaxInclusive == '1'
+                        isTaxInclusive === '1'
                             ? cartInformation.base_grand_total
                             : cartInformation.base_sub_total
                     }}

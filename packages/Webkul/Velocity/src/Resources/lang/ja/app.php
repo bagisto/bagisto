@@ -190,7 +190,6 @@ return [
     ],
 
     'checkout'    => [
-        'qty'       => '数量',
         'checkout'  => 'チェックアウト',
         'cart'      => [
             'view-cart'     => 'かごの中身を見る',

@@ -76,10 +76,10 @@
                 if(! this.value)
                     return [];
 
-                if(this.inputType == 'radio')
+                if(this.inputType === 'radio')
                     return [this.value];
 
-                return (typeof this.value == 'string') ? JSON.parse(this.value) : this.value;
+                return (typeof this.value === 'string') ? JSON.parse(this.value) : this.value;
             }
         },
 
@@ -88,7 +88,7 @@
             generateChildren () {
                 let childElements = [];
 
-                let items = (typeof this.items == 'string') ? JSON.parse(this.items) : this.items;
+                let items = (typeof this.items === 'string') ? JSON.parse(this.items) : this.items;
 
                 for(let key in items) {
                     childElements.push(this.generateTreeItem(items[key]));

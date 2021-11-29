@@ -222,7 +222,7 @@
                                             </span>
                                         </div>
 
-                                        @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+                                        @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method) @endphp
 
                                         @if (! empty($additionalDetails))
                                             <div class="row">
@@ -311,7 +311,7 @@
                                                             <div class="item-options">
 
                                                                 @foreach ($item->additional['attributes'] as $attribute)
-                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br/>
                                                                 @endforeach
 
                                                             </div>

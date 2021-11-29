@@ -164,7 +164,6 @@ return [
 
     'header' => [
         'cart' => 'Cart',
-        'cart' => 'Cart',
         'guest' => 'زائر',
         'logout' => 'تسجيل خروج',
         'title' => 'الحساب',
@@ -188,7 +187,6 @@ return [
     ],
 
     'checkout' => [
-        'qty' => 'كمية',
         'checkout' => 'الدفع',
         'cart' => [
             'view-cart' => 'عرض السلة',

@@ -24,7 +24,7 @@
         {!! view_render_event('bagisto.admin.layout.head') !!}
     </head>
 
-    <body @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif style="scroll-behavior: smooth;">
+    <body @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction === 'rtl') class="rtl" @endif style="scroll-behavior: smooth;">
 
         {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
@@ -114,19 +114,19 @@
 
                 if (menubarHeight > windowHeight) {
                     document.addEventListener("keydown", function(event) {
-                        if ((event.keyCode == 38) && count <= 0) {
+                        if ((event.key === 'ArrowUp') && count <= 0) {
                             count = count + moveDown;
 
                             $('.navbar-left').css("top", count + "px");
-                        } else if ((event.keyCode == 40) && count >= -differenceInHeight) {
+                        } else if ((event.key === 'ArrowDown') && count >= -differenceInHeight) {
                             count = count + moveUp;
 
                             $('.navbar-left').css("top", count + "px");
-                        } else if ((event.keyCode == 33) && countKeyUp <= 0) {
+                        } else if ((event.key === 'PageUp') && countKeyUp <= 0) {
                             countKeyUp = countKeyUp + pageDown;
 
                             $('.navbar-left').css("top", countKeyUp + "px");
-                        } else if ((event.keyCode == 34) && countKeyUp >= -differenceInHeight) {
+                        } else if ((event.key === 'PageDown') && countKeyUp >= -differenceInHeight) {
                             countKeyUp = countKeyUp + pageUp;
 
                             $('.navbar-left').css("top", countKeyUp + "px");

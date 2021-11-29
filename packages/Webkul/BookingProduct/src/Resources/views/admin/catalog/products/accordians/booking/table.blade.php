@@ -18,7 +18,7 @@
                 <span class="control-error" v-if="errors.has('booking[price_type]')">@{{ errors.first('booking[price_type]') }}</span>
             </div>
 
-            <div v-if="table_booking.price_type == 'table'" class="control-group" :class="[errors.has('booking[guest_limit]') ? 'has-error' : '']">
+            <div v-if="table_booking.price_type === 'table'" class="control-group" :class="[errors.has('booking[guest_limit]') ? 'has-error' : '']">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.guest-limit') }}</label>
 
                 <input type="text" v-validate="'required|min_value:1'" name="booking[guest_limit]" v-model="table_booking.guest_limit" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.guest-limit') }}&quot;"/>

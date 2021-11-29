@@ -47,7 +47,7 @@
     }
 
     .shimmer-card {
-        margin: 0px 10px 50px 10px;
+        margin: 0 10px 50px 10px;
         padding: 30px 40px;
         border: 2px solid #fff;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -65,7 +65,7 @@
     }
 
     .shimmer-wrapper {
-        width: 0px;
+        width: 0;
         animation: fullView 0.5s forwards linear;
     }
 

@@ -93,13 +93,13 @@
                             <div class="control-group" :class="[errors.has('display_mode') ? 'has-error' : '']">
                                 <label for="display_mode" class="required">{{ __('admin::app.catalog.categories.display-mode') }}</label>
                                 <select class="control" v-validate="'required'" id="display_mode" name="display_mode" data-vv-as="&quot;{{ __('admin::app.catalog.categories.display-mode') }}&quot;">
-                                    <option value="products_and_description" {{ $category->display_mode == 'products_and_description' ? 'selected' : '' }}>
+                                    <option value="products_and_description" {{ $category->display_mode === 'products_and_description' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.categories.products-and-description') }}
                                     </option>
-                                    <option value="products_only" {{ $category->display_mode == 'products_only' ? 'selected' : '' }}>
+                                    <option value="products_only" {{ $category->display_mode === 'products_only' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.categories.products-only') }}
                                     </option>
-                                    <option value="description_only" {{ $category->display_mode == 'description_only' ? 'selected' : '' }}>
+                                    <option value="description_only" {{ $category->display_mode === 'description_only' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.categories.description-only') }}
                                     </option>
                                 </select>
@@ -115,7 +115,7 @@
 
                                 <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                                     @foreach ($errors->get('image.*') as $key => $message)
-                                        @php echo str_replace($key, 'Image', $message[0]); @endphp
+                                        @php echo str_replace($key, 'Image', $message[0]) @endphp
                                     @endforeach
                                 </span>
                             </div>
@@ -154,7 +154,7 @@
 
                                     @foreach ($attributes as $attribute)
                                         <option value="{{ $attribute->id }}" {{ in_array($attribute->id, $selectedaAtributes) ? 'selected' : ''}}>
-                                            {{ $attribute->name ? $attribute->name : $attribute->admin_name }}
+                                            {{ $attribute->name ?: $attribute->admin_name }}
                                         </option>
                                     @endforeach
 
@@ -242,14 +242,14 @@
 
                 $(document).ready(function () {
                     $('#display_mode').on('change', function (e) {
-                        if ($('#display_mode').val() != 'products_only') {
+                        if ($('#display_mode').val() !== 'products_only') {
                             self.isRequired = true;
                         } else {
                             self.isRequired = false;
                         }
                     })
 
-                    if ($('#display_mode').val() != 'products_only') {
+                    if ($('#display_mode').val() !== 'products_only') {
                         self.isRequired = true;
                     } else {
                         self.isRequired = false;

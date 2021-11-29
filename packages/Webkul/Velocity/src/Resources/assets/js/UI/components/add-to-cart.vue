@@ -4,7 +4,7 @@
         <!-- for move to cart from wishlist -->
         <a
             :href="wishlistMoveRoute"
-            :disabled="isButtonEnable == 'false' || isButtonEnable == false"
+            :disabled="isButtonEnable === 'false' || isButtonEnable === false"
             :class="`btn btn-add-to-cart ${addClassToBtn}`"
             v-if="moveToCart"
             >
@@ -17,7 +17,7 @@
         <!-- for add to cart -->
         <button
             type="submit"
-            :disabled="isButtonEnable == 'false' || isButtonEnable == false"
+            :disabled="isButtonEnable === 'false' || isButtonEnable == false"
             :class="`btn btn-add-to-cart ${addClassToBtn}`"
             v-else
             >
@@ -66,12 +66,12 @@
                 .then(response => {
                     this.isButtonEnable = true;
 
-                    if (response.data.status == 'success') {
+                    if (response.data.status === 'success') {
                         this.$root.miniCartKey++;
 
                         window.showAlert(`alert-success`, this.__('shop.general.alert.success'), response.data.message);
 
-                        if (this.reloadPage == "1") {
+                        if (this.reloadPage === "1") {
                             window.location.reload();
                         }
                     } else {

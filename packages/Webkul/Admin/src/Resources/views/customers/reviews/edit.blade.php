@@ -51,15 +51,15 @@
                             <div class="control-group">
                                 <label for="name" class="required">{{ __('admin::app.customers.reviews.status') }}</label>
                                 <select  class="control" name="status">
-                                    <option value="approved" {{ $review->status == "approved" ? 'selected' : '' }}>
+                                    <option value="approved" {{ $review->status === "approved" ? 'selected' : '' }}>
                                         {{ __('admin::app.customers.reviews.approved') }}
                                     </option>
 
-                                    <option value="disapproved" {{ $review->status == "disapproved" ? 'selected' : ''}}>
+                                    <option value="disapproved" {{ $review->status === "disapproved" ? 'selected' : ''}}>
                                         {{ __('admin::app.customers.reviews.disapproved') }}
                                     </option>
 
-                                    <option value="pending" {{ $review->status == "pending" ? 'selected' : ''}}>
+                                    <option value="pending" {{ $review->status === "pending" ? 'selected' : ''}}>
                                         {{ __('admin::app.customers.reviews.pending') }}
                                     </option>
                                 </select>

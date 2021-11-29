@@ -68,7 +68,7 @@
     <script>
         $(document).ready(function () {
             $('#permission_type').on('change', function(e) {
-                if ($(e.target).val() == 'custom') {
+                if ($(e.target).val() === 'custom') {
                     $('.tree-container').removeClass('hide')
                 } else {
                     $('.tree-container').addClass('hide')

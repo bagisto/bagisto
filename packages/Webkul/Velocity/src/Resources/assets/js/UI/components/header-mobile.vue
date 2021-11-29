@@ -93,7 +93,7 @@
                                             `${$root.baseUrl}/themes/velocity/assets/images/flags/en.png`
                                         "
                                         alt=""
-                                        v-else-if="locale.code == 'en'"
+                                        v-else-if="locale.code === 'en'"
                                     />
                                 </div>
 
@@ -240,7 +240,7 @@
                                         alt=""
                                         width="20"
                                         height="20"
-                                        v-if="locale.code == 'en'"
+                                        v-if="locale.code === 'en'"
                                     />
 
                                     <img
@@ -408,7 +408,7 @@ export default {
         },
 
         toggleSubcategories: function(index, event) {
-            if (index == 'root') {
+            if (index === 'root') {
                 this.rootCategories = true;
                 this.subCategory = false;
             } else {
@@ -427,7 +427,7 @@ export default {
         },
 
         updateHeaderItemsCount: function() {
-            if (this.isCustomer != 'true') {
+            if (this.isCustomer !== 'true') {
                 let comparedItems = this.getStorageValue('compared_product');
 
                 if (comparedItems) {

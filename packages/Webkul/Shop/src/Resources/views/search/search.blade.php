@@ -77,7 +77,7 @@
             },
 
             created: function() {
-                if (localStorage.searched_terms && localStorage.searched_terms != '') {
+                if (localStorage.searched_terms && localStorage.searched_terms !== '') {
                     this.searched_terms = localStorage.searched_terms.split('_');
                 }
             }

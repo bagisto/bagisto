@@ -1,7 +1,7 @@
 @php
     $isRendered = false;
     $advertisementThree = null;
-    $isLazyLoad = ! isset($lazyload) ? true : ( $lazyload ? true : false );
+    $isLazyLoad = ! isset($lazyload) ? true : ( $lazyload ? true : false )
 @endphp
 
 @if ($velocityMetaData && $velocityMetaData->advertisement)

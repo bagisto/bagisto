@@ -98,7 +98,7 @@ class Tax
 
             function __construct()
             {
-                $this->country = core()->getConfigData('taxes.catalogue.default-location-calculation.country') != ''
+                $this->country = core()->getConfigData('taxes.catalogue.default-location-calculation.country') !== ''
                     ? core()->getConfigData('taxes.catalogue.default-location-calculation.country')
                     : strtoupper(config('app.default_country'));
                 $this->state = core()->getConfigData('taxes.catalogue.default-location-calculation.state');
@@ -126,7 +126,7 @@ class Tax
             foreach ($taxRates as $rate) {
                 $haveTaxRate = false;
 
-                if ($rate->state != '' && $rate->state != $address->state) {
+                if ($rate->state !== '' && $rate->state != $address->state) {
                     continue;
                 }
 

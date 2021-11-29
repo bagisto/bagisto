@@ -120,7 +120,7 @@ class Downloadable extends AbstractType
         $product = parent::update($data, $id, $attribute);
         $route = request()->route() ? request()->route()->getName() : '';
 
-        if ($route != 'admin.catalog.products.massupdate') {
+        if ($route !== 'admin.catalog.products.massupdate') {
             $this->productDownloadableLinkRepository->saveLinks($data, $product);
 
             $this->productDownloadableSampleRepository->saveSamples($data, $product);

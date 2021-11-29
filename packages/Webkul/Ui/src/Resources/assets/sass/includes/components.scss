@@ -92,9 +92,7 @@
 
     .icon-wrapper {
         border: 2px solid $control-border-color;
-        border-radius: 3px;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;
+        border-radius: 0 3px 3px 0;
         height: 36px;
         width: 36px;
         padding: 3px;
@@ -120,7 +118,7 @@
     border: 2px solid $control-border-color;
     border-radius: 3px;
     color: #8E8E8E;
-    padding: 0px 5px 0px 5px;
+    padding: 0 5px 0 5px;
 
     .arrow-icon-down {
         float: right;
@@ -182,17 +180,11 @@
             padding-right: 10px;
             border-left: 0;
             border-right: 2px solid #C7C7C7;
-            border-top-right-radius: 3px;
-            border-bottom-right-radius: 3px;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
+            border-radius: 0 3px 3px 0;
         }
         .icon-wrapper {
             float: left;
-            border-top-right-radius: 0px;
-            border-bottom-right-radius: 0px;
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
+            border-radius: 3px 0 0 3px;
         }
     }
 

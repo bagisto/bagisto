@@ -106,7 +106,7 @@
                 },
 
                 redirectIfCartPage: function() {
-                    if (this.route_name != 'shop.checkout.cart.index')
+                    if (this.route_name !== 'shop.checkout.cart.index')
                         return;
 
                     setTimeout(function() {

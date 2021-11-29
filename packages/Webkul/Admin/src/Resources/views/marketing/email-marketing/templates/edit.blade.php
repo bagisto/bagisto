@@ -42,13 +42,13 @@
                                 <label for="status" class="required">{{ __('admin::app.marketing.templates.status') }}</label>
                                 <?php $selectedOption = old('status') ?: $template->status ?>
                                 <select class="control" v-validate="'required'" id="status" name="status" data-vv-as="&quot;{{ __('admin::app.marketing.templates.display-mode') }}&quot;">
-                                    <option value="active" {{ $selectedOption == 'active' ? 'selected' : '' }}>
+                                    <option value="active" {{ $selectedOption === 'active' ? 'selected' : '' }}>
                                         {{ __('admin::app.marketing.templates.active') }}
                                     </option>
-                                    <option value="inactive" {{ $selectedOption == 'inactive' ? 'selected' : '' }}>
+                                    <option value="inactive" {{ $selectedOption === 'inactive' ? 'selected' : '' }}>
                                         {{ __('admin::app.marketing.templates.inactive') }}
                                     </option>
-                                    <option value="draft" {{ $selectedOption == 'draft' ? 'selected' : '' }}>
+                                    <option value="draft" {{ $selectedOption === 'draft' ? 'selected' : '' }}>
                                         {{ __('admin::app.marketing.templates.draft') }}
                                     </option>
                                 </select>

@@ -8,14 +8,14 @@
     $field['options'] = $coreConfigRepository->getDependentFieldOptions($field, $value);
 
     $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? '';
-    $dependSelectedOption = core()->getConfigData($dependNameKey, $channel, $locale) ?? '';
+    $dependSelectedOption = core()->getConfigData($dependNameKey, $channel, $locale) ?? ''
 @endphp
 
 @if (strpos($field['validation'], 'required_if') !== false)
     <required-if
         :name = "'{{ $name }}'"
         :label = "'{{ trans($field['title']) }}'"
-        :info = "'{{ trans(isset($field['info']) ? $field['info'] : '') }}'"
+        :info = "'{{ trans($field['info'] ?? '') }}'"
         :options = '@json($field['options'])'
         :result = "'{{ $selectedOption }}'"
         :validations = "'{{ $validations }}'"
@@ -89,9 +89,9 @@
                     let dependentElement = document.getElementById(self.depend);
                     let dependValue = self.value;
 
-                    if (dependValue == 'true') {
+                    if (dependValue === 'true') {
                         dependValue = 1;
-                    } else if (dependValue == 'false') {
+                    } else if (dependValue === 'false') {
                         dependValue = 0;
                     }
 

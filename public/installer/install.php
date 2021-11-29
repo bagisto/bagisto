@@ -50,7 +50,7 @@
             $port = $databaseData['DB_PORT'];
         }
 
-        if (isset($connection) && $connection == 'mysql') {
+        if (isset($connection) && $connection === 'mysql') {
             @$conn = new mysqli($servername, $username, $password, $dbname, (int)$port);
 
             if (! $conn->connect_error) {

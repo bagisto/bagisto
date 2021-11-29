@@ -11,7 +11,7 @@
 @endsection
 
 @push('css')
-    <style type="text/css">
+    <style>
         .quantity {
             width: unset;
             float: right;
@@ -122,13 +122,13 @@
                                                 @php
                                                     $moveToWishlist = trans('shop::app.checkout.cart.move-to-wishlist');
 
-                                                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                                                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') === "1";
                                                 @endphp
 
                                                 <div class="no-padding col-12 cursor-pointer fs16">
                                                     @auth('customer')
                                                         @if ($showWishlist)
-                                                            @if ($item->parent_id != 'null' ||$item->parent_id != null)
+                                                            @if ($item->parent_id !== 'null' && $item->parent_id !== null)
                                                                 <div @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')" class="alert-wishlist">
                                                                     @include('shop::products.wishlist', [
                                                                         'route' => route('shop.movetowishlist', $item->id),
@@ -209,7 +209,7 @@
                                                     <div class="row col-12 no-padding no-margin">
 
                                                         @foreach ($item->additional['attributes'] as $attribute)
-                                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br/>
                                                         @endforeach
 
                                                     </div>

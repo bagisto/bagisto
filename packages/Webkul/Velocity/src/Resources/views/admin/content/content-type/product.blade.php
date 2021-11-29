@@ -21,7 +21,7 @@
                 <span class="control-error" v-if="errors.has('catalog_type')" v-text="errors.first('catalog_type')"></span>
             </div>
 
-            <div v-if="catalog_type == 'custom'">
+            <div v-if="catalog_type === 'custom'">
                 <field-autocomplete
                     :fieldLabel="'{{ __('admin::app.catalog.attributes.options') }}'"
                     :fieldPlaceholder="'{{ __('velocity::app.admin.contents.search-hint') }}'"
@@ -56,9 +56,9 @@
                     </ul>
                 </div>
 
-                <span class="filter-tag" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start" v-if="saved_results.length">
+                <span class="filter-tag" style="text-transform: capitalize; margin-top: 10px; margin-right: 0; justify-content: flex-start" v-if="saved_results.length">
 
-                    <span class="wrapper" style="margin-left: 0px; margin-right: 10px;" v-for='(savedItem, index) in saved_results'>
+                    <span class="wrapper" style="margin-left: 0; margin-right: 10px;" v-for='(savedItem, index) in saved_results'>
                         <input type="hidden" name="products[]" :value="savedItem.id"/>
 
                         @{{ savedItem.name }}

@@ -100,13 +100,13 @@ class ContentDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => false,
             'closure'    => function ($value) {
-                if ($value->content_type == 'category') {
+                if ($value->content_type === 'category') {
                     return 'Category Slug';
-                } elseif ($value->content_type == 'link') {
+                } elseif ($value->content_type === 'link') {
                     return 'Link';
-                } elseif ($value->content_type == 'product') {
+                } elseif ($value->content_type === 'product') {
                     return 'Product';
-                } elseif ($value->content_type == 'static') {
+                } elseif ($value->content_type === 'static') {
                     return 'Static';
                 }
             },

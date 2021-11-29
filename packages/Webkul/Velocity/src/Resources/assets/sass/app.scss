@@ -63,7 +63,7 @@ input[type='checkbox'] {
 
 .form-control {
     &:focus {
-        @include box-shadow(0px 0px 8px 1px rgba(105, 221, 157, 0.25));
+        @include box-shadow(0 0 8px 1px rgba(105, 221, 157, 0.25));
     }
 }
 
@@ -103,12 +103,12 @@ body {
 
     &:focus {
         outline: none;
-        outline-offset: 0px;
+        outline-offset: 0;
     }
 
     &:active:hover {
         outline: none;
-        outline-offset: 0px;
+        outline-offset: 0;
     }
 }
 
@@ -136,7 +136,7 @@ body {
         font-size: 14px;
         letter-spacing: 0;
         text-align: center;
-        @include border-radius(0px);
+        @include border-radius(0);
         text-decoration: none;
 
         &:hover {
@@ -145,12 +145,12 @@ body {
 
         &:focus {
             outline: none;
-            outline-offset: 0px;
+            outline-offset: 0;
         }
 
         &:active:hover {
             outline: none;
-            outline-offset: 0px;
+            outline-offset: 0;
         }
     }
 
@@ -191,7 +191,7 @@ body {
     .customer-name {
         font-size: 16px;
         font-weight: 600;
-        padding: 0px 10px;
+        padding: 0 10px;
         color: $font-color;
     }
 
@@ -199,8 +199,8 @@ body {
         font-size: 14px;
 
         .select-icon {
-            top: 0px;
-            left: 0px;
+            top: 0;
+            left: 0;
             padding-left: 5px;
         }
 
@@ -298,7 +298,7 @@ body {
 
 .dropdown-menu {
     border-top: 3px solid $border-primary;
-    border-radius: 0px;
+    border-radius: 0;
     background: $white-color;
     @include box-shadow(11px 10px 17px 0 rgba(0, 0, 0, 0.21));
 
@@ -329,7 +329,7 @@ body {
 }
 
 .no-padding {
-    padding: 0px !important;
+    padding: 0 !important;
 }
 
 .btn-normal {
@@ -337,7 +337,7 @@ body {
     border-color: $border-primary;
     color: $white-color;
     font-weight: 600;
-    @include border-radius(0px);
+    @include border-radius(0);
 
     &:hover {
         background: $white-color;
@@ -418,7 +418,7 @@ header {
 
     #search-form {
         height: 40px;
-        margin: 5px 0px;
+        margin: 5px 0;
         background: $white-color;
 
         * {
@@ -445,7 +445,7 @@ header {
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
-                border-radius: 2px 0px 0px 2px;
+                border-radius: 2px 0 0 2px;
                 border: 1px solid $theme-color;
                 border-right: 0;
                 font-family: 'Source Sans Pro', sans-serif;
@@ -461,7 +461,7 @@ header {
         }
 
         input {
-            @include border-radius(0px);
+            @include border-radius(0);
 
             height: 100%;
             font-size: 14px;
@@ -479,18 +479,18 @@ header {
 
             &:focus {
                 outline: none;
-                outline-offset: 0px;
+                outline-offset: 0;
             }
 
             &:active:hover {
                 outline: none;
-                outline-offset: 0px;
+                outline-offset: 0;
             }
         }
 
         #header-search-icon {
             min-width: 40px;
-            border-radius: 0px 2px 2px 0px;
+            border-radius: 0 2px 2px 0;
             background-color: $theme-color;
 
             i {
@@ -518,7 +518,7 @@ header {
 
                 i {
                     + span.cart-text {
-                        padding-left: 0px;
+                        padding-left: 0;
                         vertical-align: text-bottom;
                     }
                 }
@@ -602,8 +602,8 @@ header {
                     .thumbnail {
                         width: 75px;
                         height: 75px;
-                        margin: 0px;
-                        border-radius: 0px;
+                        margin: 0;
+                        border-radius: 0;
                         border: 1px solid $border-common;
                     }
                 }
@@ -616,7 +616,7 @@ header {
                 }
 
                 .item-details {
-                    padding: 0px 10px;
+                    padding: 0 10px;
                     height: auto;
 
                     .item-options {
@@ -627,7 +627,7 @@ header {
                     }
 
                     .item-qty-price {
-                        padding: 5px 0px;
+                        padding: 5px 0;
                         display: inline-block;
 
                         .item-qty {
@@ -670,7 +670,7 @@ header {
         }
 
         .dropdown-footer {
-            padding: 10px 10px 0px 10px;
+            padding: 10px 10px 0 10px;
             border-top: 1px solid $border-common;
             font-weight: 700;
             font-size: 16px;
@@ -699,7 +699,7 @@ header {
     background-color: #ffffff;
 
     .navbar {
-        margin: 0px;
+        margin: 0;
         font-family: SourceSansPro-Semibold;
         font-size: 16px;
         color: rgba(0, 0, 0, 0.83);
@@ -743,13 +743,12 @@ header {
                 position: relative;
 
                 a {
-                    padding: 10px 0px;
+                    padding: 10px 0;
                     position: relative;
                     font-weight: 600;
                     font-size: 14px;
                     color: rgba(0, 0, 0, 0.83);
                     letter-spacing: 0;
-                    font-weight: 600;
                     display: block;
 
                     .material-icons {
@@ -880,7 +879,7 @@ header {
 }
 
 .product-policy {
-    padding: 30px 0px 50px 0px;
+    padding: 30px 0 50px 0;
     border: 1px solid maroon;
     text-align: center;
 }
@@ -902,7 +901,7 @@ header {
     .add-to-cart-button
     .btn-primary {
     border: #26a37c !important;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .popular-products
@@ -935,9 +934,9 @@ header {
 i.within-circle {
     display: inline-block;
     border-radius: 50%;
-    box-shadow: 0px 0px 2px #888;
+    box-shadow: 0 0 2px #888;
     padding: 12px;
-    margin: 15px 0px 15px 0px;
+    margin: 15px 0 15px 0;
     width: 50px;
     height: 50px;
 }
@@ -1004,7 +1003,7 @@ i.within-circle {
     background-color: #26a37c;
     border-color: #26a37c;
     height: 36px;
-    border-radius: 0px !important;
+    border-radius: 0 !important;
 }
 
 .login-text {
@@ -1030,13 +1029,10 @@ i.within-circle {
         width: 150px;
         height: 150px;
         margin-right: 20px;
-        background: #f8f9fa;
         @include border-radius(3px);
         display: inline-block;
         position: relative;
-        background-image: url('../images/placeholder-icon.svg');
-        background-repeat: no-repeat;
-        background-position: center;
+        background: #F8F9FA url('../images/placeholder-icon.svg') no-repeat center;
         margin-bottom: 20px;
         float: left;
         background-size: 75%;
@@ -1087,12 +1083,11 @@ i.within-circle {
 .category-page-wrapper .category-container .filters-container {
     left: 0;
     top: 30px;
-    padding: 0;
     width: 96%;
     z-index: 9;
     position: unset;
     margin-left: 7px;
-    padding-bottom: 7px;
+    padding: 0 0 7px;
     background-color: #fff;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -1116,8 +1111,8 @@ i.within-circle {
     }
 
     .nav-container {
-        top: 0px;
-        left: 0px;
+        top: 0;
+        left: 0;
         width: 75%;
         position: fixed !important;
         opacity: 1;

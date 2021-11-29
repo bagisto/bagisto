@@ -62,14 +62,14 @@
                                 {{ __('velocity::app.admin.contents.page.title') }}
                                 <span class="locale">[{{ $locale }}]</span>
                             </label>
-                            <input type="text" v-validate="'required|max:100'" class="control" id="title" name="{{$locale}}[title]" value="{{ old($locale)['title'] ?? isset($translation->title) ? $translation->title : '' }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
+                            <input type="text" v-validate="'required|max:100'" class="control" id="title" name="{{$locale}}[title]" value="{{ old($locale)['title'] ?? $translation->title ?? '' }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
 
                             <span class="control-error" v-if="errors.has('{{$locale}}[title]')" v-text="errors.first('{!!$locale!!}[title]')"></span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('position') ? 'has-error' : '']">
                             <label for="position" class="required">
-                                {{ __('velocity::app.admin.contents.page.position') }}</span>
+                                {{ __('velocity::app.admin.contents.page.position') }}
                             </label>
                             <input type="text" v-validate="'required|numeric|max:2'" class="control" id="position" name="position" value="{{ old('position') ?? $content->position }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.position') }}&quot;"/>
                             <span class="control-error" v-if="errors.has('position')" v-text="errors.first('position')"></span>
@@ -205,7 +205,7 @@
                 </span>
             </div>
 
-            <div v-if="content_type == 'link'">
+            <div v-if="content_type === 'link'">
                 {!! view_render_event('bagisto.admin.content.edit_form_accordian.content.link.before', ['content' => $content]) !!}
 
                 <div :class="`control-group ${errors.has('{{$locale}}[page_link]') ? 'has-error' : ''}`">
@@ -251,11 +251,11 @@
                 {!! view_render_event('bagisto.admin.content.edit_form_accordian.content.link.after', ['content' => $content]) !!}
             </div>
 
-            <div v-else-if="content_type == 'product'">
+            <div v-else-if="content_type === 'product'">
                 @include ('velocity::admin.content.content-type.edit-product')
             </div>
 
-            <div v-else-if="content_type == 'static'">
+            <div v-else-if="content_type === 'static'">
                 {!! view_render_event('bagisto.admin.content.edit_form_accordian.content.static.before', ['content' => $content]) !!}
 
                 <div :class="`control-group ${errors.has('{{$locale}}[description]') ? 'has-error' : ''}`">
@@ -280,7 +280,7 @@
                 {!! view_render_event('bagisto.admin.content.edit_form_accordian.content.static.after', ['content' => $content]) !!}
             </div>
 
-            <div v-else-if="content_type == 'category'">
+            <div v-else-if="content_type === 'category'">
                 @include ('velocity::admin.content.content-type.category')
             </div>
         </div>
@@ -298,7 +298,7 @@
             },
 
             created() {
-                if (this.content_type == 'static') {
+                if (this.content_type === 'static') {
                     $(document).ready(function () {
                         tinymce.init({
                             selector: 'textarea#description',
@@ -317,7 +317,7 @@
                     var thisthis = this;
                     thisthis.content_type = event.target.value;
 
-                    if ( thisthis.content_type == 'static') {
+                    if ( thisthis.content_type === 'static') {
                         $(document).ready(function () {
                             tinymce.init({
                                 selector: 'textarea#description',

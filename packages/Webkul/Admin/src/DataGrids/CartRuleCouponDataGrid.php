@@ -15,7 +15,7 @@ class CartRuleCouponDataGrid extends DataGrid
     {
         $route = request()->route() ? request()->route()->getName() : "" ;
 
-        $cartRuleId = $route == 'admin.cart-rules.edit' ? collect(request()->segments())->last() : last(explode("/", url()->previous()));
+        $cartRuleId = $route === 'admin.cart-rules.edit' ? collect(request()->segments())->last() : last(explode("/", url()->previous()));
 
         $queryBuilder = DB::table('cart_rule_coupons')
                 ->addSelect('id', 'code', 'created_at', 'expired_at', 'times_used')

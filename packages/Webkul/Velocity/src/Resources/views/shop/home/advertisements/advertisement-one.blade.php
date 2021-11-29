@@ -1,6 +1,6 @@
 @php
     $isRendered = false;
-    $advertisementOne = null;
+    $advertisementOne = null
 @endphp
 
 @if ($velocityMetaData && $velocityMetaData->advertisement)

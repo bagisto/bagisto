@@ -247,9 +247,9 @@ h5 {
     }
 
     &:disabled,
-    &[disabled="disabled"],
-    &[disabled="disabled"]:hover,
-    &[disabled="disabled"]:active {
+    &[disabled='disabled'],
+    &[disabled='disabled']:hover,
+    &[disabled='disabled']:active {
         cursor: not-allowed;
         background: #b1b1ae;
         box-shadow: none;
@@ -307,21 +307,21 @@ h5 {
 
     &.bottom-left {
         top: 42px;
-        left: 0px;
+        left: 0;
     }
 
     &.bottom-right {
         top: 42px;
-        right: 0px;
+        right: 0;
     }
 
     &.top-left {
-        bottom: 0px;
+        bottom: 0;
         left: 42px;
     }
 
     &.top-right {
-        bottom: 0px;
+        bottom: 0;
         right: 42px;
     }
 
@@ -338,7 +338,7 @@ h5 {
             display: inline-block;
             vertical-align: middle;
             transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 0px 10px;
+            padding: 0 10px;
             font-size: 15px;
 
             &:focus {
@@ -361,12 +361,12 @@ h5 {
         }
 
         ul {
-            margin: 0px;
+            margin: 0;
             list-style-type: none;
-            padding: 0px;
+            padding: 0;
 
             li {
-                padding: 5px 0px;
+                padding: 5px 0;
 
                 a:link,
                 a:active,
@@ -534,17 +534,16 @@ h5 {
     }
 
     .checkbox-view {
-        background-image: url("../images/Checkbox.svg");
+        background-image: url('../images/Checkbox.svg');
         height: 24px;
         width: 24px;
-        margin: 0;
         display: inline-block !important;
         vertical-align: middle;
-        margin-right: 5px;
+        margin: 0 5px 0 0;
     }
 
     input:checked + .checkbox-view {
-        background-image: url("../images/Checkbox-Checked.svg");
+        background-image: url('../images/Checkbox-Checked.svg');
     }
 
     input:disabled + .checkbox-view {
@@ -556,7 +555,7 @@ h5 {
 .radio {
     position: relative;
     display: block;
-    margin: 10px 5px 5px 0px;
+    margin: 10px 5px 5px 0;
 
     input {
         left: -4px;
@@ -567,14 +566,13 @@ h5 {
     }
 
     .radio-view {
-        background-image: url("../images/controls.svg");
-        background-position: -21px 0px;
+        background-image: url('../images/controls.svg');
+        background-position: -21px 0;
         height: 20px;
         width: 20px;
-        margin: 0;
         display: inline-block !important;
         vertical-align: middle;
-        margin-right: 5px;
+        margin: 0 5px 0 0;
     }
 
     input:checked + .radio-view {
@@ -610,7 +608,7 @@ h5 {
         color: $font-color;
 
         &.required::after {
-            content: "*";
+            content: '*';
             color: $danger-color;
             font-weight: 700;
             display: inline-block;
@@ -631,7 +629,7 @@ h5 {
         display: inline-block;
         vertical-align: middle;
         transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        padding: 0px 10px;
+        padding: 0 10px;
         font-size: 15px;
         margin-top: 10px;
         margin-bottom: 5px;
@@ -640,7 +638,7 @@ h5 {
             border-color: $brand-color;
         }
 
-        &[disabled="disabled"] {
+        &[disabled='disabled'] {
             border-color: #d3d3d3;
             background-color: #d3d3d3;
             cursor: not-allowed;
@@ -657,7 +655,7 @@ h5 {
         }
 
         &::after {
-            background-image: url("../images/Icon-Calendar.svg");
+            background-image: url('../images/Icon-Calendar.svg');
             width: 24px;
             height: 24px;
             content: '';
@@ -796,7 +794,7 @@ h5 {
 
     .slider:before {
         position: absolute;
-        content: "";
+        content: '';
         height: 26px;
         width: 26px;
         left: 4px;
@@ -849,8 +847,8 @@ h5 {
         @include border-radius(3px);
         display: inline-block;
         @include box-shadow(
-            0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1),
-            0px 2px 6px 0px rgba(0, 0, 0, 0.12)
+            0 4px 15.36px 0.64px rgba(0, 0, 0, 0.1),
+            0 2px 6px 0 rgba(0, 0, 0, 0.12)
         );
         position: relative;
         animation: jelly 0.5s ease-in-out;
@@ -883,8 +881,8 @@ h5 {
 
         p {
             color: $white-color;
-            margin: 0px;
-            padding: 0px;
+            margin: 0;
+            padding: 0;
             font-size: 15px;
         }
     }
@@ -900,7 +898,7 @@ h5 {
             a {
                 padding: 15px 20px;
                 cursor: pointer;
-                margin: 0px 2px;
+                margin: 0 2px;
                 text-align: center;
                 color: $black-color-shade;
                 display: block;
@@ -917,7 +915,7 @@ h5 {
     display: inline-block;
     width: 100%;
 
-    .accordian-header, div[slot*="header"] {
+    .accordian-header, div[slot*='header'] {
         width: 100%;
         display: inline-block;
         font-size: 18px;
@@ -929,7 +927,7 @@ h5 {
         margin-top: -1px;
 
         .expand-icon {
-            background-image: url("../images/Expand-Light.svg");
+            background-image: url('../images/Expand-Light.svg');
             margin-right: 10px;
             margin-top: 3px;
         }
@@ -956,7 +954,7 @@ h5 {
         }
     }
 
-    .accordian-content, div[slot*="body"] {
+    .accordian-content, div[slot*='body'] {
         width: 100%;
         padding: 20px 15px;
         display: none;
@@ -968,7 +966,7 @@ h5 {
     }
 
     &.active > .accordian-header .expand-icon {
-        background-image: url("../images/Expand-Light-On.svg");
+        background-image: url('../images/Expand-Light-On.svg');
     }
 }
 
@@ -1001,7 +999,7 @@ h5 {
             display: inline-block;
             margin-right: 10px;
             cursor: pointer;
-            background-image: url("../images/Expand-Light.svg");
+            background-image: url('../images/Expand-Light.svg');
             width: 18px;
             height: 18px;
             vertical-align: middle;
@@ -1014,7 +1012,7 @@ h5 {
 
         &.active {
             > .expand-icon {
-                background-image: url("../images/Expand-Light-On.svg");
+                background-image: url('../images/Expand-Light-On.svg');
             }
         }
     }
@@ -1046,10 +1044,10 @@ modal {
     display: none;
     overflow-y: auto;
     z-index: 10;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     position: fixed;
     background: $black-color;
     opacity: 0.7;
@@ -1069,8 +1067,8 @@ modal {
     position: fixed;
     z-index: 11;
     @include box-shadow(
-        0px 15px 25px 0px rgba(0, 0, 0, 0.03),
-        0px 20px 45px 5px rgba(0, 0, 0, 0.2)
+        0 15px 25px 0 rgba(0, 0, 0, 0.03),
+        0 20px 45px 5px rgba(0, 0, 0, 0.2)
     );
     animation: fade-in-white 0.3s ease-in-out;
     animation: jelly 0.5s ease-in-out;
@@ -1108,7 +1106,7 @@ modal {
     .modal-container {
         max-width: 80%;
         left: 10%;
-        margin-left: 0px;
+        margin-left: 0;
     }
 }
 
@@ -1186,13 +1184,10 @@ modal {
         width: 200px;
         height: 200px;
         margin-right: 20px;
-        background: #F8F9FA;
         @include border-radius(3px);
         display: inline-block;
         position: relative;
-        background-image: url("../images/placeholder-icon.svg");
-        background-repeat: no-repeat;
-        background-position: center;
+        background: #F8F9FA url('../images/placeholder-icon.svg') no-repeat center;
         margin-bottom: 20px;
         float: left;
 
@@ -1274,7 +1269,7 @@ modal {
         z-index: 1;
     }
 
-    &[x-placement^="top"] {
+    &[x-placement^='top'] {
         margin-bottom: 5px;
 
         .tooltip-arrow {
@@ -1289,7 +1284,7 @@ modal {
         }
     }
 
-    &[x-placement^="bottom"] {
+    &[x-placement^='bottom'] {
         margin-top: 5px;
 
         .tooltip-arrow {
@@ -1304,7 +1299,7 @@ modal {
         }
     }
 
-    &[x-placement^="right"] {
+    &[x-placement^='right'] {
         margin-left: 5px;
 
         .tooltip-arrow {
@@ -1319,7 +1314,7 @@ modal {
         }
     }
 
-    &[x-placement^="left"] {
+    &[x-placement^='left'] {
         margin-right: 5px;
 
         .tooltip-arrow {

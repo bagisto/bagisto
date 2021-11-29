@@ -1,6 +1,6 @@
 @php
     $brandname = app('Webkul\Velocity\Helpers\Helper');
-    $topBrandsCollection = $brandname->getBrandsWithCategories();
+    $topBrandsCollection = $brandname->getBrandsWithCategories()
 @endphp
 
 @if (! empty($topBrandsCollection))

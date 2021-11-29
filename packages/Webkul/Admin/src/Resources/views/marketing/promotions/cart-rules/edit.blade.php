@@ -67,7 +67,7 @@
                                     <label for="channels" class="required">{{ __('admin::app.promotions.cart-rules.channels') }}</label>
 
                                     @php
-                                        $selectedOptionIds = old('channels') ?: $cartRule->channels->pluck('id')->toArray();
+                                        $selectedOptionIds = old('channels') ?: $cartRule->channels->pluck('id')->toArray()
                                     @endphp
 
                                     <select class="control" id="channels" name="channels[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.channels') }}&quot;" multiple="multiple">
@@ -87,7 +87,7 @@
                                     <label for="customer_groups" class="required">{{ __('admin::app.promotions.cart-rules.customer-groups') }}</label>
 
                                     @php
-                                        $selectedOptionIds = old('customer_groups') ?: $cartRule->customer_groups->pluck('id')->toArray();
+                                        $selectedOptionIds = old('customer_groups') ?: $cartRule->customer_groups->pluck('id')->toArray()
                                     @endphp
 
                                     <select class="control" id="customer_groups" name="customer_groups[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.customer-groups') }}&quot;" multiple="multiple">
@@ -216,23 +216,23 @@
                                     <label for="action_type" class="required">{{ __('admin::app.promotions.cart-rules.action-type') }}</label>
 
                                     @php
-                                        $selectedOption = old('action_type') ?: $cartRule->action_type;
+                                        $selectedOption = old('action_type') ?: $cartRule->action_type
                                     @endphp
 
                                     <select class="control" id="action_type" name="action_type" v-validate="'required'" v-model="action_type" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.action-type') }}&quot;">
-                                        <option value="by_percent" {{ $selectedOption == 'by_percent' ? 'selected' : '' }}>
+                                        <option value="by_percent" {{ $selectedOption === 'by_percent' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.percentage-product-price') }}
                                         </option>
 
-                                        <option value="by_fixed" {{ $selectedOption == 'by_fixed' ? 'selected' : '' }}>
+                                        <option value="by_fixed" {{ $selectedOption === 'by_fixed' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.fixed-amount') }}
                                         </option>
 
-                                        <option value="cart_fixed" {{ $selectedOption == 'cart_fixed' ? 'selected' : '' }}>
+                                        <option value="cart_fixed" {{ $selectedOption === 'cart_fixed' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.fixed-amount-whole-cart') }}
                                         </option>
 
-                                        <option value="buy_x_get_y" {{ $selectedOption == 'buy_x_get_y' ? 'selected' : '' }}>
+                                        <option value="buy_x_get_y" {{ $selectedOption === 'buy_x_get_y' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.buy-x-get-y-free') }}
                                         </option>
                                     </select>
@@ -264,10 +264,10 @@
                                     <label for="apply_to_shipping">{{ __('admin::app.promotions.cart-rules.apply-to-shipping') }}</label>
 
                                     @php
-                                        $selectedOption = old('apply_to_shipping') ?: $cartRule->apply_to_shipping;
+                                        $selectedOption = old('apply_to_shipping') ?: $cartRule->apply_to_shipping
                                     @endphp
 
-                                    <select class="control" id="apply_to_shipping" name="apply_to_shipping" :disabled="action_type == 'cart_fixed'">
+                                    <select class="control" id="apply_to_shipping" name="apply_to_shipping" :disabled="action_type === 'cart_fixed'">
                                         <option value="0" {{ ! $selectedOption ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.no') }}
                                         </option>
@@ -282,7 +282,7 @@
                                     <label for="free_shipping">{{ __('admin::app.promotions.cart-rules.free-shipping') }}</label>
 
                                     @php
-                                        $selectedOption = old('free_shipping') ?: $cartRule->free_shipping;
+                                        $selectedOption = old('free_shipping') ?: $cartRule->free_shipping
                                     @endphp
 
                                     <select class="control" id="free_shipping" name="free_shipping">
@@ -300,7 +300,7 @@
                                     <label for="end_other_rules">{{ __('admin::app.promotions.cart-rules.end-other-rules') }}</label>
 
                                     @php
-                                        $selectedOption = old('end_other_rules') ?: $cartRule->end_other_rules;
+                                        $selectedOption = old('end_other_rules') ?: $cartRule->end_other_rules
                                     @endphp
 
                                     <select class="control" id="end_other_rules" name="end_other_rules">
@@ -359,36 +359,36 @@
                 <div v-if="matchedAttribute">
                     <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="matchedAttribute.type">
 
-                    <div v-if="matchedAttribute.key == 'product|children::category_ids' || matchedAttribute.key == 'product|category_ids' || matchedAttribute.key == 'product|parent::category_ids'">
+                    <div v-if="matchedAttribute.key === 'product|children::category_ids' || matchedAttribute.key === 'product|category_ids' || matchedAttribute.key === 'product|parent::category_ids'">
                         <tree-view value-field="id" id-field="id" :name-field="'conditions[' + index + '][value]'" input-type="checkbox" :items='matchedAttribute.options' :value='condition.value' :behavior="'no'" fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
                     </div>
 
                     <div v-else>
-                        <div class="control-group" v-if="matchedAttribute.type == 'text' || matchedAttribute.type == 'price' || matchedAttribute.type == 'decimal' || matchedAttribute.type == 'integer'">
+                        <div class="control-group" v-if="matchedAttribute.type === 'text' || matchedAttribute.type === 'price' || matchedAttribute.type === 'decimal' || matchedAttribute.type === 'integer'">
                             <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
                         </div>
 
-                        <div class="control-group date" v-if="matchedAttribute.type == 'date'">
+                        <div class="control-group date" v-if="matchedAttribute.type === 'date'">
                             <date>
                                 <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
                             </date>
                         </div>
 
-                        <div class="control-group date" v-if="matchedAttribute.type == 'datetime'">
+                        <div class="control-group date" v-if="matchedAttribute.type === 'datetime'">
                             <datetime>
                                 <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
                             </datetime>
                         </div>
 
-                        <div class="control-group" v-if="matchedAttribute.type == 'boolean'">
+                        <div class="control-group" v-if="matchedAttribute.type === 'boolean'">
                             <select :name="['conditions[' + index + '][value]']" class="control" v-model="condition.value">
                                 <option value="1">{{ __('admin::app.promotions.cart-rules.yes') }}</option>
                                 <option value="0">{{ __('admin::app.promotions.cart-rules.no') }}</option>
                             </select>
                         </div>
 
-                        <div class="control-group" v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
-                            <select :name="['conditions[' + index + '][value]']" class="control" v-model="condition.value" v-if="matchedAttribute.key != 'cart|state'">
+                        <div class="control-group" v-if="matchedAttribute.type === 'select' || matchedAttribute.type === 'radio'">
+                            <select :name="['conditions[' + index + '][value]']" class="control" v-model="condition.value" v-if="matchedAttribute.key !== 'cart|state'">
                                 <option v-for='option in matchedAttribute.options' :value="option.id">
                                     @{{ option.admin_name }}
                                 </option>
@@ -403,7 +403,7 @@
                             </select>
                         </div>
 
-                        <div class="control-group" v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
+                        <div class="control-group" v-if="matchedAttribute.type === 'multiselect' || matchedAttribute.type === 'checkbox'">
                             <select :name="['conditions[' + index + '][value][]']" class="control" v-model="condition.value" multiple>
                                 <option v-for='option in matchedAttribute.options' :value="option.id">
                                     @{{ option.admin_name }}
@@ -716,7 +716,7 @@
 
             computed: {
                 matchedAttribute: function () {
-                    if (this.condition.attribute == '')
+                    if (this.condition.attribute === '')
                         return;
 
                     let self = this;
@@ -724,13 +724,13 @@
                     let attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
 
                     matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
-                        return attribute.key == self.condition.attribute;
+                        return attribute.key === self.condition.attribute;
                     });
 
-                    if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
+                    if (matchedAttribute[0]['type'] === 'multiselect' || matchedAttribute[0]['type'] === 'checkbox') {
                         this.condition.operator = '{}';
 
-                        this.condition.value = this.condition.value == '' && this.condition.value != undefined
+                        this.condition.value = this.condition.value === '' && this.condition.value != undefined
                                 ? []
                                 : Array.isArray(this.condition.value) ? this.condition.value : [];
                     }

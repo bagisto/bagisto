@@ -5,7 +5,7 @@
                 @if ($enableMassActions)
                     <td>
                         @php
-                            $record_id = $record->{$index};
+                            $record_id = $record->{$index}
                         @endphp
 
                         <span class="checkbox">
@@ -24,7 +24,7 @@
 
                         $supportedClosureKey = ['wrapper', 'closure'];
 
-                        $isClosure = ! empty(array_intersect($supportedClosureKey, array_keys($column)));
+                        $isClosure = ! empty(array_intersect($supportedClosureKey, array_keys($column)))
                     @endphp
 
                     @if ($isClosure)
@@ -33,17 +33,17 @@
                             The following key i.e. `wrapper` will remove in the later version. Use only `closure`
                             key to manipulate the column. This will only hit the raw html.
                         --}}
-                        @if (isset($column['wrapper']) && gettype($column['wrapper']) === 'object' && $column['wrapper'] instanceof \Closure)
+                        @if (isset($column['wrapper']) && is_object($column['wrapper']) && $column['wrapper'] instanceof Closure)
                             @if (isset($column['closure']) && $column['closure'] == true)
                                 <td data-value="{{ $column['label'] }}">{!! $column['wrapper']($record) !!}</td>
                             @else
                                 <td data-value="{{ $column['label'] }}">{{ $column['wrapper']($record) }}</td>
                             @endif
-                        @elseif (isset($column['closure']) && gettype($column['closure']) === 'object' && $column['closure'] instanceof \Closure)
+                        @elseif (isset($column['closure']) && is_object($column['closure']) && $column['closure'] instanceof Closure)
                             <td data-value="{{ $column['label'] }}">{!! $column['closure']($record) !!}</td>
                         @endif
                     @else
-                        @if ($column['type'] == 'price')
+                        @if ($column['type'] === 'price')
                             @if (isset($column['currencyCode']))
                                 <td data-value="{{ $column['label'] }}">{{ core()->formatPrice($record->{$columnIndex}, $column['currencyCode']) }}</td>
                             @else
@@ -60,18 +60,18 @@
                         <div class="action">
                             @foreach ($actions as $action)
                                 @php
-                                    $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
+                                    $toDisplay = (isset($action['condition']) && is_object($action['condition'])) ? $action['condition']($record) : true
                                 @endphp
 
                                 @if ($toDisplay)
                                     <a
                                         id="{{ $record->{$action['index'] ?? $index} }}"
 
-                                        @if ($action['method'] == 'GET')
+                                        @if ($action['method'] === 'GET')
                                             href="{{ route($action['route'], $record->{$action['index'] ?? $index}) }}"
                                         @endif
 
-                                        @if ($action['method'] != 'GET')
+                                        @if ($action['method'] !== 'GET')
                                             @if (isset($action['function']))
                                                 onclick="{{ $action['function'] }}"
                                             @else

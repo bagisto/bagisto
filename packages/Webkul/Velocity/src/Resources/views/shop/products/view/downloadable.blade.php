@@ -1,4 +1,4 @@
-@if ($product->type == 'downloadable')
+@if ($product->type === 'downloadable')
     {!! view_render_event('bagisto.shop.products.view.downloadable.before', ['product' => $product]) !!}
 
     <div class="downloadable-container">

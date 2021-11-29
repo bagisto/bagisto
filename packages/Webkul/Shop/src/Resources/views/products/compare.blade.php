@@ -21,13 +21,13 @@
             data: function () {
                 return {
                     'baseUrl': "{{ url()->to('/') }}",
-                    'customer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                    'customer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' === "true",
                 }
             },
 
             methods: {
                 'addProductToCompare': function () {
-                    if (this.customer == "true" || this.customer == true) {
+                    if (this.customer === "true" || this.customer == true) {
                         this.$http.put(
                             `${this.baseUrl}/comparison`, {
                                 productId: this.productId,
@@ -103,7 +103,7 @@
                 },
 
                 'updateCompareCount': function () {
-                    if (this.customer == "true" || this.customer == true) {
+                    if (this.customer === "true" || this.customer == true) {
                         this.$http.get(`${this.baseUrl}/items-count`)
                         .then(response => {
                             $('#compare-items-count').html(response.data.compareProductsCount);

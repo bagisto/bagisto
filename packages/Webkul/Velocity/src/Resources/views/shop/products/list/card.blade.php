@@ -2,15 +2,13 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
 @php
-    $list = $toolbarHelper->getCurrentMode() == 'list'
-        ? true
-        : false;
+    $list = $toolbarHelper->getCurrentMode() === 'list';
 
     $productBaseImage = productimage()->getProductBaseImage($product);
 
     $totalReviews = $reviewHelper->getTotalReviews($product);
 
-    $avgRatings = ceil($reviewHelper->getAverageRating($product));
+    $avgRatings = ceil($reviewHelper->getAverageRating($product))
 @endphp
 
 {!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
@@ -45,7 +43,7 @@
                                 <div class="item-options">
 
                                     @foreach ($item->additional['attributes'] as $attribute)
-                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br/>
                                     @endforeach
 
                                 </div>
@@ -70,8 +68,7 @@
                             'addWishlistClass'  => 'pl10',
                             'product'           => $product,
                             'addToCartBtnClass' => 'medium-padding',
-                            'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                    ? true : false,
+                            'showCompare'       => core()->getConfigData('general.content.shop.compare_option') === "1",
                         ])
                     </div>
                 </div>
@@ -114,7 +111,7 @@
                                 <div class="item-options">
 
                                     @foreach ($item->additional['attributes'] as $attribute)
-                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br/>
                                     @endforeach
 
                                 </div>
@@ -149,8 +146,7 @@
                         'reloadPage'        => $reloadPage ?? null,
                         'addToCartForm'     => $addToCartForm ?? false,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',
-                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                ? true : false,
+                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') === "1",
                     ])
                 </div>
             </div>

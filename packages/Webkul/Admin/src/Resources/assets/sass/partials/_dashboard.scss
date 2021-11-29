@@ -26,7 +26,7 @@
         border: 1px solid $border-color;
         box-shadow: 0 5px 10px 2px $border-color;
         border-radius: 0.25rem;
-        padding: 20px 0px 0px 20px;
+        padding: 20px 0 0 20px;
         overflow: auto;
 
         .card-title {
@@ -165,7 +165,7 @@
 
     .sale-stock {
         width: 100%;
-        display: inline-block;
+        /* display: inline-block; is overwritten: */
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(435px, 1fr));
         grid-auto-rows: auto;

@@ -5,9 +5,9 @@
 @endsection
 
 @push('css')
-    <style type="text/css">
+    <style>
         .account-content .account-layout .account-head {
-            margin-bottom: 0px;
+            margin-bottom: 0;
         }
         .sale-summary .dash-icon {
             margin-right: 30px;
@@ -92,7 +92,7 @@
                                                             <div class="item-options">
 
                                                                 @foreach ($item->additional['attributes'] as $attribute)
-                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br/>
                                                                 @endforeach
 
                                                             </div>
@@ -561,7 +561,7 @@
                                 <div class="box-content">
                                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
 
-                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method) @endphp
 
                                     @if (! empty($additionalDetails))
                                         <div class="instructions">

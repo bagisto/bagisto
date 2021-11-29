@@ -35,7 +35,7 @@
                 <span class="control-error" v-if="errors.has('booking[booking_type]')">@{{ errors.first('booking[booking_type]') }}</span>
             </div>
 
-            <div v-if="default_booking.booking_type == 'many'">
+            <div v-if="default_booking.booking_type === 'many'">
                 <div class="control-group" :class="[errors.has('booking[duration]') ? 'has-error' : '']">
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.slot-duration') }}</label>
 
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="section-content">
-                    <div class="slot-list table" v-if="default_booking.booking_type == 'many'">
+                    <div class="slot-list table" v-if="default_booking.booking_type === 'many'">
                         <table>
                             <thead>
                                 <tr>
@@ -113,7 +113,7 @@
                         </table>
                     </div>
 
-                    <div class="slot-list table" v-if="default_booking.booking_type == 'one'">
+                    <div class="slot-list table" v-if="default_booking.booking_type === 'one'">
                         <table>
                             <thead>
                                 <tr>
@@ -238,7 +238,7 @@
             },
 
             created: function() {
-                if (this.default_booking.booking_type == 'one') {
+                if (this.default_booking.booking_type === 'one') {
                     this.slots['one'] = this.default_booking.slots ? this.default_booking.slots : [];
                 } else {
                     if (this.default_booking.slots)

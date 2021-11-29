@@ -11,7 +11,7 @@
     .link {
         min-width: 220px;
         max-width: 100%;
-        margin: 0px;
+        margin: 0;
         cursor: pointer;
         padding: 10px 15px;
         border-radius: 3px;
@@ -44,7 +44,7 @@
 .social-link-seperator {
     position: relative;
     border-top: solid 1px #D3D3D3;
-    margin: 30px 0px 25px 0px;
+    margin: 30px 0 25px 0;
     display: inline-block;
     width: 100%;
 
@@ -53,7 +53,7 @@
         position: absolute;
         left: 20px;
         top: -12px;
-        padding: 0px 15px;
+        padding: 0 15px;
         text-align: center;
     }
 }

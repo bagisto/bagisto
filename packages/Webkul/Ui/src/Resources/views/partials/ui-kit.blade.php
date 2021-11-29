@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500">
 
-        <style type="text/css">
+        <style>
             body{
                 margin: 45px;
                 font-size: 14px;
@@ -31,7 +31,7 @@
                 color: #424242;
                 padding: 20px;
                 line-height: 20px;
-                margin: 20px 0px 0px 0px;
+                margin: 20px 0 0 0;
             }
             * {
                 box-sizing: border-box;

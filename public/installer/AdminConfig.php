@@ -71,7 +71,7 @@ $data = array();
         $connection = $databaseData['DB_CONNECTION'];
         $port       = $databaseData['DB_PORT'];
 
-        if ($connection == 'mysql' ) {
+        if ($connection === 'mysql' ) {
             // Create connection
             @$conn = new mysqli($servername, $username, $password, $dbname, (int)$port);
 

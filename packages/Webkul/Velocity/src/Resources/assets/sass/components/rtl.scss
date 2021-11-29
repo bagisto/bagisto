@@ -7,7 +7,7 @@ body {
         }
 
         .order-summary-container {
-            margin-left: 0px;
+            margin-left: 0;
             margin-right: 130px;
         }
 
@@ -23,7 +23,7 @@ body {
 
                 #header-search-icon {
                     float: right;
-                    border-radius: 2px 0px 0px 2px;
+                    border-radius: 2px 0 0 2px;
                 }
 
                 .btn-group {
@@ -231,7 +231,7 @@ body {
             .toolbar-wrapper {
                 > div {
                     label {
-                        margin-right: 0px;
+                        margin-right: 0;
                         margin-left: 10px;
                     }
                 }
@@ -240,7 +240,7 @@ body {
 
         .filter-attributes-content {
             margin-left: 7px;
-            margin-right: 0px;
+            margin-right: 0;
         }
 
         .filter-attributes-item {
@@ -286,7 +286,7 @@ body {
                 .account-table-content {
                     .address-holder {
                         > div {
-                            padding-right: 0px;
+                            padding-right: 0;
                             padding-left: 15px;
                         }
                     }
@@ -311,10 +311,10 @@ body {
         .product-detail {
             .right {
                 .info {
-                    margin-right: 0px;
+                    margin-right: 0;
 
                     > h2, div {
-                        padding-right: 0px;
+                        padding-right: 0;
                     }
 
                     .buynow {
@@ -465,7 +465,7 @@ body {
             padding-right: 15px !important;
         }
         .pl0 {
-            padding-right: 0px !important;
+            padding-right: 0 !important;
         }
         .pl10 {
             padding-right: 10px !important;
@@ -507,13 +507,13 @@ body {
     body {
         &.rtl {
             .order-summary-container {
-                margin-right: 0px;
+                margin-right: 0;
             }
 
             .nav-container {
                 ul {
                     li {
-                        padding: 10px 20px 10px 0px;
+                        padding: 10px 20px 10px 0;
 
                         .rango-arrow-right {
                             float: left;

@@ -189,7 +189,6 @@ return [
     ],
 
     'checkout' => [
-        'qty' => 'Qtd',
         'checkout' => 'Finalizar Compra',
         'cart' => [
             'view-cart' => 'Ver Carrinho',

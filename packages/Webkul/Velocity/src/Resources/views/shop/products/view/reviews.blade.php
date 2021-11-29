@@ -10,7 +10,7 @@
         $avgStarRating = round($avgRatings);
     }
 
-    $percentageRatings = $reviewHelper->getPercentageRating($product);
+    $percentageRatings = $reviewHelper->getPercentageRating($product)
 @endphp
 
 {!! view_render_event('bagisto.shop.products.review.before', ['product' => $product]) !!}

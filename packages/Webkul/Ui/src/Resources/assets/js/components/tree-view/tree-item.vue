@@ -74,7 +74,7 @@
                 let leafs = [];
                 let searchTree = items => {
                     if(!! items[this.childrenField] && this.getLength(items[this.childrenField]) > 0) {
-                        if(typeof items[this.childrenField] == 'object') {
+                        if(typeof items[this.childrenField] === 'object') {
                             for(let key in items[this.childrenField]) {
                                 searchTree(items[this.childrenField][key])
                             }
@@ -110,7 +110,7 @@
 
         methods: {
             getLength (items) {
-                if(typeof items == 'object') {
+                if(typeof items === 'object') {
                     let length = 0;
 
                     for(let item in items) {
@@ -124,8 +124,8 @@
             },
 
             generateRoot () {
-                if(this.inputType == 'checkbox') {
-                    if(this.behavior == 'reactive') {
+                if(this.inputType === 'checkbox') {
+                    if(this.behavior === 'reactive') {
                         return this.$createElement('tree-checkbox', {
                             props: {
                                 id: this.items[this.idField],
@@ -177,7 +177,7 @@
                             }
                         })
                     }
-                } else if(this.inputType == 'radio') {
+                } else if(this.inputType === 'radio') {
                     return this.$createElement('tree-radio', {
                         props: {
                             id: this.items[this.idField],
@@ -216,7 +216,7 @@
             generateChildren () {
                 let childElements = [];
                 if(this.items[this.childrenField]) {
-                    if(typeof this.items[this.childrenField] == 'object') {
+                    if(typeof this.items[this.childrenField] === 'object') {
                         for(let key in this.items[this.childrenField]) {
                             childElements.push(this.generateChild(this.items[this.childrenField][key]));
                         }

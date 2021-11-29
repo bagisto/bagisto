@@ -63,7 +63,7 @@
                                             <div class="item-options">
 
                                                 @foreach ($item->additional['attributes'] as $attribute)
-                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br/>
                                                 @endforeach
 
                                             </div>
@@ -87,12 +87,12 @@
 
                                             @auth('customer')
                                                     @php
-                                                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                                                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') === "1";
                                                     @endphp
 
                                                     @if ($showWishlist)
                                                         <span class="towishlist">
-                                                            @if ($item->parent_id != 'null' ||$item->parent_id != null)
+                                                            @if ($item->parent_id !== 'null' ||$item->parent_id != null)
                                                                 <a
                                                                     href="javascript:void(0);"
                                                                     onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->id) }}')">
@@ -137,7 +137,7 @@
 
                                 @if (! cart()->hasError())
                                     @php
-                                        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+                                        $minimumOrderAmount = (float) (core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0)
                                     @endphp
 
                                     <proceed-to-checkout
@@ -278,9 +278,9 @@
         function updateCartQunatity(operation, index) {
             var quantity = document.getElementById('cart-quantity'+index).value;
 
-            if (operation == 'add') {
+            if (operation === 'add') {
                 quantity = parseInt(quantity) + 1;
-            } else if (operation == 'remove') {
+            } else if (operation === 'remove') {
                 if (quantity > 1) {
                     quantity = parseInt(quantity) - 1;
                 } else {

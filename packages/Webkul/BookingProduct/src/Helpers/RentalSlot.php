@@ -108,7 +108,7 @@ class RentalSlot extends Booking
 
         $rentingType = $data['additional']['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
 
-        if ($rentingType == 'daily') {
+        if ($rentingType === 'daily') {
             $from = Carbon::createFromTimeString($data['additional']['booking']['date_from'] . ' 00:00:01')->getTimestamp();
 
             $to = Carbon::createFromTimeString($data['additional']['booking']['date_to'] . ' 23:59:59')->getTimestamp();
@@ -198,7 +198,7 @@ class RentalSlot extends Booking
 
         $rentingType = $products[0]['additional']['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
 
-        if ($rentingType == 'daily') {
+        if ($rentingType === 'daily') {
             $from = Carbon::createFromTimeString($products[0]['additional']['booking']['date_from'] . " 00:00:00");
             $to = Carbon::createFromTimeString($products[0]['additional']['booking']['date_to'] . " 24:00:00");
 
@@ -241,7 +241,7 @@ class RentalSlot extends Booking
 
         $rentingType = $item->additional['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
 
-        if ($rentingType == 'daily') {
+        if ($rentingType === 'daily') {
             if (! isset($item->additional['booking']['date_from'])
                 || ! isset($item->additional['booking']['date_to'])
             ) {

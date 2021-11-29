@@ -14,7 +14,7 @@
                     <div class="item-options">
                         @foreach ($item->additional['attributes'] as $attribute)
                             <b>{{ $attribute['attribute_name'] }} : </b> {{ $attribute['option_label'] }}
-                            </br>
+                            <br/>
                         @endforeach
                     </div>
                 @endif

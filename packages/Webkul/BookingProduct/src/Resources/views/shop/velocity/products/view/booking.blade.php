@@ -1,4 +1,4 @@
-@if ($product->type == 'booking')
+@if ($product->type === 'booking')
 
     @if ($bookingProduct = app('\Webkul\BookingProduct\Repositories\BookingProductRepository')->findOneByField('product_id', $product->product_id))
 
@@ -13,7 +13,7 @@
             <script type="text/x-template" id="booking-information-template">
                 <div class="booking-information">
 
-                    @if ($bookingProduct->location != '')
+                    @if ($bookingProduct->location !== '')
                         <div class="booking-info-row">
                             <span class="icon bp-location-icon"></span>
                             <span class="title">{{ __('bookingproduct::app.shop.products.location') }}</span>

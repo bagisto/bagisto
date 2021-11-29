@@ -4,7 +4,7 @@
     <nav-slide-button icon-class="accordian-left-icon"></nav-slide-button>
 
     <ul>
-        @if (request()->route()->getName() != 'admin.configuration.index')
+        @if (request()->route()->getName() !== 'admin.configuration.index')
             <?php $keys = explode('.', $menu->currentKey);  ?>
 
             @if(isset($keys) && strlen($keys[0]))

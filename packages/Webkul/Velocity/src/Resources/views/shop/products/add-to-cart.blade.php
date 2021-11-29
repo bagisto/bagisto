@@ -34,7 +34,7 @@
                         <i class="material-icons text-down-3">shopping_cart</i>
                     @endif
 
-                    {{ ($product->type == 'booking') ?  __('shop::app.products.book-now') :  __('shop::app.products.add-to-cart') }}
+                    {{ ($product->type === 'booking') ?  __('shop::app.products.book-now') :  __('shop::app.products.add-to-cart') }}
                 </button>
             @elseif(isset($addToCartForm) && !$addToCartForm)
                 <form
@@ -55,7 +55,7 @@
                         @endif
 
                         <span class="fs14 fw6 text-uppercase text-up-4">
-                            {{ ($product->type == 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}
+                            {{ ($product->type === 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}
                         </span>
                     </button>
                 </form>
@@ -71,7 +71,7 @@
                     add-class-to-btn="{{ $addToCartBtnClass ?? '' }}"
                     is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}
                     show-cart-icon={{ ! (isset($showCartIcon) && ! $showCartIcon) }}
-                    btn-text="{{ (! isset($moveToCart) && $product->type == 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}">
+                    btn-text="{{ (! isset($moveToCart) && $product->type === 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}">
                 </add-to-cart>
             @endif
         </div>

@@ -60,7 +60,7 @@
 }
 
 .pt0 {
-    padding-top: 0px !important;
+    padding-top: 0 !important;
 }
 .pt10 {
     padding-top: 10px !important;
@@ -73,7 +73,7 @@
 }
 
 .pl0 {
-    padding-left: 0px !important;
+    padding-left: 0 !important;
 }
 .pl5 {
     padding-left: 5px !important;
@@ -95,7 +95,7 @@
 }
 
 .pr0 {
-    padding-right: 0px !important;
+    padding-right: 0 !important;
 }
 .pr5 {
     padding-right: 5px !important;
@@ -108,7 +108,7 @@
 }
 
 .pb0 {
-    padding-bottom: 0px !important;
+    padding-bottom: 0 !important;
 }
 .pb10 {
     padding-bottom: 10px !important;
@@ -166,7 +166,7 @@
 }
 
 .ml0 {
-    margin-left: 0px !important;
+    margin-left: 0 !important;
 }
 .ml5 {
     margin-left: 5px;
@@ -182,7 +182,7 @@
 }
 
 .w-0 {
-    width: 0px !important;
+    width: 0 !important;
 }
 .w-5 {
     width: 5px !important;
@@ -200,11 +200,11 @@
 }
 
 .no-margin {
-    margin: 0px !important;
+    margin: 0 !important;
 }
 
 .no-padding {
-    padding: 0px !important;
+    padding: 0 !important;
 }
 
 .flex-wrap {
@@ -275,7 +275,7 @@
 
 .theme-btn {
     z-index: 10;
-    border: none;
+    /* border: none; is overwritten: */
     cursor: pointer;
     font-weight: 600;
     padding: 10px 20px;
@@ -459,8 +459,8 @@
     }
 
     &.list-card {
-        margin-left: 0px;
-        padding-left: 0px;
+        margin-left: 0;
+        padding-left: 0;
 
         .background-image-group {
             height: 100%;
@@ -744,7 +744,7 @@ select:focus,
 .disable-box-shadow:focus,
 .disable-box-shadow:active {
     outline: none !important;
-    box-shadow: none !important;
+    /* box-shadow: none !important; is overwritten: */
     -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0);
     -moz-box-shadow: 0 5px 15px rgba(0,0,0,0);
     -o-box-shadow: 0 5px 15px rgba(0,0,0,0);

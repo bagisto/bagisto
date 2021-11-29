@@ -1,19 +1,19 @@
 <template>
     <carousel
-        :rtl="localeDirection == 'rtl'"
+        :rtl="localeDirection === 'rtl'"
         :dir="localeDirection"
         :id="id"
         :navigationEnabled="true"
         :paginationEnabled="true"
         :perPage="parseInt(slidesPerPage)"
-        :loop="loop == 'true' ? true : false"
-        :autoplay="autoplay == 'true' ? true : false"
+        :loop="loop === 'true' ? true : false"
+        :autoplay="autoplay === 'true' ? true : false"
         :autoplayTimeout="timeout ? parseInt(timeout) : 2000"
         :autoplayDirection="'forward'"
         :class="[
             localeDirection,
-            (navigationEnabled == 'hide') ? 'navigation-hide' : '',
-            (paginationEnabled == 'hide') ? 'pagination-hide' : '',
+            (navigationEnabled === 'hide') ? 'navigation-hide' : '',
+            (paginationEnabled === 'hide') ? 'pagination-hide' : '',
             addClass
         ]">
 

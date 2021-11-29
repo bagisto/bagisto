@@ -53,14 +53,14 @@ a { color: rgb(0, 65, 255); text-decoration: none;}
     border-radius: 3px;
     -webkit-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 0px 10px;
+    padding: 0 10px;
     font-size: 15px;
     margin-top: 10px;
 }
 
 .form-control:focus {
     border-color: #0041FF;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(11, 50, 139, 0.5);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(11, 50, 139, 0.5);
 }
 
 .form-group label.required::after {
@@ -347,4 +347,3 @@ a { color: rgb(0, 65, 255); text-decoration: none;}
     margin-right: 0.3em; }
     .select2-container--bootstrap4 .select2-selection__clear:hover {
       background-color: #343a40; }
-  

@@ -5,7 +5,6 @@ return [
         'system' => [
             'social-login' => 'Social Login',
             'enable-facebook' => 'Habilitar Facebook',
-            'enable-twitter' => 'Habilitar Twitter',
             'enable-google' => 'Habilitar Google',
             'enable-twitter' => 'Habilitar Twitter',
             'enable-linkedin' => 'Habilitar LinkedIn',

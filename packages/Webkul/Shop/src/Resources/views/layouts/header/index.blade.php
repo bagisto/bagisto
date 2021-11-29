@@ -40,7 +40,7 @@
 
                         <div class="search-icon-wrapper">
 
-                            <button class="" class="background: none;" aria-label="Search">
+                            <button class="background: none;" aria-label="Search">
                                 <i class="icon icon-search"></i>
                             </button>
                         </div>
@@ -58,7 +58,7 @@
                 {!! view_render_event('bagisto.shop.layout.header.comppare-item.before') !!}
 
                 @php
-                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+                    $showCompare = core()->getConfigData('general.content.shop.compare_option') === "1"
                 @endphp
 
                 @if ($showCompare)
@@ -77,7 +77,7 @@
                             <i class="icon compare-icon"></i>
                             <span class="name">
                                 {{ __('shop::app.customer.compare.text') }}
-                                <span class="count">(<span id="compare-items-count"></span>)<span class="count">
+                                <span class="count">(<span id="compare-items-count"></span>)</span>
                             </span>
                         </a>
                     </li>
@@ -151,7 +151,7 @@
 
                     @auth('customer')
                         @php
-                           $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                           $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') === "1";
                         @endphp
 
                         <ul class="dropdown-list account customer">
@@ -201,7 +201,9 @@
 
             </ul>
 
-            <span class="menu-box" ><span class="icon icon-menu" id="hammenu"></span>
+            <span class="menu-box">
+                <span class="icon icon-menu" id="hammenu"></span>
+            </span>
         </div>
     </div>
 
@@ -212,7 +214,7 @@
     <div class="search-responsive mt-10" id="search-responsive">
         <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
             <div class="search-content">
-                <button style="background: none; border: none; padding: 0px;">
+                <button style="background: none; border: none; padding: 0;">
                     <i class="icon icon-search"></i>
                 </button>
 
@@ -250,7 +252,7 @@
             data: function() {
                 return {
                     uploaded_image_url: '',
-                    image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? 'true' : 'false'}}" == 'true'
+                    image_search_status: "{{core()->getConfigData('general.content.shop.image_search') === '1' ? 'true' : 'false'}}" === 'true'
                 }
             },
 
@@ -307,7 +309,7 @@
                                                 ];
 
                                                 self.$root.addFlashMessages();
-                                            };
+                                            }
 
                                             localStorage.searched_image_url = self.uploaded_image_url;
 
@@ -403,7 +405,7 @@
                     currentElement.removeClass('icon-menu-close');
                     $("#search-responsive").css("display", "none");
                     $("#header-bottom").css("display", "none");
-                    if (currentElement.attr("id") == 'search') {
+                    if (currentElement.attr("id") === 'search') {
                         currentElement.addClass('icon-search');
                     } else {
                         currentElement.addClass('icon-menu');

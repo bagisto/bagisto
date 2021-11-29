@@ -64,7 +64,7 @@
                         <option value=""  @if ($customer->gender == "") selected @endif></option>
                         <option
                             value="Other"
-                            @if ($customer->gender == "Other")
+                            @if ($customer->gender === "Other")
                                 selected="selected"
                             @endif>
                             {{ __('velocity::app.shop.gender.other') }}
@@ -72,7 +72,7 @@
 
                         <option
                             value="Male"
-                            @if ($customer->gender == "Male")
+                            @if ($customer->gender === "Male")
                                 selected="selected"
                             @endif>
                             {{ __('velocity::app.shop.gender.male') }}
@@ -80,7 +80,7 @@
 
                         <option
                             value="Female"
-                            @if ($customer->gender == "Female")
+                            @if ($customer->gender === "Female")
                                 selected="selected"
                             @endif>
                             {{ __('velocity::app.shop.gender.female') }}
@@ -151,7 +151,7 @@
 
                     <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                         @foreach ($errors->get('image.*') as $key => $message)
-                            @php echo str_replace($key, 'Image', $message[0]); @endphp
+                            @php echo str_replace($key, 'Image', $message[0]) @endphp
                         @endforeach
                     </span>
                 </div>

@@ -41,13 +41,13 @@
                             <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
                                 <label for="status" class="required">{{ __('admin::app.marketing.templates.status') }}</label>
                                 <select class="control" v-validate="'required'" id="status" name="status" data-vv-as="&quot;{{ __('admin::app.marketing.templates.display-mode') }}&quot;">
-                                    <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>
+                                    <option value="active" {{ old('status') === 'active' ? 'selected' : '' }}>
                                         {{ __('admin::app.marketing.templates.active') }}
                                     </option>
-                                    <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>
+                                    <option value="inactive" {{ old('status') === 'inactive' ? 'selected' : '' }}>
                                         {{ __('admin::app.marketing.templates.inactive') }}
                                     </option>
-                                    <option value="draft" {{ old('status') == 'draft' ? 'selected' : '' }}>
+                                    <option value="draft" {{ old('status') === 'draft' ? 'selected' : '' }}>
                                         {{ __('admin::app.marketing.templates.draft') }}
                                     </option>
                                 </select>

@@ -16,13 +16,13 @@
     <div>
 
         <div class="control-group" v-for='(key) in linkedProducts'>
-            <label for="up-selling" v-if="(key == 'up_sells')">
+            <label for="up-selling" v-if="(key === 'up_sells')">
                 {{ __('admin::app.catalog.products.up-selling') }}
             </label>
-            <label for="cross_sells" v-if="(key == 'cross_sells')">
+            <label for="cross_sells" v-if="(key === 'cross_sells')">
                 {{ __('admin::app.catalog.products.cross-selling') }}
             </label>
-            <label for="related_products" v-if="(key == 'related_products')">
+            <label for="related_products" v-if="(key === 'related_products')">
                 {{ __('admin::app.catalog.products.related-products') }}
             </label>
 
@@ -44,11 +44,11 @@
                 </ul>
             </div>
 
-            <input type="hidden" name="up_sell[]" v-for='(product, index) in addedProducts.up_sells' v-if="(key == 'up_sells') && addedProducts.up_sells.length" :value="product.id"/>
+            <input type="hidden" name="up_sell[]" v-for='(product, index) in addedProducts.up_sells' v-if="(key === 'up_sells') && addedProducts.up_sells.length" :value="product.id"/>
 
-            <input type="hidden" name="cross_sell[]" v-for='(product, index) in addedProducts.cross_sells' v-if="(key == 'cross_sells') && addedProducts.cross_sells.length" :value="product.id"/>
+            <input type="hidden" name="cross_sell[]" v-for='(product, index) in addedProducts.cross_sells' v-if="(key === 'cross_sells') && addedProducts.cross_sells.length" :value="product.id"/>
 
-            <input type="hidden" name="related_products[]" v-for='(product, index) in addedProducts.related_products' v-if="(key == 'related_products') && addedProducts.related_products.length" :value="product.id"/>
+            <input type="hidden" name="related_products[]" v-for='(product, index) in addedProducts.related_products' v-if="(key === 'related_products') && addedProducts.related_products.length" :value="product.id"/>
 
             <span class="filter-tag linked-product-filter-tag" v-if="addedProducts[key].length">
                 <span class="wrapper linked-product-wrapper " v-for='(product, index) in addedProducts[key]'>

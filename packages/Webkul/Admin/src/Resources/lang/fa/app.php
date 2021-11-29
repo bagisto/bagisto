@@ -558,7 +558,6 @@ return [
             'up-selling' => 'فروش بالا',
             'related-products' => 'محصولات مرتبط',
             'product-search-hint' => 'شروع به تایپ نام محصول کنید',
-            'no-result-found' => 'محصولاتی با همین نام یافت نشد',
             'searching' => 'جست و جو ...',
             'grouped-products' => 'محصولات گروه بندی شده',
             'search-products' => 'جستجوی محصولات',

@@ -1,6 +1,6 @@
-@if ($product->type == 'bundle')
+@if ($product->type === 'bundle')
     @push('css')
-        <style type="text/css">
+        <style>
             .bundle-options-wrapper .bundle-option-list {
                 border: unset;
             }
@@ -64,7 +64,7 @@
                 <div :class="`control-group custom-form mb10 ${errors.has('bundle_options[' + option.id + '][]') ? 'has-error' : ''}`">
                     <label :class="[option.is_required ? 'required' : '']">@{{ option.label }}</label>
 
-                    <div v-if="option.type == 'select'">
+                    <div v-if="option.type === 'select'">
                         <select class="control styled-select" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="option.label + '&quot;'">
                             <option value="">{{ __('shop::app.products.choose-selection') }}</option>
                             <option v-for="(product, index2) in option.products" :value="product.id">
@@ -73,7 +73,7 @@
                         </select>
                     </div>
 
-                    <div v-if="option.type == 'radio'">
+                    <div v-if="option.type === 'radio'">
                         <span class="radio col-12 ml5" v-if="! option.is_required">
                             <input
                                 type="radio"
@@ -102,7 +102,7 @@
                         </span>
                     </div>
 
-                    <div v-if="option.type == 'checkbox'">
+                    <div v-if="option.type === 'checkbox'">
                         <span class="checkbox col-12 ml5" v-for="(product, index2) in option.products">
                             <input type="checkbox" :name="'bundle_options[' + option.id + '][]'" :value="product.id" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" :id="'bundle_options[' + option.id + '][]'">
 
@@ -114,7 +114,7 @@
                         </span>
                     </div>
 
-                    <div v-if="option.type == 'multiselect'">
+                    <div v-if="option.type === 'multiselect'">
                         <select class="control styled-select" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" multiple>
                             <option v-for="(product, index2) in option.products" :value="product.id">
                                 @{{ product.name + ' + ' + product.price.final_price.formated_price }}
@@ -125,7 +125,7 @@
                     <span class="control-error" v-if="errors.has('bundle_options[' + option.id + '][]')" v-text="errors.first('bundle_options[' + option.id + '][]')"></span>
                 </div>
 
-                <div v-if="option.type == 'select' || option.type == 'radio'">
+                <div v-if="option.type === 'select' || option.type === 'radio'">
                     <quantity-changer
                         :control-name="'bundle_option_qty[' + option.id + ']'"
                         :validations="parseInt(selected_product) ? 'required|numeric|min_value:1' : ''"
@@ -193,7 +193,7 @@
 
                 data: function() {
                     return {
-                        selected_product: (this.option.type == 'checkbox' || this.option.type == 'multiselect')  ? [] : null,
+                        selected_product: (this.option.type === 'checkbox' || this.option.type === 'multiselect')  ? [] : null,
 
                         qty_validations: ''
                     }
@@ -226,7 +226,7 @@
                         if (! this.option.products[key1].is_default)
                             continue;
 
-                        if (this.option.type == 'checkbox' || this.option.type == 'multiselect') {
+                        if (this.option.type === 'checkbox' || this.option.type === 'multiselect') {
                             this.selected_product.push(this.option.products[key1].id)
                         } else {
                             this.selected_product = this.option.products[key1].id

@@ -50,12 +50,12 @@
                             <div class="control-group">
                                 <label for="permission_type">{{ __('admin::app.users.roles.permissions') }}</label>
                                 <select class="control" name="permission_type" id="permission_type">
-                                    <option value="custom" {{ $role->permission_type == 'custom' ? 'selected' : '' }}>{{ __('admin::app.users.roles.custom') }}</option>
-                                    <option value="all" {{ $role->permission_type == 'all' ? 'selected' : '' }}>{{ __('admin::app.users.roles.all') }}</option>
+                                    <option value="custom" {{ $role->permission_type === 'custom' ? 'selected' : '' }}>{{ __('admin::app.users.roles.custom') }}</option>
+                                    <option value="all" {{ $role->permission_type === 'all' ? 'selected' : '' }}>{{ __('admin::app.users.roles.all') }}</option>
                                 </select>
                             </div>
 
-                            <div class="control-group tree-wrapper {{ $role->permission_type == 'all' ? 'hide' : '' }}">
+                            <div class="control-group tree-wrapper {{ $role->permission_type === 'all' ? 'hide' : '' }}">
                                 <tree-view value-field="key" id-field="key" items='@json($acl->items)' value='@json($role->permissions)' fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
     <script>
         $(document).ready(function () {
             $('#permission_type').on('change', function(e) {
-                if ($(e.target).val() == 'custom') {
+                if ($(e.target).val() === 'custom') {
                     $('.tree-wrapper').removeClass('hide')
                 } else {
                     $('.tree-wrapper').addClass('hide')

@@ -1,12 +1,10 @@
 @foreach ($cart->items as $item)
-    <?php
-        $product = $item->product;
+    $product = $item->product;
 
-        if ($product->cross_sells()->count()) {
-            $products[] = $product;
-            $products = array_unique($products);
-        }
-    ?>
+    if ($product->cross_sells()->count()) {
+        $products[] = $product;
+        $products = array_unique($products);
+    }
 @endforeach
 
 @if (isset($products))

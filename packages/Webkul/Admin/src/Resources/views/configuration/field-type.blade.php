@@ -9,15 +9,15 @@
 
     $validations = $coreConfigRepository->getValidations($field);
 
-    $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $channel, $locale);
+    $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $channel, $locale)
 @endphp
 
-@if ($field['type'] == 'depends')
+@if ($field['type'] === 'depends')
 
     @include('admin::configuration.dependent-field-type')
 
 @else
-    <div class="control-group {{ $field['type'] }}" @if ($field['type'] == 'multiselect') :class="[errors.has('{{ $name }}[]') ? 'has-error' : '']" @else :class="[errors.has('{{ $name }}') ? 'has-error' : '']" @endif>
+    <div class="control-group {{ $field['type'] }}" @if ($field['type'] === 'multiselect') :class="[errors.has('{{ $name }}[]') ? 'has-error' : '']" @else :class="[errors.has('{{ $name }}') ? 'has-error' : '']" @endif>
 
         <label for="{{ $name }}" {{ !isset($field['validation']) || preg_match('/\brequired\b/', $field['validation']) == false ? '' : 'class=required' }}>
 
@@ -27,27 +27,27 @@
 
         </label>
 
-        @if ($field['type'] == 'text')
+        @if ($field['type'] === 'text')
 
-            <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: (core()->getConfigData($nameKey, $channel, $locale) ? core()->getConfigData($nameKey, $channel, $locale) : (isset($field['default_value']) ? $field['default_value'] : '')) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
+            <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: (core()->getConfigData($nameKey, $channel, $locale) ? core()->getConfigData($nameKey, $channel, $locale) : ($field['default_value'] ?? '')) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
 
-        @elseif ($field['type'] == 'password')
+        @elseif ($field['type'] === 'password')
 
             <input type="password" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
 
-        @elseif ($field['type'] == 'number')
+        @elseif ($field['type'] === 'number')
 
             <input type="number" min="0" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
 
-        @elseif ($field['type'] == 'color')
+        @elseif ($field['type'] === 'color')
 
             <input type="color" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
 
-        @elseif ($field['type'] == 'textarea')
+        @elseif ($field['type'] === 'textarea')
 
-            <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) ?: (isset($field['default_value']) ? $field['default_value'] : '') }}</textarea>
+            <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) ?: ($field['default_value'] ?? '') }}</textarea>
 
-        @elseif ($field['type'] == 'select')
+        @elseif ($field['type'] === 'select')
 
             <select v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;" >
 
@@ -75,7 +75,7 @@
 
             </select>
 
-        @elseif ($field['type'] == 'multiselect')
+        @elseif ($field['type'] === 'multiselect')
 
             <select v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}[]" data-vv-as="&quot;{{ trans($field['title']) }}&quot;"  multiple>
 
@@ -103,7 +103,7 @@
 
             </select>
 
-        @elseif ($field['type'] == 'country')
+        @elseif ($field['type'] === 'country')
 
             @php $countryCode = core()->getConfigData($nameKey, $channel, $locale) ?? ''; @endphp
 
@@ -113,7 +113,7 @@
                 :name = "'{{ $name }}'"
             ></country>
 
-        @elseif ($field['type'] == 'state')
+        @elseif ($field['type'] === 'state')
 
             @php $stateCode = core()->getConfigData($nameKey, $channel, $locale) ?? ''; @endphp
 
@@ -123,9 +123,9 @@
                 :name = "'{{ $name }}'"
             ></state>
 
-        @elseif ($field['type'] == 'boolean')
+        @elseif ($field['type'] === 'boolean')
 
-            @php $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? (isset($field['default_value']) ? $field['default_value'] : ''); @endphp
+            @php $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? ($field['default_value'] ?? '') @endphp
 
             <label class="switch">
                 <input type="hidden" name="{{ $name }}" value="0" />
@@ -133,7 +133,7 @@
                 <span class="slider round"></span>
             </label>
 
-        @elseif ($field['type'] == 'image')
+        @elseif ($field['type'] === 'image')
 
             @php
                 $src = Storage::url(core()->getConfigData($nameKey, $channel, $locale));
@@ -159,7 +159,7 @@
                 </div>
             @endif
 
-        @elseif ($field['type'] == 'file')
+        @elseif ($field['type'] === 'file')
 
             @php
                 $result = core()->getConfigData($nameKey, $channel, $locale);
@@ -192,8 +192,8 @@
             <span class="control-info mt-10">{{ trans($field['info']) }}</span>
         @endif
 
-        <span class="control-error" @if ($field['type'] == 'multiselect')  v-if="errors.has('{{ $name }}[]')" @else  v-if="errors.has('{{ $name }}')" @endif>
-            @if ($field['type'] == 'multiselect')
+        <span class="control-error" @if ($field['type'] === 'multiselect')  v-if="errors.has('{{ $name }}[]')" @else  v-if="errors.has('{{ $name }}')" @endif>
+            @if ($field['type'] === 'multiselect')
                 @{{ errors.first('{!! $name !!}[]') }}
             @else
                 @{{ errors.first('{!! $name !!}') }}
@@ -205,7 +205,7 @@
 @endif
 
 @push('scripts')
-    @if ($field['type'] == 'country')
+    @if ($field['type'] === 'country')
         <script type="text/x-template" id="country-template">
             <div>
                 <select type="text" v-validate="validations" class="control" :id="name" :name="name" v-model="country" data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;" @change="sendCountryCode">

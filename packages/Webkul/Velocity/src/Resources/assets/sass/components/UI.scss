@@ -4,7 +4,7 @@
 
     > * {
         height: 36px;
-        padding: 0px 10px;
+        padding: 0 10px;
         border: 1px solid $border-common;
         vertical-align: top;
         line-height: 3.5rem;
@@ -31,7 +31,7 @@
 
 .btn-add-to-cart {
     padding: 3px 14px !important;
-    border-radius: 0px !important;
+    border-radius: 0 !important;
     color: $white-color !important;
     border-color: $theme-color !important;
     background-color: $theme-color !important;

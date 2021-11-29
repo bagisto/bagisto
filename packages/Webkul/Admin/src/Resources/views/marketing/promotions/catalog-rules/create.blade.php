@@ -150,10 +150,10 @@
                                     <label for="action_type" class="required">{{ __('admin::app.promotions.catalog-rules.action-type') }}</label>
 
                                     <select class="control" id="action_type" name="action_type" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.action-type') }}&quot;">
-                                        <option value="by_percent" {{ old('action_type') == 'by_percent' ? 'selected' : '' }}>
+                                        <option value="by_percent" {{ old('action_type') === 'by_percent' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.catalog-rules.percentage-product-price') }}
                                         </option>
-                                        <option value="by_fixed" {{ old('action_type') == 'by_fixed' ? 'selected' : '' }}>
+                                        <option value="by_fixed" {{ old('action_type') === 'by_fixed' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.catalog-rules.fixed-amount') }}
                                         </option>
                                     </select>
@@ -219,36 +219,36 @@
                 <div v-if="matchedAttribute">
                     <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="matchedAttribute.type">
 
-                    <div v-if="matchedAttribute.key == 'product|category_ids'">
+                    <div v-if="matchedAttribute.key === 'product|category_ids'">
                         <tree-view value-field="id" id-field="id" :name-field="'conditions[' + index + '][value]'" input-type="checkbox" :items='matchedAttribute.options' :behavior="'no'" fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
                     </div>
 
                     <div v-else>
-                        <div class="control-group" v-if="matchedAttribute.type == 'text' || matchedAttribute.type == 'price' || matchedAttribute.type == 'decimal' || matchedAttribute.type == 'integer'">
+                        <div class="control-group" v-if="matchedAttribute.type === 'text' || matchedAttribute.type === 'price' || matchedAttribute.type === 'decimal' || matchedAttribute.type === 'integer'">
                             <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
                         </div>
 
-                        <div class="control-group date" v-if="matchedAttribute.type == 'date'">
+                        <div class="control-group date" v-if="matchedAttribute.type === 'date'">
                             <date>
                                 <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
                             </date>
                         </div>
 
-                        <div class="control-group date" v-if="matchedAttribute.type == 'datetime'">
+                        <div class="control-group date" v-if="matchedAttribute.type === 'datetime'">
                             <datetime>
                                 <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
                             </datetime>
                         </div>
 
-                        <div class="control-group" v-if="matchedAttribute.type == 'boolean'">
+                        <div class="control-group" v-if="matchedAttribute.type === 'boolean'">
                             <select :name="['conditions[' + index + '][value]']" class="control" v-model="condition.value">
                                 <option value="1">{{ __('admin::app.promotions.catalog-rules.yes') }}</option>
                                 <option value="0">{{ __('admin::app.promotions.catalog-rules.no') }}</option>
                             </select>
                         </div>
 
-                        <div class="control-group" v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
-                            <select :name="['conditions[' + index + '][value]']" class="control" v-model="condition.value" v-if="matchedAttribute.key != 'catalog|state'">
+                        <div class="control-group" v-if="matchedAttribute.type === 'select' || matchedAttribute.type === 'radio'">
+                            <select :name="['conditions[' + index + '][value]']" class="control" v-model="condition.value" v-if="matchedAttribute.key !== 'catalog|state'">
                                 <option v-for='option in matchedAttribute.options' :value="option.id">
                                     @{{ option.admin_name }}
                                 </option>
@@ -263,7 +263,7 @@
                             </select>
                         </div>
 
-                        <div class="control-group" v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
+                        <div class="control-group" v-if="matchedAttribute.type === 'multiselect' || matchedAttribute.type === 'checkbox'">
                             <select :name="['conditions[' + index + '][value][]']" class="control" v-model="condition.value" multiple>
                                 <option v-for='option in matchedAttribute.options' :value="option.id">
                                     @{{ option.admin_name }}
@@ -307,10 +307,6 @@
                     let index = this.conditions.indexOf(condition)
 
                     this.conditions.splice(index, 1)
-                },
-
-                onSubmit: function(e) {
-                    this.$root.onSubmit(e)
                 },
 
                 onSubmit: function(e) {
@@ -486,7 +482,7 @@
 
             computed: {
                 matchedAttribute: function () {
-                    if (this.condition.attribute == '')
+                    if (this.condition.attribute === '')
                         return;
 
                     let self = this;
@@ -494,10 +490,10 @@
                     let attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
 
                     matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
-                        return attribute.key == self.condition.attribute;
+                        return attribute.key === self.condition.attribute;
                     });
 
-                    if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
+                    if (matchedAttribute[0]['type'] === 'multiselect' || matchedAttribute[0]['type'] === 'checkbox') {
                         this.condition.operator = '{}';
 
                         this.condition.value = [];

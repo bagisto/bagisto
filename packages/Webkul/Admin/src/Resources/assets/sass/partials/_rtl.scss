@@ -13,7 +13,7 @@
                 margin: 0 30px 0 25px;
 
                 i.icon {
-                    margin-left: 0px;
+                    margin-left: 0;
                     margin-right: 10px;
                 }
             }
@@ -28,7 +28,7 @@
 
     .content-container {
         padding-right: 90px;
-        padding-left: 0px;
+        padding-left: 0;
 
         .content .page-header {
             .page-title {
@@ -39,20 +39,20 @@
                 float: left;
 
                 a {
-                    margin-left: 0px;
+                    margin-left: 0;
                 }
             }
 
             .control-group {
                 margin-right: 20px;
-                margin-left: 0px;
+                margin-left: 0;
             }
         }
 
         .content-wrapper {
             padding: 25px 25px 25px 25px;
             margin-right: 280px;
-            margin-left: 0px;
+            margin-left: 0;
         }
 
         .aside-nav .active i {
@@ -62,7 +62,7 @@
 
         .aside-nav:not(.active) {
             + .content-wrapper {
-                margin-right: 0px;
+                margin-right: 0;
             }
         }
     }
@@ -73,12 +73,12 @@
         }
 
         .card {
-            padding: 20px 20px 0px 0px;
+            padding: 20px 20px 0 0;
 
             .card-info ul li {
                 .image {
                     float: right;
-                    margin-right: 0px;
+                    margin-right: 0;
                     margin-left: 15px;
                 }
 
@@ -93,12 +93,12 @@
         .graph-stats {
             .left-card-container {
                 float: right;
-                padding-right: 0px;
+                padding-right: 0;
             }
 
             .right-card-container {
                 float: right;
-                padding-left: 0px;
+                padding-left: 0;
                 padding-right: 30px;
             }
         }
@@ -110,7 +110,7 @@
 
     .grid-container .table tbody td.action a:first-child {
         margin-left: 10px;
-        margin-right: 0px;
+        margin-right: 0;
     }
 
     .table table {
@@ -127,7 +127,7 @@
     }
 
     .dropdown-list.bottom-right {
-        left: 0px;
+        left: 0;
         right: auto !important;
     }
 
@@ -145,12 +145,12 @@
         .expand-icon,
         .folder-icon {
             margin-left: 10px;
-            margin-right: 0px;
+            margin-right: 0;
         }
     }
 
     .tree-container > .tree-item {
-        padding-right: 0px;
+        padding-right: 0;
     }
 
     .radio .radio-view {
@@ -158,11 +158,11 @@
     }
 
     .image-wrapper .image-item {
-        margin-right: 0px;
+        margin-right: 0;
         margin-left: 20px;
 
         .remove-image {
-            margin-right: 0px;
+            margin-right: 0;
         }
     }
 

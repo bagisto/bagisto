@@ -93,7 +93,7 @@ class Grouped extends AbstractType
         $product = parent::update($data, $id, $attribute);
         $route = request()->route() ? request()->route()->getName() : '';
 
-        if ($route != 'admin.catalog.products.massupdate') {
+        if ($route !== 'admin.catalog.products.massupdate') {
             $this->productGroupedProductRepository->saveGroupedProducts($data, $product);
         }
 

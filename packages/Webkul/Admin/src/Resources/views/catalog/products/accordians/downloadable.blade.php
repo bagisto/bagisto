@@ -96,7 +96,7 @@
                     </select>
                 </div>
 
-                <div class="control-group" :class="[errors.has(linkInputName + '[file]') ? 'has-error' : '']" v-if="link.type == 'file'">
+                <div class="control-group" :class="[errors.has(linkInputName + '[file]') ? 'has-error' : '']" v-if="link.type === 'file'">
                     <input type="hidden" v-validate="'required'" :name="[linkInputName + '[file]']" v-model="link.file" data-vv-as="&quot;{{ __('admin::app.catalog.products.file') }}&quot;"/>
 
                     <input type="hidden" :name="[linkInputName + '[file_name]']" v-model="link.file_name"/>
@@ -116,7 +116,7 @@
                     </span>
                 </div>
 
-                <div class="control-group" :class="[errors.has(linkInputName + '[url]') ? 'has-error' : '']" v-if="link.type == 'url'">
+                <div class="control-group" :class="[errors.has(linkInputName + '[url]') ? 'has-error' : '']" v-if="link.type === 'url'">
                     <input type="text" v-validate="'required'" v-model="link.url" :name="[linkInputName + '[url]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.url') }}&quot;"/>
 
                     <span class="control-error" v-if="errors.has(linkInputName + '[url]')">@{{ errors.first(linkInputName + '[url]') }}</span>
@@ -131,7 +131,7 @@
                     </select>
                 </div>
 
-                <div class="control-group" v-if="link.sample_type == 'file'">
+                <div class="control-group" v-if="link.sample_type === 'file'">
                     <input type="hidden" :name="[linkInputName + '[sample_file]']" v-model="link.sample_file" data-vv-as="&quot;{{ __('admin::app.catalog.products.sampe-file') }}&quot;"/>
 
                     <input type="hidden" :name="[linkInputName + '[sample_file_name]']" v-model="link.sample_file_name"/>
@@ -147,7 +147,7 @@
                     </label>
                 </div>
 
-                <div class="control-group" v-if="link.sample_type == 'url'">
+                <div class="control-group" v-if="link.sample_type === 'url'">
                     <input type="text" v-model="link.sample_url" :name="[linkInputName + '[sample_url]']" class="control"/>
                 </div>
             </td>
@@ -223,7 +223,7 @@
                     </select>
                 </div>
 
-                <div class="control-group" :class="[errors.has(sampleInputName + '[file]') ? 'has-error' : '']" v-if="sample.type == 'file'">
+                <div class="control-group" :class="[errors.has(sampleInputName + '[file]') ? 'has-error' : '']" v-if="sample.type === 'file'">
                     <input type="hidden" v-validate="'required'" :name="[sampleInputName + '[file]']" v-model="sample.file" data-vv-as="&quot;{{ __('admin::app.catalog.products.file') }}&quot;"/>
 
                     <input type="hidden" :name="[sampleInputName + '[file_name]']" v-model="sample.file_name"/>
@@ -243,7 +243,7 @@
                     </span>
                 </div>
 
-                <div class="control-group" :class="[errors.has(sampleInputName + '[url]') ? 'has-error' : '']" v-if="sample.type == 'url'">
+                <div class="control-group" :class="[errors.has(sampleInputName + '[url]') ? 'has-error' : '']" v-if="sample.type === 'url'">
                     <input type="text" v-validate="'required'" v-model="sample.url" :name="[sampleInputName + '[url]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.url') }}&quot;"/>
 
                     <span class="control-error" v-if="errors.has(sampleInputName + '[url]')">@{{ errors.first(sampleInputName + '[downloads]') }}</span>

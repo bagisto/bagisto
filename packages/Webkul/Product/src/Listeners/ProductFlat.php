@@ -124,7 +124,7 @@ class ProductFlat
             Schema::table('product_flat', function (Blueprint $table) use($attribute) {
                 $table->{$this->attributeTypeFields[$attribute->type]}($attribute->code)->nullable();
 
-                if ($attribute->type == 'select' || $attribute->type == 'multiselect') {
+                if ($attribute->type === 'select' || $attribute->type === 'multiselect') {
                     $table->string($attribute->code . '_label')->nullable();
                 }
             });
@@ -145,7 +145,7 @@ class ProductFlat
             Schema::table('product_flat', function (Blueprint $table) use($attribute) {
                 $table->dropColumn($attribute->code);
 
-                if ($attribute->type == 'select' || $attribute->type == 'multiselect') {
+                if ($attribute->type === 'select' || $attribute->type === 'multiselect') {
                     $table->dropColumn($attribute->code . '_label');
                 }
             });
@@ -260,7 +260,7 @@ class ProductFlat
 
                         $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
 
-                        if ($attribute->type == 'select') {
+                        if ($attribute->type === 'select') {
                             $attributeOption = $this->attributeOptionRepository->find($product->{$attribute->code});
 
                             if ($attributeOption) {
@@ -270,7 +270,7 @@ class ProductFlat
                                     $productFlat->{$attribute->code . '_label'} = $attributeOption->admin_name;
                                 }
                             }
-                        } elseif ($attribute->type == 'multiselect') {
+                        } elseif ($attribute->type === 'multiselect') {
                             $attributeOptionIds = explode(',', $product->{$attribute->code});
 
                             if (count($attributeOptionIds)) {
@@ -316,7 +316,7 @@ class ProductFlat
             } else {
                 $route = request()->route() ? request()->route()->getName() : "";
 
-                if ($route == 'admin.catalog.products.update') {
+                if ($route === 'admin.catalog.products.update') {
                     $productFlat = $this->productFlatRepository->findOneWhere([
                         'product_id' => $product->id,
                         'channel'    => $channel->code,

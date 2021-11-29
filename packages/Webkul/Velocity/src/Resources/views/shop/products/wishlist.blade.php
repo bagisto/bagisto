@@ -8,7 +8,7 @@
             $wishlist = $wishListHelper->getWishlistProduct($product);
 
             /* link making */
-            $href = isset($route) ? $route : ($wishlist ? route('customer.wishlist.remove', $wishlist->id) : route('customer.wishlist.add', $product->product_id));
+            $href = $route ?? ($wishlist ? route('customer.wishlist.remove', $wishlist->id) : route('customer.wishlist.add', $product->product_id));
 
             /* title */
             $title = $wishlist ? __('velocity::app.shop.wishlist.remove-wishlist-text') : __('velocity::app.shop.wishlist.add-wishlist-text');
@@ -25,7 +25,7 @@
             )"
         >
 
-            <wishlist-component active="{{ $wishlist ? false : true }}"></wishlist-component>
+            <wishlist-component active="{{ !$wishlist }}"></wishlist-component>
 
             @if (isset($text))
                 {!! $text !!}

@@ -42,10 +42,10 @@
 
         .info {
             @extend .mb15;
-            margin-left: 0px;
+            margin-left: 0;
 
             > h2, div {
-                padding-left: 0px;
+                padding-left: 0;
             }
 
             > * {
@@ -117,7 +117,7 @@
             @extend .fs18;
             @extend .no-padding;
 
-            margin-bottom: 0px;
+            margin-bottom: 0;
         }
 
         h4 {
@@ -139,7 +139,7 @@
         }
 
         .add-to-cart-btn {
-            padding: 0px;
+            padding: 0;
 
             button {
                 text-transform: uppercase;
@@ -205,13 +205,13 @@
     .thumb-list {
         left: 15px;
         z-index: 99;
-        padding: 0px;
+        padding: 0;
         overflow: hidden;
         margin-top: 10px;
         position: relative;
 
         .arrow {
-            left: 0px;
+            left: 0;
             height: 100%;
             z-index: 1001;
             opacity: 0.50;
@@ -290,7 +290,7 @@
 
             > .left {
                 top: 60px;
-                padding: 0px;
+                padding: 0;
                 position: sticky;
 
                 .product-image-group {
@@ -353,7 +353,7 @@
     .accordian {
         &.active {
             .accordian-header {
-                padding-bottom: 0px;
+                padding-bottom: 0;
             }
         }
     }
@@ -374,7 +374,7 @@
 
     .full-specifications {
         tr {
-            td:first-child() {
+            td:first-child {
                 width: 100px;
             }
         }

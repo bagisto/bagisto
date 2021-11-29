@@ -19,7 +19,7 @@
 @stop
 
 @push('css')
-    <style type="text/css">
+    <style>
         .product-price span:first-child, .product-price span:last-child {
             font-size: 18px;
             font-weight: 600;
@@ -39,7 +39,7 @@
             null,
             'products_only',
             'products_and_description'
-        ]
+        ], false
     );
 
     $isDescriptionDisplayMode = in_array(
@@ -47,8 +47,8 @@
             null,
             'description_only',
             'products_and_description'
-        ]
-    );
+        ], false
+    )
 @endphp
 
 @section('content-wrapper')
@@ -60,7 +60,7 @@
         <section class="row col-12 velocity-divide-page category-page-wrapper">
             {!! view_render_event('bagisto.shop.productOrCategory.index.before', ['category' => $category]) !!}
 
-            @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
+            @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description'], false))
                 @include ('shop::products.list.layered-navigation')
             @endif
 
@@ -96,14 +96,14 @@
 
                     <div
                         class="category-block"
-                        @if ($category->display_mode == 'description_only')
+                        @if ($category->display_mode === 'description_only')
                             style="width: 100%"
                         @endif>
 
                         <shimmer-component v-if="isLoading" shimmer-count="4"></shimmer-component>
 
                         <template v-else-if="products.length > 0">
-                            @if ($toolbarHelper->getCurrentMode() == 'grid')
+                            @if ($toolbarHelper->getCurrentMode() === 'grid')
                                 <div class="row col-12 remove-padding-margin">
                                     <product-card
                                         :key="index"

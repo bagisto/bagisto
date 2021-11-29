@@ -24,7 +24,7 @@
                     </div>
                 </template>
 
-                <template v-if="scrollable && !(scrollable == '')">
+                <template v-if="scrollable && !(scrollable === '')">
                     <div class="col-lg-2 no-padding switch-buttons">
                         <div class="row justify-content-center">
                             <h2
@@ -43,7 +43,7 @@
                     </div>
                 </template>
 
-                <template v-if="(! (viewAll == 'false' || viewAll == '')) && viewAll">
+                <template v-if="(! (viewAll === 'false' || viewAll === '')) && viewAll">
                     <div>
                         <a :href="viewAll" :title="`View all ${headerHeading} products`" class="remove-decoration link-color">
                             <h2 class="fs16 fw6 cursor-pointer tab">{{ __('home.view-all') }}</h2>

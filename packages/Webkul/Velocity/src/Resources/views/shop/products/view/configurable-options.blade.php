@@ -34,8 +34,8 @@
                         class="custom-form"
                         v-if="
                             ! attribute.swatch_type
-                            || attribute.swatch_type == ''
-                            || attribute.swatch_type == 'dropdown'
+                            || attribute.swatch_type === ''
+                            || attribute.swatch_type === 'dropdown'
                         ">
 
                         <select
@@ -78,11 +78,11 @@
                                 @change="configure(attribute, $event.target.value)"
                                 :checked="index == attribute.selectedIndex">
 
-                            <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
+                            <span v-if="attribute.swatch_type === 'color'" :style="{ background: option.swatch_value }"></span>
 
-                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" :title="option.label" alt="" />
+                            <img v-if="attribute.swatch_type === 'image'" :src="option.swatch_value" :title="option.label" alt="" />
 
-                            <span v-if="attribute.swatch_type == 'text'">
+                            <span v-if="attribute.swatch_type === 'text'">
                                 @{{ option.label }}
                             </span>
 
@@ -275,8 +275,8 @@
                                 return;
 
                             if (! attribute.swatch_type
-                                || attribute.swatch_type == ''
-                                || attribute.swatch_type == 'dropdown'
+                                || attribute.swatch_type === ''
+                                || attribute.swatch_type === 'dropdown'
                             ) {
                                 let element = document.getElementById(`attribute_${attribute.id}`);
 
@@ -354,7 +354,7 @@
                             }
 
                             galleryImages.forEach(function(image){
-                                if (image.type == 'video') {
+                                if (image.type === 'video') {
                                     image.small_image_url = image.medium_image_url = image.large_image_url = image.original_image_url= image.video_url;
                                 }
                             });

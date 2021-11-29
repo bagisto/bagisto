@@ -16,7 +16,7 @@
         <i class="icon arrow-down-icon"></i>
     </div>
 
-    <div class="dropdown-list" style="display: none; top: 52px; right: 0px;">
+    <div class="dropdown-list" style="display: none; top: 52px; right: 0;">
         <div class="dropdown-container">
             <div class="dropdown-cart">
                 <div class="dropdown-header">
@@ -60,7 +60,7 @@
                                     <div class="item-options">
 
                                         @foreach ($item->additional['attributes'] as $attribute)
-                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br/>
                                         @endforeach
 
                                     </div>
@@ -97,7 +97,7 @@
                     <a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.minicart.view-cart') }}</a>
 
                     @php
-                        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+                        $minimumOrderAmount = (float) (core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0);
                     @endphp
 
                     <proceed-to-checkout

@@ -88,7 +88,7 @@
                     </review-section>
 
                     <div class="button-group">
-                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button" v-if="selected_payment_method.method != 'paypal_smart_button'">
+                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button" v-if="selected_payment_method.method !== 'paypal_smart_button'">
                             {{ __('shop::app.checkout.onepage.place-order') }}
                         </button>
 
@@ -224,11 +224,11 @@
 
                     await this.$validator.validateAll(scope).then(function (result) {
                         if (result) {
-                            if (scope == 'address-form') {
+                            if (scope === 'address-form') {
                                 this_this.saveAddress();
-                            } else if (scope == 'shipping-form') {
+                            } else if (scope === 'shipping-form') {
                                 this_this.saveShipping();
-                            } else if (scope == 'payment-form') {
+                            } else if (scope === 'payment-form') {
                                 this_this.savePayment();
                             }
                         }

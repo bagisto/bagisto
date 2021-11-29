@@ -40,7 +40,7 @@ input {
 }
 
 .btn {
-    border-radius: 0px !important;
+    border-radius: 0 !important;
 }
 
 /**
@@ -95,8 +95,8 @@ input {
         position: absolute;
         opacity: 0;
         cursor: pointer;
-        top: 0px;
-        left: 0px;
+        top: 0;
+        left: 0;
     }
 
     /**
@@ -211,11 +211,11 @@ input {
 }
 
 .radio {
-    margin: 10px 0 0px 0px !important;
+    margin: 10px 0 0 0 !important;
 }
 
 .checkbox {
-    margin: 10px 0 0px 0px;
+    margin: 10px 0 0 0;
 
     .checkbox-view {
         height: 16px !important;
@@ -503,7 +503,7 @@ input {
                 margin-right: 10px;
                 text-transform: uppercase;
                 text-align: left;
-                box-shadow: 1px 1px 0px $shadow-color;
+                box-shadow: 1px 1px 0 $shadow-color;
             }
 
             .add-to-wishlist {
@@ -525,7 +525,7 @@ input {
                 margin-right: 10px;
                 text-transform: uppercase;
                 text-align: left;
-                box-shadow: 1px 1px 0px $shadow-color;
+                box-shadow: 1px 1px 0 $shadow-color;
             }
 
             .add-to-wishlist {
@@ -560,16 +560,16 @@ input {
     }
 
     .product-card:hover {
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        -webkit-box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
-        -moz-box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
-        box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
+        /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); is overwritten */
+        -webkit-box-shadow: 0 2px 16px 4px rgba(40, 44, 63, 0.07);
+        -moz-box-shadow: 0 2px 16px 4px rgba(40, 44, 63, 0.07);
+        box-shadow: 0 2px 16px 4px rgba(40, 44, 63, 0.07);
         transition: 0.3s;
     }
 
     @media only screen and (max-width: 580px) {
         .main-container-wrapper {
-            padding: 0px;
+            padding: 0;
         }
     }
 
@@ -714,7 +714,7 @@ input {
             }
 
             .block2 {
-                display: block;
+                /* display: block; is overwritten: */
                 box-sizing: border-box;
                 display: grid;
                 grid-template-rows: repeat(2, minmax(50%, 1fr));
@@ -783,7 +783,7 @@ section.slider-block {
                     color: $font-dark;
                     height: 100%;
                     width: 100%;
-                    top: 0px;
+                    top: 0;
                 }
             }
 
@@ -914,10 +914,8 @@ section.slider-block {
                     .search-field {
                         height: 38px;
                         border: 2px solid $border-color;
-                        border-radius: 3px;
                         border-right: none;
-                        border-top-right-radius: 0px;
-                        border-bottom-right-radius: 0px;
+                        border-radius: 3px 0 0 3px;
                         padding-left: 12px;
                         font-size: 14px;
                         -webkit-appearance: none;
@@ -936,7 +934,7 @@ section.slider-block {
                             background: $btn-background-color;
                             border: 0;
                             padding: 3px 5px;
-                            margin: 0px;
+                            margin: 0;
                         }
                     }
 
@@ -963,9 +961,8 @@ section.slider-block {
                 > li {
                     display: inline-block;
                     border-right: 2px solid $border-color;
-                    padding: 0 15px;
                     min-height: 15px;
-                    padding-top: 3px;
+                    padding: 3px 15px 0;
 
                     &:first-child {
                         padding-left: 0;
@@ -1016,13 +1013,13 @@ section.slider-block {
 
                 .currency {
                     position: absolute;
-                    right: 0px;
+                    right: 0;
                     width: 100px;
                 }
 
                 .account {
                     position: absolute;
-                    right: 0px;
+                    right: 0;
 
                     li {
                         padding: 20px !important;
@@ -1032,7 +1029,7 @@ section.slider-block {
                         }
 
                         ul > li {
-                            padding: 5px 10px 5px 0px !important;
+                            padding: 5px 10px 5px 0 !important;
                         }
                     }
                 }
@@ -1323,7 +1320,7 @@ section.slider-block {
                         padding: 0 2px;
 
                         .icon:not(.arrow-down-icon) {
-                            margin-right: 0px;
+                            margin-right: 0;
                         }
                     }
 
@@ -1387,8 +1384,8 @@ section.slider-block {
             }
 
             .nav > li li:hover > ul {
-                margin-left: 0px;
-                top: 0px;
+                margin-left: 0;
+                top: 0;
             }
         }
     }
@@ -1435,10 +1432,7 @@ section.slider-block {
     .footer-content {
         .footer-list-container {
             display: grid;
-            padding-top: 40px;
-            padding-bottom: 40px;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding: 40px 10px;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             grid-auto-rows: auto;
             grid-row-gap: 1vh;
@@ -1482,7 +1476,7 @@ section.slider-block {
                         .btn-primary {
                             background-color: $font-dark;
                             margin-top: 8px;
-                            border-radius: 0px;
+                            border-radius: 0;
                             text-align: center;
                         }
 
@@ -1505,7 +1499,7 @@ section.slider-block {
         padding-left: 15px;
 
         .footer-list-container {
-            padding-left: 0px !important;
+            padding-left: 0 !important;
         }
 
         .currency {
@@ -1526,7 +1520,7 @@ section.slider-block {
     align-items: center;
 
     p {
-        padding: 0px 15px;
+        padding: 0 15px;
     }
 }
 
@@ -1630,7 +1624,7 @@ section.slider-block {
             @extend .layered-filter-wrapper;
             width: 100%;
             float: none;
-            padding-right: 0px;
+            padding-right: 0;
             margin-top: -25px !important;
         }
 
@@ -2250,7 +2244,7 @@ section.product-detail {
                 }
 
                 .accordian .accordian-content {
-                    padding: 20px 0px;
+                    padding: 20px 0;
                 }
 
                 .attributes {
@@ -2363,7 +2357,7 @@ accordian {
         left: 50%;
         width: 0;
         height: 0;
-        border: 5px solid transparent;
+        /* border: 5px solid transparent; is overwritten: */
         border: 6px solid transparent\0;
         border-top-color: inherit;
         transform: translate(-50%);
@@ -2382,7 +2376,7 @@ accordian {
         flex-direction: column;
 
         div.product-image-group {
-            margin-right: 0px;
+            margin-right: 0;
             max-width: none;
             width: auto;
             min-height: 400px;
@@ -2400,7 +2394,7 @@ accordian {
                     margin-top: 5px;
                     flex-direction: row;
                     overflow-x: scroll;
-                    margin-right: 0px;
+                    margin-right: 0;
 
                     .thumb-frame {
                         img {
@@ -2707,7 +2701,7 @@ section.cart {
             border: 1px solid #c7c7c7;
             border-right: none;
             border-left: none;
-            border-radius: 0px;
+            border-radius: 0;
 
             &:focus {
                 border-color: #c7c7c7;
@@ -2788,13 +2782,13 @@ section.cart {
                 .misc-controls {
                     position: relative;
                     top: 300px;
-                    margin-top: 0px;
+                    margin-top: 0;
                 }
             }
 
             .right-side {
                 width: 100%;
-                padding-left: 0px;
+                padding-left: 0;
                 position: relative;
                 top: -20px;
             }
@@ -2899,7 +2893,6 @@ section.cart {
             width: 100%;
             display: inline-flex;
             justify-content: space-between;
-            width: 100%;
             padding-bottom: 15px;
             border-bottom: 1px solid $border-color;
 
@@ -2910,7 +2903,7 @@ section.cart {
                 .decorator {
                     height: 48px;
                     width: 48px;
-                    border: 1px solid black;
+                    /* border: 1px solid black;  is overwritten: */
                     border-radius: 50%;
                     display: inline-flex;
                     border: 1px solid $border-color;
@@ -3118,11 +3111,11 @@ section.cart {
     .checkout-process {
         .col-main {
             width: 100%;
-            padding-right: 0px;
+            padding-right: 0;
 
             ul.checkout-steps {
                 border-bottom: none;
-                padding-bottom: 0px;
+                padding-bottom: 0;
 
                 span {
                     display: none;
@@ -3138,7 +3131,7 @@ section.cart {
         }
 
         .step-content {
-            padding-top: 0px;
+            padding-top: 0;
 
             .control-group .control {
                 width: 100%;
@@ -3410,7 +3403,7 @@ section.review {
 
             .review-form {
                 width: 100%;
-                margin-left: 0px;
+                margin-left: 0;
 
                 .heading {
                     .right {
@@ -3424,7 +3417,7 @@ section.review {
 
                     .left-side {
                         width: 100%;
-                        padding: 0px 0px 40px 0px;
+                        padding: 0 0 40px 0;
                         margin-top: -30px;
                     }
 
@@ -3432,7 +3425,7 @@ section.review {
                         width: 100%;
 
                         .rater .percentage {
-                            margin-right: 0px;
+                            margin-right: 0;
                         }
                     }
                 }
@@ -3455,8 +3448,6 @@ section.review {
         text-align: center;
         font-size: 18px;
         color: $font-light;
-
-        text-align: center;
     }
 
     .login-form {
@@ -3736,7 +3727,7 @@ ol.breadcrumb {
                         width: 100%;
 
                         .icon {
-                            right: 0px;
+                            right: 0;
                         }
                     }
 
@@ -3993,7 +3984,7 @@ ol.breadcrumb {
 @media only screen and (max-width: 720px) {
     .error-container .wrapper {
         flex-direction: column-reverse !important;
-        margin: 10px 0px 20px 0px !important;
+        margin: 10px 0 20px 0 !important;
         align-items: start !important;
         height: 100% !important;
     }
@@ -4110,7 +4101,7 @@ ol.breadcrumb {
         .header-top {
             div.left-content {
                 ul.logo-container {
-                    margin-right: 0px;
+                    margin-right: 0;
                     margin-left: 12px;
                 }
 
@@ -4118,19 +4109,15 @@ ol.breadcrumb {
                     .search-field {
                         border: 2px solid $border-color;
                         padding-right: 12px;
-                        padding-left: 0px;
-                        border-radius: 2px;
-                        border-top-left-radius: 0px;
-                        border-bottom-left-radius: 0px;
+                        padding-left: 0;
+                        border-radius: 0 2px 2px 0;
                         -webkit-appearance: none;
                     }
 
                     .search-icon-wrapper {
                         border: 2px solid $border-color;
                         border-right: none;
-                        border-radius: 2px;
-                        border-top-right-radius: 0px;
-                        border-bottom-right-radius: 0px;
+                        border-radius: 2px 0 0 2px;
                         margin-left: -2px;
                     }
 
@@ -4159,7 +4146,7 @@ ol.breadcrumb {
 
                     .cart-dropdown-container {
                         .dropdown-list {
-                            left: 0px;
+                            left: 0;
                             right: unset !important;
                         }
 
@@ -4171,7 +4158,7 @@ ol.breadcrumb {
                     .account,
                     .currency {
                         right: unset;
-                        left: 0px;
+                        left: 0;
                     }
 
                     .guest {
@@ -4187,7 +4174,7 @@ ol.breadcrumb {
         .header-bottom {
             .nav > li {
                 float: right;
-                margin-right: 0px;
+                margin-right: 0;
                 margin-left: 1px;
             }
 
@@ -4218,7 +4205,7 @@ ol.breadcrumb {
         text-align: right;
 
         &.bottom-right {
-            left: 0px;
+            left: 0;
             right: auto;
         }
     }
@@ -4227,14 +4214,14 @@ ol.breadcrumb {
         .header {
             .header-top div.right-content {
                 .menu-box {
-                    margin-left: 0px;
+                    margin-left: 0;
                     margin-right: 5px;
                 }
 
                 .right-content-menu {
                     .account {
                         position: absolute;
-                        left: 0px;
+                        left: 0;
                         right: auto;
                     }
 
@@ -4296,7 +4283,7 @@ ol.breadcrumb {
     }
 
     .main-container-wrapper .product-card .cart-wish-wrap .addtocart {
-        margin-right: 0px;
+        margin-right: 0;
         margin-left: 10px;
     }
 
@@ -4305,7 +4292,7 @@ ol.breadcrumb {
      */
     section.product-detail div.layouter .form-container {
         div.product-image-group {
-            margin-right: 0px;
+            margin-right: 0;
             margin-left: 30px;
 
             .add-to-buttons {
@@ -4315,12 +4302,12 @@ ol.breadcrumb {
 
         div .thumb-list {
             margin-left: 4px;
-            margin-right: 0px;
+            margin-right: 0;
         }
 
         .details {
             .accordian .accordian-header {
-                padding: 20px 0px 20px 15px;
+                padding: 20px 0 20px 15px;
 
                 .icon {
                     float: left;
@@ -4334,14 +4321,14 @@ ol.breadcrumb {
             .full-specifications {
                 td {
                     &:first-child {
-                        padding-right: 0px;
+                        padding-right: 0;
                         padding-left: 40px;
                     }
                 }
             }
 
             .product-ratings .total-reviews {
-                margin-left: 0px;
+                margin-left: 0;
                 margin-right: 15px;
             }
 
@@ -4357,8 +4344,8 @@ ol.breadcrumb {
             div.layouter
             .form-container
             div.product-image-group {
-            margin-right: 0px;
-            margin-left: 0px;
+            margin-right: 0;
+            margin-left: 0;
         }
     }
 
@@ -4367,7 +4354,7 @@ ol.breadcrumb {
      */
     .main .category-container .layered-filter-wrapper,
     .main .category-container .responsive-layred-filter {
-        padding-right: 0px;
+        padding-right: 0;
         padding-left: 20px;
     }
 
@@ -4376,17 +4363,17 @@ ol.breadcrumb {
             float: left;
 
             .view-mode {
-                margin-right: 0px;
+                margin-right: 0;
                 margin-left: 20px;
             }
 
             .sorter {
-                margin-right: 0px;
+                margin-right: 0;
                 margin-left: 10px;
             }
 
             label {
-                margin-right: 0px;
+                margin-right: 0;
                 margin-left: 5px;
             }
         }
@@ -4400,7 +4387,7 @@ ol.breadcrumb {
      * Product review page.
      */
     section.review .review-layouter .review-form {
-        margin-left: 0px;
+        margin-left: 0;
         margin-right: 20px;
 
         .heading .right {
@@ -4409,7 +4396,7 @@ ol.breadcrumb {
 
         .ratings-reviews .right-side .rater {
             .star-name {
-                margin-right: 0px;
+                margin-right: 0;
                 margin-left: 5px;
             }
         }
@@ -4417,7 +4404,7 @@ ol.breadcrumb {
 
     @media only screen and (max-width: 770px) {
         section.review .review-layouter .review-form {
-            margin-right: 0px;
+            margin-right: 0;
         }
     }
 
@@ -4431,14 +4418,14 @@ ol.breadcrumb {
 
             .misc-controls a.link {
                 margin-left: 15px;
-                margin-right: 0px;
+                margin-right: 0;
             }
         }
 
         .right-side {
             width: 30%;
             padding-right: 40px;
-            padding-left: 0px;
+            padding-left: 0;
         }
     }
 
@@ -4451,28 +4438,28 @@ ol.breadcrumb {
 
     .item div {
         margin-left: 15px;
-        margin-right: 0px !important;
+        margin-right: 0 !important;
     }
 
     .cart-item-list .item .item-details .misc {
         div.qty-text {
-            margin-right: 0px;
+            margin-right: 0;
             margin-left: 10px;
         }
 
         input.box {
-            margin-right: 0px;
+            margin-right: 0;
             margin-left: 30px;
         }
 
         .remove {
             margin-left: 30px;
-            margin-right: 0px;
+            margin-right: 0;
         }
 
         .control-group label {
             margin-left: 15px;
-            margin-right: 0px;
+            margin-right: 0;
         }
     }
 
@@ -4483,13 +4470,13 @@ ol.breadcrumb {
                 float: none;
 
                 .misc-controls div button {
-                    margin-right: 0px;
+                    margin-right: 0;
                 }
             }
 
             .right-side {
                 width: 100%;
-                padding-right: 0px;
+                padding-right: 0;
             }
         }
     }
@@ -4499,17 +4486,17 @@ ol.breadcrumb {
      */
     .checkout-process {
         .col-right {
-            padding-left: 0px;
+            padding-left: 0;
             padding-right: 40px;
         }
 
         .col-main {
             padding-left: 40px;
-            padding-right: 0px;
+            padding-right: 0;
 
             ul.checkout-steps li span {
                 margin-right: 7px;
-                margin-left: 0px;
+                margin-left: 0;
             }
 
             .step-content {
@@ -4525,7 +4512,7 @@ ol.breadcrumb {
 
                 .payment-methods .control-info {
                     margin-right: 28px;
-                    margin-left: 0px;
+                    margin-left: 0;
                 }
 
                 .order-description,
@@ -4545,11 +4532,11 @@ ol.breadcrumb {
     }
 
     .radio {
-        margin: 10px 0px 5px 5px;
+        margin: 10px 0 5px 5px;
 
         .radio-view {
             margin-left: 5px;
-            margin-right: 0px;
+            margin-right: 0;
         }
 
         input {
@@ -4570,7 +4557,7 @@ ol.breadcrumb {
 
     @media only screen and (max-width: 770px) {
         .checkout-process .col-main {
-            padding-left: 0px;
+            padding-left: 0;
         }
     }
 
@@ -4579,7 +4566,7 @@ ol.breadcrumb {
      */
     .account-content {
         .account-layout {
-            margin-left: 0px;
+            margin-left: 0;
             margin-right: 40px;
         }
 
@@ -4611,7 +4598,7 @@ ol.breadcrumb {
     .account-item-card {
         .media-info .info {
             margin-right: 20px;
-            margin-left: 0px;
+            margin-left: 0;
         }
 
         .operations a span {
@@ -4636,10 +4623,10 @@ ol.breadcrumb {
     @media all and (max-width: 770px) {
         .account-content {
             .account-layout {
-                margin-right: 0px;
+                margin-right: 0;
 
                 .account-head .account-action {
-                    margin-left: 0px;
+                    margin-left: 0;
                 }
             }
 
@@ -4670,7 +4657,7 @@ ol.breadcrumb {
         li
         span.icon {
         margin-left: 5px;
-        margin-right: 0px;
+        margin-right: 0;
     }
 
     @media all and (max-width: 720px) {
@@ -4679,7 +4666,7 @@ ol.breadcrumb {
             padding-left: 10%;
 
             .footer-list-container {
-                padding-right: 0px !important;
+                padding-right: 0 !important;
             }
         }
     }
@@ -4703,7 +4690,7 @@ ol.breadcrumb {
 
     .product-list {
         .product-card .product-information {
-            padding-left: 0px;
+            padding-left: 0;
             padding-right: 30px;
             float: left;
         }
@@ -4834,7 +4821,7 @@ ol.breadcrumb {
         img {
             width: 150px;
             height: auto;
-            box-shadow: rgba(0, 0, 0, 0.32) 1px 1px 3px 0px;
+            box-shadow: rgba(0, 0, 0, 0.32) 1px 1px 3px 0;
         }
     }
 
@@ -4869,11 +4856,11 @@ body {
 }
 
 .mt-0 {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .desc > p {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .comparison-component > h1 {

@@ -130,7 +130,7 @@ abstract class Payment
     public function getAdditionalDetails()
     {
         if (! $this->getConfigData('instructions')
-            || $this->getConfigData('instructions') == ''
+            || $this->getConfigData('instructions') === ''
         ) {
             return [];
         }

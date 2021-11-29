@@ -46,7 +46,7 @@ class DefaultSlot extends Booking
 
         $slots = [];
 
-        return $bookingProductSlot->booking_type == 'one'
+        return $bookingProductSlot->booking_type === 'one'
                ? $this->getOneBookingForManyDaysSlots($bookingProductSlot, $requestedDate)
                : $this->getManyBookingsforOneDaySlots($bookingProductSlot, $requestedDate);
     }

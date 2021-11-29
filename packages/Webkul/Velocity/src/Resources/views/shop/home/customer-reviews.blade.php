@@ -1,6 +1,6 @@
 @php
     $reviews = app('Webkul\Velocity\Helpers\Helper')->getShopRecentReviews(4);
-    $reviewCount = count($reviews);
+    $reviewCount = count($reviews)
 @endphp
 
 <div class="container-fluid reviews-container">

@@ -72,7 +72,7 @@
                                         class="theme-btn"
                                         @click="placeOrder()"
                                         :disabled="!isPlaceOrderEnabled"
-                                        v-if="selected_payment_method.method != 'paypal_smart_button'"
+                                        v-if="selected_payment_method.method !== 'paypal_smart_button'"
                                         id="checkout-place-order-button">
                                         {{ __('shop::app.checkout.onepage.place-order') }}
                                     </button>
@@ -235,7 +235,7 @@
                     validateForm: async function (scope) {
                         var isManualValidationFail = false;
 
-                        if (scope == 'address-form') {
+                        if (scope === 'address-form') {
                             isManualValidationFail = this.validateAddressForm();
                         }
 
@@ -294,17 +294,17 @@
                                 let elementId = element.id;
 
                                 if (value == ""
-                                    && element.id != 'sign-btn'
-                                    && element.id != 'billing[company_name]'
-                                    && element.id != 'shipping[company_name]'
+                                    && element.id !== 'sign-btn'
+                                    && element.id !== 'billing[company_name]'
+                                    && element.id !== 'shipping[company_name]'
                                 ) {
                                     // check for multiple line address
                                     if (elementId.match('billing_address_')
                                         || elementId.match('shipping_address_')
                                     ) {
                                         // only first line address is required
-                                        if (elementId == 'billing_address_0'
-                                            || elementId == 'shipping_address_0'
+                                        if (elementId === 'billing_address_0'
+                                            || elementId === 'shipping_address_0'
                                         ) {
                                             isManualValidationFail = true;
                                         }
@@ -426,7 +426,7 @@
                                 this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
                                 this.current_step = this.step_numbers[response.data.jump_to_section];
 
-                                if (response.data.jump_to_section == "payment") {
+                                if (response.data.jump_to_section === "payment") {
                                     this.showPaymentSection = true;
                                     paymentMethods  = response.data.paymentMethods;
                                 }

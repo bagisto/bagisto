@@ -45,7 +45,7 @@
                 </button>
             </div>
 
-            <div class="control-group" style="margin-bottom: 0px;">
+            <div class="control-group" style="margin-bottom: 0;">
                 <a href="{{ route('customer.session.index') }}">
                     <i class="icon primary-back-icon"></i>
                     {{ __('shop::app.customer.reset-password.back-link-title') }}

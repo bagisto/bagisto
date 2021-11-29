@@ -42,11 +42,11 @@ class ExportController extends Controller
             return redirect()->back();
         }
 
-        if ($format == 'csv') {
+        if ($format === 'csv') {
             return Excel::download(new DataGridExport($records), last($gridName) . '.csv');
         }
 
-        if ($format == 'xls') {
+        if ($format === 'xls') {
             return Excel::download(new DataGridExport($records), last($gridName) . '.xlsx');
         }
 

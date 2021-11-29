@@ -165,7 +165,7 @@ $(function() {
             },
 
             addFlashMessages: function() {
-                if (typeof flashMessages == 'undefined') {
+                if (typeof flashMessages === 'undefined') {
                     return;
                 }
 

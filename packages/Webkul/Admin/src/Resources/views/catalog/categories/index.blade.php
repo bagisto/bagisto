@@ -60,7 +60,7 @@
         let deleteCategory = function(e, type) {
             let indexes;
 
-            if (type == 'delete') {
+            if (type === 'delete') {
                 indexes = $(e.target).parent().attr('id');
             } else {
                 $("input[type='checkbox']").attr('disabled', true);
@@ -86,7 +86,7 @@
                         if (data.product_count > 0) {
                             let message = "{{ trans('ui::app.datagrid.massaction.delete-category-product') }}";
 
-                            if (type == 'delete') {
+                            if (type === 'delete') {
                                 doAction(e, message);
                             } else {
                                 $('form').attr('onsubmit', 'return confirm("'+message+'")');
@@ -94,7 +94,7 @@
                         } else {
                             let message = "{{ __('ui::app.datagrid.click_on_action') }}";
 
-                            if (type == 'delete') {
+                            if (type === 'delete') {
                                 doAction(e, message);
                             } else {
                                 $('form').attr('onsubmit', 'return confirm("'+message+'")');

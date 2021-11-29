@@ -10,9 +10,9 @@
             <div class="menu-block-content">
                 <ul class="menubar">
                     @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                        $showCompare = core()->getConfigData('general.content.shop.compare_option') === "1";
 
-                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') === "1";
                     @endphp
 
                     @if (! $showCompare)

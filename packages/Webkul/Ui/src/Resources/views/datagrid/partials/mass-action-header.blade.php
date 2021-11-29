@@ -19,7 +19,7 @@
                             </select>
                         </div>
 
-                        <div class="control-group" style="margin-left: 10px;" v-if="massActionType.value == 'update'">
+                        <div class="control-group" style="margin-left: 10px;" v-if="massActionType.value === 'update'">
                             <select class="control" v-model="massActionUpdateValue" name="update-options" required>
                                 <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ id }}</option>
                             </select>

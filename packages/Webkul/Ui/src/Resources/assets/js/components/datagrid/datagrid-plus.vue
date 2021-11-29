@@ -16,7 +16,7 @@
                                 <option
                                     value="all"
                                     :selected="
-                                        extraFilters.current.channel == 'all'
+                                        extraFilters.current.channel === 'all'
                                     "
                                     v-text="translations.allChannels"
                                 ></option>
@@ -48,7 +48,7 @@
                                 <option
                                     value="all"
                                     :selected="
-                                        extraFilters.current.locale == 'all'
+                                        extraFilters.current.locale === 'all'
                                     "
                                     v-text="translations.allLocales"
                                 ></option>
@@ -389,13 +389,14 @@
                                         />
                                     </div>
                                 </li>
-
-                                <button
-                                    v-text="translations.apply"
-                                    class="btn btn-sm btn-primary apply-filter"
-                                    v-on:click="getResponse"
-                                ></button>
                             </ul>
+                          <!-- CHECK: moved outside of ul -->
+                          <button
+                              v-text="translations.apply"
+                              class="btn btn-sm btn-primary apply-filter"
+                              v-on:click="getResponse"
+                          >
+                          </button>
                         </div>
                     </div>
                 </div>
@@ -409,7 +410,7 @@
                     v-for="(filter, filterKey) in filters"
                     style="text-transform: capitalize"
                 >
-                    <span v-if="filter.column == 'perPage'">perPage</span>
+                    <span v-if="filter.column === 'perPage'">perPage</span>
                     <span v-else>{{ filter.label }}</span>
 
                     <span class="wrapper" v-if="filter.prettyValue">
@@ -501,7 +502,7 @@
                                     <div
                                         class="control-group"
                                         style="margin-left: 10px"
-                                        v-if="massActionType.value == 'update'"
+                                        v-if="massActionType.value === 'update'"
                                     >
                                         <select
                                             class="control"
@@ -541,6 +542,7 @@
                         >
                             <span class="checkbox">
                                 <input
+                                    id="checkbox"
                                     type="checkbox"
                                     v-model="allSelected"
                                     v-on:change="selectAll"
@@ -629,12 +631,12 @@
                                             ]
                                         "
                                         :href="
-                                            action.method == 'GET'
+                                            action.method === 'GET'
                                                 ? record[`${action.key}_url`]
                                                 : 'javascript:void(0);'
                                         "
                                         v-on:click="
-                                            action.method != 'GET'
+                                            action.method !== 'GET'
                                                 ? typeof action.function !==
                                                       'undefined' &&
                                                   action.function
@@ -902,7 +904,7 @@ export default {
         },
 
         filterNumberInput: function(e) {
-            this.numberValue = e.target.value.replace(/[^0-9\,\.]+/g, '');
+            this.numberValue = e.target.value.replace(/[^0-9,.]+/g, '');
         },
 
         getResponse: function() {
@@ -1225,10 +1227,10 @@ export default {
 
             for (let i = 0; i < this.filters.length; i++) {
                 if (
-                    this.filters[i].column == 'status' ||
-                    this.filters[i].column == 'value_per_locale' ||
-                    this.filters[i].column == 'value_per_channel' ||
-                    this.filters[i].column == 'is_unique'
+                    this.filters[i].column === 'status' ||
+                    this.filters[i].column === 'value_per_locale' ||
+                    this.filters[i].column === 'value_per_channel' ||
+                    this.filters[i].column === 'is_unique'
                 ) {
                     if (this.filters[i].val.includes('True')) {
                         this.filters[i].val = 1;
@@ -1437,7 +1439,7 @@ export default {
 
         paginate: function(e) {
             for (let i = 0; i < this.filters.length; i++) {
-                if (this.filters[i].column == 'perPage') {
+                if (this.filters[i].column === 'perPage') {
                     this.filters.splice(i, 1);
                 }
             }

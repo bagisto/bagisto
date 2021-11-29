@@ -272,9 +272,9 @@
 
             created: function () {
                 this.groups.forEach(function (group) {
-                    group.custom_attributes.forEach(function (attribute) {
+                    group.custom_attributes.forEach(function (attributeIn) {
                         var attribute = this.custom_attributes.filter(function (attributeTemp) {
-                            return attributeTemp.id == attribute.id;
+                            return attributeTemp.id === attribute.id;
                         });
 
                         if (attribute.length) {

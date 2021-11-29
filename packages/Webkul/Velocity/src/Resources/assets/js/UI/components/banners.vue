@@ -19,7 +19,7 @@
                 >
                     <a
                         :href="
-                            banner.slider_path != ''
+                            banner.slider_path !== ''
                                 ? banner.slider_path
                                 : 'javascript:void(0);'
                         "
@@ -27,7 +27,7 @@
                         <img
                             class="col-12 no-padding banner-icon"
                             :src="
-                                banner.image_url != ''
+                                banner.image_url !== ''
                                     ? banner.image_url
                                     : defaultBanner
                             "

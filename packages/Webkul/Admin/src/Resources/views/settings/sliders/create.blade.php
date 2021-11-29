@@ -88,7 +88,7 @@
 
                         <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                             @foreach ($errors->get('image.*') as $key => $message)
-                                @php echo str_replace($key, 'Image', $message[0]); @endphp
+                                @php echo str_replace($key, 'Image', $message[0]) @endphp
                             @endforeach
                         </span>
                     </div>

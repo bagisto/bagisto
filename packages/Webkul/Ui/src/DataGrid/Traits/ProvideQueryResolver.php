@@ -56,9 +56,9 @@ trait ProvideQueryResolver
      */
     private function resolveBooleanQuery($collection, $columnName, $condition, $filterValue)
     {
-        if ($this->operators[$condition] == '=') {
+        if ($this->operators[$condition] === '=') {
             $this->checkFilterValueCondition($collection, $columnName, $condition, $filterValue);
-        } else if ($this->operators[$condition] == '<>') {
+        } else if ($this->operators[$condition] === '<>') {
             $this->checkFilterValueCondition($collection, $columnName, $condition, $filterValue, true);
         } else {
             $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue);

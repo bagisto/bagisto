@@ -56,7 +56,7 @@
 @stop
 
 @push('css')
-    <style type="text/css">
+    <style>
         .related-products {
             width: 100%;
         }
@@ -66,11 +66,11 @@
         }
 
         .store-meta-images > .recently-viewed:first-child {
-            margin-top: 0px;
+            margin-top: 0;
         }
 
         .main-content-wrapper {
-            margin-bottom: 0px;
+            margin-bottom: 0;
         }
 
         .buynow {
@@ -136,7 +136,7 @@
                                         @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
                                             <div class="col-12">
                                                 @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
-                                                    {{ $offers }} </br>
+                                                    {{ $offers }} <br/>
                                                 @endforeach
                                             </div>
                                         @endif
@@ -152,8 +152,7 @@
                                                 'form' => false,
                                                 'product' => $product,
                                                 'showCartIcon' => false,
-                                                'showCompare' => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                                ? true : false,
+                                                'showCompare' => core()->getConfigData('general.content.shop.compare_option') === "1",
                                             ])
                                         </div>
                                     </div>
@@ -285,7 +284,7 @@
 
             methods: {
                 onSubmit: function(event) {
-                    if (event.target.getAttribute('type') != 'submit')
+                    if (event.target.getAttribute('type') !== 'submit')
                         return;
 
                     event.preventDefault();

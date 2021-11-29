@@ -7,7 +7,7 @@
 @endsection
 
 @push('css')
-    <style type="text/css">
+    <style>
         .category-container {
             min-height: unset;
         }
@@ -82,7 +82,7 @@
             @if ($results && $results->count())
                 <div class="filters-container col-12" style="
                     margin-top: 20px;
-                    padding-left: 0px !important;
+                    padding-left: 0 !important;
                     padding-bottom: 10px !important;
                 ">
                     @include ('shop::products.list.toolbar')
@@ -107,7 +107,7 @@
                     @endif
 
                     @foreach ($results as $productFlat)
-                        @if ($toolbarHelper->getCurrentMode() == 'grid')
+                        @if ($toolbarHelper->getCurrentMode() === 'grid')
                             @include('shop::products.list.card', [
                                 'cardClass' => 'category-product-image-container',
                                 'product' => $productFlat->product,
@@ -142,7 +142,7 @@
             },
 
             created: function() {
-                if (localStorage.searched_terms && localStorage.searched_terms != '') {
+                if (localStorage.searched_terms && localStorage.searched_terms !== '') {
                     this.searched_terms = localStorage.searched_terms.split('_');
 
                     this.searched_terms = this.searched_terms.map(term => {

@@ -83,7 +83,7 @@
                     </span>
                 </div>
 
-                @if (request()->route()->getName() != 'velocity.search.index')
+                @if (request()->route()->getName() !== 'velocity.search.index')
                     @include ('shop::products.list.layered-navigation')
                 @endif
             </div>

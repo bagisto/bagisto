@@ -1,5 +1,5 @@
 @php
-    $currentCustomer = auth()->guard('customer')->user();
+    $currentCustomer = auth()->guard('customer')->user()
 @endphp
 
 @extends('shop::customers.account.index')

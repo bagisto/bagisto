@@ -81,7 +81,7 @@
                     line-height: 2.5rem;
 
                     ul {
-                        margin-bottom: 0px;
+                        margin-bottom: 0;
 
                         li {
                             margin-bottom: 5px;
@@ -95,7 +95,7 @@
             }
 
             .footer-rt-content {
-                padding-right: 0px;
+                padding-right: 0;
 
                 .row {
                     > div {
@@ -148,7 +148,7 @@
 
         .footer-statics {
             .software-description {
-                padding-left: 0px;
+                padding-left: 0;
 
                 p {
                     @extend .clr-dark;
@@ -187,7 +187,7 @@
         color: rgba(255,255,255,0.83);
 
         p {
-            padding: 0px 20px;
+            padding: 0 20px;
         }
 
         a {

@@ -53,7 +53,7 @@ class ContentRepository extends Repository
     {
         // Event::fire('velocity.content.create.before');
 
-        if (isset($data['locale']) && $data['locale'] == 'all') {
+        if (isset($data['locale']) && $data['locale'] === 'all') {
             $model = app()->make($this->model());
 
             foreach (core()->getAllLocales() as $locale) {
@@ -102,7 +102,7 @@ class ContentRepository extends Repository
 
         $content = $this->model->find($id);
 
-        if ($content->content_type == 'product') {
+        if ($content->content_type === 'product') {
             $contentLocale = $content->translate($locale);
 
             $products = json_decode($contentLocale->products, true);
@@ -134,7 +134,7 @@ class ContentRepository extends Repository
         $velocityMetaData = app('Webkul\Velocity\Helpers\Helper')->getVelocityMetaData();
         $headerContentCount = $velocityMetaData->header_content_count ?? '';
 
-        $headerContentCount = $headerContentCount != '' ? $headerContentCount : 5;
+        $headerContentCount = $headerContentCount !== '' ? $headerContentCount : 5;
 
         $contentCollection = $query
             ->select(

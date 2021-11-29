@@ -4,7 +4,7 @@
 
     $locale = core()->getRequestedLocaleCode();
 
-    $attributeOptionTranslations = app('\Webkul\Attribute\Repositories\AttributeOptionTranslationRepository')->where('locale', $locale)->get()->toJson();
+    $attributeOptionTranslations = app('\Webkul\Attribute\Repositories\AttributeOptionTranslationRepository')->where('locale', $locale)->get()->toJson()
 @endphp
 
 @push('scripts')
@@ -45,7 +45,7 @@
                     @foreach ($comparableAttributes as $attribute)
                         <tr>
                             <td>
-                                <span class="fs16">{{ isset($attribute['name']) ? $attribute['name'] : $attribute['admin_name'] }}</span>
+                                <span class="fs16">{{ $attribute['name'] ?? $attribute['admin_name'] }}</span>
                             </td>
 
                             <td :key="`title-${index}`" v-for="(product, index) in products">
@@ -164,7 +164,7 @@
                     'products': [],
                     'isProductListLoaded': false,
                     'attributeOptions': JSON.parse(@json($attributeOptionTranslations)),
-                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' === "true",
                 }
             },
 
@@ -215,7 +215,7 @@
                     if (this.isCustomer) {
                         this.$http.delete(`${this.$root.baseUrl}/comparison?productId=${productId}`)
                         .then(response => {
-                            if (productId == 'all') {
+                            if (productId === 'all') {
                                 this.$set(this, 'products', this.products.filter(product => false));
                             } else {
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
@@ -231,7 +231,7 @@
                     } else {
                         let existingItems = this.getStorageValue('compared_product');
 
-                        if (productId == "all") {
+                        if (productId === "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
 
@@ -263,18 +263,18 @@
                     if (productDetails && attributeValues) {
                         var attributeItems;
 
-                        if (type == "multiple") {
+                        if (type === "multiple") {
                             attributeItems = productDetails[attributeValues].split(',');
-                        } else if (type == "single") {
+                        } else if (type === "single") {
                             attributeItems = productDetails[attributeValues];
                         }
 
                         attributeOptions = this.attributeOptions.filter(option => {
-                            if (type == "multiple") {
+                            if (type === "multiple") {
                                 if (attributeItems.indexOf(option.attribute_option_id.toString()) > -1) {
                                     return true;
                                 }
-                            } else if (type == "single") {
+                            } else if (type === "single") {
                                 if (attributeItems == option.attribute_option_id.toString()) {
                                     return true;
                                 }

@@ -1,4 +1,4 @@
-@if ($product->type == 'grouped')
+@if ($product->type === 'grouped')
     {!! view_render_event('bagisto.shop.products.view.grouped_products.before', ['product' => $product]) !!}
 
     <div class="grouped-product-container">

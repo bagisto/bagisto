@@ -24,18 +24,18 @@
 
         <div class="category-container">
 
-            @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
+            @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description'], false))
                 @include ('shop::products.list.layered-navigation')
             @endif
 
-            <div class="category-block" @if ($category->display_mode == 'description_only') style="width: 100%" @endif>
+            <div class="category-block" @if ($category->display_mode === 'description_only') style="width: 100%" @endif>
                 <div class="hero-image mb-35">
                     @if (!is_null($category->image))
                         <img class="logo" src="{{ $category->image_url }}" alt="" />
                     @endif
                 </div>
 
-                @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
+                @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description'], false))
                     @if ($category->description)
                         <div class="category-description">
                             {!! $category->description !!}
@@ -43,7 +43,7 @@
                     @endif
                 @endif
 
-                @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
+                @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description'], false))
                     <?php $products = $productRepository->getAll($category->id); ?>
 
                     @include ('shop::products.list.toolbar')
@@ -52,7 +52,7 @@
 
                         @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
-                        @if ($toolbarHelper->getCurrentMode() == 'grid')
+                        @if ($toolbarHelper->getCurrentMode() === 'grid')
                             <div class="product-grid-3">
                                 @foreach ($products as $productFlat)
 

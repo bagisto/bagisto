@@ -68,9 +68,9 @@ class ShopController extends Controller
             case 'featured-products':
                 $count = request()->get('count');
 
-                if ($slug == "new-products") {
+                if ($slug === "new-products") {
                     $products = $this->velocityProductRepository->getNewProducts($count);
-                } else if ($slug == "featured-products") {
+                } else if ($slug === "featured-products") {
                     $products = $this->velocityProductRepository->getFeaturedProducts($count);
                 }
 
