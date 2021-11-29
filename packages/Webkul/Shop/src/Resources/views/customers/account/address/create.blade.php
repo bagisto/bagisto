@@ -74,10 +74,14 @@
 
                 {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.vat_id.after') !!}
 
+                @php
+                    $addresses = old('address1') ?? explode(PHP_EOL, '');
+                @endphp
+
                 <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
                     <label for="address1" class="required">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
 
-                    <input type="text" class="control" name="address1[]" value="{{ old('address1') }}" id="address1" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
+                    <input type="text" class="control" name="address1[]" value="{{ $addresses[0] ?? '' }}" id="address1" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
 
                     <span class="control-error" v-if="errors.has('address1[]')">@{{ errors.first('address1[]') }}</span>
                 </div>

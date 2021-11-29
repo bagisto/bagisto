@@ -56,7 +56,7 @@ class CustomerCest
             'first_name'   => $faker->firstName,
             'last_name'    => $faker->lastName,
             'vat_id'       => 'INVALIDVAT',
-            'address1[]'   => $faker->streetAddress,
+            'address1[]'   => $faker->streetName,
             'country'      => $faker->countryCode,
             'state'        => $faker->state,
             'city'         => $faker->city,
