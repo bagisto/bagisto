@@ -52,15 +52,15 @@ class CustomerCest
         $I->click('Add Address');
 
         $this->fields = [
-            'company_name' => $faker->company,
-            'first_name'   => $faker->firstName,
-            'last_name'    => $faker->lastName,
+            'company_name' => preg_replace('/[^A-Za-z0-9 ]/', '', $faker->company),
+            'first_name'   => preg_replace('/[^A-Za-z0-9 ]/', '', $faker->firstName),
+            'last_name'    => preg_replace('/[^A-Za-z0-9 ]/', '', $faker->lastName),
             'vat_id'       => 'INVALIDVAT',
-            'address1[]'   => $faker->streetName,
-            'country'      => $faker->countryCode,
-            'state'        => $faker->state,
-            'city'         => $faker->city,
-            'postcode'     => $faker->postcode,
+            'address1[]'   => preg_replace('/[^A-Za-z0-9 ]/', '', $faker->streetAddress),
+            'country'      => preg_replace('/[^A-Za-z0-9 ]/', '', $faker->countryCode),
+            'state'        => preg_replace('/[^A-Za-z0-9 ]/', '', $faker->state),
+            'city'         => preg_replace('/[^A-Za-z0-9 ]/', '', $faker->city),
+            'postcode'     => preg_replace('/[^0-9]/', '', $faker->postcode),
             'phone'        => $faker->phoneNumber,
         ];
 
@@ -99,7 +99,7 @@ class CustomerCest
         $I->click('Edit');
 
         $oldcompany = $this->fields['company_name'];
-        $this->fields['company_name'] = $faker->company;
+        $this->fields['company_name'] = preg_replace('/[^A-Za-z0-9 ]/', '', $faker->company);
 
         $I->submitForm($formCssSelector, $this->fields);
 

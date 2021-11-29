@@ -4,6 +4,7 @@ namespace Webkul\Customer\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
+use Webkul\Core\Contracts\Validations\PhoneNumber;
 use Webkul\Customer\Rules\VatIdRule;
 
 class CustomerAddressRequest extends FormRequest
@@ -35,7 +36,7 @@ class CustomerAddressRequest extends FormRequest
             'state'        => ['required', 'alpha'],
             'city'         => ['required', new AlphaNumericSpace],
             'postcode'     => ['required', 'numeric'],
-            'phone'        => ['required', 'numeric'],
+            'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
         ];
     }
