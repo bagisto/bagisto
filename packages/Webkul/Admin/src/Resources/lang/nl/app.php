@@ -1532,5 +1532,24 @@ return [
             'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled',
             'records-found'     => 'Record(s) found'
         ]
+    ],
+    
+    'api' => [
+        'system'   => [
+            'api'                       => 'API',
+            'basic-configuration'       => 'Basisconfiguratie',
+            'customer-configuration'    => 'Klantconfiguratie',
+            'username'                  => 'gebruikersnaam',
+            'password'                  => 'Wachtwoord',
+            'login-after-register'      => 'Inloggen na registratie',
+            'info-login'                => 'Info: Klant moet inloggen na registratie API.',
+        ],
+        'auth'      => [
+            'invalid-auth'              => 'Waarschuwing: u bent niet geautoriseerd om API\'s te gebruiken.',
+            'required-token'            => 'Waarschuwing: tokenparameter is vereist.',
+            'invalid-store'             => 'Waarschuwing: u vraagt ​​een ongeldige winkel aan.',
+            'login-required'            => 'Waarschuwing: Klantenlogin is nodig om het product aan de vergelijkingslijst toe te voegen.',
+            'resource-not-found'        => 'Waarschuwing: Gevraagd :resource niet gevonden in het record.',
+        ]
     ]
 ];

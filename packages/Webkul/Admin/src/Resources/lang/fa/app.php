@@ -1534,5 +1534,24 @@ return [
             'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled',
             'records-found'     => 'Record(s) found'
         ]
+    ],
+    
+    'api' => [
+        'system'   => [
+            'api'                       => 'API',
+            'basic-configuration'       => 'Basic Configuration',
+            'customer-configuration'    => 'Customer Configuration',
+            'username'                  => 'Username',
+            'password'                  => 'Password',
+            'login-after-register'      => 'Login After Register',
+            'info-login'                => 'Info: Customer must be login after registration API.',
+        ],
+        'auth'      => [
+            'invalid-auth'              => 'Warning: You are not authorized to use APIs.',
+            'required-token'            => 'Warning: token parameter is required.',
+            'invalid-store'             => 'Warning: You are requesting an invalid store.',
+            'login-required'            => 'Warning: Customer login is needed to add the product to compare list.',
+            'resource-not-found'        => 'Warning: Requested :resource not found in the record.',
+        ]
     ]
 ];
