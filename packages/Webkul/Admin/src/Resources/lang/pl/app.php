@@ -1523,5 +1523,24 @@ return [
             'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled',
             'records-found'     => 'Record(s) found'
        ]
+    ],
+    
+    'api' => [
+        'system'   => [
+            'api'                       => 'API',
+            'basic-configuration'       => 'Konfiguracja podstawowa',
+            'customer-configuration'    => 'Konfiguracja klienta',
+            'username'                  => 'Nazwa użytkownika',
+            'password'                  => 'Hasło',
+            'login-after-register'      => 'Zaloguj się po rejestracji',
+            'info-login'                => 'Info: Klient musi być zalogowany po rejestracji API.',
+        ],
+        'auth'      => [
+            'invalid-auth'              => 'Ostrzeżenie: nie masz uprawnień do korzystania z interfejsów API.',
+            'required-token'            => 'Ostrzeżenie: wymagany jest parametr tokena.',
+            'invalid-store'             => 'Ostrzeżenie: prosisz o nieprawidłowy sklep.',
+            'login-required'            => 'Ostrzeżenie: Do dodania produktu do listy porównawczej potrzebny jest login klienta.',
+            'resource-not-found'        => 'Ostrzeżenie: Żądany :resource nie znaleziono w rekordzie.',
+        ]
     ]
 ];
