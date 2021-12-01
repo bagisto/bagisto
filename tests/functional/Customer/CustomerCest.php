@@ -182,7 +182,7 @@ class CustomerCest
             'state'        => $this->cleanField($this->faker->state),
             'city'         => $this->cleanField($this->faker->city),
             'postcode'     => $this->cleanField($this->faker->postcode),
-            'phone'        => $this->faker->phoneNumber,
+            'phone'        => $this->cleanField($this->faker->phoneNumber),
         ];
     }
 
