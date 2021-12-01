@@ -1089,6 +1089,8 @@ export default {
                                 ) {
                                     filterRepeated = true;
 
+                                    alert(this.translations.filterExists);
+
                                     return false;
                                 } else if (
                                     this.filters[j].cond === condition &&
