@@ -31,8 +31,8 @@ class ProductRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
-     * @param \Illuminate\Container\Container                    $app
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Illuminate\Container\Container  $app
      *
      * @return void
      */
@@ -115,6 +115,45 @@ class ProductRepository extends Repository
     }
 
     /**
+     * Retrieve product from slug without throwing an exception.
+     *
+     * @param  string  $slug
+     * @return \Webkul\Product\Contracts\ProductFlat
+     */
+    public function findBySlug($slug)
+    {
+        return app(ProductFlatRepository::class)->findOneWhere([
+            'url_key' => $slug,
+            'locale'  => app()->getLocale(),
+            'channel' => core()->getCurrentChannelCode(),
+        ]);
+    }
+
+    /**
+     * Retrive product from slug.
+     *
+     * @param  string  $slug
+     * @param  string  $columns
+     * @return \Webkul\Product\Contracts\Product
+     */
+    public function findBySlugOrFail($slug, $columns = null)
+    {
+        $product = app(ProductFlatRepository::class)->findOneWhere([
+            'url_key' => $slug,
+            'locale'  => app()->getLocale(),
+            'channel' => core()->getCurrentChannelCode(),
+        ]);
+
+        if (! $product) {
+            throw (new ModelNotFoundException)->setModel(
+                get_class($this->model), $slug
+            );
+        }
+
+        return $product;
+    }
+
+    /**
      * Get product related to category.
      *
      * @param  int  $categoryId
@@ -129,38 +168,6 @@ class ProductRepository extends Repository
         }
 
         return $qb->get();
-    }
-
-    /**
-     * Check out of stock items. This method needed `variants` alias in
-     * the `product_flat` query.
-     *
-     * @param  Webkul\Product\Models\ProductFlat  $query
-     * @return Illuminate\Database\Eloquent\Builder
-     */
-    public function checkOutOfStockItem($query)
-    {
-        return $query
-            ->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
-            ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
-            ->where(function ($qb) {
-                return $qb
-                /* for grouped, downloadable, bundle and booking product */
-                    ->orWhereIn('ps.type', ['grouped', 'downloadable', 'bundle', 'booking'])
-                    /* for simple and virtual product */
-                    ->orWhere(function ($qb) {
-                        return $qb->whereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
-                    })
-                    /* for configurable product */
-                    ->orWhere(function ($qb) {
-                        return $qb->where('ps.type', 'configurable')->where(function ($qb) {
-                            return $qb
-                                ->selectRaw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty)')
-                                ->from('product_flat')
-                                ->leftJoin('product_inventories', 'product_inventories.product_id', '=', 'product_flat.product_id');
-                        }, '>', 0);
-                    });
-            });
     }
 
     /**
@@ -230,6 +237,7 @@ class ProductRepository extends Repository
                 $orderDirection = $params['order'];
             } else {
                 $sortOptions = $this->getDefaultSortByOption();
+
                 $orderDirection = ! empty($sortOptions) ? $sortOptions[1] : 'asc';
             }
 
@@ -244,8 +252,8 @@ class ProductRepository extends Repository
 
             if ($priceFilter = request('price')) {
                 $priceRange = explode(',', $priceFilter);
-                if (count($priceRange) > 0) {
 
+                if (count($priceRange) > 0) {
                     $customerGroupId = null;
 
                     if (Cart::getCurrentCustomer()->check()) {
@@ -289,7 +297,6 @@ class ProductRepository extends Repository
 
             if (count($attributeFilters) > 0) {
                 $qb->where(function ($filterQuery) use ($attributeFilters) {
-
                     foreach ($attributeFilters as $attribute) {
                         $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
 
@@ -318,7 +325,6 @@ class ProductRepository extends Repository
                             }
                         });
                     }
-
                 });
 
                 # this is key! if a product has been filtered down to the same number of attributes that we filtered on,
@@ -328,7 +334,6 @@ class ProductRepository extends Repository
             }
 
             return $qb->groupBy('product_flat.id');
-
         });
 
         # apply scope query so we can fetch the raw sql and perform a count
@@ -354,45 +359,6 @@ class ProductRepository extends Repository
         ]);
 
         return $results;
-    }
-
-    /**
-     * Retrive product from slug.
-     *
-     * @param  string  $slug
-     * @param  string  $columns
-     * @return \Webkul\Product\Contracts\Product
-     */
-    public function findBySlugOrFail($slug, $columns = null)
-    {
-        $product = app(ProductFlatRepository::class)->findOneWhere([
-            'url_key' => $slug,
-            'locale'  => app()->getLocale(),
-            'channel' => core()->getCurrentChannelCode(),
-        ]);
-
-        if (! $product) {
-            throw (new ModelNotFoundException)->setModel(
-                get_class($this->model), $slug
-            );
-        }
-
-        return $product;
-    }
-
-    /**
-     * Retrieve product from slug without throwing an exception.
-     *
-     * @param  string  $slug
-     * @return \Webkul\Product\Contracts\ProductFlat
-     */
-    public function findBySlug($slug)
-    {
-        return app(ProductFlatRepository::class)->findOneWhere([
-            'url_key' => $slug,
-            'locale'  => app()->getLocale(),
-            'channel' => core()->getCurrentChannelCode(),
-        ]);
     }
 
     /**
@@ -447,6 +413,32 @@ class ProductRepository extends Repository
         })->paginate($count ? $count : 4);
 
         return $results;
+    }
+
+    /**
+     * Returns product's super attribute with options.
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return \Illuminate\Support\Collection
+     */
+    public function getSuperAttributes($product)
+    {
+        $superAttrbutes = [];
+
+        foreach ($product->super_attributes as $key => $attribute) {
+            $superAttrbutes[$key] = $attribute->toArray();
+
+            foreach ($attribute->options as $option) {
+                $superAttrbutes[$key]['options'][] = [
+                    'id'           => $option->id,
+                    'admin_name'   => $option->admin_name,
+                    'sort_order'   => $option->sort_order,
+                    'swatch_value' => $option->swatch_value,
+                ];
+            }
+        }
+
+        return $superAttrbutes;
     }
 
     /**
@@ -523,32 +515,6 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Returns product's super attribute with options.
-     *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Illuminate\Support\Collection
-     */
-    public function getSuperAttributes($product)
-    {
-        $superAttrbutes = [];
-
-        foreach ($product->super_attributes as $key => $attribute) {
-            $superAttrbutes[$key] = $attribute->toArray();
-
-            foreach ($attribute->options as $option) {
-                $superAttrbutes[$key]['options'][] = [
-                    'id'           => $option->id,
-                    'admin_name'   => $option->admin_name,
-                    'sort_order'   => $option->sort_order,
-                    'swatch_value' => $option->swatch_value,
-                ];
-            }
-        }
-
-        return $superAttrbutes;
-    }
-
-    /**
      * Search simple products for grouped product association.
      *
      * @param  string  $term
@@ -571,6 +537,37 @@ class ProductRepository extends Repository
                 ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
                 ->orderBy('product_id', 'desc');
         })->get();
+    }
+
+    /**
+     * Check out of stock items.
+     *
+     * @param  Webkul\Product\Models\ProductFlat  $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function checkOutOfStockItem($query)
+    {
+        return $query
+            ->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
+            ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
+            ->where(function ($qb) {
+                return $qb
+                /* for grouped, downloadable, bundle and booking product */
+                    ->orWhereIn('ps.type', ['grouped', 'downloadable', 'bundle', 'booking'])
+                    /* for simple and virtual product */
+                    ->orWhere(function ($qb) {
+                        return $qb->whereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
+                    })
+                    /* for configurable product */
+                    ->orWhere(function ($qb) {
+                        return $qb->where('ps.type', 'configurable')->where(function ($qb) {
+                            return $qb
+                                ->selectRaw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty)')
+                                ->from('product_flat')
+                                ->leftJoin('product_inventories', 'product_inventories.product_id', '=', 'product_flat.product_id');
+                        }, '>', 0);
+                    });
+            });
     }
 
     /**
@@ -783,7 +780,6 @@ class ProductRepository extends Repository
             }
 
             $copiedProduct->attribute_values()->save($newValue);
-
         }
 
         $newProductFlat->save();
