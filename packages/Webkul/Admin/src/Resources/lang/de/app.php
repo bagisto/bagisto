@@ -1520,4 +1520,23 @@ return [
             'records-found'                         => 'Datensätze gefunden '
         ],
     ],
+    
+    'api' => [
+        'system'   => [
+            'api'                       => 'API',
+            'basic-configuration'       => 'Grundlegende Einstellung',
+            'customer-configuration'    => 'Kundenkonfiguration',
+            'username'                  => 'Nutzername',
+            'password'                  => 'Passwort',
+            'login-after-register'      => 'Anmelden nach Registrieren',
+            'info-login'                => 'Info: Der Kunde muss sich nach der Registrierung einloggen API.',
+        ],
+        'auth'      => [
+            'invalid-auth'              => 'Warnung: Sie sind nicht berechtigt, APIs zu verwenden.',
+            'required-token'            => 'Warnung: Token-Parameter ist erforderlich.',
+            'invalid-store'             => 'Warnung: Sie fordern einen ungültigen Store an.',
+            'login-required'            => 'Warnung: Kundenlogin ist erforderlich, um das Produkt zur Vergleichsliste hinzuzufügen.',
+            'resource-not-found'        => 'Warnung: Angeforderte :resource nicht im Datensatz gefunden.',
+        ]
+    ]
 ];

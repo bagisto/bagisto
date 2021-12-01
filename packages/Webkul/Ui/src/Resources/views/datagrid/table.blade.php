@@ -559,6 +559,8 @@
                                             if (this.filters[j].cond === condition && this.filters[j].val === response) {
                                                 filterRepeated = true;
 
+                                                alert('{{ __('ui::app.datagrid.filter-exists') }}');
+
                                                 return false;
                                             } else if (this.filters[j].cond === condition && this.filters[j].val !== response) {
                                                 filterRepeated = true;

@@ -1564,4 +1564,23 @@ return [
             'records-found'     => 'enregistrements trouvés'
         ],
     ],
+    
+    'api' => [
+        'system'   => [
+            'api'                       => 'API',
+            'basic-configuration'       => 'Configuration de base',
+            'customer-configuration'    => 'Configuration client',
+            'username'                  => 'Nom d\'utilisateur',
+            'password'                  => 'Mot de passe',
+            'login-after-register'      => 'Connectez-vous après l\'enregistrement',
+            'info-login'                => 'Info : le client doit être connecté après l\'inscription à l\'API.',
+        ],
+        'auth'      => [
+            'invalid-auth'              => 'Avertissement : Vous n\'êtes pas autorisé à utiliser les API.',
+            'required-token'            => 'Attention : le paramètre du jeton est obligatoire.',
+            'invalid-store'             => 'Attention : vous demandez une boutique invalide.',
+            'login-required'            => 'Attention : la connexion client est nécessaire pour ajouter le produit à la liste de comparaison.',
+            'resource-not-found'        => 'Avertissement : requise :resource introuvable dans l\'enregistrement.',
+        ]
+    ]
 ];

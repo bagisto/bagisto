@@ -1520,5 +1520,24 @@ return [
             'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled',
             'records-found'     => 'Record(s) found'
         ]
+    ],
+    
+    'api' => [
+        'system'   => [
+            'api'                       => 'API',
+            'basic-configuration'       => 'Temel yapılandırma',
+            'customer-configuration'    => 'Müşteri Yapılandırması',
+            'username'                  => 'Kullanıcı adı',
+            'password'                  => 'Parola',
+            'login-after-register'      => 'Kayıttan Sonra Giriş Yap',
+            'info-login'                => 'Bilgi: Müşteri, kayıt API\'sinden sonra giriş yapmalıdır.',
+        ],
+        'auth'      => [
+            'invalid-auth'              => 'Uyarı: API\'leri kullanma yetkiniz yok.',
+            'required-token'            => 'Uyarı: belirteç parametresi gerekli.',
+            'invalid-store'             => 'Uyarı: Geçersiz bir mağaza talep ediyorsunuz.',
+            'login-required'            => 'Uyarı: Ürünü karşılaştırma listesine eklemek için müşteri girişi gereklidir.',
+            'resource-not-found'        => 'Uyarı: İstenen :resource Kayıtta bulunamadı.',
+        ]
     ]
 ];
