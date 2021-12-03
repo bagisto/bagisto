@@ -172,18 +172,31 @@ class CustomerCest
      */
     private function setFields()
     {
-        $this->fields = [
-            'company_name' => $this->cleanField($this->faker->company),
-            'first_name'   => $this->cleanField($this->faker->firstName),
-            'last_name'    => $this->cleanField($this->faker->lastName),
+        $this->fields = $this->cleanAllFields([
+            'company_name' => $this->faker->company,
+            'first_name'   => $this->faker->firstName,
+            'last_name'    => $this->faker->lastName,
             'vat_id'       => 'INVALIDVAT',
-            'address1[]'   => $this->cleanField($this->faker->streetAddress),
-            'country'      => $this->cleanField($this->faker->countryCode),
-            'state'        => $this->cleanField($this->faker->state),
-            'city'         => $this->cleanField($this->faker->city),
-            'postcode'     => $this->cleanField($this->faker->postcode),
-            'phone'        => $this->cleanField($this->faker->phoneNumber),
-        ];
+            'address1[]'   => $this->faker->streetAddress,
+            'country'      => $this->faker->countryCode,
+            'state'        => $this->faker->word,
+            'city'         => $this->faker->city,
+            'postcode'     => $this->faker->postcode,
+            'phone'        => $this->faker->phoneNumber,
+        ]);
+    }
+
+    /**
+     * Clean all fields.
+     *
+     * @param  array  $fields
+     * @return array
+     */
+    private function cleanAllFields(array $fields)
+    {
+        return collect($fields)->map(function ($field, $key) {
+            return $this->cleanField($field);
+        })->toArray();
     }
 
     /**
