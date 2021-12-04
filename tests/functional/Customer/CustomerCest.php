@@ -17,7 +17,7 @@ class CustomerCest
     public $faker;
 
     /**
-     * Address Fields.
+     * Address fields.
      *
      * @var array
      */
@@ -56,9 +56,11 @@ class CustomerCest
     public function updateCustomerProfile(FunctionalTester $I): void
     {
         $customer = $I->loginAsCustomer();
+        $customer->first_name = $this->cleanField($customer->first_name);
+        $customer->last_name = $this->cleanField($customer->last_name);
+        $customer->save();
 
         $I->amOnPage('/');
-
         $I->click('Profile');
         $I->click('Edit');
         $I->selectOption('gender', 'Other');
@@ -86,7 +88,6 @@ class CustomerCest
         $I->loginAsCustomer();
 
         $I->amOnPage('/');
-
         $I->click('Profile');
         $I->click('Address');
         $I->click('Add Address');
@@ -106,7 +107,7 @@ class CustomerCest
             }
         }
 
-        $I->wantTo('Ensure that the company_name field is being displayed');
+        $I->wantTo('Ensure that the `company_name` field is being displayed.');
         $I->seeElement('.account-table-content > div:nth-child(2) > input:nth-child(2)');
 
         /**
@@ -116,7 +117,7 @@ class CustomerCest
         $I->submitForm($formCssSelector, $this->fields);
         $I->seeInSource('The given vat id has a wrong format');
 
-        $I->wantTo('enter a valid vat id');
+        $I->wantTo('Enter a valid vat id.');
         $this->fields['vat_id'] = $this->faker->vat(false);
 
         $I->submitForm($formCssSelector, $this->fields);
@@ -125,12 +126,12 @@ class CustomerCest
 
         $this->assertCustomerAddress($I);
 
-        $I->wantTo('Update the created customer address again');
+        $I->wantTo('Update the created customer address again.');
 
         $I->click('Edit');
 
         $oldcompany = $this->fields['company_name'];
-        $this->fields['company_name'] = preg_replace('/[^A-Za-z0-9 ]/', '', $this->faker->company);
+        $this->fields['company_name'] = $this->cleanField($this->faker->company);
 
         $I->submitForm($formCssSelector, $this->fields);
 
