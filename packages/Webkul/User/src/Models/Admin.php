@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
 use Webkul\User\Notifications\AdminResetPassword;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class Admin extends Authenticatable implements AdminContract, JWTSubject
 {
@@ -84,7 +84,7 @@ class Admin extends Authenticatable implements AdminContract, JWTSubject
     {
         return AdminFactory::new();
     }
-    
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -100,7 +100,7 @@ class Admin extends Authenticatable implements AdminContract, JWTSubject
      *
      * @return array
      */
-    public function getJWTCustomClaims()
+    public function getJWTCustomClaims(): array
     {
         return [];
     }
