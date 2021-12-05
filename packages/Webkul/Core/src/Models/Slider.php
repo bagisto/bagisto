@@ -3,6 +3,7 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Contracts\Slider as SliderContract;
 
@@ -59,5 +60,13 @@ class Slider extends Model implements SliderContract
     public function getImageUrlAttribute()
     {
         return $this->image_url();
+    }
+    
+    /**
+     * Get the slider channel name associated with the channel.
+     */
+    public function channel(): BelongsTo
+    {
+        return $this->belongsTo(ChannelProxy::modelClass());
     }
 }
