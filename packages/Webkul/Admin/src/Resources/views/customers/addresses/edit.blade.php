@@ -13,7 +13,11 @@
             <form method="post" action="{{ route('admin.customer.addresses.update', $address->id) }}" @submit.prevent="onSubmit">
                 <div class="page-header">
                     <div class="page-title">
-                        <h1>{{ __('admin::app.customers.addresses.edit-title') }}</h1>
+                        <h1>
+                            <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.addresses.index', ['id' => $address->customer_id]) }}'"></i>
+    
+                            {{ __('admin::app.customers.addresses.edit-title') }}
+                        </h1>
                     </div>
 
                     <div class="page-action">
