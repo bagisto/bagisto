@@ -1,4 +1,4 @@
-@import "main/mixins";
+@import 'main/mixins';
 
 .grid-container {
     display: block;
@@ -41,6 +41,11 @@
             }
         }
     }
+}
+
+.records-count-container {
+    float: right;
+    padding: 10px;
 }
 
 @media only screen and (max-width: 1192px) {
@@ -108,7 +113,6 @@
             width: 100px;
         }
     }
-
 }
 
 .grid-dropdown-header {
@@ -119,7 +123,7 @@
     width: 200px;
     border: 2px solid $control-border-color;
     border-radius: 3px;
-    color: #8E8E8E;
+    color: #8e8e8e;
     padding: 0px 5px 0px 5px;
 
     .arrow-icon-down {
@@ -162,7 +166,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        background: #E7E7E7;
+        background: #e7e7e7;
         font-size: 14px;
         height: 40px;
         color: #000311;
@@ -181,7 +185,7 @@
         .control {
             padding-right: 10px;
             border-left: 0;
-            border-right: 2px solid #C7C7C7;
+            border-right: 2px solid #c7c7c7;
             border-top-right-radius: 3px;
             border-bottom-right-radius: 3px;
             border-top-left-radius: 0;
@@ -213,5 +217,10 @@
                 margin-left: 0;
             }
         }
+    }
+
+    .records-count-container {
+        float: left;
+        padding: 10px;
     }
 }

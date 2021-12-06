@@ -33,62 +33,62 @@
                 <div class="datagrid-filters">
                     <div class="filter-left">
                         @if (isset($results['extraFilters']['channels']))
-                        <div class="dropdown-filters per-page">
-                            <div class="control-group">
-                                <select class="control" id="channel-switcher" name="channel"
-                                        onchange="reloadPage('channel', this.value)">
-                                    <option value="all" {{ ! isset($channel) ? 'selected' : '' }}>
-                                        {{ __('admin::app.admin.system.all-channels') }}
-                                    </option>
-                                    @foreach ($results['extraFilters']['channels'] as $channelModel)
-                                        <option
-                                            value="{{ $channelModel->code }}"
-                                            {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
-                                            {{ core()->getChannelName($channelModel) }}
+                            <div class="dropdown-filters per-page">
+                                <div class="control-group">
+                                    <select class="control" id="channel-switcher" name="channel"
+                                            onchange="reloadPage('channel', this.value)">
+                                        <option value="all" {{ ! isset($channel) ? 'selected' : '' }}>
+                                            {{ __('admin::app.admin.system.all-channels') }}
                                         </option>
-                                    @endforeach
-                                </select>
+                                        @foreach ($results['extraFilters']['channels'] as $channelModel)
+                                            <option
+                                                value="{{ $channelModel->code }}"
+                                                {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
+                                                {{ core()->getChannelName($channelModel) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
                         @endif
 
                         @if (isset($results['extraFilters']['locales']))
-                        <div class="dropdown-filters per-page">
-                            <div class="control-group">
-                                <select class="control" id="locale-switcher" name="locale"
-                                        onchange="reloadPage('locale', this.value)">
-                                    <option value="all" {{ ! isset($locale) ? 'selected' : '' }}>
-                                        {{ __('admin::app.admin.system.all-locales') }}
-                                    </option>
-                                    @foreach ($locales as $localeModel)
-                                        <option
-                                            value="{{ $localeModel->code }}" {{ (isset($locale) && ($localeModel->code) == $locale) ? 'selected' : '' }}>
-                                            {{ $localeModel->name }}
+                            <div class="dropdown-filters per-page">
+                                <div class="control-group">
+                                    <select class="control" id="locale-switcher" name="locale"
+                                            onchange="reloadPage('locale', this.value)">
+                                        <option value="all" {{ ! isset($locale) ? 'selected' : '' }}>
+                                            {{ __('admin::app.admin.system.all-locales') }}
                                         </option>
-                                    @endforeach
-                                </select>
+                                        @foreach ($locales as $localeModel)
+                                            <option
+                                                value="{{ $localeModel->code }}" {{ (isset($locale) && ($localeModel->code) == $locale) ? 'selected' : '' }}>
+                                                {{ $localeModel->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
                         @endif
 
                         @if (isset($results['extraFilters']['customer_groups']))
-                        <div class="dropdown-filters per-page">
-                            <div class="control-group">
-                                <select class="control" id="customer-group-switcher" name="customer_group"
-                                        onchange="reloadPage('customer_group', this.value)">
-                                    <option value="all" {{ ! isset($customer_group) ? 'selected' : '' }}>
-                                        {{ __('admin::app.admin.system.all-customer-groups') }}
-                                    </option>
-                                    @foreach ($results['extraFilters']['customer_groups'] as $customerGroupModel)
-                                        <option
-                                            value="{{ $customerGroupModel->id }}"
-                                            {{ (isset($customer_group) && ($customerGroupModel->id) == $customer_group) ? 'selected' : '' }}>
-                                            {{ $customerGroupModel->name }}
+                            <div class="dropdown-filters per-page">
+                                <div class="control-group">
+                                    <select class="control" id="customer-group-switcher" name="customer_group"
+                                            onchange="reloadPage('customer_group', this.value)">
+                                        <option value="all" {{ ! isset($customer_group) ? 'selected' : '' }}>
+                                            {{ __('admin::app.admin.system.all-customer-groups') }}
                                         </option>
-                                    @endforeach
-                                </select>
+                                        @foreach ($results['extraFilters']['customer_groups'] as $customerGroupModel)
+                                            <option
+                                                value="{{ $customerGroupModel->id }}"
+                                                {{ (isset($customer_group) && ($customerGroupModel->id) == $customer_group) ? 'selected' : '' }}>
+                                                {{ $customerGroupModel->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                 </div>
@@ -105,12 +105,6 @@
                                     v-on:click="searchCollection(searchValue)"></span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="filter-left records-count-container">
-                        <span class="datagrid-count">
-                            {{ $results['records']->total()  }}   {{ __('admin::app.admin.system.records-found') }}
-                        </span>
                     </div>
 
                     <div class="filter-right">
@@ -262,6 +256,12 @@
                             @{{ decodeURIComponent(filter.val) }}
                             <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
                         </span>
+                    </span>
+                </div>
+
+                <div class="records-count-container">
+                    <span class="datagrid-count">
+                        {{ $results['records']->total()  }}   {{ __('admin::app.admin.system.records-found') }}
                     </span>
                 </div>
 

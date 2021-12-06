@@ -412,6 +412,11 @@ body {
         .account-content {
             .account-layout {
                 .account-table-content {
+                    .records-count-container {
+                        float: left;
+                        padding: 10px;
+                    }
+
                     #datagrid-filters {
                         .filter-left {
                             .icon-wrapper {
