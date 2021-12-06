@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Webkul\Admin\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class CustomerGroupController extends Controller
@@ -72,7 +73,11 @@ class CustomerGroupController extends Controller
 
         $data['is_user_defined'] = 1;
 
-        $this->customerGroupRepository->create($data);
+        Event::dispatch('customer.customer_group.create.before');
+
+        $customerGroup = $this->customerGroupRepository->create($data);
+
+        Event::dispatch('customer.customer_group.create.after', $customerGroup);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer Group']));
 
@@ -105,7 +110,11 @@ class CustomerGroupController extends Controller
             'name' => 'required',
         ]);
 
-        $this->customerGroupRepository->update(request()->all(), $id);
+        Event::dispatch('customer.customer_group.update.before', $id);
+
+        $customerGroup = $this->customerGroupRepository->update(request()->all(), $id);
+
+        Event::dispatch('customer.customer_group.update.after', $customerGroup);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer Group']));
 
@@ -128,7 +137,11 @@ class CustomerGroupController extends Controller
             session()->flash('warning', trans('admin::app.response.customer-associate', ['name' => 'Customer Group']));
         } else {
             try {
+                Event::dispatch('customer.customer_group.delete.before', $id);
+
                 $this->customerGroupRepository->delete($id);
+
+                Event::dispatch('customer.customer_group.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer Group']));
 

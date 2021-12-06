@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Product\Contracts\Product as ProductContract;
 use Webkul\Product\Database\Eloquent\Builder;
 use Webkul\Product\Type\AbstractType;
+use Webkul\BookingProduct\Models\BookingProductProxy;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model implements ProductContract
@@ -538,5 +539,13 @@ class Product extends Model implements ProductContract
     protected static function newFactory(): ProductFactory
     {
         return ProductFactory::new();
+    }
+
+    /**
+     * Get the booking that owns the product.
+     */
+    public function booking_product()
+    {
+        return $this->hasOne(BookingProductProxy::modelClass());
     }
 }

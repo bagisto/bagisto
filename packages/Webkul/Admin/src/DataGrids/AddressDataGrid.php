@@ -89,6 +89,15 @@ class AddressDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
+            'index'      => 'address_id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
+            'searchable' => true,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
             'index'      => 'company_name',
             'label'      => trans('admin::app.customers.addresses.company-name'),
             'type'       => 'string',
