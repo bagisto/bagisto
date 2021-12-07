@@ -178,7 +178,17 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('customer.session.destroy') }}">{{ __('shop::app.header.logout') }}</a>
+                                        <form id="customerLogout" action="{{ route('customer.session.destroy') }}" method="POST">
+                                            @csrf
+
+                                            @method('DELETE')
+                                        </form>
+
+                                        <a
+                                            href="{{ route('customer.session.destroy') }}"
+                                            onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
+                                            {{ __('shop::app.header.logout') }}
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
