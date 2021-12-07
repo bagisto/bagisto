@@ -46,66 +46,82 @@
                 }
             },
 
+            watch: {
+                coupon_code: function (value) {
+                    if (value != '') {
+                        this.error_message = '';
+                    }
+                }
+            },
+
             methods: {
                 applyCoupon: function() {
-                    if (! this.coupon_code.length)
+                    if (! this.coupon_code.length) {
+                        this.error_message = '{{ __('shop::app.checkout.total.invalid-coupon') }}';
+
                         return;
+                    }
 
                     this.error_message = null;
+
                     this.disable_button = true;
 
                     let code = this.coupon_code;
-                    axios.post(
-                        '{{ route('shop.checkout.cart.coupon.apply') }}', {code}
-                    ).then(response => {
-                        if (response.data.success) {
-                            this.$emit('onApplyCoupon');
-                            this.applied_coupon = this.coupon_code;
-                            this.coupon_code = '';
 
-                            window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
+                    axios
+                        .post(
+                            '{{ route('shop.checkout.cart.coupon.apply') }}', {code}
+                        ).then(response => {
+                            if (response.data.success) {
+                                this.$emit('onApplyCoupon');
 
-                            this.$root.addFlashMessages();
+                                this.applied_coupon = this.coupon_code;
+                                this.coupon_code = '';
 
-                            this.redirectIfCartPage();
-                        } else {
-                            this.error_message = response.data.message;
-                        }
+                                window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
 
-                        this.disable_button = false;
-                    }).catch(error => {
-                        this.error_message = error.response.data.message;
+                                this.$root.addFlashMessages();
 
-                        this.disable_button = false;
-                    });
+                                this.redirectIfCartPage();
+                            } else {
+                                this.error_message = response.data.message;
+                            }
+
+                            this.disable_button = false;
+                        }).catch(error => {
+                            this.error_message = error.response.data.message;
+
+                            this.disable_button = false;
+                        });
                 },
 
                 removeCoupon: function () {
-                    var self = this;
+                    let self = this;
 
-                    axios.delete('{{ route('shop.checkout.coupon.remove.coupon') }}')
-                    .then(function(response) {
-                        self.$emit('onRemoveCoupon')
+                    axios
+                        .delete('{{ route('shop.checkout.coupon.remove.coupon') }}')
+                        .then(function(response) {
+                            self.$emit('onRemoveCoupon')
 
-                        self.applied_coupon = '';
-                        self.disable_button = false;
+                            self.applied_coupon = '';
 
-                        window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
+                            self.disable_button = false;
 
-                        self.$root.addFlashMessages();
+                            window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
 
-                        self.redirectIfCartPage();
-                    })
-                    .catch(function(error) {
-                        window.flashMessages = [{'type': 'alert-error', 'message': error.response.data.message}];
+                            self.$root.addFlashMessages();
 
-                        self.$root.addFlashMessages();
-                    });
+                            self.redirectIfCartPage();
+                        })
+                        .catch(function(error) {
+                            window.flashMessages = [{'type': 'alert-error', 'message': error.response.data.message}];
+
+                            self.$root.addFlashMessages();
+                        });
                 },
 
                 redirectIfCartPage: function() {
-                    if (this.route_name != 'shop.checkout.cart.index')
-                        return;
+                    if (this.route_name != 'shop.checkout.cart.index') return;
 
                     setTimeout(function() {
                         window.location.reload();

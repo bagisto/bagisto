@@ -1542,5 +1542,24 @@ return [
             'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled',
             'records-found'       => 'تم العثور على السجلات '
         ]
+    ],
+    
+    'api' => [
+        'system'   => [
+            'api'                       => 'API',
+            'basic-configuration'       => 'التكوين الأساسي',
+            'customer-configuration'    => 'تكوين العميل',
+            'username'                  => 'اسم المستخدم',
+            'password'                  => 'كلمه السر',
+            'login-after-register'      => 'تسجيل الدخول بعد التسجيل',
+            'info-login'                => 'المعلومات: يجب على العميل تسجيل الدخول بعد تسجيل API.',
+        ],
+        'auth'      => [
+            'invalid-auth'              => 'تحذير: غير مصرح لك باستخدام واجهات برمجة التطبيقات.',
+            'required-token'            => 'تحذير: مطلوب معلمة الرمز المميز.',
+            'invalid-store'             => 'تحذير: أنت تطلب متجرًا غير صالح.',
+            'login-required'            => 'تحذير: يلزم تسجيل دخول العميل لإضافة المنتج إلى قائمة المقارنة.',
+            'resource-not-found'        => 'تحذير: مطلوب :resource غير موجود في السجل.',
+        ]
     ]
 ];

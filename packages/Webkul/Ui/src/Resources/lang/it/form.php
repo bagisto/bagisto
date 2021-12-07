@@ -1,6 +1,6 @@
 <?php
 
-    return [
-        'enter-attribute' => 'Inserisci :attribute',
-        'select-attribute' => 'Seleziona :attribute'
-    ];
+return [
+    'enter-attribute'  => 'Inserisci :attribute',
+    'select-attribute' => 'Seleziona :attribute',
+];

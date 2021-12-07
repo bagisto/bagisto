@@ -10,6 +10,9 @@
             /* link making */
             $href = isset($route) ? $route : ($wishlist ? route('customer.wishlist.remove', $wishlist->id) : route('customer.wishlist.add', $product->product_id));
 
+            /* method */
+            $method = isset($route) ? 'POST' : ( $wishlist ? 'DELETE' : 'POST' );
+
             /* title */
             $title = $wishlist ? __('velocity::app.shop.wishlist.remove-wishlist-text') : __('velocity::app.shop.wishlist.add-wishlist-text');
         @endphp
@@ -20,17 +23,15 @@
             title="{{ $title }}"
             onclick="submitWishlistForm(
                 '{{ $href }}',
-                '{{ $wishlist ? 'DELETE' : 'POST' }}',
+                '{{ $method }}',
                 '{{ csrf_token() }}'
             )"
         >
-
             <wishlist-component active="{{ $wishlist ? false : true }}"></wishlist-component>
 
             @if (isset($text))
                 {!! $text !!}
             @endif
-
         </a>
     @endauth
 
