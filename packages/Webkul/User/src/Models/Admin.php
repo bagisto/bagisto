@@ -8,8 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
 use Webkul\User\Notifications\AdminResetPassword;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-class Admin extends Authenticatable implements AdminContract
+class Admin extends Authenticatable implements AdminContract, JWTSubject
 {
     use HasFactory, Notifiable;
 
@@ -82,5 +83,25 @@ class Admin extends Authenticatable implements AdminContract
     protected static function newFactory(): AdminFactory
     {
         return AdminFactory::new();
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims(): array
+    {
+        return [];
     }
 }

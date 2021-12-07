@@ -123,10 +123,17 @@
     <template v-slot:extra-navigation>
         <li>
             @auth('customer')
+                <form id="customerLogout" action="{{ route('customer.session.destroy') }}" method="POST">
+                    @csrf
+
+                    @method('DELETE')
+                </form>
+
                 <a
                     class="unset"
-                    href="{{ route('customer.session.destroy') }}">
-                    <span>{{ __('shop::app.header.logout') }}</span>
+                    href="{{ route('customer.session.destroy') }}"
+                    onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
+                    {{ __('shop::app.header.logout') }}
                 </a>
             @endauth
 
