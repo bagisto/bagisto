@@ -78,7 +78,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 /**
                  * Logout.
                  */
-                Route::get('logout', [SessionController::class, 'destroy'])->defaults('_config', [
+                Route::delete('logout', [SessionController::class, 'destroy'])->defaults('_config', [
                     'redirect' => 'customer.session.index'
                 ])->name('customer.session.destroy');
 
