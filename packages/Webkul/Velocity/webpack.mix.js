@@ -41,7 +41,6 @@ mix
         path.join(assetsPath, 'sass', 'app.scss'),
         path.join(__dirname, publicPath, 'css', 'velocity.css'),
         {
-            implementation: require('node-sass'),
             sassOptions   : {
                 includePaths: [ 'node_modules/bootstrap-sass/assets/stylesheets/' ]
             }
@@ -66,14 +65,6 @@ mix
 
     .disableNotifications()
     .mergeManifest();
-
-    // https://laravel-mix.com/docs/6.0/faq#can-i-autoload-modules-with-mix-and-webpack
-    // https://laravel-mix.com/docs/6.0/autoloading
-    /*.autoload({
-                  vue   : [ 'Vue', 'window.Vue' ],
-                  jquery: [ '$', 'window.jQuery', 'jQuery', 'window.$', 'jquery', 'window.jquery' ]
-              })
-    */
 
 if (mix.inProduction()) {
     mix.version();

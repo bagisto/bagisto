@@ -6,6 +6,7 @@
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
+    "prod": "npm run production",
     "production": "mix --production"
   },
   "devDependencies": {
@@ -16,7 +17,7 @@
     "laravel-mix": "^6.0.39",
     "laravel-mix-clean": "^0.1.0",
     "laravel-mix-merge-manifest": "^2.0.0",
-    "node-sass": "^6.0.1",
+    "sass": "^1.44.0",
     "resolve-url-loader": "^4.0.0",
     "sass-loader": "^12.3.0",
     "vue": "^2.6.14",
