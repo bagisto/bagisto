@@ -782,7 +782,6 @@ class ProductRepository extends Repository
             $copiedProduct->attribute_values()->save($newValue);
         }
 
-        $newProductFlat->save();
     }
 
     /**
@@ -883,4 +882,40 @@ class ProductRepository extends Repository
 
         Storage::copy($data->path, $copiedProductImageVideo->path);
     }
+
+
+    /**
+     * Check out of stock items. This method needed `variants` alias in
+     * the `product_flat` query.
+     *
+     * @param  Webkul\Product\Models\ProductFlat  $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function checkOutOfStockItem($query)
+    {
+        return $query
+
+            ->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
+            ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
+            ->where(function ($qb) {
+                return $qb
+                    /* for grouped, downloadable, bundle and booking product */
+                    ->orWhereIn('ps.type', ['grouped', 'downloadable', 'bundle', 'booking'])
+                    /* for simple and virtual product */
+                    ->orWhere(function ($qb) {
+                        return $qb->whereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
+                    })
+                    /* for configurable product */
+                    ->orWhere(function ($qb) {
+                        return $qb->where('ps.type', 'configurable')->where(function ($qb) {
+                            return $qb
+                                ->selectRaw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty)')
+                                ->from('product_flat')
+                                ->leftJoin('product_inventories', 'product_inventories.product_id', '=', 'product_flat.product_id')
+                                ->whereRaw(DB::getTablePrefix() . 'product_flat.parent_id = variants.id');
+                        }, '>', 0);
+                    });
+            });
+    }
+
 }
