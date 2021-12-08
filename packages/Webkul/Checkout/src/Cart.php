@@ -49,7 +49,7 @@ class Cart
     /**
      * Product repository instance.
      *
-     * @var \Webkul\Checkout\Repositories\ProductRepository
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
@@ -456,14 +456,14 @@ class Cart
         return true;
     }
 
-    /**
-     * Save payment method for cart.
-     *
-     * @param  string  $payment
-     * @return \Webkul\Checkout\Contracts\CartPayment
-     */
-    public function savePaymentMethod($payment)
-    {
+	/**
+	 * Save payment method for cart.
+	 *
+	 * @param array{method:string} $payment
+	 * @return bool|\Webkul\Checkout\Contracts\CartPayment saved CartPayment || false if failed
+	 */
+	public function savePaymentMethod(array $payment)
+	{
         if (! $cart = $this->getCart()) {
             return false;
         }

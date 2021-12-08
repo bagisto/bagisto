@@ -93,14 +93,14 @@ class AttributeRepository extends Repository
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
             if (isset($data['options'])) {
                 foreach ($data['options'] as $optionId => $optionInputs) {
-                    $isNew = $optionInputs['isNew'] === 'true' ? true : false;
+                    $isNew = $optionInputs['isNew'] === 'true';
 
                     if ($isNew) {
                         $this->attributeOptionRepository->create(array_merge([
                             'attribute_id' => $attribute->id,
                         ], $optionInputs));
                     } else {
-                        $isDelete = $optionInputs['isDelete'] === 'true' ? true : false;
+                        $isDelete = $optionInputs['isDelete'] === 'true';
 
                         if ($isDelete) {
                             $this->attributeOptionRepository->delete($optionId);

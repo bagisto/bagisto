@@ -15,9 +15,9 @@ class Large implements FilterInterface
      */
     public function applyFilter(Image $image)
     {
-        $width = core()->getConfigData('catalog.products.cache-large-image.width') !== '' ? core()->getConfigData('catalog.products.cache-large-image.width') : 480;
+        $width = empty(core()->getConfigData('catalog.products.cache-large-image.width')) === false ? core()->getConfigData('catalog.products.cache-large-image.width') : 480;
 
-        $height = core()->getConfigData('catalog.products.cache-large-image.height') !== '' ? core()->getConfigData('catalog.products.cache-large-image.height') : 480;
+        $height = empty(core()->getConfigData('catalog.products.cache-large-image.height')) === false ? core()->getConfigData('catalog.products.cache-large-image.height') : 480;
 
         return $image->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();

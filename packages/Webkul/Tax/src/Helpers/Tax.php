@@ -96,15 +96,19 @@ class Tax
             public $state;
             public $postcode;
 
-            function __construct()
-            {
-                $this->country = core()->getConfigData('taxes.catalogue.default-location-calculation.country') !== ''
-                    ? core()->getConfigData('taxes.catalogue.default-location-calculation.country')
-                    : strtoupper(config('app.default_country'));
-                $this->state = core()->getConfigData('taxes.catalogue.default-location-calculation.state');
-                $this->postcode = core()->getConfigData('taxes.catalogue.default-location-calculation.post_code');
-            }
-        };
+			function __construct()
+			{
+				$taxesCatalogueDefaultLocationCalcCountry =
+					core()->getConfigData('taxes.catalogue.default-location-calculation.country');
+
+				$this->country = !empty($taxesCatalogueDefaultLocationCalcCountry)
+					? $taxesCatalogueDefaultLocationCalcCountry
+					: strtoupper(config('app.default_country'));
+
+				$this->state    = core()->getConfigData('taxes.catalogue.default-location-calculation.state');
+				$this->postcode = core()->getConfigData('taxes.catalogue.default-location-calculation.post_code');
+			}
+		};
     }
 
     /**
@@ -126,7 +130,7 @@ class Tax
             foreach ($taxRates as $rate) {
                 $haveTaxRate = false;
 
-                if ($rate->state !== '' && $rate->state != $address->state) {
+                if (empty($rate->state) === false && $rate->state != $address->state) {
                     continue;
                 }
 

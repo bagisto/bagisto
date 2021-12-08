@@ -22,17 +22,17 @@ class Validator
         $validConditionCount = $totalConditionCount = 0;
 
         foreach ($rule->conditions as $condition) {
-            if (! $condition['attribute'] || ! isset($condition['value']) || is_null($condition['value']) ||  $condition['value'] === '') {
+            if ( ! $condition['attribute'] || empty($condition['value'])) {
                 continue;
             }
 
-            if ($entity instanceof \Webkul\Checkout\Contracts\Cart && strpos($condition['attribute'], 'cart|') === false) {
+            if ($entity instanceof \Webkul\Checkout\Contracts\Cart && str_contains($condition['attribute'], 'cart|') === false) {
                 continue;
             }
 
             $totalConditionCount++;
 
-            if ($rule->condition_type == 1) {
+            if ((int) $rule->condition_type === 1) {
                 if (! $this->validateObject($condition, $entity)) {
                     return false;
                 } else {
@@ -45,7 +45,7 @@ class Validator
             }
         }
 
-        return $validConditionCount == $totalConditionCount ? true : false;
+        return $validConditionCount === $totalConditionCount;
     }
 
     /**

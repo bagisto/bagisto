@@ -88,7 +88,7 @@ class ConfigurableOption extends AbstractProduct
 
                 $attributeValue = $product->{$productAttribute->code};
 
-                if ($attributeValue === '' && $product instanceof \Webkul\Product\Models\ProductFlat) {
+                if (empty($attributeValue) && $product instanceof \Webkul\Product\Models\ProductFlat) {
                     $attributeValue = $product->product->{$productAttribute->code};
                 }
 
