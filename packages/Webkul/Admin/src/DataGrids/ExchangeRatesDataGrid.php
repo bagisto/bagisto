@@ -2,27 +2,30 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\CurrencyExchangeRate;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class ExchangeRatesDataGrid extends DataGrid
 {
-    protected $index = 'currency_exch_id';
+    protected string $index = 'currency_exch_id';
 
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('currency_exchange_rates as cer')
-            ->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id')
-            ->addSelect('cer.id as currency_exch_id', 'curr.name', 'cer.rate');
+		$queryBuilder = CurrencyExchangeRate::from('currency_exchange_rates as cer')
+											->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id')
+											->addSelect('cer.id as currency_exch_id', 'curr.name', 'cer.rate');
 
-        $this->addFilter('currency_exch_id', 'cer.id');
+		$this->addFilter('currency_exch_id', 'cer.id');
 
-        $this->setQueryBuilder($queryBuilder);
-    }
+		$this->setQueryBuilder($queryBuilder);
+	}
 
-    public function addColumns()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'currency_exch_id',
@@ -52,7 +55,10 @@ class ExchangeRatesDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

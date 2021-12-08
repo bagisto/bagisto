@@ -2,23 +2,26 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class AttributeFamilyDataGrid extends DataGrid
 {
-    protected $index = 'id';
+    protected string $index = 'id';
 
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('attribute_families')->select('id')->addSelect('id', 'code', 'name');
+        $queryBuilder = AttributeFamily::query()->select('id')->addSelect('id', 'code', 'name');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function addColumns()
+    	/**
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -48,7 +51,7 @@ class AttributeFamilyDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions()
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

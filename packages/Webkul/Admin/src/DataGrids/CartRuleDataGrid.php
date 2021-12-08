@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids;
 
+use Webkul\CartRule\Models\CartRule;
 use Webkul\Ui\DataGrid\DataGrid;
-use Illuminate\Support\Facades\DB;
 
 class CartRuleDataGrid extends DataGrid
 {
@@ -12,14 +12,14 @@ class CartRuleDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'id';
+    protected string $index = 'id';
 
     /**
      * Default sort order of datagrid.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Customer group.
@@ -33,23 +33,23 @@ class CartRuleDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $channel = 'all';
+    protected string $channel = 'all';
 
-    /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
-    protected $extraFilters = [
+	/**
+	 * Contains the keys for which extra filters to show.
+	 *
+	 * @var string[]
+	 */
+    protected array $extraFilters = [
         'channels',
         'customer_groups',
     ];
 
-    /**
-     * Create a new datagrid instance.
-     *
-     * @return void
-     */
+	/**
+	 * Create a new datagrid instance.
+	 *
+	 * @return void
+	 */
     public function __construct()
     {
         parent::__construct();
@@ -59,14 +59,14 @@ class CartRuleDataGrid extends DataGrid
         $this->channel = core()->getRequestedChannelCode(false) ?? 'all';
     }
 
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
-    public function prepareQueryBuilder()
+	/**
+	 * Prepare query builder.
+	 *
+	 * @return void
+	 */
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('cart_rules')
+        $queryBuilder = CartRule::query()
             ->leftJoin('cart_rule_coupons', function ($leftJoin) {
                 $leftJoin->on('cart_rule_coupons.cart_rule_id', '=', 'cart_rules.id')
                     ->where('cart_rule_coupons.is_primary', 1);
@@ -102,7 +102,7 @@ class CartRuleDataGrid extends DataGrid
                 '=',
                 'cart_rules.id'
             );
-            
+
             $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
         }
 
@@ -111,12 +111,13 @@ class CartRuleDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -163,25 +164,26 @@ class CartRuleDataGrid extends DataGrid
             'filterable' => true,
         ]);
 
-        $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('admin::app.status'),
-            'type'       => 'boolean',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->status == 1) {
-                    return trans('admin::app.datagrid.active');
-                } else if ($value->status == 0) {
-                    return trans('admin::app.datagrid.inactive');
-                } else {
-                    return trans('admin::app.datagrid.draft');
-                }
-            },
-        ]);
+		$this->addColumn([
+			'index'      => 'status',
+			'label'      => trans('admin::app.status'),
+			'type'       => 'boolean',
+			'searchable' => true,
+			'sortable'   => true,
+			'filterable' => true,
+			'closure'    => function ($value) {
+				switch ( (int) $value->status ) {
+					case 1:
+						return trans('admin::app.datagrid.active');
+					case 0:
+						return trans('admin::app.datagrid.inactive');
+					default:
+						return trans('admin::app.datagrid.draft');
+				}
+			}
+		]);
 
-        $this->addColumn([
+		$this->addColumn([
             'index'      => 'sort_order',
             'label'      => trans('admin::app.datagrid.priority'),
             'type'       => 'number',
@@ -191,12 +193,13 @@ class CartRuleDataGrid extends DataGrid
         ]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

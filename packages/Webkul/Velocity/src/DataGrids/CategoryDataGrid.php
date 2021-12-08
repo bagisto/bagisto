@@ -2,8 +2,8 @@
 
 namespace Webkul\Velocity\DataGrids;
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\Velocity\Models\Category;
 
 class CategoryDataGrid extends DataGrid
 {
@@ -12,25 +12,25 @@ class CategoryDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'category_menu_id';
+    protected string $index = 'category_menu_id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
         $defaultChannel = core()->getCurrentChannel();
 
-        $queryBuilder = DB::table('velocity_category as v_cat')
+        $queryBuilder = Category::from('velocity_category as v_cat')
             ->select('v_cat.id as category_menu_id', 'v_cat.category_id', 'ct.name', 'v_cat.icon', 'v_cat.tooltip', 'v_cat.status')
             ->leftJoin('categories as c', 'c.id', '=', 'v_cat.category_id')
             ->leftJoin('category_translations as ct', function ($leftJoin) {
@@ -43,12 +43,13 @@ class CategoryDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+    public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'category_id',
@@ -80,29 +81,28 @@ class CategoryDataGrid extends DataGrid
             },
         ]);
 
-        $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('velocity::app.admin.category.datagrid.category-status'),
-            'type'       => 'string',
-            'sortable'   => true,
-            'searchable' => true,
-            'filterable' => true,
-            'closure'    => function ($row) {
-                if ($row->status) {
-                    return '<span class="badge badge-md badge-success">Enabled</span>';
-                } else {
-                    return '<span class="badge badge-md badge-danger">Disabled</span>';
-                }
-            },
-        ]);
+		$this->addColumn([
+			'index'      => 'status',
+			'label'      => trans('velocity::app.admin.category.datagrid.category-status'),
+			'type'       => 'string',
+			'sortable'   => true,
+			'searchable' => true,
+			'filterable' => true,
+			'closure'    => function ($row) {
+				return $row->status
+					? '<span class="badge badge-md badge-success">' . trans('velocity::app.admin.category.enabled')  . '</span>'
+					: '<span class="badge badge-md badge-danger">'  . trans('velocity::app.admin.category.disabled') . '</span>';
+			},
+		]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+    public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),
@@ -122,18 +122,18 @@ class CategoryDataGrid extends DataGrid
         ]);
     }
 
-    /**
-     * Prepare mass actions.
-     *
-     * @return void
-     */
-    public function prepareMassActions()
-    {
-        $this->addMassAction([
-            'type'   => 'delete',
-            'action' => route('velocity.admin.category.mass-delete'),
-            'label'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
-        ]);
-    }
+	/**
+	 * Prepare mass actions.
+	 *
+	 * @return void
+	 */
+	public function prepareMassActions(): void
+	{
+		$this->addMassAction([
+			'type'   => 'delete',
+			'action' => route('velocity.admin.category.mass-delete'),
+			'label'  => trans('admin::app.datagrid.delete'),
+			'method' => 'POST',
+		]);
+	}
 }

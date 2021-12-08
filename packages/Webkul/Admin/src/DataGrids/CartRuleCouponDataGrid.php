@@ -2,29 +2,32 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\CartRule\Models\CartRuleCoupon;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class CartRuleCouponDataGrid extends DataGrid
 {
-    protected $index = 'id';
+    protected string $index = 'id';
 
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
-    public function prepareQueryBuilder()
-    {
-        $route = request()->route() ? request()->route()->getName() : "" ;
+    public function prepareQueryBuilder(): void
+	{
+		$route = request()->route() ? request()->route()->getName() : "";
 
-        $cartRuleId = $route == 'admin.cart-rules.edit' ? collect(request()->segments())->last() : last(explode("/", url()->previous()));
+		$cartRuleId = ($route === 'admin.cart-rules.edit' ? collect(request()->segments())->last() : last(explode("/", url()->previous())));
 
-        $queryBuilder = DB::table('cart_rule_coupons')
+		$queryBuilder = CartRuleCoupon::query()
                 ->addSelect('id', 'code', 'created_at', 'expired_at', 'times_used')
                 ->where('cart_rule_coupons.cart_rule_id', $cartRuleId);
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function addColumns()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -72,7 +75,7 @@ class CartRuleCouponDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareMassActions()
+    public function prepareMassActions(): void
     {
         $this->addMassAction([
             'type'   => 'delete',

@@ -1,7 +1,6 @@
 <?php
 
 namespace Webkul\Ui\DataGrid\Facades;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Facade;
 
 class DataGrid extends Facade
@@ -11,8 +10,8 @@ class DataGrid extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
-    {
+    protected static function getFacadeAccessor(): string
+	{
         return 'datagrid';
     }
 }

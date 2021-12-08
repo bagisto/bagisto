@@ -162,7 +162,7 @@ class ProductController extends Controller
         if (
             ! request()->get('family')
             && ProductType::hasVariants(request()->input('type'))
-            && request()->input('sku') != ''
+            && empty(request()->input('sku')) === false
         ) {
             return redirect(url()->current() . '?type=' . request()->input('type') . '&family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
         }
@@ -227,7 +227,7 @@ class ProductController extends Controller
 
             if (count($customAttributes)) {
                 foreach ($customAttributes as $attribute) {
-                    if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
+                    if ($attribute->type === 'multiselect' || $attribute->type === 'checkbox') {
                         array_push($multiselectAttributeCodes, $attribute->code);
                     }
                 }
@@ -394,7 +394,8 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        if (! $data['massaction-type'] == 'update') {
+		// TODO verify correction
+        if (! ($data['massaction-type'] === 'update')) {
             return redirect()->back();
         }
 

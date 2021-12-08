@@ -32,7 +32,7 @@ class UserForm extends FormRequest
             'role_id'  => 'required',
         ];
 
-        if ($this->method() == 'PUT') {
+        if ($this->method() === 'PUT') {
             $rules['email'] = 'email|unique:admins,email,' . $this->route('id');
         }
 

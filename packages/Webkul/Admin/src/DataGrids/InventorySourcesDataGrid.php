@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Inventory\Models\InventorySource;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class InventorySourcesDataGrid extends DataGrid
@@ -12,35 +12,36 @@ class InventorySourcesDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'id';
+    protected string $index = 'id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('inventory_sources')->addSelect('id', 'code', 'name', 'priority', 'status');
+        $queryBuilder = InventorySource::select('id', 'code', 'name', 'priority', 'status');
 
         $this->addFilter('status', 'status');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+    public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -86,21 +87,22 @@ class InventorySourcesDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->status == 1) {
+                if ((int) $value->status === 1) {
                     return trans('admin::app.datagrid.active');
-                } else {
-                    return trans('admin::app.datagrid.inactive');
                 }
-            },
+
+				return trans('admin::app.datagrid.inactive');
+			},
         ]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+    public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

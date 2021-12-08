@@ -15,13 +15,14 @@ trait Sanitizer
         'image/svg+xml'
     ];
 
-    /**
-     * Sanitize SVG file.
-     *
-     * @param  string  $path
-     * @return void
-     */
-    public function sanitizeSVG($path, $mimeType)
+	/**
+	 * Sanitize SVG file.
+	 *
+	 * @param string $path
+	 * @param string $mimeType
+	 * @return void
+	 */
+    public function sanitizeSVG(string $path, string $mimeType): void
     {
         if ($this->checkMimeType($mimeType)) {
             /* sanitizer instance */
@@ -36,13 +37,13 @@ trait Sanitizer
     }
 
     /**
-     * Sanitize SVG file.
+     * Check mime type of SVG file.
      *
-     * @param  string  $path
-     * @return void
-     */
-    public function checkMimeType($mimeType)
-    {
-        return in_array($mimeType, $this->mimeTypes);
+     * @param  string  $mimeType name
+     * @return bool true if matches
+	 */
+	public function checkMimeType(string $mimeType): bool
+	{
+        return in_array($mimeType, $this->mimeTypes, true);
     }
 }

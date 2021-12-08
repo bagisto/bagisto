@@ -2,8 +2,10 @@
 
 namespace Webkul\Ui\DataGrid;
 
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
 use Webkul\Ui\DataGrid\Traits\ProvideBouncer;
 use Webkul\Ui\DataGrid\Traits\ProvideCollection;
 use Webkul\Ui\DataGrid\Traits\ProvideExceptionHandler;
@@ -17,36 +19,36 @@ abstract class DataGrid
      *
      * @var string
      */
-    protected $index;
+    protected string $index;
 
     /**
-     * Default sort order of datagrid.
+     * Default sort order of data grid.
      *
      * @var string
      */
-    protected $sortOrder = 'asc';
+    protected string $sortOrder = 'asc';
 
     /**
-     * Situation handling property when working with custom columns in datagrid, helps abstaining
+     * Situation handling property when working with custom columns in data grid, helps abstaining
      * aliases on custom column.
      *
      * @var bool
      */
-    protected $enableFilterMap = false;
+    protected bool $enableFilterMap = false;
 
     /**
      * This is array where aliases and custom column's name are passed.
      *
-     * @var array
+     * @var string[]
      */
-    protected $filterMap = [];
+    protected array $filterMap = [];
 
     /**
      * Array to hold all the columns which will be displayed on frontend.
      *
-     * @var array
+     * @var string[]
      */
-    protected $columns = [];
+    protected array $columns = [];
 
 
     /**
@@ -54,30 +56,30 @@ abstract class DataGrid
      *
      * @var array
      */
-    protected $completeColumnDetails = [];
+    protected array $completeColumnDetails = [];
 
-    /**
-     * Hold query builder instance of the query prepared by executing datagrid
-     * class method `setQueryBuilder`.
-     *
-     * @var object
-     */
-    protected $queryBuilder;
+	/**
+	 * Hold query builder instance of the query prepared by executing datagrid
+	 * class method `setQueryBuilder`.
+	 *
+	 * @var \Illuminate\Database\Eloquent\Builder
+	 */
+	protected Builder $queryBuilder;
 
-    /**
-     * Final result of the datagrid program that is collection object.
+	/**
+	 * Final result of the data grid program that is length aware paginator object.
+	 *
+	 * @var \Illuminate\Pagination\LengthAwarePaginator
+	 */
+	protected LengthAwarePaginator $collection;
+
+	/**
+     * Set of handy click tools which you can use for various operations.
+     * ex: dynamic and static redirects, deleting, etc.
      *
      * @var array
      */
-    protected $collection = [];
-
-    /**
-     * Set of handly click tools which you could be using for various operations.
-     * ex: dyanmic and static redirects, deleting, etc.
-     *
-     * @var array
-     */
-    protected $actions = [];
+    protected array $actions = [];
 
     /**
      * Works on selection of values index column as comma separated list as response
@@ -85,38 +87,38 @@ abstract class DataGrid
      *
      * @var array
      */
-    protected $massActions = [];
+    protected array $massActions = [];
 
     /**
      * Parsed value of the url parameters.
      *
      * @var array
      */
-    protected $parse;
+    protected array $parse;
 
     /**
      * To show mass action or not.
      *
      * @var bool
      */
-    protected $enableMassAction = false;
+    protected bool $enableMassAction = false;
 
     /**
      * To enable actions or not.
      */
-    protected $enableAction = false;
+    protected bool $enableAction = false;
 
     /**
      * Paginate the collection or not.
      *
      * @var bool
      */
-    protected $paginate = true;
+    protected bool $paginate = true;
 
     /**
-     * If paginated then value of pagination.
+     * If paginated then is the amount of items per each page.
      *
-     * @var int
+     * @var int|mixed
      */
     protected $itemsPerPage = 10;
 
@@ -125,7 +127,7 @@ abstract class DataGrid
      *
      * @var array
      */
-    protected $operators = [
+    protected array $operators = [
         'eq'       => '=',
         'lt'       => '<',
         'gt'       => '>',
@@ -149,7 +151,7 @@ abstract class DataGrid
      *
      * @var array
      */
-    protected $bindings = [
+    protected array $bindings = [
         0 => 'select',
         1 => 'from',
         2 => 'join',
@@ -164,7 +166,7 @@ abstract class DataGrid
      *
      * @var array
      */
-    protected $selectcomponents = [
+    protected array $selectcomponents = [
         0  => 'aggregate',
         1  => 'columns',
         2  => 'from',
@@ -183,21 +185,27 @@ abstract class DataGrid
      *
      * @var string[]
      */
-    protected $extraFilters = [];
+    protected array $extraFilters = [];
 
     /**
      * The current admin user.
      *
-     * @var object
+     * @var \Illuminate\Contracts\Auth\Authenticatable|null|object
      */
     protected $currentUser;
 
-    /**
-     * Create datagrid instance.
-     *
-     * @return void
-     */
-    public function __construct()
+	/**
+	 * @var \Webkul\Ui\DataGrid\DataGrid
+	 */
+	private DataGrid $invoker;
+
+	/**
+	 * Create DataGrid instance.
+	 *
+	 * @see \Webkul\Ui\DataGrid\Facades\DataGrid
+	 * @return void
+	 */
+	public function __construct()
     {
         $this->invoker = $this;
 
@@ -217,26 +225,27 @@ abstract class DataGrid
     /**
      * Add the index as alias of the column and use the column to make things happen.
      *
-     * @param string  $alias
-     * @param string  $column
-     *
+     * @param string $alias
+     * @param string $column
      * @return void
      */
-    public function addFilter($alias, $column)
-    {
+    public function addFilter(string $alias, string $column): void
+	{
         $this->filterMap[$alias] = $column;
 
         $this->enableFilterMap = true;
     }
 
-    /**
-     * Add column.
-     *
-     * @param  array  $column
-     * @return void
-     */
-    public function addColumn($column)
-    {
+	/**
+	 * Add column.
+	 *
+	 * @see \Webkul\Ui\DataGrid\Traits\ProvideExceptionHandler::checkRequiredColumnKeys
+	 * @param array $column
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumn(array $column): void
+	{
         $this->checkRequiredColumnKeys($column);
 
         $this->fireEvent('add.column.before.' . $column['index']);
@@ -248,101 +257,105 @@ abstract class DataGrid
         $this->fireEvent('add.column.after.' . $column['index']);
     }
 
-    /**
-     * Set complete column details.
-     *
-     * @param  array  $column
-     * @return void
-     */
-    public function setCompleteColumnDetails($column)
-    {
+	/**
+	 * Set complete column details.
+	 *
+	 * @param array $column
+	 * @return void
+	 */
+	public function setCompleteColumnDetails(array $column): void
+	{
         $this->completeColumnDetails[] = $column;
     }
 
-    /**
-     * Set query builder.
-     *
-     * @param  \Illuminate\Database\Query\Builder  $queryBuilder
-     * @return void
-     */
-    public function setQueryBuilder($queryBuilder)
-    {
+	/**
+	 * Set query builder.
+	 *
+	 * @param \Illuminate\Database\Eloquent\Builder $queryBuilder
+	 * @return void
+	 */
+	public function setQueryBuilder(Builder $queryBuilder): void
+	{
         $this->queryBuilder = $queryBuilder;
     }
 
-    /**
-     * Add action. Some datagrids are used in shops also. So extra
-     * parameters is their. If needs to give an access just pass true
-     * in second param.
-     *
-     * @param  array  $action
-     * @param  bool   $specialPermission
-     * @return void
-     */
-    public function addAction($action, $specialPermission = false)
-    {
+	/**
+	 * Add action. Some data-grids are used in shops as well. So extra
+	 * parameters is their. If needs to give an access just pass true
+	 * in second param.
+	 *
+	 * @param array $action
+	 * @param bool  $specialPermission
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function addAction(array $action, bool $specialPermission = false): void
+	{
         $this->checkRequiredActionKeys($action);
 
         $this->checkPermissions($action, $specialPermission, function ($action, $eventName) {
             $this->fireEvent('action.before.' . $eventName);
 
-            $action['key'] = Str::slug($action['title'], '_');
+			$action['key']      = Str::slug($action['title'], '_');
 
-            $this->actions[] = $action;
-            $this->enableAction = true;
+			$this->actions[]    = $action;
+			$this->enableAction = true;
 
             $this->fireEvent('action.after.' . $eventName);
         });
     }
 
-    /**
-     * Add mass action. Some datagrids are used in shops also. So extra
-     * parameters is their. If needs to give an access just pass true
-     * in second param.
-     *
-     * @param  array  $massAction
-     * @param  bool   $specialPermission
-     * @return void
-     */
-    public function addMassAction($massAction, $specialPermission = false)
-    {
+	/**
+	 * Add mass action. Some datagrids are used in shops also. So extra
+	 * parameters is their. If needs to give an access just pass true
+	 * in second param.
+	 *
+	 * @param array $massAction
+	 * @param bool  $specialPermission
+	 * @return void
+	 */
+	public function addMassAction(array $massAction, bool $specialPermission = false): void
+	{
         $massAction['route'] = $this->getRouteNameFromUrl($massAction['action'], $massAction['method']);
 
         $this->checkPermissions($massAction, $specialPermission, function ($action, $eventName) {
             $this->fireEvent('mass.action.before.' . $eventName);
 
-            $this->massActions[] = $action;
-            $this->enableMassAction = true;
+			$this->massActions[]    = $action;
+			$this->enableMassAction = true;
 
             $this->fireEvent('mass.action.after.' . $eventName);
         }, 'label');
     }
 
-    /**
-     * Preprare mass actions.
-     *
-     * @return void
-     */
-    public function prepareMassActions()
-    {
-    }
+	/**
+	 * Preprare mass actions.
+	 *
+	 * @return void
+	 */
+	public function prepareMassActions(): void
+	{
+	}
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
-    {
-    }
+	/**
+	 * Prepare actions.
+	 *
+	 * @return void
+	 */
+	public function prepareActions(): void
+	{
+	}
 
-    /**
-     * Render view.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function render()
-    {
+	/**
+	 * Render view.
+	 *
+	 * @see \Webkul\Ui\DataGrid\Traits\ProvideQueryResolver
+	 * @see \Webkul\Ui\DataGrid\Traits\ProvideCollection
+	 * @throws \Exception
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+	 */
+	public function render()
+	{
         $this->addColumns();
 
         $this->prepareActions();
@@ -354,14 +367,17 @@ abstract class DataGrid
         return view('ui::datagrid.table')->with('results', $this->prepareViewData());
     }
 
-    /**
-     * Export.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function export()
-    {
-        $this->paginate = false;
+	/**
+	 * Export.
+	 *
+	 * @see \Webkul\Ui\DataGrid\Traits\*
+	 * @see \Webkul\Ui\DataGrid\Traits\ProvideCollection
+	 * @throws \Exception
+	 * @return \Illuminate\Pagination\LengthAwarePaginator
+	 */
+	public function export(): LengthAwarePaginator
+	{
+		$this->paginate = false;
 
         $this->addColumns();
 
@@ -371,19 +387,22 @@ abstract class DataGrid
 
         $this->prepareQueryBuilder();
 
-        return $this->getCollection();
+        return $this->getResults();
     }
 
-    /**
-     * Prepare view data.
-     *
-     * @return array
-     */
-    public function prepareViewData()
-    {
+	/**
+	 * Prepare view data.
+	 *
+	 * @see \Webkul\Ui\DataGrid\Traits\*
+	 * @see \Webkul\Ui\DataGrid\Traits\ProvideCollection
+	 * @throws \Exception on get results failure
+	 * @return array
+	 */
+	public function prepareViewData(): array
+	{
         return [
             'index'             => $this->index,
-            'records'           => $this->getCollection(),
+            'records'           => $this->getResults(),
             'columns'           => $this->completeColumnDetails,
             'actions'           => $this->actions,
             'enableActions'     => $this->enableAction,
@@ -396,15 +415,15 @@ abstract class DataGrid
         ];
     }
 
-    /**
-     * Trigger event.
-     *
-     * @param  string  $name
-     * @return void
-     */
-    protected function fireEvent($name)
-    {
-        if (isset($name)) {
+	/**
+	 * Trigger event.
+	 *
+	 * @param ?string $name
+	 * @return void
+	 */
+	protected function fireEvent(?string $name): void
+	{
+		if (empty($name) === false) {
             $className = get_class($this->invoker);
 
             $className = last(explode('\\', $className));
@@ -417,14 +436,14 @@ abstract class DataGrid
         }
     }
 
-    /**
-     * Get necessary extra details.
-     *
-     * @return array
-     */
-    protected function getNecessaryExtraFilters()
-    {
-        $necessaryExtraFilters = [];
+	/**
+	 * Get necessary extra details.
+	 *
+	 * @return array
+	 */
+	protected function getNecessaryExtraFilters(): array
+	{
+		$necessaryExtraFilters = [];
 
         $checks = [
             'channels'        => core()->getAllChannels(),

@@ -992,11 +992,11 @@ class Core
         $ts = strtotime($date);
 
         if (! $day) {
-            $start = (date('D', $ts) == 'Sun') ? $ts : strtotime('last sunday', $ts);
+            $start = (date('D', $ts) === 'Sun') ? $ts : strtotime('last sunday', $ts);
 
             return date('Y-m-d', $start);
         } else {
-            $end = (date('D', $ts) == 'Sat') ? $ts : strtotime('next saturday', $ts);
+            $end = (date('D', $ts) === 'Sat') ? $ts : strtotime('next saturday', $ts);
 
             return date('Y-m-d', $end);
         }
@@ -1127,7 +1127,7 @@ class Core
     public function convertEmptyStringsToNull($array)
     {
         foreach ($array as $key => $value) {
-            if ($value == "" || $value == "null") {
+            if ($value == "" || $value === "null") {
                 $array[$key] = null;
             }
         }

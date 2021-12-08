@@ -5,6 +5,7 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
+use Webkul\Product\Models\ProductFlat;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class ProductDataGrid extends DataGrid
@@ -14,48 +15,48 @@ class ProductDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Set index columns, ex: id.
      *
      * @var string
      */
-    protected $index = 'product_id';
+    protected string $index = 'product_id';
 
     /**
      * If paginated then value of pagination.
      *
      * @var int
      */
-    protected $itemsPerPage = 10;
+    protected $itemsPerPage; // default = 10
 
     /**
      * Locale.
      *
      * @var string
      */
-    protected $locale = 'all';
+    protected string $locale = 'all';
 
     /**
      * Channel.
      *
      * @var string
      */
-    protected $channel = 'all';
+    protected string $channel = 'all';
 
     /**
      * Contains the keys for which extra filters to show.
      *
      * @var string[]
      */
-    protected $extraFilters = [
+    protected array $extraFilters = [
         'channels',
         'locales',
     ];
 
     /**
-     * Create datagrid instance.
+     * Create data grid instance.
      *
      * @return void
      */
@@ -68,8 +69,9 @@ class ProductDataGrid extends DataGrid
 
         /* finding channel code */
         if ($this->channel !== 'all') {
-            $this->channel = Channel::query()->find($this->channel);
-            $this->channel = $this->channel ? $this->channel->code : 'all';
+			$foundChannelCode = Channel::query()->where('code', '=', $this->channel)->value('code');
+			$this->channel    = $foundChannelCode;
+			$this->channel = $this->channel->code ?? 'all';
         }
 
         /* parent constructor */
@@ -81,7 +83,7 @@ class ProductDataGrid extends DataGrid
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
         if ($this->channel === 'all') {
             $whereInChannels = Channel::query()->pluck('code')->toArray();
@@ -96,7 +98,7 @@ class ProductDataGrid extends DataGrid
         }
 
         /* query builder */
-        $queryBuilder = DB::table('product_flat')
+        $queryBuilder = ProductFlat::query()
             ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
             ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
@@ -130,12 +132,13 @@ class ProductDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'product_id',
@@ -191,21 +194,19 @@ class ProductDataGrid extends DataGrid
             'filterable' => true,
         ]);
 
-        $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('admin::app.datagrid.status'),
-            'type'       => 'boolean',
-            'sortable'   => true,
-            'searchable' => false,
-            'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->status == 1) {
-                    return trans('admin::app.datagrid.active');
-                } else {
-                    return trans('admin::app.datagrid.inactive');
-                }
-            },
-        ]);
+		$this->addColumn([
+			'index'      => 'status',
+			'label'      => trans('admin::app.datagrid.status'),
+			'type'       => 'boolean',
+			'sortable'   => true,
+			'searchable' => false,
+			'filterable' => true,
+			'closure'    => function ($value) {
+				return (int) $value->status === 1
+					? trans('admin::app.datagrid.active')
+					: trans('admin::app.datagrid.inactive');
+			},
+		]);
 
         $this->addColumn([
             'index'      => 'price',
@@ -216,29 +217,28 @@ class ProductDataGrid extends DataGrid
             'filterable' => true,
         ]);
 
-        $this->addColumn([
-            'index'      => 'quantity',
-            'label'      => trans('admin::app.datagrid.qty'),
-            'type'       => 'number',
-            'sortable'   => true,
-            'searchable' => false,
-            'filterable' => false,
-            'closure'    => function ($row) {
-                if (is_null($row->quantity)) {
-                    return 0;
-                } else {
-                    return $this->renderQuantityView($row);
-                }
-            },
-        ]);
+		$this->addColumn([
+			'index'      => 'quantity',
+			'label'      => trans('admin::app.datagrid.qty'),
+			'type'       => 'number',
+			'sortable'   => true,
+			'searchable' => false,
+			'filterable' => false,
+			'closure'    => function ($row) {
+				return is_null($row->quantity)
+					? 0
+					: $this->renderQuantityView($row);
+			},
+		]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+    public function prepareActions(): void
     {
         $this->addAction([
             'title'     => trans('admin::app.datagrid.edit'),
@@ -271,7 +271,7 @@ class ProductDataGrid extends DataGrid
      *
      * @return void
      */
-    public function prepareMassActions()
+    public function prepareMassActions(): void
     {
         $this->addMassAction([
             'type'   => 'delete',
@@ -286,6 +286,7 @@ class ProductDataGrid extends DataGrid
             'action'  => route('admin.catalog.products.massupdate'),
             'method'  => 'POST',
             'options' => [
+				// TODO localize?
                 'Active'   => 1,
                 'Inactive' => 0,
             ],
@@ -296,7 +297,7 @@ class ProductDataGrid extends DataGrid
      * Render quantity view.
      *
      * @param  object  $row
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factorgy
      */
     private function renderQuantityView($row)
     {

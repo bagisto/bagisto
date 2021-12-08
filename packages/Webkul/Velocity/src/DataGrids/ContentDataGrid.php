@@ -2,8 +2,8 @@
 
 namespace Webkul\Velocity\DataGrids;
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\Velocity\Models\Content;
 
 class ContentDataGrid extends DataGrid
 {
@@ -12,23 +12,23 @@ class ContentDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'content_id';
+    protected string $index = 'content_id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('velocity_contents as con')
+        $queryBuilder = Content::from('velocity_contents as con')
             ->select('con.id as content_id', 'con_trans.title', 'con.position', 'con.content_type', 'con.status')
             ->leftJoin('velocity_contents_translations as con_trans', function ($leftJoin) {
                 $leftJoin->on('con.id', '=', 'con_trans.content_id')
@@ -42,12 +42,13 @@ class ContentDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+    public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'content_id',
@@ -82,43 +83,45 @@ class ContentDataGrid extends DataGrid
             'type'       => 'boolean',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->status == 1) {
-                    return 'Active';
-                } else {
-                    return 'Inactive';
-                }
-            },
-        ]);
+			'filterable' => true,
+			'closure'    => function ($value) {
+				return ((int) $value->status === 1)
+					? trans('admin::app.admin.datagrid.active')
+					: trans('admin::app.admin.datagrid.inactive');
+			},
+		]);
 
-        $this->addColumn([
-            'index'      => 'content_type',
-            'label'      => trans('velocity::app.admin.contents.datagrid.content-type'),
-            'type'       => 'string',
-            'sortable'   => true,
-            'searchable' => true,
-            'filterable' => false,
-            'closure'    => function ($value) {
-                if ($value->content_type == 'category') {
-                    return 'Category Slug';
-                } elseif ($value->content_type == 'link') {
-                    return 'Link';
-                } elseif ($value->content_type == 'product') {
-                    return 'Product';
-                } elseif ($value->content_type == 'static') {
-                    return 'Static';
-                }
-            },
-        ]);
-    }
+		$this->addColumn([
+			'index'      => 'content_type',
+			'label'      => trans('velocity::app.admin.contents.datagrid.content-type'),
+			'type'       => 'string',
+			'sortable'   => true,
+			'searchable' => true,
+			'filterable' => false,
+			'closure'    => function ($value) {
+				switch ( $value->content_type ) {
+					case 'category':
+						return trans('velocity::app.contents.datagrid.category-slug');
+					case 'link':
+						return trans('velocity::app.contents.datagrid.link');
+					case 'product':
+						return trans('velocity::app.contents.datagrid.product');
+					case 'static':
+						return trans('velocity::app.contents.datagrid.static');
+					default:
+						return '';
+				}
+			},
+		]);
+	}
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),
@@ -138,12 +141,12 @@ class ContentDataGrid extends DataGrid
         ]);
     }
 
-    /**
-     * Prepare mass actions.
-     *
-     * @return void
-     */
-    public function prepareMassActions()
+	/**
+	 * Prepare mass actions.
+	 *
+	 * @return void
+	 */
+	public function prepareMassActions(): void
     {
         $this->addMassAction([
             'type'   => 'delete',
@@ -158,6 +161,7 @@ class ContentDataGrid extends DataGrid
             'action'  => route('velocity.admin.content.mass-update'),
             'method'  => 'POST',
             'options' => [
+				// TODO localize?
                 'Active'   => 1,
                 'Inactive' => 0,
             ],

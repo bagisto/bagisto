@@ -156,7 +156,7 @@ class CatalogRuleRepository extends Repository
         foreach ($this->attributeRepository->findWhereNotIn('type', ['textarea', 'image', 'file']) as $attribute) {
             $attributeType = $attribute->type;
 
-            if ($attribute->code == 'tax_category_id') {
+            if ($attribute->code === 'tax_category_id') {
                 $options = $this->getTaxCategories();
             } else {
                 if ($attribute->type === 'select') {
@@ -166,10 +166,10 @@ class CatalogRuleRepository extends Repository
                 }
             }
 
-            if ($attribute->validation == 'decimal')
+            if ($attribute->validation === 'decimal')
                 $attributeType = 'decimal';
 
-            if ($attribute->validation == 'numeric')
+            if ($attribute->validation === 'numeric')
                 $attributeType = 'integer';
 
             $attributes[0]['children'][] = [

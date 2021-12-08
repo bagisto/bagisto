@@ -308,7 +308,7 @@ class ProductRepository extends Repository
                             $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
 
                             # apply the filter values to the correct column for this type of attribute.
-                            if ($attribute->type != 'price') {
+                            if ($attribute->type !== 'price') {
 
                                 $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
                                     foreach ($filterInputValues as $filterValue) {
@@ -453,7 +453,7 @@ class ProductRepository extends Repository
 
         $locale = core()->getRequestedLocaleCode();
 
-        if (config('scout.driver') == 'algolia') {
+        if (config('scout.driver') === 'algolia') {
             $results = app(ProductFlatRepository::class)->getModel()::search('query', function ($searchDriver, string $query, array $options) use ($term, $channel, $locale) {
                 $queries = explode('_', $term);
 
@@ -474,7 +474,7 @@ class ProductRepository extends Repository
                 ->where('visible_individually', 1)
                 ->orderBy('product_id', 'desc')
                 ->paginate(16);
-        } else if (config('scout.driver') == 'elastic') {
+        } else if (config('scout.driver') === 'elastic') {
             $queries = explode('_', $term);
 
             $results = app(ProductFlatRepository::class)->getModel()::search(implode(' OR ', $queries))

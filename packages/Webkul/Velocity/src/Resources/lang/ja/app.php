@@ -87,6 +87,10 @@ return [
                 'status'       => '状態',
                 'position'     => 'ポジション',
                 'content-type' => 'コンテンツタイプ',
+				'category-slug' => 'カテゴリースラッグ',
+				'link'          => 'リンク',
+				'product'       => '製品',
+				'static'        => '静的',
             ]
         ],
 
@@ -125,30 +129,32 @@ return [
             ]
         ],
 
-        'category'  => [
-            'save-btn-title'      => '保存メニュー',
-            'title'               => 'カテゴリーメニュー一覧',
-            'add-title'           => 'メニューコンテンツを追加',
-            'edit-title'          => 'メニューコンテンツの編集',
-            'btn-add-category'    => 'カテゴリコンテンツを追加',
-            'datagrid'            => [
-                'category-id'     => 'カテゴリID',
-                'category-name'   => '種別名',
-                'category-icon'   => 'カテゴリーアイコン',
-                'category-status' => '状態',
-            ],
-            'tab'                 => [
-                'general' => '一般的な',
-            ],
-            'status'              => '状態',
-            'active'              => 'アクティブ',
-            'inactive'            => '非活性',
-            'select'              => '-  選択する  -',
-            'icon-class'          => 'アイコンクラス',
-            'select-category'     => 'カテゴリーを選択',
-            'tooltip-content'     => 'ツールチップの内容',
-            'mass-delete-success' => '選択したカテゴリメニューを削除しました。',
-        ],
+		'category' => [
+			'save-btn-title'      => '保存メニュー',
+			'title'               => 'カテゴリーメニュー一覧',
+			'add-title'           => 'メニューコンテンツを追加',
+			'edit-title'          => 'メニューコンテンツの編集',
+			'btn-add-category'    => 'カテゴリコンテンツを追加',
+			'datagrid'            => [
+				'category-id'     => 'カテゴリID',
+				'category-name'   => '種別名',
+				'category-icon'   => 'カテゴリーアイコン',
+				'category-status' => '状態',
+			],
+			'tab'                 => [
+				'general' => '一般的な',
+			],
+			'status'              => '状態',
+			'active'              => 'アクティブ',
+			'inactive'            => '非活性',
+			'enabled'             => 'アクティブ',
+			'disabled'            => '非活性',
+			'select'              => '-  選択する  -',
+			'icon-class'          => 'アイコンクラス',
+			'select-category'     => 'カテゴリーを選択',
+			'tooltip-content'     => 'ツールチップの内容',
+			'mass-delete-success' => '選択したカテゴリメニューを削除しました。',
+		],
 
         'general'   => [
             'locale_logo' => 'ロケールロゴ',
@@ -190,7 +196,6 @@ return [
     ],
 
     'checkout'    => [
-        'qty'       => '数量',
         'checkout'  => 'チェックアウト',
         'cart'      => [
             'view-cart'     => 'かごの中身を見る',
@@ -227,7 +232,7 @@ return [
             'login'                 => 'ログインする',
             'become-user'           => 'ユーザーになる',
             'user-registration'     => 'ユーザー登録',
-            'form-sginup-text'      => 'あなたが私たちの店に初めている場合は、メンバーとして喜んでいます。',
+            'form-signup-text'      => 'あなたが私たちの店に初めている場合は、メンバーとして喜んでいます。',
         ],
         'forget-password'   => [
             'login'                 => 'ログインする',

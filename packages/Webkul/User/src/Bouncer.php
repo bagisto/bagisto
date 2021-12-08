@@ -12,7 +12,7 @@ class Bouncer
      */
     public function hasPermission($permission)
     {
-        if (auth()->guard('admin')->check() && auth()->guard('admin')->user()->role->permission_type == 'all') {
+        if (auth()->guard('admin')->check() && auth()->guard('admin')->user()->role->permission_type === 'all') {
             return true;
         } else {
             if (! auth()->guard('admin')->check() || ! auth()->guard('admin')->user()->hasPermission($permission)) {

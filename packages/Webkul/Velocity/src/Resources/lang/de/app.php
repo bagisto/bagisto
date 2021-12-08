@@ -73,7 +73,7 @@ return [
             'content' => [
                 'content-type' => 'Inhaltstyp',
                 'custom-title' => 'Benutzerdefinierter Titel',
-                'category-slug' => 'Kategorie Slug',
+                'category-slug' => 'Kategorie Schnecke',
                 'link-target' => 'Seitenverknüpfungsziel',
                 'custom-product' => 'Shop Produkte',
                 'custom-heading' => 'Benutzerdefinierte Überschrift',
@@ -82,11 +82,15 @@ return [
                 'page-link' => 'Seiten Link [Bsp: http://example.com/../../]',
             ],
             'datagrid' => [
-                'id' => 'Id',
-                'title' => 'Titel',
-                'status' => 'Status',
-                'position' => 'Position',
-                'content-type' => 'Inhaltstyp',
+                'id'            => 'Id',
+                'title'         => 'Titel',
+                'status'        => 'Status',
+                'position'      => 'Position',
+                'content-type'  => 'Inhaltstyp',
+                'category-slug' => 'Kategorie Schnecke',
+                'link'          => 'Link',
+                'product'       => 'Produkt',
+                'static'        => 'Statisch',
             ]
         ],
         'meta-data' => [
@@ -123,28 +127,30 @@ return [
                 'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
             ]
         ],
-        'category'  => [
-            'save-btn-title' => 'Menü speichern',
-            'title' => 'Kategoriemenüliste',
-            'add-title' => 'Menüinhalt hinzufügen',
-            'edit-title' => 'Menüinhalt bearbeiten',
-            'btn-add-category' => 'Kategorieinhalt hinzufügen',
-            'datagrid' => [
-                'category-id' => 'Kategorie Id',
-                'category-name' => 'Kategorie Name',
-                'category-icon' => 'Kategorie Symbol',
+        'category' => [
+            'save-btn-title'      => 'Menü speichern',
+            'title'               => 'Kategoriemenüliste',
+            'add-title'           => 'Menüinhalt hinzufügen',
+            'edit-title'          => 'Menüinhalt bearbeiten',
+            'btn-add-category'    => 'Kategorieinhalt hinzufügen',
+            'datagrid'            => [
+                'category-id'     => 'Kategorie Id',
+                'category-name'   => 'Kategorie Name',
+                'category-icon'   => 'Kategorie Symbol',
                 'category-status' => 'Status',
             ],
-            'tab' => [
+            'tab'                 => [
                 'general' => 'Allgemein',
             ],
-            'status' => 'Status',
-            'active' => 'Aktiv',
-            'inactive' => 'Inaktiv',
-            'select' => '-- Auswählen --',
-            'icon-class' => 'Symbol Klasse',
-            'select-category' => 'Kategorie auswählen',
-            'tooltip-content' => 'Tooltip-Inhalt',
+            'status'              => 'Status',
+            'active'              => 'Aktiv',
+            'inactive'            => 'Inaktiv',
+            'enabled'             => 'Aktiviert',
+            'disabled'            => 'Deaktiviert',
+            'select'              => '-- Auswählen --',
+            'icon-class'          => 'Symbol Klasse',
+            'select-category'     => 'Kategorie auswählen',
+            'tooltip-content'     => 'Tooltip-Inhalt',
             'mass-delete-success' => 'Ausgewähltes Kategorienmenü erfolgreich gelöscht.',
         ],
         'general'   => [
@@ -163,7 +169,6 @@ return [
     ],
 
     'header'        => [
-        'cart'              => 'Warenkorb',
         'cart'              => 'Warenkorb',
         'guest'             => 'Gast',
         'logout'            => 'Ausloggen',
@@ -188,7 +193,6 @@ return [
     ],
 
     'checkout'      => [
-        'qty'       => 'Menge',
         'checkout'  => 'Bestellen',
         'cart'      => [
             'view-cart'     => 'Warenkorb ansehen',
@@ -226,7 +230,7 @@ return [
             'login'             => 'Anmelden',
             'become-user'       => 'Benutzer werden',
             'user-registration' => 'Benutzer Registration',
-            'form-sginup-text'  => 'Wenn Sie neu in unserem Shop sind, freuen wir uns, Sie als Mitglied zu begrüßen zu dürfen.',
+            'form-signup-text'  => 'Wenn Sie neu in unserem Shop sind, freuen wir uns, Sie als Mitglied zu begrüßen zu dürfen.',
         ],
         'forget-password'   => [
             'login'                 => 'Anmelden',

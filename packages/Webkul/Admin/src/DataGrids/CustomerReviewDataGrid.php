@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Product\Models\ProductReview;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class CustomerReviewDataGrid extends DataGrid
@@ -12,23 +12,23 @@ class CustomerReviewDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'product_review_id';
+    protected string $index = 'product_review_id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('product_reviews as pr')
+        $queryBuilder = ProductReview::from('product_reviews as pr')
             ->leftjoin('product_flat as pf', 'pr.product_id', '=', 'pf.product_id')
             ->select('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pf.name as product_name', 'pr.status as product_review_status', 'pr.rating', 'pr.created_at')
             ->where('channel', core()->getCurrentChannelCode())
@@ -42,12 +42,13 @@ class CustomerReviewDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+    public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'product_review_id',
@@ -92,26 +93,29 @@ class CustomerReviewDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => false,
-        ]);
+		]);
 
-        $this->addColumn([
-            'index'      => 'product_review_status',
-            'label'      => trans('admin::app.datagrid.status'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'width'      => '100px',
-            'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->product_review_status == 'approved') {
-                    return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.approved') . '</span>';
-                } elseif ($value->product_review_status == "pending") {
-                    return '<span class="badge badge-md badge-warning">' . trans('admin::app.datagrid.pending') . '</span>';
-                } elseif ($value->product_review_status == "disapproved") {
-                    return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.disapproved') . '</span>';
-                }
-            },
-        ]);
+		$this->addColumn([
+			'index'      => 'product_review_status',
+			'label'      => trans('admin::app.datagrid.status'),
+			'type'       => 'string',
+			'searchable' => true,
+			'sortable'   => true,
+			'width'      => '100px',
+			'filterable' => true,
+			'closure'    => function ($value) {
+				switch ( $value->product_review_status ) {
+					case 'approved':
+						return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.approved') . '</span>';
+					case 'pending':
+						return '<span class="badge badge-md badge-warning">' . trans('admin::app.datagrid.pending') . '</span>';
+					case 'disapproved':
+						return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.disapproved') . '</span>';
+					default:
+						return '';
+				}
+			},
+		]);
 
         $this->addColumn([
             'index'      => 'created_at',
@@ -123,12 +127,13 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+    public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
@@ -150,7 +155,7 @@ class CustomerReviewDataGrid extends DataGrid
      *
      * @return void
      */
-    public function prepareMassActions()
+    public function prepareMassActions(): void
     {
         $this->addMassAction([
             'type'  => 'delete',

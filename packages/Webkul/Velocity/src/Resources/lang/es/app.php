@@ -82,11 +82,15 @@ return [
                 'page-link' => 'Enlace de Página [p.ej. http://ejemplo.com/../../]',
             ],
             'datagrid' => [
-                'id' => 'Id',
-                'title' => 'Título',
-                'status' => 'Estado',
-                'position' => 'Posición',
-                'content-type' => 'Tipo de Contenido',
+                'id'            => 'Id',
+                'title'         => 'Título',
+                'status'        => 'Estado',
+                'position'      => 'Posición',
+                'content-type'  => 'Tipo de Contenido',
+                'category-slug' => 'Slug de Categoría',
+                'link'          => 'Enlace',
+                'product'       => 'Producto',
+                'static'        => 'Estático',
             ]
         ],
         'meta-data' => [
@@ -123,28 +127,30 @@ return [
                 'privacy-and-cookies-policy' => 'Política de privacidad y cookies'
             ]
         ],
-        'category'  => [
-            'save-btn-title' => 'Guardar Menú',
-            'title' => 'Lista de Menú de Categorías',
-            'add-title' => 'Agregar Contenido de Menú',
-            'edit-title' => 'Edita Contenido del Menú',
-            'btn-add-category' => 'Agregar Contenido de Categoría',
-            'datagrid' => [
-                'category-id' => 'Categoría Id',
-                'category-name' => 'Nombre de Categoría',
-                'category-icon' => 'Icono de Categoría',
+        'category' => [
+            'save-btn-title'      => 'Guardar Menú',
+            'title'               => 'Lista de Menú de Categorías',
+            'add-title'           => 'Agregar Contenido de Menú',
+            'edit-title'          => 'Edita Contenido del Menú',
+            'btn-add-category'    => 'Agregar Contenido de Categoría',
+            'datagrid'            => [
+                'category-id'     => 'Categoría Id',
+                'category-name'   => 'Nombre de Categoría',
+                'category-icon'   => 'Icono de Categoría',
                 'category-status' => 'Estado',
             ],
-            'tab' => [
+            'tab'                 => [
                 'general' => 'General',
             ],
-            'status' => 'Estado',
-            'active' => 'Activo',
-            'inactive' => 'Inactivo',
-            'select' => '-- Seleccione --',
-            'icon-class' => 'Icono de Clase',
-            'select-category' => 'Elegir Categoría',
-            'tooltip-content' => 'Contenido de Información sobre Herramienta',
+            'status'              => 'Estado',
+            'active'              => 'Activo',
+            'inactive'            => 'Inactivo',
+            'enabled'             => 'Habilitado',
+            'disabled'            => 'Deshabilitado',
+            'select'              => '-- Seleccione --',
+            'icon-class'          => 'Icono de Clase',
+            'select-category'     => 'Elegir Categoría',
+            'tooltip-content'     => 'Contenido de Información sobre Herramienta',
             'mass-delete-success' => 'El menú de categorías seleccionadas se ha eliminado correctamente.',
         ],
         'general'   => [
@@ -163,7 +169,6 @@ return [
     ],
 
     'header'        => [
-        'cart'              => 'Carrito',
         'cart'              => 'Carrito',
         'guest'             => 'Invitado',
         'logout'            => 'Cerrar Sesión',
@@ -188,7 +193,6 @@ return [
     ],
 
     'checkout'      => [
-        'qty'       => 'Cant.',
         'checkout'  => 'Revisa tu Pedido',
         'cart'      => [
             'view-cart'     => 'Ver Carrito',
@@ -226,7 +230,7 @@ return [
             'login'             => 'Iniciar Sesión',
             'become-user'       => 'Convertirse en Usuario',
             'user-registration' => 'Registro de Usuario',
-            'form-sginup-text'  => 'Si es nuevo en nuestra tienda, nos complace tenerlo como miembro.',
+            'form-signup-text'  => 'Si es nuevo en nuestra tienda, nos complace tenerlo como miembro.',
         ],
         'forget-password'   => [
             'login'                 => 'Iniciar Sesión',

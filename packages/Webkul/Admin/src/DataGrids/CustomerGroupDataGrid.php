@@ -2,23 +2,26 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Customer\Models\CustomerGroup;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class CustomerGroupDataGrid extends DataGrid
 {
-    protected $index = 'id';
+    protected string $index = 'id';
 
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('customer_groups')->addSelect('id', 'code', 'name');
+        $queryBuilder = CustomerGroup::query()->select('id', 'code', 'name');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function addColumns()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -48,7 +51,10 @@ class CustomerGroupDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

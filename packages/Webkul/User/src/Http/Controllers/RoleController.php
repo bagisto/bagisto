@@ -123,7 +123,7 @@ class RoleController extends Controller
         /**
          * Check for other admins if the role has been changed from all to custom.
          */
-        $isChangedFromAll = $params['permission_type'] == "custom" && $this->roleRepository->find($id)->permission_type == 'all';
+        $isChangedFromAll = $params['permission_type'] === "custom" && $this->roleRepository->find($id)->permission_type === 'all';
 
         if ($isChangedFromAll && $this->adminRepository->countAdminsWithAllAccess() === 1) {
             session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));

@@ -2,24 +2,27 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\User\Models\Role;
 
 class RolesDataGrid extends DataGrid
 {
-    protected $index = 'id';
+    protected string $index = 'id';
 
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('roles')->addSelect('id', 'name', 'permission_type');
+		$queryBuilder = Role::select('id', 'name', 'permission_type');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function addColumns()
-    {
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 */
+	public function addColumns(): void
+	{
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.datagrid.id'),
@@ -49,9 +52,12 @@ class RolesDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions()
-    {
-        $this->addAction([
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 */
+	public function prepareActions(): void
+	{
+		$this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.roles.edit',

@@ -274,7 +274,7 @@ abstract class AbstractType
                     $attributeValue->id
                 );
 
-                if ($attribute->type == 'image' || $attribute->type == 'file') {
+                if ($attribute->type === 'image' || $attribute->type === 'file') {
                     Storage::delete($attributeValue->text_value);
                 }
             }
@@ -695,7 +695,7 @@ abstract class AbstractType
                 continue;
             }
 
-            if ($price->value_type == 'discount') {
+            if ($price->value_type === 'discount') {
                 if ($price->value >= 0 && $price->value <= 100) {
                     $lastPrice = $product->price - ($product->price * $price->value) / 100;
 

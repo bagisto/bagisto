@@ -77,7 +77,7 @@ class ProductForm extends FormRequest
         ]);
 
         foreach ($product->getEditableAttributes() as $attribute) {
-            if ($attribute->code == 'sku' || $attribute->type == 'boolean') {
+            if ($attribute->code === 'sku' || $attribute->type === 'boolean') {
                 continue;
             }
 
@@ -89,15 +89,15 @@ class ProductForm extends FormRequest
                 $validations = $this->rules[$attribute->code];
             }
 
-            if ($attribute->type == 'text' && $attribute->validation) {
+            if ($attribute->type === 'text' && $attribute->validation) {
                 array_push($validations,
-                    $attribute->validation == 'decimal'
+                    $attribute->validation === 'decimal'
                     ? new \Webkul\Core\Contracts\Validations\Decimal
                     : $attribute->validation
                 );
             }
 
-            if ($attribute->type == 'price') {
+            if ($attribute->type === 'price') {
                 array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
             }
 

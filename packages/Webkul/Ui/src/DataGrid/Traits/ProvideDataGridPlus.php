@@ -2,24 +2,30 @@
 
 namespace Webkul\Ui\DataGrid\Traits;
 
+use Illuminate\Http\JsonResponse;
+
 trait ProvideDataGridPlus
 {
-    /**
-     * Get json data.
-     *
-     * @return object
-     */
-    public function toJson()
-    {
-        $this->addColumns();
 
-        $this->prepareActions();
+	/**
+	 * Get json data.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @throws \Exception failure when retrieving collection
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function toJson(): JsonResponse
+	{
+		$this->addColumns();
+
+		$this->prepareActions();
 
         $this->prepareMassActions();
 
         $this->prepareQueryBuilder();
 
-        $this->getCollection();
+        $this->getResults();
 
         $this->formatCollection();
 
@@ -31,8 +37,8 @@ trait ProvideDataGridPlus
      *
      * @return array
      */
-    public function prepareData()
-    {
+    public function prepareData(): array
+	{
         return [
             'index'             => $this->index,
             'records'           => $this->collection,
@@ -53,8 +59,8 @@ trait ProvideDataGridPlus
      *
      * @return array
      */
-    public function getExtraFilters()
-    {
+    public function getExtraFilters(): array
+	{
         $necessaryExtraFilters = [
             'current' => $this->getCurrentExtraFilterValue(),
         ];
@@ -74,26 +80,34 @@ trait ProvideDataGridPlus
         return $necessaryExtraFilters;
     }
 
-    /**
-     * Get current extra filter values.
-     *
-     * @return array
-     */
-    public function getCurrentExtraFilterValue()
-    {
+	/**
+	 * Get current extra filter values.
+	 *
+	 * @return array
+	 * [ArrayShape([ 'locales'        → 'mixed',
+	 *               'locale'         → 'string',
+	 *               'channel'        → 'mixed|string|\Webkul\Core\Contracts\Channel',
+	 *               'customer_group' → 'null|string'
+	 *             ])
+	 *  ]
+	 */
+	public function getCurrentExtraFilterValue(): array
+	{
         /* all locales */
         $locales = core()->getAllLocales();
 
         /* request and fallback handling */
-        $locale = core()->getRequestedLocaleCode();
-        $channel = core()->getRequestedChannelCode();
-        $customer_group = core()->getRequestedCustomerGroupCode();
+		$locale         = core()->getRequestedLocaleCode();
+		$channel        = core()->getRequestedChannelCode();
+		$customer_group = core()->getRequestedCustomerGroupCode();
 
-        /* handling cases for new locale if not present in current channel */
+		/* handling cases for new locale if not present in current channel */
         if ($channel !== 'all') {
-            $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
 
-            if ($channelLocales->contains('code', $locale)) {
+			$channelLocales =
+				app(\Webkul\Core\Repositories\ChannelRepository::class)->findOneByField('code', $channel)->locales;
+
+			if ($channelLocales->contains('code', $locale)) {
                 $locales = $channelLocales;
             } else {
                 $channel = 'all';
@@ -116,8 +130,8 @@ trait ProvideDataGridPlus
      *
      * @return array
      */
-    public function getTranslations()
-    {
+    public function getTranslations(): array
+	{
         return [
             'allChannels'         => __('admin::app.admin.system.all-channels'),
             'allLocales'          => __('admin::app.admin.system.all-locales'),

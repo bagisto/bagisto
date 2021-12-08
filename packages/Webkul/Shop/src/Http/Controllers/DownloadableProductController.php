@@ -54,7 +54,7 @@ class DownloadableProductController extends Controller
             'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
-        if ($downloadableLinkPurchased->status == 'pending') {
+        if ($downloadableLinkPurchased->status === 'pending') {
             abort(403);
         }
 
@@ -88,7 +88,7 @@ class DownloadableProductController extends Controller
             ], $downloadableLinkPurchased->id);
         }
 
-        if ($downloadableLinkPurchased->type == 'file') {
+        if ($downloadableLinkPurchased->type === 'file') {
             $privateDisk = Storage::disk('private');
 
             return $privateDisk->exists($downloadableLinkPurchased->file)

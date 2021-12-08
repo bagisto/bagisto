@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Attribute\Models\Attribute;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class AttributeDataGrid extends DataGrid
@@ -12,39 +12,40 @@ class AttributeDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'id';
+    protected string $index = 'id';
 
     /**
      * Default sort order of datagrid.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
-    {
-        $queryBuilder = DB::table('attributes')
-            ->select('id')
-            ->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
+	public function prepareQueryBuilder(): void
+	{
+		$queryBuilder = Attribute::query()
+						  ->select('id')
+						  ->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
 
-        $this->addFilter('is_unique', 'is_unique');
-        $this->addFilter('value_per_locale', 'value_per_locale');
-        $this->addFilter('value_per_channel', 'value_per_channel');
+		$this->addFilter('is_unique', 'is_unique');
+		$this->addFilter('value_per_locale', 'value_per_locale');
+		$this->addFilter('value_per_channel', 'value_per_channel');
 
-        $this->setQueryBuilder($queryBuilder);
-    }
+		$this->setQueryBuilder($queryBuilder);
+	}
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+    public function addColumns():void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -89,12 +90,10 @@ class AttributeDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'closure'    => function ($value) {
-                if ($value->is_required == 1) {
-                    return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
-                }
-            },
+				return (int) $value->is_required === 1
+					? trans('admin::app.datagrid.true')
+					: trans('admin::app.datagrid.false');
+			},
         ]);
 
         $this->addColumn([
@@ -104,14 +103,12 @@ class AttributeDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->is_unique == 1) {
-                    return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
-                }
-            },
-        ]);
+			'closure' => function ($value) {
+				return (int) $value->is_unique === 1
+					? trans('admin::app.datagrid.true')
+					: trans('admin::app.datagrid.false');
+			},
+		]);
 
         $this->addColumn([
             'index'      => 'value_per_locale',
@@ -120,14 +117,12 @@ class AttributeDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->value_per_locale == 1) {
-                    return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
-                }
-            },
-        ]);
+			'closure' => function ($value) {
+				return (int) $value->value_per_locale === 1
+					? trans('admin::app.datagrid.true')
+					: trans('admin::app.datagrid.false');
+			},
+		]);
 
         $this->addColumn([
             'index'      => 'value_per_channel',
@@ -137,22 +132,21 @@ class AttributeDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->value_per_channel == 1) {
-                    return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
-                }
-            },
+				return (int) $value->value_per_channel === 1
+					? trans('admin::app.datagrid.true')
+					: trans('admin::app.datagrid.false');
+			},
         ]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
-    {
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
+	{
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
@@ -173,7 +167,7 @@ class AttributeDataGrid extends DataGrid
      *
      * @return void
      */
-    public function prepareMassActions()
+    public function prepareMassActions():void
     {
         $this->addMassAction([
             'type'   => 'delete',

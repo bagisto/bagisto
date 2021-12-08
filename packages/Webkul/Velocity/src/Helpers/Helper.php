@@ -20,49 +20,49 @@ class Helper extends Review
      *
      * @var \Webkul\Product\Contracts\Product
      */
-    protected $productModel;
+    protected \Webkul\Product\Contracts\Product $productModel;
 
     /**
      * Order brands instance.
      *
      * @var \Webkul\Velocity\Repositories\OrderBrandsRepository
      */
-    protected $orderBrandsRepository;
+    protected OrderBrandsRepository $orderBrandsRepository;
 
     /**
      * Product repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductRepository
      */
-    protected $productRepository;
+    protected ProductRepository $productRepository;
 
     /**
      * Product flat repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductFlatRepository
      */
-    protected $productFlatRepository;
+    protected ProductFlatRepository $productFlatRepository;
 
     /**
      * Attribute option instance.
      *
      * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
      */
-    protected $attributeOptionRepository;
+    protected AttributeOptionRepository $attributeOptionRepository;
 
     /**
      * Product review repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductReviewRepository
      */
-    protected $productReviewRepository;
+    protected ProductReviewRepository $productReviewRepository;
 
     /**
      * Velocity metadata instance.
      *
      * @var \Webkul\Velocity\Repositories\VelocityMetadataRepository
      */
-    protected $velocityMetadataRepository;
+    protected VelocityMetadataRepository $velocityMetadataRepository;
 
     /**
      * List of all default locale images for velocity.
@@ -152,10 +152,12 @@ class Helper extends Review
                 foreach ($orderBrand as $product) {
                     $product_id[] = $product['product_id'];
 
-                    $product_categories = $this->productRepository->with('categories')->findWhereIn('id', $product_id)->toArray();
-                }
+					$product_categories = $this->productRepository->with('categories')
+																  ->findWhereIn('id', $product_id)
+																  ->toArray();
+				}
 
-                $categoryName = $brandName = $brandImplode = [];
+				$categoryName = $brandName = $brandImplode = [];
 
                 foreach ($product_categories as $totalData) {
                     $brand = $this->attributeOptionRepository->findOneWhere(['id' => $totalData['brand']]);
@@ -250,15 +252,15 @@ class Helper extends Review
     /**
      * Get messages from session.
      *
-     * @return void
-     */
+     * @return string[]
+	 */
     public function getMessage()
     {
-        $message = [
-            'message' => '',
-            'messageType' => '',
-            'messageLabel' => '',
-        ];
+		$message = [
+			'message'      => '',
+			'messageType'  => '',
+			'messageLabel' => '',
+		];
 
         if ($message['message'] = session('success')) {
             $message['messageType'] = 'alert-success';
@@ -288,16 +290,16 @@ class Helper extends Review
 
         $path = __DIR__ . "/../Resources/lang/$currentLocale/app.php";
 
-        if (is_string($path) && is_readable($path)) {
-            return include $path;
-        } else {
-            $currentLocale = "en";
-
-            $path = __DIR__ . "/../Resources/lang/$currentLocale/app.php";
-
+        if (is_readable($path)) {
             return include $path;
         }
-    }
+
+		$currentLocale = "en";
+
+		$path          = __DIR__ . "/../Resources/lang/$currentLocale/app.php";
+
+		return include $path;
+	}
 
     /**
      * Format cart item.
@@ -331,7 +333,7 @@ class Helper extends Review
      */
     public function formatProduct($product, $list = false, $metaInformation = [])
     {
-        $reviewHelper = app('Webkul\Product\Helpers\Review');
+        $reviewHelper = app(\Webkul\Product\Helpers\Review::class);
 
         $galleryImages = ProductImage::getGalleryImages($product);
         $productImage = ProductImage::getProductBaseImage($product, $galleryImages)['medium_image_url'];
@@ -341,18 +343,18 @@ class Helper extends Review
 
         if (strpos($productImage, $mediumProductImageName) > -1) {
             $productImageNameCollection = explode('/', $productImage);
-            $productImageName = $productImageNameCollection[sizeof($productImageNameCollection) - 1];
+            $productImageName = $productImageNameCollection[ count($productImageNameCollection) - 1];
 
-            if ($productImageName == $mediumProductImageName) {
+            if ($productImageName === $mediumProductImageName) {
                 $productImage = str_replace($mediumProductImageName, $largeProductImageName, $productImage);
             }
         }
 
         $priceHTML = view('shop::products.price', ['product' => $product])->render();
 
-        $isProductNew = ($product->new && ! strpos($priceHTML, 'sticker sale') > 0) ? __('shop::app.products.new') : false;
+		$isProductNew = ($product->new && str_contains($priceHTML, 'sticker sale') === false) ? __('shop::app.products.new') : false;
 
-        return [
+		return [
             'priceHTML'         => $priceHTML,
             'avgRating'         => ceil($reviewHelper->getAverageRating($product)),
             'totalReviews'      => $reviewHelper->getTotalReviews($product),
@@ -366,10 +368,9 @@ class Helper extends Review
             'firstReviewText'   => trans('velocity::app.products.be-first-review'),
             'addToCartHtml'     => view('shop::products.add-to-cart', [
                 'product'           => $product,
-                'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
+                'addWishlistClass'  => ! (isset($list) && $list) ? '' : '', // Check
 
-                'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                    ? true : false,
+                'showCompare'       => (int) core()->getConfigData('general.content.shop.compare_option') === 1,
 
                 'btnText'           => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
                     ? $metaInformation['btnText'] : null,

@@ -12,7 +12,7 @@ class UiServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         include __DIR__ . '/../Http/routes.php';
 
@@ -34,7 +34,7 @@ class UiServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register() : void
     {
         $this->app->bind('datagrid', 'Webkul\Ui\DataGrid\DataGrid');
     }

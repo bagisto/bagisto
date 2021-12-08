@@ -16,7 +16,7 @@ class TableSlot extends Booking
 
         $requestedQty = $cartItem['quantity'];
 
-        if ($bookingProduct->table_slot->price_type == 'table') {
+        if ($bookingProduct->table_slot->price_type === 'table') {
             $requestedQty *= $bookingProduct->table_slot->guest_limit;
 
             $bookedQty *= $bookingProduct->table_slot->guest_limit;

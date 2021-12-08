@@ -165,7 +165,7 @@ class ReviewController extends Controller
                 $review = $this->productReviewRepository->findOneByField('id', $value);
 
                 try {
-                    if ($data['massaction-type'] == 'update') {
+                    if ($data['massaction-type'] === 'update') {
                         if ($data['update-options'] == 1) {
                             Event::dispatch('customer.review.update.before', $value);
 

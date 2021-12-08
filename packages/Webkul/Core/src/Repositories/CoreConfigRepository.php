@@ -48,7 +48,7 @@ class CoreConfigRepository extends Repository
 
                 $localeBased = isset($field['locale_based']) && $field['locale_based'] ? true : false;
 
-                if (getType($value) == 'array' && ! isset($value['delete'])) {
+                if (getType($value) === 'array' && ! isset($value['delete'])) {
                     $value = implode(",", $value);
                 }
 

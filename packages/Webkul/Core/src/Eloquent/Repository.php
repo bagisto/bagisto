@@ -4,8 +4,6 @@ namespace Webkul\Core\Eloquent;
 
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Container\Container as App;
 use Prettus\Repository\Traits\CacheableRepository;
 
 

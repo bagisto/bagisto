@@ -3,6 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
+use Webkul\Marketing\Models\Campaign;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class CampaignDataGrid extends DataGrid
@@ -12,35 +13,36 @@ class CampaignDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'id';
+    protected string $index = 'id';
 
     /**
      * Default sort order of datagrid.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('marketing_campaigns')->addSelect('id', 'name', 'subject', 'status');
+        $queryBuilder = Campaign::query()->select('id', 'name', 'subject', 'status');
 
         $this->addFilter('status', 'marketing_campaigns.status');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -87,11 +89,12 @@ class CampaignDataGrid extends DataGrid
     }
 
     /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

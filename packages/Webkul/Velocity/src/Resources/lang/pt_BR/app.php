@@ -82,11 +82,15 @@ return [
                 'page-link' => 'Link da Página [e.g. http://example.com/../../]',
             ],
             'datagrid' => [
-                'id' => 'Id',
-                'title' => 'Título',
-                'status' => 'Status',
-                'position' => 'Posisção',
-                'content-type' => 'Tipo de Conteúdo',
+                'id'            => 'Id',
+                'title'         => 'Título',
+                'status'        => 'Status',
+                'position'      => 'Posisção',
+                'content-type'  => 'Tipo de Conteúdo',
+                'category-slug' => 'Lesma da categoria',
+                'link'          => 'Ligação',
+                'product'       => 'Produtos',
+                'static'        => 'Estático',
             ]
         ],
         'meta-data' => [
@@ -124,27 +128,29 @@ return [
             ]
         ],
         'category' => [
-            'save-btn-title' => 'Salvar Menu',
-            'title' => 'Lista de Categorias Menu',
-            'add-title' => 'Adicionar Conteúdo do Menu',
-            'edit-title' => 'Editar Conteúdo do Menu',
-            'btn-add-category' => 'Add Conteúdo da Categoria',
-            'datagrid' => [
-                'category-id' => 'Categoria Id',
-                'category-name' => 'Categoria Nome',
-                'category-icon' => 'Categoria Ícone',
+            'save-btn-title'      => 'Salvar Menu',
+            'title'               => 'Lista de Categorias Menu',
+            'add-title'           => 'Adicionar Conteúdo do Menu',
+            'edit-title'          => 'Editar Conteúdo do Menu',
+            'btn-add-category'    => 'Add Conteúdo da Categoria',
+            'datagrid'            => [
+                'category-id'     => 'Categoria Id',
+                'category-name'   => 'Categoria Nome',
+                'category-icon'   => 'Categoria Ícone',
                 'category-status' => 'Status',
             ],
-            'tab' => [
+            'tab'                 => [
                 'general' => 'Geral',
             ],
-            'status' => 'Status',
-            'active' => 'Ativo',
-            'inactive' => 'Inativo',
-            'select' => '-- Selecionar --',
-            'icon-class' => 'Classe do Ícone',
-            'select-category' => 'Escolha a Categoria',
-            'tooltip-content' => 'Conteúdo da Dica',
+            'status'              => 'Status',
+            'active'              => 'Ativo',
+            'inactive'            => 'Inativo',
+            'enabled'             => 'Ativado',
+            'disabled'            => 'Desativado',
+            'select'              => '-- Selecionar --',
+            'icon-class'          => 'Classe do Ícone',
+            'select-category'     => 'Escolha a Categoria',
+            'tooltip-content'     => 'Conteúdo da Dica',
             'mass-delete-success' => 'Menu de categorias selecionadas excluído com sucesso.',
         ],
         'general' => [
@@ -189,7 +195,6 @@ return [
     ],
 
     'checkout' => [
-        'qty' => 'Qtd',
         'checkout' => 'Finalizar Compra',
         'cart' => [
             'view-cart' => 'Ver Carrinho',
@@ -228,7 +233,7 @@ return [
             'login' => 'Conecte-se',
             'become-user' => 'Torne-se usuário',
             'user-registration' => 'Registro de Usuário',
-            'form-sginup-text' => 'Se você é novo em nossa loja, desejamos tê-lo como membro.',
+            'form-signup-text' => 'Se você é novo em nossa loja, desejamos tê-lo como membro.',
         ],
         'forget-password' => [
             'login' => 'Conecte-se',

@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\User\Models\Admin;
 
 class UserDataGrid extends DataGrid
 {
@@ -12,25 +12,25 @@ class UserDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'user_id';
+    protected string $index = 'user_id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('admins as u')
-            ->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id')
-            ->addSelect('u.id as user_id', 'u.name as user_name', 'u.status', 'u.email', 'ro.name as role_name');
+		$queryBuilder = Admin::from('admins as u')
+			->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id')
+			->addSelect('u.id as user_id', 'u.name as user_name', 'u.status', 'u.email', 'ro.name as role_name');
 
         $this->addFilter('user_id', 'u.id');
         $this->addFilter('user_name', 'u.name');
@@ -40,13 +40,14 @@ class UserDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
-    {
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
+	{
         $this->addColumn([
             'index'      => 'user_id',
             'label'      => trans('admin::app.datagrid.id'),
@@ -65,23 +66,21 @@ class UserDataGrid extends DataGrid
             'filterable' => true,
         ]);
 
-        $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('admin::app.datagrid.status'),
-            'type'       => 'boolean',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->status == 1) {
-                    return trans('admin::app.datagrid.active');
-                } else {
-                    return trans('admin::app.datagrid.inactive');
-                }
-            },
-        ]);
+		$this->addColumn([
+			'index'      => 'status',
+			'label'      => trans('admin::app.datagrid.status'),
+			'type'       => 'boolean',
+			'searchable' => true,
+			'sortable'   => true,
+			'filterable' => true,
+			'closure'    => function ($value) {
+				return (int) $value->status === 1
+					? trans('admin::app.datagrid.active')
+					: trans('admin::app.datagrid.inactive');
+			},
+		]);
 
-        $this->addColumn([
+		$this->addColumn([
             'index'      => 'email',
             'label'      => trans('admin::app.datagrid.email'),
             'type'       => 'string',
@@ -100,12 +99,13 @@ class UserDataGrid extends DataGrid
         ]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

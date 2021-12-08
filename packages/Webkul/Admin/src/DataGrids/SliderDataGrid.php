@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
+use Webkul\Core\Models\Slider;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class SliderDataGrid extends DataGrid
@@ -13,41 +14,41 @@ class SliderDataGrid extends DataGrid
      *
      * @var int
      */
-    protected $index = 'id';
+    protected string $index = 'id';
 
     /**
      * Default sort order of datagrid.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Locale.
      *
      * @var string
      */
-    protected $locale = 'all';
+    protected string $locale = 'all';
 
     /**
      * Channel.
      *
      * @var string
      */
-    protected $channel = 'all';
+    protected string $channel = 'all';
 
     /**
      * Contains the keys for which extra filters to render.
      *
      * @var string[]
      */
-    protected $extraFilters = [
+    protected array $extraFilters = [
         'channels',
         'locales',
     ];
 
     /**
-     * Create datagrid instance.
+     * Create data grid instance.
      *
      * @return void
      */
@@ -63,9 +64,10 @@ class SliderDataGrid extends DataGrid
 
         /* finding channel code */
         if ($this->channel !== 'all') {
-            $this->channel = Channel::query()->find($this->channel);
-            $this->channel = $this->channel ? $this->channel->code : 'all';
-        }
+			$foundChannelCode = Channel::query()->where('code', '=', $this->channel)->value('code');
+			$this->channel    = $foundChannelCode;
+			$this->channel    = $this->channel->code ?? 'all';
+		}
     }
 
     /**
@@ -73,11 +75,11 @@ class SliderDataGrid extends DataGrid
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
         $dbPrefix = DB::getTablePrefix();
 
-        $queryBuilder = DB::table('sliders as sl')
+        $queryBuilder = Slider::from('sliders as sl')
             ->select('sl.id', 'sl.title', 'sl.locale', 'ct.channel_id', 'ct.name', 'ch.code')
             ->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id')
             ->leftJoin('channel_translations as ct', 'ch.id', '=', 'ct.channel_id')
@@ -100,12 +102,13 @@ class SliderDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -135,22 +138,23 @@ class SliderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'locale',
-            'label' => trans('admin::app.datagrid.locale'),
-            'type' => 'string',
-            'searchable' => true,
-            'sortable' => true,
-            'filterable' => true
+			'index'      => 'locale',
+			'label'      => trans('admin::app.datagrid.locale'),
+			'type'       => 'string',
+			'searchable' => true,
+			'sortable'   => true,
+			'filterable' => true
         ]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
-    {
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
+	{
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',

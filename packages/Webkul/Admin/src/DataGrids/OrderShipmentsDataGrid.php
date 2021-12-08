@@ -4,26 +4,26 @@ namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Models\OrderAddress;
+use Webkul\Sales\Models\Shipment;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class OrderShipmentsDataGrid extends DataGrid
 {
-    protected $index = 'shipment_id';
+    protected string $index = 'shipment_id';
 
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('shipments')
-            ->leftJoin('addresses as order_address_shipping', function($leftJoin) {
-                $leftJoin->on('order_address_shipping.order_id', '=', 'shipments.order_id')
-                         ->where('order_address_shipping.address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
-            })
-            ->leftJoin('orders as ors', 'shipments.order_id', '=', 'ors.id')
-            ->leftJoin('inventory_sources as is', 'shipments.inventory_source_id', '=', 'is.id')
-            ->select('shipments.id as shipment_id', 'ors.increment_id as shipment_order_id', 'shipments.total_qty as shipment_total_qty', 'ors.created_at as order_date', 'shipments.created_at as shipment_created_at')
-            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'))
-            ->selectRaw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name) as inventory_source_name');
+        $queryBuilder = Shipment::query()->leftJoin('addresses as order_address_shipping', function ($leftJoin) {
+			$leftJoin->on('order_address_shipping.order_id', '=', 'shipments.order_id')
+					 ->where('order_address_shipping.address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
+		})
+		->leftJoin('orders as ors', 'shipments.order_id', '=', 'ors.id')
+		->leftJoin('inventory_sources as is', 'shipments.inventory_source_id', '=', 'is.id')
+		->select('shipments.id as shipment_id', 'ors.increment_id as shipment_order_id', 'shipments.total_qty as shipment_total_qty', 'ors.created_at as order_date', 'shipments.created_at as shipment_created_at')
+		->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'))
+		->selectRaw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name) as inventory_source_name');
 
         $this->addFilter('shipment_id', 'shipments.id');
         $this->addFilter('shipment_order_id', 'ors.increment_id');
@@ -36,7 +36,10 @@ class OrderShipmentsDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function addColumns()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'shipment_id',
@@ -102,7 +105,10 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.view'),

@@ -81,14 +81,18 @@ return [
                 'catalog-type' => 'Product Catalog Type',
                 'static-description' => 'Content Description',
                 'page-link' => 'Page Link [e.g. http://example.com/../../]',
-            ],
-            'datagrid' => [
-                'id' => 'Id',
-                'title' => 'Title',
-                'status' => 'Status',
-                'position' => 'Position',
-                'content-type' => 'Content Type',
-            ]
+			],
+			'datagrid' => [
+				'id'            => 'Id',
+				'title'         => 'Title',
+				'status'        => 'Status',
+				'position'      => 'Position',
+				'content-type'  => 'Content Type',
+				'category-slug' => 'Category Slug',
+				'link'          => 'Link',
+				'product'       => 'Product',
+				'static'        => 'Static',
+			]
         ],
         'meta-data' => [
             'footer'                    => 'Footer',
@@ -124,30 +128,33 @@ return [
                 'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
             ]
         ],
-        'category'  => [
-            'save-btn-title' => 'Save Menu',
-            'title' => 'Category Menu List',
-            'add-title' => 'Add Menu Content',
-            'edit-title' => 'Edit Menu Content',
-            'btn-add-category' => 'Add Category Content',
-            'datagrid' => [
-                'category-id' => 'Category Id',
-                'category-name' => 'Category Name',
-                'category-icon' => 'Category Icon',
-                'category-status' => 'Status',
-            ],
-            'tab' => [
-                'general' => 'General',
-            ],
-            'status' => 'Status',
-            'active' => 'Active',
-            'inactive' => 'Inactive',
-            'select' => '-- Select --',
-            'icon-class' => 'Icon Class',
-            'select-category' => 'Choose Category',
-            'tooltip-content' => 'Tooltip Content',
-            'mass-delete-success' => 'Selected categories menu deleted successfully.',
-        ],
+		'category' => [
+			'save-btn-title'      => 'Save Menu',
+			'title'               => 'Category Menu List',
+			'add-title'           => 'Add Menu Content',
+			'edit-title'          => 'Edit Menu Content',
+			'btn-add-category'    => 'Add Category Content',
+			'datagrid'            => [
+				'category-id'     => 'Category Id',
+				'category-name'   => 'Category Name',
+				'category-icon'   => 'Category Icon',
+				'category-status' => 'Status',
+
+			],
+			'tab'                 => [
+				'general' => 'General',
+			],
+			'status'              => 'Status',
+			'active'              => 'Active',
+			'inactive'            => 'Inactive',
+			'enabled'             => 'Enabled',
+			'disabled'            => 'Disabled',
+			'select'              => '-- Select --',
+			'icon-class'          => 'Icon Class',
+			'select-category'     => 'Choose Category',
+			'tooltip-content'     => 'Tooltip Content',
+			'mass-delete-success' => 'Selected categories menu deleted successfully.',
+		],
         'general'   => [
             'locale_logo' => 'Locale Logo',
         ],
@@ -164,7 +171,6 @@ return [
     ],
 
     'header'        => [
-        'cart'              => 'Cart',
         'cart'              => 'Cart',
         'guest'             => 'Guest',
         'logout'            => 'Logout',
@@ -189,7 +195,6 @@ return [
     ],
 
     'checkout'      => [
-        'qty'       => 'Qty',
         'checkout'  => 'Checkout',
         'cart'      => [
             'view-cart'     => 'View Cart',
@@ -227,7 +232,7 @@ return [
             'login'             => 'Login',
             'become-user'       => 'Become User',
             'user-registration' => 'User Registration',
-            'form-sginup-text'  => 'If you are new to our store, we glad to have you as member.',
+            'form-signup-text'  => 'If you are new to our store, we glad to have you as member.',
         ],
         'forget-password'   => [
             'login'                 => 'Login',

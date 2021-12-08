@@ -2,30 +2,31 @@
 
 namespace Webkul\Core\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Storage;
-use Prettus\Repository\Traits\CacheableRepository;
+use Webkul\Core\Contracts\Channel;
+use Webkul\Core\Eloquent\Repository;
 
 class ChannelRepository extends Repository
 {
-    use CacheableRepository;
+   	// use CacheableRepository; (already imported by Repository)
 
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
-    function model()
-    {
-        return 'Webkul\Core\Contracts\Channel';
+    public function model(): string
+	{
+        return Channel::class;
     }
 
-    /**
-     * @param  array  $data
-     * @return \Webkul\Core\Contracts\Channel
-     */
-    public function create(array $data)
-    {
+	/**
+	 * @param array $data
+	 * @throws \Prettus\Validator\Exceptions\ValidatorException
+	 * @return \Webkul\Core\Contracts\Channel
+	 */
+    public function create(array $data): Channel
+	{
         $model = $this->getModel();
 
         foreach (core()->getAllLocales() as $locale) {
@@ -51,17 +52,21 @@ class ChannelRepository extends Repository
         return $channel;
     }
 
-    /**
-     * @param  array  $data
-     * @param  int  $id
-     * @param  string  $attribute
-     * @return \Webkul\Core\Contracts\Channel
-     */
-    public function update(array $data, $id, $attribute = "id")
-    {
-        $channel = $this->find($id);
+	/**
+	 * Update an existing Channel
+	 *
+	 * @see \Webkul\Core\Models\Channel Model entity
+	 * @param int   $id   numeric identifier
+	 * @param array $data associative list ['column' => 'value']
+	 * @throws \Prettus\Validator\Exceptions\ValidatorException
+	 * @return \Webkul\Core\Contracts\Channel
+	 */
+	public function update(array $data, $id): Channel
+	{
+		$channel = $this->find($id);
 
-        $channel = parent::update($data, $id, $attribute);
+		$$channel->update($data, $id);
+        //$channel = parent::update($data, $id, $attribute);
 
         $channel->locales()->sync($data['locales']);
 
@@ -76,13 +81,13 @@ class ChannelRepository extends Repository
         return $channel;
     }
 
-    /**
-     * @param  array  $data
-     * @param  \Webkul\Core\Contratcs\Channel  $channel
-     * @param  string  $type
-     * @return void
-     */
-    public function uploadImages($data, $channel, $type = "logo")
+	/**
+	 * @param array                          $data
+	 * @param \Webkul\Core\Contracts\Channel $channel
+	 * @param string                         $type
+	 * @return void
+	 */
+    public function uploadImages(array $data, Channel $channel, string $type = "logo")
     {
         if (isset($data[$type])) {
             foreach ($data[$type] as $imageId => $image) {

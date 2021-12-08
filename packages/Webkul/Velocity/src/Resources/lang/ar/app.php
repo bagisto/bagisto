@@ -82,11 +82,15 @@ return [
                 'page-link' => '[e.g. http://example.com/../../] رابط الصفحة',
             ],
             'datagrid' => [
-                'id' => 'Id',
-                'title' => 'عنوان',
-                'status' => 'الحالة',
-                'position' => 'موضع',
-                'content-type' => 'نوع المحتوى',
+                'id'            => 'Id',
+                'title'         => 'عنوان',
+                'status'        => 'الحالة',
+                'position'      => 'موضع',
+                'content-type'  => 'نوع المحتوى',
+                'category-slug' => 'فئة سبيكة',
+                'link'          => 'رابط',
+                'product'       => 'المنتج',
+                'static'        => 'ثابتة',
             ]
         ],
         'meta-data' => [
@@ -124,27 +128,29 @@ return [
             ]
         ],
         'category' => [
-            'save-btn-title' => 'قائمة الحفظ',
-            'title' => 'قائمة قائمة الفئات',
-            'add-title' => 'أضف محتوى القائمة',
-            'edit-title' => 'تحرير محتوى القائمة',
-            'btn-add-category' => 'أضف محتوى الفئة',
-            'datagrid' => [
-                'category-id' => 'Id الفئة',
-                'category-name' => 'اسم التصنيف',
-                'category-icon' => 'أيقونة الفئة',
+            'save-btn-title'      => 'قائمة الحفظ',
+            'title'               => 'قائمة قائمة الفئات',
+            'add-title'           => 'أضف محتوى القائمة',
+            'edit-title'          => 'تحرير محتوى القائمة',
+            'btn-add-category'    => 'أضف محتوى الفئة',
+            'datagrid'            => [
+                'category-id'     => 'Id الفئة',
+                'category-name'   => 'اسم التصنيف',
+                'category-icon'   => 'أيقونة الفئة',
                 'category-status' => 'الحالة',
             ],
-            'tab' => [
+            'tab'                 => [
                 'general' => 'جنرال لواء',
             ],
-            'status' => 'الحالة',
-            'active' => 'نشيط',
-            'inactive' => 'غير نشط',
-            'select' => '-- تحديد --',
-            'icon-class' => 'فئة الرمز',
-            'select-category' => 'اختر الفئة',
-            'tooltip-content' => 'المحتوى Tooltip',
+            'status'              => 'الحالة',
+            'active'              => 'نشيط',
+            'inactive'            => 'غير نشط',
+            'enabled'             => 'مكن',
+            'disabled'            => 'معطل',
+            'select'              => '-- تحديد --',
+            'icon-class'          => 'فئة الرمز',
+            'select-category'     => 'اختر الفئة',
+            'tooltip-content'     => 'المحتوى Tooltip',
             'mass-delete-success' => 'تم حذف قائمة الفئات المحددة بنجاح',
         ],
         'general' => [
@@ -163,7 +169,6 @@ return [
     ],
 
     'header' => [
-        'cart' => 'Cart',
         'cart' => 'Cart',
         'guest' => 'زائر',
         'logout' => 'تسجيل خروج',
@@ -188,7 +193,6 @@ return [
     ],
 
     'checkout' => [
-        'qty' => 'كمية',
         'checkout' => 'الدفع',
         'cart' => [
             'view-cart' => 'عرض السلة',
@@ -226,7 +230,7 @@ return [
             'login' => 'تسجيل الدخول',
             'become-user' => 'كن مستخدم',
             'user-registration' => 'تسجيل المستخدم',
-            'form-sginup-text' => '.إذا كنت جديدا على متجرنا ، فنحن نحرص على أن تكون أنت عضوًا',
+            'form-signup-text' => '.إذا كنت جديدا على متجرنا ، فنحن نحرص على أن تكون أنت عضوًا',
         ],
         'forget-password' => [
             'login' => 'تسجيل الدخول',

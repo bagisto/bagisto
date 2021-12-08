@@ -2,23 +2,26 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Marketing\Models\Template;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class EventDataGrid extends DataGrid
 {
-    protected $index = 'id';
+    protected string $index = 'id';
 
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('marketing_events')->addSelect('id', 'name', 'date');
+        $queryBuilder = Template::query()->select('id', 'name', 'date');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function addColumns()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -48,7 +51,10 @@ class EventDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

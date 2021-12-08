@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\Locale;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class LocalesDataGrid extends DataGrid
@@ -12,33 +12,34 @@ class LocalesDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'id';
+    protected string $index = 'id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('locales')->addSelect('id', 'code', 'name', 'direction');
+        $queryBuilder =Locale::select('id', 'code', 'name', 'direction');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+    public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -67,29 +68,28 @@ class LocalesDataGrid extends DataGrid
             'filterable' => true,
         ]);
 
-        $this->addColumn([
-            'index'      => 'direction',
-            'label'      => trans('admin::app.datagrid.direction'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->direction == 'ltr') {
-                    return trans('admin::app.datagrid.ltr');
-                } else {
-                    return trans('admin::app.datagrid.rtl');
-                }
-            },
-        ]);
+		$this->addColumn([
+			'index'      => 'direction',
+			'label'      => trans('admin::app.datagrid.direction'),
+			'type'       => 'string',
+			'searchable' => true,
+			'sortable'   => true,
+			'filterable' => true,
+			'closure'    => function ($value) {
+				return $value->direction === 'ltr'
+					? trans('admin::app.datagrid.ltr')
+					: trans('admin::app.datagrid.rtl');
+			},
+		]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+    public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

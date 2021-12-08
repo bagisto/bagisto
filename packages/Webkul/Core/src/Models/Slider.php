@@ -23,12 +23,12 @@ class Slider extends Model implements SliderContract
      */
     protected $appends = ['image_url'];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = [
         'title',
         'path',
         'content',
@@ -38,33 +38,35 @@ class Slider extends Model implements SliderContract
         'sort_order'
     ];
 
-    /**
-     * Get image url for the category image.
-     *
-     * @return string
-     */
-    public function image_url()
-    {
+	/**
+	 * Get image url for the category image.
+	 *
+	 * @return null|string
+	 */
+	public function image_url(): ?string
+	{
         if (! $this->path) {
-            return '';
+            return null;
         }
 
         return Storage::url($this->path);
     }
 
-    /**
-     * Get image url for the category image.
-     *
-     * @return string
-     */
-    public function getImageUrlAttribute()
-    {
+	/**
+	 * Get image url for the category image.
+	 *
+	 * @return null|string
+	 */
+    public function getImageUrlAttribute(): ?string
+	{
         return $this->image_url();
     }
-    
-    /**
-     * Get the slider channel name associated with the channel.
-     */
+
+	/**
+	 * Get the slider channel name associated with the channel.
+	 *
+	 * @return BelongsTo relationship
+	 */
     public function channel(): BelongsTo
     {
         return $this->belongsTo(ChannelProxy::modelClass());

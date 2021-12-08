@@ -115,10 +115,10 @@ class ProductController extends Controller
     public function downloadSample()
     {
         try {
-            if (request('type') == 'link') {
+            if (request('type') === 'link') {
                 $productDownloadableLink = $this->productDownloadableLinkRepository->findOrFail(request('id'));
 
-                if ($productDownloadableLink->sample_type == 'file') {
+                if ($productDownloadableLink->sample_type === 'file') {
                     $privateDisk = Storage::disk('private');
 
                     return $privateDisk->exists($productDownloadableLink->sample_file)
@@ -136,7 +136,7 @@ class ProductController extends Controller
             } else {
                 $productDownloadableSample = $this->productDownloadableSampleRepository->findOrFail(request('id'));
 
-                if ($productDownloadableSample->type == 'file') {
+                if ($productDownloadableSample->type === 'file') {
                     return Storage::download($productDownloadableSample->file);
                 } else {
                     $fileName = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);

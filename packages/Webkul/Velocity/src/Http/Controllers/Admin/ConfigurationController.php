@@ -2,11 +2,11 @@
 
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Traits\Sanitizer;
 use Webkul\Velocity\Helpers\Helper;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
 class ConfigurationController extends Controller
@@ -18,21 +18,21 @@ class ConfigurationController extends Controller
      *
      * @var \Webkul\Velocity\Helpers\Helper
      */
-    protected $velocityHelper;
+    protected Helper $velocityHelper;
 
     /**
      * Velocity meta data repository intance.
      *
      * @var \Webkul\Velocity\Repositories\VelocityMetadataRepository
      */
-    protected $velocityMetaDataRepository;
+    protected VelocityMetadataRepository $velocityMetaDataRepository;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @param  \Webkul\Velocity\Repositories\MetadataRepository  $velocityMetaDataRepository
-     * @return void
-     */
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @param \Webkul\Velocity\Helpers\Helper                          $velocityHelper
+	 * @param \Webkul\Velocity\Repositories\VelocityMetadataRepository $velocityMetadataRepository
+	 */
     public function __construct (
         Helper $velocityHelper,
         VelocityMetadataRepository $velocityMetadataRepository
@@ -82,7 +82,7 @@ class ConfigurationController extends Controller
         $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
 
         /* check if radio button value */
-        if (request()->get('slides') == "on") {
+        if (request()->get('slides') === "on") {
             $params = request()->all() + [
                 'slider' => 1,
             ];
@@ -108,7 +108,7 @@ class ConfigurationController extends Controller
             if ($advertisement) {
                 foreach ($advertisement as $key => $image_array) {
                     if (! isset($params['images'][$key])) {
-                        foreach ($advertisement[$key] as $image) {
+                        foreach ($image_array as $image) {
                             Storage::delete($image);
                         }
                     }
@@ -119,10 +119,9 @@ class ConfigurationController extends Controller
         $params['advertisement'] = json_encode($params['advertisement']);
         $params['home_page_content'] = str_replace('=&gt;', '=>', $params['home_page_content']);
 
-        unset($params['images']);
-        unset($params['slides']);
+		unset($params['images'], $params['slides']);
 
-        $params['locale'] = $locale;
+		$params['locale'] = $locale;
 
         /* update row */
         $this->velocityMetaDataRepository->update($params, $id);
@@ -142,23 +141,24 @@ class ConfigurationController extends Controller
      */
     public function uploadAdvertisementImages($data, $index, $advertisement)
     {
-        $saveImage = [];
-        $dir = 'velocity/images';
+		$saveImage = [];
+		$dir       = 'velocity/images';
+		$index     = (int) $index;
 
         $saveData = $advertisement;
         foreach ($data as $imageId => $image) {
-            if ($image != "") {
+            if (empty($image) === false) {
                 $file = 'images.' . $index . '.' . $imageId;
 
                 if (Str::contains($imageId, 'image_')) {
                     if (request()->hasFile($file) && $image) {
-                        $filter_index = substr($imageId, 6, 1);
+                        $filter_index = $imageId[6];
                         if (isset($data[$filter_index])) {
                             $size = array_key_last($saveData[$index]);
 
                             $saveImage[$size + 1] = $path = request()->file($file)->store($dir);
                         } else {
-                            $saveImage[substr($imageId, 6, 1)] = $path = request()->file($file)->store($dir);
+                            $saveImage[$filter_index] = $path = request()->file($file)->store($dir);
                         }
 
                         $this->sanitizeSVG($path, $image->getMimeType());
@@ -170,7 +170,7 @@ class ConfigurationController extends Controller
                         unset($advertisement[$index][$imageId]);
                     }
 
-                    if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
+                    if (isset($advertisement[$index][$imageId]) && request()->hasFile($file)) {
                         Storage::delete($advertisement[$index][$imageId]);
 
                         $saveImage[$imageId] = request()->file($file)->store($dir);
@@ -183,7 +183,7 @@ class ConfigurationController extends Controller
                     if (isset($advertisement[$index][$subIndex])) {
                         $saveImage[$subIndex] = $advertisement[$index][$subIndex];
 
-                        if (sizeof($advertisement[$index]) == 1) {
+                        if (count($advertisement[$index]) === 1) {
                             unset($advertisement[$index]);
                         } else {
                             unset($advertisement[$index][$subIndex]);
@@ -191,7 +191,7 @@ class ConfigurationController extends Controller
                     }
                 } else {
                     if (! isset($advertisement[$index][$subIndex])) {
-                        if ( $index == 4 ) {
+                        if ($index === 4 ) {
                             switch ($subIndex) {
                                 case '1':
                                     $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/big-sale-banner.webp'), $dir);
@@ -222,7 +222,7 @@ class ConfigurationController extends Controller
                                     
                                     break;
                             }
-                        } elseif ( $index == 3 ) {
+                        } elseif ($index === 3 ) {
                             switch ($subIndex) {
                                 case '1':
                                     $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/headphones.webp'), $dir);
@@ -247,7 +247,7 @@ class ConfigurationController extends Controller
                                     
                                     break;
                             }
-                        } elseif ( $index == 2 ) {
+                        } elseif ($index === 2 ) {
                             switch ($subIndex) {
                                 case '1':
                                     $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/toster.webp'), $dir);
@@ -332,15 +332,15 @@ class ConfigurationController extends Controller
         return $imagePaths;
     }
 
-    /**
-     * Create meta data.
-     *
-     * @param  string  $locale
-     * @param  string  $channel
-     * @return array
-     */
-    private function createMetaData($locale, $channel)
-    {
+	/**
+	 * Create meta data.
+	 *
+	 * @param string $locale
+	 * @param string $channel
+	 * @return void
+	 */
+	private function createMetaData($locale, $channel)
+	{
         $this->velocityMetaDataRepository->create([
             'locale'                   => $locale,
             'channel'                  => $channel,

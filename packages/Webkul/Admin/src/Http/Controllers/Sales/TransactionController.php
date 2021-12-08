@@ -104,7 +104,7 @@ class TransactionController extends Controller
 
         if ($invoice) {
 
-            if ($invoice->state == 'paid') {
+            if ($invoice->state === 'paid') {
                 session()->flash('info', trans('admin::app.sales.transactions.response.already-paid'));
                 return redirect(route('admin.sales.transactions.index'));
             }
@@ -184,7 +184,7 @@ class TransactionController extends Controller
             } else {
                 $skipAttributes = ['sku', 'name', 'category', 'quantity'];
 
-                if (gettype($key) == 'integer' || in_array($key, $skipAttributes)) {
+                if (gettype($key) === 'integer' || in_array($key, $skipAttributes)) {
                     continue;
                 }
 

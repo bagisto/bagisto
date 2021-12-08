@@ -94,6 +94,10 @@ return [
                 'status' => 'Statut',
                 'position' => 'Positionner',
                 'content-type' => 'Type de contenu',
+				'category-slug' => 'Catégorie Limace',
+				'link'          => 'Lien',
+				'product'       => 'Produit',
+				'static'        => 'Statique',
             ],
         ],
 
@@ -133,33 +137,35 @@ return [
             ],
         ],
 
-        'category' => [
-            'save-btn-title' => 'Enregistrer le menu',
-            'title' => 'Liste des menus des catégories',
-            'add-title' => 'Ajouter du contenu de menu',
-            'edit-title' => 'Modifier le contenu du menu',
-            'btn-add-category' => 'Ajouter du contenu de catégorie',
+		'category' => [
+			'save-btn-title'   => 'Enregistrer le menu',
+			'title'            => 'Liste des menus des catégories',
+			'add-title'        => 'Ajouter du contenu de menu',
+			'edit-title'       => 'Modifier le contenu du menu',
+			'btn-add-category' => 'Ajouter du contenu de catégorie',
 
-            'datagrid' => [
-                'category-id' => 'Identifiant de la catégorie',
-                'category-name' => 'Nom de catégorie',
-                'category-icon' => 'Icône de catégorie',
-                'category-status' => 'Statut',
-            ],
+			'datagrid' => [
+				'category-id'     => 'Identifiant de la catégorie',
+				'category-name'   => 'Nom de catégorie',
+				'category-icon'   => 'Icône de catégorie',
+				'category-status' => 'Statut',
+			],
 
-            'tab' => [
-                'general' => 'Général',
-            ],
+			'tab' => [
+				'general' => 'Général',
+			],
 
-            'status' => 'Statut',
-            'active' => 'actif',
-            'inactive' => 'Inactif',
-            'select' => '-- Sélectionnez --',
-            'icon-class' => 'Classe d\'icônes',
-            'select-category' => 'Choisissez la catégorie',
-            'tooltip-content' => 'Contenu de l\'info-bulle',
-            'mass-delete-success' => 'Le menu des catégories sélectionnées a été supprimé avec succès.',
-        ],
+			'status'              => 'Statut',
+			'active'              => 'actif',
+			'inactive'            => 'Inactif',
+			'enabled'             => 'Activée',
+			'disabled'            => 'Désactivée',
+			'select'              => '-- Sélectionnez --',
+			'icon-class'          => 'Classe d\'icônes',
+			'select-category'     => 'Choisissez la catégorie',
+			'tooltip-content'     => 'Contenu de l\'info-bulle',
+			'mass-delete-success' => 'Le menu des catégories sélectionnées a été supprimé avec succès.',
+		],
 
         'general' => [
             'locale_logo' => 'Logo de la région',
@@ -242,7 +248,7 @@ return [
             'login' => 'Connexion',
             'become-user' => 'Devenir utilisateur',
             'user-registration' => 'Enregistrement de l\'utilisateur',
-            'form-sginup-text' => 'Si vous êtes nouveau dans notre magasin, nous sommes heureux de vous compter parmi nos membres.',
+            'form-signup-text' => 'Si vous êtes nouveau dans notre magasin, nous sommes heureux de vous compter parmi nos membres.',
         ],
 
         'forget-password' => [

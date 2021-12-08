@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Sales\Models\Invoice;
 use Webkul\Ui\DataGrid\DataGrid;
 use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
@@ -15,23 +15,23 @@ class CustomersInvoicesDataGrid extends DataGrid
      *
      * @var int
      */
-    protected $index = 'id';
+    protected string $index = 'id';
 
     /**
      * Default sort order of datagrid.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('invoices')
+        $queryBuilder = Invoice::query()
             ->leftJoin('orders as ors', 'invoices.order_id', '=', 'ors.id')
             ->select('invoices.id as id', 'ors.increment_id as order_id', 'invoices.state as state', 'ors.channel_name as channel_name', 'invoices.base_grand_total as base_grand_total', 'invoices.created_at as created_at')
             ->where('ors.customer_id', request('id'));
@@ -44,12 +44,13 @@ class CustomersInvoicesDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -99,34 +100,37 @@ class CustomersInvoicesDataGrid extends DataGrid
             'filterable' => true,
         ]);
 
-        $this->addColumn([
-            'index'      => 'state',
-            'label'      => trans('admin::app.datagrid.status'),
-            'type'       => 'string',
-            'sortable'   => true,
-            'searchable' => true,
-            'filterable' => true,
-            'closure' => function ($value) {
-                if ($value->state == 'paid') {
-                    return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.invoices.status-paid') . '</span>';
-                } elseif ($value->state == 'pending' || $value->state == 'pending_payment') {
-                    return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.invoices.status-pending') . '</span>';
-                } elseif ($value->state == 'overdue') {
-                    return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.invoices.status-overdue') . '</span>';
-                } else {
-                    return $value->state;
-                }
-            },
-        ]);
-    }
+		$this->addColumn([
+			'index'      => 'state',
+			'label'      => trans('admin::app.datagrid.status'),
+			'type'       => 'string',
+			'sortable'   => true,
+			'searchable' => true,
+			'filterable' => true,
+			'closure'    => function ($value) {
+				switch ( $value->state ) {
+					case 'paid':
+						return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.invoices.status-paid') . '</span>';
+					case 'pending':
+					case 'pending_payment':
+						return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.invoices.status-pending') . '</span>';
+					case 'overdue':
+						return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.invoices.status-overdue') . '</span>';
+					default:
+						return $value->state;
+				}
+			},
+		]);
+	}
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
-    {
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
+	{
         $this->addAction([
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',

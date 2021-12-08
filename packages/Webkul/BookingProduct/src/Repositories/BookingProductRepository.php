@@ -63,7 +63,7 @@ class BookingProductRepository extends Repository
     {
         $bookingProduct = parent::create($data);
 
-        if ($bookingProduct->type == 'event') {
+        if ($bookingProduct->type === 'event') {
             $this->typeRepositories[$data['type']]->saveEventTickets($data, $bookingProduct);
         } else {
             $this->typeRepositories[$data['type']]->create(array_merge($data, ['booking_product_id' => $bookingProduct->id]));
@@ -90,7 +90,7 @@ class BookingProductRepository extends Repository
             $repository->deleteWhere(['booking_product_id' => $id]);
         }
 
-        if ($bookingProduct->type == 'event') {
+        if ($bookingProduct->type === 'event') {
             $this->typeRepositories[$data['type']]->saveEventTickets($data, $bookingProduct);
         } else {
             $bookingProductTypeSlot = $this->typeRepositories[$data['type']]->findOneByField('booking_product_id', $id);

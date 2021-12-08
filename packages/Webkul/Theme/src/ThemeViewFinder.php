@@ -44,7 +44,7 @@ class ThemeViewFinder extends FileViewFinder
             try {
                 return $this->findInPaths($view, $paths);
             } catch(\Exception $e) {
-                if ($namespace != 'admin') {
+                if ($namespace !== 'admin') {
                     if (strpos($view, 'admin.') !== false) {
                         $view = str_replace('admin.', 'admin.' . Themes::current()->code . '.', $view);
                     }
@@ -90,7 +90,7 @@ class ThemeViewFinder extends FileViewFinder
         $this->hints[$namespace] = (array) $hints;
 
         // Overide Error Pages
-        if ($namespace == 'errors' || $namespace == 'mails') {
+        if ($namespace === 'errors' || $namespace === 'mails') {
             $searchPaths = array_diff($this->paths, Themes::getLaravelViewPaths());
 
             $addPaths = array_map(function ($path) use ($namespace) {

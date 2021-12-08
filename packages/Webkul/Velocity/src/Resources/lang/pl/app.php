@@ -82,11 +82,15 @@ return [
                 'page-link' => 'Page Link [e.g. http://example.com/../../]',
             ],
             'datagrid' => [
-                'id' => 'Id',
-                'title' => 'Tytuł',
-                'status' => 'Status',
-                'position' => 'Pozycja',
-                'content-type' => 'Rodzaj zawartości',
+                'id'            => 'Id',
+                'title'         => 'Tytuł',
+                'status'        => 'Status',
+                'position'      => 'Pozycja',
+                'content-type'  => 'Rodzaj zawartości',
+                'category-slug' => 'Wzór kategorii',
+                'link'          => 'Połączyć',
+                'product'       => 'Produkt',
+                'static'        => 'Statyczny',
             ]
         ],
         'meta-data' => [
@@ -123,28 +127,30 @@ return [
                 'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
             ]
         ],
-        'category'  => [
-            'save-btn-title' => 'Zapisz menu',
-            'title' => 'Lista menu kategorii',
-            'add-title' => 'Dodaj zawartość menu',
-            'edit-title' => 'Edytuj zawartość menu',
-            'btn-add-category' => 'Dodaj treść kategorii',
-            'datagrid' => [
-                'category-id' => 'Identyfikator kategorii',
-                'category-name' => 'Nazwa kategorii',
-                'category-icon' => 'Ikona kategorii',
+        'category' => [
+            'save-btn-title'      => 'Zapisz menu',
+            'title'               => 'Lista menu kategorii',
+            'add-title'           => 'Dodaj zawartość menu',
+            'edit-title'          => 'Edytuj zawartość menu',
+            'btn-add-category'    => 'Dodaj treść kategorii',
+            'datagrid'            => [
+                'category-id'     => 'Identyfikator kategorii',
+                'category-name'   => 'Nazwa kategorii',
+                'category-icon'   => 'Ikona kategorii',
                 'category-status' => 'Status',
             ],
-            'tab' => [
+            'tab'                 => [
                 'general' => 'Ogólny',
             ],
-            'status' => 'Status',
-            'active' => 'Aktywny',
-            'inactive' => 'Nieaktywne',
-            'select' => '--  Wybierz --',
-            'icon-class' => '  Ikona klasy',
-            'select-category' => 'Wybierz kategorię',
-            'tooltip-content' => '  Treść podpowiedzi',
+            'status'              => 'Status',
+            'active'              => 'Aktywny',
+            'inactive'            => 'Nieaktywne',
+            'enabled'             => 'Włączone',
+            'disabled'            => 'Wyłączone',
+            'select'              => '--  Wybierz --',
+            'icon-class'          => '  Ikona klasy',
+            'select-category'     => 'Wybierz kategorię',
+            'tooltip-content'     => '  Treść podpowiedzi',
             'mass-delete-success' => 'Wybrane menu kategorii zostało pomyślnie usunięte.',
         ],
         'general'   => [
@@ -163,7 +169,6 @@ return [
     ],
 
     'header'        => [
-        'cart'              => 'Koszyk',
         'cart'              => 'Koszyk',
         'guest'             => 'Gość',
         'logout'            => 'Wyloguj',
@@ -188,7 +193,6 @@ return [
     ],
 
     'checkout'      => [
-        'qty'       => 'Ilość',
         'checkout'  => 'Płatność',
         'cart'      => [
             'view-cart'     => 'Wyświetl koszyk',
@@ -224,7 +228,7 @@ return [
             'login'             => 'Login',
             'become-user'       => 'Zostań użytkownikiem',
             'user-registration' => 'Rejestracja użytkownika',
-            'form-sginup-text'  => 'Cieszymy się, że jesteś z nami. Zarejestruj się by zostać członkiem',
+            'form-signup-text'  => 'Cieszymy się, że jesteś z nami. Zarejestruj się by zostać członkiem',
         ],
         'forget-password'   => [
             'login'                 => 'Login',

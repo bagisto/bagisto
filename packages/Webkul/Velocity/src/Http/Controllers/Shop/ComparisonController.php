@@ -112,7 +112,7 @@ class ComparisonController extends Controller
     public function deleteComparisonProduct()
     {
         // either delete all or individual
-        if (request()->get('productId') == 'all') {
+        if (request()->get('productId') === 'all') {
             // delete all
             $customerId = auth()->guard('customer')->user()->id;
             $this->compareProductsRepository->deleteWhere([

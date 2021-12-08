@@ -496,7 +496,7 @@ class CartRule
         $cart = Cart::getCart();
 
         foreach ($this->getCartRules() as $rule) {
-            if ($rule->action_type == 'cart_fixed') {
+            if ($rule->action_type === 'cart_fixed') {
                 $totalPrice = $totalBasePrice = $validCount = 0;
 
                 foreach ($items as $item) {

@@ -3,6 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
+use Webkul\Category\Models\Category;
 use Webkul\Core\Models\Locale;
 use Webkul\Ui\DataGrid\DataGrid;
 
@@ -13,24 +14,24 @@ class CategoryDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'category_id';
+    protected string $index = 'category_id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Locale.
      *
      * @var string
      */
-    protected $locale = 'all';
+    protected string $locale = 'all';
 
     /**
-     * Create a new datagrid instance.
+     * Create a new data grid instance.
      *
      * @return void
      */
@@ -46,7 +47,7 @@ class CategoryDataGrid extends DataGrid
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
         if ($this->locale === 'all') {
             $whereInLocales = Locale::query()->pluck('code')->toArray();
@@ -54,7 +55,7 @@ class CategoryDataGrid extends DataGrid
             $whereInLocales = [$this->locale];
         }
 
-        $queryBuilder = DB::table('categories as cat')
+        $queryBuilder = Category::from('categories as cat')
             ->select(
                 'cat.id as category_id',
                 'ct.name',
@@ -77,12 +78,13 @@ class CategoryDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'category_id',
@@ -137,12 +139,13 @@ class CategoryDataGrid extends DataGrid
         ]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

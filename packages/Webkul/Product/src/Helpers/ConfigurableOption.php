@@ -88,7 +88,7 @@ class ConfigurableOption extends AbstractProduct
 
                 $attributeValue = $product->{$productAttribute->code};
 
-                if ($attributeValue == '' && $product instanceof \Webkul\Product\Models\ProductFlat) {
+                if (empty($attributeValue) && $product instanceof \Webkul\Product\Models\ProductFlat) {
                     $attributeValue = $product->product->{$productAttribute->code};
                 }
 
@@ -153,7 +153,7 @@ class ConfigurableOption extends AbstractProduct
                 $attributeOptionsData[] = [
                     'id'           => $optionId,
                     'label'        => $attributeOption->label ? $attributeOption->label : $attributeOption->admin_name,
-                    'swatch_value' => $attribute->swatch_type == 'image' ? $attributeOption->swatch_value_url : $attributeOption->swatch_value,
+                    'swatch_value' => $attribute->swatch_type === 'image' ? $attributeOption->swatch_value_url : $attributeOption->swatch_value,
                     'products'     => $options[$attribute->id][$optionId],
                 ];
             }

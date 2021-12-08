@@ -2,34 +2,34 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\CatalogRule\Models\CatalogRule;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class CatalogRuleDataGrid extends DataGrid
 {
-    /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
+	/**
+	 * Index.
+	 *
+	 * @var string
+	 */
+    protected string $index = 'id';
 
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
+	/**
+	 * Sort order.
+	 *
+	 * @var string
+	 */
+    protected string $sortOrder = 'desc';
 
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
-    public function prepareQueryBuilder()
+	/**
+	 * Prepare query builder.
+	 *
+	 * @return void
+	 */
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('catalog_rules')
-            ->addSelect('catalog_rules.id', 'name', 'status', 'starts_from', 'ends_till', 'sort_order');
+        $queryBuilder = CatalogRule::query()
+            ->select('catalog_rules.id', 'name', 'status', 'starts_from', 'ends_till', 'sort_order');
 
 
         $this->addFilter('status', 'status');
@@ -37,12 +37,13 @@ class CatalogRuleDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -106,12 +107,13 @@ class CatalogRuleDataGrid extends DataGrid
         ]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),

@@ -73,7 +73,7 @@ class Campaign
             ->get();
 
         foreach ($campaigns as $campaign) {
-            if ($campaign->event->name == 'Birthday') {
+            if ($campaign->event->name === 'Birthday') {
                 $emails = $this->getBirthdayEmails($campaign);
             } else {
                 $emails = $this->getEmailAddresses($campaign);

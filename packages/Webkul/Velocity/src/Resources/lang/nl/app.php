@@ -73,7 +73,7 @@ return [
             'content' => [
                 'content-type' => 'Content Type',
                 'custom-title' => 'Custom Title',
-                'category-slug' => 'Category Slug',
+                'category-slug' => 'Categorie Naaktslak',
                 'link-target' => 'Page Link Target',
                 'custom-product' => 'Store Products',
                 'custom-heading' => 'Custom Heading',
@@ -82,11 +82,15 @@ return [
                 'page-link' => 'Page Link [e.g. http://example.com/../../]',
             ],
             'datagrid' => [
-                'id' => 'Id',
-                'title' => 'Titel',
-                'status' => 'Status',
-                'position' => 'Positie',
-                'content-type' => 'Content Type',
+                'id'            => 'Id',
+                'title'         => 'Titel',
+                'status'        => 'Status',
+                'position'      => 'Positie',
+                'content-type'  => 'Content Type',
+                'category-slug' => 'Categorie Naaktslak',
+                'link'          => 'Link',
+                'product'       => 'Product',
+                'static'        => 'Statisch',
             ]
         ],
         'meta-data' => [
@@ -124,27 +128,29 @@ return [
             ]
         ],
         'category' => [
-            'save-btn-title' => 'Save Menu',
-            'title' => 'Category Menu List',
-            'add-title' => 'Add Menu Content',
-            'edit-title' => 'Edit Menu Content',
-            'btn-add-category' => 'Add Category Content',
-            'datagrid' => [
-                'category-id' => 'Category Id',
-                'category-name' => 'Category Name',
-                'category-icon' => 'Category Icon',
+            'save-btn-title'      => 'Save Menu',
+            'title'               => 'Category Menu List',
+            'add-title'           => 'Add Menu Content',
+            'edit-title'          => 'Edit Menu Content',
+            'btn-add-category'    => 'Add Category Content',
+            'datagrid'            => [
+                'category-id'     => 'Category Id',
+                'category-name'   => 'Category Name',
+                'category-icon'   => 'Category Icon',
                 'category-status' => 'Status',
             ],
-            'tab' => [
+            'tab'                 => [
                 'general' => 'Algemeen',
             ],
-            'status' => 'Status',
-            'active' => 'Active',
-            'inactive' => 'Inactive',
-            'select' => '-- Select --',
-            'icon-class' => 'Icon Class',
-            'select-category' => 'Choose Category',
-            'tooltip-content' => 'Tooltip Content',
+            'status'              => 'Status',
+            'active'              => 'Active',
+            'inactive'            => 'Inactive',
+            'enabled'             => 'Ingeschakeld',
+            'disabled'            => 'Uitgeschakeld',
+            'select'              => '-- Select --',
+            'icon-class'          => 'Icon Class',
+            'select-category'     => 'Choose Category',
+            'tooltip-content'     => 'Tooltip Content',
             'mass-delete-success' => 'Selected categories menu deleted successfully.',
         ],
         'general' => [
@@ -163,7 +169,6 @@ return [
     ],
 
     'header' => [
-        'cart' => 'Winkelwagen',
         'cart' => 'Winkelwagen',
         'guest' => 'Gast',
         'logout' => 'Afmelden',
@@ -188,7 +193,6 @@ return [
     ],
 
     'checkout' => [
-        'qty' => 'Aantal',
         'checkout' => 'Checkout',
         'cart' => [
             'view-cart' => 'Bekijk winkelwagen',
@@ -226,7 +230,7 @@ return [
             'login' => 'Aanmelden',
             'become-user' => 'Klant worden',
             'user-registration' => 'User Registration',
-            'form-sginup-text' => 'Als u nieuw bent in onze winkel, willen we u graag als lid hebben.',
+            'form-signup-text' => 'Als u nieuw bent in onze winkel, willen we u graag als lid hebben.',
         ],
         'forget-password' => [
             'login' => 'Login',

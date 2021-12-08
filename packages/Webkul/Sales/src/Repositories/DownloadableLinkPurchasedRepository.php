@@ -98,7 +98,7 @@ class DownloadableLinkPurchasedRepository extends Repository
         $purchasedLinks = $this->findByField('order_item_id', $orderItem->id);
 
         foreach ($purchasedLinks as $purchasedLink) {
-            if ($status == 'expired') {
+            if ($status === 'expired') {
                 if (count($purchasedLink->order_item->invoice_items) > 0) {
                     $totalInvoiceQty = 0;
 

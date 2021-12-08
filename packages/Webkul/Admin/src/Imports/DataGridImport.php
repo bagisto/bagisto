@@ -3,19 +3,19 @@
 namespace Webkul\Admin\Imports;
 
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\Importable;
 
 class DataGridImport implements ToCollection, WithHeadingRow
 {
-    use Importable;
+	use Importable;
 
-    /**
-     * @param  Illuminate\Support\Collection  $row
-     * @return void
-    */
-    public function collection(Collection $rows)
-    {
-    }
+	/**
+	 * @param \Illuminate\Support\Collection $collection
+	 * @return void
+	 */
+	public function collection(Collection $collection): void
+	{
+	}
 }

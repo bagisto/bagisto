@@ -79,7 +79,7 @@ class Ipn
         }
 
         try {
-            if (isset($this->post['txn_type']) && 'recurring_payment' == $this->post['txn_type']) {
+            if (isset($this->post['txn_type']) && 'recurring_payment' === $this->post['txn_type']) {
 
             } else {
                 $this->getOrder();
@@ -110,7 +110,7 @@ class Ipn
      */
     protected function processOrder()
     {
-        if ($this->post['payment_status'] == 'Completed') {
+        if ($this->post['payment_status'] === 'Completed') {
             if ($this->post['mc_gross'] != $this->order->grand_total) {
                 return;
             } else {
@@ -163,7 +163,7 @@ class Ipn
 
         curl_close($request);
 
-        if ($status == 200 && $response == 'VERIFIED') {
+        if ($status == 200 && $response === 'VERIFIED') {
             return true;
         }
 

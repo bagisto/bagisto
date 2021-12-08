@@ -141,11 +141,9 @@ class CatalogRuleProduct
             $appliedAttributes = [];
 
             foreach ($rule->conditions as $condition) {
-                if (! $condition['attribute']
-                    || ! isset($condition['value'])
-                    || is_null($condition['value'])
-                    || $condition['value'] == ''
-                    || in_array($condition['attribute'], $appliedAttributes)
+                if ( ! $condition['attribute']
+					 || empty($condition['value'])
+					 || in_array($condition['attribute'], $appliedAttributes)
                 ) {
                     continue;
                 }

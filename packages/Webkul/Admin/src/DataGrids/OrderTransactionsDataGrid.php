@@ -2,18 +2,18 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Sales\Models\OrderTransaction;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class OrderTransactionsDataGrid extends DataGrid
 {
-    protected $index = 'id';
+    protected string $index = 'id';
 
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('order_transactions')
+        $queryBuilder = OrderTransaction::query()
             ->leftJoin('orders as ors', 'order_transactions.order_id', '=', 'ors.id')
             ->select('order_transactions.id as id', 'order_transactions.transaction_id as transaction_id', 'order_transactions.invoice_id as invoice_id', 'ors.increment_id as order_id', 'order_transactions.created_at as created_at');
 
@@ -26,7 +26,10 @@ class OrderTransactionsDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function addColumns()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -74,7 +77,10 @@ class OrderTransactionsDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions()
+	/**
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.view'),

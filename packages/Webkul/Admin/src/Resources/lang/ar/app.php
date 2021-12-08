@@ -528,8 +528,6 @@ return [
             'price' => 'السعر',
             'weight' => 'وزن',
             'status' => 'الحالة',
-            'enabled' => 'مكن',
-            'disabled' => 'معطل',
             'add-variant-title' => 'إضافة متغير',
             'variant-already-exist-message' => 'المتغير مع نفس الخاصية خيارات موجود.',
             'add-image-btn-title' => 'إضافة صورة',

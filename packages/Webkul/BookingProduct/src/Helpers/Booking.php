@@ -441,7 +441,7 @@ class Booking
             case 'rental':
                 $rentingType = $data['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
 
-                if ($rentingType == 'daily') {
+                if ($rentingType === 'daily') {
                     $from = Carbon::createFromTimeString($data['booking']['date_from'] . " 00:00:01")->format('d F, Y');
 
                     $to = Carbon::createFromTimeString($data['booking']['date_to'] . " 23:59:59")->format('d F, Y');
@@ -484,7 +484,7 @@ class Booking
                     ]
                 ];
 
-                if ($data['booking']['note'] != '') {
+                if ($data['booking']['note'] !== '') {
                     $data['attributes'][2] = [
                         'attribute_name' => trans('bookingproduct::app.shop.cart.special-note'),
                         'option_id'      => 0,

@@ -72,13 +72,13 @@ class Tree {
 	{
         $item['children'] = [];
 
-		if ($type == 'menu') {
+		if ($type === 'menu') {
             $item['url'] = route($item['route'], $item['params'] ?? []);
 
 			if (strpos($this->current, $item['url']) !== false) {
                 $this->currentKey = $item['key'];
 			}
-		} elseif ($type == 'acl') {
+		} elseif ($type === 'acl') {
 			$item['name'] = trans($item['name']);
 
 			$this->roles[$item['route']] = $item['key'];

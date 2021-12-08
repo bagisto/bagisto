@@ -95,7 +95,7 @@ class Booking extends Virtual
     {
         $product = parent::update($data, $id, $attribute);
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if (request()->route()->getName() !== 'admin.catalog.products.massupdate') {
             $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $id);
 
             if ($bookingProduct) {
@@ -183,7 +183,7 @@ class Booking extends Virtual
 
         $bookingProduct = $this->getBookingProduct($data['product_id']);
 
-        if ($bookingProduct->type == 'event') {
+        if ($bookingProduct->type === 'event') {
             if (Carbon::now() > $bookingProduct->available_from && Carbon::now() > $bookingProduct->available_to) {
                 return trans('shop::app.checkout.cart.event.expired');
             }

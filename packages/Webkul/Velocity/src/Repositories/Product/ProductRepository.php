@@ -140,14 +140,14 @@ class ProductRepository extends Repository
             if (isset($params['sort'])) {
                 $attribute = $this->attributeRepository->findOneByField('code', $params['sort']);
 
-                if ($params['sort'] == 'price') {
-                    if ($attribute->code == 'price') {
+                if ($params['sort'] === 'price') {
+                    if ($attribute->code === 'price') {
                         $query->orderBy('min_price', $params['order']);
                     } else {
                         $query->orderBy($attribute->code, $params['order']);
                     }
                 } else {
-                    $query->orderBy($params['sort'] == 'created_at' ? 'product_flat.created_at' : $attribute->code, $params['order']);
+                    $query->orderBy($params['sort'] === 'created_at' ? 'product_flat.created_at' : $attribute->code, $params['order']);
                 }
             }
 
@@ -171,7 +171,7 @@ class ProductRepository extends Repository
 
                             $temp = explode(',', request()->get($attribute->code));
 
-                            if ($attribute->type != 'price') {
+                            if ($attribute->type !== 'price') {
                                 $query2 = $query2->where($aliasTemp . '.attribute_id', $attribute->id);
 
                                 $query2 = $query2->where(function($query3) use($aliasTemp, $column, $temp) {

@@ -82,11 +82,15 @@ return [
                 'page-link' => 'Sayfa Linki [örn. http://example.com/../../]',
             ],
             'datagrid' => [
-                'id' => 'Id',
-                'title' => 'Başlık',
-                'status' => 'Durum',
-                'position' => 'Konum',
+                'id'           => 'Id',
+                'title'        => 'Başlık',
+                'status'       => 'Durum',
+                'position'     => 'Konum',
                 'content-type' => 'İçerik Tipi',
+                'category-slug' => 'Kategori sümüklü böcek',
+                'link'          => 'Linki',
+                'product'       => 'Ürün',
+                'static'        => 'Statik',
             ]
         ],
         'meta-data' => [
@@ -123,28 +127,30 @@ return [
                 'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
             ]
         ],
-        'category'  => [
-            'save-btn-title' => 'Menü Kaydet',
-            'title' => 'Kategori Menü Listesi',
-            'add-title' => 'Menü İçeriği Ekle',
-            'edit-title' => 'Menü İçeriği Düzenle',
-            'btn-add-category' => 'Menü İçeriği Ekle',
-            'datagrid' => [
-                'category-id' => 'Kategori No',
-                'category-name' => 'Kategori Adı',
-                'category-icon' => 'Kategori İkonu',
+        'category' => [
+            'save-btn-title'      => 'Menü Kaydet',
+            'title'               => 'Kategori Menü Listesi',
+            'add-title'           => 'Menü İçeriği Ekle',
+            'edit-title'          => 'Menü İçeriği Düzenle',
+            'btn-add-category'    => 'Menü İçeriği Ekle',
+            'datagrid'            => [
+                'category-id'     => 'Kategori No',
+                'category-name'   => 'Kategori Adı',
+                'category-icon'   => 'Kategori İkonu',
                 'category-status' => 'Durum',
             ],
-            'tab' => [
+            'tab'                 => [
                 'general' => 'Genel',
             ],
-            'status' => 'Durum',
-            'active' => 'Aktif',
-            'inactive' => 'Pasif',
-            'select' => '-- Seçiniz --',
-            'icon-class' => 'İkon Sınıfı',
-            'select-category' => 'Kategori Seçiniz',
-            'tooltip-content' => 'İpucu İçeriği',
+            'status'              => 'Durum',
+            'active'              => 'Aktif',
+            'inactive'            => 'Pasif',
+            'enabled'             => 'Aktif',
+            'disabled'            => 'Pasif',
+            'select'              => '-- Seçiniz --',
+            'icon-class'          => 'İkon Sınıfı',
+            'select-category'     => 'Kategori Seçiniz',
+            'tooltip-content'     => 'İpucu İçeriği',
             'mass-delete-success' => 'Seçili katego menüsü başarıyla silindi.',
         ],
         'general'   => [
@@ -224,7 +230,7 @@ return [
             'login'             => 'Giriş Yap',
             'become-user'       => 'Kullanıcı Olun',
             'user-registration' => 'Kullanıcı Kaydı',
-            'form-sginup-text'  => 'Eğer mağazamızda yeniyseniz, sizleri üye olarak aramızda görmekten memnuniyet duyarız.',
+            'form-signup-text'  => 'Eğer mağazamızda yeniyseniz, sizleri üye olarak aramızda görmekten memnuniyet duyarız.',
         ],
         'forget-password'   => [
             'login'                 => 'Giriş Yap',

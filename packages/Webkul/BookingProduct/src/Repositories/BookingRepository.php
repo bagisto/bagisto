@@ -28,7 +28,7 @@ class BookingRepository extends Repository
         $order = $data['order'];
 
         foreach ($order->items()->get() as $item) {
-            if ($item->type != 'booking') {
+            if ($item->type !== 'booking') {
                 continue;
             }
 

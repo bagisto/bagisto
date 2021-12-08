@@ -3,6 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
+use Webkul\Customer\Models\Customer;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class CustomerDataGrid extends DataGrid
@@ -12,30 +13,30 @@ class CustomerDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'customer_id';
+    protected string $index = 'customer_id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Items per page.
      *
-     * @var int
+     * @var int|mixed
      */
-    protected $itemsPerPage = 10;
+    protected $itemsPerPage; // default = 10;
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('customers')
+        $queryBuilder = Customer::query()
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
             ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name as group', 'customers.phone', 'customers.gender', 'status')
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name'));
@@ -50,12 +51,13 @@ class CustomerDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+    public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'customer_id',
@@ -101,12 +103,8 @@ class CustomerDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => false,
             'closure'    => function ($row) {
-                if (!$row->phone) {
-                    return '-';
-                } else {
-                    return $row->phone;
-                }
-            },
+				return $row->phone ?: '-';
+			},
         ]);
 
         $this->addColumn([
@@ -117,12 +115,8 @@ class CustomerDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => false,
             'closure'    => function ($row) {
-                if (!$row->gender) {
-                    return '-';
-                } else {
-                    return $row->gender;
-                }
-            },
+				return $row->gender ?: '-';
+			},
         ]);
 
         $this->addColumn([
@@ -133,21 +127,22 @@ class CustomerDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                if ($row->status == 1) {
+                if ((int) $row->status === 1) {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.customers.customers.active') . '</span>';
-                } else {
-                    return '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.inactive') . '</span>';
                 }
-            },
+
+				return '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.inactive') . '</span>';
+			},
         ]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException  add action failed
+	 * @return void
+	 */
+    public function prepareActions(): void
     {
         $this->addAction([
             'method' => 'GET',
@@ -176,7 +171,7 @@ class CustomerDataGrid extends DataGrid
      *
      * @return void
      */
-    public function prepareMassActions()
+    public function prepareMassActions(): void
     {
         $this->addMassAction([
             'type'   => 'delete',

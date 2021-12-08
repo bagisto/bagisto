@@ -22,17 +22,17 @@ class Validator
         $validConditionCount = $totalConditionCount = 0;
 
         foreach ($rule->conditions as $condition) {
-            if (! $condition['attribute'] || ! isset($condition['value']) || is_null($condition['value']) ||  $condition['value'] == '') {
+            if ( ! $condition['attribute'] || empty($condition['value'])) {
                 continue;
             }
 
-            if ($entity instanceof \Webkul\Checkout\Contracts\Cart && strpos($condition['attribute'], 'cart|') === false) {
+            if ($entity instanceof \Webkul\Checkout\Contracts\Cart && str_contains($condition['attribute'], 'cart|') === false) {
                 continue;
             }
 
             $totalConditionCount++;
 
-            if ($rule->condition_type == 1) {
+            if ((int) $rule->condition_type === 1) {
                 if (! $this->validateObject($condition, $entity)) {
                     return false;
                 } else {
@@ -45,7 +45,7 @@ class Validator
             }
         }
 
-        return $validConditionCount == $totalConditionCount ? true : false;
+        return $validConditionCount === $totalConditionCount;
     }
 
     /**
@@ -73,7 +73,7 @@ class Validator
                     }
 
                     return $cart->shipping_address->{$attributeCode};
-                } elseif ($attributeCode == 'shipping_method') {
+                } elseif ($attributeCode === 'shipping_method') {
                     if (! $cart->shipping_method) {
                         return;
                     }
@@ -81,7 +81,7 @@ class Validator
                     $shippingChunks = explode('_', $cart->shipping_method);
 
                     return current($shippingChunks);
-                } elseif ($attributeCode == 'payment_method') {
+                } elseif ($attributeCode === 'payment_method') {
                     if (! $cart->payment) {
                         return;
                     }
@@ -95,7 +95,7 @@ class Validator
                 return $entity->{$attributeCode};
 
             case 'product':
-                if ($attributeCode == 'category_ids') {
+                if ($attributeCode === 'category_ids') {
                     $value = $entity->product
                              ? $entity->product->categories()->pluck('id')->toArray()
                              : $entity->categories()->pluck('id')->toArray();

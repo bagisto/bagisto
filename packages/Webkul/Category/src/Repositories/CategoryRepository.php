@@ -31,7 +31,7 @@ class CategoryRepository extends Repository
     {
         Event::dispatch('catalog.category.create.before');
 
-        if (isset($data['locale']) && $data['locale'] == 'all') {
+        if (isset($data['locale']) && $data['locale'] === 'all') {
             $model = app()->make($this->model());
 
             foreach (core()->getAllLocales() as $locale) {

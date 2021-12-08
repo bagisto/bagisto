@@ -2,8 +2,8 @@
 
 namespace Webkul\Shop\DataGrids;
 
+use Webkul\Sales\Models\Order;
 use Webkul\Ui\DataGrid\DataGrid;
-use Illuminate\Support\Facades\DB;
 
 class OrderDataGrid extends DataGrid
 {
@@ -12,35 +12,36 @@ class OrderDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'id';
+    protected string $index = 'id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('orders as order')
+        $queryBuilder =Order::query()
             ->addSelect('order.id', 'order.increment_id', 'order.status', 'order.created_at', 'order.grand_total', 'order.order_currency_code')
             ->where('customer_id', auth()->guard('customer')->user()->id);
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'increment_id',
@@ -72,39 +73,43 @@ class OrderDataGrid extends DataGrid
             },
         ]);
 
-        $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('shop::app.customer.account.order.index.status'),
-            'type'       => 'string',
-            'searchable' => false,
-            'sortable'   => true,
-            'closure'    => function ($value) {
-                if ($value->status == 'processing') {
-                    return '<span class="badge badge-md badge-success">' . trans('shop::app.customer.account.order.index.processing') . '</span>';
-                } elseif ($value->status == 'completed') {
-                    return '<span class="badge badge-md badge-success">' . trans('shop::app.customer.account.order.index.completed') . '</span>';
-                } elseif ($value->status == "canceled") {
-                    return '<span class="badge badge-md badge-danger">' . trans('shop::app.customer.account.order.index.canceled') . '</span>';
-                } elseif ($value->status == "closed") {
-                    return '<span class="badge badge-md badge-info">' . trans('shop::app.customer.account.order.index.closed') . '</span>';
-                } elseif ($value->status == "pending") {
-                    return '<span class="badge badge-md badge-warning">' . trans('shop::app.customer.account.order.index.pending') . '</span>';
-                } elseif ($value->status == "pending_payment") {
-                    return '<span class="badge badge-md badge-warning">' . trans('shop::app.customer.account.order.index.pending-payment') . '</span>';
-                } elseif ($value->status == "fraud") {
-                    return '<span class="badge badge-md badge-danger">' . trans('shop::app.customer.account.order.index.fraud') . '</span>';
-                }
-            },
-            'filterable' => true,
-        ]);
-    }
+		$this->addColumn([
+			'index'      => 'status',
+			'label'      => trans('shop::app.customer.account.order.index.status'),
+			'type'       => 'string',
+			'searchable' => false,
+			'sortable'   => true,
+			'filterable' => true,
+			'closure'    => function ($value) {
+				switch ( $value->status ) {
+					case 'processing':
+						return '<span class="badge badge-md badge-success">' . trans('shop::app.customer.account.order.index.processing') . '</span>';
+					case 'completed':
+						return '<span class="badge badge-md badge-success">' . trans('shop::app.customer.account.order.index.completed') . '</span>';
+					case 'canceled':
+						return '<span class="badge badge-md badge-danger">' . trans('shop::app.customer.account.order.index.canceled') . '</span>';
+					case 'closed':
+						return '<span class="badge badge-md badge-info">' . trans('shop::app.customer.account.order.index.closed') . '</span>';
+					case 'pending':
+						return '<span class="badge badge-md badge-warning">' . trans('shop::app.customer.account.order.index.pending') . '</span>';
+					case 'pending_payment':
+						return '<span class="badge badge-md badge-warning">' . trans('shop::app.customer.account.order.index.pending-payment') . '</span>';
+					case 'fraud':
+						return '<span class="badge badge-md badge-danger">' . trans('shop::app.customer.account.order.index.fraud') . '</span>';
+					default:
+						return '';
+				}
+			},
+		]);
+	}
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('ui::app.datagrid.view'),

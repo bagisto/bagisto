@@ -9,11 +9,11 @@ trait ProvideQueryStringParser
      *
      * @return array
      */
-    private function getQueryStrings()
-    {
+    private function getQueryStrings(): array
+	{
         $route = request()->route() ? request()->route()->getName() : '';
 
-        $queryString = $this->grabQueryStrings($route == 'admin.datagrid.export' ? url()->previous() : url()->full());
+        $queryString = $this->grabQueryStrings($route === 'admin.datagrid.export' ? url()->previous() : url()->full());
 
         $parsedQueryStrings = $this->parseQueryStrings($queryString);
 
@@ -27,22 +27,22 @@ trait ProvideQueryStringParser
     /**
      * Grab query strings from url.
      *
-     * @param  string  $fullUrl
+     * @param string $fullUrl
      * @return string
      */
-    private function grabQueryStrings($fullUrl)
-    {
+    private function grabQueryStrings(string $fullUrl): ?string
+	{
         return explode('?', $fullUrl)[1] ?? null;
     }
 
     /**
      * Parse query strings.
      *
-     * @param  string  $queryString
+     * @param null|string $queryString
      * @return array
      */
-    private function parseQueryStrings($queryString)
-    {
+    private function parseQueryStrings(?string $queryString): array
+	{
         $parsedQueryStrings = [];
 
         if ($queryString) {
@@ -57,11 +57,11 @@ trait ProvideQueryStringParser
     /**
      * Update query strings.
      *
-     * @param  array  $parsedQueryStrings
+     * @param array $parsedQueryStrings
      * @return array
      */
-    private function updateQueryStrings($parsedQueryStrings)
-    {
+    private function updateQueryStrings(array $parsedQueryStrings): array
+	{
         if (isset($parsedQueryStrings['grand_total'])) {
             foreach ($parsedQueryStrings['grand_total'] as $key => $value) {
                 $parsedQueryStrings['grand_total'][$key] = str_replace(',', '.', $parsedQueryStrings['grand_total'][$key]);
@@ -69,7 +69,7 @@ trait ProvideQueryStringParser
         }
 
         foreach ($parsedQueryStrings as $key => $value) {
-            if (in_array($key, ['locale'])) {
+            if ('locale' === $key) {
                 if (! is_array($value)) {
                     unset($parsedQueryStrings[$key]);
                 }

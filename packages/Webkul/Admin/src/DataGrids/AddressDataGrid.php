@@ -3,6 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\Address;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Ui\DataGrid\DataGrid;
@@ -17,21 +18,21 @@ class AddressDataGrid extends DataGrid
      *
      * @var string
      */
-    public $index = 'address_id';
+    public string $index = 'address_id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Customer repository instance.
      *
      * @var \Webkul\Customer\Repositories\CustomerRepository
      */
-    protected $customerRepository;
+    protected CustomerRepository $customerRepository;
 
     /**
      * Create a new datagrid instance.
@@ -51,11 +52,11 @@ class AddressDataGrid extends DataGrid
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
         $customer = $this->customerRepository->find(request('id'));
 
-        $queryBuilder = DB::table('addresses as ca')
+        $queryBuilder = Address::from('addresses as ca')
             ->leftJoin('countries', 'ca.country', '=', 'countries.code')
             ->leftJoin('customers as c', 'ca.customer_id', '=', 'c.id')
             ->addSelect('ca.id as address_id', 'ca.company_name', 'ca.address1', 'ca.country', DB::raw('' . DB::getTablePrefix() . 'countries.name as country_name'), 'ca.state', 'ca.city', 'ca.postcode', 'ca.phone', 'ca.default_address')
@@ -81,12 +82,13 @@ class AddressDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'address_id',
@@ -151,28 +153,27 @@ class AddressDataGrid extends DataGrid
             'filterable' => true,
         ]);
 
-        $this->addColumn([
-            'index'      => 'default_address',
-            'label'      => trans('admin::app.customers.addresses.default-address'),
-            'type'       => 'boolean',
-            'sortable'   => true,
-            'searchable' => false,
-            'closure'    => function ($row) {
-                if ($row->default_address == 1) {
-                    return '<span class="badge badge-md badge-success"">' . trans('admin::app.customers.addresses.yes') . '</span>';
-                } else {
-                    return trans('admin::app.customers.addresses.dash');
-                }
-            },
-        ]);
-    }
+		$this->addColumn([
+			'index'      => 'default_address',
+			'label'      => trans('admin::app.customers.addresses.default-address'),
+			'type'       => 'boolean',
+			'sortable'   => true,
+			'searchable' => false,
+			'closure'    => function ($row) {
+				return (int) $row->default_address === 1
+					? '<span class="badge badge-md badge-success"">' . trans('admin::app.customers.addresses.yes') . '</span>'
+					: trans('admin::app.customers.addresses.dash');
+			},
+		]);
+	}
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
+	/**
+	 * Prepare actions.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ActionKeyException add action failed
+	 * @return void
+	 */
+	public function prepareActions(): void
     {
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
@@ -195,7 +196,7 @@ class AddressDataGrid extends DataGrid
      *
      * @return void
      */
-    public function prepareMassActions()
+    public function prepareMassActions(): void
     {
         $this->addMassAction([
             'type'   => 'delete',

@@ -40,38 +40,38 @@ class Admin extends Authenticatable implements AdminContract, JWTSubject
     ];
 
     /**
-     * Get the role that owns the admin.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function role()
-    {
-        return $this->belongsTo(RoleProxy::modelClass());
-    }
+	 * Get the role that owns the admin.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+	{
+		return $this->belongsTo(RoleProxy::modelClass());
+	}
 
-    /**
-     * Checks if admin has permission to perform certain action.
-     *
-     * @param  String  $permission
-     * @return Boolean
-     */
-    public function hasPermission($permission)
-    {
-        if ($this->role->permission_type == 'custom' && ! $this->role->permissions) {
+	/**
+	 * Checks if admin has permission to perform certain action.
+	 *
+	 * @param String $permission
+	 * @return Boolean
+	 */
+	public function hasPermission(string $permission): bool
+	{
+        if ($this->role->permission_type === 'custom' && ! $this->role->permissions) {
             return false;
         }
 
-        return in_array($permission, $this->role->permissions);
+        return in_array($permission, $this->role->permissions, true);
     }
 
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
-     */
-    public function sendPasswordResetNotification($token)
-    {
+	/**
+	 * Send the password reset notification.
+	 *
+	 * @param string $token
+	 * @return void
+	 */
+	public function sendPasswordResetNotification($token): void
+	{
         $this->notify(new AdminResetPassword($token));
     }
 

@@ -957,7 +957,6 @@ return [
             'edit-title' => 'Editar grupo',
             'save-btn-title' => 'Guardar grupo',
             'title' => 'Grupos',
-            'save-btn-title' => 'Guardar grupo',
             'code' => 'Código',
             'name' => 'Nombre',
             'is_user_defined' => 'Usuario definido',

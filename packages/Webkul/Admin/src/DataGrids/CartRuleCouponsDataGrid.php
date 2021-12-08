@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\CartRule\Models\CartRule;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class CartRuleCouponsDataGrid extends DataGrid
@@ -12,35 +12,36 @@ class CartRuleCouponsDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'id';
+    protected string $index = 'id';
 
     /**
      * Sort order.
      *
      * @var string
      */
-    protected $sortOrder = 'desc';
+    protected string $sortOrder = 'desc';
 
     /**
      * Prepare query builder.
      *
      * @return void
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): void
     {
-        $queryBuilder = DB::table('cart_rules')
+        $queryBuilder = CartRule::query()
             ->select('id')
             ->addSelect('id', 'code', 'limit', 'usage_per_customer', 'usage_throttle');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
-    public function addColumns()
+	/**
+	 * Add columns.
+	 *
+	 * @throws \Webkul\Ui\Exceptions\ColumnKeyException add column failed
+	 * @return void
+	 */
+	public function addColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -78,20 +79,18 @@ class CartRuleCouponsDataGrid extends DataGrid
             'filterable' => true,
         ]);
 
-        $this->addColumn([
-            'index'      => 'usage_per_customer',
-            'label'      => trans('admin::app.datagrid.usage-per-customer'),
-            'type'       => 'boolean',
-            'searchable' => false,
-            'sortable'   => true,
-            'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->end_other_rules == 1) {
-                    return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
-                }
-            },
-        ]);
+		$this->addColumn([
+			'index'      => 'usage_per_customer',
+			'label'      => trans('admin::app.datagrid.usage-per-customer'),
+			'type'       => 'boolean',
+			'searchable' => false,
+			'sortable'   => true,
+			'filterable' => true,
+			'closure'    => function ($value) {
+				return (int) $value->end_other_rules === 1
+					? trans('admin::app.datagrid.true')
+					: trans('admin::app.datagrid.false');
+			},
+		]);
     }
 }

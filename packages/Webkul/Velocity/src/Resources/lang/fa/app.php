@@ -82,11 +82,15 @@ return [
                 'page-link' => '[e.g. http://example.com/../../] پیوند صفحه',
             ],
             'datagrid' => [
-                'id' => 'Id',
-                'title' => 'عنوان',
-                'status' => 'وضعیت',
-                'position' => 'موقعیت',
-                'content-type' => 'نوع محتوا',
+                'id'            => 'Id',
+                'title'         => 'عنوان',
+                'status'        => 'وضعیت',
+                'position'      => 'موقعیت',
+                'content-type'  => 'نوع محتوا',
+                'category-slug' => 'فئة سبيكة',
+                'link'          => 'رابط',
+                'product'       => 'المنتج',
+                'static'        => 'ثابتة',
             ]
         ],
         'meta-data' => [
@@ -124,27 +128,29 @@ return [
             ]
         ],
         'category' => [
-            'save-btn-title' => 'ذخیره منو',
-            'title' => 'لیست فهرست های دسته بندی',
-            'add-title' => 'محتوای منو را اضافه کنید',
-            'edit-title' => 'محتوای منو را ویرایش کنید',
-            'btn-add-category' => 'محتوای دسته بندی را اضافه کنید',
-            'datagrid' => [
-                'category-id' => 'Id دسته بندی',
-                'category-name' => 'نام دسته',
-                'category-icon' => 'نماد دسته',
+            'save-btn-title'      => 'ذخیره منو',
+            'title'               => 'لیست فهرست های دسته بندی',
+            'add-title'           => 'محتوای منو را اضافه کنید',
+            'edit-title'          => 'محتوای منو را ویرایش کنید',
+            'btn-add-category'    => 'محتوای دسته بندی را اضافه کنید',
+            'datagrid'            => [
+                'category-id'     => 'Id دسته بندی',
+                'category-name'   => 'نام دسته',
+                'category-icon'   => 'نماد دسته',
                 'category-status' => 'وضعیت',
             ],
-            'tab' => [
+            'tab'                 => [
                 'general' => 'عمومی',
             ],
-            'status' => 'وضعیت',
-            'active' => 'فعال',
-            'inactive' => 'غیر فعال',
-            'select' => '-- انتخاب کنید --',
-            'icon-class' => 'کلاس آیکون',
-            'select-category' => 'دسته را انتخاب کنید',
-            'tooltip-content' => 'محتوای راهنمای ابزار',
+            'status'              => 'وضعیت',
+            'active'              => 'فعال',
+            'inactive'            => 'غیر فعال',
+            'enabled'             => 'فعال شد',
+            'disabled'            => 'غیرفعال شد',
+            'select'              => '-- انتخاب کنید --',
+            'icon-class'          => 'کلاس آیکون',
+            'select-category'     => 'دسته را انتخاب کنید',
+            'tooltip-content'     => 'محتوای راهنمای ابزار',
             'mass-delete-success' => 'منوی دسته انتخاب شده با موفقیت حذف شد.',
         ],
         'general' => [
@@ -187,7 +193,6 @@ return [
     ],
 
     'checkout' => [
-        'qty' => 'تعداد',
         'checkout' => 'وارسی',
         'cart' => [
             'view-cart' => 'مشاهده سبد خرید',
@@ -225,7 +230,7 @@ return [
             'login' => 'وارد شدن',
             'become-user' => 'کاربر شوید',
             'user-registration' => 'ثبت نام کاربر',
-            'form-sginup-text' => 'اگر تازه وارد فروشگاه ما هستید ، ما دوست داریم شما را به عنوان عضویت در اختیار داشته باشیم.',
+            'form-signup-text' => 'اگر تازه وارد فروشگاه ما هستید ، ما دوست داریم شما را به عنوان عضویت در اختیار داشته باشیم.',
         ],
         'forget-password' => [
             'login' => 'وارد شدن',
