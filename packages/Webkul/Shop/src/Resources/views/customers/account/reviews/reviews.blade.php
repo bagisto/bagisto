@@ -28,7 +28,7 @@
                                     @endfor
                                 </div>
 
-                                <div>
+                                <div v-pre>
                                     {{ $review->comment }}
                                 </div>
                             </div>
