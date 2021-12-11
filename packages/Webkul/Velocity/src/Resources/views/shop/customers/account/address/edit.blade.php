@@ -92,7 +92,7 @@
             <div class="control-group" :class="[errors.has('city') ? 'has-error' : '']">
                 <label for="city" class="mandatory">{{ __('shop::app.customer.account.address.create.city') }}</label>
 
-                <input type="text" class="control" name="city" value="{{ old('city') ?? $address->city }}" v-validate="'required|regex:^[a-zA-Z \-]*$'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
+                <input type="text" class="control" name="city" value="{{ old('city') ?? $address->city }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
 
                 <span class="control-error" v-if="errors.has('city')" v-text="errors.first('city')"></span>
             </div>
