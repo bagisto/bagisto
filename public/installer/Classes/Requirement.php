@@ -5,10 +5,9 @@ class Requirement {
     /**
      * Check for the server requirements.
      *
-     * @param array $requirements
      * @return array
      */
-    public function checkRequirements()
+    public function checkRequirements(): array
     {
         // Server Requirements
         $requirements =  [
@@ -73,14 +72,14 @@ class Requirement {
      *
      * @return array
      */
-    public function checkPHPversion()
+    public function checkPHPVersion(): array
     {
         /**
          * Minimum PHP Version Supported (Override is in installer.php config file).
          *
-         * @var _minPhpVersion
+         * @var string _minPhpVersion
          */
-        $_minPhpVersion = '7.3.0';
+        $_minPhpVersion = '7.4.0';
 
         $currentPhpVersion = $this->getPhpVersionInfo();
         $supported = false;
@@ -89,14 +88,12 @@ class Requirement {
             $supported = true;
         }
 
-        $phpStatus = [
+        return [
             'full' => $currentPhpVersion['full'],
             'current' => $currentPhpVersion['version'],
             'minimum' => $_minPhpVersion,
             'supported' => $supported
         ];
-
-        return $phpStatus;
     }
 
     /**
@@ -104,7 +101,7 @@ class Requirement {
      *
      * @return array
      */
-    private static function getPhpVersionInfo()
+    private static function getPhpVersionInfo(): array
     {
         $currentVersionFull = PHP_VERSION;
         preg_match("#^\d+(\.\d+)*#", $currentVersionFull, $filtered);
@@ -121,7 +118,7 @@ class Requirement {
      *
      * @return array
      */
-    public function composerInstall()
+    public function composerInstall(): array
     {
         $location = str_replace('\\', '/', getcwd());
         $currentLocation = explode("/", $location);
