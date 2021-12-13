@@ -32,7 +32,7 @@
                 <a
                     class="remove-decoration theme-btn light"
                     href="javascript:void(0);"
-                    onclick="document.getElementById('remove-all-wishlist').submit();">
+                    onclick="deleteAllWishlist()">
                     {{ __('shop::app.customer.account.wishlist.deleteall') }}
                 </a>
             </span>
@@ -138,12 +138,21 @@
     @if($isSharingEnabled)
         <script>
             /**
-            * Show share wishlist modal.
-            */
+             * Show share wishlist modal.
+             */
             function showShareWishlistModal() {
                 document.getElementById('shareWishlistModal').classList.remove('d-none');
 
                 window.app.showModal('shareWishlist');
+            }
+
+            /**
+             * Delete all wishlist.
+             */
+            function deleteAllWishlist() {
+                if (confirm('{{ __('shop::app.customer.account.wishlist.confirm-delete-all') }}')) document.getElementById('remove-all-wishlist').submit();
+
+                return;
             }
         </script>
     @endif
