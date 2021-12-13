@@ -101,6 +101,11 @@ class WishlistController extends Controller
             'customer_id' => $this->currentCustomer->id,
         ]);
 
+        if ($product->parent && $product->parent->type !== 'configurable') {
+            $product = $this->productRepository->findOneByField('id', $product->parent_id);
+            $data['product_id'] = $product->id;
+        }
+
         if ($checked->isEmpty()) {
             if ($this->wishlistRepository->create($data)) {
                 session()->flash('success', trans('customer::app.wishlist.success'));
