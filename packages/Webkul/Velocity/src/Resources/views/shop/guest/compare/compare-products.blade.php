@@ -212,6 +212,10 @@
                 },
 
                 'removeProductCompare': function (productId) {
+                    if (productId == 'all' && ! confirm('{{ __('shop::app.customer.compare.confirm-remove-all') }}')) {
+                        return;
+                    }
+                    
                     if (this.isCustomer) {
                         this.$http.delete(`${this.$root.baseUrl}/comparison?productId=${productId}`)
                         .then(response => {

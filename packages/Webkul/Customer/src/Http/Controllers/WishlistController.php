@@ -101,10 +101,7 @@ class WishlistController extends Controller
             'customer_id' => $this->currentCustomer->id,
         ]);
 
-        /**
-         * Accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
-         */
-        if ($product->parent_id != null) {
+        if ($product->parent && $product->parent->type !== 'configurable') {
             $product = $this->productRepository->findOneByField('id', $product->parent_id);
             $data['product_id'] = $product->id;
         }

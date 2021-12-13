@@ -56,7 +56,7 @@
                                     @endfor
                                 </div>
 
-                                <div class="mt-10">
+                                <div class="mt-10" v-pre>
                                     {{ $review->comment }}
                                 </div>
                             </div>
