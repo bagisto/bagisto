@@ -52,9 +52,9 @@
 
                             <star-ratings ratings="{{ $review->rating }}"></star-ratings>
 
-                            <h5 class="fw6">{{ $review->title }}</h5>
+                            <h5 class="fw6" v-pre>{{ $review->title }}</h5>
 
-                            <p>{{ $review->comment }}</p>
+                            <p v-pre>{{ $review->comment }}</p>
                         </div>
 
                         <div class="col-2">

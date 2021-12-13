@@ -1,40 +1,70 @@
-const { mix } = require('laravel-mix');
+const path   = require('path');
+const mix    = require('laravel-mix');
+const colors = require('colors');
 
 require('laravel-mix-merge-manifest');
+require('laravel-mix-clean');
 
-let publicPath = '../../../public/themes/velocity/assets';
+const prodPublicPath = path.join('publishable', 'assets');
+const devPublicPath  = path.join('..', '..', '..', 'public', 'themes', 'velocity', 'assets');
+const publicPath     = mix.inProduction() ? prodPublicPath : devPublicPath;
 
-if (mix.inProduction()) {
-    publicPath = 'publishable/assets';
-}
+console.log(colors.bold.blue(`Assets will be published in: ${publicPath}`));
 
-mix.setPublicPath(publicPath).mergeManifest();
-mix.disableNotifications();
+const assetsPath = path.join(__dirname, 'src', 'Resources', 'assets');
+const jsPath     = path.join(assetsPath, 'js');
+const imagesPath = path.join(assetsPath, 'images');
 
 mix
-    .js(__dirname + '/src/Resources/assets/js/app-core.js', 'js/velocity-core.js')
-    .js(
-        __dirname + '/src/Resources/assets/js/app.js',
-        'js/velocity.js'
+    .setPublicPath(publicPath)
+
+    .js(path.join(jsPath, 'app-core.js'), 'js/velocity-core.js')
+    .js(path.join(jsPath, 'app.js'), 'js/velocity.js')
+    .vue()
+
+    .alias({
+               '@Components': path.join(jsPath, 'UI', 'components')
+           })
+    .extract({
+                 to: `/js/components.js`,
+                 test(mod){ return /(component|style|loader|node)/.test(mod.nameForCondition()) }
+             }
     )
 
-    .copy(__dirname + '/src/Resources/assets/images', publicPath + '/images')
+    .copy(imagesPath, path.join(publicPath, 'images'))
 
     .sass(
-        __dirname + '/src/Resources/assets/sass/admin.scss',
-        __dirname + '/' + publicPath + '/css/velocity-admin.css'
+        path.join(assetsPath, 'sass', 'admin.scss'),
+        path.join(__dirname, publicPath, 'css', 'velocity-admin.css'),
     )
     .sass(
-        __dirname + '/src/Resources/assets/sass/app.scss',
-        __dirname + '/' + publicPath + '/css/velocity.css',
+        path.join(assetsPath, 'sass', 'app.scss'),
+        path.join(__dirname, publicPath, 'css', 'velocity.css'),
         {
-            includePaths: ['node_modules/bootstrap-sass/assets/stylesheets/']
+            sassOptions   : {
+                includePaths: [ 'node_modules/bootstrap-sass/assets/stylesheets/' ]
+            }
         }
     )
 
+    .clean({
+               // enable `dry` before adding new paths:
+               // dry: true,
+               cleanOnceBeforeBuildPatterns: [
+                   'js/**/*',
+                   'css/velocity.css',
+                   'css/velocity-admin.css',
+                   'mix-manifest.json',
+               ]
+           })
+
     .options({
-        processCssUrls: false
-    });
+                 processCssUrls: false,
+                 clearConsole  : mix.inProduction()
+             })
+
+    .disableNotifications()
+    .mergeManifest();
 
 if (mix.inProduction()) {
     mix.version();

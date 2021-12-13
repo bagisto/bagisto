@@ -11,6 +11,7 @@ use Webkul\Customer\Http\Controllers\SessionController;
 use Webkul\Customer\Http\Controllers\WishlistController;
 use Webkul\Shop\Http\Controllers\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\OrderController;
+use Webkul\Shop\Http\Controllers\ReviewController;
 
 Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function () {
     /**
