@@ -2,29 +2,36 @@
   "private": true,
   "scripts": {
     "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch-poll": "npm run watch -- --watch-poll",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
     "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "mix --production"
   },
   "devDependencies": {
-    "axios": "^0.21.0",
-    "cross-env": "^5.1.4",
+    "axios": "^0.24.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "colors": "^1.4.0",
     "jquery": "^3.2",
-    "laravel-mix": "^2.1",
-    "laravel-mix-merge-manifest": "^0.1.1",
-    "vue": "^2.1.10",
-    "vue-carousel": "^0.18.0"
+    "laravel-mix": "^6.0.39",
+    "laravel-mix-clean": "^0.1.0",
+    "laravel-mix-merge-manifest": "^2.0.0",
+    "sass": "^1.44.0",
+    "resolve-url-loader": "^4.0.0",
+    "sass-loader": "^12.3.0",
+    "vue": "^2.6.14",
+    "vue-carousel": "^0.18.0",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14"
   },
   "dependencies": {
     "accounting": "^0.4.1",
     "bootstrap-sass": "^3.4.1",
     "font-awesome": "^4.7.0",
     "lazysizes": "^5.2.2",
-    "material-icons": "^0.7.6",
+    "material-icons": "^1.10.3",
     "vee-validate": "^2.2.15",
-    "vue-slider-component": "^3.1.0"
+    "vue-slider-component": "^3.2.15"
   }
 }
