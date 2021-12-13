@@ -519,8 +519,8 @@ return [
 
             'item'                  => [
                 'error_remove'   => 'No items to remove from the cart.',
-                'success'        => 'Item was successfully added to cart.',
-                'success-remove' => 'Item was removed successfully from the cart.',
+                'success'        => 'Item is successfully added to cart.',
+                'success-remove' => 'Item is successfully removed from the cart.',
                 'error-add'      => 'Item cannot be added to cart, please try again later.',
                 'inactive'       => 'An item is inactive and was removed from cart.',
                 'inactive-add'   => 'Inactive item cannot be added to cart.',
