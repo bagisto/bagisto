@@ -2,9 +2,10 @@
  * Main imports.
  */
 import Accounting from 'accounting';
+import Vue         from 'vue';
 import VeeValidate from 'vee-validate';
 import VueCarousel from 'vue-carousel';
-import 'lazysizes';
+import translate   from '@Components/trans';
 
 /**
  * Lang imports.
@@ -42,43 +43,43 @@ Vue.filter('currency', function(value, argument) {
 /**
  * Global components.
  **/
-Vue.component('vue-slider', require('vue-slider-component'));
-Vue.component('mini-cart-button', require('./UI/components/mini-cart-button'));
-Vue.component('mini-cart', require('./UI/components/mini-cart'));
-Vue.component('modal-component', require('./UI/components/modal'));
-Vue.component('add-to-cart', require('./UI/components/add-to-cart'));
-Vue.component('star-ratings', require('./UI/components/star-rating'));
-Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
-Vue.component('quantity-changer', require('./UI/components/quantity-changer'));
-Vue.component('proceed-to-checkout', require('./UI/components/proceed-to-checkout'));
-Vue.component('compare-component-with-badge', require('./UI/components/header-compare-with-badge'));
-Vue.component('searchbar-component', require('./UI/components/header-searchbar'));
-Vue.component('wishlist-component-with-badge', require('./UI/components/header-wishlist-with-badge'));
-Vue.component('mobile-header', require('./UI/components/header-mobile'));
-Vue.component('sidebar-header', require('./UI/components/header-sidebar'));
-Vue.component('right-side-header', require('./UI/components/header-right-side'));
-Vue.component('sidebar-component', require('./UI/components/sidebar'));
-Vue.component('product-card', require('./UI/components/product-card'));
-Vue.component('wishlist-component', require('./UI/components/wishlist'));
-Vue.component('carousel-component', require('./UI/components/carousel'));
-Vue.component('slider-component', require('./UI/components/banners'));
-Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
-Vue.component('card-list-header', require('./UI/components/card-header'));
-Vue.component('logo-component', require('./UI/components/image-logo'));
-Vue.component('magnify-image', require('./UI/components/image-magnifier'));
-Vue.component('image-search-component', require('./UI/components/image-search'));
-Vue.component('compare-component', require('./UI/components/product-compare'));
-Vue.component('shimmer-component', require('./UI/components/shimmer-component'));
-Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
-Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
-Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
-Vue.component('recently-viewed', require('./UI/components/recently-viewed'));
-Vue.component('product-collections', require('./UI/components/product-collections'));
-Vue.component('hot-category', require('./UI/components/hot-category'));
-Vue.component('hot-categories', require('./UI/components/hot-categories'));
-Vue.component('popular-category', require('./UI/components/popular-category'));
-Vue.component('popular-categories', require('./UI/components/popular-categories'));
-Vue.component('velocity-overlay-loader', require('./UI/components/overlay-loader'));
+Vue.component('vue-slider', () => import('vue-slider-component'));
+Vue.component('mini-cart-button', () => import('@Components/mini-cart-button'));
+Vue.component('mini-cart', () => import('@Components/mini-cart'));
+Vue.component('modal-component', () => import('@Components/modal'));
+Vue.component('add-to-cart', () => import('@Components/add-to-cart'));
+Vue.component('star-ratings', () => import('@Components/star-rating'));
+Vue.component('quantity-btn', () => import('@Components/quantity-btn'));
+Vue.component('quantity-changer', () => import('@Components/quantity-changer'));
+Vue.component('proceed-to-checkout', () => import('@Components/proceed-to-checkout'));
+Vue.component('compare-component-with-badge', () => import('@Components/header-compare-with-badge'));
+Vue.component('searchbar-component', () => import('@Components/header-searchbar'));
+Vue.component('wishlist-component-with-badge', () => import('@Components/header-wishlist-with-badge'));
+Vue.component('mobile-header', () => import('@Components/header-mobile'));
+Vue.component('sidebar-header', () => import('@Components/header-sidebar'));
+Vue.component('right-side-header', () => import('@Components/header-right-side'));
+Vue.component('sidebar-component', () => import('@Components/sidebar'));
+Vue.component('product-card', () => import('@Components/product-card'));
+Vue.component('wishlist-component', () => import('@Components/wishlist'));
+Vue.component('carousel-component', () => import('@Components/carousel'));
+Vue.component('slider-component', () => import('@Components/banners'));
+Vue.component('child-sidebar', () => import('@Components/child-sidebar'));
+Vue.component('card-list-header', () => import('@Components/card-header'));
+Vue.component('logo-component', () => import('@Components/image-logo'));
+Vue.component('magnify-image', () => import('@Components/image-magnifier'));
+Vue.component('image-search-component', () => import('@Components/image-search'));
+Vue.component('compare-component', () => import('@Components/product-compare'));
+Vue.component('shimmer-component', () => import('@Components/shimmer-component'));
+Vue.component('responsive-sidebar', () => import('@Components/responsive-sidebar'));
+Vue.component('product-quick-view', () => import('@Components/product-quick-view'));
+Vue.component('product-quick-view-btn', () => import('@Components/product-quick-view-btn'));
+Vue.component('recently-viewed', () => import('@Components/recently-viewed'));
+Vue.component('product-collections', () => import('@Components/product-collections'));
+Vue.component('hot-category', () => import('@Components/hot-category'));
+Vue.component('hot-categories', () => import('@Components/hot-categories'));
+Vue.component('popular-category', () => import('@Components/popular-category'));
+Vue.component('popular-categories', () => import('@Components/popular-categories'));
+Vue.component('velocity-overlay-loader', () => import('@Components/overlay-loader'));
 Vue.component('vnode-injector', {
     functional: true,
     props: ['nodes'],
@@ -91,10 +92,11 @@ Vue.component('vnode-injector', {
  * Start from here.
  **/
 $(function() {
+
     /**
      * Define a mixin object.
      */
-    Vue.mixin(require('./UI/components/trans'));
+    Vue.mixin(translate);
 
     Vue.mixin({
         data: function() {
@@ -120,24 +122,23 @@ $(function() {
 
             toggleSidebar: function(id, { target }, type) {
                 if (
-                    Array.from(target.classList)[0] == 'main-category' ||
-                    Array.from(target.parentElement.classList)[0] ==
-                        'main-category'
+                    Array.from(target.classList)[0] === 'main-category'
+                    || Array.from(target.parentElement.classList)[0] === 'main-category'
                 ) {
                     let sidebar = $(`#sidebar-level-${id}`);
                     if (sidebar && sidebar.length > 0) {
-                        if (type == 'mouseover') {
+                        if (type === 'mouseover') {
                             this.show(sidebar);
-                        } else if (type == 'mouseout') {
+                        } else if (type === 'mouseout') {
                             this.hide(sidebar);
                         }
                     }
                 } else if (
-                    Array.from(target.classList)[0] == 'category' ||
-                    Array.from(target.classList)[0] == 'category-icon' ||
-                    Array.from(target.classList)[0] == 'category-title' ||
-                    Array.from(target.classList)[0] == 'category-content' ||
-                    Array.from(target.classList)[0] == 'rango-arrow-right'
+                    Array.from(target.classList)[0] === 'category' ||
+                    Array.from(target.classList)[0] === 'category-icon' ||
+                    Array.from(target.classList)[0] === 'category-title' ||
+                    Array.from(target.classList)[0] === 'category-content' ||
+                    Array.from(target.classList)[0] === 'rango-arrow-right'
                 ) {
                     let parentItem = target.closest('li');
 
@@ -152,18 +153,18 @@ $(function() {
                             let subCategories1 = Array.from(subCategories)[0];
                             subCategories1 = $(subCategories1);
 
-                            if (type == 'mouseover') {
+                            if (type === 'mouseover') {
                                 this.show(subCategories1);
 
                                 let sidebarChild = subCategories1.find(
                                     '.sidebar'
                                 );
                                 this.show(sidebarChild);
-                            } else if (type == 'mouseout') {
+                            } else if (type === 'mouseout') {
                                 this.hide(subCategories1);
                             }
                         } else {
-                            if (type == 'mouseout') {
+                            if (type === 'mouseout') {
                                 let sidebar = $(`#${id}`);
                                 sidebar.hide();
                             }
@@ -208,9 +209,7 @@ $(function() {
                 });
             },
 
-            isMobile: function() {
-                return isMobile();
-            },
+            isMobile: isMobile,
 
             loadDynamicScript: function(src, onScriptLoaded) {
                 loadDynamicScript(src, onScriptLoaded);
@@ -256,7 +255,7 @@ $(function() {
         }
     });
 
-    const app = new Vue({
+    window.app = new Vue({
         el: '#app',
 
         data: function() {
@@ -349,12 +348,11 @@ $(function() {
                     .then(response => {
                         this.sharedRootCategories = response.data.categories;
                         $(
-                            `<style type='text/css'> .sub-categories{ min-height:${response
-                                .data.categories.length * 30}px;} </style>`
+                            `<style type='text/css'> .sub-categories{ min-height:${ response.data.categories.length * 30 }px;} </style>`
                         ).appendTo('head');
                     })
                     .catch(error => {
-                        console.log('failed to load categories');
+                        console.error(`failed to load categories:`, error);
                     });
             },
 
@@ -390,6 +388,4 @@ $(function() {
             },
         }
     });
-
-    window.app = app;
 });
