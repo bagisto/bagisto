@@ -1,4 +1,7 @@
-<form method="POST" action="{{ route('admin.customer.update', $customer->id) }}">
+<form
+    method="POST"
+    action="{{ route('admin.customer.update', $customer->id) }}"
+    @submit.prevent="onSubmit">
     <div class="page-content">
         <div class="form-container">
             @csrf()
@@ -106,12 +109,12 @@
                     <label for="dob">{{ __('admin::app.customers.customers.date_of_birth') }}</label>
 
                     <input
-                        type="text"
+                        type="date"
                         class="control"
                         id="dob"
                         name="date_of_birth"
                         value="{{ old('date_of_birth') ?:$customer->date_of_birth }}"
-                        v-validate="'date_format:yyyy-MM-dd'"
+                        v-validate=""
                         data-vv-as="&quot;{{ __('admin::app.customers.customers.date_of_birth') }}&quot;">
 
                     <span class="control-error" v-if="errors.has('date_of_birth')">@{{ errors.first('date_of_birth') }}</span>
