@@ -105,18 +105,19 @@
 
                 {!! view_render_event('bagisto.admin.customer.edit.status.after', ['customer' => $customer]) !!}
 
-                <div class="control-group" :class="[errors.has('date_of_birth') ? 'has-error' : '']">
+                <div class="control-group date" :class="[errors.has('date_of_birth') ? 'has-error' : '']">
                     <label for="dob">{{ __('admin::app.customers.customers.date_of_birth') }}</label>
 
-                    <input
-                        type="date"
-                        class="control"
-                        id="dob"
-                        name="date_of_birth"
-                        value="{{ old('date_of_birth') ?:$customer->date_of_birth }}"
-                        v-validate=""
-                        data-vv-as="&quot;{{ __('admin::app.customers.customers.date_of_birth') }}&quot;">
-
+                    <date>
+                        <input
+                            type="date"
+                            class="control"
+                            id="dob"
+                            name="date_of_birth"
+                            value="{{ old('date_of_birth') ?:$customer->date_of_birth }}"
+                            v-validate=""
+                            data-vv-as="&quot;{{ __('admin::app.customers.customers.date_of_birth') }}&quot;">
+                    </date>
                     <span class="control-error" v-if="errors.has('date_of_birth')">@{{ errors.first('date_of_birth') }}</span>
                 </div>
 
