@@ -1,4 +1,3 @@
-{{-- mix versioned compiled files --}}
 <script type="text/javascript" src="{{ asset(mix('/js/manifest.js', 'themes/velocity/assets')) }}"></script>
 
 <script type="text/javascript" src="{{ asset(mix('/js/velocity-core.js', 'themes/velocity/assets')) }}"></script>
@@ -33,6 +32,8 @@
      * @param {!string} csrfToken
      */
     function submitWishlistForm(action, method, csrfToken) {
+        if (! confirm('{{ __('shop::app.checkout.cart.cart-remove-action') }}')) return;
+
         let form = document.createElement('form');
             form.method = 'POST';
             form.action = action;
