@@ -78,7 +78,7 @@ class ProductFlat extends Model implements ProductFlatContract
             if ($attribute && ($attribute->value_per_channel || $attribute->value_per_locale)) {
                 $defaultProduct = $this->getDefaultProduct();
 
-                $this->attributes[$key] = $defaultProduct->$key;
+                $this->attributes[$key] = $defaultProduct->attributes[$key];
 
                 return $this->getAttributeValue($key);
             }
