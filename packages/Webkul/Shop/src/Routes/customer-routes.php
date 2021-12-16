@@ -29,17 +29,17 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
              * Forgot password routes.
              */
             Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->defaults('_config', [
-                'view' => 'shop::customers.signup.forgot-password'
+                'view' => 'shop::customers.signup.forgot-password',
             ])->name('customer.forgot-password.create');
 
             Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('customer.forgot-password.store');
 
             Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->defaults('_config', [
-                'view' => 'shop::customers.signup.reset-password'
+                'view' => 'shop::customers.signup.reset-password',
             ])->name('customer.reset-password.create');
 
             Route::post('/reset-password', [ResetPasswordController::class, 'store'])->defaults('_config', [
-                'redirect' => 'customer.profile.index'
+                'redirect' => 'customer.profile.index',
             ])->name('customer.reset-password.store');
 
             /**
@@ -50,14 +50,14 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
             ])->name('customer.session.index');
 
             Route::post('login', [SessionController::class, 'create'])->defaults('_config', [
-                'redirect' => 'customer.profile.index'
+                'redirect' => 'customer.profile.index',
             ])->name('customer.session.create');
 
             /**
              * Registration routes.
              */
             Route::get('register', [RegistrationController::class, 'show'])->defaults('_config', [
-                'view' => 'shop::customers.signup.index'
+                'view' => 'shop::customers.signup.index',
             ])->name('customer.register.index');
 
             Route::post('register', [RegistrationController::class, 'create'])->defaults('_config', [
@@ -80,7 +80,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                  * Logout.
                  */
                 Route::delete('logout', [SessionController::class, 'destroy'])->defaults('_config', [
-                    'redirect' => 'customer.session.index'
+                    'redirect' => 'customer.session.index',
                 ])->name('customer.session.destroy');
 
                 /**
@@ -92,7 +92,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
                 Route::get('wishlist/shared', [WishlistController::class, 'shared'])
                     ->defaults('_config', [
-                        'view' => 'shop::customers.account.wishlist.wishlist-shared'
+                        'view' => 'shop::customers.account.wishlist.wishlist-shared',
                     ])
                     ->withoutMiddleware('customer')
                     ->name('customer.wishlist.shared');
@@ -112,50 +112,50 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                      * Dashboard.
                      */
                     Route::get('index', [AccountController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.index'
+                        'view' => 'shop::customers.account.index',
                     ])->name('customer.account.index');
 
                     /**
                      * Profile.
                      */
                     Route::get('profile', [CustomerController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.profile.index'
+                        'view' => 'shop::customers.account.profile.index',
                     ])->name('customer.profile.index');
 
                     Route::get('profile/edit', [CustomerController::class, 'edit'])->defaults('_config', [
-                        'view' => 'shop::customers.account.profile.edit'
+                        'view' => 'shop::customers.account.profile.edit',
                     ])->name('customer.profile.edit');
 
                     Route::post('profile/edit', [CustomerController::class, 'update'])->defaults('_config', [
-                        'redirect' => 'customer.profile.index'
+                        'redirect' => 'customer.profile.index',
                     ])->name('customer.profile.store');
 
                     Route::post('profile/destroy', [CustomerController::class, 'destroy'])->defaults('_config', [
-                        'redirect' => 'customer.profile.index'
+                        'redirect' => 'customer.profile.index',
                     ])->name('customer.profile.destroy');
 
                     /**
                      * Addresses.
                      */
                     Route::get('addresses', [AddressController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.address.index'
+                        'view' => 'shop::customers.account.address.index',
                     ])->name('customer.address.index');
 
                     Route::get('addresses/create', [AddressController::class, 'create'])->defaults('_config', [
-                        'view' => 'shop::customers.account.address.create'
+                        'view' => 'shop::customers.account.address.create',
                     ])->name('customer.address.create');
 
                     Route::post('addresses/create', [AddressController::class, 'store'])->defaults('_config', [
-                        'view' => 'shop::customers.account.address.address',
-                        'redirect' => 'customer.address.index'
+                        'view'     => 'shop::customers.account.address.address',
+                        'redirect' => 'customer.address.index',
                     ])->name('customer.address.store');
 
                     Route::get('addresses/edit/{id}', [AddressController::class, 'edit'])->defaults('_config', [
-                        'view' => 'shop::customers.account.address.edit'
+                        'view' => 'shop::customers.account.address.edit',
                     ])->name('customer.address.edit');
 
                     Route::put('addresses/edit/{id}', [AddressController::class, 'update'])->defaults('_config', [
-                        'redirect' => 'customer.address.index'
+                        'redirect' => 'customer.address.index',
                     ])->name('customer.address.update');
 
                     Route::get('addresses/default/{id}', [AddressController::class, 'makeDefault'])->name('make.default.address');
@@ -166,22 +166,22 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                      * Wishlist.
                      */
                     Route::get('wishlist', [WishlistController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.wishlist.wishlist'
+                        'view' => 'shop::customers.account.wishlist.wishlist',
                     ])->name('customer.wishlist.index');
 
                     /**
                      * Orders.
                      */
                     Route::get('orders', [OrderController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.orders.index'
+                        'view' => 'shop::customers.account.orders.index',
                     ])->name('customer.orders.index');
 
                     Route::get('orders/view/{id}', [OrderController::class, 'view'])->defaults('_config', [
-                        'view' => 'shop::customers.account.orders.view'
+                        'view' => 'shop::customers.account.orders.view',
                     ])->name('customer.orders.view');
 
                     Route::get('orders/print/{id}', [OrderController::class, 'print'])->defaults('_config', [
-                        'view' => 'shop::customers.account.orders.print'
+                        'view' => 'shop::customers.account.orders.print',
                     ])->name('customer.orders.print');
 
                     Route::post('/orders/cancel/{id}', [OrderController::class, 'cancel'])->name('customer.orders.cancel');
@@ -190,45 +190,29 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                      * Downloadable products.
                      */
                     Route::get('downloadable-products', [DownloadableProductController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.downloadable_products.index'
+                        'view' => 'shop::customers.account.downloadable_products.index',
                     ])->name('customer.downloadable_products.index');
 
                     Route::get('downloadable-products/download/{id}', [DownloadableProductController::class, 'download'])->defaults('_config', [
-                        'view' => 'shop::customers.account.downloadable_products.index'
+                        'view' => 'shop::customers.account.downloadable_products.index',
                     ])->name('customer.downloadable_products.download');
 
                     /**
                      * Reviews.
                      */
                     Route::get('reviews', [CustomerController::class, 'reviews'])->defaults('_config', [
-                        'view' => 'shop::customers.account.reviews.index'
+                        'view' => 'shop::customers.account.reviews.index',
                     ])->name('customer.reviews.index');
 
                     Route::delete('reviews/delete/{id}', [ReviewController::class, 'destroy'])->defaults('_config', [
-                        'redirect' => 'customer.reviews.index'
+                        'redirect' => 'customer.reviews.index',
                     ])->name('customer.review.delete');
 
                     Route::delete('reviews/all-delete', [ReviewController::class, 'deleteAll'])->defaults('_config', [
-                        'redirect' => 'customer.reviews.index'
+                        'redirect' => 'customer.reviews.index',
                     ])->name('customer.review.deleteall');
                 });
             });
         });
-    });
-
-    /**
-     * These are the routes which are used during checkout for checking the customer.
-     * So, placed outside the cart merger middleware.
-     */
-    Route::prefix('customer')->group(function () {
-        /**
-         * For customer exist check.
-         */
-        Route::post('/customer/exist', [OnepageController::class, 'checkExistCustomer'])->name('customer.checkout.exist');
-
-        /**
-         * For customer login checkout.
-         */
-        Route::post('/customer/checkout/login', [OnepageController::class, 'loginForCheckout'])->name('customer.checkout.login');
     });
 });
