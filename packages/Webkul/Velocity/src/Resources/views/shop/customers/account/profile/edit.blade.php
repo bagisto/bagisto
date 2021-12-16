@@ -103,14 +103,16 @@
                 </label>
 
                 <div class="col-12">
-                    <input
-                        type="date"
-                        name="date_of_birth"
-                        placeholder="dd/mm/yyyy"
-                        value="{{ old('date_of_birth') ?? $customer->date_of_birth }}"
-                        v-validate="" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.dob') }}&quot;" />
+                    <date>
+                        <input
+                            type="date"
+                            name="date_of_birth"
+                            placeholder="dd/mm/yyyy"
+                            value="{{ old('date_of_birth') ?? $customer->date_of_birth }}"
+                            v-validate="" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.dob') }}&quot;" />
+                    </date>
 
-                        <span class="control-error" v-if="errors.has('date_of_birth')" v-text="errors.first('date_of_birth')"></span>
+                    <span class="control-error" v-if="errors.has('date_of_birth')" v-text="errors.first('date_of_birth')"></span>
                 </div>
             </div>
 
