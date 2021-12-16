@@ -72,4 +72,16 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     Route::get('/checkout/success', [OnepageController::class, 'success'])->defaults('_config', [
         'view' => 'shop::checkout.success'
     ])->name('shop.checkout.success');
+
+    Route::prefix('customer')->group(function () {
+        /**
+         * For customer exist check.
+         */
+        Route::post('/customer/exist', [OnepageController::class, 'checkExistCustomer'])->name('customer.checkout.exist');
+
+        /**
+         * For customer login checkout.
+         */
+        Route::post('/customer/checkout/login', [OnepageController::class, 'loginForCheckout'])->name('customer.checkout.login');
+    });
 });
