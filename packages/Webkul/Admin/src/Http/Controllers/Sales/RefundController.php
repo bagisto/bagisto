@@ -3,8 +3,8 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\RefundRepository;
 
 class RefundController extends Controller
@@ -17,21 +17,21 @@ class RefundController extends Controller
     protected $_config;
 
     /**
-     * OrderRepository object
+     * Order repository instance.
      *
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
-     * OrderItemRepository object
+     * Order item repository instance.
      *
      * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
-     * RefundRepository object
+     * Refund repository instance.
      *
      * @var \Webkul\Sales\Repositories\RefundRepository
      */
@@ -49,8 +49,7 @@ class RefundController extends Controller
         OrderRepository $orderRepository,
         OrderItemRepository $orderItemRepository,
         RefundRepository $refundRepository
-    )
-    {
+    ) {
         $this->middleware('admin');
 
         $this->_config = request('_config');
@@ -112,6 +111,12 @@ class RefundController extends Controller
         }
 
         $totals = $this->refundRepository->getOrderItemsRefundSummary($data['refund']['items'], $orderId);
+
+        if (! $totals) {
+            session()->flash('error', trans('admin::app.sales.refunds.invalid-qty'));
+
+            return redirect()->back();
+        }
 
         $maxRefundAmount = $totals['grand_total']['price'] - $order->refunds()->sum('base_adjustment_refund');
 
