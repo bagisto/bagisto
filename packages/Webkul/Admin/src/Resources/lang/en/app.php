@@ -39,100 +39,100 @@ return [
         'country'         => 'Country',
         'state'           => 'State',
         'true'            => 'True',
-        'false'           => 'False'
+        'false'           => 'False',
     ],
 
     'layouts' => [
-        'app-version'        => 'Version : :version',
-        'my-account'         => 'My Account',
-        'logout'             => 'Logout',
-        'visit-shop'         => 'Visit Shop',
-        'dashboard'          => 'Dashboard',
-        'sales'              => 'Sales',
-        'orders'             => 'Orders',
-        'shipments'          => 'Shipments',
-        'invoices'           => 'Invoices',
-        'refunds'            => 'Refunds',
-        'catalog'            => 'Catalog',
-        'products'           => 'Products',
-        'categories'         => 'Categories',
-        'attributes'         => 'Attributes',
-        'attribute-families' => 'Attribute Families',
-        'customers'          => 'Customers',
-        'groups'             => 'Groups',
-        'reviews'            => 'Reviews',
-        'configure'          => 'Configure',
-        'settings'           => 'Settings',
-        'locales'            => 'Locales',
-        'currencies'         => 'Currencies',
-        'exchange-rates'     => 'Exchange Rates',
-        'inventory-sources'  => 'Inventory Sources',
-        'channels'           => 'Channels',
-        'users'              => 'Users',
-        'roles'              => 'Roles',
-        'sliders'            => 'Sliders',
-        'taxes'              => 'Taxes',
-        'tax-categories'     => 'Tax Categories',
-        'tax-rates'          => 'Tax Rates',
-        'marketing'          => 'Marketing',
-        'promotions'         => 'Promotions',
-        'email-marketing'    => 'Email Marketing',
-        'campaigns'          => 'Campaigns',
-        'email-templates'    => 'Email Templates',
-        'events'             => 'Events',
-        'discount'           => 'Discount',
-        'cms'                => 'CMS',
-        'transactions'       => 'Transactions',
+        'app-version'              => 'Version : :version',
+        'my-account'               => 'My Account',
+        'logout'                   => 'Logout',
+        'visit-shop'               => 'Visit Shop',
+        'dashboard'                => 'Dashboard',
+        'sales'                    => 'Sales',
+        'orders'                   => 'Orders',
+        'shipments'                => 'Shipments',
+        'invoices'                 => 'Invoices',
+        'refunds'                  => 'Refunds',
+        'catalog'                  => 'Catalog',
+        'products'                 => 'Products',
+        'categories'               => 'Categories',
+        'attributes'               => 'Attributes',
+        'attribute-families'       => 'Attribute Families',
+        'customers'                => 'Customers',
+        'groups'                   => 'Groups',
+        'reviews'                  => 'Reviews',
+        'configure'                => 'Configure',
+        'settings'                 => 'Settings',
+        'locales'                  => 'Locales',
+        'currencies'               => 'Currencies',
+        'exchange-rates'           => 'Exchange Rates',
+        'inventory-sources'        => 'Inventory Sources',
+        'channels'                 => 'Channels',
+        'users'                    => 'Users',
+        'roles'                    => 'Roles',
+        'sliders'                  => 'Sliders',
+        'taxes'                    => 'Taxes',
+        'tax-categories'           => 'Tax Categories',
+        'tax-rates'                => 'Tax Rates',
+        'marketing'                => 'Marketing',
+        'promotions'               => 'Promotions',
+        'email-marketing'          => 'Email Marketing',
+        'campaigns'                => 'Campaigns',
+        'email-templates'          => 'Email Templates',
+        'events'                   => 'Events',
+        'discount'                 => 'Discount',
+        'cms'                      => 'CMS',
+        'transactions'             => 'Transactions',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
     ],
 
     'acl' => [
-        'dashboard'          => 'Dashboard',
-        'sales'              => 'Sales',
-        'cancel'             => 'Cancel',
-        'orders'             => 'Orders',
-        'shipments'          => 'Shipments',
-        'invoices'           => 'Invoices',
-        'refunds'            => 'Refunds',
-        'catalog'            => 'Catalog',
-        'products'           => 'Products',
-        'copy'               => 'Copy',
-        'categories'         => 'Categories',
-        'attributes'         => 'Attributes',
-        'attribute-families' => 'Attribute Families',
-        'customers'          => 'Customers',
-        'addresses'          => 'Addresses',
-        'note'               => 'Note',
-        'groups'             => 'Groups',
-        'reviews'            => 'Reviews',
-        'configure'          => 'Configure',
-        'settings'           => 'Settings',
-        'locales'            => 'Locales',
-        'currencies'         => 'Currencies',
-        'exchange-rates'     => 'Exchange Rates',
-        'inventory-sources'  => 'Inventory Sources',
-        'channels'           => 'Channels',
-        'users'              => 'Users',
-        'roles'              => 'Roles',
-        'sliders'            => 'Sliders',
-        'taxes'              => 'Taxes',
-        'tax-categories'     => 'Tax Categories',
-        'tax-rates'          => 'Tax Rates',
-        'view'               => 'View',
-        'edit'               => 'Edit',
-        'create'             => 'Add',
-        'delete'             => 'Delete',
-        'mass-delete'        => 'Mass Delete',
-        'mass-update'        => 'Mass Update',
-        'marketing'          => 'Marketing',
-        'promotions'         => 'Promotions',
-        'cart-rules'         => 'Cart Rules',
-        'catalog-rules'      => 'Catalog Rules',
-        'email-marketing'    => 'Email Marketing',
-        'email-templates'    => 'Email Templates',
-        'campaigns'          => 'Campaigns',
-        'subscribers'        => 'Newsletter Subscribers',
-        'events'             => 'Events',
+        'dashboard'                => 'Dashboard',
+        'sales'                    => 'Sales',
+        'cancel'                   => 'Cancel',
+        'orders'                   => 'Orders',
+        'shipments'                => 'Shipments',
+        'invoices'                 => 'Invoices',
+        'refunds'                  => 'Refunds',
+        'catalog'                  => 'Catalog',
+        'products'                 => 'Products',
+        'copy'                     => 'Copy',
+        'categories'               => 'Categories',
+        'attributes'               => 'Attributes',
+        'attribute-families'       => 'Attribute Families',
+        'customers'                => 'Customers',
+        'addresses'                => 'Addresses',
+        'note'                     => 'Note',
+        'groups'                   => 'Groups',
+        'reviews'                  => 'Reviews',
+        'configure'                => 'Configure',
+        'settings'                 => 'Settings',
+        'locales'                  => 'Locales',
+        'currencies'               => 'Currencies',
+        'exchange-rates'           => 'Exchange Rates',
+        'inventory-sources'        => 'Inventory Sources',
+        'channels'                 => 'Channels',
+        'users'                    => 'Users',
+        'roles'                    => 'Roles',
+        'sliders'                  => 'Sliders',
+        'taxes'                    => 'Taxes',
+        'tax-categories'           => 'Tax Categories',
+        'tax-rates'                => 'Tax Rates',
+        'view'                     => 'View',
+        'edit'                     => 'Edit',
+        'create'                   => 'Add',
+        'delete'                   => 'Delete',
+        'mass-delete'              => 'Mass Delete',
+        'mass-update'              => 'Mass Update',
+        'marketing'                => 'Marketing',
+        'promotions'               => 'Promotions',
+        'cart-rules'               => 'Cart Rules',
+        'catalog-rules'            => 'Catalog Rules',
+        'email-marketing'          => 'Email Marketing',
+        'email-templates'          => 'Email Templates',
+        'campaigns'                => 'Campaigns',
+        'subscribers'              => 'Newsletter Subscribers',
+        'events'                   => 'Events',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
     ],
 
@@ -156,7 +156,7 @@ return [
         'order-count'               => ':count Orders',
         'revenue'                   => 'Revenue :total',
         'stock-threshold'           => 'Stock Threshold',
-        'qty-left'                  => ':qty Left'
+        'qty-left'                  => ':qty Left',
     ],
 
     'datagrid' => [
@@ -165,7 +165,7 @@ return [
             'delete-success' => 'Selected :resource were successfully deleted',
             'partial-action' => 'Some actions were not performed due restricted system constraints on :resource',
             'update-success' => 'Selected :resource were successfully updated',
-            'no-resource'    => 'The resource provided for insufficient for the action'
+            'no-resource'    => 'The resource provided for insufficient for the action',
         ],
 
         'id'               => 'ID',
@@ -216,7 +216,7 @@ return [
         'qty'              => 'Quantity',
         'permission-type'  => 'Permission Type',
         'identifier'       => 'Identifier',
-        'state'            =>  'State',
+        'state'            => 'State',
         'country'          => 'Country',
         'tax-rate'         => 'Rate',
         'role'             => 'Role',
@@ -266,7 +266,7 @@ return [
         'password'         => 'Password',
         'confirm-password' => 'Confirm Password',
         'change-password'  => 'Change Account Password',
-        'current-password' => 'Current Password'
+        'current-password' => 'Current Password',
     ],
 
     'users' => [
@@ -277,7 +277,7 @@ return [
             'password'         => 'Password',
             'confirm-password' => 'Confirm Password',
             'back-link-title'  => 'Back to Sign In',
-            'submit-btn-title' => 'Send Password Reset Email'
+            'submit-btn-title' => 'Send Password Reset Email',
         ],
 
         'reset-password' => [
@@ -286,7 +286,7 @@ return [
             'password'         => 'Password',
             'confirm-password' => 'Confirm Password',
             'back-link-title'  => 'Back to Sign In',
-            'submit-btn-title' => 'Reset Password'
+            'submit-btn-title' => 'Reset Password',
         ],
 
         'roles' => [
@@ -300,7 +300,7 @@ return [
             'access-control'  => 'Access Control',
             'permissions'     => 'Permissions',
             'custom'          => 'Custom',
-            'all'             => 'All'
+            'all'             => 'All',
         ],
 
         'users' => [
@@ -326,7 +326,7 @@ return [
             'password-match'       => 'Current password does not match.',
             'account-save'         => 'Account changes saved successfully.',
             'login-error'          => 'Please check your credentials and try again.',
-            'activate-warning'     => 'Your account is yet to be activated, please contact administrator.'
+            'activate-warning'     => 'Your account is yet to be activated, please contact administrator.',
         ],
 
         'sessions' => [
@@ -335,8 +335,8 @@ return [
             'password'                   => 'Password',
             'forget-password-link-title' => 'Forget Password ?',
             'remember-me'                => 'Remember Me',
-            'submit-btn-title'           => 'Sign In'
-        ]
+            'submit-btn-title'           => 'Sign In',
+        ],
     ],
 
     'sales' => [
@@ -407,35 +407,36 @@ return [
             'notify-customer'              => 'Notify Customer',
             'customer-notified'            => ':date | Customer <b>Notified</b>',
             'customer-not-notified'        => ':date | Customer <b>Not Notified</b>',
-            'transactions'                 => 'Transactions'
+            'transactions'                 => 'Transactions',
         ],
 
         'invoices' => [
-            'title'                  => 'Invoices',
-            'id'                     => 'ID',
-            'invoice'                => 'Invoice',
-            'invoice-id'             => 'Invoice ID',
-            'date'                   => 'Invoice Date',
-            'order-id'               => 'Order ID',
-            'customer-name'          => 'Customer Name',
-            'status'                 => 'Status',
-            'amount'                 => 'Amount',
-            'action'                 => 'Action',
-            'add-title'              => 'Create Invoice',
-            'save-btn-title'         => 'Save Invoice',
-            'qty'                    => 'Qty',
-            'qty-ordered'            => 'Qty Ordered',
-            'qty-to-invoice'         => 'Qty to Invoice',
-            'view-title'             => 'Invoice #:invoice_id',
-            'bill-to'                => 'Bill to',
-            'ship-to'                => 'Ship to',
-            'print'                  => 'Print',
-            'order-date'             => 'Order Date',
-            'creation-error'         => 'Order invoice creation is not allowed.',
-            'product-error'          => 'Invoice can not be created without products.',
-            'status-overdue'         => 'Overdue',
-            'status-pending'         => 'Pending Payment',
-            'status-paid'            => 'Paid',
+            'title'          => 'Invoices',
+            'id'             => 'ID',
+            'invoice'        => 'Invoice',
+            'invoice-id'     => 'Invoice ID',
+            'date'           => 'Invoice Date',
+            'order-id'       => 'Order ID',
+            'customer-name'  => 'Customer Name',
+            'status'         => 'Status',
+            'amount'         => 'Amount',
+            'action'         => 'Action',
+            'add-title'      => 'Create Invoice',
+            'save-btn-title' => 'Save Invoice',
+            'qty'            => 'Qty',
+            'qty-ordered'    => 'Qty Ordered',
+            'qty-to-invoice' => 'Qty to Invoice',
+            'view-title'     => 'Invoice #:invoice_id',
+            'bill-to'        => 'Bill to',
+            'ship-to'        => 'Ship to',
+            'print'          => 'Print',
+            'order-date'     => 'Order Date',
+            'invalid-qty'    => 'We found an invalid quantity to invoice items.',
+            'creation-error' => 'Order invoice creation is not allowed.',
+            'product-error'  => 'Invoice can not be created without products.',
+            'status-overdue' => 'Overdue',
+            'status-pending' => 'Pending Payment',
+            'status-paid'    => 'Paid',
         ],
 
         'shipments' => [
@@ -466,26 +467,26 @@ return [
         ],
 
         'refunds' => [
-            'title'              => 'Refunds',
-            'id'                 => 'ID',
-            'add-title'          => 'Create Refund',
-            'save-btn-title'     => 'Refund',
-            'order-id'           => 'Order ID',
-            'qty-ordered'        => 'Qty Ordered',
-            'qty-to-refund'      => 'Qty To Refund',
-            'refund-shipping'    => 'Refund Shipping',
-            'adjustment-refund'  => 'Adjustment Refund',
-            'adjustment-fee'     => 'Adjustment Fee',
-            'update-qty'         => 'Update Quantities',
-            'invalid-qty'        => 'We found an invalid quantity to refund items.',
-            'refund-limit-error' => 'The most money available to refund is :amount.',
-            'refunded'           => 'Refunded',
-            'date'               => 'Refund Date',
-            'customer-name'      => 'Customer Name',
-            'status'             => 'Status',
-            'action'             => 'Action',
-            'view-title'         => 'Refund #:refund_id',
-            'invalid-refund-amount-error' => 'Refund amount should be non zero.'
+            'title'                       => 'Refunds',
+            'id'                          => 'ID',
+            'add-title'                   => 'Create Refund',
+            'save-btn-title'              => 'Refund',
+            'order-id'                    => 'Order ID',
+            'qty-ordered'                 => 'Qty Ordered',
+            'qty-to-refund'               => 'Qty To Refund',
+            'refund-shipping'             => 'Refund Shipping',
+            'adjustment-refund'           => 'Adjustment Refund',
+            'adjustment-fee'              => 'Adjustment Fee',
+            'update-qty'                  => 'Update Quantities',
+            'invalid-qty'                 => 'We found an invalid quantity to refund items.',
+            'refund-limit-error'          => 'The most money available to refund is :amount.',
+            'refunded'                    => 'Refunded',
+            'date'                        => 'Refund Date',
+            'customer-name'               => 'Customer Name',
+            'status'                      => 'Status',
+            'action'                      => 'Action',
+            'view-title'                  => 'Refund #:refund_id',
+            'invalid-refund-amount-error' => 'Refund amount should be non zero.',
 
         ],
 
@@ -505,11 +506,11 @@ return [
             'created-at'          => 'Created At',
             'transaction-details' => 'Transaction Details',
             'response'            => [
-                'invoice-missing'    => 'This invoice id does not exist',
-                'transaction-saved'  => 'The transaction has been saved',
-                'already-paid'       => 'This invoice has already been paid'
-            ]
-        ]
+                'invoice-missing'   => 'This invoice id does not exist',
+                'transaction-saved' => 'The transaction has been saved',
+                'already-paid'      => 'This invoice has already been paid',
+            ],
+        ],
     ],
 
     'catalog' => [
@@ -598,62 +599,62 @@ return [
         ],
 
         'attributes' => [
-            'title'                => 'Attributes',
-            'add-title'            => 'Add Attribute',
-            'edit-title'           => 'Edit Attribute',
-            'save-btn-title'       => 'Save Attribute',
-            'general'              => 'General',
-            'code'                 => 'Attribute Code',
-            'type'                 => 'Attribute Type',
-            'text'                 => 'Text',
-            'textarea'             => 'Textarea',
-            'price'                => 'Price',
-            'boolean'              => 'Boolean',
-            'select'               => 'Select',
-            'multiselect'          => 'Multiselect',
-            'datetime'             => 'Datetime',
-            'date'                 => 'Date',
-            'label'                => 'Label',
-            'admin'                => 'Admin',
-            'options'              => 'Options',
-            'position'             => 'Position',
-            'add-option-btn-title' => 'Add Option',
+            'title'                       => 'Attributes',
+            'add-title'                   => 'Add Attribute',
+            'edit-title'                  => 'Edit Attribute',
+            'save-btn-title'              => 'Save Attribute',
+            'general'                     => 'General',
+            'code'                        => 'Attribute Code',
+            'type'                        => 'Attribute Type',
+            'text'                        => 'Text',
+            'textarea'                    => 'Textarea',
+            'price'                       => 'Price',
+            'boolean'                     => 'Boolean',
+            'select'                      => 'Select',
+            'multiselect'                 => 'Multiselect',
+            'datetime'                    => 'Datetime',
+            'date'                        => 'Date',
+            'label'                       => 'Label',
+            'admin'                       => 'Admin',
+            'options'                     => 'Options',
+            'position'                    => 'Position',
+            'add-option-btn-title'        => 'Add Option',
             'load-more-options-btn-title' => 'Load More Options',
-            'validations'          => 'Validations',
-            'input_validation'     => 'Input Validation',
-            'is_required'          => 'Is Required',
-            'is_unique'            => 'Is Unique',
-            'number'               => 'Number',
-            'decimal'              => 'Decimal',
-            'email'                => 'Email',
-            'url'                  => 'URL',
-            'configuration'        => 'Configuration',
-            'status'               => 'Status',
-            'yes'                  => 'Yes',
-            'no'                   => 'No',
-            'value_per_locale'     => 'Value Per Locale',
-            'value_per_channel'    => 'Value Per Channel',
-            'is_filterable'        => 'Use in Layered Navigation',
-            'is_configurable'      => 'Use To Create Configurable Product',
-            'admin_name'           => 'Admin Name',
-            'is_visible_on_front'  => 'Visible on Product View Page on Front-end',
-            'swatch_type'          => 'Swatch Type',
-            'dropdown'             => 'Dropdown',
-            'color-swatch'         => 'Color Swatch',
-            'image-swatch'         => 'Image Swatch',
-            'text-swatch'          => 'Text Swatch',
-            'swatch'               => 'Swatch',
-            'image'                => 'Image',
-            'file'                 => 'File',
-            'checkbox'             => 'Checkbox',
-            'use_in_flat'          => "Create in Product Flat Table",
-            'is_comparable'        => "Attribute is comparable",
-            'default_null_option'  => 'Create default empty option',
-            'validation-messages'          => [
-                'max-size' => 'The image size must be less than 600 KB'
-            ]
+            'validations'                 => 'Validations',
+            'input_validation'            => 'Input Validation',
+            'is_required'                 => 'Is Required',
+            'is_unique'                   => 'Is Unique',
+            'number'                      => 'Number',
+            'decimal'                     => 'Decimal',
+            'email'                       => 'Email',
+            'url'                         => 'URL',
+            'configuration'               => 'Configuration',
+            'status'                      => 'Status',
+            'yes'                         => 'Yes',
+            'no'                          => 'No',
+            'value_per_locale'            => 'Value Per Locale',
+            'value_per_channel'           => 'Value Per Channel',
+            'is_filterable'               => 'Use in Layered Navigation',
+            'is_configurable'             => 'Use To Create Configurable Product',
+            'admin_name'                  => 'Admin Name',
+            'is_visible_on_front'         => 'Visible on Product View Page on Front-end',
+            'swatch_type'                 => 'Swatch Type',
+            'dropdown'                    => 'Dropdown',
+            'color-swatch'                => 'Color Swatch',
+            'image-swatch'                => 'Image Swatch',
+            'text-swatch'                 => 'Text Swatch',
+            'swatch'                      => 'Swatch',
+            'image'                       => 'Image',
+            'file'                        => 'File',
+            'checkbox'                    => 'Checkbox',
+            'use_in_flat'                 => 'Create in Product Flat Table',
+            'is_comparable'               => 'Attribute is comparable',
+            'default_null_option'         => 'Create default empty option',
+            'validation-messages'         => [
+                'max-size' => 'The image size must be less than 600 KB',
+            ],
         ],
-        'families' => [
+        'families'   => [
             'title'                => 'Families',
             'add-family-btn-title' => 'Add Family',
             'add-title'            => 'Add Family',
@@ -669,7 +670,7 @@ return [
             'type'                 => 'Type',
             'add-attribute-title'  => 'Add Attributes',
             'search'               => 'Search',
-            'group-exist-error'    => 'Group with same name already exists.'
+            'group-exist-error'    => 'Group with same name already exists.',
         ],
         'categories' => [
             'title'                    => 'Categories',
@@ -697,7 +698,7 @@ return [
             'image'                    => 'Image',
             'filterable-attributes'    => 'Filterable Attributes',
             'attributes'               => 'Attributes',
-        ]
+        ],
     ],
 
     'configuration' => [
@@ -719,10 +720,10 @@ return [
             'code'            => 'Code',
             'description'     => 'Description',
             'select-taxrates' => 'Select Tax Rates',
-            'edit' => [
+            'edit'            => [
                 'title'             => 'Edit Tax Category',
-                'edit-button-title' => 'Edit Tax Category'
-            ]
+                'edit-button-title' => 'Edit Tax Category',
+            ],
         ],
 
         'tax-rates' => [
@@ -739,11 +740,11 @@ return [
             'select-state'   => 'Select a region, state or province.',
             'country'        => 'Country',
             'tax_rate'       => 'Rate',
-            'edit' => [
+            'edit'           => [
                 'title'             => 'Edit Tax Rate',
-                'edit-button-title' => 'Edit Rate'
+                'edit-button-title' => 'Edit Rate',
             ],
-            'zip_code' => 'Zip Code',
+            'zip_code'       => 'Zip Code',
         ],
 
         'sales' => [
@@ -752,13 +753,13 @@ return [
                 'save-btn-title' => 'Save',
                 'description'    => 'Description',
                 'active'         => 'Active',
-                'status'         => 'Status'
-            ]
-        ]
+                'status'         => 'Status',
+            ],
+        ],
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'title'             => 'Locales',
             'add-title'         => 'Add Locale',
             'edit-title'        => 'Edit Locale',
@@ -772,15 +773,15 @@ return [
             'delete-success'    => 'Locale deleted successfully.',
             'last-delete-error' => 'At least one Locale is required.',
         ],
-        'countries' => [
+        'countries'         => [
             'title'          => 'Countries',
             'add-title'      => 'Add Country',
             'save-btn-title' => 'Save Country',
             'general'        => 'General',
             'code'           => 'Code',
-            'name'           => 'Name'
+            'name'           => 'Name',
         ],
-        'currencies' => [
+        'currencies'        => [
             'title'             => 'Currencies',
             'add-title'         => 'Add Currency',
             'edit-title'        => 'Edit Currency',
@@ -794,7 +795,7 @@ return [
             'delete-success'    => 'Currency deleted successfully.',
             'last-delete-error' => 'At least one Currency is required.',
         ],
-        'exchange_rates' => [
+        'exchange_rates'    => [
             'title'                    => 'Exchange Rates',
             'add-title'                => 'Add Exchange Rate',
             'edit-title'               => 'Edit Exchange Rate',
@@ -840,7 +841,7 @@ return [
             'delete-success'    => 'Inventory source deleted successfully.',
             'last-delete-error' => 'At least one Inventory source is required.',
         ],
-        'channels' => [
+        'channels'          => [
             'title'                  => 'Channels',
             'add-title'              => 'Add Channel',
             'edit-title'             => 'Edit Channel',
@@ -874,7 +875,7 @@ return [
             'seo-keywords'           => 'Meta keywords',
             'maintenance-mode'       => 'Maintenance Mode',
             'maintenance-mode-text'  => 'Message',
-            'allowed-ips'            => 'Allowed IPs'
+            'allowed-ips'            => 'Allowed IPs',
         ],
 
         'sliders' => [
@@ -908,19 +909,19 @@ return [
             'code'            => 'Code',
             'description'     => 'Description',
             'select-taxrates' => 'Select Tax Rates',
-            'edit' => [
+            'edit'            => [
                 'title'             => 'Edit Tax Category',
-                'edit-button-title' => 'Edit Tax Category'
+                'edit-button-title' => 'Edit Tax Category',
             ],
-            'create-success' => 'New Tax Category Created',
-            'create-error'   => 'Error, While Creating Tax Category',
-            'update-success' => 'Successfully Updated Tax Category',
-            'update-error'   => 'Error While Updating Tax Category',
-            'atleast-one'    => 'Cannot Delete The Last Tax Category',
-            'delete'         => 'Tax Category Successfully Deleted'
+            'create-success'  => 'New Tax Category Created',
+            'create-error'    => 'Error, While Creating Tax Category',
+            'update-success'  => 'Successfully Updated Tax Category',
+            'update-error'    => 'Error While Updating Tax Category',
+            'atleast-one'     => 'Cannot Delete The Last Tax Category',
+            'delete'          => 'Tax Category Successfully Deleted',
         ],
 
-        'tax-rates' => [
+        'tax-rates'   => [
             'title'          => 'Tax Rates',
             'add-title'      => 'Create Tax Rate',
             'edit-title'     => 'Edit Tax Rate',
@@ -934,9 +935,9 @@ return [
             'select-state'   => 'Select a region, state or province.',
             'country'        => 'Country',
             'tax_rate'       => 'Rate',
-            'edit' => [
+            'edit'           => [
                 'title'             => 'Edit Tax Rate',
-                'edit-button-title' => 'Edit Rate'
+                'edit-button-title' => 'Edit Rate',
             ],
             'zip_code'       => 'Zip Code',
             'create-success' => 'Tax Rate Created Successfully',
@@ -944,11 +945,11 @@ return [
             'update-success' => 'Tax Rate Updated Successfully',
             'update-error'   => 'Error! Tax Rate Cannot Be Updated',
             'delete'         => 'Tax Rate Deleted Successfully',
-            'atleast-one'    => 'Cannot Delete Last Tax Rate'
+            'atleast-one'    => 'Cannot Delete Last Tax Rate',
         ],
         'development' => [
             'title' => 'Development',
-        ]
+        ],
     ],
 
     'customers' => [
@@ -960,7 +961,7 @@ return [
             'code'            => 'Code',
             'name'            => 'Name',
             'is_user_defined' => 'User Defined',
-            'yes'             => 'Yes'
+            'yes'             => 'Yes',
         ],
 
         'addresses' => [
@@ -998,7 +999,7 @@ return [
             'title'      => 'Add Note',
             'save-note'  => 'Save Note',
             'enter-note' => 'Enter Note',
-            'help-title' => 'Add Note On This Customer'
+            'help-title' => 'Add Note On This Customer',
         ],
 
         'customers' => [
@@ -1029,7 +1030,7 @@ return [
             'mass-update-success'       => 'Customers updated successfully',
             'status'                    => 'Status',
             'active'                    => 'Active',
-            'inactive'                  => 'Inactive'
+            'inactive'                  => 'Inactive',
         ],
 
         'reviews' => [
@@ -1040,7 +1041,7 @@ return [
             'comment'     => 'Comment',
             'pending'     => 'Pending',
             'approved'    => 'Approve',
-            'disapproved' => 'Disapprove'
+            'disapproved' => 'Disapprove',
         ],
 
         'subscribers' => [
@@ -1050,18 +1051,18 @@ return [
             'is_subscribed'  => 'Subscribed',
             'edit-btn-title' => 'Update Subscriber',
             'update-success' => 'Subscriber was successfully updated',
-            'update-failed' => 'Error! You cannot unsubscribe the subscriber',
-            'delete' => 'Subscriber was successfully deleted',
-            'delete-failed' => 'Error! Subscriber cannot be deleted',
             'update-failed'  => 'Error! You cannot unsubscribe the subscriber',
             'delete'         => 'Subscriber was successfully deleted',
-            'delete-failed'  => 'Error! Subscriber cannot be deleted'
+            'delete-failed'  => 'Error! Subscriber cannot be deleted',
+            'update-failed'  => 'Error! You cannot unsubscribe the subscriber',
+            'delete'         => 'Subscriber was successfully deleted',
+            'delete-failed'  => 'Error! Subscriber cannot be deleted',
         ],
 
         'orders' => [
             'list'  => ':customer_name\'s orders List',
-            'title' => 'Orders'
-        ]
+            'title' => 'Orders',
+        ],
     ],
 
     'promotions' => [
@@ -1152,26 +1153,26 @@ return [
         ],
 
         'catalog-rules' => [
-            'title'            => 'Catalog Rules',
-            'add-title'        => 'Add Catalog Rule',
-            'edit-title'       => 'Edit Catalog Rule',
-            'save-btn-title'   => 'Save Catalog Rule',
-            'rule-information' => 'Rule Information',
-            'name'             => 'Name',
-            'description'      => 'Description',
-            'status'           => 'Status',
-            'is-active'        => 'Catalog Rule is Active',
-            'channels'         => 'Channels',
-            'customer-groups'  => 'Customer Groups',
-            'no'               => 'No',
-            'yes'              => 'Yes',
-            'from'             => 'From',
-            'to'               => 'To',
-            'priority'         => 'Priority',
-            'conditions'       => 'Conditions',
-            'end-other-rules'  => 'End Other Rules',
-            'categories'       => 'Categories',
-            'attribute_family' => 'Attribute Family',
+            'title'                        => 'Catalog Rules',
+            'add-title'                    => 'Add Catalog Rule',
+            'edit-title'                   => 'Edit Catalog Rule',
+            'save-btn-title'               => 'Save Catalog Rule',
+            'rule-information'             => 'Rule Information',
+            'name'                         => 'Name',
+            'description'                  => 'Description',
+            'status'                       => 'Status',
+            'is-active'                    => 'Catalog Rule is Active',
+            'channels'                     => 'Channels',
+            'customer-groups'              => 'Customer Groups',
+            'no'                           => 'No',
+            'yes'                          => 'Yes',
+            'from'                         => 'From',
+            'to'                           => 'To',
+            'priority'                     => 'Priority',
+            'conditions'                   => 'Conditions',
+            'end-other-rules'              => 'End Other Rules',
+            'categories'                   => 'Categories',
+            'attribute_family'             => 'Attribute Family',
             'condition-type'               => 'Condition Type',
             'all-conditions-true'          => 'All Conditions are True',
             'any-condition-true'           => 'Any Condition is True',
@@ -1197,7 +1198,7 @@ return [
             'buy-x-get-y-free'             => 'Buy X Get Y Free',
             'discount-amount'              => 'Discount Amount',
             'mass-delete-success'          => 'All the selected index of coupons have been deleted successfully.',
-        ]
+        ],
     ],
 
     'marketing' => [
@@ -1258,8 +1259,8 @@ return [
             'create-success' => 'Event created successfully.',
             'update-success' => 'Event updated successfully.',
             'delete-success' => 'Event deleted successfully.',
-            'edit-error'     => 'Can not edit this event.'
-        ]
+            'edit-error'     => 'Can not edit this event.',
+        ],
     ],
 
     'error' => [
@@ -1271,31 +1272,31 @@ return [
             'page-title' => '404 Page not found',
             'name'       => '404',
             'title'      => 'Page Not found',
-            'message'    => 'The Page you are looking for does not exist or have been moved. Navigate using sidemenu.'
+            'message'    => 'The Page you are looking for does not exist or have been moved. Navigate using sidemenu.',
         ],
         '403' => [
             'page-title' => '403 forbidden Error',
             'name'       => '403',
             'title'      => 'Forbidden error',
-            'message'    => 'You do not have permission to access this page'
+            'message'    => 'You do not have permission to access this page',
         ],
         '500' => [
             'page-title' => '500 Internal Server Error',
             'name'       => '500',
             'title'      => 'Internal Server Error',
-            'message'    => 'The Server Encountered an internal error.'
+            'message'    => 'The Server Encountered an internal error.',
         ],
         '401' => [
             'page-title' => '401 Unauthorized Error',
             'name'       => '401',
             'title'      => 'Unauthorized Error',
-            'message'    => 'The request has not been applied because it lacks valid authentication credentials for the target resource.'
+            'message'    => 'The request has not been applied because it lacks valid authentication credentials for the target resource.',
         ],
 
         'tinymce' => [
             'http-error'    => 'HTTP error.',
             'invalid-json'  => 'Invalid JSON.',
-            'upload-failed' => 'Image upload failed due to a XHR Transport error.'
+            'upload-failed' => 'Image upload failed due to a XHR Transport error.',
         ],
     ],
 
@@ -1314,7 +1315,7 @@ return [
         'allowed-type'     => 'Allowed Type :',
         'file-type'        => 'csv, xls, xlsx.',
         'no-records'       => 'Nothing to export',
-        'illegal-format'   => 'Error! This type of format is either not supported or its illegal format'
+        'illegal-format'   => 'Error! This type of format is either not supported or its illegal format',
     ],
 
     'cms' => [
@@ -1347,8 +1348,8 @@ return [
             'one-col'          => '<div class="mt-10">Use class: <b>"static-container one-column"</b> for one column layout.</div>',
             'two-col'          => '<div class="mt-10">Use class: <b>"static-container two-column"</b> for two column layout.</div>',
             'three-col'        => '<div class="mt-10">Use class: <b>"static-container three-column"</b> for three column layout.</div>',
-            'helper-classes'   => 'Helper Classes'
-        ]
+            'helper-classes'   => 'Helper Classes',
+        ],
     ],
 
     'response' => [
@@ -1374,7 +1375,7 @@ return [
         'cancel-success'            => ':name canceled successfully.',
         'cancel-error'              => ':name can not be canceled.',
         'already-taken'             => 'The :name has already been taken.',
-        'order-pending'             => 'Cannot delete :name account because some Order(s) are pending or processing state.'
+        'order-pending'             => 'Cannot delete :name account because some Order(s) are pending or processing state.',
     ],
 
     'footer' => [
@@ -1385,7 +1386,7 @@ return [
         'emails' => [
             'email'              => 'Email',
             'notification_label' => 'Notifications',
-            'notifications' => [
+            'notifications'      => [
                 'verification'                                     => 'Send a verification e-mail after customer registration',
                 'registration'                                     => 'Send a confirmation e-mail after customer registration',
                 'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
@@ -1396,11 +1397,11 @@ return [
                 'new-refund'                                       => 'Send a notification e-mail after creating a refund',
                 'new-shipment'                                     => 'Send a notification e-mail after creating a shipment',
                 'new-inventory-source'                             => 'Send a notification e-email after creating a new inventory source',
-                'cancel-order'                                     => 'Send a notification after canceling an order'
+                'cancel-order'                                     => 'Send a notification after canceling an order',
             ],
 
         ],
-        'system' => [
+        'system'             => [
             'catalog'                               => 'Catalog',
             'homepage'                              => 'Homepage configuration',
             'allow-out-of-stock-items'              => 'Allow out of stock items',
@@ -1554,26 +1555,26 @@ return [
             'set-invoice-status'                    => 'Set the invoice status after creating the invoice to',
             'set-order-status'                      => 'Set the order status after creating the invoice to',
             'generate-invoice-applicable'           => 'Applicable if automatic generate invoice is enabled',
-            'records-found'                         => 'Record(s) found'
-        ]
-    ],
-    
-    'api' => [
-        'system'   => [
-            'api'                       => 'API',
-            'basic-configuration'       => 'Basic Configuration',
-            'customer-configuration'    => 'Customer Configuration',
-            'username'                  => 'Username',
-            'password'                  => 'Password',
-            'login-after-register'      => 'Login After Register',
-            'info-login'                => 'Info: Customer must be login after registration API.',
+            'records-found'                         => 'Record(s) found',
         ],
-        'auth'      => [
-            'invalid-auth'              => 'Warning: You are not authorized to use APIs.',
-            'required-token'            => 'Warning: token parameter is required.',
-            'invalid-store'             => 'Warning: You are requesting an invalid store.',
-            'login-required'            => 'Warning: Customer login is needed to add the product to compare list.',
-            'resource-not-found'        => 'Warning: Requested :resource not found in the record.',
-        ]
-    ]
+    ],
+
+    'api' => [
+        'system' => [
+            'api'                    => 'API',
+            'basic-configuration'    => 'Basic Configuration',
+            'customer-configuration' => 'Customer Configuration',
+            'username'               => 'Username',
+            'password'               => 'Password',
+            'login-after-register'   => 'Login After Register',
+            'info-login'             => 'Info: Customer must be login after registration API.',
+        ],
+        'auth'   => [
+            'invalid-auth'       => 'Warning: You are not authorized to use APIs.',
+            'required-token'     => 'Warning: token parameter is required.',
+            'invalid-store'      => 'Warning: You are requesting an invalid store.',
+            'login-required'     => 'Warning: Customer login is needed to add the product to compare list.',
+            'resource-not-found' => 'Warning: Requested :resource not found in the record.',
+        ],
+    ],
 ];
