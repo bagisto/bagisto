@@ -137,7 +137,7 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    function print($id) {
+    public function print($id) {
         $invoice = $this->invoiceRepository->findOrFail($id);
 
         $html = view('admin::sales.invoices.pdf', compact('invoice'))->render();
