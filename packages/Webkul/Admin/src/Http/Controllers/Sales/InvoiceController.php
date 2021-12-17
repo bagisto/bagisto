@@ -99,17 +99,14 @@ class InvoiceController extends Controller
 
         $data = request()->all();
 
-        $haveProductToInvoice = false;
+        if (! $this->invoiceRepository->haveProductToInvoice($data)) {
+            session()->flash('error', trans('admin::app.sales.invoices.product-error'));
 
-        foreach ($data['invoice']['items'] as $itemId => $qty) {
-            if ($qty) {
-                $haveProductToInvoice = true;
-                break;
-            }
+            return redirect()->back();
         }
 
-        if (! $haveProductToInvoice) {
-            session()->flash('error', trans('admin::app.sales.invoices.product-error'));
+        if (! $this->invoiceRepository->isValidQuantity($data)) {
+            session()->flash('error', trans('admin::app.sales.invoices.invalid-qty'));
 
             return redirect()->back();
         }
@@ -140,8 +137,7 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function print($id)
-    {
+    function print($id) {
         $invoice = $this->invoiceRepository->findOrFail($id);
 
         $html = view('admin::sales.invoices.pdf', compact('invoice'))->render();
@@ -165,7 +161,7 @@ class InvoiceController extends Controller
 
         for ($i = count($p) - 1; $i >= 0; $i -= 2) {
             $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i - 1], $p[$i] - $p[$i - 1]));
-            $html   = substr_replace($html, $utf8ar, $p[$i - 1], $p[$i] - $p[$i - 1]);
+            $html = substr_replace($html, $utf8ar, $p[$i - 1], $p[$i] - $p[$i - 1]);
         }
 
         return $html;
