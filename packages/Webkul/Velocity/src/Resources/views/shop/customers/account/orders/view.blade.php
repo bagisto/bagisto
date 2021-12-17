@@ -306,7 +306,7 @@
                                                     <td>{{ core()->formatPrice($invoice->shipping_amount, $order->order_currency_code) }}</td>
                                                 </tr>
 
-                                                @if ($order->base_discount_amount > 0)
+                                                @if ($invoice->base_discount_amount > 0)
                                                     <tr>
                                                         <td>{{ __('shop::app.customer.account.order.view.discount') }}
                                                             <span class="dash-icon">-</span>
