@@ -311,7 +311,7 @@
                                                         <td>{{ __('shop::app.customer.account.order.view.discount') }}
                                                             <span class="dash-icon">-</span>
                                                         </td>
-                                                        <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
+                                                        <td>{{ core()->formatPrice($invoice->discount_amount, $order->order_currency_code) }}</td>
                                                     </tr>
                                                 @endif
 
