@@ -52,6 +52,7 @@
 
                 <div>
                     @include('shop::products.add-to-cart', [
+                        'reloadPage'        => true,
                         'addWishlistClass'  => 'pl10',
                         'product'           => $item->product,
                         'addToCartBtnClass' => 'medium-padding',
