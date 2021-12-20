@@ -31,8 +31,8 @@
      * @param {!string} method
      * @param {!string} csrfToken
      */
-    function submitWishlistForm(action, method, csrfToken) {
-        if (! confirm('{{ __('shop::app.checkout.cart.cart-remove-action') }}')) return;
+    function submitWishlistForm(action, method, isConfirm, csrfToken) {
+        if (isConfirm && ! confirm('{{ __('shop::app.checkout.cart.cart-remove-action') }}')) return;
 
         let form = document.createElement('form');
             form.method = 'POST';
