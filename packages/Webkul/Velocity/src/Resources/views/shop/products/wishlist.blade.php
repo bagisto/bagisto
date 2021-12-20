@@ -13,6 +13,9 @@
             /* method */
             $method = isset($route) ? 'POST' : ( $wishlist ? 'DELETE' : 'POST' );
 
+            /* is confirmation needed */
+            $isConfirm = isset($route) ? 'true' : 'false';
+
             /* title */
             $title = $wishlist ? __('velocity::app.shop.wishlist.remove-wishlist-text') : __('velocity::app.shop.wishlist.add-wishlist-text');
         @endphp
@@ -24,6 +27,7 @@
             onclick="submitWishlistForm(
                 '{{ $href }}',
                 '{{ $method }}',
+                {{ $isConfirm }},
                 '{{ csrf_token() }}'
             )"
         >
