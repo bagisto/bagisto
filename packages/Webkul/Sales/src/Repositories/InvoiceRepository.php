@@ -234,8 +234,8 @@ class InvoiceRepository extends Repository
      */
     public function haveProductToInvoice(array $data): bool
     {
-        foreach ($data['invoice']['items'] as $itemId => $qty) {
-            if ($qty) {
+        foreach ($data['invoice']['items'] as $qty) {
+            if ((int) $qty) {
                 return true;
             }
         }
