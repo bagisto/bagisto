@@ -17,12 +17,6 @@
             tinymce.init({
                 ...config,
 
-                relative_urls : false,
-                remove_script_host : true,
-                document_base_url : '{{ asset('/') }}',
-                uploadRoute: '{{ route('admin.tinymce.upload') }}',
-                csrfToken: '{{ csrf_token() }}',
-
                 file_picker_callback: function(cb, value, meta) {
                     self.filePickerCallback(config, cb, value, meta);
                 },
