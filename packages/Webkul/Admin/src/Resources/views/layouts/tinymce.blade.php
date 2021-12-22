@@ -2,8 +2,17 @@
 
 <script>
     let tinyMCEHelper = {
-        initTinyMCE: function (config) {
+        initTinyMCE: function (extraConfiguration) {
             let self = this;
+
+            let config = {
+                relative_urls : false,
+                remove_script_host : true,
+                document_base_url : '{{ asset('/') }}',
+                uploadRoute: '{{ route('admin.tinymce.upload') }}',
+                csrfToken: '{{ csrf_token() }}',
+                ...extraConfiguration,
+            };
 
             tinymce.init({
                 ...config,
