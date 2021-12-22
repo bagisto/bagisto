@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Models\CategoryProxy;
 use Webkul\Core\Eloquent\TranslatableModel;
@@ -133,9 +134,9 @@ class Channel extends TranslatableModel implements ChannelContract
     /**
      * Create a new factory instance for the model
      *
-     * @return ChannelFactory
+     * @return Factory
      */
-    protected static function newFactory(): ChannelFactory
+    protected static function newFactory(): Factory
     {
         return ChannelFactory::new();
     }

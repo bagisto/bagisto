@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -93,9 +94,9 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
     /**
      * Create a new factory instance for the model.
      *
-     * @return ProductDownloadableLinkFactory
+     * @return Factory
      */
-    protected static function newFactory(): ProductDownloadableLinkFactory
+    protected static function newFactory(): Factory
     {
         return ProductDownloadableLinkFactory::new();
     }

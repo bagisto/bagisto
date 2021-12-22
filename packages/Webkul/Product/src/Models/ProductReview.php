@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Customer\Models\CustomerProxy;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -51,9 +52,9 @@ class ProductReview extends Model implements ProductReviewContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return ProductReviewFactory
+     * @return Factory
      */
-    protected static function newFactory(): ProductReviewFactory
+    protected static function newFactory(): Factory
     {
         return ProductReviewFactory::new();
     }

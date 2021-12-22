@@ -2,6 +2,7 @@
 
 namespace Webkul\Tax\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Tax\Database\Factories\TaxRateFactory;
 use Webkul\Tax\Contracts\TaxRate as TaxRateContract;
@@ -39,9 +40,9 @@ class TaxRate extends Model implements TaxRateContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return TaxRateFactory
+     * @return Factory
      */
-    protected static function newFactory(): TaxRateFactory
+    protected static function newFactory(): Factory
     {
         return TaxRateFactory::new();
     }

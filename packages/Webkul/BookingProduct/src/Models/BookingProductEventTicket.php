@@ -2,6 +2,7 @@
 
 namespace Webkul\BookingProduct\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\BookingProduct\Database\Factories\BookingProductEventTicketFactory;
@@ -30,9 +31,9 @@ class BookingProductEventTicket extends TranslatableModel implements BookingProd
     /**
      * Create a new factory instance for the model.
      *
-     * @return BookingProductEventTicketFactory
+     * @return Factory
      */
-    protected static function newFactory(): BookingProductEventTicketFactory
+    protected static function newFactory(): Factory
     {
         return BookingProductEventTicketFactory::new();
     }

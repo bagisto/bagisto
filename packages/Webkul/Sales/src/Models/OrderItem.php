@@ -2,6 +2,7 @@
 
 namespace Webkul\Sales\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Product\Type\AbstractType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -226,9 +227,9 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return OrderItemFactory
+     * @return Factory
      */
-    protected static function newFactory(): OrderItemFactory
+    protected static function newFactory(): Factory
     {
         return OrderItemFactory::new();
     }

@@ -2,6 +2,7 @@
 
 namespace Webkul\Attribute\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Product\Models\ProductProxy;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -82,7 +83,12 @@ class AttributeFamily extends Model implements AttributeFamilyContract
         return $this->hasMany(ProductProxy::modelClass());
     }
 
-    protected static function newFactory(): AttributeFamilyFactory
+    /**
+     * Create a new factory instance for the model
+     *
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
     {
         return AttributeFamilyFactory::new();
     }

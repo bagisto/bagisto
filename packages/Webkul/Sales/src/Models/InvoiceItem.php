@@ -2,6 +2,7 @@
 
 namespace Webkul\Sales\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Product\Type\AbstractType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -87,9 +88,9 @@ class InvoiceItem extends Model implements InvoiceItemContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return InvoiceItemFactory
+     * @return Factory
      */
-    protected static function newFactory(): InvoiceItemFactory
+    protected static function newFactory(): Factory
     {
         return InvoiceItemFactory::new();
     }

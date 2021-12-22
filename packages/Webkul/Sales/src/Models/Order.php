@@ -2,6 +2,7 @@
 
 namespace Webkul\Sales\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Checkout\Models\CartProxy;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\Order as OrderContract;
@@ -273,7 +274,7 @@ class Order extends Model implements OrderContract
 
         return false;
     }
-    
+
     /**
      * Verify if a invoice is still unpaid
      *
@@ -360,9 +361,9 @@ class Order extends Model implements OrderContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return OrderFactory
+     * @return Factory
      */
-    protected static function newFactory(): OrderFactory
+    protected static function newFactory(): Factory
     {
         return OrderFactory::new();
     }

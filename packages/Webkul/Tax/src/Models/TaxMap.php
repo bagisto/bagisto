@@ -2,6 +2,7 @@
 
 namespace Webkul\Tax\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Tax\Database\Factories\TaxMapFactory;
 use Webkul\Tax\Contracts\TaxMap as TaxMapContract;
@@ -27,9 +28,9 @@ class TaxMap extends Model implements TaxMapContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return TaxMapFactory
+     * @return Factory
      */
-    protected static function newFactory(): TaxMapFactory
+    protected static function newFactory(): Factory
     {
         return TaxMapFactory::new();
     }

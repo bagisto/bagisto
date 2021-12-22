@@ -3,6 +3,7 @@
 namespace Webkul\Customer\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Core\Models\Address;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Customer\Database\Factories\CustomerAddressFactory;
@@ -38,9 +39,9 @@ class CustomerAddress extends Address implements CustomerAddressContract
     /**
      * Create a new factory instance for the model
      *
-     * @return CustomerAddressFactory
+     * @return Factory
      */
-    protected static function newFactory(): CustomerAddressFactory
+    protected static function newFactory(): Factory
     {
         return CustomerAddressFactory::new();
     }
