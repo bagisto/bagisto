@@ -630,7 +630,6 @@ class Configurable extends AbstractType
                 'sku'        => $childProduct->sku,
                 'name'       => $childProduct->name,
                 'type'       => $childProduct->type,
-                'quantity'   => $data['quantity'],
                 'additional' => [
                     'product_id' => (int) $data['selected_configurable_option'],
                     'parent_id'  => $this->product->id,
