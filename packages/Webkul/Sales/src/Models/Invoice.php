@@ -2,6 +2,7 @@
 
 namespace Webkul\Sales\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -91,9 +92,9 @@ class Invoice extends Model implements InvoiceContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return InvoiceFactory
+     * @return Factory
      */
-    protected static function newFactory(): InvoiceFactory
+    protected static function newFactory(): Factory
     {
         return InvoiceFactory::new();
     }

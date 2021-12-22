@@ -2,6 +2,7 @@
 
 namespace Webkul\Sales\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Core\Models\Address;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -73,9 +74,9 @@ class OrderAddress extends Address implements OrderAddressContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return OrderAddressFactory
+     * @return Factory
      */
-    protected static function newFactory(): OrderAddressFactory
+    protected static function newFactory(): Factory
     {
         return OrderAddressFactory::new();
     }

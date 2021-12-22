@@ -2,6 +2,7 @@
 
 namespace Webkul\Attribute\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,7 +52,12 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
         return $this->swatch_value_url();
     }
 
-    protected static function newFactory(): AttributeOptionFactory
+    /**
+     * Create a new factory instance for the model
+     *
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
     {
         return AttributeOptionFactory::new();
     }

@@ -3,6 +3,7 @@
 namespace Webkul\Product\Models;
 
 use Exception;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Attribute\Models\AttributeFamilyProxy;
@@ -534,9 +535,9 @@ class Product extends Model implements ProductContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return ProductFactory
+     * @return Factory
      */
-    protected static function newFactory(): ProductFactory
+    protected static function newFactory(): Factory
     {
         return ProductFactory::new();
     }

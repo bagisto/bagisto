@@ -2,6 +2,7 @@
 
 namespace Webkul\Sales\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Sales\Database\Factories\OrderPaymentFactory;
@@ -26,9 +27,9 @@ class OrderPayment extends Model implements OrderPaymentContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return OrderPaymentFactory
+     * @return Factory
      */
-    protected static function newFactory(): OrderPaymentFactory
+    protected static function newFactory(): Factory
     {
         return OrderPaymentFactory::new();
     }

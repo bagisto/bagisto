@@ -2,6 +2,7 @@
 
 namespace Webkul\Tax\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Tax\Database\Factories\TaxCategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,9 +37,9 @@ class TaxCategory extends Model implements TaxCategoryContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return TaxCategoryFactory
+     * @return Factory
      */
-    protected static function newFactory(): TaxCategoryFactory
+    protected static function newFactory(): Factory
     {
         return TaxCategoryFactory::new();
     }

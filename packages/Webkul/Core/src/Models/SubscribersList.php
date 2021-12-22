@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Customer\Models\CustomerProxy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,9 +43,9 @@ class SubscribersList extends Model implements SubscribersListContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return SubscriberListFactory
+     * @return Factory
      */
-    protected static function newFactory(): SubscriberListFactory
+    protected static function newFactory(): Factory
     {
         return SubscriberListFactory::new();
     }

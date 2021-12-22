@@ -2,6 +2,7 @@
 
 namespace Webkul\Sales\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Database\Factories\RefundFactory;
 use Webkul\Sales\Contracts\Refund as RefundContract;
@@ -74,9 +75,9 @@ class Refund extends Model implements RefundContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return RefundFactory
+     * @return Factory
      */
-    protected static function newFactory(): RefundFactory
+    protected static function newFactory(): Factory
     {
         return RefundFactory::new();
     }

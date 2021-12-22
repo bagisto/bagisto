@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Database\Factories\LocaleFactory;
 use Webkul\Core\Contracts\Locale as LocaleContract;
@@ -25,9 +26,9 @@ class Locale extends Model implements LocaleContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return LocaleFactory
+     * @return Factory
      */
-    protected static function newFactory(): LocaleFactory
+    protected static function newFactory(): Factory
     {
         return LocaleFactory::new();
     }
