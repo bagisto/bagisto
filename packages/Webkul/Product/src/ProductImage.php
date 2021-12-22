@@ -53,12 +53,21 @@ class ProductImage extends AbstractProduct
                 continue;
             }
 
-            $images[] = [
-                'small_image_url'    => url('cache/small/' . $image->path),
-                'medium_image_url'   => url('cache/medium/' . $image->path),
-                'large_image_url'    => url('cache/large/' . $image->path),
-                'original_image_url' => url('cache/original/' . $image->path),
-            ];
+            if (in_array(config('filesystems.default'),['s3', 'minio'])) {
+                $images[] = [
+                    'small_image_url'    => Storage::url($image->path),
+                    'medium_image_url'   => Storage::url($image->path),
+                    'large_image_url'    => Storage::url($image->path),
+                    'original_image_url' => Storage::url($image->path),
+                ];
+            } else {
+                $images[] = [
+                    'small_image_url'    => url('cache/small/' . $image->path),
+                    'medium_image_url'   => url('cache/medium/' . $image->path),
+                    'large_image_url'    => url('cache/large/' . $image->path),
+                    'original_image_url' => url('cache/original/' . $image->path),
+                ];
+            }
         }
 
         if (! $product->parent_id && ! count($images) && ! count($product->videos)) {
@@ -137,12 +146,22 @@ class ProductImage extends AbstractProduct
         $images = $product ? $product->images : null;
 
         if ($images && $images->count()) {
-            $image = [
-                'small_image_url'    => url('cache/small/' . $images[0]->path),
-                'medium_image_url'   => url('cache/medium/' . $images[0]->path),
-                'large_image_url'    => url('cache/large/' . $images[0]->path),
-                'original_image_url' => url('cache/original/' . $images[0]->path),
-            ];
+
+            if (in_array(config('filesystems.default'),['s3', 'minio'])) {
+                $image[] = [
+                    'small_image_url'    => Storage::url($images[0]->path),
+                    'medium_image_url'   => Storage::url($images[0]->path),
+                    'large_image_url'    => Storage::url($images[0]->path),
+                    'original_image_url' => Storage::url($images[0]->path),
+                ];
+            } else {
+                $image[] = [
+                    'small_image_url'    => url('cache/small/' . $images[0]->path),
+                    'medium_image_url'   => url('cache/medium/' . $images[0]->path),
+                    'large_image_url'    => url('cache/large/' . $images[0]->path),
+                    'original_image_url' => url('cache/original/' . $images[0]->path),
+                ];
+            }
         } else {
             $image = [
                 'small_image_url'    => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.webp'),
