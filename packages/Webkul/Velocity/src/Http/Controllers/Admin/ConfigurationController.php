@@ -156,9 +156,9 @@ class ConfigurationController extends Controller
                         if (isset($data[$filter_index])) {
                             $size = array_key_last($saveData[$index]);
 
-                            $saveImage[$size + 1] = $path = request()->file($file)->store($dir);
+                            $saveImage[$size + 1] = $path = request()->file($file)->store($dir, config('filesystems.default'));
                         } else {
-                            $saveImage[substr($imageId, 6, 1)] = $path = request()->file($file)->store($dir);
+                            $saveImage[substr($imageId, 6, 1)] = $path = request()->file($file)->store($dir, config('filesystems.default'));
                         }
 
                         $this->sanitizeSVG($path, $image->getMimeType());
@@ -173,7 +173,7 @@ class ConfigurationController extends Controller
                     if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
                         Storage::delete($advertisement[$index][$imageId]);
 
-                        $saveImage[$imageId] = request()->file($file)->store($dir);
+                        $saveImage[$imageId] = request()->file($file)->store($dir, config('filesystems.default'));
                     }
                 }
             } else {
@@ -217,9 +217,9 @@ class ConfigurationController extends Controller
                                         $saveImage[$subIndex] = $copyAdImage;
                                     }
                                     break;
-                                
+
                                 default:
-                                    
+
                                     break;
                             }
                         } elseif ( $index == 3 ) {
@@ -244,7 +244,7 @@ class ConfigurationController extends Controller
                                     break;
 
                                 default:
-                                    
+
                                     break;
                             }
                         } elseif ( $index == 2 ) {
@@ -263,7 +263,7 @@ class ConfigurationController extends Controller
                                     break;
 
                                 default:
-                                    
+
                                     break;
                             }
                         }
@@ -282,7 +282,7 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Copy the default adversise images 
+     * Copy the default adversise images
      *
      * @param  string  $resourceImagePath
      * @param  string  $copiedPath

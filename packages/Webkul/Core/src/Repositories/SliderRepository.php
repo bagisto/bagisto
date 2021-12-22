@@ -74,7 +74,7 @@ class SliderRepository extends Repository
         }
 
         if ($image != false) {
-            $uploaded = $image->store($dir);
+            $uploaded = $image->store($dir, config('filesystems.default'));
 
             unset($data['image'], $data['_token']);
         }
@@ -116,7 +116,7 @@ class SliderRepository extends Repository
         }
 
         if ($image != false) {
-            $uploaded = $image->store($dir);
+            $uploaded = $image->store($dir, config('filesystems.default'));
 
             unset($data['image'], $data['_token']);
         }

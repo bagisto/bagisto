@@ -52,7 +52,7 @@ class SearchRepository extends Repository
      */
     public function uploadSearchImage($data)
     {
-        $path = request()->file('image')->store('product-search');
+        $path = request()->file('image')->store('product-search', config('filesystems.default'));
 
         $this->sanitizeSVG($path, $data['image']->getMimeType());
 

@@ -241,7 +241,7 @@ class CategoryRepository extends Repository
                         Storage::delete($category->{$type});
                     }
 
-                    $category->{$type} = $request->file($file)->store($dir);
+                    $category->{$type} = $request->file($file)->store($dir, config('filesystems.default'));
                     $category->save();
                 }
             }

@@ -94,7 +94,7 @@ class ChannelRepository extends Repository
                         Storage::delete($channel->{$type});
                     }
 
-                    $channel->{$type} = request()->file($file)->store($dir);
+                    $channel->{$type} = request()->file($file)->store($dir, config('filesystems.default'));
                     $channel->save();
                 }
             }

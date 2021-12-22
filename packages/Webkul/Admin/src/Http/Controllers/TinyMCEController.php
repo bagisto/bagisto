@@ -40,7 +40,7 @@ class TinyMCEController extends Controller
     {
         if (request()->hasFile('file')) {
             return [
-                'file'      => $path = request()->file('file')->store($this->storagePath),
+                'file'      => $path = request()->file('file')->store($this->storagePath, config('filesystems.default')),
                 'file_name' => request()->file('file')->getClientOriginalName(),
                 'file_url'  => Storage::url($path),
             ];

@@ -247,7 +247,7 @@ abstract class AbstractType
 
             if ($attribute->type === 'image' || $attribute->type === 'file') {
                 $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
-                    ? request()->file($attribute->code)->store('product/' . $product->id)
+                    ? request()->file($attribute->code)->store('product/' . $product->id, config('filesystems.default'))
                     : null;
             }
 

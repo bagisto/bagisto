@@ -71,7 +71,7 @@ class CustomerRepository extends Repository
                         Storage::delete($customer->{$type});
                     }
 
-                    $customer->{$type} = $request->file($file)->store($dir);
+                    $customer->{$type} = $request->file($file)->store($dir, config('filesystems.default'));
                     $customer->save();
                 }
             }

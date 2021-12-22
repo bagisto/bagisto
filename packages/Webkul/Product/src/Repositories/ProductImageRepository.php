@@ -84,7 +84,7 @@ class ProductImageRepository extends Repository
             foreach ($images as $imageId => $image) {
                 if ($image instanceof UploadedFile) {
                     $this->create([
-                        'path'       => $image->store($this->getProductDirectory($product)),
+                        'path'       => $image->store($this->getProductDirectory($product), config('filesystems.default')),
                         'product_id' => $product->id,
                     ]);
                 } else {

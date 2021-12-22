@@ -36,7 +36,7 @@ class ProductVideoRepository extends Repository
                 if ($video instanceof UploadedFile) {
                     if (request()->hasFile($file)) {
                         $this->create([
-                            'path'       => request()->file($file)->store($dir),
+                            'path'       => request()->file($file)->store($dir, config('filesystems.default')),
                             'product_id' => $product->id,
                             'type'       => 'video'
                         ]);

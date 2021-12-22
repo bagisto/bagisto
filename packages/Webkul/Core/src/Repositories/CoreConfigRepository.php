@@ -79,7 +79,7 @@ class CoreConfigRepository extends Repository
                 }
 
                 if (request()->hasFile($fieldName)) {
-                    $value = request()->file($fieldName)->store('configuration');
+                    $value = request()->file($fieldName)->store('configuration', config('filesystems.default'));
                 }
 
                 if (! count($coreConfigValue)) {

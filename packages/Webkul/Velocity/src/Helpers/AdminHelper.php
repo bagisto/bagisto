@@ -87,7 +87,7 @@ class AdminHelper
                         Storage::delete($model->{$type});
                     }
 
-                    $model->{$type} = $request->file($file)->store($dir);
+                    $model->{$type} = $request->file($file)->store($dir, config('filesystems.default'));
                     $model->save();
                 }
             }
