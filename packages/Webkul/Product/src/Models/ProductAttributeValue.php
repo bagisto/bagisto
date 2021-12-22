@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Attribute\Models\AttributeProxy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -77,9 +78,9 @@ class ProductAttributeValue extends Model implements ProductAttributeValueContra
     /**
      * Create a new factory instance for the model.
      *
-     * @return ProductAttributeValueFactory
+     * @return Factory
      */
-    protected static function newFactory(): ProductAttributeValueFactory
+    protected static function newFactory(): Factory
     {
         return ProductAttributeValueFactory::new();
     }

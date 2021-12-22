@@ -2,6 +2,7 @@
 
 namespace Webkul\Checkout\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Checkout\Contracts\Cart as CartContract;
 use Webkul\Checkout\Database\Factories\CartFactory;
@@ -203,9 +204,9 @@ class Cart extends Model implements CartContract
     /**
      * Create a new factory instance for the model
      *
-     * @return CartFactory
+     * @return Factory
      */
-    protected static function newFactory(): CartFactory
+    protected static function newFactory(): Factory
     {
         return CartFactory::new();
     }

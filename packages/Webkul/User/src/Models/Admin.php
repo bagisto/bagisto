@@ -2,6 +2,7 @@
 
 namespace Webkul\User\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -78,9 +79,9 @@ class Admin extends Authenticatable implements AdminContract, JWTSubject
     /**
      * Create a new factory instance for the model.
      *
-     * @return AdminFactory
+     * @return Factory
      */
-    protected static function newFactory(): AdminFactory
+    protected static function newFactory(): Factory
     {
         return AdminFactory::new();
     }

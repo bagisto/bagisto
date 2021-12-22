@@ -3,6 +3,7 @@
 namespace Webkul\Attribute\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -61,9 +62,9 @@ class Attribute extends TranslatableModel implements AttributeContract
     /**
      * Create a new factory instance for the model
      *
-     * @return AttributeFactory
+     * @return Factory
      */
-    protected static function newFactory(): AttributeFactory
+    protected static function newFactory(): Factory
     {
         return AttributeFactory::new();
     }

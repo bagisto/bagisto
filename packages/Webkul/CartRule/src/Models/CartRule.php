@@ -2,6 +2,7 @@
 
 namespace Webkul\CartRule\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Database\Factories\CartRuleFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -133,9 +134,9 @@ class CartRule extends Model implements CartRuleContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return CartRuleFactory
+     * @return Factory
      */
-    protected static function newFactory(): CartRuleFactory
+    protected static function newFactory(): Factory
     {
         return CartRuleFactory::new();
     }

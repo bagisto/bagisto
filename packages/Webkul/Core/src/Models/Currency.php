@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webkul\Core\Database\Factories\CurrencyFactory;
@@ -46,9 +47,9 @@ class Currency extends Model implements CurrencyContract
     /**
      * Create a new factory instance for the model.
      *
-     * @return CurrencyFactory
+     * @return Factory
      */
-    protected static function newFactory(): CurrencyFactory
+    protected static function newFactory(): Factory
     {
         return CurrencyFactory::new();
     }

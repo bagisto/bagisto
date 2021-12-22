@@ -2,6 +2,7 @@
 
 namespace Webkul\Checkout\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Models\ProductFlatProxy;
@@ -86,9 +87,9 @@ class CartItem extends Model implements CartItemContract
     /**
      * Create a new factory instance for the model
      *
-     * @return CartItemFactory
+     * @return Factory
      */
-    protected static function newFactory(): CartItemFactory
+    protected static function newFactory(): Factory
     {
         return CartItemFactory::new();
     }
