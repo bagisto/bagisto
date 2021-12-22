@@ -148,14 +148,14 @@ class ProductImage extends AbstractProduct
         if ($images && $images->count()) {
 
             if (in_array(config('filesystems.default'),['s3', 'minio'])) {
-                $image[] = [
+                $image = [
                     'small_image_url'    => Storage::url($images[0]->path),
                     'medium_image_url'   => Storage::url($images[0]->path),
                     'large_image_url'    => Storage::url($images[0]->path),
                     'original_image_url' => Storage::url($images[0]->path),
                 ];
             } else {
-                $image[] = [
+                $image = [
                     'small_image_url'    => url('cache/small/' . $images[0]->path),
                     'medium_image_url'   => url('cache/medium/' . $images[0]->path),
                     'large_image_url'    => url('cache/large/' . $images[0]->path),
