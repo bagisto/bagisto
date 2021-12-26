@@ -137,7 +137,7 @@ class ConfigurationController extends Controller
 
         $config = $this->coreConfigRepository->findOneByField('value', $fileName);
 
-        return Storage::download($config['value']);
+        return Storage::disk(config('bagisto_filesystem.default'))->download($config['value']);
     }
 
     /**

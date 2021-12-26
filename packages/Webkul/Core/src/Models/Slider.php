@@ -49,7 +49,7 @@ class Slider extends Model implements SliderContract
             return '';
         }
 
-        return Storage::url($this->path);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->path);
     }
 
     /**
@@ -61,7 +61,7 @@ class Slider extends Model implements SliderContract
     {
         return $this->image_url();
     }
-    
+
     /**
      * Get the slider channel name associated with the channel.
      */

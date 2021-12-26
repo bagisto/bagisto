@@ -91,16 +91,16 @@ class ChannelRepository extends Repository
 
                 if (request()->hasFile($file)) {
                     if ($channel->{$type}) {
-                        Storage::delete($channel->{$type});
+                        Storage::disk(config('bagisto_filesystem.default'))->delete($channel->{$type});
                     }
 
-                    $channel->{$type} = request()->file($file)->store($dir, config('filesystems.default'));
+                    $channel->{$type} = request()->file($file)->store($dir, config('bagisto_filesystem.default'));
                     $channel->save();
                 }
             }
         } else {
             if ($channel->{$type}) {
-                Storage::delete($channel->{$type});
+                Storage::disk(config('bagisto_filesystem.default'))->delete($channel->{$type});
             }
 
             $channel->{$type} = null;

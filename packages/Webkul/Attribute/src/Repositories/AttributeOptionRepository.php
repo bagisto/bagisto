@@ -58,7 +58,7 @@ class AttributeOptionRepository extends Repository
 
         if ($data['swatch_value'] instanceof \Illuminate\Http\UploadedFile) {
             parent::update([
-                'swatch_value' => $data['swatch_value']->store('attribute_option', config('filesystems.default')),
+                'swatch_value' => $data['swatch_value']->store('attribute_option', config('bagisto_filesystem.default')),
             ], $optionId);
         }
     }

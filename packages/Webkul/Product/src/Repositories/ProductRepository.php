@@ -879,8 +879,8 @@ class ProductRepository extends Repository
 
         $copiedProductImageVideo->save();
 
-        Storage::makeDirectory('product/' . $copiedProduct->id);
+        Storage::disk(config('bagisto_filesystem.default'))->makeDirectory('product/' . $copiedProduct->id);
 
-        Storage::copy($data->path, $copiedProductImageVideo->path);
+        Storage::disk(config('bagisto_filesystem.default'))->copy($data->path, $copiedProductImageVideo->path);
     }
 }

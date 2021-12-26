@@ -79,7 +79,7 @@ class CoreConfigRepository extends Repository
                 }
 
                 if (request()->hasFile($fieldName)) {
-                    $value = request()->file($fieldName)->store('configuration', config('filesystems.default'));
+                    $value = request()->file($fieldName)->store('configuration', config('bagisto_filesystem.default'));
                 }
 
                 if (! count($coreConfigValue)) {
@@ -92,7 +92,7 @@ class CoreConfigRepository extends Repository
                 } else {
                     foreach ($coreConfigValue as $coreConfig) {
                         if (request()->hasFile($fieldName)) {
-                            Storage::delete($coreConfig['value']);
+                            Storage::disk(config('bagisto_filesystem.default'))->delete($coreConfig['value']);
                         }
 
                         if (isset($value['delete'])) {

@@ -55,7 +55,7 @@ class Category extends TranslatableModel implements CategoryContract
             return;
         }
 
-        return Storage::url($this->image);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->image);
     }
 
     /**

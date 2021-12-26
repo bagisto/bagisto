@@ -247,7 +247,7 @@ abstract class AbstractType
 
             if ($attribute->type === 'image' || $attribute->type === 'file') {
                 $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
-                    ? request()->file($attribute->code)->store('product/' . $product->id, config('filesystems.default'))
+                    ? request()->file($attribute->code)->store('product/' . $product->id, config('bagisto_filesystem.default'))
                     : null;
             }
 
@@ -275,7 +275,7 @@ abstract class AbstractType
                 );
 
                 if ($attribute->type == 'image' || $attribute->type == 'file') {
-                    Storage::delete($attributeValue->text_value);
+                    Storage::disk(config('bagisto_filesystem.default'))->delete($attributeValue->text_value);
                 }
             }
         }

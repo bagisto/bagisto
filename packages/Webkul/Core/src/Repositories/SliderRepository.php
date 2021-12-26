@@ -74,7 +74,7 @@ class SliderRepository extends Repository
         }
 
         if ($image != false) {
-            $uploaded = $image->store($dir, config('filesystems.default'));
+            $uploaded = $image->store($dir, config('bagisto_filesystem.default'));
 
             unset($data['image'], $data['_token']);
         }
@@ -116,7 +116,7 @@ class SliderRepository extends Repository
         }
 
         if ($image != false) {
-            $uploaded = $image->store($dir, config('filesystems.default'));
+            $uploaded = $image->store($dir, config('bagisto_filesystem.default'));
 
             unset($data['image'], $data['_token']);
         }
@@ -124,7 +124,7 @@ class SliderRepository extends Repository
         if ($uploaded) {
             $sliderItem = $this->find($id);
 
-            Storage::delete($sliderItem->path);
+            Storage::disk(config('bagisto_filesystem.default'))->delete($sliderItem->path);
 
             $data['path'] = $uploaded;
         } else {
@@ -150,7 +150,7 @@ class SliderRepository extends Repository
 
         $sliderItemImage = $sliderItem->path;
 
-        Storage::delete($sliderItemImage);
+        Storage::disk(config('bagisto_filesystem.default'))->delete($sliderItemImage);
 
         return $this->model->destroy($id);
     }

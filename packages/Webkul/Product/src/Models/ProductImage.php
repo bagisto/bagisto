@@ -28,7 +28,7 @@ class ProductImage extends Model implements ProductImageContract
      */
     public function url()
     {
-        return Storage::url($this->path);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->path);
     }
 
     /**

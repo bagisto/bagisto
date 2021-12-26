@@ -44,7 +44,7 @@ class ProductReviewImageRepository extends Repository
                 if ($image instanceof UploadedFile) {
                     if (request()->hasFile($file)) {
                         $this->create([
-                            'path'      => request()->file($file)->store($dir, config('filesystems.default')),
+                            'path'      => request()->file($file)->store($dir, config('bagisto_filesystem.default')),
                             'review_id' => $review->id,
                         ]);
                     }

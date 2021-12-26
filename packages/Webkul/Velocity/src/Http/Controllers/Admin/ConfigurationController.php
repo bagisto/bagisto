@@ -156,9 +156,9 @@ class ConfigurationController extends Controller
                         if (isset($data[$filter_index])) {
                             $size = array_key_last($saveData[$index]);
 
-                            $saveImage[$size + 1] = $path = request()->file($file)->store($dir, config('filesystems.default'));
+                            $saveImage[$size + 1] = $path = request()->file($file)->store($dir);
                         } else {
-                            $saveImage[substr($imageId, 6, 1)] = $path = request()->file($file)->store($dir, config('filesystems.default'));
+                            $saveImage[substr($imageId, 6, 1)] = $path = request()->file($file)->store($dir);
                         }
 
                         $this->sanitizeSVG($path, $image->getMimeType());
@@ -173,7 +173,7 @@ class ConfigurationController extends Controller
                     if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
                         Storage::delete($advertisement[$index][$imageId]);
 
-                        $saveImage[$imageId] = request()->file($file)->store($dir, config('filesystems.default'));
+                        $saveImage[$imageId] = request()->file($file)->store($dir);
                     }
                 }
             } else {

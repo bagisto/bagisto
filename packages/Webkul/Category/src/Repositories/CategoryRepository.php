@@ -238,16 +238,16 @@ class CategoryRepository extends Repository
 
                 if ($request->hasFile($file)) {
                     if ($category->{$type}) {
-                        Storage::delete($category->{$type});
+                        Storage::disk(config('bagisto_filesystem.default'))->delete($category->{$type});
                     }
 
-                    $category->{$type} = $request->file($file)->store($dir, config('filesystems.default'));
+                    $category->{$type} = $request->file($file)->store($dir, config('bagisto_filesystem.default'));
                     $category->save();
                 }
             }
         } else {
             if ($category->{$type}) {
-                Storage::delete($category->{$type});
+                Storage::disk(config('bagisto_filesystem.default'))->delete($category->{$type});
             }
 
             $category->{$type} = null;

@@ -22,13 +22,13 @@ class ProductVideo extends AbstractProduct
         $videos = [];
 
         foreach ($product->videos as $video) {
-            if (! Storage::has($video->path)) {
+            if (! Storage::disk(config('bagisto_filesystem.default'))->has($video->path)) {
                 continue;
             }
 
             $videos[] = [
                 'type' => $video->type,
-                'video_url'    => Storage::url($video->path),
+                'video_url'    => Storage::disk(config('bagisto_filesystem.default'))->url($video->path),
             ];
         }
 

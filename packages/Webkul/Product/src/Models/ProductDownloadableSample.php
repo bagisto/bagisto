@@ -34,7 +34,7 @@ class ProductDownloadableSample extends TranslatableModel implements ProductDown
      */
     public function file_url()
     {
-        return Storage::url($this->path);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->path);
     }
 
     /**
@@ -56,7 +56,7 @@ class ProductDownloadableSample extends TranslatableModel implements ProductDown
 
         $array['title'] = $translation ? $translation->title : '';
 
-        $array['file_url'] = $this->file ? Storage::url($this->file) : null;
+        $array['file_url'] = $this->file ? Storage::disk(config('bagisto_filesystem.default'))->url($this->path) : null;
 
         return $array;
     }

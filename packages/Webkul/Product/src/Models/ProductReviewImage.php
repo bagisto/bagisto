@@ -28,7 +28,7 @@ class ProductReviewImage extends Model implements ProductReviewImageContract
      */
     public function url()
     {
-        return Storage::url($this->path);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->path);
     }
 
     /**

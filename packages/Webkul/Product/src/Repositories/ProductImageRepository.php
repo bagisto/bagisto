@@ -84,7 +84,7 @@ class ProductImageRepository extends Repository
             foreach ($images as $imageId => $image) {
                 if ($image instanceof UploadedFile) {
                     $this->create([
-                        'path'       => $image->store($this->getProductDirectory($product), config('filesystems.default')),
+                        'path'       => $image->store($this->getProductDirectory($product), config('bagisto_filesystem.default')),
                         'product_id' => $product->id,
                     ]);
                 } else {
@@ -97,7 +97,7 @@ class ProductImageRepository extends Repository
 
         foreach ($previousVariantImageIds as $imageId) {
             if ($image = $this->find($imageId)) {
-                Storage::delete($image->path);
+                Storage::disk(config('bagisto_filesystem.default'))->disk(config('bagisto_filesystem.default'))->delete($this->path);
 
                 $this->delete($imageId);
             }

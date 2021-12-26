@@ -1,6 +1,6 @@
 @if ($product[$attribute->code])
     <a href="{{ route('admin.catalog.products.file.download', [$product->product_id, $attribute->id] )}}">
-        <img src="{{ Storage::url($product[$attribute->code]) }}" class="configuration-image"/>
+        <img src="{{ Storage::disk(config('bagisto_filesystem.default'))->url($product[$attribute->code]) }}" class="configuration-image"/>
     </a>
 @endif
 
