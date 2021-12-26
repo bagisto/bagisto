@@ -39,6 +39,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([
             dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),
             dirname(__DIR__) . '/Config/scout.php'   => config_path('scout.php'),
+            dirname(__DIR__) . '/Config/bagisto_filesystem.php'   => config_path('filesystem.php'),
         ]);
 
         $this->app->bind(ExceptionHandler::class, Handler::class);
