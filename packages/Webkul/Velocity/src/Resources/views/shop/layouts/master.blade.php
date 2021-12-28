@@ -59,11 +59,11 @@
 
                             {{-- mobile header --}}
                             <div class="vc-small-screen container">
-                                @include('velocity::shop.layouts.header.mobile')
+                                @include('shop::layouts.header.mobile')
                             </div>
 
                             {{-- desktop header --}}
-                            @include('velocity::shop.layouts.header.desktop')
+                            @include('shop::layouts.header.desktop')
 
                         </header>
 
