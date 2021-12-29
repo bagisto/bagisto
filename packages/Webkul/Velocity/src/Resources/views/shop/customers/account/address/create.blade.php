@@ -16,7 +16,7 @@
     {!! view_render_event('bagisto.shop.customers.account.address.create.before') !!}
 
         <form method="post" action="{{ route('customer.address.store') }}" @submit.prevent="onSubmit">
-            <div class="account-table-content">
+            <div class="account-table-content mb-2">
                 @csrf
 
                 {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.before') !!}
