@@ -41,8 +41,9 @@
                         v-if="rootCategoriesCollection.length > 0"
                     >
                         <li
-                            v-for="(category,
-                            index) in rootCategoriesCollection"
+                            v-for="(
+                                category, index
+                            ) in rootCategoriesCollection"
                         >
                             <a
                                 class="unset"
@@ -52,9 +53,7 @@
                                     <img
                                         class="category-icon"
                                         v-if="category.category_icon_path"
-                                        :src="
-                                            `${$root.baseUrl}/storage/${category.category_icon_path}`
-                                        "
+                                        :src="`${$root.baseUrl}/storage/${category.category_icon_path}`"
                                         alt=""
                                         width="20"
                                         height="20"
@@ -80,24 +79,22 @@
                                 <div class="language-logo-wrapper">
                                     <img
                                         class="language-logo"
-                                        :src="
-                                            `${$root.baseUrl}/storage/${locale.locale_image}`
-                                        "
-                                        alt=""
-                                        v-if="locale.locale_image"
+                                        :src="locale.image_url"
+                                        :alt="locale.name"
+                                        v-if="locale.image_url"
                                     />
 
                                     <img
                                         class="language-logo"
-                                        :src="
-                                            `${$root.baseUrl}/themes/velocity/assets/images/flags/en.png`
-                                        "
+                                        :src="`${$root.baseUrl}/themes/velocity/assets/images/flags/en.png`"
                                         alt=""
                                         v-else-if="locale.code == 'en'"
                                     />
                                 </div>
 
-                                <span v-text="locale.name"></span>
+                                <span v-text="locale.name">{{
+                                    locale.image_url
+                                }}</span>
                             </template>
 
                             <i
@@ -141,14 +138,13 @@
                     <ul type="none">
                         <li
                             :key="index"
-                            v-for="(nestedSubCategory,
-                            index) in subCategory.children"
+                            v-for="(
+                                nestedSubCategory, index
+                            ) in subCategory.children"
                         >
                             <a
                                 class="unset"
-                                :href="
-                                    `${$root.baseUrl}/${subCategory.slug}/${nestedSubCategory.slug}`
-                                "
+                                :href="`${$root.baseUrl}/${subCategory.slug}/${nestedSubCategory.slug}`"
                             >
                                 <div class="category-logo">
                                     <img
@@ -156,9 +152,7 @@
                                         v-if="
                                             nestedSubCategory.category_icon_path
                                         "
-                                        :src="
-                                            `${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`
-                                        "
+                                        :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`"
                                         alt=""
                                         width="20"
                                         height="20"
@@ -172,19 +166,18 @@
                                 class="nested-category"
                                 v-if="
                                     nestedSubCategory.children &&
-                                        nestedSubCategory.children.length > 0
+                                    nestedSubCategory.children.length > 0
                                 "
                             >
                                 <li
                                     :key="`index-${Math.random()}`"
-                                    v-for="(thirdLevelCategory,
-                                    index) in nestedSubCategory.children"
+                                    v-for="(
+                                        thirdLevelCategory, index
+                                    ) in nestedSubCategory.children"
                                 >
                                     <a
                                         class="unset"
-                                        :href="
-                                            `${$root.baseUrl}/${subCategory.slug}/${nestedSubCategory.slug}/${thirdLevelCategory.slug}`
-                                        "
+                                        :href="`${$root.baseUrl}/${subCategory.slug}/${nestedSubCategory.slug}/${thirdLevelCategory.slug}`"
                                     >
                                         <div class="category-logo">
                                             <img
@@ -192,9 +185,7 @@
                                                 v-if="
                                                     thirdLevelCategory.category_icon_path
                                                 "
-                                                :src="
-                                                    `${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`
-                                                "
+                                                :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`"
                                                 alt=""
                                                 width="20"
                                                 height="20"
@@ -234,10 +225,8 @@
                                 <div class="category-logo">
                                     <img
                                         class="category-icon"
-                                        :src="
-                                            `${$root.baseUrl}/themes/velocity/assets/images/flags/en.png`
-                                        "
-                                        alt=""
+                                        :src="`${$root.baseUrl}/themes/velocity/assets/images/flags/en.png`"
+                                        :alt="locale.name"
                                         width="20"
                                         height="20"
                                         v-if="locale.code == 'en'"
@@ -245,13 +234,11 @@
 
                                     <img
                                         class="category-icon"
-                                        :src="
-                                            `${$root.baseUrl}/storage/${locale.locale_image}`
-                                        "
-                                        alt=""
+                                        :src="locale.image_url"
+                                        :alt="locale.name"
                                         width="20"
                                         height="20"
-                                        v-else
+                                        v-else-if="locale.image_url"
                                     />
                                 </div>
 
@@ -335,10 +322,10 @@ export default {
         'locale',
         'allLocales',
         'currency',
-        'allCurrencies'
+        'allCurrencies',
     ],
 
-    data: function() {
+    data: function () {
         return {
             compareCount: 0,
             wishlistCount: 0,
@@ -349,12 +336,12 @@ export default {
             isSearchbar: false,
             rootCategories: true,
             rootCategoriesCollection: this.$root.sharedRootCategories,
-            updatedCartItemsCount: this.cartItemsCount
+            updatedCartItemsCount: this.cartItemsCount,
         };
     },
 
     watch: {
-        hamburger: function(value) {
+        hamburger: function (value) {
             if (value) {
                 document.body.classList.add('open-hamburger');
             } else {
@@ -362,26 +349,26 @@ export default {
             }
         },
 
-        '$root.headerItemsCount': function() {
+        '$root.headerItemsCount': function () {
             this.updateHeaderItemsCount();
         },
 
-        '$root.miniCartKey': function() {
+        '$root.miniCartKey': function () {
             this.getMiniCartDetails();
         },
 
-        '$root.sharedRootCategories': function(categories) {
+        '$root.sharedRootCategories': function (categories) {
             this.formatCategories(categories);
-        }
+        },
     },
 
-    created: function() {
+    created: function () {
         this.getMiniCartDetails();
         this.updateHeaderItemsCount();
     },
 
     methods: {
-        openSearchBar: function() {
+        openSearchBar: function () {
             this.isSearchbar = !this.isSearchbar;
 
             let footer = $('.footer');
@@ -396,18 +383,18 @@ export default {
             }
         },
 
-        toggleHamburger: function() {
+        toggleHamburger: function () {
             this.hamburger = !this.hamburger;
         },
 
-        closeDrawer: function() {
+        closeDrawer: function () {
             $('.nav-container').hide();
 
             this.toggleHamburger();
             this.rootCategories = true;
         },
 
-        toggleSubcategories: function(index, event) {
+        toggleSubcategories: function (index, event) {
             if (index == 'root') {
                 this.rootCategories = true;
                 this.subCategory = false;
@@ -420,13 +407,13 @@ export default {
             }
         },
 
-        toggleMetaInfo: function(metaKey) {
+        toggleMetaInfo: function (metaKey) {
             this.rootCategories = !this.rootCategories;
 
             this[metaKey] = !this[metaKey];
         },
 
-        updateHeaderItemsCount: function() {
+        updateHeaderItemsCount: function () {
             if (this.isCustomer != 'true') {
                 let comparedItems = this.getStorageValue('compared_product');
 
@@ -436,32 +423,32 @@ export default {
             } else {
                 this.$http
                     .get(`${this.$root.baseUrl}/items-count`)
-                    .then(response => {
+                    .then((response) => {
                         this.compareCount = response.data.compareProductsCount;
                         this.wishlistCount =
                             response.data.wishlistedProductsCount;
                     })
-                    .catch(exception => {
+                    .catch((exception) => {
                         console.log(this.__('error.something_went_wrong'));
                     });
             }
         },
 
-        getMiniCartDetails: function() {
+        getMiniCartDetails: function () {
             this.$http
                 .get(`${this.$root.baseUrl}/mini-cart`)
-                .then(response => {
+                .then((response) => {
                     if (response.data.status) {
                         this.updatedCartItemsCount =
                             response.data.mini_cart.cart_items.length;
                     }
                 })
-                .catch(exception => {
+                .catch((exception) => {
                     console.log(this.__('error.something_went_wrong'));
                 });
         },
 
-        formatCategories: function(categories) {
+        formatCategories: function (categories) {
             let slicedCategories = categories;
             let categoryCount = this.categoryCount ? this.categoryCount : 9;
 
@@ -470,7 +457,7 @@ export default {
             }
 
             this.rootCategoriesCollection = slicedCategories;
-        }
-    }
+        },
+    },
 };
 </script>
