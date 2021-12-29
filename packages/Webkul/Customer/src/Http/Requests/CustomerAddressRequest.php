@@ -40,4 +40,11 @@ class CustomerAddressRequest extends FormRequest
             'vat_id'       => [new VatIdRule()],
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'address1.*' => 'address',
+        ];
+    }
 }
