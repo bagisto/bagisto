@@ -14,7 +14,7 @@
     {!! view_render_event('bagisto.shop.customers.account.address.edit.before', ['address' => $address]) !!}
 
     <form method="post" action="{{ route('customer.address.update', $address->id) }}" @submit.prevent="onSubmit">
-        <div class="account-table-content">
+        <div class="account-table-content mb-2">
             @method('PUT')
 
             @csrf
