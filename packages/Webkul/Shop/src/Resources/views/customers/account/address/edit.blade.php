@@ -74,12 +74,12 @@
 
                 <?php $addresses = explode(PHP_EOL, $address->address1); ?>
 
-                <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
+                <div class="control-group {{ $errors->has('address1.*') ? 'has-error' : '' }}">
                     <label for="address_0" class="required">{{ __('shop::app.customer.account.address.edit.street-address') }}</label>
 
                     <input type="text" class="control" name="address1[]" id="address_0" v-validate="'required'" value="{{ $addresses[0] ?? '' }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
 
-                    <span class="control-error" v-text="'{{ $errors->first('address1.*') }}'"></span>
+                    <span class="control-error">{{ $errors->first('address1.*') }}</span>
                 </div>
 
                 @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)
