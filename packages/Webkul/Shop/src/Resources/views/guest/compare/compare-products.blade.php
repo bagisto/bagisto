@@ -68,17 +68,21 @@
 
                                     @case('addToCartHtml')
                                         <div class="action">
-                                            <form :action="`${baseUrl}/checkout/cart/add/${product.product_id}`" method="POST">
-                                                @csrf
+                                            <div>
+                                                <span class="d-inline-block">
+                                                    <form :action="`${baseUrl}/checkout/cart/add/${product.product_id}`" method="POST">
+                                                        @csrf
 
-                                                <input type="hidden" name="product_id" :value="product.product_id">
+                                                        <input type="hidden" name="product_id" :value="product.product_id">
 
-                                                <input type="hidden" name="quantity" value="1">
+                                                        <input type="hidden" name="quantity" value="1">
 
-                                                <div v-html="product.addToCartHtml"></div>
-                                            </form>
+                                                        <span v-html="product.addToCartHtml"></span>
+                                                    </form>
+                                                </span>
 
-                                            <span class="icon white-cross-sm-icon remove-product" @click="removeProductCompare(product.id)"></span>
+                                                <span class="icon white-cross-sm-icon remove-product" @click="removeProductCompare(product.id)"></span>
+                                            </div>
                                         </div>
                                         @break
 
