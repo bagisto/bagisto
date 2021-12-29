@@ -63,7 +63,8 @@ class SliderDataGrid extends DataGrid
 
         /* finding channel code */
         if ($this->channel !== 'all') {
-            $this->channel = Channel::query()->find($this->channel);
+            $this->channel = Channel::where('code', $this->channel)->first();
+
             $this->channel = $this->channel ? $this->channel->code : 'all';
         }
     }
@@ -135,12 +136,12 @@ class SliderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'locale',
-            'label' => trans('admin::app.datagrid.locale'),
-            'type' => 'string',
+            'index'      => 'locale',
+            'label'      => trans('admin::app.datagrid.locale'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
-            'filterable' => true
+            'sortable'   => true,
+            'filterable' => true,
         ]);
     }
 
