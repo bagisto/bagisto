@@ -3,6 +3,6 @@
 return [
     'path-hint' => [
         'template' => 'Template',
-        'parents' => 'Parents'
-    ]
+        'parents'  => 'Parents',
+    ],
 ];
