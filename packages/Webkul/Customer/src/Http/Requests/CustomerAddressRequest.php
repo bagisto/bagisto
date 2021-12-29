@@ -41,6 +41,11 @@ class CustomerAddressRequest extends FormRequest
         ];
     }
 
+    /**
+     * Attributes.
+     *
+     * @return array
+     */
     public function attributes()
     {
         return [
