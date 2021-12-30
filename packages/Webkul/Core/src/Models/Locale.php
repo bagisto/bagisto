@@ -14,6 +14,20 @@ class Locale extends Model implements LocaleContract
     use HasFactory;
 
     /**
+     * List of all default locale images for velocity.
+     *
+     * @var array
+     */
+    protected $defaultImage = [
+        'de' => 'flags/de.png',
+        'en' => 'flags/en.png',
+        'es' => 'flags/es.png',
+        'fr' => 'flags/fr.png',
+        'nl' => 'flags/nl.png',
+        'tr' => 'flags/tr.png',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -46,19 +60,9 @@ class Locale extends Model implements LocaleContract
      *
      * @return string
      */
-    public function image_url()
+    public function getImageUrlAttribute(): string
     {
-        if (! $this->locale_image) {
-            $defaultLocaleImagePath = 'themes/velocity/assets/images/flags/' . $this->code . '.png';
-
-            if (file_exists(public_path($defaultLocaleImagePath))) {
-                return asset($defaultLocaleImagePath);
-            }
-
-            return '';
-        }
-
-        return Storage::url($this->locale_image);
+        return $this->image_url();
     }
 
     /**
@@ -66,8 +70,24 @@ class Locale extends Model implements LocaleContract
      *
      * @return string
      */
-    public function getImageUrlAttribute()
+    public function image_url(): string
     {
-        return $this->image_url();
+        if (! $this->locale_image) {
+            return $this->getDefaultImageSource();
+        }
+
+        return Storage::url($this->locale_image);
+    }
+
+    /**
+     * Get default image source.
+     *
+     * @return string
+     */
+    public function getDefaultImageSource(): string
+    {
+        return isset($this->defaultImage[$this->code]) && file_exists($this->defaultImage[$this->code])
+            ? asset($this->defaultImage[$this->code])
+            : '';
     }
 }
