@@ -4,7 +4,9 @@
             $image = $item->product->getTypeInstance()->getBaseImage($item);
         @endphp
 
-        <img class="media" src="{{ $image['small_image_url'] }}" alt="" />
+        <a href="{{ route('shop.productOrCategory.index', $item->product->url_key) }}" title="{{ $item->product->name }}">
+            <img class="media" src="{{ $image['small_image_url'] }}" alt="" />
+        </a>
 
         <div class="info">
             <div class="product-name">
