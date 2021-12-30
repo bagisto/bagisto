@@ -14,7 +14,7 @@ class Locale extends Model implements LocaleContract
     use HasFactory;
 
     /**
-     * List of all default locale images for velocity.
+     * List of all default locale images.
      *
      * @var array
      */
