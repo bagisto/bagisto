@@ -10,7 +10,6 @@
 
     $config = $tree;
 
-
     $allLocales = core()->getAllLocales()->pluck('name', 'code');
 
     $currentLocaleCode = core()->getRequestedLocaleCode('admin_locale');
@@ -105,17 +104,17 @@
                     <a class="nav-tab-name">
                         <span class="icon-menu icon accounts-icon"
                             style="margin-right:10px; display: inline-block;vertical-align: middle;transform: scale(0.8);"></span>
-                        <span class="menu-label">Account</span>
+                        <span class="menu-label">{{ __('admin::app.layouts.account-title') }}</span>
                         <span class="icon arrow-icon"></span>
                     </a>
                     <ul> 
                         <li class="navbar-child">                             
                             <a>                                
-                                <span style="display:flex;justify-content:space-between">
+                                <span style="display:flex;justify-content:space-between;height:20px">
                                     <div style="margin-top:12px;margin-left:47px">
-                                        <span>Mode</span>
+                                        <span>{{ __('admin::app.layouts.mode') }}</span>
                                     </div>
-                                    <dark></dark>
+                                    <dark style="margin-left:13%"></dark>
                                 </span>
                             </a>
                                                          

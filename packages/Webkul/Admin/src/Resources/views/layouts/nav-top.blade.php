@@ -92,7 +92,7 @@
                     <span class="app-version">{{ __('admin::app.layouts.app-version', ['version' => 'v' . config('app.version')]) }}</span>
 
                     <div class="dropdown-container">
-                        <label>Account</label>
+                        <label>{{ __('admin::app.layouts.account-title') }}</label>
                         <ul>
                             <li>
                                 <a href="{{ route('shop.home.index') }}" target="_blank">{{ __('admin::app.layouts.visit-shop') }}</a>
@@ -104,7 +104,7 @@
                                 <a href="{{ route('admin.session.destroy') }}">{{ __('admin::app.layouts.logout') }}</a>
                             </li>
                             <li v-if="!isMobile()" style="display: flex;justify-content: space-between;">
-                                <div style="margin-top:7px">Mode : </div>
+                                <div style="margin-top:7px">{{ __('admin::app.layouts.mode') }}</div>
                                 <dark style="margin-top: -9px;width: 83px;"></dark>
                             </li> 
                         </ul>

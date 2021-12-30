@@ -44,6 +44,7 @@ return [
 
     'layouts' => [
         'app-version'              => 'Version : :version',
+        'account-title'            => 'Account',   
         'my-account'               => 'My Account',
         'logout'                   => 'Logout',
         'visit-shop'               => 'Visit Shop',
@@ -84,6 +85,7 @@ return [
         'cms'                      => 'CMS',
         'transactions'             => 'Transactions',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
+        'mode'                     => 'Mode'
     ],
 
     'acl' => [

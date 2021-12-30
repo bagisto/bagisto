@@ -5,6 +5,7 @@ import Vue from 'vue';
 import VeeValidate from 'vee-validate';
 import './bootstrap';
 import Echo from 'laravel-echo';
+import pagination from 'laravel-vue-pagination'
 
 /**
  * Lang imports.
@@ -64,11 +65,11 @@ Vue.component(
     'notification',
     require('./components/navigation/notification').default
 );  
-
 Vue.component(
     'notification-list',
     require('./components/navigation/notification-list').default
 );  
+Vue.component('pagination', pagination);
 
 $(function() {
     Vue.config.ignoredElements = ['option-wrapper', 'group-form', 'group-list'];
