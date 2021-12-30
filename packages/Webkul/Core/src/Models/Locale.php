@@ -49,6 +49,12 @@ class Locale extends Model implements LocaleContract
     public function image_url()
     {
         if (! $this->locale_image) {
+            $defaultLocaleImagePath = 'themes/velocity/assets/images/flags/' . $this->code . '.png';
+
+            if (file_exists(public_path($defaultLocaleImagePath))) {
+                return asset($defaultLocaleImagePath);
+            }
+
             return '';
         }
 
