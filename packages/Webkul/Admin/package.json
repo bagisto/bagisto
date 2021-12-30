@@ -21,6 +21,9 @@
     "vue-template-compiler": "^2.6.14"
   },
   "dependencies": {
+    "laravel-echo": "^1.11.3",
+    "laravel-vue-pagination": "^2.3.1",
+    "pusher-js": "^7.0.3",
     "vee-validate": "^2.2.15"
   }
 }

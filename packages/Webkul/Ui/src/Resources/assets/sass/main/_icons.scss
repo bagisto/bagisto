@@ -104,6 +104,75 @@
     height: 24px;
 }
 
+
+.notification-icon {
+    background-image: url("../images/Icon-bell.svg");
+    width: 30px;
+    height: 30px;
+}
+
+.processing-icon {
+    background-image: url("../images/process.png");
+    width: 30px;
+    height: 30px;
+}
+
+.pending-icon {
+    background-image: url("../images/notification-checked.svg");
+    width: 30px;
+    height: 30px;
+}
+
+.closed-icon {
+    background-image: url("../images/return.png");
+    width: 30px;
+    height: 30px;
+}
+
+.canceled-icon {
+    background-image: url("../images/notification-cancel.svg");
+    width: 30px;
+    height: 30px;
+}
+
+.completed-icon {
+    background-image: url("../images/notification-complete.svg");
+    width: 30px;
+    height: 30px;
+}
+
+.accounts-icon {
+    @extend %menu-properties;
+    background-image: url("../images/Account-Icon.svg");
+}
+
+.arrow-icon {
+    @extend %menu-properties;
+    background-image: url("../images/arrow-icon.svg");
+    height: 13px;
+    width: 8px;
+    transform: rotate(90deg) !important;
+    float: right;
+    margin-top: 16px !important;
+    margin-right: 18px !important;
+}
+
+.rotate-arrow-icon{
+    transform: rotate(-90deg) !important;
+}
+
+.locale-icon {
+    @extend %menu-properties;
+    background-image: url("../images/Local-Icon.svg");
+}
+
+.store-icon {
+    @extend %menu-properties;
+    background-image: url("../images/store-icon.svg");
+    height: 26px;
+    width: 26px;
+}
+
 .cross-icon {
     background-image: url("../images/Icon-Crossed.svg");
     width: 18px;

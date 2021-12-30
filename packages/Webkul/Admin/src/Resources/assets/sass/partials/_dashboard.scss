@@ -175,6 +175,43 @@
     }
 }
 
+#calender-destop{
+    display: block;
+}
+
+#calender-mobile{
+    position: relative;
+    display: none;
+}
+
+#calender-mobile span{
+    background-image: url(../images/Icon-Calendar.svg);
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 4px;
+}
+
+#date-start{
+    display:block;
+    width: 337px;
+    margin-top:40px;
+}
+
+#date-end{
+    display:block;
+    width: 337px;
+}
+
+#date-submit{
+    display:block;
+    width: 337px;
+    margin-top:15px;
+}
+
 .rtl {
     .dashboard {
         .page-header {
@@ -185,5 +222,47 @@
                 }
             }
         }
+    }
+}
+
+// responsive css for modal
+@media only screen and (max-width: 770px) {
+
+    .dashboard { 
+
+        .card {
+            padding: 10px 0px 0px 15px;
+            overflow: auto;
+            margin-bottom: 20px;
+        }
+        
+        .sale-stock {
+            display: block;
+            margin-top: 30px;
+            margin-bottom:10px;
+        }
+        
+        .graph-stats {               
+            .left-card-container {
+                float: left;
+                width: 100%;
+                padding-right: 0px;
+                margin-bottom: 10px;
+            }
+    
+            .right-card-container {
+                float: left;
+                width: 100%;
+                padding-left: 0px;
+            }
+        }   
+    } 
+    
+    #calender-mobile{
+        display: block;
+    }
+
+    #calender-destop{
+        display: none;
     }
 }

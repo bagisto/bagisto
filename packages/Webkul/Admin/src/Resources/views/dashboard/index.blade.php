@@ -14,7 +14,10 @@
 
             <div class="page-action">
                 <date-filter></date-filter>
+               
             </div>
+
+            <date-mobile-filter></date-mobile-filter>
         </div>
 
         <div class="page-content">
@@ -375,7 +378,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
     <script type="text/x-template" id="date-filter-template">
-        <div>
+        <div id="calender-destop">
             <div class="control-group date">
                 <date @onChange="applyFilter('start', $event)" hide-remove-button="1"><input type="text" class="control" id="start_date" value="{{ $startDate->format('Y-m-d') }}" placeholder="{{ __('admin::app.dashboard.from') }}" v-model="start"/></date>
             </div>
@@ -383,6 +386,37 @@
             <div class="control-group date">
                 <date @onChange="applyFilter('end', $event)" hide-remove-button="1"><input type="text" class="control" id="end_date" value="{{ $endDate->format('Y-m-d') }}" placeholder="{{ __('admin::app.dashboard.to') }}" v-model="end"/></date>
             </div>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="date-mobile-filter-template">
+        <div>
+            <div id="calender-mobile">
+                <span  @click="openCalender()"></span>
+            </div>
+            <div v-if="toggleCalenderIcon">
+                <div id="date-start" style="">
+                    <div class="control-group date" style="margin-top:15px">
+                    <label for="type">{{ __('admin::app.dashboard.from') }}</label>
+                        <date @onChange="setDate('start', $event)" hide-remove-button="1">
+                            <input type="text" class="control" id="start_date" value="{{ $startDate->format('Y-m-d') }}" placeholder="{{ __('admin::app.dashboard.from') }}" v-model="start"/>
+                        </date>
+                    </div>
+                </div>
+
+                <div id="date-end" style="">
+                    <div class="control-group date" style="margin-top:15px">
+                        <label for="type">{{ __('admin::app.dashboard.to') }}</label>
+                        <date @onChange="setDate('end', $event)" hide-remove-button="1">
+                            <input type="text" class="control" id="end_date" value="{{ $endDate->format('Y-m-d') }}" placeholder="{{ __('admin::app.dashboard.to') }}" v-model="end"/>
+                        </date>
+                    </div>
+                </div>
+
+                <div id="date-submit" style="">
+                    <button class="btn btn-lg btn-primary" @click="applyFilter">Submit</button>
+                </div>              
+            </div>            
         </div>
     </script>
 
@@ -402,6 +436,41 @@
                 applyFilter: function(field, date) {
                     this[field] = date;
 
+                    window.location.href = "?start=" + this.start + '&end=' + this.end;
+                }
+            }
+        });
+
+        Vue.component('date-mobile-filter', {
+
+            template: '#date-mobile-filter-template',
+
+            data: function() {
+                return {
+                    start: "{{ $startDate->format('Y-m-d') }}",
+                    end: "{{ $endDate->format('Y-m-d') }}",
+                    toggleCalenderIcon : 0
+                }
+            },
+
+            methods: {
+
+                openCalender: function(){
+
+                    if(this.toggleCalenderIcon){
+                        this.toggleCalenderIcon = 0;
+                        $('#calender-mobile span').css('top','0');
+                    }else{
+                        this.toggleCalenderIcon = 1;
+                        $('#calender-mobile span').css('top','-40px');
+                    }
+                },
+
+                setDate: function(field, date) {
+                    this[field] = date;
+                },
+
+                applyFilter: function() {
                     window.location.href = "?start=" + this.start + '&end=' + this.end;
                 }
             }

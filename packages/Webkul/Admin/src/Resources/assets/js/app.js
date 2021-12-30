@@ -4,6 +4,7 @@
 import Vue from 'vue';
 import VeeValidate from 'vee-validate';
 import './bootstrap';
+import Echo from 'laravel-echo';
 
 /**
  * Lang imports.
@@ -41,6 +42,8 @@ Vue.prototype.$http = axios;
 window.Vue = Vue;
 window.eventBus = new Vue();
 window.VeeValidate = VeeValidate;
+window.Pusher = require('pusher-js');
+window.Echo = Echo;
 
 /**
  * Global components.
@@ -53,6 +56,19 @@ Vue.component(
     'required-if',
     require('./components/validators/required-if').default
 );
+Vue.component(
+    'dark',
+    require('./components/darkmode/dark').default
+);
+Vue.component(
+    'notification',
+    require('./components/navigation/notification').default
+);  
+
+Vue.component(
+    'notification-list',
+    require('./components/navigation/notification-list').default
+);  
 
 $(function() {
     Vue.config.ignoredElements = ['option-wrapper', 'group-form', 'group-list'];
@@ -61,7 +77,11 @@ $(function() {
         el: '#app',
 
         data: {
-            modalIds: {}
+            modalIds: {},
+
+            isMenuOpen: localStorage.getItem('bagisto-sidebar') == 'true',
+
+            isDarkMode: localStorage.getItem('dark-mode') == 'true',
         },
 
         mounted() {
@@ -178,6 +198,34 @@ $(function() {
 
             showModal: function(id) {
                 this.$set(this.modalIds, id, true);
+            },
+
+            toggleMenu() {
+                this.isMenuOpen = ! this.isMenuOpen;
+
+                localStorage.setItem('bagisto-sidebar', this.isMenuOpen);
+            },
+
+            checkMode(){
+                
+                this.isDarkMode = ! this.isDarkMode;
+
+                localStorage.setItem('dark-mode', this.isDarkMode);
+            },
+
+            isMobile: function isMobile() {
+                if (
+                    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i |
+                    /mobi/i.test(navigator.userAgent)
+                ) {
+                    return true;
+                }
+            
+                return false;
+            },
+
+            CheckIsMenuOpen: function(){
+                return this.isMenuOpen;
             }
         }
     });

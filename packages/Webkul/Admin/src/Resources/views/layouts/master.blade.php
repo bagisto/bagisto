@@ -45,7 +45,7 @@
             {!! view_render_event('bagisto.admin.layout.nav-left.after') !!}
 
 
-            <div class="content-container">
+            <div class="content-container" v-bind:style="isMenuOpen ? 'padding-left:200px' : 'padding-left:56px'">
 
                 {!! view_render_event('bagisto.admin.layout.content.before') !!}
 
@@ -58,6 +58,10 @@
 
         <script type="text/javascript">
             window.flashMessages = [];
+
+            if(localStorage.getItem('dark-mode') == 'true'){
+                document.body.classList.toggle("dark-mode");
+            }    
 
             @foreach (['success', 'warning', 'error', 'info'] as $key)
                 @if ($value = session($key))
