@@ -80,15 +80,8 @@
                                     <img
                                         class="language-logo"
                                         :src="locale.image_url"
-                                        :alt="locale.name"
-                                        v-if="locale.image_url"
-                                    />
-
-                                    <img
-                                        class="language-logo"
-                                        :src="`${$root.baseUrl}/themes/velocity/assets/images/flags/en.png`"
                                         alt=""
-                                        v-else-if="locale.code == 'en'"
+                                        v-if="locale.image_url"
                                     />
                                 </div>
 
@@ -225,20 +218,11 @@
                                 <div class="category-logo">
                                     <img
                                         class="category-icon"
-                                        :src="`${$root.baseUrl}/themes/velocity/assets/images/flags/en.png`"
-                                        :alt="locale.name"
-                                        width="20"
-                                        height="20"
-                                        v-if="locale.code == 'en'"
-                                    />
-
-                                    <img
-                                        class="category-icon"
                                         :src="locale.image_url"
-                                        :alt="locale.name"
+                                        alt=""
                                         width="20"
                                         height="20"
-                                        v-else-if="locale.image_url"
+                                        v-if="locale.image_url"
                                     />
                                 </div>
 
