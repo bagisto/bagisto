@@ -18,7 +18,7 @@ class Locale extends Model implements LocaleContract
      *
      * @var array
      */
-    protected $defaultImage = [
+    protected $defaultImages = [
         'de' => 'flags/de.png',
         'en' => 'flags/en.png',
         'es' => 'flags/es.png',
@@ -86,8 +86,8 @@ class Locale extends Model implements LocaleContract
      */
     public function getDefaultImageSource(): string
     {
-        return isset($this->defaultImage[$this->code]) && file_exists($this->defaultImage[$this->code])
-            ? asset($this->defaultImage[$this->code])
+        return isset($this->defaultImages[$this->code]) && file_exists($this->defaultImages[$this->code])
+            ? asset($this->defaultImages[$this->code])
             : '';
     }
 }
