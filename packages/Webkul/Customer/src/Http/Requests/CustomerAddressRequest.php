@@ -34,7 +34,7 @@ class CustomerAddressRequest extends FormRequest
             'address1'     => ['required', 'array'],
             'address1.*'   => ['required', new Address],
             'country'      => ['required', 'alpha'],
-            'state'        => ['required', 'alpha'],
+            'state'        => ['required', new AlphaNumericSpace],
             'city'         => ['required'],
             'postcode'     => ['required', 'numeric'],
             'phone'        => ['required', new PhoneNumber],
