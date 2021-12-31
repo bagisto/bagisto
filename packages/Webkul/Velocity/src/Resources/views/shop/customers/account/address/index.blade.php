@@ -23,8 +23,6 @@
                 </a>
             </span>
         @endif
-
-        <div class="horizontal-rule"></div>
     </div>
 
     {!! view_render_event('bagisto.shop.customers.account.address.list.before', ['addresses' => $addresses]) !!}
@@ -33,10 +31,10 @@
             @if ($addresses->isEmpty())
                 <div>{{ __('shop::app.customer.account.address.index.empty') }}</div>
             @else
-                <div class="address-holder col-12 no-padding">
+                <div class="row address-holder no-padding">
                     @foreach ($addresses as $address)
-                        <div class="col-lg-4 col-md-12">
-                            <div class="card">
+                        <div class="col-lg-4 col-md-6 col-xs-12">
+                            <div class="card m-1">
                                 <div class="card-body">
                                     <h5 class="card-title fw6">{{ $address->first_name }} {{ $address->last_name }}</h5>
 
