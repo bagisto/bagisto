@@ -64,7 +64,7 @@ class NotificationController extends Controller
         if(isset($params) && $params != NULL){     
             $searchResults = $this->notificationRepository->getParamsData($params);
         }else{
-            $searchResults = $this->notificationRepository->with('order')->latest()->paginate(5);
+            $searchResults = $this->notificationRepository->with('order')->latest()->paginate(10);
         }
 
         return [

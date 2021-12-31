@@ -261,7 +261,7 @@
             }        
             tbody td {
                 color: rgba(255, 255, 255, 0.8);
-    
+                border-bottom: 1px solid $seprator;    
             }
         }
     }
@@ -316,10 +316,10 @@
             }            
             ul{
                 li{
-                    a:link{
+                    a{
                         color: rgba(255,255,255,.8);
                         &:hover{
-                            color: #0041FF;
+                            color: #fff;
                         }
                     }
     
@@ -461,18 +461,20 @@
     }
 
     .sale-container {
-        .sale-section {          
-            .secton-title {
-                color: rgba(255,255,255,.8);
-                border-bottom: 1px solid #24384c;
-            }    
-            .section-content {          
-                .row {        
-                    .title {
-                        color: rgba(255,255,255,.8);
-                    }    
-                    .value {
-                        color: rgba(255,255,255,.8);
+        .sale{
+            .sale-section {          
+                .secton-title {
+                    color: rgba(255,255,255,.8);
+                    border-bottom: 1px solid #24384c;
+                }    
+                .section-content {          
+                    .row {        
+                        .title {
+                            color: rgba(255,255,255,.8);
+                        }    
+                        .value {
+                            color: rgba(255,255,255,.8);
+                        }
                     }
                 }
             }

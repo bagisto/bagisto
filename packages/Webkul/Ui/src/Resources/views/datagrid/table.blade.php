@@ -31,8 +31,8 @@
             <div class="grid-container">
 
                 <div class="grid-top">
-                    <div class="datagrid-filters">
 
+                    <div class="datagrid-filters">
                         <div class="filter-left">
                             @if (isset($results['extraFilters']['channels']))
                                 <div class="dropdown-filters per-page">
@@ -93,15 +93,14 @@
                                 </div>
                             @endif
                         </div>
-                        </div>
+                    </div>
 
-                        <div class="datagrid-filters" id="datagrid-filters">
-                        <div class="filter-left">
+                    <div class="datagrid-filters" id="datagrid-filters">
+                        <div>
                             <div class="search-filter">
                                 <input type="search" id="search-field" class="control"
                                     placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue"
                                     v-on:keyup.enter="searchCollection(searchValue)"/>
-
                                 <div class="icon-wrapper">
                                     <span class="icon search-icon search-btn"
                                         v-on:click="searchCollection(searchValue)"></span>
@@ -243,30 +242,31 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
+                    </div>
+                </div>
+                <div class="filter-advance">
+                    <div class="filtered-tags">
+                        <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: capitalize;">
+                            <span v-if="filter.column == 'perPage'">perPage</span>
+                            <span v-else>@{{ filter.label }}</span>
 
-                        <div class="filtered-tags">
-                            <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: capitalize;">
-                                <span v-if="filter.column == 'perPage'">perPage</span>
-                                <span v-else>@{{ filter.label }}</span>
-
-                                <span class="wrapper" v-if="filter.prettyValue">
-                                    @{{ filter.prettyValue }}
-                                    <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
-                                </span>
-                                <span class="wrapper" v-else>
-                                    @{{ decodeURIComponent(filter.val) }}
-                                    <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
-                                </span>
+                            <span class="wrapper" v-if="filter.prettyValue">
+                                @{{ filter.prettyValue }}
+                                <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
                             </span>
-                        </div>
-
-                        <div class="records-count-container">
+                            <span class="wrapper" v-else>
+                                @{{ decodeURIComponent(filter.val) }}
+                                <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
+                            </span>
+                        </span>
+                    </div>
+                    
+                    <div class="records-count-container">
                         <span class="datagrid-count">
                             {{ $results['records']->total()  }}   {{ __('admin::app.admin.system.records-found') }}
                         </span>
                     </div>
-                </div>               
+                </div>                                        
                 
                 <div class="table-responsive">
                     <table class="table">

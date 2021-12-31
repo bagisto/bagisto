@@ -1243,6 +1243,14 @@ modal {
         left: 10%;
         margin-left: 0px;
     }
+
+    .control-group {
+        width: 100%;     
+
+        .control {            
+            width: 100%;
+        } 
+    }    
 }
 
 .label {

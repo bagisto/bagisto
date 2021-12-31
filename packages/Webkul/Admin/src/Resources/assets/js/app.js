@@ -5,7 +5,8 @@ import Vue from 'vue';
 import VeeValidate from 'vee-validate';
 import './bootstrap';
 import Echo from 'laravel-echo';
-import pagination from 'laravel-vue-pagination'
+import pagination from 'laravel-vue-pagination';
+import moment from 'moment';
 
 /**
  * Lang imports.
@@ -45,6 +46,7 @@ window.eventBus = new Vue();
 window.VeeValidate = VeeValidate;
 window.Pusher = require('pusher-js');
 window.Echo = Echo;
+Vue.prototype.moment = moment;
 
 /**
  * Global components.

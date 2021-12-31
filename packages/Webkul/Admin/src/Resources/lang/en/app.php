@@ -598,6 +598,7 @@ return [
             'save'                          => 'Save',
             'cancel'                        => 'Cancel',
             'saved-inventory-message'       => 'Product inventory saved successfully.',
+            'image-size'                    => 'Image resolution should be like 640px X 640px'
         ],
 
         'attributes' => [
@@ -700,6 +701,8 @@ return [
             'image'                    => 'Image',
             'filterable-attributes'    => 'Filterable Attributes',
             'attributes'               => 'Attributes',
+            'image-size'               => 'Image resolution should be like 300px X 168px',
+            'image-size-logo'          => 'Image resolution should be like 20px X 20px'
         ],
     ],
 
@@ -878,6 +881,8 @@ return [
             'maintenance-mode'       => 'Maintenance Mode',
             'maintenance-mode-text'  => 'Message',
             'allowed-ips'            => 'Allowed IPs',
+            'logo-size'              => 'Image resolution should be like 192px X 50px',
+            'favicon-size'           => 'Image resolution should be like 16px X 16px'
         ],
 
         'sliders' => [
@@ -898,6 +903,7 @@ return [
             'delete-fail'     => 'Slider item successfully deleted',
             'expired-at'      => 'Expire Date',
             'sort-order'      => 'Sort Order',
+            'image-size'      => 'Image resolution should be like 1920px X 550px'
         ],
 
         'tax-categories' => [
@@ -1558,6 +1564,9 @@ return [
             'set-order-status'                      => 'Set the order status after creating the invoice to',
             'generate-invoice-applicable'           => 'Applicable if automatic generate invoice is enabled',
             'records-found'                         => 'Record(s) found',
+            'logo-size'                             => 'Image resolution should be like 112px X 41px',
+            'favicon-size'                          => 'Image resolution should be like 16px X 16px',
+            'invoice-logo-size'                     => 'Image resolution should be like 192px X 50px'
         ],
     ],
 

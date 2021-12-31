@@ -28,17 +28,17 @@ class NotificationRepository extends Repository
                     $qry->whereHas('order',function ($q) use ($params) {
                         $q->where(['status' => $params['status']]);
                     });
-                })->where('order_id',$params['id'])->with('order')->paginate(5)  : $this->model->where('order_id',$params['id'])->with('order')->paginate(5) ;
+                })->where('order_id',$params['id'])->with('order')->paginate(10)  : $this->model->where('order_id',$params['id'])->with('order')->paginate(10) ;
         }elseif (isset($params['status'])) {
             return $params['status'] != 'All' ? $this->model->where(function($qry)use ($params){
                 $qry->whereHas('order',function ($q) use ($params) {
                     $q->where(['status' => $params['status']]);
                 });
-            })->with('order')->paginate(5): $this->model->with('order')->latest()->paginate(5);
+            })->with('order')->paginate(10): $this->model->with('order')->latest()->paginate(10);
         }elseif(isset($params['limit'])){
-            return $this->model->limit($params['limit'])->with('order')->latest()->paginate(5);
+            return $this->model->limit($params['limit'])->with('order')->latest()->paginate(10);
         }elseif(isset($params['id'])){
-            return $this->model->where('order_id',$params['id'])->with('order')->paginate(5);
+            return $this->model->where('order_id',$params['id'])->with('order')->paginate(10);
         }
 
         return [];

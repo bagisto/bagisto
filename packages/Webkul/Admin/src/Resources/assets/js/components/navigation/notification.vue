@@ -147,6 +147,7 @@ export default {
             });
         
             Echo.channel('notification').listen('.update-notification', (e) => {
+                console.log(e);
                 this.notifications.forEach((notification)=>{
                     if(notification.order_id == e.id){
                         notification.order.status = e.status;

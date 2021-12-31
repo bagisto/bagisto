@@ -307,6 +307,8 @@ class OrderRepository extends Repository
      */
     public function updateOrderStatus($order, $orderState = null)
     {
+        Event::dispatch('sales.order.update-status.before', $order);
+
         if (! empty($orderState)) {
             $status = $orderState;
         } else {
@@ -325,6 +327,8 @@ class OrderRepository extends Repository
 
         $order->status = $status;
         $order->save();
+
+        Event::dispatch('sales.order.update-status.after', $order);
     }
 
     /**
