@@ -396,7 +396,7 @@
             </div>
             <div v-if="toggleCalenderIcon">
                 <div id="date-start" style="">
-                    <div class="control-group date" style="margin-top:15px">
+                    <div class="control-group start-date" style="margin-top:15px">
                     <label for="type">{{ __('admin::app.dashboard.from') }}</label>
                         <date @onChange="setDate('start', $event)" hide-remove-button="1">
                             <input type="text" class="control" id="start_date" value="{{ $startDate->format('Y-m-d') }}" placeholder="{{ __('admin::app.dashboard.from') }}" v-model="start"/>
@@ -405,7 +405,7 @@
                 </div>
 
                 <div id="date-end" style="">
-                    <div class="control-group date" style="margin-top:15px">
+                    <div class="control-group end-date" style="margin-top:15px">
                         <label for="type">{{ __('admin::app.dashboard.to') }}</label>
                         <date @onChange="setDate('end', $event)" hide-remove-button="1">
                             <input type="text" class="control" id="end_date" value="{{ $endDate->format('Y-m-d') }}" placeholder="{{ __('admin::app.dashboard.to') }}" v-model="end"/>

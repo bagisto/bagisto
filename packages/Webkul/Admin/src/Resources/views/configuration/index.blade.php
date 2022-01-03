@@ -4,6 +4,20 @@
     {{ __('admin::app.configuration.title') }}
 @stop
 
+@push('css')
+
+    <style>
+
+        @media only screen and (max-width: 768px){
+            .content-container .content .page-header .page-title .control-group .control{
+                width: 94%;
+            }
+        }
+
+    </style>
+
+@endpush
+
 @section('content')
     <div class="content">
         @php

@@ -800,7 +800,7 @@ h5 {
             pointer-events: none;
             position: absolute;
             left: 70%;
-            top: 69%;
+            top: 51%;
         }
 
         .cross-icon {
@@ -1474,6 +1474,19 @@ modal {
             margin-right: 0;
         }
     }
+}
+
+.start-date::after, .end-date::after {
+    background-image: url(../images/Icon-Calendar.svg);
+    width: 24px;
+    height: 24px;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -34px;
+    pointer-events: none;
+    position: absolute;
+    top: 43%;
 }
 
 @media only screen and (max-width: 414px){
