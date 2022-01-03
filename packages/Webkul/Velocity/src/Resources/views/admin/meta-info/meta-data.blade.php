@@ -10,6 +10,20 @@
     $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
 @endphp
 
+@push('css')
+
+    <style>
+
+        @media only screen and (max-width: 768px){
+            .content-container .content .page-header .page-title{
+                margin-bottom: 30px !important;
+            }
+        }
+
+    </style>
+
+@endpush
+
 @section('content')
     <div class="content">
         <form
@@ -117,9 +131,6 @@
                             value="{{ $metaData ? $metaData->header_content_count : '5' }}" />
                     </div>
 
-
-
-
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.home-page-content') }}
@@ -217,6 +228,8 @@
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @endif
+
+                        <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-four-resolution') }}</span>
                     </div>
 
                     <div class="control-group">
@@ -258,6 +271,7 @@
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @endif
+                        <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-three-resolution') }}</span>
                     </div>
 
                     <div class="control-group">
@@ -296,6 +310,7 @@
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @endif
+                        <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-two-resolution') }}</span>
                     </div>
                 </div>
             </accordian>

@@ -100,6 +100,8 @@
                                         @php echo str_replace($key, 'Image', $message[0]); @endphp
                                     @endforeach
                                 </span>
+
+                                <span class="control-info mt-10">{{ __('admin::app.catalog.categories.image-size') }}</span>   
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.controls.after') !!}

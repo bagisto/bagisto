@@ -401,6 +401,120 @@ h5 {
     }
 }
 
+
+.notification {
+    width: 400px;
+    margin-bottom: 20px;
+    @include box-shadow(0 2px 4px 0 rgba(0, 0, 0, 0.16),
+        0 0 9px 0 rgba(0, 0, 0, 0.16));
+    @include border-radius(3px);
+    background-color: $white-color;
+    position: absolute;
+    display: none;
+    z-index: 10;
+    text-align: left;
+    border-radius: 10px;
+
+    &.bottom-left {
+        top: 42px;
+        left: 0px;
+    }
+
+    &.bottom-right {
+        top: 42px;
+        right: 0px;
+    }
+
+    &.top-left {
+        bottom: 0px;
+        left: 42px;
+    }
+
+    &.top-right {
+        bottom: 0px;
+        right: 42px;
+    }
+
+    .dropdown-container {
+        padding: 0px;
+        overflow-y: auto;
+
+        label {
+            font-size: 15px;
+            display: inline-block;
+            text-transform: uppercase;
+            color: #9e9e9e;
+            font-weight: 700;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            margin: 0px;
+            list-style-type: none;
+            padding: 0px;
+
+            .read{
+                color:rgba(58, 58, 58, 0.5);
+                .notif-content > a{
+                    text-decoration: none;
+                    color: rgba(58, 58, 58, 0.5); 
+
+                    &:hover{
+                        color:rgba(58, 58, 58, 0.5)
+                    }
+                }
+            }
+
+            li {
+                padding: 16px 10px;
+                border-bottom: 1px solid #c7c7c7;
+
+                a:link,
+                a:active,
+                a:visited,
+                a:focus {
+                    color: $font-color;
+                    display: block;
+                }
+
+                a:hover {
+                    color: $brand-color;
+                }
+
+                .checkbox {
+                    margin: 0;
+                }
+
+                .control-group label {
+                    color: $font-color;
+                    font-size: 15px;
+                    font-weight: 500;
+                    text-transform: capitalize;
+                    width: 100%;
+                }   
+            }
+
+            .bottom-li{
+                border-bottom: none !important;
+                color: #3a3a3a;             
+                display: flex;
+                justify-content: space-between;
+
+                a{
+                    display: initial;
+                    color: #3a3a3a !important;
+                }
+            }
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+}
+
+
 .section {
     .secton-title {
         font-size: 18px;
@@ -435,6 +549,25 @@ h5 {
 
 .table {
     width: 100%;
+
+    .table-responsive{
+        overflow-x: auto; 
+        width: 100%;       
+
+        &::-webkit-scrollbar {
+            height: 5px !important;
+        }
+        
+        &::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(200,200,200,1) !important;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px !important;
+            background-color:#fff !important;
+            -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7) !important;
+        }
+    }
 
     table {
         border-collapse: collapse;
@@ -667,7 +800,7 @@ h5 {
             pointer-events: none;
             position: absolute;
             left: 70%;
-            top: 50%;
+            top: 51%;
         }
 
         .cross-icon {
@@ -1110,6 +1243,14 @@ modal {
         left: 10%;
         margin-left: 0px;
     }
+
+    .control-group {
+        width: 100%;     
+
+        .control {            
+            width: 100%;
+        } 
+    }    
 }
 
 .label {
@@ -1334,3 +1475,47 @@ modal {
         }
     }
 }
+
+.start-date::after, .end-date::after {
+    background-image: url(../images/Icon-Calendar.svg);
+    width: 24px;
+    height: 24px;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -34px;
+    pointer-events: none;
+    position: absolute;
+    top: 43%;
+}
+
+@media only screen and (max-width: 414px){
+    .notification{
+        width: 414px;
+    }
+}
+
+@media only screen and (max-width: 411px){
+    .notification{
+        width: 410px;
+    }
+}
+
+@media only screen and (max-width: 375px){
+    .notification{
+        width: 375px;
+    }
+}
+
+@media only screen and (max-width: 360px){
+    .notification{
+        width: 360px;
+    }
+}
+
+@media only screen and (max-width: 320px){
+    .notification{
+        width: 320px;
+    }
+}
+

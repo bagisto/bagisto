@@ -18,13 +18,11 @@ class AttributeCest
         $attribute = $I->have(Attribute::class);
 
         $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.catalog'), '//*[contains(@class, "navbar-left")]');
-        $I->click(__('admin::app.layouts.attributes'), '//*[contains(@class, "aside-nav")]');
-
+     
+        $I->amOnAdminRoute('admin.catalog.attributes.index');
         $I->seeCurrentRouteIs('admin.catalog.attributes.index');
-        $I->see($attribute->id, '//script[@type="text/x-template"]');
-        $I->see($attribute->admin_name, '//script[@type="text/x-template"]');
+
+        $I->see("{$attribute->id}", '//script[@type="text/x-template"]');
     }
 
     /**

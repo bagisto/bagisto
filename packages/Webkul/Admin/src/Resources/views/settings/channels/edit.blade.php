@@ -205,12 +205,16 @@
                                 <label>{{ __('admin::app.settings.channels.logo') }}</label>
 
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false" :images='"{{ $channel->logo_url }}"'></image-wrapper>
+                            
+                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.logo-size') }}</span>
                             </div>
 
                             <div class="control-group">
                                 <label>{{ __('admin::app.settings.channels.favicon') }}</label>
 
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="favicon" :multiple="false" :images='"{{ $channel->favicon_url }}"'></image-wrapper>
+                                
+                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.favicon-size') }}</span> 
                             </div>
 
                         </div>

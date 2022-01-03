@@ -37,7 +37,8 @@
         "laravel/ui": "^3.0",
         "maatwebsite/excel": "^3.1.26",
         "paypal/paypal-checkout-sdk": "1.0.1",
-        "prettus/l5-repository": "^2.6"
+        "prettus/l5-repository": "^2.6",
+        "pusher/pusher-php-server": "^7.0"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
@@ -101,7 +102,8 @@
             "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
             "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
             "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
-            "Webkul\\Marketing\\": "packages/Webkul/Marketing/src"
+            "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
+            "Webkul\\Notification\\": "packages/Webkul/Notification/src"
         }
     },
     "autoload-dev": {

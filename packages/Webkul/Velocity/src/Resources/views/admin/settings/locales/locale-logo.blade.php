@@ -14,4 +14,6 @@
             :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'">
         </image-wrapper>
     @endif
+
+    <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-locale-resolution') }}</span>
 </div>

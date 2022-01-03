@@ -1,50 +1,30 @@
-<template>
-    <span class="toggle-aside-nav" @click="toggle">
+<template>   
+     <div class="menubar-bottom" @click="toggle">
         <i class="icon" :class="iconClass"></i>
-    </span>
+    </div>
 </template>
 
-<style scoped>
-.toggle-aside-nav {
-    position: absolute;
-    top: 50px;
-    right: -12px;
-}
-
-.rtl .toggle-aside-nav {
-    left: -12px;
-    right: unset;
-}
-</style>
-
 <script>
-export default {
-    props: [
-        'iconClass',
-    ],
+export default {  
+
+    data(){
+        return {
+            iconClass : 'accordian-right-icon',
+            leftIconClass : 'accordian-left-icon',
+            rightIconClass : 'accordian-right-icon'            
+        }
+    },
 
     methods: {
         toggle: function () {
-            if ($('.aside-nav').hasClass('active')) {
-                this.hide();
-            } else {
-                this.show();
+            this.$root.toggleMenu();
+
+            if(this.$root.isMenuOpen && this.iconClass == 'accordian-right-icon'){
+                this.iconClass = this.leftIconClass;
+            }else{
+                this.iconClass = this.rightIconClass;
             }
         },
-
-        hide: function () {
-            $('#nav-expand-button').show();
-            $('.aside-nav').hide(function () {
-                $(this).removeClass('active');
-            });
-        },
-
-        show: function () {
-            $('#nav-expand-button').hide();
-            $('.aside-nav').show(function () {
-                $(this).addClass('active');
-            });
-        }
     }
 }
 </script>
