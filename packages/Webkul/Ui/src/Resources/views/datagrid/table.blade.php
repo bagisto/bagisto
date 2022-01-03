@@ -260,14 +260,14 @@
                             </span>
                         </span>
                     </div>
-                    
+
                     <div class="records-count-container">
                         <span class="datagrid-count">
-                            {{ $results['records']->total()  }}   {{ __('admin::app.admin.system.records-found') }}
+                            @if ($results['records'] instanceof \Illuminate\Pagination\LengthAwarePaginator) {{ $results['records']->total()  }} @else {{ count($results['records']) }} @endif {{ __('admin::app.admin.system.records-found') }}
                         </span>
                     </div>
-                </div>                                        
-                
+                </div>
+
                 <div class="table-responsive">
                     <table class="table">
                         @include('ui::datagrid.partials.mass-action-header')
@@ -276,7 +276,7 @@
 
                         @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns'],'enableMassActions' => $results['enableMassActions'], 'enableActions' => $results['enableActions'], 'norecords' => $results['norecords']])
                     </table>
-                </div>                
+                </div>
             </div>
         </script>
 
