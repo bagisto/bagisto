@@ -19,10 +19,8 @@ class OrderCest
         $I->loginAsAdmin();
 
         /* go to order view page */
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.sales'), '//*[contains(@class, "navbar-left")]');
+        $I->amOnAdminRoute('admin.sales.orders.index');
         $I->seeCurrentRouteIs('admin.sales.orders.index');
-        $I->click(__('admin::app.layouts.orders'), '//*[contains(@class, "aside-nav")]');
 
         /* now test index page */
         $I->seeCurrentRouteIs('admin.sales.orders.index');
@@ -44,7 +42,7 @@ class OrderCest
         $I->see('Cancel', Locator::href(route('admin.sales.orders.cancel', $order->id)));
         $I->click('Cancel', Locator::href(route('admin.sales.orders.cancel', $order->id)));
         $I->seeCurrentRouteIs('admin.sales.orders.view');
-        $I->see(0.00, '#due-amount-on-cancelled');
+        $I->see("0.00", '#due-amount-on-cancelled');
     }
 
     private function generateCashOnDeliveryOrder(FunctionalTester $I)

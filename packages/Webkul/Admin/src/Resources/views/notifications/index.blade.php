@@ -13,6 +13,14 @@
         'completed'=> trans('admin::app.notification.status.completed'),
         'processing' => trans('admin::app.notification.status.processing') 
     ];
+
+    $orderStatusMessages = [
+        'pending' => trans('admin::app.notification.order-status-messages.pending'),
+        'canceled'=> trans('admin::app.notification.order-status-messages.canceled'),
+        'closed' => trans('admin::app.notification.order-status-messages.closed'),
+        'completed'=> trans('admin::app.notification.order-status-messages.completed'),
+        'processing' => trans('admin::app.notification.order-status-messages.processing') 
+    ];
 @endphp
 
 @push('css')
@@ -47,6 +55,7 @@
         pusher-cluster="{{ env('PUSHER_APP_CLUSTER') }}"
         title=" {{ __('admin::app.notification.title') }}"
         order-status="{{ json_encode($orderStatus) }}"
+        order-status-messages="{{ json_encode($orderStatusMessages) }}"
         no-record-text="{{ __('admin::app.notification.no-record') }}">
     </notification-list>
 @endsection

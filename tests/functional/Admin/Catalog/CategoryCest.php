@@ -12,12 +12,10 @@ class CategoryCest
         $category = $I->have(Category::class);
 
         $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.catalog'), '//*[contains(@class, "navbar-left")]');
-        $I->click(__('admin::app.layouts.categories'), '//*[contains(@class, "aside-nav")]');
 
+        $I->amOnAdminRoute('admin.catalog.categories.index');
         $I->seeCurrentRouteIs('admin.catalog.categories.index');
-        $I->see($category->id, '//script[@type="text/x-template"]');
-        $I->see($category->name, '//script[@type="text/x-template"]');
+
+        $I->see("{$category->id}", '//script[@type="text/x-template"]');
     }
 }

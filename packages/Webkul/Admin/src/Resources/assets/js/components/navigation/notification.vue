@@ -15,7 +15,7 @@
                             </div>                
                             <div class="notif-content">
                                 <a :href="`${orderViewUrl}${notification.order_id}`">
-                                    #{{ notification.order.id }} {{ordertype.pending.message}}
+                                    #{{ notification.order.id }} {{orderTypeMessages.pending}}
                                 </a>  
                             </div>
                             <div class="notif-content">
@@ -28,7 +28,7 @@
                             </div>                
                             <div class="notif-content">
                                 <a :href="`${orderViewUrl}${notification.order_id}`">
-                                    #{{ notification.order.id }} {{ordertype.canceled.message}}
+                                    #{{ notification.order.id }} {{orderTypeMessages.canceled}}
                                 </a> 
                             </div>
                             <div class="notif-content">
@@ -41,7 +41,7 @@
                             </div>                
                             <div class="notif-content">
                                 <a :href="`${orderViewUrl}${notification.order_id}`">
-                                    #{{ notification.order.id }} {{ordertype.completed.message}}
+                                    #{{ notification.order.id }} {{orderTypeMessages.completed}}
                                 </a>
                             </div>
                             <div class="notif-content">
@@ -54,7 +54,7 @@
                             </div>                   
                             <div class="notif-content">
                                 <a :href="`${orderViewUrl}${notification.order_id}`">
-                                    #{{ notification.order.id }} {{ordertype.processing.message}}
+                                    #{{ notification.order.id }} {{orderTypeMessages.processing}}
                                 </a>
                             </div>
                             <div class="notif-content">
@@ -67,7 +67,7 @@
                             </div>                
                             <div class="notif-content">
                                 <a :href="`${orderViewUrl}${notification.order_id}`">
-                                    #{{ notification.order.id }} {{ordertype.closed.message}}
+                                    #{{ notification.order.id }} {{orderTypeMessages.closed}}
                                 </a>
                             </div>
                             <div class="notif-content">
@@ -98,7 +98,8 @@ export default {
         'title',
         'viewAllTitle',
         'getReadAllUrl',
-        'readAllTitle'   
+        'readAllTitle',
+        'orderStatusMessages'   
     ],
 
     data(){
@@ -127,12 +128,15 @@ export default {
                     message: 'Order Closed'
                 }
             },  
-            totalUnRead: 0 
+            totalUnRead: 0,
+            orderTypeMessages:JSON.parse(this.orderStatusMessages) 
         }
     },
 
     mounted(){
         this.getNotification(); 
+
+        console.log(this.orderTypeMessages);
 
         if(this.pusherKey != undefined && this.pusherCluster != undefined){
             Echo = new Echo({
@@ -147,7 +151,6 @@ export default {
             });
         
             Echo.channel('notification').listen('.update-notification', (e) => {
-                console.log(e);
                 this.notifications.forEach((notification)=>{
                     if(notification.order_id == e.id){
                         notification.order.status = e.status;

@@ -17,11 +17,7 @@ class UsersCest
     {
         $I->loginAsAdmin();
         $I->amOnAdminRoute('admin.dashboard.index');
-
-        $I->click(__('admin::app.layouts.settings'), '//*[contains(@class, "navbar-left")]');
-
-        $I->click(__('admin::app.layouts.users'), '//*[contains(@class, "aside-nav")]');
-        $I->seeCurrentRouteIs('admin.users.index');
+        $I->seeCurrentRouteIs('admin.dashboard.index');
     }
 
     /**

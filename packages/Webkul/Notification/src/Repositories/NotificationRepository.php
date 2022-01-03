@@ -36,7 +36,7 @@ class NotificationRepository extends Repository
                 });
             })->with('order')->paginate(10): $this->model->with('order')->latest()->paginate(10);
         }elseif(isset($params['limit'])){
-            return $this->model->limit($params['limit'])->with('order')->latest()->paginate(10);
+            return $this->model->limit($params['limit'])->with('order')->latest()->paginate($params['limit']);
         }elseif(isset($params['id'])){
             return $this->model->where('order_id',$params['id'])->with('order')->paginate(10);
         }

@@ -1,3 +1,13 @@
+@php 
+    $orderStatusMessages = [
+        'pending' => trans('admin::app.notification.order-status-messages.pending'),
+        'canceled'=> trans('admin::app.notification.order-status-messages.canceled'),
+        'closed' => trans('admin::app.notification.order-status-messages.closed'),
+        'completed'=> trans('admin::app.notification.order-status-messages.completed'),
+        'processing' => trans('admin::app.notification.order-status-messages.processing') 
+    ];
+@endphp
+
 <div class="navbar-top">
     <div class="navbar-top-left">
         @include ('admin::layouts.mobile-nav')
@@ -38,6 +48,7 @@
                 title="{{ __('admin::app.notification.title-plural') }}"
                 view-all-title="{{ __('admin::app.notification.view-all') }}"
                 get-read-all-url="{{ route('admin.notification.read-all') }}"
+                order-status-messages="{{ json_encode($orderStatusMessages) }}"
                 read-all-title="{{ __('admin::app.notification.read-all') }}">
             </notification>              
 
