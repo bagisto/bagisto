@@ -1,5 +1,6 @@
 @php
     $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeFamilyRepository');
+    
     $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 
     $locale = core()->getRequestedLocaleCode();
@@ -228,6 +229,8 @@
                             }
 
                             window.flashMessages = [{'type': 'alert-success', 'message': response.data.message }];
+
+                            this.updateCompareCount();
 
                             this.$root.addFlashMessages();
                         })
