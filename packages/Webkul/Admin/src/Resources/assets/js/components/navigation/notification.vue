@@ -134,9 +134,7 @@ export default {
     },
 
     mounted(){
-        this.getNotification(); 
-
-        console.log(this.orderTypeMessages);
+        this.getNotification();
 
         if(this.pusherKey != undefined && this.pusherCluster != undefined){
             Echo = new Echo({
