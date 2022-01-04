@@ -4868,6 +4868,10 @@ body {
     padding-top: 20px;
 }
 
+.compare-products {
+    width: unset !important;
+}
+
 .mt-0 {
     margin-top: 0px;
 }
@@ -4882,7 +4886,7 @@ body {
 
 td {
     padding: 15px;
-    min-width: 25px;
+    min-width: 250px;
     max-width: 250px;
     line-height: 30px;
     vertical-align: top;
