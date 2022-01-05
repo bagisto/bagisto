@@ -997,6 +997,7 @@ return [
             'title'                => 'Klanten',
             'first_name'           => 'Voornaam',
             'last_name'            => 'Naam',
+            'select-gender'        => 'Select Gender',
             'gender'               => 'Geslacht',
             'email'                => 'Email',
             'date_of_birth'        => 'Geboortedatum',

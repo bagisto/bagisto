@@ -1015,6 +1015,7 @@ return [
             'title'                     => 'Les clients',
             'first_name'                => 'Prénom',
             'last_name'                 => 'Nom de famille',
+            'select-gender'             => 'Select Gender',
             'gender'                    => 'Genre',
             'email'                     => 'E-mail',
             'date_of_birth'             => 'Date de naissance',
