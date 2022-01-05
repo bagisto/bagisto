@@ -256,7 +256,13 @@ class UserController extends Controller
 
         $isStatusChangedToInactive = (int) $data['status'] === 0 && (int) $user->status === 1;
 
-        if ($isStatusChangedToInactive && $this->adminRepository->countAdminsWithAllAccessAndActiveStatus() === 1) {
+        if (
+            $isStatusChangedToInactive
+            && (
+                auth()->guard('admin')->user()->id === (int) $id
+                || $this->adminRepository->countAdminsWithAllAccessAndActiveStatus() === 1
+            )
+        ) {
             return $this->cannotChangeRedirectResponse('status');
         }
 
@@ -264,8 +270,8 @@ class UserController extends Controller
          * Is user with `permission_type` all role changed.
          */
         $isRoleChanged = $user->role->permission_type === 'all'
-            && isset($data['role_id'])
-            && (int) $data['role_id'] !== $user->role_id;
+        && isset($data['role_id'])
+        && (int) $data['role_id'] !== $user->role_id;
 
         if ($isRoleChanged && $this->adminRepository->countAdminsWithAllAccess() === 1) {
             return $this->cannotChangeRedirectResponse('role');
@@ -283,7 +289,7 @@ class UserController extends Controller
     private function cannotChangeRedirectResponse(string $columnName): \Illuminate\Http\RedirectResponse
     {
         session()->flash('error', trans('admin::app.response.cannot-change', [
-            'name' => $columnName
+            'name' => $columnName,
         ]));
 
         return redirect()->route($this->_config['redirect']);

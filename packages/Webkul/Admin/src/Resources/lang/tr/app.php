@@ -1344,6 +1344,7 @@ return [
         'cancel-error'            => ':name iptal edilemez.',
         'already-taken'           => ':name daha önceden girilmiş.',
         'order-pending'           => 'Bu hesaba ait işlem bekleyen siparişler bulunduğundan hesap silinemez.',
+        'something-went-wrong'    => 'Something went wrong!',
     ],
 
     'footer' => [

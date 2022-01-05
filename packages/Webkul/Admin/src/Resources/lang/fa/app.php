@@ -1357,6 +1357,7 @@ return [
         'cancel-error'            => ' قابل لغو نیست :name',
         'already-taken'           => ' قبلا گرفته شده :name',
         'order-pending'           => 'حساب حذف نمی شود زیرا برخی از سفارش ها حالت معلق یا در حال پردازش هستند',
+        'something-went-wrong'    => 'Something went wrong!',
     ],
 
     'footer' => [

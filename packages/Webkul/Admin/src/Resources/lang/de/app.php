@@ -1367,6 +1367,7 @@ return [
         'cancel-error'              => ':name können nicht storniert werden.',
         'already-taken'             => 'Der :name wird bereits verwendet.',
         'order-pending'             => 'Konto kann nicht gelöscht werden, da einige Bestellungen ausstehen oder verarbeitet werden.',
+        'something-went-wrong'      => 'Something went wrong!',
     ],
     'footer'        =>
     [

@@ -44,7 +44,7 @@ return [
 
     'layouts' => [
         'app-version'              => 'Version : :version',
-        'account-title'            => 'Account',   
+        'account-title'            => 'Account',
         'my-account'               => 'My Account',
         'logout'                   => 'Logout',
         'visit-shop'               => 'Visit Shop',
@@ -85,7 +85,7 @@ return [
         'cms'                      => 'CMS',
         'transactions'             => 'Transactions',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
-        'mode'                     => 'Mode'
+        'mode'                     => 'Mode',
     ],
 
     'acl' => [
@@ -598,7 +598,7 @@ return [
             'save'                          => 'Save',
             'cancel'                        => 'Cancel',
             'saved-inventory-message'       => 'Product inventory saved successfully.',
-            'image-size'                    => 'Image resolution should be like 640px X 640px'
+            'image-size'                    => 'Image resolution should be like 640px X 640px',
         ],
 
         'attributes' => [
@@ -702,7 +702,7 @@ return [
             'filterable-attributes'    => 'Filterable Attributes',
             'attributes'               => 'Attributes',
             'image-size'               => 'Image resolution should be like 300px X 168px',
-            'image-size-logo'          => 'Image resolution should be like 20px X 20px'
+            'image-size-logo'          => 'Image resolution should be like 20px X 20px',
         ],
     ],
 
@@ -882,7 +882,7 @@ return [
             'maintenance-mode-text'  => 'Message',
             'allowed-ips'            => 'Allowed IPs',
             'logo-size'              => 'Image resolution should be like 192px X 50px',
-            'favicon-size'           => 'Image resolution should be like 16px X 16px'
+            'favicon-size'           => 'Image resolution should be like 16px X 16px',
         ],
 
         'sliders' => [
@@ -903,7 +903,7 @@ return [
             'delete-fail'     => 'Slider item successfully deleted',
             'expired-at'      => 'Expire Date',
             'sort-order'      => 'Sort Order',
-            'image-size'      => 'Image resolution should be like 1920px X 550px'
+            'image-size'      => 'Image resolution should be like 1920px X 550px',
         ],
 
         'tax-categories' => [
@@ -1384,6 +1384,7 @@ return [
         'cancel-error'              => ':name can not be canceled.',
         'already-taken'             => 'The :name has already been taken.',
         'order-pending'             => 'Cannot delete :name account because some Order(s) are pending or processing state.',
+        'something-went-wrong'      => 'Something went wrong!',
     ],
 
     'footer' => [
@@ -1566,7 +1567,7 @@ return [
             'records-found'                         => 'Record(s) found',
             'logo-size'                             => 'Image resolution should be like 112px X 41px',
             'favicon-size'                          => 'Image resolution should be like 16px X 16px',
-            'invoice-logo-size'                     => 'Image resolution should be like 192px X 50px'
+            'invoice-logo-size'                     => 'Image resolution should be like 192px X 50px',
         ],
     ],
 
@@ -1590,26 +1591,26 @@ return [
     ],
 
     'notification' => [
-        'title'         => 'Notification',
-        'title-plural'  => 'Notifications',
-        'status' => [
+        'title'                       => 'Notification',
+        'title-plural'                => 'Notifications',
+        'status'                      => [
             'all'        => 'All',
             'pending'    => 'Pending',
             'processing' => 'Processing',
             'canceled'   => 'Canceled',
             'closed'     => 'Closed',
-            'completed'  => 'Completed'
+            'completed'  => 'Completed',
         ],
-        'view-all'     => 'View All Notifications',
-        'no-record'    => 'No Record Found',
-        'read-all'     => 'Mark as Read',
+        'view-all'                    => 'View All Notifications',
+        'no-record'                   => 'No Record Found',
+        'read-all'                    => 'Mark as Read',
         'notification-marked-success' => 'Notification Marked Successfully',
-        'order-status-messages' => [
-            'completed'    => 'Order Completed',
-            'closed'       => 'Order Closed',
-            'canceled'     => 'Order Canceled',
-            'pending'      => 'Order Pending',
-            'processing'   => 'Order Processing',
-        ]
+        'order-status-messages'       => [
+            'completed'  => 'Order Completed',
+            'closed'     => 'Order Closed',
+            'canceled'   => 'Order Canceled',
+            'pending'    => 'Order Pending',
+            'processing' => 'Order Processing',
+        ],
     ],
 ];

@@ -1354,6 +1354,7 @@ return [
         'cancel-error'            => ':name kan niet worden geannuleerd.',
         'already-taken'           => 'The :name is al bezet.',
         'order-pending'           => 'Kan account niet verwijderen omdat sommige bestelling (en) in behandeling of in behandeling zijn.',
+        'something-went-wrong'    => 'Something went wrong!',
     ],
 
     'footer' => [
