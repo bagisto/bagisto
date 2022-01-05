@@ -64,7 +64,7 @@ class CategoryCest
         $I->seeRecord(CategoryTranslation::class, [
            'category_id' => $this->category->id,
            'locale' => $this->localeEn->code,
-           'url_path' => $this->category->slug,
+           'url_path' => $this->categoryAttributes[$this->localeEn->code]['slug'],
         ]);
 
         $this->childCategoryAttributes = [
@@ -82,7 +82,7 @@ class CategoryCest
         $this->category->prependNode($this->childCategory);
         $I->assertNotNull($this->childCategory);
 
-        $expectedUrlPath = $this->category->slug . '/' . $this->childCategory->slug;
+        $expectedUrlPath = $this->categoryAttributes[$this->localeEn->code]['slug'] . '/' . $this->childCategoryAttributes[$this->localeEn->code]['slug'];
         $I->seeRecord(CategoryTranslation::class, [
             'category_id' => $this->childCategory->id,
             'locale' => $this->localeEn->code,
@@ -104,7 +104,7 @@ class CategoryCest
         $this->childCategory->prependNode($this->grandChildCategory);
         $I->assertNotNull($this->grandChildCategory);
 
-        $expectedUrlPath .= '/' . $this->grandChildCategory->slug;
+        $expectedUrlPath .= '/' . $this->grandChildCategoryAttributes[$this->localeEn->code]['slug'];
         $I->seeRecord(CategoryTranslation::class, [
             'category_id' => $this->grandChildCategory->id,
             'locale' => $this->localeEn->code,
