@@ -1,4 +1,5 @@
 .env
+.env.testing
 .idea
 .php_cs.cache
 .vscode

@@ -33,18 +33,31 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: curl, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
 
-      - name: Set Environment
-        run: |
-          set -e
-          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env.testing
-          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env.testing
-          printf "the complete .env.testing ...\n\n"
-          cat .env.testing
-
       - name: Composer Install
         run: |
           set -e
           composer install --no-cache
+
+      - name: Set Testing Environment
+        run: |
+          cp .env.example .env.testing
+          set -e
+          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env.testing
+          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env.testing
+          sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto_testing|" .env.testing
+          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1bagisto|" .env.testing
+          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1secret|" .env.testing
+
+      - name: Key Generate
+        run: set -e && php artisan key:generate --env=testing
+
+      - name: Comlplete Testing Env File
+        run: |
+          printf "The complete `.env.testing` ... \n\n"
+          cat .env.testing
+
+      - name: Optimize Stuffs
+        run: set -e && php artisan optimize:clear --env=testing
 
       - name: Migrate Database
         run: set -e && php artisan migrate --env=testing
@@ -54,9 +67,6 @@ jobs:
 
       - name: Vendor Publish
         run: set -e && php artisan vendor:publish --all --force --env=testing
-
-      - name: Optimize Stuffs
-        run: set -e && php artisan optimize --env=testing
 
       - name: Execute Unit Tests
         run: set -e && vendor/bin/codecept run unit
