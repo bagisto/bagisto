@@ -989,6 +989,7 @@ return [
             'title'                => 'Müşteriler',
             'first_name'           => 'Müşteri Adı',
             'last_name'            => 'Müşteri Soyadı',
+            'select-gender'        => 'Select Gender',
             'gender'               => 'Cinsiyet',
             'email'                => 'E-Mail',
             'date_of_birth'        => 'Doğum Tarihi',

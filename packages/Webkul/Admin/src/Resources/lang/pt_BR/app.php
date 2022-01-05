@@ -999,6 +999,7 @@ return [
             'title'                => 'Clientes',
             'first_name'           => 'Nome',
             'last_name'            => 'Sobrenome',
+            'select-gender'        => 'Select Gender',
             'gender'               => 'Gênero',
             'email'                => 'Email',
             'date_of_birth'        => 'Data de Nascimento',

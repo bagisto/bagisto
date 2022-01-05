@@ -1000,6 +1000,7 @@ return [
             'title'                => 'Klienci',
             'first_name'           => 'Imię',
             'last_name'            => 'Nazwisko',
+            'select-gender'        => 'Select Gender',
             'gender'               => 'Płeć',
             'email'                => 'Email',
             'date_of_birth'        => 'Data urodzenia',

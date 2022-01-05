@@ -75,7 +75,7 @@
                         v-validate="'required'"
                         data-vv-as="&quot;{{ __('admin::app.customers.customers.gender') }}&quot;">
 
-                        <option value="" {{ $customer->gender == "" ? 'selected' : '' }}></option>
+                        <option value="" {{ $customer->gender == "" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.select-gender') }}</option>
                         <option value="{{ __('admin::app.customers.customers.male') }}" {{ $customer->gender == __('admin::app.customers.customers.male') ? 'selected' : '' }}>{{ __('admin::app.customers.customers.male') }}</option>
                         <option value="{{ __('admin::app.customers.customers.female') }}" {{ $customer->gender == __('admin::app.customers.customers.female') ? 'selected' : '' }}>{{ __('admin::app.customers.customers.female') }}</option>
                         <option value="{{ __('admin::app.customers.customers.other') }}" {{ $customer->gender == __('admin::app.customers.customers.other') ? 'selected' : '' }}>{{ __('admin::app.customers.customers.other') }}</option>
