@@ -1357,6 +1357,7 @@ return [
         'cancel-error'            => ':name nie można anulować.',
         'already-taken'           => 'Ta :name jest już zajęta.',
         'order-pending'           => 'Nie można usunąć konta, ponieważ niektóre zamówienia są w toku lub są przetwarzane.',
+        'something-went-wrong'    => 'Something went wrong!',
     ],
 
     'footer' => [

@@ -1369,6 +1369,7 @@ return [
         'cancel-error'              => ':name no puede ser cancelado.',
         'already-taken'             => 'El :name ya ha sido tomado.',
         'order-pending'             => 'No puede borrar la cuenta porque algun(os) pedido(s) están en estado pendiente o procesando.',
+        'something-went-wrong'      => 'Something went wrong!',
     ],
 
     'footer' => [

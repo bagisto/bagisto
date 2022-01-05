@@ -1383,6 +1383,7 @@ return [
         'cancel-error'              => ':name ne peut pas être annulé.',
         'already-taken'             => 'Le :name a déjà été pris.',
         'order-pending'             => 'Impossible de supprimer le compte :name car certaines commandes sont en attente ou en cours de traitement.',
+        'something-went-wrong'      => 'Something went wrong!',
     ],
 
     'footer' => [

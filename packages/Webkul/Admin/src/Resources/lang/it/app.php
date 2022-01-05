@@ -1360,6 +1360,7 @@ return [
         'cancel-error'            => ':name non può essere cancellato.',
         'already-taken'           => 'Il nome :name è stato giù utilizzato.',
         'order-pending'           => 'Non è possibile eliminare l\'account perchè alcuni Ordini sono in stato di attesa o in corso.',
+        'something-went-wrong'    => 'Something went wrong!',
     ],
 
     'footer' => [

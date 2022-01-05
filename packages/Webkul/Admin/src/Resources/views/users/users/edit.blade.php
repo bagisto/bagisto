@@ -72,14 +72,18 @@
                                 <span class="control-error" v-if="errors.has('role_id')">@{{ errors.first('role_id') }}</span>
                             </div>
 
-                            <div class="control-group">
-                                <label for="status">{{ __('admin::app.users.users.status') }}</label>
+                            @if (auth()->guard('admin')->user()->id !== $user->id)
+                                <div class="control-group">
+                                    <label for="status">{{ __('admin::app.users.users.status') }}</label>
 
-                                <label class="switch">
-                                    <input type="checkbox" id="status" name="status" value="{{ $user->status }}" {{ $user->status ? 'checked' : '' }}>
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="status" name="status" value="{{ $user->status }}" {{ $user->status ? 'checked' : '' }}>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            @else
+                                <input type="hidden" name="status" value="{{ $user->status }}">
+                            @endif
                         </div>
                     </accordian>
                 </div>
