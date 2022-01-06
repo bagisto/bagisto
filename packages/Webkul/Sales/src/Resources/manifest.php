@@ -1,6 +1,6 @@
 <?php
 
- return [
+return [
     'name'    => 'Webkul Bagisto Sales',
-    'version' => '0.0.1'
- ];
+    'version' => '0.0.1',
+];

@@ -1,6 +1,6 @@
- <?php
+<?php
 
- return [
+return [
     'name'    => 'Webkul Bagisto Categories',
-    'version' => '0.0.1'
- ];
+    'version' => '0.0.1',
+];
