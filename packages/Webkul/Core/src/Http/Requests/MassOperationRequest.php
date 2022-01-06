@@ -8,7 +8,7 @@ use Webkul\Core\Contracts\Validations\CommaSeperatedInteger;
 class MassOperationRequest extends FormRequest
 {
     /**
-     * Determine if the Configuraion is authorized to make this request.
+     * Determine if the request is authorized or not.
      *
      * @return bool
      */
