@@ -17,7 +17,7 @@ body {
     width: 95%;
     margin-left: 3%;
     border-radius: 5px;
-    color: #fff;
+    color: $white;
     font-size: 16px;
     margin-bottom: 10px;
 }
@@ -198,7 +198,7 @@ body {
             > a {
                 padding: 5px 2px;
                 display: block;
-                color: #000;
+                color: $black;
                 width: 100%;
 
                 .icon {
@@ -242,7 +242,7 @@ body {
                     a {
                         display: block;
                         padding: 8px 12px;
-                        color: #000;
+                        color: $black;
                         font-size: 12px;
                     }    
                 }
@@ -256,19 +256,19 @@ body {
 
                     .sub-menu-item {
                         .menu-label {
-                            color: #000;                            
+                            color: $black;                            
                         }
 
                         &.active {
                             background-color: #e6e6e6;
                             .menu-label {
-                                color: blue;
+                                color: $blue;
                             }
                         }
 
                         &:hover{
                             .menu-label {
-                                color: blue;
+                                color: $blue;
                             }
                         }
                     }
@@ -292,7 +292,7 @@ body {
                         font-size: 14px;
                         font-weight: 200;
                         display: inline-block;
-                        color: #000;
+                        color: $black;
                     }
 
                     .arrow-icon {
@@ -320,7 +320,7 @@ body {
                     width: calc(100% - 1px);
 
                     .menu-label {
-                        color: #000;
+                        color: $black;
                     }
 
                     ul.sub-menubar {
@@ -330,7 +330,7 @@ body {
 
                         .sub-menu-item {
                             .menu-label {
-                                color: #000;
+                                color: $black;
                             }
 
                             &.active, &:hover {
@@ -345,7 +345,7 @@ body {
 
                 &:hover {                   
                     .menu-label {
-                        color: #000;
+                        color: $black;
                     }
                 }
             }
@@ -557,7 +557,7 @@ body {
 
 .notif{
 
-    background-color: #fff;
+    background-color: $white;
 
     li {
         padding: 10px;
@@ -625,7 +625,7 @@ body {
     right: 13px;
     top: 6px;
     background: red;
-    color: #fff;
+    color: $white;
     width: 20px;
     text-align: center;
     border-radius: 10px;
