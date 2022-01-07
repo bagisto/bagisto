@@ -5,7 +5,7 @@ namespace Webkul\Core\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Contracts\Validations\CommaSeperatedInteger;
 
-class MassOperationRequest extends FormRequest
+class MassUpdateRequest extends FormRequest
 {
     /**
      * Determine if the request is authorized or not.
@@ -25,7 +25,9 @@ class MassOperationRequest extends FormRequest
     public function rules()
     {
         return [
-            'indexes' => ['required', new CommaSeperatedInteger],
+            'indexes'      => ['required', new CommaSeperatedInteger],
+            'update_key'   => ['sometimes', 'required', 'string'],
+            'update_value' => ['required'],
         ];
     }
 
@@ -37,7 +39,9 @@ class MassOperationRequest extends FormRequest
     public function passedValidation()
     {
         $this->replace([
-            'indexes' => explode(',', $this->indexes),
+            'indexes'      => explode(',', $this->indexes),
+            'update_key'   => $this->update_key,
+            'update_value' => $this->update_value,
         ]);
     }
 }
