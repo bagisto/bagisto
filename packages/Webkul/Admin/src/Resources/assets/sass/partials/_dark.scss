@@ -446,8 +446,8 @@
 
     .accordian, accordian {       
         .accordian-header, div[slot*="header"] {
-            background-color: #02080d ;
-            color: rgba(255,255,255,.5)
+            background-color: #02080d;
+            color: rgba(255,255,255,.5);
         }
         .accordian-content, div[slot*="body"] {
             background-color: #000;
@@ -537,13 +537,13 @@
     .pagination .page-item {
         background: #000;
         border: 1px solid 000;
-        color: #ffffff;
+        color: $white;
     }
 
     .pagination .page-item.active {
-        background: #0041FF;
-        color: #ffffff;
-        border-color: #0041FF;
+        background-color: rgba(32, 57, 83, 0.2) !important;
+        color: $white;
+        border-color: rgba(2, 57, 83, 0.2) !important;
     }
 
     .filter-tag .wrapper {       
@@ -582,5 +582,10 @@
         padding: 14px 10px;
         border-bottom: 1px solid #232d36;
         cursor: default;
+    }
+
+    .btn.btn-primary {
+        background: rgba(255, 255, 255, 0.8);
+        color: $black;
     }
 }
