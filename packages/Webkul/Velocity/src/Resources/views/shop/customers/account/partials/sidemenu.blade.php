@@ -1,8 +1,14 @@
 <div class="customer-sidebar row no-margin no-padding">
     <div class="account-details col-12">
-        <div class="customer-name col-12 text-uppercase">
-            {{ substr(auth('customer')->user()->first_name, 0, 1) }}
-        </div>
+        @if (auth('customer')->user()->image)
+            <div>
+                <img style="width:80px;height:80px;border-radius:50%;" src="{{ auth('customer')->user()->image_url }}" alt="{{ auth('customer')->user()->first_name }}"/>
+            </div>
+        @else
+            <div class="customer-name col-12 text-uppercase">
+                {{ substr(auth('customer')->user()->first_name, 0, 1) }}
+            </div>
+        @endif
         <div class="col-12 customer-name-text text-capitalize text-break">{{ auth('customer')->user()->first_name . ' ' . auth('customer')->user()->last_name}}</div>
         <div class="customer-email col-12 text-break">{{ auth('customer')->user()->email }}</div>
     </div>

@@ -3,6 +3,7 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Core\Contracts\CurrencyExchangeRate as CurrencyExchangeRateContract;
 
 class CurrencyExchangeRate extends Model implements CurrencyExchangeRateContract
@@ -16,4 +17,12 @@ class CurrencyExchangeRate extends Model implements CurrencyExchangeRateContract
         'target_currency',
         'rate',
     ];
+
+    /**
+     * Get the exchange rate associated with the currency.
+     */
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(CurrencyProxy::modelClass(), 'target_currency');
+    }
 }

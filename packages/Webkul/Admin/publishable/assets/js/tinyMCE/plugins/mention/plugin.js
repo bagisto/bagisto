@@ -275,16 +275,12 @@
 
         renderDropdown: function () {
             return '<div class="uv-dropdown-list uv-bottom-left" style="display: block;"><ul></ul></div>';
-            return '<ul class="rte-autocomplete dropdown-menu"><li class="loading"></li></ul>';
         },
 
         render: function (item) {
             return `
                     <li><a href="javascript:;"><span>${item[this.options.queryBy]}</span></a></li>
             `;
-            return '<li>' +
-                        '<a href="javascript:;"><span>' + item[this.options.queryBy] + '</span></a>' +
-                    '</li>';
         },
 
         autoCompleteClick: function (e) {

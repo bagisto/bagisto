@@ -23,7 +23,6 @@
 @endsection
 
 @section('head')
-
     @if (isset($homeSEO))
         @isset($metaTitle)
             <meta name="title" content="{{ $metaTitle }}" />
@@ -40,6 +39,12 @@
 @endsection
 
 @push('css')
+    @if (! empty($sliderData))
+        <link rel="preload" as="image" href="{{ asset('/storage/' . $sliderData[0]['path']) }}">
+    @else
+        <link rel="preload" as="image" href="{{ asset('/themes/velocity/assets/images/banner.webp') }}">
+    @endif
+    
     <style type="text/css">
         .product-price span:first-child, .product-price span:last-child {
             font-size: 18px;

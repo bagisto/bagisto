@@ -50,11 +50,13 @@ return [
             'provider' => 'admins',
             'table' => 'admin_password_resets',
             'expire' => 60,
+            'throttle' => 60,
         ],
         'customers' => [
             'provider' => 'customers',
             'table' => 'customer_password_resets',
             'expire' => 60,
+            'throttle' => 60,
         ],
     ],
 ];

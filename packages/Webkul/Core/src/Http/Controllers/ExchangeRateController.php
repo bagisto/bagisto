@@ -45,8 +45,6 @@ class ExchangeRateController extends Controller
 
         $this->currencyRepository = $currencyRepository;
 
-        $this->exchangeRateRepository = $exchangeRateRepository;
-
         $this->_config = request('_config');
     }
 

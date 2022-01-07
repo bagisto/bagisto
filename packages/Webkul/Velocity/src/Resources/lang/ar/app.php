@@ -301,7 +301,10 @@ return [
         'wishlist' => [
             'add-wishlist-text' => 'إضافة منتج إلى قائمة الأمنيات',
             'remove-wishlist-text' => 'أزل المنتج من قائمة الأمنيات'
-        ]
+        ],
+        'overlay-loader' => [
+            'message' => 'في تقدم',
+        ],
     ],
 
     'responsive' => [

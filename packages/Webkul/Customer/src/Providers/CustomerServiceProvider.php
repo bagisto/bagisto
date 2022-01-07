@@ -2,43 +2,56 @@
 
 namespace Webkul\Customer\Providers;
 
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\ServiceProvider;
+use Webkul\Customer\Captcha;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 
 class CustomerServiceProvider extends ServiceProvider
 {
-    public function boot(Router $router)
+    /**
+     * Bootstrap application services.
+     *
+     * @param  \Illuminate\Routing\Router  $router
+     * @return void
+     */
+    public function boot(Router $router): void
     {
         $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'customer');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'customer');
+
+        $this->app['validator']->extend('captcha', function ($attribute, $value, $parameters) {
+            return $this->app['captcha']->validateResponse($value);
+        });
     }
 
     /**
      * Register services.
      *
      * @return void
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function register()
+    public function register(): void
     {
-        $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
+        $this->registerConfig();
+
+        $this->app->singleton('captcha', function ($app) {
+            return new Captcha();
+        });
     }
 
     /**
-     * Register factories.
-     *
-     * @param string $path
+     * Register package config.
      *
      * @return void
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    protected function registerEloquentFactoriesFrom($path): void
+    protected function registerConfig(): void
     {
-        $this->app->make(EloquentFactory::class)->load($path);
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/system.php', 'core');
     }
 }

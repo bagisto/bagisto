@@ -1,20 +1,32 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Webkul\Product\Database\Factories;
 
-use Faker\Generator as Faker;
 use Webkul\Inventory\Models\InventorySource;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductInventory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(ProductInventory::class, function (Faker $faker) {
-    return [
-        'qty'                 => $faker->numberBetween(100, 200),
-        'product_id'          => function () {
-            return factory(Product::class)->create()->id;
-        },
-        'inventory_source_id' => function () {
-            return factory(InventorySource::class)->create()->id;
-        },
-    ];
-});
+class ProductInventoryFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ProductInventory::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'qty' => $this->faker->numberBetween(100, 200),
+            'product_id' => Product::factory(),
+            'inventory_source_id' => InventorySource::factory(),
+        ];
+    }
+}

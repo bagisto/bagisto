@@ -77,7 +77,7 @@
 
                             <div class="control-group"  :class="[errors.has('hostname') ? 'has-error' : '']">
                                 <label for="hostname">{{ __('admin::app.settings.channels.hostname') }}</label>
-                                <input class="control" v-validate="''" id="hostname" name="hostname" value="{{ old('hostname') }}" placeholder="https://www.example.com"/>
+                                <input class="control" v-validate="''" id="hostname" name="hostname" value="{{ old('hostname') }}" placeholder="{{ __('admin::app.settings.channels.hostname-placeholder') }}"/>
 
                                 <span class="control-error" v-if="errors.has('hostname')">@{{ errors.first('hostname') }}</span>
                             </div>
@@ -168,12 +168,16 @@
                                 <label>{{ __('admin::app.settings.channels.logo') }}</label>
 
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false"></image-wrapper>
+                                
+                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.logo-size') }}</span>  
                             </div>
 
                             <div class="control-group">
                                 <label>{{ __('admin::app.settings.channels.favicon') }}</label>
 
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false"></image-wrapper>
+
+                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.favicon-size') }}</span>     
                             </div>
 
                         </div>
@@ -238,18 +242,18 @@
 @stop
 
 @push('scripts')
-    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+    @include('admin::layouts.tinymce')
 
     <script>
         $(document).ready(function () {
-            tinymce.init({
+            tinyMCEHelper.initTinyMCE({
                 selector: 'textarea#home_page_content,textarea#footer_content',
                 height: 200,
                 width: "100%",
                 plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code | table',
                 image_advtab: true,
-                valid_elements : '*[*]'
+                valid_elements : '*[*]',
             });
         });
     </script>

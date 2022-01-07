@@ -13,15 +13,13 @@
 </accordian>
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="bundle-option-list-template">
         <div class="">
             <button type="button" class="btn btn-md btn-primary" @click="addOption" style="margin-bottom: 20px;">
                 {{ __('admin::app.catalog.products.add-option-btn-title') }}
             </button>
 
-            <bundle-option-item 
+            <bundle-option-item
                 v-for='(option, index) in options'
                 :option="option"
                 :key="index"
@@ -45,7 +43,7 @@
                     <label class="required">{{ __('admin::app.catalog.products.option-title') }}</label>
 
                     <input type="text" v-validate="'required'" :name="titleInputName + '[label]'" v-model="option.label" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.option-title') }}&quot;"/>
-                    
+
                     <span class="control-error" v-if="errors.has(titleInputName + '[label]')">@{{ errors.first(titleInputName + '[label]') }}</span>
                 </div>
 
@@ -58,7 +56,7 @@
                         <option value="checkbox">{{ __('admin::app.catalog.products.checkbox') }}</option>
                         <option value="multiselect">{{ __('admin::app.catalog.products.multiselect') }}</option>
                     </select>
-                    
+
                     <span class="control-error" v-if="errors.has(inputName + '[type]')">@{{ errors.first(inputName + '[type]') }}</span>
                 </div>
 
@@ -69,7 +67,7 @@
                         <option value="1">{{ __('admin::app.catalog.products.yes') }}</option>
                         <option value="0">{{ __('admin::app.catalog.products.no') }}</option>
                     </select>
-                    
+
                     <span class="control-error" v-if="errors.has(inputName + '[is_required]')">@{{ errors.first(inputName + '[is_required]') }}</span>
                 </div>
 
@@ -77,7 +75,7 @@
                     <label class="required">{{ __('admin::app.catalog.products.sort-order') }}</label>
 
                     <input type="text" v-validate="'required|numeric|min_value:0'" :name="inputName + '[sort_order]'" v-model="option.sort_order" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
-                    
+
                     <span class="control-error" v-if="errors.has(inputName + '[sort_order]')">@{{ errors.first(inputName + '[sort_order]') }}</span>
                 </div>
 
@@ -85,7 +83,7 @@
                     <div class="secton-title">
                         <span>Products</span>
                     </div>
-                    
+
                     <div class="section-content">
                         <bundle-product-list
                             :bundle-option-products="option.bundle_option_products"
@@ -121,10 +119,9 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="table" style="margin-top: 20px; overflow-x: unset;">
                 <table>
-
                     <thead>
                         <tr>
                             <th class="name">{{ __('admin::app.catalog.products.is-default') }}</th>
@@ -150,7 +147,6 @@
                         </bundle-product-item>
 
                     </tbody>
-
                 </table>
             </div>
         </div>
@@ -203,7 +199,6 @@
 
     <script>
         Vue.component('bundle-option-list', {
-
             template: '#bundle-option-list-template',
 
             inject: ['$validator'],
@@ -224,7 +219,7 @@
                         bundle_option_products: []
                     });
                 },
-                
+
                 removeOption: function(option) {
                     let index = this.options.indexOf(option)
 
@@ -234,7 +229,6 @@
         });
 
         Vue.component('bundle-option-item', {
-
             template: '#bundle-option-item-template',
 
             props: ['index', 'option'],
@@ -265,7 +259,6 @@
         });
 
         Vue.component('bundle-product-list', {
-
             template: '#bundle-product-list-template',
 
             inject: ['$validator'],
@@ -292,8 +285,8 @@
 
             methods: {
                 addProduct: function(item, key) {
-                    var alreadyAdded = false;
-                    
+                    let alreadyAdded = false;
+
                     this.bundle_option_products.forEach(function(optionProduct) {
                         if (item.id == optionProduct.product.id) {
                             alreadyAdded = true;
@@ -331,24 +324,24 @@
                         return;
                     }
 
-                    var this_this = this;
-                    
+                    let self = this;
+
                     this.$http.get ("{{ route('admin.catalog.products.search_simple_product') }}", {params: {query: this.search_term}})
                         .then (function(response) {
-                            this_this.searched_results = response.data;
+                            self.searched_results = response.data;
 
-                            this_this.is_searching = false;
+                            self.is_searching = false;
                         })
                         .catch (function (error) {
-                            this_this.is_searching = false;
+                            self.is_searching = false;
                         })
                 },
 
                 checkProduct: function(productId) {
-                    var this_this = this;
+                    let self = this;
 
                     this.bundle_option_products.forEach(function(product) {
-                        if (this_this.bundleOption.type == 'radio' || this_this.bundleOption.type == 'select') {
+                        if (self.bundleOption.type == 'radio' || self.bundleOption.type == 'select') {
                             product.is_default = product.product.id == productId ? 1 : 0;
                         } else {
                             if (product.product.id == productId)
@@ -360,7 +353,6 @@
         });
 
         Vue.component('bundle-product-item', {
-
             template: '#bundle-product-item-template',
 
             props: ['controlName', 'index', 'bundleOption', 'product'],
@@ -387,5 +379,4 @@
             }
         });
     </script>
-
 @endpush

@@ -35,6 +35,8 @@ class CmsRepository extends Repository
                     $data[$locale->code][$attribute] = $data[$attribute];
                 }
             }
+
+            $data[$locale->code]['html_content'] = str_replace('=&gt;', '=>', $data[$locale->code]['html_content']);
         }
 
         $page = parent::create($data);
@@ -57,6 +59,10 @@ class CmsRepository extends Repository
         $page = $this->find($id);
 
         Event::dispatch('cms.pages.update.before', $id);
+
+        $locale = isset($data['locale']) ? $data['locale'] : app()->getLocale();
+
+        $data[$locale]['html_content'] = str_replace('=&gt;', '=>', $data[$locale]['html_content']);
 
         parent::update($data, $id, $attribute);
 

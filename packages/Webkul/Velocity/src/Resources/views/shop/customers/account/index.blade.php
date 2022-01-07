@@ -7,7 +7,17 @@
         </div>
 
         <div class="account-layout right mt10">
+            @if (request()->route()->getName() !== 'customer.profile.index')
+                @if (Breadcrumbs::exists())
+                    {{ Breadcrumbs::render() }}
+                @endif
+            @endif
+
             @yield('page-detail-wrapper')
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
+@endpush

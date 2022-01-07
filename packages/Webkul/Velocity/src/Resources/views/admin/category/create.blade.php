@@ -47,7 +47,7 @@
                                     @endforeach
                                 </select>
 
-                                <span class="control-error" v-if="errors.has('category_id')">@{{ errors.first('category_id') }}</span>
+                                <span class="control-error" v-if="errors.has('category_id')" v-text="errors.first('category_id')"></span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('icon') ? 'has-error' : '']">
@@ -57,7 +57,7 @@
 
                                 <input type="text" v-validate="'required'" class="control" id="icon" name="icon" data-vv-as="&quot;{{ __('velocity::app.admin.category.icon-class') }}&quot;" />
 
-                                <span class="control-error" v-if="errors.has('icon')">@{{ errors.first('icon') }}</span>
+                                <span class="control-error" v-if="errors.has('icon')" v-text="errors.first('icon')"></span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('tooltip') ? 'has-error' : '']">
@@ -67,7 +67,7 @@
 
                                 <textarea v-validate="'max:250'" class="control" id="tooltip" name="tooltip" data-vv-as="&quot;{{ __('velocity::app.admin.category.tooltip-content') }}&quot;"></textarea>
 
-                                <span class="control-error" v-if="errors.has('tooltip')">@{{ errors.first('tooltip') }}</span>
+                                <span class="control-error" v-if="errors.has('tooltip')" v-text="errors.first('tooltip')"></span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
@@ -80,7 +80,7 @@
                                         {{ __('velocity::app.admin.category.inactive') }}
                                     </option>
                                 </select>
-                                <span class="control-error" v-if="errors.has('status')">@{{ errors.first('status') }}</span>
+                                <span class="control-error" v-if="errors.has('status')" v-text="errors.first('status')"></span>
                             </div>
 
                         {!! view_render_event('bagisto.admin.category.create_form_accordian.general.content.after') !!}

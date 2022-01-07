@@ -2,22 +2,36 @@
 
 namespace Webkul\Customer\Models;
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Webkul\Checkout\Models\CartProxy;
-use Webkul\Sales\Models\OrderProxy;
 use Webkul\Core\Models\SubscribersListProxy;
-use Webkul\Product\Models\ProductReviewProxy;
-use Webkul\Customer\Notifications\CustomerResetPassword;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
+use Webkul\Customer\Database\Factories\CustomerFactory;
+use Webkul\Customer\Notifications\CustomerResetPassword;
+use Webkul\Product\Models\ProductReviewProxy;
+use Webkul\Sales\Models\OrderProxy;
 
 class Customer extends Authenticatable implements CustomerContract, JWTSubject
 {
-    use Notifiable;
+    use HasFactory, Notifiable;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'customers';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'first_name',
         'last_name',
@@ -35,111 +49,36 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
         'status',
     ];
 
-    protected $hidden = ['password', 'api_token', 'remember_token'];
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'api_token',
+        'remember_token',
+    ];
 
     /**
-     * Get the customer full name.
+     * Create a new factory instance for the model.
+     *
+     * @return \Webkul\Customer\Database\Factories\CustomerFactory
      */
-    public function getNameAttribute()
+    protected static function newFactory()
     {
-        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+        return CustomerFactory::new();
     }
 
     /**
-     * Email exists or not
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
      */
-    public function emailExists($email)
-    {
-        $results =  $this->where('email', $email);
-
-        if ($results->count() == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
-     * Get the customer group that owns the customer.
-     */
-    public function group()
-    {
-        return $this->belongsTo(CustomerGroupProxy::modelClass(), 'customer_group_id');
-    }
-
-    /**
-    * Send the password reset notification.
-    *
-    * @param  string  $token
-    * @return void
-    */
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
         $this->notify(new CustomerResetPassword($token));
-    }
-
-    /**
-     * Get the customer address that owns the customer.
-     */
-    public function addresses()
-    {
-        return $this->hasMany(CustomerAddressProxy::modelClass(), 'customer_id');
-    }
-
-    /**
-     * Get default customer address that owns the customer.
-     */
-    public function default_address()
-    {
-        return $this->hasOne(CustomerAddressProxy::modelClass(), 'customer_id')->where('default_address', 1);
-    }
-
-    /**
-     * Customer's relation with wishlist items
-     */
-    public function wishlist_items()
-    {
-        return $this->hasMany(WishlistProxy::modelClass(), 'customer_id');
-    }
-
-    /**
-     * get all cart inactive cart instance of a customer
-     */
-    public function all_carts()
-    {
-        return $this->hasMany(CartProxy::modelClass(), 'customer_id');
-    }
-
-    /**
-     * get inactive cart inactive cart instance of a customer
-     */
-    public function inactive_carts()
-    {
-        return $this->hasMany(CartProxy::modelClass(), 'customer_id')->where('is_active', 0);
-    }
-
-    /**
-     * get active cart inactive cart instance of a customer
-     */
-    public function active_carts()
-    {
-        return $this->hasMany(CartProxy::modelClass(), 'customer_id')->where('is_active', 1);
-    }
-
-    /**
-     * get all reviews of a customer
-    */
-    public function all_reviews()
-    {
-        return $this->hasMany(ProductReviewProxy::modelClass(), 'customer_id');
-    }
-
-    /**
-     * get all orders of a customer
-     */
-    public function all_orders()
-    {
-        return $this->hasMany(OrderProxy::modelClass(), 'customer_id');
     }
 
     /**
@@ -157,13 +96,183 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
      *
      * @return array
      */
-    public function getJWTCustomClaims()
+    public function getJWTCustomClaims(): array
     {
         return [];
     }
 
     /**
+     * Get image url for the customer profile.
+     *
+     * @return string|null
+     */
+    public function getImageUrlAttribute()
+    {
+        return $this->image_url();
+    }
+
+    /**
+     * Get the customer full name.
+     *
+     * @return string
+     */
+    public function getNameAttribute(): string
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    /**
+     * Get image url for the customer image.
+     *
+     * @return string|null
+     */
+    public function image_url()
+    {
+        if (! $this->image) {
+            return;
+        }
+
+        return Storage::url($this->image);
+    }
+
+    /**
+     * Is email exists or not.
+     *
+     * @param  string  $email
+     * @return bool
+     */
+    public function emailExists($email): bool
+    {
+        $results = $this->where('email', $email);
+
+        if ($results->count() === 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get the customer group that owns the customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function group()
+    {
+        return $this->belongsTo(CustomerGroupProxy::modelClass(), 'customer_group_id');
+    }
+
+    /**
+     * Get the customer address that owns the customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function addresses()
+    {
+        return $this->hasMany(CustomerAddressProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Get default customer address that owns the customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function default_address()
+    {
+        return $this->hasOne(CustomerAddressProxy::modelClass(), 'customer_id')
+            ->where('default_address', 1);
+    }
+
+    /**
+     * Customer's relation with wishlist items.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function wishlist_items()
+    {
+        return $this->hasMany(WishlistProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Is wishlist shared by the customer.
+     *
+     * @return bool
+     */
+    public function isWishlistShared(): bool
+    {
+        return $this->wishlist_items()->where('shared', 1)->first()
+            ? true
+            : false;
+    }
+
+    /**
+     * Get wishlist shared link.
+     *
+     * @return string|null
+     */
+    public function getWishlistSharedLink()
+    {
+        return $this->isWishlistShared()
+            ? URL::signedRoute('customer.wishlist.shared', ['id' => $this->id])
+            : null;
+    }
+
+    /**
+     * Get all cart inactive cart instance of a customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function all_carts()
+    {
+        return $this->hasMany(CartProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Get inactive cart instance of a customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function inactive_carts()
+    {
+        return $this->hasMany(CartProxy::modelClass(), 'customer_id')
+            ->where('is_active', 0);
+    }
+
+    /**
+     * Get active cart instance of a customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function active_carts()
+    {
+        return $this->hasMany(CartProxy::modelClass(), 'customer_id')
+            ->where('is_active', 1);
+    }
+
+    /**
+     * Get all orders of a customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function all_orders()
+    {
+        return $this->hasMany(OrderProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Get all reviews of a customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function all_reviews()
+    {
+        return $this->hasMany(ProductReviewProxy::modelClass(), 'customer_id');
+    }
+
+    /**
      * Get the customer's subscription.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function subscription()
     {

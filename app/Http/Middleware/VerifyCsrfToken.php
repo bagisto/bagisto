@@ -11,7 +11,5 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
-    protected $except = [
-        'paypal/standard/ipn'
-    ];
+    protected $except = [];
 }

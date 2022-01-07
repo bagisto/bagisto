@@ -2,16 +2,18 @@
 
 namespace Webkul\User\Models;
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Webkul\User\Models\Role;
-use Webkul\User\Notifications\AdminResetPassword;
+use Illuminate\Notifications\Notifiable;
 use Webkul\User\Contracts\Admin as AdminContract;
+use Webkul\User\Database\Factories\AdminFactory;
+use Webkul\User\Notifications\AdminResetPassword;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-
-class Admin extends Authenticatable implements AdminContract
+class Admin extends Authenticatable implements AdminContract, JWTSubject
 {
-    use Notifiable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -40,21 +42,12 @@ class Admin extends Authenticatable implements AdminContract
 
     /**
      * Get the role that owns the admin.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function role()
     {
         return $this->belongsTo(RoleProxy::modelClass());
-    }
-
-    /**
-    * Send the password reset notification.
-    *
-    * @param  string  $token
-    * @return void
-    */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new AdminResetPassword($token));
     }
 
     /**
@@ -70,5 +63,46 @@ class Admin extends Authenticatable implements AdminContract
         }
 
         return in_array($permission, $this->role->permissions);
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPassword($token));
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return AdminFactory::new();
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims(): array
+    {
+        return [];
     }
 }

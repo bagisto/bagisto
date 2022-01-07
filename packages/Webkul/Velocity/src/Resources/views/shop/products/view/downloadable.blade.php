@@ -55,7 +55,7 @@
                     @endforeach
                 </ul>
 
-                <span class="control-error" v-if="errors.has('links[]')">@{{ errors.first('links[]') }}</span>
+                <span class="control-error" v-if="errors.has('links[]')" v-text="errors.first('links[]')"></span>
             </div>
         @endif
     </div>

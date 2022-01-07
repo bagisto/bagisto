@@ -18,6 +18,8 @@
                         {{ __('admin::app.export.export') }}
                     </span>
                 </div>
+
+                <a href="{{ route('admin.sales.transactions.create') }}" class="btn btn-lg btn-primary">{{ __('admin::app.sales.transactions.create-title') }}</a>
             </div>
         </div>
 

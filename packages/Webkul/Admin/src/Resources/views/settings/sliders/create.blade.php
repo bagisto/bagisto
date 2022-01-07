@@ -83,7 +83,8 @@
 
                     <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
                         <label class="required">{{ __('admin::app.catalog.categories.image') }}</label>
-
+                        <span class="control-info mt-10">{{ __('admin::app.settings.sliders.image-size') }}</span>
+                        
                         <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false"></image-wrapper>
 
                         <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
@@ -109,11 +110,11 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+    @include('admin::layouts.tinymce')
 
     <script>
         $(document).ready(function () {
-            tinymce.init({
+            tinyMCEHelper.initTinyMCE({
                 selector: 'textarea#tiny',
                 height: 200,
                 width: "100%",

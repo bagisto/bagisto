@@ -4,8 +4,12 @@
             <tr>
                 @if ($enableMassActions)
                     <td>
+                        @php
+                            $record_id = $record->{$index};
+                        @endphp
+
                         <span class="checkbox">
-                            <input type="checkbox" v-model="dataIds" @change="select" value="{{ $record->{$index} }}">
+                            <input type="checkbox" v-model="dataIds" @change="select($event)" value="{{ $record_id }}">
 
                             <label class="checkbox-view" for="checkbox"></label>
                         </span>
@@ -17,13 +21,26 @@
                         $columnIndex = explode('.', $column['index']);
 
                         $columnIndex = end($columnIndex);
+
+                        $supportedClosureKey = ['wrapper', 'closure'];
+
+                        $isClosure = ! empty(array_intersect($supportedClosureKey, array_keys($column)));
                     @endphp
 
-                    @if (isset($column['wrapper']))
-                        @if (isset($column['closure']) && $column['closure'] == true)
-                            <td data-value="{{ $column['label'] }}">{!! $column['wrapper']($record) !!}</td>
-                        @else
-                            <td data-value="{{ $column['label'] }}">{{ $column['wrapper']($record) }}</td>
+                    @if ($isClosure)
+                        {{--
+                            Depereciation Notice:
+                            The following key i.e. `wrapper` will remove in the later version. Use only `closure`
+                            key to manipulate the column. This will only hit the raw html.
+                        --}}
+                        @if (isset($column['wrapper']) && gettype($column['wrapper']) === 'object' && $column['wrapper'] instanceof \Closure)
+                            @if (isset($column['closure']) && $column['closure'] == true)
+                                <td data-value="{{ $column['label'] }}">{!! $column['wrapper']($record) !!}</td>
+                            @else
+                                <td data-value="{{ $column['label'] }}">{{ $column['wrapper']($record) }}</td>
+                            @endif
+                        @elseif (isset($column['closure']) && gettype($column['closure']) === 'object' && $column['closure'] instanceof \Closure)
+                            <td data-value="{{ $column['label'] }}">{!! $column['closure']($record) !!}</td>
                         @endif
                     @else
                         @if ($column['type'] == 'price')
@@ -56,7 +73,7 @@
 
                                         @if ($action['method'] != 'GET')
                                             @if (isset($action['function']))
-                                                v-on:click="{{$action['function']}}"
+                                                onclick="{{ $action['function'] }}"
                                             @else
                                                 v-on:click="doAction($event)"
                                             @endif

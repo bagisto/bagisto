@@ -13,23 +13,33 @@ class TriggerCest
     private $faker;
 
     private $parentCategory;
+
     private $category;
+
     private $root2Category;
+
     private $childOfRoot2Category;
 
     private $parentCategoryAttributes;
+
     private $categoryAttributes;
+
     private $root2CategoryAttributes;
+
     private $childOfRoot2CategoryAttributes;
 
     private $parentCategoryName;
+
     private $categoryName;
+
     private $root2CategoryName;
+
     private $childOfRoot2CategoryName;
 
 
     /** @var Locale $localeEn */
     private $localeEn;
+
     /** @var Locale $localeDe */
     private $localeDe;
 
@@ -59,9 +69,9 @@ class TriggerCest
         ]);
 
         $this->parentCategoryAttributes = [
-            'parent_id'           => $rootCategory->id,
-            'position'            => 1,
-            'status'              => 1,
+            'parent_id' => $rootCategory->id,
+            'position' => 1,
+            'status' => 1,
             $this->localeEn->code => [
                 'name' => $this->parentCategoryName,
                 'slug' => strtolower($this->parentCategoryName),
@@ -76,14 +86,15 @@ class TriggerCest
             ],
         ];
 
-        $this->parentCategory = $I->make(Category::class, $this->parentCategoryAttributes)->first();
+        $this->parentCategory = $I->make(Category::class, $this->parentCategoryAttributes)
+                                  ->first();
         $rootCategory->appendNode($this->parentCategory);
         $I->assertNotNull($this->parentCategory);
 
         $this->categoryAttributes = [
-            'position'            => 1,
-            'status'              => 1,
-            'parent_id'           => $this->parentCategory->id,
+            'position' => 1,
+            'status' => 1,
+            'parent_id' => $this->parentCategory->id,
             $this->localeEn->code => [
                 'name' => $this->categoryName,
                 'slug' => strtolower($this->categoryName),
@@ -98,15 +109,16 @@ class TriggerCest
             ],
         ];
 
-        $this->category = $I->make(Category::class, $this->categoryAttributes)->first();
+        $this->category = $I->make(Category::class, $this->categoryAttributes)
+                            ->first();
         $this->parentCategory->appendNode($this->category);
         $I->assertNotNull($this->category);
 
 
         $this->root2CategoryAttributes = [
-            'position'            => 1,
-            'status'              => 1,
-            'parent_id'           => null,
+            'position' => 1,
+            'status' => 1,
+            'parent_id' => null,
             $this->localeEn->code => [
                 'name' => $this->root2CategoryName,
                 'slug' => strtolower($this->root2CategoryName),
@@ -121,7 +133,8 @@ class TriggerCest
             ],
         ];
 
-        $this->root2Category = $I->make(Category::class, $this->root2CategoryAttributes)->first();
+        $this->root2Category = $I->make(Category::class, $this->root2CategoryAttributes)
+                                 ->first();
         $this->root2Category->save();
 
         $I->assertNotNull($this->root2Category);
@@ -129,9 +142,9 @@ class TriggerCest
         $I->assertGreaterThan($rootCategory->_rgt, $this->root2Category->_lft);
 
         $this->childOfRoot2CategoryAttributes = [
-            'position'            => 1,
-            'status'              => 1,
-            'parent_id'           => $this->root2Category->id,
+            'position' => 1,
+            'status' => 1,
+            'parent_id' => $this->root2Category->id,
             $this->localeEn->code => [
                 'name' => $this->childOfRoot2CategoryName,
                 'slug' => strtolower($this->childOfRoot2CategoryName),
@@ -146,7 +159,8 @@ class TriggerCest
             ],
         ];
 
-        $this->childOfRoot2Category = $I->make(Category::class, $this->childOfRoot2CategoryAttributes)->first();
+        $this->childOfRoot2Category = $I->make(Category::class, $this->childOfRoot2CategoryAttributes)
+                                        ->first();
         $this->root2Category->appendNode($this->childOfRoot2Category);
 
         $I->assertNotNull($this->childOfRoot2Category);
@@ -158,26 +172,26 @@ class TriggerCest
             'category_id' => $this->parentCategory->id,
             'name' => $this->parentCategoryName,
             'locale' => $this->localeEn->code,
-            'url_path' => strtolower($this->parentCategoryName)
+            'url_path' => strtolower($this->parentCategoryName),
         ]);
         $I->seeRecord(CategoryTranslation::class, [
             'category_id' => $this->parentCategory->id,
             'name' => $this->parentCategoryName,
             'locale' => $this->localeDe->code,
-            'url_path' => strtolower($this->parentCategoryName)
+            'url_path' => strtolower($this->parentCategoryName),
         ]);
 
         $I->seeRecord(CategoryTranslation::class, [
             'category_id' => $this->category->id,
             'name' => $this->categoryName,
             'locale' => $this->localeEn->code,
-            'url_path' => strtolower($this->parentCategoryName) . '/' . strtolower($this->categoryName)
+            'url_path' => strtolower($this->parentCategoryName) . '/' . strtolower($this->categoryName),
         ]);
         $I->seeRecord(CategoryTranslation::class, [
             'category_id' => $this->category->id,
             'name' => $this->categoryName,
             'locale' => $this->localeDe->code,
-            'url_path' => strtolower($this->parentCategoryName) . '/' . strtolower($this->categoryName)
+            'url_path' => strtolower($this->parentCategoryName) . '/' . strtolower($this->categoryName),
         ]);
         $I->seeRecord(CategoryTranslation::class, [
             'category_id' => $this->root2Category->id,
@@ -190,13 +204,13 @@ class TriggerCest
             'category_id' => $this->childOfRoot2Category->id,
             'name' => $this->childOfRoot2CategoryName,
             'locale' => $this->localeDe->code,
-            'url_path' => strtolower($this->childOfRoot2CategoryName)
+            'url_path' => strtolower($this->childOfRoot2CategoryName),
         ]);
         $I->seeRecord(CategoryTranslation::class, [
             'category_id' => $this->childOfRoot2Category->id,
             'name' => $this->childOfRoot2CategoryName,
             'locale' => $this->localeEn->code,
-            'url_path' => strtolower($this->childOfRoot2CategoryName)
+            'url_path' => strtolower($this->childOfRoot2CategoryName),
         ]);
     }
 
@@ -295,9 +309,7 @@ class TriggerCest
         $I->assertTrue($this->category->update($this->categoryAttributes));
         $this->category->refresh();
 
-        $expectedUrlPath = strtolower($this->parentCategoryName) . '/'
-            . strtolower($category2Name) . '/'
-            . strtolower($this->categoryName);
+        $expectedUrlPath = strtolower($this->parentCategoryName) . '/' . strtolower($category2Name) . '/' . strtolower($this->categoryName);
         $I->seeRecord(CategoryTranslation::class, [
             'category_id' => $this->category->id,
             'name' => $this->categoryName,

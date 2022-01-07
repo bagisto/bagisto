@@ -89,7 +89,11 @@ class DownloadableProductController extends Controller
         }
 
         if ($downloadableLinkPurchased->type == 'file') {
-            return Storage::download($downloadableLinkPurchased->file);
+            $privateDisk = Storage::disk('private');
+
+            return $privateDisk->exists($downloadableLinkPurchased->file)
+                ? $privateDisk->download($downloadableLinkPurchased->file)
+                : abort(404);
         } else {
             $fileName = $name = substr($downloadableLinkPurchased->url, strrpos($downloadableLinkPurchased->url, '/') + 1);;
 

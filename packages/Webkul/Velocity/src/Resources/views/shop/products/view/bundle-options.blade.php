@@ -34,7 +34,7 @@
                 <div class="bundle-summary">
                     <h3 class="mb10">{{ __('shop::app.products.your-customization') }}</h3>
 
-                    <quantity-changer></quantity-changer>
+                    <quantity-changer quantity-text="{{ __('shop::app.products.quantity') }}"></quantity-changer>
 
                     <div class="control-group">
                         <label>{{ __('shop::app.products.total-amount') }}</label>
@@ -122,9 +122,7 @@
                         </select>
                     </div>
 
-                    <span class="control-error" v-if="errors.has('bundle_options[' + option.id + '][]')">
-                        @{{ errors.first('bundle_options[' + option.id + '][]') }}
-                    </span>
+                    <span class="control-error" v-if="errors.has('bundle_options[' + option.id + '][]')" v-text="errors.first('bundle_options[' + option.id + '][]')"></span>
                 </div>
 
                 <div v-if="option.type == 'select' || option.type == 'radio'">
@@ -132,6 +130,7 @@
                         :control-name="'bundle_option_qty[' + option.id + ']'"
                         :validations="parseInt(selected_product) ? 'required|numeric|min_value:1' : ''"
                         :quantity="product_qty"
+                        quantity-text="{{ __('shop::app.products.quantity') }}"
                         @onQtyUpdated="qtyUpdated($event)">
                     </quantity-changer>
                 </div>

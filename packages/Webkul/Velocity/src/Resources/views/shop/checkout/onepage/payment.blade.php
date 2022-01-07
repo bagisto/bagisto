@@ -2,7 +2,7 @@
     <div class="form-container">
         <accordian :title="'{{ __('shop::app.checkout.payment-methods') }}'" :active="true">
             <div class="form-header mb-30" slot="header">
-                
+
                 <h3 class="fw6 display-inbl">
                    {{ __('shop::app.checkout.onepage.payment-methods') }}
                 </h3>
@@ -58,9 +58,7 @@
 
                 @endforeach
 
-                <span class="control-error" v-if="errors.has('payment-form.payment[method]')">
-                    @{{ errors.first('payment-form.payment[method]') }}
-                </span>
+                <span class="control-error" v-if="errors.has('payment-form.payment[method]')" v-text="errors.first('payment-form.payment[method]')"></span>
             </div>
         </accordian>
     </div>

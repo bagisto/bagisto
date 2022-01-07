@@ -303,7 +303,10 @@ return [
         'wishlist' => [
             'add-wishlist-text' => 'Aggiungi prodotto a wishlist',
             'remove-wishlist-text' => 'Rimuovi prodotti da wishlist'
-        ]
+        ],
+        'overlay-loader' => [
+            'message' => 'In corso',
+        ],
     ],
 
     'responsive' => [

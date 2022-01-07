@@ -93,9 +93,17 @@
                                                     @if ($showWishlist)
                                                         <span class="towishlist">
                                                             @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                                <a href="{{ route('shop.movetowishlist', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                                <a
+                                                                    href="javascript:void(0);"
+                                                                    onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->id) }}')">
+                                                                    {{ __('shop::app.checkout.cart.move-to-wishlist') }}
+                                                                </a>
                                                             @else
-                                                                <a href="{{ route('shop.movetowishlist', $item->child->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                                <a
+                                                                    href="javascript:void(0);"
+                                                                    onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->child->id) }}')">
+                                                                    {{ __('shop::app.checkout.cart.move-to-wishlist') }}
+                                                                </a>
                                                             @endif
                                                         </span>
                                                     @endif
@@ -191,12 +199,19 @@
 
                 <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
-                <input :name="controlName" class="control" :value="qty" v-validate="'required|numeric|min_value:1'" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+                <input
+                    ref="quantityChanger"
+                    class="control"
+                    :name="controlName"
+                    :model="qty"
+                    v-validate="validations"
+                    data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;"
+                    @keyup="setQty($event)">
 
                 <button type="button" class="increase" @click="increaseQty()">+</button>
-
-                <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
             </div>
+
+            <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
         </div>
     </script>
 
@@ -215,6 +230,16 @@
                 quantity: {
                     type: [Number, String],
                     default: 1
+                },
+
+                minQuantity: {
+                    type: [Number, String],
+                    default: 1
+                },
+
+                validations: {
+                    type: String,
+                    default: 'required|numeric|min_value:1'
                 }
             },
 
@@ -224,33 +249,57 @@
                 }
             },
 
-            watch: {
-                quantity: function (val) {
-                    this.qty = val;
+            mounted: function() {
+                this.$refs.quantityChanger.value = this.qty > this.minQuantity
+                    ? this.qty
+                    : this.minQuantity;
+            },
 
-                    this.$emit('onQtyUpdated', this.qty)
+            watch: {
+                qty: function (val) {
+                    this.$refs.quantityChanger.value = ! isNaN(parseFloat(val)) ? val : 0;
+
+                    this.qty = ! isNaN(parseFloat(val)) ? this.qty : 0;
+
+                    this.$emit('onQtyUpdated', this.qty);
+
+                    this.$validator.validate();
                 }
             },
 
             methods: {
-                decreaseQty: function() {
-                    if (this.qty > 1)
-                        this.qty = parseInt(this.qty) - 1;
+                setQty: function({ target }) {
+                    this.qty = parseInt(target.value);
+                },
 
-                    this.$emit('onQtyUpdated', this.qty)
+                decreaseQty: function() {
+                    if (this.qty > this.minQuantity)
+                        this.qty = parseInt(this.qty) - 1;
                 },
 
                 increaseQty: function() {
                     this.qty = parseInt(this.qty) + 1;
-
-                    this.$emit('onQtyUpdated', this.qty)
                 }
             }
         });
 
         function removeLink(message) {
-            if (!confirm(message))
-            event.preventDefault();
+            if (! confirm(message)) {
+                event.preventDefault();
+                return;
+            }
+        }
+
+        function moveToWishlist(message, route) {
+            if (! confirm(message)) {
+                event.preventDefault();
+                return;
+            }
+
+            axios.post(route, {'redirect': false})
+                .then((response) => {
+                    location.reload();
+                });
         }
 
         function updateCartQunatity(operation, index) {
@@ -265,7 +314,9 @@
                     alert('{{ __('shop::app.products.less-quantity') }}');
                 }
             }
+
             document.getElementById('cart-quantity'+index).value = quantity;
+
             event.preventDefault();
         }
     </script>

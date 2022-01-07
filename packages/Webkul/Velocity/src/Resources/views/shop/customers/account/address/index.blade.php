@@ -6,16 +6,15 @@
 
 @section('page-detail-wrapper')
     @if ($addresses->isEmpty())
-
         <a href="{{ route('customer.address.create') }}" class="theme-btn light unset address-button">
-
             {{ __('shop::app.customer.account.address.index.add') }}
         </a>
     @endif
 
-    <div class="account-head">
-        <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
-        <span class="account-heading">{{ __('shop::app.customer.account.address.index.title') }}</span>
+    <div class="account-head mt-3">
+        <span class="account-heading">
+            {{ __('shop::app.customer.account.address.index.title') }}
+        </span>
 
         @if (! $addresses->isEmpty())
             <span class="account-action">
@@ -24,8 +23,6 @@
                 </a>
             </span>
         @endif
-
-        <div class="horizontal-rule"></div>
     </div>
 
     {!! view_render_event('bagisto.shop.customers.account.address.list.before', ['addresses' => $addresses]) !!}
@@ -34,10 +31,10 @@
             @if ($addresses->isEmpty())
                 <div>{{ __('shop::app.customer.account.address.index.empty') }}</div>
             @else
-                <div class="address-holder col-12 no-padding">
+                <div class="row address-holder no-padding">
                     @foreach ($addresses as $address)
-                        <div class="col-lg-4 col-md-12">
-                            <div class="card">
+                        <div class="col-lg-4 col-md-6 col-xs-12">
+                            <div class="card m-1">
                                 <div class="card-body">
                                     <h5 class="card-title fw6">{{ $address->first_name }} {{ $address->last_name }}</h5>
 
@@ -56,13 +53,14 @@
                                         {{ __('shop::app.customer.account.address.index.edit') }}
                                     </a>
 
-                                    <a
-                                        class="card-link"
-                                        href="{{ route('address.delete', $address->id) }}"
-                                        onclick="deleteAddress('{{ __('shop::app.customer.account.address.index.confirm-delete') }}')">
-
+                                    <a class="card-link" href="javascript:void(0);" onclick="deleteAddress('{{ __('shop::app.customer.account.address.index.confirm-delete') }}')">
                                         {{ __('shop::app.customer.account.address.index.delete') }}
                                     </a>
+
+                                    <form id="deleteAddressForm" action="{{ route('address.delete', $address->id) }}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -77,8 +75,11 @@
 @push('scripts')
     <script>
         function deleteAddress(message) {
-            if (!confirm(message))
-            event.preventDefault();
+            if (! confirm(message)) {
+                return;
+            }
+
+            $('#deleteAddressForm').submit();
         }
     </script>
 @endpush

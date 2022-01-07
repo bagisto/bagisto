@@ -1,5 +1,6 @@
 @php
     $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeFamilyRepository');
+    
     $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 
     $locale = core()->getRequestedLocaleCode();
@@ -68,9 +69,21 @@
 
                                     @case('addToCartHtml')
                                         <div class="action">
-                                            <div v-html="product.addToCartHtml"></div>
+                                            <div>
+                                                <span class="d-inline-block">
+                                                    <form :action="`${baseUrl}/checkout/cart/add/${product.product_id}`" method="POST">
+                                                        @csrf
 
-                                            <span class="icon white-cross-sm-icon remove-product" @click="removeProductCompare(product.id)"></span>
+                                                        <input type="hidden" name="product_id" :value="product.product_id">
+
+                                                        <input type="hidden" name="quantity" value="1">
+
+                                                        <span v-html="product.addToCartHtml"></span>
+                                                    </form>
+                                                </span>
+
+                                                <span class="icon white-cross-sm-icon remove-product" @click="removeProductCompare(product.id)"></span>
+                                            </div>
                                         </div>
                                         @break
 
@@ -105,6 +118,11 @@
                                                 <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'single')" class="fs16"></span>
                                                 <span v-else class="fs16">__</span>
                                                 @break;
+
+                                            @case('multiselect')
+                                                <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'multiple')" class="fs16"></span>
+                                                <span v-else class="fs16">__</span>
+                                                @break
 
                                             @case ('file')
                                             @case ('image')
@@ -197,6 +215,10 @@
                 },
 
                 'removeProductCompare': function (productId) {
+                    if (productId == 'all' && ! confirm('{{ __('shop::app.customer.compare.confirm-remove-all') }}')) {
+                        return;
+                    }
+
                     if (this.isCustomer) {
                         this.$http.delete(`${this.baseUrl}/comparison?productId=${productId}`)
                         .then(response => {
@@ -207,6 +229,8 @@
                             }
 
                             window.flashMessages = [{'type': 'alert-success', 'message': response.data.message }];
+
+                            this.updateCompareCount();
 
                             this.$root.addFlashMessages();
                         })

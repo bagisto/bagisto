@@ -301,7 +301,10 @@ return [
         'wishlist'  => [
             'add-wishlist-text'     => 'Produkt zur Wunschliste hinzufügen',
             'remove-wishlist-text'  => 'Produkt von der Wunschliste entfernen'
-        ]
+        ],
+        'overlay-loader' => [
+            'message' => 'Im Gange',
+        ],
     ],
 
     'responsive'    => [

@@ -12,7 +12,7 @@ return [
             ],
 
             'settings' => [
-                'channels'=> [
+                'channels' => [
                     'subscription_bar' => 'Subscription bar content'
                 ],
             ],
@@ -60,6 +60,7 @@ return [
             'no-result-found' => 'No record found.',
             'search-hint' => 'Search product here...',
             'mass-delete-success' => 'Selected content deleted successfully.',
+            'mass-update-success' => 'Selected content updated successfully.',
             'tab' => [
                 'page' => 'Page Setting',
                 'content' => 'Content Setting',
@@ -102,7 +103,7 @@ return [
             'slider-path'               => 'Slider Path',
             'category-logo'             => 'Category logo',
             'product-policy'            => 'Product Policy',
-            'update-meta-data'          => 'Update Meta Data',
+            'update-meta-data'          => 'Update',
             'product-view-image'        => 'Product View Image',
             'advertisement-two'         => 'Advertisement Two Images',
             'advertisement-one'         => 'Advertisement One Images',
@@ -112,6 +113,16 @@ return [
             'images'                    => 'Images',
             'general'                   => 'General',
             'add-image-btn-title'       => 'Add Image',
+            'image-four-resolution'     => 'First image resolutions should be like 427px X 410px , 
+                                            Second images resolutions should be like 397px X 180px , 
+                                            Third images resolutions should be like 397px X 180px , 
+                                            Fouth image resolutions should be like 427px X 410px',
+            'image-three-resolution'    => 'First image resolution should be like 635px X 465px ,
+                                            Second image resolutions should be like 620px X 225px,
+                                            Third image resolutions should be like 620px X 225px',
+            'image-two-resolution'      => 'First image resolution should be like 953px X 447px ,
+                                            Second image resolution should be like 303px X 446px',
+            'image-locale-resolution'   => 'Image resolution should be like 20px X 20px',
             'footer-middle' => [
                 'about-us'  => 'About Us',
                 'customer-service' => 'Customer Service',
@@ -124,6 +135,16 @@ return [
             ]
         ],
         'category'  => [
+            'image-four-resolution'     => 'First image resolutions should be like 427px X 410px , 
+                                            Second images resolutions should be like 397px X 180px , 
+                                            Third images resolutions should be like 397px X 180px , 
+                                            Fouth image resolutions should be like 427px X 410px',
+            'image-three-resolution'    => 'First image resolution should be like 635px X 465px ,
+                                            Second image resolutions should be like 620px X 225px,
+                                            Third image resolutions should be like 620px X 225px',
+            'image-two-resolution'      => 'First image resolution should be like 953px X 447px ,
+                                            Second image resolution should be like 303px X 446px',
+            'image-locale-resolution'   => 'Image resolution should be like 20px X 20px',
             'save-btn-title' => 'Save Menu',
             'title' => 'Category Menu List',
             'add-title' => 'Add Menu Content',
@@ -301,7 +322,10 @@ return [
         'wishlist'  => [
             'add-wishlist-text'     => 'Add product to wishlist',
             'remove-wishlist-text'  => 'Remove product from wishlist'
-        ]
+        ],
+        'overlay-loader' => [
+            'message' => 'In Progress',
+        ],
     ],
 
     'responsive'    => [
@@ -311,6 +335,4 @@ return [
             'greeting'  => 'Welcome, :customer !',
         ]
     ],
-]
-
-?>
+];

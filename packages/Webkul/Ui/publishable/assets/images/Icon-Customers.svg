@@ -1,12 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
-    <title>Icon-Customers</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Icon-Customers" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g transform="translate(9.000000, 8.000000)" id="Combined-Shape" stroke="#8E8E8E" stroke-width="2">
-            <path d="M0.0694092808,30.8793785 C0.789639214,23.4815617 7.02613841,17.6997284 14.6130571,17.6997284 C22.1999758,17.6997284 28.436475,23.4815617 29.156705,30.8793785 L0.0694092808,30.8793785 Z M14.5,13.6997284 C10.9101491,13.6997284 8,10.7895793 8,7.19972838 C8,3.60987751 10.9101491,0.699728384 14.5,0.699728384 C18.0898509,0.699728384 21,3.60987751 21,7.19972838 C21,10.7895793 18.0898509,13.6997284 14.5,13.6997284 Z"></path>
-        </g>
-    </g>
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9.06941 38.8794C9.78964 31.4815 16.0261 25.6997 23.6131 25.6997C31.2 25.6997 37.4365 31.4815 38.1567 38.8794H9.06941ZM23.5 21.6997C19.9102 21.6997 17 18.7896 17 15.1997C17 11.6099 19.9102 8.69971 23.5 8.69971C27.0899 8.69971 30 11.6099 30 15.1997C30 18.7896 27.0899 21.6997 23.5 21.6997Z" stroke="#9497B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

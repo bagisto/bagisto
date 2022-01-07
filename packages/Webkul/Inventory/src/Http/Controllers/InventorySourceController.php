@@ -3,19 +3,20 @@
 namespace Webkul\Inventory\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Inventory\Http\Requests\InventorySourceRequest;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 
 class InventorySourceController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * InventorySourceRepository object
+     * Inventory source repository instance.
      *
      * @var \Webkul\Inventory\Repositories\InventorySourceRepository
      */
@@ -59,24 +60,11 @@ class InventorySourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(InventorySourceRequest $inventorySourceRequest)
     {
-        $this->validate(request(), [
-            'code'           => ['required', 'unique:inventory_sources,code', new \Webkul\Core\Contracts\Validations\Code],
-            'name'           => 'required',
-            'contact_name'   => 'required',
-            'contact_email'  => 'required|email',
-            'contact_number' => 'required',
-            'street'         => 'required',
-            'country'        => 'required',
-            'state'          => 'required',
-            'city'           => 'required',
-            'postcode'       => 'required',
-        ]);
+        $data = $inventorySourceRequest->all();
 
-        $data = request()->all();
-
-        $data['status'] = !isset($data['status']) ? 0 : 1;
+        $data['status'] = ! isset($data['status']) ? 0 : 1;
 
         Event::dispatch('inventory.inventory_source.create.before');
 
@@ -108,24 +96,11 @@ class InventorySourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(InventorySourceRequest $inventorySourceRequest, $id)
     {
-        $this->validate(request(), [
-            'code'           => ['required', 'unique:inventory_sources,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'name'           => 'required',
-            'contact_name'   => 'required',
-            'contact_email'  => 'required|email',
-            'contact_number' => 'required',
-            'street'         => 'required',
-            'country'        => 'required',
-            'state'          => 'required',
-            'city'           => 'required',
-            'postcode'       => 'required',
-        ]);
+        $data = $inventorySourceRequest->all();
 
-        $data = request()->all();
-
-        $data['status'] = !isset($data['status']) ? 0 : 1;
+        $data['status'] = ! isset($data['status']) ? 0 : 1;
 
         Event::dispatch('inventory.inventory_source.update.before', $id);
 
@@ -163,7 +138,7 @@ class InventorySourceController extends Controller
                 return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
                 report($e);
-                
+
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Inventory source']));
             }
         }

@@ -12,12 +12,10 @@ class GroupsCest
         $group = $I->have(CustomerGroup::class);
 
         $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.customers'), '//*[contains(@class, "navbar-left")]');
-        $I->click(__('admin::app.layouts.groups'), '//*[contains(@class, "aside-nav")]');
 
+        $I->amOnAdminRoute('admin.groups.index');     
         $I->seeCurrentRouteIs('admin.groups.index');
-        $I->see($group->id, '//script[@type="text/x-template"]');
-        $I->see($group->name, '//script[@type="text/x-template"]');
+
+        $I->see("{$group->id}", '//script[@type="text/x-template"]');
     }
 }

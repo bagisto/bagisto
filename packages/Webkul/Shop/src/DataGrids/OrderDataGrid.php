@@ -7,10 +7,25 @@ use Illuminate\Support\Facades\DB;
 
 class OrderDataGrid extends DataGrid
 {
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders as order')
@@ -20,6 +35,11 @@ class OrderDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -47,7 +67,7 @@ class OrderDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
-            'wrapper'    => function ($value) {
+            'closure'    => function ($value) {
                 return core()->formatPrice($value->grand_total, $value->order_currency_code);
             },
         ]);
@@ -58,8 +78,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
-            'closure'    => true,
-            'wrapper'    => function ($value) {
+            'closure'    => function ($value) {
                 if ($value->status == 'processing') {
                     return '<span class="badge badge-md badge-success">' . trans('shop::app.customer.account.order.index.processing') . '</span>';
                 } elseif ($value->status == 'completed') {
@@ -80,6 +99,11 @@ class OrderDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([

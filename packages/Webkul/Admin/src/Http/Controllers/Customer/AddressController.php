@@ -172,9 +172,10 @@ class AddressController extends Controller
     {
         $this->customerAddressRepository->delete($id);
 
-        session()->flash('success', trans('admin::app.customers.addresses.success-delete'));
-
-        return redirect()->route($this->_config['redirect']);
+        return response()->json([
+            'redirect' => false,
+            'message' => trans('admin::app.customers.addresses.success-delete')
+        ]);
     }
 
     /**

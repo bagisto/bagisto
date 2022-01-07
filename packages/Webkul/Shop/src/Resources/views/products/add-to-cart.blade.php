@@ -1,7 +1,7 @@
 {!! view_render_event('bagisto.shop.products.add_to_cart.before', ['product' => $product]) !!}
 
 @php
-    $width = (core()->getConfigData('catalog.products.storefront.buy_now_button_display') == 1) ? '49' : '95';
+    $width = (core()->getConfigData('catalog.products.storefront.buy_now_button_display') == 1) ? '49' : '100';
 @endphp
 
 <button type="submit" class="btn btn-lg btn-primary addtocart" {{ ! $product->isSaleable() ? 'disabled' : '' }}

@@ -2,54 +2,55 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
-use Illuminate\Support\Str;
+use Cookie;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Customer\Http\Requests\CustomerRegistrationRequest;
 use Webkul\Customer\Mail\RegistrationEmail;
 use Webkul\Customer\Mail\VerificationEmail;
-use Webkul\Shop\Mail\SubscriptionEmail;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Core\Repositories\SubscribersListRepository;
-use Cookie;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Sales\Models\Order;
+use Webkul\Shop\Mail\SubscriptionEmail;
 
 class RegistrationController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * CustomerRepository object
+     * Customer repository instance.
      *
      * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
-     * CustomerGroupRepository object
+     * Customer group repository instance.
      *
      * @var \Webkul\Customer\Repositories\CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
-     * SubscribersListRepository
+     * Subscribers list repository instance.
      *
      * @var \Webkul\Core\Repositories\SubscribersListRepository
      */
     protected $subscriptionRepository;
 
     /**
-     * Create a new Repository instance.
+     * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscriptionRepository
-     *
      * @return void
      */
     public function __construct(
@@ -80,16 +81,12 @@ class RegistrationController extends Controller
     /**
      * Method to store user's sign up form data to DB.
      *
+     * @param  \Webkul\Customer\Http\Requests\CustomerRegistrationRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CustomerRegistrationRequest $request)
     {
-        $this->validate(request(), [
-            'first_name' => 'string|required',
-            'last_name'  => 'string|required',
-            'email'      => 'email|required|unique:customers,email',
-            'password'   => 'confirmed|min:6|required',
-        ]);
+        $request->validated();
 
         $data = array_merge(request()->input(), [
             'password'          => bcrypt(request()->input('password')),
@@ -152,7 +149,11 @@ class RegistrationController extends Controller
         } else {
             try {
                 if (core()->getConfigData('emails.general.notifications.emails.general.notifications.registration')) {
-                    Mail::queue(new RegistrationEmail(request()->all()));
+                    Mail::queue(new RegistrationEmail(request()->all(), 'customer'));
+                }
+
+                if (core()->getConfigData('emails.general.notifications.emails.general.notifications.customer-registration-confirmation-mail-to-admin')) {
+                    Mail::queue(new RegistrationEmail(request()->all(), 'admin'));
                 }
 
                 session()->flash('success', trans('shop::app.customer.signup-form.success-verify'));
@@ -161,7 +162,6 @@ class RegistrationController extends Controller
 
                 session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
             }
-
             session()->flash('success', trans('shop::app.customer.signup-form.success'));
         }
 
@@ -169,7 +169,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Method to verify account
+     * Method to verify account.
      *
      * @param  string  $token
      * @return \Illuminate\Http\Response
@@ -181,6 +181,8 @@ class RegistrationController extends Controller
         if ($customer) {
             $customer->update(['is_verified' => 1, 'token' => 'NULL']);
 
+            Order::where('customer_email', $customer->email)->update(['customer_id' => $customer->id]);
+
             session()->flash('success', trans('shop::app.customer.signup-form.verified'));
         } else {
             session()->flash('warning', trans('shop::app.customer.signup-form.verify-failed'));
@@ -190,6 +192,8 @@ class RegistrationController extends Controller
     }
 
     /**
+     * Resend verification email.
+     *
      * @param  string  $email
      * @return \Illuminate\Http\Response
      */

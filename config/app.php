@@ -157,15 +157,10 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    /*
-        Code Editor
-    */
+    /**
+     * Code editor.
+     */
     'editor' => 'vscode',
-
-    /*
-        Application Version
-    */
-    'version' => env('APP_VERSION'),
 
     /**
      * Blacklisting attributes while debugging
@@ -200,7 +195,7 @@ return [
     'providers' => [
 
         /*
-         * Laravel Framework Service Providers...
+         * Laravel Framework Service Providers.
          */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -226,13 +221,15 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
+         * Package Service Providers.
          */
 
         Astrotomic\Translatable\TranslatableServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
-         * Application Service Providers...
+         * Application Service Providers.
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -240,20 +237,17 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        //Laravel Intervention
-        Intervention\Image\ImageServiceProvider::class,
-
-        //Laravel Maatwebsite
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-
-        //Repository
+        /**
+         * Repository Service Providers.
+         */
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Konekt\Concord\ConcordServiceProvider::class,
         Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
-        //Webkul packages
+        /**
+         * Webkul Package Service Providers.
+         */
         Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
@@ -272,7 +266,6 @@ return [
         Webkul\Paypal\Providers\PaypalServiceProvider::class,
         Webkul\Sales\Providers\SalesServiceProvider::class,
         Webkul\Tax\Providers\TaxServiceProvider::class,
-        Webkul\API\Providers\APIServiceProvider::class,
         Webkul\CatalogRule\Providers\CatalogRuleServiceProvider::class,
         Webkul\CartRule\Providers\CartRuleServiceProvider::class,
         Webkul\Rule\Providers\RuleServiceProvider::class,
@@ -282,6 +275,7 @@ return [
         Webkul\SocialLogin\Providers\SocialLoginServiceProvider::class,
         Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
         Webkul\Marketing\Providers\MarketingServiceProvider::class,
+        Webkul\Notification\Providers\NotificationServiceProvider::class
     ],
 
     /*
@@ -297,6 +291,11 @@ return [
 
     'aliases' => [
 
+        /**
+         * Laravel
+         *
+         * Place your aliases in alphabetical order.
+         */
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -330,18 +329,24 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
-        'ProductGrid' => Webkul\Ui\DataGrid\Facades\ProductGrid::class,
-        'Image' => Intervention\Image\Facades\Image::class,
+
+        /**
+         * Bagisto
+         *
+         * Place your aliases in alphabetical order.
+         */
+        'Captcha' => Webkul\Customer\Facades\Captcha::class,
         'Cart' => Webkul\Checkout\Facades\Cart::class,
-        'Core' => Webkul\Core\Facades\Core::class,
-        'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Concord' => Konekt\Concord\Facades\Concord::class,
-        'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Core' => Webkul\Core\Facades\Core::class,
+        'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
+        'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
         'ProductImage' => Webkul\Product\Facades\ProductImage::class,
-        'ProductVideo' => Webkul\Product\Facades\ProductVideo::class
+        'ProductVideo' => Webkul\Product\Facades\ProductVideo::class,
     ],
 ];

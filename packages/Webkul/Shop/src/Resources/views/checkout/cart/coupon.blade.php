@@ -1,6 +1,6 @@
 @if ($cart)
     <script type="text/x-template" id="coupon-component-template">
-        <div class="coupon-container">    
+        <div class="coupon-container">
             <div class="discount-control">
                 <form class="coupon-form" method="post" @submit.prevent="applyCoupon">
                     <div class="control-group" :class="[error_message ? 'has-error' : '']">
@@ -44,13 +44,24 @@
                     disable_button: false
                 }
             },
-            
+
+            watch: {
+                coupon_code: function (value) {
+                    if (value != '') {
+                        this.error_message = '';
+                    }
+                }
+            },
+
             methods: {
                 applyCoupon: function() {
-                    var self = this;
+                    let self = this;
 
-                    if (! self.coupon_code.length)
+                    if (! this.coupon_code.length) {
+                        this.error_message = '{{ __('shop::app.checkout.total.invalid-coupon') }}';
+
                         return;
+                    }
 
                     self.error_message = null;
 
@@ -68,7 +79,7 @@
                                 window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
 
                                 self.$root.addFlashMessages();
-                                
+
                                 self.redirectIfCartPage();
                             } else {
                                 self.error_message = response.data.message;
@@ -84,7 +95,7 @@
                 },
 
                 removeCoupon: function () {
-                    var self = this;
+                    let self = this;
 
                     axios.delete('{{ route('shop.checkout.coupon.remove.coupon') }}')
                         .then(function(response) {
@@ -106,8 +117,7 @@
                 },
 
                 redirectIfCartPage: function() {
-                    if (this.route_name != 'shop.checkout.cart.index')
-                        return;
+                    if (this.route_name != 'shop.checkout.cart.index') return;
 
                     setTimeout(function() {
                         window.location.reload();

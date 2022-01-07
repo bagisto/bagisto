@@ -11,11 +11,30 @@ return [
         'select-options' => 'Seleziona una opzione del prodotto prima di aggiungerlo ai Preferiti',
         'remove-all-success' => 'Tutti i Prodotti presenti nei preferiti sono stati rimossi',
     ],
+
     'reviews' => [
         'empty' => 'Non hai ancora recensito i nostri prodotti'
     ],
-	'forget_password' => [
-        'reset_link_sent' => 'Ti abbiamo inviato una email per generare una nuova password.'
-    ]
 
+    'forget_password' => [
+        'reset_link_sent' => 'Abbiamo inviato un\'e-mail con il link per reimpostare la password.',
+        'email_not_exist' => "Non riusciamo a trovare un utente con quell'indirizzo e-mail",
+    ],
+
+    'admin' => [
+        'system' => [
+            'captcha' => [
+                'title' => 'Captcha',
+                'credentials' => 'Credenziali',
+                'site-key' => 'Chiave del sito',
+                'secret-key' => 'Chiave segreta',
+                'status' => 'Stato',
+
+                'validations' => [
+                    'required' => 'Seleziona CAPTCHA',
+                    'captcha' => 'Qualcosa è andato storto! Per favore riprova.',
+                ]
+            ],
+        ],
+    ],
 ];

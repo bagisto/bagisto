@@ -44,7 +44,7 @@
 
                     @foreach ($comparableAttributes as $attribute)
                         <tr>
-                            <td>
+                            <td class="header">
                                 <span class="fs16">{{ isset($attribute['name']) ? $attribute['name'] : $attribute['admin_name'] }}</span>
                             </td>
 
@@ -115,6 +115,11 @@
                                                 <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'single')" class="fs16"></span>
                                                 <span v-else class="fs16">__</span>
                                                 @break;
+
+                                            @case('multiselect')
+                                                <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'multiple')" class="fs16"></span>
+                                                <span v-else class="fs16">__</span>
+                                                @break
 
                                             @case ('file')
                                             @case ('image')
@@ -207,6 +212,10 @@
                 },
 
                 'removeProductCompare': function (productId) {
+                    if (productId == 'all' && ! confirm('{{ __('shop::app.customer.compare.confirm-remove-all') }}')) {
+                        return;
+                    }
+
                     if (this.isCustomer) {
                         this.$http.delete(`${this.$root.baseUrl}/comparison?productId=${productId}`)
                         .then(response => {
@@ -215,6 +224,8 @@
                             } else {
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
                             }
+
+                            this.$root.headerItemsCount++;
 
                             window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                         })

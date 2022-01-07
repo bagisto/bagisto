@@ -14,7 +14,6 @@
                     :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
                     <carousel-component
                         :slides-per-page="slidesPerPage"
-                        navigation-enabled="hide"
                         pagination-enabled="hide"
                         :id="isCategory ? `${categoryDetails.name}-carousel` : productId"
                         :locale-direction="localeDirection"
@@ -51,7 +50,7 @@
         props: {
             count: {
                 type: String,
-                default: 10
+                default: '10'
             },
             productId: {
                 type: String,

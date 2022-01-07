@@ -1,84 +1,142 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Webkul\Attribute\Database\Factories;
 
-use Faker\Generator as Faker;
 use Webkul\Attribute\Models\Attribute;
-use Webkul\Core\Models\Locale;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Attribute::class, function (Faker $faker, array $attributes) {
-    $types = [
-        'text',
-        'textarea',
-        'price',
-        'boolean',
-        'select',
-        'multiselect',
-        'datetime',
-        'date',
-        'image',
-        'file',
-        'checkbox',
+class AttributeFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Attribute::class;
+
+    /**
+     * @var array
+     */
+    protected $states = [
+        'validation_numeric',
+        'validation_email',
+        'validation_decimal',
+        'validation_url',
+        'required',
+        'unique',
+        'filterable',
+        'configurable',
     ];
 
-    $locales = Locale::pluck('code')->all();
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        $types = [
+            'text',
+            'textarea',
+            'price',
+            'boolean',
+            'select',
+            'multiselect',
+            'datetime',
+            'date',
+            'image',
+            'file',
+            'checkbox',
+        ];
 
-    // array $attributes does not contain any locale code
-    if (count(array_diff_key(array_flip($locales), $attributes) ) === count($locales)) {
-        $localeCode = $locales[0];
-
-        $attributes[$localeCode] = [
-            'name' => $faker->word,
+        return [
+            'admin_name'          => $this->faker->word,
+            'code'                => $this->faker->word,
+            'type'                => array_rand($types),
+            'validation'          => '',
+            'position'            => $this->faker->randomDigit,
+            'is_required'         => false,
+            'is_unique'           => false,
+            'value_per_locale'    => false,
+            'value_per_channel'   => false,
+            'is_filterable'       => false,
+            'is_configurable'     => false,
+            'is_user_defined'     => true,
+            'is_visible_on_front' => true,
+            'swatch_type'         => null,
+            'use_in_flat'         => true,
         ];
     }
 
-    return [
-        'admin_name'          => $faker->word,
-        'code'                => $faker->word,
-        'type'                => array_rand($types),
-        'validation'          => '',
-        'position'            => $faker->randomDigit,
-        'is_required'         => false,
-        'is_unique'           => false,
-        'value_per_locale'    => false,
-        'value_per_channel'   => false,
-        'is_filterable'       => false,
-        'is_configurable'     => false,
-        'is_user_defined'     => true,
-        'is_visible_on_front' => true,
-        'swatch_type'         => null,
-        'use_in_flat'         => true,
-    ];
-});
+    public function validation_numeric(): AttributeFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'validation' => 'numeric',
+            ];
+        });
+    }
 
-$factory->state(Attribute::class, 'validation_numeric', [
-    'validation' => 'numeric',
-]);
+    public function validation_email(): AttributeFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'validation' => 'email',
+            ];
+        });
+    }
 
-$factory->state(Attribute::class, 'validation_email', [
-    'validation' => 'email',
-]);
+    public function validation_decimal(): AttributeFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'validation' => 'decimal',
+            ];
+        });
+    }
 
-$factory->state(Attribute::class, 'validation_decimal', [
-    'validation' => 'decimal',
-]);
+    public function validation_url(): AttributeFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'validation' => 'url',
+            ];
+        });
+    }
 
-$factory->state(Attribute::class, 'validation_url', [
-    'validation' => 'url',
-]);
+    public function required(): AttributeFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_required' => true,
+            ];
+        });
+    }
 
-$factory->state(Attribute::class, 'required', [
-    'is_required' => true,
-]);
+    public function unique(): AttributeFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_unique' => true,
+            ];
+        });
+    }
 
-$factory->state(Attribute::class, 'unique', [
-    'is_unique' => true,
-]);
+    public function filterable(): AttributeFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_filterable' => true,
+            ];
+        });
+    }
 
-$factory->state(Attribute::class, 'filterable', [
-    'is_filterable' => true,
-]);
-
-$factory->state(Attribute::class, 'configurable', [
-    'is_configurable' => true,
-]);
+    public function configurable(): AttributeFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_configurable' => true,
+            ];
+        });
+    }
+}

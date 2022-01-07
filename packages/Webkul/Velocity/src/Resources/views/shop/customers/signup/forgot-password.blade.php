@@ -51,9 +51,13 @@
                                 class="form-style"
                                 v-validate="'required|email'" />
 
-                            <span class="control-error" v-if="errors.has('email')">
-                                @{{ errors.first('email') }}
-                            </span>
+                            <span class="control-error" v-if="errors.has('email')" v-text="errors.first('email')"></span>
+                        </div>
+
+                        <div class="control-group">
+
+                            {!! Captcha::render() !!}
+
                         </div>
 
                         {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.after') !!}
@@ -69,3 +73,9 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+
+{!! Captcha::renderJS() !!}
+
+@endpush

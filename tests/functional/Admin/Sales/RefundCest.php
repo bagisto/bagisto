@@ -12,11 +12,10 @@ class RefundCest
         $refund = $I->have(Refund::class);
 
         $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.sales'), '//*[contains(@class, "navbar-left")]');
-        $I->click(__('admin::app.layouts.refunds'), '//*[contains(@class, "aside-nav")]');
-
+       
+        $I->amOnAdminRoute('admin.sales.refunds.index');
         $I->seeCurrentRouteIs('admin.sales.refunds.index');
-        $I->see($refund->id, '//script[@type="text/x-template"]');
+       
+        $I->see("{$refund->id}", '//script[@type="text/x-template"]');
     }
 }

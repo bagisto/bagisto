@@ -1,11 +1,12 @@
 <div class="mini-cart-container">
     <mini-cart
         is-tax-inclusive="{{ Webkul\Tax\Helpers\Tax::isTaxInclusive() }}"
-        view-cart="{{ route('shop.checkout.cart.index') }}"
-        cart-text="{{ __('shop::app.minicart.view-cart') }}"
+        view-cart-route="{{ route('shop.checkout.cart.index') }}"
+        checkout-route="{{ route('shop.checkout.onepage.index') }}"
+        check-minimum-order-route="{{ route('shop.checkout.check-minimum-order') }}"
+        cart-text="{{ __('shop::app.minicart.cart') }}"
+        view-cart-text="{{ __('shop::app.minicart.view-cart') }}"
         checkout-text="{{ __('shop::app.minicart.checkout') }}"
-        checkout-url="{{ route('shop.checkout.onepage.index') }}"
-        subtotal-text="{{ __('shop::app.checkout.cart.cart-subtotal') }}"
-        check-minimum-order-url="{{ route('shop.checkout.check-minimum-order') }}">
+        subtotal-text="{{ __('shop::app.checkout.cart.cart-subtotal') }}">
     </mini-cart>
 </div>

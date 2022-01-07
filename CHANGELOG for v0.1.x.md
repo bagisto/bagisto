@@ -1,44 +1,44 @@
 # CHANGELOG for v0.1.x
 
-This changelog consists the bug & security fixes and new features being included in the releases listed below.
+This changelog consists of the bug & security fixes and new features included in the releases listed below.
 
 ## **v0.1.9 (20th of December, 2019)** - *Release*
 
-* #1942 [fixed] - When editing the cart rule, selected category is not checked.
+* #1942 [fixed] - The selected category is not checked when editing the cart rule.
 
-* #1939 [fixed] - Invalid coupon gets applied, if clicking on apply coupon multiple time, although there is no discount amount but its displaying message that coupon code applied successfully.
+* #1939 [fixed] - Invalid coupon gets applied if clicking on apply coupon multiple times, although there is no discount amount but its displaying a message that coupon code applied successfully.
 
-* #1938 [fixed] - multiple cart rules are getting applied by using only single coupon.
+* #1938 [fixed] - Multiple cart rules are applied using only a single coupon.
 
 * #1935 [fixed] - Categories are not displaying if in condition Categories(children only) or Categories(Parent Only) is selected.
 
 * #1931 [fixed] - Catalog rule not applying if in condition type"Any Condition is true" is selected, and some of the condition doesn't match the product.
 
-* #1929 [fixed] - Actual product amount and discounted amount both should display on product page for configurable product
+* #1929 [fixed] - Actual product amount and discounted amount both should display on the product page for configurable product
 
-* #1928 [fixed] - Catalog rule should not apply if any of the condition doesn't match, if condition type"All Condition are true"
+* #1928 [fixed] - Catalog rule should not apply if any conditions don't match if condition type"All Condition are true."
 
-* #1904 [fixed] - Existing tax should display as list on creating catalog rule if in condition "Tax Category" is selected.
+* #1904 [fixed] - Existing tax should display as a list on creating a catalogue rule if "Tax Category" is selected.
 
 * #1903 [fixed] - UI issue in condition field
 
 * #1895 [fixed] - Translation issue Action Type field while creating catalog rule.
 
-* #1883 [fixed] - Free shipping not applied on cart, if from action "Free Shipping" is selected and discount amount is given as zero.
+* #1883 [fixed] - Free shipping not applied on a cart, if from action "Free Shipping" is selected and discount amount is given as zero.
 
-* #1882 [fixed] - If from Action "Apply on shipping " is selected as yes then the discounted amount is applying on both product and shipping charge.
+* #1882 [fixed] - If Action "Apply on shipping " is selected as yes, then the discounted amount applies to both product and shipping charges.
 
-* #1875 [fixed] - Discount gets applied on cart if condition is "Visible Individually" is set to yes and product added in cart is not visible individually.
+* #1875 [fixed] - Discount gets applied on a cart if a condition is "Visible Individually" is set to yes and product added in the cart is not visible individually.
 
 * #1868 [fixed] - Getting exception on checkout if action Buy X Get Y free is selected in cart rule. 
 
-* #1861 [fixed] - Getting exception on checkout if applying invalid coupon code and proceed for checkout.
+* #1861 [fixed] - Get an exception on checkout if applying an invalid coupon code and proceed for checkout.
 
 * #1857 [fixed] - Getting exception when creating cart rule with condition URL KEY(children only).
 
 * #1856 [fixed] - Getting exception on creating cart rule with condition Name(children only).
 
-* #1847 [fixed] - If cart rule condition does not match the cart then on applying coupon it should display message "Coupon cannot be applied".
+* #1847 [fixed] - If the cart rule condition does not match the cart, then on applying coupon, it should display a message "Coupon cannot be applied".
 
 * #1839 [fixed] - Getting exception on filtering cart rule through id.
 
@@ -52,13 +52,13 @@ This changelog consists the bug & security fixes and new features being included
 
 * #1833 [fixed] - Discount not applied if "Payment Method", "Shipping Method", "Shipping State" or "Shipping Country" is selected in condition.
 
-* #1832 [fixed] - Able to use coupon irrespective of the number given in "Uses per coupon" field.
+* #1832 [fixed] - Able to use coupon irrespective of the number given in the "Uses per coupon" field.
 
-* #1831 [fixed] - Negative sign is not required in discount amount.
+* #1831 [fixed] - Negative sign is not required in the discount amount.
 
-* #1830 [fixed] - If Coupon type is selected as "No Coupon" then coupon code should not generate for that particular cart rule.
+* #1830 [fixed] - If Coupon type is selected as "No Coupon", then coupon code should not generate for that particular cart rule.
 
-* #1828 [fixed] - Updated changes are not saved on editing cart rule.
+* #1828 [fixed] - Updated changes are not saved on the editing cart rule.
 
 * #1825 [fixed] - Not able to generate coupon code while creating cart rule.
 
@@ -68,7 +68,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * [feature] - Refund is added for orders.
 
-* #1504 [fixed] - Getting Exception when applying filter in Invoices grid through Invoice Date.
+* #1504 [fixed] - Getting exception when applying a filter in Invoices grid through Invoice Date.
 
 * #1492 [fixed] - Not showing orderid with prefix and suffix in Refund section.
 
@@ -76,13 +76,13 @@ This changelog consists the bug & security fixes and new features being included
 
 * #1489 [fixed] - Quantity of Product doesn't get updated after creating a refund.
 
-* #1486 [fixed] - Getting incorrect Total Due Amount if discount is applied.
+* #1486 [fixed] - Getting incorrect Total Due Amount if the discount is applied.
 
 * #1484 [fixed] - Unable to edit data of Refund Shipping field.
 
-* #1483 [fixed] - Refund option should not be available if refund is already created.
+* #1483 [fixed] - The refund option should not be available if a refund is already created.
 
-* #1461 [fixed] - Invoice number length should be number of zeros that appears before invoice id.
+* #1461 [fixed] - Invoice number length should be a number of zeros that appears before invoice id.
 
 * #1460 [fixed] - Getting error on deleting Newsletter.
 
@@ -90,7 +90,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #1442 [fixed] - Customer should get an email after registration.
 
-* #1338 [fixed] - Fixed the complete header ,header should not scroll on scrolling the page.
+* #1338 [fixed] - Fixed the complete header, the header should not scroll on scrolling the page.
 
 * #1172 [fixed] - Default shipping and payment should be selected, currently no shipping method and payment method is selected by default.
 
@@ -160,7 +160,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #1259 [fixed] - Getting exception if using same sku for variants..
 
-* #1258 [fixed] - If payment is done through paypal then invoice should generate automatically and status of Order should be processing.
+* #1258 [fixed] - If payment is done through paypal then invoice should generate automatically and Status of Order should be processing.
 
 * #1256 [fixed] - Discounted amount is not displaying in invoice and invoice pdf at both customer end and admin end.
 
@@ -198,7 +198,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #973 [fixed] - Edit Slider, get wrong with: An invalid form control with name='image[image_0]' is not focusable.
 
-* #968 [fixed] - sorting is not working (price).
+* #968 [fixed] - Sorting is not working (price).
 
 * #778 [fixed] - Error when add item to cart.
 
@@ -314,25 +314,45 @@ This changelog consists the bug & security fixes and new features being included
 
 * #939 [fixed] - Not able to save price in decimal for configurable products.
 
-* #932 [fixed] - Getting incorrect price of product in case of configurable product if custom attribute of select type is used.
+* #932 [fixed] - Getting the incorrect price of a product in case of a configurable product if custom attribute of select type is used.
 
-* #923 [fixed] - Required validation is not working for Lines in a Street Address, and add 1 as default line for address field.
+* #923 [fixed] - Required validation is not working for Lines in a Street Address, and add one as default line for the address field.
 
 * #917 [fixed] - Attribute name should display with attribute value.
 
 * #916 [fixed] - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'phone'.
 
-* #897 [fixed] - Product get saved without image, if used image is large in size.It should throw an error message.
+* #897 [fixed] - Product gets saved without image if a used image is large. It should throw an error message.
 
 * #896 [fixed] - getVariantMinPrice does not look at special_price.
 
-* #894 [fixed] - Storage link command is missing when installing framework through installer.
+* #894 [fixed] - Storage link command is missing when installing framework through 
+installer.
 
-* #890 [fixed] - An error message should show if uploaded mage size is large, while saving the category.
+* #890 [fixed] - An error message should show if 
+uploaded mage size is 
+....................................................
 
-* #879 [fixed] - Getting validation error message for locale while editing attribute.Attribute value is required for all locale.
 
-* #867 [fixed] - Getting exception if user create shipment for product which has been deleted from catalog.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+large, while saving the category.
+
+* #879 [fixed] - Getting validation error message for locale while editing attribute..................An attribute value is required for all locales.
+
+* #867 [fixed] - Getting exception if a user creates shipment for a product deleted from the catalog.
 
 * #842 [fixed] - Not able to export. This functionality is not working everywhere, where export is used.
 
@@ -340,9 +360,9 @@ This changelog consists the bug & security fixes and new features being included
 
 * #835 [fixed] - Parent Products show instock when all children have quantity 0.
 
-* #825 [fixed] - unable to update ( is_filterable ) in attributes.
+* #825 [fixed] - Unable to update ( is_filterable ) in attributes.
 
-* #818 [fixed] - Email should sent to the respective inventory from which shipment has been created.
+* #818 [fixed] - Email should be sent to the respective inventory from which shipment has been created.
 
 * #817 [fixed] - Admin should receive an email when an order is placed.
 
@@ -354,7 +374,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #771 [fixed] - Getting exception when login with custom role.
 
-* #767 [fixed] - After applying filter of status , the result display in boolean for Active/True and Inactive/False.
+* #767 [fixed] - After applying filter of Status, the result display in boolean for Active/True and Inactive/False.
 
 * #765 [fixed] - Getting issue in mass deletion for the configurable products if we have saved the products but variation and name of products has not saved.Getting this issue when App_Debug mode is false.
 
@@ -404,7 +424,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #712 [fixed] - Correct the filter option in Invoice grid.
 
-* #710 [fixed] - Getting exception when applying filter on Product according to Status.
+* #710 [fixed] - Getting exception when applying filter on product according to Status.
 
 * #709 [fixed] - Getting exception when applying filter according to Order Date of Order grid of Admin.
 
@@ -424,7 +444,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #655 [fixed] - Not able to create category with images, category doesn't get save if image is used.
 
-* #654 [fixed] - Getting Exception while adding product images by gui installer.
+* #654 [fixed] - Getting exception while adding product images by gui installer.
 
 * #647 [fixed] - Special price not working.
 
@@ -474,11 +494,11 @@ This changelog consists the bug & security fixes and new features being included
 
 * #620 [fixed] - "Enter Key" is not working while searching the product.
 
-* #619 [fixed] - Getting Exception when clicking on Product for which data is set according to locale.
+* #619 [fixed] - Getting exception when clicking on product for which data is set according to locale.
 
 * #618 [fixed] - Layout issue on Changing Locale.
 
-* #617 [fixed] - Getting Exception in case of Guest Review on frontend.
+* #617 [fixed] - Getting exception in case of Guest Review on frontend.
 
 * #616 [fixed] - Getting error message that tax rate field is required when importing tax rate even when value is provided in that field.
 
@@ -496,7 +516,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #594 [Added] - Latest order should display on top and add pagination on order page.(For Customer Account).
 
-* #592 [Added] - "Shipping to" column of Shipment remain blank if shipment for order is generated first and then invoice is created.
+* #592 [Added] - "Shipping to" column of shipment remain blank if shipment for order is generated first and then invoice is created.
 
 * #589 [Fixed] - Getting exception when product added in wishlist is deleted from admin and user try to add that product to cart from wishlist.
 
@@ -506,7 +526,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #586 [Fixed] - Getting Exception in importing tax rates.
 
-* #585 [Fixed] - Getting Exception when using filter according to Id in Order grid.
+* #585 [Fixed] - Getting exception when using filter according to Id in Order grid.
 
 * #581 [Fixed] - Translation issues when switching between any two languages, specifically categories in nav does not revert back.
 
@@ -522,7 +542,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #551 [Fixed] - Able to delete root category.
 
-* #546 [Fixed] - Getting Exception while uploading category image after installing project using installer.
+* #546 [Fixed] - Getting exception while uploading category image after installing project using installer.
 
 * #545 [Fixed] - Installer doesn't launch admin panel of framework.
 
@@ -556,13 +576,13 @@ This changelog consists the bug & security fixes and new features being included
 
 * #519 [fixed] - Status column of Review remains blank if review is in Pending state.
 
-* #514 [fixed] - Getting Exception on changing the status of Product(On mass update).
+* #514 [fixed] - Getting exception on changing the Status of Product(On mass update).
 
 * #513 [fixed] - Getting Exception in deleting categories.
 
 * #508 [fixed] - Correct the required php version in installer.
 
-* #506 [fixed] - While Installing the framework through Installer if at any stage user click on back button and then click on continue to install, then in this case unable to install.
+* #506 [fixed] - While Installing the framework through installer if at any stage user click on back button and then click on continue to install, then in this case unable to install.
 
 * #457 [fixed] - Admin add product "Undefined variable: configurableFamily".
 
@@ -580,9 +600,9 @@ This changelog consists the bug & security fixes and new features being included
 
 * #381 [fixed] - On front-end currency symbol display only for Indian Rupee and USD. If code is selected other than these two in currency then code displays before price.
 
-* #378 [fixed] - Images that are applied on Category doesn't display in Edit Category Page.
+* #378 [fixed] - Images that are applied on category doesn't display in Edit Category Page.
 
-* #369 [fixed] - Displaying incorrect response message on updating the status of products.
+* #369 [fixed] - Displaying incorrect response message on updating the Status of products.
 
 * #368 [fixed] - If products are added in shopping cart and those product get deleted from admin section then it still displays in cart.
 
@@ -614,7 +634,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * [fixes] Optimized exception handler (thanks to @AliN11)
 
-* #332 [fixed] Unable to change the status of user
+* #332 [fixed] Unable to change the Status of user
 
 * #326 [enhanced] Only customer that are on first page get exported
 
@@ -650,7 +670,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #279 [fixed] If Inventory source is not selected as active then also after saving it, its status changes to Active
 
-* #278 [fixed] Images that are applied on Category doesn't display in Edit Category Page
+* #278 [fixed] Images that are applied on category doesn't display in Edit Category Page
 
 * #277 [fixed] No email and number validation in Inventory Source Grid
 
@@ -660,7 +680,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #273 [fixed] Add a validation on price field that it should be numeric on Edit Product Page
 
-* #272 [fixed] Getting Exception when click on Save Invoice
+* #272 [fixed] Getting exception when click on Save Invoice
 
 * #271 [fixed] Provide little space between line and text in review section(frontend)
 
@@ -680,7 +700,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #238 [enhanced] Provide a mass selection option to approve a review
 
-* #228 [enhanced] bagisto icon should be clickable and by clicking on it, it should redirect to dashboard
+* #228 [enhanced] Bagisto icon should be clickable and by clicking on it, it should redirect to dashboard
 
 * #226 [fixed] Correct the spelling of "expensive" in Sort By
 
@@ -738,7 +758,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #225 - [fixed] Slider button should display as clickable on mouse hover
 
-* #224 - [fixed] Status column in Invoice remains blank
+* #224 - [fixed] Status column in invoice remains blank
 
 * #216 - [added] Add a Column "Channel" to verify from which channel order has been placed and also add this column in filter
 
@@ -768,11 +788,11 @@ This changelog consists the bug & security fixes and new features being included
 
 * #178 - [fixed] Change the Column Name
 
-* #177 - [fixed] Getting Exception when clicking on column locale
+* #177 - [fixed] Getting exception when clicking on column locale
 
 * #175 - [fixed] Getting exception in deleting attributes
 
-* #174 - [fixed] Getting Exception while applying filter on category page
+* #174 - [fixed] Getting exception while applying filter on category page
 
 * #173 - [fixed] Getting 500 Internal Server Error on Updating taxes
 
@@ -824,13 +844,13 @@ This changelog consists the bug & security fixes and new features being included
 
 * #132 - [fixed] Issue in Mass Deletion.This issue exists for every grid(mass actions will return in next release and the issue will remain open till next release)
 
-* #129 - [fixed] Getting issue when deleting orders.Mass action is not working in any grid(Getting Internal server error) while updating status(mass actions will return in next release and the issue will remain open till next release)
+* #129 - [fixed] Getting issue when deleting orders.Mass action is not working in any grid(Getting Internal server error) while updating Status (mass actions will return in next release and the issue will remain open till next release)
 
 * #126 - [fixed] Add asterisk symbol on SKU field
 
 * #125 - [fixed] Delete button is not available for mass delete of Products in Product Grid(mass actions will return in next release and the issue will remain open till next release)
 
-* #121 - [fixed] buy now button is not working on index page for some products
+* #121 - [fixed] Buy now button is not working on index page for some products
 
 * #120 - [fixed] After signup on the frontend, the customer is still not the signup page
 
@@ -844,7 +864,7 @@ This changelog consists the bug & security fixes and new features being included
 
 * #98 - [fixed] No warning before removing the item from the cart
 
-* #97 - [fixed] client side validation / js validation is missing at login page
+* #97 - [fixed] Client side validation / js validation is missing at login page
 
 * #96 - [fixed] Search button does not work(@prashant-webkul)
 
@@ -852,9 +872,9 @@ This changelog consists the bug & security fixes and new features being included
 
 * #94 - [fixed] Sign-in page shows signup text(@prashant-webkul)
 
-* [fixed] Email templates logo issue fixed(@jitendra-webkul)
+* [fixed] Email Templates logo issue fixed(@jitendra-webkul)
 
-* [fixed] Front search issue fixed due to hardcoded attribute code in search criteria(@jitendra-webkul)
+* [fixed] Front Search issue fixed due to hardcoded attribute code in search criteria(@jitendra-webkul)
 
 * [changed] Versioning of core packages
 

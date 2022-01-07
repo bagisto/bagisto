@@ -1,49 +1,28 @@
-@inject ('attributeRepository', 'Webkul\Attribute\Repositories\AttributeRepository')
-
-@inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
-
-@inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
-
-<?php
-    $filterAttributes = $attributes = [];
-    $maxPrice = 0;
-
-    if (isset($category)) {
-        $filterAttributes = $productFlatRepository->getProductsRelatedFilterableAttributes($category);
-
-        $maxPrice = core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category));
-    }
-
-    if (! count($filterAttributes) > 0) {
-        $filterAttributes = $attributeRepository->getFilterAttributes();
-    }
-?>
-
 <div class="layered-filter-wrapper">
-
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
-    <layered-navigation></layered-navigation>
+        <layered-navigation></layered-navigation>
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
-
 </div>
 
 @push('scripts')
     <script type="text/x-template" id="layered-navigation-template">
         <div>
-
             <div class="filter-title">
                 {{ __('shop::app.products.layered-nav-title') }}
             </div>
 
             <div class="filter-content">
-
                 <div class="filter-attributes">
-
-                    <filter-attribute-item v-for='(attribute, index) in attributes' :attribute="attribute" :key="index" :index="index" @onFilterAdded="addFilters(attribute.code, $event)" :appliedFilterValues="appliedFilters[attribute.code]">
+                    <filter-attribute-item
+                        v-for='(attribute, index) in attributes'
+                        :key="index"
+                        :index="index"
+                        :attribute="attribute"
+                        :appliedFilterValues="appliedFilters[attribute.code]"
+                        @onFilterAdded="addFilters(attribute.code, $event)">
                     </filter-attribute-item>
-
                 </div>
             </div>
         </div>
@@ -51,8 +30,7 @@
 
     <script type="text/x-template" id="filter-attribute-item-template">
         <div class="filter-attributes-item" :class="[active ? 'active' : '']">
-
-            <div class="filter-attributes-title" @click="active = !active">
+            <div class="filter-attributes-title" @click="active = ! active">
                 @{{ attribute.name ? attribute.name : attribute.admin_name }}
 
                 <div class="pull-right">
@@ -65,16 +43,15 @@
             </div>
 
             <div class="filter-attributes-content">
-
                 <ol class="items" v-if="attribute.type != 'price'">
                     <li class="item" v-for='(option, index) in attribute.options'>
-
                         <span class="checkbox">
                             <input type="checkbox" :id="option.id" v-bind:value="option.id" v-model="appliedFilters" @change="addFilter($event)"/>
+
                             <label class="checkbox-view" :for="option.id"></label>
+
                             @{{ option.label ? option.label : option.admin_name }}
                         </span>
-
                     </li>
                 </ol>
 
@@ -86,39 +63,47 @@
                         :tooltip-style="sliderConfig.tooltipStyle"
                         :max="sliderConfig.max"
                         :lazy="true"
-                        @change="priceRangeUpdated($event)"
-                    ></vue-slider>
+                        @change="priceRangeUpdated($event)">
+                    </vue-slider>
                 </div>
-
             </div>
-
         </div>
     </script>
 
     <script>
         Vue.component('layered-navigation', {
-
             template: '#layered-navigation-template',
 
             data: function() {
                 return {
-                    attributes: @json($filterAttributes),
-
-                    appliedFilters: {}
+                    appliedFilters: {},
+                    attributes: [],
                 }
             },
 
             created: function () {
-                var urlParams = new URLSearchParams(window.location.search);
+                this.setFilterAttributes();
 
-                var this_this = this;
-
-                urlParams.forEach(function (value, index) {
-                    this_this.appliedFilters[index] = value.split(',');
-                });
+                this.setAppliedFilters();
             },
 
             methods: {
+                setFilterAttributes: function () {
+                    axios
+                        .get('{{ route('admin.catalog.products.get-filter-attributes', $category->id) }}')
+                        .then((response) => {
+                            this.attributes = response.data.filter_attributes;
+                        });
+                },
+
+                setAppliedFilters: function () {
+                    let urlParams = new URLSearchParams(window.location.search);
+
+                    urlParams.forEach((value, index) => {
+                        this.appliedFilters[index] = value.split(',');
+                    });
+                },
+
                 addFilters: function (attributeCode, filters) {
                     if (filters.length) {
                         this.appliedFilters[attributeCode] = filters;
@@ -130,7 +115,7 @@
                 },
 
                 applyFilter: function () {
-                    var params = [];
+                    let params = [];
 
                     for(key in this.appliedFilters) {
                         if (key != 'page') {
@@ -144,27 +129,17 @@
         });
 
         Vue.component('filter-attribute-item', {
-
             template: '#filter-attribute-item-template',
 
             props: ['index', 'attribute', 'appliedFilterValues'],
 
             data: function() {
-                let maxPrice  = @json($maxPrice);
-
-                maxPrice = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
-
                 return {
                     appliedFilters: [],
-
                     active: false,
-
                     sliderConfig: {
-                        value: [
-                            0,
-                            0
-                        ],
-                        max: maxPrice,
+                        value: [0, 0],
+                        max: 500,
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
@@ -177,8 +152,7 @@
             },
 
             created: function () {
-                if (!this.index)
-                    this.active = true;
+                if (! this.index) this.active = true;
 
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;
@@ -189,9 +163,21 @@
 
                     this.active = true;
                 }
+
+                this.setMaxPrice();
             },
 
             methods: {
+                setMaxPrice: function () {
+                    axios
+                        .get('{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id) }}')
+                        .then((response) => {
+                            let maxPrice  = response.data.max_price;
+
+                            this.sliderConfig.max = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
+                        });
+                },
+
                 addFilter: function (e) {
                     this.$emit('onFilterAdded', this.appliedFilters)
                 },
@@ -212,8 +198,6 @@
                     this.$emit('onFilterAdded', this.appliedFilters)
                 }
             }
-
         });
-
     </script>
 @endpush

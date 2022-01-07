@@ -73,6 +73,15 @@ class Install extends Command
         $result = shell_exec('composer dump-autoload');
         $this->info($result);
 
+        // removing the installer directory
+        if (is_dir('public/installer')) {
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                shell_exec('rmdir /s/q public\\installer');
+            } else {
+                shell_exec('rm -rf public/installer');
+            }
+        }
+
         // final information
         $this->info('-----------------------------');
         $this->info('Congratulations!');

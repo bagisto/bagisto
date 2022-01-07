@@ -64,7 +64,18 @@
                     @endphp
 
                     @if ($showWishlist)
-                        <a @if ($wishListHelper->getWishlistProduct($product)) class="add-to-wishlist already" @else class="add-to-wishlist" @endif href="{{ route('customer.wishlist.add', $product->product_id) }}">
+                        <form id="wishlist-{{ $product->product_id }}" action="{{ route('customer.wishlist.add', $product->product_id) }}" method="POST">
+                            @csrf
+                        </form>
+
+                        <a
+                            @if ($wishListHelper->getWishlistProduct($product))
+                                class="add-to-wishlist already"
+                            @else
+                                class="add-to-wishlist"
+                            @endif
+                            href="javascript:void(0);"
+                            onclick="document.getElementById('wishlist-{{ $product->product_id }}').submit();">
                         </a>
                     @endif
                 @endauth

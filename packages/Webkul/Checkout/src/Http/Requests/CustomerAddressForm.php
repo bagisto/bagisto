@@ -100,7 +100,9 @@ class CustomerAddressForm extends FormRequest
      */
     private function getCustomerAddressIds(): string
     {
-        if ($customer = auth('customer')->user()) {
+        $guard = request()->has('token') ? 'api' : 'customer';
+        
+        if ($customer = auth($guard)->user()) {
             return $customer->addresses->pluck('id')->join(',');
         }
 

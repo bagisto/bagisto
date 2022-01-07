@@ -140,6 +140,10 @@ trait ProvideCollection
      */
     private function sortCollection($collection, $info)
     {
+        $availableOptions = ['asc', 'desc'];
+
+        $selectedSortOption = strtolower(array_values($info)[0]);
+
         $countKeys = count(array_keys($info));
 
         if ($countKeys > 1) {
@@ -150,7 +154,7 @@ trait ProvideCollection
 
         $collection->orderBy(
             $columnName[1],
-            array_values($info)[0]
+            in_array($selectedSortOption, $availableOptions) ? $selectedSortOption : 'asc'
         );
     }
 
@@ -214,17 +218,30 @@ trait ProvideCollection
     /**
      * Transform your columns.
      *
-     * @parma  object  $record
+     * @param  object  $record
      * @return void
      */
     private function transformColumns($record)
     {
         foreach($this->columns as $column) {
-            if (isset($column['wrapper'])) {
-                if (isset($column['closure']) && $column['closure'] == true) {
-                    $record->{$column['index']} = $column['wrapper']($record);
-                } else {
-                    $record->{$column['index']} = htmlspecialchars($column['wrapper']($record));
+            $supportedClosureKey = ['wrapper', 'closure'];
+
+            $isClosure = ! empty(array_intersect($supportedClosureKey, array_keys($column)));
+
+            if ($isClosure) {
+                /**
+                 * @deprecated $column['wrapper']
+                 *
+                 * Use $column['closure'] instead. `wrapper` key will get removed in the later version.
+                 */
+                if (isset($column['wrapper']) && gettype($column['wrapper']) === 'object' && $column['wrapper'] instanceof \Closure) {
+                    if (isset($column['closure']) && $column['closure'] == true) {
+                        $record->{$column['index']} = $column['wrapper']($record);
+                    } else {
+                        $record->{$column['index']} = htmlspecialchars($column['wrapper']($record));
+                    }
+                } else if (isset($column['closure']) && gettype($column['closure']) === 'object' && $column['closure'] instanceof \Closure) {
+                    $record->{$column['index']} = $column['closure']($record);
                 }
             } else {
                 if ($column['type'] == 'price') {
@@ -233,6 +250,8 @@ trait ProvideCollection
                     } else {
                         $record->{$column['index']} = htmlspecialchars(core()->formatBasePrice($record->{$column['index']}));
                     }
+                } else {
+                    $record->{$column['index']} = htmlspecialchars($record->{$column['index']});
                 }
             }
         }

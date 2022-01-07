@@ -127,9 +127,9 @@
                         <h1 class="text-center">{{ __('admin::app.sales.invoices.invoice') }}</h1>
                     </div>
                 </div>
-                @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.logo'))
+                @if (core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo'))
                     <div class="image">
-                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}"/>
+                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo')) }}"/>
                     </div>
                 @endif
                 <div class="merchant-details">
@@ -157,7 +157,12 @@
             <div class="invoice-summary">
                 <div class="row">
                     <span class="label">{{ __('admin::app.sales.invoices.invoice-id') }} -</span>
-                    <span class="value">#{{ $invoice->id }}</span>
+                    <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">{{ __('admin::app.sales.invoices.date') }} -</span>
+                    <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
                 </div>
 
                 <div class="row">
@@ -166,9 +171,16 @@
                 </div>
 
                 <div class="row">
-                    <span class="label">{{ __('admin::app.sales.invoices.order-date') }} </span>
+                    <span class="label">{{ __('admin::app.sales.invoices.order-date') }} -</span>
                     <span class="value">{{ $invoice->created_at->format('d-m-Y') }}</span>
                 </div>
+
+                @if ($invoice->hasPaymentTerm())
+                    <div class="row">
+                        <span class="label">{{ __('admin::app.admin.system.payment-terms') }} -</span>
+                        <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
+                    </div>
+                @endif
 
                 <div class="table address">
                     <table>
