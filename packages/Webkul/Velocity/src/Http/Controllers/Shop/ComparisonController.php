@@ -11,7 +11,7 @@ class ComparisonController extends Controller
      */
     public function getComparisonList()
     {
-        if (! core()->getConfigData('general.content.shop.compare_option')) {
+        if (!core()->getConfigData('general.content.shop.compare_option')) {
             abort(404);
         } else {
             if (request()->get('data')) {
@@ -22,7 +22,7 @@ class ComparisonController extends Controller
                         ->leftJoin(
                             'product_flat',
                             'velocity_customer_compare_products.product_flat_id',
-                            'product_flat.id'
+                            'product_flat.product_id'
                         )
                         ->where('customer_id', auth()->guard('customer')->user()->id)
                         ->get();
@@ -31,7 +31,7 @@ class ComparisonController extends Controller
                         return $product->id;
                     })->join('&');
 
-                    $productCollection = ! empty($items)
+                    $productCollection = !empty($items)
                         ? $this->velocityHelper->fetchProductCollection($items)
                         : [];
                 } else {
@@ -69,17 +69,17 @@ class ComparisonController extends Controller
             'product_flat_id' => $productId,
         ]);
 
-        if (! $compareProduct) {
+        if (!$compareProduct) {
             // insert new row
 
             $productFlatRepository = app('\Webkul\Product\Models\ProductFlat');
 
             $productFlat = $productFlatRepository
-                            ->where('id', $productId)
-                            ->orWhere('parent_id', $productId)
-                            ->orWhere('id', $productId)
-                            ->get()
-                            ->first();
+                ->where('id', $productId)
+                ->orWhere('parent_id', $productId)
+                ->orWhere('id', $productId)
+                ->get()
+                ->first();
 
             if ($productFlat) {
                 $productId = $productFlat->id;
