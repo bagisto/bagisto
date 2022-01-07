@@ -1,17 +1,17 @@
-@php 
+@php
     $orderStatusMessages = [
         'pending' => trans('admin::app.notification.order-status-messages.pending'),
         'canceled'=> trans('admin::app.notification.order-status-messages.canceled'),
         'closed' => trans('admin::app.notification.order-status-messages.closed'),
         'completed'=> trans('admin::app.notification.order-status-messages.completed'),
-        'processing' => trans('admin::app.notification.order-status-messages.processing') 
+        'processing' => trans('admin::app.notification.order-status-messages.processing')
     ];
 @endphp
 
 <div class="navbar-top">
     <div class="navbar-top-left">
         @include ('admin::layouts.mobile-nav')
-        
+
         <div class="brand-logo">
             <a href="{{ route('admin.dashboard.index') }}">
                 @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
@@ -36,10 +36,10 @@
                     <a  href="{{ route('shop.home.index') }}" target="_blank" style="display: inline-block; vertical-align: middle;">
                         <span class="icon store-icon" data-toggle="tooltip" data-placement="bottom" title="{{ __('admin::app.layouts.visit-shop') }}"></span>
                     </a>
-                </div>               
+                </div>
             </div>
-        
-            <notification 
+
+            <notification
                 get-notification-url="{{ route('admin.notification.get-notification') }}"
                 view-all="{{ route('admin.notification.index') }}"
                 order-view-url="{{ \URL::to('/') }}/admin/viewed-notifications/"
@@ -50,7 +50,7 @@
                 get-read-all-url="{{ route('admin.notification.read-all') }}"
                 order-status-messages="{{ json_encode($orderStatusMessages) }}"
                 read-all-title="{{ __('admin::app.notification.read-all') }}">
-            </notification>              
+            </notification>
 
             <div class="profile-info">
                 <div class="dropdown-toggle">
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="dropdown-list bottom-right">
-                    <span class="app-version">{{ __('admin::app.layouts.app-version', ['version' => 'v' . config('app.version')]) }}</span>
+                    <span class="app-version">{{ __('admin::app.layouts.app-version', ['version' => 'v' . core()->version()]) }}</span>
 
                     <div class="dropdown-container">
                         <label>{{ __('admin::app.layouts.account-title') }}</label>
@@ -81,7 +81,7 @@
                             <li v-if="!isMobile()" style="display: flex;justify-content: space-between;">
                                 <div style="margin-top:7px">{{ __('admin::app.layouts.mode') }}</div>
                                 <dark style="margin-top: -9px;width: 83px;"></dark>
-                            </li> 
+                            </li>
                         </ul>
                     </div>
                 </div>

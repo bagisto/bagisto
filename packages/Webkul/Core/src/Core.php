@@ -17,62 +17,71 @@ use Webkul\Customer\Repositories\CustomerGroupRepository;
 class Core
 {
     /**
-     * ChannelRepository class
+     * The Bagisto version.
+     *
+     * @var string
+     */
+    const BAGISTO_VERSION = '1.x-dev';
+
+    /**
+     * Channel repository instance.
      *
      * @var \Webkul\Core\Repositories\ChannelRepository
      */
     protected $channelRepository;
 
     /**
-     * CurrencyRepository class
+     * Currency repository instance.
      *
      * @var \Webkul\Core\Repositories\CurrencyRepository
      */
     protected $currencyRepository;
 
     /**
-     * ExchangeRateRepository class
+     * Exchange rate repository instance.
      *
      * @var \Webkul\Core\Repositories\ExchangeRateRepository
      */
     protected $exchangeRateRepository;
 
     /**
-     * CountryRepository class
+     * Country repository instance.
      *
      * @var \Webkul\Core\Repositories\CountryRepository
      */
     protected $countryRepository;
 
     /**
-     * CountryStateRepository class
+     * Country state repository instance.
      *
      * @var \Webkul\Core\Repositories\CountryStateRepository
      */
     protected $countryStateRepository;
 
     /**
-     * LocaleRepository class
+     * Locale repository instance.
      *
      * @var \Webkul\Core\Repositories\LocaleRepository
      */
     protected $localeRepository;
 
     /**
-     * CustomerGroupRepository class
+     * Customer group repository instance.
      *
      * @var CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
-     * CoreConfigRepository class
+     * Core config repository instance.
      *
      * @var \Webkul\Core\Repositories\CoreConfigRepository
      */
     protected $coreConfigRepository;
 
     /**
+     * Channel.
+     *
      * @var \Webkul\Core\Models\Channel
      */
     private static $channel;
@@ -83,21 +92,20 @@ class Core
      * everytime the `getConfigData` method is called.
      */
     private $coreConfigExceptions = [
-        'catalog.products.guest-checkout.allow-guest-checkout'
+        'catalog.products.guest-checkout.allow-guest-checkout',
     ];
 
     /**
      * Create a new instance.
      *
-     * @param \Webkul\Core\Repositories\ChannelRepository           $channelRepository
-     * @param \Webkul\Core\Repositories\CurrencyRepository          $currencyRepository
-     * @param \Webkul\Core\Repositories\ExchangeRateRepository      $exchangeRateRepository
-     * @param \Webkul\Core\Repositories\CountryRepository           $countryRepository
-     * @param \Webkul\Core\Repositories\CountryStateRepository      $countryStateRepository
-     * @param \Webkul\Core\Repositories\LocaleRepository            $localeRepository
-     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository
-     * @param \Webkul\Core\Repositories\CoreConfigRepository        $coreConfigRepository
-     *
+     * @param  \Webkul\Core\Repositories\ChannelRepository            $channelRepository
+     * @param  \Webkul\Core\Repositories\CurrencyRepository           $currencyRepository
+     * @param  \Webkul\Core\Repositories\ExchangeRateRepository       $exchangeRateRepository
+     * @param  \Webkul\Core\Repositories\CountryRepository            $countryRepository
+     * @param  \Webkul\Core\Repositories\CountryStateRepository       $countryStateRepository
+     * @param  \Webkul\Core\Repositories\LocaleRepository             $localeRepository
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
+     * @param  \Webkul\Core\Repositories\CoreConfigRepository         $coreConfigRepository
      * @return void
      */
     public function __construct(
@@ -109,8 +117,7 @@ class Core
         LocaleRepository $localeRepository,
         CustomerGroupRepository $customerGroupRepository,
         CoreConfigRepository $coreConfigRepository
-    )
-    {
+    ) {
         $this->channelRepository = $channelRepository;
 
         $this->currencyRepository = $currencyRepository;
@@ -126,6 +133,16 @@ class Core
         $this->customerGroupRepository = $customerGroupRepository;
 
         $this->coreConfigRepository = $coreConfigRepository;
+    }
+
+    /**
+     * Get the version number of the Bagisto.
+     *
+     * @return string
+     */
+    public function version()
+    {
+        return static::BAGISTO_VERSION;
     }
 
     /**
@@ -171,7 +188,7 @@ class Core
     /**
      * Set the current channel.
      *
-     * @param Channel $channel
+     * @param  Channel  $channel
      */
     public function setCurrentChannel(Channel $channel): void
     {
@@ -256,9 +273,7 @@ class Core
      */
     public function getChannelName($channel): string
     {
-        return $channel->name
-            ?? $channel->translate(app()->getLocale())->name
-            ?? $channel->translate(config('app.fallback_locale'))->name;
+        return $channel->name ?? $channel->translate(app()->getLocale())->name ?? $channel->translate(config('app.fallback_locale'))->name;
     }
 
     /**
@@ -294,7 +309,7 @@ class Core
 
         return $data = [
             'channel' => $channel,
-            'locales' => $channel->locales
+            'locales' => $channel->locales,
         ];
     }
 
@@ -531,10 +546,9 @@ class Core
     /**
      * Converts price.
      *
-     * @param float  $amount
-     * @param string $targetCurrencyCode
-     * @param string $orderCurrencyCode
-     *
+     * @param  float  $amount
+     * @param  string  $targetCurrencyCode
+     * @param  string  $orderCurrencyCode
      * @return string
      */
     public function convertPrice($amount, $targetCurrencyCode = null, $orderCurrencyCode = null)
@@ -571,7 +585,7 @@ class Core
             return $amount;
         }
 
-        $result = (float)$amount * (float)($this->lastCurrencyCode == $targetCurrency->code ? 1.0 : $exchangeRate->rate);
+        $result = (float) $amount * (float) ($this->lastCurrencyCode == $targetCurrency->code ? 1.0 : $exchangeRate->rate);
 
         if ($this->lastCurrencyCode != $targetCurrency->code) {
             $this->lastCurrencyCode = $targetCurrency->code;
@@ -583,9 +597,8 @@ class Core
     /**
      * Converts to base price.
      *
-     * @param float  $amount
-     * @param string $targetCurrencyCode
-     *
+     * @param  float  $amount
+     * @param  string  $targetCurrencyCode
      * @return string
      */
     public function convertToBasePrice($amount, $targetCurrencyCode = null)
@@ -606,14 +619,13 @@ class Core
             return $amount;
         }
 
-        return (float)$amount / $exchangeRate->rate;
+        return (float) $amount / $exchangeRate->rate;
     }
 
     /**
      * Format and convert price with currency symbol.
      *
-     * @param float $price
-     *
+     * @param  float  $price
      * @return string
      */
     public function currency($amount = 0)
@@ -628,8 +640,7 @@ class Core
     /**
      * Return currency symbol from currency code.
      *
-     * @param float $price
-     *
+     * @param  float  $price
      * @return string
      */
     public function currencySymbol($code)
@@ -642,14 +653,14 @@ class Core
     /**
      * Format and convert price with currency symbol.
      *
-     * @param float $price
-     *
+     * @param  float  $price
      * @return string
      */
     public function formatPrice($price, $currencyCode)
     {
-        if (is_null($price))
+        if (is_null($price)) {
             $price = 0;
+        }
 
         $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
@@ -667,9 +678,9 @@ class Core
 
         $pattern = $formater->getPattern();
 
-        $pattern = str_replace("¤", "%s", $pattern);
+        $pattern = str_replace('¤', '%s', $pattern);
 
-        $pattern = str_replace("#,##0.00", "%v", $pattern);
+        $pattern = str_replace('#,##0.00', '%v', $pattern);
 
         return [
             'symbol'  => $this->currencySymbol($this->getCurrentCurrencyCode()),
@@ -682,9 +693,8 @@ class Core
      * Format price with base currency symbol. This method also give ability to encode
      * the base currency symbol and its optional.
      *
-     * @param  float $price
+     * @param  float  $price
      * @param  bool  $isEncoded
-     *
      * @return string
      */
     public function formatBasePrice($price, $isEncoded = false)
@@ -713,10 +723,9 @@ class Core
     /**
      * Checks if current date of the given channel (in the channel timezone) is within the range.
      *
-     * @param int|string|\Webkul\Core\Contracts\Channel $channel
-     * @param string|null                               $dateFrom
-     * @param string|null                               $dateTo
-     *
+     * @param  int|string|\Webkul\Core\Contracts\Channel  $channel
+     * @param  string|null                                $dateFrom
+     * @param  string|null                                $dateTo
      * @return bool
      */
     public function isChannelDateInInterval($dateFrom = null, $dateTo = null)
@@ -747,9 +756,8 @@ class Core
     /**
      * Get channel timestamp, timstamp will be builded with channel timezone settings.
      *
-     * @param \Webkul\Core\Contracts\Channel $channel
-     *
-     * @return  int
+     * @param  \Webkul\Core\Contracts\Channel  $channel
+     * @return int
      */
     public function channelTimeStamp($channel)
     {
@@ -769,11 +777,10 @@ class Core
     /**
      * Check whether sql date is empty.
      *
-     * @param string $date
-     *
+     * @param  string  $date
      * @return bool
      */
-    function is_empty_date($date)
+    public function is_empty_date($date)
     {
         return preg_replace('#[ 0:-]#', '', $date) === '';
     }
@@ -781,10 +788,9 @@ class Core
     /**
      * Format date using current channel.
      *
-     * @param \Illuminate\Support\Carbon|null $date
-     * @param string                          $format
-     *
-     * @return  string
+     * @param  \Illuminate\Support\Carbon|null  $date
+     * @param  string  $format
+     * @return string
      */
     public function formatDate($date = null, $format = 'd-m-Y H:i:s')
     {
@@ -802,10 +808,9 @@ class Core
     /**
      * Retrieve information from payment configuration.
      *
-     * @param string          $field
-     * @param int|string|null $channelId
-     * @param string|null     $locale
-     *
+     * @param  string           $field
+     * @param  int|string|null  $channelId
+     * @param  string|null      $locale
      * @return mixed
      */
     public function getConfigData($field, $channel = null, $locale = null)
@@ -827,11 +832,11 @@ class Core
         }
 
         if (! $coreConfigValue) {
-            $fields = explode(".", $field);
+            $fields = explode('.', $field);
 
             array_shift($fields);
 
-            $field = implode(".", $fields);
+            $field = implode('.', $fields);
 
             return Config::get($field);
         }
@@ -842,8 +847,7 @@ class Core
     /**
      * Retrieve a group of information from the core config table.
      *
-     * @param mixed $criteria
-     *
+     * @param  mixed  $criteria
      * @return mixed
      */
     public function retrieveGroupConfig($criteria)
@@ -864,8 +868,7 @@ class Core
     /**
      * Returns country name by code.
      *
-     * @param string $code
-     *
+     * @param  string  $code
      * @return string
      */
     public function country_name($code)
@@ -878,8 +881,7 @@ class Core
     /**
      * Retrieve all country states.
      *
-     * @param string $countryCode
-     *
+     * @param  string  $countryCode
      * @return \Illuminate\Support\Collection
      */
     public function states($countryCode)
@@ -910,7 +912,7 @@ class Core
      */
     public function findStateByCountryCode($countryCode = null, $stateCode = null)
     {
-        $collection = array();
+        $collection = [];
 
         $collection = $this->countryStateRepository->findByField(['country_code' => $countryCode, 'code' => $stateCode]);
 
@@ -924,9 +926,8 @@ class Core
     /**
      * Returns time intervals.
      *
-     * @param \Illuminate\Support\Carbon $startDate
-     * @param \Illuminate\Support\Carbon $endDate
-     *
+     * @param  \Illuminate\Support\Carbon  $startDate
+     * @param  \Illuminate\Support\Carbon  $endDate
      * @return array
      */
     public function getTimeInterval($startDate, $endDate)
@@ -982,9 +983,10 @@ class Core
     }
 
     /**
-     * @param string $date
-     * @param int    $day
+     * Week range.
      *
+     * @param  string $date
+     * @param  int    $day
      * @return string
      */
     public function xWeekRange($date, $day)
@@ -1005,8 +1007,7 @@ class Core
     /**
      * Method to sort through the acl items and put them in order.
      *
-     * @param array $items
-     *
+     * @param  array  $items
      * @return array
      */
     public function sortItems($items)
@@ -1029,8 +1030,9 @@ class Core
     }
 
     /**
-     * @param string $fieldName
+     * Get config field.
      *
+     * @param string $fieldName
      * @return array
      */
     public function getConfigField($fieldName)
@@ -1049,8 +1051,9 @@ class Core
     }
 
     /**
-     * @param array $items
+     * Convert to associative array.
      *
+     * @param array $items
      * @return array
      */
     public function convertToAssociativeArray($items)
@@ -1083,10 +1086,11 @@ class Core
     }
 
     /**
-     * @param array            $items
-     * @param string           $key
-     * @param string|int|float $value
+     * Array set.
      *
+     * @param  array             $items
+     * @param  string            $key
+     * @param  string|int|float  $value
      * @return array
      */
     public function array_set(&$array, $key, $value)
@@ -1120,14 +1124,15 @@ class Core
     }
 
     /**
-     * @param array $array1
+     * Convert empty strings to null.
      *
+     * @param  array  $array1
      * @return array
      */
     public function convertEmptyStringsToNull($array)
     {
         foreach ($array as $key => $value) {
-            if ($value == "" || $value == "null") {
+            if ($value == '' || $value == 'null') {
                 $array[$key] = null;
             }
         }
@@ -1138,8 +1143,7 @@ class Core
     /**
      * Create singleton object through single facade.
      *
-     * @param string $className
-     *
+     * @param  string  $className
      * @return object
      */
     public function getSingletonInstance($className)
@@ -1156,13 +1160,12 @@ class Core
     /**
      * Returns a string as selector part for identifying elements in views.
      *
-     * @param float $taxRate
-     *
+     * @param  float  $taxRate
      * @return string
      */
     public static function taxRateAsIdentifier(float $taxRate): string
     {
-        return str_replace('.', '_', (string)$taxRate);
+        return str_replace('.', '_', (string) $taxRate);
     }
 
     /**
@@ -1200,9 +1203,10 @@ class Core
     }
 
     /**
-     * @param array $array1
-     * @param array $array2
+     * Array merge.
      *
+     * @param  array  $array1
+     * @param  array  $array2
      * @return array
      */
     protected function arrayMerge(array &$array1, array &$array2)
@@ -1222,6 +1226,11 @@ class Core
 
     /**
      * Get core config values.
+     *
+     * @param  mixed  $field
+     * @param  mixed  $channel
+     * @param  mixed  $locale
+     * @return mixed
      */
     protected function getCoreConfigValue($field, $channel, $locale)
     {
