@@ -157,15 +157,10 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    /*
-        Code Editor
-    */
+    /**
+     * Code editor.
+     */
     'editor' => 'vscode',
-
-    /*
-        Application Version
-    */
-    'version' => env('APP_VERSION'),
 
     /**
      * Blacklisting attributes while debugging
@@ -200,7 +195,7 @@ return [
     'providers' => [
 
         /*
-         * Laravel Framework Service Providers...
+         * Laravel Framework Service Providers.
          */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -226,13 +221,15 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
+         * Package Service Providers.
          */
 
         Astrotomic\Translatable\TranslatableServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
-         * Application Service Providers...
+         * Application Service Providers.
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -240,19 +237,17 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        //Laravel Intervention
-        Intervention\Image\ImageServiceProvider::class,
-
-        //Laravel Maatwebsite
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-
-        //Repository
+        /**
+         * Repository Service Providers.
+         */
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Konekt\Concord\ConcordServiceProvider::class,
         Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
-        //Webkul packages
+        /**
+         * Webkul Package Service Providers.
+         */
         Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
