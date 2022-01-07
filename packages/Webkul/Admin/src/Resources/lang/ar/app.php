@@ -1000,7 +1000,7 @@ return [
             'title'                => 'زبائن',
             'first_name'           => 'الاسم الاول',
             'last_name'            => 'الكنية',
-            'select-gender'        => 'Select Gender',
+            'select-gender'        => 'حدد نوع الجنس',
             'gender'               => 'جنس',
             'email'                => 'البريد الإلكتروني',
             'date_of_birth'        => 'تاريخ الولادة',

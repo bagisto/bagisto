@@ -1009,7 +1009,7 @@ return [
             'title'                     => 'Clientes',
             'first_name'                => 'Primer nombre',
             'last_name'                 => 'Apellidos',
-            'select-gender'             => 'Select Gender',
+            'select-gender'             => 'Seleccione género',
             'gender'                    => 'Género',
             'email'                     => 'Email',
             'date_of_birth'             => 'Fecha de nacimiento',

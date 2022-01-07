@@ -1001,7 +1001,7 @@ return [
             'title'                => 'Kunden',
             'first_name'           => 'Vorname',
             'last_name'            => 'Nachname',
-            'select-gender'        => 'Select Gender',
+            'select-gender'        => 'Wähle Geschlecht',
             'gender'               => 'Geschlecht',
             'email'                => 'E-Mail',
             'date_of_birth'        => 'Geburtsdatum',
