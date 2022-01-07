@@ -63,7 +63,8 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(inputName + '[qty]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|min_value:0'" :name="[inputName + '[qty]']" v-model="customerGroupPrice.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
+                    <input type="text" v-validate="'required|numeric|min_value:0'" :name="[inputName + '[qty]']" v-model="customerGroupPrice.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
+
                     <span class="control-error" v-if="errors.has(inputName + '[qty]')">@{{ errors.first(inputName + '[qty]') }}</span>
                 </div>
             </td>
@@ -72,13 +73,15 @@
                 <div class="control-group">
                     <select :name="[inputName + '[value_type]']" v-model="customerGroupPrice.value_type" class="control">
                         <option value="fixed">{{ __('admin::app.catalog.products.fixed') }}</option>
+
                         <option value="discount">{{ __('admin::app.catalog.products.discount') }}</option>
                     </select>
                 </div>
 
                 <div class="control-group">
                     <div class="control-group" :class="[errors.has(inputName + '[value]') ? 'has-error' : '']">
-                        <input type="number" step=".01" v-validate="{required: true, min_value: 0, ...(customerGroupPrice.value_type === 'discount' ? {max_value: 100} : {})}" :name="[inputName + '[value]']" v-model="customerGroupPrice.value" class="control" data-vv-as="&quot;{{ __('admin::app.datagrid.price') }}&quot;"/>
+                        <input type="text" v-validate="{required: true, decimal: true, min_value: 0, ...(customerGroupPrice.value_type === 'discount' ? {max_value: 100} : {})}" :name="[inputName + '[value]']" v-model="customerGroupPrice.value" class="control" data-vv-as="&quot;{{ __('admin::app.datagrid.price') }}&quot;"/>
+
                         <span class="control-error" v-if="errors.has(inputName + '[value]')">@{{ errors.first(inputName + '[value]') }}</span>
                     </div>
                 </div>
