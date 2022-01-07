@@ -35,7 +35,7 @@
     } 
     
     .navbar-left {          
-        background-color: $drak-bg;
+        background-color: $dark-bg;
         border-right: 1px solid $seprator;
 
         ul.menubar {
@@ -44,7 +44,7 @@
                 > a {
                     padding: 5px 2px;
                     display: block;
-                    color: #000;
+                    color: $black;
                     width: 100%;
     
                     .icon {
@@ -85,13 +85,13 @@
                         .sub-menu-item {  
 
                             .menu-label {
-                                color: #fff !important;                                    
+                                color: $white !important;                                    
                             }
         
                             &.active, &:hover {
                                 background-color: #020f1c;
                                 .menu-label {
-                                    color: #fff !important;                                    
+                                    color: $white !important;                                    
                                 }
                             }                           
                         }
@@ -132,11 +132,11 @@
                     }
     
                     &.active {
-                        background: $drak-bg;
+                        background: $dark-bg;
                         width: calc(100% - 1px);
     
                         .menu-label {
-                            color: #fff;
+                            color: $white;
                         }
     
                         ul.sub-menubar {
@@ -152,7 +152,7 @@
                                 &.active, &:hover {
                                     background-color: rgba(1, 10, 20, .5);
                                     .menu-label {
-                                        color: #fff !important;                                    
+                                        color: $white !important;                                    
                                     }
                                 }
                             }
@@ -160,9 +160,9 @@
                     }
     
                     &:hover {
-                         background: $drak-bg;
+                         background: $dark-bg;
                         .menu-label {
-                            color: #fff;
+                            color: $white;
                         }
                     }
                 }
@@ -171,7 +171,7 @@
         }
         
         .menubar-bottom {
-            background-color: $drak-bg;
+            background-color: $dark-bg;
         }
     }  
     
@@ -179,7 +179,7 @@
 
         .nav-top {
            
-            background: $drak-bg;
+            background: $dark-bg;
            
             .pro-info{
               
@@ -188,11 +188,11 @@
                     margin-left: 40px;
             
                     .name{
-                        color: #fff;
+                        color: $white;
                     }
             
                     .role{
-                        color: #fff;
+                        color: $white;
                     }
                 }
             }
@@ -200,12 +200,12 @@
         
         .nav-items{
           
-            background: $drak-bg;
+            background: $dark-bg;
           
             .nav-item {
               
                 a{
-                    color:#fff;
+                    color: $white;
                     display: block;
                     padding: 5px;
                 }
@@ -302,12 +302,12 @@
     }
     
     .grid-dropdown-header {
-        background-color: #000;  
+        background-color: $black;  
         border: 1px solid #24384c;     
     }
 
     .dropdown-list{
-        background-color: #000;
+        background-color: $black;
         .dropdown-container {
             background-color: #02080d;
             color: rgba(255,255,255,.8);
@@ -320,7 +320,7 @@
                     a{
                         color: rgba(255,255,255,.8);
                         &:hover{
-                            color: #fff;
+                            color: $white;
                         }
                     }
     
@@ -330,7 +330,7 @@
     } 
 
     .notification{
-        background-color: #000;
+        background-color: $black;
 
         .dropdown-container {
            
@@ -385,7 +385,7 @@
 
     .control-container {    
         .control {
-            background: #000;           
+            background: $black;           
         }
     } 
     
@@ -450,14 +450,14 @@
             color: rgba(255,255,255,.5)
         }
         .accordian-content, div[slot*="body"] {
-            background-color: #000;
+            background-color: $black;
             border-bottom: 1px solid #24384c;           
         }
         &.active>.accordian-content {
             background-color: #02080d;            
         }
         &.active>.accordian-header {
-            background-color: #000;
+            background-color: $black;
         }
     }
 
@@ -523,7 +523,8 @@
             .dashboard-card {
                 background: #071e37;
                 box-shadow: 0 5px 10px 2px rgb(0 0 0 / 80%);           
-                .data {                  
+                .data {
+                    color: $white !important;
                     .progress {
                         color: rgba(255,255,255,.8);
     
@@ -534,14 +535,14 @@
     } 
     
     .pagination .page-item {
-        background: #000;
+        background: $black;
         border: 1px solid 000;
-        color: #ffffff;
+        color: $white;
     }
 
     .pagination .page-item.active {
         background: #0041FF;
-        color: #ffffff;
+        color: $white;
         border-color: #0041FF;
     }
 
