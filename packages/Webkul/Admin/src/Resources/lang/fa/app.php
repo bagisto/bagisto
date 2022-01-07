@@ -996,7 +996,7 @@ return [
             'title'                => 'مشتریان',
             'first_name'           => 'نام',
             'last_name'            => 'نام خانوادگی',
-            'select-gender'        => 'Select Gender',
+            'select-gender'        => 'جنسیت را انتخاب کنید',
             'gender'               => 'جنسیت',
             'email'                => 'پست الکترونیک',
             'date_of_birth'        => 'تاریخ تولد',
