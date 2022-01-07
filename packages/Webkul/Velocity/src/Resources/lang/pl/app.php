@@ -299,7 +299,10 @@ return [
         'wishlist'  => [
             'add-wishlist-text'     => 'Dodaj produkt do listy wyboru',
             'remove-wishlist-text'  => 'Usuń produkt z listy wyboru'
-        ]
+        ],
+        'overlay-loader' => [
+            'message' => 'W trakcie',
+        ],
     ],
 
     'responsive'    => [

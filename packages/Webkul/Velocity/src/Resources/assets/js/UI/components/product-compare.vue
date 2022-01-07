@@ -19,6 +19,8 @@
                             productId: this.productId,
                         }
                     ).then(response => {
+                        this.$root.headerItemsCount++;
+                        
                         window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                     }).catch(error => {
                         window.showAlert(

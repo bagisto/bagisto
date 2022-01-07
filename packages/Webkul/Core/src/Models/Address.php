@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Webkul\Core\Models;
-
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -14,28 +12,28 @@ use Webkul\Core\Contracts\Address as AddressContract;
  * Class Address
  * @package Webkul\Core\Models
  *
- * @property string       $address_type
- * @property integer      $customer_id
- * @property Customer     $customer
- * @property string       $first_name
- * @property string       $last_name
- * @property string       $gender
- * @property string       $company_name
- * @property string       $address1
- * @property string       $address2
- * @property string       $postcode
- * @property string       $city
- * @property string       $state
- * @property string       $country
- * @property string       $email
- * @property string       $phone
- * @property boolean      $default_address
- * @property array        $additional
+ * @property string $address_type
+ * @property integer $customer_id
+ * @property Customer $customer
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $gender
+ * @property string $company_name
+ * @property string $address1
+ * @property string $address2
+ * @property string $postcode
+ * @property string $city
+ * @property string $state
+ * @property string $country
+ * @property string $email
+ * @property string $phone
+ * @property boolean $default_address
+ * @property array $additional
  *
  * @property-read integer $id
- * @property-read string  $name
- * @property-read Carbon  $created_at
- * @property-read Carbon  $updated_at
+ * @property-read string $name
+ * @property-read Carbon $created_at
+ * @property-read Carbon $updated_at
  *
  */
 abstract class Address extends Model implements AddressContract
@@ -71,12 +69,12 @@ abstract class Address extends Model implements AddressContract
     ];
 
     protected $casts = [
-        'additional' => 'array',
+        'additional'      => 'array',
         'default_address' => 'boolean',
     ];
 
     /**
-     * Get all of the attributes for the attribute groups.
+     * Get all the attributes for the attribute groups.
      */
     public function getNameAttribute(): string
     {

@@ -175,7 +175,7 @@
 
                                     @if ($product->getTypeInstance()->showQuantityBox())
                                         <div>
-                                            <quantity-changer></quantity-changer>
+                                            <quantity-changer quantity-text="{{ __('shop::app.products.quantity') }}"></quantity-changer>
                                         </div>
                                     @else
                                         <input type="hidden" name="quantity" value="1">
@@ -216,6 +216,10 @@
 @endsection
 
 @push('scripts')
+    <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('themes/velocity/assets/js/jquery.ez-plus.js') }}"></script>
+
     <script type='text/javascript' src='https://unpkg.com/spritespin@4.1.0/release/spritespin.js'></script>
 
     <script type="text/x-template" id="product-view-template">

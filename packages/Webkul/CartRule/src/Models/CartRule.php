@@ -2,13 +2,18 @@
 
 namespace Webkul\CartRule\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Core\Database\Factories\CartRuleFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\CartRule\Contracts\CartRule as CartRuleContract;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Models\CustomerGroupProxy;
 
 class CartRule extends Model implements CartRuleContract
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'description',
@@ -105,7 +110,8 @@ class CartRule extends Model implements CartRuleContract
      */
     public function coupon_code(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->cart_rule_coupon()->where('is_primary', 1);
+        return $this->cart_rule_coupon()
+                    ->where('is_primary', 1);
     }
 
     /**
@@ -115,12 +121,23 @@ class CartRule extends Model implements CartRuleContract
      */
     public function getCouponCodeAttribute()
     {
-        $coupon = $this->coupon_code()->first();
+        $coupon = $this->coupon_code()
+                       ->first();
 
-        if (! $coupon) {
+        if (!$coupon) {
             return;
         }
 
         return $coupon->code;
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return CartRuleFactory::new();
     }
 }

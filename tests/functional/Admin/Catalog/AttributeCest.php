@@ -7,20 +7,30 @@ use Webkul\Attribute\Models\Attribute;
 
 class AttributeCest
 {
+    /**
+     * Test attribute index page.
+     *
+     * @param  FunctionalTester  $I
+     * @return void
+     */
     public function testIndex(FunctionalTester $I): void
     {
         $attribute = $I->have(Attribute::class);
 
         $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.catalog'), '//*[contains(@class, "navbar-left")]');
-        $I->click(__('admin::app.layouts.attributes'), '//*[contains(@class, "aside-nav")]');
-
+     
+        $I->amOnAdminRoute('admin.catalog.attributes.index');
         $I->seeCurrentRouteIs('admin.catalog.attributes.index');
-        $I->see($attribute->id, '//script[@type="text/x-template"]');
-        $I->see($attribute->admin_name, '//script[@type="text/x-template"]');
+
+        $I->see("{$attribute->id}", '//script[@type="text/x-template"]');
     }
 
+    /**
+     * Attribute creation test.
+     *
+     * @param  FunctionalTester  $I
+     * @return void
+     */
     public function testCreate(FunctionalTester $I): void
     {
         $I->loginAsAdmin();
@@ -40,6 +50,12 @@ class AttributeCest
         $I->seeRecord(Attribute::class, $testData);
     }
 
+    /**
+     * Attribute updation test.
+     *
+     * @param  FunctionalTester  $I
+     * @return void
+     */
     public function testEdit(FunctionalTester $I): void
     {
         $attribute = $I->have(Attribute::class, ['use_in_flat' => 0]);
@@ -66,11 +82,11 @@ class AttributeCest
     }
 
     /**
-     * @param FunctionalTester $I
+     * Fill form.
      *
-     * @param bool             $skipType
-     *
-     * @return array with the test-data
+     * @param  FunctionalTester  $I
+     * @param  bool  $skipType
+     * @return array
      */
     private function fillForm(FunctionalTester $I, bool $skipType = false): array
     {

@@ -5,8 +5,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.event.after', ['product' => $product]) !!}
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="event-booking-template">
         <div>
             <div class="section">
@@ -15,9 +13,7 @@
                 </div>
 
                 <div class="section-content">
-
                     <ticket-list :tickets="tickets"></ticket-list>
-
                 </div>
             </div>
         </div>
@@ -126,7 +122,6 @@
 
     <script>
         Vue.component('event-booking', {
-
             template: '#event-booking-template',
 
             inject: ['$validator'],
@@ -139,7 +134,6 @@
         });
 
         Vue.component('ticket-list', {
-
             template: '#ticket-list-template',
 
             props: ['tickets'],
@@ -168,7 +162,6 @@
         });
 
         Vue.component('ticket-item', {
-
             template: '#ticket-item-template',
 
             props: ['index', 'ticketItem'],

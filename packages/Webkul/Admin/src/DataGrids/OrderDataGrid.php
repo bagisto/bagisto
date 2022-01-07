@@ -11,10 +11,25 @@ class OrderDataGrid extends DataGrid
 {
     use ProvideDataGridPlus;
 
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders')
@@ -38,6 +53,11 @@ class OrderDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -91,9 +111,8 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'sortable'   => true,
             'searchable' => true,
-            'closure'    => true,
             'filterable' => true,
-            'wrapper' => function ($value) {
+            'closure' => function ($value) {
                 if ($value->status == 'processing') {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.orders.order-status-processing') . '</span>';
                 } elseif ($value->status == 'completed') {
@@ -131,6 +150,11 @@ class OrderDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([

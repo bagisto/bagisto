@@ -2,7 +2,6 @@
 
 <accordian :title="'{{ __('admin::app.catalog.products.downloadable') }}'" :active="true">
     <div slot="body">
-
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.downloadable.links.controls.before', ['product' => $product]) !!}
 
         <div id="downloadable-link-list-section" class="section">
@@ -30,15 +29,12 @@
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.downloadable.samples.controls.after', ['product' => $product]) !!}
-
     </div>
 </accordian>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.downloadable.after', ['product' => $product]) !!}
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="downloadable-link-list-template">
         <div class="table" style="overflow-x: unset;">
             <table style="margin-bottom: 20px;">
@@ -55,15 +51,13 @@
                 </thead>
 
                 <tbody>
-
-                    <downloadable-link-item 
+                    <downloadable-link-item
                         v-for='(link, index) in links'
                         :link="link"
                         :key="index"
                         :index="index"
                         @onRemoveLink="removeLink($event)"
                     ></downloadable-link-item>
-
                 </tbody>
             </table>
 
@@ -136,7 +130,7 @@
                         <option value="url">{{ __('admin::app.catalog.products.url') }}</option>
                     </select>
                 </div>
-                
+
                 <div class="control-group" v-if="link.sample_type == 'file'">
                     <input type="hidden" :name="[linkInputName + '[sample_file]']" v-model="link.sample_file" data-vv-as="&quot;{{ __('admin::app.catalog.products.sampe-file') }}&quot;"/>
 
@@ -160,7 +154,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(linkInputName + '[downloads]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|min_value:0'" v-model="link.downloads" :name="[linkInputName + '[downloads]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.downloads') }}&quot;"/>
+                    <input type="text" v-validate="'required|numeric|min_value:0'" v-model="link.downloads" :name="[linkInputName + '[downloads]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.downloads') }}&quot;"/>
 
                     <span class="control-error" v-if="errors.has(linkInputName + '[downloads]')">@{{ errors.first(linkInputName + '[downloads]') }}</span>
                 </div>
@@ -168,8 +162,8 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(linkInputName + '[sort_order]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|numeric|min_value:0'" v-model="link.sort_order" :name="[linkInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
-                    
+                    <input type="text" v-validate="'required|numeric|min_value:0'" v-model="link.sort_order" :name="[linkInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
+
                     <span class="control-error" v-if="errors.has(linkInputName + '[sort_order]')">@{{ errors.first(linkInputName + '[sort_order]') }}</span>
                 </div>
             </td>
@@ -193,15 +187,13 @@
                 </thead>
 
                 <tbody>
-
-                    <downloadable-sample-item 
+                    <downloadable-sample-item
                         v-for='(sample, index) in samples'
                         :sample="sample"
                         :key="index"
                         :index="index"
                         @onRemoveSample="removeSample($event)"
                     ></downloadable-sample-item>
-
                 </tbody>
             </table>
 
@@ -260,8 +252,8 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(sampleInputName + '[sort_order]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|numeric|min_value:0'" v-model="sample.sort_order" :name="[sampleInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
-                    
+                    <input type="text" v-validate="'required|numeric|min_value:0'" v-model="sample.sort_order" :name="[sampleInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
+
                     <span class="control-error" v-if="errors.has(sampleInputName + '[sort_order]')">@{{ errors.first(sampleInputName + '[sort_order]') }}</span>
                 </div>
             </td>
@@ -273,11 +265,10 @@
     </script>
 
     <script>
-        var downloadableLinks = @json($product->downloadable_links);
-        var downloadableSamples = @json($product->downloadable_samples);
+        let downloadableLinks = @json($product->downloadable_links);
+        let downloadableSamples = @json($product->downloadable_samples);
 
         Vue.component('downloadable-link-list', {
-
             template: '#downloadable-link-list-template',
 
             inject: ['$validator'],
@@ -291,17 +282,17 @@
             },
 
             created: function() {
-                var index = 0;
+                let index = 0;
 
-                for (var key in this.old_links) {
-                    var link = this.old_links[key];
+                for (let key in this.old_links) {
+                    let link = this.old_links[key];
 
                     if (key.indexOf('link_') !== -1) {
                         link['title'] = link["{{$locale}}"]['title'];
 
                         downloadableLinks.push(link);
                     } else {
-                        for (var code in link) {
+                        for (let code in link) {
                             if (code === "{{$locale}}") {
                                 downloadableLinks[index]['title'] = link[code]['title'];
                             } else {
@@ -330,7 +321,7 @@
                         sort_order: 0
                     });
                 },
-                
+
                 removeLink: function(link) {
                     let index = this.links.indexOf(link)
 
@@ -341,7 +332,6 @@
         });
 
         Vue.component('downloadable-link-item', {
-
             template: '#downloadable-link-item-template',
 
             props: ['index', 'link'],
@@ -356,17 +346,17 @@
             },
 
             created: function() {
-                var index = 0;
+                let index = 0;
 
-                for (var key in this.old_links) {
-                    var link = this.old_links[key];
+                for (let key in this.old_links) {
+                    let link = this.old_links[key];
 
                     if (key.indexOf('link_') !== -1) {
                         link['title'] = link["{{$locale}}"]['title'];
 
                         downloadableLinks.push(link);
                     } else {
-                        for (var code in link) {
+                        for (let code in link) {
                             if (code === "{{$locale}}") {
                                 downloadableLinks[index]['title'] = link[code]['title'];
                             } else {
@@ -401,17 +391,17 @@
                 },
 
                 uploadFile: function(type) {
-                    var this_this = this;
+                    let self = this;
 
                     this[type] = this.$refs[type].files[0];
 
                     let formData = new FormData();
 
                     formData.append(type, this[type]);
-        
+
                     this.$http.post("{{ route('admin.catalog.products.upload_link', $product->id) }}", formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                         .then(function(response) {
-                            Object.assign(this_this.link, response.data);
+                            Object.assign(self.link, response.data);
                         })
                         .catch(function() {});
                 }
@@ -420,7 +410,6 @@
         });
 
         Vue.component('downloadable-sample-list', {
-
             template: '#downloadable-sample-list-template',
 
             inject: ['$validator'],
@@ -434,17 +423,17 @@
             },
 
             created: function() {
-                var index = 0;
+                let index = 0;
 
-                for (var key in this.old_samples) {
-                    var sample = this.old_samples[key];
+                for (let key in this.old_samples) {
+                    let sample = this.old_samples[key];
 
                     if (key.indexOf('sample_') !== -1) {
                         sample['title'] = sample["{{$locale}}"]['title'];
 
                         downloadableSamples.push(sample);
                     } else {
-                        for (var code in sample) {
+                        for (let code in sample) {
                             if (code === "{{$locale}}") {
                                 downloadableSamples[index]['title'] = sample[code]['title'];
                             } else {
@@ -468,7 +457,7 @@
                         sort_order: 0
                     });
                 },
-                
+
                 removeSample: function(sample) {
                     let index = this.samples.indexOf(sample)
 
@@ -479,7 +468,6 @@
         });
 
         Vue.component('downloadable-sample-item', {
-
             template: '#downloadable-sample-item-template',
 
             props: ['index', 'sample'],
@@ -514,17 +502,17 @@
                 },
 
                 uploadFile: function(type) {
-                    var this_this = this;
+                    let self = this;
 
                     this.file = this.$refs.file.files[0];
 
                     let formData = new FormData();
 
                     formData.append(type, this.file);
-        
+
                     this.$http.post("{{ route('admin.catalog.products.upload_sample', $product->id) }}", formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                         .then(function(response) {
-                            Object.assign(this_this.sample, response.data);
+                            Object.assign(self.sample, response.data);
                         })
                         .catch(function() {});
                 }

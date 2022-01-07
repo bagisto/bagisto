@@ -224,7 +224,7 @@
                 {{ __('shop::app.checkout.onepage.phone') }}
             </label>
 
-            <input type="text" v-validate="'required'" class="control" id="billing[phone]" name="billing[phone]" v-model="address.billing.phone" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"/>
+            <input type="text" v-validate="'required|numeric'" class="control" id="billing[phone]" name="billing[phone]" v-model="address.billing.phone" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"/>
 
             <span class="control-error" v-if="errors.has('address-form.billing[phone]')">
                 @{{ errors.first('address-form.billing[phone]') }}
@@ -452,7 +452,7 @@
                     {{ __('shop::app.checkout.onepage.phone') }}
                 </label>
 
-                <input type="text" v-validate="'required'" class="control" id="shipping[phone]" name="shipping[phone]" v-model="address.shipping.phone" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"/>
+                <input type="text" v-validate="'required|numeric'" class="control" id="shipping[phone]" name="shipping[phone]" v-model="address.shipping.phone" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"/>
 
                 <span class="control-error" v-if="errors.has('address-form.shipping[phone]')">
                     @{{ errors.first('address-form.shipping[phone]') }}

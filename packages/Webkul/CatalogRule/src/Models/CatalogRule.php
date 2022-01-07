@@ -42,4 +42,20 @@ class CatalogRule extends Model implements CatalogRuleContract
     {
         return $this->belongsToMany(CustomerGroupProxy::modelClass(), 'catalog_rule_customer_groups');
     }
+    
+    /**
+     * Get the Catalog rule Product that owns the catalog rule.
+     */
+    public function catalog_rule_products()
+    {
+        return $this->hasMany(CatalogRuleProductProxy::modelClass());
+    }
+
+    /**
+     * Get the Catalog rule Product that owns the catalog rule.
+     */
+    public function catalog_rule_product_prices()
+    {
+        return $this->hasMany(CatalogRuleProductPriceProxy::modelClass());
+    }
 }

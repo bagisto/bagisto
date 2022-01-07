@@ -9,19 +9,58 @@ use Webkul\Customer\Models\CustomerAddress;
 
 class CustomerCest
 {
+    /**
+     * Faker factory.
+     *
+     * @var Faker\Factory
+     */
+    public $faker;
+
+    /**
+     * Address fields.
+     *
+     * @var array
+     */
     public $fields = [];
 
+    /**
+     * Constructor.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        /**
+         * Instantiate a european faker factory to have the vat provider available.
+         */
+        $this->faker = Factory::create('at_AT');
+    }
+
+    /**
+     * Before method.
+     *
+     * @param  FunctionalTester  $I
+     * @return void
+     */
     public function _before(FunctionalTester $I): void
     {
         $I->useDefaultTheme();
     }
 
+    /**
+     * Test update customer profile.
+     *
+     * @param  FunctionalTester  $I
+     * @return void
+     */
     public function updateCustomerProfile(FunctionalTester $I): void
     {
         $customer = $I->loginAsCustomer();
+        $customer->first_name = $this->cleanField($customer->first_name);
+        $customer->last_name = $this->cleanField($customer->last_name);
+        $customer->save();
 
         $I->amOnPage('/');
-
         $I->click('Profile');
         $I->click('Edit');
         $I->selectOption('gender', 'Other');
@@ -36,37 +75,30 @@ class CustomerCest
         ]);
     }
 
+    /**
+     * Update customer address.
+     *
+     * @param  FunctionalTester  $I
+     * @return void
+     */
     public function updateCustomerAddress(FunctionalTester $I): void
     {
-        // instantiate a european faker factory to have the vat provider available
-        $faker = Factory::create('at_AT');
-
         $formCssSelector = '#customer-address-form';
 
         $I->loginAsCustomer();
 
         $I->amOnPage('/');
-
         $I->click('Profile');
         $I->click('Address');
         $I->click('Add Address');
 
-        $this->fields = [
-            'company_name' => $faker->company,
-            'first_name'   => $faker->firstName,
-            'last_name'    => $faker->lastName,
-            'vat_id'       => 'INVALIDVAT',
-            'address1[]'   => $faker->streetAddress,
-            'country'      => $faker->countryCode,
-            'state'        => $faker->state,
-            'city'         => $faker->city,
-            'postcode'     => $faker->postcode,
-            'phone'        => $faker->phoneNumber,
-        ];
+        $this->setFields();
 
         foreach ($this->fields as $key => $value) {
-            // the following fields are rendered via javascript so we ignore them
-            if (!in_array($key, [
+            /**
+             * The following fields are rendered via javascript so we ignore them.
+             */
+            if (! in_array($key, [
                 'country',
                 'state',
             ])) {
@@ -75,18 +107,18 @@ class CustomerCest
             }
         }
 
-        $I->wantTo('Ensure that the company_name field is being displayed');
+        $I->wantTo('Ensure that the `company_name` field is being displayed.');
         $I->seeElement('.account-table-content > div:nth-child(2) > input:nth-child(2)');
 
-        /*
-            We need to use this css selector to hit the correct <form>. There is another one at the
-            page header (search).
-        */
+        /**
+         * We need to use this css selector to hit the correct <form>. There is another one at the
+         * page header (search).
+         */
         $I->submitForm($formCssSelector, $this->fields);
         $I->seeInSource('The given vat id has a wrong format');
 
-        $I->wantTo('enter a valid vat id');
-        $this->fields['vat_id'] = $faker->vat(false);
+        $I->wantTo('Enter a valid vat id.');
+        $this->fields['vat_id'] = $this->faker->vat(false);
 
         $I->submitForm($formCssSelector, $this->fields);
 
@@ -94,12 +126,12 @@ class CustomerCest
 
         $this->assertCustomerAddress($I);
 
-        $I->wantTo('Update the created customer address again');
+        $I->wantTo('Update the created customer address again.');
 
         $I->click('Edit');
 
         $oldcompany = $this->fields['company_name'];
-        $this->fields['company_name'] = $faker->company;
+        $this->fields['company_name'] = $this->cleanField($this->faker->company);
 
         $I->submitForm($formCssSelector, $this->fields);
 
@@ -113,7 +145,10 @@ class CustomerCest
     }
 
     /**
-     * @param FunctionalTester $I
+     * Assert customer address.
+     *
+     * @param  FunctionalTester  $I
+     * @return void
      */
     private function assertCustomerAddress(FunctionalTester $I): void
     {
@@ -129,5 +164,50 @@ class CustomerCest
             'phone'        => $this->fields['phone'],
             'postcode'     => $this->fields['postcode'],
         ]);
+    }
+
+    /**
+     * Set fields.
+     *
+     * @return void
+     */
+    private function setFields()
+    {
+        $this->fields = $this->cleanAllFields([
+            'company_name' => $this->faker->company,
+            'first_name'   => $this->faker->firstName,
+            'last_name'    => $this->faker->lastName,
+            'vat_id'       => 'INVALIDVAT',
+            'address1[]'   => $this->faker->streetAddress,
+            'country'      => $this->faker->countryCode,
+            'state'        => $this->faker->word,
+            'city'         => $this->faker->city,
+            'postcode'     => $this->faker->postcode,
+            'phone'        => $this->faker->phoneNumber,
+        ]);
+    }
+
+    /**
+     * Clean all fields.
+     *
+     * @param  array  $fields
+     * @return array
+     */
+    private function cleanAllFields(array $fields)
+    {
+        return collect($fields)->map(function ($field, $key) {
+            return $this->cleanField($field);
+        })->toArray();
+    }
+
+    /**
+     * Clean fields.
+     *
+     * @param  string $field
+     * @return string
+     */
+    private function cleanField($field)
+    {
+        return preg_replace('/[^A-Za-z0-9 ]/', '', $field);
     }
 }

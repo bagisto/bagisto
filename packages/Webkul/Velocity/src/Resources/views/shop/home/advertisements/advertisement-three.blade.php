@@ -1,12 +1,13 @@
 @php
     $isRendered = false;
     $advertisementThree = null;
+    $isLazyLoad = ! isset($lazyload) ? true : ( $lazyload ? true : false );
 @endphp
 
 @if ($velocityMetaData && $velocityMetaData->advertisement)
     @php
         $advertisement = json_decode($velocityMetaData->advertisement, true);
-        
+
         if (isset($advertisement[3]) && is_array($advertisement[3])) {
             $advertisementThree = array_values(array_filter($advertisement[3]));
         }
@@ -21,19 +22,28 @@
             <div class="row">
                 @if ( isset($advertisementThree[0]))
                     <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-6 col-md-12 no-padding">
-                        <img data-src="{{ asset('/storage/' . $advertisementThree[0]) }}" class="full-width lazyload" alt="" />
+                        <img
+                            class="full-width {{ $isLazyLoad ? 'lazyload' : '' }}"
+                            @if (! $isLazyLoad) src="{{ asset('/storage/' . $advertisementThree[0]) }}" @endif
+                            data-src="{{ asset('/storage/' . $advertisementThree[0]) }}" alt="" />
                     </a>
                 @endif
 
                 <div class="col-lg-6 col-md-12 second-panel">
                     @if ( isset($advertisementThree[1]))
                         <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
-                            <img data-src="{{ asset('/storage/' . $advertisementThree[1]) }}" class="col-12 pr0 lazyload" alt="" />
+                            <img
+                                class="col-12 pr0 {{ $isLazyLoad ? 'lazyload' : '' }}"
+                                @if (! $isLazyLoad) src="{{ asset('/storage/' . $advertisementThree[1]) }}" @endif
+                                data-src="{{ asset('/storage/' . $advertisementThree[1]) }}" alt="" />
                         </a>
                     @endif
                     @if ( isset($advertisementThree[2]))
                         <a @if (isset($three)) href="{{ $three }}" @endif class="row bottom-container">
-                            <img data-src="{{ asset('/storage/' . $advertisementThree[2]) }}" class="col-12 pr0 lazyload" alt="" />
+                            <img
+                                class="col-12 pr0 {{ $isLazyLoad ? 'lazyload' : '' }}"
+                                @if (! $isLazyLoad) src="{{ asset('/storage/' . $advertisementThree[2]) }}" @endif
+                                data-src="{{ asset('/storage/' . $advertisementThree[2]) }}" alt="" />
                         </a>
                     @endif
                 </div>
@@ -46,15 +56,24 @@
     <div class="container-fluid advertisement-three-container">
         <div class="row">
             <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-6 col-md-12 no-padding">
-                <img data-src="{{ asset('/themes/velocity/assets/images/headphones.webp') }}" class="full-width lazyload" alt="" />
+                <img
+                    class="full-width {{ $isLazyLoad ? 'lazyload' : '' }}"
+                    @if (! $isLazyLoad) src="{{ asset('/themes/velocity/assets/images/headphones.webp') }}" @endif
+                    data-src="{{ asset('/themes/velocity/assets/images/headphones.webp') }}" alt="" />
             </a>
 
             <div class="col-lg-6 col-md-12 second-panel">
                 <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
-                    <img data-src="{{ asset('/themes/velocity/assets/images/watch.webp') }}" class="col-12 pr0 lazyload" alt="" />
+                    <img
+                        class="col-12 pr0 {{ $isLazyLoad ? 'lazyload' : '' }}"
+                        @if (! $isLazyLoad) src="{{ asset('/themes/velocity/assets/images/watch.webp') }}" @endif
+                        data-src="{{ asset('/themes/velocity/assets/images/watch.webp') }}" alt="" />
                 </a>
                 <a @if (isset($three)) href="{{ $three }}" @endif class="row bottom-container">
-                    <img data-src="{{ asset('/themes/velocity/assets/images/kids-2.webp') }}" class="col-12 pr0 lazyload" alt="" />
+                    <img
+                        class="col-12 pr0 {{ $isLazyLoad ? 'lazyload' : '' }}"
+                        @if (! $isLazyLoad) src="{{ asset('/themes/velocity/assets/images/kids-2.webp') }}" @endif
+                        data-src="{{ asset('/themes/velocity/assets/images/kids-2.webp') }}" alt="" />
                 </a>
             </div>
         </div>

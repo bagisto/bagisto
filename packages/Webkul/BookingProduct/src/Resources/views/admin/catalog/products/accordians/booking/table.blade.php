@@ -5,8 +5,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.table.after', ['product' => $product]) !!}
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="table-booking-template">
         <div>
             <div class="control-group" :class="[errors.has('booking[price_type]') ? 'has-error' : '']">
@@ -16,7 +14,7 @@
                     <option value="guest">{{ __('bookingproduct::app.admin.catalog.products.guest') }}</option>
                     <option value="table">{{ __('bookingproduct::app.admin.catalog.products.table') }}</option>
                 </select>
-                
+
                 <span class="control-error" v-if="errors.has('booking[price_type]')">@{{ errors.first('booking[price_type]') }}</span>
             </div>
 
@@ -24,7 +22,7 @@
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.guest-limit') }}</label>
 
                 <input type="text" v-validate="'required|min_value:1'" name="booking[guest_limit]" v-model="table_booking.guest_limit" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.guest-limit') }}&quot;"/>
-                
+
                 <span class="control-error" v-if="errors.has('booking[guest_limit]')">@{{ errors.first('booking[guest_limit]') }}</span>
             </div>
 
@@ -32,7 +30,7 @@
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.guest-capacity') }}</label>
 
                 <input type="text" v-validate="'required|min_value:1'" name="booking[qty]" value="{{ $bookingProduct ? $bookingProduct->qty : 0 }}" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.guest-limit') }}&quot;"/>
-                
+
                 <span class="control-error" v-if="errors.has('booking[qty]')">@{{ errors.first('booking[qty]') }}</span>
             </div>
 
@@ -40,7 +38,7 @@
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.slot-duration') }}</label>
 
                 <input type="text" v-validate="'required|min_value:1'" name="booking[duration]" v-model="table_booking.duration" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.slot-duration') }}&quot;"/>
-                
+
                 <span class="control-error" v-if="errors.has('booking[duration]')">@{{ errors.first('booking[duration]') }}</span>
             </div>
 
@@ -48,7 +46,7 @@
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.break-time') }}</label>
 
                 <input type="text" v-validate="'required|min_value:1'" name="booking[break_time]" v-model="table_booking.break_time" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.break-time') }}&quot;"/>
-                
+
                 <span class="control-error" v-if="errors.has('booking[break_time]')">@{{ errors.first('booking[break_time]') }}</span>
             </div>
 
@@ -56,7 +54,7 @@
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.prevent-scheduling-before') }}</label>
 
                 <input type="text" v-validate="'required|min_value:1'" name="booking[prevent_scheduling_before]" v-model="table_booking.prevent_scheduling_before" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.prevent-scheduling-before') }}&quot;"/>
-                
+
                 <span class="control-error" v-if="errors.has('booking[prevent_scheduling_before]')">@{{ errors.first('booking[prevent_scheduling_before]') }}</span>
             </div>
 
@@ -67,7 +65,7 @@
                     <option value="1">{{ __('bookingproduct::app.admin.catalog.products.yes') }}</option>
                     <option value="0">{{ __('bookingproduct::app.admin.catalog.products.no') }}</option>
                 </select>
-                
+
                 <span class="control-error" v-if="errors.has('booking[same_slot_all_days]')">@{{ errors.first('booking[same_slot_all_days]') }}</span>
             </div>
 
@@ -77,12 +75,10 @@
                 </div>
 
                 <div class="section-content">
-
                     <slot-list
                         booking-type="table_slot"
                         :same-slot-all-days="table_booking.same_slot_all_days">
                     </slot-list>
-                
                 </div>
             </div>
         </div>
@@ -90,7 +86,6 @@
 
     <script>
         Vue.component('table-booking', {
-
             template: '#table-booking-template',
 
             inject: ['$validator'],

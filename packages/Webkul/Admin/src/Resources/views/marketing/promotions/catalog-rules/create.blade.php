@@ -6,15 +6,11 @@
 
 @section('content')
     <div class="content">
-
         <catalog-rule></catalog-rule>
-
     </div>
 @stop
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="catalog-rule-template">
         <div>
             <form method="POST" action="{{ route('admin.catalog-rules.store') }}" @submit.prevent="onSubmit">
@@ -43,7 +39,6 @@
 
                         <accordian :title="'{{ __('admin::app.promotions.catalog-rules.rule-information') }}'" :active="true">
                             <div slot="body">
-
                                 <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                     <label for="name" class="required">{{ __('admin::app.promotions.catalog-rules.name') }}</label>
                                     <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.name') }}&quot;" value="{{ old('name') }}"/>
@@ -115,13 +110,11 @@
                                     <label for="sort_order">{{ __('admin::app.promotions.catalog-rules.priority') }}</label>
                                     <input type="text" class="control" id="sort_order" name="sort_order" value="{{ old('sort_order') ?? 0 }}"/>
                                 </div>
-
                             </div>
                         </accordian>
 
                         <accordian :title="'{{ __('admin::app.promotions.catalog-rules.conditions') }}'" :active="false">
                             <div slot="body">
-
                                 <div class="control-group">
                                     <label for="condition_type">{{ __('admin::app.promotions.catalog-rules.condition-type') }}</label>
 
@@ -148,13 +141,11 @@
                                 <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px;" @click="addCondition">
                                     {{ __('admin::app.promotions.catalog-rules.add-condition') }}
                                 </button>
-
                             </div>
                         </accordian>
 
                         <accordian :title="'{{ __('admin::app.promotions.catalog-rules.actions') }}'" :active="false">
                             <div slot="body">
-
                                 <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
                                     <label for="action_type" class="required">{{ __('admin::app.promotions.catalog-rules.action-type') }}</label>
 
@@ -189,7 +180,6 @@
                                         </option>
                                     </select>
                                 </div>
-
                             </div>
                         </accordian>
 
@@ -292,7 +282,6 @@
 
     <script>
         Vue.component('catalog-rule', {
-
             template: '#catalog-rule-template',
 
             inject: ['$validator'],
@@ -335,7 +324,6 @@
         });
 
         Vue.component('catalog-rule-condition-item', {
-
             template: '#catalog-rule-condition-item-template',
 
             props: ['index', 'condition'],
@@ -501,12 +489,12 @@
                     if (this.condition.attribute == '')
                         return;
 
-                    var this_this = this;
+                    let self = this;
 
-                    var attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
+                    let attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
 
                     matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
-                        return attribute.key == this_this.condition.attribute;
+                        return attribute.key == self.condition.attribute;
                     });
 
                     if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {

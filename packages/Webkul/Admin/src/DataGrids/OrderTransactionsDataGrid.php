@@ -15,10 +15,11 @@ class OrderTransactionsDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('order_transactions')
             ->leftJoin('orders as ors', 'order_transactions.order_id', '=', 'ors.id')
-            ->select('order_transactions.id as id', 'order_transactions.transaction_id as transaction_id', 'ors.increment_id as order_id', 'order_transactions.created_at as created_at');
+            ->select('order_transactions.id as id', 'order_transactions.transaction_id as transaction_id', 'order_transactions.invoice_id as invoice_id', 'ors.increment_id as order_id', 'order_transactions.created_at as created_at');
 
         $this->addFilter('id', 'order_transactions.id');
         $this->addFilter('transaction_id', 'order_transactions.transaction_id');
+        $this->addFilter('invoice_id', 'order_transactions.invoice_id');
         $this->addFilter('order_id', 'ors.increment_id');
         $this->addFilter('created_at', 'order_transactions.created_at');
 
@@ -41,6 +42,15 @@ class OrderTransactionsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.transaction-id'),
             'type'       => 'string',
             'searchable' => false,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'invoice_id',
+            'label'      => trans('admin::app.datagrid.invoice-id'),
+            'type'       => 'number',
+            'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
         ]);

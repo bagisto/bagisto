@@ -7,6 +7,11 @@ use Webkul\Sales\Contracts\ShipmentItem as ShipmentItemContract;
 
 class ShipmentItem extends Model implements ShipmentItemContract
 {
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var string[]|bool
+     */
     protected $guarded = [
         'id',
         'child',
@@ -14,12 +19,17 @@ class ShipmentItem extends Model implements ShipmentItemContract
         'updated_at',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
     protected $casts = [
         'additional' => 'array',
     ];
 
     /**
-     * Retrieve type instance
+     * Retrieve type instance.
      *
      * @return AbstractType
      */
@@ -27,7 +37,7 @@ class ShipmentItem extends Model implements ShipmentItemContract
     {
         return $this->order_item->getTypeInstance();
     }
-    
+
     /**
      * Get the shipment record associated with the shipment item.
      */
@@ -53,15 +63,7 @@ class ShipmentItem extends Model implements ShipmentItemContract
     }
 
     /**
-     * Get the child item record associated with the shipment item.
-     */
-    public function child()
-    {
-        return $this->belongsTo(ShipmentItemProxy::modelClass(), 'parent_id');
-    }
-
-    /**
-     * Get order item type
+     * Get order item type.
      */
     public function getTypeAttribute()
     {

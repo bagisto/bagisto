@@ -13,6 +13,7 @@ import ImageWrapper from "./components/image/image-wrapper";
 import Modal from "./components/modal";
 import OverlayLoader from "./components/overlay-loader";
 import SwatchPicker from "./components/swatch-picker";
+import DefaultImage from "./components/default-image";
 import Tab from "./components/tabs/tab";
 import Tabs from "./components/tabs/tabs";
 import TimeComponent from "./components/time";
@@ -57,6 +58,7 @@ Vue.component("swatch-picker", SwatchPicker);
 Vue.directive("debounce", Debounce);
 Vue.component("overlay-loader", OverlayLoader);
 Vue.component("multiselect", Multiselect);
+Vue.component("default-image", DefaultImage);
 
 /* filter section */
 Vue.filter("truncate", function(value, limit, trail) {

@@ -7,10 +7,25 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class CategoryDataGrid extends DataGrid
 {
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'category_menu_id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $defaultChannel = core()->getCurrentChannel();
@@ -18,18 +33,21 @@ class CategoryDataGrid extends DataGrid
         $queryBuilder = DB::table('velocity_category as v_cat')
             ->select('v_cat.id as category_menu_id', 'v_cat.category_id', 'ct.name', 'v_cat.icon', 'v_cat.tooltip', 'v_cat.status')
             ->leftJoin('categories as c', 'c.id', '=', 'v_cat.category_id')
-            ->leftJoin('category_translations as ct', function($leftJoin) {
+            ->leftJoin('category_translations as ct', function ($leftJoin) {
                 $leftJoin->on('c.id', '=', 'ct.category_id')
-                         ->where('ct.locale', app()->getLocale());
+                    ->where('ct.locale', app()->getLocale());
             })
             ->where('c.parent_id', $defaultChannel->root_category_id)
             ->groupBy('v_cat.id');
 
-        // $this->addFilter('content_id', 'con.id');
-
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -57,9 +75,8 @@ class CategoryDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
-            'closure'    => true,
-            'wrapper'    => function ($row) {
-                return '<span class="wk-icon '.$row->icon.'"></span>';
+            'closure'    => function ($row) {
+                return '<span class="wk-icon ' . $row->icon . '"></span>';
             },
         ]);
 
@@ -70,9 +87,8 @@ class CategoryDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
-            'closure'    => true,
-            'wrapper'    => function($row) {
-                if ( $row->status ) {
+            'closure'    => function ($row) {
+                if ($row->status) {
                     return '<span class="badge badge-md badge-success">Enabled</span>';
                 } else {
                     return '<span class="badge badge-md badge-danger">Disabled</span>';
@@ -81,7 +97,13 @@ class CategoryDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
+    public function prepareActions()
+    {
         $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),
             'type'   => 'Edit',
@@ -100,6 +122,11 @@ class CategoryDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
     public function prepareMassActions()
     {
         $this->addMassAction([

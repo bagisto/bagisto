@@ -20,9 +20,7 @@
         @input="$event.target.value=$event.target.value.toLowerCase()"
         data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.category-slug') }}&quot;" />
 
-    <span class="control-error" v-if="errors.has('{!!$locale!!}[page_link]')">
-        @{{ errors.first('{!!$locale!!}[page_link]') }}
-    </span>
+    <span class="control-error" v-if="errors.has('{!!$locale!!}[page_link]')" v-text="errors.first('{!!$locale!!}[page_link]')"></span>
 </div>
 
 <div class="control-group">

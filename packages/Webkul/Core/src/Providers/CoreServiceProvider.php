@@ -2,25 +2,18 @@
 
 namespace Webkul\Core\Providers;
 
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Core;
 use Webkul\Core\Exceptions\Handler;
-use Webkul\Core\Models\SliderProxy;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\ServiceProvider;
-use Webkul\Theme\ViewRenderEventManager;
-use Illuminate\Support\Facades\Validator;
-use Webkul\Core\Console\Commands\Install;
-use Webkul\Core\Observers\SliderObserver;
-use Webkul\Core\Console\Commands\UpCommand;
 use Webkul\Core\Facades\Core as CoreFacade;
-use Webkul\Core\Console\Commands\BookingCron;
-use Webkul\Core\Console\Commands\DownCommand;
+use Webkul\Core\Models\SliderProxy;
+use Webkul\Core\Observers\SliderObserver;
 use Webkul\Core\View\Compilers\BladeCompiler;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Webkul\Core\Console\Commands\BagistoVersion;
-use Webkul\Core\Console\Commands\ExchangeRateUpdate;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
+use Webkul\Theme\ViewRenderEventManager;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -28,15 +21,12 @@ class CoreServiceProvider extends ServiceProvider
      * Bootstrap services.
      *
      * @return void
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function boot()
+    public function boot(): void
     {
         include __DIR__ . '/../Http/helpers.php';
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
-        $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
 
@@ -48,32 +38,29 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->publishes([
             dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),
-            dirname(__DIR__) . '/Config/scout.php' => config_path('scout.php'),
+            dirname(__DIR__) . '/Config/scout.php'   => config_path('scout.php'),
         ]);
 
-        $this->app->bind(
-            ExceptionHandler::class,
-            Handler::class
-        );
+        $this->app->bind(ExceptionHandler::class, Handler::class);
 
         SliderProxy::observe(SliderObserver::class);
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
 
-        Event::listen('bagisto.shop.layout.body.after', static function(ViewRenderEventManager $viewRenderEventManager) {
+        Event::listen('bagisto.shop.layout.body.after', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
         });
 
-        Event::listen('bagisto.admin.layout.head', static function(ViewRenderEventManager $viewRenderEventManager) {
+        Event::listen('bagisto.admin.layout.head', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
         });
 
         $this->app->extend('command.down', function () {
-            return new DownCommand;
+            return new \Webkul\Core\Console\Commands\DownCommand;
         });
 
         $this->app->extend('command.up', function () {
-            return new UpCommand;
+            return new \Webkul\Core\Console\Commands\UpCommand;
         });
     }
 
@@ -82,7 +69,7 @@ class CoreServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->registerFacades();
 
@@ -96,7 +83,7 @@ class CoreServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerFacades()
+    protected function registerFacades(): void
     {
         $loader = AliasLoader::getInstance();
         $loader->alias('core', CoreFacade::class);
@@ -107,7 +94,7 @@ class CoreServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the console commands of this package
+     * Register the console commands of this package.
      *
      * @return void
      */
@@ -115,25 +102,18 @@ class CoreServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                BagistoVersion::class,
-                Install::class,
-                ExchangeRateUpdate::class,
-                BookingCron::class
+                \Webkul\Core\Console\Commands\BagistoVersion::class,
+                \Webkul\Core\Console\Commands\Install::class,
+                \Webkul\Core\Console\Commands\ExchangeRateUpdate::class,
+                \Webkul\Core\Console\Commands\BookingCron::class,
+                \Webkul\Core\Console\Commands\InvoiceOverdueCron::class,
             ]);
         }
-    }
 
-    /**
-     * Register factories.
-     *
-     * @param string $path
-     *
-     * @return void
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    protected function registerEloquentFactoriesFrom($path): void
-    {
-        $this->app->make(EloquentFactory::class)->load($path);
+        $this->commands([
+            \Webkul\Core\Console\Commands\DownChannelCommand::class,
+            \Webkul\Core\Console\Commands\UpChannelCommand::class,
+        ]);
     }
 
     /**
@@ -141,7 +121,7 @@ class CoreServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerBladeCompiler()
+    public function registerBladeCompiler(): void
     {
         $this->app->singleton('blade.compiler', function ($app) {
             return new BladeCompiler($app['files'], $app['config']['view.compiled']);

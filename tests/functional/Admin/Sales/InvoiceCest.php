@@ -18,11 +18,10 @@ class InvoiceCest
             ]);
 
         $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.sales'), '//*[contains(@class, "navbar-left")]');
-        $I->click(__('admin::app.layouts.invoices'), '//*[contains(@class, "aside-nav")]');
-
+        
+        $I->amOnAdminRoute('admin.sales.invoices.index');
         $I->seeCurrentRouteIs('admin.sales.invoices.index');
-        $I->see($invoice->id, '//script[@type="text/x-template"]');
+        
+        $I->see("{$invoice->id}", '//script[@type="text/x-template"]');
     }
 }

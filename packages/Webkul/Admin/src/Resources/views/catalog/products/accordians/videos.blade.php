@@ -2,7 +2,6 @@
 
 <accordian :title="'{{ __('admin::app.catalog.products.videos') }}'" :active="false">
     <div slot="body">
-
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.videos.controls.before', ['product' => $product]) !!}
 
         <div class="control-group {!! $errors->has('videos.*') ? 'has-error' : '' !!}">
@@ -11,23 +10,25 @@
             <product-video></product-video>
 
             <span class="control-error" v-if="{!! $errors->has('videos.*') !!}">
-                @php $count=1 @endphp
+                @php $count = 1; @endphp
+
                 @foreach ($errors->get('videos.*') as $key => $message)
-                    @php echo str_replace($key, 'Video'.$count, $message[0]); $count++ @endphp
+                    @php
+                        echo str_replace($key, 'Video'.$count, $message[0]);
+
+                        $count++;
+                    @endphp
                 @endforeach
             </span>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.videos.controls.after', ['product' => $product]) !!}
-
     </div>
 </accordian>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.videos.after', ['product' => $product]) !!}
 
 @push('scripts')
-    @parent
-
     <script type="text/x-template" id="product-video-template">
         <div>
             <div class="image-wrapper">
@@ -65,9 +66,8 @@
 
     <script>
         Vue.component('product-video', {
-
             template: '#product-video-template',
-            
+
             data: function() {
                 return {
                     videos: @json($product->videos),
@@ -85,18 +85,18 @@
             },
 
             created: function() {
-                var this_this = this;
+                let self = this;
 
                 this.videos.forEach(function(video) {
-                    this_this.items.push(video)
+                    self.items.push(video)
 
-                    this_this.videoCount++;
+                    self.videoCount++;
                 });
             },
 
             methods: {
                 createFileType: function() {
-                    var this_this = this;
+                    let self = this;
 
                     this.videoCount++;
 
@@ -110,13 +110,13 @@
                 },
 
                 videoSelected: function(event) {
-                    var this_this = this;
+                    let self = this;
 
                     Array.from(event.files).forEach(function(video, index) {
                         if (index) {
-                            this_this.videoCount++;
+                            self.videoCount++;
 
-                            this_this.items.push({'id': 'video_' + this_this.videoCount, file: video});
+                            self.items.push({'id': 'video_' + self.videoCount, file: video});
                         }
                     });
                 }
@@ -124,7 +124,6 @@
         });
 
         Vue.component('product-video-item', {
-
             template: '#product-video-item-template',
 
             props: {
@@ -159,7 +158,7 @@
 
             methods: {
                 addVideoView: function() {
-                    var videoInput = this.$refs.videoInput;
+                    let videoInput = this.$refs.videoInput;
 
                     if (videoInput.files && videoInput.files[0]) {
                         if (videoInput.files[0].type.includes('video/')) {
@@ -177,7 +176,7 @@
                 },
 
                 readFile: function(video) {
-                    var reader = new FileReader();
+                    let reader = new FileReader();
 
                     reader.onload = (e) => {
                         this.videoData = e.target.result;
@@ -194,5 +193,4 @@
             }
         });
     </script>
-
 @endpush

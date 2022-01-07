@@ -1,17 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Webkul\BookingProduct\Database\Factories;
 
-use Faker\Generator as Faker;
 use Webkul\BookingProduct\Models\BookingProduct;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\BookingProduct\Models\BookingProductEventTicket;
 
-$factory->define(BookingProductEventTicket::class, static function (Faker $faker, array $attributes) {
-    return [
-        'price'              => $faker->randomFloat(4, 3, 900),
-        'qty'                => $faker->numberBetween(100, 1000),
-        'booking_product_id' => static function () {
-            return factory(BookingProduct::class)->create(['type' => 'event'])->id;
-        }
-    ];
-});
+class BookingProductEventTicketFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = BookingProductEventTicket::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'price'              => $this->faker->randomFloat(4, 3, 900),
+            'qty'                => $this->faker->numberBetween(100, 1000),
+            'booking_product_id' => BookingProduct::factory(),
+        ];
+    }
+}

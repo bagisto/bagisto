@@ -6,8 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserForm extends FormRequest
 {
-    protected $rules;
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,7 +23,7 @@ class UserForm extends FormRequest
      */
     public function rules()
     {
-        $this->rules = [
+        $rules = [
             'name'     => 'required',
             'email'    => 'email|unique:admins,email',
             'password' => 'nullable',
@@ -35,9 +33,9 @@ class UserForm extends FormRequest
         ];
 
         if ($this->method() == 'PUT') {
-            $this->rules['email'] = 'email|unique:admins,email,' . $this->route('id');
+            $rules['email'] = 'email|unique:admins,email,' . $this->route('id');
         }
 
-        return $this->rules;
+        return $rules;
     }
 }

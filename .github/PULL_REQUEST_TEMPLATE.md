@@ -1,10 +1,12 @@
-## Description
-<!--- Please mention issue #id and use comma if your PR solves multiple issues -->
-<!--- Please describe your changes in detail -->
+## Issue Reference
+<!--- Please mention issue #id or use a comma if your pull request solves multiple issues. -->
 
-## How to test this
-<!--- Please describe in detail how to test the changes made in this PR -->
+## Description
+<!--- Please describe your changes in detail. -->
+
+## How To Test This?
+<!--- Please describe in detail how to test the changes made in this pull request. -->
 
 ## Documentation
-- [ ] My pull request requires a update on the documentation repository.
-<!--- Please describe in detail what needs to be changed --->
+- [ ] My pull request requires an update on the documentation repository.
+<!--- Please describe in detail what needs to be changed. --->

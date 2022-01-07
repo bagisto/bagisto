@@ -13,7 +13,11 @@
             <form method="post" action="{{ route('admin.customer.addresses.update', $address->id) }}" @submit.prevent="onSubmit">
                 <div class="page-header">
                     <div class="page-title">
-                        <h1>{{ __('admin::app.customers.addresses.edit-title') }}</h1>
+                        <h1>
+                            <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.addresses.index', ['id' => $address->customer_id]) }}'"></i>
+    
+                            {{ __('admin::app.customers.addresses.edit-title') }}
+                        </h1>
                     </div>
 
                     <div class="page-action">
@@ -89,7 +93,7 @@
 
                             <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
                                 <label for="phone" class="required">{{ __('shop::app.customer.account.address.create.phone') }}</label>
-                                <input type="text" class="control" name="phone" v-validate="'required'" value="{{ $address->phone }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.phone') }}&quot;">
+                                <input type="text" class="control" name="phone" v-validate="'required|numeric'" value="{{ $address->phone }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.phone') }}&quot;">
                                 <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
                             </div>
 

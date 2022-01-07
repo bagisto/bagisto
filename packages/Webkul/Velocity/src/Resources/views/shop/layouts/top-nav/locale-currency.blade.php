@@ -28,9 +28,7 @@
     <div class="d-inline-block">
         <div class="dropdown">
             <div class="locale-icon">
-                @if ($currentLocaleImageSource = app(\Webkul\Velocity\Helpers\Helper::class)->getCurrentLocaleImageSource())
-                    <img src="{{ $currentLocaleImageSource }}" alt="" width="20" height="20" />
-                @endif
+                <img src="{{ core()->getCurrentLocale()->image_url }}" alt="" width="20" height="20" />
             </div>
 
             <select

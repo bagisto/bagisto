@@ -14,10 +14,12 @@ class ChannelSettingsChange
      */
     public function checkForMaintenaceMode($channel)
     {
-        if ((bool) $channel->is_maintenance_on) {
-            Artisan::call('down');
+        $channels = core()->getAllChannels();
+
+        if ($channels->contains('is_maintenance_on', 1)) {
+            Artisan::call('channel:down');
         } else {
-            Artisan::call('up');
+            Artisan::call('channel:up');
         }
     }
 }

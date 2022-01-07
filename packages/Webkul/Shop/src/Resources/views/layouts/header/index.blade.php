@@ -174,11 +174,17 @@
                                     @endif
 
                                     <li>
-                                        <a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.header.cart') }}</a>
-                                    </li>
+                                        <form id="customerLogout" action="{{ route('customer.session.destroy') }}" method="POST">
+                                            @csrf
 
-                                    <li>
-                                        <a href="{{ route('customer.session.destroy') }}">{{ __('shop::app.header.logout') }}</a>
+                                            @method('DELETE')
+                                        </form>
+
+                                        <a
+                                            href="{{ route('customer.session.destroy') }}"
+                                            onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
+                                            {{ __('shop::app.header.logout') }}
+                                        </a>
                                     </li>
                                 </ul>
                             </li>

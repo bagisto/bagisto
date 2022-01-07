@@ -298,7 +298,10 @@ return [
         'wishlist'  => [
             'add-wishlist-text'     => 'Ürünü dilek listenize ekleyin',
             'remove-wishlist-text'  => 'Ürünü dilek listenizden kaldırın'
-        ]
+        ],
+        'overlay-loader' => [
+            'message' => 'Devam etmekte',
+        ],
     ],
 
     'responsive'    => [

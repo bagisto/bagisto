@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Webkul\Core\Traits\Sanitizer;
 use Webkul\Velocity\Helpers\Helper;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
 class ConfigurationController extends Controller
@@ -142,13 +143,12 @@ class ConfigurationController extends Controller
     public function uploadAdvertisementImages($data, $index, $advertisement)
     {
         $saveImage = [];
+        $dir = 'velocity/images';
 
         $saveData = $advertisement;
-
         foreach ($data as $imageId => $image) {
             if ($image != "") {
                 $file = 'images.' . $index . '.' . $imageId;
-                $dir = 'velocity/images';
 
                 if (Str::contains($imageId, 'image_')) {
                     if (request()->hasFile($file) && $image) {
@@ -177,9 +177,9 @@ class ConfigurationController extends Controller
                     }
                 }
             } else {
-                if ($saveData) {
-                    $subIndex = substr($imageId, -1);
+                $subIndex = substr($imageId, -1);
 
+                if ($saveData) {
                     if (isset($advertisement[$index][$subIndex])) {
                         $saveImage[$subIndex] = $advertisement[$index][$subIndex];
 
@@ -187,6 +187,85 @@ class ConfigurationController extends Controller
                             unset($advertisement[$index]);
                         } else {
                             unset($advertisement[$index][$subIndex]);
+                        }
+                    }
+                } else {
+                    if (! isset($advertisement[$index][$subIndex])) {
+                        if ( $index == 4 ) {
+                            switch ($subIndex) {
+                                case '1':
+                                    $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/big-sale-banner.webp'), $dir);
+                                    if ( $copyAdImage ) {
+                                        $saveImage[$subIndex] = $copyAdImage;
+                                    }
+                                    break;
+                                case '2':
+                                    $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/seasons.webp'), $dir);
+                                    if ( $copyAdImage ) {
+                                        $saveImage[$subIndex] = $copyAdImage;
+                                    }
+                                    break;
+                                case '3':
+                                    $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/deals.webp'), $dir);
+                                    if ( $copyAdImage ) {
+                                        $saveImage[$subIndex] = $copyAdImage;
+                                    }
+                                    break;
+                                case '4':
+                                    $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/kids.webp'), $dir);
+                                    if ( $copyAdImage ) {
+                                        $saveImage[$subIndex] = $copyAdImage;
+                                    }
+                                    break;
+                                
+                                default:
+                                    
+                                    break;
+                            }
+                        } elseif ( $index == 3 ) {
+                            switch ($subIndex) {
+                                case '1':
+                                    $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/headphones.webp'), $dir);
+                                    if ( $copyAdImage ) {
+                                        $saveImage[$subIndex] = $copyAdImage;
+                                    }
+                                    break;
+                                case '2':
+                                    $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/watch.webp'), $dir);
+                                    if ( $copyAdImage ) {
+                                        $saveImage[$subIndex] = $copyAdImage;
+                                    }
+                                    break;
+                                case '3':
+                                    $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/kids-2.webp'), $dir);
+                                    if ( $copyAdImage ) {
+                                        $saveImage[$subIndex] = $copyAdImage;
+                                    }
+                                    break;
+
+                                default:
+                                    
+                                    break;
+                            }
+                        } elseif ( $index == 2 ) {
+                            switch ($subIndex) {
+                                case '1':
+                                    $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/toster.webp'), $dir);
+                                    if ( $copyAdImage ) {
+                                        $saveImage[$subIndex] = $copyAdImage;
+                                    }
+                                    break;
+                                case '2':
+                                    $copyAdImage = $this->copyAdvertiseImages(public_path('/themes/velocity/assets/images/trimmer.webp'), $dir);
+                                    if ( $copyAdImage ) {
+                                        $saveImage[$subIndex] = $copyAdImage;
+                                    }
+                                    break;
+
+                                default:
+                                    
+                                    break;
+                            }
                         }
                     }
                 }
@@ -200,6 +279,29 @@ class ConfigurationController extends Controller
         }
 
         return $saveImage;
+    }
+
+    /**
+     * Copy the default adversise images 
+     *
+     * @param  string  $resourceImagePath
+     * @param  string  $copiedPath
+     * @return mixed
+     */
+    private function copyAdvertiseImages($resourceImagePath, $copiedPath)
+    {
+        $result = null;
+        $path = explode("/", $resourceImagePath);
+
+        $image = $copiedPath . '/' . end($path);
+
+        Storage::makeDirectory($copiedPath);
+
+        if ( File::copy($resourceImagePath, storage_path('app/public/' . $image)) ) {
+            $result = $image;
+        }
+
+        return $result;
     }
 
     /**

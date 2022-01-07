@@ -4,10 +4,10 @@ namespace Webkul\Marketing\Helpers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Marketing\Repositories\EventRepository;
-use Webkul\Marketing\Repositories\CampaignRepository;
-use Webkul\Marketing\Repositories\TemplateRepository;
+use Webkul\Core\Models\SubscribersList;
 use Webkul\Marketing\Mail\NewsletterMail;
+use Webkul\Marketing\Repositories\CampaignRepository;
+use Webkul\Marketing\Repositories\EventRepository;
 
 class Campaign
 {
@@ -45,8 +45,7 @@ class Campaign
         EventRepository $eventRepository,
         CampaignRepository $campaignRepository,
         CampaignRepository $templateRepository
-    )
-    {
+    ) {
         $this->eventRepository = $eventRepository;
 
         $this->campaignRepository = $campaignRepository;
@@ -55,6 +54,8 @@ class Campaign
     }
 
     /**
+     * Process the email.
+     *
      * @return void
      */
     public function process(): void
@@ -85,43 +86,35 @@ class Campaign
     }
 
     /**
-     * Build the message.
+     * Get the email address.
      *
      * @param  \Webkul\Marketing\Contracts\Campaign  $campaign
      * @return array
      */
     public function getEmailAddresses($campaign)
     {
-        $emails = [];
-
-        $customerGroupEmails = $campaign->customer_group->customers()->where('subscribed_to_news_letter', 1)->get('email');
-
-        foreach ($customerGroupEmails as $row) {
-            $emails[] = $row->email;
+        if ($campaign->customer_group->code === 'guest') {
+            $customerGroupEmails = SubscribersList::whereNull('customer_id');
+        } else {
+            $customerGroupEmails = $campaign->customer_group->customers()->where('subscribed_to_news_letter', 1);
         }
 
-        return array_unique($emails);
+        return array_unique($customerGroupEmails->pluck('email')->toArray());
     }
 
     /**
-     * Return customer's emails who has a birthday today
+     * Return customer's emails who has a birthday today.
      *
      * @param  \Webkul\Marketing\Contracts\Campaign  $campaign
      * @return array
      */
     public function getBirthdayEmails($campaign)
     {
-        $customerGroupEmails = $campaign->customer_group->customers()
+        return $campaign->customer_group
+            ->customers()
             ->whereRaw('DATE_FORMAT(date_of_birth, "%m-%d") = ?', [Carbon::now()->format('m-d')])
             ->where('subscribed_to_news_letter', 1)
-            ->get('email');
-
-        $emails = [];
-
-        foreach ($customerGroupEmails as $row) {
-            $emails[] = $row->email;
-        }
-
-        return $emails;
+            ->pluck('email')
+            ->toArray();
     }
 }

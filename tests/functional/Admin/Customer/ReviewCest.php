@@ -14,12 +14,10 @@ class ReviewCest
         $review = $I->have(ProductReview::class, ['product_id' => $product->id]);
 
         $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.customers'), '//*[contains(@class, "navbar-left")]');
-        $I->click(__('admin::app.layouts.reviews'), '//*[contains(@class, "aside-nav")]');
-
+       
+        $I->amOnAdminRoute('admin.customer.review.index');       
         $I->seeCurrentRouteIs('admin.customer.review.index');
-        $I->see($review->id, '//script[@type="text/x-template"]');
-        $I->see($review->title, '//script[@type="text/x-template"]');
+      
+        $I->see("{$review->id}", '//script[@type="text/x-template"]');
     }
 }

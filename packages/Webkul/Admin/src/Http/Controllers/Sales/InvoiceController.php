@@ -4,8 +4,8 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 
 use PDF;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class InvoiceController extends Controller
 {
@@ -17,14 +17,14 @@ class InvoiceController extends Controller
     protected $_config;
 
     /**
-     * OrderRepository object
+     * Order repository instance.
      *
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
-     * InvoiceRepository object
+     * Invoice repository instance.
      *
      * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
@@ -40,8 +40,7 @@ class InvoiceController extends Controller
     public function __construct(
         OrderRepository $orderRepository,
         InvoiceRepository $invoiceRepository
-    )
-    {
+    ) {
         $this->middleware('admin');
 
         $this->_config = request('_config');
@@ -71,6 +70,10 @@ class InvoiceController extends Controller
     {
         $order = $this->orderRepository->findOrFail($orderId);
 
+        if ($order->payment->method === 'paypal_standard') {
+            abort(404);
+        }
+
         return view($this->_config['view'], compact('order'));
     }
 
@@ -96,17 +99,14 @@ class InvoiceController extends Controller
 
         $data = request()->all();
 
-        $haveProductToInvoice = false;
+        if (! $this->invoiceRepository->haveProductToInvoice($data)) {
+            session()->flash('error', trans('admin::app.sales.invoices.product-error'));
 
-        foreach ($data['invoice']['items'] as $itemId => $qty) {
-            if ($qty) {
-                $haveProductToInvoice = true;
-                break;
-            }
+            return redirect()->back();
         }
 
-        if (! $haveProductToInvoice) {
-            session()->flash('error', trans('admin::app.sales.invoices.product-error'));
+        if (! $this->invoiceRepository->isValidQuantity($data)) {
+            session()->flash('error', trans('admin::app.sales.invoices.invalid-qty'));
 
             return redirect()->back();
         }
@@ -137,8 +137,7 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function print($id)
-    {
+    public function print($id) {
         $invoice = $this->invoiceRepository->findOrFail($id);
 
         $html = view('admin::sales.invoices.pdf', compact('invoice'))->render();
@@ -160,9 +159,9 @@ class InvoiceController extends Controller
 
         $p = $arabic->arIdentify($html);
 
-        for ($i = count($p)-1; $i >= 0; $i -= 2) {
-            $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i-1], $p[$i] - $p[$i-1]));
-            $html   = substr_replace($html, $utf8ar, $p[$i-1], $p[$i] - $p[$i-1]);
+        for ($i = count($p) - 1; $i >= 0; $i -= 2) {
+            $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i - 1], $p[$i] - $p[$i - 1]));
+            $html = substr_replace($html, $utf8ar, $p[$i - 1], $p[$i] - $p[$i - 1]);
         }
 
         return $html;

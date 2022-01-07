@@ -7,13 +7,32 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class CustomerDataGrid extends DataGrid
 {
-
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'customer_id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Items per page.
+     *
+     * @var int
+     */
     protected $itemsPerPage = 10;
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customers')
@@ -31,6 +50,11 @@ class CustomerDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -76,9 +100,8 @@ class CustomerDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => false,
-            'closure'    => true,
-            'wrapper'    => function ($row) {
-                if (! $row->phone) {
+            'closure'    => function ($row) {
+                if (!$row->phone) {
                     return '-';
                 } else {
                     return $row->phone;
@@ -93,9 +116,8 @@ class CustomerDataGrid extends DataGrid
             'searchable' => false,
             'sortable'   => true,
             'filterable' => false,
-            'closure'    => true,
-            'wrapper'    => function ($row) {
-                if (! $row->gender) {
+            'closure'    => function ($row) {
+                if (!$row->gender) {
                     return '-';
                 } else {
                     return $row->gender;
@@ -110,17 +132,21 @@ class CustomerDataGrid extends DataGrid
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
-            'closure'    => true,
-            'wrapper'    => function ($row) {
+            'closure'    => function ($row) {
                 if ($row->status == 1) {
-                    return '<span class="badge badge-md badge-success">'. trans('admin::app.customers.customers.active') .'</span>';
+                    return '<span class="badge badge-md badge-success">' . trans('admin::app.customers.customers.active') . '</span>';
                 } else {
-                    return '<span class="badge badge-md badge-danger">'. trans('admin::app.customers.customers.inactive') .'</span>';
+                    return '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.inactive') . '</span>';
                 }
             },
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
@@ -145,6 +171,11 @@ class CustomerDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
     public function prepareMassActions()
     {
         $this->addMassAction([

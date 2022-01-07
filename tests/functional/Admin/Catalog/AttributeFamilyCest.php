@@ -11,14 +11,12 @@ class AttributeFamilyCest
     {
         $attributeFamily = $I->have(AttributeFamily::class);
 
-        $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.catalog'), '//*[contains(@class, "navbar-left")]');
-        $I->click(__('admin::app.layouts.attribute-families'), '//*[contains(@class, "aside-nav")]');
-
+        $I->loginAsAdmin();      
+        
+        $I->amOnAdminRoute('admin.catalog.families.index');
         $I->seeCurrentRouteIs('admin.catalog.families.index');
-        $I->see($attributeFamily->id, '//script[@type="text/x-template"]');
-        $I->see($attributeFamily->name, '//script[@type="text/x-template"]');
+
+        $I->see("{$attributeFamily->id}", '//script[@type="text/x-template"]');
     }
 
     public function testCreate(FunctionalTester $I): void

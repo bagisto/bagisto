@@ -3,29 +3,42 @@
 namespace Webkul\Customer\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\ProductProxy;
 use Webkul\Customer\Contracts\Wishlist as WishlistContract;
+use Webkul\Product\Models\ProductProxy;
 
 class Wishlist extends Model implements WishlistContract
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'wishlist';
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
     protected $casts = [
         'additional' => 'array',
     ];
 
-    protected $fillable = [
-        'channel_id',
-        'product_id',
-        'customer_id',
-        'additional',
-        'moved_to_cart',
-        'shared',
-        'time_of_moving'
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
     ];
 
     /**
-     * The Product that belong to the wishlist.
+     * The product that belong to the wishlist.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function product()
     {

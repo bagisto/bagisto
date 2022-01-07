@@ -4,7 +4,7 @@
     {{ __('admin::app.users.reset-password.title') }}
 @stop
 
-@section('css')
+@push('css')
     <style>
         .button-group {
             margin-bottom: 25px;
@@ -13,16 +13,12 @@
             vertical-align: middle;
         }
     </style>
-@stop
+@endpush
 
 @section('content')
-
     <div class="panel">
-
         <div class="panel-content">
-
             <div class="form-container" style="text-align: left">
-
                 <h1>{{ __('admin::app.users.reset-password.title') }}</h1>
 
                 <form method="POST" action="{{ route('admin.reset-password.store') }}" @submit.prevent="onSubmit">
@@ -47,7 +43,7 @@
                         <input type="password" v-validate="'required|min:6|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation" data-vv-as="&quot;{{ __('admin::app.users.reset-password.confirm-password') }}&quot;" data-vv-as="password"/>
                         <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
                     </div>
-                    
+
                     <div class="button-group">
                         <button type="submit" class="btn btn-xl btn-primary">{{ __('admin::app.users.reset-password.submit-btn-title') }}</button>
                     </div>
@@ -59,11 +55,7 @@
                         </a>
                     </div>
                 </form>
-
             </div>
-        
         </div>
-
     </div>
-
 @stop

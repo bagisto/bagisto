@@ -17,21 +17,21 @@ class GenerateProduct
 {
     /**
      * Product Repository instance
-     * 
+     *
      * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * AttributeFamily Repository instance
-     * 
+     *
      * @var \Webkul\Product\Repositories\AttributeFamilyRepository
      */
     protected $attributeFamilyRepository;
 
     /**
      * Product Attribute Types
-     * 
+     *
      * @var array
      */
     protected $types;
@@ -70,7 +70,7 @@ class GenerateProduct
     /**
      * This brand option needs to be available so that the generated product
      * can be linked to the order_brands table after checkout.
-     * 
+     *
      * @return void
      */
     public function generateDemoBrand()

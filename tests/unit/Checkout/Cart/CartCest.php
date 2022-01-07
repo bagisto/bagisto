@@ -80,6 +80,8 @@ class CartCest
             ])
             ->update(['boolean_value' => 0]);
 
+        $this->simpleProduct2->refreshloadedAttributeValues();
+
         Event::dispatch('catalog.product.update.after', $this->simpleProduct2->refresh());
 
         $I->assertFalse(cart()->hasError());
@@ -107,6 +109,8 @@ class CartCest
             ])
             ->update(['boolean_value' => 0]);
 
+        $this->simpleProduct2->refreshloadedAttributeValues();
+
         Event::dispatch('catalog.product.update.after', $this->downloadableProduct2->refresh());
 
         $I->comment('add dP1 to cart, dP2 should be removed now');
@@ -127,6 +131,8 @@ class CartCest
                 'attribute_id' => 8 // status
             ])
             ->update(['boolean_value' => 0]);
+
+        $this->simpleProduct2->refreshloadedAttributeValues();
 
         Event::dispatch('catalog.product.update.after', $this->virtualProduct2->refresh());
 

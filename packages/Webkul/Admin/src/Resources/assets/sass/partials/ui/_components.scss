@@ -1,11 +1,15 @@
 // Accordion
 .accordian-header {
-	background-color: $accordian-header;
+    background-color: $accordian-header;
 }
 
-// buttons
-.btn.btn-primary{
+// Buttons
+.btn.btn-primary {
     background: $btn-primary-bg;
+}
+
+.btn.btn-danger {
+    background: $btn-danger-bg;
 }
 
 .fixed-action {

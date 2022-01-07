@@ -1,7 +1,6 @@
 <country-state></country-state>
 
 @push('scripts')
-
     <script type="text/x-template" id="country-state-template">
         <div>
             <div class="control-group" :class="[errors.has('country') ? 'has-error' : '']">

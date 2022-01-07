@@ -7,16 +7,27 @@ use Webkul\Core\Models\Channel;
 
 class UpCommand extends OriginalCommand
 {
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
     public function handle()
     {
-        $this->upAllChannel();
-        
+        $this->upAllChannels();
+
         parent::handle();
     }
 
-    protected function upAllChannel()
+    /**
+     * Update all channels.
+     *
+     * @return mixed
+     */
+    protected function upAllChannels()
     {
         $this->comment('Activating all channels.');
+
         return Channel::query()->update(['is_maintenance_on' => 0]);
     }
 }

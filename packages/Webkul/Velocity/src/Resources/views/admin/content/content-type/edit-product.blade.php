@@ -20,7 +20,7 @@
                     @endforeach
                 </select>
 
-                <span class="control-error" v-if="errors.has('{{$locale}}[catalog_type]')">@{{ errors.first('{!!$locale!!}[catalog_type]') }}</span>
+                <span class="control-error" v-if="errors.has('{{$locale}}[catalog_type]')" v-text="errors.first('{!!$locale!!}[catalog_type]')"></span>
             </div>
 
             <div v-if="catalog_type == 'custom'">

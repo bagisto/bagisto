@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Helpers;
 
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlatProxy;
 use Webkul\Product\Models\ProductFlat;
 

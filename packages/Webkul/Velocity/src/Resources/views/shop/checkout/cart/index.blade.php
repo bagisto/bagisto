@@ -59,9 +59,9 @@
                                     @csrf
 
                                     @foreach ($cart->items as $key => $item)
-
                                         @php
                                             $productBaseImage = $item->product->getTypeInstance()->getBaseImage($item);
+
                                             $product = $item->product;
 
                                             $productPrice = $product->getTypeInstance()->getProductPrices();
@@ -73,7 +73,6 @@
                                             } else {
                                                 $url_key = $product->url_key;
                                             }
-
                                         @endphp
 
                                         <div class="row col-12" v-if="!isMobileDevice">
@@ -128,15 +127,15 @@
                                                 <div class="no-padding col-12 cursor-pointer fs16">
                                                     @auth('customer')
                                                         @if ($showWishlist)
-                                                            @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                                <div @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')" class="alert-wishlist">
+                                                            @if ($item->parent_id != 'null' || $item->parent_id != null)
+                                                                <div class="alert-wishlist">
                                                                     @include('shop::products.wishlist', [
                                                                         'route' => route('shop.movetowishlist', $item->id),
                                                                         'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
                                                                     ])
                                                                 </div>
                                                             @else
-                                                                <div @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')" class="alert-wishlist">
+                                                                <div class="alert-wishlist">
                                                                     @include('shop::products.wishlist', [
                                                                         'route' => route('shop.movetowishlist', $item->child->id),
                                                                         'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
@@ -166,7 +165,8 @@
                                             <div class="product-quantity col-3 no-padding">
                                                 <quantity-changer
                                                     :control-name="'qty[{{$item->id}}]'"
-                                                    quantity="{{ $item->quantity }}">
+                                                    quantity="{{ $item->quantity }}"
+                                                    quantity-text="{{ __('shop::app.products.quantity') }}">
                                                 </quantity-changer>
                                             </div>
 
@@ -206,11 +206,9 @@
 
                                                 @if (isset($item->additional['attributes']))
                                                     <div class="row col-12 no-padding no-margin">
-
                                                         @foreach ($item->additional['attributes'] as $attribute)
                                                             <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                                         @endforeach
-
                                                     </div>
                                                 @endif
 
@@ -222,7 +220,8 @@
                                                     <div class="product-quantity col-lg-4 col-6 no-padding">
                                                         <quantity-changer
                                                             :control-name="'qty[{{$item->id}}]'"
-                                                            quantity="{{ $item->quantity }}">
+                                                            quantity="{{ $item->quantity }}"
+                                                            quantity-text="{{ __('shop::app.products.quantity') }}">
                                                         </quantity-changer>
                                                     </div>
 
@@ -233,9 +232,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     @endforeach
                                 </div>
 
@@ -284,7 +281,6 @@
                     @endif
 
                 {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
-
             </section>
         </div>
     </script>
@@ -293,6 +289,7 @@
         (() => {
             Vue.component('cart-component', {
                 template: '#cart-template',
+
                 data: function () {
                     return {
                         isMobileDevice: this.isMobile(),
@@ -306,6 +303,6 @@
                     }
                 }
             })
-        })()
+        })();
     </script>
 @endpush
