@@ -27,6 +27,7 @@ class ComparisonController extends Controller
                         ->where('customer_id', auth()->guard('customer')->user()->id)
                         ->get();
 
+
                     $items = $productCollection->map(function ($product) {
                         return $product->id;
                     })->join('&');
