@@ -125,7 +125,7 @@ export default {
             this.hideButton = true;
         },
 
-        createFileType() {
+        createFileType: function() {
             let self = this;
 
             if (!this.multiple) {
@@ -141,7 +141,7 @@ export default {
             this.items.push({ id: 'image_' + this.imageCount });
         },
 
-        removeImage(image) {
+        removeImage: function(image) {
             let index = this.items.indexOf(image);
 
             if (!this.multiple) this.hideButton = false;
