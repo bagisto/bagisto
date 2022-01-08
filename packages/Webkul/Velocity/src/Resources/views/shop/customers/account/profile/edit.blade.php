@@ -148,6 +148,7 @@
                 <label class="col-12">
                     {{ __('admin::app.catalog.categories.image') }}
                 </label>
+                
                 <div class="col-12">
                     <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false" :images='"{{ $customer->image_url }}"'></image-wrapper>
 
