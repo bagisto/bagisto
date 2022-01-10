@@ -1,4 +1,3 @@
-@import "colors";
 body {
     margin: 0;
     color: $font-color;
@@ -11,7 +10,7 @@ body {
 }
 
 .dark-mode-button{
-    background: #3c41ff;
+    background: $blue;
     border: none;
     padding: 10px 30px;
     width: 95%;
@@ -63,7 +62,7 @@ body {
             &::before{
                 content: "";
                 width: 24px;
-                height: 24px;       
+                height: 24px;
                 background-color: rebeccapurple;         
                 background-image: url("../assets/image/Icon-Sortable.svg");
                 display: block;
@@ -381,7 +380,7 @@ body {
         font-size: 15px;
 
         &:focus {
-            border-color: #0041ff;
+            border-color: $blue;
         }
     }
 
@@ -594,7 +593,7 @@ body {
         }
     
         .canceled{
-            background-color: red;
+            background-color: $red;
         }
     
         .closed{
@@ -602,7 +601,7 @@ body {
         }
     
         .completed{
-            background-color: #42c067;
+            background-color: $green;
         }
       
         .notif-content {
@@ -624,7 +623,7 @@ body {
     position: absolute;
     right: 13px;
     top: 6px;
-    background: red;
+    background: $red;
     color: $white;
     width: 20px;
     text-align: center;
@@ -649,7 +648,7 @@ body {
 
 .page-item.active {
 	.page-link {
-	    color: #fff !important;
+	    color: $white !important;
     }	
 }
 

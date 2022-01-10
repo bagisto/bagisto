@@ -23,7 +23,7 @@
                 color: #a2a2a2;
             }
             .name {
-                color: rgba(255,255,255,.8);
+                color: rgba(255,255,255,.8) !important;
             }
             .dropdown-list {
                 right: 0px;
@@ -36,7 +36,7 @@
     
     .navbar-left {          
         background-color: $dark-bg;
-        border-right: 1px solid $seprator;
+        border-right: 1px solid $dark-bg;
 
         ul.menubar {
             li.menu-item { 
@@ -44,7 +44,7 @@
                 > a {
                     padding: 5px 2px;
                     display: block;
-                    color: $black;
+                    color: #000;
                     width: 100%;
     
                     .icon {
@@ -85,13 +85,13 @@
                         .sub-menu-item {  
 
                             .menu-label {
-                                color: $white !important;                                    
+                                color: #fff !important;                                    
                             }
         
                             &.active, &:hover {
                                 background-color: #020f1c;
                                 .menu-label {
-                                    color: $white !important;                                    
+                                    color: #fff !important;                                    
                                 }
                             }                           
                         }
@@ -136,7 +136,7 @@
                         width: calc(100% - 1px);
     
                         .menu-label {
-                            color: $white;
+                            color: #fff;
                         }
     
                         ul.sub-menubar {
@@ -152,7 +152,7 @@
                                 &.active, &:hover {
                                     background-color: rgba(1, 10, 20, .5);
                                     .menu-label {
-                                        color: $white !important;                                    
+                                        color: #fff !important;                                    
                                     }
                                 }
                             }
@@ -162,7 +162,7 @@
                     &:hover {
                          background: $dark-bg;
                         .menu-label {
-                            color: $white;
+                            color: #fff;
                         }
                     }
                 }
@@ -188,11 +188,11 @@
                     margin-left: 40px;
             
                     .name{
-                        color: $white;
+                        color: #fff;
                     }
             
                     .role{
-                        color: $white;
+                        color: #fff;
                     }
                 }
             }
@@ -205,7 +205,7 @@
             .nav-item {
               
                 a{
-                    color: $white;
+                    color:#fff;
                     display: block;
                     padding: 5px;
                 }
@@ -302,12 +302,12 @@
     }
     
     .grid-dropdown-header {
-        background-color: $black;  
+        background-color: #000;  
         border: 1px solid #24384c;     
     }
 
     .dropdown-list{
-        background-color: $black;
+        background-color: #000;
         .dropdown-container {
             background-color: #02080d;
             color: rgba(255,255,255,.8);
@@ -320,7 +320,7 @@
                     a{
                         color: rgba(255,255,255,.8);
                         &:hover{
-                            color: $white;
+                            color: #fff;
                         }
                     }
     
@@ -330,7 +330,7 @@
     } 
 
     .notification{
-        background-color: $black;
+        background-color: #000;
 
         .dropdown-container {
            
@@ -385,7 +385,7 @@
 
     .control-container {    
         .control {
-            background: $black;           
+            background: #000;           
         }
     } 
     
@@ -446,18 +446,18 @@
 
     .accordian, accordian {       
         .accordian-header, div[slot*="header"] {
-            background-color: #02080d ;
-            color: rgba(255,255,255,.5)
+            background-color: #02080d;
+            color: rgba(255,255,255,.5);
         }
         .accordian-content, div[slot*="body"] {
-            background-color: $black;
+            background-color: #000;
             border-bottom: 1px solid #24384c;           
         }
         &.active>.accordian-content {
             background-color: #02080d;            
         }
         &.active>.accordian-header {
-            background-color: $black;
+            background-color: #000;
         }
     }
 
@@ -524,7 +524,7 @@
                 background: #071e37;
                 box-shadow: 0 5px 10px 2px rgb(0 0 0 / 80%);           
                 .data {
-                    color: $white !important;
+                    color: $white;
                     .progress {
                         color: rgba(255,255,255,.8);
     
@@ -535,15 +535,15 @@
     } 
     
     .pagination .page-item {
-        background: $black;
+        background: #000;
         border: 1px solid 000;
         color: $white;
     }
 
     .pagination .page-item.active {
-        background: #0041FF;
+        background-color: rgba(40, 69, 100, 0.2) !important;
         color: $white;
-        border-color: #0041FF;
+        border-color: rgba(2, 57, 83, 0.2) !important;
     }
 
     .filter-tag .wrapper {       
@@ -583,4 +583,104 @@
         border-bottom: 1px solid #232d36;
         cursor: default;
     }
+
+    .btn.btn-primary {
+        background: rgba(255, 255, 255, 0.8);
+        color: $black;
+    }
+
+    .flatpickr-calendar {
+        background: transparent;
+        opacity: 0;
+        display: none;
+        text-align: center;
+        visibility: hidden;
+        padding: 0;
+        -webkit-animation: none;
+        animation: none;
+        direction: ltr;
+        border: 0;
+        font-size: 14px;
+        line-height: 24px;
+        border-radius: 5px;
+        position: absolute;
+        width: 307.875px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        background-color: #02080d;
+        -webkit-box-shadow: 1px 0 0 $black,-1px 0 0 $black,0 1px 0 $black,0 -1px 0 $black,0 3px 13px rgba(0,0,0,.08);
+        box-shadow: 1px 0 0 $black,-1px 0 0 $black,0 1px 0 $black,0 -1px 0 $black,0 3px 13px rgba(0,0,0,.08);
+    }
+
+    .flatpickr-months .flatpickr-month {
+        color: $white;
+    }
+    .flatpickr-weekdays .flatpickr-weekdaycontainer, span.flatpickr-weekday {
+        color: $white;
+    }
+
+    .flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover, .flatpickr-day.nextMonthDay, .flatpickr-day.notAllowed, .flatpickr-day.notAllowed.nextMonthDay, .flatpickr-day.notAllowed.prevMonthDay, .flatpickr-day.prevMonthDay {
+        color: rgba(255, 255, 255, 0.8);
+        background: transparent;
+        border-color: transparent;
+        cursor: default;
+    }
+
+    .flatpickr-weekwrapper span.flatpickr-day, .flatpickr-weekwrapper span.flatpickr-day:hover {
+        color: $white;
+    
+    }
+
+    .flatpickr-day {
+        color: $white;
+    }
+
+    .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month {
+        color: $white;
+        fill: $white;
+    }
+
+    .flatpickr-day.endRange, 
+    .flatpickr-day.endRange.inRange,
+    .flatpickr-day.endRange.nextMonthDay, 
+    .flatpickr-day.endRange.prevMonthDay, 
+    .flatpickr-day.endRange:focus, 
+    .flatpickr-day.endRange:hover, 
+    .flatpickr-day.selected, 
+    .flatpickr-day.selected.inRange, 
+    .flatpickr-day.selected.nextMonthDay, 
+    .flatpickr-day.selected.prevMonthDay, 
+    .flatpickr-day.selected:focus, 
+    .flatpickr-day.selected:hover, 
+    .flatpickr-day.startRange, 
+    .flatpickr-day.startRange.inRange, 
+    .flatpickr-day.startRange.nextMonthDay, 
+    .flatpickr-day.startRange.prevMonthDay, 
+    .flatpickr-day.startRange:focus, 
+    .flatpickr-day.startRange:hover {
+        background: rgb(5, 30, 55) !important;
+        color: $white;
+        border-color: rgb(5, 30, 55) !important;
+    }
+
+    .flatpickr-day.inRange,
+    .flatpickr-day.prevMonthDay.inRange,
+    .flatpickr-day.nextMonthDay.inRange,
+    .flatpickr-day.today.inRange,
+    .flatpickr-day.prevMonthDay.today.inRange,
+    .flatpickr-day.nextMonthDay.today.inRange,
+    .flatpickr-day:hover,
+    .flatpickr-day.prevMonthDay:hover,
+    .flatpickr-day.nextMonthDay:hover,
+    .flatpickr-day:focus,
+    .flatpickr-day.prevMonthDay:focus,
+    .flatpickr-day.nextMonthDay:focus {
+        cursor: pointer;
+        outline: 0;
+        background: #24384c !important;
+        border-color: #24384c !important;
+    }
+
 }

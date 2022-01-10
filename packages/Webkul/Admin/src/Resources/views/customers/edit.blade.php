@@ -26,36 +26,40 @@
                     </div>
                 </tab>
 
-                <tab name="{{ __('admin::app.customers.customers.addresses') }}" :selected="false">
-                    <div class="style:overflow: auto;">&nbsp;</div>
+                <tab name="{{ __('admin::app.customers.customers.addresses') }}" :selected="false">                
+                    <div class="page-content">
+                        <div style="float: right;">
+                            <a href="{{ route('admin.customer.addresses.create', ['id' => $customer->id]) }}" class="btn btn-lg btn-primary">
+                                {{ __('admin::app.customers.addresses.create-btn-title') }}
+                            </a>
+                        </div>
 
-                    <div style="float: right">
-                        <a href="{{ route('admin.customer.addresses.create', ['id' => $customer->id]) }}" class="btn btn-lg btn-primary">
-                            {{ __('admin::app.customers.addresses.create-btn-title') }}
-                        </a>
+                        <div class="mt-30">
+                            <datagrid-plus src="{{ route('admin.customer.addresses.index', $customer->id) }}"></datagrid-plus>
+                        </div>
                     </div>
-
-                    <datagrid-plus src="{{ route('admin.customer.addresses.index', $customer->id) }}"></datagrid-plus>
                 </tab>
 
                 <tab name="{{ __('admin::app.layouts.invoices') }}" :selected="false">
-                    <div class="style:overflow: auto;">&nbsp;</div>
+                    <div class="page-content">
 
                     {!! view_render_event('bagisto.admin.customer.invoices.list.before') !!}
 
                         <datagrid-plus src="{{ route('admin.customer.invoices.data', $customer->id) }}"></datagrid-plus>
 
                     {!! view_render_event('bagisto.admin.customer.invoices.list.after') !!}
+                    </div>
                 </tab>
 
                 <tab name="{{ __('admin::app.customers.orders.title') }}" :selected="false">
-                    <div class="style:overflow: auto;">&nbsp;</div>
+                    <div class="page-content">
 
                     {!! view_render_event('bagisto.admin.customer.orders.list.before') !!}
 
                         <datagrid-plus src="{{ route('admin.customer.orders.data', $customer->id) }}"></datagrid-plus>
 
                     {!! view_render_event('bagisto.admin.customer.orders.list.after') !!}
+                    </div>
                 </tab>
 
             {!! view_render_event('bagisto.admin.customer.edit.after', ['customer' => $customer]) !!}
