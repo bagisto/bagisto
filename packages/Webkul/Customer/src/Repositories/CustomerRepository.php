@@ -2,6 +2,7 @@
 
 namespace Webkul\Customer\Repositories;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 
@@ -15,6 +16,40 @@ class CustomerRepository extends Repository
     public function model()
     {
         return \Webkul\Customer\Contracts\Customer::class;
+    }
+
+    /**
+     * Create customer.
+     *
+     * @param  array  $attributes
+     * @return mixed
+     */
+    public function create($attributes)
+    {
+        Event::dispatch('customer.registration.before');
+
+        $customer = parent::create($attributes);
+
+        Event::dispatch('customer.registration.after', $customer);
+
+        return $customer;
+    }
+
+    /**
+     * Update customer.
+     *
+     * @param  array  $attributes
+     * @return mixed
+     */
+    public function update(array $attributes, $id)
+    {
+        Event::dispatch('customer.update.before');
+
+        $customer = parent::update($attributes, $id);
+
+        Event::dispatch('customer.update.after', $customer);
+
+        return $customer;
     }
 
     /**
@@ -57,7 +92,7 @@ class CustomerRepository extends Repository
      * @param  string $type
      * @return void
      */
-    public function uploadImages($data, $customer, $type = "image")
+    public function uploadImages($data, $customer, $type = 'image')
     {
         if (isset($data[$type])) {
             $request = request();
