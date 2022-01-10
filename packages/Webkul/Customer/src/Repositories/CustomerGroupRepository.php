@@ -53,7 +53,7 @@ class CustomerGroupRepository extends Repository
 
         Event::dispatch('customer.customer_group.update.after', $customerGroup);
 
-        return $customer;
+        return $customerGroup;
     }
 
     /**
