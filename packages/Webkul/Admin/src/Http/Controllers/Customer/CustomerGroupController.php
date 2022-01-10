@@ -3,26 +3,25 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Webkul\Admin\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class CustomerGroupController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
-    */
+     */
     protected $_config;
 
     /**
-     * CustomerGroupRepository object
+     * Customer group repository instance.
      *
      * @var \Webkul\Customer\Repositories\CustomerGroupRepository
-    */
+     */
     protected $customerGroupRepository;
 
-     /**
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository;
@@ -41,7 +40,7 @@ class CustomerGroupController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
-    */
+     */
     public function index()
     {
         return view($this->_config['view']);
@@ -57,7 +56,7 @@ class CustomerGroupController extends Controller
         return view($this->_config['view']);
     }
 
-     /**
+    /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\Response
@@ -73,18 +72,14 @@ class CustomerGroupController extends Controller
 
         $data['is_user_defined'] = 1;
 
-        Event::dispatch('customer.customer_group.create.before');
-
-        $customerGroup = $this->customerGroupRepository->create($data);
-
-        Event::dispatch('customer.customer_group.create.after', $customerGroup);
+        $this->customerGroupRepository->create($data);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer Group']));
 
         return redirect()->route($this->_config['redirect']);
     }
 
-     /**
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -97,7 +92,7 @@ class CustomerGroupController extends Controller
         return view($this->_config['view'], compact('group'));
     }
 
-     /**
+    /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
@@ -110,11 +105,7 @@ class CustomerGroupController extends Controller
             'name' => 'required',
         ]);
 
-        Event::dispatch('customer.customer_group.update.before', $id);
-
-        $customerGroup = $this->customerGroupRepository->update(request()->all(), $id);
-
-        Event::dispatch('customer.customer_group.update.after', $customerGroup);
+        $this->customerGroupRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer Group']));
 
@@ -137,16 +128,12 @@ class CustomerGroupController extends Controller
             session()->flash('warning', trans('admin::app.response.customer-associate', ['name' => 'Customer Group']));
         } else {
             try {
-                Event::dispatch('customer.customer_group.delete.before', $id);
-
                 $this->customerGroupRepository->delete($id);
-
-                Event::dispatch('customer.customer_group.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer Group']));
 
                 return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer Group']));
             }
         }
