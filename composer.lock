@@ -288,12 +288,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bagisto/rest-api.git",
-                "reference": "8f1ebb70840d2080cca6906e5c39ca92d906c81d"
+                "reference": "2cfe2c549e0739768d41280a21dcfe6264a53b55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/rest-api/zipball/8f1ebb70840d2080cca6906e5c39ca92d906c81d",
-                "reference": "8f1ebb70840d2080cca6906e5c39ca92d906c81d",
+                "url": "https://api.github.com/repos/bagisto/rest-api/zipball/2cfe2c549e0739768d41280a21dcfe6264a53b55",
+                "reference": "2cfe2c549e0739768d41280a21dcfe6264a53b55",
                 "shasum": ""
             },
             "default-branch": true,
@@ -324,7 +324,7 @@
                 "issues": "https://github.com/bagisto/rest-api/issues",
                 "source": "https://github.com/bagisto/rest-api/tree/master"
             },
-            "time": "2022-01-11T13:17:27+00:00"
+            "time": "2022-01-11T13:46:36+00:00"
         },
         {
             "name": "bagistobrasil/bagisto-product-social-share",
