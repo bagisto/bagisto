@@ -19,7 +19,7 @@ trait CartValidators
      */
     public function hasProduct($product): bool
     {
-        $cart = \Cart::getCart();
+        $cart = $this->getCart();
 
         if (! $cart) {
             return false;

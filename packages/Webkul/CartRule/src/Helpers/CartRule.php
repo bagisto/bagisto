@@ -150,8 +150,8 @@ class CartRule
 
         $customerGroupId = null;
 
-        if (Cart::getCurrentCustomer()->check()) {
-            $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
+        if (auth()->guard()->check()) {
+            $customerGroupId = auth()->guard()->user()->customer_group_id;
         } else {
             $customerGuestGroup = $this->customerGroupRepository->getCustomerGuestGroup();
 

@@ -14,9 +14,7 @@ class Wishlist
     {
         $wishlist = false;
 
-        $guard = request()->has('token') ? 'api' : 'customer';
-
-        if ($customer = auth()->guard($guard)->user()) {
+        if ($customer = auth()->guard()->user()) {
             $wishlist = $customer->wishlist_items->filter(function ($item) use ($product) {
                 return $item->channel_id == core()->getCurrentChannel()->id && $item->product_id == $product->product_id;
             })->first();

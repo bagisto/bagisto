@@ -2,8 +2,8 @@
 
 namespace Webkul\Product\Database\Factories;
 
-use Webkul\Product\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Product\Models\Product;
 
 class ProductFactory extends Factory
 {
@@ -15,6 +15,8 @@ class ProductFactory extends Factory
     protected $model = Product::class;
 
     /**
+     * States.
+     *
      * @var string[]
      */
     protected $states = [
@@ -32,7 +34,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'sku' => $this->faker->uuid,
+            'sku'                 => $this->faker->uuid,
             'attribute_family_id' => 1,
         ];
     }

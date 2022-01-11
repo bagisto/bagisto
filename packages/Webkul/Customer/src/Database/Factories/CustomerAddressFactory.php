@@ -2,10 +2,10 @@
 
 namespace Webkul\Customer\Database\Factories;
 
-use Webkul\Customer\Models\Customer;
-use Illuminate\Support\Arr;
-use Webkul\Customer\Models\CustomerAddress;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
+use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerAddress;
 
 class CustomerAddressFactory extends Factory
 {
@@ -20,6 +20,7 @@ class CustomerAddressFactory extends Factory
      * Define the model's default state.
      *
      * @return array
+     * 
      * @throws \Exception
      */
     public function definition(): array
@@ -46,7 +47,3 @@ class CustomerAddressFactory extends Factory
         ];
     }
 }
-
-
-
-

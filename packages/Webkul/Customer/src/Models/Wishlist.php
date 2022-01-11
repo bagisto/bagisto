@@ -2,12 +2,15 @@
 
 namespace Webkul\Customer\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Customer\Contracts\Wishlist as WishlistContract;
 use Webkul\Product\Models\ProductProxy;
 
 class Wishlist extends Model implements WishlistContract
 {
+    use HasFactory;
+
     /**
      * The table associated with the model.
      *
@@ -43,5 +46,15 @@ class Wishlist extends Model implements WishlistContract
     public function product()
     {
         return $this->hasOne(ProductProxy::modelClass(), 'id', 'product_id');
+    }
+
+    /**
+     * Create a new factory instance for the model
+     *
+     * @return Factory
+     */
+    protected static function newFactory()
+    {
+        return \Webkul\Customer\Database\Factories\CustomerWishlistFactory::new ();
     }
 }
