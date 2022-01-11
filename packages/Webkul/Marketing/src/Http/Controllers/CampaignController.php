@@ -2,29 +2,28 @@
 
 namespace Webkul\Marketing\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Marketing\Repositories\CampaignRepository;
 
 class CampaignController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * CampaignRepository object
+     * Campaign repository instance.
      *
-     * @var \Webkul\Core\Repositories\CampaignRepository
+     * @var \Webkul\Marketing\Repositories\CampaignRepository
      */
     protected $campaignRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\CampaignRepository  $campaignRepository
+     * @param  \Webkul\Marketing\Repositories\CampaignRepository  $campaignRepository
      * @return void
      */
     public function __construct(CampaignRepository $campaignRepository)
@@ -69,11 +68,7 @@ class CampaignController extends Controller
             'marketing_event_id'    => 'required_if:schedule_type,event',
         ]);
 
-        Event::dispatch('marketing.campaigns.create.before');
-
-        $locale = $this->campaignRepository->create(request()->all());
-
-        Event::dispatch('marketing.campaigns.create.after', $locale);
+        $this->campaignRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.marketing.campaigns.create-success'));
 
@@ -109,11 +104,7 @@ class CampaignController extends Controller
             'marketing_event_id'    => 'required_if:schedule_type,event',
         ]);
 
-        Event::dispatch('marketing.campaigns.update.before', $id);
-
-        $locale = $this->campaignRepository->update(request()->all(), $id);
-
-        Event::dispatch('marketing.campaigns.update.after', $locale);
+        $this->campaignRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.marketing.campaigns.update-success'));
 
@@ -128,19 +119,15 @@ class CampaignController extends Controller
      */
     public function destroy($id)
     {
-        $locale = $this->campaignRepository->findOrFail($id);
+        $this->campaignRepository->findOrFail($id);
 
         try {
-            Event::dispatch('marketing.campaigns.delete.before', $id);
-
             $this->campaignRepository->delete($id);
-
-            Event::dispatch('marketing.campaigns.delete.after', $id);
 
             session()->flash('success', trans('admin::app.marketing.campaigns.delete-success'));
 
             return response()->json(['message' => true], 200);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Email Campaign']));
         }
 
