@@ -21,20 +21,6 @@ body {
     margin-bottom: 10px;
 }
 
-::-webkit-scrollbar {
-    width: 10px;
-    background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
-    background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #C7C7C7;
-}
-
 .navbar-top {
     display: flex;
     justify-content: space-between;
@@ -278,13 +264,16 @@ body {
 
     &.open {
         width: 200px;
-        overflow-y: auto;
-
-        &::-webkit-scrollbar {
-            width: 0px !important;
-        }
+      
 
         ul.menubar {
+            height: 86vh;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                width: 0px !important;
+            }
+
             li.menu-item {
                 a {
                     .menu-label {
