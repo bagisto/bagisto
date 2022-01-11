@@ -2,20 +2,19 @@
 
 namespace Webkul\Core\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\CurrencyRepository;
 
 class CurrencyController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * CurrencyRepository object
+     * Currency repository instance.
      *
      * @var \Webkul\Core\Repositories\CurrencyRepository
      */
@@ -66,11 +65,7 @@ class CurrencyController extends Controller
             'name' => 'required',
         ]);
 
-        Event::dispatch('core.currency.create.before');
-
-        $currency = $this->currencyRepository->create(request()->all());
-
-        Event::dispatch('core.currency.create.after', $currency);
+        $this->currencyRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.settings.currencies.create-success'));
 
@@ -103,11 +98,7 @@ class CurrencyController extends Controller
             'name' => 'required',
         ]);
 
-        Event::dispatch('core.currency.update.before', $id);
-
-        $currency = $this->currencyRepository->update(request()->all(), $id);
-
-        Event::dispatch('core.currency.update.after', $currency);
+        $this->currencyRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.settings.currencies.update-success'));
 
@@ -122,17 +113,13 @@ class CurrencyController extends Controller
      */
     public function destroy($id)
     {
-        $currency = $this->currencyRepository->findOrFail($id);
+        $this->currencyRepository->findOrFail($id);
 
         if ($this->currencyRepository->count() == 1) {
             session()->flash('warning', trans('admin::app.settings.currencies.last-delete-error'));
         } else {
             try {
-                Event::dispatch('core.currency.delete.before', $id);
-
                 $this->currencyRepository->delete($id);
-
-                Event::dispatch('core.currency.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.settings.currencies.delete-success'));
 
@@ -147,7 +134,7 @@ class CurrencyController extends Controller
     }
 
     /**
-     * Remove the specified resources from database
+     * Remove the specified resources from database.
      *
      * @return \Illuminate\Http\Response
      */
@@ -160,22 +147,19 @@ class CurrencyController extends Controller
 
             foreach ($indexes as $key => $value) {
                 try {
-                    Event::dispatch('core.currency.delete.before', $value);
-
                     $this->currencyRepository->delete($value);
-
-                    Event::dispatch('core.currency.delete.after', $value);
-                } catch(\Exception $e) {
+                } catch (\Exception $e) {
                     $suppressFlash = true;
 
                     continue;
                 }
             }
 
-            if (! $suppressFlash)
+            if (! $suppressFlash) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'currencies']));
-            else
+            } else {
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'currencies']));
+            }
 
             return redirect()->back();
         } else {

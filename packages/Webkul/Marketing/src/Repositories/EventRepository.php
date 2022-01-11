@@ -14,7 +14,7 @@ class EventRepository extends Repository
      */
     public function model()
     {
-        return Webkul\Marketing\Contracts\Event::class;
+        return \Webkul\Marketing\Contracts\Event::class;
     }
 
     /**
