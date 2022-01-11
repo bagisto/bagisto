@@ -2,20 +2,19 @@
 
 namespace Webkul\Core\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\LocaleRepository;
 
 class LocaleController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * LocaleRepository object
+     * Locale repository instance.
      *
      * @var \Webkul\Core\Repositories\LocaleRepository
      */
@@ -67,11 +66,7 @@ class LocaleController extends Controller
             'direction' => 'in:ltr,rtl',
         ]);
 
-        Event::dispatch('core.locale.create.before');
-
-        $locale = $this->localeRepository->create(request()->all());
-
-        Event::dispatch('core.locale.create.after', $locale);
+        $this->localeRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.settings.locales.create-success'));
 
@@ -105,11 +100,7 @@ class LocaleController extends Controller
             'direction' => 'in:ltr,rtl',
         ]);
 
-        Event::dispatch('core.locale.update.before', $id);
-
-        $locale = $this->localeRepository->update(request()->all(), $id);
-
-        Event::dispatch('core.locale.update.after', $locale);
+        $this->localeRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.settings.locales.update-success'));
 
@@ -124,22 +115,18 @@ class LocaleController extends Controller
      */
     public function destroy($id)
     {
-        $locale = $this->localeRepository->findOrFail($id);
+        $this->localeRepository->findOrFail($id);
 
         if ($this->localeRepository->count() == 1) {
             session()->flash('warning', trans('admin::app.settings.locales.last-delete-error'));
         } else {
             try {
-                Event::dispatch('core.locale.delete.before', $id);
-
                 $this->localeRepository->delete($id);
-
-                Event::dispatch('core.locale.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.settings.locales.delete-success'));
 
                 return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Locale']));
             }
         }

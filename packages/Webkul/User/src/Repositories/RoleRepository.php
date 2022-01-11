@@ -2,18 +2,36 @@
 
 namespace Webkul\User\Repositories;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 
 class RoleRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify model class name.
      *
      * @return mixed
      */
-    function model()
+    public function model()
     {
-        return 'Webkul\User\Contracts\Role';
+        return \Webkul\User\Contracts\Role::class;
+    }
+
+    /**
+     * Create.
+     *
+     * @param  array  $attributes
+     * @return mixed
+     */
+    public function create(array $attributes)
+    {
+        Event::dispatch('user.role.create.before');
+
+        $role = parent::create($attributes);
+
+        Event::dispatch('user.role.create.after', $role);
+
+        return $role;
     }
 
     /**
@@ -21,11 +39,12 @@ class RoleRepository extends Repository
      *
      * @param  array  $data
      * @param  int  $id
-     *
-     * @return \Webkul\User\Model\Role
+     * @return \Webkul\User\Contracts\Role
      */
     public function update(array $data, $id)
     {
+        Event::dispatch('user.role.update.before', $id);
+
         /* making collection for ease */
         $requestedData = collect($data);
 
@@ -37,7 +56,23 @@ class RoleRepository extends Repository
         $role->permissions = $requestedData->has('permissions') ? $requestedData['permissions'] : [];
         $role->update();
 
-        /* returning updated role */
+        Event::dispatch('user.role.update.after', $role);
+
         return $role;
+    }
+
+    /**
+     * Delete.
+     *
+     * @param  int  $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        Event::dispatch('user.role.delete.before', $id);
+
+        parent::delete($id);
+
+        Event::dispatch('user.role.delete.after', $id);
     }
 }

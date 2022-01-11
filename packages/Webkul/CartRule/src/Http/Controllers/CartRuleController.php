@@ -3,31 +3,30 @@
 namespace Webkul\CartRule\Http\Controllers;
 
 use Exception;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
-use Webkul\CartRule\Repositories\CartRuleRepository;
+use Illuminate\View\View;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\CartRule\Repositories\CartRuleRepository;
 
 class CartRuleController extends Controller
 {
     /**
-     * Initialize _config, a default request parameter with route
+     * Initialize _config, a default request parameter with route.
      *
      * @param array
      */
     protected $_config;
 
     /**
-     * To hold Cart repository instance
+     * To hold cart repository instance.
      *
      * @var \Webkul\CartRule\Repositories\CartRuleRepository
      */
     protected $cartRuleRepository;
 
     /**
-     * To hold CartRuleCouponRepository repository instance
+     * To hold cart rule coupon repository repository instance.
      *
      * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
      */
@@ -44,8 +43,7 @@ class CartRuleController extends Controller
     public function __construct(
         CartRuleRepository $cartRuleRepository,
         CartRuleCouponRepository $cartRuleCouponRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
 
         $this->cartRuleRepository = $cartRuleRepository;
@@ -66,7 +64,6 @@ class CartRuleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     *
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -77,6 +74,9 @@ class CartRuleController extends Controller
     /**
      * Copy a given Cart Rule id. Always make the copy is inactive so the
      * user is able to configure it before setting it live.
+     *
+     * @param  int  $cartRuleId
+     * @return \Illuminate\View\View
      */
     public function copy(int $cartRuleId): View
     {
@@ -130,17 +130,12 @@ class CartRuleController extends Controller
 
             $data = request()->all();
 
-            Event::dispatch('promotions.cart_rule.create.before');
-
-            $cartRule = $this->cartRuleRepository->create($data);
-
-            Event::dispatch('promotions.cart_rule.create.after', $cartRule);
+            $this->cartRuleRepository->create($data);
 
             session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Cart Rule']));
 
             return redirect()->route($this->_config['redirect']);
         } catch (ValidationException $e) {
-
             if ($firstError = collect($e->errors())->first()) {
                 session()->flash('error', $firstError[0]);
             }
@@ -152,8 +147,7 @@ class CartRuleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -166,9 +160,8 @@ class CartRuleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -200,17 +193,12 @@ class CartRuleController extends Controller
                 }
             }
 
-            Event::dispatch('promotions.cart_rule.update.before', $cartRule);
-
             $cartRule = $this->cartRuleRepository->update(request()->all(), $id);
-
-            Event::dispatch('promotions.cart_rule.update.after', $cartRule);
 
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Cart Rule']));
 
             return redirect()->route($this->_config['redirect']);
         } catch (ValidationException $e) {
-
             if ($firstError = collect($e->errors())->first()) {
                 session()->flash('error', $firstError[0]);
             }
@@ -222,20 +210,15 @@ class CartRuleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $cartRule = $this->cartRuleRepository->findOrFail($id);
+        $this->cartRuleRepository->findOrFail($id);
 
         try {
-            Event::dispatch('promotions.cart_rule.delete.before', $id);
-
             $this->cartRuleRepository->delete($id);
-
-            Event::dispatch('promotions.cart_rule.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Cart Rule']));
 
@@ -248,7 +231,7 @@ class CartRuleController extends Controller
     }
 
     /**
-     * Generate coupon code for cart rule
+     * Generate coupon code for cart rule.
      *
      * @return \Illuminate\Http\JsonResponse
      */

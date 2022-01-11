@@ -2,7 +2,6 @@
 
 namespace Webkul\Core\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\ChannelRepository;
 
 class ChannelController extends Controller
@@ -15,7 +14,7 @@ class ChannelController extends Controller
     protected $_config;
 
     /**
-     * ChannelRepository object
+     * Channel repository instance.
      *
      * @var \Webkul\Core\Repositories\ChannelRepository
      */
@@ -63,44 +62,40 @@ class ChannelController extends Controller
     {
         $data = $this->validate(request(), [
             /* general */
-            'code'                  => ['required', 'unique:channels,code', new \Webkul\Core\Contracts\Validations\Code],
-            'name'                  => 'required',
-            'description'           => 'nullable',
-            'inventory_sources'     => 'required|array|min:1',
-            'root_category_id'      => 'required',
-            'hostname'              => 'unique:channels,hostname',
+            'code'              => ['required', 'unique:channels,code', new \Webkul\Core\Contracts\Validations\Code],
+            'name'              => 'required',
+            'description'       => 'nullable',
+            'inventory_sources' => 'required|array|min:1',
+            'root_category_id'  => 'required',
+            'hostname'          => 'unique:channels,hostname',
 
             /* currencies and locales */
-            'locales'               => 'required|array|min:1',
-            'default_locale_id'     => 'required|in_array:locales.*',
-            'currencies'            => 'required|array|min:1',
-            'base_currency_id'      => 'required|in_array:currencies.*',
+            'locales'           => 'required|array|min:1',
+            'default_locale_id' => 'required|in_array:locales.*',
+            'currencies'        => 'required|array|min:1',
+            'base_currency_id'  => 'required|in_array:currencies.*',
 
             /* design */
-            'theme'                 => 'nullable',
-            'home_page_content'     => 'nullable',
-            'footer_content'        => 'nullable',
-            'logo.*'                => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
-            'favicon.*'             => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'theme'             => 'nullable',
+            'home_page_content' => 'nullable',
+            'footer_content'    => 'nullable',
+            'logo.*'            => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'favicon.*'         => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
 
             /* seo */
-            'seo_title'             => 'required|string',
-            'seo_description'       => 'required|string',
-            'seo_keywords'          => 'required|string',
+            'seo_title'       => 'required|string',
+            'seo_description' => 'required|string',
+            'seo_keywords'    => 'required|string',
 
             /* maintenance mode */
             'is_maintenance_on'     => 'boolean',
             'maintenance_mode_text' => 'nullable',
-            'allowed_ips'           => 'nullable'
+            'allowed_ips'           => 'nullable',
         ]);
 
         $data = $this->setSEOContent($data);
 
-        Event::dispatch('core.channel.create.before');
-
-        $channel = $this->channelRepository->create($data);
-
-        Event::dispatch('core.channel.create.after', $channel);
+        $this->channelRepository->create($data);
 
         session()->flash('success', trans('admin::app.settings.channels.create-success'));
 
@@ -132,48 +127,44 @@ class ChannelController extends Controller
 
         $data = $this->validate(request(), [
             /* general */
-            'code'                             => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            $locale . '.name'                  => 'required',
-            $locale . '.description'           => 'nullable',
-            'inventory_sources'                => 'required|array|min:1',
-            'root_category_id'                 => 'required',
-            'hostname'                         => 'unique:channels,hostname,' . $id,
+            'code'                   => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            $locale . '.name'        => 'required',
+            $locale . '.description' => 'nullable',
+            'inventory_sources'      => 'required|array|min:1',
+            'root_category_id'       => 'required',
+            'hostname'               => 'unique:channels,hostname,' . $id,
 
             /* currencies and locales */
-            'locales'                          => 'required|array|min:1',
-            'default_locale_id'                => 'required|in_array:locales.*',
-            'currencies'                       => 'required|array|min:1',
-            'base_currency_id'                 => 'required|in_array:currencies.*',
+            'locales'           => 'required|array|min:1',
+            'default_locale_id' => 'required|in_array:locales.*',
+            'currencies'        => 'required|array|min:1',
+            'base_currency_id'  => 'required|in_array:currencies.*',
 
             /* design */
-            'theme'                            => 'nullable',
-            $locale . '.home_page_content'     => 'nullable',
-            $locale . '.footer_content'        => 'nullable',
-            'logo.*'                           => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
-            'favicon.*'                        => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'theme'                        => 'nullable',
+            $locale . '.home_page_content' => 'nullable',
+            $locale . '.footer_content'    => 'nullable',
+            'logo.*'                       => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'favicon.*'                    => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
 
             /* seo */
-            $locale . '.seo_title'             => 'nullable',
-            $locale . '.seo_description'       => 'nullable',
-            $locale . '.seo_keywords'          => 'nullable',
+            $locale . '.seo_title'       => 'nullable',
+            $locale . '.seo_description' => 'nullable',
+            $locale . '.seo_keywords'    => 'nullable',
 
             /* maintenance mode */
             'is_maintenance_on'                => 'boolean',
             $locale . '.maintenance_mode_text' => 'nullable',
-            'allowed_ips'                      => 'nullable'
+            'allowed_ips'                      => 'nullable',
         ]);
 
         $data = $this->setSEOContent($data, $locale);
-
-        Event::dispatch('core.channel.update.before', $id);
 
         $channel = $this->channelRepository->update($data, $id);
 
         if ($channel->base_currency->code !== session()->get('currency')) {
             session()->put('currency', $channel->base_currency->code);
         }
-
-        Event::dispatch('core.channel.update.after', $channel);
 
         session()->flash('success', trans('admin::app.settings.channels.update-success'));
 
@@ -194,16 +185,12 @@ class ChannelController extends Controller
             session()->flash('error', trans('admin::app.settings.channels.last-delete-error'));
         } else {
             try {
-                Event::dispatch('core.channel.delete.before', $id);
-
                 $this->channelRepository->delete($id);
-
-                Event::dispatch('core.channel.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.settings.channels.delete-success'));
 
                 return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Channel']));
             }
         }

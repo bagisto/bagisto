@@ -2,30 +2,35 @@
 
 namespace Webkul\Core\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Prettus\Repository\Traits\CacheableRepository;
+use Webkul\Core\Eloquent\Repository;
 
 class ChannelRepository extends Repository
 {
     use CacheableRepository;
 
     /**
-     * Specify Model class name
+     * Specify model class name.
      *
      * @return mixed
      */
-    function model()
+    public function model()
     {
-        return 'Webkul\Core\Contracts\Channel';
+        return \Webkul\Core\Contracts\Channel::class;
     }
 
     /**
+     * Create.
+     *
      * @param  array  $data
      * @return \Webkul\Core\Contracts\Channel
      */
     public function create(array $data)
     {
+        Event::dispatch('core.channel.create.before');
+
         $model = $this->getModel();
 
         foreach (core()->getAllLocales() as $locale) {
@@ -48,17 +53,23 @@ class ChannelRepository extends Repository
 
         $this->uploadImages($data, $channel, 'favicon');
 
+        Event::dispatch('core.channel.create.after', $channel);
+
         return $channel;
     }
 
     /**
+     * Update.
+     *
      * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Core\Contracts\Channel
      */
-    public function update(array $data, $id, $attribute = "id")
+    public function update(array $data, $id, $attribute = 'id')
     {
+        Event::dispatch('core.channel.update.before', $id);
+
         $channel = $this->find($id);
 
         $channel = parent::update($data, $id, $attribute);
@@ -73,16 +84,35 @@ class ChannelRepository extends Repository
 
         $this->uploadImages($data, $channel, 'favicon');
 
+        Event::dispatch('core.channel.update.after', $channel);
+
         return $channel;
     }
 
     /**
+     * Delete.
+     *
+     * @param  $id
+     * @return int
+     */
+    public function delete($id)
+    {
+        Event::dispatch('core.channel.delete.before', $id);
+
+        parent::delete($id);
+
+        Event::dispatch('core.channel.delete.after', $id);
+    }
+
+    /**
+     * Upload images.
+     *
      * @param  array  $data
-     * @param  \Webkul\Core\Contratcs\Channel  $channel
+     * @param  \Webkul\Core\Contracts\Channel  $channel
      * @param  string  $type
      * @return void
      */
-    public function uploadImages($data, $channel, $type = "logo")
+    public function uploadImages($data, $channel, $type = 'logo')
     {
         if (isset($data[$type])) {
             foreach ($data[$type] as $imageId => $image) {
@@ -104,6 +134,7 @@ class ChannelRepository extends Repository
             }
 
             $channel->{$type} = null;
+
             $channel->save();
         }
     }
