@@ -2,28 +2,27 @@
 
 namespace Webkul\Tax\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
 
 class TaxCategoryController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * TaxCategoryRepository
+     * Tax category repository instance.
      *
      * @var \Webkul\Tax\Repositories\TaxCategoryRepository
      */
     protected $taxCategoryRepository;
 
     /**
-     * TaxRateRepository
+     * Tax rate repository instance.
      *
      * @var \Webkul\Tax\Repositories\TaxRateRepository
      */
@@ -39,8 +38,7 @@ class TaxCategoryController extends Controller
     public function __construct(
         TaxCategoryRepository $taxCategoryRepository,
         TaxRateRepository $taxRateRepository
-    )
-    {
+    ) {
         $this->taxCategoryRepository = $taxCategoryRepository;
 
         $this->taxRateRepository = $taxRateRepository;
@@ -49,7 +47,7 @@ class TaxCategoryController extends Controller
     }
 
     /**
-     * Function to show the tax category form
+     * Function to show the tax category form.
      *
      * @return \Illuminate\View\View
      */
@@ -74,14 +72,9 @@ class TaxCategoryController extends Controller
             'taxrates'    => 'array|required',
         ]);
 
-        Event::dispatch('tax.tax_category.create.before');
-
         $taxCategory = $this->taxCategoryRepository->create($data);
 
-        //attach the categories in the tax map table
         $this->taxCategoryRepository->attachOrDetach($taxCategory, $data['taxrates']);
-
-        Event::dispatch('tax.tax_category.create.after', $taxCategory);
 
         session()->flash('success', trans('admin::app.settings.tax-categories.create-success'));
 
@@ -89,7 +82,7 @@ class TaxCategoryController extends Controller
     }
 
     /**
-     * To show the edit form form the tax category
+     * To show the edit form for the tax category.
      *
      * @param  int  $id
      * @return \Illuminate\View\View
@@ -102,7 +95,7 @@ class TaxCategoryController extends Controller
     }
 
     /**
-     * To update the tax category
+     * To update the tax category.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -118,11 +111,7 @@ class TaxCategoryController extends Controller
 
         $data = request()->input();
 
-        Event::dispatch('tax.tax_category.update.before', $id);
-
         $taxCategory = $this->taxCategoryRepository->update($data, $id);
-
-        Event::dispatch('tax.tax_category.update.after', $taxCategory);
 
         if (! $taxCategory) {
             session()->flash('error', trans('admin::app.settings.tax-categories.update-error'));
@@ -130,10 +119,7 @@ class TaxCategoryController extends Controller
             return redirect()->back();
         }
 
-        $taxRates = $data['taxrates'];
-
-        //attach the categories in the tax map table
-        $this->taxCategoryRepository->attachOrDetach($taxCategory, $taxRates);
+        $this->taxCategoryRepository->attachOrDetach($taxCategory, $data['taxrates']);
 
         session()->flash('success', trans('admin::app.settings.tax-categories.update-success'));
 
@@ -148,19 +134,15 @@ class TaxCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $taxCategory = $this->taxCategoryRepository->findOrFail($id);
+        $this->taxCategoryRepository->findOrFail($id);
 
         try {
-            Event::dispatch('tax.tax_category.delete.before', $id);
-
             $this->taxCategoryRepository->delete($id);
-
-            Event::dispatch('tax.tax_category.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Tax Category']));
 
             return response()->json(['message' => true], 200);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Tax Category']));
         }
 

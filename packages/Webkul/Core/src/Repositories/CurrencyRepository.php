@@ -21,7 +21,7 @@ class CurrencyRepository extends Repository
     }
 
     /**
-     * Save a new entity in repository
+     * Create.
      *
      * @param  array  $attributes
      * @return mixed

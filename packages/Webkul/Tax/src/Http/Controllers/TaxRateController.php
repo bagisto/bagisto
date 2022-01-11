@@ -2,10 +2,9 @@
 
 namespace Webkul\Tax\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Imports\DataGridImport;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Validators\Failure;
+use Webkul\Admin\Imports\DataGridImport;
 use Webkul\Tax\Repositories\TaxRateRepository;
 
 class TaxRateController extends Controller
@@ -18,7 +17,7 @@ class TaxRateController extends Controller
     protected $_config;
 
     /**
-     * TaxRateRepository object
+     * Tax rate repository instance.
      *
      * @var \Webkul\Tax\Repositories\TaxRateRepository
      */
@@ -82,11 +81,7 @@ class TaxRateController extends Controller
             unset($data['zip_code']);
         }
 
-        Event::dispatch('tax.tax_rate.create.before');
-
-        $taxRate = $this->taxRateRepository->create($data);
-
-        Event::dispatch('tax.tax_rate.create.after', $taxRate);
+        $this->taxRateRepository->create($data);
 
         session()->flash('success', trans('admin::app.settings.tax-rates.create-success'));
 
@@ -115,7 +110,7 @@ class TaxRateController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'identifier' => 'required|string|unique:tax_rates,identifier,'.$id,
+            'identifier' => 'required|string|unique:tax_rates,identifier,' . $id,
             'is_zip'     => 'sometimes',
             'zip_from'   => 'nullable|required_with:is_zip',
             'zip_to'     => 'nullable|required_with:is_zip,zip_from',
@@ -123,11 +118,7 @@ class TaxRateController extends Controller
             'tax_rate'   => 'required|numeric|min:0.0001',
         ]);
 
-        Event::dispatch('tax.tax_rate.update.before', $id);
-
-        $taxRate = $this->taxRateRepository->update(request()->input(), $id);
-
-        Event::dispatch('tax.tax_rate.update.after', $taxRate);
+        $this->taxRateRepository->update(request()->input(), $id);
 
         session()->flash('success', trans('admin::app.settings.tax-rates.update-success'));
 
@@ -142,19 +133,15 @@ class TaxRateController extends Controller
      */
     public function destroy($id)
     {
-        $taxRate = $this->taxRateRepository->findOrFail($id);
+        $this->taxRateRepository->findOrFail($id);
 
         try {
-            Event::dispatch('tax.tax_rate.delete.before', $id);
-
             $this->taxRateRepository->delete($id);
-
-            Event::dispatch('tax.tax_rate.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Tax Rate']));
 
             return response()->json(['message' => true], 200);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Tax Rate']));
         }
 
@@ -162,7 +149,7 @@ class TaxRateController extends Controller
     }
 
     /**
-     * import function for the upload.
+     * Import function for the upload.
      *
      * @return \Illuminate\Http\Response
      */
@@ -179,7 +166,7 @@ class TaxRateController extends Controller
                 foreach ($excelData as $data) {
                     foreach ($data as $column => $uploadData) {
 
-                        if (! is_null($uploadData['zip_from']) && !is_null($uploadData['zip_to'])) {
+                        if (! is_null($uploadData['zip_from']) && ! is_null($uploadData['zip_to'])) {
                             $uploadData['is_zip'] = 1;
                         }
 
@@ -195,10 +182,10 @@ class TaxRateController extends Controller
                         ]);
 
                         if ($validator->fails()) {
-                            $failedRules[$column+1] = $validator->errors();
+                            $failedRules[$column + 1] = $validator->errors();
                         }
 
-                        $identiFier[$column+1] = $uploadData['identifier'];
+                        $identiFier[$column + 1] = $uploadData['identifier'];
                     }
 
                     $identiFierCount = array_count_values($identiFier);
@@ -213,7 +200,7 @@ class TaxRateController extends Controller
                         $message[] = trans('admin::app.export.duplicate-error', ['identifier' => $identifier, 'position' => $position]);
                     }
 
-                    $finalMsg = implode(" ", $message);
+                    $finalMsg = implode(' ', $message);
 
                     session()->flash('error', $finalMsg);
                 } else {
@@ -221,7 +208,7 @@ class TaxRateController extends Controller
 
                     if (isset($failedRules)) {
                         foreach ($failedRules as $coulmn => $fail) {
-                            if ($fail->first('identifier')){
+                            if ($fail->first('identifier')) {
                                 $errorMsg[$coulmn] = $fail->first('identifier');
                             } elseif ($fail->first('tax_rate')) {
                                 $errorMsg[$coulmn] = $fail->first('tax_rate');
@@ -239,11 +226,11 @@ class TaxRateController extends Controller
                         }
 
                         foreach ($errorMsg as $key => $msg) {
-                            $msg = str_replace(".", "", $msg);
-                            $message[] = $msg. ' at Row '  .$key . '.';
+                            $msg = str_replace('.', '', $msg);
+                            $message[] = $msg . ' at Row ' . $key . '.';
                         }
 
-                        $finalMsg = implode(" ", $message);
+                        $finalMsg = implode(' ', $message);
 
                         session()->flash('error', $finalMsg);
                     } else {
@@ -257,7 +244,7 @@ class TaxRateController extends Controller
                             foreach ($data as $column => $uploadData) {
                                 if (! is_null($uploadData['zip_from']) && ! is_null($uploadData['zip_to'])) {
                                     $uploadData['is_zip'] = 1;
-                                    $uploadData['zip_code'] = NULL;
+                                    $uploadData['zip_code'] = null;
                                 }
 
                                 if (isset($rateIdentifier)) {
