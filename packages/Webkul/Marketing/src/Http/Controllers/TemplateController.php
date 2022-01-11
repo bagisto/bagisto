@@ -2,29 +2,28 @@
 
 namespace Webkul\Marketing\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Marketing\Repositories\TemplateRepository;
 
 class TemplateController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * TemplateRepository object
+     * Template repository instance.
      *
-     * @var \Webkul\Core\Repositories\TemplateRepository
+     * @var \Webkul\Marketing\Repositories\TemplateRepository
      */
     protected $templateRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\TemplateRepository  $templateRepository
+     * @param  \Webkul\Marketing\Repositories\TemplateRepository  $templateRepository
      * @return void
      */
     public function __construct(TemplateRepository $templateRepository)
@@ -67,11 +66,7 @@ class TemplateController extends Controller
             'content' => 'required',
         ]);
 
-        Event::dispatch('marketing.templates.create.before');
-
-        $locale = $this->templateRepository->create(request()->all());
-
-        Event::dispatch('marketing.templates.create.after', $locale);
+        $this->templateRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.marketing.templates.create-success'));
 
@@ -105,11 +100,7 @@ class TemplateController extends Controller
             'content' => 'required',
         ]);
 
-        Event::dispatch('marketing.templates.update.before', $id);
-
-        $locale = $this->templateRepository->update(request()->all(), $id);
-
-        Event::dispatch('marketing.templates.update.after', $locale);
+        $this->templateRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.marketing.templates.update-success'));
 
@@ -124,19 +115,15 @@ class TemplateController extends Controller
      */
     public function destroy($id)
     {
-        $locale = $this->templateRepository->findOrFail($id);
+        $this->templateRepository->findOrFail($id);
 
         try {
-            Event::dispatch('marketing.templates.delete.before', $id);
-
             $this->templateRepository->delete($id);
-
-            Event::dispatch('marketing.templates.delete.after', $id);
 
             session()->flash('success', trans('admin::app.marketing.templates.delete-success'));
 
             return response()->json(['message' => true], 200);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Email Template']));
         }
 

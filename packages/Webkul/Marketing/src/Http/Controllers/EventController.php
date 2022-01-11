@@ -2,20 +2,19 @@
 
 namespace Webkul\Marketing\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Marketing\Repositories\EventRepository;
 
 class EventController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * EventRepository object
+     * Event repository instance.
      *
      * @var \Webkul\Marketing\Repositories\EventRepository
      */
@@ -67,11 +66,7 @@ class EventController extends Controller
             'date'        => 'date|required',
         ]);
 
-        Event::dispatch('marketing.events.create.before');
-
-        $locale = $this->eventRepository->create(request()->all());
-
-        Event::dispatch('marketing.events.create.after', $locale);
+        $this->eventRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.marketing.events.create-success'));
 
@@ -111,11 +106,7 @@ class EventController extends Controller
             'date'        => 'date|required',
         ]);
 
-        Event::dispatch('marketing.events.update.before', $id);
-
-        $locale = $this->eventRepository->update(request()->all(), $id);
-
-        Event::dispatch('marketing.events.update.after', $locale);
+        $this->eventRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.marketing.events.update-success'));
 
@@ -130,19 +121,15 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        $locale = $this->eventRepository->findOrFail($id);
+        $this->eventRepository->findOrFail($id);
 
         try {
-            Event::dispatch('marketing.events.delete.before', $id);
-
             $this->eventRepository->delete($id);
-
-            Event::dispatch('marketing.events.delete.after', $id);
 
             session()->flash('success', trans('admin::app.marketing.events.delete-success'));
 
             return response()->json(['message' => true], 200);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Event']));
         }
 

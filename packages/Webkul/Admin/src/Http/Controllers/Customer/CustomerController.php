@@ -2,52 +2,48 @@
 
 namespace Webkul\Admin\Http\Controllers\Customer;
 
-use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Customer\Repositories\CustomerRepository;
-
-use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Core\Repositories\ChannelRepository;
-
-use Webkul\Admin\Mail\NewCustomerNotification;
 use Mail;
-
 use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
 use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Mail\NewCustomerNotification;
+use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 
 class CustomerController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * CustomerRepository object
+     * Customer repository instance.
      *
      * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
-     * CustomerAddress Repository object
+     * Customer address repository instance.
      *
      * @var \Webkul\Customer\Repositories\CustomerAddressRepository
      */
     protected $customerAddressRepository;
 
     /**
-     * CustomerGroupRepository object
+     * Customer group repository instance.
      *
      * @var \Webkul\Customer\Repositories\CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
-     * ChannelRepository object
+     * Channel repository instance.
      *
      * @var \Webkul\Core\Repositories\ChannelRepository
      */
@@ -66,17 +62,19 @@ class CustomerController extends Controller
         CustomerAddressRepository $customerAddressRepository,
         CustomerGroupRepository $customerGroupRepository,
         ChannelRepository $channelRepository
-        )
+    ) {
+        $this->_config = request('_config');
 
-        {
-            $this->_config = request('_config');
-            $this->middleware('admin');
-            $this->customerRepository = $customerRepository;
+        $this->middleware('admin');
 
-            $this->customerAddressRepository = $customerAddressRepository;
-            $this->customerGroupRepository = $customerGroupRepository;
-            $this->channelRepository = $channelRepository;
-        }
+        $this->customerRepository = $customerRepository;
+
+        $this->customerAddressRepository = $customerAddressRepository;
+
+        $this->customerGroupRepository = $customerGroupRepository;
+
+        $this->channelRepository = $channelRepository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -125,11 +123,7 @@ class CustomerController extends Controller
 
         $data['is_verified'] = 1;
 
-        Event::dispatch('customer.registration.before');
-
         $customer = $this->customerRepository->create($data);
-
-        Event::dispatch('customer.registration.after', $customer);
 
         try {
             $configKey = 'emails.general.notifications.emails.general.notifications.customer';
@@ -181,11 +175,7 @@ class CustomerController extends Controller
 
         $data['status'] = ! isset($data['status']) ? 0 : 1;
 
-        Event::dispatch('customer.update.before');
-
-        $customer = $this->customerRepository->update($data, $id);
-
-        Event::dispatch('customer.update.after', $customer);
+        $this->customerRepository->update($data, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer']));
 
@@ -224,7 +214,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * To load the note taking screen for the customers
+     * To load the note taking screen for the customers.
      *
      * @param  int  $id
      * @return \Illuminate\View\View
@@ -237,7 +227,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * To store the response of the note in storage
+     * To store the response of the note in storage.
      *
      * @return \Illuminate\Http\Response
      */
@@ -261,7 +251,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * To mass update the customer
+     * To mass update the customer.
      *
      * @return \Illuminate\Http\Response
      */
@@ -282,7 +272,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * To mass delete the customer
+     * To mass delete the customer.
      *
      * @return \Illuminate\Http\Response
      */
@@ -290,7 +280,7 @@ class CustomerController extends Controller
     {
         $customerIds = explode(',', request()->input('indexes'));
 
-        if (!$this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
+        if (! $this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
 
             foreach ($customerIds as $customerId) {
                 $this->customerRepository->deleteWhere(['id' => $customerId]);
