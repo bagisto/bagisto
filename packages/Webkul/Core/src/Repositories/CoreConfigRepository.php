@@ -2,11 +2,12 @@
 
 namespace Webkul\Core\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
-use Webkul\Core\Contracts\CoreConfig;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Core\Traits\CoreConfigField;
 use Prettus\Repository\Traits\CacheableRepository;
+use Webkul\Core\Contracts\CoreConfig;
+use Webkul\Core\Eloquent\Repository;
+use Webkul\Core\Traits\CoreConfigField;
 
 class CoreConfigRepository extends Repository
 {
@@ -17,7 +18,7 @@ class CoreConfigRepository extends Repository
      *
      * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return CoreConfig::class;
     }
@@ -30,6 +31,8 @@ class CoreConfigRepository extends Repository
      */
     public function create(array $data)
     {
+        Event::dispatch('core.configuration.save.before');
+
         if ($data['locale'] || $data['channel']) {
             $locale = $data['locale'];
             $channel = $data['channel'];
@@ -49,7 +52,7 @@ class CoreConfigRepository extends Repository
                 $localeBased = isset($field['locale_based']) && $field['locale_based'] ? true : false;
 
                 if (getType($value) == 'array' && ! isset($value['delete'])) {
-                    $value = implode(",", $value);
+                    $value = implode(',', $value);
                 }
 
                 if (isset($field['channel_based']) && $field['channel_based']) {
@@ -109,6 +112,8 @@ class CoreConfigRepository extends Repository
                 }
             }
         }
+
+        Event::dispatch('core.configuration.save.after');
     }
 
     /**

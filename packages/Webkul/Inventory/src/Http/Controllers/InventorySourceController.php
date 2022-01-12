@@ -2,7 +2,6 @@
 
 namespace Webkul\Inventory\Http\Controllers;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Inventory\Http\Requests\InventorySourceRequest;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 
@@ -66,11 +65,7 @@ class InventorySourceController extends Controller
 
         $data['status'] = ! isset($data['status']) ? 0 : 1;
 
-        Event::dispatch('inventory.inventory_source.create.before');
-
-        $inventorySource = $this->inventorySourceRepository->create($data);
-
-        Event::dispatch('inventory.inventory_source.create.after', $inventorySource);
+        $this->inventorySourceRepository->create($data);
 
         session()->flash('success', trans('admin::app.settings.inventory_sources.create-success'));
 
@@ -102,11 +97,7 @@ class InventorySourceController extends Controller
 
         $data['status'] = ! isset($data['status']) ? 0 : 1;
 
-        Event::dispatch('inventory.inventory_source.update.before', $id);
-
-        $inventorySource = $this->inventorySourceRepository->update($data, $id);
-
-        Event::dispatch('inventory.inventory_source.update.after', $inventorySource);
+        $this->inventorySourceRepository->update($data, $id);
 
         session()->flash('success', trans('admin::app.settings.inventory_sources.update-success'));
 
@@ -121,17 +112,13 @@ class InventorySourceController extends Controller
      */
     public function destroy($id)
     {
-        $inventorySource = $this->inventorySourceRepository->findOrFail($id);
+        $this->inventorySourceRepository->findOrFail($id);
 
         if ($this->inventorySourceRepository->count() == 1) {
             session()->flash('error', trans('admin::app.settings.inventory_sources.last-delete-error'));
         } else {
             try {
-                Event::dispatch('inventory.inventory_source.delete.before', $id);
-
                 $this->inventorySourceRepository->delete($id);
-
-                Event::dispatch('inventory.inventory_source.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.settings.inventory_sources.delete-success'));
 
