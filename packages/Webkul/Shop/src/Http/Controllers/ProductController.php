@@ -103,7 +103,7 @@ class ProductController extends Controller
         ]);
 
         return isset($productAttribute['text_value'])
-            ? Storage::download($productAttribute['text_value'])
+            ? Storage::disk(config('bagisto_filesystem.default'))->download($productAttribute['text_value'])
             : null;
     }
 
@@ -137,7 +137,7 @@ class ProductController extends Controller
                 $productDownloadableSample = $this->productDownloadableSampleRepository->findOrFail(request('id'));
 
                 if ($productDownloadableSample->type == 'file') {
-                    return Storage::download($productDownloadableSample->file);
+                    return Storage::disk(config('bagisto_filesystem.default'))->download($productDownloadableSample->file);
                 } else {
                     $fileName = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
 

@@ -46,7 +46,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
      */
     public function file_url(): string
     {
-        return Storage::url($this->path);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->path);
     }
 
     /**
@@ -62,7 +62,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
      */
     public function sample_file_url(): string
     {
-        return Storage::url($this->path);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->path);
     }
 
     /**
@@ -84,9 +84,9 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
 
         $array['title'] = $translation->title ?? '';
 
-        $array['file_url'] = $this->file ? Storage::url($this->file) : null;
+        $array['file_url'] = $this->file ? Storage::disk(config('bagisto_filesystem.default'))->url($this->path) : null;
 
-        $array['sample_file_url'] = $this->sample_file ? Storage::url($this->sample_file) : null;
+        $array['sample_file_url'] = $this->sample_file ? Storage::disk(config('bagisto_filesystem.default'))->url($this->sample_file) : null;
 
         return $array;
     }

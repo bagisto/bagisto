@@ -463,7 +463,7 @@ class ProductController extends Controller
             'attribute_id' => $attributeId,
         ]);
 
-        return Storage::download($productAttribute['text_value']);
+        return Storage::disk(config('bagisto_filesystem.default'))->download($productAttribute['text_value']);
     }
 
     /**

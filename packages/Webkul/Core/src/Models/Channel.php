@@ -100,7 +100,7 @@ class Channel extends TranslatableModel implements ChannelContract
             return;
         }
 
-        return Storage::url($this->logo);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->logo);
     }
 
     /**
@@ -120,7 +120,7 @@ class Channel extends TranslatableModel implements ChannelContract
             return;
         }
 
-        return Storage::url($this->favicon);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->favicon);
     }
 
     /**

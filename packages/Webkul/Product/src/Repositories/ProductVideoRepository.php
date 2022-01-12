@@ -36,7 +36,7 @@ class ProductVideoRepository extends Repository
                 if ($video instanceof UploadedFile) {
                     if (request()->hasFile($file)) {
                         $this->create([
-                            'path'       => request()->file($file)->store($dir),
+                            'path'       => request()->file($file)->store($dir, config('bagisto_filesystem.default')),
                             'product_id' => $product->id,
                             'type'       => 'video'
                         ]);
@@ -51,7 +51,7 @@ class ProductVideoRepository extends Repository
 
         foreach ($previousVideoIds as $videoId) {
             if ($videoModel = $this->find($videoId)) {
-                Storage::delete($videoModel->path);
+                Storage::disk(config('bagisto_filesystem.default'))->delete($videoModel->path);
 
                 $this->delete($videoId);
             }

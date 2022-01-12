@@ -87,7 +87,7 @@ class SEO
         $images = [];
 
         foreach ($product->images as $image) {
-            if (! Storage::has($image->path)) {
+            if (! Storage::disk(config('bagisto_filesystem.default'))->has($image->path)) {
                 continue;
             }
 

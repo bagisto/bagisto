@@ -15,7 +15,7 @@
         <div class="brand-logo">
             <a href="{{ route('admin.dashboard.index') }}">
                 @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
+                    <img src="{{ \Illuminate\Support\Facades\Storage::disk(config('bagisto_filesystem.default'))->url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
                 @else
                     <default-image
                         light-theme-image-url="{{ asset('vendor/webkul/ui/assets/images/logo.png') }}"

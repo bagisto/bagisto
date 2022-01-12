@@ -29,7 +29,7 @@ class ProductVideo extends Model implements ProductVideoContract
      */
     public function url()
     {
-        return Storage::url($this->path);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->path);
     }
 
     /**

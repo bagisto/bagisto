@@ -136,7 +136,7 @@
         @elseif ($field['type'] == 'image')
 
             @php
-                $src = Storage::url(core()->getConfigData($nameKey, $channel, $locale));
+                $src = Storage::disk(config('bagisto_filesystem.default'))->url(core()->getConfigData($nameKey, $channel, $locale));
                 $result = core()->getConfigData($nameKey, $channel, $locale);
             @endphp
 

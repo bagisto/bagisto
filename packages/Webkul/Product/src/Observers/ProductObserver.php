@@ -14,6 +14,6 @@ class ProductObserver
      */
     public function deleted($product)
     {
-        Storage::deleteDirectory('product/' . $product->id);
+        Storage::disk(config('bagisto_filesystem.default'))->deleteDirectory('product/' . $product->id);
     }
 }

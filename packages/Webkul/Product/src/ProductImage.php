@@ -49,15 +49,15 @@ class ProductImage extends AbstractProduct
         $images = [];
 
         foreach ($product->images as $image) {
-            if (! Storage::has($image->path)) {
+            if (! Storage::disk(config('bagisto_filesystem.default'))->has($image->path)) {
                 continue;
             }
 
             $images[] = [
-                'small_image_url'    => url('cache/small/' . $image->path),
-                'medium_image_url'   => url('cache/medium/' . $image->path),
-                'large_image_url'    => url('cache/large/' . $image->path),
-                'original_image_url' => url('cache/original/' . $image->path),
+                'small_image_url'    => Storage::disk(config('bagisto_filesystem.default'))->url($image->path),
+                'medium_image_url'   => Storage::disk(config('bagisto_filesystem.default'))->url($image->path),
+                'large_image_url'    => Storage::disk(config('bagisto_filesystem.default'))->url($image->path),
+                'original_image_url' => Storage::disk(config('bagisto_filesystem.default'))->url($image->path),
             ];
         }
 
@@ -138,10 +138,10 @@ class ProductImage extends AbstractProduct
 
         if ($images && $images->count()) {
             $image = [
-                'small_image_url'    => url('cache/small/' . $images[0]->path),
-                'medium_image_url'   => url('cache/medium/' . $images[0]->path),
-                'large_image_url'    => url('cache/large/' . $images[0]->path),
-                'original_image_url' => url('cache/original/' . $images[0]->path),
+                'small_image_url'    => Storage::disk(config('bagisto_filesystem.default'))->url($images[0]->path),
+                'medium_image_url'   => Storage::disk(config('bagisto_filesystem.default'))->url($images[0]->path),
+                'large_image_url'    => Storage::disk(config('bagisto_filesystem.default'))->url($images[0]->path),
+                'original_image_url' => Storage::disk(config('bagisto_filesystem.default'))->url($images[0]->path),
             ];
         } else {
             $image = [

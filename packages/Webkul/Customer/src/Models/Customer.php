@@ -132,7 +132,7 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
             return;
         }
 
-        return Storage::url($this->image);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->image);
     }
 
     /**

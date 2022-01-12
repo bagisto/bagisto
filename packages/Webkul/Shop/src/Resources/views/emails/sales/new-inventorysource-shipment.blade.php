@@ -2,7 +2,7 @@
     <div style="text-align: center;">
         <a href="{{ config('app.url') }}">
             @if (core()->getConfigData('general.design.admin_logo.logo_image'))
-                <img src="{{ \Illuminate\Support\Facades\Storage::url(core()->getConfigData('general.design.admin_logo.logo_image')) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
+                <img src="{{ \Illuminate\Support\Facades\Storage::disk(config('bagisto_filesystem.default'))->url(core()->getConfigData('general.design.admin_logo.logo_image')) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
             @else
                 <img src="{{ asset('vendor/webkul/ui/assets/images/logo.png') }}" alt="{{ config('app.name') }}"/>
             @endif
@@ -50,15 +50,15 @@
                 <div>
                     {{ $order->shipping_address->address1 }}
                 </div>
-                    
+
                 <div>
                     {{ $order->shipping_address->postcode . " " . $order->shipping_address->city }}
                 </div>
-                    
+
                 <div>
                     {{ $order->shipping_address->state }}
                 </div>
-                    
+
                 <div>
                     {{ core()->country_name($order->shipping_address->country) }}
                 </div>
@@ -104,15 +104,15 @@
                 <div>
                     {{ $order->billing_address->address1 }}
                 </div>
-                    
+
                 <div>
                     {{ $order->billing_address->postcode . " " . $order->billing_address->city }}
                 </div>
-                    
+
                 <div>
                     {{ $order->billing_address->state }}
                 </div>
-                    
+
                 <div>
                     {{ core()->country_name($order->billing_address->country) }}
                 </div>

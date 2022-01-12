@@ -68,16 +68,16 @@ class CustomerRepository extends Repository
 
                 if ($request->hasFile($file)) {
                     if ($customer->{$type}) {
-                        Storage::delete($customer->{$type});
+                        Storage::disk(config('bagisto_filesystem.default'))->delete($customer->{$type});
                     }
 
-                    $customer->{$type} = $request->file($file)->store($dir);
+                    $customer->{$type} = $request->file($file)->store($dir, config('bagisto_filesystem.default'));
                     $customer->save();
                 }
             }
         } else {
             if ($customer->{$type}) {
-                Storage::delete($customer->{$type});
+                Storage::disk(config('bagisto_filesystem.default'))->delete($customer->{$type});
             }
 
             $customer->{$type} = null;

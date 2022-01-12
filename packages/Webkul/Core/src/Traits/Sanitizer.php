@@ -28,10 +28,10 @@ trait Sanitizer
             $sanitizer = new MainSanitizer();
 
             /* grab svg file */
-            $dirtySVG = Storage::get($path);
+            $dirtySVG = Storage::disk(config('bagisto_filesystem.default'))->get($path);
 
             /* save sanitized svg */
-            Storage::put($path, $sanitizer->sanitize($dirtySVG));
+            Storage::disk(config('bagisto_filesystem.default'))->put($path, $sanitizer->sanitize($dirtySVG));
         }
     }
 

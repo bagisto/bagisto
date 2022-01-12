@@ -14,6 +14,6 @@ class SliderObserver
      */
     public function deleted($slider)
     {
-        Storage::delete($slider->path);
+        Storage::disk(config('bagisto_filesystem.default'))->delete($slider->path);
     }
 }

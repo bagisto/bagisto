@@ -16,7 +16,7 @@ class CategoryObserver
      */
     public function deleted($category)
     {
-        Storage::deleteDirectory('category/' . $category->id);
+        Storage::disk(config('bagisto_filesystem.default'))->deleteDirectory('category/' . $category->id);
     }
 
     /**

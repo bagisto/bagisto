@@ -48,14 +48,14 @@ class SearchRepository extends Repository
 
     /**
      * @param  array  $data
-     * @return void
+     * @return string
      */
     public function uploadSearchImage($data)
     {
-        $path = request()->file('image')->store('product-search');
+        $path = request()->file('image')->store('product-search', config('bagisto_filesystem.default'));
 
         $this->sanitizeSVG($path, $data['image']->getMimeType());
 
-        return Storage::url($path);
+        return Storage::disk(config('bagisto_filesystem.default'))->url($this->path);
     }
 }

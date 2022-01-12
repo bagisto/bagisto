@@ -217,9 +217,9 @@ class ConfigurationController extends Controller
                                         $saveImage[$subIndex] = $copyAdImage;
                                     }
                                     break;
-                                
+
                                 default:
-                                    
+
                                     break;
                             }
                         } elseif ( $index == 3 ) {
@@ -244,7 +244,7 @@ class ConfigurationController extends Controller
                                     break;
 
                                 default:
-                                    
+
                                     break;
                             }
                         } elseif ( $index == 2 ) {
@@ -263,7 +263,7 @@ class ConfigurationController extends Controller
                                     break;
 
                                 default:
-                                    
+
                                     break;
                             }
                         }
@@ -282,7 +282,7 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Copy the default adversise images 
+     * Copy the default adversise images
      *
      * @param  string  $resourceImagePath
      * @param  string  $copiedPath
