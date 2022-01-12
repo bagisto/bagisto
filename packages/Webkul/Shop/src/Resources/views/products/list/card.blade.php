@@ -4,7 +4,7 @@
 
     <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
-    @if ($product->new)
+    @if (! $product->getTypeInstance()->haveSpecialPrice() && $product->new)
         <div class="sticker new">
             {{ __('shop::app.products.new') }}
         </div>

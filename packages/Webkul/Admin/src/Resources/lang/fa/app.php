@@ -996,6 +996,7 @@ return [
             'title'                => 'مشتریان',
             'first_name'           => 'نام',
             'last_name'            => 'نام خانوادگی',
+            'select-gender'        => 'جنسیت را انتخاب کنید',
             'gender'               => 'جنسیت',
             'email'                => 'پست الکترونیک',
             'date_of_birth'        => 'تاریخ تولد',
@@ -1357,6 +1358,7 @@ return [
         'cancel-error'            => ' قابل لغو نیست :name',
         'already-taken'           => ' قبلا گرفته شده :name',
         'order-pending'           => 'حساب حذف نمی شود زیرا برخی از سفارش ها حالت معلق یا در حال پردازش هستند',
+        'something-went-wrong'    => 'Something went wrong!',
     ],
 
     'footer' => [

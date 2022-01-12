@@ -1,405 +1,408 @@
 <template>
     <div class="table" v-if="isDataLoaded" :key="dataGridIndex">
         <div class="grid-container">
-            <div class="datagrid-filters">
-                <div class="filter-left">
-                    <div
-                        class="dropdown-filters per-page"
-                        v-if="extraFilters.channels != undefined"
-                    >
-                        <div class="control-group">
-                            <select
-                                class="control"
-                                name="channel"
-                                @change="changeExtraFilter($event, 'channel')"
-                            >
-                                <option
-                                    value="all"
-                                    :selected="
-                                        extraFilters.current.channel == 'all'
-                                    "
-                                    v-text="translations.allChannels"
-                                ></option>
-                                <option
-                                    :key="channelKey"
-                                    v-for="(channel,
-                                    channelKey) in extraFilters.channels"
-                                    v-text="channel.name"
-                                    :value="channel.code"
-                                    :selected="
-                                        channel.code ==
-                                            extraFilters.current.channel
-                                    "
-                                ></option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div
-                        class="dropdown-filters per-page"
-                        v-if="extraFilters.locales != undefined"
-                    >
-                        <div class="control-group">
-                            <select
-                                class="control"
-                                name="locale"
-                                @change="changeExtraFilter($event, 'locale')"
-                            >
-                                <option
-                                    value="all"
-                                    :selected="
-                                        extraFilters.current.locale == 'all'
-                                    "
-                                    v-text="translations.allLocales"
-                                ></option>
-                                <option
-                                    :key="localeKey"
-                                    v-for="(locale,
-                                    localeKey) in extraFilters.locales"
-                                    v-text="locale.name"
-                                    :value="locale.code"
-                                    :selected="
-                                        locale.code ==
-                                            extraFilters.current.locale
-                                    "
-                                ></option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div
-                        class="dropdown-filters per-page"
-                        v-if="extraFilters.customer_groups != undefined"
-                    >
-                        <div class="control-group">
-                            <select
-                                class="control"
-                                id="customer-group-switcher"
-                                name="customer_group"
-                                @change="
-                                    changeExtraFilter($event, 'customer_group')
-                                "
-                            >
-                                <option
-                                    value="all"
-                                    :selected="
-                                        extraFilters.current.customer_group ==
-                                            'all'
-                                    "
-                                    v-text="translations.allCustomerGroups"
-                                ></option>
-                                <option
-                                    :key="customerGroupKey"
-                                    v-for="(customerGroup,
-                                    customerGroupKey) in extraFilters.customer_groups"
-                                    v-text="customerGroup.name"
-                                    :value="customerGroup.id"
-                                    :selected="
-                                        customerGroup.id ==
-                                            extraFilters.current.customer_group
-                                    "
-                                ></option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="datagrid-filters" id="datagrid-filters">
-                <div class="filter-left">
-                    <div class="search-filter">
-                        <input
-                            type="search"
-                            id="search-field"
-                            class="control"
-                            :placeholder="translations.search"
-                            v-model="searchValue"
-                            v-on:keyup.enter="searchCollection(searchValue)"
-                        />
-
-                        <div class="icon-wrapper">
-                            <span
-                                class="icon search-icon search-btn"
-                                v-on:click="searchCollection(searchValue)"
-                            ></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="filter-right">
-                    <div class="dropdown-filters per-page">
-                        <div class="control-group">
-                            <label
-                                class="per-page-label"
-                                for="perPage"
-                                v-text="translations.itemsPerPage"
-                            ></label>
-
-                            <select
-                                id="perPage"
-                                name="perPage"
-                                class="control"
-                                v-model="perPage"
-                                v-on:change="paginate"
-                            >
-                                <option
-                                    v-for="index in this.perPageProduct"
-                                    v-text="index"
-                                    :key="index"
-                                    :value="index"
-                                ></option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="dropdown-filters">
-                        <div class="dropdown-toggle">
-                            <div class="grid-dropdown-header">
-                                <span
-                                    class="name"
-                                    v-text="translations.filter"
-                                ></span>
-                                <i class="icon arrow-down-icon active"></i>
+            <div class="grid-top">
+                 <div class="datagrid-filters">
+                    <div class="filter-left">
+                        <div
+                            class="dropdown-filters per-page"
+                            v-if="extraFilters.channels != undefined"
+                        >
+                            <div class="control-group">
+                                <select
+                                    class="control"
+                                    name="channel"
+                                    @change="changeExtraFilter($event, 'channel')"
+                                >
+                                    <option
+                                        value="all"
+                                        :selected="
+                                            extraFilters.current.channel == 'all'
+                                        "
+                                        v-text="translations.allChannels"
+                                    ></option>
+                                    <option
+                                        :key="channelKey"
+                                        v-for="(channel,
+                                        channelKey) in extraFilters.channels"
+                                        v-text="channel.name"
+                                        :value="channel.code"
+                                        :selected="
+                                            channel.code ==
+                                                extraFilters.current.channel
+                                        "
+                                    ></option>
+                                </select>
                             </div>
                         </div>
 
                         <div
-                            class="dropdown-list dropdown-container"
-                            style="display: none"
+                            class="dropdown-filters per-page"
+                            v-if="extraFilters.locales != undefined"
                         >
-                            <ul>
-                                <li>
-                                    <div class="control-group">
-                                        <select
-                                            class="filter-column-select control"
-                                            v-model="filterColumn"
-                                            v-on:change="
-                                                getColumnOrAlias(filterColumn)
-                                            "
-                                        >
-                                            <option
-                                                v-text="translations.column"
-                                                selected
-                                                disabled
-                                            ></option>
-                                            <option
-                                                :key="columnKey"
-                                                v-for="(column,
-                                                columnKey) in columns"
-                                                :value="column.index"
-                                                v-text="column.label"
-                                                v-if="
-                                                    typeof column.filterable !==
-                                                        'undefined' &&
-                                                        column.filterable
+                            <div class="control-group">
+                                <select
+                                    class="control"
+                                    name="locale"
+                                    @change="changeExtraFilter($event, 'locale')"
+                                >
+                                    <option
+                                        value="all"
+                                        :selected="
+                                            extraFilters.current.locale == 'all'
+                                        "
+                                        v-text="translations.allLocales"
+                                    ></option>
+                                    <option
+                                        :key="localeKey"
+                                        v-for="(locale,
+                                        localeKey) in extraFilters.locales"
+                                        v-text="locale.name"
+                                        :value="locale.code"
+                                        :selected="
+                                            locale.code ==
+                                                extraFilters.current.locale
+                                        "
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div
+                            class="dropdown-filters per-page"
+                            v-if="extraFilters.customer_groups != undefined"
+                        >
+                            <div class="control-group">
+                                <select
+                                    class="control"
+                                    id="customer-group-switcher"
+                                    name="customer_group"
+                                    @change="
+                                        changeExtraFilter($event, 'customer_group')
+                                    "
+                                >
+                                    <option
+                                        value="all"
+                                        :selected="
+                                            extraFilters.current.customer_group ==
+                                                'all'
+                                        "
+                                        v-text="translations.allCustomerGroups"
+                                    ></option>
+                                    <option
+                                        :key="customerGroupKey"
+                                        v-for="(customerGroup,
+                                        customerGroupKey) in extraFilters.customer_groups"
+                                        v-text="customerGroup.name"
+                                        :value="customerGroup.id"
+                                        :selected="
+                                            customerGroup.id ==
+                                                extraFilters.current.customer_group
+                                        "
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="datagrid-filters" id="datagrid-filters">
+                    <div class="">
+                        <div class="search-filter">
+                            <input
+                                type="search"
+                                id="search-field"
+                                class="control"
+                                :placeholder="translations.search"
+                                v-model="searchValue"
+                                v-on:keyup.enter="searchCollection(searchValue)"
+                            />
+
+                            <div class="icon-wrapper">
+                                <span
+                                    class="icon search-icon search-btn"
+                                    v-on:click="searchCollection(searchValue)"
+                                ></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-right">
+                        <div class="dropdown-filters per-page">
+                            <div class="control-group">
+                                <label
+                                    class="per-page-label"
+                                    for="perPage"
+                                    v-text="translations.itemsPerPage"
+                                ></label>
+
+                                <select
+                                    id="perPage"
+                                    name="perPage"
+                                    class="control"
+                                    v-model="perPage"
+                                    v-on:change="paginate"
+                                >
+                                    <option
+                                        v-for="index in this.perPageProduct"
+                                        v-text="index"
+                                        :key="index"
+                                        :value="index"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-filters">
+                            <div class="dropdown-toggle">
+                                <div class="grid-dropdown-header">
+                                    <span
+                                        class="name"
+                                        v-text="translations.filter"
+                                    ></span>
+                                    <i class="icon arrow-down-icon active"></i>
+                                </div>
+                            </div>
+
+                            <div
+                                class="dropdown-list dropdown-container"
+                                style="display: none"
+                            >
+                                <ul>
+                                    <li>
+                                        <div class="control-group">
+                                            <select
+                                                class="filter-column-select control"
+                                                v-model="filterColumn"
+                                                v-on:change="
+                                                    getColumnOrAlias(filterColumn)
                                                 "
-                                            ></option>
-                                        </select>
-                                    </div>
-                                </li>
+                                            >
+                                                <option
+                                                    v-text="translations.column"
+                                                    selected
+                                                    disabled
+                                                ></option>
+                                                <option
+                                                    :key="columnKey"
+                                                    v-for="(column,
+                                                    columnKey) in columns"
+                                                    :value="column.index"
+                                                    v-text="column.label"
+                                                    v-if="
+                                                        typeof column.filterable !==
+                                                            'undefined' &&
+                                                            column.filterable
+                                                    "
+                                                ></option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                <li v-if="stringConditionSelect">
-                                    <div class="control-group">
-                                        <select
-                                            class="control"
-                                            v-model="stringCondition"
-                                        >
-                                            <option
-                                                v-text="translations.condition"
-                                                selected
-                                                disabled
-                                            ></option>
-                                            <option
-                                                v-text="translations.contains"
-                                                value="like"
-                                            ></option>
-                                            <option
-                                                v-text="translations.ncontains"
-                                                value="nlike"
-                                            ></option>
-                                            <option
-                                                v-text="translations.equals"
-                                                value="eq"
-                                            ></option>
-                                            <option
-                                                v-text="translations.nequals"
-                                                value="neqs"
-                                            ></option>
-                                        </select>
-                                    </div>
-                                </li>
+                                    <li v-if="stringConditionSelect">
+                                        <div class="control-group">
+                                            <select
+                                                class="control"
+                                                v-model="stringCondition"
+                                            >
+                                                <option
+                                                    v-text="translations.condition"
+                                                    selected
+                                                    disabled
+                                                ></option>
+                                                <option
+                                                    v-text="translations.contains"
+                                                    value="like"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.ncontains"
+                                                    value="nlike"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.equals"
+                                                    value="eq"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.nequals"
+                                                    value="neqs"
+                                                ></option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                <li v-if="stringCondition != null">
-                                    <div class="control-group">
-                                        <input
-                                            type="text"
-                                            class="control response-string"
-                                            :placeholder="
-                                                translations.valueHere
-                                            "
-                                            v-model="stringValue"
-                                        />
-                                    </div>
-                                </li>
+                                    <li v-if="stringCondition != null">
+                                        <div class="control-group">
+                                            <input
+                                                type="text"
+                                                class="control response-string"
+                                                :placeholder="
+                                                    translations.valueHere
+                                                "
+                                                v-model="stringValue"
+                                            />
+                                        </div>
+                                    </li>
 
-                                <li v-if="numberConditionSelect">
-                                    <div class="control-group">
-                                        <select
-                                            class="control"
-                                            v-model="numberCondition"
-                                        >
-                                            <option
-                                                v-text="translations.condition"
-                                                selected
-                                                disabled
-                                            ></option>
-                                            <option
-                                                v-text="translations.equals"
-                                                value="eq"
-                                            ></option>
-                                            <option
-                                                v-text="translations.nequals"
-                                                value="neqs"
-                                            ></option>
-                                            <option
-                                                v-text="translations.greater"
-                                                value="gt"
-                                            ></option>
-                                            <option
-                                                v-text="translations.less"
-                                                value="lt"
-                                            ></option>
-                                            <option
-                                                v-text="translations.greatere"
-                                                value="gte"
-                                            ></option>
-                                            <option
-                                                v-text="translations.lesse"
-                                                value="lte"
-                                            ></option>
-                                        </select>
-                                    </div>
-                                </li>
+                                    <li v-if="numberConditionSelect">
+                                        <div class="control-group">
+                                            <select
+                                                class="control"
+                                                v-model="numberCondition"
+                                            >
+                                                <option
+                                                    v-text="translations.condition"
+                                                    selected
+                                                    disabled
+                                                ></option>
+                                                <option
+                                                    v-text="translations.equals"
+                                                    value="eq"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.nequals"
+                                                    value="neqs"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.greater"
+                                                    value="gt"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.less"
+                                                    value="lt"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.greatere"
+                                                    value="gte"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.lesse"
+                                                    value="lte"
+                                                ></option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                <li v-if="numberCondition != null">
-                                    <div class="control-group">
-                                        <input
-                                            type="text"
-                                            class="control response-number"
-                                            v-on:input="filterNumberInput"
-                                            v-model="numberValue"
-                                            :placeholder="
-                                                translations.numericValueHere
-                                            "
-                                        />
-                                    </div>
-                                </li>
+                                    <li v-if="numberCondition != null">
+                                        <div class="control-group">
+                                            <input
+                                                type="text"
+                                                class="control response-number"
+                                                v-on:input="filterNumberInput"
+                                                v-model="numberValue"
+                                                :placeholder="
+                                                    translations.numericValueHere
+                                                "
+                                            />
+                                        </div>
+                                    </li>
 
-                                <li v-if="booleanConditionSelect">
-                                    <div class="control-group">
-                                        <select
-                                            class="control"
-                                            v-model="booleanCondition"
-                                        >
-                                            <option
-                                                v-text="translations.condition"
-                                                selected
-                                                disabled
-                                            ></option>
-                                            <option
-                                                v-text="translations.equals"
-                                                value="eq"
-                                            ></option>
-                                            <option
-                                                v-text="translations.nequals"
-                                                value="neqs"
-                                            ></option>
-                                        </select>
-                                    </div>
-                                </li>
+                                    <li v-if="booleanConditionSelect">
+                                        <div class="control-group">
+                                            <select
+                                                class="control"
+                                                v-model="booleanCondition"
+                                            >
+                                                <option
+                                                    v-text="translations.condition"
+                                                    selected
+                                                    disabled
+                                                ></option>
+                                                <option
+                                                    v-text="translations.equals"
+                                                    value="eq"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.nequals"
+                                                    value="neqs"
+                                                ></option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                <li v-if="booleanCondition != null">
-                                    <div class="control-group">
-                                        <select
-                                            class="control"
-                                            v-model="booleanValue"
-                                        >
-                                            <option
-                                                v-text="translations.value"
-                                                selected
-                                                disabled
-                                            ></option>
-                                            <option
-                                                v-text="translations.true"
-                                                value="1"
-                                            ></option>
-                                            <option
-                                                v-text="translations.false"
-                                                value="0"
-                                            ></option>
-                                        </select>
-                                    </div>
-                                </li>
+                                    <li v-if="booleanCondition != null">
+                                        <div class="control-group">
+                                            <select
+                                                class="control"
+                                                v-model="booleanValue"
+                                            >
+                                                <option
+                                                    v-text="translations.value"
+                                                    selected
+                                                    disabled
+                                                ></option>
+                                                <option
+                                                    v-text="translations.true"
+                                                    value="1"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.false"
+                                                    value="0"
+                                                ></option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                <li v-if="datetimeConditionSelect">
-                                    <div class="control-group">
-                                        <select
-                                            class="control"
-                                            v-model="datetimeCondition"
-                                        >
-                                            <option
-                                                v-text="translations.condition"
-                                                selected
-                                                disabled
-                                            ></option>
-                                            <option
-                                                v-text="translations.equals"
-                                                value="eq"
-                                            ></option>
-                                            <option
-                                                v-text="translations.nequals"
-                                                value="neqs"
-                                            ></option>
-                                            <option
-                                                v-text="translations.greater"
-                                                value="gt"
-                                            ></option>
-                                            <option
-                                                v-text="translations.less"
-                                                value="lt"
-                                            ></option>
-                                            <option
-                                                v-text="translations.greatere"
-                                                value="gte"
-                                            ></option>
-                                            <option
-                                                v-text="translations.lesse"
-                                                value="lte"
-                                            ></option>
-                                        </select>
-                                    </div>
-                                </li>
+                                    <li v-if="datetimeConditionSelect">
+                                        <div class="control-group">
+                                            <select
+                                                class="control"
+                                                v-model="datetimeCondition"
+                                            >
+                                                <option
+                                                    v-text="translations.condition"
+                                                    selected
+                                                    disabled
+                                                ></option>
+                                                <option
+                                                    v-text="translations.equals"
+                                                    value="eq"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.nequals"
+                                                    value="neqs"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.greater"
+                                                    value="gt"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.less"
+                                                    value="lt"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.greatere"
+                                                    value="gte"
+                                                ></option>
+                                                <option
+                                                    v-text="translations.lesse"
+                                                    value="lte"
+                                                ></option>
+                                            </select>
+                                        </div>
+                                    </li>
 
-                                <li v-if="datetimeCondition != null">
-                                    <div class="control-group">
-                                        <input
-                                            class="control"
-                                            v-model="datetimeValue"
-                                            type="date"
-                                        />
-                                    </div>
-                                </li>
+                                    <li v-if="datetimeCondition != null">
+                                        <div class="control-group">
+                                            <input
+                                                class="control"
+                                                v-model="datetimeValue"
+                                                type="date"
+                                            />
+                                        </div>
+                                    </li>
 
-                                <button
-                                    v-text="translations.apply"
-                                    class="btn btn-sm btn-primary apply-filter"
-                                    v-on:click="getResponse"
-                                ></button>
-                            </ul>
+                                    <button
+                                        v-text="translations.apply"
+                                        class="btn btn-sm btn-primary apply-filter"
+                                        v-on:click="getResponse"
+                                    ></button>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+           
 
             <div class="filtered-tags">
                 <span
@@ -429,169 +432,122 @@
                 </span>
             </div>
 
-            <table class="table">
-                <thead v-if="massActionsToggle">
-                    <tr
-                        class="mass-action"
-                        v-if="massActionsToggle"
-                        style="height: 65px"
-                    >
-                        <th colspan="100%">
-                            <div
-                                class="mass-action-wrapper"
-                                style="
-                  display: flex;
-                  flex-direction: row;
-                  align-items: center;
-                  justify-content: flex-start;
-                "
-                            >
-                                <span
-                                    class="massaction-remove"
-                                    v-on:click="removeMassActions"
-                                    style="margin-right: 10px; margin-top: 3px"
+            <div class="table-responsive">   
+                 <table class="table">
+                    <thead v-if="massActionsToggle">
+                        <tr
+                            class="mass-action"
+                            v-if="massActionsToggle"
+                            style="height: 65px"
+                        >
+                            <th colspan="100%">
+                                <div
+                                    class="mass-action-wrapper"
+                                    style="
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: flex-start;
+                    "
                                 >
                                     <span
-                                        class="icon checkbox-dash-icon"
-                                    ></span>
-                                </span>
-
-                                <form
-                                    method="POST"
-                                    id="mass-action-form"
-                                    style="display: inline-flex"
-                                    action=""
-                                    :onsubmit="
-                                        `return confirm('${massActionConfirmText}')`
-                                    "
-                                >
-                                    <input
-                                        type="hidden"
-                                        name="_token"
-                                        :value="csrf"
-                                    />
-                                    <input
-                                        type="hidden"
-                                        id="indexes"
-                                        name="indexes"
-                                        v-model="dataIds"
-                                    />
-
-                                    <div class="control-group">
-                                        <select
-                                            class="control"
-                                            v-model="massActionType"
-                                            @change="changeMassActionTarget"
-                                            name="massaction-type"
-                                            required
-                                        >
-                                            <option
-                                                v-for="(massAction,
-                                                index) in massActions"
-                                                v-text="massAction.label"
-                                                :key="index"
-                                                :value="{
-                                                    id: index,
-                                                    value: massAction.type
-                                                }"
-                                            ></option>
-                                        </select>
-                                    </div>
-
-                                    <div
-                                        class="control-group"
-                                        style="margin-left: 10px"
-                                        v-if="massActionType.value == 'update'"
+                                        class="massaction-remove"
+                                        v-on:click="removeMassActions"
+                                        style="margin-right: 10px; margin-top: 3px"
                                     >
-                                        <select
-                                            class="control"
-                                            v-model="massActionUpdateValue"
-                                            name="update-options"
-                                            required
+                                        <span
+                                            class="icon checkbox-dash-icon"
+                                        ></span>
+                                    </span>
+
+                                    <form
+                                        method="POST"
+                                        id="mass-action-form"
+                                        style="display: inline-flex"
+                                        action=""
+                                        :onsubmit="
+                                            `return confirm('${massActionConfirmText}')`
+                                        "
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="_token"
+                                            :value="csrf"
+                                        />
+                                        <input
+                                            type="hidden"
+                                            id="indexes"
+                                            name="indexes"
+                                            v-model="dataIds"
+                                        />
+
+                                        <div class="control-group">
+                                            <select
+                                                class="control"
+                                                v-model="massActionType"
+                                                @change="changeMassActionTarget"
+                                                name="massaction-type"
+                                                required
+                                            >
+                                                <option
+                                                    v-for="(massAction,
+                                                    index) in massActions"
+                                                    v-text="massAction.label"
+                                                    :key="index"
+                                                    :value="{
+                                                        id: index,
+                                                        value: massAction.type
+                                                    }"
+                                                ></option>
+                                            </select>
+                                        </div>
+
+                                        <div
+                                            class="control-group"
+                                            style="margin-left: 10px"
+                                            v-if="massActionType.value == 'update'"
                                         >
-                                            <option
-                                                :key="id"
-                                                v-for="(massActionValue,
-                                                id) in massActionValues"
-                                                :value="massActionValue"
-                                                v-text="id"
-                                            ></option>
-                                        </select>
-                                    </div>
+                                            <select
+                                                class="control"
+                                                v-model="massActionUpdateValue"
+                                                name="update-options"
+                                                required
+                                            >
+                                                <option
+                                                    :key="id"
+                                                    v-for="(massActionValue,
+                                                    id) in massActionValues"
+                                                    :value="massActionValue"
+                                                    v-text="id"
+                                                ></option>
+                                            </select>
+                                        </div>
 
-                                    <button
-                                        v-text="translations.submit"
-                                        type="submit"
-                                        class="btn btn-sm btn-primary"
-                                        style="margin-left: 10px"
-                                    ></button>
-                                </form>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
+                                        <button
+                                            v-text="translations.submit"
+                                            type="submit"
+                                            class="btn btn-sm btn-primary"
+                                            style="margin-left: 10px"
+                                        ></button>
+                                    </form>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
 
-                <thead v-if="massActionsToggle == false">
-                    <tr style="height: 65px">
-                        <th
-                            v-if="enableMassActions"
-                            class="grid_head"
-                            id="mastercheckbox"
-                            style="width: 50px"
-                        >
-                            <span class="checkbox">
-                                <input
-                                    type="checkbox"
-                                    v-model="allSelected"
-                                    v-on:change="selectAll"
-                                />
-
-                                <label
-                                    class="checkbox-view"
-                                    for="checkbox"
-                                ></label>
-                            </span>
-                        </th>
-
-                        <th
-                            :key="columnKey"
-                            v-for="(column, columnKey) in columns"
-                            v-text="column.label"
-                            class="grid_head"
-                            :style="
-                                typeof column.width !== 'undefined' &&
-                                column.width
-                                    ? `width: ${column.width}`
-                                    : ''
-                            "
-                            v-on:click="
-                                typeof column.sortable !== 'undefined' &&
-                                column.sortable
-                                    ? sortCollection(column.index)
-                                    : {}
-                            "
-                        ></th>
-
-                        <th
-                            v-if="enableActions"
-                            v-text="translations.actions"
-                        ></th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <template v-if="records.data.length">
-                        <tr
-                            :key="recordKey"
-                            v-for="(record, recordKey) in records.data"
-                        >
-                            <td v-if="enableMassActions">
+                    <thead v-if="massActionsToggle == false">
+                        <tr style="height: 65px">
+                            <th
+                                v-if="enableMassActions"
+                                class="grid_head"
+                                id="mastercheckbox"
+                                style="width: 50px"
+                            >
                                 <span class="checkbox">
                                     <input
                                         type="checkbox"
-                                        v-model="dataIds"
-                                        @change="select"
-                                        :value="record[index]"
+                                        v-model="allSelected"
+                                        v-on:change="selectAll"
                                     />
 
                                     <label
@@ -599,85 +555,135 @@
                                         for="checkbox"
                                     ></label>
                                 </span>
-                            </td>
+                            </th>
 
-                            <td
+                            <th
                                 :key="columnKey"
                                 v-for="(column, columnKey) in columns"
-                                v-html="record[column.index]"
-                                :data-value="column.label"
-                            ></td>
+                                v-text="column.label"
+                                class="grid_head"
+                                :style="
+                                    typeof column.width !== 'undefined' &&
+                                    column.width
+                                        ? `width: ${column.width}`
+                                        : ''
+                                "
+                                v-on:click="
+                                    typeof column.sortable !== 'undefined' &&
+                                    column.sortable
+                                        ? sortCollection(column.index)
+                                        : {}
+                                "
+                            ></th>
 
-                            <td
-                                class="actions"
-                                style="white-space: nowrap; width: 100px"
-                                :data-value="translations.actions"
+                            <th
+                                v-if="enableActions"
+                                v-text="translations.actions"
+                            ></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <template v-if="records.data.length">
+                            <tr
+                                :key="recordKey"
+                                v-for="(record, recordKey) in records.data"
                             >
-                                <div class="action">
-                                    <a
-                                        :key="actionIndex"
-                                        v-for="(action, actionIndex) in actions"
-                                        v-if="
-                                            record[`${action.key}_to_display`]
-                                        "
-                                        :id="
-                                            record[
-                                                typeof action.index !==
-                                                    'undefined' && action.index
-                                                    ? action.index
-                                                    : index
-                                            ]
-                                        "
-                                        :href="
-                                            action.method == 'GET'
-                                                ? record[`${action.key}_url`]
-                                                : 'javascript:void(0);'
-                                        "
-                                        v-on:click="
-                                            action.method != 'GET'
-                                                ? typeof action.function !==
-                                                      'undefined' &&
-                                                  action.function
-                                                    ? action.function
-                                                    : doAction($event)
-                                                : {}
-                                        "
-                                        :data-method="action.method"
-                                        :data-action="
-                                            record[`${action.key}_url`]
-                                        "
-                                        :data-token="csrf"
-                                        :target="
-                                            typeof action.target !==
-                                                'undefined' && action.target
-                                                ? action.target
-                                                : ''
-                                        "
-                                        :title="
-                                            typeof action.title !==
-                                                'undefined' && action.title
-                                                ? action.title
-                                                : ''
-                                        "
-                                    >
-                                        <span :class="action.icon"></span>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    </template>
-                    <template v-else>
-                        <tr>
-                            <td colspan="10">
-                                <p
-                                    style="text-align: center"
-                                    v-text="translations.norecords"
-                                ></p>
-                            </td>
-                        </tr>
-                    </template>
-                </tbody>
-            </table>
+                                <td v-if="enableMassActions">
+                                    <span class="checkbox">
+                                        <input
+                                            type="checkbox"
+                                            v-model="dataIds"
+                                            @change="select"
+                                            :value="record[index]"
+                                        />
+
+                                        <label
+                                            class="checkbox-view"
+                                            for="checkbox"
+                                        ></label>
+                                    </span>
+                                </td>
+
+                                <td
+                                    :key="columnKey"
+                                    v-for="(column, columnKey) in columns"
+                                    v-html="record[column.index]"
+                                    :data-value="column.label"
+                                ></td>
+
+                                <td
+                                    class="actions"
+                                    style="white-space: nowrap; width: 100px"
+                                    :data-value="translations.actions"
+                                >
+                                    <div class="action">
+                                        <a
+                                            :key="actionIndex"
+                                            v-for="(action, actionIndex) in actions"
+                                            v-if="
+                                                record[`${action.key}_to_display`]
+                                            "
+                                            :id="
+                                                record[
+                                                    typeof action.index !==
+                                                        'undefined' && action.index
+                                                        ? action.index
+                                                        : index
+                                                ]
+                                            "
+                                            :href="
+                                                action.method == 'GET'
+                                                    ? record[`${action.key}_url`]
+                                                    : 'javascript:void(0);'
+                                            "
+                                            v-on:click="
+                                                action.method != 'GET'
+                                                    ? typeof action.function !==
+                                                        'undefined' &&
+                                                    action.function
+                                                        ? action.function
+                                                        : doAction($event)
+                                                    : {}
+                                            "
+                                            :data-method="action.method"
+                                            :data-action="
+                                                record[`${action.key}_url`]
+                                            "
+                                            :data-token="csrf"
+                                            :target="
+                                                typeof action.target !==
+                                                    'undefined' && action.target
+                                                    ? action.target
+                                                    : ''
+                                            "
+                                            :title="
+                                                typeof action.title !==
+                                                    'undefined' && action.title
+                                                    ? action.title
+                                                    : ''
+                                            "
+                                        >
+                                            <span :class="action.icon"></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                        <template v-else>
+                            <tr>
+                                <td colspan="10">
+                                    <p
+                                        style="text-align: center"
+                                        v-text="translations.norecords"
+                                    ></p>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+           
         </div>
 
         <div

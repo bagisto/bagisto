@@ -15,4 +15,6 @@
             :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'">
         </image-wrapper>
     @endif
+
+    <span class="control-info mt-10">{{ __('admin::app.catalog.categories.image-size-logo') }}</span>
 </div>

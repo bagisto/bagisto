@@ -2,7 +2,6 @@
 
 namespace Webkul\Velocity\Helpers;
 
-use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Helpers\Review;
@@ -65,20 +64,6 @@ class Helper extends Review
     protected $velocityMetadataRepository;
 
     /**
-     * List of all default locale images for velocity.
-     *
-     * @var array
-     */
-    protected $defaultLocaleImageSources = [
-        'de' => '/themes/velocity/assets/images/flags/de.png',
-        'en' => '/themes/velocity/assets/images/flags/en.png',
-        'es' => '/themes/velocity/assets/images/flags/es.png',
-        'fr' => '/themes/velocity/assets/images/flags/fr.png',
-        'nl' => '/themes/velocity/assets/images/flags/nl.png',
-        'tr' => '/themes/velocity/assets/images/flags/tr.png'
-    ];
-
-    /**
      * Create a helper instance.
      *
      * @param  \Webkul\Product\Contracts\Product                        $productModel
@@ -97,9 +82,9 @@ class Helper extends Review
         ProductReviewRepository $productReviewRepository,
         VelocityMetadataRepository $velocityMetadataRepository
     ) {
-        $this->productModel =  $productModel;
+        $this->productModel = $productModel;
 
-        $this->attributeOptionRepository =  $attributeOptionRepository;
+        $this->attributeOptionRepository = $attributeOptionRepository;
 
         $this->productRepository = $productRepository;
 
@@ -107,9 +92,9 @@ class Helper extends Review
 
         $this->orderBrandsRepository = $orderBrandsRepository;
 
-        $this->productReviewRepository =  $productReviewRepository;
+        $this->productReviewRepository = $productReviewRepository;
 
-        $this->velocityMetadataRepository =  $velocityMetadataRepository;
+        $this->velocityMetadataRepository = $velocityMetadataRepository;
     }
 
     /**
@@ -181,7 +166,7 @@ class Helper extends Review
                 }
 
                 foreach ($brandName as $brandKey => $brandvalue) {
-                    $brandImplode[$brandKey][] = implode(' | ', array_map("ucfirst", $brandvalue));
+                    $brandImplode[$brandKey][] = implode(' | ', array_map('ucfirst', $brandvalue));
                 }
 
                 return $brandImplode;
@@ -214,14 +199,14 @@ class Helper extends Review
 
         try {
             $metaData = $this->velocityMetadataRepository->findOneWhere([
-                'locale' => $locale,
-                'channel' => $channel
+                'locale'  => $locale,
+                'channel' => $channel,
             ]);
 
             if (! $metaData && $default) {
                 $metaData = $this->velocityMetadataRepository->findOneWhere([
-                    'locale' => 'en',
-                    'channel' => 'default'
+                    'locale'  => 'en',
+                    'channel' => 'default',
                 ]);
             }
 
@@ -255,8 +240,8 @@ class Helper extends Review
     public function getMessage()
     {
         $message = [
-            'message' => '',
-            'messageType' => '',
+            'message'      => '',
+            'messageType'  => '',
             'messageLabel' => '',
         ];
 
@@ -291,7 +276,7 @@ class Helper extends Review
         if (is_string($path) && is_readable($path)) {
             return include $path;
         } else {
-            $currentLocale = "en";
+            $currentLocale = 'en';
 
             $path = __DIR__ . "/../Resources/lang/$currentLocale/app.php";
 
@@ -336,8 +321,8 @@ class Helper extends Review
         $galleryImages = ProductImage::getGalleryImages($product);
         $productImage = ProductImage::getProductBaseImage($product, $galleryImages)['medium_image_url'];
 
-        $largeProductImageName = "large-product-placeholder.png";
-        $mediumProductImageName = "meduim-product-placeholder.png";
+        $largeProductImageName = 'large-product-placeholder.png';
+        $mediumProductImageName = 'meduim-product-placeholder.png';
 
         if (strpos($productImage, $mediumProductImageName) > -1) {
             $productImageNameCollection = explode('/', $productImage);
@@ -353,28 +338,28 @@ class Helper extends Review
         $isProductNew = ($product->new && ! strpos($priceHTML, 'sticker sale') > 0) ? __('shop::app.products.new') : false;
 
         return [
-            'priceHTML'         => $priceHTML,
-            'avgRating'         => ceil($reviewHelper->getAverageRating($product)),
-            'totalReviews'      => $reviewHelper->getTotalReviews($product),
-            'image'             => $productImage,
-            'new'               => $isProductNew,
-            'galleryImages'     => $galleryImages,
-            'name'              => $product->name,
-            'slug'              => $product->url_key,
-            'description'       => $product->description,
-            'shortDescription'  => $product->short_description,
-            'firstReviewText'   => trans('velocity::app.products.be-first-review'),
-            'addToCartHtml'     => view('shop::products.add-to-cart', [
-                'product'           => $product,
-                'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
+            'priceHTML'        => $priceHTML,
+            'avgRating'        => ceil($reviewHelper->getAverageRating($product)),
+            'totalReviews'     => $reviewHelper->getTotalReviews($product),
+            'image'            => $productImage,
+            'new'              => $isProductNew,
+            'galleryImages'    => $galleryImages,
+            'name'             => $product->name,
+            'slug'             => $product->url_key,
+            'description'      => $product->description,
+            'shortDescription' => $product->short_description,
+            'firstReviewText'  => trans('velocity::app.products.be-first-review'),
+            'addToCartHtml'    => view('shop::products.add-to-cart', [
+                'product'          => $product,
+                'addWishlistClass' => ! (isset($list) && $list) ? '' : '',
 
-                'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
+                'showCompare' => core()->getConfigData('general.content.shop.compare_option') == '1'
                     ? true : false,
 
-                'btnText'           => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
+                'btnText' => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
                     ? $metaInformation['btnText'] : null,
 
-                'moveToCart'        => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
+                'moveToCart' => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
                     ? $metaInformation['moveToCart'] : null,
 
                 'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
@@ -399,48 +384,18 @@ class Helper extends Review
             if ($productFlat) {
                 $formattedProduct = $this->formatProduct($productFlat, false, [
                     'moveToCart' => $moveToCart,
-                    'btnText' => $moveToCart ? trans('shop::app.customer.account.wishlist.move-to-cart') : null,
+                    'btnText'    => $moveToCart ? trans('shop::app.customer.account.wishlist.move-to-cart') : null,
                 ]);
 
                 return array_merge($productFlat->toArray(), [
-                    'slug' => $productFlat->url_key,
+                    'slug'          => $productFlat->url_key,
                     'product_image' => $formattedProduct['image'],
-                    'priceHTML' => $formattedProduct['priceHTML'],
-                    'new' => $formattedProduct['new'],
+                    'priceHTML'     => $formattedProduct['priceHTML'],
+                    'new'           => $formattedProduct['new'],
                     'addToCartHtml' => $formattedProduct['addToCartHtml'],
-                    'galleryImages' => $formattedProduct['galleryImages']
+                    'galleryImages' => $formattedProduct['galleryImages'],
                 ]);
             }
         })->toArray();
-    }
-
-    /**
-     * Get current locale image source.
-     *
-     * @return string
-     */
-    public function getCurrentLocaleImageSource(): string
-    {
-        $localeImages = core()->getCurrentChannel()->locales()->pluck('locale_image', 'code');
-
-        $currentLocaleImage = $localeImages[app()->getLocale()] ?? null;
-
-        return $currentLocaleImage
-            ? Storage::url($currentLocaleImage)
-            : $this->getDefaultImageSourceOfCurrentLocale();
-    }
-
-    /**
-     * Get default image source of current locale.
-     *
-     * @return string
-     */
-    public function getDefaultImageSourceOfCurrentLocale(): string
-    {
-        $currentLocale = app()->getLocale();
-
-        return isset($this->defaultLocaleImageSources[$currentLocale])
-            ? asset($this->defaultLocaleImageSources[$currentLocale])
-            : '';
     }
 }

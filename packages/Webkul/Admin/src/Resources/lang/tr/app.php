@@ -989,6 +989,7 @@ return [
             'title'                => 'Müşteriler',
             'first_name'           => 'Müşteri Adı',
             'last_name'            => 'Müşteri Soyadı',
+            'select-gender'        => 'Cinsiyet seç',
             'gender'               => 'Cinsiyet',
             'email'                => 'E-Mail',
             'date_of_birth'        => 'Doğum Tarihi',
@@ -1344,6 +1345,7 @@ return [
         'cancel-error'            => ':name iptal edilemez.',
         'already-taken'           => ':name daha önceden girilmiş.',
         'order-pending'           => 'Bu hesaba ait işlem bekleyen siparişler bulunduğundan hesap silinemez.',
+        'something-went-wrong'    => 'Something went wrong!',
     ],
 
     'footer' => [

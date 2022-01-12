@@ -168,12 +168,16 @@
                                 <label>{{ __('admin::app.settings.channels.logo') }}</label>
 
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false"></image-wrapper>
+                                
+                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.logo-size') }}</span>  
                             </div>
 
                             <div class="control-group">
                                 <label>{{ __('admin::app.settings.channels.favicon') }}</label>
 
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false"></image-wrapper>
+
+                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.favicon-size') }}</span>     
                             </div>
 
                         </div>

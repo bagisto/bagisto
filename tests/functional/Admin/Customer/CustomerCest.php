@@ -12,14 +12,11 @@ class CustomerCest
         $customer = $I->have(Customer::class);
 
         $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.customers'), '//*[contains(@class, "navbar-left")]');
+       
+        $I->amOnAdminRoute('admin.customer.index');
         $I->seeCurrentRouteIs('admin.customer.index');
-        $I->click(__('admin::app.layouts.customers'), '//*[contains(@class, "aside-nav")]');
 
-        $I->seeCurrentRouteIs('admin.customer.index');
-        $I->see($customer->id, '//script[@type="text/x-template"]');
-        $I->see($customer->last_name, '//script[@type="text/x-template"]');
+        $I->see("{$customer->id}", '//script[@type="text/x-template"]');
     }
 
     public function testCreate(FunctionalTester $I): void

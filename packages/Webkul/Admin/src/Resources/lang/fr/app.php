@@ -1015,6 +1015,7 @@ return [
             'title'                     => 'Les clients',
             'first_name'                => 'Prénom',
             'last_name'                 => 'Nom de famille',
+            'select-gender'             => 'Sélectionnez le sexe',
             'gender'                    => 'Genre',
             'email'                     => 'E-mail',
             'date_of_birth'             => 'Date de naissance',
@@ -1383,6 +1384,7 @@ return [
         'cancel-error'              => ':name ne peut pas être annulé.',
         'already-taken'             => 'Le :name a déjà été pris.',
         'order-pending'             => 'Impossible de supprimer le compte :name car certaines commandes sont en attente ou en cours de traitement.',
+        'something-went-wrong'      => 'Something went wrong!',
     ],
 
     'footer' => [

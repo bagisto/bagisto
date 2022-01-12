@@ -20,6 +20,8 @@
                     @endphp
                 @endforeach
             </span>
+
+            <span class="control-info mt-10">{{ __('admin::app.catalog.products.image-size') }}</span>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.controls.after', ['product' => $product]) !!}

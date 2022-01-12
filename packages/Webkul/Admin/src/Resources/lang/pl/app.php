@@ -1000,6 +1000,7 @@ return [
             'title'                => 'Klienci',
             'first_name'           => 'Imię',
             'last_name'            => 'Nazwisko',
+            'select-gender'        => 'Wybierz płeć',
             'gender'               => 'Płeć',
             'email'                => 'Email',
             'date_of_birth'        => 'Data urodzenia',
@@ -1357,6 +1358,7 @@ return [
         'cancel-error'            => ':name nie można anulować.',
         'already-taken'           => 'Ta :name jest już zajęta.',
         'order-pending'           => 'Nie można usunąć konta, ponieważ niektóre zamówienia są w toku lub są przetwarzane.',
+        'something-went-wrong'    => 'Something went wrong!',
     ],
 
     'footer' => [

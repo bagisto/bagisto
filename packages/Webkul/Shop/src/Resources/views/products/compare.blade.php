@@ -1,7 +1,6 @@
 <compare-component product-id="{{ $productId }}"></compare-component>
 
 @push('scripts')
-
     <script type="text/x-template" id="compare-component-template">
         <a
             class="unset text-right"
@@ -38,6 +37,8 @@
                                 'message': response.data.message
                             }];
 
+                            this.updateCompareCount();
+
                             this.$root.addFlashMessages()
                         }).catch(error => {
                             window.flashMessages = [{
@@ -49,6 +50,7 @@
                         });
                     } else {
                         let updatedItems = [this.productId];
+
                         let existingItems = this.getStorageValue('compared_product');
 
                         if (existingItems) {
@@ -79,7 +81,7 @@
                                 'message': "{{ __('shop::app.customer.compare.added') }}"
                             }];
 
-                                this.$root.addFlashMessages()
+                            this.$root.addFlashMessages()
                         }
                     }
 
@@ -118,6 +120,7 @@
                         });
                     } else {
                         let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+
                         comparedItemsCount = comparedItems ? comparedItems.length : 0;
 
                         $('#compare-items-count').html(comparedItemsCount);

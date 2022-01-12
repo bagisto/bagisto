@@ -76,14 +76,11 @@ class ProductCest
         $product = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, [], ['simple']);
 
         $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.dashboard.index');
-        $I->click(__('admin::app.layouts.catalog'), '//*[contains(@class, "navbar-left")]');
-        $I->seeCurrentRouteIs('admin.catalog.products.index');
-        $I->click(__('admin::app.layouts.products'), '//*[contains(@class, "aside-nav")]');
 
+        $I->amOnAdminRoute('admin.catalog.products.index');
         $I->seeCurrentRouteIs('admin.catalog.products.index');
-        $I->see($product->id, '//script[@type="text/x-template"]');
-        $I->see($product->name, '//script[@type="text/x-template"]');
+        
+        $I->see("{$product->id}", '//script[@type="text/x-template"]');        
     }
 
     public function selectEmptyAttributeOptionOnProductCreation(FunctionalTester $I): void

@@ -41,6 +41,11 @@ require 'settings-routes.php';
 require 'configuration-routes.php';
 
 /**
+ * Notification routes.
+ */
+require 'notification-routes.php';
+
+/**
  * Remaining routes.
  */
 require 'rest-routes.php';

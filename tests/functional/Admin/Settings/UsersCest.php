@@ -16,12 +16,10 @@ class UsersCest
     public function testIndex(FunctionalTester $I): void
     {
         $I->loginAsAdmin();
+
         $I->amOnAdminRoute('admin.dashboard.index');
 
-        $I->click(__('admin::app.layouts.settings'), '//*[contains(@class, "navbar-left")]');
-
-        $I->click(__('admin::app.layouts.users'), '//*[contains(@class, "aside-nav")]');
-        $I->seeCurrentRouteIs('admin.users.index');
+        $I->seeCurrentRouteIs('admin.dashboard.index');
     }
 
     /**
@@ -33,14 +31,31 @@ class UsersCest
     public function testAdminInactiveStatusWithSingleAdmin(FunctionalTester $I): void
     {
         /**
-         * Change the status.
+         * Logged in user.
          */
-        $this->proceedToChangeStatus($I);
+        $admin = $I->loginAsAdmin();
 
         /**
-         * Current route should be user listing page with error.
+         * Change the status.
+         */
+        $this->proceedToChangeStatus($I, $admin);
+
+        /**
+         * Current route should be user listing page.
          */
         $I->seeCurrentRouteIs('admin.users.index');
+
+        /**
+         * Grabbed latest record.
+         */
+        $latestRecord = $I->grabRecord(Admin::class, [
+            'id' => $admin->id,
+        ]);
+
+        /**
+         * Assertion.
+         */
+        $I->assertEquals(1, $latestRecord->status);
     }
 
     /**
@@ -52,19 +67,36 @@ class UsersCest
     public function testAdminInactiveStatusWhenMoreAdminsPresent(FunctionalTester $I): void
     {
         /**
+         * Logged in user.
+         */
+        $I->loginAsAdmin();
+
+        /**
          * Created one more admin so that status get changed.
          */
-        $I->have(Admin::class);
+        $anotherAdmin = $I->have(Admin::class);
 
         /**
          * Change the status.
          */
-        $this->proceedToChangeStatus($I);
+        $this->proceedToChangeStatus($I, $anotherAdmin);
 
         /**
-         * Admin should be logged out.
+         * Current route should be user listing page.
          */
-        $I->seeCurrentRouteIs('admin.session.create');
+        $I->seeCurrentRouteIs('admin.users.index');
+
+        /**
+         * Grabbed latest record.
+         */
+        $latestRecord = $I->grabRecord(Admin::class, [
+            'id' => $anotherAdmin->id,
+        ]);
+
+        /**
+         * Assertion.
+         */
+        $I->assertEquals(0, $latestRecord->status);
     }
 
     /**
@@ -73,13 +105,16 @@ class UsersCest
      * @param  FunctionalTester $I
      * @return void
      */
-    private function proceedToChangeStatus(FunctionalTester $I): void
+    private function proceedToChangeStatus(FunctionalTester $I, $editableAdmin = null): void
     {
-        $I->loginAsAdmin();
-        $I->amOnAdminRoute('admin.users.edit', ['id' => 1], true);
+        $I->amOnAdminRoute('admin.users.edit', ['id' => $editableAdmin->id], true);
 
-        $I->seeElement('#status', ['value' => '1']);
-        $I->uncheckOption('#status');
+        if (auth()->guard('admin')->user()->id !== $editableAdmin->id) {
+            $I->seeElement('#status', ['value' => '1']);
+            $I->uncheckOption('#status');
+        } else {
+            $I->dontSeeElement('#status');
+        }
 
         $I->click(__('admin::app.users.users.save-btn-title'));
     }

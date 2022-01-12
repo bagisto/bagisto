@@ -14,7 +14,7 @@
     {!! view_render_event('bagisto.shop.customers.account.address.edit.before', ['address' => $address]) !!}
 
     <form method="post" action="{{ route('customer.address.update', $address->id) }}" @submit.prevent="onSubmit">
-        <div class="account-table-content">
+        <div class="account-table-content mb-2">
             @method('PUT')
 
             @csrf
@@ -72,7 +72,7 @@
 
                 <input type="text" class="control" name="address1[]" value="{{ isset($addresses[0]) ? $addresses[0] : '' }}" id="address_0" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
 
-                <span class="control-error" v-if="errors.has('address1[]')" v-text="errors.first('address1[]')"></span>
+                <span class="control-error" v-text="'{{ $errors->first('address1.*') }}'"></span>
             </div>
 
             @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)

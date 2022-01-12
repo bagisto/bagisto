@@ -251,9 +251,13 @@
 
             watch: {
                 qty: function (val) {
-                    this.$refs.quantityChanger.value = val;
+                    this.$refs.quantityChanger.value = ! isNaN(parseFloat(val)) ? val : 0;
+
+                    this.qty = ! isNaN(parseFloat(val)) ? this.qty : 0;
 
                     this.$emit('onQtyUpdated', this.qty);
+
+                    this.$validator.validate();
                 }
             },
 

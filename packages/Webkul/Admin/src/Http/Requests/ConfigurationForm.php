@@ -3,30 +3,10 @@
 namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Factory as ValidationFactory;
+use Webkul\Core\Contracts\Validations\CommaSeperatedInteger;
 
 class ConfigurationForm extends FormRequest
 {
-    /*
-        Added custom validator.
-     */
-    public function __construct(ValidationFactory $validationFactory)
-    {
-        /* added custom comma seperated integer validator */
-        $validationFactory->extend(
-            'comma_seperated_integer',
-            function ($attribute, $value, $parameters) {
-                $pages = explode(',', $value);
-                foreach($pages as $page){
-                    if (! is_numeric($page)) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        );
-    }
-
     /**
      * Determine if the Configuraion is authorized to make this request.
      *
@@ -50,7 +30,7 @@ class ConfigurationForm extends FormRequest
             && ! empty(request()->input('catalog.products.storefront.products_per_page'))
         ) {
             $this->rules = [
-                'catalog.products.storefront.products_per_page'  => 'comma_seperated_integer',
+                'catalog.products.storefront.products_per_page' => [new CommaSeperatedInteger],
             ];
         }
 
@@ -58,7 +38,7 @@ class ConfigurationForm extends FormRequest
             && ! request()->input('general.design.admin_logo.logo_image.delete')
         ) {
             $this->rules = array_merge($this->rules, [
-                'general.design.admin_logo.logo_image'  => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
+                'general.design.admin_logo.logo_image' => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
             ]);
         }
 
@@ -66,7 +46,7 @@ class ConfigurationForm extends FormRequest
             && ! request()->input('general.design.admin_logo.favicon.delete')
         ) {
             $this->rules = array_merge($this->rules, [
-                'general.design.admin_logo.favicon'  => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
+                'general.design.admin_logo.favicon' => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
             ]);
         }
 
@@ -74,7 +54,7 @@ class ConfigurationForm extends FormRequest
             && ! request()->input('sales.invoice_setttings.invoice_slip_design.logo.delete')
         ) {
             $this->rules = array_merge($this->rules, [
-                'sales.invoice_setttings.invoice_slip_design.logo'  => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
+                'sales.invoice_setttings.invoice_slip_design.logo' => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
             ]);
         }
 
@@ -90,7 +70,6 @@ class ConfigurationForm extends FormRequest
     {
         return [
             'general.design.admin_logo.logo_image.mimes' => 'Invalid file format. Use only bmp, jpeg, jpg, png and webp.',
-            'catalog.products.storefront.products_per_page.comma_seperated_integer' => 'The "Product Per Page" field must be numeric and may contain comma.'
         ];
     }
 
@@ -100,9 +79,10 @@ class ConfigurationForm extends FormRequest
     public function attributes()
     {
         return [
-            'general.design.admin_logo.logo_image' => 'Logo Image',
-            'general.design.admin_logo.favicon' => 'Favicon Image',
-            'sales.invoice_setttings.invoice_slip_design.logo' => 'Invoice Logo'
+            'general.design.admin_logo.logo_image'             => 'Logo Image',
+            'general.design.admin_logo.favicon'                => 'Favicon Image',
+            'sales.invoice_setttings.invoice_slip_design.logo' => 'Invoice Logo',
+            'catalog.products.storefront.products_per_page'    => 'Product Per Page',
         ];
     }
 }

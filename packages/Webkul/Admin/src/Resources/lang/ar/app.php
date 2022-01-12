@@ -1000,6 +1000,7 @@ return [
             'title'                => 'زبائن',
             'first_name'           => 'الاسم الاول',
             'last_name'            => 'الكنية',
+            'select-gender'        => 'حدد نوع الجنس',
             'gender'               => 'جنس',
             'email'                => 'البريد الإلكتروني',
             'date_of_birth'        => 'تاريخ الولادة',
@@ -1360,6 +1361,7 @@ return [
         'cancel-error'              => 'لا يمكن إلغاؤه :name',
         'already-taken'             => 'بالفعل :name تم أخذ ',
         'order-pending'             => 'لا يمكن حذف الحساب لأن بعض الطلبات (الطلبات) معلقة أو قيد المعالجة.',
+        'something-went-wrong'      => 'Something went wrong!',
     ],
 
     'footer' => [

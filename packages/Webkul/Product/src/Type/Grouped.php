@@ -2,33 +2,33 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Product\Models\ProductFlat;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 
 class Grouped extends AbstractType
 {
     /**
-     * ProductGroupedProductRepository instance
+     * Product grouped product repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductGroupedProductRepository
      */
     protected $productGroupedProductRepository;
 
     /**
-     * Skip attribute for downloadable product type
+     * Skip attribute for downloadable product type.
      *
      * @var array
      */
     protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'length', 'width', 'height', 'weight'];
 
     /**
-     * These blade files will be included in product edit page
+     * These blade files will be included in product edit page.
      *
      * @var array
      */
@@ -42,7 +42,7 @@ class Grouped extends AbstractType
     ];
 
     /**
-     * Is a composite product type
+     * Is a composite product type.
      *
      * @var boolean
      */
@@ -68,8 +68,7 @@ class Grouped extends AbstractType
         ProductImageRepository $productImageRepository,
         ProductGroupedProductRepository $productGroupedProductRepository,
         ProductVideoRepository $productVideoRepository
-    )
-    {
+    ) {
         parent::__construct(
             $attributeRepository,
             $productRepository,
@@ -83,14 +82,17 @@ class Grouped extends AbstractType
     }
 
     /**
+     * Update.
+     *
      * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Product\Contracts\Product
      */
-    public function update(array $data, $id, $attribute = "id")
+    public function update(array $data, $id, $attribute = 'id')
     {
         $product = parent::update($data, $id, $attribute);
+
         $route = request()->route() ? request()->route()->getName() : '';
 
         if ($route != 'admin.catalog.products.massupdate') {
@@ -101,7 +103,7 @@ class Grouped extends AbstractType
     }
 
     /**
-     * Returns children ids
+     * Returns children ids.
      *
      * @return array
      */
@@ -111,7 +113,7 @@ class Grouped extends AbstractType
     }
 
     /**
-     * Check if catalog rule can be applied
+     * Check if catalog rule can be applied.
      *
      * @return bool
      */
@@ -123,6 +125,7 @@ class Grouped extends AbstractType
     /**
      * Get product minimal price.
      *
+     * @param  int  $qty
      * @return float
      */
     public function getMinimalPrice($qty = null)
@@ -141,11 +144,13 @@ class Grouped extends AbstractType
     }
 
     /**
+     * Is saleable.
+     *
      * @return bool
      */
     public function isSaleable()
     {
-        if (!$this->product->status) {
+        if (! $this->product->status) {
             return false;
         }
 
@@ -157,24 +162,28 @@ class Grouped extends AbstractType
     }
 
     /**
-     * Get group product special price
+     * Check whether group product have special price.
      *
-     * @return boolean
+     * @param  int  $qty
+     * @return bool
      */
-    private function checkGroupProductHaveSpecialPrice()
+    public function haveSpecialPrice($qty = null)
     {
         $haveSpecialPrice = false;
+
         foreach ($this->product->grouped_products as $groupOptionProduct) {
             if ($groupOptionProduct->associated_product->getTypeInstance()->haveSpecialPrice()) {
                 $haveSpecialPrice = true;
+
                 break;
             }
         }
+
         return $haveSpecialPrice;
     }
 
     /**
-     * Get product minimal price
+     * Get product minimal price.
      *
      * @return string
      */
@@ -182,7 +191,7 @@ class Grouped extends AbstractType
     {
         $html = '';
 
-        if ($this->checkGroupProductHaveSpecialPrice()) {
+        if ($this->haveSpecialPrice()) {
             $html .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
         }
 

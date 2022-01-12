@@ -1111,6 +1111,7 @@
 
                 .filter-left {
                     float: left;
+                    padding: 18px;
                 }
 
                 .filter-right {
@@ -1118,10 +1119,12 @@
                     width: 70%;
                     float: right;
                     position: relative;
+                    padding: 10px;
 
                     .per-page {
                         right: 0;
-                        position: absolute;
+                        width: 150px;
+                        margin-bottom: 10px;
                     }
                 }
             }
@@ -2553,6 +2556,10 @@
         vertical-align: top;
     }
 
+    .header {
+        min-width: 150px;
+    }
+
     .image-wrapper {
         width: 100%;
     }
@@ -2616,7 +2623,8 @@
         }
     }
 
-    .compare-products .col, .compare-products .col-2 {
+    .compare-products .col,
+    .compare-products .col-2 {
         max-width: 25%;
     }
 }

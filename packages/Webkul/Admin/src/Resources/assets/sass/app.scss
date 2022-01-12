@@ -6,7 +6,9 @@
 @import "variables";
 @import "mixins";
 
+@import "partials/dark";
 @import "partials/default";
+@import "partials/mobile";
 
 @import "partials/dashboard";
 @import "partials/configuration";

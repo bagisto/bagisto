@@ -53,40 +53,43 @@
 
                         <div class="control-group" :class="[errors.has('type') ? 'has-error' : '']">
                             <label for="type" class="required">{{ __('admin::app.catalog.products.product-type') }}</label>
-                            <select class="control" v-validate="'required'" id="type" name="type" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.product-type') }}&quot;">
 
+                            <select class="control" v-validate="'required'" id="type" name="type" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.product-type') }}&quot;">
                                 @foreach($productTypes as $key => $productType)
                                     <option value="{{ $key }}" {{ request()->input('type') == $productType['key'] ? 'selected' : '' }}>
                                         {{ $productType['name'] }}
                                     </option>
                                 @endforeach
-
                             </select>
 
                             @if ($familyId)
                                 <input type="hidden" name="type" value="{{ app('request')->input('type') }}"/>
                             @endif
+
                             <span class="control-error" v-if="errors.has('type')">@{{ errors.first('type') }}</span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('attribute_family_id') ? 'has-error' : '']">
                             <label for="attribute_family_id" class="required">{{ __('admin::app.catalog.products.familiy') }}</label>
+
                             <select class="control" v-validate="'required'" id="attribute_family_id" name="attribute_family_id" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.familiy') }}&quot;">
-                                <option value=""></option>
                                 @foreach ($families as $family)
                                     <option value="{{ $family->id }}" {{ ($familyId == $family->id || old('attribute_family_id') == $family->id) ? 'selected' : '' }}>{{ $family->name }}</option>
-                                    @endforeach
+                                @endforeach
                             </select>
 
                             @if ($familyId)
                                 <input type="hidden" name="attribute_family_id" value="{{ $familyId }}"/>
                             @endif
+
                             <span class="control-error" v-if="errors.has('attribute_family_id')">@{{ errors.first('attribute_family_id') }}</span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('sku') ? 'has-error' : '']">
                             <label for="sku" class="required">{{ __('admin::app.catalog.products.sku') }}</label>
+
                             <input type="text" v-validate="{ required: true, regex: /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/ }" class="control" id="sku" name="sku" value="{{ request()->input('sku') ?: old('sku') }}" data-vv-as="&quot;{{ __('admin::app.catalog.products.sku') }}&quot;"/>
+
                             <span class="control-error" v-if="errors.has('sku')">@{{ errors.first('sku') }}</span>
                         </div>
 
@@ -119,6 +122,7 @@
                                                 <td>
                                                     {{ $attribute->admin_name }}
                                                 </td>
+
                                                 <td>
                                                     @foreach ($attribute->options as $option)
                                                         <span class="label">
@@ -129,6 +133,7 @@
                                                         </span>
                                                     @endforeach
                                                 </td>
+
                                                 <td class="actions">
                                                     <i class="icon trash-icon"></i>
                                                 </td>
