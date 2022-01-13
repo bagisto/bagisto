@@ -912,7 +912,7 @@ return [
             'create'          => 'Create',
             'add-title'       => 'Create Tax Category',
             'edit-title'      => 'Edit Tax Category',
-            'save-btn-title'  => 'Save Tax Category',
+            'save-btn-title'  => 'Save',
             'general'         => 'Tax Category',
             'select-channel'  => 'Select Channel',
             'name'            => 'Name',
@@ -933,9 +933,10 @@ return [
 
         'tax-rates'   => [
             'title'          => 'Tax Rates',
+            'add'            => 'Create',
             'add-title'      => 'Create Tax Rate',
             'edit-title'     => 'Edit Tax Rate',
-            'save-btn-title' => 'Save Tax Rate',
+            'save-btn-title' => 'Save',
             'general'        => 'Tax Rate',
             'identifier'     => 'Identifier',
             'is_zip'         => 'Enable Zip Range',

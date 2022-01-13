@@ -4,6 +4,22 @@
     {{ __('admin::app.settings.tax-rates.title') }}
 @stop
 
+
+@push('css')
+    <style>
+        @media only screen and (max-width: 768px){
+            .import{
+               margin-right: 2px;
+            }
+        }
+        @media only screen and (min-width: 768px){
+            .import{
+                margin-right: 20px;
+            }
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="content">
         <div class="page-header">
@@ -12,7 +28,7 @@
             </div>
 
             <div class="page-action">
-                <div class="export-import" @click="showModal('uploadDataGrid')" style="margin-right: 20px;">
+                <div class="export-import import" @click="showModal('uploadDataGrid')">
                     <i class="import-icon"></i>
                     <span>
                         {{ __('admin::app.export.import') }}
@@ -26,7 +42,7 @@
                 </div>
 
                 <a href="{{ route('admin.tax-rates.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.settings.tax-rates.add-title') }}
+                    {{ __('admin::app.settings.tax-rates.add') }}
                 </a>
             </div>
         </div>
