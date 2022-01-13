@@ -420,11 +420,13 @@ class Core
     /**
      * Get currency.
      *
+     * Will return null if not found.
+     *
      * @return \Webkul\Core\Models\Currency
      */
     public function getCurrency()
     {
-        return self::$currency ?: $this->getChannelBaseCurrency();
+        return self::$currency;
     }
 
     /**
@@ -518,6 +520,8 @@ class Core
     /**
      * Returns current channel's currency model.
      *
+     * Will fallback to base currency if not set.
+     *
      * @return \Webkul\Core\Contracts\Currency
      */
     public function getCurrentCurrency()
@@ -528,7 +532,7 @@ class Core
             return $currency;
         }
 
-        return $currency = $this->getCurrency();
+        return $currency = $this->getCurrency() ?: $this->getChannelBaseCurrency();
     }
 
     /**
