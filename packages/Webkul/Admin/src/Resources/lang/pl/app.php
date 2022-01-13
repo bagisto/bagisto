@@ -804,6 +804,7 @@ return [
         ],
         'inventory_sources' => [
             'title'             => 'Źródła zapasów',
+            'add'               => 'Add',
             'add-title'         => 'Dodaj źródło zasobów reklamowych',
             'edit-title'        => 'Edytuj źródło zasobów reklamowych',
             'save-btn-title'    => 'Zapisz źródło zasobów reklamowych',

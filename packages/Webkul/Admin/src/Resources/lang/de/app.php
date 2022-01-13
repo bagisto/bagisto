@@ -802,6 +802,7 @@ return [
         'inventory_sources' =>
         [
             'title'             => 'Inventar-Quellen',
+            'add'               => 'Add',
             'add-title'         => 'Inventar Quelle hinzufügen',
             'edit-title'        => 'Inventar Quelle bearbeiten',
             'save-btn-title'    => 'Inventar Quelle speichern',

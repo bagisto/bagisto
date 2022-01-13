@@ -801,6 +801,7 @@ return [
         ],
         'inventory_sources' => [
             'title'             => 'Voorraadbronnen',
+            'add'               => 'Add',
             'add-title'         => 'Voorraadbron toevoegen',
             'edit-title'        => 'Edit Inventory Source',
             'save-btn-title'    => 'Opslaan',

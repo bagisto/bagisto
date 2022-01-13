@@ -802,6 +802,7 @@ return [
         ],
         'inventory_sources' => [
             'title'             => 'منابع موجودی',
+            'add'               => 'Add',
             'add-title'         => 'افزودن منبع موجودی',
             'edit-title'        => 'ویرایش منبع موجودی',
             'save-btn-title'    => 'ذخیره منبع موجودی',

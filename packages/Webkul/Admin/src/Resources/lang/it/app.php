@@ -806,6 +806,7 @@ return [
         ],
         'inventory_sources' => [
             'title'             => 'Magazzini',
+            'add'               => 'Add',
             'add-title'         => 'Aggiungi Magazzino',
             'edit-title'        => 'Modifica Magazzino',
             'save-btn-title'    => 'Salva Magazzino',

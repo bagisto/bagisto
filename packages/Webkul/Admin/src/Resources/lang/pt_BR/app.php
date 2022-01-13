@@ -803,6 +803,7 @@ return [
         ],
         'inventory_sources' => [
             'title'             => 'Origens do Estoque',
+            'add'               => 'Add',
             'add-title'         => 'Adicionar Origem de Estoque',
             'edit-title'        => 'Editar Origem de Estoque',
             'save-btn-title'    => 'Salvar Origem de Estoque',

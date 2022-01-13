@@ -818,6 +818,7 @@ return [
 
         'inventory_sources' => [
             'title'             => 'Sources d\'inventaire',
+            'add'               => 'Add',
             'add-title'         => 'Ajouter une source d\'inventaire',
             'edit-title'        => 'Modifier la source d\'inventaire',
             'save-btn-title'    => 'Enregistrer la source d\'inventaire',

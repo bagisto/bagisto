@@ -818,7 +818,7 @@ return [
         ],
         'inventory_sources' => [
             'title'             => 'Inventory Sources',
-            'add'               => 'Add',
+            'add'               => 'Add',            
             'add-title'         => 'Add Inventory Source',
             'edit-title'        => 'Edit Inventory Source',
             'save-btn-title'    => 'Save',

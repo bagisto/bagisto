@@ -795,6 +795,7 @@ return [
         ],
         'inventory_sources' => [
             'title'             => 'Envanter Kaynakları',
+            'add'               => 'Add',
             'add-title'         => 'Envanter Kaynağı Ekle',
             'edit-title'        => 'Envanter Kaynağı Düzenle',
             'save-btn-title'    => 'Envanter Kaynağı Kaydet',

@@ -813,6 +813,7 @@ return [
         ],
         'inventory_sources' => [
             'title'             => 'Fuentes de inventario',
+            'add'               => 'Add',
             'add-title'         => 'Agregar fuente de inventario',
             'edit-title'        => 'Editar fuente de inventario',
             'save-btn-title'    => 'Guardar fuente de inventario',

@@ -804,6 +804,7 @@ return [
         ],
         'inventory_sources' => [
             'title'             => 'مصادر المخزون',
+            'add'               => 'Add',
             'add-title'         => 'إضافة قائمة الجرد المصدر',
             'edit-title'        => 'حرر مصدر الجرد',
             'save-btn-title'    => 'احفظ مصدر الجرد',
