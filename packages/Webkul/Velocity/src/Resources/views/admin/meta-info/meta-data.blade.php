@@ -13,13 +13,24 @@
 @push('css')
 
     <style>
-
         @media only screen and (max-width: 768px){
-            .content-container .content .page-header .page-title{
-                margin-bottom: 30px !important;
+
+            .content-container .content .page-header .page-title {
+                float: left;
+                width: 100%;
+                margin-bottom: 12px;
+            }
+           
+            .content-container .content .page-header .page-action button {
+                position: absolute;
+                right: 2px;
+                top: -124px !important;
+            }
+
+            .content-container .content .page-header .control-group {
+                margin-top:16px !important;
             }
         }
-
     </style>
 
 @endpush

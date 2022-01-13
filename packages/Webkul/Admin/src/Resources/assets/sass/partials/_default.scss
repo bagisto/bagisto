@@ -743,16 +743,17 @@ body {
             .page-header {
 
                 .control-group {
-                    width: 330px;
+                    width: 100% !important;
                     display: block;
                     margin-bottom: 0;
                     margin-left: 0px;
                     padding: 0px;
-                    margin-top: 16px;
+                    margin-top: 40px;
                 }
 
                 .page-title {
                     float: left;
+                    width: 100%;
     
                     .back-link {                      
                         margin-top: 0px;
@@ -761,16 +762,18 @@ body {
                 }
                   
                 .page-action {
-                    float: right;
+                    position: absolute;
+                    right: 10px;
+                    margin-top: 0px;
 
                     .export-import{
-                        margin-top: -10px;
+                        margin-top: -15px;
                     }
 
                     button{
                         position: absolute;
-                        right: 9px;
-                        top: 16px;
+                        right: 2px;
+                        top: 0px;
                     }
                    
                     * {
@@ -810,12 +813,12 @@ body {
             .page-header {
 
                 .control-group {
-                    width: 385px;
+                    width: 100% !important;
                     display: block;
                     margin-bottom: 0;
                     margin-left: 0px;
                     padding: 0px;
-                    margin-top: 16px;
+                    margin-top: 40px;
                 }
             }
         } 
@@ -830,12 +833,12 @@ body {
             .page-header {
 
                 .control-group {
-                    width: 350px;
+                    width: 100% !important;
                     display: block;
                     margin-bottom: 0;
                     margin-left: 0px;
                     padding: 0px;
-                    margin-top: 16px;
+                    margin-top: 40px;
                 }
             }
         } 
@@ -850,12 +853,12 @@ body {
             .page-header {
 
                 .control-group {
-                    width: 295px;
+                    width: 100% !important;
                     display: block;
                     margin-bottom: 0;
                     margin-left: 0px;
                     padding: 0px;
-                    margin-top: 16px;
+                    margin-top: 40px;
                 }
             }
         } 
