@@ -2,44 +2,44 @@
 
 namespace Webkul\Shop\Http\Middleware;
 
-use Webkul\Core\Repositories\LocaleRepository;
 use Closure;
+use Webkul\Core\Repositories\LocaleRepository;
 
 class Locale
 {
     /**
-     * @var LocaleRepository
+     * Locale repository instance.
+     *
+     * @var \Webkul\Core\Repositories\LocaleRepository
      */
-    protected $locale;
+    protected $localeRepository;
 
     /**
-     * @param \Webkul\Core\Repositories\LocaleRepository $locale
+     * @param \Webkul\Core\Repositories\LocaleRepository $localeRepository
      */
-    public function __construct(LocaleRepository $locale)
+    public function __construct(LocaleRepository $localeRepository)
     {
-        $this->locale = $locale;
+        $this->localeRepository = $localeRepository;
     }
 
     /**
-    * Handle an incoming request.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \Closure  $next
-    * @return mixed
-    */
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
     public function handle($request, Closure $next)
     {
-        $locale = core()->getRequestedLocaleCode('locale', false);
+        if ($localeCode = core()->getRequestedLocaleCode('locale', false)) {
+            if ($this->localeRepository->findOneByField('code', $localeCode)) {
+                app()->setLocale($localeCode);
 
-        if ($locale) {
-            if ($this->locale->findOneByField('code', $locale)) {
-                app()->setLocale($locale);
-
-                session()->put('locale', $locale);
+                session()->put('locale', $localeCode);
             }
         } else {
-            if ($locale = session()->get('locale')) {
-                app()->setLocale($locale);
+            if ($localeCode = session()->get('locale')) {
+                app()->setLocale($localeCode);
             } else {
                 app()->setLocale(core()->getDefaultChannel()->default_locale->code);
             }

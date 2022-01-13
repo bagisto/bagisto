@@ -84,7 +84,14 @@ class Core
      *
      * @var \Webkul\Core\Models\Channel
      */
-    private static $channel;
+    protected static $channel;
+
+    /**
+     * Currency.
+     *
+     * @var \Webkul\Core\Models\Currency
+     */
+    protected static $currency;
 
     /**
      * Register your core config keys here which you don't want to
@@ -398,6 +405,29 @@ class Core
     }
 
     /**
+     * Set currency.
+     *
+     * @param  string  $currencyCode
+     * @return void
+     */
+    public function setCurrency($currencyCode)
+    {
+        $currency = $this->currencyRepository->findOneByField('code', $currencyCode);
+
+        self::$currency = $currency ?: $this->getChannelBaseCurrency();
+    }
+
+    /**
+     * Get currency.
+     *
+     * @return \Webkul\Core\Models\Currency
+     */
+    public function getCurrency()
+    {
+        return self::$currency;
+    }
+
+    /**
      * Returns all currencies.
      *
      * @return \Illuminate\Support\Collection
@@ -498,13 +528,7 @@ class Core
             return $currency;
         }
 
-        if ($currencyCode = session()->get('currency')) {
-            if ($currency = $this->currencyRepository->findOneByField('code', $currencyCode)) {
-                return $currency;
-            }
-        }
-
-        return $currency = $this->getChannelBaseCurrency();
+        return $currency = $this->getCurrency();
     }
 
     /**

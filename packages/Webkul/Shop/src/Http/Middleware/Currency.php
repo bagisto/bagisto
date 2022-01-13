@@ -8,36 +8,43 @@ use Webkul\Core\Repositories\CurrencyRepository;
 class Currency
 {
     /**
-     * @var CurrencyRepository
+     * Currency repository instance.
+     *
+     * @var \Webkul\Core\Repositories\CurrencyRepository
      */
-    protected $currency;
+    protected $currencyRepository;
 
     /**
-     * @param \Webkul\Core\Repositories\CurrencyRepository $locale
+     * Create a currency repository instance.
+     *
+     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
+     * @return void
      */
-    public function __construct(CurrencyRepository $currency)
+    public function __construct(CurrencyRepository $currencyRepository)
     {
-        $this->currency = $currency;
+        $this->currencyRepository = $currencyRepository;
     }
 
     /**
-    * Handle an incoming request.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \Closure  $next
-    * @return mixed
-    */
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
     public function handle($request, Closure $next)
     {
-        $currencyCode = request()->get('currency');
+        if ($currencyCode = request()->get('currency')) {
+            if ($this->currencyRepository->findOneByField('code', $currencyCode)) {
+                core()->setCurrency($currencyCode);
 
-        if ($currency = $currencyCode) {
-            if ($this->currency->findOneByField('code', $currency)) {
-                session()->put('currency', $currency);
+                session()->put('currency', $currencyCode);
             }
         } else {
-            if (! session()->get('currency')) {
-                session()->put('currency', core()->getChannelBaseCurrencyCode());
+            if ($currencyCode = session()->get('currency')) {
+                core()->setCurrency($currencyCode);
+            } else {
+                core()->setCurrency(core()->getChannelBaseCurrencyCode());
             }
         }
 
