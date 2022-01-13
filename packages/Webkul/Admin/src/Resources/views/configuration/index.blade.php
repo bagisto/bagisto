@@ -10,7 +10,8 @@
 
         @media only screen and (max-width: 768px){
             .content-container .content .page-header .page-title .control-group .control{
-                width: 94%;
+                width: 100% !important;
+                margin-top:-25px !important;
             }
         }
 
