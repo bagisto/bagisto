@@ -15,7 +15,10 @@ class Locale
     protected $localeRepository;
 
     /**
-     * @param \Webkul\Core\Repositories\LocaleRepository $localeRepository
+     * Create a middleware instance.
+     *
+     * @param  \Webkul\Core\Repositories\LocaleRepository  $localeRepository
+     * @return void
      */
     public function __construct(LocaleRepository $localeRepository)
     {

@@ -15,7 +15,7 @@ class Currency
     protected $currencyRepository;
 
     /**
-     * Create a currency repository instance.
+     * Create a middleware instance.
      *
      * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @return void
