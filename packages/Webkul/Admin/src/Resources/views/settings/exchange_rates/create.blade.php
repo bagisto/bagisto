@@ -29,53 +29,55 @@
                     @csrf()
 
                     <div class="table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        {{ __('admin::app.settings.exchange_rates.source_currency') }}
-                                    </th>
-                                    <th>
-                                        {{ __('admin::app.settings.exchange_rates.target_currency') }}
-                                    </th>
-                                    <th>
-                                        {{ __('admin::app.settings.exchange_rates.rate') }}
-                                    </th>
-                                </tr>
-                            </thead>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            {{ __('admin::app.settings.exchange_rates.source_currency') }}
+                                        </th>
+                                        <th>
+                                            {{ __('admin::app.settings.exchange_rates.target_currency') }}
+                                        </th>
+                                        <th>
+                                            {{ __('admin::app.settings.exchange_rates.rate') }}
+                                        </th>
+                                    </tr>
+                                </thead>
 
-                            <tbody>
-                                <tr>
-                                    {!! view_render_event('bagisto.admin.settings.exchangerate.create.before') !!}
+                                <tbody>
+                                    <tr>
+                                        {!! view_render_event('bagisto.admin.settings.exchangerate.create.before') !!}
 
-                                    <td>
-                                        {{ core()->getBaseCurrencyCode() }}
-                                    </td>
+                                        <td>
+                                            {{ core()->getBaseCurrencyCode() }}
+                                        </td>
 
-                                    <td>
-                                        <div class="control-group" :class="[errors.has('target_currency') ? 'has-error' : '']">
-                                            <select v-validate="'required'" class="control" name="target_currency" data-vv-as="&quot;{{ __('admin::app.settings.exchange_rates.target_currency') }}&quot;">
-                                                @foreach ($currencies as $currency)
-                                                    @if (is_null($currency->exchange_rate))
-                                                        <option value="{{ $currency->id }}">{{ $currency->name }}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                            <span class="control-error" v-if="errors.has('target_currency')">@{{ errors.first('target_currency') }}</span>
-                                        </div>
-                                    </td>
+                                        <td>
+                                            <div class="control-group" :class="[errors.has('target_currency') ? 'has-error' : '']">
+                                                <select v-validate="'required'" class="control" name="target_currency" data-vv-as="&quot;{{ __('admin::app.settings.exchange_rates.target_currency') }}&quot;">
+                                                    @foreach ($currencies as $currency)
+                                                        @if (is_null($currency->exchange_rate))
+                                                            <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                                <span class="control-error" v-if="errors.has('target_currency')">@{{ errors.first('target_currency') }}</span>
+                                            </div>
+                                        </td>
 
-                                    <td>
-                                        <div class="control-group" :class="[errors.has('rate') ? 'has-error' : '']">
-                                            <input v-validate="'required'" class="control" id="rate" name="rate" data-vv-as="&quot;{{ __('admin::app.settings.exchange_rates.rate') }}&quot;" value="{{ old('rate') }}"/>
-                                            <span class="control-error" v-if="errors.has('rate')">@{{ errors.first('rate') }}</span>
-                                        </div>
-                                    </td>
+                                        <td>
+                                            <div class="control-group" :class="[errors.has('rate') ? 'has-error' : '']">
+                                                <input v-validate="'required'" class="control" id="rate" name="rate" data-vv-as="&quot;{{ __('admin::app.settings.exchange_rates.rate') }}&quot;" value="{{ old('rate') }}"/>
+                                                <span class="control-error" v-if="errors.has('rate')">@{{ errors.first('rate') }}</span>
+                                            </div>
+                                        </td>
 
-                                    {!! view_render_event('bagisto.admin.settings.exchangerate.create.after') !!}
-                                </tr>
-                            </tbody>
-                        </table>
+                                        {!! view_render_event('bagisto.admin.settings.exchangerate.create.after') !!}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -802,9 +802,9 @@ return [
         ],
         'exchange_rates'    => [
             'title'                    => 'Exchange Rates',
-            'add-title'                => 'Add Exchange Rate',
+            'add-title'                => 'Add',
             'edit-title'               => 'Edit Exchange Rate',
-            'save-btn-title'           => 'Save Exchange Rate',
+            'save-btn-title'           => 'Save',
             'general'                  => 'General',
             'source_currency'          => 'Source Currency',
             'target_currency'          => 'Target Currency',
@@ -818,9 +818,10 @@ return [
         ],
         'inventory_sources' => [
             'title'             => 'Inventory Sources',
+            'add'               => 'Add',
             'add-title'         => 'Add Inventory Source',
             'edit-title'        => 'Edit Inventory Source',
-            'save-btn-title'    => 'Save Inventory Source',
+            'save-btn-title'    => 'Save',
             'general'           => 'General',
             'code'              => 'Code',
             'name'              => 'Name',
@@ -908,6 +909,7 @@ return [
 
         'tax-categories' => [
             'title'           => 'Tax Categories',
+            'create'          => 'Create',
             'add-title'       => 'Create Tax Category',
             'edit-title'      => 'Edit Tax Category',
             'save-btn-title'  => 'Save Tax Category',
