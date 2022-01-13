@@ -511,7 +511,24 @@
             .card-title {
                 color: rgba(255,255,255,.8);
             }    
-            .card-info {    
+            .card-info { 
+                ul {
+                    li {                     
+                        .description {
+                            margin-top: 10px;
+    
+                            .name {
+                                 color: rgba(255,255,255,.8);
+                            }
+    
+                            .info {
+                                 color: rgba(255,255,255,.8);
+                                margin-top: 5px;
+                            }
+                        }
+                    }
+                }    
+                               
                 .no-result-found { 
                     p {
                         color: rgba(255,255,255,.8);
@@ -522,12 +539,15 @@
         .dashboard-stats {            
             .dashboard-card {
                 background: #071e37;
-                box-shadow: 0 5px 10px 2px rgb(0 0 0 / 80%);           
+                box-shadow: 0 5px 10px 2px rgb(0 0 0 / 80%);       
+                
+                .title{
+                    color: rgba(255,255,255,.8);
+                }
                 .data {
                     color: $white;
                     .progress {
-                        color: rgba(255,255,255,.8);
-    
+                        color: rgba(255,255,255,.8);    
                     }
                 }
             }
@@ -583,11 +603,6 @@
         border-bottom: 1px solid #232d36;
         cursor: default;
     }
-
-    // .btn.btn-primary {
-    //     background: rgba(255, 255, 255, 0.8);
-    //     color: $black;
-    // }
 
     .flatpickr-calendar {
         background: transparent;
