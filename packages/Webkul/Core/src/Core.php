@@ -424,7 +424,7 @@ class Core
      */
     public function getCurrency()
     {
-        return self::$currency;
+        return self::$currency ?: $this->getChannelBaseCurrency();
     }
 
     /**
