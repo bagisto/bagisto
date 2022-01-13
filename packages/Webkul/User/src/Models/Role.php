@@ -19,12 +19,19 @@ class Role extends Model implements RoleContract
         'permissions',
     ];
 
+    /**
+     * The attributes that are castable.
+     *
+     * @var array
+     */
     protected $casts = [
         'permissions' => 'array',
     ];
 
     /**
      * Get the admins.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function admins()
     {

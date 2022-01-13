@@ -38,6 +38,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->publishes([
             dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),
+            dirname(__DIR__) . '/Config/sanctum.php' => config_path('sanctum.php'),
             dirname(__DIR__) . '/Config/scout.php'   => config_path('scout.php'),
         ]);
 

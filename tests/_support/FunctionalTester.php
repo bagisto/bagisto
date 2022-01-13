@@ -1,15 +1,14 @@
 <?php
 
 use Codeception\Actor;
-use Webkul\User\Models\Admin;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Webkul\Customer\Models\Customer;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\RouteCollection;
+use Webkul\Customer\Models\Customer;
+use Webkul\User\Models\Admin;
 
 /**
- * Inherited Methods
+ * Inherited methods.
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -28,16 +27,12 @@ class FunctionalTester extends Actor
     use _generated\FunctionalTesterActions;
 
     /**
-     * Define custom actions here
-     */
-
-    /**
      * Set the logged in user to the admin identity.
      *
-     * @param \Webkul\User\Models\Admin|null $admin
+     * @param  \Webkul\User\Models\Admin|null $admin
+     * @return Admin
      *
      * @throws \Exception
-     * @returns Admin
      */
     public function loginAsAdmin(Admin $admin = null): Admin
     {
@@ -49,11 +44,11 @@ class FunctionalTester extends Actor
 
         if (! $admin) {
             throw new Exception(
-                'Admin user not found in database. Please ensure Seeders are executed');
+                'Admin user not found in database. Please ensure Seeders are executed'
+            );
         }
 
-        Auth::guard('admin')
-            ->login($admin);
+        Auth::guard('admin')->login($admin);
 
         $I->seeAuthentication('admin');
 
@@ -64,9 +59,9 @@ class FunctionalTester extends Actor
      * Set the logged in user to the customer identity.
      *
      * @param \Webkul\User\Models\Customer|null $customer
+     * @return Customer
      *
      * @throws \Exception
-     * @returns Customer
      */
     public function loginAsCustomer(Customer $customer = null): Customer
     {
@@ -76,8 +71,7 @@ class FunctionalTester extends Actor
             $customer = $I->have(Customer::class);
         }
 
-        Auth::guard('customer')
-            ->login($customer);
+        Auth::guard('customer')->login($customer);
 
         $I->seeAuthentication('customer');
 
@@ -85,9 +79,12 @@ class FunctionalTester extends Actor
     }
 
     /**
-     * @param string $name
-     * @param array  $params
-     * @param bool   $routeCheck set this to false if the action is doing a redirection
+     * On admin route.
+     *
+     * @param  string  $name
+     * @param  array  $params
+     * @param  bool  $routeCheck
+     * @return void
      */
     public function amOnAdminRoute(string $name, array $params = [], bool $routeCheck = true)
     {
@@ -98,19 +95,17 @@ class FunctionalTester extends Actor
             $I->seeCurrentRouteIs($name);
         }
 
-        /** @var RouteCollection $routes */
         $routes = Route::getRoutes();
         $middlewares = $routes->getByName($name)->middleware();
         $I->assertContains('admin', $middlewares, 'check that admin middleware is applied');
     }
 
     /**
-     * Set specific Webkul/Core configuration keys to a given value
+     * Set specific Webkul/Core configuration keys to a given value.
      *
-     * // TODO: change method as soon as there is a method to set core config data
+     * TODO: Change method as soon as there is a method to set core config data.
      *
-     * @param $data array containing 'code => value' pairs
-     *
+     * @param  $data array containing 'code => value' pairs
      * @return void
      */
     public function setConfigData($data): void
@@ -133,6 +128,11 @@ class FunctionalTester extends Actor
         }
     }
 
+    /**
+     * Use default theme.
+     *
+     * @return void.
+     */
     public function useDefaultTheme(): void
     {
         $channel = core()->getCurrentChannel();

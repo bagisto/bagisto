@@ -51,18 +51,6 @@ class CatalogRuleProductPrice
     }
 
     /**
-     * Return current logged in customer
-     *
-     * @return  \Webkul\Customer\Contracts\Customer|bool
-     */
-    public function getCurrentCustomer()
-    {
-        $guard = request()->has('token') ? 'api' : 'customer';
-
-        return auth()->guard($guard);
-    }
-
-    /**
      * Collect discount on cart
      *
      * @param  int  $batchCount
@@ -198,8 +186,8 @@ class CatalogRuleProductPrice
      */
     public function getRulePrice($product)
     {
-        if ($this->getCurrentCustomer()->check()) {
-            $customerGroupId = $this->getCurrentCustomer()->user()->customer_group_id;
+        if (auth()->guard()->check()) {
+            $customerGroupId = auth()->guard()->user()->customer_group_id;
         } else {
             $customerGroup = $this->customerGroupRepository->getCustomerGuestGroup();
 

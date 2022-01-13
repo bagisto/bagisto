@@ -1,0 +1,16 @@
+actor: ApiTester
+modules:
+  enabled:
+    - Asserts
+    - \Helper\Api
+    - \Helper\DataMocker
+    - Laravel:
+        cleanup: true
+        database_seeder_class: DatabaseSeeder
+        environment_file: .env.testing
+        parts: ORM
+        run_database_migrations: false
+        run_database_seeder: false
+    - REST:
+        url: /api/
+        depends: Laravel
