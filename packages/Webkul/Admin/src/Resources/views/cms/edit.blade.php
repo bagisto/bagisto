@@ -4,6 +4,23 @@
     {{ __('admin::app.cms.pages.edit-title') }}
 @stop
 
+@push('css')
+    <style>
+    @media only screen and (max-width: 768px){
+        .content-container .content .page-header .page-action {
+            position: absolute !important;
+            right: 10px !important;
+        }
+
+        .content-container .content .page-header .page-action button {
+            position: relative;
+            right: 0px !important;
+            top: 0px !important;
+        }
+    }
+    </style>
+@endpush
+
 @section('content')
     <div class="content">
         @php
