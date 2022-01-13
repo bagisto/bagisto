@@ -1500,6 +1500,18 @@ modal {
     }
 }
 
+@media only screen and (max-width: 393px){
+    .notification{
+        width: 393px;
+    }
+}
+
+@media only screen and (max-width: 390px){
+    .notification{
+        width: 390px;
+    }
+}
+
 @media only screen and (max-width: 375px){
     .notification{
         width: 375px;
