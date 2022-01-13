@@ -1,5 +1,5 @@
 @import "colors";
-$toggleSize: 24px;
+$toggleSize: 31px;
 $toggleMargin: -25px 10px;
 $toggleLine: 2px;
 $toggleColor: #3c41ff;
@@ -40,8 +40,11 @@ $toggleColor: #3c41ff;
   }
   
   .nav-toggle {
-    $offset: $toggleSize * 0.5;    
+    background-image: url(./../images/hamburger.svg);  
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
+    top: 8px;
     width: $toggleSize;
     height: $toggleSize;
     margin: $toggleMargin;
@@ -49,26 +52,6 @@ $toggleColor: #3c41ff;
     
     &:hover {
       cursor: pointer;
-    }
-      
-    &:before, &:after {
-      content: "";
-      position: absolute;
-      top: #{$toggleSize - $toggleLine / 2};
-      left: 0;
-      transform: translate(0, 0);
-      width: 100%;
-      height: $toggleLine;
-      background: $toggleColor;
-      transition: transform .3s ease, box-shadow .3s ease;
-    }
-    
-    &:before {
-      box-shadow: 0 #{$offset / 1.5} 0 0 $toggleColor;
-    }
-    
-    &:after {
-      box-shadow: 0 #{-$offset / 1.5} 0 0 $toggleColor;
     }
   }
 
