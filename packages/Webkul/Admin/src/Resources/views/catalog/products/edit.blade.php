@@ -4,6 +4,17 @@
     {{ __('admin::app.catalog.products.edit-title') }}
 @stop
 
+@push('css')
+    <style>
+        @media only screen and (max-width: 768px){
+            .content-container .content .page-header .page-title .control-group .control{
+                width: 100% !important;
+                margin-top:-25px !important;
+            }
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="content">
         @php
