@@ -103,7 +103,7 @@
                 </label>
 
                 <div class="col-12">
-                    <date>
+                    <date id="date-of-date">
                         <input
                             type="date"
                             name="date_of_birth"
