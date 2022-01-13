@@ -420,7 +420,7 @@ class Core
     /**
      * Get currency.
      *
-     * Will return null if not found.
+     * Will return null if not set.
      *
      * @return \Webkul\Core\Models\Currency
      */
