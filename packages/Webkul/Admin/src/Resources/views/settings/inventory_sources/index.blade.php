@@ -13,7 +13,7 @@
 
             <div class="page-action">
                 <a href="{{ route('admin.inventory_sources.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.settings.inventory_sources.add-title') }}
+                    {{ __('admin::app.settings.inventory_sources.add') }}
                 </a>
             </div>
         </div>

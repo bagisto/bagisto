@@ -764,18 +764,12 @@ body {
                 .page-action {
                     position: absolute;
                     right: 10px;
-                    margin-top: 0px;
+                    margin-top: 0px;  
 
                     .export-import{
                         margin-top: -15px;
                     }
-
-                    button{
-                        position: absolute;
-                        right: 2px;
-                        top: 0px;
-                    }
-                   
+     
                     * {
                         display: inline-block;                        
                     }    
