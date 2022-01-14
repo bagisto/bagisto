@@ -256,8 +256,8 @@ class ProductRepository extends Repository
                 if (count($priceRange) > 0) {
                     $customerGroupId = null;
 
-                    if (Cart::getCurrentCustomer()->check()) {
-                        $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
+                    if (auth()->guard()->check()) {
+                        $customerGroupId = auth()->guard()->user()->customer_group_id;
                     } else {
                         $customerGuestGroup = app('Webkul\Customer\Repositories\CustomerGroupRepository')->getCustomerGuestGroup();
 

@@ -2,15 +2,15 @@
 
 namespace Helper;
 
-// here you can define custom actions
-// all public methods declared in helper class will be available in $I
+use Webkul\Core\Models\Channel;
 
 class Functional extends \Codeception\Module
 {
     /**
      * Apply the given theme by setting the value to the default (or given) channel.
      *
-     * @param string $theme
+     * @param  string  $theme
+     * @return void
      */
     public function applyTheme(string $theme, string $channel = 'default'): void
     {

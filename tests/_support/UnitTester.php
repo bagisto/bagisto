@@ -3,7 +3,7 @@
 use Codeception\Stub;
 
 /**
- * Inherited Methods
+ * Inherited methods.
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -21,22 +21,16 @@ class UnitTester extends \Codeception\Actor
 {
     use _generated\UnitTesterActions;
 
-   /**
-    * Define custom actions here
-    */
-
     /**
-     * execute any function of a class (also private/protected) and return its return
+     * Execute any function of a class (also private/protected) and return its return.
      *
-     * @param string|object $className name of the class (FQCN) or an instance of it
-     * @param string        $functionName name of the function which will be executed
-     * @param array         $methodParams params the function will be executed with
-     * @param array         $constructParams params which will be called in constructor. Will be ignored if $className
-     *     is already an instance of an object.
-     * @param array         $mocks mock/stub overrides of methods and properties. Will be ignored if $className is
-     *     already an instance of an object.
-     *
+     * @param  string|object  $className
+     * @param  string  $functionName
+     * @param  array  $methodParams
+     * @param  array  $constructParams
+     * @param  array  $mocks
      * @return mixed
+     *
      * @throws \Exception
      */
     public function executeFunction(
@@ -47,7 +41,9 @@ class UnitTester extends \Codeception\Actor
         array $mocks = []
     ) {
         $I = $this;
-        $I->comment('I execute function "'
+
+        $I->comment(
+            'I execute function "'
             . $functionName
             . '" of class "'
             . (is_object($className) ? get_class($className) : $className)
@@ -59,9 +55,13 @@ class UnitTester extends \Codeception\Actor
             . count($mocks)
             . ' mocked class-methods/params'
         );
+
         $class = new \ReflectionClass($className);
+
         $method = $class->getMethod($functionName);
+
         $method->setAccessible(true);
+
         if (is_object($className)) {
             $reflectedClass = $className;
         } elseif (empty($constructParams)) {

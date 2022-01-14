@@ -19,7 +19,7 @@ trait CartTools
      */
     public function putCart($cart)
     {
-        if (! $this->getCurrentCustomer()->check()) {
+        if (! auth()->guard()->check()) {
             session()->put('cart', $cart);
         }
     }
@@ -33,7 +33,7 @@ trait CartTools
     {
         if (session()->has('cart')) {
             $cart = $this->cartRepository->findOneWhere([
-                'customer_id' => $this->getCurrentCustomer()->user()->id,
+                'customer_id' => auth()->guard()->user()->id,
                 'is_active'   => 1,
             ]);
 
@@ -44,11 +44,11 @@ trait CartTools
              */
             if (! $cart) {
                 $this->cartRepository->update([
-                    'customer_id'         => $this->getCurrentCustomer()->user()->id,
+                    'customer_id'         => auth()->guard()->user()->id,
                     'is_guest'            => 0,
-                    'customer_first_name' => $this->getCurrentCustomer()->user()->first_name,
-                    'customer_last_name'  => $this->getCurrentCustomer()->user()->last_name,
-                    'customer_email'      => $this->getCurrentCustomer()->user()->email,
+                    'customer_first_name' => auth()->guard()->user()->first_name,
+                    'customer_last_name'  => auth()->guard()->user()->last_name,
+                    'customer_email'      => auth()->guard()->user()->email,
                 ], $guestCart->id);
 
                 session()->forget('cart');
@@ -204,7 +204,7 @@ trait CartTools
         }
 
         $wishlistItems = $this->wishlistRepository->findWhere([
-            'customer_id' => $this->getCurrentCustomer()->user()->id,
+            'customer_id' => auth()->guard()->user()->id,
             'product_id'  => $cartItem->product_id,
         ]);
 
@@ -225,7 +225,7 @@ trait CartTools
         if (! $found) {
             $this->wishlistRepository->create([
                 'channel_id'  => $cart->channel_id,
-                'customer_id' => $this->getCurrentCustomer()->user()->id,
+                'customer_id' => auth()->guard()->user()->id,
                 'product_id'  => $cartItem->product_id,
                 'additional'  => $cartItem->additional,
             ]);

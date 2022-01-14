@@ -111,18 +111,6 @@ class Cart
     }
 
     /**
-     * Return current logged in customer.
-     *
-     * @return \Webkul\Customer\Contracts\Customer|bool
-     */
-    public function getCurrentCustomer()
-    {
-        $guard = request()->has('token') ? 'api' : 'customer';
-
-        return auth()->guard($guard);
-    }
-
-    /**
      * Returns cart.
      *
      * @return \Webkul\Checkout\Contracts\Cart|null
@@ -131,9 +119,9 @@ class Cart
     {
         $cart = null;
 
-        if ($this->getCurrentCustomer()->check()) {
+        if (auth()->guard()->check()) {
             $cart = $this->cartRepository->findOneWhere([
-                'customer_id' => $this->getCurrentCustomer()->user()->id,
+                'customer_id' => auth()->guard()->user()->id,
                 'is_active'   => 1,
             ]);
         } else if (session()->has('cart')) {
@@ -261,12 +249,12 @@ class Cart
         /**
          * Fill in the customer data, as far as possible.
          */
-        if ($this->getCurrentCustomer()->check()) {
-            $cartData['customer_id'] = $this->getCurrentCustomer()->user()->id;
+        if (auth()->guard()->check()) {
+            $cartData['customer_id'] = auth()->guard()->user()->id;
             $cartData['is_guest'] = 0;
-            $cartData['customer_first_name'] = $this->getCurrentCustomer()->user()->first_name;
-            $cartData['customer_last_name'] = $this->getCurrentCustomer()->user()->last_name;
-            $cartData['customer_email'] = $this->getCurrentCustomer()->user()->email;
+            $cartData['customer_first_name'] = auth()->guard()->user()->first_name;
+            $cartData['customer_last_name'] = auth()->guard()->user()->last_name;
+            $cartData['customer_email'] = auth()->guard()->user()->email;
         } else {
             $cartData['is_guest'] = 1;
         }
@@ -573,8 +561,8 @@ class Cart
                 $address = $cart->billing_address;
             }
 
-            if ($address === null && auth()->guard('customer')->check()) {
-                $address = auth()->guard('customer')->user()->addresses()
+            if ($address === null && auth()->guard()->check()) {
+                $address = auth()->guard()->user()->addresses()
                     ->where('default_address', 1)->first();
             }
 
@@ -670,7 +658,7 @@ class Cart
             'customer_email'        => $data['customer_email'],
             'customer_first_name'   => $data['customer_first_name'],
             'customer_last_name'    => $data['customer_last_name'],
-            'customer'              => $this->getCurrentCustomer()->check() ? $this->getCurrentCustomer()->user() : null,
+            'customer'              => auth()->guard()->check() ? auth()->guard()->user() : null,
             'total_item_count'      => $data['items_count'],
             'total_qty_ordered'     => $data['items_qty'],
             'base_currency_code'    => $data['base_currency_code'],
@@ -809,8 +797,8 @@ class Cart
     private function assignCustomerFields(\Webkul\Checkout\Contracts\Cart $cart): void
     {
         if (
-            $this->getCurrentCustomer()->check()
-            && ($user = $this->getCurrentCustomer()->user())
+            auth()->guard()->check()
+            && ($user = auth()->guard()->user())
             && $this->profileIsComplete($user)
         ) {
             $cart->customer_email = $user->email;
@@ -880,7 +868,7 @@ class Cart
     {
         $attributes = [];
 
-        $user = $this->getCurrentCustomer()->user();
+        $user = auth()->guard()->user();
 
         if ($user) {
             $attributes['first_name'] = $user->first_name;

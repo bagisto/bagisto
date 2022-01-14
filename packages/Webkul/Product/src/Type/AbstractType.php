@@ -652,8 +652,8 @@ abstract class AbstractType
 
         $customerGroupId = null;
 
-        if (Cart::getCurrentCustomer()->check()) {
-            $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
+        if (auth()->guard()->check()) {
+            $customerGroupId = auth()->guard()->user()->customer_group_id;
         } else {
             $customerGuestGroup = app(CustomerGroupRepository::class)->getCustomerGuestGroup();
 
@@ -1008,8 +1008,8 @@ abstract class AbstractType
         $haveOffers = true;
         $customerGroupId = null;
 
-        if (Cart::getCurrentCustomer()->check()) {
-            $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
+        if (auth()->guard()->check()) {
+            $customerGroupId = auth()->guard()->user()->customer_group_id;
         } else {
             $customerGroupRepository = app('Webkul\Customer\Repositories\CustomerGroupRepository');
 

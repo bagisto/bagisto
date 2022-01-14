@@ -93,3 +93,16 @@
         }
     }
 }
+
+#date-of-birth:after{
+    background-image: url(../images/Icon-Calendar.svg);
+    width: 24px;
+    height: 24px;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -34px;
+    pointer-events: none;
+    position: absolute;
+    top: 14%;
+}
