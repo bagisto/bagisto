@@ -45,7 +45,7 @@
             {!! view_render_event('bagisto.admin.layout.nav-left.after') !!}
 
 
-            <div class="content-container" v-bind:style="isMenuOpen ? 'padding-left:200px' : 'padding-left:56px'">
+            <div class="content-container" v-bind:style="isMenuOpen ? 'padding-start:200px' : 'padding-start:56px'">
 
                 {!! view_render_event('bagisto.admin.layout.content.before') !!}
 
@@ -61,7 +61,7 @@
 
             if(localStorage.getItem('dark-mode') == 'true'){
                 document.body.classList.toggle("dark-mode");
-            }    
+            }
 
             @foreach (['success', 'warning', 'error', 'info'] as $key)
                 @if ($value = session($key))

@@ -1,30 +1,38 @@
-<template>   
-     <div class="menubar-bottom" @click="toggle">
+<template>
+    <div class="menubar-bottom" @click="toggle">
         <i class="icon" :class="iconClass"></i>
     </div>
 </template>
 
 <script>
-export default {  
+export default {
 
-    data(){
+    data() {
         return {
-            iconClass : 'accordian-right-icon',
-            leftIconClass : 'accordian-left-icon',
-            rightIconClass : 'accordian-right-icon'            
+            iconClass: 'accordian-right-icon',
+            leftIconClass: 'accordian-left-icon',
+            rightIconClass: 'accordian-right-icon'
         }
+    },
+
+    mounted() {
+        this.iconPosition();
     },
 
     methods: {
         toggle: function () {
             this.$root.toggleMenu();
 
+            this.iconPosition();
+        },
+
+        iconPosition() {
             if(this.$root.isMenuOpen && this.iconClass == 'accordian-right-icon'){
                 this.iconClass = this.leftIconClass;
             }else{
                 this.iconClass = this.rightIconClass;
             }
-        },
+        }
     }
 }
 </script>

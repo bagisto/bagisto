@@ -21,13 +21,47 @@
     }
 
     .navbar-left {
+        right: 0;
         border-left: 1px solid rgba(162, 162, 162, 0.2);
         border-right: none;
         background-color: $white;
+
+        ul.menubar {
+
+            li.menu-item {
+
+                ul.sub-menubar {
+                    left: 0;
+                    right: 56px;
+
+                    li.sub-menu-item {
+                        a {
+                            padding-right: 52px;
+                            padding-left: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.open {
+            ul.menubar {
+                li.menu-item {
+                    ul.sub-menubar {
+                        li.sub-menu-item {
+                            a {
+                                padding-right: 52px;
+                                padding-left: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .content-container {
-        padding-right: 90px;
+        padding-right: 56px;
         padding-left: 0px;
 
         .content .page-header {
@@ -47,12 +81,6 @@
                 margin-right: 20px;
                 margin-left: 0px;
             }
-        }
-
-        .content-wrapper {
-            padding: 25px 25px 25px 25px;
-            margin-right: 280px;
-            margin-left: 0px;
         }
 
         .aside-nav .active i {
