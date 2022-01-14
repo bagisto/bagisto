@@ -235,6 +235,7 @@ body {
 
             &:hover {
                 overflow: visible;
+                background: #f8f8f8;
 
                 ul.sub-menubar {
                     display: block;
@@ -304,8 +305,8 @@ body {
                 }
 
                 &.active {
-                    background: $white;
-                    width: calc(100% - 1px);
+                    background: #fff;
+                    width: 100%;
 
                     .menu-label {
                         color: $black;
@@ -313,8 +314,8 @@ body {
 
                     ul.sub-menubar {
                         display: block;
-                        background-color: $white;
-                        border:none !important;
+                        background-color: #f8f8f8;
+                        border: none !important;
 
                         .sub-menu-item {
                             .menu-label {
@@ -322,7 +323,7 @@ body {
                             }
 
                             &.active, &:hover {
-                                background-color: #e6e6e6;
+                                background-color: #eee;
                                 .menu-label {
                                     color: #000 !important;                                    
                                 }
@@ -549,7 +550,7 @@ body {
 
     li {
         padding: 10px;
-        border-bottom: 1px solid #c7c7c7;
+        border-bottom: 1px solid #ddd;
         position: relative;
       
         .notif-icon{
@@ -632,7 +633,7 @@ body {
 }
 
 .read{
-    background-color: #e8e8e8;
+    background-color: #f6f6f6;
 }
 
 .page-item.active {

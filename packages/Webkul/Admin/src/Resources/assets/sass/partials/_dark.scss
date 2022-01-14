@@ -132,9 +132,9 @@
                     }
     
                     &.active {
-                        background: $dark-bg;
-                        width: calc(100% - 1px);
-    
+                        background: #051e37;
+                        width: 100%;
+                        
                         .menu-label {
                             color: #fff;
                         }
