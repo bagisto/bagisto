@@ -6,7 +6,6 @@
 
 @section('content')
     <div class="content">
-
         <form method="POST" action="{{ route('admin.locales.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
@@ -51,6 +50,18 @@
                                     <option value="rtl" title="Text direction right to left">RTL</option>
                                 </select>
                                 <span class="control-error" v-if="errors.has('direction')">@{{ errors.first('direction') }}</span>
+                            </div>
+
+                            <div class="control-group">
+                                <label>{{ __('velocity::app.admin.general.locale_logo') }}</label>
+
+                                <image-wrapper
+                                    input-name="locale_image"
+                                    :multiple="false"
+                                    :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'">
+                                </image-wrapper>
+
+                                <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-locale-resolution') }}</span>
                             </div>
 
                             {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
