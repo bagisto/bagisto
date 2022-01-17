@@ -33,7 +33,7 @@ class OrderDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders')
-            ->leftJoin('order_items', 'order_items.order_id', '=', 'orders.id')
+            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
             ->leftJoin('addresses as order_address_shipping', function ($leftJoin) {
                 $leftJoin->on('order_address_shipping.order_id', '=', 'orders.id')
                     ->where('order_address_shipping.address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
@@ -48,13 +48,13 @@ class OrderDataGrid extends DataGrid
                 'orders.base_sub_total',
                 'orders.base_grand_total',
                 'orders.created_at',
-                'order_items.weight',
+                DB::raw('SUM(`total_weight`) as total_weight'),
                 'channel_name',
                 'status'
             )
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'))
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'))
-            ->groupBy('orders.id');
+            ->groupBy('order_items.order_id');
 
         $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
         $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
@@ -81,7 +81,7 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'weight',
+            'index'      => 'total_weight',
             'label'      => trans('admin::app.catalog.products.weight'),
             'type'       => 'string',
             'searchable' => false,
