@@ -7,6 +7,7 @@
 @section('page-detail-wrapper')
     <div class="account-head mb-15">
         <span class="account-heading">{{ __('shop::app.customer.account.profile.index.title') }}</span>
+
         <span></span>
     </div>
 
@@ -61,9 +62,14 @@
                         class="control styled-select"
                         data-vv-as="&quot;{{ __('shop::app.customer.account.profile.gender') }}&quot;">
 
-                        <option value=""  @if ($customer->gender == "") selected @endif></option>
-                        <option
-                            value="Other"
+                        <option value=""
+                            @if ($customer->gender == "")
+                                selected="selected"
+                            @endif>
+                            {{ __('admin::app.customers.customers.select-gender') }}
+                        </option>
+
+                        <option value="Other"
                             @if ($customer->gender == "Other")
                                 selected="selected"
                             @endif>
@@ -148,7 +154,7 @@
                 <label class="col-12">
                     {{ __('admin::app.catalog.categories.image') }}
                 </label>
-                
+
                 <div class="col-12">
                     <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false" :images='"{{ $customer->image_url }}"'></image-wrapper>
 
