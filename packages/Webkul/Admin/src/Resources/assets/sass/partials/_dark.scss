@@ -698,4 +698,15 @@
         border-color: #24384c !important;
     }
 
+    .control-group .slider {
+        top: -2px !important;
+        right: -2px !important  ;
+        background-color: #000 !important;
+        border: 1px solid #24384c !important;
+    }
+
+    .control-group input:checked + .slider {
+        background-color: #000 !important;
+    }
+
 }
