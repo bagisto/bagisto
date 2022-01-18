@@ -22,18 +22,6 @@
         @stack('css')
 
         {!! view_render_event('bagisto.admin.layout.head') !!}
-
-        @php 
-
-        $paddingNavbar = 'padding-left:56px';
-        $paddingNavbarOpen = 'padding-left:200px';
-
-        if(core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl') {
-            $paddingNavbar = 'padding-right:56px';
-            $paddingNavbarOpen = 'padding-right:200px';
-        }
-
-        @endphp
     </head>
 
     <body @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif style="scroll-behavior: smooth;">
@@ -55,7 +43,7 @@
 
             {!! view_render_event('bagisto.admin.layout.nav-left.after') !!}
 
-            <div class="content-container" v-bind:style="isMenuOpen ? '{{ $paddingNavbarOpen }}' : '{{ $paddingNavbar }}'">
+            <div :class="isMenuOpen ? 'content-container padding-container-navbar-expand' : 'content-container padding-container-navbar-not-expand'">
 
                 {!! view_render_event('bagisto.admin.layout.content.before') !!}
 

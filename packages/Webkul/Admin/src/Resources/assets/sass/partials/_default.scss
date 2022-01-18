@@ -9,6 +9,24 @@ body {
     background-color: $body-background;
 }
 
+.padding-container-navbar-not-expand{
+    padding-left:56px !important;
+}
+
+.padding-container-navbar-expand{
+    padding-left:200px !important;
+}
+
+.rtl{
+    .padding-container-navbar-not-expand{
+        padding-right:56px !important;
+    }
+    
+    .padding-container-navbar-expand{
+        padding-right:200px !important;
+    }
+}
+
 .dark-mode-button {
     background: $blue;
     border: none;
