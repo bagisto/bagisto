@@ -9,7 +9,7 @@ body {
     background-color: $body-background;
 }
 
-.dark-mode-button{
+.dark-mode-button {
     background: $blue;
     border: none;
     padding: 10px 30px;
@@ -38,18 +38,18 @@ body {
         height: 60px;
         display: flex;
         justify-content: space-between;
-        align-items: center; 
+        align-items: center;
 
-        .hamburger{
+        .hamburger {
             display: block;
             width: 48px;
             height: 48px;
 
-            &::before{
+            &::before {
                 content: "";
                 width: 24px;
                 height: 24px;
-                background-color: rebeccapurple;         
+                background-color: rebeccapurple;
                 background-image: url("../assets/image/Icon-Sortable.svg");
                 display: block;
             }
@@ -98,6 +98,7 @@ body {
                 display: block;
                 text-align: left;
             }
+
             .role {
                 font-size: 12px;
                 color: #8e8e8e;
@@ -134,6 +135,7 @@ body {
                 display: block;
                 text-align: left;
             }
+
             .role {
                 font-size: 12px;
                 color: #8e8e8e;
@@ -157,12 +159,12 @@ body {
             font-size: 15px;
             cursor: pointer;
             position: relative;
-            border-left: 1px solid $seprator;            
+            border-left: 1px solid $seprator;
         }
     }
 }
 
-.navbar-left {   
+.navbar-left {
     left: 0;
     bottom: 0;
     top: 60px;
@@ -170,9 +172,9 @@ body {
     width: 56px;
     height: 100vh !important;
     position: fixed;
-    background-color: $white;   
-    border-right:1px solid #ececec;
-    
+    background-color: $white;
+    border-right: 1px solid #ececec;
+
     ul.menubar {
 
         li.menu-item {
@@ -180,7 +182,7 @@ body {
             position: relative;
             overflow: hidden;
 
-            > a {
+            >a {
                 padding: 5px 2px;
                 display: block;
                 color: $black;
@@ -197,13 +199,12 @@ body {
                     color: #B0BEC5;
                 }
 
-                .arrow-icon{
+                .arrow-icon {
                     display: none;
                 }
 
                 .arrow-icon-left {
                     float: right;
-                   
                 }
 
                 .arrow-icon-right {
@@ -211,8 +212,9 @@ body {
                     margin-left: 20px;
                 }
 
-                &.active,&:hover {
-                    padding: 5px 2px;                  
+                &.active,
+                &:hover {
+                    padding: 5px 2px;
                 }
             }
 
@@ -232,14 +234,14 @@ body {
                 border: 1px solid #eee;
                 border-left: 0;
                 border-radius: 0 3px 3px 0;
-                
+
                 li.sub-menu-item {
                     a {
                         display: block;
                         padding: 8px 12px;
                         color: $black;
                         font-size: 12px;
-                    }    
+                    }
                 }
             }
 
@@ -251,17 +253,18 @@ body {
 
                     .sub-menu-item {
                         .menu-label {
-                            color: $black;                            
+                            color: $black;
                         }
 
                         &.active {
                             background-color: #e6e6e6;
+
                             .menu-label {
                                 color: $blue;
                             }
                         }
 
-                        &:hover{
+                        &:hover {
                             .menu-label {
                                 color: $blue;
                             }
@@ -274,7 +277,7 @@ body {
 
     &.open {
         width: 200px;
-      
+
 
         ul.menubar {
             height: 86vh;
@@ -305,7 +308,7 @@ body {
                     border-radius: 0;
                     box-shadow: unset;
                     border: 0;
-                
+
                     li.sub-menu-item {
                         a {
                             padding-left: 52px;
@@ -324,24 +327,26 @@ body {
                     ul.sub-menubar {
                         display: block;
                         background-color: $white;
-                        border:none !important;
+                        border: none !important;
 
                         .sub-menu-item {
                             .menu-label {
                                 color: $black;
                             }
 
-                            &.active, &:hover {
+                            &.active,
+                            &:hover {
                                 background-color: #e6e6e6;
+
                                 .menu-label {
-                                    color: #000 !important;                                    
+                                    color: #000 !important;
                                 }
                             }
                         }
                     }
                 }
 
-                &:hover {                   
+                &:hover {
                     .menu-label {
                         color: $black;
                     }
@@ -354,7 +359,7 @@ body {
         padding: 12px;
         cursor: pointer;
         position: fixed;
-        bottom:0;     
+        bottom: 0;
         background-color: $white;
         width: 56px;
     }
@@ -460,35 +465,35 @@ body {
 
 .rtl {
 
-    .navbar-left {   
+    .navbar-left {
         right: 0 !important;
-        
+
         ul.menubar {
-    
+
             li.menu-item {
-                  
+
                 ul.sub-menubar {
                     top: 0;
                     right: 56px !important;
-                }    
+                }
             }
-        } 
-        
-        &.open {         
-    
+        }
+
+        &.open {
+
             ul.menubar {
-                
-                li.menu-item {                   
-    
+
+                li.menu-item {
+
                     ul.sub-menubar {
-                    
+
                         li.sub-menu-item {
                             a {
                                 padding-right: 52px;
                                 padding-left: 0px;
                             }
                         }
-                    }                 
+                    }
                 }
             }
         }
@@ -509,7 +514,7 @@ body {
 }
 
 .content-container {
-    padding-left: 56px; 
+    padding-left: 56px;
     height: calc(100% - 60px);
     width: 100%;
     margin-top: 60px;
@@ -519,7 +524,7 @@ body {
     }
 
     .content-wrapper {
-        margin-top:1px;
+        margin-top: 1px;
     }
 
     .content {
@@ -531,8 +536,8 @@ body {
             position: sticky;
             top: 60px;
             z-index: 3;
-            background-color: $white;            
-            @include box-shadow(0 3px 6px 0 rgba(0, 0, 0, 0.05));  
+            background-color: $white;
+            @include box-shadow(0 3px 6px 0 rgba(0, 0, 0, 0.05));
 
             .page-title {
                 float: left;
@@ -556,7 +561,7 @@ body {
 
             .page-action {
                 float: right;
-                margin-top:-5px;
+                margin-top: -5px;
 
                 * {
                     display: inline-block;
@@ -588,7 +593,7 @@ body {
     }
 }
 
-.notif{
+.notif {
 
     background-color: $white;
 
@@ -596,14 +601,14 @@ body {
         padding: 10px;
         border-bottom: 1px solid #c7c7c7;
         position: relative;
-      
-        .notif-icon{
+
+        .notif-icon {
             position: absolute;
             height: 40px;
             width: 40px;
             left: 12px;
             border-radius: 5px;
-    
+
             span {
                 position: absolute;
                 background-repeat: no-repeat;
@@ -611,49 +616,49 @@ body {
                 top: 5px;
                 left: 5px;
             }
-        }  
+        }
 
-        .notif-content > a{
+        .notif-content>a {
             text-decoration: none;
             color: rgba(58, 58, 58, 1);
         }
-    
-        .pending{
+
+        .pending {
             background-color: #f2c94c;
         }
-    
-        .processing{
+
+        .processing {
             background-color: #399cdb;
         }
-    
-        .canceled{
+
+        .canceled {
             background-color: $red;
         }
-    
-        .closed{
+
+        .closed {
             background-color: #eb5757;
         }
-    
-        .completed{
+
+        .completed {
             background-color: $green;
         }
-      
+
         .notif-content {
-          margin-left: 50px;
+            margin-left: 50px;
         }
     }
 
-    .read{
+    .read {
         color: rgba(58, 58, 58, 0.5);
 
-        .notif-content > a{
+        .notif-content>a {
             text-decoration: none;
             color: rgba(58, 58, 58, 0.5);
         }
     }
-}    
+}
 
-.notification-badge{
+.notification-badge {
     position: absolute;
     right: 13px;
     top: 6px;
@@ -666,77 +671,77 @@ body {
     font-weight: 900;
 }
 
-#search-icon{
+#search-icon {
     position: absolute;
     margin-top: 6px;
     margin-left: 151px;
 }
 
-.notif-filter{
+.notif-filter {
     margin-top: 0px !important;
 }
 
-.read{
+.read {
     background-color: #e8e8e8;
 }
 
 .page-item.active {
-	.page-link {
-	    color: $white !important;
-    }	
+    .page-link {
+        color: $white !important;
+    }
 }
 
-.switch-dark{
+.switch-dark {
     width: 75%;
 }
 
-.read-all{
+.read-all {
     color: #3a3a3a;
-    background:none;
-    border:none;
+    background: none;
+    border: none;
 }
 
-#notif-title{
+#notif-title {
     height: 50px;
     padding: 14px 10px;
     border-bottom: 1px solid #c7c7c7;
     cursor: default;
 }
 
-@media only screen and (min-width: 768px){  
-    .navbar-left{
+@media only screen and (min-width: 768px) {
+    .navbar-left {
         display: block;
-    }  
+    }
 
-    .navbar-top {      
+    .navbar-top {
 
         .navbar-top-right {
-           
+
             .profile {
 
-                .profile-info{
-                    display: inline-block; 
+                .profile-info {
+                    display: inline-block;
                 }
             }
         }
     }
 
-    #search-icon{
+    #search-icon {
         position: absolute;
         margin-top: 6px;
         margin-left: 151px;
     }
 
-    .notif-filter{
+    .notif-filter {
         margin-top: 0px !important;
     }
 
-    .switch-dark{
+    .switch-dark {
         width: 75%;
-    }    
+    }
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 768px) {
 
     h1 {
         font-size: 18px;
@@ -746,26 +751,26 @@ body {
         padding: 4px 6px;
     }
 
-    .navbar-top {    
-        .navbar-top-left {    
-            .hamburger{
+    .navbar-top {
+        .navbar-top-left {
+            .hamburger {
                 display: block;
             }
         }
-        
+
         .navbar-top-right {
-           
+
             .profile {
 
-                .profile-info{
+                .profile-info {
                     display: none;
                 }
-                
+
             }
         }
     }
 
-    .navbar-left{
+    .navbar-left {
         left: 0px;
         display: none;
     }
@@ -780,13 +785,13 @@ body {
         bottom: 0px;
         height: calc(100% - 60px);
         width: 100%;
-    
+
         .aside-nav {
             display: none;
         }
 
         .content {
-    
+
             .page-header {
 
                 .control-group {
@@ -801,58 +806,58 @@ body {
                 .page-title {
                     float: left;
                     width: 100%;
-    
-                    .back-link {                      
+
+                    .back-link {
                         margin-top: 0px;
                         margin-right: -1px;
                         height: 22px !important;
                         width: 22px !important;
-                    }   
+                    }
                 }
-                  
+
                 .page-action {
                     position: absolute;
                     right: 10px;
-                    margin-top: 0px;  
+                    margin-top: 0px;
 
-                    .export-import{
+                    .export-import {
                         margin-top: -15px;
                     }
-     
+
                     * {
-                        display: inline-block;                        
-                    }    
+                        display: inline-block;
+                    }
                 }
             }
         }
 
         .content-wrapper {
             margin-left: 0px;
-            margin-top:1px;
-        }   
+            margin-top: 1px;
+        }
     }
 
-    #search-icon{
+    #search-icon {
         position: absolute;
         margin-top: 6px;
         right: 16px;
     }
 
 
-    .notif-filter{
+    .notif-filter {
         margin-top: 12px !important;
     }
 
-    .switch-dark{
+    .switch-dark {
         width: 100%;
     }
 }
 
-@media only screen and (max-width: 411px){
+@media only screen and (max-width: 411px) {
     .content-container {
-      
+
         .content {
-    
+
             .page-header {
 
                 .control-group {
@@ -864,15 +869,15 @@ body {
                     margin-top: 40px;
                 }
             }
-        } 
+        }
     }
 }
 
-@media only screen and (max-width: 385px){
+@media only screen and (max-width: 385px) {
     .content-container {
-      
+
         .content {
-    
+
             .page-header {
 
                 .control-group {
@@ -884,15 +889,15 @@ body {
                     margin-top: 40px;
                 }
             }
-        } 
+        }
     }
 }
 
-@media only screen and (max-width: 320px){
+@media only screen and (max-width: 320px) {
     .content-container {
-      
+
         .content {
-    
+
             .page-header {
 
                 .control-group {
@@ -904,7 +909,6 @@ body {
                     margin-top: 40px;
                 }
             }
-        } 
+        }
     }
 }
-
