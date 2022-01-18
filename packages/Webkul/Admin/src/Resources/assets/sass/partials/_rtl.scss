@@ -48,23 +48,6 @@
                 margin-left: 0px;
             }
         }
-
-        .content-wrapper {
-            padding: 25px 25px 25px 25px;
-            margin-right: 280px;
-            margin-left: 0px;
-        }
-
-        .aside-nav .active i {
-            float: left;
-            transform: rotate(180deg);
-        }
-
-        .aside-nav:not(.active) {
-            + .content-wrapper {
-                margin-right: 0px;
-            }
-        }
     }
 
     .dashboard {

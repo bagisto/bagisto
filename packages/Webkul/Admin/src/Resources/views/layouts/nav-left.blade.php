@@ -35,7 +35,9 @@
                     <span class="menu-label">{{ trans($menuItem['name']) }}</span>
 
                     @if(count($menuItem['children']) || $menuItem['key'] == 'configuration' )
-                        <span class="icon arrow-icon {{ $menu->getActive($menuItem) == 'active' ? 'rotate-arrow-icon' : '' }} "></span>
+                        <span 
+                            class="icon arrow-icon {{ $menu->getActive($menuItem) == 'active' ? 'rotate-arrow-icon' : '' }}  {{ ( core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl' ) ? 'arrow-icon-right' :'arrow-icon-left' }}"
+                            ></span>
                     @endif
                 </a>
                 @if ($menuItem['key'] != 'configuration')
@@ -70,7 +72,7 @@
 
                     <span class="menu-label"> {{ __('admin::app.datagrid.locale') }}  {{ $allLocales[$currentLocaleCode] }} </span>
 
-                    <span class="icon arrow-icon"></span>                    
+                    <span class="icon arrow-icon  {{ $menu->getActive($menuItem) == 'active' ? 'rotate-arrow-icon' : '' }}  {{ ( core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl' ) ? 'arrow-icon-right' :'arrow-icon-left' }}"></span>                    
                 </a>
                 <ul class="sub-menubar">
                     @foreach ($allLocales as $code => $name)  

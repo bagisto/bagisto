@@ -201,6 +201,16 @@ body {
                     display: none;
                 }
 
+                .arrow-icon-left{
+                    float: right;
+                   
+                }
+
+                .arrow-icon-right{
+                    float: left;
+                    margin-left: 20px;
+                }
+
                 &.active,&:hover {
                     padding: 5px 2px;                  
                 }
@@ -449,6 +459,42 @@ body {
 }
 
 .rtl {
+
+    .navbar-left {   
+        right: 0 !important;
+        
+        ul.menubar {
+    
+            li.menu-item {
+                  
+                ul.sub-menubar {
+                    top: 0;
+                    right: 56px !important;
+                }    
+            }
+        } 
+        
+        &.open {         
+    
+            ul.menubar {
+                
+                li.menu-item {
+                   
+    
+                    ul.sub-menubar {
+                    
+                        li.sub-menu-item {
+                            a {
+                                padding-right: 52px;
+                                padding-left: 0px;
+                            }
+                        }
+                    }                 
+                }
+            }
+        }
+    }
+
     .ticket-list {
         .control-group {
             &.has-error {
@@ -862,3 +908,4 @@ body {
         } 
     }
 }
+
