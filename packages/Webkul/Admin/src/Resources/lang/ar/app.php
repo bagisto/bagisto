@@ -1565,4 +1565,28 @@ return [
             'resource-not-found' => 'تحذير: مطلوب :resource غير موجود في السجل.',
         ],
     ],
+
+    'notification' => [
+        'title'                       => 'تنبيه',
+        'title-plural'                => 'إشعارات',
+        'status'                      => [
+            'all'        => 'الجميع',
+            'pending'    => 'ريثما',
+            'processing' => 'معالجة',
+            'canceled'   => 'ألغيت',
+            'closed'     => 'مغلق',
+            'completed'  => 'منجز',
+        ],
+        'view-all'                    => 'عرض جميع الإخطارات',
+        'no-record'                   => 'لا يوجد سجلات',
+        'read-all'                    => 'ضع إشارة مقروء',
+        'notification-marked-success' => 'تم تعليم الإخطار بنجاح',
+        'order-status-messages'       => [
+            'completed'  => 'تم اكتمال الطلب',
+            'closed'     => 'الطلب مغلق',
+            'canceled'   => 'تم إلغاء الطلب',
+            'pending'    => 'انتظار الطلب',
+            'processing' => 'معالجة الطلب',
+        ],
+    ],
 ];

@@ -1572,4 +1572,28 @@ return [
             'resource-not-found' => 'Advertencia: Solicitado :resource no encontrado en el registro.',
         ],
     ],
+
+    'notification' => [
+        'title'                       => 'Notificación',
+        'title-plural'                => 'Notificaciones',
+        'status'                      => [
+            'all'        => 'todo',
+            'pending'    => 'Pendiente',
+            'processing' => 'Procesando',
+            'canceled'   => 'cancelar',
+            'closed'     => 'Cerrado',
+            'completed'  => 'terminado',
+        ],
+        'view-all'                    => 'Ver todas las notificaciones',
+        'no-record'                   => 'ningún record fue encontrado',
+        'read-all'                    => 'Marcar como leído',
+        'notification-marked-success' => 'Notificación marcada con éxito',
+        'order-status-messages'       => [
+            'completed'  => 'Pedido completado',
+            'closed'     => 'Orden Cerrada',
+            'canceled'   => 'Orden cancelada',
+            'pending'    => 'Orden pendiente',
+            'processing' => 'procesando orden',
+        ],
+    ],
 ];

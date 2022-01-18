@@ -1555,4 +1555,28 @@ return [
             'resource-not-found' => 'Waarschuwing: Gevraagd :resource niet gevonden in het record.',
         ],
     ],
+
+    'notification' => [
+        'title'                       => 'Notificaties',
+        'title-plural'                => 'Notificaties',
+        'status'                      => [
+            'all'        => 'Allemaal',
+            'pending'    => 'In behandeling',
+            'processing' => 'Verwerken',
+            'canceled'   => 'Geannuleerd',
+            'closed'     => 'Gesloten',
+            'completed'  => 'Voltooid',
+        ],
+        'view-all'                    => 'Bekijk alle meldingen',
+        'no-record'                   => 'Geen record gevonden',
+        'read-all'                    => 'Markeer als gelezen',
+        'notification-marked-success' => 'Melding succesvol gemarkeerd',
+        'order-status-messages'       => [
+            'completed'  => 'Bestelling voltooid',
+            'closed'     => 'Bestelling gesloten',
+            'canceled'   => 'Bestelling geannuleerd',
+            'pending'    => 'Order in behandeling',
+            'processing' => 'Orderverwerking',
+        ],
+    ],
 ];
