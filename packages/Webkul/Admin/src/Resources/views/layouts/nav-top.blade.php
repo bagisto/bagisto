@@ -40,6 +40,7 @@
             </div>
 
             <notification
+                notif-title="{{ __('admin::app.notification.notification-title') }}"
                 get-notification-url="{{ route('admin.notification.get-notification') }}"
                 view-all="{{ route('admin.notification.index') }}"
                 order-view-url="{{ \URL::to('/') }}/admin/viewed-notifications/"
