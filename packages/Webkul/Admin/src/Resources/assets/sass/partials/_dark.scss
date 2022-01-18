@@ -173,7 +173,7 @@
         .menubar-bottom {
             background-color: $dark-bg;
         }
-    }  
+    }   
     
     .nav-container {
 
@@ -699,3 +699,146 @@
     }
 
 }
+
+.rtl.dark-mode {
+
+    .navbar-left {          
+        background-color: $dark-bg;
+        border-right: 1px solid $dark-bg;
+
+        ul.menubar {
+            li.menu-item { 
+
+                > a {
+                    padding: 5px 2px;
+                    display: block;
+                    color: #000;
+                    width: 100%;
+    
+                    .icon {
+                        display: inline-block;
+                        vertical-align: middle;
+                        transform: scale(0.7);
+                    }
+    
+                    .menu-label {
+                        display: none;
+                        color: #B0BEC5;
+                    }
+    
+                    .arrow-icon{
+                        display: none;
+                    }
+    
+                    &.active,&:hover {
+                        padding: 5px 2px;
+                        background-color: rgba(1, 10, 20, .5);
+                    }
+                }       
+                
+                &.active{  
+                    > a{                 
+                        background-color: rgba(1, 10, 20, .5);
+                    }  
+                }
+                
+                &:hover {               
+    
+                    ul.sub-menubar {   
+                        background: #031425;
+                        box-shadow: none; 
+                        border: 1px solid #24384c;
+
+    
+                        .sub-menu-item {  
+
+                            .menu-label {
+                                color: #fff !important;                                    
+                            }
+        
+                            &.active, &:hover {
+                                background-color: #020f1c;
+                                .menu-label {
+                                    color: #fff !important;                                    
+                                }
+                            }                           
+                        }
+                    }
+                }
+            }
+        } 
+
+        &.open{
+            ul.menubar {
+                li.menu-item {
+                    a {
+                        .menu-label {
+                            font-size: 14px;
+                            font-weight: 200;
+                            display: inline-block;
+                            color: #B0BEC5;
+                        }
+    
+                        .arrow-icon {
+                            display: inline-block;
+                        }
+                    }
+    
+                    ul.sub-menubar {
+                        display: none;
+                        position: unset;
+                        background-color: transparent;
+                        border-radius: 0;
+                        box-shadow: unset;
+                        border: 0;
+                    
+                        li.sub-menu-item {
+                            a {
+                                padding-left: 52px;
+                            }
+                        }
+                    }
+    
+                    &.active {
+                        background: $dark-bg;
+                        width: calc(100% - 1px);
+    
+                        .menu-label {
+                            color: #fff;
+                        }
+    
+                        ul.sub-menubar {
+                            display: block;
+                            background-color: #031425;
+                            border:none !important;
+    
+                            .sub-menu-item {
+                                .menu-label {
+                                    color: #B0BEC5;
+                                }
+    
+                                &.active, &:hover {
+                                    background-color: rgba(1, 10, 20, .5);
+                                    .menu-label {
+                                        color: #fff !important;                                    
+                                    }
+                                }
+                            }
+                        }
+                    }
+    
+                    &:hover {
+                         background: $dark-bg;
+                        .menu-label {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .menubar-bottom {
+            background-color: $dark-bg;
+        }
+    }  
+}   
