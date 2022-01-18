@@ -1557,8 +1557,8 @@ return [
     ],
 
     'notification' => [
-        'title'                       => 'Kennisgeving',
-        'title-plural'                => 'Meldingen',
+        'title'                       => 'Notificaties',
+        'title-plural'                => 'Notificaties',
         'status'                      => [
             'all'        => 'Allemaal',
             'pending'    => 'In behandeling',
