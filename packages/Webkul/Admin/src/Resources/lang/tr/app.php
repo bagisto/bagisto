@@ -1543,4 +1543,5 @@ return [
             'resource-not-found' => 'Uyarı: İstenen :resource Kayıtta bulunamadı.',
         ],
     ],
+    
 ];
