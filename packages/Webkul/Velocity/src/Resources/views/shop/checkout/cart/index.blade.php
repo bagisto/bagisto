@@ -31,7 +31,7 @@
     <script type="text/x-template" id="cart-template">
         <div class="container">
             <section class="cart-details row no-margin col-12">
-                <h2 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h2>
+                <h2 class="cart-details-header fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h2>
 
                 @if ($cart)
                     <div class="cart-details-header col-lg-6 col-md-12">
