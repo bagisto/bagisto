@@ -2,19 +2,19 @@
 
 return [
     [
-        'key'        => 'velocity',
+        'key'        => 'settings.velocity',
         'name'       => 'velocity::app.admin.layouts.velocity',
         'route'      => 'velocity.admin.content.index',
-        'sort'       => 5,
-        'icon-class' => 'velocity-icon',
+        'sort'       => 9,
+        'icon-class' => '',
     ], [
-        'key'        => 'velocity.meta-data',
+        'key'        => 'settings.velocity.meta-data',
         'name'       => 'velocity::app.admin.layouts.meta-data',
         'route'      => 'velocity.admin.meta-data',
         'sort'       => 1,
         'icon-class' => '',
     ], [
-        'key'        => 'velocity.header',
+        'key'        => 'settings.velocity.header',
         'name'       => 'velocity::app.admin.layouts.header-content',
         'route'      => 'velocity.admin.content.index',
         'sort'       => 2,
