@@ -43,7 +43,7 @@
 
                             @inject('channels', 'Webkul\Core\Repositories\ChannelRepository')
 
-                            <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
+                            <div class="control-group multi-select" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                 <label for="url-key" class="required">{{ __('admin::app.cms.pages.channel') }}</label>
 
                                 <select type="text" class="control" name="channels[]" v-validate="'required'" value="{{ old('channel[]') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.channel') }}&quot;" multiple="multiple">

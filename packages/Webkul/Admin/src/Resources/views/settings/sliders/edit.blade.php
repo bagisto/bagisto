@@ -37,7 +37,7 @@
 
                     {!! view_render_event('bagisto.admin.settings.slider.edit.before') !!}
 
-                    <div class="control-group" :class="[errors.has('locale[]') ? 'has-error' : '']">
+                    <div class="control-group multi-select" :class="[errors.has('locale[]') ? 'has-error' : '']">
                         <label for="locale">{{ __('admin::app.datagrid.locale') }}</label>
 
                         <select class="control" id="locale" name="locale[]" data-vv-as="&quot;{{ __('admin::app.datagrid.locale') }}&quot;" value="" v-validate="'required'" multiple>

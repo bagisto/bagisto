@@ -63,7 +63,7 @@
                                     </label>
                                 </div>
 
-                                <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
+                                <div class="control-group multi-select" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                     <label for="channels" class="required">{{ __('admin::app.promotions.cart-rules.channels') }}</label>
 
                                     @php
