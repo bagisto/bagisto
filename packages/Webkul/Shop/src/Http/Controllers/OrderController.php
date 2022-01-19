@@ -94,9 +94,13 @@ class OrderController extends Controller
             abort(404);
         }
 
-        $pdf = PDF::loadView('shop::customers.account.orders.pdf', compact('invoice'))->setPaper('a4');
+        $html = view('shop::customers.account.orders.pdf', compact('invoice'))->render();
 
-        return $pdf->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+
+        return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
+            ->setPaper('a4')
+            ->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
     }
 
     /**
@@ -124,5 +128,25 @@ class OrderController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * Adjust arabic and persian content.
+     *
+     * @param  string  $html
+     * @return string
+     */
+    private function adjustArabicAndPersianContent($html)
+    {
+        $arabic = new \ArPHP\I18N\Arabic();
+
+        $p = $arabic->arIdentify($html);
+
+        for ($i = count($p) - 1; $i >= 0; $i -= 2) {
+            $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i - 1], $p[$i] - $p[$i - 1]));
+            $html = substr_replace($html, $utf8ar, $p[$i - 1], $p[$i] - $p[$i - 1]);
+        }
+
+        return $html;
     }
 }

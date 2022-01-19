@@ -331,9 +331,15 @@
                     </tr>
 
                     <tr>
-                        <td><strong>{{ __('admin::app.sales.orders.grand-total') }}</strong></td>
-                        <td><strong>-</strong></td>
-                        <td><strong>{!! core()->formatBasePrice($invoice->base_grand_total, true) !!}</strong></td>
+                        <td colspan="3">
+                            <hr>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ __('admin::app.sales.orders.grand-total') }}</td>
+                        <td>-</td>
+                        <td>{!! core()->formatBasePrice($invoice->base_grand_total, true) !!}</td>
                     </tr>
                 </table>
 

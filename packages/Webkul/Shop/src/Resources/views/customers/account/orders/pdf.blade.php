@@ -347,7 +347,13 @@
                         <td>{{ core()->formatPrice($invoice->tax_amount, $invoice->order->order_currency_code) }}</td>
                     </tr>
 
-                    <tr class="bold">
+                    <tr>
+                        <td colspan="3">
+                            <hr>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td>{{ __('shop::app.customer.account.order.view.grand-total') }}</td>
                         <td>-</td>
                         <td>{{ core()->formatPrice($invoice->grand_total, $invoice->order->order_currency_code) }}</td>
