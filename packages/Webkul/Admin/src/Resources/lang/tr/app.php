@@ -1543,4 +1543,28 @@ return [
             'resource-not-found' => 'Uyarı: İstenen :resource Kayıtta bulunamadı.',
         ],
     ],
+    
+    'notification' => [
+        'title'                       => 'Bildirim',
+        'title-plural'                => 'Bildirimler',
+        'status'                      => [
+            'all'        => 'Herşey',
+            'pending'    => 'Bekliyor',
+            'processing' => 'İşleme',
+            'canceled'   => 'İptal edildi',
+            'closed'     => 'Kapalı',
+            'completed'  => 'Tamamlanmış',
+        ],
+        'view-all'                    => 'Tüm Bildirimleri Görüntüle',
+        'no-record'                   => 'Kayıt Bulunamadı',
+        'read-all'                    => 'Okundu olarak işaretle',
+        'notification-marked-success' => 'Bildirim Başarıyla İşaretlendi',
+        'order-status-messages'       => [
+            'completed'  => 'Sipariş Tamamlandı',
+            'closed'     => 'Sipariş Kapandı',
+            'canceled'   => 'Sipariş İptal Edildi',
+            'pending'    => 'Sipariş beklemede',
+            'processing' => 'sipariş düzenleniyor',
+        ],
+    ],
 ];

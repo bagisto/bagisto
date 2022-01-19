@@ -1557,4 +1557,28 @@ return [
             'resource-not-found' => 'Warning: Requested :resource not found in the record.',
         ],
     ],
+
+    'notification' => [
+        'title'                       => 'اطلاع',
+        'title-plural'                => 'اطلاعیه',
+        'status'                      => [
+            'all'        => 'همه',
+            'pending'    => 'در انتظار',
+            'processing' => 'در حال پردازش',
+            'canceled'   => 'لغو شد',
+            'closed'     => 'بسته شد',
+            'completed'  => 'تکمیل شد',
+        ],
+        'view-all'                    => 'مشاهده همه اعلان ها',
+        'no-record'                   => 'هیچ سابقه ای یافت نشد',
+        'read-all'                    => 'به عنوان خوانده شده علامت بزن',
+        'notification-marked-success' => 'اعلان با موفقیت علامت گذاری شد',
+        'order-status-messages'       => [
+            'completed'  => 'سفارش تکمیل شد',
+            'closed'     => 'سفارش بسته شد',
+            'canceled'   => 'سفارش لغو شد',
+            'pending'    => 'سفارش در انتظار',
+            'processing' => 'پردازش سفارش',
+        ],
+    ],
 ];

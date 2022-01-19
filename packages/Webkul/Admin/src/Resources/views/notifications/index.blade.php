@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.notification.title') }}
+    {{ __('admin::app.notification.notification-title') }}
 @endsection
 
 @php 
@@ -53,7 +53,7 @@
         order-view-url="{{ \URL::to('/') }}/admin/viewed-notifications/"
         pusher-key="{{ env('PUSHER_APP_KEY') }}"
         pusher-cluster="{{ env('PUSHER_APP_CLUSTER') }}"
-        title=" {{ __('admin::app.notification.title') }}"
+        title=" {{ __('admin::app.notification.notification-title') }}"
         order-status="{{ json_encode($orderStatus) }}"
         order-status-messages="{{ json_encode($orderStatusMessages) }}"
         no-record-text="{{ __('admin::app.notification.no-record') }}">
