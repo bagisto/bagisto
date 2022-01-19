@@ -136,7 +136,9 @@
                 @endif
 
                 <div class="merchant-details">
-                    <div><span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span></div>
+                    <div>
+                        <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
+                    </div>
 
                     <div>{{ core()->getConfigData('sales.shipping.origin.address1') ? core()->getConfigData('sales.shipping.origin.address1') : '' }}</div>
 
@@ -276,22 +278,22 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>{{ __('shop::app.customer.account.order.view.SKU') }}</th>
-                                <th>{{ __('shop::app.customer.account.order.view.product-name') }}</th>
-                                <th>{{ __('shop::app.customer.account.order.view.price') }}</th>
-                                <th>{{ __('shop::app.customer.account.order.view.qty') }}</th>
-                                <th>{{ __('shop::app.customer.account.order.view.subtotal') }}</th>
-                                <th>{{ __('shop::app.customer.account.order.view.tax-amount') }}</th>
-                                <th>{{ __('shop::app.customer.account.order.view.grand-total') }}</th>
+                                <th class="text-center">{{ __('shop::app.customer.account.order.view.SKU') }}</th>
+                                <th class="text-center">{{ __('shop::app.customer.account.order.view.product-name') }}</th>
+                                <th class="text-center">{{ __('shop::app.customer.account.order.view.price') }}</th>
+                                <th class="text-center">{{ __('shop::app.customer.account.order.view.qty') }}</th>
+                                <th class="text-center">{{ __('shop::app.customer.account.order.view.subtotal') }}</th>
+                                <th class="text-center">{{ __('shop::app.customer.account.order.view.tax-amount') }}</th>
+                                <th class="text-center">{{ __('shop::app.customer.account.order.view.grand-total') }}</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             @foreach ($invoice->items as $item)
                                 <tr>
-                                    <td>{{ $item->child ? $item->child->sku : $item->sku }}</td>
+                                    <td class="text-center">{{ $item->child ? $item->child->sku : $item->sku }}</td>
 
-                                    <td>
+                                    <td class="text-center">
                                         {{ $item->name }}
 
                                         @if (isset($item->additional['attributes']))
@@ -305,15 +307,15 @@
                                         @endif
                                     </td>
 
-                                    <td>{{ core()->formatPrice($item->price, $invoice->order->order_currency_code) }}</td>
+                                    <td class="text-center">{{ core()->formatPrice($item->price, $invoice->order->order_currency_code) }}</td>
 
-                                    <td>{{ $item->qty }}</td>
+                                    <td class="text-center">{{ $item->qty }}</td>
 
-                                    <td>{{ core()->formatPrice($item->total, $invoice->order->order_currency_code) }}</td>
+                                    <td class="text-center">{{ core()->formatPrice($item->total, $invoice->order->order_currency_code) }}</td>
 
-                                    <td>{{ core()->formatPrice($item->tax_amount, $invoice->order->order_currency_code) }}</td>
+                                    <td class="text-center">{{ core()->formatPrice($item->tax_amount, $invoice->order->order_currency_code) }}</td>
 
-                                    <td>{{ core()->formatPrice(($item->total + $item->tax_amount), $invoice->order->order_currency_code) }}</td>
+                                    <td class="text-center">{{ core()->formatPrice(($item->total + $item->tax_amount), $invoice->order->order_currency_code) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

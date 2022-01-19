@@ -2,14 +2,18 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use PDF;
-use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class OrderController extends Controller
 {
+    use PDFHandler;
+
     /**
      * Current customer.
+     *
+     * @var \Webkul\Customer\Contracts\Customer
      */
     protected $currentCustomer;
 
@@ -37,8 +41,7 @@ class OrderController extends Controller
     public function __construct(
         OrderRepository $orderRepository,
         InvoiceRepository $invoiceRepository
-    )
-    {
+    ) {
         $this->middleware('customer');
 
         $this->currentCustomer = auth()->guard('customer')->user();
@@ -54,7 +57,7 @@ class OrderController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
-    */
+     */
     public function index()
     {
         return view($this->_config['view']);
@@ -86,7 +89,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function print($id)
+    public function printInvoice($id)
     {
         $invoice = $this->invoiceRepository->findOrFail($id);
 
@@ -94,13 +97,10 @@ class OrderController extends Controller
             abort(404);
         }
 
-        $html = view('shop::customers.account.orders.pdf', compact('invoice'))->render();
-
-        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-
-        return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
-            ->setPaper('a4')
-            ->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
+        return $this->downloadPDF(
+            view('shop::customers.account.orders.pdf', compact('invoice'))->render(),
+            'invoice-' . $invoice->created_at->format('d-m-Y')
+        );
     }
 
     /**
@@ -128,25 +128,5 @@ class OrderController extends Controller
         }
 
         return redirect()->back();
-    }
-
-    /**
-     * Adjust arabic and persian content.
-     *
-     * @param  string  $html
-     * @return string
-     */
-    private function adjustArabicAndPersianContent($html)
-    {
-        $arabic = new \ArPHP\I18N\Arabic();
-
-        $p = $arabic->arIdentify($html);
-
-        for ($i = count($p) - 1; $i >= 0; $i -= 2) {
-            $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i - 1], $p[$i] - $p[$i - 1]));
-            $html = substr_replace($html, $utf8ar, $p[$i - 1], $p[$i] - $p[$i - 1]);
-        }
-
-        return $html;
     }
 }
