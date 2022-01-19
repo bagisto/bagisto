@@ -63,25 +63,6 @@
                 @endif
             </li>
             @endforeach
-
-            <li class="menu-item">
-                <a class="menubar-ancor" href="#">
-                    <span class="icon-menu icon locale-icon"></span>
-
-                    <span class="menu-label"> {{ __('admin::app.datagrid.locale') }}  {{ $allLocales[$currentLocaleCode] }} </span>
-
-                    <span class="icon arrow-icon"></span>                    
-                </a>
-                <ul class="sub-menubar">
-                    @foreach ($allLocales as $code => $name)  
-                    <li class="sub-menu-item">
-                        <a href="{{ url()->current() . '?' . http_build_query(array_merge(request()->all(), ['admin_locale' => $code])) }}">
-                            <span class="menu-label">{{ $name }}</span>
-                        </a>
-                    </li>
-                    @endforeach    
-                </ul>
-            </li>
         </ul>
     </script>
 
