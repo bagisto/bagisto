@@ -130,20 +130,14 @@
                                         <option value="2">{{ __('admin::app.promotions.catalog-rules.any-condition-true') }}</option>
                                     </select>
                                 </div>
-
-                                <div class="table catalog-rule-conditions" style="margin-top: 20px; overflow-x: unset;">
-                                    <table>
-                                        <tbody>
-                                            <catalog-rule-condition-item
-                                                v-for='(condition, index) in conditions'
-                                                :condition="condition"
-                                                :key="index"
-                                                :index="index"
-                                                @onRemoveCondition="removeCondition($event)">
-                                            </catalog-rule-condition-item>
-                                        </tbody>
-                                    </table>
-                                </div>
+                              
+                                <catalog-rule-condition-item
+                                    v-for='(condition, index) in conditions'
+                                    :condition="condition"
+                                    :key="index"
+                                    :index="index"
+                                    @onRemoveCondition="removeCondition($event)">
+                                </catalog-rule-condition-item>                                     
 
                                 <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px;" @click="addCondition">
                                     {{ __('admin::app.promotions.catalog-rules.add-condition') }}
@@ -208,8 +202,8 @@
     </script>
 
     <script type="text/x-template" id="catalog-rule-condition-item-template">
-        <tr>
-            <td class="attribute">
+        <div class="catalog-rule-conditions">
+            <div class="attribute">
                 <div class="control-group">
                     <select :name="['conditions[' + index + '][attribute]']" class="control" v-model="condition.attribute">
                         <option value="">{{ __('admin::app.promotions.catalog-rules.choose-condition-to-add') }}</option>
@@ -220,9 +214,9 @@
                         </optgroup>
                     </select>
                 </div>
-            </td>
+            </div>
 
-            <td class="operator">
+            <div class="operator">
                 <div class="control-group" v-if="matchedAttribute">
                     <select :name="['conditions[' + index + '][operator]']" class="control" v-model="condition.operator">
                         <option v-for='operator in condition_operators[matchedAttribute.type]' :value="operator.operator">
@@ -230,9 +224,9 @@
                         </option>
                     </select>
                 </div>
-            </td>
+            </div>
 
-            <td class="value">
+            <div class="value">
                 <div v-if="matchedAttribute">
                     <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="matchedAttribute.type">
 
@@ -289,12 +283,12 @@
                         </div>
                     </div>
                 </div>
-            </td>
+            </div>
 
-            <td class="actions">
+            <div class="actions">
                 <i class="icon trash-icon" @click="removeCondition"></i>
-            </td>
-        </tr>
+            </div>
+        </div>
     </script>
 
     <script>

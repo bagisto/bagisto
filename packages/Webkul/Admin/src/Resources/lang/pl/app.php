@@ -1546,4 +1546,28 @@ return [
             'resource-not-found' => 'Ostrzeżenie: Żądany :resource nie znaleziono w rekordzie.',
         ],
     ],
+
+    'notification' => [
+        'title'                       => 'Powiadomienie',
+        'title-plural'                => 'Powiadomienia',
+        'status'                      => [
+            'all'        => 'Wszystkie',
+            'pending'    => 'Aż do',
+            'processing' => 'Przetwarzanie',
+            'canceled'   => 'Odwołany',
+            'closed'     => 'Zamknięte',
+            'completed'  => 'Zakończony',
+        ],
+        'view-all'                    => 'Wyświetl wszystkie powiadomienia',
+        'no-record'                   => 'Nie znaleziona nagrania',
+        'read-all'                    => 'Oznacz jako przeczytane',
+        'notification-marked-success' => 'Powiadomienie oznaczone pomyślnie',
+        'order-status-messages'       => [
+            'completed'  => 'Zamówienie zrealizowane',
+            'closed'     => 'Zamówienie zamknięte',
+            'canceled'   => 'Zamówienie anulowane',
+            'pending'    => 'Zamówienie w trakcie realizacji',
+            'processing' => 'przetwarzanie zamówienia',
+        ],
+    ],
 ];

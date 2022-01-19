@@ -52,25 +52,71 @@
 
 .cart-rule-conditions,
 .catalog-rule-conditions {
-    table {
-        td {
-            &.attribute {
-                width: 250px;
-                padding-left: 0;
-            }
-            
-            &.operator,
-            &.value {
-                width: 260px;
-            }
+    display: flex;
+    column-gap: 10px;
+   
+    .attribute ,.operator,.value {
+        width: 25%;
+        padding-left: 0;
 
-            &.actions {
-                width: 44px;
-
-                .icon {
-                    margin-top: 6px;
-                }
+        .control-group{
+            .control {
+                width: 100% !important;
             }
         }
+
+        .date:after{
+            top:30% !important;
+        }
+
+        .cross-icon{
+            top:35% !important;
+        }
+    }
+
+    .actions {
+        width: 44px;
+
+        .icon {
+            margin-top: 15px;
+        }
+    }       
+}
+
+@media only screen and (max-width: 770px) {
+    .cart-rule-conditions,
+    .catalog-rule-conditions {
+        display: block;
+        border: 1px solid #e8e8e8;
+        padding: 10px;
+    
+        .attribute ,.operator,.value {
+            width: 100%;
+            padding-left: 0;
+
+            .control-group{
+                .control {
+                    width: 100% !important;
+                    margin-top: 0px !important;
+                    margin-bottom: 0px !important;
+                }
+            }
+
+            .date:after{
+                top:18% !important;
+            }
+
+            .cross-icon{
+                top:20% !important;
+            }
+        }
+
+        .actions {
+            width: 44px;
+
+            .icon {
+                margin: 0px;
+            }
+        }       
     }
 }
