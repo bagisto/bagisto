@@ -81,12 +81,14 @@
         mounted(){
             
             $('.menu-item').click(function(){
-                $('.menu-item').removeClass('active');
+                if(! this.classList.contains('active')){
+                    $('.menu-item').removeClass('active');
 
-                if (this.children[0].children[1].innerHTML != 'Dashboard') {
-                    this.classList.toggle('active');
-                    this.children[0].children[2].classList.toggle("rotate-arrow-icon");
-                }                 
+                    if (this.children[0].children[1].innerHTML != 'Dashboard') {
+                        this.classList.toggle('active');
+                        this.children[0].children[2].classList.toggle("rotate-arrow-icon");
+                    }  
+                }                               
             }); 
         },
     });
