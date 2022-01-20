@@ -58,13 +58,19 @@
                         <td>{{ $customer->email }}</td>
                     </tr>
 
+                    <tr>
+                        <td> 
+                            <button type="submit" @click="showModal('deleteProfile')" class="btn btn-lg btn-primary mt-10">
+                                {{ __('shop::app.customer.account.address.index.delete') }}
+                            </button>
+                        </td>                        
+                    </tr>
+
                     {!! view_render_event('bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer]) !!}
                 </tbody>
             </table>
 
-            <button type="submit" @click="showModal('deleteProfile')" class="btn btn-lg btn-primary mt-10">
-                {{ __('shop::app.customer.account.address.index.delete') }}
-            </button>
+           
 
             <form method="POST" action="{{ route('customer.profile.destroy') }}" @submit.prevent="onSubmit">
                 @csrf
