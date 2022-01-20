@@ -59,7 +59,7 @@
                                     </label>
                                 </div>
 
-                                <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
+                                <div class="control-group multi-select" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                     <label for="channels" class="required">{{ __('admin::app.promotions.catalog-rules.channels') }}</label>
 
                                     <select class="control" id="channels" name="channels[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.channels') }}&quot;" multiple="multiple">
@@ -75,7 +75,7 @@
                                     <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels[]') }}</span>
                                 </div>
 
-                                <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
+                                <div class="control-group multi-select" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
                                     <label for="customer_groups" class="required">{{ __('admin::app.promotions.catalog-rules.customer-groups') }}</label>
 
                                     <select class="control" id="customer_groups" name="customer_groups[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.customer-groups') }}&quot;" multiple="multiple">
@@ -257,7 +257,7 @@
                             </select>
                         </div>
 
-                        <div class="control-group" v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
+                        <div class="control-group multi-select" v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
                             <select :name="['conditions[' + index + '][value][]']" class="control" v-model="condition.value" multiple>
                                 <option v-for='option in matchedAttribute.options' :value="option.id">
                                     @{{ option.admin_name }}

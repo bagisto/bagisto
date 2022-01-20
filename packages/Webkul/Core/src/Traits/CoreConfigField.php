@@ -43,7 +43,7 @@ trait CoreConfigField
     public function getValueByRepository($field)
     {
         if (isset($field['repository'])) {
-            $temp = explode("@", $field['repository']);
+            $temp = explode('@', $field['repository']);
             $class = app(current($temp));
             $method = end($temp);
             return $class->$method();
@@ -61,7 +61,7 @@ trait CoreConfigField
      */
     public function getDependentFieldOrValue($field, $fieldOrValue = 'field')
     {
-        $depends = explode(":", $field['depend']);
+        $depends = explode(':', $field['depend']);
 
         return $fieldOrValue === 'field'
             ? current($depends) : end($depends);

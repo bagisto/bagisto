@@ -2,8 +2,8 @@
 
 namespace Webkul\Core\Traits;
 
-use Illuminate\Support\Facades\Storage;
 use enshrined\svgSanitize\Sanitizer as MainSanitizer;
+use Illuminate\Support\Facades\Storage;
 
 trait Sanitizer
 {
@@ -12,7 +12,7 @@ trait Sanitizer
      */
     public $mimeTypes = [
         'image/svg',
-        'image/svg+xml'
+        'image/svg+xml',
     ];
 
     /**
