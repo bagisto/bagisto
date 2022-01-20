@@ -83,13 +83,20 @@
             <div class="profile-info">
                 <div class="dropdown-toggle">
                     <div style="display: inline-block; vertical-align: middle;">
-                        <span class="name">
-                            {{ auth()->guard('admin')->user()->name }}
-                        </span>
+                        <div class="profile-info-div">
+                            <div class="profile-info-icon">
+                                <span>{{ substr(auth()->guard('admin')->user()->name, 0, 1) }}</span>
+                            </div>
+                            <div class="profile-info-desc">
+                                <span class="name">
+                                    {{ auth()->guard('admin')->user()->name }}
+                                </span>
 
-                        <span class="role">
-                            {{ auth()->guard('admin')->user()->role['name'] }}
-                        </span>
+                                <span class="role">
+                                    {{ auth()->guard('admin')->user()->role['name'] }}
+                                </span>
+                            </div>  
+                        </div>
                     </div>
                     <i class="icon arrow-down-icon active"></i>
                 </div>
