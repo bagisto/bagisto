@@ -180,7 +180,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                         'view' => 'shop::customers.account.orders.view',
                     ])->name('customer.orders.view');
 
-                    Route::get('orders/print/{id}', [OrderController::class, 'print'])->defaults('_config', [
+                    Route::get('orders/print/{id}', [OrderController::class, 'printInvoice'])->defaults('_config', [
                         'view' => 'shop::customers.account.orders.print',
                     ])->name('customer.orders.print');
 

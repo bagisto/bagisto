@@ -1586,4 +1586,28 @@ return [
             'resource-not-found' => 'Avertissement : requise :resource introuvable dans l\'enregistrement.',
         ],
     ],
+
+    'notification' => [
+        'title'                       => 'Ilmoitus',
+        'title-plural'                => 'Ilmoitukset',
+        'status'                      => [
+            'all'        => 'Kaikki',
+            'pending'    => 'Odottaa',
+            'processing' => 'Käsittely',
+            'canceled'   => 'Peruutettu',
+            'closed'     => 'Suljettu',
+            'completed'  => 'Valmis',
+        ],
+        'view-all'                    => 'Näytä kaikki ilmoitukset',
+        'no-record'                   => 'Tietuetta ei löydy',
+        'read-all'                    => 'Merkitse luetuksi',
+        'notification-marked-success' => 'Ilmoitus merkitty onnistuneesti',
+        'order-status-messages'       => [
+            'completed'  => 'Tilaus valmis',
+            'closed'     => 'Tilaus suljettu',
+            'canceled'   => 'Tilaus peruutettu',
+            'pending'    => 'Tilaus vireillä',
+            'processing' => 'Tilausta Käsitellään',
+        ],
+    ],
 ];

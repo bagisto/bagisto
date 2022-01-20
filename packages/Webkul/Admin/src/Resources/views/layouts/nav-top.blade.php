@@ -6,6 +6,10 @@
         'completed'=> trans('admin::app.notification.order-status-messages.completed'),
         'processing' => trans('admin::app.notification.order-status-messages.processing')
     ];
+
+    $allLocales = core()->getAllLocales()->pluck('name', 'code');
+
+    $currentLocaleCode = core()->getRequestedLocaleCode('admin_locale');
 @endphp
 
 <div class="navbar-top">
@@ -40,6 +44,7 @@
             </div>
 
             <notification
+                notif-title="{{ __('admin::app.notification.notification-title') }}"
                 get-notification-url="{{ route('admin.notification.get-notification') }}"
                 view-all="{{ route('admin.notification.index') }}"
                 order-view-url="{{ \URL::to('/') }}/admin/viewed-notifications/"
@@ -53,15 +58,45 @@
             </notification>
 
             <div class="profile-info">
+
+                <div class="dropdown-toggle">
+
+                    <i class="icon locale-icon-bold" style="height:26px;width:26px"></i>
+                </div>
+
+                <div class="dropdown-list bottom-right">
+                    <div class="dropdown-container">
+                        <ul>
+                            @foreach ($allLocales as $code => $name)
+                                <li>
+                                    <a href="{{ url()->current() . '?' . http_build_query(array_merge(request()->all(), ['admin_locale' => $code])) }}"
+                                        style="{{ $code == $currentLocaleCode ? 'color:blue' : '' }}">
+                                        {{ $name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-info">
                 <div class="dropdown-toggle">
                     <div style="display: inline-block; vertical-align: middle;">
-                        <span class="name">
-                            {{ auth()->guard('admin')->user()->name }}
-                        </span>
+                        <div class="profile-info-div">
+                            <div class="profile-info-icon">
+                                <span>{{ substr(auth()->guard('admin')->user()->name, 0, 1) }}</span>
+                            </div>
+                            <div class="profile-info-desc">
+                                <span class="name">
+                                    {{ auth()->guard('admin')->user()->name }}
+                                </span>
 
-                        <span class="role">
-                            {{ auth()->guard('admin')->user()->role['name'] }}
-                        </span>
+                                <span class="role">
+                                    {{ auth()->guard('admin')->user()->role['name'] }}
+                                </span>
+                            </div>  
+                        </div>
                     </div>
                     <i class="icon arrow-down-icon active"></i>
                 </div>

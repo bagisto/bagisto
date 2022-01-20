@@ -1542,4 +1542,28 @@ return [
             'resource-not-found' => 'Warnung: Angeforderte :resource nicht im Datensatz gefunden.',
         ],
     ],
+
+    'notification' => [
+        'title'                       => 'Benachrichtigung',
+        'title-plural'                => 'Benachrichtigungen',
+        'status'                      => [
+            'all'        => 'Alle',
+            'pending'    => 'Anhängig',
+            'processing' => 'Verarbeitung',
+            'canceled'   => 'Abgebrochen',
+            'closed'     => 'Geschlossen',
+            'completed'  => 'Abgeschlossen',
+        ],
+        'view-all'                    => 'Alle Benachrichtigungen anzeigen',
+        'no-record'                   => 'Kein Datensatz gefunden',
+        'read-all'                    => 'Als gelesen markieren',
+        'notification-marked-success' => 'Benachrichtigung erfolgreich markiert',
+        'order-status-messages'       => [
+            'completed'  => 'Bestellung abgeschlossen',
+            'closed'     => 'Bestellung geschlossen',
+            'canceled'   => 'Bestellung storniert',
+            'pending'    => 'Bestellung ausstehend',
+            'processing' => 'Auftragsabwicklung',
+        ],
+    ],
 ];

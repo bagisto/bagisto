@@ -409,34 +409,6 @@ body {
             }
         }
 
-        .account-content {
-            .account-layout {
-                .account-table-content {
-                    .records-count-container {
-                        float: left;
-                        padding: 10px;
-                    }
-
-                    #datagrid-filters {
-                        .filter-left {
-                            .icon-wrapper {
-                                .search-btn {
-                                    float: left;
-                                    right: unset;
-                                    left: 5px;
-                                }
-                            }
-                        }
-
-                        .per-page {
-                            left: 0;
-                            right: unset;
-                        }
-                    }
-                }
-            }
-        }
-
         .advertisement-three-container {
             .second-panel {
                 padding-right: 30px;

@@ -1594,7 +1594,7 @@ return [
     ],
 
     'notification' => [
-        'title'                       => 'Notification',
+        'notification-title'          => 'Notification',
         'title-plural'                => 'Notifications',
         'status'                      => [
             'all'        => 'All',
