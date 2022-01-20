@@ -80,12 +80,12 @@
 
         mounted(){
             
-            $('.menubar-ancor').click(function(){
-                var tabname = this.children[1].innerHTML;
+            $('.menu-item').click(function(){
+                $('.menu-item').removeClass('active');
 
-                if (tabname != 'Dashboard') {
-                    this.parentElement.classList.toggle('active');
-                    this.children[2].classList.toggle("rotate-arrow-icon");
+                if (this.children[0].children[1].innerHTML != 'Dashboard') {
+                    this.classList.toggle('active');
+                    this.children[0].children[2].classList.toggle("rotate-arrow-icon");
                 }                 
             }); 
         },
