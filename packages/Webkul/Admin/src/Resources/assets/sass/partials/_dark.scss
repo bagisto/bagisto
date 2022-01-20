@@ -698,4 +698,15 @@
         border-color: #24384c !important;
     }
 
+    .control-group .slider {
+        top: -2px !important;
+        right: -2px !important;
+        background-color: $dark-mode-switch-background !important;
+        border: 1px solid $dark-mode-switch-border !important;
+    } 
+
+    .control-group input:checked + .slider {
+        background-color: $dark-mode-switch-background !important;
+    }
+
 }
