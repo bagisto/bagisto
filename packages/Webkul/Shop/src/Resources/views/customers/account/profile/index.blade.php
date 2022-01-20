@@ -68,9 +68,7 @@
 
                     {!! view_render_event('bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer]) !!}
                 </tbody>
-            </table>
-
-           
+            </table>           
 
             <form method="POST" action="{{ route('customer.profile.destroy') }}" @submit.prevent="onSubmit">
                 @csrf
