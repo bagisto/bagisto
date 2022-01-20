@@ -8,7 +8,7 @@
 
 <accordian :title="'{{ __('admin::app.catalog.products.channel') }}'" :active="false">
     <div slot="body">
-        <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
+        <div class="control-group multi-select" :class="[errors.has('channels[]') ? 'has-error' : '']">
             <label for="channels" class="required">{{ __('admin::app.catalog.products.channel') }}</label>
 
             <select class="control" name="channels[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.catalog.products.channel') }}&quot;" multiple>
