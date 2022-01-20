@@ -190,13 +190,10 @@ body {
     ul.menubar {
 
         li.menu-item {
-            font-size: 12px;
             position: relative;
             overflow: hidden;
 
             > a {
-                padding: 5px 2px;
-                display: block;
                 color: $black;
                 width: 100%;
 
@@ -213,10 +210,6 @@ body {
 
                 .arrow-icon{
                     display: none;
-                }
-
-                &.active,&:hover {
-                    padding: 5px 2px;                  
                 }
             }
 
@@ -259,7 +252,7 @@ body {
                         }
 
                         &.active {
-                            background-color: #e6e6e6;
+                            background-color: $nav-hover-color;
                             .menu-label {
                                 color: $blue;
                             }
@@ -276,13 +269,22 @@ body {
         }
     }
 
+    .menubar-bottom {
+        padding: 12px;
+        cursor: pointer;
+        position: fixed;
+        bottom:0;     
+        background-color: $white;
+        width: 56px;
+    }
+
     &.open {
-        width: 200px;
-      
+        width: 200px;  
+           
 
         ul.menubar {
-            height: 86vh;
             overflow-y: auto;
+            height: 86%;
 
             &::-webkit-scrollbar {
                 width: 0px !important;
@@ -291,7 +293,6 @@ body {
             li.menu-item {
                 a {
                     .menu-label {
-                        font-size: 14px;
                         font-weight: 200;
                         display: inline-block;
                         color: $black;
@@ -309,11 +310,12 @@ body {
                     border-radius: 0;
                     box-shadow: unset;
                     border: 0;
-                
+
                     li.sub-menu-item {
                         a {
-                            padding-left: 52px;
-                        }
+                            padding-left: 56px;
+                            font-size: 14px;
+                        }  
                     }
                 }
 
@@ -336,7 +338,7 @@ body {
                             }
 
                             &.active, &:hover {
-                                background-color: #e6e6e6;
+                                background-color: $nav-hover-color;
                                 .menu-label {
                                     color: #000 !important;                                    
                                 }
@@ -352,16 +354,11 @@ body {
                 }
             }
         }
-    }
 
-    .menubar-bottom {
-        padding: 12px;
-        cursor: pointer;
-        position: fixed;
-        bottom:0;     
-        background-color: $white;
-        width: 56px;
-    }
+        .menubar-bottom {
+            width: 200px;
+        }
+    }   
 }
 
 .control-container {
@@ -871,7 +868,7 @@ body {
                     margin-left: 0px;
                     padding: 0px;
                     margin-top: 40px;
-                }
+                }   
             }
         } 
     }
