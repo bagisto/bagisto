@@ -65,6 +65,7 @@
                 @endif
             </li>
             @endforeach
+<<<<<<< HEAD
 
             <li class="menu-item">
                 <a class="menubar-ancor" href="#">
@@ -84,6 +85,8 @@
                     @endforeach    
                 </ul>
             </li>
+=======
+>>>>>>> master
         </ul>
     </script>
 

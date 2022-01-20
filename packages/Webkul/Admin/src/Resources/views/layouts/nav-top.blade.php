@@ -6,6 +6,10 @@
         'completed'=> trans('admin::app.notification.order-status-messages.completed'),
         'processing' => trans('admin::app.notification.order-status-messages.processing')
     ];
+
+    $allLocales = core()->getAllLocales()->pluck('name', 'code');
+
+    $currentLocaleCode = core()->getRequestedLocaleCode('admin_locale');
 @endphp
 
 <div class="navbar-top">
@@ -52,6 +56,29 @@
                 order-status-messages="{{ json_encode($orderStatusMessages) }}"
                 read-all-title="{{ __('admin::app.notification.read-all') }}">
             </notification>
+
+            <div class="profile-info">
+
+                <div class="dropdown-toggle">
+
+                    <i class="icon locale-icon" style="height:34px;width:34px"></i>
+                </div>
+
+                <div class="dropdown-list bottom-right">
+                    <div class="dropdown-container">
+                        <ul>
+                            @foreach ($allLocales as $code => $name)
+                                <li>
+                                    <a href="{{ url()->current() . '?' . http_build_query(array_merge(request()->all(), ['admin_locale' => $code])) }}"
+                                        style="{{ $code == $currentLocaleCode ? 'color:blue' : '' }}">
+                                        {{ $name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <div class="profile-info">
                 <div class="dropdown-toggle">
