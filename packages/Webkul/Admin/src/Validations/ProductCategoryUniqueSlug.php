@@ -101,7 +101,7 @@ class ProductCategoryUniqueSlug implements Rule
      */
     protected function isSlugExistsInCategories($slug)
     {
-        if ($this->tableName && $this->tableName === 'category_translations' && $this->id) {
+        if ($this->tableName && $this->id && $this->tableName === 'category_translations') {
             return CategoryTranslationProxy::modelClass()::where('category_id', '<>', $this->id)
                 ->where('slug', $slug)
                 ->limit(1)
