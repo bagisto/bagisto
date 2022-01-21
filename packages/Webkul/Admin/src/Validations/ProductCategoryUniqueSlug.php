@@ -19,11 +19,11 @@ class ProductCategoryUniqueSlug implements Rule
     ];
 
     /**
-     * Is reserved slug used.
+     * Is slug reserved.
      *
      * @var bool
      */
-    protected $isReservedSlugUsed = false;
+    protected $isSlugReserved = false;
 
     /**
      * Table name.
@@ -62,7 +62,7 @@ class ProductCategoryUniqueSlug implements Rule
     public function passes($attribute, $value)
     {
         if (in_array($value, $this->reservedSlugs)) {
-            return ! ($this->isReservedSlugUsed = true);
+            return ! ($this->isSlugReserved = true);
         }
 
         return $this->isSlugUnique($value);
@@ -75,7 +75,7 @@ class ProductCategoryUniqueSlug implements Rule
      */
     public function message()
     {
-        if ($this->isReservedSlugUsed) {
+        if ($this->isSlugReserved) {
             return trans('admin::app.validations.slug-reserved');
         }
 
