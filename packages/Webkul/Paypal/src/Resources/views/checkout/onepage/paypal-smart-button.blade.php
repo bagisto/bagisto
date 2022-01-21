@@ -1,5 +1,4 @@
 @if (request()->route()->getName() == 'shop.checkout.onepage.index')
-
     @php
         $clientId = core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id');
         $acceptedCurrency = core()->getConfigData('sales.paymentmethods.paypal_smart_button.accepted_currencies');
@@ -102,5 +101,4 @@
             });
         });
     </script>
-
 @endif
