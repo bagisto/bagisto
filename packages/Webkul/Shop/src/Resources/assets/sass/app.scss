@@ -3632,20 +3632,6 @@ ol.breadcrumb {
 .account-table-content {
     color: $font-dark;
     margin-top: 1.4%;
-
-    table {
-        width: 100%;
-
-        tbody {
-            tr {
-                height: 45px;
-
-                td {
-                    width: 250px;
-                }
-            }
-        }
-    }
 }
 
 /**
@@ -3781,14 +3767,6 @@ ol.breadcrumb {
 
             .account-table-content {
                 margin-top: 2%;
-
-                table tbody tr {
-                    height: 70px;
-
-                    td {
-                        display: block;
-                    }
-                }
 
                 .address-holder {
                     justify-content: center;
@@ -3999,46 +3977,6 @@ ol.breadcrumb {
     }
 }
 
-/**
- * Responsive table.
- */
-@media only screen and (max-width: 770px) {
-    .table {
-        table {
-            width: 100%;
-        }
-
-        table thead {
-            display: none;
-        }
-
-        table tbody {
-            tr td:before {
-                content: attr(data-value);
-                font-size: 15px;
-                font-weight: 600;
-                display: inline-block;
-                width: 120px;
-            }
-
-            td {
-                border-bottom: none !important;
-                display: block;
-                width: 100% !important;
-
-                div {
-                    position: relative;
-                    left: 100px;
-                    top: -20px;
-                }
-            }
-
-            tr {
-                border: 1px solid $border-color;
-            }
-        }
-    }
-}
 
 .show-wishlist {
     z-index: -1 !important;
@@ -4882,14 +4820,6 @@ body {
 
 .comparison-component > h1 {
     display: inline-block;
-}
-
-td {
-    padding: 15px;
-    min-width: 250px;
-    max-width: 250px;
-    line-height: 30px;
-    vertical-align: top;
 }
 
 .icon.remove-product {

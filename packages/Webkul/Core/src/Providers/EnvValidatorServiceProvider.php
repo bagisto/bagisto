@@ -2,25 +2,29 @@
 
 namespace Webkul\Core\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Validator;
 use Dotenv\Exception\InvalidFileException;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\ServiceProvider;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class EnvValidatorServiceProvider extends ServiceProvider
 {
-    /*
+    /**
      * Set environment variable rules.
+     *
+     * @var array
      */
     protected $rules = [
-        'DB_PREFIX' => 'not_regex:/[^A-Za-z0-9]/'
+        'DB_PREFIX' => 'not_regex:/[^A-Za-z0-9_]/',
     ];
 
-    /*
+    /**
      * Set environment variable error messages.
+     *
+     * @var array
      */
     protected $messages = [
-        'not_regex' => 'DB_PREFIX ENV is not valid.'
+        'not_regex' => 'DB_PREFIX ENV is not valid.',
     ];
 
     /**
@@ -35,6 +39,8 @@ class EnvValidatorServiceProvider extends ServiceProvider
 
     /**
      * Validate environment variables.
+     *
+     * @return void
      */
     private function validateEnvVariables()
     {
@@ -53,9 +59,8 @@ class EnvValidatorServiceProvider extends ServiceProvider
     /**
      * Generate a friendly error message.
      *
-     * @param string $cause
-     * @param string $subject
-     *
+     * @param  string  $cause
+     * @param  string  $subject
      * @return string
      */
     private function getErrorMessage($cause, $subject)

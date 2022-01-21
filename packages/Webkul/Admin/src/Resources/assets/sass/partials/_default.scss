@@ -105,6 +105,24 @@ body {
                 color: #a2a2a2;
             }
 
+            .profile-info-div{
+                display: flex;
+
+                .profile-info-icon{
+                    height: 31px;
+                    width: 30px;
+                    background: #3c41ff;
+                    padding: 6px;
+                    text-align: center;
+                    font-size: 17px;
+                    font-weight: 600;
+                    color: #fff;
+                    border-radius: 50%;
+                    margin-right: 6px;
+                    margin-top: 3px;
+                }
+            }
+
             .dropdown-list {
                 top: 63px;
                 right: 0px;
