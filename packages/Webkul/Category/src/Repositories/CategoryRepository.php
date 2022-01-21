@@ -2,12 +2,12 @@
 
 namespace Webkul\Category\Repositories;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Models\CategoryTranslationProxy;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Webkul\Core\Eloquent\Repository;
 
 class CategoryRepository extends Repository
 {
@@ -18,7 +18,7 @@ class CategoryRepository extends Repository
      */
     public function model()
     {
-        return 'Webkul\Category\Contracts\Category';
+        return \Webkul\Category\Contracts\Category::class;
     }
 
     /**
@@ -58,6 +58,50 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Update category.
+     *
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Category\Contracts\Category
+     */
+    public function update(array $data, $id, $attribute = 'id')
+    {
+        $category = $this->find($id);
+
+        Event::dispatch('catalog.category.update.before', $id);
+
+        $data = $this->setSameAttributeValueToAllLocale($data, 'slug');
+
+        $category->update($data);
+
+        $this->uploadImages($data, $category);
+
+        if (isset($data['attributes'])) {
+            $category->filterableAttributes()->sync($data['attributes']);
+        }
+
+        Event::dispatch('catalog.category.update.after', $id);
+
+        return $category;
+    }
+
+    /**
+     * Delete category.
+     *
+     * @param  int  $id
+     * @return void
+     */
+    public function delete($id)
+    {
+        Event::dispatch('catalog.category.delete.before', $id);
+
+        parent::delete($id);
+
+        Event::dispatch('catalog.category.delete.after', $id);
+    }
+
+    /**
      * Specify category tree.
      *
      * @param  int  $id
@@ -79,8 +123,8 @@ class CategoryRepository extends Repository
     public function getCategoryTreeWithoutDescendant($id = null)
     {
         return $id
-               ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
-               : $this->model::orderBy('position', 'ASC')->get()->toTree();
+            ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
+            : $this->model::orderBy('position', 'ASC')->get()->toTree();
     }
 
     /**
@@ -90,7 +134,7 @@ class CategoryRepository extends Repository
      */
     public function getRootCategories()
     {
-        return $this->getModel()->where('parent_id', NULL)->get();
+        return $this->getModel()->where('parent_id', null)->get();
     }
 
     /**
@@ -136,6 +180,21 @@ class CategoryRepository extends Repository
      * @param string $slug
      * @return \Webkul\Category\Contracts\Category
      */
+    public function findBySlug($slug)
+    {
+        $category = $this->model->whereTranslation('slug', $slug)->first();
+
+        if ($category) {
+            return $category;
+        }
+    }
+
+    /**
+     * Retrive category from slug.
+     *
+     * @param string $slug
+     * @return \Webkul\Category\Contracts\Category
+     */
     public function findBySlugOrFail($slug)
     {
         $category = $this->model->whereTranslation('slug', $slug)->first();
@@ -150,21 +209,6 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Retrive category from slug.
-     *
-     * @param string $slug
-     * @return \Webkul\Category\Contracts\Category
-     */
-    public function findBySlug($slug)
-    {
-        $category = $this->model->whereTranslation('slug', $slug)->first();
-
-        if ($category) {
-            return $category;
-        }
-    }
-
-    /**
      * Find by path.
      *
      * @param  string  $urlPath
@@ -176,50 +220,6 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Update category.
-     *
-     * @param  array  $data
-     * @param  int  $id
-     * @param  string  $attribute
-     * @return \Webkul\Category\Contracts\Category
-     */
-    public function update(array $data, $id, $attribute = "id")
-    {
-        $category = $this->find($id);
-
-        Event::dispatch('catalog.category.update.before', $id);
-
-        $data = $this->setSameAttributeValueToAllLocale($data, 'slug');
-
-        $category->update($data);
-
-        $this->uploadImages($data, $category);
-
-        if (isset($data['attributes'])) {
-            $category->filterableAttributes()->sync($data['attributes']);
-        }
-
-        Event::dispatch('catalog.category.update.after', $id);
-
-        return $category;
-    }
-
-    /**
-     * Delete category.
-     *
-     * @param  int  $id
-     * @return void
-     */
-    public function delete($id)
-    {
-        Event::dispatch('catalog.category.delete.before', $id);
-
-        parent::delete($id);
-
-        Event::dispatch('catalog.category.delete.after', $id);
-    }
-
-    /**
      * Upload category's images.
      *
      * @param  array  $data
@@ -227,7 +227,7 @@ class CategoryRepository extends Repository
      * @param  string $type
      * @return void
      */
-    public function uploadImages($data, $category, $type = "image")
+    public function uploadImages($data, $category, $type = 'image')
     {
         if (isset($data[$type])) {
             $request = request();
@@ -268,7 +268,7 @@ class CategoryRepository extends Repository
         $trimmed = [];
 
         foreach ($categories as $key => $category) {
-            if ($category->name != null || $category->name != "") {
+            if ($category->name != null || $category->name != '') {
                 $trimmed[$key] = [
                     'id'   => $category->id,
                     'name' => $category->name,
@@ -300,7 +300,9 @@ class CategoryRepository extends Repository
             foreach (core()->getAllLocales() as $locale) {
                 foreach ($model->translatedAttributes as $attribute) {
                     if ($attribute === $attributeName) {
-                        $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute]) ?: $data[$data['locale']][$attribute];
+                        $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute])
+                            ? $data[$requestedLocale][$attribute]
+                            : $data[$data['locale']][$attribute];
                     }
                 }
             }

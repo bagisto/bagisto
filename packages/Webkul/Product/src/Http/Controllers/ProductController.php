@@ -218,7 +218,7 @@ class ProductController extends Controller
     {
         $data = request()->all();
 
-        $multiselectAttributeCodes = array();
+        $multiselectAttributeCodes = [];
 
         $productAttributes = $this->productRepository->findOrFail($id);
 
@@ -237,7 +237,7 @@ class ProductController extends Controller
         if (count($multiselectAttributeCodes)) {
             foreach ($multiselectAttributeCodes as $multiselectAttributeCode) {
                 if (! isset($data[$multiselectAttributeCode])) {
-                    $data[$multiselectAttributeCode] = array();
+                    $data[$multiselectAttributeCode] = [];
                 }
             }
         }
@@ -262,8 +262,8 @@ class ProductController extends Controller
         $this->productInventoryRepository->saveInventories(request()->all(), $product);
 
         return response()->json([
-            'message' => __('admin::app.catalog.products.saved-inventory-message'),
-            'updatedTotal' => $this->productInventoryRepository->where('product_id', $product->id)->sum('qty')
+            'message'      => __('admin::app.catalog.products.saved-inventory-message'),
+            'updatedTotal' => $this->productInventoryRepository->where('product_id', $product->id)->sum('qty'),
         ]);
     }
 

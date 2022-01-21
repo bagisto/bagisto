@@ -1387,6 +1387,11 @@ return [
         'something-went-wrong'      => 'Something went wrong!',
     ],
 
+    'validations' => [
+        'slug-being-used' => 'This slug is getting used in either categories or products.',
+        'slug-reserved'   => 'This slug is reserved.',
+    ],
+
     'footer' => [
         'copy-right' => 'Propulsé par <a href="https://bagisto.com/" target="_blank">Bagisto</a>, un projet communautaire de <a href="https://webkul.com/" target="_blank ">Webkul</a>',
     ],

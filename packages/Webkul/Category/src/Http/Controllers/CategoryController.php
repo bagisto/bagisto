@@ -2,10 +2,10 @@
 
 namespace Webkul\Category\Http\Controllers;
 
-use Webkul\Core\Models\Channel;
-use Illuminate\Support\Facades\Event;
-use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Category\Http\Requests\CategoryRequest;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Core\Models\Channel;
 
 class CategoryController extends Controller
 {
@@ -17,14 +17,14 @@ class CategoryController extends Controller
     protected $_config;
 
     /**
-     * CategoryRepository object
+     * Category repository instance.
      *
      * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
     /**
-     * AttributeRepository object
+     * Attribute repository instance.
      *
      * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
@@ -40,8 +40,7 @@ class CategoryController extends Controller
     public function __construct(
         CategoryRepository $categoryRepository,
         AttributeRepository $attributeRepository
-    )
-    {
+    ) {
         $this->categoryRepository = $categoryRepository;
 
         $this->attributeRepository = $attributeRepository;
@@ -68,7 +67,7 @@ class CategoryController extends Controller
     {
         $categories = $this->categoryRepository->getCategoryTree(null, ['id']);
 
-        $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
+        $attributes = $this->attributeRepository->findWhere(['is_filterable' => 1]);
 
         return view($this->_config['view'], compact('categories', 'attributes'));
     }
@@ -78,16 +77,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(CategoryRequest $categoryRequest)
     {
-        $this->validate(request(), [
-            'slug'        => ['required', 'unique:category_translations,slug'],
-            'name'        => 'required',
-            'image.*'     => 'mimes:bmp,jpeg,jpg,png,webp',
-            'description' => 'required_if:display_mode,==,description_only,products_and_description',
-        ]);
-
-        $this->categoryRepository->create(request()->all());
+        $this->categoryRepository->create($categoryRequest->all());
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Category']));
 
@@ -106,7 +98,7 @@ class CategoryController extends Controller
 
         $categories = $this->categoryRepository->getCategoryTreeWithoutDescendant($id);
 
-        $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
+        $attributes = $this->attributeRepository->findWhere(['is_filterable' => 1]);
 
         return view($this->_config['view'], compact('category', 'categories', 'attributes'));
     }
@@ -117,21 +109,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(CategoryRequest $categoryRequest, $id)
     {
-        $locale = core()->getRequestedLocaleCode();
-
-        $this->validate(request(), [
-            $locale . '.slug' => ['required', function ($attribute, $value, $fail) use ($id) {
-                if (! $this->categoryRepository->isSlugUnique($id, $value)) {
-                    $fail(trans('admin::app.response.already-taken', ['name' => 'Category']));
-                }
-            }],
-            $locale . '.name' => 'required',
-            'image.*'         => 'mimes:bmp,jpeg,jpg,png,webp',
-        ]);
-
-        $this->categoryRepository->update(request()->all(), $id);
+        $this->categoryRepository->update($categoryRequest->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
 
@@ -152,11 +132,7 @@ class CategoryController extends Controller
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
             try {
-                Event::dispatch('catalog.category.delete.before', $category);
-
-                $category->delete();
-
-                Event::dispatch('catalog.category.delete.after', $category);
+                $this->categoryRepository->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
@@ -185,15 +161,13 @@ class CategoryController extends Controller
             if (isset($category)) {
                 if ($this->isCategoryDeletable($category)) {
                     $suppressFlash = false;
+
                     session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
                 } else {
                     try {
                         $suppressFlash = true;
-                        Event::dispatch('catalog.category.delete.before', $categoryId);
 
-                        $category->delete();
-
-                        Event::dispatch('catalog.category.delete.after', $categoryId);
+                        $this->categoryRepository->delete($categoryId);
                     } catch (\Exception $e) {
                         session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
                     }
@@ -213,11 +187,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function categoryProductCount() {
-        $indexes = explode(",", request()->input('indexes'));
+    public function categoryProductCount()
+    {
         $product_count = 0;
+        $indexes = explode(',', request()->input('indexes'));
 
-        foreach($indexes as $index) {
+        foreach ($indexes as $index) {
             $category = $this->categoryRepository->find($index);
             $product_count += $category->products->count();
         }
