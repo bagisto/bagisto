@@ -3522,6 +3522,26 @@ ol.breadcrumb {
     }
 }
 
+//Account content inside a table
+.account-table-content {
+    color: $font-dark;
+    margin-top: 1.4%;
+
+    table {
+        width: 100%;
+
+        tbody {
+            tr {
+                height: 45px;
+
+                td {
+                    width: 250px;
+                }
+            }
+        }
+    }
+}
+
 .account-content {
     width: 100%;
     display: flex;
@@ -3805,7 +3825,7 @@ ol.breadcrumb {
             padding: 20px 0;
             border-bottom: 1px solid $address-card-border-color;
 
-            .row {
+            .sale {
                 display: block;
                 padding: 7px 0;
 
