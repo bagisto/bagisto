@@ -9,24 +9,6 @@ body {
     background-color: $body-background;
 }
 
-.padding-container-navbar-not-expand {
-    padding-left: 56px;
-}
-
-.padding-container-navbar-expand {
-    padding-left: 200px;
-}
-
-.rtl {
-    .padding-container-navbar-not-expand {
-        padding-right: 56px !important;
-    }
-
-    .padding-container-navbar-expand {
-        padding-right: 200px !important;
-    }
-}
-
 .dark-mode-button {
     background: $blue;
     border: none;
@@ -102,7 +84,7 @@ body {
                 margin-bottom: -10px;
                 display: block;
                 cursor: default;
-                color: #a2a2a2;
+                color: $link-color;
             }
 
             .profile-info-div {
@@ -111,12 +93,12 @@ body {
                 .profile-info-icon {
                     height: 31px;
                     width: 30px;
-                    background: #3c41ff;
+                    background: $profile-info-icon;
                     padding: 6px;
                     text-align: center;
                     font-size: 17px;
                     font-weight: 600;
-                    color: #fff;
+                    color: $white;
                     border-radius: 50%;
                     margin-right: 6px;
                     margin-top: 3px;
@@ -130,14 +112,14 @@ body {
             }
 
             .name {
-                color: #000311;
+                color: $profile-info-name;
                 display: block;
                 text-align: left;
             }
 
             .role {
                 font-size: 12px;
-                color: #8e8e8e;
+                color: $role-text-color;
                 display: block;
                 text-align: left;
             }
@@ -163,14 +145,14 @@ body {
             }
 
             .name {
-                color: #000311;
+                color: $profile-info-name;
                 display: block;
                 text-align: left;
             }
 
             .role {
                 font-size: 12px;
-                color: #8e8e8e;
+                color: $role-text-color;
                 display: block;
                 text-align: left;
             }
@@ -205,18 +187,15 @@ body {
     height: 100vh !important;
     position: fixed;
     background-color: $white;
-    border-right: 1px solid #ececec;
+    border-right: 1px solid $navbar-border-right-color;
 
     ul.menubar {
 
         li.menu-item {
-            font-size: 12px;
             position: relative;
             overflow: hidden;
 
             >a {
-                padding: 5px 2px;
-                display: block;
                 color: $black;
                 width: 100%;
 
@@ -228,25 +207,11 @@ body {
 
                 .menu-label {
                     display: none;
-                    color: #B0BEC5;
+                    color: $menu-label-text-color;
                 }
 
                 .arrow-icon {
                     display: none;
-                }
-
-                .arrow-icon-left {
-                    float: right;
-                }
-
-                .arrow-icon-right {
-                    float: left;
-                    margin-left: 20px;
-                }
-
-                &.active,
-                &:hover {
-                    padding: 5px 2px;
                 }
             }
 
@@ -262,8 +227,8 @@ body {
                 top: 0;
                 left: 56px;
                 background-color: $white;
-                box-shadow: 2px 1px 3px #CDCECF;
-                border: 1px solid #eee;
+                box-shadow: 2px 1px 3px $submenu-shadow-color;
+                border: 1px solid $submenu-border-color;
                 border-left: 0;
                 border-radius: 0 3px 3px 0;
 
@@ -279,6 +244,7 @@ body {
 
             &:hover {
                 overflow: visible;
+                background: $menu-item-hover-color;
 
                 ul.sub-menubar {
                     display: block;
@@ -289,7 +255,7 @@ body {
                         }
 
                         &.active {
-                            background-color: #e6e6e6;
+                            background-color: $submenu-active-color;
 
                             .menu-label {
                                 color: $blue;
@@ -307,13 +273,21 @@ body {
         }
     }
 
+    .menubar-bottom {
+        padding: 12px;
+        cursor: pointer;
+        position: fixed;
+        bottom: 0;
+        background-color: $white;
+        width: 56px;
+    }
+
     &.open {
         width: 200px;
 
-
         ul.menubar {
-            height: 86vh;
             overflow-y: auto;
+            height: 86%;
 
             &::-webkit-scrollbar {
                 width: 0px !important;
@@ -322,7 +296,6 @@ body {
             li.menu-item {
                 a {
                     .menu-label {
-                        font-size: 14px;
                         font-weight: 200;
                         display: inline-block;
                         color: $black;
@@ -343,14 +316,15 @@ body {
 
                     li.sub-menu-item {
                         a {
-                            padding-left: 52px;
+                            padding-left: 56px;
+                            font-size: 14px;
                         }
                     }
                 }
 
                 &.active {
                     background: $white;
-                    width: calc(100% - 1px);
+                    width: 100%;
 
                     .menu-label {
                         color: $black;
@@ -358,7 +332,7 @@ body {
 
                     ul.sub-menubar {
                         display: block;
-                        background-color: $white;
+                        background-color: $menu-item-hover-color;
                         border: none !important;
 
                         .sub-menu-item {
@@ -368,10 +342,10 @@ body {
 
                             &.active,
                             &:hover {
-                                background-color: #e6e6e6;
+                                background-color: $submenu-border-color;
 
                                 .menu-label {
-                                    color: #000 !important;
+                                    color: $black !important;
                                 }
                             }
                         }
@@ -385,15 +359,10 @@ body {
                 }
             }
         }
-    }
 
-    .menubar-bottom {
-        padding: 12px;
-        cursor: pointer;
-        position: fixed;
-        bottom: 0;
-        background-color: $white;
-        width: 56px;
+        .menubar-bottom {
+            width: 200px;
+        }
     }
 }
 
@@ -405,7 +374,7 @@ body {
 
     .control {
         background: $white;
-        border: 1px solid #c7c7c7;
+        border: 1px solid $control-border-color;
         @include border-radius(3px);
         width: 150px;
         height: 36px;
@@ -446,7 +415,7 @@ body {
 
         .locale {
             float: right;
-            color: #8e8e8e;
+            color: $role-text-color;
         }
     }
 
@@ -496,41 +465,6 @@ body {
 }
 
 .rtl {
-
-    .navbar-left {
-        right: 0 !important;
-
-        ul.menubar {
-
-            li.menu-item {
-
-                ul.sub-menubar {
-                    top: 0;
-                    right: 56px !important;
-                }
-            }
-        }
-
-        &.open {
-
-            ul.menubar {
-
-                li.menu-item {
-
-                    ul.sub-menubar {
-
-                        li.sub-menu-item {
-                            a {
-                                padding-right: 52px;
-                                padding-left: 0px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     .ticket-list {
         .control-group {
             &.has-error {
@@ -546,6 +480,7 @@ body {
 }
 
 .content-container {
+    padding-left: 56px;
     height: calc(100% - 60px);
     width: 100%;
     margin-top: 60px;
@@ -630,7 +565,7 @@ body {
 
     li {
         padding: 10px;
-        border-bottom: 1px solid #c7c7c7;
+        border-bottom: 1px solid $notification-li-border-color;
         position: relative;
 
         .notif-icon {
@@ -655,11 +590,11 @@ body {
         }
 
         .pending {
-            background-color: #f2c94c;
+            background-color: $pending-color;
         }
 
         .processing {
-            background-color: #399cdb;
+            background-color: $processing-color;
         }
 
         .canceled {
@@ -667,7 +602,7 @@ body {
         }
 
         .closed {
-            background-color: #eb5757;
+            background-color: $closed-color;
         }
 
         .completed {
@@ -713,7 +648,7 @@ body {
 }
 
 .read {
-    background-color: #e8e8e8;
+    background-color: $read-background-color;
 }
 
 .page-item.active {
@@ -727,7 +662,7 @@ body {
 }
 
 .read-all {
-    color: #3a3a3a;
+    color: $read-all-text-color;
     background: none;
     border: none;
 }
@@ -735,7 +670,7 @@ body {
 #notif-title {
     height: 50px;
     padding: 14px 10px;
-    border-bottom: 1px solid #c7c7c7;
+    border-bottom: 1px solid $control-border-color;
     cursor: default;
 }
 
@@ -882,26 +817,6 @@ body {
     .switch-dark {
         width: 100%;
     }
-
-
-    .padding-container-navbar-not-expand {
-        padding-left: 0 !important;
-    }
-
-    .padding-container-navbar-expand {
-        padding-left: 0 !important;
-    }
-
-    .rtl {
-        .padding-container-navbar-not-expand {
-            padding-right: 0 !important;
-        }
-
-        .padding-container-navbar-expand {
-            padding-right: 0 !important;
-        }
-    }
-
 }
 
 @media only screen and (max-width: 411px) {

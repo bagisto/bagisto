@@ -165,6 +165,7 @@ $toggleColor: #3c41ff;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
     overflow-y: scroll ;
     text-decoration: none;
+    transition: all 0.2s ease-in-out;
 
     &::-webkit-scrollbar {
       display: none;

@@ -168,6 +168,8 @@
 .locale-icon-bold {
     @extend %menu-properties;
     background-image: url("../images/Local-Icon-bold.svg");
+    height: 26px;
+    width: 26px;
 }
 
 .store-icon {
