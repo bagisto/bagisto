@@ -617,6 +617,13 @@ input {
         .product-card {
             font-size: 90%;
 
+            .product-information{
+                .default-wrap{
+                    display: block;
+                    height: 40px;
+                }
+            }
+
             .product-image {
                 img {
                     display: block;
@@ -627,6 +634,15 @@ input {
             .btn.btn-md {
                 padding: 5px;
             }
+        }
+
+        .btn-primary{
+            width: 100%;
+        }
+
+        .btn-lg{
+            padding: 4px 12px;
+            margin-bottom: 10px;
         }
 
         .product-grid-4 {
