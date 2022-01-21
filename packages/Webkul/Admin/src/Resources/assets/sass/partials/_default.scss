@@ -87,6 +87,24 @@ body {
                 color: #a2a2a2;
             }
 
+            .profile-info-div{
+                display: flex;
+
+                .profile-info-icon{
+                    height: 31px;
+                    width: 30px;
+                    background: #3c41ff;
+                    padding: 6px;
+                    text-align: center;
+                    font-size: 17px;
+                    font-weight: 600;
+                    color: #fff;
+                    border-radius: 50%;
+                    margin-right: 6px;
+                    margin-top: 3px;
+                }
+            }
+
             .dropdown-list {
                 top: 63px;
                 right: 0px;
@@ -103,10 +121,6 @@ body {
                 color: #8e8e8e;
                 display: block;
                 text-align: left;
-            }
-
-            i.icon {
-                margin-left: 10px;
             }
         }
 
@@ -695,11 +709,11 @@ body {
 @media only screen and (max-width: 768px){
 
     h1 {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .btn.btn-lg {
-        padding: 5px 10px;
+        padding: 4px 6px;
     }
 
     .navbar-top {    
@@ -761,6 +775,8 @@ body {
                     .back-link {                      
                         margin-top: 0px;
                         margin-right: -1px;
+                        height: 22px !important;
+                        width: 22px !important;
                     }   
                 }
                   

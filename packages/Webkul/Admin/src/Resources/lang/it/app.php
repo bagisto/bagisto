@@ -1562,4 +1562,28 @@ return [
             'resource-not-found' => 'Avvertimento: Richiesto :resource non trovata nel record.',
         ],
     ],
+
+    'notification' => [
+        'title'                       => 'Notifica',
+        'title-plural'                => 'Notifiche',
+        'status'                      => [
+            'all'        => 'Tutto',
+            'pending'    => 'In attesa di',
+            'processing' => 'in lavorazione',
+            'canceled'   => 'annullato',
+            'closed'     => 'chiuso',
+            'completed'  => 'Completato',
+        ],
+        'view-all'                    => 'Visualizza tutte le notifiche',
+        'no-record'                   => 'Nessun record trovato',
+        'read-all'                    => 'Segna come letto',
+        'notification-marked-success' => 'Notifica contrassegnata con successo',
+        'order-status-messages'       => [
+            'completed'  => 'Ordine completato',
+            'closed'     => 'Ordine chiuso',
+            'canceled'   => 'Ordine annullato',
+            'pending'    => 'ordine pendente',
+            'processing' => "Elaborazione dell'ordine",
+        ],
+    ],
 ];

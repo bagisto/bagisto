@@ -48,7 +48,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
             'view' => 'admin::sales.invoices.view',
         ])->name('admin.sales.invoices.view');
 
-        Route::get('/invoices/print/{id}', [InvoiceController::class, 'print'])->defaults('_config', [
+        Route::get('/invoices/print/{id}', [InvoiceController::class, 'printInvoice'])->defaults('_config', [
             'view' => 'admin::sales.invoices.print',
         ])->name('admin.sales.invoices.print');
 

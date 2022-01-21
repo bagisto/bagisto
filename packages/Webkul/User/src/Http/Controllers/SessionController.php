@@ -2,12 +2,10 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Auth;
-
 class SessionController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
@@ -20,11 +18,9 @@ class SessionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin')->except(['create','store']);
+        $this->middleware('admin')->except(['create', 'store']);
 
         $this->_config = request('_config');
-
-        $this->middleware('guest', ['except' => 'destroy']);
     }
 
     /**
@@ -36,17 +32,17 @@ class SessionController extends Controller
     {
         if (auth()->guard('admin')->check()) {
             return redirect()->route('admin.dashboard.index');
-        } else {
-            if (strpos(url()->previous(), 'admin') !== false) {
-                $intendedUrl = url()->previous();
-            } else {
-                $intendedUrl = route('admin.dashboard.index');
-            }
-
-            session()->put('url.intended', $intendedUrl);
-
-            return view($this->_config['view']);
         }
+
+        if (strpos(url()->previous(), 'admin') !== false) {
+            $intendedUrl = url()->previous();
+        } else {
+            $intendedUrl = route('admin.dashboard.index');
+        }
+
+        session()->put('url.intended', $intendedUrl);
+
+        return view($this->_config['view']);
     }
 
     /**
@@ -57,7 +53,7 @@ class SessionController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'email'   => 'required|email',
+            'email'    => 'required|email',
             'password' => 'required',
         ]);
 

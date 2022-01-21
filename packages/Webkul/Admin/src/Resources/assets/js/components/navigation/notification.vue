@@ -1,6 +1,6 @@
 <template>
    <div class="notifications">
-       <div class="dropdown-toggle">
+       <div class="dropdown-toggle" data-toggle="tooltip" data-placement="bottom" :title="notifTitle">
            <span class="notification-badge" v-if="totalUnRead">{{ totalUnRead }}</span>
            <i class="icon notification-icon active" style="margin-left:0px"></i>
        </div>
@@ -90,6 +90,7 @@
 export default {
 
     props: [
+        'notifTitle',
         'getNotificationUrl',
         'viewAll',
         'orderViewUrl',

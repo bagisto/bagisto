@@ -59,7 +59,7 @@
                                     </label>
                                 </div>
 
-                                <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
+                                <div class="control-group multi-select" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                     <label for="channels" class="required">{{ __('admin::app.promotions.catalog-rules.channels') }}</label>
 
                                     <select class="control" id="channels" name="channels[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.channels') }}&quot;" multiple="multiple">
@@ -75,7 +75,7 @@
                                     <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels[]') }}</span>
                                 </div>
 
-                                <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
+                                <div class="control-group multi-select" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
                                     <label for="customer_groups" class="required">{{ __('admin::app.promotions.catalog-rules.customer-groups') }}</label>
 
                                     <select class="control" id="customer_groups" name="customer_groups[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.customer-groups') }}&quot;" multiple="multiple">
@@ -124,19 +124,13 @@
                                     </select>
                                 </div>
 
-                                <div class="table catalog-rule-conditions" style="margin-top: 20px; overflow-x: unset;">
-                                    <table>
-                                        <tbody>
-                                            <catalog-rule-condition-item
-                                                v-for='(condition, index) in conditions'
-                                                :condition="condition"
-                                                :key="index"
-                                                :index="index"
-                                                @onRemoveCondition="removeCondition($event)">
-                                            </catalog-rule-condition-item>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <catalog-rule-condition-item
+                                    v-for='(condition, index) in conditions'
+                                    :condition="condition"
+                                    :key="index"
+                                    :index="index"
+                                    @onRemoveCondition="removeCondition($event)">
+                                </catalog-rule-condition-item>                                     
 
                                 <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px;" @click="addCondition">
                                     {{ __('admin::app.promotions.catalog-rules.add-condition') }}
@@ -191,8 +185,8 @@
     </script>
 
     <script type="text/x-template" id="catalog-rule-condition-item-template">
-        <tr>
-            <td class="attribute">
+        <div class="catalog-rule-conditions">
+            <div class="attribute">
                 <div class="control-group">
                     <select :name="['conditions[' + index + '][attribute]']" class="control" v-model="condition.attribute">
                         <option value="">{{ __('admin::app.promotions.catalog-rules.choose-condition-to-add') }}</option>
@@ -203,9 +197,9 @@
                         </optgroup>
                     </select>
                 </div>
-            </td>
+            </div>
 
-            <td class="operator">
+            <div class="operator">
                 <div class="control-group" v-if="matchedAttribute">
                     <select :name="['conditions[' + index + '][operator]']" class="control" v-model="condition.operator">
                         <option v-for='operator in condition_operators[matchedAttribute.type]' :value="operator.operator">
@@ -213,9 +207,9 @@
                         </option>
                     </select>
                 </div>
-            </td>
+            </div>
 
-            <td class="value">
+            <div class="value">
                 <div v-if="matchedAttribute">
                     <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="matchedAttribute.type">
 
@@ -263,7 +257,7 @@
                             </select>
                         </div>
 
-                        <div class="control-group" v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
+                        <div class="control-group multi-select" v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
                             <select :name="['conditions[' + index + '][value][]']" class="control" v-model="condition.value" multiple>
                                 <option v-for='option in matchedAttribute.options' :value="option.id">
                                     @{{ option.admin_name }}
@@ -272,12 +266,12 @@
                         </div>
                     </div>
                 </div>
-            </td>
+            </div>
 
-            <td class="actions">
+            <div class="actions">
                 <i class="icon trash-icon" @click="removeCondition"></i>
-            </td>
-        </tr>
+            </div>
+        </div>
     </script>
 
     <script>

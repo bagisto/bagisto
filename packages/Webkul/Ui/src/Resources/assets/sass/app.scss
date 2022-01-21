@@ -195,10 +195,8 @@ h5 {
 }
 
 .btn {
-    @include box-shadow(
-        0 1px 4px 0 rgba(0, 0, 0, 0.2),
-        0 0 8px 0 rgba(0, 0, 0, 0.1)
-    );
+    @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.2),
+        0 0 8px 0 rgba(0, 0, 0, 0.1));
     @include border-radius(3px);
     border: none;
     color: $white-color;
@@ -294,10 +292,8 @@ h5 {
 .dropdown-list {
     width: 200px;
     margin-bottom: 20px;
-    @include box-shadow(
-        0 2px 4px 0 rgba(0, 0, 0, 0.16),
-        0 0 9px 0 rgba(0, 0, 0, 0.16)
-    );
+    @include box-shadow(0 2px 4px 0 rgba(0, 0, 0, 0.16),
+        0 0 9px 0 rgba(0, 0, 0, 0.16));
     @include border-radius(3px);
     background-color: $white-color;
     position: absolute;
@@ -453,14 +449,15 @@ h5 {
             list-style-type: none;
             padding: 0px;
 
-            .read{
-                color:rgba(58, 58, 58, 0.5);
-                .notif-content > a{
-                    text-decoration: none;
-                    color: rgba(58, 58, 58, 0.5); 
+            .read {
+                color: rgba(58, 58, 58, 0.5);
 
-                    &:hover{
-                        color:rgba(58, 58, 58, 0.5)
+                .notif-content>a {
+                    text-decoration: none;
+                    color: rgba(58, 58, 58, 0.5);
+
+                    &:hover {
+                        color: rgba(58, 58, 58, 0.5)
                     }
                 }
             }
@@ -491,16 +488,16 @@ h5 {
                     font-weight: 500;
                     text-transform: capitalize;
                     width: 100%;
-                }   
+                }
             }
 
-            .bottom-li{
+            .bottom-li {
                 border-bottom: none !important;
-                color: #3a3a3a;             
+                color: #3a3a3a;
                 display: flex;
                 justify-content: space-between;
 
-                a{
+                a {
                     display: initial;
                     color: #3a3a3a !important;
                 }
@@ -550,22 +547,22 @@ h5 {
 .table {
     width: 100%;
 
-    .table-responsive{
-        overflow-x: auto; 
-        width: 100%;       
+    .table-responsive {
+        overflow-x: auto;
+        width: 100%;
 
         &::-webkit-scrollbar {
             height: 5px !important;
         }
-        
+
         &::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(200,200,200,1) !important;
+            -webkit-box-shadow: inset 0 0 6px rgba(200, 200, 200, 1) !important;
         }
-        
+
         &::-webkit-scrollbar-thumb {
             border-radius: 10px !important;
-            background-color:#fff !important;
-            -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7) !important;
+            background-color: #fff !important;
+            -webkit-box-shadow: inset 0 0 6px rgba(90, 90, 90, 0.7) !important;
         }
     }
 
@@ -676,11 +673,11 @@ h5 {
         margin-right: 5px;
     }
 
-    input:checked + .checkbox-view {
+    input:checked+.checkbox-view {
         background-image: url("../images/Checkbox-Checked.svg");
     }
 
-    input:disabled + .checkbox-view {
+    input:disabled+.checkbox-view {
         opacity: 0.5;
         cursor: not-allowed;
     }
@@ -710,11 +707,11 @@ h5 {
         margin-right: 5px;
     }
 
-    input:checked + .radio-view {
+    input:checked+.radio-view {
         background-position: -21px -21px;
     }
 
-    input:disabled + .radio-view {
+    input:disabled+.radio-view {
         opacity: 0.5;
         cursor: not-allowed;
     }
@@ -784,7 +781,8 @@ h5 {
         }
     }
 
-    &.date, &.datetime {
+    &.date,
+    &.datetime {
         .control {
             padding-right: 40px;
         }
@@ -807,6 +805,12 @@ h5 {
             cursor: pointer;
             margin-left: -54px;
             top: 38px;
+        }
+    }
+
+    &.multi-select {
+        .control {
+            padding: 0;
         }
     }
 
@@ -833,7 +837,8 @@ h5 {
         }
     }
 
-    &.has-error.date, &.has-error.date {
+    &.has-error.date,
+    &.has-error.date {
         &::after {
             margin-top: -12px;
         }
@@ -849,15 +854,20 @@ h5 {
 
 .table {
     .control-group {
-        &.date, &.datetime {
+
+        &.date,
+        &.datetime {
             &::after {
                 top: 6px;
                 left: 100%;
             }
         }
 
-        &.has-error.date, &.has-error.date {
-            &.date, &.datetime {
+        &.has-error.date,
+        &.has-error.date {
+
+            &.date,
+            &.datetime {
                 &::after {
                     top: 18px;
                 }
@@ -868,7 +878,9 @@ h5 {
 
 .rtl {
     .control-group {
-        &.date, &.datetime {
+
+        &.date,
+        &.datetime {
             .control {
                 padding-left: 40px;
                 padding-right: 10px;
@@ -888,7 +900,9 @@ h5 {
 
     .table {
         .control-group {
-            &.date, &.datetime {
+
+            &.date,
+            &.datetime {
                 &::after {
                     right: unset !important;
                     left: auto;
@@ -938,15 +952,15 @@ h5 {
         transition: .2s;
     }
 
-    input:checked + .slider {
+    input:checked+.slider {
         background-color: $brand-color;
     }
 
-    input:focus + .slider {
+    input:focus+.slider {
         box-shadow: 0 0 1px $brand-color;
     }
 
-    input:checked + .slider:before {
+    input:checked+.slider:before {
         -webkit-transform: translateX(26px);
         -ms-transform: translateX(26px);
         transform: translateX(26px);
@@ -955,7 +969,7 @@ h5 {
     /* rounded sliders */
     .slider.round {
         border-radius: 34px;
-        }
+    }
 
     .slider.round:before {
         border-radius: 50%;
@@ -980,10 +994,8 @@ h5 {
         padding: 15px;
         @include border-radius(3px);
         display: inline-block;
-        @include box-shadow(
-            0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1),
-            0px 2px 6px 0px rgba(0, 0, 0, 0.12)
-        );
+        @include box-shadow(0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1),
+            0px 2px 6px 0px rgba(0, 0, 0, 0.12));
         position: relative;
         animation: jelly 0.5s ease-in-out;
         transform-origin: center top;
@@ -1045,11 +1057,13 @@ h5 {
     }
 }
 
-.accordian, accordian {
+.accordian,
+accordian {
     display: inline-block;
     width: 100%;
 
-    .accordian-header, div[slot*="header"] {
+    .accordian-header,
+    div[slot*="header"] {
         width: 100%;
         display: inline-block;
         font-size: 18px;
@@ -1088,18 +1102,19 @@ h5 {
         }
     }
 
-    .accordian-content, div[slot*="body"] {
+    .accordian-content,
+    div[slot*="body"] {
         width: 100%;
         padding: 20px 15px;
         display: none;
         transition: 0.3s ease all;
     }
 
-    &.active > .accordian-content {
+    &.active>.accordian-content {
         display: inline-block;
     }
 
-    &.active > .accordian-header .expand-icon {
+    &.active>.accordian-header .expand-icon {
         background-image: url("../images/Expand-Light-On.svg");
     }
 }
@@ -1111,11 +1126,11 @@ h5 {
         margin-top: 10px;
         width: 100%;
 
-        > .tree-item {
+        >.tree-item {
             display: none;
         }
 
-        &.active > .tree-item {
+        &.active>.tree-item {
             display: inline-block;
         }
 
@@ -1145,13 +1160,13 @@ h5 {
         }
 
         &.active {
-            > .expand-icon {
+            >.expand-icon {
                 background-image: url("../images/Expand-Light-On.svg");
             }
         }
     }
 
-    > .tree-item {
+    >.tree-item {
         padding-left: 0;
     }
 }
@@ -1200,10 +1215,8 @@ modal {
     margin-left: -300px;
     position: fixed;
     z-index: 11;
-    @include box-shadow(
-        0px 15px 25px 0px rgba(0, 0, 0, 0.03),
-        0px 20px 45px 5px rgba(0, 0, 0, 0.2)
-    );
+    @include box-shadow(0px 15px 25px 0px rgba(0, 0, 0, 0.03),
+        0px 20px 45px 5px rgba(0, 0, 0, 0.2));
     animation: fade-in-white 0.3s ease-in-out;
     animation: jelly 0.5s ease-in-out;
     @include border-radius(5px);
@@ -1244,12 +1257,12 @@ modal {
     }
 
     .control-group {
-        width: 100%;     
+        width: 100%;
 
-        .control {            
+        .control {
             width: 100%;
-        } 
-    }    
+        }
+    }
 }
 
 .label {
@@ -1346,7 +1359,7 @@ modal {
         }
 
         .remove-image {
-            background-image: linear-gradient(-180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.24) 100%);
+            background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.24) 100%);
             @include border-radius(0 0 4px 4px);
             position: absolute;
             bottom: 0;
@@ -1354,7 +1367,7 @@ modal {
             padding: 10px;
             text-align: center;
             color: $white-color;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.24);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
             margin-right: 20px;
             cursor: pointer;
         }
@@ -1475,7 +1488,8 @@ modal {
     }
 }
 
-.start-date::after, .end-date::after {
+.start-date::after,
+.end-date::after {
     background-image: url(../images/Icon-Calendar.svg);
     width: 24px;
     height: 24px;
@@ -1488,45 +1502,44 @@ modal {
     top: 43%;
 }
 
-@media only screen and (max-width: 414px){
-    .notification{
+@media only screen and (max-width: 414px) {
+    .notification {
         width: 414px;
     }
 }
 
-@media only screen and (max-width: 411px){
-    .notification{
+@media only screen and (max-width: 411px) {
+    .notification {
         width: 410px;
     }
 }
 
-@media only screen and (max-width: 393px){
-    .notification{
+@media only screen and (max-width: 393px) {
+    .notification {
         width: 393px;
     }
 }
 
-@media only screen and (max-width: 390px){
-    .notification{
+@media only screen and (max-width: 390px) {
+    .notification {
         width: 390px;
     }
 }
 
-@media only screen and (max-width: 375px){
-    .notification{
+@media only screen and (max-width: 375px) {
+    .notification {
         width: 375px;
     }
 }
 
-@media only screen and (max-width: 360px){
-    .notification{
+@media only screen and (max-width: 360px) {
+    .notification {
         width: 360px;
     }
 }
 
-@media only screen and (max-width: 320px){
-    .notification{
+@media only screen and (max-width: 320px) {
+    .notification {
         width: 320px;
     }
 }
-
