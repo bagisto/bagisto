@@ -144,6 +144,7 @@ $toggleColor: #3c41ff;
       }
     }
   }
+
   
   .nav-items{
     position: fixed;
@@ -179,6 +180,11 @@ $toggleColor: #3c41ff;
             color:#000;
             display: block;
             padding: 5px;
+
+            .arrow-icon{
+              position: absolute;
+              right: 0;
+            }
         }
 
         ul{
@@ -211,6 +217,59 @@ $toggleColor: #3c41ff;
       }       
     }
   }        
+}
+
+.rtl{
+  .nav-container{  
+
+    .close{
+      left:13px;
+      right: auto !important;
+    }
+    
+    &.is-active {
+      .nav-toggle {
+        &:before, &:after {
+          box-shadow: none;
+        }
+      }
+      
+      .nav-items,.nav-top {
+        transform: translate(0, 0);
+      }
+  
+      .overlay{
+        display: block;
+      }
+    }
+
+    .nav-top{
+      right: 0;
+      left: 100%;
+      transform: translate(calc(100% + 50px), 0);
+
+      .pro-info{
+        .profile-info-desc{
+          margin-left: 0px;
+          margin-right: 40px;
+        }
+      }
+    }
+    .nav-items{
+      right: 0;
+      left: 100%;
+      transform: translate(calc(100% + 50px), 0);
+
+
+        a{
+            .arrow-icon{
+              position: absolute;
+              right: auto;
+              left: 20px;
+            }
+        }
+    }
+  }
 }
 
 @media only screen and (max-width: 768px){

@@ -105,10 +105,10 @@ body {
                 color: #a2a2a2;
             }
 
-            .profile-info-div{
+            .profile-info-div {
                 display: flex;
 
-                .profile-info-icon{
+                .profile-info-icon {
                     height: 31px;
                     width: 30px;
                     background: #3c41ff;
@@ -546,7 +546,6 @@ body {
 }
 
 .content-container {
-    padding-left: 56px;
     height: calc(100% - 60px);
     width: 100%;
     margin-top: 60px;
@@ -883,6 +882,26 @@ body {
     .switch-dark {
         width: 100%;
     }
+
+
+    .padding-container-navbar-not-expand {
+        padding-left: 0 !important;
+    }
+
+    .padding-container-navbar-expand {
+        padding-left: 0 !important;
+    }
+
+    .rtl {
+        .padding-container-navbar-not-expand {
+            padding-right: 0 !important;
+        }
+
+        .padding-container-navbar-expand {
+            padding-right: 0 !important;
+        }
+    }
+
 }
 
 @media only screen and (max-width: 411px) {
