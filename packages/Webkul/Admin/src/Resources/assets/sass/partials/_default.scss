@@ -252,7 +252,7 @@ body {
                         }
 
                         &.active {
-                            background-color: $nav-hover-color;
+                            background-color: #e6e6e6;
                             .menu-label {
                                 color: $blue;
                             }
@@ -338,7 +338,7 @@ body {
                             }
 
                             &.active, &:hover {
-                                background-color: $nav-hover-color;
+                                background-color: #e6e6e6;
                                 .menu-label {
                                     color: #000 !important;                                    
                                 }
