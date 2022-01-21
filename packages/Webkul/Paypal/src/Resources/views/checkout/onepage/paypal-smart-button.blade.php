@@ -28,12 +28,6 @@
                     return;
                 }
 
-                if (typeof paypal == 'undefined') {
-                    options.alertBox(messages.sdkValidationError);
-
-                    return;
-                }
-
                 let options = {
                     style: {
                         layout:  'vertical',
@@ -97,6 +91,12 @@
                         }
                     }
                 };
+
+                if (typeof paypal == 'undefined') {
+                    options.alertBox(messages.sdkValidationError);
+
+                    return;
+                }
 
                 paypal.Buttons(options).render('.paypal-button-container');
             });
