@@ -1348,6 +1348,11 @@ return [
         'something-went-wrong'    => 'Something went wrong!',
     ],
 
+    'validations' => [
+        'slug-being-used' => 'This slug is getting used in either categories or products.',
+        'slug-reserved'   => 'This slug is reserved.',
+    ],
+
     'footer' => [
         'copy-right' => 'Powered by <a href="https://bagisto.com/" target="_blank">Bagisto</a>, A Community Project by <a href="https://webkul.com/" target="_blank">Webkul</a>',
     ],
@@ -1543,7 +1548,7 @@ return [
             'resource-not-found' => 'Uyarı: İstenen :resource Kayıtta bulunamadı.',
         ],
     ],
-    
+
     'notification' => [
         'title'                       => 'Bildirim',
         'title-plural'                => 'Bildirimler',

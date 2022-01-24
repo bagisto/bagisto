@@ -1,5 +1,4 @@
 @if (request()->route()->getName() == 'shop.checkout.onepage.index')
-
     @php
         $clientId = core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id');
         $acceptedCurrency = core()->getConfigData('sales.paymentmethods.paypal_smart_button.accepted_currencies');
@@ -24,12 +23,6 @@
             eventBus.$on('after-payment-method-selected', function (payment) {
                 if (payment.method != 'paypal_smart_button') {
                     $('.paypal-buttons').remove();
-
-                    return;
-                }
-
-                if (typeof paypal == 'undefined') {
-                    options.alertBox(messages.sdkValidationError);
 
                     return;
                 }
@@ -98,9 +91,14 @@
                     }
                 };
 
+                if (typeof paypal == 'undefined') {
+                    options.alertBox(messages.sdkValidationError);
+
+                    return;
+                }
+
                 paypal.Buttons(options).render('.paypal-button-container');
             });
         });
     </script>
-
 @endif

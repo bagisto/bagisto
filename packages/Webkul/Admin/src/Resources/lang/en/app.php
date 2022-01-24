@@ -1364,7 +1364,7 @@ return [
     ],
 
     'response' => [
-        'being-used'                => 'This resource :name is getting used in :source',
+        'being-used'                => 'This :name is getting used in :source',
         'product-copied'            => 'The Product has been copied',
         'error-while-copying'       => 'Something went wrong while trying to copy the product',
         'product-can-not-be-copied' => 'Products of type :type can not be copied',
@@ -1388,6 +1388,11 @@ return [
         'already-taken'             => 'The :name has already been taken.',
         'order-pending'             => 'Cannot delete :name account because some Order(s) are pending or processing state.',
         'something-went-wrong'      => 'Something went wrong!',
+    ],
+
+    'validations' => [
+        'slug-being-used' => 'This slug is getting used in either categories or products.',
+        'slug-reserved'   => 'This slug is reserved.',
     ],
 
     'footer' => [
