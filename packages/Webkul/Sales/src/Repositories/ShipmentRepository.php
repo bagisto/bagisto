@@ -3,32 +3,32 @@
 namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container as App;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Shipment;
-use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\ShipmentItemRepository;
 
 class ShipmentRepository extends Repository
 {
     /**
-     * OrderRepository object
+     * Order repository instance.
      *
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
-     * OrderItemRepository object
+     * Order item repository instance.
      *
      * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
-     * ShipmentItemRepository object
+     * Shipment item repository instance.
      *
      * @var \Webkul\Sales\Repositories\ShipmentItemRepository
      */
@@ -47,8 +47,7 @@ class ShipmentRepository extends Repository
         OrderItemRepository $orderItemRepository,
         ShipmentItemRepository $shipmentItemRepository,
         App $app
-    )
-    {
+    ) {
         $this->orderRepository = $orderRepository;
 
         $this->orderItemRepository = $orderItemRepository;
@@ -59,16 +58,18 @@ class ShipmentRepository extends Repository
     }
 
     /**
-     * Specify Model class name
+     * Specify model class name.
      *
      * @return string
      */
-    function model()
+    public function model()
     {
         return Shipment::class;
     }
 
     /**
+     * Create.
+     *
      * @param  array  $data
      * @param  string $orderState
      * @return \Webkul\Sales\Contracts\Shipment
@@ -85,6 +86,7 @@ class ShipmentRepository extends Repository
             $shipment = $this->model->create([
                 'order_id'            => $order->id,
                 'total_qty'           => 0,
+                'total_weight'        => 0,
                 'carrier_title'       => $data['shipment']['carrier_title'],
                 'track_number'        => $data['shipment']['track_number'],
                 'customer_id'         => $order->customer_id,
@@ -93,7 +95,7 @@ class ShipmentRepository extends Repository
                 'inventory_source_id' => $data['shipment']['source'],
             ]);
 
-            $totalQty = 0;
+            $totalQty = $totalWeight = 0;
 
             foreach ($data['shipment']['items'] as $itemId => $inventorySource) {
                 $qty = $inventorySource[$data['shipment']['source']];
@@ -105,8 +107,9 @@ class ShipmentRepository extends Repository
                 }
 
                 $totalQty += $qty;
+                $totalWeight += $orderItem->weight * $qty;
 
-                $shipmentItem = $this->shipmentItemRepository->create([
+                $this->shipmentItemRepository->create([
                     'shipment_id'   => $shipment->id,
                     'order_item_id' => $orderItem->id,
                     'name'          => $orderItem->name,
@@ -153,6 +156,7 @@ class ShipmentRepository extends Repository
 
             $shipment->update([
                 'total_qty'             => $totalQty,
+                'total_weight'          => $totalWeight,
                 'inventory_source_name' => $shipment->inventory_source->name,
             ]);
 

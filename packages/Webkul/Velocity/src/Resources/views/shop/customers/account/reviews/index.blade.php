@@ -27,49 +27,51 @@
     <div class="reviews-container">
         @if (! $reviews->isEmpty())
             @foreach ($reviews as $review)
-                <div class="row col-12 fs16">
-                    <div class="col-12 row">
+                <div class="col-12 lg-card-container list-card product-card row">
+                    <div class="product-image">
                         @php
                             $image = productimage()->getProductBaseImage($review->product);
                         @endphp
-
                         <a
-                            href="{{ url()->to('/').'/'.$review->product->url_key }}"
                             title="{{ $review->product->name }}"
-                            class="col-2 max-sm-img-dimention no-padding">
-                            <img class="media" src="{{ $image['small_image_url'] }}" alt=""/>
-                        </a>
+                            href="{{ url()->to('/').'/'.$review->product->url_key }}">
 
-                        <div class="col-8">
+                            <img src="{{ $image['small_image_url'] }}" title="{{ $review->product->name }}">
+                        </a>
+                    </div>
+
+                    <div class="product-information">
+                        <div class="d-flex justify-content-between">
                             <div class="product-name">
                                 <a
-                                    class="remove-decoration"
                                     href="{{ url()->to('/').'/'.$review->product->url_key }}"
-                                    title="{{ $review->product->name }}">
-                                    {{$review->product->name}}
+                                    title="{{ $review->product->name }}" class="unset">
+
+                                    <span class="fs16">{{ $review->product->name }}</span>
                                 </a>
-                            </div>
 
-                            <star-ratings ratings="{{ $review->rating }}"></star-ratings>
+                                <star-ratings ratings="{{ $review->rating }}"></star-ratings>
 
-                            <h5 class="fw6" v-pre>{{ $review->title }}</h5>
+                                <h5 class="fw6" v-pre>{{ $review->title }}</h5>
 
-                            <p v-pre>{{ $review->comment }}</p>
-                        </div>
+                                <p v-pre>{{ $review->comment }}</p>
+                            </div>  
 
-                        <div class="col-2">
-                            <form id="deleteReviewForm" action="{{ route('customer.review.delete', $review->id) }}" method="post">
-                                @method('delete')
-                                @csrf
-                            </form>
+                            <div>
+                                <form id="deleteReviewForm" action="{{ route('customer.review.delete', $review->id) }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                </form>
 
-                            <a class="unset" href="javascript:void(0);" onclick="confirm('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}') ? document.getElementById('deleteReviewForm').submit() : null;">
-                                <span class="rango-delete fs24"></span>
-                                <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
-                            </a>
+                                <a class="unset" href="javascript:void(0);" onclick="confirm('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}') ? document.getElementById('deleteReviewForm').submit() : null;">
+                                    <span class="rango-delete fs24"></span>
+                                    <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
+                                </a>
+                            </div>                       
+
                         </div>
                     </div>
-                </div>
+                </div>               
             @endforeach
 
             <div class="bottom-toolbar">
