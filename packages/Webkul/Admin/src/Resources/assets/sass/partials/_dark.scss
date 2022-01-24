@@ -275,7 +275,7 @@
             }
 
             tbody td {
-                color:$dark-mode-text-color;
+                color: $dark-mode-text-color;
                 border-bottom: 1px solid $seprator;
             }
         }
@@ -397,7 +397,7 @@
 
                     a {
                         display: initial;
-                        color:$dark-mode-text-color !important;
+                        color: $dark-mode-text-color !important;
                     }
                 }
             }
@@ -432,7 +432,7 @@
 
     .control-group {
         label {
-            color:$dark-mode-text-color;
+            color: $dark-mode-text-color;
         }
 
         .control {
@@ -684,7 +684,7 @@
     .flatpickr-day.notAllowed.nextMonthDay,
     .flatpickr-day.notAllowed.prevMonthDay,
     .flatpickr-day.prevMonthDay {
-        color:$dark-mode-text-color;
+        color: $dark-mode-text-color;
         background: transparent;
         border-color: transparent;
         cursor: default;
@@ -758,4 +758,7 @@
         background-color: $dark-mode-switch-background !important;
     }
 
+    .badge.badge-warning {
+        background-color: $dark-mode-pending-color;
+    }
 }
