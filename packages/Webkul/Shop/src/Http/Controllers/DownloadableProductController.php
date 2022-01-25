@@ -65,6 +65,9 @@ class DownloadableProductController extends Controller
             }
         }
 
+        $orderedQty = $downloadableLinkPurchased->order->total_qty_ordered;
+        $totalInvoiceQty = $totalInvoiceQty * ($downloadableLinkPurchased->download_bought / $orderedQty);
+
         if ($downloadableLinkPurchased->download_used == $totalInvoiceQty || $downloadableLinkPurchased->download_used > $totalInvoiceQty) {
             session()->flash('warning', trans('shop::app.customer.account.downloadable_products.payment-error'));
 
