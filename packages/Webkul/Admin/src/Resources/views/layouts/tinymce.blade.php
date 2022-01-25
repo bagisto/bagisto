@@ -7,7 +7,7 @@
 
             let config = {
                 relative_urls : false,
-                remove_script_host : true,
+                remove_script_host : false,
                 document_base_url : '{{ asset('/') }}',
                 uploadRoute: '{{ route('admin.tinymce.upload') }}',
                 csrfToken: '{{ csrf_token() }}',
