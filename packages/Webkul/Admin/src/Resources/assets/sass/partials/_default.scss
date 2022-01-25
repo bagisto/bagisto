@@ -9,6 +9,26 @@ body {
     background-color: $body-background;
 }
 
+.padding-container-navbar-not-expand{
+    padding-left:56px !important;
+}
+
+.padding-container-navbar-expand{
+    padding-left:200px !important;
+}
+
+.rtl{
+    .padding-container-navbar-not-expand{
+        padding-right:56px !important;
+        padding-left: 0px !important;
+    }
+
+    .padding-container-navbar-expand{
+        padding-right:200px !important;
+        padding-left: 0px !important;
+    }
+}
+
 .dark-mode-button {
     background: $blue;
     border: none;
@@ -212,6 +232,16 @@ body {
 
                 .arrow-icon {
                     display: none;
+                }
+
+                .arrow-icon-left{
+                    float: right;
+
+                }
+
+                .arrow-icon-right{
+                    float: left;
+                    margin-left: 20px;
                 }
             }
 
@@ -465,6 +495,41 @@ body {
 }
 
 .rtl {
+    .navbar-left {   
+        right: 0 !important;
+
+        ul.menubar {
+
+            li.menu-item {
+
+                ul.sub-menubar {
+                    top: 0;
+                    right: 56px !important;
+                }    
+            }
+        } 
+
+        &.open {         
+
+            ul.menubar {
+
+                li.menu-item {
+
+
+                    ul.sub-menubar {
+
+                        li.sub-menu-item {
+                            a {
+                                padding-right: 52px;
+                                padding-left: 0px;
+                            }
+                        }
+                    }                 
+                }
+            }
+        }
+    }
+
     .ticket-list {
         .control-group {
             &.has-error {

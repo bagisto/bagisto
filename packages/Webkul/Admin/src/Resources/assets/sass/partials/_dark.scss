@@ -771,7 +771,7 @@
                 >a {
                     padding: 5px 2px;
                     display: block;
-                    color: #000;
+                    color: $black;
                     width: 100%;
 
                     .icon {
@@ -782,7 +782,7 @@
 
                     .menu-label {
                         display: none;
-                        color: #B0BEC5;
+                        color: $menu-label-text-color;
                     }
 
                     .arrow-icon {
@@ -792,36 +792,36 @@
                     &.active,
                     &:hover {
                         padding: 5px 2px;
-                        background-color: rgba(1, 10, 20, .5);
+                        background-color: $dark-mode-left-menubar-background-color;
                     }
                 }
 
                 &.active {
                     >a {
-                        background-color: rgba(1, 10, 20, .5);
+                        background-color: $dark-mode-left-menubar-background-color;
                     }
                 }
 
                 &:hover {
 
                     ul.sub-menubar {
-                        background: #031425;
+                        background: $dark-mode-left-submenubar-active-background-color;
                         box-shadow: none;
-                        border: 1px solid #24384c;
+                        border: 1px solid $dark-mode-switch-border;
 
 
                         .sub-menu-item {
 
                             .menu-label {
-                                color: #fff !important;
+                                color: $white !important;
                             }
 
                             &.active,
                             &:hover {
-                                background-color: #020f1c;
+                                background-color: $dark-mode-left-submenubar-background-color;
 
                                 .menu-label {
-                                    color: #fff !important;
+                                    color: $white !important;
                                 }
                             }
                         }
@@ -838,7 +838,7 @@
                             font-size: 14px;
                             font-weight: 200;
                             display: inline-block;
-                            color: #B0BEC5;
+                            color: $menu-label-text-color;
                         }
 
                         .arrow-icon {
@@ -866,25 +866,25 @@
                         width: calc(100% - 1px);
 
                         .menu-label {
-                            color: #fff;
+                            color: $white;
                         }
 
                         ul.sub-menubar {
                             display: block;
-                            background-color: #031425;
+                            background-color: $dark-mode-left-submenubar-active-background-color;
                             border: none !important;
 
                             .sub-menu-item {
                                 .menu-label {
-                                    color: #B0BEC5;
+                                    color: $menu-label-text-color;
                                 }
 
                                 &.active,
                                 &:hover {
-                                    background-color: rgba(1, 10, 20, .5);
+                                    background-color: $dark-mode-left-menubar-background-color;
 
                                     .menu-label {
-                                        color: #fff !important;
+                                        color: $white !important;
                                     }
                                 }
                             }
@@ -895,7 +895,7 @@
                         background: $dark-bg;
 
                         .menu-label {
-                            color: #fff;
+                            color: $white;
                         }
                     }
                 }

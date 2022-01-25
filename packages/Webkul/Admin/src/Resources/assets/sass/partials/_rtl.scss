@@ -10,10 +10,17 @@
             text-align: left;
 
             .profile-info {
-                margin: 0 30px 0 25px;
+                
+                .profile-info-div {                   
+
+                    .profile-info-icon {
+                        margin-right: 0px !important;
+                        margin-left: 10px !important;
+                    }
+                }
 
                 i.icon {
-                    margin-left: 0px;
+                    margin-left: 10px;
                     margin-right: 10px;
                 }
             }
@@ -24,6 +31,8 @@
         border-left: 1px solid rgba(162, 162, 162, 0.2);
         border-right: none;
         background-color: $white;
+        left: 100%;
+        right: 0;
     }
 
     .content-container {
@@ -43,7 +52,6 @@
             }
 
             .control-group {
-                margin-right: 20px;
                 margin-left: 0px;
             }
         }
@@ -131,7 +139,7 @@
         }
     }
 
-    .tree-container > .tree-item {
+    .tree-container>.tree-item {
         padding-right: 0px;
     }
 

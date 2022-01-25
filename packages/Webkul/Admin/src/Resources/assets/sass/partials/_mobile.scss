@@ -165,7 +165,6 @@ $toggleColor: #3c41ff;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
     overflow-y: scroll ;
     text-decoration: none;
-    transition: all 0.2s ease-in-out;
 
     &::-webkit-scrollbar {
       display: none;
@@ -285,4 +284,22 @@ $toggleColor: #3c41ff;
     .content-container{
       padding-left: 0px !important;
     }
+
+    .padding-container-navbar-not-expand {
+      padding-left: 0 !important;
+  }
+
+  .padding-container-navbar-expand {
+      padding-left: 0 !important;
+  }
+
+  .rtl {
+      .padding-container-navbar-not-expand {
+          padding-right: 0 !important;
+      }
+
+      .padding-container-navbar-expand {
+          padding-right: 0 !important;
+      }
+  }
 }
