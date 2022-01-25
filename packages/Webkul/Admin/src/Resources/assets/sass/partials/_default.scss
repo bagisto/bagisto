@@ -9,22 +9,22 @@ body {
     background-color: $body-background;
 }
 
-.padding-container-navbar-not-expand{
-    padding-left:56px !important;
+.padding-container-navbar-not-expand {
+    padding-left: 56px !important;
 }
 
-.padding-container-navbar-expand{
-    padding-left:200px !important;
+.padding-container-navbar-expand {
+    padding-left: 200px !important;
 }
 
-.rtl{
-    .padding-container-navbar-not-expand{
-        padding-right:56px !important;
+.rtl {
+    .padding-container-navbar-not-expand {
+        padding-right: 56px !important;
         padding-left: 0px !important;
     }
 
-    .padding-container-navbar-expand{
-        padding-right:200px !important;
+    .padding-container-navbar-expand {
+        padding-right: 200px !important;
         padding-left: 0px !important;
     }
 }
@@ -234,12 +234,12 @@ body {
                     display: none;
                 }
 
-                .arrow-icon-left{
+                .arrow-icon-left {
                     float: right;
 
                 }
 
-                .arrow-icon-right{
+                .arrow-icon-right {
                     float: left;
                     margin-left: 20px;
                 }
@@ -495,7 +495,7 @@ body {
 }
 
 .rtl {
-    .navbar-left {   
+    .navbar-left {
         right: 0 !important;
 
         ul.menubar {
@@ -505,11 +505,11 @@ body {
                 ul.sub-menubar {
                     top: 0;
                     right: 56px !important;
-                }    
+                }
             }
-        } 
+        }
 
-        &.open {         
+        &.open {
 
             ul.menubar {
 
@@ -524,7 +524,7 @@ body {
                                 padding-left: 0px;
                             }
                         }
-                    }                 
+                    }
                 }
             }
         }
@@ -620,6 +620,15 @@ body {
             width: 100%;
             display: inline-block;
             padding: 8px 16px;
+
+            .page-content-button {
+                float: right;
+            }
+
+            .page-content-datagrid {
+                display: block;
+                clear: both;
+            }
         }
     }
 }
@@ -778,8 +787,12 @@ body {
         font-size: 18px;
     }
 
-    .btn.btn-lg {
-        padding: 4px 6px;
+    .back-link {
+        margin-top: -2px !important;
+    }
+
+    .export-import {
+        margin-top: -15px;
     }
 
     .navbar-top {
@@ -823,40 +836,35 @@ body {
 
         .content {
 
-            .page-header {
+            .configuration {
 
-                .control-group {
-                    width: 100% !important;
-                    display: block;
-                    margin-bottom: 0;
-                    margin-left: 0px;
-                    padding: 0px;
-                    margin-top: 40px;
-                }
+                .page-header {
 
-                .page-title {
-                    float: left;
-                    width: 100%;
+                    .control-group {
+                        width: 100% !important;
+                        display: block;
+                        margin-bottom: 0;
+                        margin-left: 0px;
+                        padding: 0px;
+                        margin-top: 40px;
+                    }
 
-                    .back-link {
+                    .page-title {
+                        float: left;
+                        width: 100%;
+
+                        .back-link {
+                            margin-top: 0px;
+                            margin-right: -1px;
+                            height: 22px !important;
+                            width: 22px !important;
+                        }
+                    }
+
+                    .page-action {
+                        position: absolute;
+                        right: 10px;
                         margin-top: 0px;
-                        margin-right: -1px;
-                        height: 22px !important;
-                        width: 22px !important;
-                    }
-                }
-
-                .page-action {
-                    position: absolute;
-                    right: 10px;
-                    margin-top: 0px;
-
-                    .export-import {
-                        margin-top: -15px;
-                    }
-
-                    * {
-                        display: inline-block;
                     }
                 }
             }
@@ -884,60 +892,46 @@ body {
     }
 }
 
-@media only screen and (max-width: 411px) {
+@media only screen and (max-width: 414px) {
     .content-container {
-
         .content {
-
             .page-header {
 
-                .control-group {
+                .page-title {
                     width: 100% !important;
-                    display: block;
-                    margin-bottom: 0;
-                    margin-left: 0px;
-                    padding: 0px;
-                    margin-top: 40px;
+
+                    .control-group {
+                        margin-top: 10px !important;
+                        width: 100% !important;
+                        margin-left: 0px !important;
+                    }
+                }
+
+                .page-action {
+                    margin-top: 10px !important;
+                    float: left;
+
+                    a {
+                        margin-left: 0px !important;
+                    }
+
+                    .export-import {
+                        margin-top: 0px !important;
+                    }
                 }
             }
         }
     }
 }
 
-@media only screen and (max-width: 385px) {
+@media only screen and (max-width: 400px) {
     .content-container {
-
         .content {
-
-            .page-header {
-
-                .control-group {
-                    width: 100% !important;
-                    display: block;
-                    margin-bottom: 0;
-                    margin-left: 0px;
-                    padding: 0px;
-                    margin-top: 40px;
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 320px) {
-    .content-container {
-
-        .content {
-
-            .page-header {
-
-                .control-group {
-                    width: 100% !important;
-                    display: block;
-                    margin-bottom: 0;
-                    margin-left: 0px;
-                    padding: 0px;
-                    margin-top: 40px;
+            .page-header {                
+                .page-action {
+                    a{
+                        margin-top:10px;
+                    }
                 }
             }
         }

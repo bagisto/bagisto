@@ -4,6 +4,26 @@
     {{ __('admin::app.settings.tax-rates.title') }}
 @stop
 
+@push('css')
+<style>
+    @media only screen and (max-width: 450px){
+        .content-container .content .page-header .page-title{
+            width: 100% !important;
+        }
+
+        .content-container .content .page-header .page-action {
+            margin-top: 0px !important;
+            float: left;
+        }
+
+        .export-import {
+            margin-top: 0px !important;
+        }
+    }
+</style>
+
+@endpush
+
 @section('content')
     <div class="content">
         <div class="page-header">
