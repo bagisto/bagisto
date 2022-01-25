@@ -893,7 +893,6 @@ body {
 }
 
 @media only screen and (max-width: 414px) {
-
     .content-container {
         .content {
             .page-header {
@@ -918,6 +917,20 @@ body {
 
                     .export-import {
                         margin-top: 0px !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .content-container {
+        .content {
+            .page-header {                
+                .page-action {
+                    a{
+                        margin-top:10px;
                     }
                 }
             }
