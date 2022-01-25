@@ -37,15 +37,13 @@
 
             {!! view_render_event('bagisto.admin.layout.nav-top.after') !!}
 
-
             {!! view_render_event('bagisto.admin.layout.nav-left.before') !!}
 
             @include ('admin::layouts.nav-left')
 
             {!! view_render_event('bagisto.admin.layout.nav-left.after') !!}
 
-
-            <div class="content-container" v-bind:style="isMenuOpen ? 'padding-left:200px' : 'padding-left:56px'">
+            <div :class="isMenuOpen ? 'content-container padding-container-navbar-expand' : 'content-container padding-container-navbar-not-expand'">
 
                 {!! view_render_event('bagisto.admin.layout.content.before') !!}
 

@@ -757,8 +757,153 @@
     .control-group input:checked+.slider {
         background-color: $dark-mode-switch-background !important;
     }
+}
 
-    .badge.badge-warning {
-        background-color: $dark-mode-pending-color;
+.rtl.dark-mode {
+
+    .navbar-left {
+        background-color: $dark-bg;
+        border-right: 1px solid $dark-bg;
+
+        ul.menubar {
+            li.menu-item {
+
+                >a {
+                    padding: 5px 2px;
+                    display: block;
+                    color: $black;
+                    width: 100%;
+
+                    .icon {
+                        display: inline-block;
+                        vertical-align: middle;
+                        transform: scale(0.7);
+                    }
+
+                    .menu-label {
+                        display: none;
+                        color: $menu-label-text-color;
+                    }
+
+                    .arrow-icon {
+                        display: none;
+                    }
+
+                    &.active,
+                    &:hover {
+                        padding: 5px 2px;
+                        background-color: $dark-mode-left-menubar-background-color;
+                    }
+                }
+
+                &.active {
+                    >a {
+                        background-color: $dark-mode-left-menubar-background-color;
+                    }
+                }
+
+                &:hover {
+
+                    ul.sub-menubar {
+                        background: $dark-mode-left-submenubar-active-background-color;
+                        box-shadow: none;
+                        border: 1px solid $dark-mode-switch-border;
+
+
+                        .sub-menu-item {
+
+                            .menu-label {
+                                color: $white !important;
+                            }
+
+                            &.active,
+                            &:hover {
+                                background-color: $dark-mode-left-submenubar-background-color;
+
+                                .menu-label {
+                                    color: $white !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.open {
+            ul.menubar {
+                li.menu-item {
+                    a {
+                        .menu-label {
+                            font-size: 14px;
+                            font-weight: 200;
+                            display: inline-block;
+                            color: $menu-label-text-color;
+                        }
+
+                        .arrow-icon {
+                            display: inline-block;
+                        }
+                    }
+
+                    ul.sub-menubar {
+                        display: none;
+                        position: unset;
+                        background-color: transparent;
+                        border-radius: 0;
+                        box-shadow: unset;
+                        border: 0;
+
+                        li.sub-menu-item {
+                            a {
+                                padding-left: 52px;
+                            }
+                        }
+                    }
+
+                    &.active {
+                        background: $dark-bg;
+                        width: calc(100% - 1px);
+
+                        .menu-label {
+                            color: $white;
+                        }
+
+                        ul.sub-menubar {
+                            display: block;
+                            background-color: $dark-mode-left-submenubar-active-background-color;
+                            border: none !important;
+
+                            .sub-menu-item {
+                                .menu-label {
+                                    color: $menu-label-text-color;
+                                }
+
+                                &.active,
+                                &:hover {
+                                    background-color: $dark-mode-left-menubar-background-color;
+
+                                    .menu-label {
+                                        color: $white !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &:hover {
+                        background: $dark-bg;
+
+                        .menu-label {
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+
+        .menubar-bottom {
+            background-color: $dark-bg;
+        }
     }
 }

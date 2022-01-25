@@ -106,6 +106,9 @@ class DownloadableLinkPurchasedRepository extends Repository
                         $totalInvoiceQty = $totalInvoiceQty + $invoice_item->qty;
                     }
 
+                    $orderedQty = $purchasedLink->order_item->qty_ordered;
+                    $totalInvoiceQty = $totalInvoiceQty * ($purchasedLink->download_bought / $orderedQty);            
+
                     $this->update([
                         'status' => $purchasedLink->download_used == $totalInvoiceQty ? $status : $purchasedLink->status,
                         'download_canceled' => $purchasedLink->download_bought - $totalInvoiceQty,
