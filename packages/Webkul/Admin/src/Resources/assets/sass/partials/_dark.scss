@@ -67,23 +67,22 @@
                     &.active,
                     &:hover {
                         padding: 5px 2px;
-                        background-color: $dark-mode-left-menubar-background-color;
                     }
                 }
 
                 &.active {
                     >a {
-                        background-color: $dark-mode-left-menubar-background-color;
+                        background-color: $dark-mode-left-menubar-background-color !important;
                     }
                 }
 
                 &:hover {
+                    background-color: $dark-mode-left-menubar-background-color !important;
 
                     ul.sub-menubar {
-                        background: $dark-mode-left-submenubar-background-color;
+                        background: $dark-mode-left-submenubar-background-color !important;
                         box-shadow: none;
                         border: 1px solid $dark-mode-switch-border;
-
 
                         .sub-menu-item {
 
