@@ -9,22 +9,22 @@ body {
     background-color: $body-background;
 }
 
-.padding-container-navbar-not-expand{
-    padding-left:56px !important;
+.padding-container-navbar-not-expand {
+    padding-left: 56px !important;
 }
 
-.padding-container-navbar-expand{
-    padding-left:200px !important;
+.padding-container-navbar-expand {
+    padding-left: 200px !important;
 }
 
-.rtl{
-    .padding-container-navbar-not-expand{
-        padding-right:56px !important;
+.rtl {
+    .padding-container-navbar-not-expand {
+        padding-right: 56px !important;
         padding-left: 0px !important;
     }
 
-    .padding-container-navbar-expand{
-        padding-right:200px !important;
+    .padding-container-navbar-expand {
+        padding-right: 200px !important;
         padding-left: 0px !important;
     }
 }
@@ -234,12 +234,12 @@ body {
                     display: none;
                 }
 
-                .arrow-icon-left{
+                .arrow-icon-left {
                     float: right;
 
                 }
 
-                .arrow-icon-right{
+                .arrow-icon-right {
                     float: left;
                     margin-left: 20px;
                 }
@@ -495,7 +495,7 @@ body {
 }
 
 .rtl {
-    .navbar-left {   
+    .navbar-left {
         right: 0 !important;
 
         ul.menubar {
@@ -505,11 +505,11 @@ body {
                 ul.sub-menubar {
                     top: 0;
                     right: 56px !important;
-                }    
+                }
             }
-        } 
+        }
 
-        &.open {         
+        &.open {
 
             ul.menubar {
 
@@ -524,7 +524,7 @@ body {
                                 padding-left: 0px;
                             }
                         }
-                    }                 
+                    }
                 }
             }
         }
@@ -621,10 +621,11 @@ body {
             display: inline-block;
             padding: 8px 16px;
 
-            .page-content-button{
+            .page-content-button {
                 float: right;
             }
-            .page-content-datagrid{
+
+            .page-content-datagrid {
                 display: block;
                 clear: both;
             }
@@ -790,7 +791,7 @@ body {
         margin-top: -2px !important;
     }
 
-    .export-import{
+    .export-import {
         margin-top: -15px;
     }
 
@@ -835,9 +836,9 @@ body {
 
         .content {
 
-            .configuration{
+            .configuration {
 
-                 .page-header {
+                .page-header {
 
                     .control-group {
                         width: 100% !important;
@@ -847,11 +848,11 @@ body {
                         padding: 0px;
                         margin-top: 40px;
                     }
-    
+
                     .page-title {
                         float: left;
                         width: 100%;
-    
+
                         .back-link {
                             margin-top: 0px;
                             margin-right: -1px;
@@ -859,14 +860,14 @@ body {
                             width: 22px !important;
                         }
                     }
-    
+
                     .page-action {
                         position: absolute;
                         right: 10px;
                         margin-top: 0px;
                     }
                 }
-            }            
+            }
         }
 
         .content-wrapper {
@@ -891,16 +892,16 @@ body {
     }
 }
 
-@media only screen and (max-width: 414px){
+@media only screen and (max-width: 414px) {
 
     .content-container {
         .content {
             .page-header {
 
-                .page-title{
+                .page-title {
                     width: 100% !important;
 
-                    .control-group{
+                    .control-group {
                         margin-top: 10px !important;
                         width: 100% !important;
                         margin-left: 0px !important;
@@ -911,7 +912,7 @@ body {
                     margin-top: 10px !important;
                     float: left;
 
-                    a{
+                    a {
                         margin-left: 0px !important;
                     }
 
@@ -919,8 +920,7 @@ body {
                         margin-top: 0px !important;
                     }
                 }
-            } 
-        } 
-    } 
-
+            }
+        }
+    }
 }
