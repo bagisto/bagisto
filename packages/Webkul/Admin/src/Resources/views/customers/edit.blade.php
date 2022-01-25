@@ -28,13 +28,13 @@
 
                 <tab name="{{ __('admin::app.customers.customers.addresses') }}" :selected="false">                
                     <div class="page-content">
-                        <div style="float: right;">
+                        <div class="page-content-button">
                             <a href="{{ route('admin.customer.addresses.create', ['id' => $customer->id]) }}" class="btn btn-lg btn-primary">
                                 {{ __('admin::app.customers.addresses.create-btn-title') }}
                             </a>
                         </div>
 
-                        <div class="mt-30">
+                        <div class="page-content-datagrid">
                             <datagrid-plus src="{{ route('admin.customer.addresses.index', $customer->id) }}"></datagrid-plus>
                         </div>
                     </div>

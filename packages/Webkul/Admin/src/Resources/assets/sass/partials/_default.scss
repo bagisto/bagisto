@@ -620,6 +620,14 @@ body {
             width: 100%;
             display: inline-block;
             padding: 8px 16px;
+
+            .page-content-button{
+                float: right;
+            }
+            .page-content-datagrid{
+                display: block;
+                clear: both;
+            }
         }
     }
 }
@@ -778,8 +786,12 @@ body {
         font-size: 18px;
     }
 
-    .btn.btn-lg {
-        padding: 4px 6px;
+    .back-link {
+        margin-top: -2px !important;
+    }
+
+    .export-import{
+        margin-top: -15px;
     }
 
     .navbar-top {
@@ -823,43 +835,38 @@ body {
 
         .content {
 
-            .page-header {
+            .configuration{
 
-                .control-group {
-                    width: 100% !important;
-                    display: block;
-                    margin-bottom: 0;
-                    margin-left: 0px;
-                    padding: 0px;
-                    margin-top: 40px;
-                }
+                 .page-header {
 
-                .page-title {
-                    float: left;
-                    width: 100%;
-
-                    .back-link {
+                    .control-group {
+                        width: 100% !important;
+                        display: block;
+                        margin-bottom: 0;
+                        margin-left: 0px;
+                        padding: 0px;
+                        margin-top: 40px;
+                    }
+    
+                    .page-title {
+                        float: left;
+                        width: 100%;
+    
+                        .back-link {
+                            margin-top: 0px;
+                            margin-right: -1px;
+                            height: 22px !important;
+                            width: 22px !important;
+                        }
+                    }
+    
+                    .page-action {
+                        position: absolute;
+                        right: 10px;
                         margin-top: 0px;
-                        margin-right: -1px;
-                        height: 22px !important;
-                        width: 22px !important;
                     }
                 }
-
-                .page-action {
-                    position: absolute;
-                    right: 10px;
-                    margin-top: 0px;
-
-                    .export-import {
-                        margin-top: -15px;
-                    }
-
-                    * {
-                        display: inline-block;
-                    }
-                }
-            }
+            }            
         }
 
         .content-wrapper {
@@ -884,62 +891,36 @@ body {
     }
 }
 
-@media only screen and (max-width: 411px) {
+@media only screen and (max-width: 414px){
+
     .content-container {
-
         .content {
-
             .page-header {
 
-                .control-group {
+                .page-title{
                     width: 100% !important;
-                    display: block;
-                    margin-bottom: 0;
-                    margin-left: 0px;
-                    padding: 0px;
-                    margin-top: 40px;
+
+                    .control-group{
+                        margin-top: 10px !important;
+                        width: 100% !important;
+                        margin-left: 0px !important;
+                    }
                 }
-            }
-        }
-    }
-}
 
-@media only screen and (max-width: 385px) {
-    .content-container {
+                .page-action {
+                    margin-top: 10px !important;
+                    float: left;
 
-        .content {
+                    a{
+                        margin-left: 0px !important;
+                    }
 
-            .page-header {
-
-                .control-group {
-                    width: 100% !important;
-                    display: block;
-                    margin-bottom: 0;
-                    margin-left: 0px;
-                    padding: 0px;
-                    margin-top: 40px;
+                    .export-import {
+                        margin-top: 0px !important;
+                    }
                 }
-            }
-        }
-    }
-}
+            } 
+        } 
+    } 
 
-@media only screen and (max-width: 320px) {
-    .content-container {
-
-        .content {
-
-            .page-header {
-
-                .control-group {
-                    width: 100% !important;
-                    display: block;
-                    margin-bottom: 0;
-                    margin-left: 0px;
-                    padding: 0px;
-                    margin-top: 40px;
-                }
-            }
-        }
-    }
 }
