@@ -75,7 +75,7 @@
                                             }
                                         @endphp
 
-                                        <div class="row col-12" v-if="!isMobileDevice">
+                                        <div class="row col-12 destop-view">
                                             <a
                                                 title="{{ $product->name }}"
                                                 class="product-image-container col-2"
@@ -183,7 +183,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="row col-12" v-else>
+                                        <div class="row col-12 mobile-view">
                                             <a
                                                 title="{{ $product->name }}"
                                                 class="product-image-container col-2"
@@ -195,17 +195,17 @@
                                                     alt="{{ $product->name }}">
                                             </a>
 
-                                            <div class="col-10 pr0 item-title">
+                                            <div class="col-10 pr0 pl0 item-title">
                                                 <a
                                                     href="{{ route('shop.productOrCategory.index', $url_key) }}"
                                                     title="{{ $product->name }}"
-                                                    class="unset col-12 no-padding">
+                                                    class="unset col-2 no-padding">
 
                                                     <span class="fs20 fw6 link-color">{{ $product->name }}</span>
                                                 </a>
 
                                                 @if (isset($item->additional['attributes']))
-                                                    <div class="row col-12 no-padding no-margin">
+                                                    <div class="row col-8 no-padding no-margin">
                                                         @foreach ($item->additional['attributes'] as $attribute)
                                                             <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                                         @endforeach
@@ -213,11 +213,12 @@
                                                 @endif
 
                                                 <div class="col-12 no-padding">
-                                                    @include ('shop::products.price', ['product' => $product])
+                                                @include ('shop::products.price', ['product' => $product])
+                                                    
                                                 </div>
 
                                                 <div class="row col-12 remove-padding-margin actions">
-                                                    <div class="product-quantity col-lg-4 col-6 no-padding">
+                                                <div class="product-quantity col-lg-4 col-6 no-padding">
                                                         <quantity-changer
                                                             :control-name="'qty[{{$item->id}}]'"
                                                             quantity="{{ $item->quantity }}"
