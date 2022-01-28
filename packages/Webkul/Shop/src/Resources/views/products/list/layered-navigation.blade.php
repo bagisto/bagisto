@@ -1,7 +1,17 @@
 <div class="layered-filter-wrapper">
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
-        <layered-navigation></layered-navigation>
+        @if (isset($category))
+            <layered-navigation
+                attribute-src="{{ route('admin.catalog.products.get-filter-attributes', $category->id) }}"
+                max-price-src="{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id) }}">
+            </layered-navigation>
+        @else
+            <layered-navigation
+                attribute-src="{{ route('admin.catalog.products.get-filter-attributes') }}"
+                max-price-src="{{ route('admin.catalog.products.get-category-product-maximum-price') }}">
+            </layered-navigation>
+        @endif
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
 </div>
@@ -21,6 +31,7 @@
                         :index="index"
                         :attribute="attribute"
                         :appliedFilterValues="appliedFilters[attribute.code]"
+                        :max-price-src="maxPriceSrc"
                         @onFilterAdded="addFilters(attribute.code, $event)">
                     </filter-attribute-item>
                 </div>
@@ -46,7 +57,12 @@
                 <ol class="items" v-if="attribute.type != 'price'">
                     <li class="item" v-for='(option, index) in attribute.options'>
                         <span class="checkbox">
-                            <input type="checkbox" :id="option.id" v-bind:value="option.id" v-model="appliedFilters" @change="addFilter($event)"/>
+                            <input
+                                :id="option.id"
+                                type="checkbox"
+                                v-bind:value="option.id"
+                                v-model="appliedFilters"
+                                @change="addFilter($event)"/>
 
                             <label class="checkbox-view" :for="option.id"></label>
 
@@ -74,11 +90,16 @@
         Vue.component('layered-navigation', {
             template: '#layered-navigation-template',
 
+            props: [
+                'attributeSrc',
+                'maxPriceSrc',
+            ],
+
             data: function() {
                 return {
                     appliedFilters: {},
                     attributes: [],
-                }
+                };
             },
 
             created: function () {
@@ -90,7 +111,7 @@
             methods: {
                 setFilterAttributes: function () {
                     axios
-                        .get('{{ route('admin.catalog.products.get-filter-attributes', $category->id) }}')
+                        .get(this.attributeSrc)
                         .then((response) => {
                             this.attributes = response.data.filter_attributes;
                         });
@@ -111,7 +132,7 @@
                         delete this.appliedFilters[attributeCode];
                     }
 
-                    this.applyFilter()
+                    this.applyFilter();
                 },
 
                 applyFilter: function () {
@@ -119,7 +140,7 @@
 
                     for(key in this.appliedFilters) {
                         if (key != 'page') {
-                            params.push(key + '=' + this.appliedFilters[key].join(','))
+                            params.push(key + '=' + this.appliedFilters[key].join(','));
                         }
                     }
 
@@ -131,7 +152,12 @@
         Vue.component('filter-attribute-item', {
             template: '#filter-attribute-item-template',
 
-            props: ['index', 'attribute', 'appliedFilterValues'],
+            props: [
+                'index',
+                'attribute',
+                'appliedFilterValues',
+                'maxPriceSrc',
+            ],
 
             data: function() {
                 return {
@@ -170,7 +196,7 @@
             methods: {
                 setMaxPrice: function () {
                     axios
-                        .get('{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id) }}')
+                        .get(this.maxPriceSrc)
                         .then((response) => {
                             let maxPrice  = response.data.max_price;
 
@@ -179,13 +205,13 @@
                 },
 
                 addFilter: function (e) {
-                    this.$emit('onFilterAdded', this.appliedFilters)
+                    this.$emit('onFilterAdded', this.appliedFilters);
                 },
 
                 priceRangeUpdated: function (value) {
                     this.appliedFilters = value;
 
-                    this.$emit('onFilterAdded', this.appliedFilters)
+                    this.$emit('onFilterAdded', this.appliedFilters);
                 },
 
                 clearFilters: function () {
@@ -195,7 +221,7 @@
 
                     this.appliedFilters = [];
 
-                    this.$emit('onFilterAdded', this.appliedFilters)
+                    this.$emit('onFilterAdded', this.appliedFilters);
                 }
             }
         });
