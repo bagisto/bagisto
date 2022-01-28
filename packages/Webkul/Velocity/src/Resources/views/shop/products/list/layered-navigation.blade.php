@@ -1,17 +1,10 @@
 <div class="layered-filter-wrapper left">
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
-    @if (isset($category))
-        <layered-navigation
-            attribute-src="{{ route('admin.catalog.products.get-filter-attributes', $category->id) }}"
-            max-price-src="{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id) }}">
-        </layered-navigation>
-    @else
-        <layered-navigation
-            attribute-src="{{ route('admin.catalog.products.get-filter-attributes') }}"
-            max-price-src="{{ route('admin.catalog.products.get-category-product-maximum-price') }}">
-        </layered-navigation>
-    @endif
+    <layered-navigation
+        attribute-src="{{ route('admin.catalog.products.get-filter-attributes', $category->id ?? null) }}"
+        max-price-src="{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id ?? null) }}">
+    </layered-navigation>
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
 </div>
