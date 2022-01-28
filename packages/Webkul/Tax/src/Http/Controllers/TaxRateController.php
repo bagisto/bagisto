@@ -112,6 +112,7 @@ class TaxRateController extends Controller
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier,' . $id,
             'is_zip'     => 'sometimes',
+            'zip_code'   => 'nullable',
             'zip_from'   => 'nullable|required_with:is_zip',
             'zip_to'     => 'nullable|required_with:is_zip,zip_from',
             'country'    => 'required|string',
@@ -165,6 +166,9 @@ class TaxRateController extends Controller
 
                 foreach ($excelData as $data) {
                     foreach ($data as $column => $uploadData) {
+                        if (is_null($uploadData['state'])) {
+                            $uploadData['state'] = '';
+                        }
 
                         if (! is_null($uploadData['zip_from']) && ! is_null($uploadData['zip_to'])) {
                             $uploadData['is_zip'] = 1;
@@ -172,7 +176,6 @@ class TaxRateController extends Controller
 
                         $validator = Validator::make($uploadData, [
                             'identifier' => 'required|string',
-                            'state'      => 'required|string',
                             'country'    => 'required|string',
                             'tax_rate'   => 'required|numeric|min:0.0001',
                             'is_zip'     => 'sometimes',
@@ -207,21 +210,21 @@ class TaxRateController extends Controller
                     $errorMsg = [];
 
                     if (isset($failedRules)) {
-                        foreach ($failedRules as $coulmn => $fail) {
+                        foreach ($failedRules as $column => $fail) {
                             if ($fail->first('identifier')) {
-                                $errorMsg[$coulmn] = $fail->first('identifier');
+                                $errorMsg[$column] = $fail->first('identifier');
                             } elseif ($fail->first('tax_rate')) {
-                                $errorMsg[$coulmn] = $fail->first('tax_rate');
+                                $errorMsg[$column] = $fail->first('tax_rate');
                             } elseif ($fail->first('country')) {
-                                $errorMsg[$coulmn] = $fail->first('country');
+                                $errorMsg[$column] = $fail->first('country');
                             } elseif ($fail->first('state')) {
-                                $errorMsg[$coulmn] = $fail->first('state');
+                                $errorMsg[$column] = $fail->first('state');
                             } elseif ($fail->first('zip_code')) {
-                                $errorMsg[$coulmn] = $fail->first('zip_code');
+                                $errorMsg[$column] = $fail->first('zip_code');
                             } elseif ($fail->first('zip_from')) {
-                                $errorMsg[$coulmn] = $fail->first('zip_from');
+                                $errorMsg[$column] = $fail->first('zip_from');
                             } elseif ($fail->first('zip_to')) {
-                                $errorMsg[$coulmn] = $fail->first('zip_to');
+                                $errorMsg[$column] = $fail->first('zip_to');
                             }
                         }
 
@@ -242,6 +245,10 @@ class TaxRateController extends Controller
 
                         foreach ($excelData as $data) {
                             foreach ($data as $column => $uploadData) {
+                                if (is_null($uploadData['state'])) {
+                                    $uploadData['state'] = '';
+                                }
+
                                 if (! is_null($uploadData['zip_from']) && ! is_null($uploadData['zip_to'])) {
                                     $uploadData['is_zip'] = 1;
                                     $uploadData['zip_code'] = null;
@@ -266,6 +273,7 @@ class TaxRateController extends Controller
                 }
             } catch (\Exception $e) {
                 report($e);
+
                 $failure = new Failure(1, 'rows', [0 => trans('admin::app.export.enough-row-error')]);
 
                 session()->flash('error', $failure->errors()[0]);
