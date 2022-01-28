@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
@@ -158,18 +159,20 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getFilterAttributes($categoryId)
+    public function getFilterAttributes($categoryId = null, AttributeRepository $attributeRepository)
     {
-        $category = $this->categoryRepository->find($categoryId);
+        $filterAttributes = [];
 
-        if ($category) {
-            return response()->json([
-                'filter_attributes' => $this->productFlatRepository->getFilterAttributes($category)
-            ]);
+        if ($category = $this->categoryRepository->find($categoryId)) {
+            $filterAttributes = $this->productFlatRepository->getFilterAttributes($category);
+        }
+
+        if (! count($filterAttributes) > 0) {
+            $filterAttributes = $attributeRepository->getFilterAttributes();
         }
 
         return response()->json([
-            'filter_attributes' => []
+            'filter_attributes' => $filterAttributes,
         ]);
     }
 
@@ -178,18 +181,16 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCategoryProductMaximumPrice($categoryId)
+    public function getCategoryProductMaximumPrice($categoryId = null)
     {
-        $category = $this->categoryRepository->find($categoryId);
+        $maxPrice = 0;
 
-        if ($category) {
-            return response()->json([
-                'max_price' => $this->productFlatRepository->handleCategoryProductMaximumPrice($category)
-            ]);
+        if ($category = $this->categoryRepository->find($categoryId)) {
+            $maxPrice = $this->productFlatRepository->handleCategoryProductMaximumPrice($category);
         }
 
         return response()->json([
-            'max_price' => 0
+            'max_price' => $maxPrice,
         ]);
     }
 }

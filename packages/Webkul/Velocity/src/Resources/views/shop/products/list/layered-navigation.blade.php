@@ -1,7 +1,10 @@
 <div class="layered-filter-wrapper left">
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
-        <layered-navigation></layered-navigation>
+    <layered-navigation
+        attribute-src="{{ route('admin.catalog.products.get-filter-attributes', $category->id ?? null) }}"
+        max-price-src="{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id ?? null) }}">
+    </layered-navigation>
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
 </div>
@@ -22,6 +25,7 @@
                         :index="index"
                         :attribute="attribute"
                         :appliedFilterValues="appliedFilters[attribute.code]"
+                        :max-price-src="maxPriceSrc"
                         @onFilterAdded="addFilters(attribute.code, $event)">
                     </filter-attribute-item>
                 </div>
@@ -99,6 +103,11 @@
         Vue.component('layered-navigation', {
             template: '#layered-navigation-template',
 
+            props: [
+                'attributeSrc',
+                'maxPriceSrc',
+            ],
+
             data: function() {
                 return {
                     appliedFilters: {},
@@ -115,7 +124,7 @@
             methods: {
                 setFilterAttributes: function () {
                     axios
-                        .get('{{ route('admin.catalog.products.get-filter-attributes', $category->id) }}')
+                        .get(this.attributeSrc)
                         .then((response) => {
                             this.attributes = response.data.filter_attributes;
                         });
@@ -144,7 +153,7 @@
 
                     for (key in this.appliedFilters) {
                         if (key != 'page') {
-                            params.push(key + '=' + this.appliedFilters[key].join(','))
+                            params.push(key + '=' + this.appliedFilters[key].join(','));
                         }
                     }
 
@@ -161,6 +170,7 @@
                 'attribute',
                 'addFilters',
                 'appliedFilterValues',
+                'maxPriceSrc',
             ],
 
             data: function() {
@@ -204,21 +214,21 @@
             methods: {
                 setMaxPrice: function () {
                     axios
-                        .get('{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id) }}')
+                        .get(this.maxPriceSrc)
                         .then((response) => {
                             let maxPrice  = response.data.max_price;
 
                             this.sliderConfig.max = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
                         });
                 },
-                
+
                 addFilter: function (e) {
-                    this.$emit('onFilterAdded', this.appliedFilters)
+                    this.$emit('onFilterAdded', this.appliedFilters);
                 },
 
                 priceRangeUpdated: function (value) {
                     this.appliedFilters = value;
-                    this.$emit('onFilterAdded', this.appliedFilters)
+                    this.$emit('onFilterAdded', this.appliedFilters);
                 },
 
                 clearFilters: function () {
@@ -228,7 +238,7 @@
 
                     this.appliedFilters = [];
 
-                    this.$emit('onFilterAdded', this.appliedFilters)
+                    this.$emit('onFilterAdded', this.appliedFilters);
                 },
 
                 optionClicked: function (id, {target}) {
