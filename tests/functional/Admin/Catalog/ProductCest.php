@@ -97,7 +97,7 @@ class ProductCest
             'code' => 'default',
         ]);
 
-        $I->selectOption('attribute_family_id', $attributeFamily->id);
+        $I->selectOption('attribute_family_id', (string) $attributeFamily->id);
 
         $sku = $this->faker->randomNumber(3);
 
@@ -111,7 +111,7 @@ class ProductCest
 
         $I->fillField('name', $productTitle);
         $I->fillField('url_key', $productUrlKey);
-        $I->selectOption($this->attributeBrand->code, $this->attributeBrandDefaultOption->id);
+        $I->selectOption($this->attributeBrand->code, (string) $this->attributeBrandDefaultOption->id);
         $I->fillField('price', $this->faker->randomFloat(2));
         $I->fillField('weight', $this->faker->randomDigit);
         $I->fillField('short_description', $this->faker->paragraph(1, true));
