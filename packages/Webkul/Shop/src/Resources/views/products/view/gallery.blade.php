@@ -1,37 +1,32 @@
 @inject ('wishListHelper', 'Webkul\Customer\Helpers\Wishlist')
 
-<?php
+@php
     $images = productimage()->getGalleryImages($product);
 
     $videos = productvideo()->getVideos($product);
 
     $images = array_merge($images, $videos);
-?>
-
+@endphp
 
 {!! view_render_event('bagisto.shop.products.view.gallery.before', ['product' => $product]) !!}
 
 <div class="product-image-group">
-
-    <div class="cp-spinner cp-round" id="loader">
-    </div>
+    <div class="cp-spinner cp-round" id="loader"></div>
 
     <product-gallery></product-gallery>
 
     @include ('shop::products.view.product-add')
-
 </div>
 
 {!! view_render_event('bagisto.shop.products.view.gallery.after', ['product' => $product]) !!}
 
 @push('scripts')
-
     <script type="text/x-template" id="product-gallery-template">
         <div>
-
             <ul class="thumb-list">
                 <li class="gallery-control top" @click="moveThumbs('top')" v-if="(thumbs.length > 4) && this.is_move.up">
                     <span class="overlay"></span>
+                    
                     <i class="icon arrow-up-white-icon"></i>
                 </li>
 
@@ -46,14 +41,16 @@
 
                 <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="(thumbs.length > 4) && this.is_move.down">
                     <span class="overlay"></span>
+
                     <i class="icon arrow-down-white-icon"></i>
                 </li>
             </ul>
 
             <div class="product-hero-image" id="product-hero-image">
-                <video :key="currentVideoUrl" v-if="currentType == 'video'" width="100%" height="100%" controls>
+                <video :key="currentVideoUrl" v-if="currentType == 'video'" width="100%" height="420" controls>
                     <source :src="currentVideoUrl" :data-image="currentOriginalImageUrl"  type="video/mp4">
-                        {{ __('admin::app.catalog.products.not-support-video') }}
+
+                    {{ __('admin::app.catalog.products.not-support-video') }}
                 </video>
 
                 <img v-else :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl" alt=""/>
@@ -80,7 +77,6 @@
                     @endif
                 @endauth
             </div>
-
         </div>
     </script>
 
@@ -119,16 +115,16 @@
 
             watch: {
                 'images': function(newVal, oldVal) {
-                    this.changeImage(this.images[0])
+                    this.changeImage(this.images[0]);
 
-                    this.prepareThumbs()
+                    this.prepareThumbs();
                 }
             },
 
             created: function() {
-                this.changeImage(this.images[0])
+                this.changeImage(this.images[0]);
 
-                this.prepareThumbs()
+                this.prepareThumbs();
             },
 
             methods: {
@@ -196,7 +192,6 @@
                 },
             }
         });
-
     </script>
 
     <script>
@@ -206,7 +201,6 @@
             }
 
             @if (auth()->guard('customer')->user())
-
                 let wishlist = "{{ $wishListHelper->getWishlistProduct($product) ? 'true' : 'false' }}";
 
                 $(document).mousemove(function(event) {
@@ -226,9 +220,7 @@
                         $(".zoomWindow").removeClass("zoom-image-direction");
                     }
                 });
-
             @endif
-        })
+        });
     </script>
-
 @endpush

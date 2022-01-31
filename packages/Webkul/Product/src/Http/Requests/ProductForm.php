@@ -73,10 +73,10 @@ class ProductForm extends FormRequest
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                => ['required', 'unique:products,sku,' . $this->id, new Slug],
             'url_key'            => ['required', new ProductCategoryUniqueSlug('product_flat', $this->id)],
-            'images.*'           => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
-            'videos.*'           => "nullable|mimes:mov,mp4|max:$maxVideoFileSize",
-            'special_price_from' => 'nullable|date',
-            'special_price_to'   => 'nullable|date|after_or_equal:special_price_from',
+            'images.*'           => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
+            'videos.*'           => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:' . $maxVideoFileSize],
+            'special_price_from' => ['nullable', 'date'],
+            'special_price_to'   => ['nullable', 'date', 'after_or_equal:special_price_from'],
             'special_price'      => ['nullable', new Decimal, 'lt:price'],
         ]);
 
@@ -110,7 +110,7 @@ class ProductForm extends FormRequest
                     $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
 
                     if (! $this->productAttributeValueRepository->isValueUnique($this->id, $attribute->id, $column, request($attribute->code))) {
-                        $fail('The :attribute has already been taken.');
+                        $fail(__('admin::app.response.already-taken', ['name' => ':attribute']));
                     }
                 });
             }
@@ -129,7 +129,19 @@ class ProductForm extends FormRequest
     public function messages()
     {
         return [
-            'variants.*.sku.unique' => 'The sku has already been taken.',
+            'variants.*.sku.unique' => __('admin::app.response.already-taken', ['name' => ':attribute']),
+        ];
+    }
+
+    /**
+     * Attributes.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'variants.*.sku' => 'sku',
         ];
     }
 }
