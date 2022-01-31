@@ -2,16 +2,13 @@
 
 namespace Webkul\Product\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Webkul\Product\Models\ProductProxy;
-
-use Webkul\Product\Observers\ProductObserver;
-use Webkul\Product\Console\Commands\PriceUpdate;
 use Illuminate\Foundation\AliasLoader;
-
+use Illuminate\Support\ServiceProvider;
+use Webkul\Product\Console\Commands\PriceUpdate;
 use Webkul\Product\Facades\ProductImage as ProductImageFacade;
 use Webkul\Product\Facades\ProductVideo as ProductVideoFacade;
-
+use Webkul\Product\Models\ProductProxy;
+use Webkul\Product\Observers\ProductObserver;
 use Webkul\Product\ProductImage;
 use Webkul\Product\ProductVideo;
 
@@ -52,7 +49,7 @@ class ProductServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register Configuration
+     * Register configuration.
      *
      * @return void
      */
@@ -62,7 +59,7 @@ class ProductServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the console commands of this package
+     * Register the console commands of this package.
      *
      * @return void
      */
@@ -80,15 +77,20 @@ class ProductServiceProvider extends ServiceProvider
      */
     protected function registerFacades(): void
     {
-        // Product image
+        /**
+         * Product image.
+         */
         $loader = AliasLoader::getInstance();
+
         $loader->alias('productimage', ProductImageFacade::class);
 
         $this->app->singleton('productimage', function () {
             return app()->make(ProductImage::class);
         });
 
-        // Product video
+        /**
+         * Product video.
+         */
         $loader->alias('productvideo', ProductVideoFacade::class);
 
         $this->app->singleton('productvideo', function () {

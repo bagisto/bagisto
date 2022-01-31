@@ -1,7 +1,6 @@
 <?php
 
-return array(
-
+return [
     /*
     |--------------------------------------------------------------------------
     | Name of route
@@ -14,7 +13,7 @@ return array(
     |
     | Examples: "images", "img/cache"
     |
-    */
+     */
 
     'route' => 'cache',
 
@@ -28,12 +27,12 @@ return array(
     |
     | Define as many directories as you like.
     |
-    */
+     */
 
-    'paths' => array(
+    'paths' => [
         storage_path('app/public'),
-        public_path('storage')
-    ),
+        public_path('storage'),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -49,13 +48,13 @@ return array(
     | The values of this array will define which filter class
     | will be applied, by its fully qualified name.
     |
-    */
+     */
 
-    'templates' => array(
+    'templates' => [
         'small'  => 'Webkul\Product\CacheFilters\Small',
         'medium' => 'Webkul\Product\CacheFilters\Medium',
         'large'  => 'Webkul\Product\CacheFilters\Large',
-    ),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -64,8 +63,7 @@ return array(
     |
     | Lifetime in minutes of the images handled by the imagecache route.
     |
-    */
+     */
 
     'lifetime' => 525600,
-
-);
+];
