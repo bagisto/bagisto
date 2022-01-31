@@ -1,4 +1,8 @@
-@if (request()->route()->getName() == 'shop.checkout.onepage.index')
+@if (
+    request()->route()->getName() == 'shop.checkout.onepage.index'
+    && core()->getConfigData('sales.paymentmethods.paypal_smart_button.active')
+    && core()->getConfigData('sales.paymentmethods.paypal_smart_button.active') == '1'
+)
     @php
         $clientId = core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id');
         $acceptedCurrency = core()->getConfigData('sales.paymentmethods.paypal_smart_button.accepted_currencies');
