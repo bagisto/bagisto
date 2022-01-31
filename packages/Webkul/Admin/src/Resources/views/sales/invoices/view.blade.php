@@ -5,8 +5,9 @@
 @stop
 
 @section('content-wrapper')
-
-    <?php $order = $invoice->order; ?>
+    @php
+        $order = $invoice->order;
+    @endphp
 
     <div class="content full-page">
         <div class="page-header">
@@ -25,6 +26,13 @@
             <div class="page-action">
                 {!! view_render_event('sales.invoice.page_action.before', ['order' => $order]) !!}
 
+                <a
+                    href="javascript:void(0);"
+                    class="btn btn-lg btn-primary"
+                    @click="showModal('duplicateInvoiceFormModal')">
+                    {{ __('admin::app.sales.invoices.send-duplicate-invoice') }}
+                </a>
+
                 <a href="{{ route('admin.sales.invoices.print', $invoice->id) }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.sales.invoices.print') }}
                 </a>
@@ -35,7 +43,6 @@
 
         <div class="page-content">
             <tabs>
-
                 <tab name="{{ __('admin::app.sales.orders.info') }}" :selected="true">
                     <div class="sale-container">
                         <accordian :title="'{{ __('admin::app.sales.orders.order-and-account') }}'" :active="true">
@@ -128,50 +135,48 @@
                                             {!! view_render_event('sales.invoice.customer_email.after', ['order' => $order]) !!}
                                         </div>
                                     </div>
-                                </div>                                
-                            </div>
-                        </accordian>
-
-
-                    @if ($order->billing_address || $order->shipping_address)
-                        <accordian :title="'{{ __('admin::app.sales.orders.address') }}'" :active="true">
-                            <div slot="body">
-                                <div class="sale">
-                                    @if ($order->billing_address)
-                                        <div class="sale-section">
-                                            <div class="secton-title" >
-                                                <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
-                                            </div>
-
-                                            <div class="section-content">
-                                                @include ('admin::sales.address', ['address' => $order->billing_address])
-
-                                                {!! view_render_event('sales.invoice.billing_address.after', ['order' => $order]) !!}
-                                            </div>
-                                        </div>
-                                    @endif
-
-                                    @if ($order->shipping_address)
-                                        <div class="sale-section">
-                                            <div class="secton-title">
-                                                <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
-                                            </div>
-
-                                            <div class="section-content">
-                                                @include ('admin::sales.address', ['address' => $order->shipping_address])
-
-                                                {!! view_render_event('sales.invoice.shipping_address.after', ['order' => $order]) !!}
-                                            </div>
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
                         </accordian>
-                    @endif
+
+                        @if ($order->billing_address || $order->shipping_address)
+                            <accordian :title="'{{ __('admin::app.sales.orders.address') }}'" :active="true">
+                                <div slot="body">
+                                    <div class="sale">
+                                        @if ($order->billing_address)
+                                            <div class="sale-section">
+                                                <div class="secton-title" >
+                                                    <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
+                                                </div>
+
+                                                <div class="section-content">
+                                                    @include ('admin::sales.address', ['address' => $order->billing_address])
+
+                                                    {!! view_render_event('sales.invoice.billing_address.after', ['order' => $order]) !!}
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                        @if ($order->shipping_address)
+                                            <div class="sale-section">
+                                                <div class="secton-title">
+                                                    <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
+                                                </div>
+
+                                                <div class="section-content">
+                                                    @include ('admin::sales.address', ['address' => $order->shipping_address])
+
+                                                    {!! view_render_event('sales.invoice.shipping_address.after', ['order' => $order]) !!}
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </accordian>
+                        @endif
 
                         <accordian :title="'{{ __('admin::app.sales.orders.products-ordered') }}'" :active="true">
                             <div slot="body">
-
                                 <div class="table">
                                     <div class="table-responsive">
                                         <table>
@@ -191,7 +196,6 @@
                                             </thead>
 
                                             <tbody>
-
                                                 @foreach ($invoice->items as $item)
                                                     <tr>
                                                         <td>{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
@@ -225,10 +229,9 @@
                                                         <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}</td>
                                                     </tr>
                                                 @endforeach
-
                                             </tbody>
                                         </table>
-                                    </div>                                    
+                                    </div>
                                 </div>
 
                                 <table class="sale-summary">
@@ -264,13 +267,12 @@
                                         <td>{{ core()->formatBasePrice($invoice->base_grand_total) }}</td>
                                     </tr>
                                 </table>
-
                             </div>
                         </accordian>
                     </div>
                 </tab>
 
-                <tab name="Transactions" :selected="false">
+                <tab name="{{ __('admin::app.sales.transactions.title') }}" :selected="false">
                     <div class="sale-container">
                         @inject('InvoicesTransactionsDatagrid', 'Webkul\Admin\DataGrids\InvoicesTransactionsDatagrid')
                         {!! $InvoicesTransactionsDatagrid->render() !!}
@@ -278,6 +280,41 @@
                 </tab>
             </tabs>
         </div>
-
     </div>
+
+    <modal id="duplicateInvoiceFormModal" :is-open="modalIds.duplicateInvoiceFormModal">
+        <h3 slot="header">{{ __('admin::app.sales.invoices.send-duplicate-invoice') }}</h3>
+
+        <div slot="body">
+            <form
+                method="POST"
+                action="{{ route('admin.sales.invoices.send-duplicate-invoice', $invoice->id) }}"
+                @submit.prevent="onSubmit">
+                @csrf()
+
+                <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
+                    <label for="email" class="required">{{ __('admin::app.admin.emails.email') }}</label>
+
+                    <input
+                        class="control"
+                        id="email"
+                        v-validate="'required|email'"
+                        type="email"
+                        name="email"
+                        data-vv-as="&quot;{{ __('admin::app.admin.emails.email') }}&quot;"
+                        value="{{ $invoice->order->customer_email }}">
+
+                    <span
+                        class="control-error"
+                        v-text="errors.first('email')"
+                        v-if="errors.has('email')">
+                    </span>
+                </div>
+
+                <button type="submit" class="btn btn-lg btn-primary float-right">
+                    {{ __('admin::app.sales.invoices.send') }}
+                </button>
+            </form>
+        </div>
+    </modal>
 @stop
