@@ -2,14 +2,16 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
+use Illuminate\Http\Request;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Traits\Mails;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 
 class InvoiceController extends Controller
 {
-    use PDFHandler;
+    use Mails, PDFHandler;
 
     /**
      * Display a listing of the resource.
@@ -131,6 +133,34 @@ class InvoiceController extends Controller
         $invoice = $this->invoiceRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('invoice'));
+    }
+
+    /**
+     * Send duplicate invoice.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function sendDuplicateInvoice(Request $request, $id)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $invoice = $this->invoiceRepository->findOrFail($id);
+
+        if ($invoice) {
+            $this->sendDuplicateInvoiceMail($invoice, $request->email);
+
+            session()->flash('success', __('admin::app.sales.invoices.invoice-sent'));
+
+            return redirect()->back();
+        }
+
+        session()->flash('error', __('admin::app.response.something-went-wrong'));
+
+        return redirect()->back();
     }
 
     /**

@@ -3,15 +3,16 @@
 namespace Webkul\Admin\Traits;
 
 use Illuminate\Support\Facades\Mail;
+use Webkul\Admin\Mail\CancelOrderAdminNotification;
+use Webkul\Admin\Mail\CancelOrderNotification;
+use Webkul\Admin\Mail\DuplicateInvoiceNotification;
 use Webkul\Admin\Mail\NewAdminNotification;
+use Webkul\Admin\Mail\NewInventorySourceNotification;
+use Webkul\Admin\Mail\NewInvoiceNotification;
 use Webkul\Admin\Mail\NewOrderNotification;
 use Webkul\Admin\Mail\NewRefundNotification;
-use Webkul\Admin\Mail\NewInvoiceNotification;
-use Webkul\Admin\Mail\CancelOrderNotification;
 use Webkul\Admin\Mail\NewShipmentNotification;
 use Webkul\Admin\Mail\OrderCommentNotification;
-use Webkul\Admin\Mail\CancelOrderAdminNotification;
-use Webkul\Admin\Mail\NewInventorySourceNotification;
 
 trait Mails
 {
@@ -26,14 +27,20 @@ trait Mails
         $customerLocale = $this->getLocale($order);
 
         try {
-            /* email to customer */
+            /**
+             * Email to customer.
+             */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-order';
+
             if (core()->getConfigData($configKey)) {
                 $this->prepareMail($customerLocale, new NewOrderNotification($order));
             }
 
-            /* email to admin */
+            /**
+             * Email to admin.
+             */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
+
             if (core()->getConfigData($configKey)) {
                 $this->prepareMail(config('app.locale'), new NewAdminNotification($order));
             }
@@ -57,10 +64,38 @@ trait Mails
                 return;
             }
 
-            /* email to customer */
+            /**
+             * Email to customer.
+             */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-invoice';
+
             if (core()->getConfigData($configKey)) {
                 $this->prepareMail($customerLocale, new NewInvoiceNotification($invoice));
+            }
+        } catch (\Exception $e) {
+            report($e);
+        }
+    }
+
+    /**
+     * Send duplicate invoice mail to the customer.
+     *
+     * @param  \Webkul\Sales\Contracts\Invoice  $invoice
+     * @param  string  $customerEmail
+     * @return void
+     */
+    public function sendDuplicateInvoiceMail($invoice, $customerEmail)
+    {
+        $customerLocale = $this->getLocale($invoice);
+
+        try {
+            /**
+             * Email to customer.
+             */
+            $configKey = 'emails.general.notifications.emails.general.notifications.new-invoice';
+
+            if (core()->getConfigData($configKey)) {
+                $this->prepareMail($customerLocale, new DuplicateInvoiceNotification($invoice, $customerEmail));
             }
         } catch (\Exception $e) {
             report($e);
@@ -78,8 +113,11 @@ trait Mails
         $customerLocale = $this->getLocale($refund);
 
         try {
-            /* email to customer */
+            /**
+             * Email to customer.
+             */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-refund';
+
             if (core()->getConfigData($configKey)) {
                 $this->prepareMail($customerLocale, new NewRefundNotification($refund));
             }
@@ -103,14 +141,20 @@ trait Mails
                 return;
             }
 
-            /* email to customer */
+            /**
+             * Email to customer.
+             */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-shipment';
+
             if (core()->getConfigData($configKey)) {
                 $this->prepareMail($customerLocale, new NewShipmentNotification($shipment));
             }
 
-            /* email to admin */
+            /**
+             * Email to admin.
+             */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-inventory-source';
+
             if (core()->getConfigData($configKey)) {
                 $this->prepareMail(config('app.locale'), new NewInventorySourceNotification($shipment));
             }
@@ -130,14 +174,20 @@ trait Mails
         $customerLocale = $this->getLocale($order);
 
         try {
-            /* email to customer */
+            /**
+             * Email to customer.
+             */
             $configKey = 'emails.general.notifications.emails.general.notifications.cancel-order';
+
             if (core()->getConfigData($configKey)) {
                 $this->prepareMail($customerLocale, new CancelOrderNotification($order));
             }
 
-            /* email to admin */
+            /**
+             * Email to admin.
+             */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
+
             if (core()->getConfigData($configKey)) {
                 $this->prepareMail(config('app.locale'), new CancelOrderAdminNotification($order));
             }
@@ -161,7 +211,9 @@ trait Mails
         }
 
         try {
-            /* email to customer */
+            /**
+             * Email to customer.
+             */
             $this->prepareMail($customerLocale, new OrderCommentNotification($comment));
         } catch (\Exception $e) {
             report($e);
@@ -181,6 +233,7 @@ trait Mails
         }
 
         $objectFirstItem = $object->items->first();
+
         return isset($objectFirstItem->additional['locale']) ? $objectFirstItem->additional['locale'] : 'en';
     }
 
@@ -192,6 +245,7 @@ trait Mails
     private function prepareMail($locale, $notification)
     {
         app()->setLocale($locale);
+
         Mail::queue($notification);
     }
 }
