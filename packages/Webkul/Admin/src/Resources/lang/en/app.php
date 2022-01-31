@@ -31,7 +31,7 @@ return [
     'locale-based'  => 'Locale based',
     'channel-based' => 'Channel based',
     'status'        => 'Status',
-    'select-option' => 'Select option',
+    'select-option' => 'Select Option',
     'category'      => 'Category',
 
     'common' => [
