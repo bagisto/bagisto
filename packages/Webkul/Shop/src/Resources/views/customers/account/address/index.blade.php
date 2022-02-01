@@ -56,7 +56,7 @@
                                     </li>
 
                                     <li class="mt-5">
-                                        {{ $address->address1 }},
+                                        {{ $address->address1 }}
                                     </li>
 
                                     <li class="mt-5">
@@ -91,6 +91,7 @@
 
                                         <form id="deleteAddressForm" action="{{ route('address.delete', $address->id) }}" method="post">
                                             @method('delete')
+                                            
                                             @csrf
                                         </form>
                                     </span>

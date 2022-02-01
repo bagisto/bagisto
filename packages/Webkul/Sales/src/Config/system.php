@@ -2,12 +2,29 @@
 
 return [
     /**
-     * Order Settings
+     * Sales.
+     *
+     * Child keys are in different package.
+     *
+     * Sort `1` | Shipping         | Shipping Package
+     * Sort `2` | Shipping Method  | Shipping Package
+     * Sort `3` | Payment Method   | Payment Package
+     * Sort `4` | Order Settings   | Self
+     * Sort `5` | Invoice Settings | Self
+     */
+    [
+        'key'  => 'sales',
+        'name' => 'admin::app.admin.system.sales',
+        'sort' => 5,
+    ],
+
+    /**
+     * Order settings.
      */
     [
         'key'  => 'sales.orderSettings',
         'name' => 'admin::app.admin.system.order-settings',
-        'sort' => 3,
+        'sort' => 4,
     ], [
         'key'    => 'sales.orderSettings.order_number',
         'name'   => 'admin::app.admin.system.orderNumber',
@@ -45,7 +62,7 @@ return [
                 'channel_based' => true,
                 'locale_based'  => true,
             ],
-        ]
+        ],
     ], [
         'key'    => 'sales.orderSettings.minimum-order',
         'name'   => 'admin::app.admin.system.minimum-order',
@@ -59,16 +76,16 @@ return [
                 'channel_based' => true,
                 'locale_based'  => true,
             ],
-        ]
+        ],
     ],
 
     /**
-     * Invoice Settings
+     * Invoice settings.
      */
     [
         'key'  => 'sales.invoice_setttings',
         'name' => 'admin::app.admin.system.invoice-settings',
-        'sort' => 4,
+        'sort' => 5,
     ], [
         'key'    => 'sales.invoice_setttings.invoice_number',
         'name'   => 'admin::app.admin.system.invoice-number',
@@ -106,7 +123,7 @@ return [
                 'channel_based' => true,
                 'locale_based'  => true,
             ],
-        ]
+        ],
     ], [
         'key'    => 'sales.invoice_setttings.payment_terms',
         'name'   => 'admin::app.admin.system.payment-terms',
@@ -119,7 +136,7 @@ return [
                 'validation'    => 'numeric',
                 'channel_based' => true,
             ],
-        ]
+        ],
     ], [
         'key'    => 'sales.invoice_setttings.invoice_slip_design',
         'name'   => 'admin::app.admin.system.invoice-slip-design',
@@ -132,7 +149,7 @@ return [
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
                 'channel_based' => true,
             ],
-        ]
+        ],
     ], [
         'key'    => 'sales.invoice_setttings.invoice_reminders',
         'name'   => 'admin::app.admin.system.invoice-reminders',
@@ -146,10 +163,10 @@ return [
                 'channel_based' => true,
             ],
             [
-                'name'          => 'interval_between_reminders',
-                'title'         => 'admin::app.admin.system.interval-between-reminders',
-                'type'          => 'select',
-                'options'       => [
+                'name'    => 'interval_between_reminders',
+                'title'   => 'admin::app.admin.system.interval-between-reminders',
+                'type'    => 'select',
+                'options' => [
                     [
                         'title' => '1 day',
                         'value' => 'P1D',
@@ -183,6 +200,6 @@ return [
                     ],
                 ],
             ],
-        ]
+        ],
     ],
 ];

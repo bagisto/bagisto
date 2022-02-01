@@ -1,6 +1,9 @@
 <?php
 
 return [
+    /**
+     * General.
+     */
     [
         'key'  => 'general',
         'name' => 'admin::app.admin.system.general',
@@ -27,7 +30,7 @@ return [
                         'value' => 'kgs',
                     ],
                 ],
-                'channel_based' => true
+                'channel_based' => true,
             ],
         ],
     ], [
@@ -70,7 +73,7 @@ return [
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => false,
-            ]
+            ],
         ],
     ], [
         'key'  => 'general.design',
@@ -95,7 +98,12 @@ return [
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ],
         ],
-    ], [
+    ],
+
+    /**
+     * Catalog.
+     */
+    [
         'key'  => 'catalog',
         'name' => 'admin::app.admin.system.catalog',
         'sort' => 2,
@@ -120,16 +128,16 @@ return [
         'sort'   => 2,
         'fields' => [
             [
-                'name'  => 'no_of_new_product_homepage',
-                'title' => 'admin::app.admin.system.allow-no-of-new-product-homepage',
-                'type'  => 'number',
-                'validation'    => 'min:0',
+                'name'       => 'no_of_new_product_homepage',
+                'title'      => 'admin::app.admin.system.allow-no-of-new-product-homepage',
+                'type'       => 'number',
+                'validation' => 'min:0',
             ],
             [
-                'name'  => 'no_of_featured_product_homepage',
-                'title' => 'admin::app.admin.system.allow-no-of-featured-product-homepage',
-                'type'  => 'number',
-                'validation'    => 'min:0',
+                'name'       => 'no_of_featured_product_homepage',
+                'title'      => 'admin::app.admin.system.allow-no-of-featured-product-homepage',
+                'type'       => 'number',
+                'validation' => 'min:0',
             ],
             [
                 'name'  => 'out_of_stock_items',
@@ -192,7 +200,7 @@ return [
                 'name'  => 'buy_now_button_display',
                 'title' => 'admin::app.admin.system.buy-now-button-display',
                 'type'  => 'boolean',
-            ]
+            ],
         ],
     ], [
         'key'    => 'catalog.products.cache-small-image',
@@ -208,7 +216,7 @@ return [
                 'name'  => 'height',
                 'title' => 'admin::app.admin.system.height',
                 'type'  => 'text',
-            ]
+            ],
         ],
     ], [
         'key'    => 'catalog.products.cache-medium-image',
@@ -224,7 +232,7 @@ return [
                 'name'  => 'height',
                 'title' => 'admin::app.admin.system.height',
                 'type'  => 'text',
-            ]
+            ],
         ],
     ], [
         'key'    => 'catalog.products.cache-large-image',
@@ -240,7 +248,7 @@ return [
                 'name'  => 'height',
                 'title' => 'admin::app.admin.system.height',
                 'type'  => 'text',
-            ]
+            ],
         ],
     ], [
         'key'    => 'catalog.products.review',
@@ -266,7 +274,7 @@ return [
                 'name'  => 'file_attribute_upload_size',
                 'title' => 'admin::app.admin.system.file-upload-size',
                 'type'  => 'text',
-            ]
+            ],
         ],
     ], [
         'key'  => 'catalog.inventory',
@@ -340,16 +348,65 @@ return [
                 'name'  => 'show_search_input_field',
                 'title' => 'admin::app.admin.system.show-search-input-field',
                 'type'  => 'boolean',
-            ]
-        ]
-    ], [
+            ],
+        ],
+    ],
+
+    /**
+     * Customer.
+     */
+    [
         'key'  => 'customer',
         'name' => 'admin::app.admin.system.customer',
-        'sort' => 4,
+        'sort' => 3,
+    ], [
+        'key'  => 'customer.address',
+        'name' => 'admin::app.admin.system.address',
+        'sort' => 1,
+    ], [
+        'key'    => 'customer.address.requirements',
+        'name'   => 'admin::app.admin.system.requirements',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'country',
+                'title'         => 'admin::app.admin.system.country',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'default'       => '1',
+            ],
+            [
+                'name'          => 'state',
+                'title'         => 'admin::app.admin.system.state',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'default'       => '1',
+            ],
+            [
+                'name'          => 'postcode',
+                'title'         => 'admin::app.admin.system.zip',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'default'       => '1',
+            ],
+        ],
+    ], [
+        'key'    => 'customer.address.information',
+        'name'   => 'Information',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'          => 'street_lines',
+                'title'         => 'admin::app.admin.system.street-lines',
+                'type'          => 'text',
+                'validation'    => 'between:1,4',
+                'channel_based' => true,
+            ],
+        ],
     ], [
         'key'  => 'customer.settings',
         'name' => 'admin::app.admin.system.settings',
-        'sort' => 1,
+        'sort' => 3,
     ], [
         'key'    => 'customer.settings.wishlist',
         'name'   => 'admin::app.admin.system.wishlist',
@@ -362,22 +419,9 @@ return [
             ],
         ],
     ], [
-        'key'    => 'customer.settings.address',
-        'name'   => 'admin::app.admin.system.address',
-        'sort'   => 2,
-        'fields' => [
-            [
-                'name'          => 'street_lines',
-                'title'         => 'admin::app.admin.system.street-lines',
-                'type'          => 'text',
-                'validation'    => 'between:1,4',
-                'channel_based' => true,
-            ],
-        ],
-    ], [
         'key'    => 'customer.settings.newsletter',
         'name'   => 'admin::app.admin.system.newsletter',
-        'sort'   => 3,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'  => 'subscription',
@@ -388,7 +432,7 @@ return [
     ], [
         'key'    => 'customer.settings.email',
         'name'   => 'admin::app.admin.system.email',
-        'sort'   => 4,
+        'sort'   => 3,
         'fields' => [
             [
                 'name'  => 'verification',
@@ -396,10 +440,15 @@ return [
                 'type'  => 'boolean',
             ],
         ],
-    ], [
+    ],
+
+    /**
+     * Emails.
+     */
+    [
         'key'  => 'emails',
         'name' => 'admin::app.admin.emails.email',
-        'sort' => 5,
+        'sort' => 4,
     ], [
         'key'  => 'emails.configure',
         'name' => 'admin::app.admin.system.email-settings',
@@ -417,7 +466,7 @@ return [
                 'validation'    => 'required|max:50',
                 'channel_based' => true,
                 'default_value' => config('mail.from.name'),
-            ],  [
+            ], [
                 'name'          => 'shop_email_from',
                 'title'         => 'admin::app.admin.system.shop-email-from',
                 'type'          => 'text',
@@ -425,7 +474,7 @@ return [
                 'validation'    => 'required|email',
                 'channel_based' => true,
                 'default_value' => config('mail.from.address'),
-            ],  [
+            ], [
                 'name'          => 'admin_name',
                 'title'         => 'admin::app.admin.system.admin-name',
                 'type'          => 'text',
@@ -433,7 +482,7 @@ return [
                 'validation'    => 'required|max:50',
                 'channel_based' => true,
                 'default_value' => config('mail.admin.name'),
-            ],  [
+            ], [
                 'name'          => 'admin_email',
                 'title'         => 'admin::app.admin.system.admin-email',
                 'type'          => 'text',

@@ -39,13 +39,12 @@
                                     <h5 class="card-title fw6">{{ $address->first_name }} {{ $address->last_name }}</h5>
 
                                     <ul type="none">
-                                        {{-- <li>{{ $address->company_name }}</li> --}}
-                                        <li>{{ $address->address1 }},</li>
-                                        <li>{{ $address->city }},</li>
-                                        <li>{{ $address->state }},</li>
+                                        <li>{{ $address->address1 }}</li>
+                                        <li>{{ $address->city }}</li>
+                                        <li>{{ $address->state }}</li>
                                         <li>{{ core()->country_name($address->country) }} {{ $address->postcode }}</li>
                                         <li>
-                                            {{ __('shop::app.customer.account.address.index.contact') }} : {{$address->phone }}
+                                            {{ __('shop::app.customer.account.address.index.contact') }} : {{ $address->phone }}
                                         </li>
                                     </ul>
 
@@ -59,6 +58,7 @@
 
                                     <form id="deleteAddressForm" action="{{ route('address.delete', $address->id) }}" method="post">
                                         @method('delete')
+
                                         @csrf
                                     </form>
                                 </div>
