@@ -10,11 +10,13 @@
             <product-image></product-image>
 
             <span class="control-error" v-if="{!! $errors->has('images.*') !!}">
-                @php $count = 1; @endphp
+                @php
+                    $count = 1;
+                @endphp
 
                 @foreach ($errors->get('images.*') as $key => $message)
                     @php
-                        echo str_replace($key, 'Image'.$count, $message[0]);
+                        echo str_replace($key, 'Image' . $count, $message[0]);
 
                         $count++;
                     @endphp
@@ -34,13 +36,15 @@
     <script type="text/x-template" id="product-image-template">
         <div>
             <div class="image-wrapper">
-                <product-image-item
-                    v-for='(image, index) in items'
-                    :key='image.id'
-                    :image="image"
-                    @onRemoveImage="removeImage($event)"
-                    @onImageSelected="imageSelected($event)"
-                ></product-image-item>
+                <draggable v-model="items" group="people" @end="onDragEnd">
+                    <product-image-item
+                        v-for='(image, index) in items'
+                        :key='image.id'
+                        :image="image"
+                        @onRemoveImage="removeImage($event)"
+                        @onImageSelected="imageSelected($event)">
+                    </product-image-item>
+                </draggable>
             </div>
 
             <label class="btn btn-lg btn-primary" style="display: inline-block; width: auto" @click="createFileType">
@@ -73,7 +77,7 @@
 
                     imageCount: 0,
 
-                    items: []
+                    items: [],
                 }
             },
 
@@ -102,7 +106,7 @@
                     this.items.push({'id': 'image_' + this.imageCount});
                 },
 
-                removeImage (image) {
+                removeImage: function(image) {
                     let index = this.items.indexOf(image)
 
                     Vue.delete(this.items, index);
@@ -118,7 +122,11 @@
                             self.items.push({'id': 'image_' + self.imageCount, file: image});
                         }
                     });
-                }
+                },
+
+                onDragEnd: function() {
+                    console.log(this.items);
+                },
             }
         });
 

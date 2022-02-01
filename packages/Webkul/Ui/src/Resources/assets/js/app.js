@@ -1,5 +1,6 @@
-import VTooltip from "v-tooltip";
+import draggable from 'vuedraggable';
 import { Multiselect } from "vue-multiselect";
+import VTooltip from "v-tooltip";
 
 import Accordian from "./components/accordian";
 import DatagridPlus from "./components/datagrid/datagrid-plus";
@@ -30,6 +31,8 @@ import SlugifyTarget from "./directives/slugify-target";
 /* config section */
 VTooltip.options.defaultDelay = 0;
 Vue.config.productionTip = false;
+
+Vue.use(draggable);
 
 /* component section */
 Vue.directive("tooltip", VTooltip.VTooltip);
