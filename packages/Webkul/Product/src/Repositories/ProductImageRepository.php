@@ -2,10 +2,10 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Http\UploadedFile;
-use Webkul\Core\Eloquent\Repository;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Container\Container as App;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductRepository;
 
 class ProductImageRepository extends Repository
@@ -40,7 +40,7 @@ class ProductImageRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductImage';
+        return \Webkul\Product\Contracts\ProductImage::class;
     }
 
     /**
@@ -78,7 +78,7 @@ class ProductImageRepository extends Repository
      */
     public function upload($product, $images): void
     {
-        $previousVariantImageIds = $product->images()->pluck('id');
+        $previousImageIds = $product->images()->pluck('id');
 
         if ($images) {
             foreach ($images as $imageId => $image) {
@@ -88,14 +88,16 @@ class ProductImageRepository extends Repository
                         'product_id' => $product->id,
                     ]);
                 } else {
-                    if (is_numeric($index = $previousVariantImageIds->search($imageId))) {
-                        $previousVariantImageIds->forget($index);
+                    if (is_numeric($index = $previousImageIds->search($imageId))) {
+                        $previousImageIds->forget($index);
                     }
+
+                    $this->updateImagePosition($imageId);
                 }
             }
         }
 
-        foreach ($previousVariantImageIds as $imageId) {
+        foreach ($previousImageIds as $imageId) {
             if ($image = $this->find($imageId)) {
                 Storage::delete($image->path);
 
@@ -121,5 +123,22 @@ class ProductImageRepository extends Repository
 
             $this->upload($product, $variant['images'] ?? null);
         }
+    }
+
+    /**
+     * Update image position.
+     *
+     * @param  int  $imageId
+     * @return void
+     */
+    public function updateImagePosition($imageId)
+    {
+        static $position = 0;
+
+        $this->update([
+            'position' => $position,
+        ], $imageId);
+
+        ++$position;
     }
 }

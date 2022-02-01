@@ -125,7 +125,11 @@
                 },
 
                 onDragEnd: function() {
-                    console.log(this.items);
+                    this.items = this.items.map((item, index) => {
+                        item.position = index;
+
+                        return item;
+                    });
                 },
             }
         });

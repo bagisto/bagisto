@@ -8,15 +8,28 @@ use Webkul\Product\Contracts\ProductImage as ProductImageContract;
 
 class ProductImage extends Model implements ProductImageContract
 {
+    /**
+     * Timestamp.
+     *
+     * @var boolean
+     */
     public $timestamps = false;
 
+    /**
+     * Fillable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'path',
         'product_id',
+        'position',
     ];
 
     /**
      * Get the product that owns the image.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()
     {
@@ -25,6 +38,8 @@ class ProductImage extends Model implements ProductImageContract
 
     /**
      * Get image url for the product image.
+     *
+     * @return string
      */
     public function url()
     {
@@ -33,6 +48,8 @@ class ProductImage extends Model implements ProductImageContract
 
     /**
      * Get image url for the product image.
+     *
+     * @return string
      */
     public function getUrlAttribute()
     {
@@ -40,8 +57,9 @@ class ProductImage extends Model implements ProductImageContract
     }
 
     /**
-     * @param string $key
+     * Is custom attribute.
      *
+     * @param  string  $key
      * @return bool
      */
     public function isCustomAttribute($attribute)
@@ -50,6 +68,8 @@ class ProductImage extends Model implements ProductImageContract
     }
 
     /**
+     * To array.
+     *
      * @return array
      */
     public function toArray()
