@@ -31,7 +31,7 @@ mix.setPublicPath(publicPath)
     .vue()
 
     .alias({
-        '@Components': path.join(jsPath, 'UI', 'components'),
+        '@components': path.join(jsPath, 'UI', 'components'),
     })
     .extract({
         to: `/js/components.js`,
@@ -59,8 +59,6 @@ mix.setPublicPath(publicPath)
     )
 
     .clean({
-        // enable `dry` before adding new paths:
-        // dry: true,
         cleanOnceBeforeBuildPatterns: [
             'js/**/*',
             'css/velocity.css',
