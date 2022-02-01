@@ -5,7 +5,7 @@ import Accounting from 'accounting';
 import Vue         from 'vue';
 import VeeValidate from 'vee-validate';
 import VueCarousel from 'vue-carousel';
-import translate   from '@Components/trans';
+import translate   from '@components/trans';
 
 /**
  * Lang imports.
@@ -42,44 +42,44 @@ Vue.filter('currency', function(value, argument) {
 
 /**
  * Global components.
- **/
+ */
 Vue.component('vue-slider', () => import('vue-slider-component'));
-Vue.component('mini-cart-button', () => import('@Components/mini-cart-button'));
-Vue.component('mini-cart', () => import('@Components/mini-cart'));
-Vue.component('modal-component', () => import('@Components/modal'));
-Vue.component('add-to-cart', () => import('@Components/add-to-cart'));
-Vue.component('star-ratings', () => import('@Components/star-rating'));
-Vue.component('quantity-btn', () => import('@Components/quantity-btn'));
-Vue.component('quantity-changer', () => import('@Components/quantity-changer'));
-Vue.component('proceed-to-checkout', () => import('@Components/proceed-to-checkout'));
-Vue.component('compare-component-with-badge', () => import('@Components/header-compare-with-badge'));
-Vue.component('searchbar-component', () => import('@Components/header-searchbar'));
-Vue.component('wishlist-component-with-badge', () => import('@Components/header-wishlist-with-badge'));
-Vue.component('mobile-header', () => import('@Components/header-mobile'));
-Vue.component('sidebar-header', () => import('@Components/header-sidebar'));
-Vue.component('right-side-header', () => import('@Components/header-right-side'));
-Vue.component('sidebar-component', () => import('@Components/sidebar'));
-Vue.component('product-card', () => import('@Components/product-card'));
-Vue.component('wishlist-component', () => import('@Components/wishlist'));
-Vue.component('carousel-component', () => import('@Components/carousel'));
-Vue.component('slider-component', () => import('@Components/banners'));
-Vue.component('child-sidebar', () => import('@Components/child-sidebar'));
-Vue.component('card-list-header', () => import('@Components/card-header'));
-Vue.component('logo-component', () => import('@Components/image-logo'));
-Vue.component('magnify-image', () => import('@Components/image-magnifier'));
-Vue.component('image-search-component', () => import('@Components/image-search'));
-Vue.component('compare-component', () => import('@Components/product-compare'));
-Vue.component('shimmer-component', () => import('@Components/shimmer-component'));
-Vue.component('responsive-sidebar', () => import('@Components/responsive-sidebar'));
-Vue.component('product-quick-view', () => import('@Components/product-quick-view'));
-Vue.component('product-quick-view-btn', () => import('@Components/product-quick-view-btn'));
-Vue.component('recently-viewed', () => import('@Components/recently-viewed'));
-Vue.component('product-collections', () => import('@Components/product-collections'));
-Vue.component('hot-category', () => import('@Components/hot-category'));
-Vue.component('hot-categories', () => import('@Components/hot-categories'));
-Vue.component('popular-category', () => import('@Components/popular-category'));
-Vue.component('popular-categories', () => import('@Components/popular-categories'));
-Vue.component('velocity-overlay-loader', () => import('@Components/overlay-loader'));
+Vue.component('mini-cart-button', () => import('@components/mini-cart-button'));
+Vue.component('mini-cart', () => import('@components/mini-cart'));
+Vue.component('modal-component', () => import('@components/modal'));
+Vue.component('add-to-cart', () => import('@components/add-to-cart'));
+Vue.component('star-ratings', () => import('@components/star-rating'));
+Vue.component('quantity-btn', () => import('@components/quantity-btn'));
+Vue.component('quantity-changer', () => import('@components/quantity-changer'));
+Vue.component('proceed-to-checkout', () => import('@components/proceed-to-checkout'));
+Vue.component('compare-component-with-badge', () => import('@components/header-compare-with-badge'));
+Vue.component('searchbar-component', () => import('@components/header-searchbar'));
+Vue.component('wishlist-component-with-badge', () => import('@components/header-wishlist-with-badge'));
+Vue.component('mobile-header', () => import('@components/header-mobile'));
+Vue.component('sidebar-header', () => import('@components/header-sidebar'));
+Vue.component('right-side-header', () => import('@components/header-right-side'));
+Vue.component('sidebar-component', () => import('@components/sidebar'));
+Vue.component('product-card', () => import('@components/product-card'));
+Vue.component('wishlist-component', () => import('@components/wishlist'));
+Vue.component('carousel-component', () => import('@components/carousel'));
+Vue.component('slider-component', () => import('@components/banners'));
+Vue.component('child-sidebar', () => import('@components/child-sidebar'));
+Vue.component('card-list-header', () => import('@components/card-header'));
+Vue.component('logo-component', () => import('@components/image-logo'));
+Vue.component('magnify-image', () => import('@components/image-magnifier'));
+Vue.component('image-search-component', () => import('@components/image-search'));
+Vue.component('compare-component', () => import('@components/product-compare'));
+Vue.component('shimmer-component', () => import('@components/shimmer-component'));
+Vue.component('responsive-sidebar', () => import('@components/responsive-sidebar'));
+Vue.component('product-quick-view', () => import('@components/product-quick-view'));
+Vue.component('product-quick-view-btn', () => import('@components/product-quick-view-btn'));
+Vue.component('recently-viewed', () => import('@components/recently-viewed'));
+Vue.component('product-collections', () => import('@components/product-collections'));
+Vue.component('hot-category', () => import('@components/hot-category'));
+Vue.component('hot-categories', () => import('@components/hot-categories'));
+Vue.component('popular-category', () => import('@components/popular-category'));
+Vue.component('popular-categories', () => import('@components/popular-categories'));
+Vue.component('velocity-overlay-loader', () => import('@components/overlay-loader'));
 Vue.component('vnode-injector', {
     functional: true,
     props: ['nodes'],
@@ -90,7 +90,7 @@ Vue.component('vnode-injector', {
 
 /**
  * Start from here.
- **/
+ */
 $(function() {
 
     /**
