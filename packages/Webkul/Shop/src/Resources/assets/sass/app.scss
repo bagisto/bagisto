@@ -2613,6 +2613,10 @@ section.cart {
             width: 30%;
             display: inline-block;
             padding-left: 40px;
+
+            .misc-controls {
+                display: none;
+            }
         }
     }
 }
@@ -2868,7 +2872,7 @@ section.cart {
         .cart-content {
             .left-side {
                 .misc-controls {
-                    display: block;
+                    display: none;
                     top: 300px;
 
                     div {
@@ -2887,7 +2891,25 @@ section.cart {
             }
 
             .right-side {
-                top: -100px;
+                
+                top: 30px;
+                
+                .misc-controls {
+                    display: block;
+
+                    div {
+                        button {
+                            width: 100%;
+                            margin-top: 10px;
+                        }
+
+                        a {
+                            margin-top: 10px;
+                            width: 100%;
+                            text-align: center;
+                        }
+                    }
+                }
             }
         }
     }

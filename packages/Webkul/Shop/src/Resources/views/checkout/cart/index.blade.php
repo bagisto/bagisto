@@ -12,9 +12,10 @@
             </div>
 
             <div class="cart-content">
-                <div class="left-side">
-                    <form action="{{ route('shop.checkout.cart.update') }}" method="POST" @submit.prevent="onSubmit">
-
+                <form action="{{ route('shop.checkout.cart.update') }}" method="POST" @submit.prevent="onSubmit">
+    
+                    <div class="left-side">
+                        
                         <div class="cart-item-list" style="margin-top: 0">
                             @csrf
                             @foreach ($cart->items as $key => $item)
@@ -125,45 +126,24 @@
 
                         {!! view_render_event('bagisto.shop.checkout.cart.controls.after', ['cart' => $cart]) !!}
 
-                        <div class="misc-controls">
-                            <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
-
-                            <div>
-                                @if ($cart->hasProductsWithQuantityBox())
-                                <button type="submit" class="btn btn-lg btn-primary" id="update_cart_button">
-                                    {{ __('shop::app.checkout.cart.update-cart') }}
-                                </button>
-                                @endif
-
-                                @if (! cart()->hasError())
-                                    @php
-                                        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
-                                    @endphp
-
-                                    <proceed-to-checkout
-                                        href="{{ route('shop.checkout.onepage.index') }}"
-                                        add-class="btn btn-lg btn-primary"
-                                        text="{{ __('shop::app.checkout.cart.proceed-to-checkout') }}"
-                                        is-minimum-order-completed="{{ $cart->checkMinimumOrder() }}"
-                                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) }}">
-                                    </proceed-to-checkout>
-                                @endif
-                            </div>
-                        </div>
+                        <misc-controls></misc-controls>
 
                         {!! view_render_event('bagisto.shop.checkout.cart.controls.after', ['cart' => $cart]) !!}
-                    </form>
-                </div>
+                
+                    </div>
 
-                <div class="right-side">
-                    {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
+                    <div class="right-side">
+                        {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
 
-                    @include('shop::checkout.total.summary', ['cart' => $cart])
+                        @include('shop::checkout.total.summary', ['cart' => $cart])
 
-                    <coupon-component></coupon-component>
+                        <coupon-component></coupon-component>
 
-                    {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
-                </div>
+                        <misc-controls></misc-controls>
+
+                        {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
+                    </div>
+                </form>
             </div>
 
             @include ('shop::products.view.cross-sells')
@@ -213,6 +193,37 @@
 
             <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
         </div>
+    </script>
+
+
+    <script type="text/x-template" id="misc-control-template">
+        @if($cart)
+        <div class="misc-controls">
+            <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
+
+            <div>
+                @if ($cart->hasProductsWithQuantityBox())
+                <button type="submit" class="btn btn-lg btn-primary" id="update_cart_button">
+                    {{ __('shop::app.checkout.cart.update-cart') }}
+                </button>
+                @endif
+
+                @if (! cart()->hasError())
+                    @php
+                        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+                    @endphp
+
+                    <proceed-to-checkout
+                        href="{{ route('shop.checkout.onepage.index') }}"
+                        add-class="btn btn-lg btn-primary"
+                        text="{{ __('shop::app.checkout.cart.proceed-to-checkout') }}"
+                        is-minimum-order-completed="{{ $cart->checkMinimumOrder() }}"
+                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) }}">
+                    </proceed-to-checkout>
+                @endif
+            </div>
+        </div>
+        @endif
     </script>
 
     <script>
@@ -283,6 +294,11 @@
             }
         });
 
+
+        Vue.component('misc-controls', {
+            template: '#misc-control-template',
+        });
+        
         function removeLink(message) {
             if (! confirm(message)) {
                 event.preventDefault();
