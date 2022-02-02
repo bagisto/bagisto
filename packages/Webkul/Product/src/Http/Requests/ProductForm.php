@@ -142,6 +142,7 @@ class ProductForm extends FormRequest
     public function attributes()
     {
         return [
+            'images.files.*' => 'image',
             'variants.*.sku' => 'sku',
         ];
     }
