@@ -154,7 +154,8 @@ class ProductFlat extends Model implements ProductFlatContract
      */
     public function images()
     {
-        return $this->hasMany(ProductImageProxy::modelClass(), 'product_id', 'product_id');
+        return $this->hasMany(ProductImageProxy::modelClass(), 'product_id', 'product_id')
+            ->orderBy('position');
     }
 
     /**
@@ -222,7 +223,7 @@ class ProductFlat extends Model implements ProductFlatContract
     /**
      * Retrieve product attributes.
      *
-     * @param  Group $group
+     * @param  Group  $group
      * @param  bool  $skipSuperAttribute
      * @return Collection
      */
@@ -255,7 +256,7 @@ class ProductFlat extends Model implements ProductFlatContract
     /**
      * Is product saleable.
      *
-     * @param  string $key
+     * @param  string  $key
      * @return bool
      */
     public function isSaleable()

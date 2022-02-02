@@ -56,7 +56,7 @@ class Product extends Model implements ProductContract
     /**
      * Loaded attribute values.
      *
-     * @var $loadedAttributeValues
+     * @var array
      */
     public static $loadedAttributeValues = [];
 
@@ -403,8 +403,8 @@ class Product extends Model implements ProductContract
      *
      * @param  Group  $group
      * @param  bool  $skipSuperAttribute
-     *
      * @return \Illuminate\Support\Collection
+     *
      * @throws \Exception
      */
     public function getEditableAttributes($group = null, $skipSuperAttribute = true): Collection
