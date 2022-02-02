@@ -78,6 +78,9 @@ class ProductImageRepository extends Repository
      */
     public function upload($product, $images): void
     {
+        /**
+         * Previous images ids for filtering.
+         */
         $previousImageIds = $product->images()->pluck('id');
 
         if (
@@ -85,7 +88,7 @@ class ProductImageRepository extends Repository
             && isset($images['positions']) && $images['positions']
         ) {
             /**
-             * Filter out new images because position already setuped by index.
+             * Filter out existing images because new image positions are already setuped by index.
              */
             $imagePositions = collect($images['positions'])->keys()->filter(function ($imagePosition) {
                 return is_numeric($imagePosition);
