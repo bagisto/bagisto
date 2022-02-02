@@ -1027,6 +1027,9 @@ return [
             'status'               => 'الحالة',
             'active'               => 'نشيط',
             'inactive'             => 'غير نشط',
+            'is-suspended'         => 'Is Suspended',
+            'suspend'              => 'Suspend',
+            'suspended'            => 'Suspended',
         ],
 
         'reviews' => [

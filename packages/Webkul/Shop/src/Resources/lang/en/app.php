@@ -479,45 +479,40 @@ return [
         'tax-inclusive'            => 'Inclusive of all taxes',
     ],
 
-    // 'reviews' => [
-    //     'empty' => 'You Have Not Reviewed Any Of Product Yet'
-    // ]
-
     'buynow' => [
         'no-options' => 'Please select options before buying this product.',
     ],
 
     'checkout' => [
         'cart' => [
-            'integrity'                => [
+            'integrity'                 => [
                 'missing_fields'  => 'Some required fields missing for this product.',
                 'missing_options' => 'Options are missing for this product.',
                 'missing_links'   => 'Downloadable links are missing for this product.',
                 'qty_missing'     => 'Atleast one product should have more than 1 quantity.',
                 'qty_impossible'  => 'Cannot add more than one of these products to cart.',
             ],
-            'create-error'             => 'Encountered some issue while making cart instance.',
-            'title'                    => 'Shopping Cart',
-            'empty'                    => 'Your shopping cart is empty',
-            'update-cart'              => 'Update Cart',
-            'continue-shopping'        => 'Continue Shopping',
-            'continue-registration'    => 'Continue Registration',
-            'proceed-to-checkout'      => 'Proceed To Checkout',
-            'remove'                   => 'Remove',
-            'remove-link'              => 'Remove',
-            'move-to-wishlist'         => 'Move to Wishlist',
-            'move-to-wishlist-success' => 'Item moved to wishlist successfully.',
-            'move-to-wishlist-error'   => 'Cannot move item to wishlist, please try again later.',
-            'add-config-warning'       => 'Please select option before adding to cart.',
-            'quantity'                 => [
+            'create-error'              => 'Encountered some issue while making cart instance.',
+            'title'                     => 'Shopping Cart',
+            'empty'                     => 'Your shopping cart is empty',
+            'update-cart'               => 'Update Cart',
+            'continue-shopping'         => 'Continue Shopping',
+            'continue-registration'     => 'Continue Registration',
+            'proceed-to-checkout'       => 'Proceed To Checkout',
+            'remove'                    => 'Remove',
+            'remove-link'               => 'Remove',
+            'move-to-wishlist'          => 'Move to Wishlist',
+            'move-to-wishlist-success'  => 'Item moved to wishlist successfully.',
+            'move-to-wishlist-error'    => 'Cannot move item to wishlist, please try again later.',
+            'add-config-warning'        => 'Please select option before adding to cart.',
+            'quantity'                  => [
                 'quantity'          => 'Quantity',
                 'success'           => 'Cart Item(s) successfully updated.',
                 'illegal'           => 'Quantity cannot be lesser than one.',
                 'inventory_warning' => 'The requested quantity is not available, please try again later.',
                 'error'             => 'Cannot update the item(s) at the moment, please try again later.',
             ],
-
-            'item'                  => [
+            'item'                      => [
                 'error_remove'   => 'No items to remove from the cart.',
                 'success'        => 'Item is successfully added to cart.',
                 'success-remove' => 'Item is successfully removed from the cart.',
@@ -525,15 +520,20 @@ return [
                 'inactive'       => 'An item is inactive and was removed from cart.',
                 'inactive-add'   => 'Inactive item cannot be added to cart.',
             ],
-            'quantity-error'        => 'Requested quantity is not available.',
-            'cart-subtotal'         => 'Cart Subtotal',
-            'cart-remove-action'    => 'Do you really want to do this ?',
-            'partial-cart-update'   => 'Only some of the product(s) were updated',
-            'link-missing'          => '',
-            'event'                 => [
+            'quantity-error'            => 'Requested quantity is not available.',
+            'cart-subtotal'             => 'Cart Subtotal',
+            'cart-remove-action'        => 'Do you really want to do this ?',
+            'partial-cart-update'       => 'Only some of the product(s) were updated',
+            'link-missing'              => '',
+            'event'                     => [
                 'expired' => 'This event has been expired.',
             ],
-            'minimum-order-message' => 'Minimum order amount is :amount',
+            'minimum-order-message'     => 'Minimum order amount is :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'check-shipping-address'    => 'Please check shipping address.',
+            'check-billing-address'     => 'Please check billing address.',
+            'specify-shipping-method'   => 'Please specify shipping method.',
+            'specify-payment-method'    => 'Please specify payment method.',
         ],
 
         'onepage' => [

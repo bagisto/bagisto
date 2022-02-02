@@ -42,12 +42,13 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
         'phone',
         'password',
         'api_token',
+        'token',
         'customer_group_id',
         'subscribed_to_news_letter',
-        'is_verified',
-        'token',
-        'notes',
         'status',
+        'is_verified',
+        'is_suspended',
+        'notes',
     ];
 
     /**
@@ -68,7 +69,7 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
      */
     protected static function newFactory()
     {
-        return CustomerFactory::new();
+        return CustomerFactory::new ();
     }
 
     /**

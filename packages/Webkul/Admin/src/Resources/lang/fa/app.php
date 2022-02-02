@@ -1022,6 +1022,9 @@ return [
             'status'               => 'وضعیت',
             'active'               => 'فعال',
             'inactive'             => 'غیرفعال',
+            'is-suspended'         => 'Is Suspended',
+            'suspend'              => 'Suspend',
+            'suspended'            => 'Suspended',
         ],
 
         'reviews' => [
