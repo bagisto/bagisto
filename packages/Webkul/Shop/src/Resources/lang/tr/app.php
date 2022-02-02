@@ -512,7 +512,7 @@ return [
                 'error'             => 'Ürün güncellemesi yapılamıyor, lütfen tekrar deneyin.',
             ],
 
-            'item'                  => [
+            'item'                      => [
                 'error_remove'   => 'Sepetten kaldırılacak ürün bulunamadı.',
                 'success'        => 'Ürün başarıyla sepete eklendi.',
                 'success-remove' => 'Ürün sepetten başarıyla kaldırıldı.',
@@ -520,15 +520,20 @@ return [
                 'inactive'       => 'An item is inactive and was removed from cart.',
                 'inactive-add'   => 'Inactive item cannot be added to cart.',
             ],
-            'quantity-error'        => 'Girilen miktar mevcut değil.',
-            'cart-subtotal'         => 'Sepet Ara Toplam',
-            'cart-remove-action'    => 'Sepeti boşaltmak istediğinizden emin misiniz?',
-            'partial-cart-update'   => 'Sadece bazı ürünler güncellendi.',
-            'link-missing'          => '',
-            'event'                 => [
+            'quantity-error'            => 'Girilen miktar mevcut değil.',
+            'cart-subtotal'             => 'Sepet Ara Toplam',
+            'cart-remove-action'        => 'Sepeti boşaltmak istediğinizden emin misiniz?',
+            'partial-cart-update'       => 'Sadece bazı ürünler güncellendi.',
+            'link-missing'              => '',
+            'event'                     => [
                 'expired' => 'Bu eylemin geçerliliği sona erdi.',
             ],
-            'minimum-order-message' => 'Minimum order amount is :amount',
+            'minimum-order-message'     => 'Minimum order amount is :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'check-shipping-address'    => 'Please check shipping address.',
+            'check-billing-address'     => 'Please check billing address.',
+            'specify-shipping-method'   => 'Please specify shipping method.',
+            'specify-payment-method'    => 'Please specify payment method.',
         ],
 
         'onepage' => [

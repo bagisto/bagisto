@@ -514,7 +514,7 @@ return [
                 'error'             => 'لا يستطيع تحديث عنصر s في الوقت الحالي رجاء حاول ثانية لاحقا',
             ],
 
-            'item'                  => [
+            'item'                      => [
                 'error_remove'   => 'لا عناصر لإزالتها من العربة',
                 'success'        => 'تم بنجاح إضافة العنصر إلى العربة',
                 'success-remove' => 'تم إزالة العنصر بنجاح من العربة',
@@ -522,15 +522,20 @@ return [
                 'inactive'       => 'An item is inactive and was removed from cart',
                 'inactive-add'   => 'Inactive item cannot be added to cart',
             ],
-            'quantity-error'        => 'الكمية المطلوبة غير متوفرة',
-            'cart-subtotal'         => 'المجموع الفرعي للمشتريات',
-            'cart-remove-action'    => 'هل تريد حقا أن تسمح هذا ؟',
-            'partial-cart-update'   => 'تم تحديث بعض المنتجات.',
-            'link-missing'          => '',
-            'event'                 => [
+            'quantity-error'            => 'الكمية المطلوبة غير متوفرة',
+            'cart-subtotal'             => 'المجموع الفرعي للمشتريات',
+            'cart-remove-action'        => 'هل تريد حقا أن تسمح هذا ؟',
+            'partial-cart-update'       => 'تم تحديث بعض المنتجات.',
+            'link-missing'              => '',
+            'event'                     => [
                 'expired' => 'This event has been expired.',
             ],
-            'minimum-order-message' => 'الحد الأدنى لمبلغ الطلب هو :amount',
+            'minimum-order-message'     => 'الحد الأدنى لمبلغ الطلب هو :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'check-shipping-address'    => 'Please check shipping address.',
+            'check-billing-address'     => 'Please check billing address.',
+            'specify-shipping-method'   => 'Please specify shipping method.',
+            'specify-payment-method'    => 'Please specify payment method.',
         ],
 
         'onepage' => [

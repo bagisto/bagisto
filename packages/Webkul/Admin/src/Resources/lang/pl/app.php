@@ -1027,6 +1027,9 @@ return [
             'status'               => 'Status',
             'active'               => 'Aktywny',
             'inactive'             => 'Nieaktywny',
+            'is-suspended'         => 'Is Suspended',
+            'suspend'              => 'Suspend',
+            'suspended'            => 'Suspended',
         ],
 
         'reviews' => [

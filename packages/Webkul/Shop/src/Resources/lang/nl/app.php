@@ -519,7 +519,7 @@ return [
                 'error'             => 'Kan de item (s) momenteel niet updaten. Probeer het later opnieuw.',
             ],
 
-            'item'                  => [
+            'item'                      => [
                 'error_remove'   => 'Geen items om uit de winkelwagen te verwijderen.',
                 'success'        => 'Artikel is succesvol toegevoegd aan winkelwagen.',
                 'success-remove' => 'Item is met succes uit de winkelwagen verwijderd.',
@@ -527,15 +527,20 @@ return [
                 'inactive'       => 'An item is inactive and was removed from cart.',
                 'inactive-add'   => 'Inactive item cannot be added to cart.',
             ],
-            'quantity-error'        => 'Gevraagde hoeveelheid is niet beschikbaar.',
-            'cart-subtotal'         => 'Subtotaal',
-            'cart-remove-action'    => 'Wil je dit echt doen?',
-            'partial-cart-update'   => 'Slechts enkele van de producten zijn bijgewerkt',
-            'link-missing'          => '',
-            'event'                 => [
+            'quantity-error'            => 'Gevraagde hoeveelheid is niet beschikbaar.',
+            'cart-subtotal'             => 'Subtotaal',
+            'cart-remove-action'        => 'Wil je dit echt doen?',
+            'partial-cart-update'       => 'Slechts enkele van de producten zijn bijgewerkt',
+            'link-missing'              => '',
+            'event'                     => [
                 'expired' => 'This event has been expired.',
             ],
-            'minimum-order-message' => 'Minimum orderbedrag is :amount',
+            'minimum-order-message'     => 'Minimum orderbedrag is :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'check-shipping-address'    => 'Please check shipping address.',
+            'check-billing-address'     => 'Please check billing address.',
+            'specify-shipping-method'   => 'Please specify shipping method.',
+            'specify-payment-method'    => 'Please specify payment method.',
         ],
 
         'onepage' => [

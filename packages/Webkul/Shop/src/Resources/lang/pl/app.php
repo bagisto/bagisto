@@ -512,7 +512,7 @@ return [
                 'error'             => 'W tej chwili nie można zaktualizować produktów. Spróbuj ponownie później.',
             ],
 
-            'item'                  => [
+            'item'                      => [
                 'error_remove'   => 'Brak produktów do usunięcia z koszyka.',
                 'success'        => 'Produkt został pomyślnie dodany do koszyka.',
                 'success-remove' => 'Produkt został pomyślnie usunięty z koszyka.',
@@ -520,14 +520,19 @@ return [
                 'inactive'       => 'An item is inactive and was removed from cart.',
                 'inactive-add'   => 'Inactive item cannot be added to cart.',
             ],
-            'quantity-error'        => 'Żądana ilość nie jest dostępna.',
-            'cart-subtotal'         => 'Suma częściowa koszyka',
-            'cart-remove-action'    => 'Czy na pewno chcesz to zrobić ?',
-            'partial-cart-update'   => 'Tylko niektóre produkty zostały zaktualizowane',
-            'event'                 => [
+            'quantity-error'            => 'Żądana ilość nie jest dostępna.',
+            'cart-subtotal'             => 'Suma częściowa koszyka',
+            'cart-remove-action'        => 'Czy na pewno chcesz to zrobić ?',
+            'partial-cart-update'       => 'Tylko niektóre produkty zostały zaktualizowane',
+            'event'                     => [
                 'expired' => 'To wydarzenie wygasło.',
             ],
-            'minimum-order-message' => 'Minimalna kwota zamówienia to :amount',
+            'minimum-order-message'     => 'Minimalna kwota zamówienia to :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'check-shipping-address'    => 'Please check shipping address.',
+            'check-billing-address'     => 'Please check billing address.',
+            'specify-shipping-method'   => 'Please specify shipping method.',
+            'specify-payment-method'    => 'Please specify payment method.',
         ],
 
         'onepage' => [
