@@ -40,6 +40,7 @@ window.eventBus = new Vue();
 Vue.component('image-slider', ImageSlider);
 Vue.component('vue-slider', VueSlider);
 Vue.component('proceed-to-checkout', require('./components/checkout/proceed-to-checkout').default);
+Vue.component('wishlist-component-with-badge', require('./components/header-compare-with-badge').default);
 
 Vue.filter('currency', function (value, argument) {
     return accounting.formatMoney(value, argument);
@@ -52,7 +53,8 @@ $(document).ready(function () {
         data: {
             modalIds: {},
 
-            show_loader: false
+            show_loader: false,
+            baseUrl: document.querySelector('meta[name="base-url"]').content
         },
 
         mounted: function () {
