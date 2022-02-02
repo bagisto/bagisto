@@ -640,6 +640,7 @@ input {
 
         .btn-primary {
             width: 100%;
+            margin-bottom: 10px;
         }
 
         .checkout-process {
@@ -4870,6 +4871,11 @@ body {
 
 .comparison-component>h1 {
     display: inline-block;
+}
+@media only screen and (max-width: 372px) {
+    .comparison-component>h1 {
+        line-height: 30px;
+    }
 }
 
 .icon.remove-product {
