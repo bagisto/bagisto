@@ -73,7 +73,8 @@ class ProductForm extends FormRequest
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                => ['required', 'unique:products,sku,' . $this->id, new Slug],
             'url_key'            => ['required', new ProductCategoryUniqueSlug('product_flat', $this->id)],
-            'images.*'           => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
+            'images.files.*'     => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
+            'images.positions.*' => ['nullable', 'integer'],
             'videos.*'           => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:' . $maxVideoFileSize],
             'special_price_from' => ['nullable', 'date'],
             'special_price_to'   => ['nullable', 'date', 'after_or_equal:special_price_from'],

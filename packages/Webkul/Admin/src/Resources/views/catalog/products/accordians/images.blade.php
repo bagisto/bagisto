@@ -55,11 +55,29 @@
 
     <script type="text/x-template" id="product-image-item-template">
         <label class="image-item" v-bind:class="{ 'has-image': imageData.length > 0 }">
-            <input type="hidden" :name="'images[' + image.id + ']'" v-if="! new_image"/>
+            <input
+                type="hidden"
+                :name="'images[files][' + image.id + ']'"
+                v-if="! new_image"/>
 
-            <input type="file" v-validate="'mimes:image/*'" accept="image/*" :name="'images[]'" ref="imageInput" :id="_uid" @change="addImageView($event)" multiple="multiple"/>
+            <input
+                type="hidden"
+                :name="'images[positions][' + image.id + ']'"/>
 
-            <img class="preview" :src="imageData" v-if="imageData.length > 0">
+            <input
+                :id="_uid"
+                ref="imageInput"
+                type="file"
+                :name="'images[files][]'"
+                accept="image/*"
+                multiple="multiple"
+                v-validate="'mimes:image/*'"
+                @change="addImageView($event)"/>
+
+            <img
+                class="preview"
+                :src="imageData"
+                v-if="imageData.length > 0">
 
             <label class="remove-image" @click="removeImage()">
                 {{ __('admin::app.catalog.products.remove-image-btn-title') }}

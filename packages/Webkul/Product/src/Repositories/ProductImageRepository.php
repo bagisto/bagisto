@@ -80,28 +80,41 @@ class ProductImageRepository extends Repository
     {
         $previousImageIds = $product->images()->pluck('id');
 
-        if ($images) {
-            foreach ($images as $imageId => $image) {
+        if (
+            isset($images['files']) && $images['files']
+            && isset($images['positions']) && $images['positions']
+        ) {
+            /**
+             * Filter out new images because position already setuped by index.
+             */
+            $imagePositions = collect($images['positions'])->keys()->filter(function ($imagePosition) {
+                return is_numeric($imagePosition);
+            });
+
+            foreach ($images['files'] as $indexOrImageId => $image) {
                 if ($image instanceof UploadedFile) {
                     $this->create([
                         'path'       => $image->store($this->getProductDirectory($product)),
                         'product_id' => $product->id,
+                        'position'   => $indexOrImageId,
                     ]);
                 } else {
-                    if (is_numeric($index = $previousImageIds->search($imageId))) {
+                    $this->update([
+                        'position' => $imagePositions->search($indexOrImageId),
+                    ], $indexOrImageId);
+
+                    if (is_numeric($index = $previousImageIds->search($indexOrImageId))) {
                         $previousImageIds->forget($index);
                     }
-
-                    $this->updateImagePosition($imageId);
                 }
             }
         }
 
-        foreach ($previousImageIds as $imageId) {
-            if ($image = $this->find($imageId)) {
+        foreach ($previousImageIds as $indexOrImageId) {
+            if ($image = $this->find($indexOrImageId)) {
                 Storage::delete($image->path);
 
-                $this->delete($imageId);
+                $this->delete($indexOrImageId);
             }
         }
     }
@@ -123,22 +136,5 @@ class ProductImageRepository extends Repository
 
             $this->upload($product, $variant['images'] ?? null);
         }
-    }
-
-    /**
-     * Update image position.
-     *
-     * @param  int  $imageId
-     * @return void
-     */
-    public function updateImagePosition($imageId)
-    {
-        static $position = 0;
-
-        $this->update([
-            'position' => $position,
-        ], $imageId);
-
-        ++$position;
     }
 }
