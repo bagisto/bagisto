@@ -503,7 +503,7 @@ return [
                 'error'             => 'Não é possível atualizar o item(s) no momento, por favor, tente novamente mais tarde',
             ],
 
-            'item'                  => [
+            'item'                      => [
                 'error_remove'   => 'Nenhum item para remover do carrinho',
                 'success'        => 'Item foi adicionado com sucesso ao carrinho',
                 'success-remove' => 'Item foi removido com sucesso do carrinho',
@@ -511,15 +511,20 @@ return [
                 'inactive'       => 'An item is inactive and was removed from cart',
                 'inactive-add'   => 'Inactive item cannot be added to cart',
             ],
-            'quantity-error'        => 'Quantidade solicitada não está disponível',
-            'cart-subtotal'         => 'Subtotal do carrinho',
-            'cart-remove-action'    => 'Você realmente quer fazer isso ?',
-            'partial-cart-update'   => 'Only some of the product(s) were updated',
-            'link-missing'          => '',
-            'event'                 => [
+            'quantity-error'            => 'Quantidade solicitada não está disponível',
+            'cart-subtotal'             => 'Subtotal do carrinho',
+            'cart-remove-action'        => 'Você realmente quer fazer isso ?',
+            'partial-cart-update'       => 'Only some of the product(s) were updated',
+            'link-missing'              => '',
+            'event'                     => [
                 'expired' => 'This event has been expired.',
             ],
-            'minimum-order-message' => 'O valor mínimo do pedido é :amount',
+            'minimum-order-message'     => 'O valor mínimo do pedido é :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'check-shipping-address'    => 'Please check shipping address.',
+            'check-billing-address'     => 'Please check billing address.',
+            'specify-shipping-method'   => 'Please specify shipping method.',
+            'specify-payment-method'    => 'Please specify payment method.',
         ],
 
         'onepage' => [

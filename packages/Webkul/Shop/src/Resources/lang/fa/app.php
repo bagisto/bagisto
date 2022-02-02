@@ -520,14 +520,19 @@ return [
                 'inactive-add'   => 'Inactive item cannot be added to cart',
             ],
 
-            'quantity-error'        => 'مقدار درخواستی در دسترس نیست',
-            'cart-subtotal'         => 'سبد فرعی',
-            'cart-remove-action'    => 'آیا واقعاً می خواهید این کار را انجام دهید؟',
-            'partial-cart-update'   => 'فقط برخی از محصولات (های) به روز شده اند',
-            'event'                 => [
+            'quantity-error'            => 'مقدار درخواستی در دسترس نیست',
+            'cart-subtotal'             => 'سبد فرعی',
+            'cart-remove-action'        => 'آیا واقعاً می خواهید این کار را انجام دهید؟',
+            'partial-cart-update'       => 'فقط برخی از محصولات (های) به روز شده اند',
+            'event'                     => [
                 'expired' => 'This event has been expired.',
             ],
-            'minimum-order-message' => 'حداقل مقدار سفارش است :amount',
+            'minimum-order-message'     => 'حداقل مقدار سفارش است :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'check-shipping-address'    => 'Please check shipping address.',
+            'check-billing-address'     => 'Please check billing address.',
+            'specify-shipping-method'   => 'Please specify shipping method.',
+            'specify-payment-method'    => 'Please specify payment method.',
         ],
 
         'onepage' => [

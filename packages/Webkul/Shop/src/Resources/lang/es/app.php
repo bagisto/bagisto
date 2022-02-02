@@ -487,34 +487,34 @@ return [
 
     'checkout' => [
         'cart' => [
-            'integrity'                => [
+            'integrity'                 => [
                 'missing_fields'  => 'Faltan algunos campos requeridos',
                 'missing_options' => 'Faltan opciones configurables del producto',
                 'missing_links'   => 'Faltan enlaces descargables para este producto.',
                 'qty_missing'     => 'Al menos un producto debe tener más de 1 cantidad.',
                 'qty_impossible'  => 'No se pueden agregar más de uno de estos productos al carrito.',
             ],
-            'create-error'             => 'Se encontraron problemas con el carrito de compra',
-            'title'                    => 'Carrito de la compra',
-            'empty'                    => 'Tu carrito está vacía',
-            'update-cart'              => 'Actualizar carrito',
-            'continue-shopping'        => 'Seguir comprando',
-            'continue-registration'    => 'Daŭrigu Registradon',
-            'proceed-to-checkout'      => 'Continuar con el pago',
-            'remove'                   => 'Eliminar',
-            'remove-link'              => 'Eliminar',
-            'move-to-wishlist'         => 'Mover a la lista de deseos',
-            'move-to-wishlist-success' => 'Artículo movido a la lista de deseos',
-            'move-to-wishlist-error'   => 'El artículo no se puede añadir a la lista de deseos, por favor inténtalo más tarde',
-            'add-config-warning'       => 'Por favor selecciona las opciones antes de añadir al carrito',
-            'quantity'                 => [
+            'create-error'              => 'Se encontraron problemas con el carrito de compra',
+            'title'                     => 'Carrito de la compra',
+            'empty'                     => 'Tu carrito está vacía',
+            'update-cart'               => 'Actualizar carrito',
+            'continue-shopping'         => 'Seguir comprando',
+            'continue-registration'     => 'Daŭrigu Registradon',
+            'proceed-to-checkout'       => 'Continuar con el pago',
+            'remove'                    => 'Eliminar',
+            'remove-link'               => 'Eliminar',
+            'move-to-wishlist'          => 'Mover a la lista de deseos',
+            'move-to-wishlist-success'  => 'Artículo movido a la lista de deseos',
+            'move-to-wishlist-error'    => 'El artículo no se puede añadir a la lista de deseos, por favor inténtalo más tarde',
+            'add-config-warning'        => 'Por favor selecciona las opciones antes de añadir al carrito',
+            'quantity'                  => [
                 'quantity'          => 'Cantidad',
                 'success'           => 'Carrito actualizada exitosamente',
                 'illegal'           => 'La cantidad no puede ser menor que uno',
                 'inventory_warning' => 'La cantidad solicitada no está disponible, inténtelo más tarde',
                 'error'             => 'No se pueden actualizar los artículos, inténtelo más tarde',
             ],
-            'item'                     => [
+            'item'                      => [
                 'error_remove'   => 'No hay artículos que eliminar en el carrito',
                 'success'        => 'El artículo se añadió al carrito',
                 'success-remove' => 'El artículo se eliminó del carrito',
@@ -522,14 +522,19 @@ return [
                 'inactive'       => 'Un artículo está inactivo y se eliminó del carrito.',
                 'inactive-add'   => 'El artículo inactivo no se puede agregar al carrito',
             ],
-            'quantity-error'           => 'La cantidad solicitada no está disponible',
-            'cart-subtotal'            => 'Total parcial',
-            'cart-remove-action'       => '¿Realmente quieres hacer esto?',
-            'partial-cart-update'      => 'Solo algunos de los productos se han actualizado',
-            'event'                    => [
+            'quantity-error'            => 'La cantidad solicitada no está disponible',
+            'cart-subtotal'             => 'Total parcial',
+            'cart-remove-action'        => '¿Realmente quieres hacer esto?',
+            'partial-cart-update'       => 'Solo algunos de los productos se han actualizado',
+            'event'                     => [
                 'expired' => 'This event has been expired.',
             ],
-            'minimum-order-message'    => 'La cantidad mínima de pedido es :amount',
+            'minimum-order-message'     => 'La cantidad mínima de pedido es :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'check-shipping-address'    => 'Please check shipping address.',
+            'check-billing-address'     => 'Please check billing address.',
+            'specify-shipping-method'   => 'Please specify shipping method.',
+            'specify-payment-method'    => 'Please specify payment method.',
         ],
 
         'onepage' => [

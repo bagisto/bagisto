@@ -175,6 +175,8 @@ class CustomerController extends Controller
 
         $data['status'] = ! isset($data['status']) ? 0 : 1;
 
+        $data['is_suspended'] = ! isset($data['is_suspended']) ? 0 : 1;
+
         $this->customerRepository->update($data, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer']));
