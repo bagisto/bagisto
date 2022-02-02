@@ -9,18 +9,9 @@
 
             <product-image></product-image>
 
-            <span class="control-error" v-if="{!! $errors->has('images.*') !!}">
-                @php
-                    $count = 1;
-                @endphp
-
-                @foreach ($errors->get('images.*') as $key => $message)
-                    @php
-                        echo str_replace($key, 'Image' . $count, $message[0]);
-
-                        $count++;
-                    @endphp
-                @endforeach
+            <span
+                class="control-error"
+                v-text="'{{ $errors->first('images.files.*') }}'">
             </span>
 
             <span class="control-info mt-10">{{ __('admin::app.catalog.products.image-size') }}</span>
