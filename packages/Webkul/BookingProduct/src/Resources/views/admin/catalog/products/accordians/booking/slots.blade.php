@@ -72,6 +72,9 @@
     <tr>
         <td>
             <div class="control-group date" :class="[errors.has(controlName + '[from]') ? 'has-error' : '']">
+                
+               <label>{{ __('bookingproduct::app.admin.catalog.products.from') }}</label> 
+            
                 <time-component>
                     <input type="text" v-validate="'required'" :name="controlName + '[from]'" v-model="slotItem.from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.from') }}&quot;">
                 </time-component>
@@ -84,6 +87,9 @@
 
         <td>
             <div class="control-group date" :class="[errors.has(controlName + '[to]') ? 'has-error' : '']">
+                
+                <label>{{ __('bookingproduct::app.admin.catalog.products.to') }}</label> 
+                
                 <time-component>
                     <input type="text" v-validate="{required: true, time_min: slotItem.from }" :name="controlName + '[to]'" v-model="slotItem.to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.to') }}&quot;">
                 </time-component>
