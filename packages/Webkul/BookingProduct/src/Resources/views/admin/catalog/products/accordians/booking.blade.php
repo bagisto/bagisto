@@ -12,6 +12,29 @@
         .has-control-group .control-group:last-child {
             padding-left: 10px;
         }
+
+        .slot-list table tbody tr td .control-group label{
+                display: none;
+         }
+
+        @media only screen and (max-width: 540px){
+            .slot-list table thead{
+                display: none;
+            } 
+            
+            .slot-list table tbody tr td{
+                display: block;
+            }
+
+            .slot-list table tbody tr td .control-group label{
+                display: block;
+            }
+
+            .table .control-group.date:after, .table .control-group.datetime:after {
+                top: 24px;
+                left: 100%;
+            }
+        } 
     </style>
 @endpush
 

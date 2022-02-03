@@ -6,12 +6,22 @@
 
 @push('css')
     <style>
-        @media only screen and (max-width: 768px){
-            .content-container .content .page-header .page-title .control-group .control{
-                width: 100% !important;
-                margin-top:-25px !important;
+       @media only screen and (max-width: 728px){
+            .content-container .content .page-header .page-title{
+                width: 100%;
             }
-        }
+            
+            .content-container .content .page-header .page-title .control-group {
+                margin-top: 20px!important;
+                width: 100%!important;
+                margin-left: 0!important;
+            }
+
+            .content-container .content .page-header .page-action {
+                margin-top: 10px!important;
+                float: left;
+            }
+       }        
     </style>
 @endpush
 

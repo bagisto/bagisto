@@ -1030,6 +1030,9 @@ return [
             'active'               => 'Attivo',
             'inactive'             => 'Non attivo',
             'in-active'            => 'Non attivo',
+            'is-suspended'         => 'Is Suspended',
+            'suspend'              => 'Suspend',
+            'suspended'            => 'Suspended',
         ],
 
         'reviews' => [

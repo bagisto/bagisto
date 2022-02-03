@@ -54,9 +54,14 @@ class OnepageController extends Controller
     {
         Event::dispatch('checkout.load.index');
 
-        if (! auth()->guard('customer')->check()
-            && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
+        if (! auth()->guard('customer')->check() && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
             return redirect()->route('customer.session.index');
+        }
+
+        if (auth()->guard('customer')->check() && auth()->guard('customer')->user()->is_suspended) {
+            session()->flash('warning', trans('shop::app.checkout.cart.suspended-account-message'));
+
+            return redirect()->route('shop.checkout.cart.index');
         }
 
         if (Cart::hasError()) {
@@ -65,11 +70,10 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
 
-        if (! auth()->guard('customer')->check() && $cart->hasDownloadableItems()) {
-            return redirect()->route('customer.session.index');
-        }
-
-        if (! auth()->guard('customer')->check() && ! $cart->hasGuestCheckoutItems()) {
+        if (
+            (! auth()->guard('customer')->check() && $cart->hasDownloadableItems())
+            || (! auth()->guard('customer')->check() && ! $cart->hasGuestCheckoutItems())
+        ) {
             return redirect()->route('customer.session.index');
         }
 
@@ -239,24 +243,28 @@ class OnepageController extends Controller
 
         $minimumOrderAmount = core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
 
+        if (auth()->guard('customer')->check() && auth()->guard('customer')->user()->is_suspended) {
+            throw new \Exception(trans('shop::app.checkout.cart.suspended-account-message'));
+        }
+
         if (! $cart->checkMinimumOrder()) {
             throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
         }
 
         if ($cart->haveStockableItems() && ! $cart->shipping_address) {
-            throw new \Exception(trans('Please check shipping address.'));
+            throw new \Exception(trans('shop::app.checkout.cart.check-shipping-address'));
         }
 
         if (! $cart->billing_address) {
-            throw new \Exception(trans('Please check billing address.'));
+            throw new \Exception(trans('shop::app.checkout.cart.check-billing-address'));
         }
 
         if ($cart->haveStockableItems() && ! $cart->selected_shipping_rate) {
-            throw new \Exception(trans('Please specify shipping method.'));
+            throw new \Exception(trans('shop::app.checkout.cart.specify-shipping-method'));
         }
 
         if (! $cart->payment) {
-            throw new \Exception(trans('Please specify payment method.'));
+            throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
         }
     }
 

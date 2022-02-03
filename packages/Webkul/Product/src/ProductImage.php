@@ -3,13 +3,13 @@
 namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Helpers\AbstractProduct;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ProductImage extends AbstractProduct
 {
     /**
-     * ProductRepository instance
+     * Product repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductRepository
      */
@@ -23,13 +23,12 @@ class ProductImage extends AbstractProduct
      */
     public function __construct(
         ProductRepository $productRepository
-    )
-    {
+    ) {
         $this->productRepository = $productRepository;
     }
 
     /**
-     * Retrieve collection of gallery images
+     * Retrieve collection of gallery images.
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
@@ -87,7 +86,7 @@ class ProductImage extends AbstractProduct
      * present or not. If not then it will load from the product.
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
-     * @param array
+     * @param  array
      * @return array
      */
     public function getProductBaseImage($product, array $galleryImages = null)
@@ -126,7 +125,7 @@ class ProductImage extends AbstractProduct
         return $this->getProductBaseImage($product);
     }
 
-     /**
+    /**
      * Load product's base image.
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
