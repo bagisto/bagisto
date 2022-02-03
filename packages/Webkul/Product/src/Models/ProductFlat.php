@@ -165,7 +165,8 @@ class ProductFlat extends Model implements ProductFlatContract
      */
     public function videos()
     {
-        return $this->product->videos();
+        return $this->product->videos()
+            ->orderBy('position');
     }
 
     /**

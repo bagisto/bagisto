@@ -2,58 +2,83 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 
 class ProductVideoRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify model class name.
      *
-     * @return mixed
+     * @return string
      */
-    function model()
+    public function model()
     {
-        return 'Webkul\Product\Contracts\ProductVideo';
+        return \Webkul\Product\Contracts\ProductVideo::class;
     }
 
     /**
+     * Get product directory.
+     *
+     * @param  \Webkul\Product\Contracts\Product $product
+     * @return string
+     */
+    public function getProductDirectory($product): string
+    {
+        return 'product/' . $product->id;
+    }
+
+    /**
+     * Upload videos.
+     *
      * @param  array  $data
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function uploadVideos($data, $product)
     {
+        /**
+         * Previous images ids for filtering.
+         */
         $previousVideoIds = $product->videos()->pluck('id');
 
-        if (isset($data['videos'])) {
-            foreach ($data['videos'] as $videoId => $video) {
-                $file = 'videos.' . $videoId;
-                $dir = 'product/' . $product->id;
+        if (
+            isset($data['videos']['files']) && $data['videos']['files']
+            && isset($data['videos']['positions']) && $data['videos']['positions']
+        ) {
+            /**
+             * Filter out existing videos because new video positions are already setuped by index.
+             */
+            $videoPositions = collect($data['videos']['positions'])->keys()->filter(function ($videoPosition) {
+                return is_numeric($videoPosition);
+            });
 
+            foreach ($data['videos']['files'] as $indexOrVideoId => $video) {
                 if ($video instanceof UploadedFile) {
-                    if (request()->hasFile($file)) {
-                        $this->create([
-                            'path'       => request()->file($file)->store($dir),
-                            'product_id' => $product->id,
-                            'type'       => 'video'
-                        ]);
-                    }
+                    $this->create([
+                        'path'       => $video->store($this->getProductDirectory($product)),
+                        'product_id' => $product->id,
+                        'position'   => $indexOrVideoId,
+                        'type'       => 'video',
+                    ]);
                 } else {
-                    if (is_numeric($index = $previousVideoIds->search($videoId))) {
+                    $this->update([
+                        'position' => $videoPositions->search($indexOrVideoId),
+                    ], $indexOrVideoId);
+
+                    if (is_numeric($index = $previousVideoIds->search($indexOrVideoId))) {
                         $previousVideoIds->forget($index);
                     }
                 }
             }
         }
 
-        foreach ($previousVideoIds as $videoId) {
-            if ($videoModel = $this->find($videoId)) {
-                Storage::delete($videoModel->path);
+        foreach ($previousVideoIds as $indexOrVideoId) {
+            if ($video = $this->find($indexOrVideoId)) {
+                Storage::delete($video->path);
 
-                $this->delete($videoId);
+                $this->delete($indexOrVideoId);
             }
         }
     }

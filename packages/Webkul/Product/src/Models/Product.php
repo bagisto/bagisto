@@ -49,7 +49,7 @@ class Product extends Model implements ProductContract
     /**
      * The type of product.
      *
-     * @var $typeInstance
+     * @var \Webkul\Product\Type\AbstractType
      */
     protected $typeInstance;
 
@@ -61,7 +61,7 @@ class Product extends Model implements ProductContract
     public static $loadedAttributeValues = [];
 
     /**
-     * The "booted" method of the model.
+     * The `booted` method of the model.
      *
      * @return void
      */
@@ -83,34 +83,10 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Refresh the loaded attribute values.
-     *
-     * @return void
-     */
-    public function refreshloadedAttributeValues(): void
-    {
-        self::$loadedAttributeValues = [];
-    }
-
-    /**
-     * Get the product attribute family that owns the product.
-     */
-    public function attribute_family(): BelongsTo
-    {
-        return $this->belongsTo(AttributeFamilyProxy::modelClass());
-    }
-
-    /**
-     * Get the product attribute values that owns the product.
-     */
-    public function attribute_values(): HasMany
-    {
-        return $this->hasMany(ProductAttributeValueProxy::modelClass());
-    }
-
-    /**
      * Get the product flat entries that are associated with product.
      * May be one for each locale and each channel.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function product_flats(): HasMany
     {
@@ -118,23 +94,9 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Get the product variants that owns the product.
-     */
-    public function variants(): HasMany
-    {
-        return $this->hasMany(static::class, 'parent_id');
-    }
-
-    /**
-     * Get the product reviews that owns the product.
-     */
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(ProductReviewProxy::modelClass());
-    }
-
-    /**
      * Get the product that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function parent(): BelongsTo
     {
@@ -142,40 +104,19 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * The categories that belong to the product.
+     * Get the product attribute family that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function categories(): BelongsToMany
+    public function attribute_family(): BelongsTo
     {
-        return $this->belongsToMany(CategoryProxy::modelClass(), 'product_categories');
-    }
-
-    /**
-     * The inventories that belong to the product.
-     */
-    public function inventories(): HasMany
-    {
-        return $this->hasMany(ProductInventoryProxy::modelClass(), 'product_id');
-    }
-
-    /**
-     * The ordered inventories that belong to the product.
-     */
-    public function ordered_inventories(): HasMany
-    {
-        return $this->hasMany(ProductOrderedInventoryProxy::modelClass(), 'product_id');
-    }
-
-    /**
-     * The inventory sources that belong to the product.
-     */
-    public function inventory_sources(): BelongsToMany
-    {
-        return $this->belongsToMany(InventorySourceProxy::modelClass(), 'product_inventories')
-            ->withPivot('id', 'qty');
+        return $this->belongsTo(AttributeFamilyProxy::modelClass());
     }
 
     /**
      * The super attributes that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function super_attributes(): BelongsToMany
     {
@@ -183,7 +124,39 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Get the product attribute values that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attribute_values(): HasMany
+    {
+        return $this->hasMany(ProductAttributeValueProxy::modelClass());
+    }
+
+    /**
+     * Get the product customer group prices that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function customer_group_prices(): HasMany
+    {
+        return $this->hasMany(ProductCustomerGroupPriceProxy::modelClass());
+    }
+
+    /**
+     * The categories that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(CategoryProxy::modelClass(), 'product_categories');
+    }
+
+    /**
      * The images that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function images(): HasMany
     {
@@ -193,95 +166,40 @@ class Product extends Model implements ProductContract
 
     /**
      * The videos that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function videos(): HasMany
     {
-        return $this->hasMany(ProductVideoProxy::modelClass(), 'product_id');
+        return $this->hasMany(ProductVideoProxy::modelClass(), 'product_id')
+            ->orderBy('position');
     }
 
     /**
-     * The images that belong to the product.
+     * Get the product reviews that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function getBaseImageUrlAttribute()
+    public function reviews(): HasMany
     {
-        $image = $this->images()
-            ->first();
-
-        return $image->url ?? null;
+        return $this->hasMany(ProductReviewProxy::modelClass());
     }
 
     /**
-     * The related products that belong to the product.
+     * The inventory sources that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function related_products(): BelongsToMany
+    public function inventory_sources(): BelongsToMany
     {
-        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id')
-            ->limit(4);
-    }
-
-    /**
-     * The up sells that belong to the product.
-     */
-    public function up_sells(): BelongsToMany
-    {
-        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id')
-            ->limit(4);
-    }
-
-    /**
-     * The cross sells that belong to the product.
-     */
-    public function cross_sells(): BelongsToMany
-    {
-        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id')
-            ->limit(4);
-    }
-
-    /**
-     * The images that belong to the product.
-     */
-    public function downloadable_samples(): HasMany
-    {
-        return $this->hasMany(ProductDownloadableSampleProxy::modelClass());
-    }
-
-    /**
-     * The images that belong to the product.
-     */
-    public function downloadable_links(): HasMany
-    {
-        return $this->hasMany(ProductDownloadableLinkProxy::modelClass());
-    }
-
-    /**
-     * Get the grouped products that owns the product.
-     */
-    public function grouped_products(): HasMany
-    {
-        return $this->hasMany(ProductGroupedProductProxy::modelClass());
-    }
-
-    /**
-     * Get the bundle options that owns the product.
-     */
-    public function bundle_options(): HasMany
-    {
-        return $this->hasMany(ProductBundleOptionProxy::modelClass());
-    }
-
-    /**
-     * Get the product customer group prices that owns the product.
-     */
-    public function customer_group_prices(): HasMany
-    {
-        return $this->hasMany(ProductCustomerGroupPriceProxy::modelClass());
+        return $this->belongsToMany(InventorySourceProxy::modelClass(), 'product_inventories')
+            ->withPivot('id', 'qty');
     }
 
     /**
      * Get inventory source quantity.
      *
-     * @param $inventorySourceId
-     *
+     * @param  $inventorySourceId
      * @return bool
      */
     public function inventory_source_qty($inventorySourceId)
@@ -292,9 +210,177 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * The inventories that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function inventories(): HasMany
+    {
+        return $this->hasMany(ProductInventoryProxy::modelClass(), 'product_id');
+    }
+
+    /**
+     * The ordered inventories that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ordered_inventories(): HasMany
+    {
+        return $this->hasMany(ProductOrderedInventoryProxy::modelClass(), 'product_id');
+    }
+
+    /**
+     * Get the product variants that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function variants(): HasMany
+    {
+        return $this->hasMany(static::class, 'parent_id');
+    }
+
+    /**
+     * Get the grouped products that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function grouped_products(): HasMany
+    {
+        return $this->hasMany(ProductGroupedProductProxy::modelClass());
+    }
+
+    /**
+     * The images that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function downloadable_samples(): HasMany
+    {
+        return $this->hasMany(ProductDownloadableSampleProxy::modelClass());
+    }
+
+    /**
+     * The images that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function downloadable_links(): HasMany
+    {
+        return $this->hasMany(ProductDownloadableLinkProxy::modelClass());
+    }
+
+    /**
+     * Get the bundle options that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bundle_options(): HasMany
+    {
+        return $this->hasMany(ProductBundleOptionProxy::modelClass());
+    }
+
+    /**
+     * Get the booking that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function booking_product()
+    {
+        return $this->hasOne(BookingProductProxy::modelClass());
+    }
+
+    /**
+     * The related products that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function related_products(): BelongsToMany
+    {
+        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id')
+            ->limit(4);
+    }
+
+    /**
+     * The up sells that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function up_sells(): BelongsToMany
+    {
+        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id')
+            ->limit(4);
+    }
+
+    /**
+     * The cross sells that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function cross_sells(): BelongsToMany
+    {
+        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id')
+            ->limit(4);
+    }
+
+    /**
+     * Is saleable.
+     *
+     * @param  string  $key
+     * @return bool
+     *
+     * @throws \Exception
+     */
+    public function isSaleable(): bool
+    {
+        return $this->getTypeInstance()
+            ->isSaleable();
+    }
+
+    /**
+     * Is stockable.
+     *
+     * @return bool
+     *
+     * @throws \Exception
+     */
+    public function isStockable(): bool
+    {
+        return $this->getTypeInstance()
+            ->isStockable();
+    }
+
+    /**
+     * Total quantity.
+     *
+     * @return integer
+     *
+     * @throws \Exception
+     */
+    public function totalQuantity(): int
+    {
+        return $this->getTypeInstance()
+            ->totalQuantity();
+    }
+
+    /**
+     * Have sufficient quantity.
+     *
+     * @param  int  $qty
+     * @return bool
+     *
+     * @throws \Exception
+     */
+    public function haveSufficientQuantity(int $qty): bool
+    {
+        return $this->getTypeInstance()
+            ->haveSufficientQuantity($qty);
+    }
+
+    /**
      * Get type instance.
      *
      * @return AbstractType
+     *
      * @throws \Exception
      */
     public function getTypeInstance(): AbstractType
@@ -315,62 +401,42 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Is saleable.
+     * Return the product id attribute.
      *
-     * @param  string  $key
-     *
-     * @return bool
-     * @throws \Exception
+     * @return int
      */
-    public function isSaleable(): bool
+    public function getProductIdAttribute()
     {
-        return $this->getTypeInstance()
-            ->isSaleable();
+        return $this->id;
     }
 
     /**
-     * Total quantity.
+     * Return the product attribute.
      *
-     * @return integer
-     * @throws \Exception
+     * @return self
      */
-    public function totalQuantity(): int
+    public function getProductAttribute()
     {
-        return $this->getTypeInstance()
-            ->totalQuantity();
+        return $this;
     }
 
     /**
-     * Have sufficient quantity.
+     * The images that belong to the product.
      *
-     * @param  int  $qty
-     *
-     * @return bool
-     * @throws \Exception
+     * @return string
      */
-    public function haveSufficientQuantity(int $qty): bool
+    public function getBaseImageUrlAttribute()
     {
-        return $this->getTypeInstance()
-            ->haveSufficientQuantity($qty);
-    }
+        $image = $this->images()
+            ->first();
 
-    /**
-     * Is stockable.
-     *
-     * @return bool
-     * @throws \Exception
-     */
-    public function isStockable(): bool
-    {
-        return $this->getTypeInstance()
-            ->isStockable();
+        return $image->url ?? null;
     }
 
     /**
      * Get an attribute from the model.
      *
      * @param  string  $key
-     *
      * @return mixed
      */
     public function getAttribute($key)
@@ -488,34 +554,6 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Overrides the default Eloquent query builder.
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query
-     *
-     * @return \Webkul\Product\Database\Eloquent\Builder
-     */
-    public function newEloquentBuilder($query)
-    {
-        return new Builder($query);
-    }
-
-    /**
-     * Return the product id attribute.
-     */
-    public function getProductIdAttribute()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Return the product attribute.
-     */
-    public function getProductAttribute()
-    {
-        return $this;
-    }
-
-    /**
      * Check in loaded family attributes.
      *
      * @return object
@@ -534,20 +572,33 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Overrides the default Eloquent query builder.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     * @return \Webkul\Product\Database\Eloquent\Builder
+     */
+    public function newEloquentBuilder($query)
+    {
+        return new Builder($query);
+    }
+
+    /**
+     * Refresh the loaded attribute values.
+     *
+     * @return void
+     */
+    public function refreshloadedAttributeValues(): void
+    {
+        self::$loadedAttributeValues = [];
+    }
+
+    /**
      * Create a new factory instance for the model.
      *
-     * @return Factory
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
     protected static function newFactory(): Factory
     {
         return ProductFactory::new ();
-    }
-
-    /**
-     * Get the booking that owns the product.
-     */
-    public function booking_product()
-    {
-        return $this->hasOne(BookingProductProxy::modelClass());
     }
 }

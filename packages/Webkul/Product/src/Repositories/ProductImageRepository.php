@@ -46,7 +46,8 @@ class ProductImageRepository extends Repository
     /**
      * Get product directory.
      *
-     * @param  Webkul\Product\Models\Product $variant
+     * @param  \Webkul\Product\Contracts\Product $product
+     * @return string
      */
     public function getProductDirectory($product): string
     {
@@ -72,7 +73,7 @@ class ProductImageRepository extends Repository
     /**
      * Upload.
      *
-     * @param  Webkul\Product\Models\Product $product
+     * @param  \Webkul\Product\Contracts\Product $product
      * @param  array
      * @return void
      */

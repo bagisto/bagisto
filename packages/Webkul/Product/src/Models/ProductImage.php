@@ -21,10 +21,18 @@ class ProductImage extends Model implements ProductImageContract
      * @var array
      */
     protected $fillable = [
+        'type',
         'path',
         'product_id',
         'position',
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['url'];
 
     /**
      * Get the product that owns the image.
@@ -65,19 +73,5 @@ class ProductImage extends Model implements ProductImageContract
     public function isCustomAttribute($attribute)
     {
         return $this->attribute_family->custom_attributes->pluck('code')->contains($attribute);
-    }
-
-    /**
-     * To array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $array = parent::toArray();
-
-        $array['url'] = $this->url;
-
-        return $array;
     }
 }

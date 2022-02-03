@@ -4,21 +4,14 @@
     <div slot="body">
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.videos.controls.before', ['product' => $product]) !!}
 
-        <div class="control-group {!! $errors->has('videos.*') ? 'has-error' : '' !!}">
+        <div class="control-group {{ $errors->has('videos.files.*') ? 'has-error' : '' }}">
             <label>{{ __('admin::app.catalog.products.video') }}</label>
 
             <product-video></product-video>
 
-            <span class="control-error" v-if="{!! $errors->has('videos.*') !!}">
-                @php $count = 1; @endphp
-
-                @foreach ($errors->get('videos.*') as $key => $message)
-                    @php
-                        echo str_replace($key, 'Video'.$count, $message[0]);
-
-                        $count++;
-                    @endphp
-                @endforeach
+            <span
+                class="control-error"
+                v-text="'{{ $errors->first('videos.files.*') }}'">
             </span>
         </div>
 
@@ -32,13 +25,15 @@
     <script type="text/x-template" id="product-video-template">
         <div>
             <div class="image-wrapper">
-                <product-video-item
-                    v-for='(video, index) in items'
-                    :key='video.id'
-                    :video="video"
-                    @onRemoveVideo="removeVideo($event)"
-                    @onVideoSelected="videoSelected($event)"
-                ></product-video-item>
+                <draggable v-model="items" group="people" @end="onDragEnd">
+                    <product-video-item
+                        v-for='(video, index) in items'
+                        :key='video.id'
+                        :video="video"
+                        @onRemoveVideo="removeVideo($event)"
+                        @onVideoSelected="videoSelected($event)">
+                    </product-video-item>
+                </draggable>
             </div>
 
             <label class="btn btn-lg btn-primary" style="display: inline-block; width: auto" @click="createFileType">
@@ -49,12 +44,28 @@
 
     <script type="text/x-template" id="product-video-item-template">
         <label class="image-item" v-bind:class="{ 'has-image': videoData.length > 0 }">
-            <input type="hidden" :name="'videos[' + video.id + ']'" v-if="! new_video"/>
+            <input
+                type="hidden"
+                :name="'videos[files][' + video.id + ']'"
+                v-if="! new_video"/>
 
-            <input type="file" v-validate="'mimes:video/*'"  accept="video/*" :name="'videos[]'" ref="videoInput" :id="_uid" @change="addVideoView($event)" multiple="multiple"/>
+            <input
+                type="hidden"
+                :name="'videos[positions][' + video.id + ']'"/>
+
+            <input
+                :id="_uid"
+                ref="videoInput"
+                type="file"
+                name="videos[files][]"
+                accept="video/*"
+                multiple="multiple"
+                v-validate="'mimes:video/*'"
+                @change="addVideoView($event)"/>
 
             <video class="preview" v-if="videoData.length > 0" width="200" height="160" controls>
                 <source :src="videoData"  type="video/mp4">
+
                 {{ __('admin::app.catalog.products.not-support-video') }}
             </video>
 
@@ -74,7 +85,7 @@
 
                     videoCount: 0,
 
-                    items: []
+                    items: [],
                 }
             },
 
@@ -88,7 +99,7 @@
                 let self = this;
 
                 this.videos.forEach(function(video) {
-                    self.items.push(video)
+                    self.items.push(video);
 
                     self.videoCount++;
                 });
@@ -103,8 +114,8 @@
                     this.items.push({'id': 'video_' + this.videoCount});
                 },
 
-                removeVideo (video) {
-                    let index = this.items.indexOf(video)
+                removeVideo: function(video) {
+                    let index = this.items.indexOf(video);
 
                     Vue.delete(this.items, index);
                 },
@@ -119,7 +130,15 @@
                             self.items.push({'id': 'video_' + self.videoCount, file: video});
                         }
                     });
-                }
+                },
+
+                onDragEnd: function() {
+                    this.items = this.items.map((item, index) => {
+                        item.position = index;
+
+                        return item;
+                    });
+                },
             }
         });
 
@@ -130,7 +149,7 @@
                 video: {
                     type: Object,
                     required: false,
-                    default: null
+                    default: null,
                 },
             },
 
@@ -138,8 +157,8 @@
                 return {
                     videoData: '',
 
-                    new_video: 0
-                }
+                    new_video: 0,
+                };
             },
 
             mounted () {
@@ -162,10 +181,10 @@
 
                     if (videoInput.files && videoInput.files[0]) {
                         if (videoInput.files[0].type.includes('video/')) {
-                            this.readFile(videoInput.files[0])
+                            this.readFile(videoInput.files[0]);
 
                             if (videoInput.files.length > 1) {
-                                this.$emit('onVideoSelected', videoInput)
+                                this.$emit('onVideoSelected', videoInput);
                             }
                         } else {
                             videoInput.value = "";
@@ -188,8 +207,8 @@
                 },
 
                 removeVideo: function() {
-                    this.$emit('onRemoveVideo', this.video)
-                }
+                    this.$emit('onRemoveVideo', this.video);
+                },
             }
         });
     </script>

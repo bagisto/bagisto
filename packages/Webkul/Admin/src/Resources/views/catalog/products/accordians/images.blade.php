@@ -4,7 +4,7 @@
     <div slot="body">
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.controls.before', ['product' => $product]) !!}
 
-        <div class="control-group {!! $errors->has('images.*') ? 'has-error' : '' !!}">
+        <div class="control-group {{ $errors->has('images.files.*') ? 'has-error' : '' }}">
             <label>{{ __('admin::app.catalog.categories.image') }}</label>
 
             <product-image></product-image>
@@ -59,7 +59,7 @@
                 :id="_uid"
                 ref="imageInput"
                 type="file"
-                :name="'images[files][]'"
+                name="images[files][]"
                 accept="image/*"
                 multiple="multiple"
                 v-validate="'mimes:image/*'"
