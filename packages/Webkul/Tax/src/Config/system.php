@@ -5,7 +5,12 @@ return [
         'key'  => 'taxes',
         'name' => 'tax::app.admin.system.taxes.taxes',
         'sort' => 6,
-    ], [
+    ],
+
+    /**
+     * Catalog.
+     */
+    [
         'key'  => 'taxes.catalogue',
         'name' => 'tax::app.admin.system.taxes.catalogue',
         'sort' => 1,
@@ -15,12 +20,12 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'    => 'tax_inclusive',
-                'title'   => 'tax::app.admin.system.taxes.tax-inclusive',
-                'type'    => 'boolean',
+                'name'       => 'tax_inclusive',
+                'title'      => 'tax::app.admin.system.taxes.tax-inclusive',
+                'type'       => 'boolean',
                 'validation' => 'required',
-                'default' => false
-            ]
+                'default'    => false,
+            ],
         ],
     ], [
         'key'    => 'taxes.catalogue.default-location-calculation',
@@ -44,7 +49,7 @@ return [
                 'title'   => 'tax::app.admin.system.taxes.default-post-code',
                 'type'    => 'text',
                 'default' => '',
-            ]
+            ],
         ],
-    ]
+    ],
 ];

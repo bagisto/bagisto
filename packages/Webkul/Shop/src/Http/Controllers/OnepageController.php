@@ -112,7 +112,7 @@ class OnepageController extends Controller
      */
     public function saveAddress(CustomerAddressForm $request)
     {
-        $data = request()->all();
+        $data = $request->all();
 
         if (! auth()->guard('customer')->check() && ! Cart::getCart()->hasGuestCheckoutItems()) {
             return response()->json(['redirect_url' => route('customer.session.index')], 403);
@@ -269,7 +269,7 @@ class OnepageController extends Controller
     }
 
     /**
-     * Check Customer is exist or not.
+     * Check customer is exist or not.
      *
      * @return \Illuminate\Http\Response
      */
