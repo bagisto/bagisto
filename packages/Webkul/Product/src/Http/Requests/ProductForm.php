@@ -73,8 +73,10 @@ class ProductForm extends FormRequest
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                => ['required', 'unique:products,sku,' . $this->id, new Slug],
             'url_key'            => ['required', new ProductCategoryUniqueSlug('product_flat', $this->id)],
-            'images.*'           => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
-            'videos.*'           => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:' . $maxVideoFileSize],
+            'images.files.*'     => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
+            'images.positions.*' => ['nullable', 'integer'],
+            'videos.files.*'     => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:' . $maxVideoFileSize],
+            'videos.positions.*' => ['nullable', 'integer'],
             'special_price_from' => ['nullable', 'date'],
             'special_price_to'   => ['nullable', 'date', 'after_or_equal:special_price_from'],
             'special_price'      => ['nullable', new Decimal, 'lt:price'],
@@ -141,6 +143,8 @@ class ProductForm extends FormRequest
     public function attributes()
     {
         return [
+            'images.files.*' => 'image',
+            'videos.files.*' => 'video',
             'variants.*.sku' => 'sku',
         ];
     }

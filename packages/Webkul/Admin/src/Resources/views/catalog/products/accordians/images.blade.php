@@ -4,21 +4,14 @@
     <div slot="body">
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.controls.before', ['product' => $product]) !!}
 
-        <div class="control-group {!! $errors->has('images.*') ? 'has-error' : '' !!}">
+        <div class="control-group {{ $errors->has('images.files.*') ? 'has-error' : '' }}">
             <label>{{ __('admin::app.catalog.categories.image') }}</label>
 
             <product-image></product-image>
 
-            <span class="control-error" v-if="{!! $errors->has('images.*') !!}">
-                @php $count = 1; @endphp
-
-                @foreach ($errors->get('images.*') as $key => $message)
-                    @php
-                        echo str_replace($key, 'Image'.$count, $message[0]);
-
-                        $count++;
-                    @endphp
-                @endforeach
+            <span
+                class="control-error"
+                v-text="'{{ $errors->first('images.files.*') }}'">
             </span>
 
             <span class="control-info mt-10">{{ __('admin::app.catalog.products.image-size') }}</span>
@@ -34,13 +27,15 @@
     <script type="text/x-template" id="product-image-template">
         <div>
             <div class="image-wrapper">
-                <product-image-item
-                    v-for='(image, index) in items'
-                    :key='image.id'
-                    :image="image"
-                    @onRemoveImage="removeImage($event)"
-                    @onImageSelected="imageSelected($event)"
-                ></product-image-item>
+                <draggable v-model="items" group="people" @end="onDragEnd">
+                    <product-image-item
+                        v-for='(image, index) in items'
+                        :key='image.id'
+                        :image="image"
+                        @onRemoveImage="removeImage($event)"
+                        @onImageSelected="imageSelected($event)">
+                    </product-image-item>
+                </draggable>
             </div>
 
             <label class="btn btn-lg btn-primary" style="display: inline-block; width: auto" @click="createFileType">
@@ -51,11 +46,29 @@
 
     <script type="text/x-template" id="product-image-item-template">
         <label class="image-item" v-bind:class="{ 'has-image': imageData.length > 0 }">
-            <input type="hidden" :name="'images[' + image.id + ']'" v-if="! new_image"/>
+            <input
+                type="hidden"
+                :name="'images[files][' + image.id + ']'"
+                v-if="! new_image"/>
 
-            <input type="file" v-validate="'mimes:image/*'" accept="image/*" :name="'images[]'" ref="imageInput" :id="_uid" @change="addImageView($event)" multiple="multiple"/>
+            <input
+                type="hidden"
+                :name="'images[positions][' + image.id + ']'"/>
 
-            <img class="preview" :src="imageData" v-if="imageData.length > 0">
+            <input
+                :id="_uid"
+                ref="imageInput"
+                type="file"
+                name="images[files][]"
+                accept="image/*"
+                multiple="multiple"
+                v-validate="'mimes:image/*'"
+                @change="addImageView($event)"/>
+
+            <img
+                class="preview"
+                :src="imageData"
+                v-if="imageData.length > 0">
 
             <label class="remove-image" @click="removeImage()">
                 {{ __('admin::app.catalog.products.remove-image-btn-title') }}
@@ -73,7 +86,7 @@
 
                     imageCount: 0,
 
-                    items: []
+                    items: [],
                 }
             },
 
@@ -102,7 +115,7 @@
                     this.items.push({'id': 'image_' + this.imageCount});
                 },
 
-                removeImage (image) {
+                removeImage: function(image) {
                     let index = this.items.indexOf(image)
 
                     Vue.delete(this.items, index);
@@ -118,7 +131,15 @@
                             self.items.push({'id': 'image_' + self.imageCount, file: image});
                         }
                     });
-                }
+                },
+
+                onDragEnd: function() {
+                    this.items = this.items.map((item, index) => {
+                        item.position = index;
+
+                        return item;
+                    });
+                },
             }
         });
 
