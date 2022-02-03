@@ -38,28 +38,19 @@ class ProductMediaRepository extends Repository
     /**
      * Upload.
      *
-     * @param  \Webkul\Product\Contracts\Product $product
-     * @param  array
+     * @param  array  $data
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  string  $uploadFileType
      * @return void
      */
-    public function upload($data, $product, $uploadFileType): void
+    public function upload($data, $product, string $uploadFileType): void
     {
         /**
          * Previous model ids for filtering.
          */
         $previousIds = $this->resolveFileTypeQueryBuilder($product, $uploadFileType)->pluck('id');
 
-        if (
-            isset($data[$uploadFileType]['files']) && $data[$uploadFileType]['files']
-            && isset($data[$uploadFileType]['positions']) && $data[$uploadFileType]['positions']
-        ) {
-            /**
-             * Filter out existing models because new model positions are already setuped by index.
-             */
-            $positions = collect($data[$uploadFileType]['positions'])->keys()->filter(function ($position) {
-                return is_numeric($position);
-            });
-
+        if (isset($data[$uploadFileType]['files']) && $data[$uploadFileType]['files']) {
             foreach ($data[$uploadFileType]['files'] as $indexOrModelId => $file) {
                 if ($file instanceof UploadedFile) {
                     $this->create([
@@ -69,9 +60,18 @@ class ProductMediaRepository extends Repository
                         'position'   => $indexOrModelId,
                     ]);
                 } else {
-                    $this->update([
-                        'position' => $positions->search($indexOrModelId),
-                    ], $indexOrModelId);
+                    /**
+                     * Filter out existing models because new model positions are already setuped by index.
+                     */
+                    if (isset($data[$uploadFileType]['positions']) && $data[$uploadFileType]['positions']) {
+                        $positions = collect($data[$uploadFileType]['positions'])->keys()->filter(function ($position) {
+                            return is_numeric($position);
+                        });
+
+                        $this->update([
+                            'position' => $positions->search($indexOrModelId),
+                        ], $indexOrModelId);
+                    }
 
                     if (is_numeric($index = $previousIds->search($indexOrModelId))) {
                         $previousIds->forget($index);
