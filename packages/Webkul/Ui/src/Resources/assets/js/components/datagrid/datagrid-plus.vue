@@ -2,7 +2,7 @@
     <div class="table" v-if="isDataLoaded" :key="dataGridIndex">
         <div class="grid-container">
             <div class="grid-top">
-                 <div class="datagrid-filters">
+                <div class="datagrid-filters">
                     <div class="filter-left">
                         <div
                             class="dropdown-filters per-page"
@@ -12,15 +12,19 @@
                                 <select
                                     class="control"
                                     name="channel"
-                                    @change="changeExtraFilter($event, 'channel')"
+                                    @change="
+                                        changeExtraFilter($event, 'channel')
+                                    "
                                 >
                                     <option
                                         value="all"
                                         :selected="
-                                            extraFilters.current.channel == 'all'
+                                            extraFilters.current.channel ==
+                                                'all'
                                         "
                                         v-text="translations.allChannels"
                                     ></option>
+
                                     <option
                                         :key="channelKey"
                                         v-for="(channel,
@@ -44,7 +48,9 @@
                                 <select
                                     class="control"
                                     name="locale"
-                                    @change="changeExtraFilter($event, 'locale')"
+                                    @change="
+                                        changeExtraFilter($event, 'locale')
+                                    "
                                 >
                                     <option
                                         value="all"
@@ -53,6 +59,7 @@
                                         "
                                         v-text="translations.allLocales"
                                     ></option>
+
                                     <option
                                         :key="localeKey"
                                         v-for="(locale,
@@ -78,17 +85,21 @@
                                     id="customer-group-switcher"
                                     name="customer_group"
                                     @change="
-                                        changeExtraFilter($event, 'customer_group')
+                                        changeExtraFilter(
+                                            $event,
+                                            'customer_group'
+                                        )
                                     "
                                 >
                                     <option
                                         value="all"
                                         :selected="
-                                            extraFilters.current.customer_group ==
-                                                'all'
+                                            extraFilters.current
+                                                .customer_group == 'all'
                                         "
                                         v-text="translations.allCustomerGroups"
                                     ></option>
+
                                     <option
                                         :key="customerGroupKey"
                                         v-for="(customerGroup,
@@ -97,7 +108,8 @@
                                         :value="customerGroup.id"
                                         :selected="
                                             customerGroup.id ==
-                                                extraFilters.current.customer_group
+                                                extraFilters.current
+                                                    .customer_group
                                         "
                                     ></option>
                                 </select>
@@ -175,7 +187,9 @@
                                                 class="filter-column-select control"
                                                 v-model="filterColumn"
                                                 v-on:change="
-                                                    getColumnOrAlias(filterColumn)
+                                                    getColumnOrAlias(
+                                                        filterColumn
+                                                    )
                                                 "
                                             >
                                                 <option
@@ -183,6 +197,7 @@
                                                     selected
                                                     disabled
                                                 ></option>
+
                                                 <option
                                                     :key="columnKey"
                                                     v-for="(column,
@@ -206,24 +221,36 @@
                                                 v-model="stringCondition"
                                             >
                                                 <option
-                                                    v-text="translations.condition"
+                                                    v-text="
+                                                        translations.condition
+                                                    "
                                                     selected
                                                     disabled
                                                 ></option>
+
                                                 <option
-                                                    v-text="translations.contains"
+                                                    v-text="
+                                                        translations.contains
+                                                    "
                                                     value="like"
                                                 ></option>
+
                                                 <option
-                                                    v-text="translations.ncontains"
+                                                    v-text="
+                                                        translations.ncontains
+                                                    "
                                                     value="nlike"
                                                 ></option>
+
                                                 <option
                                                     v-text="translations.equals"
                                                     value="eq"
                                                 ></option>
+
                                                 <option
-                                                    v-text="translations.nequals"
+                                                    v-text="
+                                                        translations.nequals
+                                                    "
                                                     value="neqs"
                                                 ></option>
                                             </select>
@@ -250,30 +277,44 @@
                                                 v-model="numberCondition"
                                             >
                                                 <option
-                                                    v-text="translations.condition"
+                                                    v-text="
+                                                        translations.condition
+                                                    "
                                                     selected
                                                     disabled
                                                 ></option>
+
                                                 <option
                                                     v-text="translations.equals"
                                                     value="eq"
                                                 ></option>
+
                                                 <option
-                                                    v-text="translations.nequals"
+                                                    v-text="
+                                                        translations.nequals
+                                                    "
                                                     value="neqs"
                                                 ></option>
+
                                                 <option
-                                                    v-text="translations.greater"
+                                                    v-text="
+                                                        translations.greater
+                                                    "
                                                     value="gt"
                                                 ></option>
+
                                                 <option
                                                     v-text="translations.less"
                                                     value="lt"
                                                 ></option>
+
                                                 <option
-                                                    v-text="translations.greatere"
+                                                    v-text="
+                                                        translations.greatere
+                                                    "
                                                     value="gte"
                                                 ></option>
+
                                                 <option
                                                     v-text="translations.lesse"
                                                     value="lte"
@@ -303,16 +344,22 @@
                                                 v-model="booleanCondition"
                                             >
                                                 <option
-                                                    v-text="translations.condition"
+                                                    v-text="
+                                                        translations.condition
+                                                    "
                                                     selected
                                                     disabled
                                                 ></option>
+
                                                 <option
                                                     v-text="translations.equals"
                                                     value="eq"
                                                 ></option>
+
                                                 <option
-                                                    v-text="translations.nequals"
+                                                    v-text="
+                                                        translations.nequals
+                                                    "
                                                     value="neqs"
                                                 ></option>
                                             </select>
@@ -330,10 +377,12 @@
                                                     selected
                                                     disabled
                                                 ></option>
+
                                                 <option
                                                     v-text="translations.true"
                                                     value="1"
                                                 ></option>
+
                                                 <option
                                                     v-text="translations.false"
                                                     value="0"
@@ -349,30 +398,44 @@
                                                 v-model="datetimeCondition"
                                             >
                                                 <option
-                                                    v-text="translations.condition"
+                                                    v-text="
+                                                        translations.condition
+                                                    "
                                                     selected
                                                     disabled
                                                 ></option>
+
                                                 <option
                                                     v-text="translations.equals"
                                                     value="eq"
                                                 ></option>
+
                                                 <option
-                                                    v-text="translations.nequals"
+                                                    v-text="
+                                                        translations.nequals
+                                                    "
                                                     value="neqs"
                                                 ></option>
+
                                                 <option
-                                                    v-text="translations.greater"
+                                                    v-text="
+                                                        translations.greater
+                                                    "
                                                     value="gt"
                                                 ></option>
+
                                                 <option
                                                     v-text="translations.less"
                                                     value="lt"
                                                 ></option>
+
                                                 <option
-                                                    v-text="translations.greatere"
+                                                    v-text="
+                                                        translations.greatere
+                                                    "
                                                     value="gte"
                                                 ></option>
+
                                                 <option
                                                     v-text="translations.lesse"
                                                     value="lte"
@@ -402,38 +465,47 @@
                     </div>
                 </div>
             </div>
-           
 
-            <div class="filtered-tags">
-                <span
-                    :key="filterKey"
-                    class="filter-tag"
-                    v-if="filters.length > 0"
-                    v-for="(filter, filterKey) in filters"
-                    style="text-transform: capitalize"
-                >
-                    <span v-if="filter.column == 'perPage'">perPage</span>
-                    <span v-else>{{ filter.label }}</span>
+            <div class="filter-advance">
+                <div class="filtered-tags">
+                    <span
+                        :key="filterKey"
+                        class="filter-tag"
+                        v-if="filters.length > 0"
+                        v-for="(filter, filterKey) in filters"
+                        style="text-transform: capitalize"
+                    >
+                        <span v-if="filter.column == 'perPage'">perPage</span>
 
-                    <span class="wrapper" v-if="filter.prettyValue">
-                        {{ filter.prettyValue }}
-                        <span
-                            class="icon cross-icon"
-                            v-on:click="removeFilter(filter)"
-                        ></span>
+                        <span v-else>{{ filter.label }}</span>
+
+                        <span class="wrapper" v-if="filter.prettyValue">
+                            {{ filter.prettyValue }}
+                            <span
+                                class="icon cross-icon"
+                                v-on:click="removeFilter(filter)"
+                            ></span>
+                        </span>
+
+                        <span class="wrapper" v-else>
+                            {{ decodeURIComponent(filter.val) }}
+                            <span
+                                class="icon cross-icon"
+                                v-on:click="removeFilter(filter)"
+                            ></span>
+                        </span>
                     </span>
-                    <span class="wrapper" v-else>
-                        {{ decodeURIComponent(filter.val) }}
-                        <span
-                            class="icon cross-icon"
-                            v-on:click="removeFilter(filter)"
-                        ></span>
+                </div>
+
+                <div class="records-count-container">
+                    <span class="datagrid-count">
+                        {{ records.total }} {{ translations.recordsFound }}
                     </span>
-                </span>
+                </div>
             </div>
 
-            <div class="table-responsive">   
-                 <table class="table">
+            <div class="table-responsive">
+                <table class="table">
                     <thead v-if="massActionsToggle">
                         <tr
                             class="mass-action"
@@ -443,12 +515,7 @@
                             <th colspan="100%">
                                 <div
                                     class="mass-action-wrapper"
-                                    style="
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: flex-start;
-                    "
+                                    style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;"
                                 >
                                     <span
                                         class="massaction-remove"
@@ -474,6 +541,7 @@
                                             name="_token"
                                             :value="csrf"
                                         />
+
                                         <input
                                             type="hidden"
                                             id="indexes"
@@ -505,7 +573,9 @@
                                         <div
                                             class="control-group"
                                             style="margin-left: 10px"
-                                            v-if="massActionType.value == 'update'"
+                                            v-if="
+                                                massActionType.value == 'update'
+                                            "
                                         >
                                             <select
                                                 class="control"
@@ -620,28 +690,34 @@
                                     <div class="action">
                                         <a
                                             :key="actionIndex"
-                                            v-for="(action, actionIndex) in actions"
+                                            v-for="(action,
+                                            actionIndex) in actions"
                                             v-if="
-                                                record[`${action.key}_to_display`]
+                                                record[
+                                                    `${action.key}_to_display`
+                                                ]
                                             "
                                             :id="
                                                 record[
                                                     typeof action.index !==
-                                                        'undefined' && action.index
+                                                        'undefined' &&
+                                                    action.index
                                                         ? action.index
                                                         : index
                                                 ]
                                             "
                                             :href="
                                                 action.method == 'GET'
-                                                    ? record[`${action.key}_url`]
+                                                    ? record[
+                                                          `${action.key}_url`
+                                                      ]
                                                     : 'javascript:void(0);'
                                             "
                                             v-on:click="
                                                 action.method != 'GET'
                                                     ? typeof action.function !==
-                                                        'undefined' &&
-                                                    action.function
+                                                          'undefined' &&
+                                                      action.function
                                                         ? action.function
                                                         : doAction($event)
                                                     : {}
@@ -670,6 +746,7 @@
                                 </td>
                             </tr>
                         </template>
+
                         <template v-else>
                             <tr>
                                 <td colspan="10">
@@ -683,7 +760,6 @@
                     </tbody>
                 </table>
             </div>
-           
         </div>
 
         <div
@@ -707,10 +783,12 @@
                 @click="changePage(link.url)"
             >
                 <i class="icon angle-left-icon" v-if="index == 0"></i>
+
                 <i
                     class="icon angle-right-icon"
                     v-else-if="index == records.links.length - 1"
                 ></i>
+
                 <span v-text="link.label" v-else></span>
             </a>
         </div>

@@ -151,6 +151,7 @@ trait ProvideDataGridPlus
             'filterExists'        => __('ui::app.datagrid.filter-exists'),
             'zeroIndex'           => __('ui::app.datagrid.zero-index'),
             'clickOnAction'       => __('ui::app.datagrid.click_on_action'),
+            'recordsFound'        => __('admin::app.admin.system.records-found'),
             'norecords'           => __('ui::app.datagrid.no-records'),
             'massActionDelete'    => __('ui::app.datagrid.massaction.delete'),
         ];
