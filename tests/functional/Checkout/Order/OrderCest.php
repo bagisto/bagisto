@@ -4,23 +4,26 @@ namespace Tests\Functional\Checkout\Order;
 
 use Faker\Factory;
 use FunctionalTester;
-use Webkul\Sales\Models\Order;
-use Webkul\Core\Models\Channel;
-use Webkul\Customer\Models\Customer;
-use Webkul\Sales\Models\OrderAddress;
-use Webkul\Sales\Models\OrderPayment;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartPayment;
+use Webkul\Core\Models\Channel;
+use Webkul\Customer\Models\Customer;
+use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderAddress;
+use Webkul\Sales\Models\OrderPayment;
 
 /**
- * Class OrderCest
+ * OrderCest class.
  *
  * @package Tests\Functional\Checkout\Cart
  */
 class OrderCest
 {
     /**
-     * @param \FunctionalTester $I
+     * Test checkout as customer.
+     *
+     * @param  \FunctionalTester  $I
+     * @return void
      */
     public function testCheckoutAsCustomer(FunctionalTester $I)
     {
@@ -28,7 +31,7 @@ class OrderCest
 
         $faker = Factory::create();
 
-        $addressData = [
+        $addressData = $this->cleanAllFields([
             'city'         => $faker->city,
             'company_name' => $faker->company,
             'country'      => $faker->countryCode,
@@ -38,16 +41,20 @@ class OrderCest
             'phone'        => $faker->phoneNumber,
             'postcode'     => $faker->postcode,
             'state'        => $faker->state,
-        ];
+        ]);
 
         $mocks = $I->prepareCart([
             'customer' => $customer,
         ]);
 
-        // assert that checkout can be reached and generate csrf token
+        /**
+         * Assert that checkout can be reached and generate csrf token.
+         */
         $I->amOnRoute('shop.checkout.onepage.index');
 
-        // simulate the entering of the address(es)
+        /**
+         * Simulate the entering of the address(es).
+         */
         $I->sendAjaxPostRequest(route('shop.checkout.save-address'), [
             '_token'   => csrf_token(),
             'billing'  => array_merge($addressData, [
@@ -98,7 +105,9 @@ class OrderCest
             'cart_id'      => $mocks['cart']->id,
         ]);
 
-        // simulate click on the 'place order' button at the last step
+        /**
+         * Simulate click on the 'place order' button at the last step.
+         */
         $I->sendAjaxPostRequest(
             route('shop.checkout.save-order'),
             ['_token' => csrf_token()]
@@ -142,5 +151,29 @@ class OrderCest
             'method_title' => null,
             'order_id'     => $order->id,
         ]);
+    }
+
+    /**
+     * Clean all fields.
+     *
+     * @param  array  $fields
+     * @return array
+     */
+    private function cleanAllFields(array $fields)
+    {
+        return collect($fields)->map(function ($field, $key) {
+            return $this->cleanField($field);
+        })->toArray();
+    }
+
+    /**
+     * Clean fields.
+     *
+     * @param  string $field
+     * @return string
+     */
+    private function cleanField($field)
+    {
+        return preg_replace('/[^A-Za-z0-9 ]/', '', $field);
     }
 }

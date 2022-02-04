@@ -3,6 +3,8 @@
 namespace Webkul\Checkout\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
+use Webkul\Core\Contracts\Validations\PhoneNumber;
 
 class CustomerAddressForm extends FormRequest
 {
@@ -30,55 +32,17 @@ class CustomerAddressForm extends FormRequest
      */
     public function rules(): array
     {
-        $customerAddressIds = $this->getCustomerAddressIds();
-
         if (isset($this->get('billing')['address_id'])) {
-            $billingAddressRules = [
-                'billing.address_id' => ['required'],
-            ];
-
-            if (! empty($customerAddressIds)) {
-                $billingAddressRules['billing.address_id'][] = "in:{$customerAddressIds}";
-            }
-
-            $this->mergeWithRules($billingAddressRules);
+            $this->mergeExistingAddressRules('billing');
         } else {
-            $this->mergeWithRules([
-                'billing.first_name' => ['required'],
-                'billing.last_name'  => ['required'],
-                'billing.email'      => ['required'],
-                'billing.address1'   => ['required'],
-                'billing.city'       => ['required'],
-                'billing.state'      => ['required'],
-                'billing.postcode'   => ['required'],
-                'billing.phone'      => ['required'],
-                'billing.country'    => ['required'],
-            ]);
+            $this->mergeNewAddressRules('billing');
         }
 
         if (isset($this->get('billing')['use_for_shipping']) && ! $this->get('billing')['use_for_shipping']) {
             if (isset($this->get('shipping')['address_id'])) {
-                $shippingAddressRules = [
-                    'shipping.address_id' => ['required'],
-                ];
-
-                if (! empty($customerAddressIds)) {
-                    $shippingAddressRules['shipping.address_id'][] = "in:{$customerAddressIds}";
-                }
-
-                $this->mergeWithRules($shippingAddressRules);
+                $this->mergeExistingAddressRules('shipping');
             } else {
-                $this->mergeWithRules([
-                    'shipping.first_name' => ['required'],
-                    'shipping.last_name'  => ['required'],
-                    'shipping.email'      => ['required'],
-                    'shipping.address1'   => ['required'],
-                    'shipping.city'       => ['required'],
-                    'shipping.state'      => ['required'],
-                    'shipping.postcode'   => ['required'],
-                    'shipping.phone'      => ['required'],
-                    'shipping.country'    => ['required'],
-                ]);
+                $this->mergeNewAddressRules('shipping');
             }
         }
 
@@ -86,9 +50,51 @@ class CustomerAddressForm extends FormRequest
     }
 
     /**
+     * Merge existing address rules.
+     *
+     * @param  string  $addressType
+     * @return void
+     */
+    private function mergeExistingAddressRules(string $addressType)
+    {
+        $customerAddressIds = $this->getCustomerAddressIds();
+
+        $addressRules = [
+            "{$addressType}.address_id" => ['required'],
+        ];
+
+        if (! empty($customerAddressIds)) {
+            $addressRules["{$addressType}.address_id"][] = "in:{$customerAddressIds}";
+        }
+
+        $this->mergeWithRules($addressRules);
+    }
+
+    /**
+     * Merge new address rules.
+     *
+     * @param  string  $addressType
+     * @return void
+     */
+    private function mergeNewAddressRules(string $addressType)
+    {
+        $this->mergeWithRules([
+            "{$addressType}.first_name" => ['required', new AlphaNumericSpace],
+            "{$addressType}.last_name"  => ['required', new AlphaNumericSpace],
+            "{$addressType}.email"      => ['required'],
+            "{$addressType}.address1"   => ['required'],
+            "{$addressType}.city"       => ['required'],
+            "{$addressType}.country"    => [new AlphaNumericSpace],
+            "{$addressType}.state"      => [new AlphaNumericSpace],
+            "{$addressType}.postcode"   => ['numeric'],
+            "{$addressType}.phone"      => ['required', new PhoneNumber],
+        ]);
+    }
+
+    /**
      * Merge additional rules.
      *
-     * @return string
+     * @return void
      */
     private function mergeWithRules($additionalRules): void
     {

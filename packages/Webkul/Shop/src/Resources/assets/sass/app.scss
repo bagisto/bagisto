@@ -3797,7 +3797,8 @@ ol.breadcrumb {
 
             .account-head {
                 display: flex;
-                justify-content: space-between;
+                justify-content: inherit;
+                column-gap: 10px;
                 border-bottom: 1px solid $border-color;
                 border-top: 1px solid $border-color;
                 height: 50px;

@@ -1,16 +1,23 @@
 <country-state></country-state>
 
 @push('scripts')
-
     <script type="text/x-template" id="country-state-template">
         <div>
             <div class="control-group" :class="[errors.has('country') ? 'has-error' : '']">
-                <label for="country" class="mandatory">
+                <label for="country" class="{{ core()->isCountryRequired() ? 'mandatory' : '' }}">
                     {{ __('shop::app.customer.account.address.create.country') }}
                 </label>
 
-                <select type="text" v-validate="'required'" class="control styled-select" id="country" name="country" v-model="country" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.country') }}&quot;">
-                    <option value=""></option>
+                <select
+                    class="control styled-select"
+                    id="country"
+                    type="text"
+                    name="country"
+                    v-model="country"
+                    v-validate="'{{ core()->isCountryRequired() ? 'required' : '' }}'"
+                    data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.country') }}&quot;">
+                    <option value="">{{ __('Select Country') }}</option>
+
                     @foreach (core()->countries() as $country)
                         <option {{ $country->code === $defaultCountry ? 'selected' : '' }}  value="{{ $country->code }}">{{ $country->name }}</option>
                     @endforeach
@@ -20,31 +27,35 @@
                     <span class="select-icon rango-arrow-down"></span>
                 </div>
 
-                <span class="control-error" v-if="errors.has('country')" v-text="errors.first('country')"></span>
+                <span
+                    class="control-error"
+                    v-text="errors.first('country')"
+                    v-if="errors.has('country')">
+                </span>
             </div>
 
             <div class="control-group" :class="[errors.has('state') ? 'has-error' : '']">
-                <label for="state" class="mandatory">
+                <label for="state" class="{{ core()->isStateRequired() ? 'mandatory' : '' }}">
                     {{ __('shop::app.customer.account.address.create.state') }}
                 </label>
 
                 <input
+                    class="control"
                     id="state"
                     type="text"
                     name="state"
                     v-model="state"
-                    class="control"
-                    v-if="!haveStates()"
-                    v-validate="'required'"
-                    data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.state') }}&quot;" />
+                    v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
+                    data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.state') }}&quot;"
+                    v-if="! haveStates()"/>
 
                 <template v-if="haveStates()">
                     <select
+                        class="styled-select"
                         id="state"
                         name="state"
                         v-model="state"
-                        class="styled-select"
-                        v-validate="'required'"
+                        v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
                         data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.state') }}&quot;">
 
                         <option value="">{{ __('shop::app.customer.account.address.create.select-state') }}</option>
@@ -59,19 +70,22 @@
                     </div>
                 </template>
 
-                <span class="control-error" v-if="errors.has('state')" v-text="errors.first('state')"></span>
+                <span
+                    class="control-error"
+                    v-text="errors.first('state')"
+                    v-if="errors.has('state')">
+                </span>
             </div>
         </div>
     </script>
 
     <script>
         Vue.component('country-state', {
-
             template: '#country-state-template',
 
             inject: ['$validator'],
 
-            data() {
+            data: function () {
                 return {
                     country: "{{ $countryCode ?? $defaultCountry }}",
 
@@ -82,7 +96,7 @@
             },
 
             methods: {
-                haveStates() {
+                haveStates: function () {
                     if (this.countryStates[this.country] && this.countryStates[this.country].length)
                         return true;
 

@@ -1053,7 +1053,7 @@ abstract class AbstractType
     /**
      * Get offers lines.
      *
-     * @param  array  $customerGroupPrice
+     * @param  object  $customerGroupPrice
      * @return array
      */
     public function getOfferLines($customerGroupPrice)

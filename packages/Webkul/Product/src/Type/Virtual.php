@@ -5,42 +5,42 @@ namespace Webkul\Product\Type;
 class Virtual extends AbstractType
 {
     /**
-     * Skip attribute for virtual product type
+     * Skip attribute for virtual product type.
      *
      * @var array
      */
     protected $skipAttributes = ['length', 'width', 'height', 'weight'];
 
     /**
-     * These blade files will be included in product edit page
+     * These blade files will be included in product edit page.
      *
      * @var array
      */
     protected $additionalViews = [
         'admin::catalog.products.accordians.inventories',
         'admin::catalog.products.accordians.images',
+        'admin::catalog.products.accordians.videos',
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.channels',
         'admin::catalog.products.accordians.product-links',
-        'admin::catalog.products.accordians.videos',
     ];
 
     /**
-     * Is a stokable product type
+     * Is a stokable product type.
      *
      * @var bool
      */
     protected $isStockable = false;
 
     /**
-     * Show quantity box
+     * Show quantity box.
      *
      * @var bool
      */
     protected $showQuantityBox = true;
 
     /**
-     * Return true if this product type is saleable
+     * Return true if this product type is saleable.
      *
      * @return bool
      */
@@ -63,8 +63,9 @@ class Virtual extends AbstractType
     }
 
     /**
-     * @param int $qty
+     * Have sufficient quantity.
      *
+     * @param  int  $qty
      * @return bool
      */
     public function haveSufficientQuantity(int $qty): bool
@@ -73,7 +74,7 @@ class Virtual extends AbstractType
     }
 
     /**
-     * Get product maximam price
+     * Get product maximum price.
      *
      * @return float
      */

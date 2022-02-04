@@ -6,7 +6,7 @@
     </div>
 
     <div class="control-group" id="login-and-forgot-btn">
-        <div class="forgot-password-link"  style="float: right;margin-right: 503px; margin-top: 11px;">
+        <div class="forgot-password-link"  style="float: right; margin-right: 503px; margin-top: 11px;">
             <a href="{{ route('customer.forgot-password.create') }}">{{ __('shop::app.customer.login-form.forgot_pass') }}</a>
 
             <div class="mt-10">
