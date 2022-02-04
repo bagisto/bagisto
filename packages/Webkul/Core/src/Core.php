@@ -662,7 +662,7 @@ class Core
             $amount = 0;
         }
 
-        return $this->formatPrice($this->convertPrice($amount), $this->getCurrentCurrency()->code);
+        return $this->formatPrice($this->convertPrice($amount));
     }
 
     /**
@@ -676,23 +676,6 @@ class Core
         $formatter = new \NumberFormatter(app()->getLocale() . '@currency=' . $code, \NumberFormatter::CURRENCY);
 
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
-    }
-
-    /**
-     * Format and convert price with currency symbol.
-     *
-     * @param  float  $price
-     * @return string
-     */
-    public function formatPrice($price, $currencyCode)
-    {
-        if (is_null($price)) {
-            $price = 0;
-        }
-
-        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
-
-        return $formatter->formatCurrency($price, $currencyCode);
     }
 
     /**
@@ -715,6 +698,38 @@ class Core
             'decimal' => $formater->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
             'format'  => $pattern,
         ];
+    }
+
+    /**
+     * Format and convert price with currency symbol.
+     *
+     * @param  float  $price
+     * @param  string (optional)  $currencyCode
+     * @return string
+     */
+    public function formatPrice($price, $currencyCode = null)
+    {
+        if (is_null($price)) {
+            $price = 0;
+        }
+
+        $currency = $currencyCode
+            ? $this->getAllCurrencies()->where('code', $currencyCode)->first()
+            : $this->getCurrentCurrency();
+
+        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+
+        if ($symbol = $currency->symbol) {
+            if ($this->currencySymbol($currency) == $symbol) {
+                return $formatter->formatCurrency($price, $currency->code);
+            }
+
+            $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
+
+            return $formatter->format($this->convertPrice($price));
+        }
+
+        return $formatter->formatCurrency($price, $currency->code);
     }
 
     /**
