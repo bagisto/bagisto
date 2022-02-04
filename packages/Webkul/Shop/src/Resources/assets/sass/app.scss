@@ -647,10 +647,12 @@ input {
                 .step-content {
                     .form-header {
                         display: block;
-                        .checkout-step-heading{
+
+                        .checkout-step-heading {
                             margin-bottom: 10px;
                         }
-                        .btn-primary{
+
+                        .btn-primary {
                             text-align: center;
                         }
                     }
@@ -2701,6 +2703,21 @@ section.cart {
 
         .error-message {
             color: $disc-price;
+        }
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    .cart-item-list {
+        .item {
+            .item-details {
+                .misc {
+                    .control-group {
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
         }
     }
 }
