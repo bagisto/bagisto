@@ -511,7 +511,7 @@ return [
                 'error'             => 'Die Elemente können derzeit nicht aktualisiert werden. Bitte versuchen Sie es später erneut.',
             ],
 
-            'item'                  => [
+            'item'                      => [
                 'error_remove'   => 'Keine Artikel aus dem Warenkorb zu entfernen',
                 'success'        => 'Artikel wurde erfolgreich zum Warenkorb hinzugefügt',
                 'success-remove' => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt',
@@ -519,12 +519,17 @@ return [
                 'inactive'       => 'Ein Artikel ist inaktiv und wurde aus dem Warenkorb entfernt.',
                 'inactive-add'   => 'Ein inaktiver Artikel kann nicht zum Warenkorb hinzugefügt werde.',
             ],
-            'quantity-error'        => 'Die angeforderte Menge ist nicht verfügbar',
-            'cart-subtotal'         => 'Warenkorb Zwischensumme',
-            'cart-remove-action'    => 'Wollen Sie dies wirklich tun?',
-            'partial-cart-update'   => 'Nur einige der Produkte wurden aktualisiert',
-            'link-missing'          => '',
-            'minimum-order-message' => 'Mindestbestellmenge ist :amount',
+            'quantity-error'            => 'Die angeforderte Menge ist nicht verfügbar',
+            'cart-subtotal'             => 'Warenkorb Zwischensumme',
+            'cart-remove-action'        => 'Wollen Sie dies wirklich tun?',
+            'partial-cart-update'       => 'Nur einige der Produkte wurden aktualisiert',
+            'link-missing'              => '',
+            'minimum-order-message'     => 'Mindestbestellmenge ist :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'check-shipping-address'    => 'Please check shipping address.',
+            'check-billing-address'     => 'Please check billing address.',
+            'specify-shipping-method'   => 'Please specify shipping method.',
+            'specify-payment-method'    => 'Please specify payment method.',
         ],
 
         'onepage' => [

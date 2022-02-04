@@ -105,6 +105,24 @@
 
                 {!! view_render_event('bagisto.admin.customer.edit.status.after', ['customer' => $customer]) !!}
 
+                <div class="control-group">
+                    <label for="isSuspended" class="required">{{ __('admin::app.customers.customers.suspend') }}</label>
+
+                    <label class="switch">
+                        <input
+                            id="isSuspended"
+                            type="checkbox"
+                            name="is_suspended"
+                            value="{{ $customer->is_suspended }}" {{ $customer->is_suspended ? 'checked' : '' }}>
+
+                        <span class="slider round"></span>
+                    </label>
+
+                    <span class="control-error" v-if="errors.has('is_suspended')">@{{ errors.first('is_suspended') }}</span>
+                </div>
+
+                {!! view_render_event('bagisto.admin.customer.edit.is_suspended.after', ['customer' => $customer]) !!}
+
                 <div class="control-group date" :class="[errors.has('date_of_birth') ? 'has-error' : '']">
                     <label for="dob">{{ __('admin::app.customers.customers.date_of_birth') }}</label>
 

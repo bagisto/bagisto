@@ -1042,6 +1042,9 @@ return [
             'status'                    => 'Statut',
             'active'                    => 'actif',
             'inactive'                  => 'Inactif',
+            'is-suspended'              => 'Is Suspended',
+            'suspend'                   => 'Suspend',
+            'suspended'                 => 'Suspended',
         ],
 
         'reviews' => [
@@ -1446,10 +1449,12 @@ return [
             'flate-rate-shipping'                   => 'Expédition forfaitaire',
             'shipping'                              => 'Expédition',
             'origin'                                => 'Origine',
+            'requirements'                          => 'Requirements',
             'country'                               => 'Pays',
             'state'                                 => 'État',
             'zip'                                   => 'Zipper',
             'city'                                  => 'Ville',
+            'information'                           => 'Information',
             'street-address'                        => 'Adresse de rue',
             'title'                                 => 'Titre',
             'description'                           => 'La description',

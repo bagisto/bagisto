@@ -1015,6 +1015,9 @@ return [
             'status'               => 'Durum',
             'active'               => 'Aktif',
             'inactive'             => 'Pasif',
+            'is-suspended'         => 'Is Suspended',
+            'suspend'              => 'Suspend',
+            'suspended'            => 'Suspended',
         ],
 
         'reviews' => [
@@ -1406,10 +1409,12 @@ return [
             'flate-rate-shipping'                   => 'Sabit Fiyat Teslimat',
             'shipping'                              => 'Teslimat',
             'origin'                                => 'Menşei',
+            'requirements'                          => 'Requirements',
             'country'                               => 'Ülke',
             'state'                                 => 'Şehir',
             'zip'                                   => 'Posta Kodu',
             'city'                                  => 'İlçe',
+            'information'                           => 'Information',
             'street-address'                        => 'Sokak Adresi',
             'title'                                 => 'Başlık',
             'description'                           => 'Açıklama',

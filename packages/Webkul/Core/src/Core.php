@@ -860,13 +860,7 @@ class Core
         }
 
         if (! $coreConfigValue) {
-            $fields = explode('.', $field);
-
-            array_shift($fields);
-
-            $field = implode('.', $fields);
-
-            return Config::get($field);
+            return $this->getDefaultConfig($field);
         }
 
         return $coreConfigValue->value;
@@ -949,6 +943,36 @@ class Core
         } else {
             return false;
         }
+    }
+
+    /**
+     * Is country required.
+     *
+     * @return bool
+     */
+    public function isCountryRequired()
+    {
+        return $this->getConfigData('customer.address.requirements.country') == 1;
+    }
+
+    /**
+     * Is state required.
+     *
+     * @return bool
+     */
+    public function isStateRequired()
+    {
+        return $this->getConfigData('customer.address.requirements.state') == 1;
+    }
+
+    /**
+     * Is postcode required.
+     *
+     * @return bool
+     */
+    public function isPostCodeRequired()
+    {
+        return $this->getConfigData('customer.address.requirements.postcode') == 1;
     }
 
     /**
@@ -1291,5 +1315,24 @@ class Core
         }
 
         return $coreConfigValue;
+    }
+
+    /**
+     * Get default config.
+     *
+     * @param  string  $field
+     * @return mixed
+     */
+    protected function getDefaultConfig($field)
+    {
+        $configFieldInfo = $this->getConfigField($field);
+
+        $fields = explode('.', $field);
+
+        array_shift($fields);
+
+        $field = implode('.', $fields);
+
+        return Config::get($field, $configFieldInfo['default'] ?? null);
     }
 }

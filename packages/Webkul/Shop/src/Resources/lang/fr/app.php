@@ -530,7 +530,12 @@ return [
                 'expired' => 'Cet événement a expiré.',
             ],
 
-            'minimum-order-message' => 'Le montant minimum de commande est de :amount',
+            'minimum-order-message'     => 'Le montant minimum de commande est de :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'check-shipping-address'    => 'Please check shipping address.',
+            'check-billing-address'     => 'Please check billing address.',
+            'specify-shipping-method'   => 'Please specify shipping method.',
+            'specify-payment-method'    => 'Please specify payment method.',
         ],
 
         'onepage' => [

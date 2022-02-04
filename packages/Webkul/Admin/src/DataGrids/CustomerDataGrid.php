@@ -37,8 +37,18 @@ class CustomerDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('customers')
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
-            ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name as group', 'customers.phone', 'customers.gender', 'status')
-            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name'));
+            ->addSelect(
+                'customers.id as customer_id',
+                'customers.email',
+                'customers.phone',
+                'customers.gender',
+                'customers.status',
+                'customers.is_suspended',
+                'customer_groups.name as group',
+            )
+            ->addSelect(
+                DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name')
+            );
 
         $this->addFilter('customer_id', 'customers.id');
         $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
@@ -101,7 +111,7 @@ class CustomerDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => false,
             'closure'    => function ($row) {
-                if (!$row->phone) {
+                if (! $row->phone) {
                     return '-';
                 } else {
                     return $row->phone;
@@ -117,7 +127,7 @@ class CustomerDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => false,
             'closure'    => function ($row) {
-                if (!$row->gender) {
+                if (! $row->gender) {
                     return '-';
                 } else {
                     return $row->gender;
@@ -133,11 +143,19 @@ class CustomerDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
+                $html = '';
+
                 if ($row->status == 1) {
-                    return '<span class="badge badge-md badge-success">' . trans('admin::app.customers.customers.active') . '</span>';
+                    $html .= '<span class="badge badge-md badge-success">' . trans('admin::app.customers.customers.active') . '</span>';
                 } else {
-                    return '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.inactive') . '</span>';
+                    $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.inactive') . '</span>';
                 }
+
+                if ($row->is_suspended == 1) {
+                    $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.suspended') . '</span>';
+                }
+
+                return $html;
             },
         ]);
     }

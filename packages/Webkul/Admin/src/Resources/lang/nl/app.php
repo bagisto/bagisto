@@ -1024,6 +1024,9 @@ return [
             'status'               => 'Status',
             'active'               => 'Actief',
             'inactive'             => 'Niet geactiveerd',
+            'is-suspended'         => 'Is Suspended',
+            'suspend'              => 'Suspend',
+            'suspended'            => 'Suspended',
         ],
 
         'reviews' => [
@@ -1416,10 +1419,12 @@ return [
             'flate-rate-shipping'                   => 'Forfaitaire verzendkosten',
             'shipping'                              => 'Verzending',
             'origin'                                => 'Herkomst',
+            'requirements'                          => 'Requirements',
             'country'                               => 'Land',
             'state'                                 => 'Staat/Provincie',
             'zip'                                   => 'Zip',
             'city'                                  => 'Woonplaats',
+            'information'                           => 'Information',
             'street-address'                        => 'Adres',
             'title'                                 => 'Titel',
             'description'                           => 'Omschrijving',

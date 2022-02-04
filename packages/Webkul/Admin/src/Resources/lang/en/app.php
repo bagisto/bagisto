@@ -1045,6 +1045,9 @@ return [
             'status'                    => 'Status',
             'active'                    => 'Active',
             'inactive'                  => 'Inactive',
+            'is-suspended'              => 'Is Suspended',
+            'suspend'                   => 'Suspend',
+            'suspended'                 => 'Suspended',
         ],
 
         'reviews' => [
@@ -1421,7 +1424,8 @@ return [
             ],
 
         ],
-        'system'             => [
+
+        'system' => [
             'catalog'                               => 'Catalog',
             'homepage'                              => 'Homepage configuration',
             'allow-out-of-stock-items'              => 'Allow out of stock items',
@@ -1449,10 +1453,12 @@ return [
             'flate-rate-shipping'                   => 'Flat Rate Shipping',
             'shipping'                              => 'Shipping',
             'origin'                                => 'Origin',
+            'requirements'                          => 'Requirements',
             'country'                               => 'Country',
             'state'                                 => 'State',
             'zip'                                   => 'Zip',
             'city'                                  => 'City',
+            'information'                           => 'Information',
             'street-address'                        => 'Street Address',
             'title'                                 => 'Title',
             'description'                           => 'Description',

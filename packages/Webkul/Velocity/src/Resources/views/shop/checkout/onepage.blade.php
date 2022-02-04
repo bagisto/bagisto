@@ -27,34 +27,30 @@
                         class="step-content shipping"
                         id="shipping-section"
                         v-if="showShippingSection">
-
                         <shipping-section
                             :key="shippingComponentKey"
                             @onShippingMethodSelected="shippingMethodSelected($event)">
                         </shipping-section>
-
                     </div>
 
                     <div
                         class="step-content payment"
-                        v-if="showPaymentSection"
-                        id="payment-section">
-
-                        <payment-section @onPaymentMethodSelected="paymentMethodSelected($event)">
+                        id="payment-section"
+                        v-if="showPaymentSection">
+                        <payment-section
+                            @onPaymentMethodSelected="paymentMethodSelected($event)">
                         </payment-section>
 
                         <coupon-component
                             @onApplyCoupon="getOrderSummary"
                             @onRemoveCoupon="getOrderSummary">
                         </coupon-component>
-
                     </div>
 
                     <div
                         class="step-content review"
-                        v-if="showSummarySection"
-                        id="summary-section">
-
+                        id="summary-section"
+                        v-if="showSummarySection">
                         <review-section :key="reviewComponentKey">
                             <div slot="summary-section">
                                 <summary-section
@@ -79,7 +75,6 @@
                                 </div>
                             </div>
                         </review-section>
-
                     </div>
                 </div>
 
@@ -296,7 +291,13 @@
                                 if (value == ""
                                     && element.id != 'sign-btn'
                                     && element.id != 'billing[company_name]'
+                                    && element.id != 'billing[country]'
+                                    && element.id != 'billing[state]'
+                                    && element.id != 'billing[postcode]'
                                     && element.id != 'shipping[company_name]'
+                                    && element.id != 'shipping[country]'
+                                    && element.id != 'shipping[state]'
+                                    && element.id != 'shipping[postcode]'
                                 ) {
                                     // check for multiple line address
                                     if (elementId.match('billing_address_')

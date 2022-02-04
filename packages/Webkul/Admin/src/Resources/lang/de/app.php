@@ -1027,6 +1027,9 @@ return [
             'status'               => 'Status',
             'active'               => 'Aktiv',
             'inactive'             => 'Inaktiv',
+            'is-suspended'         => 'Is Suspended',
+            'suspend'              => 'Suspend',
+            'suspended'            => 'Suspended',
         ],
         'reviews'     =>
         [
@@ -1430,10 +1433,12 @@ return [
             'flate-rate-shipping'                   => 'Pauschale Versandkosten',
             'shipping'                              => 'Versand',
             'origin'                                => 'Herkunft',
+            'requirements'                          => 'Requirements',
             'country'                               => 'Land',
             'state'                                 => 'Bundesland',
             'zip'                                   => 'Postleitzahl',
             'city'                                  => 'Stadt',
+            'information'                           => 'Information',
             'street-address'                        => 'Anschrift',
             'title'                                 => 'Titel',
             'description'                           => 'Beschreibung',

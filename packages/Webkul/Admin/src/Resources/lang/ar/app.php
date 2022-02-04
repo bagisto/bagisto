@@ -1027,6 +1027,9 @@ return [
             'status'               => 'الحالة',
             'active'               => 'نشيط',
             'inactive'             => 'غير نشط',
+            'is-suspended'         => 'Is Suspended',
+            'suspend'              => 'Suspend',
+            'suspended'            => 'Suspended',
         ],
 
         'reviews' => [
@@ -1422,10 +1425,12 @@ return [
             'flate-rate-shipping'                   => 'تعريفة موحدة للشحن بغض النظر عن الكمية',
             'shipping'                              => 'الشحن',
             'origin'                                => 'الأصل',
+            'requirements'                          => 'Requirements',
             'country'                               => 'بلد',
             'state'                                 => 'حالة',
             'zip'                                   => 'الرمز البريدي',
             'city'                                  => 'مدينة',
+            'information'                           => 'Information',
             'street-address'                        => 'عنوان الشارع',
             'title'                                 => 'عنوان',
             'description'                           => 'وصف',

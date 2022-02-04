@@ -1027,6 +1027,9 @@ return [
             'status'               => 'Status',
             'active'               => 'Aktywny',
             'inactive'             => 'Nieaktywny',
+            'is-suspended'         => 'Is Suspended',
+            'suspend'              => 'Suspend',
+            'suspended'            => 'Suspended',
         ],
 
         'reviews' => [
@@ -1419,10 +1422,12 @@ return [
             'flate-rate-shipping'                   => 'Stawka ryczałtowa',
             'shipping'                              => 'Dostawa',
             'origin'                                => 'Zamieszmanie',
+            'requirements'                          => 'Requirements',
             'country'                               => 'Kraj',
             'state'                                 => 'Stan/województwo',
             'zip'                                   => 'Kod',
             'city'                                  => 'Miasto',
+            'information'                           => 'Information',
             'street-address'                        => 'ulica',
             'title'                                 => 'Tytuł',
             'description'                           => 'Opis',
