@@ -83,6 +83,18 @@
                     </li>
                 @endif
 
+                @php
+                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                @endphp
+
+                @if ($showWishlist)                   
+                    <wishlist-component-with-badge
+                        is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
+                        text="{{ __('shop::app.header.wishlist')  }}"
+                        src="{{ route('customer.wishlist.index') }}">
+                    </wishlist-component-with-badge>  
+                @endif
+
                 {!! view_render_event('bagisto.shop.layout.header.compare-item.after') !!}
 
                 {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
