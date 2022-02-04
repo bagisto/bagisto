@@ -742,6 +742,11 @@
                 }
             }
         }
+
+        .misc {
+            display: flex;
+            justify-content: space-between;
+        }
     }
 
     .continue-shopping-btn {
@@ -757,6 +762,21 @@
 
         .control-error {
             padding: 10px 0;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 375px) {
+    .cart-details {
+        .cart-content {
+            .misc {
+                flex-direction: column;
+
+                button {
+                    margin-top: 10px;
+                }
+            }
         }
     }
 }

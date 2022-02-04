@@ -245,18 +245,21 @@
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.checkout.cart.controls.after', ['cart' => $cart]) !!}
-                                    <a
-                                        class="col-12 link-color remove-decoration fs16 no-padding"
-                                        href="{{ route('shop.home.index') }}">
-                                        {{ __('shop::app.checkout.cart.continue-shopping') }}
-                                    </a>
+                                    <div class="misc">
+                                        <a
+                                            class="theme-btn light fs16 text-center"
+                                            href="{{ route('shop.home.index') }}">
+                                            {{ __('shop::app.checkout.cart.continue-shopping') }}
+                                        </a>
 
-                                    <button
-                                        type="submit"
-                                        class="theme-btn light mr15 float-right unset">
+                                        <button
+                                            type="submit"
+                                            class="theme-btn light unset">
 
-                                        {{ __('shop::app.checkout.cart.update-cart') }}
-                                    </button>
+                                            {{ __('shop::app.checkout.cart.update-cart') }}
+                                        </button>
+                                    </div>
+                                    
                                 {!! view_render_event('bagisto.shop.checkout.cart.controls.after', ['cart' => $cart]) !!}
                             </form>
                         </div>
