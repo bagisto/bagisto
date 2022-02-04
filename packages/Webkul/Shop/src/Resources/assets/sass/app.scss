@@ -2708,6 +2708,21 @@ section.cart {
     }
 }
 
+@media only screen and (max-width: 530px) {
+    .cart-item-list {
+        .item {
+            .item-details {
+                .misc {
+                    .control-group {
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .quantity {
     display: inline-block !important;
 
