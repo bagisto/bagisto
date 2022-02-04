@@ -22,6 +22,13 @@
             position: relative;
             top: -2px;
         }
+
+        @media only screen and (max-width: 600px) {
+            .rango-delete{
+                margin-top: 10px;
+                margin-left: -10px !important;
+            }
+        }
     </style>
 @endpush
 
