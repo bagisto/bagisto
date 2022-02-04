@@ -648,10 +648,12 @@ input {
                 .step-content {
                     .form-header {
                         display: block;
-                        .checkout-step-heading{
+
+                        .checkout-step-heading {
                             margin-bottom: 10px;
                         }
-                        .btn-primary{
+
+                        .btn-primary {
                             text-align: center;
                         }
                     }
@@ -4873,6 +4875,7 @@ body {
 .comparison-component>h1 {
     display: inline-block;
 }
+
 @media only screen and (max-width: 372px) {
     .comparison-component>h1 {
         line-height: 30px;
