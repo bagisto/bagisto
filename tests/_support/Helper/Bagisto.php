@@ -24,22 +24,62 @@ use Webkul\Product\Models\ProductInventory;
 
 class Bagisto extends Laravel
 {
+    /**
+     * Simple product code.
+     *
+     * @var int
+     */
     public const SIMPLE_PRODUCT = 1;
 
+    /**
+     * Virtual product code.
+     *
+     * @var int
+     */
     public const VIRTUAL_PRODUCT = 2;
 
+    /**
+     * Downloadable product code.
+     *
+     * @var int
+     */
     public const DOWNLOADABLE_PRODUCT = 3;
 
+    /**
+     * Booking product code.
+     *
+     * @var int
+     */
     public const BOOKING_EVENT_PRODUCT = 4;
+
+    /**
+     * Set all session with the given key and value in the array.
+     *
+     * @param  array  $keyValue
+     * @return void
+     */
+    public function setSession(array $keyValue): void
+    {
+        session($keyValue);
+    }
+
+    /**
+     * Flush the session data and regenerate the ID
+     * A logged in user will be logged off.
+     *
+     * @return void
+     */
+    public function invalidateSession(): void
+    {
+        session()->invalidate();
+    }
 
     /**
      * Returns the field name of the given attribute in which a value should be saved inside
      * the 'product_attribute_values' table. Depends on the type.
      *
      * @param  string  $type
-     *
      * @return string|null
-     * @part ORM
      */
     public static function getAttributeFieldName(string $type): ?string
     {
@@ -56,11 +96,17 @@ class Bagisto extends Laravel
         return $possibleTypes[$type];
     }
 
+    /**
+     * Prepare for cart.
+     *
+     * @param  array  $options
+     * @return array
+     */
     public function prepareCart(array $options = []): array
     {
-        $faker = Factory::create();
-
         $I = $this;
+
+        $faker = Factory::create();
 
         $product = $I->haveProduct(self::SIMPLE_PRODUCT, $options['productOptions'] ?? []);
 
@@ -81,9 +127,11 @@ class Bagisto extends Laravel
         if (isset($options['payment_method'])
             && $options['payment_method'] === 'free_of_charge') {
             $grand_total = '0.0000';
+
             $base_grand_total = '0.0000';
         } else {
             $grand_total = (string) $faker->numberBetween(1, 666);
+
             $base_grand_total = $grand_total;
         }
 
@@ -110,6 +158,7 @@ class Bagisto extends Laravel
 
         for ($i = 2; $i <= $generatedCartItems; $i++) {
             $quantity = random_int(1, 10);
+
             $cartItem = $I->have(CartItem::class, [
                 'type'       => $type,
                 'quantity'   => $quantity,
@@ -139,36 +188,15 @@ class Bagisto extends Laravel
     }
 
     /**
-     * Set all session with the given key and value in the array.
-     *
-     * @param  array  $keyValue
-     */
-    public function setSession(array $keyValue): void
-    {
-        session($keyValue);
-    }
-
-    /**
-     * Flush the session data and regenerate the ID
-     * A logged in user will be logged off.
-     */
-    public function invalidateSession(): void
-    {
-        session()->invalidate();
-    }
-
-    /**
      * Helper function to generate products for testing.
      *
      * By default, the product will be generated as saleable, this means it has a price,
      * weight, is active and has a positive inventory stock, if necessary.
      *
-     * @param  int  $productType  see constants in this class for usage
+     * @param  int  $productType  (See constants in this class for usage.)
      * @param  array  $configs
      * @param  array  $productStates
-     *
      * @return \Webkul\Product\Models\Product
-     * @part ORM
      */
     public function haveProduct(int $productType, array $configs = [], array $productStates = []): Product
     {
@@ -199,9 +227,17 @@ class Bagisto extends Laravel
         return $product;
     }
 
+    /**
+     * Generate simple product.
+     *
+     * @param  array  $configs
+     * @param  array  $productStates
+     * @return \Webkul\Product\Models\Product
+     */
     private function haveSimpleProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
+
         if (! in_array('simple', $productStates)) {
             $productStates = array_merge($productStates, ['simple']);
         }
@@ -215,9 +251,17 @@ class Bagisto extends Laravel
         return $product->refresh();
     }
 
+    /**
+     * Generate virtual product.
+     *
+     * @param  array  $configs
+     * @param  array  $productStates
+     * @return \Webkul\Product\Models\Product
+     */
     private function haveVirtualProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
+
         if (! in_array('virtual', $productStates)) {
             $productStates = array_merge($productStates, ['virtual']);
         }
@@ -231,9 +275,17 @@ class Bagisto extends Laravel
         return $product->refresh();
     }
 
+    /**
+     * Generate downloadable product.
+     *
+     * @param  array  $configs
+     * @param  array  $productStates
+     * @return \Webkul\Product\Models\Product
+     */
     private function haveDownloadableProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
+
         if (! in_array('downloadable', $productStates)) {
             $productStates = array_merge($productStates, ['downloadable']);
         }
@@ -247,9 +299,17 @@ class Bagisto extends Laravel
         return $product->refresh();
     }
 
+    /**
+     * Generate booking product.
+     *
+     * @param  array  $configs
+     * @param  array  $productStates
+     * @return \Webkul\Product\Models\Product
+     */
     private function haveBookingEventProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
+
         if (! in_array('booking', $productStates)) {
             $productStates = array_merge($productStates, ['booking']);
         }
@@ -263,6 +323,13 @@ class Bagisto extends Laravel
         return $product->refresh();
     }
 
+    /**
+     * Create product.
+     *
+     * @param  array  $attributes
+     * @param  array  $states
+     * @return \Webkul\Product\Models\Product
+     */
     private function createProduct(array $attributes = [], array $states = []): Product
     {
         return Product::factory()
@@ -274,18 +341,33 @@ class Bagisto extends Laravel
             ->create($attributes);
     }
 
+    /**
+     * Create inventory.
+     *
+     * @param  int  $productId
+     * @param  array  $inventoryConfig
+     * @return void
+     */
     private function createInventory(int $productId, array $inventoryConfig = []): void
     {
         $I = $this;
+
         $I->have(ProductInventory::class, array_merge($inventoryConfig, [
             'product_id'          => $productId,
             'inventory_source_id' => 1,
         ]));
     }
 
+    /**
+     * Create downloadable link.
+     *
+     * @param  int  $productId
+     * @return void
+     */
     private function createDownloadableLink(int $productId): void
     {
         $I = $this;
+
         $link = $I->have(ProductDownloadableLink::class, [
             'product_id' => $productId,
         ]);
@@ -295,9 +377,16 @@ class Bagisto extends Laravel
         ]);
     }
 
+    /**
+     * Create booking event.
+     *
+     * @param  int  $productId
+     * @return void
+     */
     private function createBookingEventProduct(int $productId): void
     {
         $I = $this;
+
         $bookingProduct = $I->have(BookingProduct::class, [
             'product_id' => $productId,
         ]);
@@ -307,6 +396,13 @@ class Bagisto extends Laravel
         ]);
     }
 
+    /**
+     * Create attribute values.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @param  array  $attributeValues
+     * @return void
+     */
     private function createAttributeValues(Product $product, array $attributeValues = []): void
     {
         $I = $this;
@@ -345,14 +441,16 @@ class Bagisto extends Laravel
             'special_price'        => null,
             'price'                => $faker->randomFloat(2, 1, 1000),
             'weight'               => '1.00',
-            // necessary for shipping
-            'brand'                => AttributeOption::query()
-                ->firstWhere('attribute_id', $brand->id)->id,
+            'brand'                => AttributeOption::query()->firstWhere('attribute_id', $brand->id)->id,
         ];
 
         $attributeValues = array_merge($defaultAttributeValues, $attributeValues);
 
-        /** @var array $possibleAttributeValues list of the possible attributes a product can have */
+        /**
+         * List of the possible attributes a product can have.
+         *
+         * @var array
+         */
         $possibleAttributeValues = DB::table('attributes')
             ->select('id', 'code', 'type')
             ->get()
@@ -375,14 +473,16 @@ class Bagisto extends Laravel
     }
 
     /**
+     * Append attribute dependencies.
+     *
      * @param  string  $attributeCode
      * @param  array  $data
-     *
      * @return array
      */
     private function appendAttributeDependencies(string $attributeCode, array $data): array
     {
         $locale = core()->getCurrentLocale()->code;
+
         $channel = core()->getCurrentChannelCode();
 
         $attributeSetDependencies = [
