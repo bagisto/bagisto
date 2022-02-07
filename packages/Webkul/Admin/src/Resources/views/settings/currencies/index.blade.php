@@ -19,8 +19,7 @@
         </div>
 
         <div class="page-content">
-            @inject('currencies','Webkul\Admin\DataGrids\CurrencyDataGrid')
-            {!! $currencies->render() !!}
+            <datagrid-plus src="{{ route('admin.currencies.index') }}"></datagrid-plus>
         </div>
     </div>
 @stop

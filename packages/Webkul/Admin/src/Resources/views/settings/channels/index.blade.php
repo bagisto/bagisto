@@ -19,8 +19,7 @@
         </div>
 
         <div class="page-content">
-            @inject('channels','Webkul\Admin\DataGrids\ChannelDataGrid')
-            {!! $channels->render() !!}
+            <datagrid-plus src="{{ route('admin.channels.index') }}"></datagrid-plus>
         </div>
     </div>
 @stop

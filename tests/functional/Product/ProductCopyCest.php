@@ -5,7 +5,7 @@ namespace Tests\Functional\Product;
 use FunctionalTester;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
-use Webkul\Core\Helpers\Laravel5Helper;
+use Helper\Bagisto;
 use Webkul\Product\Models\ProductInventory;
 use Webkul\Product\Models\ProductAttributeValue;
 
@@ -20,7 +20,7 @@ class ProductCopyCest
     {
         config(['products.skipAttributesOnCopy' => ['name', 'inventories']]);
 
-        $original = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, [
+        $original = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, [
             'productInventory' => [
                 'qty' => 10,
             ],
@@ -46,7 +46,7 @@ class ProductCopyCest
 
     public function testBlockProductCopy(FunctionalTester $I)
     {
-        $original = $I->haveProduct(Laravel5Helper::BOOKING_EVENT_PRODUCT, []);
+        $original = $I->haveProduct(Bagisto::BOOKING_EVENT_PRODUCT, []);
 
         $I->amOnAdminRoute('admin.catalog.products.copy', ['id' => $original->id], false);
 
@@ -60,7 +60,7 @@ class ProductCopyCest
 
         $originalName = $I->fake()->name;
 
-        $original = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, [
+        $original = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, [
             'productInventory' => [
                 'qty' => 10,
             ],

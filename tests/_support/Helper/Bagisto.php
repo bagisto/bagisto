@@ -1,36 +1,28 @@
 <?php
 
-namespace Webkul\Core\Helpers;
+namespace Helper;
 
-// here you can define custom actions
-// all public methods declared in helper class will be available in $I
-
-use StdClass;
-use Faker\Factory;
 use Codeception\Module\Laravel;
-use Webkul\Checkout\Models\Cart;
-use Webkul\Product\Models\Product;
+use Faker\Factory;
 use Illuminate\Support\Facades\DB;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Customer\Models\Customer;
 use Illuminate\Support\Facades\Event;
+use StdClass;
 use Webkul\Attribute\Models\Attribute;
-use Webkul\Checkout\Models\CartAddress;
-use Webkul\Customer\Models\CustomerAddress;
-use Webkul\Product\Models\ProductInventory;
 use Webkul\Attribute\Models\AttributeOption;
 use Webkul\BookingProduct\Models\BookingProduct;
+use Webkul\BookingProduct\Models\BookingProductEventTicket;
+use Webkul\Checkout\Models\Cart;
+use Webkul\Checkout\Models\CartAddress;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerAddress;
+use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductDownloadableLink;
-use Webkul\BookingProduct\Models\BookingProductEventTicket;
 use Webkul\Product\Models\ProductDownloadableLinkTranslation;
+use Webkul\Product\Models\ProductInventory;
 
-/**
- * Class Laravel5Helper
- *
- * @package Webkul\Core\Helpers
- */
-class Laravel5Helper extends Laravel
+class Bagisto extends Laravel
 {
     public const SIMPLE_PRODUCT = 1;
 
@@ -91,7 +83,7 @@ class Laravel5Helper extends Laravel
             $grand_total = '0.0000';
             $base_grand_total = '0.0000';
         } else {
-            $grand_total = (string)$faker->numberBetween(1, 666);
+            $grand_total = (string) $faker->numberBetween(1, 666);
             $base_grand_total = $grand_total;
         }
 
@@ -164,7 +156,6 @@ class Laravel5Helper extends Laravel
     {
         session()->invalidate();
     }
-
 
     /**
      * Helper function to generate products for testing.
@@ -275,12 +266,12 @@ class Laravel5Helper extends Laravel
     private function createProduct(array $attributes = [], array $states = []): Product
     {
         return Product::factory()
-                      ->state(function () use ($states) {
-                          return [
-                              'type' => $states[0],
-                          ];
-                      })
-                      ->create($attributes);
+            ->state(function () use ($states) {
+                return [
+                    'type' => $states[0],
+                ];
+            })
+            ->create($attributes);
     }
 
     private function createInventory(int $productId, array $inventoryConfig = []): void
@@ -323,12 +314,12 @@ class Laravel5Helper extends Laravel
         $faker = Factory::create();
 
         $brand = Attribute::query()
-                          ->where(['code' => 'brand'])
-                          ->firstOrFail(); // usually 25
+            ->where(['code' => 'brand'])
+            ->firstOrFail(); // usually 25
 
-        if (!AttributeOption::query()
-                            ->where(['attribute_id' => $brand->id])
-                            ->exists()) {
+        if (! AttributeOption::query()
+            ->where(['attribute_id' => $brand->id])
+            ->exists()) {
             AttributeOption::create([
                 'admin_name'   => 'Webkul Demo Brand (c) 2020',
                 'attribute_id' => $brand->id,
@@ -356,16 +347,16 @@ class Laravel5Helper extends Laravel
             'weight'               => '1.00',
             // necessary for shipping
             'brand'                => AttributeOption::query()
-                                                     ->firstWhere('attribute_id', $brand->id)->id,
+                ->firstWhere('attribute_id', $brand->id)->id,
         ];
 
         $attributeValues = array_merge($defaultAttributeValues, $attributeValues);
 
         /** @var array $possibleAttributeValues list of the possible attributes a product can have */
         $possibleAttributeValues = DB::table('attributes')
-                                     ->select('id', 'code', 'type')
-                                     ->get()
-                                     ->toArray();
+            ->select('id', 'code', 'type')
+            ->get()
+            ->toArray();
 
         foreach ($possibleAttributeValues as $attributeSet) {
             $data = [

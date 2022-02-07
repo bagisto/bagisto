@@ -19,9 +19,7 @@
         </div>
 
         <div class="page-content">
-
-            {!! app('Webkul\Admin\DataGrids\EventDataGrid')->render() !!}
-            
+            <datagrid-plus src="{{ route('admin.events.index') }}"></datagrid-plus>
         </div>
     </div>
 @stop

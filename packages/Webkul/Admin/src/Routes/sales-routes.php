@@ -55,6 +55,9 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
             'view' => 'admin::sales.invoices.print',
         ])->name('admin.sales.invoices.print');
 
+        Route::get('/invoices/{id}/transactions', [InvoiceController::class, 'invoiceTransactions'])
+            ->name('admin.sales.invoices.transactions');
+
         /**
          * Shipments routes.
          */

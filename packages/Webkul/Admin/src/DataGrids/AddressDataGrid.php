@@ -6,12 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Ui\DataGrid\DataGrid;
-use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class AddressDataGrid extends DataGrid
 {
-    use ProvideDataGridPlus;
-
     /**
      * Index.
      *

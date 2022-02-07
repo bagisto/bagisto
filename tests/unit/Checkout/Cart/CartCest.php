@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Event;
 use UnitTester;
 use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\BookingProduct\Models\BookingProductEventTicket;
-use Webkul\Core\Helpers\Laravel5Helper;
+use Helper\Bagisto;
 use Webkul\Customer\Models\Customer;
 use Webkul\Product\Models\ProductDownloadableLink;
 
@@ -32,37 +32,37 @@ class CartCest
         $this->sessionToken = $this->faker->uuid;
         session(['_token' => $this->sessionToken]);
 
-        $this->simpleProduct1 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT);
+        $this->simpleProduct1 = $I->haveProduct(Bagisto::SIMPLE_PRODUCT);
         cart()->addProduct($this->simpleProduct1->id, [
             '_token'     => session('_token'),
             'product_id' => $this->simpleProduct1->id,
             'quantity'   => 1,
         ]);
 
-        $this->simpleProduct2 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT);
+        $this->simpleProduct2 = $I->haveProduct(Bagisto::SIMPLE_PRODUCT);
         cart()->addProduct($this->simpleProduct2->id, [
             '_token'     => session('_token'),
             'product_id' => $this->simpleProduct2->id,
             'quantity'   => 1,
         ]);
 
-        $this->virtualProduct1 = $I->haveProduct(Laravel5Helper::VIRTUAL_PRODUCT);
+        $this->virtualProduct1 = $I->haveProduct(Bagisto::VIRTUAL_PRODUCT);
         cart()->addProduct($this->virtualProduct1->id, [
             '_token'     => session('_token'),
             'product_id' => $this->virtualProduct1->id,
             'quantity'   => 1,
         ]);
 
-        $this->virtualProduct2 = $I->haveProduct(Laravel5Helper::VIRTUAL_PRODUCT);
+        $this->virtualProduct2 = $I->haveProduct(Bagisto::VIRTUAL_PRODUCT);
         cart()->addProduct($this->virtualProduct2->id, [
             '_token'     => session('_token'),
             'product_id' => $this->virtualProduct2->id,
             'quantity'   => 1,
         ]);
 
-        $this->downloadableProduct1 = $I->haveProduct(Laravel5Helper::DOWNLOADABLE_PRODUCT);
+        $this->downloadableProduct1 = $I->haveProduct(Bagisto::DOWNLOADABLE_PRODUCT);
 
-        $this->downloadableProduct2 = $I->haveProduct(Laravel5Helper::DOWNLOADABLE_PRODUCT);
+        $this->downloadableProduct2 = $I->haveProduct(Bagisto::DOWNLOADABLE_PRODUCT);
 
         $this->customer = $I->have(Customer::class);
     }
@@ -163,11 +163,11 @@ class CartCest
         $product1 = $I->haveProduct($scenario['product_type1']);
         $product2 = $I->haveProduct($scenario['product_type2']);
 
-        if ($scenario['product_type1'] === Laravel5Helper::DOWNLOADABLE_PRODUCT) {
+        if ($scenario['product_type1'] === Bagisto::DOWNLOADABLE_PRODUCT) {
             $downloadableLink1 = ProductDownloadableLink::query()->where('product_id', $product1->id)->firstOrFail();
             $I->assertNotNull($downloadableLink1);
         }
-        if ($scenario['product_type1'] === Laravel5Helper::BOOKING_EVENT_PRODUCT) {
+        if ($scenario['product_type1'] === Bagisto::BOOKING_EVENT_PRODUCT) {
             $bookingProduct = BookingProduct::query()->where('product_id', $product1->id)->firstOrFail();
             $I->assertNotNull($bookingProduct);
             $bookingTicket1 = BookingProductEventTicket::query()->where('booking_product_id',
@@ -175,11 +175,11 @@ class CartCest
             $I->assertNotNull($bookingTicket1);
         }
 
-        if ($scenario['product_type2'] === Laravel5Helper::DOWNLOADABLE_PRODUCT) {
+        if ($scenario['product_type2'] === Bagisto::DOWNLOADABLE_PRODUCT) {
             $downloadableLink2 = ProductDownloadableLink::query()->where('product_id', $product2->id)->firstOrFail();
             $I->assertNotNull($downloadableLink2);
         }
-        if ($scenario['product_type2'] === Laravel5Helper::BOOKING_EVENT_PRODUCT) {
+        if ($scenario['product_type2'] === Bagisto::BOOKING_EVENT_PRODUCT) {
             $bookingProduct = BookingProduct::query()->where('product_id', $product2->id)->firstOrFail();
             $I->assertNotNull($bookingProduct);
             $bookingTicket2 = BookingProductEventTicket::query()->where('booking_product_id',
@@ -197,10 +197,10 @@ class CartCest
             'quantity'   => 1,
             'product_id' => $product1->id,
         ];
-        if ($scenario['product_type1'] === Laravel5Helper::DOWNLOADABLE_PRODUCT) {
+        if ($scenario['product_type1'] === Bagisto::DOWNLOADABLE_PRODUCT) {
             $data['links'] = [$downloadableLink1->id];
         }
-        if ($scenario['product_type1'] === Laravel5Helper::BOOKING_EVENT_PRODUCT) {
+        if ($scenario['product_type1'] === Bagisto::BOOKING_EVENT_PRODUCT) {
             $data['booking'] = ['qty' => [$bookingTicket1->id => 1]];
         }
 
@@ -220,10 +220,10 @@ class CartCest
             'quantity'   => 1,
             'product_id' => $product2->id,
         ];
-        if ($scenario['product_type2'] === Laravel5Helper::DOWNLOADABLE_PRODUCT) {
+        if ($scenario['product_type2'] === Bagisto::DOWNLOADABLE_PRODUCT) {
             $data['links'] = [$downloadableLink2->id];
         }
-        if ($scenario['product_type2'] === Laravel5Helper::BOOKING_EVENT_PRODUCT) {
+        if ($scenario['product_type2'] === Bagisto::BOOKING_EVENT_PRODUCT) {
             $data['booking'] = ['qty' => [$bookingTicket2->id => 1]];
         }
 
@@ -243,10 +243,10 @@ class CartCest
             'quantity'   => 2,
             'product_id' => $product1->id,
         ];
-        if ($scenario['product_type1'] === Laravel5Helper::DOWNLOADABLE_PRODUCT) {
+        if ($scenario['product_type1'] === Bagisto::DOWNLOADABLE_PRODUCT) {
             $data['links'] = [$downloadableLink1->id];
         }
-        if ($scenario['product_type1'] === Laravel5Helper::BOOKING_EVENT_PRODUCT) {
+        if ($scenario['product_type1'] === Bagisto::BOOKING_EVENT_PRODUCT) {
             $data['booking'] = ['qty' => [$bookingTicket1->id => 2]];
         }
 
@@ -271,68 +271,68 @@ class CartCest
     {
         return [
             [
-                'product_type1' => Laravel5Helper::SIMPLE_PRODUCT,
-                'product_type2' => Laravel5Helper::SIMPLE_PRODUCT,
+                'product_type1' => Bagisto::SIMPLE_PRODUCT,
+                'product_type2' => Bagisto::SIMPLE_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::VIRTUAL_PRODUCT,
-                'product_type2' => Laravel5Helper::VIRTUAL_PRODUCT,
+                'product_type1' => Bagisto::VIRTUAL_PRODUCT,
+                'product_type2' => Bagisto::VIRTUAL_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::SIMPLE_PRODUCT,
-                'product_type2' => Laravel5Helper::VIRTUAL_PRODUCT,
+                'product_type1' => Bagisto::SIMPLE_PRODUCT,
+                'product_type2' => Bagisto::VIRTUAL_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::VIRTUAL_PRODUCT,
-                'product_type2' => Laravel5Helper::SIMPLE_PRODUCT,
+                'product_type1' => Bagisto::VIRTUAL_PRODUCT,
+                'product_type2' => Bagisto::SIMPLE_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::DOWNLOADABLE_PRODUCT,
-                'product_type2' => Laravel5Helper::DOWNLOADABLE_PRODUCT,
+                'product_type1' => Bagisto::DOWNLOADABLE_PRODUCT,
+                'product_type2' => Bagisto::DOWNLOADABLE_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::DOWNLOADABLE_PRODUCT,
-                'product_type2' => Laravel5Helper::SIMPLE_PRODUCT,
+                'product_type1' => Bagisto::DOWNLOADABLE_PRODUCT,
+                'product_type2' => Bagisto::SIMPLE_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::SIMPLE_PRODUCT,
-                'product_type2' => Laravel5Helper::DOWNLOADABLE_PRODUCT,
+                'product_type1' => Bagisto::SIMPLE_PRODUCT,
+                'product_type2' => Bagisto::DOWNLOADABLE_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::DOWNLOADABLE_PRODUCT,
-                'product_type2' => Laravel5Helper::VIRTUAL_PRODUCT,
+                'product_type1' => Bagisto::DOWNLOADABLE_PRODUCT,
+                'product_type2' => Bagisto::VIRTUAL_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::VIRTUAL_PRODUCT,
-                'product_type2' => Laravel5Helper::DOWNLOADABLE_PRODUCT,
+                'product_type1' => Bagisto::VIRTUAL_PRODUCT,
+                'product_type2' => Bagisto::DOWNLOADABLE_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::BOOKING_EVENT_PRODUCT,
-                'product_type2' => Laravel5Helper::BOOKING_EVENT_PRODUCT,
+                'product_type1' => Bagisto::BOOKING_EVENT_PRODUCT,
+                'product_type2' => Bagisto::BOOKING_EVENT_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::BOOKING_EVENT_PRODUCT,
-                'product_type2' => Laravel5Helper::SIMPLE_PRODUCT,
+                'product_type1' => Bagisto::BOOKING_EVENT_PRODUCT,
+                'product_type2' => Bagisto::SIMPLE_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::SIMPLE_PRODUCT,
-                'product_type2' => Laravel5Helper::BOOKING_EVENT_PRODUCT,
+                'product_type1' => Bagisto::SIMPLE_PRODUCT,
+                'product_type2' => Bagisto::BOOKING_EVENT_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::BOOKING_EVENT_PRODUCT,
-                'product_type2' => Laravel5Helper::VIRTUAL_PRODUCT,
+                'product_type1' => Bagisto::BOOKING_EVENT_PRODUCT,
+                'product_type2' => Bagisto::VIRTUAL_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::VIRTUAL_PRODUCT,
-                'product_type2' => Laravel5Helper::BOOKING_EVENT_PRODUCT,
+                'product_type1' => Bagisto::VIRTUAL_PRODUCT,
+                'product_type2' => Bagisto::BOOKING_EVENT_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::BOOKING_EVENT_PRODUCT,
-                'product_type2' => Laravel5Helper::DOWNLOADABLE_PRODUCT,
+                'product_type1' => Bagisto::BOOKING_EVENT_PRODUCT,
+                'product_type2' => Bagisto::DOWNLOADABLE_PRODUCT,
             ],
             [
-                'product_type1' => Laravel5Helper::DOWNLOADABLE_PRODUCT,
-                'product_type2' => Laravel5Helper::BOOKING_EVENT_PRODUCT,
+                'product_type1' => Bagisto::DOWNLOADABLE_PRODUCT,
+                'product_type2' => Bagisto::BOOKING_EVENT_PRODUCT,
             ],
         ];
     }

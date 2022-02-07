@@ -6,9 +6,9 @@ modules:
     - \Helper\DataMocker
     - Laravel:
         cleanup: true
-        database_seeder_class: DatabaseSeeder
         environment_file: .env.testing
-        parts: ORM
+        database_seeder_class: DatabaseSeeder
+        packages: packages
         run_database_migrations: false
         run_database_seeder: false
     - REST:

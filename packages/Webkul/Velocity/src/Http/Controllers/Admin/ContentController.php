@@ -2,24 +2,24 @@
 
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
-use Illuminate\Http\Response;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Velocity\DataGrids\ContentDataGrid;
 use Webkul\Velocity\Repositories\ContentRepository;
 
 class ContentController extends Controller
 {
     /**
-     * ProductRepository object
+     * Product repository instance.
      *
      * @var \Webkul\Product\Repositories\ProductRepository
-    */
+     */
     protected $productRepository;
 
     /**
-     * ContentRepository object
+     * Content repository instance.
      *
      * @var \Webkul\Velocity\Repositories\ContentRepository
-    */
+     */
     protected $contentRepository;
 
     /**
@@ -39,6 +39,7 @@ class ContentController extends Controller
 
         $this->_config = request('_config');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -46,14 +47,18 @@ class ContentController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(ContentDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
     /**
-     * Search for catalog
+     * Search for catalog.
      *
      * @return \Illuminate\View\View
-    */
+     */
     public function search()
     {
         $results = [];
@@ -160,7 +165,7 @@ class ContentController extends Controller
     }
 
     /**
-     * Mass Delete the products
+     * Mass delete the products.
      *
      * @return \Illuminate\Http\Response
      */
@@ -183,7 +188,7 @@ class ContentController extends Controller
     }
 
     /**
-     * To mass update the content
+     * To mass update the content.
      *
      * @return \Illuminate\Http\Response
      */

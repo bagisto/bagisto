@@ -3,6 +3,7 @@
 namespace Tests\Unit\Tax\Helpers;
 
 use Cart;
+use Helper\Bagisto;
 use Illuminate\Support\Facades\Config;
 use UnitTester;
 use Webkul\Tax\Models\TaxCategory;
@@ -51,7 +52,7 @@ class TaxCest
                 'tax_category_id' => $taxCategorie1->id,
             ],
         ];
-        $product1 = $I->haveProduct(\Webkul\Core\Helpers\Laravel5Helper::SIMPLE_PRODUCT, $config1);
+        $product1 = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, $config1);
 
         $config2 = [
             'productInventory' => ['qty' => 100],
@@ -61,7 +62,7 @@ class TaxCest
                 'tax_category_id' => $taxCategorie2->id,
             ],
         ];
-        $product2 = $I->haveProduct(\Webkul\Core\Helpers\Laravel5Helper::SIMPLE_PRODUCT, $config2);
+        $product2 = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, $config2);
 
         Cart::addProduct($product1->id, [
             '_token'     => session('_token'),
@@ -78,13 +79,13 @@ class TaxCest
         // rounded by precision of 2 because these are sums of corresponding tax categories
         $expectedTaxAmount1 = round(
             round(self::PRODUCT1_QTY * $product1->price, self::CART_TOTAL_PRECISION)
-                * $tax1->tax_rate / 100,
+             * $tax1->tax_rate / 100,
             self::CART_TOTAL_PRECISION
         );
 
         $expectedTaxAmount2 = round(
             round(self::PRODUCT2_QTY * $product2->price, self::CART_TOTAL_PRECISION)
-                * $tax2->tax_rate / 100,
+             * $tax2->tax_rate / 100,
             self::CART_TOTAL_PRECISION
         );
 

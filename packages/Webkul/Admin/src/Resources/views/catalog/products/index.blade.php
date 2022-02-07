@@ -14,7 +14,8 @@
             <div class="page-action">
                 <div class="export-import" @click="showModal('downloadDataGrid')">
                     <i class="export-icon"></i>
-                    <span >
+
+                    <span>
                         {{ __('admin::app.export.export') }}
                     </span>
                 </div>
@@ -28,9 +29,7 @@
         {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
         <div class="page-content">
-            @inject('products', 'Webkul\Admin\DataGrids\ProductDataGrid')
-
-            {!! $products->render() !!}
+            <datagrid-plus src="{{ route('admin.catalog.products.index') }}"></datagrid-plus>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
@@ -38,6 +37,7 @@
 
     <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
         <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
+
         <div slot="body">
             <export-form></export-form>
         </div>
@@ -45,7 +45,7 @@
 @stop
 
 @push('scripts')
-    @include('admin::export.export', ['gridName' => $products])
+    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\ProductDataGrid')])
 
     <script>
         function reloadPage(getVar, getVal) {

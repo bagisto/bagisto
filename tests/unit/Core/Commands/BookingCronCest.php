@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 use UnitTester;
 use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\BookingProduct\Models\BookingProductEventTicket;
-use Webkul\Core\Helpers\Laravel5Helper;
+use Helper\Bagisto;
 use Webkul\Product\Models\Product;
 
 class BookingCronCest
@@ -17,7 +17,7 @@ class BookingCronCest
         $index = $I->fake()->numberBetween(2, 6);
 
         for ($i=0; $i<$index; $i++) {
-            $products[$i] = $I->haveProduct(Laravel5Helper::VIRTUAL_PRODUCT);
+            $products[$i] = $I->haveProduct(Bagisto::VIRTUAL_PRODUCT);
             Product::query()->where('id', $products[$i]->id)->update(['type' => 'booking']);
 
             if ($I->fake()->randomDigitNotNull <= 5) {

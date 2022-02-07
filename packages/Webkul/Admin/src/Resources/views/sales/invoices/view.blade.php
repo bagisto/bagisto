@@ -274,8 +274,7 @@
 
                 <tab name="{{ __('admin::app.sales.transactions.title') }}" :selected="false">
                     <div class="sale-container">
-                        @inject('InvoicesTransactionsDatagrid', 'Webkul\Admin\DataGrids\InvoicesTransactionsDatagrid')
-                        {!! $InvoicesTransactionsDatagrid->render() !!}
+                        <datagrid-plus src="{{ route('admin.sales.invoices.transactions', $invoice->id) }}"></datagrid-plus>
                     </div>
                 </tab>
             </tabs>

@@ -2,15 +2,16 @@
 
 namespace Webkul\Ui\DataGrid;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
 use Webkul\Ui\DataGrid\Traits\ProvideBouncer;
 use Webkul\Ui\DataGrid\Traits\ProvideCollection;
+use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 use Webkul\Ui\DataGrid\Traits\ProvideExceptionHandler;
 
 abstract class DataGrid
 {
-    use ProvideBouncer, ProvideCollection, ProvideExceptionHandler;
+    use ProvideBouncer, ProvideCollection, ProvideDataGridPlus, ProvideExceptionHandler;
 
     /**
      * Set index columns, ex: id.
@@ -47,7 +48,6 @@ abstract class DataGrid
      * @var array
      */
     protected $columns = [];
-
 
     /**
      * Complete column details.
@@ -392,7 +392,7 @@ abstract class DataGrid
             'paginated'         => $this->paginate,
             'itemsPerPage'      => $this->itemsPerPage,
             'norecords'         => __('ui::app.datagrid.no-records'),
-            'extraFilters'      => $this->getNecessaryExtraFilters()
+            'extraFilters'      => $this->getNecessaryExtraFilters(),
         ];
     }
 
@@ -429,7 +429,7 @@ abstract class DataGrid
         $checks = [
             'channels'        => core()->getAllChannels(),
             'locales'         => core()->getAllLocales(),
-            'customer_groups' => core()->getAllCustomerGroups()
+            'customer_groups' => core()->getAllCustomerGroups(),
         ];
 
         foreach ($checks as $key => $val) {

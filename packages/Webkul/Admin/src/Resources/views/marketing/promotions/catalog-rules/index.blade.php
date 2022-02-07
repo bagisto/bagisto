@@ -5,7 +5,6 @@
 @stop
 
 @section('content')
-
     <div class="content">
         <div class="page-header">
             <div class="page-title">
@@ -20,8 +19,7 @@
         </div>
 
         <div class="page-content">
-            @inject('catalogRuleGrid','Webkul\Admin\DataGrids\CatalogRuleDataGrid')
-            {!! $catalogRuleGrid->render() !!}
+            <datagrid-plus src="{{ route('admin.catalog-rules.index') }}"></datagrid-plus>
         </div>
     </div>
 @endsection

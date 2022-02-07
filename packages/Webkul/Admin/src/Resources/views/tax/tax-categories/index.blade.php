@@ -19,8 +19,7 @@
         </div>
 
         <div class="page-content">
-            @inject('taxCategories','Webkul\Admin\DataGrids\TaxCategoryDataGrid')
-            {!! $taxCategories->render() !!}
+            <datagrid-plus src="{{ route('admin.tax-categories.index') }}"></datagrid-plus>
         </div>
     </div>
 @stop

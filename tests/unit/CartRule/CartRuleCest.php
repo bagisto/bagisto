@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\CartRule\Models\CartRule;
 use Webkul\CartRule\Models\CartRuleCoupon;
-use Webkul\Core\Helpers\Laravel5Helper;
+use Helper\Bagisto;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Illuminate\Contracts\Support\Arrayable;
@@ -728,7 +728,7 @@ class CartRuleCest
                 'tax_category_id' => $taxCategorie->id,
             ],
         ];
-        $product = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $productConfig);
+        $product = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, $productConfig);
 
         $ruleConfig = [
             'action_type' => self::ACTION_TYPE_PERCENTAGE,
@@ -1161,19 +1161,19 @@ class CartRuleCest
         return [
             [
                 'productScenario' => self::PRODUCT_FREE,
-                'productType' => Laravel5Helper::SIMPLE_PRODUCT,
+                'productType' => Bagisto::SIMPLE_PRODUCT,
                 'freeOfCharge' => true,
                 'reducedTax' => false,
             ],
             [
                 'productScenario' => self::PRODUCT_NOT_FREE,
-                'productType' => Laravel5Helper::SIMPLE_PRODUCT,
+                'productType' => Bagisto::SIMPLE_PRODUCT,
                 'freeOfCharge' => false,
                 'reducedTax' => false,
             ],
             [
                 'productScenario' => self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                'productType' => Laravel5Helper::SIMPLE_PRODUCT,
+                'productType' => Bagisto::SIMPLE_PRODUCT,
                 'freeOfCharge' => false,
                 'reducedTax' => true,
             ],

@@ -3,6 +3,8 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
+use Webkul\Admin\DataGrids\InvoicesTransactionsDatagrid;
+use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Traits\Mails;
 use Webkul\Core\Traits\PDFHandler;
@@ -61,7 +63,22 @@ class InvoiceController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(OrderInvoicesDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function invoiceTransactions($id)
+    {
+        return app(InvoicesTransactionsDatagrid::class)->toJson();
     }
 
     /**

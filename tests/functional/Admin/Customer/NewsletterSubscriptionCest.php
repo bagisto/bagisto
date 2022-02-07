@@ -12,10 +12,10 @@ class NewsletterSubscriptionCest
         $subscriber = $I->have(SubscribersList::class);
 
         $I->loginAsAdmin();
-     
+
         $I->amOnAdminRoute('admin.customers.subscribers.index');
         $I->seeCurrentRouteIs('admin.customers.subscribers.index');
-    
+
         $I->see("{$subscriber->id}", '//script[@type="text/x-template"]');
     }
 }

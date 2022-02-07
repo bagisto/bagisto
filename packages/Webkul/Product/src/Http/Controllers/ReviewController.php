@@ -3,6 +3,7 @@
 namespace Webkul\Product\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
 class ReviewController extends Controller
@@ -41,6 +42,10 @@ class ReviewController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CustomerReviewDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

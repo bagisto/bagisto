@@ -5,12 +5,9 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Ui\DataGrid\DataGrid;
-use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class CustomerOrderDataGrid extends DataGrid
 {
-    use ProvideDataGridPlus;
-
     /**
      * Index.
      *
@@ -113,20 +110,20 @@ class CustomerOrderDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
-            'closure' => function ($value) {
+            'closure'    => function ($value) {
                 if ($value->status == 'processing') {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.orders.order-status-processing') . '</span>';
                 } elseif ($value->status == 'completed') {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.orders.order-status-success') . '</span>';
-                } elseif ($value->status == "canceled") {
+                } elseif ($value->status == 'canceled') {
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-canceled') . '</span>';
-                } elseif ($value->status == "closed") {
+                } elseif ($value->status == 'closed') {
                     return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.orders.order-status-closed') . '</span>';
-                } elseif ($value->status == "pending") {
+                } elseif ($value->status == 'pending') {
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending') . '</span>';
-                } elseif ($value->status == "pending_payment") {
+                } elseif ($value->status == 'pending_payment') {
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending-payment') . '</span>';
-                } elseif ($value->status == "fraud") {
+                } elseif ($value->status == 'fraud') {
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-fraud') . '</span>';
                 }
             },

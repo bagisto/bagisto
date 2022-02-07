@@ -2,6 +2,7 @@
 
 namespace Webkul\Attribute\Http\Controllers;
 
+use Webkul\Admin\DataGrids\AttributeDataGrid;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
 class AttributeController extends Controller
@@ -40,6 +41,10 @@ class AttributeController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(AttributeDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

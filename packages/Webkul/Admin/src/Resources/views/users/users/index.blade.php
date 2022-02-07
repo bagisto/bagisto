@@ -5,12 +5,12 @@
 @stop
 
 @section('content')
-
     <div class="content">
         <div class="page-header">
             <div class="page-title">
                 <h1>{{ __('admin::app.users.users.title') }}</h1>
             </div>
+
             <div class="page-action">
                 <a href="{{ route('admin.users.create') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.users.users.add-user-title') }}
@@ -19,11 +19,7 @@
         </div>
 
         <div class="page-content">
-
-            @inject('datagrid','Webkul\Admin\DataGrids\UserDataGrid')
-            {!! $datagrid->render() !!}
-            {{-- <datetime></datetime> --}}
+            <datagrid-plus src="{{ route('admin.users.index') }}"></datagrid-plus>
         </div>
     </div>
-
 @stop

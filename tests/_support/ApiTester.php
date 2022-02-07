@@ -13,6 +13,7 @@ use Webkul\Product\Models\ProductInventory;
 
 /**
  * Inherited methods.
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)

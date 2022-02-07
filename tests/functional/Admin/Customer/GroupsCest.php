@@ -13,7 +13,7 @@ class GroupsCest
 
         $I->loginAsAdmin();
 
-        $I->amOnAdminRoute('admin.groups.index');     
+        $I->amOnAdminRoute('admin.groups.index');
         $I->seeCurrentRouteIs('admin.groups.index');
 
         $I->see("{$group->id}", '//script[@type="text/x-template"]');

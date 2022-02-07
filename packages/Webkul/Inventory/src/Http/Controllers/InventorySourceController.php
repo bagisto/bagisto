@@ -2,6 +2,7 @@
 
 namespace Webkul\Inventory\Http\Controllers;
 
+use Webkul\Admin\DataGrids\InventorySourcesDataGrid;
 use Webkul\Inventory\Http\Requests\InventorySourceRequest;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 
@@ -41,6 +42,10 @@ class InventorySourceController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(InventorySourcesDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

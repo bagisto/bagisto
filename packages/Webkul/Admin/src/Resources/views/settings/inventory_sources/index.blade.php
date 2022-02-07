@@ -19,8 +19,7 @@
         </div>
 
         <div class="page-content">
-            @inject('inventory_sources','Webkul\Admin\DataGrids\InventorySourcesDataGrid')
-            {!! $inventory_sources->render() !!}
+            <datagrid-plus src="{{ route('admin.inventory_sources.index') }}"></datagrid-plus>
         </div>
     </div>
 @stop
