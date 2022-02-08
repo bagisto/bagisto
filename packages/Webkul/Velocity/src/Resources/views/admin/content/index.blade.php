@@ -18,8 +18,7 @@
         </div>
 
         <div class="page-content">
-            @inject('velocity_contents', 'Webkul\Velocity\DataGrids\ContentDataGrid')
-            {!! $velocity_contents->render() !!}
+            <datagrid-plus src="{{ route('velocity.admin.content.index') }}"></datagrid-plus>
         </div>
     </div>
 @stop
