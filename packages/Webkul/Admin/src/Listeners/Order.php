@@ -25,11 +25,10 @@ class Order
 
             /* now refunding order on the basis of capture id and refund data */
             $smartButton->refundOrder($captureID, [
-                'amount' =>
-                  [
-                    'value' => $refund->grand_total,
-                    'currency_code' => $refund->order_currency_code
-                  ]
+                'amount' => [
+                    'value'         => $refund->grand_total,
+                    'currency_code' => $refund->order_currency_code,
+                ],
             ]);
         }
     }
