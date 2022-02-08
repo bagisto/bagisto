@@ -2,20 +2,21 @@
 
 namespace Webkul\CMS\Http\Controllers\Admin;
 
+use Webkul\Admin\DataGrids\CMSPageDataGrid;
 use Webkul\CMS\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
 
- class PageController extends Controller
+class PageController extends Controller
 {
     /**
-     * To hold the request variables from route file
+     * To hold the request variables from route file.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * To hold the CMSRepository instance
+     * To hold the CMS repository instance.
      *
      * @var \Webkul\CMS\Repositories\CmsRepository
      */
@@ -37,17 +38,21 @@ use Webkul\CMS\Repositories\CmsRepository;
     }
 
     /**
-     * Loads the index page showing the static pages resources
+     * Loads the index page showing the static pages resources.
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CMSPageDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
     /**
-     * To create a new CMS page
+     * To create a new CMS page.
      *
      * @return \Illuminate\View\View
      */
@@ -57,7 +62,7 @@ use Webkul\CMS\Repositories\CmsRepository;
     }
 
     /**
-     * To store a new CMS page in storage
+     * To store a new CMS page in storage.
      *
      * @return \Illuminate\Http\Response
      */
@@ -80,7 +85,7 @@ use Webkul\CMS\Repositories\CmsRepository;
     }
 
     /**
-     * To edit a previously created CMS page
+     * To edit a previously created CMS page.
      *
      * @param  int  $id
      * @return \Illuminate\View\View
@@ -93,7 +98,7 @@ use Webkul\CMS\Repositories\CmsRepository;
     }
 
     /**
-     * To update the previously created CMS page in storage
+     * To update the previously created CMS page in storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -121,7 +126,7 @@ use Webkul\CMS\Repositories\CmsRepository;
     }
 
     /**
-     * To delete the previously create CMS page
+     * To delete the previously create CMS page.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -134,15 +139,15 @@ use Webkul\CMS\Repositories\CmsRepository;
             session()->flash('success', trans('admin::app.cms.pages.delete-success'));
 
             return response()->json(['message' => true], 200);
-        } else {
-            session()->flash('success', trans('admin::app.cms.pages.delete-failure'));
-
-            return response()->json(['message' => false], 200);
         }
+
+        session()->flash('success', trans('admin::app.cms.pages.delete-failure'));
+
+        return response()->json(['message' => false], 200);
     }
 
     /**
-     * To mass delete the CMS resource from storage
+     * To mass delete the CMS resource from storage.
      *
      * @return \Illuminate\Http\Response
      */

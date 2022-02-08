@@ -9,14 +9,13 @@ class AttributeFamilyCest
 {
     public function testIndex(FunctionalTester $I): void
     {
-        $attributeFamily = $I->have(AttributeFamily::class);
+        $I->loginAsAdmin();
 
-        $I->loginAsAdmin();      
-        
         $I->amOnAdminRoute('admin.catalog.families.index');
         $I->seeCurrentRouteIs('admin.catalog.families.index');
 
-        $I->see("{$attributeFamily->id}", '//script[@type="text/x-template"]');
+        $I->sendAjaxGetRequest(route('admin.catalog.families.index'));
+        $I->seeResponseCodeIsSuccessful();
     }
 
     public function testCreate(FunctionalTester $I): void
@@ -46,7 +45,6 @@ class AttributeFamilyCest
         $I->amOnAdminRoute('admin.catalog.families.index');
 
         $route = route('admin.catalog.families.edit', ['id' => $attributeFamily->id]);
-        $I->seeInSource($route);
         $I->amOnPage($route);
         $I->seeCurrentRouteIs('admin.catalog.families.edit');
 
@@ -63,15 +61,12 @@ class AttributeFamilyCest
         $I->seeCurrentRouteIs('admin.catalog.families.index');
     }
 
-    /**
-     * @param FunctionalTester $I
-     *
-     * @return array with the test-data
-     */
     private function fillForm(FunctionalTester $I): array
     {
         $testData = [
-            // code needs to match to: '/^[a-zA-Z]+[a-zA-Z0-9_]+$/'
+            /**
+             * Code needs to match: '/^[a-zA-Z]+[a-zA-Z0-9_]+$/'
+             */
             'code' => $I->fake()->word . strtr($I->fake()->uuid, ['-' => '_']),
             'name' => $I->fake()->sentence,
         ];

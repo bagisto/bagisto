@@ -2,27 +2,28 @@
 
 namespace Webkul\Attribute\Http\Controllers;
 
+use Webkul\Admin\DataGrids\AttributeFamilyDataGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
 class AttributeFamilyController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * AttributeFamilyRepository object
+     * Attribute family repository instance.
      *
      * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
      */
     protected $attributeFamilyRepository;
 
     /**
-     * AttributeRepository object
+     * Attribute repository instance.
      *
      * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
@@ -38,8 +39,7 @@ class AttributeFamilyController extends Controller
     public function __construct(
         AttributeFamilyRepository $attributeFamilyRepository,
         AttributeRepository $attributeRepository
-    )
-    {
+    ) {
         $this->attributeFamilyRepository = $attributeFamilyRepository;
 
         $this->attributeRepository = $attributeRepository;
@@ -54,6 +54,10 @@ class AttributeFamilyController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(AttributeFamilyDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
@@ -157,7 +161,7 @@ class AttributeFamilyController extends Controller
     }
 
     /**
-     * Remove the specified resources from database
+     * Remove the specified resources from database.
      *
      * @return \Illuminate\Http\Response
      */

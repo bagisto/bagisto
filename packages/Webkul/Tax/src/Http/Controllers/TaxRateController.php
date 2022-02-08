@@ -4,6 +4,7 @@ namespace Webkul\Tax\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Validators\Failure;
+use Webkul\Admin\DataGrids\TaxRateDataGrid;
 use Webkul\Admin\Imports\DataGridImport;
 use Webkul\Tax\Repositories\TaxRateRepository;
 
@@ -53,6 +54,10 @@ class TaxRateController extends Controller
      */
     public function show()
     {
+        if (request()->ajax()) {
+            return app(TaxRateDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

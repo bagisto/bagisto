@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Http\Controllers;
 
+use Webkul\Admin\DataGrids\ExchangeRatesDataGrid;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 
@@ -53,6 +54,10 @@ class ExchangeRateController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(ExchangeRatesDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

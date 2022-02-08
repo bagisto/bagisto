@@ -4,12 +4,9 @@ namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
-use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class CustomersInvoicesDataGrid extends DataGrid
 {
-    use ProvideDataGridPlus;
-
     /**
      * Index column.
      *
@@ -57,7 +54,7 @@ class CustomersInvoicesDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -87,7 +84,7 @@ class CustomersInvoicesDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 return '<a href="' . route('admin.sales.orders.view', $value->order_id) . '">' . $value->order_id . '</a>';
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -106,7 +103,7 @@ class CustomersInvoicesDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
-            'closure' => function ($value) {
+            'closure'    => function ($value) {
                 if ($value->state == 'paid') {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.invoices.status-paid') . '</span>';
                 } elseif ($value->state == 'pending' || $value->state == 'pending_payment') {

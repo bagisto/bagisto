@@ -5,6 +5,7 @@ namespace Webkul\Product\Http\Controllers;
 use Exception;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Admin\DataGrids\ProductDataGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Contracts\Validations\Slug;
@@ -131,6 +132,10 @@ class ProductController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(ProductDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Http\Controllers;
 
+use Webkul\Admin\DataGrids\SliderDataGrid;
 use Webkul\Core\Repositories\SliderRepository;
 
 class SliderController extends Controller
@@ -47,6 +48,10 @@ class SliderController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(SliderDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
@@ -59,7 +64,7 @@ class SliderController extends Controller
     {
         $locale = core()->getRequestedLocaleCode();
 
-        return view($this->_config['view'])->with("locale", $locale);
+        return view($this->_config['view'])->with('locale', $locale);
     }
 
     /**
@@ -123,7 +128,7 @@ class SliderController extends Controller
         ]);
 
         $data = request()->all();
-        
+
         $data['expired_at'] = $data['expired_at'] ?: null;
 
         if (isset($data['locale'])) {

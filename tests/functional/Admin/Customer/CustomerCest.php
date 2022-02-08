@@ -9,14 +9,13 @@ class CustomerCest
 {
     public function testIndex(FunctionalTester $I): void
     {
-        $customer = $I->have(Customer::class);
-
         $I->loginAsAdmin();
-       
+
         $I->amOnAdminRoute('admin.customer.index');
         $I->seeCurrentRouteIs('admin.customer.index');
 
-        $I->see("{$customer->id}", '//script[@type="text/x-template"]');
+        $I->sendAjaxGetRequest(route('admin.customer.index'));
+        $I->seeResponseCodeIsSuccessful();
     }
 
     public function testCreate(FunctionalTester $I): void
@@ -38,11 +37,6 @@ class CustomerCest
         $I->seeRecord(Customer::class, $testData);
     }
 
-    /**
-     * @param FunctionalTester $I
-     *
-     * @return array with the test-data
-     */
     private function fillForm(FunctionalTester $I): array
     {
         $testData = [
@@ -57,9 +51,9 @@ class CustomerCest
         ];
 
         $I->fillField('first_name', $testData['first_name']);
-        $I->fillField('last_name',  $testData['last_name']);
-        $I->selectOption('gender',  $testData['gender']);
-        $I->fillField('email',      $testData['email']);
+        $I->fillField('last_name', $testData['last_name']);
+        $I->selectOption('gender', $testData['gender']);
+        $I->fillField('email', $testData['email']);
 
         return $testData;
     }

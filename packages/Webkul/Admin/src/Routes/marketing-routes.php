@@ -43,9 +43,14 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
 
         Route::post('cart-rules/delete/{id}', [CartRuleController::class, 'destroy'])->name('admin.cart-rules.delete');
 
-        Route::post('cart-rules/generate-coupons/{id?}', [CartRuleController::class, 'generateCoupons'])->name('admin.cart-rules.generate-coupons');
+        /**
+         * Cart rule coupons routes.
+         */
+        Route::get('cart-rule-coupons/{id}', [CartRuleCouponController::class, 'index'])->name('admin.cart-rules-coupons.index');
 
-        Route::post('/massdelete', [CartRuleCouponController::class, 'massDelete'])->name('admin.cart-rule-coupons.mass-delete');
+        Route::post('cart-rule-coupons/{id}', [CartRuleCouponController::class, 'store'])->name('admin.cart-rules-coupons.store');
+
+        Route::post('cart-rule-coupons/mass-delete', [CartRuleCouponController::class, 'massDelete'])->name('admin.cart-rule-coupons.mass-delete');
 
         /**
          * Catalog rules routes.

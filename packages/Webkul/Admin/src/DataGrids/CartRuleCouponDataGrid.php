@@ -7,23 +7,39 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class CartRuleCouponDataGrid extends DataGrid
 {
+    /**
+     * Index.
+     *
+     * @var string
+     */
     protected $index = 'id';
 
+    /**
+     * Sort order.
+     *
+     * @var string
+     */
     protected $sortOrder = 'desc';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
-        $route = request()->route() ? request()->route()->getName() : "" ;
-
-        $cartRuleId = $route == 'admin.cart-rules.edit' ? collect(request()->segments())->last() : last(explode("/", url()->previous()));
-
         $queryBuilder = DB::table('cart_rule_coupons')
-                ->addSelect('id', 'code', 'created_at', 'expired_at', 'times_used')
-                ->where('cart_rule_coupons.cart_rule_id', $cartRuleId);
+            ->addSelect('id', 'code', 'created_at', 'expired_at', 'times_used')
+            ->where('cart_rule_coupons.cart_rule_id', request('id'));
 
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -72,6 +88,11 @@ class CartRuleCouponDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
     public function prepareMassActions()
     {
         $this->addMassAction([

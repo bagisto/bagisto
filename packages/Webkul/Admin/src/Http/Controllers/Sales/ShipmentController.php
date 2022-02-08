@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
+use Webkul\Admin\DataGrids\OrderShipmentsDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -68,6 +69,10 @@ class ShipmentController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(OrderShipmentsDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

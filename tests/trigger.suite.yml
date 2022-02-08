@@ -4,11 +4,11 @@ modules:
     - Asserts
     - Filesystem
     - \Helper\Unit
-    - Laravel:
+    - \Helper\Bagisto:
         environment_file: .env.testing
-        run_database_migrations: true
-        run_database_seeder: true
         database_seeder_class: DatabaseSeeder
         packages: packages
+        run_database_migrations: true
+        run_database_seeder: true
 
   step_decorators: ~

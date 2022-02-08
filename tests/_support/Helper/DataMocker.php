@@ -2,11 +2,10 @@
 
 namespace Helper;
 
-use Codeception\Module;
 use Faker\Factory;
 use Faker\Generator;
 
-class DataMocker extends Module
+class DataMocker extends \Codeception\Module
 {
     /**
      * Faker instance.

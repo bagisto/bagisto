@@ -3,7 +3,7 @@
 namespace Tests\Functional\Checkout\Cart;
 
 use FunctionalTester;
-use Webkul\Core\Helpers\Laravel5Helper;
+use Helper\Bagisto;
 
 class CartCest
 {
@@ -22,8 +22,8 @@ class CartCest
                 'status' => 1,
             ],
         ];
-        $this->productWithQuantityBox = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $productConfig);
-        $this->productWithoutQuantityBox = $I->haveProduct(Laravel5Helper::DOWNLOADABLE_PRODUCT, $productConfig);
+        $this->productWithQuantityBox = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, $productConfig);
+        $this->productWithoutQuantityBox = $I->haveProduct(Bagisto::DOWNLOADABLE_PRODUCT, $productConfig);
     }
 
     public function checkCartWithQuantityBox(FunctionalTester $I): void

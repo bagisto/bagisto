@@ -5,7 +5,7 @@ namespace Tests\Functional\Shop;
 use Faker\Factory;
 use FunctionalTester;
 use Codeception\Example;
-use Webkul\Core\Helpers\Laravel5Helper;
+use Helper\Bagisto;
 
 class GuestCheckoutCest
 {
@@ -34,10 +34,10 @@ class GuestCheckoutCest
             ],
         ];
 
-        $this->productNoGuestCheckout = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $pConfigDefault);
+        $this->productNoGuestCheckout = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, $pConfigDefault);
         $this->productNoGuestCheckout->refresh();
 
-        $this->productGuestCheckout = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $pConfigGuestCheckout);
+        $this->productGuestCheckout = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, $pConfigGuestCheckout);
         $this->productGuestCheckout->refresh();
     }
 
@@ -72,7 +72,7 @@ class GuestCheckoutCest
         $I->seeInSource($product->name);
         $I->amOnRoute('shop.checkout.onepage.index');
         $I->seeCurrentRouteIs($example['expectedRoute']);
-        
+
         $cart = cart()->getCart();
         $I->assertTrue(cart()->removeItem($cart->items[0]->id));
     }

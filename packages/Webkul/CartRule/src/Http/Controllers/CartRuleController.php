@@ -6,7 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
-use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\Admin\DataGrids\CartRuleDataGrid;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 
 class CartRuleController extends Controller
@@ -26,29 +26,17 @@ class CartRuleController extends Controller
     protected $cartRuleRepository;
 
     /**
-     * To hold cart rule coupon repository repository instance.
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
-     */
-    protected $cartRuleCouponRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param \Webkul\CartRule\Repositories\CartRuleRepository       $cartRuleRepository
-     * @param \Webkul\CartRule\Repositories\CartRuleCouponRepository $cartRuleCouponRepository
-     *
      * @return void
      */
     public function __construct(
-        CartRuleRepository $cartRuleRepository,
-        CartRuleCouponRepository $cartRuleCouponRepository
+        CartRuleRepository $cartRuleRepository
     ) {
         $this->_config = request('_config');
 
         $this->cartRuleRepository = $cartRuleRepository;
-
-        $this->cartRuleCouponRepository = $cartRuleCouponRepository;
     }
 
     /**
@@ -58,6 +46,10 @@ class CartRuleController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CartRuleDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
@@ -228,27 +220,5 @@ class CartRuleController extends Controller
         }
 
         return response()->json(['message' => false], 400);
-    }
-
-    /**
-     * Generate coupon code for cart rule.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function generateCoupons()
-    {
-        $this->validate(request(), [
-            'coupon_qty'  => 'required|integer|min:1',
-            'code_length' => 'required|integer|min:10',
-            'code_format' => 'required',
-        ]);
-
-        if (! request('id')) {
-            return response()->json(['message' => trans('admin::app.promotions.cart-rules.cart-rule-not-defind-error')], 400);
-        }
-
-        $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));
-
-        return response()->json(['message' => trans('admin::app.response.create-success', ['name' => 'Cart rule coupons'])]);
     }
 }

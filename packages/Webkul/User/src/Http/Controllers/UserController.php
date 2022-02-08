@@ -5,6 +5,7 @@ namespace Webkul\User\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Webkul\Admin\DataGrids\UserDataGrid;
 use Webkul\User\Http\Requests\UserForm;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
@@ -59,6 +60,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(UserDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

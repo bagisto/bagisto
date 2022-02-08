@@ -9,7 +9,7 @@ use Webkul\Tax\Models\TaxRate;
 use Webkul\Tax\Models\TaxCategory;
 use Webkul\Customer\Models\Customer;
 use Illuminate\Support\Facades\Config;
-use Webkul\Core\Helpers\Laravel5Helper;
+use Helper\Bagisto;
 use Webkul\Customer\Models\CustomerAddress;
 
 class CartTaxesCest
@@ -52,7 +52,7 @@ class CartTaxesCest
                 'tax_category_id' => $taxCategory1->id,
             ],
         ];
-        $product1 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $config1);
+        $product1 = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, $config1);
 
         $config2 = [
             'productInventory' => ['qty' => 100],
@@ -62,7 +62,7 @@ class CartTaxesCest
                 'tax_category_id' => $taxCategory2->id,
             ],
         ];
-        $product2 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $config2);
+        $product2 = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, $config2);
 
         $prod1Quantity = $I->fake()->numberBetween(9, 30);
         // quantity of product1 should be odd
@@ -215,7 +215,7 @@ class CartTaxesCest
                 'tax_category_id' => $taxCategory1->id,
             ],
         ];
-        $product1 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $config1);
+        $product1 = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, $config1);
 
         $config2 = [
             'productInventory' => ['qty' => 100],
@@ -225,7 +225,7 @@ class CartTaxesCest
                 'tax_category_id' => $taxCategory2->id,
             ],
         ];
-        $product2 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $config2);
+        $product2 = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, $config2);
 
         $customer = $I->have(Customer::class);
 

@@ -19,9 +19,7 @@
         </div>
 
         <div class="page-content">
-
-            @inject('locales','Webkul\Admin\DataGrids\LocalesDataGrid')
-            {!! $locales->render() !!}
+            <datagrid-plus src="{{ route('admin.locales.index') }}"></datagrid-plus>
         </div>
     </div>
 @stop

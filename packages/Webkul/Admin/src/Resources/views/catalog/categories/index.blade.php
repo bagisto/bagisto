@@ -1,4 +1,6 @@
-@php($locale = core()->getRequestedLocaleCode())
+@php
+    $locale = core()->getRequestedLocaleCode();
+@endphp
 
 @extends('admin::layouts.content')
 
@@ -13,15 +15,20 @@
                 <h1>{{ __('admin::app.catalog.categories.title') }}</h1>
 
                 <div class="control-group">
-
-                    <select class="control" id="locale-switcher" name="locale"
-                            onchange="reloadPage('locale', this.value)">
+                    <select
+                        class="control"
+                        id="locale-switcher"
+                        name="locale"
+                        onchange="reloadPage('locale', this.value)"
+                    >
                         <option value="all" {{ ! isset($locale) ? 'selected' : '' }}>
                             {{ __('admin::app.admin.system.all-locales') }}
                         </option>
+
                         @foreach (core()->getAllLocales() as $localeModel)
                             <option
-                                value="{{ $localeModel->code }}" {{ (isset($locale) && ($localeModel->code) == $locale) ? 'selected' : '' }}>
+                                value="{{ $localeModel->code }}" {{ (isset($locale) && ($localeModel->code) == $locale) ? 'selected' : '' }}
+                            >
                                 {{ $localeModel->name }}
                             </option>
                         @endforeach
@@ -33,15 +40,13 @@
                 <a href="{{ route('admin.catalog.categories.create') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.catalog.categories.add-title') }}
                 </a>
-            </div>            
+            </div>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.categories.list.before') !!}
 
         <div class="page-content">
-            @inject('categories', 'Webkul\Admin\DataGrids\CategoryDataGrid')
-
-            {!! $categories->render() !!}
+            <datagrid-plus src="{{ route('admin.catalog.categories.index') }}"></datagrid-plus>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.categories.list.after') !!}

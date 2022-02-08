@@ -3,6 +3,7 @@
 namespace Webkul\CatalogRule\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Webkul\Admin\DataGrids\CatalogRuleDataGrid;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
 
@@ -54,6 +55,10 @@ class CatalogRuleController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CatalogRuleDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

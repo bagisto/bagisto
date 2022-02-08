@@ -2,6 +2,7 @@
 
 namespace Webkul\Category\Http\Controllers;
 
+use Webkul\Admin\DataGrids\CategoryDataGrid;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Http\Requests\CategoryRequest;
 use Webkul\Category\Repositories\CategoryRepository;
@@ -55,6 +56,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CategoryDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

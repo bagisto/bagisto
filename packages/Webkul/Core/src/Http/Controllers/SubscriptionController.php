@@ -2,21 +2,20 @@
 
 namespace Webkul\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Webkul\Admin\DataGrids\NewsLetterDataGrid;
 use Webkul\Core\Repositories\SubscribersListRepository;
 
 class SubscriptionController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * SubscribersListRepository
+     * Subscribers list repository.
      *
      * @var \Webkul\Core\Repositories\SubscribersListRepository
      */
@@ -42,11 +41,15 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(NewsLetterDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
     /**
-     * To unsubscribe the user without deleting the resource of the subscribed user
+     * To unsubscribe the user without deleting the resource of the subscribed user.
      *
      * @param  int  $id
      * @return \Illuminate\View\View
@@ -59,7 +62,7 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * To unsubscribe the user without deleting the resource of the subscribed user
+     * To unsubscribe the user without deleting the resource of the subscribed user.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

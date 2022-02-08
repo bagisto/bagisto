@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Http\Controllers;
 
+use Webkul\Admin\DataGrids\LocalesDataGrid;
 use Webkul\Core\Repositories\LocaleRepository;
 
 class LocaleController extends Controller
@@ -40,6 +41,10 @@ class LocaleController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(LocalesDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

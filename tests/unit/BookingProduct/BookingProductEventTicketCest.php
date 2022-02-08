@@ -6,7 +6,7 @@ use Webkul\BookingProduct\Helpers\EventTicket;
 use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\BookingProduct\Models\BookingProductEventTicket;
 use Webkul\Checkout\Models\CartItem;
-use Webkul\Core\Helpers\Laravel5Helper;
+use Helper\Bagisto;
 use Webkul\Product\Models\Product;
 
 class BookingProductEventTicketCest
@@ -17,7 +17,7 @@ class BookingProductEventTicketCest
     {
         $this->typeHelper = app(EventTicket::class);
 
-        $product = $I->haveProduct(Laravel5Helper::VIRTUAL_PRODUCT);
+        $product = $I->haveProduct(Bagisto::VIRTUAL_PRODUCT);
         Product::query()->where('id', $product->id)->update(['type' => 'booking']);
 
         $availableTo = Carbon::now()->addMinutes($I->fake()->numberBetween(2, 59));

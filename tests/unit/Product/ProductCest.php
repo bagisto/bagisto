@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Product;
 
+use Helper\Bagisto;
 use UnitTester;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 
@@ -15,12 +16,12 @@ class ProductCest
      */
     public function testProductInventoryUpdation(UnitTester $I): void
     {
-        $product = $I->haveProduct(\Webkul\Core\Helpers\Laravel5Helper::SIMPLE_PRODUCT, [], ['simple']);
+        $product = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, [], ['simple']);
 
         $updatedInventoriesQty = $this->getRandomUpdatedInventoriesQty($I, $product);
 
         app(ProductInventoryRepository::class)->saveInventories([
-            'inventories' => $updatedInventoriesQty
+            'inventories' => $updatedInventoriesQty,
         ], $product);
 
         $product->refresh();
@@ -36,7 +37,7 @@ class ProductCest
      */
     public function testProductInventoriesQty(UnitTester $I): void
     {
-        $product = $I->haveProduct(\Webkul\Core\Helpers\Laravel5Helper::SIMPLE_PRODUCT, [], ['simple']);
+        $product = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, [], ['simple']);
 
         $oldInventoriesQty = $product->inventories->pluck('qty', 'inventory_source_id')->toArray();
 

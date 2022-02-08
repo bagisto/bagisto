@@ -9,7 +9,7 @@ use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderPayment;
-use Webkul\Core\Helpers\Laravel5Helper;
+use Helper\Bagisto;
 
 class OrderCest
 {
@@ -47,7 +47,7 @@ class OrderCest
 
     private function generateCashOnDeliveryOrder(FunctionalTester $I)
     {
-        $product = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, [
+        $product = $I->haveProduct(Bagisto::SIMPLE_PRODUCT, [
             'productAttributes' => [],
             'productInventory'  => [
                 'qty' => 5,

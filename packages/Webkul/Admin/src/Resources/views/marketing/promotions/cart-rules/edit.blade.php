@@ -39,7 +39,6 @@
 
                         <accordian :title="'{{ __('admin::app.promotions.cart-rules.rule-information') }}'" :active="true">
                             <div slot="body">
-
                                 <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                     <label for="name" class="required">{{ __('admin::app.promotions.cart-rules.name') }}</label>
 
@@ -172,13 +171,11 @@
 
                                     <input type="text" class="control" id="sort_order" name="sort_order" value="{{ $cartRule->sort_order }}" {{ $cartRule->sort_order ? 'checked' : '' }}/>
                                 </div>
-
                             </div>
                         </accordian>
 
                         <accordian :title="'{{ __('admin::app.promotions.cart-rules.conditions') }}'" :active="false">
                             <div slot="body">
-
                                 <div class="control-group">
                                     <label for="condition_type">{{ __('admin::app.promotions.cart-rules.condition-type') }}</label>
 
@@ -194,18 +191,16 @@
                                     :key="index"
                                     :index="index"
                                     @onRemoveCondition="removeCondition($event)">
-                                </cart-rule-condition-item>                                
+                                </cart-rule-condition-item>
 
                                 <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px;" @click="addCondition">
                                     {{ __('admin::app.promotions.cart-rules.add-condition') }}
                                 </button>
-
                             </div>
                         </accordian>
 
                         <accordian :title="'{{ __('admin::app.promotions.cart-rules.actions') }}'" :active="false">
                             <div slot="body">
-
                                 <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
                                     <label for="action_type" class="required">{{ __('admin::app.promotions.cart-rules.action-type') }}</label>
 
@@ -307,20 +302,19 @@
                                         </option>
                                     </select>
                                 </div>
-
                             </div>
                         </accordian>
 
                         {!! view_render_event('bagisto.admin.promotions.cart-rules.create.after') !!}
+
+                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.coupon-codes') }}'" :active="false" v-if="coupon_type && use_auto_generation">
+                            <div slot="body">
+                                <create-coupon-form></create-coupon-form>
+                            </div>
+                        </accordian>
                     </div>
                 </div>
             </form>
-
-            <accordian :title="'{{ __('admin::app.promotions.cart-rules.coupon-codes') }}'" :active="false" v-if="coupon_type && use_auto_generation">
-                <div slot="body">
-                    <create-coupon-form></create-coupon-form>
-                </div>
-            </accordian>
         </div>
     </script>
 
@@ -416,29 +410,28 @@
 
     <script type="text/x-template" id="create-coupon-form-template">
         <div class="">
-            <form method="POST" data-vv-scope="create-coupun-form" @submit.prevent="generateCopuns('create-coupun-form')">
-
-                <div class="control-group" :class="[errors.has('create-coupun-form.coupon_qty') ? 'has-error' : '']">
+            <form method="POST" data-vv-scope="create-coupon-form" @submit.prevent="generateCoupons('create-coupon-form')">
+                <div class="control-group" :class="[errors.has('create-coupon-form.coupon_qty') ? 'has-error' : '']">
                     <label for="coupon_qty" class="required">{{ __('admin::app.promotions.cart-rules.coupon-qty') }}</label>
 
                     <input v-validate="'required|min_value:1'" class="control" id="coupon_qty" name="coupon_qty" v-model="coupon_format.coupon_qty" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.coupon-qty') }}&quot;"/>
 
-                    <span class="control-error" v-if="errors.has('create-coupun-form.coupon_qty')">
-                        @{{ errors.first('create-coupun-form.coupon_qty') }}
+                    <span class="control-error" v-if="errors.has('create-coupon-form.coupon_qty')">
+                        @{{ errors.first('create-coupon-form.coupon_qty') }}
                     </span>
                 </div>
 
-                <div class="control-group" :class="[errors.has('create-coupun-form.code_length') ? 'has-error' : '']">
+                <div class="control-group" :class="[errors.has('create-coupon-form.code_length') ? 'has-error' : '']">
                     <label for="code_length" class="required">{{ __('admin::app.promotions.cart-rules.code-length') }}</label>
 
                     <input v-validate="'required|min_value:10'" class="control" id="code_length" name="code_length" v-model="coupon_format.code_length" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.code-length') }}&quot;"/>
 
-                    <span class="control-error" v-if="errors.has('create-coupun-form.code_length')">
-                        @{{ errors.first('create-coupun-form.code_length') }}
+                    <span class="control-error" v-if="errors.has('create-coupon-form.code_length')">
+                        @{{ errors.first('create-coupon-form.code_length') }}
                     </span>
                 </div>
 
-                <div class="control-group" :class="[errors.has('create-coupun-form.code_format') ? 'has-error' : '']">
+                <div class="control-group" :class="[errors.has('create-coupon-form.code_format') ? 'has-error' : '']">
                     <label for="code_format" class="required">{{ __('admin::app.promotions.cart-rules.code-format') }}</label>
 
                     <select class="control" id="code_format" name="code_format" v-model="coupon_format.code_format" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.code-format') }}&quot;">
@@ -447,8 +440,8 @@
                         <option value="numeric">{{ __('admin::app.promotions.cart-rules.numeric') }}</option>
                     </select>
 
-                    <span class="control-error" v-if="errors.has('create-coupun-form.code_format')">
-                        @{{ errors.first('create-coupun-form.code_format') }}
+                    <span class="control-error" v-if="errors.has('create-coupon-form.code_format')">
+                        @{{ errors.first('create-coupon-form.code_format') }}
                     </span>
                 </div>
 
@@ -465,7 +458,6 @@
                 <div class="button-group">
                     <button class="btn btn-xl btn-primary">{{ __('admin::app.promotions.cart-rules.generate') }}</button>
                 </div>
-
             </form>
 
             <div class="content">
@@ -483,19 +475,18 @@
 
             <modal id="downloadDataGrid" :is-open="this.$root.modalIds.downloadDataGrid">
                 <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
+
                 <div slot="body">
                     <export-form></export-form>
                 </div>
             </modal>
 
-            @inject('cartRuleCouponGrid','Webkul\Admin\DataGrids\CartRuleCouponDataGrid')
-
-            {!! $cartRuleCouponGrid->render() !!}
+            <datagrid-plus src="{{ route('admin.cart-rules-coupons.index', $cartRule->id) }}"></datagrid-plus>
         </div>
     </script>
 
     @push('scripts')
-        @include('admin::export.export', ['gridName' => $cartRuleCouponGrid])
+        @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\CartRuleCouponDataGrid')])
     @endpush
 
     <script>
@@ -762,19 +753,19 @@
             },
 
             methods: {
-                generateCopuns: function(formScope) {
+                generateCoupons: function(formScope) {
                     let self = this;
 
                     this.$validator.validateAll(formScope).then(function (result) {
                         if (result) {
-                            self.$http.post("{{ route('admin.cart-rules.generate-coupons', $cartRule->id) }}", self.coupon_format)
+                            self.$http.post("{{ route('admin.cart-rules-coupons.store', $cartRule->id) }}", self.coupon_format)
                                 .then(function(response) {
                                     window.flashMessages = [{
                                         'type': 'alert-success',
                                         'message': response.data.message
                                     }];
 
-                                    self.$root.addFlashMessages()
+                                    self.$root.addFlashMessages();
                                 })
                                 .catch(function (error) {
                                     window.flashMessages = [{
@@ -782,8 +773,8 @@
                                         'message': error.response.data.message
                                     }];
 
-                                    self.$root.addFlashMessages()
-                                })
+                                    self.$root.addFlashMessages();
+                                });
                         }
                     });
                 },

@@ -3,14 +3,12 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Event;
-
+use Webkul\Admin\DataGrids\OrderTransactionsDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Payment\Facades\Payment;
-
+use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
-use Webkul\Sales\Repositories\InvoiceRepository;
 
 class TransactionController extends Controller
 {
@@ -22,21 +20,21 @@ class TransactionController extends Controller
     protected $_config;
 
     /**
-     * OrderRepository object
+     * Order repository instance.
      *
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
-     * OrderRepository object
+     * Order transaction repository instance.
      *
      * @var \Webkul\Sales\Repositories\OrderTransactionRepository
      */
     protected $orderTransactionRepository;
 
     /**
-     * InvoiceRepository object
+     * Invoice repository instance.
      *
      * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
@@ -53,8 +51,7 @@ class TransactionController extends Controller
     public function __construct(
         OrderRepository $orderRepository,
         OrderTransactionRepository $orderTransactionRepository,
-        InvoiceRepository $invoiceRepository)
-    {
+        InvoiceRepository $invoiceRepository) {
         $this->middleware('admin');
 
         $this->_config = request('_config');
@@ -73,6 +70,10 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(OrderTransactionsDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
@@ -84,6 +85,7 @@ class TransactionController extends Controller
     public function create()
     {
         $payment_methods = Payment::getSupportedPaymentMethods();
+
         return view($this->_config['view'], compact('payment_methods'));
     }
 
@@ -94,40 +96,37 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $this->validate(request(), [
+        $this->validate(request(), [
             'invoice_id'     => 'required',
             'payment_method' => 'required',
-            'amount'         => 'required|numeric'
+            'amount'         => 'required|numeric',
         ]);
 
         $invoice = $this->invoiceRepository->where('increment_id', $request->invoice_id)->first();
 
         if ($invoice) {
-
             if ($invoice->state == 'paid') {
                 session()->flash('info', trans('admin::app.sales.transactions.response.already-paid'));
+
                 return redirect(route('admin.sales.transactions.index'));
             }
 
             $order = $this->orderRepository->find($invoice->order_id);
 
-            $data = [
-                "paidAmount" => $request->amount
-            ];
-
             $randomId = random_bytes(20);
-            $transactionId = bin2hex($randomId);
 
-            $transactionData['transaction_id'] = $transactionId;
-            $transactionData['type']           = $request->payment_method;
-            $transactionData['payment_method'] = $request->payment_method;
-            $transactionData['invoice_id']     = $invoice->id;
-            $transactionData['order_id']       = $invoice->order_id;
-            $transactionData['amount']         = $request->amount;
-            $transactionData['status']         = 'paid';
-            $transactionData['data']           = json_encode($data);
-
-            $this->orderTransactionRepository->create($transactionData);
+            $this->orderTransactionRepository->create([
+                'transaction_id' => bin2hex($randomId),
+                'type'           => $request->payment_method,
+                'payment_method' => $request->payment_method,
+                'invoice_id'     => $invoice->id,
+                'order_id'       => $invoice->order_id,
+                'amount'         => $request->amount,
+                'status'         => 'paid',
+                'data'           => json_encode([
+                    'paidAmount' => $request->amount,
+                ]),
+            ]);
 
             $transactionTotal = $this->orderTransactionRepository->where('invoice_id', $invoice->id)->sum('amount');
 
@@ -140,16 +139,17 @@ class TransactionController extends Controller
                     $this->orderRepository->updateOrderStatus($order, 'processing');
                 }
 
-                $this->invoiceRepository->updateState($invoice, "paid");
+                $this->invoiceRepository->updateState($invoice, 'paid');
             }
 
             session()->flash('success', trans('admin::app.sales.transactions.response.transaction-saved'));
-            return redirect(route('admin.sales.transactions.index'));
 
-        } else {
-            session()->flash('error', trans('admin::app.sales.transactions.response.invoice-missing'));
-            return redirect()->back();
+            return redirect(route('admin.sales.transactions.index'));
         }
+
+        session()->flash('error', trans('admin::app.sales.transactions.response.invoice-missing'));
+
+        return redirect()->back();
     }
 
     /**
@@ -170,12 +170,13 @@ class TransactionController extends Controller
     }
 
     /**
-     * Convert Transaction Details Data into single Dim Array.
+     * Convert transaction details data into single dim array.
      *
      * @param array $data
      * @return array
-    */
-    public function convertIntoSingleDimArray($transData) {
+     */
+    public function convertIntoSingleDimArray($transData)
+    {
         static $detailsData = [];
 
         foreach ($transData as $key => $data) {

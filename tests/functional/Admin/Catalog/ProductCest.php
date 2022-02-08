@@ -4,12 +4,11 @@ namespace Tests\Functional\Admin\Catalog;
 
 use Faker\Factory;
 use FunctionalTester;
-use Webkul\Core\Models\Locale;
-use Webkul\Product\Models\Product;
 use Webkul\Attribute\Models\Attribute;
-use Webkul\Core\Helpers\Laravel5Helper;
 use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Attribute\Models\AttributeOption;
+use Webkul\Core\Models\Locale;
+use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
 
 class ProductCest
@@ -73,14 +72,13 @@ class ProductCest
 
     public function testIndex(FunctionalTester $I): void
     {
-        $product = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, [], ['simple']);
-
         $I->loginAsAdmin();
 
         $I->amOnAdminRoute('admin.catalog.products.index');
         $I->seeCurrentRouteIs('admin.catalog.products.index');
-        
-        $I->see("{$product->id}", '//script[@type="text/x-template"]');        
+
+        $I->sendAjaxGetRequest(route('admin.catalog.products.index'));
+        $I->seeResponseCodeIsSuccessful();
     }
 
     public function selectEmptyAttributeOptionOnProductCreation(FunctionalTester $I): void
@@ -131,13 +129,13 @@ class ProductCest
         $productAttribute = $I->grabRecord(ProductAttributeValue::class, [
             'product_id'    => $product->id,
             'attribute_id'  => $this->attributeBrand->id,
-            'integer_value' => $this->attributeBrandDefaultOption->id
+            'integer_value' => $this->attributeBrandDefaultOption->id,
         ]);
 
         $I->seeRecord(ProductAttributeValue::class, [
             'product_id'    => $product->id,
             'attribute_id'  => $this->attributeBrand->id,
-            'integer_value' => $this->attributeBrandDefaultOption->id
+            'integer_value' => $this->attributeBrandDefaultOption->id,
         ]);
 
         $I->assertNull($productAttribute->text_value);

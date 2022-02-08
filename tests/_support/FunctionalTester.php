@@ -9,6 +9,7 @@ use Webkul\User\Models\Admin;
 
 /**
  * Inherited methods.
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -29,8 +30,8 @@ class FunctionalTester extends Actor
     /**
      * Set the logged in user to the admin identity.
      *
-     * @param  \Webkul\User\Models\Admin|null $admin
-     * @return Admin
+     * @param  \Webkul\User\Models\Admin|null  $admin
+     * @return \Webkul\User\Models\Admin
      *
      * @throws \Exception
      */
@@ -58,8 +59,8 @@ class FunctionalTester extends Actor
     /**
      * Set the logged in user to the customer identity.
      *
-     * @param \Webkul\User\Models\Customer|null $customer
-     * @return Customer
+     * @param  \Webkul\User\Models\Customer|null  $customer
+     * @return \Webkul\Customer\Models\Customer
      *
      * @throws \Exception
      */
@@ -101,11 +102,11 @@ class FunctionalTester extends Actor
     }
 
     /**
-     * Set specific Webkul/Core configuration keys to a given value.
+     * Set specific `Webkul/Core` configuration keys to a given value.
      *
      * TODO: Change method as soon as there is a method to set core config data.
      *
-     * @param  $data array containing 'code => value' pairs
+     * @param  array  $data
      * @return void
      */
     public function setConfigData($data): void

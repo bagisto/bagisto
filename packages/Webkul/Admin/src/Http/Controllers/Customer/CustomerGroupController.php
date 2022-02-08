@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Customer;
 
+use Webkul\Admin\DataGrids\CustomerGroupDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 
@@ -43,6 +44,10 @@ class CustomerGroupController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(CustomerGroupDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

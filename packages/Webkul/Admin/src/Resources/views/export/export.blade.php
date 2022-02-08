@@ -1,6 +1,5 @@
 <script type="text/x-template" id="export-form-template">
     <form method="POST" action="{{ route('admin.datagrid.export', ['locale' => core()->getRequestedLocaleCode()]) }}" @submit.prevent="onSubmit">
-
         <div class="page-content">
             <div class="form-container">
                 @csrf()
@@ -23,7 +22,6 @@
         <button type="submit" class="btn btn-lg btn-primary">
             {{ __('admin::app.export.export') }}
         </button>
-
     </form>
 </script>
 
@@ -33,11 +31,12 @@
 
         methods: {
             onSubmit: function(e) {
-                var this_this = this;
+                var self = this;
+
                 e.target.submit();
 
                 setTimeout(function() {
-                    this_this.$root.$set(this_this.$root.modalIds, 'downloadDataGrid', false);
+                    self.$root.$set(self.$root.modalIds, 'downloadDataGrid', false);
                 }, 0);
             }
         }
