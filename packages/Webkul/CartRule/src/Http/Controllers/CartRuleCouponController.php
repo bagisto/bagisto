@@ -43,7 +43,6 @@ class CartRuleCouponController extends Controller
      */
     public function store($id)
     {
-        dd('here');
         $this->validate(request(), [
             'coupon_qty'  => 'required|integer|min:1',
             'code_length' => 'required|integer|min:10',
