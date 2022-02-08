@@ -100,8 +100,10 @@ class LocaleRepository extends Repository
                     Storage::delete($locale->locale_image);
                 }
 
-                $locale->locale_image = request()->file($file)->store($dir);
-                $locale->save();
+                if (request()->hasFile($file)) {
+                    $locale->locale_image = request()->file($file)->store($dir);
+                    $locale->save();
+                }
             }
         } else {
             if ($locale->locale_image) {

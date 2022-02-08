@@ -1419,7 +1419,7 @@ return [
                 'new-invoice'                                      => 'Send a notification e-mail after creating a new invoice',
                 'new-refund'                                       => 'Send a notification e-mail after creating a refund',
                 'new-shipment'                                     => 'Send a notification e-mail after creating a shipment',
-                'new-inventory-source'                             => 'Send a notification e-email after creating a new inventory source',
+                'new-inventory-source'                             => 'Send a notification e-mail after creating a new inventory source',
                 'cancel-order'                                     => 'Send a notification after canceling an order',
             ],
 
