@@ -4,7 +4,7 @@
 
     $locale = core()->getRequestedLocaleCode();
 
-    $attributeOptionTranslations = app('\Webkul\Attribute\Repositories\AttributeOptionTranslationRepository')->where('locale', $locale)->get()->toJson();
+    $attributeOptionTranslations = app('\Webkul\Attribute\Repositories\AttributeOptionTranslationRepository')->where('locale', $locale)->get();
 @endphp
 
 @push('scripts')
@@ -127,7 +127,7 @@
                                                     <img
                                                         class="image-wrapper"
                                                         onload="window.updateHeight ? window.updateHeight() : ''"
-                                                        :src="'storage/' + product.product['{{ $attribute['code'] }}']"
+                                                        :src="storageUrl + product.product['{{ $attribute['code'] }}']"
                                                         :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`"
                                                         alt=""/>
                                                 </a>
@@ -162,10 +162,11 @@
             data: function () {
                 return {
                     'products': [],
-                    'isProductListLoaded': false,
-                    'attributeOptions': JSON.parse(@json($attributeOptionTranslations)),
+                    'storageUrl': '{{ Storage::url('/') }}',
                     'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
-                }
+                    'isProductListLoaded': false,
+                    'attributeOptions': @json($attributeOptionTranslations),
+                };
             },
 
             mounted: function () {
@@ -208,7 +209,6 @@
                     } else {
                         this.isProductListLoaded = true;
                     }
-
                 },
 
                 'removeProductCompare': function (productId) {
