@@ -24,8 +24,8 @@
                     <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-6 col-md-12 no-padding">
                         <img
                             class="full-width {{ $isLazyLoad ? 'lazyload' : '' }}"
-                            @if (! $isLazyLoad) src="{{ asset('/storage/' . $advertisementThree[0]) }}" @endif
-                            data-src="{{ asset('/storage/' . $advertisementThree[0]) }}" alt="" />
+                            @if (! $isLazyLoad) src="{{ Storage::url($advertisementThree[0]) }}" @endif
+                            data-src="{{ Storage::url($advertisementThree[0]) }}" alt="" />
                     </a>
                 @endif
 
@@ -34,16 +34,16 @@
                         <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
                             <img
                                 class="col-12 pr0 {{ $isLazyLoad ? 'lazyload' : '' }}"
-                                @if (! $isLazyLoad) src="{{ asset('/storage/' . $advertisementThree[1]) }}" @endif
-                                data-src="{{ asset('/storage/' . $advertisementThree[1]) }}" alt="" />
+                                @if (! $isLazyLoad) src="{{ Storage::url($advertisementThree[1]) }}" @endif
+                                data-src="{{ Storage::url($advertisementThree[1]) }}" alt="" />
                         </a>
                     @endif
                     @if ( isset($advertisementThree[2]))
                         <a @if (isset($three)) href="{{ $three }}" @endif class="row bottom-container">
                             <img
                                 class="col-12 pr0 {{ $isLazyLoad ? 'lazyload' : '' }}"
-                                @if (! $isLazyLoad) src="{{ asset('/storage/' . $advertisementThree[2]) }}" @endif
-                                data-src="{{ asset('/storage/' . $advertisementThree[2]) }}" alt="" />
+                                @if (! $isLazyLoad) src="{{ Storage::url($advertisementThree[2]) }}" @endif
+                                data-src="{{ Storage::url($advertisementThree[2]) }}" alt="" />
                         </a>
                     @endif
                 </div>
