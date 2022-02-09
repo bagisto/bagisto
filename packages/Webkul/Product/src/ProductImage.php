@@ -138,6 +138,15 @@ class ProductImage extends AbstractProduct
      */
     private function getCachedImageUrls($path): array
     {
+        if (config('filesystems.default') !== 'public') {
+            return [
+                'small_image_url'    => Storage::url($path),
+                'medium_image_url'   => Storage::url($path),
+                'large_image_url'    => Storage::url($path),
+                'original_image_url' => Storage::url($path),
+            ];
+        }
+
         return [
             'small_image_url'    => url('cache/small/' . $path),
             'medium_image_url'   => url('cache/medium/' . $path),
