@@ -1,9 +1,12 @@
 <template>
-    <div class="col-lg-3 col-md-12 hot-category-wrapper" v-if="hotCategoryDetails">
+    <div
+        class="col-lg-3 col-md-12 hot-category-wrapper"
+        v-if="hotCategoryDetails"
+    >
         <div class="card">
             <div class="row velocity-divide-page">
                 <div class="left">
-                    <img :src="`${$root.baseUrl}/storage/${hotCategoryDetails.category_icon_path}`" alt="" />
+                    <img :src="hotCategoryDetails.category_icon_url" alt="" />
                 </div>
 
                 <div class="right">
@@ -14,8 +17,16 @@
                     </h3>
 
                     <ul type="none">
-                        <li :key="index" v-for="(subCategory, index) in hotCategoryDetails.children">
-                            <a :href="`${slug}/${subCategory.slug}`" class="remove-decoration normal-text">
+                        <li
+                            :key="index"
+                            v-for="(
+                                subCategory, index
+                            ) in hotCategoryDetails.children"
+                        >
+                            <a
+                                :href="`${slug}/${subCategory.slug}`"
+                                class="remove-decoration normal-text"
+                            >
                                 {{ subCategory.name }}
                             </a>
                         </li>
@@ -27,32 +38,31 @@
 </template>
 
 <script>
-    export default {
-        props: [
-            'slug'
-        ],
+export default {
+    props: ['slug'],
 
-        data: function () {
-            return {
-                'hotCategoryDetails': null
-            }
-        },
+    data: function () {
+        return {
+            hotCategoryDetails: null,
+        };
+    },
 
-        mounted: function () {
-            this.getHotCategories();
-        },
+    mounted: function () {
+        this.getHotCategories();
+    },
 
-        methods: {
-            'getHotCategories': function () {
-                this.$http.get(`${this.baseUrl}/fancy-category-details/${this.slug}`)
-                .then(response => {
+    methods: {
+        getHotCategories: function () {
+            this.$http
+                .get(`${this.baseUrl}/fancy-category-details/${this.slug}`)
+                .then((response) => {
                     if (response.data.status)
                         this.hotCategoryDetails = response.data.categoryDetails;
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.log('something went wrong');
-                })
-            }
-        }
-    }
+                });
+        },
+    },
+};
 </script>
