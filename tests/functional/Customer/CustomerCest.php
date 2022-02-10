@@ -2,6 +2,7 @@
 
 namespace Tests\Functional\Customer;
 
+use Actions\CleanAction;
 use Faker\Factory;
 use FunctionalTester;
 use Webkul\Customer\Models\Customer;
@@ -9,6 +10,8 @@ use Webkul\Customer\Models\CustomerAddress;
 
 class CustomerCest
 {
+    use CleanAction;
+
     /**
      * Faker factory.
      *
@@ -185,29 +188,5 @@ class CustomerCest
             'postcode'     => $this->faker->postcode,
             'phone'        => $this->faker->phoneNumber,
         ]);
-    }
-
-    /**
-     * Clean all fields.
-     *
-     * @param  array  $fields
-     * @return array
-     */
-    private function cleanAllFields(array $fields)
-    {
-        return collect($fields)->map(function ($field, $key) {
-            return $this->cleanField($field);
-        })->toArray();
-    }
-
-    /**
-     * Clean fields.
-     *
-     * @param  string $field
-     * @return string
-     */
-    private function cleanField($field)
-    {
-        return preg_replace('/[^A-Za-z0-9 ]/', '', $field);
     }
 }

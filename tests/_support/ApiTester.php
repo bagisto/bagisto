@@ -1,6 +1,7 @@
 <?php
 
 use Actions\CartAction;
+use Actions\CleanAction;
 use Actions\ProductAction;
 use Actions\ProductActionContract;
 use Laravel\Sanctum\Sanctum;
@@ -24,7 +25,7 @@ use Webkul\Customer\Models\Customer;
  */
 class ApiTester extends \Codeception\Actor implements ProductActionContract
 {
-    use _generated\ApiTesterActions, CartAction, ProductAction;
+    use _generated\ApiTesterActions, CartAction, CleanAction, ProductAction;
 
     /**
      * Sanctum authenticated customer.
@@ -114,29 +115,5 @@ class ApiTester extends \Codeception\Actor implements ProductActionContract
         $idAndToken = explode('|', $idAndToken);
 
         return $idAndToken[1];
-    }
-
-    /**
-     * Clean all fields.
-     *
-     * @param  array  $fields
-     * @return array
-     */
-    public function cleanAllFields(array $fields)
-    {
-        return collect($fields)->map(function ($field, $key) {
-            return $this->cleanField($field);
-        })->toArray();
-    }
-
-    /**
-     * Clean field.
-     *
-     * @param  string  $field
-     * @return string
-     */
-    public function cleanField($field)
-    {
-        return preg_replace('/[^A-Za-z0-9 ]/', '', $field);
     }
 }
