@@ -1,5 +1,6 @@
 <?php
 
+use Actions\CleanAction;
 use Codeception\Actor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +26,7 @@ use Webkul\User\Models\Admin;
  */
 class FunctionalTester extends Actor
 {
-    use _generated\FunctionalTesterActions;
+    use _generated\FunctionalTesterActions, CleanAction;
 
     /**
      * Set the logged in user to the admin identity.
