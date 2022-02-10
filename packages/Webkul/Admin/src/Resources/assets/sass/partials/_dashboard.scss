@@ -197,18 +197,28 @@
 
 #date-start {
     display: block;
-    width: 337px;
+    width: 100%;
     margin-top: 40px;
+    margin-left: -20px;
+
+    .control-group {
+        width: 100%;
+    }
 }
 
 #date-end {
     display: block;
-    width: 337px;
+    width: 100%;
+    margin-left: -20px;
+
+    .control-group {
+        width: 100%;
+    }
 }
 
 #date-submit {
     display: block;
-    width: 337px;
+    width: 100%;
     margin-top: 15px;
 }
 
@@ -227,6 +237,13 @@
     #calender-mobile span {
         right: unset;
         left: 4px;
+    }
+
+    .start-date:after,
+    .end-date:after {
+        margin-left: 0px;
+        top: 43%;
+        left: 12px;
     }
 }
 
