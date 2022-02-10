@@ -175,16 +175,16 @@
     }
 }
 
-#calender-destop{
+#calender-destop {
     display: block;
 }
 
-#calender-mobile{
+#calender-mobile {
     position: relative;
     display: none;
 }
 
-#calender-mobile span{
+#calender-mobile span {
     background-image: url(../images/Icon-Calendar.svg);
     width: 24px;
     height: 24px;
@@ -195,21 +195,21 @@
     right: 4px;
 }
 
-#date-start{
-    display:block;
+#date-start {
+    display: block;
     width: 337px;
-    margin-top:40px;
+    margin-top: 40px;
 }
 
-#date-end{
-    display:block;
+#date-end {
+    display: block;
     width: 337px;
 }
 
-#date-submit{
-    display:block;
+#date-submit {
+    display: block;
     width: 337px;
-    margin-top:15px;
+    margin-top: 15px;
 }
 
 .rtl {
@@ -223,46 +223,51 @@
             }
         }
     }
+
+    #calender-mobile span {
+        right: unset;
+        left: 4px;
+    }
 }
 
 // responsive css for modal
 @media only screen and (max-width: 770px) {
 
-    .dashboard { 
+    .dashboard {
 
         .card {
             padding: 10px 0px 0px 15px;
             overflow: auto;
             margin-bottom: 20px;
         }
-        
+
         .sale-stock {
             display: block;
             margin-top: 30px;
-            margin-bottom:10px;
+            margin-bottom: 10px;
         }
-        
-        .graph-stats {               
+
+        .graph-stats {
             .left-card-container {
                 float: left;
                 width: 100%;
                 padding-right: 0px;
                 margin-bottom: 10px;
             }
-    
+
             .right-card-container {
                 float: left;
                 width: 100%;
                 padding-left: 0px;
             }
-        }   
-    } 
-    
-    #calender-mobile{
+        }
+    }
+
+    #calender-mobile {
         display: block;
     }
 
-    #calender-destop{
+    #calender-destop {
         display: none;
     }
 }
