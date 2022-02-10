@@ -43,7 +43,7 @@
 
             {!! view_render_event('bagisto.admin.layout.nav-left.after') !!}
 
-            <div :class="isMenuOpen ? 'content-container padding-container-navbar-expand' : 'content-container padding-container-navbar-not-expand'">
+            <div class="content-container" :class="isMenuOpen ? 'padding-container-navbar-expand' : 'padding-container-navbar-not-expand'">
 
                 {!! view_render_event('bagisto.admin.layout.content.before') !!}
 
