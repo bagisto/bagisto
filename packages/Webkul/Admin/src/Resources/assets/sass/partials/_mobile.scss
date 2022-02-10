@@ -317,4 +317,16 @@ $toggleColor: #3c41ff;
       padding-right: 0 !important;
     }
   }
+
+  .control-group {
+
+    &.date,
+    &.datetime {
+
+      &::after {
+        margin-right: -34px;
+        right: 100% !important;
+      }
+    }
+  }
 }
