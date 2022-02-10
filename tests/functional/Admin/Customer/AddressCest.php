@@ -2,14 +2,11 @@
 
 namespace Tests\Functional\Admin\Customer;
 
-use Actions\CleanAction;
 use FunctionalTester;
 use Webkul\Customer\Models\Customer;
 
 class AddressCest
 {
-    use CleanAction;
-
     /**
      * Test address index page.
      *
@@ -68,7 +65,7 @@ class AddressCest
      */
     private function generateAddressData(FunctionalTester $I)
     {
-        return $this->cleanAllFields([
+        return $I->cleanAllFields([
             'first_name' => $I->fake()->firstName,
             'last_name'  => $I->fake()->lastName,
             'address1'   => $I->fake()->streetAddress,

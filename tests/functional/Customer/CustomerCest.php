@@ -2,7 +2,6 @@
 
 namespace Tests\Functional\Customer;
 
-use Actions\CleanAction;
 use Faker\Factory;
 use FunctionalTester;
 use Webkul\Customer\Models\Customer;
@@ -10,8 +9,6 @@ use Webkul\Customer\Models\CustomerAddress;
 
 class CustomerCest
 {
-    use CleanAction;
-
     /**
      * Faker factory.
      *
@@ -59,8 +56,8 @@ class CustomerCest
     public function updateCustomerProfile(FunctionalTester $I): void
     {
         $customer = $I->loginAsCustomer();
-        $customer->first_name = $this->cleanField($customer->first_name);
-        $customer->last_name = $this->cleanField($customer->last_name);
+        $customer->first_name = $I->cleanField($customer->first_name);
+        $customer->last_name = $I->cleanField($customer->last_name);
         $customer->save();
 
         $I->amOnPage('/');
@@ -95,7 +92,7 @@ class CustomerCest
         $I->click('Address');
         $I->click('Add Address');
 
-        $this->setFields();
+        $this->setFields($I);
 
         foreach ($this->fields as $key => $value) {
             /**
@@ -134,7 +131,7 @@ class CustomerCest
         $I->click('Edit');
 
         $oldcompany = $this->fields['company_name'];
-        $this->fields['company_name'] = $this->cleanField($this->faker->company);
+        $this->fields['company_name'] = $I->cleanField($this->faker->company);
 
         $I->submitForm($formCssSelector, $this->fields);
 
@@ -172,11 +169,12 @@ class CustomerCest
     /**
      * Set fields.
      *
+     * @param  FunctionalTester  $I
      * @return void
      */
-    private function setFields()
+    private function setFields(FunctionalTester $I)
     {
-        $this->fields = $this->cleanAllFields([
+        $this->fields = $I->cleanAllFields([
             'company_name' => $this->faker->company,
             'first_name'   => $this->faker->firstName,
             'last_name'    => $this->faker->lastName,
