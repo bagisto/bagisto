@@ -138,7 +138,7 @@ class ProductImage extends AbstractProduct
      */
     private function getCachedImageUrls($path): array
     {
-        if (config('filesystems.default') !== 'public') {
+        if (! $this->isDriverLocal()) {
             return [
                 'small_image_url'    => Storage::url($path),
                 'medium_image_url'   => Storage::url($path),
@@ -168,5 +168,15 @@ class ProductImage extends AbstractProduct
             'large_image_url'    => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.webp'),
             'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.webp'),
         ];
+    }
+
+    /**
+     * Is driver local.
+     *
+     * @return bool
+     */
+    private function isDriverLocal(): bool
+    {
+        return Storage::getAdapter() instanceof \League\Flysystem\Adapter\Local;
     }
 }
