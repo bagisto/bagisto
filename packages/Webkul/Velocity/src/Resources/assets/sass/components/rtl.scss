@@ -20,7 +20,6 @@ body {
 
         header {
             #search-form {
-
                 #header-search-icon {
                     float: right;
                     border-radius: 2px 0px 0px 2px;
@@ -69,7 +68,8 @@ body {
             .left-wrapper {
                 float: left;
 
-                .compare-btn, .wishlist-btn {
+                .compare-btn,
+                .wishlist-btn {
                     .badge-container {
                         .badge {
                             top: -28px;
@@ -103,9 +103,7 @@ body {
             }
         }
 
-        .main-content-wrapper
-        .vc-header
-        .mini-cart-container {
+        .main-content-wrapper .vc-header .mini-cart-container {
             #mini-cart {
                 .badge {
                     top: -6px;
@@ -199,7 +197,7 @@ body {
             }
         }
 
-        .category-list-container{
+        .category-list-container {
             .sub-categories {
                 left: -100%;
             }
@@ -244,7 +242,7 @@ body {
         }
 
         .filter-attributes-item {
-            input[type=checkbox] {
+            input[type='checkbox'] {
                 + span {
                     margin-right: 10px;
                 }
@@ -285,6 +283,10 @@ body {
 
                 .account-table-content {
                     .address-holder {
+                        .card-link + .card-link {
+                            margin-right: 1.25rem;
+                        }
+
                         > div {
                             padding-right: 0px;
                             padding-left: 15px;
@@ -313,7 +315,8 @@ body {
                 .info {
                     margin-right: 0px;
 
-                    > h2, div {
+                    > h2,
+                    div {
                         padding-right: 0px;
                     }
 
@@ -338,8 +341,8 @@ body {
             right: 100% !important;
         }
 
-        .modal-footer>:not(:last-child) {
-            margin-left: .25rem;
+        .modal-footer > :not(:last-child) {
+            margin-left: 0.25rem;
         }
 
         .compare-products {
@@ -448,7 +451,7 @@ body {
             padding-right: 10px !important;
         }
         .rango-arrow-right::before {
-            content: "\E907";
+            content: '\E907';
         }
         .styled-select {
             + .select-icon-container {
@@ -477,7 +480,6 @@ body {
 }
 
 @media only screen and (max-width: 1192px) {
-
 }
 
 @media only screen and (max-width: 992px) {
