@@ -109,13 +109,6 @@ return [
                 'validation'    => 'required',
                 'channel_based' => false,
                 'locale_based'  => true,
-            ], [
-                'name'          => 'is_calculate_tax',
-                'title'         => 'admin::app.admin.system.calculate-tax',
-                'type'          => 'boolean',
-                'validation'    => 'required',
-                'channel_based' => false,
-                'locale_based'  => false,
             ],
         ],
     ], [
@@ -165,13 +158,6 @@ return [
                 'validation'    => 'required',
                 'channel_based' => false,
                 'locale_based'  => true,
-            ], [
-                'name'          => 'is_calculate_tax',
-                'title'         => 'admin::app.admin.system.calculate-tax',
-                'type'          => 'boolean',
-                'validation'    => 'required',
-                'channel_based' => false,
-                'locale_based'  => false,
             ],
         ],
     ],

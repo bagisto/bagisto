@@ -569,22 +569,11 @@ class Cart
             $item = $this->setItemTaxToZero($item);
 
             Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use ($cart, $item) {
-                /* assigning tax percent */
                 $item->tax_percent = $rate->tax_rate;
 
-                /* getting shipping rate for tax calculation */
-                $shippingPrice = $shippingBasePrice = 0;
+                $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
 
-                if ($shipping = $cart->selected_shipping_rate) {
-                    if ($shipping->is_calculate_tax) {
-                        $shippingPrice = $shipping->price - $shipping->discount_amount;
-                        $shippingBasePrice = $shipping->base_price - $shipping->base_discount_amount;
-                    }
-                }
-
-                /* now assigning shipping prices for tax calculation */
-                $item->tax_amount = round((($item->total + $shippingPrice) * $rate->tax_rate) / 100, 4);
-                $item->base_tax_amount = round((($item->base_total + $shippingBasePrice) * $rate->tax_rate) / 100, 4);
+                $item->base_tax_amount = round(($item->base_total * $rate->tax_rate) / 100, 4);
             });
 
             $item->save();
