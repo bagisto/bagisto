@@ -106,3 +106,9 @@
     position: absolute;
     top: 14%;
 }
+
+.rtl{
+    #date-of-birth:after{
+        left: 54px;
+    }
+}

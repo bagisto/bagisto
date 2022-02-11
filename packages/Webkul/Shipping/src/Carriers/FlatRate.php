@@ -51,7 +51,6 @@ class FlatRate extends AbstractShipping
         $cartShippingRate->method = $this->getMethod();
         $cartShippingRate->method_title = $this->getConfigData('title');
         $cartShippingRate->method_description = $this->getConfigData('description');
-        $cartShippingRate->is_calculate_tax = $this->getConfigData('is_calculate_tax');
         $cartShippingRate->price = 0;
         $cartShippingRate->base_price = 0;
 
