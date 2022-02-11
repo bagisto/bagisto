@@ -165,15 +165,11 @@ class SliderController extends Controller
         try {
             $this->sliderRepository->delete($id);
 
-            return response()->json([
-                'message' => trans('admin::app.response.delete-success', ['name' => 'Slider']),
-            ], 200);
+            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Slider'])]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'Slider']),
-        ], 500);
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Slider'])], 500);
     }
 }

@@ -123,19 +123,15 @@ class LocaleController extends Controller
         $this->localeRepository->findOrFail($id);
 
         if ($this->localeRepository->count() == 1) {
-            session()->flash('warning', trans('admin::app.settings.locales.last-delete-error'));
-        } else {
-            try {
-                $this->localeRepository->delete($id);
-
-                session()->flash('success', trans('admin::app.settings.locales.delete-success'));
-
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Locale']));
-            }
+            return response()->json(['message' => trans('admin::app.settings.locales.last-delete-error')], 400);
         }
 
-        return response()->json(['message' => false], 400);
+        try {
+            $this->localeRepository->delete($id);
+
+            return response()->json(['message' => trans('admin::app.settings.locales.delete-success')]);
+        } catch (\Exception $e) {}
+
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Locale'])], 500);
     }
 }

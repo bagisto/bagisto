@@ -149,26 +149,22 @@ class UserController extends Controller
         $this->adminRepository->findOrFail($id);
 
         if ($this->adminRepository->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Admin']));
-        } else {
-            if (auth()->guard('admin')->user()->id == $id) {
-                return response()->json([
-                    'redirect' => route('super.users.confirm', ['id' => $id]),
-                ]);
-            }
-
-            try {
-                $this->adminRepository->delete($id);
-
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Admin']));
-
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Admin']));
-            }
+            return response()->json(['message' => trans('admin::app.response.last-delete-error', ['name' => 'Admin'])], 400);
         }
 
-        return response()->json(['message' => false], 400);
+        if (auth()->guard('admin')->user()->id == $id) {
+            return response()->json([
+                'redirect' => route('super.users.confirm', ['id' => $id]),
+            ]);
+        }
+
+        try {
+            $this->adminRepository->delete($id);
+
+            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Admin'])]);
+        } catch (\Exception $e) {}
+
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Admin'])], 500);
     }
 
     /**

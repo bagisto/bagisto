@@ -121,21 +121,18 @@ class CurrencyController extends Controller
         $this->currencyRepository->findOrFail($id);
 
         if ($this->currencyRepository->count() == 1) {
-            session()->flash('warning', trans('admin::app.settings.currencies.last-delete-error'));
-        } else {
-            try {
-                $this->currencyRepository->delete($id);
-
-                session()->flash('success', trans('admin::app.settings.currencies.delete-success'));
-
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                report($e);
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Currency']));
-            }
+            return response()->json(['message' => trans('admin::app.settings.currencies.last-delete-error')], 400);
         }
 
-        return response()->json(['message' => false], 400);
+        try {
+            $this->currencyRepository->delete($id);
+
+            return response()->json(['message' => trans('admin::app.settings.currencies.delete-success')]);
+        } catch (\Exception $e) {
+            report($e);
+        }
+
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Currency'])], 500);
     }
 
     /**

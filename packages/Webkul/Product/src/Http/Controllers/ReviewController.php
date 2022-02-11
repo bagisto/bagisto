@@ -90,16 +90,12 @@ class ReviewController extends Controller
         try {
             $this->productReviewRepository->delete($id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Review']));
-
-            return response()->json(['message' => true], 200);
+            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Review'])]);
         } catch (\Exception $e) {
             report($e);
-
-            session()->flash('success', trans('admin::app.response.delete-failed', ['name' => 'Review']));
         }
 
-        return response()->json(['message' => false], 400);
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Review'])], 500);
     }
 
     /**

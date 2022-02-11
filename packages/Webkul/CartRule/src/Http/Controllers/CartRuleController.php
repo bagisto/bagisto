@@ -212,13 +212,9 @@ class CartRuleController extends Controller
         try {
             $this->cartRuleRepository->delete($id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Cart Rule']));
+            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Cart Rule'])]);
+        } catch (Exception $e) {}
 
-            return response()->json(['message' => true], 200);
-        } catch (Exception $e) {
-            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Cart Rule']));
-        }
-
-        return response()->json(['message' => false], 400);
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Cart Rule'])], 400);
     }
 }

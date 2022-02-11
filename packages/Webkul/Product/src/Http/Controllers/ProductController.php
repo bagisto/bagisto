@@ -354,7 +354,7 @@ class ProductController extends Controller
 
             return response()->json([
                 'message' => trans('admin::app.response.delete-success', ['name' => 'Product']),
-            ], 200);
+            ]);
         } catch (Exception $e) {
             report($e);
         }

@@ -140,20 +140,18 @@ class AttributeController extends Controller
         $attribute = $this->attributeRepository->findOrFail($id);
 
         if (! $attribute->is_user_defined) {
-            session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
-        } else {
-            try {
-                $this->attributeRepository->delete($id);
-
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Attribute']));
-
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Attribute']));
-            }
+            return response()->json([
+                'message' => trans('admin::app.response.user-define-error', ['name' => 'Attribute']),
+            ], 400);
         }
 
-        return response()->json(['message' => false], 400);
+        try {
+            $this->attributeRepository->delete($id);
+
+            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Attribute'])]);
+        } catch (\Exception $e) {}
+
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Attribute'])], 500);
     }
 
     /**

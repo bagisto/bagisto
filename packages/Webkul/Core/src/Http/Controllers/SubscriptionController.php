@@ -104,15 +104,11 @@ class SubscriptionController extends Controller
         try {
             $this->subscribersListRepository->delete($id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Subscriber']));
-
-            return response()->json(['message' => true], 200);
+            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Subscriber'])]);
         } catch (\Exception $e) {
             report($e);
-
-            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Subscriber']));
         }
 
-        return response()->json(['message' => false], 400);
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Subscriber'])], 500);
     }
 }

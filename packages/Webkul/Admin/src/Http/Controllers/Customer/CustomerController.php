@@ -200,24 +200,16 @@ class CustomerController extends Controller
         $customer = $this->customerRepository->findorFail($id);
 
         try {
-
             if (! $this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
-
                 $this->customerRepository->delete($id);
-            } else {
 
-                session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customer']));
-                return response()->json(['message' => false], 400);
+                return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Customer'])]);
             }
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
-            return response()->json(['message' => true], 200);
-        } catch (\Exception $e) {
+            return response()->json(['message' => trans('admin::app.response.order-pending', ['name' => 'Customer'])], 400);
+        } catch (\Exception $e) {}
 
-            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
-        }
-
-        return response()->json(['message' => false], 400);
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Customer'])], 400);
     }
 
     /**

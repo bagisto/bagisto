@@ -128,21 +128,23 @@ class CustomerGroupController extends Controller
         $customerGroup = $this->customerGroupRepository->findOrFail($id);
 
         if ($customerGroup->is_user_defined == 0) {
-            session()->flash('warning', trans('admin::app.customers.customers.group-default'));
-        } elseif (count($customerGroup->customers) > 0) {
-            session()->flash('warning', trans('admin::app.response.customer-associate', ['name' => 'Customer Group']));
-        } else {
-            try {
-                $this->customerGroupRepository->delete($id);
-
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer Group']));
-
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer Group']));
-            }
+            return response()->json([
+                'message' => trans('admin::app.customers.customers.group-default'),
+            ], 400);
         }
 
-        return response()->json(['message' => false], 400);
+        if (count($customerGroup->customers) > 0) {
+            return response()->json([
+                'message' => trans('admin::app.response.customer-associate', ['name' => 'Customer Group']),
+            ], 400);
+        }
+
+        try {
+            $this->customerGroupRepository->delete($id);
+
+            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Customer Group'])]);
+        } catch (\Exception $e) {}
+
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Customer Group'])], 500);
     }
 }
