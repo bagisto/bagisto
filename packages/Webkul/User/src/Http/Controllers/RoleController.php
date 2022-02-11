@@ -149,21 +149,19 @@ class RoleController extends Controller
         $role = $this->roleRepository->findOrFail($id);
 
         if ($role->admins->count() >= 1) {
-            session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
-        } else if ($this->roleRepository->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
-        } else {
-            try {
-                $this->roleRepository->delete($id);
-
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Role']));
-
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Role']));
-            }
+            return response()->json(['message' => trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User'])], 400);
         }
 
-        return response()->json(['message' => false], 400);
+        if ($this->roleRepository->count() == 1) {
+            return response()->json(['message' => trans('admin::app.response.last-delete-error', ['name' => 'Role'])], 400);
+        }
+
+        try {
+            $this->roleRepository->delete($id);
+
+            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Role'])]);
+        } catch (\Exception $e) {}
+
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Role'])], 500);
     }
 }

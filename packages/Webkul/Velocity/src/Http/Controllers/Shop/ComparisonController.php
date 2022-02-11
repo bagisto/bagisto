@@ -94,13 +94,13 @@ class ComparisonController extends Controller
                 'status'  => 'success',
                 'message' => trans('velocity::app.customer.compare.added'),
                 'label'   => trans('velocity::app.shop.general.alert.success'),
-            ], 201);
+            ]);
         } else {
             return response()->json([
                 'status'  => 'success',
                 'label'   => trans('velocity::app.shop.general.alert.success'),
                 'message' => trans('velocity::app.customer.compare.already_added'),
-            ], 200);
+            ]);
         }
     }
 

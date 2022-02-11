@@ -136,20 +136,16 @@ class CategoryController extends Controller
         $category = $this->categoryRepository->findOrFail($id);
 
         if ($this->isCategoryDeletable($category)) {
-            session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
-        } else {
-            try {
-                $this->categoryRepository->delete($id);
-
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
-
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
-            }
+            return response()->json(['message' => trans('admin::app.response.delete-category-root', ['name' => 'Category'])], 400);
         }
 
-        return response()->json(['message' => false], 400);
+        try {
+            $this->categoryRepository->delete($id);
+
+            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Category'])]);
+        } catch (\Exception $e) {}
+
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Category'])], 500);
     }
 
     /**
@@ -204,7 +200,7 @@ class CategoryController extends Controller
             $product_count += $category->products->count();
         }
 
-        return response()->json(['product_count' => $product_count], 200);
+        return response()->json(['product_count' => $product_count]);
     }
 
     /**

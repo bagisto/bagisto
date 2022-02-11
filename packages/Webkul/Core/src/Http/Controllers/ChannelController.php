@@ -187,20 +187,16 @@ class ChannelController extends Controller
         $channel = $this->channelRepository->findOrFail($id);
 
         if ($channel->code == config('app.channel')) {
-            session()->flash('error', trans('admin::app.settings.channels.last-delete-error'));
-        } else {
-            try {
-                $this->channelRepository->delete($id);
-
-                session()->flash('success', trans('admin::app.settings.channels.delete-success'));
-
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Channel']));
-            }
+            return response()->json(['message' => trans('admin::app.settings.channels.last-delete-error')], 400);
         }
 
-        return response()->json(['message' => false], 400);
+        try {
+            $this->channelRepository->delete($id);
+
+            return response()->json(['message' => trans('admin::app.settings.channels.delete-success')]);
+        } catch (\Exception $e) {}
+
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Channel'])], 400);
     }
 
     /**

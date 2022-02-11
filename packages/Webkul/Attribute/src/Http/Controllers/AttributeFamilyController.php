@@ -140,24 +140,30 @@ class AttributeFamilyController extends Controller
         $attributeFamily = $this->attributeFamilyRepository->findOrFail($id);
 
         if ($this->attributeFamilyRepository->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Family']));
-
-        } elseif ($attributeFamily->products()->count()) {
-            session()->flash('error', trans('admin::app.response.attribute-product-error', ['name' => 'Attribute family']));
-        } else {
-            try {
-                $this->attributeFamilyRepository->delete($id);
-
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Family']));
-
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                report($e);
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Family']));
-            }
+            return response()->json([
+                'message' => trans('admin::app.response.last-delete-error', ['name' => 'Family']),
+            ], 400);
         }
 
-        return response()->json(['message' => false], 400);
+        if ($attributeFamily->products()->count()) {
+            return response()->json([
+                'message' => trans('admin::app.response.attribute-product-error', ['name' => 'Attribute family']),
+            ], 400);
+        }
+
+        try {
+            $this->attributeFamilyRepository->delete($id);
+
+            return response()->json([
+                'message' => trans('admin::app.response.delete-success', ['name' => 'Family']),
+            ]);
+        } catch (\Exception $e) {
+            report($e);
+        }
+
+        return response()->json([
+            'message' => trans('admin::app.response.delete-failed', ['name' => 'Family']),
+        ], 500);
     }
 
     /**
