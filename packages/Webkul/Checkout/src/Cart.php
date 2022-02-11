@@ -5,8 +5,8 @@ namespace Webkul\Checkout;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
-use Webkul\Checkout\Models\Cart as CartModel;
 use Webkul\Checkout\Models\CartAddress;
+use Webkul\Checkout\Models\Cart as CartModel;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Repositories\CartAddressRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
@@ -205,13 +205,9 @@ class Cart
                 } else {
                     if (isset($cartProduct['parent_id']) && $cartItem->parent_id !== $parentCartItem->id) {
                         $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, [
-                            'cart_id' => $cart->id
+                            'cart_id' => $cart->id,
                         ]));
                     } else {
-                        // if ($cartItem->product->getTypeInstance()->isMultipleQtyAllowed() === false) {
-                        //     return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
-                        // }
-
                         $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
                     }
                 }
@@ -498,8 +494,8 @@ class Cart
             $cart->discount_amount += $item->discount_amount;
             $cart->base_discount_amount += $item->base_discount_amount;
 
-            $cart->sub_total = (float)$cart->sub_total + $item->total;
-            $cart->base_sub_total = (float)$cart->base_sub_total + $item->base_total;
+            $cart->sub_total = (float) $cart->sub_total + $item->total;
+            $cart->base_sub_total = (float) $cart->base_sub_total + $item->base_total;
         }
 
         $cart->tax_total = Tax::getTaxTotal($cart, false);
@@ -736,7 +732,14 @@ class Cart
 
         if (isset($data['children']) && $data['children']) {
             foreach ($data['children'] as $child) {
-                $child['quantity'] = $child['quantity'] ? $child['quantity'] * $data['quantity'] : $child['quantity'];
+                /**
+                 * - For bundle, child quantity will not be zero.
+                 *
+                 * - For configurable, parent one will be added as child one is zero.
+                 *
+                 * - In testing phase.
+                 */
+                $child['quantity'] = $child['quantity'] ? $child['quantity'] * $data['quantity'] : $data['quantity'];
 
                 $finalData['children'][] = $this->prepareDataForOrderItem($child);
             }
@@ -913,7 +916,7 @@ class Cart
         array $billingAddress,
         array $shippingAddress
     ): void {
-        $shippingAddress['cart_id'] =  $billingAddress['cart_id'] = NULL;
+        $shippingAddress['cart_id'] = $billingAddress['cart_id'] = null;
 
         if (isset($data['billing']['save_as_address']) && $data['billing']['save_as_address']) {
             $this->customerAddressRepository->create($billingAddress);
