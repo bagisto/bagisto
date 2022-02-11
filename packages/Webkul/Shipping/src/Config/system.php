@@ -159,5 +159,6 @@ return [
                 'channel_based' => false,
                 'locale_based'  => true,
             ],
+        ],
     ],
 ];
