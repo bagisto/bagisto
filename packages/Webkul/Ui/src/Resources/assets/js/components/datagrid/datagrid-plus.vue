@@ -1574,7 +1574,14 @@ export default {
                         }
                     })
                     .catch(function(error) {
-                        console.log(error);
+                        let response = error.response;
+
+                        window.flashMessages.push({
+                            type: 'alert-error',
+                            message: response.data.message ?? 'Something went wrong!'
+                        });
+
+                        self.$root.addFlashMessages();
                     });
 
                 e.preventDefault();

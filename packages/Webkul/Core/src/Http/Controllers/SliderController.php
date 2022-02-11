@@ -153,7 +153,7 @@ class SliderController extends Controller
     }
 
     /**
-     * Delete the slider item and preserve the last one from deleting.
+     * Delete the slider item.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -165,13 +165,15 @@ class SliderController extends Controller
         try {
             $this->sliderRepository->delete($id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Slider']));
-
-            return response()->json(['message' => true], 200);
+            return response()->json([
+                'message' => trans('admin::app.response.delete-success', ['name' => 'Slider']),
+            ], 200);
         } catch (\Exception $e) {
-            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Slider']));
+            report($e);
         }
 
-        return response()->json(['message' => false], 400);
+        return response()->json([
+            'message' => trans('admin::app.response.delete-failed', ['name' => 'Slider']),
+        ], 500);
     }
 }
