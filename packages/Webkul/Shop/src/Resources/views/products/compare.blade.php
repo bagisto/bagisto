@@ -1,5 +1,4 @@
 <compare-component product-id="{{ $productId }}"></compare-component>
-
 @push('scripts')
     <script type="text/x-template" id="compare-component-template">
         <a
@@ -14,16 +13,21 @@
     <script>
         Vue.component('compare-component', {
             props: ['productId'],
-
             template: '#compare-component-template',
-
             data: function () {
                 return {
                     'baseUrl': "{{ url()->to('/') }}",
                     'customer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                    'deviceTokenNumber': null,
                 }
             },
-
+            mounted:function(){
+                this.deviceTokenNumber = localStorage.getItem("deviceTokenNumber");
+                if(this.deviceTokenNumber == null || this.deviceTokenNumber == 'null'){
+                    let deviceToken = Date.now()+""+Math.floor(Math.random() * 1000000)
+                    localStorage.setItem("deviceTokenNumber",deviceToken);
+                }
+            },
             methods: {
                 'addProductToCompare': function () {
                     if (this.customer == "true" || this.customer == true) {
@@ -32,13 +36,12 @@
                                 productId: this.productId,
                             }
                         ).then(response => {
+                            this.updateCompareCount();
+
                             window.flashMessages = [{
                                 'type': `alert-${response.data.status}`,
                                 'message': response.data.message
                             }];
-
-                            this.updateCompareCount();
-
                             this.$root.addFlashMessages()
                         }).catch(error => {
                             window.flashMessages = [{
@@ -49,43 +52,44 @@
                             this.$root.addFlashMessages()
                         });
                     } else {
-                        let updatedItems = [this.productId];
-
-                        let existingItems = this.getStorageValue('compared_product');
-
-                        if (existingItems) {
-                            if (existingItems.indexOf(this.productId) == -1) {
-                                updatedItems = existingItems.concat(updatedItems);
-
-                                this.setStorageValue('compared_product', updatedItems);
-
-                                window.flashMessages = [{
-                                    'type': `alert-success`,
-                                    'message': "{{ __('shop::app.customer.compare.added') }}"
-                                }];
-
-                                this.$root.addFlashMessages()
-                            } else {
-                                window.flashMessages = [{
-                                    'type': `alert-success`,
-                                    'message': "{{ __('shop::app.customer.compare.already_added') }}"
-                                }];
-
-                                this.$root.addFlashMessages()
+                        this.$http.put(
+                            `${this.baseUrl}/guest-comparison`, {
+                                productId: this.productId,
+                                device_token: this.deviceTokenNumber,
                             }
-                        } else {
-                            this.setStorageValue('compared_product', updatedItems);
+                        ).then(response => {
+                            this.updateCompareCount();
 
+                            if(response.status == 200){
+                                if(response.data.statusCode == 200){
+                                    window.flashMessages = [{
+                                            'type': `alert-success`,
+                                            'message': "{{ __('shop::app.customer.compare.added') }}"
+                                    }];
+                                    this.$root.addFlashMessages();
+                                }else{
+                                    window.flashMessages = [{
+                                            'type': `alert-success`,
+                                            'message':response.data.message
+                                    }];
+                                    this.$root.addFlashMessages();
+                                }
+                            }else{
+                                window.flashMessages = [{
+                                        'type': `alert-success`,
+                                        'message': "{{ __('shop::app.customer.compare.some_thing_went_wrong') }}"
+                                }];
+                                this.$root.addFlashMessages();
+                            }
+
+                        }).catch(error => {
                             window.flashMessages = [{
-                                'type': `alert-success`,
-                                'message': "{{ __('shop::app.customer.compare.added') }}"
-                            }];
-
-                            this.$root.addFlashMessages()
-                        }
+                                        'type': `alert-success`,
+                                        'message': "{{ __('shop::app.customer.compare.some_thing_went_wrong') }}"
+                                }];
+                            this.$root.addFlashMessages();
+                        });
                     }
-
-                    this.updateCompareCount();
                 },
 
                 'getStorageValue': function (key) {
@@ -115,15 +119,21 @@
                                 'type': `alert-error`,
                                 'message': "{{ __('shop::app.common.error') }}"
                             }];
-
                             this.$root.addFlashMessages();
                         });
                     } else {
-                        let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
-
-                        comparedItemsCount = comparedItems ? comparedItems.length : 0;
-
-                        $('#compare-items-count').html(comparedItemsCount);
+                        let items = localStorage.getItem('deviceTokenNumber');
+                        let url = `${this.baseUrl}/${'detailed-products'}`;
+                        let data = { params: { items }};
+                        this.$http.get(url, data)
+                        .then(response => {
+                            if(response.data.statusCode == 200){
+                                $('#compare-items-count').html(response.data.products.length);
+                            }
+                        })
+                        .catch(error => {
+                            console.log("{{ __('shop::app.common.error') }}");
+                        });
                     }
                 }
             }

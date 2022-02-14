@@ -1,10 +1,7 @@
 @extends('shop::layouts.master')
-
 @php
     $channel = core()->getCurrentChannel();
-
     $homeSEO = $channel->home_seo;
-
     if (isset($homeSEO)) {
         $homeSEO = json_decode($channel->home_seo);
 

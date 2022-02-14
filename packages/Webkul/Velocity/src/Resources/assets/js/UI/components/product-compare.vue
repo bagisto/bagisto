@@ -6,11 +6,14 @@
         <i class="material-icons">compare_arrows</i>
     </a>
 </template>
-
 <script>
     export default {
-        props: ['slug', 'customer', 'productId', 'addTooltip'],
-
+        props: ['slug','customer','productId','addTooltip'],
+        data: function () {
+            return {
+                'deviceTokenNumber': null,
+            }
+        },
         methods: {
             addProductToCompare: function () {
                 if (this.customer == "true" || this.customer == true) {
@@ -30,39 +33,32 @@
                         );
                     });
                 } else {
-                    let updatedItems = [this.productId];
-                    let existingItems = this.getStorageValue('compared_product');
-
-                    if (existingItems) {
-                        if (existingItems.indexOf(this.productId) == -1) {
-                            updatedItems = existingItems.concat(updatedItems);
-
-                            this.setStorageValue('compared_product', updatedItems);
-
-                            window.showAlert(
-                                `alert-success`,
-                                this.__('shop.general.alert.success'),
-                                `${this.__('customer.compare.added')}`
-                            );
-                        } else {
-                            window.showAlert(
-                                `alert-success`,
-                                this.__('shop.general.alert.success'),
-                                `${this.__('customer.compare.already_added')}`
-                            );
+                    //save compare list for the guest users.
+                    this.$http.put(
+                        `${this.$root.baseUrl}/guest-comparison`, {
+                            productId: this.productId,
+                            device_token: this.deviceTokenNumber,
                         }
-                    } else {
-                        this.setStorageValue('compared_product', updatedItems);
-
+                    ).then(response => {
+                        this.$root.headerItemsCount++;
+                        window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
+                    }).catch(error => {
                         window.showAlert(
-                            `alert-success`,
-                            this.__('shop.general.alert.success'),
-                            `${this.__('customer.compare.added')}`
+                            'alert-danger',
+                            this.__('shop.general.alert.error'),
+                            this.__('error.something_went_wrong')
                         );
-                    }
+                    });
                 }
 
                 this.$root.headerItemsCount++;
+            }
+        },
+        mounted:function(){
+            this.deviceTokenNumber = localStorage.getItem("deviceTokenNumber");
+            if(this.deviceTokenNumber == null || this.deviceTokenNumber == 'null'){
+                let deviceToken = Date.now()+""+Math.floor(Math.random() * 1000000)
+                localStorage.setItem("deviceTokenNumber",deviceToken);
             }
         }
     }

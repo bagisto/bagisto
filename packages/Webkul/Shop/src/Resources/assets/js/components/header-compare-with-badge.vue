@@ -1,7 +1,6 @@
 <template>
 <li class="compare-dropdown-container">
     <a :href="src" @endauth style="color: #242424;">
-
         <i class="icon wishlist-icon"></i>
         <span class="name">
             {{ text }}
@@ -27,11 +26,9 @@ export default {
 
     methods: {
         updateHeaderItemsCount: function () {       
-
             this.$http
                 .get(`${this.$root.baseUrl}/items-count`)
                 .then(response => {
-                    
                     this.compareCount = response.data.wishlistedProductsCount;
                 });
         }

@@ -224,6 +224,8 @@ return [
 
     'customer'      => [
         'compare'           => [
+            'record_has_been_delete_successfully'=>'Record has been delete successfully.',
+            'product_has_been_removed_from_compare_list'=>'Product has been removed from compare list',
             'text'                  => 'Compare',
             'compare_similar_items' => 'Compare Similar Items',
             'add-tooltip'           => 'Add product to compare list',
@@ -234,6 +236,8 @@ return [
             'empty-text'            => "You don't have any items in your compare list",
             'product_image'         => 'Product Image',
             'actions'               => 'Actions',
+            'something_went_wrong'  => 'Something went wrong, please try again',
+            'product_not_exists'  => 'Products not exists in our record.',
         ],
         'login-form'        => [
             'sign-up'               => 'Sign up',

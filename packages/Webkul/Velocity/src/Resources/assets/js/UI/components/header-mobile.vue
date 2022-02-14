@@ -399,11 +399,27 @@ export default {
 
         updateHeaderItemsCount: function () {
             if (this.isCustomer != 'true') {
-                let comparedItems = this.getStorageValue('compared_product');
-
-                if (comparedItems) {
-                    this.compareCount = comparedItems.length;
-                }
+                let items = localStorage.getItem('deviceTokenNumber');
+                let url = `${this.$root.baseUrl}/detailed-products`;
+                    let data = {
+                            params: {
+                                items
+                            }
+                        };
+                var thisMobileView = this;
+                this.$http.get(url, data)
+                .then(response => {
+                    if(response.status == 200){
+                        if(response.data.statusCode == 200){
+                             this.compareCount = response.data.products.length;
+                        }else{
+                            this.compareCount  = 0;
+                        }
+                    }
+                })
+                .catch(error => {
+                   this.compareCount  = 0;
+                });
             } else {
                 this.$http
                     .get(`${this.$root.baseUrl}/items-count`)
@@ -423,8 +439,7 @@ export default {
                 .get(`${this.$root.baseUrl}/mini-cart`)
                 .then((response) => {
                     if (response.data.status) {
-                        this.updatedCartItemsCount =
-                            response.data.mini_cart.cart_items.length;
+                        this.updatedCartItemsCount = response.data.mini_cart.cart_items.length;
                     }
                 })
                 .catch((exception) => {

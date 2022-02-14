@@ -21,7 +21,7 @@ class CreateCustomerCompareProductsTable extends Migration
                   ->on('product_flat')
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
-            $table->unsignedInteger('customer_id');
+            $table->unsignedInteger('customer_id')->nullable();
             $table->foreign('customer_id')
                   ->references('id')
                   ->on('customers')

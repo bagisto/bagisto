@@ -6,7 +6,6 @@
 
     $attributeOptionTranslations = app('\Webkul\Attribute\Repositories\AttributeOptionTranslationRepository')->where('locale', $locale)->get()->toJson();
 @endphp
-
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="cart-details row no-margin col-12">
@@ -17,7 +16,7 @@
             <div class="col-6" v-if="products.length > 0">
                 <button
                     class="theme-btn light float-right"
-                    @click="removeProductCompare('all')">
+                    @click.prevent="removeProductCompare('all')">
                     {{ __('shop::app.customer.account.wishlist.deleteall') }}
                 </button>
             </div>
@@ -44,7 +43,7 @@
 
                     @foreach ($comparableAttributes as $attribute)
                         <tr>
-                            <td class="header">
+                            <td>
                                 <span class="fs16">{{ isset($attribute['name']) ? $attribute['name'] : $attribute['admin_name'] }}</span>
                             </td>
 
@@ -150,7 +149,6 @@
                     @{{ __('customer.compare.empty-text') }}
                 </span>
             </table>
-
             {!! view_render_event('bagisto.shop.customers.account.compare.view.after') !!}
         </section>
     </script>
@@ -170,40 +168,42 @@
 
             mounted: function () {
                 this.getComparedProducts();
-
-                this.activateSlider();
+                //this.activateSlider();
             },
-
             methods: {
                 'getComparedProducts': function () {
-                    let items = '';
                     let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
-
                     let data = {
                         params: {'data': true}
                     }
-
                     if (! this.isCustomer) {
-                        items = this.getStorageValue('compared_product');
-                        items = items ? items.join('&') : '';
-
+                        let items = localStorage.getItem('deviceTokenNumber');
+                        console.log(items)
                         data = {
                             params: {
                                 items
                             }
                         };
                     }
-
-                    if (this.isCustomer || (! this.isCustomer && items != "")) {
+                    if (this.isCustomer || (! this.isCustomer)) {
+                        var this_this = this;
                         this.$http.get(url, data)
                         .then(response => {
-                            this.isProductListLoaded = true;
-
-                            this.products = response.data.products;
+                            if(response.status == 200){
+                                if(response.data.statusCode == '200'){
+                                    this_this.isProductListLoaded = true;
+                                    this_this.products = response.data.products;
+                                    this.$root.headerItemsCount = response.data.products.length;
+                                }else{
+                                 
+                                    this_this.isProductListLoaded = true;
+                                    this_this.products = [];
+                                    this.$root.headerItemsCount = 0;
+                                }
+                            }
                         })
                         .catch(error => {
                             this.isProductListLoaded = true;
-                            console.log(this.__('error.something_went_wrong'));
                         });
                     } else {
                         this.isProductListLoaded = true;
@@ -212,9 +212,6 @@
                 },
 
                 'removeProductCompare': function (productId) {
-                    if (productId == 'all' && ! confirm('{{ __('shop::app.customer.compare.confirm-remove-all') }}')) {
-                        return;
-                    }
 
                     if (this.isCustomer) {
                         this.$http.delete(`${this.$root.baseUrl}/comparison?productId=${productId}`)
@@ -224,7 +221,6 @@
                             } else {
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
                             }
-
                             this.$root.headerItemsCount++;
 
                             window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
@@ -233,32 +229,20 @@
                             console.log(this.__('error.something_went_wrong'));
                         });
                     } else {
-                        let existingItems = this.getStorageValue('compared_product');
-
-                        if (productId == "all") {
-                            updatedItems = [];
-                            this.$set(this, 'products', []);
-
-                            window.showAlert(
-                                `alert-success`,
-                                this.__('shop.general.alert.success'),
-                                `${this.__('customer.compare.removed-all')}`
-                            );
-                        } else {
-                            updatedItems = existingItems.filter(item => item != productId);
-                            this.$set(this, 'products', this.products.filter(product => product.id != productId));
-
-                            window.showAlert(
-                                `alert-success`,
-                                this.__('shop.general.alert.success'),
-                                `${this.__('customer.compare.removed')}`
-                            );
+                        let existingDeviceToken = localStorage.getItem('deviceTokenNumber');
+                        let productRequest = {
+                            'device_token':existingDeviceToken,
+                            'productId':productId,
                         }
-
-                        this.setStorageValue('compared_product', updatedItems);
+                        this.$http.post(`${this.$root.baseUrl}/delete-guest-comparison`,productRequest)
+                        .then(response => {
+                            this.getComparedProducts();
+                            window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
+                        })
+                        .catch(error => {
+                            console.log(this.__('error.something_went_wrong'));
+                        });
                     }
-
-                    this.$root.headerItemsCount++;
                 },
 
                 'getAttributeOptions': function (productDetails, attributeValues, type) {
@@ -329,9 +313,7 @@
                         if (! isMouseDown) {
                             return;
                         }
-
                         e.preventDefault();
-
                         const x = e.pageX - slider.offsetLeft;
                         const walk = (x - startX) * 3;
                         slider.scrollLeft = scrollLeft - walk;

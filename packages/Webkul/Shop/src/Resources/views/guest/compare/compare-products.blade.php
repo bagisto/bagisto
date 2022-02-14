@@ -177,48 +177,47 @@
                 'getComparedProducts': function () {
                     let items = '';
                     let url = `${this.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
-
                     let data = {
                         params: {'data': true}
                     }
-
                     if (! this.isCustomer) {
-                        items = this.getStorageValue('compared_product');
-                        items = items ? items.join('&') : '';
-
+                        let items = localStorage.getItem('deviceTokenNumber');
                         data = {
                             params: {
                                 items
                             }
                         };
                     }
-
-                    if (this.isCustomer || (! this.isCustomer && items != "")) {
+                    if (this.isCustomer || (! this.isCustomer)) {
+                        var getThis = this;
                         this.$http.get(url, data)
                         .then(response => {
-                            this.isProductListLoaded = true;
-
+                            $('#compare-items-count').html(response.data.products.length);
+                            if(response.data.statusCode == 200){
+                                getThis.isProductListLoaded = true;
+                                getThis.products = response.data.products;
+                            }else{
+                                 if((response.data.products == null) || (response.data.products == 'null')){
+                                    getThis.isProductListLoaded = false;
+                                    getThis.products = [];
+                                 }
+                            }
                             if (response.data.products.length > 2) {
                                 $('.comparison-component').css('overflow-x', 'scroll');
                             }
-
-                            this.products = response.data.products;
                         })
                         .catch(error => {
-                            this.isProductListLoaded = true;
+                            getThis.isProductListLoaded = true;
                             console.log("{{ __('shop::app.common.error') }}");
                         });
                     } else {
                         this.isProductListLoaded = true;
                     }
-
                 },
-
                 'removeProductCompare': function (productId) {
                     if (productId == 'all' && ! confirm('{{ __('shop::app.customer.compare.confirm-remove-all') }}')) {
                         return;
                     }
-
                     if (this.isCustomer) {
                         this.$http.delete(`${this.baseUrl}/comparison?productId=${productId}`)
                         .then(response => {
@@ -238,26 +237,37 @@
                             console.log("{{ __('shop::app.common.error') }}");
                         });
                     } else {
-                        let existingItems = this.getStorageValue('compared_product');
-
-                        if (productId == "all") {
-                            updatedItems = [];
-                            this.$set(this, 'products', []);
-                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('shop::app.customer.compare.removed-all') }}' }];
-                        } else {
-                            updatedItems = existingItems.filter(item => item != productId);
-                            this.$set(this, 'products', this.products.filter(product => product.id != productId));
-                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('shop::app.customer.compare.removed') }}' }];
+                        let existingDeviceToken = localStorage.getItem('deviceTokenNumber');
+                        let productRequest = {
+                            'device_token':existingDeviceToken,
+                            'productId':productId,
                         }
-
-                        this.setStorageValue('compared_product', updatedItems);
-
+                        this.$http.post(`${this.$root.baseUrl}/delete-guest-comparison`,productRequest)
+                        .then(response => {
+                            if(response.status == 200){
+                                if(response.data.statusCode == 200){
+                                    this.getComparedProducts();
+                                    window.flashMessages = [{
+                                            'type': `alert-success`,
+                                            'message': response.data.message
+                                    }];
+                                    this.$root.addFlashMessages();
+                                }else{
+                                    window.flashMessages = [{
+                                            'type': `alert-success`,
+                                            'message':response.data.message
+                                    }];
+                                    this.$root.addFlashMessages();
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.log(this.__('error.something_went_wrong'));
+                        });
                         this.$root.addFlashMessages();
                     }
 
-                    this.updateCompareCount();
                 },
-
                 'getDynamicHTML': function (input) {
                     var _staticRenderFns;
                     const { render, staticRenderFns } = Vue.compile(input);
@@ -350,15 +360,9 @@
                                 'type': `alert-error`,
                                 'message': "{{ __('shop::app.common.error') }}"
                             }];
-
                             this.$root.addFlashMessages();
                         });
-                    } else {
-                        let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
-                        comparedItemsCount = comparedItems ? comparedItems.length : 0;
-
-                        $('#compare-items-count').html(comparedItemsCount);
-                    }
+                    } 
                 }
             }
         });

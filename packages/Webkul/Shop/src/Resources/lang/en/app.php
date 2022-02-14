@@ -106,6 +106,7 @@ return [
             'empty-text'            => "You don't have any items in your compare list",
             'product_image'         => 'Product Image',
             'actions'               => 'Actions',
+            'some_thing_went_wrong'               => 'Something went wrong, please try again.',
         ],
 
         'signup-text' => [

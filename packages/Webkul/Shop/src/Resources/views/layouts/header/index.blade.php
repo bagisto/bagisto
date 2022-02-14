@@ -378,7 +378,6 @@
 
     <script>
         $(document).ready(function() {
-
             $('body').delegate('#search, .icon-menu-close, .icon.icon-menu', 'click', function(e) {
                 toggleDropdown(e);
             });
@@ -390,14 +389,20 @@
                             'customer_id' => auth()->guard('customer')->user()->id,
                         ]);
                 @endphp
-
                 let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
                 $('#compare-items-count').html({{ $compareCount }});
             @endauth
 
             @guest('customer')
-                let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
-                $('#compare-items-count').html(comparedItems ? comparedItems.length : 0);
+                let existingDeviceToken = localStorage.getItem('deviceTokenNumber');
+                $.ajax({
+                    url: "{{ url('guest-compared-product-count') }}",
+                    type: "GET",
+                    data: {existingDeviceToken:existingDeviceToken},
+                    success: function(response){
+                       $('#compare-items-count').html((response.response > 0) ? response.response : 0);
+                    }
+                });
             @endguest
 
             function toggleDropdown(e) {

@@ -40,6 +40,11 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 'view' => 'shop::guest.compare.index'
             ]);
 
+        Route::put('/guest-comparison',[ComparisonController::class, 'saveGuestComparison']);
+        Route::get('/guest-compared-product-count',[ComparisonController::class, 'countGuestComparedProduct']);
+
+        Route::post('/delete-guest-comparison',[ComparisonController::class, 'deleteGuestComparison']);
+
         Route::put('/comparison', [ComparisonController::class, 'addCompareProduct'])
             ->name('customer.product.add.compare');
 
