@@ -27,20 +27,20 @@
     <div class="reviews-container">
         @if (! $reviews->isEmpty())
             @foreach ($reviews as $review)
-                <div class="col-12 lg-card-container list-card product-card row">
+                <div class="row col-12 lg-card-container list-card product-card">
                     <div class="product-image">
                         @php
                             $image = productimage()->getProductBaseImage($review->product);
                         @endphp
+
                         <a
                             title="{{ $review->product->name }}"
                             href="{{ url()->to('/').'/'.$review->product->url_key }}">
-
                             <img src="{{ $image['small_image_url'] }}" title="{{ $review->product->name }}">
                         </a>
                     </div>
 
-                    <div class="product-information">
+                    <div class="product-information p-2">
                         <div class="d-flex justify-content-between">
                             <div class="product-name">
                                 <a
@@ -60,15 +60,16 @@
                             <div>
                                 <form id="deleteReviewForm" action="{{ route('customer.review.delete', $review->id) }}" method="post">
                                     @method('delete')
+
                                     @csrf
                                 </form>
 
                                 <a class="unset" href="javascript:void(0);" onclick="confirm('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}') ? document.getElementById('deleteReviewForm').submit() : null;">
                                     <span class="rango-delete fs24"></span>
+                                    
                                     <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
                                 </a>
-                            </div>                       
-
+                            </div>                      
                         </div>
                     </div>
                 </div>               
@@ -77,13 +78,11 @@
             <div class="bottom-toolbar">
                 {{ $reviews->links()  }}
             </div>
-            {{-- <load-more-btn></load-more-btn> --}}
         @else
             <div class="fs16">
                 {{ __('customer::app.reviews.empty') }}
             </div>
         @endif
-
     </div>
 
     {!! view_render_event('bagisto.shop.customers.account.reviews.list.after', ['reviews' => $reviews]) !!}
@@ -118,7 +117,7 @@
                         splitedParamsObject[page]
                     }
                 }
-            })
-        })()
+            });
+        })();
     </script>
 @endpush
