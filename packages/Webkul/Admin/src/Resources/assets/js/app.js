@@ -66,11 +66,11 @@ Vue.component(
 Vue.component(
     'notification',
     require('./components/navigation/notification').default
-);  
+);
 Vue.component(
     'notification-list',
     require('./components/navigation/notification-list').default
-);  
+);
 Vue.component('pagination', pagination);
 
 $(function() {
@@ -197,6 +197,8 @@ $(function() {
                 flashMessages.forEach(function(flash) {
                     flashes.addFlash(flash);
                 }, this);
+
+                flashMessages = [];
             },
 
             showModal: function(id) {
@@ -210,7 +212,7 @@ $(function() {
             },
 
             checkMode(){
-                
+
                 this.isDarkMode = ! this.isDarkMode;
 
                 localStorage.setItem('dark-mode', this.isDarkMode);
@@ -223,7 +225,7 @@ $(function() {
                 ) {
                     return true;
                 }
-            
+
                 return false;
             },
 

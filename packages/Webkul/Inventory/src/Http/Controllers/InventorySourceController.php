@@ -120,21 +120,17 @@ class InventorySourceController extends Controller
         $this->inventorySourceRepository->findOrFail($id);
 
         if ($this->inventorySourceRepository->count() == 1) {
-            session()->flash('error', trans('admin::app.settings.inventory_sources.last-delete-error'));
-        } else {
-            try {
-                $this->inventorySourceRepository->delete($id);
-
-                session()->flash('success', trans('admin::app.settings.inventory_sources.delete-success'));
-
-                return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
-                report($e);
-
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Inventory source']));
-            }
+            return response()->json(['message' => trans('admin::app.settings.inventory_sources.last-delete-error')], 400);
         }
 
-        return response()->json(['message' => false], 400);
+        try {
+            $this->inventorySourceRepository->delete($id);
+
+            return response()->json(['message' => trans('admin::app.settings.inventory_sources.delete-success')]);
+        } catch (\Exception $e) {
+            report($e);
+        }
+
+        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Inventory source'])], 500);
     }
 }

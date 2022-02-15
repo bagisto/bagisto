@@ -136,14 +136,10 @@ class PageController extends Controller
         $page = $this->cmsRepository->findOrFail($id);
 
         if ($page->delete()) {
-            session()->flash('success', trans('admin::app.cms.pages.delete-success'));
-
-            return response()->json(['message' => true], 200);
+            return response()->json(['message' => trans('admin::app.cms.pages.delete-success')]);
         }
 
-        session()->flash('success', trans('admin::app.cms.pages.delete-failure'));
-
-        return response()->json(['message' => false], 200);
+        return response()->json(['message' => trans('admin::app.cms.pages.delete-failure')], 500);
     }
 
     /**

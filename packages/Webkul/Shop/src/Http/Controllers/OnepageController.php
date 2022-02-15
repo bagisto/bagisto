@@ -328,7 +328,7 @@ class OnepageController extends Controller
                 'success' => true,
                 'message' => trans('shop::app.checkout.total.coupon-applied'),
                 'result'  => $result,
-            ], 200);
+            ]);
         }
 
         return response()->json([
@@ -356,7 +356,7 @@ class OnepageController extends Controller
                 'data'    => [
                     'grand_total' => core()->currency(Cart::getCart()->grand_total),
                 ],
-            ], 200);
+            ]);
         }
 
         return response()->json([
