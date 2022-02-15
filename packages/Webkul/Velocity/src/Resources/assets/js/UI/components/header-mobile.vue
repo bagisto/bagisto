@@ -44,6 +44,7 @@
                             v-for="(
                                 category, index
                             ) in rootCategoriesCollection"
+                            :key="index"
                         >
                             <a
                                 class="unset"
@@ -52,8 +53,8 @@
                                 <div class="category-logo">
                                     <img
                                         class="category-icon"
-                                        v-if="category.category_icon_path"
-                                        :src="`${$root.baseUrl}/storage/${category.category_icon_path}`"
+                                        v-if="category.category_icon_url"
+                                        :src="category.category_icon_url"
                                         alt=""
                                         width="20"
                                         height="20"
@@ -143,14 +144,17 @@
                                     <img
                                         class="category-icon"
                                         v-if="
-                                            nestedSubCategory.category_icon_path
+                                            nestedSubCategory.category_icon_url
                                         "
-                                        :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`"
+                                        :src="
+                                            nestedSubCategory.category_icon_url
+                                        "
                                         alt=""
                                         width="20"
                                         height="20"
                                     />
                                 </div>
+
                                 <span v-text="nestedSubCategory.name"></span>
                             </a>
 
@@ -163,7 +167,7 @@
                                 "
                             >
                                 <li
-                                    :key="`index-${Math.random()}`"
+                                    :key="`index-${index}`"
                                     v-for="(
                                         thirdLevelCategory, index
                                     ) in nestedSubCategory.children"
@@ -176,9 +180,11 @@
                                             <img
                                                 class="category-icon"
                                                 v-if="
-                                                    thirdLevelCategory.category_icon_path
+                                                    thirdLevelCategory.category_icon_url
                                                 "
-                                                :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`"
+                                                :src="
+                                                    thirdLevelCategory.category_icon_url
+                                                "
                                                 alt=""
                                                 width="20"
                                                 height="20"
@@ -201,10 +207,12 @@
                             class="rango-arrow-left fs24 text-down-4"
                             @click="toggleMetaInfo('languages')"
                         ></i>
+
                         <h4
                             class="display-inbl"
                             v-text="__('responsive.header.languages')"
                         ></h4>
+
                         <i
                             class="material-icons float-right text-dark"
                             @click="closeDrawer()"
@@ -238,10 +246,12 @@
                             class="rango-arrow-left fs24 text-down-4"
                             @click="toggleMetaInfo('currencies')"
                         ></i>
+
                         <h4
                             class="display-inbl"
                             v-text="__('shop.general.currencies')"
                         ></h4>
+
                         <i
                             class="material-icons float-right text-dark"
                             @click="closeDrawer()"
@@ -348,6 +358,7 @@ export default {
 
     created: function () {
         this.getMiniCartDetails();
+
         this.updateHeaderItemsCount();
     },
 

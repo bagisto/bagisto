@@ -20,7 +20,7 @@
             <div class="row">
             <div
                 class="col offers-lt-panel bg-image"
-                style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_1']) }}')">
+                style="background-image: url('{{ Storage::url($advertisementOne['image_1']) }}')">
             </div>
 
                 <div class="col offers-ct-panel">
@@ -28,14 +28,14 @@
                     <div class="row pb10">
                         <div
                             class="col-12 offers-ct-top"
-                            style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_2']) }}')">
+                            style="background-image: url('{{ Storage::url($advertisementOne['image_2']) }}')">
                         </div>
                     </div>
 
                     <div class="row">
                         <div
                             class="col-12 offers-ct-bottom"
-                            style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_3']) }}')">
+                            style="background-image: url('{{ Storage::url($advertisementOne['image_3']) }}')">
                         </div>
                     </div>
 
@@ -43,7 +43,7 @@
 
                 <div
                     class="col offers-rt-panel"
-                    style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_4']) }}')">
+                    style="background-image: url('{{ Storage::url($advertisementOne['image_4']) }}')">
                 </div>
             </div>
         </div>

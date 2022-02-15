@@ -347,12 +347,13 @@ $(function() {
                     .get(`${this.baseUrl}/categories`)
                     .then(response => {
                         this.sharedRootCategories = response.data.categories;
+
                         $(
                             `<style type='text/css'> .sub-categories{ min-height:${ response.data.categories.length * 30 }px;} </style>`
                         ).appendTo('head');
                     })
                     .catch(error => {
-                        console.error(`failed to load categories:`, error);
+                        console.error(`Failed to load categories:`, error);
                     });
             },
 

@@ -6,21 +6,25 @@
 
 @php
     $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
+
     $channel = core()->getRequestedChannelCode();
+
     $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
+
+    $metaRoute = $metaData
+        ? route('velocity.admin.store.meta-data', ['id' => $metaData->id])
+        : route('velocity.admin.store.meta-data', ['id' => 'new']);
 @endphp
 
 @push('css')
-
     <style>
         @media only screen and (max-width: 680px){
-
             .content-container .content .page-header .page-title {
                 float: left;
                 width: 100%;
                 margin-bottom: 12px;
             }
-           
+
             .content-container .content .page-header .page-action button {
                 position: absolute;
                 right: 2px;
@@ -34,22 +38,16 @@
             }
         }
     </style>
-
 @endpush
 
 @section('content')
     <div class="content">
         <form
             method="POST"
-            @submit.prevent="onSubmit"
             enctype="multipart/form-data"
-            @if ($metaData)
-                action="{{ route('velocity.admin.store.meta-data', ['id' => $metaData->id]) }}"
-            @else
-                action="{{ route('velocity.admin.store.meta-data', ['id' => 'new']) }}"
-            @endif
+            action="{{ $metaRoute }}"
+            @submit.prevent="onSubmit"
             >
-
             @csrf
 
             <div class="page-header">
@@ -58,6 +56,7 @@
                 </div>
 
                 <input type="hidden" name="locale" value="{{ $locale }}" />
+
                 <input type="hidden" name="channel" value="{{ $channel }}" />
 
                 <div class="control-group">
@@ -229,7 +228,7 @@
                                 @php
                                     $images[4][] = [
                                         'id' => 'image_' . $index,
-                                        'url' => asset('/storage/' . $image),
+                                        'url' => Storage::url($image),
                                     ];
                                 @endphp
                             @endforeach
@@ -273,7 +272,7 @@
                                 @php
                                     $images[3][] = [
                                         'id' => 'image_' . $index,
-                                        'url' => asset('/storage/' . $image),
+                                        'url' => Storage::url($image),
                                     ];
                                 @endphp
                             @endforeach
@@ -312,7 +311,7 @@
                                 @php
                                     $images[2][] = [
                                         'id' => 'image_' . $index,
-                                        'url' => asset('/storage/' . $image),
+                                        'url' => Storage::url($image),
                                     ];
                                 @endphp
                             @endforeach
