@@ -823,13 +823,12 @@ button[disabled] {
     cursor: not-allowed;
 }
 
-.max-sm-img-dimention {
+.max-sm-img-dimension {
     max-width: 110px;
     max-height: 110px;
 
     img {
         width: 100%;
-        height: 100%;
     }
 }
 
