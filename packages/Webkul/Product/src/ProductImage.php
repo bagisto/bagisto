@@ -52,21 +52,11 @@ class ProductImage extends AbstractProduct
                 continue;
             }
 
-            $images[] = [
-                'small_image_url'    => url('cache/small/' . $image->path),
-                'medium_image_url'   => url('cache/medium/' . $image->path),
-                'large_image_url'    => url('cache/large/' . $image->path),
-                'original_image_url' => url('cache/original/' . $image->path),
-            ];
+            $images[] = $this->getCachedImageUrls($image->path);
         }
 
         if (! $product->parent_id && ! count($images) && ! count($product->videos)) {
-            $images[] = [
-                'small_image_url'    => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.webp'),
-                'medium_image_url'   => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.webp'),
-                'large_image_url'    => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.webp'),
-                'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.webp'),
-            ];
+            $images[] = $this->getFallbackImageUrls();
         }
 
         /*
@@ -79,6 +69,27 @@ class ProductImage extends AbstractProduct
         }
 
         return $loadedGalleryImages[$product->id] = $images;
+    }
+
+    /**
+     * Get product varient image if available otherwise product base image.
+     *
+     * @param  \Webkul\Customer\Contracts\Wishlist  $item
+     * @return array
+     */
+    public function getProductImage($item)
+    {
+        if ($item instanceof \Webkul\Customer\Contracts\Wishlist) {
+            if (isset($item->additional['selected_configurable_option'])) {
+                $product = $this->productRepository->find($item->additional['selected_configurable_option']);
+            } else {
+                $product = $item->product;
+            }
+        } else {
+            $product = $item->product;
+        }
+
+        return $this->getProductBaseImage($product);
     }
 
     /**
@@ -105,27 +116,6 @@ class ProductImage extends AbstractProduct
     }
 
     /**
-     * Get product varient image if available otherwise product base image.
-     *
-     * @param  \Webkul\Customer\Contracts\Wishlist  $item
-     * @return array
-     */
-    public function getProductImage($item)
-    {
-        if ($item instanceof \Webkul\Customer\Contracts\Wishlist) {
-            if (isset($item->additional['selected_configurable_option'])) {
-                $product = $this->productRepository->find($item->additional['selected_configurable_option']);
-            } else {
-                $product = $item->product;
-            }
-        } else {
-            $product = $item->product;
-        }
-
-        return $this->getProductBaseImage($product);
-    }
-
-    /**
      * Load product's base image.
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
@@ -135,22 +125,58 @@ class ProductImage extends AbstractProduct
     {
         $images = $product ? $product->images : null;
 
-        if ($images && $images->count()) {
-            $image = [
-                'small_image_url'    => url('cache/small/' . $images[0]->path),
-                'medium_image_url'   => url('cache/medium/' . $images[0]->path),
-                'large_image_url'    => url('cache/large/' . $images[0]->path),
-                'original_image_url' => url('cache/original/' . $images[0]->path),
-            ];
-        } else {
-            $image = [
-                'small_image_url'    => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.webp'),
-                'medium_image_url'   => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.webp'),
-                'large_image_url'    => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.webp'),
-                'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.webp'),
+        return $images && $images->count()
+            ? $this->getCachedImageUrls($images[0]->path)
+            : $this->getFallbackImageUrls();
+    }
+
+    /**
+     * Get cached urls configured for intervention package.
+     *
+     * @param  string  $path
+     * @return array
+     */
+    private function getCachedImageUrls($path): array
+    {
+        if (! $this->isDriverLocal()) {
+            return [
+                'small_image_url'    => Storage::url($path),
+                'medium_image_url'   => Storage::url($path),
+                'large_image_url'    => Storage::url($path),
+                'original_image_url' => Storage::url($path),
             ];
         }
 
-        return $image;
+        return [
+            'small_image_url'    => url('cache/small/' . $path),
+            'medium_image_url'   => url('cache/medium/' . $path),
+            'large_image_url'    => url('cache/large/' . $path),
+            'original_image_url' => url('cache/original/' . $path),
+        ];
+    }
+
+    /**
+     * Get fallback urls.
+     *
+     * @return array
+     */
+    private function getFallbackImageUrls(): array
+    {
+        return [
+            'small_image_url'    => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.webp'),
+            'medium_image_url'   => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.webp'),
+            'large_image_url'    => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.webp'),
+            'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.webp'),
+        ];
+    }
+
+    /**
+     * Is driver local.
+     *
+     * @return bool
+     */
+    private function isDriverLocal(): bool
+    {
+        return Storage::getAdapter() instanceof \League\Flysystem\Adapter\Local;
     }
 }

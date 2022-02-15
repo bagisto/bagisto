@@ -24,8 +24,8 @@
                     <a class="col-lg-9 col-md-12 no-padding">
                         <img
                             class="{{ $isLazyLoad ? 'lazyload' : '' }}"
-                            @if (! $isLazyLoad) src="{{ asset('/storage/' . $advertisementTwo[0]) }}" @endif
-                            data-src="{{ asset('/storage/' . $advertisementTwo[0]) }}" alt="" />
+                            @if (! $isLazyLoad) src="{{ Storage::url($advertisementTwo[0]) }}" @endif
+                            data-src="{{ Storage::url($advertisementTwo[0]) }}" alt="" />
                     </a>
                 @endif
 
@@ -33,8 +33,8 @@
                     <a class="col-lg-3 col-md-12 pr0">
                         <img
                             class="{{ $isLazyLoad ? 'lazyload' : '' }}"
-                            @if (! $isLazyLoad) src="{{ asset('/storage/' . $advertisementTwo[1]) }}" @endif
-                            data-src="{{ asset('/storage/' . $advertisementTwo[1]) }}" alt="" />
+                            @if (! $isLazyLoad) src="{{ Storage::url($advertisementTwo[1]) }}" @endif
+                            data-src="{{ Storage::url($advertisementTwo[1]) }}" alt="" />
                     </a>
                 @endif
             </div>
