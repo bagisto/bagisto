@@ -6,43 +6,37 @@
     <div class="rating-reviews">
         <div class="rating-header">
             {{ __('shop::app.products.reviews-title') }}
-        </div>
-
-        <div class="overall">
-            <div class="review-info">
-
-                <span class="number">
-                    {{ $reviewHelper->getAverageRating($product) }}
-                </span>
-
-                <span class="stars">
-                    @for ($i = 1; $i <= 5; $i++)
-
-                      @if($i <= round($reviewHelper->getAverageRating($product)))
-                        <span class="icon star-icon"></span>
-                      @else
-                        <span class="icon star-icon-blank"></span>
-                      @endif
-
-                    @endfor
-                </span>
-
-                <div class="total-reviews">
-                    {{ __('shop::app.products.total-reviews', ['total' => $total]) }}
-                </div>
-
-            </div>
 
             @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
                 <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
                     {{ __('shop::app.products.write-review-btn') }}
                 </a>
             @endif
+        </div>
 
+        <div class="overall">
+            <div class="review-info">
+                <span class="number">
+                    {{ $reviewHelper->getAverageRating($product) }}
+                </span>
+
+                <span class="stars">
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if($i <= round($reviewHelper->getAverageRating($product)))
+                            <span class="icon star-icon"></span>
+                        @else
+                            <span class="icon star-icon-blank"></span>
+                        @endif
+                    @endfor
+                </span>
+
+                <div class="total-reviews">
+                    {{ __('shop::app.products.total-reviews', ['total' => $total]) }}
+                </div>
+            </div>
         </div>
 
         <div class="reviews">
-
             @foreach ($reviewHelper->getReviews($product)->paginate(10) as $review)
                 <div class="review">
                     <div class="title">
@@ -51,13 +45,11 @@
 
                     <span class="stars">
                         @for ($i = 1; $i <= 5; $i++)
-
-                          @if($i <= $review->rating)
-                            <span class="icon star-icon"></span>
-                          @else
-                            <span class="icon star-icon-blank"></span>
-                          @endif
-
+                            @if($i <= $review->rating)
+                                <span class="icon star-icon"></span>
+                            @else
+                                <span class="icon star-icon-blank"></span>
+                            @endif
                         @endfor
                     </span>
 
@@ -80,7 +72,6 @@
             <a href="{{ route('shop.reviews.index', $product->url_key) }}" class="view-all">
                 {{ __('shop::app.products.view-all') }}
             </a>
-
         </div>
     </div>
 @else
