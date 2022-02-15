@@ -96,7 +96,7 @@
                     @endphp
 
                     <div class="row col-12 no-padding">
-                        <div class="col-2 max-sm-img-dimention">
+                        <div class="col-2 max-sm-img-dimension">
                             <img src="{{ $productBaseImage['medium_image_url'] }}" alt="" />
                         </div>
 
