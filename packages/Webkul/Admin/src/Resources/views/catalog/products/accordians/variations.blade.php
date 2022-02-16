@@ -11,10 +11,6 @@
         .table td.actions .icon {
             margin-top: 8px;
         }
-
-        .table td.actions .icon.pencil-lg-icon {
-            margin-right: 10px;
-        }
     </style>
 @endpush
 
@@ -342,7 +338,7 @@
                 <a :href="['{{ route('admin.catalog.products.index') }}/edit/' + variant.id]">
                     <i class="icon pencil-lg-icon"></i>
                 </a>
-                
+
                 <i class="icon remove-icon" @click="removeVariant()"></i>
             </td>
         </tr>
