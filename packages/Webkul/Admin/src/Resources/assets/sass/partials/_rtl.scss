@@ -10,9 +10,7 @@
             text-align: left;
 
             .profile-info {
-                
-                .profile-info-div {                   
-
+                .profile-info-div {
                     .profile-info-icon {
                         margin-right: 0px !important;
                         margin-left: 10px !important;
@@ -140,7 +138,7 @@
         }
     }
 
-    .tree-container>.tree-item {
+    .tree-container > .tree-item {
         padding-right: 0px;
     }
 
@@ -148,17 +146,21 @@
         margin-left: 5px;
     }
 
-    .image-wrapper .image-item {
-        margin-right: 0px;
-        margin-left: 20px;
+    .image-wrapper {
+        width: auto;
 
-        .remove-image {
+        .image-item {
             margin-right: 0px;
+            margin-left: 20px;
+
+            .remove-image {
+                margin-right: 0px;
+            }
         }
     }
 
     .control-group label.required::before {
-        content: "*";
+        content: '*';
         color: #fc6868;
         font-weight: 700;
     }

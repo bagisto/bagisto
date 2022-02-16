@@ -38,7 +38,7 @@
                 </draggable>
             </div>
 
-            <label class="btn btn-lg btn-primary" style="display: inline-block; width: auto" @click="createFileType">
+            <label class="btn btn-lg btn-primary" style="display: table; width: auto" @click="createFileType">
                 {{ __('admin::app.catalog.products.add-image-btn-title') }}
             </label>
         </div>
