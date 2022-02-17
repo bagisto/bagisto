@@ -128,6 +128,8 @@ class CartController extends Controller
     {
         $result = Cart::removeItem($itemId);
 
+        session()->forget('cart');
+
         if ($result) {
             $response = [
                 'status'  => 'success',
