@@ -26,6 +26,9 @@
                     <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                         <label for="password">{{ __('admin::app.users.sessions.password') }}</label>
                         <input type="password" v-validate="'required|min:6'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.sessions.password') }}&quot;" value=""/>
+
+                        <i refer="#password" class="rango-eye-visible toggle-password-icon" style="margin-left: -30px; cursor: pointer; vertical-align: sub;"></i>
+
                         <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                     </div>
 
@@ -45,3 +48,21 @@
     </div>
 
 @stop
+
+@push('javascript')
+    <script>
+        $(document).ready(function(){
+            $(".toggle-password-icon").click(function() {
+                $(this).toggleClass("rango-eye-visible rango-eye-hide");
+
+                var input = $($(this).attr("refer"));
+
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+        });
+    </script>
+@endpush
