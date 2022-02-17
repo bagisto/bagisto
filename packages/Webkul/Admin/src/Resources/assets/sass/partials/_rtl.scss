@@ -159,6 +159,15 @@
         }
     }
 
+    .variant-image {
+        .trash-icon {
+            position: absolute;
+            cursor: pointer;
+            margin-top: 25%;
+            left: 0;
+        }
+    }
+
     .control-group label.required::before {
         content: '*';
         color: #fc6868;
