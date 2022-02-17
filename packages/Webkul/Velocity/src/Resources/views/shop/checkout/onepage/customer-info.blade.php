@@ -108,7 +108,7 @@
                 @auth('customer')
                     @if(count(auth('customer')->user()->addresses))
                         <a
-                            class="theme-btn light float-right text-up-14"
+                            class="theme-btn light back-button text-up-14"
                             @click="backToSavedBillingAddress()">
 
                             {{ __('shop::app.checkout.onepage.back') }}
