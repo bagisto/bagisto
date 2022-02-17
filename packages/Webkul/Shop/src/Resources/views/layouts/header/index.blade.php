@@ -61,39 +61,9 @@
                     $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
                 @endphp
 
-                @if ($showCompare)
-                    <li class="compare-dropdown-container">
-                        <a
-                            @auth('customer')
-                                href="{{ route('velocity.customer.product.compare') }}"
-                            @endauth
-
-                            @guest('customer')
-                                href="{{ route('velocity.product.compare') }}"
-                            @endguest
-                            style="color: #242424;"
-                            >
-
-                            <i class="icon compare-icon"></i>
-                            <span class="name">
-                                {{ __('shop::app.customer.compare.text') }}
-                                <span class="count">(<span id="compare-items-count"></span>)<span class="count">
-                            </span>
-                        </a>
-                    </li>
-                @endif
-
-                @php
+               @php
                     $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                 @endphp
-
-                @if ($showWishlist)                   
-                    <wishlist-component-with-badge
-                        is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
-                        text="{{ __('shop::app.header.wishlist')  }}"
-                        src="{{ route('customer.wishlist.index') }}">
-                    </wishlist-component-with-badge>  
-                @endif
 
                 {!! view_render_event('bagisto.shop.layout.header.compare-item.after') !!}
 
@@ -183,6 +153,22 @@
                                         <li>
                                             <a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a>
                                         </li>
+                                    @endif
+
+                                    @if ($showCompare)                                     
+                                    <li>
+                                        <a
+                                            @auth('customer')
+                                                href="{{ route('velocity.customer.product.compare') }}"
+                                            @endauth
+
+                                            @guest('customer')
+                                                href="{{ route('velocity.product.compare') }}"
+                                            @endguest
+                                            
+                                            > {{ __('shop::app.customer.compare.text') }}
+                                        </a>
+                                    </li>
                                     @endif
 
                                     <li>
