@@ -29,8 +29,20 @@
                     <thead>
                         <tr>
                             <th>{{ __('admin::app.catalog.products.customer-group') }}</th>
-                            <th>{{ __('admin::app.catalog.products.qty') }}</th>
-                            <th>{{ __('admin::app.catalog.products.price') }}</th>
+                            <th>
+                                <div class="control-group">
+                                    <label class="required">
+                                    {{ __('admin::app.catalog.products.qty') }}
+                                    </label>
+                                </div>
+                           </th>
+                            <th>
+                                <div class="control-group">
+                                    <label class="required">
+                                    {{ __('admin::app.catalog.products.price') }}
+                                    </label>
+                                </div>
+                           </th>
                             <th class="actions"></th>
                         </tr>
                     </thead>
