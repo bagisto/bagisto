@@ -1580,7 +1580,7 @@ return [
     ],
 
     'notification' => [
-        'title'                       => 'تنبيه',
+        'notification-title'          => 'تنبيه',
         'title-plural'                => 'إشعارات',
         'status'                      => [
             'all'        => 'الجميع',
