@@ -208,6 +208,8 @@ trait ProvideCollection
                     $this->resolve($collection, $columnName, $condition, $filterValue, 'whereDate');
                 } else if ($columnType === 'boolean') {
                     $this->resolve($collection, $columnName, $condition, $filterValue, 'where', 'resolveBooleanQuery');
+                } else if ($columnType === 'price') {
+                    $this->resolve($collection, $columnName, $condition, $filterValue, 'having');
                 } else {
                     $this->resolve($collection, $columnName, $condition, $filterValue);
                 }

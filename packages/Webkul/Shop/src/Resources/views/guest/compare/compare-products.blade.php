@@ -1,11 +1,11 @@
 @php
     $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeFamilyRepository');
-    
+
     $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 
     $locale = core()->getRequestedLocaleCode();
 
-    $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
+    $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get();
 @endphp
 
 @push('scripts')
@@ -129,7 +129,7 @@
                                                 <a :href="`${baseUrl}/${product.url_key}`" class="unset">
                                                     <img
                                                         class="image-wrapper"
-                                                        :src="'storage/' + product.product['{{ $attribute['code'] }}']"
+                                                        :src="storageUrl + product.product['{{ $attribute['code'] }}']"
                                                         :onerror="`this.src='${baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" alt="" />
                                                 </a>
                                                 @break;
@@ -162,11 +162,12 @@
             data: function () {
                 return {
                     'products': [],
+                    'baseUrl': '{{ url()->to('/') }}',
+                    'storageUrl': '{{ Storage::url('/') }}',
+                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == 'true',
                     'isProductListLoaded': false,
-                    'baseUrl': "{{ url()->to('/') }}",
-                    'attributeOptions': JSON.parse(@json($attributeOptionTranslations)),
-                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
-                }
+                    'attributeOptions': @json($attributeOptionTranslations),
+                };
             },
 
             mounted: function () {
@@ -211,7 +212,6 @@
                     } else {
                         this.isProductListLoaded = true;
                     }
-
                 },
 
                 'removeProductCompare': function (productId) {
