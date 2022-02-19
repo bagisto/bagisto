@@ -2844,7 +2844,7 @@ section.cart {
 
                 .misc-controls {
                     position: relative;
-                    top: 300px;
+                    top: 320px;
                     margin-top: 0px;
                 }
             }
@@ -2889,8 +2889,7 @@ section.cart {
         .cart-content {
             .left-side {
                 .misc-controls {
-                    display: block;
-                    top: 300px;
+                    top: 320px;
 
                     div {
                         button {
@@ -2905,10 +2904,6 @@ section.cart {
                         }
                     }
                 }
-            }
-
-            .right-side {
-                top: -100px;
             }
         }
     }

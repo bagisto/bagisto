@@ -170,11 +170,13 @@
                                             </div>
 
                                             <div class="product-quantity col-3 no-padding">
-                                                <quantity-changer
-                                                    :control-name="'qty[{{$item->id}}]'"
-                                                    quantity="{{ $item->quantity }}"
-                                                    quantity-text="{{ __('shop::app.products.quantity') }}">
-                                                </quantity-changer>
+                                                @if ($item->product->getTypeInstance()->showQuantityBox() === true)
+                                                    <quantity-changer
+                                                        :control-name="'qty[{{$item->id}}]'"
+                                                        quantity="{{ $item->quantity }}"
+                                                        quantity-text="{{ __('shop::app.products.quantity') }}">
+                                                    </quantity-changer>
+                                                @endif
                                             </div>
 
                                             <div class="product-price fs18 col-1">
@@ -226,11 +228,13 @@
 
                                                 <div class="row col-12 remove-padding-margin actions">
                                                 <div class="product-quantity col-lg-4 col-6 no-padding">
-                                                        <quantity-changer
-                                                            :control-name="'qty[{{$item->id}}]'"
-                                                            quantity="{{ $item->quantity }}"
-                                                            quantity-text="{{ __('shop::app.products.quantity') }}">
-                                                        </quantity-changer>
+                                                        @if ($item->product->getTypeInstance()->showQuantityBox() === true)
+                                                            <quantity-changer
+                                                                :control-name="'qty[{{$item->id}}]'"
+                                                                quantity="{{ $item->quantity }}"
+                                                                quantity-text="{{ __('shop::app.products.quantity') }}">
+                                                            </quantity-changer>
+                                                        @endif
                                                     </div>
 
                                                     <div class="col-4 cursor-pointer text-down-4">
