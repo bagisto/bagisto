@@ -1,4 +1,4 @@
-<template>   
+<template>
      <div class="content">
             <div class="page-header">
                 <div class="page-title">
@@ -6,11 +6,9 @@
                 </div>
                 <div class="page-action">
                     <div class="control-group notif-filter">
-                        <div id="search-icon">
-                            <span class="icon search-icon search-btn"></span>
-                        </div>
                         <input type="text" class="form-control control" placeholder="Search Order" @keyup="applyFilter('search',$event)">
-                    </div> 
+                        <i class="icon search-icon search-btn"></i>
+                    </div>
                     <div class="control-group notif-filter">
                         <select @change="applyFilter('filter',$event)" class="control">
                             <option v-for="orderstatus in orderTypeStatus" :value="orderstatus">{{orderstatus}}</option>
@@ -20,17 +18,17 @@
             </div>
 
             <div class="page-content">
-              
+
                 <ul class="notif" v-if="notifications.length > 0" >
                     <li v-for="(notification,index) in notifications" :class="notification.read ? 'read' : ''">
                         <template v-if="notification.order.status == 'pending'">
                             <div class="notif-icon pending">
                                 <span :class="ordertype.pending.icon"></span>
-                            </div>                
+                            </div>
                             <div class="notif-content">
                                 <a :href="`${orderViewUrl}${notification.order_id}`">
                                     #{{ notification.order.id }} {{orderTypeMessages.pending}}
-                                </a>  
+                                </a>
                             </div>
                             <div class="notif-content">
                                 {{ moment(notification.order.created_at).fromNow() }}
@@ -39,11 +37,11 @@
                         <template v-if="notification.order.status == 'canceled'">
                             <div class="notif-icon canceled">
                                 <span :class="ordertype.canceled.icon"></span>
-                            </div>                
+                            </div>
                             <div class="notif-content">
                                 <a :href="`${orderViewUrl}${notification.order_id}`">
                                     #{{ notification.order.id }} {{orderTypeMessages.canceled}}
-                                </a> 
+                                </a>
                             </div>
                             <div class="notif-content">
                                 {{ moment(notification.order.created_at).fromNow() }}
@@ -52,7 +50,7 @@
                         <template v-if="notification.order.status == 'completed'">
                             <div class="notif-icon completed">
                                 <span :class="ordertype.completed.icon"></span>
-                            </div>                
+                            </div>
                             <div class="notif-content">
                                 <a :href="`${orderViewUrl}${notification.order_id}`">
                                     #{{ notification.order.id }} {{orderTypeMessages.completed}}
@@ -65,7 +63,7 @@
                         <template v-if="notification.order.status == 'processing'">
                             <div class="notif-icon processing">
                                 <span :class="ordertype.processing.icon"></span>
-                            </div>                   
+                            </div>
                             <div class="notif-content">
                                 <a :href="`${orderViewUrl}${notification.order_id}`">
                                     #{{ notification.order.id }} {{orderTypeMessages.processing}}
@@ -78,7 +76,7 @@
                         <template v-if="notification.order.status == 'closed'">
                             <div class="notif-icon closed">
                                 <span :class="ordertype.closed.icon"></span>
-                            </div>                
+                            </div>
                             <div class="notif-content">
                                 <a :href="`${orderViewUrl}${notification.order_id}`">
                                     #{{ notification.order.id }} {{orderTypeMessages.closed}}
@@ -97,14 +95,14 @@
                 <ul class="notif" v-if="notifications.length == 0">
                     <li>{{ noRecordText }}</li>
                 </ul>
-                
+
             </div>
-        </div> 
+        </div>
 </template>
 
 <script>
-    
-    export default {  
+
+    export default {
 
         props: [
             'url',
@@ -114,7 +112,7 @@
             'title',
             'orderStatus',
             'noRecordText',
-            'orderStatusMessages'   
+            'orderStatusMessages'
         ],
 
         data: function() {
@@ -143,7 +141,7 @@
                     closed : {
                         icon: 'closed-icon',
                         message: 'Order Closed'
-                    },                    
+                    },
                 },
                 orderTypeStatus: JSON.parse(this.orderStatus),
                 orderTypeMessages: JSON.parse(this.orderStatusMessages)
@@ -158,7 +156,7 @@
                 Echo.channel('notification').listen('.create-notification', (e) => {
                     this.getNotification();
                 });
-                    
+
                 Echo.channel('notification').listen('.update-notification', (e) => {
                     this.notifications.forEach((notification)=>{
                         if(notification.order_id == e.id){
@@ -166,7 +164,7 @@
                         }
                     });
                 });
-            }                      
+            }
         },
 
         methods: {
@@ -194,7 +192,7 @@
             },
             applyFilter: function(type,$event){
                 type == 'search' ? this.id = $event.target.value : this.status = $event.target.value;
-                        
+
                 this.getNotification();
             },
             getResults(page  = 1){
