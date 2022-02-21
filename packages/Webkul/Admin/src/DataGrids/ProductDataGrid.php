@@ -66,12 +66,6 @@ class ProductDataGrid extends DataGrid
         /* channel */
         $this->channel = core()->getRequestedChannelCode();
 
-        /* finding channel code */
-        if ($this->channel !== 'all') {
-            $this->channel = Channel::query()->find($this->channel);
-            $this->channel = $this->channel ? $this->channel->code : 'all';
-        }
-
         /* parent constructor */
         parent::__construct();
     }
