@@ -4931,3 +4931,11 @@ body {
 .d-inline-block {
     display: inline-block;
 }
+
+.icon-position {
+    margin-left: -30px; 
+    cursor: pointer; 
+    vertical-align: sub;
+    position: absolute;
+    margin-top: 15px;
+}

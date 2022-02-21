@@ -30,7 +30,7 @@
                 <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                     <label for="password" class="required">{{ __('shop::app.customer.login-form.password') }}  </label>
                     <input type="password" v-validate="'required|min:6'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.sessions.password') }}&quot;" value=""/>
-                    <i refer="#password" class="icon eye-icon toggle-password-icon" style="margin-left: -30px; cursor: pointer; vertical-align: sub;position: absolute;margin-top: 15px;"></i>
+                    <i refer="#password" class="icon eye-icon toggle-password-icon icon-position"></i>
                     <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                 </div>
 
