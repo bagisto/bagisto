@@ -66,11 +66,11 @@ body {
             height: 48px;
 
             &::before {
-                content: "";
+                content: '';
                 width: 24px;
                 height: 24px;
                 background-color: rebeccapurple;
-                background-image: url("../assets/image/Icon-Sortable.svg");
+                background-image: url('../assets/image/Icon-Sortable.svg');
                 display: block;
             }
         }
@@ -210,12 +210,11 @@ body {
     border-right: 1px solid $navbar-border-right-color;
 
     ul.menubar {
-
         li.menu-item {
             position: relative;
             overflow: hidden;
 
-            >a {
+            > a {
                 color: $black;
                 width: 100%;
 
@@ -236,7 +235,6 @@ body {
 
                 .arrow-icon-left {
                     float: right;
-
                 }
 
                 .arrow-icon-right {
@@ -499,9 +497,7 @@ body {
         right: 0 !important;
 
         ul.menubar {
-
             li.menu-item {
-
                 ul.sub-menubar {
                     top: 0;
                     right: 56px !important;
@@ -510,14 +506,9 @@ body {
         }
 
         &.open {
-
             ul.menubar {
-
                 li.menu-item {
-
-
                     ul.sub-menubar {
-
                         li.sub-menu-item {
                             a {
                                 padding-right: 52px;
@@ -559,7 +550,6 @@ body {
     }
 
     .content {
-
         .page-header {
             display: inline-block;
             width: 100%;
@@ -634,7 +624,6 @@ body {
 }
 
 .notif {
-
     background-color: $white;
 
     li {
@@ -658,7 +647,7 @@ body {
             }
         }
 
-        .notif-content>a {
+        .notif-content > a {
             text-decoration: none;
             color: rgba(58, 58, 58, 1);
         }
@@ -691,7 +680,7 @@ body {
     .read {
         color: rgba(58, 58, 58, 0.5);
 
-        .notif-content>a {
+        .notif-content > a {
             text-decoration: none;
             color: rgba(58, 58, 58, 0.5);
         }
@@ -711,7 +700,7 @@ body {
     font-weight: 900;
 }
 
-#search-icon {
+.icon.search-icon.search-btn {
     position: absolute;
     margin-top: 6px;
     margin-left: 151px;
@@ -754,11 +743,8 @@ body {
     }
 
     .navbar-top {
-
         .navbar-top-right {
-
             .profile {
-
                 .profile-info {
                     display: inline-block;
                 }
@@ -766,10 +752,9 @@ body {
         }
     }
 
-    #search-icon {
-        position: absolute;
+    .icon.search-icon.search-btn {
         margin-top: 6px;
-        margin-left: 151px;
+        margin-left: -31px;
     }
 
     .notif-filter {
@@ -782,7 +767,6 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
-
     h1 {
         font-size: 18px;
     }
@@ -803,13 +787,10 @@ body {
         }
 
         .navbar-top-right {
-
             .profile {
-
                 .profile-info {
                     display: none;
                 }
-
             }
         }
     }
@@ -834,11 +815,8 @@ body {
         }
 
         .content {
-
             .configuration {
-
                 .page-header {
-
                     .control-group {
                         width: 100% !important;
                         display: block;
@@ -875,12 +853,11 @@ body {
         }
     }
 
-    #search-icon {
+    .icon.search-icon.search-btn {
         position: absolute;
         margin-top: 6px;
         right: 16px;
     }
-
 
     .notif-filter {
         margin-top: 12px !important;
@@ -895,7 +872,6 @@ body {
     .content-container {
         .content {
             .page-header {
-
                 .page-title {
                     width: 100% !important;
 
@@ -926,10 +902,10 @@ body {
 @media only screen and (max-width: 400px) {
     .content-container {
         .content {
-            .page-header {                
+            .page-header {
                 .page-action {
-                    a{
-                        margin-top:10px;
+                    a {
+                        margin-top: 10px;
                     }
                 }
             }
