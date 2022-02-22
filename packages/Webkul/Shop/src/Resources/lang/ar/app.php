@@ -158,6 +158,7 @@ return [
             'verify-first'        => 'الرجاء قم بتفعيل حسابك.',
             'not-activated'       => 'التنشيط الخاص بك يسعى للحصول على موافقة المشرف',
             'resend-verification' => 'إعادة إرسال البريد الإلكتروني للتحقق مرة أخرى',
+            'show-password'       => 'عرض كلمة المرور',
         ],
 
         'forgot-password' => [

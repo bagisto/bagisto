@@ -157,6 +157,7 @@ return [
             'verify-first'        => 'Vérifiez d\'abord votre compte de messagerie.',
             'not-activated'       => 'Votre activation demande l\'approbation de l\'administrateur',
             'resend-verification' => 'Renvoyer à nouveau l\'e-mail de vérification',
+            'show-password'       => 'montrer le mot de passe',
         ],
 
         'forgot-password' => [

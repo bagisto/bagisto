@@ -155,6 +155,7 @@ return [
             'verify-first'        => 'メールアドレスを認証してください',
             'not-activated'       => 'このアカウントは管理者の認証が出来次第、有効になります',
             'resend-verification' => 'アカウント確認メールが再送信',
+            'show-password'       => '顯示密碼',
         ],
 
         'forgot-password' => [

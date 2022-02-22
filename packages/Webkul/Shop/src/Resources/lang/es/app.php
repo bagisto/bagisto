@@ -158,6 +158,7 @@ return [
             'verify-first'        => 'Verifica tu correo electrónico primero',
             'not-activated'       => 'La activación de la cuenta será aprovada por el administrador',
             'resend-verification' => 'Se ha reenviado un correo de verificación',
+            'show-password'       => 'Montru Pasvorton',
         ],
 
         'forgot-password' => [

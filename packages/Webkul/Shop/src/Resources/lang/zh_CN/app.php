@@ -158,7 +158,8 @@ return [
             'invalid-creds' => '请检查您的凭据并重试.',
             'verify-first' => '首先验证您的电子邮件帐户.',
             'not-activated' => '您的激活需要管理员批准',
-            'resend-verification' => '重新发送验证邮件'
+            'resend-verification' => '重新发送验证邮件',
+            'show-password'       => '显示密码',
         ],
 
         'forgot-password' => [

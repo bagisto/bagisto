@@ -155,6 +155,7 @@ return [
             'verify-first'        => 'ابتدا حساب ایمیل خود را تأیید کنید',
             'not-activated'       => 'فعال سازی شما به دنبال تأیید سرپرست است',
             'resend-verification' => 'مجدداً نامه تأیید را دوباره ارسال کنید',
+            'show-password'       => 'montrer le mot de passe',
         ],
 
         'forgot-password' => [
