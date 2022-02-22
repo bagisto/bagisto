@@ -155,6 +155,7 @@ return [
             'verify-first'        => 'Öncelikle mail adresinizi doğrulayınız.',
             'not-activated'       => 'Yönetici aktivasyonu gerekiyor.',
             'resend-verification' => 'Doğrulama mailini yeniden gönder',
+            'show-password'       => 'Şifreyi göster',
         ],
 
         'forgot-password' => [

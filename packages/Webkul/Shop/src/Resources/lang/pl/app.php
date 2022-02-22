@@ -156,6 +156,7 @@ return [
             'verify-first'        => 'Najpierw zweryfikuj swoje konto e-mail.',
             'not-activated'       => 'Twoja aktywacja wymaga zgody administratora',
             'resend-verification' => 'Wyślij ponownie wiadomość weryfikacyjną',
+            'show-password'       => 'Pokaż hasło',
         ],
 
         'forgot-password' => [

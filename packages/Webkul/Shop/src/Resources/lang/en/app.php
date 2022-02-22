@@ -159,6 +159,8 @@ return [
             'verify-first'        => 'Verify your email account first.',
             'not-activated'       => 'Your activation seeks admin approval',
             'resend-verification' => 'Resend verification mail again',
+            'show-password'       => 'Show Password',
+            
         ],
 
         'forgot-password' => [

@@ -156,6 +156,7 @@ return [
             'invalid-creds'       => 'Por favor, verifique suas credenciais e tente novamente',
             'verify-first'        => 'Verifique seu e-mail primeiro',
             'resend-verification' => 'Reenviar email de verificação novamente',
+            'show-password'       => 'show-password',
         ],
 
         'forgot-password' => [

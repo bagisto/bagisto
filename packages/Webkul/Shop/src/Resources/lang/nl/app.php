@@ -163,6 +163,7 @@ return [
             'verify-first'        => 'Verifieer eerst uw e-mailaccount.',
             'not-activated'       => 'Uw activering vraagt om goedkeuring van de beheerder.',
             'resend-verification' => 'Verzend de verificatie-e-mail opnieuw',
+            'show-password'       => 'Vis passord',
         ],
 
         'forgot-password' => [

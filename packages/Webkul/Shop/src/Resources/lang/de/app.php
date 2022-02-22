@@ -158,6 +158,7 @@ return [
             'verify-first'        => 'Bestätigung Sie zuerst Ihr E-Mail-Konto.',
             'not-activated'       => 'Ihre Aktivierung erfordert die Genehmigung des Administrators',
             'resend-verification' => 'Senden Sie die Bestätigungsmail erneut',
+            'show-password'       => 'Laat wachtwoord zien',
         ],
 
         'forgot-password' => [
