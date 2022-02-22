@@ -35,7 +35,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="checkbox"  id="shoPassword" >Show Password
+                        <input type="checkbox"  id="shoPassword" >{{ __('shop::app.customer.login-form.show-password') }}  
                     </div>
 
                     <div class="col-md-6">
