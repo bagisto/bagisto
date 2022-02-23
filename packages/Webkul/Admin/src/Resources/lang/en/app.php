@@ -527,8 +527,16 @@ return [
             'save-btn-title'                => 'Save Product',
             'general'                       => 'General',
             'product-type'                  => 'Product Type',
-            'simple'                        => 'Simple',
-            'configurable'                  => 'Configurable',
+            'type'                          => [
+                'simple'                        => 'Simple',
+                'booking'                       => 'Booking',
+                'bundle'                        => 'Bundle',
+                'downloadable'                  => 'Downloadable',
+                'grouped'                       => 'Grouped',
+                'virtual'                       => 'Virtual',            
+                'configurable'                  => 'Configurable',
+
+            ],            
             'familiy'                       => 'Attribute Family',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Configurable Attributes',
