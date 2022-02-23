@@ -29,6 +29,15 @@ class CategoryDataGrid extends DataGrid
      */
     protected $locale = 'all';
 
+     /**
+     * Contains the keys for which extra filters to show.
+     *
+     * @var string[]
+     */
+    protected $extraFilters = [
+        'locales',
+    ];
+
     /**
      * Create a new datagrid instance.
      *
