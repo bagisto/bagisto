@@ -59,11 +59,8 @@
                                     <option value="{{ $key }}" {{ request()->input('type') == $productType['key'] ? 'selected' : '' }}>
                                    {{ __('admin::app.catalog.products.type.'.strtolower($productType['name'])) }}
                                    
-                                    </option> 
-                                    <!-- <option value=""> {{ $productType['name'] }}</option> -->
-                                   
-                                @endforeach
-                                
+                                    </option>                                  
+                                 @endforeach                                
                             </select>
 
                             @if ($familyId)
