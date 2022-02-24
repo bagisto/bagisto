@@ -28,14 +28,14 @@
     .icon.search-icon.search-btn {
         position: absolute;
         z-index: 1;
-        left: 35px;
     }
 
     @media only screen and (max-width: 768px) {
         .icon.search-icon.search-btn {
             position: absolute;
-            margin-top: 6px;
-            right: 150px;
+            margin-top: unset;
+            right: unset;
+            left: unset;
         }
     }
 

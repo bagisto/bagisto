@@ -702,8 +702,6 @@ body {
 
 .icon.search-icon.search-btn {
     position: absolute;
-    margin-top: 6px;
-    margin-left: 151px;
 }
 
 .notif-filter {
@@ -750,11 +748,6 @@ body {
                 }
             }
         }
-    }
-
-    .icon.search-icon.search-btn {
-        margin-top: 6px;
-        margin-left: -31px;
     }
 
     .notif-filter {
@@ -855,8 +848,8 @@ body {
 
     .icon.search-icon.search-btn {
         position: absolute;
-        margin-top: 6px;
-        right: 16px;
+        // margin-top: 6px;
+        // right: 16px;
     }
 
     .notif-filter {
