@@ -82,6 +82,8 @@ return [
         'discount'                 => 'Korting',
         'cms'                      => 'CMS',
         'transactions'             => 'Transacties',
+        'mode'                     => 'modus',
+        'account-title'            => 'Rekening',
     ],
 
     'acl' => [

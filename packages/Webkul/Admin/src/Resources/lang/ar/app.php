@@ -82,7 +82,9 @@ return [
         'email-templates'          => 'Email Templates',
         'discount'                 => 'خصم',
         'cms'                      => 'CMS',
-        'transactions'             => 'Transactions',
+        'transactions'             => 'المعاملات',
+        'mode'                     => 'الوضع',
+        'account-title'            => 'حساب',
     ],
 
     'acl' => [
