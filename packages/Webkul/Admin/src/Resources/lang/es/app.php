@@ -83,7 +83,9 @@ return [
         'events'                   => 'Eventos',
         'discount'                 => 'Descuento',
         'cms'                      => 'CMS',
-        'transactions'             => 'Transacciones',
+        'transactions'             => 'Transakcioj',
+        'mode'                     => 'Reĝimo',
+        'account-title'            => 'Konto',
     ],
 
     'acl' => [

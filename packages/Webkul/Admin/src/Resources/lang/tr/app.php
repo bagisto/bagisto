@@ -79,7 +79,9 @@ return [
         'email-templates'          => 'Email Templates',
         'discount'                 => 'İndirim',
         'cms'                      => 'CMS',
-        'transactions'             => 'Transactions',
+        'transactions'             => 'işlemler',
+        'mode'                     => 'mod',
+        'account-title'            => 'Hesap',
     ],
 
     'acl' => [

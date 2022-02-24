@@ -81,7 +81,9 @@ return [
         'tax-rates'                => 'Steuersätze',
         'discount'                 => 'Rabatt',
         'cms'                      => 'CMS',
-        'transactions'             => 'Transactions',
+        'transactions'             => 'Transacties',
+        'mode'                     => 'modus',
+        'account-title'            => 'Rekening',
     ],
     'acl'           =>
     [
