@@ -159,6 +159,15 @@ body {
             }
         }
 
+        .lg-card-container {
+            &.list-card {
+                .add-to-cart-btn {
+                    float: right;
+                    margin-left: 20px;
+                }
+            }
+        }
+
         #top {
             #account {
                 .welcome-content {
