@@ -6,7 +6,7 @@
         }
 
         .has-control-group .control-group:first-child {
-            padding-right: 10px;
+            padding-right: 0px !important;
         }
 
         .has-control-group .control-group:last-child {
