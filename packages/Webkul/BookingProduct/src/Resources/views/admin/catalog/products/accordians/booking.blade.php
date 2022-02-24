@@ -6,11 +6,11 @@
         }
 
         .has-control-group .control-group:first-child {
-            padding-right: 10px;
+            padding-right: 0px !important;
         }
 
         .has-control-group .control-group:last-child {
-            padding-left: 10px;
+            padding-left: 0px !important;
         }
 
         .slot-list table tbody tr td .control-group label{
@@ -20,8 +20,8 @@
         @media only screen and (max-width: 540px){
             .slot-list table thead{
                 display: none;
-            } 
-            
+            }
+
             .slot-list table tbody tr td{
                 display: block;
             }
@@ -31,10 +31,9 @@
             }
 
             .table .control-group.date:after, .table .control-group.datetime:after {
-                top: 24px;
                 left: 100%;
             }
-        } 
+        }
     </style>
 @endpush
 
