@@ -1,7 +1,7 @@
-@import "../main/mixins";
-@import "../main/_variables";
+@import '../main/mixins';
+@import '../main/_variables';
 
-.dropdown-toggle{
+.dropdown-toggle {
     position: relative;
 }
 
@@ -11,11 +11,12 @@
     top: 16px;
 }
 
-.rtl{
+.rtl {
     .dropdown-toggle::after {
         position: absolute;
         left: 22px;
         top: 16px;
+        right: unset;
     }
 }
 
@@ -60,7 +61,6 @@
             vertical-align: top;
 
             &.actions {
-
                 .action {
                     display: inline-flex;
                 }
@@ -120,7 +120,6 @@
                 display: inline-block;
 
                 &.per-page {
-
                     .control-group {
                         margin-bottom: 0px;
 
@@ -252,7 +251,6 @@
                         margin-bottom: 15px;
                     }
                 }
-
             }
         }
 
@@ -284,8 +282,8 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        background: #E7E7E7;
-        border: 1px solid #E7E7E7;
+        background: #e7e7e7;
+        border: 1px solid #e7e7e7;
         font-size: 14px;
         height: 40px;
         color: #000311;
@@ -299,18 +297,17 @@
 
         &:hover {
             background: $white-color;
-            border: 1px solid #E7E7E7;
+            border: 1px solid #e7e7e7;
         }
     }
 }
 
 .rtl {
     .search-filter {
-
         .control {
             padding-right: 10px;
             border-left: 0;
-            border-right: 1px solid #C7C7C7;
+            border-right: 1px solid #c7c7c7;
             border-top-right-radius: 3px;
             border-bottom-right-radius: 3px;
             border-top-left-radius: 0;
@@ -333,17 +330,14 @@
     .dropdown-filters {
         display: inline-block;
 
-
         &.per-page {
             margin-left: 10px;
             margin-right: 10px;
         }
-
     }
 
     .filtered-tags {
         .filter-tag {
-
             .wrapper,
             .cross-icon {
                 margin-right: 10px;
@@ -353,10 +347,8 @@
     }
 }
 
-
 @media only screen and (max-width: 768px) {
     .grid-container {
-
         .grid-top {
             .datagrid-filters {
                 grid-template-columns: 100%;
@@ -364,7 +356,6 @@
 
                 .search-filter {
                     max-width: 100% !important;
-
                 }
 
                 .filter-left {
@@ -388,7 +379,6 @@
     }
 
     .dropdown-list {
-
         &.dropdown-container {
             padding: 10px;
         }
