@@ -1,11 +1,11 @@
 /* main imports */
-@import "main/icons";
-@import "main/variables";
-@import "main/mixins";
+@import 'main/icons';
+@import 'main/variables';
+@import 'main/mixins';
 
 /* includes */
-@import "includes/animations";
-@import "includes/components";
+@import 'includes/animations';
+@import 'includes/components';
 
 /* start from here */
 * {
@@ -195,8 +195,10 @@ h5 {
 }
 
 .btn {
-    @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.2),
-        0 0 8px 0 rgba(0, 0, 0, 0.1));
+    @include box-shadow(
+        0 1px 4px 0 rgba(0, 0, 0, 0.2),
+        0 0 8px 0 rgba(0, 0, 0, 0.1)
+    );
     @include border-radius(3px);
     border: none;
     color: $white-color;
@@ -245,9 +247,9 @@ h5 {
     }
 
     &:disabled,
-    &[disabled="disabled"],
-    &[disabled="disabled"]:hover,
-    &[disabled="disabled"]:active {
+    &[disabled='disabled'],
+    &[disabled='disabled']:hover,
+    &[disabled='disabled']:active {
         cursor: not-allowed;
         background: #b1b1ae;
         box-shadow: none;
@@ -292,8 +294,10 @@ h5 {
 .dropdown-list {
     width: 200px;
     margin-bottom: 20px;
-    @include box-shadow(0 2px 4px 0 rgba(0, 0, 0, 0.16),
-        0 0 9px 0 rgba(0, 0, 0, 0.16));
+    @include box-shadow(
+        0 2px 4px 0 rgba(0, 0, 0, 0.16),
+        0 0 9px 0 rgba(0, 0, 0, 0.16)
+    );
     @include border-radius(3px);
     background-color: $white-color;
     position: absolute;
@@ -397,12 +401,13 @@ h5 {
     }
 }
 
-
 .notification {
     width: 400px;
     margin-bottom: 20px;
-    @include box-shadow(0 2px 4px 0 rgba(0, 0, 0, 0.16),
-        0 0 9px 0 rgba(0, 0, 0, 0.16));
+    @include box-shadow(
+        0 2px 4px 0 rgba(0, 0, 0, 0.16),
+        0 0 9px 0 rgba(0, 0, 0, 0.16)
+    );
     @include border-radius(3px);
     background-color: $white-color;
     position: absolute;
@@ -452,12 +457,12 @@ h5 {
             .read {
                 color: rgba(58, 58, 58, 0.5);
 
-                .notif-content>a {
+                .notif-content > a {
                     text-decoration: none;
                     color: rgba(58, 58, 58, 0.5);
 
                     &:hover {
-                        color: rgba(58, 58, 58, 0.5)
+                        color: rgba(58, 58, 58, 0.5);
                     }
                 }
             }
@@ -510,7 +515,6 @@ h5 {
         }
     }
 }
-
 
 .section {
     .secton-title {
@@ -585,7 +589,6 @@ h5 {
             vertical-align: top;
 
             &.actions {
-
                 .action {
                     display: inline-flex;
                 }
@@ -664,7 +667,7 @@ h5 {
     }
 
     .checkbox-view {
-        background-image: url("../images/Checkbox.svg");
+        background-image: url('../images/Checkbox.svg');
         height: 24px;
         width: 24px;
         margin: 0;
@@ -673,11 +676,11 @@ h5 {
         margin-right: 5px;
     }
 
-    input:checked+.checkbox-view {
-        background-image: url("../images/Checkbox-Checked.svg");
+    input:checked + .checkbox-view {
+        background-image: url('../images/Checkbox-Checked.svg');
     }
 
-    input:disabled+.checkbox-view {
+    input:disabled + .checkbox-view {
         opacity: 0.5;
         cursor: not-allowed;
     }
@@ -697,7 +700,7 @@ h5 {
     }
 
     .radio-view {
-        background-image: url("../images/controls.svg");
+        background-image: url('../images/controls.svg');
         background-position: -21px 0px;
         height: 20px;
         width: 20px;
@@ -707,11 +710,11 @@ h5 {
         margin-right: 5px;
     }
 
-    input:checked+.radio-view {
+    input:checked + .radio-view {
         background-position: -21px -21px;
     }
 
-    input:disabled+.radio-view {
+    input:disabled + .radio-view {
         opacity: 0.5;
         cursor: not-allowed;
     }
@@ -740,7 +743,7 @@ h5 {
         color: $font-color;
 
         &.required::after {
-            content: "*";
+            content: '*';
             color: $danger-color;
             font-weight: 700;
             display: inline-block;
@@ -770,7 +773,7 @@ h5 {
             border-color: $brand-color;
         }
 
-        &[disabled="disabled"] {
+        &[disabled='disabled'] {
             border-color: #d3d3d3;
             background-color: #d3d3d3;
             cursor: not-allowed;
@@ -788,7 +791,7 @@ h5 {
         }
 
         &::after {
-            background-image: url("../images/Icon-Calendar.svg");
+            background-image: url('../images/Icon-Calendar.svg');
             width: 24px;
             height: 24px;
             content: '';
@@ -817,7 +820,7 @@ h5 {
     .control-info {
         display: block;
         font-size: 14px;
-        color: #6F6F6F;
+        color: #6f6f6f;
         font-style: italic;
     }
 
@@ -854,7 +857,6 @@ h5 {
 
 .table {
     .control-group {
-
         &.date,
         &.datetime {
             &::after {
@@ -865,7 +867,6 @@ h5 {
 
         &.has-error.date,
         &.has-error.date {
-
             &.date,
             &.datetime {
                 &::after {
@@ -878,7 +879,6 @@ h5 {
 
 .rtl {
     .control-group {
-
         &.date,
         &.datetime {
             .control {
@@ -900,7 +900,6 @@ h5 {
 
     .table {
         .control-group {
-
             &.date,
             &.datetime {
                 &::after {
@@ -936,31 +935,31 @@ h5 {
         right: 0;
         bottom: 0;
         background-color: $filter-toggle-color;
-        -webkit-transition: .2s;
-        transition: .2s;
+        -webkit-transition: 0.2s;
+        transition: 0.2s;
     }
 
     .slider:before {
         position: absolute;
-        content: "";
+        content: '';
         height: 26px;
         width: 26px;
         left: 4px;
         bottom: 4px;
         background-color: $white-color;
-        -webkit-transition: .2s;
-        transition: .2s;
+        -webkit-transition: 0.2s;
+        transition: 0.2s;
     }
 
-    input:checked+.slider {
+    input:checked + .slider {
         background-color: $brand-color;
     }
 
-    input:focus+.slider {
+    input:focus + .slider {
         box-shadow: 0 0 1px $brand-color;
     }
 
-    input:checked+.slider:before {
+    input:checked + .slider:before {
         -webkit-transform: translateX(26px);
         -ms-transform: translateX(26px);
         transform: translateX(26px);
@@ -994,8 +993,10 @@ h5 {
         padding: 15px;
         @include border-radius(3px);
         display: inline-block;
-        @include box-shadow(0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1),
-            0px 2px 6px 0px rgba(0, 0, 0, 0.12));
+        @include box-shadow(
+            0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1),
+            0px 2px 6px 0px rgba(0, 0, 0, 0.12)
+        );
         position: relative;
         animation: jelly 0.5s ease-in-out;
         transform-origin: center top;
@@ -1063,7 +1064,7 @@ accordian {
     width: 100%;
 
     .accordian-header,
-    div[slot*="header"] {
+    div[slot*='header'] {
         width: 100%;
         display: inline-block;
         font-size: 18px;
@@ -1075,7 +1076,7 @@ accordian {
         margin-top: -1px;
 
         .expand-icon {
-            background-image: url("../images/Expand-Light.svg");
+            background-image: url('../images/Expand-Light.svg');
             margin-right: 10px;
             margin-top: 3px;
         }
@@ -1103,19 +1104,19 @@ accordian {
     }
 
     .accordian-content,
-    div[slot*="body"] {
+    div[slot*='body'] {
         width: 100%;
         padding: 20px 15px;
         display: none;
         transition: 0.3s ease all;
     }
 
-    &.active>.accordian-content {
+    &.active > .accordian-content {
         display: inline-block;
     }
 
-    &.active>.accordian-header .expand-icon {
-        background-image: url("../images/Expand-Light-On.svg");
+    &.active > .accordian-header .expand-icon {
+        background-image: url('../images/Expand-Light-On.svg');
     }
 }
 
@@ -1126,11 +1127,11 @@ accordian {
         margin-top: 10px;
         width: 100%;
 
-        >.tree-item {
+        > .tree-item {
             display: none;
         }
 
-        &.active>.tree-item {
+        &.active > .tree-item {
             display: inline-block;
         }
 
@@ -1148,7 +1149,7 @@ accordian {
             display: inline-block;
             margin-right: 10px;
             cursor: pointer;
-            background-image: url("../images/Expand-Light.svg");
+            background-image: url('../images/Expand-Light.svg');
             width: 18px;
             height: 18px;
             vertical-align: middle;
@@ -1160,13 +1161,13 @@ accordian {
         }
 
         &.active {
-            >.expand-icon {
-                background-image: url("../images/Expand-Light-On.svg");
+            > .expand-icon {
+                background-image: url('../images/Expand-Light-On.svg');
             }
         }
     }
 
-    >.tree-item {
+    > .tree-item {
         padding-left: 0;
     }
 }
@@ -1215,8 +1216,10 @@ modal {
     margin-left: -300px;
     position: fixed;
     z-index: 11;
-    @include box-shadow(0px 15px 25px 0px rgba(0, 0, 0, 0.03),
-        0px 20px 45px 5px rgba(0, 0, 0, 0.2));
+    @include box-shadow(
+        0px 15px 25px 0px rgba(0, 0, 0, 0.03),
+        0px 20px 45px 5px rgba(0, 0, 0, 0.2)
+    );
     animation: fade-in-white 0.3s ease-in-out;
     animation: jelly 0.5s ease-in-out;
     @include border-radius(5px);
@@ -1262,11 +1265,18 @@ modal {
         .control {
             width: 100%;
         }
+
+        &.date,
+        &.datetime {
+            .control {
+                padding-left: 40px;
+            }
+        }
     }
 }
 
 .label {
-    background: #E7E7E7;
+    background: #e7e7e7;
     @include border-radius(2px);
     padding: 8px;
     color: $black-color-shade;
@@ -1339,11 +1349,11 @@ modal {
         width: 200px;
         height: 200px;
         margin-right: 20px;
-        background: #F8F9FA;
+        background: #f8f9fa;
         @include border-radius(3px);
         display: inline-block;
         position: relative;
-        background-image: url("../images/placeholder-icon.svg");
+        background-image: url('../images/placeholder-icon.svg');
         background-repeat: no-repeat;
         background-position: center;
         margin-bottom: 20px;
@@ -1359,7 +1369,11 @@ modal {
         }
 
         .remove-image {
-            background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.24) 100%);
+            background-image: linear-gradient(
+                -180deg,
+                rgba(0, 0, 0, 0.08) 0%,
+                rgba(0, 0, 0, 0.24) 100%
+            );
             @include border-radius(0 0 4px 4px);
             position: absolute;
             bottom: 0;
@@ -1385,7 +1399,6 @@ modal {
 .vue-swatches__trigger {
     border: 1px solid #d3d3d3;
 }
-
 
 .helper-container {
     display: block;
@@ -1427,7 +1440,7 @@ modal {
         z-index: 1;
     }
 
-    &[x-placement^="top"] {
+    &[x-placement^='top'] {
         margin-bottom: 5px;
 
         .tooltip-arrow {
@@ -1442,7 +1455,7 @@ modal {
         }
     }
 
-    &[x-placement^="bottom"] {
+    &[x-placement^='bottom'] {
         margin-top: 5px;
 
         .tooltip-arrow {
@@ -1457,7 +1470,7 @@ modal {
         }
     }
 
-    &[x-placement^="right"] {
+    &[x-placement^='right'] {
         margin-left: 5px;
 
         .tooltip-arrow {
@@ -1472,7 +1485,7 @@ modal {
         }
     }
 
-    &[x-placement^="left"] {
+    &[x-placement^='left'] {
         margin-right: 5px;
 
         .tooltip-arrow {
@@ -1493,7 +1506,7 @@ modal {
     background-image: url(../images/Icon-Calendar.svg);
     width: 24px;
     height: 24px;
-    content: "";
+    content: '';
     display: inline-block;
     vertical-align: middle;
     margin-left: -34px;
