@@ -226,7 +226,7 @@
                                                 </div>
 
                                                 <div class="row col-12 remove-padding-margin actions">
-                                                    <div class="product-quantity col-lg-4 col-6 no-padding">
+                                                    <div class="product-quantity col-lg-4 col-4 no-padding">
                                                         @if ($item->product->getTypeInstance()->showQuantityBox() === true)
                                                             <quantity-changer
                                                                 :control-name="'qty[{{$item->id}}]'"
@@ -235,21 +235,19 @@
                                                             </quantity-changer>
                                                         @endif
                                                     </div>
-                                                </div>
 
-                                                <div class="row col-12 remove-padding-margin actions">
-                                                    <div class="col-4 no-padding">
+                                                    <div class="col-lg-2 col-2 cursor-pointer mt-2">
                                                         @auth('customer')
                                                             @if ($showWishlist)
                                                                 @if ($item->parent_id != 'null' || $item->parent_id != null)
-                                                                    <div class="alert-wishlist">
+                                                                    <div class="alert-wishlist ml-2">
                                                                         @include('shop::products.wishlist', [
                                                                             'route' => route('shop.movetowishlist', $item->id),
                                                                             'text' => ""
                                                                         ])
                                                                     </div>
                                                                 @else
-                                                                    <div class="alert-wishlist">
+                                                                    <div class="alert-wishlist ml-2">
                                                                         @include('shop::products.wishlist', [
                                                                             'route' => route('shop.movetowishlist', $item->child->id),
                                                                             'text' => ""
@@ -260,7 +258,7 @@
                                                         @endauth
                                                     </div>
 
-                                                    <div class="col-4 cursor-pointer">
+                                                    <div class="col-lg-2 col-2 cursor-pointer ml-2 mt-2">
                                                         <a href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}" class="unset">
                                                             <i class="material-icons fs24">delete</i>
                                                         </a>
