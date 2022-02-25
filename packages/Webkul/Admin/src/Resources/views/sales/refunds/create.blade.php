@@ -106,7 +106,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                           
+                            </div>
                         </div>
                     </accordian>
 
@@ -316,11 +316,11 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>                
+                </div>
             </div>
 
             <div style="width: 100%; display: inline-block">
-                <button type="button" class="btn btn-lg btn-primary" style="float: right" @click="updateQty">
+                <button type="button" class="btn btn-lg mt-10 btn-primary" style="float: right" @click="updateQty">
                     {{ __('admin::app.sales.refunds.update-qty') }}
                 </button>
             </div>
