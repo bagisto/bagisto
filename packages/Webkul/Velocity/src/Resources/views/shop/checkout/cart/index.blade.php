@@ -238,7 +238,7 @@
                                                 </div>
 
                                                 <div class="row col-12 remove-padding-margin actions">
-                                                    <div class="col-4 no-padding">
+                                                    <div class="col-2 no-padding">
                                                         @auth('customer')
                                                             @if ($showWishlist)
                                                                 @if ($item->parent_id != 'null' || $item->parent_id != null)
@@ -260,7 +260,7 @@
                                                         @endauth
                                                     </div>
 
-                                                    <div class="col-4 cursor-pointer">
+                                                    <div class="col-2 cursor-pointer">
                                                         <a href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}" class="unset">
                                                             <i class="material-icons fs24">delete</i>
                                                         </a>
