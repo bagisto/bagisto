@@ -898,10 +898,27 @@ body {
             .page-header {
                 .page-action {
                     a {
-                        margin-top: 10px;
+                        margin-top: 15px;
+                        margin-right: 81px;
                     }
                 }
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .content-container {
+        .content {
+            .page-header {
+            
+                .control {
+                    width: 100%;
+                    margin: 0;
+                    margin-top: 37px !important;
+                }
+            }
+        
         }
     }
 }
