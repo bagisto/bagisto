@@ -222,12 +222,11 @@
                                                 @endif
 
                                                 <div class="col-12 no-padding">
-                                                @include ('shop::products.price', ['product' => $product])
-                                                    
+                                                    @include ('shop::products.price', ['product' => $product])
                                                 </div>
 
                                                 <div class="row col-12 remove-padding-margin actions">
-                                                <div class="product-quantity col-lg-4 col-6 no-padding">
+                                                    <div class="product-quantity col-lg-4 col-6 no-padding">
                                                         @if ($item->product->getTypeInstance()->showQuantityBox() === true)
                                                             <quantity-changer
                                                                 :control-name="'qty[{{$item->id}}]'"
@@ -236,8 +235,32 @@
                                                             </quantity-changer>
                                                         @endif
                                                     </div>
+                                                </div>
 
-                                                    <div class="col-4 cursor-pointer text-down-4">
+                                                <div class="row col-12 remove-padding-margin actions">
+                                                    <div class="col-4 no-padding">
+                                                        @auth('customer')
+                                                            @if ($showWishlist)
+                                                                @if ($item->parent_id != 'null' || $item->parent_id != null)
+                                                                    <div class="alert-wishlist">
+                                                                        @include('shop::products.wishlist', [
+                                                                            'route' => route('shop.movetowishlist', $item->id),
+                                                                            'text' => ""
+                                                                        ])
+                                                                    </div>
+                                                                @else
+                                                                    <div class="alert-wishlist">
+                                                                        @include('shop::products.wishlist', [
+                                                                            'route' => route('shop.movetowishlist', $item->child->id),
+                                                                            'text' => ""
+                                                                        ])
+                                                                    </div>
+                                                                @endif
+                                                            @endif
+                                                        @endauth
+                                                    </div>
+
+                                                    <div class="col-4 cursor-pointer">
                                                         <a href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}" class="unset">
                                                             <i class="material-icons fs24">delete</i>
                                                         </a>
@@ -263,7 +286,7 @@
                                             {{ __('shop::app.checkout.cart.update-cart') }}
                                         </button>
                                     </div>
-                                    
+
                                 {!! view_render_event('bagisto.shop.checkout.cart.controls.after', ['cart' => $cart]) !!}
                             </form>
                         </div>
