@@ -727,6 +727,12 @@ h5 {
             right: 1px;
         }
     }
+
+    .checkbox {
+        input {
+            left: unset;
+        }
+    }
 }
 
 .control-group {
