@@ -166,4 +166,19 @@ class SliderDataGrid extends DataGrid
             'icon'   => 'icon trash-icon',
         ]);
     }
+
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
+    public function prepareMassActions()
+    {
+        $this->addMassAction([
+            'type'   => 'delete',
+            'label'  => trans('admin::app.datagrid.delete'),
+            'action' => route('admin.sliders.massdelete'),
+            'method' => 'POST',
+        ]);
+    }
 }
