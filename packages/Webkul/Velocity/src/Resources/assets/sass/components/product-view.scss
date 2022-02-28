@@ -44,7 +44,8 @@
             @extend .mb15;
             margin-left: 0px;
 
-            > h2, div {
+            > h2,
+            div {
                 padding-left: 0px;
             }
 
@@ -190,7 +191,7 @@
             .radio {
                 margin-right: 10px;
 
-                input[type=radio] {
+                input[type='radio'] {
                     margin-left: 0;
                     position: static;
                 }
@@ -214,7 +215,7 @@
             left: 0px;
             height: 100%;
             z-index: 1001;
-            opacity: 0.50;
+            opacity: 0.5;
             margin-top: 5px;
             cursor: pointer;
             position: absolute;
@@ -277,7 +278,6 @@
         }
     }
 
-
     .layouter,
     #product-form {
         height: 100%;
@@ -316,7 +316,7 @@
                             min-width: 38px;
                             height: 38px;
                             float: left;
-                            border: 1px solid #C7C7C7;
+                            border: 1px solid #c7c7c7;
                             border-radius: 3px;
                             line-height: 36px;
                             text-align: center;
@@ -327,13 +327,14 @@
                         img {
                             width: 38px;
                             height: 38px;
-                            border: 1px solid #C7C7C7;
+                            border: 1px solid #c7c7c7;
                             border-radius: 3px;
                             cursor: pointer;
                             background: rgb(242, 242, 242);
                         }
 
-                        input:checked + span, input:checked + img {
+                        input:checked + span,
+                        input:checked + img {
                             border: 1px solid #242424;
                         }
 
@@ -360,6 +361,11 @@
 
     .description {
         overflow: auto;
+        ul,
+        ol {
+            margin: revert;
+            padding: revert;
+        }
     }
 
     .accordian-content {
@@ -380,7 +386,7 @@
         }
     }
 
-    select[disabled=disabled] {
+    select[disabled='disabled'] {
         cursor: not-allowed;
         border-color: $border-dark;
         background-color: $border-dark;
@@ -400,4 +406,3 @@
 .related-products {
     margin-bottom: 60px;
 }
-
