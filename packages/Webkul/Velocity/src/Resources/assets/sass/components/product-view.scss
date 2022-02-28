@@ -376,6 +376,11 @@
 
     .full-description {
         font-size: 14px;
+        ul,
+        ol {
+            margin: revert;
+            padding: revert;
+        }
     }
 
     .full-specifications {
