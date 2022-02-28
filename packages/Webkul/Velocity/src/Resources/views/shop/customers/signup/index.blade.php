@@ -158,6 +158,11 @@
 @endsection
 
 @push('scripts')
+    <script>
+        $(function(){
+            $(":input[name=first_name]").focus();
+        });
+    </script>
 
 {!! Captcha::renderJS() !!}
 
