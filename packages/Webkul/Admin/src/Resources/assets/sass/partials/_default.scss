@@ -832,7 +832,6 @@ body {
                     }
 
                     .page-action {
-                        position: absolute;
                         right: 10px;
                         margin-top: 0px;
                     }
@@ -848,8 +847,6 @@ body {
 
     .icon.search-icon.search-btn {
         position: absolute;
-        // margin-top: 6px;
-        // right: 16px;
     }
 
     .notif-filter {
@@ -867,12 +864,6 @@ body {
             .page-header {
                 .page-title {
                     width: 100% !important;
-
-                    .control-group {
-                        margin-top: 10px !important;
-                        width: 100% !important;
-                        margin-left: 0px !important;
-                    }
                 }
 
                 .page-action {
