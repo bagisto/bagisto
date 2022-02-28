@@ -7,15 +7,16 @@
 @push('css')
     <style>
     @media only screen and (max-width: 768px){
-        .content-container .content .page-header .page-action {
-            position: absolute !important;
-            right: 10px !important;
-        }
-
         .content-container .content .page-header .page-action button {
             position: relative;
             right: 0px !important;
             top: 0px !important;
+        }
+
+        .content-container .content .page-header .page-title .control-group {
+            margin-top: 20px!important;
+            width: 100%!important;
+            margin-left: 0!important;
         }
     }
     </style>
