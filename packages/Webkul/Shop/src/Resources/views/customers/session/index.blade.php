@@ -83,6 +83,7 @@
                 $('#password').attr("type", "password");
             }
         });
+        $(":input[name=email]").focus();
     });
 </script>
 

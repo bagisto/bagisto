@@ -112,16 +112,20 @@
 {!! Captcha::renderJS() !!}
 
 <script>
-    function myFunction() {
-  var x = document.getElementById("password");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
-  
-</script>
+    $(function(){       
+        $(":input[name=email]").focus();
+    });
+
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    
+    </script>
 
 @endpush
 
