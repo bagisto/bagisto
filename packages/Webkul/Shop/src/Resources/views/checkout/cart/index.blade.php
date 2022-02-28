@@ -128,7 +128,7 @@
                         <div class="misc-controls">
                             <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
 
-                            <div>
+                            <div style="display:flex;">
                                 @if ($cart->hasProductsWithQuantityBox())
                                 <button type="submit" class="btn btn-lg btn-primary" id="update_cart_button">
                                     {{ __('shop::app.checkout.cart.update-cart') }}
