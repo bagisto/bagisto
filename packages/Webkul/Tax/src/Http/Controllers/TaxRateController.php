@@ -44,6 +44,10 @@ class TaxRateController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(TaxRateDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
