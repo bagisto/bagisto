@@ -700,12 +700,14 @@ body {
     font-weight: 900;
 }
 
-.icon.search-icon.search-btn {
-    position: absolute;
-}
-
 .notif-filter {
     margin-top: 0px !important;
+
+    .icon.search-icon.search-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
 }
 
 .read {
