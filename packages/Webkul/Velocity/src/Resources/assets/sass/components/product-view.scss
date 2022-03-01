@@ -398,6 +398,11 @@
     }
 }
 
+.zoomContainer,
+.zoomLens {
+    z-index: 99 !important;
+}
+
 .store-meta-images {
     margin-top: 20px;
 
