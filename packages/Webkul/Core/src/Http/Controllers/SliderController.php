@@ -172,4 +172,40 @@ class SliderController extends Controller
 
         return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Slider'])], 500);
     }
+
+    /**
+     * Remove the specified resources from database.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function massDestroy()
+    {
+        $suppressFlash = false;
+
+        if (request()->isMethod('post')) {
+            $indexes = explode(',', request()->input('indexes'));
+
+            foreach ($indexes as $key => $value) {
+                try {
+                    $this->sliderRepository->delete($value);
+                } catch (\Exception $e) {
+                    $suppressFlash = true;
+
+                    continue;
+                }
+            }
+
+            if (! $suppressFlash) {
+                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'sliders']));
+            } else {
+                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'sliders']));
+            }
+
+            return redirect()->back();
+        } else {
+            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+
+            return redirect()->back();
+        }
+    }
 }
