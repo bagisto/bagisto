@@ -25,9 +25,13 @@
         }
     }
 
-    .icon.search-icon.search-btn {
-        position: absolute;
-        z-index: 1;
+    .notif-filter {
+        .icon.search-icon.search-btn {
+            position: absolute;
+            z-index: 1;
+            left: 5px;
+            right: unset;
+        }
     }
 
     @media only screen and (max-width: 768px) {
