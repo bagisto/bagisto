@@ -85,7 +85,8 @@ return [
         'transactions'             => 'المعاملات',
         'mode'                     => 'الوضع',
         'account-title'            => 'حساب',
-
+    ],
+    
     'acl' => [
         'dashboard'                => 'لوحة التحكم',
         'sales'                    => 'المبيعات',
