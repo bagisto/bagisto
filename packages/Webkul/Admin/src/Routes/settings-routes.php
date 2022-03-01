@@ -229,6 +229,8 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
 
     Route::post('slider/delete/{id}', [SliderController::class, 'destroy'])->name('admin.sliders.delete');
 
+    Route::post('slider/massdelete', [SliderController::class, 'massDestroy'])->name('admin.sliders.massdelete');
+
     /**
      * Tax categories routes.
      */
