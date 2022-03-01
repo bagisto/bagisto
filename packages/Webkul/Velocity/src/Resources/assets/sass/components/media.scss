@@ -152,9 +152,9 @@
 
                         .badge {
                             z-index: 10;
-                            color: hsla(0, 0%, 100%, 0.83);
                             border-radius: 50%;
                             position: absolute;
+                            color: hsla(0, 0%, 100%, 0.83);
                             background: $theme-color;
                         }
                     }
