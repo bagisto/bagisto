@@ -244,8 +244,12 @@ trait Mails
      */
     private function prepareMail($locale, $notification)
     {
+        $previousLocale = core()->getCurrentLocale()->code;
+
         app()->setLocale($locale);
 
         Mail::queue($notification);
+
+        app()->setLocale($previousLocale);
     }
 }
