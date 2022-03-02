@@ -288,3 +288,11 @@
         display: none;
     }
 }
+
+@media only screen and (max-width: 352px) {
+    .dashboard {
+        .dashboard-stats {
+            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+        }
+    }
+}
