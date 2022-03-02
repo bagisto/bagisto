@@ -4,81 +4,39 @@
            <span class="notification-badge" v-if="totalUnRead">{{ totalUnRead }}</span>
            <i class="icon notification-icon active" style="margin-left:0px"></i>
        </div>
+
        <div class="dropdown-list bottom-right notification">
            <div class="dropdown-container">
                <ul class="notif">
                    <div id="notif-title">{{ title }}</div>
-                   <li v-for="(notification,index) in notifications" :key="notification.id" :class="notification.read ? 'read': ' '">
-                       <template v-if="notification.order.status == 'pending'">
-                           <div class="notif-icon pending">
-                               <span :class="ordertype.pending.icon"></span>
-                           </div>
-                           <div class="notif-content">
-                               <a :href="`${orderViewUrl}${notification.order_id}`">
-                                   #{{ notification.order.id }} {{orderTypeMessages.pending}}
-                               </a>
-                           </div>
-                           <div class="notif-content">
-                               {{ moment(notification.order.created_at).fromNow() }}
-                           </div>
-                       </template>
-                       <template v-if="notification.order.status == 'canceled'">
-                           <div class="notif-icon canceled">
-                               <span :class="ordertype.canceled.icon"></span>
-                           </div>
-                           <div class="notif-content">
-                               <a :href="`${orderViewUrl}${notification.order_id}`">
-                                   #{{ notification.order.id }} {{orderTypeMessages.canceled}}
-                               </a>
-                           </div>
-                           <div class="notif-content">
-                               {{ moment(notification.order.created_at).fromNow() }}
-                           </div>
-                       </template>
-                       <template v-if="notification.order.status == 'completed'">
-                           <div class="notif-icon completed">
-                               <span :class="ordertype.completed.icon"></span>
-                           </div>
-                           <div class="notif-content">
-                               <a :href="`${orderViewUrl}${notification.order_id}`">
-                                   #{{ notification.order.id }} {{orderTypeMessages.completed}}
-                               </a>
-                           </div>
-                           <div class="notif-content">
-                               {{ moment(notification.order.created_at).fromNow() }}
-                           </div>
-                       </template>
-                       <template v-if="notification.order.status == 'processing'">
-                           <div class="notif-icon processing">
-                               <span :class="ordertype.processing.icon"></span>
-                           </div>
-                           <div class="notif-content">
-                               <a :href="`${orderViewUrl}${notification.order_id}`">
-                                   #{{ notification.order.id }} {{orderTypeMessages.processing}}
-                               </a>
-                           </div>
-                           <div class="notif-content">
-                               {{ moment(notification.order.created_at).fromNow() }}
-                           </div>
-                       </template>
-                       <template v-if="notification.order.status == 'closed'">
-                           <div class="notif-icon closed">
-                               <span :class="ordertype.closed.icon"></span>
-                           </div>
-                           <div class="notif-content">
-                               <a :href="`${orderViewUrl}${notification.order_id}`">
-                                   #{{ notification.order.id }} {{orderTypeMessages.closed}}
-                               </a>
-                           </div>
-                           <div class="notif-content">
-                               {{ moment(notification.order.created_at).fromNow() }}
-                           </div>
-                       </template>
+
+                   <li v-for="notification in notifications" :key="notification.id" :class="notification.read ? 'read': ' '">
+                        <a :href="`${orderViewUrl + notification.order_id}`">
+                            <div class="notif-icon" :class="notification.order.status">
+                                <span :class="ordertype[notification.order.status].icon"></span>
+                            </div>
+
+                            <div class="notif-content">
+                                #{{ notification.order.id + ' ' + orderTypeMessages[notification.order.status]}}
+                            </div>
+
+                            <div class="notif-content">
+                                {{ moment(notification.order.created_at).fromNow() }}
+                            </div>
+                        </a>
                    </li>
 
                    <li class="bottom-li">
                        <a :href="viewAll">{{ viewAllTitle }}</a>
-                       <button @click="readAll()" class="read-all" :disabled="totalUnRead == 0" :style="totalUnRead == 0 ? 'opacity: .5' : ''">{{ readAllTitle }}</button>
+
+                       <button
+                            class="read-all"
+                            :style="totalUnRead == 0 ? 'opacity: .5' : ''"
+                            :disabled="totalUnRead == 0"
+                            @click="readAll()"
+                        >
+                            {{ readAllTitle }}
+                        </button>
                    </li>
                </ul>
            </div>
@@ -107,6 +65,7 @@ export default {
 
         return {
             notifications: [],
+
             ordertype: {
                 pending: {
                     icon: 'pending-icon',
@@ -129,7 +88,9 @@ export default {
                     message: 'Order Closed'
                 }
             },
+
             totalUnRead: 0,
+
             orderTypeMessages: JSON.parse(this.orderStatusMessages)
         }
     },
@@ -161,7 +122,6 @@ export default {
 
     methods: {
         getNotification: function () {
-
             const params = {
                 limit: 5,
                 read: 0
@@ -179,7 +139,6 @@ export default {
                 .catch(function (error) {})
         },
         readAll: function () {
-
             let this_this = this;
 
             this.$http.post(this.getReadAllUrl)
