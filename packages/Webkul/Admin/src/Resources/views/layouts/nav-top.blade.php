@@ -55,6 +55,13 @@
                 get-read-all-url="{{ route('admin.notification.read-all') }}"
                 order-status-messages="{{ json_encode($orderStatusMessages) }}"
                 read-all-title="{{ __('admin::app.notification.read-all') }}">
+
+                <div class="notifications">
+                    <div class="dropdown-toggle">
+                        <i class="icon notification-icon active" style="margin-left: 0px;"></i>
+                    </div>
+                </div>
+
             </notification>
 
             <div class="profile-info">
