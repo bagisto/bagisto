@@ -454,33 +454,35 @@ h5 {
             list-style-type: none;
             padding: 0px;
 
-            .read {
-                color: rgba(58, 58, 58, 0.5);
+            li {
+                border-bottom: 1px solid #c7c7c7;
+                padding: 0;
 
-                .notif-content > a {
-                    text-decoration: none;
-                    color: rgba(58, 58, 58, 0.5);
+                a {
+                    padding: 16px 10px;
 
+                    &:link,
+                    &:active,
+                    &:visited,
+                    &:focus {
+                        color: $font-color;
+                        display: block;
+                    }
+    
                     &:hover {
-                        color: rgba(58, 58, 58, 0.5);
+                        color: $brand-color;
                     }
                 }
-            }
 
-            li {
-                padding: 16px 10px;
-                border-bottom: 1px solid #c7c7c7;
-
-                a:link,
-                a:active,
-                a:visited,
-                a:focus {
-                    color: $font-color;
-                    display: block;
-                }
-
-                a:hover {
-                    color: $brand-color;
+                &.read {
+                    a {
+                        text-decoration: none;
+                        color: rgba(58, 58, 58, 0.5);
+    
+                        &:hover {
+                            color: rgba(58, 58, 58, 0.5);
+                        }
+                    }
                 }
 
                 .checkbox {
