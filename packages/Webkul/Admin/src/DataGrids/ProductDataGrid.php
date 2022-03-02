@@ -280,8 +280,8 @@ class ProductDataGrid extends DataGrid
             'action'  => route('admin.catalog.products.massupdate'),
             'method'  => 'POST',
             'options' => [
-                'Active'   => 1,
-                'Inactive' => 0,
+                trans('admin::app.datagrid.active')    => 1,
+                trans('admin::app.datagrid.inactive')  => 0,
             ],
         ]);
     }
