@@ -767,7 +767,7 @@
             v-if="
                 typeof paginated !== 'undefined' &&
                     paginated &&
-                    records.data.length > 0
+                    records.last_page > 1
             "
         >
             <a
