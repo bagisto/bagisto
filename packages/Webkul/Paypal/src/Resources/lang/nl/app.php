@@ -2,8 +2,8 @@
 
 return [
     'error' => [
-        'universal-error' => 'Something went wrong!',
-        'sdk-validation-error' => 'Client ID not recognized for either production or sandbox!',
-        'authorization-error' => 'Client ID and Client Secret should be valid!'
+        'universal-error' => 'Er is iets fout gegaan!',
+        'sdk-validation-error' => 'Client-ID wordt niet herkend voor productie of sandbox!',
+        'authorization-error' => 'Client-ID en Client Secret moeten geldig zijn!'
     ]
 ];
