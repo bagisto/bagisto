@@ -56,6 +56,7 @@
         title=" {{ __('admin::app.notification.notification-title') }}"
         order-status="{{ json_encode($orderStatus) }}"
         order-status-messages="{{ json_encode($orderStatusMessages) }}"
-        no-record-text="{{ __('admin::app.notification.no-record') }}">
+        no-record-text="{{ __('admin::app.notification.no-record') }}"
+        locale-code={{ core()->getCurrentLocale()->code }}>
     </notification-list>
 @endsection

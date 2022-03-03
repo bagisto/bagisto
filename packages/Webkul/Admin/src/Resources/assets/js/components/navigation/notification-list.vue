@@ -21,6 +21,9 @@
 
                 <ul class="notif" v-if="notifications.length > 0" >
                     <li v-for="(notification,index) in notifications" :class="notification.read ? 'read' : ''">
+                        <div>
+                            <span hidden>{{ moment.locale(localeCode) }}</span>
+                        </div>
                         <template v-if="notification.order.status == 'pending'">
                             <div class="notif-icon pending">
                                 <span :class="ordertype.pending.icon"></span>
@@ -112,7 +115,8 @@
             'title',
             'orderStatus',
             'noRecordText',
-            'orderStatusMessages'
+            'orderStatusMessages',
+            'localeCode'
         ],
 
         data: function() {
