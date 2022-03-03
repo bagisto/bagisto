@@ -89,7 +89,7 @@
                                                 </span>
 
                                                 <span class="value">
-                                                    {{ $order->status_label }}
+                                                {{ __('admin::app.notification.order-status-messages.'.strtolower($order->status_label)) }}
                                                 </span>
                                             </div>
 
@@ -194,7 +194,7 @@
                                 </div>
                             </accordian>
                         @endif
-
+ 
                         <accordian :title="'{{ __('admin::app.sales.orders.payment-and-shipping') }}'" :active="true">
                             <div slot="body">
 
