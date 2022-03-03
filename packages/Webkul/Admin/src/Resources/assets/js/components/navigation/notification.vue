@@ -4,6 +4,7 @@
            <span class="notification-badge" v-if="totalUnRead">{{ totalUnRead }}</span>
            <i class="icon notification-icon active" style="margin-left:0px"></i>
        </div>
+
        <div class="dropdown-list bottom-right notification">
            <div class="dropdown-container">
                <ul class="notif">
@@ -81,7 +82,15 @@
 
                    <li class="bottom-li">
                        <a :href="viewAll">{{ viewAllTitle }}</a>
-                       <button @click="readAll()" class="read-all" :disabled="totalUnRead == 0" :style="totalUnRead == 0 ? 'opacity: .5' : ''">{{ readAllTitle }}</button>
+
+                       <button
+                            class="read-all"
+                            :style="totalUnRead == 0 ? 'opacity: .5' : ''"
+                            :disabled="totalUnRead == 0"
+                            @click="readAll()"
+                        >
+                            {{ readAllTitle }}
+                        </button>
                    </li>
                </ul>
            </div>
@@ -111,6 +120,7 @@ export default {
 
         return {
             notifications: [],
+
             ordertype: {
                 pending: {
                     icon: 'pending-icon',
@@ -133,7 +143,9 @@ export default {
                     message: 'Order Closed'
                 }
             },
+
             totalUnRead: 0,
+
             orderTypeMessages: JSON.parse(this.orderStatusMessages)
         }
     },
@@ -165,7 +177,6 @@ export default {
 
     methods: {
         getNotification: function () {
-
             const params = {
                 limit: 5,
                 read: 0
@@ -183,7 +194,6 @@ export default {
                 .catch(function (error) {})
         },
         readAll: function () {
-
             let this_this = this;
 
             this.$http.post(this.getReadAllUrl)

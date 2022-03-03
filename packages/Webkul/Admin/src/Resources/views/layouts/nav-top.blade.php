@@ -54,8 +54,19 @@
                 view-all-title="{{ __('admin::app.notification.view-all') }}"
                 get-read-all-url="{{ route('admin.notification.read-all') }}"
                 order-status-messages="{{ json_encode($orderStatusMessages) }}"
+<<<<<<< HEAD
                 read-all-title="{{ __('admin::app.notification.read-all') }}"
                 locale-code={{ core()->getCurrentLocale()->code }}>
+=======
+                read-all-title="{{ __('admin::app.notification.read-all') }}">
+
+                <div class="notifications">
+                    <div class="dropdown-toggle">
+                        <i class="icon notification-icon active" style="margin-left: 0px;"></i>
+                    </div>
+                </div>
+
+>>>>>>> 97d93c675111364fdb80de23ece2343a732bcaaa
             </notification>
 
             <div class="profile-info">
