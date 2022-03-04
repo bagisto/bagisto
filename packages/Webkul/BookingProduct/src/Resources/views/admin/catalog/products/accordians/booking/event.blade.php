@@ -43,7 +43,7 @@
         <tr>
             <td>
                 <div class="control-group" :class="[errors.has(controlName + '[{{$locale}}][name]') ? 'has-error' : '']">
-                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.name') }}</label>
+                    <label class="ticket-label required">{{ __('bookingproduct::app.admin.catalog.products.name') }}</label>
                     <input type="text" v-validate="'required'" :name="controlName + '[{{$locale}}][name]'" v-model="ticketItem.name" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.name') }}&quot;">
 
                     <span class="control-error" v-if="errors.has(controlName + '[{{$locale}}][name]')">
@@ -63,7 +63,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(controlName + '[price]') ? 'has-error' : '']">
-                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.price') }}</label>
+                    <label class="ticket-label required">{{ __('bookingproduct::app.admin.catalog.products.price') }}</label>
                     <input type="text" v-validate="'required|decimal|min_value:0'" :name="controlName + '[price]'" v-model="ticketItem.price" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.price') }}&quot;">
 
                     <span class="control-error" v-if="errors.has(controlName + '[price]')">
@@ -105,7 +105,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(controlName + '[{{$locale}}][description]') ? 'has-error' : '']">
-                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.description') }}</label>
+                    <label class="ticket-label required">{{ __('bookingproduct::app.admin.catalog.products.description') }}</label>
                     <textarea type="text" v-validate="'required'" :name="controlName + '[{{$locale}}][description]'" v-model="ticketItem.description" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.description') }}&quot;"></textarea>
 
                     <span class="control-error" v-if="errors.has(controlName + '[{{$locale}}][description]')">
