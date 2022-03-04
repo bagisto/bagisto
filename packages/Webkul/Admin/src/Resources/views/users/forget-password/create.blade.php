@@ -9,9 +9,6 @@
         .button-group {
             margin-bottom: 25px;
         }
-        .primary-back-icon {
-            vertical-align: middle;
-        }
     </style>
 @endpush
 
@@ -36,7 +33,7 @@
 
                     <div class="control-group" style="margin-bottom: 0">
                         <a href="{{ route('admin.session.create') }}">
-                            <i class="icon primary-back-icon"></i>
+                            <i class="icon primary-back-icon" style="vertical-align: bottom"></i>
                             {{ __('admin::app.users.forget-password.back-link-title') }}
                         </a>
                     </div>
