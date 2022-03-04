@@ -288,12 +288,15 @@
             height: 100%;
             position: relative;
 
-            > .left {
+            .left {
                 top: 60px;
                 padding: 0px;
                 position: sticky;
 
                 .product-image-group {
+                    position: sticky;
+                    top: 70px;
+                    
                     > div {
                         margin: 0;
                         padding: 0;
