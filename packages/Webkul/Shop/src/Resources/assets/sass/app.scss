@@ -1836,7 +1836,7 @@ section.product-detail {
             div.product-image-group {
                 margin-right: 30px;
                 width: 604px;
-                height: 650px;
+                height: 100%;
                 max-width: 604px;
                 position: sticky;
                 top: 10px;
@@ -1915,6 +1915,7 @@ section.product-detail {
                             width: 100%;
                             height: auto;
                             max-height: 480px;
+                            object-fit: contain;
                         }
 
                         .add-to-wishlist {
@@ -3233,7 +3234,7 @@ section.cart {
  * Checkout responsive.
  */
 .attached-products-wrapper {
-    margin-bottom: 80px;
+    margin-top: 80px;
 
     .title {
         margin-bottom: 40px;
