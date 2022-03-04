@@ -2483,12 +2483,17 @@
 @media only screen and (max-width: 425px) {
     .cart-details {
         .cart-content {
-            .destop-view {
-                display: none;
+            .product-quantity {
+                height: fit-content;
             }
 
-            .mobile-view {
-                display: block;
+            .product-price.col-1 {
+                flex: 0 0 100%;
+                max-width: 100%;
+
+                .card-current-price.fw6 {
+                    float: right;
+                }
             }
         }
     }
