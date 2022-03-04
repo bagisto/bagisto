@@ -1,11 +1,15 @@
 <div class="col-12 lg-card-container list-card product-card row">
     <div class="product-image">
+        @php
+            $image = $item->product->getTypeInstance()->getBaseImage($item);
+        @endphp
+
         <a
             title="{{ $item->product->name }}"
             href="{{ route('shop.productOrCategory.index', $item->product->url_key) }}">
 
             <img
-                src="{{ productimage()->getProductBaseImage($item->product)['medium_image_url'] }}"
+                src="{{ $image['medium_image_url'] }}"
                 :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" alt="" />
 
                 <div class="quick-view-in-list">
@@ -21,6 +25,16 @@
                     title="{{ $item->product->name }}" class="unset">
 
                     <span class="fs16">{{ $item->product->name }}</span>
+
+
+                    @if (isset($item->additional['attributes']))
+                        <div class="item-options">
+                            @foreach ($item->additional['attributes'] as $attribute)
+                                <b>{{ $attribute['attribute_name'] }} : </b> {{ $attribute['option_label'] }}
+                                </br>
+                            @endforeach
+                        </div>
+                    @endif
                 </a>
 
                 @if (isset($item->product->additional['attributes']))
