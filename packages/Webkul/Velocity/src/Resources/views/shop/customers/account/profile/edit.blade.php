@@ -113,7 +113,7 @@
                         <input
                             type="date"
                             name="date_of_birth"
-                            placeholder="dd/mm/yyyy"
+                            placeholder="yyyy/mm/dd"
                             value="{{ old('date_of_birth') ?? $customer->date_of_birth }}"
                             v-validate="" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.dob') }}&quot;" />
                     </date>
