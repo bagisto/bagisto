@@ -2485,6 +2485,11 @@
         .cart-content {
             .product-quantity {
                 height: fit-content;
+
+                .quantity {
+                    display: flex;
+                    width: 100%;
+                }
             }
 
             .product-price.col-1 {
