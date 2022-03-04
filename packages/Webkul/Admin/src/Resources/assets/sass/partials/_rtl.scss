@@ -3,6 +3,9 @@
 
     .form-container {
         text-align: right !important;
+        .table {
+            overflow-y: auto;
+        }
     }
 
     .navbar-top {
