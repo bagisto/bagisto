@@ -82,7 +82,7 @@
                                             }
                                         @endphp
 
-                                        <div class="row col-12 destop-view">
+                                        <div class="row col-12">
                                             <a
                                                 title="{{ $product->name }}"
                                                 class="product-image-container col-2"
@@ -190,81 +190,6 @@
                                                     * {{ __('shop::app.checkout.cart.quantity-error') }}
                                                 </div>
                                             @endif
-                                        </div>
-
-                                        <div class="row col-12 mobile-view">
-                                            <a
-                                                title="{{ $product->name }}"
-                                                class="product-image-container col-2"
-                                                href="{{ route('shop.productOrCategory.index', $url_key) }}">
-
-                                                <img
-                                                    src="{{ $productBaseImage['medium_image_url'] }}"
-                                                    class="card-img-top"
-                                                    alt="{{ $product->name }}">
-                                            </a>
-
-                                            <div class="col-10 pr0 pl0 item-title">
-                                                <a
-                                                    href="{{ route('shop.productOrCategory.index', $url_key) }}"
-                                                    title="{{ $product->name }}"
-                                                    class="unset col-2 no-padding">
-
-                                                    <span class="fs20 fw6 link-color">{{ $product->name }}</span>
-                                                </a>
-
-                                                @if (isset($item->additional['attributes']))
-                                                    <div class="row col-8 no-padding no-margin">
-                                                        @foreach ($item->additional['attributes'] as $attribute)
-                                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
-                                                        @endforeach
-                                                    </div>
-                                                @endif
-
-                                                <div class="col-12 no-padding">
-                                                    @include ('shop::products.price', ['product' => $product])
-                                                </div>
-
-                                                <div class="row col-12 remove-padding-margin actions">
-                                                    <div class="product-quantity col-lg-4 col-4 no-padding">
-                                                        @if ($item->product->getTypeInstance()->showQuantityBox() === true)
-                                                            <quantity-changer
-                                                                :control-name="'qty[{{$item->id}}]'"
-                                                                quantity="{{ $item->quantity }}"
-                                                                quantity-text="{{ __('shop::app.products.quantity') }}">
-                                                            </quantity-changer>
-                                                        @endif
-                                                    </div>
-
-                                                    <div class="col-lg-2 col-2 cursor-pointer mt-2">
-                                                        @auth('customer')
-                                                            @if ($showWishlist)
-                                                                @if ($item->parent_id != 'null' || $item->parent_id != null)
-                                                                    <div class="alert-wishlist ml-2">
-                                                                        @include('shop::products.wishlist', [
-                                                                            'route' => route('shop.movetowishlist', $item->id),
-                                                                            'text' => ""
-                                                                        ])
-                                                                    </div>
-                                                                @else
-                                                                    <div class="alert-wishlist ml-2">
-                                                                        @include('shop::products.wishlist', [
-                                                                            'route' => route('shop.movetowishlist', $item->child->id),
-                                                                            'text' => ""
-                                                                        ])
-                                                                    </div>
-                                                                @endif
-                                                            @endif
-                                                        @endauth
-                                                    </div>
-
-                                                    <div class="col-lg-2 col-2 cursor-pointer ml-2 mt-2">
-                                                        <a href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}" class="unset">
-                                                            <i class="material-icons fs24">delete</i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
