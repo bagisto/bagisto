@@ -180,32 +180,29 @@ class SliderController extends Controller
      */
     public function massDestroy()
     {
-        $suppressFlash = false;
+        $indexes        = array_filter(explode(',', request()->input('indexes')));
+        $suppressFlash  = false;
+        $requestIsPost  = request()->isMethod('post');
 
-        if (request()->isMethod('post')) {
-            $indexes = explode(',', request()->input('indexes'));
-
-            foreach ($indexes as $key => $value) {
-                try {
-                    $this->sliderRepository->delete($value);
-                } catch (\Exception $e) {
-                    $suppressFlash = true;
-
-                    continue;
-                }
-            }
-
-            if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'sliders']));
-            } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'sliders']));
-            }
-
-            return redirect()->back();
-        } else {
+        if(!$requestIsPost || empty($indexes)){
             session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
-
             return redirect()->back();
         }
+
+        foreach ($indexes as $key => $value) {
+            try {
+                $this->sliderRepository->delete($value);
+            } catch (\Exception $e) {
+                $suppressFlash = true;
+                continue;
+            }
+        }
+        if (! $suppressFlash) {
+            session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'sliders']));
+        } else {
+            session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'sliders']));
+        }
+
+        return redirect()->back();
     }
 }
