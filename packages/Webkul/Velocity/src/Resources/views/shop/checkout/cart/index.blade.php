@@ -110,7 +110,7 @@
                                                     @foreach ($item->additional['attributes'] as $attribute)
                                                         <div class="row col-12 no-padding no-margin display-block">
                                                             <label class="no-margin">
-                                                                {{ $attribute['attribute_name'] }} :
+                                                                {{ $attribute['attribute_name'] }}:
                                                             </label>
                                                             <span>
                                                                 {{ $attribute['option_label'] }}
@@ -176,6 +176,8 @@
                                                         quantity="{{ $item->quantity }}"
                                                         quantity-text="{{ __('shop::app.products.quantity') }}">
                                                     </quantity-changer>
+                                                @else
+                                                    <p class="fw6 fs16 no-padding text-center ml15">--</p>
                                                 @endif
                                             </div>
 
@@ -202,12 +204,14 @@
                                             {{ __('shop::app.checkout.cart.continue-shopping') }}
                                         </a>
 
-                                        <button
-                                            type="submit"
-                                            class="theme-btn light unset">
+                                        @if ($item->product->getTypeInstance()->showQuantityBox() === true)
+                                            <button
+                                                type="submit"
+                                                class="theme-btn light unset">
 
-                                            {{ __('shop::app.checkout.cart.update-cart') }}
-                                        </button>
+                                                {{ __('shop::app.checkout.cart.update-cart') }}
+                                            </button>
+                                        @endif
                                     </div>
 
                                 {!! view_render_event('bagisto.shop.checkout.cart.controls.after', ['cart' => $cart]) !!}
