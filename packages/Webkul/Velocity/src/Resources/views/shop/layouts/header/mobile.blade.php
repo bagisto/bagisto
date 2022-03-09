@@ -139,10 +139,6 @@
         </a>
     </template>
 
-    <template v-slot:top-header>
-        
-    </template>
-
     <template v-slot:search-bar>
         <div class="row">
             <div class="col-md-12">
