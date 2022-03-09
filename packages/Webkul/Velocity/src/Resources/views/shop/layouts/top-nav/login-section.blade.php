@@ -76,24 +76,6 @@
                             <a href="{{ route('customer.orders.index') }}" class="unset">{{ __('velocity::app.shop.general.orders') }}</a>
                         </li>
 
-                        @php
-                            $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
-
-                            $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
-                        @endphp
-
-                        @if ($showWishlist)
-                            <li>
-                                <a href="{{ route('customer.wishlist.index') }}" class="unset">{{ __('shop::app.header.wishlist') }}</a>
-                            </li>
-                        @endif
-
-                        @if ($showCompare)
-                            <li>
-                                <a href="{{ route('velocity.customer.product.compare') }}" class="unset">{{ __('velocity::app.customer.compare.text') }}</a>
-                            </li>
-                        @endif
-
                         <li>
                             <form id="customerLogout" action="{{ route('customer.session.destroy') }}" method="POST">
                                 @csrf

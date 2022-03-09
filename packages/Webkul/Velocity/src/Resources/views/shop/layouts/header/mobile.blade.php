@@ -29,12 +29,6 @@
         </div>
 
         <div class="right-vc-header col-sm-6 col-xs-12">
-            <a href="{{ auth()->guard('customer')->check() ? route('velocity.customer.product.compare') : route('velocity.product.compare') }}" class="compare-btn unset">
-                <i class="material-icons">compare_arrows</i>
-            </a>
-            <a href="{{ route('customer.wishlist.index') }}" class="wishlist-btn unset">
-                <i class="material-icons">favorite_border</i>
-            </a>
             <a class="unset cursor-pointer">
                 <i class="material-icons">search</i>
             </a>
@@ -84,24 +78,6 @@
                         <span>{{ __('velocity::app.shop.general.reviews') }}</span>
                     </a>
                 </li>
-
-                @if (core()->getConfigData('general.content.shop.wishlist_option'))
-                    <li>
-                        <a href="{{ route('customer.wishlist.index') }}" class="unset">
-                            <i class="icon wishlist text-down-3"></i>
-                            <span>{{ __('shop::app.header.wishlist') }}</span>
-                        </a>
-                    </li>
-                @endif
-
-                @if (core()->getConfigData('general.content.shop.compare_option'))
-                    <li>
-                        <a href="{{ route('velocity.customer.product.compare') }}" class="unset">
-                            <i class="icon compare text-down-3"></i>
-                            <span>{{ __('shop::app.customer.compare.text') }}</span>
-                        </a>
-                    </li>
-                @endif
 
                 <li>
                     <a href="{{ route('customer.orders.index') }}" class="unset">
@@ -164,9 +140,7 @@
     </template>
 
     <template v-slot:top-header>
-        @include('velocity::shop.layouts.particals.compare', ['isText' => false])
-
-        @include('velocity::shop.layouts.particals.wishlist', ['isText' => false])
+        
     </template>
 
     <template v-slot:search-bar>
