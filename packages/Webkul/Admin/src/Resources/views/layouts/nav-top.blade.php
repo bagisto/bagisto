@@ -54,7 +54,8 @@
                 view-all-title="{{ __('admin::app.notification.view-all') }}"
                 get-read-all-url="{{ route('admin.notification.read-all') }}"
                 order-status-messages="{{ json_encode($orderStatusMessages) }}"
-                read-all-title="{{ __('admin::app.notification.read-all') }}">
+                read-all-title="{{ __('admin::app.notification.read-all') }}"
+                locale-code={{ core()->getCurrentLocale()->code }}>
 
                 <div class="notifications">
                     <div class="dropdown-toggle">

@@ -288,6 +288,8 @@ body {
         }
 
         .account-content {
+            min-height: 100vh;
+
             .account-layout {
                 &.right {
                     width: calc(100% - 20px);
@@ -309,9 +311,9 @@ body {
             }
 
             .sidebar {
-                .customer-sidebar {
-                    border-left: 1px solid $border-general;
+                border-left: 1px solid $border-general;
 
+                .customer-sidebar {
                     .navigation {
                         li i.icon {
                             padding-right: 0;

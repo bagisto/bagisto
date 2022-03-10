@@ -11,6 +11,9 @@
                    <div id="notif-title">{{ title }}</div>
 
                    <li v-for="notification in notifications" :key="notification.id" :class="notification.read ? 'read': ' '">
+                       <div>
+                            <span hidden>{{ moment.locale(localeCode) }}</span>
+                        </div>
                         <a :href="`${orderViewUrl + notification.order_id}`">
                             <div class="notif-icon" :class="notification.order.status">
                                 <span :class="ordertype[notification.order.status].icon"></span>
@@ -58,7 +61,8 @@ export default {
         'viewAllTitle',
         'getReadAllUrl',
         'readAllTitle',
-        'orderStatusMessages'
+        'orderStatusMessages',
+        'localeCode'
     ],
 
     data() {

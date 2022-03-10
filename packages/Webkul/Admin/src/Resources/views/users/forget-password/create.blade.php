@@ -9,9 +9,6 @@
         .button-group {
             margin-bottom: 25px;
         }
-        .primary-back-icon {
-            vertical-align: middle;
-        }
     </style>
 @endpush
 
@@ -25,7 +22,7 @@
                     @csrf
 
                     <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                        <label for="email">{{ __('admin::app.users.forget-password.email') }}</label>
+                        <label for="email" class="required">{{ __('admin::app.users.forget-password.email') }}</label>
                         <input type="text" v-validate="'required'" class="control" id="email" name="email" data-vv-as="&quot;{{ __('admin::app.users.forget-password.email') }}&quot;" value="{{ old('email') }}"/>
                         <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                     </div>
@@ -36,7 +33,7 @@
 
                     <div class="control-group" style="margin-bottom: 0">
                         <a href="{{ route('admin.session.create') }}">
-                            <i class="icon primary-back-icon"></i>
+                            <i class="icon primary-back-icon" style="vertical-align: bottom"></i>
                             {{ __('admin::app.users.forget-password.back-link-title') }}
                         </a>
                     </div>

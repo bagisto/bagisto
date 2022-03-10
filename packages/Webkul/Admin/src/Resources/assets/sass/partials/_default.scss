@@ -470,6 +470,13 @@ body {
                 }
             }
         }
+
+        @media only screen and (max-width: 425px) {
+            .flatpickr-input {
+                width: 210px !important;
+                padding-left: 10px;
+            }
+        }
     }
 }
 

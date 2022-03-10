@@ -786,6 +786,8 @@
 }
 
 .account-content {
+    min-height: 100vh;
+
     ol.breadcrumb {
         margin: 0 0 2 0;
         padding: 0;
@@ -806,10 +808,9 @@
 
     .sidebar {
         height: 100%;
+        border-right: 1px solid $border-general;
 
         .customer-sidebar {
-            border-right: 1px solid $border-general;
-
             .account-details {
                 text-align: center;
                 padding: 25px 20px;
@@ -2483,12 +2484,22 @@
 @media only screen and (max-width: 425px) {
     .cart-details {
         .cart-content {
-            .destop-view {
-                display: none;
+            .product-quantity {
+                height: fit-content;
+
+                .quantity {
+                    display: flex;
+                    width: 100%;
+                }
             }
 
-            .mobile-view {
-                display: block;
+            .product-price.col-1 {
+                flex: 0 0 100%;
+                max-width: 100%;
+
+                .card-current-price.fw6 {
+                    float: right;
+                }
             }
         }
     }

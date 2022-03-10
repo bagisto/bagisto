@@ -36,7 +36,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="downloadable-link-list-template">
-        <div class="table" style="overflow-x: unset;">
+        <div class="table" style="overflow-x: auto;">
             <table style="margin-bottom: 20px;">
                 <thead>
                     <tr>
@@ -175,7 +175,7 @@
     </script>
 
     <script type="text/x-template" id="downloadable-sample-list-template">
-        <div class="table" style="overflow-x: unset;">
+        <div class="table" style="overflow-x: auto;">
             <table style="margin-bottom: 20px;">
                 <thead>
                     <tr>
