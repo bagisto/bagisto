@@ -66,6 +66,12 @@ return [
                 'close' => 'غلق',
                 'time-error' => 'The to time must be greater than the from time.'
             ]
+        ],
+
+        'sales' => [
+            'bookings' => [
+                'title' => 'Bookings',
+            ]
         ]
     ],
 
