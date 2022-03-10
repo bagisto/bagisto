@@ -29,12 +29,6 @@
         </div>
 
         <div class="right-vc-header col-sm-6 col-xs-12">
-            <a href="{{ auth()->guard('customer')->check() ? route('velocity.customer.product.compare') : route('velocity.product.compare') }}" class="compare-btn unset">
-                <i class="material-icons">compare_arrows</i>
-            </a>
-            <a href="{{ route('customer.wishlist.index') }}" class="wishlist-btn unset">
-                <i class="material-icons">favorite_border</i>
-            </a>
             <a class="unset cursor-pointer">
                 <i class="material-icons">search</i>
             </a>
@@ -163,11 +157,7 @@
         </a>
     </template>
 
-    <template v-slot:top-header>
-        @include('velocity::shop.layouts.particals.compare', ['isText' => false])
-
-        @include('velocity::shop.layouts.particals.wishlist', ['isText' => false])
-    </template>
+    
 
     <template v-slot:search-bar>
         <div class="row">
