@@ -632,6 +632,7 @@
                                 v-for="(column, columnKey) in columns"
                                 v-text="column.label"
                                 class="grid_head"
+                                :class="{sortable: column.sortable}"
                                 :style="
                                     typeof column.width !== 'undefined' &&
                                     column.width
