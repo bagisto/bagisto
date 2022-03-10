@@ -67,4 +67,23 @@ class BookingRepository extends Repository
             Event::dispatch('marketplace.booking.save.after', $booking);
         }
     }
+
+    /**
+     * @param  string  $dateRange
+     * @return mixed
+     */
+    public function getBookings($dateRange)
+    {
+        return $this->select(
+                'bookings.id',
+                'bookings.order_id',
+                'order_items.name as title',
+                'bookings.from as start',
+                'bookings.to as end',
+            )
+            ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+            ->whereBetween('bookings.from', $dateRange)
+            ->distinct()
+            ->get();
+    }
 }
