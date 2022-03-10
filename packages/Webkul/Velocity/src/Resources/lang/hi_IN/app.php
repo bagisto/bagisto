@@ -275,8 +275,8 @@ return [
         'quick-view'        => 'त्वरित देखें',
         'not-available'     => 'उपलब्ध नहीं है',
         'submit-review'     => 'समीक्षा जमा करें',
-        'ratings'           => ': कुल रेटिंग रेटिंग',
-        'reviews-count'     => ': TotalReviews समीक्षाएं',
+        'ratings'           => ':totalRatings रेटिंग',
+        'reviews-count'     => ':TotalReviews समीक्षाएं',
         'customer-rating'   => 'ग्राहक रेटिंग',
         'more-infomation'   => 'अधिक जानकारी',
         'view-all-reviews'  => 'सभी समीक्षाएं देखें',
@@ -331,7 +331,7 @@ return [
         'header' => [
             'done'      => 'पूर्ण',
             'languages' => 'भाषाएं',
-            'greeting'  => 'स्वागत है, :ग्राहक !',
+            'greeting'  => 'स्वागत है, :customer !',
         ]
     ],
 ];
