@@ -2,6 +2,7 @@
 
 namespace Webkul\BookingProduct\Http\Controllers\Shop;
 
+use Webkul\BookingProduct\Http\Controllers\Controller;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\DefaultSlot as DefaultSlotHelper;
 use Webkul\BookingProduct\Helpers\AppointmentSlot as AppointmentSlotHelper;
@@ -17,7 +18,7 @@ class BookingProductController extends Controller
     protected $bookingHelpers = [];
 
     /**
-     * Create a new helper instance.
+     * Create a new controller instance.
      *
      * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
      * @param  \Webkul\BookingProduct\Helpers\DefaultSlot                    $defaultSlotHelper

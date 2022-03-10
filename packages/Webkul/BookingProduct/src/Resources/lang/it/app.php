@@ -66,6 +66,17 @@ return [
                 'close' => 'Chiuso',
                 'time-error' => 'The to time must be greater than the from time.'
             ]
+        ],
+
+        'sales' => [
+            'bookings' => [
+                'title' => 'Informazioni Prenotazione',
+            ]
+        ],
+
+        'datagrid' => [
+            'from' => 'Da',
+            'to' => 'A',
         ]
     ],
 

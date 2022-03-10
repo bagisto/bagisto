@@ -13,8 +13,8 @@ class Booking extends Model implements BookingContract
 
     protected $fillable = [
         'qty',
-        'available_from',
-        'available_to',
+        'from',
+        'to',
         'order_item_id',
         'booking_product_event_ticket_id',
         'product_id',

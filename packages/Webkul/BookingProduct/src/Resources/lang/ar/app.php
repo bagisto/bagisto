@@ -66,6 +66,17 @@ return [
                 'close' => 'غلق',
                 'time-error' => 'The to time must be greater than the from time.'
             ]
+        ],
+
+        'sales' => [
+            'bookings' => [
+                'title' => 'معلومات الحجز',
+            ]
+        ],
+
+        'datagrid' => [
+            'from' => 'من عند',
+            'to' => 'إلى',
         ]
     ],
 
