@@ -70,8 +70,13 @@ return [
 
         'sales' => [
             'bookings' => [
-                'title' => 'Bookings',
+                'title' => 'معلومات الحجز',
             ]
+        ],
+
+        'datagrid' => [
+            'from' => 'من عند',
+            'to' => 'إلى',
         ]
     ],
 

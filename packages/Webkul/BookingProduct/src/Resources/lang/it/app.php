@@ -70,8 +70,13 @@ return [
 
         'sales' => [
             'bookings' => [
-                'title' => 'Bookings',
+                'title' => 'Informazioni Prenotazione',
             ]
+        ],
+
+        'datagrid' => [
+            'from' => 'Da',
+            'to' => 'A',
         ]
     ],
 
