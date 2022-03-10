@@ -106,7 +106,11 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #5809 [fixed] - Ui issue when admin try to click on search order in notification in mobile view
 
+* #5808 [fixed] - proper allignment of images when admin try to upload in arabic language
+
 * #5805 [fixed] - Navigation alligment when we try to edit checkbox and select attribute in mobile view
+
+* #5804 [fixed] - When I create product bullets in the edit I am experienced those UL get dropped and they are left out in the customer view
 
 * #5803 [fixed] - Alligment issue when we make a configurable product in delete and edit button.
 
@@ -126,23 +130,19 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #5785 [fixed] - Calender icon is not properly visible in arabic
 
-* #5772 [fixed] - issue in french lanugage in navigation bar
-
-* #5774 [fixed] - Admin - Address index view not found
-
-* #5775 [fixed] - translations not working in navigation in admin panel
-
 * #5778 [fixed] - issue in arbaic language of alligment in mobile view
 
 * #5775 [fixed] - translations not working in navigation in admin panel
 
-* #5772 [fixed] - issue in french lanugage in navigation bar
-
 * #5774 [fixed] - Admin - Address index view not found 
+
+* #5772 [fixed] - issue in french lanugage in navigation bar
 
 * #5770 [fixed] - Layout shifting in admin ui
 
 * #5768 [fixed] - Zoomlens in product page overlap sidebar category menu 
+
+* #5764 [fixed] - not able to select options in LTR ENGLISH
 
 * #5762 [fixed] - not able to add slider images in velocity theme
 
@@ -189,6 +189,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #5704 [fixed] - alligment issue in velocity theme in mobile view 
 
 * #5703 [fixed] - star ratings alligment should be in same line in mobile view 
+
+* #5696 [fixed] - dropdown buttons is not working properly in admin panel
+
+* #5695 [fixed] - ui issue when there is only 1 downloadable product in view shopping cart (mobile view)
+
+* #5694 [fixed] - star ratings and reviews alligment should be in same line in blisss theme in mobile view
 
 * #5687 [fixed] - there should be no option for downloadable product for increasing the quanity in velocity theme 
 
@@ -255,6 +261,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #5569 [fixed] - There should be meaningful data inside the order dropdown 
 
 * #5556 [fixed] - Deprecation Warning: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0. 
+
 * #5555 [fixed] - darkmode dropdown list
 
 * #5552 [fixed] - there should not be any blank space in attribute family 
@@ -267,31 +274,31 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #5538 [fixed] - There should not be any translation issue in the notification section
 
-* #5505 [fixed] - maintance mode is not working in admin panel
-
-* #5505 [fixed] - maintance mode is not working in admin panel
-
-* #5510 [fixed] - The counting is not updating automatically when the user is trying to add or remove an item from comparison.
-
-* #5511 [fixed] - UI issue in product list page.
-
-* #5513 [fixed] - Admin package the manifest.php files are missing
-
-* #5516 [fixed] - The size of the product images should not increase when the user is removing items from compare list
-
-* #5521 [fixed] - Default logo is not visible
-
-* #5522 [fixed] - icons are missing in top right navbar
-
-* #5523 [fixed] - Notifications dropdown size
-
-* #5524 [fixed] - Dashboard text is not readable when light mode is enabled
-
-* #5526 [fixed] - There are multiple flash messages if we are clicking on the mark as read inside the notification.
+* #5531 [fixed] - there should be not any blank space in gender it may contain select gender
 
 * #5529 [fixed] - when we hover over bell icon tooltip is not showing
 
-* #5531 [fixed] - there should be not any blank space in gender it may contain select gender
+* #5526 [fixed] - There are multiple flash messages if we are clicking on the mark as read inside the notification.
+
+* #5524 [fixed] - Dashboard text is not readable when light mode is enabled
+
+* #5523 [fixed] - Notifications dropdown size
+
+* #5522 [fixed] - icons are missing in top right navbar
+
+* #5521 [fixed] - Default logo is not visible
+
+* #5516 [fixed] - The size of the product images should not increase when the user is removing items from compare list
+
+* #5513 [fixed] - Admin package the manifest.php files are missing
+
+* #5511 [fixed] - UI issue in product list page.
+
+* #5510 [fixed] - The counting is not updating automatically when the user is trying to add or remove an item from comparison.
+
+* #5505 [fixed] - maintance mode is not working in admin panel
+
+* #5503 [fixed] - validation not working in inventory page
 
 * #5501 [fixed] - There is a warning message if the user is trying to add the address.
 
@@ -300,10 +307,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #5493 [fixed] - The page should be redirected to the product-view page if the user is clicking on the product image/name
 
 * #5491 [fixed] - The user should be able to update quantity using the + icon.
-
-* #5485 [fixed] - ui issue in address bar in mobile view
-
-* #5484 [fixed] - The user should be able to add a new address.
 
 * #5485 [fixed] - ui issue in address bar in mobile view
 
@@ -339,11 +342,13 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #5444 [fixed] - The admin is able to create Invoice/ship orders with 00 quantities.
 
+* #5443 [fixed] - The message should be correct when the admin is trying to delete system attributes
+
 * #5440 [fixed] - There should be an option if the user is trying to enter the product quantity before updating the cart.
 
-* #5435 [fixed] - There should be a warning message if the user is trying to create an invoice with invalid quantity.
-
 * #5436 [fixed] - The discount Amount should be correct in the invoice.
+
+* #5435 [fixed] - There should be a warning message if the user is trying to create an invoice with invalid quantity.
 
 * #5430 [fixed] - ProductFlat getAttribute($key) throws Undefined property if value of $key is NULL in product_flat table
 
@@ -421,17 +426,15 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #5198 [fixed] - Wrong phpdoc reference in Webkul\Core\Core to CustomerGroupRepository
 
-* #5436 [fixed] - The discount Amount should be correct in the invoice.
-
 * #5197 [fixed] - There is no way to log out for 2nd user of Admin if he himself modify his roles and remove some or all privileges.
 
 * #5194 [fixed] - Getting exception when exporting a product from the admin panel
 
-* #5179 [fixed] - Cart items get increased when navigating away from the buy now functionality
-
 * #5191 [fixed] - Issue is in checkbox type attribute
 
 * #5180 [fixed] - Some code appears in starting when clicking on the any product edit page
+
+* #5179 [fixed] - Cart items get increased when navigating away from the buy now functionality
 
 * #5178 [fixed] - API for customers to cancel order
 
