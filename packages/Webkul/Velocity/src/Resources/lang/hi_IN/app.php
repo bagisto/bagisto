@@ -7,8 +7,8 @@ return [
                 'general'  => 'आम',
                 'category'  => 'श्रेणी',
                 'settings'  => 'समायोजन',
-                'extension_name' => 'वेग थीम',
-                'error-module-inactive' => 'चेतावनी: वेग विषय की स्थिति निष्क्रिय है',
+                'extension_name' => 'वेलोसिटी थीम',
+                'error-module-inactive' => 'चेतावनी: वेलोसिटी विषय की स्थिति निष्क्रिय है',
             ],
 
             'settings' => [
@@ -40,7 +40,7 @@ return [
             ]
         ],
         'layouts'   => [
-            'velocity' => 'वेग',
+            'velocity' => 'वेलोसिटी',
             'cms-pages' => 'सीएमएस पेज',
             'meta-data' => 'मेटा डेटा',
             'category-menu' => 'श्रेणी मेनू',
@@ -92,7 +92,7 @@ return [
         ],
         'meta-data' => [
             'footer'                    => 'पाद',
-            'title'                     => 'वेग मेटा डेटा',
+            'title'                     => 'वेलोसिटी मेटा डेटा',
             'activate-slider'           => 'स्लाइडर सक्रिय करें',
             'home-page-content'         => 'होम पेज कंटेंट',
             'footer-left-content'       => 'पाद वाम सामग्री',
