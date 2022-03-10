@@ -11,5 +11,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
         Route::get('/bookings', [Webkul\BookingProduct\Http\Controllers\Admin\BookingController::class, 'index'])->defaults('_config', [
             'view' => 'bookingproduct::admin.sales.bookings.index',
         ])->name('admin.sales.bookings.index');
+
+        Route::get('/bookings/get', [Webkul\BookingProduct\Http\Controllers\Admin\BookingController::class, 'get'])->name('admin.sales.bookings.get');
     });
 });

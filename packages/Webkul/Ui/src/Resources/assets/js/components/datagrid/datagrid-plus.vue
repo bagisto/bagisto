@@ -462,6 +462,8 @@
                                 </ul>
                             </div>
                         </div>
+
+                        <slot name="extra-filters"></slot>
                     </div>
                 </div>
             </div>
