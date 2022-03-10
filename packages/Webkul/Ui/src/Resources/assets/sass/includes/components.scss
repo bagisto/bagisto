@@ -27,11 +27,9 @@
                 display: inline-block;
 
                 &.per-page {
-
                     .control-group {
-
                         label {
-                            margin-top: 7px;
+                            margin-bottom: 7px;
                             margin-right: 10px;
                             flex: auto;
                         }
@@ -158,6 +156,11 @@
 .filter-advance {
     display: flex;
     justify-content: space-between;
+
+    .datagrid-count {
+        margin-bottom: 10px;
+        display: inline-block;
+    }
 }
 
 .filter-tag {
