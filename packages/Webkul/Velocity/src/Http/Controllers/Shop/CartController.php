@@ -144,4 +144,20 @@ class CartController extends Controller
             'message' => trans('velocity::app.error.something_went_wrong'),
         ]);
     }
+
+    /**
+     * Removes the item from the cart if it exists.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function removeAllItems()
+    {
+        $result = Cart::removeAllItems();
+
+        if ($result) {
+            session()->flash('success', trans('shop::app.checkout.cart.item.success-all-remove'));
+        }
+
+        return redirect()->back();
+    }
 }
