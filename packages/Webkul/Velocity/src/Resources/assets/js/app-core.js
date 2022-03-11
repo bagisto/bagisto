@@ -32,6 +32,8 @@ window.axios = axios;
 // TODO once every package is migrated to laravel-mix 6, this can be removed safely (jquery will be injected when needed)
 window.jQuery = window.$ = require('jquery');
 
+require('./dropdown.js');
+
 window.BootstrapSass = require('bootstrap-sass');
 
 window.lazySize = require('lazysizes');

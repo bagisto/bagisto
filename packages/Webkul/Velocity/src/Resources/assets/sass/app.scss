@@ -221,42 +221,9 @@ body {
             }
         }
 
-        + .account-modal {
+        .dropdown-list {
             top: 40px;
             right: 10px;
-            z-index: 101;
-            height: max-content;
-            width: 290px !important;
-            position: absolute !important;
-
-            .theme-btn {
-                padding: 0.5rem 0.9rem;
-            }
-
-            .modal-footer {
-                justify-content: unset;
-            }
-
-            .modal-content {
-                top: 0;
-                padding: 0;
-
-                ul {
-                    li {
-                        &:hover {
-                            background-color: $border-light;
-                        }
-
-                        a {
-                            padding: 10px 20px;
-                        }
-
-                        &:last-child {
-                            margin-bottom: 5px;
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -505,6 +472,7 @@ header {
         height: 50px;
         padding: 5px 17px;
         display: inline-block;
+        cursor: pointer;
 
         #mini-cart {
             .mini-cart-content {
