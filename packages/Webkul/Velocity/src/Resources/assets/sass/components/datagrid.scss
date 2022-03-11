@@ -1,25 +1,6 @@
 @import '../main/mixins';
 @import '../main/_variables';
 
-.dropdown-toggle {
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    position: absolute;
-    right: 10px;
-    top: 16px;
-}
-
-.rtl {
-    .dropdown-toggle::after {
-        position: absolute;
-        left: 22px;
-        top: 16px;
-        right: unset;
-    }
-}
-
 .table {
     width: 100%;
 
@@ -224,39 +205,104 @@
     }
 }
 
+.dropdown-toggle::after {
+    display: none;
+}
+
 .dropdown-list {
+    width: 200px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 16%), 0 0 9px 0 rgb(0 0 0 / 16%);
-    border-radius: 3px;
-    background-color: #ffffff;
+    @include box-shadow(
+        0 2px 4px 0 rgba(0, 0, 0, 0.16),
+        0 0 9px 0 rgba(0, 0, 0, 0.16)
+    );
+    @include border-radius(3px);
+    background-color: $white-color;
     position: absolute;
     display: none;
-    z-index: 10;
+    z-index: 1000;
     text-align: left;
 
-    &.dropdown-container {
-        padding: 15px;
+    &.bottom-left {
+        top: 42px;
+        left: 0px;
+    }
+
+    &.bottom-right {
+        top: 42px;
+        right: 0px;
+    }
+
+    &.top-left {
+        bottom: 0px;
+        left: 42px;
+    }
+
+    &.top-right {
+        bottom: 0px;
+        right: 42px;
+    }
+
+    .dropdown-label {
+        padding: 8px 12px;
+        display: block;
+        cursor: default;
+        color: #a2a2a2;
+        font-size: 18px;
+        border-bottom: 1px solid #C1C2C3;
+    }
+
+    .dropdown-container {
+        overflow-y: auto;
+
+        label {
+            font-size: 15px;
+            display: inline-block;
+            text-transform: uppercase;
+            color: #9e9e9e;
+            font-weight: 700;
+            padding-bottom: 5px;
+        }
 
         ul {
-            list-style: none;
+            margin: 0px;
+            padding: 0px;
+            list-style-type: none;
 
             li {
-                list-style: none !important;
+                &:last-child {
+                    margin-bottom: 5px;
+                }
 
-                .control-group {
-                    margin-bottom: 15px;
-                    display: block;
+                a {
+                    padding: 8px 12px;
 
-                    .control {
-                        margin-bottom: 15px;
+                    &:link,
+                    &:active,
+                    &:visited,
+                    &:focus {
+                        color: $font-color;
+                        display: block;
                     }
+
+                    &:hover {
+                        background-color: $border-light;
+                    }
+                }
+
+                .control-group label {
+                    color: $font-color;
+                    font-size: 15px;
+                    font-weight: 500;
+                    text-transform: capitalize;
+                    width: 100%;
                 }
             }
         }
 
-        .apply-filter {
-            padding: 10px;
+        .btn {
             width: 100%;
+            margin-top: 10px;
         }
     }
 }

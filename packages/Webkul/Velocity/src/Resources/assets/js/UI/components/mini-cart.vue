@@ -1,14 +1,21 @@
 <template>
     <div :class="`dropdown ${cartItems.length > 0 ? '' : 'disable-active'}`">
-        <mini-cart-button
-            :item-count="cartItems.length"
-            :cart-text="cartText"
-        ></mini-cart-button>
+        <div class="dropdown-toggle btn btn-link" id="mini-cart" :class="{'cursor-not-allowed': ! cartItems.length}">
+            <div class="mini-cart-content">
+                <i class="material-icons-outlined text-down-3">shopping_cart</i>
+                <span class="badge" v-text="cartItems.length" v-if="cartItems.length != 0"></span>
+                <span class="fs18 fw6 cart-text" v-text="cartText"></span>
+            </div>
+
+            <div class="down-arrow-container">
+                <span class="rango-arrow-down"></span>
+            </div>
+        </div>
 
         <div
             id="cart-modal-content"
-            v-if="cartItems.length > 0"
-            class="modal-content sensitive-modal cart-modal-content hide"
+            class="modal-content dropdown-list sensitive-modal cart-modal-content"
+            :class="{hide: ! cartItems.length}"
         >
             <div class="mini-cart-container">
                 <div
