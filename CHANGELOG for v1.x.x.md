@@ -50,11 +50,21 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #4653 [enhancement] -Making billing address informations optional
 
+* #2918 [enhancement] -Overview of sold booking products in Admin panel
+
 * #2009 [enhancement] -Using AWS S3 for storage
 
 * #1243 [enhancement] -Implement a feature to share Wishlist
 
+* #5968 [enhancement] -The wishlist and compare option should not be in multiple times
+
+* #1238 [enhancement] -Give configuration for converting textarea to wysiwyg editor or not for browser compatibility.
+
+* #5980 [fixed] - There is a UI issue if the user is trying to filter products by category
+
 * #5966 [fixed] - The product quantity should be visible on the cart page
+
+* #5965 [fixed] - Maximum Password length is 18 characters in velocity theme, which is way too short to be secure
 
 * #5941 [fixed] - UI Issue at the Profile Section -> Empty space below address
 
