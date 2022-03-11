@@ -30,7 +30,8 @@ Vue.use(VeeValidate, {
         fr: fr,
         nl: nl,
         tr: tr
-    }
+    },
+    events: 'input|change|blur'
 });
 
 /**
@@ -269,7 +270,7 @@ $(function() {
         },
 
         mounted: function() {
-            this.$validator.localize(document.documentElement.lang);
+            // this.$validator.localize(document.documentElement.lang);
 
             this.addServerErrors();
             this.loadCategories();
