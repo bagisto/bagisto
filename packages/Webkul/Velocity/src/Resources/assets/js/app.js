@@ -270,7 +270,7 @@ $(function() {
         },
 
         mounted: function() {
-            // this.$validator.localize(document.documentElement.lang);
+            this.$validator.localize(document.documentElement.lang);
 
             this.addServerErrors();
             this.loadCategories();
