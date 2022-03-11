@@ -20,6 +20,7 @@ class Attribute extends TranslatableModel implements AttributeContract
         'code',
         'admin_name',
         'type',
+        'enable_wysiwyg',
         'position',
         'is_required',
         'is_unique',
