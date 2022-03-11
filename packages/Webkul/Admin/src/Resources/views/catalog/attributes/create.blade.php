@@ -58,6 +58,15 @@
                                 </select>
                             </div>
 
+                            <div class="control-group hide">
+                                <label for="enable_wysiwyg">{{ __('admin::app.catalog.attributes.enable-wysiwyg') }}</label>
+
+                                <label class="switch">
+                                    <input type="checkbox" id="enable_wysiwyg" name="enable_wysiwyg" value="1" {{ old('enable_wysiwyg') ? 'checked' : '' }}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
                             {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.general.controls.after') !!}
 
                         </div>
@@ -346,6 +355,12 @@
                     $('#options').parent().addClass('hide')
                 } else {
                     $('#options').parent().removeClass('hide')
+                }
+
+                if (['textarea'].indexOf($(e.target).val()) > -1) {
+                    $('#enable_wysiwyg').parents('.control-group').removeClass('hide')
+                } else {
+                    $('#enable_wysiwyg').parents('.control-group').addClass('hide')
                 }
             })
         });

@@ -605,6 +605,7 @@ return [
             'type'                        => 'Nitelik Tipi',
             'text'                        => 'Text',
             'textarea'                    => 'Textarea',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'Fiyat',
             'boolean'                     => 'Boolean',
             'select'                      => 'Seçim',

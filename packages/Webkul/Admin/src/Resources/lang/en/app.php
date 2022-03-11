@@ -622,6 +622,7 @@ return [
             'type'                        => 'Attribute Type',
             'text'                        => 'Text',
             'textarea'                    => 'Textarea',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'Price',
             'boolean'                     => 'Boolean',
             'select'                      => 'Select',

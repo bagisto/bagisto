@@ -600,6 +600,7 @@ return [
             'type'                        => 'نوع ویژگی',
             'text'                        => 'Text',
             'textarea'                    => 'Textarea',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'قیمت',
             'boolean'                     => 'Boolean',
             'select'                      => 'Select',

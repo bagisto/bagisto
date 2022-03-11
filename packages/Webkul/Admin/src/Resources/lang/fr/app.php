@@ -622,6 +622,7 @@ return [
             'type'                        => 'Type d\'attribut',
             'text'                        => 'Texte',
             'textarea'                    => 'Zone de texte',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'Prix',
             'boolean'                     => 'booléen',
             'select'                      => 'Sélectionner',

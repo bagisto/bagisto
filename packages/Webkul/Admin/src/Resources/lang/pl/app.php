@@ -598,6 +598,7 @@ return [
             'type'                        => 'Rodzaj atrybutu',
             'text'                        => 'Tekst',
             'textarea'                    => 'Pole tekstowe',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'Cena',
             'boolean'                     => 'Boolean',
             'select'                      => 'Wybierz',

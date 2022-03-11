@@ -607,6 +607,7 @@ return [
             'type'                 => '属性类型',
             'text'                 => '文本',
             'textarea'             => '文本框',
+            'enable-wysiwyg'       => 'Enable Wysiwyg Editor',
             'price'                => '价格',
             'boolean'              => '布尔值',
             'select'               => '选择',

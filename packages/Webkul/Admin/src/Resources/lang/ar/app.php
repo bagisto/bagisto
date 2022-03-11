@@ -611,6 +611,7 @@ return [
             'type'                        => 'الصفة نوع',
             'text'                        => 'نص',
             'textarea'                    => 'تيكستاريا',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'السعر',
             'boolean'                     => 'قيمة منطقية',
             'select'                      => 'يختار',
