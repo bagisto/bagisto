@@ -552,6 +552,10 @@ body {
                     width: 150px;
                     top: 4px;
                 }
+
+                .right {
+                    padding: 0 20px !important;
+                }
             }
 
             .checkout-process {
@@ -568,6 +572,12 @@ body {
         &.rtl {
             .fs16 {
                 font-size: 12px !important;
+            }
+
+            .velocity-divide-page {
+                .right {
+                    padding: 0 20px !important;
+                }
             }
         }
     }
@@ -594,6 +604,12 @@ body {
         &.rtl {
             .fs16 {
                 font-size: 8px !important;
+            }
+
+            .velocity-divide-page {
+                .right {
+                    padding: 0 20px !important;
+                }
             }
         }
     }
