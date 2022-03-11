@@ -35,6 +35,16 @@
     }
 }
 
+.vuecal__event {
+    background: #0041ff !important;
+    color: #fff !important;
+    cursor: pointer;
+
+    &:hover {
+        height: max-content !important;
+    }
+}
+
 .rtl {
     .switch-view-container {
         margin-left: unset;
