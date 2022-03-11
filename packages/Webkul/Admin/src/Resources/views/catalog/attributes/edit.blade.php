@@ -93,6 +93,18 @@
                                 <input type="hidden" name="type" value="{{ $attribute->type }}"/>
                             </div>
 
+                            
+                            @if ($attribute->type == 'textarea')
+                                <div class="control-group">
+                                    <label for="enable_wysiwyg">{{ __('admin::app.catalog.attributes.enable-wysiwyg') }}</label>
+
+                                    <label class="switch">
+                                        <input type="checkbox" id="enable_wysiwyg" name="enable_wysiwyg" value="1" {{ (old('enable_wysiwyg') ?: $attribute->enable_wysiwyg) ? 'checked' : '' }}>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            @endif
+
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.controls.after', ['attribute' => $attribute]) !!}
                         </div>
                     </accordian>

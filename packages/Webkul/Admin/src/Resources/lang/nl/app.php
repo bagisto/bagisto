@@ -598,6 +598,7 @@ return [
             'type'                        => 'Attribute Type',
             'text'                        => 'Text',
             'textarea'                    => 'Textarea',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'Prijs',
             'boolean'                     => 'Boolean',
             'select'                      => 'Select',

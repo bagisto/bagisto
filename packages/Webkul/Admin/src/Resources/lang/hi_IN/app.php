@@ -622,6 +622,7 @@ return [
             'type'                        => 'विशेषता प्रकार',
             'text'                        => 'मूलपाठ',
             'textarea'                    => 'टेक्सटेरिया',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'कीमत',
             'boolean'                     => 'बूलियन',
             'select'                      => 'चुनते हैं',

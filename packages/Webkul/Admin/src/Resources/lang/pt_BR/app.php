@@ -597,6 +597,7 @@ return [
             'type'                        => 'Tipo do Atributo',
             'text'                        => 'Texto',
             'textarea'                    => 'Área de Texto',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'Preço',
             'boolean'                     => 'Boleano',
             'select'                      => 'Caixa de Seleção',

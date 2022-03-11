@@ -600,6 +600,7 @@ return [
             'type'                        => 'Attribute Tipo',
             'text'                        => 'Text',
             'textarea'                    => 'Textarea',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'Prezzo',
             'boolean'                     => 'Boolean',
             'select'                      => 'Select',
