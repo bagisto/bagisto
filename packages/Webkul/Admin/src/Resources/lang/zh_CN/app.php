@@ -1548,7 +1548,53 @@ return [
             'generate-invoice'   => '下单后自动生成发票',
             'set-invoice-status' => '创建发票后设置发票状态为',
             'set-order-status'   => '将创建发票后的订单状态设置为',
-            'generate-invoice-applicable' => '适用于启用自动生成发票的情况'
-        ]
-    ]
+            'generate-invoice-applicable' => '适用于启用自动生成发票的情况',
+            'records-found'                         => '找到记录',
+            'logo-size'                             => '图像分辨率应该是 112px X 41px',
+            'favicon-size'                          => '图像分辨率应该是 16px X 16px',
+            'invoice-logo-size'                     => '图像分辨率应该是 192px X 50px',
+        ],
+    ],
+    'api' => [
+        'system' => [
+            'api'                    => 'API',
+            'basic-configuration'    => '基本配置',
+            'customer-configuration' => '客户配置',
+            'username'               => '用户名',
+            'password'               => '密码',
+            'login-after-register'   => '注册后登录',
+            'info-login'             => '信息: 顾客 注册API后必须登录.',
+        ],
+        'auth'   => [
+            'invalid-auth'          => '警告：您无权使用 API。',
+            'required-token'        => '警告：令牌参数是必需的。',
+            'invalid-store'         => '警告：您请求的商店无效。',
+            'login-required'        => '警告：需要客户登录才能将产品添加到比较列表。',
+            'resource-not-found'    => '警告: 已请求:resource 在记录中找不到.',
+        ],
+    ],
+
+    'notification' => [
+        'notification-title'          => '通知',
+        'title-plural'                => '通知',
+        'status'                      => [
+            'all'        => 'All',
+            'pending'    => 'Pending',
+            'processing' => 'Processing',
+            'canceled'   => 'Canceled',
+            'closed'     => 'Closed',
+            'completed'  => 'Completed',
+        ],
+        'view-all'                    => '查看所有通知',
+        'no-record'                   => '没有找到记录',
+        'read-all'                    => '标记为已读',
+        'notification-marked-success' => '通知标记成功',
+        'order-status-messages'       => [
+            'completed'  => '订单完成',
+            'closed'     => '订单已关闭',
+            'canceled'   => '订单取消',
+            'pending'    => '订单待处理',
+            'processing' => '订单处理',
+        ],
+    ],
 ];
