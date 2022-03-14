@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Checkout\Facades\Cart;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValueProxy;
@@ -198,7 +197,6 @@ class ProductRepository extends Repository
             $qb = $query->distinct()
                 ->select('product_flat.*')
                 ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
-                ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'product_flat.product_id')
                 ->where('product_flat.channel', $channel)
                 ->where('product_flat.locale', $locale)
                 ->whereNotNull('product_flat.url_key');
@@ -267,13 +265,15 @@ class ProductRepository extends Repository
                     }
 
                     $qb
-                        ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'product_flat.product_id')
-                        ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'product_flat.product_id')
+                        ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
+                        ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id')
+                        ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
+                        ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
                         ->where(function ($qb) use ($priceRange, $customerGroupId) {
                             $qb->where(function ($qb) use ($priceRange) {
                                 $qb
-                                    ->where('product_flat.min_price', '>=', core()->convertToBasePrice($priceRange[0]))
-                                    ->where('product_flat.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
+                                    ->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]))
+                                    ->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
                             })
                                 ->orWhere(function ($qb) use ($priceRange) {
                                     $qb
@@ -296,40 +296,43 @@ class ProductRepository extends Repository
                 ));
 
             if (count($attributeFilters) > 0) {
-                $qb->where(function ($filterQuery) use ($attributeFilters) {
-                    foreach ($attributeFilters as $attribute) {
-                        $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
+                $qb
+                    ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
+                    ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id')
+                    ->where(function ($filterQuery) use ($attributeFilters) {
+                        foreach ($attributeFilters as $attribute) {
+                            $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
 
-                            $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
+                                $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
 
-                            $filterInputValues = explode(',', request()->get($attribute->code));
+                                $filterInputValues = explode(',', request()->get($attribute->code));
 
-                            # define the attribute we are filtering
-                            $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
+                                # define the attribute we are filtering
+                                $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
 
-                            # apply the filter values to the correct column for this type of attribute.
-                            if ($attribute->type != 'price') {
+                                # apply the filter values to the correct column for this type of attribute.
+                                if ($attribute->type != 'price') {
 
-                                $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
-                                    foreach ($filterInputValues as $filterValue) {
-                                        if (! is_numeric($filterValue)) {
-                                            continue;
+                                    $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
+                                        foreach ($filterInputValues as $filterValue) {
+                                            if (! is_numeric($filterValue)) {
+                                                continue;
+                                            }
+                                            $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
                                         }
-                                        $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
-                                    }
-                                });
+                                    });
 
-                            } else {
-                                $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
-                                    ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
-                            }
-                        });
-                    }
-                });
+                                } else {
+                                    $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
+                                        ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
+                                }
+                            });
+                        }
+                    });
 
                 # this is key! if a product has been filtered down to the same number of attributes that we filtered on,
                 # we know that it has matched all of the requested filters.
-                $qb->groupBy('product_flat.id');
+                $qb->groupBy('variants.id');
                 $qb->havingRaw('COUNT(*) = ' . count($attributeFilters));
             }
 
