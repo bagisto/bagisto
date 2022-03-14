@@ -30,7 +30,8 @@ Vue.use(VeeValidate, {
         fr: fr,
         nl: nl,
         tr: tr
-    }
+    },
+    events: 'input|change|blur'
 });
 
 /**
