@@ -5,7 +5,7 @@
         :class="`sidebar ${addClass ? addClass : ''}`"
         v-if="slicedCategories && slicedCategories.length > 0"
     >
-        <ul type="none">
+        <ul type="none" style="margin-bottom: 0">
             <li
                 :key="categoryIndex"
                 :id="`category-${category.id}`"

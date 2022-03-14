@@ -47,6 +47,14 @@
 
 .accordian {
     .accordian-header {
+        width: 100%;
+        font-size: 18px;
+        cursor: pointer;
+        color: #3a3a3a;
+        padding: 20px 0;
+        display: inline-block;
+        border-bottom: 1px solid #d3d3d3;
+
         i.rango-arrow {
             float: right;
             font-size: 24px;
@@ -57,39 +65,24 @@
         }
     }
 
+    .accordian-content {
+        width: 100%;
+        display: none;
+        padding-bottom: 20px;
+    }
+
     &.active {
         .accordian-header {
+            border-bottom: 0;
+
             i.rango-arrow::before {
                 content: "\E906";
             }
         }
-    }
-}
-
-.accordian {
-    .accordian-header {
-        width: 100%;
-        font-size: 18px;
-        cursor: pointer;
-        color: #3a3a3a;
-        margin-top: -1px;
-        padding-bottom: 20px;
-        display: inline-block;
-    }
-
-    .accordian-content {
-        width: 100%;
-        display: none;
-        padding-bottom: 10px;
-    }
-
-    &.active {
-        .accordian-header {
-            padding-bottom: 10px;
-        }
 
         .accordian-content {
             display: inline-block;
+            border-bottom: 1px solid #d3d3d3;
         }
     }
 }

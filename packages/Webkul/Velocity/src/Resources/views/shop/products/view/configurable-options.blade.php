@@ -16,7 +16,7 @@
 
     @push('scripts')
         <script type="text/x-template" id="product-options-template">
-            <div class="attributes" v-if="childAttributes.length > 0">
+            <div class="col-12 attributes" v-if="childAttributes.length > 0">
                 <input
                     type="hidden"
                     :value="selectedProductId"

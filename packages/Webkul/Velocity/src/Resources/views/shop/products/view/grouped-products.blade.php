@@ -1,7 +1,7 @@
 @if ($product->type == 'grouped')
     {!! view_render_event('bagisto.shop.products.view.grouped_products.before', ['product' => $product]) !!}
 
-    <div class="grouped-product-container">
+    <div class="col-12 grouped-product-container">
         @if ($product->groupedProductsBySortOrder->count())
             <div class="grouped-product-list">
                 <ul type="none">
