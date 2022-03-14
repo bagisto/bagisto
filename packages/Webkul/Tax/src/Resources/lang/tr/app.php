@@ -4,14 +4,14 @@ return [
     'admin' => [
         'system' => [
             'taxes' => [
-                'taxes'                        => 'Taxes',
-                'catalogue'                    => 'Catalog',
-                'pricing'                      => 'Pricing',
-                'tax-inclusive'                => 'Tax inclusive',
-                'default-location-calculation' => 'Default Location Calculation',
-                'default-country'              => 'Default Country',
-                'default-state'                => 'Default State',
-                'default-post-code'            => 'Default Post Code',
+                'taxes'                        => 'Vergiler',
+                'catalogue'                    => 'Katalog',
+                'pricing'                      => 'Fiyatlandırma',
+                'tax-inclusive'                => 'Vergiler dahil',
+                'default-location-calculation' => 'Varsayılan Konum Hesaplama',
+                'default-country'              => 'Varsayılan Ülke',
+                'default-state'                => 'Varsayılan durum',
+                'default-post-code'            => 'Varsayılan Posta Kodu',
             ],
         ]
     ]
