@@ -18,7 +18,7 @@
 
     @push('scripts')
         <script type="text/x-template" id="bundle-option-list-template">
-            <div class="bundle-options-wrapper">
+            <div class="col-12 bundle-options-wrapper">
                 <div class="bundle-option-list">
                     <h3>{{ __('shop::app.products.customize-options') }}</h3>
 

@@ -3,7 +3,7 @@
 
         {{-- this is default content if js is not loaded --}}
         <div class="main-category fs16 unselectable fw6 left">
-            <i class="rango-view-list text-down-4 align-vertical-top fs18"></i>
+            <i class="rango-view-list align-vertical-top fs18"></i>
 
             <span class="pl5">{{ __('velocity::app.menu-navbar.text-category') }}</span>
         </div>
