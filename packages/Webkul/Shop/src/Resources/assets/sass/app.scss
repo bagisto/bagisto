@@ -1082,6 +1082,19 @@ section.slider-block {
                     .btn.btn-sm {
                         padding: 9px 25px;
                     }
+
+                    .button-group {
+                        margin-top: 15px;
+                        margin-bottom: 0;
+                        display: grid;
+                        column-gap: 10px;
+                        grid-template-columns: auto auto;
+
+                        .btn  {
+                            word-break: break-all;
+                            text-align: center;
+                        }
+                    }
                 }
 
                 .cart-dropdown-container {
