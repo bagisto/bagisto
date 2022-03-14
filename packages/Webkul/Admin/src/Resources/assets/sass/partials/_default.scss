@@ -638,6 +638,16 @@ body {
         border-bottom: 1px solid $notification-li-border-color;
         position: relative;
 
+        a {
+            color: #3a3a3a;
+        }
+
+        &.read {
+            a {
+                color: rgba(58, 58, 58, 0.5);
+            }
+        }
+
         .notif-icon {
             position: absolute;
             height: 40px;
@@ -681,15 +691,6 @@ body {
 
         .notif-content {
             margin-left: 50px;
-        }
-    }
-
-    .read {
-        color: rgba(58, 58, 58, 0.5);
-
-        .notif-content > a {
-            text-decoration: none;
-            color: rgba(58, 58, 58, 0.5);
         }
     }
 }
