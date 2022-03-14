@@ -219,7 +219,7 @@ return [
                     'page-title'     => 'Adres',
                     'title'          => 'Adres',
                     'add'            => 'Adres Ekle',
-                    'edit'           => 'Düzenşe',
+                    'edit'           => 'Düzenle',
                     'empty'          => 'Henüz kayıtlı adresiniz bulunmuyor. Eklemek için lütfen aşağıdaki linki tıklayınız.',
                     'create'         => 'Adres Ekle',
                     'delete'         => 'Sil',
