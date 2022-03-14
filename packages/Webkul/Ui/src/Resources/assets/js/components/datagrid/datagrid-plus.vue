@@ -634,7 +634,7 @@
                                 v-for="(column, columnKey) in columns"
                                 v-text="column.label"
                                 class="grid_head"
-                                :class="{sortable: column.sortable}"
+                                :class="{ sortable: column.sortable }"
                                 :style="
                                     typeof column.width !== 'undefined' &&
                                     column.width
@@ -804,6 +804,7 @@ export default {
 
     data: function() {
         return {
+            id: btoa(this.src),
             url: this.src,
             isDataLoaded: false,
             dataGridIndex: 0,
@@ -854,6 +855,8 @@ export default {
         hitUrl: function() {
             let self = this;
 
+            this.analyzeDatagridsInfo();
+
             axios
                 .get(this.url)
                 .then(function(response) {
@@ -870,6 +873,97 @@ export default {
                 .catch(function(error) {
                     console.log(error);
                 });
+        },
+
+        analyzeDatagridsInfo: function() {
+            if (!this.isDataLoaded && this.url === `${this.src}?v=1`) {
+                let datagridInfo = this.getCurrentDatagridInfo();
+
+                if (datagridInfo) {
+                    this.filterCurrentDatagridFromDatagridsInfo();
+
+                    this.url = datagridInfo.previousUrl;
+                }
+            } else {
+                let datagridsInfo = this.getDatagridsInfo();
+
+                if (datagridsInfo && datagridsInfo.length > 0) {
+                    if (this.isCurrentDatagridInfoExists()) {
+                        datagridsInfo = datagridsInfo.map(datagrid => {
+                            if (datagrid.id === this.id) {
+                                return this.getDatagridsInfoDefaults();
+                            }
+
+                            return datagrid;
+                        });
+                    } else {
+                        datagridsInfo.push(this.getDatagridsInfoDefaults());
+                    }
+                } else {
+                    datagridsInfo = [this.getDatagridsInfoDefaults()];
+                }
+
+                this.updateDatagridsInfo(datagridsInfo);
+            }
+        },
+
+        isCurrentDatagridInfoExists: function() {
+            let datagridsInfo = this.getDatagridsInfo();
+
+            return !!datagridsInfo.find(({ id }) => id === this.id);
+        },
+
+        getCurrentDatagridInfo: function() {
+            let datagridsInfo = this.getDatagridsInfo();
+
+            return this.isCurrentDatagridInfoExists()
+                ? datagridsInfo.find(({ id }) => id === this.id)
+                : null;
+        },
+
+        getDatagridsInfoStorageKey: function() {
+            return 'datagridsInfo';
+        },
+
+        getDatagridsInfoDefaults: function() {
+            return {
+                id: this.id,
+                previousUrl: this.url
+            };
+        },
+
+        getDatagridsInfo: function() {
+            let storageInfo = localStorage.getItem(
+                this.getDatagridsInfoStorageKey()
+            );
+
+            return !this.isValidJsonString(storageInfo)
+                ? []
+                : JSON.parse(storageInfo) ?? [];
+        },
+
+        updateDatagridsInfo: function(info) {
+            localStorage.setItem(
+                this.getDatagridsInfoStorageKey(),
+                JSON.stringify(info)
+            );
+        },
+
+        filterCurrentDatagridFromDatagridsInfo: function() {
+            let datagridsInfo = this.getDatagridsInfo();
+
+            datagridsInfo = datagridsInfo.filter(({ id }) => id !== this.id);
+
+            this.updateDatagridsInfo(datagridsInfo);
+        },
+
+        isValidJsonString: function(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
         },
 
         initDatagrid: function() {
@@ -1581,7 +1675,8 @@ export default {
 
                         window.flashMessages.push({
                             type: 'alert-error',
-                            message: response.data.message ?? 'Something went wrong!'
+                            message:
+                                response.data.message ?? 'Something went wrong!'
                         });
 
                         self.$root.addFlashMessages();
