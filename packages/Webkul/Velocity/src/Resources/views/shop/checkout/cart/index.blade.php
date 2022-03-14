@@ -204,6 +204,12 @@
                                             {{ __('shop::app.checkout.cart.continue-shopping') }}
                                         </a>
 
+                                        <a
+                                            class="theme-btn light fs16 text-center"
+                                            href="{{ route('cart.remove.all.items') }}">
+                                            {{ __('shop::app.checkout.cart.remove-all-items') }}
+                                        </a>
+
                                         @if ($item->product->getTypeInstance()->showQuantityBox() === true)
                                             <button
                                                 type="submit"

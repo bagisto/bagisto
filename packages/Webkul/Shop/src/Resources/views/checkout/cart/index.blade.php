@@ -128,6 +128,8 @@
                         <div class="misc-controls">
                             <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
 
+                            <a href="{{ route('cart.remove.all.items') }}" class="link">{{ __('shop::app.checkout.cart.remove-all-items') }}</a>
+
                             <div style="display:flex;">
                                 @if ($cart->hasProductsWithQuantityBox())
                                 <button type="submit" class="btn btn-lg btn-primary" id="update_cart_button">
