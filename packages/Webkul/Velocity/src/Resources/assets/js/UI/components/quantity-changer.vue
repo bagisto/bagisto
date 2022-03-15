@@ -10,7 +10,9 @@
             v-text="quantityText"
         ></label>
 
-        <button type="button" class="decrease" @click="decreaseQty()">-</button>
+        <button type="button" class="decrease" @click="decreaseQty()">
+            <i class="rango-minus"></i>
+        </button>
 
         <input
             ref="quantityChanger"
@@ -23,7 +25,9 @@
             @keyup="setQty($event)"
         />
 
-        <button type="button" class="increase" @click="increaseQty()">+</button>
+        <button type="button" class="increase" @click="increaseQty()">
+            <i class="rango-plus"></i>
+        </button>
 
         <span class="control-error" v-if="errors.has(controlName)">{{
             errors.first(controlName)

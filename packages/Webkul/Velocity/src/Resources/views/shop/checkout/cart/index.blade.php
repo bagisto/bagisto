@@ -12,19 +12,8 @@
 
 @push('css')
     <style type="text/css">
-        .quantity {
-            width: unset;
-            float: right;
-        }
-
-        .alert-wishlist {
-            display: inline-block;
-            position: relative;
-            top: -2px;
-        }
-
         @media only screen and (max-width: 600px) {
-            .rango-delete{
+            .rango-delete {
                 margin-top: 10px;
                 margin-left: -10px !important;
             }
@@ -108,7 +97,7 @@
 
                                                 @if (isset($item->additional['attributes']))
                                                     @foreach ($item->additional['attributes'] as $attribute)
-                                                        <div class="row col-12 no-padding no-margin display-block">
+                                                        <div class="row col-12 no-padding no-margin display-block item-attribute">
                                                             <label class="no-margin">
                                                                 {{ $attribute['attribute_name'] }}:
                                                             </label>
@@ -119,7 +108,7 @@
                                                     @endforeach
                                                 @endif
 
-                                                <div class="row col-12 no-padding no-margin">
+                                                <div class="row col-12 no-padding no-margin item-price">
                                                     <div class="product-price">
                                                         <span>{{ core()->currency($item->base_price) }}</span>
                                                     </div>
@@ -131,18 +120,18 @@
                                                     $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                                                 @endphp
 
-                                                <div class="no-padding col-12 cursor-pointer fs16">
+                                                <div class="no-padding col-12 cursor-pointer fs16 item-actions">
                                                     @auth('customer')
                                                         @if ($showWishlist)
                                                             @if ($item->parent_id != 'null' || $item->parent_id != null)
-                                                                <div class="alert-wishlist">
+                                                                <div class="d-inline-block">
                                                                     @include('shop::products.wishlist', [
                                                                         'route' => route('shop.movetowishlist', $item->id),
                                                                         'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
                                                                     ])
                                                                 </div>
                                                             @else
-                                                                <div class="alert-wishlist">
+                                                                <div class="d-inline-block">
                                                                     @include('shop::products.wishlist', [
                                                                         'route' => route('shop.movetowishlist', $item->child->id),
                                                                         'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
@@ -154,11 +143,7 @@
 
                                                     <div class="d-inline-block">
                                                         <a
-                                                            class="unset
-                                                                @auth('customer')
-                                                                    ml10
-                                                                @endauth
-                                                            "
+                                                            class="unset"
                                                             href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
                                                             @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 
@@ -263,8 +248,9 @@
 
                 methods: {
                     removeLink(message) {
-                        if (! confirm(message))
+                        if (! confirm(message)) {
                             event.preventDefault();
+                        }
                     }
                 }
             })
