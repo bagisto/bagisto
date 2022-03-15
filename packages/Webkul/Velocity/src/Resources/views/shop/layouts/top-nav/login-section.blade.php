@@ -24,8 +24,8 @@
                     <label class="fs18 grey">{{ __('shop::app.header.title') }}</label>
                 </div>
 
-                <div class="pl10 fs14">
-                    <p>{{ __('shop::app.header.dropdown-text') }}</p>
+                <div class="fs14 content">
+                    <p class="no-margin">{{ __('shop::app.header.dropdown-text') }}</p>
                 </div>
 
                 <div class="modal-footer">
