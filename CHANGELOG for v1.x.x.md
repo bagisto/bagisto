@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v1.4.0 (16th of March 2022)** - *Release*
 
+* #5654 [feature] -Only unread notification should be shown in the notification modal box. 
+
 * #4787 [feature] - Unable to upload profile picture
 
 * #4653 [feature] - Making billing address informations optional
@@ -59,6 +61,18 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #5968 [enhancement] -The wishlist and compare option should not be in multiple times
 
 * #1238 [enhancement] -Give configuration for converting textarea to wysiwyg editor or not for browser compatibility.
+
+* #6019 [fixed] -There should not any UI issue if the admin is trying to update products by mass action. 
+
+* #6010 [fixed] -There should not be any UI issue when the user is trying to write a review for the product in mobile view. 
+
+* #6008 [fixed] -There is a UI issue on the Bills theme when the user is trying to log in.
+
+* #6006 [fixed] -There is a UI issue if the admin is trying to update products by mass action.
+
+* #5995 [fixed] -The filters should work properly. if the user is trying to filter the products by the color filter
+
+* #5985 [fixed] -There should be a warning message on the checkout page, for the required field if the user is clicking outside of the required input field 
 
 * #5980 [fixed] - There is a UI issue if the user is trying to filter products by category
 
