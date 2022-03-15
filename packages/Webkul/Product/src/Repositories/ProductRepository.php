@@ -264,9 +264,9 @@ class ProductRepository extends Repository
                         }
                     }
 
+                    $this->variantJoin($qb);
+
                     $qb
-                        ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
-                        ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id')
                         ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
                         ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
                         ->where(function ($qb) use ($priceRange, $customerGroupId) {
@@ -296,39 +296,38 @@ class ProductRepository extends Repository
                 ));
 
             if (count($attributeFilters) > 0) {
-                $qb
-                    ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
-                    ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id')
-                    ->where(function ($filterQuery) use ($attributeFilters) {
-                        foreach ($attributeFilters as $attribute) {
-                            $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
+                $this->variantJoin($qb);
 
-                                $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
+                $qb->where(function ($filterQuery) use ($attributeFilters) {
+                    foreach ($attributeFilters as $attribute) {
+                        $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
 
-                                $filterInputValues = explode(',', request()->get($attribute->code));
+                            $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
 
-                                # define the attribute we are filtering
-                                $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
+                            $filterInputValues = explode(',', request()->get($attribute->code));
 
-                                # apply the filter values to the correct column for this type of attribute.
-                                if ($attribute->type != 'price') {
+                            # define the attribute we are filtering
+                            $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
 
-                                    $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
-                                        foreach ($filterInputValues as $filterValue) {
-                                            if (! is_numeric($filterValue)) {
-                                                continue;
-                                            }
-                                            $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
+                            # apply the filter values to the correct column for this type of attribute.
+                            if ($attribute->type != 'price') {
+
+                                $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
+                                    foreach ($filterInputValues as $filterValue) {
+                                        if (! is_numeric($filterValue)) {
+                                            continue;
                                         }
-                                    });
+                                        $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
+                                    }
+                                });
 
-                                } else {
-                                    $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
-                                        ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
-                                }
-                            });
-                        }
-                    });
+                            } else {
+                                $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
+                                    ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
+                            }
+                        });
+                    }
+                });
 
                 # this is key! if a product has been filtered down to the same number of attributes that we filtered on,
                 # we know that it has matched all of the requested filters.
@@ -607,6 +606,25 @@ class ProductRepository extends Repository
         DB::commit();
 
         return $copiedProduct;
+    }
+
+    /**
+     * Variant join.
+     *
+     * @param  mixed  $query
+     * @return void
+     */
+    private function variantJoin($query)
+    {
+        static $alreadyJoined = false;
+
+        if (! $alreadyJoined) {
+            $alreadyJoined = true;
+
+            $query
+                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
+                ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id');
+        }
     }
 
     /**
