@@ -67,7 +67,7 @@
                 {{ product.new }}
             </div>
 
-            <div class="product-price fs16" v-html="product.priceHTML"></div>
+            <div v-html="product.priceHTML"></div>
 
             <div
                 class="product-rating col-12 no-padding"

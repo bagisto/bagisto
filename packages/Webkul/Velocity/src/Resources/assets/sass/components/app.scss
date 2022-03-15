@@ -283,13 +283,14 @@
         .product-name,
         .product-rating {
             width: 15rem;
+            margin-bottom: 2px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
         }
 
         .product-price {
-            height: 72px;
+            margin-bottom: 15px;
         }
     }
 
@@ -1561,15 +1562,23 @@
 }
 
 .product-price {
+    display: inline-block;
+
     .price-label {
         margin-right: 6px;
     }
 
     .regular-price {
+        font-size: 14px;
         font-weight: 500;
-        margin-right: 10px;
         text-decoration: line-through;
-        display: block;
+        display: inline-block;
+    }
+
+    .special-price {
+        display: inline-block;
+        margin-right: 10px;
+        float: left;
     }
 
     /*
