@@ -312,6 +312,7 @@
 .btn-add-to-cart:hover {
     border-color: $theme-dark-color !important;
     background-color: $theme-dark-color !important;
+    text-decoration: none;
 
     &.light {
         border: 1px solid rgba(0,0,0,0.12) !important;

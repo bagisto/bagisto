@@ -236,6 +236,21 @@ label {
         .dropdown-list {
             top: 40px;
             right: 10px;
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .content {
+                padding: 5px 20px 15px 20px;
+            }
+
+            .modal-footer {
+                .theme-btn {
+                    width: 50%;
+                    text-align: center;
+                }
+            }
         }
     }
 
