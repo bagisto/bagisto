@@ -10,24 +10,26 @@
             v-text="quantityText"
         ></label>
 
-        <button type="button" class="decrease" @click="decreaseQty()">
-            <i class="rango-minus"></i>
-        </button>
+        <div class="input-btn-group">
+            <button type="button" class="decrease" @click="decreaseQty()">
+                <i class="rango-minus"></i>
+            </button>
 
-        <input
-            ref="quantityChanger"
-            :name="controlName"
-            :model="qty"
-            class="control"
-            id="quantity-changer"
-            v-validate="validations"
-            :data-vv-as="`&quot;${quantityText}&quot;`"
-            @keyup="setQty($event)"
-        />
+            <input
+                ref="quantityChanger"
+                :name="controlName"
+                :model="qty"
+                class="control"
+                id="quantity-changer"
+                v-validate="validations"
+                :data-vv-as="`&quot;${quantityText}&quot;`"
+                @keyup="setQty($event)"
+            />
 
-        <button type="button" class="increase" @click="increaseQty()">
-            <i class="rango-plus"></i>
-        </button>
+            <button type="button" class="increase" @click="increaseQty()">
+                <i class="rango-plus"></i>
+            </button>
+        </div>
 
         <span class="control-error" v-if="errors.has(controlName)">{{
             errors.first(controlName)
