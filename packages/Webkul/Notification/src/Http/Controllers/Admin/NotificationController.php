@@ -54,11 +54,11 @@ class NotificationController extends Controller
     {
         $params = request()->all();
 
-        if (isset($params) && isset($params['page'])) {
+        if (isset($params['page'])) {
             unset($params['page']);
         }           
 
-        if (isset($params) && $params != NULL) {
+        if (count($params)) {
             $searchResults = $this->notificationRepository->getParamsData($params);
         } else {
             $searchResults = $this->notificationRepository->with('order')->latest()->paginate(10);
@@ -66,7 +66,7 @@ class NotificationController extends Controller
 
         return [
             'search_results' => $searchResults,
-            'total_unread'   => $this->notificationRepository->where('read', 0)->count()
+            'total_unread'   => $this->notificationRepository->where('read', 0)->count(),
         ];
     }
 
@@ -80,7 +80,7 @@ class NotificationController extends Controller
 
         if ($notification = $this->notificationRepository->where('order_id', $orderId)->first()) {
             $notification->read = 1;
-            
+
             $notification->save();
 
             return redirect()->route('admin.sales.orders.view',$orderId);
