@@ -283,17 +283,18 @@
         }
     }
 
-    .layouter,
-    #product-form {
+    .layouter {
         height: 100%;
     }
 
     #product-form {
+        height: 100%;
+
         .form-container {
             height: 100%;
             position: relative;
 
-            .left {
+            div.left {
                 top: 60px;
                 padding: 0px;
                 position: sticky;
