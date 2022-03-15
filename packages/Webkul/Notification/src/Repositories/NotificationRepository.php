@@ -38,7 +38,7 @@ class NotificationRepository extends Repository
         } else if(isset($params['read']) && isset($params['limit'])) {
             return $this->model->where('read', $params['read'])->limit($params['limit'])->with('order')->latest()->paginate($params['limit']);
         } else if(isset($params['limit'])) {
-            return $this->model;
+            return $this->model->limit($params['limit'])->with('order')->latest()->paginate($params['limit']);
         } else if(isset($params['id'])) {
             return $this->model->where('order_id', $params['id'])->with('order')->paginate(10);
         }
