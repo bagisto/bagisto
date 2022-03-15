@@ -404,45 +404,58 @@
         padding: 5px 15px 10px 0;
     }
 
-    button {
-        border: 1px solid #DCDCDC;
-        padding: 7px;
-        background: transparent;
-        text-align: center;
+    .input-btn-group {
+        button {
+            border: 1px solid #DCDCDC;
+            padding: 7px;
+            background: transparent;
+            text-align: center;
 
-        &.decrease {
+            &.decrease {
+                border-right: 0;
+            }
+
+            &.increase {
+                border-left: 0;
+            }
+
+            &:hover,
+            &:active,
+            &:focus {
+                outline: none;
+            }
+
+            .rango-plus,
+            .rango-minus {
+                font-size: 20px;
+                vertical-align: middle;
+            }
+        }
+
+        input {
+            border: 1px solid #DCDCDC;
             border-right: 0;
-        }
-
-        &.increase {
             border-left: 0;
-        }
-
-        &:hover,
-        &:active,
-        &:focus {
-            outline: none;
-        }
-
-        .rango-plus,
-        .rango-minus {
-            font-size: 20px;
-            vertical-align: middle;
+            max-width: 50px;
+            height: 38px;
+            margin-left: -5px;
+            margin-right: -5px;
+            vertical-align: top;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
         }
     }
 
-    input {
-        border: 1px solid #DCDCDC;
-        border-right: 0;
-        border-left: 0;
-        max-width: 50px;
-        height: 38px;
-        margin-left: -5px;
-        margin-right: -5px;
-        vertical-align: top;
-        text-align: center;
-        font-size: 16px;
-        font-weight: 600;
+    &.has-error {
+        button {
+            border-color: #fc6868;
+            color: #fc6868;
+        }
+    }
+
+    .control-error {
+        display: block;
     }
 }
 
@@ -689,7 +702,7 @@
 
         .product-quantity {
             .quantity {
-                display: inline-flex;
+                display: inline-block;
                 width: unset;
                 float: right;
 
@@ -1609,11 +1622,13 @@
 
     span {
         &.price-label {
-            font-size: 16px;
+            font-size: 14px !important;
+            font-weight: 500 !important;
         }
 
         &.final-price {
-            font-size: 30px;
+            font-size: 18px;
+            font-weight: 600;
         }
     }
 }
@@ -1913,13 +1928,6 @@
 
             .quantity {
                 border-top: 0;
-
-                &.has-error {
-                    button {
-                        border-color: #fc6868;
-                        color: #fc6868;
-                    }
-                }
             }
 
             .control-error {
