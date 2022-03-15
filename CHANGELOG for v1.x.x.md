@@ -12,7 +12,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #4356 [feature] - Guest Checkout sucess add register
 
-* #5921 [feature] -Notification should be received without page refresh.
+* #5921 [enhancement] -Notification should be received without page refresh.
 
 * #5817 [enhancement] -The wishlist and the compare option should be inside the account section
 
