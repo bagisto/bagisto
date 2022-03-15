@@ -5,6 +5,7 @@ namespace Webkul\Customer\Repositories;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Models\Order;
 
 class CustomerRepository extends Repository
 {
@@ -118,5 +119,46 @@ class CustomerRepository extends Repository
             $customer->{$type} = null;
             $customer->save();
         }
+    }
+
+    /**
+     * Sync new registered customer data.
+     *
+     * @param  \Webkul\Customer\Contracts\Customer  $customer
+     * @return mixed
+     */
+    public function syncNewRegisteredCustomerInformations($customer)
+    {
+        /**
+         * Setting registered customer to orders.
+         */
+        Order::where('customer_email', $customer->email)->update([
+            'is_guest'      => 0,
+            'customer_id'   => $customer->id,
+            'customer_type' => \Webkul\Customer\Models\Customer::class,
+        ]);
+
+        /**
+         * Grabbing orders by `customer_id`.
+         */
+        $orders = Order::where('customer_id', $customer->id)->get();
+
+        /**
+         * Setting registered customer to associated order's relations.
+         */
+        $orders->each(function ($order) use ($customer) {
+            $order->addresses()->update([
+                'customer_id' => $customer->id,
+            ]);
+
+            $order->shipments()->update([
+                'customer_id'   => $customer->id,
+                'customer_type' => \Webkul\Customer\Models\Customer::class,
+            ]);
+
+            $order->downloadable_link_purchased()->update([
+                'customer_id' => $customer->id,
+            ]);
+        });
     }
 }

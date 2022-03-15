@@ -3,15 +3,15 @@
 namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Checkout\Models\CartProxy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Webkul\Checkout\Models\CartProxy;
 use Webkul\Sales\Contracts\Order as OrderContract;
 use Webkul\Sales\Database\Factories\OrderFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model implements OrderContract
 {
@@ -44,13 +44,13 @@ class Order extends Model implements OrderContract
     ];
 
     protected $statusLabel = [
-        self::STATUS_PENDING => 'Pending',
+        self::STATUS_PENDING         => 'Pending',
         self::STATUS_PENDING_PAYMENT => 'Pending Payment',
-        self::STATUS_PROCESSING => 'Processing',
-        self::STATUS_COMPLETED => 'Completed',
-        self::STATUS_CANCELED => 'Canceled',
-        self::STATUS_CLOSED => 'Closed',
-        self::STATUS_FRAUD => 'Fraud',
+        self::STATUS_PROCESSING      => 'Processing',
+        self::STATUS_COMPLETED       => 'Completed',
+        self::STATUS_CANCELED        => 'Canceled',
+        self::STATUS_CLOSED          => 'Closed',
+        self::STATUS_FRAUD           => 'Fraud',
     ];
 
     /**
@@ -99,7 +99,7 @@ class Order extends Model implements OrderContract
     public function items(): HasMany
     {
         return $this->hasMany(OrderItemProxy::modelClass())
-                    ->whereNull('parent_id');
+            ->whereNull('parent_id');
     }
 
     /**
@@ -116,6 +116,14 @@ class Order extends Model implements OrderContract
     public function all_items(): HasMany
     {
         return $this->hasMany(OrderItemProxy::modelClass());
+    }
+
+    /**
+     * Get the order record associated with the item.
+     */
+    public function downloadable_link_purchased()
+    {
+        return $this->hasMany(DownloadableLinkPurchasedProxy::modelClass());
     }
 
     /**
@@ -180,7 +188,7 @@ class Order extends Model implements OrderContract
     public function billing_address(): HasMany
     {
         return $this->addresses()
-                    ->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
+            ->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
     }
 
     /**
@@ -189,7 +197,7 @@ class Order extends Model implements OrderContract
     public function getBillingAddressAttribute()
     {
         return $this->billing_address()
-                    ->first();
+            ->first();
     }
 
     /**
@@ -198,7 +206,7 @@ class Order extends Model implements OrderContract
     public function shipping_address(): HasMany
     {
         return $this->addresses()
-                    ->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
+            ->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
     }
 
     /**
@@ -207,7 +215,7 @@ class Order extends Model implements OrderContract
     public function getShippingAddressAttribute()
     {
         return $this->shipping_address()
-                    ->first();
+            ->first();
     }
 
     /**
@@ -227,7 +235,7 @@ class Order extends Model implements OrderContract
     {
         foreach ($this->items as $item) {
             if ($item->getTypeInstance()
-                     ->isStockable()) {
+                ->isStockable()) {
                 return true;
             }
         }
@@ -283,8 +291,8 @@ class Order extends Model implements OrderContract
     public function hasOpenInvoice(): bool
     {
         $pendingInvoice = $this->invoices()->where('state', 'pending')
-        ->orWhere('state', 'pending_payment')
-        ->first();
+            ->orWhere('state', 'pending_payment')
+            ->first();
 
         if ($pendingInvoice) {
             return true;
@@ -313,7 +321,7 @@ class Order extends Model implements OrderContract
         }
 
         $pendingInvoice = $this->invoices->where('state', 'pending')
-                                         ->first();
+            ->first();
         if ($pendingInvoice) {
             return true;
         }
@@ -339,7 +347,7 @@ class Order extends Model implements OrderContract
         }
 
         $pendingInvoice = $this->invoices->where('state', 'pending')
-                                         ->first();
+            ->first();
         if ($pendingInvoice) {
             return false;
         }
@@ -351,7 +359,7 @@ class Order extends Model implements OrderContract
         }
 
         if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()
-                                                                                       ->sum('base_adjustment_fee') > 0) {
+            ->sum('base_adjustment_fee') > 0) {
             return true;
         }
 
@@ -365,6 +373,6 @@ class Order extends Model implements OrderContract
      */
     protected static function newFactory(): Factory
     {
-        return OrderFactory::new();
+        return OrderFactory::new ();
     }
 }
