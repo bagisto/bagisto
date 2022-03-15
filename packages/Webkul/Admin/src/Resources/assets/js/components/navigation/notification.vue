@@ -14,6 +14,7 @@
                        <div>
                             <span hidden>{{ moment.locale(localeCode) }}</span>
                         </div>
+                        
                         <a :href="`${orderViewUrl + notification.order_id}`">
                             <div class="notif-icon" :class="notification.order.status">
                                 <span :class="ordertype[notification.order.status].icon"></span>

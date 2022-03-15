@@ -88,6 +88,8 @@ class AttributeRepository extends Repository
 
         Event::dispatch('catalog.attribute.update.before', $id);
 
+        $data['enable_wysiwyg'] = ! isset($data['enable_wysiwyg']) ? 0 : 1;
+
         $attribute->update($data);
 
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {

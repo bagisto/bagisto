@@ -611,7 +611,8 @@
     .product-image {
         @extend .bg-image;
 
-        height: 100%;
+        width: 70px;
+        height: 70px;
         background-position: center;
     }
 
@@ -621,7 +622,10 @@
         padding: 10px 0 !important;
 
         .product-name {
+            font-size: 18px;
+            color: #000000;
             width: 100%;
+            margin-bottom: 10px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -791,6 +795,10 @@ a {
 
         .VueCarousel-navigation-next {
             right: 12px;
+        }
+
+        span {
+            font-size: 32px;
         }
     }
 }

@@ -388,7 +388,7 @@
         }
     }
 
-    .mini-cart-container {
+    .mini-cart-btn {
         display: none;
     }
 
@@ -461,7 +461,7 @@
     .product-detail {
         #product-form {
             .form-container {
-                .left {
+                div.left {
                     top: 0px;
                     position: relative;
                     margin-bottom: 20px;

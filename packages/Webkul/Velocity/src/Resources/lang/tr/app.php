@@ -113,14 +113,14 @@ return [
             'general' => 'Genel',
             'add-image-btn-title' => 'Görsel Ekle',
             'footer-middle' => [
-                'about-us'  => 'About Us',
-                'customer-service' => 'Customer Service',
-                'whats-new' => 'What\'s New',
-                'contact-us' => 'Contact Us',
-                'order-and-returns' => 'Order and Returns',
-                'payment-policy' => 'Payment Policy',
-                'shipping-policy' => 'Shipping Policy',
-                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+                'about-us'  => 'Hakkımızda',
+                'customer-service' => 'Müşteri Servisi',
+                'whats-new' => 'Yeni Neler Var',
+                'contact-us' => 'Bize Ulaşın',
+                'order-and-returns' => 'Sipariş ve İade',
+                'payment-policy' => 'Ödeme Politikası',
+                'shipping-policy' => 'Nakliye Politikası',
+                'privacy-and-cookies-policy' => 'Gizlilik ve Çerez Politikası'
             ]
         ],
         'category'  => [
@@ -262,7 +262,7 @@ return [
         'short-description' => 'Kısa Açıklamalar',
         'recently-viewed'   => 'En Son Gezdiğiniz Ürünler',
         'be-first-review'   => 'Bu ürüne ilk siz inceleme girin!',
-        'tax-inclusive'     => 'Inclusive of all taxes',
+        'tax-inclusive'     => 'Tüm vergiler dahildir',
     ],
 
     'shop'          => [

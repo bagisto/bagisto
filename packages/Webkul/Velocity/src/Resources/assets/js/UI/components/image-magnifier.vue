@@ -24,8 +24,6 @@
 
 <style lang="scss">
 .outer-assets-container {
-    height: 420px;
-
     .image-container {
         .magnifier {
             > img {

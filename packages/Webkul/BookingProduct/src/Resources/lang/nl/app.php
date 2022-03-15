@@ -66,6 +66,17 @@ return [
                 'close' => 'Dichtbij',
                 'time-error' => 'The to time must be greater than the from time.'
             ]
+        ],
+
+        'sales' => [
+            'bookings' => [
+                'title' => 'Boekingsinformatie',
+            ]
+        ],
+
+        'datagrid' => [
+            'from' => 'Van',
+            'to' => 'To',
         ]
     ],
 

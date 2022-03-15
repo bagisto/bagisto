@@ -41,7 +41,7 @@
             text-align: center;
         }
 
-        .page-item .pagination-page-nav .active .page-link{
+        .page-item .pagination-page-nav .active .page-link {
             color:#fff !important;
         }
     </style>

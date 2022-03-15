@@ -4,6 +4,8 @@
         :dir="localeDirection"
         :id="id"
         :navigationEnabled="true"
+        navigationPrevLabel="<span class='rango-arrow-left'></span>"
+        navigationNextLabel="<span class='rango-arrow-right'></span>"
         :paginationEnabled="true"
         :perPage="parseInt(slidesPerPage)"
         :loop="loop == 'true' ? true : false"

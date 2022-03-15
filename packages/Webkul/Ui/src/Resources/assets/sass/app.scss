@@ -582,6 +582,10 @@ h5 {
             padding: 12px 10px;
             background: #f8f9fa;
             color: $font-color;
+
+            &.sortable {
+                cursor: pointer;
+            }
         }
 
         tbody td {

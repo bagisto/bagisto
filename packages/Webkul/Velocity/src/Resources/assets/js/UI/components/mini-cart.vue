@@ -1,14 +1,23 @@
 <template>
     <div :class="`dropdown ${cartItems.length > 0 ? '' : 'disable-active'}`">
-        <mini-cart-button
-            :item-count="cartItems.length"
-            :cart-text="cartText"
-        ></mini-cart-button>
+        <div class="dropdown-toggle btn btn-link" id="mini-cart" :class="{'cursor-not-allowed': ! cartItems.length}">
+            <div class="mini-cart-content">
+                <i class="material-icons-outlined">shopping_cart</i>
+                <div class="badge-container">
+                    <span class="badge" v-text="cartItems.length" v-if="cartItems.length != 0"></span>
+                </div>
+                <span class="fs18 fw6 cart-text" v-text="cartText"></span>
+            </div>
+
+            <div class="down-arrow-container">
+                <span class="rango-arrow-down"></span>
+            </div>
+        </div>
 
         <div
             id="cart-modal-content"
-            v-if="cartItems.length > 0"
-            class="modal-content sensitive-modal cart-modal-content hide"
+            class="modal-content dropdown-list sensitive-modal cart-modal-content"
+            :class="{hide: ! cartItems.length}"
         >
             <div class="mini-cart-container">
                 <div
@@ -17,9 +26,9 @@
                     v-for="(item, index) in cartItems"
                 >
                     <div class="col-3 product-image-container mr15">
-                        <a @click="removeProduct(item.id)">
+                        <span class="remove-item" @click="removeProduct(item.id)">
                             <span class="rango-close"></span>
-                        </a>
+                        </span>
 
                         <a
                             class="unset"
@@ -36,7 +45,7 @@
                     <div class="col-9 no-padding card-body align-vertical-top">
                         <div class="no-padding">
                             <div
-                                class="fs16 text-nowrap fw6"
+                                class="fs16 text-nowrap fw6 product-name"
                                 v-html="item.name"
                             ></div>
 

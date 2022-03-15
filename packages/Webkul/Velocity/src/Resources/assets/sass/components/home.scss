@@ -470,9 +470,12 @@ header #search-form > *:focus {
     }
 
     .main-category {
-        padding: 8px 15px;
+        padding: 10px 15px;
         border-top: 1px solid $border-common;
-        border-bottom: 5px solid transparent;
+
+        .pl5 {
+            vertical-align: top;
+        }
     }
 
     .content-list {
@@ -499,7 +502,7 @@ header #search-form > *:focus {
                     cursor: pointer;
                     font-size: 16px;
                     font-weight: 600;
-                    padding: 8px 15px;
+                    padding: 11px 15px;
                     letter-spacing: 0;
                     position: relative;
                     color: $white-color;
@@ -712,6 +715,7 @@ body::after {
 
 .slider-container {
     min-height: 400px;
+    margin-bottom: 20px;
 }
 
 .remove-padding-margin {

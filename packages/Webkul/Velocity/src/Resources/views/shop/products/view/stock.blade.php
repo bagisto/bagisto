@@ -1,8 +1,7 @@
 {!! view_render_event('bagisto.shop.products.view.stock.before', ['product' => $product]) !!}
 
 <div class="col-12 availability">
-    <button
-        type="button"
+    <label
         class="{{! $product->haveSufficientQuantity(1) ? '' : 'active' }} disable-box-shadow">
             @if ( $product->haveSufficientQuantity(1) === true )
                 {{ __('shop::app.products.in-stock') }}
@@ -11,7 +10,7 @@
             @else
                 {{ __('shop::app.products.out-of-stock') }}
             @endif
-    </button>
+    </label>
 </div>
 
 {!! view_render_event('bagisto.shop.products.view.stock.after', ['product' => $product]) !!}

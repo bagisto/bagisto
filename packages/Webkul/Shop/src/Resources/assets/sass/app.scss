@@ -1082,6 +1082,19 @@ section.slider-block {
                     .btn.btn-sm {
                         padding: 9px 25px;
                     }
+
+                    .button-group {
+                        margin-top: 15px;
+                        margin-bottom: 0;
+                        display: grid;
+                        column-gap: 10px;
+                        grid-template-columns: auto auto;
+
+                        .btn  {
+                            word-break: break-all;
+                            text-align: center;
+                        }
+                    }
                 }
 
                 .cart-dropdown-container {
@@ -3274,6 +3287,7 @@ section.review {
 
     .review-layouter {
         display: flex;
+        width: 100%;
 
         .product-info {
             max-width: 25%;
@@ -3286,6 +3300,7 @@ section.review {
                 img {
                     height: 280px;
                     width: 280px;
+                    max-width: 100%;
                 }
             }
 

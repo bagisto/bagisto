@@ -623,6 +623,7 @@ return [
             'type'                        => 'Tipo de atributo',
             'text'                        => 'Texto',
             'textarea'                    => 'Área de texto',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
             'price'                       => 'Precio',
             'boolean'                     => 'Booleano',
             'select'                      => 'Lista de selección',

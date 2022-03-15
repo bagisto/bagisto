@@ -13,6 +13,8 @@ class BookingProductServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->loadRoutesFrom(__DIR__ . '/../Http/admin-routes.php');
+
         $this->loadRoutesFrom(__DIR__ . '/../Http/front-routes.php');
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
@@ -36,5 +38,9 @@ class BookingProductServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(dirname(__DIR__) . '/Config/product_types.php', 'product_types');
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/menu.php', 'menu.admin'
+        );
     }
 }

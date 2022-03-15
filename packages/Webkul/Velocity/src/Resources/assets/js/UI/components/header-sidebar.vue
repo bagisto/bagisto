@@ -11,7 +11,7 @@
         @mouseout="toggleSidebar('0', $event, 'mouseout')"
         @mouseover="toggleSidebar('0', $event, 'mouseover')"
     >
-        <i class="rango-view-list text-down-4 align-vertical-top fs18"> </i>
+        <i class="rango-view-list align-vertical-top fs18"> </i>
 
         <span
             class="pl5"

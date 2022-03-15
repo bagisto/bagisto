@@ -14,7 +14,6 @@ class NotificationController extends Controller
      */
     protected $_config;
 
-
     /**
      * NotificationRepository
      *
@@ -55,21 +54,19 @@ class NotificationController extends Controller
     {
         $params = request()->all();
 
-        $searchResults = [];
-
-        if(isset($params) && isset($params['page'])){
+        if (isset($params['page'])) {
             unset($params['page']);
         }           
 
-        if(isset($params) && $params != NULL){     
+        if (count($params)) {
             $searchResults = $this->notificationRepository->getParamsData($params);
-        }else{
+        } else {
             $searchResults = $this->notificationRepository->with('order')->latest()->paginate(10);
         }
 
         return [
             'search_results' => $searchResults,
-            'total_unread' => $this->notificationRepository->where('read',0)->count()
+            'total_unread'   => $this->notificationRepository->where('read', 0)->count(),
         ];
     }
 
@@ -78,10 +75,12 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function viewedNotifications($orderId){
+    public function viewedNotifications($orderId)
+    {
 
-        if($notification = $this->notificationRepository->where('order_id',$orderId)->first()){
+        if ($notification = $this->notificationRepository->where('order_id', $orderId)->first()) {
             $notification->read = 1;
+
             $notification->save();
 
             return redirect()->route('admin.sales.orders.view',$orderId);
@@ -95,20 +94,20 @@ class NotificationController extends Controller
      *
      * @return array
      */
-    public function readAllNotifications(){
-
-        $this->notificationRepository->where('read',0)->update(['read' => 1]);
+    public function readAllNotifications()
+    {
+        $this->notificationRepository->where('read', 0)->update(['read' => 1]);
 
         $params = [
             "limit" =>  5,
-            "read" =>  0
+            "read"  =>  0
         ];
 
         $searchResults = $this->notificationRepository->getParamsData($params);
 
         return [
-            'search_results' => $searchResults,
-            'total_unread' => $this->notificationRepository->where('read',0)->count(),
+            'search_results'  => $searchResults,
+            'total_unread'    => $this->notificationRepository->where('read', 0)->count(),
             'success_message' => trans('admin::app.notification.notification-marked-success')
         ];
 

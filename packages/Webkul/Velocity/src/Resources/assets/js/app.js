@@ -30,7 +30,8 @@ Vue.use(VeeValidate, {
         fr: fr,
         nl: nl,
         tr: tr
-    }
+    },
+    events: 'input|change|blur'
 });
 
 /**
@@ -376,16 +377,6 @@ $(function() {
 
             hideLoader: function() {
                 this.loading = false;
-            },
-
-            togglePopup: function() {
-                let accountModal = $('#account-modal');
-
-                let modal = $('#cart-modal-content');
-
-                if (modal) modal.addClass('hide');
-
-                accountModal.toggleClass('hide');
             },
         }
     });

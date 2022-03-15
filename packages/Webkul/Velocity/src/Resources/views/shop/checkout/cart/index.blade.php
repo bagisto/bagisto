@@ -38,10 +38,10 @@
     <script type="text/x-template" id="cart-template">
         <div class="container">
             <section class="cart-details row no-margin col-12">
-                <h2 class="cart-details-header fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h2>
+                <h2 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h2>
 
                 @if ($cart)
-                    <div class="cart-details-header col-lg-6 col-md-12">
+                    <div class="cart-details-header col-lg-7 col-md-12">
                         <div class="row cart-header col-12 no-padding">
                             <span class="col-8 fw6 fs16 pr0">
                                 {{ __('velocity::app.checkout.items') }}
@@ -225,7 +225,7 @@
                 {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
 
                     @if ($cart)
-                        <div class="col-lg-4 col-md-12 offset-lg-2 row order-summary-container">
+                        <div class="col-lg-4 col-md-12 offset-lg-1 row order-summary-container">
                             @include('shop::checkout.total.summary', ['cart' => $cart])
 
                             <coupon-component></coupon-component>

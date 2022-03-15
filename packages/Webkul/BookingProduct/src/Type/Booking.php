@@ -203,6 +203,7 @@ class Booking extends Virtual
 
                 $data['quantity'] = $qty;
                 $data['booking']['ticket_id'] = $ticketId;
+                $data['booking']['slot'] = implode('-', [$bookingProduct->available_from->timestamp, $bookingProduct->available_to->timestamp]);
                 $cartProducts = parent::prepareForCart($data);
 
                 if (is_string($cartProducts)) {

@@ -118,7 +118,7 @@
                                     <span style="font-size: 12px;">{{ __('shop::app.header.dropdown-text') }}</span>
                                 </div>
 
-                                <div style="margin-top: 15px;">
+                                <div class="button-group">
                                     <a class="btn btn-primary btn-md" href="{{ route('customer.session.index') }}" style="color: #ffffff">
                                         {{ __('shop::app.header.sign-in') }}
                                     </a>

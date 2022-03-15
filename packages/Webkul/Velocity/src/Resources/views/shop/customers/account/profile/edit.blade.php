@@ -191,7 +191,7 @@
                         name="password"
                         ref="password"
                         type="password"
-                        v-validate="'min:6|max:18'" />
+                        v-validate="'min:6'" />
 
                     <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
                 </div>
