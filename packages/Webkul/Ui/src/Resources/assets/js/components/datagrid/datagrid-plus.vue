@@ -599,7 +599,7 @@
                                             v-text="translations.submit"
                                             type="submit"
                                             class="btn btn-sm btn-primary"
-                                            style="margin-left: 10px"
+                                            style="margin-left: 10px; white-space: nowrap;"
                                         ></button>
                                     </form>
                                 </div>
