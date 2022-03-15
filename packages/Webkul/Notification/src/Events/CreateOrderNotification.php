@@ -2,26 +2,15 @@
 
 namespace Webkul\Notification\Events;
 
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class CreateOrderNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
-    
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {    
-
-    }
 
     /**
      * Get the channels the event should broadcast on.
@@ -33,7 +22,13 @@ class CreateOrderNotification implements ShouldBroadcast
         return new Channel('notification');
     }
 
-
+    /**
+     * Seperate queue.
+     *
+     * Command: `php artisan queue:work --queue=broadcastable`
+     *
+     * @return string
+     */
     public function broadcastQueue()
     {
         return 'broadcastable';
@@ -42,7 +37,7 @@ class CreateOrderNotification implements ShouldBroadcast
     /**
      * Get the channels the event should broadcast as.
      *
-     * @return broadcast name
+     * @return string
      */
     public function broadcastAs()
     {
