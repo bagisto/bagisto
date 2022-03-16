@@ -522,7 +522,7 @@
                                     <span
                                         class="massaction-remove"
                                         v-on:click="removeMassActions"
-                                        style="margin-right: 10px; margin-top: 3px"
+                                        style="margin-right: 10px; margin-top: 5px"
                                     >
                                         <span
                                             class="icon checkbox-dash-icon"
@@ -620,6 +620,7 @@
                                         type="checkbox"
                                         v-model="allSelected"
                                         v-on:change="selectAll"
+                                        :disabled="! records.data.length"
                                     />
 
                                     <label
