@@ -67,7 +67,6 @@
     <script>
 
         $(document).ready(function () {
-
             $(".menubar-anchor").click(function() {
                 if ( $(this).parent().attr('class') == 'menu-item active' ) {
                     $(this).parent().removeClass('active');
