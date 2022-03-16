@@ -89,7 +89,7 @@
                                     <td>
                                         <div class="control-group" :class="[errors.has('booking[slots][' + index + '][to]') ? 'has-error' : '']">
                                             <time-component>
-                                                <input type="text" v-validate="parseInt(slots.many[index].status) ? 'required': ''" :name="'booking[slots][' + index + '][to]'" class="control" v-model="slots.many[index].to" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.to') }}&quot;">
+                                                <input type="text" v-validate="parseInt(slots.many[index].status) ? {required: true, time_min: slots.many[index].from } : ''" :name="'booking[slots][' + index + '][to]'" class="control" v-model="slots.many[index].to" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.to') }}&quot;">
                                             </time-component>
 
                                             <span class="control-error" v-if="errors.has('booking[slots][' + index + '][to]')">
