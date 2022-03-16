@@ -302,6 +302,14 @@
             color: $font-color;
             border-top: solid 1px $border-color;
             border-bottom: solid 1px $border-color;
+
+            .accordian-up-icon {
+                background-image: url(../images/Accordion-Dark-Arrow-Up.svg);
+            }
+
+            .accordian-down-icon {
+                background-image: url(../images/Accordion-Dark-Arrow-Up.svg);
+            }
         }
     }
 
@@ -762,6 +770,20 @@
 
     .control-group input:checked+.slider {
         background-color: $dark-mode-switch-background !important;
+    }
+}
+
+.navbar-left {
+    .menubar-bottom {
+        background-color: $dark-bg;
+
+        .accordian-left-icon {
+            background-image: url(../images/dark-chevron-left.svg);
+        }
+
+        .accordian-right-icon {
+            background-image: url(../images/dark-chevron-right.svg);
+        }
     }
 }
 
