@@ -502,6 +502,8 @@ return [
             'continue-registration'    => 'متابعة التسجيل',
             'proceed-to-checkout'      => 'انتقل إلى الخروج',
             'remove'                   => 'احذف',
+            'remove-all-items'         => 'Remove all items',
+
             'remove-link'              => 'احذف',
             'move-to-wishlist'         => 'انقل إلى قائمة الأمنيات',
             'move-to-wishlist-success' => 'نقل العنصر إلى قائمة الأمنيات',
@@ -520,6 +522,7 @@ return [
                 'success'        => 'تم بنجاح إضافة العنصر إلى العربة',
                 'success-remove' => 'تم إزالة العنصر بنجاح من العربة',
                 'error-add'      => 'لا يمكن إضافة العنصر إلى العربة ، رجاء حاول مرة أخرى ',
+                'success-all-remove' => 'All items is successfully removed from the cart.',
                 'inactive'       => 'An item is inactive and was removed from cart',
                 'inactive-add'   => 'Inactive item cannot be added to cart',
             ],
