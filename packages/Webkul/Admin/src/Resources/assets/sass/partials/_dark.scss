@@ -403,6 +403,13 @@
         }
     }
 
+    .btn {
+        &.btn-primary {
+            background: $white;
+            color: $black;
+        }
+    }
+
     .control-container {
         .control {
             background: $black;
