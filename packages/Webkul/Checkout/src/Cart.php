@@ -49,7 +49,7 @@ class Cart
     /**
      * Product repository instance.
      *
-     * @var \Webkul\Checkout\Repositories\ProductRepository
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
