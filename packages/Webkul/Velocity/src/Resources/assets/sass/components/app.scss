@@ -406,7 +406,7 @@
 
     .input-btn-group {
         button {
-            border: 1px solid #DCDCDC;
+            border: 1px solid #dcdcdc;
             padding: 7px;
             background: transparent;
             text-align: center;
@@ -433,7 +433,7 @@
         }
 
         input {
-            border: 1px solid #DCDCDC;
+            border: 1px solid #dcdcdc;
             border-right: 0;
             border-left: 0;
             max-width: 50px;
@@ -597,7 +597,7 @@
     width: 350px;
     right: 0;
     position: absolute;
-    border-top: 4px solid #26A37C;
+    border-top: 4px solid #26a37c;
 
     .close {
         top: 12px;
@@ -648,7 +648,7 @@
             border-radius: 50%;
             position: absolute;
             background: #111111;
-            color: #FFFFFF;
+            color: #ffffff;
             padding: 0px 4px;
 
             .rango-close {
@@ -763,7 +763,7 @@
             .item-actions {
                 margin-top: 12px !important;
 
-                .d-inline-block  {
+                .d-inline-block {
                     float: left;
 
                     &:first-child {
@@ -2516,6 +2516,11 @@
 }
 
 @media only screen and (max-width: 720px) {
+    .product-quantity {
+        .input-btn-group {
+            display: flex;
+        }
+    }
     .cp-spinner {
         left: 50%;
         margin-left: -24px;
