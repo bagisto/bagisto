@@ -447,6 +447,16 @@ body {
         .locale {
             float: right;
             color: $role-text-color;
+            position: relative;
+            right: 30%;
+        }
+    }
+
+    &.have-wysiwyg {
+        label {
+            .locale {
+                position: unset;
+            }
         }
     }
 
