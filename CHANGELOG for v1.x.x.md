@@ -2,6 +2,470 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v1.4.0 (16th of March 2022)** - *Release*
+
+* #5654 [feature] -Only unread notification should be shown in the notification modal box. 
+
+* #4787 [feature] - Unable to upload profile picture
+
+* #4653 [feature] - Making billing address informations optional
+
+* #4356 [feature] - Guest Checkout sucess add register
+
+* #5921 [enhancement] -Notification should be received without page refresh.
+
+* #5817 [enhancement] -The wishlist and the compare option should be inside the account section
+
+* #5671 [enhancement] -By default the first submenu should be open, when the admin is clicking on any tab
+
+* #5537 [enhancement] -New admin theme - RTL menu
+
+* #5525 [enhancement] -Send a duplicate of the invoice to the customer
+
+* #5490 [enhancement] -The address should be horizontal format
+
+* #5404 [enhancement] -The Add image button should not be present when the user is trying to edit the profile
+
+* #5396 [enhancement] -The currency icon should be shown properly
+
+* #5395 [enhancement] -The user panel should be responsive on phone-view
+
+* #5384 [enhancement] -There should be a confirmation alert before deleting all items from Wishlist and Compare
+
+* #5300 [enhancement] -Suspend customers
+
+* #5292 [enhancement] -Some data grids are missing ProvideDataGridPlus trait
+
+* #5267 [enhancement] -Send reminders for overdue invoices
+
+* #5219 [enhancement] -Issue in multi select data in every datagrid
+
+* #5165 [enhancement] -Write All Factories In Laravel 8 Pattern
+
+* #5158 [enhancement] -Breadcrumb Feature
+
+* #5143 [enhancement] -Rest API Enhancement In Sanctum
+
+* #5064 [enhancement] -Multi factor authentication
+
+* #4834 [enhancement] -Requesting to load attributes via ajax
+
+* #4772 [enhancement] -Ability to drag product image to reorder them in bagisto admin dashboard
+
+* #4653 [enhancement] -Making billing address informations optional
+
+* #2918 [enhancement] -Overview of sold booking products in Admin panel
+
+* #2009 [enhancement] -Using AWS S3 for storage
+
+* #1243 [enhancement] -Implement a feature to share Wishlist
+
+* #5968 [enhancement] -The wishlist and compare option should not be in multiple times
+
+* #1238 [enhancement] -Give configuration for converting textarea to wysiwyg editor or not for browser compatibility.
+
+* #6019 [fixed] -There should not any UI issue if the admin is trying to update products by mass action. 
+
+* #6010 [fixed] -There should not be any UI issue when the user is trying to write a review for the product in mobile view. 
+
+* #6008 [fixed] -There is a UI issue on the Bills theme when the user is trying to log in.
+
+* #6006 [fixed] -There is a UI issue if the admin is trying to update products by mass action.
+
+* #5995 [fixed] -The filters should work properly. if the user is trying to filter the products by the color filter
+
+* #5985 [fixed] -There should be a warning message on the checkout page, for the required field if the user is clicking outside of the required input field 
+
+* #5980 [fixed] - There is a UI issue if the user is trying to filter products by category
+
+* #5966 [fixed] - The product quantity should be visible on the cart page
+
+* #5965 [fixed] - Maximum Password length is 18 characters in velocity theme, which is way too short to be secure
+
+* #5941 [fixed] - UI Issue at the Profile Section -> Empty space below address
+
+* #5939 [fixed] - The selected date and time should be visible if the admin trying to add Tickets for a booking product
+
+* #5938 [fixed] - There is a UI issue on forget password page
+
+* #5932 [fixed] - There should not be any extra space on the product view page
+
+* #5931 [fixed] - The product must be added to the wishlist which the user wants to add
+
+* #5929 [fixed] - The notification text should be clickable
+
+* #5926 [fixed] - There is a UI in the header section on mobile view
+
+* #5919 [fixed] - There is a UI issue on the orders page 
+
+* #5915 [fixed] - There is a translation issue in notification pages.
+
+* #5913 [fixed] - The user is able to edit the product without permission for the same
+
+* #5908 [fixed] - The Success message should be according to the selected locale
+
+* #5907 [fixed] - There is a UI issue on the checkout page
+
+* #5904 [fixed] - There is a UI issue on the Tax Rates page
+
+* #5903 [fixed] - There is a UI issue on the notification page
+
+* #5899 [fixed] - The text color of the count should be white in mobile view
+
+* #5898 [fixed] - The success/warning messages should be shown properly
+
+* #5885 [fixed] - There are many translation issues on the Arabic locale 
+
+* #5865 [fixed] - There is a translation issue when the admin is trying to create a product.
+
+* #5855 [fixed] - The categories name should be shown in all locales
+
+* #5841 [fixed] - There is a translation issue on the Notification page.
+
+* #5839 [fixed] - There should not be any UI issue while adding the product.
+
+* #5830 [fixed] - There should be no exception if the user is trying to log in
+
+* #5828 [fixed] - The Channel filter is not working properly on the product list page.
+
+* #5820 [fixed] - The user is not able to update the review by mass action.
+
+* #5809 [fixed] - Ui issue when admin try to click on search order in notification in mobile view
+
+* #5808 [fixed] - proper allignment of images when admin try to upload in arabic language
+
+* #5805 [fixed] - Navigation alligment when we try to edit checkbox and select attribute in mobile view
+
+* #5804 [fixed] - When I create product bullets in the edit I am experienced those UL get dropped and they are left out in the customer view
+
+* #5803 [fixed] - Alligment issue when we make a configurable product in delete and edit button.
+
+* #5802 [fixed] - Ui issue comes when we click on add link in downloadable product
+
+* #5799 [fixed] - Ui issues in arabic language when we try to add booking product.
+
+* #5797 [fixed] - There should be proper space when customer is try to add address.
+
+* #5791 [fixed] - There should be gab between edit and delete option in addresss page in velocity.
+
+* #5790 [fixed] - Issue in orders page in velocity in arabic language
+
+* #5789 [fixed] - Alligment should be done properly in arabic in wishlist page
+
+* #5788 [fixed] - When we are try to delete the sliders wrong notifications show
+
+* #5785 [fixed] - Calender icon is not properly visible in arabic
+
+* #5778 [fixed] - issue in arbaic language of alligment in mobile view
+
+* #5775 [fixed] - translations not working in navigation in admin panel
+
+* #5774 [fixed] - Admin - Address index view not found 
+
+* #5772 [fixed] - issue in french lanugage in navigation bar
+
+* #5770 [fixed] - Layout shifting in admin ui
+
+* #5768 [fixed] - Zoomlens in product page overlap sidebar category menu 
+
+* #5764 [fixed] - not able to select options in LTR ENGLISH
+
+* #5762 [fixed] - not able to add slider images in velocity theme
+
+* #5761 [fixed] - email spelling wrong in notifications emails
+
+* #5755 [fixed] - there should be a space between update quantities in mobile view in admin panel
+
+* #5754 [fixed] - not get any mail when we make new intventory sources in admin panel
+
+* #5752 [fixed] - in mobile view wishlist option is not there in checkout page
+
+* #5746 [fixed] - update button alligment should done in velocity theme.
+
+* #5736 [fixed] - remove button should be with wishlist in mobile view in simple product
+
+* #5735 [fixed] - alligment should be done proper in velocity in mobile view of remove icon
+
+* #5730 [fixed] - there is an option to increase quanity when user is try to booked product in both themes.
+
+* #5729 [fixed] - ui issue when we are try to book only booking product in bliss theme in checkout page (mobile view ).
+
+* #5728 [fixed] - user is not able to update quanity in checkout cart page in veloicity theme
+
+* #5727 [fixed] - ui issue when guest is place an order (mobile view ) in velocity
+
+* #5722 [fixed] - when we disable status paypal from admin panel it show error in console
+
+* #5719 [fixed] - ui issue when we try to make booking product in admin panel in mobile view 
+
+* #5718 [fixed] - alligment issue in blisss theme in downloadable product section (mobile view)
+
+* #5717 [fixed] - ui issue in admin panel when we try to edit cms pages (mobile view )
+
+* #5709 [fixed] - Wrong error messages when uploading video 
+
+* #5708 [fixed] - proper alligment should be done in order page (mobile view)
+
+* #5707 [fixed] - ui issue in configuration part of admin (mobile view) 
+
+* #5706 [fixed] - there should be an option of wishlist button in blisss theme in front panel 
+
+* #5705 [fixed] - ui issue in compare similar items in compare page (mobile view) 
+
+* #5704 [fixed] - alligment issue in velocity theme in mobile view 
+
+* #5703 [fixed] - star ratings alligment should be in same line in mobile view 
+
+* #5696 [fixed] - dropdown buttons is not working properly in admin panel
+
+* #5695 [fixed] - ui issue when there is only 1 downloadable product in view shopping cart (mobile view)
+
+* #5694 [fixed] - star ratings and reviews alligment should be in same line in blisss theme in mobile view
+
+* #5687 [fixed] - there should be no option for downloadable product for increasing the quanity in velocity theme 
+
+* #5684 [fixed] - reimporting exported tax rate csv results in state field missing error
+
+* #5670 [fixed] - user not able to redirect to cms pages in blisss theme 
+
+* #5663 [fixed] - The user should be able to download the downloadable product 
+
+* #5661 [fixed] - ui issue in customer order view page in blisss theme in mobile view
+
+* #5659 [fixed] - delete button in customer profile should be properly allign (bliss theme) in mobile view
+
+* #5657 [fixed] - proper alligment should be done in bliss theme when we write reviews (mobile view)
+
+* #5650 [fixed] - There is a UI issue in cart page on phone view 
+
+* #5648 [fixed] - there should not be any blank space in payment method 
+
+* #5636 [fixed] - ui issue when we search any product in bliss theme 
+
+* #5635 [fixed] - issue when we click on search icon in blisss theme in mobile view 
+
+* #5633 [fixed] - alligment issue after you place an order in mobile view 
+
+* #5625 [fixed] - issue in side bar in mobile view when we open any cms pages in velocity 
+
+* #5624 [fixed] - in mobile view order id and all other items is not visible when we have not done any order 
+
+* #5621 [fixed] - There should not be any UI issue in the user panel. 
+
+* #5620 [fixed] - there should be enhacement in button colour so that it should be according to mode
+
+* #5619 [fixed] - images in review is not compatiable in mobile view
+
+* #5617 [fixed] - there should be an enhacement so that languages is not with locale heading
+
+* #5616 [fixed] - there should be dark colour in pending in reviews so that it should be more readable when we changes the mode 
+
+* #5615 [fixed] - ui issue in order page in search bar in velocity theme
+
+* #5613 [fixed] - ui issue in customer address edit in admin panel
+
+* #5609 [fixed] - ui issue in catelog in mobile view
+
+* #5608 [fixed] - slider should not overide in catelog rule and cart rule in condition part in mobile view
+
+* #5603 [fixed] - notification box should be mobile compatible
+
+* #5602 [fixed] - ui issue in tax rates in mobile view
+
+* #5601 [fixed] - ui issue in exchange rate in mobile view
+
+* #5591 [fixed] - there is a space between add category button and text box filter in mobile view
+
+* #5585 [fixed] - filters should not attach with heading in category 
+
+* #5581 [fixed] - there should be logo of admin in dekstop view like mobile view 
+
+* #5579 [fixed] - velocity in list should be left alligment 
+
+* #5571 [fixed] - there should be an icon of calender in velocity profile page of customer 
+
+* #5569 [fixed] - There should be meaningful data inside the order dropdown 
+
+* #5556 [fixed] - Deprecation Warning: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0. 
+
+* #5555 [fixed] - darkmode dropdown list
+
+* #5552 [fixed] - there should not be any blank space in attribute family 
+
+* #5545 [fixed] - navigation sliders not work properly
+
+* #5540 [fixed] - There is a UI issue in the admin panel 
+
+* #5539 [fixed] - The Login user should not be able to update self status.
+
+* #5538 [fixed] - There should not be any translation issue in the notification section
+
+* #5531 [fixed] - there should be not any blank space in gender it may contain select gender
+
+* #5529 [fixed] - when we hover over bell icon tooltip is not showing
+
+* #5526 [fixed] - There are multiple flash messages if we are clicking on the mark as read inside the notification.
+
+* #5524 [fixed] - Dashboard text is not readable when light mode is enabled
+
+* #5523 [fixed] - Notifications dropdown size
+
+* #5522 [fixed] - icons are missing in top right navbar
+
+* #5521 [fixed] - Default logo is not visible
+
+* #5516 [fixed] - The size of the product images should not increase when the user is removing items from compare list
+
+* #5513 [fixed] - Admin package the manifest.php files are missing
+
+* #5511 [fixed] - UI issue in product list page.
+
+* #5510 [fixed] - The counting is not updating automatically when the user is trying to add or remove an item from comparison.
+
+* #5505 [fixed] - maintance mode is not working in admin panel
+
+* #5503 [fixed] - validation not working in inventory page
+
+* #5501 [fixed] - There is a warning message if the user is trying to add the address.
+
+* #5497 [fixed] - If the admin user is changing the permission of other user's then the user should be logging out with a message
+
+* #5493 [fixed] - The page should be redirected to the product-view page if the user is clicking on the product image/name
+
+* #5491 [fixed] - The user should be able to update quantity using the + icon.
+
+* #5485 [fixed] - ui issue in address bar in mobile view
+
+* #5484 [fixed] - The user should be able to add a new address.
+
+* #5483 [fixed] - languages logo is not visible in mobile view
+
+* #5478 [fixed] - alligment not fixed in mobile view in velocity order page
+
+* #5474 [fixed] - The filters should work properly. if the admin is trying to filter the sliders
+
+* #5473 [fixed] - There cart option should not multiple times in the account section.
+
+* #5471 [fixed] - The user should be able to view the modules/plugins menu in mobile view also. if the user adds any module.
+
+* #5470 [fixed] - there should be less spacing in compare section
+
+* #5468 [fixed] - There is a UI issue in Compare Similar Items section
+
+* #5466 [fixed] - text alligment in order page of velocity
+
+* #5462 [fixed] - ui issue when we try to ship wrong quantity products
+
+* #5461 [fixed] - ui issue when we add product in compare.
+
+* #5460 [fixed] - UI issue when we add product in wishlist in blisss theme
+
+* #5451 [fixed] - Possibility to order infinite configurable products (product_ordered_inventories and / or order_items not correctly updated at order)
+
+* #5450 [fixed] - The CMS image should reflect on the shop if the admin is adding any image on CMS
+
+* #5445 [fixed] - There should be a confirmation alert before deleting items from the Wishlist
+
+* #5444 [fixed] - The admin is able to create Invoice/ship orders with 00 quantities.
+
+* #5443 [fixed] - The message should be correct when the admin is trying to delete system attributes
+
+* #5440 [fixed] - There should be an option if the user is trying to enter the product quantity before updating the cart.
+
+* #5436 [fixed] - The discount Amount should be correct in the invoice.
+
+* #5435 [fixed] - There should be a warning message if the user is trying to create an invoice with invalid quantity.
+
+* #5430 [fixed] - ProductFlat getAttribute($key) throws Undefined property if value of $key is NULL in product_flat table
+
+* #5429 [fixed] - php artisan route:list error target class onepagecontroller does not exist (current master branch)
+
+* #5428 [fixed] - There should not be an exception if the admin is trying to refund the order.
+
+* #5424 [fixed] - The item should not move to the wishlist if the user is canceling the action.
+
+* #5423 [fixed] - The user should not be able to edit the record while the input field is giving a warning.
+
+* #5409 [fixed] - The user should be able to view the reviews
+
+* #5408 [fixed] - There should not be any exception if the user is trying to delete their reviews.
+
+* #5406 [fixed] - The user should be able to edit the address.
+
+* #5405 [fixed] - The success message should be correct when the user is adding items to the cart
+
+* #5398 [fixed] - The User should not be able to add the same product to the wishlist multiple times.
+
+* #5389 [fixed] - There should be the proper alignment of filter's
+
+* #5381 [fixed] - Validation required for coupon code
+
+* #5377 [fixed] - There should not be an exception When user is moving a product to a wishlist that is already in wishlist
+
+* #5366 [fixed] - There should be a warning message when the user is applying the same filter again and again.
+
+* #5365 [fixed] - Issue in price filter for configurable type product
+
+* #5353 [fixed] - Shipping::rates protected variable is not cleared on Shipping::removeAllShippingRates()
+
+* #5350 [fixed] - The product price should be correct after exporting to excel.
+
+* #5347 [fixed] - Images are coming out to be same at the cross sell products.
+
+* #5342 [fixed] - admin (RTL) - menu not apears
+
+* #5328 [fixed] - SKU is still visible at the adding new product when it is disabled.
+
+* #5325 [fixed] - Delete profile modal content data visible and then suddenly hide
+
+* #5316 [fixed] - In Front end Order details, Order id is having a lot of space.
+
+* #5315 [fixed] - Quantity issue in product shipment.
+
+* #5312 [fixed] - Issue in sub-category for mobile view
+
+* #5311 [fixed] - Total weight is null in shipment table
+
+* #5307 [fixed] - Flat Rate calculation type in admin configurations 
+
+* #5305 [fixed] - Cart Set Shipping API 
+
+* #5289 [fixed] - Quantity should be updated on ' Shopping Cart ' page
+
+* #5261 [fixed] - Side filter is getting detached from the category product listing in mobile 
+
+* #5259 [fixed] - Responsive issue in user Profile - Velocity
+
+* #5233 [fixed] - Issue if create product for multiple channel
+
+* #5232 [fixed] - App config.php has bad reference to ProductGrid::class
+
+* #5226 [fixed] - Not able to send the products to wishlist from compare page if the product is not on the first position
+
+* #5210 [fixed] - UI Issue in search bar in order section at customer's end.
+
+* #5209 [fixed] - There is no way to access Admin panel if there is only one admin and he try to modify the role of Administrator and allow limited access.
+
+* #5208 [fixed] - UI Issue in bliss theme - Product View Page
+
+* #5200 [fixed] - getting API error after opening categories named category
+
+* #5198 [fixed] - Wrong phpdoc reference in Webkul\Core\Core to CustomerGroupRepository
+
+* #5197 [fixed] - There is no way to log out for 2nd user of Admin if he himself modify his roles and remove some or all privileges.
+
+* #5194 [fixed] - Getting exception when exporting a product from the admin panel
+
+* #5191 [fixed] - Issue is in checkbox type attribute
+
+* #5180 [fixed] - Some code appears in starting when clicking on the any product edit page
+
+* #5179 [fixed] - Cart items get increased when navigating away from the buy now functionality
+
+* #5178 [fixed] - API for customers to cancel order
+
+* #5047 [fixed] - Order status gets complete when shipment is generated in case of pending invoice
+
 ## **v1.3.3 (27th of September 2021)** - *Release*
 
 * #5008 [feature] - Image upload option with editor.
