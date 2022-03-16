@@ -1,5 +1,5 @@
 @php
-    $locale = core()->getRequestedLocaleCode();
+$locale = core()->getRequestedLocaleCode();
 @endphp
 
 @extends('admin::layouts.content')
@@ -12,11 +12,14 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h1>{{ __('admin::app.catalog.categories.title') }}</h1>             
+                <h1>{{ __('admin::app.catalog.categories.title') }}</h1>
             </div>
 
             <div class="page-action">
-                <a href="{{ route('admin.catalog.categories.create') }}" class="btn btn-lg btn-primary">
+                <a
+                    href="{{ route('admin.catalog.categories.create') }}"
+                    class="btn btn-lg btn-primary"
+                >
                     {{ __('admin::app.catalog.categories.add-title') }}
                 </a>
             </div>
@@ -34,7 +37,7 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $("input[type='checkbox']").change(deleteCategory);
         });
 
@@ -60,13 +63,13 @@
 
             if (indexes) {
                 $.ajax({
-                    type : 'POST',
-                    url : '{{ route("admin.catalog.categories.product.count") }}',
-                    data : {
-                        _token: '{{csrf_token()}}',
+                    type: 'POST',
+                    url: '{{ route('admin.catalog.categories.product.count') }}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
                         indexes: indexes
                     },
-                    success:function(data) {
+                    success: function(data) {
                         $("input[type='checkbox']").attr('disabled', false);
                         if (data.product_count > 0) {
                             let message = "{{ trans('ui::app.datagrid.massaction.delete-category-product') }}";
@@ -74,7 +77,7 @@
                             if (type == 'delete') {
                                 doAction(e, message);
                             } else {
-                                $('form').attr('onsubmit', 'return confirm("'+message+'")');
+                                $('form').attr('onsubmit', 'return confirm("' + message + '")');
                             }
                         } else {
                             let message = "{{ __('ui::app.datagrid.click_on_action') }}";
@@ -82,48 +85,13 @@
                             if (type == 'delete') {
                                 doAction(e, message);
                             } else {
-                                $('form').attr('onsubmit', 'return confirm("'+message+'")');
+                                $('form').attr('onsubmit', 'return confirm("' + message + '")');
                             }
                         }
                     }
                 });
             } else {
                 $("input[type='checkbox']").attr('disabled', false);
-            }
-        }
-
-        /**
-         * Do action function. Not directly calling the datagrid components.
-         * Instead taking a copy and using in this scope.
-         */
-        function doAction (e, message, type) {
-            let element = e.currentTarget;
-
-            if (message) {
-                element = e.target.parentElement;
-            }
-
-            message = message || '{{ __('ui::app.datagrid.massaction.delete') }}';
-
-            if (confirm(message)) {
-                axios.post(element.getAttribute('data-action'), {
-                    _token: element.getAttribute('data-token'),
-                    _method: element.getAttribute('data-method')
-                }).then(function (response) {
-                    this.result = response;
-
-                    if (response.data.redirect) {
-                        window.location.href = response.data.redirect;
-                    } else {
-                        location.reload();
-                    }
-                }).catch(function (error) {
-                    location.reload();
-                });
-
-                e.preventDefault();
-            } else {
-                e.preventDefault();
             }
         }
 
