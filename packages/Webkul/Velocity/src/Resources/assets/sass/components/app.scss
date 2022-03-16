@@ -2352,6 +2352,14 @@
     }
 }
 
+.full-content-wrapper {
+    .container-fluid {
+        .row.carousel-products-header {
+            padding-right: 75px !important;
+        }
+    }
+}
+
 .carousel-products {
     + .recently-viewed {
         top: -40px;
@@ -2366,6 +2374,24 @@
 
     .VueCarousel-slide {
         cursor: default;
+    }
+
+    .VueCarousel-navigation {
+        position: absolute;
+        right: 12px;
+        top: -49px;
+
+        .VueCarousel-navigation-button {
+            position: unset !important;
+            transform: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+
+
+            span {
+                font-size: 24px;
+            }
+        }
     }
 }
 
