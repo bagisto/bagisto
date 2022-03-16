@@ -14,7 +14,7 @@ body {
 }
 
 .padding-container-navbar-expand {
-    padding-left: 200px !important;
+    padding-left: 210px !important;
 }
 
 .rtl {
@@ -24,7 +24,7 @@ body {
     }
 
     .padding-container-navbar-expand {
-        padding-right: 200px !important;
+        padding-right: 210px !important;
         padding-left: 0px !important;
     }
 }
@@ -217,11 +217,13 @@ body {
             > a {
                 color: $black;
                 width: 100%;
+                display: block;
 
                 .icon {
                     display: inline-block;
                     vertical-align: middle;
                     transform: scale(0.7);
+                    margin-left: 3px;
                 }
 
                 .menu-label {
@@ -307,7 +309,8 @@ body {
         position: fixed;
         bottom: 0;
         background-color: $white;
-        width: 56px;
+        width: 55px;
+        text-align: center;
     }
 
     &.open {

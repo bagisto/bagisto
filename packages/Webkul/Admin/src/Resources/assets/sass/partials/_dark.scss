@@ -43,7 +43,7 @@
         ul.menubar {
             li.menu-item {
 
-                >a {
+                > a {
                     padding: 5px 2px;
                     display: block;
                     color: $black;
@@ -759,7 +759,6 @@
 }
 
 .rtl.dark-mode {
-
     .navbar-left {
         background-color: $dark-bg;
         border-right: 1px solid $dark-bg;
@@ -767,7 +766,7 @@
         ul.menubar {
             li.menu-item {
 
-                >a {
+                > a {
                     padding: 5px 2px;
                     display: block;
                     color: $black;
