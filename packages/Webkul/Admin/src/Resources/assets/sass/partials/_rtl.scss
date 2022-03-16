@@ -201,6 +201,8 @@
 
     .control-group label .locale {
         float: left;
+        right: unset;
+        left: 30%;
     }
 
     .multiselect {

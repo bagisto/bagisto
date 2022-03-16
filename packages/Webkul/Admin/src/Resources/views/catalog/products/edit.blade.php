@@ -132,7 +132,7 @@
 
                                     @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
 
-                                        <div class="control-group {{ $attribute->type }}"
+                                        <div class="control-group {{ $attribute->type }} {{ $attribute->enable_wysiwyg ? 'have-wysiwyg' : '' }}"
                                              @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']"
                                              @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
 
