@@ -39,7 +39,7 @@
                     disabled="disabled"
                 @endif>
 
-                @foreach (core()->getCurrentChannel()->locales as $locale)
+                @foreach (core()->getCurrentChannel()->locales()->orderBy('name')->get() as $locale)
                     @if (isset($searchQuery) && $searchQuery)
                         <option
                             value="?{{ $searchQuery }}&locale={{ $locale->code }}"
