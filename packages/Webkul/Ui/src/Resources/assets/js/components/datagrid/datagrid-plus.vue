@@ -718,11 +718,7 @@
                                             "
                                             v-on:click="
                                                 action.method != 'GET'
-                                                    ? typeof action.function !==
-                                                          'undefined' &&
-                                                      action.function
-                                                        ? action.function
-                                                        : doAction($event)
+                                                    ? doAction($event)
                                                     : {}
                                             "
                                             :data-method="action.method"
