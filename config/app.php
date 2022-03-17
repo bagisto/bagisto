@@ -162,6 +162,11 @@ return [
      */
     'editor' => 'vscode',
 
+    /*
+     *Application Version
+     */
+    'version' => env('APP_VERSION', '1.x-dev'),
+
     /**
      * Blacklisting attributes while debugging
      */

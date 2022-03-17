@@ -2,6 +2,20 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+
+## **v1.4.1 (17th of March 2022)** - *Release*
+
+* #6040 [enhancement] - The locale dropdown should be in ascending order
+
+* #6007 [enhancement] - There should be an option to export selected product
+
+* #5923 [enhancement] - There should not be option for mass delete if there is no record in table
+
+* #6039 [fixed] - The from date should be less than to date
+
+* #6038 [fixed] - The color of checkboxes should be according to the theme in the admin panel
+
+
 ## **v1.4.0 (16th of March 2022)** - *Release*
 
 * #5654 [feature] -Only unread notification should be shown in the notification modal box. 
