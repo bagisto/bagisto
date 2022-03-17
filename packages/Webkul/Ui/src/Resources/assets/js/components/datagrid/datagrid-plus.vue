@@ -877,7 +877,10 @@ export default {
                 let datagridInfo = this.getCurrentDatagridInfo();
 
                 if (datagridInfo) {
-                    this.filterCurrentDatagridFromDatagridsInfo();
+                    /**
+                     * Will check this later. Don't remove it.
+                     */
+                    // this.filterCurrentDatagridFromDatagridsInfo();
 
                     this.url = datagridInfo.previousUrl;
                     this.filters = datagridInfo.previousFilters;
