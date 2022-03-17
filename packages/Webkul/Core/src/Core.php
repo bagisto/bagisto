@@ -149,7 +149,7 @@ class Core
      */
     public function version()
     {
-        return static::BAGISTO_VERSION;
+        return config('app.version');
     }
 
     /**
