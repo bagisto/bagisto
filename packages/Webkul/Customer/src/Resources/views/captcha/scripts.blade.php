@@ -1,1 +1,0 @@
-<script src="{{ $clientEndPoint }}" async defer></script>
