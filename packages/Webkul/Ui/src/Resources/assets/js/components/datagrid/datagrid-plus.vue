@@ -620,7 +620,7 @@
                                         type="checkbox"
                                         v-model="allSelected"
                                         v-on:change="selectAll"
-                                        :disabled="! records.data.length"
+                                        :disabled="!records.data.length"
                                     />
 
                                     <label
@@ -877,9 +877,13 @@ export default {
                 let datagridInfo = this.getCurrentDatagridInfo();
 
                 if (datagridInfo) {
-                    this.filterCurrentDatagridFromDatagridsInfo();
+                    /**
+                     * Will check this later. Don't remove it.
+                     */
+                    // this.filterCurrentDatagridFromDatagridsInfo();
 
                     this.url = datagridInfo.previousUrl;
+                    this.filters = datagridInfo.previousFilters;
                 }
             } else {
                 let datagridsInfo = this.getDatagridsInfo();
@@ -925,6 +929,7 @@ export default {
         getDatagridsInfoDefaults: function() {
             return {
                 id: this.id,
+                previousFilters: this.filters,
                 previousUrl: this.url
             };
         },

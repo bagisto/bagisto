@@ -13,7 +13,7 @@ trait ProvideQueryStringParser
     {
         $route = request()->route() ? request()->route()->getName() : '';
 
-        $queryString = $this->grabQueryStrings($route == 'admin.datagrid.export' ? url()->previous() : url()->full());
+        $queryString = $this->grabQueryStrings($route == 'admin.datagrid.export' ? request()->get('datagridUrl') : url()->full());
 
         $parsedQueryStrings = $this->parseQueryStrings($queryString);
 
