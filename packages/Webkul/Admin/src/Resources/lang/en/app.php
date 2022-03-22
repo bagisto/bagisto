@@ -260,15 +260,17 @@ return [
     ],
 
     'account' => [
-        'title'            => 'My Account',
-        'save-btn-title'   => 'Save',
-        'general'          => 'General',
-        'name'             => 'Name',
-        'email'            => 'Email',
-        'password'         => 'Password',
-        'confirm-password' => 'Confirm Password',
-        'change-password'  => 'Change Account Password',
-        'current-password' => 'Current Password',
+        'title'             => 'My Account',
+        'save-btn-title'    => 'Save',
+        'general'           => 'General',
+        'upload-image-info' => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
+        'remove-image'      => 'Remove Image',
+        'name'              => 'Name',
+        'email'             => 'Email',
+        'password'          => 'Password',
+        'confirm-password'  => 'Confirm Password',
+        'change-password'   => 'Change Account Password',
+        'current-password'  => 'Current Password',
     ],
 
     'users' => [

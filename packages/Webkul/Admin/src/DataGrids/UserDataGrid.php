@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
+use Illuminate\Support\Facades\Storage;
 
 class UserDataGrid extends DataGrid
 {
@@ -30,7 +31,7 @@ class UserDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('admins as u')
             ->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id')
-            ->addSelect('u.id as user_id', 'u.name as user_name', 'u.status', 'u.email', 'ro.name as role_name');
+            ->addSelect('u.id as user_id', 'u.name as user_name', 'u.image as user_image', 'u.status', 'u.email', 'ro.name as role_name');
 
         $this->addFilter('user_id', 'u.id');
         $this->addFilter('user_name', 'u.name');
@@ -63,6 +64,13 @@ class UserDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
+            'closure'  => function ($row) {
+                if ($row->user_image) {
+                    return '<div class="avatar"><img src="' . Storage::url($row->user_image) . '"></div>' . $row->user_name;
+                } else {
+                    return '<div class="avatar"><span class="icon profile-pic-icon"></span></div>' . $row->user_name;
+                }
+            },
         ]);
 
         $this->addColumn([
