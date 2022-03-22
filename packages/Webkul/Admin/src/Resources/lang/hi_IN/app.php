@@ -260,15 +260,18 @@ return [
     ],
 
     'account' => [
-        'title'            => 'मेरा खाता',
-        'save-btn-title'   => 'सहेजें',
-        'general'          => 'आम',
-        'name'             => 'नाम',
-        'email'            => 'ईमेल',
-        'password'         => 'कुंजिका',
-        'confirm-password' => 'पासवर्ड की पुष्टि कीजिये',
-        'change-password'  => 'खाते का पासवर्ड बदलें',
-        'current-password' => 'वर्तमान पासवर्ड',
+        'title'                => 'मेरा खाता',
+        'save-btn-title'       => 'सहेजें',
+        'general'              => 'आम',
+        'upload-image-info'    => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
+        'remove-image'         => 'Remove Image',
+        'image-upload-message' => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
+        'name'                 => 'नाम',
+        'email'                => 'ईमेल',
+        'password'             => 'कुंजिका',
+        'confirm-password'     => 'पासवर्ड की पुष्टि कीजिये',
+        'change-password'      => 'खाते का पासवर्ड बदलें',
+        'current-password'     => 'वर्तमान पासवर्ड',
     ],
 
     'users' => [

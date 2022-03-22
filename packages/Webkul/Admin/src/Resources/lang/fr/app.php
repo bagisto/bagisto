@@ -260,15 +260,18 @@ return [
     ],
 
     'account' => [
-        'title'            => 'Mon compte',
-        'save-btn-title'   => 'Sauvegarder',
-        'general'          => 'Général',
-        'name'             => 'Nom',
-        'email'            => 'E-mail',
-        'password'         => 'Mot de passe',
-        'confirm-password' => 'Confirmez le mot de passe',
-        'change-password'  => 'Changer le mot de passe du compte',
-        'current-password' => 'Mot de passe actuel',
+        'title'                => 'Mon compte',
+        'save-btn-title'       => 'Sauvegarder',
+        'general'              => 'Général',
+        'upload-image-info'    => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
+        'remove-image'         => 'Remove Image',
+        'image-upload-message' => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
+        'name'                 => 'Nom',
+        'email'                => 'E-mail',
+        'password'             => 'Mot de passe',
+        'confirm-password'     => 'Confirmez le mot de passe',
+        'change-password'      => 'Changer le mot de passe du compte',
+        'current-password'     => 'Mot de passe actuel',
     ],
 
     'users' => [
