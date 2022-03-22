@@ -114,7 +114,6 @@ body {
                     height: 31px;
                     width: 30px;
                     background: $profile-info-icon;
-                    padding: 6px;
                     text-align: center;
                     font-size: 17px;
                     font-weight: 600;
@@ -122,6 +121,16 @@ body {
                     border-radius: 50%;
                     margin-right: 6px;
                     margin-top: 3px;
+                    overflow: hidden;
+
+                    span {
+                        padding: 6px;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
             }
 

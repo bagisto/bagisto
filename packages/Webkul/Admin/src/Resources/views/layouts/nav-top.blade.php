@@ -92,9 +92,17 @@
                 <div class="dropdown-toggle">
                     <div style="display: inline-block; vertical-align: middle;">
                         <div class="profile-info-div">
-                            <div class="profile-info-icon">
-                                <span>{{ substr(auth()->guard('admin')->user()->name, 0, 1) }}</span>
-                            </div>
+                            @if (auth()->guard('admin')->user()->image)
+                                <div class="profile-info-icon">
+                                    <img src="{{ auth()->guard('admin')->user()->image_url }}"/>
+                                </div>
+                            @else
+                                <div class="profile-info-icon">
+                                    <span>{{ substr(auth()->guard('admin')->user()->name, 0, 1) }}</span>
+                                </div>
+                            @endif
+
+
                             <div class="profile-info-desc">
                                 <span class="name">
                                     {{ auth()->guard('admin')->user()->name }}
