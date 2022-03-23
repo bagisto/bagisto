@@ -23,7 +23,7 @@ class ShopServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
             __DIR__ . '/../Resources/views'       => resource_path('themes/default/views'),
-            __DIR__ . '/../Resources/lang'        => resource_path('lang/vendor/shop'),
+            __DIR__ . '/../Resources/lang'        => lang_path('vendor/shop'),
         ]);
 
         /* loaders */
