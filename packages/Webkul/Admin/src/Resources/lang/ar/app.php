@@ -251,15 +251,18 @@ return [
     ],
 
     'account' => [
-        'title'            => 'حسابي',
-        'save-btn-title'   => 'احفظ',
-        'general'          => 'عام',
-        'name'             => 'اسم',
-        'email'            => 'البريد الإلكتروني',
-        'password'         => 'كلمه المرور',
-        'confirm-password' => 'تأكيد كلمة المرور',
-        'change-password'  => 'غير كلمة سر الحساب',
-        'current-password' => 'كلمة المرور الحالية',
+        'title'                => 'حسابي',
+        'save-btn-title'       => 'احفظ',
+        'general'              => 'عام',
+        'upload-image-info'    => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
+        'remove-image'         => 'Remove Image',
+        'image-upload-message' => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
+        'name'                 => 'اسم',
+        'email'                => 'البريد الإلكتروني',
+        'password'             => 'كلمه المرور',
+        'confirm-password'     => 'تأكيد كلمة المرور',
+        'change-password'      => 'غير كلمة سر الحساب',
+        'current-password'     => 'كلمة المرور الحالية',
     ],
 
     'users' => [

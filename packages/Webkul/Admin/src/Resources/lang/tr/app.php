@@ -247,15 +247,18 @@ return [
     ],
 
     'account' => [
-        'title'            => 'Hesabım',
-        'save-btn-title'   => 'Kaydet',
-        'general'          => 'Genel',
-        'name'             => 'Adı',
-        'email'            => 'E-Mail',
-        'password'         => 'Parola',
-        'confirm-password' => 'Parolayı Doğrula',
-        'change-password'  => 'Parla Değiştir',
-        'current-password' => 'Mevcut Parola',
+        'title'                => 'Hesabım',
+        'save-btn-title'       => 'Kaydet',
+        'general'              => 'Genel',
+        'upload-image-info'    => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
+        'remove-image'         => 'Remove Image',
+        'image-upload-message' => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
+        'name'                 => 'Adı',
+        'email'                => 'E-Mail',
+        'password'             => 'Parola',
+        'confirm-password'     => 'Parolayı Doğrula',
+        'change-password'      => 'Parla Değiştir',
+        'current-password'     => 'Mevcut Parola',
     ],
 
     'users' => [

@@ -258,15 +258,18 @@ return [
     ],
 
     'account' => [
-        'title'            => '我的帐户',
-        'save-btn-title'   => '保存',
-        'general'          => '一般的',
-        'name'             => '名称',
-        'email'            => '电子邮件',
-        'password'         => '密码',
-        'confirm-password' => '确认密码',
-        'change-password'  => '修改密码',
-        'current-password' => '当前密码'
+        'title'                => '我的帐户',
+        'save-btn-title'       => '保存',
+        'general'              => '一般的',
+        'upload-image-info'    => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
+        'remove-image'         => 'Remove Image',
+        'image-upload-message' => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
+        'name'                 => '名称',
+        'email'                => '电子邮件',
+        'password'             => '密码',
+        'confirm-password'     => '确认密码',
+        'change-password'      => '修改密码',
+        'current-password'     => '当前密码'
     ],
 
     'users' => [

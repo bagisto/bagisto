@@ -250,15 +250,18 @@ return [
     ],
 
     'account' => [
-        'title'            => 'حساب من',
-        'save-btn-title'   => 'ذخیره',
-        'general'          => 'عمومی',
-        'name'             => 'نام',
-        'email'            => 'پست الکترونیک',
-        'password'         => 'رمز عبور',
-        'confirm-password' => 'تاید رمز عبور',
-        'change-password'  => 'تغیر رمز عبور',
-        'current-password' => 'گذرواژه فعلی',
+        'title'                => 'حساب من',
+        'save-btn-title'       => 'ذخیره',
+        'general'              => 'عمومی',
+        'upload-image-info'    => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
+        'remove-image'         => 'Remove Image',
+        'image-upload-message' => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
+        'name'                 => 'نام',
+        'email'                => 'پست الکترونیک',
+        'password'             => 'رمز عبور',
+        'confirm-password'     => 'تاید رمز عبور',
+        'change-password'      => 'تغیر رمز عبور',
+        'current-password'     => 'گذرواژه فعلی',
     ],
 
     'users' => [

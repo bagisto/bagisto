@@ -6,7 +6,7 @@
 
 @section('content-wrapper')
     <div class="content full-page">
-        <form method="POST" action="" @submit.prevent="onSubmit">
+        <form method="POST" action="" enctype="multipart/form-data" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
@@ -30,6 +30,8 @@
 
                     <accordian :title="'{{ __('admin::app.account.general') }}'" :active="true">
                         <div slot="body">
+                            <upload-profile-image></upload-profile-image>
+
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.account.name') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') ?: $user->name }}"  data-vv-as="&quot;{{ __('admin::app.account.name') }}&quot;"/>
@@ -74,3 +76,76 @@
         </form>
     </div>
 @stop
+
+@push('scripts')
+    <script type="text/x-template" id="upload-profile-image-template">
+        <div class="form-group" style="margin-bottom: 40px;">
+            <div class="image-upload-brick">
+                <input
+                    type="file"
+                    name="image"
+                    id="upload-profile"
+                    ref="imageInput"
+                    @change="addImageView($event)"
+                >
+
+                <i class="icon upload-icon"></i>
+
+                <img class="preview" :src="imageData" v-if="imageData.length > 0">
+            </div>
+
+            <div class="image-info-brick">
+                <span class="field-info">
+                    {{ __('admin::app.account.upload-image-info') }}
+                </span>
+            </div>
+
+            @if ($user->image_url)
+                <div style="margin-top: 10px;">
+                    <input 
+                        type="checkbox"
+                        name="remove_image"
+                    />
+
+                    <label for="remove" class="">
+                        {{ __('admin::app.account.remove-image') }}
+                    </label>
+                </div>      
+            @endif
+        </div>
+    </script>
+
+    <script>
+        Vue.component('upload-profile-image', {
+            template: '#upload-profile-image-template',
+
+            data: function() {
+                return {
+                    imageData: "{{ $user->image_url }}",
+                }
+            },
+
+            methods: {
+                addImageView () {
+                    var imageInput = this.$refs.imageInput;
+
+                    if (imageInput.files && imageInput.files[0]) {
+                        if (imageInput.files[0].type.includes('image/')) {
+                            var reader = new FileReader();
+
+                            reader.onload = (e) => {
+                                this.imageData = e.target.result;
+                            }
+
+                            reader.readAsDataURL(imageInput.files[0]);
+                        } else {
+                            imageInput.value = '';
+
+                            alert('{{ __('admin::app.account.image_upload_message') }}');
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+@endpush

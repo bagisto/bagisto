@@ -114,7 +114,6 @@ body {
                     height: 31px;
                     width: 30px;
                     background: $profile-info-icon;
-                    padding: 6px;
                     text-align: center;
                     font-size: 17px;
                     font-weight: 600;
@@ -122,6 +121,17 @@ body {
                     border-radius: 50%;
                     margin-right: 6px;
                     margin-top: 3px;
+                    overflow: hidden;
+
+                    span {
+                        margin-top: 6px;
+                        display: inline-block;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
             }
 
@@ -915,6 +925,89 @@ body {
                         margin-top: 10px;
                     }
                 }
+            }
+        }
+    }
+}
+
+.image-upload-brick {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    border: dashed 1px #3a3a3a;
+    overflow: hidden;
+    margin-right: 15px;
+    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    input[type="file"] {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        opacity: 0;
+        z-index: 3;
+    }
+
+    .upload-icon {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        left: 50%;
+        top: 50%;
+        margin-left: -20px;
+        margin-top: -20px;
+        z-index: 1;
+    }
+
+    img {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        z-index: 2;
+        display: block;
+        background: #ffffff;
+    }
+}
+
+.image-info-brick {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px 0px;
+
+    .field-info {
+        width: 305px;
+        display: block;
+        font-style: italic;
+        color: $role-text-color;
+        font-size: 16px;
+    }
+}
+
+
+.table {
+    td {
+        .avatar {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 43px;
+            background-color: $body-background;
+            border: 1px solid $border-color;
+            vertical-align: middle;
+            text-align: center;
+            margin-right: 10px;
+            overflow: hidden;
+
+            img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .icon {
+                width: 100%;
+                height: 100%;
             }
         }
     }

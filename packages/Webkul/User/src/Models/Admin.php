@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Storage;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
@@ -25,6 +26,7 @@ class Admin extends Authenticatable implements AdminContract, JWTSubject
         'name',
         'email',
         'password',
+        'image',
         'api_token',
         'role_id',
         'status',
@@ -40,6 +42,38 @@ class Admin extends Authenticatable implements AdminContract, JWTSubject
         'api_token',
         'remember_token',
     ];
+
+    /**
+     * Get image url for the product image.
+     */
+    public function image_url()
+    {
+        if (! $this->image) {
+            return;
+        }
+
+        return Storage::url($this->image);
+    }
+
+    /**
+     * Get image url for the product image.
+     */
+    public function getImageUrlAttribute()
+    {
+        return $this->image_url();
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $array['image_url'] = $this->image_url;
+
+        return $array;
+    }
 
     /**
      * Get the role that owns the admin.

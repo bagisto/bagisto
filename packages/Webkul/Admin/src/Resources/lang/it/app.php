@@ -248,15 +248,18 @@ return [
     ],
 
     'account' => [
-        'title'            => 'Il Mio Account',
-        'save-btn-title'   => 'Salva',
-        'general'          => 'Generale',
-        'name'             => 'Nome',
-        'email'            => 'Email',
-        'password'         => 'Password',
-        'confirm-password' => 'Conferma Password',
-        'change-password'  => 'Modifica Password',
-        'current-password' => 'Attuale Password',
+        'title'                => 'Il Mio Account',
+        'save-btn-title'       => 'Salva',
+        'general'              => 'Generale',
+        'upload-image-info'    => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
+        'remove-image'         => 'Remove Image',
+        'image-upload-message' => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
+        'name'                 => 'Nome',
+        'email'                => 'Email',
+        'password'             => 'Password',
+        'confirm-password'     => 'Conferma Password',
+        'change-password'      => 'Modifica Password',
+        'current-password'     => 'Attuale Password',
     ],
 
     'users' => [
