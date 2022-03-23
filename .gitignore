@@ -20,7 +20,7 @@ package-lock.json
 /public/storage
 /public/themes
 /public/vendor
-/resources/lang/vendor
+/lang/vendor
 /storage/*.key
 /storage/dcc-data/
 /vendor
