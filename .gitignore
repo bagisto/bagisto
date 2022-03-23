@@ -4,6 +4,7 @@
 .php_cs.cache
 .vscode
 .vagrant
+/stubs
 /data
 /docker-compose-collection
 Homestead.json
