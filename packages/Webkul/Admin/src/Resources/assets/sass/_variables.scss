@@ -1,0 +1,71 @@
+$body-background: $white;
+$background-color: #f8f9fa;
+$border-color: rgba(162, 162, 162, 0.2);
+$navbar-top-background: $white;
+
+// Accordion
+$accordian-header: #fbfbfb;
+
+// Buttons
+$btn-primary: $white;
+$btn-primary-bg: #0041FF;
+$btn-danger-bg: red;
+
+// Cards
+$card-title: #3a3a3a;
+$card-background: $white;
+
+// Dashboard
+$dashboard-stats-data: #0041ff;
+
+// Typography
+$font-family: 'Montserrat', sans-serif;
+$font-size-base: 14px;
+$font-color: #3A3A3A;
+
+$link-color: #a2a2a2;
+
+//Switch Color
+$dark-mode-switch-background: #000;
+$dark-mode-switch-border: #24384c;
+
+// Top nav color
+$profile-info-icon: #3c41ff;
+$role-text-color: #8e8e8e;
+$profile-info-name: #000311;
+$control-border-color: #c7c7c7;
+
+// Navbar Color
+$navbar-border-right-color: #ececec;
+$submenu-shadow-color: #CDCECF;
+$submenu-border-color: #eee;
+$menu-item-hover-color: #f8f8f8;
+$submenu-active-color: #e6e6e6;
+
+//Notification Color
+$notification-li-border-color: #ddd;
+$pending-color: #f2c94c;
+$processing-color: #399cdb;
+$closed-color: #eb5757;
+$read-background-color: #f6f6f6;
+$read-all-text-color: #3a3a3a;
+$menu-label-text-color: #B0BEC5;
+
+// Dark Mode Color
+$dark-mode-text-color: rgba(255,255,255,0.8);
+$dark-mode-background-color: #02080d;
+$dark-mode-read-color: rgba(255, 255, 255, 0.5);
+$dark-mode-unread-color: rgba(255, 255, 255, 1);
+$dark-mode-navtop-left-color: #071e37;
+$dark-mode-notification-border-color: #232d36;
+$dark-mode-left-menubar-background-color: rgba(1, 10, 20, .5);
+$dark-mode-left-submenubar-active-background-color: #031425;
+$dark-mode-left-submenubar-background-color: #020f1c;
+$dark-mode-left-menubar-active-background-color: #051e37;
+$dark-mode-body-background-color: #04101b;
+$dark-mode-table-head-backgound-color: rgba(7, 30, 55,0.2);
+$dark-mode-pagination-page-item-active-background-color:rgba(40, 69, 100, 0.2);
+$dark-mode-pagination-page-item-active-border-color:rgba(2, 57, 83, 0.2);
+$flatpickr-day-startRange-hover:rgb(5, 30, 55);
+$dark-mode-pending-color: #dbb709;
+

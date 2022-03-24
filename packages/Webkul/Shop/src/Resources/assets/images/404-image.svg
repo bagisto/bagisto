@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="254px" height="236px" viewBox="0 0 254 236" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>404-image</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+        <g id="404-page" transform="translate(-960.000000, -288.000000)">
+            <g id="404-image" transform="translate(961.000000, 289.000000)">
+                <polyline id="Path-3" stroke="#242424" stroke-width="3" points="0.626953125 0.990234375 34.3359375 26.4658203 34.6796875 73.1640625 34.3359375 186.773437 160.960938 215.992187 210.71875 130.375 34.3359375 72.71875"></polyline>
+                <g id="Group" transform="translate(46.000000, 190.000000)" fill="#FFFFFF" stroke="#242424" stroke-width="3">
+                    <circle id="Oval" cx="22.5" cy="22.5" r="21"></circle>
+                    <circle id="Oval" cx="23" cy="23" r="5.5"></circle>
+                </g>
+                <g id="Group" transform="translate(208.000000, 163.000000)" fill="#FFFFFF" stroke="#242424" stroke-width="3">
+                    <circle id="Oval" cx="22.5" cy="22.5" r="21"></circle>
+                    <circle id="Oval" cx="23" cy="23" r="5.5"></circle>
+                </g>
+                <path d="M178,205 L182,205 L182,208 L178,208 L178,205 Z M185,205 L206,205 L206,208 L185,208 L185,205 Z" id="Combined-Shape" fill="#242424" transform="translate(192.000000, 206.500000) rotate(-23.000000) translate(-192.000000, -206.500000) "></path>
+                <path d="M172.473165,218.350993 L176.473165,218.350993 L176.473165,221.350993 L172.473165,221.350993 L172.473165,218.350993 Z M179.473165,218.350993 L200.473165,218.350993 L200.473165,221.350993 L179.473165,221.350993 L179.473165,218.350993 Z" id="Combined-Shape" fill="#242424" transform="translate(186.473165, 219.850993) rotate(-23.000000) translate(-186.473165, -219.850993) "></path>
+                <path d="M198.610065,126.237911 L222.219028,78.9333292 L163.963322,59.4411726 L147.719875,109.950161 L198.610065,126.237911 Z" id="Path-4" stroke="#242424" stroke-width="3"></path>
+                <polyline id="Path-5" stroke="#242424" stroke-width="3" points="131.557617 105.489258 134.746094 71.9423828 157.437808 79.0096878"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

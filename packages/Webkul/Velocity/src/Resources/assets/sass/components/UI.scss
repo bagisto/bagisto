@@ -1,0 +1,107 @@
+.qty-btn {
+    height: 36px;
+    display: inline-block;
+
+    > * {
+        height: 36px;
+        padding: 0px 10px;
+        border: 1px solid $border-common;
+        vertical-align: top;
+        line-height: 3.5rem;
+        display: inline-block;
+    }
+
+    > *:not(:first-child) {
+        border-left: none;
+        position: relative;
+    }
+
+    > *:not(:nth-child(2)) {
+        @extend .cursor-pointer;
+    }
+
+    > *:nth-child(2) {
+        left: -4px;
+    }
+
+    > *:nth-child(3) {
+        left: -7px;
+    }
+}
+
+.btn-add-to-cart {
+    padding: 3px 14px !important;
+    border-radius: 0px !important;
+    color: $white-color !important;
+    border-color: $theme-color !important;
+    background-color: $theme-color !important;
+
+    &.large {
+        padding: 12px 18px;
+    }
+
+    .rango-cart-1 {
+        padding-right: 5px;
+    }
+}
+
+.accordian {
+    .accordian-header {
+        width: 100%;
+        font-size: 18px;
+        cursor: pointer;
+        color: #3a3a3a;
+        padding: 20px 0;
+        display: inline-block;
+        border-bottom: 1px solid #d3d3d3;
+
+        i.rango-arrow {
+            float: right;
+            font-size: 24px;
+        }
+
+        i.rango-arrow::before {
+            content: "\E908";
+        }
+    }
+
+    .accordian-content {
+        width: 100%;
+        display: none;
+        padding-bottom: 20px;
+    }
+
+    &.active {
+        .accordian-header {
+            border-bottom: 0;
+
+            i.rango-arrow::before {
+                content: "\E906";
+            }
+        }
+
+        .accordian-content {
+            display: inline-block;
+            border-bottom: 1px solid #d3d3d3;
+        }
+    }
+}
+
+#date-of-birth:after{
+    background-image: url(../images/icon-calendar.svg);
+    width: 24px;
+    height: 24px;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -34px;
+    pointer-events: none;
+    position: absolute;
+    top: 14%;
+}
+
+.rtl{
+    #date-of-birth:after{
+        left: 54px;
+    }
+}

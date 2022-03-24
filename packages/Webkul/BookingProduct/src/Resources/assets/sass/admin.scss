@@ -1,0 +1,74 @@
+.switch-view-container {
+    margin-left: -5px;
+    margin-right: 6px;
+    vertical-align: top;
+    display: inline-block;
+
+    .icon-container {
+        height: 36px;
+        cursor: pointer;
+        display: inline-block;
+        padding: 6px 10px 10px 10px;
+        border: 1px solid #C7C7C7;
+
+        &:first-child {
+            left: 5px;
+            position: relative;
+            border-radius: 3px 0px 0px 3px;
+        }
+
+        &:last-child {
+            border-radius: 0px 3px 3px 0px;
+        }
+
+        &.active {
+            cursor: not-allowed;
+            border-color: #0041ff;
+            background-color: #0041ff;
+        }
+
+        .icon {
+            vertical-align: middle;
+            width: 22px;
+            height: 22px;
+        }
+    }
+}
+
+.vuecal__event {
+    background: #0041ff !important;
+    color: #fff !important;
+    cursor: pointer;
+
+    &:hover {
+        height: max-content !important;
+    }
+}
+
+.rtl {
+    .switch-view-container {
+        margin-left: unset;
+
+        .icon-container {
+            &.active {
+                margin-left: -9px;
+            }
+        }
+    }
+}
+
+.calendar-icon {
+    background-image: url("../images/calendar-icon.svg");
+}
+
+.calendar-white-icon {
+    background-image: url("../images/calendar-white-icon.svg");
+}
+
+.table-icon {
+    background-image: url("../images/table-icon.svg");
+}
+
+.table-white-icon {
+    background-image: url("../images/table-white-icon.svg");
+}

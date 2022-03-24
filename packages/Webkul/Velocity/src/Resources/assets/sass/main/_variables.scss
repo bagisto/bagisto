@@ -1,0 +1,55 @@
+/*
+|--------------------------------------------------------------------------
+| Velocity Variables
+|--------------------------------------------------------------------------
+|
+| Below are all the variables used in Velocity's SCSS.
+|
+*/
+/* theme colors */
+$theme-color: #26A37C;
+$theme-dark-color: #247959;
+
+/* background colors */
+$light-background: #F7F7F9;
+
+/* font colors */
+$font-color: rgba(0,0,0,0.83);
+$font-color-light: rgba(255, 255, 255, 0.83);
+
+/* button colors */
+$button-danger: #F05153;
+$button-primary-bg: #21A179;
+$button-text-color: #FFFFFF;
+
+/* border colors */
+$border-common: #CCCCCC;
+$border-danger: #F05153;
+$border-dark: #DCDCDC;
+$border-general: #E5E5E5;
+$border-light: #ECECEC;
+$border-primary: #269c77;
+
+/* link colors */
+$link-color: #4D7EA8;
+$light-link-color: #28557B;
+
+/* remaining colors */
+$black-color: #111111;
+$danger-color: #F05153;
+$grey-color: rgb(158, 158, 158);
+$light1-black: #141516;
+$light2-black: #cfcfd0;
+$white-color: #FFFFFF;
+
+/* other stuffs */
+$sidebar-width: 230px;
+$box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+$material-icons-font-path: '../material-icons/iconfont/' !default;
+$border-normal: 1px solid $border-dark;
+$font-family-pro: 'Source Sans Pro', sans-serif;
+
+
+$control-border-color: #C7C7C7;
+$selection-color: rgba(0, 64, 255, 0.6);
+$brand-color: #0041FF;

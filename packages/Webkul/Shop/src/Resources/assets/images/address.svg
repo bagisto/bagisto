@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>tab/heading/icon/address</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="tab/heading/icon/address" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M15.5,23.897235 C20.2087657,20.0716385 22.5,16.8805311 22.5,14.5 C22.5,10.6340068 19.3659932,7.5 15.5,7.5 C11.6340068,7.5 8.5,10.6340068 8.5,14.5 C8.5,16.8805311 10.7912343,20.0716385 15.5,23.897235 Z" id="Oval" stroke="#242424" stroke-width="3"></path>
+        <circle id="Oval-2" fill="#242424" cx="15.5" cy="14.5" r="2.5"></circle>
+    </g>
+</svg>

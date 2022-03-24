@@ -1,0 +1,154 @@
+.sale-container {
+
+    .sale{
+        display: flex;
+        column-gap: 20px;
+
+        .sale-section {
+            font-size: 16px;
+            width: 50%;
+    
+            .secton-title {
+                font-size: 18px;
+                color: #8e8e8e;
+                padding: 15px 0;
+                border-bottom: 1px solid $border-color;
+            }
+    
+            .section-content {
+                display: block;
+                padding: 20px 0;
+    
+                .row {
+                    display: block;
+                    padding: 7px 0;
+    
+                    .title {
+                        width: 200px;
+                        color: $font-color;
+                        letter-spacing: -0.26px;
+                        display: inline-block;
+                    }
+    
+                    .value {
+                        color: $font-color;
+                        letter-spacing: -0.26px;
+                        display: inline-block;
+                    }
+                }
+            }
+        } 
+    }
+  
+    .table {
+        .qty-row {
+            display: block;
+            margin-bottom: 5px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .radio {
+            margin: 0;
+        }
+    }
+
+    .summary-comment-container {
+        .comment-container {
+            margin-top: 20px;
+            float: left;
+
+            .comment-list {
+                margin-top: 40px;
+                
+                li {
+                    margin-bottom: 20px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+
+                    p {
+                        margin: 0;
+                        margin-top: 5px;
+                        color: #8e8e8e;
+                    }
+                }
+            }
+        }
+    }
+
+    .sale-summary {
+        margin-top: 20px;
+        height: 130px;
+        float: right;
+
+        tr {
+            td {
+                padding: 5px 8px;
+                vertical-align: text-bottom;
+            }
+
+            &.bold {
+                font-weight: 600;
+                font-size: 15px;
+            }
+
+            &.border {
+                td {
+                    border-bottom: 1px solid $border-color;
+                }
+            }
+        }
+    }
+}
+
+.stars {
+    margin-top: 5px;
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.export-import {
+    cursor: pointer;
+
+    .export-icon,
+    .import-icon {
+        position: relative;
+        top: 10px;
+    }
+
+    span {
+        margin-left: 2px;
+    }
+}
+
+
+@media only screen and (max-width: 768px){
+    .sale-container {
+
+        .sale{
+            display: block;
+
+            .sale-section {
+                  width: 100%;
+            } 
+        }
+
+        .summary-comment-container{
+            .comment-container{
+                width: 100%;
+                form{
+                    .control-group{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }   
+}

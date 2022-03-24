@@ -1,0 +1,46 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
+
+// Variables
+@import "colors";
+@import "variables";
+@import "mixins";
+
+@import "partials/dark";
+@import "partials/default";
+@import "partials/mobile";
+
+@import "partials/dashboard";
+@import "partials/configuration";
+@import "partials/sales";
+@import "partials/rtl";
+
+@import "partials/ui/components";
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.do-not-cross-arrow {
+    width: 85%;
+}
+
+.linked-product-filter-tag {
+    text-transform: capitalize;
+    margin-top: 10px;
+    margin-right: 0px;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.linked-product-wrapper {
+    margin-left: 0px !important;
+    margin-right: 10px !important;
+    height: 100% !important;
+}
+
+.do-not-cross-linked-product-arrow {
+    width: 95%;
+}

@@ -1,0 +1,56 @@
+// Accordion
+.accordian-header {
+    background-color: $accordian-header;
+}
+
+// Buttons
+.btn.btn-primary {
+    background: $btn-primary-bg;
+}
+
+.btn.btn-danger {
+    background: $btn-danger-bg;
+}
+
+.fixed-action {
+    position: fixed;
+    top: 108px;
+    right: 32px;
+    z-index: 20;
+}
+
+.fixed-action-slight {
+    position: fixed;
+    top: 94px;
+    right: 32px;
+    z-index: 20;
+}
+
+.pagination {
+    margin-top: 30px;
+}
+
+.flatpickr-day.endRange, 
+.flatpickr-day.endRange.inRange, 
+.flatpickr-day.endRange.nextMonthDay, 
+.flatpickr-day.endRange.prevMonthDay, 
+.flatpickr-day.endRange:focus, 
+.flatpickr-day.endRange:hover, 
+.flatpickr-day.selected, 
+.flatpickr-day.selected.inRange, 
+.flatpickr-day.selected.nextMonthDay, 
+.flatpickr-day.selected.prevMonthDay, 
+.flatpickr-day.selected:focus, 
+.flatpickr-day.selected:hover, 
+.flatpickr-day.startRange, 
+.flatpickr-day.startRange.inRange, 
+.flatpickr-day.startRange.nextMonthDay, 
+.flatpickr-day.startRange.prevMonthDay, 
+.flatpickr-day.startRange:focus, 
+.flatpickr-day.startRange:hover {
+    background: $blue !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: $white;
+    border-color: $blue !important;
+}
