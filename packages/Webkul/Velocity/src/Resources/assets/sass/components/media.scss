@@ -411,11 +411,9 @@
                 .selectdiv {
                     display: none;
 
-                    + div {
-                        input {
-                            width: calc(100% - 40px);
-                            border: 1px solid $theme-color;
-                        }
+                    + input {
+                        width: calc(100% - 40px);
+                        border: 1px solid $theme-color;
                     }
                 }
             }
@@ -963,16 +961,6 @@
 @media only screen and (max-width: 420px) {
     .sticky-header {
         display: none !important;
-    }
-
-    .main-content-wrapper {
-        .vc-header {
-            > div.vc-small-screen {
-                .right-vc-header {
-                    text-align: center;
-                }
-            }
-        }
     }
 
     #home-right-bar-container {
