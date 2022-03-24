@@ -88,6 +88,7 @@ Vue.component('vnode-injector', {
         return props.nodes;
     }
 });
+Vue.component('go-top', () => import('@inotom/vue-go-top'));
 
 /**
  * Start from here.
