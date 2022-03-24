@@ -92,7 +92,7 @@ class VelocityServiceProvider extends ServiceProvider
             __DIR__ . '/../Resources/views/shop' => resource_path('themes/velocity/views'),
         ]);
 
-        $this->publishes([__DIR__ . '/../Resources/lang' => resource_path('lang/vendor/velocity')]);
+        $this->publishes([__DIR__ . '/../Resources/lang' => lang_path('vendor/velocity')]);
 
         return true;
     }

@@ -4,6 +4,7 @@
 .php_cs.cache
 .vscode
 .vagrant
+/stubs
 /data
 /docker-compose-collection
 Homestead.json
@@ -19,7 +20,7 @@ package-lock.json
 /public/storage
 /public/themes
 /public/vendor
-/resources/lang/vendor
+/lang/vendor
 /storage/*.key
 /storage/dcc-data/
 /vendor
