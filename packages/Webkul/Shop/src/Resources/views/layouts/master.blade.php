@@ -88,6 +88,8 @@
         @endif
 
         <overlay-loader :is-open="show_loader"></overlay-loader>
+
+        <go-top bg-color="#0041ff"></go-top>
     </div>
 
     <script type="text/javascript">

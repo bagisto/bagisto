@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
+        "@inotom/vue-go-top": "^1.3.0",
         "accounting": "^0.4.1",
         "bootstrap-sass": "^3.4.1",
         "font-awesome": "^4.7.0",

@@ -11,6 +11,7 @@ import axios from 'axios';
 import VueSlider from 'vue-slider-component';
 import accounting from 'accounting';
 import ImageSlider from './components/image-slider';
+import GoTop from '@inotom/vue-go-top';
 import 'lazysizes';
 
 window.jQuery = window.$ = $;
@@ -41,6 +42,7 @@ Vue.component('image-slider', ImageSlider);
 Vue.component('vue-slider', VueSlider);
 Vue.component('proceed-to-checkout', require('./components/checkout/proceed-to-checkout').default);
 Vue.component('wishlist-component-with-badge', require('./components/header-compare-with-badge').default);
+Vue.component('go-top', require('@inotom/vue-go-top').default);
 
 Vue.filter('currency', function (value, argument) {
     return accounting.formatMoney(value, argument);

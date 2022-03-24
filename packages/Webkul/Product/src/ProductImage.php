@@ -177,6 +177,6 @@ class ProductImage extends AbstractProduct
      */
     private function isDriverLocal(): bool
     {
-        return Storage::getAdapter() instanceof \League\Flysystem\Adapter\Local;
+        return Storage::getAdapter() instanceof \League\Flysystem\Local\LocalFilesystemAdapter;
     }
 }
