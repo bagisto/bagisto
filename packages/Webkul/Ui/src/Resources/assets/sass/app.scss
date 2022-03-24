@@ -251,7 +251,7 @@ h5 {
     &[disabled='disabled']:hover,
     &[disabled='disabled']:active {
         cursor: not-allowed;
-        background: #b1b1ae;
+        background: #b1b1ae !important;
         box-shadow: none;
         opacity: 1;
     }
