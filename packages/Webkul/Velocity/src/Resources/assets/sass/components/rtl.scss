@@ -612,3 +612,9 @@ body.rtl .payment-methods {
         padding-left: 0 !important;
     }
 }
+
+#top #account .dropdown-list {
+    left: 10px;
+    right: unset !important;
+    text-align: right;
+}
