@@ -141,14 +141,6 @@
                                             </div>
                                         @endif
 
-                                        @include ('shop::products.view.configurable-options')
-
-                                        @include ('shop::products.view.downloadable')
-
-                                        @include ('shop::products.view.grouped-products')
-
-                                        @include ('shop::products.view.bundle-options')
-
                                         {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
                                         @if ($product->getTypeInstance()->showQuantityBox())
@@ -160,6 +152,14 @@
                                         @endif
 
                                         {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+
+                                        @include ('shop::products.view.configurable-options')
+
+                                        @include ('shop::products.view.downloadable')
+
+                                        @include ('shop::products.view.grouped-products')
+
+                                        @include ('shop::products.view.bundle-options')
 
                                         <div class="col-12 product-actions">
                                             @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
