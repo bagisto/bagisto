@@ -296,7 +296,7 @@ class Core
             return $locales;
         }
 
-        return $locales = $this->localeRepository->all();
+        return $locales = $this->localeRepository->orderBy('name')->all();
     }
 
     /**
@@ -316,7 +316,7 @@ class Core
 
         return $data = [
             'channel' => $channel,
-            'locales' => $channel->locales,
+            'locales' => $channel->locales()->orderBy('name')->get()
         ];
     }
 

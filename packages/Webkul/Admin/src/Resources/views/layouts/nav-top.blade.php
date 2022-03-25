@@ -6,7 +6,7 @@
         'completed'=> trans('admin::app.notification.order-status-messages.completed'),
         'processing' => trans('admin::app.notification.order-status-messages.processing')
     ];
-    $allLocales = core()->getAllLocales()->sortBy('name')->pluck('name', 'code');
+    $allLocales = core()->getAllLocales()->pluck('name', 'code');
 
     $currentLocaleCode = core()->getRequestedLocaleCode('admin_locale');
 @endphp
