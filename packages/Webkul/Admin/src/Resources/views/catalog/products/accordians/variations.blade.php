@@ -106,15 +106,6 @@
                         <th class="sku">{{ __('admin::app.catalog.products.sku') }}</th>
                         <th>{{ __('admin::app.catalog.products.name') }}</th>
                         <th>{{ __('admin::app.catalog.products.images') }}</th>
-
-                        @foreach ($product->super_attributes as $attribute)
-                            <th
-                                class="{{ $attribute->code }}"
-                                style="width: 150px">
-                                {{ $attribute->admin_name }}
-                            </th>
-                        @endforeach
-
                         <th class="qty">{{ __('admin::app.catalog.products.qty') }}</th>
                         <th class="price">{{ __('admin::app.catalog.products.price') }}</th>
                         <th class="weight">{{ __('admin::app.catalog.products.weight') }}</th>
@@ -188,6 +179,18 @@
                         v-if="errors.has(variantInputName + '[name]')">
                     </span>
                 </div>
+
+                <div class="item-options" style="margin-top: 10px">
+                    <div v-for='(attribute, index) in superAttributes'>
+                        <b>@{{ attribute.admin_name }} : </b>@{{ optionName(variant[attribute.code]) }}
+
+                        <input
+                            type="hidden"
+                            :name="[variantInputName + '[' + attribute.code + ']']"
+                            :value="variant[attribute.code]"
+                        />
+                    </div>
+                </div>
             </td>
 
             <td>
@@ -221,21 +224,6 @@
                     <label class="btn btn-lg btn-primary add-image" @click="createFileType">
                         {{ __('admin::app.catalog.products.add-image-btn-title') }}
                     </label>
-                </div>
-            </td>
-
-            <td v-for='(attribute, index) in superAttributes'>
-                <div class="control-group">
-                    <input
-                        type="hidden"
-                        :name="[variantInputName + '[' + attribute.code + ']']"
-                        :value="variant[attribute.code]"/>
-
-                    <input
-                        type="text"
-                        class="control"
-                        :value="optionName(variant[attribute.code])"
-                        readonly/>
                 </div>
             </td>
 
