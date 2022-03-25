@@ -146,7 +146,7 @@ class Cart
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (isset($data['additional']['parent_id'])) {
-                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, $data['additional'])) {
+                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, request()->all())) {
                         return $item;
                     }
                 } else {
