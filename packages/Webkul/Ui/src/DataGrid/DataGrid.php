@@ -286,7 +286,7 @@ abstract class DataGrid
         $this->checkPermissions($action, $specialPermission, function ($action, $eventName) {
             $this->fireEvent('action.before.' . $eventName);
 
-            $action['key'] = Str::slug($action['title'], '_');
+            $action['key'] = Str::slug($action['title'], '_', app()->getLocale());
 
             $this->actions[] = $action;
             $this->enableAction = true;
