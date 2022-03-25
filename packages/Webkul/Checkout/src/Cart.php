@@ -136,17 +136,18 @@ class Cart
     /**
      * Get cart item by product.
      *
-     * @param  array  $data
+     * @param  array|null  $data
+     * @param  array  $parentData
      * @return \Webkul\Checkout\Contracts\CartItem|void
      */
-    public function getItemByProduct($data)
+    public function getItemByProduct($data, $parentData = null)
     {
         $items = $this->getCart()->all_items;
 
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (isset($data['additional']['parent_id'])) {
-                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, request()->all())) {
+                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, $parentData ?: request()->all())) {
                         return $item;
                     }
                 } else {
@@ -194,7 +195,7 @@ class Cart
             $parentCartItem = null;
 
             foreach ($cartProducts as $cartProduct) {
-                $cartItem = $this->getItemByProduct($cartProduct);
+                $cartItem = $this->getItemByProduct($cartProduct, $data);
 
                 if (isset($cartProduct['parent_id'])) {
                     $cartProduct['parent_id'] = $parentCartItem->id;
