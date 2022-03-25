@@ -56,15 +56,6 @@ body {
                 }
             }
 
-            .mini-cart-btn {
-                #mini-cart {
-                    .badge {
-                        top: -8px;
-                        left: 73%;
-                    }
-                }
-            }
-
             .left-wrapper {
                 float: left;
 
@@ -75,6 +66,42 @@ body {
                             top: -28px;
                             left: -2px;
                         }
+                    }
+                }
+
+                .mini-cart-btn {
+                    margin-right: 16px;
+                    margin-left: 0;
+
+                    .mini-cart-content {
+                        margin-left: 7px;
+                        margin-right: 0 !important;
+
+                        .badge-container {
+                            .badge {
+                                left: unset;
+                                right: -15px;
+                            }
+                        }
+                    }
+
+                    #cart-modal-content {
+                        left: 0;
+
+                        .small-card-container {
+                            .remove-item {
+                                left: unset;
+                                right: -10px;
+                            }
+
+                            .card-total-price {
+                                float: left;
+                            }
+                        }
+                    }
+
+                    .dropdown-list {
+                        right: unset !important;
                     }
                 }
             }
@@ -99,20 +126,6 @@ body {
                             }
                         }
                     }
-                }
-            }
-        }
-
-        .main-content-wrapper .vc-header .mini-cart-btn {
-            #mini-cart {
-                .badge {
-                    top: -6px;
-                    left: 90%;
-                }
-
-                .cart-text {
-                    left: 24px;
-                    vertical-align: top;
                 }
             }
         }
@@ -182,21 +195,6 @@ body {
             .locale-icon {
                 ~ .select-icon-container {
                     right: 20px;
-                }
-            }
-        }
-
-        #cart-modal-content {
-            left: 0;
-
-            .small-card-container {
-                .rango-close {
-                    left: unset;
-                    right: -10px;
-                }
-
-                .card-total-price {
-                    float: left;
                 }
             }
         }
@@ -366,14 +364,6 @@ body {
         #alert-container {
             right: unset;
             left: 15px;
-        }
-
-        .mini-cart-content {
-            ~ .down-arrow-container {
-                .rango-arrow-down {
-                    left: -15px;
-                }
-            }
         }
 
         .alert-dismissible {
