@@ -59,7 +59,8 @@ class ProductDataGrid extends DataGrid
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         /* locale */
         $this->locale = core()->getRequestedLocaleCode();
 

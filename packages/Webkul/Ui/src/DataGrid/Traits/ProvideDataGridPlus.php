@@ -91,7 +91,7 @@ trait ProvideDataGridPlus
 
         /* handling cases for new locale if not present in current channel */
         if ($channel !== 'all') {
-            $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+            $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales()->orderBy('name')->get();
 
             if ($channelLocales->contains('code', $locale)) {
                 $locales = $channelLocales;
