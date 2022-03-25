@@ -596,15 +596,17 @@ body {
     }
 }
 
-body.rtl .payment-methods {
-    .pl40 {
-        padding-right: 40px !important;
-        padding-left: 0 !important;
+body.rtl {
+    .payment-methods {
+        .pl40 {
+            padding-right: 40px !important;
+            padding-left: 0 !important;
+        }
     }
-}
 
-#top #account .dropdown-list {
-    left: 10px;
-    right: unset !important;
-    text-align: right;
+    #top #account .dropdown-list {
+        left: 10px;
+        right: unset !important;
+        text-align: right;
+    }
 }
