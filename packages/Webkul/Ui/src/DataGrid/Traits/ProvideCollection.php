@@ -275,6 +275,7 @@ trait ProvideCollection
 
             if ($toDisplay) {
                 $urlKey = $this->generateKeyFromActionTitle($action['title'], '_url');
+
                 $record->$urlKey = route($action['route'], $record->{$action['index'] ?? $this->index});
             }
         }
@@ -306,7 +307,7 @@ trait ProvideCollection
      */
     private function generateKeyFromActionTitle($title, $suffix)
     {
-        $validatedStrings = Str::slug($title, '_');
+        $validatedStrings = Str::slug($title, '_', app()->getLocale());
 
         return strtolower($validatedStrings) . $suffix;
     }
