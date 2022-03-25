@@ -192,7 +192,7 @@
 
                             <div class="control-group">
                                 <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>
-                                <select class="control" id="is_filterable" name="is_filterable">
+                                <select class="control" id="is_filterable" name="is_filterable" disabled="disabled">
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
                                     <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
@@ -352,15 +352,23 @@
         $(document).ready(function () {
             $('#type').on('change', function (e) {
                 if (['select', 'multiselect', 'checkbox'].indexOf($(e.target).val()) === -1) {
-                    $('#options').parent().addClass('hide')
+                    $('#options').parent().addClass('hide');
                 } else {
-                    $('#options').parent().removeClass('hide')
+                    $('#options').parent().removeClass('hide');
+                }
+
+                if (['select', 'multiselect', 'checkbox', 'checkbox', 'price'].indexOf($(e.target).val()) === -1) {
+                    $('#options').parent().addClass('hide');
+                    $('#is_filterable').attr('disabled', 'disabled');
+                } else {
+                    $('#options').parent().removeClass('hide');
+                    $('#is_filterable').removeAttr('disabled');
                 }
 
                 if (['textarea'].indexOf($(e.target).val()) > -1) {
-                    $('#enable_wysiwyg').parents('.control-group').removeClass('hide')
+                    $('#enable_wysiwyg').parents('.control-group').removeClass('hide');
                 } else {
-                    $('#enable_wysiwyg').parents('.control-group').addClass('hide')
+                    $('#enable_wysiwyg').parents('.control-group').addClass('hide');
                 }
             })
         });
