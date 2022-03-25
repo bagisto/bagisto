@@ -8,12 +8,14 @@
 </template>
 
 <style scoped>
-.message-block {
-    position: relative;
-    top: 60px;
-}
+    .message-block {
+        position: relative;
+        top: 60px;
+        color: #fff;
+        font-size: 16px;
+    }
 </style>
 
 <script>
-export default {};
+    export default {};
 </script>
