@@ -184,7 +184,7 @@
                     </accordian>
 
                     {{-- home page seo --}}
-                    <accordian :title="'{{ __('admin::app.settings.channels.seo') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.settings.channels.seo') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('seo_title') ? 'has-error' : '']">
                                 <label for="seo_title" class="required">{{ __('admin::app.settings.channels.seo-title') }}</label>
