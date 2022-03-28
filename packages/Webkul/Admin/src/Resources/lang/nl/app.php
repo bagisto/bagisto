@@ -686,6 +686,7 @@ return [
             'description'              => 'Beschrijving',
             'parent-category'          => 'Bovenliggende categorie',
             'seo'                      => 'zoek machine optimalisatie',
+            'products'                 => 'Producten',
             'slug'                     => 'Slug',
             'meta_title'               => 'Metatitel',
             'meta_description'         => 'Meta omschrijving',

@@ -690,6 +690,7 @@ return [
             'parent-category'          => 'Categoria Padre',
             'seo'                      => 'Search Engine Optimization',
             'slug'                     => 'Slug',
+            'products'                 => 'Prodotti',
             'meta_title'               => 'Meta Title',
             'meta_description'         => 'Meta Description',
             'meta_keywords'            => 'Meta Keywords',

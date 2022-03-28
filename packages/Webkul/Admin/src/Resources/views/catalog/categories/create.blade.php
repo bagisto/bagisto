@@ -152,7 +152,7 @@
 
                     {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.seo.before') !!}
 
-                    <accordian title="'{{ __('admin::app.catalog.categories.seo') }}" :active="true">
+                    <accordian title="{{ __('admin::app.catalog.categories.seo') }}" :active="true">
                         <div slot="body">
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.seo.controls.before') !!}
 

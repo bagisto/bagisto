@@ -694,6 +694,7 @@ return [
             'description'              => '描述',
             'parent-category'          => '父分类',
             'seo'                      => '搜索引擎优化',
+            'products'                 => '产品列表',
             'slug'                     => 'Slug',
             'meta_title'               => 'Meta标题',
             'meta_description'         => 'Meta描述',

@@ -710,6 +710,7 @@ return [
             'description'              => 'Descripción',
             'parent-category'          => 'Categoría padre',
             'seo'                      => 'SEO',
+            'products'                 => 'Productos',
             'slug'                     => 'Slug',
             'meta_title'               => 'Meta Title',
             'meta_description'         => 'Meta Description',

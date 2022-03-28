@@ -686,6 +686,7 @@ return [
             'description'              => 'Opis',
             'parent-category'          => 'Kategoria nadrzędna',
             'seo'                      => 'Optymalizacja SEO strony dla wyszukiwarek',
+            'products'                 => 'Produkty',
             'slug'                     => 'Wzór',
             'meta_title'               => 'Meta tutuł',
             'meta_description'         => 'Meta opis',

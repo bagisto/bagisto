@@ -111,7 +111,7 @@
                         </div>
                     </accordian>
 
-                    <accordian title="'{{ __('admin::app.settings.inventory_sources.address') }}" :active="true">
+                    <accordian title="{{ __('admin::app.settings.inventory_sources.address') }}" :active="true">
                         <div slot="body">
 
                             @include ('admin::customers.country-state', ['countryCode' => old('country') ?? $inventorySource->country, 'stateCode' => old('state') ?? $inventorySource->state])

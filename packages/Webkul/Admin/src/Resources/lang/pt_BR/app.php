@@ -685,6 +685,7 @@ return [
             'description'              => 'Descrição',
             'parent-category'          => 'Categoria Pai',
             'seo'                      => 'Search Engine Optimization',
+            'products'                 => 'Produtos',
             'slug'                     => 'Slug',
             'meta_title'               => 'Meta Título',
             'meta_description'         => 'Meta Descrição',

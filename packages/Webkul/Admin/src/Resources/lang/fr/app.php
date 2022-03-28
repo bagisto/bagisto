@@ -711,6 +711,7 @@ return [
             'description'              => 'La description',
             'parent-category'          => 'Catégorie Parentale',
             'seo'                      => 'optimisation du moteur de recherche',
+            'products'                 => 'Des produits',
             'slug'                     => 'Limace',
             'meta_title'               => 'Titre du méta',
             'meta_description'         => 'Meta Description',

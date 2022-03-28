@@ -691,6 +691,7 @@ return [
             'description'              => 'Beschreibung',
             'parent-category'          => 'Übergeordnete Kategorie',
             'seo'                      => 'Suchmaschinen-Optimierung',
+            'products'                 => 'Produkte',
             'slug'                     => 'Slug',
             'meta_title'               => 'Meta Titel',
             'meta_description'         => 'Meta-Beschreibung',
