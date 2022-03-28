@@ -18,7 +18,7 @@
         <div class="account-items-list">
             <div class="account-table-content">
 
-                {!! app('Webkul\Shop\DataGrids\DownloadableProductDataGrid')->render() !!}
+                <datagrid-plus src="{{ route('customer.downloadable_products.index') }}"></datagrid-plus>
 
             </div>
         </div>
