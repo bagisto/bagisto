@@ -699,6 +699,7 @@ return [
             'description'              => 'الوصف',
             'parent-category'          => 'الفئة الأم',
             'seo'                      => 'محرك البحث الأمثل',
+            'products'                 => 'المنتجات',
             'slug'                     => 'Slug',
             'meta_title'               => 'عنوان الفوقية',
             'meta_description'         => 'ميتا الوصف',

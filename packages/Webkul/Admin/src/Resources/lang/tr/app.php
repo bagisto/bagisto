@@ -692,6 +692,7 @@ return [
             'description'              => 'Açıklama',
             'parent-category'          => 'Üst Kategori',
             'seo'                      => 'Arama Motoru Optimizasyonu',
+            'products'                 => 'Ürünler',
             'slug'                     => 'URL',
             'meta_title'               => 'Meta Başlığı',
             'meta_description'         => 'Meta Açıklaması',

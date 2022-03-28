@@ -709,6 +709,7 @@ return [
             'description'              => 'Description',
             'parent-category'          => 'Parent Category',
             'seo'                      => 'Search Engine Optimization',
+            'products'                 => 'Products',
             'slug'                     => 'Slug',
             'meta_title'               => 'Meta Title',
             'meta_description'         => 'Meta Description',

@@ -96,6 +96,8 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
             'redirect' => 'admin.catalog.categories.index',
         ])->name('admin.catalog.categories.update');
 
+        Route::get('/categories/products/{id}', [CategoryController::class, 'products'])->name('admin.catalog.categories.products');
+
         Route::post('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.catalog.categories.delete');
 
         Route::post('categories/massdelete', [CategoryController::class, 'massDestroy'])->defaults('_config', [

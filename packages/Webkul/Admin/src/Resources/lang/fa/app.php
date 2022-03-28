@@ -687,6 +687,7 @@ return [
             'description'              => 'توضیحات',
             'parent-category'          => 'دسته بندی پدر',
             'seo'                      => 'بهینه سازی موتور جستجو',
+            'products'                    => 'محصولات',
             'slug'                     => 'نامک',
             'meta_title'               => 'عنوان متا',
             'meta_description'         => 'توضیحات متا',

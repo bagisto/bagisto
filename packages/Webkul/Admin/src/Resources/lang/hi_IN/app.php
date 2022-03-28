@@ -709,6 +709,7 @@ return [
             'description'              => 'विवरण',
             'parent-category'          => 'अभिभावक श्रेणी',
             'seo'                      => 'खोज इंजिन अनुकूलन',
+            'products'                 => 'उत्पाद',
             'slug'                     => 'स्लग',
             'meta_title'               => 'मेटा शीर्षक',
             'meta_description'         => 'मेटा विवरण',

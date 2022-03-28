@@ -31,7 +31,7 @@
                     {!! view_render_event('bagisto.admin.settings.channel.create.before') !!}
 
                     {{-- general --}}
-                    <accordian title="'{{ __('admin::app.settings.channels.general') }}" :active="true">
+                    <accordian title="{{ __('admin::app.settings.channels.general') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
@@ -141,7 +141,7 @@
                     </accordian>
 
                     {{-- design --}}
-                    <accordian title="'{{ __('admin::app.settings.channels.design') }}" :active="true">
+                    <accordian title="{{ __('admin::app.settings.channels.design') }}" :active="true">
                         <div slot="body">
                             <div class="control-group">
                                 <label for="theme">{{ __('admin::app.settings.channels.theme') }}</label>

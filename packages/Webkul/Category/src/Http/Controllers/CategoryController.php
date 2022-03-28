@@ -3,6 +3,7 @@
 namespace Webkul\Category\Http\Controllers;
 
 use Webkul\Admin\DataGrids\CategoryDataGrid;
+use Webkul\Admin\DataGrids\CategoryProductDataGrid;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Http\Requests\CategoryRequest;
 use Webkul\Category\Repositories\CategoryRepository;
@@ -107,6 +108,19 @@ class CategoryController extends Controller
         $attributes = $this->attributeRepository->findWhere(['is_filterable' => 1]);
 
         return view($this->_config['view'], compact('category', 'categories', 'attributes'));
+    }
+
+    /**
+     * Show the products of specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    public function products($id)
+    {
+        if (request()->ajax()) {
+            return app(CategoryProductDataGrid::class)->toJson();
+        }
     }
 
     /**

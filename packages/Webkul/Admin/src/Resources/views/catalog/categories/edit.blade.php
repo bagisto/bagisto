@@ -216,6 +216,16 @@
                         </div>
                     </accordian>
 
+                    <accordian title="{{ __('admin::app.catalog.categories.products') }}" :active="true">
+                        <div slot="body">
+                            {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.products.controls.before', ['category' => $category]) !!}
+
+                            <datagrid-plus src="{{ route('admin.catalog.categories.products', $category->id) }}"></datagrid-plus>
+
+                            {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.products.controls.before', ['category' => $category]) !!}
+                        </div>
+                    </accordian>
+
                     {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.seo.after', ['category' => $category]) !!}
                 </div>
             </div>
