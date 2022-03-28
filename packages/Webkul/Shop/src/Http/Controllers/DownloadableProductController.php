@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
+use Webkul\Shop\DataGrids\DownloadableProductDataGrid;
 
 class DownloadableProductController extends Controller
 {
@@ -38,6 +39,10 @@ class DownloadableProductController extends Controller
     */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(DownloadableProductDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 

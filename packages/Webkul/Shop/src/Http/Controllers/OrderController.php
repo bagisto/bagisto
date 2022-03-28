@@ -5,6 +5,7 @@ namespace Webkul\Shop\Http\Controllers;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Shop\DataGrids\OrderDataGrid;
 
 class OrderController extends Controller
 {
@@ -60,6 +61,10 @@ class OrderController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(OrderDataGrid::class)->toJson();
+        }
+
         return view($this->_config['view']);
     }
 
