@@ -85,7 +85,7 @@
                         <label class="required">{{ __('admin::app.catalog.categories.image') }}</label>
                         <span class="control-info mt-10">{{ __('admin::app.settings.sliders.image-size') }}</span>
                         
-                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false"></image-wrapper>
+                        <image-wrapper button-label="{{ __('admin::app.settings.sliders.image') }}" input-name="image" :multiple="false"></image-wrapper>
 
                         <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                             @foreach ($errors->get('image.*') as $key => $message)

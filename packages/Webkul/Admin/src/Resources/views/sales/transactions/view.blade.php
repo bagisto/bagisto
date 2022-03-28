@@ -22,7 +22,7 @@
         <div class="page-content">
             <div class="sale-container">
 
-                <accordian :title="'{{ __('admin::app.sales.transactions.transaction-data') }}'" :active="true">
+                <accordian title="{{ __('admin::app.sales.transactions.transaction-data') }}" :active="true">
                     <div slot="body">
                         <div class="sale">
                             <div class="sale-section" style="width:100%">
@@ -104,7 +104,7 @@
                     </div>
                 </accordian>
 
-                <accordian :title="'{{ __('admin::app.sales.transactions.transaction-details') }}'" :active="true">
+                <accordian title="{{ __('admin::app.sales.transactions.transaction-details') }}" :active="true">
                     <div slot="body">
                         @php
                             $transData = json_decode(json_encode(json_decode($transaction['data'])), true);

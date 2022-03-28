@@ -47,7 +47,7 @@
 
                 {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.general.before') !!}
 
-                <accordian :title="'{{ __('admin::app.catalog.products.general') }}'" :active="true">
+                <accordian title="{{ __('admin::app.catalog.products.general') }}" :active="true">
                     <div slot="body">
                         {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.general.controls.before') !!}
 
@@ -103,7 +103,7 @@
                 @if ($familyId)
                     {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.configurable_attributes.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.catalog.products.configurable-attributes') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.catalog.products.configurable-attributes') }}" :active="true">
                         <div slot="body">
                             {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.configurable_attributes.controls.before') !!}
 

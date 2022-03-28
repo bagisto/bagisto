@@ -31,7 +31,7 @@
                     {!! view_render_event('bagisto.admin.settings.channel.create.before') !!}
 
                     {{-- general --}}
-                    <accordian :title="'{{ __('admin::app.settings.channels.general') }}'" :active="true">
+                    <accordian title="'{{ __('admin::app.settings.channels.general') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
@@ -86,7 +86,7 @@
                     </accordian>
 
                     {{-- currencies and locales --}}
-                    <accordian :title="'{{ __('admin::app.settings.channels.currencies-and-locales') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.settings.channels.currencies-and-locales') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('locales[]') ? 'has-error' : '']">
@@ -141,7 +141,7 @@
                     </accordian>
 
                     {{-- design --}}
-                    <accordian :title="'{{ __('admin::app.settings.channels.design') }}'" :active="true">
+                    <accordian title="'{{ __('admin::app.settings.channels.design') }}" :active="true">
                         <div slot="body">
                             <div class="control-group">
                                 <label for="theme">{{ __('admin::app.settings.channels.theme') }}</label>
@@ -167,7 +167,7 @@
                             <div class="control-group">
                                 <label>{{ __('admin::app.settings.channels.logo') }}</label>
 
-                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false"></image-wrapper>
+                                <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="logo" :multiple="false"></image-wrapper>
                                 
                                 <span class="control-info mt-10">{{ __('admin::app.settings.channels.logo-size') }}</span>  
                             </div>
@@ -175,7 +175,7 @@
                             <div class="control-group">
                                 <label>{{ __('admin::app.settings.channels.favicon') }}</label>
 
-                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false"></image-wrapper>
+                                <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="logo" :multiple="false"></image-wrapper>
 
                                 <span class="control-info mt-10">{{ __('admin::app.settings.channels.favicon-size') }}</span>     
                             </div>

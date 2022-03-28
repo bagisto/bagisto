@@ -37,7 +37,7 @@
 
                         {!! view_render_event('bagisto.admin.promotions.cart-rules.create.before') !!}
 
-                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.rule-information') }}'" :active="true">
+                        <accordian title="{{ __('admin::app.promotions.cart-rules.rule-information') }}" :active="true">
                             <div slot="body">
 
                                 <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
@@ -157,7 +157,7 @@
                             </div>
                         </accordian>
 
-                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.conditions') }}'" :active="false">
+                        <accordian title="{{ __('admin::app.promotions.cart-rules.conditions') }}" :active="false">
                             <div slot="body">
 
                                 <div class="control-group">
@@ -184,7 +184,7 @@
                             </div>
                         </accordian>
 
-                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.actions') }}'" :active="false">
+                        <accordian title="{{ __('admin::app.promotions.cart-rules.actions') }}" :active="false">
                             <div slot="body">
 
                                 <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">

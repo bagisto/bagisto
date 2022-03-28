@@ -30,7 +30,7 @@
 
                     {!! view_render_event('bagisto.admin.marketing.templates.create.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.marketing.templates.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.marketing.templates.general') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.marketing.templates.name') }}</label>

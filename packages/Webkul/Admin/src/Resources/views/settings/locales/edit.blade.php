@@ -31,7 +31,7 @@
 
                     <input name="_method" type="hidden" value="PUT">
 
-                    <accordian :title="'{{ __('admin::app.settings.locales.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.settings.locales.general') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
@@ -71,13 +71,13 @@
                                         input-name="locale_image"
                                         :multiple="false"
                                         :images='"{{ Storage:: url($locale->locale_image) }}"'
-                                        :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'">
+                                        button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
                                     </image-wrapper>
                                 @else
                                     <image-wrapper
                                         input-name="locale_image"
                                         :multiple="false"
-                                        :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'">
+                                        button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
                                     </image-wrapper>
                                 @endif
 

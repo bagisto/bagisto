@@ -29,7 +29,7 @@
 
                     {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.settings.locales.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.settings.locales.general') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.locales.code') }}</label>
@@ -58,7 +58,7 @@
                                 <image-wrapper
                                     input-name="locale_image"
                                     :multiple="false"
-                                    :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'">
+                                    button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
                                 </image-wrapper>
 
                                 <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-locale-resolution') }}</span>

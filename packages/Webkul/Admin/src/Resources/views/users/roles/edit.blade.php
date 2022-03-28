@@ -30,7 +30,7 @@
 
                     <input name="_method" type="hidden" value="PUT">
 
-                    <accordian :title="'{{ __('admin::app.users.roles.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.users.roles.general') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.users.roles.name') }}</label>
@@ -45,7 +45,7 @@
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('admin::app.users.roles.access-control') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.users.roles.access-control') }}" :active="true">
                         <div slot="body">
                             <div class="control-group">
                                 <label for="permission_type">{{ __('admin::app.users.roles.permissions') }}</label>

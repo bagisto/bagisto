@@ -34,7 +34,7 @@
 
                     <input type="hidden" name="customer_id" value="{{ $address->customer_id }}">
 
-                    <accordian :title="'{{ __('admin::app.customers.addresses.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.customers.addresses.general') }}" :active="true">
                         <div slot="body">
 
                             <?php $addresses = explode(PHP_EOL, $address->address1); ?>

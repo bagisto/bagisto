@@ -28,7 +28,7 @@
 
                     <input name="_method" type="hidden" value="PUT">
 
-                    <accordian :title="'{{ __('admin::app.account.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.account.general') }}" :active="true">
                         <div slot="body">
                             <upload-profile-image></upload-profile-image>
 
@@ -46,7 +46,7 @@
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('admin::app.account.change-password') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.account.change-password') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                                 <label for="password">{{ __('admin::app.account.password') }}</label>
@@ -62,7 +62,7 @@
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('admin::app.account.current-password') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.account.current-password') }}" :active="true">
                         <div slot="body">
                         <div class="control-group" :class="[errors.has('current_password') ? 'has-error' : '']">
                             <label for="current_password" class="required">{{ __('admin::app.account.current-password') }}</label>

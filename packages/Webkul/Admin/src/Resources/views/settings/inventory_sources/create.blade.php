@@ -30,7 +30,7 @@
 
                     {!! view_render_event('bagisto.admin.settings.inventory.create.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.settings.inventory_sources.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.settings.inventory_sources.general') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
@@ -80,7 +80,7 @@
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('admin::app.settings.inventory_sources.contact-info') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.settings.inventory_sources.contact-info') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('contact_name') ? 'has-error' : '']">
@@ -109,7 +109,7 @@
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('admin::app.settings.inventory_sources.address') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.settings.inventory_sources.address') }}" :active="true">
                         <div slot="body">
 
                             @include ('admin::customers.country-state', ['countryCode' => old('country'), 'stateCode' => old('state')])

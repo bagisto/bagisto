@@ -33,7 +33,7 @@
 
                     <input type="hidden" name="customer_id" value="{{ $customer->id }}">
 
-                    <accordian :title="'{{ __('admin::app.customers.addresses.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.customers.addresses.general') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('company_name') ? 'has-error' : '']">

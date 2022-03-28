@@ -37,7 +37,7 @@
 
                         {!! view_render_event('bagisto.admin.promotions.cart-rules.create.before') !!}
 
-                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.rule-information') }}'" :active="true">
+                        <accordian title="{{ __('admin::app.promotions.cart-rules.rule-information') }}" :active="true">
                             <div slot="body">
                                 <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                     <label for="name" class="required">{{ __('admin::app.promotions.cart-rules.name') }}</label>
@@ -174,7 +174,7 @@
                             </div>
                         </accordian>
 
-                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.conditions') }}'" :active="false">
+                        <accordian title="{{ __('admin::app.promotions.cart-rules.conditions') }}" :active="false">
                             <div slot="body">
                                 <div class="control-group">
                                     <label for="condition_type">{{ __('admin::app.promotions.cart-rules.condition-type') }}</label>
@@ -199,7 +199,7 @@
                             </div>
                         </accordian>
 
-                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.actions') }}'" :active="false">
+                        <accordian title="{{ __('admin::app.promotions.cart-rules.actions') }}" :active="false">
                             <div slot="body">
                                 <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
                                     <label for="action_type" class="required">{{ __('admin::app.promotions.cart-rules.action-type') }}</label>
@@ -307,7 +307,7 @@
 
                         {!! view_render_event('bagisto.admin.promotions.cart-rules.create.after') !!}
 
-                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.coupon-codes') }}'" :active="false" v-if="coupon_type && use_auto_generation">
+                        <accordian title="{{ __('admin::app.promotions.cart-rules.coupon-codes') }}" :active="false" v-if="coupon_type && use_auto_generation">
                             <div slot="body">
                                 <create-coupon-form></create-coupon-form>
                             </div>

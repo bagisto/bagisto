@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.downloadable.before', ['product' => $product]) !!}
 
-<accordian :title="'{{ __('admin::app.catalog.products.downloadable') }}'" :active="true">
+<accordian title="{{ __('admin::app.catalog.products.downloadable') }}" :active="true">
     <div slot="body">
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.downloadable.links.controls.before', ['product' => $product]) !!}
 
