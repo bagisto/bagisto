@@ -21,7 +21,7 @@
 
         @if ($product->downloadable_links->count())
             <div class="link-list control-group" :class="[errors.has('links[]') ? 'has-error' : '']">
-                <h3>{{ __('shop::app.products.links') }}</h3>
+                <h3 class="required">{{ __('shop::app.products.links') }}</h3>
 
                 <ul>
                     @foreach ($product->downloadable_links as $link)

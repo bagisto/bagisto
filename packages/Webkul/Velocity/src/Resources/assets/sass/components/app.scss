@@ -2015,6 +2015,13 @@
         h3 {
             font-size: 16px;
             margin-top: 0;
+
+            &.required:after {
+                content: "*";
+                font-size: 16px;
+                margin-left: -1px;
+                color: #F05153;
+            }
         }
 
         ul {
@@ -2029,7 +2036,7 @@
                     input[type='checkbox'] {
                         width: 15px !important;
                         height: 15px !important;
-                        margin-left: -24px;
+                        margin-left: -10px;
                     }
                 }
 
