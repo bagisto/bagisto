@@ -212,7 +212,7 @@ body {
     left: 0;
     bottom: 0;
     top: 60px;
-    z-index: 6;
+    z-index: 1000;
     width: 56px;
     height: 100vh !important;
     position: fixed;
@@ -266,6 +266,7 @@ body {
                 position: absolute;
                 top: 0;
                 left: 56px;
+                z-index: 1000;
                 background-color: $white;
                 box-shadow: 2px 1px 3px $submenu-shadow-color;
                 border: 1px solid $submenu-border-color;
