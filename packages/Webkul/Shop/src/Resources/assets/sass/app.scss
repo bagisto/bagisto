@@ -2079,6 +2079,13 @@ section.product-detail {
                         h3 {
                             font-size: 16px;
                             margin-top: 0;
+
+                            &.required:after {
+                                content: "*";
+                                color: #fc6868;
+                                font-weight: 700;
+                                display: inline-block;
+                            }
                         }
 
                         ul {
