@@ -17,6 +17,8 @@ import fa from 'vee-validate/dist/locale/fa';
 import fr from 'vee-validate/dist/locale/fr';
 import nl from 'vee-validate/dist/locale/nl';
 import tr from 'vee-validate/dist/locale/tr';
+import hi_IN from 'vee-validate/dist/locale/hi';
+import zh_CN from 'vee-validate/dist/locale/zh_CN';
 
 /**
  * Vue plugins.
@@ -28,7 +30,9 @@ Vue.use(VeeValidate, {
         fa: fa,
         fr: fr,
         nl: nl,
-        tr: tr
+        tr: tr,
+        hi_IN: hi_IN,
+        zh_CN: zh_CN
     },
     events: 'input|change|blur'
 });
