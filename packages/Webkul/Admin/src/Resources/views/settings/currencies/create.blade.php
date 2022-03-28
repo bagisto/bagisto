@@ -30,7 +30,7 @@
 
                     {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.settings.currencies.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.settings.currencies.general') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">

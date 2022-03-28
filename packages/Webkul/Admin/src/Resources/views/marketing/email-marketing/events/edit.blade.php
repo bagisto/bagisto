@@ -30,7 +30,7 @@
 
                     {!! view_render_event('bagisto.admin.marketing.events.create.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.marketing.events.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.marketing.events.general') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">

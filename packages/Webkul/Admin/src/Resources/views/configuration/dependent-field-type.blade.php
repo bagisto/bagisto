@@ -13,8 +13,8 @@
 
 @if (strpos($field['validation'], 'required_if') !== false)
     <required-if
-        :name = "'{{ $name }}'"
-        :label = "'{{ trans($field['title']) }}'"
+        name = "{{ $name }}"
+        label = "{{ trans($field['title']) }}"
         :info = "'{{ trans(isset($field['info']) ? $field['info'] : '') }}'"
         :options = '@json($field['options'])'
         :result = "'{{ $selectedOption }}'"
@@ -26,7 +26,7 @@
 @else
     <depends
         :options = '@json($field['options'])'
-        :name = "'{{ $name }}'"
+        name = "{{ $name }}"
         :validations = "'{{ $validations }}'"
         :depend = "'{{ $dependName }}'"
         :value = "'{{ $dependValue }}'"

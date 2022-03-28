@@ -28,7 +28,7 @@
             <div class="page-content">
                 <div class="sale-container">
 
-                    <accordian :title="'{{ __('admin::app.sales.orders.order-and-account') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.sales.orders.order-and-account') }}" :active="true">
                         <div slot="body">
                             <div class="sale">
                                 <div class="sale-section">
@@ -111,7 +111,7 @@
                     </accordian>
 
                     @if ($order->billing_address || $order->shipping_address)
-                        <accordian :title="'{{ __('admin::app.sales.orders.address') }}'" :active="true">
+                        <accordian title="{{ __('admin::app.sales.orders.address') }}" :active="true">
                             <div slot="body">
 
                                 <div class="sale">
@@ -147,7 +147,7 @@
                         </accordian>
                     @endif
 
-                    <accordian :title="'{{ __('admin::app.sales.orders.payment-and-shipping') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.sales.orders.payment-and-shipping') }}" :active="true">
                         <div slot="body">
                             <div class="sale">
                                 <div class="sale-section">
@@ -209,7 +209,7 @@
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('admin::app.sales.orders.products-ordered') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.sales.orders.products-ordered') }}" :active="true">
                         <div slot="body">
 
                             <refund-items></refund-items>

@@ -30,7 +30,7 @@
 
                     {!! view_render_event('bagisto.admin.marketing.templates.create.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.marketing.campaigns.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.marketing.campaigns.general') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
@@ -85,7 +85,7 @@
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('admin::app.marketing.campaigns.audience') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.marketing.campaigns.audience') }}" :active="true">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">

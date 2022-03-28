@@ -6,7 +6,7 @@
     ])->pluck('channel')->unique()->toArray();
 ?>
 
-<accordian :title="'{{ __('admin::app.catalog.products.channel') }}'" :active="false">
+<accordian title="{{ __('admin::app.catalog.products.channel') }}" :active="false">
     <div slot="body">
         <div class="control-group multi-select" :class="[errors.has('channels[]') ? 'has-error' : '']">
             <label for="channels" class="required">{{ __('admin::app.catalog.products.channel') }}</label>

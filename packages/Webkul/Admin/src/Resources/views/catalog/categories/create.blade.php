@@ -31,7 +31,7 @@
 
                     {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.general.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.catalog.categories.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.catalog.categories.general') }}" :active="true">
                         <div slot="body">
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.general.controls.before') !!}
 
@@ -68,7 +68,7 @@
 
                     {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.catalog.categories.description-and-images') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.catalog.categories.description-and-images') }}" :active="true">
                         <div slot="body">
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.controls.before') !!}
 
@@ -93,7 +93,7 @@
                             <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
                                 <label>{{ __('admin::app.catalog.categories.image') }}</label>
 
-                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false"></image-wrapper>
+                                <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="image" :multiple="false"></image-wrapper>
 
                                 <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                                     @foreach ($errors->get('image.*') as $key => $message)
@@ -113,7 +113,7 @@
                     @if ($categories->count())
                         {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.parent_category.before') !!}
 
-                        <accordian :title="'{{ __('admin::app.catalog.categories.parent-category') }}'" :active="true">
+                        <accordian title="{{ __('admin::app.catalog.categories.parent-category') }}" :active="true">
                             <div slot="body">
 
                                 {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.parent_category.controls.before') !!}
@@ -128,7 +128,7 @@
                         {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.parent_category.after') !!}
                     @endif
 
-                    <accordian :title="'{{ __('admin::app.catalog.categories.filterable-attributes') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.catalog.categories.filterable-attributes') }}" :active="true">
                         <div slot="body">
                             <?php $selectedaAtributes = old('attributes') ? old('attributes') : ['11']  ?>
 
@@ -152,7 +152,7 @@
 
                     {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.seo.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.catalog.categories.seo') }}'" :active="true">
+                    <accordian title="'{{ __('admin::app.catalog.categories.seo') }}" :active="true">
                         <div slot="body">
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.seo.controls.before') !!}
 

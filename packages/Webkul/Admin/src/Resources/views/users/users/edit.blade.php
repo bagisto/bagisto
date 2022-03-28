@@ -28,7 +28,7 @@
                     @csrf()
                     <input name="_method" type="hidden" value="PUT">
 
-                    <accordian :title="'{{ __('admin::app.users.users.general') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.users.users.general') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.users.users.name') }}</label>
@@ -44,7 +44,7 @@
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('admin::app.users.users.password') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.users.users.password') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                                 <label for="password">{{ __('admin::app.users.users.password') }}</label>
@@ -60,7 +60,7 @@
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('admin::app.users.users.status-and-role') }}'" :active="true">
+                    <accordian title="{{ __('admin::app.users.users.status-and-role') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('role_id') ? 'has-error' : '']">
                                 <label for="role" class="required">{{ __('admin::app.users.users.role') }}</label>
