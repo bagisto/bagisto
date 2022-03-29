@@ -501,6 +501,7 @@ return [
             'remove'                   => 'Entfernen',
             'remove-link'              => 'Entfernen',
             'remove-all-items'         => 'Remove all items',
+            'confirm-action'           => 'Confirm this action?',
             'move-to-wishlist'         => 'Zur Wunschliste verschieben',
             'move-to-wishlist-success' => 'Artikel wurde erfolgreich auf die Wunschliste verschoben.',
             'move-to-wishlist-error'   => 'Das Objekt kann nicht auf die Wunschliste verschoben werden. Bitte versuchen Sie es später erneut.',

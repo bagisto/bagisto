@@ -493,6 +493,7 @@ return [
             'remove'                   => 'Remover',
             'remove-link'              => 'Remover',
             'remove-all-items'         => 'Remove all items',
+            'confirm-action'           => 'Confirm this action?',
             'move-to-wishlist'         => 'Mover para Lista de Desejos',
             'move-to-wishlist-success' => 'Item Movido para Lista de Desejos',
             'move-to-wishlist-error'   => 'Não foi possivel Mover Item para Lista de Desejos, Por favor, tente novamente mais tarde',

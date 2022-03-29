@@ -500,6 +500,7 @@ return [
             'update-cart'               => 'Update Cart',
             'continue-shopping'         => 'Continue Shopping',
             'remove-all-items'          => 'Remove all items',
+            'confirm-action'            => 'Confirm this action?',
             'continue-registration'     => 'Continue Registration',
             'proceed-to-checkout'       => 'Proceed To Checkout',
             'remove'                    => 'Remove',

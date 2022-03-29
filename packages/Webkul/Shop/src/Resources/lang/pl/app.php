@@ -502,6 +502,7 @@ return [
             'remove'                   => 'Usuń',
             'remove-link'              => 'Usuń',
             'remove-all-items'         => 'Remove all items',
+            'confirm-action'           => 'Confirm this action?',
             'move-to-wishlist'         => 'Przenieś na listę wyboru',
             'move-to-wishlist-success' => 'Produkt został pomyślnie przeniesiony na listę wyboru.',
             'move-to-wishlist-error'   => 'Nie można przenieść ptoduktu na listę życzeń, spróbuj ponownie później.',

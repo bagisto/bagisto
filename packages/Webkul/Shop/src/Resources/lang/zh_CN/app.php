@@ -502,6 +502,7 @@ return [
             'remove' => '移除',
             'remove-link' => '移除',
             'remove-all-items'          => 'Remove all items',
+            'confirm-action'           => 'Confirm this action?',
             'move-to-wishlist' => '移动到愿望清单',
             'move-to-wishlist-success' => '项目已成功移至愿望清单.',
             'move-to-wishlist-error' => '无法将商品移至愿望清单, 请稍后再试.',

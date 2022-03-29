@@ -503,7 +503,7 @@ return [
             'proceed-to-checkout'      => 'انتقل إلى الخروج',
             'remove'                   => 'احذف',
             'remove-all-items'         => 'Remove all items',
-
+            'confirm-action'           => 'Confirm this action?',
             'remove-link'              => 'احذف',
             'move-to-wishlist'         => 'انقل إلى قائمة الأمنيات',
             'move-to-wishlist-success' => 'نقل العنصر إلى قائمة الأمنيات',

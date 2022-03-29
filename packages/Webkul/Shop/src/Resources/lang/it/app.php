@@ -498,6 +498,7 @@ return [
             'update-cart'              => 'Aggiorna Carrello',
             'continue-shopping'        => 'Continua con i tuoi acquisti',
             'remove-all-items'         => 'Rimuovi tutti i prodotti',
+            'confirm-action'           => 'Confermi questa azione?',
             'continue-registration'    => 'Continua la registrazione',
             'proceed-to-checkout'      => 'Procedi alla Cassa',
             'remove'                   => 'Rimuovi',

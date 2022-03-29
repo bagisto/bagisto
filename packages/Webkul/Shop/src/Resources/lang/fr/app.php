@@ -500,6 +500,7 @@ return [
             'remove'                   => 'Supprimer',
             'remove-link'              => 'Supprimer',
             'remove-all-items'         => 'Remove all items',
+            'confirm-action'           => 'Confirm this action?',
             'move-to-wishlist'         => 'Placer dans la liste de souhaits',
             'move-to-wishlist-success' => 'L\'article a été déplacé vers la liste de souhaits avec succès.',
             'move-to-wishlist-error'   => 'Impossible de déplacer l\'élément vers la liste de souhaits, veuillez réessayer plus tard.',

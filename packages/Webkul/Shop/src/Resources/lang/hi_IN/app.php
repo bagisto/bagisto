@@ -504,6 +504,7 @@ return [
             'remove'                    => 'निकालना',
             'remove-link'               => 'निकालना',
             'remove-all-items'          => 'Remove all items',
+            'confirm-action'            => 'Confirm this action?',
             'move-to-wishlist'          => 'इच्छा सूची की ओर बदें',
             'move-to-wishlist-success'  => 'आइटम सफलतापूर्वक इच्छा सूची में ले जाया गया।',
             'move-to-wishlist-error'    => 'आइटम को इच्छा सूची में नहीं ले जाया जा सकता, कृपया बाद में पुन: प्रयास करें।',

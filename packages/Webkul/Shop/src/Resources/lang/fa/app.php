@@ -501,6 +501,7 @@ return [
             'remove'                   => 'برداشتن',
             'remove-link'              => 'برداشتن',
             'remove-all-items'         => 'Remove all items',
+            'confirm-action'           => 'Confirm this action?',
             'move-to-wishlist'         => 'انتقال به لیست دلخواه',
             'move-to-wishlist-success' => 'مورد به لیست دلخواه منتقل شد',
             'move-to-wishlist-error'   => 'نمی توان مورد را به لیست علاقه مندی ها انتقال داد ، لطفا بعداً دوباره امتحان کنید',

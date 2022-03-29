@@ -509,6 +509,7 @@ return [
             'remove'                   => 'Verwijderen',
             'remove-link'              => 'Verwijderen',
             'remove-all-items'         => 'Remove all items',
+            'confirm-action'           => 'Confirm this action?',
             'move-to-wishlist'         => 'Verplaats naar wens lijst',
             'move-to-wishlist-success' => 'Item is succesvol naar de verlanglijst verplaatst.',
             'move-to-wishlist-error'   => 'Kan item niet naar verlanglijstje verplaatsen, probeer het later opnieuw.',
