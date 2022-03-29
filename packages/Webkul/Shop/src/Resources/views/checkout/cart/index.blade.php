@@ -128,7 +128,11 @@
                         <div class="misc-controls">
                             <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
 
-                            <a href="{{ route('cart.remove.all.items') }}" class="link">{{ __('shop::app.checkout.cart.remove-all-items') }}</a>
+                            <a
+                                onclick="return confirm('{{ __('shop::app.checkout.cart.confirm-action') }}')"
+                                href="{{ route('cart.remove.all.items') }}">
+                                {{ __('shop::app.checkout.cart.remove-all-items') }}
+                            </a>
 
                             <div style="display:flex;">
                                 @if ($cart->hasProductsWithQuantityBox())
