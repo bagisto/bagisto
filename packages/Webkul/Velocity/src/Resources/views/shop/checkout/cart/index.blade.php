@@ -206,6 +206,7 @@
 
                                         <a
                                             class="theme-btn light fs16 text-center"
+                                            onclick="return confirm('{{ __('shop::app.checkout.cart.confirm-action') }}')"
                                             href="{{ route('cart.remove.all.items') }}">
                                             {{ __('shop::app.checkout.cart.remove-all-items') }}
                                         </a>
