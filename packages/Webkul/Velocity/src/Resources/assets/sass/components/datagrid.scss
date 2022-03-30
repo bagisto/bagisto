@@ -33,7 +33,10 @@
             padding: 12px 10px;
             background: #f8f9fa;
             color: $font-color;
-            border-right: 1px solid #ccc!important;
+            border-right: 1px solid #ccc !important;
+            &:last-child {
+                border-right: none;
+            }
         }
 
         tbody td {
