@@ -1206,7 +1206,7 @@ modal {
 .modal-overlay {
     display: none;
     overflow-y: auto;
-    z-index: 10;
+    z-index: 1001;
     top: 0px;
     right: 0px;
     bottom: 0px;
@@ -1228,7 +1228,7 @@ modal {
     left: 50%;
     margin-left: -300px;
     position: fixed;
-    z-index: 11;
+    z-index: 1002;
     @include box-shadow(
         0px 15px 25px 0px rgba(0, 0, 0, 0.03),
         0px 20px 45px 5px rgba(0, 0, 0, 0.2)
