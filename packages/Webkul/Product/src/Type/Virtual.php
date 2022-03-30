@@ -9,7 +9,7 @@ class Virtual extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['length', 'width', 'height', 'weight'];
+    protected $skipAttributes = ['length', 'width', 'height', 'weight', 'depth'];
 
     /**
      * These blade files will be included in product edit page.
