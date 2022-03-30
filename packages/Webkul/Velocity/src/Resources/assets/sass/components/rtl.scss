@@ -502,6 +502,22 @@ body {
                 flex-direction: row-reverse;
             }
         }
+
+        .quantity {
+            .input-btn-group {
+                button {
+                    &.increase {
+                        border-right: 0;
+                        border-left: 1px solid #dcdcdc;
+                    }
+
+                    &.decrease {
+                        border-left: 0;
+                        border-right: 1px solid #dcdcdc;
+                    }
+                }
+            }
+        }
     }
 }
 
