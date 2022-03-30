@@ -38,8 +38,8 @@
                         <quantity-changer
                             :control-name="'booking[qty][' + ticket.id + ']'"
                             :validations="'required|numeric|min_value:0'"
-                            quantity="0"
-                            min-quantity="0">
+                            :quantity="defaultQty"
+                            :min-quantity="defaultQty">
                         </quantity-changer>
                     </div>
 
@@ -60,6 +60,12 @@
             data: function() {
                 return {
                     tickets: @json($bookingSlotHelper->getTickets($bookingProduct)),
+                }
+            },
+
+            computed: {
+                defaultQty: function() {
+                    return this.tickets.length > 1 ? 0 : 1;
                 }
             }
         });
