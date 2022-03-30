@@ -952,8 +952,8 @@
         .table {
             table {
                 tr {
-                    margin-bottom: 20px;
                     border: 1px solid #cccccc;
+                    height: auto !important;
 
                     td {
                         width: auto;
