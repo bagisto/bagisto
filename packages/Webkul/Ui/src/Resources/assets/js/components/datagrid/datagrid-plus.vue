@@ -689,6 +689,7 @@
                                 <td
                                     class="actions"
                                     style="white-space: nowrap; width: 100px"
+                                    v-if="enableActions"
                                     :data-value="translations.actions"
                                 >
                                     <div class="action">
