@@ -162,14 +162,9 @@
 
 .locale-icon {
     @extend %menu-properties;
-    background-image: url("../images/Local-Icon.svg");
-}
-
-.locale-icon-bold {
-    @extend %menu-properties;
-    background-image: url("../images/Local-Icon-bold.svg");
-    height: 26px;
+    background-image: url("../images/Locale-Icon.svg");
     width: 26px;
+    height: 26px;
 }
 
 .store-icon {

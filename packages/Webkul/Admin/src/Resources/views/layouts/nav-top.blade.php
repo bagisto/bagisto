@@ -68,7 +68,7 @@
 
                 <div class="dropdown-toggle">
 
-                    <i class="icon locale-icon-bold"></i>
+                    <i class="icon locale-icon"></i>
                 </div>
 
                 <div class="dropdown-list bottom-right">
