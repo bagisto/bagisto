@@ -433,22 +433,28 @@ body {
         .text-right {
             text-align: left !important;
         }
+
         .text-left {
             text-align: right !important;
         }
+
         .pr0 {
             padding-left: 0 !important;
             padding-right: 15px !important;
         }
+
         .pl0 {
             padding-right: 0px !important;
         }
+
         .pl10 {
             padding-right: 10px !important;
         }
+
         .rango-arrow-right::before {
             content: '\E907';
         }
+
         .styled-select {
             + .select-icon-container {
                 .select-icon {
@@ -457,20 +463,44 @@ body {
                 }
             }
         }
+
         .ml15 {
             margin-right: 15px !important;
         }
+
         .pl30 {
             padding-right: 30px;
         }
+
         .ml-5 {
             margin-right: 3rem !important;
         }
+
         .mr15 {
             margin-left: 15px !important;
         }
+
         .ml5 {
             margin-right: 5px;
+        }
+
+        .payment-methods {
+            .pl40 {
+                padding-right: 40px !important;
+                padding-left: 0 !important;
+            }
+        }
+
+        #top #account .dropdown-list {
+            left: 10px;
+            right: unset !important;
+            text-align: right;
+        }
+
+        .VueCarousel {
+            .VueCarousel-inner {
+                flex-direction: row-reverse;
+            }
         }
     }
 }
@@ -593,20 +623,5 @@ body {
                 }
             }
         }
-    }
-}
-
-body.rtl {
-    .payment-methods {
-        .pl40 {
-            padding-right: 40px !important;
-            padding-left: 0 !important;
-        }
-    }
-
-    #top #account .dropdown-list {
-        left: 10px;
-        right: unset !important;
-        text-align: right;
     }
 }
