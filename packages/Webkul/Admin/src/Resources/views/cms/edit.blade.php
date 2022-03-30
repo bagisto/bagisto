@@ -68,7 +68,7 @@
 
                 <div class="form-container">
                     @csrf()
-                    <accordian :title="{{ __('admin::app.cms.pages.general') }}" :active="true">
+                    <accordian title="{{ __('admin::app.cms.pages.general') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('{{$locale}}[page_title]') ? 'has-error' : '']">
                                 <label for="page_title" class="required">{{ __('admin::app.cms.pages.page-title') }}</label>
