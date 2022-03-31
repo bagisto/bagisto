@@ -3,6 +3,71 @@
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
 
+
+## **v1.4.2 (31st of March 2022)** - *Release*
+
+* #6164 [enhancement] - UI Enhancement - Please Add the separation Lines in the Heading section also in Orders and Downloadable Product Details. 
+
+* #6162 [enhancement] -UI Enhancement - Please Make the Information Text Bold in the Compare Product Page. 
+
+* #6119 [enhancement] -The locale dropdown should be in ascending order 
+
+* #6117 ['enhancement] -The locale name should be shown instead of the locale code on the orders page 
+
+* #5964 [enhancement] - The process to checkout button should be disabled if the product is out of stock. 
+
+* #5399 [enhancement] - There should be a Back to Top Button in the user panel.
+
+* #5355 [enhancement] -There should be an option to upload user's picture 
+
+
+* #6186 [fixed] - The page should be redirected to the product-review page after submitting the review  
+
+* #6181 [fixed] - There should not be any UI issue on the product-view page in the quantity field. 
+
+* #6177 [fixed] - There is a UI issue on the product-view page in the Arabic locale 
+
+* #6174 [fixed] - The sidebar should be disabled if the admin is trying to send the duplicate invoice. 
+
+* #6167 [fixed] - In Reviews Section - Grammatical Mistake Found. 
+
+* #6165 [fixed] - In Downloadable Product Section Unnecessary Column is present. 
+
+* #6161 [fixed] - There should not be any UI issue on the orders page.if the user is trying to filter the orders  
+
+* #6158 [fixed] - The quantity option should not be visible for booking products. 
+
+* #6157 [fixed] - There is a UI issue on the product-edit page 
+
+* #6156 [fixed] -  LINT ERROR IN EDIT PRODUCTS BLADE 
+
+* #6153 [fixed] - There should be an asterisk icon for the required fields. 
+
+* #6144 [fixed] - Payment methods page is Blank if admin_locale=fr 
+
+* #6134 [fixed] - The total amount of cart items should be correct. 
+
+* #6132 [fixed] - The edit channel page should not be blank in the Chinese locale. 
+
+* #6126 [fixed] - There is a UI issue on the cart section with Arabic locale 
+
+* #6124 [fixed] - There is a UI issue on the header section 
+
+* #6121 [fixed] - The warning message should be correct if the user is trying to delete the account
+
+* #6115 [fixed] - The Back to top button should be disabled when the user is placing the order 
+
+* #6114 [fixed] - Edit channel page is Blank if admin_locale=fr 
+
+* #6112 [fixed] - There should not be Error 500 if the admin is trying to edit the product. 
+
+* #6109 [fixed] - The add to cart button should be blurred if the item is out of stock 
+
+* #6103 [fixed] - The header section should be responsive in mobile view 
+
+* #4959 [fixed] - getting exception when merge guest cart with customer cart with configurable item 
+
+
 ## **v1.4.1 (17th of March 2022)** - *Release*
 
 * #6040 [enhancement] - The locale dropdown should be in ascending order
