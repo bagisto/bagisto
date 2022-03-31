@@ -43,8 +43,6 @@ class OrderController extends Controller
         OrderCommentRepository $orderCommentRepository
     )
     {
-        $this->middleware('admin');
-
         $this->_config = request('_config');
 
         $this->orderRepository = $orderRepository;

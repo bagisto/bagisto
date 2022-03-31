@@ -54,8 +54,6 @@ class CustomerController extends Controller
         ProductReviewRepository $productReviewRepository,
         SubscribersListRepository $subscriptionRepository
     ) {
-        $this->middleware('customer');
-
         $this->_config = request('_config');
 
         $this->customerRepository = $customerRepository;

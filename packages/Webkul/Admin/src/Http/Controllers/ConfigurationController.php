@@ -38,8 +38,6 @@ class ConfigurationController extends Controller
      */
     public function __construct(CoreConfigRepository $coreConfigRepository)
     {
-        $this->middleware('admin');
-
         $this->coreConfigRepository = $coreConfigRepository;
 
         $this->_config = request('_config');

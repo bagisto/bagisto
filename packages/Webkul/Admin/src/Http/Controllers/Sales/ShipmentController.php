@@ -51,8 +51,6 @@ class ShipmentController extends Controller
         OrderRepository $orderRepository,
         OrderItemRepository $orderItemRepository
     ) {
-        $this->middleware('admin');
-
         $this->_config = request('_config');
 
         $this->orderRepository = $orderRepository;

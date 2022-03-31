@@ -47,8 +47,6 @@ class InvoiceController extends Controller
         OrderRepository $orderRepository,
         InvoiceRepository $invoiceRepository
     ) {
-        $this->middleware('admin');
-
         $this->_config = request('_config');
 
         $this->orderRepository = $orderRepository;

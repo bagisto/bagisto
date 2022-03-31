@@ -43,8 +43,6 @@ class OrderController extends Controller
         OrderRepository $orderRepository,
         InvoiceRepository $invoiceRepository
     ) {
-        $this->middleware('customer');
-
         $this->currentCustomer = auth()->guard('customer')->user();
 
         $this->orderRepository = $orderRepository;

@@ -30,8 +30,6 @@ class PageController extends Controller
      */
     public function __construct(CmsRepository $cmsRepository)
     {
-        $this->middleware('admin');
-
         $this->cmsRepository = $cmsRepository;
 
         $this->_config = request('_config');
