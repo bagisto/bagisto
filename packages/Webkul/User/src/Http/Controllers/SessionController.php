@@ -18,8 +18,6 @@ class SessionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin')->except(['create', 'store']);
-
         $this->_config = request('_config');
     }
 

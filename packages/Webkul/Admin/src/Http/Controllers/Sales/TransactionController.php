@@ -52,8 +52,6 @@ class TransactionController extends Controller
         OrderRepository $orderRepository,
         OrderTransactionRepository $orderTransactionRepository,
         InvoiceRepository $invoiceRepository) {
-        $this->middleware('admin');
-
         $this->_config = request('_config');
 
         $this->orderRepository = $orderRepository;

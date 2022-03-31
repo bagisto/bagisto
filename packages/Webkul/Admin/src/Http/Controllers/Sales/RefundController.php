@@ -51,8 +51,6 @@ class RefundController extends Controller
         OrderItemRepository $orderItemRepository,
         RefundRepository $refundRepository
     ) {
-        $this->middleware('admin');
-
         $this->_config = request('_config');
 
         $this->orderRepository = $orderRepository;

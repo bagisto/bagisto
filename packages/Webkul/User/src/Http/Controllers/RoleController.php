@@ -40,8 +40,6 @@ class RoleController extends Controller
         RoleRepository $roleRepository,
         AdminRepository $adminRepository
     ) {
-        $this->middleware('admin');
-
         $this->roleRepository = $roleRepository;
 
         $this->adminRepository = $adminRepository;

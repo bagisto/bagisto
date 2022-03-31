@@ -66,8 +66,6 @@ class CustomerController extends Controller
     ) {
         $this->_config = request('_config');
 
-        $this->middleware('admin');
-
         $this->customerRepository = $customerRepository;
 
         $this->customerAddressRepository = $customerAddressRepository;

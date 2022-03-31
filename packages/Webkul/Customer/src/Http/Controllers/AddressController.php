@@ -36,8 +36,6 @@ class AddressController extends Controller
      */
     public function __construct(CustomerAddressRepository $customerAddressRepository)
     {
-        $this->middleware('customer');
-
         $this->_config = request('_config');
 
         $this->customer = auth()->guard('customer')->user();

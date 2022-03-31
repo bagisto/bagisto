@@ -49,8 +49,6 @@ class UserController extends Controller
         $this->roleRepository = $roleRepository;
 
         $this->_config = request('_config');
-
-        $this->middleware('guest', ['except' => 'destroy']);
     }
 
     /**

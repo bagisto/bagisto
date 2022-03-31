@@ -8,16 +8,6 @@ use Webkul\Admin\Exports\DataGridExport;
 class ExportController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
-    /**
      * Export datagrid.
      *
      * @return \Illuminate\Http\Response
