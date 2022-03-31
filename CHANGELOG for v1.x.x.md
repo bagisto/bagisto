@@ -8,17 +8,17 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #6164 [enhancement] - UI Enhancement - Please Add the separation Lines in the Heading section also in Orders and Downloadable Product Details. 
 
-* #6162['enhancement'] -UI Enhancement - Please Make the Information Text Bold in the Compare Product Page. 
+* #6162 [enhancement] -UI Enhancement - Please Make the Information Text Bold in the Compare Product Page. 
 
-* #6119['enhancement'] -The locale dropdown should be in ascending order 
+* #6119 [enhancement] -The locale dropdown should be in ascending order 
 
-* #6117['enhancement'] -The locale name should be shown instead of the locale code on the orders page 
+* #6117 ['enhancement] -The locale name should be shown instead of the locale code on the orders page 
 
 * #5964 [enhancement] - The process to checkout button should be disabled if the product is out of stock. 
 
 * #5399 [enhancement] - There should be a Back to Top Button in the user panel.
 
-* #5355['enhancement'] -There should be an option to upload user's picture 
+* #5355 [enhancement] -There should be an option to upload user's picture 
 
 
 * #6186 [fixed] - The page should be redirected to the product-review page after submitting the review  
@@ -29,7 +29,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #6174 [fixed] - The sidebar should be disabled if the admin is trying to send the duplicate invoice. 
 
-* ##6167 [fixed] - In Reviews Section - Grammatical Mistake Found. 
+* #6167 [fixed] - In Reviews Section - Grammatical Mistake Found. 
 
 * #6165 [fixed] - In Downloadable Product Section Unnecessary Column is present. 
 
@@ -38,6 +38,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #6158 [fixed] - The quantity option should not be visible for booking products. 
 
 * #6157 [fixed] - There is a UI issue on the product-edit page 
+
+* #6156 [fixed] -  LINT ERROR IN EDIT PRODUCTS BLADE 
 
 * #6153 [fixed] - There should be an asterisk icon for the required fields. 
 
