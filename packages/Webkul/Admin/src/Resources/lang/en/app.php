@@ -309,7 +309,7 @@ return [
         ],
 
         'users' => [
-            'title'                => 'User',
+            'title'                => 'Users',
             'add-user-title'       => 'Add User',
             'edit-user-title'      => 'Edit User',
             'save-btn-title'       => 'Save User',
