@@ -13,7 +13,7 @@ return [
     ],
 
     'reviews' => [
-        'empty' => 'You have not reviewed any of product yet',
+        'empty' => 'You have not reviewed any product yet',
     ],
 
     'forget_password' => [
