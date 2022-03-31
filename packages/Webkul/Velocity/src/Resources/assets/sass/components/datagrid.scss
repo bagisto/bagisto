@@ -131,6 +131,7 @@
         grid-template-columns: auto auto;
         column-gap: 10px;
         align-items: end;
+        position: relative;
 
         .filter-right {
             justify-self: end;
@@ -140,8 +141,25 @@
             align-items: end;
 
             .control-group {
+                margin-bottom: 10px;
+
                 .control {
                     margin-bottom: 0px;
+                }
+            }
+
+            .dropdown-list {
+                right: 0;
+                padding: 15px;
+
+                ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                }
+
+                .apply-filter {
+                    width: 100%;
                 }
             }
         }
