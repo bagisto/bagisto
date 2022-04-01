@@ -258,7 +258,27 @@
                                     </li>
 
                                     <li v-if="stringCondition != null">
-                                        <div class="control-group">
+                                        <div
+                                            class="control-group"
+                                            v-if="
+                                                isCurrentFilterColumnHasOptions()
+                                            "
+                                        >
+                                            <select
+                                                class="control"
+                                                v-model="stringValue"
+                                            >
+                                                <option
+                                                    :key="key"
+                                                    v-text="option"
+                                                    v-value="key"
+                                                    v-for="(option,
+                                                    key) in this.getCurrentFilterOptions()"
+                                                ></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="control-group" v-else>
                                             <input
                                                 type="text"
                                                 class="control response-string"
@@ -1701,6 +1721,28 @@ export default {
                     'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token'
                 );
             }
+        },
+
+        getCurrentFilterColumn: function() {
+            return this.columns.find(
+                column => column.index === this.filterColumn
+            );
+        },
+
+        isCurrentFilterColumnHasOptions: function() {
+            let currentFilterColumn = this.getCurrentFilterColumn();
+
+            return (
+                currentFilterColumn && currentFilterColumn.options !== undefined
+            );
+        },
+
+        getCurrentFilterOptions: function() {
+            if (this.isCurrentFilterColumnHasOptions()) {
+                return this.getCurrentFilterColumn().options ?? [];
+            }
+
+            throw "Options are not defined. Don't use this method if options are not available.";
         }
     }
 };

@@ -76,6 +76,15 @@ class OrderDataGrid extends DataGrid
             'index'      => 'status',
             'label'      => trans('shop::app.customer.account.order.index.status'),
             'type'       => 'string',
+            'options'    => [
+                'processing'      => 'Processing',
+                'completed'       => 'Completed',
+                'canceled'        => 'Cancelled',
+                'closed'          => 'Closed',
+                'pending'         => 'Pending',
+                'pending_payment' => 'Pending Payment',
+                'fraud'           => 'Fraud',
+            ],
             'searchable' => false,
             'sortable'   => true,
             'closure'    => function ($value) {
