@@ -194,11 +194,15 @@ class ProductDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'closure'    => function ($value) {
+                $html = '';
+
                 if ($value->status == 1) {
-                    return trans('admin::app.datagrid.active');
+                    $html .= '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.active') . '</span>';
                 } else {
-                    return trans('admin::app.datagrid.inactive');
+                    $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.inactive') . '</span>';
                 }
+
+                return $html;
             },
         ]);
 
