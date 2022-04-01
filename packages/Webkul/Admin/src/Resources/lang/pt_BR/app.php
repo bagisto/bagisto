@@ -79,6 +79,8 @@ return [
         'email-marketing'          => 'Email Marketing',
         'campaigns'                => 'Campanhas',
         'email-templates'          => 'Email Templates',
+        'events'                   => 'Events',
+        'sitemaps'                 => 'Sitemaps',
         'discount'                 => 'Desconto',
         'cms'                      => 'CMS',
         'transactions'             => 'Transações',
@@ -127,6 +129,13 @@ return [
         'promotions'               => 'Promoções',
         'cart-rules'               => 'Regras do Carrinho',
         'catalog-rules'            => 'Regras do Catálogo',
+        'email-marketing'          => 'Email Marketing',
+        'email-templates'          => 'Email Templates',
+        'campaigns'                => 'Campaigns',
+        'subscribers'              => 'Newsletter Subscribers',
+        'events'                   => 'Events',
+        'sitemaps'                 => 'Sitemaps',
+        'newsletter-subscriptions' => 'Newsletter Subscriptions',
     ],
 
     'dashboard' => [
@@ -244,6 +253,9 @@ return [
         'update-status'    => 'Atualizar o status',
         'transaction-id'   => 'Transaction Id',
         'transaction-date' => 'Transaction Date',
+        'file-name'        => 'File Name',
+        'path'             => 'Path',
+        'link-for-google'  => 'Link For Google',
     ],
 
     'account' => [
@@ -1256,6 +1268,21 @@ return [
             'delete-success' => 'Event deleted successfully.',
             'edit-error'     => 'Não é possível editar esse evento.',
         ],
+
+        'sitemaps' => [
+            'title'          => 'Sitemaps',
+            'add-title'      => 'Add Sitemap',
+            'edit-title'     => 'Edit Sitemap',
+            'save-btn-title' => 'Save',
+            'general'        => 'General',
+            'file-name'      => 'File Name',
+            'file-name-info' => 'Example: sitemap.xml',
+            'path'           => 'Path',
+            'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+            'create-success' => 'Sitemap created successfully.',
+            'update-success' => 'Sitemap updated successfully.',
+            'delete-success' => 'Sitemap deleted successfully.',
+        ]
     ],
 
     'error' => [

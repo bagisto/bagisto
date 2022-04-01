@@ -18,7 +18,6 @@
         "diglactic/laravel-breadcrumbs": "^7.0",
         "doctrine/dbal": "^2.9",
         "enshrined/svg-sanitize": "^0.15.0",
-        "spatie/laravel-ignition": "^1.0",
         "fakerphp/faker": "^1.14",
         "flynsarmy/db-blade-compiler": "dev-master",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -36,7 +35,9 @@
         "maatwebsite/excel": "^3.1.26",
         "paypal/paypal-checkout-sdk": "1.0.1",
         "prettus/l5-repository": "^2.6",
-        "pusher/pusher-php-server": "^7.0"
+        "pusher/pusher-php-server": "^7.0",
+        "spatie/laravel-ignition": "^1.0",
+        "spatie/laravel-sitemap": "^6.1"
     },
     "require-dev": {
         "codeception/codeception": "*@dev",
@@ -102,7 +103,8 @@
             "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
             "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
             "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
-            "Webkul\\Notification\\": "packages/Webkul/Notification/src"
+            "Webkul\\Notification\\": "packages/Webkul/Notification/src",
+            "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src"
         }
     },
     "autoload-dev": {

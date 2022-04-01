@@ -236,6 +236,12 @@ return [
         'sort'       => 3,
         'icon-class' => '',
     ], [
+        'key'        => 'marketing.sitemaps',
+        'name'       => 'admin::app.layouts.sitemaps',
+        'route'      => 'admin.sitemaps.index',
+        'sort'       => 3,
+        'icon-class' => '',
+    ], [
         'key'        => 'cms',
         'name'       => 'admin::app.layouts.cms',
         'route'      => 'admin.cms.index',
