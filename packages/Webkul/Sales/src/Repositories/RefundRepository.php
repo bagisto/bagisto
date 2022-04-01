@@ -11,34 +11,6 @@ use Webkul\Sales\Contracts\Refund;
 class RefundRepository extends Repository
 {
     /**
-     * Order repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * Order item repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderItemRepository
-     */
-    protected $orderItemRepository;
-
-    /**
-     * Refund item repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\RefundItemRepository
-     */
-    protected $refundItemRepository;
-
-    /**
-     * Downloadable link purchased repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository
-     */
-    protected $downloadableLinkPurchasedRepository;
-
-    /**
      * Create a new repository instance.
      *
      * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
@@ -48,20 +20,13 @@ class RefundRepository extends Repository
      * @param  \Illuminate\Container\Container  $app
      */
     public function __construct(
-        OrderRepository $orderRepository,
-        OrderItemRepository $orderItemRepository,
-        RefundItemRepository $refundItemRepository,
-        DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
+        protected OrderRepository $orderRepository,
+        protected OrderItemRepository $orderItemRepository,
+        protected RefundItemRepository $refundItemRepository,
+        protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         App $app
-    ) {
-        $this->orderRepository = $orderRepository;
-
-        $this->orderItemRepository = $orderItemRepository;
-
-        $this->refundItemRepository = $refundItemRepository;
-
-        $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
-
+    )
+    {
         parent::__construct($app);
     }
 

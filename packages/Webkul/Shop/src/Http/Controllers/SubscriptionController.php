@@ -9,22 +9,13 @@ use Webkul\Core\Repositories\SubscribersListRepository;
 class SubscriptionController extends Controller
 {
     /**
-     * SubscribersListRepository
-     *
-     * @var \Webkul\Core\Repositories\SubscribersListRepository
-     */
-    protected $subscriptionRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscriptionRepository
      * @return void
      */
-    public function __construct(SubscribersListRepository $subscriptionRepository)
+    public function __construct(protected SubscribersListRepository $subscriptionRepository)
     {
-        $this->subscriptionRepository = $subscriptionRepository;
-
         parent::__construct();
     }
 

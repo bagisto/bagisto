@@ -8,21 +8,13 @@ use Webkul\Category\Repositories\CategoryRepository;
 class AdminHelper
 {
     /**
-     * Category repository instance.
-     *
-     * @var \Webkul\Category\Repositories\CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
      * Create a new helper instance.
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @return void
      */
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(protected CategoryRepository $categoryRepository)
     {
-        $this->categoryRepository = $categoryRepository;
     }
 
     /**

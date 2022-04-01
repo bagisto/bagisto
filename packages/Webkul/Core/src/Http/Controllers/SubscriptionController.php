@@ -15,22 +15,13 @@ class SubscriptionController extends Controller
     protected $_config;
 
     /**
-     * Subscribers list repository.
-     *
-     * @var \Webkul\Core\Repositories\SubscribersListRepository
-     */
-    protected $subscribersListRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscribersListRepository
      * @return void
      */
-    public function __construct(SubscribersListRepository $subscribersListRepository)
+    public function __construct(protected SubscribersListRepository $subscribersListRepository)
     {
-        $this->subscribersListRepository = $subscribersListRepository;
-
         $this->_config = request('_config');
     }
 

@@ -26,55 +26,6 @@ class Cart
     use CartCoupons, CartTools, CartValidators;
 
     /**
-     * Cart repository instance.
-     *
-     * @var \Webkul\Checkout\Repositories\CartRepository
-     */
-    protected $cartRepository;
-
-    /**
-     * Cart item repository instance.
-     *
-     * @var \Webkul\Checkout\Repositories\CartItemRepository
-     */
-    protected $cartItemRepository;
-
-    /**
-     * Cart address repository instance.
-     *
-     * @var \Webkul\Checkout\Repositories\CartAddressRepository
-     */
-    protected $cartAddressRepository;
-
-    /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * Tax category repository instance.
-     *
-     * @var \Webkul\Tax\Repositories\TaxCategoryRepository
-     */
-    protected $taxCategoryRepository;
-
-    /**
-     * Wishlist repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\WishlistRepository
-     */
-    protected $wishlistRepository;
-
-    /**
-     * Customer address repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerAddressRepository
-     */
-    protected $customerAddressRepository;
-
-    /**
      * Create a new class instance.
      *
      * @param  \Webkul\Checkout\Repositories\CartRepository             $cartRepository
@@ -87,27 +38,15 @@ class Cart
      * @return void
      */
     public function __construct(
-        CartRepository $cartRepository,
-        CartItemRepository $cartItemRepository,
-        CartAddressRepository $cartAddressRepository,
-        ProductRepository $productRepository,
-        TaxCategoryRepository $taxCategoryRepository,
-        WishlistRepository $wishlistRepository,
-        CustomerAddressRepository $customerAddressRepository
-    ) {
-        $this->cartRepository = $cartRepository;
-
-        $this->cartItemRepository = $cartItemRepository;
-
-        $this->cartAddressRepository = $cartAddressRepository;
-
-        $this->productRepository = $productRepository;
-
-        $this->taxCategoryRepository = $taxCategoryRepository;
-
-        $this->wishlistRepository = $wishlistRepository;
-
-        $this->customerAddressRepository = $customerAddressRepository;
+        protected CartRepository $cartRepository,
+        protected CartItemRepository $cartItemRepository,
+        protected CartAddressRepository $cartAddressRepository,
+        protected ProductRepository $productRepository,
+        protected TaxCategoryRepository $taxCategoryRepository,
+        protected WishlistRepository $wishlistRepository,
+        protected CustomerAddressRepository $customerAddressRepository
+    )
+    {
     }
 
     /**

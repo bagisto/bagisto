@@ -12,21 +12,13 @@ class NewAdminNotification extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The order instance.
-     *
-     * @var \Webkul\Sales\Contracts\Order
-     */
-    public $order;
-
-    /**
      * Create a new message instance.
      * 
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
-    public function __construct($order)
+    public function __construct(public $order)
     {
-        $this->order = $order;
     }
 
     /**

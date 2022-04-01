@@ -9,20 +9,6 @@ use Webkul\Sales\Repositories\OrderRepository;
 class StandardController extends Controller
 {
     /**
-     * OrderRepository $orderRepository
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * IPN $ipnHelper
-     *
-     * @var \Webkul\Paypal\Helpers\Ipn
-     */
-    protected $ipnHelper;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
@@ -30,13 +16,10 @@ class StandardController extends Controller
      * @return void
      */
     public function __construct(
-        OrderRepository $orderRepository,
-        Ipn $ipnHelper
+        protected OrderRepository $orderRepository,
+        protected Ipn $ipnHelper
     )
     {
-        $this->orderRepository = $orderRepository;
-
-        $this->ipnHelper = $ipnHelper;
     }
 
     /**

@@ -12,21 +12,13 @@ class NewInvoiceNotification extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The invoice instance.
-     *
-     * @param  \Webkul\Customer\Contracts\Invoice  $invoice
-     */
-    public $invoice;
-
-    /**
      * Create a new message instance.
      *
      * @param  \Webkul\Customer\Contracts\Invoice  $invoice
      * @return void
      */
-    public function __construct($invoice)
+    public function __construct(public $invoice)
     {
-        $this->invoice = $invoice;
     }
 
     /**

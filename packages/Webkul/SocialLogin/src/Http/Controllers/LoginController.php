@@ -19,24 +19,15 @@ class LoginController extends Controller
      * @var array
      */
     protected $_config;
-
-    /**
-     * CustomerSocialAccountRepository
-     *
-     * @var \Webkul\SocialLogin\Repositories\CustomerSocialAccountRepository
-     */
-    protected $customerSocialAccountRepository;
-
+    
     /**
      * Create a new controller instance.
      *
      * @param  \Webkul\SocialLogin\Repositories\CustomerSocialAccountRepository  $customerSocialAccountRepository
      * @return void
      */
-    public function __construct(CustomerSocialAccountRepository $customerSocialAccountRepository)
+    public function __construct(protected CustomerSocialAccountRepository $customerSocialAccountRepository)
     {
-        $this->customerSocialAccountRepository = $customerSocialAccountRepository;
-
         $this->_config = request('_config');
     }
 

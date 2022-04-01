@@ -23,34 +23,6 @@ class CustomerController extends Controller
     protected $_config;
 
     /**
-     * Customer repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerRepository
-     */
-    protected $customerRepository;
-
-    /**
-     * Customer address repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerAddressRepository
-     */
-    protected $customerAddressRepository;
-
-    /**
-     * Customer group repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
-     */
-    protected $customerGroupRepository;
-
-    /**
-     * Channel repository instance.
-     *
-     * @var \Webkul\Core\Repositories\ChannelRepository
-     */
-    protected $channelRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
@@ -59,20 +31,13 @@ class CustomerController extends Controller
      * @param \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      */
     public function __construct(
-        CustomerRepository $customerRepository,
-        CustomerAddressRepository $customerAddressRepository,
-        CustomerGroupRepository $customerGroupRepository,
-        ChannelRepository $channelRepository
-    ) {
+        protected CustomerRepository $customerRepository,
+        protected CustomerAddressRepository $customerAddressRepository,
+        protected CustomerGroupRepository $customerGroupRepository,
+        protected ChannelRepository $channelRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->customerRepository = $customerRepository;
-
-        $this->customerAddressRepository = $customerAddressRepository;
-
-        $this->customerGroupRepository = $customerGroupRepository;
-
-        $this->channelRepository = $channelRepository;
     }
 
     /**

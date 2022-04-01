@@ -7,21 +7,13 @@ use Webkul\BookingProduct\Repositories\BookingRepository;
 class Order
 {
     /**
-     * BookingRepository Object
-     *
-     * @var \Webkul\BookingProduct\Repositories\BookingRepository
-     */
-    protected $bookingRepository;
-
-    /**
      * Create a new listener instance.
      *
      * @param  \Webkul\Booking\Repositories\BookingRepository  $bookingRepository
      * @return void
      */
-    public function __construct(BookingRepository $bookingRepository)
+    public function __construct(protected BookingRepository $bookingRepository)
     {
-        $this->bookingRepository = $bookingRepository;
     }
 
     /**

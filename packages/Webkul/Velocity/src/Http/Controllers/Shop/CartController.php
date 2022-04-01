@@ -14,7 +14,7 @@ class CartController extends Controller
      * Retrives the mini cart details
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function getMiniCartDetails()
     {
         $cart = cart()->getCart();
@@ -59,7 +59,7 @@ class CartController extends Controller
      * Function for guests user to add the product in the cart.
      *
      * @return array
-    */
+     */
     public function addProductToCart()
     {
         try {
@@ -123,7 +123,7 @@ class CartController extends Controller
      *
      * @param  int  $itemId
      * @return \Illuminate\Http\Response
-    */
+     */
     public function removeProductFromCart($itemId)
     {
         $result = Cart::removeItem($itemId);

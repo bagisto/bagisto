@@ -16,20 +16,6 @@ class RoleController extends Controller
     protected $_config;
 
     /**
-     * Role repository instance.
-     *
-     * @var \Webkul\User\Repositories\RoleRepository
-     */
-    protected $roleRepository;
-
-    /**
-     * Admin repository instance.
-     *
-     * @var \Webkul\User\Repositories\AdminRepository
-     */
-    protected $adminRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\User\Repositories\AdminRepository  $adminRepository
@@ -37,13 +23,10 @@ class RoleController extends Controller
      * @return void
      */
     public function __construct(
-        RoleRepository $roleRepository,
-        AdminRepository $adminRepository
-    ) {
-        $this->roleRepository = $roleRepository;
-
-        $this->adminRepository = $adminRepository;
-
+        protected RoleRepository $roleRepository,
+        protected AdminRepository $adminRepository
+    )
+    {
         $this->_config = request('_config');
     }
 

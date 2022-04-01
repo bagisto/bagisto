@@ -15,29 +15,13 @@ class SliderController extends Controller
     protected $_config;
 
     /**
-     * Slider repository instance.
-     *
-     * @var \Webkul\Core\Repositories\SliderRepository
-     */
-    protected $sliderRepository;
-
-    /**
-     * Channels.
-     *
-     * @var array
-     */
-    protected $channels;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\SliderRepository  $sliderRepository
      * @return void
      */
-    public function __construct(SliderRepository $sliderRepository)
+    public function __construct(protected SliderRepository $sliderRepository)
     {
-        $this->sliderRepository = $sliderRepository;
-
         $this->_config = request('_config');
     }
 

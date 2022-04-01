@@ -9,14 +9,6 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 
 class DownloadableLinkPurchasedRepository extends Repository
 {
-
-    /**
-     * ProductDownloadableLinkRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
-     */
-    protected $productDownloadableLinkRepository;
-
     /**
      * Create a new repository instance.
      *
@@ -24,12 +16,10 @@ class DownloadableLinkPurchasedRepository extends Repository
      * @return void
      */
     public function __construct(
-        ProductDownloadableLinkRepository $productDownloadableLinkRepository,
+        protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         App $app
     )
     {
-        $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
-
         parent::__construct($app);
     }
 

@@ -23,20 +23,6 @@ class InvoiceController extends Controller
     protected $_config;
 
     /**
-     * Order repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * Invoice repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\InvoiceRepository
-     */
-    protected $invoiceRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
@@ -44,14 +30,11 @@ class InvoiceController extends Controller
      * @return void
      */
     public function __construct(
-        OrderRepository $orderRepository,
-        InvoiceRepository $invoiceRepository
-    ) {
+        protected OrderRepository $orderRepository,
+        protected InvoiceRepository $invoiceRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->orderRepository = $orderRepository;
-
-        $this->invoiceRepository = $invoiceRepository;
     }
 
     /**

@@ -17,21 +17,12 @@ class BookingController extends Controller
     protected $_config;
 
     /**
-     * BookingRepository object
-     *
-     * @var \Webkul\BookingProduct\Repositories\BookingRepository
-     */
-    protected $bookingRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(BookingRepository $bookingRepository)
+    public function __construct(protected BookingRepository $bookingRepository)
     {
-        $this->bookingRepository = $bookingRepository;
-
         $this->_config = request('_config');
     }
 

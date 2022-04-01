@@ -22,22 +22,13 @@ class PriceUpdate extends Command
     protected $description = 'Automatically updates product information (eg. min_price and max_price)';
 
     /**
-     * ProductFlatRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductFlatRepository
-    */
-    protected $productFlatRepository;
-
-    /**
      * Create a new command instance.
      *
      * @param  ]Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
      * @return void
      */
-    public function __construct(ProductFlatRepository $productFlatRepository)
+    public function __construct(protected ProductFlatRepository $productFlatRepository)
     {
-        $this->productFlatRepository = $productFlatRepository;
-
         parent::__construct();
     }
 

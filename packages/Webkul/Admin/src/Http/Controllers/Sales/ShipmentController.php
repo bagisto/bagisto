@@ -18,27 +18,6 @@ class ShipmentController extends Controller
     protected $_config;
 
     /**
-     * Order repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * Order item repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderItemRepository
-     */
-    protected $orderItemRepository;
-
-    /**
-     * Shipment repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\ShipmentRepository
-     */
-    protected $shipmentRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Sales\Repositories\ShipmentRepository   $shipmentRepository
@@ -47,17 +26,12 @@ class ShipmentController extends Controller
      * @return void
      */
     public function __construct(
-        ShipmentRepository $shipmentRepository,
-        OrderRepository $orderRepository,
-        OrderItemRepository $orderItemRepository
-    ) {
+        protected ShipmentRepository $shipmentRepository,
+        protected OrderRepository $orderRepository,
+        protected OrderItemRepository $orderItemRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->orderRepository = $orderRepository;
-
-        $this->orderItemRepository = $orderItemRepository;
-
-        $this->shipmentRepository = $shipmentRepository;
     }
 
     /**

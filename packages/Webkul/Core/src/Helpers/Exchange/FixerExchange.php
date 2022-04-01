@@ -23,20 +23,6 @@ class FixerExchange extends ExchangeRate
     protected $apiEndPoint;
 
     /**
-     * Holds CurrencyRepository instance
-     * 
-     * @var \Webkul\Core\Repositories\CurrencyRepository
-     */
-    protected $currencyRepository;
-
-    /**
-     * Holds ExchangeRateRepository instance
-     * 
-     * @var \Webkul\Core\Repositories\ExchangeRateRepository
-     */
-    protected $exchangeRateRepository;
-
-    /**
      * Create a new helper instance.
      *
      * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
@@ -44,14 +30,10 @@ class FixerExchange extends ExchangeRate
      * @return void
      */
     public function  __construct(
-        CurrencyRepository $currencyRepository,
-        ExchangeRateRepository $exchangeRateRepository
+        protected CurrencyRepository $currencyRepository,
+        protected ExchangeRateRepository $exchangeRateRepository
     )
     {
-        $this->currencyRepository = $currencyRepository;
-
-        $this->exchangeRateRepository = $exchangeRateRepository;
-
         $this->apiEndPoint = 'http://data.fixer.io/api';
 
         $this->apiKey = config('services.exchange-api')['fixer']['key'];

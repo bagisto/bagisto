@@ -16,20 +16,6 @@ class AttributeFamilyController extends Controller
     protected $_config;
 
     /**
-     * Attribute family repository instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
-     */
-    protected $attributeFamilyRepository;
-
-    /**
-     * Attribute repository instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
@@ -37,13 +23,10 @@ class AttributeFamilyController extends Controller
      * @return void
      */
     public function __construct(
-        AttributeFamilyRepository $attributeFamilyRepository,
-        AttributeRepository $attributeRepository
-    ) {
-        $this->attributeFamilyRepository = $attributeFamilyRepository;
-
-        $this->attributeRepository = $attributeRepository;
-
+        protected AttributeFamilyRepository $attributeFamilyRepository,
+        protected AttributeRepository $attributeRepository
+    )
+    {
         $this->_config = request('_config');
     }
 

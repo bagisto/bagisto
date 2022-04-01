@@ -24,20 +24,6 @@ class WishlistController extends Controller
     protected $currentCustomer;
 
     /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\WishlistRepository
-     */
-    protected $wishlistRepository;
-
-    /**
-     * Wishlist repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository
@@ -45,14 +31,11 @@ class WishlistController extends Controller
      * @return void
      */
     public function __construct(
-        WishlistRepository $wishlistRepository,
-        ProductRepository $productRepository
-    ) {
+        protected WishlistRepository $wishlistRepository,
+        protected ProductRepository $productRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->wishlistRepository = $wishlistRepository;
-
-        $this->productRepository = $productRepository;
 
         $this->currentCustomer = auth()->guard('customer')->user();
     }

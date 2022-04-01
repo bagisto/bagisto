@@ -15,86 +15,25 @@ use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 class Helper extends Review
 {
     /**
-     * Product model instance.
-     *
-     * @var \Webkul\Product\Contracts\Product
-     */
-    protected $productModel;
-
-    /**
-     * Order brands instance.
-     *
-     * @var \Webkul\Velocity\Repositories\OrderBrandsRepository
-     */
-    protected $orderBrandsRepository;
-
-    /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * Product flat repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductFlatRepository
-     */
-    protected $productFlatRepository;
-
-    /**
-     * Attribute option instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
-     */
-    protected $attributeOptionRepository;
-
-    /**
-     * Product review repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductReviewRepository
-     */
-    protected $productReviewRepository;
-
-    /**
-     * Velocity metadata instance.
-     *
-     * @var \Webkul\Velocity\Repositories\VelocityMetadataRepository
-     */
-    protected $velocityMetadataRepository;
-
-    /**
      * Create a helper instance.
      *
-     * @param  \Webkul\Product\Contracts\Product                        $productModel
-     * @param  \Webkul\Velocity\Repositories\OrderBrandsRepository      $orderBrands
-     * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository $attributeOptionRepository
-     * @param  \Webkul\Product\Repositories\ProductReviewRepository     $productReviewRepository
-     * @param  \Webkul\Velocity\Repositories\VelocityMetadataRepository $velocityMetadataRepository
+     * @param  \Webkul\Product\Contracts\Product  $productModel
+     * @param  \Webkul\Velocity\Repositories\OrderBrandsRepository  $orderBrands
+     * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
+     * @param  \Webkul\Velocity\Repositories\VelocityMetadataRepository  $velocityMetadataRepository
      * @return void
      */
     public function __construct(
-        ProductModel $productModel,
-        ProductRepository $productRepository,
-        AttributeOptionRepository $attributeOptionRepository,
-        ProductFlatRepository $productFlatRepository,
-        OrderBrandsRepository $orderBrandsRepository,
-        ProductReviewRepository $productReviewRepository,
-        VelocityMetadataRepository $velocityMetadataRepository
-    ) {
-        $this->productModel = $productModel;
-
-        $this->attributeOptionRepository = $attributeOptionRepository;
-
-        $this->productRepository = $productRepository;
-
-        $this->productFlatRepository = $productFlatRepository;
-
-        $this->orderBrandsRepository = $orderBrandsRepository;
-
-        $this->productReviewRepository = $productReviewRepository;
-
-        $this->velocityMetadataRepository = $velocityMetadataRepository;
+        protected ProductModel $productModel,
+        protected ProductRepository $productRepository,
+        protected AttributeOptionRepository $attributeOptionRepository,
+        protected ProductFlatRepository $productFlatRepository,
+        protected OrderBrandsRepository $orderBrandsRepository,
+        protected ProductReviewRepository $productReviewRepository,
+        protected VelocityMetadataRepository $velocityMetadataRepository
+    )
+    {
     }
 
     /**

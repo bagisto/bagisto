@@ -16,48 +16,6 @@ use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
 class CartRule
 {
     /**
-     * CartRuleRepository object
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleRepository
-     */
-    protected $cartRuleRepository;
-
-    /**
-     * CartRuleCouponRepository object
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
-     */
-    protected $cartRuleCouponRepository;
-
-    /**
-     * CartRuleCouponUsageRepository object
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository
-     */
-    protected $cartRuleCouponUsageRepository;
-
-    /**
-     * CartRuleCustomerRepository object
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleCustomerRepository
-     */
-    protected $cartRuleCustomerRepository;
-
-    /**
-     * CustomerGroupRepository object
-     *
-     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
-     */
-    protected $customerGroupRepository;
-
-    /**
-     * Validator object
-     *
-     * @var \Webkul\Rule\Helpers\Validator
-     */
-    protected $validator;
-
-    /**
      * @var array
      */
     protected $itemTotals = [];
@@ -75,25 +33,14 @@ class CartRule
      * @return void
      */
     public function __construct(
-        CartRuleRepository $cartRuleRepository,
-        CartRuleCouponRepository $cartRuleCouponRepository,
-        CartRuleCouponUsageRepository $cartRuleCouponUsageRepository,
-        CartRuleCustomerRepository $cartRuleCustomerRepository,
-        CustomerGroupRepository $customerGroupRepository,
-        Validator $validator
+        protected CartRuleRepository $cartRuleRepository,
+        protected CartRuleCouponRepository $cartRuleCouponRepository,
+        protected CartRuleCouponUsageRepository $cartRuleCouponUsageRepository,
+        protected CartRuleCustomerRepository $cartRuleCustomerRepository,
+        protected CustomerGroupRepository $customerGroupRepository,
+        protected Validator $validator
     )
     {
-        $this->cartRuleRepository = $cartRuleRepository;
-
-        $this->cartRuleCouponRepository = $cartRuleCouponRepository;
-
-        $this->cartRuleCouponUsageRepository = $cartRuleCouponUsageRepository;
-
-        $this->cartRuleCustomerRepository = $cartRuleCustomerRepository;
-
-        $this->customerGroupRepository = $customerGroupRepository;
-
-        $this->validator = $validator;
     }
 
     /**

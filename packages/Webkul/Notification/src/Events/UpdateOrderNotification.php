@@ -12,16 +12,13 @@ class UpdateOrderNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    protected $data;
-
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct(protected $data)
     {
-        $this->data = $data;
     }
 
     /**

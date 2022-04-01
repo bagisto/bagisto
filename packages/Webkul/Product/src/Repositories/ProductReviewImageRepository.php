@@ -15,7 +15,8 @@ class ProductReviewImageRepository extends Repository
      *
      * @return void
      */
-    public function __construct(App $app) {
+    public function __construct(App $app)
+    {
         parent::__construct($app);
     }
 

@@ -21,27 +21,6 @@ class CustomerController extends Controller
     protected $_config;
 
     /**
-     * Customer repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerRepository
-     */
-    protected $customerRepository;
-
-    /**
-     * Product review repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\ProductReviewRepository
-     */
-    protected $productReviewRepository;
-
-    /**
-     * Subscribers list repository instance.
-     *
-     * @var \Webkul\Core\Repositories\SubscribersListRepository
-     */
-    protected $subscriptionRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
@@ -50,17 +29,12 @@ class CustomerController extends Controller
      * @return void
      */
     public function __construct(
-        CustomerRepository $customerRepository,
-        ProductReviewRepository $productReviewRepository,
-        SubscribersListRepository $subscriptionRepository
-    ) {
+        protected CustomerRepository $customerRepository,
+        protected ProductReviewRepository $productReviewRepository,
+        protected SubscribersListRepository $subscriptionRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->customerRepository = $customerRepository;
-
-        $this->productReviewRepository = $productReviewRepository;
-
-        $this->subscriptionRepository = $subscriptionRepository;
     }
 
     /**

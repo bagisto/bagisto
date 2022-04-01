@@ -15,22 +15,13 @@ class ChannelController extends Controller
     protected $_config;
 
     /**
-     * Channel repository instance.
-     *
-     * @var \Webkul\Core\Repositories\ChannelRepository
-     */
-    protected $channelRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @return void
      */
-    public function __construct(ChannelRepository $channelRepository)
+    public function __construct(protected ChannelRepository $channelRepository)
     {
-        $this->channelRepository = $channelRepository;
-
         $this->_config = request('_config');
     }
 

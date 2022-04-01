@@ -11,13 +11,6 @@ class ContentRepository extends Repository
 {
     use CacheableRepository;
 
-   /**
-    * Product Repository object
-    *
-    * @var \Webkul\Product\Repositories\ProductRepository
-    */
-    protected $productRepository;
-
     /**
      * Create a new controller instance.
      *
@@ -26,12 +19,10 @@ class ContentRepository extends Repository
      * @return void
      */
     public function __construct(
-        ProductRepository $productRepository,
+        protected ProductRepository $productRepository,
         App $app
     )
     {
-        $this->productRepository = $productRepository;
-
         parent::__construct($app);
     }
 

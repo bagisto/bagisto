@@ -17,20 +17,6 @@ class CatalogRuleController extends Controller
     protected $_config;
 
     /**
-     * To hold catalog repository instance.
-     *
-     * @var \Webkul\CatalogRule\Repositories\CatalogRuleRepository
-     */
-    protected $catalogRuleRepository;
-
-    /**
-     * Catalog rule index.
-     *
-     * @var \Webkul\CatalogRule\Helpers\CatalogRuleIndex
-     */
-    protected $catalogRuleIndexHelper;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\CatalogRule\Repositories\CatalogRuleRepository  $catalogRuleRepository
@@ -38,14 +24,11 @@ class CatalogRuleController extends Controller
      * @return void
      */
     public function __construct(
-        CatalogRuleRepository $catalogRuleRepository,
-        CatalogRuleIndex $catalogRuleIndexHelper
-    ) {
+        protected CatalogRuleRepository $catalogRuleRepository,
+        protected CatalogRuleIndex $catalogRuleIndexHelper
+    )
+    {
         $this->_config = request('_config');
-
-        $this->catalogRuleRepository = $catalogRuleRepository;
-
-        $this->catalogRuleIndexHelper = $catalogRuleIndexHelper;
     }
 
     /**

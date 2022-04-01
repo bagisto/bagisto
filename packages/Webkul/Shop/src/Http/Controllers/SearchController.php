@@ -4,25 +4,16 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Product\Repositories\SearchRepository;
 
- class SearchController extends Controller
+class SearchController extends Controller
 {
-    /**
-     * SearchRepository object
-     *
-     * @var \Webkul\Product\Repositories\SearchRepository
-    */
-    protected $searchRepository;
-
     /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
      * @return void
-    */
-    public function __construct(SearchRepository $searchRepository)
+     */
+    public function __construct(protected SearchRepository $searchRepository)
     {
-        $this->searchRepository = $searchRepository;
-
         parent::__construct();
     }
 

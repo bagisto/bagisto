@@ -14,13 +14,6 @@ use Webkul\Product\Repositories\ProductVideoRepository;
 class Grouped extends AbstractType
 {
     /**
-     * Product grouped product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductGroupedProductRepository
-     */
-    protected $productGroupedProductRepository;
-
-    /**
      * Skip attribute for downloadable product type.
      *
      * @var array
@@ -51,13 +44,13 @@ class Grouped extends AbstractType
     /**
      * Create a new product type instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository            $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository                $productRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository       $productInventoryRepository
-     * @param  \Webkul\Product\Repositories\ProductImageRepository           $productImageRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
-     * @param  \Webkul\Product\Repositories\ProductVideoRepository           $productVideoRepository
+     * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @return void
      */
     public function __construct(
@@ -66,9 +59,10 @@ class Grouped extends AbstractType
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
-        ProductGroupedProductRepository $productGroupedProductRepository,
-        ProductVideoRepository $productVideoRepository
-    ) {
+        ProductVideoRepository $productVideoRepository,
+        protected ProductGroupedProductRepository $productGroupedProductRepository
+    )
+    {
         parent::__construct(
             $attributeRepository,
             $productRepository,
@@ -77,8 +71,6 @@ class Grouped extends AbstractType
             $productImageRepository,
             $productVideoRepository
         );
-
-        $this->productGroupedProductRepository = $productGroupedProductRepository;
     }
 
     /**

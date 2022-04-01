@@ -12,20 +12,6 @@ use Webkul\Product\Repositories\ProductRepository;
 class CartController extends Controller
 {
     /**
-     * Wishlist repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\WishlistRepository
-     */
-    protected $wishlistRepository;
-
-    /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CartItemRepository  $wishlistRepository
@@ -33,16 +19,13 @@ class CartController extends Controller
      * @return void
      */
     public function __construct(
-        WishlistRepository $wishlistRepository,
-        ProductRepository $productRepository
-    ) {
+        protected WishlistRepository $wishlistRepository,
+        protected ProductRepository $productRepository
+    )
+    {
         $this->middleware('throttle:5,1')->only('applyCoupon');
 
         $this->middleware('customer')->only('moveToWishlist');
-
-        $this->wishlistRepository = $wishlistRepository;
-
-        $this->productRepository = $productRepository;
 
         parent::__construct();
     }

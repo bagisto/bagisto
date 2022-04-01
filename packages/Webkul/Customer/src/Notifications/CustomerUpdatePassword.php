@@ -11,21 +11,13 @@ class CustomerUpdatePassword extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The customer instance.
-     *
-     * @var  \Webkul\Customer\Models\Customer  $customer
-     */
-    public $customer;
-
-    /**
      * Create a new message instance.
      *
      * @param  \Webkul\Customer\Models\Customer  $customer
      * @return void
      */
-    public function __construct($customer)
+    public function __construct(public $customer)
     {
-        $this->customer = $customer;
     }
 
     /**

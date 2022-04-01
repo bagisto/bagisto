@@ -10,34 +10,6 @@ use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
 class Order
 {
     /**
-     * CartRuleRepository object
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleRepository
-     */
-    protected $cartRuleRepository;
-
-    /**
-     * CartRuleCustomerRepository object
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleCustomerRepository
-     */
-    protected $cartRuleCustomerRepository;
-
-    /**
-     * CartRuleCouponRepository object
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
-     */
-    protected $cartRuleCouponRepository;
-
-    /**
-     * CartRuleCouponUsageRepository object
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository
-     */
-    protected $cartRuleCouponUsageRepository;
-
-    /**
      * Create a new listener instance.
      *
      * @param  \Webkul\CartRule\Repositories\CartRuleRepository  $cartRuleRepository
@@ -47,19 +19,12 @@ class Order
      * @return void
      */
     public function __construct(
-        CartRuleRepository $cartRuleRepository,
-        CartRuleCustomerRepository $cartRuleCustomerRepository,
-        CartRuleCouponRepository $cartRuleCouponRepository,
-        CartRuleCouponUsageRepository $cartRuleCouponUsageRepository
+        protected CartRuleRepository $cartRuleRepository,
+        protected CartRuleCustomerRepository $cartRuleCustomerRepository,
+        protected CartRuleCouponRepository $cartRuleCouponRepository,
+        protected CartRuleCouponUsageRepository $cartRuleCouponUsageRepository
     )
     {
-        $this->cartRuleRepository = $cartRuleRepository;
-
-        $this->cartRuleCustomerRepository = $cartRuleCustomerRepository;
-
-        $this->cartRuleCouponRepository = $cartRuleCouponRepository;
-
-        $this->cartRuleCouponUsageRepository = $cartRuleCouponUsageRepository;
     }
 
     /**

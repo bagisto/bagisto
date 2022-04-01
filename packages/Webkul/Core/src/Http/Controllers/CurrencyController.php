@@ -15,22 +15,13 @@ class CurrencyController extends Controller
     protected $_config;
 
     /**
-     * Currency repository instance.
-     *
-     * @var \Webkul\Core\Repositories\CurrencyRepository
-     */
-    protected $currencyRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @return void
      */
-    public function __construct(CurrencyRepository $currencyRepository)
+    public function __construct(protected CurrencyRepository $currencyRepository)
     {
-        $this->currencyRepository = $currencyRepository;
-
         $this->_config = request('_config');
     }
 

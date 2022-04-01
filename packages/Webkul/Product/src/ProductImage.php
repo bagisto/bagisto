@@ -9,22 +9,13 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductImage extends AbstractProduct
 {
     /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
      * Create a new helper instance.
      *
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
-    public function __construct(
-        ProductRepository $productRepository
-    ) {
-        $this->productRepository = $productRepository;
+    public function __construct(protected ProductRepository $productRepository)
+    {
     }
 
     /**

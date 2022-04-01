@@ -9,27 +9,6 @@ use Webkul\Product\Repositories\ProductReviewImageRepository;
 class ReviewController extends Controller
 {
     /**
-     * ProductRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * ProductReviewRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductReviewRepository
-     */
-    protected $productReviewRepository;
-
-    /**
-     * ProductReviewImageRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductReviewImageRepository
-     */
-    protected $productReviewImageRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
@@ -38,16 +17,11 @@ class ReviewController extends Controller
      * @return void
      */
     public function __construct(
-        ProductRepository $productRepository,
-        ProductReviewRepository $productReviewRepository,
-        ProductReviewImageRepository $productReviewImageRepository
-    ) {
-        $this->productRepository = $productRepository;
-
-        $this->productReviewRepository = $productReviewRepository;
-
-        $this->productReviewImageRepository = $productReviewImageRepository;
-
+        protected ProductRepository $productRepository,
+        protected ProductReviewRepository $productReviewRepository,
+        protected ProductReviewImageRepository $productReviewImageRepository
+    )
+    {
         parent::__construct();
     }
 

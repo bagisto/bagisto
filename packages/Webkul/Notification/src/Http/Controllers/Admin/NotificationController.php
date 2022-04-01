@@ -15,21 +15,12 @@ class NotificationController extends Controller
     protected $_config;
 
     /**
-     * Notification repository instance.
-     *
-     * @var object
-     */
-    protected $notificationRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(NotificationRepository $notificationRepository)
+    public function __construct(protected NotificationRepository $notificationRepository)
     {
-        $this->notificationRepository = $notificationRepository;
-
         $this->_config = request('_config');
     }
 
