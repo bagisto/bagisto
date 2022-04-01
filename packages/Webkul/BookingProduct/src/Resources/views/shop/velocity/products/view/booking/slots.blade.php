@@ -4,7 +4,7 @@
     <script type="text/x-template" id="book-slots-template">
 
         <div class="book-slots">
-            <label>{{ $title ?? __('bookingproduct::app.shop.products.book-an-appointment') }} :</label>
+            <label class="label-style">{{ $title ?? __('bookingproduct::app.shop.products.book-an-appointment') }} :</label>
 
             <div class="control-group-container">
                 <div class="form-group date" :class="[errors.has('booking[date]') ? 'has-error' : '']">

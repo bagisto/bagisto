@@ -1,8 +1,6 @@
 @import "icons";
 
 .booking-information {
-    margin-bottom: 15px;
-
     .booking-info-row {
         padding-left: 32px;
         margin-bottom: 20px;
@@ -109,6 +107,10 @@
 
             .radio {
                 display: inline-block;
+            }
+
+            .control-error {
+                float: left;
             }
         }
 

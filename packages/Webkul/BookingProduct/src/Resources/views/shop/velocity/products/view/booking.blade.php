@@ -6,7 +6,18 @@
             <link rel="stylesheet" href="{{ bagisto_asset('css/velocity-booking.css') }}">
         @endpush
 
-        <booking-information></booking-information>        
+        <accordian :title="'{{ __('bookingproduct::app.shop.products.booking-information') }}'" :active="true">
+            <div slot="header">
+                <h3 class="no-margin display-inbl">
+                    {{ __('bookingproduct::app.shop.products.booking-information') }}
+                </h3>
+                <i class="rango-arrow"></i>
+            </div>
+
+            <div slot="body">
+                <booking-information></booking-information>        
+            </div>
+        </accordian>
 
         @push('scripts')
 
