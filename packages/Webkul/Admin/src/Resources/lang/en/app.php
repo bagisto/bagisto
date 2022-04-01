@@ -81,6 +81,7 @@ return [
         'campaigns'                => 'Campaigns',
         'email-templates'          => 'Email Templates',
         'events'                   => 'Events',
+        'sitemaps'                 => 'Sitemaps',
         'discount'                 => 'Discount',
         'cms'                      => 'CMS',
         'transactions'             => 'Transactions',
@@ -135,6 +136,7 @@ return [
         'campaigns'                => 'Campaigns',
         'subscribers'              => 'Newsletter Subscribers',
         'events'                   => 'Events',
+        'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
     ],
 
@@ -257,6 +259,9 @@ return [
         'date'             => 'Date',
         'transaction-id'   => 'Transaction ID',
         'transaction-date' => 'Transaction Date',
+        'file-name'        => 'File Name',
+        'path'             => 'Path',
+        'link-for-google'  => 'Link For Google',
     ],
 
     'account' => [
@@ -1291,6 +1296,21 @@ return [
             'delete-success' => 'Event deleted successfully.',
             'edit-error'     => 'Can not edit this event.',
         ],
+
+        'sitemaps' => [
+            'title'          => 'Sitemaps',
+            'add-title'      => 'Add Sitemap',
+            'edit-title'     => 'Edit Sitemap',
+            'save-btn-title' => 'Save',
+            'general'        => 'General',
+            'file-name'      => 'File Name',
+            'file-name-info' => 'Example: sitemap.xml',
+            'path'           => 'Path',
+            'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+            'create-success' => 'Sitemap created successfully.',
+            'update-success' => 'Sitemap updated successfully.',
+            'delete-success' => 'Sitemap deleted successfully.',
+        ]
     ],
 
     'error' => [

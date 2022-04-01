@@ -80,6 +80,8 @@ return [
         'email-marketing'          => 'التسويق عبر البريد الإلكتروني',
         'campaigns'                => 'الحملات',
         'email-templates'          => 'قوالب البريد الإلكتروني',
+        'events'                   => 'Events',
+        'sitemaps'                 => 'Sitemaps',
         'discount'                 => 'خصم',
         'cms'                      => 'CMS',
         'transactions'             => 'المعاملات',
@@ -130,6 +132,13 @@ return [
         'promotions'               => 'الترقيات',
         'cart-rules'               => 'قواعد سلة التسوق',
         'catalog-rules'            => 'قواعد الكتالوج',
+        'email-marketing'          => 'Email Marketing',
+        'email-templates'          => 'Email Templates',
+        'campaigns'                => 'Campaigns',
+        'subscribers'              => 'Newsletter Subscribers',
+        'events'                   => 'Events',
+        'sitemaps'                 => 'Sitemaps',
+        'newsletter-subscriptions' => 'Newsletter Subscriptions',
     ],
 
     'dashboard' => [
@@ -248,6 +257,9 @@ return [
         'update-status'    => 'تحديث الحالة',
         'transaction-id'   => 'Transaction Id',
         'transaction-date' => 'Transaction Date',
+        'file-name'        => 'File Name',
+        'path'             => 'Path',
+        'link-for-google'  => 'Link For Google',
     ],
 
     'account' => [
@@ -1269,6 +1281,21 @@ return [
             'delete-success' => 'تم حذف الحدث بنجاح.',
             'edit-error'     => 'لا يمكن تعديل هذا الحدث.',
         ],
+
+        'sitemaps' => [
+            'title'          => 'Sitemaps',
+            'add-title'      => 'Add Sitemap',
+            'edit-title'     => 'Edit Sitemap',
+            'save-btn-title' => 'Save',
+            'general'        => 'General',
+            'file-name'      => 'File Name',
+            'file-name-info' => 'Example: sitemap.xml',
+            'path'           => 'Path',
+            'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+            'create-success' => 'Sitemap created successfully.',
+            'update-success' => 'Sitemap updated successfully.',
+            'delete-success' => 'Sitemap deleted successfully.',
+        ]
     ],
 
     'error' => [

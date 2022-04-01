@@ -81,6 +81,7 @@ return [
         'campaigns'                => 'अभियान',
         'email-templates'          => 'ईमेल टेम्प्लेट',
         'events'                   => 'आयोजन',
+        'sitemaps'                 => 'Sitemaps',
         'discount'                 => 'छूट',
         'cms'                      => 'सीएमएस',
         'transactions'             => 'लेनदेन',
@@ -135,6 +136,7 @@ return [
         'campaigns'                => 'अभियान',
         'subscribers'              => 'न्यूज़लेटर सब्सक्राइबर्स',
         'events'                   => 'आयोजन',
+        'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'न्यूज़लेटर सदस्यता',
     ],
 
@@ -257,6 +259,9 @@ return [
         'date'             => 'तारीख',
         'transaction-id'   => 'लेनदेन आईडी',
         'transaction-date' => 'कार्यवाही की तिथि',
+        'file-name'        => 'File Name',
+        'path'             => 'Path',
+        'link-for-google'  => 'Link For Google',
     ],
 
     'account' => [
@@ -1291,6 +1296,21 @@ return [
             'delete-success' => 'ईवेंट सफलतापूर्वक हटाया गया।',
             'edit-error'     => 'इस घटना को संपादित नहीं कर सकता।',
         ],
+
+        'sitemaps' => [
+            'title'          => 'Sitemaps',
+            'add-title'      => 'Add Sitemap',
+            'edit-title'     => 'Edit Sitemap',
+            'save-btn-title' => 'Save',
+            'general'        => 'General',
+            'file-name'      => 'File Name',
+            'file-name-info' => 'Example: sitemap.xml',
+            'path'           => 'Path',
+            'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+            'create-success' => 'Sitemap created successfully.',
+            'update-success' => 'Sitemap updated successfully.',
+            'delete-success' => 'Sitemap deleted successfully.',
+        ]
     ],
 
     'error' => [

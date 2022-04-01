@@ -8,6 +8,7 @@ use Webkul\Core\Http\Controllers\SubscriptionController;
 use Webkul\Marketing\Http\Controllers\CampaignController;
 use Webkul\Marketing\Http\Controllers\EventController;
 use Webkul\Marketing\Http\Controllers\TemplateController;
+use Webkul\Sitemap\Http\Controllers\Admin\SitemapController;
 
 /**
  * Marketing routes.
@@ -171,5 +172,31 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
         Route::put('subscribers/update/{id}', [SubscriptionController::class, 'update'])->defaults('_config', [
             'redirect' => 'admin.customers.subscribers.index',
         ])->name('admin.customers.subscribers.update');
+
+
+        /**
+         * Cart rules routes.
+         */
+        Route::get('sitemaps', [SitemapController::class, 'index'])->defaults('_config', [
+            'view' => 'admin::marketing.sitemaps.index',
+        ])->name('admin.sitemaps.index');
+
+        Route::get('sitemaps/create', [SitemapController::class, 'create'])->defaults('_config', [
+            'view' => 'admin::marketing.sitemaps.create',
+        ])->name('admin.sitemaps.create');
+
+        Route::post('sitemaps/create', [SitemapController::class, 'store'])->defaults('_config', [
+            'redirect' => 'admin.sitemaps.index',
+        ])->name('admin.sitemaps.store');
+
+        Route::get('sitemaps/edit/{id}', [SitemapController::class, 'edit'])->defaults('_config', [
+            'view' => 'admin::marketing.sitemaps.edit',
+        ])->name('admin.sitemaps.edit');
+
+        Route::put('sitemaps/edit/{id}', [SitemapController::class, 'update'])->defaults('_config', [
+            'redirect' => 'admin.sitemaps.index',
+        ])->name('admin.sitemaps.update');
+
+        Route::post('sitemaps/delete/{id}', [SitemapController::class, 'destroy'])->name('admin.sitemaps.delete');
     });
 });

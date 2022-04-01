@@ -349,7 +349,7 @@ return [
         'key'   => 'marketing.promotions',
         'name'  => 'admin::app.acl.promotions',
         'route' => 'admin.cart-rules.index',
-        'sort'  => 6,
+        'sort'  => 1,
     ], [
         'key'   => 'marketing.promotions.cart-rules',
         'name'  => 'admin::app.acl.cart-rules',
@@ -399,7 +399,7 @@ return [
         'key'   => 'marketing.email-marketing',
         'name'  => 'admin::app.acl.email-marketing',
         'route' => 'admin.email-templates.index',
-        'sort'  => 7,
+        'sort'  => 2,
     ], [
         'key'   => 'marketing.email-marketing.email-templates',
         'name'  => 'admin::app.acl.email-templates',
@@ -409,22 +409,22 @@ return [
         'key'   => 'marketing.email-marketing.email-templates.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.email-templates.create',
-        'sort'  => 1,
+        'sort'  => 2,
     ], [
         'key'   => 'marketing.email-marketing.email-templates.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.email-templates.edit',
-        'sort'  => 2,
+        'sort'  => 3,
     ], [
         'key'   => 'marketing.email-marketing.email-templates.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.email-templates.delete',
-        'sort'  => 3,
+        'sort'  => 4,
     ], [
         'key'   => 'marketing.email-marketing.events',
         'name'  => 'admin::app.acl.events',
         'route' => 'admin.events.index',
-        'sort'  => 1,
+        'sort'  => 2,
     ], [
         'key'   => 'marketing.email-marketing.events.create',
         'name'  => 'admin::app.acl.create',
@@ -444,7 +444,7 @@ return [
         'key'   => 'marketing.email-marketing.campaigns',
         'name'  => 'admin::app.acl.campaigns',
         'route' => 'admin.campaigns.index',
-        'sort'  => 1,
+        'sort'  => 3,
     ], [
         'key'   => 'marketing.email-marketing.campaigns.create',
         'name'  => 'admin::app.acl.create',
@@ -464,16 +464,36 @@ return [
         'key'   => 'marketing.email-marketing.subscribers',
         'name'  => 'admin::app.acl.subscribers',
         'route' => 'admin.customers.subscribers.index',
-        'sort'  => 1,
+        'sort'  => 4,
     ], [
         'key'   => 'marketing.email-marketing.subscribers.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.customers.subscribers.edit',
-        'sort'  => 2,
+        'sort'  => 1,
     ], [
         'key'   => 'marketing.email-marketing.subscribers.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.customers.subscribers.delete',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.sitemaps',
+        'name'  => 'admin::app.acl.sitemaps',
+        'route' => 'admin.sitemaps.index',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.sitemaps.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.sitemaps.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.sitemaps.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.sitemaps.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.sitemaps.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.sitemaps.delete',
         'sort'  => 3,
     ],
 
