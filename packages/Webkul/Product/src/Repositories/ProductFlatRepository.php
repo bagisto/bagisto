@@ -16,11 +16,10 @@ class ProductFlatRepository extends Repository
      * @return void
      */
     public function __construct(
-        AttributeRepository $attributeRepository,
+        protected AttributeRepository $attributeRepository,
         App $app
-    ) {
-        $this->attributeRepository = $attributeRepository;
-
+    )
+    {
         parent::__construct($app);
     }
 

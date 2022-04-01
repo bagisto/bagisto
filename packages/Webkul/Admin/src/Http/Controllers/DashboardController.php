@@ -20,41 +20,6 @@ class DashboardController extends Controller
     protected $_config;
 
     /**
-     * Order repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * Order item repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderItemRepository
-     */
-    protected $orderItemRepository;
-
-    /**
-     * Invoice repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\InvoiceRepository
-     */
-    protected $invoiceRepository;
-
-    /**
-     * Customer repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerRepository
-     */
-    protected $customerRepository;
-
-    /**
-     * Product inventory repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductInventoryRepository
-     */
-    protected $productInventoryRepository;
-
-    /**
      * Start date.
      *
      * @var \Illuminate\Support\Carbon
@@ -92,23 +57,14 @@ class DashboardController extends Controller
      * @return void
      */
     public function __construct(
-        OrderRepository $orderRepository,
-        OrderItemRepository $orderItemRepository,
-        InvoiceRepository $invoiceRepository,
-        CustomerRepository $customerRepository,
-        ProductInventoryRepository $productInventoryRepository
-    ) {
+        protected OrderRepository $orderRepository,
+        protected OrderItemRepository $orderItemRepository,
+        protected InvoiceRepository $invoiceRepository,
+        protected CustomerRepository $customerRepository,
+        protected ProductInventoryRepository $productInventoryRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->orderRepository = $orderRepository;
-
-        $this->orderItemRepository = $orderItemRepository;
-
-        $this->invoiceRepository = $invoiceRepository;
-
-        $this->customerRepository = $customerRepository;
-
-        $this->productInventoryRepository = $productInventoryRepository;
     }
 
     /**

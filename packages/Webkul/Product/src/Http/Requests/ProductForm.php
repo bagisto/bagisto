@@ -13,20 +13,6 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductForm extends FormRequest
 {
     /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * Product attribute value repository instnace.
-     *
-     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
-     */
-    protected $productAttributeValueRepository;
-
-    /**
      * Rules.
      *
      * @var array
@@ -37,16 +23,14 @@ class ProductForm extends FormRequest
      * Create a new form request instance.
      *
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository $productAttributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
      * @return void
      */
     public function __construct(
-        ProductRepository $productRepository,
-        ProductAttributeValueRepository $productAttributeValueRepository
-    ) {
-        $this->productRepository = $productRepository;
-
-        $this->productAttributeValueRepository = $productAttributeValueRepository;
+        protected ProductRepository $productRepository,
+        protected ProductAttributeValueRepository $productAttributeValueRepository
+    )
+    {
     }
 
     /**

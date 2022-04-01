@@ -20,20 +20,6 @@ class UserController extends Controller
     protected $_config;
 
     /**
-     * Admin repository instance.
-     *
-     * @var \Webkul\User\Repositories\AdminRepository
-     */
-    protected $adminRepository;
-
-    /**
-     * Role repository instance.
-     *
-     * @var \Webkul\User\Repositories\RoleRepository
-     */
-    protected $roleRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\User\Repositories\AdminRepository  $adminRepository
@@ -41,13 +27,10 @@ class UserController extends Controller
      * @return void
      */
     public function __construct(
-        AdminRepository $adminRepository,
-        RoleRepository $roleRepository
-    ) {
-        $this->adminRepository = $adminRepository;
-
-        $this->roleRepository = $roleRepository;
-
+        protected AdminRepository $adminRepository,
+        protected RoleRepository $roleRepository
+    )
+    {
         $this->_config = request('_config');
     }
 

@@ -19,24 +19,14 @@ class CartRuleController extends Controller
     protected $_config;
 
     /**
-     * To hold cart repository instance.
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleRepository
-     */
-    protected $cartRuleRepository;
-
-    /**
      * Create a new controller instance.
      *
-     * @param \Webkul\CartRule\Repositories\CartRuleRepository       $cartRuleRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleRepository  $cartRuleRepository
      * @return void
      */
-    public function __construct(
-        CartRuleRepository $cartRuleRepository
-    ) {
+    public function __construct(protected CartRuleRepository $cartRuleRepository)
+    {
         $this->_config = request('_config');
-
-        $this->cartRuleRepository = $cartRuleRepository;
     }
 
     /**

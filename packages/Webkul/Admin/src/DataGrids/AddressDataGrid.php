@@ -24,22 +24,13 @@ class AddressDataGrid extends DataGrid
     protected $sortOrder = 'desc';
 
     /**
-     * Customer repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerRepository
-     */
-    protected $customerRepository;
-
-    /**
      * Create a new datagrid instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository $customerRepository
      * @return void
      */
-    public function __construct(CustomerRepository $customerRepository)
+    public function __construct(protected CustomerRepository $customerRepository)
     {
-        $this->customerRepository = $customerRepository;
-
         parent::__construct();
     }
 

@@ -10,24 +10,16 @@ use Webkul\Core\Eloquent\Repository;
 class AttributeRepository extends Repository
 {
     /**
-     * Attribute option repository instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
-     */
-    protected $attributeOptionRepository;
-
-    /**
      * Create a new repository instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
      * @return void
      */
     public function __construct(
-        AttributeOptionRepository $attributeOptionRepository,
+        protected AttributeOptionRepository $attributeOptionRepository,
         App $app
-    ) {
-        $this->attributeOptionRepository = $attributeOptionRepository;
-
+    )
+    {
         parent::__construct($app);
     }
 

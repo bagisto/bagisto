@@ -12,34 +12,6 @@ use Webkul\Sales\Generators\InvoiceSequencer;
 class InvoiceRepository extends Repository
 {
     /**
-     * Order repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * Order's item repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderItemRepository
-     */
-    protected $orderItemRepository;
-
-    /**
-     * Invoice's item repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\InvoiceItemRepository
-     */
-    protected $invoiceItemRepository;
-
-    /**
-     * Downloadable link purchased repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository
-     */
-    protected $downloadableLinkPurchasedRepository;
-
-    /**
      * Create a new repository instance.
      *
      * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
@@ -50,22 +22,13 @@ class InvoiceRepository extends Repository
      * @return void
      */
     public function __construct(
-        OrderRepository $orderRepository,
-        OrderItemRepository $orderItemRepository,
-        InvoiceItemRepository $invoiceItemRepository,
-        DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
+        protected OrderRepository $orderRepository,
+        protected OrderItemRepository $orderItemRepository,
+        protected InvoiceItemRepository $invoiceItemRepository,
+        protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         App $app
-    ) {
-        $this->orderRepository = $orderRepository;
-
-        $this->orderItemRepository = $orderItemRepository;
-
-        $this->invoiceItemRepository = $invoiceItemRepository;
-
-        $this->invoiceItemRepository = $invoiceItemRepository;
-
-        $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
-
+    )
+    {
         parent::__construct($app);
     }
 

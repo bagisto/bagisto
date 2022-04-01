@@ -16,20 +16,6 @@ class ExchangeRateController extends Controller
     protected $_config;
 
     /**
-     * Exchange rate repository instance.
-     *
-     * @var \Webkul\Core\Repositories\ExchangeRateRepository
-     */
-    protected $exchangeRateRepository;
-
-    /**
-     * Currency repository instance.
-     *
-     * @var \Webkul\Core\Repositories\CurrencyRepository
-     */
-    protected $currencyRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
@@ -37,13 +23,10 @@ class ExchangeRateController extends Controller
      * @return void
      */
     public function __construct(
-        ExchangeRateRepository $exchangeRateRepository,
-        CurrencyRepository $currencyRepository
-    ) {
-        $this->exchangeRateRepository = $exchangeRateRepository;
-
-        $this->currencyRepository = $currencyRepository;
-
+        protected ExchangeRateRepository $exchangeRateRepository,
+        protected CurrencyRepository $currencyRepository
+    )
+    {
         $this->_config = request('_config');
     }
 

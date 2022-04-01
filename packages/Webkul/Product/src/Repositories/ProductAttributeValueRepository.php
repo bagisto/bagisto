@@ -10,13 +10,6 @@ use Webkul\Product\Models\ProductAttributeValueProxy;
 class ProductAttributeValueRepository extends Repository
 {
     /**
-     * AttributeRepository object
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
      * Create a new reposotory instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
@@ -24,12 +17,10 @@ class ProductAttributeValueRepository extends Repository
      * @return void
      */
     public function __construct(
-        AttributeRepository $attributeRepository,
+        protected AttributeRepository $attributeRepository,
         App $app
     )
     {
-        $this->attributeRepository = $attributeRepository;
-
         parent::__construct($app);
     }
 

@@ -15,55 +15,6 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 class CartRuleRepository extends Repository
 {
     /**
-     * Attribute family repository instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
-     */
-    protected $attributeFamilyRepository;
-
-    /**
-     * Attribute repository instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
-     * Category repository instance.
-     *
-     * @var \Webkul\Category\Repositories\CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
-     * Cart rule coupon repository instance.
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
-     */
-    protected $cartRuleCouponRepository;
-
-    /**
-     * Tax category repository instance.
-     *
-     * @var \Webkul\Tax\Repositories\TaxCategoryRepository
-     */
-    protected $taxCategoryRepository;
-
-    /**
-     * Country repository instance.
-     *
-     * @var \Webkul\Core\Repositories\CountryRepository
-     */
-    protected $countryRepository;
-
-    /**
-     * Country state repository instance.
-     *
-     * @var \Webkul\Core\Repositories\CountryStateRepository
-     */
-    protected $countryStateRepository;
-
-    /**
      * Create a new repository instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
@@ -77,29 +28,16 @@ class CartRuleRepository extends Repository
      * @return void
      */
     public function __construct(
-        AttributeFamilyRepository $attributeFamilyRepository,
-        AttributeRepository $attributeRepository,
-        CategoryRepository $categoryRepository,
-        CartRuleCouponRepository $cartRuleCouponRepository,
-        TaxCategoryRepository $taxCategoryRepository,
-        CountryRepository $countryRepository,
-        CountryStateRepository $countryStateRepository,
+        protected AttributeFamilyRepository $attributeFamilyRepository,
+        protected AttributeRepository $attributeRepository,
+        protected CategoryRepository $categoryRepository,
+        protected CartRuleCouponRepository $cartRuleCouponRepository,
+        protected TaxCategoryRepository $taxCategoryRepository,
+        protected CountryRepository $countryRepository,
+        protected CountryStateRepository $countryStateRepository,
         App $app
-    ) {
-        $this->attributeFamilyRepository = $attributeFamilyRepository;
-
-        $this->attributeRepository = $attributeRepository;
-
-        $this->categoryRepository = $categoryRepository;
-
-        $this->cartRuleCouponRepository = $cartRuleCouponRepository;
-
-        $this->taxCategoryRepository = $taxCategoryRepository;
-
-        $this->countryRepository = $countryRepository;
-
-        $this->countryStateRepository = $countryStateRepository;
-
+    )
+    {
         parent::__construct($app);
     }
 

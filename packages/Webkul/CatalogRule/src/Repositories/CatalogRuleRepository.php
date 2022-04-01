@@ -13,34 +13,6 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 class CatalogRuleRepository extends Repository
 {
     /**
-     * Attribute family repository instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
-     */
-    protected $attributeFamilyRepository;
-
-    /**
-     * Attribute repository instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
-     * Category repository instance.
-     *
-     * @var \Webkul\Category\Repositories\CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
-     * Tax category repository instance.
-     *
-     * @var \Webkul\CaTaxtegory\Repositories\axCategoryRepository
-     */
-    protected $taxCategoryRepository;
-
-    /**
      * Create a new repository instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
@@ -51,20 +23,13 @@ class CatalogRuleRepository extends Repository
      * @return void
      */
     public function __construct(
-        AttributeFamilyRepository $attributeFamilyRepository,
-        AttributeRepository $attributeRepository,
-        CategoryRepository $categoryRepository,
-        TaxCategoryRepository $taxCategoryRepository,
+        protected AttributeFamilyRepository $attributeFamilyRepository,
+        protected AttributeRepository $attributeRepository,
+        protected CategoryRepository $categoryRepository,
+        protected TaxCategoryRepository $taxCategoryRepository,
         App $app
-    ) {
-        $this->attributeFamilyRepository = $attributeFamilyRepository;
-
-        $this->attributeRepository = $attributeRepository;
-
-        $this->categoryRepository = $categoryRepository;
-
-        $this->taxCategoryRepository = $taxCategoryRepository;
-
+    )
+    {
         parent::__construct($app);
     }
 

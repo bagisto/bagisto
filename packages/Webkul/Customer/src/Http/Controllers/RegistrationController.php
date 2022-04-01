@@ -24,27 +24,6 @@ class RegistrationController extends Controller
     protected $_config;
 
     /**
-     * Customer repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerRepository
-     */
-    protected $customerRepository;
-
-    /**
-     * Customer group repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
-     */
-    protected $customerGroupRepository;
-
-    /**
-     * Subscribers list repository instance.
-     *
-     * @var \Webkul\Core\Repositories\SubscribersListRepository
-     */
-    protected $subscriptionRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
@@ -53,17 +32,12 @@ class RegistrationController extends Controller
      * @return void
      */
     public function __construct(
-        CustomerRepository $customerRepository,
-        CustomerGroupRepository $customerGroupRepository,
-        SubscribersListRepository $subscriptionRepository
-    ) {
+        protected CustomerRepository $customerRepository,
+        protected CustomerGroupRepository $customerGroupRepository,
+        protected SubscribersListRepository $subscriptionRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->customerRepository = $customerRepository;
-
-        $this->customerGroupRepository = $customerGroupRepository;
-
-        $this->subscriptionRepository = $subscriptionRepository;
     }
 
     /**

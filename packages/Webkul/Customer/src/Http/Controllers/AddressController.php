@@ -22,25 +22,16 @@ class AddressController extends Controller
     protected $customer;
 
     /**
-     * Customer address repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerAddressRepository
-     */
-    protected $customerAddressRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      * @return void
      */
-    public function __construct(CustomerAddressRepository $customerAddressRepository)
+    public function __construct(protected CustomerAddressRepository $customerAddressRepository)
     {
         $this->_config = request('_config');
 
         $this->customer = auth()->guard('customer')->user();
-
-        $this->customerAddressRepository = $customerAddressRepository;
     }
 
     /**

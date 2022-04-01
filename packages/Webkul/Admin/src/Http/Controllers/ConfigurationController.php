@@ -17,13 +17,6 @@ class ConfigurationController extends Controller
     protected $_config;
 
     /**
-     * Core config repository instance.
-     *
-     * @var \Webkul\Core\Repositories\CoreConfigRepository
-     */
-    protected $coreConfigRepository;
-
-    /**
      * Tree instance.
      *
      * @var \Webkul\Core\Tree
@@ -36,10 +29,8 @@ class ConfigurationController extends Controller
      * @param  \Webkul\Core\Repositories\CoreConfigRepository  $coreConfigRepository
      * @return void
      */
-    public function __construct(CoreConfigRepository $coreConfigRepository)
+    public function __construct(protected CoreConfigRepository $coreConfigRepository)
     {
-        $this->coreConfigRepository = $coreConfigRepository;
-
         $this->_config = request('_config');
 
         $this->prepareConfigTree();

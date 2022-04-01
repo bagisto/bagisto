@@ -11,29 +11,19 @@ use Webkul\Product\Repositories\ProductRepository;
 class SearchRepository extends Repository
 {
     use Sanitizer;
-
-    /**
-     * ProductRepository object
-     *
-     * @return Object
-     */
-    protected $productRepository;
-
     /**
      * Create a new repository instance.
      *
-     * @param \Webkul\Product\Repositories\ProductRepository $productRepository
-     * @param \Illuminate\Container\Container                $app
-     *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
-        ProductRepository $productRepository,
+        protected ProductRepository $productRepository,
         App $app
-    ) {
+    )
+    {
         parent::__construct($app);
-
-        $this->productRepository = $productRepository;
     }
 
     function model()

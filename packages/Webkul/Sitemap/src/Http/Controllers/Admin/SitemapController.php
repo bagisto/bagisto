@@ -27,9 +27,7 @@ class SitemapController extends Controller
      *
      * @return void
      */
-    public function __construct(
-        public SitemapRepository $sitemapRepository
-    )
+    public function __construct(public SitemapRepository $sitemapRepository)
     {
         $this->_config = request('_config');
     }

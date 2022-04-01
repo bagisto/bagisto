@@ -16,23 +16,14 @@ class CustomerGroupController extends Controller
     protected $_config;
 
     /**
-     * Customer group repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
-     */
-    protected $customerGroupRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository;
      * @return void
      */
-    public function __construct(CustomerGroupRepository $customerGroupRepository)
+    public function __construct(protected CustomerGroupRepository $customerGroupRepository)
     {
         $this->_config = request('_config');
-
-        $this->customerGroupRepository = $customerGroupRepository;
     }
 
     /**

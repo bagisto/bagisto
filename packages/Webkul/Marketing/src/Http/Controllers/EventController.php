@@ -15,22 +15,13 @@ class EventController extends Controller
     protected $_config;
 
     /**
-     * Event repository instance.
-     *
-     * @var \Webkul\Marketing\Repositories\EventRepository
-     */
-    protected $eventRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Marketing\Repositories\EventRepository  $eventRepository
      * @return void
      */
-    public function __construct(EventRepository $eventRepository)
+    public function __construct(protected EventRepository $eventRepository)
     {
-        $this->eventRepository = $eventRepository;
-
         $this->_config = request('_config');
     }
 

@@ -29,100 +29,29 @@ class ProductController extends Controller
     protected $_config;
 
     /**
-     * Category repository instance.
-     *
-     * @var \Webkul\Category\Repositories\CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * Product downloadable link repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
-     */
-    protected $productDownloadableLinkRepository;
-
-    /**
-     * Product downloadable sample repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
-     */
-    protected $productDownloadableSampleRepository;
-
-    /**
-     * Attribute family repository instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
-     */
-    protected $attributeFamilyRepository;
-
-    /**
-     * Inventory source repository instance.
-     *
-     * @var \Webkul\Inventory\Repositories\InventorySourceRepository
-     */
-    protected $inventorySourceRepository;
-
-    /**
-     * Product attribute value repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
-     */
-    protected $productAttributeValueRepository;
-
-    /**
-     * Product inventory repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductInventoryRepository
-     */
-    protected $productInventoryRepository;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository                 $categoryRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository                   $productRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository         $attributeFamilyRepository
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository         $inventorySourceRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository     $productAttributeValueRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
      * @return void
      */
     public function __construct(
-        CategoryRepository $categoryRepository,
-        ProductRepository $productRepository,
-        ProductDownloadableLinkRepository $productDownloadableLinkRepository,
-        ProductDownloadableSampleRepository $productDownloadableSampleRepository,
-        AttributeFamilyRepository $attributeFamilyRepository,
-        InventorySourceRepository $inventorySourceRepository,
-        ProductAttributeValueRepository $productAttributeValueRepository,
-        ProductInventoryRepository $productInventoryRepository
-    ) {
+        protected CategoryRepository $categoryRepository,
+        protected ProductRepository $productRepository,
+        protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
+        protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
+        protected AttributeFamilyRepository $attributeFamilyRepository,
+        protected InventorySourceRepository $inventorySourceRepository,
+        protected ProductAttributeValueRepository $productAttributeValueRepository,
+        protected ProductInventoryRepository $productInventoryRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->categoryRepository = $categoryRepository;
-
-        $this->productRepository = $productRepository;
-
-        $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
-
-        $this->productDownloadableSampleRepository = $productDownloadableSampleRepository;
-
-        $this->attributeFamilyRepository = $attributeFamilyRepository;
-
-        $this->inventorySourceRepository = $inventorySourceRepository;
-
-        $this->productAttributeValueRepository = $productAttributeValueRepository;
-
-        $this->productInventoryRepository = $productInventoryRepository;
     }
 
     /**

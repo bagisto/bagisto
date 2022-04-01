@@ -16,22 +16,13 @@ class PageController extends Controller
     protected $_config;
 
     /**
-     * To hold the CMS repository instance.
-     *
-     * @var \Webkul\CMS\Repositories\CmsRepository
-     */
-    protected $cmsRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\CMS\Repositories\CmsRepository  $cmsRepository
      * @return void
      */
-    public function __construct(CmsRepository $cmsRepository)
+    public function __construct(protected CmsRepository $cmsRepository)
     {
-        $this->cmsRepository = $cmsRepository;
-
         $this->_config = request('_config');
     }
 

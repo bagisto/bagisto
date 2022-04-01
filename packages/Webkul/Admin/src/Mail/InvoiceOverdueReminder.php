@@ -12,34 +12,16 @@ class InvoiceOverdueReminder extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The customer instance.
-     *
-     * @var  \Webkul\Customer\Contracts\Customer
-     */
-    public $customer;
-
-    /**
-     * The invoice instance.
-     *
-     * @var  \Webkul\Sales\Contracts\Invoice
-     */
-    public $invoice;
-
-    /**
      * Create a new message instance.
      *
      * @param  \Webkul\Customer\Contracts\Customer  $customer
      * @param  \Webkul\Sales\Contracts\Invoice  $invoice
      */
     public function __construct(
-        $customer,
-        $invoice
+        public $customer,
+        public $invoice
     )
-    {
-        $this->customer = $customer;
-
-        $this->invoice = $invoice;
-    }
+    {}
 
     /**
      * Build the message.

@@ -14,20 +14,6 @@ use Webkul\Shop\Http\Controllers\Controller;
 class OnepageController extends Controller
 {
     /**
-     * Order repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * Customer repository instance.
-     *
-     * @var \Webkul\Customer\Repositories\CustomerRepository
-     */
-    protected $customerRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
@@ -35,13 +21,10 @@ class OnepageController extends Controller
      * @return void
      */
     public function __construct(
-        OrderRepository $orderRepository,
-        CustomerRepository $customerRepository
-    ) {
-        $this->orderRepository = $orderRepository;
-
-        $this->customerRepository = $customerRepository;
-
+        protected OrderRepository $orderRepository,
+        protected CustomerRepository $customerRepository
+    )
+    {
         parent::__construct();
     }
 

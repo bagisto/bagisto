@@ -9,23 +9,15 @@ use Illuminate\Queue\SerializesModels;
 class AdminUpdatePassword extends Mailable
 {
     use Queueable, SerializesModels;
-
-    /**
-     * The admin instance.
-     *
-     * @var  \Webkul\User\Contracts\Admin  $admin
-     */
-    public $admin;
-
+    
     /**
      * Create a new admin instance.
      *
      * @param  \Webkul\User\Contracts\Admin  $admin
      * @return void
      */
-    public function __construct($admin)
+    public function __construct(public $admin)
     {
-        $this->admin = $admin;
     }
 
     /**

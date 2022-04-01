@@ -12,21 +12,13 @@ class NewRefundNotification extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The refund instance.
-     *
-     * @var \Webkul\Sales\Contracts\Refund
-     */
-    public $refund;
-
-    /**
      * Create a new message instance.
      *
      * @param  \Webkul\Sales\Contracts\Refund  $refund
      * @return void
      */
-    public function __construct($refund)
+    public function __construct(public $refund)
     {
-        $this->refund = $refund;
     }
 
     /**

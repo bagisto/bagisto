@@ -15,22 +15,13 @@ class LocaleController extends Controller
     protected $_config;
 
     /**
-     * Locale repository instance.
-     *
-     * @var \Webkul\Core\Repositories\LocaleRepository
-     */
-    protected $localeRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\LocaleRepository  $localeRepository
      * @return void
      */
-    public function __construct(LocaleRepository $localeRepository)
+    public function __construct(protected LocaleRepository $localeRepository)
     {
-        $this->localeRepository = $localeRepository;
-
         $this->_config = request('_config');
     }
 

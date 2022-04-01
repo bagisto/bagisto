@@ -14,20 +14,6 @@ use Webkul\Sales\Models\Order as OrderModel;
 class OrderRepository extends Repository
 {
     /**
-     * Order item repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderItemRepository
-     */
-    protected $orderItemRepository;
-
-    /**
-     * Downloadable link purchased repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository
-     */
-    protected $downloadableLinkPurchasedRepository;
-
-    /**
      * Create a new repository instance.
      *
      * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
@@ -36,14 +22,11 @@ class OrderRepository extends Repository
      * @return void
      */
     public function __construct(
-        OrderItemRepository $orderItemRepository,
-        DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
+        protected OrderItemRepository $orderItemRepository,
+        protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         App $app
-    ) {
-        $this->orderItemRepository = $orderItemRepository;
-
-        $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
-
+    )
+    {
         parent::__construct($app);
     }
 

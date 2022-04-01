@@ -10,13 +10,6 @@ class CategoryRepository extends Repository
 {
     use CacheableRepository;
 
-   /**
-    * Category Repository object
-    *
-    * @var \Webkul\Category\Repositories\CategoryRepository
-    */
-    protected $categoryRepository;
-
     /**
      * Create a new repository instance.
      *
@@ -25,12 +18,10 @@ class CategoryRepository extends Repository
      * @return void
      */
     public function __construct(
-        CategoryRepository $categoryRepository,
+        protected CategoryRepository $categoryRepository,
         App $app
     )
     {
-        $this->categoryRepository = $categoryRepository;
-
         parent::__construct($app);
     }
 

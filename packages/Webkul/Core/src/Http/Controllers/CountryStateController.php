@@ -15,35 +15,17 @@ class CountryStateController extends Controller
     protected $_config;
 
     /**
-     * CountryRepository object
-     *
-     * @var \Webkul\Core\Repositories\CountryRepository
-     */
-    protected $countryRepository;
-
-    /**
-     * CountryStateRepository object
-     *
-     * @var Webkul\Core\Repositories\CountryStateRepository
-     */
-    protected $countryStateRepository;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\CountryRepository       $countryRepository
+     * @param  \Webkul\Core\Repositories\CountryRepository  $countryRepository
      * @param  \Webkul\Core\Repositories\CountryStateRepository  $countryStateRepository
      * @return void
      */
     public function __construct(
-        CountryRepository $countryRepository,
-        CountryStateRepository $countryStateRepository
+        protected CountryRepository $countryRepository,
+        protected CountryStateRepository $countryStateRepository
     )
     {
-        $this->countryRepository = $countryRepository;
-
-        $this->countryStateRepository = $countryStateRepository;
-
         $this->_config = request('_config');
     }
 

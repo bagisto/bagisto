@@ -16,33 +16,11 @@ class Ipn
     protected $post;
 
     /**
-     * Standard $paypalStandard
-     *
-     * @var \Webkul\Paypal\Payment\Standard
-     */
-    protected $paypalStandard;
-
-    /**
      * Order $order
      *
      * @var \Webkul\Sales\Contracts\Order
      */
     protected $order;
-
-    /**
-     * OrderRepository $orderRepository
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * InvoiceRepository $invoiceRepository
-     *
-     * @var \Webkul\Sales\Repositories\InvoiceRepository
-     */
-    protected $invoiceRepository;
-
     /**
      * Create a new helper instance.
      *
@@ -52,16 +30,11 @@ class Ipn
      * @return void
      */
     public function __construct(
-        Standard $paypalStandard,
-        OrderRepository $orderRepository,
-        InvoiceRepository $invoiceRepository
+        protected Standard $paypalStandard,
+        protected OrderRepository $orderRepository,
+        protected InvoiceRepository $invoiceRepository
     )
     {
-        $this->paypalStandard = $paypalStandard;
-
-        $this->orderRepository = $orderRepository;
-
-        $this->invoiceRepository = $invoiceRepository;
     }
 
     /**

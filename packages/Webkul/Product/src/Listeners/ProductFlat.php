@@ -14,34 +14,6 @@ use Webkul\Product\Models\ProductAttributeValue;
 class ProductFlat
 {
     /**
-     * AttributeRepository Repository Object
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
-     * AttributeOptionRepository Repository Object
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
-     */
-    protected $attributeOptionRepository;
-
-    /**
-     * ProductFlatRepository Repository Object
-     *
-     * @var \Webkul\Product\Repositories\ProductFlatRepository
-     */
-    protected $productFlatRepository;
-
-    /**
-     * ProductAttributeValueRepository Repository Object
-     *
-     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
-     */
-    protected $productAttributeValueRepository;
-
-    /**
      * Attribute Object
      *
      * @var \Webkul\Attribute\Contracts\Attribute
@@ -88,19 +60,12 @@ class ProductFlat
      * @return void
      */
     public function __construct(
-        AttributeRepository $attributeRepository,
-        AttributeOptionRepository $attributeOptionRepository,
-        ProductFlatRepository $productFlatRepository,
-        ProductAttributeValueRepository $productAttributeValueRepository
+        protected AttributeRepository $attributeRepository,
+        protected AttributeOptionRepository $attributeOptionRepository,
+        protected ProductFlatRepository $productFlatRepository,
+        protected ProductAttributeValueRepository $productAttributeValueRepository
     )
     {
-        $this->attributeRepository = $attributeRepository;
-
-        $this->attributeOptionRepository = $attributeOptionRepository;
-
-        $this->productAttributeValueRepository = $productAttributeValueRepository;
-
-        $this->productFlatRepository = $productFlatRepository;
     }
 
     /**

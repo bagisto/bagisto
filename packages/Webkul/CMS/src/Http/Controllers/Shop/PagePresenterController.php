@@ -8,21 +8,13 @@ use Webkul\CMS\Repositories\CmsRepository;
 class PagePresenterController extends Controller
 {
     /**
-     * CmsRepository object
-     *
-     * @var \Webkul\CMS\Repositories\CmsRepository
-     */
-    protected $cmsRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\CMS\Repositories\CmsRepository  $cmsRepository
      * @return void
      */
-    public function __construct(CmsRepository $cmsRepository)
+    public function __construct(protected CmsRepository $cmsRepository)
     {
-        $this->cmsRepository = $cmsRepository;
     }
 
     /**

@@ -16,20 +16,6 @@ use Webkul\Product\Repositories\ProductVideoRepository;
 class Downloadable extends AbstractType
 {
     /**
-     * Product downloadable link repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
-     */
-    protected $productDownloadableLinkRepository;
-
-    /**
-     * Product downloadable sample repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
-     */
-    protected $productDownloadableSampleRepository;
-
-    /**
      * Skip attribute for downloadable product type.
      *
      * @var array
@@ -74,14 +60,14 @@ class Downloadable extends AbstractType
     /**
      * Create a new product type instance.
      *
-     * @param \Webkul\Attribute\Repositories\AttributeRepository               $attributeRepository
-     * @param \Webkul\Product\Repositories\ProductRepository                   $productRepository
-     * @param \Webkul\Product\Repositories\ProductAttributeValueRepository     $attributeValueRepository
-     * @param \Webkul\Product\Repositories\ProductInventoryRepository          $productInventoryRepository
-     * @param \Webkul\Product\Repositories\ProductImageRepository              $productImageRepository
-     * @param \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
-     * @param \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
-     * @param \Webkul\Product\Repositories\ProductVideoRepository              $productVideoRepository
+     * @param \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
+     * @param \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
+     * @param \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
+     * @param \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
+     * @param \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @return void
      */
     public function __construct(
@@ -90,10 +76,11 @@ class Downloadable extends AbstractType
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         productImageRepository $productImageRepository,
-        ProductDownloadableLinkRepository $productDownloadableLinkRepository,
-        ProductDownloadableSampleRepository $productDownloadableSampleRepository,
-        ProductVideoRepository $productVideoRepository
-    ) {
+        ProductVideoRepository $productVideoRepository,
+        protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
+        protected ProductDownloadableSampleRepository $productDownloadableSampleRepository
+    )
+    {
         parent::__construct(
             $attributeRepository,
             $productRepository,
@@ -102,10 +89,6 @@ class Downloadable extends AbstractType
             $productImageRepository,
             $productVideoRepository
         );
-
-        $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
-
-        $this->productDownloadableSampleRepository = $productDownloadableSampleRepository;
     }
 
     /**

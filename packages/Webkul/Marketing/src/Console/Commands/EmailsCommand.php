@@ -22,22 +22,13 @@ class EmailsCommand extends Command
     protected $description = 'Process campaigns and send emails to the subscribed customers.';
 
     /**
-     * Campaign object
-     *
-     * @var \Webkul\Marketing\Helpers\Campaign
-     */
-    protected $campaignHelper;
-
-    /**
      * Create a new command instance.
      *
      * @param  \Webkul\Marketing\Repositories\Campaign  $campaignHelper
      * @return void
      */
-    public function __construct(Campaign $campaignHelper)
+    public function __construct(protected Campaign $campaignHelper)
     {
-        $this->campaignHelper = $campaignHelper;
-
         parent::__construct();
     }
 

@@ -15,20 +15,6 @@ class TaxCategoryController extends Controller
     protected $_config;
 
     /**
-     * Tax category repository instance.
-     *
-     * @var \Webkul\Tax\Repositories\TaxCategoryRepository
-     */
-    protected $taxCategoryRepository;
-
-    /**
-     * Tax rate repository instance.
-     *
-     * @var \Webkul\Tax\Repositories\TaxRateRepository
-     */
-    protected $taxRateRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
@@ -36,13 +22,10 @@ class TaxCategoryController extends Controller
      * @return void
      */
     public function __construct(
-        TaxCategoryRepository $taxCategoryRepository,
-        TaxRateRepository $taxRateRepository
-    ) {
-        $this->taxCategoryRepository = $taxCategoryRepository;
-
-        $this->taxRateRepository = $taxRateRepository;
-
+        protected TaxCategoryRepository $taxCategoryRepository,
+        protected TaxRateRepository $taxRateRepository
+    )
+    {
         $this->_config = request('_config');
     }
 

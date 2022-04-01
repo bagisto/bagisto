@@ -29,7 +29,7 @@ class BookingProductController extends Controller
      * @return void
      */
     public function __construct(
-        BookingProductRepository $bookingProductRepository,
+        protected BookingProductRepository $bookingProductRepository,
         DefaultSlotHelper $defaultSlotHelper,
         AppointmentSlotHelper $appointmentSlotHelper,
         RentalSlotHelper $rentalSlotHelper,

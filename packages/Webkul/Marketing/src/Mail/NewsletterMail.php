@@ -12,29 +12,17 @@ class NewsletterMail extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * @var  string
-     */
-    public $email;
-
-    /**
-     * The campaign instance.
-     *
-     * @var  \Webkul\Marketing\Contracts\Campaign
-     */
-    public $campaign;
-
-    /**
      * Create a new message instance.
      *
      * @param  string  $email
      * @param  \Webkul\Marketing\Contracts\Campaign  $campaign
      * @return void
      */
-    public function __construct($email, $campaign)
+    public function __construct(
+        public $email,
+        public $campaign
+    )
     {
-        $this->email = $email;
-
-        $this->campaign = $campaign;
     }
 
     /**

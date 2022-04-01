@@ -19,23 +19,9 @@ use Webkul\Checkout\Models\CartItem;
 class Booking
 {
     /**
-     * BookingProductRepository
-     *
-     * @return \Webkul\BookingProduct\Repositories\BookingProductRepository
-     */
-    protected $bookingProductRepository;
-
-    /**
      * @return array
      */
     protected $typeRepositories = [];
-
-    /**
-     * BookingRepository
-     *
-     * @return \Webkul\BookingProduct\Repositories\BookingRepository
-     */
-    protected $bookingRepository;
 
     /**
      * @return array
@@ -66,17 +52,15 @@ class Booking
      * @return void
      */
     public function __construct(
-        BookingProductRepository $bookingProductRepository,
+        protected BookingProductRepository $bookingProductRepository,
+        protected BookingRepository $bookingRepository,
         BookingProductDefaultSlotRepository $bookingProductDefaultSlotRepository,
         BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository,
         BookingProductEventTicketRepository $bookingProductEventTicketRepository,
         BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
         BookingProductTableSlotRepository $bookingProductTableSlotRepository,
-        BookingRepository $bookingRepository
     )
     {
-        $this->bookingProductRepository = $bookingProductRepository;
-
         $this->typeRepositories['default'] = $bookingProductDefaultSlotRepository;
 
         $this->typeRepositories['appointment'] = $bookingProductAppointmentSlotRepository;
@@ -86,8 +70,6 @@ class Booking
         $this->typeRepositories['rental'] = $bookingProductRentalSlotRepository;
 
         $this->typeRepositories['table'] = $bookingProductTableSlotRepository;
-
-        $this->bookingRepository = $bookingRepository;
     }
 
     /**

@@ -15,22 +15,13 @@ class CampaignController extends Controller
     protected $_config;
 
     /**
-     * Campaign repository instance.
-     *
-     * @var \Webkul\Marketing\Repositories\CampaignRepository
-     */
-    protected $campaignRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Marketing\Repositories\CampaignRepository  $campaignRepository
      * @return void
      */
-    public function __construct(CampaignRepository $campaignRepository)
+    public function __construct(protected CampaignRepository $campaignRepository)
     {
-        $this->campaignRepository = $campaignRepository;
-
         $this->_config = request('_config');
     }
 

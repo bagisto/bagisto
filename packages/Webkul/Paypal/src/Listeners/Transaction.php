@@ -8,34 +8,17 @@ use Webkul\Sales\Repositories\OrderTransactionRepository;
 class Transaction
 {
     /**
-     * SmartButton $smartButton
-     *
-     * @var \Webkul\Paypal\Payment\SmartButton
-     */
-    protected $smartButton;
-
-     /**
-     * OrderTransactionRepository object
-     *
-     * @var \Webkul\Sales\Repositories\OrderTransactionRepository
-     */
-    protected $orderTransactionRepository;
-
-    /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Paypal\Payment\SmartButton                     $smartButton
+     * @param  \Webkul\Paypal\Payment\SmartButton  $smartButton
      * @param  \Webkul\Sales\Repositories\OrderTransactionRepository  $orderTransactionRepository
      * @return void
      */
     public function __construct(
-        SmartButton $smartButton,
-        OrderTransactionRepository $orderTransactionRepository
+        protected SmartButton $smartButton,
+        protected OrderTransactionRepository $orderTransactionRepository
     )
     {
-        $this->smartButton = $smartButton;
-
-        $this->orderTransactionRepository = $orderTransactionRepository;
     }
 
     /**

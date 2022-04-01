@@ -10,37 +10,19 @@ use Webkul\Customer\Repositories\CustomerGroupRepository;
 class CustomerSocialAccountRepository extends Repository
 {
     /**
-     * CustomerRepository object
-     *
-     * @var \Webkul\Customer\Repositories\CustomerRepository
-     */
-    protected $customerRepository;
-
-    /**
-     * CustomerGroupRepository object
-     *
-     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
-     */
-    protected $customerGroupRepository;
-
-    /**
      * Create a new reposotory instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository       $customerRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
-        CustomerRepository $customerRepository,
-        CustomerGroupRepository $customerGroupRepository,
+        protected CustomerRepository $customerRepository,
+        protected CustomerGroupRepository $customerGroupRepository,
         App $app
     )
     {
-        $this->customerRepository = $customerRepository;
-
-        $this->customerGroupRepository = $customerGroupRepository;
-
         $this->_config = request('_config');
 
         parent::__construct($app);

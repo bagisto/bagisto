@@ -14,27 +14,6 @@ use Webkul\Sales\Repositories\ShipmentItemRepository;
 class ShipmentRepository extends Repository
 {
     /**
-     * Order repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * Order item repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderItemRepository
-     */
-    protected $orderItemRepository;
-
-    /**
-     * Shipment item repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\ShipmentItemRepository
-     */
-    protected $shipmentItemRepository;
-
-    /**
      * Create a new repository instance.
      *
      * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
@@ -43,17 +22,12 @@ class ShipmentRepository extends Repository
      * @return void
      */
     public function __construct(
-        OrderRepository $orderRepository,
-        OrderItemRepository $orderItemRepository,
-        ShipmentItemRepository $shipmentItemRepository,
+        protected OrderRepository $orderRepository,
+        protected OrderItemRepository $orderItemRepository,
+        protected ShipmentItemRepository $shipmentItemRepository,
         App $app
-    ) {
-        $this->orderRepository = $orderRepository;
-
-        $this->orderItemRepository = $orderItemRepository;
-
-        $this->shipmentItemRepository = $shipmentItemRepository;
-
+    )
+    {
         parent::__construct($app);
     }
 

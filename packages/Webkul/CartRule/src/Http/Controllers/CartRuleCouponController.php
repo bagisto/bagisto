@@ -8,21 +8,13 @@ use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 class CartRuleCouponController extends Controller
 {
     /**
-     * To hold cart rule coupon repository instance.
-     *
-     * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
-     */
-    protected $cartRuleCouponRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
      * @return void
      */
-    public function __construct(CartRuleCouponRepository $cartRuleCouponRepository)
+    public function __construct(protected CartRuleCouponRepository $cartRuleCouponRepository)
     {
-        $this->cartRuleCouponRepository = $cartRuleCouponRepository;
     }
 
     /**

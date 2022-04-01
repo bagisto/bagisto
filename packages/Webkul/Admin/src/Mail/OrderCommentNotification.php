@@ -12,21 +12,13 @@ class OrderCommentNotification extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The order comment instance.
-     *
-     * @var  \Webkul\Sales\Contracts\OrderComment  $comment
-     */
-    public $comment;
-
-    /**
      * Create a new message instance.
      *
      * @param  \Webkul\Sales\Contracts\OrderComment  $comment
      * @return void
      */
-    public function __construct($comment)
+    public function __construct(public $comment)
     {
-        $this->comment = $comment;
     }
 
     /**

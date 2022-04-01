@@ -8,26 +8,18 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductImageRepository extends ProductMediaRepository
 {
     /**
-     * Product repository object.
-     *
-     * @var Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
-     * @param  \Illuminate\Container\Container                $app
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
-        ProductRepository $productRepository,
+        protected ProductRepository $productRepository,
         App $app
-    ) {
+    )
+    {
         parent::__construct($app);
-
-        $this->productRepository = $productRepository;
     }
 
     /**

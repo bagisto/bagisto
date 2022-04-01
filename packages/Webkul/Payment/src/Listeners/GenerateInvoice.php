@@ -14,20 +14,6 @@ use Webkul\Sales\Repositories\InvoiceRepository;
 class GenerateInvoice
 {
     /**
-     * OrderRepository object
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * InvoiceRepository object
-     *
-     * @var \Webkul\Sales\Repositories\InvoiceRepository
-     */
-    protected $invoiceRepository;
-
-    /**
      * Create the event listener.
      *
      * @param  Webkul\Sales\Repositories\OrderRepository $orderRepository
@@ -35,13 +21,11 @@ class GenerateInvoice
      * @return void
      */
     public function __construct(
-        OrderRepository $orderRepository,
-        InvoiceRepository $invoiceRepository
-        )
-        {
-            $this->orderRepository = $orderRepository;
-            $this->invoiceRepository = $invoiceRepository;
-        }
+        protected OrderRepository $orderRepository,
+        protected InvoiceRepository $invoiceRepository
+    )
+    {
+    }
 
     /**
      * Generate a new invoice.
