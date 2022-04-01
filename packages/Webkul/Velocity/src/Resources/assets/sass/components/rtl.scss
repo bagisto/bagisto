@@ -455,6 +455,10 @@ body {
             content: '\E907';
         }
 
+        .rango-arrow-left::before {
+            content: '\E908';
+        }
+
         .styled-select {
             + .select-icon-container {
                 .select-icon {
@@ -516,6 +520,26 @@ body {
                         border-right: 1px solid #dcdcdc;
                     }
                 }
+            }
+        }
+
+        .full-content-wrapper .container-fluid .row.carousel-products-header {
+            padding-right: 15px !important;
+            padding-left: 75px !important;
+        }
+
+        .carousel-products {
+            .VueCarousel-wrapper {
+                direction: ltr;
+            }
+
+            .VueCarousel-slide {
+                direction: ltr;
+            }
+            
+            .VueCarousel-navigation {
+                left: 12px;
+                right: unset;
             }
         }
     }
