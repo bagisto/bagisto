@@ -18,27 +18,6 @@ class RefundController extends Controller
     protected $_config;
 
     /**
-     * Order repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * Order item repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderItemRepository
-     */
-    protected $orderItemRepository;
-
-    /**
-     * Refund repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\RefundRepository
-     */
-    protected $refundRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
@@ -47,17 +26,12 @@ class RefundController extends Controller
      * @return void
      */
     public function __construct(
-        OrderRepository $orderRepository,
-        OrderItemRepository $orderItemRepository,
-        RefundRepository $refundRepository
-    ) {
+        protected OrderRepository $orderRepository,
+        protected OrderItemRepository $orderItemRepository,
+        protected RefundRepository $refundRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->orderRepository = $orderRepository;
-
-        $this->orderItemRepository = $orderItemRepository;
-
-        $this->refundRepository = $refundRepository;
     }
 
     /**

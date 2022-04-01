@@ -10,20 +10,12 @@ use Webkul\Notification\Events\UpdateOrderNotification;
 class Order
 {
     /**
-     * NotificationRepository
-     *
-     * @var object
-     */
-    protected $notificationRepository;
-
-    /**
      * Create a new listener instance.
      *
      * @return void
      */
-    public function __construct(NotificationRepository $notificationRepository)
+    public function __construct(protected NotificationRepository $notificationRepository)
     {
-        $this->notificationRepository = $notificationRepository;
     }
 
     /**

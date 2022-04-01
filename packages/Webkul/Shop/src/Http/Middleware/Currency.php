@@ -8,21 +8,13 @@ use Webkul\Core\Repositories\CurrencyRepository;
 class Currency
 {
     /**
-     * Currency repository instance.
-     *
-     * @var \Webkul\Core\Repositories\CurrencyRepository
-     */
-    protected $currencyRepository;
-
-    /**
      * Create a middleware instance.
      *
      * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @return void
      */
-    public function __construct(CurrencyRepository $currencyRepository)
+    public function __construct(protected CurrencyRepository $currencyRepository)
     {
-        $this->currencyRepository = $currencyRepository;
     }
 
     /**

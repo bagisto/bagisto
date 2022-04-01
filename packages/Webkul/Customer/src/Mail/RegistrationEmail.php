@@ -25,20 +25,16 @@ class RegistrationEmail extends Mailable
     public $selectedMailType;
 
     /**
-     * Request data.
-     *
-     * @var array
-     */
-    public $data;
-
-    /**
      * Create a new mailable instance.
      *
      * @param  array  $data
      * @param  string  $mailType
      * @return void
      */
-    public function __construct($data, $mailType)
+    public function __construct(
+        public $data,
+        $mailType
+    )
     {
         $this->data = $data;
 

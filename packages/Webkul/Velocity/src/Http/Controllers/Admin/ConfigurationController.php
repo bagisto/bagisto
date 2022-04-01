@@ -14,35 +14,18 @@ class ConfigurationController extends Controller
     use Sanitizer;
 
     /**
-     * Velocity helper instance.
-     *
-     * @var \Webkul\Velocity\Helpers\Helper
-     */
-    protected $velocityHelper;
-
-    /**
-     * Velocity meta data repository intance.
-     *
-     * @var \Webkul\Velocity\Repositories\VelocityMetadataRepository
-     */
-    protected $velocityMetaDataRepository;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Velocity\Repositories\MetadataRepository  $velocityMetaDataRepository
+     * @param  \Webkul\Velocity\Helpers\Helper  $velocityHelper
+     * @param  \Webkul\Velocity\Repositories\MetadataRepository  $velocityMetadataRepository
      * @return void
      */
     public function __construct (
-        Helper $velocityHelper,
-        VelocityMetadataRepository $velocityMetadataRepository
+        protected Helper $velocityHelper,
+        protected VelocityMetadataRepository $velocityMetadataRepository
     )
     {
         $this->_config = request('_config');
-
-        $this->velocityHelper = $velocityHelper;
-
-        $this->velocityMetaDataRepository = $velocityMetadataRepository;
     }
 
     /**
@@ -92,7 +75,7 @@ class ConfigurationController extends Controller
             ];
         }
 
-        $velocityMetaData = $this->velocityMetaDataRepository->findOneWhere([
+        $velocityMetaData = $this->velocityMetadataRepository->findOneWhere([
             'id' => $id,
         ]);
 
@@ -125,7 +108,7 @@ class ConfigurationController extends Controller
         $params['locale'] = $locale;
 
         /* update row */
-        $this->velocityMetaDataRepository->update($params, $id);
+        $this->velocityMetadataRepository->update($params, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => trans('velocity::app.admin.meta-data.title')]));
 
@@ -341,7 +324,7 @@ class ConfigurationController extends Controller
      */
     private function createMetaData($locale, $channel)
     {
-        $this->velocityMetaDataRepository->create([
+        $this->velocityMetadataRepository->create([
             'locale'                   => $locale,
             'channel'                  => $channel,
             'header_content_count'     => '5',

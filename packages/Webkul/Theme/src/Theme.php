@@ -8,34 +8,6 @@ use Webkul\Theme\Facades\Themes as Themes;
 class Theme
 {
     /**
-     * Contains theme code
-     *
-     * @var string
-     */
-    public $code;
-
-    /**
-     * Contains theme name
-     *
-     * @var string
-     */
-    public $name;
-    
-    /**
-     * Contains theme views path
-     *
-     * @var string
-     */
-    public $viewsPath;
-
-    /**
-     * Contains theme assets path
-     *
-     * @var string
-     */
-    public $assetsPath;
-
-    /**
      * Contains theme parent
      *
      * @var Theme
@@ -51,12 +23,13 @@ class Theme
      * @param  string  $viewsPath
      * @return void
      */
-    public function __construct($code, $name = null, $assetsPath = null, $viewsPath = null)
+    public function __construct(
+        public $code,
+        public $name = null,
+        public $assetsPath = null,
+        public $viewsPath = null
+    )
     {
-        $this->code = $code;
-
-        $this->name = $name;
-
         $this->assetsPath = $assetsPath === null ? $code : $assetsPath;
 
         $this->viewsPath = $viewsPath === null ? $code : $viewsPath;

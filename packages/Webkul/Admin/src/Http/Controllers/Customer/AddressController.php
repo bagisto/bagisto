@@ -18,34 +18,17 @@ class AddressController extends Controller
     protected $_config;
 
     /**
-     * CustomerRepository object
-     *
-     * @var \Webkul\Customer\Repositories\CustomerRepository
-     */
-    protected $customerRepository;
-
-    /**
-     * CustomerAddressRepository object
-     *
-     * @var \Webkul\Customer\Repositories\CustomerAddressRepository
-     */
-    protected $customerAddressRepository;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository         $customerRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      * @return void
      */
     public function __construct(
-        CustomerRepository $customerRepository,
-        CustomerAddressRepository $customerAddressRepository
-    ) {
-        $this->customerRepository = $customerRepository;
-
-        $this->customerAddressRepository = $customerAddressRepository;
-
+        protected CustomerRepository $customerRepository,
+        protected CustomerAddressRepository $customerAddressRepository
+    )
+    {
         $this->_config = request('_config');
     }
 

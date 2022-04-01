@@ -12,21 +12,13 @@ class NewInventorySourceNotification extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The shipment instance.
-     *
-     * @var \Webkul\Customer\Contracts\Shipment
-     */
-    public $shipment;
-
-    /**
      * Create a new message instance.
      *
      * @param  \Webkul\Customer\Contracts\Shipment  $shipment
      * @return void
      */
-    public function __construct($shipment)
+    public function __construct(public $shipment)
     {
-        $this->shipment = $shipment;
     }
 
     /**

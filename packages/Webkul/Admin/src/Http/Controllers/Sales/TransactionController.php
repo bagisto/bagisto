@@ -20,27 +20,6 @@ class TransactionController extends Controller
     protected $_config;
 
     /**
-     * Order repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * Order transaction repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\OrderTransactionRepository
-     */
-    protected $orderTransactionRepository;
-
-    /**
-     * Invoice repository instance.
-     *
-     * @var \Webkul\Sales\Repositories\InvoiceRepository
-     */
-    protected $invoiceRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
@@ -49,16 +28,12 @@ class TransactionController extends Controller
      * @return void
      */
     public function __construct(
-        OrderRepository $orderRepository,
-        OrderTransactionRepository $orderTransactionRepository,
-        InvoiceRepository $invoiceRepository) {
+        protected OrderRepository $orderRepository,
+        protected OrderTransactionRepository $orderTransactionRepository,
+        protected InvoiceRepository $invoiceRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->orderRepository = $orderRepository;
-
-        $this->orderTransactionRepository = $orderTransactionRepository;
-
-        $this->invoiceRepository = $invoiceRepository;
     }
 
     /**

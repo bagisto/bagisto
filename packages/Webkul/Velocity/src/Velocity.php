@@ -32,22 +32,14 @@ class Velocity
         'custom'  => 'Custom Selection',
     ];
 
-	/**
-	 * CategoryRepository object
-	 * 
-	 * @var \Webkul\Category\Repositories\CategoryRepository
-	 */
-	protected $categoryRepository;
-
     /**
      * Create a new instance.
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @return void
      */
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(protected CategoryRepository $categoryRepository)
     {
-        $this->categoryRepository = $categoryRepository;
     }
 
     /**

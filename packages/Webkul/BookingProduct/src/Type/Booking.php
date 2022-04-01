@@ -18,21 +18,11 @@ use Webkul\Product\Type\Virtual;
 
 class Booking extends Virtual
 {
-    /**
-     * BookingProductRepository instance
-     *
-     * @var \Webkul\BookingProduct\Repositories\BookingProductRepository
+    /** @var bool 
+     * 
+     * do not allow booking products to be copied, it would be too complicated. 
+     * 
      */
-    protected $bookingProductRepository;
-
-    /**
-     * Booking helper instance
-     *
-     * @var \Webkul\BookingProduct\Helpers\Booking
-     */
-    protected $bookingHelper;
-
-    /** @var bool do not allow booking products to be copied, it would be too complicated. */
     protected $canBeCopied = false;
 
     /**
@@ -66,9 +56,9 @@ class Booking extends Virtual
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
-        BookingProductRepository $bookingProductRepository,
-        BookingHelper $bookingHelper,
-        ProductVideoRepository $productVideoRepository
+        ProductVideoRepository $productVideoRepository,
+        protected BookingProductRepository $bookingProductRepository,
+        protected BookingHelper $bookingHelper
     )
     {
         parent::__construct(
@@ -79,10 +69,6 @@ class Booking extends Virtual
             $productImageRepository,
             $productVideoRepository
         );
-
-        $this->bookingProductRepository = $bookingProductRepository;
-
-        $this->bookingHelper = $bookingHelper;
     }
 
     /**

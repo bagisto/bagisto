@@ -9,20 +9,6 @@ use Webkul\Product\Repositories\SearchRepository;
 class HomeController extends Controller
 {
     /**
-     * Slider repository instance.
-     *
-     * @var \Webkul\Core\Repositories\SliderRepository
-     */
-    protected $sliderRepository;
-
-    /**
-     * Search repository instance.
-     *
-     * @var \Webkul\Core\Repositories\SearchRepository
-     */
-    protected $searchRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\SliderRepository  $sliderRepository
@@ -30,13 +16,10 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct(
-        SliderRepository $sliderRepository,
-        SearchRepository $searchRepository
-    ) {
-        $this->sliderRepository = $sliderRepository;
-
-        $this->searchRepository = $searchRepository;
-
+        protected SliderRepository $sliderRepository,
+        protected SearchRepository $searchRepository
+    )
+    {
         parent::__construct();
     }
 

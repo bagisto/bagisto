@@ -24,62 +24,6 @@ class Core
     const BAGISTO_VERSION = '1.x-dev';
 
     /**
-     * Channel repository instance.
-     *
-     * @var \Webkul\Core\Repositories\ChannelRepository
-     */
-    protected $channelRepository;
-
-    /**
-     * Currency repository instance.
-     *
-     * @var \Webkul\Core\Repositories\CurrencyRepository
-     */
-    protected $currencyRepository;
-
-    /**
-     * Exchange rate repository instance.
-     *
-     * @var \Webkul\Core\Repositories\ExchangeRateRepository
-     */
-    protected $exchangeRateRepository;
-
-    /**
-     * Country repository instance.
-     *
-     * @var \Webkul\Core\Repositories\CountryRepository
-     */
-    protected $countryRepository;
-
-    /**
-     * Country state repository instance.
-     *
-     * @var \Webkul\Core\Repositories\CountryStateRepository
-     */
-    protected $countryStateRepository;
-
-    /**
-     * Locale repository instance.
-     *
-     * @var \Webkul\Core\Repositories\LocaleRepository
-     */
-    protected $localeRepository;
-
-    /**
-     * Customer group repository instance.
-     *
-     * @var CustomerGroupRepository
-     */
-    protected $customerGroupRepository;
-
-    /**
-     * Core config repository instance.
-     *
-     * @var \Webkul\Core\Repositories\CoreConfigRepository
-     */
-    protected $coreConfigRepository;
-
-    /**
      * Channel.
      *
      * @var \Webkul\Core\Models\Channel
@@ -105,41 +49,27 @@ class Core
     /**
      * Create a new instance.
      *
-     * @param  \Webkul\Core\Repositories\ChannelRepository            $channelRepository
-     * @param  \Webkul\Core\Repositories\CurrencyRepository           $currencyRepository
-     * @param  \Webkul\Core\Repositories\ExchangeRateRepository       $exchangeRateRepository
-     * @param  \Webkul\Core\Repositories\CountryRepository            $countryRepository
-     * @param  \Webkul\Core\Repositories\CountryStateRepository       $countryStateRepository
-     * @param  \Webkul\Core\Repositories\LocaleRepository             $localeRepository
+     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
+     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
+     * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
+     * @param  \Webkul\Core\Repositories\CountryRepository  $countryRepository
+     * @param  \Webkul\Core\Repositories\CountryStateRepository  $countryStateRepository
+     * @param  \Webkul\Core\Repositories\LocaleRepository  $localeRepository
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
-     * @param  \Webkul\Core\Repositories\CoreConfigRepository         $coreConfigRepository
+     * @param  \Webkul\Core\Repositories\CoreConfigRepository  $coreConfigRepository
      * @return void
      */
     public function __construct(
-        ChannelRepository $channelRepository,
-        CurrencyRepository $currencyRepository,
-        ExchangeRateRepository $exchangeRateRepository,
-        CountryRepository $countryRepository,
-        CountryStateRepository $countryStateRepository,
-        LocaleRepository $localeRepository,
-        CustomerGroupRepository $customerGroupRepository,
-        CoreConfigRepository $coreConfigRepository
-    ) {
-        $this->channelRepository = $channelRepository;
-
-        $this->currencyRepository = $currencyRepository;
-
-        $this->exchangeRateRepository = $exchangeRateRepository;
-
-        $this->countryRepository = $countryRepository;
-
-        $this->countryStateRepository = $countryStateRepository;
-
-        $this->localeRepository = $localeRepository;
-
-        $this->customerGroupRepository = $customerGroupRepository;
-
-        $this->coreConfigRepository = $coreConfigRepository;
+        protected ChannelRepository $channelRepository,
+        protected CurrencyRepository $currencyRepository,
+        protected ExchangeRateRepository $exchangeRateRepository,
+        protected CountryRepository $countryRepository,
+        protected CountryStateRepository $countryStateRepository,
+        protected LocaleRepository $localeRepository,
+        protected CustomerGroupRepository $customerGroupRepository,
+        protected CoreConfigRepository $coreConfigRepository
+    )
+    {
     }
 
     /**

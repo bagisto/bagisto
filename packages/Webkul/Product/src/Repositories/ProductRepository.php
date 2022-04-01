@@ -21,13 +21,6 @@ use Webkul\Product\Models\ProductFlat;
 class ProductRepository extends Repository
 {
     /**
-     * Attribute repository instance,
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
      * Create a new repository instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
@@ -36,11 +29,10 @@ class ProductRepository extends Repository
      * @return void
      */
     public function __construct(
-        AttributeRepository $attributeRepository,
+        protected AttributeRepository $attributeRepository,
         App $app
-    ) {
-        $this->attributeRepository = $attributeRepository;
-
+    )
+    {
         parent::__construct($app);
     }
 

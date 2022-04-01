@@ -16,20 +16,6 @@ use Illuminate\Support\Str;
 class GenerateProduct
 {
     /**
-     * Product Repository instance
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * AttributeFamily Repository instance
-     *
-     * @var \Webkul\Product\Repositories\AttributeFamilyRepository
-     */
-    protected $attributeFamilyRepository;
-
-    /**
      * Product Attribute Types
      *
      * @var array
@@ -44,14 +30,10 @@ class GenerateProduct
      * @return void
      */
     public function __construct(
-        ProductRepository $productRepository,
-        AttributeFamilyRepository $attributeFamilyRepository
+        protected ProductRepository $productRepository,
+        protected AttributeFamilyRepository $attributeFamilyRepository
     )
     {
-        $this->productRepository = $productRepository;
-
-        $this->attributeFamilyRepository = $attributeFamilyRepository;
-
         $this->types = [
             'text',
             'textarea',

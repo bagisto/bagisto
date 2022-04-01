@@ -16,22 +16,13 @@ class ReviewController extends Controller
     protected $_config;
 
     /**
-     * Product review repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductReviewRepository
-     */
-    protected $productReviewRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */
-    public function __construct(ProductReviewRepository $productReviewRepository)
+    public function __construct(protected ProductReviewRepository $productReviewRepository)
     {
-        $this->productReviewRepository = $productReviewRepository;
-
         $this->_config = request('_config');
     }
 

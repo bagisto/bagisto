@@ -23,48 +23,6 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 abstract class AbstractType
 {
     /**
-     * Attribute repository instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * Product attribute value repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
-     */
-    protected $attributeValueRepository;
-
-    /**
-     * Product inventory repository instance.
-     *
-     * @var ProductInventoryRepository
-     */
-    protected $productInventoryRepository;
-
-    /**
-     * Product image repository instance.
-     *
-     * @var \Webkul\Product\Repositories\productImageRepository
-     */
-    protected $productImageRepository;
-
-    /**
-     * Product video repository instance.
-     *
-     * @var \Webkul\Product\Repositories\productVideoRepository
-     */
-    protected $productVideoRepository;
-
-    /**
      * Product instance.
      *
      * @var \Webkul\Product\Models\Product
@@ -158,33 +116,23 @@ abstract class AbstractType
     /**
      * Create a new product type instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository               $productRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
-     * @param  \Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param  \Webkul\Product\Repositories\ProductVideoRepository          $productVideoRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @return void
      */
     public function __construct(
-        AttributeRepository $attributeRepository,
-        ProductRepository $productRepository,
-        ProductAttributeValueRepository $attributeValueRepository,
-        ProductInventoryRepository $productInventoryRepository,
-        ProductImageRepository $productImageRepository,
-        ProductVideoRepository $productVideoRepository
-    ) {
-        $this->attributeRepository = $attributeRepository;
-
-        $this->productRepository = $productRepository;
-
-        $this->attributeValueRepository = $attributeValueRepository;
-
-        $this->productInventoryRepository = $productInventoryRepository;
-
-        $this->productImageRepository = $productImageRepository;
-
-        $this->productVideoRepository = $productVideoRepository;
+        protected AttributeRepository $attributeRepository,
+        protected ProductRepository $productRepository,
+        protected ProductAttributeValueRepository $attributeValueRepository,
+        protected ProductInventoryRepository $productInventoryRepository,
+        protected ProductImageRepository $productImageRepository,
+        protected ProductVideoRepository $productVideoRepository
+    )
+    {
     }
 
     /**

@@ -13,13 +13,6 @@ class ProductRepository extends Repository
 {
     use CacheableRepository;
 
-     /**
-     * AttributeRepository object
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
     /**
      * Create a new controller instance.
      *
@@ -28,12 +21,10 @@ class ProductRepository extends Repository
      * @return void
      */
     public function __construct(
-        AttributeRepository $attributeRepository,
+        protected AttributeRepository $attributeRepository,
         App $app
     )
     {
-        $this->attributeRepository = $attributeRepository;
-
         parent::__construct($app);
     }
 

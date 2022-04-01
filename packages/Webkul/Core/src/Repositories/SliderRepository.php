@@ -15,13 +15,6 @@ class SliderRepository extends Repository
     use CacheableRepository;
 
     /**
-     * Channel repository instance.
-     *
-     * @var \Webkul\Core\Repositories\ChannelRepository
-     */
-    protected $channelRepository;
-
-    /**
      * Create a new repository instance.
      *
      * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
@@ -29,11 +22,10 @@ class SliderRepository extends Repository
      * @return void
      */
     public function __construct(
-        ChannelRepository $channelRepository,
+        protected ChannelRepository $channelRepository,
         App $app
-    ) {
-        $this->channelRepository = $channelRepository;
-
+    )
+    {
         parent::__construct($app);
     }
 

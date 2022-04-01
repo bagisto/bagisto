@@ -16,24 +16,15 @@ class TaxRateController extends Controller
      * @var array
      */
     protected $_config;
-
-    /**
-     * Tax rate repository instance.
-     *
-     * @var \Webkul\Tax\Repositories\TaxRateRepository
-     */
-    protected $taxRateRepository;
-
+    
     /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Tax\Repositories\TaxRateRepository  $taxRateRepository
      * @return void
      */
-    public function __construct(TaxRateRepository $taxRateRepository)
+    public function __construct(protected TaxRateRepository $taxRateRepository)
     {
-        $this->taxRateRepository = $taxRateRepository;
-
         $this->_config = request('_config');
     }
 

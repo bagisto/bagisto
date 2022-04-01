@@ -16,22 +16,13 @@ class InventorySourceController extends Controller
     protected $_config;
 
     /**
-     * Inventory source repository instance.
-     *
-     * @var \Webkul\Inventory\Repositories\InventorySourceRepository
-     */
-    protected $inventorySourceRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @return void
      */
-    public function __construct(InventorySourceRepository $inventorySourceRepository)
+    public function __construct(protected InventorySourceRepository $inventorySourceRepository)
     {
-        $this->inventorySourceRepository = $inventorySourceRepository;
-
         $this->_config = request('_config');
     }
 

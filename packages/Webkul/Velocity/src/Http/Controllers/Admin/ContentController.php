@@ -9,20 +9,6 @@ use Webkul\Velocity\Repositories\ContentRepository;
 class ContentController extends Controller
 {
     /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * Content repository instance.
-     *
-     * @var \Webkul\Velocity\Repositories\ContentRepository
-     */
-    protected $contentRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
@@ -30,13 +16,10 @@ class ContentController extends Controller
      * @return void
      */
     public function __construct(
-        ProductRepository $productRepository,
-        ContentRepository $contentRepository
-    ) {
-        $this->productRepository = $productRepository;
-
-        $this->contentRepository = $contentRepository;
-
+        protected ProductRepository $productRepository,
+        protected ContentRepository $contentRepository
+    )
+    {
         $this->_config = request('_config');
     }
 

@@ -8,20 +8,12 @@ use Webkul\Core\Repositories\LocaleRepository;
 class Locale
 {
     /**
-     * Locale repository.
-     *
-     * @var LocaleRepository
-     */
-    protected $locale;
-
-    /**
      * Create a new middleware instance.
      *
-     * @param  \Webkul\Core\Repositories\LocaleRepository $locale
+     * @param  \Webkul\Core\Repositories\LocaleRepository $localeRepository
      */
-    public function __construct(LocaleRepository $locale)
+    public function __construct(protected LocaleRepository $localeRepository)
     {
-        $this->locale = $locale;
     }
 
     /**
@@ -36,7 +28,7 @@ class Locale
         $locale = request()->get('admin_locale');
 
         if ($locale) {
-            if ($this->locale->findOneByField('code', $locale)) {
+            if ($this->localeRepository->findOneByField('code', $locale)) {
                 app()->setLocale($locale);
 
                 session()->put('admin_locale', $locale);

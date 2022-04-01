@@ -24,92 +24,29 @@ class Controller extends BaseController
      * @var array
      */
     protected $_config;
-
-    /**
-     * SearchRepository object
-     *
-     * @var \Webkul\Product\Repositories\SearchRepository
-     */
-    protected $searchRepository;
-
-    /**
-     * ProductRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * ProductRepository object of velocity package
-     *
-     * @var \Webkul\Velocity\Repositories\Product\ProductRepository
-     */
-    protected $velocityProductRepository;
-
-    /**
-     * CategoryRepository object of velocity package
-     *
-     * @var \Webkul\Category\Repositories\CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
-     * WishlistRepository object
-     *
-     * @var \Webkul\Customer\Repositories\WishlistRepository
-     */
-    protected $wishlistRepository;
-
-    /**
-     * Helper object
-     *
-     * @var \Webkul\Velocity\Helpers\Helper
-     */
-    protected $velocityHelper;
-
-    /**
-     * VelocityCustomerCompareProductRepository object of repository
-     *
-     * @var \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository
-     */
-    protected $compareProductsRepository;
-
-
+    
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Velocity\Helpers\Helper                                         $velocityHelper
-     * @param  \Webkul\Product\Repositories\SearchRepository                           $searchRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository                          $productRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository                        $categoryRepository
-     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository                 $velocityProductRepository
+     * @param  \Webkul\Velocity\Helpers\Helper  $velocityHelper
+     * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository  $velocityProductRepository
      * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $compareProductsRepository
      *
      * @return void
      */
     public function __construct(
-        Helper $velocityHelper,
-        SearchRepository $searchRepository,
-        ProductRepository $productRepository,
-        WishlistRepository $wishlistRepository,
-        CategoryRepository $categoryRepository,
-        VelocityProductRepository $velocityProductRepository,
-        CustomerCompareProductRepository $compareProductsRepository
-    ) {
+        protected Helper $velocityHelper,
+        protected SearchRepository $searchRepository,
+        protected ProductRepository $productRepository,
+        protected WishlistRepository $wishlistRepository,
+        protected CategoryRepository $categoryRepository,
+        protected VelocityProductRepository $velocityProductRepository,
+        protected CustomerCompareProductRepository $compareProductsRepository
+    )
+    {
         $this->_config = request('_config');
-
-        $this->velocityHelper = $velocityHelper;
-
-        $this->searchRepository = $searchRepository;
-
-        $this->productRepository = $productRepository;
-
-        $this->categoryRepository = $categoryRepository;
-
-        $this->wishlistRepository = $wishlistRepository;
-
-        $this->velocityProductRepository = $velocityProductRepository;
-
-        $this->compareProductsRepository = $compareProductsRepository;
     }
 }

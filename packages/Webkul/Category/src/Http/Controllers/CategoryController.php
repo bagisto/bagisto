@@ -19,20 +19,6 @@ class CategoryController extends Controller
     protected $_config;
 
     /**
-     * Category repository instance.
-     *
-     * @var \Webkul\Category\Repositories\CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
-     * Attribute repository instance.
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
@@ -40,13 +26,10 @@ class CategoryController extends Controller
      * @return void
      */
     public function __construct(
-        CategoryRepository $categoryRepository,
-        AttributeRepository $attributeRepository
-    ) {
-        $this->categoryRepository = $categoryRepository;
-
-        $this->attributeRepository = $attributeRepository;
-
+        protected CategoryRepository $categoryRepository,
+        protected AttributeRepository $attributeRepository
+    )
+    {
         $this->_config = request('_config');
     }
 

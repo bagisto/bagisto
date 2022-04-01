@@ -11,16 +11,13 @@ class SubscriptionEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subscriptionData;
-
     /**
      * Create a mailable instance
      * 
      * @param  array  $subscriptionData
      */
-    public function __construct($subscriptionData)
+    public function __construct(public $subscriptionData)
     {
-        $this->subscriptionData = $subscriptionData;
     }
 
     /**

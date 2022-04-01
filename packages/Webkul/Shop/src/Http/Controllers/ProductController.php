@@ -14,48 +14,6 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductController extends Controller
 {
     /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * Product flat repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductFlatRepository
-     */
-    protected $productFlatRepository;
-
-    /**
-     * Product attribute value repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
-     */
-    protected $productAttributeValueRepository;
-
-    /**
-     * Product downloadable sample repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
-     */
-    protected $productDownloadableSampleRepository;
-
-    /**
-     * Product downloadable link repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
-     */
-    protected $productDownloadableLinkRepository;
-
-    /**
-     * Category repository instance.
-     *
-     * @var \Webkul\Category\Repositories\CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
@@ -67,25 +25,14 @@ class ProductController extends Controller
      * @return void
      */
     public function __construct(
-        ProductRepository $productRepository,
-        ProductFlatRepository $productFlatRepository,
-        ProductAttributeValueRepository $productAttributeValueRepository,
-        ProductDownloadableSampleRepository $productDownloadableSampleRepository,
-        ProductDownloadableLinkRepository $productDownloadableLinkRepository,
-        CategoryRepository $categoryRepository
-    ) {
-        $this->productRepository = $productRepository;
-
-        $this->productFlatRepository = $productFlatRepository;
-
-        $this->productAttributeValueRepository = $productAttributeValueRepository;
-
-        $this->productDownloadableSampleRepository = $productDownloadableSampleRepository;
-
-        $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
-
-        $this->categoryRepository = $categoryRepository;
-
+        protected ProductRepository $productRepository,
+        protected ProductFlatRepository $productFlatRepository,
+        protected ProductAttributeValueRepository $productAttributeValueRepository,
+        protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
+        protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
+        protected CategoryRepository $categoryRepository
+    )
+    {
         parent::__construct();
     }
 

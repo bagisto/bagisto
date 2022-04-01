@@ -9,20 +9,6 @@ use Webkul\Velocity\Repositories\CategoryRepository as VelocityCategoryRepositor
 class CategoryController extends Controller
 {
     /**
-     * Category Repository object
-     *
-     * @var \Webkul\Category\Repositories\CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
-     * VelocityCategory Repository object
-     *
-     * @var \Webkul\Velocity\Repositories\CategoryRepository
-     */
-    protected $velocityCategoryRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository;
@@ -30,13 +16,10 @@ class CategoryController extends Controller
      * @return void
      */
     public function __construct(
-        CategoryRepository $categoryRepository,
-        VelocityCategoryRepository $velocityCategoryRepository
-    ) {
-        $this->categoryRepository = $categoryRepository;
-
-        $this->velocityCategoryRepository = $velocityCategoryRepository;
-
+        protected CategoryRepository $categoryRepository,
+        protected VelocityCategoryRepository $velocityCategoryRepository
+    )
+    {
         $this->_config = request('_config');
     }
     /**

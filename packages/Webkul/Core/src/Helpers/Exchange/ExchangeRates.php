@@ -23,35 +23,17 @@ class ExchangeRates extends ExchangeRate
     protected $apiEndPoint;
 
     /**
-     * CurrencyRepository $currencyRepository
-     *
-     * @var \Webkul\Core\Repositories\CurrencyRepository
-     */
-    protected $currencyRepository;
-
-    /**
-     * ExchangeRateRepository $exchangeRateRepository
-     *
-     * @var \Webkul\Core\Repositories\ExchangeRateRepository
-     */
-    protected $exchangeRateRepository;
-
-    /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\Core\Repositories\CurrencyRepository      $currencyRepository
+     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
      * @return  void
      */
     public function  __construct(
-        CurrencyRepository $currencyRepository,
-        ExchangeRateRepository $exchangeRateRepository
+        protected CurrencyRepository $currencyRepository,
+        protected ExchangeRateRepository $exchangeRateRepository
     )
     {
-        $this->currencyRepository = $currencyRepository;
-
-        $this->exchangeRateRepository = $exchangeRateRepository;
-
         $this->apiEndPoint = 'https://api.exchangeratesapi.io/latest';
 
         $this->apiKey = config('services.exchange-api.exchange_rates.key');

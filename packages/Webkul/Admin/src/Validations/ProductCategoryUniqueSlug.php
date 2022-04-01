@@ -26,30 +26,16 @@ class ProductCategoryUniqueSlug implements Rule
     protected $isSlugReserved = false;
 
     /**
-     * Table name.
-     *
-     * @var string
-     */
-    protected $tableName;
-
-    /**
-     * Table id.
-     *
-     * @var string
-     */
-    protected $id;
-
-    /**
      * Constructor.
      *
      * @param  string  $tableName
      * @param  string  $id
      */
-    public function __construct($tableName = null, $id = null)
+    public function __construct(
+        protected $tableName = null,
+        protected $id = null
+    )
     {
-        $this->tableName = $tableName;
-
-        $this->id = $id;
     }
 
     /**

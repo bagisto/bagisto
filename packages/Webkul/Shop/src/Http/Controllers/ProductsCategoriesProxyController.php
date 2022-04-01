@@ -10,27 +10,6 @@ use Webkul\Category\Repositories\CategoryRepository;
 class ProductsCategoriesProxyController extends Controller
 {
     /**
-     * Category repository instance.
-     *
-     * @var \Webkul\Category\Repositories\CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
-     * Product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * Slider repository instance.
-     *
-     * @var \Webkul\Core\Repositories\SliderRepository
-     */
-    protected $sliderRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
@@ -38,16 +17,11 @@ class ProductsCategoriesProxyController extends Controller
      * @return void
      */
     public function __construct(
-        CategoryRepository $categoryRepository,
-        ProductRepository $productRepository,
-        SliderRepository $sliderRepository
-    ) {
-        $this->categoryRepository = $categoryRepository;
-
-        $this->productRepository = $productRepository;
-
-        $this->sliderRepository = $sliderRepository;
-
+        protected CategoryRepository $categoryRepository,
+        protected ProductRepository $productRepository,
+        protected SliderRepository $sliderRepository
+    )
+    {
         parent::__construct();
     }
 

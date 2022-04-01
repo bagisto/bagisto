@@ -12,20 +12,6 @@ use Illuminate\Support\Str;
 class AttributeFamilyRepository extends Repository
 {
     /**
-     * AttributeRepository object
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
-     * AttributeGroupRepository object
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeGroupRepository
-     */
-    protected $attributeGroupRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
@@ -33,15 +19,11 @@ class AttributeFamilyRepository extends Repository
      * @return void
      */
     public function __construct(
-        AttributeRepository $attributeRepository,
-        AttributeGroupRepository $attributeGroupRepository,
+        protected AttributeRepository $attributeRepository,
+        protected AttributeGroupRepository $attributeGroupRepository,
         App $app
     )
     {
-        $this->attributeRepository = $attributeRepository;
-
-        $this->attributeGroupRepository = $attributeGroupRepository;
-
         parent::__construct($app);
     }
 

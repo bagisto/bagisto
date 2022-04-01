@@ -9,21 +9,13 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 class DataGridExport implements FromView, ShouldAutoSize
 {
     /**
-     * DataGrid instance
-     *
-     * @var mixed
-     */
-    protected $gridData = [];
-
-    /**
      * Create a new instance.
      *
      * @param mixed DataGrid
      * @return void
      */
-    public function __construct($gridData)
+    public function __construct(protected $gridData = [])
     {
-        $this->gridData = $gridData;
     }
 
      /**

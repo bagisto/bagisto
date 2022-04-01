@@ -12,34 +12,6 @@ use Webkul\Rule\Helpers\Validator;
 class CatalogRuleProduct
 {
     /**
-     * AttributeRepository object
-     *
-     * @var \Webkul\Attribute\Repositories\AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
-     * ProductRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * CatalogRuleProductRepository object
-     *
-     * @var \Webkul\CatalogRule\Repositories\CatalogRuleProductRepository
-     */
-    protected $catalogRuleProductRepository;
-
-    /**
-     * Validator object
-     *
-     * @var \Webkul\Rule\Helpers\ValidatorValidator
-     */
-    protected $validator;
-
-    /**
      * Create a new helper instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
@@ -49,19 +21,12 @@ class CatalogRuleProduct
      * @return void
      */
     public function __construct(
-        AttributeRepository $attributeRepository,
-        ProductRepository $productRepository,
-        CatalogRuleProductRepository $catalogRuleProductRepository,
-        Validator $validator
+        protected AttributeRepository $attributeRepository,
+        protected ProductRepository $productRepository,
+        protected CatalogRuleProductRepository $catalogRuleProductRepository,
+        protected Validator $validator
     )
     {
-        $this->attributeRepository = $attributeRepository;
-
-        $this->productRepository = $productRepository;
-
-        $this->catalogRuleProductRepository = $catalogRuleProductRepository;
-
-        $this->validator = $validator;
     }
 
     /**

@@ -17,27 +17,6 @@ use Webkul\Product\Repositories\ProductVideoRepository;
 class Bundle extends AbstractType
 {
     /**
-     * Product bundle option repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductBundleOptionRepository
-     */
-    protected $productBundleOptionRepository;
-
-    /**
-     * Product bundle option product repository instance.
-     *
-     * @var \Webkul\Product\Repositories\ProductBundleOptionProductRepository
-     */
-    protected $productBundleOptionProductRepository;
-
-    /**
-     * Bundle Option helper instance.
-     *
-     * @var \Webkul\Product\Helpers\BundleOption
-     */
-    protected $bundleOptionHelper;
-
-    /**
      * Skip attribute for Bundle product type.
      *
      * @var array
@@ -99,11 +78,12 @@ class Bundle extends AbstractType
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
-        ProductBundleOptionRepository $productBundleOptionRepository,
-        ProductBundleOptionProductRepository $productBundleOptionProductRepository,
-        BundleOption $bundleOptionHelper,
-        ProductVideoRepository $productVideoRepository
-    ) {
+        ProductVideoRepository $productVideoRepository,
+        protected ProductBundleOptionRepository $productBundleOptionRepository,
+        protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
+        protected BundleOption $bundleOptionHelper
+    )
+    {
         parent::__construct(
             $attributeRepository,
             $productRepository,
@@ -112,12 +92,6 @@ class Bundle extends AbstractType
             $productImageRepository,
             $productVideoRepository
         );
-
-        $this->productBundleOptionRepository = $productBundleOptionRepository;
-
-        $this->productBundleOptionProductRepository = $productBundleOptionProductRepository;
-
-        $this->bundleOptionHelper = $bundleOptionHelper;
     }
 
     /**

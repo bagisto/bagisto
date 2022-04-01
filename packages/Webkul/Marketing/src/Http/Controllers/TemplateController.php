@@ -15,22 +15,13 @@ class TemplateController extends Controller
     protected $_config;
 
     /**
-     * Template repository instance.
-     *
-     * @var \Webkul\Marketing\Repositories\TemplateRepository
-     */
-    protected $templateRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Marketing\Repositories\TemplateRepository  $templateRepository
      * @return void
      */
-    public function __construct(TemplateRepository $templateRepository)
+    public function __construct(protected TemplateRepository $templateRepository)
     {
-        $this->templateRepository = $templateRepository;
-
         $this->_config = request('_config');
     }
 

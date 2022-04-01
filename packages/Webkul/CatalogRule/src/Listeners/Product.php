@@ -7,21 +7,13 @@ use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
 class Product
 {
     /**
-     * Product Repository Object
-     * 
-     * @var \Webkul\CatalogRule\Helpers\CatalogRuleIndex
-     */
-    protected $catalogRuleIndexHelper;
-
-    /**
      * Create a new listener instance.
      * 
      * @param  \Webkul\CatalogRule\Helpers\CatalogRuleIndex  $catalogRuleIndexHelper
      * @return void
      */
-    public function __construct(CatalogRuleIndex $catalogRuleIndexHelper)
+    public function __construct(protected CatalogRuleIndex $catalogRuleIndexHelper)
     {
-        $this->catalogRuleIndexHelper = $catalogRuleIndexHelper;
     }
 
     /**

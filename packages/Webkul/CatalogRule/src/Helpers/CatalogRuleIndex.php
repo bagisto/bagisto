@@ -8,27 +8,6 @@ use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
 class CatalogRuleIndex
 {
     /**
-     * CatalogRuleRepository object
-     *
-     * @var \Webkul\CatalogRule\Repositories\CatalogRuleRepository
-    */
-    protected $catalogRuleRepository;
-
-    /**
-     * CatalogRuleProduct object
-     *
-     * @var \Webkul\CatalogRule\Helpers\CatalogRuleProduct
-    */
-    protected $catalogRuleHelper;
-
-    /**
-     * CatalogRuleProductPrice object
-     *
-     * @var \Webkul\CatalogRule\Helpers\CatalogRuleProductPrice
-    */
-    protected $catalogRuleProductPriceHelper;
-
-    /**
      * Create a new helper instance.
      *
      * @param  \Webkul\CatalogRule\Repositories\CatalogRuleRepository  $catalogRuleRepository
@@ -37,16 +16,11 @@ class CatalogRuleIndex
      * @return void
      */
     public function __construct(
-        CatalogRuleRepository $catalogRuleRepository,
-        CatalogRuleProduct $catalogRuleProductHelper,
-        CatalogRuleProductPrice $catalogRuleProductPriceHelper
+        protected CatalogRuleRepository $catalogRuleRepository,
+        protected CatalogRuleProduct $catalogRuleProductHelper,
+        protected CatalogRuleProductPrice $catalogRuleProductPriceHelper
     )
     {
-        $this->catalogRuleRepository = $catalogRuleRepository;
-
-        $this->catalogRuleProductHelper = $catalogRuleProductHelper;
-
-        $this->catalogRuleProductPriceHelper = $catalogRuleProductPriceHelper;
     }
 
     /**

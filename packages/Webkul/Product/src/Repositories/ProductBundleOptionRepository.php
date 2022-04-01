@@ -9,13 +9,6 @@ use Illuminate\Support\Str;
 class ProductBundleOptionRepository extends Repository
 {
     /**
-     * ProductBundleOptionProductRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductBundleOptionProductRepository
-     */
-    protected $productBundleOptionProductRepository;
-
-    /**
      * Create a new repository instance.
      *
      * @param  Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
@@ -23,12 +16,10 @@ class ProductBundleOptionRepository extends Repository
      * @return void
      */
     public function __construct(
-        ProductBundleOptionProductRepository $productBundleOptionProductRepository,
+        protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         App $app
     )
     {
-        $this->productBundleOptionProductRepository = $productBundleOptionProductRepository;
-
         parent::__construct($app);
     }
 

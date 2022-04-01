@@ -10,27 +10,6 @@ use Webkul\Sales\Repositories\InvoiceRepository;
 class SmartButtonController extends Controller
 {
     /**
-     * SmartButton $smartButton
-     *
-     * @var \Webkul\Paypal\Payment\SmartButton
-     */
-    protected $smartButton;
-
-    /**
-     * OrderRepository $orderRepository
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * InvoiceRepository $invoiceRepository
-     *
-     * @var \Webkul\Sales\Repositories\InvoiceRepository
-     */
-    protected $invoiceRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Paypal\Payment\SmartButton  $smartButton
@@ -39,16 +18,11 @@ class SmartButtonController extends Controller
      * @return void
      */
     public function __construct(
-        SmartButton $smartButton,
-        OrderRepository $orderRepository,
-        InvoiceRepository $invoiceRepository
+        protected SmartButton $smartButton,
+        protected OrderRepository $orderRepository,
+        protected InvoiceRepository $invoiceRepository
     )
     {
-        $this->smartButton = $smartButton;
-
-        $this->orderRepository = $orderRepository;
-
-        $this->invoiceRepository = $invoiceRepository;
     }
 
     /**
