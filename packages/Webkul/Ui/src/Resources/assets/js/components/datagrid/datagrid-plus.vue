@@ -223,12 +223,6 @@ export default {
         },
 
         setParamsAndUrl() {
-            let params = new URL(this.src).search;
-
-            if (params.slice(1, params.length).length > 0) {
-                this.arrayFromUrl();
-            }
-
             for (let id in this.massActions) {
                 this.massActionTargets.push({
                     id: parseInt(id),
@@ -236,110 +230,6 @@ export default {
                     action: this.massActions[id].action,
                     confirm_text: this.massActions[id].confirm_text
                 });
-            }
-        },
-
-        arrayFromUrl: function() {
-            let obj = {};
-            const processedUrl = this.url.search.slice(1, this.url.length);
-            let splitted = [];
-            let moreSplitted = [];
-
-            splitted = processedUrl.split('&');
-
-            for (let i = 0; i < splitted.length; i++) {
-                moreSplitted.push(splitted[i].split('='));
-            }
-
-            for (let i = 0; i < moreSplitted.length; i++) {
-                const key = decodeURI(moreSplitted[i][0]);
-                let value = decodeURI(moreSplitted[i][1]);
-
-                if (value.includes('+')) {
-                    value = value.replace('+', ' ');
-                }
-
-                obj.column = key.replace(']', '').split('[')[0];
-                obj.cond = key.replace(']', '').split('[')[1];
-                obj.val = value;
-
-                switch (obj.column) {
-                    case 'search':
-                        obj.label = this.translations.searchTitle;
-                        break;
-                    case 'channel':
-                        obj.label = this.translations.channel;
-                        if ('channels' in this.extraFilters) {
-                            obj.prettyValue = this.extraFilters[
-                                'channels'
-                            ].find(channel => channel.code == obj.val);
-
-                            if (obj.prettyValue !== undefined) {
-                                obj.prettyValue = obj.prettyValue.name;
-                            }
-                        }
-                        break;
-                    case 'locale':
-                        obj.label = this.translations.locale;
-                        if ('locales' in this.extraFilters) {
-                            obj.prettyValue = this.extraFilters['locales'].find(
-                                locale => locale.code === obj.val
-                            );
-
-                            if (obj.prettyValue !== undefined) {
-                                obj.prettyValue = obj.prettyValue.name;
-                            }
-                        }
-                        break;
-                    case 'customer_group':
-                        obj.label = this.translations.customerGroup;
-                        if ('customer_groups' in this.extraFilters) {
-                            obj.prettyValue = this.extraFilters[
-                                'customer_groups'
-                            ].find(
-                                customer_group =>
-                                    customer_group.id === parseInt(obj.val, 10)
-                            );
-
-                            if (obj.prettyValue !== undefined) {
-                                obj.prettyValue = obj.prettyValue.name;
-                            }
-                        }
-                        break;
-                    case 'sort':
-                        for (let colIndex in this.columns) {
-                            if (this.columns[colIndex].index === obj.cond) {
-                                obj.label = this.columns[colIndex].label;
-                                break;
-                            }
-                        }
-                        break;
-                    default:
-                        for (let colIndex in this.columns) {
-                            if (this.columns[colIndex].index === obj.column) {
-                                obj.label = this.columns[colIndex].label;
-
-                                if (this.columns[colIndex].type === 'boolean') {
-                                    if (obj.val === '1') {
-                                        obj.val = this.translations.true;
-                                    } else {
-                                        obj.val = this.translations.false;
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                }
-
-                if (
-                    obj.column !== undefined &&
-                    obj.column !== 'admin_locale' &&
-                    obj.val !== undefined
-                ) {
-                    this.filters.push(obj);
-                }
-
-                obj = {};
             }
         },
 
@@ -374,149 +264,148 @@ export default {
                 alert(this.translations.filterFieldsMissing);
 
                 return false;
-            } else {
-                if (this.filters.length > 0) {
-                    if (column !== 'sort' && column !== 'search') {
-                        let filterRepeated = false;
+            }
 
-                        for (let j = 0; j < this.filters.length; j++) {
-                            if (this.filters[j].column === column) {
-                                if (
-                                    this.filters[j].cond === condition &&
-                                    this.filters[j].val === response
-                                ) {
-                                    filterRepeated = true;
+            if (this.filters.length > 0) {
+                if (column !== 'sort' && column !== 'search') {
+                    let filterRepeated = false;
 
-                                    alert(this.translations.filterExists);
+                    for (let j = 0; j < this.filters.length; j++) {
+                        if (this.filters[j].column === column) {
+                            if (
+                                this.filters[j].cond === condition &&
+                                this.filters[j].val === response
+                            ) {
+                                filterRepeated = true;
 
-                                    return false;
-                                } else if (
-                                    this.filters[j].cond === condition &&
-                                    this.filters[j].val !== response
-                                ) {
-                                    filterRepeated = true;
+                                alert(this.translations.filterExists);
 
-                                    this.filters[j].val = response;
-
-                                    this.makeURL();
-                                }
+                                return false;
                             }
-                        }
 
-                        if (filterRepeated === false) {
-                            obj.column = column;
-                            obj.cond = condition;
-                            obj.val = response;
-                            obj.label = label;
+                            if (
+                                this.filters[j].cond === condition &&
+                                this.filters[j].val !== response
+                            ) {
+                                filterRepeated = true;
 
-                            this.filters.push(obj);
-                            obj = {};
-
-                            this.makeURL();
-                        }
-                    }
-
-                    if (column === 'sort') {
-                        let sort_exists = false;
-
-                        for (let j = 0; j < this.filters.length; j++) {
-                            if (this.filters[j].column === 'sort') {
-                                if (
-                                    this.filters[j].column === column &&
-                                    this.filters[j].cond === condition
-                                ) {
-                                    this.findCurrentSort();
-
-                                    if (this.currentSort === 'asc') {
-                                        this.filters[j].column = column;
-                                        this.filters[j].cond = condition;
-                                        this.filters[j].val = 'desc';
-
-                                        this.makeURL();
-                                    } else {
-                                        this.filters[j].column = column;
-                                        this.filters[j].cond = condition;
-                                        this.filters[j].val = 'asc';
-
-                                        this.makeURL();
-                                    }
-                                } else {
-                                    this.filters[j].column = column;
-                                    this.filters[j].cond = condition;
-                                    this.filters[j].val = response;
-                                    this.filters[j].label = label;
-
-                                    this.makeURL();
-                                }
-
-                                sort_exists = true;
-                            }
-                        }
-
-                        if (sort_exists === false) {
-                            if (this.currentSort === null)
-                                this.currentSort = 'asc';
-
-                            obj.column = column;
-                            obj.cond = condition;
-                            obj.val = this.currentSort;
-                            obj.label = label;
-
-                            this.filters.push(obj);
-
-                            obj = {};
-
-                            this.makeURL();
-                        }
-                    }
-
-                    if (column === 'search') {
-                        let search_found = false;
-
-                        for (let j = 0; j < this.filters.length; j++) {
-                            if (this.filters[j].column === 'search') {
-                                this.filters[j].column = column;
-                                this.filters[j].cond = condition;
-                                this.filters[j].val = encodeURIComponent(
-                                    response
-                                );
-                                this.filters[j].label = label;
+                                this.filters[j].val = response;
 
                                 this.makeURL();
                             }
                         }
+                    }
 
-                        for (let j = 0; j < this.filters.length; j++) {
-                            if (this.filters[j].column === 'search') {
-                                search_found = true;
+                    if (filterRepeated === false) {
+                        obj.column = column;
+                        obj.cond = condition;
+                        obj.val = response;
+                        obj.label = label;
+
+                        this.filters.push(obj);
+                        obj = {};
+
+                        this.makeURL();
+                    }
+                }
+
+                if (column === 'sort') {
+                    let sortExists = false;
+
+                    for (let j = 0; j < this.filters.length; j++) {
+                        if (this.filters[j].column === 'sort') {
+                            if (
+                                this.filters[j].column === column &&
+                                this.filters[j].cond === condition
+                            ) {
+                                this.findCurrentSort();
+
+                                if (this.currentSort === 'asc') {
+                                    this.filters[j].column = column;
+                                    this.filters[j].cond = condition;
+                                    this.filters[j].val = 'desc';
+
+                                    this.makeURL();
+                                } else {
+                                    this.filters[j].column = column;
+                                    this.filters[j].cond = condition;
+                                    this.filters[j].val = 'asc';
+
+                                    this.makeURL();
+                                }
+                            } else {
+                                this.filters[j].column = column;
+                                this.filters[j].cond = condition;
+                                this.filters[j].val = response;
+                                this.filters[j].label = label;
+
+                                this.makeURL();
                             }
+
+                            sortExists = true;
                         }
+                    }
 
-                        if (search_found === false) {
-                            obj.column = column;
-                            obj.cond = condition;
-                            obj.val = encodeURIComponent(response);
-                            obj.label = label;
+                    if (sortExists === false) {
+                        if (this.currentSort === null) this.currentSort = 'asc';
 
-                            this.filters.push(obj);
+                        obj.column = column;
+                        obj.cond = condition;
+                        obj.val = this.currentSort;
+                        obj.label = label;
 
-                            obj = {};
+                        this.filters.push(obj);
+
+                        obj = {};
+
+                        this.makeURL();
+                    }
+                }
+
+                if (column === 'search') {
+                    let searchFound = false;
+
+                    for (let j = 0; j < this.filters.length; j++) {
+                        if (this.filters[j].column === 'search') {
+                            this.filters[j].column = column;
+                            this.filters[j].cond = condition;
+                            this.filters[j].val = encodeURIComponent(response);
+                            this.filters[j].label = label;
 
                             this.makeURL();
                         }
                     }
-                } else {
-                    obj.column = column;
-                    obj.cond = condition;
-                    obj.val = encodeURIComponent(response);
-                    obj.label = label;
 
-                    this.filters.push(obj);
+                    for (let j = 0; j < this.filters.length; j++) {
+                        if (this.filters[j].column === 'search') {
+                            searchFound = true;
+                        }
+                    }
 
-                    obj = {};
+                    if (searchFound === false) {
+                        obj.column = column;
+                        obj.cond = condition;
+                        obj.val = encodeURIComponent(response);
+                        obj.label = label;
 
-                    this.makeURL();
+                        this.filters.push(obj);
+
+                        obj = {};
+
+                        this.makeURL();
+                    }
                 }
+            } else {
+                obj.column = column;
+                obj.cond = condition;
+                obj.val = encodeURIComponent(response);
+                obj.label = label;
+
+                this.filters.push(obj);
+
+                obj = {};
+
+                this.makeURL();
             }
         },
 
