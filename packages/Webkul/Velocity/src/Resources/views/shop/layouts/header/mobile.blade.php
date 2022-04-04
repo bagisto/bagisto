@@ -11,7 +11,7 @@
     cart-items-count="{{ $cartItemsCount }}"
     cart-route="{{ route('shop.checkout.cart.index') }}"
     :locale="{{ json_encode(core()->getCurrentLocale()) }}"
-    :all-locales="{{ json_encode(core()->getCurrentChannel()->locales) }}"
+    :all-locales="{{ json_encode(core()->getCurrentChannel()->locales()->orderBy('name')->get()) }}"
     :currency="{{ json_encode(core()->getCurrentCurrency()) }}"
     :all-currencies="{{ json_encode(core()->getCurrentChannel()->currencies) }}"
 >
