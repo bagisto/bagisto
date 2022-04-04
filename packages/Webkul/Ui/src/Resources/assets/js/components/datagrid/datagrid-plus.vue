@@ -71,16 +71,10 @@
             </div>
 
             <div class="filter-advance">
-                <div class="filtered-tags">
-                    <template v-if="filters.length > 0">
-                        <datagrid-filter-tag
-                            :key="filterKey"
-                            :filter="filter"
-                            v-for="(filter, filterKey) in filters"
-                            @onRemoveFilter="removeFilter(filter)"
-                        ></datagrid-filter-tag>
-                    </template>
-                </div>
+                <datagrid-filter-tags
+                    :filters="filters"
+                    @onRemoveFilter="removeFilter($event)"
+                ></datagrid-filter-tags>
 
                 <div class="records-count-container">
                     <span class="datagrid-count">
@@ -101,6 +95,7 @@
                     :records="records"
                     :translations="translations"
                     @onSorting="filterData($event)"
+                    @onActionSuccess="hitUrl()"
                 ></datagrid-table>
             </div>
 
@@ -114,16 +109,16 @@
 </template>
 
 <script>
-import ChannelFilter from './filters/channel-filter.vue';
-import ColumnFilter from './filters/column-filter.vue';
-import CustomerGroupFilter from './filters/customer-group-filter.vue';
-import LocaleFilter from './filters/locale-filter.vue';
-import PageFilter from './filters/page-filter.vue';
-import SearchFilter from './filters/search-filter.vue';
-import DatagridFilterTag from './datagrid-filter-tag.vue';
-import DatagridPagination from './datagrid-pagination.vue';
-import DatagridTable from './datagrid-table.vue';
+import ChannelFilter from './filters/channel-filter';
+import ColumnFilter from './filters/column-filter';
+import CustomerGroupFilter from './filters/customer-group-filter';
+import LocaleFilter from './filters/locale-filter';
+import PageFilter from './filters/page-filter';
+import SearchFilter from './filters/search-filter';
 import PersistDatagridAttributes from './mixins/persist-datagrid-attributes';
+import DatagridFilterTags from './datagrid-filter-tags';
+import DatagridPagination from './datagrid-pagination';
+import DatagridTable from './datagrid-table';
 
 export default {
     props: ['src'],
@@ -135,9 +130,10 @@ export default {
         LocaleFilter,
         PageFilter,
         SearchFilter,
-        DatagridFilterTag,
+        DatagridFilterTags,
         DatagridPagination,
-        DatagridTable
+        DatagridTable,
+        DatagridFilterTags
     },
 
     mixins: [PersistDatagridAttributes],
@@ -577,7 +573,9 @@ export default {
             this.formURL(column, condition, response, label);
         },
 
-        removeFilter(filter) {
+        removeFilter($event) {
+            const { filter } = $event.data;
+
             for (let i in this.filters) {
                 if (
                     this.filters[i].column === filter.column &&

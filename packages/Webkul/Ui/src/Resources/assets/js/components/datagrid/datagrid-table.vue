@@ -407,26 +407,28 @@ export default {
                         _method: element.getAttribute('data-method')
                     })
                     .then(function(response) {
+                        const { data } = response;
+
                         /**
                          * If refirect is true, then pass redirect url in the response.
                          *
                          * Else, it will reload table only.
                          */
-                        if (response.data.redirect) {
-                            window.location.href = response.data.redirectUrl;
+                        if (data.redirect !== undefined && data.redirect) {
+                            window.location.href = data.redirectUrl;
                         } else {
-                            self.hitUrl();
+                            self.$emit('onActionSuccess');
 
                             window.flashMessages.push({
                                 type: 'alert-success',
-                                message: response.data.message
+                                message: data.message
                             });
 
                             self.$root.addFlashMessages();
                         }
                     })
                     .catch(function(error) {
-                        let response = error.response;
+                        const { response } = error;
 
                         window.flashMessages.push({
                             type: 'alert-error',
