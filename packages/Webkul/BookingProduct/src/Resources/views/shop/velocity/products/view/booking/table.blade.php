@@ -58,6 +58,6 @@
     ])
 
 <div class="form-group">
-    <label class="label-style">{{ __('bookingproduct::app.shop.products.special-notes') }}</label>
+    <label class="label-style required">{{ __('bookingproduct::app.shop.products.special-notes') }}</label>
     <textarea name="booking[note]" class="form-style" style="width: 100%"/>
 </div>
