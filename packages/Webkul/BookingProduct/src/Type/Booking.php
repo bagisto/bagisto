@@ -225,12 +225,10 @@ class Booking extends Virtual
             return false;
         }
 
-        if (isset($options1['booking'], $options2['booking'])) {
-            return $options1['booking'] == $options2['booking'];
-        } elseif (! isset($options1['booking'])) {
-            return false;
-        } elseif (! isset($options2['booking'])) {
-            return false;
+        if (isset($options1['booking'], $options2['booking'])
+            && isset($options1['booking']['ticket_id'], $options2['booking']['ticket_id'])
+            && $options1['booking']['ticket_id'] === $options2['booking']['ticket_id']) {
+                return true;
         }
 
         return false;
