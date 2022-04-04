@@ -1161,7 +1161,7 @@ return [
             'action-type'                    => 'प्रक्रिया का प्रकार',
             'percentage-product-price'       => 'उत्पाद मूल्य का प्रतिशत',
             'fixed-amount'                   => 'निश्चित राशि',
-            'fixed-amount-whole-cart'        => 'निश्चित राशि से पूरी गाड़ी',
+            'fixed-amount-whole-cart'        => 'निश्चित राशि से पूरी कार्ट',
             'buy-x-get-y-free'               => 'X खरीदें, Y मुफ़्त पाएं',
             'discount-amount'                => 'छूट राशि',
             'discount-quantity'              => 'अधिकतम मात्रा में छूट दी जाने की अनुमति',
