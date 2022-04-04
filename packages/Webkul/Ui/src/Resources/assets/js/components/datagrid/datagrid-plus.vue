@@ -8,479 +8,61 @@
                             class="dropdown-filters per-page"
                             v-if="extraFilters.channels != undefined"
                         >
-                            <div class="control-group">
-                                <select
-                                    class="control"
-                                    name="channel"
-                                    @change="
-                                        changeExtraFilter($event, 'channel')
-                                    "
-                                >
-                                    <option
-                                        value="all"
-                                        :selected="
-                                            extraFilters.current.channel ==
-                                                'all'
-                                        "
-                                        v-text="translations.allChannels"
-                                    ></option>
-
-                                    <option
-                                        :key="channelKey"
-                                        v-for="(channel,
-                                        channelKey) in extraFilters.channels"
-                                        v-text="channel.name"
-                                        :value="channel.code"
-                                        :selected="
-                                            channel.code ==
-                                                extraFilters.current.channel
-                                        "
-                                    ></option>
-                                </select>
-                            </div>
+                            <channel-filter
+                                :extra-filters="extraFilters"
+                                :translations="translations"
+                                @onFilter="changeExtraFilter($event)"
+                            ></channel-filter>
                         </div>
 
                         <div
                             class="dropdown-filters per-page"
                             v-if="extraFilters.locales != undefined"
                         >
-                            <div class="control-group">
-                                <select
-                                    class="control"
-                                    name="locale"
-                                    @change="
-                                        changeExtraFilter($event, 'locale')
-                                    "
-                                >
-                                    <option
-                                        value="all"
-                                        :selected="
-                                            extraFilters.current.locale == 'all'
-                                        "
-                                        v-text="translations.allLocales"
-                                    ></option>
-
-                                    <option
-                                        :key="localeKey"
-                                        v-for="(locale,
-                                        localeKey) in extraFilters.locales"
-                                        v-text="locale.name"
-                                        :value="locale.code"
-                                        :selected="
-                                            locale.code ==
-                                                extraFilters.current.locale
-                                        "
-                                    ></option>
-                                </select>
-                            </div>
+                            <locale-filter
+                                :extra-filters="extraFilters"
+                                :translations="translations"
+                                @onFilter="changeExtraFilter($event)"
+                            ></locale-filter>
                         </div>
 
                         <div
                             class="dropdown-filters per-page"
                             v-if="extraFilters.customer_groups != undefined"
                         >
-                            <div class="control-group">
-                                <select
-                                    class="control"
-                                    id="customer-group-switcher"
-                                    name="customer_group"
-                                    @change="
-                                        changeExtraFilter(
-                                            $event,
-                                            'customer_group'
-                                        )
-                                    "
-                                >
-                                    <option
-                                        value="all"
-                                        :selected="
-                                            extraFilters.current
-                                                .customer_group == 'all'
-                                        "
-                                        v-text="translations.allCustomerGroups"
-                                    ></option>
-
-                                    <option
-                                        :key="customerGroupKey"
-                                        v-for="(customerGroup,
-                                        customerGroupKey) in extraFilters.customer_groups"
-                                        v-text="customerGroup.name"
-                                        :value="customerGroup.id"
-                                        :selected="
-                                            customerGroup.id ==
-                                                extraFilters.current
-                                                    .customer_group
-                                        "
-                                    ></option>
-                                </select>
-                            </div>
+                            <customer-group-filter
+                                :extra-filters="extraFilters"
+                                :translations="translations"
+                                @onFilter="changeExtraFilter($event)"
+                            ></customer-group-filter>
                         </div>
                     </div>
                 </div>
 
                 <div class="datagrid-filters" id="datagrid-filters">
                     <div class="">
-                        <div class="search-filter">
-                            <input
-                                type="search"
-                                id="search-field"
-                                class="control"
-                                :placeholder="translations.search"
-                                v-model="searchValue"
-                                v-on:keyup.enter="searchCollection(searchValue)"
-                            />
-
-                            <div class="icon-wrapper">
-                                <span
-                                    class="icon search-icon search-btn"
-                                    v-on:click="searchCollection(searchValue)"
-                                ></span>
-                            </div>
-                        </div>
+                        <search-filter
+                            :translations="translations"
+                            @onFilter="searchData($event)"
+                        ></search-filter>
                     </div>
 
                     <div class="filter-right">
                         <div class="dropdown-filters per-page">
-                            <div class="control-group">
-                                <label
-                                    class="per-page-label"
-                                    for="perPage"
-                                    v-text="translations.itemsPerPage"
-                                ></label>
-
-                                <select
-                                    id="perPage"
-                                    name="perPage"
-                                    class="control"
-                                    v-model="perPage"
-                                    v-on:change="paginate"
-                                >
-                                    <option
-                                        v-for="index in this.perPageProduct"
-                                        v-text="index"
-                                        :key="index"
-                                        :value="index"
-                                    ></option>
-                                </select>
-                            </div>
+                            <page-filter
+                                :per-page="perPage"
+                                :per-page-count="perPageCount"
+                                :translations="translations"
+                                @onFilter="paginateData($event)"
+                            ></page-filter>
                         </div>
 
                         <div class="dropdown-filters">
-                            <div class="dropdown-toggle">
-                                <div class="grid-dropdown-header">
-                                    <span
-                                        class="name"
-                                        v-text="translations.filter"
-                                    ></span>
-                                    <i class="icon arrow-down-icon active"></i>
-                                </div>
-                            </div>
-
-                            <div
-                                class="dropdown-list dropdown-container"
-                                style="display: none"
-                            >
-                                <ul>
-                                    <li>
-                                        <div class="control-group">
-                                            <select
-                                                class="filter-column-select control"
-                                                v-model="filterColumn"
-                                                v-on:change="
-                                                    getColumnOrAlias(
-                                                        filterColumn
-                                                    )
-                                                "
-                                            >
-                                                <option
-                                                    v-text="translations.column"
-                                                    selected
-                                                    disabled
-                                                ></option>
-
-                                                <option
-                                                    :key="columnKey"
-                                                    v-for="(column,
-                                                    columnKey) in columns"
-                                                    :value="column.index"
-                                                    v-text="column.label"
-                                                    v-if="
-                                                        typeof column.filterable !==
-                                                            'undefined' &&
-                                                            column.filterable
-                                                    "
-                                                ></option>
-                                            </select>
-                                        </div>
-                                    </li>
-
-                                    <li v-if="stringConditionSelect">
-                                        <div class="control-group">
-                                            <select
-                                                class="control"
-                                                v-model="stringCondition"
-                                            >
-                                                <option
-                                                    v-text="
-                                                        translations.condition
-                                                    "
-                                                    selected
-                                                    disabled
-                                                ></option>
-
-                                                <option
-                                                    v-text="
-                                                        translations.contains
-                                                    "
-                                                    value="like"
-                                                ></option>
-
-                                                <option
-                                                    v-text="
-                                                        translations.ncontains
-                                                    "
-                                                    value="nlike"
-                                                ></option>
-
-                                                <option
-                                                    v-text="translations.equals"
-                                                    value="eq"
-                                                ></option>
-
-                                                <option
-                                                    v-text="
-                                                        translations.nequals
-                                                    "
-                                                    value="neqs"
-                                                ></option>
-                                            </select>
-                                        </div>
-                                    </li>
-
-                                    <li v-if="stringCondition != null">
-                                        <div
-                                            class="control-group"
-                                            v-if="
-                                                isCurrentFilterColumnHasOptions()
-                                            "
-                                        >
-                                            <select
-                                                class="control"
-                                                v-model="stringValue"
-                                            >
-                                                <option
-                                                    :key="key"
-                                                    v-text="option"
-                                                    v-value="key"
-                                                    v-for="(option,
-                                                    key) in this.getCurrentFilterOptions()"
-                                                ></option>
-                                            </select>
-                                        </div>
-
-                                        <div class="control-group" v-else>
-                                            <input
-                                                type="text"
-                                                class="control response-string"
-                                                :placeholder="
-                                                    translations.valueHere
-                                                "
-                                                v-model="stringValue"
-                                            />
-                                        </div>
-                                    </li>
-
-                                    <li v-if="numberConditionSelect">
-                                        <div class="control-group">
-                                            <select
-                                                class="control"
-                                                v-model="numberCondition"
-                                            >
-                                                <option
-                                                    v-text="
-                                                        translations.condition
-                                                    "
-                                                    selected
-                                                    disabled
-                                                ></option>
-
-                                                <option
-                                                    v-text="translations.equals"
-                                                    value="eq"
-                                                ></option>
-
-                                                <option
-                                                    v-text="
-                                                        translations.nequals
-                                                    "
-                                                    value="neqs"
-                                                ></option>
-
-                                                <option
-                                                    v-text="
-                                                        translations.greater
-                                                    "
-                                                    value="gt"
-                                                ></option>
-
-                                                <option
-                                                    v-text="translations.less"
-                                                    value="lt"
-                                                ></option>
-
-                                                <option
-                                                    v-text="
-                                                        translations.greatere
-                                                    "
-                                                    value="gte"
-                                                ></option>
-
-                                                <option
-                                                    v-text="translations.lesse"
-                                                    value="lte"
-                                                ></option>
-                                            </select>
-                                        </div>
-                                    </li>
-
-                                    <li v-if="numberCondition != null">
-                                        <div class="control-group">
-                                            <input
-                                                type="text"
-                                                class="control response-number"
-                                                v-on:input="filterNumberInput"
-                                                v-model="numberValue"
-                                                :placeholder="
-                                                    translations.numericValueHere
-                                                "
-                                            />
-                                        </div>
-                                    </li>
-
-                                    <li v-if="booleanConditionSelect">
-                                        <div class="control-group">
-                                            <select
-                                                class="control"
-                                                v-model="booleanCondition"
-                                            >
-                                                <option
-                                                    v-text="
-                                                        translations.condition
-                                                    "
-                                                    selected
-                                                    disabled
-                                                ></option>
-
-                                                <option
-                                                    v-text="translations.equals"
-                                                    value="eq"
-                                                ></option>
-
-                                                <option
-                                                    v-text="
-                                                        translations.nequals
-                                                    "
-                                                    value="neqs"
-                                                ></option>
-                                            </select>
-                                        </div>
-                                    </li>
-
-                                    <li v-if="booleanCondition != null">
-                                        <div class="control-group">
-                                            <select
-                                                class="control"
-                                                v-model="booleanValue"
-                                            >
-                                                <option
-                                                    v-text="translations.value"
-                                                    selected
-                                                    disabled
-                                                ></option>
-
-                                                <option
-                                                    v-text="translations.true"
-                                                    value="1"
-                                                ></option>
-
-                                                <option
-                                                    v-text="translations.false"
-                                                    value="0"
-                                                ></option>
-                                            </select>
-                                        </div>
-                                    </li>
-
-                                    <li v-if="datetimeConditionSelect">
-                                        <div class="control-group">
-                                            <select
-                                                class="control"
-                                                v-model="datetimeCondition"
-                                            >
-                                                <option
-                                                    v-text="
-                                                        translations.condition
-                                                    "
-                                                    selected
-                                                    disabled
-                                                ></option>
-
-                                                <option
-                                                    v-text="translations.equals"
-                                                    value="eq"
-                                                ></option>
-
-                                                <option
-                                                    v-text="
-                                                        translations.nequals
-                                                    "
-                                                    value="neqs"
-                                                ></option>
-
-                                                <option
-                                                    v-text="
-                                                        translations.greater
-                                                    "
-                                                    value="gt"
-                                                ></option>
-
-                                                <option
-                                                    v-text="translations.less"
-                                                    value="lt"
-                                                ></option>
-
-                                                <option
-                                                    v-text="
-                                                        translations.greatere
-                                                    "
-                                                    value="gte"
-                                                ></option>
-
-                                                <option
-                                                    v-text="translations.lesse"
-                                                    value="lte"
-                                                ></option>
-                                            </select>
-                                        </div>
-                                    </li>
-
-                                    <li v-if="datetimeCondition != null">
-                                        <div class="control-group">
-                                            <input
-                                                class="control"
-                                                v-model="datetimeValue"
-                                                type="date"
-                                            />
-                                        </div>
-                                    </li>
-
-                                    <button
-                                        v-text="translations.apply"
-                                        class="btn btn-sm btn-primary apply-filter"
-                                        v-on:click="getResponse"
-                                    ></button>
-                                </ul>
-                            </div>
+                            <column-filter
+                                :columns="columns"
+                                :translations="translations"
+                                @onFilter="filterData($event)"
+                            ></column-filter>
                         </div>
 
                         <slot name="extra-filters"></slot>
@@ -490,33 +72,13 @@
 
             <div class="filter-advance">
                 <div class="filtered-tags">
-                    <span
+                    <datagrid-filter-tag
                         :key="filterKey"
-                        class="filter-tag"
-                        v-if="filters.length > 0"
+                        :filter="filter"
                         v-for="(filter, filterKey) in filters"
-                        style="text-transform: capitalize"
-                    >
-                        <span v-if="filter.column == 'perPage'">perPage</span>
-
-                        <span v-else>{{ filter.label }}</span>
-
-                        <span class="wrapper" v-if="filter.prettyValue">
-                            {{ filter.prettyValue }}
-                            <span
-                                class="icon cross-icon"
-                                v-on:click="removeFilter(filter)"
-                            ></span>
-                        </span>
-
-                        <span class="wrapper" v-else>
-                            {{ decodeURIComponent(filter.val) }}
-                            <span
-                                class="icon cross-icon"
-                                v-on:click="removeFilter(filter)"
-                            ></span>
-                        </span>
-                    </span>
+                        v-if="filters.length > 0"
+                        @onRemoveFilter="removeFilter(filter)"
+                    ></datagrid-filter-tag>
                 </div>
 
                 <div class="records-count-container">
@@ -781,44 +343,42 @@
                     </tbody>
                 </table>
             </div>
-        </div>
 
-        <div
-            class="pagination shop mt-50"
-            v-if="
-                typeof paginated !== 'undefined' &&
-                    paginated &&
-                    records.last_page > 1
-            "
-        >
-            <a
-                v-for="(link, index) in records.links"
-                :key="index"
-                href="javascript:void(0);"
-                :data-page="link.url"
-                :class="
-                    `page-item ${index == 0 ? 'previous' : ''} ${
-                        link.active ? 'active' : ''
-                    } ${index == records.links.length - 1 ? 'next' : ''}`
-                "
-                @click="changePage(link.url)"
-            >
-                <i class="icon angle-left-icon" v-if="index == 0"></i>
-
-                <i
-                    class="icon angle-right-icon"
-                    v-else-if="index == records.links.length - 1"
-                ></i>
-
-                <span v-text="link.label" v-else></span>
-            </a>
+            <datagrid-pagination
+                :paginated="paginated"
+                :records="records"
+                @onChangePage="changePage($event)"
+            ></datagrid-pagination>
         </div>
     </div>
 </template>
 
 <script>
+import ChannelFilter from './filters/channel-filter.vue';
+import ColumnFilter from './filters/column-filter.vue';
+import CustomerGroupFilter from './filters/customer-group-filter.vue';
+import LocaleFilter from './filters/locale-filter.vue';
+import PageFilter from './filters/page-filter.vue';
+import SearchFilter from './filters/search-filter.vue';
+import DatagridFilterTag from './datagrid-filter-tag.vue';
+import DatagridPagination from './datagrid-pagination.vue';
+import PersistDatagridAttributes from './mixins/persist-datagrid-attributes';
+
 export default {
     props: ['src'],
+
+    components: {
+        ChannelFilter,
+        ColumnFilter,
+        CustomerGroupFilter,
+        LocaleFilter,
+        PageFilter,
+        SearchFilter,
+        DatagridFilterTag,
+        DatagridPagination
+    },
+
+    mixins: [PersistDatagridAttributes],
 
     data: function() {
         return {
@@ -842,24 +402,9 @@ export default {
             currentSortIcon: null,
             isActive: false,
             isHidden: true,
-            searchValue: '',
             filterColumn: true,
             filters: [],
-            columnOrAlias: '',
-            type: null,
-            stringCondition: null,
-            booleanCondition: null,
-            numberCondition: null,
-            datetimeCondition: null,
-            stringValue: null,
-            booleanValue: null,
-            datetimeValue: '2000-01-01',
-            numberValue: 0,
-            stringConditionSelect: false,
-            booleanConditionSelect: false,
-            numberConditionSelect: false,
-            datetimeConditionSelect: false,
-            perPageProduct: [10, 20, 30, 40, 50]
+            perPageCount: [10, 20, 30, 40, 50]
         };
     },
 
@@ -893,102 +438,6 @@ export default {
                 });
         },
 
-        analyzeDatagridsInfo: function() {
-            if (!this.isDataLoaded && this.url === `${this.src}?v=1`) {
-                let datagridInfo = this.getCurrentDatagridInfo();
-
-                if (datagridInfo) {
-                    /**
-                     * Will check this later. Don't remove it.
-                     */
-                    // this.filterCurrentDatagridFromDatagridsInfo();
-
-                    this.url = datagridInfo.previousUrl;
-                    this.filters = datagridInfo.previousFilters;
-                }
-            } else {
-                let datagridsInfo = this.getDatagridsInfo();
-
-                if (datagridsInfo && datagridsInfo.length > 0) {
-                    if (this.isCurrentDatagridInfoExists()) {
-                        datagridsInfo = datagridsInfo.map(datagrid => {
-                            if (datagrid.id === this.id) {
-                                return this.getDatagridsInfoDefaults();
-                            }
-
-                            return datagrid;
-                        });
-                    } else {
-                        datagridsInfo.push(this.getDatagridsInfoDefaults());
-                    }
-                } else {
-                    datagridsInfo = [this.getDatagridsInfoDefaults()];
-                }
-
-                this.updateDatagridsInfo(datagridsInfo);
-            }
-        },
-
-        isCurrentDatagridInfoExists: function() {
-            let datagridsInfo = this.getDatagridsInfo();
-
-            return !!datagridsInfo.find(({ id }) => id === this.id);
-        },
-
-        getCurrentDatagridInfo: function() {
-            let datagridsInfo = this.getDatagridsInfo();
-
-            return this.isCurrentDatagridInfoExists()
-                ? datagridsInfo.find(({ id }) => id === this.id)
-                : null;
-        },
-
-        getDatagridsInfoStorageKey: function() {
-            return 'datagridsInfo';
-        },
-
-        getDatagridsInfoDefaults: function() {
-            return {
-                id: this.id,
-                previousFilters: this.filters,
-                previousUrl: this.url
-            };
-        },
-
-        getDatagridsInfo: function() {
-            let storageInfo = localStorage.getItem(
-                this.getDatagridsInfoStorageKey()
-            );
-
-            return !this.isValidJsonString(storageInfo)
-                ? []
-                : JSON.parse(storageInfo) ?? [];
-        },
-
-        updateDatagridsInfo: function(info) {
-            localStorage.setItem(
-                this.getDatagridsInfoStorageKey(),
-                JSON.stringify(info)
-            );
-        },
-
-        filterCurrentDatagridFromDatagridsInfo: function() {
-            let datagridsInfo = this.getDatagridsInfo();
-
-            datagridsInfo = datagridsInfo.filter(({ id }) => id !== this.id);
-
-            this.updateDatagridsInfo(datagridsInfo);
-        },
-
-        isValidJsonString: function(str) {
-            try {
-                JSON.parse(str);
-            } catch (e) {
-                return false;
-            }
-            return true;
-        },
-
         initDatagrid: function() {
             this.setParamsAndUrl();
 
@@ -1010,8 +459,8 @@ export default {
                 }
             }
 
-            if (this.perPageProduct.indexOf(parseInt(this.perPage)) === -1) {
-                this.perPageProduct.unshift(this.perPage);
+            if (this.perPageCount.indexOf(parseInt(this.perPage)) === -1) {
+                this.perPageCount.unshift(this.perPage);
             }
 
             this.isDataLoaded = true;
@@ -1019,155 +468,6 @@ export default {
             this.gridCurrentData = this.records;
             this.perPage = this.itemsPerPage;
             this.massActionConfirmText = this.translations.clickOnAction;
-        },
-
-        changePage: function(url) {
-            if (url) {
-                this.url = url;
-                this.hitUrl();
-            }
-        },
-
-        changeExtraFilter: function(event, key) {
-            let url = new URL(this.src);
-            url.searchParams.set(key, event.target.value);
-
-            this.url = url.href;
-            this.hitUrl();
-        },
-
-        getColumnOrAlias: function(columnOrAlias) {
-            this.columnOrAlias = columnOrAlias;
-
-            for (let column in this.columns) {
-                if (this.columns[column].index === this.columnOrAlias) {
-                    this.type = this.columns[column].type;
-
-                    switch (this.type) {
-                        case 'string': {
-                            this.stringConditionSelect = true;
-                            this.datetimeConditionSelect = false;
-                            this.booleanConditionSelect = false;
-                            this.numberConditionSelect = false;
-
-                            this.nullify();
-                            break;
-                        }
-
-                        case 'datetime': {
-                            this.datetimeConditionSelect = true;
-                            this.stringConditionSelect = false;
-                            this.booleanConditionSelect = false;
-                            this.numberConditionSelect = false;
-
-                            this.nullify();
-                            break;
-                        }
-
-                        case 'boolean': {
-                            this.booleanConditionSelect = true;
-                            this.datetimeConditionSelect = false;
-                            this.stringConditionSelect = false;
-                            this.numberConditionSelect = false;
-
-                            this.nullify();
-                            break;
-                        }
-
-                        case 'number': {
-                            this.numberConditionSelect = true;
-                            this.booleanConditionSelect = false;
-                            this.datetimeConditionSelect = false;
-                            this.stringConditionSelect = false;
-
-                            this.nullify();
-                            break;
-                        }
-
-                        case 'price': {
-                            this.numberConditionSelect = true;
-                            this.booleanConditionSelect = false;
-                            this.datetimeConditionSelect = false;
-                            this.stringConditionSelect = false;
-
-                            this.nullify();
-                            break;
-                        }
-                    }
-                }
-            }
-        },
-
-        nullify: function() {
-            this.stringCondition = null;
-            this.datetimeCondition = null;
-            this.booleanCondition = null;
-            this.numberCondition = null;
-        },
-
-        filterNumberInput: function(e) {
-            this.numberValue = e.target.value.replace(/[^0-9\,\.]+/g, '');
-        },
-
-        getResponse: function() {
-            let label = '';
-
-            for (let colIndex in this.columns) {
-                if (this.columns[colIndex].index == this.columnOrAlias) {
-                    label = this.columns[colIndex].label;
-                    break;
-                }
-            }
-
-            if (this.type === 'string' && this.stringValue !== null) {
-                this.formURL(
-                    this.columnOrAlias,
-                    this.stringCondition,
-                    encodeURIComponent(this.stringValue),
-                    label
-                );
-            } else if (this.type === 'number') {
-                let indexConditions = true;
-
-                if (
-                    this.filterIndex === this.columnOrAlias &&
-                    (this.numberValue === 0 || this.numberValue < 0)
-                ) {
-                    indexConditions = false;
-
-                    alert(this.translations.zeroIndex);
-                }
-
-                if (indexConditions) {
-                    this.formURL(
-                        this.columnOrAlias,
-                        this.numberCondition,
-                        this.numberValue,
-                        label
-                    );
-                }
-            } else if (this.type === 'boolean') {
-                this.formURL(
-                    this.columnOrAlias,
-                    this.booleanCondition,
-                    this.booleanValue,
-                    label
-                );
-            } else if (this.type === 'datetime') {
-                this.formURL(
-                    this.columnOrAlias,
-                    this.datetimeCondition,
-                    this.datetimeValue,
-                    label
-                );
-            } else if (this.type === 'price') {
-                this.formURL(
-                    this.columnOrAlias,
-                    this.numberCondition,
-                    this.numberValue,
-                    label
-                );
-            }
         },
 
         sortCollection: function(alias) {
@@ -1182,15 +482,6 @@ export default {
             }
 
             this.formURL('sort', alias, this.sortAsc, label);
-        },
-
-        searchCollection: function(searchValue) {
-            this.formURL(
-                'search',
-                'all',
-                searchValue,
-                this.translations.searchTitle
-            );
         },
 
         setParamsAndUrl: function() {
@@ -1561,20 +852,6 @@ export default {
             }
         },
 
-        removeFilter: function(filter) {
-            for (let i in this.filters) {
-                if (
-                    this.filters[i].column === filter.column &&
-                    this.filters[i].cond === filter.cond &&
-                    this.filters[i].val === filter.val
-                ) {
-                    this.filters.splice(i, 1);
-
-                    this.makeURL();
-                }
-            }
-        },
-
         select: function() {
             this.allSelected = false;
 
@@ -1639,22 +916,6 @@ export default {
             this.allSelected = false;
 
             this.massActionType = this.getDefaultMassActionType();
-        },
-
-        paginate: function(e) {
-            for (let i = 0; i < this.filters.length; i++) {
-                if (this.filters[i].column == 'perPage') {
-                    this.filters.splice(i, 1);
-                }
-            }
-
-            this.filters.push({
-                column: 'perPage',
-                cond: 'eq',
-                val: e.target.value
-            });
-
-            this.makeURL();
         },
 
         doAction: function(e, message, type) {
@@ -1723,26 +984,90 @@ export default {
             }
         },
 
-        getCurrentFilterColumn: function() {
-            return this.columns.find(
-                column => column.index === this.filterColumn
+        /**
+         * Change extra filter.
+         */
+        changeExtraFilter: function($event) {
+            const { type, value } = $event.data;
+
+            let url = new URL(this.src);
+            url.searchParams.set(type, value);
+
+            this.url = url.href;
+            this.hitUrl();
+        },
+
+        /**
+         * Search filter.
+         */
+        searchData: function($event) {
+            const searchValue = $event.data.searchValue;
+
+            this.formURL(
+                'search',
+                'all',
+                searchValue,
+                this.translations.searchTitle
             );
         },
 
-        isCurrentFilterColumnHasOptions: function() {
-            let currentFilterColumn = this.getCurrentFilterColumn();
+        /**
+         * Page filter.
+         */
+        paginateData: function($event) {
+            const currentPerPageSelection = $event.data.perPage;
 
-            return (
-                currentFilterColumn && currentFilterColumn.options !== undefined
-            );
-        },
-
-        getCurrentFilterOptions: function() {
-            if (this.isCurrentFilterColumnHasOptions()) {
-                return this.getCurrentFilterColumn().options ?? [];
+            for (let i = 0; i < this.filters.length; i++) {
+                if (this.filters[i].column == 'perPage') {
+                    this.filters.splice(i, 1);
+                }
             }
 
-            throw "Options are not defined. Don't use this method if options are not available.";
+            this.filters.push({
+                column: 'perPage',
+                cond: 'eq',
+                val: currentPerPageSelection
+            });
+
+            this.makeURL();
+        },
+
+        /**
+         * Column filter.
+         */
+        filterData($event) {
+            const { column, condition, response, label } = $event.data;
+
+            this.formURL(column, condition, response, label);
+        },
+
+        /**
+         * Remove filter.
+         */
+        removeFilter(filter) {
+            for (let i in this.filters) {
+                if (
+                    this.filters[i].column === filter.column &&
+                    this.filters[i].cond === filter.cond &&
+                    this.filters[i].val === filter.val
+                ) {
+                    this.filters.splice(i, 1);
+
+                    this.makeURL();
+                }
+            }
+        },
+
+        /**
+         * Change page.
+         */
+        changePage: function($event) {
+            const { pageLink } = $event.data;
+
+            if (pageLink) {
+                this.url = pageLink;
+                this.hitUrl();
+            }
         }
     }
 };
