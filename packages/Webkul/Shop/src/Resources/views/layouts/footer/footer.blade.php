@@ -54,7 +54,7 @@
                     <div class="control-group">
                         <select class="control locale-switcher" id="locale-switcher" onchange="window.location.href = this.value" @if (count(core()->getCurrentChannel()->locales) == 1) disabled="disabled" @endif>
 
-                            @foreach (core()->getCurrentChannel()->locales as $locale)
+                            @foreach (core()->getCurrentChannel()->locales()->orderBy('name')->get() as $locale)
                                 @if (isset($serachQuery))
                                     <option value="?{{ $serachQuery }}&locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
                                 @else
