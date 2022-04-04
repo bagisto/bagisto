@@ -95,6 +95,7 @@
                     :columns="columns"
                     :enable-actions="enableActions"
                     :enable-mass-actions="enableMassActions"
+                    :index="index"
                     :mass-actions="massActions"
                     :mass-action-targets="massActionTargets"
                     :records="records"
@@ -155,24 +156,10 @@ export default {
     },
 
     mounted: function() {
-        this.getCsrf();
-
         this.makeURL();
     },
 
     methods: {
-        getCsrf() {
-            let token = document.head.querySelector('meta[name="csrf-token"]');
-
-            if (token) {
-                this.csrf = token.content;
-            } else {
-                console.error(
-                    'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token'
-                );
-            }
-        },
-
         makeURL() {
             let newParams = '';
 
@@ -374,7 +361,6 @@ export default {
             }
 
             this.isDataLoaded = true;
-            this.filterIndex = this.index;
             this.perPage = this.itemsPerPage;
         },
 

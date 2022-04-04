@@ -28,7 +28,11 @@
                                 `return confirm('${massActionConfirmText}')`
                             "
                         >
-                            <input type="hidden" name="_token" :value="csrf" />
+                            <input
+                                type="hidden"
+                                name="_token"
+                                :value="getCsrf()"
+                            />
 
                             <input
                                 type="hidden"
@@ -191,7 +195,7 @@
                                 "
                                 :data-method="action.method"
                                 :data-action="record[`${action.key}_url`]"
-                                :data-token="csrf"
+                                :data-token="getCsrf()"
                                 :target="
                                     typeof action.target !== 'undefined' &&
                                     action.target
@@ -233,6 +237,7 @@ export default {
         'columns',
         'enableActions',
         'enableMassActions',
+        'index',
         'massActions',
         'massActionTargets',
         'records',
@@ -280,7 +285,7 @@ export default {
                             if (i == 0) {
                                 this.dataIds.push(
                                     this.gridCurrentData.data[currentData][
-                                        this.filterIndex
+                                        this.index
                                     ]
                                 );
                             }

@@ -72,6 +72,18 @@ Vue.filter('truncate', function(value, limit, trail) {
     return value.length > limit ? value.substring(0, limit) + trail : value;
 });
 
+Vue.prototype.getCsrf = () => {
+    let token = document.head.querySelector('meta[name="csrf-token"]');
+
+    if (!token) {
+        console.error(
+            'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token'
+        );
+    }
+
+    return token.content;
+};
+
 /* require section */
 require('flatpickr/dist/flatpickr.css');
 require('vue-swatches/dist/vue-swatches.min.css');
