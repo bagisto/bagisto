@@ -7,7 +7,7 @@
 
             <div v-if="renting_type == 'daily_hourly'">
                 <div class="form-group">
-                    <label class="label-style">{{ __('bookingproduct::app.shop.products.choose-rent-option') }}</label>
+                    <label class="label-style required">{{ __('bookingproduct::app.shop.products.choose-rent-option') }}</label>
 
                     <span class="radio">
                         <input type="radio" id="daily-renting-type" name="booking[renting_type]" value="daily" v-model="sub_renting_type">
@@ -27,7 +27,7 @@
             <div v-if="renting_type != 'daily' && sub_renting_type == 'hourly'">
                 
                 <div>
-                    <label class="label-style">{{ __('bookingproduct::app.shop.products.select-slot') }}</label>
+                    <label class="label-style required">{{ __('bookingproduct::app.shop.products.select-slot') }}</label>
 
                     <div class="control-group-container">
                         <div class="form-group date" :class="[errors.has('booking[date]') ? 'has-error' : '']">
@@ -50,7 +50,7 @@
                 </div>
 
                 <div v-if="slots[selected_slot] && slots[selected_slot]['slots'].length">
-                    <label class="label-style">{{ __('bookingproduct::app.shop.products.select-rent-time') }}</label>
+                    <label class="label-style required">{{ __('bookingproduct::app.shop.products.select-rent-time') }}</label>
 
                     <div class="control-group-container">
                         <div class="form-group slots" :class="[errors.has('booking[slot][from]') ? 'has-error' : '']">
@@ -81,7 +81,7 @@
             </div>
 
             <div v-else>
-                <label class="label-style">{{ __('bookingproduct::app.shop.products.select-date') }}</label>
+                <label class="label-style required">{{ __('bookingproduct::app.shop.products.select-date') }}</label>
 
                 <div class="control-group-container">
                     <div class="form-group date" :class="[errors.has('booking[date_from]') ? 'has-error' : '']">
