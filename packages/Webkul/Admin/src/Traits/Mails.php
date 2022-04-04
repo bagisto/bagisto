@@ -135,7 +135,7 @@ trait Mails
     public function sendNewShipmentMail($shipment)
     {
         $customerLocale = $this->getLocale($shipment);
-
+        
         try {
             if ($shipment->email_sent) {
                 return;
@@ -248,7 +248,15 @@ trait Mails
 
         app()->setLocale($locale);
 
-        Mail::queue($notification);
+        try {
+            Mail::queue($notification);
+        } catch(\Exception $e) {
+            app()->setLocale($previousLocale);
+            
+            \Log::error(
+                'prepareMail' . $e->getMessage()
+            );
+        }
 
         app()->setLocale($previousLocale);
     }
