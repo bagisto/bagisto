@@ -95,7 +95,7 @@
                     :records="records"
                     :translations="translations"
                     @onSorting="filterData($event)"
-                    @onActionSuccess="hitUrl()"
+                    @onActionSuccess="refresh()"
                 ></datagrid-table>
             </div>
 
@@ -184,10 +184,10 @@ export default {
 
             this.url = `${this.src}?v=1${newParams}`;
 
-            this.hitUrl();
+            this.refresh();
         },
 
-        hitUrl() {
+        refresh() {
             let self = this;
 
             this.analyzeDatagridsInfo();
@@ -535,7 +535,7 @@ export default {
             url.searchParams.set(type, value);
 
             this.url = url.href;
-            this.hitUrl();
+            this.refresh();
         },
 
         searchData($event) {
@@ -594,7 +594,7 @@ export default {
 
             if (pageLink) {
                 this.url = pageLink;
-                this.hitUrl();
+                this.refresh();
             }
         }
     }
