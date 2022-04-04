@@ -4,38 +4,11 @@
             <div class="grid-top">
                 <div class="datagrid-filters">
                     <div class="filter-left">
-                        <div
-                            class="dropdown-filters per-page"
-                            v-if="extraFilters.channels != undefined"
-                        >
-                            <channel-filter
-                                :extra-filters="extraFilters"
-                                :translations="translations"
-                                @onFilter="changeExtraFilter($event)"
-                            ></channel-filter>
-                        </div>
-
-                        <div
-                            class="dropdown-filters per-page"
-                            v-if="extraFilters.locales != undefined"
-                        >
-                            <locale-filter
-                                :extra-filters="extraFilters"
-                                :translations="translations"
-                                @onFilter="changeExtraFilter($event)"
-                            ></locale-filter>
-                        </div>
-
-                        <div
-                            class="dropdown-filters per-page"
-                            v-if="extraFilters.customer_groups != undefined"
-                        >
-                            <customer-group-filter
-                                :extra-filters="extraFilters"
-                                :translations="translations"
-                                @onFilter="changeExtraFilter($event)"
-                            ></customer-group-filter>
-                        </div>
+                        <datagrid-extra-filters
+                            :extra-filters="extraFilters"
+                            :translations="translations"
+                            @onFilter="changeExtraFilter($event)"
+                        ></datagrid-extra-filters>
                     </div>
                 </div>
 
@@ -109,30 +82,26 @@
 </template>
 
 <script>
-import ChannelFilter from './filters/channel-filter';
 import ColumnFilter from './filters/column-filter';
-import CustomerGroupFilter from './filters/customer-group-filter';
-import LocaleFilter from './filters/locale-filter';
 import PageFilter from './filters/page-filter';
 import SearchFilter from './filters/search-filter';
 import PersistDatagridAttributes from './mixins/persist-datagrid-attributes';
-import DatagridFilterTags from './datagrid-filter-tags';
-import DatagridPagination from './datagrid-pagination';
-import DatagridTable from './datagrid-table';
+import DatagridExtraFilters from './partials/datagrid-extra-filters';
+import DatagridFilterTags from './partials/datagrid-filter-tags';
+import DatagridPagination from './partials/datagrid-pagination';
+import DatagridTable from './partials/datagrid-table';
 
 export default {
     props: ['src'],
 
     components: {
-        ChannelFilter,
         ColumnFilter,
-        CustomerGroupFilter,
-        LocaleFilter,
         PageFilter,
         SearchFilter,
         DatagridFilterTags,
         DatagridPagination,
         DatagridTable,
+        DatagridExtraFilters,
         DatagridFilterTags
     },
 
