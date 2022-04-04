@@ -72,13 +72,14 @@
 
             <div class="filter-advance">
                 <div class="filtered-tags">
-                    <datagrid-filter-tag
-                        :key="filterKey"
-                        :filter="filter"
-                        v-for="(filter, filterKey) in filters"
-                        v-if="filters.length > 0"
-                        @onRemoveFilter="removeFilter(filter)"
-                    ></datagrid-filter-tag>
+                    <template v-if="filters.length > 0">
+                        <datagrid-filter-tag
+                            :key="filterKey"
+                            :filter="filter"
+                            v-for="(filter, filterKey) in filters"
+                            @onRemoveFilter="removeFilter(filter)"
+                        ></datagrid-filter-tag>
+                    </template>
                 </div>
 
                 <div class="records-count-container">
@@ -89,259 +90,17 @@
             </div>
 
             <div class="table-responsive">
-                <table class="table">
-                    <thead v-if="massActionsToggle">
-                        <tr
-                            class="mass-action"
-                            v-if="massActionsToggle"
-                            style="height: 65px"
-                        >
-                            <th colspan="100%">
-                                <div
-                                    class="mass-action-wrapper"
-                                    style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;"
-                                >
-                                    <span
-                                        class="massaction-remove"
-                                        v-on:click="removeMassActions"
-                                        style="margin-right: 10px; margin-top: 5px"
-                                    >
-                                        <span
-                                            class="icon checkbox-dash-icon"
-                                        ></span>
-                                    </span>
-
-                                    <form
-                                        method="POST"
-                                        id="mass-action-form"
-                                        style="display: inline-flex"
-                                        action=""
-                                        :onsubmit="
-                                            `return confirm('${massActionConfirmText}')`
-                                        "
-                                    >
-                                        <input
-                                            type="hidden"
-                                            name="_token"
-                                            :value="csrf"
-                                        />
-
-                                        <input
-                                            type="hidden"
-                                            id="indexes"
-                                            name="indexes"
-                                            v-model="dataIds"
-                                        />
-
-                                        <div class="control-group">
-                                            <select
-                                                class="control"
-                                                v-model="massActionType"
-                                                @change="changeMassActionTarget"
-                                                name="massaction-type"
-                                                required
-                                            >
-                                                <option
-                                                    v-for="(massAction,
-                                                    index) in massActions"
-                                                    v-text="massAction.label"
-                                                    :key="index"
-                                                    :value="{
-                                                        id: index,
-                                                        value: massAction.type
-                                                    }"
-                                                ></option>
-                                            </select>
-                                        </div>
-
-                                        <div
-                                            class="control-group"
-                                            style="margin-left: 10px"
-                                            v-if="
-                                                massActionType.value == 'update'
-                                            "
-                                        >
-                                            <select
-                                                class="control"
-                                                v-model="massActionUpdateValue"
-                                                name="update-options"
-                                                required
-                                            >
-                                                <option
-                                                    :key="id"
-                                                    v-for="(massActionValue,
-                                                    id) in massActionValues"
-                                                    :value="massActionValue"
-                                                    v-text="id"
-                                                ></option>
-                                            </select>
-                                        </div>
-
-                                        <button
-                                            v-text="translations.submit"
-                                            type="submit"
-                                            class="btn btn-sm btn-primary"
-                                            style="margin-left: 10px; white-space: nowrap;"
-                                        ></button>
-                                    </form>
-                                </div>
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <thead v-if="massActionsToggle == false">
-                        <tr style="height: 65px">
-                            <th
-                                v-if="enableMassActions"
-                                class="grid_head"
-                                id="mastercheckbox"
-                                style="width: 50px"
-                            >
-                                <span class="checkbox">
-                                    <input
-                                        type="checkbox"
-                                        v-model="allSelected"
-                                        v-on:change="selectAll"
-                                        :disabled="!records.data.length"
-                                    />
-
-                                    <label
-                                        class="checkbox-view"
-                                        for="checkbox"
-                                    ></label>
-                                </span>
-                            </th>
-
-                            <th
-                                :key="columnKey"
-                                v-for="(column, columnKey) in columns"
-                                v-text="column.label"
-                                class="grid_head"
-                                :class="{ sortable: column.sortable }"
-                                :style="
-                                    typeof column.width !== 'undefined' &&
-                                    column.width
-                                        ? `width: ${column.width}`
-                                        : ''
-                                "
-                                v-on:click="
-                                    typeof column.sortable !== 'undefined' &&
-                                    column.sortable
-                                        ? sortCollection(column.index)
-                                        : {}
-                                "
-                            ></th>
-
-                            <th
-                                v-if="enableActions"
-                                v-text="translations.actions"
-                            ></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <template v-if="records.data.length">
-                            <tr
-                                :key="recordKey"
-                                v-for="(record, recordKey) in records.data"
-                            >
-                                <td v-if="enableMassActions">
-                                    <span class="checkbox">
-                                        <input
-                                            type="checkbox"
-                                            v-model="dataIds"
-                                            @change="select"
-                                            :value="record[index]"
-                                        />
-
-                                        <label
-                                            class="checkbox-view"
-                                            for="checkbox"
-                                        ></label>
-                                    </span>
-                                </td>
-
-                                <td
-                                    :key="columnKey"
-                                    v-for="(column, columnKey) in columns"
-                                    v-html="record[column.index]"
-                                    :data-value="column.label"
-                                ></td>
-
-                                <td
-                                    class="actions"
-                                    style="white-space: nowrap; width: 100px"
-                                    v-if="enableActions"
-                                    :data-value="translations.actions"
-                                >
-                                    <div class="action">
-                                        <a
-                                            :key="actionIndex"
-                                            v-for="(action,
-                                            actionIndex) in actions"
-                                            v-if="
-                                                record[
-                                                    `${action.key}_to_display`
-                                                ]
-                                            "
-                                            :id="
-                                                record[
-                                                    typeof action.index !==
-                                                        'undefined' &&
-                                                    action.index
-                                                        ? action.index
-                                                        : index
-                                                ]
-                                            "
-                                            :href="
-                                                action.method == 'GET'
-                                                    ? record[
-                                                          `${action.key}_url`
-                                                      ]
-                                                    : 'javascript:void(0);'
-                                            "
-                                            v-on:click="
-                                                action.method != 'GET'
-                                                    ? doAction($event)
-                                                    : {}
-                                            "
-                                            :data-method="action.method"
-                                            :data-action="
-                                                record[`${action.key}_url`]
-                                            "
-                                            :data-token="csrf"
-                                            :target="
-                                                typeof action.target !==
-                                                    'undefined' && action.target
-                                                    ? action.target
-                                                    : ''
-                                            "
-                                            :title="
-                                                typeof action.title !==
-                                                    'undefined' && action.title
-                                                    ? action.title
-                                                    : ''
-                                            "
-                                        >
-                                            <span :class="action.icon"></span>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </template>
-
-                        <template v-else>
-                            <tr>
-                                <td colspan="10">
-                                    <p
-                                        style="text-align: center"
-                                        v-text="translations.norecords"
-                                    ></p>
-                                </td>
-                            </tr>
-                        </template>
-                    </tbody>
-                </table>
+                <datagrid-table
+                    :actions="actions"
+                    :columns="columns"
+                    :enable-actions="enableActions"
+                    :enable-mass-actions="enableMassActions"
+                    :mass-actions="massActions"
+                    :mass-action-targets="massActionTargets"
+                    :records="records"
+                    :translations="translations"
+                    @onSorting="filterData($event)"
+                ></datagrid-table>
             </div>
 
             <datagrid-pagination
@@ -362,6 +121,7 @@ import PageFilter from './filters/page-filter.vue';
 import SearchFilter from './filters/search-filter.vue';
 import DatagridFilterTag from './datagrid-filter-tag.vue';
 import DatagridPagination from './datagrid-pagination.vue';
+import DatagridTable from './datagrid-table.vue';
 import PersistDatagridAttributes from './mixins/persist-datagrid-attributes';
 
 export default {
@@ -375,36 +135,22 @@ export default {
         PageFilter,
         SearchFilter,
         DatagridFilterTag,
-        DatagridPagination
+        DatagridPagination,
+        DatagridTable
     },
 
     mixins: [PersistDatagridAttributes],
 
     data: function() {
         return {
-            id: btoa(this.src),
-            url: this.src,
-            isDataLoaded: false,
             dataGridIndex: 0,
-            massActionsToggle: false,
-            massActionTarget: null,
-            massActionType: this.getDefaultMassActionType(),
-            massActionValues: [],
-            massActionTargets: [],
-            massActionUpdateValue: null,
             currentSort: null,
-            dataIds: [],
-            allSelected: false,
-            sortDesc: 'desc',
-            sortAsc: 'asc',
-            sortUpIcon: 'sort-up-icon',
-            sortDownIcon: 'sort-down-icon',
-            currentSortIcon: null,
-            isActive: false,
-            isHidden: true,
-            filterColumn: true,
             filters: [],
-            perPageCount: [10, 20, 30, 40, 50]
+            id: btoa(this.src),
+            isDataLoaded: false,
+            massActionTargets: [],
+            perPageCount: [10, 20, 30, 40, 50],
+            url: this.src
         };
     },
 
@@ -415,309 +161,19 @@ export default {
     },
 
     methods: {
-        hitUrl: function() {
-            let self = this;
+        getCsrf() {
+            let token = document.head.querySelector('meta[name="csrf-token"]');
 
-            this.analyzeDatagridsInfo();
-
-            axios
-                .get(this.url)
-                .then(function(response) {
-                    if (response.status === 200) {
-                        let results = response.data;
-
-                        self.initResponseProps(results);
-
-                        self.initDatagrid();
-
-                        self.dataGridIndex += 1;
-                    }
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        },
-
-        initDatagrid: function() {
-            this.setParamsAndUrl();
-
-            this.initDataParams();
-        },
-
-        initResponseProps: function(results) {
-            for (let property in results) {
-                this[property] = results[property];
-            }
-        },
-
-        initDataParams: function() {
-            if (this.filters.length) {
-                for (let i = 0; i < this.filters.length; i++) {
-                    if (this.filters[i].column === 'perPage') {
-                        this.perPage = this.filters[i].val;
-                    }
-                }
-            }
-
-            if (this.perPageCount.indexOf(parseInt(this.perPage)) === -1) {
-                this.perPageCount.unshift(this.perPage);
-            }
-
-            this.isDataLoaded = true;
-            this.filterIndex = this.index;
-            this.gridCurrentData = this.records;
-            this.perPage = this.itemsPerPage;
-            this.massActionConfirmText = this.translations.clickOnAction;
-        },
-
-        sortCollection: function(alias) {
-            let label = '';
-
-            for (let colIndex in this.columns) {
-                if (this.columns[colIndex].index === alias) {
-                    let matched = 0;
-                    label = this.columns[colIndex].label;
-                    break;
-                }
-            }
-
-            this.formURL('sort', alias, this.sortAsc, label);
-        },
-
-        setParamsAndUrl: function() {
-            let params = new URL(this.src).search;
-
-            if (params.slice(1, params.length).length > 0) {
-                this.arrayFromUrl();
-            }
-
-            for (let id in this.massActions) {
-                this.massActionTargets.push({
-                    id: parseInt(id),
-                    type: this.massActions[id].type,
-                    action: this.massActions[id].action,
-                    confirm_text: this.massActions[id].confirm_text
-                });
-            }
-        },
-
-        findCurrentSort: function() {
-            for (let i in this.filters) {
-                if (this.filters[i].column === 'sort') {
-                    this.currentSort = this.filters[i].val;
-                }
-            }
-        },
-
-        getDefaultMassActionType: function() {
-            return {
-                id: null,
-                value: null
-            };
-        },
-
-        changeMassActionTarget: function() {
-            if (this.massActionType.value === 'delete') {
-                for (let i in this.massActionTargets) {
-                    if (this.massActionTargets[i].type === 'delete') {
-                        this.massActionTarget = this.massActionTargets[
-                            i
-                        ].action;
-                        this.massActionConfirmText = this.massActionTargets[i]
-                            .confirm_text
-                            ? this.massActionTargets[i].confirm_text
-                            : this.massActionConfirmText;
-
-                        break;
-                    }
-                }
-            }
-
-            if (this.massActionType.value === 'update') {
-                for (let i in this.massActionTargets) {
-                    if (this.massActionTargets[i].type === 'update') {
-                        this.massActionValues = this.massActions[
-                            this.massActionType.id
-                        ].options;
-                        this.massActionTarget = this.massActionTargets[
-                            i
-                        ].action;
-                        this.massActionConfirmText = this.massActionTargets[i]
-                            .confirm_text
-                            ? this.massActionTargets[i].confirm_text
-                            : this.massActionConfirmText;
-
-                        break;
-                    }
-                }
-            }
-
-            document.getElementById(
-                'mass-action-form'
-            ).action = this.massActionTarget;
-        },
-
-        formURL: function(column, condition, response, label) {
-            let obj = {};
-
-            if (
-                column === '' ||
-                condition === '' ||
-                response === '' ||
-                column === null ||
-                condition === null ||
-                response === null
-            ) {
-                alert(this.translations.filterFieldsMissing);
-
-                return false;
+            if (token) {
+                this.csrf = token.content;
             } else {
-                if (this.filters.length > 0) {
-                    if (column !== 'sort' && column !== 'search') {
-                        let filterRepeated = false;
-
-                        for (let j = 0; j < this.filters.length; j++) {
-                            if (this.filters[j].column === column) {
-                                if (
-                                    this.filters[j].cond === condition &&
-                                    this.filters[j].val === response
-                                ) {
-                                    filterRepeated = true;
-
-                                    alert(this.translations.filterExists);
-
-                                    return false;
-                                } else if (
-                                    this.filters[j].cond === condition &&
-                                    this.filters[j].val !== response
-                                ) {
-                                    filterRepeated = true;
-
-                                    this.filters[j].val = response;
-
-                                    this.makeURL();
-                                }
-                            }
-                        }
-
-                        if (filterRepeated === false) {
-                            obj.column = column;
-                            obj.cond = condition;
-                            obj.val = response;
-                            obj.label = label;
-
-                            this.filters.push(obj);
-                            obj = {};
-
-                            this.makeURL();
-                        }
-                    }
-
-                    if (column === 'sort') {
-                        let sort_exists = false;
-
-                        for (let j = 0; j < this.filters.length; j++) {
-                            if (this.filters[j].column === 'sort') {
-                                if (
-                                    this.filters[j].column === column &&
-                                    this.filters[j].cond === condition
-                                ) {
-                                    this.findCurrentSort();
-
-                                    if (this.currentSort === 'asc') {
-                                        this.filters[j].column = column;
-                                        this.filters[j].cond = condition;
-                                        this.filters[j].val = this.sortDesc;
-
-                                        this.makeURL();
-                                    } else {
-                                        this.filters[j].column = column;
-                                        this.filters[j].cond = condition;
-                                        this.filters[j].val = this.sortAsc;
-
-                                        this.makeURL();
-                                    }
-                                } else {
-                                    this.filters[j].column = column;
-                                    this.filters[j].cond = condition;
-                                    this.filters[j].val = response;
-                                    this.filters[j].label = label;
-
-                                    this.makeURL();
-                                }
-
-                                sort_exists = true;
-                            }
-                        }
-
-                        if (sort_exists === false) {
-                            if (this.currentSort === null)
-                                this.currentSort = this.sortAsc;
-
-                            obj.column = column;
-                            obj.cond = condition;
-                            obj.val = this.currentSort;
-                            obj.label = label;
-
-                            this.filters.push(obj);
-
-                            obj = {};
-
-                            this.makeURL();
-                        }
-                    }
-
-                    if (column === 'search') {
-                        let search_found = false;
-
-                        for (let j = 0; j < this.filters.length; j++) {
-                            if (this.filters[j].column === 'search') {
-                                this.filters[j].column = column;
-                                this.filters[j].cond = condition;
-                                this.filters[j].val = encodeURIComponent(
-                                    response
-                                );
-                                this.filters[j].label = label;
-
-                                this.makeURL();
-                            }
-                        }
-
-                        for (let j = 0; j < this.filters.length; j++) {
-                            if (this.filters[j].column === 'search') {
-                                search_found = true;
-                            }
-                        }
-
-                        if (search_found === false) {
-                            obj.column = column;
-                            obj.cond = condition;
-                            obj.val = encodeURIComponent(response);
-                            obj.label = label;
-
-                            this.filters.push(obj);
-
-                            obj = {};
-
-                            this.makeURL();
-                        }
-                    }
-                } else {
-                    obj.column = column;
-                    obj.cond = condition;
-                    obj.val = encodeURIComponent(response);
-                    obj.label = label;
-
-                    this.filters.push(obj);
-
-                    obj = {};
-
-                    this.makeURL();
-                }
+                console.error(
+                    'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token'
+                );
             }
         },
 
-        makeURL: function() {
+        makeURL() {
             let newParams = '';
 
             for (let i = 0; i < this.filters.length; i++) {
@@ -746,6 +202,58 @@ export default {
             this.url = `${this.src}?v=1${newParams}`;
 
             this.hitUrl();
+        },
+
+        hitUrl() {
+            let self = this;
+
+            this.analyzeDatagridsInfo();
+
+            axios
+                .get(this.url)
+                .then(function(response) {
+                    if (response.status === 200) {
+                        let results = response.data;
+
+                        self.initResponseProps(results);
+
+                        self.initDatagrid();
+
+                        self.dataGridIndex += 1;
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        },
+
+        initResponseProps(results) {
+            for (let property in results) {
+                this[property] = results[property];
+            }
+        },
+
+        initDatagrid() {
+            this.setParamsAndUrl();
+
+            this.initDataParams();
+        },
+
+        setParamsAndUrl() {
+            let params = new URL(this.src).search;
+
+            if (params.slice(1, params.length).length > 0) {
+                this.arrayFromUrl();
+            }
+
+            for (let id in this.massActions) {
+                this.massActionTargets.push({
+                    id: parseInt(id),
+                    type: this.massActions[id].type,
+                    action: this.massActions[id].action,
+                    confirm_text: this.massActions[id].confirm_text
+                });
+            }
         },
 
         arrayFromUrl: function() {
@@ -852,142 +360,193 @@ export default {
             }
         },
 
-        select: function() {
-            this.allSelected = false;
-
-            if (this.dataIds.length === 0) {
-                this.massActionsToggle = false;
-                this.massActionType = this.getDefaultMassActionType();
-            } else {
-                this.massActionsToggle = true;
+        initDataParams() {
+            if (this.filters.length) {
+                for (let i = 0; i < this.filters.length; i++) {
+                    if (this.filters[i].column === 'perPage') {
+                        this.perPage = this.filters[i].val;
+                    }
+                }
             }
+
+            if (this.perPageCount.indexOf(parseInt(this.perPage)) === -1) {
+                this.perPageCount.unshift(this.perPage);
+            }
+
+            this.isDataLoaded = true;
+            this.filterIndex = this.index;
+            this.perPage = this.itemsPerPage;
         },
 
-        selectAll: function() {
-            this.dataIds = [];
+        formURL(column, condition, response, label) {
+            let obj = {};
 
-            this.massActionsToggle = true;
+            if (
+                column === '' ||
+                condition === '' ||
+                response === '' ||
+                column === null ||
+                condition === null ||
+                response === null
+            ) {
+                alert(this.translations.filterFieldsMissing);
 
-            if (this.allSelected) {
-                if (this.gridCurrentData.hasOwnProperty('data')) {
-                    for (let currentData in this.gridCurrentData.data) {
-                        let i = 0;
-                        for (let currentId in this.gridCurrentData.data[
-                            currentData
-                        ]) {
-                            if (i == 0) {
-                                this.dataIds.push(
-                                    this.gridCurrentData.data[currentData][
-                                        this.filterIndex
-                                    ]
-                                );
+                return false;
+            } else {
+                if (this.filters.length > 0) {
+                    if (column !== 'sort' && column !== 'search') {
+                        let filterRepeated = false;
+
+                        for (let j = 0; j < this.filters.length; j++) {
+                            if (this.filters[j].column === column) {
+                                if (
+                                    this.filters[j].cond === condition &&
+                                    this.filters[j].val === response
+                                ) {
+                                    filterRepeated = true;
+
+                                    alert(this.translations.filterExists);
+
+                                    return false;
+                                } else if (
+                                    this.filters[j].cond === condition &&
+                                    this.filters[j].val !== response
+                                ) {
+                                    filterRepeated = true;
+
+                                    this.filters[j].val = response;
+
+                                    this.makeURL();
+                                }
                             }
+                        }
 
-                            i++;
+                        if (filterRepeated === false) {
+                            obj.column = column;
+                            obj.cond = condition;
+                            obj.val = response;
+                            obj.label = label;
+
+                            this.filters.push(obj);
+                            obj = {};
+
+                            this.makeURL();
+                        }
+                    }
+
+                    if (column === 'sort') {
+                        let sort_exists = false;
+
+                        for (let j = 0; j < this.filters.length; j++) {
+                            if (this.filters[j].column === 'sort') {
+                                if (
+                                    this.filters[j].column === column &&
+                                    this.filters[j].cond === condition
+                                ) {
+                                    this.findCurrentSort();
+
+                                    if (this.currentSort === 'asc') {
+                                        this.filters[j].column = column;
+                                        this.filters[j].cond = condition;
+                                        this.filters[j].val = 'desc';
+
+                                        this.makeURL();
+                                    } else {
+                                        this.filters[j].column = column;
+                                        this.filters[j].cond = condition;
+                                        this.filters[j].val = 'asc';
+
+                                        this.makeURL();
+                                    }
+                                } else {
+                                    this.filters[j].column = column;
+                                    this.filters[j].cond = condition;
+                                    this.filters[j].val = response;
+                                    this.filters[j].label = label;
+
+                                    this.makeURL();
+                                }
+
+                                sort_exists = true;
+                            }
+                        }
+
+                        if (sort_exists === false) {
+                            if (this.currentSort === null)
+                                this.currentSort = 'asc';
+
+                            obj.column = column;
+                            obj.cond = condition;
+                            obj.val = this.currentSort;
+                            obj.label = label;
+
+                            this.filters.push(obj);
+
+                            obj = {};
+
+                            this.makeURL();
+                        }
+                    }
+
+                    if (column === 'search') {
+                        let search_found = false;
+
+                        for (let j = 0; j < this.filters.length; j++) {
+                            if (this.filters[j].column === 'search') {
+                                this.filters[j].column = column;
+                                this.filters[j].cond = condition;
+                                this.filters[j].val = encodeURIComponent(
+                                    response
+                                );
+                                this.filters[j].label = label;
+
+                                this.makeURL();
+                            }
+                        }
+
+                        for (let j = 0; j < this.filters.length; j++) {
+                            if (this.filters[j].column === 'search') {
+                                search_found = true;
+                            }
+                        }
+
+                        if (search_found === false) {
+                            obj.column = column;
+                            obj.cond = condition;
+                            obj.val = encodeURIComponent(response);
+                            obj.label = label;
+
+                            this.filters.push(obj);
+
+                            obj = {};
+
+                            this.makeURL();
                         }
                     }
                 } else {
-                    for (let currentData in this.gridCurrentData) {
-                        let i = 0;
-                        for (let currentId in this.gridCurrentData[
-                            currentData
-                        ]) {
-                            if (i === 0)
-                                this.dataIds.push(
-                                    this.gridCurrentData[currentData][currentId]
-                                );
+                    obj.column = column;
+                    obj.cond = condition;
+                    obj.val = encodeURIComponent(response);
+                    obj.label = label;
 
-                            i++;
-                        }
-                    }
+                    this.filters.push(obj);
+
+                    obj = {};
+
+                    this.makeURL();
                 }
             }
         },
 
-        captureColumn: function(id) {
-            element = document.getElementById(id);
-        },
-
-        removeMassActions: function() {
-            this.dataIds = [];
-
-            this.massActionsToggle = false;
-
-            this.allSelected = false;
-
-            this.massActionType = this.getDefaultMassActionType();
-        },
-
-        doAction: function(e, message, type) {
-            let self = this;
-
-            let element = e.currentTarget;
-
-            if (message) {
-                element = e.target.parentElement;
-            }
-
-            message = message || this.translations.massActionDelete;
-
-            if (confirm(message)) {
-                axios
-                    .post(element.getAttribute('data-action'), {
-                        _token: element.getAttribute('data-token'),
-                        _method: element.getAttribute('data-method')
-                    })
-                    .then(function(response) {
-                        /**
-                         * If refirect is true, then pass redirect url in the response.
-                         *
-                         * Else, it will reload table only.
-                         */
-                        if (response.data.redirect) {
-                            window.location.href = response.data.redirectUrl;
-                        } else {
-                            self.hitUrl();
-
-                            window.flashMessages.push({
-                                type: 'alert-success',
-                                message: response.data.message
-                            });
-
-                            self.$root.addFlashMessages();
-                        }
-                    })
-                    .catch(function(error) {
-                        let response = error.response;
-
-                        window.flashMessages.push({
-                            type: 'alert-error',
-                            message:
-                                response.data.message ?? 'Something went wrong!'
-                        });
-
-                        self.$root.addFlashMessages();
-                    });
-
-                e.preventDefault();
-            } else {
-                e.preventDefault();
+        findCurrentSort() {
+            for (let i in this.filters) {
+                if (this.filters[i].column === 'sort') {
+                    this.currentSort = this.filters[i].val;
+                }
             }
         },
 
-        getCsrf: function() {
-            let token = document.head.querySelector('meta[name="csrf-token"]');
-
-            if (token) {
-                this.csrf = token.content;
-            } else {
-                console.error(
-                    'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token'
-                );
-            }
-        },
-
-        /**
-         * Change extra filter.
-         */
-        changeExtraFilter: function($event) {
+        changeExtraFilter($event) {
             const { type, value } = $event.data;
 
             let url = new URL(this.src);
@@ -997,10 +556,7 @@ export default {
             this.hitUrl();
         },
 
-        /**
-         * Search filter.
-         */
-        searchData: function($event) {
+        searchData($event) {
             const searchValue = $event.data.searchValue;
 
             this.formURL(
@@ -1011,10 +567,7 @@ export default {
             );
         },
 
-        /**
-         * Page filter.
-         */
-        paginateData: function($event) {
+        paginateData($event) {
             const currentPerPageSelection = $event.data.perPage;
 
             for (let i = 0; i < this.filters.length; i++) {
@@ -1032,18 +585,12 @@ export default {
             this.makeURL();
         },
 
-        /**
-         * Column filter.
-         */
         filterData($event) {
             const { column, condition, response, label } = $event.data;
 
             this.formURL(column, condition, response, label);
         },
 
-        /**
-         * Remove filter.
-         */
         removeFilter(filter) {
             for (let i in this.filters) {
                 if (
@@ -1058,10 +605,7 @@ export default {
             }
         },
 
-        /**
-         * Change page.
-         */
-        changePage: function($event) {
+        changePage($event) {
             const { pageLink } = $event.data;
 
             if (pageLink) {
