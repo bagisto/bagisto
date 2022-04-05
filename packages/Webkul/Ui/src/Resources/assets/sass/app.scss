@@ -1203,6 +1203,10 @@ modal {
     overflow: hidden;
 }
 
+.loader-open {
+    overflow: hidden;
+}
+
 .modal-overlay {
     display: none;
     overflow-y: auto;
@@ -1217,6 +1221,10 @@ modal {
 }
 
 .modal-open .modal-overlay {
+    display: block;
+}
+
+.loader-open .loader-overlay {
     display: block;
 }
 
@@ -1425,7 +1433,7 @@ modal {
 
 .overlay-loader {
     position: fixed;
-    z-index: 11;
+    z-index: 10000;
     top: 50%;
     left: 50%;
     margin-top: -24px;

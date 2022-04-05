@@ -66,51 +66,8 @@
                         {{ __('shop::app.customer.account.wishlist.share-wishlist') }}
                     </h3>
 
-                    <i class="rango-close"></i>
-
                     <div slot="body">
-                        <form method="POST" action="{{ route('customer.wishlist.share') }}">
-                            @csrf
-
-                            <div class="control-group">
-                                <label for="shared" class="required">{{ __('shop::app.customer.account.wishlist.wishlist-sharing') }}</label>
-
-                                <select name="shared" class="control">
-                                    <option value="0" {{ $isWishlistShared ? '' : 'selected="selected"' }}>{{ __('shop::app.customer.account.wishlist.disable') }}</option>
-                                    <option value="1" {{ $isWishlistShared ? 'selected="selected"' : '' }}>{{ __('shop::app.customer.account.wishlist.enable') }}</option>
-                                </select>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="required">{{ __('shop::app.customer.account.wishlist.visibility') }}</label>
-
-                                <div class="mt-5">
-                                    @if ($isWishlistShared)
-                                        <span class="badge badge-sm badge-success">{{ __('shop::app.customer.account.wishlist.public') }}</span>
-                                    @else
-                                        <span class="badge badge-sm badge-danger">{{ __('shop::app.customer.account.wishlist.private') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="required">{{ __('shop::app.customer.account.wishlist.shared-link') }}</label>
-
-                                <div>
-                                    @if ($isWishlistShared)
-                                        <a href="{{ $wishlistSharedLink ?? 'javascript:void(0);' }}" target="_blank">{{ $wishlistSharedLink }}</a>
-                                    @else
-                                        <p>{{ __('shop::app.customer.account.wishlist.enable-wishlist-info') }}</p>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="page-action">
-                                <button type="submit"  class="btn btn-lg btn-primary mt-10 pull-right">
-                                    {{ __('shop::app.customer.account.wishlist.save') }}
-                                </button>
-                            </div>
-                        </form>
+                        <share-component></share-component>
                     </div>
                 </modal>
             </div>
@@ -122,6 +79,48 @@
 
 @push('scripts')
     @if ($isSharingEnabled)
+        <script type="text/x-template" id="share-component-template"> 
+            <form method="POST">
+                @csrf
+
+                <div class="control-group">
+                    <label for="shared" class="required">{{ __('shop::app.customer.account.wishlist.wishlist-sharing') }}</label>
+
+                    <select name="shared" class="control" @change="shareWishlist($event.target.value)">
+                        <option value="0" :selected="! isWishlistShared">{{ __('shop::app.customer.account.wishlist.disable') }}</option>
+                        <option value="1" :selected="isWishlistShared">{{ __('shop::app.customer.account.wishlist.enable') }}</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="required">{{ __('shop::app.customer.account.wishlist.visibility') }}</label>
+
+                    <div style="margin-top: 10px; margin-bottom: 5px;">
+                        <span class="badge badge-sm badge-success" v-if="isWishlistShared">
+                            {{ __('shop::app.customer.account.wishlist.public') }}
+                        </span>
+
+                        <span class="badge badge-sm badge-danger" v-else>
+                            {{ __('shop::app.customer.account.wishlist.private') }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="required">{{ __('shop::app.customer.account.wishlist.shared-link') }}</label>
+
+                    <div style="margin-top: 10px; margin-bottom: 5px;">
+                        <a href="{{ $wishlistSharedLink ?? 'javascript:void(0);' }}" target="_blank" v-if="isWishlistShared" v-text="wishlistSharedLink">
+                        </a>
+                            
+                        <p class="alert alert-danger" v-else>
+                            {{ __('shop::app.customer.account.wishlist.enable-wishlist-info') }}
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </script>
+        
         <script>
             /**
             * Show share wishlist modal.
@@ -131,6 +130,44 @@
 
                 window.app.showModal('shareWishlist');
             }
+
+            Vue.component('share-component', {
+                template: '#share-component-template',
+
+                inject: ['$validator'],
+
+                data: function () {
+                    return {
+                        isWishlistShared: parseInt("{{ $isWishlistShared }}"),
+
+                        wishlistSharedLink: "{{ $wishlistSharedLink }}",
+                    }
+                },
+
+                methods: {
+                    shareWishlist: function(val) {
+                        var self = this;
+
+                        this.$root.showLoader();
+
+                        this.$http.post("{{ route('customer.wishlist.share') }}", {
+                            shared: val
+                        })
+                        .then(function(response) {
+                            self.$root.hideLoader();
+
+                            self.isWishlistShared = response.data.isWishlistShared;
+
+                            self.wishlistSharedLink = response.data.wishlistSharedLink;
+                        })
+                        .catch(function (error) {
+                            self.$root.hideLoader();
+
+                            window.location.reload();
+                        })
+                    }
+                }
+            });
         </script>
     @endif
 
