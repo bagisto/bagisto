@@ -21,19 +21,54 @@ class BagistoPublish extends Command
     protected $description = 'Publish the available assets';
 
     /**
-     * List of Bagisto's providers.
+     * List of providers.
      *
      * @var array
      */
     protected $providers = [
-        'Admin'           => "Webkul\Admin\Providers\AdminServiceProvider",
-        'UI'              => "Webkul\Ui\Providers\UiServiceProvider",
-        'Core'            => "Webkul\Core\Providers\CoreServiceProvider",
-        'Shop'            => "Webkul\Shop\Providers\ShopServiceProvider",
-        'Product'         => "Webkul\Product\Providers\ProductServiceProvider",
-        'Velocity'        => "Webkul\Velocity\Providers\VelocityServiceProvider",
-        'Booking Product' => "Webkul\BookingProduct\Providers\BookingProductServiceProvider",
-        'Social'          => "Webkul\SocialLogin\Providers\SocialLoginServiceProvider",
+        /**
+         * Package providers.
+         */
+        [
+            'name'     => 'DB Blade Compiler',
+            'provider' => \Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider::class,
+        ],
+
+        /**
+         * Bagisto providers.
+         */
+        [
+            'name'     => 'Admin',
+            'provider' => \Webkul\Admin\Providers\AdminServiceProvider::class,
+        ],
+        [
+            'name'     => 'UI',
+            'provider' => \Webkul\Ui\Providers\UiServiceProvider::class,
+        ],
+        [
+            'name'     => 'Core',
+            'provider' => \Webkul\Core\Providers\CoreServiceProvider::class,
+        ],
+        [
+            'name'     => 'Shop',
+            'provider' => \Webkul\Shop\Providers\ShopServiceProvider::class,
+        ],
+        [
+            'name'     => 'Product',
+            'provider' => \Webkul\Product\Providers\ProductServiceProvider::class,
+        ],
+        [
+            'name'     => 'Velocity',
+            'provider' => \Webkul\Velocity\Providers\VelocityServiceProvider::class,
+        ],
+        [
+            'name'     => 'Booking Product',
+            'provider' => \Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
+        ],
+        [
+            'name'     => 'Social',
+            'provider' => \Webkul\SocialLogin\Providers\SocialLoginServiceProvider::class,
+        ],
     ];
 
     /**
@@ -53,27 +88,26 @@ class BagistoPublish extends Command
      */
     public function publishAllPackages(): void
     {
-        collect($this->providers)->each(function ($provider, $name) {
-            $this->publishPackage($provider, $name);
+        collect($this->providers)->each(function ($provider) {
+            $this->publishPackage($provider);
         });
     }
 
     /**
      * Publish package.
      *
-     * @param  string  $provider
-     * @param  string  $name
+     * @param  array  $provider
      * @return void
      */
-    public function publishPackage(string $provider, ?string $name = null): void
+    public function publishPackage(array $provider): void
     {
         $this->line('');
         $this->line('-----------------------------------------');
-        $this->info('Publishing ' . $name);
+        $this->info('Publishing ' . $provider['name']);
         $this->line('-----------------------------------------');
 
         $this->call('vendor:publish', [
-            '--provider' => $provider,
+            '--provider' => $provider['provider'],
             '--force'    => $this->option('force'),
         ]);
     }
