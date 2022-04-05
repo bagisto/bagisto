@@ -87,6 +87,10 @@
                                 <div class="item-qty">Quantity - {{ $item->quantity }}</div>
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.after', ['item' => $item]) !!}
+
+                                <div class="item-remove">
+                                    <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.remove-link') }}</a>
+                                </div>
                             </div>
                         </div>
 
