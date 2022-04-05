@@ -25,10 +25,11 @@
 
 <script>
 export default {
-    props: ['perPage', 'perPageCount', 'translations'],
+    props: ['perPage', 'translations'],
 
     data() {
         return {
+            perPageCount: [10, 20, 30, 40, 50],
             currentSelection: this.perPage
         };
     },

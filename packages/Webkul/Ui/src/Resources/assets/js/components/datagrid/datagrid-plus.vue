@@ -24,7 +24,6 @@
                         <div class="dropdown-filters per-page">
                             <page-filter
                                 :per-page="perPage"
-                                :per-page-count="perPageCount"
                                 :translations="translations"
                                 @onFilter="paginateData($event)"
                             ></page-filter>
@@ -115,7 +114,6 @@ export default {
             id: btoa(this.src),
             isDataLoaded: false,
             massActionTargets: [],
-            perPageCount: [10, 20, 30, 40, 50],
             url: this.src
         };
     },
@@ -209,10 +207,6 @@ export default {
                         this.perPage = this.filters[i].val;
                     }
                 }
-            }
-
-            if (this.perPageCount.indexOf(parseInt(this.perPage)) === -1) {
-                this.perPageCount.unshift(this.perPage);
             }
 
             this.isDataLoaded = true;
