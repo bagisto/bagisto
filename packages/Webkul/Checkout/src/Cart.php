@@ -274,7 +274,7 @@ class Cart
         if ($cartItem = $cart->items()->find($itemId)) {
             $cartItem->delete();
 
-            if ($cart->items->count() == 0) {
+            if ($cart->items()->get()->count() == 0) {
                 $this->cartRepository->delete($cart->id);
 
                 if (session()->has('cart')) {
