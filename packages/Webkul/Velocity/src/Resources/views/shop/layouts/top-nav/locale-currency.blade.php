@@ -65,6 +65,10 @@
     @if (core()->getCurrentChannel()->currencies->count() > 1)
         <div class="d-inline-block">
             <div class="dropdown">
+            <span class="currency-icon">
+                {{ core()->getCurrentCurrency()->symbol }}
+            </span>
+
                <select
                     class="btn btn-link dropdown-toggle control locale-switcher styled-select"
                     onchange="window.location.href = this.value" aria-label="Locale">
