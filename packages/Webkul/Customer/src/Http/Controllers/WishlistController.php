@@ -125,13 +125,14 @@ class WishlistController extends Controller
             $updateCounts = $this->currentCustomer->wishlist_items()->update(['shared' => $data['shared']]);
 
             if ($updateCounts && $updateCounts > 0) {
-                session()->flash('success', __('shop::app.customer.account.wishlist.update-message'));
-
-                return redirect()->back();
+                return response()->json([
+                    'isWishlistShared' => $this->currentCustomer->isWishlistShared(),
+                    'wishlistSharedLink' => $this->currentCustomer->getWishlistSharedLink()
+                ]);
             }
         }
 
-        return redirect()->back();
+        return response()->json([], 400);
     }
 
     /**

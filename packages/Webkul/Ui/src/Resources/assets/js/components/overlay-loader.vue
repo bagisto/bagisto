@@ -21,9 +21,9 @@
                 var body = document.querySelector("body");
 
                 if (this.isOpen) {
-                    body.classList.add("modal-open");
+                    body.classList.add("loader-open");
                 } else {
-                    body.classList.remove("modal-open");
+                    body.classList.remove("loader-open");
                 }
             }
         }
