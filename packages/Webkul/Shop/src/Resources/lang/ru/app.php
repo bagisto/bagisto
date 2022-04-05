@@ -376,6 +376,7 @@ return [
                 'share-wishlist'       => '«Поделиться списком желаний»',
                 'wishlist-sharing'     => '«Обмен списком желаний»',
                 'shared-link'          => '«Общая ссылка»',
+                'copy'                 => 'Copy',
                 'visibility'           => '«Видимость»',
                 'public'               => '«Общественный»',
                 'private'              => 'Частный',

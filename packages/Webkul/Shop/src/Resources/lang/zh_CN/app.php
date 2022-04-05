@@ -375,6 +375,7 @@ return [
                 'share-wishlist'       => '分享愿望清单',
                 'wishlist-sharing'     => '愿望清单分享',
                 'shared-link'          => '已共享链接',
+                'copy'                 => 'Copy',
                 'visibility'           => '可见度',
                 'public'               => '公开的',
                 'private'              => '私有的',

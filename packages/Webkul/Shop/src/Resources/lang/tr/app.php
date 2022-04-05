@@ -371,6 +371,7 @@ return [
                 'share-wishlist'       => 'Share Wishlist',
                 'wishlist-sharing'     => 'Wishlist Sharing',
                 'shared-link'          => 'Shared Link',
+                'copy'                 => 'Copy',
                 'visibility'           => 'Visibility',
                 'public'               => 'Public',
                 'private'              => 'Private',
