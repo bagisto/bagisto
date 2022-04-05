@@ -62,9 +62,10 @@ class BagistoPublish extends Command
      * Publish package.
      *
      * @param  string  $provider
+     * @param  string  $name
      * @return void
      */
-    public function publishPackage(string $provider, string $name): void
+    public function publishPackage(string $provider, ?string $name = null): void
     {
         $this->line('');
         $this->line('-----------------------------------------');
