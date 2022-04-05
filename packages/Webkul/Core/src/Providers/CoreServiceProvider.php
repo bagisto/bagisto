@@ -103,6 +103,7 @@ class CoreServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                \Webkul\Core\Console\Commands\BagistoPublish::class,
                 \Webkul\Core\Console\Commands\BagistoVersion::class,
                 \Webkul\Core\Console\Commands\Install::class,
                 \Webkul\Core\Console\Commands\ExchangeRateUpdate::class,
