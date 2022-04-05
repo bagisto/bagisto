@@ -375,6 +375,7 @@ return [
                 'share-wishlist'       => 'שתף משאלות',
                 'wishlist-sharing'     => 'שיתוף רשימת המשאלות',
                 'shared-link'          => 'קישור משותף',
+                'copy'                 => 'Copy',
                 'visibility'           => 'רְאוּת',
                 'public'               => 'פּוּמְבֵּי',
                 'private'              => 'פְּרָטִי',

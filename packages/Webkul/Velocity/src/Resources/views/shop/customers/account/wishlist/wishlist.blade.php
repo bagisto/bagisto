@@ -117,14 +117,30 @@
                         {{ __('shop::app.customer.account.wishlist.shared-link') }}
                     </label>
 
-                    <div>
-                        <a href="{{ $wishlistSharedLink ?? 'javascript:void(0);' }}" target="_blank" v-if="isWishlistShared" v-text="wishlistSharedLink">
-                        </a>
-                        
-                        <p class="alert alert-danger" v-else>
-                            {{ __('shop::app.customer.account.wishlist.enable-wishlist-info') }}
-                        </p>
+                    <div class="input-group" v-if="isWishlistShared">
+                        <input
+                            type="text"
+                            class="form-control"
+                            v-model="wishlistSharedLink"
+                            v-on:focus="$event.target.select()" 
+                            ref="sharedLink"
+                        />
+
+                        <div class="input-group-append">
+                            <button
+                                class="btn btn-outline-secondary theme-btn"
+                                style="padding: 6px 20px"
+                                type="button"
+                                @click="copyToClipboard"
+                            >
+                                {{ __('shop::app.customer.account.wishlist.copy') }}
+                            </button>
+                        </div>
                     </div>
+
+                    <p class="alert alert-danger" v-else>
+                        {{ __('shop::app.customer.account.wishlist.enable-wishlist-info') }}
+                    </p>
                 </div>
             </form>
         </script>
@@ -173,6 +189,12 @@
 
                             window.location.reload();
                         })
+                    },
+
+                    copyToClipboard: function() {
+                        this.$refs.sharedLink.focus();
+
+                        document.execCommand('copy');
                     }
                 }
             });

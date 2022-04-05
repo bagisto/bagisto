@@ -376,6 +376,7 @@ return [
                 'share-wishlist'       => 'ইচ্ছা তালিকা ভাগ করুন',
                 'wishlist-sharing'     => 'ইচ্ছা তালিকা শেয়ারিং',
                 'shared-link'          => 'শেয়ারড লিংক',
+                'copy'                 => 'Copy',
                 'visibility'           => 'দৃশ্যমানতা',
                 'public'               => 'পাবলিক',
                 'private'              => 'ব্যক্তিগত',

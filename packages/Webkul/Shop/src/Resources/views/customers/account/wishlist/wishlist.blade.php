@@ -110,8 +110,25 @@
                     <label class="required">{{ __('shop::app.customer.account.wishlist.shared-link') }}</label>
 
                     <div style="margin-top: 10px; margin-bottom: 5px;">
-                        <a href="{{ $wishlistSharedLink ?? 'javascript:void(0);' }}" target="_blank" v-if="isWishlistShared" v-text="wishlistSharedLink">
-                        </a>
+                        <div class="input-group"  v-if="isWishlistShared">
+                            <input
+                                type="text"
+                                class="control"
+                                v-model="wishlistSharedLink"
+                                v-on:focus="$event.target.select()" 
+                                ref="sharedLink"
+                            />
+
+                            <div class="input-group-append">
+                                <button
+                                    class="btn btn-primary btn-md"
+                                    type="button"
+                                    @click="copyToClipboard"
+                                >
+                                    {{ __('shop::app.customer.account.wishlist.copy') }}
+                                </button>
+                            </div>
+                        </div>
                             
                         <p class="alert alert-danger" v-else>
                             {{ __('shop::app.customer.account.wishlist.enable-wishlist-info') }}
@@ -165,6 +182,12 @@
 
                             window.location.reload();
                         })
+                    },
+
+                    copyToClipboard: function() {
+                        this.$refs.sharedLink.focus();
+
+                        document.execCommand('copy');
                     }
                 }
             });

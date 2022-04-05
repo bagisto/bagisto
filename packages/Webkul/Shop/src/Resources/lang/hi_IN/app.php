@@ -375,6 +375,7 @@ return [
                 'share-wishlist'       => 'शेयर विशलिस्ट',
                 'wishlist-sharing'     => 'विशलिस्ट शेयरिंग',
                 'shared-link'          => 'साझा लिंक',
+                'copy'                 => 'Copy',
                 'visibility'           => 'दृश्यता',
                 'public'               => 'जनता',
                 'private'              => 'निजी',

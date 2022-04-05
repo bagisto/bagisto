@@ -376,6 +376,7 @@ return [
                 'share-wishlist'       => 'පැතුම් ලැයිස්තුව බෙදාගන්න',
                 'wishlist-sharing'     => 'පැතුම් ලැයිස්තු බෙදාගැනීම',
                 'shared-link'          => 'බෙදාගත් සබැඳිය',
+                'copy'                 => 'Copy',
                 'visibility'           => 'දෘෂ්‍යතාව',
                 'public'               => 'මහජන',
                 'private'              => 'පුද්ගලික',
