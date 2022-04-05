@@ -14,7 +14,7 @@ $commands = [
     ],
     'publish'      => [
         'key'     => 'publish_results',
-        'command' => 'cd ../.. && '. $phpbin .' artisan vendor:publish --all --force 2>&1'
+        'command' => 'cd ../.. && '. $phpbin .' artisan bagisto:publish --force 2>&1'
     ],
     'storage_link' => [
         'key'     => 'storage_link_results',

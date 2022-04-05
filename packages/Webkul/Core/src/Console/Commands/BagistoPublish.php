@@ -21,22 +21,59 @@ class BagistoPublish extends Command
     protected $description = 'Publish the available assets';
 
     /**
+     * List of Bagisto's providers.
+     *
+     * @var array
+     */
+    protected $providers = [
+        'Admin'           => "Webkul\Admin\Providers\AdminServiceProvider",
+        'Booking Product' => "Webkul\BookingProduct\Providers\BookingProductServiceProvider",
+        'Core'            => "Webkul\Core\Providers\CoreServiceProvider",
+        'Product'         => "Webkul\Product\Providers\ProductServiceProvider",
+        'Shop'            => "Webkul\Shop\Providers\ShopServiceProvider",
+        'Social'          => "Webkul\SocialLogin\Providers\SocialLoginServiceProvider",
+        'UI'              => "Webkul\Ui\Providers\UiServiceProvider",
+        'Velocity'        => "Webkul\Velocity\Providers\VelocityServiceProvider",
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return void
      */
     public function handle()
     {
-        $this->callSilent('vendor:publish', [
-            '--tag'   => 'canvas-config',
-            '--force' => $this->option('force'),
-        ]);
+        $this->publishAllPackages();
+    }
 
-        $this->callSilent('vendor:publish', [
-            '--tag'   => 'canvas-assets',
-            '--force' => true,
-        ]);
+    /**
+     * Publish all packages.
+     *
+     * @return void
+     */
+    public function publishAllPackages(): void
+    {
+        collect($this->providers)->each(function ($provider, $name) {
+            $this->publishPackage($provider, $name);
+        });
+    }
 
-        $this->info('Publishing complete.');
+    /**
+     * Publish package.
+     *
+     * @param  string  $provider
+     * @return void
+     */
+    public function publishPackage(string $provider, string $name): void
+    {
+        $this->line('');
+        $this->line('-----------------------------------------');
+        $this->info('Publishing ' . $name);
+        $this->line('-----------------------------------------');
+
+        $this->call('vendor:publish', [
+            '--provider' => $provider,
+            '--force'    => $this->option('force'),
+        ]);
     }
 }
