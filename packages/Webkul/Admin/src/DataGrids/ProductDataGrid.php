@@ -105,6 +105,7 @@ class ProductDataGrid extends DataGrid
                 'products.type as product_type',
                 'product_flat.status',
                 'product_flat.price',
+                'product_flat.url_key',
                 'attribute_families.name as attribute_family',
                 DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
@@ -166,6 +167,9 @@ class ProductDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
+            'closure'    => function ($row) {
+                return "<a href='".asset($row->url_key)."' target='_blank'>" . $row->product_name . "</a>";
+            },
         ]);
 
         $this->addColumn([
