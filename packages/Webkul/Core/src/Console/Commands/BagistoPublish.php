@@ -27,13 +27,13 @@ class BagistoPublish extends Command
      */
     protected $providers = [
         'Admin'           => "Webkul\Admin\Providers\AdminServiceProvider",
-        'Booking Product' => "Webkul\BookingProduct\Providers\BookingProductServiceProvider",
-        'Core'            => "Webkul\Core\Providers\CoreServiceProvider",
-        'Product'         => "Webkul\Product\Providers\ProductServiceProvider",
-        'Shop'            => "Webkul\Shop\Providers\ShopServiceProvider",
-        'Social'          => "Webkul\SocialLogin\Providers\SocialLoginServiceProvider",
         'UI'              => "Webkul\Ui\Providers\UiServiceProvider",
+        'Core'            => "Webkul\Core\Providers\CoreServiceProvider",
+        'Shop'            => "Webkul\Shop\Providers\ShopServiceProvider",
+        'Product'         => "Webkul\Product\Providers\ProductServiceProvider",
         'Velocity'        => "Webkul\Velocity\Providers\VelocityServiceProvider",
+        'Booking Product' => "Webkul\BookingProduct\Providers\BookingProductServiceProvider",
+        'Social'          => "Webkul\SocialLogin\Providers\SocialLoginServiceProvider",
     ];
 
     /**
