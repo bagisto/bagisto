@@ -341,6 +341,9 @@ body {
                         font-weight: 200;
                         display: inline-block;
                         color: $black;
+                        width: 115px;
+                        word-break: break-all;
+                        vertical-align: middle;
                     }
 
                     .arrow-icon {
