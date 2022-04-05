@@ -415,7 +415,7 @@ export default {
                          * Else, it will reload table only.
                          */
                         if (data.redirect !== undefined && data.redirect) {
-                            window.location.href = data.redirectUrl;
+                            window.location.href = data.redirect;
                         } else {
                             self.$emit('onActionSuccess');
 
