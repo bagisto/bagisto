@@ -172,7 +172,7 @@ class ProductDataGrid extends DataGrid
                     return "<a href='" . route('shop.productOrCategory.index', $row->url_key) . "' target='_blank'>" . $row->product_name . "</a>";
                 }
 
-                return $row->url_key;
+                return $row->product_name;
             },
         ]);
 
