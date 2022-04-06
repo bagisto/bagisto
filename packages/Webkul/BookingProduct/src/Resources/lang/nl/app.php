@@ -101,6 +101,7 @@ return [
             'book-an-appointment' => 'Een afspraak maken',
             'date' => 'Datum',
             'slot' => 'Sleuf',
+            'no-slots-available' => 'No slots available',
             'rent-an-item' => 'Huur een item',
             'choose-rent-option' => 'Kies Huuroptie',
             'daily-basis' => 'Dagelijks',

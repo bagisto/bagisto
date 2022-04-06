@@ -101,6 +101,7 @@ return [
             'book-an-appointment' => 'Reservar una Cita',
             'date' => 'Fecha',
             'slot' => 'Horario',
+            'no-slots-available' => 'No slots available',
             'rent-an-item' => 'Alquilar un Artículo',
             'choose-rent-option' => 'Elija la Opción de Alquiler',
             'daily-basis' => 'Diariamente',

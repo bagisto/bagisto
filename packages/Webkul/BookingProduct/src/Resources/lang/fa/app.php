@@ -101,6 +101,7 @@ return [
             'book-an-appointment' => 'قرار ملاقات را رزرو کنید',
             'date' => 'تاریخ',
             'slot' => 'اسلات',
+            'no-slots-available' => 'No slots available',
             'rent-an-item' => 'اجاره یک مورد',
             'choose-rent-option' => 'گزینه اجاره را انتخاب کنید',
             'daily-basis' => 'به صورت روزانه',
