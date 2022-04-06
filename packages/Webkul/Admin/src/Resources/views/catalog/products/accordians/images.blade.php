@@ -32,6 +32,7 @@
                         v-for='(image, index) in items'
                         :key='image.id'
                         :image="image"
+                        class="draggable"
                         @onRemoveImage="removeImage($event)"
                         @onImageSelected="imageSelected($event)">
                     </product-image-item>
