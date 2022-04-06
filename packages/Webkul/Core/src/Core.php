@@ -597,7 +597,7 @@ class Core
     /**
      * Return currency symbol from currency code.
      *
-     * @param  string|\Webkul\Core\Contracts\Currency  $code
+     * @param  string|\Webkul\Core\Contracts\Currency  $currency
      * @return string
      */
     public function currencySymbol($currency)
