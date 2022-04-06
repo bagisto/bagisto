@@ -10,7 +10,15 @@
             <h1 class="row col-12">{{ __('shop::app.checkout.success.thanks') }}</h1>
 
             <p class="row col-12">
-                {{ __('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) }}
+                @if (auth()->guard('customer')->user())
+                    {!! 
+                        __('shop::app.checkout.success.order-id-info', [
+                            'order_id' => '<a href="' . route('customer.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
+                        ])
+                    !!}
+                @else
+                    {{ __('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) }}
+                @endif
             </p>
 
             <p class="row col-12">
