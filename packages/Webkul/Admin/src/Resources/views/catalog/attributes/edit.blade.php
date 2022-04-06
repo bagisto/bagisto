@@ -184,25 +184,27 @@
                                 <input type="hidden" name="is_unique" value="{{ $attribute->is_unique }}"/>
                             </div>
 
-                            <div class="control-group">
-                                <?php $selectedValidation = old('validation') ?: $attribute->validation ?>
-                                <label for="validation">{{ __('admin::app.catalog.attributes.input_validation') }}</label>
-                                <select class="control" id="validation" name="validation" {{ ! $attribute->is_user_defined ? 'disabled' : '' }}>
-                                    <option value=""></option>
-                                    <option value="numeric" {{ $selectedValidation == 'numeric' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.number') }}
-                                    </option>
-                                    <option value="decimal" {{ $selectedValidation == 'decimal' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.decimal') }}
-                                    </option>
-                                    <option value="email" {{ $selectedValidation == 'email' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.email') }}
-                                    </option>
-                                    <option value="url" {{ $selectedValidation == 'url' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.url') }}
-                                    </option>
-                                </select>
-                            </div>
+                            @if ($attribute->type == 'text')
+                                <div class="control-group">
+                                    <?php $selectedValidation = old('validation') ?: $attribute->validation ?>
+                                    <label for="validation">{{ __('admin::app.catalog.attributes.input_validation') }}</label>
+                                    <select class="control" id="validation" name="validation" {{ ! $attribute->is_user_defined ? 'disabled' : '' }}>
+                                        <option value=""></option>
+                                        <option value="numeric" {{ $selectedValidation == 'numeric' ? 'selected' : '' }}>
+                                            {{ __('admin::app.catalog.attributes.number') }}
+                                        </option>
+                                        <option value="decimal" {{ $selectedValidation == 'decimal' ? 'selected' : '' }}>
+                                            {{ __('admin::app.catalog.attributes.decimal') }}
+                                        </option>
+                                        <option value="email" {{ $selectedValidation == 'email' ? 'selected' : '' }}>
+                                            {{ __('admin::app.catalog.attributes.email') }}
+                                        </option>
+                                        <option value="url" {{ $selectedValidation == 'url' ? 'selected' : '' }}>
+                                            {{ __('admin::app.catalog.attributes.url') }}
+                                        </option>
+                                    </select>
+                                </div>
+                            @endif
 
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.after', ['attribute' => $attribute]) !!}
                         </div>
