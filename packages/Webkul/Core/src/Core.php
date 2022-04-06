@@ -68,8 +68,7 @@ class Core
         protected LocaleRepository $localeRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected CoreConfigRepository $coreConfigRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -246,7 +245,7 @@ class Core
 
         return $data = [
             'channel' => $channel,
-            'locales' => $channel->locales()->orderBy('name')->get()
+            'locales' => $channel->locales()->orderBy('name')->get(),
         ];
     }
 
@@ -598,11 +597,13 @@ class Core
     /**
      * Return currency symbol from currency code.
      *
-     * @param  float  $price
+     * @param  string|\Webkul\Core\Contracts\Currency  $currency
      * @return string
      */
-    public function currencySymbol($code)
+    public function currencySymbol($currency)
     {
+        $code = $currency instanceof \Webkul\Core\Contracts\Currency ? $currency->code : $currency;
+
         $formatter = new \NumberFormatter(app()->getLocale() . '@currency=' . $code, \NumberFormatter::CURRENCY);
 
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
@@ -1206,7 +1207,7 @@ class Core
      * @param  array  $array2
      * @return array
      */
-    protected function arrayMerge(array &$array1, array &$array2)
+    protected function arrayMerge(array&$array1, array&$array2)
     {
         $merged = $array1;
 
