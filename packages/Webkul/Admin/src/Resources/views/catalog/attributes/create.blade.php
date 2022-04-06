@@ -370,6 +370,12 @@
                 } else {
                     $('#enable_wysiwyg').parents('.control-group').addClass('hide');
                 }
+
+                if (['text'].indexOf($(e.target).val()) > -1) {
+                    $('#validation').parents('.control-group').removeClass('hide');
+                } else {
+                    $('#validation').parents('.control-group').addClass('hide');
+                }
             })
         });
 
