@@ -101,6 +101,7 @@ return [
             'book-an-appointment' => '预约',
             'date' => '日期',
             'slot' => '插槽',
+            'no-slots-available' => 'No slots available',
             'rent-an-item' => '租一个项目',
             'choose-rent-option' => '选择租金选项',
             'daily-basis' => '每日基础',

@@ -101,6 +101,7 @@ return [
             'book-an-appointment'       => 'एक अपॉइंटमेंट बुक करें',
             'date'                      => 'तारीख',
             'slot'                      => 'स्लॉट',
+            'no-slots-available' => 'No slots available',
             'rent-an-item'              => 'एक वस्तु किराए पर लें',
             'choose-rent-option'        => 'किराया विकल्प चुनें',
             'daily-basis'               => 'दैनिक आधार पर',

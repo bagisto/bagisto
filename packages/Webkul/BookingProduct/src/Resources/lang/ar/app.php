@@ -101,6 +101,7 @@ return [
             'book-an-appointment' => 'حجز موعد',
             'date' => 'تاريخ',
             'slot' => 'فتحة',
+            'no-slots-available' => 'No slots available',
             'rent-an-item' => 'استئجار عنصر',
             'choose-rent-option' => 'اختر خيار الإيجار',
             'daily-basis' => 'الأساس اليومي',

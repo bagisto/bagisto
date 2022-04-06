@@ -18,6 +18,8 @@
                 <div class="control-group slots" :class="[errors.has('booking[slot]') ? 'has-error' : '']">
                     <select v-validate="'required'" name="booking[slot]" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.slot') }}&quot;">
                         <option v-for="slot in slots" :value="slot.timestamp">@{{ slot.from + ' - ' + slot.to }}</option>
+
+                        <option value="" v-if="! slots.length">{{ __('bookingproduct::app.shop.products.no-slots-available') }}</option>
                     </select>
 
                     <span class="control-error" v-if="errors.has('booking[slot]')">@{{ errors.first('booking[slot]') }}</span>

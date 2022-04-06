@@ -101,6 +101,7 @@ return [
             'book-an-appointment' => 'Marque uma consulta',
             'date' => 'Date',
             'slot' => 'Slot',
+            'no-slots-available' => 'No slots available',
             'rent-an-item' => 'Alugar um item',
             'choose-rent-option' => 'Escolha a opção de aluguel',
             'daily-basis' => 'Diariamente',
