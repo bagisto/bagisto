@@ -11,8 +11,6 @@
     $config = $tree;
 
     $allLocales = core()->getAllLocales()->pluck('name', 'code');
-
-    $currentLocaleCode = core()->getRequestedLocaleCode('admin_locale');
 @endphp
 
 <div class="navbar-left" v-bind:class="{'open': isMenuOpen}">
@@ -26,10 +24,10 @@
                 <span class="menu-label">{{ trans($menuItem['name']) }}</span>
 
                 @if(count($menuItem['children']) || $menuItem['key'] == 'configuration' )
-                    <span 
+                    <span
                         class="icon arrow-icon {{ $menu->getActive($menuItem) == 'active' ? 'rotate-arrow-icon' : '' }} {{ ( core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl' ) ? 'arrow-icon-right' :'arrow-icon-left' }}"
                         ></span>
-                        
+
                 @endif
             </a>
             @if ($menuItem['key'] != 'configuration')
@@ -48,7 +46,7 @@
                 <ul class="sub-menubar">
                     @foreach ($config->items as $key => $item)
                         <li class="sub-menu-item {{ $item['key'] == request()->route('slug') ? 'active' : '' }}">
-                            <a href="{{ route('admin.configuration.index', $item['key']) }}">                                  
+                            <a href="{{ route('admin.configuration.index', $item['key']) }}">
                                 <span class="menu-label"> {{ isset($item['name']) ? trans($item['name']) : '' }}</span>
                             </a>
                         </li>

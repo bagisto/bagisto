@@ -28,8 +28,6 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->registerACL();
 
-        $router->aliasMiddleware('admin_locale', Locale::class);
-
         $this->app->register(EventServiceProvider::class);
     }
 

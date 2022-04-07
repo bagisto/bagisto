@@ -10,7 +10,7 @@ use Webkul\User\Http\Controllers\SessionController;
 /**
  * Extra routes.
  */
-Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_url')], function () {
     /**
      * Tinymce file upload handler.
      */

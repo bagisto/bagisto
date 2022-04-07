@@ -13,7 +13,7 @@ use Webkul\Sitemap\Http\Controllers\Admin\SitemapController;
 /**
  * Marketing routes.
  */
-Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('promotions')->group(function () {
         /**
          * Cart rules routes.
@@ -172,7 +172,6 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
         Route::put('subscribers/update/{id}', [SubscriptionController::class, 'update'])->defaults('_config', [
             'redirect' => 'admin.customers.subscribers.index',
         ])->name('admin.customers.subscribers.update');
-
 
         /**
          * Cart rules routes.
