@@ -685,6 +685,8 @@ return [
             'name'                 => 'اسم',
             'groups'               => 'المجموعات',
             'add-group-title'      => 'أضف المجموعة',
+            'edit-group-title'     => 'Edit Group',
+            'update-group-title'   => 'Update Group',
             'position'             => 'موضع',
             'attribute-code'       => 'الشفرة',
             'type'                 => 'النوع',

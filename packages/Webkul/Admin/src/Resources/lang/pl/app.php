@@ -672,6 +672,8 @@ return [
             'name'                 => 'Nazwa',
             'groups'               => 'Grupy',
             'add-group-title'      => 'Dodaj grupę',
+            'edit-group-title'     => 'Edit Group',
+            'update-group-title'   => 'Update Group',
             'position'             => 'Pozycja',
             'attribute-code'       => 'Kod',
             'type'                 => 'Rodzaj',

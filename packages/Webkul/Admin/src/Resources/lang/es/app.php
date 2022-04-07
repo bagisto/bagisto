@@ -690,6 +690,8 @@ return [
             'name'                 => 'Nombre',
             'groups'               => 'Grupos',
             'add-group-title'      => 'Agregar grupo',
+            'edit-group-title'     => 'Edit Group',
+            'update-group-title'   => 'Update Group',
             'position'             => 'Posición',
             'attribute-code'       => 'Código',
             'type'                 => 'Tipo',

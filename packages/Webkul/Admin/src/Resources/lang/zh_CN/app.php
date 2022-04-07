@@ -673,6 +673,8 @@ return [
             'name'                 => '名称',
             'groups'               => '客户群',
             'add-group-title'      => '添加群',
+            'edit-group-title'     => 'Edit Group',
+            'update-group-title'   => 'Update Group',
             'position'             => '位置',
             'attribute-code'       => '代码',
             'type'                 => '类型',

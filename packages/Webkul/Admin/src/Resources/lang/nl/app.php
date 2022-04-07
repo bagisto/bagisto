@@ -672,6 +672,8 @@ return [
             'name'                 => 'Naam',
             'groups'               => 'Groepen',
             'add-group-title'      => 'Add Group',
+            'edit-group-title'     => 'Edit Group',
+            'update-group-title'   => 'Update Group',
             'position'             => 'Position',
             'attribute-code'       => 'Code',
             'type'                 => 'Type',

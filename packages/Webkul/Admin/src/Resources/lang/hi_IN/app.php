@@ -688,6 +688,8 @@ return [
             'name'                 => 'नाम',
             'groups'               => 'समूह',
             'add-group-title'      => 'समूह जोड़ें',
+            'edit-group-title'     => 'Edit Group',
+            'update-group-title'   => 'Update Group',
             'position'             => 'स्थान',
             'attribute-code'       => 'कोड',
             'type'                 => 'प्रकार',

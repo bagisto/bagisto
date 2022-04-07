@@ -23,6 +23,8 @@
 
 <script>
 export default {
+    inject: ['$validator'],
+
     props: {
         title: String,
         id: String,
