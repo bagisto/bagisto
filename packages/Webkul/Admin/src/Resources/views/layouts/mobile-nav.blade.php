@@ -9,10 +9,6 @@
     $tree->items = core()->sortItems($tree->items);
 
     $config = $tree;
-
-    $allLocales = core()->getAllLocales()->pluck('name', 'code');
-
-    $currentLocaleCode = core()->getRequestedLocaleCode('admin_locale');
 @endphp
 
 <mobile-nav></mobile-nav>
@@ -30,7 +26,7 @@
                     <div class="profile-info-icon">
                         <span style="">{{ substr(auth()->guard('admin')->user()->name, 0, 1) }}</span>
                     </div>
-                    
+
                     <div class="profile-info-desc">
                         <div class="name">
                             {{ auth()->guard('admin')->user()->name }}
@@ -46,7 +42,7 @@
                 </div>
             </div>
 
-            <div class="nav-items">  
+            <div class="nav-items">
                 @foreach ($menu->items as $menuItem)
                     <div class="nav-item {{ $menu->getActive($menuItem) }}">
                         <a class="nav-tab-name" href="{{ $menuItem['key'] == 'dashboard' ? $menuItem['url'] : '#' }}">
@@ -68,7 +64,7 @@
                                         </a>
                                     </li>
                                 @endforeach
-                            </ul>   
+                            </ul>
                             @endif
                         @else
                             <ul>
@@ -78,28 +74,11 @@
                                             <span style="margin-left:47px">{{ isset($item['name']) ? trans($item['name']) : '' }}</span>
                                         </a>
                                     </li>
-                                @endforeach                                
-                            </ul>  
-                        @endif          
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 @endforeach
-                <div class="nav-item">
-                    <a class="nav-tab-name">
-                        <span class="icon-menu icon locale-icon"
-                        style="margin-right:10px; display: inline-block;vertical-align: middle;transform: scale(0.8);"></span>
-                        <span class="menu-label"> {{ __('admin::app.datagrid.locale') }}  {{ $allLocales[$currentLocaleCode] }}</span>
-                        <span class="icon arrow-icon"></span>
-                    </a>
-                    <ul>
-                        @foreach ($allLocales as $code => $name)                          
-                            <li class="navbar-child">
-                                <a href="{{ url()->current() . '?' . http_build_query(array_merge(request()->all(), ['admin_locale' => $code])) }}">                                
-                                    <span style="margin-left:47px"> {{ $name }}</span>
-                                </a>
-                            </li>
-                        @endforeach                         
-                    </ul>                             
-                </div>  
                 <div class="nav-item">
                     <a class="nav-tab-name">
                         <span class="icon-menu icon accounts-icon"
@@ -107,9 +86,9 @@
                         <span class="menu-label">{{ __('admin::app.layouts.account-title') }}</span>
                         <span class="icon arrow-icon"></span>
                     </a>
-                    <ul> 
-                        <li class="navbar-child">                             
-                            <a>                                
+                    <ul>
+                        <li class="navbar-child">
+                            <a>
                                 <span style="display:flex;justify-content:space-between;height:20px">
                                     <div style="margin-top:12px;margin-left:47px">
                                         <span>{{ __('admin::app.layouts.mode') }}</span>
@@ -117,10 +96,10 @@
                                     <dark style="margin-left:13%"></dark>
                                 </span>
                             </a>
-                                                         
+
                         </li>
                         <li  class="navbar-child">
-                            <a href="{{ route('admin.account.edit') }}">                                
+                            <a href="{{ route('admin.account.edit') }}">
                                 <span style="margin-left:47px">{{ __('admin::app.layouts.my-account') }}</span>
                             </a>
                         </li>
@@ -128,10 +107,10 @@
                             <a href="{{ route('admin.session.destroy') }}">
                                 <span style="margin-left:47px">{{ __('admin::app.layouts.logout') }}</span>
                             </a>
-                        </li>                           
-                    </ul>                             
-                </div>                                  
-            </div>      
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </script>
 
@@ -149,10 +128,10 @@
 
         mounted(){
             const nav = document.querySelector(".nav-container");
-          
+
             if (nav) {
                 const toggle = nav.querySelector(".nav-toggle");
-                
+
                 if (toggle) {
                     toggle.addEventListener("click", () => {
                     if (nav.classList.contains("is-active")) {
@@ -162,7 +141,7 @@
                         nav.classList.add("is-active");
                     }
                     });
-                    
+
                     nav.addEventListener("blur", () => {
                         nav.classList.remove("is-active");
                     });
@@ -177,7 +156,7 @@
                         navItem.parentElement.children[1].classList.toggle("display-block");
                         navItem.children[2].classList.toggle("rotate-arrow-icon");
                     }
-                  
+
                 });
             });
         },
