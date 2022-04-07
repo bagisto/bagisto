@@ -64,10 +64,6 @@
 
                             {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.groups.controls.before', ['attributeFamily' => $attributeFamily]) !!}
 
-                            <button type="button" style="margin-bottom : 20px" class="btn btn-md btn-primary" @click="showModal('addGroup')">
-                                {{ __('admin::app.catalog.families.add-group-title') }}
-                            </button>
-
                             <group-list></group-list>
 
                             {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.groups.controls.before', ['attributeFamily' => $attributeFamily]) !!}
@@ -81,63 +77,106 @@
 
         </form>
     </div>
-
-    <modal id="addGroup" :is-open="modalIds.addGroup">
-        <h3 slot="header">{{ __('admin::app.catalog.families.add-group-title') }}</h3>
-
-        <div slot="body">
-            <group-form></group-form>
-        </div>
-    </modal>
 @stop
 
 @push('scripts')
 
-    <script type="text/x-template" id="group-form-template">
-        <form method="POST" action="{{ route('admin.catalog.families.store') }}" data-vv-scope="add-group-form" @submit.prevent="addGroup('add-group-form')">
-
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-
-                    <div class="control-group" :class="[errors.has('add-group-form.groupName') ? 'has-error' : '']">
-                        <label for="groupName" class="required">{{ __('admin::app.catalog.families.name') }}</label>
-                        <input type="text" v-validate="'required'" v-model="group.groupName" class="control" id="groupName" name="groupName" data-vv-as="&quot;{{ __('admin::app.catalog.families.name') }}&quot;"/>
-                        <span class="control-error" v-if="errors.has('add-group-form.groupName')">@{{ errors.first('add-group-form.groupName') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('add-group-form.position') ? 'has-error' : '']">
-                        <label for="position" class="required">{{ __('admin::app.catalog.families.position') }}</label>
-                        <input type="text" v-validate="'required|numeric'" v-model="group.position" class="control" id="position" name="position" data-vv-as="&quot;{{ __('admin::app.catalog.families.position') }}&quot;"/>
-                        <span class="control-error" v-if="errors.has('add-group-form.position')">@{{ errors.first('add-group-form.position') }}</span>
-                    </div>
-
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.catalog.families.add-group-title') }}
-                    </button>
-
-                </div>
-            </div>
-
-        </form>
-    </script>
-
     <script type="text/x-template" id="group-list-template">
         <div style="margin-top: 20px">
-            <group-item v-for='(group, index) in groups' :group="group" :custom_attributes="custom_attributes" :key="index" :index="index" @onRemoveGroup="removeGroup($event)" @onAttributeAdd="addAttributes(index, $event)" @onAttributeRemove="removeAttribute(index, $event)"></group-item>
+            <button type="button" style="margin-bottom : 20px" class="btn btn-md btn-primary" @click="showModal('addGroupForm')">
+                {{ __('admin::app.catalog.families.add-group-title') }}
+            </button>
+
+            <modal id="addGroupForm" :is-open="$root.modalIds.addGroupForm">
+                <h3 slot="header">{{ __('admin::app.catalog.families.add-group-title') }}</h3>
+
+                <div slot="body">
+                    <form method="POST" data-vv-scope="add-group-form" @submit.prevent="addGroup('add-group-form')">
+
+                        <div class="page-content">
+                            <div class="form-container">
+                                <div class="control-group" :class="[errors.has('add-group-form.name') ? 'has-error' : '']">
+                                    <label for="name" class="required">{{ __('admin::app.catalog.families.name') }}</label>
+                                    <input type="text" v-validate="'required'" v-model="group.name" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.catalog.families.name') }}&quot;"/>
+                                    <span class="control-error" v-if="errors.has('add-group-form.name')">@{{ errors.first('add-group-form.name') }}</span>
+                                </div>
+            
+                                <div class="control-group" :class="[errors.has('add-group-form.position') ? 'has-error' : '']">
+                                    <label for="position" class="required">{{ __('admin::app.catalog.families.position') }}</label>
+                                    <input type="text" v-validate="'required|numeric'" v-model="group.position" class="control" id="position" name="position" data-vv-as="&quot;{{ __('admin::app.catalog.families.position') }}&quot;"/>
+                                    <span class="control-error" v-if="errors.has('add-group-form.position')">@{{ errors.first('add-group-form.position') }}</span>
+                                </div>
+            
+                                <button type="submit" class="btn btn-lg btn-primary">
+                                    {{ __('admin::app.catalog.families.add-group-title') }}
+                                </button>
+            
+                            </div>
+                        </div>
+            
+                    </form>
+                </div>
+            </modal>
+
+            <modal id="editGroupForm" :is-open="$root.modalIds.editGroupForm">
+                <h3 slot="header">{{ __('admin::app.catalog.families.edit-group-title') }}</h3>
+
+                <div slot="body">
+                    <form method="POST" data-vv-scope="edit-group-form" @submit.prevent="updateGroup('edit-group-form')">
+
+                        <div class="page-content">
+                            <div class="form-container">
+                                <div class="control-group" :class="[errors.has('edit-group-form.name') ? 'has-error' : '']">
+                                    <label for="name" class="required">{{ __('admin::app.catalog.families.name') }}</label>
+                                    <input type="text" v-validate="'required'" v-model="editGroup.name" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.catalog.families.name') }}&quot;"/>
+                                    <span class="control-error" v-if="errors.has('edit-group-form.name')">@{{ errors.first('edit-group-form.name') }}</span>
+                                </div>
+            
+                                <div class="control-group" :class="[errors.has('edit-group-form.position') ? 'has-error' : '']">
+                                    <label for="position" class="required">{{ __('admin::app.catalog.families.position') }}</label>
+                                    <input type="text" v-validate="'required|numeric'" v-model="editGroup.position" class="control" id="position" name="position" data-vv-as="&quot;{{ __('admin::app.catalog.families.position') }}&quot;"/>
+                                    <span class="control-error" v-if="errors.has('edit-group-form.position')">@{{ errors.first('edit-group-form.position') }}</span>
+                                </div>
+            
+                                <button type="submit" class="btn btn-lg btn-primary">
+                                    {{ __('admin::app.catalog.families.update-group-title') }}
+                                </button>
+            
+                            </div>
+                        </div>
+            
+                    </form>
+                </div>
+            </modal>
+
+            <group-item
+                v-for='(group, index) in groups'
+                :group="group"
+                :custom_attributes="custom_attributes"
+                :key="index"
+                :index="index"
+                @onRemoveGroup="removeGroup($event)"
+                @onEditGroup="openEditGroupModal($event)"
+                @onAttributeAdd="addAttributes(index, $event)"
+                @onAttributeRemove="removeAttribute(index, $event)"
+            ></group-item>
         </div>
     </script>
 
     <script type="text/x-template" id="group-item-template">
-        <accordian :title="group.groupName" :active="true">
+        <accordian :title="group.name" :active="true">
             <div slot="header">
                 <i class="icon expand-icon left"></i>
-                <h1>@{{ group.name ? group.name : group.groupName }}</h1>
+                
+                <h1>@{{ group.name }}</h1>
+                
                 <i class="icon trash-icon" @click="removeGroup()" v-if="group.is_user_defined"></i>
+                
+                <span class="icon pencil-lg-icon" @click="editGroup()"></span>
             </div>
 
             <div slot="body">
-                <input type="hidden" :name="[groupInputName + '[name]']" :value="group.name ? group.name : group.groupName"/>
+                <input type="hidden" :name="[groupInputName + '[name]']" :value="group.name"/>
                 <input type="hidden":name="[groupInputName + '[position]']" :value="group.position"/>
 
                 <div class="table" v-if="group.custom_attributes.length" style="margin-bottom: 20px;">
@@ -200,70 +239,27 @@
         var groups = @json($attributeFamily->attribute_groups);
         var custom_attributes = @json($custom_attributes);
 
-        Vue.component('group-form', {
-
-            data: function() {
-                return {
-                    group: {
-                        'groupName': '',
-                        'position': '',
-                        'custom_attributes': []
-                    }
-                }
-            },
-
-            template: '#group-form-template',
-
-            methods: {
-                addGroup: function (formScope) {
-                    var this_this = this;
-
-                    this.$validator.validateAll(formScope).then(function (result) {
-                        if (result) {
-
-                            var filteredGroups = groups.filter(function(group) {
-                                return this_this.group.groupName.trim() === (group.name ? group.name.trim() : group.groupName.trim())
-                            })
-
-                            if (filteredGroups.length) {
-                                const field = this.$validator.fields.find({ name: 'groupName', scope: 'add-group-form' });
-
-                                if (field) {
-                                    this.$validator.errors.add({
-                                        id: field.id,
-                                        field: 'groupName',
-                                        msg: "{{ __('admin::app.catalog.families.group-exist-error') }}",
-                                        scope: 'add-group-form',
-                                    });
-                                }
-                            } else {
-                                groups.push(this_this.group);
-
-                                groups = this_this.sortGroups();
-
-                                this.group = {'groupName': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
-
-                                this_this.$parent.closeModal();
-                            }
-                        }
-                    });
-                },
-
-                sortGroups: function () {
-                    return groups.sort(function(a, b) {
-                        return a.position - b.position;
-                    });
-                }
-            }
-        });
-
         Vue.component('group-list', {
 
             template: '#group-list-template',
 
             data: function() {
                 return {
+                    group: {
+                        'name': '',
+                        'position': '',
+                        'custom_attributes': []
+                    },
+
+                    editGroup: {
+                        'name': '',
+                        'position': '',
+                        'is_user_defined': 1,
+                        'custom_attributes': []
+                    },
+
                     groups: groups,
+
                     custom_attributes: custom_attributes
                 }
             },
@@ -286,6 +282,88 @@
             },
 
             methods: {
+                addGroup: function (formScope) {
+                    var this_this = this;
+
+                    this.$validator.validateAll(formScope).then(function (result) {
+                        if (result) {
+
+                            var filteredGroups = groups.filter(function(group) {
+                                return this_this.group.name.trim() === group.name.trim()
+                            })
+
+                            if (filteredGroups.length) {
+                                const field = this.$validator.fields.find({ name: 'name', scope: 'add-group-form' });
+
+                                if (field) {
+                                    this.$validator.errors.add({
+                                        id: field.id,
+                                        field: 'name',
+                                        msg: "{{ __('admin::app.catalog.families.group-exist-error') }}",
+                                        scope: 'add-group-form',
+                                    });
+                                }
+                            } else {
+                                groups.push(this_this.group);
+
+                                groups = this_this.sortGroups();
+
+                                this.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
+
+                                self.$set(self.$root.modalIds, 'addGroupForm', false);
+                            }
+                        }
+                    });
+                },
+
+                updateGroup: function(formScope) {
+                    var self = this;
+
+                    this.$validator.validateAll(formScope).then(function (result) {
+                        if (result) {
+
+                            var filteredGroups = groups.filter(function(group) {
+                                return self.editGroup.name.trim() === group.name.trim()
+                            })
+
+                            if (filteredGroups.length > 1) {
+                                const field = self.$validator.fields.find({ name: 'name', scope: 'edit-group-form' });
+
+                                if (field) {
+                                    self.$validator.errors.add({
+                                        id: field.id,
+                                        field: 'name',
+                                        msg: "{{ __('admin::app.catalog.families.group-exist-error') }}",
+                                        scope: 'edit-group-form',
+                                    });
+                                }
+                            } else {
+                                let index = groups.indexOf(self.editGroup)
+
+                                groups[index] = self.editGroup;
+
+                                groups = self.sortGroups();
+
+                                this.editGroup = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
+
+                                self.$set(self.$root.modalIds, 'editGroupForm', false);
+                            }
+                        }
+                    });
+                },
+
+                sortGroups: function () {
+                    return groups.sort(function(a, b) {
+                        return a.position - b.position;
+                    });
+                },
+
+                openEditGroupModal: function (group) {
+                    this.editGroup = group;
+
+                    this.$root.showModal('editGroupForm')
+                },
+
                 removeGroup: function (group) {
                     group.custom_attributes.forEach(function(attribute) {
                         this.custom_attributes.push(attribute);
@@ -347,6 +425,10 @@
             },
 
             methods: {
+                editGroup: function() {
+                    this.$emit('onEditGroup', this.group)
+                },
+
                 removeGroup: function () {
                     this.$emit('onRemoveGroup', this.group)
                 },

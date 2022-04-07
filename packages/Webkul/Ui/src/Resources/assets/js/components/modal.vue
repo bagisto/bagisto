@@ -19,6 +19,8 @@
     export default {
         props: ['id', 'isOpen'],
 
+        inject: ['$validator'],
+
         created () {
             this.closeModal();
         },

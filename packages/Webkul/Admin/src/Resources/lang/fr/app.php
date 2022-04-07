@@ -689,6 +689,8 @@ return [
             'name'                 => 'Nom',
             'groups'               => 'Groupes',
             'add-group-title'      => 'Ajouter un groupe',
+            'edit-group-title'     => 'Edit Group',
+            'update-group-title'   => 'Update Group',
             'position'             => 'Positionner',
             'attribute-code'       => 'Code',
             'type'                 => 'Taper',

@@ -678,6 +678,8 @@ return [
             'name'                 => 'Tanımı',
             'groups'               => 'Gruplar',
             'add-group-title'      => 'Grup Ekle',
+            'edit-group-title'     => 'Edit Group',
+            'update-group-title'   => 'Update Group',
             'position'             => 'Konum',
             'attribute-code'       => 'Nitelik Kodu',
             'type'                 => 'Tipi',

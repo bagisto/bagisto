@@ -673,6 +673,8 @@ return [
             'name'                 => 'نام',
             'groups'               => 'گروه ها',
             'add-group-title'      => 'افزودن گروه',
+            'edit-group-title'     => 'Edit Group',
+            'update-group-title'   => 'Update Group',
             'position'             => 'موقعیت',
             'attribute-code'       => 'کد',
             'type'                 => 'نوع',
