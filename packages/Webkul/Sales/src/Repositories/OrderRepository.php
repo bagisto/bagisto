@@ -74,8 +74,12 @@ class OrderRepository extends Repository
             $order->payment()->create($data['payment']);
 
             if (isset($data['shipping_address'])) {
+                unset($data['shipping_address']['customer_id']);
+
                 $order->addresses()->create($data['shipping_address']);
             }
+
+            unset($data['billing_address']['customer_id']);
 
             $order->addresses()->create($data['billing_address']);
 

@@ -137,13 +137,11 @@ class OrderCest
         $I->seeRecord(OrderAddress::class, array_merge($addressData, [
             'order_id'     => $order->id,
             'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-            'customer_id'  => $mocks['customer']->id,
         ]));
 
         $I->seeRecord(OrderAddress::class, array_merge($addressData, [
             'order_id'     => $order->id,
             'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-            'customer_id'  => $mocks['customer']->id,
         ]));
 
         $I->seeRecord(OrderPayment::class, [
