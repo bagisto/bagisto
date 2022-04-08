@@ -283,6 +283,9 @@ return [
             'confirm-password' => 'Conferma Password',
             'back-link-title'  => 'Torna a Login',
             'submit-btn-title' => 'Invia Email Recupera Password',
+            'passwords'        => [
+                'throttled'        => 'Avvertenza: hai richiesto di recente la reimpostazione della password, controlla la tua email.',
+            ]
         ],
 
         'reset-password' => [

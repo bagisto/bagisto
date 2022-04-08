@@ -288,6 +288,9 @@ return [
             'confirm-password' => 'Confirmez le mot de passe',
             'back-link-title'  => 'Retour à la connexion',
             'submit-btn-title' => 'Envoyer un e-mail de réinitialisation du mot de passe',
+            'passwords'        => [
+                'throttled'        => 'Avertissement : Vous avez récemment demandé la réinitialisation de votre mot de passe, veuillez vérifier votre messagerie.',
+            ]
         ],
 
         'reset-password' => [

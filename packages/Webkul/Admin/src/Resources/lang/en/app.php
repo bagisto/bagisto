@@ -288,6 +288,9 @@ return [
             'confirm-password' => 'Confirm Password',
             'back-link-title'  => 'Back to Sign In',
             'submit-btn-title' => 'Send Password Reset Email',
+            'passwords'        => [
+                'throttled'        => 'Warning: You have requested password reset recently, please check your email.',
+            ]
         ],
 
         'reset-password' => [
