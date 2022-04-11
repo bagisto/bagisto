@@ -197,6 +197,12 @@ body {
                     right: 20px;
                 }
             }
+
+            .currency-icon {
+                ~ .select-icon-container {
+                    right: 7px;
+                }
+            }
         }
 
         .category-list-container {
