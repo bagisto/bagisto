@@ -84,7 +84,7 @@
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.before', ['item' => $item]) !!}
 
-                                <div class="item-qty">Quantity - {{ $item->quantity }}</div>
+                                <div class="item-qty">Quantity : {{ $item->quantity }}</div>
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.after', ['item' => $item]) !!}
 
