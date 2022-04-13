@@ -324,6 +324,11 @@ body {
         }
 
         // product page
+
+        .buynow-btn-float{
+            float:right;
+        }
+
         .product-detail {
             .right {
                 .info {
@@ -335,8 +340,7 @@ body {
                     }
 
                     .buynow {
-                        float: left;
-                        margin-right: 10px;
+                       margin-right: 10px;
                     }
                 }
             }
@@ -348,7 +352,12 @@ body {
 
             .wishlist-icon {
                 padding-right: 10px;
+                float: left;
             }
+
+            .product-actions > div .add-to-cart-btn {
+                float: right;
+              }
         }
 
         .zoomWindow {

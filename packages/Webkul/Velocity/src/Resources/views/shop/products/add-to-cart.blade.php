@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.products.add_to_cart.before', ['product' => $product]) !!}
 
-    <div class="mx-0 no-padding">
+    <div class="mx-0 no-padding buynow-btn-float">
         @if (isset($showCompare) && $showCompare)
             <compare-component
                 @auth('customer')
