@@ -323,6 +323,10 @@ body {
             }
         }
 
+        .grid-container .datagrid-filters .filter-right .dropdown-list {
+            right: unset;
+        }
+
         // product page
         .product-detail {
             .right {
