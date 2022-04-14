@@ -323,6 +323,14 @@ body {
             }
         }
 
+        .image-wrapper.image-wrapper .image-item{
+            float:unset;
+
+            .remove-image 
+            {
+                margin-right: unset;
+            }
+        }
         // product page
         .product-detail {
             .right {
