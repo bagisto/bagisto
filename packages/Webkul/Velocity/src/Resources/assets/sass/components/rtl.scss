@@ -323,10 +323,14 @@ body {
             }
         }
 
-        .grid-container .datagrid-filters .filter-right .dropdown-list {
-            right: unset;
-        }
+        .image-wrapper.image-wrapper .image-item {
+            float: unset;
 
+            .remove-image {
+                margin-right: unset;
+            }
+        }
+        
         // product page
         .product-detail {
             .right {
