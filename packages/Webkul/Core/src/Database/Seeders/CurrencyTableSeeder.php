@@ -24,6 +24,11 @@ class CurrencyTableSeeder extends Seeder
                 'code'   => 'EUR',
                 'name'   => 'Euro',
                 'symbol' => '€',
+            ], [
+                'id'     => 3,
+                'code'   => 'CNY',
+                'name'   => 'Chinese Yuan',
+                'symbol' => '¥',
             ]
         ]);
     }
