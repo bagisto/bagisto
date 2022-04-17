@@ -34,6 +34,10 @@ class LocalesTableSeeder extends Seeder
                 'id'   => 5,
                 'code' => 'es',
                 'name' => 'Español',
+            ], [
+                'id'   => 6,
+                'code' => 'zh_CN',
+                'name' => 'Simplified Chinese',
             ]]);
     }
 }
