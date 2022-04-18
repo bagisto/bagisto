@@ -193,7 +193,7 @@
         @endif
 
         @if (isset($field['info']))
-            <span class="control-info mt-10">{{ trans($field['info']) }}</span>
+            <span class="control-info mt-10">{{!! trans($field['info']) !!}}</span>
         @endif
 
         <span class="control-error" @if ($field['type'] == 'multiselect')  v-if="errors.has('{{ $name }}[]')" @else  v-if="errors.has('{{ $name }}')" @endif>
