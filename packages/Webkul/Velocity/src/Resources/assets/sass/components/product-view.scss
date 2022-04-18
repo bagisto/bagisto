@@ -265,6 +265,7 @@
                 height: 46px;
                 margin-left: 0;
                 padding-left: 10px;
+                float: right;
 
                 i {
                     display: table-cell;
@@ -301,7 +302,7 @@
                 .product-image-group {
                     position: sticky;
                     top: 70px;
-                    
+
                     > div {
                         margin: 0;
                         padding: 0;
