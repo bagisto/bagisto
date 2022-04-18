@@ -308,7 +308,7 @@ body {
             .account-action {
                 float: left !important;
             }
-            
+
             .sidebar {
                 border-left: 1px solid $border-general;
 
@@ -330,9 +330,21 @@ body {
                 margin-right: unset;
             }
         }
-        
-        // product page
+
+        /**
+         * Product view page.
+         */
         .product-detail {
+            .product-actions {
+                .compare-icon {
+                    float: left;
+                }
+
+                .wishlist-icon {
+                    float: left;
+                }
+            }
+
             .right {
                 .info {
                     margin-right: 0px;
@@ -343,7 +355,6 @@ body {
                     }
 
                     .buynow {
-                        float: left;
                         margin-right: 10px;
                     }
                 }
@@ -447,7 +458,9 @@ body {
             margin-top: 3px;
         }
 
-        // Shared
+        /**
+         * Shared.
+         */
         .text-right {
             text-align: left !important;
         }
@@ -554,7 +567,7 @@ body {
             .VueCarousel-slide {
                 direction: ltr;
             }
-            
+
             .VueCarousel-navigation {
                 left: 12px;
                 right: unset;
