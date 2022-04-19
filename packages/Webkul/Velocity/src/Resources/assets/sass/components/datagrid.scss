@@ -38,7 +38,7 @@
             &.sortable {
                 cursor: pointer;
             }
-            
+
             &:last-child {
                 border-right: none;
             }
@@ -239,11 +239,14 @@
 .dropdown-list {
     width: 200px;
     margin-bottom: 20px;
+
     @include box-shadow(
         0 2px 4px 0 rgba(0, 0, 0, 0.16),
-        0 0 9px 0 rgba(0, 0, 0, 0.16)
+        0 0 9px 0 rgba(68, 58, 58, 0.16)
     );
+
     @include border-radius(3px);
+
     background-color: $white-color;
     position: absolute;
     display: none;
@@ -277,7 +280,7 @@
         color: rgba(0, 0, 0, 0.53);
         font-size: 18px;
         font-weight: 600;
-        border-bottom: 1px solid #C1C2C3;
+        border-bottom: 1px solid #c1c2c3;
     }
 
     .dropdown-container {
@@ -332,6 +335,27 @@
     }
 }
 
+.checkbox-dropdown-list {
+    width: 170px !important;
+    right: 14px !important;
+
+    input {
+        width: unset !important;
+    }
+}
+
+.dropdown-btn {
+    min-width: 150px;
+    text-align: left;
+    background: #fff;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 8px 35px 8px 10px;
+    cursor: pointer;
+    position: relative;
+}
+
 .filter-advance {
     display: flex;
     justify-content: space-between;
@@ -359,6 +383,7 @@
         height: 40px;
         color: #000311;
         letter-spacing: -0.22px;
+
         @include border-radius(24px);
 
         .icon.cross-icon {
