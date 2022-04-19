@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Prettus\Repository\Events\RepositoryEntityCreated;
+use Prettus\Repository\Events\RepositoryEntityCreating;
+use Prettus\Repository\Events\RepositoryEntityDeleted;
+use Prettus\Repository\Events\RepositoryEntityDeleting;
+use Prettus\Repository\Events\RepositoryEntityUpdated;
+use Prettus\Repository\Events\RepositoryEntityUpdating;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
@@ -56,9 +62,13 @@ class ProductRepository extends Repository
     {
         Event::dispatch('catalog.product.create.before');
 
+        event(new RepositoryEntityCreating($this, $data));
+
         $typeInstance = app(config('product_types.' . $data['type'] . '.class'));
 
         $product = $typeInstance->create($data);
+
+        event(new RepositoryEntityCreated($this, $this->model));
 
         Event::dispatch('catalog.product.create.after', $product);
 
@@ -77,6 +87,8 @@ class ProductRepository extends Repository
     {
         Event::dispatch('catalog.product.update.before', $id);
 
+        event(new RepositoryEntityUpdating($this, $this->model));
+
         $product = $this->find($id);
 
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
@@ -84,6 +96,8 @@ class ProductRepository extends Repository
         if (isset($data['channels'])) {
             $product['channels'] = $data['channels'];
         }
+
+        event(new RepositoryEntityUpdated($this, $this->model));
 
         Event::dispatch('catalog.product.update.after', $product);
 
@@ -100,7 +114,13 @@ class ProductRepository extends Repository
     {
         Event::dispatch('catalog.product.delete.before', $id);
 
+        $originalModel = clone $this->model;
+
+        event(new RepositoryEntityDeleting($this, $this->model));
+
         parent::delete($id);
+
+        event(new RepositoryEntityDeleted($this, $originalModel));
 
         Event::dispatch('catalog.product.delete.after', $id);
     }
