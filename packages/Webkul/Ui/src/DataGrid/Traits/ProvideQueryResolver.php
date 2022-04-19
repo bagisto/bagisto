@@ -66,6 +66,26 @@ trait ProvideQueryResolver
     }
 
     /**
+     * Resolve checkbox query.
+     *
+     * @param  \Illuminate\Support\Collection  $collection
+     * @param  string  $columnName
+     * @param  string  $condition
+     * @param  string  $filterValue
+     * @return void
+     */
+    private function resolveCheckboxQuery($collection, $columnName, $condition, $filterValue)
+    {
+        $filterValue = explode(',', $filterValue);
+
+        if ($this->operators[$condition] == '=') {
+            $collection->whereIn($columnName, $filterValue);
+        } else {
+            $collection->whereNotIn($columnName, $filterValue);
+        }
+    }
+
+    /**
      * Resolve filter query.
      *
      * @param  \Illuminate\Support\Collection  $collection
@@ -77,7 +97,7 @@ trait ProvideQueryResolver
      */
     private function resolveFilterQuery($collection, $columnName, $condition, $filterValue, $nullCheck = null)
     {
-        $clause = is_null($nullCheck) ? null : ( $nullCheck ? 'orWhereNull' : 'whereNotNull' );
+        $clause = is_null($nullCheck) ? null : ($nullCheck ? 'orWhereNull' : 'whereNotNull');
 
         $collection->where(function ($query) use ($columnName, $condition, $filterValue, $clause) {
             $this->resolveQuery($query, $columnName, $condition, $filterValue);

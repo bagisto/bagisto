@@ -204,7 +204,9 @@ trait ProvideCollection
 
                 $condition = ($condition === 'undefined') ? '=' : $condition;
 
-                if ($columnType === 'datetime') {
+                if ($columnType === 'checkbox') {
+                    $this->resolve($collection, $columnName, $condition, $filterValue, 'whereIn', 'resolveCheckboxQuery');
+                } else if ($columnType === 'datetime') {
                     $this->resolve($collection, $columnName, $condition, $filterValue, 'whereDate');
                 } else if ($columnType === 'boolean') {
                     $this->resolve($collection, $columnName, $condition, $filterValue, 'where', 'resolveBooleanQuery');

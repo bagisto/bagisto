@@ -69,22 +69,7 @@
                 </li>
 
                 <li v-if="stringCondition != null">
-                    <div
-                        class="control-group"
-                        v-if="isCurrentFilterColumnHasOptions()"
-                    >
-                        <select class="control" v-model="stringValue">
-                            <option
-                                :key="key"
-                                v-text="option"
-                                v-value="key"
-                                v-for="(option,
-                                key) in this.getCurrentFilterOptions()"
-                            ></option>
-                        </select>
-                    </div>
-
-                    <div class="control-group" v-else>
+                    <div class="control-group">
                         <input
                             type="text"
                             class="control response-string"
@@ -192,6 +177,109 @@
                     </div>
                 </li>
 
+                <li v-if="dropdownConditionSelect">
+                    <div class="control-group">
+                        <select class="control" v-model="dropdownCondition">
+                            <option
+                                v-text="translations.condition"
+                                selected
+                                disabled
+                            ></option>
+
+                            <option
+                                v-text="translations.equals"
+                                value="eq"
+                            ></option>
+
+                            <option
+                                v-text="translations.nequals"
+                                value="neqs"
+                            ></option>
+                        </select>
+                    </div>
+                </li>
+
+                <li v-if="dropdownCondition != null">
+                    <div class="control-group">
+                        <select class="control" v-model="dropdownValue">
+                            <option
+                                :key="key"
+                                v-text="option"
+                                v-value="key"
+                                v-for="(option,
+                                key) in this.getCurrentFilterOptions()"
+                            ></option>
+                        </select>
+                    </div>
+                </li>
+
+                <li v-if="checkboxConditionSelect">
+                    <div class="control-group">
+                        <select class="control" v-model="checkboxCondition">
+                            <option
+                                v-text="translations.condition"
+                                selected
+                                disabled
+                            ></option>
+
+                            <option
+                                v-text="translations.equals"
+                                value="eq"
+                            ></option>
+
+                            <option
+                                v-text="translations.nequals"
+                                value="neqs"
+                            ></option>
+                        </select>
+                    </div>
+                </li>
+
+                <li v-if="checkboxCondition != null">
+                    <div class="control-group">
+                        <button
+                            style="width: 100%;"
+                            type="button"
+                            class="dropdown-btn"
+                            @click="toggleCheckboxDropdown"
+                        >
+                            {{ translations.select }}
+
+                            <i class="icon arrow-down-icon"></i>
+                        </button>
+
+                        <div
+                            ref="checkboxOptions"
+                            class="dropdown-list"
+                            style="display: none;"
+                        >
+                            <div class="dropdown-container">
+                                <ul>
+                                    <li
+                                        :key="key"
+                                        v-for="(option,
+                                        key) in this.getCurrentFilterOptions()"
+                                    >
+                                        <span class="checkbox">
+                                            <input
+                                                type="checkbox"
+                                                v-model="checkboxValue"
+                                                :value="option"
+                                            />
+
+                                            <label
+                                                class="checkbox-view"
+                                            ></label>
+
+                                            {{ option }}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
                 <li v-if="datetimeConditionSelect">
                     <div class="control-group">
                         <select class="control" v-model="datetimeCondition">
@@ -272,16 +360,22 @@ export default {
             stringConditionSelect: false,
             numberConditionSelect: false,
             booleanConditionSelect: false,
+            dropdownConditionSelect: false,
+            checkboxConditionSelect: false,
             datetimeConditionSelect: false,
 
             stringCondition: null,
             numberCondition: null,
             booleanCondition: null,
+            dropdownCondition: null,
+            checkboxCondition: null,
             datetimeCondition: null,
 
             stringValue: null,
             numberValue: 0,
             booleanValue: null,
+            dropdownValue: null,
+            checkboxValue: [],
             datetimeValue: '2000-01-01'
         };
     },
@@ -310,7 +404,7 @@ export default {
                 return this.getCurrentFilterColumn().options ?? [];
             }
 
-            throw "Options are not defined. Don't use this method if options are not available.";
+            throw 'Options are not defined.';
         },
 
         getColumnOrAlias(columnOrAlias) {
@@ -325,26 +419,8 @@ export default {
                             this.stringConditionSelect = true;
                             this.numberConditionSelect = false;
                             this.booleanConditionSelect = false;
-                            this.datetimeConditionSelect = false;
-
-                            this.nullify();
-                            break;
-                        }
-
-                        case 'datetime': {
-                            this.stringConditionSelect = false;
-                            this.numberConditionSelect = false;
-                            this.booleanConditionSelect = false;
-                            this.datetimeConditionSelect = true;
-
-                            this.nullify();
-                            break;
-                        }
-
-                        case 'boolean': {
-                            this.stringConditionSelect = false;
-                            this.numberConditionSelect = false;
-                            this.booleanConditionSelect = true;
+                            this.dropdownConditionSelect = false;
+                            this.checkboxConditionSelect = false;
                             this.datetimeConditionSelect = false;
 
                             this.nullify();
@@ -355,7 +431,57 @@ export default {
                             this.stringConditionSelect = false;
                             this.numberConditionSelect = true;
                             this.booleanConditionSelect = false;
+                            this.dropdownConditionSelect = false;
+                            this.checkboxConditionSelect = false;
                             this.datetimeConditionSelect = false;
+
+                            this.nullify();
+                            break;
+                        }
+
+                        case 'boolean': {
+                            this.stringConditionSelect = false;
+                            this.numberConditionSelect = false;
+                            this.booleanConditionSelect = true;
+                            this.dropdownConditionSelect = false;
+                            this.checkboxConditionSelect = false;
+                            this.datetimeConditionSelect = false;
+
+                            this.nullify();
+                            break;
+                        }
+
+                        case 'dropdown': {
+                            this.stringConditionSelect = false;
+                            this.numberConditionSelect = false;
+                            this.booleanConditionSelect = false;
+                            this.dropdownConditionSelect = true;
+                            this.checkboxConditionSelect = false;
+                            this.datetimeConditionSelect = false;
+
+                            this.nullify();
+                            break;
+                        }
+
+                        case 'checkbox': {
+                            this.stringConditionSelect = false;
+                            this.numberConditionSelect = false;
+                            this.booleanConditionSelect = false;
+                            this.dropdownConditionSelect = false;
+                            this.checkboxConditionSelect = true;
+                            this.datetimeConditionSelect = false;
+
+                            this.nullify();
+                            break;
+                        }
+
+                        case 'datetime': {
+                            this.stringConditionSelect = false;
+                            this.numberConditionSelect = false;
+                            this.booleanConditionSelect = false;
+                            this.dropdownConditionSelect = false;
+                            this.checkboxConditionSelect = false;
+                            this.datetimeConditionSelect = true;
 
                             this.nullify();
                             break;
@@ -365,6 +491,8 @@ export default {
                             this.stringConditionSelect = false;
                             this.numberConditionSelect = true;
                             this.booleanConditionSelect = false;
+                            this.dropdownConditionSelect = false;
+                            this.checkboxConditionSelect = false;
                             this.datetimeConditionSelect = false;
 
                             this.nullify();
@@ -425,6 +553,24 @@ export default {
                         label
                     }
                 });
+            } else if (this.type === 'dropdown') {
+                this.$emit('onFilter', {
+                    data: {
+                        column: this.columnOrAlias,
+                        condition: this.dropdownCondition,
+                        response: this.dropdownValue,
+                        label
+                    }
+                });
+            } else if (this.type === 'checkbox') {
+                this.$emit('onFilter', {
+                    data: {
+                        column: this.columnOrAlias,
+                        condition: this.checkboxCondition,
+                        response: this.checkboxValue,
+                        label
+                    }
+                });
             } else if (this.type === 'datetime') {
                 this.$emit('onFilter', {
                     data: {
@@ -450,7 +596,19 @@ export default {
             this.stringCondition = null;
             this.datetimeCondition = null;
             this.booleanCondition = null;
+            this.dropdownCondition = null;
             this.numberCondition = null;
+        },
+
+        toggleCheckboxDropdown() {
+            const display = this.$refs.checkboxOptions.style.display;
+
+            if (display === 'none') {
+                this.$refs.checkboxOptions.style.display = 'block';
+                return;
+            }
+
+            this.$refs.checkboxOptions.style.display = 'none';
         }
     }
 };
