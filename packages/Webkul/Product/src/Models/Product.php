@@ -500,25 +500,25 @@ class Product extends Model implements ProductContract
 
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
-                $attributeValue = $this->attribute_values()
+                $attributeValue = $this->attribute_values
                     ->where('channel', $channel)
                     ->where('locale', $locale)
                     ->where('attribute_id', $attribute->id)
                     ->first();
             } else {
-                $attributeValue = $this->attribute_values()
+                $attributeValue = $this->attribute_values
                     ->where('channel', $channel)
                     ->where('attribute_id', $attribute->id)
                     ->first();
             }
         } else {
             if ($attribute->value_per_locale) {
-                $attributeValue = $this->attribute_values()
+                $attributeValue = $this->attribute_values
                     ->where('locale', $locale)
                     ->where('attribute_id', $attribute->id)
                     ->first();
             } else {
-                $attributeValue = $this->attribute_values()
+                $attributeValue = $this->attribute_values
                     ->where('attribute_id', $attribute->id)
                     ->first();
             }
