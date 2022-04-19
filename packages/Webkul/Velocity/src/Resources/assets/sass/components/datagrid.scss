@@ -404,6 +404,10 @@
 }
 
 .rtl {
+    .grid-container .datagrid-filters .filter-right .dropdown-list {
+        right: unset;
+    }
+
     .search-filter {
         .control {
             padding-right: 10px;
@@ -443,6 +447,20 @@
             .cross-icon {
                 margin-right: 10px;
                 margin-left: 0;
+            }
+        }
+    }
+
+    .checkbox-dropdown-list {
+        .dropdown-container {
+            text-align: right;
+        }
+
+        .checkbox {
+            input[type='checkbox'] {
+                float: right;
+                margin-right: unset;
+                margin-left: unset;
             }
         }
     }
