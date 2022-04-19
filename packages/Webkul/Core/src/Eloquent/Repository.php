@@ -52,12 +52,29 @@ abstract class Repository extends BaseRepository implements CacheableInterface {
      */
     public function find($id, $columns = ['*'])
     {
-        $this->applyCriteria();
-        $this->applyScope();
-        $model = $this->model->find($id, $columns);
-        $this->resetModel();
+        if (!$this->allowedCache('find') || $this->isSkippedCache()) {
+            $this->applyCriteria();
+            $this->applyScope();
+            $model = $this->model->find($id, $columns);
+            $this->resetModel();
 
-        return $this->parserResult($model);
+            return $this->parserResult($model);
+        }
+
+        $key = $this->getCacheKey('find', func_get_args());
+        $time = $this->getCacheTime();
+        $value = $this->getCacheRepository()->remember($key, $time, function () use ($id, $columns) {
+            $this->applyCriteria();
+            $this->applyScope();
+            $model = $this->model->find($id, $columns);
+            $this->resetModel();
+
+            return $this->parserResult($model);
+        });
+
+        $this->resetModel();
+        $this->resetScope();
+        return $value;
     }
 
     /**
@@ -69,12 +86,29 @@ abstract class Repository extends BaseRepository implements CacheableInterface {
      */
     public function findOrFail($id, $columns = ['*'])
     {
-        $this->applyCriteria();
-        $this->applyScope();
-        $model = $this->model->findOrFail($id, $columns);
-        $this->resetModel();
+        if (!$this->allowedCache('find') || $this->isSkippedCache()) {
+            $this->applyCriteria();
+            $this->applyScope();
+            $model = $this->model->findOrFail($id, $columns);
+            $this->resetModel();
 
-        return $this->parserResult($model);
+            return $this->parserResult($model);
+        }
+
+        $key = $this->getCacheKey('find', func_get_args());
+        $time = $this->getCacheTime();
+        $value = $this->getCacheRepository()->remember($key, $time, function () use ($id, $columns) {
+            $this->applyCriteria();
+            $this->applyScope();
+            $model = $this->model->findOrFail($id, $columns);
+            $this->resetModel();
+
+            return $this->parserResult($model);
+        });
+
+        $this->resetModel();
+        $this->resetScope();
+        return $value;
     }
 
      /**
@@ -86,18 +120,20 @@ abstract class Repository extends BaseRepository implements CacheableInterface {
      */
     public function count(array $where = [], $columns = '*')
     {
-        $this->applyCriteria();
-        $this->applyScope();
-
-        if ($where) {
-            $this->applyConditions($where);
+        if (!$this->allowedCache('count') || $this->isSkippedCache()) {
+            return parent::count($where, $columns);
         }
 
-        $result = $this->model->count($columns);
+        $key = $this->getCacheKey('count', func_get_args());
+        $time = $this->getCacheTime();
+        $value = $this->getCacheRepository()->remember($key, $time, function () use ($where, $columns) {
+            return parent::count($where, $columns);
+        });
+
         $this->resetModel();
         $this->resetScope();
+        return $value;
 
-        return $result;
     }
 
     /**
@@ -106,13 +142,31 @@ abstract class Repository extends BaseRepository implements CacheableInterface {
      */
     public function sum($columns)
     {
-        $this->applyCriteria();
-        $this->applyScope();
+        if (!$this->allowedCache('sum') || $this->isSkippedCache()) {
+            $this->applyCriteria();
+            $this->applyScope();
 
-        $sum = $this->model->sum($columns);
+            $sum = $this->model->sum($columns);
+            $this->resetModel();
+
+            return $sum;
+        }
+
+        $key = $this->getCacheKey('sum', func_get_args());
+        $time = $this->getCacheTime();
+        $value = $this->getCacheRepository()->remember($key, $time, function () use ($columns) {
+            $this->applyCriteria();
+            $this->applyScope();
+
+            $sum = $this->model->sum($columns);
+            $this->resetModel();
+
+            return $sum;
+        });
+
         $this->resetModel();
-
-        return $sum;
+        $this->resetScope();
+        return $value;
     }
 
     /**
@@ -121,13 +175,31 @@ abstract class Repository extends BaseRepository implements CacheableInterface {
      */
     public function avg($columns)
     {
-        $this->applyCriteria();
-        $this->applyScope();
+        if (!$this->allowedCache('sum') || $this->isSkippedCache()) {
+            $this->applyCriteria();
+            $this->applyScope();
 
-        $avg = $this->model->avg($columns);
+            $avg = $this->model->avg($columns);
+            $this->resetModel();
+
+            return $avg;
+        }
+
+        $key = $this->getCacheKey('sum', func_get_args());
+        $time = $this->getCacheTime();
+        $value = $this->getCacheRepository()->remember($key, $time, function () use ($columns) {
+            $this->applyCriteria();
+            $this->applyScope();
+
+            $avg = $this->model->avg($columns);
+            $this->resetModel();
+
+            return $avg;
+        });
+
         $this->resetModel();
-
-        return $avg;
+        $this->resetScope();
+        return $value;
     }
 
     /**
