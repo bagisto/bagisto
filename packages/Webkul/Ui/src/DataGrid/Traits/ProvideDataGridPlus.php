@@ -144,6 +144,7 @@ trait ProvideDataGridPlus
             'value'               => __('ui::app.datagrid.value'),
             'valueHere'           => __('ui::app.datagrid.value-here'),
             'numericValueHere'    => __('ui::app.datagrid.numeric-value-here'),
+            'select'              => __('ui::form.select-attribute', ['attribute' => '']),
             'apply'               => __('ui::app.datagrid.apply'),
             'submit'              => __('ui::app.datagrid.submit'),
             'actions'             => __('ui::app.datagrid.actions'),
@@ -154,7 +155,6 @@ trait ProvideDataGridPlus
             'recordsFound'        => __('admin::app.admin.system.records-found'),
             'norecords'           => __('ui::app.datagrid.no-records'),
             'massActionDelete'    => __('ui::app.datagrid.massaction.delete'),
-            'select'              => __('ui::form.select-attribute', ['attribute' => '']),
         ];
     }
 }

@@ -8,11 +8,11 @@ trait ProvideQueryResolver
      * Main resolve method.
      *
      * @param  \Illuminate\Support\Collection  $collection
-     * @param  string                          $columnName
-     * @param  string                          $condition
-     * @param  string                          $filterValue
-     * @param  string                          $clause
-     * @param  string                          $method
+     * @param  string  $columnName
+     * @param  string  $condition
+     * @param  string  $filterValue
+     * @param  string  $clause
+     * @param  string  $method
      * @return void
      */
     private function resolve($collection, $columnName, $condition, $filterValue, $clause = 'where', $method = 'resolveQuery')
@@ -29,10 +29,10 @@ trait ProvideQueryResolver
     /**
      * Resolve query.
      *
-     * @param  object        $query
-     * @param  string        $columnName
-     * @param  string        $condition
-     * @param  string        $filterValue
+     * @param  object  $query
+     * @param  string  $columnName
+     * @param  string  $condition
+     * @param  string  $filterValue
      * @param  null|boolean  $nullCheck
      * @return void
      */
@@ -49,12 +49,13 @@ trait ProvideQueryResolver
      * Resolve boolean query.
      *
      * @param  \Illuminate\Support\Collection  $collection
-     * @param  string                          $columnName
-     * @param  string                          $condition
-     * @param  string                          $filterValue
+     * @param  string  $columnName
+     * @param  string  $condition
+     * @param  string  $filterValue
+     * @param  string  $clause
      * @return void
      */
-    private function resolveBooleanQuery($collection, $columnName, $condition, $filterValue)
+    private function resolveBooleanQuery($collection, $columnName, $condition, $filterValue, $clause)
     {
         if ($this->operators[$condition] == '=') {
             $this->checkFilterValueCondition($collection, $columnName, $condition, $filterValue);
@@ -72,9 +73,10 @@ trait ProvideQueryResolver
      * @param  string  $columnName
      * @param  string  $condition
      * @param  string  $filterValue
+     * @param  string  $clause
      * @return void
      */
-    private function resolveCheckboxQuery($collection, $columnName, $condition, $filterValue)
+    private function resolveCheckboxQuery($collection, $columnName, $condition, $filterValue, $clause)
     {
         $filterValue = explode(',', $filterValue);
 
@@ -89,10 +91,10 @@ trait ProvideQueryResolver
      * Resolve filter query.
      *
      * @param  \Illuminate\Support\Collection  $collection
-     * @param  string                          $columnName
-     * @param  string                          $condition
-     * @param  string                          $filterValue
-     * @param  null|boolean                    $nullCheck
+     * @param  string  $columnName
+     * @param  string  $condition
+     * @param  string  $filterValue
+     * @param  null|boolean  $nullCheck
      * @return void
      */
     private function resolveFilterQuery($collection, $columnName, $condition, $filterValue, $nullCheck = null)
@@ -112,10 +114,10 @@ trait ProvideQueryResolver
      * Check filter value condition.
      *
      * @param  \Illuminate\Support\Collection  $collection
-     * @param  string                          $columnName
-     * @param  string                          $condition
-     * @param  string                          $filterValue
-     * @param  bool                            $nullCheck
+     * @param  string  $columnName
+     * @param  string  $condition
+     * @param  string  $filterValue
+     * @param  bool  $nullCheck
      * @return void
      */
     private function checkFilterValueCondition($collection, $columnName, $condition, $filterValue, $nullCheck = false)
