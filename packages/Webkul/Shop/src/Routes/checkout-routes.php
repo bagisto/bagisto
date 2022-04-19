@@ -33,7 +33,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
     Route::get('checkout/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
-    Route::get('checkout/cart/remove}', [CartController::class, 'removeAllItems'])->name('cart.remove.all.items');
+    Route::post('checkout/cart/remove}', [CartController::class, 'removeAllItems'])->name('cart.remove.all.items');
 
     Route::post('/checkout/cart', [CartController::class, 'updateBeforeCheckout'])->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'
