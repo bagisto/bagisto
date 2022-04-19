@@ -9,7 +9,7 @@
 
         <div
             class="dropdown-list dropdown-container"
-            style="display: none"
+            style="display: none;"
             v-on:keyup.enter="getResponse"
         >
             <ul>
@@ -269,7 +269,7 @@
 
                         <div
                             ref="checkboxOptions"
-                            class="dropdown-list"
+                            class="dropdown-list checkbox-dropdown-list"
                             style="display: none;"
                         >
                             <div class="dropdown-container">
@@ -363,6 +363,13 @@
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+.checkbox-dropdown-list {
+    font-size: 11px;
+    width: inherit;
+}
+</style>
 
 <script>
 export default {
