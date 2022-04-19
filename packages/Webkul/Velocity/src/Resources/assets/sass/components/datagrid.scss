@@ -356,6 +356,11 @@
     position: relative;
 }
 
+.dropdown-btn:focus {
+    border-color: #26a37c !important;
+    outline: unset !important;
+}
+
 .filter-advance {
     display: flex;
     justify-content: space-between;
