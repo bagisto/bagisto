@@ -287,7 +287,7 @@
                                             <input
                                                 type="checkbox"
                                                 v-model="types.checkbox.value"
-                                                :value="option"
+                                                :value="key"
                                             />
 
                                             <label
