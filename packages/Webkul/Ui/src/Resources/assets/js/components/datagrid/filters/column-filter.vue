@@ -7,7 +7,11 @@
             </div>
         </div>
 
-        <div class="dropdown-list dropdown-container" style="display: none">
+        <div
+            class="dropdown-list dropdown-container"
+            style="display: none"
+            v-on:keyup.enter="getResponse"
+        >
             <ul>
                 <li>
                     <div class="control-group">
@@ -353,7 +357,7 @@
                 <button
                     v-text="translations.apply"
                     class="btn btn-sm btn-primary apply-filter"
-                    v-on:click="getResponse"
+                    @click="getResponse"
                 ></button>
             </ul>
         </div>
