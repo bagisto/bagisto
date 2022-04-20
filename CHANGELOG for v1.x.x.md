@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.4.3 (20 of March 2022)** - *Release*
+## **v1.4.3 (20th of April 2022)** - *Release*
 
 * #6213 [feature] -  Command For Bagisto Publish
 
