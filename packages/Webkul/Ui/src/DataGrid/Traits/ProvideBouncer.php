@@ -9,8 +9,8 @@ trait ProvideBouncer
     /**
      * Check permissions.
      *
-     * @param  array     $action
-     * @param  bool      $specialPermission
+     * @param  array  $action
+     * @param  bool  $specialPermission
      * @param  \Closure  $operation
      * @return void
      */
