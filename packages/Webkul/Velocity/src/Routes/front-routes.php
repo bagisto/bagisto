@@ -80,6 +80,9 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     Route::delete('/cart/remove/{id}', [CartController::class, 'removeProductFromCart'])
         ->name('velocity.cart.remove.product');
 
+    Route::post('/cart/remove-all', [CartController::class, 'removeAllItems'])
+        ->name('velocity.cart.remove.all.items');
+
     Route::get('/categories', [ShopController::class, 'fetchCategories'])
         ->name('velocity.categoriest');
 

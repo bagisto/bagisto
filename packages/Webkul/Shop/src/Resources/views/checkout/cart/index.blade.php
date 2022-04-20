@@ -13,6 +13,20 @@
 
             <div class="cart-content">
                 <div class="left-side">
+                    <div style="display: flex;justify-content: flex-end;margin-bottom: 20px;">
+                        <form
+                            method="POST"
+                            action="{{  route('cart.remove.all.items') }}">
+                            @csrf
+                            <button
+                                type="submit"
+                                onclick="return confirm('{{ __('shop::app.checkout.cart.confirm-action') }}')"
+                                class="btn btn-lg btn-primary">
+
+                                {{ __('shop::app.checkout.cart.remove-all-items') }}
+                            </button>
+                        </form>
+                    </div>
                     <form action="{{ route('shop.checkout.cart.update') }}" method="POST" @submit.prevent="onSubmit">
 
                         <div class="cart-item-list" style="margin-top: 0">
@@ -86,27 +100,27 @@
                                                 <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
 
                                             @auth('customer')
-                                                    @php
-                                                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
-                                                    @endphp
+                                                @php
+                                                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                                                @endphp
 
-                                                    @if ($showWishlist)
-                                                        <span class="towishlist">
+                                                @if ($showWishlist)
+                                                    <span class="towishlist">
                                                             @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                                <a
-                                                                    href="javascript:void(0);"
-                                                                    onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->id) }}')">
+                                                            <a
+                                                                href="javascript:void(0);"
+                                                                onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->id) }}')">
                                                                     {{ __('shop::app.checkout.cart.move-to-wishlist') }}
                                                                 </a>
-                                                            @else
-                                                                <a
-                                                                    href="javascript:void(0);"
-                                                                    onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->child->id) }}')">
+                                                        @else
+                                                            <a
+                                                                href="javascript:void(0);"
+                                                                onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->child->id) }}')">
                                                                     {{ __('shop::app.checkout.cart.move-to-wishlist') }}
                                                                 </a>
-                                                            @endif
+                                                        @endif
                                                         </span>
-                                                    @endif
+                                                @endif
                                             @endauth
                                         </div>
 
@@ -130,9 +144,9 @@
 
                             <div style="display:flex;">
                                 @if ($cart->hasProductsWithQuantityBox())
-                                <button type="submit" class="btn btn-lg btn-primary" id="update_cart_button">
-                                    {{ __('shop::app.checkout.cart.update-cart') }}
-                                </button>
+                                    <button type="submit" class="btn btn-lg btn-primary" id="update_cart_button">
+                                        {{ __('shop::app.checkout.cart.update-cart') }}
+                                    </button>
                                 @endif
 
                                 @if (! cart()->hasError())

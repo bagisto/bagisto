@@ -160,7 +160,7 @@ return [
             'not-activated'       => 'Your activation seeks admin approval',
             'resend-verification' => 'Resend verification mail again',
             'show-password'       => 'Show Password',
-            
+
         ],
 
         'forgot-password' => [
@@ -500,6 +500,8 @@ return [
             'empty'                     => 'Your shopping cart is empty',
             'update-cart'               => 'Update Cart',
             'continue-shopping'         => 'Continue Shopping',
+            'remove-all-items'          => 'Remove all items',
+            'confirm-action'            => 'Confirm this action?',
             'continue-registration'     => 'Continue Registration',
             'proceed-to-checkout'       => 'Proceed To Checkout',
             'remove'                    => 'Remove',
@@ -519,6 +521,7 @@ return [
                 'error_remove'   => 'No items to remove from the cart.',
                 'success'        => 'Item is successfully added to cart.',
                 'success-remove' => 'Item is successfully removed from the cart.',
+                'success-all-remove' => 'All items is successfully removed from the cart.',
                 'error-add'      => 'Item cannot be added to cart, please try again later.',
                 'inactive'       => 'An item is inactive and was removed from cart.',
                 'inactive-add'   => 'Inactive item cannot be added to cart.',
