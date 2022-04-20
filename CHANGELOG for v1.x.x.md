@@ -2,6 +2,99 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v1.4.3 (20 of March 2022)** - *Release*
+
+* #6213 [feature] -  Command For Bagisto Publish
+
+* #6197 [feature] -  Link to frontend from admin product list or product detail page
+
+* #6190 [feature] -  Give option to enable WYSIWYG editor in configuration
+
+* #5376 [feature] -  There should be an option to remove all cart items at once
+
+* #6294 [enhancement] - The mouse property should be a pointer when the admin is trying to mark all notifications as read.
+
+* #6289 [enhancement] - Improvement on products listing
+
+* #6285 [enhancement] - The dashboard cards are not clickable
+
+* #6283 [enhancement] - When the user is trying to view the mini cart then Product Quantity Looks like as a minus value
+
+* #6269 [enhancement] - The mouse property should be a pointer when the customer is trying to change the app currency & locale 
+
+* #6259 [enhancement] - The color of View All Notifications should be blue on the mouseover in admin panel 
+
+* #6243 [enhancement] - The mouse property should be a pointer when the admin is trying to drag the product image while editing any product 
+
+* #6241 [enhancement] - There should be checkboxes inside the status dropdown if the user is trying to filter orders with multiple statuses
+
+* #6229 [enhancement] - The mouse property should be a pointer when the user is trying to sort the table by tables header.
+
+* #6217 [enhancement] - There should be an asterisk icon for the required fields if the user is trying to book the product. 
+
+* #6213 [enhancement] - Command For Bagisto Publish 
+
+* #6208 [enhancement] - The product status should be Highlighted in product list page
+
+* #5967 [enhancement] - There should be an option to copy the product's share link.
+
+* #5960 [enhancement] - There should be an option for a sitemap generator. .
+
+* #5559 [enhancement] - There should be the currency icon inside the currency dropdown 
+
+* #5530 [enhancement] - there should be an cross icon in blisss theme so that customer can delete product from cart 
+
+* #5397 [enhancement] - The filter dropdown should be according to the selected value. 
+
+* #5354 [enhancement] - The Input validation's dropdown should be according to attribute type.
+
+* #2718 [enhancement] - Show error message "No booking available" if booking is not available for selected date. Booking 
+
+* #2308 [enhancement] - Existing groups in the attribute families are not translatable yet.
+
+* #6290  [fixed] -  Cancel already shipped order results in incorrect pending inventory amount
+
+* #6279  [fixed] -  The currency icon is overriding on the currency dropdown when the app locale is Arabic.  
+
+* #6270  [fixed] -  The enter key is not working if the admin is trying to apply the filter by pressing the enter key  
+
+* #6267  [fixed] -  There should not be an exception if the admin is trying to view order after deleting the customer of same order Admin  
+  
+* #6266  [fixed] -  The admin is not able to view the bookings in the calendar view.   
+ 
+* #6261  [fixed] -  The filter options should be under the filter button. when the customer is trying to filter order in Arabic locale  
+
+* #6260  [fixed] -  The upload image option should be slightly on the right side. when the customer is adding a review for any product.  
+ 
+* #6256  [fixed] -  There should not be any extra space between add to cart and the by now button.  
+ 
+* #6253  [fixed] -  The page should be redirected to the particular order's page if the customer is clicking on the order id after placing the order.
+ 
+* #6250  [fixed] -  The admin is not able to view the customer's review if the customer is creating a review with the moustache syntax Like: {{ url(' ') }}  
+ 
+* #6246  [fixed] -  The products are not listing when url key is null  
+
+* #6244  [fixed] -  There is an exception when the customer is changing the app currency on the product view page.
+ 
+* #6228  [fixed] -  There should not be a blank value in the items per page dropdown. on customer orders page
+ 
+* #6206  [fixed] -  The border of calendar icon is not showing in dark mode, when the admin is trying to view booking in calendar view.
+
+* #6205  [fixed] -  The flash message should be according to the selected locale if the admin trying to create a Shipment.
+ 
+* #6204  [fixed] -  The carousel arrow icons [ previous and next ] should work properly in the Arabic locale.
+
+* #6202  [fixed] -  There should be some space between the input box and labels if the user is trying to book an appointment for any booking product.
+
+* #6196  [fixed] -  The admin should be able to delete the users.
+
+* #6195  [fixed] -  Mini Cart sub  total is not updating after removing the cart's item.
+
+* #6192  [fixed] -  The shopping cart goes empty after removing an item from the mini cart.
+
+* #5772  [fixed] -  issue in french lanugage in navigation bar
+
+* #5067  [fixed] -  Products is_wishlisted attribute is always false on API   
 
 
 ## **v1.4.2 (31st of March 2022)** - *Release*
