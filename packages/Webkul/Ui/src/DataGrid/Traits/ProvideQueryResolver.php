@@ -78,7 +78,7 @@ trait ProvideQueryResolver
      */
     private function resolveCheckboxQuery($collection, $columnName, $condition, $filterValue, $clause)
     {
-        $filterValue = explode(',', $filterValue);
+        $filterValue = $this->mapFilterValue($columnName, $filterValue);
 
         if ($this->operators[$condition] == '=') {
             $collection->whereIn($columnName, $filterValue);
@@ -125,5 +125,29 @@ trait ProvideQueryResolver
         $filterValue == 1
             ? $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue, $nullCheck)
             : $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue, ! $nullCheck);
+    }
+
+    /**
+     * Map filter value. Currently supported checkbox type.
+     *
+     * In future may be this will become big with multiple if else cases.
+     *
+     * @param  string  $columnName
+     * @param  string  $filterValue
+     * @return array
+     */
+    private function mapFilterValue($columnName, $filterValue)
+    {
+        $options = $this->getColumnByName($columnName, 'options');
+
+        return collect(explode(',', $filterValue))->map(function ($value) use ($options) {
+            $mappedKey = collect($options)->search($value);
+
+            if (! $mappedKey) {
+                throw new \Exception(__('ui::app.datagrid.error.mapped-keys-error'));
+            }
+
+            return $mappedKey;
+        })->toArray();
     }
 }

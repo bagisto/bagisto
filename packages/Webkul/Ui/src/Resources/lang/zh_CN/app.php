@@ -15,6 +15,7 @@ return [
         'error' => [
             'multiple-sort-keys-error'   => '致命错误! 找到多个排序键, 请手动解析URL.',
             'multiple-search-keys-error' => '找到多个搜索键, 请手动解析URL',
+            'mapped-keys-error'          => 'Mapped key not found. Make sure you have given valid options.',
         ],
 
         'zero-index'            => '索引列的值只能大于零',
