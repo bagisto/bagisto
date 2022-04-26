@@ -34,103 +34,107 @@
 
 
         <div style="display: flex;flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 40px;">
-            <div style="line-height: 25px;">
-                <div style="font-weight: bold;font-size: 16px;color: #242424;">
-                    {{ __('shop::app.mail.order.shipping-address') }}
-                </div>
-
-                <div>
-                    {{ $order->shipping_address->company_name ?? '' }}
-                </div>
-
-                <div>
-                    {{ $order->shipping_address->name }}
-                </div>
-
-                <div>
-                    {{ $order->shipping_address->address1 }}
-                </div>
-                    
-                <div>
-                    {{ $order->shipping_address->postcode . " " . $order->shipping_address->city }}
-                </div>
-                    
-                <div>
-                    {{ $order->shipping_address->state }}
-                </div>
-                    
-                <div>
-                    {{ core()->country_name($order->shipping_address->country) }}
-                </div>
-
-                <div>---</div>
-
-                <div style="margin-bottom: 40px;">
-                    {{ __('shop::app.mail.order.contact') }} : {{ $order->shipping_address->phone }}
-                </div>
-
-                <div style="font-weight: bold;font-size: 16px;color: #242424;">
-                    {{ __('shop::app.mail.order.shipping') }}
-                </div>
-
-                <div style="font-size: 16px;color: #242424;">
-                    <div style="font-weight: bold;">
-                        {{ $order->shipping_title }}
+            @if ($order->shipping_address)
+                <div style="line-height: 25px;">
+                    <div style="font-weight: bold;font-size: 16px;color: #242424;">
+                        {{ __('shop::app.mail.order.shipping-address') }}
                     </div>
 
-                    <div style="margin-top: 5px;">
-                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.carrier') }} : </span>{{ $shipment->carrier_title }}
+                    <div>
+                        {{ $order->shipping_address->company_name ?? '' }}
                     </div>
 
-                    <div style="margin-top: 5px;">
-                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.tracking-number') }} : </span>{{ $shipment->track_number }}
+                    <div>
+                        {{ $order->shipping_address->name }}
+                    </div>
+
+                    <div>
+                        {{ $order->shipping_address->address1 }}
+                    </div>
+
+                    <div>
+                        {{ $order->shipping_address->postcode . " " . $order->shipping_address->city }}
+                    </div>
+
+                    <div>
+                        {{ $order->shipping_address->state }}
+                    </div>
+
+                    <div>
+                        {{ core()->country_name($order->shipping_address->country) }}
+                    </div>
+
+                    <div>---</div>
+
+                    <div style="margin-bottom: 40px;">
+                        {{ __('shop::app.mail.order.contact') }} : {{ $order->shipping_address->phone }}
+                    </div>
+
+                    <div style="font-weight: bold;font-size: 16px;color: #242424;">
+                        {{ __('shop::app.mail.order.shipping') }}
+                    </div>
+
+                    <div style="font-size: 16px;color: #242424;">
+                        <div style="font-weight: bold;">
+                            {{ $order->shipping_title }}
+                        </div>
+
+                        <div style="margin-top: 5px;">
+                            <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.carrier') }} : </span>{{ $shipment->carrier_title }}
+                        </div>
+
+                        <div style="margin-top: 5px;">
+                            <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.tracking-number') }} : </span>{{ $shipment->track_number }}
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
 
-            <div style="line-height: 25px;">
-                <div style="font-weight: bold;font-size: 16px;color: #242424;">
-                    {{ __('shop::app.mail.order.billing-address') }}
-                </div>
+            @if ($order->billing_address)
+                <div style="line-height: 25px;">
+                    <div style="font-weight: bold;font-size: 16px;color: #242424;">
+                        {{ __('shop::app.mail.order.billing-address') }}
+                    </div>
 
-                <div>
-                    {{ $order->billing_address->company_name ?? '' }}
-                </div>
+                    <div>
+                        {{ $order->billing_address->company_name ?? '' }}
+                    </div>
 
-                <div>
-                    {{ $order->billing_address->name }}
-                </div>
+                    <div>
+                        {{ $order->billing_address->name }}
+                    </div>
 
-                <div>
-                    {{ $order->billing_address->address1 }}
-                </div>
-                    
-                <div>
-                    {{ $order->billing_address->postcode . " " . $order->billing_address->city }}
-                </div>
-                    
-                <div>
-                    {{ $order->billing_address->state }}
-                </div>
-                    
-                <div>
-                    {{ core()->country_name($order->billing_address->country) }}
-                </div>
+                    <div>
+                        {{ $order->billing_address->address1 }}
+                    </div>
 
-                <div>---</div>
+                    <div>
+                        {{ $order->billing_address->postcode . " " . $order->billing_address->city }}
+                    </div>
 
-                <div style="margin-bottom: 40px;">
-                    {{ __('shop::app.mail.order.contact') }} : {{ $order->billing_address->phone }}
-                </div>
+                    <div>
+                        {{ $order->billing_address->state }}
+                    </div>
 
-                <div style="font-weight: bold; font-size: 16px; color: #242424;">
-                    {{ __('shop::app.mail.order.payment') }}
-                </div>
+                    <div>
+                        {{ core()->country_name($order->billing_address->country) }}
+                    </div>
 
-                <div style="font-weight: bold; font-size: 16px; color: #242424;">
-                    {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+                    <div>---</div>
+
+                    <div style="margin-bottom: 40px;">
+                        {{ __('shop::app.mail.order.contact') }} : {{ $order->billing_address->phone }}
+                    </div>
+
+                    <div style="font-weight: bold; font-size: 16px; color: #242424;">
+                        {{ __('shop::app.mail.order.payment') }}
+                    </div>
+
+                    <div style="font-weight: bold; font-size: 16px; color: #242424;">
+                        {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
 
         <div class="section-content">

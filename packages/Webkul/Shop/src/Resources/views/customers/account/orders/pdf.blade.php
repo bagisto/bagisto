@@ -208,18 +208,20 @@
 
                         <tbody>
                             <tr>
-                                <td>
-                                    <p>{{ $invoice->order->billing_address->company_name ?? '' }}</p>
-                                    <p>{{ $invoice->order->billing_address->name }}</p>
-                                    <p>{{ $invoice->order->billing_address->address1 }}</p>
-                                    <p>{{ $invoice->order->billing_address->city }}</p>
-                                    <p>{{ $invoice->order->billing_address->state }}</p>
-                                    <p>
-                                        {{ core()->country_name($invoice->order->billing_address->country) }}
-                                        {{ $invoice->order->billing_address->postcode }}
-                                    </p>
-                                    {{ __('shop::app.customer.account.order.view.contact') }} : {{ $invoice->order->billing_address->phone }}
-                                </td>
+                                @if ($invoice->order->billing_address)
+                                    <td>
+                                        <p>{{ $invoice->order->billing_address->company_name ?? '' }}</p>
+                                        <p>{{ $invoice->order->billing_address->name }}</p>
+                                        <p>{{ $invoice->order->billing_address->address1 }}</p>
+                                        <p>{{ $invoice->order->billing_address->city }}</p>
+                                        <p>{{ $invoice->order->billing_address->state }}</p>
+                                        <p>
+                                            {{ core()->country_name($invoice->order->billing_address->country) }}
+                                            {{ $invoice->order->billing_address->postcode }}
+                                        </p>
+                                        {{ __('shop::app.customer.account.order.view.contact') }} : {{ $invoice->order->billing_address->phone }}
+                                    </td>
+                                @endif
 
                                 @if ($invoice->order->shipping_address)
                                     <td>
