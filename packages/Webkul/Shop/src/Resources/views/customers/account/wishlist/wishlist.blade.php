@@ -22,7 +22,7 @@
                     @if ($isSharingEnabled)
                         <a
                             href="javascript:void(0);"
-                            onclick="window.showShareWishlistModal();">
+                            onclick="window.showShareWishlistModal();" style="margin:20px;">
                             {{ __('shop::app.customer.account.wishlist.share') }}
                         </a>
                     @endif
