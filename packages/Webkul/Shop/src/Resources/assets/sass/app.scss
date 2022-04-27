@@ -452,7 +452,7 @@ input {
     }
 
     .product-card {
-        height: 480px;
+        height: 470px;
         position: relative;
         padding: 15px;
 
@@ -616,6 +616,7 @@ input {
     @media only screen and (max-width: 425px) {
         .product-card {
             font-size: 90%;
+            height: 300px;
 
             .product-information {
                 .default-wrap {
@@ -633,6 +634,12 @@ input {
 
             .btn.btn-md {
                 padding: 5px;
+            }
+        }
+
+        .cart-wish-wrap {
+            .addtocart {
+                margin-right: 0px;    
             }
         }
 
