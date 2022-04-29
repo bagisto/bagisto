@@ -20,9 +20,9 @@
                     </form>
 
                     @if ($isSharingEnabled)
-                        <a
+                        <a 
                             href="javascript:void(0);"
-                            onclick="window.showShareWishlistModal();" style="margin:20px;">
+                            onclick="window.showShareWishlistModal();" class="m-20">
                             {{ __('shop::app.customer.account.wishlist.share') }}
                         </a>
                     @endif
