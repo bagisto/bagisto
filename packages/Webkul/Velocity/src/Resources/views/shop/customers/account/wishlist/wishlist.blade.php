@@ -11,7 +11,7 @@
         <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
 
         @if (count($items))
-            <span class="account-action">
+            <span class="account-action d-inline-flex">
                 <form id="remove-all-wishlist" class="d-none" action="{{ route('customer.wishlist.removeall') }}" method="POST">
                     @method('DELETE')
 
@@ -81,7 +81,7 @@
 
 @push('scripts')
     @if($isSharingEnabled)
-        <script type="text/x-template" id="share-component-template">            
+        <script type="text/x-template" id="share-component-template">
             <form method="POST">
                 @csrf
 
@@ -122,7 +122,7 @@
                             type="text"
                             class="form-control"
                             v-model="wishlistSharedLink"
-                            v-on:focus="$event.target.select()" 
+                            v-on:focus="$event.target.select()"
                             ref="sharedLink"
                         />
 
@@ -144,7 +144,7 @@
                 </div>
             </form>
         </script>
-        
+
         <script>
             /**
              * Show share wishlist modal.
