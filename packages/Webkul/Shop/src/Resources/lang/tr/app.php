@@ -517,13 +517,13 @@ return [
             ],
 
             'item'                      => [
-                'error_remove'   => 'Sepetten kaldırılacak ürün bulunamadı.',
-                'success'        => 'Ürün başarıyla sepete eklendi.',
-                'success-remove' => 'Ürün sepetten başarıyla kaldırıldı.',
+                'error_remove'       => 'Sepetten kaldırılacak ürün bulunamadı.',
+                'success'            => 'Ürün başarıyla sepete eklendi.',
+                'success-remove'     => 'Ürün sepetten başarıyla kaldırıldı.',
                 'success-all-remove' => 'All items is successfully removed from the cart.',
-                'error-add'      => 'Ürün sepete eklenirken hata oluştu, lütfen tekrar deneyin.',
-                'inactive'       => 'An item is inactive and was removed from cart.',
-                'inactive-add'   => 'Inactive item cannot be added to cart.',
+                'error-add'          => 'Ürün sepete eklenirken hata oluştu, lütfen tekrar deneyin.',
+                'inactive'           => 'An item is inactive and was removed from cart.',
+                'inactive-add'       => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error'            => 'Girilen miktar mevcut değil.',
             'cart-subtotal'             => 'Sepet Ara Toplam',
@@ -590,6 +590,10 @@ return [
             'password'            => 'Parola',
             'login-exist-message' => 'Kayıtlı hesabınız bulunuyor, lütfen giriş yapınız ya da ziyaretçi olarak satın alın.',
             'enter-coupon-code'   => 'Kupon Kodu Girin',
+
+            'validations' => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [

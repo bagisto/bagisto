@@ -508,13 +508,13 @@ return [
             ],
 
             'item'                      => [
-                'error_remove'   => 'Nenhum item para remover do carrinho',
-                'success'        => 'Item foi adicionado com sucesso ao carrinho',
-                'success-remove' => 'Item foi removido com sucesso do carrinho',
+                'error_remove'       => 'Nenhum item para remover do carrinho',
+                'success'            => 'Item foi adicionado com sucesso ao carrinho',
+                'success-remove'     => 'Item foi removido com sucesso do carrinho',
                 'success-all-remove' => 'Todos os itens foram removidos com sucesso do carrinho.',
-                'error-add'      => 'Item não pode ser adicionado ao carrinho, por favor, tente novamente mais tarde',
-                'inactive'       => 'An item is inactive and was removed from cart',
-                'inactive-add'   => 'Inactive item cannot be added to cart',
+                'error-add'          => 'Item não pode ser adicionado ao carrinho, por favor, tente novamente mais tarde',
+                'inactive'           => 'An item is inactive and was removed from cart',
+                'inactive-add'       => 'Inactive item cannot be added to cart',
             ],
             'quantity-error'            => 'Quantidade solicitada não está disponível',
             'cart-subtotal'             => 'Subtotal do carrinho',
@@ -570,6 +570,10 @@ return [
             'save_as_address'   => 'Salvar Endereço',
             'apply-coupon'      => 'Aplicar Cupom',
             'enter-coupon-code' => 'Digite aqui o seu Cupom',
+
+            'validations' => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [

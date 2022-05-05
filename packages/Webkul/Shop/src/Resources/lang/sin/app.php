@@ -590,6 +590,10 @@ return [
             'password'            => 'මුරපදය',
             'login-exist-message' => 'ඔබට දැනටමත් අප සමඟ ගිණුමක් ඇත, පුරනය වන්න හෝ ආගන්තුකයෙකු ලෙස ඉදිරියට යන්න.',
             'enter-coupon-code'   => 'කූපන් කේතය ඇතුළත් කරන්න',
+
+            'validations' => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [

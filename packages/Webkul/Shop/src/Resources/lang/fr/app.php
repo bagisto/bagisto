@@ -516,13 +516,13 @@ return [
             ],
 
             'item' => [
-                'error_remove'   => 'Aucun article à retirer du panier.',
-                'success'        => 'L\'article a été ajouté au panier avec succès.',
-                'success-remove' => 'L\'article a été supprimé avec succès du panier.',
-                'remove-all-items'          => 'Remove all items',
-                'error-add'      => 'L\'article ne peut pas être ajouté au panier, veuillez réessayer plus tard.',
-                'inactive'       => 'Un article est inactif et a été supprimé du panier.',
-                'inactive-add'   => 'L\'article inactif ne peut pas être ajouté au panier.',
+                'error_remove'     => 'Aucun article à retirer du panier.',
+                'success'          => 'L\'article a été ajouté au panier avec succès.',
+                'success-remove'   => 'L\'article a été supprimé avec succès du panier.',
+                'remove-all-items' => 'Remove all items',
+                'error-add'        => 'L\'article ne peut pas être ajouté au panier, veuillez réessayer plus tard.',
+                'inactive'         => 'Un article est inactif et a été supprimé du panier.',
+                'inactive-add'     => 'L\'article inactif ne peut pas être ajouté au panier.',
             ],
 
             'quantity-error'      => 'La quantité demandée n\'est pas disponible.',
@@ -592,6 +592,10 @@ return [
             'password'            => 'Mot de passe',
             'login-exist-message' => 'Vous avez déjà un compte chez nous, connectez-vous ou continuez en tant qu\'invité.',
             'enter-coupon-code'   => 'Entrer le code promotionnel',
+
+            'validations' => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [

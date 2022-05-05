@@ -33,8 +33,7 @@
 
                 <span
                     class="control-error"
-                    v-text="errors.first('company_name')"
-                    v-if="errors.has('company_name')">
+                    v-text="'{{ $errors->first('company_name') }}'">
                 </span>
             </div>
 

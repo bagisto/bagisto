@@ -524,13 +524,13 @@ return [
             ],
 
             'item'                      => [
-                'error_remove'   => 'Geen items om uit de winkelwagen te verwijderen.',
-                'success'        => 'Artikel is succesvol toegevoegd aan winkelwagen.',
-                'success-remove' => 'Item is met succes uit de winkelwagen verwijderd.',
+                'error_remove'       => 'Geen items om uit de winkelwagen te verwijderen.',
+                'success'            => 'Artikel is succesvol toegevoegd aan winkelwagen.',
+                'success-remove'     => 'Item is met succes uit de winkelwagen verwijderd.',
                 'success-all-remove' => 'All items is successfully removed from the cart.',
-                'error-add'      => 'Item kan niet aan winkelwagen worden toegevoegd. Probeer het later opnieuw.',
-                'inactive'       => 'An item is inactive and was removed from cart.',
-                'inactive-add'   => 'Inactive item cannot be added to cart.',
+                'error-add'          => 'Item kan niet aan winkelwagen worden toegevoegd. Probeer het later opnieuw.',
+                'inactive'           => 'An item is inactive and was removed from cart.',
+                'inactive-add'       => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error'            => 'Gevraagde hoeveelheid is niet beschikbaar.',
             'cart-subtotal'             => 'Subtotaal',
@@ -599,6 +599,10 @@ return [
             'password'            => 'Wachtwoord',
             'login-exist-message' => 'U heeft al een account bij ons, log in of ga verder als gast.',
             'enter-coupon-code'   => 'Vul couponcode in',
+
+            'validations' => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [

@@ -519,13 +519,13 @@ return [
                 'error'             => 'No se pueden actualizar los artículos, inténtelo más tarde',
             ],
             'item'                      => [
-                'error_remove'   => 'No hay artículos que eliminar en el carrito',
-                'success'        => 'El artículo se añadió al carrito',
-                'success-remove' => 'El artículo se eliminó del carrito',
+                'error_remove'       => 'No hay artículos que eliminar en el carrito',
+                'success'            => 'El artículo se añadió al carrito',
+                'success-remove'     => 'El artículo se eliminó del carrito',
                 'success-all-remove' => 'All items is successfully removed from the cart.',
-                'error-add'      => 'El artículo no se puede añadir al carrito, inténtelo más tarde',
-                'inactive'       => 'Un artículo está inactivo y se eliminó del carrito.',
-                'inactive-add'   => 'El artículo inactivo no se puede agregar al carrito',
+                'error-add'          => 'El artículo no se puede añadir al carrito, inténtelo más tarde',
+                'inactive'           => 'Un artículo está inactivo y se eliminó del carrito.',
+                'inactive-add'       => 'El artículo inactivo no se puede agregar al carrito',
             ],
             'quantity-error'            => 'La cantidad solicitada no está disponible',
             'cart-subtotal'             => 'Total parcial',
@@ -593,6 +593,10 @@ return [
             'password'            => 'Contraseña',
             'login-exist-message' => 'Ya tienes una cuenta con nosotros, inicia sesión o continúa como invitado .',
             'enter-coupon-code'   => 'Introduce el Código de Cupón',
+
+            'validations' => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [

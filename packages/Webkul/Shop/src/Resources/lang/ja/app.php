@@ -481,13 +481,13 @@ return [
                 'error'             => 'アイテムの更新が出来ませんでした。しばらくしてから再度お試し下さい。',
             ],
             'item'                      => [
-                'error_remove'   => 'カートに削除するアイテムがございません。',
-                'success'        => 'アイテムがカートに追加されました。',
-                'success-remove' => 'アイテムがカートから削除されました。',
+                'error_remove'       => 'カートに削除するアイテムがございません。',
+                'success'            => 'アイテムがカートに追加されました。',
+                'success-remove'     => 'アイテムがカートから削除されました。',
                 'success-all-remove' => 'All items is successfully removed from the cart.',
-                'error-add'      => 'アイテムをカートに追加できません。しばらくしてから再度お試し下さい。',
-                'inactive'       => 'An item is inactive and was removed from cart',
-                'inactive-add'   => 'Inactive item cannot be added to cart',
+                'error-add'          => 'アイテムをカートに追加できません。しばらくしてから再度お試し下さい。',
+                'inactive'           => 'An item is inactive and was removed from cart',
+                'inactive-add'       => 'Inactive item cannot be added to cart',
             ],
             'quantity-error'            => 'ご希望の数量の在庫が現在ございません。',
             'cart-subtotal'             => '小計',
@@ -549,6 +549,10 @@ return [
             'paypal-desc'      => 'Paypal',
             'free-desc'        => '送料無料',
             'flat-desc'        => '送料一律',
+
+            'validations' => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [

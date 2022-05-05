@@ -517,13 +517,13 @@ return [
             ],
 
             'item'                      => [
-                'error_remove'   => 'Brak produktów do usunięcia z koszyka.',
-                'success'        => 'Produkt został pomyślnie dodany do koszyka.',
-                'success-remove' => 'Produkt został pomyślnie usunięty z koszyka.',
+                'error_remove'       => 'Brak produktów do usunięcia z koszyka.',
+                'success'            => 'Produkt został pomyślnie dodany do koszyka.',
+                'success-remove'     => 'Produkt został pomyślnie usunięty z koszyka.',
                 'success-all-remove' => 'All items is successfully removed from the cart.',
-                'error-add'      => 'Nie można dodać produktu do koszyka, spróbuj ponownie później.',
-                'inactive'       => 'An item is inactive and was removed from cart.',
-                'inactive-add'   => 'Inactive item cannot be added to cart.',
+                'error-add'          => 'Nie można dodać produktu do koszyka, spróbuj ponownie później.',
+                'inactive'           => 'An item is inactive and was removed from cart.',
+                'inactive-add'       => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error'            => 'Żądana ilość nie jest dostępna.',
             'cart-subtotal'             => 'Suma częściowa koszyka',
@@ -591,6 +591,10 @@ return [
             'password'            => 'Hasło',
             'login-exist-message' => 'Masz już konto, zaloguj się lub kontynuuj jako gość.',
             'enter-coupon-code'   => 'Wprowadź kod kuponu',
+
+            'validations' => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [

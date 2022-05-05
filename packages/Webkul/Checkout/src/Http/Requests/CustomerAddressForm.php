@@ -50,6 +50,31 @@ class CustomerAddressForm extends FormRequest
     }
 
     /**
+     * Attributes.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'billing.postcode'  => __('shop::app.checkout.onepage.postcode'),
+            'shipping.postcode' => __('shop::app.checkout.onepage.postcode'),
+        ];
+    }
+
+    /**
+     * Messages.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'numeric' => __('shop::app.checkout.onepage.validations.numeric'),
+        ];
+    }
+
+    /**
      * Merge existing address rules.
      *
      * @param  string  $addressType

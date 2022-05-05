@@ -516,13 +516,13 @@ return [
             ],
 
             'item' => [
-                'error_remove'   => 'هیچ موردی برای حذف از سبد خرید وجود ندارد',
-                'success'        => 'مورد با موفقیت به سبد خرید اضافه شد',
-                'success-remove' => 'مورد با موفقیت از سبد خرید حذف شد',
+                'error_remove'       => 'هیچ موردی برای حذف از سبد خرید وجود ندارد',
+                'success'            => 'مورد با موفقیت به سبد خرید اضافه شد',
+                'success-remove'     => 'مورد با موفقیت از سبد خرید حذف شد',
                 'success-all-remove' => 'All items is successfully removed from the cart.',
-                'error-add'      => 'لطفاً موردی را به سبد خرید اضافه نکرد ، لطفا بعداً دوباره امتحان کنید',
-                'inactive'       => 'An item is inactive and was removed from cart',
-                'inactive-add'   => 'Inactive item cannot be added to cart',
+                'error-add'          => 'لطفاً موردی را به سبد خرید اضافه نکرد ، لطفا بعداً دوباره امتحان کنید',
+                'inactive'           => 'An item is inactive and was removed from cart',
+                'inactive-add'       => 'Inactive item cannot be added to cart',
             ],
 
             'quantity-error'            => 'مقدار درخواستی در دسترس نیست',
@@ -589,6 +589,10 @@ return [
             'password'            => 'کلمه عبور',
             'login-exist-message' => 'شما قبلاً با ما حساب کاربری دارید ، وارد شوید یا به عنوان مهمان ادامه دهید',
             'enter-coupon-code'   => 'شماره کوپن را وارد کنید',
+
+            'validations' => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [

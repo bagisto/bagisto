@@ -518,13 +518,13 @@ return [
                 'error'             => 'Cannot update the item(s) at the moment, please try again later.',
             ],
             'item'                      => [
-                'error_remove'   => 'No items to remove from the cart.',
-                'success'        => 'Item is successfully added to cart.',
-                'success-remove' => 'Item is successfully removed from the cart.',
+                'error_remove'       => 'No items to remove from the cart.',
+                'success'            => 'Item is successfully added to cart.',
+                'success-remove'     => 'Item is successfully removed from the cart.',
                 'success-all-remove' => 'All items is successfully removed from the cart.',
-                'error-add'      => 'Item cannot be added to cart, please try again later.',
-                'inactive'       => 'An item is inactive and was removed from cart.',
-                'inactive-add'   => 'Inactive item cannot be added to cart.',
+                'error-add'          => 'Item cannot be added to cart, please try again later.',
+                'inactive'           => 'An item is inactive and was removed from cart.',
+                'inactive-add'       => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error'            => 'Requested quantity is not available.',
             'cart-subtotal'             => 'Cart Subtotal',
@@ -593,6 +593,10 @@ return [
             'password'            => 'Password',
             'login-exist-message' => 'You already have an account with us, Sign in or continue as guest.',
             'enter-coupon-code'   => 'Enter Coupon Code',
+
+            'validations'         => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [

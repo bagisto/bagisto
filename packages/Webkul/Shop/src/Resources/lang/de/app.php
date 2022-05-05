@@ -516,13 +516,13 @@ return [
             ],
 
             'item'                      => [
-                'error_remove'   => 'Keine Artikel aus dem Warenkorb zu entfernen',
-                'success'        => 'Artikel wurde erfolgreich zum Warenkorb hinzugefügt',
-                'success-remove' => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt',
+                'error_remove'       => 'Keine Artikel aus dem Warenkorb zu entfernen',
+                'success'            => 'Artikel wurde erfolgreich zum Warenkorb hinzugefügt',
+                'success-remove'     => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt',
                 'success-all-remove' => 'All items is successfully removed from the cart.',
-                'error-add'      => 'Artikel kann nicht zum Warenkorb hinzugefügt werden. Bitte versuchen Sie es später erneut',
-                'inactive'       => 'Ein Artikel ist inaktiv und wurde aus dem Warenkorb entfernt.',
-                'inactive-add'   => 'Ein inaktiver Artikel kann nicht zum Warenkorb hinzugefügt werde.',
+                'error-add'          => 'Artikel kann nicht zum Warenkorb hinzugefügt werden. Bitte versuchen Sie es später erneut',
+                'inactive'           => 'Ein Artikel ist inaktiv und wurde aus dem Warenkorb entfernt.',
+                'inactive-add'       => 'Ein inaktiver Artikel kann nicht zum Warenkorb hinzugefügt werde.',
             ],
             'quantity-error'            => 'Die angeforderte Menge ist nicht verfügbar',
             'cart-subtotal'             => 'Warenkorb Zwischensumme',
@@ -588,6 +588,10 @@ return [
             'password'            => 'Passwort',
             'login-exist-message' => 'Sie haben bereits ein Konto bei uns, melden Sie sich an oder fahren Sie als Gast fort.',
             'enter-coupon-code'   => 'Gutscheincode eingeben',
+
+            'validations' => [
+                'numeric' => 'The ":attribute" field must be numeric',
+            ],
         ],
 
         'total' => [
