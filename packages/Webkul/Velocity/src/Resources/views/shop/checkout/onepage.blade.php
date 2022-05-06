@@ -162,6 +162,9 @@
                             },
                         },
 
+                        /**
+                         * Previous values for back button only.
+                         */
                         previousValues: {
                             address: {
                                 billing: {
