@@ -21,77 +21,77 @@
         id="checkout-template"
     >
         <div class="container">
-                <div id="checkout" class="checkout-process row offset-lg-1 col-lg-11 col-md-12">
-                    <h1 class="col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
+            <div id="checkout" class="checkout-process row offset-lg-1 col-lg-11 col-md-12">
+                <h1 class="col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
 
-                    <div class="col-lg-7 col-md-12">
-                        <div class="step-content information" id="address-section">
-                            @include('shop::checkout.onepage.customer-info')
-                        </div>
-
-                        <div
-                            class="step-content shipping"
-                            id="shipping-section"
-                            v-if="showShippingSection">
-                            <shipping-section
-                                :key="shippingComponentKey"
-                                @onShippingMethodSelected="shippingMethodSelected($event)">
-                            </shipping-section>
-                        </div>
-
-                        <div
-                            class="step-content payment"
-                            id="payment-section"
-                            v-if="showPaymentSection">
-                            <payment-section
-                                @onPaymentMethodSelected="paymentMethodSelected($event)">
-                            </payment-section>
-
-                            <coupon-component
-                                @onApplyCoupon="getOrderSummary"
-                                @onRemoveCoupon="getOrderSummary">
-                            </coupon-component>
-                        </div>
-
-                        <div
-                            class="step-content review"
-                            id="summary-section"
-                            v-if="showSummarySection">
-                            <review-section :key="reviewComponentKey">
-                                <div slot="summary-section">
-                                    <summary-section
-                                        discount="1"
-                                        :key="summaryComponentKey"
-                                        @onApplyCoupon="getOrderSummary"
-                                        @onRemoveCoupon="getOrderSummary"
-                                    ></summary-section>
-                                </div>
-
-                                <div slot="place-order-btn">
-                                    <div class="mb20">
-                                        <button
-                                            type="button"
-                                            class="theme-btn"
-                                            @click="placeOrder()"
-                                            :disabled="!isPlaceOrderEnabled"
-                                            v-if="selected_payment_method.method != 'paypal_smart_button'"
-                                            id="checkout-place-order-button">
-                                            {{ __('shop::app.checkout.onepage.place-order') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </review-section>
-                        </div>
+                <div class="col-lg-7 col-md-12">
+                    <div class="step-content information" id="address-section">
+                        @include('shop::checkout.onepage.customer-info')
                     </div>
 
-                    <div class="col-lg-4 col-md-12 offset-lg-1 order-summary-container top pt0">
-                        <summary-section :key="summaryComponentKey"></summary-section>
+                    <div
+                        class="step-content shipping"
+                        id="shipping-section"
+                        v-if="showShippingSection">
+                        <shipping-section
+                            :key="shippingComponentKey"
+                            @onShippingMethodSelected="shippingMethodSelected($event)">
+                        </shipping-section>
+                    </div>
 
-                        <div class="paypal-button-container mt10"></div>
+                    <div
+                        class="step-content payment"
+                        id="payment-section"
+                        v-if="showPaymentSection">
+                        <payment-section
+                            @onPaymentMethodSelected="paymentMethodSelected($event)">
+                        </payment-section>
+
+                        <coupon-component
+                            @onApplyCoupon="getOrderSummary"
+                            @onRemoveCoupon="getOrderSummary">
+                        </coupon-component>
+                    </div>
+
+                    <div
+                        class="step-content review"
+                        id="summary-section"
+                        v-if="showSummarySection">
+                        <review-section :key="reviewComponentKey">
+                            <div slot="summary-section">
+                                <summary-section
+                                    discount="1"
+                                    :key="summaryComponentKey"
+                                    @onApplyCoupon="getOrderSummary"
+                                    @onRemoveCoupon="getOrderSummary"
+                                ></summary-section>
+                            </div>
+
+                            <div slot="place-order-btn">
+                                <div class="mb20">
+                                    <button
+                                        type="button"
+                                        class="theme-btn"
+                                        @click="placeOrder()"
+                                        :disabled="!isPlaceOrderEnabled"
+                                        v-if="selected_payment_method.method != 'paypal_smart_button'"
+                                        id="checkout-place-order-button">
+                                        {{ __('shop::app.checkout.onepage.place-order') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </review-section>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-12 offset-lg-1 order-summary-container top pt0">
+                    <summary-section :key="summaryComponentKey"></summary-section>
+
+                    <div class="paypal-button-container mt10"></div>
+                </div>
             </div>
-        </script>
+        </div>
+    </script>
 
     <script type="text/javascript">
         (() => {
