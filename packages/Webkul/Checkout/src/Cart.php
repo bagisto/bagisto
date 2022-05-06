@@ -310,18 +310,8 @@ class Cart
         }
 
         foreach ($cart->items as $item) {
-            $this->cartItemRepository->delete($item->id);
-
-            if ($cart->items->count() == 0) {
-                $this->cartRepository->delete($cart->id);
-
-                if (session()->has('cart')) {
-                    session()->forget('cart');
-                }
-            }
+            $this->removeItem($item->id);
         }
-
-        $cart->save();
 
         Event::dispatch('checkout.cart.delete.all.after', $cart);
 
