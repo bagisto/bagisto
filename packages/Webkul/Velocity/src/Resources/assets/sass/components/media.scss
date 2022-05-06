@@ -953,6 +953,16 @@
     }
 }
 
+@media only screen and (max-width: 460px) {
+    .product-card-new {
+        max-width: 11rem;
+
+        .product-image-container img {
+            min-height: unset;
+        }
+    }
+}
+
 @media only screen and (max-width: 420px) {
     .sticky-header {
         display: none !important;
@@ -980,7 +990,7 @@
     }
 
     .product-card-new {
-        max-width: 10rem;
+        max-width: 9rem;
 
         .product-image-container img {
             min-height: unset;
@@ -990,7 +1000,7 @@
 
 @media only screen and (max-width: 360px) {
     .product-card-new {
-        max-width: 9rem;
+        max-width: 8rem;
 
         .product-image-container img {
             min-height: unset;
