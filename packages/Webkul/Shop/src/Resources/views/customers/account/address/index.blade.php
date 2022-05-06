@@ -85,13 +85,13 @@
                                     </span>
 
                                     <span>
-                                        <a href="javascript:void(0);" onclick="deleteAddress('{{ __('shop::app.customer.account.address.index.confirm-delete') }}')">
+                                        <a href="javascript:void(0);" onclick="deleteAddress('{{ __('shop::app.customer.account.address.index.confirm-delete') }}', '{{ $address->id }}')">
                                             {{ __('shop::app.customer.account.address.index.delete') }}
                                         </a>
 
-                                        <form id="deleteAddressForm" action="{{ route('address.delete', $address->id) }}" method="post">
+                                        <form id="deleteAddressForm{{ $address->id }}" action="{{ route('address.delete', $address->id) }}" method="post">
                                             @method('delete')
-                                            
+
                                             @csrf
                                         </form>
                                     </span>
@@ -109,12 +109,12 @@
 
 @push('scripts')
     <script>
-        function deleteAddress(message) {
+        function deleteAddress(message, addressId) {
             if (! confirm(message)) {
                 return;
             }
 
-            $('#deleteAddressForm').submit();
+            $(`#deleteAddressForm${addressId}`).submit();
         }
     </script>
 @endpush
