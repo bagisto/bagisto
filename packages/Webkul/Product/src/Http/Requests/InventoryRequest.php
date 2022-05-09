@@ -25,7 +25,7 @@ class InventoryRequest extends FormRequest
     {
         return [
             'inventories'   => 'required|array',
-            'inventories.*' => 'required|numeric|min:0',
+            'inventories.*' => 'required|integer|min:0',
         ];
     }
 
@@ -38,7 +38,7 @@ class InventoryRequest extends FormRequest
     {
         return [
             'inventories.*.required' => __('admin::app.catalog.products.validations.quantity-required'),
-            'inventories.*.numeric'  => __('admin::app.catalog.products.validations.quantity-numeric'),
+            'inventories.*.integer'  => __('admin::app.catalog.products.validations.quantity-integer'),
             'inventories.*.min'      => __('admin::app.catalog.products.validations.quantity-min-zero'),
         ];
     }

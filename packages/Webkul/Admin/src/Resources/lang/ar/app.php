@@ -619,7 +619,7 @@ return [
             'saved-inventory-message'       => 'تم حفظ مخزون المنتج بنجاح.',
             'validations'                   => [
                 'quantity-required' => 'Quantity is required.',
-                'quantity-numeric'  => 'Quantity should be numeric.',
+                'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
         ],
