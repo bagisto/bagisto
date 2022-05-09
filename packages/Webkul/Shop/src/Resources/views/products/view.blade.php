@@ -277,6 +277,10 @@
             }
         });
 
+        $(document).ready(function() {
+            document.getElementById('loader').style.display = 'none';
+        });
+
         window.onload = function() {
             var thumbList = document.getElementsByClassName('thumb-list')[0];
             var thumbFrame = document.getElementsByClassName('thumb-frame');

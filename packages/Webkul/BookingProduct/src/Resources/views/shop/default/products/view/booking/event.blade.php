@@ -1,10 +1,12 @@
 @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\EventTicket')
 
 <div class="booking-info-row">
-    <span class="icon bp-slot-icon"></span>
     <span class="title">
+        <span class="icon bp-slot-icon"></span>
+
         {{ __('bookingproduct::app.shop.products.event-on') }}
     </span>
+
     <span class="value">
         {!! $bookingSlotHelper->getEventDate($bookingProduct) !!}
     </span>
@@ -13,7 +15,6 @@
 <event-tickets></event-tickets>
 
 @push('scripts')
-
     <script type="text/x-template" id="event-tickets-template">
         <div class="book-slots">
             <label style="font-weight: 600">{{ __('bookingproduct::app.shop.products.book-your-ticket') }}</label>
@@ -29,6 +30,7 @@
                             <span class="regular-price">@{{ ticket.original_formated_price }}</span>
                             <span class="special-price">@{{ ticket.formated_price_text }}</span>
                         </div>
+
                         <div v-else class="ticket-price">
                             @{{ ticket.formated_price_text }}
                         </div>
@@ -50,9 +52,7 @@
     </script>
 
     <script>
-
         Vue.component('event-tickets', {
-
             template: '#event-tickets-template',
 
             inject: ['$validator'],
@@ -69,11 +69,10 @@
                 }
             }
         });
-
     </script>
 
     <style>
-        .ticket-price .regular-price{
+        .ticket-price .regular-price {
             color: #a5a5a5;
             text-decoration: line-through;
             margin-right: 5px;

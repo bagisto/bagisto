@@ -1,6 +1,7 @@
 <div class="booking-info-row">
-    <span class="icon bp-slot-icon"></span>
     <span class="title">
+        <span class="icon bp-slot-icon"></span>
+
         {{ __('bookingproduct::app.shop.products.slot-duration') }} :
 
         {{ __('bookingproduct::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->appointment_slot->duration]) }}
@@ -10,15 +11,14 @@
 @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\AppointmentSlot')
 
 <div class="booking-info-row">
-    <span class="icon bp-slot-icon"></span>
     <span class="title">
+        <span class="icon bp-slot-icon"></span>
+
         {{ __('bookingproduct::app.shop.products.today-availability') }}
     </span>
 
     <span class="value">
-    
         {!! $bookingSlotHelper->getTodaySlotsHtml($bookingProduct) !!}
-
     </span>
 
     <div class="toggle" @click="showDaysAvailability = ! showDaysAvailability">
@@ -28,7 +28,6 @@
     </div>
 
     <div class="days-availability" v-show="showDaysAvailability">
-
         <table>
             <tbody>
                 @foreach ($bookingSlotHelper->getWeekSlotDurations($bookingProduct) as $day)
@@ -48,7 +47,6 @@
                 @endforeach
             </tbody>
         </table>
-
     </div>
 </div>
 
