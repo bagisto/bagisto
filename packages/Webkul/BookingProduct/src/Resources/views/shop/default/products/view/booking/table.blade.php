@@ -21,13 +21,13 @@
         {!! $bookingSlotHelper->getTodaySlotsHtml($bookingProduct) !!}
     </span>
 
-    <div class="toggle" @click="showDaysAvailability = ! showDaysAvailability">
+    <div class="value toggle" @click="showDaysAvailability = ! showDaysAvailability">
         {{ __('bookingproduct::app.shop.products.slots-for-all-days') }}
 
         <i class="icon" :class="[! showDaysAvailability ? 'arrow-down-icon' : 'arrow-up-icon']"></i>
     </div>
 
-    <div class="days-availability" v-show="showDaysAvailability">
+    <div class="value days-availability" v-show="showDaysAvailability">
 
         <table>
             <tbody>
