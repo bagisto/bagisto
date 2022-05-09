@@ -1,29 +1,27 @@
-@import "icons";
+@import 'icons';
 
 .booking-information {
     margin-bottom: 15px;
-    border-top: 1px solid #E8E8E8;
+    border-top: 1px solid #e8e8e8;
     padding-top: 15px;
 
     .booking-info-row {
-        padding-left: 32px;
         margin-bottom: 20px;
-        position: relative;
 
-        .icon {
-            position: absolute;
-            left: 0;
-            top: -4px;
+        .bp-location-icon {
+            width: 30px;
+            height: 24px;
         }
 
         .title {
-            color: #5E5E5E;
             display: block;
             margin-bottom: 5px;
+            color: #5e5e5e;
         }
 
         .value {
             display: block;
+            padding-left: 32px;
             margin-bottom: 5px;
 
             .text-danger {
@@ -32,7 +30,7 @@
         }
 
         .toggle {
-            color: #0041FF;
+            color: #0041ff;
             cursor: pointer;
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -76,13 +74,13 @@
                             font-size: 14px;
                             padding-left: 15px;
                             padding-right: 0;
-                            color: #5E5E5E;
+                            color: #5e5e5e;
                         }
 
                         .text-danger {
                             color: #ff5656;
                         }
-                    }    
+                    }
                 }
             }
         }
@@ -99,12 +97,13 @@
             color: #242424;
             margin-top: 0;
         }
-        
+
         label {
             color: #3a3a3a;
         }
 
-        .control-group, .form-group {
+        .control-group,
+        .form-group {
             label {
                 font-size: 16px;
             }
@@ -118,11 +117,13 @@
             width: 100%;
             float: left;
 
-            .control-group:not(.quantity), .form-group:not(.quantity) {
+            .control-group:not(.quantity),
+            .form-group:not(.quantity) {
                 width: 50%;
                 float: left;
 
-                .control, .form-style {
+                .control,
+                .form-style {
                     width: 100%;
                 }
 
@@ -131,7 +132,7 @@
 
                     &::after {
                         top: 16px;
-                        left: 100%; 
+                        left: 100%;
                     }
 
                     .cross-icon {
@@ -161,13 +162,12 @@
         }
 
         .ticket-list {
-
             .ticket-item {
                 width: 100%;
                 display: inline-block;
                 padding: 16px 0;
                 border-bottom: solid 1px #e8e8e8;
-                
+
                 &:last-child {
                     border-bottom: 0;
                 }
@@ -182,7 +182,7 @@
                     }
 
                     .ticket-price {
-                        color: #5E5E5E;
+                        color: #5e5e5e;
                     }
                 }
 
@@ -191,7 +191,8 @@
                     display: inline-block;
                     text-align: right;
 
-                    .control-group, .form-group {
+                    .control-group,
+                    .form-group {
                         margin: 0;
 
                         &.quantity {
@@ -201,7 +202,7 @@
                             margin-bottom: 0;
                             border-top: 0;
                             padding-top: 0;
-                            
+
                             label {
                                 display: none;
                             }
@@ -235,6 +236,21 @@
                     color: #242424;
                     font-weight: 400;
                     margin-top: 4px;
+                }
+            }
+        }
+    }
+}
+
+/**
+ *  RTL.
+ */
+body {
+    &.rtl {
+        .booking-information {
+            .booking-info-row {
+                .value {
+                    padding-right: 32px;
                 }
             }
         }
