@@ -60,8 +60,10 @@ class CMSPageDataGrid extends DataGrid
         $this->addAction([ 
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'shop.cms.view.front',
+            'route'  => 'shop.cms.page',
+            'index'  => 'url_key',
             'icon'   => 'icon eye-icon',
+            
         ]);
 
         $this->addAction([

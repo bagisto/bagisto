@@ -24,10 +24,6 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
          */
         Route::get('page/{slug}', [PagePresenterController::class, 'presenter'])->name('shop.cms.page');
 
-        Route::get('preview/{id}', [PagePresenterController::class, 'view'])->defaults('_config', [
-            'view' => 'shop::cms.page',
-        ])->name('shop.cms.view.front');
-
         /**
          * Fallback route.
          */

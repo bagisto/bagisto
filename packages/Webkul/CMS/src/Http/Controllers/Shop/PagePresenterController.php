@@ -15,7 +15,6 @@ class PagePresenterController extends Controller
      */
     public function __construct(protected CmsRepository $cmsRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -29,24 +28,5 @@ class PagePresenterController extends Controller
         $page = $this->cmsRepository->findByUrlKeyOrFail($urlKey);
 
         return view('shop::cms.page')->with('page', $page);
-    }
-
-    /**
-     * Preview the CMS page from datagrid.
-     *
-     * @param  int  $id
-     * @return \Illuminate\View\View
-     */
-    public function view($id)
-    {
-        $page = $this->cmsRepository->findOrFail($id);
-        
-        request()->merge(['url_key' => $page->url_key]);
-        
-        if (is_null($page)) {
-            abort(404);
-        }
-
-        return view($this->_config['view'], compact('page'));
     }
 }
