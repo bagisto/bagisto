@@ -105,9 +105,9 @@ Take advantage of two of the hottest frameworks used in this project -- Laravel 
 
 * **SERVER**: Apache 2 or NGINX.
 * **RAM**: 3 GB or higher.
-* **PHP**: 8.0 or higher.
+* **PHP**: 8.0 and 8.1.
 * **For MySQL users**: 5.7.23 or higher.
-* **For MariaDB users**: 10.2.7 or Higher.
+* **For MariaDB users**: 10.2.7 or higher.
 * **Node**: 8.11.3 LTS or higher.
 * **Composer**: 2.3.5 or higher.
 
