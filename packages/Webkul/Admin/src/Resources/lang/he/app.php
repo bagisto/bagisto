@@ -544,10 +544,10 @@ return [
                 'bundle'                        => 'Bundle',
                 'downloadable'                  => 'Downloadable',
                 'grouped'                       => 'Grouped',
-                'virtual'                       => 'Virtual',            
+                'virtual'                       => 'Virtual',
                 'configurable'                  => 'Configurable',
 
-            ],            
+            ],
             'familiy'                       => 'Attribute Family',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Configurable Attributes',
@@ -621,6 +621,11 @@ return [
             'cancel'                        => 'Cancel',
             'saved-inventory-message'       => 'Product inventory saved successfully.',
             'image-size'                    => 'Image resolution should be like 640px X 640px',
+            'validations'                   => [
+                'quantity-required' => 'Quantity is required.',
+                'quantity-numeric'  => 'Quantity should be numeric.',
+                'quantity-min-zero' => 'Quantity should be greater then zero.',
+            ],
         ],
 
         'attributes' => [

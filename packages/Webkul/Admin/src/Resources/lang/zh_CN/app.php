@@ -39,51 +39,51 @@ return [
         'country'         => '国家',
         'state'           => '州',
         'true'            => '真的',
-        'false'           => '假的'
+        'false'           => '假的',
     ],
 
     'layouts' => [
-        'app-version'        => '版本 : :version',
-        'my-account'         => '我的账号',
-        'logout'             => '退出',
-        'visit-shop'         => '访问商店',
-        'dashboard'          => '仪表盘',
-        'sales'              => '销售列表',
-        'orders'             => '订单列表',
-        'shipments'          => '货运列表',
-        'invoices'           => '发票列表',
-        'refunds'            => '退款列表',
-        'catalog'            => '商品目录',
-        'products'           => '商品中心',
-        'categories'         => '商品分类',
-        'attributes'         => '属性',
-        'attribute-families' => '属性家族',
-        'customers'          => '客户列表',
-        'groups'             => '客户群',
-        'reviews'            => '评论列表',
-        'configure'          => '全局配置',
-        'settings'           => '系统设置',
-        'locales'            => '多语言',
-        'currencies'         => '货币列表',
-        'exchange-rates'     => '汇率换算',
-        'inventory-sources'  => '货源列表',
-        'channels'           => '渠道列表',
-        'users'              => '后台用户',
-        'roles'              => '权限列表',
-        'sliders'            => '图片轮播',
-        'taxes'              => '税务列表',
-        'tax-categories'     => '税务目录',
-        'tax-rates'          => '税率',
-        'marketing'          => '市场营销',
-        'promotions'         => '促销活动',
-        'email-marketing'    => '邮件营销',
-        'campaigns'          => '广告活动',
-        'email-templates'    => '邮件模板',
-        'events'             => '事件列表',
-        'sitemaps'           => 'Sitemaps',
-        'discount'           => '折扣',
-        'cms'                => 'CMS',
-        'transactions'       => '事物列表',
+        'app-version'              => '版本 : :version',
+        'my-account'               => '我的账号',
+        'logout'                   => '退出',
+        'visit-shop'               => '访问商店',
+        'dashboard'                => '仪表盘',
+        'sales'                    => '销售列表',
+        'orders'                   => '订单列表',
+        'shipments'                => '货运列表',
+        'invoices'                 => '发票列表',
+        'refunds'                  => '退款列表',
+        'catalog'                  => '商品目录',
+        'products'                 => '商品中心',
+        'categories'               => '商品分类',
+        'attributes'               => '属性',
+        'attribute-families'       => '属性家族',
+        'customers'                => '客户列表',
+        'groups'                   => '客户群',
+        'reviews'                  => '评论列表',
+        'configure'                => '全局配置',
+        'settings'                 => '系统设置',
+        'locales'                  => '多语言',
+        'currencies'               => '货币列表',
+        'exchange-rates'           => '汇率换算',
+        'inventory-sources'        => '货源列表',
+        'channels'                 => '渠道列表',
+        'users'                    => '后台用户',
+        'roles'                    => '权限列表',
+        'sliders'                  => '图片轮播',
+        'taxes'                    => '税务列表',
+        'tax-categories'           => '税务目录',
+        'tax-rates'                => '税率',
+        'marketing'                => '市场营销',
+        'promotions'               => '促销活动',
+        'email-marketing'          => '邮件营销',
+        'campaigns'                => '广告活动',
+        'email-templates'          => '邮件模板',
+        'events'                   => '事件列表',
+        'sitemaps'                 => 'Sitemaps',
+        'discount'                 => '折扣',
+        'cms'                      => 'CMS',
+        'transactions'             => '事物列表',
         'newsletter-subscriptions' => '邮件订阅',
     ],
 
@@ -158,7 +158,7 @@ return [
         'order-count'               => ':count 订单',
         'revenue'                   => '收入 :total',
         'stock-threshold'           => '库存临界点',
-        'qty-left'                  => ':qty 剩余'
+        'qty-left'                  => ':qty 剩余',
     ],
 
     'datagrid' => [
@@ -167,7 +167,7 @@ return [
             'delete-success' => '选择的 :resource 被成功删除',
             'partial-action' => '由于受限制的系统限制, 某些 :resource 操作未执行',
             'update-success' => '选择的 :resource 被成功更新',
-            'no-resource'    => '为操作提供的资源不足'
+            'no-resource'    => '为操作提供的资源不足',
         ],
 
         'id'               => 'ID',
@@ -245,7 +245,7 @@ return [
         'disapproved'      => '未获批准',
         'coupon-code'      => '优惠码',
         'times-used'       => '使用次数',
-        '创建-date'     => '创建日期',
+        '创建-date'          => '创建日期',
         'expiration-date'  => '截止日期',
         'edit'             => '编辑',
         'delete'           => '删除',
@@ -274,7 +274,7 @@ return [
         'password'             => '密码',
         'confirm-password'     => '确认密码',
         'change-password'      => '修改密码',
-        'current-password'     => '当前密码'
+        'current-password'     => '当前密码',
     ],
 
     'users' => [
@@ -285,7 +285,7 @@ return [
             'password'         => '密码',
             'confirm-password' => '确认密码',
             'back-link-title'  => '返回登录',
-            'submit-btn-title' => '发送密码重置邮件'
+            'submit-btn-title' => '发送密码重置邮件',
         ],
 
         'reset-password' => [
@@ -294,7 +294,7 @@ return [
             'password'         => '密码',
             'confirm-password' => '确认密码',
             'back-link-title'  => '返回登录',
-            'submit-btn-title' => '重置密码'
+            'submit-btn-title' => '重置密码',
         ],
 
         'roles' => [
@@ -308,7 +308,7 @@ return [
             'access-control'  => '访问控制',
             'permissions'     => '权限',
             'custom'          => '自定义',
-            'all'             => '所有'
+            'all'             => '所有',
         ],
 
         'users' => [
@@ -334,7 +334,7 @@ return [
             'password-match'       => '当前密码不匹配.',
             'account-save'         => '帐户更改已成功保存.',
             'login-error'          => '请检查您的凭据并重试.',
-            'activate-warning'     => '您的帐号尚未激活，请联系管理员.'
+            'activate-warning'     => '您的帐号尚未激活，请联系管理员.',
         ],
 
         'sessions' => [
@@ -343,8 +343,8 @@ return [
             'password'                   => '密码',
             'forget-password-link-title' => '忘记密码?',
             'remember-me'                => '记得我',
-            'submit-btn-title'           => '登入'
-        ]
+            'submit-btn-title'           => '登入',
+        ],
     ],
 
     'sales' => [
@@ -415,35 +415,35 @@ return [
             'notify-customer'              => '通知客户',
             'customer-notified'            => ':date |客户 <b>已通知</b>',
             'customer-not-notified'        => ':date |客户 <b>未通知</b>',
-            'transactions'                 => '交易'
+            'transactions'                 => '交易',
         ],
 
         'invoices' => [
-            'title'                  => '发票列表',
-            'id'                     => 'ID',
-            'invoice'                => '发票',
-            'invoice-id'             => '发票 ID',
-            'date'                   => '发票日期',
-            'order-id'               => '订单ID',
-            'customer-name'          => '顾客姓名',
-            'status'                 => '状态',
-            'amount'                 => '数量',
-            'action'                 => '行动',
-            'add-title'              => '创建发票',
-            'save-btn-title'         => '保存发票',
-            'qty'                    => '数量',
-            'qty-ordered'            => '已订购数量',
-            'qty-to-invoice'         => '发票数量',
-            'view-title'             => '发票 #:invoice_id',
-            'bill-to'                => '记账到',
-            'ship-to'                => '运输到',
-            'print'                  => '打印',
-            'order-date'             => '订单日期',
-            'creation-error'         => '订单不允许创建发票.',
-            'product-error'          => '没有产品就不能创造发票.',
-            'status-overdue'         => '逾期',
-            'status-pending'         => '待批准支付',
-            'status-paid'            => '已支付',
+            'title'          => '发票列表',
+            'id'             => 'ID',
+            'invoice'        => '发票',
+            'invoice-id'     => '发票 ID',
+            'date'           => '发票日期',
+            'order-id'       => '订单ID',
+            'customer-name'  => '顾客姓名',
+            'status'         => '状态',
+            'amount'         => '数量',
+            'action'         => '行动',
+            'add-title'      => '创建发票',
+            'save-btn-title' => '保存发票',
+            'qty'            => '数量',
+            'qty-ordered'    => '已订购数量',
+            'qty-to-invoice' => '发票数量',
+            'view-title'     => '发票 #:invoice_id',
+            'bill-to'        => '记账到',
+            'ship-to'        => '运输到',
+            'print'          => '打印',
+            'order-date'     => '订单日期',
+            'creation-error' => '订单不允许创建发票.',
+            'product-error'  => '没有产品就不能创造发票.',
+            'status-overdue' => '逾期',
+            'status-pending' => '待批准支付',
+            'status-paid'    => '已支付',
         ],
 
         'shipments' => [
@@ -474,26 +474,26 @@ return [
         ],
 
         'refunds' => [
-            'title'              => '退款列表',
-            'id'                 => 'ID',
-            'add-title'          => '创建退款',
-            'save-btn-title'     => '退款',
-            'order-id'           => '订单ID',
-            'qty-ordered'        => '已订购数量',
-            'qty-to-refund'      => '退款数量',
-            'refund-shipping'    => '退运费',
-            'adjustment-refund'  => '调整退款',
-            'adjustment-fee'     => '调整费',
-            'update-qty'         => '更新数量',
-            'invalid-qty'        => '我们发现退货数量无效.',
-            'refund-limit-error' => '最多可以退款的钱是:amount.',
-            'refunded'           => '已退款',
-            'date'               => '退款日期',
-            'customer-name'      => '顾客姓名',
-            'status'             => '状态',
-            'action'             => '行动',
-            'view-title'         => '退款 #:refund_id',
-            'invalid-refund-amount-error' => '退款金额不应为零.'
+            'title'                       => '退款列表',
+            'id'                          => 'ID',
+            'add-title'                   => '创建退款',
+            'save-btn-title'              => '退款',
+            'order-id'                    => '订单ID',
+            'qty-ordered'                 => '已订购数量',
+            'qty-to-refund'               => '退款数量',
+            'refund-shipping'             => '退运费',
+            'adjustment-refund'           => '调整退款',
+            'adjustment-fee'              => '调整费',
+            'update-qty'                  => '更新数量',
+            'invalid-qty'                 => '我们发现退货数量无效.',
+            'refund-limit-error'          => '最多可以退款的钱是:amount.',
+            'refunded'                    => '已退款',
+            'date'                        => '退款日期',
+            'customer-name'               => '顾客姓名',
+            'status'                      => '状态',
+            'action'                      => '行动',
+            'view-title'                  => '退款 #:refund_id',
+            'invalid-refund-amount-error' => '退款金额不应为零.',
 
         ],
 
@@ -510,14 +510,14 @@ return [
             'order-id'            => '订单ID',
             'invoice-id'          => '发票ID',
             'status'              => '状态',
-            '创建-at'          => '创建于',
+            '创建-at'               => '创建于',
             'transaction-details' => '交易细节',
             'response'            => [
-                'invoice-missing'    => '此发票ID不存在',
-                'transaction-saved'  => '交易已保存',
-                'already-paid'       => '此发票已支付'
-            ]
-        ]
+                'invoice-missing'   => '此发票ID不存在',
+                'transaction-saved' => '交易已保存',
+                'already-paid'      => '此发票已支付',
+            ],
+        ],
     ],
 
     'catalog' => [
@@ -603,66 +603,71 @@ return [
             'save'                          => '保存',
             'cancel'                        => '取消',
             'saved-inventory-message'       => '产品库存已成功保存.',
+            'validations'                   => [
+                'quantity-required' => 'Quantity is required.',
+                'quantity-numeric'  => 'Quantity should be numeric.',
+                'quantity-min-zero' => 'Quantity should be greater then zero.',
+            ],
         ],
 
         'attributes' => [
-            'title'                => '属性列表',
-            'add-title'            => '添加属性',
-            'edit-title'           => '编辑属性',
-            'save-btn-title'       => '保存属性',
-            'general'              => '一般的',
-            'code'                 => '属性代码',
-            'type'                 => '属性类型',
-            'text'                 => '文本',
-            'textarea'             => '文本框',
-            'enable-wysiwyg'       => 'Enable Wysiwyg Editor',
-            'price'                => '价格',
-            'boolean'              => '布尔值',
-            'select'               => '选择',
-            'multiselect'          => '多选',
-            'datetime'             => '时间日期',
-            'date'                 => '日期',
-            'label'                => '标签',
-            'admin'                => '管理',
-            'options'              => '选项',
-            'position'             => '位置',
-            'add-option-btn-title' => '添加选项',
+            'title'                       => '属性列表',
+            'add-title'                   => '添加属性',
+            'edit-title'                  => '编辑属性',
+            'save-btn-title'              => '保存属性',
+            'general'                     => '一般的',
+            'code'                        => '属性代码',
+            'type'                        => '属性类型',
+            'text'                        => '文本',
+            'textarea'                    => '文本框',
+            'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
+            'price'                       => '价格',
+            'boolean'                     => '布尔值',
+            'select'                      => '选择',
+            'multiselect'                 => '多选',
+            'datetime'                    => '时间日期',
+            'date'                        => '日期',
+            'label'                       => '标签',
+            'admin'                       => '管理',
+            'options'                     => '选项',
+            'position'                    => '位置',
+            'add-option-btn-title'        => '添加选项',
             'load-more-options-btn-title' => '加载更多选项',
-            'validations'          => '验证',
-            'input_validation'     => '输入验证',
-            'is_required'          => '是必须的',
-            'is_unique'            => '是独特的',
-            'number'               => '数字',
-            'decimal'              => '十进制',
-            'email'                => '电子邮件',
-            'url'                  => '网址',
-            'configuration'        => '配置',
-            'status'               => '状态',
-            'yes'                  => 'Yes',
-            'no'                   => 'No',
-            'value_per_locale'     => '每个地区的值',
-            'value_per_channel'    => '每个渠道的值',
-            'is_filterable'        => '在分层导航中使用',
-            'is_configurable'      => '用于创建可配置产品',
-            'admin_name'           => '管理员姓名',
-            'is_visible_on_front'  => '可见于前端产品查看页',
-            'swatch_type'          => '样本类型',
-            'dropdown'             => '下拉菜单',
-            'color-swatch'         => '颜色样本',
-            'image-swatch'         => '图像样本',
-            'text-swatch'          => '文本样本',
-            'swatch'               => '样本',
-            'image'                => '图片',
-            'file'                 => '文件',
-            'checkbox'             => '多选框',
-            'use_in_flat'          => "在产品平面表中创建",
-            'is_comparable'        => "属性可比",
-            'default_null_option'  => '创建默认空选项',
-            'validation-messages'          => [
-                'max-size' => '图像大小必须小于600KB'
-            ]
+            'validations'                 => '验证',
+            'input_validation'            => '输入验证',
+            'is_required'                 => '是必须的',
+            'is_unique'                   => '是独特的',
+            'number'                      => '数字',
+            'decimal'                     => '十进制',
+            'email'                       => '电子邮件',
+            'url'                         => '网址',
+            'configuration'               => '配置',
+            'status'                      => '状态',
+            'yes'                         => 'Yes',
+            'no'                          => 'No',
+            'value_per_locale'            => '每个地区的值',
+            'value_per_channel'           => '每个渠道的值',
+            'is_filterable'               => '在分层导航中使用',
+            'is_configurable'             => '用于创建可配置产品',
+            'admin_name'                  => '管理员姓名',
+            'is_visible_on_front'         => '可见于前端产品查看页',
+            'swatch_type'                 => '样本类型',
+            'dropdown'                    => '下拉菜单',
+            'color-swatch'                => '颜色样本',
+            'image-swatch'                => '图像样本',
+            'text-swatch'                 => '文本样本',
+            'swatch'                      => '样本',
+            'image'                       => '图片',
+            'file'                        => '文件',
+            'checkbox'                    => '多选框',
+            'use_in_flat'                 => '在产品平面表中创建',
+            'is_comparable'               => '属性可比',
+            'default_null_option'         => '创建默认空选项',
+            'validation-messages'         => [
+                'max-size' => '图像大小必须小于600KB',
+            ],
         ],
-        'families' => [
+        'families'   => [
             'title'                => '家庭',
             'add-family-btn-title' => '添加家庭',
             'add-title'            => '添加家庭',
@@ -680,7 +685,7 @@ return [
             'type'                 => '类型',
             'add-attribute-title'  => '添加属性标题',
             'search'               => '搜索',
-            'group-exist-error'    => '同名组已存在.'
+            'group-exist-error'    => '同名组已存在.',
         ],
         'categories' => [
             'title'                    => '分类列表',
@@ -709,7 +714,7 @@ return [
             'image'                    => '图片',
             'filterable-attributes'    => '可过滤属性',
             'attributes'               => '属性列表',
-        ]
+        ],
     ],
 
     'configuration' => [
@@ -731,10 +736,10 @@ return [
             'code'            => '代码',
             'description'     => '描述',
             'select-taxrates' => '选择税率',
-            'edit' => [
+            'edit'            => [
                 'title'             => '编辑选择分类',
-                'edit-button-title' => '编辑选择分类'
-            ]
+                'edit-button-title' => '编辑选择分类',
+            ],
         ],
 
         'tax-rates' => [
@@ -751,11 +756,11 @@ return [
             'select-state'   => '选择地区、州或省.',
             'country'        => '国家',
             'tax_rate'       => '率',
-            'edit' => [
+            'edit'           => [
                 'title'             => '编辑税率',
-                'edit-button-title' => '编辑率'
+                'edit-button-title' => '编辑率',
             ],
-            'zip_code' => '邮政编码',
+            'zip_code'       => '邮政编码',
         ],
 
         'sales' => [
@@ -764,13 +769,13 @@ return [
                 'save-btn-title' => '保存',
                 'description'    => '描述',
                 'active'         => '活跃的',
-                'status'         => '状态'
-            ]
-        ]
+                'status'         => '状态',
+            ],
+        ],
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'title'             => '多语言',
             'add-title'         => '添加语言',
             'edit-title'        => '编辑语言',
@@ -784,15 +789,15 @@ return [
             'delete-success'    => '语言删除成功.',
             'last-delete-error' => '至少需要一个语言设置.',
         ],
-        'countries' => [
+        'countries'         => [
             'title'          => '国家',
             'add-title'      => '添加国家',
             'save-btn-title' => '保存国家',
             'general'        => '一般的',
             'code'           => '代码',
-            'name'           => '名称'
+            'name'           => '名称',
         ],
-        'currencies' => [
+        'currencies'        => [
             'title'             => '货币列表',
             'add-title'         => '添加货币',
             'edit-title'        => '编辑货币',
@@ -806,7 +811,7 @@ return [
             'delete-success'    => '货币删除成功.',
             'last-delete-error' => '至少一个货币是必须的.',
         ],
-        'exchange_rates' => [
+        'exchange_rates'    => [
             'title'                    => '汇率换算',
             'add-title'                => '添加汇率',
             'edit-title'               => '编辑汇率',
@@ -852,7 +857,7 @@ return [
             'delete-success'    => '已成功删除货源.',
             'last-delete-error' => '至少一个货源是必须的.',
         ],
-        'channels' => [
+        'channels'          => [
             'title'                  => '渠道列表',
             'add-title'              => '添加渠道',
             'edit-title'             => '编辑渠道',
@@ -886,7 +891,7 @@ return [
             'seo-keywords'           => 'Meta关键词',
             'maintenance-mode'       => '维护模式',
             'maintenance-mode-text'  => '消息',
-            'allowed-ips'            => '被允许的IP'
+            'allowed-ips'            => '被允许的IP',
         ],
 
         'sliders' => [
@@ -920,19 +925,19 @@ return [
             'code'            => '代码',
             'description'     => '描述',
             'select-taxrates' => '选择税率',
-            'edit' => [
+            'edit'            => [
                 'title'             => '编辑税务分类',
-                'edit-button-title' => '编辑税务分类'
+                'edit-button-title' => '编辑税务分类',
             ],
-            'create-success' => '新的税务分类已创建',
-            'create-error'   => '错误, 当创建税务分类时',
-            'update-success' => '成功更新税务分类',
-            'update-error'   => '错误, 当更新税务分类时',
-            'atleast-one'    => '不能删除最后的税务分类',
-            'delete'         => '税务分类成功删除'
+            'create-success'  => '新的税务分类已创建',
+            'create-error'    => '错误, 当创建税务分类时',
+            'update-success'  => '成功更新税务分类',
+            'update-error'    => '错误, 当更新税务分类时',
+            'atleast-one'     => '不能删除最后的税务分类',
+            'delete'          => '税务分类成功删除',
         ],
 
-        'tax-rates' => [
+        'tax-rates'   => [
             'title'          => '税率',
             'add-title'      => '创建税率',
             'edit-title'     => '编辑税率',
@@ -946,9 +951,9 @@ return [
             'select-state'   => '选择地区、州或省.',
             'country'        => '国家',
             'tax_rate'       => '率',
-            'edit' => [
+            'edit'           => [
                 'title'             => '编辑税率',
-                'edit-button-title' => '编辑税率'
+                'edit-button-title' => '编辑税率',
             ],
             'zip_code'       => '邮政编码',
             'create-success' => '税率创建成功',
@@ -956,11 +961,11 @@ return [
             'update-success' => '税率更新成功',
             'update-error'   => '错误! 税率不能被更新',
             'delete'         => '税率删除成功',
-            'atleast-one'    => '不能删除最后一个税率'
+            'atleast-one'    => '不能删除最后一个税率',
         ],
         'development' => [
             'title' => '发展',
-        ]
+        ],
     ],
 
     'customers' => [
@@ -972,7 +977,7 @@ return [
             'code'            => '代码',
             'name'            => '名称',
             'is_user_defined' => '用户已定义',
-            'yes'             => 'Yes'
+            'yes'             => 'Yes',
         ],
 
         'addresses' => [
@@ -1010,7 +1015,7 @@ return [
             'title'      => '添加备注',
             'save-note'  => '保存备注',
             'enter-note' => '确认备注',
-            'help-title' => '给这个客户添加备注'
+            'help-title' => '给这个客户添加备注',
         ],
 
         'customers' => [
@@ -1041,7 +1046,7 @@ return [
             'mass-update-success'       => '客户列表已更新成功',
             'status'                    => '状态',
             'active'                    => '活跃的',
-            'inactive'                  => '不活跃'
+            'inactive'                  => '不活跃',
         ],
 
         'reviews' => [
@@ -1052,7 +1057,7 @@ return [
             'comment'     => '评论',
             'pending'     => '待批准',
             'approved'    => '批准',
-            'disapproved' => '不赞成'
+            'disapproved' => '不赞成',
         ],
 
         'subscribers' => [
@@ -1062,18 +1067,18 @@ return [
             'is_subscribed'  => '订阅',
             'edit-btn-title' => '更新邮件订阅者',
             'update-success' => '订阅者已成功更新',
-            'update-failed' => '错误! 您不能取消订阅订阅者',
-            'delete' => '订阅已成功删除',
-            'delete-failed' => '错误! 订阅不能被删除',
+            'update-failed'  => '错误! 您不能取消订阅订阅者',
+            'delete'         => '订阅已成功删除',
+            'delete-failed'  => '错误! 订阅不能被删除',
             'update-failed'  => '错误! 您不能取消订阅者',
             'delete'         => '订阅已成功删除',
-            'delete-failed'  => '错误! 订阅不能被删除'
+            'delete-failed'  => '错误! 订阅不能被删除',
         ],
 
         'orders' => [
             'list'  => ':customer_name的列表',
-            'title' => '订单列表'
-        ]
+            'title' => '订单列表',
+        ],
     ],
 
     'promotions' => [
@@ -1164,26 +1169,26 @@ return [
         ],
 
         'catalog-rules' => [
-            'title'            => '商品目录规则',
-            'add-title'        => '添加商品目录规则',
-            'edit-title'       => '编辑商品目录规则',
-            'save-btn-title'   => '保存商品目录规则',
-            'rule-information' => '规则信息',
-            'name'             => '名称',
-            'description'      => '描述',
-            'status'           => '状态',
-            'is-active'        => '商品目录规则是活跃的',
-            'channels'         => '渠道列表',
-            'customer-groups'  => '自定义客户群',
-            'no'               => 'No',
-            'yes'              => 'Yes',
-            'from'             => '从',
-            'to'               => '到',
-            'priority'         => '优先事项',
-            'conditions'       => '条件',
-            'end-other-rules'  => '结束其他规则',
-            'categories'       => '分类列表',
-            'attribute_family' => '家庭属性',
+            'title'                        => '商品目录规则',
+            'add-title'                    => '添加商品目录规则',
+            'edit-title'                   => '编辑商品目录规则',
+            'save-btn-title'               => '保存商品目录规则',
+            'rule-information'             => '规则信息',
+            'name'                         => '名称',
+            'description'                  => '描述',
+            'status'                       => '状态',
+            'is-active'                    => '商品目录规则是活跃的',
+            'channels'                     => '渠道列表',
+            'customer-groups'              => '自定义客户群',
+            'no'                           => 'No',
+            'yes'                          => 'Yes',
+            'from'                         => '从',
+            'to'                           => '到',
+            'priority'                     => '优先事项',
+            'conditions'                   => '条件',
+            'end-other-rules'              => '结束其他规则',
+            'categories'                   => '分类列表',
+            'attribute_family'             => '家庭属性',
             'condition-type'               => '条件类型',
             'all-conditions-true'          => '所有条件是真的',
             'any-condition-true'           => '任何条件是真的',
@@ -1209,7 +1214,7 @@ return [
             'buy-x-get-y-free'             => '买X送Y',
             'discount-amount'              => '折扣数量',
             'mass-delete-success'          => '所有选择的优惠券索引已被成功删除.',
-        ]
+        ],
     ],
 
     'marketing' => [
@@ -1270,7 +1275,7 @@ return [
             'create-success' => '事件创建成功.',
             'update-success' => '事件更新成功.',
             'delete-success' => '事件删除成功.',
-            'edit-error'     => '无法编辑此活动.'
+            'edit-error'     => '无法编辑此活动.',
         ],
 
         'sitemaps' => [
@@ -1286,7 +1291,7 @@ return [
             'create-success' => 'Sitemap created successfully.',
             'update-success' => 'Sitemap updated successfully.',
             'delete-success' => 'Sitemap deleted successfully.',
-        ]
+        ],
     ],
 
     'error' => [
@@ -1298,31 +1303,31 @@ return [
             'page-title' => '404页面不存在',
             'name'       => '404',
             'title'      => '网页找不到',
-            'message'    => '您要查找的页面不存在或已被移动。 使用侧边菜单导航.'
+            'message'    => '您要查找的页面不存在或已被移动。 使用侧边菜单导航.',
         ],
         '403' => [
             'page-title' => '403 禁止错误',
             'name'       => '403',
             'title'      => '禁止错误',
-            'message'    => '您没有访问该页面的权限.'
+            'message'    => '您没有访问该页面的权限.',
         ],
         '500' => [
             'page-title' => '500内部服务器错误',
             'name'       => '500',
             'title'      => '内部服务器错误',
-            'message'    => '服务器遇到内部错误.'
+            'message'    => '服务器遇到内部错误.',
         ],
         '401' => [
             'page-title' => '401 未经授权的错误',
             'name'       => '401',
             'title'      => '未经授权的错误',
-            'message'    => '该请求未经授权, 因为它缺少目标资源的有效身份验证凭据.'
+            'message'    => '该请求未经授权, 因为它缺少目标资源的有效身份验证凭据.',
         ],
 
         'tinymce' => [
             'http-error'    => 'HTTP错误.',
             'invalid-json'  => '无效的JSON.',
-            'upload-failed' => '由于XHR传输错误, 图片上传失败.'
+            'upload-failed' => '由于XHR传输错误, 图片上传失败.',
         ],
     ],
 
@@ -1341,7 +1346,7 @@ return [
         'allowed-type'     => '允许的类型:',
         'file-type'        => 'csv, xls, xlsx.',
         'no-records'       => '没有什么可导出的',
-        'illegal-format'   => '错误! 这种类型的格式要么不受支持, 要么是非法格式.'
+        'illegal-format'   => '错误! 这种类型的格式要么不受支持, 要么是非法格式.',
     ],
 
     'cms' => [
@@ -1374,8 +1379,8 @@ return [
             'one-col'          => '<div class="mt-10">使用类: <b>"静态容器一栏"</b> 对于一列布局.</div>',
             'two-col'          => '<div class="mt-10">使用类: <b>"静态容器二栏"</b> 对于二列布局.</div>',
             'three-col'        => '<div class="mt-10">使用类: <b>"静态容器三栏"</b> 对于三列布局.</div>',
-            'helper-classes'   => '助手类'
-        ]
+            'helper-classes'   => '助手类',
+        ],
     ],
 
     'response' => [
@@ -1400,7 +1405,7 @@ return [
         'cancel-success'            => ':name 已取消成功.',
         'cancel-error'              => ':name 无法取消.',
         'already-taken'             => ':name 已被占用.',
-        'order-pending'             => '无法删除 :name 帐户, 因为某些订单处于待处理或处理状态.'
+        'order-pending'             => '无法删除 :name 帐户, 因为某些订单处于待处理或处理状态.',
     ],
 
     'footer' => [
@@ -1411,7 +1416,7 @@ return [
         'emails' => [
             'email'              => '电子邮件',
             'notification_label' => '通知',
-            'notifications' => [
+            'notifications'      => [
                 'verification'                                     => '客户注册后发送验证邮件',
                 'registration'                                     => '客户注册后发送确认邮件',
                 'customer-registration-confirmation-mail-to-admin' => '客户注册后向管理员发送确认电子邮件',
@@ -1422,11 +1427,11 @@ return [
                 'new-refund'                                       => '创建退款后发送通知电子邮件',
                 'new-shipment'                                     => '创建货件后发送通知电子邮件',
                 'new-inventory-source'                             => '创建新的库存来源后发送通知电子邮件',
-                'cancel-order'                                     => '取消订单后发送通知'
+                'cancel-order'                                     => '取消订单后发送通知',
             ],
 
         ],
-        'system' => [
+        'system'             => [
             'catalog'                               => '商品目录',
             'homepage'                              => '主页配置',
             'allow-out-of-stock-items'              => '允许缺货商品',
@@ -1566,22 +1571,22 @@ return [
             'show-search-input-field'               => '显示搜索输入字段',
             'allow-no-of-new-product-homepage'      => '首页允许的新产品数量',
             'allow-no-of-featured-product-homepage' => '主页中允许的特色产品数量',
-            'width' => '宽度',
-            'height' => '高度',
-            'cache-small-image' => '小图片',
-            'cache-medium-image' => '中图片',
-            'cache-large-image' => '大图片',
-            'generate-invoice'   => '下单后自动生成发票',
-            'set-invoice-status' => '创建发票后设置发票状态为',
-            'set-order-status'   => '将创建发票后的订单状态设置为',
-            'generate-invoice-applicable' => '适用于启用自动生成发票的情况',
+            'width'                                 => '宽度',
+            'height'                                => '高度',
+            'cache-small-image'                     => '小图片',
+            'cache-medium-image'                    => '中图片',
+            'cache-large-image'                     => '大图片',
+            'generate-invoice'                      => '下单后自动生成发票',
+            'set-invoice-status'                    => '创建发票后设置发票状态为',
+            'set-order-status'                      => '将创建发票后的订单状态设置为',
+            'generate-invoice-applicable'           => '适用于启用自动生成发票的情况',
             'records-found'                         => '找到记录',
             'logo-size'                             => '图像分辨率应该是 112px X 41px',
             'favicon-size'                          => '图像分辨率应该是 16px X 16px',
             'invoice-logo-size'                     => '图像分辨率应该是 192px X 50px',
         ],
     ],
-    'api' => [
+    'api'    => [
         'system' => [
             'api'                    => 'API',
             'basic-configuration'    => '基本配置',
@@ -1592,11 +1597,11 @@ return [
             'info-login'             => '信息: 顾客 注册API后必须登录.',
         ],
         'auth'   => [
-            'invalid-auth'          => '警告：您无权使用 API。',
-            'required-token'        => '警告：令牌参数是必需的。',
-            'invalid-store'         => '警告：您请求的商店无效。',
-            'login-required'        => '警告：需要客户登录才能将产品添加到比较列表。',
-            'resource-not-found'    => '警告: 已请求:resource 在记录中找不到.',
+            'invalid-auth'       => '警告：您无权使用 API。',
+            'required-token'     => '警告：令牌参数是必需的。',
+            'invalid-store'      => '警告：您请求的商店无效。',
+            'login-required'     => '警告：需要客户登录才能将产品添加到比较列表。',
+            'resource-not-found' => '警告: 已请求:resource 在记录中找不到.',
         ],
     ],
 

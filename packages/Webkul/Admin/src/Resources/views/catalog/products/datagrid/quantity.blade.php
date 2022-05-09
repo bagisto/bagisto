@@ -26,10 +26,12 @@
                 <label>{{ $inventorySource->name }}</label>
 
                 <input type="text" v-validate="'numeric|min:0'" name="inventories[{{ $inventorySource->id }}]" class="control" value="{{ $qty }}" data-vv-as="&quot;{{ $inventorySource->name }}&quot;"/>
-
-                <span class="control-error" v-if="errors.has('inventories[{{ $inventorySource->id }}]')">@{{ errors.first('inventories[{!! $inventorySource->id !!}]') }}</span>
             </div>
         @endforeach
+
+        <div class="control-group has-error">
+            <span class="control-error" id="inventoryErrors"></span>
+        </div>
 
         <button class="btn btn-primary" onclick="saveEditQuantityForm('{{ route('admin.catalog.products.update-inventories', $product->id) }}', '{{ $product->id }}')">{{ __('admin::app.catalog.products.save') }}</button>
 

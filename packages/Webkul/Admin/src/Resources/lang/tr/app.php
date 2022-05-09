@@ -608,6 +608,11 @@ return [
             'save'                          => 'Kaydet',
             'cancel'                        => 'İptal',
             'saved-inventory-message'       => 'Ürün envanteri başarıyla kaydedildi.',
+            'validations'                   => [
+                'quantity-required' => 'Quantity is required.',
+                'quantity-numeric'  => 'Quantity should be numeric.',
+                'quantity-min-zero' => 'Quantity should be greater then zero.',
+            ],
         ],
 
         'attributes' => [

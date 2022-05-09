@@ -284,8 +284,8 @@ return [
             'back-link-title'  => 'Torna a Login',
             'submit-btn-title' => 'Invia Email Recupera Password',
             'passwords'        => [
-                'throttled'        => 'Avvertenza: hai richiesto di recente la reimpostazione della password, controlla la tua email.',
-            ]
+                'throttled' => 'Avvertenza: hai richiesto di recente la reimpostazione della password, controlla la tua email.',
+            ],
         ],
 
         'reset-password' => [
@@ -606,6 +606,11 @@ return [
             'save'                          => 'Save',
             'cancel'                        => 'Cancel',
             'saved-inventory-message'       => 'Product inventory saved successfully.',
+            'validations'                   => [
+                'quantity-required' => 'Quantity is required.',
+                'quantity-numeric'  => 'Quantity should be numeric.',
+                'quantity-min-zero' => 'Quantity should be greater then zero.',
+            ],
         ],
 
         'attributes' => [
@@ -1291,7 +1296,7 @@ return [
             'create-success' => 'Sitemap created successfully.',
             'update-success' => 'Sitemap updated successfully.',
             'delete-success' => 'Sitemap deleted successfully.',
-        ]
+        ],
     ],
 
     'error' => [
