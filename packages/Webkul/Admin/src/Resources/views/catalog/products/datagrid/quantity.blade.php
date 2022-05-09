@@ -25,12 +25,16 @@
             <div class="control-group" :class="[errors.has('inventories[{{ $inventorySource->id }}]') ? 'has-error' : '']">
                 <label>{{ $inventorySource->name }}</label>
 
-                <input type="text" v-validate="'numeric|min:0'" name="inventories[{{ $inventorySource->id }}]" class="control" value="{{ $qty }}" data-vv-as="&quot;{{ $inventorySource->name }}&quot;"/>
+                <input
+                    type="text"
+                    name="inventories[{{ $inventorySource->id }}]"
+                    class="control" value="{{ $qty }}"
+                    onkeyup="document.getElementById('inventoryErrors{{ $product->id }}').innerHTML = ''" />
             </div>
         @endforeach
 
         <div class="control-group has-error">
-            <span class="control-error" id="inventoryErrors"></span>
+            <span class="control-error" id="inventoryErrors{{ $product->id }}"></span>
         </div>
 
         <button class="btn btn-primary" onclick="saveEditQuantityForm('{{ route('admin.catalog.products.update-inventories', $product->id) }}', '{{ $product->id }}')">{{ __('admin::app.catalog.products.save') }}</button>

@@ -76,7 +76,7 @@
                 .then(function (response) {
                     let data = response.data;
 
-                    $('#inventoryErrors').text('');
+                    $(`#inventoryErrors${productId}`).text('');
 
                     $(`#edit-product-${productId}-quantity-form-block`).hide();
 
@@ -87,7 +87,7 @@
                 .catch(function ({ response }) {
                     let { data } = response;
 
-                    $('#inventoryErrors').text(data.message);
+                    $(`#inventoryErrors${productId}`).text(data.message);
                 });
         }
     </script>
