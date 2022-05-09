@@ -201,7 +201,7 @@
                     },
 
                     fetchCountries: function () {
-                        let countriesEndPoint = `${this.$root.baseUrl}/api/countries?pagination=0`;
+                        let countriesEndPoint = `${this.$root.baseUrl}/api/countries?pagination=0&sort=id&order=asc`;
 
                         this.$http.get(countriesEndPoint)
                             .then(response => {
