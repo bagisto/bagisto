@@ -277,12 +277,6 @@
             }
         });
 
-        $(document).ready(function() {
-            var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
-            document.getElementById('loader').style.display="none";
-            addTOButton.style.display="flex";
-        });
-
         window.onload = function() {
             var thumbList = document.getElementsByClassName('thumb-list')[0];
             var thumbFrame = document.getElementsByClassName('thumb-frame');
