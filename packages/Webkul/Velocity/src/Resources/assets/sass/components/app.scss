@@ -226,7 +226,6 @@
 
 .product-card-new {
     width: 12rem;
-    height: 385px;
     border: none !important;
     margin: 0 5px 10px 10px;
 
@@ -2018,10 +2017,10 @@
             margin-top: 0;
 
             &.required:after {
-                content: "*";
+                content: '*';
                 font-size: 16px;
                 margin-left: -1px;
-                color: #F05153;
+                color: #f05153;
             }
         }
 
@@ -2118,22 +2117,22 @@
 
 .full-content-wrapper {
     > .container-fluid {
-        padding: 0 !important;
-        margin-bottom: 60px !important;
+        padding: 0;
+        margin: 10px 0;
 
         > .row {
-            padding: 0 15px !important;
+            padding: 0 15px;
         }
     }
 
     p,
     div {
         > .container-fluid {
-            padding: 0 !important;
-            margin-bottom: 60px !important;
+            padding: 0;
+            margin: 10px 0;
 
             > .row {
-                padding: 0 15px !important;
+                padding: 0 15px;
             }
         }
     }
@@ -2395,7 +2394,6 @@
             transform: none !important;
             padding: 0 !important;
             margin: 0 !important;
-
 
             span {
                 font-size: 24px;
