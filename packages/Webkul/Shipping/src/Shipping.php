@@ -102,7 +102,7 @@ class Shipping
             if (! isset($rates[$rate->carrier])) {
                 $rates[$rate->carrier] = [
                     'carrier_title' => $rate->carrier_title,
-                    'rates'         => []
+                    'rates'         => [],
                 ];
             }
 
@@ -132,7 +132,7 @@ class Shipping
                 'code'         => $object->getCode(),
                 'method'       => $object->getMethod(),
                 'method_title' => $object->getTitle(),
-                'description'  => $object->getDescription()
+                'description'  => $object->getDescription(),
             ];
         }
 
@@ -147,8 +147,20 @@ class Shipping
      */
     public function isMethodCodeExists($shippingMethodCode)
     {
-        $activeShippingMethods = collect($this->getShippingMethods());
+        $shippingMethods = $this->collectRates()['shippingMethods'] ?? [];
 
-        return $activeShippingMethods->contains('method', $shippingMethodCode);
+        if (empty($shippingMethods) || ! $shippingMethods) {
+            return false;
+        }
+
+        foreach ($shippingMethods as $shippingMethod) {
+            foreach ($shippingMethod['rates'] as $rate) {
+                if ($rate->method === $shippingMethodCode) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
