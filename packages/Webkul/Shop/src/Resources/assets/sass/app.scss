@@ -1959,22 +1959,23 @@ section.product-detail {
                 }
 
                 .add-to-buttons {
-                    display: none;
-                    flex-direction: row;
+                    display: flex;
+                    justify-content: space-between;
                     margin-top: 10px;
                     width: 79.5%;
                     float: right;
-                    justify-content: space-between;
 
                     .addtocart {
-                        width: 49%;
+                        margin: 2px;
+                        width: 100%;
                         background: black;
-                        white-space: normal;
+                        white-space: nowrap;
                         text-transform: uppercase;
                     }
 
                     .buynow {
-                        width: 49%;
+                        margin: 2px;
+                        width: 100%;
                         white-space: nowrap;
                         text-transform: uppercase;
                     }
