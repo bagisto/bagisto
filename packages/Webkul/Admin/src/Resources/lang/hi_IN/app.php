@@ -541,10 +541,10 @@ return [
                 'bundle'                        => 'बंडल',
                 'downloadable'                  => 'डाउनलोड करने योग्य',
                 'grouped'                       => 'समूहीकृत',
-                'virtual'                       => 'आभासी',            
+                'virtual'                       => 'आभासी',
                 'configurable'                  => 'कॉन्फ़िगर करने योग्य',
 
-            ],            
+            ],
             'familiy'                       => 'विशेषता परिवार',
             'sku'                           => 'एसकेयू',
             'configurable-attributes'       => 'कॉन्फ़िगर करने योग्य गुण',
@@ -618,6 +618,11 @@ return [
             'cancel'                        => 'रद्द करें',
             'saved-inventory-message'       => 'उत्पाद सूची सफलतापूर्वक सहेजी गई।',
             'image-size'                    => 'इमेज रेजोल्यूशन 640px X 640px जैसा होना चाहिए',
+            'validations'                   => [
+                'quantity-required' => 'Quantity is required.',
+                'quantity-integer'  => 'Quantity should be integer.',
+                'quantity-min-zero' => 'Quantity should be greater then zero.',
+            ],
         ],
 
         'attributes' => [

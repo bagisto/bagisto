@@ -88,7 +88,7 @@ return [
         'mode'                     => 'الوضع',
         'account-title'            => 'حساب',
     ],
-    
+
     'acl' => [
         'dashboard'                => 'لوحة التحكم',
         'sales'                    => 'المبيعات',
@@ -287,8 +287,8 @@ return [
             'back-link-title'  => 'العودة للتوقيع',
             'submit-btn-title' => 'بريد إلكتروني كلمة مرور إعادة تعيين وصلة',
             'passwords'        => [
-                'throttled'        => 'تحذير: لقد طلبت إعادة تعيين كلمة المرور مؤخرًا ، يرجى التحقق من بريدك الإلكتروني.',
-            ]
+                'throttled' => 'تحذير: لقد طلبت إعادة تعيين كلمة المرور مؤخرًا ، يرجى التحقق من بريدك الإلكتروني.',
+            ],
         ],
 
         'reset-password' => [
@@ -528,23 +528,23 @@ return [
 
     'catalog' => [
         'products' => [
-            'title'                         => 'المنتجات',
-            'add-product-btn-title'         => 'أضف المنتج',
-            'add-title'                     => 'أضف المنتج',
-            'edit-title'                    => 'حرر المنتج',
-            'save-btn-title'                => 'احفظ المنتج',
-            'general'                       => 'ألف-لمحة عامة',
-            'product-type'                  => 'نوع المنتج',
-            'type'                          => [
+            'title'                 => 'المنتجات',
+            'add-product-btn-title' => 'أضف المنتج',
+            'add-title'             => 'أضف المنتج',
+            'edit-title'            => 'حرر المنتج',
+            'save-btn-title'        => 'احفظ المنتج',
+            'general'               => 'ألف-لمحة عامة',
+            'product-type'          => 'نوع المنتج',
+            'type'                  => [
                 'simple'                        => 'بسيط',
                 'booking'                       => 'الحجز',
                 'bundle'                        => 'حزمة',
                 'downloadable'                  => 'للتحميل',
                 'grouped'                       => 'مجمعة',
-                'virtual'                       => 'افتراضية',            
+                'virtual'                       => 'افتراضية',
                 'configurable'                  => 'شكلي',
 
-            ], 
+            ],
             'simple'                        => 'بسيط',
             'configurable'                  => 'مهيء',
             'familiy'                       => 'الصفة الأسرة',
@@ -617,6 +617,11 @@ return [
             'save'                          => 'يحفظ',
             'cancel'                        => 'يلغي',
             'saved-inventory-message'       => 'تم حفظ مخزون المنتج بنجاح.',
+            'validations'                   => [
+                'quantity-required' => 'Quantity is required.',
+                'quantity-integer'  => 'Quantity should be integer.',
+                'quantity-min-zero' => 'Quantity should be greater then zero.',
+            ],
         ],
 
         'attributes' => [
@@ -1300,7 +1305,7 @@ return [
             'create-success' => 'Sitemap created successfully.',
             'update-success' => 'Sitemap updated successfully.',
             'delete-success' => 'Sitemap deleted successfully.',
-        ]
+        ],
     ],
 
     'error' => [

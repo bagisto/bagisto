@@ -543,10 +543,10 @@ return [
                 'bundle'                        => 'empaqueter',
                 'downloadable'                  => 'téléchargeable',
                 'grouped'                       => 'groupé',
-                'virtual'                       => 'virtuelle',            
+                'virtual'                       => 'virtuelle',
                 'configurable'                  => 'configurable',
 
-            ], 
+            ],
             'simple'                        => 'Simple',
             'configurable'                  => 'Configurable',
             'familiy'                       => 'Famille d\'attributs',
@@ -621,6 +621,11 @@ return [
             'save'                          => 'Save',
             'cancel'                        => 'Cancel',
             'saved-inventory-message'       => 'Product inventory saved successfully.',
+            'validations'                   => [
+                'quantity-required' => 'Quantity is required.',
+                'quantity-integer'  => 'Quantity should be integer.',
+                'quantity-min-zero' => 'Quantity should be greater then zero.',
+            ],
         ],
 
         'attributes' => [
