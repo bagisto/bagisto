@@ -63,7 +63,6 @@ class CMSPageDataGrid extends DataGrid
             'route'  => 'shop.cms.page',
             'index'  => 'url_key',
             'icon'   => 'icon eye-icon',
-            
         ]);
 
         $this->addAction([
