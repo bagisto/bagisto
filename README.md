@@ -75,7 +75,7 @@ Develop and deploy your next headless commerce storefronts with Next JS and Bagi
 
 # Commerce For Every Needs
 
-![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/every-need.png
+![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/every-need.png)
 
 With Bagisto, you can easily create use cases for various commerce needs like Marketplaces, PWA, Native Mobile Apps, Multi-Tenants systems and many more. 
 
