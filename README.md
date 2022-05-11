@@ -49,7 +49,7 @@ Bagisto can help you cut down your time, cost, and workforce for building online
 
 # Getting Started
 
-![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/geeting-starded.png)
+![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/geting-starded.png)
 
 **[Install Bagisto](https://webkul.com/blog/laravel-ecommerce-website/)** with or without Composer (Check **[Requirement Details](https://bagisto.com/en/download/)**)
 
