@@ -146,8 +146,8 @@ class Grouped extends AbstractType
             return false;
         }
 
-        if (ProductFlat::query()->select('id')->whereIn('product_id', $this->getChildrenIds())->where('status', 0)->first()) {
-            return false;
+        if (ProductFlat::query()->select('id')->whereIn('product_id', $this->getChildrenIds())->where('status', 1)->first()) {
+            return true;
         }
 
         return true;
