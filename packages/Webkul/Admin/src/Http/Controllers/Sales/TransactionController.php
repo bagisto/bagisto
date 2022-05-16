@@ -9,6 +9,7 @@ use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
+use Webkul\Sales\Repositories\ShipmentRepository;
 
 class TransactionController extends Controller
 {
@@ -25,12 +26,14 @@ class TransactionController extends Controller
      * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
      * @param  \Webkul\Sales\Repositories\OrderTransactionRepository  $orderTransactionRepository
      * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
+     * @param  \Webkul\Sales\Repositories\ShipmentRepository $shipmentRepository
      * @return void
      */
     public function __construct(
         protected OrderRepository $orderRepository,
         protected OrderTransactionRepository $orderTransactionRepository,
-        protected InvoiceRepository $invoiceRepository
+        protected InvoiceRepository $invoiceRepository,
+        protected ShipmentRepository $shipmentRepository
     )
     {
         $this->_config = request('_config');
