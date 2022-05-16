@@ -4133,6 +4133,20 @@ ol.breadcrumb {
         }
     }
 
+    .account-content {
+        .account-layout {
+            .control-group {
+                &.date,
+                &.datetime {
+                    &::after {
+                        position: relative;
+                        right: 0;
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Header css start here.
      */
