@@ -1,6 +1,24 @@
-<div class="row footer-statics col-12 no-margin">
-    @include('velocity::layouts.footer.footer-links.footer-left')
-    @include('velocity::layouts.footer.footer-links.footer-middle')
-    @include('velocity::layouts.footer.footer-links.footer-right')
+<div class="row footer-statics no-margin">
+    <div class="col-12 software-description">
+        <div class="logo">
+            <a href="{{ route('shop.home.index') }}" aria-label="Logo">
+                @if ($logo = core()->getCurrentChannel()->logo_url)
+                    <img
+                        src="{{ $logo }}"
+                        class="logo full-img" alt="" width="200" height="50" />
+                @else
+                    <img
+                        src="{{ asset('themes/velocity/assets/images/static/logo-text-white.png') }}"
+                        class="logo full-img" alt="" width="200" height="50" />
+                @endif
+            </a>
+        </div>
+
+        @if ($velocityMetaData)
+            {!! $velocityMetaData->footer_left_content !!}
+        @else
+            {!! __('velocity::app.admin.meta-data.footer-left-raw-content') !!}
+        @endif
+    </div>
 </div>
 
