@@ -117,8 +117,6 @@
                         {{ __('shop::app.customer.account.wishlist.shared-link') }}
                     </label>
 
-                    <p id="copy-message" class="d-none bg-dark text-white text-bold">Link copied</p>
-
                     <div class="input-group" v-if="isWishlistShared">
                         <input
                             type="text"
@@ -132,6 +130,8 @@
                             <button
                                 class="btn btn-outline-secondary theme-btn"
                                 style="padding: 6px 20px"
+                                id="copy-btn"
+                                title="Copy Link"
                                 type="button"
                                 @click="copyToClipboard"
                             >
@@ -195,8 +195,8 @@
 
                     copyToClipboard: function() {
                         this.$refs.sharedLink.focus();
-                        document.getElementById("copy-message").classList.add("d-block");;
                         document.execCommand('copy');
+                        showCopyMessage();
                     }
                 }
             });
@@ -211,6 +211,12 @@
             if (confirm('{{ __('shop::app.customer.account.wishlist.confirm-delete-all') }}')) document.getElementById('remove-all-wishlist').submit();
 
             return;
+        }
+
+        function showCopyMessage()
+        {
+            $('#copy-btn').text('Copied!');
+            $('#copy-btn').css({backgroundColor: '#146e24'});
         }
     </script>
 @endpush
