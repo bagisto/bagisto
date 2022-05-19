@@ -117,6 +117,8 @@
                         {{ __('shop::app.customer.account.wishlist.shared-link') }}
                     </label>
 
+                    <p id="copy-message" class="d-none bg-dark text-white text-bold">Link copied</p>
+
                     <div class="input-group" v-if="isWishlistShared">
                         <input
                             type="text"
@@ -193,7 +195,7 @@
 
                     copyToClipboard: function() {
                         this.$refs.sharedLink.focus();
-
+                        document.getElementById("copy-message").classList.add("d-block");;
                         document.execCommand('copy');
                     }
                 }
