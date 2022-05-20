@@ -568,6 +568,14 @@ return [
             'shipping-method'     => 'जलयात्रा पद्धति का चयन करें',
             'payment-methods'     => 'भुगतान का तरीका चुनें',
             'payment-method'      => 'भुगतान विधि',
+            'payment-method-name' => [
+                'PayPal Smart Button' => 'पेपाल स्मार्ट बटन',
+                'PayPal'              => 'पेपाल',
+                'Cash On Delivery'    => 'डिलवरी पर नकदी',               
+                'Money Transfer'      => 'मनी ट्रांसफर',        
+                'PayPal Standard'     => 'पेपैल मानक'
+                
+            ],
             'summary'             => 'आदेश सारांश',
             'price'               => 'कीमत',
             'quantity'            => 'मात्रा',

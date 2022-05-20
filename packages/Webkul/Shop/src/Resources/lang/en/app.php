@@ -569,6 +569,13 @@ return [
             'shipping-method'     => 'Select Shipping Method',
             'payment-methods'     => 'Select Payment Method',
             'payment-method'      => 'Payment Method',
+            'payment-method-name' => [
+                'PayPal Smart Button' => 'PayPal Smart Button',
+                'PayPal'              => 'PayPal',
+                'Cash On Delivery'    => 'Cash On Delivery',                
+                'Money Transfer'      => 'Money Transfer',                
+                'Paypal Standard'     => 'PayPal Standard'    
+            ],
             'summary'             => 'Order Summary',
             'price'               => 'Price',
             'quantity'            => 'Quantity',
