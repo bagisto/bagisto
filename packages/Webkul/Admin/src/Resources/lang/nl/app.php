@@ -516,6 +516,7 @@ return [
                 'invoice-missing'   => 'Dit factuurnummer bestaat niet',
                 'transaction-saved' => 'De transactie is geregistreerd',
                 'already-paid'      => 'Dit factuur is al voldaan',
+                'transaction-amount-exceeds' => 'Het opgegeven bedrag van deze transactie overschrijdt het totaalbedrag van de factuur.',
             ],
         ],
     ],

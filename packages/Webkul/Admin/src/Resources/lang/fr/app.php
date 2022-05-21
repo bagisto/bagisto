@@ -524,6 +524,7 @@ return [
                 'invoice-missing'   => 'Cet identifiant de facture n\'existe pas',
                 'transaction-saved' => 'La transaction a été enregistrée',
                 'already-paid'      => 'Cette facture a déjà été payée',
+                'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
             ],
         ],
     ],
