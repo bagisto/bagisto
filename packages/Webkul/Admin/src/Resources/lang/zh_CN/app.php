@@ -516,6 +516,7 @@ return [
                 'invoice-missing'   => '此发票ID不存在',
                 'transaction-saved' => '交易已保存',
                 'already-paid'      => '此发票已支付',
+                'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
             ],
         ],
     ],
