@@ -3,8 +3,8 @@
 @php 
     if($product->getTypeInstance()->haveSpecialPrice()){
         $specialPrice = $product->getTypeInstance()->getSpecialPrice();
-        $proce = $product->price;
-        $Discount_Precent = "(".round(($specialPrice*100)/$proce)."% off)";  
+        $price = $product->price;
+        $Discount_Precent = "(".round(($specialPrice*100)/$price)."% off)";  
 
     }else{
        $Discount_Precent ='';
