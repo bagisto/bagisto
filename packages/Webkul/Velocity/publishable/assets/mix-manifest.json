@@ -1,14 +1,14 @@
 {
-    "/js/jquery-ez-plus.js": "/js/jquery-ez-plus.js?id=ba3c7cada62de152fd8f",
-    "/js/velocity-core.js": "/js/velocity-core.js?id=73cc7c3501570ebe9151",
-    "/js/velocity.js": "/js/velocity.js?id=f655ac65cbd1aa549cba",
-    "/js/manifest.js": "/js/manifest.js?id=e069a8f952a02ea0f290",
-    "/js/components.js": "/js/components.js?id=13ebf112e40292178d23",
-    "/css/velocity.css": "/css/velocity.css?id=dc79a6ba53b2f91384ce",
-    "/css/velocity-admin.css": "/css/velocity-admin.css?id=b67a82956e53163b5e3f",
-    "/images/icon-calendar.svg": "/images/icon-calendar.svg?id=870d0f733a5837742276",
-    "/images/icon-camera.svg": "/images/icon-camera.svg?id=b2fd2f9e17e1ccee96e2",
-    "/images/icon-crossed.svg": "/images/icon-crossed.svg?id=c72c3c1ef790bd4fd993",
-    "/images/icon-eye.svg": "/images/icon-eye.svg?id=9345f20b862e21aa30c6",
-    "/images/icon-search.svg": "/images/icon-search.svg?id=a5f38a895551b8a015b2"
+    "/js/jquery-ez-plus.js": "/js/jquery-ez-plus.js?id=ba3c7cada62de152fd8fce211d0b1b70",
+    "/js/velocity-core.js": "/js/velocity-core.js?id=73cc7c3501570ebe9151c72d954bd97d",
+    "/js/velocity.js": "/js/velocity.js?id=f655ac65cbd1aa549cba57f77b9a4344",
+    "/js/manifest.js": "/js/manifest.js?id=e069a8f952a02ea0f290bcca8fab930e",
+    "/js/components.js": "/js/components.js?id=13ebf112e40292178d2386143e9d75cd",
+    "/css/velocity.css": "/css/velocity.css?id=b9f192eab1656c856a07286579208f6e",
+    "/css/velocity-admin.css": "/css/velocity-admin.css?id=b67a82956e53163b5e3ff45a44f9778f",
+    "/images/icon-calendar.svg": "/images/icon-calendar.svg?id=870d0f733a58377422766f3152e15486",
+    "/images/icon-camera.svg": "/images/icon-camera.svg?id=b2fd2f9e17e1ccee96e29f6c6cec91e8",
+    "/images/icon-crossed.svg": "/images/icon-crossed.svg?id=c72c3c1ef790bd4fd99376bd4ba7bd5b",
+    "/images/icon-eye.svg": "/images/icon-eye.svg?id=9345f20b862e21aa30c675df49d56fd5",
+    "/images/icon-search.svg": "/images/icon-search.svg?id=a5f38a895551b8a015b24952561263f1"
 }
