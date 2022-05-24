@@ -374,6 +374,8 @@ return [
                 'wishlist-sharing'     => 'تقاسم قائمة الرغبات',
                 'shared-link'          => 'رابط مشترك',
                 'copy'                 => 'ينسخ',
+                'copy-link'            => 'انسخ الرابط',
+                'copied'               => 'نسخ!',
                 'visibility'           => 'الرؤية',
                 'public'               => 'عام',
                 'private'              => 'نشر',
