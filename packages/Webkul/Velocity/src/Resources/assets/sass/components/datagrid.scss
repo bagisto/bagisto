@@ -181,6 +181,7 @@
     border-radius: 3px;
     height: 36px;
     max-width: 300px;
+    position: relative;
 
     .control {
         font-size: 15px;
@@ -210,10 +211,21 @@
         height: 36px;
         width: 36px;
         padding: 5px;
-        float: right;
-        display: none;
+        right: 0px;
+        top: 0px;
+        position: absolute;
     }
 }
+
+.search-icon {
+    background-image: url(../images/icon-search.svg);
+    width: 24px;
+    height: 24px;
+  }
+  .icon {
+    display: inline-block;
+    background-size: cover;
+  }
 
 .grid-dropdown-header {
     display: inline-flex;
