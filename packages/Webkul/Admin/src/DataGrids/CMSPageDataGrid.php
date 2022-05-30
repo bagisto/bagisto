@@ -62,6 +62,7 @@ class CMSPageDataGrid extends DataGrid
             'method' => 'GET',
             'route'  => 'shop.cms.page',
             'index'  => 'url_key',
+            'target' => '_blank',
             'icon'   => 'icon eye-icon',
         ]);
 
