@@ -68,7 +68,7 @@
                                 @csrf
                             </form>
 
-                            <a class="mb-50" href="javascript:void(0);" onclick="deleteReview('Are you sure ?', '{{ $review->id }}')">
+                            <a class="mb-50" href="javascript:void(0);" onclick="deleteReview('{{ $review->id }}')">
                                 <span class="icon trash-icon"></span>
                             </a>
                         </div>
@@ -93,8 +93,8 @@
 
 @push('scripts')
     <script>
-        function deleteReview(message, reviewId) {
-            if (! confirm(message)) {
+        function deleteReview(reviewId) {
+            if (! confirm('{{ __("shop::app.customer.account.review.delete.confirmation-message") }}')) {
                 return;
             }
 
