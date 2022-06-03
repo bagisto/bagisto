@@ -579,9 +579,19 @@ class Configurable extends AbstractType
             . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'
             . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getOfferPrice())) . '</span>';
         } else {
-            return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-            . ' '
-            . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>';
+            $ActualPrice = $this->getMaximamPrice();
+            $MinimalPrice = $this->getMinimalPrice(); 
+            if($MinimalPrice  &&  $MinimalPrice !=$ActualPrice){
+                $DiscountPrecentage = round((($ActualPrice-$MinimalPrice)/($ActualPrice))*100);          
+                $html =  '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'. ' '
+                 . '<span class="final-price">' . core()->currency($this->evaluatePrice($MinimalPrice)).  '</span> <span class="regular-price">'.core()->currency($this->evaluatePrice($ActualPrice)). '</span>'
+                 . ' <span class="text-success">' .$DiscountPrecentage.'% off </span>';
+            }else{
+                $DiscountPrecentage = round((($ActualPrice-$MinimalPrice)/($ActualPrice))*100);          
+                $html = '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'. ' '
+                . '<span class="final-price">' . core()->currency($this->evaluatePrice($MinimalPrice)) .'</span>';              
+            }             
+            return $html;
         }
     }
 

@@ -399,8 +399,12 @@ class Bundle extends AbstractType
         $priceHtml .= '<div class="price-from">';
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
+            $ActualPrice = $prices['from']['regular_price']['price'];
+            $SpecialPrice = $prices['from']['final_price']['price'];               
+            $DiscountPrecentage = round((($ActualPrice-$SpecialPrice)/($ActualPrice))*100);
             $priceHtml .= '<span class="bundle-regular-price">' . $prices['from']['regular_price']['formated_price'] . '</span>'
-                . '<span class="bundle-special-price">' . $prices['from']['final_price']['formated_price'] . '</span>';
+                . '<span class="bundle-special-price">' . $prices['from']['final_price']['formated_price'] . '</span>'
+                . ' <span class="text-success">' .$DiscountPrecentage.'% off </span>';
         } else {
             $priceHtml .= '<span>' . $prices['from']['regular_price']['formated_price'] . '</span>';
         }
@@ -411,8 +415,12 @@ class Bundle extends AbstractType
             $priceHtml .= '<span class="bundle-to">To</span>';
 
             if ($prices['to']['regular_price']['price'] != $prices['to']['final_price']['price']) {
+                $ActualPrice = $prices['to']['regular_price']['price'];
+                $SpecialPrice = $prices['to']['final_price']['price'];               
+                $DiscountPrecentage = round((($ActualPrice-$SpecialPrice)/($ActualPrice))*100);  
                 $priceHtml .= '<span class="bundle-regular-price">' . $prices['to']['regular_price']['formated_price'] . '</span>'
-                    . '<span class="bundle-special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
+                    . '<span class="bundle-special-price">' . $prices['to']['final_price']['formated_price'] . '</span>'
+                    . ' <span class="text-success">' .$DiscountPrecentage.'% off </span>';
             } else {
                 $priceHtml .= '<span>' . $prices['to']['regular_price']['formated_price'] . '</span>';
             }
