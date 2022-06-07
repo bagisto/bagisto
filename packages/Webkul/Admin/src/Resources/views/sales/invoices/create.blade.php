@@ -107,41 +107,45 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                          
+                            </div>
                         </div>
                     </accordian>
 
-                    <accordian title="{{ __('admin::app.sales.orders.address') }}" :active="true">
-                        <div slot="body">
-                            <div class="sale">
-                                <div class="sale-section">
-                                    <div class="secton-title">
-                                        <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
-                                    </div>
+                    @if ($order->billing_address || $order->shipping_address)
+                        <accordian title="{{ __('admin::app.sales.orders.address') }}" :active="true">
+                            <div slot="body">
+                                <div class="sale">
+                                    @if ($order->billing_address)
+                                        <div class="sale-section">
+                                            <div class="secton-title">
+                                                <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
+                                            </div>
 
-                                    <div class="section-content">
+                                            <div class="section-content">
 
-                                        @include ('admin::sales.address', ['address' => $order->billing_address])
+                                                @include ('admin::sales.address', ['address' => $order->billing_address])
 
-                                    </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if ($order->shipping_address)
+                                        <div class="sale-section">
+                                            <div class="secton-title">
+                                                <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
+                                            </div>
+
+                                            <div class="section-content">
+
+                                                @include ('admin::sales.address', ['address' => $order->shipping_address])
+
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
-
-                                @if ($order->shipping_address)
-                                    <div class="sale-section">
-                                        <div class="secton-title">
-                                            <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
-                                        </div>
-
-                                        <div class="section-content">
-
-                                            @include ('admin::sales.address', ['address' => $order->shipping_address])
-
-                                        </div>
-                                    </div>
-                                @endif
-                            </div>                            
-                        </div>
-                    </accordian>
+                            </div>
+                        </accordian>
+                    @endif
 
                     <accordian title="{{ __('admin::app.sales.orders.payment-and-shipping') }}" :active="true">
                         <div slot="body">
@@ -273,7 +277,7 @@
 
                                         </tbody>
                                     </table>
-                                </div>                                
+                                </div>
                             </div>
                         </div>
                     </accordian>

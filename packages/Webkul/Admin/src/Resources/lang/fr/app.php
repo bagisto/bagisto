@@ -524,6 +524,7 @@ return [
                 'invoice-missing'   => 'Cet identifiant de facture n\'existe pas',
                 'transaction-saved' => 'La transaction a été enregistrée',
                 'already-paid'      => 'Cette facture a déjà été payée',
+                'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
             ],
         ],
     ],
@@ -543,10 +544,10 @@ return [
                 'bundle'                        => 'empaqueter',
                 'downloadable'                  => 'téléchargeable',
                 'grouped'                       => 'groupé',
-                'virtual'                       => 'virtuelle',            
+                'virtual'                       => 'virtuelle',
                 'configurable'                  => 'configurable',
 
-            ], 
+            ],
             'simple'                        => 'Simple',
             'configurable'                  => 'Configurable',
             'familiy'                       => 'Famille d\'attributs',
@@ -621,6 +622,11 @@ return [
             'save'                          => 'Save',
             'cancel'                        => 'Cancel',
             'saved-inventory-message'       => 'Product inventory saved successfully.',
+            'validations'                   => [
+                'quantity-required' => 'Quantity is required.',
+                'quantity-integer'  => 'Quantity should be integer.',
+                'quantity-min-zero' => 'Quantity should be greater then zero.',
+            ],
         ],
 
         'attributes' => [

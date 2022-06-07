@@ -289,8 +289,8 @@ return [
             'back-link-title'  => 'Back to Sign In',
             'submit-btn-title' => 'Send Password Reset Email',
             'passwords'        => [
-                'throttled'        => 'Warning: You have requested password reset recently, please check your email.',
-            ]
+                'throttled' => 'Warning: You have requested password reset recently, please check your email.',
+            ],
         ],
 
         'reset-password' => [
@@ -525,29 +525,30 @@ return [
                 'invoice-missing'   => 'This invoice id does not exist',
                 'transaction-saved' => 'The transaction has been saved',
                 'already-paid'      => 'This invoice has already been paid',
+                'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
             ],
         ],
     ],
 
     'catalog' => [
         'products' => [
-            'title'                         => 'Products',
-            'add-product-btn-title'         => 'Add Product',
-            'add-title'                     => 'Add Product',
-            'edit-title'                    => 'Edit Product',
-            'save-btn-title'                => 'Save Product',
-            'general'                       => 'General',
-            'product-type'                  => 'Product Type',
-            'type'                          => [
+            'title'                 => 'Products',
+            'add-product-btn-title' => 'Add Product',
+            'add-title'             => 'Add Product',
+            'edit-title'            => 'Edit Product',
+            'save-btn-title'        => 'Save Product',
+            'general'               => 'General',
+            'product-type'          => 'Product Type',
+            'type'                  => [
                 'simple'                        => 'Simple',
                 'booking'                       => 'Booking',
                 'bundle'                        => 'Bundle',
                 'downloadable'                  => 'Downloadable',
                 'grouped'                       => 'Grouped',
-                'virtual'                       => 'Virtual',            
+                'virtual'                       => 'Virtual',
                 'configurable'                  => 'Configurable',
 
-            ],            
+            ],
             'familiy'                       => 'Attribute Family',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Configurable Attributes',
@@ -621,6 +622,11 @@ return [
             'cancel'                        => 'Cancel',
             'saved-inventory-message'       => 'Product inventory saved successfully.',
             'image-size'                    => 'Image resolution should be like 640px X 640px',
+            'validations'                   => [
+                'quantity-required' => 'Quantity is required.',
+                'quantity-integer'  => 'Quantity should be integer.',
+                'quantity-min-zero' => 'Quantity should be greater then zero.',
+            ],
         ],
 
         'attributes' => [
@@ -1315,7 +1321,7 @@ return [
             'create-success' => 'Sitemap created successfully.',
             'update-success' => 'Sitemap updated successfully.',
             'delete-success' => 'Sitemap deleted successfully.',
-        ]
+        ],
     ],
 
     'error' => [
@@ -1666,6 +1672,7 @@ return [
             'canceled'   => 'Order Canceled',
             'pending'    => 'Order Pending',
             'processing' => 'Order Processing',
+            'pending payment' => 'Pending Payment',
         ],
     ],
 ];

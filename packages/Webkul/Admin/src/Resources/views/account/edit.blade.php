@@ -141,7 +141,7 @@
                         } else {
                             imageInput.value = '';
 
-                            alert('{{ __('admin::app.account.image_upload_message') }}');
+                            alert('{{ __('admin::app.account.image-upload-message') }}');
                         }
                     }
                 }

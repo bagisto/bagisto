@@ -141,7 +141,7 @@
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;"
             @change="validateForm('address-form')">
 
-            <option value=""></option>
+            <option value="" disabled>{{ __('ui::form.select-attribute', ['attribute' => __('shop::app.checkout.onepage.country')]) }}</option>
 
             <option v-for='(country, index) in countries' :value="country.code">
                 @{{ country.name }}
@@ -431,7 +431,7 @@
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;"
             @change="validateForm('address-form')">
 
-            <option value=""></option>
+            <option value="" disabled>{{ __('ui::form.select-attribute', ['attribute' => __('shop::app.checkout.onepage.country')]) }}</option>
 
             <option v-for='(country, index) in countries' :value="country.code" v-text="country.name"></option>
         </select>

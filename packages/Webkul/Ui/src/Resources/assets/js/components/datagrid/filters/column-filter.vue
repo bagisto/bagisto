@@ -7,7 +7,11 @@
             </div>
         </div>
 
-        <div class="dropdown-list dropdown-container" style="display: none">
+        <div
+            class="dropdown-list dropdown-container"
+            style="display: none;"
+            v-on:keyup.enter="getResponse"
+        >
             <ul>
                 <li>
                     <div class="control-group">
@@ -36,9 +40,12 @@
                     </div>
                 </li>
 
-                <li v-if="stringConditionSelect">
+                <li v-if="types.string.isSelected">
                     <div class="control-group">
-                        <select class="control" v-model="stringCondition">
+                        <select
+                            class="control"
+                            v-model="types.string.condition"
+                        >
                             <option
                                 v-text="translations.condition"
                                 selected
@@ -68,35 +75,23 @@
                     </div>
                 </li>
 
-                <li v-if="stringCondition != null">
-                    <div
-                        class="control-group"
-                        v-if="isCurrentFilterColumnHasOptions()"
-                    >
-                        <select class="control" v-model="stringValue">
-                            <option
-                                :key="key"
-                                v-text="option"
-                                v-value="key"
-                                v-for="(option,
-                                key) in this.getCurrentFilterOptions()"
-                            ></option>
-                        </select>
-                    </div>
-
-                    <div class="control-group" v-else>
+                <li v-if="types.string.condition != null">
+                    <div class="control-group">
                         <input
                             type="text"
                             class="control response-string"
                             :placeholder="translations.valueHere"
-                            v-model="stringValue"
+                            v-model="types.string.value"
                         />
                     </div>
                 </li>
 
-                <li v-if="numberConditionSelect">
+                <li v-if="types.number.isSelected">
                     <div class="control-group">
-                        <select class="control" v-model="numberCondition">
+                        <select
+                            class="control"
+                            v-model="types.number.condition"
+                        >
                             <option
                                 v-text="translations.condition"
                                 selected
@@ -136,21 +131,24 @@
                     </div>
                 </li>
 
-                <li v-if="numberCondition != null">
+                <li v-if="types.number.condition != null">
                     <div class="control-group">
                         <input
                             type="text"
                             class="control response-number"
                             v-on:input="filterNumberInput"
-                            v-model="numberValue"
+                            v-model="types.number.value"
                             :placeholder="translations.numericValueHere"
                         />
                     </div>
                 </li>
 
-                <li v-if="booleanConditionSelect">
+                <li v-if="types.boolean.isSelected">
                     <div class="control-group">
-                        <select class="control" v-model="booleanCondition">
+                        <select
+                            class="control"
+                            v-model="types.boolean.condition"
+                        >
                             <option
                                 v-text="translations.condition"
                                 selected
@@ -170,9 +168,9 @@
                     </div>
                 </li>
 
-                <li v-if="booleanCondition != null">
+                <li v-if="types.boolean.condition != null">
                     <div class="control-group">
-                        <select class="control" v-model="booleanValue">
+                        <select class="control" v-model="types.boolean.value">
                             <option
                                 v-text="translations.value"
                                 selected
@@ -192,9 +190,125 @@
                     </div>
                 </li>
 
-                <li v-if="datetimeConditionSelect">
+                <li v-if="types.dropdown.isSelected">
                     <div class="control-group">
-                        <select class="control" v-model="datetimeCondition">
+                        <select
+                            class="control"
+                            v-model="types.dropdown.condition"
+                        >
+                            <option
+                                v-text="translations.condition"
+                                selected
+                                disabled
+                            ></option>
+
+                            <option
+                                v-text="translations.equals"
+                                value="eq"
+                            ></option>
+
+                            <option
+                                v-text="translations.nequals"
+                                value="neqs"
+                            ></option>
+                        </select>
+                    </div>
+                </li>
+
+                <li v-if="types.dropdown.condition != null">
+                    <div class="control-group">
+                        <select class="control" v-model="types.dropdown.value">
+                            <option
+                                :key="key"
+                                v-text="option"
+                                v-value="key"
+                                v-for="(option,
+                                key) in this.getCurrentFilterOptions()"
+                            ></option>
+                        </select>
+                    </div>
+                </li>
+
+                <li v-if="types.checkbox.isSelected">
+                    <div class="control-group">
+                        <select
+                            class="control"
+                            v-model="types.checkbox.condition"
+                        >
+                            <option
+                                v-text="translations.condition"
+                                selected
+                                disabled
+                            ></option>
+
+                            <option
+                                v-text="translations.equals"
+                                value="eq"
+                            ></option>
+
+                            <option
+                                v-text="translations.nequals"
+                                value="neqs"
+                            ></option>
+                        </select>
+                    </div>
+                </li>
+
+                <li v-if="types.checkbox.condition != null">
+                    <div class="control-group">
+                        <button
+                            style="width: 100%;"
+                            type="button"
+                            class="dropdown-btn"
+                            @click="toggleCheckboxDropdown"
+                        >
+                            {{
+                                types.checkbox.value.length > 0
+                                    ? types.checkbox.value.join(', ')
+                                    : translations.select
+                            }}
+
+                            <i class="icon arrow-down-icon"></i>
+                        </button>
+
+                        <div
+                            ref="checkboxOptions"
+                            class="dropdown-list checkbox-dropdown-list"
+                            style="display: none;"
+                        >
+                            <div class="dropdown-container">
+                                <ul>
+                                    <li
+                                        :key="key"
+                                        v-for="(option,
+                                        key) in this.getCurrentFilterOptions()"
+                                    >
+                                        <span class="checkbox">
+                                            <input
+                                                type="checkbox"
+                                                v-model="types.checkbox.value"
+                                                :value="option"
+                                            />
+
+                                            <label
+                                                class="checkbox-view"
+                                            ></label>
+
+                                            {{ option }}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li v-if="types.datetime.isSelected">
+                    <div class="control-group">
+                        <select
+                            class="control"
+                            v-model="types.datetime.condition"
+                        >
                             <option
                                 v-text="translations.condition"
                                 selected
@@ -234,11 +348,11 @@
                     </div>
                 </li>
 
-                <li v-if="datetimeCondition != null">
+                <li v-if="types.datetime.condition != null">
                     <div class="control-group">
                         <input
                             class="control"
-                            v-model="datetimeValue"
+                            v-model="types.datetime.value"
                             type="date"
                         />
                     </div>
@@ -247,53 +361,86 @@
                 <button
                     v-text="translations.apply"
                     class="btn btn-sm btn-primary apply-filter"
-                    v-on:click="getResponse"
+                    @click="getResponse"
                 ></button>
             </ul>
         </div>
     </div>
 </template>
 
+<style lang="scss" scoped>
+.checkbox-dropdown-list {
+    font-size: 11px;
+    width: inherit;
+}
+</style>
+
 <script>
 export default {
     props: ['columns', 'translations'],
 
     data() {
-        /**
-         * To Do (@devansh-webkul):
-         *
-         * - Try to minimize these data props also.
-         * - Refactor all repeative properties.
-         */
         return {
             type: null,
+
             columnOrAlias: '',
 
-            stringConditionSelect: false,
-            numberConditionSelect: false,
-            booleanConditionSelect: false,
-            datetimeConditionSelect: false,
+            types: {
+                string: {
+                    isSelected: false,
+                    condition: null,
+                    value: null
+                },
 
-            stringCondition: null,
-            numberCondition: null,
-            booleanCondition: null,
-            datetimeCondition: null,
+                number: {
+                    isSelected: false,
+                    condition: null,
+                    value: 0
+                },
 
-            stringValue: null,
-            numberValue: 0,
-            booleanValue: null,
-            datetimeValue: '2000-01-01'
+                boolean: {
+                    isSelected: false,
+                    condition: null,
+                    value: null
+                },
+
+                dropdown: {
+                    isSelected: false,
+                    condition: null,
+                    value: null
+                },
+
+                checkbox: {
+                    isSelected: false,
+                    condition: null,
+                    value: []
+                },
+
+                datetime: {
+                    isSelected: false,
+                    condition: null,
+                    value: '2000-01-01'
+                }
+            }
         };
     },
 
     methods: {
-        filterNumberInput: function(e) {
-            this.numberValue = e.target.value.replace(/[^0-9\,\.]+/g, '');
+        toggleCheckboxDropdown() {
+            const display = this.$refs.checkboxOptions.style.display;
+
+            if (display === 'none') {
+                this.$refs.checkboxOptions.style.display = 'block';
+                return;
+            }
+
+            this.$refs.checkboxOptions.style.display = 'none';
         },
 
-        getCurrentFilterColumn() {
-            return this.columns.find(
-                column => column.index === this.filterColumn
+        filterNumberInput: function(e) {
+            this.types.number.value = e.target.value.replace(
+                /[^0-9\,\.]+/g,
+                ''
             );
         },
 
@@ -305,12 +452,18 @@ export default {
             );
         },
 
+        getCurrentFilterColumn() {
+            return this.columns.find(
+                column => column.index === this.filterColumn
+            );
+        },
+
         getCurrentFilterOptions() {
             if (this.isCurrentFilterColumnHasOptions()) {
                 return this.getCurrentFilterColumn().options ?? [];
             }
 
-            throw "Options are not defined. Don't use this method if options are not available.";
+            throw 'Options are not defined.';
         },
 
         getColumnOrAlias(columnOrAlias) {
@@ -322,52 +475,37 @@ export default {
 
                     switch (this.type) {
                         case 'string': {
-                            this.stringConditionSelect = true;
-                            this.numberConditionSelect = false;
-                            this.booleanConditionSelect = false;
-                            this.datetimeConditionSelect = false;
-
-                            this.nullify();
-                            break;
-                        }
-
-                        case 'datetime': {
-                            this.stringConditionSelect = false;
-                            this.numberConditionSelect = false;
-                            this.booleanConditionSelect = false;
-                            this.datetimeConditionSelect = true;
-
-                            this.nullify();
-                            break;
-                        }
-
-                        case 'boolean': {
-                            this.stringConditionSelect = false;
-                            this.numberConditionSelect = false;
-                            this.booleanConditionSelect = true;
-                            this.datetimeConditionSelect = false;
-
-                            this.nullify();
+                            this.switchSelectCondition('string');
                             break;
                         }
 
                         case 'number': {
-                            this.stringConditionSelect = false;
-                            this.numberConditionSelect = true;
-                            this.booleanConditionSelect = false;
-                            this.datetimeConditionSelect = false;
+                            this.switchSelectCondition('number');
+                            break;
+                        }
 
-                            this.nullify();
+                        case 'boolean': {
+                            this.switchSelectCondition('boolean');
+                            break;
+                        }
+
+                        case 'dropdown': {
+                            this.switchSelectCondition('dropdown');
+                            break;
+                        }
+
+                        case 'checkbox': {
+                            this.switchSelectCondition('checkbox');
+                            break;
+                        }
+
+                        case 'datetime': {
+                            this.switchSelectCondition('datetime');
                             break;
                         }
 
                         case 'price': {
-                            this.stringConditionSelect = false;
-                            this.numberConditionSelect = true;
-                            this.booleanConditionSelect = false;
-                            this.datetimeConditionSelect = false;
-
-                            this.nullify();
+                            this.switchSelectCondition('number');
                             break;
                         }
                     }
@@ -385,72 +523,95 @@ export default {
                 }
             }
 
-            if (this.type === 'string' && this.stringValue !== null) {
-                this.$emit('onFilter', {
-                    data: {
-                        column: this.columnOrAlias,
-                        condition: this.stringCondition,
-                        response: encodeURIComponent(this.stringValue),
-                        label
+            switch (this.type) {
+                case 'string': {
+                    if (this.types.string.value !== null) {
+                        this.emitOnFilterEvent('string', label, true);
                     }
-                });
-            } else if (this.type === 'number') {
-                let indexConditions = true;
-
-                if (
-                    this.filterIndex === this.columnOrAlias &&
-                    (this.numberValue === 0 || this.numberValue < 0)
-                ) {
-                    indexConditions = false;
-
-                    alert(this.translations.zeroIndex);
+                    break;
                 }
 
-                if (indexConditions) {
-                    this.$emit('onFilter', {
-                        data: {
-                            column: this.columnOrAlias,
-                            condition: this.numberCondition,
-                            response: this.numberValue,
-                            label
-                        }
-                    });
+                case 'number': {
+                    let indexConditions = true;
+
+                    if (
+                        this.filterIndex === this.columnOrAlias &&
+                        (this.types.number.value === 0 ||
+                            this.types.number.value < 0)
+                    ) {
+                        indexConditions = false;
+
+                        alert(this.translations.zeroIndex);
+                    }
+
+                    if (indexConditions) {
+                        this.emitOnFilterEvent('number', label);
+                    }
+                    break;
                 }
-            } else if (this.type === 'boolean') {
-                this.$emit('onFilter', {
-                    data: {
-                        column: this.columnOrAlias,
-                        condition: this.booleanCondition,
-                        response: this.booleanValue,
-                        label
-                    }
-                });
-            } else if (this.type === 'datetime') {
-                this.$emit('onFilter', {
-                    data: {
-                        column: this.columnOrAlias,
-                        condition: this.datetimeCondition,
-                        response: this.datetimeValue,
-                        label
-                    }
-                });
-            } else if (this.type === 'price') {
-                this.$emit('onFilter', {
-                    data: {
-                        column: this.columnOrAlias,
-                        condition: this.numberCondition,
-                        response: this.numberValue,
-                        label
-                    }
-                });
+
+                case 'boolean': {
+                    this.emitOnFilterEvent('boolean', label);
+                    break;
+                }
+
+                case 'dropdown': {
+                    this.emitOnFilterEvent('dropdown', label);
+                    break;
+                }
+
+                case 'checkbox': {
+                    this.emitOnFilterEvent('checkbox', label);
+                    break;
+                }
+
+                case 'datetime': {
+                    this.emitOnFilterEvent('datetime', label);
+                    break;
+                }
+
+                case 'price': {
+                    this.emitOnFilterEvent('number', label);
+                    break;
+                }
             }
         },
 
-        nullify() {
-            this.stringCondition = null;
-            this.datetimeCondition = null;
-            this.booleanCondition = null;
-            this.numberCondition = null;
+        switchSelectCondition(type) {
+            this.resetAllTypesSelection();
+
+            this.types[type].isSelected = true;
+
+            this.resetAllTypesCondition();
+        },
+
+        emitOnFilterEvent(type, label, isEncoded = false) {
+            this.$emit('onFilter', {
+                data: {
+                    column: this.columnOrAlias,
+                    condition: this.types[type].condition,
+                    response: isEncoded
+                        ? encodeURIComponent(this.types[type].value)
+                        : this.types[type].value,
+                    label
+                }
+            });
+        },
+
+        resetAllTypesSelection() {
+            for (let key in this.types) {
+                if (this.types.hasOwnProperty(key)) {
+                    this.types[key].isSelected = false;
+                }
+            }
+        },
+
+        resetAllTypesCondition() {
+            for (let key in this.types) {
+                if (this.types.hasOwnProperty(key)) {
+                    this.types[key].condition = null;
+                }
+            }
         }
     }
 };

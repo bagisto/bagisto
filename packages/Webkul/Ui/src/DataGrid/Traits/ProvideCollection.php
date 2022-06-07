@@ -33,7 +33,7 @@ trait ProvideCollection
      * Sort or filter collection.
      *
      * @param  \Illuminate\Support\Collection  $collection
-     * @param  array                           $parseInfo
+     * @param  array  $parseInfo
      * @return \Illuminate\Support\Collection
      */
     public function sortOrFilterCollection($collection, $parseInfo)
@@ -42,17 +42,15 @@ trait ProvideCollection
             $columnType = $this->findColumnType($key)[0] ?? null;
             $columnName = $this->findColumnType($key)[1] ?? null;
 
-            if ($key === 'sort') {
-                $this->sortCollection($collection, $info);
-            } else if ($key === 'search') {
-                $this->searchCollection($collection, $info);
-            } else {
-                if ($this->exceptionCheckInColumns($columnName)) {
-                    return $collection;
-                }
-
-                $this->filterCollection($collection, $info, $columnType, $columnName);
+            if ($this->exceptionCheckInColumns($columnName)) {
+                return $collection;
             }
+
+            match($key) {
+                'sort'   => $this->sortCollection($collection, $info),
+                'search' => $this->searchCollection($collection, $info),
+                default  => $this->filterCollection($collection, $info, $columnType, $columnName)
+            };
         }
 
         return $collection;
@@ -135,7 +133,7 @@ trait ProvideCollection
      * Sort collection.
      *
      * @param  \Illuminate\Support\Collection  $collection
-     * @param  array                           $info
+     * @param  array  $info
      * @return void
      */
     private function sortCollection($collection, $info)
@@ -162,7 +160,7 @@ trait ProvideCollection
      * Search collection.
      *
      * @param  \Illuminate\Support\Collection  $collection
-     * @param  array                           $info
+     * @param  array  $info
      * @return void
      */
     private function searchCollection($collection, $info)
@@ -188,9 +186,9 @@ trait ProvideCollection
      * Filter collection.
      *
      * @param  \Illuminate\Support\Collection  $collection
-     * @param  array                           $info
-     * @param  string                          $columnType
-     * @param  string                          $columnName
+     * @param  array  $info
+     * @param  string  $columnType
+     * @param  string  $columnName
      * @return void
      */
     private function filterCollection($collection, $info, $columnType, $columnName)
@@ -204,15 +202,13 @@ trait ProvideCollection
 
                 $condition = ($condition === 'undefined') ? '=' : $condition;
 
-                if ($columnType === 'datetime') {
-                    $this->resolve($collection, $columnName, $condition, $filterValue, 'whereDate');
-                } else if ($columnType === 'boolean') {
-                    $this->resolve($collection, $columnName, $condition, $filterValue, 'where', 'resolveBooleanQuery');
-                } else if ($columnType === 'price') {
-                    $this->resolve($collection, $columnName, $condition, $filterValue, 'having');
-                } else {
-                    $this->resolve($collection, $columnName, $condition, $filterValue);
-                }
+                match($columnType) {
+                    'boolean'  => $this->resolve($collection, $columnName, $condition, $filterValue, 'where', 'resolveBooleanQuery'),
+                    'checkbox' => $this->resolve($collection, $columnName, $condition, $filterValue, 'whereIn', 'resolveCheckboxQuery'),
+                    'price'    => $this->resolve($collection, $columnName, $condition, $filterValue, 'having'),
+                    'datetime' => $this->resolve($collection, $columnName, $condition, $filterValue, 'whereDate'),
+                default    => $this->resolve($collection, $columnName, $condition, $filterValue)
+                };
             }
         }
     }
@@ -225,7 +221,7 @@ trait ProvideCollection
      */
     private function transformColumns($record)
     {
-        foreach($this->columns as $column) {
+        foreach ($this->columns as $column) {
             $supportedClosureKey = ['wrapper', 'closure'];
 
             $isClosure = ! empty(array_intersect($supportedClosureKey, array_keys($column)));
@@ -267,7 +263,7 @@ trait ProvideCollection
      */
     private function transformActions($record)
     {
-        foreach($this->actions as $action) {
+        foreach ($this->actions as $action) {
             $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
 
             $toDisplayKey = $this->generateKeyFromActionTitle($action['title'], '_to_display');

@@ -57,10 +57,12 @@
 
                 {!! view_render_event('bagisto.shop.customers.account.profile.edit.gender.after') !!}
 
-                <div class="control-group"  :class="[errors.has('date_of_birth') ? 'has-error' : '']">
+                <div class="control-group date"  :class="[errors.has('date_of_birth') ? 'has-error' : '']">
                     <label for="date_of_birth">{{ __('shop::app.customer.account.profile.dob') }}</label>
 
-                    <input type="date" class="control" name="date_of_birth" value="{{ old('date_of_birth') ?? $customer->date_of_birth }}" v-validate="" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.dob') }}&quot;">
+                    <date>
+                        <input type="date" class="control" name="date_of_birth" value="{{ old('date_of_birth') ?? $customer->date_of_birth }}" v-validate="" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.dob') }}&quot;">
+                    </date>
 
                     <span class="control-error" v-if="errors.has('date_of_birth')">@{{ errors.first('date_of_birth') }}</span>
                 </div>

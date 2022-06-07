@@ -57,20 +57,29 @@ class CMSPageDataGrid extends DataGrid
 
     public function prepareActions()
     {
+        $this->addAction([ 
+            'title'  => trans('admin::app.datagrid.view'),
+            'method' => 'GET',
+            'route'  => 'shop.cms.page',
+            'index'  => 'url_key',
+            'target' => '_blank',
+            'icon'   => 'icon eye-icon',
+        ]);
+
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.cms.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
-
+ 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.cms.delete',
             'icon'   => 'icon trash-icon',
         ]);
-    }
+    } 
 
     public function prepareMassActions()
     {

@@ -20,9 +20,9 @@
                     </form>
 
                     @if ($isSharingEnabled)
-                        <a
+                        <a 
                             href="javascript:void(0);"
-                            onclick="window.showShareWishlistModal();">
+                            onclick="window.showShareWishlistModal();" class="m-20">
                             {{ __('shop::app.customer.account.wishlist.share') }}
                         </a>
                     @endif
@@ -123,6 +123,8 @@
                                 <button
                                     class="btn btn-primary btn-md"
                                     type="button"
+                                    id="copy-btn"
+                                title="{{ __('shop::app.customer.account.wishlist.copy-link') }}"
                                     @click="copyToClipboard"
                                 >
                                     {{ __('shop::app.customer.account.wishlist.copy') }}
@@ -188,6 +190,7 @@
                         this.$refs.sharedLink.focus();
 
                         document.execCommand('copy');
+                        showCopyMessage();
                     }
                 }
             });
@@ -203,5 +206,12 @@
 
             return;
         }
+
+        function showCopyMessage()
+        {
+            $('#copy-btn').text("{{ __('shop::app.customer.account.wishlist.copied') }}");
+            $('#copy-btn').css({backgroundColor: '#146e24'});
+        }
+    </script>
     </script>
 @endpush

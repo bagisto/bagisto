@@ -295,6 +295,30 @@ class Cart
     }
 
     /**
+     * Remove all items from cart.
+     *
+     * @return \Webkul\Checkout\Models\Cart|null
+     */
+    public function removeAllItems(): ?CartModel
+    {
+        $cart = $this->getCart();
+
+        Event::dispatch('checkout.cart.delete.all.before', $cart);
+
+        if (! $cart) {
+            return $cart;
+        }
+
+        foreach ($cart->items as $item) {
+            $this->removeItem($item->id);
+        }
+
+        Event::dispatch('checkout.cart.delete.all.after', $cart);
+
+        return $cart;
+    }
+
+    /**
      * Remove cart items, whose product is inactive.
      *
      * @param \Webkul\Checkout\Models\Cart|null $cart

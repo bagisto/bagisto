@@ -70,7 +70,7 @@
                         'addWishlistClass'  => 'pl10',
                         'product'           => $item->product,
                         'addToCartBtnClass' => 'medium-padding',
-                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false,
+                        'showCompare'       => false
                     ])
                 </div>
             </div>

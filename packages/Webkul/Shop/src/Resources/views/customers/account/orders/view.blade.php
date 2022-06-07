@@ -136,7 +136,7 @@
                                     </table>
                                 </div>
                             </div>
-                            
+
 
                             <div class="totals">
                                 <table class="sale-summary">
@@ -271,7 +271,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                        </div>                                          
+                                        </div>
                                     </div>
 
                                     <div class="totals">
@@ -360,7 +360,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -474,17 +474,19 @@
             <div class="sale-section">
                 <div class="section-content" style="border-bottom: 0">
                     <div class="order-box-container">
-                        <div class="box">
-                            <div class="box-title">
-                                {{ __('shop::app.customer.account.order.view.billing-address') }}
-                            </div>
+                        @if ($order->billing_address)
+                            <div class="box">
+                                <div class="box-title">
+                                    {{ __('shop::app.customer.account.order.view.billing-address') }}
+                                </div>
 
-                            <div class="box-content">
-                                @include ('admin::sales.address', ['address' => $order->billing_address])
+                                <div class="box-content">
+                                    @include ('admin::sales.address', ['address' => $order->billing_address])
 
-                                {!! view_render_event('bagisto.shop.customers.account.orders.view.billing-address.after', ['order' => $order]) !!}
+                                    {!! view_render_event('bagisto.shop.customers.account.orders.view.billing-address.after', ['order' => $order]) !!}
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
                         @if ($order->shipping_address)
                             <div class="box">

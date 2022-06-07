@@ -106,6 +106,22 @@ class CartController extends Controller
     }
 
     /**
+     * Removes the item from the cart if it exists.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function removeAllItems()
+    {
+        $result = Cart::removeAllItems();
+
+        if ($result) {
+            session()->flash('success', trans('shop::app.checkout.cart.item.success-all-remove'));
+        }
+
+        return redirect()->back();
+    }
+
+    /**
      * Updates the quantity of the items present in the cart.
      *
      * @return \Illuminate\Http\Response
