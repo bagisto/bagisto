@@ -130,12 +130,14 @@
                             <button
                                 class="btn btn-outline-secondary theme-btn"
                                 style="padding: 6px 20px"
+                                id="copy-btn"
+                                title="{{ __('shop::app.customer.account.wishlist.copy-link') }}"
                                 type="button"
                                 @click="copyToClipboard"
                             >
                                 {{ __('shop::app.customer.account.wishlist.copy') }}
                             </button>
-                        </div>
+                        </div> 
                     </div>
 
                     <p class="alert alert-danger" v-else>
@@ -193,8 +195,8 @@
 
                     copyToClipboard: function() {
                         this.$refs.sharedLink.focus();
-
                         document.execCommand('copy');
+                        showCopyMessage();
                     }
                 }
             });
@@ -209,6 +211,12 @@
             if (confirm('{{ __('shop::app.customer.account.wishlist.confirm-delete-all') }}')) document.getElementById('remove-all-wishlist').submit();
 
             return;
+        }
+
+        function showCopyMessage()
+        {
+            $('#copy-btn').text("{{ __('shop::app.customer.account.wishlist.copied') }}");
+            $('#copy-btn').css({backgroundColor: '#146e24'});
         }
     </script>
 @endpush
