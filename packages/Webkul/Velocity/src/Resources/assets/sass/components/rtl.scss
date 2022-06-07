@@ -576,6 +576,15 @@ body {
     }
 }
 
+.cross-icon {
+    background-image: url("../images/icon-crossed.svg");
+    width: 18px;
+    height: 18px;
+    position: absolute;
+   	margin-right: -54px;
+    top: 5px;
+}
+
 @media only screen and (max-width: 1192px) {
 }
 
