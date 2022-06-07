@@ -280,7 +280,7 @@ class ConfigurationController extends Controller
 
         Storage::makeDirectory($copiedPath);
 
-        if ( File::copy($resourceImagePath, storage_path('app/public/' . $image)) ) {
+        if ( Storage::copy($resourceImagePath, storage_path('app/public/' . $image)) ) {
             $result = $image;
         }
 
