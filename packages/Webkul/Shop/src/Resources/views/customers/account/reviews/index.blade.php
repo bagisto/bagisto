@@ -63,12 +63,12 @@
                         </div>
 
                         <div class="operations">
-                            <form id="deleteReviewForm" action="{{ route('customer.review.delete', $review->id) }}" method="post">
+                            <form id="deleteReviewForm{{ $review->id }}" action="{{ route('customer.review.delete', $review->id) }}" method="post">
                                 @method('delete')
                                 @csrf
                             </form>
 
-                            <a class="mb-50" href="javascript:void(0);" onclick="confirm('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}') ? document.getElementById('deleteReviewForm').submit() : null;">
+                            <a class="mb-50" href="javascript:void(0);" onclick="deleteReview('{{ $review->id }}')">
                                 <span class="icon trash-icon"></span>
                             </a>
                         </div>
@@ -90,3 +90,15 @@
         {!! view_render_event('bagisto.shop.customers.account.reviews.list.after', ['reviews' => $reviews]) !!}
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function deleteReview(reviewId) {
+            if (! confirm('{{ __("shop::app.customer.account.review.delete.confirmation-message") }}')) {
+                return;
+            }
+
+            $(`#deleteReviewForm${reviewId}`).submit();
+        }
+    </script>
+@endpush
