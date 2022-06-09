@@ -58,13 +58,13 @@
                             </div>  
 
                             <div>
-                                <form id="deleteReviewForm" action="{{ route('customer.review.delete', $review->id) }}" method="post">
+                                <form id="deleteReviewForm{{ $review->id }}" action="{{ route('customer.review.delete', $review->id) }}" method="post">
                                     @method('delete')
 
                                     @csrf
                                 </form>
 
-                                <a class="unset" href="javascript:void(0);" onclick="confirm('{{ __('shop::app.customer.account.review.delete.confirmation-message') }}') ? document.getElementById('deleteReviewForm').submit() : null;">
+                                <a class="unset" href="javascript:void(0);" onclick="deleteReview('{{ $review->id }}')">
                                     <span class="rango-delete fs24"></span>
                                     
                                     <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
@@ -119,5 +119,13 @@
                 }
             });
         })();
+
+        function deleteReview(reviewId) {
+            if (! confirm('{{ __("shop::app.customer.account.review.delete.confirmation-message") }}')) {
+                return;
+            }
+
+            $(`#deleteReviewForm${reviewId}`).submit();
+        }
     </script>
 @endpush
