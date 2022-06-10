@@ -4,6 +4,17 @@
     {{ __('shop::app.customer.account.profile.index.title') }}
 @endsection
 
+@push('css')
+
+<style>
+.cross-icon {
+position: absolute;
+top: 5px;
+margin-left: -54px;
+}
+</style>
+
+@endpush
 @section('page-detail-wrapper')
     <div class="account-head mb-15">
         <span class="account-heading">{{ __('shop::app.customer.account.profile.index.title') }}</span>
