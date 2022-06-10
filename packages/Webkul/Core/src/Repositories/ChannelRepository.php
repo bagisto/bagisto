@@ -70,8 +70,6 @@ class ChannelRepository extends Repository
     {
         Event::dispatch('core.channel.update.before', $id);
 
-        $channel = $this->find($id);
-
         $channel = parent::update($data, $id, $attribute);
 
         $channel->locales()->sync($data['locales']);
