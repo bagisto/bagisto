@@ -121,8 +121,8 @@
         </div>
     </div>
 @else
-    <div class="dropdown-toggle" style="pointer-events: none;">
-        <div style="display: inline-block; cursor: pointer;">
+    <div class="dropdown-toggle">
+        <div style="display: inline-block; cursor: not-allowed">
             <span class="icon cart-icon"></span>
             <span class="name">{{ __('shop::app.minicart.cart') }}<span class="count"> ({{ __('shop::app.minicart.zero') }}) </span></span>
         </div>
