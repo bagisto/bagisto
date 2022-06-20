@@ -97,7 +97,7 @@
 
                 removeCoupon: function () {
                     let self = this;
-
+                    $('.fs18').css('display','none');
                     axios
                         .delete('{{ route('shop.checkout.coupon.remove.coupon') }}')
                         .then(function(response) {

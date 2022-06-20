@@ -96,7 +96,7 @@
 
                 removeCoupon: function () {
                     let self = this;
-
+                    $('.cross-icon').css('display','none');
                     axios.delete('{{ route('shop.checkout.coupon.remove.coupon') }}')
                         .then(function(response) {
                             self.$emit('onRemoveCoupon')
