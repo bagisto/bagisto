@@ -44,7 +44,7 @@
                 notif-title="{{ __('admin::app.notification.notification-title', ['read' => 0]) }}"
                 get-notification-url="{{ route('admin.notification.get-notification') }}"
                 view-all="{{ route('admin.notification.index') }}"
-                order-view-url="{{ \URL::to('/') }}/admin/viewed-notifications/"
+                order-view-url="{{ \URL::to('/') }}/{{ config('app.admin_url')}}/viewed-notifications/"
                 pusher-key="{{ env('PUSHER_APP_KEY') }}"
                 pusher-cluster="{{ env('PUSHER_APP_CLUSTER') }}"
                 title="{{ __('admin::app.notification.title-plural') }}"
