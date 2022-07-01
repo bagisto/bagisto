@@ -513,7 +513,7 @@ abstract class AbstractType
      */
     public function getFinalPrice($qty = null)
     {
-        return round($this->getMinimalPrice($qty), 2);
+        return round($this->getMinimalPrice($qty), 4);
     }
 
     /**
@@ -887,7 +887,7 @@ abstract class AbstractType
             return $result;
         }
 
-        $price = round($item->product->getTypeInstance()->getFinalPrice($item->quantity), 2);
+        $price = round($item->product->getTypeInstance()->getFinalPrice($item->quantity), 4);
 
         if ($price == $item->base_price) {
             return $result;
