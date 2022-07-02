@@ -61,8 +61,8 @@
                     </div>
 
                     <div class="section-content">
-                        <div class="table">
-                            <table>
+                    <div class="table-responsive">
+                            <table class="table">
                                 <thead>
                                     <tr>
                                         <th>{{ __('shop::app.customer.account.order.view.SKU') }}</th>
