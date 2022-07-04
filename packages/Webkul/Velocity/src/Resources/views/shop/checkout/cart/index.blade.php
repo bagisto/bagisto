@@ -61,6 +61,7 @@
                                             $product = $item->product;
 
                                             $productPrice = $product->getTypeInstance()->getProductPrices();
+                                            $productSpecialPrice = $product->getTypeInstance()->getPriceHtml();
 
                                             if (is_null ($product->url_key)) {
                                                 if (! is_null($product->parent)) {
@@ -110,7 +111,7 @@
 
                                                 <div class="row col-12 no-padding no-margin item-price">
                                                     <div class="product-price">
-                                                        <span>{{ core()->currency($item->base_price) }}</span>
+                                                      @php  echo $productSpecialPrice @endphp 
                                                     </div>
                                                 </div>
 
