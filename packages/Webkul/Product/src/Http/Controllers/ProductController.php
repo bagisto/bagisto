@@ -3,6 +3,7 @@
 namespace Webkul\Product\Http\Controllers;
 
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\ProductDataGrid;
@@ -50,8 +51,7 @@ class ProductController extends Controller
         protected InventorySourceRepository $inventorySourceRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ProductInventoryRepository $productInventoryRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
     }
 
@@ -95,7 +95,7 @@ class ProductController extends Controller
     public function store()
     {
         if (
-            ! request()->get('family')
+            !request()->get('family')
             && ProductType::hasVariants(request()->input('type'))
             && request()->input('sku') != ''
         ) {
@@ -104,8 +104,8 @@ class ProductController extends Controller
 
         if (
             ProductType::hasVariants(request()->input('type'))
-            && (! request()->has('super_attributes')
-                || ! count(request()->get('super_attributes')))
+            && (!request()->has('super_attributes')
+                || !count(request()->get('super_attributes')))
         ) {
             session()->flash('error', trans('admin::app.catalog.products.configurable-error'));
 
@@ -131,15 +131,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
+        $locale = $request->locale;
+
         $product = $this->productRepository->with(['variants', 'variants.inventories'])->findOrFail($id);
 
         $categories = $this->categoryRepository->getCategoryTree();
 
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
 
-        return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
+        return view($this->_config['view'], compact('product', 'categories', 'inventorySources', 'locale'));
     }
 
     /**
@@ -171,7 +173,7 @@ class ProductController extends Controller
 
         if (count($multiselectAttributeCodes)) {
             foreach ($multiselectAttributeCodes as $multiselectAttributeCode) {
-                if (! isset($data[$multiselectAttributeCode])) {
+                if (!isset($data[$multiselectAttributeCode])) {
                     $data[$multiselectAttributeCode] = [];
                 }
             }
@@ -225,7 +227,7 @@ class ProductController extends Controller
     {
         $originalProduct = $this->productRepository->findOrFail($productId);
 
-        if (! $originalProduct->getTypeInstance()->canBeCopied()) {
+        if (!$originalProduct->getTypeInstance()->canBeCopied()) {
             session()->flash(
                 'error',
                 trans('admin::app.response.product-can-not-be-copied', [
@@ -325,7 +327,7 @@ class ProductController extends Controller
     {
         $data = request()->all();
 
-        if (! isset($data['massaction-type'])) {
+        if (!isset($data['massaction-type'])) {
             return redirect()->back();
         }
 
