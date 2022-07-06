@@ -1863,7 +1863,6 @@
                     float: right;
 
                     .control-group {
-                        height: 45px;
                         width: auto;
                         border-top: 0;
                         padding-top: 0;
@@ -1882,7 +1881,10 @@
                         }
 
                         > * {
+                            display: flex;
+                            justify-content: flex-end;
                             height: 100%;
+                            margin-bottom: 5px;
                         }
                     }
                 }
