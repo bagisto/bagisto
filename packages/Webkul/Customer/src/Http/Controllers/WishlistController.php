@@ -69,9 +69,11 @@ class WishlistController extends Controller
     {
         $product = $this->productRepository->findOneByField('id', $itemId);
 
-        if ($product == null || ! $product->status)
+        if ($product == null || ! $product->status) {
+            session()->flash('error', trans('customer::app.wishlist.failure'));
             return redirect()->back();
-
+        }
+        
         $data = [
             'channel_id'  => core()->getCurrentChannel()->id,
             'product_id'  => $itemId,
