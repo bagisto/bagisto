@@ -10,6 +10,7 @@ return [
         'empty' => '您的愿望清单中没有任何商品',
         'select-options' => '在添加到愿望清单之前需要选择选项',
         'remove-all-success' => '您的愿望清单中的所有项目都已被删除',
+        'product-removed'  => 'Item Cannot Be Added To Wishlist As Product Has Been Removed by Admin',
     ],
 
     'reviews' => [

@@ -10,6 +10,7 @@ return [
         'empty' => 'Você não tem nenhum item em sua lista de desejos',
         'select-options' => 'Precisa selecionar opções antes de adicionar à lista de desejos',
         'remove-all-success' => 'Todos os itens da sua lista de desejos foram removidos',
+        'product-removed'  => 'Item Cannot Be Added To Wishlist As Product Has Been Removed by Admin',
     ],
 
     'reviews' => [

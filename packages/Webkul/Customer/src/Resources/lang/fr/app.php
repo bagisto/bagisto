@@ -10,6 +10,7 @@ return [
         'empty' => 'Vous n\'avez aucun article dans votre liste de souhaits',
         'select-options' => 'Besoin de sélectionner des options avant d\'ajouter à la liste de souhaits',
         'remove-all-success' => 'Tous les articles de votre liste de souhaits ont été supprimés',
+        'product-removed'  => 'L article ne peut pas être ajouté à la liste de souhaits car le produit a été supprimé par l administrateur',
     ],
 
     'reviews' => [
