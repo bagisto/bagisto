@@ -218,8 +218,9 @@
                     </div>
 
                     <div v-else>
-                        <div class="control-group" v-if="matchedAttribute.type == 'text' || matchedAttribute.type == 'price' || matchedAttribute.type == 'decimal' || matchedAttribute.type == 'integer'">
-                            <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
+                        <div class="control-group" :class="[errors.has('value') ? 'has-error' : '']" v-if="matchedAttribute.type == 'text' || matchedAttribute.type == 'price' || matchedAttribute.type == 'decimal' || matchedAttribute.type == 'integer'">
+                            <input v-validate="matchedAttribute.type == 'price'?'numeric':'' || matchedAttribute.type == 'decimal'?'decimal:2':'' || matchedAttribute.type == 'integer' ? 'numeric':'' || matchedAttribute.type == 'text'?'alpha':''" class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value" name="value"/>
+                            <span class="control-error" v-if="errors.has('value')">@{{ errors.first('value') }}</span>
                         </div>
 
                         <div class="control-group date" v-if="matchedAttribute.type == 'date'">
