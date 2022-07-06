@@ -69,7 +69,7 @@ class WishlistController extends Controller
     {
         $product = $this->productRepository->findOneByField('id', $itemId);
 
-        if (! $product->status)
+        if ($product == null || ! $product->status)
             return redirect()->back();
 
         $data = [
