@@ -10,8 +10,9 @@ return [
         'empty' => 'ليس لديك أي عناصر في قائمة الامنيات',
         'select-options' => 'تحتاج إلى تحديد خيارات قبل إضافة إلى قائمة الأمنيات',
         'remove-all-success' => 'تمت إزالة جميع العناصر من قائمة الأمنيات الخاصة بك',
-        'product-removed'  => 'لا يمكن إضافة العنصر إلى قائمة الرغبات حيث تمت إزالة المنتج بواسطة المسؤول',
     ],
+
+    'product-removed'  => 'Product Is No More Available As Removed By Admin',
 
     'reviews' => [
         'empty' => '.لم تقم بمراجعة أي منتج حتى الآن',

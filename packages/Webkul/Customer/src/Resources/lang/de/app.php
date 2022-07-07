@@ -10,8 +10,9 @@ return [
         'empty' => 'Sie haben keine Artikel auf Ihrer Wunschliste',
         'select-options' => 'Vor dem Hinzufügen zur Wunschliste müssen Optionen ausgewählt werden',
         'remove-all-success' => 'Alle Elemente von Ihrer Wunschliste wurden entfernt',
-        'product-removed'  => 'Artikel kann nicht zur Wunschliste hinzugefügt werden, da Produkt vom Administrator entfernt wurde',
     ],
+
+    'product-removed'  => 'Das Produkt ist nicht mehr verfügbar, da es vom Administrator entfernt wurde',
 
     'reviews' => [
         'empty' => 'Sie haben noch kein Produkt bewertet',

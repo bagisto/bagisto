@@ -10,8 +10,9 @@ return [
         'empty' => 'U heeft geen items op uw verlanglijst',
         'select-options' => 'Moet opties selecteren voordat u aan verlanglijst toevoegt',
         'remove-all-success' => 'Alle items van je verlanglijst zijn verwijderd',
-        'product-removed'  => 'Artikel kan niet aan verlanglijst worden toegevoegd omdat het product door de beheerder is verwijderd',
     ],
+
+    'product-removed'  => 'Product is niet meer beschikbaar zoals verwijderd door beheerder',
 
     'reviews' => [
         'empty' => 'U heeft nog geen product beoordeeld',

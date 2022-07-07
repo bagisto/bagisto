@@ -10,8 +10,9 @@ return [
         'empty' => 'Non hai prodotti nei tuoi Preferiti',
         'select-options' => 'Seleziona una opzione del prodotto prima di aggiungerlo ai Preferiti',
         'remove-all-success' => 'Tutti i Prodotti presenti nei preferiti sono stati rimossi',
-        'product-removed'  => 'Item Cannot Be Added To Wishlist As Product Has Been Removed by Admin',
     ],
+
+    'product-removed'  => 'Il prodotto non è più disponibile in quanto rimosso dall amministratore',
 
     'reviews' => [
         'empty' => 'Non hai ancora recensito i nostri prodotti'

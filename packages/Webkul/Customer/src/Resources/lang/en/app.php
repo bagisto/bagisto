@@ -10,8 +10,9 @@ return [
         'empty' => 'You Don\'t Have Any Items In Your Wishlist',
         'select-options' => 'Need To Select Options Before Adding To Wishlist',
         'remove-all-success' => 'All The Items From Your Wishlist Have Been Removed',
-        'product-removed'  => 'Item Cannot Be Added To Wishlist As Product Has Been Removed by Admin',
     ],
+
+    'product-removed'  => 'Product Is No More Available As Removed By Admin',
 
     'reviews' => [
         'empty' => 'You have not reviewed any product yet',

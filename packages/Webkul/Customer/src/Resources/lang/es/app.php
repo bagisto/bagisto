@@ -10,8 +10,9 @@ return [
         'empty' => 'No tienes artículos en la lista de deseos',
         'select-options' => 'Necesita seleccionar opciones antes de agregar a la lista de deseos',
         'remove-all-success' => 'Se han eliminado todos los elementos de su lista de deseos',
-        'product-removed'  => 'El artículo no se puede agregar a la lista de deseos porque el administrador eliminó el producto',
     ],
+
+    'product-removed'  => 'El producto ya no está disponible porque lo eliminó el administrador',
 
     'reviews' => [
         'empty' => 'Aún no has calificado ningún producto',

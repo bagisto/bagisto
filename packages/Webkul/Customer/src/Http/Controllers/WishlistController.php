@@ -70,7 +70,7 @@ class WishlistController extends Controller
         $product = $this->productRepository->findOneByField('id', $itemId);
 
         if ( $product == null ) {
-            session()->flash('error', trans('customer::app.wishlist.product-removed'));
+            session()->flash('error', trans('customer::app.product-removed'));
             return redirect()->back();
         } elseif (! $product->status) {
             return redirect()->back();

@@ -10,8 +10,9 @@ return [
         'empty' => 'İstek Listenizde Hiç Ürün Yok',
         'select-options' => 'İstek Listesine Eklemeden Önce Seçenekleri Seçmeniz Gerekiyor',
         'remove-all-success' => 'İstek Listenizdeki Tüm Öğeler Kaldırıldı',
-        'product-removed'  => 'Item Cannot Be Added To Wishlist As Product Has Been Removed by Admin',
     ],
+
+    'product-removed'  => 'Ürün Yönetici Tarafından Kaldırıldığı İçin Artık Mevcut Değil',
 
     'reviews' => [
         'empty' => 'Henüz hiçbir ürünü incelemediniz',

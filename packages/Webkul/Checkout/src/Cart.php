@@ -116,7 +116,9 @@ class Cart
 
         $product = $this->productRepository->findOneByField('id', $productId);
 
-        if ($product->status === 0) {
+        if($product == null) {
+            return ['info' => __('customer::app.wishlist.product-removed')];
+        } elseif ($product->status === 0) {
             return ['info' => __('shop::app.checkout.cart.item.inactive-add')];
         }
 
