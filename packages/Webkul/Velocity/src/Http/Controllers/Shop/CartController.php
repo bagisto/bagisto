@@ -96,14 +96,16 @@ class CartController extends Controller
                     return redirect()->route('shop.checkout.onepage.index');
                 }
             }
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
 
             session()->flash('warning', __($exception->getMessage()));
 
             $product = $this->productRepository->find($id);
 
-            Log::error('Velocity CartController: ' . $exception->getMessage(),
-                ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]);
+            Log::error(
+                'Velocity CartController: ' . $exception->getMessage(),
+                ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]
+            );
 
             $response = [
                 'status'           => 'danger',
