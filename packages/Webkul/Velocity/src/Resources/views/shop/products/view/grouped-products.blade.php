@@ -21,10 +21,10 @@
                                 <span class="qty">
                                     <quantity-changer
                                         :control-name="'qty[{{$groupedProduct->associated_product_id}}]'"
-                                        :validations="'required|numeric|min_value:0'"
+                                        :validations="'required|numeric|min_value:1'"
                                         quantity="{{ $groupedProduct->qty }}"
                                         quantity-text="{{ __('shop::app.products.quantity') }}"
-                                        min-quantity="0">
+                                        min-quantity="1">
                                     </quantity-changer>
                                 </span>
                             </li>
