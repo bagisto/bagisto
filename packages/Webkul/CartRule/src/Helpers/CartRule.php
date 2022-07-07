@@ -367,8 +367,6 @@ class CartRule
 
         $cart->save();
 
-        Cart::setCart($cart);
-
         return $this;
     }
 
@@ -432,8 +430,6 @@ class CartRule
         $cart->applied_cart_rule_ids = join(',', $cartAppliedCartRuleIds);
 
         $cart->save();
-
-        Cart::setCart($cart);
     }
 
     /**

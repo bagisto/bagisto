@@ -49,7 +49,6 @@ class Cart
     {
     }
 
-    protected $cart;
     /**
      * Returns cart.
      *
@@ -57,31 +56,20 @@ class Cart
      */
     public function getCart(): ?\Webkul\Checkout\Contracts\Cart
     {
-        if ($this->cart) {
-            return $this->cart;
-        }
+        $cart = null;
 
         if (auth()->guard()->check()) {
-            $this->cart = $this->cartRepository->findOneWhere([
+            $cart = $this->cartRepository->findOneWhere([
                 'customer_id' => auth()->guard()->user()->id,
                 'is_active'   => 1,
             ]);
         } else if (session()->has('cart')) {
-            $this->cart = $this->cartRepository->find(session()->get('cart')->id);
+            $cart = $this->cartRepository->find(session()->get('cart')->id);
         }
 
-        $this->removeInactiveItems($this->cart);
+        $this->removeInactiveItems($cart);
 
-        return $this->cart;
-    }
-    /**
-     * Returns cart.
-     *
-     * @return \Webkul\Checkout\Contracts\Cart|null
-     */
-    public function setCart($cart)
-    {
-        $this->cart = $cart;
+        return $cart;
     }
 
     /**
@@ -169,8 +157,6 @@ class Cart
                 }
             }
         }
-
-        $this->setCart($cart);
 
         Event::dispatch('checkout.cart.add.after', $cart);
 
@@ -294,8 +280,6 @@ class Cart
                 if (session()->has('cart')) {
                     session()->forget('cart');
                 }
-
-                $this->setCart(null);
             }
 
             Shipping::collectRates();
@@ -329,9 +313,7 @@ class Cart
             $this->removeItem($item->id);
         }
 
-        $this->setCart(null);
-
-        Event::dispatch('checkout.cart.delete.all.after', null);
+        Event::dispatch('checkout.cart.delete.all.after', $cart);
 
         return $cart;
     }
@@ -359,8 +341,6 @@ class Cart
                     if (session()->has('cart')) {
                         session()->forget('cart');
                     }
-
-                    $this->setCart(null);
                 }
 
                 session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
@@ -397,8 +377,6 @@ class Cart
 
         $cart->save();
 
-        $this->setCart($cart);
-
         $this->collectTotals();
 
         return true;
@@ -422,8 +400,6 @@ class Cart
 
         $cart->shipping_method = $shippingMethodCode;
         $cart->save();
-
-        $this->setCart($cart);
 
         return true;
     }
@@ -516,8 +492,6 @@ class Cart
 
         $cart->save();
 
-        $this->setCart($cart);
-
         Event::dispatch('checkout.cart.collect.totals.after', $cart);
     }
 
@@ -568,8 +542,6 @@ class Cart
 
             $item->save();
         }
-
-        $this->setCart($cart);
 
         Event::dispatch('checkout.cart.calculate.items.tax.after', $cart);
     }

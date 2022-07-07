@@ -25,8 +25,6 @@ trait CartCoupons
 
         $cart->save();
 
-        $this->setCart($cart);
-
         return $this;
     }
 
@@ -42,8 +40,6 @@ trait CartCoupons
         $cart->coupon_code = null;
 
         $cart->save();
-
-        $this->setCart($cart);
 
         return $this;
     }
