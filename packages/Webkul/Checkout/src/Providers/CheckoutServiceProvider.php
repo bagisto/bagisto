@@ -49,6 +49,6 @@ class CheckoutServiceProvider extends ServiceProvider
             return new Cart();
         });
 
-        $this->app->bind('cart', \Webkul\Checkout\Cart::class);
+        $this->app->singleton('cart', \Webkul\Checkout\Cart::class);
     }
 }

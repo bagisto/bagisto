@@ -68,6 +68,8 @@ trait CartTools
 
             $this->cartRepository->delete($guestCart->id);
 
+            $this->setCart($cart);
+
             session()->forget('cart');
         }
     }
@@ -239,6 +241,8 @@ trait CartTools
 
         if (! $cart->items->count()) {
             $this->cartRepository->delete($cart->id);
+
+            $this->setCart(null);
         }
 
         $this->collectTotals();

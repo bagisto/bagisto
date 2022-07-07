@@ -77,7 +77,7 @@ class ProductRepository extends Repository
     {
         Event::dispatch('catalog.product.update.before', $id);
 
-        $product = $this->find($id);
+        $product = $this->findOrFail($id);
 
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
 
