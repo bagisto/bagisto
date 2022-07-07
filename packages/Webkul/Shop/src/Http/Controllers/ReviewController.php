@@ -34,7 +34,12 @@ class ReviewController extends Controller
     public function create($slug)
     {
         if (auth()->guard('customer')->check() || core()->getConfigData('catalog.products.review.guest_review')) {
-            $product = $this->productRepository->findBySlugOrFail($slug);
+            $product = $this->productRepository->findBySlug($slug);
+            
+            if ($product == null) {
+                session()->flash('error', trans('customer::app.product-removed'));
+                return redirect()->back();
+            }
 
             return view($this->_config['view'], compact('product'));
         }
