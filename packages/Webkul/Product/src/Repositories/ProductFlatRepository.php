@@ -192,7 +192,7 @@ class ProductFlatRepository extends Repository
             $filterAttributes = $this->getProductsRelatedFilterableAttributes($category);
         }
 
-        if (! count($filterAttributes) > 0) {
+        if (empty($filterAttributes)) {
             $filterAttributes = $this->attributeRepository->getFilterAttributes();
         }
 

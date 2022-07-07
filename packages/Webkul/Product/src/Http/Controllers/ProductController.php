@@ -303,7 +303,7 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        if (! $data['massaction-type'] == 'update') {
+        if ($data['massaction-type'] !== 'update') {
             return redirect()->back();
         }
 
