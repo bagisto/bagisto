@@ -120,6 +120,19 @@ class Cart
             return ['info' => __('shop::app.checkout.cart.item.inactive-add')];
         }
 
+        if (isset($data['qty'])) {
+            $count = 0;
+            foreach ($data['qty'] as $itemId => $quantity) {
+                if (substr($quantity, 0, 1) == 0 || $quantity <= 0 ) {
+                    $count++;
+                }                
+            }
+            
+            if (count($data['qty']) ==  $count) {
+                throw new Exception(__('shop::app.checkout.cart.quantity.illegal'));
+            } 
+        }
+
         $cartProducts = $product->getTypeInstance()->prepareForCart($data);
 
         if (is_string($cartProducts)) {
