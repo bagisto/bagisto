@@ -115,7 +115,7 @@ class RefundController extends Controller
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Refund']));
 
-        return redirect()->route($this->_config['redirect'], $orderId);
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
