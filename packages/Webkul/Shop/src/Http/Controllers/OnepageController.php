@@ -230,7 +230,7 @@ class OnepageController extends Controller
             throw new \Exception(trans('shop::app.checkout.cart.suspended-account-message'));
         }
 
-        if(auth()->guard('customer')->user() && ! auth()->guard('customer')->user()->status) {
+        if (auth()->guard('customer')->user() && ! auth()->guard('customer')->user()->status) {
             throw new \Exception(trans('shop::app.checkout.cart.inactive-account-message'));
         }
 
