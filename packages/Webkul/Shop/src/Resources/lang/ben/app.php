@@ -533,6 +533,7 @@ return [
             ],
             'minimum-order-message'     => 'ন্যূনতম অর্ডারের পরিমাণ হল :অ্যামাউন্ট',
             'suspended-account-message' => 'আপনার অ্যাকাউন্ট স্থগিত করা হয়েছে.',
+            'inactive-account-message' =>  'আপনার অ্যাকাউন্ট নিষ্ক্রিয় করা হয়েছে.',
             'check-shipping-address'    => 'অনুগ্রহ করে শিপিং ঠিকানা চেক করুন।',
             'check-billing-address'     => 'বিলিং ঠিকানা চেক করুন।',
             'specify-shipping-method'   => 'অনুগ্রহ করে শিপিং পদ্ধতি উল্লেখ করুন।',

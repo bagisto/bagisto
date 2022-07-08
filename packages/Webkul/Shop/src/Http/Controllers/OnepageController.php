@@ -230,6 +230,10 @@ class OnepageController extends Controller
             throw new \Exception(trans('shop::app.checkout.cart.suspended-account-message'));
         }
 
+        if(auth()->guard('customer')->user() && ! auth()->guard('customer')->user()->status) {
+            throw new \Exception(trans('shop::app.checkout.cart.inactive-account-message'));
+        }
+
         if (! $cart->checkMinimumOrder()) {
             throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
         }

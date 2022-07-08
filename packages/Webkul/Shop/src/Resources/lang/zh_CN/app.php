@@ -535,6 +535,7 @@ return [
             ],
             'minimum-order-message'     => '最低订购金额为 :amount',
             'suspended-account-message' => '您的帐户已被暂停.',
+            'inactive-account-message' =>  '您的帐户一直处于非活动状态',
             'check-shipping-address'    => '请检查收货地址.',
             'check-billing-address'     => '请检查帐单地址.',
             'specify-shipping-method'   => '请指定送货方式.',
