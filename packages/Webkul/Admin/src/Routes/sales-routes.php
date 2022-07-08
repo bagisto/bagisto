@@ -69,9 +69,9 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
             'view' => 'admin::sales.shipments.create',
         ])->name('admin.sales.shipments.create');
 
-        Route::post('/shipments/create/{order_id}', [ShipmentController::class, 'store'])->defaults('_config', [
-            'redirect' => 'admin.sales.orders.view',
-        ])->name('admin.sales.shipments.store');
+        Route::post('/refunds/create/{order_id}', [RefundController::class, 'store'])->defaults('_config', [
+            'view' => 'admin::sales.refunds.index',
+        ])->name('admin.sales.refunds.store');
 
         Route::get('/shipments/view/{id}', [ShipmentController::class, 'view'])->defaults('_config', [
             'view' => 'admin::sales.shipments.view',
