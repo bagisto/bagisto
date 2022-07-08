@@ -274,11 +274,31 @@
             inject: ['$validator'],
 
             data: function() {
-                return {
+                if($.isEmptyObject(downloadableLinks)){   
+                    return {
+                        links: [
+                            {
+                            title: '',
+                            type: 'file',
+                            file: '',
+                            file_name: '',
+                            url: '',
+                            sample_type: 'file',
+                            sample_file: '',
+                            sample_file_name: '',
+                            sample_url: '',
+                            downloads: 0,
+                            sort_order: 0
+                            }
+                        ] 
+                    } 
+                }else{
+                    return {
                     links: downloadableLinks,
 
                     old_links: @json(old('downloadable_links'))
                 }
+            }
             },
 
             created: function() {
