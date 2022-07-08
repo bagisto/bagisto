@@ -286,10 +286,11 @@ array_push($productImages, $image['medium_image_url']);
                         setTimeout(function() {
                             document.getElementById('product-form').submit();
                         }, 0);
+                    } else {
+                        this.activateAutoScroll();
                     }
 
                 });
-                this.activateAutoScroll();
 
             },
             activateAutoScroll: function() {
