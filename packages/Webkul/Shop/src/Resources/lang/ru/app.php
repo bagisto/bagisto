@@ -533,6 +533,7 @@ return [
             ],
             'minimum-order-message'     => 'Минимальная сумма заказа: сумма',
             'suspended-account-message' => 'Ваша учетная запись была приостановлена.',
+            'inactive-account-message' =>  'Your account has been inactive.',
             'check-shipping-address'    => 'Пожалуйста, проверьте адрес доставки.',
             'check-billing-address'     => 'Пожалуйста, проверьте платежный адрес.',
             'specify-shipping-method'   => '«Укажите способ доставки».',

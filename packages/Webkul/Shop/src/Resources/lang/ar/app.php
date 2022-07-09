@@ -539,6 +539,7 @@ return [
             ],
             'minimum-order-message'     => 'الحد الأدنى لمبلغ الطلب هو :amount',
             'suspended-account-message' => 'تم تعليق حسابك.',
+            'inactive-account-message' =>  'كان حسابك غير نشط.',
             'check-shipping-address'    => 'يرجى التحقق من عنوان الشحن.',
             'check-billing-address'     => 'يرجى التحقق من عنوان الفواتير.',
             'specify-shipping-method'   => 'الرجاء تحديد طريقة الشحن.',
