@@ -80,6 +80,14 @@ class ComparisonController extends Controller
                             ->orWhere('id', $productId)
                             ->get()
                             ->first();
+                            
+            if ($productFlat == null) {
+                return response()->json([
+                    'status'  => 'warning',
+                    'message' => trans('customer::app.product-removed'),
+                    'label'   => trans('velocity::app.shop.general.alert.warning'),
+                ]);
+            }
 
             if ($productFlat) {
                 $productId = $productFlat->id;

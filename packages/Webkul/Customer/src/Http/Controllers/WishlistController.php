@@ -69,8 +69,12 @@ class WishlistController extends Controller
     {
         $product = $this->productRepository->findOneByField('id', $itemId);
 
-        if (! $product->status)
+        if ( $product == null ) {
+            session()->flash('error', trans('customer::app.product-removed'));
             return redirect()->back();
+        } elseif (! $product->status) {
+            return redirect()->back();
+        }
 
         $data = [
             'channel_id'  => core()->getCurrentChannel()->id,
