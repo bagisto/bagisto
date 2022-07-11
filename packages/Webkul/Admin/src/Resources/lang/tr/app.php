@@ -517,6 +517,7 @@ return [
                 'transaction-saved' => 'İşlem kaydedildi',
                 'already-paid'      => 'Bu fatura zaten ödendi',
                 'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
+                'transaction-amount-zero' => 'Transaction amount can be zero or less',
             ],
         ],
     ],
