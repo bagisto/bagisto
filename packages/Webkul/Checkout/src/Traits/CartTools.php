@@ -78,7 +78,7 @@ trait CartTools
                 return;
             }
 
-            foreach ($guestCart->items()->get() as $guestCartItem) {
+            foreach ($guestCart->items as $guestCartItem) {
                 try {
                     $cart = $this->addProduct($guestCartItem->product_id, $guestCartItem->additional);
                 } catch (\Exception $e) {

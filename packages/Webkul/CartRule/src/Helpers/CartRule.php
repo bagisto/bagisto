@@ -53,7 +53,7 @@ class CartRule
     {
         $appliedCartRuleIds = [];
 
-        $this->calculateCartItemTotals($cart, $cart->items()->get());
+        $this->calculateCartItemTotals($cart, $cart->items);
 
         foreach ($cart->items as $item) {
             $itemCartRuleIds = $this->process($cart, $item);
