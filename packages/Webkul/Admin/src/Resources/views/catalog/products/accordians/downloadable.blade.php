@@ -263,9 +263,9 @@
             </td>
         </tr>
     </script>
-
+    @inject('downloadLinks', 'Webkul\Product\Helpers\Downloadable')
     <script>
-        let downloadableLinks = @json($product->downloadable_links);
+        let downloadableLinks = @json($downloadLinks->getProductLink($product));
         let downloadableSamples = @json($product->downloadable_samples);
 
         Vue.component('downloadable-link-list', {
