@@ -573,12 +573,6 @@ abstract class AbstractType
      */
     public function haveSpecialPrice($qty = null)
     {
-        // static $haveSpecialPrice = null;
-
-        // if (! is_null($haveSpecialPrice)) {
-        //     return $haveSpecialPrice;
-        // }
-
         $customerGroupPrice = $this->getCustomerGroupPrice($this->product, $qty);
 
         $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
