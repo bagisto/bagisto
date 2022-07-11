@@ -55,7 +55,7 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get allowed attributes.
      *
-     * @param  \W\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\ProductFlat  $product
      * @return \Illuminate\Support\Collection
      */
     public function getAllowAttributes($product)

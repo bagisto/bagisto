@@ -12,6 +12,23 @@ namespace Webkul\Checkout\Traits;
 trait CartTools
 {
     /**
+     * Remove cart and destroy the session
+     *
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
+     * @return void
+     */
+    public function removeCart($cart)
+    {
+        $this->cartRepository->delete($cart->id);
+
+        if (session()->has('cart')) {
+            session()->forget('cart');
+        }
+
+        $this->resetCart();
+    }
+
+    /**
      * Save cart for guest.
      *
      * @param  \Webkul\Checkout\Contracts\Cart  $cart
@@ -20,7 +37,10 @@ trait CartTools
     public function putCart($cart)
     {
         if (! auth()->guard()->check()) {
-            session()->put('cart', $cart);
+            $cartTemp = new \stdClass();
+            $cartTemp->id = $cart->id;
+
+            session()->put('cart', $cartTemp);
         }
     }
 
@@ -37,7 +57,9 @@ trait CartTools
                 'is_active'   => 1,
             ]);
 
-            $guestCart = session()->get('cart');
+            $this->setCart($cart);
+
+            $guestCart = $this->cartRepository->find(session()->get('cart')->id);
 
             /**
              * When the logged in customer is not having any of the cart instance previously and are active.
@@ -56,9 +78,9 @@ trait CartTools
                 return;
             }
 
-            foreach ($guestCart->items as $guestCartItem) {
+            foreach ($guestCart->items()->get() as $guestCartItem) {
                 try {
-                    $this->addProduct($guestCartItem->product_id, $guestCartItem->additional);
+                    $cart = $this->addProduct($guestCartItem->product_id, $guestCartItem->additional);
                 } catch (\Exception $e) {
                     //Ignore exception
                 }
@@ -66,9 +88,7 @@ trait CartTools
 
             $this->collectTotals();
 
-            $this->cartRepository->delete($guestCart->id);
-
-            session()->forget('cart');
+            $this->removeCart($guestCart);
         }
     }
 

@@ -12,11 +12,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-      'checkout.order.save.after' => [
-          'Webkul\CartRule\Listeners\Order@manageCartRule'
-      ],
-      'checkout.cart.collect.totals.before' => [
-          'Webkul\CartRule\Listeners\Cart@applyCartRules'
-      ],
+        'checkout.order.save.after'           => [
+            'Webkul\CartRule\Listeners\Order@manageCartRule'
+        ],
+
+        'checkout.cart.collect.totals.before' => [
+            'Webkul\CartRule\Listeners\Cart@applyCartRules'
+        ],
     ];
 }
