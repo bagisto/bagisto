@@ -160,7 +160,9 @@ trait CartTools
     public function deActivateCart(): void
     {
         if ($cart = $this->getCart()) {
-            $this->cartRepository->update(['is_active' => false], $cart->id);
+            $cart = $this->cartRepository->update(['is_active' => false], $cart->id);
+
+            $this->resetCart();
 
             if (session()->has('cart')) {
                 session()->forget('cart');
