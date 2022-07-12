@@ -10,6 +10,7 @@ use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Core\Repositories\ChannelRepository;
 
 class ProductFlat
 {
@@ -160,15 +161,11 @@ class ProductFlat
 
         if (isset($product['channels'])) {
             foreach ($product['channels'] as $channel) {
-                $channel = app('Webkul\Core\Repositories\ChannelRepository')->findOrFail($channel);
-
-                $channels[] = $channel['code'];
+                $channels[] = $this->getChannel($channel)->code;
             }
         } else if (isset($parentProduct['channels'])){
             foreach ($parentProduct['channels'] as $channel) {
-                $channel = app('Webkul\Core\Repositories\ChannelRepository')->findOrFail($channel);
-
-                $channels[] = $channel['code'];
+                $channels[] = $this->getChannel($channel)->code;
             }
         } else {
             $channels[] = core()->getDefaultChannelCode();
@@ -286,6 +283,21 @@ class ProductFlat
                 }
             }
         }
+    }
+
+    /**
+     * @param  string  $id
+     * @return mixed
+     */
+    public function getChannel($id)
+    {
+        static $channels = [];
+
+        if (isset($channels[$id])) {
+            return $channels[$id];
+        }
+
+        return $channels[$id] = app(ChannelRepository::class)->findOrFail($id);
     }
 
     /**
