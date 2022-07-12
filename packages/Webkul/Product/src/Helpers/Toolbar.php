@@ -137,7 +137,7 @@ class Toolbar extends AbstractProduct
 
         if (request()->input() == null && $key == $defaultMode) {
             return true;
-        } else if (isset($params['mode']) && $key == $params['mode']) {
+        } elseif (isset($params['mode']) && $key == $params['mode']) {
             return true;
         }
 

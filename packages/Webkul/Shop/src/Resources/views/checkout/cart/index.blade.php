@@ -321,7 +321,7 @@
 
             if (operation == 'add') {
                 quantity = parseInt(quantity) + 1;
-            } else if (operation == 'remove') {
+            } elseif (operation == 'remove') {
                 if (quantity > 1) {
                     quantity = parseInt(quantity) - 1;
                 } else {

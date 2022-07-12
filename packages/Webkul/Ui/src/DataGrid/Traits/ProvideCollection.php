@@ -238,7 +238,7 @@ trait ProvideCollection
                     } else {
                         $record->{$column['index']} = htmlspecialchars($column['wrapper']($record));
                     }
-                } else if (isset($column['closure']) && gettype($column['closure']) === 'object' && $column['closure'] instanceof \Closure) {
+                } elseif (isset($column['closure']) && gettype($column['closure']) === 'object' && $column['closure'] instanceof \Closure) {
                     $record->{$column['index']} = $column['closure']($record);
                 }
             } else {

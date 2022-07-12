@@ -51,7 +51,7 @@ class Transaction
                     $this->orderTransactionRepository->create($transactionData);
                 }
             }
-        } else if ($invoice->order->payment->method == 'paypal_standard') {
+        } elseif ($invoice->order->payment->method == 'paypal_standard') {
             $transactionData['transaction_id'] = $data['txn_id'];
             $transactionData['status']         = $data['payment_status'];
             $transactionData['type']           = $data['payment_type'];

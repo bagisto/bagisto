@@ -86,7 +86,7 @@ class Cart
                 'customer_id' => auth()->guard()->user()->id,
                 'is_active'   => 1,
             ]);
-        } else if (session()->has('cart')) {
+        } elseif (session()->has('cart')) {
             $this->cart = $this->cartRepository->find(session()->get('cart')->id);
         }
 

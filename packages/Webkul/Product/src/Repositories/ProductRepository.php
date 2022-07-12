@@ -468,7 +468,7 @@ class ProductRepository extends Repository
                 ->where('visible_individually', 1)
                 ->orderBy('product_id', 'desc')
                 ->paginate(16);
-        } else if (config('scout.driver') == 'elastic') {
+        } elseif (config('scout.driver') == 'elastic') {
             $queries = explode('_', $term);
 
             $results = app(ProductFlatRepository::class)->getModel()::search(implode(' OR ', $queries))

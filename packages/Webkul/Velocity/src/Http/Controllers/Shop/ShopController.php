@@ -74,7 +74,7 @@ class ShopController extends Controller
 
                 if ($slug == 'new-products') {
                     $products = $this->velocityProductRepository->getNewProducts($count);
-                } else if ($slug == 'featured-products') {
+                } elseif ($slug == 'featured-products') {
                     $products = $this->velocityProductRepository->getFeaturedProducts($count);
                 }
 

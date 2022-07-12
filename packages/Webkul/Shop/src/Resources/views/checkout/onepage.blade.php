@@ -218,9 +218,9 @@
                         if (result) {
                             if (scope == 'address-form') {
                                 self.saveAddress();
-                            } else if (scope == 'shipping-form') {
+                            } elseif (scope == 'shipping-form') {
                                 self.saveShipping();
-                            } else if (scope == 'payment-form') {
+                            } elseif (scope == 'payment-form') {
                                 self.savePayment();
                             }
                         }
@@ -392,7 +392,7 @@
                     if (response.status == 422) {
                         serverErrors = response.data.errors;
                         this.$root.addServerErrors(scope)
-                    } else if (response.status == 403) {
+                    } elseif (response.status == 403) {
                         if (response.data.redirect_url) {
                             window.location.href = response.data.redirect_url;
                         }
