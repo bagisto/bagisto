@@ -367,7 +367,7 @@ class Cart
      *
      * @return void
      */
-    private function removeInactiveItems()
+    public function removeInactiveItems()
     {
         $cart = $this->getCart();
 
