@@ -172,9 +172,7 @@ class Configurable extends AbstractType
                             $permutation[$superAttribute->id] = $variantData[$superAttribute->code];
                         }
 
-                        $variant = $this->createVariant($product, $permutation, $variantData);
-
-                        $this->productImageRepository->upload($variant, $variantData['images'] ?? null);
+                        $this->createVariant($product, $permutation, $variantData);
                     } else {
                         if (is_numeric($index = $previousVariantIds->search($variantId))) {
                             $previousVariantIds->forget($index);
@@ -301,6 +299,8 @@ class Configurable extends AbstractType
         $this->attributeValueRepository->insert($attributeValues);
 
         $this->productInventoryRepository->saveInventories($data, $variant);
+
+        $this->productImageRepository->upload($data, $variant, 'images');
 
         return $variant;
     }

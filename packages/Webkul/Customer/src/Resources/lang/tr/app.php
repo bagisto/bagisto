@@ -12,6 +12,8 @@ return [
         'remove-all-success' => 'İstek Listenizdeki Tüm Öğeler Kaldırıldı',
     ],
 
+    'product-removed'  => 'Ürün Yönetici Tarafından Kaldırıldığı İçin Artık Mevcut Değil',
+
     'reviews' => [
         'empty' => 'Henüz hiçbir ürünü incelemediniz',
     ],

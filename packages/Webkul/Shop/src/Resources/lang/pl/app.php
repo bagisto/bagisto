@@ -534,6 +534,7 @@ return [
             ],
             'minimum-order-message'     => 'Minimalna kwota zamówienia to :amount',
             'suspended-account-message' => 'Your account has been suspended.',
+            'inactive-account-message' =>  'Your account has been inactive.',
             'check-shipping-address'    => 'Please check shipping address.',
             'check-billing-address'     => 'Please check billing address.',
             'specify-shipping-method'   => 'Please specify shipping method.',

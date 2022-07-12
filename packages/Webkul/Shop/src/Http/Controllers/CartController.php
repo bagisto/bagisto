@@ -82,7 +82,11 @@ class CartController extends Controller
                 ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]
             );
 
-            return redirect()->route('shop.productOrCategory.index', $product->url_key);
+            if ($product != null) {
+                return redirect()->route('shop.productOrCategory.index', $product->url_key);
+            }
+            
+            session()->flash('error', trans('customer::app.product-removed'));
         }
 
         return redirect()->back();
