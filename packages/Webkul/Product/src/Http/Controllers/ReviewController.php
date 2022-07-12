@@ -143,7 +143,7 @@ class ReviewController extends Controller
             $indexes = explode(',', request()->input('indexes'));
 
             foreach ($indexes as $key => $value) {
-                $review = $this->productReviewRepository->findOneByField('id', $value);
+                $review = $this->productReviewRepository->find($value);
 
                 try {
                     if (! isset($data['massaction-type'])) {

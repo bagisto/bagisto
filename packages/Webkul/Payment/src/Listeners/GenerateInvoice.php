@@ -41,7 +41,8 @@ class GenerateInvoice
         ) {
             $this->invoiceRepository->create(
                 $this->prepareInvoiceData($order),
-                core()->getConfigData('sales.paymentmethods.cashondelivery.invoice_status'), core()->getConfigData('sales.paymentmethods.cashondelivery.order_status')
+                core()->getConfigData('sales.paymentmethods.cashondelivery.invoice_status'),
+                core()->getConfigData('sales.paymentmethods.cashondelivery.order_status')
             );
         }
 
@@ -51,7 +52,8 @@ class GenerateInvoice
         ) {
             $this->invoiceRepository->create(
                 $this->prepareInvoiceData($order),
-                core()->getConfigData('sales.paymentmethods.moneytransfer.invoice_status'), core()->getConfigData('sales.paymentmethods.moneytransfer.order_status')
+                core()->getConfigData('sales.paymentmethods.moneytransfer.invoice_status'),
+                core()->getConfigData('sales.paymentmethods.moneytransfer.order_status')
             );
         }
     }
