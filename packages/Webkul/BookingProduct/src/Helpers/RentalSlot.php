@@ -21,7 +21,10 @@ class RentalSlot extends Booking
     {
         $bookingProductSlot = $this->typeRepositories[$bookingProduct->type]->findOneByField('booking_product_id', $bookingProduct->id);
 
-        if (! is_array($bookingProductSlot->slots) || ! count($bookingProductSlot->slots)) {
+        if (
+            ! is_array($bookingProductSlot->slots)
+            || ! count($bookingProductSlot->slots)
+        ) {
             return [];
         }
 
@@ -41,7 +44,8 @@ class RentalSlot extends Booking
                          ? $bookingProductSlot->slots
                          : $bookingProductSlot->slots[$requestedDate->format('w')] ?? [];
 
-        if ($requestedDate < $availableFrom
+        if (
+            $requestedDate < $availableFrom
             || $requestedDate > $availableTo
         ) {
             return [];
@@ -66,17 +70,33 @@ class RentalSlot extends Booking
 
                 $to = clone $tempStartDayTime;
 
-                if (($startDayTime <= $from && $from <= $availableTo)
-                    && ($availableTo >= $to && $to >= $startDayTime)
-                    && ($startDayTime <= $from && $from <= $endDayTime)
-                    && ($endDayTime >= $to && $to >= $startDayTime)
+                if (
+                    (
+                        $startDayTime <= $from
+                        && $from <= $availableTo
+                    )
+                    && (
+                        $availableTo >= $to
+                        && $to >= $startDayTime
+                    )
+                    && (
+                        $startDayTime <= $from
+                        && $from <= $endDayTime
+                    )
+                    && (
+                        $endDayTime >= $to
+                        && $to >= $startDayTime
+                    )
                 ) {
                     // Get already ordered qty for this slot
                     $orderedQty = 0;
 
                     $qty = isset($timeDuration['qty']) ? ( $timeDuration['qty'] - $orderedQty ) : 1;
 
-                    if ($qty && $currentTime <= $from) {
+                    if (
+                        $qty
+                        && $currentTime <= $from
+                    ) {
                         if (! isset($slots[$index])) {
                             $slots[$index]['time'] = $startDayTime->format('h:i A') . ' - ' . $endDayTime->format('h:i A');
                         }
@@ -174,7 +194,8 @@ class RentalSlot extends Booking
                     ? Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d') . ' 23:59:59')
                     : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
-            if ($requestedFromDate < $availableFrom
+            if (
+                $requestedFromDate < $availableFrom
                 || $requestedFromDate > $availableTo
                 || $requestedToDate < $availableFrom
                 || $requestedToDate > $availableTo
@@ -242,7 +263,8 @@ class RentalSlot extends Booking
         $rentingType = $item->additional['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
 
         if ($rentingType == 'daily') {
-            if (! isset($item->additional['booking']['date_from'])
+            if (
+                ! isset($item->additional['booking']['date_from'])
                 || ! isset($item->additional['booking']['date_to'])
             ) {
                 $result->itemIsInactive();
@@ -255,7 +277,8 @@ class RentalSlot extends Booking
 
             $price += $bookingProduct->rental_slot->daily_price * $to->diffInDays($from);
         } else {
-            if (! isset($item->additional['booking']['slot']['from'])
+            if (
+                ! isset($item->additional['booking']['slot']['from'])
                 || ! isset($item->additional['booking']['slot']['to'])
             ) {
                 $result->itemIsInactive();

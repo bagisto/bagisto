@@ -88,7 +88,10 @@ class WishlistController extends Controller
             'customer_id' => $this->currentCustomer->id,
         ]);
 
-        if ($product->parent && $product->parent->type !== 'configurable') {
+        if (
+            $product->parent
+            && $product->parent->type !== 'configurable'
+        ) {
             $product = $this->productRepository->findOneByField('id', $product->parent_id);
             $data['product_id'] = $product->id;
         }
@@ -128,7 +131,10 @@ class WishlistController extends Controller
 
             $updateCounts = $this->currentCustomer->wishlist_items()->update(['shared' => $data['shared']]);
 
-            if ($updateCounts && $updateCounts > 0) {
+            if (
+                $updateCounts
+                && $updateCounts > 0
+            ) {
                 return response()->json([
                     'isWishlistShared' => $this->currentCustomer->isWishlistShared(),
                     'wishlistSharedLink' => $this->currentCustomer->getWishlistSharedLink()
@@ -158,7 +164,10 @@ class WishlistController extends Controller
 
         $items = $customer->wishlist_items()->where('shared', 1)->get();
 
-        if ($customer && $items->isNotEmpty()) {
+        if (
+            $customer
+            && $items->isNotEmpty()
+        ) {
             return view($this->_config['view'], compact('customer', 'items'));
         }
 

@@ -75,7 +75,13 @@ class ProductFlat extends Model implements ProductFlatContract
                 ->getSingletonInstance(AttributeRepository::class)
                 ->getAttributeByCode($key);
 
-            if ($attribute && ($attribute->value_per_channel || $attribute->value_per_locale)) {
+            if (
+                $attribute
+                && (
+                    $attribute->value_per_channel
+                    || $attribute->value_per_locale
+                )
+            ) {
                 $defaultProduct = $this->getDefaultProduct();
 
                 $this->attributes[$key] = $defaultProduct->attributes[$key];

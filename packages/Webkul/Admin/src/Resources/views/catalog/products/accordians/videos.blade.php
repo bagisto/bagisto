@@ -164,7 +164,7 @@
             mounted () {
                 if (this.video.id && this.video.url) {
                     this.videoData = this.video.url;
-                } elseif (this.video.id && this.video.file) {
+                } else if (this.video.id && this.video.file) {
                     this.readFile(this.video.file);
                 }
             },

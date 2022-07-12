@@ -39,7 +39,10 @@
                 <div class="heading mt-10">
                     <span> {{ __('shop::app.reviews.rating-reviews') }} </span>
 
-                    @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
+                    @if (
+                        core()->getConfigData('catalog.products.review.guest_review')
+                        || auth()->guard('customer')->check()
+                    )
                         <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary right">
                             {{ __('shop::app.products.write-review-btn') }}
                         </a>

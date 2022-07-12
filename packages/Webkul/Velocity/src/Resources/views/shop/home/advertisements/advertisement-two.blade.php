@@ -4,11 +4,17 @@
     $isLazyLoad = ! isset($lazyload) ? true : ( $lazyload ? true : false );
 @endphp
 
-@if ($velocityMetaData && $velocityMetaData->advertisement)
+@if (
+    $velocityMetaData
+    && $velocityMetaData->advertisement
+)
     @php
         $advertisement = json_decode($velocityMetaData->advertisement, true);
 
-        if (isset($advertisement[2]) && is_array($advertisement[2])) {
+        if (
+            isset($advertisement[2])
+            && is_array($advertisement[2])
+        ) {
             $advertisementTwo = array_values(array_filter($advertisement[2]));
         }
     @endphp

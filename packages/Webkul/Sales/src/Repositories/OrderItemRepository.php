@@ -26,7 +26,10 @@ class OrderItemRepository extends Repository
      */
     public function create(array $data)
     {
-        if (isset($data['product']) && $data['product']) {
+        if (
+            isset($data['product'])
+            && $data['product']
+        ) {
             $data['product_id'] = $data['product']->id;
             $data['product_type'] = get_class($data['product']);
 

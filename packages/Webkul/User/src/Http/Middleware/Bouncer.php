@@ -60,7 +60,10 @@ class Bouncer
             return false;
         }
 
-        if ($role->permission_type !== 'all' && empty($role->permissions)) {
+        if (
+            $role->permission_type !== 'all'
+            && empty($role->permissions)
+        ) {
             return true;
         }
 
@@ -78,7 +81,10 @@ class Bouncer
     {
         $acl = app('acl');
 
-        if ($acl && isset($acl->roles[Route::currentRouteName()])) {
+        if (
+            $acl
+            && isset($acl->roles[Route::currentRouteName()])
+        ) {
             bouncer()->allow($acl->roles[Route::currentRouteName()]);
         }
     }

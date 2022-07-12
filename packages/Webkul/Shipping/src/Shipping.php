@@ -149,7 +149,10 @@ class Shipping
     {
         $shippingMethods = $this->collectRates()['shippingMethods'] ?? [];
 
-        if (empty($shippingMethods) || ! $shippingMethods) {
+        if (
+            empty($shippingMethods)
+            || ! $shippingMethods
+        ) {
             return false;
         }
 

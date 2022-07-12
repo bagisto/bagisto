@@ -161,7 +161,10 @@ class Downloadable extends AbstractType
      */
     public function prepareForCart($data)
     {
-        if (! isset($data['links']) || ! count($data['links'])) {
+        if (
+            ! isset($data['links'])
+            || ! count($data['links'])
+        ) {
             return trans('shop::app.checkout.cart.integrity.missing_links');
         }
 
@@ -194,7 +197,10 @@ class Downloadable extends AbstractType
             return false;
         }
 
-        if (isset($options1['links']) && isset($options2['links'])) {
+        if (
+            isset($options1['links'])
+            && isset($options2['links'])
+        ) {
             return $options1['links'] === $options2['links'];
         }
 

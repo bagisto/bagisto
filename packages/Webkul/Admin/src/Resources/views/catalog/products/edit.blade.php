@@ -101,7 +101,10 @@
                                 @foreach ($customAttributes as $attribute)
 
                                     <?php
-                                        if ($attribute->code == 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
+                                        if (
+                                            $attribute->code == 'guest_checkout'
+                                            && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')
+                                        ) {
                                             continue;
                                         }
 
@@ -116,12 +119,14 @@
                                         }
 
                                         if ($attribute->type == 'file') {
-                                            $retVal = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048' ;
+                                            $retVal = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048';
+
                                             array_push($validations, 'size:' . $retVal);
                                         }
 
                                         if ($attribute->type == 'image') {
-                                            $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048' ;
+                                            $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048';
+
                                             array_push($validations, 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp');
                                         }
 
@@ -164,8 +169,8 @@
                                             @include ($typeView)
 
                                             <span class="control-error"
-                                                  @if ($attribute->type == 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')"
-                                                  @else  v-if="errors.has('{{ $attribute->code }}')"  @endif>
+                                                @if ($attribute->type == 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')"
+                                                @else  v-if="errors.has('{{ $attribute->code }}')"  @endif>
                                                 @if ($attribute->type == 'multiselect')
                                                     @{{ errors.first('{!! $attribute->code !!}[]') }}
                                                 @else

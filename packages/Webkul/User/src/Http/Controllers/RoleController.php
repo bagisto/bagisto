@@ -106,7 +106,10 @@ class RoleController extends Controller
          */
         $isChangedFromAll = $params['permission_type'] == 'custom' && $this->roleRepository->find($id)->permission_type == 'all';
 
-        if ($isChangedFromAll && $this->adminRepository->countAdminsWithAllAccess() === 1) {
+        if (
+            $isChangedFromAll
+            && $this->adminRepository->countAdminsWithAllAccess() === 1
+        ) {
             session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
 
             return redirect()->route($this->_config['redirect']);

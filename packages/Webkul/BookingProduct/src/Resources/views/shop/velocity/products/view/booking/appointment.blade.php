@@ -36,7 +36,10 @@
                         <td>{{ $day['name'] }}</td>
 
                         <td>
-                            @if ($day['slots'] && count($day['slots']))
+                            @if (
+                                $day['slots']
+                                && count($day['slots'])
+                            )
                                 @foreach ($day['slots'] as $slot)
                                     {{ $slot['from'] . ' - ' . $slot['to'] }}</br>
                                 @endforeach

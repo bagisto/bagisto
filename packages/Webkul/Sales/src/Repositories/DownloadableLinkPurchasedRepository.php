@@ -71,7 +71,10 @@ class DownloadableLinkPurchasedRepository extends Repository
      * @return bool
      */
     private function isValidDownloadableProduct($orderItem) : bool {
-        if (stristr($orderItem->type,'downloadable') !== false && isset($orderItem->additional['links'])) {
+        if (
+            stristr($orderItem->type,'downloadable') !== false
+            && isset($orderItem->additional['links'])
+        ) {
             return true;
         }
 

@@ -35,12 +35,24 @@ class GenerateInvoice
      */
     public function handle($order)
     {
-        if ($order->payment->method == 'cashondelivery' && core()->getConfigData('sales.paymentmethods.cashondelivery.generate_invoice')) {
-            $this->invoiceRepository->create($this->prepareInvoiceData($order), core()->getConfigData('sales.paymentmethods.cashondelivery.invoice_status'), core()->getConfigData('sales.paymentmethods.cashondelivery.order_status'));
+        if (
+            $order->payment->method == 'cashondelivery'
+            && core()->getConfigData('sales.paymentmethods.cashondelivery.generate_invoice')
+        ) {
+            $this->invoiceRepository->create(
+                $this->prepareInvoiceData($order),
+                core()->getConfigData('sales.paymentmethods.cashondelivery.invoice_status'), core()->getConfigData('sales.paymentmethods.cashondelivery.order_status')
+            );
         }
 
-        if ($order->payment->method == 'moneytransfer' && core()->getConfigData('sales.paymentmethods.moneytransfer.generate_invoice')) {
-            $this->invoiceRepository->create($this->prepareInvoiceData($order), core()->getConfigData('sales.paymentmethods.moneytransfer.invoice_status'), core()->getConfigData('sales.paymentmethods.moneytransfer.order_status'));
+        if (
+            $order->payment->method == 'moneytransfer'
+            && core()->getConfigData('sales.paymentmethods.moneytransfer.generate_invoice')
+        ) {
+            $this->invoiceRepository->create(
+                $this->prepareInvoiceData($order),
+                core()->getConfigData('sales.paymentmethods.moneytransfer.invoice_status'), core()->getConfigData('sales.paymentmethods.moneytransfer.order_status')
+            );
         }
     }
 

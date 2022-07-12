@@ -66,7 +66,10 @@
                             <div class="control-group">
                                 <label>{{ __('velocity::app.admin.general.locale_logo') }}</label>
 
-                                @if (isset($locale) && $locale->locale_image)
+                                @if (
+                                    isset($locale)
+                                    && $locale->locale_image
+                                )
                                     <image-wrapper
                                         input-name="locale_image"
                                         :multiple="false"

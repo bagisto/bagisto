@@ -89,7 +89,10 @@ class Toolbar extends AbstractProduct
         $params = request()->input();
         $orderDirection = $params['order'] ?? 'asc';
 
-        if (isset($params['sort']) && $key == $params['sort'] . '-' . $orderDirection) {
+        if (
+            isset($params['sort'])
+            && $key == $params['sort'] . '-' . $orderDirection
+        ) {
             return true;
         } elseif (! isset($params['sort'])) {
             $sortBy = core()->getConfigData('catalog.products.storefront.sort_by')
@@ -135,9 +138,15 @@ class Toolbar extends AbstractProduct
             ? core()->getConfigData('catalog.products.storefront.mode')
             : 'grid';
 
-        if (request()->input() == null && $key == $defaultMode) {
+        if (
+            request()->input() == null
+            && $key == $defaultMode
+        ) {
             return true;
-        } elseif (isset($params['mode']) && $key == $params['mode']) {
+        } elseif (
+            isset($params['mode'])
+            && $key == $params['mode']
+        ) {
             return true;
         }
 

@@ -166,7 +166,10 @@ class TaxRateController extends Controller
                             $uploadData['state'] = '';
                         }
 
-                        if (! is_null($uploadData['zip_from']) && ! is_null($uploadData['zip_to'])) {
+                        if (
+                            ! is_null($uploadData['zip_from'])
+                            && ! is_null($uploadData['zip_to'])
+                        ) {
                             $uploadData['is_zip'] = 1;
                         }
 
@@ -245,7 +248,10 @@ class TaxRateController extends Controller
                                     $uploadData['state'] = '';
                                 }
 
-                                if (! is_null($uploadData['zip_from']) && ! is_null($uploadData['zip_to'])) {
+                                if (
+                                    ! is_null($uploadData['zip_from'])
+                                    && ! is_null($uploadData['zip_to'])
+                                ) {
                                     $uploadData['is_zip'] = 1;
                                     $uploadData['zip_code'] = null;
                                 }

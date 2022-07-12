@@ -93,7 +93,10 @@ class Admin extends Authenticatable implements AdminContract, JWTSubject
      */
     public function hasPermission($permission)
     {
-        if ($this->role->permission_type == 'custom' && ! $this->role->permissions) {
+        if (
+            $this->role->permission_type == 'custom'
+            && ! $this->role->permissions
+        ) {
             return false;
         }
 

@@ -33,7 +33,10 @@ class CoreConfigRepository extends Repository
     {
         Event::dispatch('core.configuration.save.before');
 
-        if ($data['locale'] || $data['channel']) {
+        if (
+            $data['locale']
+            || $data['channel']
+        ) {
             $locale = $data['locale'];
             $channel = $data['channel'];
 
@@ -51,12 +54,21 @@ class CoreConfigRepository extends Repository
 
                 $localeBased = isset($field['locale_based']) && $field['locale_based'] ? true : false;
 
-                if (getType($value) == 'array' && ! isset($value['delete'])) {
+                if (
+                    getType($value) == 'array'
+                    && ! isset($value['delete'])
+                ) {
                     $value = implode(',', $value);
                 }
 
-                if (isset($field['channel_based']) && $field['channel_based']) {
-                    if (isset($field['locale_based']) && $field['locale_based']) {
+                if (
+                    isset($field['channel_based'])
+                    && $field['channel_based']
+                ) {
+                    if (
+                        isset($field['locale_based'])
+                        && $field['locale_based']
+                    ) {
                         $coreConfigValue = $this->model
                             ->where('code', $fieldName)
                             ->where('locale_code', $locale)
@@ -69,7 +81,10 @@ class CoreConfigRepository extends Repository
                             ->get();
                     }
                 } else {
-                    if (isset($field['locale_based']) && $field['locale_based']) {
+                    if (
+                        isset($field['locale_based'])
+                        && $field['locale_based']
+                    ) {
                         $coreConfigValue = $this->model
                             ->where('code', $fieldName)
                             ->where('locale_code', $locale)

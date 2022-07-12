@@ -223,7 +223,11 @@ class ProductRepository extends Repository
 
             # sort direction
             $orderDirection = 'asc';
-            if (isset($params['order']) && in_array($params['order'], ['desc', 'asc'])) {
+
+            if (
+                isset($params['order'])
+                && in_array($params['order'], ['desc', 'asc'])
+            ) {
                 $orderDirection = $params['order'];
             } else {
                 $sortOptions = $this->getDefaultSortByOption();

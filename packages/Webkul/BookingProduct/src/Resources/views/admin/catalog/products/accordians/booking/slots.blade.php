@@ -136,8 +136,9 @@
         },
 
         created: function() {
-            if (! bookingProduct || ! bookingProduct[this.bookingType].slots || ! bookingProduct[this.bookingType].slots)
+            if (! bookingProduct || ! bookingProduct[this.bookingType].slots || ! bookingProduct[this.bookingType].slots) {
                 return;
+            }
 
             if (bookingProduct[this.bookingType].same_slot_all_days) {
                 this.slots['same_for_week'] = bookingProduct[this.bookingType].slots;
@@ -149,8 +150,9 @@
         methods: {
             addSlot: function (dayIndex = null) {
                 if (dayIndex !== null) {
-                    if (this.slots['different_for_week'][dayIndex] == undefined)
+                    if (this.slots['different_for_week'][dayIndex] == undefined) {
                         this.slots['different_for_week'][dayIndex] = [];
+                    }
 
                     var slot = {
                         'from': '',

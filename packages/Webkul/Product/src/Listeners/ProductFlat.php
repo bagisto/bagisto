@@ -90,7 +90,10 @@ class ProductFlat
             Schema::table('product_flat', function (Blueprint $table) use($attribute) {
                 $table->{$this->attributeTypeFields[$attribute->type]}($attribute->code)->nullable();
 
-                if ($attribute->type == 'select' || $attribute->type == 'multiselect') {
+                if (
+                    $attribute->type == 'select'
+                    || $attribute->type == 'multiselect'
+                ) {
                     $table->string($attribute->code . '_label')->nullable();
                 }
             });
@@ -111,7 +114,10 @@ class ProductFlat
             Schema::table('product_flat', function (Blueprint $table) use($attribute) {
                 $table->dropColumn($attribute->code);
 
-                if ($attribute->type == 'select' || $attribute->type == 'multiselect') {
+                if (
+                    $attribute->type == 'select'
+                    || $attribute->type == 'multiselect'
+                ) {
                     $table->dropColumn($attribute->code . '_label');
                 }
             });
@@ -155,7 +161,10 @@ class ProductFlat
             $familyAttributes[$product->attribute_family_id] = $product->attribute_family->custom_attributes;
         }
 
-        if ($parentProduct && ! array_key_exists($parentProduct->id, $superAttributes)) {
+        if (
+            $parentProduct
+            && ! array_key_exists($parentProduct->id, $superAttributes)
+        ) {
             $superAttributes[$parentProduct->id] = $parentProduct->super_attributes()->pluck('code')->toArray();
         }
 

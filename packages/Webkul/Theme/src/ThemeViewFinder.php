@@ -20,7 +20,10 @@ class ThemeViewFinder extends FileViewFinder
         // Extract the $view and the $namespace parts
         list($namespace, $view) = $this->parseNamespaceSegments($name);
 
-        if (request()->route() !== null && ! Str::contains(request()->route()->uri, config('app.admin_url') . '/')) {
+        if (
+            request()->route() !== null
+            && ! Str::contains(request()->route()->uri, config('app.admin_url') . '/')
+        ) {
             $paths = $this->addThemeNamespacePaths($namespace);
 
             try {
@@ -90,7 +93,10 @@ class ThemeViewFinder extends FileViewFinder
         $this->hints[$namespace] = (array) $hints;
 
         // Overide Error Pages
-        if ($namespace == 'errors' || $namespace == 'mails') {
+        if (
+            $namespace == 'errors'
+            || $namespace == 'mails'
+        ) {
             $searchPaths = array_diff($this->paths, Themes::getLaravelViewPaths());
 
             $addPaths = array_map(function ($path) use ($namespace) {

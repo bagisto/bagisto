@@ -43,7 +43,10 @@ class Themes
      */
     public function __construct()
     {
-        if (request()->route() !== null && Str::contains(request()->route()->uri, config('app.admin_url') . '/')) {
+        if (
+            request()->route() !== null
+            && Str::contains(request()->route()->uri, config('app.admin_url') . '/')
+        ) {
             $this->defaultThemeCode = Config::get('themes.admin-default', null);
         } else {
             $this->defaultThemeCode = Config::get('themes.default', null);
@@ -82,7 +85,10 @@ class Themes
                 isset($data['views_path']) ? $data['views_path'] : ''
             );
 
-            if (isset($data['parent']) && $data['parent']) {
+            if (
+                isset($data['parent'])
+                && $data['parent']
+            ) {
                 $parentThemes[$code] = $data['parent'];
             }
         }
@@ -116,7 +122,10 @@ class Themes
     {
         $parentThemes = [];
 
-        if (request()->route() !== null && Str::contains(request()->route()->uri, config('app.admin_url') . '/')) {
+        if (
+            request()->route() !== null
+            && Str::contains(request()->route()->uri, config('app.admin_url') . '/')
+        ) {
             $themes = config('themes.admin-themes', []);
         } else {
             $themes = config('themes.themes', []);
@@ -130,7 +139,10 @@ class Themes
                 isset($data['views_path']) ? $data['views_path'] : ''
             );
 
-            if (isset($data['parent']) && $data['parent']) {
+            if (
+                isset($data['parent'])
+                && $data['parent']
+            ) {
                 $parentThemes[$code] = $data['parent'];
             }
         }

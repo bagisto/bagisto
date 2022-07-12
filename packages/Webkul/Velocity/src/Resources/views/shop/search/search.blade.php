@@ -79,7 +79,10 @@
                 <image-search-result-component></image-search-result-component>
             @endif
 
-            @if ($results && $results->count())
+            @if (
+                $results
+                && $results->count()
+            )
                 <div class="filters-container col-12" style="
                     margin-top: 20px;
                     padding-left: 0px !important;

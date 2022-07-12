@@ -1,7 +1,10 @@
 {!! view_render_event('bagisto.shop.products.add_to_cart.before', ['product' => $product]) !!}
 
     <div class="mx-0 no-padding">
-        @if (isset($showCompare) && $showCompare)
+        @if (
+            isset($showCompare)
+            && $showCompare
+        )
             <compare-component
                 @auth('customer')
                     customer="true"
@@ -17,26 +20,38 @@
             ></compare-component>
         @endif
 
-        @if (! (isset($showWishlist) && !$showWishlist) && core()->getConfigData('general.content.shop.wishlist_option'))
+        @if (
+            ! (
+                isset($showWishlist)
+                && ! $showWishlist
+            )
+            && core()->getConfigData('general.content.shop.wishlist_option')
+        )
             @include('shop::products.wishlist', [
                 'addClass' => $addWishlistClass ?? ''
             ])
         @endif
 
         <div class="add-to-cart-btn pl0">
-            @if (isset($form) && !$form)
+            @if (
+                isset($form)
+                && ! $form
+            )
                 <button
                     type="submit"
                     {{ ! $product->isSaleable() ? 'disabled' : '' }}
                     class="theme-btn {{ $addToCartBtnClass ?? '' }}">
 
-                    @if (! (isset($showCartIcon) && !$showCartIcon))
+                    @if (
+                        ! (isset($showCartIcon)
+                        && ! $showCartIcon)
+                    )
                         <i class="material-icons text-down-3">shopping_cart</i>
                     @endif
 
                     {{ ($product->type == 'booking') ?  __('shop::app.products.book-now') :  __('shop::app.products.add-to-cart') }}
                 </button>
-            @elseif(isset($addToCartForm) && !$addToCartForm)
+            @elseif(isset($addToCartForm) && ! $addToCartForm)
                 <form
                     method="POST"
                     action="{{ route('cart.add', $product->product_id) }}">
@@ -50,7 +65,10 @@
                         {{ ! $product->isSaleable() ? 'disabled' : '' }}
                         class="btn btn-add-to-cart {{ $addToCartBtnClass ?? '' }}">
 
-                        @if (! (isset($showCartIcon) && !$showCartIcon))
+                        @if (
+                            ! (isset($showCartIcon)
+                            && ! $showCartIcon)
+                        )
                             <i class="material-icons text-down-3">shopping_cart</i>
                         @endif
 

@@ -196,7 +196,10 @@ class Bundle extends AbstractType
             }
         }
 
-        if (! $haveRequiredOptions && count($minPrices)) {
+        if (
+            ! $haveRequiredOptions
+            && count($minPrices)
+        ) {
             $minPrice = min($minPrices);
         }
 
@@ -437,7 +440,10 @@ class Bundle extends AbstractType
             $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
         }
 
-        if (! isset($data['bundle_options']) || ! count($data['bundle_options'])) {
+        if (
+            ! isset($data['bundle_options'])
+            || ! count($data['bundle_options'])
+        ) {
             return trans('shop::app.checkout.cart.integrity.missing_options');
         }
 
@@ -537,11 +543,17 @@ class Bundle extends AbstractType
      */
     public function compareOptions($options1, $options2)
     {
-        if (isset($options2['product_id']) && $this->product->id != $options2['product_id']) {
+        if (
+            isset($options2['product_id'])
+            && $this->product->id != $options2['product_id']
+        ) {
             return false;
         }
 
-        if (isset($options1['bundle_options']) && isset($options2['bundle_options'])) {
+        if (
+            isset($options1['bundle_options'])
+            && isset($options2['bundle_options'])
+        ) {
             return $options1['bundle_options'] == $options2['bundle_options'] && $options1['bundle_option_qty'] == $this->getOptionQuantities($options2);
         }
 

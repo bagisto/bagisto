@@ -134,7 +134,10 @@ class ConfigurationController extends Controller
                 $file = 'images.' . $index . '.' . $imageId;
 
                 if (Str::contains($imageId, 'image_')) {
-                    if (request()->hasFile($file) && $image) {
+                    if (
+                        request()->hasFile($file)
+                        && $image
+                    ) {
                         $filter_index = substr($imageId, 6, 1);
                         if (isset($data[$filter_index])) {
                             $size = array_key_last($saveData[$index]);
@@ -147,13 +150,20 @@ class ConfigurationController extends Controller
                         $this->sanitizeSVG($path, $image->getMimeType());
                     }
                 } else {
-                    if (isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
+                    if (
+                        isset($advertisement[$index][$imageId])
+                        && $advertisement[$index][$imageId]
+                        && !request()->hasFile($file)
+                    ) {
                         $saveImage[$imageId] = $advertisement[$index][$imageId];
 
                         unset($advertisement[$index][$imageId]);
                     }
 
-                    if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
+                    if (
+                        request()->hasFile($file)
+                        && isset($advertisement[$index][$imageId])
+                    ) {
                         Storage::delete($advertisement[$index][$imageId]);
 
                         $saveImage[$imageId] = request()->file($file)->store($dir);
@@ -255,7 +265,10 @@ class ConfigurationController extends Controller
             }
         }
 
-        if (isset($advertisement[$index]) && $advertisement[$index]) {
+        if (
+            isset($advertisement[$index])
+            && $advertisement[$index]
+        ) {
             foreach ($advertisement[$index] as $imageId) {
                 Storage::delete($imageId);
             }

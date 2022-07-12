@@ -52,14 +52,20 @@ class OrderRepository extends Repository
         try {
             Event::dispatch('checkout.order.save.before', [$data]);
 
-            if (isset($data['customer']) && $data['customer']) {
+            if (
+                isset($data['customer'])
+                && $data['customer']
+            ) {
                 $data['customer_id'] = $data['customer']->id;
                 $data['customer_type'] = get_class($data['customer']);
             } else {
                 unset($data['customer']);
             }
 
-            if (isset($data['channel']) && $data['channel']) {
+            if (
+                isset($data['channel'])
+                && $data['channel']
+            ) {
                 $data['channel_id'] = $data['channel']->id;
                 $data['channel_type'] = get_class($data['channel']);
                 $data['channel_name'] = $data['channel']->name;
@@ -88,7 +94,10 @@ class OrderRepository extends Repository
 
                 $orderItem = $this->orderItemRepository->create(array_merge($item, ['order_id' => $order->id]));
 
-                if (isset($item['children']) && $item['children']) {
+                if (
+                    isset($item['children'])
+                    && $item['children']
+                ) {
                     foreach ($item['children'] as $child) {
                         $this->orderItemRepository->create(array_merge($child, ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
                     }
@@ -175,7 +184,10 @@ class OrderRepository extends Repository
                     $orderItem->qty_canceled += $orderItem->qty_to_cancel;
                     $orderItem->save();
 
-                    if ($orderItem->parent && $orderItem->parent->qty_ordered) {
+                    if (
+                        $orderItem->parent
+                        && $orderItem->parent->qty_ordered
+                    ) {
                         $orderItem->parent->qty_canceled += $orderItem->parent->qty_to_cancel;
                         $orderItem->parent->save();
                     }
@@ -241,7 +253,10 @@ class OrderRepository extends Repository
          * If order is already completed and total quantity ordered is not equal to refunded
          * then it can be considered as completed.
          */
-        if ($order->status === OrderModel::STATUS_COMPLETED && $totalQtyOrdered != $totalQtyRefunded) {
+        if (
+            $order->status === OrderModel::STATUS_COMPLETED
+            && $totalQtyOrdered != $totalQtyRefunded
+        ) {
             return true;
         }
 

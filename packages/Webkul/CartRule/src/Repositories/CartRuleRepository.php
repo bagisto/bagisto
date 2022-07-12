@@ -71,7 +71,10 @@ class CartRuleRepository extends Repository
 
         $cartRule->customer_groups()->sync($data['customer_groups']);
 
-        if ($data['coupon_type'] && ! $data['use_auto_generation']) {
+        if (
+            $data['coupon_type']
+            && ! $data['use_auto_generation']
+        ) {
             $this->cartRuleCouponRepository->create([
                 'cart_rule_id'       => $cartRule->id,
                 'code'               => $data['coupon_code'],

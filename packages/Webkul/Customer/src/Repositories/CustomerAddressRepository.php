@@ -31,7 +31,10 @@ class CustomerAddressRepository extends Repository
             ->findWhere(['customer_id' => $data['customer_id'], 'default_address' => 1])
             ->first();
 
-        if (isset($default_address->id) && $data['default_address']) {
+        if (
+            isset($default_address->id)
+            && $data['default_address']
+        ) {
             $default_address->update(['default_address' => 0]);
         }
 
@@ -59,7 +62,10 @@ class CustomerAddressRepository extends Repository
             ->findWhere(['customer_id' => $address->customer_id, 'default_address' => 1])
             ->first();
 
-        if (isset($default_address->id) && $data['default_address']) {
+        if (
+            isset($default_address->id)
+            && $data['default_address']
+        ) {
             if ($default_address->id != $address->id) {
                 $default_address->update(['default_address' => 0]);
             }

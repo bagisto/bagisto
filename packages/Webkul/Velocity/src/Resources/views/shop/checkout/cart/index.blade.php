@@ -123,7 +123,10 @@
                                                 <div class="no-padding col-12 cursor-pointer fs16 item-actions">
                                                     @auth('customer')
                                                         @if ($showWishlist)
-                                                            @if ($item->parent_id != 'null' || $item->parent_id != null)
+                                                            @if (
+                                                                $item->parent_id != 'null'
+                                                                || $item->parent_id != null
+                                                            )
                                                                 <div class="d-inline-block">
                                                                     @include('shop::products.wishlist', [
                                                                         'route' => route('shop.movetowishlist', $item->id),

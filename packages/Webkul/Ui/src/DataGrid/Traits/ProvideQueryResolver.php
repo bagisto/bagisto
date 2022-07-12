@@ -17,9 +17,15 @@ trait ProvideQueryResolver
      */
     private function resolve($collection, $columnName, $condition, $filterValue, $clause = 'where', $method = 'resolveQuery')
     {
-        if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
+        if (
+            $this->enableFilterMap
+            && isset($this->filterMap[$columnName])
+        ) {
             $this->$method($collection, $this->filterMap[$columnName], $condition, $filterValue, $clause);
-        } elseif ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
+        } elseif (
+            $this->enableFilterMap
+            && ! isset($this->filterMap[$columnName])
+        ) {
             $this->$method($collection, $columnName, $condition, $filterValue, $clause);
         } else {
             $this->$method($collection, $columnName, $condition, $filterValue, $clause);

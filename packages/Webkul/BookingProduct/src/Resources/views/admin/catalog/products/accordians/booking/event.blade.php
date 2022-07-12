@@ -170,8 +170,9 @@
 
             computed: {
                 controlName: function () {
-                    if (this.ticketItem.id)
+                    if (this.ticketItem.id) {
                         return 'booking[tickets][' + this.ticketItem.id + ']';
+                    }
 
                     return 'booking[tickets][ticket_' + this.index + ']';
                 }

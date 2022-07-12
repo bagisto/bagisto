@@ -221,7 +221,10 @@ class ProductController extends Controller
 
         $copiedProduct = $this->productRepository->copy($originalProduct);
 
-        if ($copiedProduct instanceof Product && $copiedProduct->id) {
+        if (
+            $copiedProduct instanceof Product
+            && $copiedProduct->id
+        ) {
             session()->flash('success', trans('admin::app.response.product-copied'));
         } else {
             session()->flash('error', trans('admin::app.response.error-while-copying'));

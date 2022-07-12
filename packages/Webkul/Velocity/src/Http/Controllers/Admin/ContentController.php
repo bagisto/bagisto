@@ -48,7 +48,10 @@ class ContentController extends Controller
 
         $params = request()->input();
 
-        if (isset($params['query']) && $params['query']) {
+        if (
+            isset($params['query'])
+            && $params['query']
+        ) {
             foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
                 $results[] = [
                     'id'   => $row->product_id,
@@ -113,7 +116,10 @@ class ContentController extends Controller
     {
         $params = request()->all();
 
-        if (isset($params['locale']) && isset($params[$params['locale']]['products'])) {
+        if (
+            isset($params['locale'])
+            && isset($params[$params['locale']]['products'])
+        ) {
             $params[$params['locale']]['products'] = json_encode($params[$params['locale']]['products']);
         }
 

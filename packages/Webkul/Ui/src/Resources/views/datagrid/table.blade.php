@@ -22,7 +22,10 @@
 <div class="table">
     <datagrid-filters></datagrid-filters>
 
-    @if (isset($results['paginated']) && $results['paginated'])
+    @if (
+        isset($results['paginated'])
+        && $results['paginated']
+    )
         @include('ui::datagrid.pagination', ['results' => $results['records']])
     @endif
 
@@ -431,7 +434,7 @@
 
                         if (this.type === 'string' && this.stringValue !== null) {
                             this.formURL(this.columnOrAlias, this.stringCondition, encodeURIComponent(this.stringValue), label)
-                        } elseif (this.type === 'number') {
+                        } else if (this.type === 'number') {
                             indexConditions = true;
 
                             if (this.filterIndex === this.columnOrAlias
@@ -444,11 +447,11 @@
                             if (indexConditions) {
                                 this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
                             }
-                        } elseif (this.type === 'boolean') {
+                        } else if (this.type === 'boolean') {
                             this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
-                        } elseif (this.type === 'datetime') {
+                        } else if (this.type === 'datetime') {
                             this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue, label);
-                        } elseif (this.type === 'price') {
+                        } else if (this.type === 'price') {
                             this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
                         }
                     },
@@ -567,7 +570,7 @@
                                                 alert('{{ __('ui::app.datagrid.filter-exists') }}');
 
                                                 return false;
-                                            } elseif (this.filters[j].cond === condition && this.filters[j].val !== response) {
+                                            } else if (this.filters[j].cond === condition && this.filters[j].val !== response) {
                                                 filterRepeated = true;
 
                                                 this.filters[j].val = response;
@@ -699,7 +702,7 @@
                             if (this.filters[i].column == 'status' || this.filters[i].column == 'value_per_locale' || this.filters[i].column == 'value_per_channel' || this.filters[i].column == 'is_unique') {
                                 if (this.filters[i].val.includes("True")) {
                                     this.filters[i].val = 1;
-                                } elseif (this.filters[i].val.includes("False")) {
+                                } else if (this.filters[i].val.includes("False")) {
                                     this.filters[i].val = 0;
                                 }
                             }
