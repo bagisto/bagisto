@@ -65,7 +65,9 @@ class Cart
     {
         $this->getCart();
 
-        $this->removeInactiveItems();
+        if ($this->cart) {
+            $this->removeInactiveItems();
+        }
     }
 
     /**
@@ -154,9 +156,9 @@ class Cart
             return ['warning' => __('shop::app.checkout.cart.item.error-add')];
         }
 
-        $product = $this->productRepository->findOneByField('id', $productId);
+        $product = $this->productRepository->find($productId);
 
-        if ($product->status === 0) {
+        if (! $product->status) {
             return ['info' => __('shop::app.checkout.cart.item.inactive-add')];
         }
 
@@ -363,9 +365,7 @@ class Cart
      */
     private function removeInactiveItems()
     {
-        if (! $cart = $this->getCart()) {
-            return;
-        }
+        $cart = $this->getCart();
 
         foreach ($cart->items as $item) {
             if ($this->isCartItemInactive($item)) {
@@ -591,7 +591,9 @@ class Cart
             return false;
         }
 
-        if (count($cart->items) === 0) {
+        $cartItems = $cart->items()->get();
+
+        if (count($cartItems) === 0) {
             $this->removeCart($cart);
 
             return false;
@@ -599,7 +601,7 @@ class Cart
 
         $isInvalid = false;
 
-        foreach ($cart->items()->get() as $item) {
+        foreach ($cartItems as $item) {
             $validationResult = $item->product->getTypeInstance()->validateCartItem($item);
 
             if ($validationResult->isItemInactive()) {
