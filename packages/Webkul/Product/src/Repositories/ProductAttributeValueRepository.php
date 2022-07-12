@@ -10,21 +10,6 @@ use Webkul\Product\Models\ProductAttributeValueProxy;
 class ProductAttributeValueRepository extends Repository
 {
     /**
-     * Create a new reposotory instance.
-     *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Illuminate\Container\Container  $app
-     * @return void
-     */
-    public function __construct(
-        protected AttributeRepository $attributeRepository,
-        App $app
-    )
-    {
-        parent::__construct($app);
-    }
-
-    /**
      * Specify Model class name
      *
      * @return string
@@ -32,27 +17,6 @@ class ProductAttributeValueRepository extends Repository
     function model()
     {
         return 'Webkul\Product\Contracts\ProductAttributeValue';
-    }
-
-    /**
-     * @param  array  $data
-     * @return \Webkul\Product\Contracts\ProductAttributeValue
-     */
-    public function create(array $data)
-    {
-        if (isset($data['attribute_id'])) {
-            $attribute = $this->attributeRepository->find($data['attribute_id']);
-        } else {
-            $attribute = $this->attributeRepository->findOneByField('code', $data['attribute_code']);
-        }
-
-        if (! $attribute) {
-            return;
-        }
-
-        $data[ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type]] = $data['value'];
-
-        return $this->model->create($data);
     }
 
     /**

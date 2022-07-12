@@ -207,6 +207,23 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * Get attribute by id.
+     *
+     * @param  integer  $id
+     * @return \Webkul\Attribute\Contracts\Attribute
+     */
+    public function getAttributeById($id)
+    {
+        static $attributes = [];
+
+        if (array_key_exists($id, $attributes)) {
+            return $attributes[$id];
+        }
+
+        return $attributes[$id] = $this->find($id);
+    }
+
+    /**
      * Get family attributes.
      *
      * @param  \Webkul\Attribute\Contracts\AttributeFamily  $attributeFamily

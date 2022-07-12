@@ -617,7 +617,7 @@ class CartRuleCest
             $expectedCartCoupon = $cartRuleWithCoupon->coupon->code;
             $I->comment('I try to use coupon code ' . $expectedCartCoupon);
             cart()
-                ->setCouponCode($expectedCartCoupon)
+                ->setCouponCode($expectedCartCoupon->toString())
                 ->collectTotals();
         } else {
             $I->comment('I have no coupon');
@@ -688,9 +688,9 @@ class CartRuleCest
             $expectedOrder = new expectedOrder($expectedCart, $customer, $cart->id);
             $I->seeRecord('orders', $expectedOrder->toArray());
 
-            auth()
-                ->guard('customer')
-                ->logout();
+            auth()->guard('customer')->logout();
+
+            cart()->setCart(null);
         }
     }
 
@@ -1062,6 +1062,7 @@ class CartRuleCest
 
         $couponSpecifications = $this->getCouponSpecifications();
         $ruleConfig = $this->makeRuleConfig($couponSpecifications[$couponConfig['scenario']], $this->products, $couponConfig['products']);
+
         $cartRule = $I->have(CartRule::class, $ruleConfig);
 
         DB::table('cart_rule_channels')

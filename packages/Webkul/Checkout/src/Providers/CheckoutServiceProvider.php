@@ -45,10 +45,6 @@ class CheckoutServiceProvider extends ServiceProvider
 
         $loader->alias('cart', Cart::class);
 
-        $this->app->singleton('cart', function () {
-            return new Cart();
-        });
-
-        $this->app->bind('cart', \Webkul\Checkout\Cart::class);
+        $this->app->singleton('cart', \Webkul\Checkout\Cart::class);
     }
 }

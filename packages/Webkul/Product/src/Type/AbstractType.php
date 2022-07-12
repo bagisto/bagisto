@@ -177,6 +177,10 @@ abstract class AbstractType
                 $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
             }
 
+            if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
+                $data[$attribute->code] = isset($data[$attribute->code]) ? implode(',', $data[$attribute->code]) : null;
+            }
+
             if (! isset($data[$attribute->code])) {
                 continue;
             }
@@ -189,38 +193,50 @@ abstract class AbstractType
                 $data[$attribute->code] = null;
             }
 
-            if ($attribute->type === 'multiselect' || $attribute->type === 'checkbox') {
-                $data[$attribute->code] = implode(',', $data[$attribute->code]);
-            }
-
             if ($attribute->type === 'image' || $attribute->type === 'file') {
                 $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
                     ? request()->file($attribute->code)->store('product/' . $product->id)
                     : null;
             }
 
-            $attributeValue = $this->attributeValueRepository->findOneWhere([
-                'product_id'   => $product->id,
-                'attribute_id' => $attribute->id,
-                'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
-                'locale'       => $attribute->value_per_locale ? $data['locale'] : null,
-            ]);
+            if ($attribute->value_per_channel) {
+                if ($attribute->value_per_locale) {
+                    $productAttributeValue = $product->attribute_values
+                        ->where('channel', $attribute->value_per_channel ? $data['channel'] : null)
+                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null)
+                        ->where('attribute_id', $attribute->id)
+                        ->first();
+                } else {
+                    $productAttributeValue = $product->attribute_values
+                        ->where('channel', $attribute->value_per_channel ? $data['channel'] : null)
+                        ->where('attribute_id', $attribute->id)
+                        ->first();
+                }
+            } else {
+                if ($attribute->value_per_locale) {
+                    $productAttributeValue = $product->attribute_values
+                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null)
+                        ->where('attribute_id', $attribute->id)
+                        ->first();
+                } else {
+                    $productAttributeValue = $product->attribute_values
+                        ->where('attribute_id', $attribute->id)
+                        ->first();
+                }
+            }
 
-            if (! $attributeValue) {
+            $columnName = ProductAttributeValue::$attributeTypeFields[$attribute->type];
+
+            if (! $productAttributeValue) {
                 $this->attributeValueRepository->create([
                     'product_id'   => $product->id,
                     'attribute_id' => $attribute->id,
-                    'value'        => $data[$attribute->code],
+                    $columnName    => $data[$attribute->code],
                     'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
                     'locale'       => $attribute->value_per_locale ? $data['locale'] : null,
                 ]);
             } else {
-                $this->attributeValueRepository->update(
-                    [
-                        ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code],
-                    ],
-                    $attributeValue->id
-                );
+                $productAttributeValue->update([$columnName => $data[$attribute->code]]);
 
                 if ($attribute->type == 'image' || $attribute->type == 'file') {
                     Storage::delete($attributeValue->text_value);
@@ -269,6 +285,28 @@ abstract class AbstractType
         $this->product = $product;
 
         return $this;
+    }
+
+    /**
+     * @param  string  $code
+     * @return mixed
+     */
+    public function getAttributeByCode($code)
+    {
+        return core()
+            ->getSingletonInstance(AttributeRepository::class)
+            ->getAttributeByCode($code);
+    }
+
+    /**
+     * @param  integer  $id
+     * @return mixed
+     */
+    public function getAttributeById($id)
+    {
+        return core()
+            ->getSingletonInstance(AttributeRepository::class)
+            ->getAttributeById($id);
     }
 
     /**
@@ -413,7 +451,7 @@ abstract class AbstractType
             }
         }
 
-        $orderedInventory = $this->product->ordered_inventories()
+        $orderedInventory = $this->product->ordered_inventories
             ->where('channel_id', core()->getCurrentChannel()->id)->first();
 
         if ($orderedInventory) {
@@ -715,7 +753,7 @@ abstract class AbstractType
 
         if ($taxCategory = $this->getTaxCategory()) {
             if ($address === null && auth()->guard('customer')->check()) {
-                $address = auth()->guard('customer')->user()->addresses()->where('default_address', 1)->first();
+                $address = auth()->guard('customer')->user()->addresses->where('default_address', 1)->first();
             }
 
             if ($address === null) {
@@ -959,9 +997,7 @@ abstract class AbstractType
         if (auth()->guard()->check()) {
             $customerGroupId = auth()->guard()->user()->customer_group_id;
         } else {
-            $customerGroupRepository = app('Webkul\Customer\Repositories\CustomerGroupRepository');
-
-            if ($customerGuestGroup = $customerGroupRepository->findOneByField('code', 'guest')) {
+            if ($customerGuestGroup = app(CustomerGroupRepository::class)->findOneByField('code', 'guest')) {
                 $customerGroupId = $customerGuestGroup->id;
             }
         }

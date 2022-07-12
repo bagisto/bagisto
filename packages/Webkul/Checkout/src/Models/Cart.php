@@ -20,10 +20,10 @@ class Cart extends Model implements CartContract
         'updated_at',
     ];
 
-    protected $with = [
-        'items',
-        'items.children',
-    ];
+    // protected $with = [
+    //     'items',
+    //     'items.children',
+    // ];
 
     /**
      * To get relevant associated items with the cart instance
@@ -162,11 +162,11 @@ class Cart extends Model implements CartContract
     public function hasProductsWithQuantityBox(): bool
     {
         foreach ($this->items as $item) {
-            if ($item->product->getTypeInstance()
-                              ->showQuantityBox() === true) {
+            if ($item->product->getTypeInstance()->showQuantityBox() === true) {
                 return true;
             }
         }
+
         return false;
     }
 

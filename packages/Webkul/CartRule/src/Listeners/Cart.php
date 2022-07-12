@@ -24,6 +24,6 @@ class Cart
      */
     public function applyCartRules($cart)
     {
-        $this->cartRuleHepler->collect();
+        $this->cartRuleHepler->collect($cart);
     }
 }
