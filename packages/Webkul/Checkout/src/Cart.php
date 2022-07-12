@@ -756,7 +756,7 @@ class Cart
 
         $data['payment'] = $cart->payment->toArray();
 
-        $data['items'] = $cart->items->toArray();
+        $data['items'] = $cart->items()->with('children')->get()->toArray();
 
         return $data;
     }
