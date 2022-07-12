@@ -607,6 +607,7 @@ return [
             'invalid-coupon'      => 'Gutscheincode ist ungültig.',
             'success-coupon'      => 'Gutscheincode erfolgreich angewendet.',
             'coupon-apply-issue'  => 'Gutscheincode kann nicht angewendet werden.',
+            'coupon-already-applied' => 'Gutscheincode bereits angewendet.',
         ],
 
         'success' => [

@@ -609,6 +609,7 @@ return [
             'invalid-coupon'      => 'Kupon kodu geçersiz.',
             'success-coupon'      => 'Kupon kodu başarıyla uygulandı.',
             'coupon-apply-issue'  => 'Kupon kodu uygulanamaz.',
+            'coupon-already-applied' => 'Kupon kodu zaten uygulandı.',
         ],
 
         'success' => [

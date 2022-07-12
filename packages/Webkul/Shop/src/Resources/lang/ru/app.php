@@ -609,6 +609,7 @@ return [
             'invalid-coupon'      => 'Код купона недействителен.',
             'success-coupon'      => 'Код купона успешно применен.',
             'coupon-apply-issue'  => 'Код купона не может быть применен.',
+            'coupon-already-applied' => 'Coupon code already applied.',
         ],
 
         'success' => [

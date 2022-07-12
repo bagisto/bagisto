@@ -608,6 +608,7 @@ return [
             'invalid-coupon'      => 'کد کوپن نامعتبر است',
             'success-coupon'      => 'کد کوپن با موفقیت اعمال شد',
             'coupon-apply-issue'  => 'کد کوپن نمی تواند اعمال شود',
+            'coupon-already-applied' => 'کد کوپن قبلاً اعمال شده است.',
         ],
 
         'success' => [

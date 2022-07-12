@@ -610,7 +610,8 @@ return [
             'cannot-apply-coupon' => '不能应用优惠券',
             'invalid-coupon' => '优惠券代码无效.',
             'success-coupon' => '优惠券代码已应用成功.',
-            'coupon-apply-issue' => '优惠券代码不能被应用.'
+            'coupon-apply-issue' => '优惠券代码不能被应用.',
+            'coupon-already-applied' => '優惠券代碼已應用',
         ],
 
         'success' => [

@@ -623,6 +623,7 @@ return [
             'invalid-coupon'      => 'رمز القسيمة غير صالح.',
             'success-coupon'      => 'تم تطبيق رمز القسيمة بنجاح.',
             'coupon-apply-issue'  => 'لا يمكن تطبيق رمز القسيمة.',
+            'coupon-already-applied' => 'تم تطبيق رمز القسيمة بالفعل.',
         ],
 
         'success' => [

@@ -173,6 +173,13 @@ class CartController extends Controller
 
         try {
             if (strlen($couponCode)) {
+                if (Cart::getCart()->coupon_code && Cart::getCart()->coupon_code == $couponCode) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => trans('shop::app.checkout.total.coupon-already-applied'),
+                    ]);
+                }
+                
                 Cart::setCouponCode($couponCode)->collectTotals();
 
                 if (Cart::getCart()->coupon_code == $couponCode) {

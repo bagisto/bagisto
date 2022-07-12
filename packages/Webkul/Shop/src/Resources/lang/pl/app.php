@@ -610,6 +610,7 @@ return [
             'invalid-coupon'      => 'Kod kuponu jest nieprawidłowy.',
             'success-coupon'      => 'Kod kuponu został pomyślnie zastosowany.',
             'coupon-apply-issue'  => 'Nie można zastosować kodu kuponu.',
+            'coupon-already-applied' => 'Kod kuponu został już zastosowany.',
         ],
 
         'success' => [

@@ -608,6 +608,7 @@ return [
             'invalid-coupon'      => 'קוד הקופון אינו חוקי.',
             'success-coupon'      => 'קוד הקופון הוחל בהצלחה.',
             'coupon-apply-issue'  => 'לא ניתן להחיל קוד קופון.',
+            'coupon-already-applied' => 'קוד קופון כבר הוחל.',
         ],
 
         'success' => [
