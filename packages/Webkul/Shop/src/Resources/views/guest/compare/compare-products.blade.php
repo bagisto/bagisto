@@ -311,7 +311,7 @@
 
                         if (type == "multiple") {
                             attributeItems = productDetails[attributeValues].split(',');
-                        } elseif (type == "single") {
+                        } else if (type == "single") {
                             attributeItems = productDetails[attributeValues];
                         }
 
@@ -320,7 +320,7 @@
                                 if (attributeItems.indexOf(option.attribute_option_id.toString()) > -1) {
                                     return true;
                                 }
-                            } elseif (type == "single") {
+                            } else if (type == "single") {
                                 if (attributeItems == option.attribute_option_id.toString()) {
                                     return true;
                                 }

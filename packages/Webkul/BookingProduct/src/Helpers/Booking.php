@@ -173,7 +173,10 @@ class Booking
             $date = clone $currentTime;
             $date->addDays($i);
 
-            if ($date >= $availableFrom && $date <= $availableTo) {
+            if (
+                $date >= $availableFrom
+                && $date <= $availableTo
+            ) {
                 $days[$i] = $date->format('l');
             }
         }
@@ -235,7 +238,10 @@ class Booking
     {
         $bookingProductSlot = $this->typeRepositories[$bookingProduct->type]->findOneByField('booking_product_id', $bookingProduct->id);
 
-        if (! is_array($bookingProductSlot->slots) || ! count($bookingProductSlot->slots)) {
+        if (
+            ! is_array($bookingProductSlot->slots)
+            || ! count($bookingProductSlot->slots)
+        ) {
             return [];
         }
 
@@ -255,7 +261,8 @@ class Booking
                          ? $bookingProductSlot->slots
                          : ($bookingProductSlot->slots[$requestedDate->format('w')] ?? []);
 
-        if ($requestedDate < $availableFrom
+        if (
+            $requestedDate < $availableFrom
             || $requestedDate > $availableTo
         ) {
             return [];
@@ -289,17 +296,32 @@ class Booking
 
                 $to = clone $tempStartDayTime;
 
-                if (($startDayTime <= $from && $from <= $availableTo)
-                    && ($availableTo >= $to && $to >= $startDayTime)
-                    && ($startDayTime <= $from && $from <= $endDayTime)
-                    && ($endDayTime >= $to && $to >= $startDayTime)
+                if (
+                    ($startDayTime <= $from
+                        && $from <= $availableTo
+                    )
+                    && (
+                        $availableTo >= $to
+                        && $to >= $startDayTime
+                    )
+                    && (
+                        $startDayTime <= $from
+                        && $from <= $endDayTime
+                    )
+                    && (
+                        $endDayTime >= $to
+                        && $to >= $startDayTime
+                    )
                 ) {
                     // Get already ordered qty for this slot
                     $orderedQty = 0;
 
                     $qty = isset($timeDuration['qty']) ? ( $timeDuration['qty'] - $orderedQty ) : 1;
 
-                    if ($qty && $currentTime <= $from) {
+                    if (
+                        $qty
+                        && $currentTime <= $from
+                    ) {
                         $slots[] = [
                             'from'      => $from->format('h:i A'),
                             'to'        => $to->format('h:i A'),
@@ -324,7 +346,10 @@ class Booking
     {
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
 
-        if ($bookingProduct->qty - $this->getBookedQuantity($cartItem) < $cartItem['quantity'] || $this->isSlotExpired($cartItem)) {
+        if (
+            $bookingProduct->qty - $this->getBookedQuantity($cartItem) < $cartItem['quantity']
+            || $this->isSlotExpired($cartItem)
+        ) {
             return false;
         }
 

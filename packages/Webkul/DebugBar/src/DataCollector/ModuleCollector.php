@@ -79,7 +79,10 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
                     ? "/\?(?=(?:[^'\\\']*'[^'\\\']*')*[^'\\\']*$)/"
                     : "/:{$key}(?=(?:[^'\\\']*'[^'\\\']*')*[^'\\\']*$)/";
 
-                if (! is_int($binding) && ! is_float($binding)) {
+                if (
+                    ! is_int($binding)
+                    && ! is_float($binding)
+                ) {
                     $binding = $query->connection->getPdo()->quote($binding);
                 }
 
@@ -99,7 +102,10 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
     public function checkBindings($bindings)
     {
         foreach ($bindings as &$binding) {
-            if (is_string($binding) && ! mb_check_encoding($binding, 'UTF-8')) {
+            if (
+                is_string($binding)
+                && ! mb_check_encoding($binding, 'UTF-8')
+            ) {
                 $binding = '[BINARY DATA]';
             }
         }
@@ -135,7 +141,11 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
 
             $queries = $this->getQueries($module->getNamespaceRoot());
 
-            if (count($models) || count($views) || count($queries)) {
+            if (
+                count($models)
+                || count($views)
+                || count($queries)
+            ) {
                 $modules[] = [
                     'name'    => $module->getNamespaceRoot(),
                     'models'  => $models,

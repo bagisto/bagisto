@@ -69,7 +69,10 @@ class CartController extends Controller
 
             $cart = Cart::addProduct($id, request()->all());
 
-            if (is_array($cart) && isset($cart['warning'])) {
+            if (
+                is_array($cart)
+                && isset($cart['warning'])
+            ) {
                 $response = [
                     'status'  => 'warning',
                     'message' => $cart['warning'],

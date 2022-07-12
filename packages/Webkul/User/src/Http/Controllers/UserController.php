@@ -70,8 +70,12 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        if (isset($data['password']) && $data['password']) {
+        if (
+            isset($data['password'])
+            && $data['password']
+        ) {
             $data['password'] = bcrypt($data['password']);
+
             $data['api_token'] = Str::random(80);
         }
 
@@ -236,10 +240,13 @@ class UserController extends Controller
          * Is user with `permission_type` all role changed.
          */
         $isRoleChanged = $user->role->permission_type === 'all'
-        && isset($data['role_id'])
-        && (int) $data['role_id'] !== $user->role_id;
+            && isset($data['role_id'])
+            && (int) $data['role_id'] !== $user->role_id;
 
-        if ($isRoleChanged && $this->adminRepository->countAdminsWithAllAccess() === 1) {
+        if (
+            $isRoleChanged
+            && $this->adminRepository->countAdminsWithAllAccess() === 1
+        ) {
             return $this->cannotChangeRedirectResponse('role');
         }
 

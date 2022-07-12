@@ -109,11 +109,17 @@ trait CoreConfigField
     {
         $info = [];
 
-        if (isset($field['channel_based']) && $field['channel_based']) {
+        if (
+            isset($field['channel_based'])
+            && $field['channel_based']
+        ) {
             $info[] = $channel;
         }
 
-        if (isset($field['locale_based']) && $field['locale_based']) {
+        if (
+            isset($field['locale_based'])
+            && $field['locale_based']
+        ) {
             $info[] = $locale;
         }
 

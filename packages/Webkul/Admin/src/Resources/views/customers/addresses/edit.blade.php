@@ -69,7 +69,10 @@
                                 <span class="control-error" v-if="errors.has('address1[]')">@{{ errors.first('address1[]') }}</span>
                             </div>
 
-                            @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)
+                            @if (
+                                core()->getConfigData('customer.settings.address.street_lines')
+                                && core()->getConfigData('customer.settings.address.street_lines') > 1
+                            )
                                 <div class="control-group" style="margin-top: -25px;">
                                     @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
                                         <input type="text" class="control" name="address1[{{ $i }}]" id="address_{{ $i }}" value="{{ isset($addresses[$i]) ? $addresses[$i] : '' }}">

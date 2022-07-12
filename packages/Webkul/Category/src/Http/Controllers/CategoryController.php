@@ -175,7 +175,10 @@ class CategoryController extends Controller
             }
         }
 
-        if (count($categoryIds) != 1 || $suppressFlash == true) {
+        if (
+            count($categoryIds) != 1
+            || $suppressFlash == true
+        ) {
             session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Category']));
         }
 

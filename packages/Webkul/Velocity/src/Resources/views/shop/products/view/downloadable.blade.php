@@ -37,7 +37,10 @@
 
                                 <span>{{ $link->title . ' + ' . core()->currency($link->price) }}</span>
 
-                                @if ($link->sample_file || $link->sample_url)
+                                @if (
+                                    $link->sample_file
+                                    || $link->sample_url
+                                )
                                     <a
                                         target="_blank"
                                         class="remove-decoration"

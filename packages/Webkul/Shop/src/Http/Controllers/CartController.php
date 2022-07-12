@@ -225,13 +225,21 @@ class CartController extends Controller
      */
     private function onFailureAddingToCart($result): bool
     {
-        if (is_array($result) && isset($result['warning'])) {
+        if (
+            is_array($result)
+            && isset($result['warning'])
+        ) {
             session()->flash('warning', $result['warning']);
+
             return true;
         }
 
-        if (is_array($result) && isset($result['info'])) {
+        if (
+            is_array($result)
+            && isset($result['info'])
+        ) {
             session()->flash('info', $result['info']);
+            
             return true;
         }
 

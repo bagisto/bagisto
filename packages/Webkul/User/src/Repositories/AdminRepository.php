@@ -47,7 +47,10 @@ class AdminRepository extends Repository
 
         $admin = parent::update($attributes, $id);
 
-        if (isset($attributes['password']) && $attributes['password']) {
+        if (
+            isset($attributes['password'])
+            && $attributes['password']
+        ) {
             Event::dispatch('user.admin.update-password', $admin);
         }
 

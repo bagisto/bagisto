@@ -139,7 +139,10 @@
                             </div>
                         </accordian>
 
-                        @if ($order->billing_address || $order->shipping_address)
+                        @if (
+                            $order->billing_address
+                            || $order->shipping_address
+                        )
                             <accordian title="{{ __('admin::app.sales.orders.address') }}" :active="true">
                                 <div slot="body">
                                     <div class="sale">

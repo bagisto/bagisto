@@ -47,7 +47,10 @@
                     </div>
                 @endif
 
-                @if ($cart->haveStockableItems() && $shippingAddress = $cart->shipping_address)
+                @if (
+                    $cart->haveStockableItems()
+                    && $shippingAddress = $cart->shipping_address
+                )
                     <div class="shipping-address col-6">
                         <div class="card-title mb-20">
                             <b>{{ __('shop::app.checkout.onepage.shipping-address') }}</b>

@@ -46,7 +46,11 @@ class ProductImage extends AbstractProduct
             $images[] = $this->getCachedImageUrls($image->path);
         }
 
-        if (! $product->parent_id && ! count($images) && ! count($product->videos)) {
+        if (
+            ! $product->parent_id
+            && ! count($images)
+            && ! count($product->videos)
+        ) {
             $images[] = $this->getFallbackImageUrls();
         }
 

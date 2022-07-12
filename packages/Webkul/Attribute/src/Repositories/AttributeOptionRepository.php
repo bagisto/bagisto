@@ -52,7 +52,10 @@ class AttributeOptionRepository extends Repository
      */
     public function uploadSwatchImage($data, $optionId)
     {
-        if (! isset($data['swatch_value']) || ! $data['swatch_value']) {
+        if (
+            ! isset($data['swatch_value'])
+            || ! $data['swatch_value']
+        ) {
             return;
         }
 

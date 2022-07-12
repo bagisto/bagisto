@@ -220,7 +220,10 @@ class Configurable extends AbstractType
         $typeOfVariants = 'simple';
         $productInstance = app(config('product_types.' . $product->type . '.class'));
 
-        if (isset($productInstance->variantsType) && ! in_array($productInstance->variantsType, ['bundle', 'configurable', 'grouped'])) {
+        if (
+            isset($productInstance->variantsType)
+            && ! in_array($productInstance->variantsType, ['bundle', 'configurable', 'grouped'])
+        ) {
             $typeOfVariants = $productInstance->variantsType;
         }
 
@@ -556,7 +559,10 @@ class Configurable extends AbstractType
             $customerGroupPrices[] = $this->getCustomerGroupPrice($variant, 1);
         }
 
-        if ($rulePrices || $customerGroupPrices) {
+        if (
+            $rulePrices
+            || $customerGroupPrices
+        ) {
             return $offerPrice = min(array_merge($rulePrices, $customerGroupPrices));
         }
 
@@ -649,7 +655,10 @@ class Configurable extends AbstractType
      */
     public function prepareForCart($data)
     {
-        if (! isset($data['selected_configurable_option']) || ! $data['selected_configurable_option']) {
+        if (
+            ! isset($data['selected_configurable_option'])
+            || ! $data['selected_configurable_option']
+        ) {
             if ($this->getDefaultVariantId()) {
                 $data['selected_configurable_option'] = $this->getDefaultVariantId();
             } else {
@@ -709,7 +718,10 @@ class Configurable extends AbstractType
             return false;
         }
 
-        if (isset($options1['selected_configurable_option']) && isset($options2['selected_configurable_option'])) {
+        if (
+            isset($options1['selected_configurable_option'])
+            && isset($options2['selected_configurable_option'])
+        ) {
             return $options1['selected_configurable_option'] === $options2['selected_configurable_option'];
         }
 

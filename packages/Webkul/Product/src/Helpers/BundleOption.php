@@ -41,7 +41,10 @@ class BundleOption extends AbstractProduct
         foreach ($this->product->bundle_options as $option) {
             $data = $this->getOptionItemData($option);
 
-            if (! $option->is_required && ! count($data['products'])) {
+            if (
+                ! $option->is_required
+                && ! count($data['products'])
+            ) {
                 continue;
             }
 

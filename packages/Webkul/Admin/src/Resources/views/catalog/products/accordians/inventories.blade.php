@@ -12,6 +12,7 @@
                 foreach ($product->inventories as $inventory) {
                     if ($inventory->inventory_source_id == $inventorySource->id) {
                         $qty = $inventory->qty;
+                        
                         break;
                     }
                 }

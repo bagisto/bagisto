@@ -57,7 +57,7 @@
                     itemToClone = itemToClone.next();
 
                     // wrap around if at end of item collection
-                    if (!itemToClone.length) {
+                    if (! itemToClone.length) {
                         itemToClone = $(this).siblings(':first');
                     }
 

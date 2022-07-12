@@ -124,7 +124,10 @@ class ProductRepository extends Repository
             if ($term)
                 $query->where('product_flat.name', 'like', '%' . urldecode($term) . '%');
 
-            if ($categoryId && $categoryId !== "") {
+            if (
+                $categoryId
+                && $categoryId !== ""
+            ) {
                 $query = $query->where('product_categories.category_id', $categoryId);
             }
 

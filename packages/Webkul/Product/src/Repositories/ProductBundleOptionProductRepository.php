@@ -62,14 +62,20 @@ class ProductBundleOptionProductRepository extends Repository
         $haveIsDefaulFlag = false;
 
         foreach ($data['products'] as $key => $product) {
-            if (isset($product['is_default']) && $product['is_default']) {
+            if (
+                isset($product['is_default'])
+                && $product['is_default']
+            ) {
                 $haveIsDefaulFlag = true;
             } else {
                 $data['products'][$key]['is_default'] = 0;
             }
         }
 
-        if (! $haveIsDefaulFlag && $data['is_required']) {
+        if (
+            ! $haveIsDefaulFlag
+            && $data['is_required']
+        ) {
             $data['products'][key($data['products'])]['is_default'] = 1;
         }
     }

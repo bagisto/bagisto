@@ -173,11 +173,17 @@ abstract class AbstractType
         foreach ($product->attribute_family->custom_attributes as $attribute) {
             $route = request()->route() ? request()->route()->getName() : '';
 
-            if ($attribute->type === 'boolean' && $route !== 'admin.catalog.products.massupdate') {
+            if (
+                $attribute->type === 'boolean'
+                && $route !== 'admin.catalog.products.massupdate'
+            ) {
                 $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
             }
 
-            if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
+            if (
+                $attribute->type == 'multiselect'
+                || $attribute->type == 'checkbox'
+            ) {
                 $data[$attribute->code] = isset($data[$attribute->code]) ? implode(',', $data[$attribute->code]) : null;
             }
 
@@ -185,15 +191,26 @@ abstract class AbstractType
                 continue;
             }
 
-            if ($attribute->type === 'price' && isset($data[$attribute->code]) && $data[$attribute->code] === '') {
+            if (
+                $attribute->type === 'price'
+                && isset($data[$attribute->code])
+                && $data[$attribute->code] === ''
+            ) {
                 $data[$attribute->code] = null;
             }
 
-            if ($attribute->type === 'date' && $data[$attribute->code] === '' && $route !== 'admin.catalog.products.massupdate') {
+            if (
+                $attribute->type === 'date'
+                && $data[$attribute->code] === ''
+                && $route !== 'admin.catalog.products.massupdate'
+            ) {
                 $data[$attribute->code] = null;
             }
 
-            if ($attribute->type === 'image' || $attribute->type === 'file') {
+            if (
+                $attribute->type === 'image'
+                || $attribute->type === 'file'
+            ) {
                 $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
                     ? request()->file($attribute->code)->store('product/' . $product->id)
                     : null;
@@ -238,7 +255,10 @@ abstract class AbstractType
             } else {
                 $productAttributeValue->update([$columnName => $data[$attribute->code]]);
 
-                if ($attribute->type == 'image' || $attribute->type == 'file') {
+                if (
+                    $attribute->type == 'image'
+                    || $attribute->type == 'file'
+                ) {
                     Storage::delete($attributeValue->text_value);
                 }
             }
@@ -579,7 +599,11 @@ abstract class AbstractType
 
         $specialPrice = $this->product->special_price;
 
-        if ((is_null($specialPrice) || ! (float) $specialPrice)
+        if (
+            (
+                is_null($specialPrice)
+                || ! (float) $specialPrice
+            )
             && ! $rulePrice
             && $customerGroupPrice == $this->product->price
         ) {
@@ -589,13 +613,19 @@ abstract class AbstractType
         $haveSpecialPrice = false;
 
         if (! (float) $specialPrice) {
-            if ($rulePrice && $rulePrice->price < $this->product->price) {
+            if (
+                $rulePrice
+                && $rulePrice->price < $this->product->price
+            ) {
                 $this->product->special_price = $rulePrice->price;
 
                 $haveSpecialPrice = true;
             }
         } else {
-            if ($rulePrice && $rulePrice->price <= $this->product->special_price) {
+            if (
+                $rulePrice
+                && $rulePrice->price <= $this->product->special_price
+            ) {
                 $this->product->special_price = $rulePrice->price;
 
                 $haveSpecialPrice = true;
@@ -661,7 +691,10 @@ abstract class AbstractType
         $lastCustomerGroupId = null;
 
         foreach ($customerGroupPrices as $price) {
-            if ($price->customer_group_id != $customerGroupId && $price->customer_group_id) {
+            if (
+                $price->customer_group_id != $customerGroupId
+                && $price->customer_group_id
+            ) {
                 continue;
             }
 
@@ -682,7 +715,10 @@ abstract class AbstractType
             }
 
             if ($price->value_type == 'discount') {
-                if ($price->value >= 0 && $price->value <= 100) {
+                if (
+                    $price->value >= 0
+                    && $price->value <= 100
+                ) {
                     $lastPrice = $product->price - ($product->price * $price->value) / 100;
 
                     $lastQty = $price->qty;
@@ -690,7 +726,10 @@ abstract class AbstractType
                     $lastCustomerGroupId = $price->customer_group_id;
                 }
             } else {
-                if ($price->value >= 0 && $price->value < $lastPrice) {
+                if (
+                    $price->value >= 0
+                    && $price->value < $lastPrice
+                ) {
                     $lastPrice = $price->value;
 
                     $lastQty = $price->qty;
@@ -752,7 +791,10 @@ abstract class AbstractType
         $address = null;
 
         if ($taxCategory = $this->getTaxCategory()) {
-            if ($address === null && auth()->guard('customer')->check()) {
+            if (
+                $address === null
+                && auth()->guard('customer')->check()
+            ) {
                 $address = auth()->guard('customer')->user()->addresses->where('default_address', 1)->first();
             }
 
@@ -860,15 +902,24 @@ abstract class AbstractType
         if ($this->product->id != $options2['product_id']) {
             return false;
         } else {
-            if (isset($options1['parent_id']) && isset($options2['parent_id'])) {
+            if (
+                isset($options1['parent_id'])
+                && isset($options2['parent_id'])
+            ) {
                 if ($options1['parent_id'] == $options2['parent_id']) {
                     return true;
                 } else {
                     return false;
                 }
-            } elseif (isset($options1['parent_id']) && ! isset($options2['parent_id'])) {
+            } elseif (
+                isset($options1['parent_id'])
+                && ! isset($options2['parent_id'])
+            ) {
                 return false;
-            } elseif (isset($options2['parent_id']) && ! isset($options1['parent_id'])) {
+            } elseif (
+                isset($options2['parent_id'])
+                && ! isset($options1['parent_id'])
+            ) {
                 return false;
             }
         }
@@ -974,7 +1025,10 @@ abstract class AbstractType
                 break;
 
             case 'configurable':
-                if ($item->child && $item->child->product->status === 0) {
+                if (
+                    $item->child
+                    && $item->child->product->status === 0
+                ) {
                     return true;
                 }
                 break;
@@ -1012,13 +1066,19 @@ abstract class AbstractType
         if ($this->haveSpecialPrice()) {
             $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
 
-            if ($rulePrice && $rulePrice->price < $this->product->special_price) {
+            if (
+                $rulePrice
+                && $rulePrice->price < $this->product->special_price
+            ) {
                 $haveOffers = false;
             }
 
             if ($haveOffers) {
                 foreach ($customerGroupPrices as $key => $customerGroupPrice) {
-                    if ($customerGroupPrice && $customerGroupPrice->qty > 1) {
+                    if (
+                        $customerGroupPrice
+                        && $customerGroupPrice->qty > 1
+                    ) {
                         array_push($offerLines, $this->getOfferLines($customerGroupPrice));
                     }
                 }

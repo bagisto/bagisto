@@ -521,7 +521,7 @@
 
                     if (image.id && image.url) {
                         self.imageData.push(image.url);
-                    } elseif (image.id && image.file) {
+                    } else if (image.id && image.file) {
                         self.readFile(image.file);
                     }
                 });

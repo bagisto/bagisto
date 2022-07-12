@@ -110,7 +110,12 @@ class Sequencer implements SequencerContract
      */
     public function generate(): string
     {
-        if ($this->length && ($this->prefix || $this->suffix)) {
+        if (
+            $this->length
+            && (
+                $this->prefix || $this->suffix
+            )
+        ) {
             $number = ($this->prefix) . sprintf(
                 "%0{$this->length}d",
                 ($this->lastId + 1)

@@ -115,7 +115,10 @@ class BookingProductRepository extends Repository
      */
     public function formatSlots($data)
     {
-        if (isset($data['same_slot_all_days']) && ! $data['same_slot_all_days']) {
+        if (
+            isset($data['same_slot_all_days'])
+            && ! $data['same_slot_all_days']
+        ) {
             for ($i = 0; $i < 7; $i++) {
                 if (! isset($data['slots'][$i])) {
                     $data['slots'][$i] = [];
@@ -183,8 +186,15 @@ class BookingProductRepository extends Repository
             $isOverLapping = false;
 
             foreach ($tempSlots as $slot) {
-                if (($slot['from'] <= $from && $slot['to'] >= $from)
-                    || ($slot['from'] <= $to && $slot['to'] >= $to)
+                if (
+                    (
+                        $slot['from'] <= $from
+                        && $slot['to'] >= $from
+                    )
+                    || (
+                        $slot['from'] <= $to
+                        && $slot['to'] >= $to
+                    )
                 ) {
                     $isOverLapping = true;
 

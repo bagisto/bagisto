@@ -38,7 +38,10 @@ class View extends AbstractProduct
                             continue;
                         }
                     }
-                } elseif ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
+                } elseif (
+                    $attribute->type == 'multiselect'
+                    || $attribute->type == 'checkbox'
+                ) {
                     $lables = [];
 
                     $attributeOptions = $attributeOptionReposotory->findWhereIn('id', explode(",", $value));

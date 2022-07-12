@@ -72,7 +72,10 @@ class Helper extends Review
         try {
             $orderBrand = $this->orderBrandsRepository->get()->toArray();
 
-            if (isset($orderBrand) && ! empty($orderBrand)) {
+            if (
+                isset($orderBrand)
+                && ! empty($orderBrand)
+            ) {
                 foreach ($orderBrand as $product) {
                     $product_id[] = $product['product_id'];
 
@@ -142,7 +145,10 @@ class Helper extends Review
                 'channel' => $channel,
             ]);
 
-            if (! $metaData && $default) {
+            if (
+                ! $metaData
+                && $default
+            ) {
                 $metaData = $this->velocityMetadataRepository->findOneWhere([
                     'locale'  => 'en',
                     'channel' => 'default',

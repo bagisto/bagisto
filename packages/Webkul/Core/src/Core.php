@@ -489,7 +489,10 @@ class Core
     {
         static $exchangeRate;
 
-        if ($exchangeRate || $exchangeRate === '') {
+        if (
+            $exchangeRate
+            || $exchangeRate === ''
+        ) {
             return $exchangeRate;
         }
 
@@ -538,7 +541,11 @@ class Core
 
         $exchangeRate = $this->getExchangeRate($targetCurrency->id);
 
-        if ('' === $exchangeRate || null === $exchangeRate || ! $exchangeRate->rate) {
+        if (
+            '' === $exchangeRate
+            || null === $exchangeRate
+            || ! $exchangeRate->rate
+        ) {
             return $amount;
         }
 
@@ -572,7 +579,10 @@ class Core
             'target_currency' => $targetCurrency->id,
         ]);
 
-        if (null === $exchangeRate || ! $exchangeRate->rate) {
+        if (
+            null === $exchangeRate
+            || ! $exchangeRate->rate
+        ) {
             return $amount;
         }
 
@@ -716,9 +726,15 @@ class Core
             $toTimeStamp += 86400;
         }
 
-        if (! $this->is_empty_date($dateFrom) && $channelTimeStamp < $fromTimeStamp) {
+        if (
+            ! $this->is_empty_date($dateFrom)
+            && $channelTimeStamp < $fromTimeStamp
+        ) {
             $result = false;
-        } elseif (! $this->is_empty_date($dateTo) && $channelTimeStamp > $toTimeStamp) {
+        } elseif (
+            ! $this->is_empty_date($dateTo)
+            && $channelTimeStamp > $toTimeStamp
+        ) {
             $result = false;
         } else {
             $result = true;
@@ -791,7 +807,10 @@ class Core
     {
         static $loadedConfigs = [];
 
-        if (array_key_exists($field, $loadedConfigs) && ! in_array($field, $this->coreConfigExceptions)) {
+        if (
+            array_key_exists($field, $loadedConfigs)
+            && ! in_array($field, $this->coreConfigExceptions)
+        ) {
             $coreConfigValue = $loadedConfigs[$field];
         } else {
             if (null === $channel) {
@@ -1103,7 +1122,10 @@ class Core
         while (count($keys) > 1) {
             $key = array_shift($keys);
 
-            if (! isset($array[$key]) || ! is_array($array[$key])) {
+            if (
+                ! isset($array[$key])
+                || ! is_array($array[$key])
+            ) {
                 $array[$key] = [];
             }
 
@@ -1212,7 +1234,11 @@ class Core
         $merged = $array1;
 
         foreach ($array2 as $key => &$value) {
-            if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
+            if (
+                is_array($value)
+                && isset($merged[$key])
+                && is_array($merged[$key])
+            ) {
                 $merged[$key] = $this->arrayMerge($merged[$key], $value);
             } else {
                 $merged[$key] = $value;
@@ -1234,8 +1260,14 @@ class Core
     {
         $fields = $this->getConfigField($field);
 
-        if (isset($fields['channel_based']) && $fields['channel_based']) {
-            if (isset($fields['locale_based']) && $fields['locale_based']) {
+        if (
+            isset($fields['channel_based'])
+            && $fields['channel_based']
+        ) {
+            if (
+                isset($fields['locale_based'])
+                && $fields['locale_based']
+            ) {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
                     'code'         => $field,
                     'channel_code' => $channel,
@@ -1248,7 +1280,10 @@ class Core
                 ]);
             }
         } else {
-            if (isset($fields['locale_based']) && $fields['locale_based']) {
+            if (
+                isset($fields['locale_based'])
+                && $fields['locale_based']
+            ) {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
                     'code'        => $field,
                     'locale_code' => $locale,

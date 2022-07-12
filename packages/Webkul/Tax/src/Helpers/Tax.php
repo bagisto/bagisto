@@ -47,7 +47,7 @@ class Tax
         foreach ($that->items as $item) {
             $taxRate = (string) round((float) $item->tax_percent, self::TAX_RATE_PRECISION);
 
-            if (!array_key_exists($taxRate, $taxes)) {
+            if (! array_key_exists($taxRate, $taxes)) {
                 $taxes[$taxRate] = 0;
             }
 
@@ -126,22 +126,32 @@ class Tax
             foreach ($taxRates as $rate) {
                 $haveTaxRate = false;
 
-                if ($rate->state != '' && $rate->state != $address->state) {
+                if (
+                    $rate->state != ''
+                    && $rate->state != $address->state
+                ) {
                     continue;
                 }
 
-                if (!$rate->is_zip) {
-                    if (empty($rate->zip_code) || in_array($rate->zip_code, ['*', $address->postcode])) {
+                if (! $rate->is_zip) {
+                    if (
+                        empty($rate->zip_code)
+                        || in_array($rate->zip_code, ['*', $address->postcode])
+                    ) {
                         $haveTaxRate = true;
                     }
                 } else {
-                    if ($address->postcode >= $rate->zip_from && $address->postcode <= $rate->zip_to) {
+                    if (
+                        $address->postcode >= $rate->zip_from
+                        && $address->postcode <= $rate->zip_to
+                    ) {
                         $haveTaxRate = true;
                     }
                 }
 
                 if ($haveTaxRate) {
                     $operation($rate);
+                    
                     break;
                 }
             }

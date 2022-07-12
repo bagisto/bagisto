@@ -38,8 +38,10 @@ class Simple extends AbstractType
                 return false;
             }
 
-            if (is_callable(config('products.isSaleable')) &&
-                call_user_func(config('products.isSaleable'), $product) === false) {
+            if (
+                is_callable(config('products.isSaleable')) &&
+                call_user_func(config('products.isSaleable'), $product) === false
+            ) {
                 return false;
             }
 

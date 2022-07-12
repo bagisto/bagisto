@@ -14,7 +14,10 @@
 @endphp
 
 {!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
-    @if (isset($list) && $list)
+    @if (
+        isset($list)
+        && $list
+    )
         <div class="col-12 lg-card-container list-card product-card row">
             <div class="product-image">
                 <a
@@ -40,7 +43,10 @@
                             <span class="fs16">{{ $product->name }}</span>
                         </a>
 
-                        @if (isset($additionalAttributes) && $additionalAttributes)
+                        @if (
+                            isset($additionalAttributes)
+                            && $additionalAttributes
+                        )
                             @if (isset($item->additional['attributes']))
                                 <div class="item-options">
 
@@ -109,7 +115,10 @@
 
                         <span class="fs16">{{ $product->name }}</span>
 
-                        @if (isset($additionalAttributes) && $additionalAttributes)
+                        @if (
+                            isset($additionalAttributes)
+                            && $additionalAttributes
+                        )
                             @if (isset($item->additional['attributes']))
                                 <div class="item-options">
 

@@ -27,12 +27,12 @@ class OrderItemFactory extends Factory
 
         if (isset($attributes['product_id'])) {
             $product = Product::query()
-                              ->where('id', $attributes['product_id'])
-                              ->first();
+                ->where('id', $attributes['product_id'])
+                ->first();
         } else {
             $product = Product::factory()
-                              ->simple()
-                              ->create();
+                ->simple()
+                ->create();
         }
 
         $fallbackPrice = $this->faker->randomFloat(4, 0, 1000);

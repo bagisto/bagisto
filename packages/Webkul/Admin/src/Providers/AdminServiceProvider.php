@@ -94,10 +94,16 @@ class AdminServiceProvider extends ServiceProvider
                     continue;
                 }
 
-                if ($index + 1 < count(config('menu.admin')) && $permissionType != 'all') {
+                if (
+                    $index + 1 < count(config('menu.admin'))
+                    && $permissionType != 'all'
+                ) {
                     $permission = config('menu.admin')[$index + 1];
 
-                    if (substr_count($permission['key'], '.') == 2 && substr_count($item['key'], '.') == 1) {
+                    if (
+                        substr_count($permission['key'], '.') == 2
+                        && substr_count($item['key'], '.') == 1
+                    ) {
                         foreach ($allowedPermissions as $key => $value) {
                             if ($item['key'] == $value) {
                                 $neededItem = $allowedPermissions[$key + 1];

@@ -37,11 +37,17 @@ class OnepageController extends Controller
     {
         Event::dispatch('checkout.load.index');
 
-        if (! auth()->guard('customer')->check() && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
+        if (
+            ! auth()->guard('customer')->check()
+            && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')
+        ) {
             return redirect()->route('customer.session.index');
         }
 
-        if (auth()->guard('customer')->check() && auth()->guard('customer')->user()->is_suspended) {
+        if (
+            auth()->guard('customer')->check()
+            && auth()->guard('customer')->user()->is_suspended
+        ) {
             session()->flash('warning', trans('shop::app.checkout.cart.suspended-account-message'));
 
             return redirect()->route('shop.checkout.cart.index');
@@ -54,8 +60,14 @@ class OnepageController extends Controller
         $cart = Cart::getCart();
 
         if (
-            (! auth()->guard('customer')->check() && $cart->hasDownloadableItems())
-            || (! auth()->guard('customer')->check() && ! $cart->hasGuestCheckoutItems())
+            (
+                ! auth()->guard('customer')->check()
+                && $cart->hasDownloadableItems()
+            )
+            || (
+                ! auth()->guard('customer')->check()
+                && ! $cart->hasGuestCheckoutItems()
+            )
         ) {
             return redirect()->route('customer.session.index');
         }
@@ -97,14 +109,20 @@ class OnepageController extends Controller
     {
         $data = $request->all();
 
-        if (! auth()->guard('customer')->check() && ! Cart::getCart()->hasGuestCheckoutItems()) {
+        if (
+            ! auth()->guard('customer')->check()
+            && ! Cart::getCart()->hasGuestCheckoutItems()
+        ) {
             return response()->json(['redirect_url' => route('customer.session.index')], 403);
         }
 
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
 
-        if (Cart::hasError() || ! Cart::saveCustomerAddress($data)) {
+        if (
+            Cart::hasError()
+            || ! Cart::saveCustomerAddress($data)
+        ) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
         }
 
@@ -132,7 +150,11 @@ class OnepageController extends Controller
     {
         $shippingMethod = request()->get('shipping_method');
 
-        if (Cart::hasError() || ! $shippingMethod || ! Cart::saveShippingMethod($shippingMethod)) {
+        if (
+            Cart::hasError()
+            || ! $shippingMethod
+            || ! Cart::saveShippingMethod($shippingMethod)
+        ) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
         }
 
@@ -150,7 +172,11 @@ class OnepageController extends Controller
     {
         $payment = request()->get('payment');
 
-        if (Cart::hasError() || ! $payment || ! Cart::savePaymentMethod($payment)) {
+        if (
+            Cart::hasError()
+            || ! $payment
+            || ! Cart::savePaymentMethod($payment)
+        ) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
         }
 
@@ -226,11 +252,17 @@ class OnepageController extends Controller
 
         $minimumOrderAmount = core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
 
-        if (auth()->guard('customer')->check() && auth()->guard('customer')->user()->is_suspended) {
+        if (
+            auth()->guard('customer')->check()
+            && auth()->guard('customer')->user()->is_suspended
+        ) {
             throw new \Exception(trans('shop::app.checkout.cart.suspended-account-message'));
         }
 
-        if (auth()->guard('customer')->user() && ! auth()->guard('customer')->user()->status) {
+        if (
+            auth()->guard('customer')->user()
+            && ! auth()->guard('customer')->user()->status
+        ) {
             throw new \Exception(trans('shop::app.checkout.cart.inactive-account-message'));
         }
 
@@ -246,7 +278,10 @@ class OnepageController extends Controller
             throw new \Exception(trans('shop::app.checkout.cart.check-billing-address'));
         }
 
-        if ($cart->haveStockableItems() && ! $cart->selected_shipping_rate) {
+        if (
+            $cart->haveStockableItems()
+            && ! $cart->selected_shipping_rate
+        ) {
             throw new \Exception(trans('shop::app.checkout.cart.specify-shipping-method'));
         }
 

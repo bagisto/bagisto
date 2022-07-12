@@ -38,7 +38,10 @@ class CustomerAddressForm extends FormRequest
             $this->mergeNewAddressRules('billing');
         }
 
-        if (isset($this->get('billing')['use_for_shipping']) && ! $this->get('billing')['use_for_shipping']) {
+        if (
+            isset($this->get('billing')['use_for_shipping'])
+            && ! $this->get('billing')['use_for_shipping']
+        ) {
             if (isset($this->get('shipping')['address_id'])) {
                 $this->mergeExistingAddressRules('shipping');
             } else {

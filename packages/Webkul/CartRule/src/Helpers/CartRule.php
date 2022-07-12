@@ -60,7 +60,10 @@ class CartRule
 
             $appliedCartRuleIds = array_merge($appliedCartRuleIds, $itemCartRuleIds);
 
-            if ($item->children()->count() && $item->product->getTypeInstance()->isChildrenCalculated()) {
+            if (
+                $item->children()->count()
+                && $item->product->getTypeInstance()->isChildrenCalculated()
+            ) {
                 $this->divideDiscount($item);
             }
         }
@@ -91,7 +94,10 @@ class CartRule
             public static $cartID;
         };
 
-        if ($staticCartRules::$cartID === $cart->id && $staticCartRules::$cartRules) {
+        if (
+            $staticCartRules::$cartID === $cart->id
+            && $staticCartRules::$cartRules
+        ) {
             return $staticCartRules::$cartRules;
         }
 
@@ -132,18 +138,30 @@ class CartRule
                 // reasons (cart_rule_coupon-relation is pre-loaded by self::getCartRuleQuery())
                 $coupon = $rule->cart_rule_coupon()->where('code', $cart->coupon_code)->first();
 
-                if ($coupon && $coupon->code === $cart->coupon_code) {
-                    if ($coupon->usage_limit && $coupon->times_used >= $coupon->usage_limit) {
+                if (
+                    $coupon
+                    && $coupon->code === $cart->coupon_code
+                ) {
+                    if (
+                        $coupon->usage_limit
+                        && $coupon->times_used >= $coupon->usage_limit
+                    ) {
                         return false;
                     }
 
-                    if ($cart->customer_id && $coupon->usage_per_customer) {
+                    if (
+                        $cart->customer_id
+                        && $coupon->usage_per_customer
+                    ) {
                         $couponUsage = $this->cartRuleCouponUsageRepository->findOneWhere([
                             'cart_rule_coupon_id' => $coupon->id,
                             'customer_id'         => $cart->customer_id,
                         ]);
 
-                        if ($couponUsage && $couponUsage->times_used >= $coupon->usage_per_customer) {
+                        if (
+                            $couponUsage
+                            && $couponUsage->times_used >= $coupon->usage_per_customer
+                        ) {
                             return false;
                         }
                     }
@@ -161,7 +179,10 @@ class CartRule
                 'customer_id'  => $cart->customer_id,
             ]);
 
-            if ($ruleCustomer && $ruleCustomer->times_used >= $rule->usage_per_customer) {
+            if (
+                $ruleCustomer
+                && $ruleCustomer->times_used >= $rule->usage_per_customer
+            ) {
                 return false;
             }
         }
@@ -209,7 +230,10 @@ class CartRule
 
                     $baseDiscountAmount = ($quantity * $item->base_price + $item->base_tax_amount - $item->base_discount_amount) * ($rulePercent / 100);
 
-                    if (! $rule->discount_quantity || $rule->discount_quantity > $quantity) {
+                    if (
+                        ! $rule->discount_quantity
+                        || $rule->discount_quantity > $quantity
+                    ) {
                         $discountPercent = min(100, $item->discount_percent + $rulePercent);
 
                         $item->discount_percent = $discountPercent;
@@ -242,7 +266,10 @@ class CartRule
                     break;
 
                 case 'buy_x_get_y':
-                    if (! $rule->discount_step || $rule->discount_amount > $rule->discount_step) {
+                    if (
+                        ! $rule->discount_step
+                        || $rule->discount_amount > $rule->discount_step
+                    ) {
                         break;
                     }
 
@@ -314,7 +341,10 @@ class CartRule
                 continue;
             }
 
-            if (! $rule || ! $rule->apply_to_shipping) {
+            if (
+                ! $rule
+                || ! $rule->apply_to_shipping
+            ) {
                 continue;
             }
 
@@ -400,7 +430,10 @@ class CartRule
                     continue;
                 }
 
-                if (! $rule || ! $rule->free_shipping) {
+                if (
+                    ! $rule
+                    || ! $rule->free_shipping
+                ) {
                     continue;
                 }
 

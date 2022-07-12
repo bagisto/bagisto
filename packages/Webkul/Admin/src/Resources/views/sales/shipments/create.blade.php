@@ -110,7 +110,10 @@
                     </div>
                 </accordian>
 
-                @if ($order->billing_address || $order->shipping_address)
+                @if (
+                    $order->billing_address
+                    || $order->shipping_address
+                )
                 <accordian title="{{ __('admin::app.sales.orders.address') }}" :active="true">
                     <div slot="body">
                         <div class="sale">
@@ -270,7 +273,10 @@
                         <tbody>
 
                             @foreach ($order->items as $item)
-                                @if ($item->qty_to_ship > 0 && $item->product)
+                                @if (
+                                    $item->qty_to_ship > 0
+                                    && $item->product
+                                )
                                     <tr>
                                         <td>{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
                                         <td>

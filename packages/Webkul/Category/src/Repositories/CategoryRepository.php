@@ -31,7 +31,10 @@ class CategoryRepository extends Repository
     {
         Event::dispatch('catalog.category.create.before');
 
-        if (isset($data['locale']) && $data['locale'] == 'all') {
+        if (
+            isset($data['locale'])
+            && $data['locale'] == 'all'
+        ) {
             $model = app()->make($this->model());
 
             foreach (core()->getAllLocales() as $locale) {
@@ -268,7 +271,10 @@ class CategoryRepository extends Repository
         $trimmed = [];
 
         foreach ($categories as $key => $category) {
-            if ($category->name != null || $category->name != '') {
+            if (
+                $category->name != null
+                || $category->name != ''
+            ) {
                 $trimmed[$key] = [
                     'id'   => $category->id,
                     'name' => $category->name,

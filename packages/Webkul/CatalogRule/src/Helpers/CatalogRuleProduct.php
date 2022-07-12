@@ -106,7 +106,8 @@ class CatalogRuleProduct
             $appliedAttributes = [];
 
             foreach ($rule->conditions as $condition) {
-                if (! $condition['attribute']
+                if (
+                    ! $condition['attribute']
                     || ! isset($condition['value'])
                     || is_null($condition['value'])
                     || $condition['value'] == ''

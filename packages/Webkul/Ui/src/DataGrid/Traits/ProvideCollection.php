@@ -193,7 +193,10 @@ trait ProvideCollection
      */
     private function filterCollection($collection, $info, $columnType, $columnName)
     {
-        if (array_keys($info)[0] === 'like' || array_keys($info)[0] === 'nlike') {
+        if (
+            array_keys($info)[0] === 'like'
+            || array_keys($info)[0] === 'nlike'
+        ) {
             foreach ($info as $condition => $filterValue) {
                 $this->resolve($collection, $columnName, $condition, '%' . $filterValue . '%');
             }
@@ -232,13 +235,24 @@ trait ProvideCollection
                  *
                  * Use $column['closure'] instead. `wrapper` key will get removed in the later version.
                  */
-                if (isset($column['wrapper']) && gettype($column['wrapper']) === 'object' && $column['wrapper'] instanceof \Closure) {
-                    if (isset($column['closure']) && $column['closure'] == true) {
+                if (
+                    isset($column['wrapper'])
+                    && gettype($column['wrapper']) === 'object'
+                    && $column['wrapper'] instanceof \Closure
+                ) {
+                    if (
+                        isset($column['closure'])
+                        && $column['closure'] == true
+                    ) {
                         $record->{$column['index']} = $column['wrapper']($record);
                     } else {
                         $record->{$column['index']} = htmlspecialchars($column['wrapper']($record));
                     }
-                } elseif (isset($column['closure']) && gettype($column['closure']) === 'object' && $column['closure'] instanceof \Closure) {
+                } elseif (
+                    isset($column['closure'])
+                    && gettype($column['closure']) === 'object'
+                    && $column['closure'] instanceof \Closure
+                ) {
                     $record->{$column['index']} = $column['closure']($record);
                 }
             } else {
@@ -286,7 +300,10 @@ trait ProvideCollection
     private function exceptionCheckInColumns($columnName)
     {
         foreach ($this->completeColumnDetails as $column) {
-            if ($column['index'] === $columnName && ! $column['filterable']) {
+            if (
+                $column['index'] === $columnName
+                && ! $column['filterable']
+            ) {
                 return true;
             }
         }

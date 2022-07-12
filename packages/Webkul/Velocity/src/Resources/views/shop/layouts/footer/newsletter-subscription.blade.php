@@ -5,7 +5,10 @@
 )
     <div class="newsletter-subscription">
         <div class="newsletter-wrapper row col-12">
-            @if ($velocityMetaData && $velocityMetaData->subscription_bar_content)
+            @if (
+                $velocityMetaData
+                && $velocityMetaData->subscription_bar_content
+            )
                 {!! $velocityMetaData->subscription_bar_content !!}
             @endif
 

@@ -124,7 +124,7 @@ class CartRule extends Model implements CartRuleContract
         $coupon = $this->coupon_code()
                        ->first();
 
-        if (!$coupon) {
+        if (! $coupon) {
             return;
         }
 

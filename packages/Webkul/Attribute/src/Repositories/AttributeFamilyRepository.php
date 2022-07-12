@@ -152,7 +152,10 @@ class AttributeFamilyRepository extends Repository
         $trimmed = [];
 
         foreach ($attributeFamilies as $key => $attributeFamily) {
-            if ($attributeFamily->name != null || $attributeFamily->name != "") {
+            if (
+                $attributeFamily->name != null
+                || $attributeFamily->name != ""
+            ) {
                 $trimmed[$key] = [
                     'id'   => $attributeFamily->id,
                     'code' => $attributeFamily->code,
