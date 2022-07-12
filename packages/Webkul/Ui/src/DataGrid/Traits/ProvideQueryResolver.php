@@ -19,7 +19,7 @@ trait ProvideQueryResolver
     {
         if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
             $this->$method($collection, $this->filterMap[$columnName], $condition, $filterValue, $clause);
-        } else if ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
+        } elseif ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
             $this->$method($collection, $columnName, $condition, $filterValue, $clause);
         } else {
             $this->$method($collection, $columnName, $condition, $filterValue, $clause);
@@ -59,7 +59,7 @@ trait ProvideQueryResolver
     {
         if ($this->operators[$condition] == '=') {
             $this->checkFilterValueCondition($collection, $columnName, $condition, $filterValue);
-        } else if ($this->operators[$condition] == '<>') {
+        } elseif ($this->operators[$condition] == '<>') {
             $this->checkFilterValueCondition($collection, $columnName, $condition, $filterValue, true);
         } else {
             $this->resolveFilterQuery($collection, $columnName, $condition, $filterValue);

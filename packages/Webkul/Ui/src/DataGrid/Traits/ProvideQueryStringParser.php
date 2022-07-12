@@ -73,7 +73,7 @@ trait ProvideQueryStringParser
                 if (! is_array($value)) {
                     unset($parsedQueryStrings[$key]);
                 }
-            } else if (! is_array($value)) {
+            } elseif (! is_array($value)) {
                 unset($parsedQueryStrings[$key]);
             }
         }

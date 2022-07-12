@@ -166,7 +166,7 @@
             mounted () {
                 if (this.image.id && this.image.url) {
                     this.imageData = this.image.url;
-                } else if (this.image.id && this.image.file) {
+                } elseif (this.image.id && this.image.file) {
                     this.readFile(this.image.file);
                 }
             },

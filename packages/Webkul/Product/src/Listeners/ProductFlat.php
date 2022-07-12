@@ -163,7 +163,7 @@ class ProductFlat
             foreach ($product['channels'] as $channel) {
                 $channels[] = $this->getChannel($channel)->code;
             }
-        } else if (isset($parentProduct['channels'])){
+        } elseif (isset($parentProduct['channels'])){
             foreach ($parentProduct['channels'] as $channel) {
                 $channels[] = $this->getChannel($channel)->code;
             }

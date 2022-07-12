@@ -100,7 +100,7 @@ class ProductFlatRepository extends Repository
                 if (! is_null($attribute[$key])) {
                     if ($key == 'integer_value' && ! in_array($attribute[$key], $attributeInfo['attributeOptions'])) {
                         array_push($attributeInfo['attributeOptions'], $attribute[$key]);
-                    } else if ($key == 'text_value' && ! in_array($attribute[$key], $attributeInfo['attributeOptions'])) {
+                    } elseif ($key == 'text_value' && ! in_array($attribute[$key], $attributeInfo['attributeOptions'])) {
                         $multiSelectArrributes = explode(",", $attribute[$key]);
 
                         foreach ($multiSelectArrributes as $multi) {
@@ -108,7 +108,7 @@ class ProductFlatRepository extends Repository
                                 array_push($attributeInfo['attributeOptions'], $multi);
                             }
                         }
-                    } else if (($key == 'attribute_id' || $key == 'attributeId') && ! in_array($attribute[$key], $attributeInfo['attributes'])) {
+                    } elseif (($key == 'attribute_id' || $key == 'attributeId') && ! in_array($attribute[$key], $attributeInfo['attributes'])) {
                         array_push($attributeInfo['attributes'], $attribute[$key]);
                     }
                 }
