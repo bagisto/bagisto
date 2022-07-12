@@ -217,8 +217,8 @@ class Cart
     {
         $cartData = [
             'channel_id'            => core()->getCurrentChannel()->id,
-            'global_currency_code'  => core()->getBaseCurrencyCode(),
-            'base_currency_code'    => core()->getBaseCurrencyCode(),
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
             'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
             'cart_currency_code'    => core()->getCurrentCurrencyCode(),
             'items_count'           => 1,
@@ -228,11 +228,15 @@ class Cart
          * Fill in the customer data, as far as possible.
          */
         if (auth()->guard()->check()) {
-            $cartData['customer_id'] = auth()->guard()->user()->id;
-            $cartData['is_guest'] = 0;
-            $cartData['customer_first_name'] = auth()->guard()->user()->first_name;
-            $cartData['customer_last_name'] = auth()->guard()->user()->last_name;
-            $cartData['customer_email'] = auth()->guard()->user()->email;
+            $customer = auth()->guard()->user();
+
+            $cartData = array_merge($cartData, [
+                'customer_id'         => $customer->id,
+                'is_guest'            => 0,
+                'customer_first_name' => $customer->first_name,
+                'customer_last_name'  => $customer->last_name,
+                'customer_email'      => $customer->email,
+            ]);
         } else {
             $cartData['is_guest'] = 1;
         }
@@ -261,7 +265,7 @@ class Cart
     public function updateItems($data)
     {
         foreach ($data['qty'] as $itemId => $quantity) {
-            $item = $this->cartItemRepository->findOneByField('id', $itemId);
+            $item = $this->cartItemRepository->find($itemId);
 
             if (! $item) {
                 continue;
@@ -401,7 +405,23 @@ class Cart
 
         $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
 
-        $this->assignCustomerFields($cart);
+        if (
+            auth()->guard()->check()
+            && ($user = auth()->guard()->user())
+            && ($user->email
+                && $user->first_name
+                &&
+                $user->last_name
+            )
+        ) {
+            $cart->customer_email = $user->email;
+            $cart->customer_first_name = $user->first_name;
+            $cart->customer_last_name = $user->last_name;
+        } else {
+            $cart->customer_email = $cart->billing_address->email;
+            $cart->customer_first_name = $cart->billing_address->first_name;
+            $cart->customer_last_name = $cart->billing_address->last_name;
+        }
 
         $cart->save();
 
@@ -564,7 +584,7 @@ class Cart
                 $address = Tax::getDefaultAddress();
             }
 
-            $item = $this->setItemTaxToZero($item);
+            $item->tax_percent = $item->tax_amount = $item->base_tax_amount = 0;
 
             Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use ($cart, $item) {
                 $item->tax_percent = $rate->tax_rate;
@@ -764,46 +784,6 @@ class Cart
     }
 
     /**
-     * Set Item tax to zero.
-     *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return \Webkul\Checkout\Contracts\CartItem
-     */
-    protected function setItemTaxToZero(\Webkul\Checkout\Contracts\CartItem $item): \Webkul\Checkout\Contracts\CartItem
-    {
-        $item->tax_percent = 0;
-        $item->tax_amount = 0;
-        $item->base_tax_amount = 0;
-
-        return $item;
-    }
-
-    /**
-     * Transfer the user profile information into the cart/into the order.
-     *
-     * When logged in as guest or the customer profile is not complete, we use the
-     * billing address to fill the order customer_ data.
-     *
-     * @param \Webkul\Checkout\Contracts\Cart $cart
-     */
-    private function assignCustomerFields(\Webkul\Checkout\Contracts\Cart $cart): void
-    {
-        if (
-            auth()->guard()->check()
-            && ($user = auth()->guard()->user())
-            && $this->profileIsComplete($user)
-        ) {
-            $cart->customer_email = $user->email;
-            $cart->customer_first_name = $user->first_name;
-            $cart->customer_last_name = $user->last_name;
-        } else {
-            $cart->customer_email = $cart->billing_address->email;
-            $cart->customer_first_name = $cart->billing_address->first_name;
-            $cart->customer_last_name = $cart->billing_address->last_name;
-        }
-    }
-
-    /**
      * Returns true, if cart item is inactive.
      *
      * @param \Webkul\Checkout\Contracts\CartItem $item
@@ -818,17 +798,6 @@ class Cart
         }
 
         return $loadedCartItem[$item->product_id] = $item->product->getTypeInstance()->isCartItemInactive($item);
-    }
-
-    /**
-     * Is profile is complete.
-     *
-     * @param  $user
-     * @return bool
-     */
-    private function profileIsComplete($user): bool
-    {
-        return $user->email && $user->first_name && $user->last_name;
     }
 
     /**
