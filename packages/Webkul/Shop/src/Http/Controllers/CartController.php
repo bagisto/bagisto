@@ -173,23 +173,26 @@ class CartController extends Controller
 
         try {
             if (strlen($couponCode)) {
-                if (Cart::getCart()->coupon_code && Cart::getCart()->coupon_code == $couponCode) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => trans('shop::app.checkout.total.coupon-already-applied'),
-                    ]);
-                }
-                
-                Cart::setCouponCode($couponCode)->collectTotals();
-
-                if (Cart::getCart()->coupon_code == $couponCode) {
-                    return response()->json([
-                        'success' => true,
-                        'message' => trans('shop::app.checkout.total.success-coupon'),
-                    ]);
+                $validateStatus = $this->validateCouponStatus($couponCode);
+                if ($validateStatus) {
+                    if (Cart::getCart()->coupon_code && Cart::getCart()->coupon_code == $couponCode) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => trans('shop::app.checkout.total.coupon-already-applied'),
+                        ]);
+                    }
+    
+                    Cart::setCouponCode($couponCode)->collectTotals();
+                  
+                    if (Cart::getCart()->coupon_code == $couponCode) {
+                        return response()->json([
+                            'success' => true,
+                            'message' => trans('shop::app.checkout.total.success-coupon'),
+                        ]);
+                    }
                 }
             }
-
+           
             return response()->json([
                 'success' => false,
                 'message' => trans('shop::app.checkout.total.invalid-coupon'),
@@ -202,6 +205,24 @@ class CartController extends Controller
                 'message' => trans('shop::app.checkout.total.coupon-apply-issue'),
             ]);
         }
+    }
+
+    /**
+     * Validate coupon code.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function validateCouponStatus($couponCode)
+    { 
+        $coupons = $this->cartRuleCouponRepository->where(['code' => $couponCode])->get();
+        foreach ($coupons as $coupon) {
+            $cartRule = $this->cartRuleRepository->where(['id' => $coupon->cart_rule_id])->first();
+            if ($cartRule->status) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
