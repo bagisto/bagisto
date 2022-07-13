@@ -1213,6 +1213,7 @@ return [
             'end-other-rules'              => 'Beëindig andere regels',
             'categories'                   => 'Categorieën',
             'attribute_family'             => 'Kenmerk Familie',
+            'per-dis-can-not-more-than-100' => 'Percentage korting kan niet meer zijn dan 100',
         ],
     ],
 

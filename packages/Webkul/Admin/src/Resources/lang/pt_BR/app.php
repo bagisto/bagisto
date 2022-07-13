@@ -1213,6 +1213,7 @@ return [
             'end-other-rules'              => 'Terminar outras regras',
             'categories'                   => 'Categorias',
             'attribute_family'             => 'Família de Atributos',
+            'per-dis-can-not-more-than-100' => 'O desconto percentual não pode ser superior a 100',
         ],
     ],
 

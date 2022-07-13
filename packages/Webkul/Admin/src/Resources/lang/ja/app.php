@@ -1244,6 +1244,7 @@ return [
             'buy-x-get-y-free'             => 'Buy X Get Y Free',
             'discount-amount'              => 'Discount Amount',
             'mass-delete-success'          => 'All the selected index of coupons have been deleted successfully.',
+            'per-dis-can-not-more-than-100' => 'Percentage discount can not be more than 100',
         ],
     ],
 

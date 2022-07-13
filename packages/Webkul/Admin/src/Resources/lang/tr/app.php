@@ -1213,6 +1213,7 @@ return [
             'end-other-rules'              => 'Diğer Kuralları Sonlandır.',
             'categories'                   => 'Kategoriler',
             'attribute_family'             => 'Nitelik Grubu',
+            'per-dis-can-not-more-than-100' => 'Yüzde indirimi 100\'den fazla olamaz',
         ],
     ],
 

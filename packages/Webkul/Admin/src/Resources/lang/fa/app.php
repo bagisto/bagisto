@@ -1214,6 +1214,7 @@ return [
             'end-other-rules'              => 'قوانین دیگر را پایان دهید',
             'categories'                   => 'دسته بندی ها',
             'attribute_family'             => 'نوع ویژگی',
+            'per-dis-can-not-more-than-100' => 'درصد تخفیف نمی تواند بیشتر از 100 باشد',
         ],
     ],
 

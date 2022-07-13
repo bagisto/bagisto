@@ -1229,6 +1229,7 @@ return [
             'end-other-rules'              => 'إنهاء القواعد الأخرى',
             'categories'                   => 'التصنيفات',
             'attribute_family'             => 'عائلة السمة',
+            'per-dis-can-not-more-than-100' => 'لا يمكن أن تكون النسبة المئوية للخصم أكثر من 100',
         ],
     ],
 

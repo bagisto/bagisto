@@ -1230,6 +1230,7 @@ return [
             'end-other-rules'              => 'Ende Andere Regeln',
             'categories'                   => 'Kategorien',
             'attribute_family'             => 'Attributgruppe',
+            'per-dis-can-not-more-than-100' => 'Der prozentuale Rabatt darf nicht mehr als 100 betragen',
         ],
     ],
 

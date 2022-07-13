@@ -1215,6 +1215,7 @@ return [
             'buy-x-get-y-free'             => '买X送Y',
             'discount-amount'              => '折扣数量',
             'mass-delete-success'          => '所有选择的优惠券索引已被成功删除.',
+            'per-dis-can-not-more-than-100' => '百分比折扣不能超過100',
         ],
     ],
 

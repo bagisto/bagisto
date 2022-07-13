@@ -1242,6 +1242,7 @@ return [
             'buy-x-get-y-free'             => 'Achetez X Obtenez Y gratuitement',
             'discount-amount'              => 'Montant de la remise',
             'mass-delete-success'          => 'Tous les index de coupons sélectionnés ont été supprimés avec succès.',
+            'per-dis-can-not-more-than-100' => 'Le pourcentage de remise ne peut pas être supérieur à 100',
         ],
     ],
 

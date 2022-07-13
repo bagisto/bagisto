@@ -1214,6 +1214,7 @@ return [
             'end-other-rules'              => 'Zakończ inne zasady',
             'categories'                   => 'Kategorie',
             'attribute_family'             => 'Rodzina atrybutów',
+            'per-dis-can-not-more-than-100' => 'Rabat procentowy nie może być większy niż 100',
         ],
     ],
 

@@ -1220,6 +1220,7 @@ return [
             'end-other-rules'              => 'Fine altre regole',
             'categories'                   => 'Categorie',
             'attribute_family'             => 'Famiglia Attributi',
+            'per-dis-can-not-more-than-100' => 'La percentuale di sconto non può essere superiore a 100',
         ],
     ],
 
