@@ -123,16 +123,18 @@
                                         </div>
                                     </div>
 
-                                    <div class="control-group">
+                                    <div class="control-group" :class="[errors.has('uses_per_coupon') ? 'has-error' : '']">
                                         <label for="uses_per_coupon">{{ __('admin::app.promotions.cart-rules.uses-per-coupon') }}</label>
-                                        <input class="control" id="uses_per_coupon" name="uses_per_coupon" value="{{ old('uses_per_coupon') }}"/>
+                                        <input v-validate="'numeric'" class="control" id="uses_per_coupon" name="uses_per_coupon" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.uses-per-coupon') }}&quot;"  value="{{ old('uses_per_coupon') }}"/>
+                                        <span class="control-error" v-if="errors.has('uses_per_coupon')">@{{ errors.first('uses_per_coupon') }}</span>
                                     </div>
                                 </div>
 
-                                <div class="control-group">
+                                <div class="control-group" :class="[errors.has('usage_per_customer') ? 'has-error' : '']">
                                     <label for="usage_per_customer">{{ __('admin::app.promotions.cart-rules.uses-per-customer') }}</label>
-                                    <input class="control" id="usage_per_customer" name="usage_per_customer" value="{{ old('usage_per_customer') }}"/>
+                                    <input v-validate="'numeric'" class="control" id="usage_per_customer" name="usage_per_customer" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.uses-per-customer') }}&quot;"  value="{{ old('usage_per_customer') }}"/>
                                     <span class="control-info">{{ __('admin::app.promotions.cart-rules.uses-per-customer-control-info') }}</span>
+                                    <span class="control-error" v-if="errors.has('usage_per_customer')">@{{ errors.first('usage_per_customer') }}</span>
                                 </div>
 
                                 <div class="control-group date">
