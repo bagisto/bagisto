@@ -730,6 +730,7 @@ return [
         'yes'            => 'Evet',
         'no'             => 'Hayır',
         'delete'         => 'Sil',
+        'enable-atleast-one-shipping' => 'En az bir gönderim yöntemini etkinleştirin.',
 
         'tax-categories' => [
             'title'           => 'Vergi Kategorileri',

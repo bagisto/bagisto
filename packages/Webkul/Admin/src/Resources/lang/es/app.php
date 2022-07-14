@@ -742,6 +742,7 @@ return [
         'yes'            => 'Sí',
         'no'             => 'No',
         'delete'         => 'Borrar',
+        'enable-atleast-one-shipping' => 'Habilite al menos un método de envío.',
 
         'tax-categories' => [
             'title'           => 'Categorías de impuestos',

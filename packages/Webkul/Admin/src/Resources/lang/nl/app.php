@@ -724,6 +724,7 @@ return [
         'yes'            => 'Ja',
         'no'             => 'Nee',
         'delete'         => 'Verwijder',
+        'enable-atleast-one-shipping' => 'Schakel ten minste één verzendmethode in.',
 
         'tax-categories' => [
             'title'           => 'BTW categorieën',

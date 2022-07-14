@@ -723,6 +723,7 @@ return [
         'yes'            => 'Sim',
         'no'             => 'Não',
         'delete'         => 'Deletar',
+        'enable-atleast-one-shipping' => 'Enable atleast one shipping method.',
 
         'tax-categories' => [
             'title'           => 'Categorias de Imposto',

@@ -742,6 +742,7 @@ return [
         'yes'            => 'हां',
         'no'             => 'नहीं',
         'delete'         => 'हटाएं',
+        'enable-atleast-one-shipping' => 'कम से कम एक शिपिंग विधि सक्षम करें।',
 
         'tax-categories' => [
             'title'           => 'कर श्रेणियाँ',
