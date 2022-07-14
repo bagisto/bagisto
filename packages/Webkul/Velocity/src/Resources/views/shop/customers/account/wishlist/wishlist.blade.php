@@ -166,7 +166,7 @@
                     return {
                         isWishlistShared: parseInt("{{ $isWishlistShared }}"),
 
-                        wishlistSharedLink: "{{ $wishlistSharedLink }}".replace("&amp", "&"),
+                        wishlistSharedLink: "{{ $wishlistSharedLink }}".replace("&amp;", "&"),
                     }
                 },
 
