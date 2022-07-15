@@ -94,13 +94,19 @@ class CartController extends Controller
                     return redirect()->route('shop.checkout.onepage.index');
                 }
             }
+<<<<<<< HEAD
         } catch(\Exception $exception) {
+=======
+
+>>>>>>> 6952314159279bb86aadb32bb23add1b9966aba8
             session()->flash('warning', __($exception->getMessage()));
 
             $product = $this->productRepository->find($id);
 
-            Log::error('Velocity CartController: ' . $exception->getMessage(),
-                ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]);
+            Log::error(
+                'Velocity CartController: ' . $exception->getMessage(),
+                ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]
+            );
 
             $response = [
                 'status'           => 'danger',
@@ -133,11 +139,7 @@ class CartController extends Controller
             ];
         }
 
-        return response()->json($response ?? [
-            'status'  => 'danger',
-            'label'   => trans('velocity::app.shop.general.alert.error'),
-            'message' => trans('velocity::app.error.something_went_wrong'),
-        ]);
+        return response()->json($response);
     }
 
     /**
