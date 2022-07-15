@@ -537,12 +537,17 @@ return [
                 'expired' => 'This event has been expired.',
             ],
             'minimum-order-message'     => 'Minimum order amount is :amount',
+<<<<<<< HEAD
             'suspended-account-message' => 'Your account has been suspended.',
             'inactive-account-message' =>  'Your account has been inactive.',
+=======
+            'suspended-account-message' => 'Your account has been  suspended.',
+>>>>>>> b2ad7f730086b86e29e30d53042a32e52580b2d6
             'check-shipping-address'    => 'Please check shipping address.',
             'check-billing-address'     => 'Please check billing address.',
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
+            'rule-applied'              => 'Cart or Catalog rule applied',
         ],
 
         'onepage' => [
@@ -575,9 +580,9 @@ return [
             'payment-method-name' => [
                 'PayPal Smart Button' => 'PayPal Smart Button',
                 'PayPal'              => 'PayPal',
-                'Cash On Delivery'    => 'Cash On Delivery',                
-                'Money Transfer'      => 'Money Transfer',                
-                'Paypal Standard'     => 'PayPal Standard'    
+                'Cash On Delivery'    => 'Cash On Delivery',
+                'Money Transfer'      => 'Money Transfer',
+                'Paypal Standard'     => 'PayPal Standard'
             ],
             'summary'             => 'Order Summary',
             'price'               => 'Price',
