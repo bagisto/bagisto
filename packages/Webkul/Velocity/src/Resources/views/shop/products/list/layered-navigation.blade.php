@@ -179,7 +179,7 @@
                     appliedFilters: [],
                     sliderConfig: {
                         max: 500,
-                        value: [0, 0],
+                        value: [0, 888],
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
@@ -187,7 +187,7 @@
                             "borderColor": "#FF6472",
                             "backgroundColor": "#FF6472",
                         },
-                        priceTo: 0,
+                        priceTo: 888,
                         priceFrom: 0,
                     }
                 }
