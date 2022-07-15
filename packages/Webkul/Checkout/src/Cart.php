@@ -51,6 +51,7 @@ class Cart
         protected TaxCategoryRepository $taxCategoryRepository,
         protected WishlistRepository $wishlistRepository,
         protected CustomerAddressRepository $customerAddressRepository
+<<<<<<< HEAD
     )
     {
         $this->initCart();
@@ -68,6 +69,9 @@ class Cart
         if ($this->cart) {
             $this->removeInactiveItems();
         }
+=======
+    ) {
+>>>>>>> 8bdce17f46ebf08a5f984bd87237b307ea336933
     }
 
     /**
@@ -152,10 +156,14 @@ class Cart
 
         $cart = $this->getCart();
 
+<<<<<<< HEAD
         if (
             ! $cart
             && ! $cart = $this->create($data)
         ) {
+=======
+        if (!$cart && !$cart = $this->create($data)) {
+>>>>>>> 8bdce17f46ebf08a5f984bd87237b307ea336933
             return ['warning' => __('shop::app.checkout.cart.item.error-add')];
         }
 
@@ -178,6 +186,14 @@ class Cart
         } else {
             $parentCartItem = null;
 
+            if (count($cartProducts) >= 1) {
+                foreach ($cartProducts as $key => $productQty) {
+                    if ($productQty['quantity'] == 0) {
+                        unset($cartProducts[$key]);
+                    }
+                }
+            }
+
             foreach ($cartProducts as $cartProduct) {
                 $cartItem = $this->getItemByProduct($cartProduct, $data);
 
@@ -185,7 +201,7 @@ class Cart
                     $cartProduct['parent_id'] = $parentCartItem->id;
                 }
 
-                if (! $cartItem) {
+                if (!$cartItem) {
                     $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
                 } else {
                     if (
@@ -200,7 +216,7 @@ class Cart
                     }
                 }
 
-                if (! $parentCartItem) {
+                if (!$parentCartItem) {
                     $parentCartItem = $cartItem;
                 }
             }
@@ -249,7 +265,7 @@ class Cart
 
         $cart = $this->cartRepository->create($cartData);
 
-        if (! $cart) {
+        if (!$cart) {
             session()->flash('error', __('shop::app.checkout.cart.create-error'));
 
             return;
@@ -273,7 +289,7 @@ class Cart
         foreach ($data['qty'] as $itemId => $quantity) {
             $item = $this->cartItemRepository->find($itemId);
 
-            if (! $item) {
+            if (!$item) {
                 continue;
             }
 
@@ -292,7 +308,7 @@ class Cart
 
             $item->quantity = $quantity;
 
-            if (! $this->isItemHaveQuantity($item)) {
+            if (!$this->isItemHaveQuantity($item)) {
                 throw new Exception(__('shop::app.checkout.cart.quantity.inventory_warning'));
             }
 
@@ -324,7 +340,7 @@ class Cart
     {
         Event::dispatch('checkout.cart.delete.before', $itemId);
 
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return false;
         }
 
@@ -358,7 +374,7 @@ class Cart
 
         Event::dispatch('checkout.cart.delete.all.before', $cart);
 
-        if (! $cart) {
+        if (!$cart) {
             return $cart;
         }
 
@@ -378,7 +394,13 @@ class Cart
      */
     public function removeInactiveItems()
     {
+<<<<<<< HEAD
         $cart = $this->getCart();
+=======
+        if (!$cart) {
+            return $cart;
+        }
+>>>>>>> 8bdce17f46ebf08a5f984bd87237b307ea336933
 
         foreach ($cart->items as $item) {
             if ($this->isCartItemInactive($item)) {
@@ -402,7 +424,7 @@ class Cart
      */
     public function saveCustomerAddress($data): bool
     {
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return false;
         }
 
@@ -448,11 +470,11 @@ class Cart
      */
     public function saveShippingMethod($shippingMethodCode): bool
     {
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return false;
         }
 
-        if (! Shipping::isMethodCodeExists($shippingMethodCode)) {
+        if (!Shipping::isMethodCodeExists($shippingMethodCode)) {
             return false;
         }
 
@@ -470,7 +492,7 @@ class Cart
      */
     public function savePaymentMethod($payment)
     {
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return false;
         }
 
@@ -494,11 +516,11 @@ class Cart
      */
     public function collectTotals(): void
     {
-        if (! $this->validateItems()) {
+        if (!$this->validateItems()) {
             return;
         }
 
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return;
         }
 
@@ -566,7 +588,7 @@ class Cart
      */
     public function calculateItemsTax(): void
     {
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return;
         }
 
@@ -575,7 +597,7 @@ class Cart
         foreach ($cart->items as $item) {
             $taxCategory = $this->taxCategoryRepository->find($item->product->tax_category_id);
 
-            if (! $taxCategory) {
+            if (!$taxCategory) {
                 continue;
             }
 
@@ -617,7 +639,7 @@ class Cart
      */
     public function validateItems(): bool
     {
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return false;
         }
 
@@ -651,10 +673,22 @@ class Cart
                 ], $item->id);
             }
 
+<<<<<<< HEAD
+=======
+            $price = !is_null($item->custom_price) ? $item->custom_price : $item->base_price;
+
+            $this->cartItemRepository->update([
+                'price'      => core()->convertPrice($price),
+                'base_price' => $price,
+                'total'      => core()->convertPrice($price * $item->quantity),
+                'base_total' => $price * $item->quantity,
+            ], $item->id);
+
+>>>>>>> 8bdce17f46ebf08a5f984bd87237b307ea336933
             $isInvalid |= $validationResult->isCartInvalid();
         }
 
-        return ! $isInvalid;
+        return !$isInvalid;
     }
 
     /**

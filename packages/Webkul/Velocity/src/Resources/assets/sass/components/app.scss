@@ -1882,7 +1882,10 @@
                         }
 
                         > * {
+                            display: flex;
+                            justify-content: flex-end;
                             height: 100%;
+                            margin-bottom: 5px;
                         }
                     }
                 }
