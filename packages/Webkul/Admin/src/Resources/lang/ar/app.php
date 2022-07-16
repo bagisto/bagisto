@@ -740,6 +740,7 @@ return [
         'yes'            => 'نعم.',
         'no'             => 'لا.',
         'delete'         => 'احذف',
+        'enable-atleast-one-shipping' => 'تفعيل طريقة شحن واحدة على الأقل.',
 
         'tax-categories' => [
             'title'           => 'فئات الضرائب',

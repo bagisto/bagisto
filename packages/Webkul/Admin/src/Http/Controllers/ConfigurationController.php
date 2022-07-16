@@ -101,6 +101,17 @@ class ConfigurationController extends Controller
      */
     public function store(ConfigurationForm $request)
     {
+        $data = $request->request->all();
+        if (isset($data['sales']['carriers'])) {
+            $freeShipping = $data['sales']['carriers']['free']['active'];
+            $flatrateShipping = $data['sales']['carriers']['flatrate']['active'];
+            
+            if (! $freeShipping && ! $flatrateShipping) {
+                session()->flash('error', trans('admin::app.configuration.enable-atleast-one-shipping'));
+                return redirect()->back();
+            }
+        }
+
         $this->coreConfigRepository->create($request->except(['_token', 'admin_locale']));
 
         session()->flash('success', trans('admin::app.configuration.save-message'));

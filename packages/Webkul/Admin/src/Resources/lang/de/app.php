@@ -732,6 +732,7 @@ return [
         'yes'            => 'Ja',
         'no'             => 'Nein',
         'delete'         => 'Löschen',
+        'enable-atleast-one-shipping' => 'Aktivieren Sie mindestens eine Versandart.',
         'tax-categories' =>
         [
             'title'           => 'Steuerkategorien',

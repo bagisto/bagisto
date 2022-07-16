@@ -730,6 +730,7 @@ return [
         'yes'            => 'Sì',
         'no'             => 'No',
         'delete'         => 'Elimina',
+        'enable-atleast-one-shipping' => 'Abilita almeno un metodo di spedizione.',
 
         'tax-categories' => [
             'title'           => 'Categorie IVA',
