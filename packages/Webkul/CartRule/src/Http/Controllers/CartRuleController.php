@@ -110,6 +110,12 @@ class CartRuleController extends Controller
                 'discount_amount'     => 'required|numeric',
             ]);
 
+            if (request()->has('action_type') && request()->action_type == 'by_percent') { 
+                $this->validate(request(), [
+                    'discount_amount' => 'required|numeric|max:100',
+                ]);
+            }
+
             $data = request()->all();
 
             $this->cartRuleRepository->create($data);
@@ -160,6 +166,12 @@ class CartRuleController extends Controller
                 'action_type'         => 'required',
                 'discount_amount'     => 'required|numeric',
             ]);
+
+            if ($request->has('action_type') && $request->action_type == 'by_percent') { 
+                $this->validate(request(), [
+                    'discount_amount' => 'required|numeric|max:100',
+                ]);
+            }
 
             $cartRule = $this->cartRuleRepository->findOrFail($id);
 
