@@ -37,7 +37,7 @@
 
         @elseif ($field['type'] == 'number')
 
-            <input type="number" min="1" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
+            <input type="number" min="{{ $field['name'] == 'minimum_order_amount' ? 1 : 0 }}" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
 
         @elseif ($field['type'] == 'color')
 
