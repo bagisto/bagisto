@@ -94,11 +94,8 @@ class CartController extends Controller
                     return redirect()->route('shop.checkout.onepage.index');
                 }
             }
-<<<<<<< HEAD
         } catch(\Exception $exception) {
-=======
 
->>>>>>> 6952314159279bb86aadb32bb23add1b9966aba8
             session()->flash('warning', __($exception->getMessage()));
 
             $product = $this->productRepository->find($id);
