@@ -133,11 +133,7 @@ class CartController extends Controller
             ];
         }
 
-        return response()->json($response ?? [
-            'status'  => 'danger',
-            'label'   => trans('velocity::app.shop.general.alert.error'),
-            'message' => trans('velocity::app.error.something_went_wrong'),
-        ]);
+        return response()->json($response);
     }
 
     /**
