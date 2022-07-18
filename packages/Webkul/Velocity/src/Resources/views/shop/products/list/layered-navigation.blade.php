@@ -179,7 +179,7 @@
                     appliedFilters: [],
                     sliderConfig: {
                         max: 500,
-                        value: [0, 888],
+                        value: [0, 0],
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
@@ -187,7 +187,7 @@
                             "borderColor": "#FF6472",
                             "backgroundColor": "#FF6472",
                         },
-                        priceTo: 888,
+                        priceTo: 0,
                         priceFrom: 0,
                     }
                 }
@@ -219,6 +219,10 @@
                             let maxPrice  = response.data.max_price;
 
                             this.sliderConfig.max = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
+                            
+                            this.sliderConfig.value = [0, this.sliderConfig.max];
+
+                            this.sliderConfig.priceTo = this.sliderConfig.max;
                         });
                 },
 
