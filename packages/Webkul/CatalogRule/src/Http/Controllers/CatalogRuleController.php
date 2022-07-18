@@ -62,7 +62,7 @@ class CatalogRuleController extends Controller
      */
     public function store()
     {
-        $this->validate(request(), [
+        $validations = [
             'name'            => 'required',
             'channels'        => 'required|array|min:1',
             'customer_groups' => 'required|array|min:1',
@@ -70,7 +70,13 @@ class CatalogRuleController extends Controller
             'ends_till'       => 'nullable|date|after_or_equal:starts_from',
             'action_type'     => 'required',
             'discount_amount' => 'required|numeric',
-        ]);
+        ];
+
+        if (request()->has('action_type') && request()->action_type == 'by_percent') {
+            $validations = array_merge($validations, [
+                'discount_amount' => 'required|numeric|max:100',
+            ]);
+        }
 
         $data = request()->all();
 
@@ -105,7 +111,7 @@ class CatalogRuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate(request(), [
+        $validations = [
             'name'            => 'required',
             'channels'        => 'required|array|min:1',
             'customer_groups' => 'required|array|min:1',
@@ -113,7 +119,15 @@ class CatalogRuleController extends Controller
             'ends_till'       => 'nullable|date|after_or_equal:starts_from',
             'action_type'     => 'required',
             'discount_amount' => 'required|numeric',
-        ]);
+        ];
+
+        if ($request->has('action_type') && $request->action_type == 'by_percent') {
+            $validations = array_merge($validations, [
+                'discount_amount' => 'required|numeric|max:100',
+            ]);
+        }
+
+        $this->validate(request(), $validations);
 
         $this->catalogRuleRepository->findOrFail($id);
 
