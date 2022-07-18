@@ -172,6 +172,7 @@
                                     <input v-validate="'required'" class="control" id="discount_amount" name="discount_amount" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.discount-amount') }}&quot;" value="{{ old('discount_amount') ?: $catalogRule->discount_amount }}"/>
 
                                     <span class="control-error" v-if="errors.has('discount_amount')">@{{ errors.first('discount_amount') }}</span>
+                                    <div id="discount_error"></div>
                                 </div>
 
                                 <div class="control-group">
@@ -321,7 +322,17 @@
                 },
 
                 onSubmit: function(e) {
-                    this.$root.onSubmit(e)
+                    $actionType = $('#action_type').val();
+                    if ($actionType == 'by_percent') {
+                        $discountValue = $('#discount_amount').val();
+                        if ($discountValue <= 100) {
+                            this.$root.onSubmit(e)
+                        } else {
+                            $("#discount_error").html('<span style="padding-top:5px; color:red; font-size:14px" class="error">' + '{{ __("admin::app.promotions.catalog-rules.per-dis-can-not-more-than-100") }}' + '</span>');
+                        }
+                    } else {
+                        this.$root.onSubmit(e)
+                    }
                 },
 
                 redirectBack: function(fallbackUrl) {

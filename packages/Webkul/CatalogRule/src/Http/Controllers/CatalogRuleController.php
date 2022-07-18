@@ -72,13 +72,6 @@ class CatalogRuleController extends Controller
             'discount_amount' => 'required|numeric',
         ]);
 
-        if (request()->request->get('action_type') == "by_percent") {
-            if (request()->request->get('discount_amount') > 100) {
-                session()->flash('error', trans('admin::app.promotions.catalog-rules.per-dis-can-not-more-than-100'));
-                return redirect()->route($this->_config['redirect']);
-            }
-        }
-
         $data = request()->all();
 
         $this->catalogRuleRepository->create($data);
@@ -121,13 +114,6 @@ class CatalogRuleController extends Controller
             'action_type'     => 'required',
             'discount_amount' => 'required|numeric',
         ]);
-
-        if ($request->request->get('action_type') == "by_percent") {
-            if ($request->request->get('discount_amount') > 100) {
-                session()->flash('error', trans('admin::app.promotions.catalog-rules.per-dis-can-not-more-than-100'));
-                return redirect()->route('admin.catalog-rules.edit', ['id' => $id ]);
-            }
-        }
 
         $this->catalogRuleRepository->findOrFail($id);
 
