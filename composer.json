@@ -14,7 +14,7 @@
         "bagisto/rest-api": "dev-master",
         "bagistobrasil/bagisto-product-social-share": "^0.1.2",
         "barryvdh/laravel-debugbar": "^3.1",
-        "barryvdh/laravel-dompdf": "^1.0.0",
+        "barryvdh/laravel-dompdf": "^2.0.0",
         "diglactic/laravel-breadcrumbs": "^7.0",
         "doctrine/dbal": "^2.9",
         "enshrined/svg-sanitize": "^0.15.0",
