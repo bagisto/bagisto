@@ -67,7 +67,7 @@ class WishlistController extends Controller
      */
     public function add($itemId)
     {
-        $product = $this->productRepository->findOneByField('id', $itemId);
+        $product = $this->productRepository->find($itemId);
 
         if ( $product == null ) {
             session()->flash('error', trans('customer::app.product-removed'));
@@ -92,7 +92,7 @@ class WishlistController extends Controller
             $product->parent
             && $product->parent->type !== 'configurable'
         ) {
-            $product = $this->productRepository->findOneByField('id', $product->parent_id);
+            $product = $this->productRepository->find($product->parent_id);
             $data['product_id'] = $product->id;
         }
 
