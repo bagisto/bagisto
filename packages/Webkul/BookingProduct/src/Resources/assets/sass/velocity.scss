@@ -117,6 +117,16 @@
         .control-group-container {
             width: 100%;
             float: left;
+            
+            span {
+                position:relative;
+
+                .icon {
+                    position: absolute;
+                    margin-left: -20px !important;
+                    top: 8px !important;
+                }
+            }
 
             .control-group:not(.quantity), .form-group:not(.quantity) {
                 width: 50%;
