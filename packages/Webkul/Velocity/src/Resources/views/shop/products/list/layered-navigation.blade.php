@@ -220,9 +220,10 @@
 
                             this.sliderConfig.max = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
                             
-                            this.sliderConfig.value = [0, this.sliderConfig.max];
-
-                            this.sliderConfig.priceTo = this.sliderConfig.max;
+                            if (! this.appliedFilterValues) { 
+                                this.sliderConfig.value = [0, this.sliderConfig.max];
+                                this.sliderConfig.priceTo = this.sliderConfig.max;
+                            }
                         });
                 },
 
