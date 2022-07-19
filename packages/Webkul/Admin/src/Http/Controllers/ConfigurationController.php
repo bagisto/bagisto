@@ -102,16 +102,20 @@ class ConfigurationController extends Controller
     public function store(ConfigurationForm $request)
     {
         $data = $request->request->all();
+        
         if (isset($data['sales']['carriers'])) {
             $at_least_one_carrier_enabled = false;
+            
             foreach ($data['sales']['carriers'] as $carrier) {
                 if ($carrier['active']) {
                     $at_least_one_carrier_enabled = true;
                     break;
                 }
             }
+            
             if (! $at_least_one_carrier_enabled) {
                 session()->flash('error', trans('admin::app.configuration.enable-atleast-one-shipping'));
+                
                 return redirect()->back();
             }
         }
