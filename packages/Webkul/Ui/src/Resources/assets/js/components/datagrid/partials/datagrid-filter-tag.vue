@@ -13,7 +13,7 @@
         </span>
 
         <span class="wrapper" v-else>
-            {{ decodeURIComponent(filter.val) }}
+            {{filter.val == 1 ? "Active" : "Inactive"}}
             <span
                 class="icon cross-icon"
                 v-on:click="removeFilter(filter)"
