@@ -115,7 +115,7 @@
                                         }
 
                                         if ($attribute->type == 'price') {
-                                            array_push($validations, 'decimal');
+                                            array_push($validations, 'decimal:2');
                                         }
 
                                         if ($attribute->type == 'file') {
@@ -130,7 +130,9 @@
                                             array_push($validations, 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp');
                                         }
 
-                                        array_push($validations, $attribute->validation);
+                                        if ($attribute->type != 'price') {
+                                            array_push($validations, $attribute->validation);
+                                        }
 
                                         $validations = implode('|', array_filter($validations));
                                     ?>
