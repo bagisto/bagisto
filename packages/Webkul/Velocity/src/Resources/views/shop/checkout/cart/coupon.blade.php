@@ -107,9 +107,11 @@
 
                             self.disable_button = false;
 
-                            window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
-
-                            self.$root.addFlashMessages();
+                            window.showAlert(
+                                'alert-success',
+                                response.data.label,
+                                response.data.message
+                            );
 
                             self.redirectIfCartPage();
                         })
