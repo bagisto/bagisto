@@ -514,6 +514,10 @@ export default {
         },
 
         getResponse: function() {
+            if(this.type == null){
+                alert("Please select the filter");
+            }
+
             let label = '';
 
             for (let colIndex in this.columns) {
@@ -527,6 +531,8 @@ export default {
                 case 'string': {
                     if (this.types.string.value !== null) {
                         this.emitOnFilterEvent('string', label, true);
+                    } else {
+                        alert("Please enter the value");
                     }
                     break;
                 }
@@ -542,6 +548,8 @@ export default {
                         indexConditions = false;
 
                         alert(this.translations.zeroIndex);
+                    } else {
+                        alert("Please enter the value");
                     }
 
                     if (indexConditions) {
