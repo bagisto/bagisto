@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\CartRuleDataGrid;
+use Webkul\CartRule\Http\Requests\CartRuleRequest;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 
 class CartRuleController extends Controller
@@ -94,23 +95,10 @@ class CartRuleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(CartRuleRequest $cartRuleRequest)
     {
         try {
-            $this->validate(request(), [
-                'name'                => 'required',
-                'channels'            => 'required|array|min:1',
-                'customer_groups'     => 'required|array|min:1',
-                'coupon_type'         => 'required',
-                'use_auto_generation' => 'required_if:coupon_type,==,1',
-                'coupon_code'         => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code',
-                'starts_from'         => 'nullable|date',
-                'ends_till'           => 'nullable|date|after_or_equal:starts_from',
-                'action_type'         => 'required',
-                'discount_amount'     => 'required|numeric',
-            ]);
-
-            $data = request()->all();
+            $data = $cartRuleRequest->all();
 
             $this->cartRuleRepository->create($data);
 
@@ -146,21 +134,9 @@ class CartRuleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CartRuleRequest $cartRuleRequest, $id)
     {
         try {
-            $this->validate(request(), [
-                'name'                => 'required',
-                'channels'            => 'required|array|min:1',
-                'customer_groups'     => 'required|array|min:1',
-                'coupon_type'         => 'required',
-                'use_auto_generation' => 'required_if:coupon_type,==,1',
-                'starts_from'         => 'nullable|date',
-                'ends_till'           => 'nullable|date|after_or_equal:starts_from',
-                'action_type'         => 'required',
-                'discount_amount'     => 'required|numeric',
-            ]);
-
             $cartRule = $this->cartRuleRepository->findOrFail($id);
 
             if ($cartRule->coupon_type) {
@@ -175,7 +151,7 @@ class CartRuleController extends Controller
                 }
             }
 
-            $cartRule = $this->cartRuleRepository->update(request()->all(), $id);
+            $cartRule = $this->cartRuleRepository->update($cartRuleRequest->all(), $id);
 
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Cart Rule']));
 

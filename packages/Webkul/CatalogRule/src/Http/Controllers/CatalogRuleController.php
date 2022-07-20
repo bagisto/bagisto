@@ -5,6 +5,7 @@ namespace Webkul\CatalogRule\Http\Controllers;
 use Illuminate\Http\Request;
 use Webkul\Admin\DataGrids\CatalogRuleDataGrid;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
+use Webkul\CatalogRule\Http\Requests\CatalogRuleRequest;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
 
 class CatalogRuleController extends Controller
@@ -60,19 +61,9 @@ class CatalogRuleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(CatalogRuleRequest $catalogRuleRequest)
     {
-        $this->validate(request(), [
-            'name'            => 'required',
-            'channels'        => 'required|array|min:1',
-            'customer_groups' => 'required|array|min:1',
-            'starts_from'     => 'nullable|date',
-            'ends_till'       => 'nullable|date|after_or_equal:starts_from',
-            'action_type'     => 'required',
-            'discount_amount' => 'required|numeric',
-        ]);
-
-        $data = request()->all();
+        $data = $catalogRuleRequest->all();
 
         $this->catalogRuleRepository->create($data);
 
@@ -103,21 +94,11 @@ class CatalogRuleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CatalogRuleRequest $catalogRuleRequest, $id)
     {
-        $this->validate(request(), [
-            'name'            => 'required',
-            'channels'        => 'required|array|min:1',
-            'customer_groups' => 'required|array|min:1',
-            'starts_from'     => 'nullable|date',
-            'ends_till'       => 'nullable|date|after_or_equal:starts_from',
-            'action_type'     => 'required',
-            'discount_amount' => 'required|numeric',
-        ]);
-
         $this->catalogRuleRepository->findOrFail($id);
 
-        $this->catalogRuleRepository->update(request()->all(), $id);
+        $this->catalogRuleRepository->update($catalogRuleRequest->all(), $id);
 
         $this->catalogRuleIndexHelper->reindexComplete();
 
