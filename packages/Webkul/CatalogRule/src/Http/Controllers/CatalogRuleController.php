@@ -72,12 +72,6 @@ class CatalogRuleController extends Controller
             'discount_amount' => 'required|numeric',
         ]);
 
-        if (request()->has('action_type') && request()->action_type == 'by_percent') { 
-            $this->validate(request(), [
-                'discount_amount' => 'required|numeric|max:100',
-            ]);
-        }
-
         $data = request()->all();
 
         $this->catalogRuleRepository->create($data);
@@ -120,12 +114,6 @@ class CatalogRuleController extends Controller
             'action_type'     => 'required',
             'discount_amount' => 'required|numeric',
         ]);
-
-        if ($request->has('action_type') && $request->action_type == 'by_percent') { 
-            $this->validate(request(), [
-                'discount_amount' => 'required|numeric|max:100',
-            ]);
-        }
 
         $this->catalogRuleRepository->findOrFail($id);
 
