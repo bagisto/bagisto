@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Webkul\Core\Repositories\SliderRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
 
 class ProductsCategoriesProxyController extends Controller
 {
@@ -19,7 +20,8 @@ class ProductsCategoriesProxyController extends Controller
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository,
-        protected SliderRepository $sliderRepository
+        protected SliderRepository $sliderRepository,
+        protected OrderItemRepository $orderItem
     )
     {
         parent::__construct();
@@ -48,12 +50,21 @@ class ProductsCategoriesProxyController extends Controller
             if ($product = $this->productRepository->findBySlug($slugOrPath)) {
 
                 $customer = auth()->guard('customer')->user();
+                
+                $orderedList = $this->orderItem->getModel()->where('product_id', $product->id)
+                ->leftJoin('orders', 'order_items.order_id', 'orders.id')
+                ->where('orders.customer_id', $customer->id)
+                ->get();
 
-                return view($this->_config['product_view'], compact('product', 'customer'));
+                $orderCount = count($orderedList);
+
+                return view($this->_config['product_view'], compact('product', 'customer', 'orderCount'));
             }
 
             abort(404);
         }
+
+        
 
         $sliderData = $this->sliderRepository->getActiveSliders();
 
