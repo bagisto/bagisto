@@ -15,6 +15,7 @@ class ProductsCategoriesProxyController extends Controller
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItem
      * @return void
      */
     public function __construct(
