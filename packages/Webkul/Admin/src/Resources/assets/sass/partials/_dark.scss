@@ -452,6 +452,11 @@
         .control {
             border: 1px solid $dark-mode-switch-border;
         }
+
+        input[type=date]  {
+            background: #fff;
+            color: #000;
+        }
     }
 
     .grid-container {
