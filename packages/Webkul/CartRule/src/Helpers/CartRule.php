@@ -46,7 +46,7 @@ class CartRule
     /**
      * Collect discount on cart
      *
-     * @param  \Webkul\Cart\Contracts\Cart  $cart
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return void
      */
     public function collect($cart)
@@ -84,7 +84,7 @@ class CartRule
     /**
      * Returns cart rules
      *
-     * @param  \Webkul\Cart\Contracts\Cart  $cart
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return \Illuminate\Support\Collection
      */
     public function getCartRules($cart)
@@ -125,7 +125,7 @@ class CartRule
     /**
      * Check if cart rule can be applied
      *
-     * @param  \Webkul\Cart\Contracts\Cart  $cart
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @param  \Webkul\CartRule\Contracts\CartRule  $rule
      * @return bool
      */
@@ -193,7 +193,7 @@ class CartRule
     /**
      * Cart item discount calculation process
      *
-     * @param  \Webkul\Cart\Contracts\Cart  $cart
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @param  \Webkul\Checkout\Models\CartItem  $item
      * @return array
      */
@@ -465,7 +465,7 @@ class CartRule
     /**
      * Calculate cart item totals for each rule
      *
-     * @param  \Webkul\Cart\Contracts\Cart  $cart
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @param  \Illuminate\Support\Collecton  $items
      * @return \Webkul\Rule\Helpers\Validator
      */
@@ -502,7 +502,7 @@ class CartRule
     /**
      * Check if coupon code is applied or not
      *
-     * @param  \Webkul\Cart\Contracts\Cart  $cart
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return bool
      */
     public function checkCouponCode($cart): bool
