@@ -515,7 +515,7 @@ export default {
 
         getResponse: function() {
             if (this.type == null) {
-                alert("Please select the filter");
+                alert(this.translations.emptyField);
             }
 
             let label = '';
@@ -532,7 +532,7 @@ export default {
                     if (this.types.string.value !== null) {
                         this.emitOnFilterEvent('string', label, true);
                     } else {
-                        alert("Please enter the value");
+                        alert(this.translations.emptyValue);
                     }
                     break;
                 }
@@ -549,7 +549,7 @@ export default {
 
                         alert(this.translations.zeroIndex);
                     } else {
-                        alert("Please enter the value");
+                        alert(this.translations.emptyValue);
                     }
 
                     if (indexConditions) {
