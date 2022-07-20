@@ -59,6 +59,7 @@ class CatalogRuleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \Webkul\CatalogRule\Http\Requests\CatalogRuleRequest  $catalogRuleRequest
      * @return \Illuminate\Http\Response
      */
     public function store(CatalogRuleRequest $catalogRuleRequest)
@@ -90,7 +91,7 @@ class CatalogRuleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Webkul\CatalogRule\Http\Requests\CatalogRuleRequest  $catalogRuleRequest
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

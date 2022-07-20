@@ -92,7 +92,8 @@ class CartRuleController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * 
+     * @param  \Webkul\CartRule\Http\Requests\CartRuleRequest  $cartRuleRequest
      * @return \Illuminate\Http\Response
      */
     public function store(CartRuleRequest $cartRuleRequest)
@@ -130,7 +131,7 @@ class CartRuleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Webkul\CartRule\Http\Requests\CartRuleRequest  $cartRuleRequest
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
