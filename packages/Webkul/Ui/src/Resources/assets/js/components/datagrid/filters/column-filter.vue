@@ -514,7 +514,7 @@ export default {
         },
 
         getResponse: function() {
-            if(this.type == null){
+            if (this.type == null) {
                 alert("Please select the filter");
             }
 
