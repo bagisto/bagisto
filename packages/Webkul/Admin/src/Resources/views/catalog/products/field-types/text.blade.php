@@ -15,5 +15,5 @@
 
     {{-- To Do (@devansh-webkul): Need to handle from the backend. --}}
     {{ in_array($attribute->code, ['url_key']) ? 'v-slugify' : '' }}
-    {{ $attribute->code == 'name' && ! $product[$attribute->code]  ? 'v-slugify-target=\'url_key\'' : ''  }}
+    {{ $attribute->code == 'name' && ! $product->url_key  ? 'v-slugify-target=\'url_key\'' : ''  }}
 >
