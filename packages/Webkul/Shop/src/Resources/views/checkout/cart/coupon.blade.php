@@ -76,7 +76,7 @@
 
                                 self.coupon_code = '';
 
-                                window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
+                                window.flashMessages = {'type': 'alert-success', 'message': response.data.message};
 
                                 self.$root.addFlashMessages();
 

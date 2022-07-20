@@ -341,8 +341,8 @@ $(function() {
             },
 
             addFlashMessages: function() {
-                if (window.flashMessages.alertMessage)
-                    window.alert(window.flashMessages.alertMessage);
+                if (window.flashMessages.message)
+                    window.alert(window.flashMessages.message);
             },
 
             showModal: function(id) {
