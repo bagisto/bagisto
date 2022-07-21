@@ -51,5 +51,7 @@ return [
         'edit'                  => 'Edit',
         'delete'                => 'Delete',
         'view'                  => 'View',
+        'empty-field'           => 'Please select the filter',
+        'empty-value'           => 'Please enter the value',
     ],
 ];
