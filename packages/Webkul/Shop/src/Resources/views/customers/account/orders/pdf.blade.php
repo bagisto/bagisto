@@ -125,15 +125,14 @@
             <div class="header">
                 <div class="row">
                     <div class="col-12">
+                        @if (core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo'))
+                            <div class="image text-center">
+                                <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo')) }}" alt=""/>
+                            </div>
+                        @endif
                         <h1 class="text-center">{{ __('admin::app.sales.invoices.invoice') }}</h1>
                     </div>
                 </div>
-
-                @if (core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo'))
-                    <div class="image">
-                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo')) }}" alt=""/>
-                    </div>
-                @endif
 
                 <div class="merchant-details">
                     <div>
