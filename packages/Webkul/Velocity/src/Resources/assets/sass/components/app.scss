@@ -853,6 +853,9 @@
         border-right: 1px solid $border-general;
 
         .customer-sidebar {
+            position: sticky;
+            top: 40px;
+            
             .account-details {
                 text-align: center;
                 padding: 25px 20px;
