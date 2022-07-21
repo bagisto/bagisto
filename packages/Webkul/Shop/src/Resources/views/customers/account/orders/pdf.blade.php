@@ -117,6 +117,7 @@
             .text-center {
                 text-align: center;
             }
+            
             .col-6 {
                 width: 46%;
                 display: inline-block;
@@ -144,19 +145,19 @@
                         <div class="col-6">
                             <div class="merchant-details">
                                 <div>
-                                    <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
+                                    <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ?? '' }}</span>
                                 </div>
 
-                                <div>{{ core()->getConfigData('sales.shipping.origin.address1') ? core()->getConfigData('sales.shipping.origin.address1') : '' }}</div>
+                                <div>{{ core()->getConfigData('sales.shipping.origin.address1') ?? '' }}</div>
 
                                 <div>
-                                    <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ? core()->getConfigData('sales.shipping.origin.zipcode') : '' }}</span>
-                                    <span>{{ core()->getConfigData('sales.shipping.origin.city') ? core()->getConfigData('sales.shipping.origin.city') : '' }}</span>
+                                    <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ?? '' }}</span>
+                                    <span>{{ core()->getConfigData('sales.shipping.origin.city') ?? '' }}</span>
                                 </div>
 
-                                <div>{{ core()->getConfigData('sales.shipping.origin.state') ? core()->getConfigData('sales.shipping.origin.state') : '' }}</div>
+                                <div>{{ core()->getConfigData('sales.shipping.origin.state') ?? '' }}</div>
 
-                                <div>{{ core()->getConfigData('sales.shipping.origin.country') ?  core()->country_name(core()->getConfigData('sales.shipping.origin.country')) : '' }}</div>
+                                <div>{{ core()->getConfigData('sales.shipping.origin.country') ?? '' }}</div>
                             </div>
 
                             <div class="merchant-details">
