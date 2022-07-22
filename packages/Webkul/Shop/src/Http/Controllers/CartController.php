@@ -176,7 +176,7 @@ class CartController extends Controller
         $couponCode = request()->get('code');
         $couponStatus = request()->get('coupon_status');
 
-        if($couponStatus){
+        if ($couponStatus) {
             return response()->json([
                 'success' => false,
                 'message' => trans('shop::app.checkout.total.coupon-already-apply'),
