@@ -78,9 +78,11 @@
                                 this.applied_coupon = this.coupon_code;
                                 this.coupon_code = '';
 
-                                window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
-
-                                this.$root.addFlashMessages();
+                                window.showAlert(
+                                    'alert-success',
+                                    response.data.label,
+                                    response.data.message
+                                 );
 
                                 this.redirectIfCartPage();
                             } else {
@@ -107,9 +109,11 @@
 
                             self.disable_button = false;
 
-                            window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
-
-                            self.$root.addFlashMessages();
+                            window.showAlert(
+                                'alert-success',
+                                response.data.label,
+                                response.data.message
+                            );
 
                             self.redirectIfCartPage();
                         })

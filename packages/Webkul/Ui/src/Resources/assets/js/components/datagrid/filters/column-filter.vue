@@ -514,6 +514,10 @@ export default {
         },
 
         getResponse: function() {
+            if (this.type == null) {
+                alert(this.translations.emptyField);
+            }
+
             let label = '';
 
             for (let colIndex in this.columns) {
@@ -527,6 +531,8 @@ export default {
                 case 'string': {
                     if (this.types.string.value !== null) {
                         this.emitOnFilterEvent('string', label, true);
+                    } else {
+                        alert(this.translations.emptyValue);
                     }
                     break;
                 }
@@ -542,6 +548,8 @@ export default {
                         indexConditions = false;
 
                         alert(this.translations.zeroIndex);
+                    } else {
+                        alert(this.translations.emptyValue);
                     }
 
                     if (indexConditions) {
