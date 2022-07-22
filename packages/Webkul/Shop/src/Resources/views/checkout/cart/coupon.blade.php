@@ -41,7 +41,10 @@
 
                     route_name: "{{ request()->route()->getName() }}",
 
-                    disable_button: false
+                    disable_button: false,
+
+                    already_applied: false,
+
                 }
             },
 
@@ -57,6 +60,11 @@
                 applyCoupon: function() {
                     let self = this;
 
+                    if (this.applied_coupon != '') {
+                        this.already_applied = true
+                    }
+
+
                     if (! this.coupon_code.length) {
                         this.error_message = '{{ __('shop::app.checkout.total.invalid-coupon') }}';
 
@@ -67,7 +75,10 @@
 
                     self.disable_button = true;
 
-                    axios.post('{{ route('shop.checkout.cart.coupon.apply') }}', {code: self.coupon_code})
+                    let coupon_status = this.already_applied;
+
+
+                    axios.post('{{ route('shop.checkout.cart.coupon.apply') }}', {code: self.coupon_code,coupon_status})
                         .then(function(response) {
                             if (response.data.success) {
                                 self.$emit('onApplyCoupon');

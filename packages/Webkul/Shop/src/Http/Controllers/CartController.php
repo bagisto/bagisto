@@ -174,6 +174,14 @@ class CartController extends Controller
     public function applyCoupon()
     {
         $couponCode = request()->get('code');
+        $couponStatus = request()->get('coupon_status');
+
+        if($couponStatus){
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.total.coupon-already-apply'),
+            ]);
+        }
 
         try {
             if (strlen($couponCode)) {
