@@ -51,13 +51,12 @@ class ProductsCategoriesProxyController extends Controller
             if ($product = $this->productRepository->findBySlug($slugOrPath)) {
 
                 $customer = auth()->guard('customer')->user();
-                
-                $orderedList = $this->orderItem->getModel()->where('product_id', $product->id)
-                ->leftJoin('orders', 'order_items.order_id', 'orders.id')
-                ->where('orders.customer_id', $customer->id)
-                ->get();
 
-                $orderCount = count($orderedList);
+                $orderCount = $this->orderItem->getModel()
+                    ->where('product_id', $product->id)
+                    ->leftJoin('orders', 'order_items.order_id', 'orders.id')
+                    ->where('orders.customer_id', $customer->id??0)
+                    ->count("orders.id");
 
                 return view($this->_config['product_view'], compact('product', 'customer', 'orderCount'));
             }

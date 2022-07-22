@@ -220,10 +220,13 @@
     @else
         @if (
                 (
-                    core()->getConfigData('catalog.products.review.guest_review')
-                    || auth()->guard('customer')->check()
-                ) 
-                && $orderCount != 0
+                    ! auth()->guard('customer')->check() 
+                    && core()->getConfigData('catalog.products.review.guest_review')
+                )
+                || (
+                    auth()->guard('customer')->check() 
+                    && $orderCount != 0
+                )
         )
             <div class="customer-rating" style="border: none">
                 <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
