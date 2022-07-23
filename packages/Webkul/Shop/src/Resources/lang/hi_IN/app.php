@@ -541,6 +541,7 @@ return [
             'check-billing-address'     => 'कृपया बिलिंग पता जांचें।',
             'specify-shipping-method'   => 'कृपया शिपिंग विधि निर्दिष्ट करें।',
             'specify-payment-method'    => 'कृपया भुगतान विधि निर्दिष्ट करें।',
+            'rule-applied'              => 'Cart rule applied',
         ],
 
         'onepage' => [

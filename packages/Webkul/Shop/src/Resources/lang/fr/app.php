@@ -542,6 +542,7 @@ return [
             'check-billing-address'     => 'Please check billing address.',
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
+            'rule-applied'              => 'Cart rule applied',
         ],
 
         'onepage' => [

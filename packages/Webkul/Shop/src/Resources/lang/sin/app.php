@@ -537,6 +537,7 @@ return [
             'check-billing-address'     => 'කරුණාකර බිල්පත් ලිපිනය පරීක්ෂා කරන්න.',
             'specify-shipping-method'   => 'කරුණාකර නැව්ගත කිරීමේ ක්‍රමය සඳහන් කරන්න.',
             'specify-payment-method'    => 'කරුණාකර ගෙවීමේ ක්‍රමය සඳහන් කරන්න.',
+            'rule-applied'              => 'Cart rule applied',
         ],
 
         'onepage' => [
