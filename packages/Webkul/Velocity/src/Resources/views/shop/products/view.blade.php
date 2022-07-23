@@ -100,7 +100,7 @@
                                 {{-- right-section --}}
                                 <div class="right col-lg-7 col-md-6">
                                     {{-- product-info-section --}}
-                                    <div class="info">
+                                    <div class="row info">
                                         <h2 class="col-12">{{ $product->name }}</h2>
 
                                         @if ($total)
@@ -144,27 +144,7 @@
                                             </div>
                                         @endif
 
-                                        {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
-
-                                        @if ($product->getTypeInstance()->showQuantityBox())
-                                            <div class="col-12">
-                                                <quantity-changer quantity-text="{{ __('shop::app.products.quantity') }}"></quantity-changer>
-                                            </div>
-                                        @else
-                                            <input type="hidden" name="quantity" value="1">
-                                        @endif
-
-                                        {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
-
-                                        @include ('shop::products.view.configurable-options')
-
-                                        @include ('shop::products.view.downloadable')
-
-                                        @include ('shop::products.view.grouped-products')
-
-                                        @include ('shop::products.view.bundle-options')
-
-                                        <div class="col-12 product-actions">
+                                        <div class="product-actions">
                                             @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                                 @include ('shop::products.buy-now', [
                                                     'product' => $product,
@@ -181,7 +161,38 @@
                                         </div>
                                     </div>
 
-                                    @include ('shop::products.view.short-description')
+                                    {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
+
+                                    @if ($product->short_description)
+                                        <div class="description">
+                                            <h3 class="col-lg-12">{{ __('velocity::app.products.short-description') }}</h3>
+
+                                            {!! $product->short_description !!}
+                                        </div>
+                                    @endif
+
+                                    {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
+
+
+                                    {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
+
+                                    @if ($product->getTypeInstance()->showQuantityBox())
+                                        <div>
+                                            <quantity-changer quantity-text="{{ __('shop::app.products.quantity') }}"></quantity-changer>
+                                        </div>
+                                    @else
+                                        <input type="hidden" name="quantity" value="1">
+                                    @endif
+
+                                    {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+
+                                    @include ('shop::products.view.configurable-options')
+
+                                    @include ('shop::products.view.downloadable')
+
+                                    @include ('shop::products.view.grouped-products')
+
+                                    @include ('shop::products.view.bundle-options')
 
                                     @include ('shop::products.view.attributes', [
                                         'active' => true
@@ -210,7 +221,7 @@
 @push('scripts')
     <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('themes/velocity/assets/js/jquery-ez-plus.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('themes/velocity/assets/js/jquery.ez-plus.js') }}"></script>
 
     <script type='text/javascript' src='https://unpkg.com/spritespin@4.1.0/release/spritespin.js'></script>
 
@@ -289,9 +300,25 @@
                             setTimeout(function() {
                                 document.getElementById('product-form').submit();
                             }, 0);
+                        } else {
+                            this.activateAutoScroll()
                         }
                     });
                 },
+                activateAutoScroll:function() {
+                    const normalElment = document.querySelector('.control-error:first-of-type');
+
+                    const scrollConfigs = {
+                        behavior:'smooth',
+                        block:'end',
+                        inline:'nearest'
+                    };
+                    
+                    if(normalElment){
+                        normalElment.scrollIntoView(scrollConfigs);
+                        return;
+                    }
+                }
             }
         });
 
