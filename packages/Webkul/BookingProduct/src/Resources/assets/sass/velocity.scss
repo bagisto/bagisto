@@ -117,13 +117,6 @@
         .control-group-container {
             width: 100%;
             float: left;
-
-            .rtl {
-                .icon {
-                    left: 80px !important;
-                    right: inherit;
-                }
-            }
         
             span {
                 position: relative;
@@ -274,5 +267,12 @@
             top: 3px !important;
             pointer-events: none;
         }
+    }
+}
+
+.rtl {
+    .cross-icon {
+        left: 80px !important;
+        right: inherit !important;
     }
 }
