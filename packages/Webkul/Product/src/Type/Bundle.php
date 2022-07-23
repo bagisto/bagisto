@@ -45,6 +45,13 @@ class Bundle extends AbstractType
     protected $isComposite = true;
 
     /**
+     * Show quantity box.
+     *
+     * @var boolean
+     */
+    protected $showQuantityBox = false;
+
+    /**
      * Product children price can be calculated or not.
      *
      * @var bool

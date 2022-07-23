@@ -55,21 +55,21 @@
                                     @csrf
 
                                     @php
-                                        $productOtherThanDownloadable = false;
+                                        $showUpdateCartButton = false;
                                     @endphp
 
                                     @foreach ($cart->items as $key => $item)
                                         @php
                                             $productBaseImage = $item->product->getTypeInstance()->getBaseImage($item);
-                                            
+
                                             $product = $item->product;
 
-                                            if ($item->product->type != "downloadable") {
-                                                $productOtherThanDownloadable = true;
-                                            }
-                                            
                                             $productPrice = $product->getTypeInstance()->getProductPrices();
 
+                                            if ($product->getTypeInstance()->showQuantityBox()) {
+                                                $showUpdateCartButton = true;
+                                            }
+                                                
                                             if (is_null ($product->url_key)) {
                                                 if (! is_null($product->parent)) {
                                                     $url_key = $product->parent->url_key;
@@ -214,7 +214,7 @@
                                         </button>
                                     </form>
 
-                                    @if ($productOtherThanDownloadable)
+                                    @if ($showUpdateCartButton)
                                         <button
                                             type="submit"
                                             class="theme-btn light unset">

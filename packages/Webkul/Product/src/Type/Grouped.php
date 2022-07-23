@@ -42,6 +42,13 @@ class Grouped extends AbstractType
     protected $isComposite = true;
 
     /**
+     * Show quantity box.
+     *
+     * @var boolean
+     */
+    protected $showQuantityBox = false;
+
+    /**
      * Create a new product type instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
