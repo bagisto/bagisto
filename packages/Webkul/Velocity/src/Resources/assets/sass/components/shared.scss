@@ -297,6 +297,7 @@
         background-color: $white-color !important;
         box-shadow: 0 1px 0 0 #CFCFCF;
         border: 1px solid rgba(0,0,0,0.12);
+        z-index: 0;
 
         &:hover,
         &:focus {
