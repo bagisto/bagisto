@@ -305,6 +305,7 @@
                         }
                     });
                 },
+                
                 activateAutoScroll:function() {
                     const normalElment = document.querySelector('.control-error:first-of-type');
 
