@@ -47,7 +47,16 @@
                                 }}
                             </span>
 
-                            @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
+                            @if (
+                                    (
+                                        ! auth()->guard('customer')->check() 
+                                        && core()->getConfigData('catalog.products.review.guest_review')
+                                    )
+                                    || (
+                                        auth()->guard('customer')->check() 
+                                        && $orderCount != 0
+                                    )
+                            )
                                 <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
                                     <button type="button" class="theme-btn light">{{ __('velocity::app.products.write-your-review') }}</button>
                                 </a>
@@ -91,7 +100,16 @@
                             }}
                         </span>
 
-                        @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
+                        @if (
+                                (
+                                    ! auth()->guard('customer')->check() 
+                                    && core()->getConfigData('catalog.products.review.guest_review')
+                                )
+                                || (
+                                    auth()->guard('customer')->check() 
+                                    && $orderCount != 0
+                                )
+                        )
                             <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
                                 <button type="button" class="theme-btn light">{{ __('velocity::app.products.write-your-review') }}</button>
                             </a>

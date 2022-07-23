@@ -8,8 +8,14 @@
             {{ __('shop::app.products.reviews-title') }}
 
             @if (
-                core()->getConfigData('catalog.products.review.guest_review')
-                || auth()->guard('customer')->check()
+                    (
+                        ! auth()->guard('customer')->check() 
+                        && core()->getConfigData('catalog.products.review.guest_review')
+                    )
+                    || (
+                        auth()->guard('customer')->check() 
+                        && $orderCount != 0
+                    )
             )
                 <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
                     {{ __('shop::app.products.write-review-btn') }}
@@ -79,8 +85,14 @@
     </div>
 @else
     @if (
-        core()->getConfigData('catalog.products.review.guest_review')
-        || auth()->guard('customer')->check()
+            (
+                ! auth()->guard('customer')->check() 
+                && core()->getConfigData('catalog.products.review.guest_review')
+            )
+            || (
+                auth()->guard('customer')->check() 
+                && $orderCount != 0
+            )
     )
         <div class="rating-reviews">
             <div class="rating-header">
