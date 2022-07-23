@@ -118,6 +118,17 @@
             width: 100%;
             float: left;
 
+
+            span {
+                position: relative;
+
+                .icon {
+                    position: absolute;
+                    right: 30px;
+                    top: 10px !important;
+                }
+            }
+
             .control-group:not(.quantity), .form-group:not(.quantity) {
                 width: 50%;
                 float: left;
