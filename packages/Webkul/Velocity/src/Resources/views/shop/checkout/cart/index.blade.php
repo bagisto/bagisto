@@ -54,21 +54,17 @@
                                 <div class="cart-item-list">
                                     @csrf
 
-                                    @php
-                                        $productOtherThanDownloadable = false;
-                                    @endphp
-
                                     @foreach ($cart->items as $key => $item)
                                         @php
                                             $productBaseImage = $item->product->getTypeInstance()->getBaseImage($item);
                                             
                                             $product = $item->product;
+                                            $productOtherThanDownloadable = false;
 
                                             if ($item->product->type != "downloadable") {
                                                 $productOtherThanDownloadable = true;
                                             }
                                             
-
                                             $productPrice = $product->getTypeInstance()->getProductPrices();
 
                                             if (is_null ($product->url_key)) {
