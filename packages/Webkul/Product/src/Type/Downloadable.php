@@ -51,13 +51,6 @@ class Downloadable extends AbstractType
     protected $allowMultipleQty = false;
 
     /**
-     * Show quantity box.
-     *
-     * @var boolean
-     */
-    protected $showQuantityBox = false;
-    
-    /**
      * Get product options.
      *
      * @var array
