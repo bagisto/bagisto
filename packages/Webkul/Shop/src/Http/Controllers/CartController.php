@@ -173,9 +173,10 @@ class CartController extends Controller
 
         try {
             if (strlen($couponCode)) {
-                $validateStatus = $this->validateCouponStatus($couponCode);
-                if ($validateStatus) {
-                    if (Cart::getCart()->coupon_code && Cart::getCart()->coupon_code == $couponCode) {
+                $coupon = $this->cartRuleCouponRepository->findOneByField('code', $couponCode);
+
+                if ($coupon->cart_rule->status) {
+                    if (Cart::getCart()->coupon_code == $couponCode) {
                         return response()->json([
                             'success' => false,
                             'message' => trans('shop::app.checkout.total.coupon-already-applied'),
@@ -205,24 +206,6 @@ class CartController extends Controller
                 'message' => trans('shop::app.checkout.total.coupon-apply-issue'),
             ]);
         }
-    }
-
-    /**
-     * Validate coupon code.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function validateCouponStatus($couponCode)
-    { 
-        $coupons = $this->cartRuleCouponRepository->where(['code' => $couponCode])->get();
-        foreach ($coupons as $coupon) {
-            $cartRule = $this->cartRuleRepository->where(['id' => $coupon->cart_rule_id])->first();
-            if ($cartRule->status) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**
