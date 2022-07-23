@@ -54,6 +54,10 @@
                                 <div class="cart-item-list">
                                     @csrf
 
+                                    @php
+                                        $showUpdateCartButton = false;
+                                    @endphp
+
                                     @foreach ($cart->items as $key => $item)
                                         @php
                                             $productBaseImage = $item->product->getTypeInstance()->getBaseImage($item);
@@ -62,6 +66,10 @@
 
                                             $productPrice = $product->getTypeInstance()->getProductPrices();
 
+                                            if ($product->getTypeInstance()->showQuantityBox()) {
+                                                $showUpdateCartButton = true;
+                                            }
+                                                
                                             if (is_null ($product->url_key)) {
                                                 if (! is_null($product->parent)) {
                                                     $url_key = $product->parent->url_key;
@@ -206,7 +214,7 @@
                                         </button>
                                     </form>
 
-                                    @if ($item->product->getTypeInstance()->showQuantityBox() === true)
+                                    @if ($showUpdateCartButton)
                                         <button
                                             type="submit"
                                             class="theme-btn light unset">
