@@ -102,7 +102,10 @@ class CartController extends Controller
 
             Log::error(
                 'Velocity CartController: ' . $exception->getMessage(),
-                ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]
+                [
+                    'product_id' => $id, 
+                    'cart_id' => cart()->getCart() ?? 0
+                ]
             );
 
             $response = [
