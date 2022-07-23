@@ -54,11 +54,20 @@
                                 <div class="cart-item-list">
                                     @csrf
 
+                                    @php
+                                        $productOtherThanDownloadable = false;
+                                    @endphp
+
                                     @foreach ($cart->items as $key => $item)
                                         @php
                                             $productBaseImage = $item->product->getTypeInstance()->getBaseImage($item);
-
+                                            
                                             $product = $item->product;
+
+                                            if ($item->product->type != "downloadable") {
+                                                $productOtherThanDownloadable = true;
+                                            }
+                                            
 
                                             $productPrice = $product->getTypeInstance()->getProductPrices();
 
@@ -206,7 +215,7 @@
                                         </button>
                                     </form>
 
-                                    @if ($item->product->getTypeInstance()->showQuantityBox() === true)
+                                    @if ($productOtherThanDownloadable)
                                         <button
                                             type="submit"
                                             class="theme-btn light unset">
