@@ -117,13 +117,20 @@
         .control-group-container {
             width: 100%;
             float: left;
-            
+
+            .rtl {
+                .icon {
+                    left: 80px !important;
+                    right: inherit;
+                }
+            }
+        
             span {
                 position: relative;
 
                 .icon {
                     position: absolute;
-                    right: 30px!important;
+                    right: 30px;
                     top: 10px !important;
                 }
             }
