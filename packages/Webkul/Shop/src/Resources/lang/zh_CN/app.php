@@ -540,6 +540,7 @@ return [
             'check-billing-address'     => '请检查帐单地址.',
             'specify-shipping-method'   => '请指定送货方式.',
             'specify-payment-method'    => '请指定付款方式.',
+            'rule-applied'              => 'Cart rule applied',
         ],
 
         'onepage' => [

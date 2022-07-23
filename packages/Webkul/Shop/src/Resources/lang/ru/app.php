@@ -538,6 +538,7 @@ return [
             'check-billing-address'     => 'Пожалуйста, проверьте платежный адрес.',
             'specify-shipping-method'   => '«Укажите способ доставки».',
             'specify-payment-method'    => 'Укажите способ оплаты.',
+            'rule-applied'              => 'Cart rule applied',
         ],
 
         'onepage' => [
