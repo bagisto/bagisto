@@ -11,7 +11,7 @@
         </slot>
 
         <span
-            class="icon cross-icon book-cross-icon"
+            class="icon cross-icon"
             v-if="!hideRemoveButton"
             @click.prevent="clear"
         >

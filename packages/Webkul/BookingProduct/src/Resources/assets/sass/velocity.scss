@@ -273,9 +273,11 @@
 
 body {
         &.rtl {
-        .book-cross-icon {
-            left: 80px !important;
-            right: inherit !important;
-        }
+        .booking-information {
+            .cross-icon {
+                left: 80px !important;
+                right: inherit !important;
+            }
+       }
     }
-}
+} 
