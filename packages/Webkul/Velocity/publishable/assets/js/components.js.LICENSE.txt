@@ -16,8 +16,8 @@
  */
 
 /*!
- * Vue.js v2.6.14
- * (c) 2014-2021 Evan You
+ * Vue.js v2.7.8
+ * (c) 2014-2022 Evan You
  * Released under the MIT License.
  */
 
@@ -70,6 +70,8 @@
 /*! @inotom/vue-go-top v1.3.0 inotom (http://www.serendip.ws/) | MIT */
 
 /*! @preserve sweet-scroll v4.0.0 - tsuyoshiwada | MIT License */
+
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
 
 /**
   * vee-validate v2.2.15

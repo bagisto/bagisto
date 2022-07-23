@@ -2140,6 +2140,16 @@
     }
 }
 
+.cd-slider {
+    .VueCarousel-dot.VueCarousel-dot--active {
+        background-color: rgb(0 0 0) !important;
+    }
+
+    .VueCarousel-dot {
+        background-color: rgb(26 24 24 / 59%) !important;
+    }
+}
+
 .slides-container {
     position: relative;
 
