@@ -58,11 +58,8 @@ class OnepageController extends Controller
         }
 
         $cart = Cart::getCart();
-
-        if (
-            $cart->applied_cart_rule_ids != ""
-            || $cart->coupon_code == ""
-        ) {
+        
+        if ( $cart->applied_cart_rule_ids != "" ) {
             session()->flash('success', trans('shop::app.checkout.cart.rule-applied'));
         }
 
