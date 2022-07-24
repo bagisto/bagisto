@@ -538,6 +538,7 @@ return [
             'check-billing-address'     => 'বিলিং ঠিকানা চেক করুন।',
             'specify-shipping-method'   => 'অনুগ্রহ করে শিপিং পদ্ধতি উল্লেখ করুন।',
             'specify-payment-method'    => 'অনুগ্রহ করে অর্থপ্রদানের পদ্ধতি উল্লেখ করুন।',
+            'rule-applied'              => 'Cart rule applied',
         ],
 
         'onepage' => [

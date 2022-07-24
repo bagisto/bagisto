@@ -155,6 +155,8 @@ trait ProvideDataGridPlus
             'recordsFound'        => __('admin::app.admin.system.records-found'),
             'norecords'           => __('ui::app.datagrid.no-records'),
             'massActionDelete'    => __('ui::app.datagrid.massaction.delete'),
+            'emptyField'          => __('ui::app.datagrid.empty-field'),
+            'emptyValue'          => __('ui::app.datagrid.empty-value'),
         ];
     }
 }

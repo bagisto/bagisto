@@ -756,6 +756,7 @@ h5 {
     label {
         display: block;
         color: $font-color;
+        pointer-events: none;
 
         &.required::after {
             content: '*';
@@ -998,6 +999,7 @@ h5 {
         height: 34px;
         margin-top: 10px;
         margin-bottom: 5px;
+        pointer-events: auto;
     }
 
     .switch input {
@@ -1178,7 +1180,7 @@ accordian {
 
     &.error {
         .accordian-header {
-            color: #ff5656;
+            color: #ff5656 !important;
         }
     }
 

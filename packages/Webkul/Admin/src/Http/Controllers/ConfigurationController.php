@@ -97,17 +97,25 @@ class ConfigurationController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Webkul\Admin\Http\Requests\ConfigurationForm  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ConfigurationForm $request)
     {
         $data = $request->request->all();
+        
         if (isset($data['sales']['carriers'])) {
-            $freeShipping = $data['sales']['carriers']['free']['active'];
-            $flatrateShipping = $data['sales']['carriers']['flatrate']['active'];
+            $atLeastOneCarrierEnabled = false;
             
-            if (! $freeShipping && ! $flatrateShipping) {
+            foreach ($data['sales']['carriers'] as $carrier) {
+                if ($carrier['active']) {
+                    $atLeastOneCarrierEnabled = true;
+                    break;
+                }
+            }
+            
+            if (! $atLeastOneCarrierEnabled) {
                 session()->flash('error', trans('admin::app.configuration.enable-atleast-one-shipping'));
+                
                 return redirect()->back();
             }
         }

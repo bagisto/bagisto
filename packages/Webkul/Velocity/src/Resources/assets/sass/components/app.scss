@@ -853,6 +853,9 @@
         border-right: 1px solid $border-general;
 
         .customer-sidebar {
+            position: sticky;
+            top: 40px;
+            
             .account-details {
                 text-align: center;
                 padding: 25px 20px;
@@ -2134,6 +2137,16 @@
                 padding: 0 15px;
             }
         }
+    }
+}
+
+.cd-slider {
+    .VueCarousel-dot.VueCarousel-dot--active {
+        background-color: rgb(0 0 0) !important;
+    }
+
+    .VueCarousel-dot {
+        background-color: rgb(26 24 24 / 59%) !important;
     }
 }
 

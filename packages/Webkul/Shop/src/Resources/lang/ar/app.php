@@ -544,6 +544,7 @@ return [
             'check-billing-address'     => 'يرجى التحقق من عنوان الفواتير.',
             'specify-shipping-method'   => 'الرجاء تحديد طريقة الشحن.',
             'specify-payment-method'    => 'الرجاء تحديد طريقة الدفع.',
+            'rule-applied'              => 'Cart rule applied',
         ],
 
         'onepage' => [

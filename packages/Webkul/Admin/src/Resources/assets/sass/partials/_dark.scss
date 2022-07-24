@@ -452,6 +452,19 @@
         .control {
             border: 1px solid $dark-mode-switch-border;
         }
+
+        input[type=date]  {
+            background-position-x: 95%;
+            background-position-y: center;
+            background-image: url(../images/Icon-remove.svg);
+            background-size: 18px 30px;
+            background-repeat: no-repeat;
+            &::-webkit-inner-spin-button,
+            &::-webkit-calendar-picker-indicator {
+                -webkit-appearance: none;
+                opacity: 0;
+            }
+        }
     }
 
     .grid-container {
