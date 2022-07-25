@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 
 class CartController extends Controller
 {
@@ -16,11 +17,13 @@ class CartController extends Controller
      *
      * @param  \Webkul\Customer\Repositories\CartItemRepository  $wishlistRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
      * @return void
      */
     public function __construct(
         protected WishlistRepository $wishlistRepository,
-        protected ProductRepository $productRepository
+        protected ProductRepository $productRepository,
+        protected CartRuleCouponRepository $cartRuleCouponRepository
     )
     {
         $this->middleware('throttle:5,1')->only('applyCoupon');
