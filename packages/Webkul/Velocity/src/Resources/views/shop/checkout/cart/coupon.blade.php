@@ -43,6 +43,7 @@
                     applied_coupon: "{{ $cart->coupon_code }}",
                     route_name: "{{ request()->route()->getName() }}",
                     disable_button: false,
+                    removeIconEnabled: true
                 }
             },
 
@@ -100,7 +101,10 @@
                 removeCoupon: function () {
                     let self = this;
 
-                    axios
+                    if (self.removeIconEnabled) {
+                        self.removeIconEnabled = false;
+
+                        axios
                         .delete('{{ route('shop.checkout.coupon.remove.coupon') }}')
                         .then(function(response) {
                             self.$emit('onRemoveCoupon')
@@ -108,6 +112,8 @@
                             self.applied_coupon = '';
 
                             self.disable_button = false;
+
+                            self.removeIconEnabled = true;
 
                             window.showAlert(
                                 'alert-success',
@@ -121,7 +127,12 @@
                             window.flashMessages = [{'type': 'alert-error', 'message': error.response.data.message}];
 
                             self.$root.addFlashMessages();
+
+                            self.disable_button = false;
+
+                            self.removeIconEnabled = true;
                         });
+                    }
                 },
 
                 redirectIfCartPage: function() {

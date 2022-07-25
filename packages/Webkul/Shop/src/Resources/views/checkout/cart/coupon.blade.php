@@ -41,7 +41,9 @@
 
                     route_name: "{{ request()->route()->getName() }}",
 
-                    disable_button: false
+                    disable_button: false,
+
+                    removeIconEnabled: true
                 }
             },
 
@@ -96,15 +98,17 @@
 
                 removeCoupon: function () {
                     let self = this;
-                    $('.cross-icon').css('pointer-events','none');
+                    
+                    if (self.removeIconEnabled) { 
+                        self.removeIconEnabled = false;
 
-                    axios.delete('{{ route('shop.checkout.coupon.remove.coupon') }}')
+                        axios.delete('{{ route('shop.checkout.coupon.remove.coupon') }}')
                         .then(function(response) {
                             self.$emit('onRemoveCoupon')
 
                             self.applied_coupon = '';
 
-                            $('.cross-icon').css('pointer-events','auto');
+                            self.removeIconEnabled = true;
 
                             window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
 
@@ -116,7 +120,10 @@
                             window.flashMessages = [{'type': 'alert-error', 'message': error.response.data.message}];
 
                             self.$root.addFlashMessages();
+
+                            self.removeIconEnabled = true;
                         });
+                    }
                 },
 
                 redirectIfCartPage: function() {
