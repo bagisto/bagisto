@@ -96,12 +96,15 @@
 
                 removeCoupon: function () {
                     let self = this;
+                    $('.cross-icon').css('pointer-events','none');
 
                     axios.delete('{{ route('shop.checkout.coupon.remove.coupon') }}')
                         .then(function(response) {
                             self.$emit('onRemoveCoupon')
 
                             self.applied_coupon = '';
+
+                            $('.cross-icon').css('pointer-events','auto');
 
                             window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
 
