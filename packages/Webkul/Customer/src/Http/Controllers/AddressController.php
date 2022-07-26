@@ -30,8 +30,6 @@ class AddressController extends Controller
     public function __construct(protected CustomerAddressRepository $customerAddressRepository)
     {
         $this->_config = request('_config');
-
-        $this->customer = auth()->guard('customer')->user();
     }
 
     /**
@@ -41,7 +39,9 @@ class AddressController extends Controller
      */
     public function index()
     {
-        return view($this->_config['view'])->with('addresses', $this->customer->addresses);
+        $customer = auth()->guard('customer')->user();
+
+        return view($this->_config['view'])->with('addresses', $customer->addresses);
     }
 
     /**
@@ -63,12 +63,14 @@ class AddressController extends Controller
      */
     public function store(CustomerAddressRequest $request)
     {
+        $customer = auth()->guard('customer')->user();
+
         $data = $request->all();
 
-        $data['customer_id'] = $this->customer->id;
+        $data['customer_id'] = $customer->id;
         $data['address1'] = implode(PHP_EOL, array_filter(request()->input('address1')));
 
-        if ($this->customer->addresses->count() == 0) {
+        if ($customer->addresses->count() == 0) {
             $data['default_address'] = 1;
         }
 
@@ -90,9 +92,11 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
+        $customer = auth()->guard('customer')->user();
+
         $address = $this->customerAddressRepository->findOneWhere([
             'id'          => $id,
-            'customer_id' => $this->customer->id,
+            'customer_id' => $customer->id,
         ]);
 
         if (! $address) {
@@ -112,11 +116,13 @@ class AddressController extends Controller
      */
     public function update($id, CustomerAddressRequest $request)
     {
+        $customer = auth()->guard('customer')->user();
+
         $data = $request->all();
 
         $data['address1'] = implode(PHP_EOL, array_filter(request()->input('address1')));
 
-        $addresses = $this->customer->addresses;
+        $addresses = $customer->addresses;
 
         foreach ($addresses as $address) {
             if ($id == $address->id) {
@@ -141,7 +147,9 @@ class AddressController extends Controller
      */
     public function makeDefault($id)
     {
-        if ($default = $this->customer->default_address) {
+        $customer = auth()->guard('customer')->user();
+
+        if ($default = $customer->default_address) {
             $this->customerAddressRepository->find($default->id)->update(['default_address' => 0]);
         }
 
@@ -162,9 +170,11 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
+        $customer = auth()->guard('customer')->user();
+
         $address = $this->customerAddressRepository->findOneWhere([
             'id'          => $id,
-            'customer_id' => $this->customer->id,
+            'customer_id' => $customer->id,
         ]);
 
         if (! $address) {
