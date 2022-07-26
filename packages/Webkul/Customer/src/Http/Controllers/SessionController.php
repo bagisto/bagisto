@@ -78,7 +78,7 @@ class SessionController extends Controller
          */
         Event::dispatch('customer.after.login', $request->get('email'));
 
-        return redirect()->intended(route($this->_config['redirect']));
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
