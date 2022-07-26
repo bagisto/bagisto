@@ -52,13 +52,11 @@ class ProductsCategoriesProxyController extends Controller
 
                 $customer = auth()->guard('customer')->user();
 
-                $orderCount = $this->orderItem->getModel()
-                    ->where('product_id', $product->id)
-                    ->leftJoin('orders', 'order_items.order_id', 'orders.id')
-                    ->where('orders.customer_id', $customer->id??0)
-                    ->count("orders.id");
+                $orderCount = $this->orderItem->getCustomerOrderCount($product, $customer);
 
-                return view($this->_config['product_view'], compact('product', 'customer', 'orderCount'));
+                $canReview = $this->customerCanReview($orderCount);
+
+                return view($this->_config['product_view'], compact('product', 'customer', 'canReview'));
             }
 
             abort(404);
@@ -69,5 +67,30 @@ class ProductsCategoriesProxyController extends Controller
         $sliderData = $this->sliderRepository->getActiveSliders();
 
         return view('shop::home.index', compact('sliderData'));
+    }
+
+
+    /**
+     * Customer can review or not
+     *
+     * @param int $orderCount
+     * @return boolean
+     */
+    public function customerCanReview($orderCount)
+    {
+        if (
+                (
+                    ! auth()->guard('customer')->check() 
+                    && core()->getConfigData('catalog.products.review.guest_review')
+                )
+                || (
+                    auth()->guard('customer')->check() 
+                    && $orderCount != 0
+                )
+        ) {
+           return true;
+        } else {
+            return false;
+        }
     }
 }

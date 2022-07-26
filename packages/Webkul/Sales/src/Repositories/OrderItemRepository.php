@@ -228,4 +228,21 @@ class OrderItemRepository extends Repository
 
         $orderedInventory->update(['qty' => $qty]);
     }
+
+
+    /**
+     * Get Count of Customer Order
+     *
+     * @param Object $product
+     * @param Object $customer
+     * @return int
+     */
+    public function getCustomerOrderCount($product, $customer) 
+    {
+        return $this->getModel()
+            ->where('product_id', $product->id)
+            ->leftJoin('orders', 'order_items.order_id', 'orders.id')
+            ->where('orders.customer_id', $customer->id ?? 0)
+            ->count("orders.id");
+    }
 }
