@@ -52,7 +52,6 @@
                 onclick="document.getElementById('wishlist-{{ $product->product_id }}').submit();">
 
                 <wishlist-component active="false"></wishlist-component>
-
             </a>
         </form>
     @endauth
