@@ -44,7 +44,8 @@
             id="wishlist-{{ $product->product_id }}"
             action="{{ route('customer.wishlist.add', $product->product_id) }}"
             method="POST">
-            @csrf      
+            @csrf
+            
             <a
                 class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
                 href="javascript:void(0);"
