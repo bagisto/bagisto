@@ -2,7 +2,7 @@
     <span class="filter-tag" style="text-transform: capitalize">
         <span v-if="filter.column == 'perPage'">perPage</span>
 
-        <span v-else>{{ filter.label }}</span>
+        <span v-else>{{ filter.label }} | {{ filter.cond }}</span>
 
         <span class="wrapper" v-if="filter.prettyValue">
             {{ filter.prettyValue }}
