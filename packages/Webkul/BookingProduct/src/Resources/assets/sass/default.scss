@@ -240,3 +240,22 @@
         }
     }
 }
+
+body {
+        &.rtl {
+        .booking-information {
+            .icon {
+                position: absolute;
+                top: -4px;
+            }
+
+            .bp-location-icon{
+                right: 60px;
+            }
+
+            .bp-slot-icon{
+                right: 140px;
+            }
+       }
+    }
+} 
