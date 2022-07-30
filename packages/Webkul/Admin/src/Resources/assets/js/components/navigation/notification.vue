@@ -145,6 +145,7 @@ export default {
         },
         readAll: function () {
             let this_this = this;
+            let notifications = document.querySelector(".dropdown-list");
 
             this.$http.post(this.getReadAllUrl)
                 .then(function (response) {
@@ -160,6 +161,8 @@ export default {
                     this_this.$root.addFlashMessages();
                 })
                 .catch(function (error) {})
+                
+                notifications.style.display = "none";
         }
     }
 }
