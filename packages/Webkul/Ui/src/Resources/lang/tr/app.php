@@ -51,5 +51,7 @@ return [
         'edit'                  => 'Düzenle',
         'delete'                => 'Sil',
         'view'                  => 'Görüntüle',
+        'active'                => 'aktif',
+        'inactive'              => 'etkin değil',
     ],
 ];

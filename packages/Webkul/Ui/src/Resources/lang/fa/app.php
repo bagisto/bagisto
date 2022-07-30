@@ -51,5 +51,7 @@ return [
         'edit'                  => 'ویرایش کنید',
         'delete'                => 'حذف',
         'view'                  => 'چشم انداز',
+        'active'                => 'Active',
+        'inactive'              => 'Inactive',
     ],
 ];

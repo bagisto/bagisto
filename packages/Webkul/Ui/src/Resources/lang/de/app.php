@@ -51,5 +51,7 @@ return [
         'view'                  => 'View',
         'edit'                  => 'Bearbeiten',
         'delete'                => 'Löschen',
+        'active'                => 'aktiv',
+        'inactive'              => 'inaktiv',
     ],
 ];

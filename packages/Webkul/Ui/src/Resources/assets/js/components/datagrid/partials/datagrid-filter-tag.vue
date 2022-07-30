@@ -12,6 +12,14 @@
             ></span>
         </span>
 
+         <span class="wrapper" v-else-if="filter.label == 'Status' && filter.val == 1 || filter.val == 0">
+            {{ filter.val == 1 ? 'Active' : 'Inactive' }} 
+            <span
+                class="icon cross-icon"
+                v-on:click="removeFilter(filter)"
+            ></span>
+        </span>
+
         <span class="wrapper" v-else>
             {{ decodeURIComponent(filter.val) }}
             <span

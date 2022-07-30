@@ -51,5 +51,7 @@ return [
         'edit'                  => 'تعديل',
         'delete'                => 'حذف',
         'view'                  => 'رأي',
+        'active'                => 'نشيط',
+        'inactive'              => 'غير نشط',
     ],
 ];

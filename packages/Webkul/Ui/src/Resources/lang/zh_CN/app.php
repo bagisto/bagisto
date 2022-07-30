@@ -51,5 +51,7 @@ return [
         'edit'                  => '编辑',
         'delete'                => '删除',
         'view'                  => '查看',
+        'active'                => '積極的',
+        'inactive'              => '不活躍',
     ],
 ];
