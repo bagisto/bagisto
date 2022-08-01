@@ -99,7 +99,7 @@
                 <li>
                     <span class="dropdown-toggle">
                         @if( auth()->guard('customer')->user() && auth()->guard('customer')->user()->image) 
-                            <i style="vertical-align: top;"><img style="width:20px;margin-right:5px;height:20px;border-radius:50%;" src="{{ auth('customer')->user()->image_url }}" alt="{{ auth('customer')->user()->first_name }}"/></i>
+                            <img  class="profile-small-icon" src="{{ auth('customer')->user()->image_url }}" alt="{{ auth('customer')->user()->first_name }}"/>
                         @else
                             <i class="icon account-icon"></i>
                         @endif
