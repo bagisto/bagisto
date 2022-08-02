@@ -167,7 +167,7 @@ export default {
                         let results = response.data;
 
                         if (
-                            !results.records.data.length &&
+                            ! results.records.data.length &&
                             results.records.prev_page_url
                         ) {
                             self.url = results.records.prev_page_url;
