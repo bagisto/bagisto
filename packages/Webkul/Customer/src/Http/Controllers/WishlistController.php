@@ -36,8 +36,6 @@ class WishlistController extends Controller
     )
     {
         $this->_config = request('_config');
-
-        $this->currentCustomer = auth()->guard('customer')->user();
     }
 
     /**
@@ -47,6 +45,8 @@ class WishlistController extends Controller
      */
     public function index()
     {
+        $customer = auth()->guard('customer')->user();
+
         if (! core()->getConfigData('general.content.shop.wishlist_option')) {
             abort(404);
         }
@@ -54,8 +54,8 @@ class WishlistController extends Controller
         return view($this->_config['view'], [
             'items' => $this->wishlistRepository->getCustomerWishlist(),
             'isSharingEnabled' => $this->isSharingEnabled(),
-            'isWishlistShared' => $this->currentCustomer->isWishlistShared(),
-            'wishlistSharedLink' => $this->currentCustomer->getWishlistSharedLink()
+            'isWishlistShared' => $customer->isWishlistShared(),
+            'wishlistSharedLink' => $customer->getWishlistSharedLink()
         ]);
     }
 
@@ -67,6 +67,8 @@ class WishlistController extends Controller
      */
     public function add($itemId)
     {
+        $customer = auth()->guard('customer')->user();
+
         $product = $this->productRepository->find($itemId);
 
         if ( $product == null ) {
@@ -79,13 +81,13 @@ class WishlistController extends Controller
         $data = [
             'channel_id'  => core()->getCurrentChannel()->id,
             'product_id'  => $itemId,
-            'customer_id' => $this->currentCustomer->id,
+            'customer_id' => $customer->id,
         ];
 
         $checked = $this->wishlistRepository->findWhere([
             'channel_id'  => core()->getCurrentChannel()->id,
             'product_id'  => $itemId,
-            'customer_id' => $this->currentCustomer->id,
+            'customer_id' => $customer->id,
         ]);
 
         if (
@@ -124,20 +126,22 @@ class WishlistController extends Controller
      */
     public function share()
     {
+        $customer = auth()->guard('customer')->user();
+
         if ($this->isSharingEnabled()) {
             $data = $this->validate(request(), [
                 'shared' => 'required|boolean'
             ]);
 
-            $updateCounts = $this->currentCustomer->wishlist_items()->update(['shared' => $data['shared']]);
+            $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);
 
             if (
                 $updateCounts
                 && $updateCounts > 0
             ) {
                 return response()->json([
-                    'isWishlistShared' => $this->currentCustomer->isWishlistShared(),
-                    'wishlistSharedLink' => $this->currentCustomer->getWishlistSharedLink()
+                    'isWishlistShared' => $customer->isWishlistShared(),
+                    'wishlistSharedLink' => $customer->getWishlistSharedLink()
                 ]);
             }
         }
@@ -185,7 +189,9 @@ class WishlistController extends Controller
      */
     public function remove($itemId)
     {
-        $customerWishlistItems = $this->currentCustomer->wishlist_items;
+        $customer = auth()->guard('customer')->user();
+
+        $customerWishlistItems = $customer->wishlist_items;
 
         foreach ($customerWishlistItems as $customerWishlistItem) {
             if ($itemId == $customerWishlistItem->id) {
@@ -210,9 +216,11 @@ class WishlistController extends Controller
      */
     public function move($itemId)
     {
+        $customer = auth()->guard('customer')->user();
+        
         $wishlistItem = $this->wishlistRepository->findOneWhere([
             'id'          => $itemId,
-            'customer_id' => $this->currentCustomer->id,
+            'customer_id' => $customer->id,
         ]);
 
         if (! $wishlistItem) {
@@ -247,7 +255,9 @@ class WishlistController extends Controller
      */
     public function removeAll()
     {
-        $wishlistItems = $this->currentCustomer->wishlist_items;
+        $customer = auth()->guard('customer')->user();
+
+        $wishlistItems = $customer->wishlist_items;
 
         if ($wishlistItems->count() > 0) {
             foreach ($wishlistItems as $wishlistItem) {

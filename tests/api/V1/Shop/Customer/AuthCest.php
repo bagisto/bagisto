@@ -29,7 +29,7 @@ class AuthCest extends CustomerCest
 
         $I->haveAllNecessaryHeaders();
 
-        $I->sendPost($this->getVersionRoute('customer/login'), [
+        $I->sendPost($this->getVersionRoute('customer/login?accept_token=true'), [
             'email'       => $customer->email,
             'password'    => json_decode($customer->notes)->plain_password,
             'device_name' => $I->fake()->company,
