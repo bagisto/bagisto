@@ -5,7 +5,7 @@
         padding-left: 32px;
         margin-bottom: 20px;
         position: relative;
-
+        
         .icon {
             position: absolute;
             left: 0;
@@ -277,6 +277,19 @@ body {
             .cross-icon {
                 left: 80px !important;
                 right: inherit !important;
+            }
+
+            .icon {
+                position: absolute;
+                top: -4px;
+            }
+
+            .bp-location-icon {
+                right: 60px;
+            }
+
+            .bp-slot-icon {
+                right: 140px;
             }
        }
     }
