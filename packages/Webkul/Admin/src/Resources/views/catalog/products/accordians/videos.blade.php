@@ -13,6 +13,7 @@
                 class="control-error"
                 v-text="'{{ $errors->first('videos.files.*') }}'">
             </span>
+            
             <span class="control-info mt-10">{{ __('admin::app.catalog.products.video-size', ['size' => core()->getMaxUploadSize()]) }}</span>
         </div>
 

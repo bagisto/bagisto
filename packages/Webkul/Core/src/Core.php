@@ -1318,12 +1318,12 @@ class Core
     }
 
     /**
-     * Get Max Upload Size form php.ini
+     * Get max upload size from the php.ini file.
      *
      * @return string
      */
     public function getMaxUploadSize()
     {
-        return ini_get("upload_max_filesize");
+        return ini_get('upload_max_filesize');
     }
 }
