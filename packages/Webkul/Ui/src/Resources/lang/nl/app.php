@@ -51,5 +51,11 @@ return [
         'edit'                  => 'Edit',
         'delete'                => 'Delete',
         'view'                  => 'View',
+        'active'                => 'Actief',
+        'inactive'              => 'Inactief',
+        'all-channels'          => 'Alle kanalen',
+        'all-locales'           => 'Alle locaties',
+        'all-customer-groups'   => 'Alle klantgroepen',
+        'records-found'         => 'Record(s) gevonden',
     ],
 ];

@@ -219,8 +219,9 @@
             method="POST"
             id="product-form"
             @click="onSubmit($event)"
-            action="{{ route('cart.add', $product->product_id) }}">
-
+            @submit.enter.prevent="onSubmit($event)"
+            action="{{ route('cart.add', $product->product_id) }}"
+        >
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
 
             <slot v-if="slot"></slot>
@@ -228,7 +229,6 @@
             <div v-else>
                 <div class="spritespin"></div>
             </div>
-
         </form>
     </script>
 
