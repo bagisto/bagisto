@@ -193,7 +193,7 @@ class WishlistController extends Controller
 
                 session()->flash('success', trans('customer::app.wishlist.removed'));
 
-                return redirect()->back();
+                return redirect()->route('customer.wishlist.index');
             }
         }
 
