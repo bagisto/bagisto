@@ -4,6 +4,7 @@
             <datagrid-filter-tag
                 :key="filterKey"
                 :filter="filter"
+                :translations="translations"
                 v-for="(filter, filterKey) in filters"
                 @onRemoveFilter="removeFilter(filter)"
             ></datagrid-filter-tag>
@@ -15,7 +16,7 @@
 import DatagridFilterTag from './datagrid-filter-tag.vue';
 
 export default {
-    props: ['filters'],
+    props: ['filters', 'translations'],
 
     components: {
         DatagridFilterTag

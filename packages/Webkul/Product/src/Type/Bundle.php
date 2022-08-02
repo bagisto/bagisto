@@ -434,7 +434,7 @@ class Bundle extends AbstractType
      */
     public function prepareForCart($data)
     {
-        $bundleQuantity = $data['quantity'];
+        $bundleQuantity = parent::handleQuantity((int) $data['quantity']);
 
         if (isset($data['bundle_options'])) {
             $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));

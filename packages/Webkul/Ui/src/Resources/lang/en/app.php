@@ -53,5 +53,11 @@ return [
         'view'                  => 'View',
         'empty-field'           => 'Please select the filter',
         'empty-value'           => 'Please enter the value',
+        'active'                => 'Active',
+        'inactive'              => 'Inactive',
+        'all-channels'          => 'All Channels',
+        'all-locales'           => 'All Locales',
+        'all-customer-groups'   => 'All Customer groups',
+        'records-found'         => 'Record(s) found',
     ],
 ];

@@ -158,6 +158,7 @@
     <script type="text/x-template" id="quantity-changer-template">
         <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
             <label class="required">{{ __('shop::app.products.quantity') }}</label>
+
             <span class="quantity-container">
                 <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
@@ -171,9 +172,9 @@
                     @keyup="setQty($event)">
 
                 <button type="button" class="increase" @click="increaseQty()">+</button>
-
-                <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
             </span>
+
+            <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
         </div>
     </script>
 
