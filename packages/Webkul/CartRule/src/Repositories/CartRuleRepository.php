@@ -78,7 +78,7 @@ class CartRuleRepository extends Repository
             $this->cartRuleCouponRepository->create([
                 'cart_rule_id'       => $cartRule->id,
                 'code'               => $data['coupon_code'],
-                'usage_limit'        => $data['usage_per_customer'] ?? 0,
+                'usage_limit'        => $data['uses_per_coupon'] ?? 0,
                 'usage_per_customer' => $data['usage_per_customer'] ?? 0,
                 'is_primary'         => 1,
                 'expired_at'         => $data['ends_till'] ?: null,

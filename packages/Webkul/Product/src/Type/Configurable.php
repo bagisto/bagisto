@@ -655,6 +655,8 @@ class Configurable extends AbstractType
      */
     public function prepareForCart($data)
     {
+        $data['quantity'] = parent::handleQuantity((int) $data['quantity']);
+        
         if (
             ! isset($data['selected_configurable_option'])
             || ! $data['selected_configurable_option']
