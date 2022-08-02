@@ -80,7 +80,8 @@ class CustomerController extends Controller
         }
 
         if (
-            ! isset($data['image'] )
+            core()->getCurrentChannel()->theme === 'default'
+            && ! isset($data['image'])
         ) {
             $data['image']['image_0'] = '';
         }
