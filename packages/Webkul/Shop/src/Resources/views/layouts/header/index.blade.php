@@ -98,12 +98,8 @@
 
                 <li>
                     <span class="dropdown-toggle">
-                        @if (auth()->guard('customer')->user() && auth()->guard('customer')->user()->image)
-                            <img  class="profile-small-icon" src="{{ auth('customer')->user()->image_url }}" alt="{{ auth('customer')->user()->first_name }}"/>
-                        @else
-                            <i class="icon account-icon"></i>
-                        @endif
-
+                        <i class="icon account-icon"></i>
+                      
                         <span class="name">{{ __('shop::app.header.account') }}</span>
 
                         <i class="icon arrow-down-icon"></i>
