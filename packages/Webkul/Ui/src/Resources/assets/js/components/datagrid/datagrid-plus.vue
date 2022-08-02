@@ -45,6 +45,7 @@
             <div class="filter-advance">
                 <datagrid-filter-tags
                     :filters="filters"
+                    :translations="translations"
                     @onRemoveFilter="removeFilter($event)"
                 ></datagrid-filter-tags>
 
@@ -213,7 +214,7 @@ export default {
             this.perPage = this.itemsPerPage;
         },
 
-        formURL(column, condition, response, label) {
+        formURL(column, condition, response, label, type) {
             let obj = {};
 
             if (
@@ -260,6 +261,7 @@ export default {
                     }
 
                     if (filterRepeated === false) {
+                        obj.type = type;
                         obj.column = column;
                         obj.cond = condition;
                         obj.val = response;
@@ -359,6 +361,7 @@ export default {
                     }
                 }
             } else {
+                obj.type = type;
                 obj.column = column;
                 obj.cond = condition;
                 obj.val = encodeURIComponent(response);
@@ -397,7 +400,8 @@ export default {
                 'search',
                 'all',
                 searchValue,
-                this.translations.searchTitle
+                this.translations.searchTitle,
+                'search'
             );
         },
 
@@ -420,9 +424,9 @@ export default {
         },
 
         filterData($event) {
-            const { column, condition, response, label } = $event.data;
+            const { type, column, condition, response, label } = $event.data;
 
-            this.formURL(column, condition, response, label);
+            this.formURL(column, condition, response, label, type);
         },
 
         removeFilter($event) {
