@@ -47,6 +47,7 @@
                     :filters="filters"
                     :translations="translations"
                     @onRemoveFilter="removeFilter($event)"
+                    @onRemoveAllFilter="clearAllFilters()"
                 ></datagrid-filter-tags>
 
                 <div class="records-count-container">
@@ -455,6 +456,12 @@ export default {
                 }
             }
         },
+        
+        clearAllFilters() {
+            this.filters = [];
+
+            this.makeURL();
+        },
 
         changePage($event) {
             const { pageLink } = $event.data;
@@ -463,7 +470,7 @@ export default {
                 this.url = pageLink;
                 this.refresh();
             }
-        },
-    },
+        }
+    }
 };
 </script>

@@ -8,6 +8,8 @@
                 v-for="(filter, filterKey) in filters"
                 @onRemoveFilter="removeFilter(filter)"
             ></datagrid-filter-tag>
+            
+            <p @click="removeAllFilters" v-if="filters.length > 0">{{ translations.clearAll }}</p>
         </template>
     </div>
 </template>
@@ -29,6 +31,10 @@ export default {
     methods: {
         removeFilter(filter) {
             this.$emit('onRemoveFilter', { data: { filter } });
+        },
+
+        removeAllFilters() {
+            this.$emit('onRemoveAllFilter');
         }
     }
 };

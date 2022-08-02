@@ -57,5 +57,6 @@ return [
         'all-locales'           => '所有語言環境',
         'all-customer-groups'   => '所有客戶組',
         'records-found'         => '找到記錄',
+        'clear-all'             => 'Clear All'
     ],
 ];
