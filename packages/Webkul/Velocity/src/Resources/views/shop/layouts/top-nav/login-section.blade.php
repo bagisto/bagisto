@@ -2,7 +2,11 @@
 
 <div id="account">
     <div class="d-inline-block welcome-content dropdown-toggle">
-        <i class="material-icons align-vertical-top">perm_identity</i>
+        @if (auth()->guard('customer')->user() && auth()->guard('customer')->user()->image)
+            <i class="align-vertical-top"><img class= "profile-small-icon" src="{{ auth('customer')->user()->image_url }}" alt="{{ auth('customer')->user()->first_name }}"/></i>
+        @else
+            <i class="material-icons align-vertical-top">perm_identity</i>
+        @endif
 
         <span class="text-center">
             {{ __('velocity::app.header.welcome-message', [

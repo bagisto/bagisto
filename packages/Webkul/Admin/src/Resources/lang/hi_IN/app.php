@@ -624,6 +624,7 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'video-size'                    => 'Maximum video size should be like :size',
         ],
 
         'attributes' => [

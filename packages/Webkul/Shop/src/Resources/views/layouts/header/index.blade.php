@@ -99,7 +99,7 @@
                 <li>
                     <span class="dropdown-toggle">
                         <i class="icon account-icon"></i>
-
+                      
                         <span class="name">{{ __('shop::app.header.account') }}</span>
 
                         <i class="icon arrow-down-icon"></i>
