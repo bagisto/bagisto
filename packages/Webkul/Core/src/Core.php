@@ -1316,4 +1316,14 @@ class Core
 
         return Config::get($field, $configFieldInfo['default'] ?? null);
     }
+
+    /**
+     * Get max upload size from the php.ini file.
+     *
+     * @return string
+     */
+    public function getMaxUploadSize()
+    {
+        return ini_get('upload_max_filesize');
+    }
 }

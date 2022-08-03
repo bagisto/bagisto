@@ -62,7 +62,7 @@
                     :class="`thumb-frame ${index + 1 == 4 ? '' : 'mr5'} ${thumb.large_image_url == currentLargeImageUrl ? 'active' : ''}`"
                     >
 
-                    <video v-if="thumb.type == 'video'" width="110" height="110" controls>
+                    <video v-if="thumb.type == 'video' || thumb.type == 'videos'" width="110" height="110" controls>
                         <source :src="thumb.small_image_url" type="video/mp4">
                         {{ __('admin::app.catalog.products.not-support-video') }}
                     </video>

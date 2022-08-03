@@ -51,5 +51,12 @@ return [
         'view'                  => 'View',
         'edit'                  => 'Bearbeiten',
         'delete'                => 'Löschen',
+        'active'                => 'Aktiv',
+        'inactive'              => 'Inaktiv',
+        'all-channels'          => 'Alle Kanäle',
+        'all-locales'           => 'Alle Lokalitäten',
+        'all-customer-groups'   => 'Alle Kundengruppen',
+        'records-found'         => 'Datensätze gefunden',
+        'clear-all'             => 'Clear All'
     ],
 ];
