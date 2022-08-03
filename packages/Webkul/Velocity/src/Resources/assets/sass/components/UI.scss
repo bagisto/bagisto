@@ -87,6 +87,17 @@
     }
 }
 
+#date-of-birth {
+    display: block;
+    position: relative;
+
+    .cross-icon {
+        position: absolute;
+        left: 110px;
+        top: 8px;
+    }
+}
+
 #date-of-birth:after{
     background-image: url(../images/icon-calendar.svg);
     width: 24px;
@@ -94,10 +105,10 @@
     content: "";
     display: inline-block;
     vertical-align: middle;
-    margin-left: -34px;
     pointer-events: none;
     position: absolute;
-    top: 14%;
+    top: 5px;
+    left: 130px;
 }
 
 .rtl{
