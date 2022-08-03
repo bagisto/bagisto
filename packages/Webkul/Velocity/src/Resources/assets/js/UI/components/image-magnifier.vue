@@ -87,7 +87,7 @@ export default {
                 this.activeImage.removeData('elevateZoom');
 
                 /* getting url */
-                this.activeImageVideoURL = largeImageUrl;
+                this.activeImageVideoURL = smallImageUrl;
 
                 /* type checking for media type */
                 this.currentType = currentType;
