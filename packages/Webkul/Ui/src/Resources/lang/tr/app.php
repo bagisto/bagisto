@@ -57,5 +57,6 @@ return [
         'all-locales'           => 'Tüm Yerel Ayarlar',
         'all-customer-groups'   => 'Tüm Müşteri grupları',
         'records-found'         => 'Kayıt(lar) bulundu',
+        'clear-all'             => 'Clear All'
     ],
 ];

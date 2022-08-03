@@ -139,14 +139,16 @@
             "@php artisan migrate:fresh --env=testing",
             "vendor/bin/codecept run unit",
             "vendor/bin/codecept run functional",
-            "vendor/bin/codecept run trigger"
+            "vendor/bin/codecept run trigger",
+            "vendor/bin/codecept run api"
         ],
         "test-win": [
             "@set -e",
             "@php artisan migrate:fresh --env=testing",
             "vendor\\bin\\codecept.bat run unit",
             "vendor\\bin\\codecept.bat run functional",
-            "vendor\\bin\\codecept.bat run trigger"
+            "vendor\\bin\\codecept.bat run trigger",
+            "vendor\\bin\\codecept.bat run api"
         ]
     },
     "config": {

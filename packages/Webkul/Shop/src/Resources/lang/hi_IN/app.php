@@ -622,6 +622,7 @@ return [
             'invalid-coupon'      => 'कूपन कोड अमान्य है।',
             'success-coupon'      => 'कूपन कोड सफलतापूर्वक लागू किया गया।',
             'coupon-apply-issue'  => 'कूपन कोड लागू नहीं किया जा सकता',
+            'coupon-already-applied' => 'कूपन कोड पहले से ही लागू है।',
         ],
 
         'success' => [

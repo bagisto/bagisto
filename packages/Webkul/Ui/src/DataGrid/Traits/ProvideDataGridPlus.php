@@ -159,6 +159,7 @@ trait ProvideDataGridPlus
             'emptyValue'          => __('ui::app.datagrid.empty-value'),
             'active'              => __('ui::app.datagrid.active'),
             'inactive'            => __('ui::app.datagrid.inactive'),
+            'clearAll'            => __('ui::app.datagrid.clear-all'),
         ];
     }
 }

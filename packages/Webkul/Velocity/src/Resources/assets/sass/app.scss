@@ -217,6 +217,14 @@ label {
             padding-left: 5px;
         }
 
+        .profile-small-icon {
+            width: 20px;
+            margin-right: 5px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: top;
+        }
+
         .welcome-content {
             @extend .unselectable;
 
