@@ -51,5 +51,12 @@ return [
         'edit'                  => '编辑',
         'delete'                => '删除',
         'view'                  => '查看',
+        'active'                => '積極的',
+        'inactive'              => '不活躍',
+        'all-channels'          => '所有頻道',
+        'all-locales'           => '所有語言環境',
+        'all-customer-groups'   => '所有客戶組',
+        'records-found'         => '找到記錄',
+        'clear-all'             => 'Clear All'
     ],
 ];

@@ -614,6 +614,7 @@ return [
             'invalid-coupon'      => 'El código del cupón no es válido.',
             'success-coupon'      => 'Código del cupón aplicado correctamente.',
             'coupon-apply-issue'  => 'No se puede aplicar el código de cupón.',
+            'coupon-already-applied' => 'Código de cupón ya aplicado.',
         ],
 
         'success' => [

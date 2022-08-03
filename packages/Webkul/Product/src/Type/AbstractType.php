@@ -844,7 +844,7 @@ abstract class AbstractType
      */
     public function prepareForCart($data)
     {
-        $data['quantity'] = (int) $data['quantity'] ?? 1;
+        $data['quantity'] = $this->handleQuantity((int) $data['quantity']);
 
         $data = $this->getQtyRequest($data);
 
@@ -873,6 +873,19 @@ abstract class AbstractType
         ];
 
         return $products;
+    }
+
+    /**
+     * Handle quantity.
+     *
+     * @param  int  $quantity
+     * @return int
+     */
+    public function handleQuantity(int $quantity): int
+    {
+        return ! empty($quantity)
+            ? $quantity
+            : 1;
     }
 
     /**
