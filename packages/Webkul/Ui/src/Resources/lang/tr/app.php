@@ -51,5 +51,12 @@ return [
         'edit'                  => 'Düzenle',
         'delete'                => 'Sil',
         'view'                  => 'Görüntüle',
+        'active'                => 'Aktif',
+        'inactive'              => 'etkin değil',
+        'all-channels'          => 'Tüm kanallar',
+        'all-locales'           => 'Tüm Yerel Ayarlar',
+        'all-customer-groups'   => 'Tüm Müşteri grupları',
+        'records-found'         => 'Kayıt(lar) bulundu',
+        'clear-all'             => 'Clear All'
     ],
 ];

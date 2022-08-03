@@ -619,6 +619,7 @@ return [
             'invalid-coupon'      => 'Couponcode is ongeldig.',
             'success-coupon'      => 'Couponcode succesvol toegepast.',
             'coupon-apply-issue'  => 'Coupon code can\'t be applied.',
+            'coupon-already-applied' => 'Couponcode reeds toegepast.',
         ],
 
         'success' => [

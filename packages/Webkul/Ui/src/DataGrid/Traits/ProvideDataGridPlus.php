@@ -119,9 +119,9 @@ trait ProvideDataGridPlus
     public function getTranslations()
     {
         return [
-            'allChannels'         => __('admin::app.admin.system.all-channels'),
-            'allLocales'          => __('admin::app.admin.system.all-locales'),
-            'allCustomerGroups'   => __('admin::app.admin.system.all-customer-groups'),
+            'allChannels'         => __('ui::app.datagrid.all-channels'),
+            'allLocales'          => __('ui::app.datagrid.all-locales'),
+            'allCustomerGroups'   => __('ui::app.datagrid.all-customer-groups'),
             'search'              => __('ui::app.datagrid.search'),
             'searchTitle'         => __('ui::app.datagrid.search-title'),
             'channel'             => __('ui::app.datagrid.channel'),
@@ -152,11 +152,14 @@ trait ProvideDataGridPlus
             'filterExists'        => __('ui::app.datagrid.filter-exists'),
             'zeroIndex'           => __('ui::app.datagrid.zero-index'),
             'clickOnAction'       => __('ui::app.datagrid.click_on_action'),
-            'recordsFound'        => __('admin::app.admin.system.records-found'),
+            'recordsFound'        => __('ui::app.datagrid.records-found'),
             'norecords'           => __('ui::app.datagrid.no-records'),
             'massActionDelete'    => __('ui::app.datagrid.massaction.delete'),
             'emptyField'          => __('ui::app.datagrid.empty-field'),
             'emptyValue'          => __('ui::app.datagrid.empty-value'),
+            'active'              => __('ui::app.datagrid.active'),
+            'inactive'            => __('ui::app.datagrid.inactive'),
+            'clearAll'            => __('ui::app.datagrid.clear-all'),
         ];
     }
 }

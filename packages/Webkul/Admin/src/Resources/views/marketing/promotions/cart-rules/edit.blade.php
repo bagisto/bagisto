@@ -310,7 +310,7 @@
 
                         {!! view_render_event('bagisto.admin.promotions.cart-rules.create.after') !!}
 
-                        <accordian title="{{ __('admin::app.promotions.cart-rules.coupon-codes') }}" :active="false" v-if="coupon_type && use_auto_generation">
+                        <accordian title="{{ __('admin::app.promotions.cart-rules.coupon-codes') }}" :active="false" v-if="parseInt(use_auto_generation) && parseInt(coupon_type)">
                             <div slot="body">
                                 <create-coupon-form></create-coupon-form>
                             </div>
