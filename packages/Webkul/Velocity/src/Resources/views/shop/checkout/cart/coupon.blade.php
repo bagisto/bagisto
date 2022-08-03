@@ -14,7 +14,7 @@
                         <div class="control-error">@{{ error_message }}</div>
                     </div>
 
-                    <button class="theme-btn light" :disabled="disable_button">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
+                    <button class="theme-btn light" :disabled="disableButton">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
                 </form>
             </div>
 
@@ -42,7 +42,7 @@
                     error_message: '',
                     applied_coupon: "{{ $cart->coupon_code }}",
                     route_name: "{{ request()->route()->getName() }}",
-                    disable_button: false,
+                    disableButton: false,
                     removeIconEnabled: true
                 }
             },
@@ -65,7 +65,7 @@
 
                     this.error_message = null;
 
-                    this.disable_button = true;
+                    this.disableButton = true;
 
                     let code = this.coupon_code;
 
@@ -90,11 +90,11 @@
                                 this.error_message = response.data.message;
                             }
 
-                            this.disable_button = false;
+                            this.disableButton = false;
                         }).catch(error => {
                             this.error_message = error.response.data.message;
 
-                            this.disable_button = false;
+                            this.disableButton = false;
                         });
                 },
 
@@ -111,7 +111,7 @@
 
                             self.applied_coupon = '';
 
-                            self.disable_button = false;
+                            self.disableButton = false;
 
                             self.removeIconEnabled = true;
 
@@ -128,7 +128,7 @@
 
                             self.$root.addFlashMessages();
 
-                            self.disable_button = false;
+                            self.disableButton = false;
 
                             self.removeIconEnabled = true;
                         });
