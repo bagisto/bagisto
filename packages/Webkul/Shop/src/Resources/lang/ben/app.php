@@ -611,6 +611,7 @@ return [
             'invalid-coupon'      => 'কুপন কোড অবৈধ।',
             'success-coupon'      => 'কুপন কোড সফলভাবে প্রয়োগ করা হয়েছে।',
             'coupon-apply-issue'  => 'কুপন কোড প্রয়োগ করা যাবে না।',
+            'coupon-already-applied' => 'কুপন কোড ইতিমধ্যেই প্রয়োগ করা হয়েছে।',
         ],
 
         'success' => [

@@ -57,5 +57,6 @@ return [
         'all-locales'           => 'همه افراد محلی',
         'all-customer-groups'   => 'همه گروه های مشتری',
         'records-found'         => 'رکورد(های) یافت شده',
+        'clear-all'             => 'Clear All'
     ],
 ];

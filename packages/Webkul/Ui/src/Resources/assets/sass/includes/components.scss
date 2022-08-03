@@ -72,6 +72,10 @@
     align-items: flex-start;
     flex-wrap: wrap;
     margin-bottom: 10px;
+    
+    p {
+        cursor: pointer;
+    }
 }
 
 .search-filter {

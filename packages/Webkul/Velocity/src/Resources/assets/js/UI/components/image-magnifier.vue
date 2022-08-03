@@ -1,6 +1,6 @@
 <template>
     <div class="outer-assets-container">
-        <div class="video-container" v-if="currentType == 'video'">
+        <div class="video-container" v-if="currentType == 'video' || currentType == 'videos'">
             <video :key="activeImageVideoURL" width="100%" controls>
                 <source :src="activeImageVideoURL" type="video/mp4" />
             </video>
