@@ -572,6 +572,16 @@ body {
                 left: 12px;
                 right: unset;
             }
+
+            #date-of-birth {
+                .cross-icon {
+                    right: 1120px;
+                }
+            }
+            
+            #date-of-birth:after{
+                right: 1142px;
+            }
         }
     }
 }
