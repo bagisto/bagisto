@@ -57,5 +57,6 @@ return [
         'all-locales'           => 'Todos os locais',
         'all-customer-groups'   => 'Todos os grupos de clientes',
         'records-found'         => 'Registro(s) encontrado(s)',
+        'clear-all'             => 'Clear All'
     ],
 ];
