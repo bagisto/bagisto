@@ -103,11 +103,11 @@ class WishlistController extends Controller
                 session()->flash('success', trans('customer::app.wishlist.success'));
 
                 return redirect()->back();
-            } else {
-                session()->flash('error', trans('customer::app.wishlist.failure'));
-
-                return redirect()->back();
             }
+            session()->flash('error', trans('customer::app.wishlist.failure'));
+
+            return redirect()->back();
+
         } else {
             $this->wishlistRepository->findOneWhere([
                 'product_id' => $data['product_id']
@@ -128,23 +128,25 @@ class WishlistController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        if ($this->isSharingEnabled()) {
-            $data = $this->validate(request(), [
-                'shared' => 'required|boolean'
-            ]);
-
-            $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);
-
-            if (
-                $updateCounts
-                && $updateCounts > 0
-            ) {
-                return response()->json([
-                    'isWishlistShared' => $customer->isWishlistShared(),
-                    'wishlistSharedLink' => $customer->getWishlistSharedLink()
-                ]);
-            }
+        if (!$this->isSharingEnabled()) {
+            return;
         }
+        $data = $this->validate(request(), [
+            'shared' => 'required|boolean'
+        ]);
+
+        $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);
+
+        if (
+            $updateCounts
+            && $updateCounts > 0
+        ) {
+            return response()->json([
+                'isWishlistShared' => $customer->isWishlistShared(),
+                'wishlistSharedLink' => $customer->getWishlistSharedLink()
+            ]);
+        }
+
 
         return response()->json([], 400);
     }
@@ -217,7 +219,7 @@ class WishlistController extends Controller
     public function move($itemId)
     {
         $customer = auth()->guard('customer')->user();
-        
+
         $wishlistItem = $this->wishlistRepository->findOneWhere([
             'id'          => $itemId,
             'customer_id' => $customer->id,
@@ -259,11 +261,13 @@ class WishlistController extends Controller
 
         $wishlistItems = $customer->wishlist_items;
 
-        if ($wishlistItems->count() > 0) {
-            foreach ($wishlistItems as $wishlistItem) {
-                $this->wishlistRepository->delete($wishlistItem->id);
-            }
+        if ($wishlistItems->count() <= 0) {
+            return;
         }
+        foreach ($wishlistItems as $wishlistItem) {
+            $this->wishlistRepository->delete($wishlistItem->id);
+        }
+
 
         session()->flash('success', trans('customer::app.wishlist.remove-all-success'));
 

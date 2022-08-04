@@ -61,11 +61,11 @@ class RegistrationController extends Controller
         $request->validated();
 
         $data = array_merge(request()->input(), [
-            'password'                  => bcrypt(request()->input('password')),
-            'api_token'                 => Str::random(80),
-            'is_verified'               => core()->getConfigData('customer.settings.email.verification') ? 0 : 1,
-            'customer_group_id'         => $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id,
-            'token'                     => md5(uniqid(rand(), true)),
+            'password' => bcrypt(request()->input('password')),
+            'api_token' => Str::random(80),
+            'is_verified' => core()->getConfigData('customer.settings.email.verification') ? 0 : 1,
+            'customer_group_id' => $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id,
+            'token' => md5(uniqid(rand(), true)),
             'subscribed_to_news_letter' => isset(request()->input()['is_subscribed']) ? 1 : 0,
         ]);
 
@@ -75,34 +75,36 @@ class RegistrationController extends Controller
 
         Event::dispatch('customer.registration.after', $customer);
 
-        if (! $customer) {
+        if (!$customer) {
             session()->flash('error', trans('shop::app.customer.signup-form.failed'));
 
             return redirect()->back();
         }
 
-        if (isset($data['is_subscribed'])) {
-            $subscription = $this->subscriptionRepository->findOneWhere(['email' => $data['email']]);
+        if (!isset($data['is_subscribed'])) {
+            return;
+        }
+        $subscription = $this->subscriptionRepository->findOneWhere(['email' => $data['email']]);
 
-            if ($subscription) {
-                $this->subscriptionRepository->update([
-                    'customer_id' => $customer->id,
-                ], $subscription->id);
-            } else {
-                $this->subscriptionRepository->create([
-                    'email'         => $data['email'],
-                    'customer_id'   => $customer->id,
-                    'channel_id'    => core()->getCurrentChannel()->id,
-                    'is_subscribed' => 1,
-                    'token'         => $token = uniqid(),
-                ]);
+        if ($subscription) {
+            $this->subscriptionRepository->update([
+                'customer_id' => $customer->id,
+            ], $subscription->id);
+        } else {
+            $this->subscriptionRepository->create([
+                'email' => $data['email'],
+                'customer_id' => $customer->id,
+                'channel_id' => core()->getCurrentChannel()->id,
+                'is_subscribed' => 1,
+                'token' => $token = uniqid(),
+            ]);
 
-                try {
-                    Mail::queue(new SubscriptionEmail([
-                        'email' => $data['email'],
-                        'token' => $token,
-                    ]));
-                } catch (\Exception $e) {}
+            try {
+                Mail::queue(new SubscriptionEmail([
+                    'email' => $data['email'],
+                    'token' => $token,
+                ]));
+            } catch (\Exception $e) {
             }
         }
 

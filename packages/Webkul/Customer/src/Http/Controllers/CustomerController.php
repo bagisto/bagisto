@@ -93,15 +93,15 @@ class CustomerController extends Controller
                 $data['oldpassword'] != ''
                 || $data['oldpassword'] != null
             ) {
-                if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
-                    $isPasswordChanged = true;
-
-                    $data['password'] = bcrypt($data['password']);
-                } else {
+                if (!Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
                     session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
 
                     return redirect()->back();
                 }
+                $isPasswordChanged = true;
+
+                $data['password'] = bcrypt($data['password']);
+
             } else {
                 unset($data['password']);
             }
@@ -179,25 +179,25 @@ class CustomerController extends Controller
         $customerRepository = $this->customerRepository->findorFail($id);
 
         try {
-            if (Hash::check($data['password'], $customerRepository->password)) {
-                $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
-
-                if ($orders) {
-                    session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customer']));
-
-                    return redirect()->route($this->_config['redirect']);
-                } else {
-                    $this->customerRepository->delete($id);
-
-                    session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
-
-                    return redirect()->route('customer.session.index');
-                }
-            } else {
+            if (!Hash::check($data['password'], $customerRepository->password)) {
                 session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
 
                 return redirect()->back();
             }
+            $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
+
+            if ($orders) {
+                session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customer']));
+
+                return redirect()->route($this->_config['redirect']);
+            }
+            $this->customerRepository->delete($id);
+
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+
+            return redirect()->route('customer.session.index');
+
+
         } catch (\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
 

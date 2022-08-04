@@ -88,7 +88,7 @@ class CmsRepository extends Repository
             ->select(\DB::raw(1))
             ->exists();
 
-        return $exists ? false : true;
+        return !$exists;
     }
 
     /**

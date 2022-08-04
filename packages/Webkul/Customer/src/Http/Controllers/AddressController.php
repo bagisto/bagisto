@@ -125,13 +125,15 @@ class AddressController extends Controller
         $addresses = $customer->addresses;
 
         foreach ($addresses as $address) {
-            if ($id == $address->id) {
-                session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
-
-                $this->customerAddressRepository->update($data, $id);
-
-                return redirect()->route('customer.address.index');
+            if ($id != $address->id) {
+                return;
             }
+            session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
+
+            $this->customerAddressRepository->update($data, $id);
+
+            return redirect()->route('customer.address.index');
+
         }
 
         session()->flash('warning', trans('shop::app.security-warning'));
