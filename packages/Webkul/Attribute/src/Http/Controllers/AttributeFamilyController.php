@@ -53,9 +53,9 @@ class AttributeFamilyController extends Controller
     {
         $attributeFamily = $this->attributeFamilyRepository->with(['attribute_groups.custom_attributes'])->findOneByField('code', 'default');
 
-        $custom_attributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type']);
+        $customAttributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type']);
 
-        return view($this->_config['view'], compact('custom_attributes', 'attributeFamily'));
+        return view($this->_config['view'], compact('attributeFamily', 'customAttributes'));
     }
 
     /**
@@ -87,9 +87,9 @@ class AttributeFamilyController extends Controller
     {
         $attributeFamily = $this->attributeFamilyRepository->with(['attribute_groups.custom_attributes'])->findOrFail($id, ['*']);
 
-        $custom_attributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type']);
+        $customAttributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type']);
 
-        return view($this->_config['view'], compact('attributeFamily', 'custom_attributes'));
+        return view($this->_config['view'], compact('attributeFamily', 'customAttributes'));
     }
 
     /**

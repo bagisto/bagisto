@@ -57,8 +57,6 @@ class PageController extends Controller
      */
     public function store()
     {
-        $data = request()->all();
-
         $this->validate(request(), [
             'url_key'      => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Contracts\Validations\Slug],
             'page_title'   => 'required',

@@ -62,11 +62,9 @@ class CustomerGroupController extends Controller
             'name' => 'required',
         ]);
 
-        $data = request()->all();
-
-        $data['is_user_defined'] = 1;
-
-        $this->customerGroupRepository->create($data);
+        $this->customerGroupRepository->create(array_merge(request()->all() , [
+            'is_user_defined' => 1,
+        ]));
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer Group']));
 
@@ -116,13 +114,13 @@ class CustomerGroupController extends Controller
     {
         $customerGroup = $this->customerGroupRepository->findOrFail($id);
 
-        if ($customerGroup->is_user_defined == 0) {
+        if (! $customerGroup->is_user_defined) {
             return response()->json([
                 'message' => trans('admin::app.customers.customers.group-default'),
             ], 400);
         }
 
-        if (count($customerGroup->customers) > 0) {
+        if ($customerGroup->customers->count()) {
             return response()->json([
                 'message' => trans('admin::app.response.customer-associate', ['name' => 'Customer Group']),
             ], 400);

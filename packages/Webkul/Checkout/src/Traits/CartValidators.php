@@ -27,7 +27,7 @@ trait CartValidators
 
         $count = $cart->all_items()->where('product_id', $product->id)->count();
 
-        return $count > 0 ? true : false;
+        return $count > 0;
     }
 
     /**
@@ -37,11 +37,9 @@ trait CartValidators
      */
     public function hasError(): bool
     {
-        if (! $this->getCart()) {
-            return true;
-        }
-
-        if (! $this->isItemsHaveSufficientQuantity()) {
+        if (
+            ! $this->getCart()
+            || ! $this->isItemsHaveSufficientQuantity()) {
             return true;
         }
 

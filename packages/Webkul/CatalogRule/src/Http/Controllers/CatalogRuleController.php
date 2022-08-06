@@ -64,9 +64,7 @@ class CatalogRuleController extends Controller
      */
     public function store(CatalogRuleRequest $catalogRuleRequest)
     {
-        $data = $catalogRuleRequest->all();
-
-        $this->catalogRuleRepository->create($data);
+        $this->catalogRuleRepository->create($catalogRuleRequest->all());
 
         $this->catalogRuleIndexHelper->reindexComplete();
 

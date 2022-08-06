@@ -63,7 +63,7 @@ class CartRuleRepository extends Repository
 
         $data['ends_till'] = isset($data['ends_till']) && $data['ends_till'] ? $data['ends_till'] : null;
 
-        $data['status'] = ! isset($data['status']) ? 0 : 1;
+        $data['status'] = isset($data['status']);
 
         $cartRule = parent::create($data);
 
@@ -100,13 +100,12 @@ class CartRuleRepository extends Repository
     {
         Event::dispatch('promotions.cart_rule.update.before', $id);
 
-        $data['starts_from'] = $data['starts_from'] ?: null;
-
-        $data['ends_till'] = $data['ends_till'] ?: null;
-
-        $data['status'] = ! isset($data['status']) ? 0 : 1;
-
-        $data['conditions'] = $data['conditions'] ?? [];
+        $data = array_merge($data, [
+            'starts_from' => $data['starts_from'] ?: null,
+            'ends_till'   => $data['ends_till'] ?: null,
+            'status'      => isset($data['status']),
+            'conditions'  => $data['conditions'] ?? [],
+        ]);
 
         $cartRule = $this->find($id);
 
@@ -118,7 +117,10 @@ class CartRuleRepository extends Repository
 
         if ($data['coupon_type']) {
             if (! $data['use_auto_generation']) {
-                $cartRuleCoupon = $this->cartRuleCouponRepository->findOneWhere(['is_primary' => 1, 'cart_rule_id' => $cartRule->id]);
+                $cartRuleCoupon = $this->cartRuleCouponRepository->findOneWhere([
+                    'is_primary'   => 1,
+                    'cart_rule_id' => $cartRule->id,
+                ]);
 
                 if ($cartRuleCoupon) {
                     $this->cartRuleCouponRepository->update([
@@ -138,7 +140,10 @@ class CartRuleRepository extends Repository
                     ]);
                 }
             } else {
-                $this->cartRuleCouponRepository->deleteWhere(['is_primary' => 1, 'cart_rule_id' => $cartRule->id]);
+                $this->cartRuleCouponRepository->deleteWhere([
+                    'is_primary' => 1,
+                    'cart_rule_id' => $cartRule->id,
+                ]);
 
                 $this->cartRuleCouponRepository->getModel()->where('cart_rule_id', $cartRule->id)->update([
                     'usage_limit'        => $data['uses_per_coupon'] ?? 0,
@@ -282,9 +287,7 @@ class CartRuleRepository extends Repository
 
             if ($attribute->validation == 'decimal') {
                 $attributeType = 'decimal';
-            }
-
-            if ($attribute->validation == 'numeric') {
+            } elseif ($attribute->validation == 'numeric') {
                 $attributeType = 'integer';
             }
 

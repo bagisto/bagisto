@@ -89,7 +89,7 @@
                     <div class="control-group">
                         <label for="customerGroup" >{{ __('admin::app.customers.customers.customer_group') }}</label>
                         <select  class="control" id="customerGroup" name="customer_group_id">
-                        @foreach ($customerGroup as $group)
+                        @foreach ($groups as $group)
                             <option value="{{ $group->id }}"> {{ $group->name}} </>
                         @endforeach
                         </select>

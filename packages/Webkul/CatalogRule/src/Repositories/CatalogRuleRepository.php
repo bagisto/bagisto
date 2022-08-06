@@ -53,11 +53,11 @@ class CatalogRuleRepository extends Repository
     {
         Event::dispatch('promotions.catalog_rule.create.before');
 
-        $data['starts_from'] = $data['starts_from'] ?: null;
-
-        $data['ends_till'] = $data['ends_till'] ?: null;
-
-        $data['status'] = ! isset($data['status']) ? 0 : 1;
+        $data = array_merge($data, [
+            'starts_from' => $data['starts_from'] ?: null,
+            'ends_till'   => $data['ends_till'] ?: null,
+            'status'      => isset($data['status']),
+        ]);
 
         $catalogRule = parent::create($data);
 
@@ -82,13 +82,12 @@ class CatalogRuleRepository extends Repository
     {
         Event::dispatch('promotions.catalog_rule.update.before', $id);
 
-        $data['starts_from'] = $data['starts_from'] ?: null;
-
-        $data['ends_till'] = $data['ends_till'] ?: null;
-
-        $data['status'] = ! isset($data['status']) ? 0 : 1;
-
-        $data['conditions'] = $data['conditions'] ?? [];
+        $data = array_merge($data, [
+            'starts_from' => $data['starts_from'] ?: null,
+            'ends_till'   => $data['ends_till'] ?: null,
+            'status'      => isset($data['status']),
+            'conditions'  => $data['conditions'] ?? [],
+        ]);
 
         $catalogRule = $this->find($id);
 

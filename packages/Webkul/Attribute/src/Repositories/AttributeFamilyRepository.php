@@ -2,29 +2,30 @@
 
 namespace Webkul\Attribute\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
+use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeGroupRepository;
-use Illuminate\Container\Container as App;
-use Illuminate\Support\Str;
 
 class AttributeFamilyRepository extends Repository
 {
     /**
-     * Create a new controller instance.
+     * Create a new repository instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Attribute\Repositories\AttributeGroupRepository  $attributeGroupRepository
+     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected AttributeRepository $attributeRepository,
         protected AttributeGroupRepository $attributeGroupRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**

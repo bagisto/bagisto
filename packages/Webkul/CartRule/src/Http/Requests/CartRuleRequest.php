@@ -41,7 +41,10 @@ class CartRuleRequest extends FormRequest
             ]);
         }
 
-        if (request()->has('action_type') && request()->action_type == 'by_percent') {
+        if (
+            request()->has('action_type')
+            && request()->action_type == 'by_percent'
+        ) {
             $rules = array_merge($rules, [
                 'discount_amount' => 'required|numeric|min:0|max:100',
             ]);

@@ -153,6 +153,7 @@ class CategoryController extends Controller
     public function massDestroy()
     {
         $suppressFlash = true;
+        
         $categoryIds = explode(',', request()->input('indexes'));
 
         foreach ($categoryIds as $categoryId) {

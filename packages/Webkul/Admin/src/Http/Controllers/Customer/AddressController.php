@@ -73,8 +73,6 @@ class AddressController extends Controller
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
         ]);
 
-        $data = collect(request()->input())->except('_token')->toArray();
-
         $this->validate(request(), [
             'company_name' => 'string',
             'address1'     => 'string|required',
@@ -86,10 +84,10 @@ class AddressController extends Controller
             'vat_id'       => new VatIdRule(),
         ]);
 
-        if ($this->customerAddressRepository->create($data)) {
+        if ($this->customerAddressRepository->create(request()->all())) {
             session()->flash('success', trans('admin::app.customers.addresses.success-create'));
 
-            return redirect()->route('admin.customer.edit', ['id' => $data['customer_id']]);
+            return redirect()->route('admin.customer.edit', ['id' => request('customer_id')]);
         } else {
             session()->flash('success', trans('admin::app.customers.addresses.error-create'));
 
@@ -131,18 +129,11 @@ class AddressController extends Controller
             'vat_id'       => new VatIdRule(),
         ]);
 
-        $data = collect(request()->input())->except('_token')->toArray();
+        $this->customerAddressRepository->update(request()->all(), $id);
 
-        $address = $this->customerAddressRepository->find($id);
+        session()->flash('success', trans('admin::app.customers.addresses.success-update'));
 
-        if ($address) {
-            $this->customerAddressRepository->update($data, $id);
-
-            session()->flash('success', trans('admin::app.customers.addresses.success-update'));
-
-            return redirect()->route('admin.customer.addresses.index', ['id' => $address->customer_id]);
-        }
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.customer.addresses.index', ['id' => $address->customer_id]);
     }
 
     /**
@@ -157,7 +148,7 @@ class AddressController extends Controller
 
         return response()->json([
             'redirect' => false,
-            'message' => trans('admin::app.customers.addresses.success-delete')
+            'message'  => trans('admin::app.customers.addresses.success-delete')
         ]);
     }
 

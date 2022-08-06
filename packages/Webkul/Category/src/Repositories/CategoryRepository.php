@@ -41,6 +41,7 @@ class CategoryRepository extends Repository
                 foreach ($model->translatedAttributes as $attribute) {
                     if (isset($data[$attribute])) {
                         $data[$locale->code][$attribute] = $data[$attribute];
+
                         $data[$locale->code]['locale_id'] = $locale->id;
                     }
                 }
@@ -237,6 +238,7 @@ class CategoryRepository extends Repository
 
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type . '.' . $imageId;
+
                 $dir = 'category/' . $category->id;
 
                 if ($request->hasFile($file)) {
@@ -245,6 +247,7 @@ class CategoryRepository extends Repository
                     }
 
                     $category->{$type} = $request->file($file)->store($dir);
+
                     $category->save();
                 }
             }
@@ -254,6 +257,7 @@ class CategoryRepository extends Repository
             }
 
             $category->{$type} = null;
+            
             $category->save();
         }
     }

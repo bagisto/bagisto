@@ -99,21 +99,21 @@ class InvoiceController extends Controller
             'invoice.items.*' => 'required|numeric|min:0',
         ]);
 
-        $data = request()->all();
-
-        if (! $this->invoiceRepository->haveProductToInvoice($data)) {
+        if (! $this->invoiceRepository->haveProductToInvoice(request()->all())) {
             session()->flash('error', trans('admin::app.sales.invoices.product-error'));
 
             return redirect()->back();
         }
 
-        if (! $this->invoiceRepository->isValidQuantity($data)) {
+        if (! $this->invoiceRepository->isValidQuantity(request()->all())) {
             session()->flash('error', trans('admin::app.sales.invoices.invalid-qty'));
 
             return redirect()->back();
         }
 
-        $this->invoiceRepository->create(array_merge($data, ['order_id' => $orderId]));
+        $this->invoiceRepository->create(array_merge(request()->all(), [
+            'order_id' => $orderId,
+        ]));
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Invoice']));
 
@@ -148,15 +148,9 @@ class InvoiceController extends Controller
 
         $invoice = $this->invoiceRepository->findOrFail($id);
 
-        if ($invoice) {
-            $this->sendDuplicateInvoiceMail($invoice, $request->email);
+        $this->sendDuplicateInvoiceMail($invoice, $request->email);
 
-            session()->flash('success', __('admin::app.sales.invoices.invoice-sent'));
-
-            return redirect()->back();
-        }
-
-        session()->flash('error', __('admin::app.response.something-went-wrong'));
+        session()->flash('success', trans('admin::app.sales.invoices.invoice-sent'));
 
         return redirect()->back();
     }

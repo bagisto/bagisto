@@ -88,15 +88,15 @@ class ShipmentController extends Controller
             'shipment.items.*.*' => 'required|numeric|min:0',
         ]);
 
-        $data = request()->all();
-
-        if (! $this->isInventoryValidate($data)) {
+        if (! $this->isInventoryValidate(request()->all())) {
             session()->flash('error', trans('admin::app.sales.shipments.quantity-invalid'));
 
             return redirect()->back();
         }
 
-        $this->shipmentRepository->create(array_merge($data, ['order_id' => $orderId]));
+        $this->shipmentRepository->create(array_merge(request()->all(), [
+            'order_id' => $orderId,
+        ]));
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Shipment']));
 
@@ -141,7 +141,10 @@ class ShipmentController extends Controller
                             ->where('inventory_source_id', $inventorySourceId)
                             ->sum('qty');
 
-                        if ($child->qty_to_ship < $finalQty || $availableQty < $finalQty) {
+                        if (
+                            $child->qty_to_ship < $finalQty
+                            || $availableQty < $finalQty
+                        ) {
                             return false;
                         }
                     }
@@ -150,7 +153,10 @@ class ShipmentController extends Controller
                         ->where('inventory_source_id', $inventorySourceId)
                         ->sum('qty');
 
-                    if ($orderItem->qty_to_ship < $qty || $availableQty < $qty) {
+                    if (
+                        $orderItem->qty_to_ship < $qty
+                        || $availableQty < $qty
+                    ) {
                         return false;
                     }
                 }

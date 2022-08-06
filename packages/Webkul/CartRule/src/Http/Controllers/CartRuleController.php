@@ -99,9 +99,7 @@ class CartRuleController extends Controller
     public function store(CartRuleRequest $cartRuleRequest)
     {
         try {
-            $data = $cartRuleRequest->all();
-
-            $this->cartRuleRepository->create($data);
+            $this->cartRuleRepository->create($cartRuleRequest->all());
 
             session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Cart Rule']));
 

@@ -62,11 +62,9 @@ class AttributeController extends Controller
             'type'       => 'required',
         ]);
 
-        $data = request()->all();
-
-        $data['is_user_defined'] = 1;
-
-        $this->attributeRepository->create($data);
+        $this->attributeRepository->create(array_merge(request()->all(), [
+            'is_user_defined' => 1,
+        ]));
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Attribute']));
 
@@ -170,12 +168,10 @@ class AttributeController extends Controller
             }
 
             session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
-
-            return redirect()->back();
         } else {
             session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
-
-            return redirect()->back();
         }
+
+        return redirect()->back();
     }
 }
