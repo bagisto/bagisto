@@ -573,6 +573,18 @@ body {
                 right: unset;
             }
         }
+
+        .d-inline-block  {
+            .material-icons {
+                float: right !important;
+                margin-left: 4px !important;
+            }
+        } 
+
+        .rango-delete {
+            float: right !important;
+            margin-left: 4px !important;
+        }
     }
 }
 
