@@ -2,6 +2,7 @@
 
 namespace Webkul\Inventory\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\InventorySourcesDataGrid;
 use Webkul\Inventory\Http\Requests\InventorySourceRequest;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
@@ -57,11 +58,13 @@ class InventorySourceController extends Controller
      */
     public function store(InventorySourceRequest $inventorySourceRequest)
     {
-        $data = $inventorySourceRequest->all();
+        Event::dispatch('inventory.inventory_source.create.before');
 
-        $data['status'] = ! isset($data['status']) ? 0 : 1;
+        $inventorySource = $this->inventorySourceRepository->create(array_merge($inventorySourceRequest->all() ,[
+            'status' => request()->has('status'),
+        ]));
 
-        $this->inventorySourceRepository->create($data);
+        Event::dispatch('inventory.inventory_source.create.after', $inventorySource);
 
         session()->flash('success', trans('admin::app.settings.inventory_sources.create-success'));
 
@@ -89,11 +92,13 @@ class InventorySourceController extends Controller
      */
     public function update(InventorySourceRequest $inventorySourceRequest, $id)
     {
-        $data = $inventorySourceRequest->all();
+        Event::dispatch('inventory.inventory_source.update.before', $id);
 
-        $data['status'] = ! isset($data['status']) ? 0 : 1;
+        $inventorySource = $this->inventorySourceRepository->update(array_merge($inventorySourceRequest->all() ,[
+            'status' => request()->has('status'),
+        ]), $id);
 
-        $this->inventorySourceRepository->update($data, $id);
+        Event::dispatch('inventory.inventory_source.update.after', $inventorySource);
 
         session()->flash('success', trans('admin::app.settings.inventory_sources.update-success'));
 
@@ -115,7 +120,11 @@ class InventorySourceController extends Controller
         }
 
         try {
+            Event::dispatch('inventory.inventory_source.delete.before', $id);
+
             $this->inventorySourceRepository->delete($id);
+
+            Event::dispatch('inventory.inventory_source.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.settings.inventory_sources.delete-success')]);
         } catch (\Exception $e) {

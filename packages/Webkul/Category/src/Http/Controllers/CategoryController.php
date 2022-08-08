@@ -2,6 +2,7 @@
 
 namespace Webkul\Category\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\CategoryDataGrid;
 use Webkul\Admin\DataGrids\CategoryProductDataGrid;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -69,7 +70,11 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $categoryRequest)
     {
-        $this->categoryRepository->create($categoryRequest->all());
+        Event::dispatch('catalog.category.create.before');
+
+        $category = $this->categoryRepository->create($categoryRequest->all());
+
+        Event::dispatch('catalog.category.create.after', $category);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Category']));
 
@@ -115,7 +120,11 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $categoryRequest, $id)
     {
-        $this->categoryRepository->update($categoryRequest->all(), $id);
+        Event::dispatch('catalog.category.update.before', $id);
+
+        $category = $this->categoryRepository->update($categoryRequest->all(), $id);
+
+        Event::dispatch('catalog.category.update.after', $category);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
 
@@ -137,7 +146,11 @@ class CategoryController extends Controller
         }
 
         try {
+            Event::dispatch('catalog.category.delete.before', $id);
+
             $this->categoryRepository->delete($id);
+
+            Event::dispatch('catalog.category.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Category'])]);
         } catch (\Exception $e) {}
@@ -168,7 +181,11 @@ class CategoryController extends Controller
                     try {
                         $suppressFlash = true;
 
+                        Event::dispatch('catalog.category.delete.before', $categoryId);
+
                         $this->categoryRepository->delete($categoryId);
+
+                        Event::dispatch('catalog.category.delete.after', $categoryId);
                     } catch (\Exception $e) {
                         session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
                     }

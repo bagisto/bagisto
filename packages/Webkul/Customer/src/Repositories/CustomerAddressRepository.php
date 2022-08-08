@@ -3,7 +3,6 @@
 namespace Webkul\Customer\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Illuminate\Support\Facades\Event;
 
 class CustomerAddressRepository extends Repository
 {
@@ -23,9 +22,7 @@ class CustomerAddressRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::dispatch('customer.addresses.create.before');
-
-        $data['default_address'] = isset($data['default_address']) ? 1 : 0;
+        $data['default_address'] = isset($data['default_address']);
 
         $default_address = $this
             ->findWhere(['customer_id' => $data['customer_id'], 'default_address' => 1])
@@ -40,8 +37,6 @@ class CustomerAddressRepository extends Repository
 
         $address = $this->model->create($data);
 
-        Event::dispatch('customer.addresses.create.after', $address);
-
         return $address;
     }
 
@@ -54,9 +49,7 @@ class CustomerAddressRepository extends Repository
     {
         $address = $this->find($id);
 
-        Event::dispatch('customer.addresses.update.before', $id);
-
-        $data['default_address'] = isset($data['default_address']) ? 1 : 0;
+        $data['default_address'] = isset($data['default_address']);
 
         $default_address = $this
             ->findWhere(['customer_id' => $address->customer_id, 'default_address' => 1])
@@ -74,8 +67,6 @@ class CustomerAddressRepository extends Repository
         } else {
             $address->update($data);
         }
-
-        Event::dispatch('customer.addresses.update.after', $id);
 
         return $address;
     }

@@ -3,8 +3,9 @@
 namespace Webkul\CartRule\Http\Controllers;
 
 use Exception;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\CartRuleDataGrid;
 use Webkul\CartRule\Http\Requests\CartRuleRequest;
@@ -99,7 +100,11 @@ class CartRuleController extends Controller
     public function store(CartRuleRequest $cartRuleRequest)
     {
         try {
-            $this->cartRuleRepository->create($cartRuleRequest->all());
+            Event::dispatch('promotions.cart_rule.create.before');
+
+            $cartRule = $this->cartRuleRepository->create($cartRuleRequest->all());
+
+            Event::dispatch('promotions.cart_rule.create.after', $cartRule);
 
             session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Cart Rule']));
 
@@ -150,7 +155,11 @@ class CartRuleController extends Controller
                 }
             }
 
+            Event::dispatch('promotions.cart_rule.update.before', $id);
+
             $cartRule = $this->cartRuleRepository->update($cartRuleRequest->all(), $id);
+
+            Event::dispatch('promotions.cart_rule.update.after', $cartRule);
 
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Cart Rule']));
 
@@ -175,7 +184,11 @@ class CartRuleController extends Controller
         $this->cartRuleRepository->findOrFail($id);
 
         try {
+            Event::dispatch('promotions.cart_rule.delete.before', $id);
+
             $this->cartRuleRepository->delete($id);
+
+            Event::dispatch('promotions.cart_rule.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Cart Rule'])]);
         } catch (Exception $e) {}

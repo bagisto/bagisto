@@ -3,7 +3,7 @@
 namespace Webkul\Velocity\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Illuminate\Container\Container as App;
+use Illuminate\Container\Container;
 use Prettus\Repository\Traits\CacheableRepository;
 
 class CategoryRepository extends Repository
@@ -14,15 +14,15 @@ class CategoryRepository extends Repository
      * Create a new repository instance.
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Illuminate\Container\Container  $app
+     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected CategoryRepository $categoryRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**

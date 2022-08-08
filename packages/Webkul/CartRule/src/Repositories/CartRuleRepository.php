@@ -2,8 +2,7 @@
 
 namespace Webkul\CartRule\Repositories;
 
-use Illuminate\Container\Container as App;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Container\Container;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
@@ -24,7 +23,7 @@ class CartRuleRepository extends Repository
      * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
      * @param  \Webkul\Core\Repositories\CountryRepository  $countryRepository
      * @param  \Webkul\Core\Repositories\CountryStateRepository  $countryStateRepository
-     * @param  \Illuminate\Container\Container  $app
+     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
@@ -35,10 +34,10 @@ class CartRuleRepository extends Repository
         protected TaxCategoryRepository $taxCategoryRepository,
         protected CountryRepository $countryRepository,
         protected CountryStateRepository $countryStateRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**
@@ -57,8 +56,6 @@ class CartRuleRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::dispatch('promotions.cart_rule.create.before');
-
         $data['starts_from'] = isset($data['starts_from']) && $data['starts_from'] ? $data['starts_from'] : null;
 
         $data['ends_till'] = isset($data['ends_till']) && $data['ends_till'] ? $data['ends_till'] : null;
@@ -85,8 +82,6 @@ class CartRuleRepository extends Repository
             ]);
         }
 
-        Event::dispatch('promotions.cart_rule.create.after', $cartRule);
-
         return $cartRule;
     }
 
@@ -98,7 +93,6 @@ class CartRuleRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
-        Event::dispatch('promotions.cart_rule.update.before', $id);
 
         $data = array_merge($data, [
             'starts_from' => $data['starts_from'] ?: null,
@@ -141,7 +135,7 @@ class CartRuleRepository extends Repository
                 }
             } else {
                 $this->cartRuleCouponRepository->deleteWhere([
-                    'is_primary' => 1,
+                    'is_primary'   => 1,
                     'cart_rule_id' => $cartRule->id,
                 ]);
 
@@ -155,24 +149,7 @@ class CartRuleRepository extends Repository
             $cartRuleCoupon = $this->cartRuleCouponRepository->deleteWhere(['is_primary' => 1, 'cart_rule_id' => $cartRule->id]);
         }
 
-        Event::dispatch('promotions.cart_rule.update.after', $cartRule);
-
         return $cartRule;
-    }
-
-    /**
-     * Delete.
-     *
-     * @param  $id
-     * @return int
-     */
-    public function delete($id)
-    {
-        Event::dispatch('promotions.cart_rule.delete.before', $id);
-
-        parent::delete($id);
-
-        Event::dispatch('promotions.cart_rule.delete.after', $id);
     }
 
     /**

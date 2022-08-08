@@ -3,7 +3,6 @@
 namespace Webkul\Attribute\Repositories;
 
 use Illuminate\Container\Container;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -44,8 +43,6 @@ class AttributeFamilyRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::dispatch('catalog.attribute_family.create.before');
-
         $attributeGroups = isset($data['attribute_groups']) ? $data['attribute_groups'] : [];
 
         unset($data['attribute_groups']);
@@ -70,8 +67,6 @@ class AttributeFamilyRepository extends Repository
             }
         }
 
-        Event::dispatch('catalog.attribute_family.create.after', $family);
-
         return $family;
     }
 
@@ -84,9 +79,7 @@ class AttributeFamilyRepository extends Repository
     public function update(array $data, $id, $attribute = "id")
     {
         $family = $this->find($id);
-
-        Event::dispatch('catalog.attribute_family.update.before', $id);
-
+        
         $family->update($data);
 
         $previousAttributeGroupIds = $family->attribute_groups()->pluck('id');
@@ -137,8 +130,6 @@ class AttributeFamilyRepository extends Repository
             $this->attributeGroupRepository->delete($attributeGroupId);
         }
 
-        Event::dispatch('catalog.attribute_family.update.after', $family);
-
         return $family;
     }
 
@@ -166,18 +157,5 @@ class AttributeFamilyRepository extends Repository
         }
 
         return $trimmed;
-    }
-
-    /**
-     * @param  int  $id
-     * @return void
-     */
-    public function delete($id)
-    {
-        Event::dispatch('catalog.attribute_family.delete.before', $id);
-
-        parent::delete($id);
-
-        Event::dispatch('catalog.attribute_family.delete.after', $id);
     }
 }

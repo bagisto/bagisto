@@ -2,7 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers\Customer;
 
-use Mail;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\DataGrids\CustomerDataGrid;
 use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
 use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
@@ -77,10 +78,14 @@ class CustomerController extends Controller
 
         $password = rand(100000, 10000000);
 
+        Event::dispatch('customer.registration.before');
+
         $customer = $this->customerRepository->create(array_merge(request()->all() , [
             'password'    => bcrypt($password),
             'is_verified' => 1,
         ]));
+
+        Event::dispatch('customer.registration.after', $customer);
 
         try {
             $configKey = 'emails.general.notifications.emails.general.notifications.customer';
@@ -128,10 +133,14 @@ class CustomerController extends Controller
             'date_of_birth' => 'date|before:today',
         ]);
 
-        $this->customerRepository->update(array_merge(request()->all(), [
-            'status'       => isset($data['status']),
-            'is_suspended' => isset($data['is_suspended']),
+        Event::dispatch('customer.update.before', $id);
+        
+        $customer = $this->customerRepository->update(array_merge(request()->all(), [
+            'status'       => request()->has('status'),
+            'is_suspended' => request()->has('is_suspended'),
         ]), $id);
+
+        Event::dispatch('customer.update.after', $customer);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer']));
 
@@ -185,9 +194,13 @@ class CustomerController extends Controller
             'notes' => 'string|nullable',
         ]);
 
-        $customer = $this->customerRepository->find(request()->input('_customer'));
+        Event::dispatch('customer.update.before', request()->input('_customer'));
 
-        $noteTaken = $customer->update(['notes' => request()->input('notes')]);
+        $customer = $this->customerRepository->update([
+            'notes' => request()->input('notes'),
+        ], request()->input('_customer'));
+
+        Event::dispatch('customer.update.after', $customer);
 
         session()->flash('success', 'Note taken');
 
@@ -206,9 +219,13 @@ class CustomerController extends Controller
         $updateOption = request()->input('update-options');
 
         foreach ($customerIds as $customerId) {
-            $customer = $this->customerRepository->find($customerId);
+            Event::dispatch('customer.update.before', $customerId);
 
-            $customer->update(['status' => $updateOption]);
+            $customer = $this->customerRepository->update([
+                'status' => $updateOption,
+            ], $customerId);
+
+            Event::dispatch('customer.update.after', $customer);
         }
 
         session()->flash('success', trans('admin::app.customers.customers.mass-update-success'));
@@ -226,9 +243,12 @@ class CustomerController extends Controller
         $customerIds = explode(',', request()->input('indexes'));
 
         if (! $this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
-
             foreach ($customerIds as $customerId) {
-                $this->customerRepository->deleteWhere(['id' => $customerId]);
+                Event::dispatch('customer.delete.before', $customerId);
+                
+                $this->customerRepository->delete($customerId);
+
+                Event::dispatch('customer.delete.after', $customerId);
             }
 
             session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));

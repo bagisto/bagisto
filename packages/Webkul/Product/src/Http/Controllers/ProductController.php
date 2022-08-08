@@ -118,7 +118,11 @@ class ProductController extends Controller
             'sku'                 => ['required', 'unique:products,sku', new Slug],
         ]);
 
+        Event::dispatch('catalog.product.create.before');
+
         $product = $this->productRepository->create(request()->all());
+
+        Event::dispatch('catalog.product.create.after', $product);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Product']));
 
@@ -151,7 +155,11 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
-        $this->productRepository->update(request()->all(), $id);
+        Event::dispatch('catalog.product.update.before', $id);
+
+        $product = $this->productRepository->update(request()->all(), $id);
+
+        Event::dispatch('catalog.product.update.after', $product);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
 
@@ -257,7 +265,11 @@ class ProductController extends Controller
         $product = $this->productRepository->findOrFail($id);
 
         try {
+            Event::dispatch('catalog.product.delete.before', $id);
+
             $this->productRepository->delete($id);
+
+            Event::dispatch('catalog.product.delete.after', $id);
 
             return response()->json([
                 'message' => trans('admin::app.response.delete-success', ['name' => 'Product']),
@@ -284,7 +296,11 @@ class ProductController extends Controller
             $product = $this->productRepository->find($productId);
 
             if (isset($product)) {
+                Event::dispatch('catalog.product.delete.before', $productId);
+
                 $this->productRepository->delete($productId);
+
+                Event::dispatch('catalog.product.delete.after', $productId);
             }
         }
 
@@ -313,11 +329,15 @@ class ProductController extends Controller
         $productIds = explode(',', $data['indexes']);
 
         foreach ($productIds as $productId) {
-            $this->productRepository->update([
+            Event::dispatch('catalog.product.update.before', $id);
+
+            $product = $this->productRepository->update([
                 'channel' => null,
                 'locale'  => null,
                 'status'  => $data['update-options'],
             ], $productId);
+
+            Event::dispatch('catalog.product.update.after', $product);
         }
 
         session()->flash('success', trans('admin::app.catalog.products.mass-update-success'));

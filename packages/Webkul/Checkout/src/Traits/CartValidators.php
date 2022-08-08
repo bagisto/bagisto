@@ -39,7 +39,8 @@ trait CartValidators
     {
         if (
             ! $this->getCart()
-            || ! $this->isItemsHaveSufficientQuantity()) {
+            || ! $this->isItemsHaveSufficientQuantity()
+        ) {
             return true;
         }
 

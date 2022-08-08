@@ -2,7 +2,6 @@
 
 namespace Webkul\Sales\Repositories;
 
-use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\InvoiceItem;

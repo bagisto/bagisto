@@ -99,15 +99,17 @@ class ProductImage extends AbstractProduct
     {
         static $loadedBaseImages = [];
 
-        if ($product) {
-            if (array_key_exists($product->id, $loadedBaseImages)) {
-                return $loadedBaseImages[$product->id];
-            }
-
-            return $loadedBaseImages[$product->id] = $galleryImages
-                ? $galleryImages[0]
-                : $this->otherwiseLoadFromProduct($product);
+        if (! $product) {
+            return;
         }
+
+        if (array_key_exists($product->id, $loadedBaseImages)) {
+            return $loadedBaseImages[$product->id];
+        }
+
+        return $loadedBaseImages[$product->id] = $galleryImages
+            ? $galleryImages[0]
+            : $this->otherwiseLoadFromProduct($product);
     }
 
     /**

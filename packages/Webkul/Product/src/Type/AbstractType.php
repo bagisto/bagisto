@@ -558,7 +558,7 @@ abstract class AbstractType
      *
      * @return float
      */
-    public function getMaximamPrice()
+    public function getMaximumPrice()
     {
         return $this->getMinimalPrice();
     }

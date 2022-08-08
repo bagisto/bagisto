@@ -2,7 +2,7 @@
 
 namespace Webkul\Sales\Repositories;
 
-use Illuminate\Container\Container as App;
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
@@ -18,7 +18,7 @@ class InvoiceRepository extends Repository
      * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
      * @param  \Webkul\Sales\Repositories\InvoiceItemRepository  $invoiceItemRepository
      * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
-     * @param  \Illuminate\Container\Container  $app
+     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
@@ -26,10 +26,10 @@ class InvoiceRepository extends Repository
         protected OrderItemRepository $orderItemRepository,
         protected InvoiceItemRepository $invoiceItemRepository,
         protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**

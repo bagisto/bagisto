@@ -61,7 +61,11 @@ class ReviewController extends Controller
      */
     public function update($id)
     {
-        $this->productReviewRepository->update(request()->all(), $id);
+        Event::dispatch('customer.review.update.before', $id);
+
+        $review = $this->productReviewRepository->update(request()->all(), $id);
+
+        Event::dispatch('customer.review.update.after', $review);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Review']));
 
@@ -79,7 +83,11 @@ class ReviewController extends Controller
         $this->productReviewRepository->findOrFail($id);
 
         try {
+            Event::dispatch('customer.review.delete.before', $id);
+
             $this->productReviewRepository->delete($id);
+
+            Event::dispatch('customer.review.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Review'])]);
         } catch (\Exception $e) {
@@ -99,13 +107,15 @@ class ReviewController extends Controller
         $suppressFlash = false;
 
         if (request()->isMethod('post')) {
-            $data = request()->all();
-
             $indexes = explode(',', request()->input('indexes'));
 
-            foreach ($indexes as $key => $value) {
+            foreach ($indexes as $index) {
                 try {
-                    $this->productReviewRepository->delete($value);
+                    Event::dispatch('customer.review.delete.before', $index);
+
+                    $this->productReviewRepository->delete($index);
+
+                    Event::dispatch('customer.review.delete.after', $index);
                 } catch (\Exception $e) {
                     $suppressFlash = true;
 

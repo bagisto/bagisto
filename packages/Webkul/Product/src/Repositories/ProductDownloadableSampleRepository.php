@@ -25,15 +25,15 @@ class ProductDownloadableSampleRepository extends Repository
      */
     public function upload($data, $productId)
     {
-        if (request()->hasFile('file')) {
-            return [
-                'file'      => $path = request()->file('file')->store('product_downloadable_links/' . $productId),
-                'file_name' => request()->file('file')->getClientOriginalName(),
-                'file_url'  => Storage::url($path),
-            ];
+        if (! request()->hasFile('file')) {
+            return [];
         }
 
-        return [];
+        return [
+            'file'      => $path = request()->file('file')->store('product_downloadable_links/' . $productId),
+            'file_name' => request()->file('file')->getClientOriginalName(),
+            'file_url'  => Storage::url($path),
+        ];
     }
 
     /**

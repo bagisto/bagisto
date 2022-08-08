@@ -2,7 +2,7 @@
 
 namespace Webkul\BookingProduct\Repositories;
 
-use Illuminate\Container\Container as App;
+use Illuminate\Container\Container;
 use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
 
@@ -21,6 +21,7 @@ class BookingProductRepository extends Repository
      * @param  \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository  $bookingProductEventTicketRepository
      * @param  \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository  $bookingProductRentalSlotRepository
      * @param  \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository  $bookingProductTableSlotRepository
+     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
@@ -29,10 +30,10 @@ class BookingProductRepository extends Repository
         BookingProductEventTicketRepository $bookingProductEventTicketRepository,
         BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
         BookingProductTableSlotRepository $bookingProductTableSlotRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
 
         $this->typeRepositories['default'] = $bookingProductDefaultSlotRepository;
 

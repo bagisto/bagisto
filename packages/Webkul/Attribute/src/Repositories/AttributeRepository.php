@@ -3,7 +3,6 @@
 namespace Webkul\Attribute\Repositories;
 
 use Illuminate\Container\Container;
-use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Core\Eloquent\Repository;
 
@@ -42,8 +41,6 @@ class AttributeRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::dispatch('catalog.attribute.create.before');
-
         $data = $this->validateUserInput($data);
 
         $options = isset($data['options']) ? $data['options'] : [];
@@ -63,8 +60,6 @@ class AttributeRepository extends Repository
             }
         }
 
-        Event::dispatch('catalog.attribute.create.after', $attribute);
-
         return $attribute;
     }
 
@@ -82,23 +77,21 @@ class AttributeRepository extends Repository
 
         $attribute = $this->find($id);
 
-        Event::dispatch('catalog.attribute.update.before', $id);
-
-        $data['enable_wysiwyg'] = ! isset($data['enable_wysiwyg']) ? 0 : 1;
+        $data['enable_wysiwyg'] = isset($data['enable_wysiwyg']);
 
         $attribute->update($data);
 
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
             if (isset($data['options'])) {
                 foreach ($data['options'] as $optionId => $optionInputs) {
-                    $isNew = $optionInputs['isNew'] == 'true' ? true : false;
+                    $isNew = $optionInputs['isNew'] == 'true';
 
                     if ($isNew) {
                         $this->attributeOptionRepository->create(array_merge([
                             'attribute_id' => $attribute->id,
                         ], $optionInputs));
                     } else {
-                        $isDelete = $optionInputs['isDelete'] == 'true' ? true : false;
+                        $isDelete = $optionInputs['isDelete'] == 'true';
 
                         if ($isDelete) {
                             $this->attributeOptionRepository->delete($optionId);
@@ -110,24 +103,7 @@ class AttributeRepository extends Repository
             }
         }
 
-        Event::dispatch('catalog.attribute.update.after', $attribute);
-
         return $attribute;
-    }
-
-    /**
-     * Delete attribute.
-     *
-     * @param  int  $id
-     * @return void
-     */
-    public function delete($id)
-    {
-        Event::dispatch('catalog.attribute.delete.before', $id);
-
-        parent::delete($id);
-
-        Event::dispatch('catalog.attribute.delete.after', $id);
     }
 
     /**
@@ -267,12 +243,11 @@ class AttributeRepository extends Repository
                 )
             ) {
                 array_push($trimmed, [
-                    'id'          => $attribute->id,
-                    'name'        => $attribute->admin_name,
-                    'type'        => $attribute->type,
-                    'code'        => $attribute->code,
-                    'has_options' => $attribute->options()->exists(),
-                    'options'     => $attribute->options,
+                    'id'      => $attribute->id,
+                    'name'    => $attribute->admin_name,
+                    'type'    => $attribute->type,
+                    'code'    => $attribute->code,
+                    'options' => $attribute->options,
                 ]);
             }
         }

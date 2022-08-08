@@ -73,6 +73,7 @@ class SmartButton extends Paypal
         $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
         $request->prefer('return=representation');
         $request->body = $body;
+
         return $this->client()->execute($request);
     }
 
@@ -85,8 +86,10 @@ class SmartButton extends Paypal
     public function captureOrder($orderId)
     {
         $request = new OrdersCaptureRequest($orderId);
+
         $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
         $request->prefer('return=representation');
+
         $this->client()->execute($request);
     }
 
@@ -110,6 +113,7 @@ class SmartButton extends Paypal
     public function getCaptureId($orderId)
     {
         $paypalOrderDetails = $this->getOrder($orderId);
+
         return $paypalOrderDetails->result->purchase_units[0]->payments->captures[0]->id;
     }
 
@@ -121,8 +125,10 @@ class SmartButton extends Paypal
     public function refundOrder($captureId, $body = [])
     {
         $request = new CapturesRefundRequest($captureId);
+
         $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
         $request->body = $body;
+        
         return $this->client()->execute($request);
     }
 

@@ -61,11 +61,11 @@ class Simple extends AbstractType
      */
     public function haveSufficientQuantity(int $qty): bool
     {
-        $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
+        $backOrders = core()->getConfigData('catalog.inventory.stock_options.backorders');
 
-        $backorders = ! is_null($backorders) ? $backorders : false;
+        $backOrders = ! is_null($backOrders) ? $backOrders : false;
 
-        return $qty <= $this->totalQuantity() ? true : $backorders;
+        return $qty <= $this->totalQuantity() ? true : $backOrders;
     }
 
     /**
@@ -73,7 +73,7 @@ class Simple extends AbstractType
      *
      * @return float
      */
-    public function getMaximamPrice()
+    public function getMaximumPrice()
     {
         return $this->product->price;
     }

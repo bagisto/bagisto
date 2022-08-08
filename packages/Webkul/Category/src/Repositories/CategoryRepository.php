@@ -4,7 +4,6 @@ namespace Webkul\Category\Repositories;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Models\CategoryTranslationProxy;
 use Webkul\Core\Eloquent\Repository;
@@ -29,8 +28,6 @@ class CategoryRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::dispatch('catalog.category.create.before');
-
         if (
             isset($data['locale'])
             && $data['locale'] == 'all'
@@ -56,8 +53,6 @@ class CategoryRepository extends Repository
             $category->filterableAttributes()->sync($data['attributes']);
         }
 
-        Event::dispatch('catalog.category.create.after', $category);
-
         return $category;
     }
 
@@ -73,8 +68,6 @@ class CategoryRepository extends Repository
     {
         $category = $this->find($id);
 
-        Event::dispatch('catalog.category.update.before', $id);
-
         $data = $this->setSameAttributeValueToAllLocale($data, 'slug');
 
         $category->update($data);
@@ -85,24 +78,7 @@ class CategoryRepository extends Repository
             $category->filterableAttributes()->sync($data['attributes']);
         }
 
-        Event::dispatch('catalog.category.update.after', $id);
-
         return $category;
-    }
-
-    /**
-     * Delete category.
-     *
-     * @param  int  $id
-     * @return void
-     */
-    public function delete($id)
-    {
-        Event::dispatch('catalog.category.delete.before', $id);
-
-        parent::delete($id);
-
-        Event::dispatch('catalog.category.delete.after', $id);
     }
 
     /**
@@ -175,7 +151,7 @@ class CategoryRepository extends Repository
             ->select(DB::raw(1))
             ->exists();
 
-        return $exists ? false : true;
+        return ! $exists;
     }
 
     /**

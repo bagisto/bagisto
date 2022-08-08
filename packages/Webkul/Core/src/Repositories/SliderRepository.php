@@ -2,13 +2,13 @@
 
 namespace Webkul\Core\Repositories;
 
-use Carbon\Carbon;
-use Illuminate\Support\Arr;
-use Webkul\Core\Eloquent\Repository;
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Container\Container as App;
+use Illuminate\Support\Arr;
 use Prettus\Repository\Traits\CacheableRepository;
+use Carbon\Carbon;
+use Webkul\Core\Eloquent\Repository;
 
 class SliderRepository extends Repository
 {
@@ -18,15 +18,15 @@ class SliderRepository extends Repository
      * Create a new repository instance.
      *
      * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
-     * @param  \Illuminate\Container\Container  $channelRepository
+     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected ChannelRepository $channelRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**

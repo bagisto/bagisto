@@ -261,7 +261,7 @@ class ProductFlat
 
                     $productFlat->min_price = $product->getTypeInstance()->getMinimalPrice();
 
-                    $productFlat->max_price = $product->getTypeInstance()->getMaximamPrice();
+                    $productFlat->max_price = $product->getTypeInstance()->getMaximumPrice();
 
                     if ($parentProduct) {
                         $parentProductFlat = $this->productFlatRepository->findOneWhere([

@@ -2,7 +2,7 @@
 
 namespace Webkul\Sales\Repositories;
 
-use Illuminate\Container\Container as App;
+use Illuminate\Container\Container;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\DownloadableLinkPurchased;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
@@ -13,14 +13,15 @@ class DownloadableLinkPurchasedRepository extends Repository
      * Create a new repository instance.
      *
      * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
+     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**

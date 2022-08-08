@@ -37,7 +37,7 @@ class SubscriptionController extends Controller
         $alreadySubscribed = $this->subscriptionRepository->findWhere(['email' => $email]);
 
         $unique = function () use ($alreadySubscribed) {
-            return $alreadySubscribed->count() > 0 ? 0 : 1;
+            return ! $alreadySubscribed->count();
         };
 
         if ($unique()) {

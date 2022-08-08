@@ -3,12 +3,11 @@
 namespace Webkul\Product\Repositories;
 
 use Exception;
-use Illuminate\Container\Container as App;
+use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Attribute\Models\Attribute;
@@ -24,16 +23,16 @@ class ProductRepository extends Repository
      * Create a new repository instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Illuminate\Container\Container  $app
+     * @param  \Illuminate\Container\Container  $container
      *
      * @return void
      */
     public function __construct(
         protected AttributeRepository $attributeRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**
@@ -54,13 +53,9 @@ class ProductRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::dispatch('catalog.product.create.before');
-
         $typeInstance = app(config('product_types.' . $data['type'] . '.class'));
 
         $product = $typeInstance->create($data);
-
-        Event::dispatch('catalog.product.create.after', $product);
 
         return $product;
     }
@@ -75,8 +70,6 @@ class ProductRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
-        Event::dispatch('catalog.product.update.before', $id);
-
         $product = $this->findOrFail($id);
 
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
@@ -85,24 +78,7 @@ class ProductRepository extends Repository
             $product['channels'] = $data['channels'];
         }
 
-        Event::dispatch('catalog.product.update.after', $product);
-
         return $product;
-    }
-
-    /**
-     * Delete product.
-     *
-     * @param  int  $id
-     * @return void
-     */
-    public function delete($id)
-    {
-        Event::dispatch('catalog.product.delete.before', $id);
-
-        parent::delete($id);
-
-        Event::dispatch('catalog.product.delete.after', $id);
     }
 
     /**

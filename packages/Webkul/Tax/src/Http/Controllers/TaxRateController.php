@@ -2,6 +2,7 @@
 
 namespace Webkul\Tax\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Validators\Failure;
 use Webkul\Admin\DataGrids\TaxRateDataGrid;
@@ -81,7 +82,11 @@ class TaxRateController extends Controller
             unset($data['zip_code']);
         }
 
-        $this->taxRateRepository->create($data);
+        Event::dispatch('tax.tax_rate.create.before');
+        
+        $taxRate = $this->taxRateRepository->create($data);
+
+        Event::dispatch('tax.tax_rate.create.after', $taxRate);
 
         session()->flash('success', trans('admin::app.settings.tax-rates.create-success'));
 
@@ -119,7 +124,11 @@ class TaxRateController extends Controller
             'tax_rate'   => 'required|numeric|min:0.0001',
         ]);
 
-        $this->taxRateRepository->update(request()->input(), $id);
+        Event::dispatch('tax.tax_rate.update.before', $id);
+
+        $taxRate = $this->taxRateRepository->update(request()->input(), $id);
+
+        Event::dispatch('tax.tax_rate.update.after', $taxRate);
 
         session()->flash('success', trans('admin::app.settings.tax-rates.update-success'));
 
@@ -137,7 +146,11 @@ class TaxRateController extends Controller
         $this->taxRateRepository->findOrFail($id);
 
         try {
+            Event::dispatch('tax.tax_rate.delete.before', $id);
+
             $this->taxRateRepository->delete($id);
+
+            Event::dispatch('tax.tax_rate.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Tax Rate'])]);
         } catch (\Exception $e) {}

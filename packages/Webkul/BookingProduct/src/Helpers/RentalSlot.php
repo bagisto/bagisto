@@ -33,16 +33,16 @@ class RentalSlot extends Booking
         $currentTime = Carbon::now();
 
         $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                         ? Carbon::createFromTimeString($bookingProduct->available_from)
-                         : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
+            ? Carbon::createFromTimeString($bookingProduct->available_from)
+            : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
 
         $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                       ? Carbon::createFromTimeString($bookingProduct->available_to)
-                       : Carbon::createFromTimeString('2080-01-01 00:00:00');
+            ? Carbon::createFromTimeString($bookingProduct->available_to)
+            : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         $timeDurations = $bookingProductSlot->same_slot_all_days
-                         ? $bookingProductSlot->slots
-                         : $bookingProductSlot->slots[$requestedDate->format('w')] ?? [];
+            ? $bookingProductSlot->slots
+            : $bookingProductSlot->slots[$requestedDate->format('w')] ?? [];
 
         if (
             $requestedDate < $availableFrom
@@ -139,18 +139,18 @@ class RentalSlot extends Booking
         }
 
         $result = $this->bookingRepository->getModel()
-                       ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
-                       ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
-                       ->where('bookings.product_id', $data['product_id'])
-                       ->where(function ($query) use($from, $to) {
-                           $query->where(function ($query) use($from) {
-                               $query->where('bookings.from', '<=', $from)->where('bookings.to', '>=', $from);
-                           })
-                           ->orWhere(function($query) use($to) {
-                               $query->where('bookings.from', '<=', $to)->where('bookings.to', '>=', $to);
-                           });
-                       })
-                       ->first();
+            ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+            ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
+            ->where('bookings.product_id', $data['product_id'])
+            ->where(function ($query) use($from, $to) {
+                $query->where(function ($query) use($from) {
+                    $query->where('bookings.from', '<=', $from)->where('bookings.to', '>=', $from);
+                })
+                ->orWhere(function($query) use($to) {
+                    $query->where('bookings.from', '<=', $to)->where('bookings.to', '>=', $to);
+                });
+            })
+            ->first();
 
         return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
     }
@@ -187,12 +187,12 @@ class RentalSlot extends Booking
             $requestedToDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_to'] . " 23:59:59");
 
             $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                        ? Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d') . ' 00:00:00')
-                        : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
+                ? Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d') . ' 00:00:00')
+                : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
 
             $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                    ? Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d') . ' 23:59:59')
-                    : Carbon::createFromTimeString('2080-01-01 00:00:00');
+                ? Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d') . ' 23:59:59')
+                : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
             if (
                 $requestedFromDate < $availableFrom

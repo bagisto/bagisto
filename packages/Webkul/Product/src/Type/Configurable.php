@@ -588,7 +588,7 @@ class Configurable extends AbstractType
      *
      * @return float
      */
-    public function getMaximamPrice()
+    public function getMaximumPrice()
     {
         static $maxPrice = null;
 

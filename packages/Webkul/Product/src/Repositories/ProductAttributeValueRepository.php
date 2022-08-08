@@ -2,10 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Container\Container as App;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Product\Models\ProductAttributeValueProxy;
 
 class ProductAttributeValueRepository extends Repository
 {
@@ -30,6 +27,6 @@ class ProductAttributeValueRepository extends Repository
     {
         $result = $this->resetScope()->model->where($column, $value)->where('attribute_id', '=', $attributeId)->where('product_id', '!=', $productId)->get();
 
-        return $result->count() ? false : true;
+        return ! $result->count();
     }
 }

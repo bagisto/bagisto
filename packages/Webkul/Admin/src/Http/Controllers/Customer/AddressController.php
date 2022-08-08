@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Customer;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Rules\VatIdRule;
 use Webkul\Admin\DataGrids\AddressDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -84,15 +85,15 @@ class AddressController extends Controller
             'vat_id'       => new VatIdRule(),
         ]);
 
-        if ($this->customerAddressRepository->create(request()->all())) {
-            session()->flash('success', trans('admin::app.customers.addresses.success-create'));
+        Event::dispatch('customer.addresses.create.before');
 
-            return redirect()->route('admin.customer.edit', ['id' => request('customer_id')]);
-        } else {
-            session()->flash('success', trans('admin::app.customers.addresses.error-create'));
+        $customerAddress = $this->customerAddressRepository->create(request()->all());
 
-            return redirect()->back();
-        }
+        Event::dispatch('customer.addresses.create.after', $customerAddress);
+        
+        session()->flash('success', trans('admin::app.customers.addresses.success-create'));
+
+        return redirect()->route('admin.customer.edit', ['id' => request('customer_id')]);
     }
 
     /**
@@ -129,7 +130,11 @@ class AddressController extends Controller
             'vat_id'       => new VatIdRule(),
         ]);
 
-        $this->customerAddressRepository->update(request()->all(), $id);
+        Event::dispatch('customer.addresses.update.before', $id);
+
+        $customerAddress = $this->customerAddressRepository->update(request()->all(), $id);
+
+        Event::dispatch('customer.addresses.update.after', $customerAddress);
 
         session()->flash('success', trans('admin::app.customers.addresses.success-update'));
 
@@ -144,7 +149,11 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
+        Event::dispatch('customer.addresses.delete.before', $id);
+
         $this->customerAddressRepository->delete($id);
+
+        Event::dispatch('customer.addresses.delete.after', $id);
 
         return response()->json([
             'redirect' => false,
@@ -163,7 +172,11 @@ class AddressController extends Controller
         $addressIds = explode(',', request()->input('indexes'));
 
         foreach ($addressIds as $addressId) {
+            Event::dispatch('customer.addresses.delete.before', $addressId);
+
             $this->customerAddressRepository->delete($addressId);
+
+            Event::dispatch('customer.addresses.delete.after', $addressId);
         }
 
         session()->flash('success', trans('admin::app.customers.addresses.success-mass-delete'));

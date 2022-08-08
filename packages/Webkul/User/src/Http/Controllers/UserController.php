@@ -79,7 +79,11 @@ class UserController extends Controller
             $data['api_token'] = Str::random(80);
         }
 
-        $this->adminRepository->create($data);
+        Event::dispatch('user.admin.create.before');
+
+        $admin = $this->adminRepository->create($data);
+
+        Event::dispatch('user.admin.create.after', $admin);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'User']));
 
@@ -116,7 +120,18 @@ class UserController extends Controller
             return $data;
         }
 
-        $this->adminRepository->update($data, $id);
+        Event::dispatch('user.admin.update.before', $id);
+
+        $admin = $this->adminRepository->update($data, $id);
+
+        if (
+            isset($data['password'])
+            && $data['password']
+        ) {
+            Event::dispatch('user.admin.update-password', $admin);
+        }
+
+        Event::dispatch('user.admin.update.after', $admin);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'User']));
 
@@ -144,7 +159,11 @@ class UserController extends Controller
         }
 
         try {
+            Event::dispatch('user.admin.delete.before', $id);
+
             $this->adminRepository->delete($id);
+
+            Event::dispatch('user.admin.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Admin'])]);
         } catch (\Exception $e) {}
@@ -222,7 +241,7 @@ class UserController extends Controller
         /**
          * Is user with `permission_type` all changed status.
          */
-        $data['status'] = isset($data['status']) ? 1 : 0;
+        $data['status'] = isset($data['status']);
 
         $isStatusChangedToInactive = (int) $data['status'] === 0 && (int) $user->status === 1;
 

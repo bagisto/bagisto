@@ -108,9 +108,7 @@ class ProductMediaRepository extends Repository
     {
         if ($uploadFileType === 'images') {
             return $product->images();
-        }
-
-        if ($uploadFileType === 'videos') {
+        } elseif ($uploadFileType === 'videos') {
             return $product->videos();
         }
 

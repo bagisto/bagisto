@@ -91,11 +91,11 @@ class EventTicket extends Booking
     public function getBookedQuantity($data)
     {
         $result = $this->bookingRepository->getModel()
-                       ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
-                       ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
-                       ->where('bookings.product_id', $data['product_id'])
-                       ->where('bookings.booking_product_event_ticket_id', $data['additional']['booking']['ticket_id'])
-                       ->first();
+            ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+            ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
+            ->where('bookings.product_id', $data['product_id'])
+            ->where('bookings.booking_product_event_ticket_id', $data['additional']['booking']['ticket_id'])
+            ->first();
 
         return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
     }
@@ -114,6 +114,7 @@ class EventTicket extends Booking
             $ticket = $bookingProduct->event_tickets()->find($product['additional']['booking']['ticket_id']);
 
             $price = $ticket->price;
+            
             if ($this->isInSale($ticket)) {
                 $price = $ticket->special_price;
             }

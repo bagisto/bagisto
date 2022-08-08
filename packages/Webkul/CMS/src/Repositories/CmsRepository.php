@@ -2,7 +2,6 @@
 
 namespace Webkul\CMS\Repositories;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\CMS\Models\CmsPageTranslationProxy;
@@ -25,8 +24,6 @@ class CmsRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::dispatch('cms.pages.create.before');
-
         $model = $this->getModel();
 
         foreach (core()->getAllLocales() as $locale) {
@@ -43,8 +40,6 @@ class CmsRepository extends Repository
 
         $page->channels()->sync($data['channels']);
 
-        Event::dispatch('cms.pages.create.after', $page);
-
         return $page;
     }
 
@@ -58,8 +53,6 @@ class CmsRepository extends Repository
     {
         $page = $this->find($id);
 
-        Event::dispatch('cms.pages.update.before', $id);
-
         $locale = isset($data['locale']) ? $data['locale'] : app()->getLocale();
 
         $data[$locale]['html_content'] = str_replace('=&gt;', '=>', $data[$locale]['html_content']);
@@ -67,8 +60,6 @@ class CmsRepository extends Repository
         parent::update($data, $id, $attribute);
 
         $page->channels()->sync($data['channels']);
-
-        Event::dispatch('cms.pages.update.after', $id);
 
         return $page;
     }
@@ -88,7 +79,7 @@ class CmsRepository extends Repository
             ->select(\DB::raw(1))
             ->exists();
 
-        return $exists ? false : true;
+        return ! $exists;
     }
 
     /**

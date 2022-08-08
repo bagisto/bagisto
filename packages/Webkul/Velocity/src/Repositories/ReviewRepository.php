@@ -27,8 +27,6 @@ class ReviewRepository extends Repository
 
     function getAll()
     {
-        $reviews = $this->model->get();
-
-        return $reviews;
+        return $this->all();
     }
 }

@@ -92,12 +92,6 @@ class WishlistController extends Controller
         if (! $wishlist) {
             $wishlist = $this->wishlistRepository->create($data);
 
-            if ($wishlist) {
-                session()->flash('success', trans('customer::app.wishlist.success'));
-            } else {
-                session()->flash('error', trans('customer::app.wishlist.failure'));
-            }
-
             return redirect()->back();
         } else {
             $this->wishlistRepository->findOneWhere([

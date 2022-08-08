@@ -3,6 +3,7 @@
 namespace Webkul\CatalogRule\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\CatalogRuleDataGrid;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
 use Webkul\CatalogRule\Http\Requests\CatalogRuleRequest;
@@ -64,7 +65,11 @@ class CatalogRuleController extends Controller
      */
     public function store(CatalogRuleRequest $catalogRuleRequest)
     {
-        $this->catalogRuleRepository->create($catalogRuleRequest->all());
+        Event::dispatch('promotions.catalog_rule.create.before');
+
+        $catalogRule = $this->catalogRuleRepository->create($catalogRuleRequest->all());
+
+        Event::dispatch('promotions.catalog_rule.create.after', $catalogRule);
 
         $this->catalogRuleIndexHelper->reindexComplete();
 
@@ -97,7 +102,11 @@ class CatalogRuleController extends Controller
     {
         $this->catalogRuleRepository->findOrFail($id);
 
-        $this->catalogRuleRepository->update($catalogRuleRequest->all(), $id);
+        Event::dispatch('promotions.catalog_rule.update.before', $id);
+
+        $catalogRule = $this->catalogRuleRepository->update($catalogRuleRequest->all(), $id);
+
+        Event::dispatch('promotions.catalog_rule.update.after', $catalogRule);
 
         $this->catalogRuleIndexHelper->reindexComplete();
 
@@ -117,7 +126,11 @@ class CatalogRuleController extends Controller
         $this->catalogRuleRepository->findOrFail($id);
 
         try {
+            Event::dispatch('promotions.catalog_rule.delete.before', $id);
+
             $this->catalogRuleRepository->delete($id);
+
+            Event::dispatch('promotions.catalog_rule.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Catalog Rule'])]);
         } catch (\Exception $e) {}
