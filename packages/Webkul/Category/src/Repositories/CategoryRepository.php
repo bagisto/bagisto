@@ -306,8 +306,9 @@ class CategoryRepository extends Repository
             foreach (core()->getAllLocales() as $locale) {
                 foreach ($model->translatedAttributes as $attribute) {
                     if ($attribute !== $attributeName) {
-                        return;
+                        continue;
                     }
+
                     $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute])
                         ? $data[$requestedLocale][$attribute]
                         : $data[$data['locale']][$attribute];

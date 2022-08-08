@@ -98,6 +98,7 @@ class CustomerController extends Controller
 
                     return redirect()->back();
                 }
+
                 $isPasswordChanged = true;
 
                 $data['password'] = bcrypt($data['password']);
@@ -179,11 +180,12 @@ class CustomerController extends Controller
         $customerRepository = $this->customerRepository->findorFail($id);
 
         try {
-            if (!Hash::check($data['password'], $customerRepository->password)) {
+            if (! Hash::check($data['password'], $customerRepository->password)) {
                 session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
 
                 return redirect()->back();
             }
+
             $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
 
             if ($orders) {
@@ -191,6 +193,7 @@ class CustomerController extends Controller
 
                 return redirect()->route($this->_config['redirect']);
             }
+
             $this->customerRepository->delete($id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));

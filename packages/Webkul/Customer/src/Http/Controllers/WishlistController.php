@@ -104,6 +104,7 @@ class WishlistController extends Controller
 
                 return redirect()->back();
             }
+
             session()->flash('error', trans('customer::app.wishlist.failure'));
 
             return redirect()->back();
@@ -117,6 +118,7 @@ class WishlistController extends Controller
 
             return redirect()->back();
         }
+
     }
 
     /**
@@ -131,6 +133,7 @@ class WishlistController extends Controller
         if (!$this->isSharingEnabled()) {
             return;
         }
+
         $data = $this->validate(request(), [
             'shared' => 'required|boolean'
         ]);
@@ -203,6 +206,7 @@ class WishlistController extends Controller
 
                 return redirect()->route('customer.wishlist.index');
             }
+
         }
 
         session()->flash('error', trans('customer::app.wishlist.remove-fail'));
@@ -264,6 +268,7 @@ class WishlistController extends Controller
         if ($wishlistItems->count() <= 0) {
             return;
         }
+
         foreach ($wishlistItems as $wishlistItem) {
             $this->wishlistRepository->delete($wishlistItem->id);
         }

@@ -128,6 +128,7 @@ class AddressController extends Controller
             if ($id != $address->id) {
                 return;
             }
+
             session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
 
             $this->customerAddressRepository->update($data, $id);
