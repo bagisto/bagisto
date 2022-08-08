@@ -96,19 +96,19 @@
         right: 34px;
         top: 8px;
     }
-}
-
-#date-of-birth:after{
-    background-image: url(../images/icon-calendar.svg);
-    width: 24px;
-    height: 24px;
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    pointer-events: none;
-    position: absolute;
-    top: 5px;
-    right: 8px;
+    
+    &::after { 
+        background-image: url(../images/icon-calendar.svg);
+        width: 24px;
+        height: 24px;
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        pointer-events: none;
+        position: absolute;
+        top: 5px;
+        right: 8px;
+    }
 }
 
 .rtl{
