@@ -329,7 +329,7 @@ class ProductController extends Controller
         $productIds = explode(',', $data['indexes']);
 
         foreach ($productIds as $productId) {
-            Event::dispatch('catalog.product.update.before', $id);
+            Event::dispatch('catalog.product.update.before', $productId);
 
             $product = $this->productRepository->update([
                 'channel' => null,
