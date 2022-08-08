@@ -24,7 +24,6 @@ class ProductRepository extends Repository
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Illuminate\Container\Container  $container
-     *
      * @return void
      */
     public function __construct(
@@ -157,7 +156,15 @@ class ProductRepository extends Repository
 
         $page = Paginator::resolveCurrentPage('page');
 
-        $repository = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($params, $categoryId) {
+        $repository = app(ProductFlatRepository::class)->with([
+            'images',
+            'product.videos',
+            'product.attribute_values',
+            'product.customer_group_prices',
+            'product.inventory_sources',
+            'product.inventories',
+            'product.ordered_inventories',
+        ])->scopeQuery(function ($query) use ($params, $categoryId) {
             $channel = core()->getRequestedChannelCode();
 
             $locale = core()->getRequestedLocaleCode();
@@ -273,7 +280,6 @@ class ProductRepository extends Repository
                 $qb->where(function ($filterQuery) use ($attributeFilters) {
                     foreach ($attributeFilters as $attribute) {
                         $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
-
                             $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
 
                             $filterInputValues = explode(',', request()->get($attribute->code));
@@ -289,6 +295,7 @@ class ProductRepository extends Repository
                                         if (! is_numeric($filterValue)) {
                                             continue;
                                         }
+
                                         $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
                                     }
                                 });
@@ -526,7 +533,7 @@ class ProductRepository extends Repository
             ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
             ->where(function ($qb) {
                 return $qb
-                /* for grouped, downloadable, bundle and booking product */
+                    /* for grouped, downloadable, bundle and booking product */
                     ->orWhereIn('ps.type', ['grouped', 'downloadable', 'bundle', 'booking'])
                     /* for simple and virtual product */
                     ->orWhere(function ($qb) {
