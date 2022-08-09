@@ -247,6 +247,8 @@ class CartController extends Controller
             session()->flash('warning', $result['warning']);
         } elseif (isset($result['info'])) {
             session()->flash('info', $result['info']);
+        } else {
+            return false;
         }
 
         return true;
