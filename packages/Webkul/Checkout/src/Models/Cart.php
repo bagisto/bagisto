@@ -178,7 +178,7 @@ class Cart extends Model implements CartContract
     public function hasGuestCheckoutItems(): bool
     {
         foreach ($this->items as $item) {
-            if ($item->product->getAttribute('guest_checkout') === 0) {
+            if (! $item->product->getAttribute('guest_checkout')) {
                 return false;
             }
         }

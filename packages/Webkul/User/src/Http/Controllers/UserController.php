@@ -243,7 +243,7 @@ class UserController extends Controller
          */
         $data['status'] = isset($data['status']);
 
-        $isStatusChangedToInactive = (int) $data['status'] === 0 && (int) $user->status === 1;
+        $isStatusChangedToInactive = ! $data['status'] && (bool) $user->status;
 
         if (
             $isStatusChangedToInactive

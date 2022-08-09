@@ -278,7 +278,7 @@ class Cart
 
             if (
                 $item->product
-                && $item->product->status === 0
+                && ! $item->product->status
             ) {
                 throw new Exception(__('shop::app.checkout.cart.item.inactive'));
             }
@@ -330,7 +330,7 @@ class Cart
         if ($cartItem = $cart->items()->find($itemId)) {
             $cartItem->delete();
 
-            if ($cart->items()->get()->count() == 0) {
+            if (! $cart->items()->get()->count()) {
                 $this->removeCart($cart);
             } else {
                 Shipping::collectRates();
@@ -383,7 +383,7 @@ class Cart
             if ($this->isCartItemInactive($item)) {
                 $this->cartItemRepository->delete($item->id);
 
-                if ($cart->items->count() == 0) {
+                if (! $cart->items->count()) {
                     $this->removeCart($cart);
                 }
 
@@ -621,7 +621,7 @@ class Cart
 
         $cartItems = $cart->items()->get();
 
-        if (count($cartItems) === 0) {
+        if (! count($cartItems)) {
             $this->removeCart($cart);
 
             return false;

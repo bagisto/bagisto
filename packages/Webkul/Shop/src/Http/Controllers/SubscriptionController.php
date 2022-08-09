@@ -95,7 +95,7 @@ class SubscriptionController extends Controller
         if (isset($subscriber)) {
             if (
                 $subscriber->count() > 0
-                && $subscriber->is_subscribed == 1
+                && $subscriber->is_subscribed
                 && $subscriber->update(['is_subscribed' => 0])
             ) {
                 session()->flash('info', trans('shop::app.subscription.unsubscribed'));

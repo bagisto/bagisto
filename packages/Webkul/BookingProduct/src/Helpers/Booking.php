@@ -577,10 +577,6 @@ class Booking
      */
     public function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool
     {
-        if ($item->product->status === 0) {
-            return true;
-        }
-
-        return false;
+        return ! $item->product->status;
     }
 }

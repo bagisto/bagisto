@@ -86,7 +86,7 @@ class InventorySourcesDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->status == 1) {
+                if ($value->status) {
                     return trans('admin::app.datagrid.active');
                 } else {
                     return trans('admin::app.datagrid.inactive');

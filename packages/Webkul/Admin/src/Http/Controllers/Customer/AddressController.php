@@ -138,7 +138,7 @@ class AddressController extends Controller
 
         session()->flash('success', trans('admin::app.customers.addresses.success-update'));
 
-        return redirect()->route('admin.customer.addresses.index', ['id' => $address->customer_id]);
+        return redirect()->route('admin.customer.addresses.index', ['id' => $customerAddress->customer_id]);
     }
 
     /**

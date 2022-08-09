@@ -917,7 +917,7 @@ class Core
      */
     public function isCountryRequired()
     {
-        return $this->getConfigData('customer.address.requirements.country') == 1;
+        return (bool) $this->getConfigData('customer.address.requirements.country');
     }
 
     /**
@@ -927,7 +927,7 @@ class Core
      */
     public function isStateRequired()
     {
-        return $this->getConfigData('customer.address.requirements.state') == 1;
+        return (bool) $this->getConfigData('customer.address.requirements.state');
     }
 
     /**
@@ -937,7 +937,7 @@ class Core
      */
     public function isPostCodeRequired()
     {
-        return $this->getConfigData('customer.address.requirements.postcode') == 1;
+        return (bool) $this->getConfigData('customer.address.requirements.postcode');
     }
 
     /**
