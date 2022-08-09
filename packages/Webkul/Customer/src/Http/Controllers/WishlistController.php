@@ -192,6 +192,7 @@ class WishlistController extends Controller
         $customer = auth()->guard('customer')->user();
 
         $customerWishlistItems = $customer->wishlist_items;
+        $referer = strtok(request()->headers->get('referer'), '?');
 
         foreach ($customerWishlistItems as $customerWishlistItem) {
             if ($itemId == $customerWishlistItem->id) {
@@ -199,7 +200,7 @@ class WishlistController extends Controller
 
                 session()->flash('success', trans('customer::app.wishlist.removed'));
 
-                return redirect()->route('customer.wishlist.index');
+                return redirect()->to($referer);
             }
         }
 
