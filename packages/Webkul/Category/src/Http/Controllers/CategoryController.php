@@ -229,17 +229,17 @@ class CategoryController extends Controller
      * This method will fetch all root category ids from the channel. If `id` is present,
      * then it is not deletable.
      *
-     * @param  \Webkul\Category\Models\Category $category
+     * @param  \Webkul\Category\Contracts\Category $category
      * @return bool
      */
     private function isCategoryDeletable($category)
     {
-        static $rootIdInChannels;
+        static $channelRootCategoryIds;
 
-        if (! $rootIdInChannels) {
-            $rootIdInChannels = $this->channelRepository->pluck('root_category_id');
+        if (! $channelRootCategoryIds) {
+            $channelRootCategoryIds = $this->channelRepository->pluck('root_category_id');
         }
 
-        return $category->id === 1 || $rootIdInChannels->contains($category->id);
+        return $category->id === 1 || $channelRootCategoryIds->contains($category->id);
     }
 }
