@@ -88,13 +88,15 @@ class ShipmentController extends Controller
             'shipment.items.*.*' => 'required|numeric|min:0',
         ]);
 
-        if (! $this->isInventoryValidate(request()->all())) {
+        $data = request()->all();
+
+        if (! $this->isInventoryValidate($data)) {
             session()->flash('error', trans('admin::app.sales.shipments.quantity-invalid'));
 
             return redirect()->back();
         }
 
-        $this->shipmentRepository->create(array_merge(request()->all(), [
+        $this->shipmentRepository->create(array_merge($data, [
             'order_id' => $orderId,
         ]));
 

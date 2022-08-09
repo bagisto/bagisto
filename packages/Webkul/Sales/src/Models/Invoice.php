@@ -34,8 +34,8 @@ class Invoice extends Model implements InvoiceContract
      * @var array
      */
     protected $statusLabel = [
-        'pending' => 'Pending',
-        'paid' => 'Paid',
+        'pending'  => 'Pending',
+        'paid'     => 'Paid',
         'refunded' => 'Refunded',
     ];
 
@@ -61,7 +61,7 @@ class Invoice extends Model implements InvoiceContract
     public function items(): HasMany
     {
         return $this->hasMany(InvoiceItemProxy::modelClass())
-                    ->whereNull('parent_id');
+            ->whereNull('parent_id');
     }
 
     /**
@@ -86,7 +86,7 @@ class Invoice extends Model implements InvoiceContract
     public function address(): BelongsTo
     {
         return $this->belongsTo(OrderAddressProxy::modelClass(), 'order_address_id')
-                    ->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
+            ->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
     }
 
     /**

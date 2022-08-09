@@ -31,7 +31,7 @@ class TaxCategory extends Model implements TaxCategoryContract
     public function tax_rates(): BelongsToMany
     {
         return $this->belongsToMany(TaxRateProxy::modelClass(), 'tax_categories_tax_rates', 'tax_category_id')
-                    ->withPivot('id');
+            ->withPivot('id');
     }
 
     /**

@@ -41,13 +41,6 @@ class ProductFlat extends Model implements ProductFlatContract
     ];
 
     /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var boolean
-     */
-    // public $timestamps = false;
-
-    /**
      * Get the index name for the model.
      *
      * @return string
