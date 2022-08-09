@@ -5,10 +5,10 @@ namespace Webkul\Category\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\CategoryDataGrid;
 use Webkul\Admin\DataGrids\CategoryProductDataGrid;
+use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Http\Requests\CategoryRequest;
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Core\Models\Channel;
 
 class CategoryController extends Controller
 {
@@ -22,11 +22,13 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
     public function __construct(
+        protected ChannelRepository $channelRepository,
         protected CategoryRepository $categoryRepository,
         protected AttributeRepository $attributeRepository
     )
@@ -235,7 +237,7 @@ class CategoryController extends Controller
         static $rootIdInChannels;
 
         if (! $rootIdInChannels) {
-            $rootIdInChannels = Channel::pluck('root_category_id');
+            $rootIdInChannels = $this->channelRepository->pluck('root_category_id');
         }
 
         return $category->id === 1 || $rootIdInChannels->contains($category->id);

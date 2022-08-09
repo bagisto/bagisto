@@ -3,10 +3,10 @@
 namespace Webkul\CatalogRule\Repositories;
 
 use Illuminate\Container\Container;
+use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Core\Eloquent\Repository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class CatalogRuleRepository extends Repository
@@ -75,7 +75,6 @@ class CatalogRuleRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
-
         $data = array_merge($data, [
             'starts_from' => $data['starts_from'] ?: null,
             'ends_till'   => $data['ends_till'] ?: null,
