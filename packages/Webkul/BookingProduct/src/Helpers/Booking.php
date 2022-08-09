@@ -37,7 +37,15 @@ class Booking
     /**
      * @return array
      */
-    protected $daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    protected $daysOfWeek = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    ];
 
     /**
      * Create a new helper instance.
@@ -222,6 +230,7 @@ class Booking
 
         foreach ($slots as $index => $slot) {
             $slots[$index]['from']  = Carbon::createFromTimeString($slot['from'])->format("h:i a");
+            
             $slots[$index]['to']  = Carbon::createFromTimeString($slot['to'])->format("h:i a");
         }
 

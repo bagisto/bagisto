@@ -12,7 +12,7 @@ class DefaultSlot extends Booking
     protected $daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     
     /**
-     * Returns slots for a perticular day
+     * Returns slots for a particular day
      *
      * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @param  string  $date
@@ -52,7 +52,7 @@ class DefaultSlot extends Booking
 
         return $bookingProductSlot->booking_type == 'one'
             ? $this->getOneBookingForManyDaysSlots($bookingProductSlot, $requestedDate)
-            : $this->getManyBookingsforOneDaySlots($bookingProductSlot, $requestedDate);
+            : $this->getManyBookingsForOneDaySlots($bookingProductSlot, $requestedDate);
     }
 
     /**
@@ -98,7 +98,7 @@ class DefaultSlot extends Booking
      * @param  string  $requestedDate
      * @return array
      */
-    public function getManyBookingsforOneDaySlots($bookingProductSlot, $requestedDate)
+    public function getManyBookingsForOneDaySlots($bookingProductSlot, $requestedDate)
     {
         $bookingProduct = $bookingProductSlot->booking_product;
 

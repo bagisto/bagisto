@@ -19,9 +19,8 @@ class BookingProductEventTicketRepository extends Repository
     }
 
     /**
-     * @param array                                           $data
-     * @param \Webkul\BookingProduct\Contracts\BookingProduct $bookingProduct
-     *
+     * @param  array  $data
+     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @return void
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */

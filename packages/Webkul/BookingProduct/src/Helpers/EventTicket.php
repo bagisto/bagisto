@@ -187,7 +187,15 @@ class EventTicket extends Booking
     {
         return $ticket->special_price !== null
             && $ticket->special_price > 0.0
-            && ($ticket->special_price_from === null || $ticket->special_price_from === '0000-00-00 00:00:00' || $ticket->special_price_from <= Carbon::now())
-            && ($ticket->special_price_to === null || $ticket->special_price_to === '0000-00-00 00:00:00' || $ticket->special_price_to > Carbon::now());
+            && (
+                $ticket->special_price_from === null
+                || $ticket->special_price_from === '0000-00-00 00:00:00'
+                || $ticket->special_price_from <= Carbon::now()
+            )
+            && (
+                $ticket->special_price_to === null
+                || $ticket->special_price_to === '0000-00-00 00:00:00'
+                || $ticket->special_price_to > Carbon::now()
+            );
     }
 }
