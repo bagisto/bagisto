@@ -212,15 +212,17 @@ class CategoryController extends Controller
      */
     public function categoryProductCount()
     {
-        $product_count = 0;
+        $productCount = 0;
+        
         $indexes = explode(',', request()->input('indexes'));
 
         foreach ($indexes as $index) {
             $category = $this->categoryRepository->find($index);
-            $product_count += $category->products->count();
+
+            $productCount += $category->products->count();
         }
 
-        return response()->json(['product_count' => $product_count]);
+        return response()->json(['product_count' => $productCount]);
     }
 
     /**
