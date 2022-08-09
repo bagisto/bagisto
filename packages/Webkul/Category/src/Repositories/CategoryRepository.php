@@ -170,7 +170,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Retrive category from slug.
+     * Retrieve category from slug.
      *
      * @param string $slug
      * @return \Webkul\Category\Contracts\Category

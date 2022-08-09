@@ -11,7 +11,6 @@ class CartRepository extends Repository
      *
      * @return Mixed
      */
-
     function model()
     {
         return 'Webkul\Checkout\Contracts\Cart';
@@ -23,9 +22,8 @@ class CartRepository extends Repository
      * @param  int  $cartId
      * @return bool
      */
-    public function deleteParent($cartId) {
-        $cart = $this->model->find($cartId);
-
+    public function deleteParent($cartId)
+    {
         return $this->model->destroy($cartId);
     }
 }
