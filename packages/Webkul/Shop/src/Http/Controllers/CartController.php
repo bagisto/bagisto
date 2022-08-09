@@ -62,34 +62,34 @@ class CartController extends Controller
                 return redirect()->back();
             }
 
-            if ($result instanceof CartModel) {
-                session()->flash('success', __('shop::app.checkout.cart.item.success'));
+            session()->flash('success', __('shop::app.checkout.cart.item.success'));
 
-                if ($customer = auth()->guard('customer')->user()) {
-                    $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
-                }
+            if ($customer = auth()->guard('customer')->user()) {
+                $this->wishlistRepository->deleteWhere([
+                    'product_id'  => $id,
+                    'customer_id' => $customer->id,
+                ]);
+            }
 
-                if (request()->get('is_buy_now')) {
-                    Event::dispatch('shop.item.buy-now', $id);
+            if (request()->get('is_buy_now')) {
+                Event::dispatch('shop.item.buy-now', $id);
 
-                    return redirect()->route('shop.checkout.onepage.index');
-                }
+                return redirect()->route('shop.checkout.onepage.index');
             }
         } catch (\Exception $e) {
             session()->flash('warning', __($e->getMessage()));
 
-            $product = $this->productRepository->find($id);
+            $product = $this->productRepository->findOrFail($id);
 
             Log::error(
                 'Shop CartController: ' . $e->getMessage(),
-                ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]
+                [
+                    'product_id' => $id,
+                    'cart_id'    => cart()->getCart() ?? 0
+                ]
             );
 
-            if ($product != null) {
-                return redirect()->route('shop.productOrCategory.index', $product->url_key);
-            }
-            
-            session()->flash('error', trans('customer::app.product-removed'));
+            return redirect()->route('shop.productOrCategory.index', $product->url_key);
         }
 
         return redirect()->back();
@@ -164,7 +164,7 @@ class CartController extends Controller
             session()->flash('warning', trans('shop::app.checkout.cart.move-to-wishlist-error'));
         }
 
-        return request()->get('redirect') !== false
+        return request()->get('redirect')
             ? redirect()->back()
             : response()->json([]);
     }
@@ -239,24 +239,16 @@ class CartController extends Controller
      */
     private function onFailureAddingToCart($result): bool
     {
-        if (
-            is_array($result)
-            && isset($result['warning'])
-        ) {
+        if (! is_array($result)) {
+            return false;
+        }
+
+        if (isset($result['warning'])) {
             session()->flash('warning', $result['warning']);
-
-            return true;
-        }
-
-        if (
-            is_array($result)
-            && isset($result['info'])
-        ) {
+        } elseif (isset($result['info'])) {
             session()->flash('info', $result['info']);
-            
-            return true;
         }
 
-        return false;
+        return true;
     }
 }
