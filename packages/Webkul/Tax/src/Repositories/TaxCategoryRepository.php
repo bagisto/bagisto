@@ -11,9 +11,9 @@ class TaxCategoryRepository extends Repository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return \Webkul\Tax\Contracts\TaxCategory::class;
+        return 'Webkul\Tax\Contracts\TaxCategory';
     }
 
     /**

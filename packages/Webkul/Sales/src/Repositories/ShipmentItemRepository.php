@@ -13,9 +13,9 @@ class ShipmentItemRepository extends Repository
      *
      * @return string
      */
-    function model()
+    function model(): string
     {
-        return ShipmentItem::class;
+        return 'Webkul\Sales\Contracts\ShipmentItem';
     }
 
     /**

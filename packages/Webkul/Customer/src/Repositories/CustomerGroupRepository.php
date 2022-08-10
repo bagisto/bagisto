@@ -9,12 +9,11 @@ class CustomerGroupRepository extends Repository
     /**
      * Specify model class name.
      *
-     * @return mixed
+     * @return string
      */
-
-    public function model()
+    public function model(): string
     {
-        return \Webkul\Customer\Contracts\CustomerGroup::class;
+        return 'Webkul\Customer\Contracts\CustomerGroup';
     }
 
     /**

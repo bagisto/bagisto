@@ -9,10 +9,10 @@ class TaxRateRepository extends Repository
     /**
      * Specify model class name.
      *
-     * @return mixed
+     * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return \Webkul\Tax\Contracts\TaxRate::class;
+        return 'Webkul\Tax\Contracts\TaxRate';
     }
 }

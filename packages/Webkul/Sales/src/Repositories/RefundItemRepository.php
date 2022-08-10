@@ -12,9 +12,9 @@ class RefundItemRepository extends Repository
      *
      * @return string
      */
-    function model()
+    function model(): string
     {
-        return RefundItem::class;
+        return 'Webkul\Sales\Contracts\RefundItem';
     }
 
     /**

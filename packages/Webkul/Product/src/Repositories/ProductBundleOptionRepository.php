@@ -28,7 +28,7 @@ class ProductBundleOptionRepository extends Repository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
         return 'Webkul\Product\Contracts\ProductBundleOption';
     }

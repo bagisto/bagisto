@@ -13,9 +13,9 @@ class OrderItemRepository extends Repository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return OrderItem::class;
+        return 'Webkul\Sales\Contracts\OrderItem';
     }
 
     /**

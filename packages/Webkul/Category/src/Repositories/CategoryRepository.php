@@ -13,11 +13,11 @@ class CategoryRepository extends Repository
     /**
      * Specify model class name.
      *
-     * @return mixed
+     * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return \Webkul\Category\Contracts\Category::class;
+        return 'Webkul\Category\Contracts\Category';
     }
 
     /**

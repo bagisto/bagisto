@@ -30,7 +30,7 @@ class CategoryRepository extends Repository
      *
      * @return string
      */
-    function model()
+    function model(): string
     {
         return 'Webkul\Velocity\Contracts\Category';
     }

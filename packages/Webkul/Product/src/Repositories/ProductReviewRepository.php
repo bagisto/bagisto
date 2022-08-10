@@ -9,11 +9,11 @@ class ProductReviewRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return \Webkul\Product\Contracts\ProductReview::class;
+        return 'Webkul\Product\Contracts\ProductReview';
     }
 
     /**

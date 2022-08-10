@@ -31,7 +31,7 @@ class ContentRepository extends Repository
      *
      * @return string
      */
-    function model()
+    function model(): string
     {
         return 'Webkul\Velocity\Contracts\Content';
     }

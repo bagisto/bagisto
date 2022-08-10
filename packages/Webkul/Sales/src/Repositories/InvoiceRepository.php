@@ -6,7 +6,6 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\Invoice;
 use Webkul\Sales\Generators\InvoiceSequencer;
 
 class InvoiceRepository extends Repository
@@ -37,9 +36,9 @@ class InvoiceRepository extends Repository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return Invoice::class;
+        return 'Webkul\Sales\Contracts\Invoice';
     }
 
     /**

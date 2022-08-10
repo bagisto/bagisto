@@ -9,10 +9,10 @@ class EventRepository extends Repository
     /**
      * Specify model class name.
      *
-     * @return mixed
+     * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return \Webkul\Marketing\Contracts\Event::class;
+        return 'Webkul\Marketing\Contracts\Event';
     }
 }
