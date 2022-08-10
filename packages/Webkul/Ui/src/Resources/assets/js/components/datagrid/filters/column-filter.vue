@@ -540,6 +540,11 @@ export default {
                 case 'number': {
                     let indexConditions = true;
 
+                    if (! this.types.number.value) {
+                        alert(this.translations.emptyValue);
+                        this.switchSelectCondition('number');
+                    }
+
                     if (
                         this.filterIndex === this.columnOrAlias &&
                         (this.types.number.value === 0 ||
@@ -548,8 +553,6 @@ export default {
                         indexConditions = false;
 
                         alert(this.translations.zeroIndex);
-                    } else {
-                        alert(this.translations.emptyValue);
                     }
 
                     if (indexConditions) {
