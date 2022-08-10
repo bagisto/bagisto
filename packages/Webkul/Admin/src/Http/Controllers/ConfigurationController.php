@@ -118,6 +118,21 @@ class ConfigurationController extends Controller
                 
                 return redirect()->back();
             }
+        } elseif (isset($data['sales']['paymentmethods'])) {
+            $atLeastOnePaymentMethodEnabled = false;
+            
+            foreach ($data['sales']['paymentmethods'] as $paymentMethod) {
+                if ($paymentMethod['active']) {
+                    $atLeastOnePaymentMethodEnabled = true;
+                    break;
+                }
+            }
+            
+            if (! $atLeastOnePaymentMethodEnabled) {
+                session()->flash('error', trans('admin::app.configuration.enable-atleast-one-payment'));
+                
+                return redirect()->back();
+            }
         }
 
         $this->coreConfigRepository->create($request->except(['_token', 'admin_locale']));
