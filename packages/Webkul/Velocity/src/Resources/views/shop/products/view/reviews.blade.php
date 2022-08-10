@@ -47,7 +47,7 @@
                                 }}
                             </span>
 
-                            @if ($canReview)
+                            @if (isset($canReview) && $canReview)
                                 <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
                                     <button type="button" class="theme-btn light">{{ __('velocity::app.products.write-your-review') }}</button>
                                 </a>
@@ -91,7 +91,7 @@
                             }}
                         </span>
 
-                        @if ($canReview)
+                        @if (isset($canReview) && $canReview)
                             <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
                                 <button type="button" class="theme-btn light">{{ __('velocity::app.products.write-your-review') }}</button>
                             </a>
@@ -218,8 +218,8 @@
         @endif
 
     @else
-        @if ($canReview)
-            <div class="customer-rating" style="border: none">
+        @if (isset($canReview) && $canReview)
+            <div class="customer-rating ehllo" style="border: none">
                 <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
                     <button type="button" class="theme-btn light">{{ __('velocity::app.products.write-your-review') }}</button>
                 </a>

@@ -7,7 +7,7 @@
         <div class="rating-header">
             {{ __('shop::app.products.reviews-title') }}
 
-            @if ($canReview)
+            @if (isset($canReview) && $canReview)
                 <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
                     {{ __('shop::app.products.write-review-btn') }}
                 </a>
@@ -75,7 +75,7 @@
         </div>
     </div>
 @else
-    @if ($canReview)
+    @if (isset($canReview) && $canReview)
         <div class="rating-reviews">
             <div class="rating-header">
                 <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
