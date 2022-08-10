@@ -109,6 +109,7 @@ class ConfigurationController extends Controller
             foreach ($data['sales']['carriers'] as $carrier) {
                 if ($carrier['active']) {
                     $atLeastOneCarrierEnabled = true;
+                    
                     break;
                 }
             }
@@ -124,6 +125,7 @@ class ConfigurationController extends Controller
             foreach ($data['sales']['paymentmethods'] as $paymentMethod) {
                 if ($paymentMethod['active']) {
                     $atLeastOnePaymentMethodEnabled = true;
+
                     break;
                 }
             }
