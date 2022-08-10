@@ -151,6 +151,16 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
+        foreach (request()->images['files'] as $fileExists) 
+        {
+            if(! $fileExists)
+            {
+                session()->flash('error', trans('admin::app.admin.system.image-required'));
+                
+                return redirect()->back();
+            }
+        }
+        
         $this->productRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
