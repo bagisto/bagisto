@@ -118,7 +118,7 @@
 
                                                 <div class="row col-12 no-padding no-margin item-price">
                                                     <div class="product-price">
-                                                        <span>{{ core()->currency($item->base_price) }}</span>
+                                                        {!! $product->getTypeInstance()->getPriceHtml() !!}
                                                     </div>
                                                 </div>
 
