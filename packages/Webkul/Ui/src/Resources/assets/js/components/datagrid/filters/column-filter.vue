@@ -541,7 +541,6 @@ export default {
                     let indexConditions = true;
 
                     if (! this.types.number.value) {
-                        alert(this.translations.emptyValue);
                         this.switchSelectCondition('number');
                     }
 
