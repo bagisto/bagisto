@@ -395,7 +395,7 @@ export default {
                 number: {
                     isSelected: false,
                     condition: null,
-                    value: 0
+                    value: null
                 },
 
                 boolean: {
