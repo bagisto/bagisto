@@ -151,10 +151,10 @@ class SEO
     public function getProductOffers($product)
     {
         return [
-            '@type'           => 'Offer',
-            'priceCurrency'   => core()->getCurrentCurrencyCode(),
-            'price'           => $product->getTypeInstance()->getMinimalPrice(),
-            'availability'    => 'https://schema.org/InStock',
+            '@type'         => 'Offer',
+            'priceCurrency' => core()->getCurrentCurrencyCode(),
+            'price'         => $product->getTypeInstance()->getMinimalPrice(),
+            'availability'  => 'https://schema.org/InStock',
         ];
     }
 

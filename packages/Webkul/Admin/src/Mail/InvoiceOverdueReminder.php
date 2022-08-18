@@ -16,12 +16,15 @@ class InvoiceOverdueReminder extends Mailable
      *
      * @param  \Webkul\Customer\Contracts\Customer  $customer
      * @param  \Webkul\Sales\Contracts\Invoice  $invoice
+     * @return void
      */
     public function __construct(
         public $customer,
         public $invoice
     )
-    {}
+    {
+
+    }
 
     /**
      * Build the message.
@@ -31,8 +34,11 @@ class InvoiceOverdueReminder extends Mailable
     public function build()
     {
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-                    ->to($this->customer->email)
-                    ->subject(trans('shop::app.mail.invoice.reminder.subject'))
-                    ->view('shop::emails.customer.invoice-reminder')->with(['customer' => $this->customer, 'invoice' => $this->invoice]);
+            ->to($this->customer->email)
+            ->subject(trans('shop::app.mail.invoice.reminder.subject'))
+            ->view('shop::emails.customer.invoice-reminder')->with([
+                'customer' => $this->customer,
+                'invoice'  => $this->invoice,
+            ]);
     }
 }

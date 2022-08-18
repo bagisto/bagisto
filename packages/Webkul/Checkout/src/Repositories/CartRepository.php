@@ -9,38 +9,11 @@ class CartRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
-
-    function model()
+    function model(): string
     {
         return 'Webkul\Checkout\Contracts\Cart';
-    }
-
-    /**
-     * @param  array  $data
-     * @return \Webkul\Checkout\Contracts\Cart
-     */
-    public function create(array $data)
-    {
-        $cart = $this->model->create($data);
-
-        return $cart;
-    }
-
-    /**
-     * @param  array  $data
-     * @param  int  $id
-     * @param  string  $attribute
-     * @return \Webkul\Checkout\Contracts\Cart
-     */
-    public function update(array $data, $id, $attribute = "id")
-    {
-        $cart = $this->find($id);
-
-        $cart->update($data);
-
-        return $cart;
     }
 
     /**
@@ -49,9 +22,8 @@ class CartRepository extends Repository
      * @param  int  $cartId
      * @return bool
      */
-    public function deleteParent($cartId) {
-        $cart = $this->model->find($cartId);
-
+    public function deleteParent($cartId)
+    {
         return $this->model->destroy($cartId);
     }
 }

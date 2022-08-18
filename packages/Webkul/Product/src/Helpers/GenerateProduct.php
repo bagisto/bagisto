@@ -60,7 +60,6 @@ class GenerateProduct
         $brand = Attribute::where(['code' => 'brand'])->first();
 
         if (! AttributeOption::where(['attribute_id' => $brand->id])->exists()) {
-
             AttributeOption::create([
                 'admin_name'   => 'Webkul Demo Brand (c) 2020',
                 'attribute_id' => $brand->id,

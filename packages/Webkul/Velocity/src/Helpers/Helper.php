@@ -298,8 +298,7 @@ class Helper extends Review
                 'product'          => $product,
                 'addWishlistClass' => ! (isset($list) && $list) ? '' : '',
 
-                'showCompare' => core()->getConfigData('general.content.shop.compare_option') == '1'
-                    ? true : false,
+                'showCompare' => (bool) core()->getConfigData('general.content.shop.compare_option'),
 
                 'btnText' => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
                     ? $metaInformation['btnText'] : null,

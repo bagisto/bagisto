@@ -34,7 +34,6 @@ class SubscriptionEmail extends Mailable
             ->with('data', [
                 'content' => 'You Are Subscribed',
                 'token'   => $this->subscriptionData['token'],
-                ]
-            );
+            ]);
     }
 }

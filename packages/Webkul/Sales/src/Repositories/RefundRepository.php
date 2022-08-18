@@ -2,11 +2,10 @@
 
 namespace Webkul\Sales\Repositories;
 
-use Illuminate\Container\Container as App;
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\Refund;
 
 class RefundRepository extends Repository
 {
@@ -17,17 +16,17 @@ class RefundRepository extends Repository
      * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
      * @param  \Webkul\Sales\Repositories\RefundItemRepository   $refundItemRepository
      * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
-     * @param  \Illuminate\Container\Container  $app
+     * @param  \Illuminate\Container\Container  $container
      */
     public function __construct(
         protected OrderRepository $orderRepository,
         protected OrderItemRepository $orderItemRepository,
         protected RefundItemRepository $refundItemRepository,
         protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**
@@ -35,9 +34,9 @@ class RefundRepository extends Repository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return Refund::class;
+        return 'Webkul\Sales\Contracts\Refund';
     }
 
     /**

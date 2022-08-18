@@ -42,17 +42,17 @@ class View extends AbstractProduct
                     $attribute->type == 'multiselect'
                     || $attribute->type == 'checkbox'
                 ) {
-                    $lables = [];
+                    $labels = [];
 
                     $attributeOptions = $attributeOptionReposotory->findWhereIn('id', explode(",", $value));
 
                     foreach ($attributeOptions as $attributeOption) {
                         if ($label = $attributeOption->label) {
-                            $lables[] = $label;
+                            $labels[] = $label;
                         }
                     }
 
-                    $value = implode(", ", $lables);
+                    $value = implode(", ", $labels);
                 }
             }
 

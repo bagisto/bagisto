@@ -72,7 +72,7 @@ class Virtual extends AbstractType
      */
     public function haveSufficientQuantity(int $qty): bool
     {
-        return $qty <= $this->totalQuantity() ? true : false;
+        return $qty <= $this->totalQuantity();
     }
 
     /**
@@ -80,7 +80,7 @@ class Virtual extends AbstractType
      *
      * @return float
      */
-    public function getMaximamPrice()
+    public function getMaximumPrice()
     {
         return $this->product->price;
     }

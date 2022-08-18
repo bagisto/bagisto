@@ -40,7 +40,7 @@ class Validator
 
             $totalConditionCount++;
 
-            if ($rule->condition_type == 1) {
+            if ($rule->condition_type) {
                 if (! $this->validateObject($condition, $entity)) {
                     return false;
                 } else {
@@ -53,7 +53,7 @@ class Validator
             }
         }
 
-        return $validConditionCount == $totalConditionCount ? true : false;
+        return $validConditionCount == $totalConditionCount;
     }
 
     /**
@@ -105,14 +105,14 @@ class Validator
             case 'product':
                 if ($attributeCode == 'category_ids') {
                     $value = $entity->product
-                             ? $entity->product->categories()->pluck('id')->toArray()
-                             : $entity->categories()->pluck('id')->toArray();
+                        ? $entity->product->categories()->pluck('id')->toArray()
+                        : $entity->categories()->pluck('id')->toArray();
 
                     return $value;
                 } else {
                     $value = $entity->product
-                             ? $entity->product->{$attributeCode}
-                              : $entity->{$attributeCode};
+                        ? $entity->product->{$attributeCode}
+                        : $entity->{$attributeCode};
 
                     if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox'])) {
                         return $value;
@@ -278,12 +278,15 @@ class Validator
         }
         
         foreach ($attributeValue as $subValue) {
-            if (is_array($subValue)) {
-                if (self::validateArrayValues($subValue, $conditionValue) === true) {
-                    return true;
-                }
+            if (! is_array($subValue)) {
+                continue;
+            }
+
+            if (self::validateArrayValues($subValue, $conditionValue) === true) {
+                return true;
             }
         }
+
         return false;
     }
 }

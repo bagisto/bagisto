@@ -237,7 +237,7 @@
 
     <script>
         var groups = @json($attributeFamily->attribute_groups);
-        var custom_attributes = @json($custom_attributes);
+        var custom_attributes = @json($customAttributes);
 
         Vue.component('group-list', {
 

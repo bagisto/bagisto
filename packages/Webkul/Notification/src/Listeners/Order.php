@@ -2,7 +2,6 @@
 
 namespace Webkul\Notification\Listeners;
 
-use Illuminate\Database\Eloquent\Collection;
 use Webkul\Notification\Repositories\NotificationRepository;
 use Webkul\Notification\Events\CreateOrderNotification;
 use Webkul\Notification\Events\UpdateOrderNotification;
@@ -37,11 +36,9 @@ class Order
      */
     public function updateOrder($order)
     { 
-        $orderArray = [
+        event(new UpdateOrderNotification([
             'id'     => $order->id,
             'status' => $order->status,
-        ];
-
-        event(new UpdateOrderNotification($orderArray));
+        ]));
     }
 }

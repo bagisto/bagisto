@@ -23,16 +23,16 @@ class ProductDownloadableLinkFactory extends Factory
     public function definition(): array
     {
         $now = date("Y-m-d H:i:s");
+
         $filename = 'ProductImageExampleForUpload.jpg';
-        $filepath = '/tests/_data/';
 
         return [
-            'url' => '',
-            'file' => $filepath . $filename,
-            'file_name' => $filename,
-            'type' => 'file',
-            'price' => 0.0000,
-            'downloads' => $this->faker->randomNumber(1),
+            'url'        => '',
+            'file'       => '/tests/_data/' . $filename,
+            'file_name'  => $filename,
+            'type'       => 'file',
+            'price'      => 0.0000,
+            'downloads'  => $this->faker->randomNumber(1),
             'product_id' => Product::factory(),
             'created_at' => $now,
             'updated_at' => $now,
