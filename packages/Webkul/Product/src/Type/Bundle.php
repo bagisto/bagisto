@@ -151,14 +151,16 @@ class Bundle extends AbstractType
         foreach ($this->product->bundle_options as $option) {
             $optionProductsPrices = $this->getOptionProductsPrices($option);
 
-            if (count($optionProductsPrices)) {
-                $selectionMinPrice = min($optionProductsPrices);
+            if (! count($optionProductsPrices)) {
+                continue;
+            }
 
-                if ($option->is_required) {
-                    $minPrice += $selectionMinPrice;
-                } elseif (! $haveRequiredOptions) {
-                    $minPrices[] = $selectionMinPrice;
-                }
+            $selectionMinPrice = min($optionProductsPrices);
+
+            if ($option->is_required) {
+                $minPrice += $selectionMinPrice;
+            } elseif (! $haveRequiredOptions) {
+                $minPrices[] = $selectionMinPrice;
             }
         }
 
@@ -185,14 +187,16 @@ class Bundle extends AbstractType
         foreach ($this->product->bundle_options as $option) {
             $optionProductsPrices = $this->getOptionProductsPrices($option, false);
 
-            if (count($optionProductsPrices)) {
-                $selectionMinPrice = min($optionProductsPrices);
+            if (! count($optionProductsPrices)) {
+                continue;
+            }
 
-                if ($option->is_required) {
-                    $minPrice += $selectionMinPrice;
-                } elseif (! $haveRequiredOptions) {
-                    $minPrices[] = $selectionMinPrice;
-                }
+            $selectionMinPrice = min($optionProductsPrices);
+
+            if ($option->is_required) {
+                $minPrice += $selectionMinPrice;
+            } elseif (! $haveRequiredOptions) {
+                $minPrices[] = $selectionMinPrice;
             }
         }
 
@@ -253,7 +257,7 @@ class Bundle extends AbstractType
      *
      * @return float
      */
-    public function getMaximamPrice()
+    public function getMaximumPrice()
     {
         $optionPrices = [];
 
@@ -290,7 +294,7 @@ class Bundle extends AbstractType
      *
      * @return float
      */
-    public function getRegularMaximamPrice()
+    public function getRegularMaximumPrice()
     {
         $optionPrices = [];
 
@@ -354,11 +358,11 @@ class Bundle extends AbstractType
 
             'to' => [
                 'regular_price' => [
-                    'price'          => core()->convertPrice($this->evaluatePrice($regularMaximumPrice = $this->getRegularMaximamPrice())),
+                    'price'          => core()->convertPrice($this->evaluatePrice($regularMaximumPrice = $this->getRegularMaximumPrice())),
                     'formated_price' => core()->currency($this->evaluatePrice($regularMaximumPrice)),
                 ],
                 'final_price'   => [
-                    'price'          => core()->convertPrice($this->evaluatePrice($maximumPrice = $this->getMaximamPrice())),
+                    'price'          => core()->convertPrice($this->evaluatePrice($maximumPrice = $this->getMaximumPrice())),
                     'formated_price' => core()->currency($this->evaluatePrice($maximumPrice)),
                 ],
             ],
@@ -377,6 +381,7 @@ class Bundle extends AbstractType
             foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
                 if ($bundleOptionProduct->product->getTypeInstance()->haveSpecialPrice()) {
                     $haveSpecialPrice = true;
+
                     break;
                 }
             }
@@ -755,6 +760,7 @@ class Bundle extends AbstractType
                         continue 2;
                     }
                 }
+
                 # if any required option does not have any in-stock product option we will get here.
                 return false;
             }

@@ -2,12 +2,13 @@
 
 namespace Webkul\Category\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\CategoryDataGrid;
 use Webkul\Admin\DataGrids\CategoryProductDataGrid;
+use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Http\Requests\CategoryRequest;
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Core\Models\Channel;
 
 class CategoryController extends Controller
 {
@@ -21,11 +22,13 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
     public function __construct(
+        protected ChannelRepository $channelRepository,
         protected CategoryRepository $categoryRepository,
         protected AttributeRepository $attributeRepository
     )
@@ -69,7 +72,11 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $categoryRequest)
     {
-        $this->categoryRepository->create($categoryRequest->all());
+        Event::dispatch('catalog.category.create.before');
+
+        $category = $this->categoryRepository->create($categoryRequest->all());
+
+        Event::dispatch('catalog.category.create.after', $category);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Category']));
 
@@ -115,7 +122,11 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $categoryRequest, $id)
     {
-        $this->categoryRepository->update($categoryRequest->all(), $id);
+        Event::dispatch('catalog.category.update.before', $id);
+
+        $category = $this->categoryRepository->update($categoryRequest->all(), $id);
+
+        Event::dispatch('catalog.category.update.after', $category);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
 
@@ -137,7 +148,11 @@ class CategoryController extends Controller
         }
 
         try {
+            Event::dispatch('catalog.category.delete.before', $id);
+
             $this->categoryRepository->delete($id);
+
+            Event::dispatch('catalog.category.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Category'])]);
         } catch (\Exception $e) {}
@@ -153,6 +168,7 @@ class CategoryController extends Controller
     public function massDestroy()
     {
         $suppressFlash = true;
+        
         $categoryIds = explode(',', request()->input('indexes'));
 
         foreach ($categoryIds as $categoryId) {
@@ -167,7 +183,11 @@ class CategoryController extends Controller
                     try {
                         $suppressFlash = true;
 
+                        Event::dispatch('catalog.category.delete.before', $categoryId);
+
                         $this->categoryRepository->delete($categoryId);
+
+                        Event::dispatch('catalog.category.delete.after', $categoryId);
                     } catch (\Exception $e) {
                         session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
                     }
@@ -192,15 +212,17 @@ class CategoryController extends Controller
      */
     public function categoryProductCount()
     {
-        $product_count = 0;
+        $productCount = 0;
+        
         $indexes = explode(',', request()->input('indexes'));
 
         foreach ($indexes as $index) {
             $category = $this->categoryRepository->find($index);
-            $product_count += $category->products->count();
+
+            $productCount += $category->products->count();
         }
 
-        return response()->json(['product_count' => $product_count]);
+        return response()->json(['product_count' => $productCount]);
     }
 
     /**
@@ -209,17 +231,17 @@ class CategoryController extends Controller
      * This method will fetch all root category ids from the channel. If `id` is present,
      * then it is not deletable.
      *
-     * @param  \Webkul\Category\Models\Category $category
+     * @param  \Webkul\Category\Contracts\Category $category
      * @return bool
      */
     private function isCategoryDeletable($category)
     {
-        static $rootIdInChannels;
+        static $channelRootCategoryIds;
 
-        if (! $rootIdInChannels) {
-            $rootIdInChannels = Channel::pluck('root_category_id');
+        if (! $channelRootCategoryIds) {
+            $channelRootCategoryIds = $this->channelRepository->pluck('root_category_id');
         }
 
-        return $category->id === 1 || $rootIdInChannels->contains($category->id);
+        return $category->id === 1 || $channelRootCategoryIds->contains($category->id);
     }
 }

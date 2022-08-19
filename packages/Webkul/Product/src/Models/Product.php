@@ -491,8 +491,10 @@ class Product extends Model implements ProductContract
         $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
         $channel = core()->getRequestedChannelCode();
 
-        if (array_key_exists($this->id, self::$loadedAttributeValues)
-            && array_key_exists($attribute->id, self::$loadedAttributeValues[$this->id])) {
+        if (
+            array_key_exists($this->id, self::$loadedAttributeValues)
+            && array_key_exists($attribute->id, self::$loadedAttributeValues[$this->id])
+        ) {
             return self::$loadedAttributeValues[$this->id][$attribute->id];
         }
 

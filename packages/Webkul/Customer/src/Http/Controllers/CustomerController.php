@@ -86,7 +86,7 @@ class CustomerController extends Controller
             $data['image']['image_0'] = '';
         }
 
-        $data['subscribed_to_news_letter'] = isset($data['subscribed_to_news_letter']) ? 1 : 0;
+        $data['subscribed_to_news_letter'] = isset($data['subscribed_to_news_letter']);
 
         if (isset($data['oldpassword'])) {
             if (

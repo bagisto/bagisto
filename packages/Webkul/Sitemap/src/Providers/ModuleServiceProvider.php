@@ -2,9 +2,9 @@
 
 namespace Webkul\Sitemap\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Webkul\Core\Providers\CoreModuleServiceProvider;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     protected $models = [
         \Webkul\Sitemap\Models\Sitemap::class

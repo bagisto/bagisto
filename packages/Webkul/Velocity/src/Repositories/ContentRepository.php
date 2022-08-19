@@ -3,7 +3,7 @@
 namespace Webkul\Velocity\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Illuminate\Container\Container as App;
+use Illuminate\Container\Container;
 use Webkul\Product\Repositories\ProductRepository;
 use Prettus\Repository\Traits\CacheableRepository;
 
@@ -15,15 +15,15 @@ class ContentRepository extends Repository
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
-     * @param  \Illuminate\Container\Container  $app
+     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected ProductRepository $productRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**
@@ -31,7 +31,7 @@ class ContentRepository extends Repository
      *
      * @return string
      */
-    function model()
+    function model(): string
     {
         return 'Webkul\Velocity\Contracts\Content';
     }
@@ -42,8 +42,6 @@ class ContentRepository extends Repository
      */
     public function create(array $data)
     {
-        // Event::fire('velocity.content.create.before');
-
         if (
             isset($data['locale'])
             && $data['locale'] == 'all'
@@ -60,26 +58,6 @@ class ContentRepository extends Repository
         }
 
         $content = $this->model->create($data);
-
-        // Event::fire('velocity.content.create.after', $content);
-
-        return $content;
-    }
-
-    /**
-     * @param  array  $data
-     * @param  int  $id
-     * @return \Webkul\Velocity\Models\Content
-     */
-    public function update(array $data, $id)
-    {
-        $content = $this->find($id);
-
-        // Event::fire('velocity.content.update.before', $id);
-
-        $content->update($data);
-
-        // Event::fire('velocity.content.update.after', $id);
 
         return $content;
     }

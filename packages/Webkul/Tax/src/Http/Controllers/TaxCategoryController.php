@@ -2,6 +2,7 @@
 
 namespace Webkul\Tax\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
 
@@ -55,9 +56,13 @@ class TaxCategoryController extends Controller
             'taxrates'    => 'array|required',
         ]);
 
+        Event::dispatch('tax.tax_category.create.before');
+
         $taxCategory = $this->taxCategoryRepository->create($data);
 
         $this->taxCategoryRepository->attachOrDetach($taxCategory, $data['taxrates']);
+
+        Event::dispatch('tax.tax_category.create.after', $taxCategory);
 
         session()->flash('success', trans('admin::app.settings.tax-categories.create-success'));
 
@@ -94,15 +99,13 @@ class TaxCategoryController extends Controller
 
         $data = request()->input();
 
+        Event::dispatch('tax.tax_category.update.before', $id);
+
         $taxCategory = $this->taxCategoryRepository->update($data, $id);
 
-        if (! $taxCategory) {
-            session()->flash('error', trans('admin::app.settings.tax-categories.update-error'));
-
-            return redirect()->back();
-        }
-
         $this->taxCategoryRepository->attachOrDetach($taxCategory, $data['taxrates']);
+
+        Event::dispatch('tax.tax_category.update.after', $taxCategory);
 
         session()->flash('success', trans('admin::app.settings.tax-categories.update-success'));
 
@@ -120,7 +123,11 @@ class TaxCategoryController extends Controller
         $this->taxCategoryRepository->findOrFail($id);
 
         try {
+            Event::dispatch('tax.tax_category.delete.before', $id);
+
             $this->taxCategoryRepository->delete($id);
+
+            Event::dispatch('tax.tax_category.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Tax Category'])]);
         } catch (\Exception $e) {}

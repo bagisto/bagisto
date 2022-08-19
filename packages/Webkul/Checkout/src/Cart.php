@@ -25,7 +25,6 @@ class Cart
 {
     use CartCoupons, CartTools, CartValidators;
 
-
     /**
      * @var \Webkul\Checkout\Contracts\Cart
      */
@@ -34,12 +33,12 @@ class Cart
     /**
      * Create a new class instance.
      *
-     * @param  \Webkul\Checkout\Repositories\CartRepository             $cartRepository
-     * @param  \Webkul\Checkout\Repositories\CartItemRepository         $cartItemRepository
-     * @param  \Webkul\Checkout\Repositories\CartAddressRepository      $cartAddressRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository           $productRepository
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository           $taxCategoryRepository
-     * @param  \Webkul\Customer\Repositories\WishlistRepository         $wishlistRepository
+     * @param  \Webkul\Checkout\Repositories\CartRepository  $cartRepository
+     * @param  \Webkul\Checkout\Repositories\CartItemRepository  $cartItemRepository
+     * @param  \Webkul\Checkout\Repositories\CartAddressRepository  $cartAddressRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository   $taxCategoryRepository
+     * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository
      * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      * @return void
      */
@@ -127,11 +126,11 @@ class Cart
 
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
-                if (isset($data['additional']['parent_id'])) {
-                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, $parentData ?: request()->all())) {
-                        return $item;
-                    }
-                } else {
+                if (! isset($data['additional']['parent_id'])) {
+                    return $item;
+                }
+
+                if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, $parentData ?: request()->all())) {
                     return $item;
                 }
             }
@@ -279,7 +278,7 @@ class Cart
 
             if (
                 $item->product
-                && $item->product->status === 0
+                && ! $item->product->status
             ) {
                 throw new Exception(__('shop::app.checkout.cart.item.inactive'));
             }
@@ -331,7 +330,7 @@ class Cart
         if ($cartItem = $cart->items()->find($itemId)) {
             $cartItem->delete();
 
-            if ($cart->items()->get()->count() == 0) {
+            if (! $cart->items()->get()->count()) {
                 $this->removeCart($cart);
             } else {
                 Shipping::collectRates();
@@ -384,7 +383,7 @@ class Cart
             if ($this->isCartItemInactive($item)) {
                 $this->cartItemRepository->delete($item->id);
 
-                if ($cart->items->count() == 0) {
+                if (! $cart->items->count()) {
                     $this->removeCart($cart);
                 }
 
@@ -420,8 +419,7 @@ class Cart
             && (
                 $user->email
                 && $user->first_name
-                &&
-                $user->last_name
+                && $user->last_name
             )
         ) {
             $cart->customer_email = $user->email;
@@ -623,7 +621,7 @@ class Cart
 
         $cartItems = $cart->items()->get();
 
-        if (count($cartItems) === 0) {
+        if (! count($cartItems)) {
             $this->removeCart($cart);
 
             return false;

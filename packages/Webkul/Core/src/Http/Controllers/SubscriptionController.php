@@ -60,18 +60,17 @@ class SubscriptionController extends Controller
      */
     public function update($id)
     {
-        $data = request()->all();
-
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         $customer = $subscriber->customer;
 
         if (! is_null($customer)) {
-            $customer->subscribed_to_news_letter = $data['is_subscribed'];
+            $customer->subscribed_to_news_letter = request('is_subscribed');
+
             $customer->save();
         }
 
-        $result = $subscriber->update($data);
+        $result = $subscriber->update(request()->all());
 
         if ($result) {
             session()->flash('success', trans('admin::app.customers.subscribers.update-success'));
