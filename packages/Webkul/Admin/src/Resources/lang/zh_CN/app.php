@@ -1586,6 +1586,7 @@ return [
             'logo-size'                             => '图像分辨率应该是 112px X 41px',
             'favicon-size'                          => '图像分辨率应该是 16px X 16px',
             'invoice-logo-size'                     => '图像分辨率应该是 192px X 50px',
+            'image-required'                        => 'Image is required'
         ],
     ],
     'api'    => [

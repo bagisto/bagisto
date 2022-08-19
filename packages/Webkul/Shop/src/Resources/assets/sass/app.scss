@@ -4926,6 +4926,15 @@ body {
 
 .compare-products {
     width: unset !important;
+
+    tr {
+        display: flex;
+        justify-content: space-around;
+
+        td {
+            width: 200px;
+        }
+    }
 }
 
 .mt-0 {

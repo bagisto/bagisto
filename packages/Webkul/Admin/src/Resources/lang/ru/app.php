@@ -1631,6 +1631,7 @@ return [
             'logo-size'                             => 'Image resolution should be like 112px X 41px',
             'favicon-size'                          => 'Image resolution should be like 16px X 16px',
             'invoice-logo-size'                     => 'Image resolution should be like 192px X 50px',
+            'image-required'                        => 'Image is required'
         ],
     ],
 
