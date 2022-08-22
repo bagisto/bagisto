@@ -576,11 +576,32 @@ class Configurable extends AbstractType
      */
     public function haveOffer()
     {
-        if ($this->getOfferPrice() < $this->getMinimalPrice()) {
+        if ($this->getOfferPrice() < $this->getMinimalPrice() || $this->haveSpecialPrice()) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Check whether configurable product have special price.
+     *
+     * @param  int  $qty
+     * @return bool
+    */
+    public function haveSpecialPrice($qty = null)
+    {
+        $haveSpecialPrice = false;
+
+        foreach ($this->product->variants as $variant) {
+            if ($variant->getTypeInstance()->haveSpecialPrice()) {
+                $haveSpecialPrice = true;
+
+                break;
+            }
+        }
+
+        return $haveSpecialPrice;
     }
 
     /**
