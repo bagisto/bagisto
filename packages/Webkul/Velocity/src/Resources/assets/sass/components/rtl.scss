@@ -576,12 +576,14 @@ body {
 
         #date-of-birth {
             .cross-icon {
-                right: 94% !important;
+                right: unset;
+                left: 34px;
             }
         }
         
         #date-of-birth:after {
-            right: 96% !important;
+            right: unset;
+            left: 8px;
         }
     }
 }
