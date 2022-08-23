@@ -2,25 +2,25 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Container\Container as App;
-use Webkul\Attribute\Repositories\AttributeRepository;
+use Illuminate\Container\Container;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Attribute\Repositories\AttributeRepository;
 
 class ProductFlatRepository extends Repository
 {
     /**
      * Create a new repository instance.
      *
-     * @param \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
-     * @param \Illuminate\Container\Container                    $app
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected AttributeRepository $attributeRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**
@@ -30,7 +30,7 @@ class ProductFlatRepository extends Repository
      */
     public function model(): string
     {
-        return \Webkul\Product\Contracts\ProductFlat::class;
+        return 'Webkul\Product\Contracts\ProductFlat';
     }
 
     /**

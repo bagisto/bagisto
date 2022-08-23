@@ -13,7 +13,8 @@ class Product extends BaseProduct implements Sitemapable
      */
     public function toSitemapTag(): Url | string | array
     {
-        if (! $this->url_key
+        if (
+            ! $this->url_key
             || ! $this->status
             || ! $this->visible_individually
         ) {

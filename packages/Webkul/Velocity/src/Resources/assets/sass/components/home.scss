@@ -639,6 +639,10 @@ body::after {
     .product-actions {
         display: inline-block;
 
+        form {
+            float: right;
+        }
+        
         .compare-icon,
         .wishlist-icon {
             height: 38px;

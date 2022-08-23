@@ -21,11 +21,11 @@ class BookingProductController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
-     * @param  \Webkul\BookingProduct\Helpers\DefaultSlot                    $defaultSlotHelper
-     * @param  \Webkul\BookingProduct\Helpers\AppointmentSlot                $appointmentSlotHelper
-     * @param  \Webkul\BookingProduct\Helpers\RentalSlot                     $rentalSlotHelper
-     * @param  \Webkul\BookingProduct\Helpers\EventTicket                    $EventTicketHelper
-     * @param  \Webkul\BookingProduct\Helpers\TableSlot                      $tableSlotHelper
+     * @param  \Webkul\BookingProduct\Helpers\DefaultSlot $defaultSlotHelper
+     * @param  \Webkul\BookingProduct\Helpers\AppointmentSlot  $appointmentSlotHelper
+     * @param  \Webkul\BookingProduct\Helpers\RentalSlot  $rentalSlotHelper
+     * @param  \Webkul\BookingProduct\Helpers\EventTicket   $EventTicketHelper
+     * @param  \Webkul\BookingProduct\Helpers\TableSlot  $tableSlotHelper
      * @return void
      */
     public function __construct(

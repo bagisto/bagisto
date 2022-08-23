@@ -86,18 +86,20 @@ class ProductFlat
             return false;
         }
 
-        if (! in_array($attribute->code, $this->flatColumns)) {
-            Schema::table('product_flat', function (Blueprint $table) use($attribute) {
-                $table->{$this->attributeTypeFields[$attribute->type]}($attribute->code)->nullable();
-
-                if (
-                    $attribute->type == 'select'
-                    || $attribute->type == 'multiselect'
-                ) {
-                    $table->string($attribute->code . '_label')->nullable();
-                }
-            });
+        if (in_array($attribute->code, $this->flatColumns)) {
+            return;
         }
+
+        Schema::table('product_flat', function (Blueprint $table) use($attribute) {
+            $table->{$this->attributeTypeFields[$attribute->type]}($attribute->code)->nullable();
+
+            if (
+                $attribute->type == 'select'
+                || $attribute->type == 'multiselect'
+            ) {
+                $table->string($attribute->code . '_label')->nullable();
+            }
+        });
     }
 
     /**
@@ -110,21 +112,22 @@ class ProductFlat
     {
         $attribute = $this->attributeRepository->find($attributeId);
         
-        if (in_array(strtolower($attribute->code), $this->flatColumns)) {
-            Schema::table('product_flat', function (Blueprint $table) use($attribute) {
-                $table->dropColumn($attribute->code);
-
-                if (
-                    $attribute->type == 'select'
-                    || $attribute->type == 'multiselect'
-                ) {
-                    $table->dropColumn($attribute->code . '_label');
-                }
-            });
-            
-            $this->productFlatRepository->updateAttributeColumn( $attribute , $this);
-            
+        if (! in_array(strtolower($attribute->code), $this->flatColumns)) {
+            return;
         }
+
+        Schema::table('product_flat', function (Blueprint $table) use($attribute) {
+            $table->dropColumn($attribute->code);
+
+            if (
+                $attribute->type == 'select'
+                || $attribute->type == 'multiselect'
+            ) {
+                $table->dropColumn($attribute->code . '_label');
+            }
+        });
+        
+        $this->productFlatRepository->updateAttributeColumn( $attribute , $this);
     }
 
     /**
@@ -137,10 +140,12 @@ class ProductFlat
     {
         $this->createFlat($product);
 
-        if (ProductType::hasVariants($product->type)) {
-            foreach ($product->variants()->get() as $variant) {
-                $this->createFlat($variant, $product);
-            }
+        if (! ProductType::hasVariants($product->type)) {
+            return;
+        }
+
+        foreach ($product->variants()->get() as $variant) {
+            $this->createFlat($variant, $product);
         }
     }
 
@@ -192,8 +197,11 @@ class ProductFlat
                     ]);
 
                     foreach ($familyAttributes[$product->attribute_family_id] as $attribute) {
-                        if (($parentProduct
-                            && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], $this->fillableAttributeCodes)))
+                        if (
+                            (
+                                $parentProduct
+                                && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], $this->fillableAttributeCodes))
+                            )
                             || in_array($attribute->code, ['tax_category_id'])
                             || ! in_array($attribute->code, $this->flatColumns)
                         ) {
@@ -261,14 +269,14 @@ class ProductFlat
 
                     $productFlat->min_price = $product->getTypeInstance()->getMinimalPrice();
 
-                    $productFlat->max_price = $product->getTypeInstance()->getMaximamPrice();
+                    $productFlat->max_price = $product->getTypeInstance()->getMaximumPrice();
 
                     if ($parentProduct) {
                         $parentProductFlat = $this->productFlatRepository->findOneWhere([
-                                'product_id' => $parentProduct->id,
-                                'channel'    => $channel->code,
-                                'locale'     => $locale->code,
-                            ]);
+                            'product_id' => $parentProduct->id,
+                            'channel'    => $channel->code,
+                            'locale'     => $locale->code,
+                        ]);
 
                         if ($parentProductFlat) {
                             $productFlat->parent_id = $parentProductFlat->id;

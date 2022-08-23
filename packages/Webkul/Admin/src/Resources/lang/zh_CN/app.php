@@ -726,6 +726,7 @@ return [
         'no'             => 'No',
         'delete'         => '删除',
         'enable-atleast-one-shipping' => '啟用至少一種運輸方式',
+        'enable-atleast-one-payment'  => '啟用至少一種付款方式。',
 
         'tax-categories' => [
             'title'           => '税分类',

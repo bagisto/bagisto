@@ -726,6 +726,7 @@ return [
         'no'             => 'خیر',
         'delete'         => 'حذف',
         'enable-atleast-one-shipping' => 'حداقل یک روش حمل و نقل را فعال کنید.',
+        'enable-atleast-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
 
         'tax-categories' => [
             'title'           => 'دسته بندی های مالیات',

@@ -63,7 +63,7 @@ class SessionController extends Controller
             return redirect()->back();
         }
 
-        if (auth()->guard('admin')->user()->status == 0) {
+        if (! auth()->guard('admin')->user()->status) {
             session()->flash('warning', trans('admin::app.users.users.activate-warning'));
 
             auth()->guard('admin')->logout();

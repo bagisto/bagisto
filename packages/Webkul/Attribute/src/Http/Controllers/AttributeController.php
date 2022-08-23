@@ -2,6 +2,7 @@
 
 namespace Webkul\Attribute\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\AttributeDataGrid;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
@@ -62,11 +63,13 @@ class AttributeController extends Controller
             'type'       => 'required',
         ]);
 
-        $data = request()->all();
+        Event::dispatch('catalog.attribute.create.before');
 
-        $data['is_user_defined'] = 1;
+        $attribute = $this->attributeRepository->create(array_merge(request()->all(), [
+            'is_user_defined' => 1,
+        ]));
 
-        $this->attributeRepository->create($data);
+        Event::dispatch('catalog.attribute.create.after', $attribute);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Attribute']));
 
@@ -113,7 +116,11 @@ class AttributeController extends Controller
             'type'       => 'required',
         ]);
 
-        $this->attributeRepository->update(request()->all(), $id);
+        Event::dispatch('catalog.attribute.update.before', $id);
+
+        $attribute = $this->attributeRepository->update(request()->all(), $id);
+
+        Event::dispatch('catalog.attribute.update.after', $attribute);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Attribute']));
 
@@ -137,7 +144,11 @@ class AttributeController extends Controller
         }
 
         try {
+            Event::dispatch('catalog.attribute.delete.before', $id);
+
             $this->attributeRepository->delete($id);
+
+            Event::dispatch('catalog.attribute.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Attribute'])]);
         } catch (\Exception $e) {}
@@ -166,16 +177,18 @@ class AttributeController extends Controller
             }
 
             foreach ($indexes as $index) {
+                Event::dispatch('catalog.attribute.delete.before', $index);
+
                 $this->attributeRepository->delete($index);
+
+                Event::dispatch('catalog.attribute.delete.after', $index);
             }
 
             session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
-
-            return redirect()->back();
         } else {
             session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
-
-            return redirect()->back();
         }
+
+        return redirect()->back();
     }
 }

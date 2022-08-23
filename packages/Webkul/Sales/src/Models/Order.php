@@ -234,8 +234,7 @@ class Order extends Model implements OrderContract
     public function haveStockableItems(): bool
     {
         foreach ($this->items as $item) {
-            if ($item->getTypeInstance()
-                ->isStockable()) {
+            if ($item->getTypeInstance()->isStockable()) {
                 return true;
             }
         }
@@ -378,8 +377,7 @@ class Order extends Model implements OrderContract
             }
         }
 
-        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()
-            ->sum('base_adjustment_fee') > 0) {
+        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()->sum('base_adjustment_fee') > 0) {
             return true;
         }
 

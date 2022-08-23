@@ -79,6 +79,7 @@ class ConfigurationController extends Controller
     {
         if (! request()->route('slug')) {
             $firstItem = current($this->configTree->items);
+
             $secondItem = current($firstItem['children']);
 
             return $this->getSlugs($secondItem);
@@ -109,12 +110,29 @@ class ConfigurationController extends Controller
             foreach ($data['sales']['carriers'] as $carrier) {
                 if ($carrier['active']) {
                     $atLeastOneCarrierEnabled = true;
+                    
                     break;
                 }
             }
             
             if (! $atLeastOneCarrierEnabled) {
                 session()->flash('error', trans('admin::app.configuration.enable-atleast-one-shipping'));
+                
+                return redirect()->back();
+            }
+        } elseif (isset($data['sales']['paymentmethods'])) {
+            $atLeastOnePaymentMethodEnabled = false;
+            
+            foreach ($data['sales']['paymentmethods'] as $paymentMethod) {
+                if ($paymentMethod['active']) {
+                    $atLeastOnePaymentMethodEnabled = true;
+
+                    break;
+                }
+            }
+            
+            if (! $atLeastOnePaymentMethodEnabled) {
+                session()->flash('error', trans('admin::app.configuration.enable-atleast-one-payment'));
                 
                 return redirect()->back();
             }

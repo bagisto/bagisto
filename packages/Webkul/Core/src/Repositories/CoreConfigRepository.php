@@ -20,7 +20,7 @@ class CoreConfigRepository extends Repository
      */
     public function model(): string
     {
-        return CoreConfig::class;
+        return 'Webkul\Core\Contracts\CoreConfig';
     }
 
     /**
@@ -50,9 +50,9 @@ class CoreConfigRepository extends Repository
             foreach ($recurssiveData as $fieldName => $value) {
                 $field = core()->getConfigField($fieldName);
 
-                $channelBased = isset($field['channel_based']) && $field['channel_based'] ? true : false;
+                $channelBased = isset($field['channel_based']) && $field['channel_based'];
 
-                $localeBased = isset($field['locale_based']) && $field['locale_based'] ? true : false;
+                $localeBased = isset($field['locale_based']) && $field['locale_based'];
 
                 if (
                     getType($value) == 'array'

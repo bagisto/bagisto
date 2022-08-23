@@ -5,6 +5,8 @@ namespace Webkul\Admin\Listeners;
 use Illuminate\Support\Facades\Mail;
 use Webkul\User\Notifications\AdminUpdatePassword;
 use Webkul\Customer\Notifications\CustomerUpdatePassword;
+use Webkul\Customer\Models\Customer;
+use Webkul\User\Models\Admin;
 
 class PasswordChange
 {
@@ -17,11 +19,9 @@ class PasswordChange
     public function sendUpdatePasswordMail($adminOrCustomer)
     {
         try {
-            if ($adminOrCustomer instanceof \Webkul\Customer\Models\Customer) {
+            if ($adminOrCustomer instanceof Customer) {
                 Mail::queue(new CustomerUpdatePassword($adminOrCustomer));
-            }
-
-            if ($adminOrCustomer instanceof \Webkul\User\Models\Admin) {
+            } elseif ($adminOrCustomer instanceof Admin) {
                 Mail::queue(new AdminUpdatePassword($adminOrCustomer));
             }
         } catch (\Exception $e) {

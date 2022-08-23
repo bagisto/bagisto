@@ -9,11 +9,11 @@ class WishlistRepository extends Repository
     /**
      * Specify model class name.
      *
-     * @return mixed
+     * @return string
      */
-    function model()
+    function model(): string
     {
-        return \Webkul\Customer\Contracts\Wishlist::class;
+        return 'Webkul\Customer\Contracts\Wishlist';
     }
 
     /**
