@@ -59,7 +59,7 @@ class NewsLetterDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->status === 1) {
+                if ($value->status) {
                     return trans('admin::app.datagrid.true');
                 } else {
                     return trans('admin::app.datagrid.false');

@@ -8,7 +8,12 @@ use Illuminate\Support\Str;
 
 class ProductGroupedProductRepository extends Repository
 {
-    public function model()
+    /**
+     * Specify model.
+     *
+     * @return string
+     */
+    public function model(): string
     {
         return 'Webkul\Product\Contracts\ProductGroupedProduct';
     }

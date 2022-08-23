@@ -11,8 +11,7 @@ trait PaymentTerm
      */
     public function hasPaymentTerm()
     {
-        return $this->getPaymentTerm()
-            ? true : false;
+        return (bool) $this->getPaymentTerm();
     }
 
     /**

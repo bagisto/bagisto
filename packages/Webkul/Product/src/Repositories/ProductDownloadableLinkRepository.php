@@ -13,7 +13,7 @@ class ProductDownloadableLinkRepository extends Repository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
         return 'Webkul\Product\Contracts\ProductDownloadableLink';
     }
@@ -28,13 +28,15 @@ class ProductDownloadableLinkRepository extends Repository
     public function upload($data, $productId)
     {
         foreach ($data as $type => $file) {
-            if (request()->hasFile($type)) {
-                return [
-                    $type           => $path = request()->file($type)->store('product_downloadable_links/' . $productId, 'private'),
-                    $type . '_name' => $file->getClientOriginalName(),
-                    $type . '_url'  => Storage::url($path),
-                ];
+            if (! request()->hasFile($type)) {
+                continue;
             }
+
+            return [
+                $type           => $path = request()->file($type)->store('product_downloadable_links/' . $productId, 'private'),
+                $type . '_name' => $file->getClientOriginalName(),
+                $type . '_url'  => Storage::url($path),
+            ];
         }
 
         return [];

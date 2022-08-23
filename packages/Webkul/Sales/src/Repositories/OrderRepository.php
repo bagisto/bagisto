@@ -2,12 +2,11 @@
 
 namespace Webkul\Sales\Repositories;
 
-use Illuminate\Container\Container as App;
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Generators\OrderSequencer;
 use Webkul\Sales\Models\Order as OrderModel;
 
@@ -18,16 +17,16 @@ class OrderRepository extends Repository
      *
      * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
      * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
-     * @param  \Illuminate\Container\Container  $app
+     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected OrderItemRepository $orderItemRepository,
         protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
-        App $app
+        Container $container
     )
     {
-        parent::__construct($app);
+        parent::__construct($container);
     }
 
     /**
@@ -35,9 +34,9 @@ class OrderRepository extends Repository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return Order::class;
+        return 'Webkul\Sales\Contracts\Order';
     }
 
     /**

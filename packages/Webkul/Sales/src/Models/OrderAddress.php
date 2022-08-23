@@ -53,9 +53,12 @@ class OrderAddress extends Address implements OrderAddressContract
             switch ($address->address_type) {
                 case CartAddress::ADDRESS_TYPE_BILLING:
                     $address->address_type = self::ADDRESS_TYPE_BILLING;
+
                     break;
+                    
                 case CartAddress::ADDRESS_TYPE_SHIPPING:
                     $address->address_type = self::ADDRESS_TYPE_SHIPPING;
+                    
                     break;
             }
         });

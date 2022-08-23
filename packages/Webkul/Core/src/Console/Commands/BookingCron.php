@@ -64,11 +64,15 @@ class BookingCron extends Command
                 ProductFlat::query()->where('product_id', $expEvent->product_id)
                     ->update(['status' => 0]);
 
-                Log::info('BookingCron: deactivated expired event', ['booking_product_id' => $expEvent->id, 'product_id' => $expEvent->product_id]);
+                Log::info('BookingCron: deactivated expired event', [
+                    'booking_product_id' => $expEvent->id,
+                    'product_id'         => $expEvent->product_id,
+                ]);
             }
             $this->info('All expired events have been deactivated');
         } else {
             Log::info('BookingCron: Did not find any expired events to be deactivated');
+
             $this->info('Did not find any expired events to be deactivated');
         }
     }

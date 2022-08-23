@@ -430,6 +430,11 @@
             padding-left: 10px;
         }
 
+        form {
+            display: inline-table;
+            vertical-align: bottom;
+        }
+
         .product-price span:first-child, .product-price span:last-child {
             font-size: 18px;
             font-weight: 600;

@@ -105,13 +105,15 @@ class AdminServiceProvider extends ServiceProvider
                         && substr_count($item['key'], '.') == 1
                     ) {
                         foreach ($allowedPermissions as $key => $value) {
-                            if ($item['key'] == $value) {
-                                $neededItem = $allowedPermissions[$key + 1];
+                            if ($item['key'] != $value) {
+                                continue;
+                            }
 
-                                foreach (config('menu.admin') as $key1 => $findMatced) {
-                                    if ($findMatced['key'] == $neededItem) {
-                                        $item['route'] = $findMatced['route'];
-                                    }
+                            $neededItem = $allowedPermissions[$key + 1];
+
+                            foreach (config('menu.admin') as $key1 => $findMatced) {
+                                if ($findMatced['key'] == $neededItem) {
+                                    $item['route'] = $findMatced['route'];
                                 }
                             }
                         }

@@ -21,7 +21,8 @@ class DuplicateInvoiceNotification extends Mailable
         public $invoice,
         public $customerEmail
     )
-    {}
+    {
+    }
 
     /**
      * Build the message.

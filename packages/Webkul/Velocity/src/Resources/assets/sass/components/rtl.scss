@@ -178,6 +178,14 @@ body {
                     float: right;
                     margin-left: 20px;
                 }
+
+                .wishlist-icon {
+                    padding: 0px !important;
+                }
+
+                .product-information {
+                    margin-right: 1%;
+                }
             }
         }
 
@@ -337,6 +345,10 @@ body {
         .product-detail {
             .product-actions {
                 .compare-icon {
+                    float: left;
+                }
+
+                form {
                     float: left;
                 }
 

@@ -29,8 +29,8 @@ class OrderCommentNotification extends Mailable
     public function build()
     {
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-                    ->to($this->comment->order->customer_email, $this->comment->order->customer_full_name)
-                    ->subject(trans('shop::app.mail.order.comment.subject', ['order_id' => $this->comment->order->increment_id]))
-                    ->view('shop::emails.sales.new-order-comment');
+            ->to($this->comment->order->customer_email, $this->comment->order->customer_full_name)
+            ->subject(trans('shop::app.mail.order.comment.subject', ['order_id' => $this->comment->order->increment_id]))
+            ->view('shop::emails.sales.new-order-comment');
     }
 }

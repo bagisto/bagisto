@@ -90,10 +90,10 @@ class Review extends AbstractProduct
         }
 
         return $reviews[$product->id] = $product->reviews()->where('status', 'approved')
-                                            ->select('rating', DB::raw('count(*) as total'))
-                                            ->groupBy('rating')
-                                            ->orderBy('rating', 'desc')
-                                            ->get();
+            ->select('rating', DB::raw('count(*) as total'))
+            ->groupBy('rating')
+            ->orderBy('rating', 'desc')
+            ->get();
     }
 
      /**

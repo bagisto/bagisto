@@ -37,7 +37,15 @@ class Booking
     /**
      * @return array
      */
-    protected $daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    protected $daysOfWeek = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    ];
 
     /**
      * Create a new helper instance.
@@ -95,7 +103,7 @@ class Booking
 
         $bookingProductSlot = $this->typeRepositories[$bookingProduct->type]->findOneByField('booking_product_id', $bookingProduct->id);
 
-        $availabileDays = $this->getAvailableWeekDays($bookingProduct);
+        $availableDays = $this->getAvailableWeekDays($bookingProduct);
 
         foreach ($this->daysOfWeek as $index => $isOpen) {
             $slots = [];
@@ -106,7 +114,7 @@ class Booking
 
             $slotsByDays[] = [
                 'name'  => trans($this->daysOfWeek[$index]),
-                'slots' => isset($availabileDays[$index]) ? $this->conver24To12Hours($slots) : [],
+                'slots' => isset($availableDays[$index]) ? $this->conver24To12Hours($slots) : [],
             ];
         }
 
@@ -128,8 +136,8 @@ class Booking
         }
 
         return count($slots)
-               ? implode(' | ', $slots)
-               : '<span class="text-danger">' . trans('bookingproduct::app.shop.products.closed') . '</span>';
+            ? implode(' | ', $slots)
+            : '<span class="text-danger">' . trans('bookingproduct::app.shop.products.closed') . '</span>';
     }
 
     /**
@@ -162,15 +170,16 @@ class Booking
         $currentTime = Carbon::now();
 
         $availableFrom = ! $bookingProduct->available_from && $bookingProduct->available_from
-                         ? Carbon::createFromTimeString($bookingProduct->available_from)
-                         : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
+            ? Carbon::createFromTimeString($bookingProduct->available_from)
+            : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
 
         $availableTo = ! $bookingProduct->available_from && $bookingProduct->available_to
-                       ? Carbon::createFromTimeString($bookingProduct->available_to)
-                       : Carbon::createFromTimeString('2080-01-01 00:00:00');
+            ? Carbon::createFromTimeString($bookingProduct->available_to)
+            : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         for ($i = 0; $i < 7; $i++) {
             $date = clone $currentTime;
+
             $date->addDays($i);
 
             if (
@@ -221,6 +230,7 @@ class Booking
 
         foreach ($slots as $index => $slot) {
             $slots[$index]['from']  = Carbon::createFromTimeString($slot['from'])->format("h:i a");
+            
             $slots[$index]['to']  = Carbon::createFromTimeString($slot['to'])->format("h:i a");
         }
 
@@ -250,16 +260,16 @@ class Booking
         $requestedDate = Carbon::createFromTimeString($date . " 00:00:00");
 
         $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                         ? Carbon::createFromTimeString($bookingProduct->available_from)
-                         : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
+            ? Carbon::createFromTimeString($bookingProduct->available_from)
+            : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
 
         $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                       ? Carbon::createFromTimeString($bookingProduct->available_to)
-                       : Carbon::createFromTimeString('2080-01-01 00:00:00');
+            ? Carbon::createFromTimeString($bookingProduct->available_to)
+            : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         $timeDurations = $bookingProductSlot->same_slot_all_days
-                         ? $bookingProductSlot->slots
-                         : ($bookingProductSlot->slots[$requestedDate->format('w')] ?? []);
+            ? $bookingProductSlot->slots
+            : ($bookingProductSlot->slots[$requestedDate->format('w')] ?? []);
 
         if (
             $requestedDate < $availableFrom
@@ -387,7 +397,7 @@ class Booking
             return $slot['timestamp'] == $cartItem['additional']['booking']['slot'];
         });
 
-        return count($filtered) ? false : true;
+        return ! count($filtered);
     }
 
     /**
@@ -399,12 +409,12 @@ class Booking
         $timestamps = explode('-', $data['additional']['booking']['slot']);
 
         $result = $this->bookingRepository->getModel()
-                       ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
-                       ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
-                       ->where('bookings.product_id', $data['product_id'])
-                       ->where('bookings.from', $timestamps[0])
-                       ->where('bookings.to', $timestamps[1])
-                       ->first();
+            ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+            ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
+            ->where('bookings.product_id', $data['product_id'])
+            ->where('bookings.from', $timestamps[0])
+            ->where('bookings.to', $timestamps[1])
+            ->first();
 
         return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
     }
@@ -576,10 +586,6 @@ class Booking
      */
     public function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool
     {
-        if ($item->product->status === 0) {
-            return true;
-        }
-
-        return false;
+        return ! $item->product->status;
     }
 }

@@ -2,10 +2,8 @@
 
 namespace Webkul\Sales\Repositories;
 
-use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\InvoiceItem;
 
 class InvoiceItemRepository extends Repository
 {
@@ -14,9 +12,9 @@ class InvoiceItemRepository extends Repository
      *
      * @return string
      */
-    function model()
+    function model(): string
     {
-        return InvoiceItem::class;
+        return 'Webkul\Sales\Contracts\InvoiceItem';
     }
 
     /**

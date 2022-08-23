@@ -741,6 +741,7 @@ return [
         'no'             => 'لا.',
         'delete'         => 'احذف',
         'enable-atleast-one-shipping' => 'تفعيل طريقة شحن واحدة على الأقل.',
+        'enable-atleast-one-payment'  => 'تفعيل طريقة دفع واحدة على الأقل.',
 
         'tax-categories' => [
             'title'           => 'فئات الضرائب',

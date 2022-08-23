@@ -27,8 +27,8 @@ class ProductVideo extends AbstractProduct
             }
 
             $videos[] = [
-                'type' => $video->type,
-                'video_url'    => Storage::url($video->path),
+                'type'      => $video->type,
+                'video_url' => Storage::url($video->path),
             ];
         }
 

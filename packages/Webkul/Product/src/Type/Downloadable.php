@@ -124,8 +124,10 @@ class Downloadable extends AbstractType
             return false;
         }
 
-        if (is_callable(config('products.isSaleable')) &&
-            call_user_func(config('products.isSaleable'), $this->product) === false) {
+        if (
+            is_callable(config('products.isSaleable'))
+            && call_user_func(config('products.isSaleable'), $this->product) === false
+        ) {
             return false;
         }
 
@@ -286,7 +288,7 @@ class Downloadable extends AbstractType
      *
      * @return float
      */
-    public function getMaximamPrice()
+    public function getMaximumPrice()
     {
         return $this->product->price;
     }
