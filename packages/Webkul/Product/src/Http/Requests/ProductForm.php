@@ -2,13 +2,14 @@
 
 namespace Webkul\Product\Http\Requests;
 
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
-use Webkul\Core\Contracts\Validations\Decimal;
 use Webkul\Core\Contracts\Validations\Slug;
+use Webkul\Core\Contracts\Validations\Decimal;
 use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 
 class ProductForm extends FormRequest
 {
@@ -65,6 +66,14 @@ class ProductForm extends FormRequest
             'special_price_to'   => ['nullable', 'date', 'after_or_equal:special_price_from'],
             'special_price'      => ['nullable', new Decimal, 'lt:price'],
         ]);
+
+        foreach (request()->images['files'] as $key => $file) {
+            if (Str::contains($key, 'image_')) {
+                $this->rules = array_merge($this->rules, [
+                    'images.files.' . $key     => ['required', 'mimes:bmp,jpeg,jpg,png,webp'],
+                ]);
+            }
+        }
 
         foreach ($product->getEditableAttributes() as $attribute) {
             if (

@@ -1628,7 +1628,6 @@ return [
             'logo-size'                             => 'छवि संकल्प 112px X 41px जैसा होना चाहिए',
             'favicon-size'                          => 'छवि संकल्प 16px X 16px जैसा होना चाहिए',
             'invoice-logo-size'                     => 'इमेज रेजोल्यूशन 192px X 50px जैसा होना चाहिए',
-            'image-required'                        => 'Image is required'
         ],
     ],
 

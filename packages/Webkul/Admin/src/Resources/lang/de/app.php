@@ -1589,7 +1589,6 @@ return [
             'set-order-status'                      => 'Set the order status after creating the invoice to',
             'generate-invoice-applicable'           => 'Applicable if automatic generate invoice is enabled',
             'records-found'                         => 'Datensätze gefunden ',
-            'image-required'                        => 'Image is required'
         ],
     ],
 

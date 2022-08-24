@@ -1613,7 +1613,6 @@ return [
             'set-order-status'                      => 'قم بتعيين حالة الطلب بعد إنشاء الفاتورة إلى',
             'generate-invoice-applicable'           => 'قابل للتطبيق إذا تم تمكين إنشاء الفاتورة تلقائيًا',
             'records-found'                         => 'تم العثور على السجلات ',
-            'image-required'                        => 'Image is required'
         ],
     ],
 
