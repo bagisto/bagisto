@@ -452,7 +452,7 @@ input {
     }
 
     .product-card {
-        height: 480px;
+        height: 400px;
         position: relative;
         padding: 15px;
 
@@ -496,7 +496,6 @@ input {
             display: inline-flex;
             justify-content: flex-start;
             align-items: center;
-            bottom: 5px;
             height: 40px;
 
             .addtocart {
