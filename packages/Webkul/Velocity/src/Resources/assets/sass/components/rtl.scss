@@ -178,6 +178,14 @@ body {
                     float: right;
                     margin-left: 20px;
                 }
+
+                .wishlist-icon {
+                    padding: 0px !important;
+                }
+
+                .product-information {
+                    margin-right: 1%;
+                }
             }
         }
 
@@ -337,6 +345,10 @@ body {
         .product-detail {
             .product-actions {
                 .compare-icon {
+                    float: left;
+                }
+
+                form {
                     float: left;
                 }
 
@@ -574,16 +586,16 @@ body {
             }
         }
 
-        .d-inline-block  {
-            .material-icons {
-                float: right !important;
-                margin-left: 4px !important;
+        #date-of-birth {
+            .cross-icon {
+                right: unset;
+                left: 34px;
             }
-        } 
-
-        .rango-delete {
-            float: right !important;
-            margin-left: 4px !important;
+            
+            &:after {
+                right: unset;
+                left: 8px;
+            }
         }
     }
 }

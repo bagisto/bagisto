@@ -731,6 +731,7 @@ return [
         'no'             => 'No',
         'delete'         => 'Elimina',
         'enable-atleast-one-shipping' => 'Abilita almeno un metodo di spedizione.',
+        'enable-atleast-one-payment'  => 'Abilita almeno un metodo di pagamento.',
 
         'tax-categories' => [
             'title'           => 'Categorie IVA',
