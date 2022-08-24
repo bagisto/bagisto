@@ -591,11 +591,11 @@ body {
                 right: unset;
                 left: 34px;
             }
-        }
-        
-        #date-of-birth:after {
-            right: unset;
-            left: 8px;
+            
+            &:after {
+                right: unset;
+                left: 8px;
+            }
         }
     }
 }
