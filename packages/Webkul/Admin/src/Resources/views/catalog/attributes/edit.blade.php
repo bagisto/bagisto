@@ -387,7 +387,7 @@
 
                             <td>
                                 <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
-                                    <input type="text" v-validate="'required'" v-model="row['admin_name']" :name="adminName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
+                                    <input type="text" v-validate="getOptionValidation(row, '')" v-model="row['admin_name']" :name="adminName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has(adminName(row))" v-text="errors.first(adminName(row))"></span>
                                 </div>
                             </td>
@@ -401,7 +401,7 @@
 
                             <td>
                                 <div class="control-group" :class="[errors.has(sortOrderName(row)) ? 'has-error' : '']">
-                                    <input type="text" v-validate="'required|numeric'" v-model="row['sort_order']" :name="sortOrderName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.position') }}&quot;"/>
+                                    <input type="text" v-validate="getOptionValidation(row, '')" v-model="row['sort_order']" :name="sortOrderName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.position') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has(sortOrderName(row))" v-text="errors.first(sortOrderName(row))"></span>
                                 </div>
                             </td>
@@ -506,10 +506,12 @@
                                 'isDelete': false,
                             };
 
-                            if (option.label) {
+                            if (option.label == "") {
                                 self.isNullOptionChecked = true;
                                 self.idNullOption = option.id;
                                 row['notRequired'] = true;
+                            } else {
+                                row['notRequired'] = false;
                             }
 
                             option.translations.forEach((translation) => {
@@ -595,8 +597,8 @@
                     if (row.notRequired === true) {
                         return '';
                     }
-
-                    return (this.appLocale === localeCode) ? 'required' : '';
+                    
+                    return ('{{ app()->getLocale() }}' === localeCode) || localeCode == ""  ? 'required' : '';
                 },
             },
         });
