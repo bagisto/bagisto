@@ -1,5 +1,6 @@
 @php
-    $currentCurrency = core()->getBaseCurrency();
+    $currentCurrency = core()->getBaseCurrency()->symbol;
+
 @endphp
 
 <a class="mini-cart-btn">
@@ -11,6 +12,7 @@
         cart-text="{{ __('shop::app.minicart.cart') }}"
         view-cart-text="{{ __('shop::app.minicart.view-cart') }}"
         checkout-text="{{ __('shop::app.minicart.checkout') }}"
-        subtotal-text="{{ __('shop::app.checkout.cart.cart-subtotal') }}">
+        subtotal-text="{{ __('shop::app.checkout.cart.cart-subtotal') }}"
+        currentCurrency= "{{ $currentCurrency }}">
     </mini-cart>
 </a>
