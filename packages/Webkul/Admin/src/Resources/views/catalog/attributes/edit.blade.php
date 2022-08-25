@@ -506,7 +506,7 @@
                                 'isDelete': false,
                             };
 
-                            if (option.label == "") {
+                            if (! option.label) {
                                 self.isNullOptionChecked = true;
                                 self.idNullOption = option.id;
                                 row['notRequired'] = true;
