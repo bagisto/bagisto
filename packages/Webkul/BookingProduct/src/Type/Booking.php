@@ -184,7 +184,6 @@ class Booking extends Virtual
             }
 
             $products = parent::prepareForCart($data);
-            
         } elseif ($bookingProduct->type == 'event') {
             if (
                 Carbon::now() > $bookingProduct->available_from
