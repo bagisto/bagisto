@@ -302,7 +302,10 @@
 
                         if (this.childAttributes.length == selectedOptionCount) {
                             priceLabelElement.style.display = 'none';
-                            regularPriceElement.style.display = 'none';
+
+                            if (regularPriceElement) {
+                                regularPriceElement.style.display = 'none';
+                            }
 
                             priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
 
