@@ -56,9 +56,10 @@
                                     }}</label>
                                     <input
                                         type="text"
-                                        disabled
                                         :value="item.quantity"
                                         class="ml5"
+                                        @input ="update(index,$event.target.value)"
+                                        ref="qty"
                                     />
                                 </div>
                                 <span class="card-total-price fw6">
@@ -108,9 +109,9 @@
 </template>
 
 <style lang="scss">
-.hide {
-    display: none !important;
-}
+    .hide {
+        display: none !important;
+    }
 </style>
 
 <script>
@@ -144,6 +145,14 @@ export default {
     },
 
     methods: {
+
+        update: function(itemIndex,itemQty) {
+            let baseTotal = Number(this.cartItems[itemIndex].base_price) * Number(itemQty);
+            this.cartItems[itemIndex].quantity = itemQty;
+            this.cartItems[itemIndex].base_total = baseTotal;
+            console.log(this.cartItems[itemIndex]);
+        },
+
         getMiniCartDetails: function() {
             this.$http
                 .get(`${this.$root.baseUrl}/mini-cart`)
