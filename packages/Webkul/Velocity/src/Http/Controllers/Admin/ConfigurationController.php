@@ -129,6 +129,7 @@ class ConfigurationController extends Controller
         $dir = 'velocity/images';
 
         $saveData = $advertisement;
+
         foreach ($data as $imageId => $image) {
             if ($image != "") {
                 $file = 'images.' . $index . '.' . $imageId;
@@ -293,7 +294,7 @@ class ConfigurationController extends Controller
 
         Storage::makeDirectory($copiedPath);
 
-        if ( File::copy($resourceImagePath, storage_path('app/public/' . $image)) ) {
+        if (File::copy($resourceImagePath, storage_path('app/public/' . $image))) {
             $result = $image;
         }
 

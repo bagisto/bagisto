@@ -51,5 +51,12 @@ return [
         'edit'                  => 'تعديل',
         'delete'                => 'حذف',
         'view'                  => 'رأي',
+        'active'                => 'نشيط',
+        'inactive'              => 'غير نشط',
+        'all-channels'          => 'جميع القنوات',
+        'all-locales'           => 'كل اللغات',
+        'all-customer-groups'   => 'جميع مجموعات العملاء',
+        'records-found'         => 'جميع مجموعات العملاء',
+        'clear-all'             => 'Clear All'
     ],
 ];

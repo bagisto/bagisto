@@ -627,6 +627,7 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'video-size'                    => 'Maximum video size should be like :size',
         ],
 
         'attributes' => [
@@ -746,6 +747,7 @@ return [
         'no'             => 'No',
         'delete'         => 'Delete',
         'enable-atleast-one-shipping' => 'Enable atleast one shipping method.',
+        'enable-atleast-one-payment'  => 'Enable atleast one payment method.',
 
         'tax-categories' => [
             'title'           => 'Tax Categories',

@@ -56,8 +56,8 @@ class Attribute extends TranslatableModel implements AttributeContract
     public function scopeFilterableAttributes(Builder $query): Builder
     {
         return $query->where('is_filterable', 1)
-                     ->where('swatch_type', '<>', 'image')
-                     ->orderBy('position');
+            ->where('swatch_type', '<>', 'image')
+            ->orderBy('position');
     }
 
     /**

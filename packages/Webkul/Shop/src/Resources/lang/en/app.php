@@ -623,6 +623,7 @@ return [
             'invalid-coupon'      => 'Coupon code is invalid.',
             'success-coupon'      => 'Coupon code applied successfully.',
             'coupon-apply-issue'  => 'Coupon code can\'t be applied.',
+            'coupon-already-applied' => 'Coupon code already applied.',
         ],
 
         'success' => [

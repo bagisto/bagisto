@@ -124,20 +124,13 @@ class ConfigurableOption extends AbstractProduct
         $allowAttributes = $this->getAllowAttributes($product);
 
         foreach ($allowAttributes as $attribute) {
-
-            $attributeOptionsData = $this->getAttributeOptionsData($attribute, $options);
-
-            if ($attributeOptionsData) {
-                $attributeId = $attribute->id;
-
-                $attributes[] = [
-                    'id'          => $attributeId,
-                    'code'        => $attribute->code,
-                    'label'       => $attribute->name ? $attribute->name : $attribute->admin_name,
-                    'swatch_type' => $attribute->swatch_type,
-                    'options'     => $attributeOptionsData,
-                ];
-            }
+            $attributes[] = [
+                'id'          => $attribute->id,
+                'code'        => $attribute->code,
+                'label'       => $attribute->name ? $attribute->name : $attribute->admin_name,
+                'swatch_type' => $attribute->swatch_type,
+                'options'     => $this->getAttributeOptionsData($attribute, $options),
+            ];
         }
 
         return $attributes;
@@ -155,17 +148,18 @@ class ConfigurableOption extends AbstractProduct
         $attributeOptionsData = [];
 
         foreach ($attribute->options as $attributeOption) {
-
             $optionId = $attributeOption->id;
 
-            if (isset($options[$attribute->id][$optionId])) {
-                $attributeOptionsData[] = [
-                    'id'           => $optionId,
-                    'label'        => $attributeOption->label ? $attributeOption->label : $attributeOption->admin_name,
-                    'swatch_value' => $attribute->swatch_type == 'image' ? $attributeOption->swatch_value_url : $attributeOption->swatch_value,
-                    'products'     => $options[$attribute->id][$optionId],
-                ];
+            if (! isset($options[$attribute->id][$optionId])) {
+                continue;
             }
+            
+            $attributeOptionsData[] = [
+                'id'           => $optionId,
+                'label'        => $attributeOption->label ? $attributeOption->label : $attributeOption->admin_name,
+                'swatch_value' => $attribute->swatch_type == 'image' ? $attributeOption->swatch_value_url : $attributeOption->swatch_value,
+                'products'     => $options[$attribute->id][$optionId],
+            ];
         }
 
         return $attributeOptionsData;

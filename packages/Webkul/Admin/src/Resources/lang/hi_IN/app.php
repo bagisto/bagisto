@@ -624,6 +624,7 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'video-size'                    => 'Maximum video size should be like :size',
         ],
 
         'attributes' => [
@@ -743,6 +744,7 @@ return [
         'no'             => 'नहीं',
         'delete'         => 'हटाएं',
         'enable-atleast-one-shipping' => 'कम से कम एक शिपिंग विधि सक्षम करें।',
+        'enable-atleast-one-payment'  => 'कम से कम एक भुगतान विधि सक्षम करें।',
 
         'tax-categories' => [
             'title'           => 'कर श्रेणियाँ',

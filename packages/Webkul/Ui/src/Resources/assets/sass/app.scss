@@ -744,6 +744,12 @@ h5 {
     }
 }
 
+.boolean {
+    label {
+        pointer-events: none;
+    }
+}
+
 .control-group {
     display: block;
     margin-bottom: 25px;
@@ -756,8 +762,7 @@ h5 {
     label {
         display: block;
         color: $font-color;
-        pointer-events: none;
-
+        
         &.required::after {
             content: '*';
             color: $danger-color;

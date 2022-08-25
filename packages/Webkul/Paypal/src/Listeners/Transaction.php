@@ -23,8 +23,8 @@ class Transaction
 
     /**
      * Save the transaction data for online payment.
+     * 
      * @param  \Webkul\Sales\Models\Invoice $invoice
-     *
      * @return void
     */
     public function saveTransaction($invoice) {
@@ -41,27 +41,27 @@ class Transaction
 
                 if ($transactionDetails['statusCode'] == 200) {
                     $transactionData['transaction_id'] = $transactionDetails['result']['id'];
-                    $transactionData['status']         = $transactionDetails['result']['status'];
-                    $transactionData['type']           = $transactionDetails['result']['intent'];
+                    $transactionData['status'] = $transactionDetails['result']['status'];
+                    $transactionData['type'] = $transactionDetails['result']['intent'];
                     $transactionData['payment_method'] = $invoice->order->payment->method;
-                    $transactionData['order_id']       = $invoice->order->id;
-                    $transactionData['invoice_id']     = $invoice->id;
-                    $transactionData['data']           = json_encode (
-                                                            array_merge($transactionDetails['result']['purchase_units'],
-                                                            $transactionDetails['result']['payer'])
-                                                        );
+                    $transactionData['order_id'] = $invoice->order->id;
+                    $transactionData['invoice_id'] = $invoice->id;
+                    $transactionData['data'] = json_encode (
+                        array_merge($transactionDetails['result']['purchase_units'],
+                        $transactionDetails['result']['payer'])
+                    );
 
                     $this->orderTransactionRepository->create($transactionData);
                 }
             }
         } elseif ($invoice->order->payment->method == 'paypal_standard') {
             $transactionData['transaction_id'] = $data['txn_id'];
-            $transactionData['status']         = $data['payment_status'];
-            $transactionData['type']           = $data['payment_type'];
+            $transactionData['status'] = $data['payment_status'];
+            $transactionData['type'] = $data['payment_type'];
             $transactionData['payment_method'] = $invoice->order->payment->method;
-            $transactionData['order_id']       = $invoice->order->id;
-            $transactionData['invoice_id']     = $invoice->id;
-            $transactionData['data']           = json_encode ($data);
+            $transactionData['order_id'] = $invoice->order->id;
+            $transactionData['invoice_id'] = $invoice->id;
+            $transactionData['data'] = json_encode ($data);
 
             $this->orderTransactionRepository->create($transactionData);
         }

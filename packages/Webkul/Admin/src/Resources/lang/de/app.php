@@ -733,6 +733,8 @@ return [
         'no'             => 'Nein',
         'delete'         => 'Löschen',
         'enable-atleast-one-shipping' => 'Aktivieren Sie mindestens eine Versandart.',
+        'enable-atleast-one-payment'  => 'Aktivieren Sie mindestens eine Zahlungsmethode.',
+
         'tax-categories' =>
         [
             'title'           => 'Steuerkategorien',

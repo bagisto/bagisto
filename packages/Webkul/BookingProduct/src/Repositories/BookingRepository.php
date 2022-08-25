@@ -2,7 +2,6 @@
 
 namespace Webkul\BookingProduct\Repositories;
 
-use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
 use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
@@ -12,9 +11,9 @@ class BookingRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
-    function model()
+    function model(): string
     {
         return 'Webkul\BookingProduct\Contracts\Booking';
     }

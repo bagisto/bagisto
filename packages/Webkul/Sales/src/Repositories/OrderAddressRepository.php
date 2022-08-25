@@ -18,9 +18,8 @@ class OrderAddressRepository extends Repository
      *
      * @return string
      */
-
-    function model()
+    function model(): string
     {
-        return OrderAddress::class;
+        return 'Webkul\Sales\Contracts\OrderAddress';
     }
 }

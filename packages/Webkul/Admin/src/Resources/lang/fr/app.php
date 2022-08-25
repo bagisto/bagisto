@@ -746,6 +746,7 @@ return [
         'no'             => 'Non',
         'delete'         => 'Effacer',
         'enable-atleast-one-shipping' => 'Activez au moins une méthode d\'expédition.',
+        'enable-atleast-one-payment'  => 'Activez au moins un mode de paiement.',
 
         'tax-categories' => [
             'title'           => 'Catégories de taxes',

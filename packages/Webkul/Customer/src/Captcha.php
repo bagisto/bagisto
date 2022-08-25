@@ -117,7 +117,7 @@ class Captcha implements CaptchaContract
 
         $response = $client->post($this->getSiteVerifyEndpoint(), [
             'query' => [
-                'secret' => $this->secretKey,
+                'secret'   => $this->secretKey,
                 'response' => $response
             ]
         ]);
@@ -160,7 +160,7 @@ class Captcha implements CaptchaContract
     protected function getAttributes(): array
     {
         return [
-            'class' => 'g-recaptcha',
+            'class'        => 'g-recaptcha',
             'data-sitekey' => $this->siteKey,
         ];
     }

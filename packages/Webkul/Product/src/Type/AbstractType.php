@@ -558,7 +558,7 @@ abstract class AbstractType
      *
      * @return float
      */
-    public function getMaximamPrice()
+    public function getMaximumPrice()
     {
         return $this->getMinimalPrice();
     }
@@ -844,7 +844,7 @@ abstract class AbstractType
      */
     public function prepareForCart($data)
     {
-        $data['quantity'] = (int) $data['quantity'] ?? 1;
+        $data['quantity'] = $this->handleQuantity((int) $data['quantity']);
 
         $data = $this->getQtyRequest($data);
 
@@ -873,6 +873,19 @@ abstract class AbstractType
         ];
 
         return $products;
+    }
+
+    /**
+     * Handle quantity.
+     *
+     * @param  int  $quantity
+     * @return int
+     */
+    public function handleQuantity(int $quantity): int
+    {
+        return ! empty($quantity)
+            ? $quantity
+            : 1;
     }
 
     /**
@@ -1011,14 +1024,14 @@ abstract class AbstractType
      */
     public function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool
     {
-        if ($item->product->status === 0) {
+        if (! $item->product->status) {
             return true;
         }
 
         switch ($item->product->type) {
             case 'bundle':
                 foreach ($item->children as $child) {
-                    if ($child->product->status === 0) {
+                    if (! $child->product->status) {
                         return true;
                     }
                 }
@@ -1027,7 +1040,7 @@ abstract class AbstractType
             case 'configurable':
                 if (
                     $item->child
-                    && $item->child->product->status === 0
+                    && ! $item->child->product->status
                 ) {
                     return true;
                 }

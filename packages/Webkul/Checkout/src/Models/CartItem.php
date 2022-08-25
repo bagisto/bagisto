@@ -41,9 +41,9 @@ class CartItem extends Model implements CartItemContract
     public function product_flat()
     {
         return (ProductFlatProxy::modelClass())::where('product_flat.product_id', $this->product_id)
-                                               ->where('product_flat.locale', app()->getLocale())
-                                               ->where('product_flat.channel', core()->getCurrentChannelCode())
-                                               ->select('product_flat.*');
+            ->where('product_flat.locale', app()->getLocale())
+            ->where('product_flat.channel', core()->getCurrentChannelCode())
+            ->select('product_flat.*');
     }
 
     /**
@@ -51,8 +51,7 @@ class CartItem extends Model implements CartItemContract
      */
     public function getProductFlatAttribute()
     {
-        return $this->product_flat()
-                    ->first();
+        return $this->product_flat()->first();
     }
 
     public function cart(): HasOne

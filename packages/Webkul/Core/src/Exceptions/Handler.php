@@ -62,7 +62,7 @@ class Handler extends AppExceptionHandler
      */
     private function isAdminUri()
     {
-        return strpos(\Illuminate\Support\Facades\Request::path(), 'admin') !== false ? true : false;
+        return strpos(\Illuminate\Support\Facades\Request::path(), 'admin') !== false;
     }
 
     /**

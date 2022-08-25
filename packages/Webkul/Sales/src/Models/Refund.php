@@ -45,7 +45,7 @@ class Refund extends Model implements RefundContract
     public function items(): HasMany
     {
         return $this->hasMany(RefundItemProxy::modelClass())
-                    ->whereNull('parent_id');
+            ->whereNull('parent_id');
     }
 
     /**

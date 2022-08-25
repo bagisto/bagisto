@@ -24,7 +24,7 @@ class PriceUpdate extends Command
     /**
      * Create a new command instance.
      *
-     * @param  ]Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
+     * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
      * @return void
      */
     public function __construct(protected ProductFlatRepository $productFlatRepository)
@@ -46,30 +46,30 @@ class PriceUpdate extends Command
 
             $product->min_price = $product->getTypeInstance()->getMinimalPrice();
 
-            $product->max_price = $product->getTypeInstance()->getMaximamPrice();
+            $product->max_price = $product->getTypeInstance()->getMaximumPrice();
 
             $product->save();
 
             if ($product->parent) {
                 $product->parent->min_price = $product->parent->getTypeInstance()->getMinimalPrice();
 
-                $product->parent->max_price = $product->parent->getTypeInstance()->getMaximamPrice();
+                $product->parent->max_price = $product->parent->getTypeInstance()->getMaximumPrice();
     
                 $product->parent->save();
             } else {
                 $bundleProducts = $this->productFlatRepository->getModel()
-                                       ->addSelect('product_flat.*')
-                                       ->distinct()
-                                       ->leftJoin('products', 'product_flat.product_id', 'products.id')
-                                       ->leftJoin('product_bundle_options', 'products.id', 'product_bundle_options.product_id')
-                                       ->leftJoin('product_bundle_option_products', 'product_bundle_options.id', 'product_bundle_option_productsproduct_bundle_option_id')
-                                       ->where('product_bundle_option_products.product_id', $product->product_id)
-                                       ->get();
+                    ->addSelect('product_flat.*')
+                    ->distinct()
+                    ->leftJoin('products', 'product_flat.product_id', 'products.id')
+                    ->leftJoin('product_bundle_options', 'products.id', 'product_bundle_options.product_id')
+                    ->leftJoin('product_bundle_option_products', 'product_bundle_options.id', 'product_bundle_option_productsproduct_bundle_option_id')
+                    ->where('product_bundle_option_products.product_id', $product->product_id)
+                    ->get();
 
                 foreach ($bundleProducts as $bundleProduct) {
                     $bundleProduct->min_price = $bundleProduct->getTypeInstance()->getMinimalPrice();
 
-                    $bundleProduct->max_price = $bundleProduct->getTypeInstance()->getMaximamPrice();
+                    $bundleProduct->max_price = $bundleProduct->getTypeInstance()->getMaximumPrice();
         
                     $bundleProduct->save();
                 }

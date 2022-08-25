@@ -13,6 +13,8 @@
                 class="control-error"
                 v-text="'{{ $errors->first('videos.files.*') }}'">
             </span>
+            
+            <span class="control-info mt-10">{{ __('admin::app.catalog.products.video-size', ['size' => core()->getMaxUploadSize()]) }}</span>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.videos.controls.after', ['product' => $product]) !!}

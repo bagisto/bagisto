@@ -40,23 +40,21 @@
     @endauth
 
     @guest('customer')
-        <form
-            class="d-none"
+        <form           
             id="wishlist-{{ $product->product_id }}"
             action="{{ route('customer.wishlist.add', $product->product_id) }}"
             method="POST">
             @csrf
+            
+            <a
+                class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
+                href="javascript:void(0);"
+                title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
+                onclick="document.getElementById('wishlist-{{ $product->product_id }}').submit();">
+
+                <wishlist-component active="false"></wishlist-component>
+            </a>
         </form>
-
-        <a
-            class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
-            href="javascript:void(0);"
-            title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
-            onclick="document.getElementById('wishlist-{{ $product->product_id }}').submit();">
-
-            <wishlist-component active="false"></wishlist-component>
-
-        </a>
     @endauth
 
 {!! view_render_event('bagisto.shop.products.wishlist.after') !!}

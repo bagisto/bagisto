@@ -91,11 +91,11 @@ class EventTicket extends Booking
     public function getBookedQuantity($data)
     {
         $result = $this->bookingRepository->getModel()
-                       ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
-                       ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
-                       ->where('bookings.product_id', $data['product_id'])
-                       ->where('bookings.booking_product_event_ticket_id', $data['additional']['booking']['ticket_id'])
-                       ->first();
+            ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+            ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
+            ->where('bookings.product_id', $data['product_id'])
+            ->where('bookings.booking_product_event_ticket_id', $data['additional']['booking']['ticket_id'])
+            ->first();
 
         return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
     }
@@ -114,6 +114,7 @@ class EventTicket extends Booking
             $ticket = $bookingProduct->event_tickets()->find($product['additional']['booking']['ticket_id']);
 
             $price = $ticket->price;
+            
             if ($this->isInSale($ticket)) {
                 $price = $ticket->special_price;
             }
@@ -186,7 +187,15 @@ class EventTicket extends Booking
     {
         return $ticket->special_price !== null
             && $ticket->special_price > 0.0
-            && ($ticket->special_price_from === null || $ticket->special_price_from === '0000-00-00 00:00:00' || $ticket->special_price_from <= Carbon::now())
-            && ($ticket->special_price_to === null || $ticket->special_price_to === '0000-00-00 00:00:00' || $ticket->special_price_to > Carbon::now());
+            && (
+                $ticket->special_price_from === null
+                || $ticket->special_price_from === '0000-00-00 00:00:00'
+                || $ticket->special_price_from <= Carbon::now()
+            )
+            && (
+                $ticket->special_price_to === null
+                || $ticket->special_price_to === '0000-00-00 00:00:00'
+                || $ticket->special_price_to > Carbon::now()
+            );
     }
 }

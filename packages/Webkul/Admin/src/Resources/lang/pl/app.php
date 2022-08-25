@@ -726,6 +726,7 @@ return [
         'no'             => 'Nie',
         'delete'         => 'Usuń',
         'enable-atleast-one-shipping' => 'Włącz co najmniej jedną metodę wysyłki.',
+        'enable-atleast-one-payment'  => 'Włącz co najmniej jedną formę płatności.',
 
         'tax-categories' => [
             'title'           => 'Kategorie podatkowe',

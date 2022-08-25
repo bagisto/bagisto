@@ -45,12 +45,12 @@ class BookingController extends Controller
     {
         if (request('view_type')) {
             $startDate = request()->get('startDate')
-                        ? Carbon::createFromTimeString(request()->get('startDate') . " 00:00:01")
-                        : Carbon::now()->startOfWeek()->format('Y-m-d H:i:s');
+                ? Carbon::createFromTimeString(request()->get('startDate') . " 00:00:01")
+                : Carbon::now()->startOfWeek()->format('Y-m-d H:i:s');
 
             $endDate = request()->get('endDate')
-                    ? Carbon::createFromTimeString(request()->get('endDate') . " 23:59:59")
-                    : Carbon::now()->endOfWeek()->format('Y-m-d H:i:s');
+                ? Carbon::createFromTimeString(request()->get('endDate') . " 23:59:59")
+                : Carbon::now()->endOfWeek()->format('Y-m-d H:i:s');
 
             $bookings = $this->bookingRepository->getBookings([strtotime($startDate), strtotime($endDate)])
                 ->map(function ($booking) {

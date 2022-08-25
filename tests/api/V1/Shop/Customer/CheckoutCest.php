@@ -65,8 +65,6 @@ class CheckoutCest extends CustomerCest
 
     private function saveShippingMethod(ApiTester $I)
     {
-        $I->haveHttpHeader('X-CSRF-TOKEN', csrf_token());
-
         $I->sendPost($this->getVersionRoute('customer/checkout/save-shipping'), [
             'shipping_method' => 'flatrate_flatrate',
         ]);
@@ -76,8 +74,6 @@ class CheckoutCest extends CustomerCest
 
     private function savePaymentMethod(ApiTester $I)
     {
-        $I->haveHttpHeader('X-CSRF-TOKEN', csrf_token());
-
         $I->sendPost($this->getVersionRoute('customer/checkout/save-payment'), [
             'payment' => [
                 'method' => 'cashondelivery',
@@ -89,8 +85,6 @@ class CheckoutCest extends CustomerCest
 
     private function saveOrder(ApiTester $I)
     {
-        $I->haveHttpHeader('X-CSRF-TOKEN', csrf_token());
-        
         $I->sendPost($this->getVersionRoute('customer/checkout/save-order'));
 
         $I->seeAllNecessarySuccessResponse();

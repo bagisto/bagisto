@@ -9,9 +9,9 @@ class NotificationRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
-    function model()
+    function model(): string
     {
         return 'Webkul\Notification\Contracts\Notification';
     }

@@ -24,7 +24,7 @@ class ProductAttributeValueFactory extends Factory
     {
         return [
             //'product_id' => Product::factory(),
-            'locale' => 'en',
+            'locale'  => 'en',
             'channel' => 'default',
         ];
     }

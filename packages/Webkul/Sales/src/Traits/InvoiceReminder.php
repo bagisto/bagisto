@@ -14,8 +14,7 @@ trait InvoiceReminder
      */
     private function hasOverdueRemindersLimit()
     {
-        return $this->getOverdueRemindersLimit()
-            ? true : false;
+        return (bool) $this->getOverdueRemindersLimit();
     }
 
     /**
@@ -59,20 +58,29 @@ trait InvoiceReminder
     {
         if ($this->hasOverdueRemindersLimit()) {
             $limit = $this->getOverdueRemindersLimit();
+
             if ($this->reminders >= $limit) {
                 return;
             }
         }
+
         /** @var Webkul\Customer\Models\Customer $customer */
         $customer = $this->customer;
+
         Mail::queue(new InvoiceOverdueReminder($customer, $this));
+
         $this->reminders++;
+
         // Calculate next reminder date
         $date = now();
+
         $interval = $this->getIntervalBetweenReminders();
+
         $date->add($interval);
         $date->setTime(0, 0, 0, 0);
+
         $this->next_reminder_date = $date;
+
         $this->save();
     }
 
@@ -82,6 +90,7 @@ trait InvoiceReminder
     public function scopeInOverdueAndRemindersLimit($query)
     {
         $query->where('state', '=', 'overdue');
+        
         // Filter by next_reminder_date
         $query->where(function($query) {
             $query->where('next_reminder_at', '<=', now())
@@ -91,6 +100,7 @@ trait InvoiceReminder
         // If the core config have maximum limit of reminders
         if ($this->hasOverdueRemindersLimit()) {
             $limit = $this->getOverdueRemindersLimit();
+
             return $query->where('reminders', '<', $limit);
         }
 

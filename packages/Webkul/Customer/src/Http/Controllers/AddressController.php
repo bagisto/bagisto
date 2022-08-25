@@ -2,6 +2,7 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Http\Requests\CustomerAddressRequest;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 
@@ -30,8 +31,6 @@ class AddressController extends Controller
     public function __construct(protected CustomerAddressRepository $customerAddressRepository)
     {
         $this->_config = request('_config');
-
-        $this->customer = auth()->guard('customer')->user();
     }
 
     /**
@@ -41,7 +40,9 @@ class AddressController extends Controller
      */
     public function index()
     {
-        return view($this->_config['view'])->with('addresses', $this->customer->addresses);
+        $customer = auth()->guard('customer')->user();
+
+        return view($this->_config['view'])->with('addresses', $customer->addresses);
     }
 
     /**
@@ -63,24 +64,21 @@ class AddressController extends Controller
      */
     public function store(CustomerAddressRequest $request)
     {
-        $data = $request->all();
+        $customer = auth()->guard('customer')->user();
 
-        $data['customer_id'] = $this->customer->id;
-        $data['address1'] = implode(PHP_EOL, array_filter(request()->input('address1')));
+        Event::dispatch('customer.addresses.create.before');
 
-        if ($this->customer->addresses->count() == 0) {
-            $data['default_address'] = 1;
-        }
+        $customerAddress = $this->customerAddressRepository->create(array_merge($request->all(), [
+            'customer_id'     => $customer->id,
+            'address1'        => implode(PHP_EOL, array_filter(request()->input('address1'))),
+            'default_address' => ! $customer->addresses->count(),
+        ]));
 
-        if ($this->customerAddressRepository->create($data)) {
-            session()->flash('success', trans('shop::app.customer.account.address.create.success'));
+        Event::dispatch('customer.addresses.create.after', $customerAddress);
 
-            return redirect()->route($this->_config['redirect']);
-        }
+        session()->flash('success', trans('shop::app.customer.account.address.create.success'));
 
-        session()->flash('error', trans('shop::app.customer.account.address.create.error'));
-
-        return redirect()->back();
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
@@ -90,9 +88,11 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
+        $customer = auth()->guard('customer')->user();
+
         $address = $this->customerAddressRepository->findOneWhere([
             'id'          => $id,
-            'customer_id' => $this->customer->id,
+            'customer_id' => $customer->id,
         ]);
 
         if (! $address) {
@@ -112,20 +112,24 @@ class AddressController extends Controller
      */
     public function update($id, CustomerAddressRequest $request)
     {
-        $data = $request->all();
+        $customer = auth()->guard('customer')->user();
 
-        $data['address1'] = implode(PHP_EOL, array_filter(request()->input('address1')));
-
-        $addresses = $this->customer->addresses;
-
-        foreach ($addresses as $address) {
-            if ($id == $address->id) {
-                session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
-
-                $this->customerAddressRepository->update($data, $id);
-
-                return redirect()->route('customer.address.index');
+        foreach ($customer->addresses as $address) {
+            if ($id != $address->id) {
+                continue;
             }
+
+            Event::dispatch('customer.addresses.update.before', $id);
+
+            $customerAddress = $this->customerAddressRepository->update(array_merge($request->all(), [
+                'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
+            ]), $id);
+
+            Event::dispatch('customer.addresses.update.after', $customerAddress);
+
+            session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
+
+            return redirect()->route('customer.address.index');
         }
 
         session()->flash('warning', trans('shop::app.security-warning'));
@@ -141,7 +145,9 @@ class AddressController extends Controller
      */
     public function makeDefault($id)
     {
-        if ($default = $this->customer->default_address) {
+        $customer = auth()->guard('customer')->user();
+
+        if ($default = $customer->default_address) {
             $this->customerAddressRepository->find($default->id)->update(['default_address' => 0]);
         }
 
@@ -162,16 +168,22 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
+        $customer = auth()->guard('customer')->user();
+
         $address = $this->customerAddressRepository->findOneWhere([
             'id'          => $id,
-            'customer_id' => $this->customer->id,
+            'customer_id' => $customer->id,
         ]);
 
         if (! $address) {
             abort(404);
         }
 
+        Event::dispatch('customer.addresses.delete.before', $id);
+
         $this->customerAddressRepository->delete($id);
+
+        Event::dispatch('customer.addresses.delete.after', $id);
 
         session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
 
