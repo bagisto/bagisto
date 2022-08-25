@@ -67,11 +67,13 @@ class ProductForm extends FormRequest
             'special_price'      => ['nullable', new Decimal, 'lt:price'],
         ]);
 
-        foreach (request()->images['files'] as $key => $file) {
-            if (Str::contains($key, 'image_')) {
-                $this->rules = array_merge($this->rules, [
-                    'images.files.' . $key     => ['required', 'mimes:bmp,jpeg,jpg,png,webp'],
-                ]);
+        if(isset(request()->images['files'])) {
+            foreach (request()->images['files'] as $key => $file) {
+                if (Str::contains($key, 'image_')) {
+                    $this->rules = array_merge($this->rules, [
+                        'images.files.' . $key     => ['required', 'mimes:bmp,jpeg,jpg,png,webp'],
+                    ]);
+                }
             }
         }
 
