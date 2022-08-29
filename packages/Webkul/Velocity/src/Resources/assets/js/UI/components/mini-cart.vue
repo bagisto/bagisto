@@ -56,9 +56,10 @@
                                     }}</label>
                                     <input
                                         type="text"
-                                        disabled
                                         :value="item.quantity"
                                         class="ml5"
+                                        @input ="update(index,$event.target.value)"
+                                        v-on:keyup.enter ="updateQty(index,$event.target.value)"
                                     />
                                 </div>
                                 <span class="card-total-price fw6">
@@ -67,7 +68,7 @@
                                             ? item.base_total_with_tax
                                             : item.base_total
                                     }}
-                                </span>
+                                </span> 
                             </div>
                         </div>
                     </div>
@@ -108,9 +109,9 @@
 </template>
 
 <style lang="scss">
-.hide {
-    display: none !important;
-}
+    .hide {
+        display: none !important;
+    }
 </style>
 
 <script>
@@ -123,13 +124,15 @@ export default {
         'cartText',
         'viewCartText',
         'checkoutText',
-        'subtotalText'
+        'subtotalText',
+        'currentCurrency'
     ],
 
     data: function() {
         return {
             cartItems: [],
-            cartInformation: []
+            cartInformation: [],
+            currency:this.currentCurrency
         };
     },
 
@@ -142,8 +145,31 @@ export default {
             this.getMiniCartDetails();
         }
     },
+ 
+    methods: { 
 
-    methods: {
+        update: function(itemIndex,itemQty) {
+            let baseTotal = Number(this.cartItems[itemIndex].base_price) * Number(itemQty);
+            
+            this.cartItems[itemIndex].quantity = itemQty;
+            this.cartItems[itemIndex].base_total = baseTotal;
+        },
+
+        updateQty : function(itemIndex,qty) {
+            let token = document.head.querySelector('meta[name="csrf-token"]');
+            let cartItemId = this.cartItems[itemIndex].id;
+            
+            this.$http
+                .post(`${this.$root.baseUrl}/checkout/cart`,{"_token":token.content,"qty":{[cartItemId]:qty}})
+                .then(response => {
+                    console.log("Quantity updated");
+                    this.$root.miniCartKey++;
+                })
+                .catch(exception => {
+                    console.log(this.__('error.something_went_wrong'));
+                });
+        },
+
         getMiniCartDetails: function() {
             this.$http
                 .get(`${this.$root.baseUrl}/mini-cart`)
