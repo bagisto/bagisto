@@ -492,6 +492,7 @@ return [
                 'missing_links'   => 'Bu ürün için indirilebilir linkler girilmemiş.',
                 'qty_missing'     => 'En az bir adet ürün girilmelidir.',
                 'qty_impossible'  => 'Bu üründen birden fazla adet girilemez.',
+                'select_hourly_duration' => 'Bir saatlik bir slot süresi seçin.',
             ],
             'create-error'             => 'Alışveriş sepeti oluşturulurken hata meydana geldi!',
             'title'                    => 'Alışveriş Sepeti',

@@ -499,6 +499,7 @@ return [
                 'missing_links'   => 'Downloadbare links ontbreken voor dit product.',
                 'qty_missing'     => 'Minstens één product moet meer dan 1 hoeveelheid bevatten.',
                 'qty_impossible'  => 'Kan niet meer dan één van deze producten toevoegen aan winkelwagen.',
+                'select_hourly_duration' => 'Kies een slotduur van één uur.',
             ],
             'create-error'             => 'Er is een probleem opgetreden bij het maken van een winkelwageninstantie.',
             'title'                    => 'Winkelwagen',
