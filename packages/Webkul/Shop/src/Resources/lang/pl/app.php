@@ -492,6 +492,7 @@ return [
                 'missing_links'   => 'Brak linków do pobrania dla tego produktu.',
                 'qty_missing'     => 'Przynajmniej jeden produkt powinien zawierać ilośćwiększą niż 1',
                 'qty_impossible'  => 'Nie można dodać więcej niż jednego z tych produktów do koszyka.',
+                'select_hourly_duration' => 'Wybierz przedział czasu na jedną godzinę.',
             ],
             'create-error'             => 'Wystąpił problem podczas tworzenia instancji koszyka.',
             'title'                    => 'Koszyk zakupu',

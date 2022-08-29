@@ -406,7 +406,7 @@ export default {
         },
 
         searchData($event) {
-            const searchValue = $event.data.searchValue;
+            const searchValue = $event.data.searchValue.trim();
 
             this.formURL(
                 'search',

@@ -747,6 +747,7 @@ return [
         'no'             => 'No',
         'delete'         => 'Delete',
         'enable-atleast-one-shipping' => 'Enable atleast one shipping method.',
+        'enable-atleast-one-payment'  => 'Enable atleast one payment method.',
 
         'tax-categories' => [
             'title'           => 'Tax Categories',

@@ -744,6 +744,7 @@ return [
         'no'             => 'नहीं',
         'delete'         => 'हटाएं',
         'enable-atleast-one-shipping' => 'कम से कम एक शिपिंग विधि सक्षम करें।',
+        'enable-atleast-one-payment'  => 'कम से कम एक भुगतान विधि सक्षम करें।',
 
         'tax-categories' => [
             'title'           => 'कर श्रेणियाँ',

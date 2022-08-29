@@ -492,7 +492,8 @@ return [
                 'missing_options' => '此产品缺少选项.',
                 'missing_links' => '此产品缺少可下载链接.',
                 'qty_missing' => '至少一种产品的数量应超过 1 个.',
-                'qty_impossible' => '不能将这些产品中的一种以上添加到购物车.'
+                'qty_impossible' => '不能将这些产品中的一种以上添加到购物车.',
+                'select_hourly_duration' => '選擇一小時的時隙持續時間。',
             ],
             'create-error' => '制作购物车实例时遇到一些问题.',
             'title' => '购物车',
