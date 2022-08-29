@@ -484,6 +484,7 @@ return [
                 'missing_links'   => 'Faltam links para download para este produto.',
                 'qty_missing'     => 'Pelo menos um produto deve ter mais de 1 quantidade.',
                 'qty_impossible'  => 'Não é possível adicionar mais do que um desse produto ao carrinho.',
+                'select_hourly_duration' => 'Selecione uma duração de slot de uma hora.',
             ],
 
             'create-error'             => 'Encontrou algum problema ao fazer a instância do carrinho',
