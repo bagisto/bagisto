@@ -2,6 +2,203 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v1.4.4 (29th of April 2022)** - *Release*
+
+* #5584 [feature] -  there should be an feature so that when we click on mark as read , notification box should close.
+
+* #5463 [feature] -  there should be a button so that we should clear all filters.
+
+* #6556 [enhancement] - Cart Rule -. Validation should be applied in Coupon Code uses per customer and used per coupon section.
+
+* #6555 [enhancement] - Cart Rule - Auto Generate Coupon Code details at bottom must not visible when we switch to Manual Coupon Code.
+
+* #6501 [enhancement] - Cart item prices rounded with precision of 2 resulting in rounding errors after applying taxes. 
+
+* #6494 [enhancement] - The product's URL_KEY should not be changed if the admin is editing the product's name for another locale.
+
+* #6464 [enhancement] - UI - In Table Booking Product, Special Request/Notes must be in Bold for Main Cart.
+
+* #6458 [enhancement] - There should be the validations for the input fields if the admin is trying to create catalog rules.
+
+* #6452 [enhancement] - The page should be open on the next tab when the admin is trying to view the CMS pages.
+
+* #6427 [enhancement] - The mouse property should be not-allowed if the cart is empty. in default theme.
+
+* #6426 [enhancement] - The warning message should be correct if the admin is trying to ship the invalid product quantity. 
+
+* #6417 [enhancement] - There should be a flash message [ Coupan is already applied ] if the user is trying to apply the same coupon multiple times.
+
+* #6408 [enhancement] - The name of the applied filters should be meaningful if the customer is trying to filter the orders.
+
+* #6393 [enhancement] - The page should not be refreshed if the customer is trying to apply the same coupon multiple times.
+
+* #6371 [enhancement] - There should be a flash message for customers when the cart rule is applied on the checkout page.
+
+* #6358 [enhancement] - Unable to see any notification on Coupon Applied on the Checkout Page.
+
+* #6355 [enhancement] - There should be a preview option in the CMS pages table.
+
+* #6327 [enhancement] - Add Missing Language Folder In All Package
+
+* #6273 [enhancement] - There should be a tooltip message, after copying the wishlist share link 
+
+* #5801 [enhancement] - Maximum video uploading size should be mentioned when we create product. 
+
+* #5464 [enhancement] - there should be an image icon of user profile image.
+
+* #6545  [fixed] -  The admin should be able to create transactions only with the Grand Total amount of the order.
+
+* #6406  [fixed] -  Discount should be shown only for the product for which we created a catalog rule.
+
+* #6312  [fixed] -  The billing address should not be saved multiple times, if the customer is clicking on save address checkbox in multiple times.
+
+* #6654  [fixed] -  The size of the image card should be fixed. on the home page.
+
+* #6644  [fixed] -  Trimming should be added for the search string.
+
+* #6640  [fixed] -  There should not be any alert box if the admin is trying to filter the products.
+
+* #6635  [fixed] -  The page should not be redirected to the wishlist page when the customer removes any product from the wishlist.
+
+* #6632  [fixed] -  There add to cart and the wishlist button are adjusting if the customer is trying to view any product.
+
+* #6609  [fixed] -  The wishlist should not get empty after deleting the all product of the second-page wishlist.
+
+* #6606  [fixed] -  The admin should be able to upload and remove the product's image.
+
+* #6558  [fixed] -  The cross icon should be just before the calendar icon if the customer is trying to select the appointment date for booking the product.
+
+* #6554  [fixed] -  The discount amount cannot be greater than 100 if the action type is the Percentage of the product. 
+
+* #6547  [fixed] -  The product video should be played properly if any.
+
+* #6518  [fixed] -  The admin should be able to update the product's status by mass action.
+
+* #6514  [fixed] -  The save as category button should not be clicked automatically if the admin is pressing the enter key for the searching product.
+
+* #6509  [fixed] -  There is an exception if the admin is trying to search products from the category page.
+
+* #6507  [fixed] -  Notification url is broken when admin_url is changed.
+
+* #6505  [fixed] -  The model box should be in the center of the page if the user is clicking on Quick view for any produt.
+
+* #6492  [fixed] -  There is a UI issue if the user is trying to view the compared products in Arabic locale. 
+
+* #6485  [fixed] -  The trash icon should be on the right side of the text if the user is trying to view the shopping cart in the Arabic locale.
+
+* #6484  [fixed] -  The admin is not able to logout on the mobile view.
+
+* #6479  [fixed] -  The position of the top bar should be fixed if the customer is trying to view any order in mobile view.
+
+* #6471  [fixed] -  UI Issue - In Customer Profile Edit option, there we can see the Calendar Logo at DOB is inappropriate.
+
+* #6469  [fixed] -  Translation Issue in the Configure Section related to Number.
+
+* #6463  [fixed] -  There should not be an exception if the admin is trying to add a new variant for the configurable product.
+
+* #6461  [fixed] -  There should not be any warning message for the default empty option if the admin is trying to create/edit any attribute.
+
+* #6459  [fixed] -  Only the review should be deleted which the user wants to delete.
+
+* #6453  [fixed] -  The new customer is not able to login properly when the another user is logging out.
+
+* #6447  [fixed] -  There should not be an exception if the customer is trying to add that product to the wishlist which is deleted by the admin.
+
+* #6444  [fixed] -  The page should be redirected to the login page if the guest user is trying to move products from compare to wishlist.
+
+* #6443  [fixed] -  The height of Add to cart button should be a little less on compare page.
+
+* #6442  [fixed] -  The products should be in proper alignment if there are multiple products in the compare list.
+
+* #6441  [fixed] -  The customer should be able to share the wishlist product if the share link is already generated.
+
+* #6434  [fixed] -  There should not be any translation issue in the checkout page, if the customer is trying to place an order.
+
+* #6430  [fixed] -  The admin should not be able to create a transaction for an invoice with the incorrect Transaction amount
+
+* #6429  [fixed] -  The user should not be able to add products into the cart with 0 quantity.
+
+* #6425  [fixed] -  The sidebar submenu dropdown icon should be shown properly if the admin is changing the English from LTR to RTL. 
+
+* #6423  [fixed] -  The order status should be shown properly in the admin panel. if the status of the order is payment pending. 
+
+* #6419  [fixed] -  There is an exception if the admin is trying to add transactions for any invoice.
+
+* #6407  [fixed] -  The user should not be able to place the order if the user is inactive. 
+
+* #6402  [fixed] -  Only the address should be deleted which the user wants to delete.
+
+* #6401  [fixed] -  There is no option to view compare items for guests.
+
+* #6400  [fixed] -  The success message should not be shown multiple times if the user is trying to remove the applied coupon.
+
+* #6397  [fixed] - The should not be an exception if the guest is trying to log in after deleting all the cart items.
+
+* #6390  [fixed] -  The radio button should be toggle only after clicking on the radio button's in admin panel 
+
+* #6389  [fixed] -  The share wishlist and delete button should not overlap the sidebar in mobile view.
+
+* #6386  [fixed] -  The Products Ordered label should be highlighted if there is an error, while the admin is trying to create a ship for the order in dark mode.
+
+* #6385  [fixed] -  There should be a search icon if the customer is trying to search the orders.
+
+* #6384  [fixed] -  The product's image should not be out of the product card if the user is trying to view products in list mode.
+
+* #6370  [fixed] -  At least one shipping and payment method should be available.
+
+* #6369  [fixed] - The product images are overriding if there are multiple products in the cart.
+
+* #6368  [fixed] - There should be an option to update the cart if the customer is adding downloadable and simple products into the cart.
+
+* #6366  [fixed] -  The product's image is adjusted when the user is trying to view any variant of the configurable product
+
+* #6365  [fixed] -  The bullet symbol should be visible if the user is trying to change the product's image in a quick view popup box. 
+
+* #6364  [fixed] -  The warning message should be correct when the condition is not matching with cart rule while the user is applying a coupon. 
+
+* #6362  [fixed] -  There should be some space between the share and delete buttons on the wishlist page.
+
+* #6349  [fixed] -  The filter value should be correct if the admin is trying to filter the customers by the status filter
+
+* #6346  [fixed] -  There should not be any extra space between the update cart and the delete all items button, on the shopping cart page.
+
+* #6344  [fixed] -  The calendar icon is not showing when the admin is trying to filter the orders by date in dark mode.
+
+* #6341  [fixed] -  There is some extra space between the product image and add to cart button in the mobile view
+
+* #6340  [fixed] -  By default maximum price should be selected if the user is trying to filter a product by price filter.
+
+* #6339  [fixed] -  The Add to cart button should not be disabled if any one product is inactive of the group product.
+
+* #6335  [fixed] -  The translation is missing for slot dropdown if the user is trying to book any product 
+
+* #6334  [fixed] -  The quantity field should not take a negative value if the admin is trying to edit the quantity
+
+* #6333  [fixed] -  The country dropdown should be in the Ascending order when the customer is adding the delivery address on the checkout page.
+
+* #6332  [fixed] -  The calendar Icon should be on the left side of the input box in the Arabic locale when the customer is editing the profile. 
+
+* #6331  [fixed] -  The location and the calendar Icon should be slightly right side in the Arabic locale when the customer is trying to book any product.
+
+* #6324  [fixed] -  The warning message should be correct if the admin is trying to upload an invalid image format for the profile image.
+
+* #6319  [fixed] -  The calendar icon is in the center of the input box. if the customer is trying to book the product.
+
+* #6318  [fixed] -  The add to cart button should be in proper alignment inside the compare page.
+
+* #6317  [fixed] -  The page should be redirected to the product view page. if the user clicks on the product image inside the mini cart.
+
+* #6313  [fixed] -  The warning message should be correct if the customer is selecting the PayPal Smart Button payment method with an invalid country code
+
+* #6288  [fixed] -  The delete button is overriding on share button if the customer is trying to view the wishlist products on mobile view. 
+
+* #6277  [fixed] -  Checkout redirects when a carrier has more than one shipping method 
+
+* #6276  [fixed] -  The product's image should be visible properly in mobile view.
+
+* #6271 [fixed] - There should not be any warning message if the user is trying to book a rental product for multiple hours.
+
+
 ## **v1.4.3 (20th of April 2022)** - *Release*
 
 * #6213 [feature] -  Command For Bagisto Publish
