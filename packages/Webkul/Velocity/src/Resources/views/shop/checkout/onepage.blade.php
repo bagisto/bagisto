@@ -375,6 +375,12 @@
 
                     saveAddress: async function () {
                         this.disable_button = true;
+                        this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
+
+                        if (this.saveAddressCheckbox.prop('checked') == true) {
+                            this.saveAddressCheckbox.attr('disabled', 'disabled');
+                            this.saveAddressCheckbox.prop('checked', true);
+                        }
 
                         if (this.allAddress.length > 0) {
                             let address = this.allAddress.forEach(address => {
