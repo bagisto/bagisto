@@ -1,3 +1,7 @@
+@php
+    $currentCurrency = core()->getBaseCurrency()->symbol;
+@endphp
+
 <a class="mini-cart-btn">
     <mini-cart
         is-tax-inclusive="{{ Webkul\Tax\Helpers\Tax::isTaxInclusive() }}"
