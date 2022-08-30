@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Generators\OrderSequencer;
 use Webkul\Sales\Models\Order as OrderModel;
 
@@ -35,9 +34,9 @@ class OrderRepository extends Repository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return Order::class;
+        return 'Webkul\Sales\Contracts\Order';
     }
 
     /**

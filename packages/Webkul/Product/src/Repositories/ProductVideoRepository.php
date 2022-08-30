@@ -9,9 +9,9 @@ class ProductVideoRepository extends ProductMediaRepository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return \Webkul\Product\Contracts\ProductVideo::class;
+        return 'Webkul\Product\Contracts\ProductVideo';
     }
 
     /**

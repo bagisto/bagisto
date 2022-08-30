@@ -26,9 +26,9 @@ class AttributeRepository extends Repository
     /**
      * Specify model class name.
      *
-     * @return mixed
+     * @return string
      */
-    public function model()
+    public function model(): string
     {
         return 'Webkul\Attribute\Contracts\Attribute';
     }

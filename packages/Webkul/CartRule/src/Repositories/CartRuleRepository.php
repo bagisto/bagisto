@@ -43,9 +43,9 @@ class CartRuleRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
-    public function model()
+    public function model(): string
     {
         return 'Webkul\CartRule\Contracts\CartRule';
     }

@@ -395,7 +395,7 @@ export default {
                 number: {
                     isSelected: false,
                     condition: null,
-                    value: 0
+                    value: null
                 },
 
                 boolean: {
@@ -540,6 +540,10 @@ export default {
                 case 'number': {
                     let indexConditions = true;
 
+                    if (! this.types.number.value) {
+                        this.switchSelectCondition('number');
+                    }
+
                     if (
                         this.filterIndex === this.columnOrAlias &&
                         (this.types.number.value === 0 ||
@@ -548,8 +552,6 @@ export default {
                         indexConditions = false;
 
                         alert(this.translations.zeroIndex);
-                    } else {
-                        alert(this.translations.emptyValue);
                     }
 
                     if (indexConditions) {

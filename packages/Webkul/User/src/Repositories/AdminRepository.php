@@ -9,11 +9,11 @@ class AdminRepository extends Repository
     /**
      * Specify model class name.
      *
-     * @return mixed
+     * @return string
      */
     public function model(): string
     {
-        return \Webkul\User\Contracts\Admin::class;
+        return 'Webkul\User\Contracts\Admin';
     }
 
     /**

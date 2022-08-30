@@ -517,6 +517,7 @@ return [
                 'transaction-saved' => '交易已保存',
                 'already-paid'      => '此发票已支付',
                 'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
+                'transaction-amount-zero' => 'Transaction amount can be zero or less',
             ],
         ],
     ],
@@ -726,6 +727,7 @@ return [
         'no'             => 'No',
         'delete'         => '删除',
         'enable-atleast-one-shipping' => '啟用至少一種運輸方式',
+        'enable-atleast-one-payment'  => '啟用至少一種付款方式。',
 
         'tax-categories' => [
             'title'           => '税分类',

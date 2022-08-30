@@ -25,8 +25,13 @@ class SearchRepository extends Repository
     {
         parent::__construct($container);
     }
-
-    function model()
+    
+    /**
+     * Specify model class name.
+     *
+     * @return string
+     */
+    function model(): string
     {
         return 'Webkul\Product\Contracts\Product';
     }

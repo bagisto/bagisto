@@ -492,6 +492,7 @@ return [
                 'missing_links'   => 'I link per il download di questo prodotto sono mancanti.',
                 'qty_missing'     => 'Almeno un prodotto dovrebbe avere una quantità superiore a 1.',
                 'qty_impossible'  => 'Non è possibile aggiungere più di un pezzo di questo articolo nel carrello.',
+                'select_hourly_duration' => 'Seleziona una durata dello slot di un\'ora.',
             ],
             'create-error'             => 'Si è verificato un problema durante la visualizzazione del carrello.',
             'title'                    => 'Carrello',

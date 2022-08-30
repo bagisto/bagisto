@@ -30,6 +30,8 @@
 
     .main-container-wrapper .product-card .product-image img {
         max-width: 100%;
+        height: 260px;
+        object-fit: cover;
     }
 </style>
 

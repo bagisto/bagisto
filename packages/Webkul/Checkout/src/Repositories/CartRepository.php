@@ -9,9 +9,9 @@ class CartRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
-    function model()
+    function model(): string
     {
         return 'Webkul\Checkout\Contracts\Cart';
     }

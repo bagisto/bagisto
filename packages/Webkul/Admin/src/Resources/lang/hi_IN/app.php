@@ -523,6 +523,7 @@ return [
                 'transaction-saved' => 'लेन-देन सहेजा गया है',
                 'already-paid'      => 'इस चालान का भुगतान पहले ही किया जा चुका है',
                 'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
+                'transaction-amount-zero' => 'Transaction amount can be zero or less',
             ],
         ],
     ],
@@ -744,6 +745,7 @@ return [
         'no'             => 'नहीं',
         'delete'         => 'हटाएं',
         'enable-atleast-one-shipping' => 'कम से कम एक शिपिंग विधि सक्षम करें।',
+        'enable-atleast-one-payment'  => 'कम से कम एक भुगतान विधि सक्षम करें।',
 
         'tax-categories' => [
             'title'           => 'कर श्रेणियाँ',

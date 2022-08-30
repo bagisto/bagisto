@@ -6,7 +6,6 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\Refund;
 
 class RefundRepository extends Repository
 {
@@ -35,9 +34,9 @@ class RefundRepository extends Repository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return Refund::class;
+        return 'Webkul\Sales\Contracts\Refund';
     }
 
     /**

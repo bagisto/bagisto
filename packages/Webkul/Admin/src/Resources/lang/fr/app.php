@@ -524,7 +524,8 @@ return [
                 'invoice-missing'   => 'Ce numéro de facture n\'existe pas',
                 'transaction-saved' => 'La transaction a été enregistrée',
                 'already-paid'      => 'Cette facture a déjà été payée',
-                'transaction-amount-exceeds' => 'Le montant de cette transaction dépasse le montant total de la facture.',
+                'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
+                'transaction-amount-zero' => 'Transaction amount can be zero or less.',
             ],
         ],
     ],
@@ -746,6 +747,7 @@ return [
         'no'             => 'Non',
         'delete'         => 'Effacer',
         'enable-atleast-one-shipping' => 'Activez au moins une méthode d\'expédition.',
+        'enable-atleast-one-payment'  => 'Activez au moins un mode de paiement.',
 
         'tax-categories' => [
             'title'           => 'Catégories de taxes',

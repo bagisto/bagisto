@@ -29,7 +29,7 @@ class ProductImageRepository extends ProductMediaRepository
      */
     public function model(): string
     {
-        return \Webkul\Product\Contracts\ProductImage::class;
+        return 'Webkul\Product\Contracts\ProductImage';
     }
 
     /**

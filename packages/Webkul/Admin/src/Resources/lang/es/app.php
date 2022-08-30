@@ -524,6 +524,7 @@ return [
                 'transaction-saved' => 'The transaction has been saved',
                 'already-paid'      => 'This invoice has already been paid',
                 'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
+                'transaction-amount-zero' => 'Transaction amount can be zero or less',
             ],
         ],
     ],
@@ -743,6 +744,7 @@ return [
         'no'             => 'No',
         'delete'         => 'Borrar',
         'enable-atleast-one-shipping' => 'Habilite al menos un método de envío.',
+        'enable-atleast-one-payment'  => 'Habilite al menos un método de pago.',
 
         'tax-categories' => [
             'title'           => 'Categorías de impuestos',

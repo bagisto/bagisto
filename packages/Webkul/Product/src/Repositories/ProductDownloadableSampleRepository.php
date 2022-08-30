@@ -13,7 +13,7 @@ class ProductDownloadableSampleRepository extends Repository
      *
      * @return string
      */
-    function model()
+    function model(): string
     {
         return 'Webkul\Product\Contracts\ProductDownloadableSample';
     }

@@ -521,6 +521,7 @@ return [
                 'transaction-saved' => 'The transaction has been saved',
                 'already-paid'      => 'This invoice has already been paid',
                 'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
+                'transaction-amount-zero' => 'Transaction amount can be zero or less',
             ],
         ],
     ],
@@ -726,6 +727,7 @@ return [
         'no'             => 'خیر',
         'delete'         => 'حذف',
         'enable-atleast-one-shipping' => 'حداقل یک روش حمل و نقل را فعال کنید.',
+        'enable-atleast-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
 
         'tax-categories' => [
             'title'           => 'دسته بندی های مالیات',

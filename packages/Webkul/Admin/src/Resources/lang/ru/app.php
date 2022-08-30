@@ -526,6 +526,7 @@ return [
                 'transaction-saved' => 'The transaction has been saved',
                 'already-paid'      => 'This invoice has already been paid',
                 'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
+                'transaction-amount-zero' => 'Transaction amount can be zero or less',
             ],
         ],
     ],
@@ -747,6 +748,7 @@ return [
         'no'             => 'No',
         'delete'         => 'Delete',
         'enable-atleast-one-shipping' => 'Включите хотя бы один способ доставки.',
+        'enable-atleast-one-payment'  => 'Включите хотя бы один способ оплаты.',
 
         'tax-categories' => [
             'title'           => 'Tax Categories',

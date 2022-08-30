@@ -516,6 +516,7 @@ return [
                 'transaction-saved' => 'Die Transaktion wurde gespeichert',
                 'already-paid'      => 'Diese Rechnung wurde bereits bezahlt',
                 'transaction-amount-exceeds' => 'Der angegebene Betrag dieser Transaktion übersteigt den Gesamtbetrag der Rechnung.',
+                'transaction-amount-zero' => 'Der Transaktionsbetrag kann Null oder weniger betragen',
             ],
         ],
     ],
@@ -733,6 +734,8 @@ return [
         'no'             => 'Nein',
         'delete'         => 'Löschen',
         'enable-atleast-one-shipping' => 'Aktivieren Sie mindestens eine Versandart.',
+        'enable-atleast-one-payment'  => 'Aktivieren Sie mindestens eine Zahlungsmethode.',
+
         'tax-categories' =>
         [
             'title'           => 'Steuerkategorien',

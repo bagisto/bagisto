@@ -6,7 +6,6 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\Shipment;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\ShipmentItemRepository;
@@ -37,9 +36,9 @@ class ShipmentRepository extends Repository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
-        return Shipment::class;
+        return 'Webkul\Sales\Contracts\Shipment';
     }
 
     /**
