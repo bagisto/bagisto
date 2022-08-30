@@ -576,11 +576,32 @@ class Configurable extends AbstractType
      */
     public function haveOffer()
     {
-        if ($this->getOfferPrice() < $this->getMinimalPrice()) {
+        if ($this->getOfferPrice() < $this->getMinimalPrice() || $this->haveSpecialPrice()) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Check whether configurable product have special price.
+     *
+     * @param  int  $qty
+     * @return bool
+    */
+    public function haveSpecialPrice($qty = null)
+    {
+        $haveSpecialPrice = false;
+
+        foreach ($this->product->variants as $variant) {
+            if ($variant->getTypeInstance()->haveSpecialPrice()) {
+                $haveSpecialPrice = true;
+
+                break;
+            }
+        }
+
+        return $haveSpecialPrice;
     }
 
     /**
@@ -635,7 +656,12 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        if ($this->haveOffer()) {
+        if ($this->haveSpecialPrice()) {
+            return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
+            . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+            . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'
+            . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getOfferPrice())) . '</span>';
+        } elseif($this->haveOffer() && ! $this->haveSpecialPrice()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
             . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'
