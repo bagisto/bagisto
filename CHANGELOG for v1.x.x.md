@@ -2,11 +2,17 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.4.4 (29th of August 2022)** - *Release*
+## **v1.4.4 (30th of August 2022)** - *Release*
 
 * #5584 [feature] -  there should be an feature so that when we click on mark as read , notification box should close.
 
 * #5463 [feature] -  there should be a button so that we should clear all filters.
+
+* [enhancement] - Optimized product
+
+* [enhancement] - Optimized cart
+
+* [enhancement] - Refactored code
 
 * #6556 [enhancement] - Cart Rule -. Validation should be applied in Coupon Code uses per customer and used per coupon section.
 
