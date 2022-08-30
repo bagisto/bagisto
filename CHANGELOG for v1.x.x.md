@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.4.4 (29th of April 2022)** - *Release*
+## **v1.4.4 (29th of August 2022)** - *Release*
 
 * #5584 [feature] -  there should be an feature so that when we click on mark as read , notification box should close.
 
