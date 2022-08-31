@@ -22,6 +22,7 @@
     </div>
 
     @guest('customer')
+        <dark-mode></dark-mode>
         <div class="dropdown-list" style="width: 290px">
             <div class="modal-content dropdown-container">
                 <div class="modal-header no-border pb0">

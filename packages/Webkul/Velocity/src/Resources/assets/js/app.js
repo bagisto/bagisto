@@ -86,6 +86,7 @@ Vue.component('hot-categories', () => import('@components/hot-categories'));
 Vue.component('popular-category', () => import('@components/popular-category'));
 Vue.component('popular-categories', () => import('@components/popular-categories'));
 Vue.component('velocity-overlay-loader', () => import('@components/overlay-loader'));
+Vue.component('dark-mode', () => import('@components/darkmode/dark'));
 Vue.component('vnode-injector', {
     functional: true,
     props: ['nodes'],
@@ -115,6 +116,7 @@ $(function() {
                 responsiveSidebarTemplate: '',
                 responsiveSidebarKey: Math.random(),
                 baseUrl: getBaseUrl(),
+                isDarkMode: localStorage.getItem('dark-mode-velocity') == 'true',
             };
         },
 
@@ -189,6 +191,12 @@ $(function() {
 
             hide: function(element) {
                 element.hide();
+            },
+
+            checkThemeMode() { 
+                this.isDarkMode = ! this.isDarkMode;
+
+                localStorage.setItem('dark-mode-velocity', this.isDarkMode);
             },
 
             toggleButtonDisability({ event, actionType }) {

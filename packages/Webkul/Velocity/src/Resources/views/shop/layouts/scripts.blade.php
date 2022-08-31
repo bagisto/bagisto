@@ -6,6 +6,10 @@
 
 <script type="text/javascript">
     (() => {
+        if (localStorage.getItem('dark-mode-velocity') == 'true') {
+            document.body.classList.toggle("dark-mode-velocity");
+        }    
+        
         /* activate session messages */
         let message = @json($velocityHelper->getMessage());
         if (message.messageType && message.message !== '') {

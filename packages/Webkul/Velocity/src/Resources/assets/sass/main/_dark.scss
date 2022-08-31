@@ -1,0 +1,87 @@
+.dark-mode-velocity {
+    background-color: $dark-mode-velocity-body-background-color;
+    color: $dark-mode-velocity-text-color;
+
+    #top {
+        color: $white;
+
+        .btn-link  {
+            color: $white;
+            background-color: $dark-mode-velocity-body-background-color;
+        }
+    }
+
+    .category-list-container {
+        background-color: $dark-mode-velocity-left-menubar-active-background-color;
+
+        .sub-categories {
+            background-color: $dark-mode-velocity-left-menubar-active-background-color;
+        }
+    }
+
+    .rango-arrow-right {
+        color: $white;
+    }
+    
+    .rango-arrow-left {
+        color: $white;
+    }
+
+    .wishlist-icon i {
+        color: $dark-mode-velocity-text-color-black;
+    }
+
+    .product-card-new {
+        .card-body {
+            color: $dark-mode-velocity-text-color-black;
+        }
+    }
+
+    .cd-quick-view {
+        color: $dark-mode-velocity-text-color-black;
+
+        .close-btn {
+            color: $dark-mode-velocity-text-color-black;
+        }
+    } 
+
+    .social-link-seperator {
+        span {
+            color: $dark-mode-velocity-text-color-black;
+        }
+    }
+
+    .quantity {
+        .input-btn-group {
+            button {
+                .rango-minus {
+                    color: $white;
+                }
+
+                .rango-plus {
+                    color: $white;
+                }
+            }
+        }
+    }
+
+    #cart-modal-content {
+        .small-card-container {
+            input {
+                color: $white;
+            }
+        }
+    } 
+
+    @media only screen and (max-width: 1300px) {
+        .table {
+            table {
+
+                tbody tr td {
+                    background-color: $dark-mode-velocity-body-background-color;
+                }
+
+            }
+        }
+    }   
+}
