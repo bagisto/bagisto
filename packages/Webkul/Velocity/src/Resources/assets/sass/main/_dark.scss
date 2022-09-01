@@ -2,6 +2,10 @@
     background-color: $dark-mode-velocity-body-background-color;
     color: $dark-mode-velocity-text-color;
 
+    header.sticky-header {
+        background-color : $dark-mode-sticky-header-background-color;
+    }
+
     #top {
         color: $white;
 
@@ -11,11 +15,19 @@
         }
     }
 
+    #header-search-icon {
+        background-color: $dark-mode-theme-color !important;
+    }
+
+    .vue-go-top {
+        background-color: $dark-mode-theme-color !important;
+    }
+
     .category-list-container {
-        background-color: $dark-mode-velocity-left-menubar-active-background-color;
+        background-color: $dark-mode-velocity-body-background-color;
 
         .sub-categories {
-            background-color: $dark-mode-velocity-left-menubar-active-background-color;
+            background-color: $dark-mode-velocity-body-background-color;
         }
     }
 
@@ -29,6 +41,12 @@
 
     .wishlist-icon i {
         color: $dark-mode-velocity-text-color-black;
+    }
+
+    .product-detail {
+        .wishlist-icon i {
+            color: $white;
+        }
     }
 
     .product-card-new {
@@ -72,6 +90,22 @@
             }
         }
     } 
+
+    .btn-add-to-cart {
+        border-color: $dark-mode-theme-color !important;
+        background-color: $dark-mode-theme-color !important;
+    }
+
+    .theme-btn {
+        border-color: $dark-mode-theme-color !important;
+        background-color: $dark-mode-theme-color !important;
+    }
+
+    .theme-btn:hover,
+    .btn-add-to-cart:hover {
+        border-color: $dark-mode-dark-theme-color !important;
+        background-color: $dark-mode-dark-theme-color !important;
+    }
 
     @media only screen and (max-width: 1300px) {
         .table {
