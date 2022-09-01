@@ -67,7 +67,7 @@ class ProductForm extends FormRequest
             'special_price'      => ['nullable', new Decimal, 'lt:price'],
         ]);
 
-        if (request()->hasFile('images.files')) {
+        if (request()->images) {
             foreach (request()->images['files'] as $key => $file) {
                 if (Str::contains($key, 'image_')) {
                     $this->rules = array_merge($this->rules, [
