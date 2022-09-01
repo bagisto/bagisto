@@ -3,15 +3,41 @@
     color: $dark-mode-velocity-text-color;
 
     header.sticky-header {
-        background-color : $dark-mode-sticky-header-background-color;
+        background-color: $dark-mode-sticky-header-background-color;
+    }
+
+    #mini-cart {
+        .mini-cart-content {
+            color: $white !important;
+        }
+
+        .modal-footer {
+            color: $dark-mode-velocity-text-color;
+        }
+    }
+
+    #cart-modal-content {
+        color: $dark-mode-velocity-text-color-black;
+
+        .small-card-container input {
+            color: $dark-mode-velocity-text-color-black !important;
+        }
     }
 
     #top {
-        color: $white;
+        .dropdown {
+            color: $white;
+        }
 
+        #account {
+            .welcome-content {
+                color: $white;
+            }
+        }
+     
         .btn-link  {
             color: $white;
-            background-color: $dark-mode-velocity-body-background-color;
+            background-color: $dark-mode-velocity-text-color-black;
         }
     }
 
@@ -24,18 +50,16 @@
     }
 
     .category-list-container {
-        background-color: $dark-mode-velocity-body-background-color;
+        background-color: $dark-mode-velocity-text-color-black;
 
         .sub-categories {
-            background-color: $dark-mode-velocity-body-background-color;
+            background-color: $dark-mode-velocity-text-color-black;
         }
     }
 
-    .rango-arrow-right {
-        color: $white;
-    }
-    
-    .rango-arrow-left {
+    .rango-arrow-left,
+    .rango-arrow-right,
+    .rango-arrow-down {
         color: $white;
     }
 
@@ -99,12 +123,26 @@
     .theme-btn {
         border-color: $dark-mode-theme-color !important;
         background-color: $dark-mode-theme-color !important;
+
+        &.light {
+            background-color: $dark-mode-theme-color !important;
+
+            &:hover {
+                background-color: $dark-mode-dark-theme-color !important;
+            }
+        } 
     }
 
     .theme-btn:hover,
     .btn-add-to-cart:hover {
         border-color: $dark-mode-dark-theme-color !important;
         background-color: $dark-mode-dark-theme-color !important;
+    }
+
+    .customer-info {
+        .customer-name {
+            background-color: $dark-mode-theme-color;
+        }
     }
 
     @media only screen and (max-width: 1300px) {
