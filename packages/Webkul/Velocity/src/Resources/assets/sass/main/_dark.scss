@@ -166,6 +166,20 @@
         }
     }
 
+    .vue-slider {
+        .vue-slider-process {
+            background-color: #555 !important;
+        }
+    }
+
+    .vue-slider {
+        .vue-slider-dot-tooltip-text {
+            background-color: #555 !important;
+            border-radius: 0px;
+            border-color: #555 !important;
+        }
+    }
+    
     @media only screen and (max-width: 1300px) {
        
     }   
