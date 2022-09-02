@@ -79,6 +79,10 @@
         }
     }
 
+    .sticker.new {
+        background-color: $dark-mode-theme-color !important;
+    }
+
     .cd-quick-view {
         color: $dark-mode-velocity-text-color-black;
 
@@ -145,15 +149,24 @@
         }
     }
 
-    @media only screen and (max-width: 1300px) {
-        .table {
-            table {
+    .form-control {
+        background-color: $dark-mode-theme-color;
+        color: $white;
+    }
 
-                tbody tr td {
-                    background-color: $dark-mode-velocity-body-background-color;
-                }
+    #header-search-icon {
+        border: 1px solid #26A37C;
+    }
 
-            }
+    .view-mode {
+        .rango-view-grid-container.active,
+        .rango-view-list-container.active {
+            background-color: $dark-mode-theme-color;
+            border: 1px solid $white;;
         }
+    }
+
+    @media only screen and (max-width: 1300px) {
+       
     }   
 }
