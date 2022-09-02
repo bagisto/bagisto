@@ -523,6 +523,7 @@ return [
                 'transaction-saved' => 'लेन-देन सहेजा गया है',
                 'already-paid'      => 'इस चालान का भुगतान पहले ही किया जा चुका है',
                 'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
+                'transaction-amount-zero' => 'Transaction amount can be zero or less',
             ],
         ],
     ],

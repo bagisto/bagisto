@@ -523,6 +523,7 @@ return [
                 'transaction-saved' => 'تم حفظ الصفقة',
                 'already-paid'      => 'تم دفع هذه الفاتورة بالفعل',
                 'transaction-amount-exceeds' => 'المبلغ المحدد لهذه المعاملة أكبر من المبلغ الإجمالي للفاتورة.',
+                'transaction-amount-zero' => 'يمكن أن يكون مبلغ الصفقة صفرًا أو أقل',
             ],
         ],
     ],
