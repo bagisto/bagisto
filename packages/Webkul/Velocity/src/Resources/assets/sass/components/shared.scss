@@ -955,3 +955,55 @@ button[disabled] {
         vertical-align: middle;
     }
 }
+
+.control-group {
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        width: 40px;
+        top: 8px;
+        left: 15px;
+        right: 0;
+        bottom: 0;
+        background-color: #8e8e8e;
+        border: 1px solid #24384c !important;
+        transition: .2s;
+        height: 18px;
+
+        &:before {
+            position: absolute;
+            content: "";
+            height: 15px;
+            width: 15px;
+            left: 2px;
+            bottom: 1px;
+            background-color: #fff;
+            transition: 0.2s;
+        }
+
+        &.round {
+            border-radius: 34px;
+
+            &:before {
+                border-radius: 50%;
+            }
+        }
+    } 
+
+    input {
+        &:checked {
+            &+.slider {
+                background-color: #051e37 !important;
+
+                &:before {
+                    transform: translateX(18px);
+                }
+            }
+        }
+    }
+
+    #dark {
+        display: initial;
+        appearance: none;
+    }
+}
