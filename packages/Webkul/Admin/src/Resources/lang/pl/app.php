@@ -1624,6 +1624,7 @@ return [
             'canceled'   => 'Zamówienie anulowane',
             'pending'    => 'Zamówienie w trakcie realizacji',
             'processing' => 'przetwarzanie zamówienia',
+            'pending-payment' => 'oczekująca płatność',
         ],
     ],
 ];

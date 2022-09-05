@@ -1676,7 +1676,7 @@ return [
             'canceled'   => 'Order Canceled',
             'pending'    => 'Order Pending',
             'processing' => 'Order Processing',
-            'pending payment' => 'Pending Payment',
+            'pending-payment' => 'Pending Payment',
         ],
     ],
 ];
