@@ -128,6 +128,7 @@ return [
         'delete'                   => 'حذف',
         'mass-delete'              => 'حذف جماعي',
         'mass-update'              => 'التحديث الشامل',
+        'export'                   => 'يصدّر',
         'marketing'                => 'تسويق',
         'promotions'               => 'الترقيات',
         'cart-rules'               => 'قواعد سلة التسوق',

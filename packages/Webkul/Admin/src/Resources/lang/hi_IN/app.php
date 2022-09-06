@@ -127,6 +127,7 @@ return [
         'delete'                   => 'हटाएं',
         'mass-delete'              => 'मास डिलीट',
         'mass-update'              => 'मास अपडेट',
+        'export'                   => 'निर्यात करना',
         'marketing'                => 'विपणन',
         'promotions'               => 'प्रचार',
         'cart-rules'               => 'कार्ट रूल्स',

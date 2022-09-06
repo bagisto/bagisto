@@ -126,6 +126,7 @@ return [
         'delete'                   => 'حذف',
         'mass-delete'              => 'حذف دسته ای',
         'mass-update'              => 'آپدیت دسته ای',
+        'export'                   => 'صادرات',
         'marketing'                => 'بازاریابی',
         'promotions'               => 'تبلیغات',
         'cart-rules'               => 'قوانین سبد خرید',

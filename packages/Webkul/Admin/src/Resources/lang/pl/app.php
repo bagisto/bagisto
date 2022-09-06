@@ -124,6 +124,7 @@ return [
         'delete'                   => 'Usuń',
         'mass-delete'              => 'Mass Delete',
         'mass-update'              => 'Mass Update',
+        'export'                   => 'Eksport',
         'marketing'                => 'Marketing',
         'promotions'               => 'Promocje',
         'cart-rules'               => 'Zasady koszyka',

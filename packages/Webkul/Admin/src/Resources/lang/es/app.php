@@ -128,6 +128,7 @@ return [
         'delete'                   => 'Borrar',
         'mass-delete'              => 'Eliminar Masivamente',
         'mass-update'              => 'Actualizar Masivamente',
+        'export'                   => 'exportar',
         'marketing'                => 'Márketing',
         'promotions'               => 'Promociones',
         'cart-rules'               => 'Reglas del carrito',

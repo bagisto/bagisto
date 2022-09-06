@@ -125,6 +125,7 @@ return [
         'delete'                   => '删除',
         'mass-delete'              => '批量删除',
         'mass-update'              => '批量更新',
+        'export'                   => '出口',
         'marketing'                => '市场营销',
         'promotions'               => '促销活动',
         'cart-rules'               => '购物车规则',

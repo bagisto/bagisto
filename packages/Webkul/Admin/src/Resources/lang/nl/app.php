@@ -127,6 +127,7 @@ return [
         'delete'                   => 'Verwijder',
         'mass-delete'              => 'Mass Delete',
         'mass-update'              => 'Mass Update',
+        'export'                   => 'Exporteren',
         'marketing'                => 'Marketing',
         'promotions'               => 'Promoties',
         'cart-rules'               => 'Cart Rules',

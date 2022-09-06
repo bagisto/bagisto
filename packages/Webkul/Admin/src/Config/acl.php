@@ -46,6 +46,11 @@ return [
         'route' => 'admin.sales.orders.cancel',
         'sort'  => 2,
     ], [
+        'key'   => 'sales.orders.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'admin.datagrid.export',
+        'sort'  => 2,
+    ], [
         'key'   => 'sales.invoices',
         'name'  => 'admin::app.acl.invoices',
         'route' => 'admin.sales.invoices.index',
@@ -59,6 +64,11 @@ return [
         'key'   => 'sales.invoices.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.sales.invoices.create',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.invoices.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'admin.datagrid.export',
         'sort'  => 2,
     ], [
         'key'   => 'sales.shipments',
@@ -76,6 +86,11 @@ return [
         'route' => 'admin.sales.shipments.create',
         'sort'  => 2,
     ], [
+        'key'   => 'sales.shipments.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'admin.datagrid.export',
+        'sort'  => 2,
+    ], [
         'key'   => 'sales.refunds',
         'name'  => 'admin::app.acl.refunds',
         'route' => 'admin.sales.refunds.index',
@@ -89,6 +104,11 @@ return [
         'key'   => 'sales.refunds.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.sales.refunds.create',
+        'sort'  => 2,
+    ],[
+        'key'   => 'sales.refunds.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'admin.datagrid.export',
         'sort'  => 2,
     ],
 
@@ -139,6 +159,11 @@ return [
         'key'   => 'catalog.products.mass-delete',
         'name'  => 'admin::app.acl.mass-delete',
         'route' => 'admin.catalog.products.massdelete',
+        'sort'  => 6,
+    ], [
+        'key'   => 'catalog.products.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'admin.datagrid.export',
         'sort'  => 6,
     ], [
         'key'   => 'catalog.categories',
@@ -255,6 +280,11 @@ return [
         'name'  => 'admin::app.acl.mass-delete',
         'route' => 'admin.customer.mass-delete',
         'sort'  => 5,
+    ], [
+        'key'   => 'customers.customers.export',
+        'name'  => 'admin::app.acl.export',
+        'route' => 'admin.datagrid.export',
+        'sort'  => 6,
     ], [
         'key'   => 'customers.addresses',
         'name'  => 'admin::app.acl.addresses',

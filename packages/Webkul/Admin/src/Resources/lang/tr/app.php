@@ -125,6 +125,7 @@ return [
         'delete'                   => 'Sil',
         'mass-delete'              => 'Toplu Silme',
         'mass-update'              => 'Toplu Güncelleme',
+        'export'                   => 'İhracat',
         'marketing'                => 'Pazarlama',
         'promotions'               => 'Promosyonlar',
         'cart-rules'               => 'Alışveriş Sepeti Kuralları',

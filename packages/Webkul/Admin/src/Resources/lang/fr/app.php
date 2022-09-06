@@ -127,6 +127,7 @@ return [
         'delete'                   => 'Effacer',
         'mass-delete'              => 'Suppression multiple',
         'mass-update'              => 'Mise à jour multiple',
+        'export'                   => 'Exporter',
         'marketing'                => 'Commercialisation',
         'promotions'               => 'Promotions',
         'cart-rules'               => 'Paramètres du panier',
