@@ -731,6 +731,7 @@ return [
             'image'                    => 'صورة',
             'filterable-attributes'    => 'سمات قابلة للفلترة',
             'attributes'               => 'السمات',
+            'mass-update-success'      => 'تم تحديث جميع الفئات المحددة بنجاح',
         ],
     ],
 

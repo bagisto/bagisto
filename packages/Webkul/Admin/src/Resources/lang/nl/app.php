@@ -715,6 +715,7 @@ return [
             'image'                    => 'Afbeelding',
             'filterable-attributes'    => 'Filtreerbare kenmerken',
             'attributes'               => 'Attributen',
+            'mass-update-success'      => 'Alle geselecteerde categorieën zijn met succes bijgewerkt',
         ],
     ],
 

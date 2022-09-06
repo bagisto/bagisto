@@ -737,6 +737,8 @@ return [
             'attributes'               => 'Attributes',
             'image-size'               => 'Image resolution should be like 300px X 168px',
             'image-size-logo'          => 'Image resolution should be like 20px X 20px',
+            'mass-update-success'      => 'All the selected categories have been updated successfully',
+
         ],
     ],
 
