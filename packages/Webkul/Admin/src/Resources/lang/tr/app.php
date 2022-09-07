@@ -1633,7 +1633,7 @@ return [
             'canceled'   => 'Sipariş İptal Edildi',
             'pending'    => 'Sipariş beklemede',
             'processing' => 'sipariş düzenleniyor',
-            'pending-payment' => 'bekleyen ödeme',
+            'pending_payment' => 'bekleyen ödeme',
         ],
     ],
 ];

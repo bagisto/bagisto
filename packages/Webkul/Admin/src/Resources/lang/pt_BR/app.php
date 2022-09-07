@@ -1638,7 +1638,7 @@ return [
             'canceled'   => 'Pedido cancelado',
             'pending'    => 'pedido pendente',
             'processing' => 'processamento de pedido',
-            'pending-payment' => 'Pagamento Pendente',
+            'pending_payment' => 'Pagamento Pendente',
         ],
     ],
 ];

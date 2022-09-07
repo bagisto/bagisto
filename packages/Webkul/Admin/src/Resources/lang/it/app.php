@@ -1643,7 +1643,7 @@ return [
             'canceled'   => 'Ordine annullato',
             'pending'    => 'ordine pendente',
             'processing' => "Elaborazione dell'ordine",
-            'pending-payment' => 'In attesa di Pagamento',
+            'pending_payment' => 'In attesa di Pagamento',
         ],
     ],
 ];

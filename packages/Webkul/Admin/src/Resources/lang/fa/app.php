@@ -1635,7 +1635,7 @@ return [
             'canceled'   => 'سفارش لغو شد',
             'pending'    => 'سفارش در انتظار',
             'processing' => 'پردازش سفارش',
-            'pending-payment' => 'در انتظار پرداخت',
+            'pending_payment' => 'در انتظار پرداخت',
         ],
     ],
 ];
