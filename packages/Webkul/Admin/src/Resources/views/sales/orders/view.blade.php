@@ -95,7 +95,7 @@
                                                 </span>
 
                                                 <span class="value">
-                                                {{ __('admin::app.notification.order-status-messages.'.strtolower($order->status_label)) }}
+                                                    {{ __('admin::app.notification.order-status-messages.'.strtolower($order->status)) }}
                                                 </span>
                                             </div>
 
