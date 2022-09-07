@@ -16,9 +16,11 @@
             </div>
 
             <div class="page-action">
+            @if (bouncer()->hasPermission('customers.addresses.create '))
                 <a href="{{ route('admin.customer.addresses.create', ['id' => $customer->id]) }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.customers.addresses.create-btn-title') }}
                 </a>
+            @endif
             </div>
         </div>
 

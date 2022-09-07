@@ -15,10 +15,11 @@
                 <a href="{{ route('admin.exchange_rates.update_rates') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.settings.exchange_rates.update-rates') }}
                 </a>
-
-                <a href="{{ route('admin.exchange_rates.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.settings.exchange_rates.add-title') }}
-                </a>
+                @if (bouncer()->hasPermission('settings.exchange_rates.create'))
+                    <a href="{{ route('admin.exchange_rates.create') }}" class="btn btn-lg btn-primary">
+                        {{ __('admin::app.settings.exchange_rates.add-title') }}
+                    </a>
+                @endif
             </div>
         </div>
 
