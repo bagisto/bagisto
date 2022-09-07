@@ -1635,6 +1635,7 @@ return [
             'canceled'   => 'Bestelling geannuleerd',
             'pending'    => 'Order in behandeling',
             'processing' => 'Orderverwerking',
+            'pending_payment' => 'In afwachting van betaling',
         ],
     ],
 ];

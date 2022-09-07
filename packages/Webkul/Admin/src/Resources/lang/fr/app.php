@@ -1672,6 +1672,7 @@ return [
             'canceled'   => 'Tilaus peruutettu',
             'pending'    => 'Tilaus vireillä',
             'processing' => 'Tilausta Käsitellään',
+            'pending_payment' => 'En attente de paiement',
         ],
     ],
 ];

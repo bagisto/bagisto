@@ -1658,6 +1658,7 @@ return [
             'canceled'   => 'تم إلغاء الطلب',
             'pending'    => 'انتظار الطلب',
             'processing' => 'معالجة الطلب',
+            'pending_payment' => 'في انتظار الدفع',
         ],
     ],
 ];
