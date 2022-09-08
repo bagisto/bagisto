@@ -164,19 +164,11 @@ class CustomerDataGrid extends DataGrid
             'index'       => 'is_suspended',
             'label'       => trans('admin::app.customers.customers.suspended'),
             'type'        => 'boolean',
+            'filter-type' => 'suspended',
             'searchable'  => false,
             'sortable'    => true,
             'filterable'  => true,
             'visibility'  => false,
-            'closure'     => function ($row) {
-                $html = '';
-
-                if ($row->is_suspended) {
-                    $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.suspended') . '</span>';
-                }
-
-                return $html;
-            },
         ]);
     }
 
