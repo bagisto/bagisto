@@ -118,6 +118,7 @@
                 <th
                     :key="columnKey"
                     v-for="(column, columnKey) in columns"
+                    v-if ="column.visibility != false"
                     v-text="column.label"
                     class="grid_head"
                     :class="{ sortable: column.sortable }"
@@ -160,6 +161,7 @@
                     <td
                         :key="columnKey"
                         v-for="(column, columnKey) in columns"
+                        v-if ="column.visibility != false"
                         v-html="record[column.index]"
                         :data-value="column.label"
                     ></td>

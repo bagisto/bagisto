@@ -56,6 +56,7 @@ class CustomerDataGrid extends DataGrid
         $this->addFilter('phone', 'customers.phone');
         $this->addFilter('gender', 'customers.gender');
         $this->addFilter('status', 'status');
+        $this->addFilter('is_suspended', 'customers.is_suspended');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -150,6 +151,25 @@ class CustomerDataGrid extends DataGrid
                 } else {
                     $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.inactive') . '</span>';
                 }
+
+                if ($row->is_suspended) {
+                    $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.suspended') . '</span>';
+                }
+
+                return $html;
+            },
+        ]);
+
+        $this->addColumn([
+            'index'       => 'is_suspended',
+            'label'       => trans('admin::app.customers.customers.suspended'),
+            'type'        => 'boolean',
+            'searchable'  => false,
+            'sortable'    => true,
+            'filterable'  => true,
+            'visibility'  => false,
+            'closure'     => function ($row) {
+                $html = '';
 
                 if ($row->is_suspended) {
                     $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.suspended') . '</span>';
