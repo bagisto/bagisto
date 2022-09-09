@@ -6,9 +6,15 @@
 
 <script type="text/javascript">
     (() => {
-        if (localStorage.getItem('dark-mode-velocity') == 'true') {
+       if (localStorage.getItem('dark-mode-velocity') == 'true') {
             document.body.classList.toggle("dark-mode-velocity");
-        }    
+
+            document.getElementById('logo_dark_mode').style.display = "block";
+            document.getElementById('logo_light_mode').style.display = "none";
+        } else {
+            document.getElementById('logo_light_mode').style.display = "block";
+            document.getElementById('logo_dark_mode').style.display = "none";
+        }
         
         /* activate session messages */
         let message = @json($velocityHelper->getMessage());

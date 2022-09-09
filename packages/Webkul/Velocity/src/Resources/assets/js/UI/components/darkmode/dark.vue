@@ -12,8 +12,8 @@
 <script>
 export default {  
 
-    data(){
-        return{
+    data() {
+        return {
             lightMode: 'Light Mode',
             darkMode: 'Dark Mode',
             buttonText: 'Dark Mode',
@@ -22,17 +22,22 @@ export default {
     },
 
     methods: {
-
         toggle: function () {  
-
             this.$root.checkThemeMode();
-
             this.toggleBodyClass();
         },
 
         toggleBodyClass: function() {
             let element = document.body;
-            element.classList.toggle("dark-mode-velocity"); 
+            element.classList.toggle("dark-mode-velocity");
+            
+            if (this.$root.isDarkMode) {
+                document.getElementById('logo_light_mode').style.display = "none";
+                document.getElementById('logo_dark_mode').style.display = "block";
+            } else {
+                document.getElementById('logo_light_mode').style.display = "block";
+                document.getElementById('logo_dark_mode').style.display = "none";
+            }
 
             if (this.buttonText == this.darkMode) {
                 this.buttonText = this.lightMode;
