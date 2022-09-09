@@ -1673,6 +1673,7 @@ return [
             'canceled'   => 'आदेश रद्द',
             'pending'    => 'आदेश लम्बित',
             'processing' => 'आदेश प्रसंस्करण',
+            'pending_payment' => 'En attente de paiement',
         ],
     ],
 ];
