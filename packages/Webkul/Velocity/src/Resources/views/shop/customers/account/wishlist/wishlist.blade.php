@@ -166,7 +166,7 @@
                     return {
                         isWishlistShared: parseInt("{{ $isWishlistShared }}"),
 
-                        wishlistSharedLink: "{{ $wishlistSharedLink }}".replace("&amp;", "&"),
+                        wishlistSharedLink: "{{ $wishlistSharedLink }}".replace(/&amp;/g, "&"),
                     }
                 },
 
@@ -177,7 +177,8 @@
                         this.$root.showLoader();
 
                         this.$http.post("{{ route('customer.wishlist.share') }}", {
-                            shared: val
+                            shared: val,
+                            product_id:[51,49,29]
                         })
                         .then(function(response) {
                             self.$root.hideLoader();

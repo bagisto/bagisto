@@ -48,7 +48,7 @@ class WishlistController extends Controller
             'items'              => $this->wishlistRepository->getCustomerWishlist(),
             'isSharingEnabled'   => $this->isSharingEnabled(),
             'isWishlistShared'   => $customer->isWishlistShared(),
-            'wishlistSharedLink' => $customer->getWishlistSharedLink()
+            'wishlistSharedLink' => $customer->getWishlistSharedLink(51)
         ]);
     }
 
@@ -113,6 +113,8 @@ class WishlistController extends Controller
      */
     public function share()
     {
+        $productIds = request()->product_id;
+
         $customer = auth()->guard('customer')->user();
 
         if ($this->isSharingEnabled()) {
@@ -128,7 +130,7 @@ class WishlistController extends Controller
             ) {
                 return response()->json([
                     'isWishlistShared'   => $customer->isWishlistShared(),
-                    'wishlistSharedLink' => $customer->getWishlistSharedLink()
+                    'wishlistSharedLink' => $customer->getWishlistSharedLink($productIds)
                 ]);
             }
         }
@@ -143,6 +145,9 @@ class WishlistController extends Controller
      */
     public function shared(CustomerRepository $customerRepository)
     {
+
+        return request()->get('product_id');
+
         if (
             ! $this->isSharingEnabled()
             || ! request()->hasValidSignature()
@@ -153,7 +158,11 @@ class WishlistController extends Controller
 
         $customer = $customerRepository->find(request()->get('id'));
 
-        $items = $customer->wishlist_items()->where('shared', 1)->get();
+        $items = $customer->wishlist_items()
+        // ->whereIn('product_id', [51, 49, 29])
+        ->whereIn('product_id', request()->get('product_id'))
+        ->where('shared', 1)
+        ->get();
 
         if (
             $customer
