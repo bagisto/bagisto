@@ -723,6 +723,7 @@ return [
             'image'                    => 'Bild',
             'filterable-attributes'    => 'Filterbare Attribute',
             'attributes'               => 'Attribute',
+            'mass-update-success'      => 'Alle ausgewählten Kategorien wurden erfolgreich aktualisiert',
         ],
     ],
     'configuration' =>

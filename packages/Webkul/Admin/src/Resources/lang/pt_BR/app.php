@@ -714,6 +714,7 @@ return [
             'image'                    => 'Imagem',
             'filterable-attributes'    => 'Atributos filtráveis',
             'attributes'               => 'Atributos',
+            'mass-update-success'      => 'Todas as categorias selecionadas foram atualizadas com sucesso',
         ],
     ],
 
