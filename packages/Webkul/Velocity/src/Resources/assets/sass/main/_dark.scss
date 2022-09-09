@@ -45,6 +45,12 @@
         background-color: $dark-mode-theme-color !important;
     }
 
+    header #search-form {
+        input, .btn-group select {
+            border: 1px solid $white !important;
+        }
+    }
+
     .vue-go-top {
         background-color: $dark-mode-theme-color !important;
     }
@@ -155,7 +161,7 @@
     }
 
     #header-search-icon {
-        border: 1px solid #26A37C;
+        border: 1px solid $white;
     }
 
     .view-mode {
