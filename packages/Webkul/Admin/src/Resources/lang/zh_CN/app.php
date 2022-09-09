@@ -1630,6 +1630,7 @@ return [
             'canceled'   => '订单取消',
             'pending'    => '订单待处理',
             'processing' => '订单处理',
+            'pending_payment' => '待付款',
         ],
     ],
 ];

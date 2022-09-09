@@ -1635,6 +1635,7 @@ return [
             'canceled'   => 'Bestellung storniert',
             'pending'    => 'Bestellung ausstehend',
             'processing' => 'Auftragsabwicklung',
+            'pending_payment' => 'Ausstehende Zahlung',
         ],
     ],
 ];

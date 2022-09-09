@@ -91,6 +91,10 @@ export default {
                 closed: {
                     icon: 'closed-icon',
                     message: 'Order Closed'
+                },
+                pending_payment: {
+                    icon: 'pending-icon',
+                    message: 'Payment Pending'
                 }
             },
 

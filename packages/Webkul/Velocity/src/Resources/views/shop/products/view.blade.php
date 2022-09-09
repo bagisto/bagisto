@@ -289,9 +289,35 @@
                             setTimeout(function() {
                                 document.getElementById('product-form').submit();
                             }, 0);
+                        } else {
+                            this.activateAutoScroll();
                         }
                     });
                 },
+
+                activateAutoScroll: function(event) {
+                    
+                    /**
+                     * This is normal Element
+                     */
+                    const normalElement = document.querySelector(
+                        '.control-error:first-of-type'
+                    );
+
+                    /**
+                     * Scroll Config
+                     */
+                    const scrollConfig = {
+                        behavior: 'smooth',
+                        block: 'end',
+                        inline: 'nearest',
+                    }
+
+                    if (normalElement) {
+                        normalElement.scrollIntoView(scrollConfig);
+                        return;
+                    }
+                }
             }
         });
 
