@@ -49,6 +49,10 @@
         input, .btn-group select {
             border: 1px solid $white !important;
         }
+
+        .select-icon {
+            background-color: $dark-mode-theme-color !important;
+        }
     }
 
     .reviews-container {
