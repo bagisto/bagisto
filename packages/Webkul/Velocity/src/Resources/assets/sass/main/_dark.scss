@@ -190,6 +190,19 @@
         }
     }
     
+    .account-content  {
+        .wishlist-icon i,
+        .per-page-label,
+        .account-heading,
+        .customer-name-text,
+        .wishlist-container,
+        .compare-container,
+        .reviews-container,
+        .account-table-content .table table tr td {
+            color: $white !important;
+        }
+    }
+    
     @media only screen and (max-width: 1300px) {
        
     }   
