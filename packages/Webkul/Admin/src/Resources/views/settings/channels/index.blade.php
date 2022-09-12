@@ -12,9 +12,11 @@
             </div>
 
             <div class="page-action">
-                <a href="{{ route('admin.channels.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.settings.channels.add-title') }}
-                </a>
+                @if (bouncer()->hasPermission('settings.channels.create'))
+                    <a href="{{ route('admin.channels.create') }}" class="btn btn-lg btn-primary">
+                        {{ __('admin::app.settings.channels.add-title') }}
+                    </a>
+                @endif
             </div>
         </div>
 
