@@ -164,7 +164,6 @@ class CustomerDataGrid extends DataGrid
             'index'       => 'is_suspended',
             'label'       => trans('admin::app.customers.customers.suspended'),
             'type'        => 'boolean',
-            'filter-type' => 'suspended',
             'searchable'  => false,
             'sortable'    => true,
             'filterable'  => true,
