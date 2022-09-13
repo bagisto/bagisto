@@ -206,6 +206,8 @@
             color: $white !important;
             
             .table table tr td,
+            .filter-advance .filtered-tags,
+            .filter-advance .datagrid-count,
              label {
                 color: $white !important;
             }
