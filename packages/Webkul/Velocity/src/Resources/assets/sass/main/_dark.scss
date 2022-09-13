@@ -202,8 +202,17 @@
         .wishlist-container,
         .compare-container,
         .reviews-container,
-        .account-table-content .table table tr td {
+        .account-table-content {
             color: $white !important;
+            
+            .table table tr td,
+             label {
+                color: $white !important;
+            }
+
+            .card-body {
+                color: $dark-mode-velocity-text-color-black;
+            }
         }
     }
     
