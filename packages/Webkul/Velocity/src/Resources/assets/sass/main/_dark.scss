@@ -202,6 +202,14 @@
         .wishlist-container,
         .compare-container,
         .reviews-container,
+        .sale-container {
+            color: $white !important;
+
+            .table {
+                color: $white !important;
+            }
+        }
+        
         .account-table-content {
             color: $white !important;
             
