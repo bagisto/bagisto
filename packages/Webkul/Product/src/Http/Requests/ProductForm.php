@@ -71,7 +71,7 @@ class ProductForm extends FormRequest
             foreach (request()->images['files'] as $key => $file) {
                 if (Str::contains($key, 'image_')) {
                     $this->rules = array_merge($this->rules, [
-                        'images.files.' . $key     => ['required', 'mimes:bmp,jpeg,jpg,png,webp'],
+                        'images.files.' . $key => ['required', 'mimes:bmp,jpeg,jpg,png,webp'],
                     ]);
                 }
             }
