@@ -6,6 +6,29 @@
         background-color: $dark-mode-sticky-header-background-color;
     }
 
+    .accordian {
+        .accordian-header,
+        .accordian-content {
+            color: $white !important;
+        }
+    }
+
+    .booking-information {
+        .ticket-name,
+        .ticket-price,
+        .ticket-item p,
+        .book-slots label {
+            color: $white !important;
+        }
+
+        .booking-info-row {
+            .title,
+            .icon {
+                color: $white !important;
+            }
+        }
+    }
+
     #mini-cart {
         .mini-cart-content {
             color: $white !important;
@@ -209,7 +232,7 @@
                 color: $white !important;
             }
         }
-        
+
         .account-table-content {
             color: $white !important;
             
