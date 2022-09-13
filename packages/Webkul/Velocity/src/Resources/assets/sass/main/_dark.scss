@@ -29,6 +29,13 @@
         }
     }
 
+    .category-list-container {
+        .sub-categories, 
+        .category-content {
+            background-color:  $dark-mode-theme-color !important;
+        }
+    }
+
     #mini-cart {
         .mini-cart-content {
             color: $white !important;
