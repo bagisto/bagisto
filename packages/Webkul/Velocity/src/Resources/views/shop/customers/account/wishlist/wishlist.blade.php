@@ -44,6 +44,7 @@
     <div class="wishlist-container">
         @if ($items->count())
             @foreach ($items as $item)
+                <input type="checkbox" class="wishlist_ids" data-value="{{ $item->id }}" >
                 @include ('shop::customers.account.wishlist.wishlist-product', [
                     'item' => $item,
                     'visibility' => $isSharingEnabled
@@ -70,7 +71,7 @@
                 <i class="rango-close"></i>
 
                 <div slot="body">
-                    <share-component></share-component>
+                    <share-component :hello-val=arr></share-component>
                 </div>
             </modal>
         </div>
@@ -158,6 +159,11 @@
             }
 
             Vue.component('share-component', {
+
+                props : [
+                    'helloVal'
+                ],
+
                 template: '#share-component-template',
 
                 inject: ['$validator'],
@@ -172,6 +178,7 @@
 
                 methods: {
                     shareWishlist: function(val) {
+                        console.log(this.helloVal);
                         var self = this;
 
                         this.$root.showLoader();
@@ -205,6 +212,16 @@
     @endif
 
     <script>
+        const arr = [];
+        $("input[type=checkbox]").each(function(){
+            $(this).change(function () {
+                alert("asd");
+            })
+            // if ($(this).prop("checked")) {
+                // arr.push($(this).attr("data-value"));
+            // }
+        }); 
+
         /**
          * Delete all wishlist.
          */

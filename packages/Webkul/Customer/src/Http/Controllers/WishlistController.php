@@ -48,7 +48,7 @@ class WishlistController extends Controller
             'items'              => $this->wishlistRepository->getCustomerWishlist(),
             'isSharingEnabled'   => $this->isSharingEnabled(),
             'isWishlistShared'   => $customer->isWishlistShared(),
-            'wishlistSharedLink' => $customer->getWishlistSharedLink(51)
+            'wishlistSharedLink' => $customer->getWishlistSharedLink()
         ]);
     }
 
@@ -146,8 +146,6 @@ class WishlistController extends Controller
     public function shared(CustomerRepository $customerRepository)
     {
 
-        return request()->get('product_id');
-
         if (
             ! $this->isSharingEnabled()
             || ! request()->hasValidSignature()
@@ -159,10 +157,14 @@ class WishlistController extends Controller
         $customer = $customerRepository->find(request()->get('id'));
 
         $items = $customer->wishlist_items()
-        // ->whereIn('product_id', [51, 49, 29])
-        ->whereIn('product_id', request()->get('product_id'))
         ->where('shared', 1)
         ->get();
+
+        if (request()->get('product_id')) {
+            $items->whereIn('product_id', request()->get('product_id'));
+        }
+
+        // $items->get();
 
         if (
             $customer
