@@ -90,6 +90,8 @@ class Category extends TranslatableModel implements CategoryContract
                 'options' => function ($query) {
                     $query->orderBy('sort_order');
                 },
+                'translations',
+                'options.translations'
             ]);
     }
 
