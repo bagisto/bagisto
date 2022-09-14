@@ -44,7 +44,7 @@
     <div class="wishlist-container">
         @if ($items->count())
             @foreach ($items as $item)
-                <input type="checkbox" class="wishlist_ids" data-value="{{ $item->id }}" >
+                <input type="checkbox" value="{{ $item->product_id }}" onclick="getCheckBoxValue(this)">
                 @include ('shop::customers.account.wishlist.wishlist-product', [
                     'item' => $item,
                     'visibility' => $isSharingEnabled
@@ -71,7 +71,7 @@
                 <i class="rango-close"></i>
 
                 <div slot="body">
-                    <share-component :hello-val=arr></share-component>
+                    <share-component :product-ids=arr></share-component>
                 </div>
             </modal>
         </div>
@@ -161,7 +161,7 @@
             Vue.component('share-component', {
 
                 props : [
-                    'helloVal'
+                    'productIds'
                 ],
 
                 template: '#share-component-template',
@@ -178,14 +178,13 @@
 
                 methods: {
                     shareWishlist: function(val) {
-                        console.log(this.helloVal);
                         var self = this;
 
                         this.$root.showLoader();
 
                         this.$http.post("{{ route('customer.wishlist.share') }}", {
                             shared: val,
-                            product_id:[51,49,29]
+                            product_id:this.productIds
                         })
                         .then(function(response) {
                             self.$root.hideLoader();
@@ -212,15 +211,21 @@
     @endif
 
     <script>
-        const arr = [];
-        $("input[type=checkbox]").each(function(){
-            $(this).change(function () {
-                alert("asd");
-            })
-            // if ($(this).prop("checked")) {
-                // arr.push($(this).attr("data-value"));
-            // }
-        }); 
+
+        const arr = []; 
+
+        function getCheckBoxValue(event) {
+            if (event.checked) {
+                arr.push(event.value);
+
+            } else {
+                arr.filter((value,index)=>{
+                    if (value == event.value) {
+                        arr.splice(index,1);
+                   }
+                });
+            }
+        }
 
         /**
          * Delete all wishlist.
