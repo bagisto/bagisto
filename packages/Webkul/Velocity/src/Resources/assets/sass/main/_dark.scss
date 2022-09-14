@@ -111,7 +111,8 @@
         color: $dark-mode-velocity-text-color-black;
     }
 
-    .product-detail {
+    .product-detail,
+    .lg-card-container.list-card {
         .wishlist-icon i {
             color: $white;
         }
