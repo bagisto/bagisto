@@ -721,6 +721,7 @@ return [
             'image'                    => 'Görsel',
             'filterable-attributes'    => 'Filtrelenebilir Nitelikler',
             'attributes'               => 'Nitelikler',
+            'mass-update-success'      => 'All the selected categories have been updated successfully',
         ],
     ],
 

@@ -56,6 +56,7 @@ class CustomerDataGrid extends DataGrid
         $this->addFilter('phone', 'customers.phone');
         $this->addFilter('gender', 'customers.gender');
         $this->addFilter('status', 'status');
+        $this->addFilter('is_suspended', 'customers.is_suspended');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -157,6 +158,16 @@ class CustomerDataGrid extends DataGrid
 
                 return $html;
             },
+        ]);
+
+        $this->addColumn([
+            'index'       => 'is_suspended',
+            'label'       => trans('admin::app.customers.customers.suspended'),
+            'type'        => 'boolean',
+            'searchable'  => false,
+            'sortable'    => true,
+            'filterable'  => true,
+            'visibility'  => false,
         ]);
     }
 

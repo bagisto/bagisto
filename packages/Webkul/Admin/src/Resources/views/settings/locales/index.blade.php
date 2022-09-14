@@ -12,9 +12,11 @@
             </div>
 
             <div class="page-action">
-                <a href="{{ route('admin.locales.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.settings.locales.add-title') }}
-                </a>
+                @if (bouncer()->hasPermission('settings.locales.create'))
+                    <a href="{{ route('admin.locales.create') }}" class="btn btn-lg btn-primary">
+                        {{ __('admin::app.settings.locales.add-title') }}
+                    </a>
+                @endif
             </div>
         </div>
 

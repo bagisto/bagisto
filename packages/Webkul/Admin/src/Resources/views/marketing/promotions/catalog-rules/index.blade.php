@@ -12,9 +12,11 @@
             </div>
 
             <div class="page-action">
-                <a href="{{ route('admin.catalog-rules.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.promotions.catalog-rules.add-title') }}
-                </a>
+                @if (bouncer()->hasPermission('marketing.promotions.catalog-rules'))
+                    <a href="{{ route('admin.catalog-rules.create') }}" class="btn btn-lg btn-primary">
+                        {{ __('admin::app.promotions.catalog-rules.add-title') }}
+                    </a>
+                @endif
             </div>
         </div>
 
