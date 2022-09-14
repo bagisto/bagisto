@@ -174,10 +174,10 @@
         background-color: $dark-mode-theme-color !important;
 
         &.light {
-            background-color: $dark-mode-theme-color !important;
+            background-color: $white !important;
 
             &:hover {
-                background-color: $dark-mode-dark-theme-color !important;
+                background-color: $white !important;
             }
         } 
     }
