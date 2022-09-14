@@ -122,7 +122,9 @@ class WishlistController extends Controller
                 'shared' => 'required|boolean'
             ]);
 
-            $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);
+            $updateCounts = $customer->wishlist_items()
+            ->whereIn('product_id', $productIds)
+            ->update(['shared' => $data['shared']]);
 
             if (
                 $updateCounts
