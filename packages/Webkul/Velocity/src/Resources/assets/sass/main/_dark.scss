@@ -107,10 +107,13 @@
         }
     }
 
+    .page-item,
+    .angle-left-icon,
+    .angle-right-icon,
     .rango-arrow-left,
     .rango-arrow-right,
     .rango-arrow-down {
-        color: $white;
+        color: $white !important;
     }
 
     .wishlist-icon i {
