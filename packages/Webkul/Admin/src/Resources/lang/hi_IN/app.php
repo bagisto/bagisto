@@ -734,6 +734,7 @@ return [
             'attributes'               => 'गुण',
             'image-size'               => 'इमेज रेजोल्यूशन 300px X 168px जैसा होना चाहिए',
             'image-size-logo'          => 'इमेज रेजोल्यूशन 20px X 20px जैसा होना चाहिए',
+            'mass-update-success'      => 'सभी चयनित श्रेणियों को सफलतापूर्वक अपडेट कर दिया गया है',
         ],
     ],
 
@@ -1673,6 +1674,7 @@ return [
             'canceled'   => 'आदेश रद्द',
             'pending'    => 'आदेश लम्बित',
             'processing' => 'आदेश प्रसंस्करण',
+            'pending_payment' => 'En attente de paiement',
         ],
     ],
 ];

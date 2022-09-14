@@ -166,6 +166,11 @@ return [
         'route' => 'admin.catalog.categories.massdelete',
         'sort'  => 4,
     ], [
+        'key'   => 'catalog.categories.mass-update',
+        'name'  => 'admin::app.acl.mass-update',
+        'route' => 'admin.catalog.categories.mass-update',
+        'sort'  => 4,
+    ], [
         'key'   => 'catalog.attributes',
         'name'  => 'admin::app.acl.attributes',
         'route' => 'admin.catalog.attributes.index',

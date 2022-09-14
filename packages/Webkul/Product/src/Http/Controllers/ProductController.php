@@ -318,11 +318,9 @@ class ProductController extends Controller
     {
         $data = request()->all();
 
-        if (! isset($data['massaction-type'])) {
-            return redirect()->back();
-        }
-
-        if (! $data['massaction-type'] == 'update') {
+        if (! isset($data['massaction-type']) 
+            || ! $data['massaction-type'] == 'update'
+        ) {
             return redirect()->back();
         }
 

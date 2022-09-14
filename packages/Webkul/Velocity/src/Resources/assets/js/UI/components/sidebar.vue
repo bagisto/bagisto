@@ -129,6 +129,14 @@
                                         <span class="category-title">{{
                                             subCategory['name']
                                         }}</span>
+
+                                        <i
+                                            class="rango-arrow-down pr15 float-right"
+                                            @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                                            @mouseover="toggleSidebar(id, $event, 'mouseover')"
+                                            v-if="subCategory.children.length > 0"
+                                        >
+                                        </i>
                                     </a>
 
                                     <ul type="none" class="nested">

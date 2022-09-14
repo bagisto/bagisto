@@ -716,6 +716,7 @@ return [
             'image'                    => '图片',
             'filterable-attributes'    => '可过滤属性',
             'attributes'               => '属性列表',
+            'mass-update-success'      => '所有選擇的類別都已成功更新',
         ],
     ],
 
@@ -1630,6 +1631,7 @@ return [
             'canceled'   => '订单取消',
             'pending'    => '订单待处理',
             'processing' => '订单处理',
+            'pending_payment' => '待付款',
         ],
     ],
 ];

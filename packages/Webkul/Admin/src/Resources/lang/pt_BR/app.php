@@ -714,6 +714,7 @@ return [
             'image'                    => 'Imagem',
             'filterable-attributes'    => 'Atributos filtráveis',
             'attributes'               => 'Atributos',
+            'mass-update-success'      => 'Todas as categorias selecionadas foram atualizadas com sucesso',
         ],
     ],
 
@@ -1638,6 +1639,7 @@ return [
             'canceled'   => 'Pedido cancelado',
             'pending'    => 'pedido pendente',
             'processing' => 'processamento de pedido',
+            'pending_payment' => 'Pagamento Pendente',
         ],
     ],
 ];

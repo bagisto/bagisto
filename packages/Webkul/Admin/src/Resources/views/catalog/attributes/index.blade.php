@@ -12,12 +12,14 @@
             </div>
 
             <div class="page-action">
-                <a
-                    href="{{ route('admin.catalog.attributes.create') }}"
-                    class="btn btn-lg btn-primary"
-                >
-                    {{ __('admin::app.catalog.attributes.add-title') }}
-                </a>
+                @if (bouncer()->hasPermission('catalog.attributes.create'))
+                    <a
+                        href="{{ route('admin.catalog.attributes.create') }}"
+                        class="btn btn-lg btn-primary"
+                    >
+                        {{ __('admin::app.catalog.attributes.add-title') }}
+                    </a>
+                @endif
             </div>
         </div>
 

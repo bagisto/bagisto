@@ -12,9 +12,11 @@
             </div>
 
             <div class="page-action">
-                <a href="{{ route('admin.groups.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.customers.groups.add-title') }}
-                </a>
+                @if (bouncer()->hasPermission('customers.groups.create'))
+                    <a href="{{ route('admin.groups.create') }}" class="btn btn-lg btn-primary">
+                        {{ __('admin::app.customers.groups.add-title') }}
+                    </a>
+                @endif
             </div>
         </div>
 
