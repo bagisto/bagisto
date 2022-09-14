@@ -737,6 +737,7 @@ return [
             'attributes'               => 'Attributes',
             'image-size'               => 'Image resolution should be like 300px X 168px',
             'image-size-logo'          => 'Image resolution should be like 20px X 20px',
+            'mass-update-success'      => 'All the selected categories have been updated successfully',
         ],
     ],
 
@@ -1633,6 +1634,7 @@ return [
             'logo-size'                             => 'Image resolution should be like 112px X 41px',
             'favicon-size'                          => 'Image resolution should be like 16px X 16px',
             'invoice-logo-size'                     => 'Image resolution should be like 192px X 50px',
+
         ],
     ],
 
@@ -1676,7 +1678,7 @@ return [
             'canceled'   => 'Order Canceled',
             'pending'    => 'Order Pending',
             'processing' => 'Order Processing',
-            'pending payment' => 'Pending Payment',
+            'pending_payment' => 'Pending Payment',
         ],
     ],
 ];

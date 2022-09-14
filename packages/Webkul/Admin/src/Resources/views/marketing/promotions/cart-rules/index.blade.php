@@ -18,9 +18,11 @@
             </div>
 
             <div class="page-action">
-                <a href="{{ route('admin.cart-rules.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.promotions.cart-rules.add-title') }}
-                </a>
+                @if (bouncer()->hasPermission('marketing.promotions.cart-rules.create'))
+                    <a href="{{ route('admin.cart-rules.create') }}" class="btn btn-lg btn-primary">
+                        {{ __('admin::app.promotions.cart-rules.add-title') }}
+                    </a>
+                @endif
             </div>
         </div>
 

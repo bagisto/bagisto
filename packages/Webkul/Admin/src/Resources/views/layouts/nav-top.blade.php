@@ -4,7 +4,8 @@
         'canceled'=> trans('admin::app.notification.order-status-messages.canceled'),
         'closed' => trans('admin::app.notification.order-status-messages.closed'),
         'completed'=> trans('admin::app.notification.order-status-messages.completed'),
-        'processing' => trans('admin::app.notification.order-status-messages.processing')
+        'processing' => trans('admin::app.notification.order-status-messages.processing'),
+        'pending_payment' => trans('admin::app.notification.order-status-messages.pending_payment')
     ];
     $allLocales = core()->getAllLocales()->pluck('name', 'code');
 @endphp

@@ -205,6 +205,37 @@ class CategoryController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
+     /**
+     * Mass update Category.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function massUpdate()
+    {
+        $data = request()->all();
+
+        if (! isset($data['massaction-type']) || ! $data['massaction-type'] == 'update') {
+            return redirect()->back();
+        }
+
+        $categoryIds = explode(',', $data['indexes']);
+
+        foreach ($categoryIds as $categoryId) {
+            Event::dispatch('catalog.categories.mass-update.before', $categoryId);
+
+            $category = $this->categoryRepository->find($categoryId);
+
+            $category->status = $data['update-options'];
+            $category->save();
+
+            Event::dispatch('catalog.categories.mass-update.after', $category);
+        }
+
+        session()->flash('success', trans('admin::app.catalog.categories.mass-update-success'));
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
     /**
      * Get category product count.
      *

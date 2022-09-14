@@ -1753,7 +1753,7 @@
 
         .category {
             padding: 5px 0 4px 15px;
-
+            
             + .nested {
                 color: $font-color;
 
@@ -2688,4 +2688,12 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+.sub-category:hover ~ ul {
+    display: block;
+}
+
+.nested {
+    display: none;
 }

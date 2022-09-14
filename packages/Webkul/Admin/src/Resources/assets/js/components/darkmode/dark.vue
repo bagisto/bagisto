@@ -22,23 +22,20 @@ export default {
     },
 
     methods: {
-
         toggle: function () {  
-
             this.$root.checkMode();
 
             this.toggleBodyClass();
         },
 
         toggleBodyClass: function(){
-            
             let element = document.body;
 
             element.classList.toggle("dark-mode"); 
 
-            if(this.buttonText == this.darkMode){
+            if (this.buttonText == this.darkMode) {
                 this.buttonText = this.lightMode;
-            }else{
+            } else {
                 this.buttonText = this.darkMode;
             }
         }
