@@ -108,13 +108,9 @@ class ProductController extends Controller
      */
     public function getFilterAttributes($categoryId = null, AttributeRepository $attributeRepository)
     {
-        $filterAttributes = [];
+        $category = $this->categoryRepository->findOrFail($categoryId);
 
-        if ($category = $this->categoryRepository->find($categoryId)) {
-            $filterAttributes = $this->productFlatRepository->getFilterAttributes($category);
-        }
-
-        if (empty($filterAttributes)) {
+        if (empty($filterAttributes = $category->filterableAttributes)) {
             $filterAttributes = $attributeRepository->getFilterAttributes();
         }
 
