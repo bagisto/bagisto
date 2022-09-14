@@ -1,4 +1,4 @@
-<div class="col-12 lg-card-container list-card product-card row {{ $visibility ? 'card' : ''}}">
+<div class="col-12 lg-card-container list-card product-card row">
     <div class="product-image">
         @php
             $image = $item->product->getTypeInstance()->getBaseImage($item);
@@ -25,6 +25,7 @@
                     title="{{ $item->product->name }}" class="unset">
 
                     <span class="fs16">{{ $item->product->name }}</span>
+
 
                     @if (isset($item->additional['attributes']))
                         <div class="item-options">
@@ -73,12 +74,6 @@
                     ])
                 </div>
             </div>
-            @if ($visibility)
-                <div id='share-wishlist'>
-                    <input type="checkbox" value="{{ $item->product_id }}" onclick="getCheckBoxValue(this)">
-                    <p>Click to share the product</p>
-                </div>
-            @endif
         </div>
     </div>
 </div>

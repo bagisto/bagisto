@@ -14,7 +14,7 @@
                     </h2>
 
                     @foreach ($items as $item)
-                        @include('shop::customers.account.wishlist.wishlist-product', ['item' => $item])
+                        @include('shop::customers.account.wishlist.wishlist-product', ['item' => $item, 'visibility' => 0])
                     @endforeach
                 </div>
             </div>

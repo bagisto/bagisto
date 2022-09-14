@@ -6,6 +6,39 @@
     {{ __('shop::app.customer.account.wishlist.page-title') }}
 @endsection
 
+@push('css')
+    <style>
+        .wishlist-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+        }
+            
+            .product-card {
+                width: 100%;
+                padding-right: 0;
+                margin-top: 0px !important;
+            }
+
+            .product-image {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .product-information {
+                width: fit-content !important;
+            }
+            #share-wishlist {
+                display: flex;
+                margin-top: 30px;
+                align-items: center;
+            }       
+            input,p {
+                margin: 0px;
+            }
+    </style>
+@endpush
+
 @section('page-detail-wrapper')
     <div class="account-head">
         <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
@@ -44,11 +77,11 @@
     <div class="wishlist-container">
         @if ($items->count())
             @foreach ($items as $item)
-                <input type="checkbox" value="{{ $item->product_id }}" onclick="getCheckBoxValue(this)">
                 @include ('shop::customers.account.wishlist.wishlist-product', [
-                    'item' => $item,
+                    'product'    => $item,
                     'visibility' => $isSharingEnabled
                 ])
+                
             @endforeach
 
             <div>
