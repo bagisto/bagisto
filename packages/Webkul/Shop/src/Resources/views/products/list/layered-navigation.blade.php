@@ -2,8 +2,8 @@
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
     <layered-navigation
-        attribute-src="{{ route('admin.catalog.products.get-filter-attributes', $category->id ?? null) }}"
-        max-price-src="{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id ?? null) }}">
+        attribute-src="{{ route('catalog.categories.filterable-attributes', $category->id ?? null) }}"
+        max-price-src="{{ route('catalog.categories.maximum-price', $category->id ?? null) }}">
     </layered-navigation>
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}

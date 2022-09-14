@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\CMS\Http\Controllers\Shop\PagePresenterController;
 use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\ProductController;
+use Webkul\Shop\Http\Controllers\CategoryController;
 use Webkul\Shop\Http\Controllers\ReviewController;
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
@@ -79,7 +80,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'view' => 'shop.products.index',
     ])->name('shop.product.file.download');
 
-    Route::get('products/get-filter-attributes/{categoryId?}', [ProductController::class, 'getFilterAttributes'])->name('admin.catalog.products.get-filter-attributes');
+    Route::get('categories/filterable-attributes/{categoryId?}', [CategoryController::class, 'getFilterAttributes'])->name('catalog.categories.filterable-attributes');
 
-    Route::get('products/get-category-product-maximum-price/{categoryId?}', [ProductController::class, 'getCategoryProductMaximumPrice'])->name('admin.catalog.products.get-category-product-maximum-price');
+    Route::get('categories/maximum-price/{categoryId?}', [CategoryController::class, 'getCategoryProductMaximumPrice'])->name('catalog.categories.maximum-price');
 });
