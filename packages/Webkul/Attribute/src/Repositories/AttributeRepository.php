@@ -136,7 +136,6 @@ class AttributeRepository extends Repository
      */
     public function getFilterAttributes()
     {
-        dd(111);
         return $this->model->with(['options', 'options.translations'])->where('is_filterable', 1)->get();
     }
 
