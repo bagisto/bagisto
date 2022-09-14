@@ -155,13 +155,18 @@
             data: function() {
                 return {
                     appliedFilters: [],
+
                     active: false,
+
                     sliderConfig: {
                         value: [0, 0],
+
                         max: 500,
+
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
+
                         tooltipStyle: {
                             "backgroundColor": "#FF6472",
                             "borderColor": "#FF6472"
@@ -188,6 +193,10 @@
 
             methods: {
                 setMaxPrice: function () {
+                    if (this.attribute['code'] != 'price') {
+                        return;
+                    }
+
                     axios
                         .get(this.maxPriceSrc)
                         .then((response) => {
