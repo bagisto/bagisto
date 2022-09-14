@@ -91,7 +91,7 @@ class Category extends TranslatableModel implements CategoryContract
                     $query->orderBy('sort_order');
                 },
                 'translations',
-                'options.translations'
+                'options.translations',
             ]);
     }
 
