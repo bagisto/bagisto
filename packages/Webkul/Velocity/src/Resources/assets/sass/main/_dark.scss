@@ -29,6 +29,12 @@
         }
     }
 
+    .filters-container {
+        .toolbar-wrapper > div label {
+            color: $dark-mode-velocity-text-color-black;
+        }
+    }
+
     .category-list-container {
         .sub-categories, 
         .category-content {
