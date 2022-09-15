@@ -51,11 +51,6 @@
                     @csrf
                 </form>
 
-                <div class='select-all-section'>
-                    <p>{{ __('shop::app.customer.account.wishlist.select-all') }}</p>
-                    <input type="checkbox" id="check-all" onclick="checkAllCheckbox()">
-                </div>
-
                 @if ($isSharingEnabled)
                     <a
                         class="remove-decoration theme-btn light"
@@ -249,30 +244,8 @@
     @endif
 
     <script>
-        
+
         const arr = []; 
-
-        function getAllCheckboxValue() {
-            $(".wishlist").each(function() {
-                getCheckBoxValue(this);
-                if ($(this).attr('checked')) {
-                    $("#check-all").attr('checked',true);
-                }
-            });
-        }
-        
-        getAllCheckboxValue();
-
-        function checkAllCheckbox() {
-            $(".wishlist").each(function() {
-                if ($(this).attr('checked')) {
-                    $(this).attr('checked',false);
-                } else {
-                    $(this).attr('checked',true);
-                }
-            });
-            getAllCheckboxValue();
-        }
 
         function getCheckBoxValue(event) {
             if (event.checked) {
