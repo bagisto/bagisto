@@ -639,7 +639,7 @@ class Configurable extends AbstractType
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
             . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'
-            . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getMaximumPrice())) . '</span>';
+            . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getOfferPrice())) . '</span>';
         } elseif ($this->haveOffer()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
