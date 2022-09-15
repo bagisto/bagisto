@@ -386,6 +386,8 @@ return [
                 'customer-name'        => ':name\'s साझा विशलिस्ट',
                 'enable-wishlist-info' => 'लिंक प्राप्त करने के लिए इच्छा सूची साझाकरण सक्षम करें।',
                 'update-message'       => 'साझा इच्छा-सूची सेटिंग सफलतापूर्वक अपडेट की गईं',
+                'share-product'        => 'Click to share the product',
+
             ],
 
             'downloadable_products' => [

@@ -385,6 +385,7 @@ return [
                 'customer-name'        => ":নাম' শেয়ার করা ইচ্ছা তালিকা",
                 'enable-wishlist-info' => "লিঙ্ক পেতে ইচ্ছা তালিকা শেয়ারিং সক্ষম করুন।",
                 'update-message'       => "শেয়ারড উইশলিস্ট সেটিংস সফলভাবে আপডেট হয়েছে",
+                'share-product'        => 'Click to share the product',
             ],
 
             'downloadable_products' => [

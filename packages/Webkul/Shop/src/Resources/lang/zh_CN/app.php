@@ -384,6 +384,8 @@ return [
                 'customer-name'        => ':name 的共享愿望清单',
                 'enable-wishlist-info' => '启用愿望清单共享以获取链接.',
                 'update-message'       => '已成功更新共享心愿单设置',
+                'share-product'        => 'Click to share the product',
+
             ],
 
             'downloadable_products' => [

@@ -384,6 +384,8 @@ return [
                 'customer-name'        => ':name\'s wished shared',
                 'enable-wishlist-info' => 'הפעל שיתוף רשימת משאלות כדי לקבל את הקישור.',
                 'update-message'       => 'הגדרות רשימת המשאלות המשותפת עודכנו בהצלחה',
+                'share-product'        => 'Click to share the product',
+
             ],
 
             'downloadable_products' => [

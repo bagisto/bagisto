@@ -244,8 +244,14 @@
     @endif
 
     <script>
-
+        
         const arr = []; 
+
+        $(document).ready(function() {
+            $(".wishlist").each(function() {
+                getCheckBoxValue(this);
+            });
+        })
 
         function getCheckBoxValue(event) {
             if (event.checked) {
