@@ -182,6 +182,7 @@
     .theme-btn {
         border-color: $dark-mode-theme-color !important;
         background-color: $dark-mode-theme-color !important;
+        border: 1px solid $white !important;
 
         &.light {
             background-color: $white !important;
