@@ -531,7 +531,7 @@ class Configurable extends AbstractType
             return 0;
         }
 
-        return $minPrice = min($minPrices);
+        return $minPrice = max($minPrices);
     }
 
     /**
@@ -559,12 +559,15 @@ class Configurable extends AbstractType
             $customerGroupPrices[] = $this->getCustomerGroupPrice($variant, 1);
         }
 
+
         if (
             $rulePrices
             || $customerGroupPrices
         ) {
+            
             return $offerPrice = min(array_merge($rulePrices, $customerGroupPrices));
         }
+
 
         return $offerPrice = [];
     }
@@ -636,7 +639,7 @@ class Configurable extends AbstractType
     public function getPriceHtml()
     {
         if ($this->haveOffer()) {
-            return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
+            return '<div  class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
             . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'
             . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getOfferPrice())) . '</span>';
