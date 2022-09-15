@@ -531,7 +531,7 @@ class Configurable extends AbstractType
             return 0;
         }
 
-        return $minPrice = max($minPrices);
+        return $minPrice = min($minPrices);
     }
 
     /**
