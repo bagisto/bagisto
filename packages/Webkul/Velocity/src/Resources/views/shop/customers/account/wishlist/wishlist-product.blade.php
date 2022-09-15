@@ -75,7 +75,7 @@
             </div>
             @if ($visibility)
                 <div id='share-wishlist'>
-                    <input type="checkbox" class="wishlist" value="{{ $item->product_id }}" onclick="getCheckBoxValue(this)">
+                    <input type="checkbox" class="wishlist" {{ $item->shared ? 'checked' : '' }} value="{{ $item->product_id }}" onclick="getCheckBoxValue(this)">
                     <p>{{ __('shop::app.customer.account.wishlist.share-product') }}</p>
                 </div>
             @endif

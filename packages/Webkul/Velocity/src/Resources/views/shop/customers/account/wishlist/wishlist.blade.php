@@ -130,19 +130,25 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label class="label-style mandatory">
-                        {{ __('shop::app.customer.account.wishlist.visibility') }}
-                    </label>
-
+                <div class="form-group select-container">
                     <div>
-                        <span class="badge badge-success" v-if="isWishlistShared">
-                            {{ __('shop::app.customer.account.wishlist.public') }}
-                        </span>
+                        <label class="label-style mandatory">
+                            {{ __('shop::app.customer.account.wishlist.visibility') }}
+                        </label>
 
-                        <span class="badge badge-danger" v-else>
-                            {{ __('shop::app.customer.account.wishlist.private') }}
-                        </span>
+                        <div>
+                            <span class="badge badge-success" v-if="isWishlistShared">
+                                {{ __('shop::app.customer.account.wishlist.public') }}
+                            </span>
+
+                            <span class="badge badge-danger" v-else>
+                                {{ __('shop::app.customer.account.wishlist.private') }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class='select-all'>
+                        <input type='checkbox' id='check-all' ref='selectAll'>
+                        <p>{{ __('shop::app.customer.account.wishlist.select-all') }}</p>
                     </div>
                 </div>
 
@@ -171,7 +177,8 @@
                             >
                                 {{ __('shop::app.customer.account.wishlist.copy') }}
                             </button>
-                        </div> 
+                        </div>
+                        
                     </div>
 
                     <p class="alert alert-danger" v-else>
@@ -213,11 +220,13 @@
                     shareWishlist: function(val) {
                         var self = this;
 
+                        var checked = this.$refs.selectAll.checked;
+
                         this.$root.showLoader();
 
                         this.$http.post("{{ route('customer.wishlist.share') }}", {
                             shared: val,
-                            product_id:this.productIds
+                            product_id:! checked ? this.productIds : []
                         })
                         .then(function(response) {
                             self.$root.hideLoader();
@@ -245,7 +254,14 @@
 
     <script>
 
-        const arr = []; 
+        const arr = [];
+
+        $(document).ready(function() {
+            $(".wishlist").each(function() {
+                getCheckBoxValue(this);
+            });
+        })
+
 
         function getCheckBoxValue(event) {
             if (event.checked) {

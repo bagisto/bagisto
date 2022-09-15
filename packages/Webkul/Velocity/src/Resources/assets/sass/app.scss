@@ -1147,6 +1147,16 @@ i.within-circle {
     margin-top:10px !important;
 }
 
+.select-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.select-all {
+    display: flex;
+    align-items: center;
+}
+
 .select-all-section {
     display: flex;
     flex-direction: row-reverse;
