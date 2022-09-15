@@ -386,6 +386,8 @@ return [
                 'enable-wishlist-info' => 'සබැඳිය ලබා ගැනීමට පැතුම් ලැයිස්තු බෙදාගැනීම සබල කරන්න.',
                 'update-message'       => 'බෙදාගත් පැතුම් ලැයිස්තු සැකසීම් සාර්ථකව යාවත්කාලීන කරන ලදී',
                 'share-product'        => 'Click to share the product',
+                'select-all'           => 'Select All',
+
 
             ],
 

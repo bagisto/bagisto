@@ -386,6 +386,8 @@ return [
                 'enable-wishlist-info' => 'Включите общий доступ к списку желаний, чтобы получить ссылку.',
                 'update-message'       => 'Настройки общего списка желаний успешно обновлены',
                 'share-product'        => 'Click to share the product',
+                'select-all'           => 'Select All',
+
 
             ],
 

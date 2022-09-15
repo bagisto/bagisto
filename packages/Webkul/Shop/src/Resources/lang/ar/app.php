@@ -385,6 +385,8 @@ return [
                 'enable-wishlist-info' => 'قم بتمكين مشاركة قائمة الرغبات للحصول على الرابط.',
                 'update-message'       => 'تم تحديث إعدادات قائمة الرغبات المشتركة بنجاح',
                 'share-product'        => 'Click to share the product',
+                'select-all'           => 'Select All',
+
             ],
 
             'downloadable_products' => [

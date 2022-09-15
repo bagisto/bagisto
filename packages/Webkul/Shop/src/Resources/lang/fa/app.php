@@ -380,6 +380,8 @@ return [
                 'enable-wishlist-info' => 'Enable wishlist sharing to get the link.',
                 'update-message'       => 'Shared wishlist settings updated successfully',
                 'share-product'        => 'Click to share the product',
+                'select-all'           => 'Select All',
+
 
             ],
 

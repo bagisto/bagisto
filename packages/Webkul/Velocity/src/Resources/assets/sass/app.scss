@@ -1147,3 +1147,9 @@ i.within-circle {
     margin-top:10px !important;
 }
 
+.select-all-section {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-right: 10px;
+}
