@@ -651,12 +651,12 @@ class Configurable extends AbstractType
         }
     }
 
-     /**
+    /**
      * Check whether configurable product have special price.
      *
      * @param  int  $qty
      * @return bool
-    */
+     */
     public function haveSpecialPrice($qty = null)
     {
         $haveSpecialPrice = false;
