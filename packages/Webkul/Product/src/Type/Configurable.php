@@ -642,7 +642,7 @@ class Configurable extends AbstractType
             . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
             . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>';
 
-            if (core()->currency($this->evaluatePrice($this->getMinimalPrice()) ) !=  core()->currency($this->evaluatePrice($this->getOfferPrice()))) {
+            if (core()->currency($this->evaluatePrice($this->getMinimalPrice()) ) <  core()->currency($this->evaluatePrice($this->getOfferPrice()))) {
                 $html .= '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getOfferPrice())) . '</span>';
             } else {
                 $html .= '<span class="regular-price"></span>';
