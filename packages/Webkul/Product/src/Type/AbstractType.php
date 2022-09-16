@@ -768,10 +768,13 @@ abstract class AbstractType
      */
     public function getPriceHtml()
     {
+        $discountPercentage = round((($this->product->price - $this->getSpecialPrice()) / $this->product->price) * 100);
+
         if ($this->haveSpecialPrice()) {
             $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>'
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getSpecialPrice())) . '</span>';
+            . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getSpecialPrice())) . '</span>'
+            . ' <span class="card-discount">' . $discountPercentage . '% off</span>';
         } else {
             $html = '<span>' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>';
         }
