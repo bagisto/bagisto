@@ -1,4 +1,4 @@
-<div class="col-12 lg-card-container list-card product-card row {{ $visibility ? 'card' : ''}}">
+<div class="col-12 lg-card-container list-card product-card row {{ $visibility ? 'card shared-product' : ''}}">
     <div class="product-image">
         @php
             $image = $item->product->getTypeInstance()->getBaseImage($item);
@@ -73,9 +73,11 @@
                     ])
                 </div>
             </div>
-            @if ($visibility)
+
+            @if ($visibility) 
                 <div id='share-wishlist'>
-                    <input type="checkbox" class="wishlist" {{ $item->shared ? 'checked' : '' }} value="{{ $item->product_id }}" onclick="getCheckBoxValue(this)">
+                    <input type="checkbox" class="wishlist" {{ $item->shared ? 'checked' : '' }} value="{{ $item->product_id }}" @click="getCheckBoxValue($event.target)">
+
                     <p>{{ __('shop::app.customer.account.wishlist.share-product') }}</p>
                 </div>
             @endif

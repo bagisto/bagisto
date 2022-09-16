@@ -1163,3 +1163,40 @@ i.within-circle {
     align-items: center;
     margin-right: 10px;
 }
+
+.wishlist {
+
+    .wishlist-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px;
+
+        .product-card {
+            width: 100%;
+            padding-right: 0;
+            margin-top: 0px !important;
+        }
+
+        .shared-product {
+
+            .product-image {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .product-information {
+                width: fit-content !important;
+            }
+
+            #share-wishlist {
+                display: flex;
+                margin-top: 30px;
+                align-items: center;
+            }   
+                
+            input,p {
+                margin: 0px;
+            }
+        }
+    }
+}

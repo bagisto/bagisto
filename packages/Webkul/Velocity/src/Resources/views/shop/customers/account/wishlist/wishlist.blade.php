@@ -3,117 +3,146 @@
 @extends('shop::customers.account.index')
 
 @section('page_title')
-    {{ __('shop::app.customer.account.wishlist.page-title') }}
+{{ __('shop::app.customer.account.wishlist.page-title') }}
 @endsection
 
-@push('css')
-    <style>
-        .wishlist-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 20px;
-        }
-            
-            .product-card {
-                width: 100%;
-                padding-right: 0;
-                margin-top: 0px !important;
-            }
-
-            .product-image {
-                width: 100% !important;
-                max-width: 100% !important;
-            }
-
-            .product-information {
-                width: fit-content !important;
-            }
-            #share-wishlist {
-                display: flex;
-                margin-top: 30px;
-                align-items: center;
-            }       
-            input,p {
-                margin: 0px;
-            }
-    </style>
-@endpush
-
 @section('page-detail-wrapper')
-    <div class="account-head">
-        <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
 
-        @if (count($items))
-            <span class="account-action d-inline-flex">
-                <form id="remove-all-wishlist" class="d-none" action="{{ route('customer.wishlist.removeall') }}" method="POST">
-                    @method('DELETE')
+{!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $items]) !!}
 
-                    @csrf
-                </form>
+<wishlist-details items-value='@json($items)'></wishlist-details>
 
-                @if ($isSharingEnabled)
-                    <a
-                        class="remove-decoration theme-btn light"
-                        href="javascript:void(0);"
-                        onclick="window.showShareWishlistModal();">
-                        {{ __('shop::app.customer.account.wishlist.share') }}
-                    </a>
-
-                    &nbsp;
-                @endif
-
-                <a
-                    class="remove-decoration theme-btn light"
-                    href="javascript:void(0);"
-                    onclick="window.deleteAllWishlist();">
-                    {{ __('shop::app.customer.account.wishlist.deleteall') }}
-                </a>
-            </span>
-        @endif
-    </div>
-
-    {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $items]) !!}
-
-    <div class="wishlist-container">
-        @if ($items->count())
-            @foreach ($items as $item)
-                @include ('shop::customers.account.wishlist.wishlist-product', [
-                    'product'    => $item,
-                    'visibility' => $isSharingEnabled
-                ])
-                
-            @endforeach
-
-            <div>
-                {{ $items->links()  }}
-            </div>
-        @else
-            <div class="empty">
-                {{ __('customer::app.wishlist.empty') }}
-            </div>
-        @endif
-    </div>
-
-    @if($isSharingEnabled)
-        <div id="shareWishlistModal" class="d-none">
-            <modal id="shareWishlist" :is-open="modalIds.shareWishlist">
-                <h3 slot="header">
-                    {{ __('shop::app.customer.account.wishlist.share-wishlist') }}
-                </h3>
-
-                <i class="rango-close"></i>
-
-                <div slot="body">
-                    <share-component :product-ids=arr></share-component>
-                </div>
-            </modal>
-        </div>
-    @endif
-
-    {!! view_render_event('bagisto.shop.customers.account.wishlist.list.after', ['wishlist' => $items]) !!}
+{!! view_render_event('bagisto.shop.customers.account.wishlist.list.after', ['wishlist' => $items]) !!}
 @endsection
 
 @push('scripts')
+<script type="text/x-template" id="wishlist-details-template">
+    <div>
+        <div class="account-head">
+            <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
+
+            @if (count($items))
+                <span class="account-action d-inline-flex">
+                    <form id="remove-all-wishlist" class="d-none" action="{{ route('customer.wishlist.removeall') }}" method="POST">
+                        @method('DELETE')
+
+                        @csrf
+                    </form>
+
+                    @if ($isSharingEnabled)
+                        <a
+                            class="remove-decoration theme-btn light"
+                            href="javascript:void(0);"
+                            @click="showShareWishlistModal()">
+                            {{ __('shop::app.customer.account.wishlist.share') }}
+                        </a>
+                    @endif
+
+                    <a
+                        class="remove-decoration theme-btn light"
+                        href="javascript:void(0);"
+                        @click="deleteAllWishlist();">
+                        {{ __('shop::app.customer.account.wishlist.deleteall') }}
+                    </a>
+                </span>
+            @endif
+        </div>
+        <div class="wishlist-container">
+            @if ($items->count())
+                @foreach ($items as $item)
+                    @include ('shop::customers.account.wishlist.wishlist-product', [
+                        'product'    => $item,
+                        'visibility' => $isSharingEnabled
+                    ])
+                    
+                @endforeach
+
+                <div>
+                    {{ $items->links()  }}
+                </div>
+            @else
+                <div class="empty">
+                    {{ __('customer::app.wishlist.empty') }}
+                </div>
+            @endif
+
+            @if ($isSharingEnabled)
+                <div id="shareWishlistModal" class="d-none">
+                    <modal id="shareWishlist" :is-open="modalStatus">
+                        <h3 slot="header">
+                            {{ __('shop::app.customer.account.wishlist.share-wishlist') }}
+                        </h3>
+
+                        <i class="rango-close"></i>
+
+                        <div slot="body">
+                            <share-component :product-ids=projectIds></share-component>
+                        </div>
+                    </modal>
+                </div>
+            @endif
+        </div>
+    </div>
+</script>
+
+<script>
+    Vue.component('wishlist-details', {
+        template: '#wishlist-details-template',
+
+        props: [
+            'itemsValue',
+        ],
+
+        data() {
+            return {
+                projectIds: [],
+
+                modalStatus: false
+            }
+        },
+
+        mounted() {
+            let items = JSON.parse(this.itemsValue);
+            items.data.forEach((values) => {
+                if (values.shared) {
+                    this.projectIds.push(values.product_id);
+                }
+            })
+        },
+
+        methods: {
+            getCheckBoxValue: function(event) {
+                if (event.checked) {
+                    this.projectIds.push(event.value);
+
+                } else {
+                    this.projectIds.filter((value, index) => {
+                        if (value == event.value) {
+                            this.projectIds.splice(index, 1);
+                        }
+                    });
+                }
+            },
+
+            showShareWishlistModal: function() {
+                document.getElementById('shareWishlistModal').classList.remove('d-none');
+
+                window.app.showModal('shareWishlist');
+
+                this.modalStatus = true;
+            },
+
+            deleteAllWishlist: function() {
+                if (confirm("{{ __('shop::app.customer.account.wishlist.confirm-delete-all')}}")) {
+                    document.getElementById('remove-all-wishlist').submit();
+                }
+
+                return;
+            }
+        }
+    })
+</script>
+
     @if($isSharingEnabled)
         <script type="text/x-template" id="share-component-template">
             <form method="POST">
@@ -189,18 +218,9 @@
         </script>
 
         <script>
-            /**
-             * Show share wishlist modal.
-             */
-            function showShareWishlistModal() {
-                document.getElementById('shareWishlistModal').classList.remove('d-none');
-
-                window.app.showModal('shareWishlist');
-            }
-
             Vue.component('share-component', {
 
-                props : [
+                props: [
                     'productIds'
                 ],
 
@@ -208,7 +228,7 @@
 
                 inject: ['$validator'],
 
-                data: function () {
+                data: function() {
                     return {
                         isWishlistShared: parseInt("{{ $isWishlistShared }}"),
 
@@ -217,29 +237,30 @@
                 },
 
                 methods: {
-                    shareWishlist: function(val) {
-                        var self = this;
 
-                        var checked = this.$refs.selectAll.checked;
+                    shareWishlist: function(val) {
+                        let self = this;
+
+                        let checked = this.$refs.selectAll.checked;
 
                         this.$root.showLoader();
 
                         this.$http.post("{{ route('customer.wishlist.share') }}", {
-                            shared: val,
-                            product_id:! checked ? this.productIds : []
-                        })
-                        .then(function(response) {
-                            self.$root.hideLoader();
+                                shared: val,
+                                product_ids: !checked ? this.productIds : []
+                            })
+                            .then(function(response) {
+                                self.$root.hideLoader();
 
-                            self.isWishlistShared = response.data.isWishlistShared;
+                                self.isWishlistShared = response.data.isWishlistShared;
 
-                            self.wishlistSharedLink = response.data.wishlistSharedLink;
-                        })
-                        .catch(function (error) {
-                            self.$root.hideLoader();
+                                self.wishlistSharedLink = response.data.wishlistSharedLink;
+                            })
+                            .catch(function(error) {
+                                self.$root.hideLoader();
 
-                            window.location.reload();
-                        })
+                                window.location.reload();
+                            })
                     },
 
                     copyToClipboard: function() {
@@ -252,43 +273,12 @@
         </script>
     @endif
 
-    <script>
-
-        const arr = [];
-
-        $(document).ready(function() {
-            $(".wishlist").each(function() {
-                getCheckBoxValue(this);
-            });
-        })
-
-
-        function getCheckBoxValue(event) {
-            if (event.checked) {
-                arr.push(event.value);
-
-            } else {
-                arr.filter((value,index)=>{
-                    if (value == event.value) {
-                        arr.splice(index,1);
-                   }
-                });
-            }
-        }
-
-        /**
-         * Delete all wishlist.
-         */
-        function deleteAllWishlist() {
-            if (confirm('{{ __('shop::app.customer.account.wishlist.confirm-delete-all') }}')) document.getElementById('remove-all-wishlist').submit();
-
-            return;
-        }
-
-        function showCopyMessage()
-        {
-            $('#copy-btn').text("{{ __('shop::app.customer.account.wishlist.copied') }}");
-            $('#copy-btn').css({backgroundColor: '#146e24'});
-        }
-    </script>
+<script>
+    function showCopyMessage() {
+        $('#copy-btn').text("{{ __('shop::app.customer.account.wishlist.copied') }}");
+        $('#copy-btn').css({
+            backgroundColor: '#146e24'
+        });
+    }
+</script>
 @endpush

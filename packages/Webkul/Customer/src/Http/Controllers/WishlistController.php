@@ -113,7 +113,7 @@ class WishlistController extends Controller
      */
     public function share()
     {
-        $productIds = request()->product_id;
+        $productIds = request()->product_ids;
 
         $customer = auth()->guard('customer')->user();
 
@@ -165,7 +165,7 @@ class WishlistController extends Controller
         ->where('shared', 1);
 
         if (request()->get('product_id')) {
-            $items->whereIn('product_id', request()->get('product_id'));
+            $items->whereIn('product_id', request()->get('product_ids'));
         }
 
         $items = $items->get();
