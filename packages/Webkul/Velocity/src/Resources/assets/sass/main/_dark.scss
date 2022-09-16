@@ -12,12 +12,6 @@
             color: $white !important;
         }
     }
-
-    .card-body {
-        background-color: $dark-mode-velocity-body-background-color;
-        color: $dark-mode-velocity-text-color !important;
-        box-shadow:  0 2px 5px 1px rgb(0 0 0 / 60%);
-    }
     
     .product-policy-container .card {
         background-color: $dark-mode-velocity-body-background-color;
@@ -141,7 +135,9 @@
 
     .product-card-new {
         .card-body {
-            color: $dark-mode-velocity-text-color-black;
+            background-color: $dark-mode-velocity-body-background-color;
+            color: $dark-mode-velocity-text-color !important;
+            box-shadow:  0 2px 5px 1px rgb(0 0 0 / 60%);
         }
     }
 
