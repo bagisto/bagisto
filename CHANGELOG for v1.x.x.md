@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.4.5 (15th of September 2022)** - *Release*
+## **v1.4.5 (19th of September 2022)** - *Release*
 
 * #6690 [enhancement] - Mass update option should be available for the categories section.
 
