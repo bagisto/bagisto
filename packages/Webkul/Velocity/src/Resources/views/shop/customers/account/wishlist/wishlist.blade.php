@@ -68,7 +68,7 @@
 
             @if ($isSharingEnabled)
                 <div id="shareWishlistModal" class="d-none">
-                    <modal id="shareWishlist" :is-open="modalStatus">
+                    <modal id="shareWishlist" :is-open="openClose" @onCloseModal='changeStatus()'>
                         <h3 slot="header">
                             {{ __('shop::app.customer.account.wishlist.share-wishlist') }}
                         </h3>
@@ -97,7 +97,7 @@
             return {
                 projectIds: [],
 
-                modalStatus: false
+                openClose: false
             }
         },
 
@@ -125,11 +125,16 @@
             },
 
             showShareWishlistModal: function() {
+
                 document.getElementById('shareWishlistModal').classList.remove('d-none');
 
                 window.app.showModal('shareWishlist');
 
-                this.modalStatus = true;
+                this.openClose = true;
+            },
+
+            changeStatus: function() {
+                this.openClose = false;
             },
 
             deleteAllWishlist: function() {
@@ -143,135 +148,136 @@
     })
 </script>
 
-    @if($isSharingEnabled)
-        <script type="text/x-template" id="share-component-template">
-            <form method="POST">
-                @csrf
+@if($isSharingEnabled)
+<script type="text/x-template" id="share-component-template">
+    <form method="POST">
+        @csrf
 
-                <div class="form-group">
-                    <label class="label-style mandatory">
-                        {{ __('shop::app.customer.account.wishlist.wishlist-sharing') }}
-                    </label>
+        <div class="form-group">
+            <label class="label-style mandatory">
+                {{ __('shop::app.customer.account.wishlist.wishlist-sharing') }}
+            </label>
 
-                    <select name="shared" class="form-control" @change="shareWishlist($event.target.value)">
-                        <option value="0" :selected="! isWishlistShared">{{ __('shop::app.customer.account.wishlist.disable') }}</option>
-                        <option value="1" :selected="isWishlistShared">{{ __('shop::app.customer.account.wishlist.enable') }}</option>
-                    </select>
+            <select name="shared" class="form-control" @change="shareWishlist($event.target.value)">
+                <option value="0" :selected="! isWishlistShared">{{ __('shop::app.customer.account.wishlist.disable') }}</option>
+                <option value="1" :selected="isWishlistShared">{{ __('shop::app.customer.account.wishlist.enable') }}</option>
+            </select>
+        </div>
+
+        <div class="form-group select-container">
+            <div>
+                <label class="label-style mandatory">
+                    {{ __('shop::app.customer.account.wishlist.visibility') }}
+                </label>
+
+                <div>
+                    <span class="badge badge-success" v-if="isWishlistShared">
+                        {{ __('shop::app.customer.account.wishlist.public') }}
+                    </span>
+
+                    <span class="badge badge-danger" v-else>
+                        {{ __('shop::app.customer.account.wishlist.private') }}
+                    </span>
                 </div>
+            </div>
+            <div class='select-all'>
+                <input type='checkbox' id='check-all' ref='selectAll'>
+                <p>{{ __('shop::app.customer.account.wishlist.select-all') }}</p>
+            </div>
+        </div>
 
-                <div class="form-group select-container">
-                    <div>
-                        <label class="label-style mandatory">
-                            {{ __('shop::app.customer.account.wishlist.visibility') }}
-                        </label>
+        <div class="form-group">
+            <label class="label-style mandatory">
+                {{ __('shop::app.customer.account.wishlist.shared-link') }}
+            </label>
 
-                        <div>
-                            <span class="badge badge-success" v-if="isWishlistShared">
-                                {{ __('shop::app.customer.account.wishlist.public') }}
-                            </span>
+            <div class="input-group" v-if="isWishlistShared">
+                <input
+                    type="text"
+                    class="form-control"
+                    v-model="wishlistSharedLink"
+                    v-on:focus="$event.target.select()"
+                    ref="sharedLink"
+                />
 
-                            <span class="badge badge-danger" v-else>
-                                {{ __('shop::app.customer.account.wishlist.private') }}
-                            </span>
-                        </div>
-                    </div>
-                    <div class='select-all'>
-                        <input type='checkbox' id='check-all' ref='selectAll'>
-                        <p>{{ __('shop::app.customer.account.wishlist.select-all') }}</p>
-                    </div>
+                <div class="input-group-append">
+                    <button
+                        class="btn btn-outline-secondary theme-btn"
+                        style="padding: 6px 20px"
+                        id="copy-btn"
+                        title="{{ __('shop::app.customer.account.wishlist.copy-link') }}"
+                        type="button"
+                        @click="copyToClipboard"
+                    >
+                        {{ __('shop::app.customer.account.wishlist.copy') }}
+                    </button>
                 </div>
+                
+            </div>
 
-                <div class="form-group">
-                    <label class="label-style mandatory">
-                        {{ __('shop::app.customer.account.wishlist.shared-link') }}
-                    </label>
+            <p class="alert alert-danger" v-else>
+                {{ __('shop::app.customer.account.wishlist.enable-wishlist-info') }}
+            </p>
+        </div>
+    </form>
+</script>
 
-                    <div class="input-group" v-if="isWishlistShared">
-                        <input
-                            type="text"
-                            class="form-control"
-                            v-model="wishlistSharedLink"
-                            v-on:focus="$event.target.select()"
-                            ref="sharedLink"
-                        />
+<script>
+    Vue.component('share-component', {
 
-                        <div class="input-group-append">
-                            <button
-                                class="btn btn-outline-secondary theme-btn"
-                                style="padding: 6px 20px"
-                                id="copy-btn"
-                                title="{{ __('shop::app.customer.account.wishlist.copy-link') }}"
-                                type="button"
-                                @click="copyToClipboard"
-                            >
-                                {{ __('shop::app.customer.account.wishlist.copy') }}
-                            </button>
-                        </div>
-                        
-                    </div>
+        props: [
+            'productIds'
+        ],
 
-                    <p class="alert alert-danger" v-else>
-                        {{ __('shop::app.customer.account.wishlist.enable-wishlist-info') }}
-                    </p>
-                </div>
-            </form>
-        </script>
+        template: '#share-component-template',
 
-        <script>
-            Vue.component('share-component', {
+        inject: ['$validator'],
 
-                props: [
-                    'productIds'
-                ],
+        data: function() {
+            return {
+                isWishlistShared: parseInt("{{ $isWishlistShared }}"),
 
-                template: '#share-component-template',
+                wishlistSharedLink: "{{ $wishlistSharedLink }}".replace(/&amp;/g, "&"),
+            }
+        },
 
-                inject: ['$validator'],
+        methods: {
 
-                data: function() {
-                    return {
-                        isWishlistShared: parseInt("{{ $isWishlistShared }}"),
+            shareWishlist: function(val) {
 
-                        wishlistSharedLink: "{{ $wishlistSharedLink }}".replace(/&amp;/g, "&"),
-                    }
-                },
+                let self = this;
 
-                methods: {
+                let checked = this.$refs.selectAll.checked;
 
-                    shareWishlist: function(val) {
-                        let self = this;
+                this.$root.showLoader();
 
-                        let checked = this.$refs.selectAll.checked;
+                this.$http.post("{{ route('customer.wishlist.share') }}", {
+                        shared: val,
+                        product_ids: !checked ? this.productIds : []
+                    })
+                    .then(function(response) {
+                        self.$root.hideLoader();
 
-                        this.$root.showLoader();
+                        self.isWishlistShared = response.data.isWishlistShared;
 
-                        this.$http.post("{{ route('customer.wishlist.share') }}", {
-                                shared: val,
-                                product_ids: !checked ? this.productIds : []
-                            })
-                            .then(function(response) {
-                                self.$root.hideLoader();
+                        self.wishlistSharedLink = response.data.wishlistSharedLink;
+                    })
+                    .catch(function(error) {
+                        self.$root.hideLoader();
 
-                                self.isWishlistShared = response.data.isWishlistShared;
+                        window.location.reload();
+                    })
+            },
 
-                                self.wishlistSharedLink = response.data.wishlistSharedLink;
-                            })
-                            .catch(function(error) {
-                                self.$root.hideLoader();
-
-                                window.location.reload();
-                            })
-                    },
-
-                    copyToClipboard: function() {
-                        this.$refs.sharedLink.focus();
-                        document.execCommand('copy');
-                        showCopyMessage();
-                    }
-                }
-            });
-        </script>
-    @endif
+            copyToClipboard: function() {
+                this.$refs.sharedLink.focus();
+                document.execCommand('copy');
+                showCopyMessage();
+            }
+        }
+    });
+</script>
+@endif
 
 <script>
     function showCopyMessage() {

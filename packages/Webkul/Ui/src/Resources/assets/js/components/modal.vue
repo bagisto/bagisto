@@ -35,6 +35,8 @@
 
         methods: {
             closeModal () {
+                this.$emit('onCloseModal');
+
                 this.$root.$set(this.$root.modalIds, this.id, false);
             },
 

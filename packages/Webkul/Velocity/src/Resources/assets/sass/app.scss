@@ -1155,6 +1155,10 @@ i.within-circle {
 .select-all {
     display: flex;
     align-items: center;
+
+    p {
+        margin: 0px;
+    }
 }
 
 .select-all-section {

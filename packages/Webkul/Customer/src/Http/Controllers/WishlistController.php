@@ -164,7 +164,7 @@ class WishlistController extends Controller
         $items = $customer->wishlist_items()
         ->where('shared', 1);
 
-        if (request()->get('product_id')) {
+        if (request()->get('product_ids')) {
             $items->whereIn('product_id', request()->get('product_ids'));
         }
 
