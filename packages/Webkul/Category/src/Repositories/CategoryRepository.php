@@ -284,11 +284,13 @@ class CategoryRepository extends Repository
 
         foreach ($attributeNames as $attributeName) {
             foreach (core()->getAllLocales() as $locale) {
-                foreach ($model->translatedAttributes as $attribute) {
-                    if ($attribute === $attributeName) {
-                        $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute])
-                            ? $data[$requestedLocale][$attribute]
-                            : $data[$data['locale']][$attribute];
+                if ($requestedLocale == $locale->code) { 
+                    foreach ($model->translatedAttributes as $attribute) {
+                        if ($attribute === $attributeName) {
+                                $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute])
+                                ? $data[$requestedLocale][$attribute]
+                                : $data[$data['locale']][$attribute];
+                        }
                     }
                 }
             }
