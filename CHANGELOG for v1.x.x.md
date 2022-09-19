@@ -21,6 +21,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #6699  [fixed] -  The sale icon should be visible if there is any special price for a configurable product.
 
+* #6725  [fixed] - The category should not be updated for all locales if the admin is updating the category for any specific locale. 
+
 * #6705  [fixed] -  The filter value should be correct if the admin is trying to filter products by the status filter.
 
 * #6697  [fixed] -  The add button should be hidden from view page if the user has no permission to create.
