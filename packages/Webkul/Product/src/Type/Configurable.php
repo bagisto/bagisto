@@ -651,6 +651,27 @@ class Configurable extends AbstractType
     }
 
     /**
+     * Check whether configurable product have special price.
+     *
+     * @param  int  $qty
+     * @return bool
+     */
+    public function haveSpecialPrice($qty = null)
+    {
+        $haveSpecialPrice = false;
+
+        foreach ($this->product->variants as $variant) {
+            if ($variant->getTypeInstance()->haveSpecialPrice()) {
+                $haveSpecialPrice = true;
+
+                break;
+            }
+        }
+
+        return $haveSpecialPrice;
+    }
+
+    /**
      * Add product. Returns error message if can't prepare product.
      *
      * @param  array  $data

@@ -297,7 +297,7 @@
                         });
 
                         let priceLabelElement = document.querySelector('.price-label');
-                        let priceElement = document.querySelector('.final-price');
+                        let priceElement = document.querySelector('.special-price') ? document.querySelector('.special-price') : document.querySelector('.final-price');
                         let regularPriceElement = document.querySelector('.regular-price');
 
                         if (this.childAttributes.length == selectedOptionCount) {
