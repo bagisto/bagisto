@@ -351,7 +351,6 @@
                                      
                                     discountPriceElement.innerHTML = disPercentage + "% Off";
                                     discountPriceElement.style.display = 'inline-block';
-                                    discountPriceElement.style.paddingLeft = '5px';
                                 }
 
                                 eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
