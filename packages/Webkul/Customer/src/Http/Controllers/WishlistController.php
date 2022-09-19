@@ -124,8 +124,12 @@ class WishlistController extends Controller
 
             $updateCounts = $customer->wishlist_items();
 
-            if ($productIds) {
+            if ($productIds && $data['shared']) {
                 $updateCounts->whereIn('product_id', $productIds);
+            }
+
+            if ($productIds && ! $data['shared']) {
+                $updateCounts->whereNotIn('product_id', $productIds);
             }
 
             $updateCounts = $updateCounts->update(['shared' => $data['shared']]);
@@ -135,7 +139,7 @@ class WishlistController extends Controller
                 && $updateCounts > 0
             ) {
                 return response()->json([
-                    'isWishlistShared'   => $customer->isWishlistShared(),
+                    'isWishlistShared'   => $data['shared'] ? 1 : 0,
                     'wishlistSharedLink' => $customer->getWishlistSharedLink($productIds)
                 ]);
             }

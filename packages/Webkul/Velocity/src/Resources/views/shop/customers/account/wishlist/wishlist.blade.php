@@ -252,21 +252,21 @@
                 this.$root.showLoader();
 
                 this.$http.post("{{ route('customer.wishlist.share') }}", {
-                        shared: val,
-                        product_ids: !checked ? this.productIds : []
-                    })
-                    .then(function(response) {
-                        self.$root.hideLoader();
+                    shared: val,
+                    product_ids: !checked ? this.productIds : []
+                })
+                .then(function(response) {
+                    self.$root.hideLoader();
 
-                        self.isWishlistShared = response.data.isWishlistShared;
+                    self.isWishlistShared = response.data.isWishlistShared;
 
-                        self.wishlistSharedLink = response.data.wishlistSharedLink;
-                    })
-                    .catch(function(error) {
-                        self.$root.hideLoader();
+                    self.wishlistSharedLink = response.data.wishlistSharedLink;
+                })
+                .catch(function(error) {
+                    self.$root.hideLoader();
 
-                        window.location.reload();
-                    })
+                    window.location.reload();
+                })
             },
 
             copyToClipboard: function() {
@@ -287,4 +287,5 @@
         });
     }
 </script>
+
 @endpush
