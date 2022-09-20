@@ -18,12 +18,13 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #1929 [enhancement] - Actual product amount and discounted amount both should display.
 
-
-* #6699  [fixed] -  The sale icon should be visible if there is any special price for a configurable product.
+* #6732  [fixed] -  Getting exception if the customer is trying to move product from cart to wishlist
 
 * #6725  [fixed] - The category should not be updated for all locales if the admin is updating the category for any specific locale. 
 
 * #6705  [fixed] -  The filter value should be correct if the admin is trying to filter products by the status filter.
+
+* #6699  [fixed] -  The sale icon should be visible if there is any special price for a configurable product.
 
 * #6697  [fixed] -  The add button should be hidden from view page if the user has no permission to create.
 
