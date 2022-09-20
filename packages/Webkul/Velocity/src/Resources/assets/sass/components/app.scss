@@ -298,10 +298,18 @@
     }
 
     .card-body {
-        .compare-icon,
-        .wishlist-icon {
-            left: 0;
+        .compare-icon {
             top: 10px;
+            right: 0;
+            display: none;
+            margin-left: 5px;
+            margin-right: 5px;
+            position: absolute;
+        }
+
+        .wishlist-icon {
+            right: 0;
+            top: 40px;
             display: none;
             margin-left: 5px;
             margin-right: 5px;
@@ -380,7 +388,7 @@
     }
 
     .sticker {
-        display: none;
+        display: block;
     }
 }
 
