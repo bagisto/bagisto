@@ -10,6 +10,11 @@
         .accordian-header,
         .accordian-content {
             color: $white !important;
+            
+            p span {
+                color: $white !important;
+            }
+           
         }
     }
     
@@ -78,6 +83,38 @@
      
         .btn-link  {
             color: $white;
+
+            option {
+                background-color: $dark-mode-velocity-text-color-black;
+            }
+        }
+    }
+
+    .bundle-options-wrapper {
+        .bundle-option-list {
+            h3 {
+                color: $white;
+            }
+
+            .bundle-option-item {
+                .control-group {
+                    color: $white;
+
+                    label {
+                        color: $white;
+                    }
+
+                    .control {
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+        .bundle-summary {
+            h3 {
+                color: $white;
+            }
         }
     }
 
