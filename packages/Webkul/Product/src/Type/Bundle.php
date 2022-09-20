@@ -398,16 +398,25 @@ class Bundle extends AbstractType
     {
         $prices = $this->getProductPrices();
 
-        $discountMin =  $prices['from']['regular_price']['price'] - $prices['from']['final_price']['price'];
-        $discountPercentageMin = round(($discountMin / $prices['from']['regular_price']['price']) * 100);
+        if($prices['from']['regular_price']['price'] != $prices['to']['regular_price']['price']
+        || $prices['from']['final_price']['price'] != $prices['to']['final_price']['price']) {
+            $discountMin =  $prices['from']['regular_price']['price'] - $prices['from']['final_price']['price'];
+            $discountPercentageMin = round(($discountMin / $prices['from']['regular_price']['price']) * 100);
 
-        $discountMax =  $prices['to']['regular_price']['price'] - $prices['to']['final_price']['price'];
-        $discountPercentageMax = round(($discountMax / $prices['to']['regular_price']['price']) * 100);
+            $discountMax =  $prices['to']['regular_price']['price'] - $prices['to']['final_price']['price'];
+            $discountPercentageMax = round(($discountMax / $prices['to']['regular_price']['price']) * 100);
 
-        if ($discountPercentageMax > $discountPercentageMin) {
-            $discountOffer = $discountPercentageMin.'% - '. $discountPercentageMax.'% off';
+
+            if ($discountPercentageMax > $discountPercentageMin) {
+                $discountOffer = $discountPercentageMin.'% - '. $discountPercentageMax.'% off';
+            } else {
+                $discountOffer = $discountPercentageMax.'% - '. $discountPercentageMin.'% off';
+            }
         } else {
-            $discountOffer = $discountPercentageMax.'% - '. $discountPercentageMin.'% off';
+            $discountMax =  $prices['to']['regular_price']['price'] - $prices['to']['final_price']['price'];
+            $discountPercentageMax = round(($discountMax / $prices['to']['regular_price']['price']) * 100);
+
+            $discountOffer = 'upto '. $discountPercentageMax.'% off';
         }
 
         $priceHtml = '';
