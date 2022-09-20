@@ -76,7 +76,7 @@
                         <i class="rango-close"></i>
 
                         <div slot="body">
-                            <share-component :product-ids=projectIds></share-component>
+                            <share-component :product-ids=projectIds :item-values=items></share-component>
                         </div>
                     </modal>
                 </div>
@@ -97,7 +97,9 @@
             return {
                 projectIds: [],
 
-                openClose: false
+                openClose: false,
+
+                items: this.itemsValue
             }
         },
 
@@ -226,7 +228,8 @@
     Vue.component('share-component', {
 
         props: [
-            'productIds'
+            'productIds',
+            'itemValues'
         ],
 
         template: '#share-component-template',
@@ -251,22 +254,27 @@
 
                 this.$root.showLoader();
 
+                let items = JSON.parse(this.itemValues);
+
+                let itemsCount = items.data.length;
+
                 this.$http.post("{{ route('customer.wishlist.share') }}", {
-                    shared: val,
-                    product_ids: !checked ? this.productIds : []
-                })
-                .then(function(response) {
-                    self.$root.hideLoader();
+                        shared: val,
+                        product_ids: !checked ? this.productIds : [],
+                        product_count: itemsCount
+                    })
+                    .then(function(response) {
+                        self.$root.hideLoader();
 
-                    self.isWishlistShared = response.data.isWishlistShared;
+                        self.isWishlistShared = response.data.isWishlistShared;
 
-                    self.wishlistSharedLink = response.data.wishlistSharedLink;
-                })
-                .catch(function(error) {
-                    self.$root.hideLoader();
+                        self.wishlistSharedLink = response.data.wishlistSharedLink;
+                    })
+                    .catch(function(error) {
+                        self.$root.hideLoader();
 
-                    window.location.reload();
-                })
+                        window.location.reload();
+                    })
             },
 
             copyToClipboard: function() {

@@ -115,6 +115,14 @@ class WishlistController extends Controller
     {
         $productIds = request()->product_ids;
 
+        $productCount = request()->product_count;
+
+        $selectedAll = false;
+
+        if (count($productIds) == $productCount) {
+            $selectedAll = true;
+        }
+
         $customer = auth()->guard('customer')->user();
 
         if ($this->isSharingEnabled()) {
@@ -124,11 +132,16 @@ class WishlistController extends Controller
 
             $updateCounts = $customer->wishlist_items();
 
-            if ($productIds && $data['shared']) {
+            if ($productIds 
+                && $data['shared']
+            ) {
                 $updateCounts->whereIn('product_id', $productIds);
             }
 
-            if ($productIds && ! $data['shared']) {
+            if ($productIds 
+                && ! $data['shared'] 
+                && ! $selectedAll
+            ) {
                 $updateCounts->whereNotIn('product_id', $productIds);
             }
 
