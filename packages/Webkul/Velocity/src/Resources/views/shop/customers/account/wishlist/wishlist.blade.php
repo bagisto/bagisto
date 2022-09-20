@@ -56,10 +56,7 @@
                     ])
                     
                 @endforeach
-
-                <div>
-                    {{ $items->links()  }}
-                </div>
+                
             @else
                 <div class="empty">
                     {{ __('customer::app.wishlist.empty') }}
@@ -81,6 +78,9 @@
                     </modal>
                 </div>
             @endif
+        </div> <br>
+        <div>
+            {{ $items->links()  }}
         </div>
     </div>
 </script>
