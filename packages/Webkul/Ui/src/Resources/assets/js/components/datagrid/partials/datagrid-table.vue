@@ -138,12 +138,13 @@
                 <th v-if="enableActions" v-text="translations.actions"></th>
             </tr>
         </thead>
-
-        <tbody>
+        
+        <draggable tag="tbody" :list="records.data" draggable=".draggable">
             <template v-if="records.data.length">
                 <tr
                     :key="recordKey"
                     v-for="(record, recordKey) in records.data"
+                    class="draggable"
                 >
                     <td v-if="enableMassActions">
                         <span class="checkbox">
@@ -228,7 +229,8 @@
                     </td>
                 </tr>
             </template>
-        </tbody>
+        </draggable>
+
     </table>
 </template>
 
