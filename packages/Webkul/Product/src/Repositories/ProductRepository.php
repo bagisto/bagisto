@@ -404,13 +404,13 @@ class ProductRepository extends Repository
      */
     public function getSuperAttributes($product)
     {
-        $superAttrbutes = [];
+        $superAttributes = [];
 
         foreach ($product->super_attributes as $key => $attribute) {
-            $superAttrbutes[$key] = $attribute->toArray();
+            $superAttributes[$key] = $attribute->toArray();
 
             foreach ($attribute->options as $option) {
-                $superAttrbutes[$key]['options'][] = [
+                $superAttributes[$key]['options'][] = [
                     'id'           => $option->id,
                     'admin_name'   => $option->admin_name,
                     'sort_order'   => $option->sort_order,
@@ -419,7 +419,7 @@ class ProductRepository extends Repository
             }
         }
 
-        return $superAttrbutes;
+        return $superAttributes;
     }
 
     /**
@@ -467,7 +467,6 @@ class ProductRepository extends Repository
                 ->paginate(16);
         } else {
             $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($term, $channel, $locale) {
-
                 $query = $query->distinct()
                     ->addSelect('product_flat.*')
                     ->where('product_flat.channel', $channel)
