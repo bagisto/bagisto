@@ -25,7 +25,12 @@ class ProductAttributeValueRepository extends Repository
      */
     public function isValueUnique($productId, $attributeId, $column, $value)
     {
-        $result = $this->resetScope()->model->where($column, $value)->where('attribute_id', '=', $attributeId)->where('product_id', '!=', $productId)->get();
+        $result = $this->resetScope()
+            ->model
+            ->where($column, $value)
+            ->where('attribute_id', '=', $attributeId)
+            ->where('product_id', '!=', $productId)
+            ->get();
 
         return ! $result->count();
     }
