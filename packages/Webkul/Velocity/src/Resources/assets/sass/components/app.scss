@@ -1730,7 +1730,6 @@
         }
 
         .rango-arrow-right {
-            top: 4px;
             position: relative;
         }
 
@@ -1790,6 +1789,12 @@
     background: $white-color;
     position: absolute !important;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+    .main-cat {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+    }
 
     .category {
         @extend .cursor-pointer;

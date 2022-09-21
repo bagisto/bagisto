@@ -13,23 +13,25 @@
         />
 
         <i
-            :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
+            :class="`rate_star material-icons ${editable ? 'cursor-pointer' : ''}`"
             v-for="(rating, index) in parseInt(
                 showFilled != 'undefined' ? showFilled : 3
             )"
             :key="`${index}${Math.random()}`"
             @click="updateRating(index + 1)"
+            @mouseover="ratingMouseOver($event)"
         >
             star
         </i>
 
         <template v-if="!hideBlank">
             <i
-                :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
+                :class="`rate_star material-icons ${editable ? 'cursor-pointer' : ''}`"
                 v-for="(blankStar, index) in 5 -
                 (showFilled != 'undefined' ? showFilled : 3)"
                 :key="`${index}${Math.random()}`"
                 @click="updateRating(showFilled + index + 1)"
+                @mouseover="ratingMouseOver($event)"
             >
                 star_border
             </i>
@@ -72,6 +74,16 @@ export default {
             index = Math.abs(index);
             this.editable ? (this.showFilled = index) : '';
         },
+        
+        ratingMouseOver: function (event) {
+            let stars = document.getElementsByClassName('rate_star');
+            
+            stars.forEach(function (star,key) {
+                star.setAttribute("id",key + 1);
+            })
+
+            this.showFilled = event.target.id;
+        }
     },
 };
 </script>

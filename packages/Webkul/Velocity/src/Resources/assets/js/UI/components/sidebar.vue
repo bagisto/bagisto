@@ -16,24 +16,26 @@
             >
                 <a
                     :href="`${$root.baseUrl}/${category.slug}`"
-                    :class="`category unset ${
+                    :class="`main-cat category unset ${
                         category.children.length > 0 ? 'fw6' : ''
                     }`"
                 >
-                    <div
-                        class="category-icon"
-                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
-                        @mouseover="toggleSidebar(id, $event, 'mouseover')"
-                    >
-                        <img
-                            v-if="category.category_icon_url"
-                            :src="category.category_icon_url"
-                            width="20"
-                            height="20"
-                        />
-                    </div>
+                    <div>
+                        <div
+                            class="category-icon"
+                            @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                            @mouseover="toggleSidebar(id, $event, 'mouseover')"
+                        >
+                            <img
+                                v-if="category.category_icon_url"
+                                :src="category.category_icon_url"
+                                width="20"
+                                height="20"
+                            />
+                        </div>
 
-                    <span class="category-title">{{ category['name'] }}</span>
+                        <span class="category-title">{{ category['name'] }}</span>
+                    </div>
 
                     <i
                         class="rango-arrow-right pr15 float-right"
