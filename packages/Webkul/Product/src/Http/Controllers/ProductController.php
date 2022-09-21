@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Http\Controllers;
 
-use Exception;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\ProductDataGrid;
@@ -104,8 +103,10 @@ class ProductController extends Controller
 
         if (
             ProductType::hasVariants(request()->input('type'))
-            && (! request()->has('super_attributes')
-                || ! count(request()->get('super_attributes')))
+            && (
+                ! request()->has('super_attributes')
+                || ! count(request()->get('super_attributes'))
+            )
         ) {
             session()->flash('error', trans('admin::app.catalog.products.configurable-error'));
 
@@ -274,7 +275,7 @@ class ProductController extends Controller
             return response()->json([
                 'message' => trans('admin::app.response.delete-success', ['name' => 'Product']),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             report($e);
         }
 

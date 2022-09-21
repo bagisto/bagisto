@@ -345,11 +345,14 @@ class ProductRepository extends Repository
     /**
      * Returns newly added product.
      *
+     * @param  int  $count
      * @return \Illuminate\Support\Collection
      */
-    public function getNewProducts()
+    public function getNewProducts($count = null)
     {
-        $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
+        if (! $count) {
+            $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
+        }
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
             $channel = core()->getRequestedChannelCode();
@@ -372,11 +375,14 @@ class ProductRepository extends Repository
     /**
      * Returns featured product.
      *
+     * @param  int  $count
      * @return \Illuminate\Support\Collection
      */
-    public function getFeaturedProducts()
+    public function getFeaturedProducts($count = null)
     {
-        $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
+        if (! $count) {
+            $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
+        }
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
             $channel = core()->getRequestedChannelCode();

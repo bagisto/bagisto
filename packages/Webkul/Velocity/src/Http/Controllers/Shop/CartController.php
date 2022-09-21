@@ -2,18 +2,28 @@
 
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
-use Cart;
 use Illuminate\Support\Facades\Log;
-use Webkul\Velocity\Helpers\Helper;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Product\Repositories\ProductRepository;
 
 class CartController extends Controller
 {
     /**
-     * Retrives the mini cart details
+     * Create a new controller instance.
      *
-     * @return \Illuminate\Http\Response
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     *
+     * @return void
+     */
+    public function __construct(protected ProductRepository $productRepository)
+    {
+    }
+
+    /**
+     * Retrieves the mini cart details
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getMiniCartDetails()
     {

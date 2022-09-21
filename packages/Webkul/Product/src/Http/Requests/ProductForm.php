@@ -53,7 +53,9 @@ class ProductForm extends FormRequest
     {
         $product = $this->productRepository->find($this->id);
 
-        $maxVideoFileSize = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048';
+        $maxVideoFileSize = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')
+            ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')
+            : '2048';
 
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                => ['required', 'unique:products,sku,' . $this->id, new Slug],

@@ -25,8 +25,6 @@ class TaxCategoryRepository extends Repository
      */
     public function attachOrDetach($taxCategory, $data)
     {
-        $taxCategory->tax_rates;
-
         $this->model->findOrFail($taxCategory->id)->tax_rates()->sync($data);
 
         return true;

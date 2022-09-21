@@ -587,7 +587,7 @@ class Product extends Model implements ProductContract
      *
      * @return void
      */
-    public function refreshloadedAttributeValues(): void
+    public function refreshLoadedAttributeValues(): void
     {
         self::$loadedAttributeValues = [];
     }
