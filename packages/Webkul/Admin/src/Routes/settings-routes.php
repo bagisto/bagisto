@@ -8,7 +8,6 @@ use Webkul\Core\Http\Controllers\LocaleController;
 use Webkul\Core\Http\Controllers\SliderController;
 use Webkul\Inventory\Http\Controllers\InventorySourceController;
 use Webkul\Tax\Http\Controllers\TaxCategoryController;
-use Webkul\Tax\Http\Controllers\TaxController;
 use Webkul\Tax\Http\Controllers\TaxRateController;
 use Webkul\User\Http\Controllers\RoleController;
 use Webkul\User\Http\Controllers\UserController;
@@ -234,7 +233,7 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
     /**
      * Tax categories routes.
      */
-    Route::get('/tax-categories', [TaxController::class, 'index'])->defaults('_config', [
+    Route::get('/tax-categories', [TaxCategoryController::class, 'index'])->defaults('_config', [
         'view' => 'admin::tax.tax-categories.index',
     ])->name('admin.tax-categories.index');
 
