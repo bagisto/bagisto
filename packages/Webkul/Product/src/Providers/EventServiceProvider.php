@@ -19,7 +19,7 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\Product\Listeners\ProductFlat@afterAttributeCreatedUpdated'
         ],
         'catalog.attribute.delete.before' => [
-            'Webkul\Product\Listeners\ProductFlat@afterAttributeDeleted'
+            'Webkul\Product\Listeners\ProductFlat@beforeAttributeDeleted'
         ],
         'catalog.product.create.after' => [
             'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated'

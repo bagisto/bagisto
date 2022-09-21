@@ -81,7 +81,7 @@ class ProductFlat
         }
 
         if (! $attribute->use_in_flat) {
-            $this->afterAttributeDeleted($attribute->id);
+            $this->beforeAttributeDeleted($attribute->id);
 
             return false;
         }
@@ -100,6 +100,8 @@ class ProductFlat
                 $table->string($attribute->code . '_label')->nullable();
             }
         });
+        
+        $this->productFlatRepository->updateAttributeColumn($attribute, $this);
     }
 
     /**
@@ -108,7 +110,7 @@ class ProductFlat
      * @param  int  $attributeId
      * @return void
      */
-    public function afterAttributeDeleted($attributeId)
+    public function beforeAttributeDeleted($attributeId)
     {
         $attribute = $this->attributeRepository->find($attributeId);
         
@@ -126,8 +128,6 @@ class ProductFlat
                 $table->dropColumn($attribute->code . '_label');
             }
         });
-        
-        $this->productFlatRepository->updateAttributeColumn( $attribute , $this);
     }
 
     /**
