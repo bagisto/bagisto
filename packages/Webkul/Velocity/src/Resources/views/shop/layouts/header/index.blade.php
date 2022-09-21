@@ -6,11 +6,11 @@
 
         <div class="right searchbar">
             <div class="row">
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-7 col-md-12">
                     @include('velocity::shop.layouts.particals.search-bar')
                 </div>
 
-                <div class="col-lg-7 col-md-12 vc-full-screen">
+                <div class="col-lg-5 col-md-12 vc-full-screen">
                     <div class="left-wrapper">
 
                         {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}

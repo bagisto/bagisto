@@ -1,4 +1,4 @@
-<div class="input-group">
+<div>
     <form
         method="GET"
         role="search"

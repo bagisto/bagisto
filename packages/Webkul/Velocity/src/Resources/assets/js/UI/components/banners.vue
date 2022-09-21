@@ -5,8 +5,8 @@
             timeout="5000"
             autoplay="true"
             slides-per-page="1"
-            navigation-enabled="hide"
-            paginationEnabled="hide"
+            navigation-enabled="true"
+            paginationEnabled="true"
             :locale-direction="direction"
             :slides-count="banners.length > 0 ? banners.length : 1"
         >
