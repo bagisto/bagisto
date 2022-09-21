@@ -22,7 +22,7 @@ class ProductBundleOptionProductRepository extends Repository
      * @param  \Webkul\Product\Contracts\ProductBundleOption  $productBundleOption
      * @return void
      */
-    public function saveBundleOptonProducts($data, $productBundleOption)
+    public function saveBundleOptionProducts($data, $productBundleOption)
     {
         $previousBundleOptionProductIds = $productBundleOption->bundle_option_products()->pluck('id');
 

@@ -58,7 +58,7 @@ class ProductBundleOptionRepository extends Repository
                     $this->update($bundleOptionInputs, $bundleOptionId);
                 }
 
-                $this->productBundleOptionProductRepository->saveBundleOptonProducts($bundleOptionInputs, $productBundleOption);
+                $this->productBundleOptionProductRepository->saveBundleOptionProducts($bundleOptionInputs, $productBundleOption);
             }
         }
 
