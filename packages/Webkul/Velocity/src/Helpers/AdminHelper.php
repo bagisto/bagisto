@@ -18,7 +18,7 @@ class AdminHelper
     }
 
     /**
-     * Store cateogry icon.
+     * Store category icon.
      *
      * @param  \Webkul\Category\Contracts\Category  $category
      * @return \Webkul\Category\Contracts\Category
