@@ -11,7 +11,7 @@ use Webkul\Product\Datatypes\CartItemValidationResult;
 class RentalSlot extends Booking
 {
     /**
-     * Returns slots for a perticular day
+     * Returns slots for a particular day
      *
      * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @param  string  $date

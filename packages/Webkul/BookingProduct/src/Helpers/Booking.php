@@ -81,7 +81,7 @@ class Booking
     }
 
     /**
-     * Returns the booking type hepler instance
+     * Returns the booking type helper instance
      *
      * @param  string  $type
      * @return array
@@ -114,7 +114,7 @@ class Booking
 
             $slotsByDays[] = [
                 'name'  => trans($this->daysOfWeek[$index]),
-                'slots' => isset($availableDays[$index]) ? $this->conver24To12Hours($slots) : [],
+                'slots' => isset($availableDays[$index]) ? $this->convert24To12Hours($slots) : [],
             ];
         }
 
@@ -222,7 +222,7 @@ class Booking
      * @param  array  $slots
      * @return array
      */
-    public function conver24To12Hours($slots)
+    public function convert24To12Hours($slots)
     {
         if (! $slots) {
             return [];
@@ -238,7 +238,7 @@ class Booking
     }
 
     /**
-     * Returns slots for a perticular day
+     * Returns slots for a particular day
      *
      * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @param  string  $date
@@ -349,7 +349,7 @@ class Booking
     }
 
     /**
-     * @param  \Webkul\Ceckout\Contracts\CartItem|array  $cartItem
+     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
@@ -382,7 +382,7 @@ class Booking
     }
 
     /**
-     * @param  \Webkul\Ceckout\Contracts\CartItem|array  $cartItem
+     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
      * @return bool
      */
     public function isSlotExpired($cartItem)
