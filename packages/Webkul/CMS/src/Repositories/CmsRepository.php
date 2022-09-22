@@ -83,7 +83,7 @@ class CmsRepository extends Repository
     }
 
     /**
-     * Retrive category from slug
+     * Retrieve category from slug
      *
      * @param  string  $urlKey
      * @return \Webkul\CMS\Contracts\CmsPage|\Exception
