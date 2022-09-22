@@ -105,7 +105,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Edit's the premade resource of customer called Address.
+     * Edit's the pre-made resource of customer called Address.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

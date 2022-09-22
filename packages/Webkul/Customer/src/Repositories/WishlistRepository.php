@@ -78,7 +78,7 @@ class WishlistRepository extends Repository
      */
     public function getCustomerWishlist()
     {
-        /* due to ambigious ids only selecting from wishlist table */
+        /* due to ambiguous ids only selecting from wishlist table */
         $query = $this->model->select('wishlist.*');
 
         /* don't add product repository method as that one will need a product flat table */
@@ -89,7 +89,7 @@ class WishlistRepository extends Repository
                 ->where(function ($qb) {
                     $qb
                         ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
-                        ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
+                        ->orWhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
                 });
         }
 
