@@ -1408,6 +1408,7 @@ return [
         'already-taken'           => 'The :name is al bezet.',
         'order-pending'           => 'Kan account niet verwijderen omdat sommige bestelling (en) in behandeling of in behandeling zijn.',
         'something-went-wrong'    => 'Something went wrong!',
+        'parent-permission-checkbox' => 'Vink het selectievakje toestemming aan voor',
     ],
 
     'validations' => [

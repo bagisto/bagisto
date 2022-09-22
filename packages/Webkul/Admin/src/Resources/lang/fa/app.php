@@ -1409,6 +1409,7 @@ return [
         'already-taken'           => ' قبلا گرفته شده :name',
         'order-pending'           => 'حساب حذف نمی شود زیرا برخی از سفارش ها حالت معلق یا در حال پردازش هستند',
         'something-went-wrong'    => 'Something went wrong!',
+        'parent-permission-checkbox' => 'لطفاً کادر تأیید مجوز را علامت بزنید',
     ],
 
     'validations' => [

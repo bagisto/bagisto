@@ -1326,4 +1326,17 @@ class Core
     {
         return ini_get('upload_max_filesize');
     }
+
+    /**
+     * Fetch current name acl. As no access to acl name, this will fetch acl by key name.
+     *
+     * @param  $action
+     * @return array
+     */
+    public function fetchCurrentNameACL($key)
+    {
+        return collect(config('acl'))->filter(function ($acl) use ($key) {
+            return $acl['key'] === $key;
+        })->first();
+    }
 }

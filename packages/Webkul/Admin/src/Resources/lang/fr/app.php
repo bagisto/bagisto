@@ -1443,6 +1443,7 @@ return [
         'already-taken'             => 'Le :name a déjà été pris.',
         'order-pending'             => 'Impossible de supprimer le compte :name car certaines commandes sont en attente ou en cours de traitement.',
         'something-went-wrong'      => 'Something went wrong!',
+        'parent-permission-checkbox' => 'Veuillez cocher la case d\'autorisation pour',
     ],
 
     'validations' => [

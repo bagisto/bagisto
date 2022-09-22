@@ -62,6 +62,14 @@ class RoleController extends Controller
      */
     public function store()
     {
+        if (request()->has('permissions')) {
+            $isParentPermissionSelected = $this->validateIfParentPermissionSelected(request('permissions'));
+
+            if(! $isParentPermissionSelected) {
+                return redirect()->route($this->_config['redirect']);
+            }
+        }
+
         $this->validate(request(), [
             'name'            => 'required',
             'permission_type' => 'required',
@@ -99,6 +107,14 @@ class RoleController extends Controller
      */
     public function update($id)
     {
+        if (request()->has('permissions')) {
+            $isParentPermissionSelected = $this->validateIfParentPermissionSelected(request('permissions'));
+
+            if(! $isParentPermissionSelected) {
+                return redirect()->route($this->_config['redirect']);
+            }
+        }
+        
         $this->validate(request(), [
             'name'            => 'required',
             'permission_type' => 'required',
@@ -129,6 +145,31 @@ class RoleController extends Controller
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
 
         return redirect()->route($this->_config['redirect']);
+    }
+
+    /**
+     * Check if parent category selected.
+     *
+     */
+    public function validateIfParentPermissionSelected($permissions)
+    { 
+        foreach ($permissions as $permissionValue) {
+            $permissionArray = explode('.', $permissionValue);
+            $count = count($permissionArray);
+            
+            if ($count > 1) {
+                unset($permissionArray[$count - 1]);
+    
+                if (! in_array(implode('.', $permissionArray) , $permissions)) {
+    
+                    $parentCategoryName = trans(core()->fetchCurrentNameACL(implode('.', $permissionArray))['name']);
+    
+                    session()->flash('warning', trans('admin::app.response.parent-permission-checkbox').' '.$parentCategoryName);
+    
+                    return false;
+                }
+            }
+        }
     }
 
     /**

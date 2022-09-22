@@ -1409,6 +1409,7 @@ return [
         'already-taken'           => 'Ta :name jest już zajęta.',
         'order-pending'           => 'Nie można usunąć konta, ponieważ niektóre zamówienia są w toku lub są przetwarzane.',
         'something-went-wrong'    => 'Something went wrong!',
+        'parent-permission-checkbox' => 'Zaznacz pole wyboru uprawnień dla',
     ],
 
     'validations' => [

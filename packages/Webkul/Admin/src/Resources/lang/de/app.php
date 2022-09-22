@@ -1435,6 +1435,7 @@ return [
         'already-taken'             => 'Der :name wird bereits verwendet.',
         'order-pending'             => 'Konto kann nicht gelöscht werden, da einige Bestellungen ausstehen oder verarbeitet werden.',
         'something-went-wrong'      => 'Something went wrong!',
+        'parent-permission-checkbox' => 'Bitte kreuzen Sie das Kontrollkästchen für die Berechtigung an',
     ],
     'validations'   => [
         'slug-being-used' => 'This slug is getting used in either categories or products.',

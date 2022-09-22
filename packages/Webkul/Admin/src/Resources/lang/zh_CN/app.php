@@ -1411,6 +1411,7 @@ return [
         'cancel-error'              => ':name 无法取消.',
         'already-taken'             => ':name 已被占用.',
         'order-pending'             => '无法删除 :name 帐户, 因为某些订单处于待处理或处理状态.',
+        'parent-permission-checkbox' => '请检查权限复选框',
     ],
 
     'footer' => [

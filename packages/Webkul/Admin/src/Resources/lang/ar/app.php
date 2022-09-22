@@ -1427,6 +1427,7 @@ return [
         'already-taken'             => 'بالفعل :name تم أخذ ',
         'order-pending'             => 'لا يمكن حذف الحساب لأن بعض الطلبات (الطلبات) معلقة أو قيد المعالجة.',
         'something-went-wrong'      => 'Something went wrong!',
+        'parent-permission-checkbox' => 'يرجى التحقق من خانة الاختيار إذن لـ',
     ],
 
     'validations' => [

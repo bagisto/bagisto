@@ -1408,6 +1408,7 @@ return [
         'already-taken'           => 'O :name já foi tomada.',
         'order-pending'           => 'Não é possível excluir a conta porque alguns pedidos estão em estado pendente ou em processamento.',
         'something-went-wrong'    => 'Something went wrong!',
+        'parent-permission-checkbox' => 'Por favor, marque a caixa de seleção de permissão para',
     ],
 
     'validations' => [

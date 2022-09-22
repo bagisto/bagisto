@@ -1415,6 +1415,7 @@ return [
         'already-taken'           => 'Il nome :name è stato già utilizzato.',
         'order-pending'           => 'Non è possibile eliminare l\'account perchè alcuni Ordini sono in stato di attesa o in corso.',
         'something-went-wrong'    => 'Qualcosa é andato storto!',
+        'parent-permission-checkbox' => 'Si prega di controllare la casella di controllo dell autorizzazione per',
     ],
 
     'validations' => [

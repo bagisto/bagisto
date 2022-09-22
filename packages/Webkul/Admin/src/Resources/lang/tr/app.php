@@ -1408,6 +1408,7 @@ return [
         'already-taken'           => ':name daha önceden girilmiş.',
         'order-pending'           => 'Bu hesaba ait işlem bekleyen siparişler bulunduğundan hesap silinemez.',
         'something-went-wrong'    => 'Bir şeyler yanlış gitti!',
+        'parent-permission-checkbox' => 'Lütfen izin onay kutusunu işaretleyin',
     ],
 
     'validations' => [

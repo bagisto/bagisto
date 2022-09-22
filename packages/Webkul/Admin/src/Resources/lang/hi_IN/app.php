@@ -1440,6 +1440,7 @@ return [
         'already-taken'             => 'द :name पहले ही लिया जा चुका है।',
         'order-pending'             => 'हटाया नहीं जा सकता :name खाता क्योंकि कुछ आदेश लंबित हैं या संसाधित हो रहे हैं।',
         'something-went-wrong'      => 'कुछ गलत हो गया!',
+        'parent-permission-checkbox' => 'कृपया इसके लिए अनुमति चेकबॉक्स चेक करें',
     ],
 
     'validations' => [
