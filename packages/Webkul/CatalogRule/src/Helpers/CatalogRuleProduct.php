@@ -5,8 +5,8 @@ namespace Webkul\CatalogRule\Helpers;
 use Carbon\Carbon;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\CatalogRule\Repositories\CatalogRuleProductRepository;
+use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Rule\Helpers\Validator;
 
 class CatalogRuleProduct
