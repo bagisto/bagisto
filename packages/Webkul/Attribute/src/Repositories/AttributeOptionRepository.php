@@ -2,11 +2,11 @@
 
 namespace Webkul\Attribute\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Webkul\Core\Eloquent\Repository;
 
 class AttributeOptionRepository extends Repository
 {
-
     /**
      * Specify Model class name
      *
@@ -59,7 +59,7 @@ class AttributeOptionRepository extends Repository
             return;
         }
 
-        if ($data['swatch_value'] instanceof \Illuminate\Http\UploadedFile) {
+        if ($data['swatch_value'] instanceof UploadedFile) {
             parent::update([
                 'swatch_value' => $data['swatch_value']->store('attribute_option'),
             ], $optionId);

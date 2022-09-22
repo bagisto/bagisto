@@ -36,8 +36,6 @@ class Attribute extends TranslatableModel implements AttributeContract
         'is_comparable',
     ];
 
-    // protected $with = ['options'];
-
     /**
      * Get the options.
      */
@@ -50,7 +48,6 @@ class Attribute extends TranslatableModel implements AttributeContract
      * Scope a query to only include popular users.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFilterableAttributes(Builder $query): Builder

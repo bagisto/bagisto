@@ -67,7 +67,7 @@ class AttributeRepository extends Repository
      * Update attribute.
      *
      * @param  array  $data
-     * @param  int $id
+     * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Attribute\Contracts\Attribute
      */
@@ -81,24 +81,27 @@ class AttributeRepository extends Repository
 
         $attribute->update($data);
 
-        if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
-            if (isset($data['options'])) {
-                foreach ($data['options'] as $optionId => $optionInputs) {
-                    $isNew = $optionInputs['isNew'] == 'true';
+        if (
+            ! in_array($attribute->type, ['select', 'multiselect', 'checkbox'])
+            || ! isset($data['options'])
+        ) {
+            return $attribute;
+        }
 
-                    if ($isNew) {
-                        $this->attributeOptionRepository->create(array_merge([
-                            'attribute_id' => $attribute->id,
-                        ], $optionInputs));
-                    } else {
-                        $isDelete = $optionInputs['isDelete'] == 'true';
+        foreach ($data['options'] as $optionId => $optionInputs) {
+            $isNew = $optionInputs['isNew'] == 'true';
 
-                        if ($isDelete) {
-                            $this->attributeOptionRepository->delete($optionId);
-                        } else {
-                            $this->attributeOptionRepository->update($optionInputs, $optionId);
-                        }
-                    }
+            if ($isNew) {
+                $this->attributeOptionRepository->create(array_merge([
+                    'attribute_id' => $attribute->id,
+                ], $optionInputs));
+            } else {
+                $isDelete = $optionInputs['isDelete'] == 'true';
+
+                if ($isDelete) {
+                    $this->attributeOptionRepository->delete($optionId);
+                } else {
+                    $this->attributeOptionRepository->update($optionInputs, $optionId);
                 }
             }
         }
