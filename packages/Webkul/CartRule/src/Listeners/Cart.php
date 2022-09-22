@@ -9,21 +9,21 @@ class Cart
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\CartRule\Repositories\CartRule  $cartRuleHepler
+     * @param  \Webkul\CartRule\Repositories\CartRule  $cartRuleHelper
      * @return void
      */
-    public function __construct(protected CartRule $cartRuleHepler)
+    public function __construct(protected CartRule $cartRuleHelper)
     {
     }
 
     /**
-     * Aplly valid cart rules to cart
+     * Apply valid cart rules to cart
      * 
      * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return void
      */
     public function applyCartRules($cart)
     {
-        $this->cartRuleHepler->collect($cart);
+        $this->cartRuleHelper->collect($cart);
     }
 }
