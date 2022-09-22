@@ -155,7 +155,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Retrive category from slug.
+     * Retrieve category from slug.
      *
      * @param string $slug
      * @return \Webkul\Category\Contracts\Category
@@ -287,7 +287,7 @@ class CategoryRepository extends Repository
                 if ($requestedLocale == $locale->code) { 
                     foreach ($model->translatedAttributes as $attribute) {
                         if ($attribute === $attributeName) {
-                                $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute])
+                            $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute])
                                 ? $data[$requestedLocale][$attribute]
                                 : $data[$data['locale']][$attribute];
                         }
