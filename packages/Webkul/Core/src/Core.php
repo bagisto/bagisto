@@ -40,7 +40,7 @@ class Core
     /**
      * Register your core config keys here which you don't want to
      * load in static array. These keys will load from database
-     * everytime the `getConfigData` method is called.
+     * every time the `getConfigData` method is called.
      */
     private $coreConfigExceptions = [
         'catalog.products.guest-checkout.allow-guest-checkout',
@@ -132,7 +132,7 @@ class Core
     }
 
     /**
-     * Returns currenct channel code.
+     * Returns current channel code.
      *
      * @return \Webkul\Core\Contracts\Channel
      */
@@ -425,9 +425,9 @@ class Core
             return $currency;
         }
 
-        $currenctChannel = $this->getCurrentChannel();
+        $currentChannel = $this->getCurrentChannel();
 
-        return $currency = $currenctChannel->base_currency;
+        return $currency = $currentChannel->base_currency;
     }
 
     /**
@@ -626,9 +626,9 @@ class Core
      */
     public function getAccountJsSymbols()
     {
-        $formater = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
-        $pattern = $formater->getPattern();
+        $pattern = $formatter->getPattern();
 
         $pattern = str_replace('¤', '%s', $pattern);
 
@@ -636,7 +636,7 @@ class Core
 
         return [
             'symbol'  => $this->currencySymbol($this->getCurrentCurrencyCode()),
-            'decimal' => $formater->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
+            'decimal' => $formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
             'format'  => $pattern,
         ];
     }
@@ -687,18 +687,18 @@ class Core
             $price = 0;
         }
 
-        $formater = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
         if ($symbol = $this->getBaseCurrency()->symbol) {
             if ($this->currencySymbol($this->getBaseCurrencyCode()) == $symbol) {
-                $content = $formater->formatCurrency($price, $this->getBaseCurrencyCode());
+                $content = $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
             } else {
-                $formater->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
+                $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
 
-                $content = $formater->format($this->convertPrice($price));
+                $content = $formatter->format($this->convertPrice($price));
             }
         } else {
-            $content = $formater->formatCurrency($price, $this->getBaseCurrencyCode());
+            $content = $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
         }
 
         return ! $isEncoded ? $content : htmlentities($content);
@@ -744,7 +744,7 @@ class Core
     }
 
     /**
-     * Get channel timestamp, timstamp will be builded with channel timezone settings.
+     * Get channel timestamp, timestamp will be builded with channel timezone settings.
      *
      * @param  \Webkul\Core\Contracts\Channel  $channel
      * @return int
@@ -1105,8 +1105,8 @@ class Core
     /**
      * Array set.
      *
-     * @param  array             $items
-     * @param  string            $key
+     * @param  array  $items
+     * @param  string  $key
      * @param  string|int|float  $value
      * @return array
      */
