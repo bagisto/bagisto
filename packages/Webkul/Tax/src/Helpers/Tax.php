@@ -131,7 +131,10 @@ class Tax
         }
 
         foreach ($taxRates as $rate) {
-            if ($rate->state != $address->state) {
+            if (
+                $rate->state != ''
+                && $rate->state != $address->state
+            ) {
                 continue;
             }
 
