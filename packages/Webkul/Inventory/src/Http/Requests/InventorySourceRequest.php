@@ -27,9 +27,7 @@ class InventorySourceRequest extends FormRequest
      */
     public function rules()
     {
-        $id = request('id');
-
-        $uniqueCode = 'unique:inventory_sources,code,' . $id ?? 'unique:inventory_sources,code';
+        $uniqueCode = 'unique:inventory_sources,code,' . request('id') ?? 'unique:inventory_sources,code';
 
         return [
             'code'           => ['required', $uniqueCode, new Code],
