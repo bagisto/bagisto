@@ -40,7 +40,7 @@ class CustomerRepository extends Repository
     public function checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)
     {
         foreach ($customerIds as $customerId) {
-            $customer = $this->findorFail($customerId);
+            $customer = $this->findOrFail($customerId);
 
             if ($this->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
                 return true;
@@ -92,7 +92,7 @@ class CustomerRepository extends Repository
      * @param  \Webkul\Customer\Contracts\Customer  $customer
      * @return mixed
      */
-    public function syncNewRegisteredCustomerInformations($customer)
+    public function syncNewRegisteredCustomerInformation($customer)
     {
         /**
          * Setting registered customer to orders.

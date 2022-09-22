@@ -89,7 +89,7 @@ class OrderRepository extends Repository
             $order->addresses()->create($data['billing_address']);
 
             foreach ($data['items'] as $item) {
-                Event::dispatch('checkout.order.orderitem.save.before', $data);
+                Event::dispatch('checkout.order.orderitem.save.before', $item);
 
                 $orderItem = $this->orderItemRepository->create(array_merge($item, ['order_id' => $order->id]));
 
@@ -106,7 +106,7 @@ class OrderRepository extends Repository
 
                 $this->downloadableLinkPurchasedRepository->saveLinks($orderItem, 'available');
 
-                Event::dispatch('checkout.order.orderitem.save.after', $data);
+                Event::dispatch('checkout.order.orderitem.save.after', $orderItem);
             }
 
             Event::dispatch('checkout.order.save.after', $order);

@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;

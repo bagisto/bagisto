@@ -153,7 +153,7 @@ class RegistrationController extends Controller
         if ($customer) {
             $this->customerRepository->update(['is_verified' => 1, 'token' => 'NULL'], $customer->id);
 
-            $this->customerRepository->syncNewRegisteredCustomerInformations($customer);
+            $this->customerRepository->syncNewRegisteredCustomerInformation($customer);
 
             session()->flash('success', trans('shop::app.customer.signup-form.verified'));
         } else {
