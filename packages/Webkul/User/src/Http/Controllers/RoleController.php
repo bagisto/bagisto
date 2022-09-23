@@ -161,7 +161,7 @@ class RoleController extends Controller
                 unset($permissionArray[$count - 1]);
     
                 if (! in_array(implode('.', $permissionArray) , $permissions)) {
-                    $key =   implode('.', $permissionArray);
+                    $key = implode('.', $permissionArray);
                     $keyName = trans(core()->fetchCurrentACLByKey($key)['name']);
     
                     session()->flash('warning', trans('admin::app.response.parent-permission-checkbox').' '.$keyName);
