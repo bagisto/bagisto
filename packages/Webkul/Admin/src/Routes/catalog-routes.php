@@ -96,7 +96,7 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
             'redirect' => 'admin.catalog.categories.index',
         ])->name('admin.catalog.categories.update');
 
-        Route::get('categoriesproducts/{id}', [CategoryController::class, 'products'])->name('admin.catalog.categories.products');
+        Route::get('categories/products/{id}', [CategoryController::class, 'products'])->name('admin.catalog.categories.products');
 
         Route::post('categories/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.catalog.categories.delete');
 

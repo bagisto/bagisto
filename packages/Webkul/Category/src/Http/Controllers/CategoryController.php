@@ -214,8 +214,6 @@ class CategoryController extends Controller
     {
         $data = request()->all();
 
-        dd($data);
-
         if (! isset($data['mass-action-type']) || ! $data['mass-action-type'] == 'update') {
             return redirect()->back();
         }
