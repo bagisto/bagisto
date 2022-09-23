@@ -106,7 +106,7 @@ class ProductRepository extends BaseProductRepository
                                             continue;
 
                                         $columns = $aliasTemp . '.' . $column;
-                                        $query3 = $query3->orwhereRaw("find_in_set($filterValue, $columns)");
+                                        $query3 = $query3->orWhereRaw("find_in_set($filterValue, $columns)");
                                     }
                                 });
                             } else {

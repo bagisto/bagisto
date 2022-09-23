@@ -231,7 +231,7 @@ class ShopController extends Controller
                     ->where(function ($qb) {
                         $qb
                             ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
-                            ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
+                            ->orWhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
                     })
                     ->where('wishlist.customer_id', $customer->id)
                     ->where('wishlist.channel_id', core()->getCurrentChannel()->id)

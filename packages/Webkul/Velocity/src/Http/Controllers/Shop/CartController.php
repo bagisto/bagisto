@@ -51,15 +51,14 @@ class CartController extends Controller
 
             $response = [
                 'status'    => true,
+
                 'mini_cart' => [
-                    'cart_items' => $cartItems,
+                    'cart_items'   => $cartItems,
                     'cart_details' => $cartDetails,
                 ],
             ];
         } else {
-            $response = [
-                'status' => false,
-            ];
+            $response = ['status' => false];
         }
 
         return response()->json($response);
@@ -79,10 +78,7 @@ class CartController extends Controller
 
             $cart = Cart::addProduct($id, request()->all());
 
-            if (
-                is_array($cart)
-                && isset($cart['warning'])
-            ) {
+            if (isset($cart['warning'])) {
                 $response = [
                     'status'  => 'warning',
                     'message' => $cart['warning'],
