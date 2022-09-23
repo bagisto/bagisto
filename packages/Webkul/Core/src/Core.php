@@ -1328,12 +1328,12 @@ class Core
     }
 
     /**
-     * Fetch current name acl. As no access to acl name, this will fetch acl by key name.
+     * Fetch current acl by key. As no access to acl other parameter directly (name, route).
      *
      * @param  $action
      * @return array
      */
-    public function fetchCurrentNameACL($key)
+    public function fetchCurrentACLByKey($key)
     {
         return collect(config('acl'))->filter(function ($acl) use ($key) {
             return $acl['key'] === $key;

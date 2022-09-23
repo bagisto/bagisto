@@ -63,7 +63,7 @@ class RoleController extends Controller
     public function store()
     {
         if (request()->has('permissions')) {
-            $isParentPermissionSelected = $this->validateIfParentPermissionSelected(request('permissions'));
+            $isParentPermissionSelected = $this->guardedParentPermission(request('permissions'));
 
             if(! $isParentPermissionSelected) {
                 return redirect()->route($this->_config['redirect']);
@@ -108,7 +108,7 @@ class RoleController extends Controller
     public function update($id)
     {
         if (request()->has('permissions')) {
-            $isParentPermissionSelected = $this->validateIfParentPermissionSelected(request('permissions'));
+            $isParentPermissionSelected = $this->guardedParentPermission(request('permissions'));
 
             if(! $isParentPermissionSelected) {
                 return redirect()->route($this->_config['redirect']);
@@ -151,7 +151,7 @@ class RoleController extends Controller
      * Check if parent category selected.
      *
      */
-    public function validateIfParentPermissionSelected($permissions)
+    public function guardedParentPermission($permissions)
     { 
         foreach ($permissions as $permissionValue) {
             $permissionArray = explode('.', $permissionValue);
@@ -161,10 +161,10 @@ class RoleController extends Controller
                 unset($permissionArray[$count - 1]);
     
                 if (! in_array(implode('.', $permissionArray) , $permissions)) {
+                    $key =   implode('.', $permissionArray);
+                    $keyName = trans(core()->fetchCurrentACLByKey($key)['name']);
     
-                    $parentCategoryName = trans(core()->fetchCurrentNameACL(implode('.', $permissionArray))['name']);
-    
-                    session()->flash('warning', trans('admin::app.response.parent-permission-checkbox').' '.$parentCategoryName);
+                    session()->flash('warning', trans('admin::app.response.parent-permission-checkbox').' '.$keyName);
     
                     return false;
                 }
