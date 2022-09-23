@@ -10,7 +10,7 @@
     $avgStarRating = round($avgRatings);
 
     $productImages = [];
-    $images = productimage()->getGalleryImages($product);
+    $images = product_image()->getGalleryImages($product);
 
     foreach ($images as $key => $image) {
         array_push($productImages, $image['medium_image_url']);
@@ -32,7 +32,7 @@
         </script>
     @endif
 
-    <?php $productBaseImage = productimage()->getProductBaseImage($product, $images); ?>
+    <?php $productBaseImage = product_image()->getProductBaseImage($product, $images); ?>
 
     <meta name="twitter:card" content="summary_large_image" />
 

@@ -37,7 +37,7 @@
                 @foreach ($reviews as $review)
                     <div class="account-item-card mt-15 mb-15">
                         <div class="media-info">
-                            @php $image = productimage()->getProductBaseImage($review->product); @endphp
+                            @php $image = product_image()->getProductBaseImage($review->product); @endphp
 
                             <a href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}" title="{{ $review->product->name }}">
                                 <img class="media" src="{{ $image['small_image_url'] }}" alt=""/>

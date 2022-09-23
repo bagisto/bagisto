@@ -3,8 +3,8 @@
 namespace Webkul\Product\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
 
 class ReviewController extends Controller
 {

@@ -50,7 +50,7 @@ class ProductBundleOptionProductRepository extends Repository
     }
 
     /**
-     * @param array $data
+     * @param  array  $data
      * @return void|null
      */
     public function setIsDefaultFlag(&$data)
@@ -59,21 +59,21 @@ class ProductBundleOptionProductRepository extends Repository
             return;
         }
 
-        $haveIsDefaulFlag = false;
+        $haveIsDefaultFlag = false;
 
         foreach ($data['products'] as $key => $product) {
             if (
                 isset($product['is_default'])
                 && $product['is_default']
             ) {
-                $haveIsDefaulFlag = true;
+                $haveIsDefaultFlag = true;
             } else {
                 $data['products'][$key]['is_default'] = 0;
             }
         }
 
         if (
-            ! $haveIsDefaulFlag
+            ! $haveIsDefaultFlag
             && $data['is_required']
         ) {
             $data['products'][key($data['products'])]['is_default'] = 1;

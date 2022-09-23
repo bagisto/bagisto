@@ -2,7 +2,7 @@
 
 <div class="product-card">
 
-    <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
+    <?php $productBaseImage = product_image()->getProductBaseImage($product); ?>
 
     @if (
         ! $product->getTypeInstance()->haveSpecialPrice()

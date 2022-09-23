@@ -30,7 +30,7 @@
                 <div class="row col-12 lg-card-container list-card product-card">
                     <div class="product-image">
                         @php
-                            $image = productimage()->getProductBaseImage($review->product);
+                            $image = product_image()->getProductBaseImage($review->product);
                         @endphp
 
                         <a

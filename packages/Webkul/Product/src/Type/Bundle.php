@@ -4,7 +4,7 @@ namespace Webkul\Product\Type;
 
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Checkout\Models\CartItem;
-use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Helpers\BundleOption;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
@@ -108,7 +108,7 @@ class Bundle extends AbstractType
         $route = request()->route() ? request()->route()->getName() : '';
 
         if ($route != 'admin.catalog.products.massupdate') {
-            $this->productBundleOptionRepository->saveBundleOptons($data, $product);
+            $this->productBundleOptionRepository->saveBundleOptions($data, $product);
         }
 
         return $product;
@@ -682,7 +682,7 @@ class Bundle extends AbstractType
      * Validate cart item product price and other things.
      *
      * @param  \Webkul\Checkout\Models\CartItem  $item
-     * @return \Webkul\Product\Datatypes\CartItemValidationResult
+     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {

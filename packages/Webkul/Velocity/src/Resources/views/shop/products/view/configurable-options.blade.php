@@ -5,7 +5,7 @@
     @php
         $defaultVariant = $product->getTypeInstance()->getDefaultVariant();
         $config = $configurableOptionHelper->getConfigurationConfig($product);
-        $galleryImages = productimage()->getGalleryImages($product);
+        $galleryImages = product_image()->getGalleryImages($product);
     @endphp
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.before', ['product' => $product]) !!}

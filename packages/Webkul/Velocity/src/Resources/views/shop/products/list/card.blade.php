@@ -6,7 +6,7 @@
         ? true
         : false;
 
-    $productBaseImage = productimage()->getProductBaseImage($product);
+    $productBaseImage = product_image()->getProductBaseImage($product);
 
     $totalReviews = $reviewHelper->getTotalReviews($product);
 

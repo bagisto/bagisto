@@ -8,7 +8,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -977,7 +977,7 @@ abstract class AbstractType
      * Validate cart item product price and other things.
      *
      * @param  \Webkul\Checkout\Models\CartItem  $item
-     * @return \Webkul\Product\Datatypes\CartItemValidationResult
+     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {

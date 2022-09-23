@@ -64,7 +64,7 @@ class ProductMediaRepository extends Repository
                     ]);
                 } else {
                     /**
-                     * Filter out existing models because new model positions are already setuped by index.
+                     * Filter out existing models because new model positions are already setup by index.
                      */
                     if (
                         isset($data[$uploadFileType]['positions'])
