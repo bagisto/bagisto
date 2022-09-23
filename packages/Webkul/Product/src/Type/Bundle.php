@@ -107,7 +107,7 @@ class Bundle extends AbstractType
         $product = parent::update($data, $id, $attribute);
         $route = request()->route() ? request()->route()->getName() : '';
 
-        if ($route != 'admin.catalog.products.massupdate') {
+        if ($route != 'admin.catalog.products.mass_update') {
             $this->productBundleOptionRepository->saveBundleOptions($data, $product);
         }
 

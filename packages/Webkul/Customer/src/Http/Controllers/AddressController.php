@@ -129,12 +129,12 @@ class AddressController extends Controller
 
             session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
 
-            return redirect()->route('customer.address.index');
+            return redirect()->route('shop.customer.addresses.index');
         }
 
         session()->flash('warning', trans('shop::app.security-warning'));
 
-        return redirect()->route('customer.address.index');
+        return redirect()->route('shop.customer.addresses.index');
     }
 
     /**
@@ -187,6 +187,6 @@ class AddressController extends Controller
 
         session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
 
-        return redirect()->route('customer.address.index');
+        return redirect()->route('shop.customer.addresses.index');
     }
 }

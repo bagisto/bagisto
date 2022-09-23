@@ -41,7 +41,7 @@ class OnepageController extends Controller
             ! auth()->guard('customer')->check()
             && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')
         ) {
-            return redirect()->route('customer.session.index');
+            return redirect()->route('shop.customer.session.index');
         }
 
         if (
@@ -73,7 +73,7 @@ class OnepageController extends Controller
                 && ! $cart->hasGuestCheckoutItems()
             )
         ) {
-            return redirect()->route('customer.session.index');
+            return redirect()->route('shop.customer.session.index');
         }
 
         $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
@@ -117,7 +117,7 @@ class OnepageController extends Controller
             ! auth()->guard('customer')->check()
             && ! Cart::getCart()->hasGuestCheckoutItems()
         ) {
-            return response()->json(['redirect_url' => route('customer.session.index')], 403);
+            return response()->json(['redirect_url' => route('shop.customer.session.index')], 403);
         }
 
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));

@@ -10,7 +10,7 @@
 
         @if (count($reviews) > 1)
             <div class="account-action float-right">
-                <form id="deleteAllReviewForm" action="{{ route('customer.review.deleteall') }}" method="post">
+                <form id="deleteAllReviewForm" action="{{ route('shop.customer.review.delete_all') }}" method="post">
                     @method('delete')
                     @csrf
                 </form>
@@ -58,7 +58,7 @@
                             </div>  
 
                             <div>
-                                <form id="deleteReviewForm{{ $review->id }}" action="{{ route('customer.review.delete', $review->id) }}" method="post">
+                                <form id="deleteReviewForm{{ $review->id }}" action="{{ route('shop.customer.review.delete', $review->id) }}" method="post">
                                     @method('delete')
 
                                     @csrf

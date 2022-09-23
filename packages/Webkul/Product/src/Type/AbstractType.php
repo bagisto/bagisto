@@ -175,7 +175,7 @@ abstract class AbstractType
 
             if (
                 $attribute->type === 'boolean'
-                && $route !== 'admin.catalog.products.massupdate'
+                && $route !== 'admin.catalog.products.mass_update'
             ) {
                 $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
             }
@@ -202,7 +202,7 @@ abstract class AbstractType
             if (
                 $attribute->type === 'date'
                 && $data[$attribute->code] === ''
-                && $route !== 'admin.catalog.products.massupdate'
+                && $route !== 'admin.catalog.products.mass_update'
             ) {
                 $data[$attribute->code] = null;
             }
@@ -266,7 +266,7 @@ abstract class AbstractType
 
         $route = request()->route() ? request()->route()->getName() : '';
 
-        if ($route !== 'admin.catalog.products.massupdate') {
+        if ($route !== 'admin.catalog.products.mass_update') {
             if (! isset($data['categories'])) {
                 $data['categories'] = [];
             }

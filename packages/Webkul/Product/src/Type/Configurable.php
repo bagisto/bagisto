@@ -160,7 +160,7 @@ class Configurable extends AbstractType
 
         $route = request()->route() ? request()->route()->getName() : '';
 
-        if ($route != 'admin.catalog.products.massupdate') {
+        if ($route != 'admin.catalog.products.mass_update') {
             $previousVariantIds = $product->variants->pluck('id');
 
             if (isset($data['variants'])) {

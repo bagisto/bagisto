@@ -220,7 +220,7 @@
             id="product-form"
             @click="onSubmit($event)"
             @submit.enter.prevent="onSubmit($event)"
-            action="{{ route('cart.add', $product->product_id) }}"
+            action="{{ route('shop.cart.add', $product->product_id) }}"
         >
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
 

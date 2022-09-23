@@ -7,13 +7,13 @@
 @section('account-content')
     <div class="account-layout">
         <div class="account-head">
-            <span class="back-icon"><a href="{{ route('customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
+            <span class="back-icon"><a href="{{ route('shop.customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
 
             <span class="account-heading">{{ __('shop::app.customer.account.review.index.title') }}</span>
 
             @if (count($reviews) > 1)
                 <div class="account-action">
-                    <form id="deleteAllReviewForm" action="{{ route('customer.review.deleteall') }}" method="post">
+                    <form id="deleteAllReviewForm" action="{{ route('shop.customer.review.delete_all') }}" method="post">
                         @method('delete')
 
                         @csrf
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="operations">
-                            <form id="deleteReviewForm{{ $review->id }}" action="{{ route('customer.review.delete', $review->id) }}" method="post">
+                            <form id="deleteReviewForm{{ $review->id }}" action="{{ route('shop.customer.review.delete', $review->id) }}" method="post">
                                 @method('delete')
                                 @csrf
                             </form>

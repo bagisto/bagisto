@@ -128,7 +128,7 @@
                         {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.parent_category.after') !!}
                     @endif
 
-                    <accordian title="{{ __('admin::app.catalog.categories.filterable-attributes') }}" :active="true">
+                    <accordian title="{{ __('admin::app.catalog.categories.filterable_attributes') }}" :active="true">
                         <div slot="body">
                             <?php $selectedaAtributes = old('attributes') ? old('attributes') : ['11']  ?>
 

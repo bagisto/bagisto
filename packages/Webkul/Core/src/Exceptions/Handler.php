@@ -52,7 +52,7 @@ class Handler extends AppExceptionHandler
             return response()->json(['error' => $this->jsonErrorMessages[401]], 401);
         }
 
-        return redirect()->guest(route('customer.session.index'));
+        return redirect()->guest(route('shop.customer.session.index'));
     }
 
     /**

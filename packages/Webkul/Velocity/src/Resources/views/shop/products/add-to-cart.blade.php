@@ -54,7 +54,7 @@
             @elseif(isset($addToCartForm) && ! $addToCartForm)
                 <form
                     method="POST"
-                    action="{{ route('cart.add', $product->product_id) }}">
+                    action="{{ route('shop.cart.add', $product->product_id) }}">
 
                     @csrf
 

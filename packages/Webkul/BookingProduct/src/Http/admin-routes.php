@@ -8,10 +8,10 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
         /**
          * Booking routes.
          */
-        Route::get('/bookings', [Webkul\BookingProduct\Http\Controllers\Admin\BookingController::class, 'index'])->defaults('_config', [
+        Route::get('bookings', [Webkul\BookingProduct\Http\Controllers\Admin\BookingController::class, 'index'])->defaults('_config', [
             'view' => 'bookingproduct::admin.sales.bookings.index',
         ])->name('admin.sales.bookings.index');
 
-        Route::get('/bookings/get', [Webkul\BookingProduct\Http\Controllers\Admin\BookingController::class, 'get'])->name('admin.sales.bookings.get');
+        Route::get('bookings/get', [Webkul\BookingProduct\Http\Controllers\Admin\BookingController::class, 'get'])->name('admin.sales.bookings.get');
     });
 });

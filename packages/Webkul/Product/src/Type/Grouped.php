@@ -87,7 +87,7 @@ class Grouped extends AbstractType
 
         $route = request()->route() ? request()->route()->getName() : '';
 
-        if ($route != 'admin.catalog.products.massupdate') {
+        if ($route != 'admin.catalog.products.mass_update') {
             $this->productGroupedProductRepository->saveGroupedProducts($data, $product);
         }
 

@@ -191,7 +191,7 @@ class CustomerController extends Controller
 
                     session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
 
-                    return redirect()->route('customer.session.index');
+                    return redirect()->route('shop.customer.session.index');
                 }
             } else {
                 session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
