@@ -67,7 +67,7 @@
 
                             <div class="control-group">
                                 <label for="name">{{ __('admin::app.customers.reviews.comment') }}</label>
-                                <textarea class="control" disabled>{{ $review->comment }}</textarea>
+                                <textarea class="control" disabled v-pre>{{ $review->comment }}</textarea>
                             </div>
 
                             @if (count($review->images) > 0)
