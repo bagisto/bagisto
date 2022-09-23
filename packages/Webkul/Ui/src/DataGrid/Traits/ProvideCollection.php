@@ -40,6 +40,7 @@ trait ProvideCollection
     {
         foreach ($parseInfo as $key => $info) {
             $columnType = $this->findColumnType($key)[0] ?? null;
+            
             $columnName = $this->findColumnType($key)[1] ?? null;
 
             if ($this->exceptionCheckInColumns($columnName)) {
@@ -57,7 +58,7 @@ trait ProvideCollection
     }
 
     /**
-     * Finalyze your collection here.
+     * Finalize your collection here.
      *
      * @return void
      */
