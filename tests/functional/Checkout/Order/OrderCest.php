@@ -109,7 +109,7 @@ class OrderCest
          * Simulate click on the 'place order' button at the last step.
          */
         $I->sendAjaxPostRequest(
-            route('shop.checkout.save-order'),
+            route('shop.checkout.save_order'),
             ['_token' => csrf_token()]
         );
 
