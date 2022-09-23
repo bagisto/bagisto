@@ -55,13 +55,13 @@ class EventTicket extends Booking
                 $price = $ticket->special_price;
 
                 $tickets[$index]['original_converted_price'] = core()->convertPrice($ticket->price);
-                $tickets[$index]['original_formated_price'] = core()->currency($ticket->price);
+                $tickets[$index]['original_formatted_price'] = core()->currency($ticket->price);
             }
 
             $tickets[$index]['id'] = $ticket->id;
             $tickets[$index]['converted_price'] = core()->convertPrice($price);
-            $tickets[$index]['formated_price'] = $formatedPrice = core()->currency($price);
-            $tickets[$index]['formated_price_text'] = __('bookingproduct::app.shop.products.per-ticket-price', ['price' => $formatedPrice]);
+            $tickets[$index]['formatted_price'] = $formattedPrice = core()->currency($price);
+            $tickets[$index]['formatted_price_text'] = __('bookingproduct::app.shop.products.per-ticket-price', ['price' => $formattedPrice]);
         }
 
         return $tickets;

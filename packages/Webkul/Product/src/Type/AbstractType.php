@@ -751,12 +751,12 @@ abstract class AbstractType
     {
         return [
             'regular_price' => [
-                'price'          => core()->convertPrice($this->evaluatePrice($regularPrice = $this->product->price)),
-                'formated_price' => core()->currency($this->evaluatePrice($regularPrice)),
+                'price'           => core()->convertPrice($this->evaluatePrice($regularPrice = $this->product->price)),
+                'formatted_price' => core()->currency($this->evaluatePrice($regularPrice)),
             ],
             'final_price'   => [
-                'price'          => core()->convertPrice($this->evaluatePrice($minimalPrice = $this->getMinimalPrice())),
-                'formated_price' => core()->currency($this->evaluatePrice($minimalPrice)),
+                'price'           => core()->convertPrice($this->evaluatePrice($minimalPrice = $this->getMinimalPrice())),
+                'formatted_price' => core()->currency($this->evaluatePrice($minimalPrice)),
             ],
         ];
     }

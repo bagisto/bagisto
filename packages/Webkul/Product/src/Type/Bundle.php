@@ -347,23 +347,23 @@ class Bundle extends AbstractType
         return [
             'from' => [
                 'regular_price' => [
-                    'price'          => core()->convertPrice($this->evaluatePrice($regularMinimalPrice = $this->getRegularMinimalPrice())),
-                    'formated_price' => core()->currency($this->evaluatePrice($regularMinimalPrice)),
+                    'price'           => core()->convertPrice($this->evaluatePrice($regularMinimalPrice = $this->getRegularMinimalPrice())),
+                    'formatted_price' => core()->currency($this->evaluatePrice($regularMinimalPrice)),
                 ],
                 'final_price'   => [
-                    'price'          => core()->convertPrice($this->evaluatePrice($minimalPrice = $this->getMinimalPrice())),
-                    'formated_price' => core()->currency($this->evaluatePrice($minimalPrice)),
+                    'price'           => core()->convertPrice($this->evaluatePrice($minimalPrice = $this->getMinimalPrice())),
+                    'formatted_price' => core()->currency($this->evaluatePrice($minimalPrice)),
                 ],
             ],
 
             'to' => [
                 'regular_price' => [
-                    'price'          => core()->convertPrice($this->evaluatePrice($regularMaximumPrice = $this->getRegularMaximumPrice())),
-                    'formated_price' => core()->currency($this->evaluatePrice($regularMaximumPrice)),
+                    'price'           => core()->convertPrice($this->evaluatePrice($regularMaximumPrice = $this->getRegularMaximumPrice())),
+                    'formatted_price' => core()->currency($this->evaluatePrice($regularMaximumPrice)),
                 ],
                 'final_price'   => [
-                    'price'          => core()->convertPrice($this->evaluatePrice($maximumPrice = $this->getMaximumPrice())),
-                    'formated_price' => core()->currency($this->evaluatePrice($maximumPrice)),
+                    'price'           => core()->convertPrice($this->evaluatePrice($maximumPrice = $this->getMaximumPrice())),
+                    'formatted_price' => core()->currency($this->evaluatePrice($maximumPrice)),
                 ],
             ],
         ];
@@ -407,10 +407,10 @@ class Bundle extends AbstractType
         $priceHtml .= '<div class="price-from">';
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
-            $priceHtml .= '<span class="bundle-regular-price">' . $prices['from']['regular_price']['formated_price'] . '</span>'
-                . '<span class="bundle-special-price">' . $prices['from']['final_price']['formated_price'] . '</span>';
+            $priceHtml .= '<span class="bundle-regular-price">' . $prices['from']['regular_price']['formatted_price'] . '</span>'
+                . '<span class="bundle-special-price">' . $prices['from']['final_price']['formatted_price'] . '</span>';
         } else {
-            $priceHtml .= '<span>' . $prices['from']['regular_price']['formated_price'] . '</span>';
+            $priceHtml .= '<span>' . $prices['from']['regular_price']['formatted_price'] . '</span>';
         }
 
         if ($prices['from']['regular_price']['price'] != $prices['to']['regular_price']['price']
@@ -419,10 +419,10 @@ class Bundle extends AbstractType
             $priceHtml .= '<span class="bundle-to">To</span>';
 
             if ($prices['to']['regular_price']['price'] != $prices['to']['final_price']['price']) {
-                $priceHtml .= '<span class="bundle-regular-price">' . $prices['to']['regular_price']['formated_price'] . '</span>'
-                    . '<span class="bundle-special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
+                $priceHtml .= '<span class="bundle-regular-price">' . $prices['to']['regular_price']['formatted_price'] . '</span>'
+                    . '<span class="bundle-special-price">' . $prices['to']['final_price']['formatted_price'] . '</span>';
             } else {
-                $priceHtml .= '<span>' . $prices['to']['regular_price']['formated_price'] . '</span>';
+                $priceHtml .= '<span>' . $prices['to']['regular_price']['formatted_price'] . '</span>';
             }
         }
 

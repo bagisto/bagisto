@@ -117,7 +117,7 @@ class DashboardController extends Controller
             $total = $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total_invoiced') - $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total_refunded');
 
             $statistics['sale_graph']['total'][] = $total;
-            $statistics['sale_graph']['formated_total'][] = core()->formatBasePrice($total);
+            $statistics['sale_graph']['formatted_total'][] = core()->formatBasePrice($total);
         }
 
         return view($this->_config['view'], compact('statistics'))->with(['startDate' => $this->startDate, 'endDate' => $this->endDate]);

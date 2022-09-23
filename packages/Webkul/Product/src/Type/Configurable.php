@@ -618,10 +618,10 @@ class Configurable extends AbstractType
 
         return [
             'regular_price' => [
-                'formated_price' => $haveOffer
+                'formatted_price' => $haveOffer
                     ? core()->currency($this->evaluatePrice($offerPrice = $this->getOfferPrice()))
                     : core()->currency($this->evaluatePrice($minimalPrice = $this->getMinimalPrice())),
-                'price'          => $haveOffer
+                'price'           => $haveOffer
                     ? $this->evaluatePrice($offerPrice)
                     : $this->evaluatePrice($minimalPrice),
             ],

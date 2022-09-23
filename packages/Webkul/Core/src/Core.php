@@ -968,7 +968,7 @@ class Core
                     ? $endDate
                     : Carbon::createFromTimeString($date->addMonth()->subDay()->format('Y-m-d') . ' 23:59:59');
 
-                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('M')];
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('M')];
             }
         } elseif ($totalWeeks > 6) {
             for ($i = 0; $i < $totalWeeks; $i++) {
@@ -982,7 +982,7 @@ class Core
                     ? $endDate
                     : Carbon::createFromTimeString($this->xWeekRange($date->subDay(), 1) . ' 23:59:59');
 
-                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('d M')];
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('d M')];
             }
         } else {
             for ($i = 0; $i < $totalDays; $i++) {
@@ -992,7 +992,7 @@ class Core
                 $start = Carbon::createFromTimeString($date->format('Y-m-d') . ' 00:00:01');
                 $end = Carbon::createFromTimeString($date->format('Y-m-d') . ' 23:59:59');
 
-                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('d M')];
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('d M')];
             }
         }
 

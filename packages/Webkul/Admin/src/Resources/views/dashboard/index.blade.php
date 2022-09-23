@@ -529,7 +529,7 @@
                         displayColors: false,
                         callbacks: {
                             label: function(tooltipItem, dataTemp) {
-                                return data['formated_total'][tooltipItem.index];
+                                return data['formatted_total'][tooltipItem.index];
                             }
                         }
                     }
