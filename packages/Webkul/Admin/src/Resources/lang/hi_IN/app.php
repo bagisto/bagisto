@@ -626,6 +626,7 @@ return [
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
             'video-size'                    => 'Maximum video size should be like :size',
+            'atleast-one-bundle-item'       => 'बंडल उत्पाद के लिए कम से कम एक उत्पाद जोड़ें',
         ],
 
         'attributes' => [

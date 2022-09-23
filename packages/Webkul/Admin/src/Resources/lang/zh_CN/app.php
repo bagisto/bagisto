@@ -610,7 +610,7 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
-        ],
+            'atleast-one-bundle-item' => '為捆綁產品添加至少一種產品',
 
         'attributes' => [
             'title'                       => '属性列表',

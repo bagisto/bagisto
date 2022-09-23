@@ -155,6 +155,17 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
+        $product = $this->productRepository->find($id);
+
+        if (
+            (($product->type == 'bundle') 
+            && (($request->get('bundle_options') == null)))
+        ) {
+            session()->flash('warning', trans('admin::app.catalog.products.atleast-one-bundle-item'));
+
+            return back();
+        }
+
         Event::dispatch('catalog.product.update.before', $id);
 
         $product = $this->productRepository->update(request()->all(), $id);

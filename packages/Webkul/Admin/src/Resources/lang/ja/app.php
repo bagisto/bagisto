@@ -629,6 +629,7 @@ return [
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
             'video-size'                    => 'Maximum video size should be like :size',
+            'atleast-one-bundle-item' => 'Add atleast one product for bundle product',
         ],
 
         'attributes' => [

@@ -610,6 +610,8 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'atleast-one-bundle-item' => 'حداقل یک محصول برای محصول بسته اضافه کنید',
+        ],
         ],
 
         'attributes' => [

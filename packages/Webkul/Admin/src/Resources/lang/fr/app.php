@@ -628,6 +628,7 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'atleast-one-bundle-item' => 'Ajouter au moins un produit pour le produit groupé',
         ],
 
         'attributes' => [

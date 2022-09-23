@@ -615,6 +615,7 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'atleast-one-bundle-item' => 'Fügen Sie mindestens ein Produkt für das Bundle-Produkt hinzu',
         ],
         'attributes'            =>
         [
