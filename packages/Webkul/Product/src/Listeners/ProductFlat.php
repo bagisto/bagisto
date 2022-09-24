@@ -9,7 +9,6 @@ use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Helpers\ProductType;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Core\Repositories\ChannelRepository;
 
 class ProductFlat
@@ -234,7 +233,7 @@ class ProductFlat
                             }
                         }
 
-                        $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
+                        $productFlat->{$attribute->code} = $productAttributeValue[$attribute->column_name] ?? null;
 
                         if ($attribute->type == 'select') {
                             $attributeOption = $this->getAttributeOptions($productFlat->{$attribute->code});

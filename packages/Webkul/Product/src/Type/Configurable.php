@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
 
 class Configurable extends AbstractType
@@ -243,7 +242,7 @@ class Configurable extends AbstractType
 
             $attribute = $this->getAttributeByCode($attributeCode);
 
-            $attributeTypeFields = $this->getAttributeTypeValues($attribute->type, $data[$attributeCode]);
+            $attributeTypeFields = $this->getAttributeTypeValues($attribute, $data[$attributeCode]);
 
             if ($attribute->value_per_channel) {
                 if ($attribute->value_per_locale) {
@@ -291,7 +290,7 @@ class Configurable extends AbstractType
         foreach ($permutation as $attributeId => $optionId) {
             $attribute = $this->getAttributeById($attributeId);
 
-            $attributeValues[] = array_merge($this->getAttributeTypeValues($attribute->type, $optionId), [
+            $attributeValues[] = array_merge($this->getAttributeTypeValues($attribute, $optionId), [
                 'product_id'   => $variant->id,
                 'attribute_id' => $attributeId,
                 'channel'      => null,
@@ -309,15 +308,15 @@ class Configurable extends AbstractType
     }
 
     /**
-     * @param  string  $attributeType
+     * @param  mixed  $attribute
      * @param  mixed  $value
      * @return array
      */
-    public function getAttributeTypeValues($attributeType, $value)
+    public function getAttributeTypeValues($attribute, $value)
     {
-        $attributeTypeFields = array_fill_keys(array_values(ProductAttributeValue::$attributeTypeFields), null);
+        $attributeTypeFields = array_fill_keys(array_values($attribute->column_name), null);
 
-        $attributeTypeFields[ProductAttributeValue::$attributeTypeFields[$attributeType]] = $value;
+        $attributeTypeFields[$attribute->column_name] = $value;
 
         return $attributeTypeFields;
     }
@@ -368,7 +367,7 @@ class Configurable extends AbstractType
                 }
             }
 
-            $columnName = ProductAttributeValue::$attributeTypeFields[$attribute->type];
+            $columnName = $attribute->column_name;
 
             if (! $productAttributeValue) {
                 $this->attributeValueRepository->create([

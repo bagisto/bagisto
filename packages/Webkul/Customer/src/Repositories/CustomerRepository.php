@@ -2,12 +2,29 @@
 
 namespace Webkul\Customer\Repositories;
 
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Sales\Models\Order;
 
 class CustomerRepository extends Repository
 {
+    /**
+     * Create a new repository instance.
+     *
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
+     * @param  \Illuminate\Container\Container  $container
+     * @return void
+     */
+    public function __construct(
+        protected CustomerGroupRepository $customerGroupRepository,
+        Container $container
+    )
+    {
+        parent::__construct($container);
+    }
+
     /**
      * Specify model class name.
      *
@@ -29,6 +46,20 @@ class CustomerRepository extends Repository
         return $customer->all_orders->pluck('status')->contains(function ($val) {
             return $val === 'pending' || $val === 'processing';
         });
+    }
+
+    /**
+     * Returns current customer group
+     *
+     * @return \Webkul\Customer\Models\CustomerGroup
+     */
+    public function getCurrentGroup()
+    {
+        if ($customer = auth()->guard()->user()) {
+            $customerGroupId = $customer->customer_group;
+        }
+        
+        return $this->customerGroupRepository->getCustomerGuestGroup();
     }
 
     /**

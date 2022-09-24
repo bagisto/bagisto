@@ -10,7 +10,6 @@ use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
@@ -242,7 +241,7 @@ abstract class AbstractType
                 }
             }
 
-            $columnName = ProductAttributeValue::$attributeTypeFields[$attribute->type];
+            $columnName = $attribute->column_name;
 
             if (! $productAttributeValue) {
                 $this->attributeValueRepository->create([

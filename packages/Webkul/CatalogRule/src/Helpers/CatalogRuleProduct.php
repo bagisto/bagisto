@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\CatalogRule\Repositories\CatalogRuleProductRepository;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Rule\Helpers\Validator;
 
 class CatalogRuleProduct
@@ -169,7 +168,7 @@ class CatalogRuleProduct
                ->where('pav_' . $attribute->code . '.attribute_id', $attribute->id);
         });
 
-        $query = $query->addSelect('pav_' . $attribute->code . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $attribute->code);
+        $query = $query->addSelect('pav_' . $attribute->code . '.' . $attribute->column_name . ' as ' . $attribute->code);
 
         return $query;
     }

@@ -524,7 +524,7 @@ class Product extends Model implements ProductContract
             }
         }
 
-        return self::$loadedAttributeValues[$this->id][$attribute->id] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
+        return self::$loadedAttributeValues[$this->id][$attribute->id] = $attributeValue[$attribute->column_name] ?? null;
     }
 
     /**

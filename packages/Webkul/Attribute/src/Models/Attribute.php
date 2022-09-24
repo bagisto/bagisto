@@ -37,6 +37,25 @@ class Attribute extends TranslatableModel implements AttributeContract
     ];
 
     /**
+     * Attribute type fields.
+     *
+     * @var array
+     */
+    protected $attributeTypeFields = [
+        'text'        => 'text_value',
+        'textarea'    => 'text_value',
+        'price'       => 'float_value',
+        'boolean'     => 'boolean_value',
+        'select'      => 'integer_value',
+        'multiselect' => 'text_value',
+        'datetime'    => 'datetime_value',
+        'date'        => 'date_value',
+        'file'        => 'text_value',
+        'image'       => 'text_value',
+        'checkbox'    => 'text_value',
+    ];
+
+    /**
      * Get the options.
      */
     public function options(): HasMany
@@ -65,5 +84,15 @@ class Attribute extends TranslatableModel implements AttributeContract
     protected static function newFactory(): Factory
     {
         return AttributeFactory::new();
+    }
+
+    /**
+     * Returns attribute value table column based attribute type
+     *
+     * @return string
+     */
+    protected function getColumnNameAttribute()
+    {
+        return $this->attributeTypeFields[$this->type];
     }
 }

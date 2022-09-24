@@ -4,25 +4,28 @@ namespace Webkul\Velocity\Repositories\Product;
 
 use Illuminate\Container\Container;
 use Webkul\Product\Repositories\ProductRepository as BaseProductRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Models\ProductAttributeValue;
 
 class ProductRepository extends BaseProductRepository
 {
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
+        protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
         Container $container
     )
     {
         parent::__construct(
+            $customerRepository,
             $attributeRepository,
             $container
         );
@@ -93,7 +96,7 @@ class ProductRepository extends BaseProductRepository
 
                             $query = $query->leftJoin('product_attribute_values as ' . $aliasTemp, $table . '.id', '=', $aliasTemp . '.product_id');
 
-                            $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
+                            $column = $attribute->column_name;
 
                             $temp = explode(',', request()->get($attribute->code));
 
