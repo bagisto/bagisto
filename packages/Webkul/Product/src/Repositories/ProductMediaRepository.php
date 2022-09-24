@@ -87,11 +87,13 @@ class ProductMediaRepository extends Repository
         }
 
         foreach ($previousIds as $indexOrModelId) {
-            if ($model = $this->find($indexOrModelId)) {
-                Storage::delete($model->path);
-
-                $this->delete($indexOrModelId);
+            if (! $model = $this->find($indexOrModelId)) {
+                continue;
             }
+
+            Storage::delete($model->path);
+
+            $this->delete($indexOrModelId);
         }
     }
 
