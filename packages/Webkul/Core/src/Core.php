@@ -1055,13 +1055,15 @@ class Core
     public function getConfigField($fieldName)
     {
         foreach (config('core') as $coreData) {
-            if (isset($coreData['fields'])) {
-                foreach ($coreData['fields'] as $field) {
-                    $name = $coreData['key'] . '.' . $field['name'];
+            if (! isset($coreData['fields'])) {
+                continue;
+            }
 
-                    if ($name == $fieldName) {
-                        return $field;
-                    }
+            foreach ($coreData['fields'] as $field) {
+                $name = $coreData['key'] . '.' . $field['name'];
+
+                if ($name == $fieldName) {
+                    return $field;
                 }
             }
         }
@@ -1077,24 +1079,34 @@ class Core
     {
         foreach ($items as $key1 => $level1) {
             unset($items[$key1]);
+
             $items[$level1['key']] = $level1;
 
-            if (count($level1['children'])) {
-                foreach ($level1['children'] as $key2 => $level2) {
-                    $temp2 = explode('.', $level2['key']);
-                    $finalKey2 = end($temp2);
-                    unset($items[$level1['key']]['children'][$key2]);
-                    $items[$level1['key']]['children'][$finalKey2] = $level2;
+            if (! count($level1['children'])) {
+                continue;
+            }
 
-                    if (count($level2['children'])) {
-                        foreach ($level2['children'] as $key3 => $level3) {
-                            $temp3 = explode('.', $level3['key']);
-                            $finalKey3 = end($temp3);
-                            unset($items[$level1['key']]['children'][$finalKey2]['children'][$key3]);
-                            $items[$level1['key']]['children'][$finalKey2]['children'][$finalKey3] = $level3;
-                        }
-                    }
+            foreach ($level1['children'] as $key2 => $level2) {
+                $temp2 = explode('.', $level2['key']);
 
+                $finalKey2 = end($temp2);
+
+                unset($items[$level1['key']]['children'][$key2]);
+
+                $items[$level1['key']]['children'][$finalKey2] = $level2;
+
+                if (! count($level2['children'])) {
+                    continue;
+                } 
+
+                foreach ($level2['children'] as $key3 => $level3) {
+                    $temp3 = explode('.', $level3['key']);
+
+                    $finalKey3 = end($temp3);
+
+                    unset($items[$level1['key']]['children'][$finalKey2]['children'][$key3]);
+
+                    $items[$level1['key']]['children'][$finalKey2]['children'][$finalKey3] = $level3;
                 }
             }
         }
@@ -1195,9 +1207,9 @@ class Core
      */
     public function getSenderEmailDetails()
     {
-        $sender_name = $this->getConfigData('emails.configure.email_settings.sender_name') ? $this->getConfigData('emails.configure.email_settings.sender_name') : config('mail.from.name');
+        $sender_name = $this->getConfigData('emails.configure.email_settings.sender_name') ?? config('mail.from.name');
 
-        $sender_email = $this->getConfigData('emails.configure.email_settings.shop_email_from') ? $this->getConfigData('emails.configure.email_settings.shop_email_from') : config('mail.from.address');
+        $sender_email = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?? config('mail.from.address');
 
         return [
             'name'  => $sender_name,
@@ -1212,9 +1224,9 @@ class Core
      */
     public function getAdminEmailDetails()
     {
-        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ? $this->getConfigData('emails.configure.email_settings.admin_name') : config('mail.admin.name');
+        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ?? config('mail.admin.name');
 
-        $admin_email = $this->getConfigData('emails.configure.email_settings.admin_email') ? $this->getConfigData('emails.configure.email_settings.admin_email') : config('mail.admin.address');
+        $admin_email = $this->getConfigData('emails.configure.email_settings.admin_email') ?? config('mail.admin.address');
 
         return [
             'name'  => $admin_name,

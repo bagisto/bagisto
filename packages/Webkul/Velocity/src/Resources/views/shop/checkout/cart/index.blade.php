@@ -125,7 +125,7 @@
                                                 @php
                                                     $moveToWishlist = trans('shop::app.checkout.cart.move-to-wishlist');
 
-                                                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                                                    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
                                                 @endphp
 
                                                 <div class="no-padding col-12 cursor-pointer fs16 item-actions">

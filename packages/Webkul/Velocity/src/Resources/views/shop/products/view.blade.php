@@ -175,8 +175,7 @@
                                                 'form' => false,
                                                 'product' => $product,
                                                 'showCartIcon' => false,
-                                                'showCompare' => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                                ? true : false,
+                                                'showCompare' => (bool) core()->getConfigData('general.content.shop.compare_option'),
                                             ])
                                         </div>
                                     </div>

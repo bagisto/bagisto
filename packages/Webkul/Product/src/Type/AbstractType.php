@@ -192,7 +192,7 @@ abstract class AbstractType
 
             if (
                 $attribute->type === 'price'
-                && ! empty($data[$attribute->code])
+                && empty($data[$attribute->code])
             ) {
                 $data[$attribute->code] = null;
             }

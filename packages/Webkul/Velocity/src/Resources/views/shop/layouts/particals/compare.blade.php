@@ -1,5 +1,5 @@
 @php
-    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+    $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
 @endphp
 
 @if ($showCompare)

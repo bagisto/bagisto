@@ -19,9 +19,9 @@
             @php
                 $subMenuCollection = [];
 
-                $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
 
-                $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
 
                 try {
                     $subMenuCollection['profile'] = $menuItem['children']['profile'];

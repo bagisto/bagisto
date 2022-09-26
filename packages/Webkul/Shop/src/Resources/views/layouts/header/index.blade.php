@@ -58,11 +58,9 @@
                 {!! view_render_event('bagisto.shop.layout.header.comppare-item.before') !!}
 
                 @php
-                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
-                @endphp
+                    $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
 
-                @php
-                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
                 @endphp
 
                 {!! view_render_event('bagisto.shop.layout.header.compare-item.after') !!}

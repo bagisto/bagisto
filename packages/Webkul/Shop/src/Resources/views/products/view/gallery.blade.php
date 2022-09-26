@@ -57,7 +57,7 @@
 
                 @auth('customer')
                     @php
-                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                        $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
                     @endphp
 
                     @if ($showWishlist)

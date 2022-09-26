@@ -70,8 +70,7 @@
                             'addWishlistClass'  => 'pl10',
                             'product'           => $product,
                             'addToCartBtnClass' => 'medium-padding',
-                            'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                    ? true : false,
+                            'showCompare'       => (bool) core()->getConfigData('general.content.shop.compare_option'),
                         ])
                     </div>
                 </div>
@@ -149,8 +148,7 @@
                         'reloadPage'        => $reloadPage ?? null,
                         'addToCartForm'     => $addToCartForm ?? false,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',
-                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                ? true : false,
+                        'showCompare'       => (bool) core()->getConfigData('general.content.shop.compare_option'),
                     ])
                 </div>
             </div>
