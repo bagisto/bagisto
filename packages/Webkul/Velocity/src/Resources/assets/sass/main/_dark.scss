@@ -225,20 +225,15 @@
     }
 
     .theme-btn {
-        border-color: $dark-mode-theme-color !important;
-        background-color: $dark-mode-theme-color !important;
-        border: 1px solid $white !important;
-
         &.light {
             background-color: $white !important;
 
             &:hover {
                 background-color: $white !important;
             }
-        } 
+        }
     }
 
-    .theme-btn:hover,
     .btn-add-to-cart:hover {
         border-color: $dark-mode-dark-theme-color !important;
         background-color: $dark-mode-dark-theme-color !important;
