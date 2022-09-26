@@ -61,19 +61,13 @@
                         <a href="{{ route('shop.customer.orders.index') }}" class="unset">{{ __('velocity::app.shop.general.orders') }}</a>
                     </li>
 
-                    @php
-                        $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
-
-                        $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
-                    @endphp
-
-                    @if ($showWishlist)
+                    @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
                         <li>
                             <a href="{{ route('shop.customer.wishlist.index') }}" class="unset">{{ __('shop::app.header.wishlist') }}</a>
                         </li>
                     @endif
 
-                    @if ($showCompare)
+                    @if ((bool) core()->getConfigData('general.content.shop.compare_option'))
                         <li>
                             <a href="{{ route('velocity.customer.product.compare') }}" class="unset">{{ __('velocity::app.customer.compare.text') }}</a>
                         </li>

@@ -124,13 +124,11 @@
 
                                                 @php
                                                     $moveToWishlist = trans('shop::app.checkout.cart.move-to-wishlist');
-
-                                                    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
                                                 @endphp
 
                                                 <div class="no-padding col-12 cursor-pointer fs16 item-actions">
                                                     @auth('customer')
-                                                        @if ($showWishlist)
+                                                        @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
                                                             @if (
                                                                 $item->parent_id != 'null'
                                                                 || $item->parent_id != null

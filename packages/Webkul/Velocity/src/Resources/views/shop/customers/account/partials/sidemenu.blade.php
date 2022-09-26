@@ -19,20 +19,16 @@
             @php
                 $subMenuCollection = [];
 
-                $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
-
-                $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
-
                 try {
                     $subMenuCollection['profile'] = $menuItem['children']['profile'];
                     $subMenuCollection['orders'] = $menuItem['children']['orders'];
                     $subMenuCollection['downloadables'] = $menuItem['children']['downloadables'];
 
-                    if ($showWishlist) {
+                    if ((bool) core()->getConfigData('general.content.shop.wishlist_option')) {
                         $subMenuCollection['wishlist'] = $menuItem['children']['wishlist'];
                     }
 
-                    if ($showCompare) {
+                    if ((bool) core()->getConfigData('general.content.shop.compare_option')) {
                         $subMenuCollection['compare'] = $menuItem['children']['compare'];
                     }
 

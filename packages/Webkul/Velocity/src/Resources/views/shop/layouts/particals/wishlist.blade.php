@@ -1,9 +1,4 @@
-@php
-    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
-@endphp
-
-@if($showWishlist)
-
+@if((bool) core()->getConfigData('general.content.shop.wishlist_option'))
     <wishlist-component-with-badge
         is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
         is-text="{{ isset($isText) && $isText ? 'true' : 'false' }}"
