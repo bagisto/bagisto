@@ -498,6 +498,10 @@ class Product extends Model implements ProductContract
             return self::$loadedAttributeValues[$this->id][$attribute->id];
         }
 
+        if (empty($this->attribute_values->count())) {
+            $this->load('attribute_values');
+        }
+
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
                 $attributeValue = $this->attribute_values

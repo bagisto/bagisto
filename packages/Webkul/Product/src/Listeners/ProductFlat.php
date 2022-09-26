@@ -199,7 +199,10 @@ class ProductFlat
                         if (
                             (
                                 $parentProduct
-                                && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], $this->fillableAttributeCodes))
+                                && ! in_array($attribute->code, array_merge(
+                                    $superAttributes[$parentProduct->id],
+                                    $this->fillableAttributeCodes
+                                ))
                             )
                             || in_array($attribute->code, ['tax_category_id'])
                             || ! in_array($attribute->code, $this->flatColumns)

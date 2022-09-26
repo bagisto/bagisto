@@ -240,18 +240,16 @@ abstract class AbstractType
                 }
             }
 
-            $columnName = $attribute->column_name;
-
             if (! $productAttributeValue) {
                 $this->attributeValueRepository->create([
-                    'product_id'   => $product->id,
-                    'attribute_id' => $attribute->id,
-                    $columnName    => $data[$attribute->code],
-                    'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale'       => $attribute->value_per_locale ? $data['locale'] : null,
+                    'product_id'            => $product->id,
+                    'attribute_id'          => $attribute->id,
+                    $attribute->column_name => $data[$attribute->code],
+                    'channel'               => $attribute->value_per_channel ? $data['channel'] : null,
+                    'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
                 ]);
             } else {
-                $productAttributeValue->update([$columnName => $data[$attribute->code]]);
+                $productAttributeValue->update([$attribute->column_name => $data[$attribute->code]]);
 
                 if (
                     $attribute->type == 'image'
