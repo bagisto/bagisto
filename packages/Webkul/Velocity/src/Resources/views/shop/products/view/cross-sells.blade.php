@@ -10,7 +10,6 @@
 @endforeach
 
 @if (isset($products))
-
     <card-list-header
         heading="{{ __('shop::app.products.cross-sell-title') }}"
         view-all="false"

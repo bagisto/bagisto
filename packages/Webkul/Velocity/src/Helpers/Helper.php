@@ -290,17 +290,15 @@ class Helper extends Review
             'firstReviewText'  => trans('velocity::app.products.be-first-review'),
             'addToCartHtml'    => view('shop::products.add-to-cart', [
                 'product'          => $product,
-                'addWishlistClass' => ! (isset($list) && $list) ? '' : '',
+                'addWishlistClass' => '',
 
                 'showCompare' => (bool) core()->getConfigData('general.content.shop.compare_option'),
 
-                'btnText' => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
-                    ? $metaInformation['btnText'] : null,
+                'btnText' => $metaInformation['btnText'] ?? null,
 
-                'moveToCart' => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
-                    ? $metaInformation['moveToCart'] : null,
+                'moveToCart' => $metaInformation['moveToCart'] ?? null,
 
-                'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
+                'addToCartBtnClass' => empty($list) ? 'small-padding' : '',
             ])->render(),
         ];
     }

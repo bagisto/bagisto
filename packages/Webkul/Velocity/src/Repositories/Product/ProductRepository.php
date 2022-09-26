@@ -122,7 +122,7 @@ class ProductRepository extends BaseProductRepository
             });
 
             return $query->groupBy('product_flat.id');
-        })->paginate(isset($params['limit']) ? $params['limit'] : 9);
+        })->paginate($params['limit'] ?? 9);
 
         return $results;
     }

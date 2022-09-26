@@ -124,20 +124,22 @@ class Configurable extends AbstractType
     {
         $product = $this->productRepository->getModel()->create($data);
 
-        if (isset($data['super_attributes'])) {
-            $super_attributes = [];
+        if (! isset($data['super_attributes'])) {
+            return $product;
+        }
 
-            foreach ($data['super_attributes'] as $attributeCode => $attributeOptions) {
-                $attribute = $this->getAttributeByCode($attributeCode);
+        $super_attributes = [];
 
-                $super_attributes[$attribute->id] = $attributeOptions;
+        foreach ($data['super_attributes'] as $attributeCode => $attributeOptions) {
+            $attribute = $this->getAttributeByCode($attributeCode);
 
-                $product->super_attributes()->attach($attribute->id);
-            }
+            $super_attributes[$attribute->id] = $attributeOptions;
 
-            foreach (array_permutation($super_attributes) as $permutation) {
-                $this->createVariant($product, $permutation);
-            }
+            $product->super_attributes()->attach($attribute->id);
+        }
+
+        foreach (array_permutation($super_attributes) as $permutation) {
+            $this->createVariant($product, $permutation);
         }
 
         return $product;

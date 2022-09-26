@@ -559,7 +559,8 @@ class Bundle extends AbstractType
             isset($options1['bundle_options'])
             && isset($options2['bundle_options'])
         ) {
-            return $options1['bundle_options'] == $options2['bundle_options'] && $options1['bundle_option_qty'] == $this->getOptionQuantities($options2);
+            return $options1['bundle_options'] == $options2['bundle_options']
+                && $options1['bundle_option_qty'] == $this->getOptionQuantities($options2);
         }
 
         if (! isset($options1['bundle_options'])) {

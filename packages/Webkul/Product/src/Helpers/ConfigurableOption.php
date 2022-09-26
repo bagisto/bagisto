@@ -43,7 +43,7 @@ class ConfigurableOption extends AbstractProduct
 
         $config = [
             'attributes'     => $this->getAttributesData($product, $options),
-            'index'          => isset($options['index']) ? $options['index'] : [],
+            'index'          => $options['index'] ?? [],
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
             'variant_videos' => $this->getVariantVideos($product),

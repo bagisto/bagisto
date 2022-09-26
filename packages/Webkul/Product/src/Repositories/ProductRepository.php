@@ -97,7 +97,7 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Retrive product from slug.
+     * Retrieve product from slug.
      *
      * @param  string  $slug
      * @param  string  $columns

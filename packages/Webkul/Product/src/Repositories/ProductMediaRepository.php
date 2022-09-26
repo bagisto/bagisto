@@ -50,10 +50,7 @@ class ProductMediaRepository extends Repository
          */
         $previousIds = $this->resolveFileTypeQueryBuilder($product, $uploadFileType)->pluck('id');
 
-        if (
-            isset($data[$uploadFileType]['files'])
-            && $data[$uploadFileType]['files']
-        ) {
+        if (! empty($data[$uploadFileType]['files'])) {
             foreach ($data[$uploadFileType]['files'] as $indexOrModelId => $file) {
                 if ($file instanceof UploadedFile) {
                     $this->create([
@@ -66,10 +63,7 @@ class ProductMediaRepository extends Repository
                     /**
                      * Filter out existing models because new model positions are already setup by index.
                      */
-                    if (
-                        isset($data[$uploadFileType]['positions'])
-                        && $data[$uploadFileType]['positions']
-                    ) {
+                    if (! empty($data[$uploadFileType]['positions'])) {
                         $positions = collect($data[$uploadFileType]['positions'])->keys()->filter(function ($position) {
                             return is_numeric($position);
                         });

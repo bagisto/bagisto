@@ -102,9 +102,7 @@ class Handler extends AppExceptionHandler
     {
         if (request()->expectsJson()) {
             return response()->json([
-                'error' => isset($this->jsonErrorMessages[$statusCode])
-                    ? $this->jsonErrorMessages[$statusCode]
-                    : 'Something went wrong, please try again later.'
+                'error' => $this->jsonErrorMessages[$statusCode] ?? 'Something went wrong, please try again later.',
             ], $statusCode);
         }
 

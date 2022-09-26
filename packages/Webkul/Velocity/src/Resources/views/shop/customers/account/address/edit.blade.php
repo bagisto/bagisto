@@ -114,7 +114,7 @@
                     id="address_0"
                     type="text"
                     name="address1[]"
-                    value="{{ isset($addresses[0]) ? $addresses[0] : '' }}"
+                    value="{{ $addresses[0] ?? '' }}"
                     v-validate="'required'"
                     data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
 

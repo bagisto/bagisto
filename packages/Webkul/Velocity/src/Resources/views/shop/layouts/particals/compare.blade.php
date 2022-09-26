@@ -6,7 +6,7 @@
 
     <compare-component-with-badge
         is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
-        is-text="{{ isset($isText) && $isText ? 'true' : 'false' }}"
+        is-text="{{ ! empty($isText) ? 'true' : 'false' }}"
         src="{{ auth()->guard('customer')->check() ? route('velocity.customer.product.compare') : route('velocity.product.compare') }}">
     </compare-component-with-badge>
 

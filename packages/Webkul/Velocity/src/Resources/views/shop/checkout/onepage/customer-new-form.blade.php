@@ -1,7 +1,4 @@
-@if (
-    isset($shipping)
-    && $shipping
-)
+@if (! empty($shipping))
     <div :class="`col-12 form-field mb30 ${errors.has('address-form.shipping[first_name]') ? 'has-error' : ''}`">
         <label for="shipping[first_name]" class="mandatory" style="width: unset;">
             {{ __('shop::app.checkout.onepage.first-name') }}
@@ -266,10 +263,7 @@
             </span>
         </div>
     @endauth
-@elseif (
-    isset($billing)
-    && $billing
-)
+@elseif (! empty($billing))
     <div :class="`col-12 form-field ${errors.has('address-form.billing[company_name]') ? 'has-error' : ''}`">
         <label for="billing[company_name]">
             {{ __('shop::app.checkout.onepage.company-name') }}

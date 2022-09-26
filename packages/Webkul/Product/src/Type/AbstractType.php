@@ -176,7 +176,7 @@ abstract class AbstractType
                 $attribute->type === 'boolean'
                 && $route !== 'admin.catalog.products.mass_update'
             ) {
-                $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
+                $data[$attribute->code] = ! empty($data[$attribute->code]);
             }
 
             if (
@@ -192,8 +192,7 @@ abstract class AbstractType
 
             if (
                 $attribute->type === 'price'
-                && isset($data[$attribute->code])
-                && $data[$attribute->code] === ''
+                && ! empty($data[$attribute->code])
             ) {
                 $data[$attribute->code] = null;
             }

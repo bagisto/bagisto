@@ -1260,14 +1260,8 @@ class Core
     {
         $fields = $this->getConfigField($field);
 
-        if (
-            isset($fields['channel_based'])
-            && $fields['channel_based']
-        ) {
-            if (
-                isset($fields['locale_based'])
-                && $fields['locale_based']
-            ) {
+        if (! empty($fields['channel_based'])) {
+            if (! empty($fields['locale_based'])) {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
                     'code'         => $field,
                     'channel_code' => $channel,
@@ -1280,10 +1274,7 @@ class Core
                 ]);
             }
         } else {
-            if (
-                isset($fields['locale_based'])
-                && $fields['locale_based']
-            ) {
+            if (! empty($fields['locale_based'])) {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
                     'code'        => $field,
                     'locale_code' => $locale,

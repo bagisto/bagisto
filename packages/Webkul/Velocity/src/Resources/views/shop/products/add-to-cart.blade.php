@@ -1,10 +1,7 @@
 {!! view_render_event('bagisto.shop.products.add_to_cart.before', ['product' => $product]) !!}
 
     <div class="mx-0 no-padding">
-        @if (
-            isset($showCompare)
-            && $showCompare
-        )
+        @if (! empty($showCompare))
             <compare-component
                 @auth('customer')
                     customer="true"
@@ -21,10 +18,7 @@
         @endif
 
         @if (
-            ! (
-                isset($showWishlist)
-                && ! $showWishlist
-            )
+            ! empty($showWishlist)
             && core()->getConfigData('general.content.shop.wishlist_option')
         )
             @include('shop::products.wishlist', [
@@ -33,10 +27,7 @@
         @endif
 
         <div class="add-to-cart-btn pl0">
-            @if (
-                isset($form)
-                && ! $form
-            )
+            @if (empty($form))
                 <button
                     type="submit"
                     {{ ! $product->isSaleable() ? 'disabled' : '' }}
@@ -51,7 +42,7 @@
 
                     {{ ($product->type == 'booking') ?  __('shop::app.products.book-now') :  __('shop::app.products.add-to-cart') }}
                 </button>
-            @elseif(isset($addToCartForm) && ! $addToCartForm)
+            @elseif(empty($addToCartForm))
                 <form
                     method="POST"
                     action="{{ route('shop.cart.add', $product->product_id) }}">
@@ -65,10 +56,7 @@
                         {{ ! $product->isSaleable() ? 'disabled' : '' }}
                         class="btn btn-add-to-cart {{ $addToCartBtnClass ?? '' }}">
 
-                        @if (
-                            ! (isset($showCartIcon)
-                            && ! $showCartIcon)
-                        )
+                        @if (empty($showCartIcon))
                             <i class="material-icons text-down-3">shopping_cart</i>
                         @endif
 
@@ -88,7 +76,7 @@
                     wishlist-move-route="{{ $wishlistMoveRoute ?? false }}"
                     add-class-to-btn="{{ $addToCartBtnClass ?? '' }}"
                     is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}
-                    show-cart-icon={{ ! (isset($showCartIcon) && ! $showCartIcon) }}
+                    show-cart-icon={{ empty($showCartIcon) }}
                     btn-text="{{ (! isset($moveToCart) && $product->type == 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}">
                 </add-to-cart>
             @endif

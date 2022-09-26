@@ -177,7 +177,7 @@ class DefaultSlot extends Booking
                 // Get already ordered qty for this slot
                 $orderedQty = 0;
 
-                $qty = isset($timeDuration['qty']) ? ( $timeDuration['qty'] - $orderedQty ) : 1;
+                $qty = isset($timeDuration['qty']) ? ($timeDuration['qty'] - $orderedQty) : 1;
 
                 if (
                     $qty

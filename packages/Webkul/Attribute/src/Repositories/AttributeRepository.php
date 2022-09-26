@@ -43,7 +43,7 @@ class AttributeRepository extends Repository
     {
         $data = $this->validateUserInput($data);
 
-        $options = isset($data['options']) ? $data['options'] : [];
+        $options = $data['options'] ?? [];
 
         unset($data['options']);
 

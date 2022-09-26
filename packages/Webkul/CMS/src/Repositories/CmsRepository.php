@@ -53,7 +53,7 @@ class CmsRepository extends Repository
     {
         $page = $this->find($id);
 
-        $locale = isset($data['locale']) ? $data['locale'] : app()->getLocale();
+        $locale = $data['locale'] ?? app()->getLocale();
 
         $data[$locale]['html_content'] = str_replace('=&gt;', '=>', $data[$locale]['html_content']);
 

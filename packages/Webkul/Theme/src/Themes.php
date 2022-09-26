@@ -80,15 +80,12 @@ class Themes
         foreach ($themes as $code => $data) {
             $channelThemes[] = new Theme(
                 $code,
-                isset($data['name']) ? $data['name'] : '',
-                isset($data['assets_path']) ? $data['assets_path'] : '',
-                isset($data['views_path']) ? $data['views_path'] : ''
+                $data['name'] ?? '',
+                $data['assets_path'] ?? '',
+                $data['views_path'] ?? ''
             );
 
-            if (
-                isset($data['parent'])
-                && $data['parent']
-            ) {
+            if (! empty($data['parent'])            ) {
                 $parentThemes[$code] = $data['parent'];
             }
         }
@@ -139,10 +136,7 @@ class Themes
                 isset($data['views_path']) ? $data['views_path'] : ''
             );
 
-            if (
-                isset($data['parent'])
-                && $data['parent']
-            ) {
+            if (! empty($data['parent'])) {
                 $parentThemes[$code] = $data['parent'];
             }
         }

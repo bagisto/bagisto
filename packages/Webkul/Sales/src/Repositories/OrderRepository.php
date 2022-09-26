@@ -51,20 +51,14 @@ class OrderRepository extends Repository
         try {
             Event::dispatch('checkout.order.save.before', [$data]);
 
-            if (
-                isset($data['customer'])
-                && $data['customer']
-            ) {
+            if (! empty($data['customer'])) {
                 $data['customer_id'] = $data['customer']->id;
                 $data['customer_type'] = get_class($data['customer']);
             } else {
                 unset($data['customer']);
             }
 
-            if (
-                isset($data['channel'])
-                && $data['channel']
-            ) {
+            if (! empty($data['channel'])) {
                 $data['channel_id'] = $data['channel']->id;
                 $data['channel_type'] = get_class($data['channel']);
                 $data['channel_name'] = $data['channel']->name;
@@ -93,10 +87,7 @@ class OrderRepository extends Repository
 
                 $orderItem = $this->orderItemRepository->create(array_merge($item, ['order_id' => $order->id]));
 
-                if (
-                    isset($item['children'])
-                    && $item['children']
-                ) {
+                if (! empty($item['children'])) {
                     foreach ($item['children'] as $child) {
                         $this->orderItemRepository->create(array_merge($child, ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
                     }
