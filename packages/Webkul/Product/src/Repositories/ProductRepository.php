@@ -147,7 +147,7 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
 
-        $repository = app(ProductFlatRepository::class)->with([
+        $query = app(ProductFlatRepository::class)->with([
             'images',
             'product.videos',
             'product.attribute_values',
@@ -162,74 +162,49 @@ class ProductRepository extends Repository
                 ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
                 ->where('product_flat.channel', core()->getRequestedChannelCode())
                 ->where('product_flat.locale', core()->getRequestedLocaleCode())
+                ->where('product_flat.status', 1)
+                ->where('product_flat.visible_individually', 1)
                 ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {
                 $qb->whereIn('product_categories.category_id', explode(',', $categoryId));
             }
 
-            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                $qb = $this->checkOutOfStockItem($qb);
-            }
-
-            if (! isset($params['status'])) {
-                $qb->where('product_flat.status', 1);
-            }
-
-            if (! isset($params['visible_individually'])) {
-                $qb->where('product_flat.visible_individually', 1);
-            }
-
-            if (
-                isset($params['search'])
-                || isset($params['name'])
-            ) {
-                
+            if (isset($params['search'])) {
                 $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
+            }
+
+            if (isset($params['name'])) {
+                $qb->where('product_flat.name', 'like', '%' . urldecode($params['name']) . '%');
             }
 
             if (isset($params['url_key'])) {
                 $qb->where('product_flat.url_key', 'like', '%' . urldecode($params['url_key']) . '%');
             }
 
-            # sort direction
-            $orderDirection = 'asc';
+            #Sort collection
+            $sortOptions = explode('-', core()->getConfigData('catalog.products.storefront.sort_by') ?: 'name-desc');
 
-            if (
-                isset($params['order'])
-                && in_array($params['order'], ['desc', 'asc'])
-            ) {
-                $orderDirection = $params['order'];
+            $orderDirection = empty($params['order']) ? end($sortOptions) : $params['order'];
+            if (empty($params['sort'])) {
+                $this->checkSortAttributeAndGenerateQuery($qb, current($sortOptions), $orderDirection);
             } else {
-                $sortOptions = $this->getDefaultSortByOption();
-
-                $orderDirection = ! empty($sortOptions) ? $sortOptions[1] : 'asc';
-            }
-
-            if (isset($params['sort'])) {
                 $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
-            } else {
-                $sortOptions = $this->getDefaultSortByOption();
-
-                if (! empty($sortOptions)) {
-                    $this->checkSortAttributeAndGenerateQuery($qb, $sortOptions[0], $orderDirection);
-                }
             }
 
-            if (
-                request()->has('price')
-                && ($priceRange = explode(',', request('price'))) > 0
-            ) {
+            #Filter collection by price
+            if (! empty($params['price'])) {
+                $priceRange = explode(',', $params['price']);
+
                 $qb->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
                     ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
                     ->where(function ($qb) use ($priceRange) {
                         $priceRange = [
-                            core()->convertToBasePrice($priceRange[0]),
+                            core()->convertToBasePrice(current($priceRange)),
                             core()->convertToBasePrice(end($priceRange)),
                         ];
 
                         $qb->orWhereBetween('variants.min_price', $priceRange)
-                            ->orWhereBetween('variants.max_price', $priceRange)
                             ->orWhereBetween('catalog_rule_product_prices.price', $priceRange)
                             ->orWhere(function ($qb) use ($priceRange) {
                                 $customerGroup = $this->customerRepository->getCurrentGroup();
@@ -249,6 +224,7 @@ class ProductRepository extends Repository
                 ])
             ));
 
+            #Filter collection by attributes
             if ($filterableAttributes->count() > 0) {
                 $qb->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id');
 
@@ -285,32 +261,32 @@ class ProductRepository extends Repository
         if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
             $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
 
-            $perPage = ! empty($params['limit'])
-                ? $params['limit']
-                : current($pages);
+            $perPage = ! empty($params['limit']) ? $params['limit'] : current($pages);
         } else {
-            $perPage = ! empty($params['limit'])
-                ? $params['limit']
-                : 9;
+            $perPage = ! empty($params['limit']) ? $params['limit'] : 9;
         }
+
+        # apply scope query so we can fetch the raw sql and perform a count
+        $query->applyScope();
 
         $page = Paginator::resolveCurrentPage('page');
 
-        # apply scope query so we can fetch the raw sql and perform a count
-        $repository->applyScope();
-        $countQuery = "select count(*) as aggregate from ({$repository->model->toSql()}) c";
-        $count = collect(DB::select($countQuery, $repository->model->getBindings()))->pluck('aggregate')->first();
+        $countQuery = clone $query->model;
+
+        $count = collect(
+            DB::select("select count(id) as aggregate from ({$countQuery->select('product_flat.id')->toSql()}) c",
+            $countQuery->getBindings())
+        )->pluck('aggregate')->first();
+
+        $items = [];
 
         if ($count > 0) {
             # apply a new scope query to limit results to one page
-            $repository->scopeQuery(function ($query) use ($page, $perPage) {
+            $query->scopeQuery(function ($query) use ($page, $perPage) {
                 return $query->forPage($page, $perPage);
             });
 
-            # manually build the paginator
-            $items = $repository->get();
-        } else {
-            $items = [];
+            $items = $query->get();
         }
 
         $results = new LengthAwarePaginator($items, $count, $perPage, $page, [
@@ -458,10 +434,6 @@ class ProductRepository extends Repository
                     ->where('product_flat.locale', $locale)
                     ->whereNotNull('product_flat.url_key');
 
-                if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                    $query = $this->checkOutOfStockItem($query);
-                }
-
                 return $query->where('product_flat.status', 1)
                     ->where('product_flat.visible_individually', 1)
                     ->where(function ($subQuery) use ($term) {
@@ -505,37 +477,6 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Check out of stock items.
-     *
-     * @param  Webkul\Product\Models\ProductFlat  $query
-     * @return Illuminate\Database\Eloquent\Builder
-     */
-    public function checkOutOfStockItem($query)
-    {
-        return $query
-            ->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
-            ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
-            ->where(function ($qb) {
-                return $qb
-                    /* for grouped, downloadable, bundle and booking product */
-                    ->orWhereIn('ps.type', ['grouped', 'downloadable', 'bundle', 'booking'])
-                    /* for simple and virtual product */
-                    ->orWhere(function ($qb) {
-                        return $qb->whereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
-                    })
-                    /* for configurable product */
-                    ->orWhere(function ($qb) {
-                        return $qb->where('ps.type', 'configurable')->where(function ($qb) {
-                            return $qb
-                                ->selectRaw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty)')
-                                ->from('product_flat')
-                                ->leftJoin('product_inventories', 'product_inventories.product_id', '=', 'product_flat.product_id');
-                        }, '>', 0);
-                    });
-            });
-    }
-
-    /**
      * Copy a product. Is usually called by the copy() function of the ProductController.
      *
      * Always make the copy is inactive so the admin is able to configure it before setting it live.
@@ -569,20 +510,6 @@ class ProductRepository extends Repository
         DB::commit();
 
         return $copiedProduct;
-    }
-
-    /**
-     * Get default sort by option.
-     *
-     * @return array
-     */
-    private function getDefaultSortByOption()
-    {
-        $value = core()->getConfigData('catalog.products.storefront.sort_by');
-
-        $config = $value ? $value : 'name-desc';
-
-        return explode('-', $config);
     }
 
     /**
