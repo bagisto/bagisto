@@ -87,16 +87,20 @@
                         .sub-menu-item {
 
                             .menu-label {
-                                color: $white !important;
+                                color: $menu-label-text-color !important;
                             }
+                        }
+                    }
+                }
 
-                            &.active,
-                            &:hover {
-                                background-color: $dark-mode-left-submenubar-background-color;
+                ul.sub-menubar {
+                    li.sub-menu-item {
+                        &.active,
+                        &:hover {
+                            background-color: $dark-mode-left-submenubar-active-background-color;
 
-                                .menu-label {
-                                    color: $white !important;
-                                }
+                            .menu-label {
+                                color: $white !important;
                             }
                         }
                     }
