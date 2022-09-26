@@ -229,6 +229,7 @@ class ProductRepository extends Repository
                         ];
 
                         $qb->orWhereBetween('variants.min_price', $priceRange)
+                            ->orWhereBetween('variants.max_price', $priceRange)
                             ->orWhereBetween('catalog_rule_product_prices.price', $priceRange)
                             ->orWhere(function ($qb) use ($priceRange) {
                                 $customerGroup = $this->customerRepository->getCurrentGroup();
