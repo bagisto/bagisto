@@ -81,10 +81,11 @@ class AttributeRepository extends Repository
 
         $attribute->update($data);
 
-        if (
-            ! in_array($attribute->type, ['select', 'multiselect', 'checkbox'])
-            || ! isset($data['options'])
-        ) {
+        if (! in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
+            return $attribute;
+        }
+
+        if (! isset($data['options'])) {
             return $attribute;
         }
 

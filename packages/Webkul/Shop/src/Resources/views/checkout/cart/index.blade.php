@@ -100,11 +100,7 @@
                                                 <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
 
                                             @auth('customer')
-                                                @php
-                                                    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
-                                                @endphp
-
-                                                @if ($showWishlist)
+                                                @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
                                                     <span class="towishlist">
                                                             @if (
                                                                 $item->parent_id != 'null'

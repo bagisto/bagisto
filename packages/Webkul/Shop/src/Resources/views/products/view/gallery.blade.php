@@ -56,11 +56,7 @@
                 <img v-else :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl" alt=""/>
 
                 @auth('customer')
-                    @php
-                        $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
-                    @endphp
-
-                    @if ($showWishlist)
+                    @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
                         <form id="wishlist-{{ $product->product_id }}" action="{{ route('shop.customer.wishlist.add', $product->product_id) }}" method="POST">
                             @csrf
                         </form>

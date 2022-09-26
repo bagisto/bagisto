@@ -166,8 +166,8 @@ class InvoiceController extends Controller
         $invoice = $this->invoiceRepository->findOrFail($id);
 
         return $this->downloadPDF(
-            view('admin::sales.invoices.pdf', compact('invoice'))->render()
-            , 'invoice-' . $invoice->created_at->format('d-m-Y')
+            view('admin::sales.invoices.pdf', compact('invoice'))->render(),
+            'invoice-' . $invoice->created_at->format('d-m-Y')
         );
     }
 }

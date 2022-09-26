@@ -1207,9 +1207,9 @@ class Core
      */
     public function getSenderEmailDetails()
     {
-        $sender_name = $this->getConfigData('emails.configure.email_settings.sender_name') ?? config('mail.from.name');
+        $sender_name = $this->getConfigData('emails.configure.email_settings.sender_name') ?: config('mail.from.name');
 
-        $sender_email = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?? config('mail.from.address');
+        $sender_email = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?: config('mail.from.address');
 
         return [
             'name'  => $sender_name,
@@ -1224,9 +1224,9 @@ class Core
      */
     public function getAdminEmailDetails()
     {
-        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ?? config('mail.admin.name');
+        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ?: config('mail.admin.name');
 
-        $admin_email = $this->getConfigData('emails.configure.email_settings.admin_email') ?? config('mail.admin.address');
+        $admin_email = $this->getConfigData('emails.configure.email_settings.admin_email') ?: config('mail.admin.address');
 
         return [
             'name'  => $admin_name,
