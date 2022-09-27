@@ -288,9 +288,7 @@ class ProductFlat
                     $productFlat->save();
                 }
             } else {
-                $route = request()->route() ? request()->route()->getName() : "";
-
-                if ($route == 'admin.catalog.products.update') {
+                if (request()->route()?->getName() == 'admin.catalog.products.update') {
                     $productFlat = $this->productFlatRepository->findOneWhere([
                         'product_id' => $product->id,
                         'channel'    => $channel->code,

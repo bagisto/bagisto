@@ -170,9 +170,9 @@ abstract class AbstractType
 
         $product->update($data);
 
-        foreach ($product->attribute_family->custom_attributes as $attribute) {
-            $route = request()->route() ? request()->route()->getName() : '';
+        $route = request()->route()?->getName();
 
+        foreach ($product->attribute_family->custom_attributes as $attribute) {
             if (
                 $attribute->type === 'boolean'
                 && $route !== 'admin.catalog.products.mass_update'
@@ -261,32 +261,32 @@ abstract class AbstractType
             }
         }
 
-        $route = request()->route() ? request()->route()->getName() : '';
-
-        if ($route !== 'admin.catalog.products.mass_update') {
-            if (! isset($data['categories'])) {
-                $data['categories'] = [];
-            }
-
-            $product->categories()->sync($data['categories']);
-
-            $product->up_sells()->sync($data['up_sell'] ?? []);
-
-            $product->cross_sells()->sync($data['cross_sell'] ?? []);
-
-            $product->related_products()->sync($data['related_products'] ?? []);
-
-            $this->productInventoryRepository->saveInventories($data, $product);
-
-            $this->productImageRepository->uploadImages($data, $product);
-
-            $this->productVideoRepository->uploadVideos($data, $product);
-
-            app(ProductCustomerGroupPriceRepository::class)->saveCustomerGroupPrices(
-                $data,
-                $product
-            );
+        if ($route == 'admin.catalog.products.mass_update') {
+            return $product;
         }
+
+        if (! isset($data['categories'])) {
+            $data['categories'] = [];
+        }
+
+        $product->categories()->sync($data['categories']);
+
+        $product->up_sells()->sync($data['up_sell'] ?? []);
+
+        $product->cross_sells()->sync($data['cross_sell'] ?? []);
+
+        $product->related_products()->sync($data['related_products'] ?? []);
+
+        $this->productInventoryRepository->saveInventories($data, $product);
+
+        $this->productImageRepository->uploadImages($data, $product);
+
+        $this->productVideoRepository->uploadVideos($data, $product);
+
+        app(ProductCustomerGroupPriceRepository::class)->saveCustomerGroupPrices(
+            $data,
+            $product
+        );
 
         return $product;
     }
@@ -579,7 +579,9 @@ abstract class AbstractType
      */
     public function getSpecialPrice($qty = null)
     {
-        return $this->haveSpecialPrice($qty) ? $this->product->special_price : $this->product->price;
+        return $this->haveSpecialPrice($qty)
+            ? $this->product->special_price
+            : $this->product->price;
     }
 
     /**

@@ -11,11 +11,11 @@ trait ProvideQueryStringParser
      */
     private function getQueryStrings()
     {
-        $route = request()->route() ? request()->route()->getName() : '';
-
-        $queryString = $this->grabQueryStrings($route == 'admin.datagrid.export'
-            ? request()->get('datagridUrl')
-            : url()->full());
+        $queryString = $this->grabQueryStrings(
+            request()->route()?->getName() == 'admin.datagrid.export'
+                ? request()->get('datagridUrl')
+                : url()->full()
+        );
 
         $parsedQueryStrings = $this->parseQueryStrings($queryString);
 

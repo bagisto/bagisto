@@ -16,14 +16,33 @@ class Configurable extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'length', 'width', 'height', 'weight'];
+    protected $skipAttributes = [
+        'price',
+        'cost',
+        'special_price',
+        'special_price_from',
+        'special_price_to',
+        'length',
+        'width',
+        'height',
+        'weight',
+    ];
 
     /**
      * These are the types which can be fillable when generating variant.
      *
      * @var array
      */
-    protected $fillableTypes = ['sku', 'name', 'url_key', 'short_description', 'description', 'price', 'weight', 'status'];
+    protected $fillableTypes = [
+        'sku',
+        'name',
+        'url_key',
+        'short_description',
+        'description',
+        'price',
+        'weight',
+        'status',
+    ];
 
     /**
      * These blade files will be included in product edit page.
@@ -159,37 +178,37 @@ class Configurable extends AbstractType
 
         $this->updateDefaultVariantId();
 
-        $route = request()->route() ? request()->route()->getName() : '';
+        if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
+            return $product;
+        }
 
-        if ($route != 'admin.catalog.products.mass_update') {
-            $previousVariantIds = $product->variants->pluck('id');
+        $previousVariantIds = $product->variants->pluck('id');
 
-            if (isset($data['variants'])) {
-                foreach ($data['variants'] as $variantId => $variantData) {
-                    if (Str::contains($variantId, 'variant_')) {
-                        $permutation = [];
+        if (isset($data['variants'])) {
+            foreach ($data['variants'] as $variantId => $variantData) {
+                if (Str::contains($variantId, 'variant_')) {
+                    $permutation = [];
 
-                        foreach ($product->super_attributes as $superAttribute) {
-                            $permutation[$superAttribute->id] = $variantData[$superAttribute->code];
-                        }
-
-                        $this->createVariant($product, $permutation, $variantData);
-                    } else {
-                        if (is_numeric($index = $previousVariantIds->search($variantId))) {
-                            $previousVariantIds->forget($index);
-                        }
-
-                        $variantData['channel'] = $data['channel'];
-                        $variantData['locale'] = $data['locale'];
-
-                        $this->updateVariant($variantData, $variantId);
+                    foreach ($product->super_attributes as $superAttribute) {
+                        $permutation[$superAttribute->id] = $variantData[$superAttribute->code];
                     }
+
+                    $this->createVariant($product, $permutation, $variantData);
+                } else {
+                    if (is_numeric($index = $previousVariantIds->search($variantId))) {
+                        $previousVariantIds->forget($index);
+                    }
+
+                    $variantData['channel'] = $data['channel'];
+                    $variantData['locale'] = $data['locale'];
+
+                    $this->updateVariant($variantData, $variantId);
                 }
             }
+        }
 
-            foreach ($previousVariantIds as $variantId) {
-                $this->productRepository->delete($variantId);
-            }
+        foreach ($previousVariantIds as $variantId) {
+            $this->productRepository->delete($variantId);
         }
 
         return $product;
@@ -683,10 +702,7 @@ class Configurable extends AbstractType
     {
         $data['quantity'] = parent::handleQuantity((int) $data['quantity']);
         
-        if (
-            ! isset($data['selected_configurable_option'])
-            || ! $data['selected_configurable_option']
-        ) {
+        if (empty($data['selected_configurable_option'])) {
             if ($this->getDefaultVariantId()) {
                 $data['selected_configurable_option'] = $this->getDefaultVariantId();
             } else {

@@ -18,7 +18,18 @@ class Grouped extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'length', 'width', 'height', 'weight', 'depth'];
+    protected $skipAttributes = [
+        'price',
+        'cost',
+        'special_price',
+        'special_price_from',
+        'special_price_to',
+        'length',
+        'width',
+        'height',
+        'weight',
+        'depth',
+    ];
 
     /**
      * These blade files will be included in product edit page.
@@ -85,11 +96,11 @@ class Grouped extends AbstractType
     {
         $product = parent::update($data, $id, $attribute);
 
-        $route = request()->route() ? request()->route()->getName() : '';
-
-        if ($route != 'admin.catalog.products.mass_update') {
-            $this->productGroupedProductRepository->saveGroupedProducts($data, $product);
+        if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
+            return $product;
         }
+
+        $this->productGroupedProductRepository->saveGroupedProducts($data, $product);
 
         return $product;
     }

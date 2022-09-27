@@ -20,7 +20,14 @@ class Downloadable extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['length', 'width', 'height', 'weight', 'depth', 'guest_checkout'];
+    protected $skipAttributes = [
+        'length',
+        'width',
+        'height',
+        'weight',
+        'depth',
+        'guest_checkout',
+    ];
 
     /**
      * These blade files will be included in product edit page.
@@ -102,13 +109,14 @@ class Downloadable extends AbstractType
     public function update(array $data, $id, $attribute = 'id')
     {
         $product = parent::update($data, $id, $attribute);
-        $route = request()->route() ? request()->route()->getName() : '';
 
-        if ($route != 'admin.catalog.products.mass_update') {
-            $this->productDownloadableLinkRepository->saveLinks($data, $product);
-
-            $this->productDownloadableSampleRepository->saveSamples($data, $product);
+        if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
+            return $product;
         }
+
+        $this->productDownloadableLinkRepository->saveLinks($data, $product);
+
+        $this->productDownloadableSampleRepository->saveSamples($data, $product);
 
         return $product;
     }
@@ -163,10 +171,7 @@ class Downloadable extends AbstractType
      */
     public function prepareForCart($data)
     {
-        if (
-            ! isset($data['links'])
-            || ! count($data['links'])
-        ) {
+        if (empty($data['links'])) {
             return trans('shop::app.checkout.cart.integrity.missing_links');
         }
 

@@ -151,10 +151,11 @@ class Cart
 
         $cart = $this->getCart();
 
-        if (
-            ! $cart
-            && ! $cart = $this->create($data)
-        ) {
+        if (! $cart) {
+            $cart = $this->create($data);
+        }
+
+        if (! $cart) {
             return ['warning' => __('shop::app.checkout.cart.item.error-add')];
         }
 
@@ -414,8 +415,7 @@ class Cart
         $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
 
         if (
-            auth()->guard()->check()
-            && ($user = auth()->guard()->user())
+            ($user = auth()->guard()->user())
             && (
                 $user->email
                 && $user->first_name
@@ -781,7 +781,9 @@ class Cart
         if ($cart->haveStockableItems()) {
             $data['shipping_address'] = $cart->shipping_address->toArray();
 
-            $data['selected_shipping_rate'] = $cart->selected_shipping_rate ? $cart->selected_shipping_rate->toArray() : 0.0;
+            $data['selected_shipping_rate'] = $cart->selected_shipping_rate
+                ? $cart->selected_shipping_rate->toArray()
+                : 0;
         }
 
         $data['payment'] = $cart->payment->toArray();
@@ -885,8 +887,7 @@ class Cart
         $customerAddress = [];
 
         if (! empty($data['billing']['address_id'])) {
-            $customerAddress = $this
-                ->customerAddressRepository
+            $customerAddress = $this->customerAddressRepository
                 ->findOneWhere(['id' => $data['billing']['address_id']])
                 ->toArray();
         }
@@ -914,8 +915,7 @@ class Cart
         $customerAddress = [];
 
         if (! empty($data['shipping']['address_id'])) {
-            $customerAddress = $this
-                ->customerAddressRepository
+            $customerAddress = $this->customerAddressRepository
                 ->findOneWhere(['id' => $data['shipping']['address_id']])
                 ->toArray();
         }

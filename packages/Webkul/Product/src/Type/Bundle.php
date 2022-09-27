@@ -3,16 +3,16 @@
 namespace Webkul\Product\Type;
 
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Product\Repositories\ProductBundleOptionRepository;
+use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
+use Webkul\Product\Helpers\BundleOption;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\DataTypes\CartItemValidationResult;
-use Webkul\Product\Helpers\BundleOption;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
-use Webkul\Product\Repositories\ProductBundleOptionRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
 
 class Bundle extends AbstractType
 {
@@ -21,7 +21,18 @@ class Bundle extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'length', 'width', 'height', 'weight', 'depth'];
+    protected $skipAttributes = [
+        'price',
+        'cost',
+        'special_price',
+        'special_price_from',
+        'special_price_to',
+        'length',
+        'width',
+        'height',
+        'weight',
+        'depth',
+    ];
 
     /**
      * These blade files will be included in product edit page.
@@ -66,10 +77,10 @@ class Bundle extends AbstractType
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionRepository  $productBundleOptionRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
      * @param  \Webkul\Product\Helpers\BundleOption  $bundleOptionHelper
-     * @param \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @return void
      */
     public function __construct(
@@ -105,11 +116,12 @@ class Bundle extends AbstractType
     public function update(array $data, $id, $attribute = 'id')
     {
         $product = parent::update($data, $id, $attribute);
-        $route = request()->route() ? request()->route()->getName() : '';
 
-        if ($route != 'admin.catalog.products.mass_update') {
-            $this->productBundleOptionRepository->saveBundleOptions($data, $product);
+        if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
+            return $product;
         }
+
+        $this->productBundleOptionRepository->saveBundleOptions($data, $product);
 
         return $product;
     }
@@ -376,17 +388,15 @@ class Bundle extends AbstractType
      */
     private function checkBundleProductHaveSpecialPrice()
     {
-        $haveSpecialPrice = false;
         foreach ($this->product->bundle_options as $option) {
-            foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
+            foreach ($option->bundle_option_products as $bundleOptionProduct) {
                 if ($bundleOptionProduct->product->getTypeInstance()->haveSpecialPrice()) {
-                    $haveSpecialPrice = true;
-
-                    break;
+                    return true;
                 }
             }
         }
-        return $haveSpecialPrice;
+
+        return false;
     }
 
     /**
@@ -441,14 +451,13 @@ class Bundle extends AbstractType
     {
         $bundleQuantity = parent::handleQuantity((int) $data['quantity']);
 
-        if (isset($data['bundle_options'])) {
-            $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
+        if (empty($data['bundle_options'])) {
+            return trans('shop::app.checkout.cart.integrity.missing_options');
         }
 
-        if (
-            ! isset($data['bundle_options'])
-            || ! count($data['bundle_options'])
-        ) {
+        $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
+
+        if (empty($data['bundle_options'])) {
             return trans('shop::app.checkout.cart.integrity.missing_options');
         }
 
@@ -459,7 +468,6 @@ class Bundle extends AbstractType
         $products = parent::prepareForCart($data);
 
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
-
             $product = $this->productRepository->find($productId);
 
             /* need to check each individual quantity as well if don't have then show error */
@@ -471,7 +479,9 @@ class Bundle extends AbstractType
                 continue;
             }
 
-            $cartProduct = $product->getTypeInstance()->prepareForCart(array_merge($data, ['parent_id' => $this->product->id]));
+            $cartProduct = $product->getTypeInstance()->prepareForCart(array_merge($data, [
+                'parent_id' => $this->product->id
+            ]));
 
             if (is_string($cartProduct)) {
                 return $cartProduct;
@@ -688,13 +698,14 @@ class Bundle extends AbstractType
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
         $result = new CartItemValidationResult();
-        $price = 0;
 
         if (parent::isCartItemInactive($item)) {
             $result->itemIsInactive();
 
             return $result;
         }
+        
+        $price = 0;
 
         foreach ($item->children as $childItem) {
             $childResult = $childItem->product->getTypeInstance()->validateCartItem($childItem);
