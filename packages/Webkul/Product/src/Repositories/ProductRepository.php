@@ -174,6 +174,7 @@ class ProductRepository extends Repository
                         ->where('catalog_rule_product_prices.customer_group_id', $customerGroup->id);
                 })
                 ->addSelect('catalog_rule_product_prices.price as catalog_rule_price')
+                // ->addSelect(DB::raw('LEAST(product_flat.min_price, catalog_rule_product_prices.price, product_customer_group_prices.value) as final_price'))
                 ->where('product_flat.channel', core()->getRequestedChannelCode())
                 ->where('product_flat.locale', core()->getRequestedLocaleCode())
                 ->where('product_flat.status', 1)
@@ -232,8 +233,8 @@ class ProductRepository extends Repository
             ));
 
             #Filter collection by attributes
-            if ($filterableAttributes->count() > 0) {
-                $qb->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id');
+            if ($filterableAttributes->isNotEmpty()) {
+                $qb->leftJoin('product_attribute_values', 'variants.product_id', '=', 'product_attribute_values.product_id');
 
                 $qb->where(function ($filterQuery) use ($filterableAttributes) {
                     foreach ($filterableAttributes as $attribute) {
@@ -294,6 +295,8 @@ class ProductRepository extends Repository
             });
 
             $items = $query->get();
+
+            dd($items->toArray());
         }
 
         $results = new LengthAwarePaginator($items, $count, $perPage, $page, [
@@ -302,6 +305,33 @@ class ProductRepository extends Repository
         ]);
 
         return $results;
+    }
+
+    /**
+     * Check sort attribute and generate query.
+     *
+     * @param  object  $query
+     * @param  string  $sort
+     * @param  string  $direction
+     * @return object
+     */
+    private function checkSortAttributeAndGenerateQuery($query, $sort, $direction)
+    {
+        $attribute = $this->attributeRepository->findOneByField('code', $sort);
+
+        if ($attribute) {
+            if ($attribute->code === 'price') {
+                // $query->orderBy(DB::raw('LEAST(variants.min_price, customer_group_price, catalog_rule_price)'), $direction);
+                $query->orderBy('final_price', $direction);
+            } else {
+                $query->orderBy($attribute->code, $direction);
+            }
+        } else {
+            /* `created_at` is not an attribute so it will be in else case */
+            $query->orderBy('product_flat.created_at', $direction);
+        }
+
+        return $query;
     }
 
     /**
@@ -517,41 +547,6 @@ class ProductRepository extends Repository
         DB::commit();
 
         return $copiedProduct;
-    }
-
-    /**
-     * Check sort attribute and generate query.
-     *
-     * @param  object  $query
-     * @param  string  $sort
-     * @param  string  $direction
-     * @return object
-     */
-    private function checkSortAttributeAndGenerateQuery($query, $sort, $direction)
-    {
-        $attribute = $this->attributeRepository->findOneByField('code', $sort);
-
-        if ($attribute) {
-            if ($attribute->code === 'price') {
-                // ->orWhereBetween('variants.min_price', $priceRange)
-                // ->orWhereBetween('catalog_rule_product_prices.price', $priceRange)
-                // ->orWhere(function ($qb) use ($priceRange) {
-                //     $customerGroup = $this->customerRepository->getCurrentGroup();
-
-                //     $qb->whereBetween('product_customer_group_prices.value', $priceRange)
-                //         ->where('product_customer_group_prices.customer_group_id', '=', $customerGroup->id);
-                // });
-
-                $query->orderBy('min_price', $direction);
-            } else {
-                $query->orderBy($attribute->code, $direction);
-            }
-        } else {
-            /* `created_at` is not an attribute so it will be in else case */
-            $query->orderBy('product_flat.created_at', $direction);
-        }
-
-        return $query;
     }
 
     /**
