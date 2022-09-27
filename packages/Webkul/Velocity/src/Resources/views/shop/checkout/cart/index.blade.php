@@ -118,7 +118,11 @@
 
                                                 <div class="row col-12 no-padding no-margin item-price">
                                                     <div class="product-price">
-                                                        <span>{{ core()->currency($item->base_price) }}</span>
+                                                        @if($product->type != 'configurable') 
+                                                            <span>{!! $product->getTypeInstance()->getPriceHtml() !!}</span>
+                                                        @else
+                                                            <span>{{ core()->currency($item->base_price) }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
 
@@ -179,7 +183,7 @@
 
                                             <div class="product-price fs18 col-1">
                                                 <span class="card-current-price fw6 mr10">
-                                                    {{ core()->currency( $item->base_total) }}
+                                                    {{ core()->currency($item->base_total) }}
                                                 </span>
                                             </div>
 
