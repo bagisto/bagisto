@@ -158,23 +158,24 @@ class ProductRepository extends Repository
         ])->scopeQuery(function ($query) use ($params, $categoryId) {
             $customerGroup = $this->customerRepository->getCurrentGroup();
 
+            $prefix = DB::getTablePrefix();
+
             $qb = $query->distinct()
                 ->select('product_flat.*')
                 ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
-                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
+                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . $prefix . 'variants.parent_id, ' . $prefix . 'variants.id)'))
                 #Customer Group pricing
                 ->leftJoin('product_customer_group_prices', function ($join) use ($customerGroup) {
                     $join->on('variants.product_id', '=', 'product_customer_group_prices.product_id')
                         ->where('product_customer_group_prices.customer_group_id', $customerGroup->id);
                 })
-                ->addSelect('product_customer_group_prices.value as customer_group_price')
                 #Catalog Rule pricing
                 ->leftJoin('catalog_rule_product_prices', function ($join) use ($customerGroup) {
                     $join->on('variants.product_id', '=', 'catalog_rule_product_prices.product_id')
                         ->where('catalog_rule_product_prices.customer_group_id', $customerGroup->id);
                 })
-                ->addSelect('catalog_rule_product_prices.price as catalog_rule_price')
-                // ->addSelect(DB::raw('LEAST(product_flat.min_price, catalog_rule_product_prices.price, product_customer_group_prices.value) as final_price'))
+                #Select products final price including discounts
+                ->addSelect(DB::raw('LEAST(COALESCE(' . $prefix . 'catalog_rule_product_prices.price, ' . $prefix . 'product_customer_group_prices.value, ' . $prefix . 'variants.min_price), COALESCE(' . $prefix . 'product_customer_group_prices.value, ' . $prefix . 'catalog_rule_product_prices.price, ' . $prefix . 'variants.min_price)) as final_price'))
                 ->where('product_flat.channel', core()->getRequestedChannelCode())
                 ->where('product_flat.locale', core()->getRequestedLocaleCode())
                 ->where('product_flat.status', 1)
@@ -295,8 +296,6 @@ class ProductRepository extends Repository
             });
 
             $items = $query->get();
-
-            dd($items->toArray());
         }
 
         $results = new LengthAwarePaginator($items, $count, $perPage, $page, [
@@ -321,7 +320,6 @@ class ProductRepository extends Repository
 
         if ($attribute) {
             if ($attribute->code === 'price') {
-                // $query->orderBy(DB::raw('LEAST(variants.min_price, customer_group_price, catalog_rule_price)'), $direction);
                 $query->orderBy('final_price', $direction);
             } else {
                 $query->orderBy($attribute->code, $direction);

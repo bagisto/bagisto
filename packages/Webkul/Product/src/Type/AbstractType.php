@@ -9,7 +9,7 @@ use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
@@ -597,10 +597,7 @@ abstract class AbstractType
         $specialPrice = $this->product->special_price;
 
         if (
-            (
-                is_null($specialPrice)
-                || ! (float) $specialPrice
-            )
+            empty($specialPrice)
             && ! $rulePrice
             && $customerGroupPrice == $this->product->price
         ) {
@@ -644,8 +641,9 @@ abstract class AbstractType
             $this->product->special_price = min($this->product->special_price, $customerGroupPrice);
         } else {
             if ($customerGroupPrice !== $this->product->price) {
-                $haveSpecialPrice = true;
                 $this->product->special_price = $customerGroupPrice;
+
+                $haveSpecialPrice = true;
             }
         }
 
@@ -663,21 +661,11 @@ abstract class AbstractType
             $qty = 1;
         }
 
-        $customerGroupId = null;
+        $customerGroup = app(CustomerRepository::class)->getCurrentGroup();
 
-        if (auth()->guard()->check()) {
-            $customerGroupId = auth()->guard()->user()->customer_group_id;
-        } else {
-            $customerGuestGroup = app(CustomerGroupRepository::class)->getCustomerGuestGroup();
+        $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
 
-            if ($customerGuestGroup) {
-                $customerGroupId = $customerGuestGroup->id;
-            }
-        }
-
-        $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroupId);
-
-        if (! $customerGroupPrices->count()) {
+        if ($customerGroupPrices->isEmpty()) {
             return $product->price;
         }
 
@@ -687,51 +675,44 @@ abstract class AbstractType
 
         $lastCustomerGroupId = null;
 
-        foreach ($customerGroupPrices as $price) {
-            if (
-                $price->customer_group_id != $customerGroupId
-                && $price->customer_group_id
-            ) {
+        foreach ($customerGroupPrices as $customerGroupPrice) {
+            if ($qty < $customerGroupPrice->qty) {
                 continue;
             }
 
-            if ($qty < $price->qty) {
-                continue;
-            }
-
-            if ($price->qty < $lastQty) {
+            if ($customerGroupPrice->qty < $lastQty) {
                 continue;
             }
 
             if (
-                $price->qty == $lastQty
-                && $lastCustomerGroupId != null
-                && $price->customer_group_id == null
+                $customerGroupPrice->qty == $lastQty
+                && ! empty($lastCustomerGroupId)
+                && empty($customerGroupPrice->customer_group_id)
             ) {
                 continue;
             }
 
-            if ($price->value_type == 'discount') {
+            if ($customerGroupPrice->value_type == 'discount') {
                 if (
-                    $price->value >= 0
-                    && $price->value <= 100
+                    $customerGroupPrice->value >= 0
+                    && $customerGroupPrice->value <= 100
                 ) {
-                    $lastPrice = $product->price - ($product->price * $price->value) / 100;
+                    $lastPrice = $product->price - ($product->price * $customerGroupPrice->value) / 100;
 
-                    $lastQty = $price->qty;
+                    $lastQty = $customerGroupPrice->qty;
 
-                    $lastCustomerGroupId = $price->customer_group_id;
+                    $lastCustomerGroupId = $customerGroupPrice->customer_group_id;
                 }
             } else {
                 if (
-                    $price->value >= 0
-                    && $price->value < $lastPrice
+                    $customerGroupPrice->value >= 0
+                    && $customerGroupPrice->value < $lastPrice
                 ) {
-                    $lastPrice = $price->value;
+                    $lastPrice = $customerGroupPrice->value;
 
-                    $lastQty = $price->qty;
+                    $lastQty = $customerGroupPrice->qty;
 
-                    $lastCustomerGroupId = $price->customer_group_id;
+                    $lastCustomerGroupId = $customerGroupPrice->customer_group_id;
                 }
             }
         }
@@ -814,7 +795,9 @@ abstract class AbstractType
      */
     public function getTaxCategory()
     {
-        $taxCategoryId = $this->product->parent ? $this->product->parent->tax_category_id : $this->product->tax_category_id;
+        $taxCategoryId = $this->product->parent
+            ? $this->product->parent->tax_category_id
+            : $this->product->tax_category_id;
 
         return app(TaxCategoryRepository::class)->find($taxCategoryId);
     }
@@ -880,9 +863,7 @@ abstract class AbstractType
      */
     public function handleQuantity(int $quantity): int
     {
-        return ! empty($quantity)
-            ? $quantity
-            : 1;
+        return $quantity ?? 1;
     }
 
     /**
@@ -916,11 +897,7 @@ abstract class AbstractType
                 isset($options1['parent_id'])
                 && isset($options2['parent_id'])
             ) {
-                if ($options1['parent_id'] == $options2['parent_id']) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return $options1['parent_id'] == $options2['parent_id'];
             } elseif (
                 isset($options1['parent_id'])
                 && ! isset($options2['parent_id'])
@@ -1055,49 +1032,36 @@ abstract class AbstractType
     public function getCustomerGroupPricingOffers()
     {
         $offerLines = [];
-        $haveOffers = true;
-        $customerGroupId = null;
+        
+        $customerGroup = app(CustomerRepository::class)->getCurrentGroup();
 
-        if (auth()->guard()->check()) {
-            $customerGroupId = auth()->guard()->user()->customer_group_id;
-        } else {
-            if ($customerGuestGroup = app(CustomerGroupRepository::class)->findOneByField('code', 'guest')) {
-                $customerGroupId = $customerGuestGroup->id;
-            }
-        }
-
-        $customerGroupPrices = $this->product->customer_group_prices()->where(
-            function ($query) use ($customerGroupId) {
-                $query->where('customer_group_id', $customerGroupId)
-                    ->orWhereNull('customer_group_id');
-            }
-        )->groupBy('qty')->get()->sortBy('qty')->values()->all();
+        $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroup) {
+            $query->where('customer_group_id', $customerGroup->id)
+                ->orWhereNull('customer_group_id');
+        })
+        ->groupBy('qty')
+        ->orderBy('qty')
+        ->get();
 
         if ($this->haveSpecialPrice()) {
             $rulePrice = app(CatalogRuleProductPrice::class)->getRulePrice($this->product);
 
-            if (
-                $rulePrice
-                && $rulePrice->price < $this->product->special_price
-            ) {
-                $haveOffers = false;
+            if (! $rulePrice) {
+                return $offerLines;
             }
 
-            if ($haveOffers) {
-                foreach ($customerGroupPrices as $key => $customerGroupPrice) {
-                    if (
-                        $customerGroupPrice
-                        && $customerGroupPrice->qty > 1
-                    ) {
-                        array_push($offerLines, $this->getOfferLines($customerGroupPrice));
-                    }
-                }
+            if ($rulePrice->price >= $this->product->special_price) {
+                return $offerLines;
             }
-        } else {
-            if (count($customerGroupPrices) > 0) {
-                foreach ($customerGroupPrices as $key => $customerGroupPrice) {
+
+            foreach ($customerGroupPrices as $customerGroupPrice) {
+                if ($customerGroupPrice->qty > 1) {
                     array_push($offerLines, $this->getOfferLines($customerGroupPrice));
                 }
+            }
+        } elseif ($customerGroupPrices->isNotEmpty()) {
+            foreach ($customerGroupPrices as $customerGroupPrice) {
+                array_push($offerLines, $this->getOfferLines($customerGroupPrice));
             }
         }
 

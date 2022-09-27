@@ -78,23 +78,7 @@ class WishlistRepository extends Repository
      */
     public function getCustomerWishlist()
     {
-        /* due to ambiguous ids only selecting from wishlist table */
-        $query = $this->model->select('wishlist.*');
-
-        /* don't add product repository method as that one will need a product flat table */
-        if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-            $query = $query
-                ->leftJoin('products as ps', 'wishlist.product_id', '=', 'ps.id')
-                ->leftJoin('product_inventories as pv', 'ps.id', '=', 'pv.product_id')
-                ->where(function ($qb) {
-                    $qb
-                        ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
-                        ->orWhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
-                });
-        }
-
-        /* main check to determine the wishlist */
-        return $query->where([
+        return $this->model->select('wishlist.*')->where([
             'channel_id'  => core()->getCurrentChannel()->id,
             'customer_id' => auth()->guard('customer')->user()->id,
         ])->paginate(5);
