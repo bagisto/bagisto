@@ -47,7 +47,7 @@ class Velocity
      */
     public function getContentType()
     {
-		return $this->content_type;
+		  return $this->content_type;
     }
 
     /**
@@ -55,6 +55,6 @@ class Velocity
      */
     public function getCatalogType()
     {
-		return $this->catalog_type;
+		  return $this->catalog_type;
     }
 }
