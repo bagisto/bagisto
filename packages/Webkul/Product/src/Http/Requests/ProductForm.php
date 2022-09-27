@@ -62,7 +62,7 @@ class ProductForm extends FormRequest
             'images.positions.*' => ['nullable', 'integer'],
             'videos.files.*'     => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:' . $maxVideoFileSize],
             'videos.positions.*' => ['nullable', 'integer'],
-            'special_price_from' => ['nullable', 'date'],
+            'special_price_from' => ['nullable', 'date', 'after_or_equal:' .date('Y-m-d')],
             'special_price_to'   => ['nullable', 'date', 'after_or_equal:special_price_from'],
             'special_price'      => ['nullable', new Decimal, 'lt:price'],
         ]);
