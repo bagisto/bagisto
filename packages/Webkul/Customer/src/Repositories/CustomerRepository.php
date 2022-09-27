@@ -56,7 +56,7 @@ class CustomerRepository extends Repository
     public function getCurrentGroup()
     {
         if ($customer = auth()->guard()->user()) {
-            $customerGroupId = $customer->customer_group;
+            return $customer->group;
         }
         
         return $this->customerGroupRepository->getCustomerGuestGroup();

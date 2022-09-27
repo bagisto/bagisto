@@ -156,10 +156,24 @@ class ProductRepository extends Repository
             'product.inventories',
             'product.ordered_inventories',
         ])->scopeQuery(function ($query) use ($params, $categoryId) {
+            $customerGroup = $this->customerRepository->getCurrentGroup();
+
             $qb = $query->distinct()
                 ->select('product_flat.*')
                 ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
                 ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
+                #Customer Group pricing
+                ->leftJoin('product_customer_group_prices', function ($join) use ($customerGroup) {
+                    $join->on('variants.product_id', '=', 'product_customer_group_prices.product_id')
+                        ->where('product_customer_group_prices.customer_group_id', $customerGroup->id);
+                })
+                ->addSelect('product_customer_group_prices.value as customer_group_price')
+                #Catalog Rule pricing
+                ->leftJoin('catalog_rule_product_prices', function ($join) use ($customerGroup) {
+                    $join->on('variants.product_id', '=', 'catalog_rule_product_prices.product_id')
+                        ->where('catalog_rule_product_prices.customer_group_id', $customerGroup->id);
+                })
+                ->addSelect('catalog_rule_product_prices.price as catalog_rule_price')
                 ->where('product_flat.channel', core()->getRequestedChannelCode())
                 ->where('product_flat.locale', core()->getRequestedLocaleCode())
                 ->where('product_flat.status', 1)
@@ -196,23 +210,16 @@ class ProductRepository extends Repository
             if (! empty($params['price'])) {
                 $priceRange = explode(',', $params['price']);
 
-                $qb->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
-                    ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
-                    ->where(function ($qb) use ($priceRange) {
-                        $priceRange = [
-                            core()->convertToBasePrice(current($priceRange)),
-                            core()->convertToBasePrice(end($priceRange)),
-                        ];
+                $qb->where(function ($qb) use ($priceRange) {
+                    $priceRange = [
+                        core()->convertToBasePrice(current($priceRange)),
+                        core()->convertToBasePrice(end($priceRange)),
+                    ];
 
-                        $qb->orWhereBetween('variants.min_price', $priceRange)
-                            ->orWhereBetween('catalog_rule_product_prices.price', $priceRange)
-                            ->orWhere(function ($qb) use ($priceRange) {
-                                $customerGroup = $this->customerRepository->getCurrentGroup();
-
-                                $qb->whereBetween('product_customer_group_prices.value', $priceRange)
-                                    ->where('product_customer_group_prices.customer_group_id', '=', $customerGroup->id);
-                            });
-                    });
+                    $qb->orWhereBetween('variants.min_price', $priceRange)
+                        ->orWhereBetween('catalog_rule_product_prices.price', $priceRange)
+                        ->orWhereBetween('product_customer_group_prices.value', $priceRange);
+                });
             }
 
             $filterableAttributes = $this->attributeRepository->getProductDefaultAttributes(array_keys(
@@ -274,7 +281,7 @@ class ProductRepository extends Repository
         $countQuery = clone $query->model;
 
         $count = collect(
-            DB::select("select count(id) as aggregate from ({$countQuery->select('product_flat.id')->toSql()}) c",
+            DB::select("select count(id) as aggregate from ({$countQuery->select('product_flat.id')->reorder('product_flat.id')->toSql()}) c",
             $countQuery->getBindings())
         )->pluck('aggregate')->first();
 
@@ -287,6 +294,7 @@ class ProductRepository extends Repository
             });
 
             $items = $query->get();
+            dd($items->toArray());
         }
 
         $results = new LengthAwarePaginator($items, $count, $perPage, $page, [
@@ -526,6 +534,15 @@ class ProductRepository extends Repository
 
         if ($attribute) {
             if ($attribute->code === 'price') {
+                // ->orWhereBetween('variants.min_price', $priceRange)
+                // ->orWhereBetween('catalog_rule_product_prices.price', $priceRange)
+                // ->orWhere(function ($qb) use ($priceRange) {
+                //     $customerGroup = $this->customerRepository->getCurrentGroup();
+
+                //     $qb->whereBetween('product_customer_group_prices.value', $priceRange)
+                //         ->where('product_customer_group_prices.customer_group_id', '=', $customerGroup->id);
+                // });
+
                 $query->orderBy('min_price', $direction);
             } else {
                 $query->orderBy($attribute->code, $direction);

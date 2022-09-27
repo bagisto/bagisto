@@ -4,20 +4,21 @@ namespace Webkul\Product\Type;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Checkout\Facades\Cart;
-use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Webkul\Product\DataTypes\CartItemValidationResult;
-use Webkul\Product\Facades\ProductImage;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Tax\Helpers\Tax;
+use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Webkul\Product\Facades\ProductImage;
+use Webkul\CatalogRule\Helpers\CatalogRuleProductPrice;
+use Webkul\Checkout\Facades\Cart;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Tax\Helpers\Tax;
 
 abstract class AbstractType
 {
@@ -591,7 +592,7 @@ abstract class AbstractType
     {
         $customerGroupPrice = $this->getCustomerGroupPrice($this->product, $qty);
 
-        $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
+        $rulePrice = app(CatalogRuleProductPrice::class)->getRulePrice($this->product);
 
         $specialPrice = $this->product->special_price;
 
@@ -1073,7 +1074,7 @@ abstract class AbstractType
         )->groupBy('qty')->get()->sortBy('qty')->values()->all();
 
         if ($this->haveSpecialPrice()) {
-            $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
+            $rulePrice = app(CatalogRuleProductPrice::class)->getRulePrice($this->product);
 
             if (
                 $rulePrice
