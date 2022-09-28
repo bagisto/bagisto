@@ -428,42 +428,6 @@ class Configurable extends AbstractType
     }
 
     /**
-     * Check variant option availability.
-     *
-     * @param  array  $data
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return bool
-     */
-    public function checkVariantOptionAvailabiliy($data, $product)
-    {
-        $superAttributeCodes = $product->parent->super_attributes->pluck('code');
-
-        foreach ($product->parent->variants as $variant) {
-            if ($variant->id == $product->id) {
-                continue;
-            }
-
-            $matchCount = 0;
-
-            foreach ($superAttributeCodes as $attributeCode) {
-                if (! isset($data[$attributeCode])) {
-                    return false;
-                }
-
-                if ($data[$attributeCode] == $variant->{$attributeCode}) {
-                    $matchCount++;
-                }
-            }
-
-            if ($matchCount == $superAttributeCodes->count()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Returns children ids.
      *
      * @return array
@@ -528,27 +492,18 @@ class Configurable extends AbstractType
             return $minPrice;
         }
 
-        /* method is calling many time so using variable */
-        $tablePrefix = DB::getTablePrefix();
-
-        $result = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
-            ->distinct()
-            ->where('products.parent_id', $this->product->id)
-            ->selectRaw("IF( {$tablePrefix}product_flat.special_price_from IS NOT NULL
-            AND {$tablePrefix}product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= {$tablePrefix}product_flat.special_price_from
-            AND NOW( ) <= {$tablePrefix}product_flat.special_price_to, IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , {$tablePrefix}product_flat.price ) , IF( {$tablePrefix}product_flat.special_price_from IS NULL , IF( {$tablePrefix}product_flat.special_price_to IS NULL , IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , IF( NOW( ) <= {$tablePrefix}product_flat.special_price_to, IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , {$tablePrefix}product_flat.price ) ) , IF( {$tablePrefix}product_flat.special_price_to IS NULL , IF( NOW( ) >= {$tablePrefix}product_flat.special_price_from, IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , {$tablePrefix}product_flat.price ) , {$tablePrefix}product_flat.price ) ) ) AS min_price")
-            ->where('product_flat.channel', core()->getCurrentChannelCode())
-            ->get();
-
-
         $minPrices = [];
 
-        foreach ($result as $price) {
-            $minPrices[] = $price->min_price;
+        foreach ($this->product->variants as $variant) {
+            if (! $variant->getTypeInstance()->isSaleable()) {
+                continue;
+            }
+
+            $minPrices[] = $variant->getTypeInstance()->getMinimalPrice();
         }
 
         if (empty($minPrices)) {
-            return 0;
+            return $minPrice = 0;
         }
 
         return $minPrice = min($minPrices);
@@ -624,7 +579,7 @@ class Configurable extends AbstractType
             ->where('product_flat.locale', app()->getLocale())
             ->first();
 
-        return $maxPrice = $productFlat ? $productFlat->max_price : 0;
+        return $maxPrice = $productFlat?->max_price ?: 0;
     }
 
     /**

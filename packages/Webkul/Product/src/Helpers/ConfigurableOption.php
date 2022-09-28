@@ -50,8 +50,6 @@ class ConfigurableOption extends AbstractProduct
             'chooseText'     => trans('shop::app.products.choose-option'),
         ];
 
-        // dd(array_merge($config, $product->getTypeInstance()->getProductPrices()));
-
         return array_merge($config, $product->getTypeInstance()->getProductPrices());
     }
 
