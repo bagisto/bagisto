@@ -106,6 +106,7 @@ class ProductDataGrid extends DataGrid
                 'product_flat.status',
                 'product_flat.price',
                 'product_flat.url_key',
+                'product_flat.visible_individually',
                 'attribute_families.name as attribute_family',
                 DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
@@ -168,7 +169,7 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                if (! empty($row->url_key)) {
+                if (! empty($row->visible_individually) && ! empty($row->url_key)) {
                     return "<a href='" . route('shop.productOrCategory.index', $row->url_key) . "' target='_blank'>" . $row->product_name . "</a>";
                 }
 
