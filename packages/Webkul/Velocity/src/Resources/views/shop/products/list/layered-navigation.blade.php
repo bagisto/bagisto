@@ -48,7 +48,7 @@
             </div>
 
             <div class="filter-attributes-content">
-                <ul type="none" class="items ml15" v-if="attribute.type != 'price'">
+                <ul type="none" class="items" v-if="attribute.type != 'price'">
                     <li
                         class="item"
                         v-for='(option, index) in attribute.options'>

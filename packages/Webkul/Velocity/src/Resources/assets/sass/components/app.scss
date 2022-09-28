@@ -2076,9 +2076,16 @@
         background-color: #ccc;
     }
 
+    .vue-slider-dot {
+        width: 8px !important;
+        height: 8px !important;
+        margin-top: -4px;
+    }
+
     .vue-slider-dot-handle {
         width: 100%;
         height: 100%;
+        border: 4px solid #4D7EA8;
         border-radius: 50%;
         background-color: $white-color;
         box-shadow: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.32);
@@ -2201,8 +2208,14 @@
 }
 
 .filter-attributes-item {
+    font-size: 16px;
     margin-bottom: 10px;
     border-bottom: 1px solid #cccccc;
+
+    .filter-attributes-content {
+        display: none;
+        margin-left: 7px;
+    }
 
     &.active {
         .filter-attributes-content {
@@ -2214,21 +2227,17 @@
         margin: 10px 15px 13px -4px;
 
         input[type='text'] {
+            padding: 7px;
             text-align: center;
-            border: 1px solid $theme-color;
+            border: 1px solid #DCDCDC;
             width: 30%;
             background-color: white;
         }
-    }
 
-    input[type='checkbox'] + span {
-        margin-left: 10px !important;
+        .text-center {
+            margin-top: 7px;
+        }
     }
-}
-
-.filter-attributes-content {
-    display: none;
-    margin-left: 7px;
 }
 
 .layered-filter-wrapper {
