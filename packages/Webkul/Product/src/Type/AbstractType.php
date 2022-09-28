@@ -865,7 +865,7 @@ abstract class AbstractType
      */
     public function handleQuantity(int $quantity): int
     {
-        return $quantity ?? 1;
+        return $quantity ?: 1;
     }
 
     /**
