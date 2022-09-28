@@ -13,7 +13,7 @@
 
         methods: {
             addProductToCompare: function () {
-                if (Boolean(this.customer) == true) {    
+                if (this.customer == "true") {                        
                     this.$http.put(
                         `${this.$root.baseUrl}/comparison`, {
                             productId: this.productId,
