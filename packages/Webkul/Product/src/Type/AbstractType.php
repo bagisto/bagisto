@@ -1038,33 +1038,23 @@ abstract class AbstractType
         $customerGroup = app(CustomerRepository::class)->getCurrentGroup();
 
         $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroup) {
-            $query->where('customer_group_id', $customerGroup->id)
-                ->orWhereNull('customer_group_id');
-        })
-        ->groupBy('qty')
-        ->orderBy('qty')
-        ->get();
+                $query->where('customer_group_id', $customerGroup->id)
+                    ->orWhereNull('customer_group_id');
+            })
+            ->where('qty', '>', 1)
+            ->groupBy('qty')
+            ->orderBy('qty')
+            ->get();
 
-        if ($this->haveSpecialPrice()) {
-            $rulePrice = app(CatalogRuleProductPrice::class)->getRulePrice($this->product);
-
-            if (! $rulePrice) {
-                return $offerLines;
+        foreach ($customerGroupPrices as $customerGroupPrice) {
+            if (
+                ! is_null($this->product->special_price)
+                && $customerGroupPrice->value >= $this->product->special_price
+            ) {
+                continue;
             }
 
-            if ($rulePrice->price >= $this->product->special_price) {
-                return $offerLines;
-            }
-
-            foreach ($customerGroupPrices as $customerGroupPrice) {
-                if ($customerGroupPrice->qty > 1) {
-                    array_push($offerLines, $this->getOfferLines($customerGroupPrice));
-                }
-            }
-        } elseif ($customerGroupPrices->isNotEmpty()) {
-            foreach ($customerGroupPrices as $customerGroupPrice) {
-                array_push($offerLines, $this->getOfferLines($customerGroupPrice));
-            }
+            array_push($offerLines, $this->getOfferLines($customerGroupPrice));
         }
 
         return $offerLines;
