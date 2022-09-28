@@ -164,9 +164,7 @@ class CartController extends Controller
             session()->flash('warning', trans('shop::app.checkout.cart.move-to-wishlist-error'));
         }
 
-        return request()->get('redirect')
-            ? redirect()->back()
-            : response()->json([]);
+        return redirect()->back();
     }
 
     /**
