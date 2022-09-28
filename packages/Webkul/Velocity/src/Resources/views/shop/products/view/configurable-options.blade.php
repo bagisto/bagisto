@@ -1,10 +1,9 @@
 @if (Webkul\Product\Helpers\ProductType::hasVariants($product->type))
-
-    @inject ('configurableOptionHelper', 'Webkul\Product\Helpers\ConfigurableOption')
-
     @php
         $defaultVariant = $product->getTypeInstance()->getDefaultVariant();
-        $config = $configurableOptionHelper->getConfigurationConfig($product);
+
+        $config = app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($product);
+
         $galleryImages = product_image()->getGalleryImages($product);
     @endphp
 
@@ -78,13 +77,15 @@
                                 @change="configure(attribute, $event.target.value)"
                                 :checked="index == attribute.selectedIndex">
 
-                            <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
+                            <div>
+                                <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
 
-                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" :title="option.label" alt="" />
+                                <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" :title="option.label" alt="" />
 
-                            <span v-if="attribute.swatch_type == 'text'">
-                                @{{ option.label }}
-                            </span>
+                                <span v-if="attribute.swatch_type == 'text'">
+                                    @{{ option.label }}
+                                </span>
+                            </div>
 
                         </label>
 

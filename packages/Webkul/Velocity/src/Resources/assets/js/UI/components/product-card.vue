@@ -74,7 +74,7 @@
                 v-if="product.totalReviews && product.totalReviews > 0">
 
                 <star-ratings :ratings="product.avgRating"></star-ratings>
-                <a class="fs14 align-top unset active-hover" :href="`${$root.baseUrl}/reviews/${product.slug}`">
+                <a class="fs14 unset active-hover" :href="`${$root.baseUrl}/reviews/${product.slug}`">
                     {{ __('products.reviews-count', {'totalReviews': product.totalReviews}) }}
                 </a>
             </div>

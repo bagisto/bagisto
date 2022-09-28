@@ -141,6 +141,8 @@
                                         </div>
                                     @endif
 
+                                    @include ('shop::products.view.configurable-options')
+
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
                                     @if ($product->getTypeInstance()->showQuantityBox())
@@ -152,8 +154,6 @@
                                     @endif
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
-
-                                    @include ('shop::products.view.configurable-options')
 
                                     @include ('shop::products.view.downloadable')
 

@@ -112,17 +112,19 @@
 
     .toolbar-wrapper {
         > div {
-            margin: 0 20px 0 0;
+            margin: 0 8px 0 0;
             display: inline-block;
 
             label {
+                font-size: 16px;
                 font-weight: 500;
                 margin-right: 10px;
             }
 
             select {
                 cursor: pointer;
-                padding: 6px 16px;
+                padding: 8px;
+                font-size: 16px;
                 color: $font-color;
                 background-color: white;
             }
@@ -257,6 +259,7 @@
 
     .product-rating {
         @extend .text-nowrap;
+        color: #212529;
 
         .stars {
             display: inline-block;
@@ -289,6 +292,7 @@
         }
 
         .product-price {
+            margin-top: 5px;
             margin-bottom: 15px;
         }
     }
@@ -1574,15 +1578,12 @@
     }
 }
 
-.price-label {
-    margin-right: 6px;
-}
-
 .product-price {
     display: inline-block;
 
     .price-label {
         margin-right: 6px;
+        float: right;
     }
 
     .regular-price {
@@ -1593,7 +1594,8 @@
     }
 
     .special-price {
-        display: inline-block;
+        font-weight: 600;
+        font-size: 18px;
         margin-right: 10px;
         float: left;
     }

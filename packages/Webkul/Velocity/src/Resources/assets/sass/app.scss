@@ -1103,17 +1103,6 @@ i.within-circle {
     box-shadow: none;
 }
 
-.filters-container .toolbar-wrapper > div select {
-    cursor: pointer;
-    padding: 6px 8px;
-    color: rgba(0, 0, 0, 0.83);
-    background-color: #fff;
-}
-
-.filters-container .toolbar-wrapper > div {
-    margin: 0 8px 0 0;
-}
-
 @media (max-width: 600px) {
     .selective-div {
         width: 97px;
