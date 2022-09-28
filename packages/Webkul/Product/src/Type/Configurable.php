@@ -124,13 +124,13 @@ class Configurable extends AbstractType
      */
     public function updateDefaultVariantId()
     {
-        $defaultVariantId = request()->get('default_variant_id');
-
-        if ($defaultVariantId) {
-            $this->setDefaultVariantId($defaultVariantId);
-
-            $this->product->save();
+        if (! $defaultVariantId = request()->get('default_variant_id')) {
+            return;
         }
+
+        $this->setDefaultVariantId($defaultVariantId);
+
+        $this->product->save();
     }
 
     /**
@@ -200,6 +200,7 @@ class Configurable extends AbstractType
                     }
 
                     $variantData['channel'] = $data['channel'];
+
                     $variantData['locale'] = $data['locale'];
 
                     $this->updateVariant($variantData, $variantId);
@@ -238,6 +239,7 @@ class Configurable extends AbstractType
         $data = $this->fillRequiredFields($data);
 
         $typeOfVariants = 'simple';
+
         $productInstance = app(config('product_types.' . $product->type . '.class'));
 
         if (
@@ -388,18 +390,16 @@ class Configurable extends AbstractType
                 }
             }
 
-            $columnName = $attribute->column_name;
-
             if (! $productAttributeValue) {
                 $this->attributeValueRepository->create([
-                    'product_id'   => $variant->id,
-                    'attribute_id' => $attribute->id,
-                    $columnName    => $data[$attribute->code],
-                    'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale'       => $attribute->value_per_locale ? $data['locale'] : null,
+                    'product_id'            => $variant->id,
+                    'attribute_id'          => $attribute->id,
+                    $attribute->column_name => $data[$attribute->code],
+                    'channel'               => $attribute->value_per_channel ? $data['channel'] : null,
+                    'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
                 ]);
             } else {
-                $productAttributeValue->update([$columnName => $data[$attribute->code]]);
+                $productAttributeValue->update([$attribute->column_name => $data[$attribute->code]]);
             }
         }
 
@@ -471,11 +471,7 @@ class Configurable extends AbstractType
      */
     public function canBeMovedFromWishlistToCart($item)
     {
-        if (isset($item->additional['selected_configurable_option'])) {
-            return true;
-        }
-
-        return false;
+        return isset($item->additional['selected_configurable_option']);
     }
 
     /**
@@ -612,17 +608,17 @@ class Configurable extends AbstractType
     {
         if ($this->haveSpecialPrice()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-            . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'.'<span class="regular-price"></span>';
+                . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'.'<span class="regular-price"></span>';
         } elseif ($this->haveOffer()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-            . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-            . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'
-            . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getOfferPrice())) . '</span>';
+                . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+                . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'
+                . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getOfferPrice())) . '</span>';
         } else {
             return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-            . ' '
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span> <span class="regular-price"></span>';
+                . ' '
+                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span> <span class="regular-price"></span>';
         }
     }
 
@@ -837,8 +833,7 @@ class Configurable extends AbstractType
      */
     public function getProductOptions($product = '')
     {
-        $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
-        $options = $configurableOption->getConfigurationConfig($product);
+        $options = app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($product);
 
         return $options;
     }
