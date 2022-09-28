@@ -1,10 +1,9 @@
 @php
     $reviews = app('Webkul\Velocity\Helpers\Helper')->getShopRecentReviews(4);
-    $reviewCount = count($reviews);
 @endphp
 
 <div class="container-fluid reviews-container">
-    @if ($reviewCount)
+    @if ($reviews->isNotEmpty())
         <card-list-header
             heading="{{ __('velocity::app.home.customer-reviews') }}"
         ></card-list-header>
