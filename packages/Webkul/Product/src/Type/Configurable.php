@@ -335,7 +335,7 @@ class Configurable extends AbstractType
      */
     public function getAttributeTypeValues($attribute, $value)
     {
-        $attributeTypeFields = array_fill_keys(array_values($attribute->column_name), null);
+        $attributeTypeFields = array_fill_keys(array_values($attribute->attributeTypeFields), null);
 
         $attributeTypeFields[$attribute->column_name] = $value;
 

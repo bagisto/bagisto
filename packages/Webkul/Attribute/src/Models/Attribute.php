@@ -41,7 +41,7 @@ class Attribute extends TranslatableModel implements AttributeContract
      *
      * @var array
      */
-    protected $attributeTypeFields = [
+    public $attributeTypeFields = [
         'text'        => 'text_value',
         'textarea'    => 'text_value',
         'price'       => 'float_value',

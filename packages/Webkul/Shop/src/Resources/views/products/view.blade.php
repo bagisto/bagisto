@@ -72,10 +72,10 @@
                             </div>
                         @endif
 
-                        @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
-                            <div class="regular-price">
-                                @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
-                                    <p> {{ $offers }} </p>
+                        @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
+                            <div class="discount-offers">
+                                @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
+                                    <p> {{ $offer }} </p>
                                 @endforeach
                             </div>
                         @endif
