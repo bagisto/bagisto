@@ -53,8 +53,10 @@
         }
     }
 
-    .custom-form select {
-        background: $dark-mode-theme-color;
+    .bundle-option-item {
+        .custom-form select {
+            background: $dark-mode-theme-color;
+        }
     }
 
     .address-container {
