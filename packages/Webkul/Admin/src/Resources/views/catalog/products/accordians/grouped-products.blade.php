@@ -81,7 +81,7 @@
     <script type="text/x-template" id="grouped-product-item-template">
         <tr>
             <td>
-                @{{ groupedProduct.associated_product.name }}
+                <a :href="`${baseUrl}/${groupedProduct.associated_product.url_key}`" target='_blank'> @{{ groupedProduct.associated_product.name }}</a>
                 <input type="hidden" :name="[inputName + '[associated_product_id]']" :value="groupedProduct.associated_product.id"/>
             </td>
 
@@ -189,6 +189,12 @@
         Vue.component('grouped-product-item', {
             template: '#grouped-product-item-template',
 
+            data: function () {
+                return {
+                    baseUrl: window.location.origin
+                }
+            },
+
             props: ['index', 'groupedProduct'],
 
             inject: ['$validator'],
@@ -200,6 +206,10 @@
 
                     return 'links[link_' + this.index + ']';
                 }
+            },
+
+            mounted () {
+                console.log(this.baseUrl);
             },
 
             methods: {

@@ -171,7 +171,7 @@
             </td>
 
             <td>
-                @{{ product.product.name }}
+                <a :href="`${baseUrl}/${product.product.url_key}`" target='_blank'>@{{ product.product.name }}</a>
                 <input type="hidden" :name="[inputName + '[product_id]']" :value="product.product.id"/>
             </td>
 
@@ -356,6 +356,12 @@
             template: '#bundle-product-item-template',
 
             props: ['controlName', 'index', 'bundleOption', 'product'],
+
+            data: function () {
+                return {
+                    baseUrl: window.location.origin
+                }
+            },
 
             inject: ['$validator'],
 
