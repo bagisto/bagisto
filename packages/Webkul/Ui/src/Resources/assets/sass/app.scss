@@ -1463,7 +1463,11 @@ modal {
         }
 
         input {
-            display: none;
+            display: block;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            cursor: all-scroll;
         }
 
         .remove-image {
