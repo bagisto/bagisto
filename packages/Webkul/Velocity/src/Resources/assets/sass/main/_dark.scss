@@ -54,7 +54,13 @@
     }
 
     .custom-form select {
-        background: $dark-mode-theme-color !important;
+        background: $dark-mode-theme-color;
+    }
+
+    .address-container {
+        .card {
+            color: $dark-mode-velocity-text-color-black;
+        }
     }
 
     #mini-cart {
