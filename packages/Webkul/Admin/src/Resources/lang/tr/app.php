@@ -1591,6 +1591,7 @@ return [
             'set-order-status'                      => 'Faturayı oluşturduktan sonra sipariş durumunu ayarlayın.',
             'generate-invoice-applicable'           => 'Otomatik fatura oluştur etkinse geçerlidir',
             'records-found'                         => 'Kayıt(lar) bulundu',
+
         ],
     ],
 

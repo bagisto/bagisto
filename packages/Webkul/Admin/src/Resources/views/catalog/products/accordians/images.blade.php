@@ -5,7 +5,7 @@
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.controls.before', ['product' => $product]) !!}
 
         <div class="control-group {{ $errors->has('images.files.*') ? 'has-error' : '' }}">
-            <label>{{ __('admin::app.catalog.categories.image') }}</label>
+            <label class="required">{{ __('admin::app.catalog.categories.image') }}</label>
 
             <product-image></product-image>
 
