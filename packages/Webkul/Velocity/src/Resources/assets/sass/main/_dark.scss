@@ -133,12 +133,15 @@
 
     #header-search-icon {
         background-color: $dark-mode-theme-color !important;
+        border: 1px solid $border-header-search;
+        border-radius: 0px !important;
     }
 
     header #search-form {
-        input, 
-        .btn-group select {
+        .btn-group select, 
+        input {
             border: 1px solid $border-header-search !important;
+            border-radius: 0px;
         }
 
         .select-icon {
@@ -260,10 +263,6 @@
     .form-control {
         background-color: $dark-mode-theme-color;
         color: $white;
-    }
-
-    #header-search-icon {
-        border: 1px solid $border-header-search;
     }
 
     .view-mode {
