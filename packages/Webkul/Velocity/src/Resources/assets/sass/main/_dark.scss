@@ -53,6 +53,10 @@
         }
     }
 
+    .custom-form select {
+        background: $dark-mode-theme-color !important;
+    }
+
     #mini-cart {
         .mini-cart-content {
             color: $white !important;
