@@ -208,10 +208,6 @@
                 }
             },
 
-            mounted () {
-                console.log(this.baseUrl);
-            },
-
             methods: {
                 removeGroupedProduct: function () {
                     this.$emit('onRemoveGroupedProduct', this.groupedProduct)
