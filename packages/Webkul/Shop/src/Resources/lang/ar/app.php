@@ -384,6 +384,8 @@ return [
                 'customer-name'        => ':name\'س قائمة الرغبات المشتركة',
                 'enable-wishlist-info' => 'قم بتمكين مشاركة قائمة الرغبات للحصول على الرابط.',
                 'update-message'       => 'تم تحديث إعدادات قائمة الرغبات المشتركة بنجاح',
+                'share-product'        => 'انقر لمشاركة المنتج',
+                'select-all'           => 'شارك الكل',
             ],
 
             'downloadable_products' => [

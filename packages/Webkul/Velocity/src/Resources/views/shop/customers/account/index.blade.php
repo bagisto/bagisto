@@ -6,7 +6,7 @@
             @include('shop::customers.account.partials.sidemenu')
         </div>
 
-        <div class="account-layout right mt10">
+        <div class="account-layout right mt10 wishlist">
             @if (request()->route()->getName() !== 'customer.profile.index')
                 @if (Breadcrumbs::exists())
                     {{ Breadcrumbs::render() }}

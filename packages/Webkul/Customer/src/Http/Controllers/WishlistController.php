@@ -11,7 +11,7 @@ class WishlistController extends Controller
 {
     /**
      * Contains route related configuration.
-     *
+     
      * @var array
      */
     protected $_config;
@@ -47,7 +47,7 @@ class WishlistController extends Controller
         return view($this->_config['view'], [
             'items'              => $this->wishlistRepository->getCustomerWishlist(),
             'isSharingEnabled'   => $this->isSharingEnabled(),
-            'isWishlistShared'   => $customer->isWishlistShared(),
+            'isWishlistShared'   => 0,
             'wishlistSharedLink' => $customer->getWishlistSharedLink()
         ]);
     }
@@ -113,12 +113,39 @@ class WishlistController extends Controller
      */
     public function share()
     {
+        $productIds = request()->product_ids;
+
+        $productCount = request()->product_count;
+
+        $selectedAll = false;
+
+        if (count($productIds) == $productCount) {
+            $selectedAll = true;
+        }
+
         $customer = auth()->guard('customer')->user();
 
         if ($this->isSharingEnabled()) {
             $data = $this->validate(request(), [
                 'shared' => 'required|boolean'
             ]);
+
+            $updateCounts = $customer->wishlist_items();
+
+            if ($productIds 
+                && $data['shared']
+            ) {
+                $updateCounts->whereIn('product_id', $productIds);
+            }
+
+            if ($productIds 
+                && ! $data['shared'] 
+                && ! $selectedAll
+            ) {
+                $updateCounts->whereNotIn('product_id', $productIds);
+            }
+
+            $updateCounts = $updateCounts->update(['shared' => $data['shared']]);
 
             $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);
 
@@ -127,8 +154,8 @@ class WishlistController extends Controller
                 && $updateCounts > 0
             ) {
                 return response()->json([
-                    'isWishlistShared'   => $customer->isWishlistShared(),
-                    'wishlistSharedLink' => $customer->getWishlistSharedLink()
+                    'isWishlistShared'   => $data['shared'] ? 1 : 0,
+                    'wishlistSharedLink' => $customer->getWishlistSharedLink($productIds)
                 ]);
             }
         }
@@ -153,7 +180,14 @@ class WishlistController extends Controller
 
         $customer = $customerRepository->find(request()->get('id'));
 
-        $items = $customer->wishlist_items()->where('shared', 1)->get();
+        $items = $customer->wishlist_items()
+        ->where('shared', 1);
+
+        if (request()->get('product_ids')) {
+            $items->whereIn('product_id', request()->get('product_ids'));
+        }
+
+        $items = $items->get();
 
         if (
             $customer
