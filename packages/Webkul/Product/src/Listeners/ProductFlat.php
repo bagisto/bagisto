@@ -286,6 +286,14 @@ class ProductFlat
                     }
 
                     $productFlat->save();
+
+                    if ($productFlat->parent) {
+                        $productFlat->parent->min_price = $productFlat->parent->getTypeInstance()->getMinimalPrice();
+
+                        $productFlat->parent->max_price = $productFlat->parent->getTypeInstance()->getMaximumPrice();
+
+                        $productFlat->parent->save();
+                    }
                 }
             } else {
                 if (request()->route()?->getName() == 'admin.catalog.products.update') {
