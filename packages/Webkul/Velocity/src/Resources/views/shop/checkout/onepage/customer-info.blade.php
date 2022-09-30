@@ -21,16 +21,19 @@
                         <div class="card">
                             <div class="card-body row">
                                 <div class="col-1">
-                                    <input
-                                        type="radio"
-                                        name="billing[address_id]"
-                                        :value="addresses.id"
-                                        v-model="address.billing.address_id"
-                                        v-validate="'required'"
-                                        data-vv-as="&quot;{{ __('shop::app.checkout.onepage.billing-address') }}&quot;"
-                                        @change="validateForm('address-form')" />
+                                    <div class="radio">
+                                        <input
+                                            type="radio"
+                                            name="billing[address_id]"
+                                            :id="'billing_address_id_' + addresses.id"
+                                            :value="addresses.id"
+                                            v-model="address.billing.address_id"
+                                            v-validate="'required'"
+                                            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.billing-address') }}&quot;"
+                                            @change="validateForm('address-form')" />
 
-                                    <span class="checkmark"></span>
+                                        <label :for="'billing_address_id_' + addresses.id" class="radio-view"></label>
+                                    </div>
                                 </div>
 
                                 <div class="col-10">
@@ -83,6 +86,8 @@
                                 name="billing[use_for_shipping]"
                                 v-model="address.billing.use_for_shipping"
                                 @change="validateFormAfterAction" />
+
+                            <label for="billing[use_for_shipping]" class="checkbox-view"></label>
 
                             <span>
                                 {{ __('shop::app.checkout.onepage.use_for_shipping') }}
@@ -146,16 +151,19 @@
                         <div class="card">
                             <div class="card-body row">
                                 <div class="col-1">
-                                    <input
-                                        type="radio"
-                                        name="shipping[address_id]"
-                                        :value="addresses.id"
-                                        v-model="address.shipping.address_id"
-                                        v-validate="'required'"
-                                        data-vv-as="&quot;{{ __('shop::app.checkout.onepage.shipping-address') }}&quot;"
-                                        @change="validateForm('address-form')" />
+                                    <div class="radio">
+                                        <input
+                                            type="radio"
+                                            name="shipping[address_id]"
+                                            :id="'shipping_address_id_' + addresses.id"
+                                            :value="addresses.id"
+                                            v-model="address.shipping.address_id"
+                                            v-validate="'required'"
+                                            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.shipping-address') }}&quot;"
+                                            @change="validateForm('address-form')" />
 
-                                    <span class="checkmark"></span>
+                                        <label :for="'shipping_address_id_' + addresses.id" class="radio-view"></label>
+                                    </div>
                                 </div>
 
                                 <div class="col-10">

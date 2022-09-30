@@ -72,7 +72,16 @@
                                     v-validate="'required'"
                                     value="{{ old('password') }}"
                                     data-vv-as="&quot;{{ __('shop::app.customer.login-form.password') }}&quot;" />
-                                <input type="checkbox" onclick="myFunction()" id="shoPassword" class="show-password"> {{ __('shop::app.customer.login-form.show-password') }}  
+
+                                <input
+                                    type="checkbox"
+                                    onclick="myFunction()"
+                                    id="shoPassword"
+                                    class="show-password"
+                                />
+
+                                {{ __('shop::app.customer.login-form.show-password') }}
+
                                 <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
 
                                 <a href="{{ route('shop.customer.forgot_password.create') }}" class=" show-password float-right">
@@ -116,16 +125,16 @@
         $(":input[name=email]").focus();
     });
 
-        function myFunction() {
-            var x = document.getElementById("password");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
         }
+    }
     
-    </script>
+</script>
 
 @endpush
 

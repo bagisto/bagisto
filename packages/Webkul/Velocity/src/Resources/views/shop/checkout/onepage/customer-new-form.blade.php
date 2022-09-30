@@ -257,6 +257,9 @@
                     v-model="address.shipping.save_as_address"
                     @change="validateForm('address-form')" />
 
+                
+                <label for="shipping[save_as_address]" class="checkbox-view"></label>
+
                 <span>
                     {{ __('shop::app.checkout.onepage.save_as_address') }}
                 </span>
@@ -543,6 +546,8 @@
                     v-model="address.billing.use_for_shipping"
                     @change="setTimeout(() => validateForm('address-form'), 0)" />
 
+                <label for="billing[use_for_shipping]" class="checkbox-view"></label>
+
                 <span>
                     {{ __('shop::app.checkout.onepage.use_for_shipping') }}
                 </span>
@@ -559,6 +564,8 @@
                     name="billing[save_as_address]"
                     v-model="address.billing.save_as_address"
                     @change="validateForm('address-form')" />
+
+                <label for="billing[save_as_address]" class="checkbox-view"></label>
 
                 <span>
                     {{ __('shop::app.checkout.onepage.save_as_address') }}

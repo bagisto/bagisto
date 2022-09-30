@@ -1158,8 +1158,8 @@ i.within-circle {
     input {
         left: -4px;
         opacity: 0;
-        position: absolute;
-        top: -1px;
+        position: absolute !important;
+        top: -1px !important;
         z-index: 100;
     }
 
@@ -1187,13 +1187,12 @@ i.within-circle {
 .radio {
     position: relative;
     display: block;
-    margin: 10px 5px 5px 0px;
 
     input {
-        left: -4px;
+        left: 3px;
         opacity: 0;
         position: absolute;
-        top: -1px;
+        top: 4px;
         z-index: 100;
     }
 
