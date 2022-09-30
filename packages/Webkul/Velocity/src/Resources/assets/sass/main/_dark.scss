@@ -178,6 +178,14 @@
         color: $dark-mode-velocity-text-color-black;
     }
 
+    .card-body {
+        .compare-icon {
+            .material-icons {
+                color: $dark-mode-velocity-text-color-black;
+            }
+        }
+    }
+
     .product-detail,
     .cart-item-list,
     .lg-card-container.list-card {
