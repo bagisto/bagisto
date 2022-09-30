@@ -208,7 +208,9 @@
             },
 
             created: function () {
-                if (! this.index) this.active = false;
+                if (! this.index) {
+                    this.active = false;
+                }
 
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;
@@ -219,6 +221,8 @@
                         this.sliderConfig.priceTo = this.appliedFilterValues[1];
                     }
 
+                    this.active = true;
+                } else if (this.attribute.code == 'price') {
                     this.active = true;
                 }
 
