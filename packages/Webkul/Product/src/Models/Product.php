@@ -385,9 +385,9 @@ class Product extends Model implements ProductContract
      */
     public function getTypeInstance(): AbstractType
     {
-        if ($this->typeInstance) {
-            return $this->typeInstance;
-        }
+        // if ($this->typeInstance) {
+        //     return $this->typeInstance;
+        // }
 
         $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
 
