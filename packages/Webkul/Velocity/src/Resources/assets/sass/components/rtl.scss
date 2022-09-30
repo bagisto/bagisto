@@ -598,6 +598,25 @@ body {
             }
         }
     }
+
+    .pl20 {
+        padding-left: 0 !important;
+        padding-right: 20px !important;
+    }
+
+    .radio {
+        .radio-view {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+
+    .checkbox {
+        .checkbox-view {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
 }
 
 @media only screen and (max-width: 1192px) {
