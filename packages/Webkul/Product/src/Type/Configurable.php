@@ -606,11 +606,6 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        // if ($this->product->name == 'Configgurabel Product 2') {
-        //     dd($this->haveSpecialPrice(), $this->haveOffer(), $this->getMinimalPrice());
-        //     // dd($minPrice);
-        // }
-
         if ($this->haveSpecialPrice()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
                 . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
