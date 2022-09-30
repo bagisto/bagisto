@@ -654,16 +654,13 @@ class Core
             $price = 0;
         }
 
-        $currency = $currencyCode
-            ? $this->getAllCurrencies()->where('code', $currencyCode)->first()
+        $currency = ($currencyByCode = $this->getAllCurrencies()->where('code', $currencyCode)->first()) 
+            ? $currencyByCode
             : $this->getCurrentCurrency();
 
         $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
-        if (
-            $currency 
-            && $symbol = $currency->symbol
-        ) {
+        if ($symbol = $currency->symbol) {
             if ($this->currencySymbol($currency) == $symbol) {
                 return $formatter->formatCurrency($price, $currency->code);
             }
@@ -673,7 +670,7 @@ class Core
             return $formatter->format($this->convertPrice($price));
         }
 
-        return $formatter->formatCurrency($price, $currency ? $currency->code : $this->getCurrentCurrencyCode());
+        return $formatter->formatCurrency($price, $currency->code);
     }
 
     /**
