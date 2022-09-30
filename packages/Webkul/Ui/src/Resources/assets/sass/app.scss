@@ -1434,7 +1434,6 @@ modal {
 
 // image wrapper
 .image-wrapper {
-    margin-bottom: 20px;
     margin-top: 10px;
     display: inline-block;
     width: 100%;
@@ -1450,7 +1449,7 @@ modal {
         background-image: url('../images/placeholder-icon.svg');
         background-repeat: no-repeat;
         background-position: center;
-        margin-bottom: 20px;
+        margin-bottom: 20px; 
         float: left;
 
         &.draggable {
@@ -1495,6 +1494,11 @@ modal {
         &.has-image {
             background-image: none;
         }
+    }
+
+    .image-add {
+        border: 3px dashed #ccc;
+        background-image: url('/vendor/webkul/ui/assets/images/icons8-plus-100 (1).png') !important;background-color: white;
     }
 }
 

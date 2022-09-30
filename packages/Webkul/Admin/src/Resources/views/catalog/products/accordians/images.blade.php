@@ -14,7 +14,7 @@
                 v-text="'{{ $errors->first('images.files.*') }}'">
             </span>
 
-            <span class="control-info mt-10">{{ __('admin::app.catalog.products.image-size') }}</span>
+            <span class="control-info">{{ __('admin::app.catalog.products.image-size') }}</span>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.controls.after', ['product' => $product]) !!}
@@ -37,11 +37,9 @@
                         @onImageSelected="imageSelected($event)">
                     </product-image-item>
                 </draggable>
-            </div>
 
-            <label class="btn btn-lg btn-primary" style="display: table; width: auto" @click="createFileType">
-                {{ __('admin::app.catalog.products.add-image-btn-title') }}
-            </label>
+                <label class="image-add" @click="createFileType"></label>
+            </div>
         </div>
     </script>
 
