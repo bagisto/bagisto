@@ -121,6 +121,12 @@
                 margin-right: 10px;
             }
 
+            .styled-select + .select-icon-container {
+                .select-icon {
+                    top: -26px;
+                }
+            }
+
             select {
                 cursor: pointer;
                 padding: 8px;
@@ -2215,6 +2221,12 @@
     .filter-attributes-content {
         display: none;
         margin-left: 7px;
+
+        ul.items {
+            li.item {
+                margin-bottom: 10px;
+            }
+        }
     }
 
     &.active {

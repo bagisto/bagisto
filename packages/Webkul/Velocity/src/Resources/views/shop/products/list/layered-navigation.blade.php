@@ -26,6 +26,7 @@
                         :attribute="attribute"
                         :appliedFilterValues="appliedFilters[attribute.code]"
                         :max-price-src="maxPriceSrc"
+                        v-if="attribute.type == 'price' || attribute.options.length"
                         @onFilterAdded="addFilters(attribute.code, $event)">
                     </filter-attribute-item>
                 </div>
@@ -51,18 +52,24 @@
                 <ul type="none" class="items" v-if="attribute.type != 'price'">
                     <li
                         class="item"
-                        v-for='(option, index) in attribute.options'>
-                        <div
+                        v-for='(option, index) in attribute.options'
+                    >
+
+                        <span
                             class="checkbox"
-                            @click="optionClicked(option.id, $event)">
+                            @click="optionClicked(option.id, $event)"
+                        >
                             <input
                                 type="checkbox"
                                 :id="option.id"
                                 v-bind:value="option.id"
                                 v-model="appliedFilters"
-                                @change="addFilter($event)" />
+                                @change="addFilter($event)"
+                            />
+                            <label :for="option.id" class="checkbox-view"></label>
                             <span>@{{ option.label ? option.label : option.admin_name }}</span>
-                        </div>
+                        </span>
+
                     </li>
                 </ul>
 
