@@ -38,7 +38,7 @@
                     </product-image-item>
                 </draggable>
 
-                <label class="image-add" @click="createFileType"></label>
+                <label class="image-add image-item" @click="createFileType"></label>
             </div>
         </div>
     </script>
