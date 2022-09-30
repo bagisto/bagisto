@@ -296,6 +296,8 @@ class ProductRepository extends Repository
             });
 
             $items = $query->get();
+
+            dd($items->toArray());
         }
 
         $results = new LengthAwarePaginator($items, $count, $perPage, $page, [
