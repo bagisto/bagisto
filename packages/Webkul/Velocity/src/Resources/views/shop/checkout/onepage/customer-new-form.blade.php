@@ -400,28 +400,6 @@
         @endfor
     @endif
 
-    <div :class="`col-12 form-field ${errors.has('address-form.billing[city]') ? 'has-error' : ''}`" style="margin-top: 15px;">
-        <label for="billing[city]" class="mandatory">
-            {{ __('shop::app.checkout.onepage.city') }}
-        </label>
-
-        <input
-            class="control"
-            id="billing[city]"
-            type="text"
-            name="billing[city]"
-            v-model="address.billing.city"
-            v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;"
-            @change="validateForm('address-form')" />
-
-        <span
-            class="control-error"
-            v-text="errors.first('address-form.billing[city]')"
-            v-if="errors.has('address-form.billing[city]')">
-        </span>
-    </div>
-
     <div :class="`col-12 form-field ${errors.has('address-form.billing[country]') ? 'has-error' : ''}`">
         <label for="billing[country]" class="{{ core()->isCountryRequired() ? 'mandatory' : '' }}">
             {{ __('shop::app.checkout.onepage.country') }}
@@ -492,6 +470,28 @@
             class="control-error"
             v-text="errors.first('address-form.billing[state]')"
             v-if="errors.has('address-form.billing[state]')">
+        </span>
+    </div>
+    
+    <div :class="`col-12 form-field ${errors.has('address-form.billing[city]') ? 'has-error' : ''}`" style="margin-top: 15px;">
+        <label for="billing[city]" class="mandatory">
+            {{ __('shop::app.checkout.onepage.city') }}
+        </label>
+
+        <input
+            class="control"
+            id="billing[city]"
+            type="text"
+            name="billing[city]"
+            v-model="address.billing.city"
+            v-validate="'required'"
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;"
+            @change="validateForm('address-form')" />
+
+        <span
+            class="control-error"
+            v-text="errors.first('address-form.billing[city]')"
+            v-if="errors.has('address-form.billing[city]')">
         </span>
     </div>
 
