@@ -1939,6 +1939,11 @@
                 padding-bottom: 0;
             }
 
+            span.price {
+                font-size: inherit !important;
+                vertical-align: text-bottom;
+            }
+            
             .control-group {
                 margin-bottom: 0;
                 color: #5e5e5e;
@@ -1949,6 +1954,11 @@
 
                 .control {
                     color: #5e5e5e;
+                }
+
+                .checkbox,
+                .radio {
+                    margin-bottom: 10px;
                 }
             }
 
