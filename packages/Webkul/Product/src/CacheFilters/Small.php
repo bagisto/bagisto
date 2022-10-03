@@ -21,7 +21,7 @@ class Small implements FilterInterface
 
         $height = core()->getConfigData('catalog.products.cache-small-image.height')
             ? core()->getConfigData('catalog.products.cache-small-image.height')
-            : 120;
+            : null;
 
         $image->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
