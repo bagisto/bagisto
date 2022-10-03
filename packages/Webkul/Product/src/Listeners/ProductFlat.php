@@ -202,7 +202,6 @@ class ProductFlat
                                     $this->fillableAttributeCodes
                                 ))
                             )
-                            || in_array($attribute->code, ['tax_category_id'])
                             || ! in_array($attribute->code, $this->flatColumns)
                         ) {
                             continue;
