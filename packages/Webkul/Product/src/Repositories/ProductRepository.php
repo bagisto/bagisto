@@ -512,10 +512,13 @@ class ProductRepository extends Repository
                 ->addSelect('product_flat.*')
                 ->addSelect('product_flat.product_id as id')
                 ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
                 ->where('products.type', 'simple')
                 ->where('product_flat.channel', $channel)
                 ->where('product_flat.locale', $locale)
+                ->where('product_flat.status', '1')
                 ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
+                ->where('product_inventories.qty','>','0')
                 ->orderBy('product_id', 'desc');
         })->get();
     }
