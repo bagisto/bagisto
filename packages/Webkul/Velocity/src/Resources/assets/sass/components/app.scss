@@ -1626,14 +1626,14 @@
     */
     .price-from {
         .bundle-regular-price {
-            font-size: 12px !important;
+            font-size: 14px !important;
             font-weight: 500;
             margin-right: 10px;
             text-decoration: line-through;
         }
 
         .bundle-special-price {
-            font-size: 15px !important;
+            font-size: 18px !important;
             font-weight: 600;
         }
 
@@ -1655,6 +1655,7 @@
         &.final-price {
             font-size: 18px;
             font-weight: 600;
+            margin-right: 10px;
         }
     }
 }
@@ -1883,6 +1884,18 @@
                     font-size: 16px;
                     vertical-align: middle;
                     display: inline-block;
+
+                    .product-price {
+                        display: block;
+                        margin-top: 5px;
+                        margin-bottom: 0;
+                        font-size: 18px;
+                        word-break: break-all;
+
+                        .special-price {
+                            font-size: 16px;
+                        }
+                    }
                 }
 
                 .qty {
@@ -1939,6 +1952,11 @@
                 padding-bottom: 0;
             }
 
+            span.price {
+                font-size: inherit !important;
+                vertical-align: text-bottom;
+            }
+            
             .control-group {
                 margin-bottom: 0;
                 color: #5e5e5e;
@@ -1949,6 +1967,11 @@
 
                 .control {
                     color: #5e5e5e;
+                }
+
+                .checkbox,
+                .radio {
+                    margin-bottom: 10px;
                 }
             }
 
@@ -2325,7 +2348,7 @@
         }
 
         .bundle-special-price {
-            font-size: 15px !important;
+            font-size: 18px !important;
             font-weight: 600;
         }
 
