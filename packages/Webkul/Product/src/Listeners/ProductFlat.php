@@ -172,12 +172,10 @@ class ProductFlat
             $superAttributes[$parentProduct->id] = $parentProduct->super_attributes()->pluck('code')->toArray();
         }
 
-        if (isset($product['channels'])) {
-            foreach ($product['channels'] as $channel) {
-                $channels[] = $this->getChannel($channel)->code;
-            }
-        } elseif (isset($parentProduct['channels'])){
-            foreach ($parentProduct['channels'] as $channel) {
+        $channelCodes = $product['channels'] ?? ($parentProduct['channels'] ?? []);
+
+        if (! empty($channelCodes)) {
+            foreach ($channelCodes as $channel) {
                 $channels[] = $this->getChannel($channel)->code;
             }
         } else {
