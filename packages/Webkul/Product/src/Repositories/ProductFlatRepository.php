@@ -36,8 +36,8 @@ class ProductFlatRepository extends Repository
     /**
      * Update `product_flat` custom column.
      *
-     * @param  \Webkul\Attribute\Models\Attribute $attribute
-     * @param  \Webkul\Product\Listeners\ProductFlat $listener
+     * @param  \Webkul\Attribute\Models\Attribute  $attribute
+     * @param  \Webkul\Product\Listeners\ProductFlat  $listener
      * @return object
      */
     public function updateAttributeColumn(
@@ -57,38 +57,11 @@ class ProductFlatRepository extends Repository
      * @param  \Webkul\Category\Contracts\Category  $category
      * @return float
      */
-    public function getCategoryProductMaximumPrice($category = null)
+    public function getCategoryProductMaximumPrice($category)
     {
-        static $loadedCategoryMaxPrice = [];
-
-        if (! $category) {
-            return $this->model->max('max_price');
-        }
-
-        if (array_key_exists($category->id, $loadedCategoryMaxPrice)) {
-            return $loadedCategoryMaxPrice[$category->id];
-        }
-
-        return $loadedCategoryMaxPrice[$category->id] = $this->model
+        return $this->model
             ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
             ->where('product_categories.category_id', $category->id)
             ->max('max_price');
-    }
-
-    /**
-     * Handle category product max price.
-     *
-     * @param  \Webkul\Category\Contracts\Category  $category
-     * @return float
-     */
-    public function handleCategoryProductMaximumPrice($category)
-    {
-        $maxPrice = 0;
-
-        if (isset($category)) {
-            $maxPrice = core()->convertPrice($this->getCategoryProductMaximumPrice($category));
-        }
-
-        return $maxPrice;
     }
 }

@@ -29,9 +29,7 @@ trait CoreConfigField
      */
     public function getValidations($field)
     {
-        return isset($field['validation'])
-            ? $field['validation']
-            : '';
+        return $field['validation'] ?? '';
     }
 
     /**
@@ -76,24 +74,23 @@ trait CoreConfigField
      */
     public function getDependentFieldOptions($field, $dependentValues)
     {
-        $fieldOptions = null;
-
-        if ($dependentValues) {
-            $i = 0;
-
-            foreach ($dependentValues as $key => $result) {
-                $data['title'] = $result;
-                $data['value'] = $key;
-                $options[$i] = $data;
-                $i++;
-            }
-
-            $fieldOptions = $options;
+        if (
+            empty($field['options'])
+            || ! $dependentValues
+        ) {
+            return '';
         }
 
-        return ! isset($field['options'])
-            ? ''
-            : $fieldOptions;
+        $options = [];
+
+        foreach ($dependentValues as $key => $result) {
+            $options[] = [
+                'title' => $result,
+                'value' => $key,
+            ];
+        }
+
+        return $options;
     }
 
     /**
@@ -109,17 +106,11 @@ trait CoreConfigField
     {
         $info = [];
 
-        if (
-            isset($field['channel_based'])
-            && $field['channel_based']
-        ) {
+        if (! empty($field['channel_based'])) {
             $info[] = $channel;
         }
 
-        if (
-            isset($field['locale_based'])
-            && $field['locale_based']
-        ) {
+        if (! empty($field['locale_based'])) {
             $info[] = $locale;
         }
 

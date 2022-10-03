@@ -28,7 +28,7 @@ class CartRuleCopyCest
 
         $count = count(CartRule::all());
 
-        $I->amOnAdminRoute('admin.cart-rules.copy', ['id' => $original->id]);
+        $I->amOnAdminRoute('admin.cart_rules.copy', ['id' => $original->id]);
 
         $I->seeRecord(CartRule::class, [
             'id'     => $original->id + 1,
@@ -54,6 +54,6 @@ class CartRuleCopyCest
 
         $I->seeResponseCodeIsSuccessful();
 
-        $I->seeCurrentRouteIs('admin.cart-rules.copy');
+        $I->seeCurrentRouteIs('admin.cart_rules.copy');
     }
 }

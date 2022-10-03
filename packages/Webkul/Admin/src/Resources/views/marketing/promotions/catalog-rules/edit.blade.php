@@ -13,12 +13,12 @@
 @push('scripts')
     <script type="text/x-template" id="catalog-rule-template">
         <div>
-            <form method="POST" action="{{ route('admin.catalog-rules.update', $catalogRule->id) }}" @submit.prevent="onSubmit">
+            <form method="POST" action="{{ route('admin.catalog_rules.update', $catalogRule->id) }}" @submit.prevent="onSubmit">
                 <div class="page-header">
                     <div class="page-title">
                         <h1>
                         <i class="icon angle-left-icon back-link"
-                            onclick="window.location = '{{ route('admin.catalog-rules.index') }}'"></i>
+                            onclick="window.location = '{{ route('admin.catalog_rules.index') }}'"></i>
 
                             {{ __('admin::app.promotions.catalog-rules.edit-title') }}
                         </h1>

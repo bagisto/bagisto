@@ -51,10 +51,10 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->findOrFail($categoryId);
 
-        $maxPrice = $this->productFlatRepository->handleCategoryProductMaximumPrice($category);
+        $maxPrice = $this->productFlatRepository->getCategoryProductMaximumPrice($category);
 
         return response()->json([
-            'max_price' => $maxPrice,
+            'max_price' => core()->convertPrice($maxPrice),
         ]);
     }
 }

@@ -10,9 +10,9 @@ use Webkul\BookingProduct\Repositories\BookingRepository;
 class BookingController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Contains route configuration
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     protected $_config;
 

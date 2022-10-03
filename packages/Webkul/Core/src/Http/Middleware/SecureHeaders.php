@@ -37,6 +37,7 @@ class SecureHeaders
     /**
      * Set headers.
      *
+     * @param  \Illuminate\Http\Response  $response
      * @return void
      */
     private function setHeaders($response)

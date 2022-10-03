@@ -6,11 +6,11 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.tax-rates.update', $taxRate->id) }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.tax_rates.update', $taxRate->id) }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.tax-rates.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.tax_rates.index') }}'"></i>
 
                         {{ __('admin::app.settings.tax-rates.edit.title') }}
                     </h1>

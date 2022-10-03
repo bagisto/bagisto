@@ -62,7 +62,7 @@ class PriceUpdate extends Command
                     ->distinct()
                     ->leftJoin('products', 'product_flat.product_id', 'products.id')
                     ->leftJoin('product_bundle_options', 'products.id', 'product_bundle_options.product_id')
-                    ->leftJoin('product_bundle_option_products', 'product_bundle_options.id', 'product_bundle_option_productsproduct_bundle_option_id')
+                    ->leftJoin('product_bundle_option_products', 'product_bundle_options.id', 'product_bundle_option_products.product_bundle_option_id')
                     ->where('product_bundle_option_products.product_id', $product->product_id)
                     ->get();
 

@@ -11,10 +11,10 @@ class CartRuleCreateCest
     {
         $I->loginAsAdmin();
 
-        $I->amOnAdminRoute('admin.cart-rules.index');
+        $I->amOnAdminRoute('admin.cart_rules.index');
 
         // we are dealing with `Vue.js` so we can not do classical form filling
-        $I->sendAjaxPostRequest(route('admin.cart-rules.store'), [
+        $I->sendAjaxPostRequest(route('admin.cart_rules.store'), [
             '_token' => csrf_token(),
             'name' => 'Demo Cart Rule',
 

@@ -86,11 +86,11 @@ class EventController extends Controller
             session()->flash('error', trans('admin::app.marketing.events.edit-error'));
 
             return redirect()->back();
-        } else {
-            $event = $this->eventRepository->findOrFail($id);
-
-            return view($this->_config['view'], compact('event'));
         }
+
+        $event = $this->eventRepository->findOrFail($id);
+
+        return view($this->_config['view'], compact('event'));
     }
 
     /**

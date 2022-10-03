@@ -10,7 +10,7 @@ use Webkul\Customer\Repositories\CustomerGroupRepository;
 class CustomerSocialAccountRepository extends Repository
 {
     /**
-     * Create a new reposotory instance.
+     * Create a new repository instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository

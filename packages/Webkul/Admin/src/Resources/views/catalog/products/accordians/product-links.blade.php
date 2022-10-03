@@ -148,7 +148,7 @@
                 this.is_searching[key] = true;
 
                 if (this.search_term[key].length >= 1) {
-                    this.$http.get ("{{ route('admin.catalog.products.productlinksearch') }}", {params: {query: this.search_term[key]}})
+                    this.$http.get ("{{ route('admin.catalog.products.product_link_search') }}", {params: {query: this.search_term[key]}})
                         .then (function(response) {
 
                             for (var index in response.data) {

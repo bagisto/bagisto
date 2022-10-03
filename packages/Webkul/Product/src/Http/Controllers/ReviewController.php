@@ -3,8 +3,8 @@
 namespace Webkul\Product\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
 
 class ReviewController extends Controller
 {
@@ -156,11 +156,11 @@ class ReviewController extends Controller
                 $review = $this->productReviewRepository->find($value);
 
                 try {
-                    if (! isset($data['massaction-type'])) {
+                    if (! isset($data['mass-action-type'])) {
                         return redirect()->back();
                     }
 
-                    if (! $data['massaction-type'] == 'update') {
+                    if (! $data['mass-action-type'] == 'update') {
                         return redirect()->back();
                     }
 

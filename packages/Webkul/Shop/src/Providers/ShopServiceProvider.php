@@ -37,14 +37,14 @@ class ShopServiceProvider extends ServiceProvider
         $router->aliasMiddleware('theme', Theme::class);
         $router->aliasMiddleware('currency', Currency::class);
 
-        /* view composers */
+        /* View Composers */
         $this->composeView();
 
-        /* paginators */
+        /* Paginator */
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
 
-        /* breadcrumbs */
+        /* Breadcrumbs */
         require __DIR__ . '/../Routes/breadcrumbs.php';
     }
 

@@ -4,7 +4,7 @@ namespace Webkul\Core\Contracts\Validations;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class CommaSeperatedInteger implements Rule
+class CommaSeparatedInteger implements Rule
 {
     /**
      * Determine if the validation rule passes.
@@ -33,6 +33,6 @@ class CommaSeperatedInteger implements Rule
      */
     public function message()
     {
-        return trans('core::validation.comma-seperated-integer');
+        return trans('core::validation.comma-separated-integer');
     }
 }
