@@ -803,17 +803,15 @@ class Configurable extends AbstractType
      */
     public function getBaseImage($item)
     {
+        $product = $item->product;
+
         if ($item instanceof \Webkul\Customer\Contracts\Wishlist) {
             if (isset($item->additional['selected_configurable_option'])) {
                 $product = $this->productRepository->find($item->additional['selected_configurable_option']);
-            } else {
-                $product = $item->product;
             }
         } else {
             if (count($item->child->product->images)) {
                 $product = $item->child->product;
-            } else {
-                $product = $item->product;
             }
         }
 
