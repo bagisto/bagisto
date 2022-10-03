@@ -271,6 +271,12 @@
             display: inline-block;
         }
 
+        a {
+            vertical-align: top;
+            margin-top: -2px;
+            display: inline-block;
+        }
+
         span {
             font-size: 14px;
             vertical-align: middle;
@@ -2217,6 +2223,10 @@
     font-size: 16px;
     margin-bottom: 10px;
     border-bottom: 1px solid #cccccc;
+
+    &:last-child {
+        border-bottom: none;
+    }
 
     .filter-attributes-content {
         display: none;

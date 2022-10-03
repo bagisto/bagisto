@@ -1151,39 +1151,7 @@ i.within-circle {
 }
 
 
-.checkbox {
-    position: relative;
-    display: block;
-
-    input {
-        left: -4px;
-        opacity: 0;
-        position: absolute !important;
-        top: -1px !important;
-        z-index: 100;
-    }
-
-    .checkbox-view {
-        background-image: url('../images/controls.svg');
-        background-position: 0px 0px;
-        height: 20px;
-        width: 20px;
-        margin: 0;
-        display: inline-block !important;
-        vertical-align: middle;
-        margin-right: 10px;
-    }
-
-    input:checked + .checkbox-view {
-        background-position: 0px -21px;
-    }
-
-    input:disabled + .checkbox-view {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-}
-
+.checkbox,
 .radio {
     position: relative;
     display: block;
@@ -1191,28 +1159,54 @@ i.within-circle {
     input {
         left: 3px;
         opacity: 0;
-        position: absolute;
-        top: 4px;
+        position: absolute !important;
+        top: 4px !important;
         z-index: 100;
+
+        &:checked {
+            &+ .checkbox-view {
+                background-position: 0px -21px;
+            }
+            
+            &+ .radio-view {
+                background-position: -21px -21px;
+            }
+        
+        }
+
+        &:disabled {
+            &+ .checkbox-view {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            &+ .radio-view {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
     }
 
-    .radio-view {
-        background-image: url('../images/controls.svg');
-        background-position: -21px 0px;
+    label {
         height: 20px;
         width: 20px;
         margin: 0;
         display: inline-block !important;
         vertical-align: middle;
         margin-right: 10px;
-    }
 
-    input:checked + .radio-view {
-        background-position: -21px -21px;
+        &.checkbox-view {
+            background-image: url('../images/controls.svg');
+            background-position: 0px 0px;
+        }
+    
+        &.radio-view {
+            background-image: url('../images/controls.svg');
+            background-position: -21px 0px;
+        }
     }
-
-    input:disabled + .radio-view {
-        opacity: 0.5;
-        cursor: not-allowed;
+    
+    span {
+        vertical-align: middle;
     }
 }
