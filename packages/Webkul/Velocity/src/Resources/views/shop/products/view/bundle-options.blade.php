@@ -37,7 +37,7 @@
                     <quantity-changer quantity-text="{{ __('shop::app.products.quantity') }}"></quantity-changer>
 
                     <div class="control-group mt10 mb20">
-                        <label>{{ __('shop::app.products.total-amount') }}</label>
+                        <label class="mb10">{{ __('shop::app.products.total-amount') }}</label>
 
                         <div class="bundle-price no-margin">
                             @{{ formatted_total_price | currency(currency_options) }}
@@ -88,13 +88,14 @@
                         <span class="radio" v-for="(product, index2) in option.products">
                             <input
                                 type="radio"
+                                :id="'bundle_options[' + option.id + '][' + product.id + ']'"
                                 :name="'bundle_options[' + option.id + '][]'"
                                 v-model="selected_product"
                                 v-validate="option.is_required ? 'required' : ''"
                                 :data-vv-as="'&quot;' + option.label + '&quot;'"
                                 :value="product.id" />
 
-                            <label :for="'bundle_options[' + option.id + '][]'" class="radio-view"></label>
+                            <label :for="'bundle_options[' + option.id + '][' + product.id + ']'" class="radio-view"></label>
 
                             <span>
                                 @{{ product.name }}
@@ -110,7 +111,7 @@
                         <span class="checkbox" v-for="(product, index2) in option.products">
                             <input
                                 type="checkbox"
-                                :id="'bundle_options[' + option.id + '][]'"
+                                :id="'bundle_options[' + option.id + '][' + product.id + ']'"
                                 :name="'bundle_options[' + option.id + '][]'"
                                 :value="product.id"
                                 v-model="selected_product"
@@ -118,7 +119,7 @@
                                 :data-vv-as="'&quot;' + option.label + '&quot;'"
                             >
 
-                            <label :for="'bundle_options[' + option.id + '][]'" class="checkbox-view"></label>
+                            <label :for="'bundle_options[' + option.id + '][' + product.id + ']'" class="checkbox-view"></label>
 
                             <span>
                                 @{{ product.name }}
