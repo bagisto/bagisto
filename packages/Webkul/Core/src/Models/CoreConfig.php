@@ -12,9 +12,13 @@ class CoreConfig extends Model implements CoreConfigContract
      *
      * @var array
      */
-
     protected $table = 'core_config';
 
+    /**
+     * Fillable for mass assignment
+     *
+     * @var array
+     */
     protected $fillable = [
         'code',
         'value',
@@ -22,5 +26,10 @@ class CoreConfig extends Model implements CoreConfigContract
         'locale_code',
     ];
 
+    /**
+     * Hidden properties
+     *
+     * @var array
+     */
     protected $hidden = ['token'];
 }

@@ -23,6 +23,7 @@ class CategoryObserver
      * Handle the Category "saved" event.
      *
      * @param  \Webkul\Category\Contracts\Category  $category
+     * @return void
      */
     public function saved($category)
     {

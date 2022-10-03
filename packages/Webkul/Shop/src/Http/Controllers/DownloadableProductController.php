@@ -66,7 +66,7 @@ class DownloadableProductController extends Controller
         ) {
             session()->flash('warning', trans('shop::app.customer.account.downloadable_products.payment-error'));
 
-            return redirect()->route('customer.downloadable_products.index');
+            return redirect()->route('shop.customer.downloadable_products.index');
         }
 
         if (
@@ -76,7 +76,7 @@ class DownloadableProductController extends Controller
 
             session()->flash('warning', trans('shop::app.customer.account.downloadable_products.download-error'));
 
-            return redirect()->route('customer.downloadable_products.index');
+            return redirect()->route('shop.customer.downloadable_products.index');
         }
 
         $remainingDownloads = $downloadableLinkPurchased->download_bought - ($downloadableLinkPurchased->download_used + $downloadableLinkPurchased->download_canceled + 1);

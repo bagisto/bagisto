@@ -332,13 +332,13 @@
                 <tr>
                     <td>{{ __('admin::app.sales.orders.subtotal') }}</td>
                     <td>-</td>
-                    <td>@{{ refund.summary.subtotal.formated_price }}</td>
+                    <td>@{{ refund.summary.subtotal.formatted_price }}</td>
                 </tr>
 
                 <tr>
                     <td>{{ __('admin::app.sales.orders.discount') }}</td>
                     <td>-</td>
-                    <td>-@{{ refund.summary.discount.formated_price }}</td>
+                    <td>-@{{ refund.summary.discount.formatted_price }}</td>
                 </tr>
 
                 <tr>
@@ -386,13 +386,13 @@
                 <tr class="border">
                     <td>{{ __('admin::app.sales.orders.tax') }}</td>
                     <td>-</td>
-                    <td>@{{ refund.summary.tax.formated_price }}</td>
+                    <td>@{{ refund.summary.tax.formatted_price }}</td>
                 </tr>
 
                 <tr class="bold">
                     <td>{{ __('admin::app.sales.orders.grand-total') }}</td>
                     <td>-</td>
-                    <td>@{{ refund.summary.grand_total.formated_price }}</td>
+                    <td>@{{ refund.summary.grand_total.formatted_price }}</td>
                 </tr>
             </table>
         </div>

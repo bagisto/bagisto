@@ -2,33 +2,33 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Webkul\Admin\DataGrids\OrderShipmentsDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
+use Webkul\Admin\DataGrids\OrderShipmentsDataGrid;
 
 class ShipmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     protected $_config;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\ShipmentRepository   $shipmentRepository
      * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderitemRepository  $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\ShipmentRepository   $shipmentRepository
      * @return void
      */
     public function __construct(
-        protected ShipmentRepository $shipmentRepository,
         protected OrderRepository $orderRepository,
-        protected OrderItemRepository $orderItemRepository
+        protected OrderItemRepository $orderItemRepository,
+        protected ShipmentRepository $shipmentRepository
     )
     {
         $this->_config = request('_config');

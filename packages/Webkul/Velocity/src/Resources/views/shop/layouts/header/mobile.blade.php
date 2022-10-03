@@ -43,13 +43,13 @@
 
     <template v-slot:greetings>
         @guest('customer')
-            <a class="unset" href="{{ route('customer.session.index') }}">
+            <a class="unset" href="{{ route('shop.customer.session.index') }}">
                 {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
             </a>
         @endguest
 
         @auth('customer')
-            <a class="unset" href="{{ route('customer.profile.index') }}">
+            <a class="unset" href="{{ route('shop.customer.profile.index') }}">
                 {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
             </a>
         @endauth
@@ -59,21 +59,21 @@
         @auth('customer')
             <ul type="none" class="vc-customer-options">
                 <li>
-                    <a href="{{ route('customer.profile.index') }}" class="unset">
+                    <a href="{{ route('shop.customer.profile.index') }}" class="unset">
                         <i class="icon profile text-down-3"></i>
                         <span>{{ __('shop::app.header.profile') }}</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('customer.address.index') }}" class="unset">
+                    <a href="{{ route('shop.customer.addresses.index') }}" class="unset">
                         <i class="icon address text-down-3"></i>
                         <span>{{ __('velocity::app.shop.general.addresses') }}</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('customer.reviews.index') }}" class="unset">
+                    <a href="{{ route('shop.customer.reviews.index') }}" class="unset">
                         <i class="icon reviews text-down-3"></i>
                         <span>{{ __('velocity::app.shop.general.reviews') }}</span>
                     </a>
@@ -81,7 +81,7 @@
 
                 @if (core()->getConfigData('general.content.shop.wishlist_option'))
                     <li>
-                        <a href="{{ route('customer.wishlist.index') }}" class="unset">
+                        <a href="{{ route('shop.customer.wishlist.index') }}" class="unset">
                             <i class="icon wishlist text-down-3"></i>
                             <span>{{ __('shop::app.header.wishlist') }}</span>
                         </a>
@@ -98,14 +98,14 @@
                 @endif
 
                 <li>
-                    <a href="{{ route('customer.orders.index') }}" class="unset">
+                    <a href="{{ route('shop.customer.orders.index') }}" class="unset">
                         <i class="icon orders text-down-3"></i>
                         <span>{{ __('velocity::app.shop.general.orders') }}</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('customer.downloadable_products.index') }}" class="unset">
+                    <a href="{{ route('shop.customer.downloadable_products.index') }}" class="unset">
                         <i class="icon downloadables text-down-3"></i>
                         <span>{{ __('velocity::app.shop.general.downloadables') }}</span>
                     </a>
@@ -117,7 +117,7 @@
     <template v-slot:extra-navigation>
         <li>
             @auth('customer')
-                <form id="customerLogout" action="{{ route('customer.session.destroy') }}" method="POST">
+                <form id="customerLogout" action="{{ route('shop.customer.session.destroy') }}" method="POST">
                     @csrf
 
                     @method('DELETE')
@@ -125,7 +125,7 @@
 
                 <a
                     class="unset"
-                    href="{{ route('customer.session.destroy') }}"
+                    href="{{ route('shop.customer.session.destroy') }}"
                     onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
                     {{ __('shop::app.header.logout') }}
                 </a>
@@ -134,7 +134,7 @@
             @guest('customer')
                 <a
                     class="unset"
-                    href="{{ route('customer.session.create') }}">
+                    href="{{ route('shop.customer.session.create') }}">
                     <span>{{ __('shop::app.customer.login-form.title') }}</span>
                 </a>
             @endguest
@@ -144,7 +144,7 @@
             @guest('customer')
                 <a
                     class="unset"
-                    href="{{ route('customer.register.index') }}">
+                    href="{{ route('shop.customer.register.index') }}">
                     <span>{{ __('shop::app.header.sign-up') }}</span>
                 </a>
             @endguest

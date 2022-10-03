@@ -8,7 +8,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\Checkout\Models\CartItem;
-use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
@@ -81,7 +81,7 @@ class Booking extends Virtual
     {
         $product = parent::update($data, $id, $attribute);
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if (request()->route()->getName() != 'admin.catalog.products.mass_update') {
             $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $id);
 
             if ($bookingProduct) {
@@ -270,7 +270,7 @@ class Booking extends Virtual
      *
      * @param \Webkul\Checkout\Models\CartItem $item
      *
-     * @return \Webkul\Product\Datatypes\CartItemValidationResult
+     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {

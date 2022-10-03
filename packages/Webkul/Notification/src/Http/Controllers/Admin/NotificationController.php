@@ -60,7 +60,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * Update the notification is readed or not.
+     * Update the notification is reade or not.
      *
      * @param  int  $orderId
      * @return \Illuminate\View\View
@@ -79,7 +79,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * Update the notification is readed or not.
+     * Update the notification is reade or not.
      *
      * @return array
      */
@@ -87,12 +87,10 @@ class NotificationController extends Controller
     {
         $this->notificationRepository->where('read', 0)->update(['read' => 1]);
 
-        $params = [
+        $searchResults = $this->notificationRepository->getParamsData([
             'limit' => 5,
             'read'  => 0,
-        ];
-
-        $searchResults = $this->notificationRepository->getParamsData($params);
+        ]);
 
         return [
             'search_results'  => $searchResults,

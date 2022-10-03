@@ -4,10 +4,10 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\DataGrids\CustomerDataGrid;
 use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
 use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Mail\NewCustomerNotification;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -87,14 +87,12 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.registration.after', $customer);
 
-        try {
-            $configKey = 'emails.general.notifications.emails.general.notifications.customer';
-
-            if (core()->getConfigData($configKey)) {
+        if (core()->getConfigData('emails.general.notifications.emails.general.notifications.customer')) {
+            try {
                 Mail::queue(new NewCustomerNotification($customer, $password));
+            } catch (\Exception $e) {
+                report($e);
             }
-        } catch (\Exception $e) {
-            report($e);
         }
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer']));

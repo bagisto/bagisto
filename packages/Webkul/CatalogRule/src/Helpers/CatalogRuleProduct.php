@@ -5,7 +5,6 @@ namespace Webkul\CatalogRule\Helpers;
 use Carbon\Carbon;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\CatalogRule\Repositories\CatalogRuleProductRepository;
 use Webkul\Rule\Helpers\Validator;
 
@@ -109,9 +108,7 @@ class CatalogRuleProduct
             foreach ($rule->conditions as $condition) {
                 if (
                     ! $condition['attribute']
-                    || ! isset($condition['value'])
-                    || is_null($condition['value'])
-                    || $condition['value'] == ''
+                    || empty($condition['value'])
                     || in_array($condition['attribute'], $appliedAttributes)
                 ) {
                     continue;
@@ -169,7 +166,7 @@ class CatalogRuleProduct
                ->where('pav_' . $attribute->code . '.attribute_id', $attribute->id);
         });
 
-        $query = $query->addSelect('pav_' . $attribute->code . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $attribute->code);
+        $query = $query->addSelect('pav_' . $attribute->code . '.' . $attribute->column_name . ' as ' . $attribute->code);
 
         return $query;
     }

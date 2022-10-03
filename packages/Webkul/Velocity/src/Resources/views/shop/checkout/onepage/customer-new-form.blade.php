@@ -1,7 +1,4 @@
-@if (
-    isset($shipping)
-    && $shipping
-)
+@if (! empty($shipping))
     <div :class="`col-12 form-field mb30 ${errors.has('address-form.shipping[first_name]') ? 'has-error' : ''}`">
         <label for="shipping[first_name]" class="mandatory" style="width: unset;">
             {{ __('shop::app.checkout.onepage.first-name') }}
@@ -260,16 +257,16 @@
                     v-model="address.shipping.save_as_address"
                     @change="validateForm('address-form')" />
 
+                
+                <label for="shipping[save_as_address]" class="checkbox-view"></label>
+
                 <span>
                     {{ __('shop::app.checkout.onepage.save_as_address') }}
                 </span>
             </span>
         </div>
     @endauth
-@elseif (
-    isset($billing)
-    && $billing
-)
+@elseif (! empty($billing))
     <div :class="`col-12 form-field ${errors.has('address-form.billing[company_name]') ? 'has-error' : ''}`">
         <label for="billing[company_name]">
             {{ __('shop::app.checkout.onepage.company-name') }}
@@ -549,6 +546,8 @@
                     v-model="address.billing.use_for_shipping"
                     @change="setTimeout(() => validateForm('address-form'), 0)" />
 
+                <label for="billing[use_for_shipping]" class="checkbox-view"></label>
+
                 <span>
                     {{ __('shop::app.checkout.onepage.use_for_shipping') }}
                 </span>
@@ -565,6 +564,8 @@
                     name="billing[save_as_address]"
                     v-model="address.billing.save_as_address"
                     @change="validateForm('address-form')" />
+
+                <label for="billing[save_as_address]" class="checkbox-view"></label>
 
                 <span>
                     {{ __('shop::app.checkout.onepage.save_as_address') }}

@@ -13,7 +13,7 @@
 
             <div class="page-action">
                 @if (bouncer()->hasPermission('marketing.email-marketing.email-templates.create'))
-                    <a href="{{ route('admin.email-templates.create') }}" class="btn btn-lg btn-primary">
+                    <a href="{{ route('admin.email_templates.create') }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.marketing.templates.add-title') }}
                     </a>
                 @endif
@@ -21,7 +21,7 @@
         </div>
 
         <div class="page-content">
-            <datagrid-plus src="{{ route('admin.email-templates.index') }}"></datagrid-plus>
+            <datagrid-plus src="{{ route('admin.email_templates.index') }}"></datagrid-plus>
         </div>
     </div>
 @stop

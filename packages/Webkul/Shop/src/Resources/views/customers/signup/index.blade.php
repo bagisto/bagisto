@@ -7,12 +7,12 @@
 <div class="auth-content">
 
     <div class="sign-up-text">
-        {{ __('shop::app.customer.signup-text.account_exists') }} - <a href="{{ route('customer.session.index') }}">{{ __('shop::app.customer.signup-text.title') }}</a>
+        {{ __('shop::app.customer.signup-text.account_exists') }} - <a href="{{ route('shop.customer.session.index') }}">{{ __('shop::app.customer.signup-text.title') }}</a>
     </div>
 
     {!! view_render_event('bagisto.shop.customers.signup.before') !!}
 
-    <form method="post" action="{{ route('customer.register.create') }}" @submit.prevent="onSubmit">
+    <form method="post" action="{{ route('shop.customer.register.create') }}" @submit.prevent="onSubmit">
 
         {{ csrf_field() }}
 

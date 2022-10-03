@@ -15,23 +15,21 @@
                     {!! view_render_event('bagisto.shop.checkout.shipping-method.before', ['rateGroup' => $rateGroup]) !!}
                         @foreach ($rateGroup['rates'] as $rate)
                             <div class="row col-12">
-                                <div>
-                                    <label class="radio-container">
-                                        <input
-                                            type="radio"
-                                            v-validate="'required'"
-                                            name="shipping_method"
-                                            id="{{ $rate->method }}"
-                                            value="{{ $rate->method }}"
-                                            @change="methodSelected()"
-                                            v-model="selected_shipping_method"
-                                            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.shipping-method') }}&quot;" />
+                                <div class="radio">
+                                    <input
+                                        type="radio"
+                                        v-validate="'required'"
+                                        name="shipping_method"
+                                        id="{{ $rate->method }}"
+                                        value="{{ $rate->method }}"
+                                        @change="methodSelected()"
+                                        v-model="selected_shipping_method"
+                                        data-vv-as="&quot;{{ __('shop::app.checkout.onepage.shipping-method') }}&quot;" />
 
-                                        <span class="checkmark"></span>
-                                    </label>
+                                    <label for="{{ $rate->method }}" class="radio-view"></label>
                                 </div>
 
-                                <div class="pl30">
+                                <div class="pl20">
                                     <div class="row">
                                         <b>{{ core()->currency($rate->base_price) }}</b>
                                     </div>

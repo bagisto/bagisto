@@ -39,6 +39,7 @@
             > div {
                 display: inline-block;
                 vertical-align: middle;
+                font-weight: 600;
             }
         }
 
@@ -158,7 +159,16 @@
         }
 
         .product-price {
-            line-height: 38px;
+            font-size: 30px;
+            line-height: 30px;
+
+            .special-price {
+                font-size: 30px;
+            }
+
+            .regular-price {
+                font-size: 18px;
+            }
 
             .price-from {
                 .bundle-regular-price {
@@ -307,17 +317,23 @@
                     position: sticky;
                     top: 70px;
 
-                    div.col-12:first-child {
-                        max-height: 420px;
-                        height: 420px;
-                    }
-
                     > div {
                         margin: 0;
                         padding: 0;
                     }
                 }
             }
+
+            .control-group {
+                &.attribute {
+                    margin-bottom: 10px;
+
+                    > label {
+                        font-weight: 600;
+                    }
+                }
+            }
+                    
 
             .right {
                 .swatch-container {
@@ -327,33 +343,34 @@
                     .swatch {
                         display: inline-block;
                         margin-right: 5px;
-                        min-width: 40px;
-                        height: 40px;
 
-                        span {
-                            min-width: 38px;
-                            height: 38px;
-                            float: left;
-                            border: 1px solid #c7c7c7;
-                            border-radius: 3px;
-                            line-height: 36px;
-                            text-align: center;
-                            cursor: pointer;
-                            padding: 0 10px;
+                        div {
+                            min-width: 40px;
+                            height: 40px;
+                            padding: 3px;
+                            border: 1px solid transparent;
+
+                            span {
+                                float: left;
+                                min-width: 32px;
+                                height: 32px;
+                                line-height: 32px;
+                                text-align: center;
+                                cursor: pointer;
+                                padding: 0 10px;
+                                background: rgb(242, 242, 242);
+                            }
+
+                            img {
+                                width: 32px;
+                                height: 32px;
+                                cursor: pointer;
+                                background: rgb(242, 242, 242);
+                            }
                         }
 
-                        img {
-                            width: 38px;
-                            height: 38px;
-                            border: 1px solid #c7c7c7;
-                            border-radius: 3px;
-                            cursor: pointer;
-                            background: rgb(242, 242, 242);
-                        }
-
-                        input:checked + span,
-                        input:checked + img {
-                            border: 1px solid #242424;
+                        input:checked + div {
+                            border: 1px solid #979797;
                         }
 
                         input {

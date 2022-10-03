@@ -112,17 +112,25 @@
 
     .toolbar-wrapper {
         > div {
-            margin: 0 20px 0 0;
+            margin: 0 8px 0 0;
             display: inline-block;
 
             label {
+                font-size: 16px;
                 font-weight: 500;
                 margin-right: 10px;
             }
 
+            .styled-select + .select-icon-container {
+                .select-icon {
+                    top: -26px;
+                }
+            }
+
             select {
                 cursor: pointer;
-                padding: 6px 16px;
+                padding: 8px;
+                font-size: 16px;
                 color: $font-color;
                 background-color: white;
             }
@@ -257,8 +265,15 @@
 
     .product-rating {
         @extend .text-nowrap;
+        color: #212529;
 
         .stars {
+            display: inline-block;
+        }
+
+        a {
+            vertical-align: top;
+            margin-top: -2px;
             display: inline-block;
         }
 
@@ -289,6 +304,7 @@
         }
 
         .product-price {
+            margin-top: 5px;
             margin-bottom: 15px;
         }
     }
@@ -1574,15 +1590,12 @@
     }
 }
 
-.price-label {
-    margin-right: 6px;
-}
-
 .product-price {
     display: inline-block;
 
     .price-label {
         margin-right: 6px;
+        float: right;
     }
 
     .regular-price {
@@ -1593,7 +1606,8 @@
     }
 
     .special-price {
-        display: inline-block;
+        font-weight: 600;
+        font-size: 18px;
         margin-right: 10px;
         float: left;
     }
@@ -2074,9 +2088,16 @@
         background-color: #ccc;
     }
 
+    .vue-slider-dot {
+        width: 8px !important;
+        height: 8px !important;
+        margin-top: -4px;
+    }
+
     .vue-slider-dot-handle {
         width: 100%;
         height: 100%;
+        border: 4px solid #4D7EA8;
         border-radius: 50%;
         background-color: $white-color;
         box-shadow: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.32);
@@ -2199,8 +2220,24 @@
 }
 
 .filter-attributes-item {
+    font-size: 16px;
     margin-bottom: 10px;
     border-bottom: 1px solid #cccccc;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    .filter-attributes-content {
+        display: none;
+        margin-left: 7px;
+
+        ul.items {
+            li.item {
+                margin-bottom: 10px;
+            }
+        }
+    }
 
     &.active {
         .filter-attributes-content {
@@ -2212,21 +2249,17 @@
         margin: 10px 15px 13px -4px;
 
         input[type='text'] {
+            padding: 7px;
             text-align: center;
-            border: 1px solid $theme-color;
+            border: 1px solid #DCDCDC;
             width: 30%;
             background-color: white;
         }
-    }
 
-    input[type='checkbox'] + span {
-        margin-left: 10px !important;
+        .text-center {
+            margin-top: 7px;
+        }
     }
-}
-
-.filter-attributes-content {
-    display: none;
-    margin-left: 7px;
 }
 
 .layered-filter-wrapper {

@@ -35,7 +35,7 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\Admin\Listeners\Order@sendOrderCommentMail'
         ],
         'core.channel.update.after' => [
-            'Webkul\Admin\Listeners\ChannelSettingsChange@checkForMaintenaceMode'
+            'Webkul\Admin\Listeners\ChannelSettingsChange@checkForMaintenanceMode'
         ],
     ];
 }

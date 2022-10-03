@@ -83,7 +83,7 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * To unsubscribe from a the subcription list
+     * To unsubscribe from a the subscription list
      *
      * @param  string  $token
      * @return \Illuminate\Http\Response
