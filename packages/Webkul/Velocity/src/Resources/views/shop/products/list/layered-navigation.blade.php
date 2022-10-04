@@ -61,12 +61,14 @@
                         >
                             <input
                                 type="checkbox"
-                                :id="option.id"
+                                :id="'option_' + option.id"
                                 v-bind:value="option.id"
                                 v-model="appliedFilters"
                                 @change="addFilter($event)"
                             />
-                            <label :for="option.id" class="checkbox-view"></label>
+
+                            <label :for="'option_' + option.id" class="checkbox-view"></label>
+
                             <span>@{{ option.label ? option.label : option.admin_name }}</span>
                         </span>
 
