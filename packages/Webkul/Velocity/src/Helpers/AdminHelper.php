@@ -4,6 +4,7 @@ namespace Webkul\Velocity\Helpers;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Category\Contracts\Category;
 
 class AdminHelper
 {
@@ -18,7 +19,7 @@ class AdminHelper
     }
 
     /**
-     * Store cateogry icon.
+     * Store category icon.
      *
      * @param  \Webkul\Category\Contracts\Category  $category
      * @return \Webkul\Category\Contracts\Category
@@ -27,7 +28,7 @@ class AdminHelper
     {
         $data = request()->all();
 
-        if (! $category instanceof \Webkul\Category\Contracts\Category) {
+        if (! $category instanceof Category) {
             $category = $this->categoryRepository->findOrFail($category);
         }
 

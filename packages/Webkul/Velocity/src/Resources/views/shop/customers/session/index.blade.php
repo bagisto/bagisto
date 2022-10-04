@@ -16,7 +16,7 @@
                             {{ __('velocity::app.customer.login-form.customer-login')}}
                         </h2>
 
-                        <a href="{{ route('customer.register.index') }}" class="btn-new-customer">
+                        <a href="{{ route('shop.customer.register.index') }}" class="btn-new-customer">
                             <button type="button" class="theme-btn light">
                                 {{ __('velocity::app.customer.login-form.sign-up')}}
                             </button>
@@ -36,7 +36,7 @@
 
                         <form
                             method="POST"
-                            action="{{ route('customer.session.create') }}"
+                            action="{{ route('shop.customer.session.create') }}"
                             @submit.prevent="onSubmit">
 
                             {{ csrf_field() }}
@@ -72,17 +72,26 @@
                                     v-validate="'required'"
                                     value="{{ old('password') }}"
                                     data-vv-as="&quot;{{ __('shop::app.customer.login-form.password') }}&quot;" />
-                                <input type="checkbox" onclick="myFunction()" id="shoPassword" class="show-password"> {{ __('shop::app.customer.login-form.show-password') }}  
+
+                                <input
+                                    type="checkbox"
+                                    onclick="myFunction()"
+                                    id="shoPassword"
+                                    class="show-password"
+                                />
+
+                                {{ __('shop::app.customer.login-form.show-password') }}
+
                                 <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
 
-                                <a href="{{ route('customer.forgot-password.create') }}" class=" show-password float-right">
+                                <a href="{{ route('shop.customer.forgot_password.create') }}" class=" show-password float-right">
                                     {{ __('shop::app.customer.login-form.forgot_pass') }}  
                                 </a>
 
                                 <div class="mt10">
                                     @if (Cookie::has('enable-resend'))
                                         @if (Cookie::get('enable-resend') == true)
-                                            <a href="{{ route('customer.resend.verification-email', Cookie::get('email-for-resend')) }}">{{ __('shop::app.customer.login-form.resend-verification') }}</a>
+                                            <a href="{{ route('shop.customer.resend.verification_email', Cookie::get('email-for-resend')) }}">{{ __('shop::app.customer.login-form.resend-verification') }}</a>
                                         @endif
                                     @endif
                                 </div>
@@ -116,16 +125,16 @@
         $(":input[name=email]").focus();
     });
 
-        function myFunction() {
-            var x = document.getElementById("password");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
         }
+    }
     
-    </script>
+</script>
 
 @endpush
 

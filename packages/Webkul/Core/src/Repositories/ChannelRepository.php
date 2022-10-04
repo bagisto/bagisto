@@ -2,7 +2,6 @@
 
 namespace Webkul\Core\Repositories;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Prettus\Repository\Traits\CacheableRepository;
 use Webkul\Core\Eloquent\Repository;
@@ -29,7 +28,6 @@ class ChannelRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::dispatch('core.channel.create.before');
 
         $model = $this->getModel();
 
@@ -53,8 +51,6 @@ class ChannelRepository extends Repository
 
         $this->uploadImages($data, $channel, 'favicon');
 
-        Event::dispatch('core.channel.create.after', $channel);
-
         return $channel;
     }
 
@@ -68,7 +64,6 @@ class ChannelRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
-        Event::dispatch('core.channel.update.before', $id);
 
         $channel = parent::update($data, $id, $attribute);
 
@@ -82,24 +77,7 @@ class ChannelRepository extends Repository
 
         $this->uploadImages($data, $channel, 'favicon');
 
-        Event::dispatch('core.channel.update.after', $channel);
-
         return $channel;
-    }
-
-    /**
-     * Delete.
-     *
-     * @param  $id
-     * @return int
-     */
-    public function delete($id)
-    {
-        Event::dispatch('core.channel.delete.before', $id);
-
-        parent::delete($id);
-
-        Event::dispatch('core.channel.delete.after', $id);
     }
 
     /**

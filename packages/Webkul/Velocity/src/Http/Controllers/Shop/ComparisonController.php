@@ -2,8 +2,35 @@
 
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
+use Webkul\Velocity\Helpers\Helper;
+use Webkul\Product\Models\ProductFlat;
+use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
+
 class ComparisonController extends Controller
 {
+    /**
+     * Contains route related configuration
+     *
+     * @var array
+     */
+    protected $_config;
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Velocity\Helpers\Helper  $velocityHelper
+     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $compareProductsRepository
+     *
+     * @return void
+     */
+    public function __construct(
+        protected Helper $velocityHelper,
+        protected CustomerCompareProductRepository $compareProductsRepository
+    )
+    {
+        $this->_config = request('_config');
+    }
+
     /**
      * Method for customers to get products in comparison.
      *
@@ -69,47 +96,39 @@ class ComparisonController extends Controller
             'product_flat_id' => $productId,
         ]);
 
-        if (! $compareProduct) {
-            // insert new row
-
-            $productFlatRepository = app('\Webkul\Product\Models\ProductFlat');
-
-            $productFlat = $productFlatRepository
-                ->where('id', $productId)
-                ->orWhere('parent_id', $productId)
-                ->orWhere('id', $productId)
-                ->get()
-                ->first();
-                            
-            if ($productFlat == null) {
-                return response()->json([
-                    'status'  => 'warning',
-                    'message' => trans('customer::app.product-removed'),
-                    'label'   => trans('velocity::app.shop.general.alert.warning'),
-                ]);
-            }
-
-            if ($productFlat) {
-                $productId = $productFlat->id;
-
-                $this->compareProductsRepository->create([
-                    'customer_id'     => $customerId,
-                    'product_flat_id' => $productId,
-                ]);
-            }
-
+        if ($compareProduct) {
             return response()->json([
-                'status'  => 'success',
-                'message' => trans('velocity::app.customer.compare.added'),
-                'label'   => trans('velocity::app.shop.general.alert.success'),
-            ]);
-        } else {
-            return response()->json([
-                'status'  => 'success',
-                'label'   => trans('velocity::app.shop.general.alert.success'),
+                'status'  => 'warning',
+                'label'   => trans('velocity::app.shop.general.alert.warning'),
                 'message' => trans('velocity::app.customer.compare.already_added'),
             ]);
         }
+
+        $productFlat = app(ProductFlat::class)
+            ->where('id', $productId)
+            ->orWhere('parent_id', $productId)
+            ->orWhere('id', $productId)
+            ->get()
+            ->first();
+                        
+        if (! $productFlat) {
+            return response()->json([
+                'status'  => 'warning',
+                'message' => trans('customer::app.product-removed'),
+                'label'   => trans('velocity::app.shop.general.alert.warning'),
+            ]);
+        }
+
+        $this->compareProductsRepository->create([
+            'customer_id'     => $customerId,
+            'product_flat_id' => $productFlat->id,
+        ]);
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => trans('velocity::app.customer.compare.added'),
+            'label'   => trans('velocity::app.shop.general.alert.success'),
+        ]);
     }
 
     /**

@@ -133,9 +133,9 @@
                     </div>
                 </div>
 
-                @if (core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo'))
+                @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
                     <div class="image">
-                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo')) }}"/>
+                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}"/>
                     </div>
                 @endif
 

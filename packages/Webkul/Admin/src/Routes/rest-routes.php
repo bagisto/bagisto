@@ -27,18 +27,18 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
     /**
      * Admin profile routes.
      */
-    Route::get('/account', [AccountController::class, 'edit'])->defaults('_config', [
+    Route::get('account', [AccountController::class, 'edit'])->defaults('_config', [
         'view' => 'admin::account.edit',
     ])->name('admin.account.edit');
 
-    Route::put('/account', [AccountController::class, 'update'])->name('admin.account.update');
+    Route::put('account', [AccountController::class, 'update'])->name('admin.account.update');
 
-    Route::get('/logout', [SessionController::class, 'destroy'])->defaults('_config', [
+    Route::get('logout', [SessionController::class, 'destroy'])->defaults('_config', [
         'redirect' => 'admin.session.create',
     ])->name('admin.session.destroy');
 
     /**
      * DataGrid export.
      */
-    Route::post('/export', [ExportController::class, 'export'])->name('admin.datagrid.export');
+    Route::post('export', [ExportController::class, 'export'])->name('admin.datagrid.export');
 });

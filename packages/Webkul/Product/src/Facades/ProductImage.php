@@ -13,6 +13,6 @@ class ProductImage extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'productimage';
+        return 'product_image';
     }
 }

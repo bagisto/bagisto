@@ -24,11 +24,11 @@ class CatalogRuleIndex
     }
 
     /**
-     * Full reindex
+     * Full re-index
      *
      * @return void
      */
-    public function reindexComplete()
+    public function reIndexComplete()
     {
         try {
             $this->cleanIndexes();
@@ -44,12 +44,12 @@ class CatalogRuleIndex
     }
 
     /**
-     * Full reindex
+     * Full re-index
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
-    public function reindexProduct($product)
+    public function reIndexProduct($product)
     {
         try {
             if (! $product->getTypeInstance()->priceRuleCanBeApplied()) {
@@ -101,11 +101,11 @@ class CatalogRuleIndex
         $catalogRules = $this->catalogRuleRepository->scopeQuery(function($query) {
             return $query->where(function ($query1) {
                 $query1->where('catalog_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))
-                        ->orWhereNull('catalog_rules.starts_from');
+                    ->orWhereNull('catalog_rules.starts_from');
             })
             ->where(function ($query2) {
                 $query2->where('catalog_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))
-                        ->orWhereNull('catalog_rules.ends_till');
+                    ->orWhereNull('catalog_rules.ends_till');
             })
             ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);

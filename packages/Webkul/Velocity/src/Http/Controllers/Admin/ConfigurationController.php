@@ -152,9 +152,8 @@ class ConfigurationController extends Controller
                     }
                 } else {
                     if (
-                        isset($advertisement[$index][$imageId])
-                        && $advertisement[$index][$imageId]
-                        && !request()->hasFile($file)
+                        ! empty($advertisement[$index][$imageId])
+                        && ! request()->hasFile($file)
                     ) {
                         $saveImage[$imageId] = $advertisement[$index][$imageId];
 
@@ -266,10 +265,7 @@ class ConfigurationController extends Controller
             }
         }
 
-        if (
-            isset($advertisement[$index])
-            && $advertisement[$index]
-        ) {
+        if (! empty($advertisement[$index])) {
             foreach ($advertisement[$index] as $imageId) {
                 Storage::delete($imageId);
             }

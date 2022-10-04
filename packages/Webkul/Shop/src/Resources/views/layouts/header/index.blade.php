@@ -58,11 +58,9 @@
                 {!! view_render_event('bagisto.shop.layout.header.comppare-item.before') !!}
 
                 @php
-                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
-                @endphp
+                    $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
 
-                @php
-                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
                 @endphp
 
                 {!! view_render_event('bagisto.shop.layout.header.compare-item.after') !!}
@@ -119,11 +117,11 @@
                                 </div>
 
                                 <div class="button-group">
-                                    <a class="btn btn-primary btn-md" href="{{ route('customer.session.index') }}" style="color: #ffffff">
+                                    <a class="btn btn-primary btn-md" href="{{ route('shop.customer.session.index') }}" style="color: #ffffff">
                                         {{ __('shop::app.header.sign-in') }}
                                     </a>
 
-                                    <a class="btn btn-primary btn-md" href="{{ route('customer.register.index') }}" style="float: right; color: #ffffff">
+                                    <a class="btn btn-primary btn-md" href="{{ route('shop.customer.register.index') }}" style="float: right; color: #ffffff">
                                         {{ __('shop::app.header.sign-up') }}
                                     </a>
                                 </div>
@@ -133,7 +131,7 @@
 
                             @if ($showWishlist)
                                 <li>
-                                    <a href="{{ route('customer.wishlist.index') }}">
+                                    <a href="{{ route('shop.customer.wishlist.index') }}">
                                         {{ __('shop::app.header.wishlist') }}
                                     </a>
                                 </li>
@@ -160,12 +158,12 @@
 
                                 <ul>
                                     <li>
-                                        <a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a>
+                                        <a href="{{ route('shop.customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a>
                                     </li>
 
                                     @if ($showWishlist)
                                         <li>
-                                            <a href="{{ route('customer.wishlist.index') }}">
+                                            <a href="{{ route('shop.customer.wishlist.index') }}">
                                                 {{ __('shop::app.header.wishlist') }}
                                             </a>
                                         </li>
@@ -180,14 +178,14 @@
                                     @endif
 
                                     <li>
-                                        <form id="customerLogout" action="{{ route('customer.session.destroy') }}" method="POST">
+                                        <form id="customerLogout" action="{{ route('shop.customer.session.destroy') }}" method="POST">
                                             @csrf
 
                                             @method('DELETE')
                                         </form>
 
                                         <a
-                                            href="{{ route('customer.session.destroy') }}"
+                                            href="{{ route('shop.customer.session.destroy') }}"
                                             onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
                                             {{ __('shop::app.header.logout') }}
                                         </a>

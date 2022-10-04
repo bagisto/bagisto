@@ -5,7 +5,7 @@ namespace Webkul\BookingProduct\Helpers;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Checkout\Models\CartItem;
 
 class EventTicket extends Booking
@@ -55,13 +55,13 @@ class EventTicket extends Booking
                 $price = $ticket->special_price;
 
                 $tickets[$index]['original_converted_price'] = core()->convertPrice($ticket->price);
-                $tickets[$index]['original_formated_price'] = core()->currency($ticket->price);
+                $tickets[$index]['original_formatted_price'] = core()->currency($ticket->price);
             }
 
             $tickets[$index]['id'] = $ticket->id;
             $tickets[$index]['converted_price'] = core()->convertPrice($price);
-            $tickets[$index]['formated_price'] = $formatedPrice = core()->currency($price);
-            $tickets[$index]['formated_price_text'] = __('bookingproduct::app.shop.products.per-ticket-price', ['price' => $formatedPrice]);
+            $tickets[$index]['formatted_price'] = $formattedPrice = core()->currency($price);
+            $tickets[$index]['formatted_price_text'] = __('bookingproduct::app.shop.products.per-ticket-price', ['price' => $formattedPrice]);
         }
 
         return $tickets;
@@ -133,7 +133,7 @@ class EventTicket extends Booking
      *
      * @param \Webkul\Checkout\Models\CartItem $item
      *
-     * @return \Webkul\Product\Datatypes\CartItemValidationResult
+     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {

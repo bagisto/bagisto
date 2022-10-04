@@ -23,10 +23,7 @@ class MoneyTransfer extends Payment
      */
     public function getAdditionalDetails()
     {
-        if (
-            ! $this->getConfigData('mailing_address')
-            || $this->getConfigData('mailing_address') == ''
-        ) {
+        if (empty($this->getConfigData('mailing_address'))) {
             return [];
         }
 

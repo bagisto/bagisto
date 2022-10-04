@@ -13,7 +13,7 @@
             @if (auth()->guard('customer')->user())
                 {!! 
                     __('shop::app.checkout.success.order-id-info', [
-                        'order_id' => '<a href="' . route('customer.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
+                        'order_id' => '<a href="' . route('shop.customer.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
                     ])
                 !!}
             @else

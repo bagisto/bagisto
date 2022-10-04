@@ -243,15 +243,15 @@ class RefundRepository extends Repository
 
         $summary['grand_total']['price'] += $summary['subtotal']['price'] + $summary['tax']['price'] + $summary['shipping']['price'] - $summary['discount']['price'];
 
-        $summary['subtotal']['formated_price'] = core()->formatBasePrice($summary['subtotal']['price']);
+        $summary['subtotal']['formatted_price'] = core()->formatBasePrice($summary['subtotal']['price']);
 
-        $summary['discount']['formated_price'] = core()->formatBasePrice($summary['discount']['price']);
+        $summary['discount']['formatted_price'] = core()->formatBasePrice($summary['discount']['price']);
 
-        $summary['tax']['formated_price'] = core()->formatBasePrice($summary['tax']['price']);
+        $summary['tax']['formatted_price'] = core()->formatBasePrice($summary['tax']['price']);
 
-        $summary['shipping']['formated_price'] = core()->formatBasePrice($summary['shipping']['price']);
+        $summary['shipping']['formatted_price'] = core()->formatBasePrice($summary['shipping']['price']);
 
-        $summary['grand_total']['formated_price'] = core()->formatBasePrice($summary['grand_total']['price']);
+        $summary['grand_total']['formatted_price'] = core()->formatBasePrice($summary['grand_total']['price']);
 
         return $summary;
     }

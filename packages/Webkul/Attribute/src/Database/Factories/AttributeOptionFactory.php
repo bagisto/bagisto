@@ -2,9 +2,9 @@
 
 namespace Webkul\Attribute\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeOption;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AttributeOptionFactory extends Factory
 {

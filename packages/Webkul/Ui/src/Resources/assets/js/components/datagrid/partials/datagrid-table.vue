@@ -46,7 +46,7 @@
                                     class="control"
                                     v-model="massActionType"
                                     @change="changeMassActionTarget"
-                                    name="massaction-type"
+                                    name="mass-action-type"
                                     required
                                 >
                                     <option

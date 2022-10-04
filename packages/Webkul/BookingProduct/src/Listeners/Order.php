@@ -19,7 +19,8 @@ class Order
     /**
      * After sales order creation, add entry to bookings table
      *
-     * @param \Webkul\Sales\Contracts\Order  $order
+     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @return void
      */
     public function afterPlaceOrder($order)
     {

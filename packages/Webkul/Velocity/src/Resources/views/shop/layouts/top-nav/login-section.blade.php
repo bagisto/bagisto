@@ -33,11 +33,11 @@
                 </div>
 
                 <div class="modal-footer">
-                    <a href="{{ route('customer.session.index') }}" class="theme-btn fs14 fw6">
+                    <a href="{{ route('shop.customer.session.index') }}" class="theme-btn fs14 fw6">
                         {{ __('shop::app.header.sign-in') }}
                     </a>
 
-                    <a href="{{ route('customer.register.index') }}" class="theme-btn fs14 fw6">
+                    <a href="{{ route('shop.customer.register.index') }}" class="theme-btn fs14 fw6">
                         {{ __('shop::app.header.sign-up') }}
                     </a>
                 </div>
@@ -54,33 +54,27 @@
             <div class="dropdown-container">
                 <ul type="none">
                     <li>
-                        <a href="{{ route('customer.profile.index') }}" class="unset">{{ __('shop::app.header.profile') }}</a>
+                        <a href="{{ route('shop.customer.profile.index') }}" class="unset">{{ __('shop::app.header.profile') }}</a>
                     </li>
 
                     <li>
-                        <a href="{{ route('customer.orders.index') }}" class="unset">{{ __('velocity::app.shop.general.orders') }}</a>
+                        <a href="{{ route('shop.customer.orders.index') }}" class="unset">{{ __('velocity::app.shop.general.orders') }}</a>
                     </li>
 
-                    @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
-
-                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
-                    @endphp
-
-                    @if ($showWishlist)
+                    @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
                         <li>
-                            <a href="{{ route('customer.wishlist.index') }}" class="unset">{{ __('shop::app.header.wishlist') }}</a>
+                            <a href="{{ route('shop.customer.wishlist.index') }}" class="unset">{{ __('shop::app.header.wishlist') }}</a>
                         </li>
                     @endif
 
-                    @if ($showCompare)
+                    @if ((bool) core()->getConfigData('general.content.shop.compare_option'))
                         <li>
                             <a href="{{ route('velocity.customer.product.compare') }}" class="unset">{{ __('velocity::app.customer.compare.text') }}</a>
                         </li>
                     @endif
 
                     <li>
-                        <form id="customerLogout" action="{{ route('customer.session.destroy') }}" method="POST">
+                        <form id="customerLogout" action="{{ route('shop.customer.session.destroy') }}" method="POST">
                             @csrf
 
                             @method('DELETE')
@@ -88,7 +82,7 @@
 
                         <a
                             class="unset"
-                            href="{{ route('customer.session.destroy') }}"
+                            href="{{ route('shop.customer.session.destroy') }}"
                             onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
                             {{ __('shop::app.header.logout') }}
                         </a>

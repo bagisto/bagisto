@@ -10,7 +10,7 @@ class Review extends AbstractProduct
      * Returns the product's avg rating
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
-     * @return float
+     * @return \Illuminate\Support\Collection
      */
     public function getReviews($product)
     {
@@ -78,8 +78,7 @@ class Review extends AbstractProduct
      * Returns reviews with ratings.
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
-     *
-     * @return collection
+     * @return \Illuminate\Support\Collection
      */
     public function getReviewsWithRatings($product)
     {

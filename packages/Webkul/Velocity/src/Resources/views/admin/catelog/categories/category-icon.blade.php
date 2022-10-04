@@ -1,10 +1,7 @@
 <div class="control-group">
     <label>{{ __('velocity::app.admin.meta-data.category-logo') }}</label>
 
-    @if (
-        isset($category)
-        && $category->category_icon_url
-    )
+    @if (! empty($category->category_icon_url))
         <image-wrapper
             :multiple="false"
             input-name="category_icon_path"

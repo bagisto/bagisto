@@ -2,8 +2,6 @@
 
 namespace Webkul\Velocity;
 
-use Webkul\Category\Repositories\CategoryRepository;
-
 class Velocity
 {
     /**
@@ -31,16 +29,6 @@ class Velocity
         'rated'   => 'Most Rated',
         'custom'  => 'Custom Selection',
     ];
-
-    /**
-     * Create a new instance.
-     *
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @return void
-     */
-    public function __construct(protected CategoryRepository $categoryRepository)
-    {
-    }
 
     /**
      * @return string

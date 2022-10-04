@@ -82,18 +82,18 @@ class ProductServiceProvider extends ServiceProvider
          */
         $loader = AliasLoader::getInstance();
 
-        $loader->alias('productimage', ProductImageFacade::class);
+        $loader->alias('product_image', ProductImageFacade::class);
 
-        $this->app->singleton('productimage', function () {
+        $this->app->singleton('product_image', function () {
             return app()->make(ProductImage::class);
         });
 
         /**
          * Product video.
          */
-        $loader->alias('productvideo', ProductVideoFacade::class);
+        $loader->alias('product_video', ProductVideoFacade::class);
 
-        $this->app->singleton('productvideo', function () {
+        $this->app->singleton('product_video', function () {
             return app()->make(ProductVideo::class);
         });
     }

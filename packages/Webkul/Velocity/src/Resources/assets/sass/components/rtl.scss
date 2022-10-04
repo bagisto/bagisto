@@ -8,7 +8,7 @@ body {
 
         .order-summary-container {
             margin-left: 0px;
-            margin-right: 130px;
+            margin-right: 100px;
         }
 
         .velocity-divide-page {
@@ -595,6 +595,25 @@ body {
             &:after {
                 right: unset;
                 left: 8px;
+            }
+        }
+
+        .pl20 {
+            padding-left: 0 !important;
+            padding-right: 20px !important;
+        }
+    
+        .radio {
+            .radio-view {
+                margin-right: 0;
+                margin-left: 10px;
+            }
+        }
+    
+        .checkbox {
+            .checkbox-view {
+                margin-right: 0;
+                margin-left: 10px;
             }
         }
     }
