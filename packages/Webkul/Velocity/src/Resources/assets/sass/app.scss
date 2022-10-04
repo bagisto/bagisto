@@ -1128,6 +1128,10 @@ i.within-circle {
         width: 150%;
         display: grid;
         grid-template-columns: auto auto;
+
+        > div:first-child {
+            margin-right: 0px !important;
+        }
     }
 }
 
