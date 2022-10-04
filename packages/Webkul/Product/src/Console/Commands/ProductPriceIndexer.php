@@ -43,10 +43,6 @@ class ProductPriceIndexer extends Command
     {
         $batch = Bus::batch([])->dispatch();
 
-        $batch->add(new ProductPriceIndexerJob([$this->productRepository->find(59)]));
-
-        return;
-
         while (true) {
             $paginator = $this->productRepository->cursorPaginate(10);
 
