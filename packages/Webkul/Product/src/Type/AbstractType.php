@@ -1096,4 +1096,14 @@ abstract class AbstractType
 
         return $loadedSaleableChecks[$product->id] = $callback($product);
     }
+
+    /**
+     * Check in loaded saleable.
+     *
+     * @return mixed
+     */
+    public function getPriceIndexer()
+    {
+        return '\Webkul\Product\Helpers\ProductPriceIndex\\' . ucfirst($this->product->type);
+    }
 }

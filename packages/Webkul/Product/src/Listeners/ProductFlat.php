@@ -8,8 +8,8 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Helpers\ProductType;
 use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Product\Helpers\ProductType;
 
 class ProductFlat
 {
@@ -51,6 +51,7 @@ class ProductFlat
     /**
      * Create a new listener instance.
      *
+     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
      * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
@@ -58,6 +59,7 @@ class ProductFlat
      * @return void
      */
     public function __construct(
+        protected ChannelRepository $channelRepository,
         protected AttributeRepository $attributeRepository,
         protected AttributeOptionRepository $attributeOptionRepository,
         protected ProductFlatRepository $productFlatRepository,
@@ -319,7 +321,7 @@ class ProductFlat
             return $channels[$id];
         }
 
-        return $channels[$id] = app(ChannelRepository::class)->findOrFail($id);
+        return $channels[$id] = $this->channelRepository->findOrFail($id);
     }
 
     /**

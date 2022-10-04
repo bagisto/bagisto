@@ -22,9 +22,11 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\Product\Listeners\ProductFlat@beforeAttributeDeleted',
         ],
         'catalog.product.create.after' => [
+            'Webkul\Product\Helpers\ProductPriceIndexer@refresh',
             'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated',
         ],
         'catalog.product.update.after' => [
+            'Webkul\Product\Helpers\ProductPriceIndexer@refresh',
             'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated',
         ],
     ];
