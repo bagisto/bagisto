@@ -6,7 +6,7 @@
 
 @section('page-detail-wrapper')
     @if ($addresses->isEmpty())
-        <a href="{{ route('customer.address.create') }}" class="theme-btn light unset address-button">
+        <a href="{{ route('shop.customer.addresses.create') }}" class="theme-btn light unset address-button">
             {{ __('shop::app.customer.account.address.index.add') }}
         </a>
     @endif
@@ -18,7 +18,7 @@
 
         @if (! $addresses->isEmpty())
             <span class="account-action">
-                <a href="{{ route('customer.address.create') }}" class="theme-btn light unset float-right">
+                <a href="{{ route('shop.customer.addresses.create') }}" class="theme-btn light unset float-right">
                     {{ __('shop::app.customer.account.address.index.add') }}
                 </a>
             </span>
@@ -48,7 +48,7 @@
                                         </li>
                                     </ul>
 
-                                    <a class="card-link" href="{{ route('customer.address.edit', $address->id) }}">
+                                    <a class="card-link" href="{{ route('shop.customer.addresses.edit', $address->id) }}">
                                         {{ __('shop::app.customer.account.address.index.edit') }}
                                     </a>
 
@@ -56,7 +56,7 @@
                                         {{ __('shop::app.customer.account.address.index.delete') }}
                                     </a>
 
-                                    <form id="deleteAddressForm{{ $address->id }}" action="{{ route('address.delete', $address->id) }}" method="post">
+                                    <form id="deleteAddressForm{{ $address->id }}" action="{{ route('shop.customer.addresses.delete', $address->id) }}" method="post">
                                         @method('delete')
 
                                         @csrf

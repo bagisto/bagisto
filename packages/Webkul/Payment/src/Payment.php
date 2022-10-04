@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Config;
 
 class Payment
 {
-
     /**
      * Returns all supported payment methods
      *

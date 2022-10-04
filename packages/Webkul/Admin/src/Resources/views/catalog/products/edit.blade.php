@@ -119,13 +119,13 @@
                                         }
 
                                         if ($attribute->type == 'file') {
-                                            $retVal = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048';
+                                            $retVal = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?? '2048';
 
                                             array_push($validations, 'size:' . $retVal);
                                         }
 
                                         if ($attribute->type == 'image') {
-                                            $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048';
+                                            $retVal = core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') ?? '2048';
 
                                             array_push($validations, 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp');
                                         }

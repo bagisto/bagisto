@@ -43,20 +43,20 @@ class AttributeFamilyRepository extends Repository
      */
     public function create(array $data)
     {
-        $attributeGroups = isset($data['attribute_groups']) ? $data['attribute_groups'] : [];
+        $attributeGroups = $data['attribute_groups'] ?? [];
 
         unset($data['attribute_groups']);
 
         $family = $this->model->create($data);
 
         foreach ($attributeGroups as $group) {
-            $custom_attributes = isset($group['custom_attributes']) ? $group['custom_attributes'] : [];
+            $customAttributes = $group['custom_attributes'] ?? [];
 
             unset($group['custom_attributes']);
 
             $attributeGroup = $family->attribute_groups()->create($group);
 
-            foreach ($custom_attributes as $key => $attribute) {
+            foreach ($customAttributes as $key => $attribute) {
                 if (isset($attribute['id'])) {
                     $attributeModel = $this->attributeRepository->find($attribute['id']);
                 } else {

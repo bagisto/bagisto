@@ -71,7 +71,7 @@
                                 @foreach ($config->items as $key => $item)
                                     <li class="navbar-child {{ $item['key'] == request()->route('slug') ? 'active' : '' }}">
                                         <a href="{{ route('admin.configuration.index', $item['key']) }}">
-                                            <span style="margin-left:47px">{{ isset($item['name']) ? trans($item['name']) : '' }}</span>
+                                            <span style="margin-left:47px">{{ trans($item['name'] ?? '') }}</span>
                                         </a>
                                     </li>
                                 @endforeach

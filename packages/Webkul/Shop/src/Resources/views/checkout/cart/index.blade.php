@@ -16,7 +16,7 @@
                     <div style="display: flex;justify-content: flex-end;margin-bottom: 20px;">
                         <form
                             method="POST"
-                            action="{{  route('cart.remove.all.items') }}">
+                            action="{{  route('shop.cart.remove.all.items') }}">
                             @csrf
                             <button
                                 type="submit"
@@ -100,11 +100,7 @@
                                                 <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
 
                                             @auth('customer')
-                                                @php
-                                                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
-                                                @endphp
-
-                                                @if ($showWishlist)
+                                                @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
                                                     <span class="towishlist">
                                                             @if (
                                                                 $item->parent_id != 'null'
@@ -112,13 +108,13 @@
                                                             )
                                                             <a
                                                                 href="javascript:void(0);"
-                                                                onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->id) }}')">
+                                                                onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.move_to_wishlist', $item->id) }}')">
                                                                     {{ __('shop::app.checkout.cart.move-to-wishlist') }}
                                                                 </a>
                                                         @else
                                                             <a
                                                                 href="javascript:void(0);"
-                                                                onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.movetowishlist', $item->child->id) }}')">
+                                                                onclick="moveToWishlist('{{ __('shop::app.checkout.cart.cart-remove-action') }}', '{{ route('shop.move_to_wishlist', $item->child->id) }}')">
                                                                     {{ __('shop::app.checkout.cart.move-to-wishlist') }}
                                                                 </a>
                                                         @endif

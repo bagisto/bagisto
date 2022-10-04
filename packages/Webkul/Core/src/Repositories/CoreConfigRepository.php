@@ -45,14 +45,14 @@ class CoreConfigRepository extends Repository
         }
 
         foreach ($data as $method => $fieldData) {
-            $recurssiveData = $this->recuressiveArray($fieldData, $method);
+            $recursiveData = $this->recursiveArray($fieldData, $method);
 
-            foreach ($recurssiveData as $fieldName => $value) {
+            foreach ($recursiveData as $fieldName => $value) {
                 $field = core()->getConfigField($fieldName);
 
-                $channelBased = isset($field['channel_based']) && $field['channel_based'];
+                $channelBased = ! empty($field['channel_based']);
 
-                $localeBased = isset($field['locale_based']) && $field['locale_based'];
+                $localeBased = ! empty($field['locale_based']);
 
                 if (
                     getType($value) == 'array'
@@ -61,14 +61,8 @@ class CoreConfigRepository extends Repository
                     $value = implode(',', $value);
                 }
 
-                if (
-                    isset($field['channel_based'])
-                    && $field['channel_based']
-                ) {
-                    if (
-                        isset($field['locale_based'])
-                        && $field['locale_based']
-                    ) {
+                if (! empty($field['channel_based'])) {
+                    if (! empty($field['locale_based'])) {
                         $coreConfigValue = $this->model
                             ->where('code', $fieldName)
                             ->where('locale_code', $locale)
@@ -81,10 +75,7 @@ class CoreConfigRepository extends Repository
                             ->get();
                     }
                 } else {
-                    if (
-                        isset($field['locale_based'])
-                        && $field['locale_based']
-                    ) {
+                    if (! empty($field['locale_based'])) {
                         $coreConfigValue = $this->model
                             ->where('code', $fieldName)
                             ->where('locale_code', $locale)
@@ -138,11 +129,11 @@ class CoreConfigRepository extends Repository
      * @param  string  $method
      * @return array
      */
-    public function recuressiveArray(array $formData, $method)
+    public function recursiveArray(array $formData, $method)
     {
         static $data = [];
 
-        static $recuressiveArrayData = [];
+        static $recursiveArrayData = [];
 
         foreach ($formData as $form => $formValue) {
             $value = $method . '.' . $form;
@@ -151,7 +142,7 @@ class CoreConfigRepository extends Repository
                 $dim = $this->countDim($formValue);
 
                 if ($dim > 1) {
-                    $this->recuressiveArray($formValue, $value);
+                    $this->recursiveArray($formValue, $value);
                 } elseif ($dim == 1) {
                     $data[$value] = $formValue;
                 }
@@ -162,15 +153,15 @@ class CoreConfigRepository extends Repository
             $field = core()->getConfigField($key);
 
             if ($field) {
-                $recuressiveArrayData[$key] = $value;
+                $recursiveArrayData[$key] = $value;
             } else {
                 foreach ($value as $key1 => $val) {
-                    $recuressiveArrayData[$key . '.' . $key1] = $val;
+                    $recursiveArrayData[$key . '.' . $key1] = $val;
                 }
             }
         }
 
-        return $recuressiveArrayData;
+        return $recursiveArrayData;
     }
 
     /**

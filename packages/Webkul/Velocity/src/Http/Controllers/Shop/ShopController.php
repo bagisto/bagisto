@@ -2,10 +2,47 @@
 
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
+use Webkul\Velocity\Helpers\Helper;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
+use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
 use Webkul\Product\Facades\ProductImage;
 
 class ShopController extends Controller
 {
+    /**
+     * Contains route related configuration
+     *
+     * @var array
+     */
+    protected $_config;
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Velocity\Helpers\Helper  $velocityHelper
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\WishlistRepository  $wishlistRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository  $velocityProductRepository
+     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $compareProductsRepository
+     *
+     * @return void
+     */
+    public function __construct(
+        protected Helper $velocityHelper,
+        protected ProductRepository $productRepository,
+        protected WishlistRepository $wishlistRepository,
+        protected CategoryRepository $categoryRepository,
+        protected VelocityProductRepository $velocityProductRepository,
+        protected CustomerCompareProductRepository $compareProductsRepository
+    )
+    {
+        $this->_config = request('_config');
+    }
+
     /**
      * Index to handle the view loaded with the search results.
      *
@@ -186,25 +223,10 @@ class ShopController extends Controller
     public function getItemsCount()
     {
         if ($customer = auth()->guard('customer')->user()) {
-
-            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                $wishlistItemsCount = $this->wishlistRepository->getModel()
-                    ->leftJoin('products as ps', 'wishlist.product_id', '=', 'ps.id')
-                    ->leftJoin('product_inventories as pv', 'ps.id', '=', 'pv.product_id')
-                    ->where(function ($qb) {
-                        $qb
-                            ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
-                            ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
-                    })
-                    ->where('wishlist.customer_id', $customer->id)
-                    ->where('wishlist.channel_id', core()->getCurrentChannel()->id)
-                    ->count('wishlist.id');
-            } else {
-                $wishlistItemsCount = $this->wishlistRepository->count([
-                    'customer_id' => $customer->id,
-                    'channel_id'  => core()->getCurrentChannel()->id,
-                ]);
-            }
+            $wishlistItemsCount = $this->wishlistRepository->count([
+                'customer_id' => $customer->id,
+                'channel_id'  => core()->getCurrentChannel()->id,
+            ]);
 
             $comparedItemsCount = $this->compareProductsRepository->count([
                 'customer_id' => $customer->id,

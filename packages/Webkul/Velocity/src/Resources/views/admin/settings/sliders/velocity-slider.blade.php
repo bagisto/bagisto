@@ -5,5 +5,5 @@
         type="text"
         class="control"
         name="slider_path"
-        value="{{ (isset($slider) && $slider->slider_path) ? $slider->slider_path : '' }}" />
+        value="{{ $slider->slider_path ?? '' }}" />
 </div>

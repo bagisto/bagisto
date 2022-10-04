@@ -7,5 +7,5 @@ return [
     'decimal'                 => ':attribute geçerli olmalı.',
     'phone-number'            => 'The :attribute must be valid phone number.',
     'slug'                    => ':attribute değeri geçerli bir url olmalı.',
-    'comma-seperated-integer' => 'The :attribute field must be numeric and may contain comma.',
+    'comma-separated-integer' => 'The :attribute field must be numeric and may contain comma.',
 ];

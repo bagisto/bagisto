@@ -7,7 +7,7 @@
 @section('account-content')
     <div class="account-layout">
         <div class="account-head mb-10">
-            <span class="back-icon"><a href="{{ route('customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
+            <span class="back-icon"><a href="{{ route('shop.customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
 
             <span class="account-heading">{{ __('shop::app.customer.account.profile.edit-profile.title') }}</span>
 
@@ -16,7 +16,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit.before', ['customer' => $customer]) !!}
 
-        <form method="post" action="{{ route('customer.profile.store') }}" @submit.prevent="onSubmit">
+        <form method="post" action="{{ route('shop.customer.profile.store') }}" @submit.prevent="onSubmit">
             <div class="edit-form">
                 @csrf
 

@@ -30,6 +30,7 @@ class ProductReviewImageRepository extends Repository
 
         foreach ($data['attachments'] as $imageId => $image) {
             $file = 'attachments.' . $imageId;
+            
             $dir = 'review/' . $review->id;
 
             if (

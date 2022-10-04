@@ -105,7 +105,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Edit's the premade resource of customer called Address.
+     * Edit's the pre-made resource of customer called Address.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -129,12 +129,12 @@ class AddressController extends Controller
 
             session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
 
-            return redirect()->route('customer.address.index');
+            return redirect()->route('shop.customer.addresses.index');
         }
 
         session()->flash('warning', trans('shop::app.security-warning'));
 
-        return redirect()->route('customer.address.index');
+        return redirect()->route('shop.customer.addresses.index');
     }
 
     /**
@@ -187,6 +187,6 @@ class AddressController extends Controller
 
         session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
 
-        return redirect()->route('customer.address.index');
+        return redirect()->route('shop.customer.addresses.index');
     }
 }

@@ -13,7 +13,7 @@
 
             <div class="page-action">
                 @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
-                    <a href="{{ route('admin.tax-categories.create') }}" class="btn btn-lg btn-primary">
+                    <a href="{{ route('admin.tax_categories.create') }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.tax-categories.add-title') }}
                     </a>
                 @endif
@@ -21,7 +21,7 @@
         </div>
 
         <div class="page-content">
-            <datagrid-plus src="{{ route('admin.tax-categories.index') }}"></datagrid-plus>
+            <datagrid-plus src="{{ route('admin.tax_categories.index') }}"></datagrid-plus>
         </div>
     </div>
 @stop

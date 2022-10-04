@@ -13,6 +13,6 @@ class ProductVideo extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'productvideo';
+        return 'product_video';
     }
 }

@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Contracts\Validations\Slug;
 use Webkul\Core\Contracts\Validations\Decimal;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -53,7 +52,7 @@ class ProductForm extends FormRequest
     {
         $product = $this->productRepository->find($this->id);
 
-        $maxVideoFileSize = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048';
+        $maxVideoFileSize = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?: '2048';
 
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                => ['required', 'unique:products,sku,' . $this->id, new Slug],
@@ -110,9 +109,7 @@ class ProductForm extends FormRequest
 
             if ($attribute->is_unique) {
                 array_push($validations, function ($field, $value, $fail) use ($attribute) {
-                    $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
-
-                    if (! $this->productAttributeValueRepository->isValueUnique($this->id, $attribute->id, $column, request($attribute->code))) {
+                    if (! $this->productAttributeValueRepository->isValueUnique($this->id, $attribute->id, $attribute->column_name, request($attribute->code))) {
                         $fail(__('admin::app.response.already-taken', ['name' => ':attribute']));
                     }
                 });

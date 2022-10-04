@@ -89,14 +89,14 @@ class EmailTemplateDataGrid extends DataGrid
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.email-templates.edit',
+            'route'  => 'admin.email_templates.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
-            'route'        => 'admin.email-templates.delete',
+            'route'        => 'admin.email_templates.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Email Template']),
             'icon'         => 'icon trash-icon',
         ]);

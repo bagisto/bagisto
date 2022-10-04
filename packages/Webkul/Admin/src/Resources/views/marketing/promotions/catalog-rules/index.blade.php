@@ -13,7 +13,7 @@
 
             <div class="page-action">
                 @if (bouncer()->hasPermission('marketing.promotions.catalog-rules'))
-                    <a href="{{ route('admin.catalog-rules.create') }}" class="btn btn-lg btn-primary">
+                    <a href="{{ route('admin.catalog_rules.create') }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.promotions.catalog-rules.add-title') }}
                     </a>
                 @endif
@@ -21,7 +21,7 @@
         </div>
 
         <div class="page-content">
-            <datagrid-plus src="{{ route('admin.catalog-rules.index') }}"></datagrid-plus>
+            <datagrid-plus src="{{ route('admin.catalog_rules.index') }}"></datagrid-plus>
         </div>
     </div>
 @endsection

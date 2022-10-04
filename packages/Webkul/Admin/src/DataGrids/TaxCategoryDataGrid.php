@@ -53,14 +53,14 @@ class TaxCategoryDataGrid extends DataGrid
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.tax-categories.edit',
+            'route'  => 'admin.tax_categories.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
-            'route'  => 'admin.tax-categories.delete',
+            'route'  => 'admin.tax_categories.delete',
             'icon'   => 'icon trash-icon',
         ]);
     }

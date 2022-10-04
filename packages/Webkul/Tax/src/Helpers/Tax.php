@@ -10,7 +10,7 @@ namespace Webkul\Tax\Helpers;
 class Tax
 {
     /**
-     * Tax rate precission.
+     * Tax rate precision.
      *
      * @var int
      */
@@ -93,7 +93,9 @@ class Tax
         return new class()
         {
             public $country;
+
             public $state;
+            
             public $postcode;
 
             function __construct()
@@ -101,7 +103,9 @@ class Tax
                 $this->country = core()->getConfigData('taxes.catalogue.default-location-calculation.country') != ''
                     ? core()->getConfigData('taxes.catalogue.default-location-calculation.country')
                     : strtoupper(config('app.default_country'));
+
                 $this->state = core()->getConfigData('taxes.catalogue.default-location-calculation.state');
+
                 $this->postcode = core()->getConfigData('taxes.catalogue.default-location-calculation.post_code');
             }
         };
@@ -122,38 +126,40 @@ class Tax
             'country' => $address->country,
         ])->orderBy('tax_rate', 'desc')->get();
 
-        if ($taxRates->count()) {
-            foreach ($taxRates as $rate) {
-                $haveTaxRate = false;
+        if (! $taxRates->count()) {
+            return;
+        }
 
+        foreach ($taxRates as $rate) {
+            if (
+                $rate->state != ''
+                && $rate->state != $address->state
+            ) {
+                continue;
+            }
+
+            $haveTaxRate = false;
+
+            if (! $rate->is_zip) {
                 if (
-                    $rate->state != ''
-                    && $rate->state != $address->state
+                    empty($rate->zip_code)
+                    || in_array($rate->zip_code, ['*', $address->postcode])
                 ) {
-                    continue;
+                    $haveTaxRate = true;
                 }
+            } else {
+                if (
+                    $address->postcode >= $rate->zip_from
+                    && $address->postcode <= $rate->zip_to
+                ) {
+                    $haveTaxRate = true;
+                }
+            }
 
-                if (! $rate->is_zip) {
-                    if (
-                        empty($rate->zip_code)
-                        || in_array($rate->zip_code, ['*', $address->postcode])
-                    ) {
-                        $haveTaxRate = true;
-                    }
-                } else {
-                    if (
-                        $address->postcode >= $rate->zip_from
-                        && $address->postcode <= $rate->zip_to
-                    ) {
-                        $haveTaxRate = true;
-                    }
-                }
-
-                if ($haveTaxRate) {
-                    $operation($rate);
-                    
-                    break;
-                }
+            if ($haveTaxRate) {
+                $operation($rate);
+                
+                break;
             }
         }
     }

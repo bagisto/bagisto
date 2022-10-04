@@ -142,7 +142,7 @@ class InvoiceRepository extends Repository
                                 'invoice'   => $invoice,
                                 'product'   => $childOrderItem->product,
                                 'qty'       => $finalQty,
-                                'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0,
+                                'vendor_id' => $data['vendor_id'] ?? 0,
                             ]);
                         }
 
@@ -157,7 +157,7 @@ class InvoiceRepository extends Repository
                         'invoice'   => $invoice,
                         'product'   => $orderItem->product,
                         'qty'       => $qty,
-                        'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0,
+                        'vendor_id' => $data['vendor_id'] ?? 0,
                     ]);
                 }
 
