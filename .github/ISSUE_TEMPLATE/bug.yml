@@ -11,6 +11,17 @@ body:
         - label: Before you openning this issue, i have checked if the issue has already been reported.
           required: true
 
+  # input box
+
+  - type: input
+    id: versioninput
+    attributes:
+      label: Bagisto Version(s) affected
+      description: Please enter the Bagisto version(s) affected by this issue.
+      placeholder: 'x.y.z'
+    validations:
+      required: true
+
   - type: textarea
     id: description
     attributes:
@@ -26,18 +37,6 @@ body:
       description: Please provide as detailed information about your environment as possible.
     validations:
       required: true
-
-  - type: checkboxes
-    id: versions
-    attributes:
-      label: Bagisto Version
-      description: Please select the version of bagisto that you are using.
-      options:
-        - label: master branch
-        - label: 1.3.3
-        - label: 1.3.2
-        - label: 1.3.1
-        - label: 1.3.0
 
   - type: textarea
     id: reproduce
