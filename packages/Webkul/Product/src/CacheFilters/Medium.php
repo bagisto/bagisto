@@ -17,11 +17,11 @@ class Medium implements FilterInterface
     {
         $width = core()->getConfigData('catalog.products.cache-medium-image.width') != ''
             ? core()->getConfigData('catalog.products.cache-medium-image.width')
-            : 280;
+            : 225;
 
         $height = core()->getConfigData('catalog.products.cache-medium-image.height') != ''
             ? core()->getConfigData('catalog.products.cache-medium-image.height')
-            : 280;
+            : null;
 
         $image->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
