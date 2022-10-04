@@ -62,8 +62,11 @@ class ProductCustomerGroupPriceRepository extends Repository
             return $customerGroupPrices[$product->id];
         }
 
-        return $customerGroupPrices[$product->id] = $product->customer_group_prices->filter(function ($customerGroupPrice) use ($customerGroupId) {
-            return $customerGroupPrice->customer_group_id == $customerGroupId || is_null($customerGroupPrice->customer_group_id);
+        $customerGroupPrices[$product->id] = $product->customer_group_prices->filter(function ($customerGroupPrice) use ($customerGroupId) {
+            return $customerGroupPrice->customer_group_id == $customerGroupId
+                || is_null($customerGroupPrice->customer_group_id);
         });
+
+        return $customerGroupPrices[$product->id];
     }
 }

@@ -52,8 +52,10 @@ trait CartTools
     public function mergeCart(): void
     {
         if (session()->has('cart')) {
+            $user = auth()->guard()->user();
+
             $cart = $this->cartRepository->findOneWhere([
-                'customer_id' => auth()->guard()->user()->id,
+                'customer_id' => $user->id,
                 'is_active'   => 1,
             ]);
 
@@ -66,11 +68,11 @@ trait CartTools
              */
             if (! $cart) {
                 $this->cartRepository->update([
-                    'customer_id'         => auth()->guard()->user()->id,
+                    'customer_id'         => $user->id,
                     'is_guest'            => 0,
-                    'customer_first_name' => auth()->guard()->user()->first_name,
-                    'customer_last_name'  => auth()->guard()->user()->last_name,
-                    'customer_email'      => auth()->guard()->user()->email,
+                    'customer_first_name' => $user->first_name,
+                    'customer_last_name'  => $user->last_name,
+                    'customer_email'      => $user->email,
                 ], $guestCart->id);
 
                 session()->forget('cart');

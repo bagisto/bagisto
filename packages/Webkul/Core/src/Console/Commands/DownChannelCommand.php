@@ -12,7 +12,7 @@ class DownChannelCommand extends OriginalCommand
      * @var string
      */
     protected $signature = 'channel:down {--redirect= : The path that users should be redirected to}
-                                         {--render= : The view that should be prerendered for display during maintenance mode}
+                                         {--render= : The view that should be pre-rendered for display during maintenance mode}
                                          {--retry= : The number of seconds after which the request may be retried}
                                          {--refresh= : The number of seconds after which the browser may refresh}
                                          {--secret= : The secret phrase that may be used to bypass maintenance mode}

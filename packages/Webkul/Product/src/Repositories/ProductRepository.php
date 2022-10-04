@@ -2,19 +2,18 @@
 
 namespace Webkul\Product\Repositories;
 
-use Exception;
 use Illuminate\Container\Container;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Webkul\Attribute\Models\Attribute;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Attribute\Models\Attribute;
 use Webkul\Product\Models\Product;
-use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Product\Models\ProductFlat;
 
 class ProductRepository extends Repository
@@ -22,11 +21,13 @@ class ProductRepository extends Repository
     /**
      * Create a new repository instance.
      *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
+        protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
         Container $container
     )
@@ -96,7 +97,7 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Retrive product from slug.
+     * Retrieve product from slug.
      *
      * @param  string  $slug
      * @param  string  $columns
@@ -146,17 +147,7 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
 
-        if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
-            $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
-
-            $perPage = isset($params['limit']) ? (! empty($params['limit']) ? $params['limit'] : 9) : current($pages);
-        } else {
-            $perPage = isset($params['limit']) && ! empty($params['limit']) ? $params['limit'] : 9;
-        }
-
-        $page = Paginator::resolveCurrentPage('page');
-
-        $repository = app(ProductFlatRepository::class)->with([
+        $query = app(ProductFlatRepository::class)->with([
             'images',
             'product.videos',
             'product.attribute_values',
@@ -165,31 +156,34 @@ class ProductRepository extends Repository
             'product.inventories',
             'product.ordered_inventories',
         ])->scopeQuery(function ($query) use ($params, $categoryId) {
-            $channel = core()->getRequestedChannelCode();
+            $customerGroup = $this->customerRepository->getCurrentGroup();
 
-            $locale = core()->getRequestedLocaleCode();
+            $prefix = DB::getTablePrefix();
 
             $qb = $query->distinct()
                 ->select('product_flat.*')
                 ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
-                ->where('product_flat.channel', $channel)
-                ->where('product_flat.locale', $locale)
+                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . $prefix . 'variants.parent_id, ' . $prefix . 'variants.id)'))
+                #Customer Group pricing
+                ->leftJoin('product_customer_group_prices', function ($join) use ($customerGroup) {
+                    $join->on('variants.product_id', '=', 'product_customer_group_prices.product_id')
+                        ->where('product_customer_group_prices.customer_group_id', $customerGroup->id);
+                })
+                #Catalog Rule pricing
+                ->leftJoin('catalog_rule_product_prices', function ($join) use ($customerGroup) {
+                    $join->on('variants.product_id', '=', 'catalog_rule_product_prices.product_id')
+                        ->where('catalog_rule_product_prices.customer_group_id', $customerGroup->id);
+                })
+                #Select products final price including discounts
+                ->addSelect(DB::raw('LEAST(COALESCE(' . $prefix . 'catalog_rule_product_prices.price, ' . $prefix . 'product_customer_group_prices.value, ' . $prefix . 'variants.min_price), COALESCE(' . $prefix . 'product_customer_group_prices.value, ' . $prefix . 'catalog_rule_product_prices.price, ' . $prefix . 'variants.min_price)) as final_price'))
+                ->where('product_flat.channel', core()->getRequestedChannelCode())
+                ->where('product_flat.locale', core()->getRequestedLocaleCode())
+                ->where('product_flat.status', 1)
+                ->where('product_flat.visible_individually', 1)
                 ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {
                 $qb->whereIn('product_categories.category_id', explode(',', $categoryId));
-            }
-
-            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                $qb = $this->checkOutOfStockItem($qb);
-            }
-
-            if (is_null(request()->input('status'))) {
-                $qb->where('product_flat.status', 1);
-            }
-
-            if (is_null(request()->input('visible_individually'))) {
-                $qb->where('product_flat.visible_individually', 1);
             }
 
             if (isset($params['search'])) {
@@ -204,105 +198,61 @@ class ProductRepository extends Repository
                 $qb->where('product_flat.url_key', 'like', '%' . urldecode($params['url_key']) . '%');
             }
 
-            # sort direction
-            $orderDirection = 'asc';
+            #Sort collection
+            $sortOptions = explode('-', core()->getConfigData('catalog.products.storefront.sort_by') ?: 'name-desc');
 
-            if (
-                isset($params['order'])
-                && in_array($params['order'], ['desc', 'asc'])
-            ) {
-                $orderDirection = $params['order'];
+            $orderDirection = empty($params['order']) ? end($sortOptions) : $params['order'];
+            if (empty($params['sort'])) {
+                $this->checkSortAttributeAndGenerateQuery($qb, current($sortOptions), $orderDirection);
             } else {
-                $sortOptions = $this->getDefaultSortByOption();
-
-                $orderDirection = ! empty($sortOptions) ? $sortOptions[1] : 'asc';
-            }
-
-            if (isset($params['sort'])) {
                 $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
-            } else {
-                $sortOptions = $this->getDefaultSortByOption();
-                if (! empty($sortOptions)) {
-                    $this->checkSortAttributeAndGenerateQuery($qb, $sortOptions[0], $orderDirection);
-                }
             }
 
-            if ($priceFilter = request('price')) {
-                $priceRange = explode(',', $priceFilter);
+            #Filter collection by price
+            if (! empty($params['price'])) {
+                $priceRange = explode(',', $params['price']);
 
-                if (count($priceRange) > 0) {
-                    $customerGroupId = null;
+                $qb->where(function ($qb) use ($priceRange) {
+                    $priceRange = [
+                        core()->convertToBasePrice(current($priceRange)),
+                        core()->convertToBasePrice(end($priceRange)),
+                    ];
 
-                    if (auth()->guard()->check()) {
-                        $customerGroupId = auth()->guard()->user()->customer_group_id;
-                    } else {
-                        $customerGuestGroup = app('Webkul\Customer\Repositories\CustomerGroupRepository')->getCustomerGuestGroup();
-
-                        if ($customerGuestGroup) {
-                            $customerGroupId = $customerGuestGroup->id;
-                        }
-                    }
-
-                    $this->variantJoin($qb);
-
-                    $qb
-                        ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
-                        ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
-                        ->where(function ($qb) use ($priceRange, $customerGroupId) {
-                            $qb->where(function ($qb) use ($priceRange) {
-                                $qb
-                                    ->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]))
-                                    ->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
-                            })
-                                ->orWhere(function ($qb) use ($priceRange) {
-                                    $qb
-                                        ->where('catalog_rule_product_prices.price', '>=', core()->convertToBasePrice($priceRange[0]))
-                                        ->where('catalog_rule_product_prices.price', '<=', core()->convertToBasePrice(end($priceRange)));
-                                })
-                                ->orWhere(function ($qb) use ($priceRange, $customerGroupId) {
-                                    $qb
-                                        ->where('product_customer_group_prices.value', '>=', core()->convertToBasePrice($priceRange[0]))
-                                        ->where('product_customer_group_prices.value', '<=', core()->convertToBasePrice(end($priceRange)))
-                                        ->where('product_customer_group_prices.customer_group_id', '=', $customerGroupId);
-                                });
-                        });
-                }
+                    $qb->orWhereBetween('variants.min_price', $priceRange)
+                        ->orWhereBetween('catalog_rule_product_prices.price', $priceRange)
+                        ->orWhereBetween('product_customer_group_prices.value', $priceRange);
+                });
             }
 
-            $attributeFilters = $this->attributeRepository
-                ->getProductDefaultAttributes(array_keys(
-                    request()->except(['price'])
-                ));
+            $filterableAttributes = $this->attributeRepository->getProductDefaultAttributes(array_keys(
+                request()->except([
+                    'price',
+                    'name',
+                    'status',
+                    'visible_individually',
+                ])
+            ));
 
-            if (count($attributeFilters) > 0) {
-                $this->variantJoin($qb);
+            #Filter collection by attributes
+            if ($filterableAttributes->isNotEmpty()) {
+                $qb->leftJoin('product_attribute_values', 'variants.product_id', '=', 'product_attribute_values.product_id');
 
-                $qb->where(function ($filterQuery) use ($attributeFilters) {
-                    foreach ($attributeFilters as $attribute) {
+                $qb->where(function ($filterQuery) use ($filterableAttributes) {
+                    foreach ($filterableAttributes as $attribute) {
                         $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
-                            $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
-
-                            $filterInputValues = explode(',', request()->get($attribute->code));
-
                             # define the attribute we are filtering
                             $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
 
+                            $filterInputValues = explode(',', request()->get($attribute->code));
+
                             # apply the filter values to the correct column for this type of attribute.
-                            if ($attribute->type != 'price') {
-
-                                $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
-                                    foreach ($filterInputValues as $filterValue) {
-                                        if (! is_numeric($filterValue)) {
-                                            continue;
-                                        }
-
-                                        $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
-                                    }
-                                });
-
+                            if ($attribute->type == 'price') {
+                                $attributeQuery->whereBetween('product_attribute_values.' . $attribute->column_name, [
+                                    core()->convertToBasePrice(current($filterInputValues)),
+                                    core()->convertToBasePrice(end($filterInputValues)),
+                                ]);
                             } else {
-                                $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
-                                    ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
+                                $attributeQuery->whereIn('product_attribute_values.' . $attribute->column_name, $filterInputValues);
                             }
                         });
                     }
@@ -311,27 +261,41 @@ class ProductRepository extends Repository
                 # this is key! if a product has been filtered down to the same number of attributes that we filtered on,
                 # we know that it has matched all of the requested filters.
                 $qb->groupBy('variants.id');
-                $qb->havingRaw('COUNT(*) = ' . count($attributeFilters));
+                $qb->havingRaw('COUNT(*) = ' . count($filterableAttributes));
             }
 
             return $qb->groupBy('product_flat.id');
         });
 
+        if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
+            $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
+
+            $perPage = ! empty($params['limit']) ? $params['limit'] : current($pages);
+        } else {
+            $perPage = ! empty($params['limit']) ? $params['limit'] : 9;
+        }
+
         # apply scope query so we can fetch the raw sql and perform a count
-        $repository->applyScope();
-        $countQuery = "select count(*) as aggregate from ({$repository->model->toSql()}) c";
-        $count = collect(DB::select($countQuery, $repository->model->getBindings()))->pluck('aggregate')->first();
+        $query->applyScope();
+
+        $page = Paginator::resolveCurrentPage('page');
+
+        $countQuery = clone $query->model;
+
+        $count = collect(
+            DB::select("select count(id) as aggregate from ({$countQuery->select('product_flat.id')->reorder('product_flat.id')->toSql()}) c",
+            $countQuery->getBindings())
+        )->pluck('aggregate')->first();
+
+        $items = [];
 
         if ($count > 0) {
             # apply a new scope query to limit results to one page
-            $repository->scopeQuery(function ($query) use ($page, $perPage) {
+            $query->scopeQuery(function ($query) use ($page, $perPage) {
                 return $query->forPage($page, $perPage);
             });
 
-            # manually build the paginator
-            $items = $repository->get();
-        } else {
-            $items = [];
+            $items = $query->get();
         }
 
         $results = new LengthAwarePaginator($items, $count, $perPage, $page, [
@@ -343,13 +307,42 @@ class ProductRepository extends Repository
     }
 
     /**
+     * Check sort attribute and generate query.
+     *
+     * @param  object  $query
+     * @param  string  $sort
+     * @param  string  $direction
+     * @return object
+     */
+    private function checkSortAttributeAndGenerateQuery($query, $sort, $direction)
+    {
+        $attribute = $this->attributeRepository->findOneByField('code', $sort);
+
+        if ($attribute) {
+            if ($attribute->code === 'price') {
+                $query->orderBy('final_price', $direction);
+            } else {
+                $query->orderBy($attribute->code, $direction);
+            }
+        } else {
+            /* `created_at` is not an attribute so it will be in else case */
+            $query->orderBy('product_flat.created_at', $direction);
+        }
+
+        return $query;
+    }
+
+    /**
      * Returns newly added product.
      *
+     * @param  int  $count
      * @return \Illuminate\Support\Collection
      */
-    public function getNewProducts()
+    public function getNewProducts($count = null)
     {
-        $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
+        if (! $count) {
+            $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
+        }
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
             $channel = core()->getRequestedChannelCode();
@@ -372,11 +365,14 @@ class ProductRepository extends Repository
     /**
      * Returns featured product.
      *
+     * @param  int  $count
      * @return \Illuminate\Support\Collection
      */
-    public function getFeaturedProducts()
+    public function getFeaturedProducts($count = null)
     {
-        $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
+        if (! $count) {
+            $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
+        }
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
             $channel = core()->getRequestedChannelCode();
@@ -404,13 +400,13 @@ class ProductRepository extends Repository
      */
     public function getSuperAttributes($product)
     {
-        $superAttrbutes = [];
+        $superAttributes = [];
 
         foreach ($product->super_attributes as $key => $attribute) {
-            $superAttrbutes[$key] = $attribute->toArray();
+            $superAttributes[$key] = $attribute->toArray();
 
             foreach ($attribute->options as $option) {
-                $superAttrbutes[$key]['options'][] = [
+                $superAttributes[$key]['options'][] = [
                     'id'           => $option->id,
                     'admin_name'   => $option->admin_name,
                     'sort_order'   => $option->sort_order,
@@ -419,7 +415,7 @@ class ProductRepository extends Repository
             }
         }
 
-        return $superAttrbutes;
+        return $superAttributes;
     }
 
     /**
@@ -467,16 +463,11 @@ class ProductRepository extends Repository
                 ->paginate(16);
         } else {
             $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($term, $channel, $locale) {
-
                 $query = $query->distinct()
                     ->addSelect('product_flat.*')
                     ->where('product_flat.channel', $channel)
                     ->where('product_flat.locale', $locale)
                     ->whereNotNull('product_flat.url_key');
-
-                if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                    $query = $this->checkOutOfStockItem($query);
-                }
 
                 return $query->where('product_flat.status', 1)
                     ->where('product_flat.visible_individually', 1)
@@ -521,37 +512,6 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Check out of stock items.
-     *
-     * @param  Webkul\Product\Models\ProductFlat  $query
-     * @return Illuminate\Database\Eloquent\Builder
-     */
-    public function checkOutOfStockItem($query)
-    {
-        return $query
-            ->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
-            ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
-            ->where(function ($qb) {
-                return $qb
-                    /* for grouped, downloadable, bundle and booking product */
-                    ->orWhereIn('ps.type', ['grouped', 'downloadable', 'bundle', 'booking'])
-                    /* for simple and virtual product */
-                    ->orWhere(function ($qb) {
-                        return $qb->whereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
-                    })
-                    /* for configurable product */
-                    ->orWhere(function ($qb) {
-                        return $qb->where('ps.type', 'configurable')->where(function ($qb) {
-                            return $qb
-                                ->selectRaw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty)')
-                                ->from('product_flat')
-                                ->leftJoin('product_inventories', 'product_inventories.product_id', '=', 'product_flat.product_id');
-                        }, '>', 0);
-                    });
-            });
-    }
-
-    /**
      * Copy a product. Is usually called by the copy() function of the ProductController.
      *
      * Always make the copy is inactive so the admin is able to configure it before setting it live.
@@ -563,7 +523,7 @@ class ProductRepository extends Repository
         $this->fillOriginalProduct($originalProduct);
 
         if (! $originalProduct->getTypeInstance()->canBeCopied()) {
-            throw new Exception(trans('admin::app.response.product-can-not-be-copied', ['type' => $originalProduct->type]));
+            throw new \Exception(trans('admin::app.response.product-can-not-be-copied', ['type' => $originalProduct->type]));
         }
 
         DB::beginTransaction();
@@ -574,7 +534,7 @@ class ProductRepository extends Repository
             $this->persistAttributeValues($originalProduct, $copiedProduct);
 
             $this->persistRelations($originalProduct, $copiedProduct);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             report($e);
@@ -585,65 +545,6 @@ class ProductRepository extends Repository
         DB::commit();
 
         return $copiedProduct;
-    }
-
-    /**
-     * Variant join.
-     *
-     * @param  mixed  $query
-     * @return void
-     */
-    private function variantJoin($query)
-    {
-        static $alreadyJoined = false;
-
-        if (! $alreadyJoined) {
-            $alreadyJoined = true;
-
-            $query
-                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
-                ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id');
-        }
-    }
-
-    /**
-     * Get default sort by option.
-     *
-     * @return array
-     */
-    private function getDefaultSortByOption()
-    {
-        $value = core()->getConfigData('catalog.products.storefront.sort_by');
-
-        $config = $value ? $value : 'name-desc';
-
-        return explode('-', $config);
-    }
-
-    /**
-     * Check sort attribute and generate query.
-     *
-     * @param  object  $query
-     * @param  string  $sort
-     * @param  string  $direction
-     * @return object
-     */
-    private function checkSortAttributeAndGenerateQuery($query, $sort, $direction)
-    {
-        $attribute = $this->attributeRepository->findOneByField('code', $sort);
-
-        if ($attribute) {
-            if ($attribute->code === 'price') {
-                $query->orderBy('min_price', $direction);
-            } else {
-                $query->orderBy($attribute->code, $direction);
-            }
-        } else {
-            /* `created_at` is not an attribute so it will be in else case */
-            $query->orderBy('product_flat.created_at', $direction);
-        }
-
-        return $query;
     }
 
     /**

@@ -16,23 +16,21 @@
                     {!! view_render_event('bagisto.shop.checkout.payment-method.before', ['payment' => $payment]) !!}
 
                     <div class="row col-12">
-                        <div>
-                            <label class="radio-container" style="position: absolute;">
-                                <input
-                                    type="radio"
-                                    name="payment[method]"
-                                    v-validate="'required'"
-                                    v-model="payment.method"
-                                    @change="methodSelected()"
-                                    id="{{ $payment['method'] }}"
-                                    value="{{ $payment['method'] }}"
-                                    data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;" />
-
-                                <span class="checkmark"></span>
-                            </label>
+                        <div class="radio">
+                            <input
+                                type="radio"
+                                name="payment[method]"
+                                v-validate="'required'"
+                                v-model="payment.method"
+                                @change="methodSelected()"
+                                id="{{ $payment['method'] }}"
+                                value="{{ $payment['method'] }}"
+                                data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;" />
+                            
+                            <label for="{{ $payment['method'] }}" class="radio-view"></label>
                         </div>
 
-                        <div class="pl40">
+                        <div class="pl20">
                             <div class="row">
                                 <span class="payment-method method-label">
                                 <b>{{ __('shop::app.checkout.onepage.payment-method-name.'.$payment['method_title']) }}</b>

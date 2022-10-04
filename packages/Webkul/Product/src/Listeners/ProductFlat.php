@@ -9,7 +9,6 @@ use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Helpers\ProductType;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Core\Repositories\ChannelRepository;
 
 class ProductFlat
@@ -81,7 +80,7 @@ class ProductFlat
         }
 
         if (! $attribute->use_in_flat) {
-            $this->afterAttributeDeleted($attribute->id);
+            $this->beforeAttributeDeleted($attribute->id);
 
             return false;
         }
@@ -100,6 +99,8 @@ class ProductFlat
                 $table->string($attribute->code . '_label')->nullable();
             }
         });
+        
+        $this->productFlatRepository->updateAttributeColumn($attribute, $this);
     }
 
     /**
@@ -108,7 +109,7 @@ class ProductFlat
      * @param  int  $attributeId
      * @return void
      */
-    public function afterAttributeDeleted($attributeId)
+    public function beforeAttributeDeleted($attributeId)
     {
         $attribute = $this->attributeRepository->find($attributeId);
         
@@ -126,8 +127,6 @@ class ProductFlat
                 $table->dropColumn($attribute->code . '_label');
             }
         });
-        
-        $this->productFlatRepository->updateAttributeColumn( $attribute , $this);
     }
 
     /**
@@ -173,12 +172,10 @@ class ProductFlat
             $superAttributes[$parentProduct->id] = $parentProduct->super_attributes()->pluck('code')->toArray();
         }
 
-        if (isset($product['channels'])) {
-            foreach ($product['channels'] as $channel) {
-                $channels[] = $this->getChannel($channel)->code;
-            }
-        } elseif (isset($parentProduct['channels'])){
-            foreach ($parentProduct['channels'] as $channel) {
+        $channelCodes = $product['channels'] ?? ($parentProduct['channels'] ?? []);
+
+        if (! empty($channelCodes)) {
+            foreach ($channelCodes as $channel) {
                 $channels[] = $this->getChannel($channel)->code;
             }
         } else {
@@ -200,9 +197,11 @@ class ProductFlat
                         if (
                             (
                                 $parentProduct
-                                && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], $this->fillableAttributeCodes))
+                                && ! in_array($attribute->code, array_merge(
+                                    $superAttributes[$parentProduct->id],
+                                    $this->fillableAttributeCodes
+                                ))
                             )
-                            || in_array($attribute->code, ['tax_category_id'])
                             || ! in_array($attribute->code, $this->flatColumns)
                         ) {
                             continue;
@@ -234,7 +233,7 @@ class ProductFlat
                             }
                         }
 
-                        $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
+                        $productFlat->{$attribute->code} = $productAttributeValue[$attribute->column_name] ?? null;
 
                         if ($attribute->type == 'select') {
                             $attributeOption = $this->getAttributeOptions($productFlat->{$attribute->code});
@@ -284,11 +283,17 @@ class ProductFlat
                     }
 
                     $productFlat->save();
+
+                    if ($productFlat->parent) {
+                        $productFlat->parent->min_price = $productFlat->parent->getTypeInstance()->getMinimalPrice();
+
+                        $productFlat->parent->max_price = $productFlat->parent->getTypeInstance()->getMaximumPrice();
+
+                        $productFlat->parent->save();
+                    }
                 }
             } else {
-                $route = request()->route() ? request()->route()->getName() : "";
-
-                if ($route == 'admin.catalog.products.update') {
+                if (request()->route()?->getName() == 'admin.catalog.products.update') {
                     $productFlat = $this->productFlatRepository->findOneWhere([
                         'product_id' => $product->id,
                         'channel'    => $channel->code,

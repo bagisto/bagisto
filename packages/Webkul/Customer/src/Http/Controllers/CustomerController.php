@@ -72,10 +72,7 @@ class CustomerController extends Controller
 
         $data = $customerProfileRequest->validated();
 
-        if (
-            isset($data['date_of_birth'])
-            && $data['date_of_birth'] == ''
-        ) {
+        if (empty($data['date_of_birth'])) {
             unset($data['date_of_birth']);
         }
 
@@ -88,23 +85,18 @@ class CustomerController extends Controller
 
         $data['subscribed_to_news_letter'] = isset($data['subscribed_to_news_letter']);
 
-        if (isset($data['oldpassword'])) {
-            if (
-                $data['oldpassword'] != ''
-                || $data['oldpassword'] != null
-            ) {
-                if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
-                    $isPasswordChanged = true;
+        if (! empty($data['oldpassword'])) {
+            if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
+                $isPasswordChanged = true;
 
-                    $data['password'] = bcrypt($data['password']);
-                } else {
-                    session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
-
-                    return redirect()->back();
-                }
+                $data['password'] = bcrypt($data['password']);
             } else {
-                unset($data['password']);
+                session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
+
+                return redirect()->back();
             }
+        } else {
+            unset($data['password']);
         }
 
         Event::dispatch('customer.update.before');
@@ -191,7 +183,7 @@ class CustomerController extends Controller
 
                     session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
 
-                    return redirect()->route('customer.session.index');
+                    return redirect()->route('shop.customer.session.index');
                 }
             } else {
                 session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));

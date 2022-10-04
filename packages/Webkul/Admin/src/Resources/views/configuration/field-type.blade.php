@@ -29,7 +29,7 @@
 
         @if ($field['type'] == 'text')
 
-            <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: (core()->getConfigData($nameKey, $channel, $locale) ? core()->getConfigData($nameKey, $channel, $locale) : (isset($field['default_value']) ? $field['default_value'] : '')) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
+            <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: (core()->getConfigData($nameKey, $channel, $locale) ? core()->getConfigData($nameKey, $channel, $locale) : ($field['default_value'] ?? '')) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
 
         @elseif ($field['type'] == 'password')
 
@@ -129,7 +129,7 @@
 
         @elseif ($field['type'] == 'boolean')
 
-            @php $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? (isset($field['default_value']) ? $field['default_value'] : ''); @endphp
+            @php $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? ($field['default_value'] ?? ''); @endphp
 
             <label class="switch">
                 <input type="hidden" name="{{ $name }}" value="0" />

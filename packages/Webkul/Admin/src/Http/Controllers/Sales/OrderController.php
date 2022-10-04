@@ -3,17 +3,17 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\OrderDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use \Webkul\Sales\Repositories\OrderCommentRepository;
+use Webkul\Admin\DataGrids\OrderDataGrid;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     protected $_config;
 

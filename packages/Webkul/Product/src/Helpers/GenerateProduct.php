@@ -2,12 +2,13 @@
 
 namespace Webkul\Product\Helpers;
 
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+use Faker\Factory;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeOption;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository;
-use Illuminate\Support\Str;
-
 /**
  * Class GenerateProduct
  *
@@ -65,8 +66,6 @@ class GenerateProduct
                 'attribute_id' => $brand->id,
             ]);
         }
-
-
     }
 
     /**
@@ -76,23 +75,22 @@ class GenerateProduct
     {
         $attributes = $this->getDefaultFamilyAttributes();
 
-        $attributeFamily = $this->attributeFamilyRepository->findWhere([
-            'code' => 'default',
-        ]);
+        $attributeFamily = $this->attributeFamilyRepository->findOneWhere(['code' => 'default']);
 
         $sku = Str::random(10);
-        $data['sku'] = strtolower($sku);
-        $data['attribute_family_id'] = $attributeFamily->first()->id;
-        $data['type'] = 'simple';
 
-        $product = $this->productRepository->create($data);
+        $product = $this->productRepository->create([
+            'type'                => 'simple',
+            'sku'                 => strtolower($sku),
+            'attribute_family_id' => $attributeFamily->id,
+        ]);
 
-        unset($data);
+        $faker = Factory::create();
 
-        $faker = \Faker\Factory::create();
-        $date = date('Y-m-d');
-        $date = \Carbon\Carbon::parse($date);
+        $date = Carbon::parse(date('Y-m-d'));
+
         $specialFrom = $date->toDateString();
+        
         $specialTo = $date->addDays(7)->toDateString();
 
         foreach ($attributes as $attribute) {
@@ -185,30 +183,20 @@ class GenerateProduct
 
         $channel = core()->getCurrentChannel();
 
-        $data['locale'] = core()->getCurrentLocale()->code;
-
         $brand = Attribute::where(['code' => 'brand'])->first();
-        $data['brand'] = AttributeOption::where(['attribute_id' => $brand->id])->first()->id ?? '';
-
-        $data['channel'] = $channel->code;
-
-        $data['channels'] = [
-            0 => $channel->id,
-        ];
 
         $inventorySource = $channel->inventory_sources[0];
 
-        $data['inventories'] = [
-            $inventorySource->id => 10,
-        ];
+        $product = $this->productRepository->update(array_merge($data, [
+            'locale'      => core()->getCurrentLocale()->code,
+            'brand'       => AttributeOption::where(['attribute_id' => $brand->id])->first()->id ?? '',
+            'channel'     => $channel->code,
+            'channels'    => [$channel->id],
+            'inventories' => [$inventorySource->id => 10],
+            'categories'  => [$channel->root_category->id],
+        ]), $product->id);
 
-        $data['categories'] = [
-            0 => $channel->root_category->id,
-        ];
-
-        $updated = $this->productRepository->update($data, $product->id);
-
-        return $updated;
+        return $product;
     }
 
     /**
@@ -216,20 +204,16 @@ class GenerateProduct
      */
     public function getDefaultFamilyAttributes()
     {
-        $attributeFamily = $this->attributeFamilyRepository->findWhere([
-            'code' => 'default',
-        ]);
-
         $attributes = collect();
 
-        if ($attributeFamily->count()) {
-            $attributeGroups = $attributeFamily->first()->attribute_groups;
+        $attributeFamily = $this->attributeFamilyRepository->findOneWhere(['code' => 'default']);
 
-            foreach ($attributeGroups as $attributeGroup) {
-                foreach ($attributeGroup->custom_attributes as $customAttribute) {
-                    $attributes->push($customAttribute);
-                }
-            }
+        if (! $attributeFamily) {
+            return $attributes;
+        }
+
+        foreach ($attributeFamily->custom_attributes as $attribute) {
+            $attributes->push($attribute);
         }
 
         return $attributes;

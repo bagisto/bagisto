@@ -37,6 +37,7 @@ trait ProvideBouncer
     private function generateEventName($titleOrLabel)
     {
         $eventName = explode(' ', strtolower($titleOrLabel));
+        
         return implode('.', $eventName);
     }
 }
