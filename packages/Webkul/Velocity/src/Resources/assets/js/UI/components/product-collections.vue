@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid products-carousel">
         <shimmer-component v-if="isLoading"></shimmer-component>
 
         <template v-else-if="productCollections.length > 0">

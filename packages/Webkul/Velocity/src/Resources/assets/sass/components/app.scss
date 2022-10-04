@@ -225,9 +225,10 @@
 }
 
 .product-card-new {
-    width: 12rem;
+    width: 14rem;
     border: none !important;
-    margin: 0 5px 10px 10px;
+    margin: 0px 15px;
+    height: 99%;
 
     .category-product-image-container {
         margin: 0 auto;
@@ -241,7 +242,8 @@
     }
 
     .product-image-container {
-        max-height: 190px;
+        height: 100%;
+        max-height: 300px;
         position: relative;
 
         img {
@@ -274,6 +276,7 @@
 
     .card-body {
         cursor: default;
+        padding: 10px 5px;
 
         > div:last-child {
             margin-top: 10px;
@@ -324,11 +327,15 @@
         .add-to-cart-btn {
             width: 100%;
             position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
             .btn-add-to-cart {
-                width: 100%;
+                width: 126px;
                 max-width: 140px;
                 max-width: 100% !important;
+                padding: 0 !important;
 
                 &.small-padding {
                     max-width: 130px;
@@ -2139,6 +2146,10 @@
         > .row {
             padding: 0 15px;
         }
+    }
+
+    .products-carousel {
+        margin: 40px 0px;
     }
 
     p,

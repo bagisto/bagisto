@@ -92,6 +92,8 @@
                     btn-text="{{ (! isset($moveToCart) && $product->type == 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}">
                 </add-to-cart>
             @endif
+            <i class="material-icons">favorite_border</i>
+            <i class="material-icons">compare_arrows</i>
         </div>
     </div>
 
