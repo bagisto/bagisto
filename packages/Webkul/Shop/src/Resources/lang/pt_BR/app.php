@@ -568,7 +568,7 @@ return [
                 'PayPal'              => 'PayPal',
                 'Cash On Delivery'    => 'Dinheiro na entrega',          
                 'Money Transfer'      => 'Transferência de dinheiro',        
-                'Paypal Standard'     => 'Padrão do PayPal'
+                'PayPal Standard'     => 'Padrão do PayPal'
             ],
             'summary'           => 'Resumo do Pedido',
             'price'             => 'Preço',

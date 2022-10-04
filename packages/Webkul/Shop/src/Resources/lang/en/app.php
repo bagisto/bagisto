@@ -579,7 +579,7 @@ return [
                 'PayPal'              => 'PayPal',
                 'Cash On Delivery'    => 'Cash On Delivery',                
                 'Money Transfer'      => 'Money Transfer',                
-                'Paypal Standard'     => 'PayPal Standard'    
+                'PayPal Standard'     => 'PayPal Standard'    
             ],
             'summary'             => 'Order Summary',
             'price'               => 'Price',
