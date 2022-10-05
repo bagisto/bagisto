@@ -10,7 +10,7 @@ class Bundle extends AbstractPriceIndex
      * @param  \Webkul\Customer\Contracts\CustomerGroup  $customerGroup
      * @return array
      */
-    public function getIndexes($customerGroup)
+    public function getIndices($customerGroup)
     {
         $this->customerGroup = $customerGroup;
 

@@ -70,13 +70,15 @@ abstract class AbstractPriceIndex
      * @param  \Webkul\Customer\Contracts\CustomerGroup  $customerGroup
      * @return array
      */
-    public function getIndexes($customerGroup)
+    public function getIndices($customerGroup)
     {
         $this->customerGroup = $customerGroup;
 
         return [
-            'min_price' => $this->getMinimalPrice() ?? 0,
-            'max_price' => $this->getMaximumPrice() ?? 0,
+            'min_price'         => $this->getMinimalPrice() ?? 0,
+            'regular_min_price' => $this->product->price,
+            'max_price'         => $this->getMaximumPrice() ?? 0,
+            'regular_max_price' => $this->product->price,
         ];
     }
 
@@ -86,27 +88,6 @@ abstract class AbstractPriceIndex
      * @return float
      */
     public function getMinimalPrice()
-    {
-        return $this->getDiscountedPrice();
-    }
-
-    /**
-     * Get product maximum price.
-     *
-     * @return float
-     */
-    public function getMaximumPrice()
-    {
-        return $this->getMinimalPrice();
-    }
-
-    /**
-     * Returns discounted price.
-     *
-     * @param  int  $qty
-     * @return bool
-     */
-    public function getDiscountedPrice()
     {
         $customerGroupPrice = $this->getCustomerGroupPrice();
 
@@ -122,7 +103,7 @@ abstract class AbstractPriceIndex
             return $this->product->price;
         }
 
-        $haveSpecialPrice = false;
+        $haveDiscount = false;
 
         if (! (float) $discountedPrice) {
             if (
@@ -131,7 +112,7 @@ abstract class AbstractPriceIndex
             ) {
                 $discountedPrice = $rulePrice->price;
 
-                $haveSpecialPrice = true;
+                $haveDiscount = true;
             }
         } else {
             if (
@@ -140,22 +121,22 @@ abstract class AbstractPriceIndex
             ) {
                 $discountedPrice = $rulePrice->price;
 
-                $haveSpecialPrice = true;
+                $haveDiscount = true;
             } else {
                 if (core()->isChannelDateInInterval(
                     $this->product->special_price_from,
                     $this->product->special_price_to
                 )) {
-                    $haveSpecialPrice = true;
+                    $haveDiscount = true;
                 } elseif ($rulePrice) {
                     $discountedPrice = $rulePrice->price;
 
-                    $haveSpecialPrice = true;
+                    $haveDiscount = true;
                 }
             }
         }
 
-        if ($haveSpecialPrice) {
+        if ($haveDiscount) {
             $discountedPrice = min($discountedPrice, $customerGroupPrice);
         } else {
             if ($customerGroupPrice !== $this->product->price) {
@@ -164,6 +145,16 @@ abstract class AbstractPriceIndex
         }
 
         return $discountedPrice;
+    }
+
+    /**
+     * Get product maximum price.
+     *
+     * @return float
+     */
+    public function getMaximumPrice()
+    {
+        return $this->product->price;
     }
 
     /**

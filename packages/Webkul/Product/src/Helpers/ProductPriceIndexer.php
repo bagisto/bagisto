@@ -38,7 +38,7 @@ class ProductPriceIndexer
             $this->productPriceIndexRepository->updateOrCreate([
                 'customer_group_id' => $customerGroup->id,
                 'product_id'        => $product->id,
-            ], $indexer->getIndexes($customerGroup));
+            ], $indexer->getIndices($customerGroup));
         }
     }
 }

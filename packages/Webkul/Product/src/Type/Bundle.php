@@ -2,8 +2,10 @@
 
 namespace Webkul\Product\Type;
 
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
@@ -72,8 +74,10 @@ class Bundle extends AbstractType
     /**
      * Create a new product type instance.
      *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository   $productPriceIndexRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
@@ -84,8 +88,10 @@ class Bundle extends AbstractType
      * @return void
      */
     public function __construct(
+        CustomerRepository $customerRepository,
         AttributeRepository $attributeRepository,
         ProductRepository $productRepository,
+        ProductPriceIndexRepository $productPriceIndexRepository,
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
@@ -96,8 +102,10 @@ class Bundle extends AbstractType
     )
     {
         parent::__construct(
+            $customerRepository,
             $attributeRepository,
             $productRepository,
+            $productPriceIndexRepository,
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
@@ -152,198 +160,6 @@ class Bundle extends AbstractType
      * @param  int  $qty
      * @return float
      */
-    public function getMinimalPrice($qty = null)
-    {
-        $minPrice = 0;
-
-        $haveRequiredOptions = $this->haveRequiredOptions();
-
-        $minPrices = [];
-
-        foreach ($this->product->bundle_options as $option) {
-            $optionProductsPrices = $this->getOptionProductsPrices($option);
-
-            if (! count($optionProductsPrices)) {
-                continue;
-            }
-
-            $selectionMinPrice = min($optionProductsPrices);
-
-            if ($option->is_required) {
-                $minPrice += $selectionMinPrice;
-            } elseif (! $haveRequiredOptions) {
-                $minPrices[] = $selectionMinPrice;
-            }
-        }
-
-        if (! $haveRequiredOptions) {
-            $minPrice = count($minPrices) ? min($minPrices) : 0;
-        }
-
-        return $minPrice;
-    }
-
-    /**
-     * Get product regular minimal price.
-     *
-     * @return float
-     */
-    public function getRegularMinimalPrice()
-    {
-        $minPrice = 0;
-
-        $haveRequiredOptions = $this->haveRequiredOptions();
-
-        $minPrices = [];
-
-        foreach ($this->product->bundle_options as $option) {
-            $optionProductsPrices = $this->getOptionProductsPrices($option, false);
-
-            if (! count($optionProductsPrices)) {
-                continue;
-            }
-
-            $selectionMinPrice = min($optionProductsPrices);
-
-            if ($option->is_required) {
-                $minPrice += $selectionMinPrice;
-            } elseif (! $haveRequiredOptions) {
-                $minPrices[] = $selectionMinPrice;
-            }
-        }
-
-        if (
-            ! $haveRequiredOptions
-            && count($minPrices)
-        ) {
-            $minPrice = min($minPrices);
-        }
-
-        return $minPrice;
-    }
-
-    /**
-     * Get product regular minimal price.
-     *
-     * @param  \Webkul\Product\Contracts\ProductBundleOption  $option
-     * @param  bool  $minPrice
-     * @return float
-     */
-    public function getOptionProductsPrices($option, $minPrice = true)
-    {
-        $optionPrices = [];
-
-        foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
-            if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
-                continue;
-            }
-
-            $optionPrices[] = $bundleOptionProduct->qty
-                 * ($minPrice
-                    ? $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice()
-                    : $bundleOptionProduct->product->price
-            );
-        }
-
-        return $optionPrices;
-    }
-
-    /**
-     * Check if product has required options or not.
-     *
-     * @return bool
-     */
-    protected function haveRequiredOptions()
-    {
-        foreach ($this->product->bundle_options as $option) {
-            if ($option->is_required) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Get product maximum price.
-     *
-     * @return float
-     */
-    public function getMaximumPrice()
-    {
-        $optionPrices = [];
-
-        foreach ($this->product->bundle_options as $option) {
-            foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
-                if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
-                    continue;
-                }
-
-                if (in_array($option->type, ['multiselect', 'checkbox'])) {
-                    if (! isset($optionPrices[$option->id][0])) {
-                        $optionPrices[$option->id][0] = 0;
-                    }
-
-                    $optionPrices[$option->id][0] += $bundleOptionProduct->qty * $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice();
-                } else {
-                    $optionPrices[$option->id][] = $bundleOptionProduct->qty * $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice();
-                }
-
-            }
-        }
-
-        $maxPrice = 0;
-
-        foreach ($optionPrices as $key => $optionPrice) {
-            $maxPrice += max($optionPrice);
-        }
-
-        return $maxPrice;
-    }
-
-    /**
-     * Get product regular maximum price.
-     *
-     * @return float
-     */
-    public function getRegularMaximumPrice()
-    {
-        $optionPrices = [];
-
-        foreach ($this->product->bundle_options as $option) {
-            foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
-                if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
-                    continue;
-                }
-
-                if (in_array($option->type, ['multiselect', 'checkbox'])) {
-                    if (! isset($optionPrices[$option->id][0])) {
-                        $optionPrices[$option->id][0] = 0;
-                    }
-
-                    $optionPrices[$option->id][0] += $bundleOptionProduct->qty * $bundleOptionProduct->product->price;
-                } else {
-                    $optionPrices[$option->id][] = $bundleOptionProduct->qty * $bundleOptionProduct->product->price;
-                }
-
-            }
-        }
-
-        $maxPrice = 0;
-
-        foreach ($optionPrices as $key => $optionPrice) {
-            $maxPrice += max($optionPrice);
-        }
-
-        return $maxPrice;
-    }
-
-    /**
-     * Get product minimal price.
-     *
-     * @param  int  $qty
-     * @return float
-     */
     public function getFinalPrice($qty = null)
     {
         return round(0, 2);
@@ -382,24 +198,6 @@ class Bundle extends AbstractType
     }
 
     /**
-     * Get bundle product special price.
-     *
-     * @return boolean
-     */
-    private function checkBundleProductHaveSpecialPrice()
-    {
-        foreach ($this->product->bundle_options as $option) {
-            foreach ($option->bundle_option_products as $bundleOptionProduct) {
-                if ($bundleOptionProduct->product->getTypeInstance()->haveSpecialPrice()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Get product minimal price.
      *
      * @return string
@@ -410,7 +208,7 @@ class Bundle extends AbstractType
 
         $priceHtml = '';
 
-        if ($this->checkBundleProductHaveSpecialPrice()) {
+        if ($this->haveDiscount()) {
             $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
         }
 

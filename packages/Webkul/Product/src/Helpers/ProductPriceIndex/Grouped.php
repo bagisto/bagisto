@@ -5,6 +5,24 @@ namespace Webkul\Product\Helpers\ProductPriceIndex;
 class Grouped extends AbstractPriceIndex
 {
     /**
+     * Returns product specific pricing for customer group
+     *
+     * @param  \Webkul\Customer\Contracts\CustomerGroup  $customerGroup
+     * @return array
+     */
+    public function getIndices($customerGroup)
+    {
+        $this->customerGroup = $customerGroup;
+
+        return [
+            'min_price'         => $this->getMinimalPrice() ?? 0,
+            'regular_min_price' => $this->getRegularMinimalPrice() ?? 0,
+            'max_price'         => $this->getMaximumPrice() ?? 0,
+            'regular_max_price' => $this->getRegularMaximumPrice() ?? 0,
+        ];
+    }
+    
+    /**
      * Get product minimal price.
      *
      * @return float
@@ -27,6 +45,22 @@ class Grouped extends AbstractPriceIndex
     }
 
     /**
+     * Get product regular minimal price.
+     *
+     * @return float
+     */
+    public function getRegularMinimalPrice()
+    {
+        $minPrices = [];
+
+        foreach ($this->product->grouped_products as $groupOptionProduct) {
+            $minPrices[] = $groupOptionProduct->associated_product->price;
+        }
+
+        return empty($minPrices) ? 0 : min($minPrices);
+    }
+
+    /**
      * Get product maximum price.
      *
      * @return float
@@ -42,7 +76,23 @@ class Grouped extends AbstractPriceIndex
                 ->setCustomerGroup($this->customerGroup)
                 ->setProduct($variant);
 
-            $maxPrices[] = $variantIndexer->getMaximumPrice();
+            $maxPrices[] = $variantIndexer->getMinimalPrice();
+        }
+
+        return empty($maxPrices) ? 0 : max($maxPrices);
+    }
+
+    /**
+     * Get product regular maximum price.
+     *
+     * @return float
+     */
+    public function getRegularMaximumPrice()
+    {
+        $maxPrices = [];
+
+        foreach ($this->product->grouped_products as $groupOptionProduct) {
+            $maxPrices[] = $groupOptionProduct->associated_product->price;
         }
 
         return empty($maxPrices) ? 0 : max($maxPrices);

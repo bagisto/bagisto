@@ -3,19 +3,19 @@
 namespace Webkul\Product\Type;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Product\Facades\ProductImage;
-use Webkul\CatalogRule\Helpers\CatalogRuleProductPrice;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Tax\Helpers\Tax;
@@ -116,8 +116,10 @@ abstract class AbstractType
     /**
      * Create a new product type instance.
      *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
+     * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository   $productPriceIndexRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
@@ -125,8 +127,10 @@ abstract class AbstractType
      * @return void
      */
     public function __construct(
+        protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
         protected ProductRepository $productRepository,
+        protected ProductPriceIndexRepository $productPriceIndexRepository,
         protected ProductAttributeValueRepository $attributeValueRepository,
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductImageRepository $productImageRepository,
@@ -543,11 +547,25 @@ abstract class AbstractType
      */
     public function getMinimalPrice($qty = null)
     {
-        if ($this->haveSpecialPrice($qty)) {
-            return $this->product->special_price;
+        if (! $priceIndex = $this->getPriceIndex()) {
+            return $this->product->price;
         }
 
-        return $this->product->price;
+        return $priceIndex->min_price;
+    }
+
+    /**
+     * Get product regular minimal price.
+     *
+     * @return float
+     */
+    public function getRegularMinimalPrice()
+    {
+        if (! $priceIndex = $this->getPriceIndex()) {
+            return $this->product->price;
+        }
+
+        return $priceIndex->regular_min_price;
     }
 
     /**
@@ -557,7 +575,25 @@ abstract class AbstractType
      */
     public function getMaximumPrice()
     {
-        return $this->getMinimalPrice();
+        if (! $priceIndex = $this->getPriceIndex()) {
+            return $this->product->price;
+        }
+
+        return $priceIndex->max_price;
+    }
+
+    /**
+     * Get product regular minimal price.
+     *
+     * @return float
+     */
+    public function getRegularMaximumPrice()
+    {
+        if (! $priceIndex = $this->getPriceIndex()) {
+            return $this->product->price;
+        }
+
+        return $priceIndex->regular_max_price;
     }
 
     /**
@@ -572,16 +608,26 @@ abstract class AbstractType
     }
 
     /**
-     * Returns the product's minimal price.
+     * Have special price.
      *
-     * @param  int  $qty
-     * @return float
+     * @return \Webkul\Product\Contracts\ProductPriceIndex
      */
-    public function getSpecialPrice($qty = null)
+    public function getPriceIndex()
     {
-        return $this->haveSpecialPrice($qty)
-            ? $this->product->special_price
-            : $this->product->price;
+        static $indices = [];
+
+        if (array_key_exists($this->product->id, $indices)) {
+            return $indices[$this->product->id];
+        }
+
+        $customerGroup = $this->customerRepository->getCurrentGroup();
+
+        $indices[$this->product->id] = $this->product
+            ->price_indices
+            ->where('customer_group_id', $customerGroup->id)
+            ->first();
+
+        return $indices[$this->product->id];
     }
 
     /**
@@ -590,66 +636,13 @@ abstract class AbstractType
      * @param  int  $qty
      * @return bool
      */
-    public function haveSpecialPrice($qty = null)
+    public function haveDiscount($qty = null)
     {
-        $customerGroupPrice = $this->getCustomerGroupPrice($this->product, $qty);
-
-        $rulePrice = app(CatalogRuleProductPrice::class)->getRulePrice($this->product);
-
-        $specialPrice = $this->product->special_price;
-
-        if (
-            empty($specialPrice)
-            && ! $rulePrice
-            && $customerGroupPrice == $this->product->price
-        ) {
+        if (! $priceIndex = $this->getPriceIndex()) {
             return false;
         }
 
-        $haveSpecialPrice = false;
-
-        if (! (float) $specialPrice) {
-            if (
-                $rulePrice
-                && $rulePrice->price < $this->product->price
-            ) {
-                $this->product->special_price = $rulePrice->price;
-
-                $haveSpecialPrice = true;
-            }
-        } else {
-            if (
-                $rulePrice
-                && $rulePrice->price <= $this->product->special_price
-            ) {
-                $this->product->special_price = $rulePrice->price;
-
-                $haveSpecialPrice = true;
-            } else {
-                if (core()->isChannelDateInInterval(
-                    $this->product->special_price_from,
-                    $this->product->special_price_to
-                )) {
-                    $haveSpecialPrice = true;
-                } elseif ($rulePrice) {
-                    $this->product->special_price = $rulePrice->price;
-
-                    $haveSpecialPrice = true;
-                }
-            }
-        }
-
-        if ($haveSpecialPrice) {
-            $this->product->special_price = min($this->product->special_price, $customerGroupPrice);
-        } else {
-            if ($customerGroupPrice !== $this->product->price) {
-                $this->product->special_price = $customerGroupPrice;
-
-                $haveSpecialPrice = true;
-            }
-        }
-
-        return $haveSpecialPrice;
+        return $priceIndex->min_price != $this->product->regular_min_price;
     }
 
     /**
@@ -663,7 +656,7 @@ abstract class AbstractType
             $qty = 1;
         }
 
-        $customerGroup = app(CustomerRepository::class)->getCurrentGroup();
+        $customerGroup = $this->customerRepository->getCurrentGroup();
 
         $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
 
@@ -748,10 +741,12 @@ abstract class AbstractType
      */
     public function getPriceHtml()
     {
-        if ($this->haveSpecialPrice()) {
+        $minPrice = $this->getMinimalPrice();
+
+        if ($minPrice < $this->product->price) {
             $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>'
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getSpecialPrice())) . '</span>';
+            . '<span class="special-price">' . core()->currency($this->evaluatePrice($minPrice)) . '</span>';
         } else {
             $html = '<span>' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>';
         }
@@ -1035,7 +1030,7 @@ abstract class AbstractType
     {
         $offerLines = [];
         
-        $customerGroup = app(CustomerRepository::class)->getCurrentGroup();
+        $customerGroup = $this->customerRepository->getCurrentGroup();
 
         $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroup) {
                 $query->where('customer_group_id', $customerGroup->id)

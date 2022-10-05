@@ -162,11 +162,19 @@ class ProductFlat extends Model implements ProductFlatContract
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
+    public function getReviewsAttribute()
+    {
+        return $this->product->reviews;
+    }
+
+    /**
+     * The reviews that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function reviews()
     {
-        return (ProductReviewProxy::modelClass())
-            ::where('product_reviews.product_id', $this->product_id)
-            ->select('product_reviews.*');
+        return $this->product->reviews();
     }
 
     /**
