@@ -75,9 +75,9 @@ abstract class AbstractPriceIndex
         $this->customerGroup = $customerGroup;
 
         return [
-            'min_price'         => $this->getMinimalPrice() ?? 0,
+            'min_price'         => ($minPrice = $this->getMinimalPrice()) ?? 0,
             'regular_min_price' => $this->product->price,
-            'max_price'         => $this->getMaximumPrice() ?? 0,
+            'max_price'         => $minPrice ?? 0,
             'regular_max_price' => $this->product->price,
         ];
     }
@@ -145,16 +145,6 @@ abstract class AbstractPriceIndex
         }
 
         return $discountedPrice;
-    }
-
-    /**
-     * Get product maximum price.
-     *
-     * @return float
-     */
-    public function getMaximumPrice()
-    {
-        return $this->product->price;
     }
 
     /**

@@ -1093,9 +1093,9 @@ abstract class AbstractType
     }
 
     /**
-     * Check in loaded saleable.
+     * Returns price indexer class for a specific product type
      *
-     * @return mixed
+     * @return string
      */
     public function getPriceIndexer()
     {
