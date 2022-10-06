@@ -646,76 +646,6 @@ abstract class AbstractType
     }
 
     /**
-     * Get product group price.
-     *
-     * @return float
-     */
-    public function getCustomerGroupPrice($product, $qty)
-    {
-        if (is_null($qty)) {
-            $qty = 1;
-        }
-
-        $customerGroup = $this->customerRepository->getCurrentGroup();
-
-        $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
-
-        if ($customerGroupPrices->isEmpty()) {
-            return $product->price;
-        }
-
-        $lastQty = 1;
-
-        $lastPrice = $product->price;
-
-        $lastCustomerGroupId = null;
-
-        foreach ($customerGroupPrices as $customerGroupPrice) {
-            if ($qty < $customerGroupPrice->qty) {
-                continue;
-            }
-
-            if ($customerGroupPrice->qty < $lastQty) {
-                continue;
-            }
-
-            if (
-                $customerGroupPrice->qty == $lastQty
-                && ! empty($lastCustomerGroupId)
-                && empty($customerGroupPrice->customer_group_id)
-            ) {
-                continue;
-            }
-
-            if ($customerGroupPrice->value_type == 'discount') {
-                if (
-                    $customerGroupPrice->value >= 0
-                    && $customerGroupPrice->value <= 100
-                ) {
-                    $lastPrice = $product->price - ($product->price * $customerGroupPrice->value) / 100;
-
-                    $lastQty = $customerGroupPrice->qty;
-
-                    $lastCustomerGroupId = $customerGroupPrice->customer_group_id;
-                }
-            } else {
-                if (
-                    $customerGroupPrice->value >= 0
-                    && $customerGroupPrice->value < $lastPrice
-                ) {
-                    $lastPrice = $customerGroupPrice->value;
-
-                    $lastQty = $customerGroupPrice->qty;
-
-                    $lastCustomerGroupId = $customerGroupPrice->customer_group_id;
-                }
-            }
-        }
-
-        return $lastPrice;
-    }
-
-    /**
      * Get product prices.
      *
      * @return array
@@ -1074,6 +1004,76 @@ abstract class AbstractType
         ]);
 
         return $offerLines;
+    }
+
+    /**
+     * Get product group price.
+     *
+     * @return float
+     */
+    public function getCustomerGroupPrice($product, $qty)
+    {
+        if (is_null($qty)) {
+            $qty = 1;
+        }
+
+        $customerGroup = $this->customerRepository->getCurrentGroup();
+
+        $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
+
+        if ($customerGroupPrices->isEmpty()) {
+            return $product->price;
+        }
+
+        $lastQty = 1;
+
+        $lastPrice = $product->price;
+
+        $lastCustomerGroupId = null;
+
+        foreach ($customerGroupPrices as $customerGroupPrice) {
+            if ($qty < $customerGroupPrice->qty) {
+                continue;
+            }
+
+            if ($customerGroupPrice->qty < $lastQty) {
+                continue;
+            }
+
+            if (
+                $customerGroupPrice->qty == $lastQty
+                && ! empty($lastCustomerGroupId)
+                && empty($customerGroupPrice->customer_group_id)
+            ) {
+                continue;
+            }
+
+            if ($customerGroupPrice->value_type == 'discount') {
+                if (
+                    $customerGroupPrice->value >= 0
+                    && $customerGroupPrice->value <= 100
+                ) {
+                    $lastPrice = $product->price - ($product->price * $customerGroupPrice->value) / 100;
+
+                    $lastQty = $customerGroupPrice->qty;
+
+                    $lastCustomerGroupId = $customerGroupPrice->customer_group_id;
+                }
+            } else {
+                if (
+                    $customerGroupPrice->value >= 0
+                    && $customerGroupPrice->value < $lastPrice
+                ) {
+                    $lastPrice = $customerGroupPrice->value;
+
+                    $lastQty = $customerGroupPrice->qty;
+
+                    $lastCustomerGroupId = $customerGroupPrice->customer_group_id;
+                }
+            }
+        }
+
+        return $lastPrice;
     }
 
     /**

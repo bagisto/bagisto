@@ -24,6 +24,7 @@ class ConfigurableOption extends AbstractProduct
 
         $variantCollection = $product->variants()
             ->with([
+                'parent',
                 'product.attribute_values',
                 'product.price_indices',
                 'product.inventory_sources',
