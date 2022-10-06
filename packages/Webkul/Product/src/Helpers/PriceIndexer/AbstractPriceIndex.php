@@ -39,7 +39,7 @@ abstract class AbstractPriceIndex
     }
 
     /**
-     * Specify type instance product.
+     * Set current product
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return \Webkul\Product\Helpers\ProductPriceIndex\AbstractPriceIndex
@@ -52,7 +52,7 @@ abstract class AbstractPriceIndex
     }
 
     /**
-     * Specify type instance product.
+     * Set customer group
      *
      * @param  \Webkul\Customer\Contracts\CustomerGroup  $customerGroup
      * @return \Webkul\Product\Helpers\ProductPriceIndex\AbstractPriceIndex
@@ -91,7 +91,9 @@ abstract class AbstractPriceIndex
     {
         $customerGroupPrice = $this->getCustomerGroupPrice();
 
-        $rulePrice = $this->catalogRuleProductPriceHelper->getRulePrice($this->product);
+        $rulePrice = $this->catalogRuleProductPriceHelper
+            ->setCustomerGroup($this->customerGroup)
+            ->getRulePrice($this->product);
 
         $discountedPrice = $this->product->special_price;
 
