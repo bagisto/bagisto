@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('booking:cron')->dailyAt('3:00');
         $schedule->command('invoice:cron')->dailyAt('3:00');
-        $schedule->command('invoice:cron')->dailyAt('23:59');
+        $schedule->command('products:price-index')->dailyAt('24:00');
     }
 
     /**

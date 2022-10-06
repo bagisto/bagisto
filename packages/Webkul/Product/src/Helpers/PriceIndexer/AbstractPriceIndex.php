@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Product\Helpers\ProductPriceIndex;
+namespace Webkul\Product\Helpers\PriceIndexer;
 
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
@@ -76,9 +76,9 @@ abstract class AbstractPriceIndex
 
         return [
             'min_price'         => ($minPrice = $this->getMinimalPrice()) ?? 0,
-            'regular_min_price' => $this->product->price,
+            'regular_min_price' => $this->product->price ?? 0,
             'max_price'         => $minPrice ?? 0,
-            'regular_max_price' => $this->product->price,
+            'regular_max_price' => $this->product->price ?? 0,
         ];
     }
 

@@ -5,7 +5,7 @@ namespace Webkul\Product\Helpers;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Product\Repositories\ProductPriceIndexRepository;
 
-class ProductPriceIndexer
+class PriceIndexer
 {
     /**
      * Create a new command instance.

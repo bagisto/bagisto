@@ -1099,6 +1099,6 @@ abstract class AbstractType
      */
     public function getPriceIndexer()
     {
-        return '\Webkul\Product\Helpers\ProductPriceIndex\\' . ucfirst($this->product->type);
+        return '\Webkul\Product\Helpers\PriceIndexer\\' . ucfirst($this->product->type);
     }
 }

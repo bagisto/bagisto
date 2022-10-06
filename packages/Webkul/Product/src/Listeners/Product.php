@@ -10,7 +10,7 @@ use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Helpers\ProductType;
-use Webkul\Product\Helpers\ProductPriceIndexer;
+use Webkul\Product\Helpers\PriceIndexer;
 
 class Product
 {
@@ -41,7 +41,7 @@ class Product
      * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
      * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
-     * @param  \Webkul\Product\Helpers\ProductPriceIndexer  $productPriceIndexer
+     * @param  \Webkul\Product\Helpers\PriceIndexer  $priceIndexer
      * @return void
      */
     public function __construct(
@@ -51,7 +51,7 @@ class Product
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository,
         protected ProductFlatRepository $productFlatRepository,
-        protected ProductPriceIndexer $productPriceIndexer
+        protected PriceIndexer $priceIndexer
     )
     {
         $this->flatColumns = Schema::getColumnListing('product_flat');
@@ -80,7 +80,7 @@ class Product
         }
 
         foreach ($products as $product) {
-            $this->productPriceIndexer->refresh($product);
+            $this->priceIndexer->refresh($product);
         }
     }
 

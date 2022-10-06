@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Product\Helpers\ProductPriceIndex;
+namespace Webkul\Product\Helpers\PriceIndexer;
 
 class Virtual extends AbstractPriceIndex
 {

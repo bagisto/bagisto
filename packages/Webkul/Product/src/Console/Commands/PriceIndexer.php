@@ -5,9 +5,9 @@ namespace Webkul\Product\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Bus;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Jobs\ProductPriceIndexer as ProductPriceIndexerJob;
+use Webkul\Product\Jobs\PriceIndexer as PriceIndexerJob;
 
-class ProductPriceIndexer extends Command
+class PriceIndexer extends Command
 {
     /**
      * The name and signature of the console command.
@@ -46,7 +46,7 @@ class ProductPriceIndexer extends Command
         while (true) {
             $paginator = $this->productRepository->cursorPaginate(10);
 
-            $batch->add(new ProductPriceIndexerJob($paginator->items()));
+            $batch->add(new PriceIndexerJob($paginator->items()));
 
             if (! $cursor = $paginator->nextCursor()) {
                 break;

@@ -307,6 +307,6 @@ class Booking extends Virtual
      */
     public function getPriceIndexer()
     {
-        return '\Webkul\Product\Helpers\ProductPriceIndex\Virtual';
+        return '\Webkul\Product\Helpers\PriceIndexer\Virtual';
     }
 }
