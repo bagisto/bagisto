@@ -712,15 +712,13 @@ class Configurable extends AbstractType
      */
     public function haveSufficientQuantity(int $qty): bool
     {
-        $isBackOrderEnable = (bool) core()->getConfigData('catalog.inventory.stock_options.backorders');
-
         foreach ($this->product->variants as $variant) {
             if ($variant->haveSufficientQuantity($qty)) {
                 return true;
             }
         }
 
-        return $isBackOrderEnable;
+        return (bool) core()->getConfigData('catalog.inventory.stock_options.backorders');
     }
 
     /**
