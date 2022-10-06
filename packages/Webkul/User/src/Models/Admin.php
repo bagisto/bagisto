@@ -8,12 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Storage;
-use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
 use Webkul\User\Notifications\AdminResetPassword;
 
-class Admin extends Authenticatable implements AdminContract, JWTSubject
+class Admin extends Authenticatable implements AdminContract
 {
     use HasFactory, HasApiTokens, Notifiable;
 
