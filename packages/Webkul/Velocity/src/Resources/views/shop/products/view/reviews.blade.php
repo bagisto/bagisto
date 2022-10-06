@@ -1,16 +1,21 @@
 @php
-    $reviews = $reviewHelper->getReviews($product)->paginate(10);
-    
-    $avgRatings = $reviewHelper->getAverageRating($product);
-    
-    $avgStarRating = round($avgRatings);
+    $reviewHelper = app('Webkul\Product\Helpers\Review');
 
-    $percentageRatings = $reviewHelper->getPercentageRating($product);
+    $total = $reviewHelper->getTotalReviews($product);
 @endphp
 
 {!! view_render_event('bagisto.shop.products.review.before', ['product' => $product]) !!}
 
 @if ($total)
+    @php
+        $reviews = $reviewHelper->getReviews($product)->paginate(10);
+        
+        $avgRatings = $reviewHelper->getAverageRating($product);
+        
+        $avgStarRating = round($avgRatings);
+
+        $percentageRatings = $reviewHelper->getPercentageRating($product);
+    @endphp
     @if (! empty($accordian))
         <accordian :active="true">
             {{-- customer ratings --}}
