@@ -166,7 +166,7 @@
 
                                     @if ($order->base_discount_amount > 0)
                                         <tr>
-                                            <td>{{ __('shop::app.customer.account.order.view.discount') }}
+                                            <td>{{ __('shop::app.customer.account.order.view.coupon') }}
                                                 @if ($order->coupon_code)
                                                     ({{ $order->coupon_code }})
                                                 @endif
