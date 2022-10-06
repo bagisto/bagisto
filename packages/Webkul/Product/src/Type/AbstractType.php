@@ -545,7 +545,7 @@ abstract class AbstractType
      * @param  int  $qty
      * @return float
      */
-    public function getMinimalPrice($qty = null)
+    public function getMinimalPrice()
     {
         if (! $priceIndex = $this->getPriceIndex()) {
             return $this->product->price;
@@ -604,7 +604,17 @@ abstract class AbstractType
      */
     public function getFinalPrice($qty = null)
     {
-        return round($this->getMinimalPrice($qty), 4);
+        if (! $qty) {
+            return $this->getMinimalPrice();
+        }
+
+        $customerGroup = $this->customerRepository->getCurrentGroup();
+
+        $indexer = app($this->getPriceIndexer())
+            ->setCustomerGroup($customerGroup)
+            ->setProduct($this->product);
+
+        return $indexer->getMinimalPrice($qty);
     }
 
     /**

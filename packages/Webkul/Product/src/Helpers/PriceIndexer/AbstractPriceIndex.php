@@ -85,11 +85,12 @@ abstract class AbstractPriceIndex
     /**
      * Get product minimal price.
      *
+     * @param  integer  $qty
      * @return float
      */
-    public function getMinimalPrice()
+    public function getMinimalPrice($qty = null)
     {
-        $customerGroupPrice = $this->getCustomerGroupPrice();
+        $customerGroupPrice = $this->getCustomerGroupPrice($qty ?? 1);
 
         $rulePrice = $this->catalogRuleProductPriceHelper
             ->setCustomerGroup($this->customerGroup)
@@ -152,9 +153,10 @@ abstract class AbstractPriceIndex
     /**
      * Get product group price.
      *
+     * @param  integer  $qty
      * @return float
      */
-    public function getCustomerGroupPrice()
+    public function getCustomerGroupPrice($qty)
     {
         $customerGroupPrices = $this->productCustomerGroupPriceRepository
             ->checkInLoadedCustomerGroupPrice($this->product, $this->customerGroup->id);
@@ -170,7 +172,7 @@ abstract class AbstractPriceIndex
         $lastCustomerGroupId = null;
 
         foreach ($customerGroupPrices as $customerGroupPrice) {
-            if ($customerGroupPrice->qty > 1) {
+            if ($customerGroupPrice->qty > $qty) {
                 continue;
             }
 

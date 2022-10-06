@@ -27,7 +27,7 @@ class Grouped extends AbstractPriceIndex
      *
      * @return float
      */
-    public function getMinimalPrice()
+    public function getMinimalPrice($qty = null)
     {
         $minPrices = [];
 
