@@ -27,11 +27,7 @@
                 </div>
 
                 <div class="product-price mt-10">
-                    @if ($product->getTypeInstance()->haveDiscount())
-                        <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getMinimalPrice()) }}</span>
-                    @else
-                        <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getMinimalPrice()) }}</span>
-                    @endif
+                    <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getMinimalPrice()) }}</span>
                 </div>
             </div>
 
