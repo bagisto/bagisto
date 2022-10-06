@@ -9,6 +9,13 @@ use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 class CatalogRuleProductPrice
 {
     /**
+     * Customer Group instance.
+     *
+     * @var \Webkul\Customer\Contracts\CustomerGroup
+     */
+    protected $customerGroup;
+
+    /**
      * Create a new helper instance.
      *
      * @param  \Webkul\Attribute\Repositories\CatalogRuleProductPriceRepository  $catalogRuleProductPriceRepository
@@ -22,6 +29,19 @@ class CatalogRuleProductPrice
         protected CustomerRepository $customerRepository
     )
     {
+    }
+
+    /**
+     * Set customer group
+     *
+     * @param  \Webkul\Customer\Contracts\CustomerGroup  $customerGroup
+     * @return \Webkul\Product\Helpers\ProductPriceIndex\AbstractPriceIndex
+     */
+    public function setCustomerGroup($customerGroup)
+    {
+        $this->customerGroup = $customerGroup;
+
+        return $this;
     }
 
     /**
@@ -170,8 +190,10 @@ class CatalogRuleProductPrice
      */
     public function getRulePrice($product)
     {
-        $customerGroup = $this->customerRepository->getCurrentGroup();
+        if (! $this->customerGroup) {
+            $this->customerGroup = $this->customerRepository->getCurrentGroup();
+        }
 
-        return $this->catalogRuleProductPriceRepository->checkInLoadedCatalogRulePrice($product, $customerGroup->id);
+        return $this->catalogRuleProductPriceRepository->checkInLoadedCatalogRulePrice($product, $this->customerGroup->id);
     }
 }

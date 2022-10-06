@@ -22,7 +22,20 @@ class ConfigurableOption extends AbstractProduct
             return $variants;
         }
 
-        foreach ($product->variants as $variant) {
+        $variantCollection = $product->variants()
+            ->with([
+                'parent',
+                'product.attribute_values',
+                'product.price_indices',
+                'product.inventory_sources',
+                'product.inventories',
+                'product.ordered_inventories',
+                'images',
+                'videos',
+            ])
+            ->get();
+
+        foreach ($variantCollection as $variant) {
             if ($variant->isSaleable()) {
                 $variants[] = $variant;
             }
