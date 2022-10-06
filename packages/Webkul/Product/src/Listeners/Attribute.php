@@ -51,14 +51,14 @@ class Attribute
      * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
      * @return void
      */
-    public function updateCreateFlatColumn($attribute)
+    public function removeOrCreateProductFlatColumn($attribute)
     {
         if (! $attribute->is_user_defined) {
             return;
         }
 
         if (! $attribute->use_in_flat) {
-            $this->removeFlatColumn($attribute->id);
+            $this->removeProductFlatColumn($attribute->id);
 
             return;
         }
@@ -84,7 +84,7 @@ class Attribute
      * @param  int  $attributeId
      * @return void
      */
-    public function removeFlatColumn($attributeId)
+    public function removeProductFlatColumn($attributeId)
     {
         $attribute = $this->attributeRepository->find($attributeId);
         

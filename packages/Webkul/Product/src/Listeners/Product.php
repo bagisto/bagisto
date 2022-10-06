@@ -132,7 +132,7 @@ class Product
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
-    public function updateCreateFlat($product)
+    public function updateOrCreateProductFlatRecord($product)
     {
         $this->updateCreate($product);
 
