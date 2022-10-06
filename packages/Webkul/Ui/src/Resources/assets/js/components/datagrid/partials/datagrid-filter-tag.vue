@@ -2,6 +2,8 @@
     <span class="filter-tag">
         <span v-if="filter.column == 'perPage'">perPage</span>
 
+        <span v-else-if="filter.column == 'sort'">{{ filter.label }}</span>
+
         <span v-else>{{ filter.label }} | {{ filter.cond }}</span>
 
         <span class="wrapper" v-if="filter.prettyValue">
