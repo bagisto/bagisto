@@ -154,7 +154,8 @@ class ProductFlat extends Model implements ProductFlatContract
      */
     public function videos()
     {
-        return $this->product->videos()->orderBy('position');
+        return $this->hasMany(ProductVideoProxy::modelClass(), 'product_id', 'product_id')
+            ->orderBy('position');
     }
 
     /**
