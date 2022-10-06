@@ -131,10 +131,6 @@ header #search-form > *:focus {
         .offers-ct-top {
             height: 180px;
         }
-
-        .offers-ct-bottom {
-            height: 220px;
-        }
     }
 
     > .row:first-child {
@@ -149,7 +145,7 @@ header #search-form > *:focus {
     img {
         width: 100%;
         height: 100%;
-        max-height: 425px;
+        // max-height: 425px;
     }
 
     img:nth-of-type(1),
@@ -172,7 +168,7 @@ header #search-form > *:focus {
     .top-container,
     .bottom-container {
         img {
-            height: 225px;
+            height: 238px;
         }
     }
 

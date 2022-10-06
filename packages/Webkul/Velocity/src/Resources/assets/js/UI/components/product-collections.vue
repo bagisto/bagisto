@@ -11,7 +11,7 @@
             <div class="row" :class="localeDirection">
                 <div
                     class="col-md-12 no-padding carousel-products"
-                    :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
+                    :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-10' : 'without-recent-viewed col-lg-12'">
                     <carousel-component
                         :slides-per-page="slidesPerPage"
                         pagination-enabled="hide"
@@ -35,7 +35,7 @@
                 <recently-viewed
                     :title="recentlyViewedTitle"
                     :no-data-text="noDataText"
-                    :add-class="`col-lg-3 col-md-12 ${localeDirection}`"
+                    :add-class="`col-lg-2 col-md-12 ${localeDirection}`"
                     quantity="3"
                     add-class-wrapper=""
                     v-if="showRecentlyViewed === 'true'">

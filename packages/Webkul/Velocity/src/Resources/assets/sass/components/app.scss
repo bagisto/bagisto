@@ -258,11 +258,6 @@
         img {
             max-width: 100%;
             max-height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
             margin: auto;
         }
     }
@@ -2196,11 +2191,18 @@
         margin: 40px 0px;
     }
 
+    .advertisement-three-container {
+        margin: 60px 0px;
+    }
+
+    .category-with-custom-options {
+        margin: 60px 0px;
+    }
+
     p,
     div {
         > .container-fluid {
             padding: 0;
-            margin: 10px 0;
 
             > .row {
                 padding: 0 15px;
@@ -2638,6 +2640,16 @@
     position: fixed;
     margin-top: -24px;
     margin-left: -24px;
+}
+
+@media only screen and (min-width: 1295px) {
+    .products-carousel {
+        .no-padding {
+            h2 {
+                width: max-content;
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 720px) {
