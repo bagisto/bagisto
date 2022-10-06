@@ -233,7 +233,7 @@
 }
 
 .product-card-new {
-    width: 12rem;
+    width: 225px;
     border: none !important;
     margin: 0 5px 10px 10px;
 
@@ -249,13 +249,20 @@
     }
 
     .product-image-container {
-        max-height: 190px;
+        width: 100%;
+        padding-top: 280px;
         position: relative;
+        display: block;
 
         img {
-            width: 100%;
-            min-height: 190px;
-            max-height: 190px;
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
         }
     }
 
@@ -278,6 +285,7 @@
         }
 
         span {
+            line-height: 17px;
             font-size: 14px;
             vertical-align: middle;
         }
@@ -1618,14 +1626,14 @@
     */
     .price-from {
         .bundle-regular-price {
-            font-size: 12px !important;
+            font-size: 14px !important;
             font-weight: 500;
             margin-right: 10px;
             text-decoration: line-through;
         }
 
         .bundle-special-price {
-            font-size: 15px !important;
+            font-size: 18px !important;
             font-weight: 600;
         }
 
@@ -1647,6 +1655,7 @@
         &.final-price {
             font-size: 18px;
             font-weight: 600;
+            margin-right: 10px;
         }
     }
 }
@@ -1875,6 +1884,18 @@
                     font-size: 16px;
                     vertical-align: middle;
                     display: inline-block;
+
+                    .product-price {
+                        display: block;
+                        margin-top: 5px;
+                        margin-bottom: 0;
+                        font-size: 18px;
+                        word-break: break-all;
+
+                        .special-price {
+                            font-size: 16px;
+                        }
+                    }
                 }
 
                 .qty {
@@ -1931,6 +1952,11 @@
                 padding-bottom: 0;
             }
 
+            span.price {
+                font-size: inherit !important;
+                vertical-align: text-bottom;
+            }
+            
             .control-group {
                 margin-bottom: 0;
                 color: #5e5e5e;
@@ -1941,6 +1967,11 @@
 
                 .control {
                     color: #5e5e5e;
+                }
+
+                .checkbox,
+                .radio {
+                    margin-bottom: 10px;
                 }
             }
 
@@ -1996,13 +2027,6 @@
                 }
             }
         }
-    }
-}
-
-.category-container,
-.search-container {
-    .grid-card {
-        width: 15rem;
     }
 }
 
@@ -2324,7 +2348,7 @@
         }
 
         .bundle-special-price {
-            font-size: 15px !important;
+            font-size: 18px !important;
             font-weight: 600;
         }
 
