@@ -604,7 +604,10 @@ abstract class AbstractType
      */
     public function getFinalPrice($qty = null)
     {
-        if (! $qty) {
+        if (
+            is_null($qty)
+            || $qty == 1
+        ) {
             return $this->getMinimalPrice();
         }
 
