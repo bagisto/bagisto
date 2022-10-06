@@ -2,6 +2,8 @@
 
 namespace Webkul\Product\Type;
 
+use Webkul\Product\Helpers\PriceIndexer\Simple as SimpleIndexer;
+
 class Simple extends AbstractType
 {
     /**
@@ -72,5 +74,15 @@ class Simple extends AbstractType
     public function getMaximumPrice()
     {
         return $this->product->price;
+    }
+
+    /**
+     * Returns price indexer class for a specific product type
+     *
+     * @return string
+     */
+    public function getPriceIndexer()
+    {
+        return app(SimpleIndexer::class);
     }
 }

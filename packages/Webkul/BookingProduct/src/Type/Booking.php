@@ -4,17 +4,20 @@ namespace Webkul\BookingProduct\Type;
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Webkul\Product\Type\Virtual;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
-use Webkul\BookingProduct\Repositories\BookingProductRepository;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Type\Virtual;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
+use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Helpers\PriceIndexer\Virtual as VirtualIndexer;
 
 class Booking extends Virtual
 {
@@ -40,19 +43,23 @@ class Booking extends Virtual
     /**
      * Create a new product type instance.
      *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository   $productPriceIndexRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
      * @param  \Webkul\BookingProduct\Helpers\BookingHelper  $bookingHelper
-     * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @return void
      */
     public function __construct(
+        CustomerRepository $customerRepository,
         AttributeRepository $attributeRepository,
         ProductRepository $productRepository,
+        ProductPriceIndexRepository $productPriceIndexRepository,
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
@@ -62,8 +69,10 @@ class Booking extends Virtual
     )
     {
         parent::__construct(
+            $customerRepository,
             $attributeRepository,
             $productRepository,
+            $productPriceIndexRepository,
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
@@ -290,5 +299,15 @@ class Booking extends Virtual
         }
 
         return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->validateCartItem($item);
+    }
+
+    /**
+     * Returns price indexer class for a specific product type
+     *
+     * @return string
+     */
+    public function getPriceIndexer()
+    {
+        return app(VirtualIndexer::class);
     }
 }
