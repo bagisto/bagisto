@@ -8,6 +8,7 @@ use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Helpers\PriceIndexer\Configurable as ConfigurableIndexer;
 
 class Configurable extends AbstractType
 {
@@ -768,5 +769,15 @@ class Configurable extends AbstractType
         }
 
         return $total;
+    }
+
+    /**
+     * Returns price indexer class for a specific product type
+     *
+     * @return string
+     */
+    public function getPriceIndexer()
+    {
+        return app(ConfigurableIndexer::class);
     }
 }

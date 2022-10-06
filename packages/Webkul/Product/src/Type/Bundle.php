@@ -15,6 +15,7 @@ use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Helpers\BundleOption;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Helpers\PriceIndexer\Bundle as BundleIndexer;
 
 class Bundle extends AbstractType
 {
@@ -577,5 +578,15 @@ class Bundle extends AbstractType
         }
 
         return true;
+    }
+
+    /**
+     * Returns price indexer class for a specific product type
+     *
+     * @return string
+     */
+    public function getPriceIndexer()
+    {
+        return app(BundleIndexer::class);
     }
 }

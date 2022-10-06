@@ -34,7 +34,8 @@ class Grouped extends AbstractPriceIndex
         foreach ($this->product->grouped_products as $groupOptionProduct) {
             $variant = $groupOptionProduct->associated_product;
 
-            $variantIndexer = app($variant->getTypeInstance()->getPriceIndexer())
+            $variantIndexer = $variant->getTypeInstance()
+                ->getPriceIndexer()
                 ->setCustomerGroup($this->customerGroup)
                 ->setProduct($variant);
 
@@ -72,7 +73,8 @@ class Grouped extends AbstractPriceIndex
         foreach ($this->product->grouped_products as $groupOptionProduct) {
             $variant = $groupOptionProduct->associated_product;
 
-            $variantIndexer = app($variant->getTypeInstance()->getPriceIndexer())
+            $variantIndexer = $variant->getTypeInstance()
+                ->getPriceIndexer()
                 ->setCustomerGroup($this->customerGroup)
                 ->setProduct($variant);
 

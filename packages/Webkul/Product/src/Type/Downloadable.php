@@ -14,6 +14,7 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Helpers\PriceIndexer\Downloadable as DownloadableIndexer;
 
 class Downloadable extends AbstractType
 {
@@ -304,5 +305,15 @@ class Downloadable extends AbstractType
     public function getMaximumPrice()
     {
         return $this->product->price;
+    }
+
+    /**
+     * Returns price indexer class for a specific product type
+     *
+     * @return string
+     */
+    public function getPriceIndexer()
+    {
+        return app(DownloadableIndexer::class);
     }
 }

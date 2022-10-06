@@ -12,6 +12,7 @@ use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Helpers\PriceIndexer\Grouped as GroupedIndexer;
 
 class Grouped extends AbstractType
 {
@@ -212,5 +213,15 @@ class Grouped extends AbstractType
         }
 
         return $products;
+    }
+
+    /**
+     * Returns price indexer class for a specific product type
+     *
+     * @return string
+     */
+    public function getPriceIndexer()
+    {
+        return app(GroupedIndexer::class);
     }
 }

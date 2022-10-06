@@ -17,6 +17,7 @@ use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Helpers\PriceIndexer\Virtual as VirtualIndexer;
 
 class Booking extends Virtual
 {
@@ -307,6 +308,6 @@ class Booking extends Virtual
      */
     public function getPriceIndexer()
     {
-        return '\Webkul\Product\Helpers\PriceIndexer\Virtual';
+        return app(VirtualIndexer::class);
     }
 }

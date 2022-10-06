@@ -613,7 +613,7 @@ abstract class AbstractType
 
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        $indexer = app($this->getPriceIndexer())
+        $indexer = $this->getPriceIndexer()
             ->setCustomerGroup($customerGroup)
             ->setProduct($this->product);
 
@@ -1103,15 +1103,5 @@ abstract class AbstractType
         }
 
         return $loadedSaleableChecks[$product->id] = $callback($product);
-    }
-
-    /**
-     * Returns price indexer class for a specific product type
-     *
-     * @return string
-     */
-    public function getPriceIndexer()
-    {
-        return '\Webkul\Product\Helpers\PriceIndexer\\' . ucfirst($this->product->type);
     }
 }

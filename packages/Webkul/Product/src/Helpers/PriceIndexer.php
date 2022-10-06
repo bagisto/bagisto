@@ -29,7 +29,8 @@ class PriceIndexer
      */
     public function refresh($product)
     {
-        $indexer = app($product->getTypeInstance()->getPriceIndexer())
+        $indexer = $product->getTypeInstance()
+            ->getPriceIndexer()
             ->setProduct($product);
 
         $customerGroups = $this->customerGroupRepository->all();

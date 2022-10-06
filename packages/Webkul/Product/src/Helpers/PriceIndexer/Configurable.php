@@ -36,7 +36,8 @@ class Configurable extends AbstractPriceIndex
                 continue;
             }
 
-            $variantIndexer = app($variant->getTypeInstance()->getPriceIndexer())
+            $variantIndexer = $variant->getTypeInstance()
+                ->getPriceIndexer()
                 ->setCustomerGroup($this->customerGroup)
                 ->setProduct($variant);
 
@@ -88,7 +89,8 @@ class Configurable extends AbstractPriceIndex
                 continue;
             }
 
-            $variantIndexer = app($variant->getTypeInstance()->getPriceIndexer())
+            $variantIndexer = $variant->getTypeInstance()
+                ->getPriceIndexer()
                 ->setCustomerGroup($this->customerGroup)
                 ->setProduct($variant);
 
