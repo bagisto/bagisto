@@ -97,11 +97,11 @@ class DownloadableProductDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status == 'pending') {
-                    return trans('shop::app.customer.account.downloadable_products.pending');
+                    return '<span class="badge badge-md badge-warning">' .trans('shop::app.customer.account.downloadable_products.pending'). '</span>';
                 } elseif ($value->status == 'available') {
-                    return trans('shop::app.customer.account.downloadable_products.available');
+                    return '<span class="badge badge-md badge-success">' .trans('shop::app.customer.account.downloadable_products.available'). '</span>';
                 } elseif ($value->status == 'expired') {
-                    return trans('shop::app.customer.account.downloadable_products.expired');
+                    return '<span class="badge badge-md badge-info">' .trans('shop::app.customer.account.downloadable_products.expired'). '</span>';
                 }
             },
         ]);
