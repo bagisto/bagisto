@@ -3,9 +3,6 @@
         .table th.price, .table th.weight {
             width: 100px;
         }
-        .table th.actions {
-            width: 85px;
-        }
         .table td.actions .icon {
             margin-top: 8px;
         }
