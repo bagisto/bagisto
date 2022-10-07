@@ -272,7 +272,7 @@ return [
                     'wrong-password' => 'كلمة مرور خاطئة !',
                 ],
 
-                'default-address' => 'Default Address',
+                'default-address' => 'العنوان الافتراضي',
             ],
 
             'order' => [
