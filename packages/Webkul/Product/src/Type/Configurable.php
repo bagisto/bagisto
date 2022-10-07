@@ -8,6 +8,7 @@ use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Helpers\PriceIndexer\Configurable as ConfigurableIndexer;
 
 class Configurable extends AbstractType
 {
@@ -475,126 +476,18 @@ class Configurable extends AbstractType
     }
 
     /**
-     * Get product minimal price.
-     *
-     * @param  int  $qty
-     * @return float
-     */
-    public function getMinimalPrice($qty = null)
-    {
-        // static $minPrice = null;
-
-        // if (! is_null($minPrice)) {
-        //     return $minPrice;
-        // }
-
-        $minPrices = [];
-
-        foreach ($this->product->variants as $variant) {
-            if (! $variant->getTypeInstance()->isSaleable()) {
-                continue;
-            }
-
-            $minPrices[] = $variant->getTypeInstance()->getMinimalPrice();
-        }
-
-        if (empty($minPrices)) {
-            return $minPrice = 0;
-        }
-
-        return $minPrice = min($minPrices);
-    }
-
-    /**
-     * Get product offer price.
-     *
-     * @return float
-     */
-    public function getOfferPrice()
-    {
-        static $offerPrice = null;
-
-        if (! is_null($offerPrice)) {
-            return $offerPrice;
-        }
-
-        $rulePrices = $customerGroupPrices = [];
-
-        foreach ($this->product->variants as $variant) {
-            $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($variant);
-
-            if ($rulePrice) {
-                $rulePrices[] = $rulePrice->price;
-            }
-
-            $customerGroupPrices[] = $this->getCustomerGroupPrice($variant, 1);
-        }
-
-        if (
-            $rulePrices
-            || $customerGroupPrices
-        ) {
-            return $offerPrice = min(array_merge($rulePrices, $customerGroupPrices));
-        }
-
-        return $offerPrice = [];
-    }
-
-    /**
-     * Check for offer.
-     *
-     * @return bool
-     */
-    public function haveOffer()
-    {
-        if ($this->getOfferPrice() < $this->getMinimalPrice()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Get product maximum price.
-     *
-     * @return float
-     */
-    public function getMaximumPrice()
-    {
-        static $maxPrice = null;
-
-        if (! is_null($maxPrice)) {
-            return $maxPrice;
-        }
-
-        $productFlat = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
-            ->distinct()
-            ->where('products.parent_id', $this->product->id)
-            ->selectRaw('MAX(' . DB::getTablePrefix() . 'product_flat.price) AS max_price')
-            ->where('product_flat.channel', core()->getCurrentChannelCode())
-            ->where('product_flat.locale', app()->getLocale())
-            ->first();
-
-        return $maxPrice = $productFlat?->max_price ?: 0;
-    }
-
-    /**
      * Get product prices.
      *
      * @return array
      */
     public function getProductPrices()
     {
-        $haveOffer = $this->haveOffer();
+        $minPrice = $this->getMinimalPrice();
 
         return [
             'regular_price' => [
-                'formatted_price' => $haveOffer
-                    ? core()->currency($this->evaluatePrice($offerPrice = $this->getOfferPrice()))
-                    : core()->currency($this->evaluatePrice($minimalPrice = $this->getMinimalPrice())),
-                'price'           => $haveOffer
-                    ? $this->evaluatePrice($offerPrice)
-                    : $this->evaluatePrice($minimalPrice),
+                'formatted_price' => core()->currency($this->evaluatePrice($minPrice)),
+                'price'           => $this->evaluatePrice($minPrice),
             ],
         ];
     }
@@ -606,41 +499,15 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        if ($this->haveSpecialPrice()) {
+        if ($this->haveDiscount()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
                 . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
                 . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'.'<span class="regular-price"></span>';
-        } elseif ($this->haveOffer()) {
-            return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-                . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'
-                . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getOfferPrice())) . '</span>';
         } else {
             return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
                 . ' '
                 . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span> <span class="regular-price"></span>';
         }
-    }
-
-    /**
-     * Check whether configurable product have special price.
-     *
-     * @param  int  $qty
-     * @return bool
-     */
-    public function haveSpecialPrice($qty = null)
-    {
-        $haveSpecialPrice = false;
-
-        foreach ($this->product->variants as $variant) {
-            if ($variant->getTypeInstance()->haveSpecialPrice()) {
-                $haveSpecialPrice = true;
-
-                break;
-            }
-        }
-
-        return $haveSpecialPrice;
     }
 
     /**
@@ -846,15 +713,13 @@ class Configurable extends AbstractType
      */
     public function haveSufficientQuantity(int $qty): bool
     {
-        $isBackOrderEnable = (bool) core()->getConfigData('catalog.inventory.stock_options.backorders');
-
         foreach ($this->product->variants as $variant) {
             if ($variant->haveSufficientQuantity($qty)) {
                 return true;
             }
         }
 
-        return $isBackOrderEnable;
+        return (bool) core()->getConfigData('catalog.inventory.stock_options.backorders');
     }
 
     /**
@@ -904,5 +769,15 @@ class Configurable extends AbstractType
         }
 
         return $total;
+    }
+
+    /**
+     * Returns price indexer class for a specific product type
+     *
+     * @return string
+     */
+    public function getPriceIndexer()
+    {
+        return app(ConfigurableIndexer::class);
     }
 }

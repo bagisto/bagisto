@@ -151,31 +151,24 @@ class ProductRepository extends Repository
             'images',
             'product.videos',
             'product.attribute_values',
-            'product.customer_group_prices',
             'product.inventory_sources',
             'product.inventories',
             'product.ordered_inventories',
+            'product.price_indices',
+            'product.reviews',
         ])->scopeQuery(function ($query) use ($params, $categoryId) {
-            $customerGroup = $this->customerRepository->getCurrentGroup();
-
             $prefix = DB::getTablePrefix();
 
             $qb = $query->distinct()
                 ->select('product_flat.*')
-                ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
-                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . $prefix . 'variants.parent_id, ' . $prefix . 'variants.id)'))
+                ->leftJoin('product_flat as variants', DB::raw('COALESCE(' . $prefix . 'variants.parent_id, ' . $prefix . 'variants.id)'), '=', 'product_flat.id')
                 #Customer Group pricing
-                ->leftJoin('product_customer_group_prices', function ($join) use ($customerGroup) {
-                    $join->on('variants.product_id', '=', 'product_customer_group_prices.product_id')
-                        ->where('product_customer_group_prices.customer_group_id', $customerGroup->id);
+                ->leftJoin('product_price_indices', function ($join) {
+                    $customerGroup = $this->customerRepository->getCurrentGroup();
+
+                    $join->on('product_flat.product_id', '=', 'product_price_indices.product_id')
+                        ->where('product_price_indices.customer_group_id', $customerGroup->id);
                 })
-                #Catalog Rule pricing
-                ->leftJoin('catalog_rule_product_prices', function ($join) use ($customerGroup) {
-                    $join->on('variants.product_id', '=', 'catalog_rule_product_prices.product_id')
-                        ->where('catalog_rule_product_prices.customer_group_id', $customerGroup->id);
-                })
-                #Select products final price including discounts
-                ->addSelect(DB::raw('LEAST(COALESCE(' . $prefix . 'catalog_rule_product_prices.price, ' . $prefix . 'product_customer_group_prices.value, ' . $prefix . 'variants.min_price), COALESCE(' . $prefix . 'product_customer_group_prices.value, ' . $prefix . 'catalog_rule_product_prices.price, ' . $prefix . 'variants.min_price)) as final_price'))
                 ->where('product_flat.channel', core()->getRequestedChannelCode())
                 ->where('product_flat.locale', core()->getRequestedLocaleCode())
                 ->where('product_flat.status', 1)
@@ -183,7 +176,8 @@ class ProductRepository extends Repository
                 ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {
-                $qb->whereIn('product_categories.category_id', explode(',', $categoryId));
+                $qb->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
+                    ->whereIn('product_categories.category_id', explode(',', $categoryId));
             }
 
             if (isset($params['search'])) {
@@ -198,30 +192,14 @@ class ProductRepository extends Repository
                 $qb->where('product_flat.url_key', 'like', '%' . urldecode($params['url_key']) . '%');
             }
 
-            #Sort collection
-            $sortOptions = explode('-', core()->getConfigData('catalog.products.storefront.sort_by') ?: 'name-desc');
-
-            $orderDirection = empty($params['order']) ? end($sortOptions) : $params['order'];
-            if (empty($params['sort'])) {
-                $this->checkSortAttributeAndGenerateQuery($qb, current($sortOptions), $orderDirection);
-            } else {
-                $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
-            }
-
             #Filter collection by price
             if (! empty($params['price'])) {
                 $priceRange = explode(',', $params['price']);
 
-                $qb->where(function ($qb) use ($priceRange) {
-                    $priceRange = [
-                        core()->convertToBasePrice(current($priceRange)),
-                        core()->convertToBasePrice(end($priceRange)),
-                    ];
-
-                    $qb->orWhereBetween('variants.min_price', $priceRange)
-                        ->orWhereBetween('catalog_rule_product_prices.price', $priceRange)
-                        ->orWhereBetween('product_customer_group_prices.value', $priceRange);
-                });
+                $qb->whereBetween('product_price_indices.min_price', [
+                    core()->convertToBasePrice(current($priceRange)),
+                    core()->convertToBasePrice(end($priceRange)),
+                ]);
             }
 
             $filterableAttributes = $this->attributeRepository->getProductDefaultAttributes(array_keys(
@@ -262,6 +240,17 @@ class ProductRepository extends Repository
                 # we know that it has matched all of the requested filters.
                 $qb->groupBy('variants.id');
                 $qb->havingRaw('COUNT(*) = ' . count($filterableAttributes));
+            }
+
+            #Sort collection
+            $sortOptions = explode('-', core()->getConfigData('catalog.products.storefront.sort_by') ?: 'name-desc');
+
+            $orderDirection = empty($params['order']) ? end($sortOptions) : $params['order'];
+            
+            if (empty($params['sort'])) {
+                $this->checkSortAttributeAndGenerateQuery($qb, current($sortOptions), $orderDirection);
+            } else {
+                $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
             }
 
             return $qb->groupBy('product_flat.id');
@@ -320,7 +309,7 @@ class ProductRepository extends Repository
 
         if ($attribute) {
             if ($attribute->code === 'price') {
-                $query->orderBy('final_price', $direction);
+                $query->orderBy('product_price_indices.min_price', $direction);
             } else {
                 $query->orderBy($attribute->code, $direction);
             }
@@ -503,10 +492,13 @@ class ProductRepository extends Repository
                 ->addSelect('product_flat.*')
                 ->addSelect('product_flat.product_id as id')
                 ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
                 ->where('products.type', 'simple')
                 ->where('product_flat.channel', $channel)
                 ->where('product_flat.locale', $locale)
+                ->where('product_flat.status', '1')
                 ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
+                ->where('product_inventories.qty','>','0')
                 ->orderBy('product_id', 'desc');
         })->get();
     }
