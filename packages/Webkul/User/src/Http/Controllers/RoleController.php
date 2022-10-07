@@ -65,7 +65,7 @@ class RoleController extends Controller
         if (request()->has('permissions')) {
             $isParentPermissionSelected = $this->guardedParentPermission(request('permissions'));
 
-            if(! $isParentPermissionSelected) {
+            if (! $isParentPermissionSelected) {
                 return redirect()->route($this->_config['redirect']);
             }
         }
@@ -153,23 +153,27 @@ class RoleController extends Controller
      */
     public function guardedParentPermission($permissions)
     { 
-        foreach ($permissions as $permissionValue) {
-            $permissionArray = explode('.', $permissionValue);
-            $count = count($permissionArray);
-            
-            if ($count > 1) {
-                unset($permissionArray[$count - 1]);
-    
-                if (! in_array(implode('.', $permissionArray) , $permissions)) {
-                    $key = implode('.', $permissionArray);
-                    $keyName = trans(core()->fetchCurrentACLByKey($key)['name']);
-    
-                    session()->flash('warning', trans('admin::app.response.parent-permission-checkbox').' '.$keyName);
-    
-                    return false;
+        if (count($permissions) > 1) {
+            foreach ($permissions as $permissionValue) {
+                $permissionArray = explode('.', $permissionValue);
+                $count = count($permissionArray);
+                
+                if ($count > 1) {
+                    unset($permissionArray[$count - 1]);
+        
+                    if (! in_array(implode('.', $permissionArray) , $permissions)) {
+                        $key = implode('.', $permissionArray);
+                        $keyName = trans(core()->fetchCurrentACLByKey($key)['name']);
+        
+                        session()->flash('warning', trans('admin::app.response.parent-permission-checkbox').' '.$keyName);
+        
+                        return false;
+                    }
                 }
             }
         }
+
+        return true;
     }
 
     /**
