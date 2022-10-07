@@ -21,7 +21,7 @@ class ProductOrderedInventory extends Model implements ProductOrderedInventoryCo
     public $timestamps = false;
 
     /**
-     * Fillables.
+     * Fillable.
      *
      * @var array
      */

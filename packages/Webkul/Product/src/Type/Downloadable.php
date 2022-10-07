@@ -2,16 +2,19 @@
 
 namespace Webkul\Product\Type;
 
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Helpers\PriceIndexer\Downloadable as DownloadableIndexer;
 
 class Downloadable extends AbstractType
 {
@@ -20,7 +23,14 @@ class Downloadable extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['length', 'width', 'height', 'weight', 'depth', 'guest_checkout'];
+    protected $skipAttributes = [
+        'length',
+        'width',
+        'height',
+        'weight',
+        'depth',
+        'guest_checkout',
+    ];
 
     /**
      * These blade files will be included in product edit page.
@@ -60,19 +70,23 @@ class Downloadable extends AbstractType
     /**
      * Create a new product type instance.
      *
-     * @param \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
-     * @param \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
-     * @param \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
-     * @param \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
-     * @param \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
-     * @param \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository   $productPriceIndexRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
+     * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @return void
      */
     public function __construct(
+        CustomerRepository $customerRepository,
         AttributeRepository $attributeRepository,
         ProductRepository $productRepository,
+        ProductPriceIndexRepository $productPriceIndexRepository,
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         productImageRepository $productImageRepository,
@@ -82,8 +96,10 @@ class Downloadable extends AbstractType
     )
     {
         parent::__construct(
+            $customerRepository,
             $attributeRepository,
             $productRepository,
+            $productPriceIndexRepository,
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
@@ -102,13 +118,14 @@ class Downloadable extends AbstractType
     public function update(array $data, $id, $attribute = 'id')
     {
         $product = parent::update($data, $id, $attribute);
-        $route = request()->route() ? request()->route()->getName() : '';
 
-        if ($route != 'admin.catalog.products.massupdate') {
-            $this->productDownloadableLinkRepository->saveLinks($data, $product);
-
-            $this->productDownloadableSampleRepository->saveSamples($data, $product);
+        if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
+            return $product;
         }
+
+        $this->productDownloadableLinkRepository->saveLinks($data, $product);
+
+        $this->productDownloadableSampleRepository->saveSamples($data, $product);
 
         return $product;
     }
@@ -163,10 +180,7 @@ class Downloadable extends AbstractType
      */
     public function prepareForCart($data)
     {
-        if (
-            ! isset($data['links'])
-            || ! count($data['links'])
-        ) {
+        if (empty($data['links'])) {
             return trans('shop::app.checkout.cart.integrity.missing_links');
         }
 
@@ -244,7 +258,7 @@ class Downloadable extends AbstractType
      * Validate cart item product price
      *
      * @param  \Webkul\Checkout\Models\CartItem  $item
-     * @return \Webkul\Product\Datatypes\CartItemValidationResult
+     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
@@ -291,5 +305,15 @@ class Downloadable extends AbstractType
     public function getMaximumPrice()
     {
         return $this->product->price;
+    }
+
+    /**
+     * Returns price indexer class for a specific product type
+     *
+     * @return string
+     */
+    public function getPriceIndexer()
+    {
+        return app(DownloadableIndexer::class);
     }
 }

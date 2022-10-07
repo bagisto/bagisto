@@ -24,7 +24,7 @@
 
         @if ($order->canCancel())
             <span class="account-action">
-                <form id="cancelOrderForm" action="{{ route('customer.orders.cancel', $order->id) }}" method="post">
+                <form id="cancelOrderForm" action="{{ route('shop.customer.orders.cancel', $order->id) }}" method="post">
                     @csrf
                 </form>
 
@@ -166,7 +166,7 @@
 
                                     @if ($order->base_discount_amount > 0)
                                         <tr>
-                                            <td>{{ __('shop::app.customer.account.order.view.discount') }}
+                                            <td>{{ __('shop::app.customer.account.order.view.coupon') }}
                                                 @if ($order->coupon_code)
                                                     ({{ $order->coupon_code }})
                                                 @endif
@@ -231,7 +231,7 @@
                             <div class="section-title">
                                 <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}</span>
 
-                                <a href="{{ route('customer.orders.print', $invoice->id) }}" class="float-right">
+                                <a href="{{ route('shop.customer.orders.print', $invoice->id) }}" class="float-right">
                                     {{ __('shop::app.customer.account.order.view.print') }}
                                 </a>
                             </div>

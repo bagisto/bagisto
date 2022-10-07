@@ -3,9 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CustomerGroupDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\DataGrids\CustomerGroupDataGrid;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Core\Contracts\Validations\Code;
 
 class CustomerGroupController extends Controller
 {
@@ -59,7 +60,7 @@ class CustomerGroupController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:customer_groups,code', new \Webkul\Core\Contracts\Validations\Code],
+            'code' => ['required', 'unique:customer_groups,code', new Code],
             'name' => 'required',
         ]);
 
@@ -98,7 +99,7 @@ class CustomerGroupController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:customer_groups,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'code' => ['required', 'unique:customer_groups,code,' . $id, new Code],
             'name' => 'required',
         ]);
 

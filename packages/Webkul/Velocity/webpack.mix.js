@@ -23,7 +23,6 @@ const jsPath = path.join(assetsPath, 'js');
 const imagesPath = path.join(assetsPath, 'images');
 
 mix.setPublicPath(publicPath)
-
     .js(path.join(jsPath, 'jquery-ez-plus.js'), 'js/jquery-ez-plus.js')
     .js(path.join(jsPath, 'app-core.js'), 'js/velocity-core.js')
     .js(path.join(jsPath, 'app.js'), 'js/velocity.js')

@@ -30,7 +30,7 @@
                         <label>{{ __('shop::app.products.total-amount') }}</label>
 
                         <div class="bundle-price">
-                            @{{ formated_total_price | currency(currency_options) }}
+                            @{{ formatted_total_price | currency(currency_options) }}
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@
                         <select class="control" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="option.label + '&quot;'">
                             <option value="">{{ __('shop::app.products.choose-selection') }}</option>
                             <option v-for="(product, index2) in option.products" :value="product.id">
-                                @{{ product.name + ' + ' + product.price.final_price.formated_price }}
+                                @{{ product.name + ' + ' + product.price.final_price.formatted_price }}
                             </option>
                         </select>
                     </div>
@@ -78,7 +78,7 @@
                             @{{ product.name }}
 
                             <span class="price">
-                                + @{{ product.price.final_price.formated_price }}
+                                + @{{ product.price.final_price.formatted_price }}
                             </span>
                         </span>
                     </div>
@@ -91,7 +91,7 @@
                             @{{ product.name }}
 
                             <span class="price">
-                                + @{{ product.price.final_price.formated_price }}
+                                + @{{ product.price.final_price.formatted_price }}
                             </span>
                         </span>
                     </div>
@@ -100,7 +100,7 @@
                         <select class="control" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" multiple>
                             <option value="0" v-if="! option.is_required">{{ __('shop::app.products.none') }}</option>
                             <option v-for="(product, index2) in option.products" :value="product.id">
-                                @{{ product.name + ' + ' + product.price.final_price.formated_price }}
+                                @{{ product.name + ' + ' + product.price.final_price.formatted_price }}
                             </option>
                         </select>
                     </div>
@@ -139,7 +139,7 @@
                 },
 
                 computed: {
-                    formated_total_price: function() {
+                    formatted_total_price: function() {
                         var total = 0;
 
                         for (var key in this.options) {

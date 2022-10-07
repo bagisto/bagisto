@@ -18,7 +18,7 @@
         <div class="account-items-list">
             <div class="account-table-content">
 
-                <datagrid-plus src="{{ route('customer.downloadable_products.index') }}"></datagrid-plus>
+                <datagrid-plus src="{{ route('shop.customer.downloadable_products.index') }}"></datagrid-plus>
 
             </div>
         </div>

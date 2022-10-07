@@ -12,8 +12,8 @@
     $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
 
     $metaRoute = $metaData
-        ? route('velocity.admin.store.meta-data', ['id' => $metaData->id])
-        : route('velocity.admin.store.meta-data', ['id' => 'new']);
+        ? route('velocity.admin.store.meta_data', ['id' => $metaData->id])
+        : route('velocity.admin.store.meta_data', ['id' => 'new']);
 @endphp
 
 @push('css')
@@ -402,7 +402,7 @@
 
                 var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
 
-                window.location.href = "{{ route('velocity.admin.meta-data')  }}" + query;
+                window.location.href = "{{ route('velocity.admin.meta_data')  }}" + query;
             })
         });
     </script>

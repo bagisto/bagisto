@@ -3,12 +3,12 @@
 namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Contracts\Validations\CommaSeperatedInteger;
+use Webkul\Core\Contracts\Validations\CommaSeparatedInteger;
 
 class ConfigurationForm extends FormRequest
 {
     /**
-     * Determine if the Configuraion is authorized to make this request.
+     * Determine if the Configuration is authorized to make this request.
      *
      * @return bool
      */
@@ -31,7 +31,7 @@ class ConfigurationForm extends FormRequest
             && ! empty(request()->input('catalog.products.storefront.products_per_page'))
         ) {
             $this->rules = [
-                'catalog.products.storefront.products_per_page' => [new CommaSeperatedInteger],
+                'catalog.products.storefront.products_per_page' => [new CommaSeparatedInteger],
             ];
         }
 
@@ -54,11 +54,11 @@ class ConfigurationForm extends FormRequest
         }
 
         if (
-            request()->has('sales.invoice_setttings.invoice_slip_design.logo')
-            && ! request()->input('sales.invoice_setttings.invoice_slip_design.logo.delete')
+            request()->has('sales.invoice_settings.invoice_slip_design.logo')
+            && ! request()->input('sales.invoice_settings.invoice_slip_design.logo.delete')
         ) {
             $this->rules = array_merge($this->rules, [
-                'sales.invoice_setttings.invoice_slip_design.logo' => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
+                'sales.invoice_settings.invoice_slip_design.logo' => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
             ]);
         }
 
@@ -85,7 +85,7 @@ class ConfigurationForm extends FormRequest
         return [
             'general.design.admin_logo.logo_image'             => 'Logo Image',
             'general.design.admin_logo.favicon'                => 'Favicon Image',
-            'sales.invoice_setttings.invoice_slip_design.logo' => 'Invoice Logo',
+            'sales.invoice_settings.invoice_slip_design.logo' => 'Invoice Logo',
             'catalog.products.storefront.products_per_page'    => 'Product Per Page',
         ];
     }

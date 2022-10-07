@@ -27,8 +27,7 @@
     .image-container {
         .magnifier {
             > img {
-                max-width: 100%;
-                max-height: 420px;
+                width: 100%;
             }
         }
     }
@@ -36,13 +35,6 @@
     @media only screen and (max-width: 992px) {
         .image-container {
             margin: 0 auto;
-
-            .magnifier {
-                > img {
-                    width: 100%;
-                    max-height: 300px;
-                }
-            }
         }
     }
 

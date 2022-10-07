@@ -7,7 +7,6 @@ use Illuminate\Auth\Notifications\ResetPassword;
 
 class CustomerResetPassword extends ResetPassword
 {
-
     /**
      * Build the mail representation of the notification.
      *
