@@ -24,13 +24,15 @@ class CatalogRuleProductPriceRepository extends Repository
      */
     public function checkInLoadedCatalogRulePrice($product, $customerGroupId)
     {
+        $identifier = $product->id . '_' . $customerGroupId;
+
         static $catalogRulePrices = [];
 
-        if (array_key_exists($product->id, $catalogRulePrices)) {
-            return $catalogRulePrices[$product->id];
+        if (array_key_exists($identifier, $catalogRulePrices)) {
+            return $catalogRulePrices[$identifier];
         }
 
-        return $catalogRulePrices[$product->id] = $this->findOneWhere([
+        return $catalogRulePrices[$identifier] = $this->findOneWhere([
             'product_id'        => $product->id,
             'channel_id'        => core()->getCurrentChannel()->id,
             'customer_group_id' => $customerGroupId,
