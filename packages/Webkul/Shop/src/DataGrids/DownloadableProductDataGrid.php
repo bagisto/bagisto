@@ -101,7 +101,7 @@ class DownloadableProductDataGrid extends DataGrid
                 } elseif ($value->status == 'available') {
                     return '<span class="badge badge-md badge-success">' .trans('shop::app.customer.account.downloadable_products.available'). '</span>';
                 } elseif ($value->status == 'expired') {
-                    return '<span class="badge badge-md badge-info">' .trans('shop::app.customer.account.downloadable_products.expired'). '</span>';
+                    return '<span class="badge badge-md badge-danger">' .trans('shop::app.customer.account.downloadable_products.expired'). '</span>';
                 }
             },
         ]);
