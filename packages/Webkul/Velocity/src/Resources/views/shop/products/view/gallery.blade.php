@@ -33,7 +33,7 @@
 <div class="product-image-group">
     <div class="row col-12">
         <magnify-image
-            src="{{ $images[0]['original_image_url'] }}"
+            src="{{ $images[0]['large_image_url'] }}"
             type="{{ $images[0]['type'] }}"
         ></magnify-image>
     </div>
