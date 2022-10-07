@@ -2,27 +2,13 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Container\Container;
+use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Attribute\Models\Attribute;
+use Webkul\Product\Listeners\ProductFlat;
 
 class ProductFlatRepository extends Repository
 {
-    /**
-     * Create a new repository instance.
-     *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Illuminate\Container\Container  $container
-     * @return void
-     */
-    public function __construct(
-        protected AttributeRepository $attributeRepository,
-        Container $container
-    )
-    {
-        parent::__construct($container);
-    }
-
     /**
      * Specify model.
      *
@@ -38,30 +24,14 @@ class ProductFlatRepository extends Repository
      *
      * @param  \Webkul\Attribute\Models\Attribute  $attribute
      * @param  \Webkul\Product\Listeners\ProductFlat  $listener
-     * @return object
+     * @return mixed
      */
-    public function updateAttributeColumn(
-        \Webkul\Attribute\Models\Attribute $attribute,
-        \Webkul\Product\Listeners\ProductFlat $listener
-    ) {
+    public function updateAttributeColumn(Attribute $attribute, ProductFlat $listener)
+    {
         return $this->model
             ->leftJoin('product_attribute_values as v', function ($join) use ($attribute) {
                 $join->on('product_flat.id', '=', 'v.product_id')
                     ->on('v.attribute_id', '=', \DB::raw($attribute->id));
-            })->update(['product_flat.' . $attribute->code => \DB::raw($listener->attributeTypeFields[$attribute->type] . '_value')]);
-    }
-
-    /**
-     * Maximum price of category product.
-     *
-     * @param  \Webkul\Category\Contracts\Category  $category
-     * @return float
-     */
-    public function getCategoryProductMaximumPrice($category)
-    {
-        return $this->model
-            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-            ->where('product_categories.category_id', $category->id)
-            ->max('max_price');
+            })->update(['product_flat.' . $attribute->code => DB::raw($listener->attributeTypeFields[$attribute->type] . '_value')]);
     }
 }
