@@ -71,7 +71,7 @@ export default {
         /* binding should be with class as ezplus is having bug of creating multiple containers */
         this.activeImage = $('.main-product-image');
         this.activeImage.attr('src', this.activeImageVideoURL);
-        this.activeImage.data('zoom-image', this.activeImageVideoURL);
+        this.activeImage.data('zoom-image', this.activeOriginalImage);
 
         /* initialise zoom */
         this.elevateZoom();
