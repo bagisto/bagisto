@@ -6,7 +6,6 @@
 
 @section('content')
     <div class="content">
-
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
             <div class="page-header">
