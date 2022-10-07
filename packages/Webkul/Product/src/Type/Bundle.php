@@ -141,7 +141,7 @@ class Bundle extends AbstractType
      * @param  \Webkul\Product\Models\Product  $product
      * @return void
      */
-    private function copyRelationships($product)
+    protected function copyRelationships($product)
     {
         parent::copyRelationships($product);
 

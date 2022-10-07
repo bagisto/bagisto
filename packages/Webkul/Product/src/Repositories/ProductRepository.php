@@ -18,12 +18,14 @@ class ProductRepository extends Repository
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
      * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
+        protected ProductFlatRepository $productFlatRepository,
         Container $container
     )
     {
@@ -121,7 +123,7 @@ class ProductRepository extends Repository
      */
     public function findBySlug($slug)
     {
-        return app(ProductFlatRepository::class)->findOneWhere([
+        return $this->productFlatRepository->findOneWhere([
             'url_key' => $slug,
             'locale'  => app()->getLocale(),
             'channel' => core()->getCurrentChannelCode(),
@@ -137,7 +139,7 @@ class ProductRepository extends Repository
      */
     public function findBySlugOrFail($slug, $columns = null)
     {
-        $product = app(ProductFlatRepository::class)->findOneWhere([
+        $product = $this->productFlatRepository->findOneWhere([
             'url_key' => $slug,
             'locale'  => app()->getLocale(),
             'channel' => core()->getCurrentChannelCode(),
@@ -179,7 +181,7 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
 
-        $query = app(ProductFlatRepository::class)->with([
+        $query = $this->productFlatRepository->with([
             'images',
             'product.videos',
             'product.attribute_values',
@@ -362,7 +364,7 @@ class ProductRepository extends Repository
             $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
         }
 
-        $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
+        $results = $this->productFlatRepository->scopeQuery(function ($query) {
             $channel = core()->getRequestedChannelCode();
 
             $locale = core()->getRequestedLocaleCode();
@@ -392,7 +394,7 @@ class ProductRepository extends Repository
             $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
         }
 
-        $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
+        $results = $this->productFlatRepository->scopeQuery(function ($query) {
             $channel = core()->getRequestedChannelCode();
 
             $locale = core()->getRequestedLocaleCode();
@@ -449,7 +451,7 @@ class ProductRepository extends Repository
         $locale = core()->getRequestedLocaleCode();
 
         if (config('scout.driver') == 'algolia') {
-            $results = app(ProductFlatRepository::class)
+            $results = $this->productFlatRepository
                 ->getModel()::search('query', function ($searchDriver, string $query, array $options) use ($term, $channel, $locale) {
                     $queries = explode('_', $term);
 
@@ -473,7 +475,7 @@ class ProductRepository extends Repository
         } elseif (config('scout.driver') == 'elastic') {
             $queries = explode('_', $term);
 
-            $results = app(ProductFlatRepository::class)
+            $results = $this->productFlatRepository
                 ->getModel()::search(implode(' OR ', $queries))
                 ->where('status', 1)
                 ->where('visible_individually', 1)
@@ -482,8 +484,8 @@ class ProductRepository extends Repository
                 ->orderBy('product_id', 'desc')
                 ->paginate(16);
         } else {
-            $results = app(ProductFlatRepository::class)
-                    ->scopeQuery(function ($query) use ($term, $channel, $locale) {
+            $results = $this->productFlatRepository
+                ->scopeQuery(function ($query) use ($term, $channel, $locale) {
                     $query = $query->distinct()
                         ->addSelect('product_flat.*')
                         ->where('product_flat.channel', $channel)
@@ -515,7 +517,7 @@ class ProductRepository extends Repository
      */
     public function searchSimpleProducts($term)
     {
-        return app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($term) {
+        return $this->productFlatRepository->scopeQuery(function ($query) use ($term) {
             $channel = core()->getRequestedChannelCode();
 
             $locale = core()->getRequestedLocaleCode();
