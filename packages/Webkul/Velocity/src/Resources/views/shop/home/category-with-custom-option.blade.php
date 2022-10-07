@@ -7,7 +7,7 @@
     $category[3] = $categoryRepository->findByPath($category[3]);
 @endphp
 
-<div class="container-fluid category-with-custom-options">
+<div class="container-fluid category-with-custom-options" v-if='width > 768'  >
     <div class="row">
         <div class="col pr15">
             <img data-src="{{ $category['2']->image_url }}" class="lazyload" alt="" />
@@ -129,7 +129,7 @@
     </div>
 </div>
 
-<div class="container-fluid category-with-custom-options vc-small-screen">
+<div class="container-fluid category-with-custom-options vc-small-screen" v-if='width < 768'  >
     @foreach ($category as $categoryItem)
         <div class="smart-category-container">
             <div class="col-12">

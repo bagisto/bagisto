@@ -1,66 +1,70 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
 {!! view_render_event('bagisto.shop.products.list.toolbar.before') !!}
-    <toolbar-component></toolbar-component>
+    <toolbar-component :paginate-html='paginationHTML'></toolbar-component>
 {!! view_render_event('bagisto.shop.products.list.toolbar.after') !!}
 
 @push('scripts')
     <script type="text/x-template" id="toolbar-template">
-        <div class="toolbar-wrapper" v-if='!isMobile()'>
-            <div class="view-mode">
-                @php
-                  $viewOption = $toolbarHelper->getViewOption();
-                @endphp
+        <div class="toolbar-wrapper-container" v-if='!isMobile()'>
+            <div class="toolbar-wrapper">
+                <div class="view-mode">
+                    @php
+                    $viewOption = $toolbarHelper->getViewOption();
+                    @endphp
 
-                <div class="rango-view-grid-container {{ $viewOption === 'grid' ? 'active' : '' }}">
-                    <a href="{{ $toolbarHelper->getModeUrl('grid') }}" class="grid-view unset" aria-label="Grid">
-                        <span class="rango-view-grid fs24"></span>
-                    </a>
+                    <div class="rango-view-grid-container {{ $viewOption === 'grid' ? 'active' : '' }}">
+                        <a href="{{ $toolbarHelper->getModeUrl('grid') }}" class="grid-view unset" aria-label="Grid">
+                            <span class="rango-view-grid fs24"></span>
+                        </a>
+                    </div>
+                    <div class="rango-view-list-container {{ $viewOption === 'list' ? 'active' : '' }}" aria-label="List">
+                        <a
+                            href="{{ $toolbarHelper->getModeUrl('list') }}"
+                            class="list-view unset">
+                            <span class="rango-view-list fs24"></span>
+                        </a>
+                    </div>
                 </div>
-                <div class="rango-view-list-container {{ $viewOption === 'list' ? 'active' : '' }}" aria-label="List">
-                    <a
-                        href="{{ $toolbarHelper->getModeUrl('list') }}"
-                        class="list-view unset">
-                        <span class="rango-view-list fs24"></span>
-                    </a>
+
+                <div class="sorter">
+                    <label>{{ __('shop::app.products.sort-by') }}</label>
+
+                    <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value" aria-label="Sort By">
+                        @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
+                            <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
+                                {{ __('shop::app.products.' . $order) }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    <div class="select-icon-container">
+                        <span class="select-icon rango-arrow-down"></span>
+                    </div>
+                </div>
+
+                <div class="limiter">
+                    <label>{{ __('shop::app.products.show') }}</label>
+
+                    <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value" style="width: 57px;" aria-label="Show">
+
+                        @foreach ($toolbarHelper->getAvailableLimits() as $limit)
+
+                            <option value="{{ $toolbarHelper->getLimitUrl($limit) }}" {{ $toolbarHelper->isLimitCurrent($limit) ? 'selected' : '' }}>
+                                {{ $limit }}
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                    <div class="select-icon-container">
+                        <span class="select-icon rango-arrow-down"></span>
+                    </div>
                 </div>
             </div>
 
-            <div class="sorter">
-                <label>{{ __('shop::app.products.sort-by') }}</label>
-
-                <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value" aria-label="Sort By">
-                    @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
-                        <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
-                            {{ __('shop::app.products.' . $order) }}
-                        </option>
-                    @endforeach
-                </select>
-
-                <div class="select-icon-container">
-                    <span class="select-icon rango-arrow-down"></span>
-                </div>
-            </div>
-
-            <div class="limiter">
-                <label>{{ __('shop::app.products.show') }}</label>
-
-                <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value" style="width: 57px;" aria-label="Show">
-
-                    @foreach ($toolbarHelper->getAvailableLimits() as $limit)
-
-                        <option value="{{ $toolbarHelper->getLimitUrl($limit) }}" {{ $toolbarHelper->isLimitCurrent($limit) ? 'selected' : '' }}>
-                            {{ $limit }}
-                        </option>
-
-                    @endforeach
-
-                </select>
-
-                <div class="select-icon-container">
-                    <span class="select-icon rango-arrow-down"></span>
-                </div>
-            </div>
+            <div class="bottom-toolbar" v-html="paginateHtml"></div>
         </div>
 
         <div class="toolbar-wrapper row col-12 remove-padding-margin" v-else>
@@ -134,6 +138,7 @@
     <script type="text/javascript">
         (() => {
             Vue.component('toolbar-component', {
+                props: ['paginateHtml'],
                 template: '#toolbar-template',
                 data: function () {
                     return {

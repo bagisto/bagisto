@@ -124,7 +124,11 @@
 
                             {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.before', ['category' => $category]) !!}
 
-                            <div class="bottom-toolbar" v-html="paginationHTML"></div>
+                            <div class="filters-container">
+                                <template v-if="products.length >= 0">
+                                    @include ('shop::products.list.toolbar')
+                                </template>
+                            </div>
 
                             {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.after', ['category' => $category]) !!}
                         </template>

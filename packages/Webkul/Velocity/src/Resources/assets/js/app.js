@@ -115,6 +115,7 @@ $(function() {
                 responsiveSidebarTemplate: '',
                 responsiveSidebarKey: Math.random(),
                 baseUrl: getBaseUrl(),
+                width: window.innerWidth,
             };
         },
 

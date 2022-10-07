@@ -175,19 +175,20 @@
                                             'showCompare' => (bool) core()->getConfigData('general.content.shop.compare_option'),
                                         ])
                                     </div>
+                                
+
+                                    @include ('shop::products.view.short-description')
+
+                                    @include ('shop::products.view.attributes', [
+                                        'active' => true
+                                    ])
+
+                                    {{-- product long description --}}
+                                    @include ('shop::products.view.description')
+
+                                    {{-- reviews count --}}
+                                    @include ('shop::products.view.reviews', ['accordian' => true])
                                 </div>
-
-                                @include ('shop::products.view.short-description')
-
-                                @include ('shop::products.view.attributes', [
-                                    'active' => true
-                                ])
-
-                                {{-- product long description --}}
-                                @include ('shop::products.view.description')
-
-                                {{-- reviews count --}}
-                                @include ('shop::products.view.reviews', ['accordian' => true])
                             </div>
                         </div>
                     </div>

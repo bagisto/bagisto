@@ -110,6 +110,10 @@
 .filters-container {
     margin: 20px 0;
 
+    .toolbar-wrapper-container {
+        @include flexBox(flex,space-between);
+    }
+
     .toolbar-wrapper {
         > div {
             margin: 0 8px 0 0;
@@ -152,8 +156,6 @@
 }
 
 .view-mode {
-    margin-bottom: 20px;
-
     .rango-view-grid-container {
         width: 36px;
         height: 36px;
@@ -236,7 +238,6 @@
     width: 14rem;
     border: none !important;
     margin: 0px 15px;
-    height: 99%;
 
     .category-product-image-container {
         margin: 0 auto;
@@ -2119,6 +2120,12 @@
             margin-bottom: 30px;
         }
     }
+
+    .category-block {
+        .row {
+            margin-bottom: 10px !important;
+        }
+    }
 }
 
 .vue-slider {
@@ -2180,23 +2187,11 @@
 .full-content-wrapper {
     > .container-fluid {
         padding: 0;
-        margin: 10px 0;
+        margin-top: 60px;
 
         > .row {
             padding: 0 15px;
         }
-    }
-
-    .products-carousel {
-        margin: 40px 0px;
-    }
-
-    .advertisement-three-container {
-        margin: 60px 0px;
-    }
-
-    .category-with-custom-options {
-        margin: 60px 0px;
     }
 
     p,
@@ -2392,13 +2387,22 @@
 
 .pagination {
     width: 100%;
+    align-items: center;
+
+    .as,.active {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #DCDCDC;
+        text-align: center;
+        padding: 8px 0px;
+        margin-right: 6px;
+    }
 
     .page-item {
-        padding: 0 10px;
-
         &.active {
             font-weight: 600;
-            color: $theme-color !important;
+            background-color: $theme-color !important;
+            color: $white-color !important;
             border-bottom: 2px solid $theme-color;
         }
 
@@ -2431,12 +2435,14 @@
     a {
         color: unset !important;
         text-decoration: none !important;
+    }
 
-        i {
-            top: 2px;
-            font-size: 18px;
-            position: relative;
-        }
+    #previous {
+        margin-right: 14px !important;
+    }
+
+    #next {
+        margin-left: 14px;
     }
 
     .angle-left-icon,

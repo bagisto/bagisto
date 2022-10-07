@@ -13,7 +13,6 @@ body {
 .angle-right-icon {
     width: 22px;
     height: 20px;
-    float: right;
     margin-right: 10px;
     background-image: url("../images/Icon-Arrow-Right.svg");
 }
@@ -322,6 +321,12 @@ header #search-form > *:focus {
 
             .right {
                 padding-left: 50px !important;
+
+                h3 {
+                    a {
+                        font-weight: 600;
+                    }
+                }
             }
         }
     }
