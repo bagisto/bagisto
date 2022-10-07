@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Type;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -296,7 +297,7 @@ abstract class AbstractType
     public function copy()
     {
         if (! $this->canBeCopied()) {
-            throw new \Exception(trans('admin::app.response.product-can-not-be-copied', ['type' => $product->type]));
+            throw new \Exception(trans('admin::app.response.product-can-not-be-copied', ['type' => $this->product->type]));
         }
 
         $copiedProduct = $this->product
