@@ -34,6 +34,7 @@
     <div class="row col-12">
         <magnify-image
             src="{{ $images[0]['large_image_url'] }}"
+            zoom-src="{{ $images[0]['original_image_url'] }}"
             type="{{ $images[0]['type'] }}"
         ></magnify-image>
     </div>
@@ -165,8 +166,8 @@
                         this.currentType = currentType;
 
                         this.$root.$emit('changeMagnifiedImage', {
-                            smallImageUrl: this.currentOriginalImageUrl,
                             largeImageUrl: this.currentLargeImageUrl,
+                            originalImageUrl: this.currentOriginalImageUrl,
                             currentType  : this.currentType
                         });
 
@@ -174,7 +175,7 @@
                         if (productImage && productImage[0]) {
                             productImage = productImage[0];
 
-                            productImage.src = this.currentOriginalImageUrl;
+                            productImage.src = this.currentLargeImageUrl;
                         }
                     },
 

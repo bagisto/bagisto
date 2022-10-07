@@ -10,7 +10,7 @@
             <div class="magnifier">
                 <img
                     :src="activeImageVideoURL"
-                    :data-zoom-image="activeImageVideoURL"
+                    :data-zoom-image="activeOriginalImage"
                     :class="[
                         ! isMobile()
                             ? 'main-product-image'
@@ -52,12 +52,17 @@
 
 <script type="text/javascript">
 export default {
-    props: ['src', 'type'],
+    props: [
+        'src',
+        'zoomSrc',
+        'type'
+    ],
 
     data: function () {
         return {
             activeImage: null,
             activeImageVideoURL: this.src,
+            activeOriginalImage: this.zoomSrc,
             currentType: this.type,
         };
     },
@@ -73,23 +78,27 @@ export default {
 
         this.$root.$on(
             'changeMagnifiedImage',
-            ({ smallImageUrl, largeImageUrl, currentType }) => {
+            ({ largeImageUrl, originalImageUrl, currentType }) => {
                 /* removed old instance */
                 $('.zoomContainer').remove();
                 this.activeImage.removeData('elevateZoom');
 
                 /* getting url */
-                this.activeImageVideoURL = smallImageUrl;
+                this.activeImageVideoURL = largeImageUrl;
+
+                /* getting url */
+                this.activeOriginalImage = originalImageUrl;
 
                 /* type checking for media type */
                 this.currentType = currentType;
 
                 /* waiting added for image because image element takes time load when switching from video  */
                 this.waitForElement('.main-product-image', () => {
+                    console.log(originalImageUrl)
                     /* update source for images */
                     this.activeImage = $('.main-product-image');
-                    this.activeImage.attr('src', smallImageUrl);
-                    this.activeImage.data('zoom-image', largeImageUrl);
+                    this.activeImage.attr('src', largeImageUrl);
+                    this.activeImage.data('zoom-image', originalImageUrl);
 
                     /* reinitialize zoom */
                     this.elevateZoom();
