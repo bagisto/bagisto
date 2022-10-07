@@ -540,6 +540,24 @@ class ProductRepository extends Repository
     }
 
     /**
+     * Return category product maximum price.
+     *
+     * @param  integer  $categoryId
+     * @return float
+     */
+    public function getCategoryProductMaximumPrice($categoryId)
+    {
+        $customerGroup = $this->customerRepository->getCurrentGroup();
+
+        return $this->model
+            ->leftJoin('product_price_indices', 'products.id', 'product_price_indices.product_id')
+            ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
+            ->where('product_price_indices.customer_group_id', $customerGroup->id)
+            ->where('product_categories.category_id', $categoryId)
+            ->max('max_price');
+    }
+
+    /**
      * Fill original product.
      *
      * @param  \Webkul\Product\Models\Product  $sourceProduct
