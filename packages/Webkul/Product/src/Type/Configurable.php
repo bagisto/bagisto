@@ -410,6 +410,38 @@ class Configurable extends AbstractType
     }
 
     /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        parent::copyRelationships($product);
+
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        if (
+            in_array('super_attributes', $attributesToSkip)
+            || in_array('variants', $attributesToSkip)
+        ) {
+            return;
+        }
+
+        foreach ($this->product->super_attributes as $superAttribute) {
+            $product->super_attributes()->save($superAttribute);
+        }
+        
+        foreach ($this->product->variants as $variant) {
+            $newVariant = $variant->getTypeInstance()->copy();
+
+            $newVariant->parent_id = $product->id;
+
+            $newVariant->save();
+        }
+    }
+
+    /**
      * Fill required fields.
      *
      * @param  array  $data
