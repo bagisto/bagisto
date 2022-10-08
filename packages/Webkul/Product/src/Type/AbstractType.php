@@ -812,7 +812,7 @@ abstract class AbstractType
 
         $indices[$this->product->id] = $this->product
             ->inventory_indices
-            ->where('customer_group_id', core()->getCurrentChannel()->id)
+            ->where('channel_id', core()->getCurrentChannel()->id)
             ->first();
 
         return $indices[$this->product->id];

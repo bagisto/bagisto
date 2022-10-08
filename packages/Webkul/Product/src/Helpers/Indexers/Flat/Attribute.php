@@ -65,12 +65,12 @@ class Attribute
     /**
      * After the attribute is deleted
      *
-     * @param  int  $attributeId
+     * @param  int  $id
      * @return void
      */
-    public function removeColumn($attributeId)
+    public function removeColumn($id)
     {
-        $attribute = $this->attributeRepository->find($attributeId);
+        $attribute = $this->attributeRepository->find($id);
         
         if (! in_array(strtolower($attribute->code), $this->flatColumns)) {
             return;
