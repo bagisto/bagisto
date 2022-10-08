@@ -1,8 +1,8 @@
 <?php
 
-namespace Webkul\Product\Helpers\PriceIndexer;
+namespace Webkul\Product\Helpers\Indexers\Price;
 
-class Grouped extends AbstractPriceIndex
+class Grouped extends AbstractIndexer
 {
     /**
      * Returns product specific pricing for customer group

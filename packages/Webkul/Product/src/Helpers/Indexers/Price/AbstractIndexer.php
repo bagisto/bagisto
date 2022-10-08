@@ -1,12 +1,12 @@
 <?php
 
-namespace Webkul\Product\Helpers\PriceIndexer;
+namespace Webkul\Product\Helpers\Indexers\Price;
 
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\CatalogRule\Helpers\CatalogRuleProductPrice;
 
-abstract class AbstractPriceIndex
+abstract class AbstractIndexer
 {
     /**
      * Product instance.

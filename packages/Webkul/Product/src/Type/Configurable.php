@@ -8,7 +8,7 @@ use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\ProductFlat;
-use Webkul\Product\Helpers\PriceIndexer\Configurable as ConfigurableIndexer;
+use Webkul\Product\Helpers\Indexers\Price\Configurable as ConfigurableIndexer;
 
 class Configurable extends AbstractType
 {

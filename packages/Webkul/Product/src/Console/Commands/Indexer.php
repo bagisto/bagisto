@@ -5,23 +5,23 @@ namespace Webkul\Product\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Bus;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Jobs\PriceIndexer as PriceIndexerJob;
+use Webkul\Product\Jobs\Indexer as IndexerJob;
 
-class PriceIndexer extends Command
+class Indexer extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'products:price-index';
+    protected $signature = 'products:index';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Automatically updates product price indexes (eg. min_price and max_price for customer_group_id)';
+    protected $description = 'Automatically updates product price and inventory indices';
 
     /**
      * Create a new command instance.
@@ -46,7 +46,7 @@ class PriceIndexer extends Command
         while (true) {
             $paginator = $this->productRepository->cursorPaginate(10);
 
-            $batch->add(new PriceIndexerJob($paginator->items()));
+            $batch->add(new IndexerJob($paginator->items()));
 
             if (! $cursor = $paginator->nextCursor()) {
                 break;

@@ -8,9 +8,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Bus\Batchable;
 use Illuminate\Queue\SerializesModels;
-use Webkul\Product\Helpers\PriceIndexer as PriceIndexerHelper;
+use Webkul\Product\Helpers\Indexer as IndexerHelper;
  
-class PriceIndexer implements ShouldQueue
+class Indexer implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
  
@@ -39,8 +39,10 @@ class PriceIndexer implements ShouldQueue
      */
     public function handle()
     {
+        $indexer = app(IndexerHelper::class);
+
         foreach ($this->products as $product) {
-            app(PriceIndexerHelper::class)->refresh($product);
+            $indexer->refresh($product);
         }
     }
 }
