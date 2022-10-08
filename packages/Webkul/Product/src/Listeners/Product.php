@@ -32,7 +32,7 @@ class Product
      */
     public function afterCreate($product)
     {
-        $$this->indexer->refreshFlat($product);
+        $this->indexer->refreshFlat($product);
     }
 
     /**
