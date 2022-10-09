@@ -8,7 +8,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Laravel\Sanctum\HasApiTokens;
-use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Webkul\Checkout\Models\CartProxy;
 use Webkul\Core\Models\SubscribersListProxy;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
@@ -17,7 +16,7 @@ use Webkul\Customer\Notifications\CustomerResetPassword;
 use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Sales\Models\OrderProxy;
 
-class Customer extends Authenticatable implements CustomerContract, JWTSubject
+class Customer extends Authenticatable implements CustomerContract
 {
     use HasApiTokens, HasFactory, Notifiable;
 

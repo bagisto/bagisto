@@ -56,17 +56,19 @@ class ProductCustomerGroupPriceRepository extends Repository
      */
     public function checkInLoadedCustomerGroupPrice($product, $customerGroupId)
     {
+        $identifier = $product->id . '_' . $customerGroupId;
+
         static $customerGroupPrices = [];
 
-        if (array_key_exists($product->id, $customerGroupPrices)) {
-            return $customerGroupPrices[$product->id];
+        if (array_key_exists($identifier, $customerGroupPrices)) {
+            return $customerGroupPrices[$identifier];
         }
 
-        $customerGroupPrices[$product->id] = $product->customer_group_prices->filter(function ($customerGroupPrice) use ($customerGroupId) {
+        $customerGroupPrices[$identifier] = $product->customer_group_prices->filter(function ($customerGroupPrice) use ($customerGroupId) {
             return $customerGroupPrice->customer_group_id == $customerGroupId
                 || is_null($customerGroupPrice->customer_group_id);
         });
 
-        return $customerGroupPrices[$product->id];
+        return $customerGroupPrices[$identifier];
     }
 }
