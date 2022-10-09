@@ -19,8 +19,7 @@ $toggleColor: #3c41ff;
             }
         }
 
-        .nav-items,
-        .nav-top {
+        .nav-content {
             transform: translate(0, 0);
         }
 
@@ -88,33 +87,32 @@ $toggleColor: #3c41ff;
         }
     }
 
-    .nav-top {
+    .nav-content {
         position: fixed;
         top: 0;
         left: 0;
+        z-index: 1;
         min-width: 300px;
         max-width: 25vw;
         width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        transform: translate(calc(-100% - 50px), 0);
+        transition: transform 0.3s ease;
+    }
+
+    .nav-top {
         height: 60px;
         z-index: 1;
-        padding: 50px 0px 0px 0px;
-        transition: transform 0.3s ease;
-        transform: translate(calc(-100% - 50px), 0);
-        background: $white;
-        display: grid;
-        grid-template-columns: 1fr;
-        align-content: start;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
-        text-decoration: none;
+        background: linear-gradient(to bottom, #fff 0%, #f6f6f6 52%, #dededef2 100%);
 
         .pro-info {
-            width: 100%;
             padding: 15px;
-            position: absolute;
+            display: flex;
+            column-gap: 10px;
 
             .profile-info-icon {
-                position: absolute;
-                display: inline-block;
                 background: #3c41ff;
                 height: 30px;
                 width: 30px;
@@ -131,7 +129,6 @@ $toggleColor: #3c41ff;
 
             .profile-info-desc {
                 display: inline-block;
-                margin-left: 40px;
 
                 .name {
                     font-size: 18px;
@@ -147,24 +144,9 @@ $toggleColor: #3c41ff;
     }
 
     .nav-items {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        min-width: 300px;
-        max-width: 25vw;
-        width: 100vw;
-        height: 90vh;
-        z-index: 1;
-        padding-bottom: 10px;
-        transition: transform 0.3s ease;
-        transform: translate(calc(-100% - 50px), 0);
+        flex-grow: 1;
         background: $white;
-        display: grid;
-        grid-template-columns: 1fr;
-        align-content: start;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
         overflow-y: scroll;
-        text-decoration: none;
 
         &::-webkit-scrollbar {
             display: none;
@@ -175,15 +157,29 @@ $toggleColor: #3c41ff;
             font-size: 16px;
             text-transform: capitalize;
             text-decoration: none;
+            position: relative;
 
             a {
                 color: #000;
-                display: block;
+                display: flex;
+                align-items: center;
                 padding: 5px;
 
+                .icon-menu {
+                    margin-right: 10px;
+                    transform: scale(0.8);
+                }
+
+                .menu-label {
+                    flex: 1;
+                }
+
+                .arrow-icon-wrapper {
+                    padding: 0 12px;
+                }
+
                 .arrow-icon {
-                    position: absolute;
-                    right: 0;
+                    margin: 0 !important;
                 }
             }
 
@@ -197,6 +193,10 @@ $toggleColor: #3c41ff;
                     &.active,
                     &:hover {
                         background-color: #e6e6e6;
+                    }
+
+                    a {
+                        margin-left: 45px;
                     }
                 }
             }
@@ -219,6 +219,22 @@ $toggleColor: #3c41ff;
                 }
             }
         }
+
+        .dark-mode-switcher {
+            display: flex;
+            justify-content: space-between;
+            height: 20px;
+            width: 100%;
+            align-items: center;
+
+            .control-group {
+                margin-bottom: 0;
+
+                .switch {
+                    margin: 0;
+                }
+            }
+        }
     }
 }
 
@@ -230,48 +246,15 @@ $toggleColor: #3c41ff;
         }
 
         &.is-active {
-            .nav-toggle {
-                &:before,
-                &:after {
-                    box-shadow: none;
-                }
-            }
-
-            .nav-items,
-            .nav-top {
+            .nav-content {
                 transform: translate(0, 0);
             }
-
-            .overlay {
-                display: block;
-            }
         }
 
-        .nav-top {
+        .nav-content {
             right: 0;
             left: 100%;
             transform: translate(calc(100% + 50px), 0);
-
-            .pro-info {
-                .profile-info-desc {
-                    margin-left: 0px;
-                    margin-right: 40px;
-                }
-            }
-        }
-
-        .nav-items {
-            right: 0;
-            left: 100%;
-            transform: translate(calc(100% + 50px), 0);
-
-            a {
-                .arrow-icon {
-                    position: absolute;
-                    right: auto;
-                    left: 20px;
-                }
-            }
         }
     }
 }
