@@ -59,7 +59,7 @@ You can browse through the Free **[Live Demo](https://demo.bagisto.com/)**
 
 # Headless Commerce
 
-The power of headless commerce now comes to Bagisto enabling you to experience seamless and easily scalable storefront performance. Backed by some of the hottest tech stacks Vue and React, Bagisto commerce can now be used to build powerful headless commerce solutions offering blazing fast speed and easy customisation powered by Vue Storefront and Next.js
+The power of headless commerce now comes to Bagisto enabling you to experience seamless and easily scalable storefront performance. Backed by some of the hottest tech stacks Vue and React, Bagisto commerce can now be used to build powerful headless commerce solutions offering blazing-fast speed and easy customization powered by Vue Storefront and Next.js
 
 ## Vue Storefront
 
