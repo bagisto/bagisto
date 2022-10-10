@@ -79,7 +79,7 @@ export default {
                 this.activeImage.removeData('elevateZoom');
 
                 /* getting url */
-                this.activeImageVideoURL = smallImageUrl;
+                this.activeImageVideoURL = largeImageUrl;
 
                 /* type checking for media type */
                 this.currentType = currentType;
@@ -88,7 +88,7 @@ export default {
                 this.waitForElement('.main-product-image', () => {
                     /* update source for images */
                     this.activeImage = $('.main-product-image');
-                    this.activeImage.attr('src', smallImageUrl);
+                    this.activeImage.attr('src', largeImageUrl);
                     this.activeImage.data('zoom-image', largeImageUrl);
 
                     /* reinitialize zoom */
