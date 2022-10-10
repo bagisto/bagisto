@@ -22,14 +22,22 @@ class Indexer implements ShouldQueue
     protected $products;
 
     /**
+     * @var array
+     */
+    protected $indexers;
+
+    /**
      * Create a new job instance.
      *
      * @param  array  $products
+     * @param  array  $indexers
      * @return void
      */
-    public function __construct($products)
+    public function __construct($products, $indexers)
     {
         $this->products = $products;
+
+        $this->indexers = $indexers;
     }
  
     /**
@@ -42,7 +50,7 @@ class Indexer implements ShouldQueue
         $indexer = app(IndexerHelper::class);
 
         foreach ($this->products as $product) {
-            $indexer->refresh($product);
+            $indexer->refresh($product, $this->indexers);
         }
     }
 }

@@ -47,7 +47,7 @@ class Product
 
         $this->refreshPriceIndices($product);
 
-        $this->refreshInventoryIndices($product);
+        $this->indexer->refreshInventory($product);
     }
 
     /**
@@ -73,18 +73,8 @@ class Product
         }
 
         foreach ($products as $product) {
-            $this->indexer->refresh($product);
+            $this->indexer->refreshPrice($product);
         }
-    }
-
-    /**
-     * Update or create product inventory indices
-     *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return void
-     */
-    public function refreshInventoryIndices($product)
-    {
     }
 
     /**

@@ -14,7 +14,7 @@ class Indexer extends Command
      *
      * @var string
      */
-    protected $signature = 'products:index';
+    protected $signature = 'products:index {--type=*}';
 
     /**
      * The console command description.
@@ -41,12 +41,18 @@ class Indexer extends Command
      */
     public function handle()
     {
+        $indexers = ['price', 'inventory'];
+
+        if (! empty($this->option('type'))) {
+            $indexers = $this->option('type');
+        }
+
         $batch = Bus::batch([])->dispatch();
 
         while (true) {
             $paginator = $this->productRepository->cursorPaginate(10);
 
-            $batch->add(new IndexerJob($paginator->items()));
+            $batch->add(new IndexerJob($paginator->items(), $indexers));
 
             if (! $cursor = $paginator->nextCursor()) {
                 break;

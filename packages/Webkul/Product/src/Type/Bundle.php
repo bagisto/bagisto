@@ -10,7 +10,6 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
@@ -85,7 +84,6 @@ class Bundle extends AbstractType
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
      * @param \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionRepository  $productBundleOptionRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
@@ -101,7 +99,6 @@ class Bundle extends AbstractType
         ProductImageRepository $productImageRepository,
         ProductVideoRepository $productVideoRepository,
         ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
-        InventorySourceRepository $inventorySourceRepository,
         TaxCategoryRepository $taxCategoryRepository,
         protected ProductBundleOptionRepository $productBundleOptionRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
@@ -117,7 +114,6 @@ class Bundle extends AbstractType
             $productImageRepository,
             $productVideoRepository,
             $productCustomerGroupPriceRepository,
-            $inventorySourceRepository,
             $taxCategoryRepository
         );
     }

@@ -13,7 +13,6 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Models\ProductFlat;
@@ -126,7 +125,6 @@ abstract class AbstractType
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
      * @return void
      */
@@ -139,7 +137,6 @@ abstract class AbstractType
         protected ProductImageRepository $productImageRepository,
         protected ProductVideoRepository $productVideoRepository,
         protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
-        protected InventorySourceRepository $inventorySourceRepository,
         protected TaxCategoryRepository $taxCategoryRepository
     )
     {
@@ -614,26 +611,11 @@ abstract class AbstractType
      */
     public function totalQuantity()
     {
-        $total = 0;
-
-        $channelInventorySourceIds = $this->inventorySourceRepository->getChannelInventorySourceIds();
-
-        $productInventories = $this->productInventoryRepository->checkInLoadedProductInventories($this->product);
-
-        foreach ($productInventories as $inventory) {
-            if (is_numeric($channelInventorySourceIds->search($inventory->inventory_source_id))) {
-                $total += $inventory->qty;
-            }
+        if (! $inventoryIndex = $this->getInventoryIndex()) {
+            return 0;
         }
 
-        $orderedInventory = $this->product->ordered_inventories
-            ->where('channel_id', core()->getCurrentChannel()->id)->first();
-
-        if ($orderedInventory) {
-            $total -= $orderedInventory->qty;
-        }
-
-        return $total;
+        return $inventoryIndex->qty;
     }
 
     /**
@@ -830,7 +812,7 @@ abstract class AbstractType
             return false;
         }
 
-        return $priceIndex->min_price != $this->product->regular_min_price;
+        return $priceIndex->min_price != $priceIndex->regular_min_price;
     }
 
     /**

@@ -24,6 +24,8 @@ return new class extends Migration
             
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
