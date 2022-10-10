@@ -613,6 +613,6 @@ class Product extends Model implements ProductContract
      */
     protected static function newFactory(): Factory
     {
-        return ProductFactory::new ();
+        return ProductFactory::new();
     }
 }
