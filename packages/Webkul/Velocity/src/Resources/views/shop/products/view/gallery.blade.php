@@ -165,8 +165,8 @@
                         this.currentType = currentType;
 
                         this.$root.$emit('changeMagnifiedImage', {
-                            smallImageUrl: this.currentOriginalImageUrl,
                             largeImageUrl: this.currentLargeImageUrl,
+                            originalImageUrl: this.currentOriginalImageUrl,
                             currentType  : this.currentType
                         });
 
@@ -174,7 +174,7 @@
                         if (productImage && productImage[0]) {
                             productImage = productImage[0];
 
-                            productImage.src = this.currentOriginalImageUrl;
+                            productImage.src = this.currentLargeImageUrl;
                         }
                     },
 

@@ -71,8 +71,6 @@
 
 /*! @preserve sweet-scroll v4.0.0 - tsuyoshiwada | MIT License */
 
-/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
-
 /**
   * vee-validate v2.2.15
   * (c) 2019 Abdelrahman Awad

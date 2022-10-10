@@ -32,6 +32,7 @@
     "/images/icon-camera.svg": "/images/icon-camera.svg?id=b2fd2f9e17e1ccee96e29f6c6cec91e8",
     "/images/icon-crossed.svg": "/images/icon-crossed.svg?id=c72c3c1ef790bd4fd99376bd4ba7bd5b",
     "/images/icon-eye.svg": "/images/icon-eye.svg?id=9345f20b862e21aa30c675df49d56fd5",
+<<<<<<< HEAD
     "/images/icon-search.svg": "/images/icon-search.svg?id=a5f38a895551b8a015b24952561263f1",
     "/images/kids-2.png": "/images/kids-2.png?id=5b8fbafaf93ee7a3b4b2fd55147e5f5a",
     "/images/kids-2.webp": "/images/kids-2.webp?id=8ea1782d2c75398d5c77c8f9f3ea5519",
@@ -61,4 +62,7 @@
     "/images/trimmer.webp": "/images/trimmer.webp?id=d9176893314733eeeb027a5f4a1182b9",
     "/images/watch.png": "/images/watch.png?id=a43c1524c5b6bb0ae907106e6aa84fde",
     "/images/watch.webp": "/images/watch.webp?id=57742bbf72172d644c65dfbef00e8102"
+=======
+    "/images/icon-search.svg": "/images/icon-search.svg?id=a5f38a895551b8a015b24952561263f1"
+>>>>>>> upstream/master
 }
