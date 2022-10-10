@@ -115,6 +115,27 @@ class Grouped extends AbstractType
     }
 
     /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        parent::copyRelationships($product);
+
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        if (in_array('grouped_products', $attributesToSkip)) {
+            return;
+        }
+
+        foreach ($this->product->grouped_products as $groupedProduct) {
+            $product->grouped_products()->save($groupedProduct->replicate());
+        }
+    }
+
+    /**
      * Returns children ids.
      *
      * @return array

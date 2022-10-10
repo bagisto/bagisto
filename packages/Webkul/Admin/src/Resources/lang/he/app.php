@@ -2,8 +2,8 @@
 
 return [
     'save'          => 'Save',
-    'copy-of'       => 'Copy of ',
-    'copy-of-slug'  => 'copy-of-',
+    'copy-of'       => 'Copy of :value',
+    'copy-of-slug'  => 'copy-of-:value',
     'create'        => 'Create',
     'update'        => 'Update',
     'delete'        => 'Delete',

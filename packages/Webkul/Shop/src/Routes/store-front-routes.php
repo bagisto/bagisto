@@ -80,7 +80,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'view' => 'shop.products.index',
     ])->name('shop.product.file.download');
 
-    Route::get('categories/filterable-attributes/{categoryId?}', [CategoryController::class, 'getFilterAttributes'])->name('shop.catalog.categories.filterable_attributes');
+    Route::get('categories/filterable-attributes/{categoryId?}', [CategoryController::class, 'getFilterableAttributes'])->name('shop.catalog.categories.filterable_attributes');
 
     Route::get('categories/maximum-price/{categoryId?}', [CategoryController::class, 'getCategoryProductMaximumPrice'])->name('shop.catalog.categories.maximum_price');
 });

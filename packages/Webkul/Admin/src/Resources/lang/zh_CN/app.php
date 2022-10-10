@@ -2,8 +2,8 @@
 
 return [
     'save'          => '保存',
-    'copy-of'       => '复制 ',
-    'copy-of-slug'  => '复制',
+    'copy-of'       => '复制 :value',
+    'copy-of-slug'  => '复制:value',
     'create'        => '创建',
     'update'        => '更新',
     'delete'        => '删除',
