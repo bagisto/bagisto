@@ -31,7 +31,7 @@
 {!! view_render_event('bagisto.shop.products.view.gallery.before', ['product' => $product]) !!}
 
 <div class="product-image-group">
-    <div class='product-image'>
+    <div>
         <magnify-image
             src="{{ $images[0]['large_image_url'] }}"
             type="{{ $images[0]['type'] }}"

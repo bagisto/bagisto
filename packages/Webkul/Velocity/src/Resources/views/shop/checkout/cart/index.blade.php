@@ -193,7 +193,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.cart.controls.after', ['cart' => $cart]) !!}
                                 <div class="misc">
                                     <a
-                                        class="theme-btn light fs16 text-center"
+                                        class="fs16 text-center continue-shopping"
                                         href="{{ route('shop.home.index') }}">
                                         {{ __('shop::app.checkout.cart.continue-shopping') }}
                                     </a>
@@ -233,7 +233,7 @@
                 {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
 
                     @if ($cart)
-                        <div class="col-lg-4 col-md-12 offset-lg-1 row order-summary-container">
+                        <div class="col-lg-3 col-md-12 offset-lg-1 row order-summary-container">
                             @include('shop::checkout.total.summary', ['cart' => $cart])
 
                             <coupon-component></coupon-component>

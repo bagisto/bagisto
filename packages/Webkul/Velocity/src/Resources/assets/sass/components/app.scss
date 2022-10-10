@@ -827,6 +827,11 @@
         .misc {
             display: flex;
             justify-content: space-between;
+
+            .continue-shopping {
+                color: #4D7EA8;
+                font-weight: 600;
+            }
         }
     }
 
