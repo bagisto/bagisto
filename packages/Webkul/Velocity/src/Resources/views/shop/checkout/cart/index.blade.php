@@ -124,27 +124,25 @@
 
                                                 @php
                                                     $moveToWishlist = trans('shop::app.checkout.cart.move-to-wishlist');
-
-                                                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                                                 @endphp
 
                                                 <div class="no-padding col-12 cursor-pointer fs16 item-actions">
                                                     @auth('customer')
-                                                        @if ($showWishlist)
+                                                        @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
                                                             @if (
                                                                 $item->parent_id != 'null'
                                                                 || $item->parent_id != null
                                                             )
                                                                 <div class="d-inline-block">
                                                                     @include('shop::products.wishlist', [
-                                                                        'route' => route('shop.movetowishlist', $item->id),
+                                                                        'route' => route('shop.move_to_wishlist', $item->id),
                                                                         'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
                                                                     ])
                                                                 </div>
                                                             @else
                                                                 <div class="d-inline-block">
                                                                     @include('shop::products.wishlist', [
-                                                                        'route' => route('shop.movetowishlist', $item->child->id),
+                                                                        'route' => route('shop.move_to_wishlist', $item->child->id),
                                                                         'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
                                                                     ])
                                                                 </div>

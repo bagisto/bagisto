@@ -22,6 +22,6 @@ class Product
      */
     public function createProductRuleIndex($product)
     {
-        $this->catalogRuleIndexHelper->reindexProduct($product);
+        $this->catalogRuleIndexHelper->reIndexProduct($product);
     }
 }

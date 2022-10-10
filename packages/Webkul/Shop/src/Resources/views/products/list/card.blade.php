@@ -2,10 +2,10 @@
 
 <div class="product-card">
 
-    <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
+    <?php $productBaseImage = product_image()->getProductBaseImage($product); ?>
 
     @if (
-        ! $product->getTypeInstance()->haveSpecialPrice()
+        ! $product->getTypeInstance()->haveDiscount()
         && $product->new
     )
         <div class="sticker new">
@@ -15,7 +15,7 @@
 
     <div class="product-image">
         <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
-            <img src="{{ $productBaseImage['medium_image_url'] }}" onerror="this.src='{{ asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png') }}'" alt="" height="500"/>
+            <img src="{{ $productBaseImage['medium_image_url'] }}" onerror="this.src='{{ asset('vendor/webkul/ui/assets/images/product/medium-product-placeholder.png') }}'" alt="" height="500"/>
         </a>
     </div>
 

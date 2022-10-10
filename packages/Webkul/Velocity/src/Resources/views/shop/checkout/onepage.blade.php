@@ -334,7 +334,7 @@
                             if (! isValid)
                                 return;
 
-                            this.$http.post("{{ route('customer.checkout.exist') }}", {email: this.address.billing.email})
+                            this.$http.post("{{ route('shop.customer.checkout.exist') }}", {email: this.address.billing.email})
                             .then(response => {
                                 this.is_customer_exist = response.data ? 1 : 0;
                                 console.log(this.is_customer_exist);
@@ -348,7 +348,7 @@
                     },
 
                     loginCustomer: function () {
-                        this.$http.post("{{ route('customer.checkout.login') }}", {
+                        this.$http.post("{{ route('shop.customer.checkout.login') }}", {
                                 email: this.address.billing.email,
                                 password: this.address.billing.password
                             })
@@ -418,7 +418,7 @@
                             });
                         }
 
-                        this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
+                        this.$http.post("{{ route('shop.checkout.save_address') }}", this.address)
                             .then(response => {
                                 this.disable_button = false;
                                 this.isPlaceOrderEnabled = true;
@@ -457,7 +457,7 @@
                     saveShipping: async function () {
                         this.disable_button = true;
 
-                        this.$http.post("{{ route('shop.checkout.save-shipping') }}", {'shipping_method': this.selected_shipping_method})
+                        this.$http.post("{{ route('shop.checkout.save_shipping') }}", {'shipping_method': this.selected_shipping_method})
                             .then(response => {
                                 this.$root.hideLoader();
                                 this.disable_button = false;
@@ -490,7 +490,7 @@
                         if (this.isCheckPayment) {
                             this.isCheckPayment = false;
 
-                            this.$http.post("{{ route('shop.checkout.save-payment') }}", {'payment': this.selected_payment_method})
+                            this.$http.post("{{ route('shop.checkout.save_payment') }}", {'payment': this.selected_payment_method})
                             .then(response => {
                                 this.isCheckPayment = true;
                                 this.disable_button = false;
@@ -521,7 +521,7 @@
 
                             this.$root.showLoader();
 
-                            this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
+                            this.$http.post("{{ route('shop.checkout.save_order') }}", {'_token': "{{ csrf_token() }}"})
                             .then(response => {
                                 if (response.data.success) {
                                     if (response.data.redirect_url) {

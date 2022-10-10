@@ -85,21 +85,21 @@ class GuestCheckoutCest
                 'globalConfig'  => 0,
                 'guest_product' => false,
                 'product'       => $this->productNoGuestCheckout,
-                'expectedRoute' => 'customer.session.index'
+                'expectedRoute' => 'shop.customer.session.index'
             ],
             [
                 'name'          => 'false / true',
                 'globalConfig'  => 0,
                 'guest_product' => true,
                 'product'       => $this->productGuestCheckout,
-                'expectedRoute' => 'customer.session.index'
+                'expectedRoute' => 'shop.customer.session.index'
             ],
             [
                 'name'          => 'true / false',
                 'globalConfig'  => 1,
                 'guest_product' => false,
                 'product'       => $this->productNoGuestCheckout,
-                'expectedRoute' => 'customer.session.index'
+                'expectedRoute' => 'shop.customer.session.index'
             ],
             [
                 'name'          => 'true / true',

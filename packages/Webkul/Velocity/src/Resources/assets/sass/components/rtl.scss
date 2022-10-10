@@ -6,9 +6,9 @@ body {
             font-size: 14px !important;
         }
 
-        .order-summary-container {
+        .offset-lg-1 {
             margin-left: 0px;
-            margin-right: 100px;
+            margin-right: 8.333333%;
         }
 
         .velocity-divide-page {
@@ -595,6 +595,25 @@ body {
             &:after {
                 right: unset;
                 left: 8px;
+            }
+        }
+
+        .pl20 {
+            padding-left: 0 !important;
+            padding-right: 20px !important;
+        }
+    
+        .radio {
+            .radio-view {
+                margin-right: 0;
+                margin-left: 10px;
+            }
+        }
+    
+        .checkbox {
+            .checkbox-view {
+                margin-right: 0;
+                margin-left: 10px;
             }
         }
     }

@@ -3,8 +3,8 @@
 namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Admin\Http\Requests\ConfigurationForm;
 use Webkul\Core\Repositories\CoreConfigRepository;
+use Webkul\Admin\Http\Requests\ConfigurationForm;
 use Webkul\Core\Tree;
 
 class ConfigurationController extends Controller
@@ -12,7 +12,7 @@ class ConfigurationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @var \Illuminate\Http\Response
+     * @var array
      */
     protected $_config;
 

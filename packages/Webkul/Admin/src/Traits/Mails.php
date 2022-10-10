@@ -234,7 +234,7 @@ trait Mails
 
         $objectFirstItem = $object->items->first();
 
-        return isset($objectFirstItem->additional['locale']) ? $objectFirstItem->additional['locale'] : 'en';
+        return $objectFirstItem->additional['locale'] ?? 'en';
     }
 
     /**

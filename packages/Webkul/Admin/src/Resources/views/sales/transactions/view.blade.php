@@ -117,7 +117,7 @@
                                 </div>
 
                                 <div class="section-content">
-                                    @foreach ($transactionDeatilsData as $key => $data)
+                                    @foreach ($transactionDetailsData as $key => $data)
                                         <div class="row">
                                             <span class="title">
                                                 {{ $key }}

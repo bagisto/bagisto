@@ -4,7 +4,7 @@ namespace Webkul\Product\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Product\Console\Commands\PriceUpdate;
+use Webkul\Product\Console\Commands\PriceIndexer;
 use Webkul\Product\Facades\ProductImage as ProductImageFacade;
 use Webkul\Product\Facades\ProductVideo as ProductVideoFacade;
 use Webkul\Product\Models\ProductProxy;
@@ -66,7 +66,7 @@ class ProductServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([PriceUpdate::class]);
+            $this->commands([PriceIndexer::class]);
         }
     }
 
@@ -82,18 +82,18 @@ class ProductServiceProvider extends ServiceProvider
          */
         $loader = AliasLoader::getInstance();
 
-        $loader->alias('productimage', ProductImageFacade::class);
+        $loader->alias('product_image', ProductImageFacade::class);
 
-        $this->app->singleton('productimage', function () {
+        $this->app->singleton('product_image', function () {
             return app()->make(ProductImage::class);
         });
 
         /**
          * Product video.
          */
-        $loader->alias('productvideo', ProductVideoFacade::class);
+        $loader->alias('product_video', ProductVideoFacade::class);
 
-        $this->app->singleton('productvideo', function () {
+        $this->app->singleton('product_video', function () {
             return app()->make(ProductVideo::class);
         });
     }

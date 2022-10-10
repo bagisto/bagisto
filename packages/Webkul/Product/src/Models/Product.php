@@ -144,6 +144,16 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Get the price indices that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function price_indices(): HasMany
+    {
+        return $this->hasMany(ProductPriceIndexProxy::modelClass());
+    }
+
+    /**
      * The categories that belong to the product.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -498,6 +508,10 @@ class Product extends Model implements ProductContract
             return self::$loadedAttributeValues[$this->id][$attribute->id];
         }
 
+        if (empty($this->attribute_values->count())) {
+            $this->load('attribute_values');
+        }
+
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
                 $attributeValue = $this->attribute_values
@@ -524,7 +538,7 @@ class Product extends Model implements ProductContract
             }
         }
 
-        return self::$loadedAttributeValues[$this->id][$attribute->id] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
+        return self::$loadedAttributeValues[$this->id][$attribute->id] = $attributeValue[$attribute->column_name] ?? null;
     }
 
     /**
@@ -587,7 +601,7 @@ class Product extends Model implements ProductContract
      *
      * @return void
      */
-    public function refreshloadedAttributeValues(): void
+    public function refreshLoadedAttributeValues(): void
     {
         self::$loadedAttributeValues = [];
     }
@@ -599,6 +613,6 @@ class Product extends Model implements ProductContract
      */
     protected static function newFactory(): Factory
     {
-        return ProductFactory::new ();
+        return ProductFactory::new();
     }
 }

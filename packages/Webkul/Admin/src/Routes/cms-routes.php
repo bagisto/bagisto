@@ -28,12 +28,12 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
             'redirect' => 'admin.cms.index',
         ])->name('admin.cms.update');
 
-        Route::post('/delete/{id}', [PageController::class, 'delete'])->defaults('_config', [
+        Route::post('delete/{id}', [PageController::class, 'delete'])->defaults('_config', [
             'redirect' => 'admin.cms.index',
         ])->name('admin.cms.delete');
 
-        Route::post('/massdelete', [PageController::class, 'massDelete'])->defaults('_config', [
+        Route::post('mass-delete', [PageController::class, 'massDelete'])->defaults('_config', [
             'redirect' => 'admin.cms.index',
-        ])->name('admin.cms.mass-delete');
+        ])->name('admin.cms.mass_delete');
     });
 });

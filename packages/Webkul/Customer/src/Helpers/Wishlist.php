@@ -8,7 +8,7 @@ class Wishlist
      * Returns wishlist products for current customer.
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @return boolean
+     * @return Webkul\Customer\Contracts\Wishlist|null
      */
     public function getWishlistProduct($product)
     {

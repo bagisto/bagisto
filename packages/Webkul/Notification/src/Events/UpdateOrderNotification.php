@@ -42,7 +42,7 @@ class UpdateOrderNotification implements ShouldBroadcast
     }
 
     /**
-     * Seperate queue.
+     * Separate queue.
      *
      * Command: `php artisan queue:work --queue=broadcastable`
      *

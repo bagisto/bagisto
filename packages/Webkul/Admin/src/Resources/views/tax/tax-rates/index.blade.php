@@ -47,7 +47,7 @@
                     </span>
                 </div>
                 @if (bouncer()->hasPermission('settings.taxes.tax-rates.create'))
-                    <a href="{{ route('admin.tax-rates.create') }}" class="btn btn-lg btn-primary">
+                    <a href="{{ route('admin.tax_rates.create') }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.tax-rates.add-title') }}
                     </a>
                 @endif
@@ -55,7 +55,7 @@
         </div>
 
         <div class="page-content">
-            <datagrid-plus src="{{ route('admin.tax-rates.index') }}"></datagrid-plus>
+            <datagrid-plus src="{{ route('admin.tax_rates.index') }}"></datagrid-plus>
         </div>
     </div>
 
@@ -71,7 +71,7 @@
         <h3 slot="header">{{ __('admin::app.export.upload') }}</h3>
 
         <div slot="body">
-            <form method="POST" action="{{ route('admin.tax-rates.import') }}" enctype="multipart/form-data" @submit.prevent="onSubmit">
+            <form method="POST" action="{{ route('admin.tax_rates.import') }}" enctype="multipart/form-data" @submit.prevent="onSubmit">
                 @csrf()
 
                 <div class="control-group" :class="[errors.has('file') ? 'has-error' : '']">
