@@ -64,16 +64,18 @@ class CartRuleController extends Controller
      */
     public function copy(int $cartRuleId): View
     {
-        $originalCartRule = $this->cartRuleRepository
-            ->findOrFail($cartRuleId)
-            ->load('channels')
-            ->load('customer_groups');
+        $cartRule = $this->cartRuleRepository
+            ->with([
+                'channels',
+                'customer_groups',
+            ])
+            ->findOrFail($cartRuleId);
 
-        $copiedCartRule = $originalCartRule
+        $copiedCartRule = $cartRule
             ->replicate()
             ->fill([
                 'status' => 0,
-                'name'   => __('admin::app.copy-of') . $originalCartRule->name,
+                'name'   => trans('admin::app.copy-of', ['value' => $cartRule->name]),
             ]);
 
         $copiedCartRule->save();

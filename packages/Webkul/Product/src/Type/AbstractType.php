@@ -2,20 +2,23 @@
 
 namespace Webkul\Product\Type;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Facades\ProductImage;
-use Webkul\CatalogRule\Helpers\CatalogRuleProductPrice;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Tax\Helpers\Tax;
@@ -116,8 +119,10 @@ abstract class AbstractType
     /**
      * Create a new product type instance.
      *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
+     * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository   $productPriceIndexRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
@@ -125,24 +130,16 @@ abstract class AbstractType
      * @return void
      */
     public function __construct(
+        protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
         protected ProductRepository $productRepository,
+        protected ProductPriceIndexRepository $productPriceIndexRepository,
         protected ProductAttributeValueRepository $attributeValueRepository,
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductImageRepository $productImageRepository,
         protected ProductVideoRepository $productVideoRepository
     )
     {
-    }
-
-    /**
-     * Is the administrator able to copy products of this type in the admin backend?
-     *
-     * @return bool
-     */
-    public function canBeCopied(): bool
-    {
-        return $this->canBeCopied;
     }
 
     /**
@@ -292,6 +289,154 @@ abstract class AbstractType
     }
 
     /**
+     * Copy product.
+     *
+     * @return \Webkul\Product\Contracts\Product
+     * @throws \Exception
+     */
+    public function copy()
+    {
+        if (! $this->canBeCopied()) {
+            throw new \Exception(trans('admin::app.response.product-can-not-be-copied', ['type' => $this->product->type]));
+        }
+
+        $copiedProduct = $this->product
+            ->replicate()
+            ->fill(['sku' => 'temporary-sku-' . substr(md5(microtime()), 0, 6)]);
+
+
+        $copiedProduct->save();
+
+        $this->copyAttributeValues($copiedProduct);
+
+        $this->copyRelationships($copiedProduct);
+
+        return $copiedProduct;
+    }
+
+    /**
+     * Copy attribute values.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyAttributeValues($product): void
+    {
+        $productFlat = $this->product->product_flats[0]?->replicate() ?? new ProductFlat();
+
+        $productFlat->product_id = $product->id;
+
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        foreach ($this->product->attribute_values as $attributeValue) {
+            $attribute = $attributeValue->attribute;
+
+            if (in_array($attribute->code, $attributesToSkip)) {
+                continue;
+            }
+
+            $value = null;
+
+            if ($attribute->code == 'name') {
+                $value = trans('admin::app.copy-of', ['value' => $this->product->name]);
+            } elseif ($attribute->code == 'url_key') {
+                $value = trans('admin::app.copy-of-slug', ['value' => $this->product->url_key]);
+            } elseif ($attribute->code == 'sku') {
+                $value = $product->sku;
+            } elseif ($attribute->code === 'product_number') {
+                if (! empty($this->product->product_number)) {
+                    $value = trans('admin::app.copy-of-slug', ['value' => $this->product->product_number]);
+                }
+            } elseif ($attribute->code == 'status') {
+                $value = 0;
+            }
+
+            $newAttributeValue = $attributeValue->replicate();
+
+            if (! is_null($value)) {
+                $newAttributeValue->{$attribute->column_name} = $value;
+
+                $productFlat->{$attribute->code} = $value;
+            }
+
+            $product->attribute_values()->save($newAttributeValue);
+        }
+
+        $productFlat->save();
+    }
+
+    /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        if (! in_array('categories', $attributesToSkip)) {
+            $product->categories()->sync($this->product->categories->pluck('id'));
+        }
+
+        if (! in_array('inventories', $attributesToSkip)) {
+            foreach ($this->product->inventories as $inventory) {
+                $product->inventories()->save($inventory->replicate());
+            }
+        }
+
+        if (! in_array('customer_group_prices', $attributesToSkip)) {
+            foreach ($this->product->customer_group_prices as $customer_group_price) {
+                $product->customer_group_prices()->save($customer_group_price->replicate());
+            }
+        }
+
+        if (! in_array('images', $attributesToSkip)) {
+            foreach ($this->product->images as $image) {
+                $copiedImage = $product->images()->save($image->replicate());
+
+                $this->copyMedia($product, $image, $copiedImage);
+            }
+        }
+
+        if (! in_array('videos', $attributesToSkip)) {
+            foreach ($this->product->videos as $video) {
+                $copiedVideo = $product->videos()->save($video->replicate());
+
+                $this->copyMedia($product, $video, $copiedVideo);
+            }
+        }
+
+        if (config('products.linkProductsOnCopy')) {
+            DB::table('product_relations')->insert([
+                'parent_id' => $this->product->id,
+                'child_id'  => $product->id,
+            ]);
+        }
+    }
+
+    /**
+     * Copy product image video.
+     *
+     * @param  $product
+     * @param  $media
+     * @param  $copiedMedia
+     * @return void
+     */
+    private function copyMedia($product, $media, $copiedMedia): void
+    {
+        $path = explode('/', $media->path);
+
+        $copiedMedia->path = 'product/' . $product->id . '/' . end($path);
+
+        $copiedMedia->save();
+
+        Storage::makeDirectory('product/' . $product->id);
+
+        Storage::copy($media->path, $copiedMedia->path);
+    }
+
+    /**
      * Specify type instance product.
      *
      * @param  \Webkul\Product\Contracts\Product  $product
@@ -405,6 +550,16 @@ abstract class AbstractType
     public function isChildrenCalculated()
     {
         return $this->isChildrenCalculated;
+    }
+
+    /**
+     * Is the administrator able to copy products of this type in the admin backend?
+     *
+     * @return bool
+     */
+    public function canBeCopied(): bool
+    {
+        return $this->canBeCopied;
     }
 
     /**
@@ -541,13 +696,27 @@ abstract class AbstractType
      * @param  int  $qty
      * @return float
      */
-    public function getMinimalPrice($qty = null)
+    public function getMinimalPrice()
     {
-        if ($this->haveSpecialPrice($qty)) {
-            return $this->product->special_price;
+        if (! $priceIndex = $this->getPriceIndex()) {
+            return $this->product->price;
         }
 
-        return $this->product->price;
+        return $priceIndex->min_price;
+    }
+
+    /**
+     * Get product regular minimal price.
+     *
+     * @return float
+     */
+    public function getRegularMinimalPrice()
+    {
+        if (! $priceIndex = $this->getPriceIndex()) {
+            return $this->product->price;
+        }
+
+        return $priceIndex->regular_min_price;
     }
 
     /**
@@ -557,7 +726,25 @@ abstract class AbstractType
      */
     public function getMaximumPrice()
     {
-        return $this->getMinimalPrice();
+        if (! $priceIndex = $this->getPriceIndex()) {
+            return $this->product->price;
+        }
+
+        return $priceIndex->max_price;
+    }
+
+    /**
+     * Get product regular minimal price.
+     *
+     * @return float
+     */
+    public function getRegularMaximumPrice()
+    {
+        if (! $priceIndex = $this->getPriceIndex()) {
+            return $this->product->price;
+        }
+
+        return $priceIndex->regular_max_price;
     }
 
     /**
@@ -568,20 +755,43 @@ abstract class AbstractType
      */
     public function getFinalPrice($qty = null)
     {
-        return round($this->getMinimalPrice($qty), 4);
+        if (
+            is_null($qty)
+            || $qty == 1
+        ) {
+            return $this->getMinimalPrice();
+        }
+
+        $customerGroup = $this->customerRepository->getCurrentGroup();
+
+        $indexer = $this->getPriceIndexer()
+            ->setCustomerGroup($customerGroup)
+            ->setProduct($this->product);
+
+        return $indexer->getMinimalPrice($qty);
     }
 
     /**
-     * Returns the product's minimal price.
+     * Have special price.
      *
-     * @param  int  $qty
-     * @return float
+     * @return \Webkul\Product\Contracts\ProductPriceIndex
      */
-    public function getSpecialPrice($qty = null)
+    public function getPriceIndex()
     {
-        return $this->haveSpecialPrice($qty)
-            ? $this->product->special_price
-            : $this->product->price;
+        static $indices = [];
+
+        if (array_key_exists($this->product->id, $indices)) {
+            return $indices[$this->product->id];
+        }
+
+        $customerGroup = $this->customerRepository->getCurrentGroup();
+
+        $indices[$this->product->id] = $this->product
+            ->price_indices
+            ->where('customer_group_id', $customerGroup->id)
+            ->first();
+
+        return $indices[$this->product->id];
     }
 
     /**
@@ -590,136 +800,13 @@ abstract class AbstractType
      * @param  int  $qty
      * @return bool
      */
-    public function haveSpecialPrice($qty = null)
+    public function haveDiscount($qty = null)
     {
-        $customerGroupPrice = $this->getCustomerGroupPrice($this->product, $qty);
-
-        $rulePrice = app(CatalogRuleProductPrice::class)->getRulePrice($this->product);
-
-        $specialPrice = $this->product->special_price;
-
-        if (
-            empty($specialPrice)
-            && ! $rulePrice
-            && $customerGroupPrice == $this->product->price
-        ) {
+        if (! $priceIndex = $this->getPriceIndex()) {
             return false;
         }
 
-        $haveSpecialPrice = false;
-
-        if (! (float) $specialPrice) {
-            if (
-                $rulePrice
-                && $rulePrice->price < $this->product->price
-            ) {
-                $this->product->special_price = $rulePrice->price;
-
-                $haveSpecialPrice = true;
-            }
-        } else {
-            if (
-                $rulePrice
-                && $rulePrice->price <= $this->product->special_price
-            ) {
-                $this->product->special_price = $rulePrice->price;
-
-                $haveSpecialPrice = true;
-            } else {
-                if (core()->isChannelDateInInterval(
-                    $this->product->special_price_from,
-                    $this->product->special_price_to
-                )) {
-                    $haveSpecialPrice = true;
-                } elseif ($rulePrice) {
-                    $this->product->special_price = $rulePrice->price;
-
-                    $haveSpecialPrice = true;
-                }
-            }
-        }
-
-        if ($haveSpecialPrice) {
-            $this->product->special_price = min($this->product->special_price, $customerGroupPrice);
-        } else {
-            if ($customerGroupPrice !== $this->product->price) {
-                $this->product->special_price = $customerGroupPrice;
-
-                $haveSpecialPrice = true;
-            }
-        }
-
-        return $haveSpecialPrice;
-    }
-
-    /**
-     * Get product group price.
-     *
-     * @return float
-     */
-    public function getCustomerGroupPrice($product, $qty)
-    {
-        if (is_null($qty)) {
-            $qty = 1;
-        }
-
-        $customerGroup = app(CustomerRepository::class)->getCurrentGroup();
-
-        $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
-
-        if ($customerGroupPrices->isEmpty()) {
-            return $product->price;
-        }
-
-        $lastQty = 1;
-
-        $lastPrice = $product->price;
-
-        $lastCustomerGroupId = null;
-
-        foreach ($customerGroupPrices as $customerGroupPrice) {
-            if ($qty < $customerGroupPrice->qty) {
-                continue;
-            }
-
-            if ($customerGroupPrice->qty < $lastQty) {
-                continue;
-            }
-
-            if (
-                $customerGroupPrice->qty == $lastQty
-                && ! empty($lastCustomerGroupId)
-                && empty($customerGroupPrice->customer_group_id)
-            ) {
-                continue;
-            }
-
-            if ($customerGroupPrice->value_type == 'discount') {
-                if (
-                    $customerGroupPrice->value >= 0
-                    && $customerGroupPrice->value <= 100
-                ) {
-                    $lastPrice = $product->price - ($product->price * $customerGroupPrice->value) / 100;
-
-                    $lastQty = $customerGroupPrice->qty;
-
-                    $lastCustomerGroupId = $customerGroupPrice->customer_group_id;
-                }
-            } else {
-                if (
-                    $customerGroupPrice->value >= 0
-                    && $customerGroupPrice->value < $lastPrice
-                ) {
-                    $lastPrice = $customerGroupPrice->value;
-
-                    $lastQty = $customerGroupPrice->qty;
-
-                    $lastCustomerGroupId = $customerGroupPrice->customer_group_id;
-                }
-            }
-        }
-
-        return $lastPrice;
+        return $priceIndex->min_price != $this->product->regular_min_price;
     }
 
     /**
@@ -748,10 +835,12 @@ abstract class AbstractType
      */
     public function getPriceHtml()
     {
-        if ($this->haveSpecialPrice()) {
+        $minPrice = $this->getMinimalPrice();
+
+        if ($minPrice < $this->product->price) {
             $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>'
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getSpecialPrice())) . '</span>';
+            . '<span class="special-price">' . core()->currency($this->evaluatePrice($minPrice)) . '</span>';
         } else {
             $html = '<span>' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>';
         }
@@ -1035,7 +1124,7 @@ abstract class AbstractType
     {
         $offerLines = [];
         
-        $customerGroup = app(CustomerRepository::class)->getCurrentGroup();
+        $customerGroup = $this->customerRepository->getCurrentGroup();
 
         $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroup) {
                 $query->where('customer_group_id', $customerGroup->id)
@@ -1079,6 +1168,76 @@ abstract class AbstractType
         ]);
 
         return $offerLines;
+    }
+
+    /**
+     * Get product group price.
+     *
+     * @return float
+     */
+    public function getCustomerGroupPrice($product, $qty)
+    {
+        if (is_null($qty)) {
+            $qty = 1;
+        }
+
+        $customerGroup = $this->customerRepository->getCurrentGroup();
+
+        $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
+
+        if ($customerGroupPrices->isEmpty()) {
+            return $product->price;
+        }
+
+        $lastQty = 1;
+
+        $lastPrice = $product->price;
+
+        $lastCustomerGroupId = null;
+
+        foreach ($customerGroupPrices as $customerGroupPrice) {
+            if ($qty < $customerGroupPrice->qty) {
+                continue;
+            }
+
+            if ($customerGroupPrice->qty < $lastQty) {
+                continue;
+            }
+
+            if (
+                $customerGroupPrice->qty == $lastQty
+                && ! empty($lastCustomerGroupId)
+                && empty($customerGroupPrice->customer_group_id)
+            ) {
+                continue;
+            }
+
+            if ($customerGroupPrice->value_type == 'discount') {
+                if (
+                    $customerGroupPrice->value >= 0
+                    && $customerGroupPrice->value <= 100
+                ) {
+                    $lastPrice = $product->price - ($product->price * $customerGroupPrice->value) / 100;
+
+                    $lastQty = $customerGroupPrice->qty;
+
+                    $lastCustomerGroupId = $customerGroupPrice->customer_group_id;
+                }
+            } else {
+                if (
+                    $customerGroupPrice->value >= 0
+                    && $customerGroupPrice->value < $lastPrice
+                ) {
+                    $lastPrice = $customerGroupPrice->value;
+
+                    $lastQty = $customerGroupPrice->qty;
+
+                    $lastCustomerGroupId = $customerGroupPrice->customer_group_id;
+                }
+            }
+        }
+
+        return $lastPrice;
     }
 
     /**

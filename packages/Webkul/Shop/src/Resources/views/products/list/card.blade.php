@@ -5,7 +5,7 @@
     <?php $productBaseImage = product_image()->getProductBaseImage($product); ?>
 
     @if (
-        ! $product->getTypeInstance()->haveSpecialPrice()
+        ! $product->getTypeInstance()->haveDiscount()
         && $product->new
     )
         <div class="sticker new">

@@ -15,18 +15,21 @@ class ProductRepository extends BaseProductRepository
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
      * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
-        protected CustomerRepository $customerRepository,
+        CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
+        protected ProductFlatRepository $productFlatRepository,
         Container $container
     )
     {
         parent::__construct(
             $customerRepository,
             $attributeRepository,
+            $productFlatRepository,
             $container
         );
     }
@@ -39,7 +42,7 @@ class ProductRepository extends BaseProductRepository
      */
     public function searchProductsFromCategory($params)
     {
-        $results = app(ProductFlatRepository::class)->scopeQuery(function($query) use($params) {
+        $results = $this->productFlatRepository->scopeQuery(function($query) use($params) {
             $channel = core()->getRequestedChannelCode();
 
             $locale = core()->getRequestedLocaleCode();

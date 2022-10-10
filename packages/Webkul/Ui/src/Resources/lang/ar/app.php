@@ -57,6 +57,6 @@ return [
         'all-locales'           => 'كل اللغات',
         'all-customer-groups'   => 'جميع مجموعات العملاء',
         'records-found'         => 'جميع مجموعات العملاء',
-        'clear-all'             => 'Clear All'
+        'clear-all'             => 'امسح الكل'
     ],
 ];
