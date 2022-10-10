@@ -2,8 +2,8 @@
 
 return [
     'save'          => 'सहेजें',
-    'copy-of'       => 'प्रति का ',
-    'copy-of-slug'  => 'की प्रति-',
+    'copy-of'       => 'प्रति का :value',
+    'copy-of-slug'  => 'की प्रति-:value',
     'create'        => 'सृजन करना',
     'update'        => 'अद्यतन',
     'delete'        => 'हटाएं',

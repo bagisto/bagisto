@@ -144,6 +144,16 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Get the price indices that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function price_indices(): HasMany
+    {
+        return $this->hasMany(ProductPriceIndexProxy::modelClass());
+    }
+
+    /**
      * The categories that belong to the product.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -603,6 +613,6 @@ class Product extends Model implements ProductContract
      */
     protected static function newFactory(): Factory
     {
-        return ProductFactory::new ();
+        return ProductFactory::new();
     }
 }

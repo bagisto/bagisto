@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_price_indexes', function (Blueprint $table) {
+        Schema::create('product_price_indices', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('min_price', 12, 4)->default(0);
             $table->decimal('regular_min_price', 12, 4)->default(0);
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_price_indexes');
+        Schema::dropIfExists('product_price_indices');
     }
 };

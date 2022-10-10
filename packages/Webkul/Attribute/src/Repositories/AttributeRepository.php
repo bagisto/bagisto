@@ -138,7 +138,7 @@ class AttributeRepository extends Repository
      *
      * @return array
      */
-    public function getFilterAttributes()
+    public function getFilterableAttributes()
     {
         return $this->model->with(['options', 'options.translations'])->where('is_filterable', 1)->get();
     }

@@ -133,10 +133,10 @@
                                         @endif
                                     </div>
 
-                                    @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
+                                    @if (count($offers = $product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
                                         <div class="col-12">
-                                            @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
-                                                {{ $offers }} </br>
+                                            @foreach ($offers as $offer)
+                                                {{ $offer }} </br>
                                             @endforeach
                                         </div>
                                     @endif

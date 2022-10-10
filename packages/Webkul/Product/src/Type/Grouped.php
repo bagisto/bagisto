@@ -2,14 +2,17 @@
 
 namespace Webkul\Product\Type;
 
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Models\ProductFlat;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductPriceIndexRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Product\Repositories\ProductGroupedProductRepository;
+use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Helpers\PriceIndexer\Grouped as GroupedIndexer;
 
 class Grouped extends AbstractType
 {
@@ -55,8 +58,10 @@ class Grouped extends AbstractType
     /**
      * Create a new product type instance.
      *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository   $productPriceIndexRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
@@ -65,8 +70,10 @@ class Grouped extends AbstractType
      * @return void
      */
     public function __construct(
+        CustomerRepository $customerRepository,
         AttributeRepository $attributeRepository,
         ProductRepository $productRepository,
+        ProductPriceIndexRepository $productPriceIndexRepository,
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
@@ -75,8 +82,10 @@ class Grouped extends AbstractType
     )
     {
         parent::__construct(
+            $customerRepository,
             $attributeRepository,
             $productRepository,
+            $productPriceIndexRepository,
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
@@ -106,6 +115,27 @@ class Grouped extends AbstractType
     }
 
     /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        parent::copyRelationships($product);
+
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        if (in_array('grouped_products', $attributesToSkip)) {
+            return;
+        }
+
+        foreach ($this->product->grouped_products as $groupedProduct) {
+            $product->grouped_products()->save($groupedProduct->replicate());
+        }
+    }
+
+    /**
      * Returns children ids.
      *
      * @return array
@@ -123,27 +153,6 @@ class Grouped extends AbstractType
     public function priceRuleCanBeApplied()
     {
         return false;
-    }
-
-    /**
-     * Get product minimal price.
-     *
-     * @param  int  $qty
-     * @return float
-     */
-    public function getMinimalPrice($qty = null)
-    {
-        $minPrices = [];
-
-        foreach ($this->product->grouped_products as $groupOptionProduct) {
-            $groupOptionProductTypeInstance = $groupOptionProduct->associated_product->getTypeInstance();
-
-            $groupOptionProductMinimalPrice = $groupOptionProductTypeInstance->getMinimalPrice();
-
-            $minPrices[] = $groupOptionProductTypeInstance->evaluatePrice($groupOptionProductMinimalPrice);
-        }
-
-        return empty($minPrices) ? 0 : min($minPrices);
     }
 
     /**
@@ -165,27 +174,6 @@ class Grouped extends AbstractType
     }
 
     /**
-     * Check whether group product have special price.
-     *
-     * @param  int  $qty
-     * @return bool
-     */
-    public function haveSpecialPrice($qty = null)
-    {
-        $haveSpecialPrice = false;
-
-        foreach ($this->product->grouped_products as $groupOptionProduct) {
-            if ($groupOptionProduct->associated_product->getTypeInstance()->haveSpecialPrice()) {
-                $haveSpecialPrice = true;
-
-                break;
-            }
-        }
-
-        return $haveSpecialPrice;
-    }
-
-    /**
      * Get product minimal price.
      *
      * @return string
@@ -194,7 +182,7 @@ class Grouped extends AbstractType
     {
         $html = '';
 
-        if ($this->haveSpecialPrice()) {
+        if ($this->haveDiscount()) {
             $html .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
         }
 
@@ -246,5 +234,15 @@ class Grouped extends AbstractType
         }
 
         return $products;
+    }
+
+    /**
+     * Returns price indexer class for a specific product type
+     *
+     * @return string
+     */
+    public function getPriceIndexer()
+    {
+        return app(GroupedIndexer::class);
     }
 }

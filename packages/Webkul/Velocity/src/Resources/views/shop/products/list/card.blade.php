@@ -93,7 +93,7 @@
                     <product-quick-view-btn :quick-view-details="{{ json_encode($velocityHelper->formatProduct($product)) }}"></product-quick-view-btn>
             </a>
 
-            @if (! $product->getTypeInstance()->haveSpecialPrice() && $product->new)
+            @if (! $product->getTypeInstance()->haveDiscount() && $product->new)
                 <div class="sticker new">
                     {{ __('shop::app.products.new') }}
                 </div>
