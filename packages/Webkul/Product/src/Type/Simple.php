@@ -36,7 +36,7 @@ class Simple extends AbstractType
     public function isSaleable()
     {
         return $this->checkInLoadedSaleableChecks($this->product, function ($product) {
-            if (! $this->product->status) {
+            if (! $product->status) {
                 return false;
             }
 

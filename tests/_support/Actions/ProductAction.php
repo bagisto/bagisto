@@ -171,6 +171,8 @@ trait ProductAction
 
         if ($product !== null) {
             Event::dispatch('catalog.product.create.after', $product);
+
+            Event::dispatch('catalog.product.update.after', $product);
         }
 
         return $product;
