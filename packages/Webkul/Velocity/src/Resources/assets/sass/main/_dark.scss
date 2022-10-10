@@ -174,8 +174,10 @@
         color: $white !important;
     }
 
-    .wishlist-icon i {
-        color: $dark-mode-velocity-text-color-black;
+    .compare-products {
+        .wishlist-icon i {
+            color: $white !important;
+        }
     }
 
     .card-body {
@@ -183,6 +185,10 @@
             .material-icons {
                 color: $dark-mode-velocity-text-color-black;
             }
+        }
+
+        .product-rating {
+            color: $white !important;
         }
     }
 
