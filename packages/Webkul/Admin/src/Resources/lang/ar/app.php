@@ -716,6 +716,9 @@ return [
             'update-success'       => 'تم تحديث العائلة بنجاح.',
             'delete-success'       => 'تم حذف العائلة بنجاح.',
             'delete-failed'        => 'حدث خطأ أثناء حذف العائلة.',
+            'user-define-error'    => 'لا يمكن حذف عائلة سمات النظام',
+            'last-delete-error'    => 'مطلوب عائلة واحدة على الأقل.',
+            'attribute-product-error'   => 'الأسرة المستخدمة في المنتجات.',
         ],
         'categories' => [
             'title'                    => 'الفئات',

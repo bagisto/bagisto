@@ -720,6 +720,9 @@ return [
             'update-success'       => 'Family updated successfully.',
             'delete-success'       => 'Family deleted successfully.',
             'delete-failed'        => 'Error encountered while deleting Family.',
+            'user-define-error'    => 'Can not delete system Attribute family',
+            'last-delete-error'    => 'At least one family is required.',
+            'attribute-product-error'   => 'family is used in products.',
         ],
         'categories' => [
             'title'                    => 'Categories',
