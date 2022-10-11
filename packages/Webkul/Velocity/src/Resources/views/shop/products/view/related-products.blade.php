@@ -1,6 +1,4 @@
-<?php
-    $relatedProducts = $product->related_products()->get();
-?>
+@php $relatedProducts = $product->related_products()->get(); @endphp
 
 @if ($relatedProducts->count())
     <card-list-header

@@ -269,7 +269,7 @@
 
                                                                 <span class="control-error" v-if="errors.has('invoice[items][{{ $item->id }}]')">
                                                                     @verbatim
-                                                                        {{ errors.first('invoice[items][<?php echo $item->id ?>]') }}
+                                                                        {{ errors.first('invoice[items][@php echo $item->id @endphp]') }}
                                                                     @endverbatim
                                                                 </span>
                                                             </div>
