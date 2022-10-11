@@ -37,20 +37,4 @@ class ProductInventoryRepository extends Repository
             ]);
         }
     }
-
-    /**
-     * Check if product inventories are already loaded. If already loaded then load from it.
-     *
-     * @return object
-     */
-    public function checkInLoadedProductInventories($product)
-    {
-        static $productInventories = [];
-
-        if (array_key_exists($product->id, $productInventories)) {
-            return $productInventories[$product->id];
-        }
-
-        return $productInventories[$product->id] = $product->inventories;
-    }
 }

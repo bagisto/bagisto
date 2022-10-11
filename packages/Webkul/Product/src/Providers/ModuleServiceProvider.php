@@ -19,6 +19,7 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
         \Webkul\Product\Models\ProductGroupedProduct::class,
         \Webkul\Product\Models\ProductImage::class,
         \Webkul\Product\Models\ProductInventory::class,
+        \Webkul\Product\Models\ProductInventoryIndex::class,
         \Webkul\Product\Models\ProductOrderedInventory::class,
         \Webkul\Product\Models\ProductPriceIndex::class,
         \Webkul\Product\Models\ProductReview::class,

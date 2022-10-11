@@ -1,10 +1,10 @@
 <?php
 
-namespace Webkul\Inventory\Repositories;
+namespace Webkul\Product\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-class InventorySourceRepository extends Repository
+class ProductInventoryIndexRepository extends Repository
 {
     /**
      * Specify model class name.
@@ -13,6 +13,6 @@ class InventorySourceRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Inventory\Contracts\InventorySource';
+        return 'Webkul\Product\Contracts\ProductInventoryIndex';
     }
 }

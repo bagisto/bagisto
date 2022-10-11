@@ -8,7 +8,7 @@ use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\ProductFlat;
-use Webkul\Product\Helpers\PriceIndexer\Configurable as ConfigurableIndexer;
+use Webkul\Product\Helpers\Indexers\Price\Configurable as ConfigurableIndexer;
 
 class Configurable extends AbstractType
 {
@@ -779,25 +779,10 @@ class Configurable extends AbstractType
     {
         $total = 0;
 
-        $channelInventorySourceIds = core()->getCurrentChannel()
-            ->inventory_sources
-            ->where('status', 1)
-            ->pluck('id');
-
         foreach ($this->product->variants as $variant) {
-            foreach ($variant->inventories as $inventory) {
-                if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
-                    $total += $inventory->qty;
-                }
-            }
+            $inventoryIndex = $variant->totalQuantity();
 
-            $orderedInventory = $variant->ordered_inventories
-                ->where('channel_id', core()->getCurrentChannel()->id)
-                ->first();
-
-            if ($orderedInventory) {
-                $total -= $orderedInventory->qty;
-            }
+            $total += $inventoryIndex->qty;
         }
 
         return $total;
