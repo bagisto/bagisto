@@ -10,8 +10,12 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.catalog.attributes.update', $attribute->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-
+        <form
+            method="POST"
+            action="{{ route('admin.catalog.attributes.update', $attribute->id) }}"
+            @submit.prevent="onSubmit"
+            enctype="multipart/form-data"
+        >
             <div class="page-header">
                 <div class="page-title">
                     <h1>
@@ -41,9 +45,24 @@
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.controls.before', ['attribute' => $attribute]) !!}
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.catalog.attributes.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') ?: $attribute->code }}" disabled="disabled" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.code') }}&quot;" v-code/>
+                                <label for="code" class="required">
+                                    {{ __('admin::app.catalog.attributes.code') }}
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="code"
+                                    class="control"
+                                    id="code"
+                                    value="{{ old('code') ?: $attribute->code }}"
+                                    disabled="disabled"
+                                    v-code
+                                    v-validate="'required'"
+                                    data-vv-as="&quot;{{ __('admin::app.catalog.attributes.code') }}&quot;"
+                                />
+
                                 <input type="hidden" name="code" value="{{ $attribute->code }}"/>
+
                                 <span class="control-error" v-if="errors.has('code')" v-text="errors.first('code')"></span>
                             </div>
 
@@ -58,33 +77,43 @@
                                     <option value="text" {{ $selectedOption == 'text' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.text') }}
                                     </option>
+
                                     <option value="textarea" {{ $selectedOption == 'textarea' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.textarea') }}
                                     </option>
+
                                     <option value="price" {{ $selectedOption == 'price' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.price') }}
                                     </option>
+
                                     <option value="boolean" {{ $selectedOption == 'boolean' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.boolean') }}
                                     </option>
+
                                     <option value="select" {{ $selectedOption == 'select' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.select') }}
                                     </option>
+
                                     <option value="multiselect" {{ $selectedOption == 'multiselect' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.multiselect') }}
                                     </option>
+
                                     <option value="datetime" {{ $selectedOption == 'datetime' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.datetime') }}
                                     </option>
+
                                     <option value="date" {{ $selectedOption == 'date' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.date') }}
                                     </option>
+
                                     <option value="image" {{ $selectedOption == 'image' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.image') }}
                                     </option>
+
                                     <option value="file" {{ $selectedOption == 'file' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.file') }}
                                     </option>
+
                                     <option value="checkbox" {{ $selectedOption == 'checkbox' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.checkbox') }}
                                     </option>
@@ -96,10 +125,19 @@
                             
                             @if ($attribute->type == 'textarea')
                                 <div class="control-group">
-                                    <label for="enable_wysiwyg">{{ __('admin::app.catalog.attributes.enable-wysiwyg') }}</label>
+                                    <label for="enable_wysiwyg">
+                                        {{ __('admin::app.catalog.attributes.enable-wysiwyg') }}
+                                    </label>
 
                                     <label class="switch">
-                                        <input type="checkbox" id="enable_wysiwyg" name="enable_wysiwyg" value="1" {{ (old('enable_wysiwyg') ?: $attribute->enable_wysiwyg) ? 'checked' : '' }}>
+                                        <input
+                                            type="checkbox"
+                                            name="enable_wysiwyg"
+                                            id="enable_wysiwyg"
+                                            value="1"
+                                            {{ (old('enable_wysiwyg') ?: $attribute->enable_wysiwyg) ? 'checked' : '' }}
+                                        />
+
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
@@ -118,15 +156,40 @@
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.controls.before', ['attribute' => $attribute]) !!}
 
                             <div class="control-group" :class="[errors.has('admin_name') ? 'has-error' : '']">
-                                <label for="admin_name" class="required">{{ __('admin::app.catalog.attributes.admin') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="admin_name" name="admin_name" value="{{ old('admin_name') ?: $attribute->admin_name }}" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('admin_name')" v-text="errors.first('admin_name')"></span>
+                                <label for="admin_name" class="required">
+                                    {{ __('admin::app.catalog.attributes.admin') }}
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="admin_name"
+                                    class="control"
+                                    id="admin_name"
+                                    value="{{ old('admin_name') ?: $attribute->admin_name }}"
+                                    v-validate="'required'"
+                                    data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"
+                                />
+
+                                <span
+                                    class="control-error"
+                                    v-if="errors.has('admin_name')"
+                                    v-text="errors.first('admin_name')"
+                                ></span>
                             </div>
 
                             @foreach ($allLocales as $locale)
                                 <div class="control-group">
-                                    <label for="locale-{{ $locale->code }}">{{ $locale->name . ' (' . $locale->code . ')' }}</label>
-                                    <input type="text" class="control" id="locale-{{ $locale->code }}" name="<?php echo $locale->code; ?>[name]" value="{{ old($locale->code)['name'] ?? ($attribute->translate($locale->code)->name ?? '') }}"/>
+                                    <label for="locale-{{ $locale->code }}">
+                                        {{ $locale->name . ' (' . $locale->code . ')' }}
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="<?php echo $locale->code; ?>[name]"
+                                        class="control"
+                                        id="locale-{{ $locale->code }}"
+                                        value="{{ old($locale->code)['name'] ?? ($attribute->translate($locale->code)->name ?? '') }}"
+                                    />
                                 </div>
                             @endforeach
 
@@ -164,41 +227,72 @@
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.before', ['attribute' => $attribute]) !!}
 
                             <div class="control-group">
-                                <label for="is_required">{{ __('admin::app.catalog.attributes.is_required') }}</label>
-                                <select class="control" id="is_required" name="is_required" {{ ! $attribute->is_user_defined ? 'disabled' : '' }}>
-                                    <option value="0" {{ $attribute->is_required ? '' : 'selected' }}>{{ __('admin::app.catalog.attributes.no') }}</option>
-                                    <option value="1" {{ $attribute->is_required ? 'selected' : '' }}>{{ __('admin::app.catalog.attributes.yes') }}</option>
+                                <label for="is_required">
+                                    {{ __('admin::app.catalog.attributes.is_required') }}
+                                </label>
+
+                                <select
+                                    name="is_required"
+                                    class="control"
+                                    id="is_required"
+                                    {{ ! $attribute->is_user_defined ? 'disabled' : '' }}
+                                >
+                                    <option value="0" {{ $attribute->is_required ? '' : 'selected' }}>
+                                        {{ __('admin::app.catalog.attributes.no') }}
+                                    </option>
+
+                                    <option value="1" {{ $attribute->is_required ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.yes') }}
+                                    </option>
                                 </select>
                             </div>
 
                             <div class="control-group">
-                                <label for="is_unique">{{ __('admin::app.catalog.attributes.is_unique') }}</label>
-                                <select class="control" id="is_unique" name="is_unique" disabled>
+                                <label for="is_unique">
+                                    {{ __('admin::app.catalog.attributes.is_unique') }}
+                                </label>
+
+                                <select name="is_unique" class="control" id="is_unique" disabled>
                                     <option value="0" {{ $attribute->is_unique ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
+
                                     <option value="1" {{ $attribute->is_unique ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
                                 </select>
+
                                 <input type="hidden" name="is_unique" value="{{ $attribute->is_unique }}"/>
                             </div>
 
                             @if ($attribute->type == 'text')
                                 <div class="control-group">
                                     <?php $selectedValidation = old('validation') ?: $attribute->validation ?>
-                                    <label for="validation">{{ __('admin::app.catalog.attributes.input_validation') }}</label>
-                                    <select class="control" id="validation" name="validation" {{ ! $attribute->is_user_defined ? 'disabled' : '' }}>
+
+                                    <label for="validation">
+                                        {{ __('admin::app.catalog.attributes.input_validation') }}
+                                    </label>
+
+                                    <select
+                                        name="validation"
+                                        class="control"
+                                        id="validation"
+                                        {{ ! $attribute->is_user_defined ? 'disabled' : '' }}
+                                    >
                                         <option value=""></option>
+                                        
                                         <option value="numeric" {{ $selectedValidation == 'numeric' ? 'selected' : '' }}>
                                             {{ __('admin::app.catalog.attributes.number') }}
                                         </option>
+
                                         <option value="decimal" {{ $selectedValidation == 'decimal' ? 'selected' : '' }}>
                                             {{ __('admin::app.catalog.attributes.decimal') }}
                                         </option>
+
                                         <option value="email" {{ $selectedValidation == 'email' ? 'selected' : '' }}>
                                             {{ __('admin::app.catalog.attributes.email') }}
                                         </option>
+
                                         <option value="url" {{ $selectedValidation == 'url' ? 'selected' : '' }}>
                                             {{ __('admin::app.catalog.attributes.url') }}
                                         </option>
@@ -219,37 +313,51 @@
                             {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.before', ['attribute' => $attribute]) !!}
 
                             <div class="control-group">
-                                <label for="value_per_locale">{{ __('admin::app.catalog.attributes.value_per_locale') }}</label>
-                                <select class="control" id="value_per_locale" name="value_per_locale" disabled>
+                                <label for="value_per_locale">
+                                    {{ __('admin::app.catalog.attributes.value_per_locale') }}
+                                </label>
+
+                                <select name="value_per_locale" class="control" id="value_per_locale" disabled>
                                     <option value="0" {{ $attribute->value_per_locale ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
+
                                     <option value="1" {{ $attribute->value_per_locale ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
                                 </select>
+
                                 <input type="hidden" name="value_per_locale" value="{{ $attribute->value_per_locale }}"/>
                             </div>
 
                             <div class="control-group">
-                                <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
-                                <select class="control" id="value_per_channel" name="value_per_channel" disabled>
+                                <label for="value_per_channel">
+                                    {{ __('admin::app.catalog.attributes.value_per_channel') }}
+                                </label>
+
+                                <select name="value_per_channel" class="control" id="value_per_channel" disabled>
                                     <option value="0" {{ $attribute->value_per_channel ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
+
                                     <option value="1" {{ $attribute->value_per_channel ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
                                 </select>
+
                                 <input type="hidden" name="value_per_channel" value="{{ $attribute->value_per_channel }}"/>
                             </div>
 
                             <div class="control-group">
-                                <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>
-                                <select class="control" id="is_filterable" name="is_filterable">
+                                <label for="is_filterable">
+                                    {{ __('admin::app.catalog.attributes.is_filterable') }}
+                                </label>
+
+                                <select name="is_filterable" class="control" id="is_filterable">
                                     <option value="0" {{ $attribute->is_filterable ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
+
                                     <option value="1" {{ $attribute->is_filterable ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
@@ -257,11 +365,15 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="is_configurable">{{ __('admin::app.catalog.attributes.is_configurable') }}</label>
-                                <select class="control" id="is_configurable" name="is_configurable">
+                                <label for="is_configurable">
+                                    {{ __('admin::app.catalog.attributes.is_configurable') }}
+                                </label>
+
+                                <select name="is_configurable" class="control" id="is_configurable">
                                     <option value="0" {{ $attribute->is_configurable ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
+
                                     <option value="1" {{ $attribute->is_configurable ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
@@ -269,11 +381,15 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="is_visible_on_front">{{ __('admin::app.catalog.attributes.is_visible_on_front') }}</label>
-                                <select class="control" id="is_visible_on_front" name="is_visible_on_front">
+                                <label for="is_visible_on_front">
+                                    {{ __('admin::app.catalog.attributes.is_visible_on_front') }}
+                                </label>
+
+                                <select name="is_visible_on_front" class="control" id="is_visible_on_front">
                                     <option value="0" {{ $attribute->is_visible_on_front ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
+
                                     <option value="1" {{ $attribute->is_visible_on_front ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
@@ -281,11 +397,15 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="use_in_flat">{{ __('admin::app.catalog.attributes.use_in_flat') }}</label>
-                                <select class="control" id="use_in_flat" name="use_in_flat">
+                                <label for="use_in_flat">
+                                    {{ __('admin::app.catalog.attributes.use_in_flat') }}
+                                </label>
+
+                                <select name="use_in_flat" class="control" id="use_in_flat">
                                     <option value="0" {{ $attribute->use_in_flat ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
+
                                     <option value="1" {{ $attribute->use_in_flat ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
@@ -293,11 +413,15 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="is_comparable">{{ __('admin::app.catalog.attributes.is_comparable') }}</label>
-                                <select class="control" id="is_comparable" name="is_comparable">
+                                <label for="is_comparable">
+                                    {{ __('admin::app.catalog.attributes.is_comparable') }}
+                                </label>
+
+                                <select name="is_comparable" class="control" id="is_comparable">
                                     <option value="0" {{ $attribute->is_comparable ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
+
                                     <option value="1" {{ $attribute->is_comparable ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
@@ -320,8 +444,16 @@
     <script type="text/x-template" id="options-template">
         <div>
             <div class="control-group" v-if="show_swatch">
-                <label for="swatch_type">{{ __('admin::app.catalog.attributes.swatch_type') }}</label>
-                <select class="control" id="swatch_type" name="swatch_type" v-model="swatch_type">
+                <label for="swatch_type">
+                    {{ __('admin::app.catalog.attributes.swatch_type') }}
+                </label>
+
+                <select
+                    name="swatch_type"
+                    class="control"
+                    id="swatch_type"
+                    v-model="swatch_type"
+                >
                     <option value="dropdown">
                         {{ __('admin::app.catalog.attributes.dropdown') }}
                     </option>
@@ -342,7 +474,13 @@
 
             <div class="control-group">
                 <span class="checkbox">
-                    <input type="checkbox" class="control" id="default-null-option" name="default-null-option" v-model="isNullOptionChecked">
+                    <input
+                        type="checkbox"
+                        name="default-null-option"
+                        class="control"
+                        id="default-null-option"
+                        v-model="isNullOptionChecked"
+                    />
 
                     <label class="checkbox-view" for="default-null-option"></label>
 
@@ -354,13 +492,19 @@
                 <table>
                     <thead>
                         <tr>
-                            <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
+                            <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">
+                                {{ __('admin::app.catalog.attributes.swatch') }}
+                            </th>
 
-                            <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
+                            <th>
+                                {{ __('admin::app.catalog.attributes.admin_name') }}
+                            </th>
 
                             <th v-for="locale in allLocales" v-text="`${locale.name} (${locale.code})`"></th>
 
-                            <th>{{ __('admin::app.catalog.attributes.position') }}</th>
+                            <th>
+                                {{ __('admin::app.catalog.attributes.position') }}
+                            </th>
 
                             <th></th>
                         </tr>
@@ -374,35 +518,91 @@
                             <input type="hidden" :name="'options[' + row.id + '][isDelete]'" :value="row.isDelete">
 
                             <td v-if="show_swatch && swatch_type == 'color'">
-                                <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
+                                <swatch-picker
+                                    :input-name="'options[' + row.id + '][swatch_value]'"
+                                    :color="row.swatch_value"
+                                    colors="text-advanced"
+                                    show-fallback
+                                />
                             </td>
 
                             <td style="white-space: nowrap;" v-if="show_swatch && swatch_type == 'image'">
                                 <div class="control-group" :class="[errors.has('options[' + row.id + '][swatch_value]') ? 'has-error' : '']">
-                                    <img style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;" v-if="row.swatch_value_url" :src="row.swatch_value_url"/>
-                                    <input type="file" v-validate="'size:600'" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
-                                    <span class="control-error" v-if="errors.has('options[' + row.id + '][swatch_value]')" v-text="'{{ __('admin::app.catalog.attributes.validation-messages.max-size') }}'"></span>
+                                    <img
+                                        :src="row.swatch_value_url"
+                                        style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;"
+                                        v-if="row.swatch_value_url"
+                                    />
+
+                                    <input
+                                        type="file"
+                                        :name="'options[' + row.id + '][swatch_value]'"
+                                        accept="image/*"
+                                        v-validate="'size:600'"
+                                    />
+
+                                    <span
+                                        class="control-error"
+                                        v-text="'{{ __('admin::app.catalog.attributes.validation-messages.max-size') }}'"
+                                        v-if="errors.has('options[' + row.id + '][swatch_value]')"
+                                    ></span>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
-                                    <input type="text" v-validate="getOptionValidation(row, '')" v-model="row['admin_name']" :name="adminName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
-                                    <span class="control-error" v-if="errors.has(adminName(row))" v-text="errors.first(adminName(row))"></span>
+                                    <input
+                                        type="text"
+                                        :name="adminName(row)"
+                                        class="control"
+                                        v-model="row['admin_name']"
+                                        v-validate="getOptionValidation(row, '')"
+                                        data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"
+                                    />
+
+                                    <span
+                                        class="control-error"
+                                        v-text="errors.first(adminName(row))"
+                                        v-if="errors.has(adminName(row))"
+                                    ></span>
                                 </div>
                             </td>
 
                             <td v-for="locale in allLocales">
                                 <div class="control-group" :class="[errors.has(localeInputName(row, locale.code)) ? 'has-error' : '']">
-                                    <input type="text" v-validate="getOptionValidation(row, locale.code)" v-model="row['locales'][locale.code]" :name="localeInputName(row, locale.code)" class="control" :data-vv-as="`&quot;${locale.name} (${locale.code})&quot;`"/>
-                                    <span class="control-error" v-if="errors.has(localeInputName(row, locale.code))" v-text="errors.first(localeInputName(row, locale.code))"></span>
+                                    <input
+                                        type="text"
+                                        :name="localeInputName(row, locale.code)"
+                                        class="control"
+                                        v-model="row['locales'][locale.code]"
+                                        v-validate="getOptionValidation(row, locale.code)"
+                                        :data-vv-as="`&quot;${locale.name} (${locale.code})&quot;`"
+                                    />
+
+                                    <span
+                                        class="control-error"
+                                        v-text="errors.first(localeInputName(row, locale.code))"
+                                        v-if="errors.has(localeInputName(row, locale.code))"
+                                    ></span>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control-group" :class="[errors.has(sortOrderName(row)) ? 'has-error' : '']">
-                                    <input type="text" v-validate="getOptionValidation(row, '')" v-model="row['sort_order']" :name="sortOrderName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.position') }}&quot;"/>
-                                    <span class="control-error" v-if="errors.has(sortOrderName(row))" v-text="errors.first(sortOrderName(row))"></span>
+                                    <input
+                                        type="text"
+                                        :name="sortOrderName(row)"
+                                        class="control"
+                                        v-model="row['sort_order']"
+                                        v-validate="getOptionValidation(row, '')"
+                                        data-vv-as="&quot;{{ __('admin::app.catalog.attributes.position') }}&quot;"
+                                    />
+
+                                    <span
+                                        class="control-error"
+                                        v-text="errors.first(sortOrderName(row))"
+                                        v-if="errors.has(sortOrderName(row))"
+                                    ></span>
                                 </div>
                             </td>
 
@@ -414,11 +614,24 @@
                 </table>
             </div>
 
-            <button type="button" class="btn btn-lg btn-primary" id="load-more-btm" style="margin-top: 20px" @click="loadMoreOptions()" v-if="loadMore">
+            <button
+                type="button"
+                class="btn btn-lg btn-primary"
+                id="load-more-btm"
+                style="margin-top: 20px"
+                @click="loadMoreOptions()"
+                v-if="loadMore"
+            >
                 {{ __('admin::app.catalog.attributes.load-more-options-btn-title') }}
             </button>
 
-            <button type="button" class="btn btn-lg btn-primary" id="add-option-btn" style="margin-top: 20px" @click="addOptionRow()">
+            <button
+                type="button"
+                class="btn btn-lg btn-primary"
+                id="add-option-btn"
+                style="margin-top: 20px"
+                @click="addOptionRow()"
+            >
                 {{ __('admin::app.catalog.attributes.add-option-btn-title') }}
             </button>
         </div>
@@ -438,13 +651,21 @@
             data: function() {
                 return {
                     appLocale: '{{ app()->getLocale() }}',
+
                     optionPage: 1,
+
                     optionRowCount: 0,
+
                     optionRows: [],
+
                     loadMore: true,
+
                     show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
+
                     swatch_type: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
+
                     isNullOptionChecked: false,
+                    
                     idNullOption: null
                 };
             },
