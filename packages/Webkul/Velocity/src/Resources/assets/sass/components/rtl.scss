@@ -11,6 +11,10 @@ body {
             margin-right: 8.333333%;
         }
 
+        .float-right {
+            float: left !important;
+        }
+
         .velocity-divide-page {
             .right {
                 padding-left: 0 !important;
@@ -401,8 +405,10 @@ body {
             }
 
             .material-icons.cross {
-                left: 20px;
+                left: 8px;
                 right: unset;
+                top: 5px;
+                font-size: 24px !important;
             }
         }
 
