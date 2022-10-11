@@ -9,6 +9,17 @@
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
 </div>
 
+@push('css')
+    <style>
+        @media only screen and (max-width: 992px){
+            body.rtl .velocity-divide-page .left {
+                width: 40% !important;
+            }
+        }
+        
+    </style>
+@endpush
+
 @push('scripts')
     <script type="text/x-template" id="layered-navigation-template">
         <div v-if="attributes.length > 0">
