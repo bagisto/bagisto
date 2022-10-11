@@ -37,7 +37,7 @@
                     <accordian title="{{ __('admin::app.customers.addresses.general') }}" :active="true">
                         <div slot="body">
 
-                            <?php $addresses = explode(PHP_EOL, $address->address1); ?>
+                            @php $addresses = explode(PHP_EOL, $address->address1); @endphp
 
                             <div class="control-group" :class="[errors.has('company_name') ? 'has-error' : '']">
                                 <label for="company_name">{{ __('shop::app.customer.account.address.create.company_name') }}</label>

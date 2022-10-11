@@ -6,9 +6,9 @@
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.inventories.controls.before', ['product' => $product]) !!}
 
         @foreach ($inventorySources as $inventorySource)
-            <?php
-
+            @php
                 $qty = 0;
+
                 foreach ($product->inventories as $inventory) {
                     if ($inventory->inventory_source_id == $inventorySource->id) {
                         $qty = $inventory->qty;
@@ -18,8 +18,8 @@
                 }
 
                 $qty = old('inventories[' . $inventorySource->id . ']') ?: $qty;
+            @endphp
 
-            ?>
             <div class="control-group" :class="[errors.has('inventories[{{ $inventorySource->id }}]') ? 'has-error' : '']">
                 <label>{{ $inventorySource->name }}</label>
 

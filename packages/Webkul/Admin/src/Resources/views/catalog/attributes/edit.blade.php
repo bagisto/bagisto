@@ -126,7 +126,7 @@
                             @foreach ($allLocales as $locale)
                                 <div class="control-group">
                                     <label for="locale-{{ $locale->code }}">{{ $locale->name . ' (' . $locale->code . ')' }}</label>
-                                    <input type="text" class="control" id="locale-{{ $locale->code }}" name="<?php echo $locale->code; ?>[name]" value="{{ old($locale->code)['name'] ?? ($attribute->translate($locale->code)->name ?? '') }}"/>
+                                    <input type="text" class="control" id="locale-{{ $locale->code }}" name="@php echo $locale->code; @endphp[name]" value="{{ old($locale->code)['name'] ?? ($attribute->translate($locale->code)->name ?? '') }}"/>
                                 </div>
                             @endforeach
 
@@ -186,8 +186,11 @@
 
                             @if ($attribute->type == 'text')
                                 <div class="control-group">
-                                    <?php $selectedValidation = old('validation') ?: $attribute->validation ?>
+
+                                    @php $selectedValidation = old('validation') ?: $attribute->validation @endphp
+
                                     <label for="validation">{{ __('admin::app.catalog.attributes.input_validation') }}</label>
+
                                     <select class="control" id="validation" name="validation" {{ ! $attribute->is_user_defined ? 'disabled' : '' }}>
                                         <option value=""></option>
                                         <option value="numeric" {{ $selectedValidation == 'numeric' ? 'selected' : '' }}>
