@@ -136,6 +136,27 @@ class Bundle extends AbstractType
     }
 
     /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        parent::copyRelationships($product);
+
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        if (in_array('bundle_options', $attributesToSkip)) {
+            return;
+        }
+
+        foreach ($this->product->bundle_options as $bundleOption) {
+            $product->bundle_options()->save($bundleOption->replicate());
+        }
+    }
+
+    /**
      * Returns children ids.
      *
      * @return array
