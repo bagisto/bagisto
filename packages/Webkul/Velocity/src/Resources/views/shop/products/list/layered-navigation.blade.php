@@ -16,7 +16,6 @@
                 width: 40% !important;
             }
         }
-        
     </style>
 @endpush
 
