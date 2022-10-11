@@ -2,27 +2,33 @@
 
 namespace Webkul\Product\Helpers;
 
+use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductInventoryIndexRepository;
 use Webkul\Product\Helpers\Indexers\Flat\Product as FlatIndexer;
+use Webkul\Product\Helpers\Indexers\Inventory\Product as InventoryIndexer;
 
 class Indexer
 {
     /**
      * Create a new command instance.
      *
+     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository  $productPriceIndexRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryIndexRepository  $productInventoryIndexRepository
      * @param  \Webkul\Product\Helpers\Indexers\Flat\Product  $flatIndexer
+     * @param  \Webkul\Product\Helpers\Indexers\Inventory\Product  $inventoryIndexer
      * @return void
      */
     public function __construct(
+        protected ChannelRepository $channelRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected ProductPriceIndexRepository $productPriceIndexRepository,
         protected ProductInventoryIndexRepository $productInventoryIndexRepository,
-        protected FlatIndexer $flatIndexer
+        protected FlatIndexer $flatIndexer,
+        protected InventoryIndexer $inventoryIndexer
     )
     {
     }
@@ -31,13 +37,18 @@ class Indexer
      * Refresh product indexes
      *
      * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  array  $indexers
      * @return void
      */
-    public function refresh($product)
+    public function refresh($product, array $indexers = ['price', 'inventory'])
     {
-        $this->refreshPrice($product);
+        if (in_array('price', $indexers)) {
+            $this->refreshPrice($product);
+        }
 
-        $this->refreshInventory($product);
+        if (in_array('inventory', $indexers)) {
+            $this->refreshInventory($product);
+        }
     }
 
     /**
@@ -81,5 +92,17 @@ class Indexer
      */
     public function refreshInventory($product)
     {
+        if (in_array($product, ['configurable', 'bundle', 'grouped', 'booking'])) {
+            return;
+        }
+
+        $channels = $this->channelRepository->all();
+
+        foreach ($channels as $channel) {
+            $this->productInventoryIndexRepository->updateOrCreate([
+                'channel_id' => $channel->id,
+                'product_id' => $product->id,
+            ], $this->inventoryIndexer->setProduct($product)->getIndices($channel));
+        }
     }
 }

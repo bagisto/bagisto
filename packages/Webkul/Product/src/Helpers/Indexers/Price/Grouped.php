@@ -12,7 +12,7 @@ class Grouped extends AbstractIndexer
      */
     public function getIndices($customerGroup)
     {
-        $this->customerGroup = $customerGroup;
+        $this->setCustomerGroup($customerGroup);
 
         return [
             'min_price'         => $this->getMinimalPrice() ?? 0,

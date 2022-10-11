@@ -173,7 +173,7 @@
 
                                     <input
                                         type="text"
-                                        name="<?php echo $locale->code; ?>[name]"
+                                        name="@php echo $locale->code; @endphp[name]"
                                         class="control"
                                         id="locale-{{ $locale->code }}"
                                         value="{{ old($locale->code)['name'] ?? '' }}"

@@ -185,7 +185,7 @@
 
                                     <input
                                         type="text"
-                                        name="<?php echo $locale->code; ?>[name]"
+                                        name="@php echo $locale->code; @endphp[name]"
                                         class="control"
                                         id="locale-{{ $locale->code }}"
                                         value="{{ old($locale->code)['name'] ?? ($attribute->translate($locale->code)->name ?? '') }}"
@@ -267,7 +267,7 @@
 
                             @if ($attribute->type == 'text')
                                 <div class="control-group">
-                                    <?php $selectedValidation = old('validation') ?: $attribute->validation ?>
+                                    @php $selectedValidation = old('validation') ?: $attribute->validation @endphp
 
                                     <label for="validation">
                                         {{ __('admin::app.catalog.attributes.input_validation') }}
@@ -665,7 +665,7 @@
                     swatch_type: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
 
                     isNullOptionChecked: false,
-                    
+
                     idNullOption: null
                 };
             },

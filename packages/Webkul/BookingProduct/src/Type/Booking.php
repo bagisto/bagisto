@@ -13,7 +13,6 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
@@ -53,7 +52,6 @@ class Booking extends Virtual
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
      * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
      * @param  \Webkul\BookingProduct\Helpers\BookingHelper  $bookingHelper
@@ -68,7 +66,6 @@ class Booking extends Virtual
         ProductImageRepository $productImageRepository,
         ProductVideoRepository $productVideoRepository,
         ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
-        InventorySourceRepository $inventorySourceRepository,
         TaxCategoryRepository $taxCategoryRepository,
         protected BookingProductRepository $bookingProductRepository,
         protected BookingHelper $bookingHelper
@@ -83,7 +80,6 @@ class Booking extends Virtual
             $productImageRepository,
             $productVideoRepository,
             $productCustomerGroupPriceRepository,
-            $inventorySourceRepository,
             $taxCategoryRepository
         );
     }
