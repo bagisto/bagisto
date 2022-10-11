@@ -778,7 +778,7 @@ class Core
     /**
      * Format date using current channel.
      *
-     * @param  \Illuminate\Support\Carbon|null  $date
+     * @param  \Illuminate\Support\Carbon|string|null  $date
      * @param  string  $format
      * @return string
      */
@@ -788,6 +788,10 @@ class Core
 
         if (is_null($date)) {
             $date = Carbon::now();
+        }
+
+        if (is_string($date)){
+            $date = Carbon::parse($date);
         }
 
         $date->setTimezone($channel->timezone);
@@ -1097,7 +1101,7 @@ class Core
 
                 if (! count($level2['children'])) {
                     continue;
-                } 
+                }
 
                 foreach ($level2['children'] as $key3 => $level3) {
                     $temp3 = explode('.', $level3['key']);

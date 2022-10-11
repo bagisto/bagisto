@@ -53,7 +53,7 @@
                                             </span>
 
                                             <span class="value">
-                                                {{ $order->created_at }}
+                                                {{ core()->formatDate($order->created_at, 'Y-m-d H:i:s') }}
                                             </span>
                                         </div>
 
