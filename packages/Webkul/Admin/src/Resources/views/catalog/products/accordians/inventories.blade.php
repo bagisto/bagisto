@@ -19,10 +19,6 @@
             <span class="control-info">{{ __('admin::app.catalog.products.pending-ordered-qty-info') }}</span>
         </div>
 
-        @php
-            $inventorySources = app(\Webkul\Inventory\Repositories\InventorySourceRepository::class)->findWhere(['status' => 1]);
-        @endphp
-
         @foreach ($inventorySources as $inventorySource)
             @php
                 $qty = old('inventories[' . $inventorySource->id . ']')

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
@@ -31,6 +32,7 @@ class ProductController extends Controller
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
@@ -41,6 +43,7 @@ class ProductController extends Controller
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected AttributeFamilyRepository $attributeFamilyRepository,
+        protected InventorySourceRepository $inventorySourceRepository,
         protected ProductRepository $productRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
@@ -139,7 +142,9 @@ class ProductController extends Controller
 
         $categories = $this->categoryRepository->getCategoryTree();
 
-        return view($this->_config['view'], compact('product', 'categories'));
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
+
+        return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }
 
     /**
