@@ -185,10 +185,8 @@ class ProductRepository extends Repository
             'images',
             'product.videos',
             'product.attribute_values',
-            'product.inventory_sources',
-            'product.inventories',
-            'product.ordered_inventories',
             'product.price_indices',
+            'product.inventory_indices',
             'product.reviews',
         ])->scopeQuery(function ($query) use ($params, $categoryId) {
             $prefix = DB::getTablePrefix();
@@ -279,7 +277,7 @@ class ProductRepository extends Repository
             $orderDirection = empty($params['order']) ? end($sortOptions) : $params['order'];
             
             if (empty($params['sort'])) {
-                $this->checkSortAttributeAndGenerateQuery($qb, current($sortOptions), $orderDirection);
+                $this->checkSortAttributeAndGenerateQuery($qb, $sortOptions[0], $orderDirection);
             } else {
                 $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
             }

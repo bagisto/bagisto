@@ -1,8 +1,8 @@
 <?php
 
-namespace Webkul\Product\Helpers\PriceIndexer;
+namespace Webkul\Product\Helpers\Indexers\Price;
 
-class Configurable extends AbstractPriceIndex
+class Grouped extends AbstractIndexer
 {
     /**
      * Returns product specific pricing for customer group
@@ -12,7 +12,7 @@ class Configurable extends AbstractPriceIndex
      */
     public function getIndices($customerGroup)
     {
-        $this->customerGroup = $customerGroup;
+        $this->setCustomerGroup($customerGroup);
 
         return [
             'min_price'         => $this->getMinimalPrice() ?? 0,
@@ -21,7 +21,7 @@ class Configurable extends AbstractPriceIndex
             'regular_max_price' => $this->getRegularMaximumPrice() ?? 0,
         ];
     }
-
+    
     /**
      * Get product minimal price.
      *
@@ -31,10 +31,8 @@ class Configurable extends AbstractPriceIndex
     {
         $minPrices = [];
 
-        foreach ($this->product->variants as $variant) {
-            if (! $variant->getTypeInstance()->isSaleable()) {
-                continue;
-            }
+        foreach ($this->product->grouped_products as $groupOptionProduct) {
+            $variant = $groupOptionProduct->associated_product;
 
             $variantIndexer = $variant->getTypeInstance()
                 ->getPriceIndexer()
@@ -44,13 +42,9 @@ class Configurable extends AbstractPriceIndex
             $minPrices[] = $variantIndexer->getMinimalPrice();
         }
 
-        if (empty($minPrices)) {
-            return 0;
-        }
-
-        return min($minPrices);
+        return empty($minPrices) ? 0 : min($minPrices);
     }
-    
+
     /**
      * Get product regular minimal price.
      *
@@ -60,19 +54,11 @@ class Configurable extends AbstractPriceIndex
     {
         $minPrices = [];
 
-        foreach ($this->product->variants as $variant) {
-            if (! $variant->getTypeInstance()->isSaleable()) {
-                continue;
-            }
-
-            $minPrices[] = $variant->price;
+        foreach ($this->product->grouped_products as $groupOptionProduct) {
+            $minPrices[] = $groupOptionProduct->associated_product->price;
         }
 
-        if (empty($minPrices)) {
-            return 0;
-        }
-
-        return min($minPrices);
+        return empty($minPrices) ? 0 : min($minPrices);
     }
 
     /**
@@ -84,10 +70,8 @@ class Configurable extends AbstractPriceIndex
     {
         $maxPrices = [];
 
-        foreach ($this->product->variants as $variant) {
-            if (! $variant->getTypeInstance()->isSaleable()) {
-                continue;
-            }
+        foreach ($this->product->grouped_products as $groupOptionProduct) {
+            $variant = $groupOptionProduct->associated_product;
 
             $variantIndexer = $variant->getTypeInstance()
                 ->getPriceIndexer()
@@ -97,11 +81,7 @@ class Configurable extends AbstractPriceIndex
             $maxPrices[] = $variantIndexer->getMinimalPrice();
         }
 
-        if (empty($maxPrices)) {
-            return 0;
-        }
-
-        return max($maxPrices);
+        return empty($maxPrices) ? 0 : max($maxPrices);
     }
 
     /**
@@ -113,18 +93,10 @@ class Configurable extends AbstractPriceIndex
     {
         $maxPrices = [];
 
-        foreach ($this->product->variants as $variant) {
-            if (! $variant->getTypeInstance()->isSaleable()) {
-                continue;
-            }
-
-            $maxPrices[] = $variant->price;
+        foreach ($this->product->grouped_products as $groupOptionProduct) {
+            $maxPrices[] = $groupOptionProduct->associated_product->price;
         }
 
-        if (empty($maxPrices)) {
-            return 0;
-        }
-
-        return max($maxPrices);
+        return empty($maxPrices) ? 0 : max($maxPrices);
     }
 }

@@ -23,7 +23,7 @@ class ProductPriceIndex extends Model implements ProductPriceIndexContract
     ];
 
     /**
-     * Get the product that owns the image.
+     * Get the product that owns the price index.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -4,7 +4,7 @@ namespace Webkul\Product\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Product\Console\Commands\PriceIndexer;
+use Webkul\Product\Console\Commands\Indexer;
 use Webkul\Product\Facades\ProductImage as ProductImageFacade;
 use Webkul\Product\Facades\ProductVideo as ProductVideoFacade;
 use Webkul\Product\Models\ProductProxy;
@@ -66,7 +66,7 @@ class ProductServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([PriceIndexer::class]);
+            $this->commands([Indexer::class]);
         }
     }
 
