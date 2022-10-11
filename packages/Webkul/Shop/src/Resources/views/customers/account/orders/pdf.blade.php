@@ -117,6 +117,13 @@
             .text-center {
                 text-align: center;
             }
+
+            .col-6 {
+                width: 40%;
+                display: inline-block;
+                vertical-align: top;
+                margin: 0px 10px;
+            }
         </style>
     </head>
 
@@ -124,77 +131,86 @@
         <div class="container">
             <div class="header">
                 <div class="row">
+                    <div class="col-12 text-center">
+                        <h1>{{ __('admin::app.sales.invoices.invoice') }}</h1>
+
+                        @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
+                            <div class="image">
+                                <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}" alt=""/>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-12">
-                        <h1 class="text-center">{{ __('admin::app.sales.invoices.invoice') }}</h1>
+                        <div class="col-6">
+                            <div class="merchant-details">
+                                <div>
+                                    <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
+                                </div>
+
+                                <div>{{ core()->getConfigData('sales.shipping.origin.address1') ?? '' }}</div>
+
+                                <div>
+                                    <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ?? '' }}</span>
+                                    <span>{{ core()->getConfigData('sales.shipping.origin.city') ?? '' }}</span>
+                                </div>
+
+                                <div>{{ core()->getConfigData('sales.shipping.origin.state') ?? '' }}</div>
+
+                                <div>{{ core()->getConfigData('sales.shipping.origin.country') ?? '' }}</div>
+                            </div>
+                            <div class="merchant-details">
+                                @if (core()->getConfigData('sales.shipping.origin.contact'))
+                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
+                                @endif
+
+                                @if (core()->getConfigData('sales.shipping.origin.vat_number'))
+                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-6" style="padding-left:80px">
+                            <div class="row">
+                                <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }} -</span>
+                                <span class="value">#{{ $invoice->order->increment_id }}</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }} -</span>
+                                <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
+                            </div>
+
+                            <div class="row">
+                                <span class="label">{{ __('shop::app.customer.account.order.view.invoice-date') }} -</span>
+                                <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">{{ __('shop::app.customer.account.order.view.order-date') }} -</span>
+                                <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
+                            </div>
+
+                            @if ($invoice->hasPaymentTerm())
+                                <div class="row">
+                                    <span class="label">{{ __('shop::app.customer.account.order.view.payment-terms') }} -</span>
+                                    <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
+                                </div>
+                            @endif
+
+                            @if (core()->getConfigData('sales.shipping.origin.bank_details'))
+                                <div class="row" style="padding-top:20px">
+                                    <span class="merchant-details-title">
+                                        {{ __('admin::app.admin.system.bank-details') }}:
+                                    </span> {{ core()->getConfigData('sales.shipping.origin.bank_details') }}
+                                </div>
+                            @endif
+                        </div>
                     </div>
-                </div>
-
-                @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
-                    <div class="image">
-                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}" alt=""/>
-                    </div>
-                @endif
-
-                <div class="merchant-details">
-                    <div>
-                        <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
-                    </div>
-
-                    <div>{{ core()->getConfigData('sales.shipping.origin.address1') ? core()->getConfigData('sales.shipping.origin.address1') : '' }}</div>
-
-                    <div>
-                        <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ? core()->getConfigData('sales.shipping.origin.zipcode') : '' }}</span>
-                        <span>{{ core()->getConfigData('sales.shipping.origin.city') ? core()->getConfigData('sales.shipping.origin.city') : '' }}</span>
-                    </div>
-
-                    <div>{{ core()->getConfigData('sales.shipping.origin.state') ? core()->getConfigData('sales.shipping.origin.state') : '' }}</div>
-
-                    <div>{{ core()->getConfigData('sales.shipping.origin.country') ?  core()->country_name(core()->getConfigData('sales.shipping.origin.country')) : '' }}</div>
-                </div>
-
-                <div class="merchant-details">
-                    @if (core()->getConfigData('sales.shipping.origin.contact'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
-                    @endif
-
-                    @if (core()->getConfigData('sales.shipping.origin.vat_number'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
-                    @endif
-
-                    @if (core()->getConfigData('sales.shipping.origin.bank_details'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.bank-details') }}:</span> {{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
-                    @endif
                 </div>
             </div>
 
             <div class="invoice-summary">
-                <div class="row">
-                    <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }} -</span>
-                    <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
-                </div>
-
-                <div class="row">
-                    <span class="label">{{ __('shop::app.customer.account.order.view.invoice-date') }} -</span>
-                    <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
-                </div>
-
-                <div class="row">
-                    <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }} -</span>
-                    <span class="value">#{{ $invoice->order->increment_id }}</span>
-                </div>
-
-                <div class="row">
-                    <span class="label">{{ __('shop::app.customer.account.order.view.order-date') }} -</span>
-                    <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
-                </div>
-
-                @if ($invoice->hasPaymentTerm())
-                    <div class="row">
-                        <span class="label">{{ __('shop::app.customer.account.order.view.payment-terms') }} -</span>
-                        <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
-                    </div>
-                @endif
-
                 <div class="table address">
                     <table>
                         <thead>
