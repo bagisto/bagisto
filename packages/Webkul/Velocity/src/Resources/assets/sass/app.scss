@@ -283,19 +283,22 @@ label {
     }
 
     .locale-switcher {
-        padding-left: 5px;
+        padding-left: 3px;
         position: relative;
-        padding-right: 15px;
         text-align: left;
         cursor: pointer;
     }
 
+    .d-inline-block {
+        margin-right: 12px;
+    }
+
     .dropdown {
-        margin-right: 15px;
+        margin-right: 12px;
 
         .select-icon-container {
             .select-icon {
-                right: 0;
+                right: -10px;
             }
         }
     }
@@ -523,8 +526,11 @@ header {
                 background-color: #26a37cc7;
                 border-radius: 8px;
 
-                span,i {
-                    color: #fff;
+                #mini-cart {
+                    
+                    span,i {
+                        color: #fff;
+                    }
                 }
             }
 

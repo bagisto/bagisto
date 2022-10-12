@@ -235,9 +235,9 @@
 }
 
 .product-card-new {
-    width: 14rem;
+    width: 12rem;
     border: none !important;
-    margin: 0px 15px;
+    height: 100%;
 
     .category-product-image-container {
         margin: 0 auto;
@@ -254,7 +254,8 @@
         height: 100%;
         max-height: 300px;
         position: relative;
-        display: block;
+        display: grid;
+        align-items: center;
 
         img {
             max-width: 100%;
@@ -646,7 +647,7 @@
         font-size: 14px;
         max-height: 200px;
         overflow-y: scroll;
-        padding: 10px 15px 0 20px;
+        padding: 8px 10px 0;
     }
 
     .small-card-container {
@@ -678,17 +679,20 @@
 
         .remove-item {
             top: -10px;
-            left: -10px;
+            left: -5px;
             border-radius: 50%;
             position: absolute;
             background: #111111;
             color: #ffffff;
-            padding: 0px 4px;
+            // padding: 0px 4px;
+            width: 18px;
+            height: 18px;
 
             .rango-close {
                 font-size: 12px;
                 font-weight: 600;
                 padding: 0;
+                margin-left: 3px;
             }
         }
     }
@@ -699,6 +703,12 @@
 
     .modal-footer {
         padding-right: 15px;
+        padding-left: 10px;
+        
+        h5, a {
+            padding-left: 0px !important;
+            margin-right: 0px !important;
+        }
     }
 }
 
