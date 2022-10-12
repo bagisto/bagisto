@@ -11,6 +11,10 @@ body {
             margin-right: 8.333333%;
         }
 
+        .float-right {
+            float: left !important;
+        }
+
         .velocity-divide-page {
             .right {
                 padding-left: 0 !important;
@@ -187,6 +191,10 @@ body {
                     margin-right: 1%;
                 }
             }
+        }
+
+        .filter-tag {
+            margin-left: 10px;
         }
 
         #top {
@@ -397,8 +405,10 @@ body {
             }
 
             .material-icons.cross {
-                left: 20px;
+                left: 8px;
                 right: unset;
+                top: 5px;
+                font-size: 24px !important;
             }
         }
 
@@ -702,6 +712,16 @@ body {
             .velocity-divide-page {
                 .right {
                     padding: 0 20px !important;
+                }
+            }
+
+            .cart-details {
+                .cart-content {
+                    .product-price.col-1 {
+                        .card-current-price.fw6 {
+                            float: left;
+                        }
+                    }
                 }
             }
         }

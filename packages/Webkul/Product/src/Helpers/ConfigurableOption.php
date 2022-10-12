@@ -27,9 +27,7 @@ class ConfigurableOption extends AbstractProduct
                 'parent',
                 'product.attribute_values',
                 'product.price_indices',
-                'product.inventory_sources',
-                'product.inventories',
-                'product.ordered_inventories',
+                'product.inventory_indices',
                 'images',
                 'videos',
             ])
