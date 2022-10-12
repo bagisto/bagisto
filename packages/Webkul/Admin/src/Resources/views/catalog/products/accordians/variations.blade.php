@@ -269,7 +269,7 @@
                         type="number"
                         :name="[variantInputName + '[price]']"
                         v-model="variant.price"
-                        v-validate="'required'"
+                        v-validate="'required|decimal|min_value:0'"
                         data-vv-as="&quot;{{ __('admin::app.catalog.products.price') }}&quot;"
                         step="any"/>
 
