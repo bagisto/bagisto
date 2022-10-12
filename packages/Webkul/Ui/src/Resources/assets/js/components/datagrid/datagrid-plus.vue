@@ -3,13 +3,11 @@
         <div class="grid-container">
             <div class="grid-top">
                 <div class="datagrid-filters">
-                    <div class="filter-left">
-                        <datagrid-extra-filters
-                            :extra-filters="extraFilters"
-                            :translations="translations"
-                            @onFilter="changeExtraFilter($event)"
-                        ></datagrid-extra-filters>
-                    </div>
+                    <datagrid-extra-filters
+                        :extra-filters="extraFilters"
+                        :translations="translations"
+                        @onFilter="changeExtraFilter($event)"
+                    ></datagrid-extra-filters>
                 </div>
 
                 <div class="datagrid-filters" id="datagrid-filters">
@@ -456,7 +454,7 @@ export default {
                 }
             }
         },
-        
+
         clearAllFilters() {
             this.filters = [];
 
