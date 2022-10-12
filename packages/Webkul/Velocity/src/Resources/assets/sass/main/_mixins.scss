@@ -28,8 +28,8 @@
     padding: 0px !important;
 }
 
-@mixin flexBox($display, $space) {
-    display: $display;
+@mixin flexBox($space, $align) {
+    display: flex;
     justify-content: $space;
-    align-items: center;
+    align-items: $align;
 }

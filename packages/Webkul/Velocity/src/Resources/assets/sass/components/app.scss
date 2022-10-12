@@ -1625,6 +1625,8 @@
 
 .product-price {
     display: inline-block;
+    @include flexBox(flex-end, inherit);
+    flex-direction: row-reverse;
 
     .price-label {
         margin-right: 6px;
