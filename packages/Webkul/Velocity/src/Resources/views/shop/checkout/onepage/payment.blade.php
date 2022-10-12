@@ -41,7 +41,7 @@
                             <span class="method-summary">{{ __('shop::app.checkout.onepage.payment-method-name.'.$payment['description']) }}</span>
                             </div>
 
-                            <?php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($payment['method']); ?>
+                            @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($payment['method']); @endphp
 
                             @if (! empty($additionalDetails))
                                 <div class="instructions" v-show="payment.method == '{{$payment['method']}}'">

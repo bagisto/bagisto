@@ -1122,6 +1122,17 @@ i.within-circle {
         box-shadow: 5px 0 5px -5px #333;
         background-color: #ffffff;
     }
+
+    .cart-details .cart-content .product-details-content .item-actions {
+        gap: 20px;
+        width: 150%;
+        display: grid;
+        grid-template-columns: auto auto;
+
+        > div:first-child {
+            margin-right: 0px !important;
+        }
+    }
 }
 
 .velocity-divide-page .right {

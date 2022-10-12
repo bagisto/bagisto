@@ -2,8 +2,8 @@
 
 return [
     'save'          => 'Sauvegarder',
-    'copy-of'       => 'Copie de',
-    'copy-of-slug'  => 'copie de-',
+    'copy-of'       => 'Copie de :value',
+    'copy-of-slug'  => 'copie de-:value',
     'create'        => 'Créer',
     'update'        => 'Mettre à jour',
     'delete'        => 'Effacer',
@@ -628,6 +628,9 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [

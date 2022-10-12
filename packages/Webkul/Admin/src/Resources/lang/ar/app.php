@@ -5,8 +5,8 @@ return [
     'create'        => 'إنشاء',
     'update'        => 'تحديث',
     'delete'        => 'حذف',
-    'copy-of'       => 'نسخة من ',
-    'copy-of-slug'  => 'نسخة-من-',
+    'copy-of'       => 'نسخة من :value',
+    'copy-of-slug'  => 'نسخة-من-:value',
     'failed'        => 'فشل',
     'store'         => 'متجر',
     'image'         => 'صورة',
@@ -624,6 +624,9 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [

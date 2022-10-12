@@ -1,8 +1,8 @@
 <?php
 
-namespace Webkul\Product\Helpers\PriceIndexer;
+namespace Webkul\Product\Helpers\Indexers\Price;
 
-class Bundle extends AbstractPriceIndex
+class Bundle extends AbstractIndexer
 {
     /**
      * Returns product specific pricing for customer group
@@ -12,7 +12,7 @@ class Bundle extends AbstractPriceIndex
      */
     public function getIndices($customerGroup)
     {
-        $this->customerGroup = $customerGroup;
+        $this->setCustomerGroup($customerGroup);
 
         return [
             'min_price'         => $this->getMinimalPrice() ?? 0,
