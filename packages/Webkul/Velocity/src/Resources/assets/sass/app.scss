@@ -1134,9 +1134,10 @@ i.within-circle {
         }
     }
 }
-
-.velocity-divide-page .right {
-    width: 99% !important;
+@media (max-width: 992px) {
+    body.rtl .velocity-divide-page .left {
+        width: 77% !important;
+    }
 }
 
 .main-content-wrapper .content-list ul {
