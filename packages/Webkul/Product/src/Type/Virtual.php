@@ -2,7 +2,7 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Product\Helpers\PriceIndexer\Virtual as VirtualIndexer;
+use Webkul\Product\Helpers\Indexers\Price\Virtual as VirtualIndexer;
 
 class Virtual extends AbstractType
 {

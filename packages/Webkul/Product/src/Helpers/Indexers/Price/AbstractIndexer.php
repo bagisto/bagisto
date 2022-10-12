@@ -1,12 +1,12 @@
 <?php
 
-namespace Webkul\Product\Helpers\PriceIndexer;
+namespace Webkul\Product\Helpers\Indexers\Price;
 
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\CatalogRule\Helpers\CatalogRuleProductPrice;
 
-abstract class AbstractPriceIndex
+abstract class AbstractIndexer
 {
     /**
      * Product instance.
@@ -42,7 +42,7 @@ abstract class AbstractPriceIndex
      * Set current product
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Webkul\Product\Helpers\ProductPriceIndex\AbstractPriceIndex
+     * @return \Webkul\Product\Helpers\Indexers\Price\AbstractPriceIndex
      */
     public function setProduct($product)
     {
@@ -55,7 +55,7 @@ abstract class AbstractPriceIndex
      * Set customer group
      *
      * @param  \Webkul\Customer\Contracts\CustomerGroup  $customerGroup
-     * @return \Webkul\Product\Helpers\ProductPriceIndex\AbstractPriceIndex
+     * @return \Webkul\Product\Helpers\Indexers\Price\AbstractPriceIndex
      */
     public function setCustomerGroup($customerGroup)
     {
@@ -72,7 +72,7 @@ abstract class AbstractPriceIndex
      */
     public function getIndices($customerGroup)
     {
-        $this->customerGroup = $customerGroup;
+        $this->setCustomerGroup($customerGroup);
 
         return [
             'min_price'         => ($minPrice = $this->getMinimalPrice()) ?? 0,
