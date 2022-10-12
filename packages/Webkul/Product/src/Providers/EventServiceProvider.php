@@ -12,21 +12,29 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'catalog.attribute.create.after' => [
-            'Webkul\Product\Listeners\Attribute@removeOrCreateProductFlatColumn',
+        'catalog.attribute.create.after'  => [
+            'Webkul\Product\Listeners\Attribute@afterCreate',
         ],
-        'catalog.attribute.update.after' => [
-            'Webkul\Product\Listeners\Attribute@removeOrCreateProductFlatColumn',
+        'catalog.attribute.update.after'  => [
+            'Webkul\Product\Listeners\Attribute@afterUpdate',
         ],
         'catalog.attribute.delete.before' => [
-            'Webkul\Product\Listeners\Attribute@removeProductFlatColumn',
+            'Webkul\Product\Listeners\Attribute@beforeRemove',
         ],
-        'catalog.product.create.after' => [
-            'Webkul\Product\Listeners\Product@updateOrCreateProductFlatRecord',
+        'catalog.product.create.after'    => [
+            'Webkul\Product\Listeners\Product@afterCreate',
         ],
-        'catalog.product.update.after' => [
-            'Webkul\Product\Listeners\Product@updateOrCreateProductFlatRecord',
-            'Webkul\Product\Listeners\Product@reIndexPrice',
+        'catalog.product.update.after'    => [
+            'Webkul\Product\Listeners\Product@afterUpdate',
+        ],
+        'checkout.order.save.after'       => [
+            'Webkul\Product\Listeners\Order@afterCreate',
+        ],
+        'sales.order.cancel.after'        => [
+            'Webkul\Product\Listeners\Order@afterCancel',
+        ],
+        'sales.refund.save.after'         => [
+            'Webkul\Product\Listeners\Refund@afterCreate',
         ],
     ];
 }
