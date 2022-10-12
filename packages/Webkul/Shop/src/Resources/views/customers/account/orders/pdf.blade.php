@@ -119,10 +119,10 @@
             }
 
             .col-6 {
-                width: 40%;
+                width: 42%;
                 display: inline-block;
                 vertical-align: top;
-                margin: 0px 10px;
+                margin: 0px 5px;
             }
         </style>
     </head>
