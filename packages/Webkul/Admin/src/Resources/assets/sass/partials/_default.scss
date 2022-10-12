@@ -1023,17 +1023,3 @@ body {
         }
     }
 }
-
-@media only screen and (min-width: 280px) and (max-width: 420px) {
-    .grid-container {
-        .grid-top {
-            .datagrid-filters {
-                .filter-left {
-                    div {
-                        display: contents !important;
-                    }
-                }
-            }
-        }
-    }
-}
