@@ -718,6 +718,16 @@ body {
                     padding: 0 20px !important;
                 }
             }
+
+            .cart-details {
+                .cart-content {
+                    .product-price.col-1 {
+                        .card-current-price.fw6 {
+                            float: left;
+                        }
+                    }
+                }
+            }
         }
     }
 }
