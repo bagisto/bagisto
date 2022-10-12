@@ -287,7 +287,7 @@
                         type="number"
                         :name="[variantInputName + '[weight]']" class="control"
                         v-model="variant.weight"
-                        v-validate="'required|numeric|min:0'"
+                        v-validate="'required|numeric|min_value:0'"
                         data-vv-as="&quot;{{ __('admin::app.catalog.products.weight') }}&quot;"
                         step="any"/>
 
