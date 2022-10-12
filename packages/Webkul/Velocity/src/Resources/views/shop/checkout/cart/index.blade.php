@@ -14,7 +14,6 @@
     <style type="text/css">
         @media only screen and (max-width: 600px) {
             .rango-delete {
-                margin-top: 10px;
                 margin-left: -10px !important;
             }
         }
@@ -126,7 +125,7 @@
                                                     $moveToWishlist = trans('shop::app.checkout.cart.move-to-wishlist');
                                                 @endphp
 
-                                                <div class="no-padding col-12 cursor-pointer fs16 item-actions">
+                                                <div class="no-padding cursor-pointer fs16 item-actions">
                                                     @auth('customer')
                                                         @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
                                                             @if (
@@ -156,7 +155,7 @@
                                                             href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
                                                             @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 
-                                                            <span class="rango-delete fs24"></span>
+                                                            <span class="rango-delete mt-0 fs24"></span>
                                                             <span class="align-vertical-super">{{ __('shop::app.checkout.cart.remove') }}</span>
                                                         </a>
                                                     </div>
