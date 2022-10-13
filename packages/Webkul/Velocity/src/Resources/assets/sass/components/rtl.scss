@@ -319,10 +319,6 @@ body {
                         }
                     }
                 }
-
-                input[type=search] {
-                    margin-right: 35px;
-                }
             }
             
             .account-action {
@@ -341,6 +337,16 @@ body {
                     }
                 }
             }
+        }
+
+        .search-filter {
+            .icon-wrapper {
+                right: 264px;
+            }
+        }
+
+        .account-content .account-layout .account-table-content input[type=search] {
+            padding-right: 35px;
         }
 
         .image-wrapper.image-wrapper .image-item {
