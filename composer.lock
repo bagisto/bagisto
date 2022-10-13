@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f54a5dbf274bab68adb5aec77dbdc1fa",
+    "content-hash": "24a0dc2b81de04eed28797f623305a33",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -98,70 +98,19 @@
             "time": "2022-02-05T10:42:52+00:00"
         },
         {
-            "name": "bagisto/legacy-api",
+            "name": "bagisto/rest-api",
             "version": "v1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bagisto/legacy-api.git",
-                "reference": "a404fbfb2b99bbf9de6502d77c90c6cfd53b97ce"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/legacy-api/zipball/a404fbfb2b99bbf9de6502d77c90c6cfd53b97ce",
-                "reference": "a404fbfb2b99bbf9de6502d77c90c6cfd53b97ce",
-                "shasum": ""
-            },
-            "require": {
-                "php-open-source-saver/jwt-auth": "^1.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Webkul\\API\\Providers\\APIServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Webkul\\API\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Prashant Singh",
-                    "email": "prashant.singh852@webkul.com"
-                },
-                {
-                    "name": "Devansh Bawari",
-                    "email": "devansh.bawari419@webkul.com"
-                }
-            ],
-            "support": {
-                "issues": "https://github.com/bagisto/legacy-api/issues",
-                "source": "https://github.com/bagisto/legacy-api/tree/v1.0.0"
-            },
-            "time": "2021-11-19T07:54:39+00:00"
-        },
-        {
-            "name": "bagisto/rest-api",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
                 "url": "https://github.com/bagisto/rest-api.git",
-                "reference": "9c822e5fc5bd72a3a61c26c27d1cbb5b0d4856ab"
+                "reference": "9fbfea5215e1dc1e7158819905d3ea6d7ae71a02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/rest-api/zipball/9c822e5fc5bd72a3a61c26c27d1cbb5b0d4856ab",
-                "reference": "9c822e5fc5bd72a3a61c26c27d1cbb5b0d4856ab",
+                "url": "https://api.github.com/repos/bagisto/rest-api/zipball/9fbfea5215e1dc1e7158819905d3ea6d7ae71a02",
+                "reference": "9fbfea5215e1dc1e7158819905d3ea6d7ae71a02",
                 "shasum": ""
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -187,9 +136,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bagisto/rest-api/issues",
-                "source": "https://github.com/bagisto/rest-api/tree/master"
+                "source": "https://github.com/bagisto/rest-api/tree/v1.0.0"
             },
-            "time": "2022-07-18T12:34:49+00:00"
+            "time": "2022-10-06T11:02:12+00:00"
         },
         {
             "name": "bagistobrasil/bagisto-product-social-share",
@@ -3068,141 +3017,6 @@
             "time": "2022-05-20T13:38:08+00:00"
         },
         {
-            "name": "lcobucci/clock",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lcobucci/clock.git",
-                "reference": "fb533e093fd61321bfcbac08b131ce805fe183d3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/clock/zipball/fb533e093fd61321bfcbac08b131ce805fe183d3",
-                "reference": "fb533e093fd61321bfcbac08b131ce805fe183d3",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0",
-                "stella-maris/clock": "^0.1.4"
-            },
-            "require-dev": {
-                "infection/infection": "^0.26",
-                "lcobucci/coding-standard": "^8.0",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-deprecation-rules": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Lcobucci\\Clock\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Luís Cobucci",
-                    "email": "lcobucci@gmail.com"
-                }
-            ],
-            "description": "Yet another clock abstraction",
-            "support": {
-                "issues": "https://github.com/lcobucci/clock/issues",
-                "source": "https://github.com/lcobucci/clock/tree/2.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/lcobucci",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/lcobucci",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2022-04-19T19:34:17+00:00"
-        },
-        {
-            "name": "lcobucci/jwt",
-            "version": "4.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "fe2d89f2eaa7087af4aa166c6f480ef04e000582"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/fe2d89f2eaa7087af4aa166c6f480ef04e000582",
-                "reference": "fe2d89f2eaa7087af4aa166c6f480ef04e000582",
-                "shasum": ""
-            },
-            "require": {
-                "ext-hash": "*",
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "ext-openssl": "*",
-                "ext-sodium": "*",
-                "lcobucci/clock": "^2.0",
-                "php": "^7.4 || ^8.0"
-            },
-            "require-dev": {
-                "infection/infection": "^0.21",
-                "lcobucci/coding-standard": "^6.0",
-                "mikey179/vfsstream": "^1.6.7",
-                "phpbench/phpbench": "^1.0",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-deprecation-rules": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/php-invoker": "^3.1",
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Lcobucci\\JWT\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Luís Cobucci",
-                    "email": "lcobucci@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A simple library to work with JSON Web Token and JSON Web Signature",
-            "keywords": [
-                "JWS",
-                "jwt"
-            ],
-            "support": {
-                "issues": "https://github.com/lcobucci/jwt/issues",
-                "source": "https://github.com/lcobucci/jwt/tree/4.1.5"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/lcobucci",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/lcobucci",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2021-09-28T19:34:56+00:00"
-        },
-        {
             "name": "league/commonmark",
             "version": "2.3.4",
             "source": {
@@ -4235,73 +4049,6 @@
             "time": "2021-07-05T08:18:36+00:00"
         },
         {
-            "name": "namshi/jose",
-            "version": "7.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/namshi/jose.git",
-                "reference": "89a24d7eb3040e285dd5925fcad992378b82bcff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/namshi/jose/zipball/89a24d7eb3040e285dd5925fcad992378b82bcff",
-                "reference": "89a24d7eb3040e285dd5925fcad992378b82bcff",
-                "shasum": ""
-            },
-            "require": {
-                "ext-date": "*",
-                "ext-hash": "*",
-                "ext-json": "*",
-                "ext-pcre": "*",
-                "ext-spl": "*",
-                "php": ">=5.5",
-                "symfony/polyfill-php56": "^1.0"
-            },
-            "require-dev": {
-                "phpseclib/phpseclib": "^2.0",
-                "phpunit/phpunit": "^4.5|^5.0",
-                "satooshi/php-coveralls": "^1.0"
-            },
-            "suggest": {
-                "ext-openssl": "Allows to use OpenSSL as crypto engine.",
-                "phpseclib/phpseclib": "Allows to use Phpseclib as crypto engine, use version ^2.0."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Namshi\\JOSE\\": "src/Namshi/JOSE/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alessandro Nadalin",
-                    "email": "alessandro.nadalin@gmail.com"
-                },
-                {
-                    "name": "Alessandro Cinelli (cirpo)",
-                    "email": "alessandro.cinelli@gmail.com"
-                }
-            ],
-            "description": "JSON Object Signing and Encryption library for PHP.",
-            "keywords": [
-                "JSON Web Signature",
-                "JSON Web Token",
-                "JWS",
-                "json",
-                "jwt",
-                "token"
-            ],
-            "support": {
-                "issues": "https://github.com/namshi/jose/issues",
-                "source": "https://github.com/namshi/jose/tree/master"
-            },
-            "time": "2016-12-05T07:27:31+00:00"
-        },
-        {
             "name": "nesbot/carbon",
             "version": "2.59.1",
             "source": {
@@ -5038,100 +4785,6 @@
                 "source": "https://github.com/dompdf/php-svg-lib/tree/0.4.1"
             },
             "time": "2022-03-07T12:52:04+00:00"
-        },
-        {
-            "name": "php-open-source-saver/jwt-auth",
-            "version": "1.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHP-Open-Source-Saver/jwt-auth.git",
-                "reference": "5fd8c185453d875835c24d4ce50be7396af6ae14"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/5fd8c185453d875835c24d4ce50be7396af6ae14",
-                "reference": "5fd8c185453d875835c24d4ce50be7396af6ae14",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "illuminate/auth": "^6|^7|^8.67|^9",
-                "illuminate/contracts": "^6|^7|^8.67|^9",
-                "illuminate/http": "^6|^7|^8.67|^9",
-                "illuminate/support": "^6|^7|^8.67|^9",
-                "lcobucci/jwt": "^4.0",
-                "namshi/jose": "^7.0",
-                "nesbot/carbon": "^1.0|^2.0",
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3",
-                "illuminate/console": "^6|^7|^8.67|^9",
-                "illuminate/routing": "^6|^7|^8.67|^9",
-                "mockery/mockery": "^1.4.4",
-                "orchestra/testbench": "^4.18|^5.8|^6.3|^7",
-                "phpstan/phpstan": "^1",
-                "phpunit/phpunit": "^8.5|^9.4",
-                "rector/rector": "^0.12.4",
-                "vlucas/phpdotenv": "^5.2.0",
-                "yoast/phpunit-polyfills": "^1.0.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-develop": "1.0-dev"
-                },
-                "laravel": {
-                    "aliases": {
-                        "JWTAuth": "PHPOpenSourceSaver\\JWTAuth\\Facades\\JWTAuth",
-                        "JWTFactory": "PHPOpenSourceSaver\\JWTAuth\\Facades\\JWTFactory"
-                    },
-                    "providers": [
-                        "PHPOpenSourceSaver\\JWTAuth\\Providers\\LaravelServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PHPOpenSourceSaver\\JWTAuth\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sean Tymon",
-                    "email": "tymon148@gmail.com",
-                    "homepage": "https://tymon.xyz",
-                    "role": "Forked package creator | Developer"
-                },
-                {
-                    "name": "Eric Schricker",
-                    "email": "eric.schricker@adiutabyte.de",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Fabio William Conceição",
-                    "email": "messhias@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "JSON Web Token Authentication for Laravel and Lumen",
-            "homepage": "https://github.com/PHP-Open-Source-Saver/jwt-auth",
-            "keywords": [
-                "Authentication",
-                "JSON Web Token",
-                "auth",
-                "jwt",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/PHP-Open-Source-Saver/jwt-auth/issues",
-                "source": "https://github.com/PHP-Open-Source-Saver/jwt-auth"
-            },
-            "time": "2022-04-22T06:31:30+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",
@@ -7011,53 +6664,6 @@
             "time": "2022-03-11T08:16:01+00:00"
         },
         {
-            "name": "stella-maris/clock",
-            "version": "0.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://gitlab.com/stella-maris/clock.git",
-                "reference": "8a0a967896df4c63417385dc69328a0aec84d9cf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/stella-maris%2Fclock/repository/archive.zip?sha=8a0a967896df4c63417385dc69328a0aec84d9cf",
-                "reference": "8a0a967896df4c63417385dc69328a0aec84d9cf",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0|^8.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "StellaMaris\\Clock\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andreas Heigl",
-                    "role": "Maintainer"
-                }
-            ],
-            "description": "A pre-release of the proposed PSR-20 Clock-Interface",
-            "homepage": "https://gitlab.com/stella-maris/clock",
-            "keywords": [
-                "clock",
-                "datetime",
-                "point in time",
-                "psr20"
-            ],
-            "support": {
-                "issues": "https://gitlab.com/stella-maris/clock/-/issues",
-                "source": "https://gitlab.com/stella-maris/clock/-/tree/0.1.4"
-            },
-            "time": "2022-04-17T14:12:26+00:00"
-        },
-        {
             "name": "symfony/console",
             "version": "v6.1.2",
             "source": {
@@ -8405,74 +8011,6 @@
                 }
             ],
             "time": "2022-05-24T11:49:31+00:00"
-        },
-        {
-            "name": "symfony/polyfill-php56",
-            "version": "v1.20.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675",
-                "reference": "54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "type": "metapackage",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.20-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting some PHP 5.6+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-php56/tree/v1.20.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-10-23T14:02:19+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
@@ -12823,7 +12361,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "bagisto/rest-api": 20,
         "flynsarmy/db-blade-compiler": 20,
         "codeception/codeception": 20,
         "codeception/module-laravel": 20

@@ -23,10 +23,4 @@ class ReviewRepository extends Repository
     {
         return 'Webkul\Product\Contracts\ProductReview';
     }
-
-
-    function getAll()
-    {
-        return $this->all();
-    }
 }

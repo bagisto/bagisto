@@ -43,7 +43,7 @@ class AttributeRepository extends Repository
     {
         $data = $this->validateUserInput($data);
 
-        $options = isset($data['options']) ? $data['options'] : [];
+        $options = $data['options'] ?? [];
 
         unset($data['options']);
 
@@ -67,7 +67,7 @@ class AttributeRepository extends Repository
      * Update attribute.
      *
      * @param  array  $data
-     * @param  int $id
+     * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Attribute\Contracts\Attribute
      */
@@ -81,24 +81,28 @@ class AttributeRepository extends Repository
 
         $attribute->update($data);
 
-        if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
-            if (isset($data['options'])) {
-                foreach ($data['options'] as $optionId => $optionInputs) {
-                    $isNew = $optionInputs['isNew'] == 'true';
+        if (! in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
+            return $attribute;
+        }
 
-                    if ($isNew) {
-                        $this->attributeOptionRepository->create(array_merge([
-                            'attribute_id' => $attribute->id,
-                        ], $optionInputs));
-                    } else {
-                        $isDelete = $optionInputs['isDelete'] == 'true';
+        if (! isset($data['options'])) {
+            return $attribute;
+        }
 
-                        if ($isDelete) {
-                            $this->attributeOptionRepository->delete($optionId);
-                        } else {
-                            $this->attributeOptionRepository->update($optionInputs, $optionId);
-                        }
-                    }
+        foreach ($data['options'] as $optionId => $optionInputs) {
+            $isNew = $optionInputs['isNew'] == 'true';
+
+            if ($isNew) {
+                $this->attributeOptionRepository->create(array_merge([
+                    'attribute_id' => $attribute->id,
+                ], $optionInputs));
+            } else {
+                $isDelete = $optionInputs['isDelete'] == 'true';
+
+                if ($isDelete) {
+                    $this->attributeOptionRepository->delete($optionId);
+                } else {
+                    $this->attributeOptionRepository->update($optionInputs, $optionId);
                 }
             }
         }
@@ -134,7 +138,7 @@ class AttributeRepository extends Repository
      *
      * @return array
      */
-    public function getFilterAttributes()
+    public function getFilterableAttributes()
     {
         return $this->model->with(['options', 'options.translations'])->where('is_filterable', 1)->get();
     }
@@ -147,7 +151,14 @@ class AttributeRepository extends Repository
      */
     public function getProductDefaultAttributes($codes = null)
     {
-        $attributeColumns  = ['id', 'code', 'value_per_channel', 'value_per_locale', 'type', 'is_filterable'];
+        $attributeColumns  = [
+            'id',
+            'code',
+            'value_per_channel',
+            'value_per_locale',
+            'type',
+            'is_filterable'
+        ];
 
         if (
             ! is_array($codes)

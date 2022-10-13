@@ -9,7 +9,15 @@ class DefaultSlot extends Booking
     /**
      * @return array
      */
-    protected $daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    protected $daysOfWeek = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    ];
     
     /**
      * Returns slots for a particular day
@@ -169,7 +177,7 @@ class DefaultSlot extends Booking
                 // Get already ordered qty for this slot
                 $orderedQty = 0;
 
-                $qty = isset($timeDuration['qty']) ? ( $timeDuration['qty'] - $orderedQty ) : 1;
+                $qty = isset($timeDuration['qty']) ? ($timeDuration['qty'] - $orderedQty) : 1;
 
                 if (
                     $qty

@@ -37,7 +37,7 @@
                     <accordian title="{{ __('admin::app.customers.addresses.general') }}" :active="true">
                         <div slot="body">
 
-                            <?php $addresses = explode(PHP_EOL, $address->address1); ?>
+                            @php $addresses = explode(PHP_EOL, $address->address1); @endphp
 
                             <div class="control-group" :class="[errors.has('company_name') ? 'has-error' : '']">
                                 <label for="company_name">{{ __('shop::app.customer.account.address.create.company_name') }}</label>
@@ -65,7 +65,7 @@
 
                             <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
                                 <label for="address_0" class="required">{{ __('shop::app.customer.account.address.edit.street-address') }}</label>
-                                <input type="text" class="control" name="address1[]" id="address_0" v-validate="'required'" value="{{ isset($addresses[0]) ? $addresses[0] : '' }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
+                                <input type="text" class="control" name="address1[]" id="address_0" v-validate="'required'" value="{{ $addresses[0] ?? '' }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
                                 <span class="control-error" v-if="errors.has('address1[]')">@{{ errors.first('address1[]') }}</span>
                             </div>
 
@@ -75,7 +75,7 @@
                             )
                                 <div class="control-group" style="margin-top: -25px;">
                                     @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
-                                        <input type="text" class="control" name="address1[{{ $i }}]" id="address_{{ $i }}" value="{{ isset($addresses[$i]) ? $addresses[$i] : '' }}">
+                                        <input type="text" class="control" name="address1[{{ $i }}]" id="address_{{ $i }}" value="{{ $addresses[$i] ?? '' }}">
                                     @endfor
                                 </div>
                             @endif

@@ -40,10 +40,10 @@ class AttributeFamily extends Model implements AttributeFamilyContract
     public function getComparableAttributesBelongsToFamily()
     {
         return (AttributeProxy::modelClass())::join('attribute_group_mappings', 'attribute_group_mappings.attribute_id', '=', 'attributes.id')
-                                             ->select('attributes.*')
-                                             ->where('attributes.is_comparable', 1)
-                                             ->distinct()
-                                             ->get();
+            ->select('attributes.*')
+            ->where('attributes.is_comparable', 1)
+            ->distinct()
+            ->get();
     }
 
     /**
@@ -51,8 +51,7 @@ class AttributeFamily extends Model implements AttributeFamilyContract
      */
     public function getCustomAttributesAttribute()
     {
-        return $this->custom_attributes()
-                    ->get();
+        return $this->custom_attributes()->get();
     }
 
     /**
@@ -60,8 +59,7 @@ class AttributeFamily extends Model implements AttributeFamilyContract
      */
     public function attribute_groups(): HasMany
     {
-        return $this->hasMany(AttributeGroupProxy::modelClass())
-                    ->orderBy('position');
+        return $this->hasMany(AttributeGroupProxy::modelClass())->orderBy('position');
     }
 
     /**
@@ -70,9 +68,9 @@ class AttributeFamily extends Model implements AttributeFamilyContract
     public function getConfigurableAttributesAttribute()
     {
         return $this->custom_attributes()
-                    ->where('attributes.is_configurable', 1)
-                    ->where('attributes.type', 'select')
-                    ->get();
+            ->where('attributes.is_configurable', 1)
+            ->where('attributes.type', 'select')
+            ->get();
     }
 
     /**

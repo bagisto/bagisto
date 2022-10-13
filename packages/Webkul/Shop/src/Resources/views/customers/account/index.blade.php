@@ -2,7 +2,7 @@
 
 @section('content-wrapper')
     <div>
-        @if (request()->route()->getName() !== 'customer.profile.index')
+        @if (request()->route()->getName() !== 'shop.customer.profile.index')
             @if (Breadcrumbs::exists())
                 {{ Breadcrumbs::render() }}
             @endif

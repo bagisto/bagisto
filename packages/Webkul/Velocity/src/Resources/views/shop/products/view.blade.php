@@ -3,20 +3,6 @@
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('customHelper', 'Webkul\Velocity\Helpers\Helper')
 
-@php
-    $total = $reviewHelper->getTotalReviews($product);
-
-    $avgRatings = $reviewHelper->getAverageRating($product);
-    $avgStarRating = round($avgRatings);
-
-    $productImages = [];
-    $images = productimage()->getGalleryImages($product);
-
-    foreach ($images as $key => $image) {
-        array_push($productImages, $image['medium_image_url']);
-    }
-@endphp
-
 @section('page_title')
     {{ trim($product->meta_title) != "" ? $product->meta_title : $product->name }}
 @stop
@@ -32,7 +18,17 @@
         </script>
     @endif
 
-    <?php $productBaseImage = productimage()->getProductBaseImage($product, $images); ?>
+    @php
+        $images = product_image()->getGalleryImages($product);
+        
+        $productImages = [];
+
+        foreach ($images as $key => $image) {
+            array_push($productImages, $image['medium_image_url']);
+        }
+
+        $productBaseImage = product_image()->getProductBaseImage($product, $images);
+    @endphp
 
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -82,128 +78,130 @@
 
 @section('full-content-wrapper')
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
-        <div class="row no-margin">
-            <section class="col-12 product-detail">
-                <div class="layouter">
-                    <product-view>
-                        <div class="form-container">
-                            @csrf()
 
-                            <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+    <div class="row no-margin">
+        <section class="col-12 product-detail">
+            <div class="layouter">
+                <product-view>
+                    <div class="form-container">
+                        @csrf()
 
-                            <div class="row">
-                                {{-- product-gallery --}}
-                                <div class="left col-lg-5 col-md-6">
-                                    @include ('shop::products.view.gallery')
-                                </div>
+                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
 
-                                {{-- right-section --}}
-                                <div class="right col-lg-7 col-md-6">
-                                    {{-- product-info-section --}}
-                                    <div class="info">
-                                        <h2 class="col-12">{{ $product->name }}</h2>
+                        <div class="row">
+                            {{-- product-gallery --}}
+                            <div class="left col-lg-5 col-md-6">
+                                @include ('shop::products.view.gallery')
+                            </div>
 
-                                        @if ($total)
-                                            <div class="reviews col-lg-12">
-                                                <star-ratings
-                                                    push-class="mr5"
-                                                    :ratings="{{ $avgStarRating }}"
-                                                ></star-ratings>
+                            {{-- right-section --}}
+                            <div class="right col-lg-7 col-md-6">
+                                {{-- product-info-section --}}
+                                <div class="info">
+                                    <h2 class="col-12">{{ $product->name }}</h2>
 
-                                                <div class="reviews">
-                                                    <span>
-                                                        {{ __('shop::app.reviews.ratingreviews', [
-                                                            'rating' => $avgRatings,
-                                                            'review' => $total])
-                                                        }}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        @endif
+                                    @if ($total = $reviewHelper->getTotalReviews($product))
+                                        <div class="reviews col-lg-12">
+                                            <star-ratings
+                                                push-class="mr5"
+                                                :ratings="{{ round($reviewHelper->getAverageRating($product)) }}"
+                                            ></star-ratings>
 
-                                        @include ('shop::products.view.stock', ['product' => $product])
-
-                                        <div class="col-12 price">
-                                            @include ('shop::products.price', ['product' => $product])
-
-                                            @if (
-                                                Webkul\Tax\Helpers\Tax::isTaxInclusive()
-                                                && $product->getTypeInstance()->getTaxCategory()
-                                            )
+                                            <div class="reviews">
                                                 <span>
-                                                    {{ __('velocity::app.products.tax-inclusive') }}
+                                                    {{ __('shop::app.reviews.ratingreviews', [
+                                                        'rating' => round($reviewHelper->getAverageRating($product)),
+                                                        'review' => $total])
+                                                    }}
                                                 </span>
-                                            @endif
-                                        </div>
-
-                                        @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
-                                            <div class="col-12">
-                                                @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
-                                                    {{ $offers }} </br>
-                                                @endforeach
                                             </div>
-                                        @endif
-
-                                        {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
-
-                                        @if ($product->getTypeInstance()->showQuantityBox())
-                                            <div class="col-12">
-                                                <quantity-changer quantity-text="{{ __('shop::app.products.quantity') }}"></quantity-changer>
-                                            </div>
-                                        @else
-                                            <input type="hidden" name="quantity" value="1">
-                                        @endif
-
-                                        {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
-
-                                        @include ('shop::products.view.configurable-options')
-
-                                        @include ('shop::products.view.downloadable')
-
-                                        @include ('shop::products.view.grouped-products')
-
-                                        @include ('shop::products.view.bundle-options')
-
-                                        <div class="col-12 product-actions">
-                                            @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
-                                                @include ('shop::products.buy-now', [
-                                                    'product' => $product,
-                                                ])
-                                            @endif
-
-                                            @include ('shop::products.add-to-cart', [
-                                                'form' => false,
-                                                'product' => $product,
-                                                'showCartIcon' => false,
-                                                'showCompare' => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                                ? true : false,
-                                            ])
                                         </div>
+                                    @endif
+
+                                    @include ('shop::products.view.stock', ['product' => $product])
+
+                                    <div class="col-12 price">
+                                        @include ('shop::products.price', ['product' => $product])
+
+                                        @if (
+                                            Webkul\Tax\Helpers\Tax::isTaxInclusive()
+                                            && $product->getTypeInstance()->getTaxCategory()
+                                        )
+                                            <span>
+                                                {{ __('velocity::app.products.tax-inclusive') }}
+                                            </span>
+                                        @endif
                                     </div>
 
-                                    @include ('shop::products.view.short-description')
+                                    @if (count($offers = $product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
+                                        <div class="col-12">
+                                            @foreach ($offers as $offer)
+                                                {{ $offer }} </br>
+                                            @endforeach
+                                        </div>
+                                    @endif
 
-                                    @include ('shop::products.view.attributes', [
-                                        'active' => true
-                                    ])
+                                    @include ('shop::products.view.configurable-options')
 
-                                    {{-- product long description --}}
-                                    @include ('shop::products.view.description')
+                                    {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
-                                    {{-- reviews count --}}
-                                    @include ('shop::products.view.reviews', ['accordian' => true])
+                                    @if ($product->getTypeInstance()->showQuantityBox())
+                                        <div class="col-12">
+                                            <quantity-changer quantity-text="{{ __('shop::app.products.quantity') }}"></quantity-changer>
+                                        </div>
+                                    @else
+                                        <input type="hidden" name="quantity" value="1">
+                                    @endif
+
+                                    {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+
+                                    @include ('shop::products.view.downloadable')
+
+                                    @include ('shop::products.view.grouped-products')
+
+                                    @include ('shop::products.view.bundle-options')
+
+                                    <div class="col-12 product-actions">
+                                        @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
+                                            @include ('shop::products.buy-now', [
+                                                'product' => $product,
+                                            ])
+                                        @endif
+
+                                        @include ('shop::products.add-to-cart', [
+                                            'form' => false,
+                                            'product' => $product,
+                                            'showCartIcon' => false,
+                                            'showCompare' => (bool) core()->getConfigData('general.content.shop.compare_option'),
+                                        ])
+                                    </div>
                                 </div>
+
+                                @include ('shop::products.view.short-description')
+
+                                @include ('shop::products.view.attributes', [
+                                    'active' => true
+                                ])
+
+                                {{-- product long description --}}
+                                @include ('shop::products.view.description')
+
+                                {{-- reviews count --}}
+                                @include ('shop::products.view.reviews', ['accordian' => true])
                             </div>
                         </div>
-                    </product-view>
-                </div>
-            </section>
-
-            <div class="related-products">
-                @include('shop::products.view.related-products')
-                @include('shop::products.view.up-sells')
+                    </div>
+                </product-view>
             </div>
+        </section>
+
+        <div class="related-products">
+            @include('shop::products.view.related-products')
+            
+            @include('shop::products.view.up-sells')
         </div>
+    </div>
+
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 @endsection
 
@@ -220,7 +218,7 @@
             id="product-form"
             @click="onSubmit($event)"
             @submit.enter.prevent="onSubmit($event)"
-            action="{{ route('cart.add', $product->product_id) }}"
+            action="{{ route('shop.cart.add', $product->product_id) }}"
         >
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
 

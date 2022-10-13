@@ -1,6 +1,4 @@
-<?php
-    $productUpSells = $product->up_sells()->get();
-?>
+@php $productUpSells = $product->up_sells()->get(); @endphp
 
 @if ($productUpSells->count())
     <card-list-header

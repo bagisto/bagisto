@@ -3,8 +3,8 @@
 namespace Webkul\Marketing\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\EmailTemplateDataGrid;
 use Webkul\Marketing\Repositories\TemplateRepository;
+use Webkul\Admin\DataGrids\EmailTemplateDataGrid;
 
 class TemplateController extends Controller
 {

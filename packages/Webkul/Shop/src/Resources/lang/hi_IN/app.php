@@ -316,6 +316,7 @@ return [
                     'shipping-handling'   => 'शिपिंग और हैंडलिंग',
                     'tax'                 => 'कर',
                     'discount'            => 'छूट',
+                    'coupon'              => 'कूपन',
                     'tax-percent'         => 'कर प्रतिशत',
                     'tax-amount'          => 'कर राशि',
                     'discount-amount'     => 'छूट राशि',

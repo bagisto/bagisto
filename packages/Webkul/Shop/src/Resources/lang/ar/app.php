@@ -272,7 +272,7 @@ return [
                     'wrong-password' => 'كلمة مرور خاطئة !',
                 ],
 
-                'default-address' => 'Default Address',
+                'default-address' => 'العنوان الافتراضي',
             ],
 
             'order' => [
@@ -315,6 +315,7 @@ return [
                     'shipping-handling'   => 'الشحن والتوصيل',
                     'tax'                 => 'الضرائب',
                     'discount'            => 'تخفيض',
+                    'coupon'              => 'قسيمة',
                     'tax-percent'         => 'نسبة الضرائب',
                     'tax-amount'          => 'المبلغ الضريبي',
                     'discount-amount'     => 'مبلغ الخصم',

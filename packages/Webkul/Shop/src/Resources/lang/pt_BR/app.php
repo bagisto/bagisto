@@ -308,6 +308,7 @@ return [
                     'shipping-handling'   => 'Entrega & Manuseio',
                     'tax'                 => 'Imposto',
                     'discount'            => 'Discount',
+                    'coupon'              => 'Coupon',
                     'tax-percent'         => 'Percentagem de imposto',
                     'tax-amount'          => 'Valor de Imposto',
                     'discount-amount'     => 'Valor de Desconto',

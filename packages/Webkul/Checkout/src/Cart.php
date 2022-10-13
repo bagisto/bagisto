@@ -151,10 +151,11 @@ class Cart
 
         $cart = $this->getCart();
 
-        if (
-            ! $cart
-            && ! $cart = $this->create($data)
-        ) {
+        if (! $cart) {
+            $cart = $this->create($data);
+        }
+
+        if (! $cart) {
             return ['warning' => __('shop::app.checkout.cart.item.error-add')];
         }
 
@@ -414,8 +415,7 @@ class Cart
         $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
 
         if (
-            auth()->guard()->check()
-            && ($user = auth()->guard()->user())
+            ($user = auth()->guard()->user())
             && (
                 $user->email
                 && $user->first_name
@@ -747,10 +747,7 @@ class Cart
             'additional'           => is_array($data['additional']) ? array_merge($data['additional'], $locale) : $locale,
         ];
 
-        if (
-            isset($data['children'])
-            && $data['children']
-        ) {
+        if (! empty($data['children'])) {
             foreach ($data['children'] as $child) {
                 /**
                  * - For bundle, child quantity will not be zero.
@@ -784,7 +781,9 @@ class Cart
         if ($cart->haveStockableItems()) {
             $data['shipping_address'] = $cart->shipping_address->toArray();
 
-            $data['selected_shipping_rate'] = $cart->selected_shipping_rate ? $cart->selected_shipping_rate->toArray() : 0.0;
+            $data['selected_shipping_rate'] = $cart->selected_shipping_rate
+                ? $cart->selected_shipping_rate->toArray()
+                : 0;
         }
 
         $data['payment'] = $cart->payment->toArray();
@@ -867,17 +866,11 @@ class Cart
     ): void {
         $shippingAddress['cart_id'] = $billingAddress['cart_id'] = null;
 
-        if (
-            isset($data['billing']['save_as_address'])
-            && $data['billing']['save_as_address']
-        ) {
+        if (! empty($data['billing']['save_as_address'])) {
             $this->customerAddressRepository->create($billingAddress);
         }
 
-        if (
-            isset($data['shipping']['save_as_address'])
-            && $data['shipping']['save_as_address']
-        ) {
+        if (! empty($data['shipping']['save_as_address'])) {
             $this->customerAddressRepository->create($shippingAddress);
         }
     }
@@ -893,12 +886,8 @@ class Cart
     {
         $customerAddress = [];
 
-        if (
-            isset($data['billing']['address_id'])
-            && $data['billing']['address_id']
-        ) {
-            $customerAddress = $this
-                ->customerAddressRepository
+        if (! empty($data['billing']['address_id'])) {
+            $customerAddress = $this->customerAddressRepository
                 ->findOneWhere(['id' => $data['billing']['address_id']])
                 ->toArray();
         }
@@ -925,12 +914,8 @@ class Cart
     {
         $customerAddress = [];
 
-        if (
-            isset($data['shipping']['address_id'])
-            && $data['shipping']['address_id']
-        ) {
-            $customerAddress = $this
-                ->customerAddressRepository
+        if (! empty($data['shipping']['address_id'])) {
+            $customerAddress = $this->customerAddressRepository
                 ->findOneWhere(['id' => $data['shipping']['address_id']])
                 ->toArray();
         }
@@ -970,10 +955,7 @@ class Cart
                 $shippingAddressModel = $cart->shipping_address;
 
                 if ($shippingAddressModel) {
-                    if (
-                        isset($billingAddressData['use_for_shipping'])
-                        && $billingAddressData['use_for_shipping']
-                    ) {
+                    if (! empty($billingAddressData['use_for_shipping'])) {
                         $billingAddressData['address_type'] = CartAddress::ADDRESS_TYPE_SHIPPING;
 
                         $this->cartAddressRepository->update($billingAddressData, $shippingAddressModel->id);
@@ -983,10 +965,7 @@ class Cart
                         $this->cartAddressRepository->update($shippingAddressData, $shippingAddressModel->id);
                     }
                 } else {
-                    if (
-                        isset($billingAddressData['use_for_shipping'])
-                        && $billingAddressData['use_for_shipping']
-                    ) {
+                    if (! empty($billingAddressData['use_for_shipping'])) {
                         $this->cartAddressRepository->create(array_merge(
                             $billingAddressData,
                             ['address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]
@@ -1003,10 +982,7 @@ class Cart
             $this->cartAddressRepository->create(array_merge($billingAddressData, ['address_type' => CartAddress::ADDRESS_TYPE_BILLING]));
 
             if ($cart->haveStockableItems()) {
-                if (
-                    isset($billingAddressData['use_for_shipping'])
-                    && $billingAddressData['use_for_shipping']
-                ) {
+                if (! empty($billingAddressData['use_for_shipping'])) {
                     $this->cartAddressRepository->create(array_merge($billingAddressData, ['address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]));
                 } else {
                     $this->cartAddressRepository->create(array_merge($shippingAddressData, ['address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]));

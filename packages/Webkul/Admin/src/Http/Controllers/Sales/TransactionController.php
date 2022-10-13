@@ -3,20 +3,20 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
-use Webkul\Admin\DataGrids\OrderTransactionsDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Payment\Facades\Payment;
-use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\OrderTransactionRepository;
+use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
+use Webkul\Admin\DataGrids\OrderTransactionsDataGrid;
+use Webkul\Payment\Facades\Payment;
 
 class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     protected $_config;
 
@@ -24,16 +24,16 @@ class TransactionController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderTransactionRepository  $orderTransactionRepository
      * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @param  \Webkul\Sales\Repositories\ShipmentRepository $shipmentRepository
+     * @param  \Webkul\Sales\Repositories\OrderTransactionRepository  $orderTransactionRepository
      * @return void
      */
     public function __construct(
         protected OrderRepository $orderRepository,
-        protected OrderTransactionRepository $orderTransactionRepository,
         protected InvoiceRepository $invoiceRepository,
-        protected ShipmentRepository $shipmentRepository
+        protected ShipmentRepository $shipmentRepository,
+        protected OrderTransactionRepository $orderTransactionRepository
     )
     {
         $this->_config = request('_config');
@@ -66,7 +66,7 @@ class TransactionController extends Controller
     }
 
     /**
-     * Save the tranaction.
+     * Save the transaction.
      *
      * @return \Illuminate\View\View
      */
@@ -88,7 +88,7 @@ class TransactionController extends Controller
 
         $transactionAmtBefore = $this->orderTransactionRepository->where('invoice_id', $invoice->id)->sum('amount');
         
-        $transactionAmtfinal = $request->amount + $transactionAmtBefore;
+        $transactionAmtFinal = $request->amount + $transactionAmtBefore;
 
         if ($invoice->state == 'paid') {
             session()->flash('info', trans('admin::app.sales.transactions.response.already-paid'));
@@ -96,7 +96,7 @@ class TransactionController extends Controller
             return redirect(route('admin.sales.transactions.index'));
         }
 
-        if ($transactionAmtfinal > $invoice->base_grand_total) {
+        if ($transactionAmtFinal > $invoice->base_grand_total) {
             session()->flash('info', trans('admin::app.sales.transactions.response.transaction-amount-exceeds'));
 
             return redirect(route('admin.sales.transactions.create'));
@@ -156,9 +156,9 @@ class TransactionController extends Controller
 
         $transData = json_decode(json_encode(json_decode($transaction['data'])), true);
 
-        $transactionDeatilsData = $this->convertIntoSingleDimArray($transData);
+        $transactionDetailsData = $this->convertIntoSingleDimArray($transData);
 
-        return view($this->_config['view'], compact('transaction', 'transactionDeatilsData'));
+        return view($this->_config['view'], compact('transaction', 'transactionDetailsData'));
     }
 
     /**

@@ -2,23 +2,21 @@
 
 namespace Webkul\Product\Http\Controllers;
 
-use Exception;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Admin\DataGrids\ProductDataGrid;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Core\Contracts\Validations\Slug;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Webkul\Product\Helpers\ProductType;
-use Webkul\Product\Http\Requests\InventoryRequest;
-use Webkul\Product\Http\Requests\ProductForm;
-use Webkul\Product\Models\Product;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Admin\DataGrids\ProductDataGrid;
+use Webkul\Product\Helpers\ProductType;
+use Webkul\Product\Http\Requests\ProductForm;
+use Webkul\Product\Http\Requests\InventoryRequest;
+use Webkul\Core\Contracts\Validations\Slug;
 
 class ProductController extends Controller
 {
@@ -33,22 +31,23 @@ class ProductController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
      * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
      * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @return void
      */
     public function __construct(
         protected CategoryRepository $categoryRepository,
-        protected ProductRepository $productRepository,
-        protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
-        protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected InventorySourceRepository $inventorySourceRepository,
+        protected ProductRepository $productRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
+        protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
+        protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         protected ProductInventoryRepository $productInventoryRepository
     )
     {
@@ -104,8 +103,10 @@ class ProductController extends Controller
 
         if (
             ProductType::hasVariants(request()->input('type'))
-            && (! request()->has('super_attributes')
-                || ! count(request()->get('super_attributes')))
+            && (
+                ! request()->has('super_attributes')
+                || ! count(request()->get('super_attributes'))
+            )
         ) {
             session()->flash('error', trans('admin::app.catalog.products.configurable-error'));
 
@@ -200,45 +201,22 @@ class ProductController extends Controller
     /**
      * Copy a given Product.
      *
-     * @param  int  $productId
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function copy(int $productId)
+    public function copy(int $id)
     {
-        $originalProduct = $this->productRepository->findOrFail($productId);
-
-        if (! $originalProduct->getTypeInstance()->canBeCopied()) {
-            session()->flash(
-                'error',
-                trans('admin::app.response.product-can-not-be-copied', [
-                    'type' => $originalProduct->type,
-                ])
-            );
+        try {
+            $product = $this->productRepository->copy($id);
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
 
             return redirect()->to(route('admin.catalog.products.index'));
         }
 
-        if ($originalProduct->parent_id) {
-            session()->flash(
-                'error',
-                trans('admin::app.catalog.products.variant-already-exist-message')
-            );
+        session()->flash('success', trans('admin::app.response.product-copied'));
 
-            return redirect()->to(route('admin.catalog.products.index'));
-        }
-
-        $copiedProduct = $this->productRepository->copy($originalProduct);
-
-        if (
-            $copiedProduct instanceof Product
-            && $copiedProduct->id
-        ) {
-            session()->flash('success', trans('admin::app.response.product-copied'));
-        } else {
-            session()->flash('error', trans('admin::app.response.error-while-copying'));
-        }
-
-        return redirect()->to(route('admin.catalog.products.edit', ['id' => $copiedProduct->id]));
+        return redirect()->route('admin.catalog.products.edit', $product->id);
     }
 
     /**
@@ -274,7 +252,7 @@ class ProductController extends Controller
             return response()->json([
                 'message' => trans('admin::app.response.delete-success', ['name' => 'Product']),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             report($e);
         }
 
@@ -318,8 +296,8 @@ class ProductController extends Controller
     {
         $data = request()->all();
 
-        if (! isset($data['massaction-type']) 
-            || ! $data['massaction-type'] == 'update'
+        if (! isset($data['mass-action-type']) 
+            || ! $data['mass-action-type'] == 'update'
         ) {
             return redirect()->back();
         }

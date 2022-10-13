@@ -317,6 +317,7 @@ return [
                     'shipping-handling'   => 'Shipping & Handling',
                     'tax'                 => 'Tax',
                     'discount'            => 'Discount',
+                    'coupon'              => 'Coupon',
                     'tax-percent'         => 'Tax Percent',
                     'tax-amount'          => 'Tax Amount',
                     'discount-amount'     => 'Discount Amount',

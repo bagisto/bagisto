@@ -56,7 +56,8 @@
                         <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                     </div>
 
-                    <?php $channels = core()->getAllChannels() ?>
+                    @php $channels = core()->getAllChannels() @endphp
+
                     <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">
                         <label for="channel_id">{{ __('admin::app.settings.sliders.channels') }}</label>
                         <select class="control" id="channel_id" name="channel_id" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.channels') }}&quot;">

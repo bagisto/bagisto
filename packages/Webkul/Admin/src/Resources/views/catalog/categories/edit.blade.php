@@ -157,7 +157,7 @@
 
                     <accordian title="{{ __('admin::app.catalog.categories.filterable-attributes') }}" :active="true">
                         <div slot="body">
-                            <?php $selectedaAtributes = old('attributes') ?? $category->filterableAttributes->pluck('id')->toArray() ?>
+                            @php $selectedaAtributes = old('attributes') ?? $category->filterableAttributes->pluck('id')->toArray() @endphp
 
                             <div class="control-group multi-select" :class="[errors.has('attributes[]') ? 'has-error' : '']">
                                 <label for="attributes" class="required">{{ __('admin::app.catalog.categories.attributes') }}</label>

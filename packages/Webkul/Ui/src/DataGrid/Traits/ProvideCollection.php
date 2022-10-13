@@ -40,6 +40,7 @@ trait ProvideCollection
     {
         foreach ($parseInfo as $key => $info) {
             $columnType = $this->findColumnType($key)[0] ?? null;
+            
             $columnName = $this->findColumnType($key)[1] ?? null;
 
             if ($this->exceptionCheckInColumns($columnName)) {
@@ -57,7 +58,7 @@ trait ProvideCollection
     }
 
     /**
-     * Finalyze your collection here.
+     * Finalize your collection here.
      *
      * @return void
      */
@@ -240,10 +241,7 @@ trait ProvideCollection
                     && gettype($column['wrapper']) === 'object'
                     && $column['wrapper'] instanceof \Closure
                 ) {
-                    if (
-                        isset($column['closure'])
-                        && $column['closure'] == true
-                    ) {
+                    if (! empty($column['closure'])) {
                         $record->{$column['index']} = $column['wrapper']($record);
                     } else {
                         $record->{$column['index']} = htmlspecialchars($column['wrapper']($record));
@@ -278,7 +276,9 @@ trait ProvideCollection
     private function transformActions($record)
     {
         foreach ($this->actions as $action) {
-            $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
+            $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object')
+                ? $action['condition']($record)
+                : true;
 
             $toDisplayKey = $this->generateKeyFromActionTitle($action['title'], '_to_display');
             $record->$toDisplayKey = $toDisplay;

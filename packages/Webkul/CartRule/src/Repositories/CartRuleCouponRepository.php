@@ -9,7 +9,7 @@ class CartRuleCouponRepository extends Repository
     /**
      * @var array
      */
-    protected $charsets = [
+    protected $charset = [
         'alphanumeric' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
         'alphabetical' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
         'numeric'      => '0123456789',
@@ -60,7 +60,7 @@ class CartRuleCouponRepository extends Repository
         $couponCode = '';
 
         for ($i = 0; $i < $length; $i++) {
-            $couponCode .= $this->charsets[$format][rand(0, strlen($this->charsets[$format]) - 1)];
+            $couponCode .= $this->charset[$format][rand(0, strlen($this->charset[$format]) - 1)];
         }
 
         return $couponCode;

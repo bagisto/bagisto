@@ -19,13 +19,14 @@ class ProductReviewRepository extends Repository
     /**
      * Retrieve review for customerId
      *
-     * @param int $customerId
+     * @return \Illuminate\Support\Collection
      */
     public function getCustomerReview()
     {
-        $customerId = auth()->guard('customer')->user()->id;
-
-        $reviews = $this->model->where(['customer_id' => $customerId])->with('product')->paginate(5);
+        $reviews = $this->model
+            ->where(['customer_id' => auth()->guard('customer')->user()->id])
+            ->with('product')
+            ->paginate(5);
 
         return $reviews;
     }

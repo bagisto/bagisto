@@ -49,7 +49,7 @@
 
 @section('content')
     <notification-list  
-        url="{{ route('admin.notification.get-notification') }}"
+        url="{{ route('admin.notification.get_notification') }}"
         order-view-url="{{ \URL::to('/') }}/{{ config('app.admin_url')}}/viewed-notifications/"
         pusher-key="{{ env('PUSHER_APP_KEY') }}"
         pusher-cluster="{{ env('PUSHER_APP_CLUSTER') }}"

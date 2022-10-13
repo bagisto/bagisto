@@ -28,8 +28,8 @@ class AdminUpdatePassword extends Mailable
     public function build()
     {
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-                    ->to($this->admin->email, $this->admin->name)
-                    ->subject(trans('shop::app.mail.update-password.subject'))
-                    ->view('shop::emails.admin.update-password', ['user' => $this->admin]);
+            ->to($this->admin->email, $this->admin->name)
+            ->subject(trans('shop::app.mail.update-password.subject'))
+            ->view('shop::emails.admin.update-password', ['user' => $this->admin]);
     }
 }

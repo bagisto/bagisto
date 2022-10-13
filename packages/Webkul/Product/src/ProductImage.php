@@ -160,10 +160,10 @@ class ProductImage extends AbstractProduct
     private function getFallbackImageUrls(): array
     {
         return [
-            'small_image_url'    => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.webp'),
-            'medium_image_url'   => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.webp'),
-            'large_image_url'    => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.webp'),
-            'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.webp'),
+            'small_image_url'    => bagisto_asset('images/product/small-product-placeholder.webp'),
+            'medium_image_url'   => bagisto_asset('images/product/medium-product-placeholder.webp'),
+            'large_image_url'    => bagisto_asset('images/product/large-product-placeholder.webp'),
+            'original_image_url' => bagisto_asset('images/product/large-product-placeholder.webp'),
         ];
     }
 
