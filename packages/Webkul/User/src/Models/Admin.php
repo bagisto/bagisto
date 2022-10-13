@@ -92,6 +92,10 @@ class Admin extends Authenticatable implements AdminContract
      */
     public function hasPermission($permission)
     {
+        if ($this->role->permission_type == 'all') {
+            return true;
+        }
+
         if (
             $this->role->permission_type == 'custom'
             && ! $this->role->permissions
