@@ -253,9 +253,9 @@ trait ProvideCollection
                 ) {
                     $record->{$column['index']} = $column['closure']($record);
                 }
-            } elseif ($column['type'] == 'datetime'){
+            } elseif ($column['type'] == 'datetime') {
                 $record->{$column['index']} = core()->formatDate($record->{$column['index']}, $column['format'] ?? 'Y-m-d H:i:s');
-            } elseif ($column['type'] == 'date'){
+            } elseif ($column['type'] == 'date') {
                 $record->{$column['index']} = core()->formatDate($record->{$column['index']}, $column['format'] ?? 'Y-m-d');
             } else {
                 if ($column['type'] == 'price') {

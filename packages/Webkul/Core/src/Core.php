@@ -790,7 +790,7 @@ class Core
             $date = Carbon::now();
         }
 
-        if (is_string($date)){
+        if (is_string($date)) {
             $date = Carbon::parse($date);
         }
 
