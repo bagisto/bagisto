@@ -81,7 +81,7 @@
                             <div class="control-group multi-select" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                 <label for="url-key" class="required">{{ __('admin::app.cms.pages.channel') }}</label>
 
-                                <?php $selectedOptionIds = old('inventory_sources') ?: $page->channels->pluck('id')->toArray() ?>
+                                @php $selectedOptionIds = old('inventory_sources') ?: $page->channels->pluck('id')->toArray() @endphp
 
                                 <select type="text" class="control" name="channels[]" v-validate="'required'" value="{{ old('channel[]') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.channel') }}&quot;" multiple="multiple">
                                     @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)

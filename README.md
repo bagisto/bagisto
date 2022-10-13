@@ -43,7 +43,7 @@
 
 [Bagisto](https://www.bagisto.com/) is a hand-tailored E-Commerce framework built on some of the hottest open-source technologies such as [Laravel](https://laravel.com/) (a [PHP](https://secure.php.net/) framework) and [Vue.js](https://vuejs.org/) a progressive Javascript framework.
 
-Bagisto can help you cut down your time, cost, and workforce for building online stores or migrating from physical stores to the ever-demanding online world. Your business -- whether small or huge -- can benefit. And it's straightforward to set it up.
+Bagisto can help you cut down your time, cost, and workforce for building online stores or migrating from physical stores to the ever-demanding online world. Your business -- whether small or huge -- can benefit. The best part, it's straightforward to set it up!
 
 ![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/stats.png)
 
@@ -59,7 +59,7 @@ You can browse through the Free **[Live Demo](https://demo.bagisto.com/)**
 
 # Headless Commerce
 
-The power of headless commerce now comes to Bagisto enabling you to experience seamless and easily scalable storefront performance. Backed by some of the hottest tech stacks Vue and React, Bagisto commerce can now be used to build powerful headless commerce solutions offering blazing fast speed and easy customisation powered by Vue Storefront and Next.js
+The power of headless commerce now comes to Bagisto enabling you to experience seamless and easily scalable storefront performance. Backed by some of the hottest tech stacks Vue and React, Bagisto commerce can now be used to build powerful headless commerce solutions offering blazing-fast speed and easy customization powered by Vue Storefront and Next.js
 
 ## Vue Storefront
 
@@ -77,7 +77,7 @@ Develop and deploy your next headless commerce storefronts with Next JS and Bagi
 
 ![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/every-need.png)
 
-With Bagisto, you can easily create use cases for various commerce needs like Marketplaces, PWA, Native Mobile Apps, Multi-Tenants systems and many more. 
+With Bagisto, you can easily create use cases for various commerce needs like Marketplaces, PWA, Native Mobile Apps, Multi-Tenants systems, and many more.
 
 # Built In Extensions
 

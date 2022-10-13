@@ -334,7 +334,7 @@
 
                                                                     <span class="control-error" v-if="errors.has('{{ $inputName }}')">
                                                                         @verbatim
-                                                                            {{ errors.first('<?php echo $inputName; ?>') }}
+                                                                            {{ errors.first('@php echo $inputName; @endphp') }}
                                                                         @endverbatim
                                                                     </span>
                                                                 </div>

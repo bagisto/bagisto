@@ -2,7 +2,7 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Product\Helpers\PriceIndexer\Simple as SimpleIndexer;
+use Webkul\Product\Helpers\Indexers\Price\Simple as SimpleIndexer;
 
 class Simple extends AbstractType
 {
