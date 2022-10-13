@@ -320,7 +320,7 @@ body {
                     }
                 }
             }
-
+            
             .account-action {
                 float: left !important;
             }
@@ -337,6 +337,16 @@ body {
                     }
                 }
             }
+        }
+
+        .search-filter {
+            .icon-wrapper {
+                right: 264px;
+            }
+        }
+
+        .account-content .account-layout .account-table-content input[type=search] {
+            padding-right: 35px;
         }
 
         .image-wrapper.image-wrapper .image-item {
