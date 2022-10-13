@@ -496,7 +496,7 @@ return [
             'continue-registration'    => 'Continuar o registro',
             'proceed-to-checkout'      => 'Finalizar Compra',
             'remove'                   => 'Remover',
-            'remove-link'              => 'Remover',
+            'remove-link'              => 'Remover enlace',
             'remove-all-items'         => 'Remover todos os itens',
             'confirm-action'           => 'Confirme esta ação?',
             'move-to-wishlist'         => 'Mover para Lista de Desejos',

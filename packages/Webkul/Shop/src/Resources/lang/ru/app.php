@@ -499,6 +499,7 @@ return [
             'create-error'              => 'Обнаружена проблема при создании экземпляра корзины.',
             'title'                     => 'Корзина',
             'empty'                     => 'Ваша корзина пуста',
+            'remove-all-items'          => 'Удалить все элементы',
             'update-cart'               => 'Обновить корзину',
             'continue-shopping'         => 'Продолжить покупки',
             'remove-all-items'          => 'Remove all items',

@@ -496,6 +496,7 @@ return [
             'create-error'             => 'هنگام تهیه نمونه سبد خرید ، با برخی از شماره ها روبرو شد',
             'title'                    => 'سبد خرید',
             'empty'                    => 'سبد خرید شما خالی است',
+            'remove-all-items'         => 'همه موارد را حذف کنید',
             'update-cart'              => 'به روز رسانی سبد خرید',
             'continue-shopping'        => 'ادامه خرید',
             'continue-registration'    => 'ادامه ثبت نام',
