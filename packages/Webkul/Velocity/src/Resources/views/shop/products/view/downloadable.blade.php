@@ -26,14 +26,16 @@
                 <ul type="none" class="mt15">
                     @foreach ($product->downloadable_links as $link)
                         <li>
-                            <div class="checkbox col-12 ml10">
+                            <div class="checkbox col-12">
                                 <input
                                     name="links[]"
                                     type="checkbox"
-                                    id="{{ $link->id }}"
+                                    id="links_{{ $link->id }}"
                                     v-validate="'required'"
                                     value="{{ $link->id }}"
                                     data-vv-as="&quot;{{ __('shop::app.products.links') }}&quot;" />
+                                
+                                <label for="links_{{ $link->id }}" class="checkbox-view"></label>
 
                                 <span>{{ $link->title . ' + ' . core()->currency($link->price) }}</span>
 

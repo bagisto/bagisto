@@ -1,11 +1,10 @@
 @if (Webkul\Product\Helpers\ProductType::hasVariants($product->type))
-
-    @inject ('configurableOptionHelper', 'Webkul\Product\Helpers\ConfigurableOption')
-
     @php
         $defaultVariant = $product->getTypeInstance()->getDefaultVariant();
-        $config = $configurableOptionHelper->getConfigurationConfig($product);
-        $galleryImages = productimage()->getGalleryImages($product);
+
+        $config = app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($product);
+
+        $galleryImages = product_image()->getGalleryImages($product);
     @endphp
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.before', ['product' => $product]) !!}
@@ -78,13 +77,15 @@
                                 @change="configure(attribute, $event.target.value)"
                                 :checked="index == attribute.selectedIndex">
 
-                            <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
+                            <div>
+                                <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
 
-                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" :title="option.label" alt="" />
+                                <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" :title="option.label" alt="" />
 
-                            <span v-if="attribute.swatch_type == 'text'">
-                                @{{ option.label }}
-                            </span>
+                                <span v-if="attribute.swatch_type == 'text'">
+                                    @{{ option.label }}
+                                </span>
+                            </div>
 
                         </label>
 
@@ -324,21 +325,21 @@
                                     regularPriceElement.style.display = 'none';
                                 }
 
-                                priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
+                                priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formatted_price;
                                    
                                 if (
-                                    this.config.variant_prices[this.simpleProduct].regular_price.formated_price == "$0.00" 
-                                    || this.config.variant_prices[this.simpleProduct].regular_price.formated_price == this.config.variant_prices[this.simpleProduct].final_price.formated_price
+                                    this.config.variant_prices[this.simpleProduct].regular_price.formatted_price == "$0.00" 
+                                    || this.config.variant_prices[this.simpleProduct].regular_price.formatted_price == this.config.variant_prices[this.simpleProduct].final_price.formatted_price
                                 ) {
                                     regularPriceElement.innerHTML = "";
                                 }
                                 
                                 if (
                                     regularPriceElement 
-                                    && this.config.variant_prices[this.simpleProduct].regular_price.formated_price != "$0.00" 
-                                    && this.config.variant_prices[this.simpleProduct].regular_price.formated_price != this.config.variant_prices[this.simpleProduct].final_price.formated_price 
+                                    && this.config.variant_prices[this.simpleProduct].regular_price.formatted_price != "$0.00" 
+                                    && this.config.variant_prices[this.simpleProduct].regular_price.formatted_price != this.config.variant_prices[this.simpleProduct].final_price.formatted_price 
                                 ) {
-                                    regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formated_price;
+                                    regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formatted_price;
                                     regularPriceElement.style.display = 'inline-block';
                                 }
 
@@ -346,7 +347,7 @@
                             } else {
                                 priceLabelElement.style.display = 'inline-block';
 
-                                priceElement.innerHTML = this.config.regular_price.formated_price;
+                                priceElement.innerHTML = this.config.regular_price.formatted_price;
 
                                 eventBus.$emit('configurable-variant-selected-event', 0)
                             }

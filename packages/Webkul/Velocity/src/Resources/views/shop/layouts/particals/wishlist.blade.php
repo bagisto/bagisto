@@ -1,13 +1,8 @@
-@php
-    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
-@endphp
-
-@if($showWishlist)
-
+@if((bool) core()->getConfigData('general.content.shop.wishlist_option'))
     <wishlist-component-with-badge
         is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
         is-text="{{ isset($isText) && $isText ? 'true' : 'false' }}"
-        src="{{ route('customer.wishlist.index') }}">
+        src="{{ route('shop.customer.wishlist.index') }}">
     </wishlist-component-with-badge>
 
 @endif

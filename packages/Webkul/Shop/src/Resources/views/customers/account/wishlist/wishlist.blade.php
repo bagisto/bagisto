@@ -13,7 +13,7 @@
 
             @if (count($items))
                 <div class="account-action">
-                    <form id="remove-all-wishlist" action="{{ route('customer.wishlist.removeall') }}" method="POST">
+                    <form id="remove-all-wishlist" action="{{ route('shop.customer.wishlist.remove_all') }}" method="POST">
                         @method('DELETE')
 
                         @csrf
@@ -169,7 +169,7 @@
 
                         this.$root.showLoader();
 
-                        this.$http.post("{{ route('customer.wishlist.share') }}", {
+                        this.$http.post("{{ route('shop.customer.wishlist.share') }}", {
                             shared: val
                         })
                         .then(function(response) {

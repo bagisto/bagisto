@@ -44,7 +44,7 @@ class LoginController extends Controller
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
 
-            return redirect()->route('customer.session.index');
+            return redirect()->route('shop.customer.session.index');
         }
     }
 
@@ -59,7 +59,7 @@ class LoginController extends Controller
         try {
             $user = Socialite::driver($provider)->user();
         } catch (\Exception $e) {
-            return redirect()->route('customer.session.index');
+            return redirect()->route('shop.customer.session.index');
         }
 
         $customer = $this->customerSocialAccountRepository->findOrCreateCustomer($user, $provider);

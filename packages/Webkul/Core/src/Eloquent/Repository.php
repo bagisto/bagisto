@@ -7,7 +7,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Traits\CacheableRepository;
 
-
 abstract class Repository extends BaseRepository implements CacheableInterface {
 
     use CacheableRepository;

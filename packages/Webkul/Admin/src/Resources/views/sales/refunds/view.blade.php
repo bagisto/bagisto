@@ -6,7 +6,7 @@
 
 @section('content-wrapper')
 
-    <?php $order = $refund->order; ?>
+    @php $order = $refund->order; @endphp
 
     <div class="content full-page">
         <div class="page-header">

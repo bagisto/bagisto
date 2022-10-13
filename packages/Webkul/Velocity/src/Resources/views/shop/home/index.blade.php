@@ -19,7 +19,7 @@
 @endphp
 
 @section('page_title')
-    {{ isset($metaTitle) ? $metaTitle : "" }}
+    {{ $metaTitle ?? "" }}
 @endsection
 
 @section('head')

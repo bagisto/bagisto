@@ -79,13 +79,14 @@ class Shipping
 
         $shippingAddress = $cart->shipping_address;
 
-        if ($shippingAddress) {
+        if (! $shippingAddress) {
+            return;
+        }
 
-            foreach ($this->rates as $rate) {
-                $rate->cart_address_id = $shippingAddress->id;
+        foreach ($this->rates as $rate) {
+            $rate->cart_address_id = $shippingAddress->id;
 
-                $rate->save();
-            }
+            $rate->save();
         }
     }
 

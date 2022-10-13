@@ -16,7 +16,7 @@
     <form
         method="POST"
         @submit.prevent="onSubmit"
-        action="{{ route('customer.profile.store') }}"
+        action="{{ route('shop.customer.profile.store') }}"
         enctype="multipart/form-data">
 
         <div class="account-table-content">

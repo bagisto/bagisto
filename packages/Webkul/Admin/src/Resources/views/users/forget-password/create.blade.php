@@ -18,7 +18,7 @@
             <div class="form-container" style="text-align: left">
                 <h1>{{ __('admin::app.users.forget-password.header-title') }}</h1>
 
-                <form method="POST" action="{{ route('admin.forget-password.store') }}" @submit.prevent="onSubmit">
+                <form method="POST" action="{{ route('admin.forget_password.store') }}" @submit.prevent="onSubmit">
                     @csrf
 
                     <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">

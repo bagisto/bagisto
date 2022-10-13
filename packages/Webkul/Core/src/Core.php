@@ -40,7 +40,7 @@ class Core
     /**
      * Register your core config keys here which you don't want to
      * load in static array. These keys will load from database
-     * everytime the `getConfigData` method is called.
+     * every time the `getConfigData` method is called.
      */
     private $coreConfigExceptions = [
         'catalog.products.guest-checkout.allow-guest-checkout',
@@ -132,7 +132,7 @@ class Core
     }
 
     /**
-     * Returns currenct channel code.
+     * Returns current channel code.
      *
      * @return \Webkul\Core\Contracts\Channel
      */
@@ -425,9 +425,9 @@ class Core
             return $currency;
         }
 
-        $currenctChannel = $this->getCurrentChannel();
+        $currentChannel = $this->getCurrentChannel();
 
-        return $currency = $currenctChannel->base_currency;
+        return $currency = $currentChannel->base_currency;
     }
 
     /**
@@ -626,9 +626,9 @@ class Core
      */
     public function getAccountJsSymbols()
     {
-        $formater = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
-        $pattern = $formater->getPattern();
+        $pattern = $formatter->getPattern();
 
         $pattern = str_replace('¤', '%s', $pattern);
 
@@ -636,7 +636,7 @@ class Core
 
         return [
             'symbol'  => $this->currencySymbol($this->getCurrentCurrencyCode()),
-            'decimal' => $formater->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
+            'decimal' => $formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
             'format'  => $pattern,
         ];
     }
@@ -687,18 +687,18 @@ class Core
             $price = 0;
         }
 
-        $formater = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
         if ($symbol = $this->getBaseCurrency()->symbol) {
             if ($this->currencySymbol($this->getBaseCurrencyCode()) == $symbol) {
-                $content = $formater->formatCurrency($price, $this->getBaseCurrencyCode());
+                $content = $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
             } else {
-                $formater->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
+                $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
 
-                $content = $formater->format($this->convertPrice($price));
+                $content = $formatter->format($this->convertPrice($price));
             }
         } else {
-            $content = $formater->formatCurrency($price, $this->getBaseCurrencyCode());
+            $content = $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
         }
 
         return ! $isEncoded ? $content : htmlentities($content);
@@ -744,7 +744,7 @@ class Core
     }
 
     /**
-     * Get channel timestamp, timstamp will be builded with channel timezone settings.
+     * Get channel timestamp, timestamp will be builded with channel timezone settings.
      *
      * @param  \Webkul\Core\Contracts\Channel  $channel
      * @return int
@@ -968,7 +968,7 @@ class Core
                     ? $endDate
                     : Carbon::createFromTimeString($date->addMonth()->subDay()->format('Y-m-d') . ' 23:59:59');
 
-                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('M')];
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('M')];
             }
         } elseif ($totalWeeks > 6) {
             for ($i = 0; $i < $totalWeeks; $i++) {
@@ -982,7 +982,7 @@ class Core
                     ? $endDate
                     : Carbon::createFromTimeString($this->xWeekRange($date->subDay(), 1) . ' 23:59:59');
 
-                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('d M')];
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('d M')];
             }
         } else {
             for ($i = 0; $i < $totalDays; $i++) {
@@ -992,7 +992,7 @@ class Core
                 $start = Carbon::createFromTimeString($date->format('Y-m-d') . ' 00:00:01');
                 $end = Carbon::createFromTimeString($date->format('Y-m-d') . ' 23:59:59');
 
-                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('d M')];
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('d M')];
             }
         }
 
@@ -1055,13 +1055,15 @@ class Core
     public function getConfigField($fieldName)
     {
         foreach (config('core') as $coreData) {
-            if (isset($coreData['fields'])) {
-                foreach ($coreData['fields'] as $field) {
-                    $name = $coreData['key'] . '.' . $field['name'];
+            if (! isset($coreData['fields'])) {
+                continue;
+            }
 
-                    if ($name == $fieldName) {
-                        return $field;
-                    }
+            foreach ($coreData['fields'] as $field) {
+                $name = $coreData['key'] . '.' . $field['name'];
+
+                if ($name == $fieldName) {
+                    return $field;
                 }
             }
         }
@@ -1077,24 +1079,34 @@ class Core
     {
         foreach ($items as $key1 => $level1) {
             unset($items[$key1]);
+
             $items[$level1['key']] = $level1;
 
-            if (count($level1['children'])) {
-                foreach ($level1['children'] as $key2 => $level2) {
-                    $temp2 = explode('.', $level2['key']);
-                    $finalKey2 = end($temp2);
-                    unset($items[$level1['key']]['children'][$key2]);
-                    $items[$level1['key']]['children'][$finalKey2] = $level2;
+            if (! count($level1['children'])) {
+                continue;
+            }
 
-                    if (count($level2['children'])) {
-                        foreach ($level2['children'] as $key3 => $level3) {
-                            $temp3 = explode('.', $level3['key']);
-                            $finalKey3 = end($temp3);
-                            unset($items[$level1['key']]['children'][$finalKey2]['children'][$key3]);
-                            $items[$level1['key']]['children'][$finalKey2]['children'][$finalKey3] = $level3;
-                        }
-                    }
+            foreach ($level1['children'] as $key2 => $level2) {
+                $temp2 = explode('.', $level2['key']);
 
+                $finalKey2 = end($temp2);
+
+                unset($items[$level1['key']]['children'][$key2]);
+
+                $items[$level1['key']]['children'][$finalKey2] = $level2;
+
+                if (! count($level2['children'])) {
+                    continue;
+                } 
+
+                foreach ($level2['children'] as $key3 => $level3) {
+                    $temp3 = explode('.', $level3['key']);
+
+                    $finalKey3 = end($temp3);
+
+                    unset($items[$level1['key']]['children'][$finalKey2]['children'][$key3]);
+
+                    $items[$level1['key']]['children'][$finalKey2]['children'][$finalKey3] = $level3;
                 }
             }
         }
@@ -1105,8 +1117,8 @@ class Core
     /**
      * Array set.
      *
-     * @param  array             $items
-     * @param  string            $key
+     * @param  array  $items
+     * @param  string  $key
      * @param  string|int|float  $value
      * @return array
      */
@@ -1195,9 +1207,9 @@ class Core
      */
     public function getSenderEmailDetails()
     {
-        $sender_name = $this->getConfigData('emails.configure.email_settings.sender_name') ? $this->getConfigData('emails.configure.email_settings.sender_name') : config('mail.from.name');
+        $sender_name = $this->getConfigData('emails.configure.email_settings.sender_name') ?: config('mail.from.name');
 
-        $sender_email = $this->getConfigData('emails.configure.email_settings.shop_email_from') ? $this->getConfigData('emails.configure.email_settings.shop_email_from') : config('mail.from.address');
+        $sender_email = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?: config('mail.from.address');
 
         return [
             'name'  => $sender_name,
@@ -1212,9 +1224,9 @@ class Core
      */
     public function getAdminEmailDetails()
     {
-        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ? $this->getConfigData('emails.configure.email_settings.admin_name') : config('mail.admin.name');
+        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ?: config('mail.admin.name');
 
-        $admin_email = $this->getConfigData('emails.configure.email_settings.admin_email') ? $this->getConfigData('emails.configure.email_settings.admin_email') : config('mail.admin.address');
+        $admin_email = $this->getConfigData('emails.configure.email_settings.admin_email') ?: config('mail.admin.address');
 
         return [
             'name'  => $admin_name,
@@ -1260,14 +1272,8 @@ class Core
     {
         $fields = $this->getConfigField($field);
 
-        if (
-            isset($fields['channel_based'])
-            && $fields['channel_based']
-        ) {
-            if (
-                isset($fields['locale_based'])
-                && $fields['locale_based']
-            ) {
+        if (! empty($fields['channel_based'])) {
+            if (! empty($fields['locale_based'])) {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
                     'code'         => $field,
                     'channel_code' => $channel,
@@ -1280,10 +1286,7 @@ class Core
                 ]);
             }
         } else {
-            if (
-                isset($fields['locale_based'])
-                && $fields['locale_based']
-            ) {
+            if (! empty($fields['locale_based'])) {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
                     'code'        => $field,
                     'locale_code' => $locale,

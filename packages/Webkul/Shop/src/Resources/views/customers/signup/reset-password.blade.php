@@ -10,7 +10,7 @@
 
     {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
 
-    <form method="post" action="{{ route('customer.reset-password.store') }}" >
+    <form method="post" action="{{ route('shop.customer.reset_password.store') }}" >
 
         {{ csrf_field() }}
 

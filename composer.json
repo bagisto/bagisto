@@ -10,8 +10,7 @@
     "require": {
         "php": "^8.1",
         "astrotomic/laravel-translatable": "^11.0.0",
-        "bagisto/legacy-api": "^1.0",
-        "bagisto/rest-api": "dev-master",
+        "bagisto/rest-api": "^1.0",
         "bagistobrasil/bagisto-product-social-share": "^0.1.2",
         "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "^2.0.0",

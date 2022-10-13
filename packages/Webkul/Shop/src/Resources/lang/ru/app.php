@@ -501,6 +501,8 @@ return [
             'empty'                     => 'Ваша корзина пуста',
             'update-cart'               => 'Обновить корзину',
             'continue-shopping'         => 'Продолжить покупки',
+            'remove-all-items'          => 'Remove all items',
+            'confirm-action'            => 'Confirm this action?',
             'continue-registration'     => '«Продолжить регистрацию»',
             'proceed-to-checkout'       => 'Перейти к оформлению заказа',
             'remove'                    => 'Удалять',

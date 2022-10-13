@@ -10,7 +10,7 @@ class Review extends AbstractProduct
      * Returns the product's avg rating
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
-     * @return float
+     * @return \Illuminate\Support\Collection
      */
     public function getReviews($product)
     {
@@ -37,7 +37,7 @@ class Review extends AbstractProduct
             return $avgRating[$product->id];
         }
 
-        return $avgRating[$product->id] = number_format(round($product->reviews()->where('status', 'approved')->avg('rating'), 2), 1);
+        return $avgRating[$product->id] = number_format(round($product->reviews->where('status', 'approved')->avg('rating'), 2), 1);
     }
 
     /**
@@ -54,7 +54,7 @@ class Review extends AbstractProduct
             return $totalReviews[$product->id];
         }
 
-        return $totalReviews[$product->id] = $product->reviews()->where('status', 'approved')->count();
+        return $totalReviews[$product->id] = $product->reviews->where('status', 'approved')->count();
     }
 
      /**
@@ -71,15 +71,14 @@ class Review extends AbstractProduct
             return $totalRating[$product->id];
         }
 
-        return $totalRating[$product->id] = $product->reviews()->where('status', 'approved')->sum('rating');
+        return $totalRating[$product->id] = $product->reviews->where('status', 'approved')->sum('rating');
     }
 
     /**
      * Returns reviews with ratings.
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
-     *
-     * @return collection
+     * @return \Illuminate\Support\Collection
      */
     public function getReviewsWithRatings($product)
     {
@@ -89,7 +88,8 @@ class Review extends AbstractProduct
             return $reviews[$product->id];
         }
 
-        return $reviews[$product->id] = $product->reviews()->where('status', 'approved')
+        return $reviews[$product->id] = $product->reviews()
+            ->where('status', 'approved')
             ->select('rating', DB::raw('count(*) as total'))
             ->groupBy('rating')
             ->orderBy('rating', 'desc')

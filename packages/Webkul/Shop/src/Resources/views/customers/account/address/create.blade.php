@@ -12,7 +12,7 @@
     <div class="account-layout">
         <div class="account-head mb-15">
             <span class="back-icon">
-                <a href="{{ route('customer.address.index') }}"><i class="icon icon-menu-back"></i></a>
+                <a href="{{ route('shop.customer.addresses.index') }}"><i class="icon icon-menu-back"></i></a>
             </span>
 
             <span class="account-heading">{{ __('shop::app.customer.account.address.create.title') }}</span>
@@ -22,7 +22,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.address.create.before') !!}
 
-        <form id="customer-address-form" method="post" action="{{ route('customer.address.store') }}" @submit.prevent="onSubmit">
+        <form id="customer-address-form" method="post" action="{{ route('shop.customer.addresses.store') }}" @submit.prevent="onSubmit">
             <div class="account-table-content">
                 @csrf
 

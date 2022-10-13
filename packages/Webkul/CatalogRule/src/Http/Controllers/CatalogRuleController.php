@@ -71,7 +71,7 @@ class CatalogRuleController extends Controller
 
         Event::dispatch('promotions.catalog_rule.create.after', $catalogRule);
 
-        $this->catalogRuleIndexHelper->reindexComplete();
+        $this->catalogRuleIndexHelper->reIndexComplete();
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Catalog Rule']));
 
@@ -108,7 +108,7 @@ class CatalogRuleController extends Controller
 
         Event::dispatch('promotions.catalog_rule.update.after', $catalogRule);
 
-        $this->catalogRuleIndexHelper->reindexComplete();
+        $this->catalogRuleIndexHelper->reIndexComplete();
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Catalog Rule']));
 

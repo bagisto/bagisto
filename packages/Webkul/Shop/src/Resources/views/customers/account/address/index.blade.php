@@ -8,7 +8,7 @@
     <div class="account-layout">
         <div class="account-head">
             <span class="back-icon">
-                <a href="{{ route('customer.profile.index') }}">
+                <a href="{{ route('shop.customer.profile.index') }}">
                     <i class="icon icon-menu-back"></i>
                 </a>
             </span>
@@ -17,7 +17,7 @@
 
             @if (! $addresses->isEmpty())
                 <span class="account-action">
-                    <a href="{{ route('customer.address.create') }}">{{ __('shop::app.customer.account.address.index.add') }}</a>
+                    <a href="{{ route('shop.customer.addresses.create') }}">{{ __('shop::app.customer.account.address.index.add') }}</a>
                 </span>
             @else
                 <span></span>
@@ -34,7 +34,7 @@
 
                 <br/>
 
-                <a href="{{ route('customer.address.create') }}">{{ __('shop::app.customer.account.address.index.add') }}</a>
+                <a href="{{ route('shop.customer.addresses.create') }}">{{ __('shop::app.customer.account.address.index.add') }}</a>
             @else
                 <div class="address-holder">
                     @foreach ($addresses as $address)
@@ -79,7 +79,7 @@
 
                                 <div class="control-links mt-20">
                                     <span>
-                                        <a href="{{ route('customer.address.edit', $address->id) }}">
+                                        <a href="{{ route('shop.customer.addresses.edit', $address->id) }}">
                                             {{ __('shop::app.customer.account.address.index.edit') }}
                                         </a>
                                     </span>
@@ -89,7 +89,7 @@
                                             {{ __('shop::app.customer.account.address.index.delete') }}
                                         </a>
 
-                                        <form id="deleteAddressForm{{ $address->id }}" action="{{ route('address.delete', $address->id) }}" method="post">
+                                        <form id="deleteAddressForm{{ $address->id }}" action="{{ route('shop.customer.addresses.delete', $address->id) }}" method="post">
                                             @method('delete')
 
                                             @csrf

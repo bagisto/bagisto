@@ -3,7 +3,7 @@
 @auth('customer')
     {!! view_render_event('bagisto.shop.products.wishlist.before') !!}
 
-    <form id="wishlist-{{ $product->product_id }}" action="{{ route('customer.wishlist.add', $product->product_id) }}" method="POST">
+    <form id="wishlist-{{ $product->product_id }}" action="{{ route('shop.customer.wishlist.add', $product->product_id) }}" method="POST">
         @csrf
     </form>
 

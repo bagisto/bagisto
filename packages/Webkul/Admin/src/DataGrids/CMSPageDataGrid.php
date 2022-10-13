@@ -86,7 +86,7 @@ class CMSPageDataGrid extends DataGrid
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
-            'action' => route('admin.cms.mass-delete'),
+            'action' => route('admin.cms.mass_delete'),
             'method' => 'POST',
         ]);
     }

@@ -1,6 +1,8 @@
 <template>
     <span class="filter-tag">
-        <span v-if="filter.column == 'perPage'">perPage</span>
+        <span v-if="filter.column == 'perPage'" v-text="translations.itemsPerPage"></span>
+
+        <span v-else-if="filter.column == 'sort'">{{ filter.label }}</span>
 
         <span v-else>{{ filter.label }} | {{ filter.cond }}</span>
 

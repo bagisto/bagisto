@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\SliderDataGrid;
 use Webkul\Core\Repositories\SliderRepository;
 
@@ -73,13 +74,13 @@ class SliderController extends Controller
             $data['locale'] = implode(',', $data['locale']);
         }
 
-        $result = $this->sliderRepository->save($data);
+        Event::dispatch('core.settings.slider.create.before');
 
-        if ($result) {
-            session()->flash('success', trans('admin::app.settings.sliders.created-success'));
-        } else {
-            session()->flash('success', trans('admin::app.settings.sliders.created-fail'));
-        }
+        $slider = $this->sliderRepository->create($data);
+
+        Event::dispatch('core.settings.slider.create.after', $slider);
+
+        session()->flash('success', trans('admin::app.settings.sliders.created-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -125,13 +126,13 @@ class SliderController extends Controller
             return redirect()->back();
         }
 
-        $result = $this->sliderRepository->updateItem($data, $id);
+        Event::dispatch('core.settings.slider.update.before', $id);
 
-        if ($result) {
-            session()->flash('success', trans('admin::app.settings.sliders.update-success'));
-        } else {
-            session()->flash('error', trans('admin::app.settings.sliders.update-fail'));
-        }
+        $slider = $this->sliderRepository->update($data, $id);
+
+        Event::dispatch('core.settings.slider.update.after', $slider);
+
+        session()->flash('success', trans('admin::app.settings.sliders.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -147,7 +148,11 @@ class SliderController extends Controller
         $this->sliderRepository->findOrFail($id);
 
         try {
+            Event::dispatch('core.settings.slider.delete.before', $id);
+
             $this->sliderRepository->delete($id);
+            
+            Event::dispatch('core.settings.slider.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Slider'])]);
         } catch (\Exception $e) {
@@ -171,7 +176,11 @@ class SliderController extends Controller
 
             foreach ($indexes as $key => $value) {
                 try {
+                    Event::dispatch('core.settings.slider.delete.before', $value);
+
                     $this->sliderRepository->delete($value);
+            
+                    Event::dispatch('core.settings.slider.delete.after', $value);
                 } catch (\Exception $e) {
                     $suppressFlash = true;
 

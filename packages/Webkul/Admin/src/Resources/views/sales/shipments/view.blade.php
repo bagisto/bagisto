@@ -5,7 +5,7 @@
 @stop
 
 @section('content-wrapper')
-    <?php $order = $shipment->order; ?>
+    @php $order = $shipment->order; @endphp
 
     <div class="content full-page">
         <div class="page-header">

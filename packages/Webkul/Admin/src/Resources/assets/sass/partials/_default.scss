@@ -906,19 +906,21 @@ body {
         .content {
             .page-header {
                 .page-title {
-                    width: 100% !important;
+                    float: left;
                 }
 
                 .page-action {
-                    margin-top: 10px !important;
-                    float: left;
+                    margin-top: -15px !important;
+                    float: right;
 
                     a {
                         margin-left: 0px !important;
+                        margin-top: 5px;
                     }
 
                     .export-import {
                         margin-top: 0px !important;
+                        padding-right: 5px !important;
                     }
                 }
             }
@@ -932,7 +934,7 @@ body {
             .page-header {
                 .page-action {
                     a {
-                        margin-top: 10px;
+                        margin-top: 20px;
                     }
                 }
             }

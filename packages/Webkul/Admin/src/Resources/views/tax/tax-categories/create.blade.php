@@ -6,11 +6,11 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.tax-categories.store') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.tax_categories.store') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.tax-categories.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.tax_categories.index') }}'"></i>
 
                         {{ __('admin::app.settings.tax-categories.add-title') }}
                     </h1>
@@ -50,7 +50,7 @@
                         <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                     </div>
 
-                    <?php $selectedOptions = old('taxrates') ?: [] ?>
+                    @php $selectedOptions = old('taxrates') ?: [] @endphp
 
                     <div class="control-group multi-select" :class="[errors.has('taxrates[]') ? 'has-error' : '']">
                         <label for="taxrates" class="required">{{ __('admin::app.configuration.tax-categories.select-taxrates') }}</label>

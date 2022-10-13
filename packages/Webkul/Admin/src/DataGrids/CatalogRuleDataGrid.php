@@ -116,14 +116,14 @@ class CatalogRuleDataGrid extends DataGrid
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.catalog-rules.edit',
+            'route'  => 'admin.catalog_rules.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
-            'route'  => 'admin.catalog-rules.delete',
+            'route'  => 'admin.catalog_rules.delete',
             'icon'   => 'icon trash-icon',
         ]);
     }

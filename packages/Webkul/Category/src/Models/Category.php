@@ -42,7 +42,7 @@ class Category extends TranslatableModel implements CategoryContract
     ];
 
     /**
-     * Fillables.
+     * Fillable.
      *
      * @var array
      */

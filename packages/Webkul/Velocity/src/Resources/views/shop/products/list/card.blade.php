@@ -6,7 +6,7 @@
         ? true
         : false;
 
-    $productBaseImage = productimage()->getProductBaseImage($product);
+    $productBaseImage = product_image()->getProductBaseImage($product);
 
     $totalReviews = $reviewHelper->getTotalReviews($product);
 
@@ -14,10 +14,7 @@
 @endphp
 
 {!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
-    @if (
-        isset($list)
-        && $list
-    )
+    @if (! empty($list))
         <div class="col-12 lg-card-container list-card product-card row">
             <div class="product-image">
                 <a
@@ -43,10 +40,7 @@
                             <span class="fs16">{{ $product->name }}</span>
                         </a>
 
-                        @if (
-                            isset($additionalAttributes)
-                            && $additionalAttributes
-                        )
+                        @if (! empty($additionalAttributes))
                             @if (isset($item->additional['attributes']))
                                 <div class="item-options">
 
@@ -76,8 +70,7 @@
                             'addWishlistClass'  => 'pl10',
                             'product'           => $product,
                             'addToCartBtnClass' => 'medium-padding',
-                            'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                    ? true : false,
+                            'showCompare'       => (bool) core()->getConfigData('general.content.shop.compare_option'),
                         ])
                     </div>
                 </div>
@@ -100,7 +93,7 @@
                     <product-quick-view-btn :quick-view-details="{{ json_encode($velocityHelper->formatProduct($product)) }}"></product-quick-view-btn>
             </a>
 
-            @if (! $product->getTypeInstance()->haveSpecialPrice() && $product->new)
+            @if (! $product->getTypeInstance()->haveDiscount() && $product->new)
                 <div class="sticker new">
                     {{ __('shop::app.products.new') }}
                 </div>
@@ -115,10 +108,7 @@
 
                         <span class="fs16">{{ $product->name }}</span>
 
-                        @if (
-                            isset($additionalAttributes)
-                            && $additionalAttributes
-                        )
+                        @if (! empty($additionalAttributes))
                             @if (isset($item->additional['attributes']))
                                 <div class="item-options">
 
@@ -158,8 +148,7 @@
                         'reloadPage'        => $reloadPage ?? null,
                         'addToCartForm'     => $addToCartForm ?? false,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',
-                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
-                                                ? true : false,
+                        'showCompare'       => (bool) core()->getConfigData('general.content.shop.compare_option'),
                     ])
                 </div>
             </div>

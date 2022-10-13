@@ -61,10 +61,7 @@ class FixerExchange extends ExchangeRate
                 isset($result['success'])
                 && ! $result['success']
             ) {
-                throw new \Exception(
-                    isset($result['error']['info'])
-                    ? $result['error']['info']
-                    : $result['error']['type'], 1);
+                throw new \Exception($result['error']['info'] ?? $result['error']['type'], 1);
             }
 
             if ($exchangeRate = $currency->exchange_rate) {
