@@ -3,6 +3,7 @@
         :title="`${addTooltip}`"
         class="unset compare-icon text-right"
         @click="addProductToCompare">
+        <i class="material-icons">compare_arrows</i>
     </a>
 </template>
 

@@ -663,6 +663,19 @@ body::after {
 
         .add-to-cart-btn {
             float: left;
+
+            display: flex;
+            align-items: center;
+
+            form {
+                i {
+                    margin-left: inherit;
+                }
+            }
+
+            i {
+                margin-left: 20px;
+            }
         }
     }
 

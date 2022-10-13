@@ -111,7 +111,7 @@
     margin: 20px 0;
 
     .toolbar-wrapper-container {
-        @include flexBox(flex,space-between);
+        @include flexBox(space-between, inherit);
     }
 
     .toolbar-wrapper {
@@ -322,8 +322,8 @@
 
     .card-body {
         .compare-icon {
-            top: 10px;
-            right: 0;
+            bottom: 0px;
+            right: 0px;
             display: none;
             margin-left: 5px;
             margin-right: 5px;
@@ -332,7 +332,7 @@
 
         .wishlist-icon {
             right: 0;
-            top: 40px;
+            bottom: 0px;
             display: none;
             margin-left: 5px;
             margin-right: 5px;
@@ -340,7 +340,7 @@
         }
 
         .compare-icon {
-            right: 0;
+            right: 25px;
             left: unset;
         }
 
@@ -1802,6 +1802,10 @@
 
         .category {
             padding: 5px 0 4px 15px;
+
+            .category-icon {
+                margin-left: 5px;
+            }
             
             + .nested {
                 color: $font-color;
@@ -2142,6 +2146,11 @@
         .row {
             margin-bottom: 10px !important;
         }
+        
+        .grid-card {
+            margin: 0px 10px;
+            height: inherit !important;
+        }
     }
 }
 
@@ -2454,8 +2463,13 @@
         text-decoration: none !important;
     }
 
+    .previous {
+        display: none;
+    }
+
     #previous {
         margin-right: 14px !important;
+        display: block !important;
     }
 
     #next {
@@ -2803,12 +2817,4 @@
     100% {
         transform: rotate(360deg);
     }
-}
-
-.sub-category:hover ~ ul {
-    display: block;
-}
-
-.nested {
-    display: none;
 }
