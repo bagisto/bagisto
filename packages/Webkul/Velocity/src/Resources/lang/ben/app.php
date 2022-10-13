@@ -333,6 +333,7 @@ return [
             'done'      => 'সম্পন্ন',
             'languages' => 'ভাষা',
             'greeting'  => 'স্বাগত, :গ্রাহক!',
+            'greeting-for-guest' => 'স্বাগতম, অতিথি'
         ]
     ],
 ];

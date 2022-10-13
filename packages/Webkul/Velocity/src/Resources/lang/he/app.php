@@ -333,6 +333,7 @@ return [
             'done'      => 'בוצע',
             'languages' => 'שפות',
             'greeting'  => 'ברוך הבא, :לקוח !',
+            'greeting-for-guest' => 'ברוך הבא אורח'
         ]
     ],
 ];

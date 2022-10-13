@@ -309,7 +309,8 @@ return [
 
     'responsive' => [
         'header' => [
-            'greeting' => 'Welkom, :customer !',
+            'greeting' => 'Welkom, :Klant !',
+            'greeting-for-guest' => 'Welkom gast'
         ]
     ],
 ]

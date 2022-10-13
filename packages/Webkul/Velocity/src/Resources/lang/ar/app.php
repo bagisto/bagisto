@@ -309,7 +309,8 @@ return [
 
     'responsive' => [
         'header' => [
-            'greeting' => ':customer, أهلا بك ',
+            'greeting' => ':عميل, أهلا بك ',
+            'greeting-for-guest' => 'أهلا بك ضيف'
         ]
     ],
 ]

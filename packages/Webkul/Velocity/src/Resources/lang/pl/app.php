@@ -309,7 +309,8 @@ return [
         'header' => [
             'done'      => 'Gotowe',
             'languages' => 'Języki',
-            'greeting'  => 'Witaj!, :customer !',
+            'greeting'  => 'Witaj!, :Klient !',
+            'greeting-for-guest' => 'Witaj gościu'
         ]
     ],
 ]

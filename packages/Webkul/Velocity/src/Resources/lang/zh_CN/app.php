@@ -332,7 +332,8 @@ return [
         'header' => [
             'done'      => '完成',
             'languages' => '语言',
-            'greeting'  => '欢迎, :customer !',
+            'greeting'  => '欢迎, :顾客 !',
+            'greeting-for-guest' => '欢迎来客'
         ]
     ],
 ];
