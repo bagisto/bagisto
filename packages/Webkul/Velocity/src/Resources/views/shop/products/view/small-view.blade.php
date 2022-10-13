@@ -1,5 +1,5 @@
 @php
-    $productBaseImage = productimage()->getProductBaseImage($product);
+    $productBaseImage = product_image()->getProductBaseImage($product);
 @endphp
 
 <div class="col-lg-3 col-md-12">

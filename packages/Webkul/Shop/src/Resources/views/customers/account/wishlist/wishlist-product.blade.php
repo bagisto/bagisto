@@ -43,7 +43,7 @@
     </div>
 
     <div class="operations">
-        <form id="wishlist-{{ $item->id }}" action="{{ route('customer.wishlist.remove', $item->id) }}" method="POST">
+        <form id="wishlist-{{ $item->id }}" action="{{ route('shop.customer.wishlist.remove', $item->id) }}" method="POST">
             @method('DELETE')
 
             @csrf
@@ -58,7 +58,7 @@
             </a>
         @endauth
 
-        <a href="{{ route('customer.wishlist.move', $item->id) }}" class="btn btn-primary btn-md">
+        <a href="{{ route('shop.customer.wishlist.move', $item->id) }}" class="btn btn-primary btn-md">
             {{ __('shop::app.customer.account.wishlist.move-to-cart') }}
         </a>
     </div>

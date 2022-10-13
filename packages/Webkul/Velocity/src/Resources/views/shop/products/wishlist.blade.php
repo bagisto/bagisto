@@ -8,7 +8,7 @@
             $wishlist = $wishListHelper->getWishlistProduct($product);
 
             /* link making */
-            $href = isset($route) ? $route : ($wishlist ? route('customer.wishlist.remove', $wishlist->id) : route('customer.wishlist.add', $product->product_id));
+            $href = isset($route) ? $route : ($wishlist ? route('shop.customer.wishlist.remove', $wishlist->id) : route('shop.customer.wishlist.add', $product->product_id));
 
             /* method */
             $method = isset($route) ? 'POST' : ( $wishlist ? 'DELETE' : 'POST' );
@@ -42,7 +42,7 @@
     @guest('customer')
         <form           
             id="wishlist-{{ $product->product_id }}"
-            action="{{ route('customer.wishlist.add', $product->product_id) }}"
+            action="{{ route('shop.customer.wishlist.add', $product->product_id) }}"
             method="POST">
             @csrf
             

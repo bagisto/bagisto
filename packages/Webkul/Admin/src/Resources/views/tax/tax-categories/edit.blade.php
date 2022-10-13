@@ -6,11 +6,11 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.tax-categories.update', $taxCategory->id) }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.tax_categories.update', $taxCategory->id) }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.tax-categories.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.tax_categories.index') }}'"></i>
 
                         {{ __('admin::app.settings.tax-categories.edit.title') }}
                     </h1>
@@ -49,7 +49,7 @@
                         <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                     </div>
 
-                    <?php $selectedOptions = old('taxrates') ?: $taxCategory->tax_rates()->pluck('tax_rates.id')->toArray() ?>
+                    @php $selectedOptions = old('taxrates') ?: $taxCategory->tax_rates()->pluck('tax_rates.id')->toArray() @endphp
 
                     <div class="control-group multi-select" :class="[errors.has('taxrates[]') ? 'has-error' : '']">
                         <label for="taxrates" class="required">{{ __('admin::app.settings.tax-categories.select-taxrates') }}</label>

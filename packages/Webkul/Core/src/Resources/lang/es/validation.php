@@ -7,5 +7,5 @@ return [
     'decimal'                 => 'O :attribute debe ser válido.',
     'phone-number'            => 'The :attribute must be valid phone number.',
     'slug'                    => 'O :attribute debe tener un slug válido.',
-    'comma-seperated-integer' => 'The :attribute field must be numeric and may contain comma.',
+    'comma-separated-integer' => 'The :attribute field must be numeric and may contain comma.',
 ];

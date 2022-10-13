@@ -6,8 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Core\Models\SubscribersList;
 use Webkul\Marketing\Mail\NewsletterMail;
-use Webkul\Marketing\Repositories\CampaignRepository;
 use Webkul\Marketing\Repositories\EventRepository;
+use Webkul\Marketing\Repositories\CampaignRepository;
 
 class Campaign
 {
@@ -16,14 +16,12 @@ class Campaign
      *
      * @param  \Webkul\Marketing\Repositories\EventRepository  $eventRepository
      * @param  \Webkul\Marketing\Repositories\CampaignRepository  $campaignRepository
-     * @param  \Webkul\Marketing\Repositories\TemplateRepository  $templateRepository
      *
      * @return void
      */
     public function __construct(
         protected EventRepository $eventRepository,
-        protected CampaignRepository $campaignRepository,
-        protected CampaignRepository $templateRepository
+        protected CampaignRepository $campaignRepository
     )
     {
     }

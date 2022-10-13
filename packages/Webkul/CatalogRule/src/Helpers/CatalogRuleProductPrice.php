@@ -3,25 +3,45 @@
 namespace Webkul\CatalogRule\Helpers;
 
 use Carbon\Carbon;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 
 class CatalogRuleProductPrice
 {
     /**
+     * Customer Group instance.
+     *
+     * @var \Webkul\Customer\Contracts\CustomerGroup
+     */
+    protected $customerGroup;
+
+    /**
      * Create a new helper instance.
      *
      * @param  \Webkul\Attribute\Repositories\CatalogRuleProductPriceRepository  $catalogRuleProductPriceRepository
      * @param  \Webkul\CatalogRule\Repositories\CatalogRuleProduct  $catalogRuleProductHelper
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @return void
      */
     public function __construct(
         protected CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository,
         protected CatalogRuleProduct $catalogRuleProductHelper,
-        protected CustomerGroupRepository $customerGroupRepository
+        protected CustomerRepository $customerRepository
     )
     {
+    }
+
+    /**
+     * Set customer group
+     *
+     * @param  \Webkul\Customer\Contracts\CustomerGroup  $customerGroup
+     * @return \Webkul\Product\Helpers\ProductPriceIndex\AbstractPriceIndex
+     */
+    public function setCustomerGroup($customerGroup)
+    {
+        $this->customerGroup = $customerGroup;
+
+        return $this;
     }
 
     /**
@@ -118,7 +138,7 @@ class CatalogRuleProductPrice
      */
     public function calculate($rule, $productData = null)
     {
-        $price = $productData && isset($productData['price']) ? $productData['price'] : $rule->price;
+        $price = $productData['price'] ?? $rule->price;
 
         switch ($rule->action_type) {
             case 'to_fixed':
@@ -170,18 +190,10 @@ class CatalogRuleProductPrice
      */
     public function getRulePrice($product)
     {
-        if (auth()->guard()->check()) {
-            $customerGroupId = auth()->guard()->user()->customer_group_id;
-        } else {
-            $customerGroup = $this->customerGroupRepository->getCustomerGuestGroup();
-
-            if (! $customerGroup) {
-                return;
-            }
-
-            $customerGroupId = $customerGroup->id;
+        if (! $this->customerGroup) {
+            $this->customerGroup = $this->customerRepository->getCurrentGroup();
         }
 
-        return $this->catalogRuleProductPriceRepository->checkInLoadedCatalogRulePrice($product, $customerGroupId);
+        return $this->catalogRuleProductPriceRepository->checkInLoadedCatalogRulePrice($product, $this->customerGroup->id);
     }
 }

@@ -83,11 +83,11 @@ return [
      * Invoice settings.
      */
     [
-        'key'  => 'sales.invoice_setttings',
+        'key'  => 'sales.invoice_settings',
         'name' => 'admin::app.admin.system.invoice-settings',
         'sort' => 5,
     ], [
-        'key'    => 'sales.invoice_setttings.invoice_number',
+        'key'    => 'sales.invoice_settings.invoice_number',
         'name'   => 'admin::app.admin.system.invoice-number',
         'sort'   => 0,
         'fields' => [
@@ -125,7 +125,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.invoice_setttings.payment_terms',
+        'key'    => 'sales.invoice_settings.payment_terms',
         'name'   => 'admin::app.admin.system.payment-terms',
         'sort'   => 1,
         'fields' => [
@@ -138,7 +138,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.invoice_setttings.invoice_slip_design',
+        'key'    => 'sales.invoice_settings.invoice_slip_design',
         'name'   => 'admin::app.admin.system.invoice-slip-design',
         'sort'   => 2,
         'fields' => [
@@ -151,7 +151,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.invoice_setttings.invoice_reminders',
+        'key'    => 'sales.invoice_settings.invoice_reminders',
         'name'   => 'admin::app.admin.system.invoice-reminders',
         'sort'   => 2,
         'fields' => [

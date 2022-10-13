@@ -6,9 +6,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #6690 [enhancement] - Mass update option should be available for the categories section.
 
-* #6689 [enhancement] - There should be a proper UI for categories in the shop if there are sub0category of any category.
+* #6689 [enhancement] - There should be a proper UI for categories in the shop if there are subcategory of any category.
 
-* #6685 [enhancement] - There should be an option to filter the suspended customer. in the admin panel.
+* #6685 [enhancement] - There should be an option to filter the suspended customer from the admin panel.
 
 * #6646 [enhancement] - The actual and special prices both should be visible if there is any special price for a configurable product.
 
@@ -41,9 +41,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v1.4.4 (30th of August 2022)** - *Release*
 
-* #5584 [feature] -  there should be an feature so that when we click on mark as read , notification box should close.
+* #5584 [feature] -  There should be an feature so that when we click on mark as read , notification box should close.
 
-* #5463 [feature] -  there should be a button so that we should clear all filters.
+* #5463 [feature] -  There should be a button so that we should clear all filters.
 
 * [enhancement] - Optimized product
 

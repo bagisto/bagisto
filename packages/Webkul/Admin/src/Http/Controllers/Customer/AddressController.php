@@ -3,9 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Rules\VatIdRule;
 use Webkul\Admin\DataGrids\AddressDataGrid;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 

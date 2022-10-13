@@ -7,5 +7,5 @@ return [
     'decimal'                 => '这个 :attribute 必须有效.',
     'phone-number'            => '这个 :attribute 必须是有效的电话号码.',
     'slug'                    => '这个 :attribute 必须有效Slug.',
-    'comma-seperated-integer' => '这个 :attribute 字段必须是数字并且可以包含逗号',
+    'comma-separated-integer' => '这个 :attribute 字段必须是数字并且可以包含逗号',
 ];

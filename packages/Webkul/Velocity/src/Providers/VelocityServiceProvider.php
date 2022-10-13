@@ -24,7 +24,7 @@ class VelocityServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
 
-        $this->loadGloableVariables();
+        $this->loadGlobalVariables();
 
         $this->loadPublishableAssets();
 
@@ -102,7 +102,7 @@ class VelocityServiceProvider extends ServiceProvider
      *
      * @return boolean
      */
-    private function loadGloableVariables()
+    private function loadGlobalVariables()
     {
         view()->composer('*', function ($view) {
             $velocityHelper = app(\Webkul\Velocity\Helpers\Helper::class);

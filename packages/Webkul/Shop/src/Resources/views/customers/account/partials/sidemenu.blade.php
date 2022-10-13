@@ -9,19 +9,13 @@
 
             <div class="menu-block-content">
                 <ul class="menubar">
-                    @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
-
-                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
-                    @endphp
-
-                    @if (! $showCompare)
+                    @if (! (bool) core()->getConfigData('general.content.shop.wishlist_option'))
                         @php
                             unset($menuItem['children']['compare']);
                         @endphp
                     @endif
 
-                    @if (! $showWishlist)
+                    @if (! (bool) core()->getConfigData('general.content.shop.compare_option'))
                         @php
                             unset($menuItem['children']['wishlist']);
                         @endphp

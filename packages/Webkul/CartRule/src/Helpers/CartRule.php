@@ -2,16 +2,16 @@
 
 namespace Webkul\CartRule\Helpers;
 
-use Carbon\Carbon;
-use Webkul\Checkout\Facades\Cart;
-use Webkul\Rule\Helpers\Validator;
-use Webkul\Checkout\Models\CartItem;
 use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\CartRule\Repositories\CartRuleRepository;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
+use Webkul\Rule\Helpers\Validator;
+use Webkul\Checkout\Facades\Cart;
+use Webkul\Checkout\Models\CartItem;
 
 class CartRule
 {
@@ -23,21 +23,21 @@ class CartRule
     /**
      * Create a new helper instance.
      *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\CartRule\Repositories\CartRuleRepository  $cartRuleRepository
      * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
-     * @param  \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository  $cartRuleCouponUsageRepository
      * @param  \Webkul\CartRule\Repositories\CartRuleCustomerRepository  $cartRuleCustomerRepository
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository  $cartRuleCouponUsageRepository
      * @param  \Webkul\Rule\Helpers\Validator  $validator
      *
      * @return void
      */
     public function __construct(
+        protected CustomerRepository $customerRepository,
         protected CartRuleRepository $cartRuleRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository,
-        protected CartRuleCouponUsageRepository $cartRuleCouponUsageRepository,
         protected CartRuleCustomerRepository $cartRuleCustomerRepository,
-        protected CustomerGroupRepository $customerGroupRepository,
+        protected CartRuleCouponUsageRepository $cartRuleCouponUsageRepository,
         protected Validator $validator
     )
     {
@@ -103,19 +103,9 @@ class CartRule
 
         $staticCartRules::$cartID = $cart->id;
 
-        $customerGroupId = null;
+        $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        if (auth()->guard()->check()) {
-            $customerGroupId = auth()->guard()->user()->customer_group_id;
-        } else {
-            $customerGuestGroup = $this->customerGroupRepository->getCustomerGuestGroup();
-
-            if ($customerGuestGroup) {
-                $customerGroupId = $customerGuestGroup->id;
-            }
-        }
-
-        $cartRules = $this->getCartRuleQuery($customerGroupId, core()->getCurrentChannel()->id);
+        $cartRules = $this->getCartRuleQuery($customerGroup->id, core()->getCurrentChannel()->id);
 
         $staticCartRules::$cartRules = $cartRules;
         

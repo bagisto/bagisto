@@ -111,7 +111,7 @@ class ShipmentRepository extends Repository
                             'shipment'  => $shipment,
                             'product'   => $child->product,
                             'qty'       => $finalQty,
-                            'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0,
+                            'vendor_id' => $data['vendor_id'] ?? 0,
                         ]);
 
                         $this->orderItemRepository->update(['qty_shipped' => $child->qty_shipped + $finalQty], $child->id);
@@ -121,7 +121,7 @@ class ShipmentRepository extends Repository
                         'shipment'  => $shipment,
                         'product'   => $orderItem->product,
                         'qty'       => $qty,
-                        'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0,
+                        'vendor_id' => $data['vendor_id'] ?? 0,
                     ]);
                 }
 
