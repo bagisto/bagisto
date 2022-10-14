@@ -230,7 +230,6 @@
                                         alt=""
                                         width="20"
                                         height="20"
-                                        v-if="locale.image_url"
                                     />
                                 </div>
 
