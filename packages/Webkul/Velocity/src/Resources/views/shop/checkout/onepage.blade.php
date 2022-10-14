@@ -149,10 +149,12 @@
                                 address1: [''],
                                 save_as_address: false,
                                 use_for_shipping: true,
+                                country: '',
                             },
 
                             shipping: {
-                                address1: ['']
+                                address1: [''],
+                                country: '',
                             },
                         },
                     }
