@@ -103,8 +103,7 @@
             "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
             "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
             "Webkul\\Notification\\": "packages/Webkul/Notification/src",
-            "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src",
-            "Webkul\\Faker\\": "packages/Webkul/Faker/src"
+            "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src"
         }
     },
     "autoload-dev": {
