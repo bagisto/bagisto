@@ -7,7 +7,7 @@ return [
                 'general'  => 'جنرال لواء',
                 'category'  => 'الفئة',
                 'settings'  => 'الإعدادات',
-                'extension_name' => 'Velocity موضوع',
+                'extension_name' => 'موضوع السرعة',
                 'error-module-inactive' => 'Warning: حالة سمة السرعة غير نشطة',
             ],
 
@@ -22,6 +22,7 @@ return [
                 'active' => 'نشيط',
                 'inactive' => 'غير نشط',
             ],
+
             'category' => [
                 'all' => 'الكل',
                 'left' => 'اليسار',
@@ -63,7 +64,7 @@ return [
             'tab' => [
                 'page' => 'إعداد الصفحة',
                 'content' => 'إعداد المحتوى',
-                'meta_content' => 'Meta Data',
+                'meta_content' => 'البيانات الوصفية',
             ],
             'page' => [
                 'title' => 'عنوان',
@@ -73,7 +74,7 @@ return [
             'content' => [
                 'content-type' => 'نوع المحتوى',
                 'custom-title' => 'عنوان مخصص',
-                'category-slug' => 'الفئة Slug',
+                'category-slug' => 'فئة الفئة',
                 'link-target' => 'هدف ارتباط الصفحة',
                 'custom-product' => 'تخزين المنتجات',
                 'custom-heading' => 'عنوان مخصص',
@@ -82,7 +83,7 @@ return [
                 'page-link' => '[e.g. http://example.com/../../] رابط الصفحة',
             ],
             'datagrid' => [
-                'id' => 'Id',
+                'id' => 'بطاقة تعريف',
                 'title' => 'عنوان',
                 'status' => 'الحالة',
                 'position' => 'موضع',
@@ -97,7 +98,7 @@ return [
             'footer-left-content' => 'تذييل يسار المحتوى',
             'subscription-content' => 'محتوى شريط الاشتراك',
             'sidebar-categories' => 'فئات الشريط الجانبي',
-            'header_content_count' => 'Header Content Count',
+            'header_content_count' => 'عدد محتوى الرأس',
             'footer-left-raw-content' => '<p>نحن نحب صياغة البرامج وحل مشاكل العالم الحقيقي مع الثنائيات. نحن ملتزمون للغاية بأهدافنا. نحن نستثمر مواردنا لإنشاء برامج وتطبيقات سهلة الاستخدام على مستوى عالمي للأعمال التجارية مع أرفع مستوى ، على أعلى مستوى من الخبرة التقنية.</p>',
             'slider-path' => 'مسار المنزلق',
             'category-logo' => 'شعار الفئة',
@@ -113,14 +114,14 @@ return [
             'general' => 'جنرال لواء',
             'add-image-btn-title' => 'إضافة صورة',
             'footer-middle' => [
-                'about-us'  => 'About Us',
-                'customer-service' => 'Customer Service',
-                'whats-new' => 'What\'s New',
-                'contact-us' => 'Contact Us',
-                'order-and-returns' => 'Order and Returns',
-                'payment-policy' => 'Payment Policy',
-                'shipping-policy' => 'Shipping Policy',
-                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+                'about-us'  => 'معلومات عنا',
+                'customer-service' => 'خدمة الزبائن',
+                'whats-new' => 'ما هو الجديد',
+                'contact-us' => 'اتصل بنا',
+                'order-and-returns' => 'النظام والإرجاع',
+                'payment-policy' => 'الية الدفع',
+                'shipping-policy' => 'سياسة الشحن',
+                'privacy-and-cookies-policy' => 'سياسة الخصوصية وملفات تعريف الارتباط'
             ]
         ],
         'category' => [
@@ -130,7 +131,7 @@ return [
             'edit-title' => 'تحرير محتوى القائمة',
             'btn-add-category' => 'أضف محتوى الفئة',
             'datagrid' => [
-                'category-id' => 'Id الفئة',
+                'category-id' => 'معرف الفئة',
                 'category-name' => 'اسم التصنيف',
                 'category-icon' => 'أيقونة الفئة',
                 'category-status' => 'الحالة',
@@ -144,7 +145,7 @@ return [
             'select' => '-- تحديد --',
             'icon-class' => 'فئة الرمز',
             'select-category' => 'اختر الفئة',
-            'tooltip-content' => 'المحتوى Tooltip',
+            'tooltip-content' => 'تلميح أداة المحتوى',
             'mass-delete-success' => 'تم حذف قائمة الفئات المحددة بنجاح',
         ],
         'general' => [
@@ -163,8 +164,7 @@ return [
     ],
 
     'header' => [
-        'cart' => 'Cart',
-        'cart' => 'Cart',
+        'cart' => 'عربة التسوق',
         'guest' => 'زائر',
         'logout' => 'تسجيل خروج',
         'title' => 'الحساب',
@@ -211,8 +211,8 @@ return [
             'removed-all' => 'تمت إزالة كافة العناصر بنجاح من قائمة المقارنة',
             'already_added' => 'تمت إضافة العنصر بالفعل لمقارنة القائمة',
             'empty-text' => "ليس لديك أي عناصر في قائمة المقارنة الخاصة بك",
-            'product_image' => 'Product Image',
-            'actions' => 'Actions',
+            'product_image' => 'صورة المنتج',
+            'actions' => 'أجراءات',
         ],
         'login-form' => [
             'sign-up' => 'سجل',
@@ -274,8 +274,8 @@ return [
             'female' => 'أنثى',
         ],
         'general' => [
-            'no' => 'No',
-            'yes' => 'Yes',
+            'no' => 'رقم',
+            'yes' => 'نعم',
             'view' => 'رأي',
             'filter' => 'منقي',
             'update' => 'تحديث',
@@ -283,7 +283,7 @@ return [
             'addresses' => 'عناوين',
             'reviews' => 'التعليقات',
             'orders' => 'الطلب #٪ s',
-            'currencies' => 'Currencies',
+            'currencies' => 'العملات',
             'top-brands' => 'ارقى الماركات',
             'new-password' => 'كلمة مرور جديدة',
             'no-file-available' => 'لا يوجد ملف متاح!',
