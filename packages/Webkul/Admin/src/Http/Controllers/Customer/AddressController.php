@@ -72,10 +72,6 @@ class AddressController extends Controller
      */
     public function store()
     {
-        request()->merge([
-            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
-        ]);
-
         $this->validate(request(), [
             'company_name' => [new AlphaNumericSpace],
             'address1'     => ['required', 'array'],
@@ -87,6 +83,10 @@ class AddressController extends Controller
             'vat_id'       => [new VatIdRule()],
         ]);
 
+        request()->merge([
+            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
+        ]);
+        
         Event::dispatch('customer.addresses.create.before');
 
         $customerAddress = $this->customerAddressRepository->create(request()->all());
@@ -119,8 +119,6 @@ class AddressController extends Controller
      */
     public function update($id)
     {
-        request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
-
         $this->validate(request(), [
             'company_name' => [new AlphaNumericSpace],
             'address1'     => ['required', 'array'],
@@ -131,7 +129,11 @@ class AddressController extends Controller
             'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
         ]);
-
+        
+        request()->merge([
+            'address1' => implode(PHP_EOL, array_filter(request()->input('address1')))
+        ]);
+        
         Event::dispatch('customer.addresses.update.before', $id);
 
         $customerAddress = $this->customerAddressRepository->update(request()->all(), $id);
