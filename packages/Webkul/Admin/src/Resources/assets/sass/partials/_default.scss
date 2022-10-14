@@ -915,11 +915,26 @@ body {
 
                     a {
                         margin-left: 0px !important;
+                        margin-top: 5px;
                     }
 
                     .export-import {
                         margin-top: 0px !important;
                         padding-right: 5px !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .content-container {
+        .content {
+            .page-header {
+                .page-action {
+                    a {
+                        margin-top: 20px;
                     }
                 }
             }
@@ -933,7 +948,7 @@ body {
             .page-header {
                 .page-action {
                     a {
-                        margin-top: 10px;
+                        margin-top: 20px;
                     }
                 }
             }
