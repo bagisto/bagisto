@@ -332,7 +332,7 @@ return [
         'header' => [
             'done'      => 'সম্পন্ন',
             'languages' => 'ভাষা',
-            'greeting'  => 'স্বাগত, :গ্রাহক!',
+            'greeting'  => 'স্বাগত, :customer !',
             'greeting-for-guest' => 'স্বাগতম, অতিথি'
         ]
     ],

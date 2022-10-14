@@ -310,7 +310,7 @@ return [
 
     'responsive' => [
         'header' => [
-            'greeting' => 'Bem-vindo, :Cliente !',
+            'greeting' => 'Bem-vindo, :Customer !',
             'greeting-for-guest' => 'Bem vindo convidado'
         ]
     ],

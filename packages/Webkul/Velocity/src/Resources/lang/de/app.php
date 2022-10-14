@@ -310,8 +310,8 @@ return [
     'responsive'    => [
         'header' => [
             'languages' => 'Sprachen',
-            'greeting'  => 'Herzlich willkommen, :Kundin !',
-            'greeting-for-guest' => 'Willkommener Gast'
+            'greeting'  => 'Willkommen, :customer !',
+            'greeting-for-guest' => 'Willkommener, Gast'
         ]
     ],
 ]

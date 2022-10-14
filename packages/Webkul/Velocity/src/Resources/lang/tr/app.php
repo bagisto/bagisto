@@ -308,7 +308,7 @@ return [
         'header' => [
             'done'      => 'Tamamlandı',
             'languages' => 'Diller',
-            'greeting'  => 'Hoşgeldiniz, :Müşteri !',
+            'greeting'  => 'Hoşgeldiniz, :Customer !',
             'greeting-for-guest' => 'Hoşgeldin Misafir'
         ]
     ],

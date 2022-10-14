@@ -332,7 +332,7 @@ return [
         'header' => [
             'done'      => 'නිමි',
             'languages' => 'භාෂා',
-            'greeting'  => 'සාදරයෙන් පිළිගනිමු, :පාරිභෝගිකයා!',
+            'greeting'  => 'සාදරයෙන් පිළිගනිමු, :Customer !',
             'greeting-for-guest' => 'සාදරයෙන් පිළිගනිමු, අමුත්තා'
         ]
     ],

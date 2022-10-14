@@ -332,7 +332,7 @@ return [
         'header' => [
             'done' => 'Fait',
             'languages' => 'Langues',
-            'greeting' => 'Bienvenue, :Client !',
+            'greeting' => 'Bienvenue, :Customer !',
             'greeting-for-guest' => 'Bienvenue, Invité'
         ],
     ],

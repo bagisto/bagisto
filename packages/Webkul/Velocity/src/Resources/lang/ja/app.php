@@ -309,7 +309,7 @@ return [
         'header' => [
             'done'      => 'できた',
             'languages' => '言語',
-            'greeting'  => 'ようこそ、:お客様 !',
+            'greeting'  => 'ようこそ、:Customer !',
             'greeting-for-guest' => 'ようこそゲストさん'
         
         ]

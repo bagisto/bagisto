@@ -331,7 +331,7 @@ return [
         'header' => [
             'done'      => 'पूर्ण',
             'languages' => 'भाषाएं',
-            'greeting'  => 'स्वागत है, ग्राहक !',
+            'greeting'  => 'स्वागत है, :customer !',
             'greeting-for-guest' => 'अतिथि का स्वागत'
         ]
     ],
