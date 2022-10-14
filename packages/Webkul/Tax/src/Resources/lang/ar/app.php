@@ -4,14 +4,14 @@ return [
     'admin' => [
         'system' => [
             'taxes' => [
-                'taxes'                        => 'Taxes',
-                'catalogue'                    => 'Catalog',
-                'pricing'                      => 'Pricing',
-                'tax-inclusive'                => 'Tax inclusive',
-                'default-location-calculation' => 'Default Location Calculation',
-                'default-country'              => 'Default Country',
-                'default-state'                => 'Default State',
-                'default-post-code'            => 'Default Post Code',
+                'taxes'                        => 'الضرائب',
+                'catalogue'                    => 'فهرس',
+                'pricing'                      => 'التسعير',
+                'tax-inclusive'                => 'شامل الضريبة',
+                'default-location-calculation' => 'حساب الموقع الافتراضي',
+                'default-country'              => 'البلد الافتراضي',
+                'default-state'                => 'الحالة الافتراضية',
+                'default-post-code'            => 'رمز البريد الافتراضي',
             ],
         ]
     ]
