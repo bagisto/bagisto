@@ -35,7 +35,7 @@
                 <recently-viewed
                     :title="recentlyViewedTitle"
                     :no-data-text="noDataText"
-                    :add-class="`col-lg-2 col-md-12 ${localeDirection}`"
+                    :add-class="`no-padding col-lg-2 col-md-12 ${localeDirection}`"
                     quantity="3"
                     add-class-wrapper=""
                     v-if="showRecentlyViewed === 'true'">

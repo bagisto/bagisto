@@ -519,22 +519,7 @@ header {
             cursor: pointer;
             display: inline-block;
             margin-top: 5px;
-
-            &:hover {
-                margin: 0px;
-                padding: 10px;
-                background-color: #26a37cc7;
-                border-radius: 8px;
-
-                #mini-cart {
-                    
-                    span,i {
-                        color: #fff;
-                    }
-                }
-            }
-
-
+            
             &.mini-cart-btn {
                 margin-right: 0;
             }
