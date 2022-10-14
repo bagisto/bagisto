@@ -111,7 +111,6 @@
 
             <div class="col-3">
                 <div class="limiter">
-                    <label>{{ __('shop::app.products.show') }}</label>
 
                     <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value" style="width: 57px;" aria-label="Show">
 
