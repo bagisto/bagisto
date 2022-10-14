@@ -35,8 +35,8 @@ class CustomerAddressRequest extends FormRequest
             'address1.*'   => ['required', new Address],
             'country'      => [new AlphaNumericSpace],
             'state'        => [new AlphaNumericSpace],
-            'city'         => ['required'],
-            'postcode'     => ['numeric'],
+            'city'         => ['required', 'string'],
+            'postcode'     => ['required', 'numeric'],
             'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
         ];
