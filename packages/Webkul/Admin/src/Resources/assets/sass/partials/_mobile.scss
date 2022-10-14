@@ -317,7 +317,7 @@ $toggleColor: #3c41ff;
         &.datetime {
             &::after {
                 margin-right: -34px;
-                right: 100% !important;
+                left: 100% !important;
             }
         }
     }
