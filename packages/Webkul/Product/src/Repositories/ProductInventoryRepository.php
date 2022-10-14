@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 
 class ProductInventoryRepository extends Repository
@@ -37,7 +36,5 @@ class ProductInventoryRepository extends Repository
                 'qty' => $qty ?? 0,
             ]);
         }
-
-        Event::dispatch('catalog.product.update.after', $product);
     }
 }
