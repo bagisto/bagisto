@@ -7,8 +7,8 @@ return [
                 'general'  => '一般的',
                 'category'  => '分类',
                 'settings'  => '设置',
-                'extension_name' => 'Velocity主题',
-                'error-module-inactive' => '警告: Velocity主题状态为非活动状态',
+                'extension_name' => '速度主题',
+                'error-module-inactive' => '警告: 速度主题状态为非活动状态',
             ],
 
             'settings' => [
@@ -40,9 +40,9 @@ return [
             ]
         ],
         'layouts'   => [
-            'velocity' => 'Velocity',
-            'cms-pages' => 'CMS页面',
-            'meta-data' => 'Meta数据',
+            'velocity' => '速度',
+            'cms-pages' => '内容管理系统页面',
+            'meta-data' => '元数据',
             'category-menu' => '分类菜单',
             'header-content' => '页头内容',
         ],
@@ -92,7 +92,7 @@ return [
         ],
         'meta-data' => [
             'footer'                    => '设置',
-            'title'                     => 'Velocity元数据',
+            'title'                     => '速度元数据',
             'activate-slider'           => '激活滑块',
             'home-page-content'         => '主页页面内容',
             'footer-left-content'       => '设置居左内容',
@@ -131,7 +131,7 @@ return [
                 'order-and-returns' => '订单和退货',
                 'payment-policy' => '付款政策',
                 'shipping-policy' => '快递政策',
-                'privacy-and-cookies-policy' => '隐私和Cookies政策'
+                'privacy-and-cookies-policy' => '隐私和饼干政策'
             ]
         ],
         'category'  => [
@@ -216,7 +216,7 @@ return [
             'cart-summary'  => '购物车概况',
         ],
         'qty'       => '数量',
-        'items'     => 'Items',
+        'items'     => '项目',
         'subtotal'  => '小计',
         'sub-total' => '小计',
         'proceed'   => '进行结算',
@@ -295,8 +295,8 @@ return [
             'female' => '女性',
         ],
         'general'   => [
-            'no'                     => 'No',
-            'yes'                    => 'Yes',
+            'no'                     => '不',
+            'yes'                    => '是的',
             'view'                   => '查看',
             'filter'                 => '筛选',
             'orders'                 => '订单',
