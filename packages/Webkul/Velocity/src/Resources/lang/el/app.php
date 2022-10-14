@@ -4,9 +4,9 @@ return [
     'admin'         => [
         'system'    => [
             'velocity' => [
-                'general'  => 'Γενικά',
-                'category'  => 'Κατηγορία',
-                'settings'  => 'Ρυθμίσεις',
+                'general'  => 'General',
+                'category'  => 'Category',
+                'settings'  => 'Settings',
                 'extension_name' => 'Velocity Theme',
                 'error-module-inactive' => 'Warning: Velocity theme status is inactive',
             ],
@@ -18,17 +18,17 @@ return [
             ],
 
             'general' => [
-                'status' => 'Κατάσταση',
-                'active' => 'Ενεργό',
-                'inactive' => 'Ανενεργό',
+                'status' => 'Status',
+                'active' => 'Active',
+                'inactive' => 'Inactive',
             ],
             'category' => [
-                'all' => 'Όλα',
-                'left' => 'Αριστερά',
-                'right' => 'Δεξιά',
-                'active' => 'Ενεργό',
+                'all' => 'All',
+                'left' => 'Left',
+                'right' => 'Right',
+                'active' => 'Active',
                 'custom' => 'Custom',
-                'inactive' => 'Ανενεργό',
+                'inactive' => 'Inactive',
                 'image-alignment' => 'Image Alignment',
                 'icon-status' => 'Category Icon Status',
                 'image-status' => 'Category Image Status',
