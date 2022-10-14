@@ -2,47 +2,18 @@
 
 namespace Webkul\Product\Listeners;
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductFlatRepository;
+use Webkul\Product\Helpers\Indexers\Flat\Attribute as FlatIndexer;
 
 class Attribute
 {
     /**
-     * @var array
-     */
-    public $attributeTypeFields = [
-        'text'        => 'text',
-        'textarea'    => 'text',
-        'price'       => 'float',
-        'boolean'     => 'boolean',
-        'select'      => 'integer',
-        'multiselect' => 'text',
-        'datetime'    => 'datetime',
-        'date'        => 'date',
-        'file'        => 'text',
-        'image'       => 'text',
-        'checkbox'    => 'text',
-    ];
-
-    /**
-     * @var array
-     */
-    protected $flatColumns = [];
-
-    /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
+     * @param  \Webkul\Product\Helpers\Indexers\Flat\Attribute  $flatIndexer
      * @return void
      */
-    public function __construct(
-        protected AttributeRepository $attributeRepository,
-        protected ProductFlatRepository $productFlatRepository
-    )
+    public function __construct(protected FlatIndexer $flatIndexer)
     {
-        $this->flatColumns = Schema::getColumnListing('product_flat');
     }
 
     /**
@@ -51,53 +22,30 @@ class Attribute
      * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
      * @return void
      */
-    public function removeOrCreateProductFlatColumn($attribute)
+    public function afterCreate($attribute)
     {
-        if (! $attribute->is_user_defined) {
-            return;
-        }
-
-        if (! $attribute->use_in_flat) {
-            $this->removeProductFlatColumn($attribute->id);
-
-            return;
-        }
-
-        if (in_array($attribute->code, $this->flatColumns)) {
-            return;
-        }
-
-        Schema::table('product_flat', function (Blueprint $table) use($attribute) {
-            $table->{$this->attributeTypeFields[$attribute->type]}($attribute->code)->nullable();
-
-            if (in_array($attribute->type, ['select', 'multiselect'])) {
-                $table->string($attribute->code . '_label')->nullable();
-            }
-        });
-        
-        $this->productFlatRepository->updateAttributeColumn($attribute, $this);
+        $this->flatIndexer->removeOrCreateColumn($attribute);
     }
 
     /**
-     * After the attribute is deleted
+     * After the attribute is created
      *
-     * @param  int  $attributeId
+     * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
      * @return void
      */
-    public function removeProductFlatColumn($attributeId)
+    public function afterUpdate($attribute)
     {
-        $attribute = $this->attributeRepository->find($attributeId);
-        
-        if (! in_array(strtolower($attribute->code), $this->flatColumns)) {
-            return;
-        }
+        $this->flatIndexer->removeOrCreateColumn($attribute);
+    }
 
-        Schema::table('product_flat', function (Blueprint $table) use($attribute) {
-            $table->dropColumn($attribute->code);
-
-            if (in_array($attribute->type, ['select', 'multiselect'])) {
-                $table->dropColumn($attribute->code . '_label');
-            }
-        });
+    /**
+     * Before the attribute is removed
+     *
+     * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
+     * @return void
+     */
+    public function beforeRemove($attribute)
+    {
+        $this->flatIndexer->removeColumn($attribute);
     }
 }
