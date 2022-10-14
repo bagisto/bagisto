@@ -6,12 +6,22 @@
 
 @push('css')
     <style>
-        @media only screen and (max-width: 768px){
-            .content-container .content .page-header .page-title .control-group .control{
-                width: 100% !important;
-                margin-top:-25px !important;
+       @media only screen and (max-width: 728px){
+            .content-container .content .page-header .page-title{
+                width: 100%;
             }
-        }
+
+            .content-container .content .page-header .page-title .control-group {
+                margin-top: 20px!important;
+                width: 100%!important;
+                margin-left: 0!important;
+            }
+
+            .content-container .content .page-header .page-action {
+                margin-top: 10px!important;
+                float: left;
+            }
+       }
     </style>
 @endpush
 
@@ -29,6 +39,18 @@
 
                         {{ __('admin::app.catalog.categories.edit-title') }}
                     </h1>
+
+                    <div class="control-group">
+                        <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
+                            @foreach (core()->getAllLocales() as $localeModel)
+
+                                <option value="{{ route('admin.catalog.categories.update', $category->id) . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                    {{ $localeModel->name }}
+                                </option>
+
+                            @endforeach
+                        </select>
+                    </div>
 
                 </div>
 
