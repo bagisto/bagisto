@@ -537,7 +537,7 @@
                                 this.disable_button = true;
                                 this.$root.hideLoader();
 
-                                window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), "{{ __('shop::app.common.error') }}");
+                                window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), error.response.data.message ? error.response.data.message : "{{ __('shop::app.common.error') }}");
                             })
                         } else {
                             this.disable_button = true;

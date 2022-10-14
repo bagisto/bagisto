@@ -496,7 +496,7 @@ return [
             'continue-registration'    => 'Continuar o registro',
             'proceed-to-checkout'      => 'Finalizar Compra',
             'remove'                   => 'Remover',
-            'remove-link'              => 'Remover',
+            'remove-link'              => 'Remover enlace',
             'remove-all-items'         => 'Remover todos os itens',
             'confirm-action'           => 'Confirme esta ação?',
             'move-to-wishlist'         => 'Mover para Lista de Desejos',
@@ -564,13 +564,6 @@ return [
             'shipping-method'   => 'Selecione o Método de Entrega',
             'payment-methods'   => 'Selecione o Método de Pagamento',
             'payment-method'    => 'Método de Pagamento',
-            'payment-method-name' => [
-                'PayPal Smart Button' => 'Botão Inteligente do PayPal',
-                'PayPal'              => 'PayPal',
-                'Cash On Delivery'    => 'Dinheiro na entrega',          
-                'Money Transfer'      => 'Transferência de dinheiro',        
-                'Paypal Standard'     => 'Padrão do PayPal'
-            ],
             'summary'           => 'Resumo do Pedido',
             'price'             => 'Preço',
             'quantity'          => 'Quantidade',

@@ -576,14 +576,6 @@ return [
             'payment-methods'     => 'اختار طريقة الدفع',
             'payment-method'      => 'طريقة الدفع او السداد',
             'payment-method'      => 'طريقة الدفع',
-            'payment-method-name' => [
-                'PayPal Smart Button' => 'زر PayPal الذكي',
-                'PayPal'              => 'باي بال ',
-                'Cash On Delivery'    => 'الدفع عند الاستلام',                
-                'Money Transfer'      => 'حوالة مالية',                
-                'PayPal Standard'     => 'معيار PayPal'
-                
-            ],
             'summary'             => 'المعلومات',
             'price'               => 'السعر',
             'quantity'            => 'الكمية',

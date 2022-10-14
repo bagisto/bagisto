@@ -316,8 +316,47 @@ $toggleColor: #3c41ff;
         &.date,
         &.datetime {
             &::after {
-                margin-right: -34px;
-                right: 100% !important;
+                right: 10px;
+                left: unset;
+            }
+        }
+
+        label {
+            .locale {
+                right: 0;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 280px) {
+    .navbar-top {
+        .navbar-top-left {
+            .brand-logo {
+                margin-left: 0px !important;
+                a {
+                    img {
+                        width: 100px !important;
+                    }
+                }
+            }
+        }
+
+        .navbar-top-right {
+            .store {
+                padding: 11px 14px !important;
+            }
+        }
+    }
+
+    .content-container {
+        .content {
+            .page-header {
+                .page-action {
+                    a {
+                        padding: 8px 10px !important;
+                    }
+                }
             }
         }
     }
