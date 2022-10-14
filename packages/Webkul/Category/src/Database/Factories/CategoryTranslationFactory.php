@@ -23,7 +23,7 @@ class CategoryTranslationFactory extends Factory
     {
         return [
             'name'        => $this->faker->word,
-            'slug'        => fake()->unique()->slug,
+            'slug'        => $this->faker->unique()->slug,
             'description' => $this->faker->sentence(),
             'locale'      => 'en',
             'locale_id'   => 1,
