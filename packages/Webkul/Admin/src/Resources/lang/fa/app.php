@@ -82,7 +82,7 @@ return [
         'events'                   => 'Events',
         'sitemaps'                 => 'Sitemaps',
         'discount'                 => 'تخفیف',
-        'cms'                      => 'مدیری محتوا',
+        'cms'                      => 'مدیریت محتوا',
         'transactions'             => 'پرداختی ها',
         'events'                   => 'رویداد ها',
     ],
