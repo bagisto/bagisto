@@ -68,6 +68,9 @@
 
                 <div class="form-container">
                     @csrf()
+
+                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.general.before') !!}
+
                     <accordian title="{{ __('admin::app.cms.pages.general') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('{{$locale}}[page_title]') ? 'has-error' : '']">
@@ -104,6 +107,10 @@
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.general.after') !!}
+
+                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.seo.before') !!}
+
                     <accordian title="{{ __('admin::app.cms.pages.seo') }}" :active="true">
                         <div slot="body">
                             <div class="control-group">
@@ -135,6 +142,8 @@
                             </div>
                         </div>
                     </accordian>
+
+                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.seo.after') !!}
                 </div>
             </div>
         </form>
