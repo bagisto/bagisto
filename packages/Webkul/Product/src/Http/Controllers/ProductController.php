@@ -177,7 +177,11 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->findOrFail($id);
 
+        Event::dispatch('catalog.product.update.before', $id);
+
         $this->productInventoryRepository->saveInventories(request()->all(), $product);
+
+        Event::dispatch('catalog.product.update.after', $product);
 
         return response()->json([
             'message'      => __('admin::app.catalog.products.saved-inventory-message'),
