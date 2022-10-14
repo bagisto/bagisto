@@ -275,12 +275,8 @@ class ProductRepository extends Repository
             $sortOptions = explode('-', core()->getConfigData('catalog.products.storefront.sort_by') ?: 'name-desc');
 
             $orderDirection = empty($params['order']) ? end($sortOptions) : $params['order'];
-            
-            if (empty($params['sort'])) {
-                $this->checkSortAttributeAndGenerateQuery($qb, $sortOptions[0], $orderDirection);
-            } else {
-                $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
-            }
+
+            $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'] ?? $sortOptions[0], $orderDirection);
 
             return $qb->groupBy('product_flat.id');
         });
@@ -334,6 +330,10 @@ class ProductRepository extends Repository
      */
     private function checkSortAttributeAndGenerateQuery($query, $sort, $direction)
     {
+        if ($direction == 'rand') {
+            return $query->inRandomOrder();
+        }
+
         $attribute = $this->attributeRepository->findOneByField('code', $sort);
 
         if ($attribute) {
@@ -348,66 +348,6 @@ class ProductRepository extends Repository
         }
 
         return $query;
-    }
-
-    /**
-     * Returns newly added product.
-     *
-     * @param  int  $count
-     * @return \Illuminate\Support\Collection
-     */
-    public function getNewProducts($count = null)
-    {
-        if (! $count) {
-            $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
-        }
-
-        $results = $this->productFlatRepository->scopeQuery(function ($query) {
-            $channel = core()->getRequestedChannelCode();
-
-            $locale = core()->getRequestedLocaleCode();
-
-            return $query->distinct()
-                ->addSelect('product_flat.*')
-                ->where('product_flat.status', 1)
-                ->where('product_flat.visible_individually', 1)
-                ->where('product_flat.new', 1)
-                ->where('product_flat.channel', $channel)
-                ->where('product_flat.locale', $locale)
-                ->inRandomOrder();
-        })->paginate($count ? $count : 4);
-
-        return $results;
-    }
-
-    /**
-     * Returns featured product.
-     *
-     * @param  int  $count
-     * @return \Illuminate\Support\Collection
-     */
-    public function getFeaturedProducts($count = null)
-    {
-        if (! $count) {
-            $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
-        }
-
-        $results = $this->productFlatRepository->scopeQuery(function ($query) {
-            $channel = core()->getRequestedChannelCode();
-
-            $locale = core()->getRequestedLocaleCode();
-
-            return $query->distinct()
-                ->addSelect('product_flat.*')
-                ->where('product_flat.status', 1)
-                ->where('product_flat.visible_individually', 1)
-                ->where('product_flat.featured', 1)
-                ->where('product_flat.channel', $channel)
-                ->where('product_flat.locale', $locale)
-                ->inRandomOrder();
-        })->paginate($count ? $count : 4);
-
-        return $results;
     }
 
     /**
