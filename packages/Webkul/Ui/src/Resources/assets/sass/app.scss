@@ -443,6 +443,7 @@ h5 {
     .dropdown-container {
         padding: 0px;
         overflow-y: auto;
+        border-radius: inherit;
 
         label {
             font-size: 15px;
@@ -472,7 +473,7 @@ h5 {
                         color: $font-color;
                         display: block;
                     }
-    
+
                     &:hover {
                         color: $brand-color;
                     }
@@ -482,7 +483,7 @@ h5 {
                     a {
                         text-decoration: none;
                         color: rgba(58, 58, 58, 0.5);
-    
+
                         &:hover {
                             color: rgba(58, 58, 58, 0.5);
                         }
@@ -519,6 +520,13 @@ h5 {
             width: 100%;
             margin-top: 10px;
         }
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .notification {
+        width: 96vw;
+        margin-right: 2vw;
     }
 }
 
@@ -762,7 +770,7 @@ h5 {
     label {
         display: block;
         color: $font-color;
-        
+
         &.required::after {
             content: '*';
             color: $danger-color;
@@ -1613,44 +1621,3 @@ modal {
     top: 43%;
 }
 
-@media only screen and (max-width: 414px) {
-    .notification {
-        width: 414px;
-    }
-}
-
-@media only screen and (max-width: 411px) {
-    .notification {
-        width: 410px;
-    }
-}
-
-@media only screen and (max-width: 393px) {
-    .notification {
-        width: 393px;
-    }
-}
-
-@media only screen and (max-width: 390px) {
-    .notification {
-        width: 390px;
-    }
-}
-
-@media only screen and (max-width: 375px) {
-    .notification {
-        width: 375px;
-    }
-}
-
-@media only screen and (max-width: 360px) {
-    .notification {
-        width: 360px;
-    }
-}
-
-@media only screen and (max-width: 320px) {
-    .notification {
-        width: 320px;
-    }
-}

@@ -316,8 +316,14 @@ $toggleColor: #3c41ff;
         &.date,
         &.datetime {
             &::after {
-                margin-right: -34px;
-                right: 100% !important;
+                right: 10px;
+                left: unset;
+            }
+        }
+
+        label {
+            .locale {
+                right: 0;
             }
         }
     }
