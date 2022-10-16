@@ -97,7 +97,7 @@
 
             <div class="col-3">
                 <div class="sorter" id="sort-by">
-                    <i class="material-icons">sort_by_alpha</i>
+                    <i class="material-icons">sort</i>
 
                     <select class="selective-div no-border" onchange="window.location.href = this.value">
                         @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
@@ -111,6 +111,7 @@
 
             <div class="col-3">
                 <div class="limiter">
+                    <i class="material-icons">sort</i>
 
                     <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value" style="width: 57px;" aria-label="Show">
 
