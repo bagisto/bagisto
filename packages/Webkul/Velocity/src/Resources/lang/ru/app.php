@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => 'Обновлять',
             'product-view-image'        => 'Просмотр продукта',
             'advertisement-two'         => 'Реклама Два изображения',
-            'advertisement-one'         => 'Реклама одного изображения',
             'footer-middle-content'     => 'Середина нижнего колонтитула',
             'advertisement-four'        => 'Реклама четыре изображения',
             'advertisement-three'       => 'Реклама Три изображения',
