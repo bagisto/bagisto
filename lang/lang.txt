@@ -1,0 +1,9 @@
+Instead of translating manually each page without any authentication , PHP client library can be used .
+
+PHP client library
+Google provides the Cloud Translation API client library for PHP as a single package for both Cloud Translation - Advanced and Cloud Translation.
+
+To install the client library:
+
+composer require google/cloud-translate
+use Google\Cloud\Translate\V2\TranslateClient;
