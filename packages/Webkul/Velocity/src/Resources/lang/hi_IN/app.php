@@ -332,6 +332,7 @@ return [
             'done'      => 'पूर्ण',
             'languages' => 'भाषाएं',
             'greeting'  => 'स्वागत है, :customer !',
+            'greeting-for-guest' => 'अतिथि का स्वागत'
         ]
     ],
 ];

@@ -279,7 +279,7 @@ return [
 
             'order' => [
                 'index' => [
-                    'page-title'      =>'Заказы',
+                    'page-title'      => 'Заказы',
                     'title'           => 'Заказы',
                     'order_id'        => 'Номер заказа',
                     'date'            => 'Дата',
@@ -380,9 +380,9 @@ return [
                 'visibility'           => '«Видимость»',
                 'public'               => '«Общественный»',
                 'private'              => 'Частный',
-                'enable'               => 'Давать возможность',
-                'disable'              => 'Запрещать',
-                'customer-name'        => ':name\'s Shared Wishlist',
+                'enable'               => 'Разрешить',
+                'disable'              => 'Запретить',
+                'customer-name'        => 'Общий список желаний :name ',
                 'enable-wishlist-info' => 'Включите общий доступ к списку желаний, чтобы получить ссылку.',
                 'update-message'       => 'Настройки общего списка желаний успешно обновлены',
             ],
@@ -436,7 +436,7 @@ return [
         'newest-first'             => 'Новички вперед',
         'oldest-first'             => 'Старейший первый',
         'cheapest-first'           => '«Сначала самые дешевые»',
-        'expensive-first'          => '«Сначала дорого»',
+        'expensive-first'          => '«Сначала дорогие»',
         'show'                     => 'Показывать',
         'pager-info'               => 'Показ :показ :всего предметов',
         'description'              => 'Описание',
@@ -499,6 +499,7 @@ return [
             'create-error'              => 'Обнаружена проблема при создании экземпляра корзины.',
             'title'                     => 'Корзина',
             'empty'                     => 'Ваша корзина пуста',
+            'remove-all-items'          => 'Удалить все элементы',
             'update-cart'               => 'Обновить корзину',
             'continue-shopping'         => 'Продолжить покупки',
             'remove-all-items'          => 'Remove all items',
@@ -510,6 +511,7 @@ return [
             'move-to-wishlist'          => 'Добавить в список желаемого',
             'move-to-wishlist-success'  => 'Товар успешно перемещен в список желаний.',
             'move-to-wishlist-error'    => 'Не удается переместить элемент в список желаний, повторите попытку позже.',
+            'confirm-action'            => 'Вы подтверждаете это действие?',
             'add-config-warning'        => 'Пожалуйста, выберите вариант перед добавлением в корзину.',
             'quantity'                  => [
                 'quantity'          => 'Количество',
@@ -536,12 +538,12 @@ return [
             ],
             'minimum-order-message'     => 'Минимальная сумма заказа: сумма',
             'suspended-account-message' => 'Ваша учетная запись была приостановлена.',
-            'inactive-account-message' =>  'Your account has been inactive.',
+            'inactive-account-message' =>  'Ваша учетная запись неактивна.',
             'check-shipping-address'    => 'Пожалуйста, проверьте адрес доставки.',
             'check-billing-address'     => 'Пожалуйста, проверьте платежный адрес.',
             'specify-shipping-method'   => '«Укажите способ доставки».',
             'specify-payment-method'    => 'Укажите способ оплаты.',
-            'rule-applied'              => 'Cart rule applied',
+            'rule-applied'              => 'Скидка была применена',
         ],
 
         'onepage' => [
@@ -614,7 +616,7 @@ return [
             'invalid-coupon'      => 'Код купона недействителен.',
             'success-coupon'      => 'Код купона успешно применен.',
             'coupon-apply-issue'  => 'Код купона не может быть применен.',
-            'coupon-already-applied' => 'Coupon code already applied.',
+            'coupon-already-applied' => 'Код купона уже был использован.',
         ],
 
         'success' => [
@@ -651,11 +653,11 @@ return [
             'thanks'            => 'Спасибо!',
 
             'comment' => [
-                'subject'       => 'New comment added to your order #:order_id',
-                'dear'          => 'Dear :customer_name',
-                'final-summary' => 'Thanks for showing your interest in our store',
-                'help'          => 'If you need any kind of help please contact us at :support_email',
-                'thanks'        => 'Thanks!',
+                'subject'       => 'Новый комментарий был добавлен к вашему заказу #:order_id',
+                'dear'          => 'Уважаемый :customer_name',
+                'final-summary' => 'Спасибо за проявленный интерес к нашему магазину',
+                'help'          => 'Если вам нужна какая-либо помощь, пожалуйста, свяжитесь с нами по адресу: :support_email',
+                'thanks'        => 'Спасибо!',
             ],
 
             'cancel' => [
