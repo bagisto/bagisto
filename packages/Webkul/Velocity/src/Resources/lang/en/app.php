@@ -333,6 +333,7 @@ return [
             'done'      => 'Done',
             'languages' => 'Languages',
             'greeting'  => 'Welcome, :customer !',
+            'greeting-for-guest' => 'Welcome, Guest'
         ]
     ],
 ];
