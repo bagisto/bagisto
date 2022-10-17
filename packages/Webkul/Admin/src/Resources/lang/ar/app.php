@@ -1101,6 +1101,11 @@ return [
             'delete'         => 'تم حذف المشترك بنجاح',
             'delete-failed'  => 'خطأ! المشترك لا يمكن حذفه',
         ],
+
+        'orders' => [
+            'list'  => ':customer_name\'s قائمة الطلبات',
+            'title' => 'ترتيب' ,
+        ],
     ],
 
     'promotions' => [
