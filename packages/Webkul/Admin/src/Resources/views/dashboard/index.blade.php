@@ -221,7 +221,7 @@
                                 <li>
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
                                         <div class="product image">
-                                            <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
+                                            @php $productBaseImage = product_image()->getProductBaseImage($item->product); @endphp
 
                                             <img class="item-image" src="{{ $productBaseImage['small_image_url'] ?? asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.webp') }}" />
                                         </div>
@@ -331,7 +331,7 @@
                                 <li>
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
                                         <div class="image">
-                                            <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
+                                            @php $productBaseImage = product_image()->getProductBaseImage($item->product); @endphp
 
                                             <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
                                         </div>
@@ -529,7 +529,7 @@
                         displayColors: false,
                         callbacks: {
                             label: function(tooltipItem, dataTemp) {
-                                return data['formated_total'][tooltipItem.index];
+                                return data['formatted_total'][tooltipItem.index];
                             }
                         }
                     }

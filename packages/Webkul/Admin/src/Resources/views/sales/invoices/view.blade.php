@@ -72,7 +72,7 @@
                                                 </span>
 
                                                 <span class="value">
-                                                    {{ $order->created_at }}
+                                                    {{ core()->formatDate($order->created_at, 'Y-m-d H:i:s') }}
                                                 </span>
                                             </div>
 
@@ -290,7 +290,7 @@
         <div slot="body">
             <form
                 method="POST"
-                action="{{ route('admin.sales.invoices.send-duplicate-invoice', $invoice->id) }}"
+                action="{{ route('admin.sales.invoices.send_duplicate', $invoice->id) }}"
                 @submit.prevent="onSubmit">
                 @csrf()
 

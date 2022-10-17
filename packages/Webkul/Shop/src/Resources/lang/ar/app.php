@@ -272,7 +272,7 @@ return [
                     'wrong-password' => 'كلمة مرور خاطئة !',
                 ],
 
-                'default-address' => 'Default Address',
+                'default-address' => 'العنوان الافتراضي',
             ],
 
             'order' => [
@@ -315,6 +315,7 @@ return [
                     'shipping-handling'   => 'الشحن والتوصيل',
                     'tax'                 => 'الضرائب',
                     'discount'            => 'تخفيض',
+                    'coupon'              => 'قسيمة',
                     'tax-percent'         => 'نسبة الضرائب',
                     'tax-amount'          => 'المبلغ الضريبي',
                     'discount-amount'     => 'مبلغ الخصم',
@@ -577,14 +578,6 @@ return [
             'payment-methods'     => 'اختار طريقة الدفع',
             'payment-method'      => 'طريقة الدفع او السداد',
             'payment-method'      => 'طريقة الدفع',
-            'payment-method-name' => [
-                'PayPal Smart Button' => 'زر PayPal الذكي',
-                'PayPal'              => 'باي بال ',
-                'Cash On Delivery'    => 'الدفع عند الاستلام',                
-                'Money Transfer'      => 'حوالة مالية',                
-                'PayPal Standard'     => 'معيار PayPal'
-                
-            ],
             'summary'             => 'المعلومات',
             'price'               => 'السعر',
             'quantity'            => 'الكمية',

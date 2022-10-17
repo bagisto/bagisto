@@ -47,7 +47,9 @@
 
                             <div class="control-group" :class="[errors.has('marketing_event_id') ? 'has-error' : '']">
                                 <label for="marketing_event_id" class="required">{{ __('admin::app.marketing.campaigns.event') }}</label>
-                                <?php $selectedOption = old('marketing_event_id') ?: $campaign->marketing_event_id ?>
+
+                                @php $selectedOption = old('marketing_event_id') ?: $campaign->marketing_event_id @endphp
+
                                 <select class="control" v-validate="'required'" id="marketing_event_id" name="marketing_event_id" data-vv-as="&quot;{{ __('admin::app.marketing.campaigns.event') }}&quot;">
                                     @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
                                         <option value="{{ $event->id }}" {{ $selectedOption == $event->id ? 'selected' : '' }}>
@@ -60,7 +62,9 @@
 
                             <div class="control-group" :class="[errors.has('marketing_template_id') ? 'has-error' : '']">
                                 <label for="marketing_template_id" class="required">{{ __('admin::app.marketing.campaigns.email-template') }}</label>
-                                <?php $selectedOption = old('marketing_template_id') ?: $campaign->marketing_template_id ?>
+
+                                @php $selectedOption = old('marketing_template_id') ?: $campaign->marketing_template_id @endphp
+
                                 <select v-validate="'required'" class="control" id="marketing_template_id" name="marketing_template_id" data-vv-as="&quot;{{ __('admin::app.marketing.campaigns.email-template') }}&quot;">
                                     @foreach (app('Webkul\Marketing\Repositories\TemplateRepository')->all() as $template)
                                         <option value="{{ $template->id }}" {{ $selectedOption == $template->id ? 'selected' : '' }}>
@@ -73,7 +77,9 @@
 
                             <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
                                 <label for="status" class="required">{{ __('admin::app.marketing.campaigns.status') }}</label>
-                                <?php $selectedOption = old('status') ?: $campaign->status ?>
+
+                                @php $selectedOption = old('status') ?: $campaign->status @endphp
+
                                 <select class="control" v-validate="'required'" id="status" name="status" data-vv-as="&quot;{{ __('admin::app.marketing.campaigns.display-mode') }}&quot;">
                                     <option value="0" {{ $selectedOption == 0 ? 'selected' : '' }}>
                                         {{ __('admin::app.marketing.campaigns.inactive') }}
@@ -93,7 +99,9 @@
 
                             <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">
                                 <label for="channel_id" class="required">{{ __('admin::app.marketing.campaigns.channel') }}</label>
-                                <?php $selectedOption = old('channel_id') ?: $campaign->channel_id ?>
+
+                                @php $selectedOption = old('channel_id') ?: $campaign->channel_id @endphp
+
                                 <select v-validate="'required'" class="control" id="channel_id" name="channel_id" data-vv-as="&quot;{{ __('admin::app.marketing.campaigns.channel') }}&quot;">
                                     @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                         <option value="{{ $channel->id }}" {{ $selectedOption == $channel->id ? 'selected' : '' }}>
@@ -106,7 +114,9 @@
 
                             <div class="control-group" :class="[errors.has('customer_group_id') ? 'has-error' : '']">
                                 <label for="customer_group_id" class="required">{{ __('admin::app.marketing.campaigns.customer-group') }}</label>
-                                <?php $selectedOption = old('customer_group_id') ?: $campaign->customer_group_id ?>
+
+                                @php $selectedOption = old('customer_group_id') ?: $campaign->customer_group_id @endphp
+
                                 <select v-validate="'required'" class="control" id="customer_group_id" name="customer_group_id" data-vv-as="&quot;{{ __('admin::app.marketing.campaigns.customer-group') }}&quot;">
                                     @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
                                         <option value="{{ $customerGroup->id }}" {{ $selectedOption == $customerGroup->id ? 'selected' : '' }}>

@@ -5,7 +5,7 @@
 @stop
 
 @section('content-wrapper')
-    <?php $order = $shipment->order; ?>
+    @php $order = $shipment->order; @endphp
 
     <div class="content full-page">
         <div class="page-header">
@@ -49,7 +49,7 @@
                                         </span>
 
                                         <span class="value">
-                                            {{ $order->created_at }}
+                                            {{ core()->formatDate($order->created_at, 'Y-m-d H:i:s') }}
                                         </span>
                                     </div>
 
@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                                            
+                        </div>
                     </div>
                 </accordian>
 
@@ -140,7 +140,7 @@
                                         </div>
                                     </div>
                                 @endif
-                            </div>                            
+                            </div>
                         </div>
                     </accordian>
                 @endif
@@ -238,7 +238,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                       
+                        </div>
                     </div>
                 </accordian>
 
@@ -280,7 +280,7 @@
 
                                     </tbody>
                                 </table>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                 </accordian>

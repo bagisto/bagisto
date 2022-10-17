@@ -10,7 +10,7 @@
             <div class="magnifier">
                 <img
                     :src="activeImageVideoURL"
-                    :data-zoom-image="activeImageVideoURL"
+                    :data-zoom-image="activeOriginalImage"
                     :class="[
                         ! isMobile()
                             ? 'main-product-image'
@@ -27,8 +27,7 @@
     .image-container {
         .magnifier {
             > img {
-                max-width: 100%;
-                max-height: 420px;
+                width: 100%;
             }
         }
     }
@@ -36,13 +35,6 @@
     @media only screen and (max-width: 992px) {
         .image-container {
             margin: 0 auto;
-
-            .magnifier {
-                > img {
-                    width: 100%;
-                    max-height: 300px;
-                }
-            }
         }
     }
 
@@ -60,12 +52,17 @@
 
 <script type="text/javascript">
 export default {
-    props: ['src', 'type'],
+    props: [
+        'src',
+        'zoomSrc',
+        'type'
+    ],
 
     data: function () {
         return {
             activeImage: null,
             activeImageVideoURL: this.src,
+            activeOriginalImage: this.zoomSrc,
             currentType: this.type,
         };
     },
@@ -74,30 +71,34 @@ export default {
         /* binding should be with class as ezplus is having bug of creating multiple containers */
         this.activeImage = $('.main-product-image');
         this.activeImage.attr('src', this.activeImageVideoURL);
-        this.activeImage.data('zoom-image', this.activeImageVideoURL);
+        this.activeImage.data('zoom-image', this.activeOriginalImage);
 
         /* initialise zoom */
         this.elevateZoom();
 
         this.$root.$on(
             'changeMagnifiedImage',
-            ({ smallImageUrl, largeImageUrl, currentType }) => {
+            ({ largeImageUrl, originalImageUrl, currentType }) => {
                 /* removed old instance */
                 $('.zoomContainer').remove();
                 this.activeImage.removeData('elevateZoom');
 
                 /* getting url */
-                this.activeImageVideoURL = smallImageUrl;
+                this.activeImageVideoURL = largeImageUrl;
+
+                /* getting url */
+                this.activeOriginalImage = originalImageUrl;
 
                 /* type checking for media type */
                 this.currentType = currentType;
 
                 /* waiting added for image because image element takes time load when switching from video  */
                 this.waitForElement('.main-product-image', () => {
+                    console.log(originalImageUrl)
                     /* update source for images */
                     this.activeImage = $('.main-product-image');
-                    this.activeImage.attr('src', smallImageUrl);
-                    this.activeImage.data('zoom-image', largeImageUrl);
+                    this.activeImage.attr('src', largeImageUrl);
+                    this.activeImage.data('zoom-image', originalImageUrl);
 
                     /* reinitialize zoom */
                     this.elevateZoom();

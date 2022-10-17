@@ -13,7 +13,7 @@
                         {{ __('velocity::app.customer.forget-password.forgot-password')}}
                     </h2>
 
-                    <a href="{{ route('customer.session.index') }}" class="btn-new-customer">
+                    <a href="{{ route('shop.customer.session.index') }}" class="btn-new-customer">
                         <button type="button" class="theme-btn light">
                             {{  __('velocity::app.customer.signup-form.login') }}
                         </button>
@@ -33,7 +33,7 @@
 
                     <form
                         method="post"
-                        action="{{ route('customer.forgot-password.store') }}"
+                        action="{{ route('shop.customer.forgot-password.store') }}"
                         @submit.prevent="onSubmit">
 
                         {{ csrf_field() }}

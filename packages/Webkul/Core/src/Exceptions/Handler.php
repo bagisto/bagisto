@@ -52,7 +52,7 @@ class Handler extends AppExceptionHandler
             return response()->json(['error' => $this->jsonErrorMessages[401]], 401);
         }
 
-        return redirect()->guest(route('customer.session.index'));
+        return redirect()->guest(route('shop.customer.session.index'));
     }
 
     /**
@@ -102,9 +102,7 @@ class Handler extends AppExceptionHandler
     {
         if (request()->expectsJson()) {
             return response()->json([
-                'error' => isset($this->jsonErrorMessages[$statusCode])
-                    ? $this->jsonErrorMessages[$statusCode]
-                    : 'Something went wrong, please try again later.'
+                'error' => $this->jsonErrorMessages[$statusCode] ?? 'Something went wrong, please try again later.',
             ], $statusCode);
         }
 

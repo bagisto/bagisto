@@ -7,7 +7,7 @@
 @section('content-wrapper')
     @push('scripts')
         <script>
-            window.location = '{{ route('customer.wishlist.index') }}';
+            window.location = '{{ route('shop.customer.wishlist.index') }}';
         </script>
     @endpush
 @endsection

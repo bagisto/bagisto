@@ -11,6 +11,6 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
         \Webkul\CartRule\Models\CartRuleTranslation::class,
         \Webkul\CartRule\Models\CartRuleCustomer::class,
         \Webkul\CartRule\Models\CartRuleCoupon::class,
-        \Webkul\CartRule\Models\CartRuleCouponUsage::class
+        \Webkul\CartRule\Models\CartRuleCouponUsage::class,
     ];
 }

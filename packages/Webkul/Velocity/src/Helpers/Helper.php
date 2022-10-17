@@ -2,10 +2,9 @@
 
 namespace Webkul\Velocity\Helpers;
 
-use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Helpers\Review;
-use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
@@ -17,20 +16,20 @@ class Helper extends Review
     /**
      * Create a helper instance.
      *
-     * @param  \Webkul\Product\Contracts\Product  $productModel
-     * @param  \Webkul\Velocity\Repositories\OrderBrandsRepository  $orderBrands
      * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
+     * @param  \Webkul\Velocity\Repositories\OrderBrandsRepository  $productRepository
+     * @param  \Webkul\ProductFlatRepository\Repositories\ProductRepository  $productFlatRepository
      * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $orderBrands
      * @param  \Webkul\Velocity\Repositories\VelocityMetadataRepository  $velocityMetadataRepository
      * @return void
      */
     public function __construct(
-        protected ProductModel $productModel,
-        protected ProductRepository $productRepository,
         protected AttributeOptionRepository $attributeOptionRepository,
+        protected ProductRepository $productRepository,
         protected ProductFlatRepository $productFlatRepository,
-        protected OrderBrandsRepository $orderBrandsRepository,
         protected ProductReviewRepository $productReviewRepository,
+        protected OrderBrandsRepository $orderBrandsRepository,
         protected VelocityMetadataRepository $velocityMetadataRepository
     )
     {
@@ -40,22 +39,17 @@ class Helper extends Review
      * Top brand.
      *
      * @param  \Webkul\Sales\Contracts\Order  $order
-     *
      * @return void
      */
     public function topBrand($order)
     {
-        $orderItems = $order->items;
-
-        foreach ($orderItems as $key => $orderItem) {
-            $products[] = $orderItem->product;
-
+        foreach ($order->items as $orderItem) {
             try {
                 $this->orderBrandsRepository->create([
                     'order_item_id' => $orderItem->id,
                     'order_id'      => $orderItem->order_id,
                     'product_id'    => $orderItem->product_id,
-                    'brand'         => $products[$key]->brand,
+                    'brand'         => $orderItem->product->brand,
                 ]);
             } catch (\Exception $exception) {
             }
@@ -65,57 +59,57 @@ class Helper extends Review
     /**
      * Get brands with categories.
      *
-     * @return \Illuminate\Support\Collection|\Exception
+     * @return \Illuminate\Support\Collection|null
      */
     public function getBrandsWithCategories()
     {
-        try {
-            $orderBrand = $this->orderBrandsRepository->get()->toArray();
+        $orderBrands = $this->orderBrandsRepository->get()->toArray();
 
-            if (
-                isset($orderBrand)
-                && ! empty($orderBrand)
-            ) {
-                foreach ($orderBrand as $product) {
-                    $product_id[] = $product['product_id'];
-
-                    $product_categories = $this->productRepository->with('categories')->findWhereIn('id', $product_id)->toArray();
-                }
-
-                $categoryName = $brandName = $brandImplode = [];
-
-                foreach ($product_categories as $totalData) {
-                    $brand = $this->attributeOptionRepository->findOneWhere(['id' => $totalData['brand']]);
-
-                    foreach ($totalData['categories'] as $categories) {
-                        foreach ($categories['translations'] as $catName) {
-                            if (isset($brand->admin_name)) {
-                                $brandData[$brand->admin_name][] = $catName['name'];
-                                $categoryName[] = $catName['name'];
-                            }
-                        }
-                    }
-                }
-
-                $uniqueCategoryName = array_unique($categoryName);
-
-                foreach ($uniqueCategoryName as $key => $categoryNameValue) {
-                    foreach ($brandData as $brandDataKey => $brandDataValue) {
-                        if (in_array($categoryNameValue, $brandDataValue)) {
-                            $brandName[$categoryNameValue][] = $brandDataKey;
-                        }
-                    }
-                }
-
-                foreach ($brandName as $brandKey => $brandvalue) {
-                    $brandImplode[$brandKey][] = implode(' | ', array_map('ucfirst', $brandvalue));
-                }
-
-                return $brandImplode;
-            }
-        } catch (\Exception $exception) {
-            throw $exception;
+        if (empty($orderBrands)) {
+            return;
         }
+        
+        foreach ($orderBrands as $product) {
+            $productCategories = $this->productRepository->with('categories')->findWhereIn('id', [$product['product_id']])->toArray();
+        }
+
+        $categoryNames = [];
+
+        foreach ($productCategories as $totalData) {
+            $brand = $this->attributeOptionRepository->findOneWhere(['id' => $totalData['brand']]);
+
+            foreach ($totalData['categories'] as $category) {
+                foreach ($category['translations'] as $categoryTranslation) {
+                    if (! isset($brand->admin_name)) {
+                        continue;
+                    }
+
+                    $categoryNames[] = $brandData[$brand->admin_name][] = $categoryTranslation['name'];
+                }
+            }
+        }
+
+        $brandNames = [];
+
+        $uniqueCategoryNames = array_unique($categoryNames);
+
+        foreach ($uniqueCategoryNames as $categoryNameValue) {
+            foreach ($brandData as $brandDataKey => $brandDataValue) {
+                if (! in_array($categoryNameValue, $brandDataValue)) {
+                    continue;
+                }
+
+                $brandNames[$categoryNameValue][] = $brandDataKey;
+            }
+        }
+
+        $brands = [];
+
+        foreach ($brandNames as $brandKey => $brandValue) {
+            $brands[$brandKey][] = implode(' | ', array_map('ucfirst', $brandValue));
+        }
+
+        return $brands;
     }
 
     /**
@@ -267,7 +261,7 @@ class Helper extends Review
         $productImage = ProductImage::getProductBaseImage($product, $galleryImages)['medium_image_url'];
 
         $largeProductImageName = 'large-product-placeholder.png';
-        $mediumProductImageName = 'meduim-product-placeholder.png';
+        $mediumProductImageName = 'medium-product-placeholder.png';
 
         if (strpos($productImage, $mediumProductImageName) > -1) {
             $productImageNameCollection = explode('/', $productImage);
@@ -296,17 +290,15 @@ class Helper extends Review
             'firstReviewText'  => trans('velocity::app.products.be-first-review'),
             'addToCartHtml'    => view('shop::products.add-to-cart', [
                 'product'          => $product,
-                'addWishlistClass' => ! (isset($list) && $list) ? '' : '',
+                'addWishlistClass' => '',
 
                 'showCompare' => (bool) core()->getConfigData('general.content.shop.compare_option'),
 
-                'btnText' => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
-                    ? $metaInformation['btnText'] : null,
+                'btnText' => $metaInformation['btnText'] ?? null,
 
-                'moveToCart' => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
-                    ? $metaInformation['moveToCart'] : null,
+                'moveToCart' => $metaInformation['moveToCart'] ?? null,
 
-                'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
+                'addToCartBtnClass' => empty($list) ? 'small-padding' : '',
             ])->render(),
         ];
     }

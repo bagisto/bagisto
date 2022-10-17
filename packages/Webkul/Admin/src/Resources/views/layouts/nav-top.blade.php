@@ -43,14 +43,14 @@
 
             <notification
                 notif-title="{{ __('admin::app.notification.notification-title', ['read' => 0]) }}"
-                get-notification-url="{{ route('admin.notification.get-notification') }}"
+                get-notification-url="{{ route('admin.notification.get_notification') }}"
                 view-all="{{ route('admin.notification.index') }}"
                 order-view-url="{{ \URL::to('/') }}/{{ config('app.admin_url')}}/viewed-notifications/"
                 pusher-key="{{ env('PUSHER_APP_KEY') }}"
                 pusher-cluster="{{ env('PUSHER_APP_CLUSTER') }}"
                 title="{{ __('admin::app.notification.title-plural') }}"
                 view-all-title="{{ __('admin::app.notification.view-all') }}"
-                get-read-all-url="{{ route('admin.notification.read-all') }}"
+                get-read-all-url="{{ route('admin.notification.read_all') }}"
                 order-status-messages="{{ json_encode($orderStatusMessages) }}"
                 read-all-title="{{ __('admin::app.notification.read-all') }}"
                 locale-code={{ core()->getCurrentLocale()->code }}>

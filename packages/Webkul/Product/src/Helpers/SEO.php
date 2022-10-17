@@ -10,7 +10,7 @@ class SEO
      * Returns product json ld data for product
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
-     * @return array
+     * @return string
      */
     public function getProductJsonLd($product)
     {

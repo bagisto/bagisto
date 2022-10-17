@@ -5,6 +5,7 @@ namespace Webkul\Tax\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
+use Webkul\Admin\DataGrids\TaxCategoryDataGrid;
 
 class TaxCategoryController extends Controller
 {
@@ -28,6 +29,20 @@ class TaxCategoryController extends Controller
     )
     {
         $this->_config = request('_config');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        if (request()->ajax()) {
+            return app(TaxCategoryDataGrid::class)->toJson();
+        }
+
+        return view($this->_config['view']);
     }
 
     /**
@@ -60,7 +75,7 @@ class TaxCategoryController extends Controller
 
         $taxCategory = $this->taxCategoryRepository->create($data);
 
-        $this->taxCategoryRepository->attachOrDetach($taxCategory, $data['taxrates']);
+        $taxCategory->tax_rates()->sync($data['taxrates']);
 
         Event::dispatch('tax.tax_category.create.after', $taxCategory);
 
@@ -103,7 +118,7 @@ class TaxCategoryController extends Controller
 
         $taxCategory = $this->taxCategoryRepository->update($data, $id);
 
-        $this->taxCategoryRepository->attachOrDetach($taxCategory, $data['taxrates']);
+        $taxCategory->tax_rates()->sync($data['taxrates']);
 
         Event::dispatch('tax.tax_category.update.after', $taxCategory);
 

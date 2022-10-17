@@ -1,16 +1,15 @@
 @foreach ($cart->items as $item)
-    <?php
+    @php
         $product = $item->product;
 
         if ($product->cross_sells()->count()) {
             $products[] = $product;
             $products = array_unique($products);
         }
-    ?>
+    @endphp
 @endforeach
 
 @if (isset($products))
-
     <card-list-header
         heading="{{ __('shop::app.products.cross-sell-title') }}"
         view-all="false"

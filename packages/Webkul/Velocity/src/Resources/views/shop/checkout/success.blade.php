@@ -13,7 +13,7 @@
                 @if (auth()->guard('customer')->user())
                     {!! 
                         __('shop::app.checkout.success.order-id-info', [
-                            'order_id' => '<a href="' . route('customer.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
+                            'order_id' => '<a href="' . route('shop.customer.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
                         ])
                     !!}
                 @else
@@ -35,7 +35,7 @@
 
                     @guest('customer')
                         <span class="">
-                            <a href="{{ route('customer.register.index') }}" class="theme-btn remove-decoration">
+                            <a href="{{ route('shop.customer.register.index') }}" class="theme-btn remove-decoration">
                                 {{ __('shop::app.checkout.cart.continue-registration') }}
                             </a>
                         </span>

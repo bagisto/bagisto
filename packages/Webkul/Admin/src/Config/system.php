@@ -139,11 +139,6 @@ return [
                 'type'       => 'number',
                 'validation' => 'min:0',
             ],
-            [
-                'name'  => 'out_of_stock_items',
-                'title' => 'admin::app.admin.system.allow-out-of-stock-items',
-                'type'  => 'boolean',
-            ],
         ],
     ], [
         'key'    => 'catalog.products.storefront',

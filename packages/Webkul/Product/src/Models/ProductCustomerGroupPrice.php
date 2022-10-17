@@ -5,7 +5,7 @@ namespace Webkul\Product\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Product\Contracts\ProductCustomerGroupPrice as ProductCustomerGroupPriceContract;
-use Webkul\Product\Models\CustomerGroup;
+use Webkul\Customer\Models\CustomerGroupProxy;
 
 class ProductCustomerGroupPrice extends Model implements ProductCustomerGroupPriceContract
 {

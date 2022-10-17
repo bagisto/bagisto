@@ -74,7 +74,7 @@ class DownloadableProductDataGrid extends DataGrid
                 ) {
                     return $value->product_name;
                 } else {
-                    return $value->product_name . ' ' . '<a href="' . route('customer.downloadable_products.download', $value->id) . '" target="_blank">' . $value->name . '</a>';
+                    return $value->product_name . ' ' . '<a href="' . route('shop.customer.downloadable_products.download', $value->id) . '" target="_blank">' . $value->name . '</a>';
                 }
             },
         ]);
@@ -97,11 +97,11 @@ class DownloadableProductDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status == 'pending') {
-                    return trans('shop::app.customer.account.downloadable_products.pending');
+                    return '<span class="badge badge-md badge-warning">' .trans('shop::app.customer.account.downloadable_products.pending'). '</span>';
                 } elseif ($value->status == 'available') {
-                    return trans('shop::app.customer.account.downloadable_products.available');
+                    return '<span class="badge badge-md badge-success">' .trans('shop::app.customer.account.downloadable_products.available'). '</span>';
                 } elseif ($value->status == 'expired') {
-                    return trans('shop::app.customer.account.downloadable_products.expired');
+                    return '<span class="badge badge-md badge-danger">' .trans('shop::app.customer.account.downloadable_products.expired'). '</span>';
                 }
             },
         ]);

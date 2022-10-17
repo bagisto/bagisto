@@ -55,7 +55,7 @@ class OrderCest
         /**
          * Simulate the entering of the address(es).
          */
-        $I->sendAjaxPostRequest(route('shop.checkout.save-address'), [
+        $I->sendAjaxPostRequest(route('shop.checkout.save_address'), [
             '_token'   => csrf_token(),
             'billing'  => array_merge($addressData, [
                 'address1'         => ['900 Nobel Parkway'],
@@ -83,14 +83,14 @@ class OrderCest
             'customer_id'  => $mocks['customer']->id,
         ]));
 
-        $I->sendAjaxPostRequest(route('shop.checkout.save-shipping'), [
+        $I->sendAjaxPostRequest(route('shop.checkout.save_shipping'), [
             '_token'          => csrf_token(),
             'shipping_method' => 'free_free',
         ]);
 
         $I->seeResponseCodeIsSuccessful();
 
-        $I->sendAjaxPostRequest(route('shop.checkout.save-payment'), [
+        $I->sendAjaxPostRequest(route('shop.checkout.save_payment'), [
             '_token'  => csrf_token(),
             'payment' => [
                 'method' => 'cashondelivery',
@@ -109,7 +109,7 @@ class OrderCest
          * Simulate click on the 'place order' button at the last step.
          */
         $I->sendAjaxPostRequest(
-            route('shop.checkout.save-order'),
+            route('shop.checkout.save_order'),
             ['_token' => csrf_token()]
         );
 

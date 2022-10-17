@@ -15,7 +15,7 @@ abstract class AbstractProduct
     protected $productFlat = [];
 
     /**
-     * Add Channle and Locale filter
+     * Add Channel and Locale filter
      *
      * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
      * @param  \Illuminate\Database\Eloquent\Builder  $qb

@@ -3,6 +3,7 @@
 namespace Webkul\Rule\Helpers;
 
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Checkout\Contracts\Cart as CheckoutContract;
 
 class Validator
 {
@@ -24,15 +25,13 @@ class Validator
         foreach ($rule->conditions as $condition) {
             if (
                 ! $condition['attribute']
-                || ! isset($condition['value'])
-                || is_null($condition['value'])
-                ||  $condition['value'] == ''
+                || empty($condition['value'])
             ) {
                 continue;
             }
 
             if (
-                $entity instanceof \Webkul\Checkout\Contracts\Cart
+                $entity instanceof CheckoutContract
                 && strpos($condition['attribute'], 'cart|') === false
             ) {
                 continue;
@@ -73,7 +72,7 @@ class Validator
 
         switch (current($chunks)) {
             case 'cart':
-                $cart = $entity instanceof \Webkul\Checkout\Contracts\Cart ? $entity : $entity->cart;
+                $cart = $entity instanceof CheckoutContract ? $entity : $entity->cart;
 
                 if (in_array($attributeCode, ['postcode', 'state', 'country'])) {
                     if (! $cart->shipping_address) {

@@ -26,16 +26,22 @@ class CheckForMaintenanceMode extends Original
 
     /**
      * Exclude route names.
+     * 
+     * @var array
      */
     protected $excludedNames = [];
 
     /**
      * Exclude route uris.
+     * 
+     * @var array
      */
     protected $except = [];
 
     /**
      * Exclude IPs.
+     * 
+     * @var array
      */
     protected $excludedIPs = [];
 

@@ -11,7 +11,7 @@
         <div class="review-layouter">
             @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 
-            <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
+            <?php $productBaseImage = product_image()->getProductBaseImage($product); ?>
 
             <div class="product-info">
                 <div class="product-image">
@@ -27,11 +27,7 @@
                 </div>
 
                 <div class="product-price mt-10">
-                    @if ($product->getTypeInstance()->haveSpecialPrice())
-                        <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getSpecialPrice()) }}</span>
-                    @else
-                        <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getMinimalPrice()) }}</span>
-                    @endif
+                    <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getMinimalPrice()) }}</span>
                 </div>
             </div>
 
