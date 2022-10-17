@@ -105,7 +105,6 @@ return [
             'update-meta-data' => 'متا دیتا به روز رسانی',
             'product-view-image' => 'تصویر نمایش محصول',
             'advertisement-two' => 'تبلیغات دو تصویر',
-            'advertisement-one' => 'تبلیغات یک تصویر',
             'footer-middle-content' => 'پاورقی مطالب میانی',
             'advertisement-four' => 'تبلیغات چهار تصویر',
             'advertisement-three' => 'تبلیغات سه تصویر',

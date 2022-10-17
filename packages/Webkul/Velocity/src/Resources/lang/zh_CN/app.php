@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => '更新元数据',
             'product-view-image'        => '产品视图图片',
             'advertisement-two'         => '两个图像广告',
-            'advertisement-one'         => '一个图像广告',
             'footer-middle-content'     => '设置居中内容',
             'advertisement-four'        => '四个图像广告',
             'advertisement-three'       => '三个图像广告',

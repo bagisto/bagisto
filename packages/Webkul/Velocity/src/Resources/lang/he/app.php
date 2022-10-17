@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => 'עדכון',
             'product-view-image'        => 'תמונת תצוגת מוצר',
             'advertisement-two'         => 'מודעה שתי תמונות',
-            'advertisement-one'         => 'תמונות פרסומת אחת',
             'footer-middle-content'     => 'תוכן תחתונה באמצע',
             'advertisement-four'        => 'פרסומת ארבע תמונות',
             'advertisement-three'       => 'פרסומת שלוש תמונות',

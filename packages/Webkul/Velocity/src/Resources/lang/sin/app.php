@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => 'යාවත්කාලීන',
             'product-view-image'        => 'නිෂ්පාදන දසුන් රූපය',
             'advertisement-two'         => 'වෙළඳ දැන්වීම් පින්තූර දෙකක්',
-            'advertisement-one'         => 'වෙළඳ දැන්වීම් එක රූප',
             'footer-middle-content'     => 'පාද මධ්‍ය අන්තර්ගතය',
             'advertisement-four'        => 'වෙළඳ දැන්වීම් හතර රූප',
             'advertisement-three'       => 'වෙළඳ දැන්වීම් තුන පින්තූර',

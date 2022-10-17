@@ -106,7 +106,6 @@ return [
             'update-meta-data' => 'تحديث بيانات التعريف',
             'product-view-image' => 'صورة عرض المنتج',
             'advertisement-two' => 'إعلان صورتين',
-            'advertisement-one' => 'إعلان صور واحدة',
             'footer-middle-content' => 'تذييل المحتوى الأوسط',
             'advertisement-four' => 'إعلان أربع صور',
             'advertisement-three' => 'إعلان ثلاث صور',
