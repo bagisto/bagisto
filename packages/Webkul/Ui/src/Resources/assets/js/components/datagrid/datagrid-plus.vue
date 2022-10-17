@@ -2,7 +2,7 @@
     <div class="table" v-if="isDataLoaded" :key="dataGridIndex">
         <div class="grid-container">
             <div class="grid-top">
-                <div class="datagrid-filters">
+                <div class="datagrid-filters" id="datagrid-filters">
                     <datagrid-extra-filters
                         :extra-filters="extraFilters"
                         :translations="translations"
