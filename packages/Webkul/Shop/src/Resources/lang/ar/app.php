@@ -101,7 +101,7 @@ return [
             'added'                 => 'تمت إضافة العنصر بنجاح لمقارنة القائمة',
             'removed'               => 'تمت إزالة العنصر بنجاح من قائمة المقارنة',
             'removed-all'           => 'تمت إزالة جميع العناصر بنجاح من قائمة المقارنة',
-            'confirm-remove-all'    => 'Are you sure you want to delete all compare items?',
+            'confirm-remove-all'    => 'هل أنت متأكد أنك تريد حذف كافة عناصر المقارنة؟',
             'already_added'         => 'تمت إضافة العنصر بالفعل لمقارنة القائمة',
             'empty-text'            => 'ليس لديك أي عناصر في قائمة المقارنة الخاصة بك',
             'product_image'         => 'صورة المنتج',
@@ -343,7 +343,7 @@ return [
                     'adjustment-refund'   => 'تعديلات عملية الإسترجاع',
                     'adjustment-fee'      => 'تكلفة تعديلات عملية الإسترجاع',
                     'cancel-confirm-msg'  => 'هل أنت متأكد من أنك تريد إلغاء هذا الطلب ؟',
-                    'tracking-number'     => 'Tracking Number',
+                    'tracking-number'     => 'أرقام التتبع',
                 ],
             ],
 
@@ -481,10 +481,6 @@ return [
         'tax-inclusive'            => 'شاملة لجميع الضرائب',
     ],
 
-    // 'reviews' => [
-    //     'empty' => 'أنت لم تراجع أي منتج لحد الآن'
-    // ]
-
     'buynow' => [
         'no-options' => 'رجاء تحديد خيارات قبل شراء هذا المنتج',
     ],
@@ -612,7 +608,7 @@ return [
             'price'               => 'السعر ',
             'disc-amount'         => 'المبلغ المخصوم',
             'new-grand-total'     => 'المجموع الكلي الجديد',
-            'coupon'              => 'Coupon',
+            'coupon'              => 'قسيمة',
             'coupon-applied'      => 'قسيمة تطبيقية',
             'remove-coupon'       => 'إزالة القسيمة',
             'cannot-apply-coupon' => 'لا يمكن تطبيق القسيمة',
@@ -681,7 +677,7 @@ return [
                 'grand-total'       => 'المبلغ الإجمالي',
                 'final-summary'     => 'شكرا لإظهار اهتمامك بمتجرنا',
                 'help'              => ': support_email إذا كنت بحاجة إلى أي نوع من المساعدة ، يرجى الاتصال بنا على',
-                'thanks'            => 'Thanks!',
+                'thanks'            => 'شكرًا!',
             ],
         ],
 
