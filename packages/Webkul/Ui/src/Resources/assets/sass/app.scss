@@ -528,6 +528,24 @@ h5 {
         width: 96vw;
         margin-right: 2vw;
     }
+
+    .table {
+        table {
+            thead {
+                tr {
+                    th {
+                        padding: 12px 4px !important;
+                    }
+                }
+            }
+
+            tbody {
+                td {
+                    padding: 4px !important;
+                }
+            }
+        }
+    }   
 }
 
 .section {
@@ -601,7 +619,7 @@ h5 {
         }
 
         tbody td {
-            padding: 4px;
+            padding: 10px;
             border-bottom: solid 1px #d3d3d3;
             color: $font-color;
             vertical-align: top;

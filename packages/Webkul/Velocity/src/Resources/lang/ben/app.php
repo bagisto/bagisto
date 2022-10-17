@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => 'হালনাগাদ',
             'product-view-image'        => 'প্রোডাক্ট ভিউ ইমেজ',
             'advertisement-two'         => 'বিজ্ঞাপন দুটি ছবি',
-            'advertisement-one'         => 'বিজ্ঞাপন এক ছবি',
             'footer-middle-content'     => 'ফুটার মিডল কন্টেন্ট',
             'advertisement-four'        => 'বিজ্ঞাপন চারটি ছবি',
             'advertisement-three'       => 'বিজ্ঞাপন তিনটি ছবি',
