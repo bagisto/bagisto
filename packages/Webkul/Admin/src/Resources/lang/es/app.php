@@ -1576,7 +1576,7 @@ return [
             'oldest-first'                          => 'Más Viejos Primero',
             'cheapest-first'                        => 'Más Barato Primero',
             'expensive-first'                       => 'Más Caro Primero',
-            'comma-seperated'                       => 'Separado por Comas',
+            'comma-separated'                       => 'Separado por Comas',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Fragmentos Enriquecidos',

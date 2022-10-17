@@ -1587,7 +1587,7 @@ return [
             'oldest-first'                          => 'सबसे पुराना पहले',
             'cheapest-first'                        => 'सबसे सस्ता पहला',
             'expensive-first'                       => 'महंगा पहले',
-            'comma-seperated'                       => 'अल्पविराम अलग',
+            'comma-separated'                       => 'अल्पविराम अलग',
             'favicon'                               => 'फेविकॉन',
             'seo'                                   => 'एसईओ',
             'rich-snippets'                         => 'समृद्ध निकम्मा आदमी',

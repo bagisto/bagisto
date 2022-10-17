@@ -1572,7 +1572,7 @@ return [
             'oldest-first'                          => 'Oldest First',
             'cheapest-first'                        => 'Cheapest First',
             'expensive-first'                       => 'Expensive First',
-            'comma-seperated'                       => 'مفصولة بفواصل',
+            'comma-separated'                       => 'مفصولة بفواصل',
             'favicon'                               => 'فافيكون',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'قصاصات غنية',
