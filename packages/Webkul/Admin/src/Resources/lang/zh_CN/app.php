@@ -1303,9 +1303,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => '回到首页',
-        'in-maitainace' => '维护中',
-        'right-back'    => '马上回来',
+        'go-to-home'     => '回到首页',
+        'in-maintenance' => '维护中',
+        'right-back'     => '马上回来',
 
         '404' => [
             'page-title' => '404页面不存在',

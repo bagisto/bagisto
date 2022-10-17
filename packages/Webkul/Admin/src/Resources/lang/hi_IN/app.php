@@ -1329,9 +1329,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'घर जाओ',
-        'in-maitainace' => 'रखरखाव में',
-        'right-back'    => 'इसी समय वापस आओ',
+        'go-to-home'     => 'घर जाओ',
+        'in-maintenance' => 'रखरखाव में',
+        'right-back'     => 'इसी समय वापस आओ',
 
         '404' => [
             'page-title' => '404 पृष्ठ नहीं मिला',

@@ -1302,9 +1302,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'IDŹ DO GŁÓWNEJ',
-        'in-maitainace' => 'W konserwacji',
-        'right-back'    => 'Zaraz wracam',
+        'go-to-home'     => 'IDŹ DO GŁÓWNEJ',
+        'in-maintenance' => 'W konserwacji',
+        'right-back'     => 'Zaraz wracam',
 
         '404' => [
             'page-title' => '404 STRONA NIE DOSTĘPNA',

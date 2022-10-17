@@ -1301,9 +1301,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'IR PARA PÁGINA INICIAL',
-        'in-maitainace' => 'Em manutenção',
-        'right-back'    => 'Volto logo',
+        'go-to-home'     => 'IR PARA PÁGINA INICIAL',
+        'in-maintenance' => 'Em manutenção',
+        'right-back'     => 'Volto logo',
 
         '404' => [
             'page-title' => '404 Página não Encontrada',

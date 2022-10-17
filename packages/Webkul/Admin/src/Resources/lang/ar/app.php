@@ -1317,9 +1317,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'إذهب إلى البيت',
-        'in-maitainace' => 'في الصيانة',
-        'right-back'    => 'سأعود',
+        'go-to-home'     => 'إذهب إلى البيت',
+        'in-maintenance' => 'في الصيانة',
+        'right-back'     => 'سأعود',
 
         '404' => [
             'page-title' => '404 صفحة غير موجودة',

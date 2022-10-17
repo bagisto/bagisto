@@ -1308,9 +1308,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'TORNA ALLA HOME',
-        'in-maitainace' => 'In Manutezione',
-        'right-back'    => 'Torno subito',
+        'go-to-home'     => 'TORNA ALLA HOME',
+        'in-maintenance' => 'In Manutezione',
+        'right-back'     => 'Torno subito',
 
         '404' => [
             'page-title' => '404 Pagina non trovata',

@@ -1330,9 +1330,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'ALLER À LA MAISON',
-        'in-maitainace' => 'En maintenance',
-        'right-back'    => 'Je reviens tout de suite',
+        'go-to-home'     => 'ALLER À LA MAISON',
+        'in-maintenance' => 'En maintenance',
+        'right-back'     => 'Je reviens tout de suite',
 
         404 => [
             'page-title' => '404 Page non trouvée',
