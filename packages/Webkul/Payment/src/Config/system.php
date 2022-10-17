@@ -86,7 +86,7 @@ return [
                 'type'          => 'boolean',
                 'validation'    => 'required',
                 'channel_based' => true,
-                'locale_based'  => true,
+                'locale_based'  => false,
             ], [
                 'name'    => 'sort',
                 'title'   => 'admin::app.admin.system.sort_order',
@@ -147,7 +147,9 @@ return [
                         'value' => 'paid',
                     ],
                 ],
-                'info'    => 'admin::app.admin.system.generate-invoice-applicable',
+                'info'          => 'admin::app.admin.system.generate-invoice-applicable',
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'    => 'order_status',
                 'title'   => 'Order status after creating the invoice',
@@ -164,7 +166,9 @@ return [
                         'value' => 'processing',
                     ],
                 ],
-                'info'    => 'admin::app.admin.system.generate-invoice-applicable',
+                'info'          => 'admin::app.admin.system.generate-invoice-applicable',
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'          => 'mailing_address',
                 'title'         => 'admin::app.admin.system.mailing-address',
@@ -177,7 +181,7 @@ return [
                 'type'          => 'boolean',
                 'validation'    => 'required',
                 'channel_based' => true,
-                'locale_based'  => true,
+                'locale_based'  => false,
             ], [
                 'name'    => 'sort',
                 'title'   => 'admin::app.admin.system.sort_order',

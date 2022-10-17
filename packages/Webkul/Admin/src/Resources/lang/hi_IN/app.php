@@ -2,8 +2,8 @@
 
 return [
     'save'          => 'सहेजें',
-    'copy-of'       => 'प्रति का ',
-    'copy-of-slug'  => 'की प्रति-',
+    'copy-of'       => 'प्रति का :value',
+    'copy-of-slug'  => 'की प्रति-:value',
     'create'        => 'सृजन करना',
     'update'        => 'अद्यतन',
     'delete'        => 'हटाएं',
@@ -626,6 +626,8 @@ return [
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
             'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [

@@ -8,7 +8,7 @@ use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\ProductFlat;
-use Webkul\Product\Helpers\PriceIndexer\Configurable as ConfigurableIndexer;
+use Webkul\Product\Helpers\Indexers\Price\Configurable as ConfigurableIndexer;
 
 class Configurable extends AbstractType
 {
@@ -410,6 +410,38 @@ class Configurable extends AbstractType
     }
 
     /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        parent::copyRelationships($product);
+
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        if (
+            in_array('super_attributes', $attributesToSkip)
+            || in_array('variants', $attributesToSkip)
+        ) {
+            return;
+        }
+
+        foreach ($this->product->super_attributes as $superAttribute) {
+            $product->super_attributes()->save($superAttribute);
+        }
+        
+        foreach ($this->product->variants as $variant) {
+            $newVariant = $variant->getTypeInstance()->copy();
+
+            $newVariant->parent_id = $product->id;
+
+            $newVariant->save();
+        }
+    }
+
+    /**
      * Fill required fields.
      *
      * @param  array  $data
@@ -638,21 +670,15 @@ class Configurable extends AbstractType
      */
     public function getBaseImage($item)
     {
+        $product = $item->product;
+
         if ($item instanceof \Webkul\Customer\Contracts\Wishlist) {
             if (isset($item->additional['selected_configurable_option'])) {
                 $product = $this->productRepository->find($item->additional['selected_configurable_option']);
-            } else {
-                $product = $item->product;
             }
         } else {
-            if ($item instanceof \Webkul\Checkout\Contracts\CartItem) {
+            if (count($item->child->product->images)) {
                 $product = $item->child->product;
-            } else {
-                if (count($item->child->product->images)) {
-                    $product = $item->child->product;
-                } else {
-                    $product = $item->product;
-                }
             }
         }
 
@@ -747,25 +773,10 @@ class Configurable extends AbstractType
     {
         $total = 0;
 
-        $channelInventorySourceIds = core()->getCurrentChannel()
-            ->inventory_sources
-            ->where('status', 1)
-            ->pluck('id');
-
         foreach ($this->product->variants as $variant) {
-            foreach ($variant->inventories as $inventory) {
-                if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
-                    $total += $inventory->qty;
-                }
-            }
+            $inventoryIndex = $variant->totalQuantity();
 
-            $orderedInventory = $variant->ordered_inventories
-                ->where('channel_id', core()->getCurrentChannel()->id)
-                ->first();
-
-            if ($orderedInventory) {
-                $total -= $orderedInventory->qty;
-            }
+            $total += $inventoryIndex->qty;
         }
 
         return $total;

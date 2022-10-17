@@ -16,7 +16,6 @@ use Webkul\Admin\DataGrids\ProductDataGrid;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Http\Requests\InventoryRequest;
-use Webkul\Product\Models\Product;
 use Webkul\Core\Contracts\Validations\Slug;
 
 class ProductController extends Controller
@@ -178,7 +177,11 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->findOrFail($id);
 
+        Event::dispatch('catalog.product.update.before', $id);
+
         $this->productInventoryRepository->saveInventories(request()->all(), $product);
+
+        Event::dispatch('catalog.product.update.after', $product);
 
         return response()->json([
             'message'      => __('admin::app.catalog.products.saved-inventory-message'),
@@ -202,45 +205,22 @@ class ProductController extends Controller
     /**
      * Copy a given Product.
      *
-     * @param  int  $productId
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function copy(int $productId)
+    public function copy(int $id)
     {
-        $originalProduct = $this->productRepository->findOrFail($productId);
-
-        if (! $originalProduct->getTypeInstance()->canBeCopied()) {
-            session()->flash(
-                'error',
-                trans('admin::app.response.product-can-not-be-copied', [
-                    'type' => $originalProduct->type,
-                ])
-            );
+        try {
+            $product = $this->productRepository->copy($id);
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
 
             return redirect()->to(route('admin.catalog.products.index'));
         }
 
-        if ($originalProduct->parent_id) {
-            session()->flash(
-                'error',
-                trans('admin::app.catalog.products.variant-already-exist-message')
-            );
+        session()->flash('success', trans('admin::app.response.product-copied'));
 
-            return redirect()->to(route('admin.catalog.products.index'));
-        }
-
-        $copiedProduct = $this->productRepository->copy($originalProduct);
-
-        if (
-            $copiedProduct instanceof Product
-            && $copiedProduct->id
-        ) {
-            session()->flash('success', trans('admin::app.response.product-copied'));
-        } else {
-            session()->flash('error', trans('admin::app.response.error-while-copying'));
-        }
-
-        return redirect()->to(route('admin.catalog.products.edit', ['id' => $copiedProduct->id]));
+        return redirect()->route('admin.catalog.products.edit', $product->id);
     }
 
     /**

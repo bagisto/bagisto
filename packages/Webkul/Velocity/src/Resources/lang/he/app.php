@@ -332,7 +332,8 @@ return [
         'header' => [
             'done'      => 'בוצע',
             'languages' => 'שפות',
-            'greeting'  => 'ברוך הבא, :לקוח !',
+            'greeting'  => 'ברוך הבא, :customer !',
+            'greeting-for-guest' => 'ברוך הבא אורח'
         ]
     ],
 ];

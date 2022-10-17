@@ -1122,6 +1122,17 @@ i.within-circle {
         box-shadow: 5px 0 5px -5px #333;
         background-color: #ffffff;
     }
+
+    .cart-details .cart-content .product-details-content .item-actions {
+        gap: 20px;
+        width: 150%;
+        display: grid;
+        grid-template-columns: auto auto;
+
+        > div:first-child {
+            margin-right: 0px !important;
+        }
+    }
 }
 
 .velocity-divide-page .right {
@@ -1144,7 +1155,7 @@ i.within-circle {
     padding-left: 0 !important;
     padding-top: 0 !important;
     line-height: 2.0rem !important;
-    
+
     i {
         margin-top: 8px !important;
     }
@@ -1167,11 +1178,11 @@ i.within-circle {
             &+ .checkbox-view {
                 background-position: 0px -21px;
             }
-            
+
             &+ .radio-view {
                 background-position: -21px -21px;
             }
-        
+
         }
 
         &:disabled {
@@ -1199,14 +1210,22 @@ i.within-circle {
             background-image: url('../images/controls.svg');
             background-position: 0px 0px;
         }
-    
+
         &.radio-view {
             background-image: url('../images/controls.svg');
             background-position: -21px 0px;
         }
     }
-    
+
     span {
         vertical-align: middle;
+    }
+}
+
+@media only screen and (max-width: 420px) and (min-width: 280px) {
+    .sale-summary {
+        .dash-icon {
+            margin-right: -20% !important;
+        }
     }
 }

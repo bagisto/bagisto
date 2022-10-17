@@ -2,19 +2,20 @@
 
 namespace Webkul\Product\Type;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
@@ -119,34 +120,26 @@ abstract class AbstractType
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
-     * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository   $productPriceIndexRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
+     * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
      * @return void
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
         protected ProductRepository $productRepository,
-        protected ProductPriceIndexRepository $productPriceIndexRepository,
         protected ProductAttributeValueRepository $attributeValueRepository,
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductImageRepository $productImageRepository,
-        protected ProductVideoRepository $productVideoRepository
+        protected ProductVideoRepository $productVideoRepository,
+        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
+        protected TaxCategoryRepository $taxCategoryRepository
     )
     {
-    }
-
-    /**
-     * Is the administrator able to copy products of this type in the admin backend?
-     *
-     * @return bool
-     */
-    public function canBeCopied(): bool
-    {
-        return $this->canBeCopied;
     }
 
     /**
@@ -287,12 +280,160 @@ abstract class AbstractType
 
         $this->productVideoRepository->uploadVideos($data, $product);
 
-        app(ProductCustomerGroupPriceRepository::class)->saveCustomerGroupPrices(
+        $this->productCustomerGroupPriceRepository->saveCustomerGroupPrices(
             $data,
             $product
         );
 
         return $product;
+    }
+
+    /**
+     * Copy product.
+     *
+     * @return \Webkul\Product\Contracts\Product
+     * @throws \Exception
+     */
+    public function copy()
+    {
+        if (! $this->canBeCopied()) {
+            throw new \Exception(trans('admin::app.response.product-can-not-be-copied', ['type' => $this->product->type]));
+        }
+
+        $copiedProduct = $this->product
+            ->replicate()
+            ->fill(['sku' => 'temporary-sku-' . substr(md5(microtime()), 0, 6)]);
+
+
+        $copiedProduct->save();
+
+        $this->copyAttributeValues($copiedProduct);
+
+        $this->copyRelationships($copiedProduct);
+
+        return $copiedProduct;
+    }
+
+    /**
+     * Copy attribute values.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyAttributeValues($product): void
+    {
+        $productFlat = $this->product->product_flats[0]?->replicate() ?? new ProductFlat();
+
+        $productFlat->product_id = $product->id;
+
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        foreach ($this->product->attribute_values as $attributeValue) {
+            $attribute = $attributeValue->attribute;
+
+            if (in_array($attribute->code, $attributesToSkip)) {
+                continue;
+            }
+
+            $value = null;
+
+            if ($attribute->code == 'name') {
+                $value = trans('admin::app.copy-of', ['value' => $this->product->name]);
+            } elseif ($attribute->code == 'url_key') {
+                $value = trans('admin::app.copy-of-slug', ['value' => $this->product->url_key]);
+            } elseif ($attribute->code == 'sku') {
+                $value = $product->sku;
+            } elseif ($attribute->code === 'product_number') {
+                if (! empty($this->product->product_number)) {
+                    $value = trans('admin::app.copy-of-slug', ['value' => $this->product->product_number]);
+                }
+            } elseif ($attribute->code == 'status') {
+                $value = 0;
+            }
+
+            $newAttributeValue = $attributeValue->replicate();
+
+            if (! is_null($value)) {
+                $newAttributeValue->{$attribute->column_name} = $value;
+
+                $productFlat->{$attribute->code} = $value;
+            }
+
+            $product->attribute_values()->save($newAttributeValue);
+        }
+
+        $productFlat->save();
+    }
+
+    /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        if (! in_array('categories', $attributesToSkip)) {
+            $product->categories()->sync($this->product->categories->pluck('id'));
+        }
+
+        if (! in_array('inventories', $attributesToSkip)) {
+            foreach ($this->product->inventories as $inventory) {
+                $product->inventories()->save($inventory->replicate());
+            }
+        }
+
+        if (! in_array('customer_group_prices', $attributesToSkip)) {
+            foreach ($this->product->customer_group_prices as $customer_group_price) {
+                $product->customer_group_prices()->save($customer_group_price->replicate());
+            }
+        }
+
+        if (! in_array('images', $attributesToSkip)) {
+            foreach ($this->product->images as $image) {
+                $copiedImage = $product->images()->save($image->replicate());
+
+                $this->copyMedia($product, $image, $copiedImage);
+            }
+        }
+
+        if (! in_array('videos', $attributesToSkip)) {
+            foreach ($this->product->videos as $video) {
+                $copiedVideo = $product->videos()->save($video->replicate());
+
+                $this->copyMedia($product, $video, $copiedVideo);
+            }
+        }
+
+        if (config('products.linkProductsOnCopy')) {
+            DB::table('product_relations')->insert([
+                'parent_id' => $this->product->id,
+                'child_id'  => $product->id,
+            ]);
+        }
+    }
+
+    /**
+     * Copy product image video.
+     *
+     * @param  $product
+     * @param  $media
+     * @param  $copiedMedia
+     * @return void
+     */
+    private function copyMedia($product, $media, $copiedMedia): void
+    {
+        $path = explode('/', $media->path);
+
+        $copiedMedia->path = 'product/' . $product->id . '/' . end($path);
+
+        $copiedMedia->save();
+
+        Storage::makeDirectory('product/' . $product->id);
+
+        Storage::copy($media->path, $copiedMedia->path);
     }
 
     /**
@@ -412,6 +553,16 @@ abstract class AbstractType
     }
 
     /**
+     * Is the administrator able to copy products of this type in the admin backend?
+     *
+     * @return bool
+     */
+    public function canBeCopied(): bool
+    {
+        return $this->canBeCopied;
+    }
+
+    /**
      * Have sufficient quantity.
      *
      * @param  int  $qty
@@ -460,26 +611,11 @@ abstract class AbstractType
      */
     public function totalQuantity()
     {
-        $total = 0;
-
-        $channelInventorySourceIds = app(InventorySourceRepository::class)->getChannelInventorySourceIds();
-
-        $productInventories = $this->productInventoryRepository->checkInLoadedProductInventories($this->product);
-
-        foreach ($productInventories as $inventory) {
-            if (is_numeric($channelInventorySourceIds->search($inventory->inventory_source_id))) {
-                $total += $inventory->qty;
-            }
+        if (! $inventoryIndex = $this->getInventoryIndex()) {
+            return 0;
         }
 
-        $orderedInventory = $this->product->ordered_inventories
-            ->where('channel_id', core()->getCurrentChannel()->id)->first();
-
-        if ($orderedInventory) {
-            $total -= $orderedInventory->qty;
-        }
-
-        return $total;
+        return $inventoryIndex->qty;
     }
 
     /**
@@ -621,7 +757,7 @@ abstract class AbstractType
     }
 
     /**
-     * Have special price.
+     * Returns product price index of current customer group.
      *
      * @return \Webkul\Product\Contracts\ProductPriceIndex
      */
@@ -644,6 +780,27 @@ abstract class AbstractType
     }
 
     /**
+     * Returns product inventory index of current channel.
+     *
+     * @return \Webkul\Product\Contracts\ProductInventoryIndex
+     */
+    public function getInventoryIndex()
+    {
+        static $indices = [];
+
+        if (array_key_exists($this->product->id, $indices)) {
+            return $indices[$this->product->id];
+        }
+
+        $indices[$this->product->id] = $this->product
+            ->inventory_indices
+            ->where('channel_id', core()->getCurrentChannel()->id)
+            ->first();
+
+        return $indices[$this->product->id];
+    }
+
+    /**
      * Have special price.
      *
      * @param  int  $qty
@@ -655,7 +812,7 @@ abstract class AbstractType
             return false;
         }
 
-        return $priceIndex->min_price != $this->product->regular_min_price;
+        return $priceIndex->min_price != $priceIndex->regular_min_price;
     }
 
     /**
@@ -739,7 +896,7 @@ abstract class AbstractType
             ? $this->product->parent->tax_category_id
             : $this->product->tax_category_id;
 
-        return app(TaxCategoryRepository::class)->find($taxCategoryId);
+        return $this->taxCategoryRepository->find($taxCategoryId);
     }
 
     /**
@@ -1032,7 +1189,7 @@ abstract class AbstractType
 
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
+        $customerGroupPrices = $this->productCustomerGroupPriceRepository->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
 
         if ($customerGroupPrices->isEmpty()) {
             return $product->price;
