@@ -106,7 +106,7 @@
                 <div class="linked-product-search-result">
                     <ul>
                         <li v-for='(product, index) in searched_results' v-if='searched_results.length' @click="addProduct(product)">
-                            @{{ product.name }}
+                            @{{ product.name }} (@{{ product.sku }})
                         </li>
 
                         <li v-if='! searched_results.length && search_term.length && ! is_searching'>
