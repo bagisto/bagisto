@@ -64,7 +64,7 @@ return [
             'tab' => [
                 'page' => '页面设置',
                 'content' => '内容设置',
-                'meta_content' => 'Meta数据',
+                'meta_content' => '元数据',
             ],
             'page' => [
                 'title' => '标题',
@@ -74,7 +74,7 @@ return [
             'content' => [
                 'content-type' => '内容设置',
                 'custom-title' => '自定义标题',
-                'category-slug' => '分类Slug',
+                'category-slug' => '分类蛞蝓',
                 'link-target' => '页面链接目标',
                 'custom-product' => '商店产品',
                 'custom-heading' => '自定义标题',
@@ -101,7 +101,7 @@ return [
             'header_content_count'      => '页头内容计数',
             'footer-left-raw-content'   => '<p>我们喜欢制作软件和用二进制文件解决现实世界的问题. 我们高度致力于实现我们的目标。 我们投资我们的资源, 以一流的前沿技术专长为企业业务创建世界一流的易于使用的软件和应用程序.</p>',
             'slider-path'               => '滑块路径',
-            'category-logo'             => '分类logo',
+            'category-logo'             => '分类标志',
             'product-policy'            => '产品政策',
             'update-meta-data'          => '更新元数据',
             'product-view-image'        => '产品视图图片',
@@ -169,7 +169,7 @@ return [
             'mass-delete-success' => '所选类别菜单已删除成功.',
         ],
         'general'   => [
-            'locale_logo' => '区域Logo',
+            'locale_logo' => '区域标志',
         ],
     ],
 

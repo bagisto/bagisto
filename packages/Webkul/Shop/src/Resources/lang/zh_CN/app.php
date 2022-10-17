@@ -183,8 +183,8 @@ return [
             'menu' => '菜单',
 
             'general' => [
-                'no' => 'No',
-                'yes' => 'Yes',
+                'no' => '不',
+                'yes' => '是的',
             ],
 
             'profile' => [
@@ -375,7 +375,7 @@ return [
                 'share-wishlist'       => '分享愿望清单',
                 'wishlist-sharing'     => '愿望清单分享',
                 'shared-link'          => '已共享链接',
-                'copy'                 => 'Copy',
+                'copy'                 => '复制',
                 'visibility'           => '可见度',
                 'public'               => '公开的',
                 'private'              => '私有的',
@@ -417,7 +417,7 @@ return [
                 ],
 
                 'delete-all' => [
-                    'title' => 'Delete All',
+                    'title' => '全部删除',
                     'confirmation-message' => '您确定要删除所有评论吗?',
                 ],
             ]
