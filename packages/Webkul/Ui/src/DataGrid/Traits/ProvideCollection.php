@@ -40,7 +40,7 @@ trait ProvideCollection
     {
         foreach ($parseInfo as $key => $info) {
             $columnType = $this->findColumnType($key)[0] ?? null;
-            
+
             $columnName = $this->findColumnType($key)[1] ?? null;
 
             if ($this->exceptionCheckInColumns($columnName)) {
@@ -253,6 +253,10 @@ trait ProvideCollection
                 ) {
                     $record->{$column['index']} = $column['closure']($record);
                 }
+            } elseif ($column['type'] == 'datetime') {
+                $record->{$column['index']} = core()->formatDate($record->{$column['index']}, $column['format'] ?? 'Y-m-d H:i:s');
+            } elseif ($column['type'] == 'date') {
+                $record->{$column['index']} = core()->formatDate($record->{$column['index']}, $column['format'] ?? 'Y-m-d');
             } else {
                 if ($column['type'] == 'price') {
                     if (isset($column['currencyCode'])) {

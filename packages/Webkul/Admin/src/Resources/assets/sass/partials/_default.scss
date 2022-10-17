@@ -934,6 +934,20 @@ body {
     }
 }
 
+@media only screen and (max-width: 480px) {
+    .content-container {
+        .content {
+            .page-header {
+                .page-action {
+                    a {
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 400px) {
     .content-container {
         .content {

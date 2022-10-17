@@ -33,12 +33,12 @@
                         <div class="pl20">
                             <div class="row">
                                 <span class="payment-method method-label">
-                                <b>{{ __('shop::app.checkout.onepage.payment-method-name.'.$payment['method_title']) }}</b>
+                                <b>{{ $payment['method_title'] }}</b>
                                 </span>
                             </div>
 
                             <div class="row">
-                            <span class="method-summary">{{ __('shop::app.checkout.onepage.payment-method-name.'.$payment['description']) }}</span>
+                            <span class="method-summary">{{ $payment['description'] }}</span>
                             </div>
 
                             @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($payment['method']); @endphp

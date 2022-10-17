@@ -158,7 +158,7 @@ return [
         'hot-categories' => 'دسته بندی های داغ',
         'payment-methods' => 'روش های پرداخت',
         'customer-reviews' => 'نظرات مشتری',
-        'shipping-methods' => 'روش های حمل و نقل',
+        'shipping-methods' => 'روش های حمل و:Customer نقل',
         'popular-categories' => 'دسته بندی های محبوب',
     ],
 
@@ -253,7 +253,7 @@ return [
         'review-by' => 'مرور توسط',
         'quick-view' => 'مشاهده سریع',
         'not-available' => 'در دسترس نیست',
-        'submit-review' => 'ارسال بررسی',
+        'submit-review' => 'ارس:Customerال بررسی',
         'ratings' => ':totalRatings رتبه بندی',
         'reviews-count' => ':totalReviews بررسی ها',
         'customer-rating' => 'رتبه بندی مشتری',
@@ -309,6 +309,7 @@ return [
     'responsive' => [
         'header' => [
             'greeting' => ':customer ! خوش آمدی',
+            'greeting-for-guest' =>' خوش آمد گویی به مهمان'
         ]
     ],
 ]

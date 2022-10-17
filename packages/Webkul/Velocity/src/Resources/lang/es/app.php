@@ -311,7 +311,8 @@ return [
         'header' => [
             'done'      => 'Hecho',
             'languages' => 'Idiomas',
-            'greeting'  => 'Bienvenido, :customer !',
+            'greeting'  => 'Bienvenido, :Customer !',
+            'greeting-for-guest' => 'Bienvenido Invitado'
         ]
     ],
 ]

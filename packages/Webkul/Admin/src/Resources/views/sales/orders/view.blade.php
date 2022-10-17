@@ -83,7 +83,7 @@
                                                 </span>
 
                                                 <span class="value">
-                                                    {{ $order->created_at }}
+                                                    {{ core()->formatDate($order->created_at, 'Y-m-d H:i:s') }}
                                                 </span>
                                             </div>
 
@@ -405,9 +405,9 @@
                                                 <li>
                                                     <span class="comment-info">
                                                         @if ($comment->customer_notified)
-                                                            {!! __('admin::app.sales.orders.customer-notified', ['date' => $comment->created_at]) !!}
+                                                            {!! __('admin::app.sales.orders.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s')]) !!}
                                                         @else
-                                                            {!! __('admin::app.sales.orders.customer-not-notified', ['date' => $comment->created_at]) !!}
+                                                            {!! __('admin::app.sales.orders.customer-not-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s')]) !!}
                                                         @endif
                                                     </span>
 
@@ -510,7 +510,7 @@
                                     @foreach ($order->invoices as $invoice)
                                         <tr>
                                             <td>#{{ $invoice->increment_id ?? $invoice->id }}</td>
-                                            <td>{{ $invoice->created_at }}</td>
+                                            <td>{{ core()->formatDate($invoice->created_at, 'Y-m-d H:i:s') }}</td>
                                             <td>#{{ $invoice->order->increment_id }}</td>
                                             <td>{{ $order->customer_full_name }}</td>
                                             <td>{{ $invoice->status_label }}</td>
@@ -556,7 +556,7 @@
                                     @foreach ($order->shipments as $shipment)
                                         <tr>
                                             <td>#{{ $shipment->id }}</td>
-                                            <td>{{ $shipment->created_at }}</td>
+                                            <td>{{ core()->formatDate($shipment->created_at, 'Y-m-d H:i:s') }}</td>
                                             <td>{{ $shipment->carrier_title }}</td>
                                             <td>{{ $shipment->track_number }}</td>
                                             <td>{{ $shipment->total_qty }}</td>
@@ -602,7 +602,7 @@
                                     @foreach ($order->refunds as $refund)
                                         <tr>
                                             <td>#{{ $refund->id }}</td>
-                                            <td>{{ $refund->created_at }}</td>
+                                            <td>{{ core()->formatDate($refund->created_at, 'Y-m-d H:i:s') }}</td>
                                             <td>#{{ $refund->order->increment_id }}</td>
                                             <td>{{ $refund->order->customer_full_name }}</td>
                                             <td>{{ __('admin::app.sales.refunds.refunded') }}</td>
