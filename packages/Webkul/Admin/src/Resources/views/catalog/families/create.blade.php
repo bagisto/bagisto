@@ -96,26 +96,26 @@
                         <div class="page-content">
                             <div class="form-container">
                                 @csrf()
-            
+
                                 <div class="control-group" :class="[errors.has('add-group-form.name') ? 'has-error' : '']">
                                     <label for="name" class="required">{{ __('admin::app.catalog.families.name') }}</label>
                                     <input type="text" v-validate="'required'" v-model="group.name" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.catalog.families.name') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has('add-group-form.name')">@{{ errors.first('add-group-form.name') }}</span>
                                 </div>
-            
+
                                 <div class="control-group" :class="[errors.has('add-group-form.position') ? 'has-error' : '']">
                                     <label for="position" class="required">{{ __('admin::app.catalog.families.position') }}</label>
                                     <input type="text" v-validate="'required|numeric'" v-model="group.position" class="control" id="position" name="position" data-vv-as="&quot;{{ __('admin::app.catalog.families.position') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has('add-group-form.position')">@{{ errors.first('add-group-form.position') }}</span>
                                 </div>
-            
+
                                 <button type="submit" class="btn btn-lg btn-primary">
                                     {{ __('admin::app.catalog.families.add-group-title') }}
                                 </button>
-            
+
                             </div>
                         </div>
-            
+
                     </form>
                 </div>
             </modal>
@@ -133,20 +133,20 @@
                                     <input type="text" v-validate="'required'" v-model="editGroup.name" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.catalog.families.name') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has('edit-group-form.name')">@{{ errors.first('edit-group-form.name') }}</span>
                                 </div>
-            
+
                                 <div class="control-group" :class="[errors.has('edit-group-form.position') ? 'has-error' : '']">
                                     <label for="position" class="required">{{ __('admin::app.catalog.families.position') }}</label>
                                     <input type="text" v-validate="'required|numeric'" v-model="editGroup.position" class="control" id="position" name="position" data-vv-as="&quot;{{ __('admin::app.catalog.families.position') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has('edit-group-form.position')">@{{ errors.first('edit-group-form.position') }}</span>
                                 </div>
-            
+
                                 <button type="submit" class="btn btn-lg btn-primary">
                                     {{ __('admin::app.catalog.families.update-group-title') }}
                                 </button>
-            
+
                             </div>
                         </div>
-            
+
                     </form>
                 </div>
             </modal>
@@ -159,7 +159,7 @@
                 :index="index"
                 @onRemoveGroup="removeGroup($event)"
                 @onEditGroup="openEditGroupModal($event)"
-                @onAttributeAdd="addAttributes(index, $event)" 
+                @onAttributeAdd="addAttributes(index, $event)"
                 @onAttributeRemove="removeAttribute(index, $event)"
             ></group-item>
         </div>
@@ -173,7 +173,7 @@
                 <h1>@{{ group.name }}</h1>
 
                 <i class="icon trash-icon" @click="removeGroup()" v-if="group.is_user_defined"></i>
-                
+
                 <span class="icon pencil-lg-icon" @click="editGroup()"></span>
             </div>
 
@@ -183,30 +183,32 @@
                 <input type="hidden" :name="[groupInputName + '[is_user_defined]']" :value="group.is_user_defined"/>
 
                 <div class="table" v-if="group.custom_attributes.length" style="margin-bottom: 20px;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>{{ __('admin::app.catalog.families.attribute-code') }}</th>
-                                <th>{{ __('admin::app.catalog.families.name') }}</th>
-                                <th>{{ __('admin::app.catalog.families.type') }}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{{ __('admin::app.catalog.families.attribute-code') }}</th>
+                                    <th>{{ __('admin::app.catalog.families.name') }}</th>
+                                    <th>{{ __('admin::app.catalog.families.type') }}</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            <tr v-for='(attribute, index) in group.custom_attributes'>
-                                <td>
-                                    <input type="hidden" :name="[groupInputName + '[custom_attributes][][id]']" :value="attribute.id"/>
-                                    @{{ attribute.code }}
-                                </td>
-                                <td>@{{ attribute.admin_name }}</td>
-                                <td>@{{ attribute.type }}</td>
-                                <td class="actions">
-                                    <i class="icon trash-icon" @click="removeAttribute(attribute)" v-if="attribute.is_user_defined"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <tbody>
+                                <tr v-for='(attribute, index) in group.custom_attributes'>
+                                    <td>
+                                        <input type="hidden" :name="[groupInputName + '[custom_attributes][][id]']" :value="attribute.id"/>
+                                        @{{ attribute.code }}
+                                    </td>
+                                    <td>@{{ attribute.admin_name }}</td>
+                                    <td>@{{ attribute.type }}</td>
+                                    <td class="actions">
+                                        <i class="icon trash-icon" @click="removeAttribute(attribute)" v-if="attribute.is_user_defined"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <button type="button" class="btn btn-md btn-primary dropdown-toggle">

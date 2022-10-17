@@ -320,7 +320,7 @@ body {
                     }
                 }
             }
-
+            
             .account-action {
                 float: left !important;
             }
@@ -337,6 +337,16 @@ body {
                     }
                 }
             }
+        }
+
+        .search-filter {
+            .icon-wrapper {
+                right: 264px;
+            }
+        }
+
+        .account-content .account-layout .account-table-content input[type=search] {
+            padding-right: 35px;
         }
 
         .image-wrapper.image-wrapper .image-item {
@@ -712,6 +722,16 @@ body {
             .velocity-divide-page {
                 .right {
                     padding: 0 20px !important;
+                }
+            }
+
+            .cart-details {
+                .cart-content {
+                    .product-price.col-1 {
+                        .card-current-price.fw6 {
+                            float: left;
+                        }
+                    }
                 }
             }
         }

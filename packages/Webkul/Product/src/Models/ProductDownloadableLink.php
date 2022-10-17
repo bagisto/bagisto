@@ -46,7 +46,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
      */
     public function file_url(): string
     {
-        return Storage::url($this->path);
+        return Storage::url($this->file);
     }
 
     /**
@@ -62,7 +62,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
      */
     public function sample_file_url(): string
     {
-        return Storage::url($this->path);
+        return Storage::url($this->sample_file);
     }
 
     /**
