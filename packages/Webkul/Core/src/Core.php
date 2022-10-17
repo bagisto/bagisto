@@ -660,6 +660,10 @@ class Core
 
         $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
+        if (! $currency) {
+            return $formatter->formatCurrency($price, $currencyCode);
+        }
+
         if ($symbol = $currency->symbol) {
             if ($this->currencySymbol($currency) == $symbol) {
                 return $formatter->formatCurrency($price, $currency->code);
