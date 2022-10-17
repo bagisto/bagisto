@@ -3,8 +3,9 @@
 namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\AttributeDataGrid;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Admin\DataGrids\AttributeDataGrid;
+use Webkul\Core\Contracts\Validations\Code;
 
 class AttributeController extends Controller
 {
@@ -58,7 +59,7 @@ class AttributeController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code'       => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Code],
+            'code'       => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
             'admin_name' => 'required',
             'type'       => 'required',
         ]);
@@ -111,7 +112,7 @@ class AttributeController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code'       => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'code'       => ['required', 'unique:attributes,code,' . $id, new Code],
             'admin_name' => 'required',
             'type'       => 'required',
         ]);

@@ -106,6 +106,7 @@ class ProductDataGrid extends DataGrid
                 'product_flat.status',
                 'product_flat.price',
                 'product_flat.url_key',
+                'product_flat.visible_individually',
                 'attribute_families.name as attribute_family',
                 DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
@@ -168,7 +169,7 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                if (! empty($row->url_key)) {
+                if (! empty($row->visible_individually) && ! empty($row->url_key)) {
                     return "<a href='" . route('shop.productOrCategory.index', $row->url_key) . "' target='_blank'>" . $row->product_name . "</a>";
                 }
 
@@ -283,14 +284,14 @@ class ProductDataGrid extends DataGrid
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
-            'action' => route('admin.catalog.products.massdelete'),
+            'action' => route('admin.catalog.products.mass_delete'),
             'method' => 'POST',
         ]);
 
         $this->addMassAction([
             'type'    => 'update',
             'label'   => trans('admin::app.datagrid.update-status'),
-            'action'  => route('admin.catalog.products.massupdate'),
+            'action'  => route('admin.catalog.products.mass_update'),
             'method'  => 'POST',
             'options' => [
                 trans('admin::app.datagrid.active')    => 1,

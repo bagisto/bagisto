@@ -7,11 +7,11 @@
 @section('content')
     <div class="content">
 
-        <form method="POST" action="{{ route('admin.email-templates.update', $template->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.email_templates.update', $template->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.email-templates.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.email_templates.index') }}'"></i>
 
                         {{ __('admin::app.marketing.templates.edit-title') }}
                     </h1>
@@ -40,7 +40,9 @@
 
                             <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
                                 <label for="status" class="required">{{ __('admin::app.marketing.templates.status') }}</label>
-                                <?php $selectedOption = old('status') ?: $template->status ?>
+
+                                @php $selectedOption = old('status') ?: $template->status @endphp
+
                                 <select class="control" v-validate="'required'" id="status" name="status" data-vv-as="&quot;{{ __('admin::app.marketing.templates.display-mode') }}&quot;">
                                     <option value="active" {{ $selectedOption == 'active' ? 'selected' : '' }}>
                                         {{ __('admin::app.marketing.templates.active') }}

@@ -6,12 +6,22 @@
 
 @push('css')
     <style>
-        @media only screen and (max-width: 768px){
-            .content-container .content .page-header .page-title .control-group .control{
-                width: 100% !important;
-                margin-top:-25px !important;
+       @media only screen and (max-width: 728px){
+            .content-container .content .page-header .page-title{
+                width: 100%;
             }
-        }
+
+            .content-container .content .page-header .page-title .control-group {
+                margin-top: 20px!important;
+                width: 100%!important;
+                margin-left: 0!important;
+            }
+
+            .content-container .content .page-header .page-action {
+                margin-top: 10px!important;
+                float: left;
+            }
+       }
     </style>
 @endpush
 
@@ -41,6 +51,7 @@
                             @endforeach
                         </select>
                     </div>
+
                 </div>
 
                 <div class="page-action">
@@ -157,7 +168,7 @@
 
                     <accordian title="{{ __('admin::app.catalog.categories.filterable-attributes') }}" :active="true">
                         <div slot="body">
-                            <?php $selectedaAtributes = old('attributes') ?? $category->filterableAttributes->pluck('id')->toArray() ?>
+                            @php $selectedaAtributes = old('attributes') ?? $category->filterableAttributes->pluck('id')->toArray() @endphp
 
                             <div class="control-group multi-select" :class="[errors.has('attributes[]') ? 'has-error' : '']">
                                 <label for="attributes" class="required">{{ __('admin::app.catalog.categories.attributes') }}</label>

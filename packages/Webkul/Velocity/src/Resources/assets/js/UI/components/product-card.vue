@@ -47,7 +47,7 @@
                 :data-src="product.image || product.product_image"
                 class="card-img-top lzy_img"
                 :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
-                <!-- :src="`${$root.baseUrl}/vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png`" /> -->
+                <!-- :src="`${$root.baseUrl}/vendor/webkul/ui/assets/images/product/medium-product-placeholder.png`" /> -->
 
             <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn>
         </a>
@@ -74,7 +74,7 @@
                 v-if="product.totalReviews && product.totalReviews > 0">
 
                 <star-ratings :ratings="product.avgRating"></star-ratings>
-                <a class="fs14 align-top unset active-hover" :href="`${$root.baseUrl}/reviews/${product.slug}`">
+                <a class="fs14 unset active-hover" :href="`${$root.baseUrl}/reviews/${product.slug}`">
                     {{ __('products.reviews-count', {'totalReviews': product.totalReviews}) }}
                 </a>
             </div>

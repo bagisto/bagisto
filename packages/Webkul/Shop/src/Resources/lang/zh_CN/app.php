@@ -154,7 +154,7 @@ return [
             'forgot_pass' => '忘记密码?',
             'button_title' => '登入',
             'remember' => '登入',
-            'footer' => '© 版权 :year Webkul Software, 版权所有',
+            'footer' => '© 版权 :year 网络库 软件, 版权所有',
             'invalid-creds' => '请检查您的凭据并重试.',
             'verify-first' => '首先验证您的电子邮件帐户.',
             'not-activated' => '您的激活需要管理员批准',
@@ -502,9 +502,9 @@ return [
             'continue-shopping' => '继续购物',
             'proceed-to-checkout' => '进行结算',
             'remove' => '移除',
-            'remove-link' => '移除',
-            'remove-all-items'          => 'Remove all items',
-            'confirm-action'           => 'Confirm this action?',
+            'remove-link' => '删除链接',
+            'remove-all-items'          => '删除所有项目',
+            'confirm-action'           => '确认此操作？',
             'move-to-wishlist' => '移动到愿望清单',
             'move-to-wishlist-success' => '项目已成功移至愿望清单.',
             'move-to-wishlist-error' => '无法将商品移至愿望清单, 请稍后再试.',
@@ -521,7 +521,7 @@ return [
                 'error_remove' => '没有要从购物车中删除的物品.',
                 'success' => '商品已成功添加到购物车.',
                 'success-remove' => '物品已成功从购物车中移除.',
-                'success-all-remove' => 'All items is successfully removed from the cart.',
+                'success-all-remove' => '所有商品均已成功从购物车中移除。',
                 'error-add' => '商品无法加入购物车, 请稍后再试.',
                 'inactive' => '商品处于非活动状态并已从购物车中移除.',
                 'inactive-add' => '不活跃商品无法添加到购物车.',
@@ -541,7 +541,7 @@ return [
             'check-billing-address'     => '请检查帐单地址.',
             'specify-shipping-method'   => '请指定送货方式.',
             'specify-payment-method'    => '请指定付款方式.',
-            'rule-applied'              => 'Cart rule applied',
+            'rule-applied'              => '已应用购物车规则',
         ],
 
         'onepage' => [
@@ -768,7 +768,7 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => '© 版权 :year Webkul Software, All rights reserved',
+        'copy-right' => '© 版权 :year 网络库 软件，保留所有权利',
     ],
 
     'response' => [

@@ -38,10 +38,7 @@
                             && gettype($column['wrapper']) === 'object'
                             && $column['wrapper'] instanceof \Closure
                         )
-                            @if (
-                                isset($column['closure'])
-                                && $column['closure'] == true
-                            )
+                            @if (! empty($column['closure']))
                                 <td data-value="{{ $column['label'] }}">{!! $column['wrapper']($record) !!}</td>
                             @else
                                 <td data-value="{{ $column['label'] }}">{{ $column['wrapper']($record) }}</td>
@@ -71,7 +68,9 @@
                         <div class="action">
                             @foreach ($actions as $action)
                                 @php
-                                    $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
+                                    $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object')
+                                        ? $action['condition']($record)
+                                        : true;
                                 @endphp
 
                                 @if ($toDisplay)

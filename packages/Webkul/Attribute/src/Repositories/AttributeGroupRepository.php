@@ -6,7 +6,6 @@ use Webkul\Core\Eloquent\Repository;
 
 class AttributeGroupRepository extends Repository
 {
-
     /**
      * Specify Model class name
      *

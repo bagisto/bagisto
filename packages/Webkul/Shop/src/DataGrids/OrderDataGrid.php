@@ -119,7 +119,7 @@ class OrderDataGrid extends DataGrid
             'title'  => trans('ui::app.datagrid.view'),
             'type'   => 'View',
             'method' => 'GET',
-            'route'  => 'customer.orders.view',
+            'route'  => 'shop.customer.orders.view',
             'icon'   => 'icon eye-icon',
         ], true);
     }

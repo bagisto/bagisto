@@ -1,4 +1,17 @@
-@if (count(app('Webkul\Product\Repositories\ProductRepository')->getNewProducts()))
+@php
+    request()->query->remove('featured');
+
+    request()->query->add([
+        'new'   => 1,
+        'order' => 'rand',
+        'limit' => request()->get('count')
+            ?? core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage'),
+    ]);
+
+    $products = app(\Webkul\Product\Repositories\ProductRepository::class)->getAll();
+@endphp
+
+@if ($products->count())
     <section class="featured-products">
 
         <div class="featured-heading">
@@ -9,15 +22,9 @@
 
         <div class="product-grid-4">
 
-            @foreach (app('Webkul\Product\Repositories\ProductRepository')->getNewProducts() as $productFlat)
+            @foreach ($products as $productFlat)
 
-                @if (core()->getConfigData('catalog.products.homepage.out_of_stock_items'))
-                    @include ('shop::products.list.card', ['product' => $productFlat])
-                @else
-                    @if ($productFlat->isSaleable())
-                        @include ('shop::products.list.card', ['product' => $productFlat])
-                    @endif
-                @endif
+                @include ('shop::products.list.card', ['product' => $productFlat])
 
             @endforeach
 

@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
-use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Product\DataTypes\CartItemValidationResult;
 
 class RentalSlot extends Booking
 {
     /**
-     * Returns slots for a perticular day
+     * Returns slots for a particular day
      *
      * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @param  string  $date
@@ -91,7 +91,7 @@ class RentalSlot extends Booking
                     // Get already ordered qty for this slot
                     $orderedQty = 0;
 
-                    $qty = isset($timeDuration['qty']) ? ( $timeDuration['qty'] - $orderedQty ) : 1;
+                    $qty = isset($timeDuration['qty']) ? ($timeDuration['qty'] - $orderedQty) : 1;
 
                     if (
                         $qty
@@ -244,7 +244,7 @@ class RentalSlot extends Booking
      *
      * @param \Webkul\Checkout\Models\CartItem $item
      *
-     * @return \Webkul\Product\Datatypes\CartItemValidationResult
+     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {

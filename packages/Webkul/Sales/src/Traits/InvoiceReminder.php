@@ -30,7 +30,7 @@ trait InvoiceReminder
             return $remindersLimit;
         }
 
-        return $remindersLimit = (int) core()->getConfigData('sales.invoice_setttings.invoice_reminders.reminders_limit');
+        return $remindersLimit = (int) core()->getConfigData('sales.invoice_settings.invoice_reminders.reminders_limit');
     }
 
     /**
@@ -46,7 +46,7 @@ trait InvoiceReminder
             return $intervalBetweenReminders;
         }
 
-        return $intervalBetweenReminders = core()->getConfigData('sales.invoice_setttings.invoice_reminders.interval_between_reminders') ?: 'P1D';
+        return $intervalBetweenReminders = core()->getConfigData('sales.invoice_settings.invoice_reminders.interval_between_reminders') ?: 'P1D';
     }
 
     /**

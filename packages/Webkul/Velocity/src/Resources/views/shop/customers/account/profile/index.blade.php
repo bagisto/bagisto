@@ -19,7 +19,7 @@
         </span>
 
         <span class="account-action">
-            <a href="{{ route('customer.profile.edit') }}" class="theme-btn light unset float-right">
+            <a href="{{ route('shop.customer.profile.edit') }}" class="theme-btn light unset float-right">
                 {{ __('shop::app.customer.account.profile.index.edit') }}
             </a>
         </span>
@@ -83,7 +83,7 @@
         </button>
 
         <div id="deleteProfileForm" class="d-none">
-            <form method="POST" action="{{ route('customer.profile.destroy') }}" @submit.prevent="onSubmit">
+            <form method="POST" action="{{ route('shop.customer.profile.destroy') }}" @submit.prevent="onSubmit">
                 @csrf
 
                 <modal id="deleteProfile" :is-open="modalIds.deleteProfile">

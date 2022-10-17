@@ -68,6 +68,9 @@
 
                 <div class="form-container">
                     @csrf()
+
+                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.general.before') !!}
+
                     <accordian title="{{ __('admin::app.cms.pages.general') }}" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('{{$locale}}[page_title]') ? 'has-error' : '']">
@@ -81,7 +84,7 @@
                             <div class="control-group multi-select" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                 <label for="url-key" class="required">{{ __('admin::app.cms.pages.channel') }}</label>
 
-                                <?php $selectedOptionIds = old('inventory_sources') ?: $page->channels->pluck('id')->toArray() ?>
+                                @php $selectedOptionIds = old('inventory_sources') ?: $page->channels->pluck('id')->toArray() @endphp
 
                                 <select type="text" class="control" name="channels[]" v-validate="'required'" value="{{ old('channel[]') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.channel') }}&quot;" multiple="multiple">
                                     @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
@@ -103,6 +106,10 @@
                             </div>
                         </div>
                     </accordian>
+
+                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.general.after') !!}
+
+                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.seo.before') !!}
 
                     <accordian title="{{ __('admin::app.cms.pages.seo') }}" :active="true">
                         <div slot="body">
@@ -135,6 +142,8 @@
                             </div>
                         </div>
                     </accordian>
+
+                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.seo.after') !!}
                 </div>
             </div>
         </form>

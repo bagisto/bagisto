@@ -23,45 +23,18 @@ class ProductInventoryRepository extends Repository
      */
     public function saveInventories(array $data, $product)
     {
-        if (isset($data['inventories'])) {
-            foreach ($data['inventories'] as $inventorySourceId => $qty) {
-                $qty = is_null($qty) ? 0 : $qty;
-
-                $productInventory = $this->findOneWhere([
-                    'product_id'          => $product->id,
-                    'inventory_source_id' => $inventorySourceId,
-                    'vendor_id'           => isset($data['vendor_id']) ? $data['vendor_id'] : 0,
-                ]);
-
-                if ($productInventory) {
-                    $productInventory->qty = $qty;
-
-                    $productInventory->save();
-                } else {
-                    $this->create([
-                        'qty'                 => $qty,
-                        'product_id'          => $product->id,
-                        'inventory_source_id' => $inventorySourceId,
-                        'vendor_id'           => isset($data['vendor_id']) ? $data['vendor_id'] : 0,
-                    ]);
-                }
-            }
-        }
-    }
-
-    /**
-     * Check if product inventories are already loaded. If already loaded then load from it.
-     *
-     * @return object
-     */
-    public function checkInLoadedProductInventories($product)
-    {
-        static $productInventories = [];
-
-        if (array_key_exists($product->id, $productInventories)) {
-            return $productInventories[$product->id];
+        if (! isset($data['inventories'])) {
+            return;
         }
 
-        return $productInventories[$product->id] = $product->inventories;
+        foreach ($data['inventories'] as $inventorySourceId => $qty) {
+            $this->updateOrCreate([
+                'product_id'          => $product->id,
+                'inventory_source_id' => $inventorySourceId,
+                'vendor_id'           => $data['vendor_id'] ?? 0,
+            ], [
+                'qty' => $qty ?? 0,
+            ]);
+        }
     }
 }

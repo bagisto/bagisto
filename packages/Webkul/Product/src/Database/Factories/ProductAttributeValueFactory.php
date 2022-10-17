@@ -23,7 +23,6 @@ class ProductAttributeValueFactory extends Factory
     public function definition(): array
     {
         return [
-            //'product_id' => Product::factory(),
             'locale'  => 'en',
             'channel' => 'default',
         ];

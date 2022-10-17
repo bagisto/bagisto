@@ -7,11 +7,11 @@
 @section('content')
     <div class="content">
 
-        <form method="POST" action="{{ route('admin.email-templates.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.email_templates.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.email-templates.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.email_templates.index') }}'"></i>
 
                         {{ __('admin::app.marketing.templates.add-title') }}
                     </h1>

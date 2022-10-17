@@ -108,7 +108,6 @@ return [
             'update-meta-data' => 'Aggiorna Meta Data',
             'product-view-image' => 'Immagine Vista Prodotto',
             'advertisement-two' => 'Advertisement Two Images',
-            'advertisement-one' => 'Advertisement One Images',
             'footer-middle-content' => 'Contenuto Footer Centrale',
             'advertisement-four' => 'Advertisement Four Images',
             'advertisement-three' => 'Advertisement Three Images',
@@ -313,7 +312,8 @@ return [
         'header' => [
             'done'      => 'Fatto',
             'languages' => 'Lingue',
-            'greeting' => 'Benvenuto, :customer !',
+            'greeting' => 'Benvenuto, :Customer !',
+            'greeting-for-guest' => 'Benvenuto ospite'
         ]
     ],
 ]

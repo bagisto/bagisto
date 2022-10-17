@@ -81,10 +81,11 @@ class Bouncer
     {
         $acl = app('acl');
 
-        if (
-            $acl
-            && isset($acl->roles[Route::currentRouteName()])
-        ) {
+        if (! $acl) {
+            return;
+        }
+
+        if (isset($acl->roles[Route::currentRouteName()])) {
             bouncer()->allow($acl->roles[Route::currentRouteName()]);
         }
     }

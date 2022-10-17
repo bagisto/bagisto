@@ -1,10 +1,10 @@
 @inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
-<?php
+@php
     $productChannels = $productFlatRepository->findWhere([
         'product_id' => $product->id
     ])->pluck('channel')->unique()->toArray();
-?>
+@endphp
 
 <accordian title="{{ __('admin::app.catalog.products.channel') }}" :active="false">
     <div slot="body">

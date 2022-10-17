@@ -175,6 +175,11 @@
     align-items: flex-start;
     flex-wrap: wrap;
     margin-bottom: 10px;
+
+    p {
+        padding-top: 1.5vh;
+        cursor: pointer;
+    }
 }
 
 .search-filter {

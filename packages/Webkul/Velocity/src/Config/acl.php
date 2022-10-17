@@ -4,19 +4,19 @@ return [
     [
         'key'   => 'velocity',
         'name'  => 'velocity::app.admin.layouts.velocity',
-        'route' => 'velocity.admin.meta-data',
+        'route' => 'velocity.admin.meta_data',
         'sort'  => 5,
     ],
     [
         'key'   => 'velocity.meta-data',
         'name'  => 'velocity::app.admin.layouts.meta-data',
-        'route' => 'velocity.admin.meta-data',
+        'route' => 'velocity.admin.meta_data',
         'sort'  => 5,
     ],
     [
         'key'   => 'velocity.meta-data.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'velocity.admin.store.meta-data',
+        'route' => 'velocity.admin.store.meta_data',
         'sort'  => 1,
     ],
     [

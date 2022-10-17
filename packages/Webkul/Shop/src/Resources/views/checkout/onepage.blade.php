@@ -237,7 +237,7 @@
                             if (! isValid)
                                 return;
 
-                            self.$http.post("{{ route('customer.checkout.exist') }}", {email: self.address.billing.email})
+                            self.$http.post("{{ route('shop.customer.checkout.exist') }}", {email: self.address.billing.email})
                                 .then(function(response) {
                                     self.is_customer_exist = response.data ? 1 : 0;
                                 })
@@ -249,7 +249,7 @@
                 loginCustomer: function() {
                     let self = this;
 
-                    self.$http.post("{{ route('customer.checkout.login') }}", {
+                    self.$http.post("{{ route('shop.customer.checkout.login') }}", {
                             email: self.address.billing.email,
                             password: self.address.billing.password
                         })
@@ -300,7 +300,7 @@
                         });
                     }
 
-                    this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
+                    this.$http.post("{{ route('shop.checkout.save_address') }}", this.address)
                         .then(function(response) {
                             self.disable_button = false;
 
@@ -329,7 +329,7 @@
 
                     this.disable_button = true;
 
-                    this.$http.post("{{ route('shop.checkout.save-shipping') }}", {'shipping_method': this.selected_shipping_method})
+                    this.$http.post("{{ route('shop.checkout.save_shipping') }}", {'shipping_method': this.selected_shipping_method})
                         .then(function(response) {
                             self.disable_button = false;
 
@@ -353,7 +353,7 @@
 
                     this.disable_button = true;
 
-                    this.$http.post("{{ route('shop.checkout.save-payment') }}", {'payment': this.selected_payment_method})
+                    this.$http.post("{{ route('shop.checkout.save_payment') }}", {'payment': this.selected_payment_method})
                     .then(function(response) {
                         self.disable_button = false;
 
@@ -375,7 +375,7 @@
 
                     this.disable_button = true;
 
-                    this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
+                    this.$http.post("{{ route('shop.checkout.save_order') }}", {'_token': "{{ csrf_token() }}"})
                     .then(function(response) {
                         if (response.data.success) {
                             if (response.data.redirect_url) {

@@ -1,8 +1,7 @@
 <div class="tabs">
     @if (request()->route()->getName() != 'admin.configuration.index')
 
-        <?php $keys = explode('.', $menu->currentKey);  ?>
-
+        @php $keys = explode('.', $menu->currentKey);  @endphp
 
         @if ($items = \Illuminate\Support\Arr::get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children'))
 
