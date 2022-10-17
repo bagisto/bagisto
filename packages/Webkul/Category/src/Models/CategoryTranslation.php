@@ -3,7 +3,10 @@
 namespace Webkul\Category\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Category\Contracts\CategoryTranslation as CategoryTranslationContract;
+use Webkul\Category\Database\Factories\CategoryTranslationFactory;
 
 /**
  * Class CategoryTranslation
@@ -14,6 +17,8 @@ use Webkul\Category\Contracts\CategoryTranslation as CategoryTranslationContract
  */
 class CategoryTranslation extends Model implements CategoryTranslationContract
 {
+    use HasFactory;
+
     public $timestamps = false;
 
     protected $fillable = [
@@ -25,4 +30,14 @@ class CategoryTranslation extends Model implements CategoryTranslationContract
         'meta_keywords',
         'locale_id',
     ];
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return CategoryTranslationFactory::new();
+    }
 }

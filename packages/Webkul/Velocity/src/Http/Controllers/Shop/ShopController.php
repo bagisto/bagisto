@@ -107,24 +107,28 @@ class ShopController extends Controller
         switch ($slug) {
             case 'new-products':
             case 'featured-products':
-                $count = request()->get('count');
-
                 if ($slug == 'new-products') {
-                    $products = $this->velocityProductRepository->getNewProducts($count);
+                    request()->query->add([
+                        'new'   => 1,
+                        'order' => 'rand',
+                        'limit' => request()->get('count')
+                            ?? core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage'),
+                    ]);
                 } elseif ($slug == 'featured-products') {
-                    $products = $this->velocityProductRepository->getFeaturedProducts($count);
+                    request()->query->add([
+                        'featured' => 1,
+                        'order'    => 'rand',
+                        'limit'    => request()->get('count')
+                            ?? core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage'),
+                    ]);
                 }
+
+                $products = $this->velocityProductRepository->getAll();
 
                 $response = [
                     'status'   => true,
                     'products' => $products->map(function ($product) {
-                        if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                            return $this->velocityHelper->formatProduct($product);
-                        } else {
-                            if ($product->isSaleable()) {
-                                return $this->velocityHelper->formatProduct($product);
-                            }
-                        }
+                        return $this->velocityHelper->formatProduct($product);
                     })->reject(function ($product) {
                         return is_null($product);
                     })->values(),

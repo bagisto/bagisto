@@ -320,6 +320,12 @@ $toggleColor: #3c41ff;
                 left: 100% !important;
             }
         }
+
+        label {
+            .locale {
+                right: 0;
+            }
+        }
     }
 }
 
