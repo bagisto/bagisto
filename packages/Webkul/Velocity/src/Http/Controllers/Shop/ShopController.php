@@ -6,7 +6,6 @@ use Webkul\Velocity\Helpers\Helper;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
 use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
 use Webkul\Product\Facades\ProductImage;
 
@@ -26,7 +25,6 @@ class ShopController extends Controller
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\WishlistRepository  $wishlistRepository
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository  $velocityProductRepository
      * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $compareProductsRepository
      *
      * @return void
@@ -36,7 +34,6 @@ class ShopController extends Controller
         protected ProductRepository $productRepository,
         protected WishlistRepository $wishlistRepository,
         protected CategoryRepository $categoryRepository,
-        protected VelocityProductRepository $velocityProductRepository,
         protected CustomerCompareProductRepository $compareProductsRepository
     )
     {
@@ -50,7 +47,9 @@ class ShopController extends Controller
      */
     public function search()
     {
-        $results = $this->velocityProductRepository->searchProductsFromCategory(request()->all());
+        request()->query->add(['name' => request('term')]);
+
+        $results = $this->productRepository->getAll(request('category'));
 
         return view($this->_config['view'])->with('results', $results ? $results : null);
     }
@@ -123,7 +122,7 @@ class ShopController extends Controller
                     ]);
                 }
 
-                $products = $this->velocityProductRepository->getAll();
+                $products = $this->productRepository->getAll();
 
                 $response = [
                     'status'   => true,
