@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => 'Update',
             'product-view-image'        => 'Product View Image',
             'advertisement-two'         => 'Advertisement Two Images',
-            'advertisement-one'         => 'Advertisement One Images',
             'footer-middle-content'     => 'Footer Middle Content',
             'advertisement-four'        => 'Advertisement Four Images',
             'advertisement-three'       => 'Advertisement Three Images',
@@ -333,6 +332,7 @@ return [
             'done'      => 'Done',
             'languages' => 'Languages',
             'greeting'  => 'Welcome, :customer !',
+            'greeting-for-guest' => 'Welcome, Guest'
         ]
     ],
 ];

@@ -76,7 +76,7 @@ return [
 
     'reviews' => [
         'title'                     => 'عنوان',
-        'add-review-page-title'     => 'Add بررسی',
+        'add-review-page-title'     => 'اضافه کردن بررسی',
         'write-review'              => 'یک بررسی بنویسید',
         'review-title'              => 'عنوان خود را به نقد خود بدهید',
         'product-review-page-title' => 'بررسی محصول',
@@ -99,10 +99,10 @@ return [
             'already_added'         => 'مورد در حال حاضر برای مقایسه لیست اضافه شده است',
             'removed'               => 'مورد با موفقیت از لیست مقایسه حذف شد',
             'removed-all'           => 'همه موارد با موفقیت از لیست مقایسه حذف شدند',
-            'confirm-remove-all'    => 'Are you sure you want to delete all compare items?',
+            'confirm-remove-all'    => 'آیا مطمئن هستید که می خواهید همه موارد مقایسه را حذف کنید؟',
             'empty-text'            => 'شما هیچ موردی را در لیست مقایسه خود ندارید',
-            'product_image'         => 'Product Image',
-            'actions'               => 'Actions',
+            'product_image'         => 'تصویر محصول',
+            'actions'               => 'اقدامات',
         ],
 
         'signup-text' => [
@@ -150,12 +150,12 @@ return [
             'forgot_pass'         => 'رمز عبور را فراموش کرده اید؟',
             'button_title'        => 'ورود',
             'remember'            => 'مرا به خاطر بسپار',
-            'footer'              => '© حقوق النشر :year Webkul Software ، جميع الحقوق محفوظة',
+            'footer'              => '© حقوق النشر :year وبکول نرم افزار ، جميع الحقوق محفوظة',
             'invalid-creds'       => 'لطفا مدارک خود را بررسی کنید و دوباره امتحان کنید',
             'verify-first'        => 'ابتدا حساب ایمیل خود را تأیید کنید',
             'not-activated'       => 'فعال سازی شما به دنبال تأیید سرپرست است',
             'resend-verification' => 'مجدداً نامه تأیید را دوباره ارسال کنید',
-            'show-password'       => 'montrer le mot de passe',
+            'show-password'       => 'نمایش رمز عبور',
         ],
 
         'forgot-password' => [
@@ -237,7 +237,7 @@ return [
                     'first_name'     => 'نام کوچک',
                     'last_name'      => 'نام خانوادگی',
                     'vat_id'         => 'id وات',
-                    'vat_help_note'  => '[Note: Use Country Code with VAT Id. Eg. INV01234567891]',
+                    'vat_help_note'  => '[توجه: از کد کشور با شناسه VAT استفاده کنید. به عنوان مثال. INV01234567891]',
                     'title'          => 'اضافه کردن آدرس',
                     'street-address' => 'آدرس خیابان',
                     'country'        => 'کشور',
@@ -269,7 +269,7 @@ return [
                     'wrong-password' => 'گذرواژه اشتباه!',
                 ],
 
-                'default-address' => 'Default Address',
+                'default-address' => 'آدرس پیش فرض',
             ],
 
             'order' => [
@@ -338,8 +338,8 @@ return [
                     'individual-refund'   => '#:refund_id بازپرداخت',
                     'adjustment-refund'   => 'بازپرداخت تنظیم',
                     'adjustment-fee'      => 'هزینه تنظیم',
-                    'tracking-number'     => 'Tracking Number',
-                    'cancel-confirm-msg'  => 'Are you sure you want to cancel this order ?',
+                    'tracking-number'     => 'شماره پیگیری',
+                    'cancel-confirm-msg'  => 'آیا مطمئن هستید که می خواهید این سفارش را لغو کنید؟',
                 ],
             ],
 
@@ -347,7 +347,7 @@ return [
                 'page-title'           => 'مشتری - لیست دلخواه',
                 'title'                => 'لیست دلخواه',
                 'deleteall'            => 'حذف همه',
-                'confirm-delete-all'   => 'Are you sure you want to delete all wishlist?',
+                'confirm-delete-all'   => 'آیا مطمئنید که می‌خواهید همه فهرست علاقه‌مندان را حذف کنید؟',
                 'moveall'              => 'انتقال همه محصولات به سبد خرید',
                 'move-to-cart'         => 'انتقال به سبد خرید',
                 'error'                => 'به دلیل مشکلات ناشناخته نمی توان محصول را به لیست دلخواه اضافه کرد ، لطفا بعداً بررسی کنید',
@@ -365,20 +365,20 @@ return [
                 'remove-fail'          => 'لطفاً مورد از لیست لیست حذف نشود ، لطفا بعداً دوباره امتحان کنید',
                 'empty'                => 'شما هیچ موردی در لیست دلخواه خود ندارید',
                 'remove-all-success'   => 'همه موارد از لیست دلخواه شما حذف شده است',
-                'save'                 => 'Save',
-                'share'                => 'Share',
-                'share-wishlist'       => 'Share Wishlist',
-                'wishlist-sharing'     => 'Wishlist Sharing',
-                'shared-link'          => 'Shared Link',
-                'copy'                 => 'Copy',
-                'visibility'           => 'Visibility',
-                'public'               => 'Public',
-                'private'              => 'Private',
-                'enable'               => 'Enable',
-                'disable'              => 'Disable',
-                'customer-name'        => ':name\'s Shared Wishlist',
-                'enable-wishlist-info' => 'Enable wishlist sharing to get the link.',
-                'update-message'       => 'Shared wishlist settings updated successfully',
+                'save'                 => 'صرفه جویی',
+                'share'                => 'اشتراک گذاری',
+                'share-wishlist'       => 'لیست علاقه مندی ها را به اشتراک بگذارید',
+                'wishlist-sharing'     => 'اشتراک گذاری لیست علاقه مندی ها',
+                'shared-link'          => 'لینک مشترک',
+                'copy'                 => 'کپی',
+                'visibility'           => 'دید',
+                'public'               => 'عمومی',
+                'private'              => 'خصوصی',
+                'enable'               => 'فعال کردن',
+                'disable'              => 'غیر فعال کردن',
+                'customer-name'        => ':name\'s لیست علاقه مندیها مشترک',
+                'enable-wishlist-info' => 'اشتراک‌گذاری لیست علاقه‌مندان را برای دریافت پیوند فعال کنید.',
+                'update-message'       => 'تنظیمات لیست علاقه مشترک با موفقیت به روز شد',
             ],
 
             'downloadable_products' => [
@@ -393,7 +393,7 @@ return [
                 'remaining-downloads' => 'بارگیری های باقی مانده',
                 'unlimited'           => 'نامحدود',
                 'download-error'      => 'لینک دانلود منقضی شده است',
-                'payment-error'       => 'Payment has not been done for this download.',
+                'payment-error'       => 'پرداختی برای این دانلود انجام نشده است.',
             ],
 
             'review' => [
@@ -471,13 +471,9 @@ return [
         'settings'                 => 'تنظیمات ها',
         'compare_options'          => 'قابلیت مقایشه محصولات',
         'wishlist-options'         => 'قابلیت لیست علاقه مندیها',
-        'offers'                   => 'Buy :qty for :price each and save :discount%',
-        'tax-inclusive'            => 'Inclusive of all taxes',
+        'offers'                   => 'خرید کنید :qty برای :price هر کدام و ذخیره کنید :discount%',
+        'tax-inclusive'            => 'با احتساب کلیه مالیات ها',
     ],
-
-    // 'reviews' => [
-    //     'empty' => 'You Have Not Reviewed Any Of Product Yet'
-    // ]
 
     'buynow' => [
         'no-options' => 'لطفا قبل از خرید این محصول گزینه هایی را انتخاب کنید',
@@ -503,8 +499,8 @@ return [
             'proceed-to-checkout'      => 'ادامه به پرداخت',
             'remove'                   => 'برداشتن',
             'remove-link'              => 'برداشتن',
-            'remove-all-items'         => 'Remove all items',
-            'confirm-action'           => 'Confirm this action?',
+            'remove-all-items'         => 'همه موارد را حذف کنید',
+            'confirm-action'           => 'این عمل را تأیید می‌کنید؟',
             'move-to-wishlist'         => 'انتقال به لیست دلخواه',
             'move-to-wishlist-success' => 'مورد به لیست دلخواه منتقل شد',
             'move-to-wishlist-error'   => 'نمی توان مورد را به لیست علاقه مندی ها انتقال داد ، لطفا بعداً دوباره امتحان کنید',
@@ -521,10 +517,10 @@ return [
                 'error_remove'   => 'هیچ موردی برای حذف از سبد خرید وجود ندارد',
                 'success'        => 'مورد با موفقیت به سبد خرید اضافه شد',
                 'success-remove' => 'مورد با موفقیت از سبد خرید حذف شد',
-                'success-all-remove' => 'All items is successfully removed from the cart.',
+                'success-all-remove' => 'همه موارد با موفقیت از سبد خرید حذف شد.',
                 'error-add'      => 'لطفاً موردی را به سبد خرید اضافه نکرد ، لطفا بعداً دوباره امتحان کنید',
-                'inactive'       => 'An item is inactive and was removed from cart',
-                'inactive-add'   => 'Inactive item cannot be added to cart',
+                'inactive'       => 'یک مورد غیرفعال است و از سبد خرید حذف شده است',
+                'inactive-add'   => 'کالای غیرفعال را نمی توان به سبد خرید اضافه کرد',
             ],
 
             'quantity-error'            => 'مقدار درخواستی در دسترس نیست',
@@ -532,16 +528,16 @@ return [
             'cart-remove-action'        => 'آیا واقعاً می خواهید این کار را انجام دهید؟',
             'partial-cart-update'       => 'فقط برخی از محصولات (های) به روز شده اند',
             'event'                     => [
-                'expired' => 'This event has been expired.',
+                'expired' => 'این رویداد منقضی شده است.',
             ],
             'minimum-order-message'     => 'حداقل مقدار سفارش است :amount',
-            'suspended-account-message' => 'Your account has been suspended.',
-            'inactive-account-message' =>  'Your account has been inactive.',
-            'check-shipping-address'    => 'Please check shipping address.',
-            'check-billing-address'     => 'Please check billing address.',
-            'specify-shipping-method'   => 'Please specify shipping method.',
-            'specify-payment-method'    => 'Please specify payment method.',
-            'rule-applied'              => 'Cart rule applied',
+            'suspended-account-message' => 'حساب شما مسدود شده است.',
+            'inactive-account-message' =>  'حساب شما غیر فعال بوده است.',
+            'check-shipping-address'    => 'لطفا آدرس حمل و نقل را بررسی کنید.',
+            'check-billing-address'     => 'لطفا آدرس صورتحساب را بررسی کنید.',
+            'specify-shipping-method'   => 'لطفا روش ارسال را مشخص کنید',
+            'specify-payment-method'    => 'لطفا روش پرداخت را مشخص کنید',
+            'rule-applied'              => 'قانون سبد خرید اعمال شد',
         ],
 
         'onepage' => [
@@ -683,10 +679,10 @@ return [
             'subject'  => 'فاکتور سفارش شما #:order_id',
             'summary'  => 'خلاصه فاکتور',
             'reminder' => [
-                'subject'                                          => 'Invoice reminder',
-                'your-invoice-is-overdue'                          => 'Your invoice :invoice is overdue by :time.',
-                'please-make-your-payment-as-soon-as-possible'     => 'Please make your payment as soon as possible.',
-                'if-you-ve-already-paid-just-disregard-this-email' => 'If you\'ve already paid, just disregard this email.',
+                'subject'                                          => 'یادآوری فاکتور',
+                'your-invoice-is-overdue'                          => 'فاکتور :invoice شما تا :time عقب افتاده است.',
+                'please-make-your-payment-as-soon-as-possible'     => 'لطفا در اسرع وقت پرداخت خود را انجام دهید.',
+                'if-you-ve-already-paid-just-disregard-this-email' => 'اگر قبلاً پرداخت کرده اید، فقط این ایمیل را نادیده بگیرید.',
             ],
         ],
 
@@ -766,7 +762,7 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => ' جميع الحقوق محفوظة,:year Webkul Software حقوق الطبع والنشر  ©',
+        'copy-right' => ' جميع الحقوق محفوظة,:year وبکول نرم افزار حقوق الطبع والنشر  ©',
     ],
 
     'response' => [

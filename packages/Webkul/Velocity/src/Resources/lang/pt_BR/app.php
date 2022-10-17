@@ -105,7 +105,6 @@ return [
             'update-meta-data' => 'Atualizar Meta Data',
             'product-view-image' => 'Imagem da Visualização do produto',
             'advertisement-two' => 'Anúncio Duas Imagens',
-            'advertisement-one' => 'Anúncio Uma Imagem',
             'footer-middle-content' => 'Rodapé Conteúdo do Meio',
             'advertisement-four' => 'Anúncio Quatro Imagens',
             'advertisement-three' => 'Anúncio Três Imagens',
@@ -310,7 +309,8 @@ return [
 
     'responsive' => [
         'header' => [
-            'greeting' => 'Bem-vindo, :customer !',
+            'greeting' => 'Bem-vindo, :Customer !',
+            'greeting-for-guest' => 'Bem vindo convidado'
         ]
     ],
 ]
