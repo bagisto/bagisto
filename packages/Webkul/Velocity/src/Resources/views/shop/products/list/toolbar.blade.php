@@ -97,21 +97,23 @@
 
             <div class="col-3">
                 <div class="sorter" id="sort-by">
-                    <i class="material-icons">sort</i>
 
-                    <select class="selective-div no-border" onchange="window.location.href = this.value">
+                    <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value">
                         @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
                             <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
                                 {{ __('shop::app.products.' . $order) }}
                             </option>
                         @endforeach
                     </select>
+
+                    <div class="select-icon-container">
+                        <span class="select-icon rango-arrow-down"></span>
+                    </div>
                 </div>
             </div>
 
             <div class="col-3">
-                <div class="limiter">
-                    <i class="material-icons">sort</i>
+                <div class="limiter" id="limit-by">
 
                     <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value" style="width: 57px;" aria-label="Show">
 

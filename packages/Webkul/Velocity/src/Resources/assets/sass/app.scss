@@ -1222,7 +1222,52 @@ i.within-circle {
     }
 }
 
-@media only screen and (max-width: 420px) and (min-width: 280px) {
+@media only screen and (max-width: 280px) {
+    .filters-container {
+        .toolbar-wrapper {
+            div {
+                #sort-by {
+                    select {
+                        margin-left: -6px !important;
+                        top: -6px !important;
+                        padding: 5px 0px !important;
+                    }
+
+                    .selective-div {
+                        width: 75px !important;
+                    }
+
+                    .select-icon-container {
+                        .select-icon {
+                            left: 53px !important;
+                        }
+                    }
+                }
+
+                #limit-by {
+                    select {
+                        margin-left: -6px !important;
+                        top: -6px !important;
+                        padding: 5px 0px !important;
+                    }
+
+                    .selective-div {
+                        width: 45px !important;
+                    }
+
+                    .select-icon-container {
+                        .select-icon {
+                            left: 43px !important;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 420px) {
     .sale-summary {
         .dash-icon {
             margin-right: -20% !important;
@@ -1233,7 +1278,28 @@ i.within-circle {
         .toolbar-wrapper {
             div {
                 margin: 0 0 0 0 !important;
+                padding-left: 4px !important;
+                padding-right: 4px !important;
+
+                #sort-by {
+                    select {
+                        margin-left: -25px;
+                        position: unset !important;
+                        left: 15% !important;
+                        top: -5px;
+                        padding: 7px 9px;
+                    }
+                }
+
+                #limit-by {
+                    select {
+                        margin-left: 16px!important;
+                        top: -5px !important;
+                        padding: 7px 9px;
+                    }
+                }
             }
         }
     }
 }
+
