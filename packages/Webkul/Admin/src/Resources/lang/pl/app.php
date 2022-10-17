@@ -6,7 +6,7 @@ return [
     'update'        => 'Aktualizuj',
     'delete'        => 'Usuń',
     'failed'        => 'Nie powiodło się',
-    'store'         => '  Sklep',
+    'store'         => 'Sklep',
     'image'         => 'Obraz',
     'no result'     => 'Brak wyników',
     'product'       => 'Produkt',
