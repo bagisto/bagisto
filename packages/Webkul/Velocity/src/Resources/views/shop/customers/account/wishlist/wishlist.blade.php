@@ -256,15 +256,7 @@
 
                 let items = JSON.parse(this.itemValues);
 
-<<<<<<< HEAD
                 let itemsCount = items.data.length;
-=======
-                        this.$http.post("{{ route('shop.customer.wishlist.share') }}", {
-                            shared: val
-                        })
-                        .then(function(response) {
-                            self.$root.hideLoader();
->>>>>>> upstream/master
 
                 this.$http.post("{{ route('customer.wishlist.share') }}", {
                         shared: val,
