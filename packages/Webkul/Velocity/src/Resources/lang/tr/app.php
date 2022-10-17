@@ -105,7 +105,6 @@ return [
             'update-meta-data' => 'Meta Bilgisi Güncelle',
             'product-view-image' => 'Ürün Görselini Görüntüle',
             'advertisement-two' => 'İki Görselli Reklam',
-            'advertisement-one' => 'Rek Görsel Reklamı',
             'footer-middle-content' => 'Orta İçerikli Alt Kısım',
             'advertisement-four' => 'Dört Görselli Reklam',
             'advertisement-three' => 'Üç Görselli Reklam',
