@@ -1317,9 +1317,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'REGRESAR AL INICIO',
-        'in-maitainace' => 'En mantenimiento',
-        'right-back'    => 'Estaremos de vuelta',
+        'go-to-home'     => 'REGRESAR AL INICIO',
+        'in-maintenance' => 'En mantenimiento',
+        'right-back'     => 'Estaremos de vuelta',
 
         '404' => [
             'page-title' => '404 página no encontrada',

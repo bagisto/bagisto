@@ -1301,9 +1301,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'GA NAAR HUIS',
-        'in-maitainace' => 'In onderhoud',
-        'right-back'    => 'Ben zo terug',
+        'go-to-home'     => 'GA NAAR HUIS',
+        'in-maintenance' => 'In onderhoud',
+        'right-back'     => 'Ben zo terug',
 
         '404' => [
             'page-title' => '404 Pagina niet gevonden',
