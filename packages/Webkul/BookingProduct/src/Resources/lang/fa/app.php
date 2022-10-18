@@ -48,9 +48,9 @@ return [
                 'price' => 'قیمت',
                 'quantity' => 'تعداد',
                 'description' => 'شرح',
-                'special-price' => 'Special Price',
-                'special-price-from' => 'Valid From',
-                'special-price-to' => 'Valid Until',
+                'special-price' => 'قیمت ویژه',
+                'special-price-from' => 'معتبر از',
+                'special-price-to' => 'معتبر است تا',
                 'charged-per' => 'به اتهام در هر',
                 'guest' => 'مهمان',
                 'table' => 'جدول',
@@ -64,7 +64,7 @@ return [
                 'status' => 'وضعیت',
                 'open' => 'باز کن',
                 'close' => 'بستن',
-                'time-error' => 'The to time must be greater than the from time.'
+                'time-error' => 'زمان به زمان باید بیشتر از زمان باشد.'
             ]
         ],
 
@@ -101,7 +101,7 @@ return [
             'book-an-appointment' => 'قرار ملاقات را رزرو کنید',
             'date' => 'تاریخ',
             'slot' => 'اسلات',
-            'no-slots-available' => 'No slots available',
+            'no-slots-available' => 'اسلات موجود نیست',
             'rent-an-item' => 'اجاره یک مورد',
             'choose-rent-option' => 'گزینه اجاره را انتخاب کنید',
             'daily-basis' => 'به صورت روزانه',

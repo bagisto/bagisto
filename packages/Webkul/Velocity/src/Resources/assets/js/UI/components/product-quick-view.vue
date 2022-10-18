@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="col-lg-6 fs16">
-                        <h2 class="fw6 quick-view-name">{{ product.name }}</h2>
+                        <h2 class="fw6 quick-view-name" v-html="product.name"></h2>
 
                         <div class="product-price" v-html="product.priceHTML"></div>
 
