@@ -1554,7 +1554,7 @@ return [
             'oldest-first'                          => 'قدیمی ترها در اولویت',
             'cheapest-first'                        => 'اول ارزانترین',
             'expensive-first'                       => 'گران اول',
-            'comma-seperated'                       => 'با کاما جدا شده',
+            'comma-separated'                       => 'با کاما جدا شده',
             'favicon'                               => 'فاویکون',
             'seo'                                   => 'سئو',
             'rich-snippets'                         => 'ریچ اسنیپت ها',

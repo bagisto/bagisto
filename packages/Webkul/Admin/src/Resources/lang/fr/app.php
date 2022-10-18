@@ -1590,7 +1590,7 @@ return [
             'oldest-first'                          => 'Le plus vieux d\'abord',
             'cheapest-first'                        => 'Le moins cher d\'abord',
             'expensive-first'                       => 'Cher d\'abord',
-            'comma-seperated'                       => 'Séparé par des virgules',
+            'comma-separated'                       => 'Séparé par des virgules',
             'favicon'                               => 'Icône de favori',
             'seo'                                   => 'Référencement',
             'rich-snippets'                         => 'Extraits riches',

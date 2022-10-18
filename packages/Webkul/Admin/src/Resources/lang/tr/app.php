@@ -1553,7 +1553,7 @@ return [
             'oldest-first'                          => 'Eskiden Yenile',
             'cheapest-first'                        => 'Ucuzdan Pahallıya',
             'expensive-first'                       => 'Pahallıdan Ucuza',
-            'comma-seperated'                       => 'Virgülle Ayrılsın',
+            'comma-separated'                       => 'Virgülle Ayrılsın',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Zengin Snippet',

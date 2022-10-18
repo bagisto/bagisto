@@ -1546,7 +1546,7 @@ return [
             'oldest-first'                          => '最旧优先',
             'cheapest-first'                        => '便宜优先',
             'expensive-first'                       => '昂贵优先',
-            'comma-seperated'                       => '逗号分隔',
+            'comma-separated'                       => '逗号分隔',
             'favicon'                               => '网站图标',
             'seo'                                   => '搜索引擎优化',
             'rich-snippets'                         => '富片段',

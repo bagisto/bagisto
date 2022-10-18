@@ -1577,7 +1577,7 @@ return [
             'oldest-first'                          => 'الأقدم أولا',
             'cheapest-first'                        => 'الأرخص أولا',
             'expensive-first'                       => 'مكلفة أولا',
-            'comma-seperated'                       => 'مفصولة بفواصل',
+            'comma-separated'                       => 'مفصولة بفواصل',
             'favicon'                               => 'فافيكون',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'قصاصات غنية',
