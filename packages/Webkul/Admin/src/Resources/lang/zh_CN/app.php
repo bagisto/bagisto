@@ -887,7 +887,7 @@ return [
             'theme'                  => '主题',
             'home_page_content'      => '主页内容',
             'footer_content'         => '页脚内容',
-            'logo'                   => 'Logo',
+            'logo'                   => '标志',
             'favicon'                => '网站图标',
             'create-success'         => '渠道创建成功.',
             'update-success'         => '渠道更新成功.',
@@ -985,7 +985,7 @@ return [
             'code'            => '代码',
             'name'            => '名称',
             'is_user_defined' => '用户已定义',
-            'yes'             => 'Yes',
+            'yes'             => '是的',
         ],
 
         'addresses' => [
@@ -1004,7 +1004,7 @@ return [
             'country-name'        => '国家',
             'postcode'            => '邮编',
             'default-address'     => '默认地址',
-            'yes'                 => 'Yes',
+            'yes'                 => '是的',
             'not-approved'        => '不批准',
             'no'                  => '不',
             'dash'                => '-',
@@ -1303,9 +1303,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => '回到首页',
-        'in-maitainace' => '维护中',
-        'right-back'    => '马上回来',
+        'go-to-home'     => '回到首页',
+        'in-maintenance' => '维护中',
+        'right-back'     => '马上回来',
 
         '404' => [
             'page-title' => '404页面不存在',
@@ -1504,8 +1504,8 @@ return [
             'admin-email-tip'                       => '此频道用于接收电子邮件的管理员电子邮件地址',
             'admin-page-limit'                      => '每页的默认项目 (管理员)',
             'design'                                => '设计',
-            'admin-logo'                            => '管理员Logo',
-            'logo-image'                            => 'Logo图片',
+            'admin-logo'                            => '管理员标志',
+            'logo-image'                            => '标志图片',
             'credit-max'                            => '客户信用最大值',
             'credit-max-value'                      => '信用最大值',
             'use-credit-max'                        => '使用信用最大值',
@@ -1528,7 +1528,7 @@ return [
             'due-duration-day'                      => ':due-duration 日',
             'due-duration-days'                     => ':due-duration 日',
             'invoice-slip-design'                   => '发票单设计',
-            'logo'                                  => 'Logo',
+            'logo'                                  => '标志',
             'default'                               => '默认',
             'sandbox'                               => '沙盒',
             'all-channels'                          => '所有渠道列表',
@@ -1546,7 +1546,7 @@ return [
             'oldest-first'                          => '最旧优先',
             'cheapest-first'                        => '便宜优先',
             'expensive-first'                       => '昂贵优先',
-            'comma-seperated'                       => '逗号分隔',
+            'comma-separated'                       => '逗号分隔',
             'favicon'                               => '网站图标',
             'seo'                                   => '搜索引擎优化',
             'rich-snippets'                         => '富片段',

@@ -545,7 +545,7 @@ h5 {
                 }
             }
         }
-    }   
+    }
 }
 
 .section {
@@ -1639,3 +1639,18 @@ modal {
     top: 43%;
 }
 
+@media only screen and (max-width: 1040px) {
+    .grid-container {
+        .grid-top {
+            .datagrid-filters {
+                .filter-left {
+                    display: grid;
+                    grid-template-columns: 49.5% 49%;
+                    -moz-column-gap: 5px;
+                    column-gap: 5px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
