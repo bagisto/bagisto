@@ -113,7 +113,6 @@ return [
             'update-meta-data' => 'Mettre à jour les métadonnées',
             'product-view-image' => 'Image du produit',
             'advertisement-two' => 'Publicité Deux Images',
-            'advertisement-one' => 'Publicité One Images',
             'footer-middle-content' => 'Contenu intermédiaire du pied de page',
             'advertisement-four' => 'Publicité Quatre Images',
             'advertisement-three' => 'Publicité Trois Images',
@@ -332,7 +331,8 @@ return [
         'header' => [
             'done' => 'Fait',
             'languages' => 'Langues',
-            'greeting' => 'Bienvenue, :customer !',
+            'greeting' => 'Bienvenue, :Customer !',
+            'greeting-for-guest' => 'Bienvenue, Invité'
         ],
     ],
 ];

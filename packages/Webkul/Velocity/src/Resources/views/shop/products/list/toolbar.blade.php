@@ -88,28 +88,52 @@
                 @endif
             </div>
 
-            <div class="col-4" @click="toggleLayeredNavigation({event: $event, actionType: 'open'})">
+            <div class="col-3" @click="toggleLayeredNavigation({event: $event, actionType: 'open'})">
                 <a class="unset">
                     <i class="material-icons">filter_list</i>
                     <span>{{ __('velocity::app.shop.general.filter') }}</span>
                 </a>
             </div>
 
-            <div class="col-4">
+            <div class="col-3">
                 <div class="sorter" id="sort-by">
-                    <i class="material-icons">sort_by_alpha</i>
 
-                    <select class="selective-div no-border" onchange="window.location.href = this.value">
+                    <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value">
                         @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
                             <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
                                 {{ __('shop::app.products.' . $order) }}
                             </option>
                         @endforeach
                     </select>
+
+                    <div class="select-icon-container">
+                        <span class="select-icon rango-arrow-down"></span>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-3">
+                <div class="limiter" id="limit-by">
+
+                    <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value" style="width: 57px;" aria-label="Show">
+
+                        @foreach ($toolbarHelper->getAvailableLimits() as $limit)
+
+                            <option value="{{ $toolbarHelper->getLimitUrl($limit) }}" {{ $toolbarHelper->isLimitCurrent($limit) ? 'selected' : '' }}>
+                                {{ $limit }}
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                    <div class="select-icon-container">
+                        <span class="select-icon rango-arrow-down"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3">
                 @php
                     $isList = $toolbarHelper->isModeActive('list');
                 @endphp

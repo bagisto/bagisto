@@ -316,8 +316,14 @@ $toggleColor: #3c41ff;
         &.date,
         &.datetime {
             &::after {
-                margin-right: -34px;
-                right: 100% !important;
+                right: 10px;
+                left: unset;
+            }
+        }
+
+        label {
+            .locale {
+                right: 0;
             }
         }
     }
@@ -349,6 +355,17 @@ $toggleColor: #3c41ff;
                 .page-action {
                     a {
                         padding: 8px 10px !important;
+                    }
+
+                    .btn {
+                        padding: 7px 8px !important;
+                        margin-top: 7px !important;
+                    }
+                }
+
+                .page-title {
+                    h1 {
+                        font-size: 14px !important;
                     }
                 }
             }
