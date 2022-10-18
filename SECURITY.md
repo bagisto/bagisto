@@ -1,6 +1,6 @@
 # Reporting Security Issues
 
-Bagisto values the contributions of the security research community, and we look forward to working with you to minimize risk to Magento merchants.
+Bagisto values the contributions of the security research community, and we look forward to working with you to minimize risk to Bagisto merchants.
 
 ## Where should I report security issues?
 
