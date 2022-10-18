@@ -1302,9 +1302,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'رفتن به خانه',
-        'in-maitainace' => 'در حال تعمیر و نگهداری',
-        'right-back'    => 'الآن برمیگردم',
+        'go-to-home'     => 'رفتن به خانه',
+        'in-maintenance' => 'در حال تعمیر و نگهداری',
+        'right-back'     => 'الآن برمیگردم',
 
         '404' => [
             'page-title' => '404 صفحه مورد نظر یافت نشد',
@@ -1554,7 +1554,7 @@ return [
             'oldest-first'                          => 'قدیمی ترها در اولویت',
             'cheapest-first'                        => 'اول ارزانترین',
             'expensive-first'                       => 'گران اول',
-            'comma-seperated'                       => 'با کاما جدا شده',
+            'comma-separated'                       => 'با کاما جدا شده',
             'favicon'                               => 'فاویکون',
             'seo'                                   => 'سئو',
             'rich-snippets'                         => 'ریچ اسنیپت ها',

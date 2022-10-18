@@ -1,5 +1,5 @@
 <template>
-    <div class="filters">
+    <div class="filter-left">
         <div
             class="dropdown-filters per-page"
             v-if="extraFilters.channels != undefined"
