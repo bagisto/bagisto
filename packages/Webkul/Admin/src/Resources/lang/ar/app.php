@@ -1365,7 +1365,7 @@ return [
         'download'         => 'نزل',
         'upload'           => 'الارسال',
         'csv'              => 'كسف',
-        'xls'              => 'زلس',
+        'xls'              => 'سي إس الخامس',
         'file'             => 'ملف',
         'upload-error'     => ' xls, xlsx, csv: الملف يجب أن يكون ملف من نوع',
         'duplicate-error'  => ':position عند الصف :identifier  يجب أن يكون المعرف فريدًا ومكررًا',
