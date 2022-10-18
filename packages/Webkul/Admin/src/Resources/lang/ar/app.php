@@ -1322,9 +1322,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'إذهب إلى البيت',
-        'in-maitainace' => 'في الصيانة',
-        'right-back'    => 'سأعود',
+        'go-to-home'     => 'إذهب إلى البيت',
+        'in-maintenance' => 'في الصيانة',
+        'right-back'     => 'سأعود',
 
         '404' => [
             'page-title' => '404 صفحة غير موجودة',
@@ -1577,7 +1577,7 @@ return [
             'oldest-first'                          => 'الأقدم أولا',
             'cheapest-first'                        => 'الأرخص أولا',
             'expensive-first'                       => 'مكلفة أولا',
-            'comma-seperated'                       => 'مفصولة بفواصل',
+            'comma-separated'                       => 'مفصولة بفواصل',
             'favicon'                               => 'فافيكون',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'قصاصات غنية',
