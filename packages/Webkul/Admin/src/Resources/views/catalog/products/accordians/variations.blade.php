@@ -284,10 +284,10 @@
             <td>
                 <div :class="['control-group', errors.has(variantInputName + '[weight]') ? 'has-error' : '']">
                     <input
-                        type="number"
+                        type="text"
                         :name="[variantInputName + '[weight]']" class="control"
                         v-model="variant.weight"
-                        v-validate="'required|decimal|min_value:0'"
+                        v-validate="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                         data-vv-as="&quot;{{ __('admin::app.catalog.products.weight') }}&quot;"
                         step="any"/>
 
