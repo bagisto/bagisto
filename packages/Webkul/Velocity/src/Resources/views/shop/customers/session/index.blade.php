@@ -82,13 +82,12 @@
 
                                 {{ __('shop::app.customer.login-form.show-password') }}
 
-                                <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
-
                                 <a href="{{ route('shop.customer.forgot_password.create') }}" class=" show-password float-right">
                                     {{ __('shop::app.customer.login-form.forgot_pass') }}  
                                 </a>
 
                                 <div class="mt10">
+                                    <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
                                     @if (Cookie::has('enable-resend'))
                                         @if (Cookie::get('enable-resend') == true)
                                             <a href="{{ route('shop.customer.resend.verification_email', Cookie::get('email-for-resend')) }}">{{ __('shop::app.customer.login-form.resend-verification') }}</a>
