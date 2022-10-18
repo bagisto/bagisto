@@ -105,7 +105,6 @@ return [
             'update-meta-data' => 'Update Meta Data',
             'product-view-image' => 'Product View Image',
             'advertisement-two' => 'Advertisement Two Images',
-            'advertisement-one' => 'Advertisement One Images',
             'footer-middle-content' => 'Footer Middle Content',
             'advertisement-four' => 'Advertisement Four Images',
             'advertisement-three' => 'Advertisement Three Images',

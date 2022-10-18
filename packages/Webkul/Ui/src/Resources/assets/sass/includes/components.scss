@@ -267,9 +267,11 @@
                 }
 
                 .filter-left {
-                    display: grid;
-                    grid-template-columns: 49.5% 49%;
-                    column-gap: 5px;
+                    .filters {
+                        display: grid;
+                        grid-template-columns: 49.5% 49%;
+                        column-gap: 5px;    
+                    }
                 }
 
                 .filter-right {
