@@ -105,7 +105,6 @@ return [
             'update-meta-data' => 'Metadaten aktualisieren',
             'product-view-image' => 'Produktansicht Bild',
             'advertisement-two' => 'Werbung Zwei Bilder',
-            'advertisement-one' => 'Werbung Eins Bilder',
             'footer-middle-content' => 'Fußzeile Mittlerer Inhalt',
             'advertisement-four' => 'Werbung Vier Bilder',
             'advertisement-three' => 'Werbung Drei Bilder',
