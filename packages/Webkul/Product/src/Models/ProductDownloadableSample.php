@@ -34,7 +34,7 @@ class ProductDownloadableSample extends TranslatableModel implements ProductDown
      */
     public function file_url()
     {
-        return Storage::url($this->path);
+        return Storage::url($this->file);
     }
 
     /**

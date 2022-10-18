@@ -169,10 +169,6 @@ trait ProductAction
                 $product = $I->haveSimpleProduct($configs, $productStates);
         }
 
-        if ($product !== null) {
-            Event::dispatch('catalog.product.create.after', $product);
-        }
-
         return $product;
     }
 
@@ -193,11 +189,17 @@ trait ProductAction
 
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
+        Event::dispatch('catalog.product.create.after', $product);
+
         $I->createAttributeValues($product, $configs['attributeValues'] ?? []);
 
         $I->createInventory($product->id, $configs['productInventory'] ?? []);
 
-        return $product->refresh();
+        $product = $product->refresh();
+
+        Event::dispatch('catalog.product.update.after', $product);
+
+        return $product;
     }
 
     /**
@@ -217,9 +219,13 @@ trait ProductAction
 
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
+        Event::dispatch('catalog.product.create.after', $product);
+
         $I->createAttributeValues($product, $configs['attributeValues'] ?? []);
 
         $I->createInventory($product->id, $configs['productInventory'] ?? []);
+
+        Event::dispatch('catalog.product.update.after', $product);
 
         return $product->refresh();
     }
@@ -241,9 +247,13 @@ trait ProductAction
 
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
+        Event::dispatch('catalog.product.create.after', $product);
+
         $I->createAttributeValues($product, $configs['attributeValues'] ?? []);
 
         $I->createDownloadableLink($product->id);
+
+        Event::dispatch('catalog.product.update.after', $product);
 
         return $product->refresh();
     }
@@ -265,9 +275,13 @@ trait ProductAction
 
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
+        Event::dispatch('catalog.product.create.after', $product);
+
         $I->createAttributeValues($product, $configs['attributeValues'] ?? []);
 
         $I->createBookingEventProduct($product->id);
+
+        Event::dispatch('catalog.product.update.after', $product);
 
         return $product->refresh();
     }

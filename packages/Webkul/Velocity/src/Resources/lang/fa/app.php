@@ -8,7 +8,7 @@ return [
                 'category'  => 'دسته بندی',
                 'settings'  => 'تنظیمات',
                 'extension_name' => 'تم سرعت',
-                'error-module-inactive' => 'Warning: وضعیت موضوع سرعت غیرفعال است',
+                'error-module-inactive' => 'هشدار: وضعیت موضوع سرعت غیرفعال است',
             ],
 
             'settings' => [
@@ -40,9 +40,9 @@ return [
             ]
         ],
         'layouts' => [
-            'velocity' => 'Velocity',
+            'velocity' => 'سرعت',
             'cms-pages' => 'CMS صفحات',
-            'meta-data' => 'Meta Data',
+            'meta-data' => 'متا دیتا',
             'category-menu' => 'منوی دسته',
             'header-content' => 'محتوای سرصفحه',
         ],
@@ -63,7 +63,7 @@ return [
             'tab' => [
                 'page' => 'تنظیم صفحه',
                 'content' => 'تنظیم محتوا',
-                'meta_content' => 'Meta Data',
+                'meta_content' => 'متا دیتا',
             ],
             'page' => [
                 'title' => 'عنوان',
@@ -73,7 +73,7 @@ return [
             'content' => [
                 'content-type' => 'نوع محتوا',
                 'custom-title' => 'عنوان سفارشی',
-                'category-slug' => 'دسته Slug',
+                'category-slug' => 'دسته حلزون حرکت کردن',
                 'link-target' => 'هدف پیوند صفحه',
                 'custom-product' => 'محصولات فروشگاهی',
                 'custom-heading' => 'عنوان سفارشی',
@@ -90,22 +90,21 @@ return [
             ]
         ],
         'meta-data' => [
-            'footer' => 'Footer',
+            'footer' => 'پاورقی',
             'title' => 'داده های متا سرعت',
             'activate-slider' => 'لغزنده را فعال کنید',
             'home-page-content' => 'محتوای صفحه اصلی',
             'footer-left-content' => 'بالا و پایین صفحه',
             'subscription-content' => 'نوار اشتراک محتوا',
             'sidebar-categories' => 'دسته بندی های نوار کناری',
-            'header_content_count' => 'Header Content Count',
+            'header_content_count' => 'تعداد محتوای سرصفحه',
             'footer-left-raw-content' => '<p>ما دوست داریم که نرم افزارهایی را تهیه کرده و مشکلات دنیای واقعی را با باینری حل کنیم. ما به اهداف خود بسیار متعهد هستیم. ما منابع خود را برای ایجاد کلاس های نرم افزاری و برنامه های کاربردی برای تجارت سازمانی با درجه برتر ، در لبه تخصص فناوری سرمایه گذاری می کنیم..</p>',
             'slider-path' => 'مسیر اسلاید',
             'category-logo' => 'آرم دسته',
             'product-policy' => 'خط مشی محصول',
-            'update-meta-data' => 'Meta Data به روز رسانی',
+            'update-meta-data' => 'متا دیتا به روز رسانی',
             'product-view-image' => 'تصویر نمایش محصول',
             'advertisement-two' => 'تبلیغات دو تصویر',
-            'advertisement-one' => 'تبلیغات یک تصویر',
             'footer-middle-content' => 'پاورقی مطالب میانی',
             'advertisement-four' => 'تبلیغات چهار تصویر',
             'advertisement-three' => 'تبلیغات سه تصویر',
@@ -113,14 +112,14 @@ return [
             'general' => 'عمومی',
             'add-image-btn-title' => 'تصویر اضافه کن',
             'footer-middle' => [
-                'about-us'  => 'About Us',
-                'customer-service' => 'Customer Service',
-                'whats-new' => 'What\'s New',
-                'contact-us' => 'Contact Us',
-                'order-and-returns' => 'Order and Returns',
-                'payment-policy' => 'Payment Policy',
-                'shipping-policy' => 'Shipping Policy',
-                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+                'about-us'  => 'درباره ما',
+                'customer-service' => 'خدمات مشتری',
+                'whats-new' => 'چه خبر',
+                'contact-us' => 'با ما تماس بگیرید',
+                'order-and-returns' => 'سفارش و برگرداندن',
+                'payment-policy' => 'قوانین پرداخت',
+                'shipping-policy' => 'سیاست حمل و نقل',
+                'privacy-and-cookies-policy' => 'سیاست حفظ حریم خصوصی و کوکی ها'
             ]
         ],
         'category' => [
@@ -130,7 +129,7 @@ return [
             'edit-title' => 'محتوای منو را ویرایش کنید',
             'btn-add-category' => 'محتوای دسته بندی را اضافه کنید',
             'datagrid' => [
-                'category-id' => 'Id دسته بندی',
+                'category-id' => 'شناسه دسته بندی',
                 'category-name' => 'نام دسته',
                 'category-icon' => 'نماد دسته',
                 'category-status' => 'وضعیت',
@@ -158,7 +157,7 @@ return [
         'hot-categories' => 'دسته بندی های داغ',
         'payment-methods' => 'روش های پرداخت',
         'customer-reviews' => 'نظرات مشتری',
-        'shipping-methods' => 'روش های حمل و نقل',
+        'shipping-methods' => 'روش های حمل و:Customer نقل',
         'popular-categories' => 'دسته بندی های محبوب',
     ],
 
@@ -210,8 +209,8 @@ return [
             'removed' => 'مورد با موفقیت از لیست مقایسه حذف شد',
             'removed-all' => 'همه موارد با موفقیت از لیست مقایسه حذف شدند',
             'empty-text' => "شما هیچ موردی را در لیست مقایسه خود ندارید",
-            'product_image' => 'Product Image',
-            'actions' => 'Actions',
+            'product_image' => 'تصویر محصول',
+            'actions' => 'اقدامات',
         ],
         'login-form' => [
             'sign-up' => 'ثبت نام',
@@ -253,7 +252,7 @@ return [
         'review-by' => 'مرور توسط',
         'quick-view' => 'مشاهده سریع',
         'not-available' => 'در دسترس نیست',
-        'submit-review' => 'ارسال بررسی',
+        'submit-review' => 'ارس:Customerال بررسی',
         'ratings' => ':totalRatings رتبه بندی',
         'reviews-count' => ':totalReviews بررسی ها',
         'customer-rating' => 'رتبه بندی مشتری',
@@ -263,7 +262,7 @@ return [
         'short-description' => 'توضیحات کوتاه',
         'recently-viewed' => 'محصولات اخیرا مشاهده شده',
         'be-first-review' => 'اولین نفری باشید که نظر می دهد',
-        'tax-inclusive' => 'Inclusive of all taxes',
+        'tax-inclusive' => 'با احتساب کلیه مالیات ها',
     ],
 
     'shop' => [
@@ -273,8 +272,8 @@ return [
             'female' => 'زن',
         ],
         'general' => [
-            'no' => 'No',
-            'yes' => 'Yes',
+            'no' => 'خیر',
+            'yes' => 'آره',
             'filter' => 'فیلتر',
             'view' => 'چشم انداز',
             'orders' => 'سفارشات',
@@ -282,7 +281,7 @@ return [
             'reviews' => 'بررسی ها',
             'addresses' => 'آدرس ها',
             'update' => 'به روز رسانی',
-            'currencies' => 'Currencies',
+            'currencies' => 'ارزها',
             'top-brands' => 'برندهای برتر',
             'new-password' => 'رمز عبور جدید',
             'downloadables' => 'محصولات دانلودی',
@@ -309,6 +308,7 @@ return [
     'responsive' => [
         'header' => [
             'greeting' => ':customer ! خوش آمدی',
+            'greeting-for-guest' =>' خوش آمد گویی به مهمان'
         ]
     ],
 ]

@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => 'अद्यतन',
             'product-view-image'        => 'उत्पाद देखें छवि',
             'advertisement-two'         => 'विज्ञापन दो छवियां',
-            'advertisement-one'         => 'विज्ञापन एक छवियाँ',
             'footer-middle-content'     => 'पाद मध्य सामग्री',
             'advertisement-four'        => 'विज्ञापन चार छवियां',
             'advertisement-three'       => 'विज्ञापन तीन छवियां',
@@ -332,6 +331,7 @@ return [
             'done'      => 'पूर्ण',
             'languages' => 'भाषाएं',
             'greeting'  => 'स्वागत है, :customer !',
+            'greeting-for-guest' => 'अतिथि का स्वागत'
         ]
     ],
 ];

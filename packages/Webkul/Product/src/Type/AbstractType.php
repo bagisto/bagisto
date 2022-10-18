@@ -8,15 +8,13 @@ use Illuminate\Support\Str;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Checkout\Facades\Cart;
@@ -122,22 +120,24 @@ abstract class AbstractType
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
-     * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository   $productPriceIndexRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
+     * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
      * @return void
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
         protected ProductRepository $productRepository,
-        protected ProductPriceIndexRepository $productPriceIndexRepository,
         protected ProductAttributeValueRepository $attributeValueRepository,
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductImageRepository $productImageRepository,
-        protected ProductVideoRepository $productVideoRepository
+        protected ProductVideoRepository $productVideoRepository,
+        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
+        protected TaxCategoryRepository $taxCategoryRepository
     )
     {
     }
@@ -280,7 +280,7 @@ abstract class AbstractType
 
         $this->productVideoRepository->uploadVideos($data, $product);
 
-        app(ProductCustomerGroupPriceRepository::class)->saveCustomerGroupPrices(
+        $this->productCustomerGroupPriceRepository->saveCustomerGroupPrices(
             $data,
             $product
         );
@@ -611,26 +611,11 @@ abstract class AbstractType
      */
     public function totalQuantity()
     {
-        $total = 0;
-
-        $channelInventorySourceIds = app(InventorySourceRepository::class)->getChannelInventorySourceIds();
-
-        $productInventories = $this->productInventoryRepository->checkInLoadedProductInventories($this->product);
-
-        foreach ($productInventories as $inventory) {
-            if (is_numeric($channelInventorySourceIds->search($inventory->inventory_source_id))) {
-                $total += $inventory->qty;
-            }
+        if (! $inventoryIndex = $this->getInventoryIndex()) {
+            return 0;
         }
 
-        $orderedInventory = $this->product->ordered_inventories
-            ->where('channel_id', core()->getCurrentChannel()->id)->first();
-
-        if ($orderedInventory) {
-            $total -= $orderedInventory->qty;
-        }
-
-        return $total;
+        return $inventoryIndex->qty;
     }
 
     /**
@@ -772,7 +757,7 @@ abstract class AbstractType
     }
 
     /**
-     * Have special price.
+     * Returns product price index of current customer group.
      *
      * @return \Webkul\Product\Contracts\ProductPriceIndex
      */
@@ -795,6 +780,27 @@ abstract class AbstractType
     }
 
     /**
+     * Returns product inventory index of current channel.
+     *
+     * @return \Webkul\Product\Contracts\ProductInventoryIndex
+     */
+    public function getInventoryIndex()
+    {
+        static $indices = [];
+
+        if (array_key_exists($this->product->id, $indices)) {
+            return $indices[$this->product->id];
+        }
+
+        $indices[$this->product->id] = $this->product
+            ->inventory_indices
+            ->where('channel_id', core()->getCurrentChannel()->id)
+            ->first();
+
+        return $indices[$this->product->id];
+    }
+
+    /**
      * Have special price.
      *
      * @param  int  $qty
@@ -806,7 +812,7 @@ abstract class AbstractType
             return false;
         }
 
-        return $priceIndex->min_price != $this->product->regular_min_price;
+        return $priceIndex->min_price != $priceIndex->regular_min_price;
     }
 
     /**
@@ -890,7 +896,7 @@ abstract class AbstractType
             ? $this->product->parent->tax_category_id
             : $this->product->tax_category_id;
 
-        return app(TaxCategoryRepository::class)->find($taxCategoryId);
+        return $this->taxCategoryRepository->find($taxCategoryId);
     }
 
     /**
@@ -1183,7 +1189,7 @@ abstract class AbstractType
 
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
+        $customerGroupPrices = $this->productCustomerGroupPriceRepository->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
 
         if ($customerGroupPrices->isEmpty()) {
             return $product->price;

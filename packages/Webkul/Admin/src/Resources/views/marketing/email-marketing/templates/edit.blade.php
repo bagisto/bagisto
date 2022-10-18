@@ -40,7 +40,9 @@
 
                             <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
                                 <label for="status" class="required">{{ __('admin::app.marketing.templates.status') }}</label>
-                                <?php $selectedOption = old('status') ?: $template->status ?>
+
+                                @php $selectedOption = old('status') ?: $template->status @endphp
+
                                 <select class="control" v-validate="'required'" id="status" name="status" data-vv-as="&quot;{{ __('admin::app.marketing.templates.display-mode') }}&quot;">
                                     <option value="active" {{ $selectedOption == 'active' ? 'selected' : '' }}>
                                         {{ __('admin::app.marketing.templates.active') }}
