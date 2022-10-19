@@ -505,6 +505,7 @@ return [
             'continue-registration'     => 'নিবন্ধন চালিয়ে যান',
             'proceed-to-checkout'       => 'চেকআউটে এগিয়ে যান',
             'remove'                    => 'অপসারণ',
+            'remove-all-items'          => 'সমস্ত আইটেম সরান',
             'remove-link'               => 'অপসারণ',
             'move-to-wishlist'          => 'তালিকা তলা থেকে সরান',
             'move-to-wishlist-success'  => 'আইটেম সফলভাবে ইচ্ছা তালিকায় সরানো হয়েছে৷',
