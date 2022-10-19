@@ -12,7 +12,7 @@ return [
         'remove-all-success' => 'تمت إزالة جميع العناصر من قائمة الأمنيات الخاصة بك',
     ],
 
-    'product-removed'  => 'Product Is No More Available As Removed By Admin',
+    'product-removed'  => 'لم يعد المنتج متاحًا كما تمت إزالته بواسطة المسؤول',
 
     'reviews' => [
         'empty' => '.لم تقم بمراجعة أي منتج حتى الآن',

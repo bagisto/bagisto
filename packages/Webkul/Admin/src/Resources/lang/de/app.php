@@ -1320,9 +1320,9 @@ return [
 
     'error' =>
     [
-        'go-to-home'    => 'HOME ÖFFNEN',
-        'in-maitainace' => 'In Bearbeitung',
-        'right-back'    => 'Gleich wieder zurück',
+        'go-to-home'     => 'HOME ÖFFNEN',
+        'in-maintenance' => 'In Bearbeitung',
+        'right-back'     => 'Gleich wieder zurück',
         404             =>
         [
             'page-title' => '404-Seite nicht gefunden',

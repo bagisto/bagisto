@@ -1308,9 +1308,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'TORNA ALLA HOME',
-        'in-maitainace' => 'In Manutezione',
-        'right-back'    => 'Torno subito',
+        'go-to-home'     => 'TORNA ALLA HOME',
+        'in-maintenance' => 'In Manutezione',
+        'right-back'     => 'Torno subito',
 
         '404' => [
             'page-title' => '404 Pagina non trovata',
@@ -1561,7 +1561,7 @@ return [
             'oldest-first'                          => 'I più vecchi prima',
             'cheapest-first'                        => 'I più convenienti prima',
             'expensive-first'                       => 'I più cari prima',
-            'comma-seperated'                       => 'Separato da virgola',
+            'comma-separated'                       => 'Separato da virgola',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Rich Snippets',
