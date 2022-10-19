@@ -16,7 +16,7 @@
             </span> <br>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                {{ __('shop::app.mail.order.cancel.dear', ['customer_name' => config('mail.from.name')]) }},
+                {{ __('shop::app.mail.order.cancel.dear', ['customer_name' => core()->getAdminEmailDetails()['name']]) }},
             </p>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
@@ -219,7 +219,7 @@
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!!
                     __('shop::app.mail.order.cancel.help', [
-                        'support_email' => '<a style="color:#0041FF" href="mailto:' . config('mail.from.address') . '">' . config('mail.from.address'). '</a>'
+                        'support_email' => '<a style="color:#0041FF" href="mailto:' . config('mail.admin.address') . '">' . config('mail.admin.address'). '</a>'
                         ])
                 !!}
             </p>
