@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="control-group">
-                        <a href="{{ route('admin.forget-password.create') }}">{{ __('admin::app.users.sessions.forget-password-link-title') }}</a>
+                        <a href="{{ route('admin.forget_password.create') }}">{{ __('admin::app.users.sessions.forget-password-link-title') }}</a>
                     </div>
 
                     <div class="button-group">

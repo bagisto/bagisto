@@ -10,7 +10,7 @@ return [
     ], [
         'key'        => 'settings.velocity.meta-data',
         'name'       => 'velocity::app.admin.layouts.meta-data',
-        'route'      => 'velocity.admin.meta-data',
+        'route'      => 'velocity.admin.meta_data',
         'sort'       => 1,
         'icon-class' => '',
     ], [

@@ -131,7 +131,7 @@ class CategoryDataGrid extends DataGrid
     {
         $this->addMassAction([
             'type'   => 'delete',
-            'action' => route('velocity.admin.category.mass-delete'),
+            'action' => route('velocity.admin.category.mass_delete'),
             'label'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
         ]);

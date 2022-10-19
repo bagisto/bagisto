@@ -93,14 +93,14 @@
                                         </span>
 
                                         <span class="value">
-                                            {{ $transaction->created_at }}
+                                            {{ core()->formatDate($transaction->created_at, 'Y-m-d H:i:s') }}
                                         </span>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </accordian>
 
@@ -117,7 +117,7 @@
                                 </div>
 
                                 <div class="section-content">
-                                    @foreach ($transactionDeatilsData as $key => $data)
+                                    @foreach ($transactionDetailsData as $key => $data)
                                         <div class="row">
                                             <span class="title">
                                                 {{ $key }}
@@ -132,7 +132,7 @@
 
                             </div>
                         </div>
-                        
+
                     </div>
                 </accordian>
 

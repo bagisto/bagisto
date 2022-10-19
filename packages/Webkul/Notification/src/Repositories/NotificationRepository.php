@@ -19,7 +19,8 @@ class NotificationRepository extends Repository
     /**
      * Return Filtered Notification resources
      *
-     * @return objects
+     * @param  array  $params
+     * @return array
      */
     public function getParamsData($params)
     {

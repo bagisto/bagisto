@@ -1,7 +1,7 @@
 <?php
 return [
     'datagrid' => [
-        'actions' => 'Actions',
+        'actions' => '行动',
         'id'      => '索引列的值仅大于零',
 
         'massaction' => [
@@ -15,7 +15,7 @@ return [
         'error' => [
             'multiple-sort-keys-error'   => '致命错误! 找到多个排序键, 请手动解析URL.',
             'multiple-search-keys-error' => '找到多个搜索键, 请手动解析URL',
-            'mapped-keys-error'          => 'Mapped key not found. Make sure you have given valid options.',
+            'mapped-keys-error'          => '未找到映射键。确保您提供了有效的选项。',
         ],
 
         'zero-index'            => '索引列的值只能大于零',
@@ -57,6 +57,6 @@ return [
         'all-locales'           => '所有語言環境',
         'all-customer-groups'   => '所有客戶組',
         'records-found'         => '找到記錄',
-        'clear-all'             => 'Clear All'
+        'clear-all'             => '全部清除'
     ],
 ];

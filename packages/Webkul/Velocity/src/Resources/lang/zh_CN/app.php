@@ -7,8 +7,8 @@ return [
                 'general'  => '一般的',
                 'category'  => '分类',
                 'settings'  => '设置',
-                'extension_name' => 'Velocity主题',
-                'error-module-inactive' => '警告: Velocity主题状态为非活动状态',
+                'extension_name' => '速度主题',
+                'error-module-inactive' => '警告: 速度主题状态为非活动状态',
             ],
 
             'settings' => [
@@ -40,9 +40,9 @@ return [
             ]
         ],
         'layouts'   => [
-            'velocity' => 'Velocity',
-            'cms-pages' => 'CMS页面',
-            'meta-data' => 'Meta数据',
+            'velocity' => '速度',
+            'cms-pages' => '内容管理系统页面',
+            'meta-data' => '元数据',
             'category-menu' => '分类菜单',
             'header-content' => '页头内容',
         ],
@@ -64,7 +64,7 @@ return [
             'tab' => [
                 'page' => '页面设置',
                 'content' => '内容设置',
-                'meta_content' => 'Meta数据',
+                'meta_content' => '元数据',
             ],
             'page' => [
                 'title' => '标题',
@@ -74,7 +74,7 @@ return [
             'content' => [
                 'content-type' => '内容设置',
                 'custom-title' => '自定义标题',
-                'category-slug' => '分类Slug',
+                'category-slug' => '分类蛞蝓',
                 'link-target' => '页面链接目标',
                 'custom-product' => '商店产品',
                 'custom-heading' => '自定义标题',
@@ -92,7 +92,7 @@ return [
         ],
         'meta-data' => [
             'footer'                    => '设置',
-            'title'                     => 'Velocity元数据',
+            'title'                     => '速度元数据',
             'activate-slider'           => '激活滑块',
             'home-page-content'         => '主页页面内容',
             'footer-left-content'       => '设置居左内容',
@@ -101,12 +101,11 @@ return [
             'header_content_count'      => '页头内容计数',
             'footer-left-raw-content'   => '<p>我们喜欢制作软件和用二进制文件解决现实世界的问题. 我们高度致力于实现我们的目标。 我们投资我们的资源, 以一流的前沿技术专长为企业业务创建世界一流的易于使用的软件和应用程序.</p>',
             'slider-path'               => '滑块路径',
-            'category-logo'             => '分类logo',
+            'category-logo'             => '分类标志',
             'product-policy'            => '产品政策',
             'update-meta-data'          => '更新元数据',
             'product-view-image'        => '产品视图图片',
             'advertisement-two'         => '两个图像广告',
-            'advertisement-one'         => '一个图像广告',
             'footer-middle-content'     => '设置居中内容',
             'advertisement-four'        => '四个图像广告',
             'advertisement-three'       => '三个图像广告',
@@ -131,7 +130,7 @@ return [
                 'order-and-returns' => '订单和退货',
                 'payment-policy' => '付款政策',
                 'shipping-policy' => '快递政策',
-                'privacy-and-cookies-policy' => '隐私和Cookies政策'
+                'privacy-and-cookies-policy' => '隐私和饼干政策'
             ]
         ],
         'category'  => [
@@ -169,7 +168,7 @@ return [
             'mass-delete-success' => '所选类别菜单已删除成功.',
         ],
         'general'   => [
-            'locale_logo' => '区域Logo',
+            'locale_logo' => '区域标志',
         ],
     ],
 
@@ -216,7 +215,7 @@ return [
             'cart-summary'  => '购物车概况',
         ],
         'qty'       => '数量',
-        'items'     => 'Items',
+        'items'     => '项目',
         'subtotal'  => '小计',
         'sub-total' => '小计',
         'proceed'   => '进行结算',
@@ -295,8 +294,8 @@ return [
             'female' => '女性',
         ],
         'general'   => [
-            'no'                     => 'No',
-            'yes'                    => 'Yes',
+            'no'                     => '不',
+            'yes'                    => '是的',
             'view'                   => '查看',
             'filter'                 => '筛选',
             'orders'                 => '订单',
@@ -332,7 +331,8 @@ return [
         'header' => [
             'done'      => '完成',
             'languages' => '语言',
-            'greeting'  => '欢迎, :customer !',
+            'greeting'  => '欢迎, :Customer !',
+            'greeting-for-guest' => '欢迎来客'
         ]
     ],
 ];

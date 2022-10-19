@@ -3,8 +3,8 @@
 namespace Webkul\Marketing\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CampaignDataGrid;
 use Webkul\Marketing\Repositories\CampaignRepository;
+use Webkul\Admin\DataGrids\CampaignDataGrid;
 
 class CampaignController extends Controller
 {

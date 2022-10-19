@@ -1,9 +1,9 @@
 @inject ('wishListHelper', 'Webkul\Customer\Helpers\Wishlist')
 
 @php
-    $images = productimage()->getGalleryImages($product);
+    $images = product_image()->getGalleryImages($product);
 
-    $videos = productvideo()->getVideos($product);
+    $videos = product_video()->getVideos($product);
 
     $images = array_merge($images, $videos);
 @endphp
@@ -56,12 +56,8 @@
                 <img v-else :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl" alt=""/>
 
                 @auth('customer')
-                    @php
-                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
-                    @endphp
-
-                    @if ($showWishlist)
-                        <form id="wishlist-{{ $product->product_id }}" action="{{ route('customer.wishlist.add', $product->product_id) }}" method="POST">
+                    @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
+                        <form id="wishlist-{{ $product->product_id }}" action="{{ route('shop.customer.wishlist.add', $product->product_id) }}" method="POST">
                             @csrf
                         </form>
 

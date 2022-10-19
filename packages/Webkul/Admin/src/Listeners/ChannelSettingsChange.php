@@ -12,7 +12,7 @@ class ChannelSettingsChange
      * @param  \Webkul\Core\Models\Channel  $channel
      * @return void
      */
-    public function checkForMaintenaceMode($channel)
+    public function checkForMaintenanceMode($channel)
     {
         $channels = core()->getAllChannels();
 

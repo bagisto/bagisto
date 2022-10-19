@@ -9,19 +9,19 @@ return [
             'mass-update-status'      => 'هل تريد حقا تحديث الحالة من منتقى :resource?',
             'delete'                  => 'هل تريد حقا حذف هذا :resource?',
             'edit'                    => 'هل تريد حقا تحرير هذا :resource?',
-            'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?',
+            'delete-category-product' => 'الفئات المحددة تحتوي على منتجات. سيؤدي تنفيذ هذا الإجراء إلى إزالة المنتجات ذات الصلة. هل تريد حقًا القيام بهذا الإجراء؟',
         ],
 
         'error' => [
-            'multiple-sort-keys-error'   => 'Fatal Error! Multiple sort keys found, please resolve the URL manually',
-            'multiple-search-keys-error' => 'Multiple search keys found, please resolve the URL manually',
-            'mapped-keys-error'          => 'Mapped key not found. Make sure you have given valid options.',
+            'multiple-sort-keys-error'   => 'خطأ فادح! تم العثور على مفاتيح فرز متعددة ، يرجى حل عنوان URL يدويًا',
+            'multiple-search-keys-error' => 'تم العثور على مفاتيح بحث متعددة ، يرجى حل عنوان URL يدويًا',
+            'mapped-keys-error'          => 'المفتاح المعين غير موجود. تأكد من أنك قدمت خيارات صالحة.',
         ],
 
         'zero-index'            => 'يمكن أن تحتوي أعمدة الفهرس على قيم أكبر من الصفر فقط',
         'no-records'            => 'لا توجد سجلات',
         'filter-fields-missing' => 'بعض الحقل المطلوب هو لاغ ، رجاء تفقد عمود ، حالة و قيمة صحيح',
-        'filter-exists'         => 'Filter value already exists.',
+        'filter-exists'         => 'قيمة التصفية موجودة بالفعل.',
         'click_on_action'       => 'هل تريد حقا أن تؤدي هذا العمل؟',
         'search'                => '...ابحث هنا',
         'search-title'          => 'يبحث',
@@ -57,6 +57,6 @@ return [
         'all-locales'           => 'كل اللغات',
         'all-customer-groups'   => 'جميع مجموعات العملاء',
         'records-found'         => 'جميع مجموعات العملاء',
-        'clear-all'             => 'Clear All'
+        'clear-all'             => 'امسح الكل'
     ],
 ];

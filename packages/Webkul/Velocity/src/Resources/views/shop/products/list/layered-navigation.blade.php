@@ -2,8 +2,8 @@
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
     <layered-navigation
-        attribute-src="{{ route('catalog.categories.filterable-attributes', $category->id ?? null) }}"
-        max-price-src="{{ route('catalog.categories.maximum-price', $category->id ?? null) }}">
+        attribute-src="{{ route('shop.catalog.categories.filterable_attributes', $category->id ?? null) }}"
+        max-price-src="{{ route('shop.catalog.categories.maximum_price', $category->id ?? null) }}">
     </layered-navigation>
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
@@ -26,6 +26,7 @@
                         :attribute="attribute"
                         :appliedFilterValues="appliedFilters[attribute.code]"
                         :max-price-src="maxPriceSrc"
+                        v-if="attribute.type == 'price' || attribute.options.length"
                         @onFilterAdded="addFilters(attribute.code, $event)">
                     </filter-attribute-item>
                 </div>
@@ -48,21 +49,29 @@
             </div>
 
             <div class="filter-attributes-content">
-                <ul type="none" class="items ml15" v-if="attribute.type != 'price'">
+                <ul type="none" class="items" v-if="attribute.type != 'price'">
                     <li
                         class="item"
-                        v-for='(option, index) in attribute.options'>
-                        <div
+                        v-for='(option, index) in attribute.options'
+                    >
+
+                        <span
                             class="checkbox"
-                            @click="optionClicked(option.id, $event)">
+                            @click="optionClicked(option.id, $event)"
+                        >
                             <input
                                 type="checkbox"
-                                :id="option.id"
+                                :id="'option_' + option.id"
                                 v-bind:value="option.id"
                                 v-model="appliedFilters"
-                                @change="addFilter($event)" />
+                                @change="addFilter($event)"
+                            />
+
+                            <label :for="'option_' + option.id" class="checkbox-view"></label>
+
                             <span>@{{ option.label ? option.label : option.admin_name }}</span>
-                        </div>
+                        </span>
+
                     </li>
                 </ul>
 
@@ -201,7 +210,9 @@
             },
 
             created: function () {
-                if (! this.index) this.active = false;
+                if (! this.index) {
+                    this.active = false;
+                }
 
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;
@@ -212,6 +223,8 @@
                         this.sliderConfig.priceTo = this.appliedFilterValues[1];
                     }
 
+                    this.active = true;
+                } else if (this.attribute.code == 'price') {
                     this.active = true;
                 }
 

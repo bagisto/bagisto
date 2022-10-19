@@ -3,10 +3,10 @@
 namespace Webkul\CartRule\Repositories;
 
 use Illuminate\Container\Container;
+use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
@@ -56,9 +56,9 @@ class CartRuleRepository extends Repository
      */
     public function create(array $data)
     {
-        $data['starts_from'] = isset($data['starts_from']) && $data['starts_from'] ? $data['starts_from'] : null;
+        $data['starts_from'] = $data['starts_from'] ?? null;
 
-        $data['ends_till'] = isset($data['ends_till']) && $data['ends_till'] ? $data['ends_till'] : null;
+        $data['ends_till'] = $data['ends_till'] ?? null;
 
         $data['status'] = isset($data['status']);
 
@@ -93,7 +93,6 @@ class CartRuleRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
-
         $data = array_merge($data, [
             'starts_from' => $data['starts_from'] ?: null,
             'ends_till'   => $data['ends_till'] ?: null,

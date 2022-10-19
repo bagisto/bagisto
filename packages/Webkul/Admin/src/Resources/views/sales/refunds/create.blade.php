@@ -53,7 +53,7 @@
                                             </span>
 
                                             <span class="value">
-                                                {{ $order->created_at }}
+                                                {{ core()->formatDate($order->created_at, 'Y-m-d H:i:s') }}
                                             </span>
                                         </div>
 
@@ -306,13 +306,10 @@
 
                                     <td>
                                         <div class="control-group" :class="[errors.has('refund[items][{{ $item->id }}]') ? 'has-error' : '']">
-                                            <input type="text" v-validate="'required|numeric|min:0'" class="control" id="refund[items][{{ $item->id }}]" name="refund[items][{{ $item->id }}]" v-model="refund.items[{{ $item->id }}]" data-vv-as="&quot;{{ __('admin::app.sales.refunds.qty-to-refund') }}&quot;"/>
 
-                                            <span class="control-error" v-if="errors.has('refund[items][{{ $item->id }}]')">
-                                                @verbatim
-                                                    {{ errors.first('refund[items][<?php echo $item->id ?>]') }}
-                                                @endverbatim
-                                            </span>
+                                            <input type="text" v-validate="'required|numeric|min:0'" class="control" id="refund[items][{{ $item->id }}]" name="refund[items][{{ $item->id }}]" v-model="refund.items[{{ $item->id }}]" data-vv-as="&quot;{{ __('admin::app.sales.refunds.qty-to-refund') }}&quot;"/>
+                                            <span class="control-error" v-if="errors.has('refund[items][{{ $item->id }}]')" v-text="errors.first('refund[items][{{ $item->id }}]')"></span>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -332,13 +329,13 @@
                 <tr>
                     <td>{{ __('admin::app.sales.orders.subtotal') }}</td>
                     <td>-</td>
-                    <td>@{{ refund.summary.subtotal.formated_price }}</td>
+                    <td>@{{ refund.summary.subtotal.formatted_price }}</td>
                 </tr>
 
                 <tr>
                     <td>{{ __('admin::app.sales.orders.discount') }}</td>
                     <td>-</td>
-                    <td>-@{{ refund.summary.discount.formated_price }}</td>
+                    <td>-@{{ refund.summary.discount.formatted_price }}</td>
                 </tr>
 
                 <tr>
@@ -386,13 +383,13 @@
                 <tr class="border">
                     <td>{{ __('admin::app.sales.orders.tax') }}</td>
                     <td>-</td>
-                    <td>@{{ refund.summary.tax.formated_price }}</td>
+                    <td>@{{ refund.summary.tax.formatted_price }}</td>
                 </tr>
 
                 <tr class="bold">
                     <td>{{ __('admin::app.sales.orders.grand-total') }}</td>
                     <td>-</td>
-                    <td>@{{ refund.summary.grand_total.formated_price }}</td>
+                    <td>@{{ refund.summary.grand_total.formatted_price }}</td>
                 </tr>
             </table>
         </div>

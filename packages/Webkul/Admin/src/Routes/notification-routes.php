@@ -12,11 +12,11 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
     ])->name('admin.notification.index');
 
     Route::get('get-notifications', [NotificationController::class, 'getNotifications'])
-        ->name('admin.notification.get-notification');
+        ->name('admin.notification.get_notification');
 
     Route::get('viewed-notifications/{orderId}', [NotificationController::class, 'viewedNotifications'])
-        ->name('admin.notification.viewed-notification');
+        ->name('admin.notification.viewed_notification');
 
     Route::post('read-all-notifications', [NotificationController::class, 'readAllNotifications'])
-        ->name('admin.notification.read-all');
+        ->name('admin.notification.read_all');
 });

@@ -21,7 +21,7 @@ class Large implements FilterInterface
 
         $height = core()->getConfigData('catalog.products.cache-large-image.height') != ''
             ? core()->getConfigData('catalog.products.cache-large-image.height')
-            : 480;
+            : null;
 
         return $image->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();

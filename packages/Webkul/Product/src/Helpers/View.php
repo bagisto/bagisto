@@ -2,6 +2,8 @@
 
 namespace Webkul\Product\Helpers;
 
+use Webkul\Product\Models\ProductFlat;
+
 class View extends AbstractProduct
 {
     /**
@@ -16,10 +18,10 @@ class View extends AbstractProduct
 
         $attributes = $product->attribute_family->custom_attributes()->where('attributes.is_visible_on_front', 1)->get();
 
-        $attributeOptionReposotory = app('Webkul\Attribute\Repositories\AttributeOptionRepository');
+        $attributeOptionRepository = app('Webkul\Attribute\Repositories\AttributeOptionRepository');
 
         foreach ($attributes as $attribute) {
-            if ($product instanceof \Webkul\Product\Models\ProductFlat) {
+            if ($product instanceof ProductFlat) {
                 $value = $product->product->{$attribute->code};
             } else {
                 $value = $product->{$attribute->code};
@@ -29,7 +31,7 @@ class View extends AbstractProduct
                 $value = $value ? 'Yes' : 'No';
             } elseif($value) {
                 if ($attribute->type == 'select') {
-                    $attributeOption = $attributeOptionReposotory->find($value);
+                    $attributeOption = $attributeOptionRepository->find($value);
 
                     if ($attributeOption) {
                         $value = $attributeOption->label ?? null;
@@ -44,7 +46,7 @@ class View extends AbstractProduct
                 ) {
                     $labels = [];
 
-                    $attributeOptions = $attributeOptionReposotory->findWhereIn('id', explode(",", $value));
+                    $attributeOptions = $attributeOptionRepository->findWhereIn('id', explode(",", $value));
 
                     foreach ($attributeOptions as $attributeOption) {
                         if ($label = $attributeOption->label) {

@@ -35,7 +35,7 @@ class Slider extends Model implements SliderContract
         'channel_id',
         'locale',
         'expired_at',
-        'sort_order'
+        'sort_order',
     ];
 
     /**

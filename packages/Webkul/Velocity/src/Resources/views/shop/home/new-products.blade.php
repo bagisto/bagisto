@@ -1,6 +1,6 @@
 @php
-    $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
-    $count = $count ? $count : 10;
+    $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage') ?: 10;
+
     $direction = core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr';
 @endphp
 

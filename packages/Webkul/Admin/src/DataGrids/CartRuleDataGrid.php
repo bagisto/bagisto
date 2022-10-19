@@ -201,21 +201,21 @@ class CartRuleDataGrid extends DataGrid
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.cart-rules.edit',
+            'route'  => 'admin.cart_rules.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
-            'route'  => 'admin.cart-rules.copy',
+            'route'  => 'admin.cart_rules.copy',
             'icon'   => 'icon copy-icon',
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
-            'route'  => 'admin.cart-rules.delete',
+            'route'  => 'admin.cart_rules.delete',
             'icon'   => 'icon trash-icon',
         ]);
     }

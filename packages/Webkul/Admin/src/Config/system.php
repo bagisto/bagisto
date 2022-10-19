@@ -139,11 +139,6 @@ return [
                 'type'       => 'number',
                 'validation' => 'min:0',
             ],
-            [
-                'name'  => 'out_of_stock_items',
-                'title' => 'admin::app.admin.system.allow-out-of-stock-items',
-                'type'  => 'boolean',
-            ],
         ],
     ], [
         'key'    => 'catalog.products.storefront',
@@ -168,7 +163,7 @@ return [
                 'name'          => 'products_per_page',
                 'title'         => 'admin::app.admin.system.products-per-page',
                 'type'          => 'text',
-                'info'          => 'admin::app.admin.system.comma-seperated',
+                'info'          => 'admin::app.admin.system.comma-separated',
                 'channel_based' => true,
             ], [
                 'name'          => 'sort_by',

@@ -3,11 +3,10 @@
 namespace Webkul\Core\Repositories;
 
 use Illuminate\Container\Container;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
-use Prettus\Repository\Traits\CacheableRepository;
 use Carbon\Carbon;
+use Prettus\Repository\Traits\CacheableRepository;
 use Webkul\Core\Eloquent\Repository;
 
 class SliderRepository extends Repository
@@ -43,12 +42,10 @@ class SliderRepository extends Repository
      * Save slider.
      *
      * @param  array  $data
-     * @return bool|\Webkul\Core\Contracts\Slider
+     * @return \Webkul\Core\Contracts\Slider
      */
-    public function save(array $data)
+    public function create(array $data)
     {
-        Event::dispatch('core.settings.slider.create.before', $data);
-
         $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
         $dir = 'slider_images/' . $channelName;
@@ -77,11 +74,7 @@ class SliderRepository extends Repository
             unset($data['image']);
         }
 
-        $slider = $this->create($data);
-
-        Event::dispatch('core.settings.slider.create.after', $slider);
-
-        return true;
+        return parent::create($data);
     }
 
     /**
@@ -89,12 +82,11 @@ class SliderRepository extends Repository
      *
      * @param  array  $data
      * @param  int  $id
-     * @return bool
+     * @param  string  $attribute
+     * @return \Webkul\Core\Contracts\Slider
      */
-    public function updateItem(array $data, $id)
+    public function update(array $data, $id, $attribute = 'id')
     {
-        Event::dispatch('core.settings.slider.update.before', $id);
-
         $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
         $dir = 'slider_images/' . $channelName;
@@ -123,11 +115,7 @@ class SliderRepository extends Repository
             unset($data['image']);
         }
 
-        $slider = $this->update($data, $id);
-
-        Event::dispatch('core.settings.slider.update.after', $slider);
-
-        return true;
+        return parent::update($data, $id);
     }
 
     /**

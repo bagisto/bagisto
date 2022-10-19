@@ -1,18 +1,14 @@
 <?php
 
-namespace Webkul\Product\Listeners;
+namespace Webkul\Product\Helpers\Indexers\Flat;
 
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Helpers\ProductType;
-use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Core\Repositories\ChannelRepository;
 
-class ProductFlat
+class Product
 {
     /**
      * Attribute codes that can be fill during flat creation.
@@ -30,122 +26,41 @@ class ProductFlat
     /**
      * @var array
      */
-    public $attributeTypeFields = [
-        'text'        => 'text',
-        'textarea'    => 'text',
-        'price'       => 'float',
-        'boolean'     => 'boolean',
-        'select'      => 'integer',
-        'multiselect' => 'text',
-        'datetime'    => 'datetime',
-        'date'        => 'date',
-        'file'        => 'text',
-        'image'       => 'text',
-        'checkbox'    => 'text',
-    ];
-
-    /**
-     * @var array
-     */
     protected $flatColumns = [];
 
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
      * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
      * @return void
      */
     public function __construct(
-        protected AttributeRepository $attributeRepository,
+        protected ChannelRepository $channelRepository,
         protected AttributeOptionRepository $attributeOptionRepository,
-        protected ProductFlatRepository $productFlatRepository,
-        protected ProductAttributeValueRepository $productAttributeValueRepository
+        protected ProductFlatRepository $productFlatRepository
     )
     {
         $this->flatColumns = Schema::getColumnListing('product_flat');
     }
 
     /**
-     * After the attribute is created
-     *
-     * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
-     * @return void
-     */
-    public function afterAttributeCreatedUpdated($attribute)
-    {
-        if (! $attribute->is_user_defined) {
-            return false;
-        }
-
-        if (! $attribute->use_in_flat) {
-            $this->afterAttributeDeleted($attribute->id);
-
-            return false;
-        }
-
-        if (in_array($attribute->code, $this->flatColumns)) {
-            return;
-        }
-
-        Schema::table('product_flat', function (Blueprint $table) use($attribute) {
-            $table->{$this->attributeTypeFields[$attribute->type]}($attribute->code)->nullable();
-
-            if (
-                $attribute->type == 'select'
-                || $attribute->type == 'multiselect'
-            ) {
-                $table->string($attribute->code . '_label')->nullable();
-            }
-        });
-    }
-
-    /**
-     * After the attribute is deleted
-     *
-     * @param  int  $attributeId
-     * @return void
-     */
-    public function afterAttributeDeleted($attributeId)
-    {
-        $attribute = $this->attributeRepository->find($attributeId);
-        
-        if (! in_array(strtolower($attribute->code), $this->flatColumns)) {
-            return;
-        }
-
-        Schema::table('product_flat', function (Blueprint $table) use($attribute) {
-            $table->dropColumn($attribute->code);
-
-            if (
-                $attribute->type == 'select'
-                || $attribute->type == 'multiselect'
-            ) {
-                $table->dropColumn($attribute->code . '_label');
-            }
-        });
-        
-        $this->productFlatRepository->updateAttributeColumn( $attribute , $this);
-    }
-
-    /**
-     * Creates product flat
+     * Refresh product indexer indexes
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
-    public function afterProductCreatedUpdated($product)
+    public function refresh($product)
     {
-        $this->createFlat($product);
+        $this->updateCreate($product);
 
         if (! ProductType::hasVariants($product->type)) {
             return;
         }
 
         foreach ($product->variants()->get() as $variant) {
-            $this->createFlat($variant, $product);
+            $this->updateCreate($variant, $product);
         }
     }
 
@@ -156,30 +71,17 @@ class ProductFlat
      * @param  \Webkul\Product\Contracts\Product  $parentProduct
      * @return void
      */
-    public function createFlat($product, $parentProduct = null)
+    public function updateCreate($product, $parentProduct = null)
     {
-        static $familyAttributes = [];
+        $familyAttributes = $this->getCachedFamilyAttributes($product);
 
-        static $superAttributes = [];
+        $superAttributes = $this->getCachedSuperAttributeCodes($parentProduct);
 
-        if (! array_key_exists($product->attribute_family_id, $familyAttributes)) {
-            $familyAttributes[$product->attribute_family_id] = $product->attribute_family->custom_attributes;
-        }
+        $channelCodes = $product['channels'] ?? ($parentProduct['channels'] ?? []);
 
-        if (
-            $parentProduct
-            && ! array_key_exists($parentProduct->id, $superAttributes)
-        ) {
-            $superAttributes[$parentProduct->id] = $parentProduct->super_attributes()->pluck('code')->toArray();
-        }
-
-        if (isset($product['channels'])) {
-            foreach ($product['channels'] as $channel) {
-                $channels[] = $this->getChannel($channel)->code;
-            }
-        } elseif (isset($parentProduct['channels'])){
-            foreach ($parentProduct['channels'] as $channel) {
-                $channels[] = $this->getChannel($channel)->code;
+        if (! empty($channelCodes)) {
+            foreach ($channelCodes as $channel) {
+                $channels[] = $this->getCachedChannel($channel)->code;
             }
         } else {
             $channels[] = core()->getDefaultChannelCode();
@@ -196,13 +98,15 @@ class ProductFlat
                         'locale'     => $locale->code,
                     ]);
 
-                    foreach ($familyAttributes[$product->attribute_family_id] as $attribute) {
+                    foreach ($familyAttributes as $attribute) {
                         if (
                             (
                                 $parentProduct
-                                && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], $this->fillableAttributeCodes))
+                                && ! in_array($attribute->code, array_merge(
+                                    $superAttributes,
+                                    $this->fillableAttributeCodes
+                                ))
                             )
-                            || in_array($attribute->code, ['tax_category_id'])
                             || ! in_array($attribute->code, $this->flatColumns)
                         ) {
                             continue;
@@ -234,10 +138,10 @@ class ProductFlat
                             }
                         }
 
-                        $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
+                        $productFlat->{$attribute->code} = $productAttributeValue[$attribute->column_name] ?? null;
 
                         if ($attribute->type == 'select') {
-                            $attributeOption = $this->getAttributeOptions($productFlat->{$attribute->code});
+                            $attributeOption = $this->getCachedAttributeOptions($productFlat->{$attribute->code});
 
                             if ($attributeOption) {
                                 if ($attributeOptionTranslation = $attributeOption->translate($locale->code)) {
@@ -250,7 +154,7 @@ class ProductFlat
                             $attributeOptionIds = explode(',', $productFlat->{$attribute->code});
 
                             if (count($attributeOptionIds)) {
-                                $attributeOptions = $this->getAttributeOptions($productFlat->{$attribute->code});
+                                $attributeOptions = $this->getCachedAttributeOptions($productFlat->{$attribute->code});
 
                                 $optionLabels = [];
 
@@ -267,10 +171,6 @@ class ProductFlat
                         }
                     }
 
-                    $productFlat->min_price = $product->getTypeInstance()->getMinimalPrice();
-
-                    $productFlat->max_price = $product->getTypeInstance()->getMaximumPrice();
-
                     if ($parentProduct) {
                         $parentProductFlat = $this->productFlatRepository->findOneWhere([
                             'product_id' => $parentProduct->id,
@@ -286,9 +186,7 @@ class ProductFlat
                     $productFlat->save();
                 }
             } else {
-                $route = request()->route() ? request()->route()->getName() : "";
-
-                if ($route == 'admin.catalog.products.update') {
+                if (request()->route()?->getName() == 'admin.catalog.products.update') {
                     $productFlat = $this->productFlatRepository->findOneWhere([
                         'product_id' => $product->id,
                         'channel'    => $channel->code,
@@ -303,10 +201,44 @@ class ProductFlat
     }
 
     /**
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return mixed
+     */
+    public function getCachedFamilyAttributes($product)
+    {
+        static $attributes = [];
+
+        if (array_key_exists($product->attribute_family_id, $attributes)) {
+            return $attributes[$product->attribute_family_id];
+        }
+
+        return $attributes[$product->attribute_family_id] = $product->attribute_family->custom_attributes;
+    }
+
+    /**
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return mixed
+     */
+    public function getCachedSuperAttributeCodes($product)
+    {
+        if (! $product) {
+            return [];
+        }
+
+        static $attributeCodes = [];
+
+        if (array_key_exists($product->id, $attributeCodes)) {
+            return $attributeCodes[$product->id];
+        }
+
+        return $attributeCodes[$product->id] = $product->super_attributes()->pluck('code')->toArray();
+    }
+
+    /**
      * @param  string  $id
      * @return mixed
      */
-    public function getChannel($id)
+    public function getCachedChannel($id)
     {
         static $channels = [];
 
@@ -314,14 +246,14 @@ class ProductFlat
             return $channels[$id];
         }
 
-        return $channels[$id] = app(ChannelRepository::class)->findOrFail($id);
+        return $channels[$id] = $this->channelRepository->findOrFail($id);
     }
 
     /**
      * @param  string  $value
      * @return mixed
      */
-    public function getAttributeOptions($value)
+    public function getCachedAttributeOptions($value)
     {
         if (! $value) {
             return;

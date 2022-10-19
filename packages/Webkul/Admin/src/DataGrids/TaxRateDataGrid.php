@@ -130,14 +130,14 @@ class TaxRateDataGrid extends DataGrid
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.tax-rates.edit',
+            'route'  => 'admin.tax_rates.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
-            'route'  => 'admin.tax-rates.delete',
+            'route'  => 'admin.tax_rates.delete',
             'icon'   => 'icon trash-icon',
         ]);
     }
