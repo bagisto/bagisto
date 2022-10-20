@@ -21,6 +21,12 @@
                 {{ __('shop::app.mail.customer.registration.summary') }}
             </div>
 
+            <p style="text-align: center;padding: 20px 0;">
+                <a href="{{ route('shop.customer.session.index') }}" style="padding: 10px 20px;background: #0041FF;color: #ffffff;text-transform: uppercase;text-decoration: none; font-size: 16px">
+                    {{ __('shop::app.header.sign-in') }}
+                </a>
+            </p>
+
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!!
                     __('shop::app.mail.order.help', [
