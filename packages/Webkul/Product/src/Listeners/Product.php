@@ -53,21 +53,6 @@ class Product
     }
 
     /**
-     * Update or create product price indices
-     *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return void
-     */
-    public function refreshPriceIndices($product)
-    {
-        $products = $this->getAllRelatedProducts($product);
-
-        foreach ($products as $product) {
-            $this->indexer->refreshPrice($product);
-        }
-    }
-
-    /**
      * Update or create product inventory indices
      *
      * @param  \Webkul\Product\Contracts\Product  $product
@@ -79,6 +64,22 @@ class Product
 
         foreach ($products as $product) {
             $this->indexer->refreshInventory($product);
+        }
+    }
+
+
+    /**
+     * Update or create product price indices
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return void
+     */
+    public function refreshPriceIndices($product)
+    {
+        $products = $this->getAllRelatedProducts($product);
+
+        foreach ($products as $product) {
+            $this->indexer->refreshPrice($product);
         }
     }
 

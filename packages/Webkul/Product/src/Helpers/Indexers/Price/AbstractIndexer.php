@@ -172,18 +172,9 @@ abstract class AbstractIndexer
         $lastCustomerGroupId = null;
 
         foreach ($customerGroupPrices as $customerGroupPrice) {
-            if ($customerGroupPrice->qty > $qty) {
-                continue;
-            }
-
-            if ($customerGroupPrice->qty < $lastQty) {
-                continue;
-            }
-
             if (
-                $customerGroupPrice->qty == $lastQty
-                && ! empty($lastCustomerGroupId)
-                && empty($customerGroupPrice->customer_group_id)
+                $customerGroupPrice->qty > $qty
+                || $customerGroupPrice->qty < $lastQty
             ) {
                 continue;
             }

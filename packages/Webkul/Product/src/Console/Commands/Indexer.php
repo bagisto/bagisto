@@ -50,7 +50,7 @@ class Indexer extends Command
         $batch = Bus::batch([])->dispatch();
 
         while (true) {
-            $paginator = $this->productRepository->cursorPaginate(10);
+            $paginator = $this->productRepository->cursorPaginate(50);
 
             $batch->add(new IndexerJob($paginator->items(), $indexers));
 
