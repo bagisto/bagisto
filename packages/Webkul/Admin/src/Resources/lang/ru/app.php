@@ -328,7 +328,7 @@ return [
             'confirm-password'     => 'Подтвердить Пароль',
             'status-and-role'      => 'Статус и роль',
             'role'                 => 'Роль',
-            'status'               => 'Status',
+            'status'               => 'Статус',
             'account-is-active'    => 'Аккаунт активен',
             'current-password'     => 'Введите текущий пароль',
             'confirm-delete'       => 'Подтвердить удаление этой учетной записи',
