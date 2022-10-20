@@ -299,9 +299,14 @@
                         let priceLabelElement = document.querySelector('.price-label');
                         let priceElement = document.querySelector('.special-price') ? document.querySelector('.special-price') : document.querySelector('.final-price');
                         let regularPriceElement = document.querySelector('.regular-price');
+                        let discountPriceElement = document.querySelector('.card-discount');
 
                         if (this.childAttributes.length == selectedOptionCount) {
                             priceLabelElement.style.display = 'none';
+
+                            if (discountPriceElement) {
+                                discountPriceElement.style.display = 'none';
+                            }
 
                             if (regularPriceElement) {
                                 regularPriceElement.style.display = 'none';
@@ -312,6 +317,12 @@
                             if (regularPriceElement && this.config.variant_prices[this.simpleProduct].final_price.price < this.config.variant_prices[this.simpleProduct].regular_price.price) {
                                 regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formatted_price;
                                 regularPriceElement.style.display = 'inline-block';
+
+                                disPercentage = Math.round(((this.config.variant_prices[this.simpleProduct].regular_price.price - 
+                                this.config.variant_prices[this.simpleProduct].final_price.price) / this.config.variant_prices[this.simpleProduct].regular_price.price) * 100);
+                                    
+                                discountPriceElement.innerHTML = disPercentage + "% Off";
+                                discountPriceElement.style.display = 'inline-block';
                             }
 
                             eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
@@ -356,5 +367,4 @@
 
         </script>
     @endpush
-
 @endif

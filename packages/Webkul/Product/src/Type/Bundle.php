@@ -232,10 +232,31 @@ class Bundle extends AbstractType
     {
         $prices = $this->getProductPrices();
 
+        if($prices['from']['regular_price']['price'] != $prices['to']['regular_price']['price']
+        || $prices['from']['final_price']['price'] != $prices['to']['final_price']['price']) {
+            $discountMin =  $prices['from']['regular_price']['price'] - $prices['from']['final_price']['price'];
+            $discountPercentageMin = round(($discountMin / $prices['from']['regular_price']['price']) * 100);
+
+            $discountMax =  $prices['to']['regular_price']['price'] - $prices['to']['final_price']['price'];
+            $discountPercentageMax = round(($discountMax / $prices['to']['regular_price']['price']) * 100);
+
+
+            if ($discountPercentageMax > $discountPercentageMin) {
+                $discountOffer = $discountPercentageMin.'% - '. $discountPercentageMax.'% off';
+            } else {
+                $discountOffer = $discountPercentageMax.'% - '. $discountPercentageMin.'% off';
+            }
+        } else {
+            $discountMax =  $prices['to']['regular_price']['price'] - $prices['to']['final_price']['price'];
+            $discountPercentageMax = round(($discountMax / $prices['to']['regular_price']['price']) * 100);
+
+            $discountOffer = 'upto '. $discountPercentageMax.'% off';
+        }
+
         $priceHtml = '';
 
         if ($this->haveDiscount()) {
-            $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
+            $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'. '</span>'. ' <span class="card-discount">' . $discountOffer . '</span>';
         }
 
         $priceHtml .= '<div class="price-from">';
