@@ -503,7 +503,21 @@ body {
             }
         }
 
-        @media only screen and (max-width: 425px) {
+@media only screen and (max-width: 425px) {
+
+        .content-container {
+            .content {
+                .page-header {
+                    .control-group {
+                        width: 90%;
+                        display: inline-block;
+                        margin-bottom: 0;
+                        margin-left: 20px;
+                        margin-top:24px;
+                    }
+                }
+            }
+        }
             .flatpickr-input {
                 width: 210px !important;
                 padding-left: 10px;
@@ -780,6 +794,20 @@ body {
 }
 
 @media only screen and (min-width: 768px) {
+
+        .content-container{
+            .content{
+                .page-header{
+                .control-group {
+                        width: 180px;
+                        display: inline-block;
+                        margin-bottom: 0;
+                        margin-left: 20px;
+                        margin-top:24px;
+                        }
+                }
+            }
+        }
     .navbar-left {
         display: block;
     }
@@ -804,6 +832,20 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
+    .content-container {
+        .content {
+            .page-header {
+                .control-group {
+                        width: 90%;
+                        display: inline-block;
+                        margin-bottom: 0;
+                        margin-left: 20px;
+                        margin-top:24px;
+                    }
+                }
+            }
+    }
+
     h1 {
         font-size: 18px;
     }
@@ -901,6 +943,14 @@ body {
 
     .notif-filter {
         margin-top: 12px !important;
+        width: 100% !important;
+        margin-left: inherit !important;
+
+    }
+
+    .page-action {
+        margin: inherit !important;
+        float: inherit !important;
     }
 
     .switch-dark {
@@ -909,9 +959,18 @@ body {
 }
 
 @media only screen and (max-width: 414px) {
+
     .content-container {
         .content {
             .page-header {
+
+        .control-group {
+            width: 90%;
+            display: inline-block;
+            margin-bottom: 0;
+            margin-left: 20px;
+            margin-top:24px;
+        }
                 .page-title {
                     float: left;
                 }
@@ -936,9 +995,17 @@ body {
 }
 
 @media only screen and (max-width: 480px) {
+
     .content-container {
         .content {
             .page-header {
+                .control-group {
+                    width: 90%;
+                    display: inline-block;
+                    margin-bottom: 0;
+                    margin-left: 20px;
+                    margin-top:24px;
+                    }
                 .page-action {
                     a {
                         margin-top: 20px;
@@ -950,9 +1017,17 @@ body {
 }
 
 @media only screen and (max-width: 400px) {
+
     .content-container {
         .content {
             .page-header {
+                .control-group {
+                    width: 90%;
+                    display: inline-block;
+                    margin-bottom: 0;
+                    margin-left: 20px;
+                    margin-top:24px;
+                    }
                 .page-action {
                     a {
                         margin-top: 20px;
