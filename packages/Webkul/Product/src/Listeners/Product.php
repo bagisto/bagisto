@@ -45,9 +45,9 @@ class Product
     {
         $this->indexer->refreshFlat($product);
 
-        $this->refreshPriceIndices($product);
-
         $this->refreshInventoryIndices($product);
+
+        $this->refreshPriceIndices($product);
     }
 
     /**
