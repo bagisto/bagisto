@@ -94,9 +94,9 @@ class Product
             return $products[$product->id];
         }
 
-        if ($product->type == 'simple') {
-            $products[$product->id][] = $product;
+        $products[$product->id] = [$product];
 
+        if ($product->type == 'simple') {
             if ($product->parent_id) {
                 $products[$product->id][] = $product->parent;
             }
@@ -110,8 +110,6 @@ class Product
             foreach ($product->variants as $variant) {
                 $products[$product->id][] = $variant;
             }
-            
-            $products[$product->id][] = $product;
         }
 
         return $products[$product->id];
