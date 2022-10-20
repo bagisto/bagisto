@@ -47,7 +47,7 @@ class Product
 
         $this->refreshPriceIndices($product);
 
-        $this->indexer->refreshInventory($product);
+        $this->refreshInventoryIndices($product);
     }
 
     /**
@@ -58,27 +58,63 @@ class Product
      */
     public function refreshPriceIndices($product)
     {
-        $products = [$product];
+        $products = $this->getAllRelatedProducts($product);
+
+        foreach ($products as $product) {
+            $this->indexer->refreshPrice($product);
+        }
+    }
+
+    /**
+     * Update or create product inventory indices
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return void
+     */
+    public function refreshInventoryIndices($product)
+    {
+        $products = $this->getAllRelatedProducts($product);
+
+        foreach ($products as $product) {
+            $this->indexer->refreshInventory($product);
+        }
+    }
+
+    /**
+     * Returns parents bundle products associated with simple product
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
+    public function getAllRelatedProducts($product)
+    {
+        static $products = [];
+
+        if (array_key_exists($product->id, $products)) {
+            return $products[$product->id];
+        }
 
         if ($product->type == 'simple') {
+            $products[$product->id][] = $product;
+
             if ($product->parent_id) {
-                $products[] = $product->parent;
+                $products[$product->id][] = $product->parent;
             }
 
-            $products = array_merge(
-                $products,
+            $products[$product->id] = array_merge(
+                $products[$product->id],
                 $this->getParentBundleProducts($product),
                 $this->getParentGroupProducts($product)
             );
         } elseif ($product->type == 'configurable') {
             foreach ($product->variants as $variant) {
-                $products[] = $variant;
+                $products[$product->id][] = $variant;
             }
+            
+            $products[$product->id][] = $product;
         }
 
-        foreach ($products as $product) {
-            $this->indexer->refreshPrice($product);
-        }
+        return $products[$product->id];
     }
 
     /**
