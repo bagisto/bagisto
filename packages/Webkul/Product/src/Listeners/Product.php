@@ -70,6 +70,10 @@ class Product
                 $this->getParentBundleProducts($product),
                 $this->getParentGroupProducts($product)
             );
+        } elseif ($product->type == 'configurable') {
+            foreach ($product->variants as $variant) {
+                $products[] = $variant;
+            }
         }
 
         foreach ($products as $product) {
