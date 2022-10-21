@@ -28,4 +28,3 @@ class SubscriberListFactory extends Factory
         ];
     }
 }
-
