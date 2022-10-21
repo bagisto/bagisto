@@ -146,6 +146,19 @@ return [
         'sort'   => 3,
         'fields' => [
             [
+                'name'          => 'search_mode',
+                'title'         => 'admin::app.admin.system.search-mode',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.admin.system.flat',
+                        'value' => 'flat',
+                    ], [
+                        'title' => 'admin::app.admin.system.elastic',
+                        'value' => 'elastic',
+                    ],
+                ],
+            ], [
                 'name'          => 'mode',
                 'title'         => 'admin::app.admin.system.default-list-mode',
                 'type'          => 'select',

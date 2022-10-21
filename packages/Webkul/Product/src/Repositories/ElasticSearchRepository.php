@@ -17,6 +17,16 @@ class ElasticSearchRepository
     public function __construct(protected AttributeRepository $attributeRepository)
     {
     }
+    
+    /**
+     * Return elastic search index name
+     *
+     * @return void
+     */
+    public function getIndexName()
+    {
+        return 'products_' . core()->getRequestedChannelCode() . '_' . core()->getRequestedLocaleCode() . '_index';
+    }
 
     /**
      * Returns product ids from Elasticsearch
@@ -29,31 +39,26 @@ class ElasticSearchRepository
     {
         $from = ($options['page'] * $options['limit']) - $options['limit'];
 
-        $filters = $this->addFilters();
+        $filters = $this->getFilters();
+
+        if ($categoryId) {
+            $filters['filter'][]['term']['category_ids'] = $categoryId;
+        }
 
         $params = [
             'index' => $this->getIndexName(),
             'body'  => [
-                'from' => $from,
+                'from'          => $from,
+                'size'          => $options['limit'],
                 'stored_fields' => [],
-                'query' => [
-                    'bool' => [
-                        'filter' => $filters,
-                    ]
+                'query'         => [
+                    'bool' => $filters,
                 ],
-                'sort' => [
-                    $options['sort'] . '.keyword' => [
-                        'order' => $options['order'],
-                    ],
-                ],
+                'sort'          => $this->getSortOptions($options),
             ],
         ];
 
-        dd($params);
-
         $results = Elasticsearch::search($params);
-
-        dd($results);
 
         return [
             'total' => $results['hits']['total']['value'],
@@ -62,23 +67,18 @@ class ElasticSearchRepository
     }
     
     /**
-     * Refresh product indices
+     * Return filters
      *
      * @return void
      */
-    public function getIndexName()
-    {
-        return 'products_' . core()->getRequestedChannelCode() . '_' . core()->getRequestedLocaleCode() . '_index';
-    }
-    
-    /**
-     * Refresh product indices
-     *
-     * @return void
-     */
-    public function addFilters()
+    public function getFilters()
     {
         $params = request()->input();
+
+        $params = array_merge($params, [
+            'status'               => 1,
+            'visible_individually' => 1,
+        ]);
 
         $filterableAttributes = $this->attributeRepository
             ->getProductDefaultAttributes(array_keys($params));
@@ -86,29 +86,83 @@ class ElasticSearchRepository
         $filters = [];
 
         foreach ($filterableAttributes as $attribute) {
-            switch ($attribute->type) {
-                case 'price':
-                    $range = explode(',', $params[$attribute->code]);
+            $filter = $this->getFilterValue($attribute, $params);
 
-                    // $filters['range'][$attribute->code] = [
-                    //     'gte' => core()->convertToBasePrice(current($range)),
-                    //     'lte' => core()->convertToBasePrice(end($range)),
-                    // ];
-
-                    break;
-                
-                case 'text':
-                    $filters['match_phrase_prefix'][$attribute->code] = $params[$attribute->code];
-
-                    break;
-                
-                case 'select':
-                    $filters['term'][$attribute->code] = $params[$attribute->code];
-
-                    break;
+            if (
+                $attribute->is_configurable
+                || $attribute->is_filterable
+            ) {
+                $filters['must'][]['bool']['should'] = $filter;
+            } else {
+                $filters['filter'][] = $filter;
             }
         }
 
         return $filters;
+    }
+
+    /**
+     * Return applied filters
+     *
+     * @return void
+     */
+    public function getFilterValue($attribute, $params)
+    {
+        switch ($attribute->type) {
+            case 'boolean':
+                return [
+                    'term' => [
+                        $attribute->code => intval($params[$attribute->code]),
+                    ]
+                ];
+            case 'price':
+                $range = explode(',', $params[$attribute->code]);
+
+                return [
+                    'range' => [
+                        $attribute->code => [
+                            'gte' => core()->convertToBasePrice(current($range)),
+                            'lte' => core()->convertToBasePrice(end($range)),
+                        ],
+                    ],
+                ];
+            
+            case 'text':
+                return [
+                    'term' => [
+                        $attribute->code => $params[$attribute->code],
+                    ]
+                ];
+            
+            case 'select':
+                $filter[]['terms'][$attribute->code] = explode(',', $params[$attribute->code]);
+
+                if ($attribute->is_configurable) {
+                    $filter[]['terms']['ca_' . $attribute->code] = explode(',', $params[$attribute->code]);
+                }
+
+                return $filter;
+        }
+    }
+    
+    /**
+     * Returns sort options
+     *
+     * @parmas  array  $options
+     * @return array
+     */
+    public function getSortOptions($options)
+    {
+        $sort = $options['sort'];
+
+        if ($options['sort'] == 'name') {
+            $sort .= '.keyword';
+        }
+
+        return [
+            $sort => [
+                'order' => $options['order'],
+            ],
+        ];
     }
 }
