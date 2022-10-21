@@ -116,6 +116,10 @@ class Indexer
      */
     public function refreshElasticSearch($product)
     {
+        if (core()->getConfigData('catalog.products.storefront.search_mode') != 'elastic') {
+            return;
+        }
+
         foreach (core()->getAllChannels() as $channel) {
             foreach ($channel->locales as $locale) {
                 $this->elasticSearchIndexer

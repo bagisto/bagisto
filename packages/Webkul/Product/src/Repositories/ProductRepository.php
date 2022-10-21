@@ -181,7 +181,7 @@ class ProductRepository extends Repository
      */
     public function getAll($categoryId = null)
     {
-        if (core()->getConfigData('catalog.products.storefront.search_mode')  == 'elastic') {
+        if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
             return $this->searchFromElastic($categoryId);
         } else {
             return $this->searchFromDatabase($categoryId);
