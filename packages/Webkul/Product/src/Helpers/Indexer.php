@@ -42,12 +42,12 @@ class Indexer
      */
     public function refresh($product, array $indexers = ['price', 'inventory'])
     {
-        if (in_array('price', $indexers)) {
-            $this->refreshPrice($product);
-        }
-
         if (in_array('inventory', $indexers)) {
             $this->refreshInventory($product);
+        }
+
+        if (in_array('price', $indexers)) {
+            $this->refreshPrice($product);
         }
     }
 

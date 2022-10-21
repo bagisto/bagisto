@@ -1604,6 +1604,7 @@
 
     .price-label {
         margin-right: 6px;
+        margin-top: 4px;
         float: right;
     }
 
@@ -1713,7 +1714,7 @@
 
     .lg-card-container {
         &.list-card {
-            margin: 0 15px 5px 15px;
+            margin: 0 15px;
         }
     }
 
@@ -2529,6 +2530,7 @@
 
         .btn-add-to-cart {
             white-space: pre-wrap;
+            max-width: 63%;
         }
 
         .close-btn {
