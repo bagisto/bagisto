@@ -1600,9 +1600,11 @@
 
 .product-price {
     display: inline-block;
+    font-weight: 600;
 
     .price-label {
         margin-right: 6px;
+        margin-top: 4px;
         float: right;
     }
 
@@ -2528,6 +2530,7 @@
 
         .btn-add-to-cart {
             white-space: pre-wrap;
+            max-width: 63%;
         }
 
         .close-btn {

@@ -25,13 +25,11 @@
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!! __('shop::app.mail.shipment.greeting', [
                     'order_id' => '<a href="' . route('shop.customer.orders.view', $order->id) . '" style="color: #0041FF; font-weight: bold;">#' . $order->increment_id . '</a>',
-                    'created_at' => $order->created_at
+                    'created_at' => core()->formatDate($order->created_at, 'Y-m-d H:i:s')
                     ])
                 !!}
             </p>
         </div>
-
-
 
         <div style="display: flex;flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 40px;">
             @if ($order->shipping_address)

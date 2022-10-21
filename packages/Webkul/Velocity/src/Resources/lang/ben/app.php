@@ -62,14 +62,14 @@ return [
             'mass-delete-success' => 'নির্বাচিত বিষয়বস্তু সফলভাবে মুছে ফেলা হয়েছে।',
             'mass-update-success' => 'নির্বাচিত বিষয়বস্তু সফলভাবে আপডেট হয়েছে।',
             'tab' => [
-                'page' => 'Page Setting',
-                'content' => 'Content Setting',
-                'meta_content' => 'Meta Data',
+                'page'         => 'পৃষ্ঠা সেটিং',
+                'content'      => 'বিষয়বস্তু সেটিং',
+                'meta_content' => 'মেটা ডেটা',
             ],
             'page' => [
-                'title' => 'Title',
-                'status' => 'Status',
-                'position' => 'Position',
+                'title'    => 'শিরোনাম',
+                'status'   => 'স্ট্যাটাস',
+                'position' => 'অবস্থান',
             ],
             'content' => [
                 'content-type'   => 'বিষয়বস্তুর প্রকার',
@@ -106,16 +106,15 @@ return [
             'update-meta-data'          => 'হালনাগাদ',
             'product-view-image'        => 'প্রোডাক্ট ভিউ ইমেজ',
             'advertisement-two'         => 'বিজ্ঞাপন দুটি ছবি',
-            'advertisement-one'         => 'বিজ্ঞাপন এক ছবি',
             'footer-middle-content'     => 'ফুটার মিডল কন্টেন্ট',
             'advertisement-four'        => 'বিজ্ঞাপন চারটি ছবি',
             'advertisement-three'       => 'বিজ্ঞাপন তিনটি ছবি',
             'images'                    => 'ছবি',
             'general'                   => 'সাধারণ',
             'add-image-btn-title'       => 'ছবি যোগ কর',
-            'image-four-resolution'     => 'প্রথম ছবির রেজোলিউশন 427px X 41 এর মতো হওয়া উচিতX 410px , 
-                                            দ্বিতীয় ছবির রেজোলিউশন 397px X এর মত হওয়া উচিতx X 180px , 
-                                            তৃতীয় ছবির রেজোলিউশন 397px X 1 এর মত হওয়া উচিত X 180px , 
+            'image-four-resolution'     => 'প্রথম ছবির রেজোলিউশন 427px X 41 এর মতো হওয়া উচিতX 410px ,
+                                            দ্বিতীয় ছবির রেজোলিউশন 397px X এর মত হওয়া উচিতx X 180px ,
+                                            তৃতীয় ছবির রেজোলিউশন 397px X 1 এর মত হওয়া উচিত X 180px ,
                                             চতুর্থ ছবির রেজোলিউশন 427px X 41 এর মত হওয়া উচিতX 410px',
             'image-three-resolution'    => 'প্রথম ছবির রেজোলিউশন 635px X 465 এর মতো হওয়া উচিত 465px ,
                                             দ্বিতীয় ছবির রেজোলিউশন 620px X 2 এর মত হওয়া উচিত X 225px,
@@ -332,7 +331,8 @@ return [
         'header' => [
             'done'      => 'সম্পন্ন',
             'languages' => 'ভাষা',
-            'greeting'  => 'স্বাগত, :গ্রাহক!',
+            'greeting'  => 'স্বাগত, :customer !',
+            'greeting-for-guest' => 'স্বাগতম, অতিথি'
         ]
     ],
 ];
