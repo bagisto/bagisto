@@ -1332,9 +1332,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'GO TO HOME',
-        'in-maitainace' => 'In Maintenance',
-        'right-back'    => 'Be Right Back',
+        'go-to-home'     => 'GO TO HOME',
+        'in-maintenance' => 'In Maintenance',
+        'right-back'     => 'Be Right Back',
 
         '404' => [
             'page-title' => '404 Page not found',
@@ -1593,7 +1593,7 @@ return [
             'oldest-first'                          => 'Oldest First',
             'cheapest-first'                        => 'Cheapest First',
             'expensive-first'                       => 'Expensive First',
-            'comma-seperated'                       => 'Comma Seperated',
+            'comma-separated'                       => 'Comma Separated',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Rich Snippets',
@@ -1621,7 +1621,7 @@ return [
             'client-secret'                         => 'Client Secret',
             'client-secret-info'                    => 'Add your secret key here',
             'accepted-currencies'                   => 'Accepted currencies',
-            'accepted-currencies-info'              => 'Add currency code comma seperated e.g. USD,INR,...',
+            'accepted-currencies-info'              => 'Add currency code comma separated e.g. USD,INR,...',
             'buy-now-button-display'                => 'Allow customers to directly buy products',
             'show-search-input-field'               => 'Show Search Input Field',
             'allow-no-of-new-product-homepage'      => 'Allowed number of New Product in Homepage',

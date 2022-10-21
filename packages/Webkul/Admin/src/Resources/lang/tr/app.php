@@ -1301,9 +1301,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'ANA SAYFAYA GİT',
-        'in-maitainace' => 'Bakım Modunda',
-        'right-back'    => 'Yakında Döneceğiz',
+        'go-to-home'     => 'ANA SAYFAYA GİT',
+        'in-maintenance' => 'Bakım Modunda',
+        'right-back'     => 'Yakında Döneceğiz',
 
         '404' => [
             'page-title' => '404 Sayfa Bulunamadı',
@@ -1553,7 +1553,7 @@ return [
             'oldest-first'                          => 'Eskiden Yenile',
             'cheapest-first'                        => 'Ucuzdan Pahallıya',
             'expensive-first'                       => 'Pahallıdan Ucuza',
-            'comma-seperated'                       => 'Virgülle Ayrılsın',
+            'comma-separated'                       => 'Virgülle Ayrılsın',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Zengin Snippet',
