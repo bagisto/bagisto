@@ -26,4 +26,3 @@ class OrderPaymentFactory extends Factory
         ];
     }
 }
-

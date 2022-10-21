@@ -27,4 +27,3 @@ class RefundFactory extends Factory
         ];
     }
 }
-
