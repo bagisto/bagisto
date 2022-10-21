@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f97b453abb0e5218dd71c940aaa63d00",
+    "content-hash": "6e26b3b441dbf0a0242f4fe0b3800ef0",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -96,59 +96,6 @@
                 }
             ],
             "time": "2022-02-05T10:42:52+00:00"
-        },
-        {
-            "name": "bagisto/laravel-datafaker",
-            "version": "v2.0.0-ALPHA1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bagisto/laravel-data-faker.git",
-                "reference": "09c3587a6cef80e84ddc16ea30cd2f0ade1d09b2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/09c3587a6cef80e84ddc16ea30cd2f0ade1d09b2",
-                "reference": "09c3587a6cef80e84ddc16ea30cd2f0ade1d09b2",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Webkul\\Faker\\Providers\\FakerServiceProvider"
-                    ],
-                    "aliases": []
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Webkul\\Faker\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jitendra Singh",
-                    "email": "jitendra@webkul.in",
-                    "homepage": "https://bagisto.com"
-                }
-            ],
-            "description": "Create fake customers, categories and products in Bagisto.",
-            "homepage": "https://github.com/bagisto/laravel-data-faker",
-            "keywords": [
-                "bagisto",
-                "fake categories",
-                "fake customers",
-                "fake products"
-            ],
-            "support": {
-                "issues": "https://github.com/bagisto/laravel-data-faker/issues",
-                "source": "https://github.com/bagisto/laravel-data-faker/tree/v2.0.0-ALPHA1"
-            },
-            "time": "2022-10-14T10:10:16+00:00"
         },
         {
             "name": "bagisto/rest-api",
@@ -12669,7 +12616,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "bagisto/laravel-datafaker": 15,
         "flynsarmy/db-blade-compiler": 20,
         "codeception/codeception": 20,
         "codeception/module-laravel": 20
