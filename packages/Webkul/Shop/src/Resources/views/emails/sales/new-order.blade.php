@@ -225,7 +225,7 @@
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!!
                     __('shop::app.mail.order.help', [
-                        'support_email' => '<a style="color:#0041FF" href="mailto:' . core()->getSenderEmailDetails()['email'] . '">' . core()->getSenderEmailDetails()['email']. '</a>'
+                        'support_email' => '<a style="color:#0041FF" href="mailto:' . core()->getAdminEmailDetails()['email'] . '">' . core()->getAdminEmailDetails()['email']. '</a>'
                         ])
                 !!}
             </p>
