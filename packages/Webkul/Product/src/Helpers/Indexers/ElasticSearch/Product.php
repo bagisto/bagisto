@@ -85,13 +85,39 @@ class Product
      */
     public function refresh()
     {
+        if (
+            ! $this->product->status
+            || ! $this->product->visible_individually
+        ) {
+            return $this->delete();
+        }
+
         $params = [
             'index' => $this->getIndexName(),
             'id'    => $this->product->id,
-            'body'  => $this->getElasticProperties(),
+            'body' => $this->getElasticProperties(),
         ];
 
         Elasticsearch::index($params);
+    }
+
+    /**
+     * Delete product indices
+     *
+     * @return void
+     */
+    public function delete()
+    {
+        $params = [
+            'index' => $this->getIndexName(),
+            'id'    => $this->product->id,
+        ];
+
+        try {
+            \Elasticsearch::delete($params);
+        } catch(\Exception $e) {}
+
+        return;
     }
 
     /**
@@ -113,24 +139,12 @@ class Product
     {
         $properties = [
             'id'           => $this->product->id,
+            'sku'          => $this->product->sku,
             'category_ids' => $this->product->categories->pluck('id')->toArray(),
             'created_at'   => $this->product->created_at,
         ];
 
-        $attributes = $this->attributeRepository->scopeQuery(function ($query) {
-            return $query->where(function ($ab) {
-                return $ab->orWhereIn('code', [
-                    'sku',
-                    'name',
-                    'status',
-                    'visible_individually',
-                    'url_key',
-                    'short_description',
-                    'description',
-                ])
-                ->orWhere('is_filterable', 1);
-            });
-        })->get();
+        $attributes = $this->getAttributes();
 
         foreach ($attributes as $attribute) {
             $attributeValue = $this->getAttributeValue($attribute);
@@ -154,6 +168,36 @@ class Product
     }
 
     /**
+     * Returns attributes to index
+     *
+     * @return void
+     */
+    public function getAttributes()
+    {
+        static $attributes = [];
+
+        if (count($attributes)) {
+            return $attributes;
+        }
+
+        $attributes = $this->attributeRepository->scopeQuery(function ($query) {
+            return $query->where(function ($qb) {
+                return $qb->orWhereIn('code', [
+                    'name',
+                    'new',
+                    'featured',
+                    'url_key',
+                    'short_description',
+                    'description',
+                ])
+                ->orWhere('is_filterable', 1);
+            });
+        })->get();
+
+        return $attributes;
+    }
+
+    /**
      * Returns filterable attribute values
      *
      * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
@@ -162,32 +206,23 @@ class Product
      */
     public function getAttributeValue($attribute)
     {
+        $attributeValues = $this->product->attribute_values
+            ->where('attribute_id', $attribute->id);
+
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
-                $attributeValue = $this->product->attribute_values
+                $attributeValues = $attributeValues
                     ->where('channel', $this->channel->code)
-                    ->where('locale', $this->locale->code)
-                    ->where('attribute_id', $attribute->id)
-                    ->first();
+                    ->where('locale', $this->locale->code);
             } else {
-                $attributeValue = $this->product->attribute_values
-                    ->where('channel', $this->channel->code)
-                    ->where('attribute_id', $attribute->id)
-                    ->first();
+                $attributeValues = $attributeValues->where('channel', $this->channel->code);
             }
         } else {
             if ($attribute->value_per_locale) {
-                $attributeValue = $this->product->attribute_values
-                    ->where('locale', $this->locale->code)
-                    ->where('attribute_id', $attribute->id)
-                    ->first();
-            } else {
-                $attributeValue = $this->product->attribute_values
-                    ->where('attribute_id', $attribute->id)
-                    ->first();
+                $attributeValues = $attributeValues->where('locale', $this->locale->code)->first();
             }
         }
 
-        return $attributeValue;
+        return $attributeValues->first();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Support\Str;
 use Elasticsearch;
 use Elasticsearch\Common\Exceptions\Missing404Exception;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -74,11 +75,6 @@ class ElasticSearchRepository
     public function getFilters()
     {
         $params = request()->input();
-
-        $params = array_merge($params, [
-            'status'               => 1,
-            'visible_individually' => 1,
-        ]);
 
         $filterableAttributes = $this->attributeRepository
             ->getProductDefaultAttributes(array_keys($params));
@@ -153,6 +149,21 @@ class ElasticSearchRepository
      */
     public function getSortOptions($options)
     {
+        if ($options['order'] == 'rand') {
+            return [
+                '_script' => [
+                    'type'   => 'number',
+                    'script' => [
+                        'source' => '(doc[\'_id\'].value + params.salt).hashCode()',
+                        'params' => [
+                            'salt' => Str::random(40),
+                        ],
+                    ],
+                    'order'  => 'asc',
+                ],
+            ];
+        }
+
         $sort = $options['sort'];
 
         if ($options['sort'] == 'name') {

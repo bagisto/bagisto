@@ -130,4 +130,27 @@ class Indexer
             }
         }
     }
+
+    /**
+     * Delete elastic search indices
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return void
+     */
+    public function deleteElasticSearch($product)
+    {
+        if (core()->getConfigData('catalog.products.storefront.search_mode') != 'elastic') {
+            return;
+        }
+
+        foreach (core()->getAllChannels() as $channel) {
+            foreach ($channel->locales as $locale) {
+                $this->elasticSearchIndexer
+                    ->setProduct($product)
+                    ->setChannel($channel)
+                    ->setLocale($locale)
+                    ->delete();
+            }
+        }
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Listeners;
 
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Helpers\Indexer;
@@ -11,12 +12,14 @@ class Product
     /**
      * Create a new listener instance.
      *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
      * @param  \Webkul\Product\Helpers\Indexer  $indexer
      * @return void
      */
     public function __construct(
+        protected ProductRepository $productRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository,
         protected Indexer $indexer
@@ -25,7 +28,7 @@ class Product
     }
 
     /**
-     * Update or create product price indices
+     * Update or create product indices
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
@@ -36,7 +39,7 @@ class Product
     }
 
     /**
-     * Update or create product price indices
+     * Update or create product indices
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
@@ -50,6 +53,19 @@ class Product
         $this->refreshPriceIndices($product);
 
         $this->refreshElasticSearchIndices($product);
+    }
+
+    /**
+     * Delete product indices
+     *
+     * @param  integer  $productId
+     * @return void
+     */
+    public function beforeDelete($productId)
+    {
+        $product = $this->productRepository->find($productId);
+        
+        $this->indexer->deleteElasticSearch($product);
     }
 
     /**

@@ -157,23 +157,6 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Get product related to category.
-     *
-     * @param  int  $categoryId
-     * @return \Illuminate\Support\Collection
-     */
-    public function getProductsRelatedToCategory($categoryId = null)
-    {
-        $qb = $this->model->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id');
-
-        if ($categoryId) {
-            $qb->where('product_categories.category_id', $categoryId);
-        }
-
-        return $qb->get();
-    }
-
-    /**
      * Get all products.
      *
      * @param  string  $categoryId
@@ -186,7 +169,6 @@ class ProductRepository extends Repository
         } else {
             return $this->searchFromDatabase($categoryId);
         }
-
     }
 
     /**
@@ -389,10 +371,6 @@ class ProductRepository extends Repository
 
         $items = $indices['total'] ? $query->get() : [];
 
-        $currentPage = Paginator::resolveCurrentPage('page');
-
-        $limit = $this->getPerPageLimit($params);
-
         $results = new LengthAwarePaginator($items, $indices['total'], $limit, $currentPage, [
                 'path'  => request()->url(),
                 'query' => request()->query(),
@@ -412,8 +390,8 @@ class ProductRepository extends Repository
     {
         $limit = $params['limit'] ?? 9;
 
-        if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
-            $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
+        if ($productsPerPage = core()->getConfigData('catalog.products.storefront.products_per_page')) {
+            $pages = explode(',', $productsPerPage);
 
             $limit = $params['limit'] ?? current($pages);
         }
