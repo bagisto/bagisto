@@ -27,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
         'catalog.product.update.after'    => [
             'Webkul\Product\Listeners\Product@afterUpdate',
         ],
+        'catalog.product.delete.before'   => [
+            'Webkul\Product\Listeners\Product@beforeDelete',
+        ],
         'checkout.order.save.after'       => [
             'Webkul\Product\Listeners\Order@afterCreate',
         ],
