@@ -6,7 +6,7 @@ use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Facades\ProductVideo;
 
-class ConfigurableOption extends AbstractProduct
+class ConfigurableOption
 {
     /**
      * Returns the allowed variants.

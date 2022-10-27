@@ -2,7 +2,7 @@
 
 namespace Webkul\Product\Helpers;
 
-class BundleOption extends AbstractProduct
+class BundleOption
 {
     /**
      * Product

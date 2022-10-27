@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Product\Helpers\AbstractProduct;
 use Webkul\Product\Repositories\ProductRepository;
 
-class ProductImage extends AbstractProduct
+class ProductImage
 {
     /**
      * Create a new helper instance.

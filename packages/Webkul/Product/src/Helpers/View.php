@@ -4,7 +4,7 @@ namespace Webkul\Product\Helpers;
 
 use Webkul\Product\Models\ProductFlat;
 
-class View extends AbstractProduct
+class View
 {
     /**
      * Returns the visible custom attributes

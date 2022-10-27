@@ -4,7 +4,7 @@ namespace Webkul\Product\Helpers;
 
 use Illuminate\Support\Facades\DB;
 
-class Review extends AbstractProduct
+class Review
 {
     /**
      * Returns the product's avg rating
