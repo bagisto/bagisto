@@ -53,7 +53,7 @@ class ElasticSearchRepository
                 'size'          => $options['limit'],
                 'stored_fields' => [],
                 'query'         => [
-                    'bool' => $filters,
+                    'bool' => $filters ?: new \stdClass(),
                 ],
                 'sort'          => $this->getSortOptions($options),
             ],
@@ -144,7 +144,7 @@ class ElasticSearchRepository
     /**
      * Returns sort options
      *
-     * @parmas  array  $options
+     * @param  array  $options
      * @return array
      */
     public function getSortOptions($options)

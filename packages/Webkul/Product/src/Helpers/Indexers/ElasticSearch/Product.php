@@ -114,7 +114,7 @@ class Product
         ];
 
         try {
-            \Elasticsearch::delete($params);
+            Elasticsearch::delete($params);
         } catch(\Exception $e) {}
 
         return;
