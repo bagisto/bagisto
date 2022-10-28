@@ -83,6 +83,7 @@ class ProductImage
                 $product = $item->product;
             }
         } else {
+            
             $product = $item->product;
         }
 
@@ -124,7 +125,7 @@ class ProductImage
     {
         $images = $product?->images;
 
-        return ! empty($images)
+        return $images && $images->count()
             ? $this->getCachedImageUrls($images[0]->path)
             : $this->getFallbackImageUrls();
     }
