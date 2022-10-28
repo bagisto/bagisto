@@ -681,7 +681,6 @@ return [
             'image'                       => 'Imagen',
             'file'                        => 'Archivo',
             'checkbox'                    => 'Opción múltiple',
-            'use_in_flat'                 => 'Crear en tabla plana de productos',
             'is_comparable'               => 'El atributo es comparable',
             'default_null_option'         => 'Crear opción vacía por defecto',
             'validation-messages'         => [

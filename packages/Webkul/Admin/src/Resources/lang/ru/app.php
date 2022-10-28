@@ -683,7 +683,6 @@ return [
             'image'                       => 'Изображение',
             'file'                        => 'Файл',
             'checkbox'                    => 'Флажок',
-            'use_in_flat'                 => 'Создать плоскую таблицу продукта',
             'is_comparable'               => 'Атрибут сопоставим',
             'default_null_option'         => 'Создать пустой параметр по умолчанию',
             'validation-messages'         => [

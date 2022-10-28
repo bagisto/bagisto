@@ -10,7 +10,7 @@ class ProductVideo
     /**
      * Retrieve collection of videos
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
     public function getVideos($product)

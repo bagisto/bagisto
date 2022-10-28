@@ -8,7 +8,7 @@
             $wishlist = $wishListHelper->getWishlistProduct($product);
 
             /* link making */
-            $href = isset($route) ? $route : ($wishlist ? route('shop.customer.wishlist.remove', $wishlist->id) : route('shop.customer.wishlist.add', $product->product_id));
+            $href = isset($route) ? $route : ($wishlist ? route('shop.customer.wishlist.remove', $wishlist->id) : route('shop.customer.wishlist.add', $product->id));
 
             /* method */
             $method = isset($route) ? 'POST' : ( $wishlist ? 'DELETE' : 'POST' );
@@ -41,8 +41,8 @@
 
     @guest('customer')
         <form           
-            id="wishlist-{{ $product->product_id }}"
-            action="{{ route('shop.customer.wishlist.add', $product->product_id) }}"
+            id="wishlist-{{ $product->id }}"
+            action="{{ route('shop.customer.wishlist.add', $product->id) }}"
             method="POST">
             @csrf
             
@@ -50,7 +50,7 @@
                 class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
                 href="javascript:void(0);"
                 title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
-                onclick="document.getElementById('wishlist-{{ $product->product_id }}').submit();">
+                onclick="document.getElementById('wishlist-{{ $product->id }}').submit();">
 
                 <wishlist-component active="false"></wishlist-component>
             </a>

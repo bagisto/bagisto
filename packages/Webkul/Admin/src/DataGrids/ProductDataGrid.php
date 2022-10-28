@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
 use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
 
 class ProductDataGrid extends DataGrid
 {
@@ -57,9 +59,14 @@ class ProductDataGrid extends DataGrid
     /**
      * Create datagrid instance.
      *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        protected ProductRepository $productRepository,
+        protected InventorySourceRepository $inventorySourceRepository
+    )
     {
         /* locale */
         $this->locale = core()->getRequestedLocaleCode();
@@ -262,7 +269,7 @@ class ProductDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.catalog.products.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
             'icon'         => 'icon trash-icon',
         ]);
 
@@ -308,9 +315,9 @@ class ProductDataGrid extends DataGrid
      */
     private function renderQuantityView($row)
     {
-        $product = app(\Webkul\Product\Repositories\ProductRepository::class)->find($row->product_id);
+        $product = $this->productRepository->find($row->product_id);
 
-        $inventorySources = app(\Webkul\Inventory\Repositories\InventorySourceRepository::class)->findWhere(['status' => 1]);
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
 
         $totalQuantity = $row->quantity;
 

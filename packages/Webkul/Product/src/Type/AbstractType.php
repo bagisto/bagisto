@@ -94,13 +94,6 @@ abstract class AbstractType
     protected $isChildrenCalculated = false;
 
     /**
-     * product options.
-     *
-     * @var array
-     */
-    protected $productOptions = [];
-
-    /**
      * Skip attribute for simple product type.
      *
      * @var array
@@ -1070,16 +1063,6 @@ abstract class AbstractType
         $item->save();
 
         return $result;
-    }
-
-    /**
-     * Get product options.
-     *
-     * @return array
-     */
-    public function getProductOptions()
-    {
-        return $this->productOptions;
     }
 
     /**

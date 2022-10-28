@@ -62,13 +62,6 @@ class Downloadable extends AbstractType
     protected $allowMultipleQty = false;
 
     /**
-     * Get product options.
-     *
-     * @var array
-     */
-    protected $getProductOptions = [];
-
-    /**
      * Create a new product type instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository

@@ -54,6 +54,7 @@ return [
             'title' => 'Content List',
             'select' => '-- Select --',
             'add-title' => 'Add Content',
+            'edit-title' => 'Edit Content',
             'btn-add-content' => 'Add Content',
             'save-btn-title' => 'Save Content',
             'autocomplete' => '[Autocomplete]',

@@ -139,6 +139,7 @@ class Product
     {
         $properties = [
             'id'           => $this->product->id,
+            'type'         => $this->product->type,
             'sku'          => $this->product->sku,
             'category_ids' => $this->product->categories->pluck('id')->toArray(),
             'created_at'   => $this->product->created_at,

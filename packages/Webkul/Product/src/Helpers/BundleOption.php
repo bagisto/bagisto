@@ -7,14 +7,14 @@ class BundleOption
     /**
      * Product
      *
-     * @var \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat
+     * @var \Webkul\Product\Contracts\Product
      */
     protected $product;
 
     /**
      * Returns bundle option config
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
     public function getBundleConfig($product)
@@ -107,36 +107,6 @@ class BundleOption
                 'inventory'  => $bundleOptionProduct->product->inventories->sum('qty'),
             ];
         }
-
-        usort ($products, function($a, $b) {
-            if ($a['sort_order'] == $b['sort_order']) {
-                return 0;
-            }
-
-            return ($a['sort_order'] < $b['sort_order']) ? -1 : 1;
-        });
-
-        return $products;
-    }
-
-    /**
-     * Get formed data from bundle option product
-     *
-     * @return array
-     */
-    public function getProductOptions($product)
-    {
-        $products = [];
-
-        $products[$product->id] = [
-            'id'         => $product->id,
-            'qty'        => $product->qty,
-            'price'      => $product->product->getTypeInstance()->getProductPrices(),
-            'name'       => $product->product->name,
-            'product_id' => $product->product_id,
-            'is_default' => $product->is_default,
-            'sort_order' => $product->sort_order,
-        ];
 
         usort ($products, function($a, $b) {
             if ($a['sort_order'] == $b['sort_order']) {
