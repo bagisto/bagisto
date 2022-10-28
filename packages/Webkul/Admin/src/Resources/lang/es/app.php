@@ -159,7 +159,7 @@ return [
         'customer-with-most-sales'  => 'Clientes con más ventas',
         'order-count'               => ':count Pedidos',
         'revenue'                   => 'Ingresos :total',
-        'stock-threshold'           => 'Umbral de Stock',
+        'stock-threshold'           => 'Umbral de existencia',
         'qty-left'                  => 'Quedan :qty',
     ],
 
@@ -1221,7 +1221,7 @@ return [
             'greater-than'                 => 'Más grande que',
             'less-than'                    => 'Menos que',
             'contain'                      => 'Contiene',
-            'contains'                     => 'Contienes',
+            'contains'                     => 'Contiene',
             'does-not-contain'             => 'No contiene',
             'actions'                      => 'Acciones',
             'action-type'                  => 'Tipo de acción',
@@ -1305,7 +1305,7 @@ return [
             'save-btn-title' => 'Guardar',
             'general'        => 'General',
             'file-name'      => 'Nombre del archivo',
-            'file-name-info' => 'Example: sitemap.xml',
+            'file-name-info' => 'Ejemplo: sitemap.xml',
             'path'           => 'Ruta',
             'path-info'      => 'Ejemplo: "/sitemap/" o "/" para la ruta base',
             'create-success' => 'Mapa del sitio creado con éxito.',
@@ -1432,7 +1432,7 @@ return [
 
     'validations' => [
         'slug-being-used' => 'Este slug está siendo usado en categorías o productos.',
-        'slug-reserved'   => 'Este slug es reservada.',
+        'slug-reserved'   => 'Este slug es reservado.',
     ],
 
     'footer' => [
