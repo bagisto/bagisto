@@ -62,7 +62,7 @@ return [
             'mass-delete-success'   => 'Вибраний контент успішно видалено.',
             'mass-update-success'   => 'Вибраний контент успішно оновлено.',
             'tab' => [
-                'page' => 'Налаштування сторінки,
+                'page' => 'Налаштування сторінки',
                 'content' => 'Налаштування контента',
                 'meta_content' => 'Метадані'
             ],
@@ -152,7 +152,7 @@ return [
             'btn-add-category' => 'Додати вміст категорії',
             'datagrid' => [
                 'category-id' => 'Ідентифікатор категорії',
-                'category-name' => 'Ім'я категорії',
+                'category-name' => 'Ім\'я категорії',
                 'category-icon' => 'Значок категорії',
                 'category-status' => 'Статус',
             ],
