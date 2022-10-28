@@ -67,16 +67,6 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * Get product type value from base product.
-     *
-     * @return string
-     */
-    public function getTypeAttribute()
-    {
-        return $this->product->type;
-    }
-
-    /**
      * Retrieve type instance.
      *
      * @return \Webkul\Product\Type\AbstractType
