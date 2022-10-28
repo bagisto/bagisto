@@ -246,7 +246,7 @@ return [
             'login'             => '登录',
             'become-user'       => '成为用户',
             'user-registration' => '用户注册',
-            'form-sginup-text'  => '如果您是我们商店的新手, 我们很高兴您成为会员.',
+            'form-signup-text'  => '如果您是我们商店的新手, 我们很高兴您成为会员.',
         ],
         'forget-password'   => [
             'login'                 => '登录',

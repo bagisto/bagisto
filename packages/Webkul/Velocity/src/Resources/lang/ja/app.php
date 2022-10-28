@@ -226,7 +226,7 @@ return [
             'login'                 => 'ログインする',
             'become-user'           => 'ユーザーになる',
             'user-registration'     => 'ユーザー登録',
-            'form-sginup-text'      => 'あなたが私たちの店に初めている場合は、メンバーとして喜んでいます。',
+            'form-signup-text'      => 'あなたが私たちの店に初めている場合は、メンバーとして喜んでいます。',
         ],
         'forget-password'   => [
             'login'                 => 'ログインする',
@@ -310,7 +310,7 @@ return [
             'languages' => '言語',
             'greeting'  => 'ようこそ、:Customer !',
             'greeting-for-guest' => 'ようこそゲストさん'
-        
+
         ]
     ],
 ];
