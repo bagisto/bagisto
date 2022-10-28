@@ -13,15 +13,15 @@ return [
         ],
 
         'error' => [
-            'multiple-sort-keys-error'   => 'Fatal Error! Multiple sort keys found, please resolve the URL manually',
-            'multiple-search-keys-error' => 'Multiple search keys found, please resolve the URL manually',
-            'mapped-keys-error'          => 'Mapped key not found. Make sure you have given valid options.',
+            'multiple-sort-keys-error'   => '¡Error fatal! Se encontraron varias claves de ordenamiento, por favor resuelva la URL de forma manual',
+            'multiple-search-keys-error' => 'Se encontraron varios términos de búsqueda, por favor resuelva la URL de forma manual',
+            'mapped-keys-error'          => 'No se encontró clave asignada. Asegúrate de haber proporcionado opciones válidas.',
         ],
 
         'zero-index'            => 'Las columnas de índice solo pueden tener valores superiores a cero',
         'no-records'            => 'No se encontraron registros',
         'filter-fields-missing' => 'Algunos de los campos obligatorios son nulos, verifique la columna, la condición y el valor correctamente',
-        'filter-exists'         => 'Filter value already exists.',
+        'filter-exists'         => 'El valor del filtro ya existe.',
         'click_on_action'       => '¿De verdad quieres realizar esta acción?',
         'search'                => 'Busque Aquí...',
         'search-title'          => 'Buscar',
@@ -37,9 +37,9 @@ return [
         'nequals'               => 'Es diferente a',
         'greater'               => 'Más grande que',
         'less'                  => 'Menor que',
-        'greatere'              => 'Mayor qué o igual a',
+        'greatere'              => 'Mayor que o igual a',
         'lesse'                 => 'Menos que o igual a',
-        'value'                 => 'Selecione el valor',
+        'value'                 => 'Seleccione el valor',
         'true'                  => 'Verdadero / Activo',
         'false'                 => 'Falso / Inactivo',
         'between'               => 'Está entre',
@@ -57,6 +57,6 @@ return [
         'all-locales'           => 'Todas las localidades',
         'all-customer-groups'   => 'Todos los grupos de clientes',
         'records-found'         => 'Registro(s) encontrado(s)',
-        'clear-all'             => 'Clear All'
+        'clear-all'             => 'Limpiar Todo'
     ],
 ];
