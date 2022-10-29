@@ -5,9 +5,9 @@ namespace Webkul\Product\Helpers;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductInventoryIndexRepository;
-use Webkul\Product\Helpers\Indexers\Flat\Product as FlatIndexer;
-use Webkul\Product\Helpers\Indexers\Inventory\Product as InventoryIndexer;
-use Webkul\Product\Helpers\Indexers\ElasticSearch\Product as ElasticSearchIndexer;
+use Webkul\Product\Helpers\Indexers\Flat as FlatIndexer;
+use Webkul\Product\Helpers\Indexers\Inventory as InventoryIndexer;
+use Webkul\Product\Helpers\Indexers\ElasticSearch as ElasticSearchIndexer;
 
 class Indexer
 {
@@ -17,9 +17,9 @@ class Indexer
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository  $productPriceIndexRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryIndexRepository  $productInventoryIndexRepository
-     * @param  \Webkul\Product\Helpers\Indexers\Flat\Product  $flatIndexer
-     * @param  \Webkul\Product\Helpers\Indexers\Inventory\Product  $inventoryIndexer
-     * @param  \Webkul\Product\Helpers\Indexers\ElasticSearch\Product  $elasticSearchIndexer
+     * @param  \Webkul\Product\Helpers\Indexers\Flat  $flatIndexer
+     * @param  \Webkul\Product\Helpers\Indexers\Inventory  $inventoryIndexer
+     * @param  \Webkul\Product\Helpers\Indexers\ElasticSearch  $elasticSearchIndexer
      * @return void
      */
     public function __construct(
@@ -74,17 +74,18 @@ class Indexer
      */
     public function refreshPrice($product)
     {
-        $indexer = $product->getTypeInstance()
-            ->getPriceIndexer()
-            ->setProduct($product);
-
         $customerGroups = $this->customerGroupRepository->all();
 
         foreach ($customerGroups as $customerGroup) {
+            $indexer = $product->getTypeInstance()
+                ->getPriceIndexer()
+                ->setCustomerGroup($customerGroup)
+                ->setProduct($product);
+
             $this->productPriceIndexRepository->updateOrCreate([
                 'customer_group_id' => $customerGroup->id,
                 'product_id'        => $product->id,
-            ], $indexer->getIndices($customerGroup));
+            ], $indexer->getIndices());
         }
     }
 

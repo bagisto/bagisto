@@ -3,18 +3,22 @@
 namespace Webkul\Product\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Bus;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Jobs\Indexer as IndexerJob;
+use Webkul\Product\Helpers\Indexers\{Inventory, Price, Elastic};
 
 class Indexer extends Command
 {
+    protected $indexers = [
+        'inventory' => Inventory::class,
+        'price'     => Price::class,
+        'elastic'   => Elastic::class,
+    ];
+    
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'products:index {--type=*}';
+    protected $signature = 'indexer:index {--type=*} {--mode=*}';
 
     /**
      * The console command description.
@@ -24,41 +28,32 @@ class Indexer extends Command
     protected $description = 'Automatically updates product price and inventory indices';
 
     /**
-     * Create a new command instance.
-     *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @return void
-     */
-    public function __construct(protected ProductRepository $productRepository)
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return void
      */
     public function handle()
     {
-        $indexers = ['inventory', 'price', 'elastic'];
+        $indexerIds = ['inventory', 'price', 'elastic'];
 
         if (! empty($this->option('type'))) {
-            $indexers = $this->option('type');
+            $indexerIds = $this->option('type');
         }
 
-        $batch = Bus::batch([])->dispatch();
+        $mode = 'full';
 
-        while (true) {
-            $paginator = $this->productRepository->cursorPaginate(50);
+        if (! empty($this->option('mode'))) {
+            $mode = current($this->option('mode'));
+        }
 
-            $batch->add(new IndexerJob($paginator->items(), $indexers));
+        foreach ($indexerIds as $indexerId) {
+            $indexer = app($this->indexers[$indexerId]);
 
-            if (! $cursor = $paginator->nextCursor()) {
-                break;
+            if ($mode == 'full') {
+                $indexer->reindexFull();
+            } else {
+                $indexer->reindexSelective();
             }
-
-            request()->query->add(['cursor' => $cursor->encode()]);
         }
     }
 }

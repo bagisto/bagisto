@@ -6,7 +6,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\CatalogRule\Helpers\CatalogRuleProductPrice;
 
-abstract class AbstractIndexer
+abstract class AbstractType
 {
     /**
      * Product instance.
@@ -67,18 +67,17 @@ abstract class AbstractIndexer
     /**
      * Returns product specific pricing for customer group
      *
-     * @param  \Webkul\Customer\Contracts\CustomerGroup  $customerGroup
      * @return array
      */
-    public function getIndices($customerGroup)
+    public function getIndices()
     {
-        $this->setCustomerGroup($customerGroup);
-
         return [
             'min_price'         => ($minPrice = $this->getMinimalPrice()) ?? 0,
             'regular_min_price' => $this->product->price ?? 0,
             'max_price'         => $minPrice ?? 0,
             'regular_max_price' => $this->product->price ?? 0,
+            'product_id'        => $this->product->id,
+            'customer_group_id' => $this->customerGroup->id,
         ];
     }
 

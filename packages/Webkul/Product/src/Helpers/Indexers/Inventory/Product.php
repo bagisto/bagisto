@@ -47,15 +47,14 @@ class Product
     /**
      * Returns product specific indices
      *
-     * @param  \Webkul\Core\Contracts\Channel  $channel
      * @return array
      */
-    public function getIndices($channel)
+    public function getIndices()
     {
-        $this->setChannel($channel);
-
         return [
-            'qty' => $this->getQuantity(),
+            'qty'        => $this->getQuantity(),
+            'product_id' => $this->product->id,
+            'channel_id' => $this->channel->id,
         ];
     }
 
