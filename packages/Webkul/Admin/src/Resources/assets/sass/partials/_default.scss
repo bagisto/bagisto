@@ -620,8 +620,11 @@ body {
             }
 
             .page-action {
-                float: right;
                 margin-top: -5px;
+
+                button {
+                    margin-top: 10px;
+                }
 
                 * {
                     display: inline-block;
@@ -871,6 +874,8 @@ body {
                     .page-title {
                         float: left;
                         width: 100%;
+                        display: flex;
+                        grid-gap: 5px;
 
                         .back-link {
                             margin-top: 0px;
@@ -883,6 +888,9 @@ body {
                     .page-action {
                         right: 10px;
                         margin-top: 0px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
                     }
                 }
             }
@@ -917,7 +925,6 @@ body {
 
                 .page-action {
                     margin-top: -15px !important;
-                    float: right;
 
                     a {
                         margin-left: 0px !important;

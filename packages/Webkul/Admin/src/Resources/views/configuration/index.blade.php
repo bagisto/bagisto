@@ -31,12 +31,15 @@
             <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
                 <div class="page-header">
-
-                    <div class="page-title">
+                    <div class="page-action">
                         <h1>
                             {{ __('admin::app.configuration.title') }}
                         </h1>
-
+                        <button type="submit" class="btn btn-lg btn-primary">
+                            {{ __('admin::app.configuration.save-btn-title') }}
+                        </button>
+                    </div>
+                    <div class="page-title">
                         <div class="control-group">
                             <select class="control" id="channel-switcher" name="channel">
                                 @foreach (core()->getAllChannels() as $channelModel)
@@ -60,12 +63,6 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-
-                    <div class="page-action">
-                        <button type="submit" class="btn btn-lg btn-primary">
-                            {{ __('admin::app.configuration.save-btn-title') }}
-                        </button>
                     </div>
                 </div>
 
