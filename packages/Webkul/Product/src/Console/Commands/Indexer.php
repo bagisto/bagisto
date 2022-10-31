@@ -49,7 +49,15 @@ class Indexer extends Command
         }
 
         foreach ($indexerIds as $indexerId) {
+            
             $indexer = app($this->indexers[$indexerId]);
+
+            if (
+                $indexerId == 'elastic'
+                && core()->getConfigData('catalog.products.storefront.search_mode') != 'elastic'
+            ) {
+                continue;
+            }
 
             if ($mode == 'full') {
                 $indexer->reindexFull();

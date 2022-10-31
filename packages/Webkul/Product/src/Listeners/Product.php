@@ -59,7 +59,9 @@ class Product
 
         app($this->indexers['price'])->reindexRows($products);
 
-        app($this->indexers['elastic'])->reindexRows($products);
+        if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
+            app($this->indexers['elastic'])->reindexRows($products);
+        }
     }
 
     /**
@@ -70,6 +72,10 @@ class Product
      */
     public function beforeDelete($productId)
     {
+        if (core()->getConfigData('catalog.products.storefront.search_mode') != 'elastic') {
+            return;
+        }
+
         $product = $this->productRepository->find($productId);
 
         app($this->indexers['elastic'])->reindexRow($product);
