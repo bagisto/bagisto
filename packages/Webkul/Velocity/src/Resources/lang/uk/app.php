@@ -4,11 +4,11 @@ return [
     'admin'         => [
         'system'    => [
             'velocity' => [
-                'general'  => 'Загальний',
-                'category'  => 'Категорія',
-                'settings'  => 'Налаштування',
-                'extension_name' => 'Тема Velocity',
-                'error-module-inactive' => 'Попередження: статус теми Velocity неактивен'
+               'general'  => 'Загальний',
+               'category'  => 'Категорія',
+               'settings'  => 'Налаштування',
+               'extension_name' => 'Тема Velocity',
+               'error-module-inactive' => 'Попередження: статус теми Velocity неактивен'
             ],
 
             'settings' => [
@@ -166,7 +166,7 @@ return [
             'icon-class' => 'Клас ікони',
             'select-category' => 'Виберіть категорію',
             'tooltip-content' => 'Вміст спливаючої підказки',
-            'mass-delete-success' => 'Обрані категорії успішно видалені'.
+            'mass-delete-success' => 'Обрані категорії успішно видалені',
         ],
         'general'   => [
             'locale_logo' => 'Логотип регіону',
@@ -254,6 +254,7 @@ return [
             'forgot-password'        => 'Забув пароль',
             'recover-password'       => 'Відновити пароль',
              'recover-password-text' => 'Якщо ви забули свій пароль, відновіть його, ввівши адресу електронної пошти.',
+        ],
         'wishlist' => [
             'remove-all-success' => 'Всі предмети з списку бажань було видалено',
         ],
@@ -264,6 +265,7 @@ return [
         'page-lost-short'       => 'Сторінка втратила контент',
         'something_went_wrong'  => 'щось пішло не так',
         'page-lost-description' => "Сторінка, яку ви шукаєте, недоступна. Спробуйте виконати пошук ще раз або натисніть кнопку 'Повернутися' нижче.",
+    ],
 
     'products'      => [
         'text'              => 'Продукти',
