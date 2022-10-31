@@ -27,7 +27,7 @@
         <div class="container-fluid advertisement-two-container">
             <div class="row">
                 @if ( isset($advertisementTwo[0]))
-                    <a class="col-lg-9 col-md-12 no-padding">
+                    <a @if (isset($one)) href="{{ $one }}" @endif aria-label="Advertisement" class="col-lg-9 col-md-12 no-padding">
                         <img
                             class="{{ $isLazyLoad ? 'lazyload' : '' }}"
                             @if (! $isLazyLoad) src="{{ Storage::url($advertisementTwo[0]) }}" @endif
@@ -36,7 +36,7 @@
                 @endif
 
                 @if ( isset($advertisementTwo[1]))
-                    <a class="col-lg-3 col-md-12 pr0">
+                    <a @if (isset($two)) href="{{ $two }}" @endif aria-label="Advertisement" class="col-lg-3 col-md-12 pr0">
                         <img
                             class="{{ $isLazyLoad ? 'lazyload' : '' }}"
                             @if (! $isLazyLoad) src="{{ Storage::url($advertisementTwo[1]) }}" @endif
@@ -51,14 +51,14 @@
 @if (! $isRendered)
     <div class="container-fluid advertisement-two-container">
         <div class="row">
-            <a class="col-lg-9 col-md-12 no-padding">
+            <a @if (isset($one)) href="{{ $one }}" @endif aria-label="Advertisement" class="col-lg-9 col-md-12 no-padding">
                 <img
                     class="{{ $isLazyLoad ? 'lazyload' : '' }}"
                     @if (! $isLazyLoad) src="{{ asset('/themes/velocity/assets/images/toster.webp') }}" @endif
                     data-src="{{ asset('/themes/velocity/assets/images/toster.webp') }}" alt="" />
             </a>
 
-            <a class="col-lg-3 col-md-12 pr0">
+            <a @if (isset($two)) href="{{ $two }}" @endif aria-label="Advertisement" class="col-lg-3 col-md-12 pr0">
                 <img
                     class="{{ $isLazyLoad ? 'lazyload' : '' }}"
                     @if (! $isLazyLoad) src="{{ asset('/themes/velocity/assets/images/trimmer.webp') }}" @endif
