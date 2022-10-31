@@ -212,33 +212,28 @@ abstract class AbstractType
                     : null;
             }
 
+            $attributeValues = $product->attribute_values
+                ->where('attribute_id', $attribute->id);
+
             if ($attribute->value_per_channel) {
                 if ($attribute->value_per_locale) {
-                    $productAttributeValue = $product->attribute_values
+                    $attributeValues = $attributeValues
                         ->where('channel', $attribute->value_per_channel ? $data['channel'] : null)
-                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null)
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
+                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null);
                 } else {
-                    $productAttributeValue = $product->attribute_values
-                        ->where('channel', $attribute->value_per_channel ? $data['channel'] : null)
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
+                    $attributeValues = $attributeValues
+                        ->where('channel', $attribute->value_per_channel ? $data['channel'] : null);
                 }
             } else {
                 if ($attribute->value_per_locale) {
-                    $productAttributeValue = $product->attribute_values
-                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null)
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
-                } else {
-                    $productAttributeValue = $product->attribute_values
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
+                    $attributeValues = $attributeValues
+                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null);
                 }
             }
 
-            if (! $productAttributeValue) {
+            $attributeValue = $attributeValues->first();
+
+            if (! $attributeValue) {
                 $this->attributeValueRepository->create([
                     'product_id'            => $product->id,
                     'attribute_id'          => $attribute->id,
@@ -247,7 +242,7 @@ abstract class AbstractType
                     'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
                 ]);
             } else {
-                $productAttributeValue->update([$attribute->column_name => $data[$attribute->code]]);
+                $attributeValue->update([$attribute->column_name => $data[$attribute->code]]);
 
                 if (
                     $attribute->type == 'image'

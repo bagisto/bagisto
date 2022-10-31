@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Listeners;
 
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Helpers\Indexer;
@@ -11,12 +12,14 @@ class Product
     /**
      * Create a new listener instance.
      *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
      * @param  \Webkul\Product\Helpers\Indexer  $indexer
      * @return void
      */
     public function __construct(
+        protected ProductRepository $productRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository,
         protected Indexer $indexer
@@ -25,7 +28,7 @@ class Product
     }
 
     /**
-     * Update or create product price indices
+     * Update or create product indices
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
@@ -36,7 +39,7 @@ class Product
     }
 
     /**
-     * Update or create product price indices
+     * Update or create product indices
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
@@ -45,10 +48,41 @@ class Product
     {
         $this->indexer->refreshFlat($product);
 
+        $this->refreshInventoryIndices($product);
+
         $this->refreshPriceIndices($product);
 
-        $this->indexer->refreshInventory($product);
+        $this->refreshElasticSearchIndices($product);
     }
+
+    /**
+     * Delete product indices
+     *
+     * @param  integer  $productId
+     * @return void
+     */
+    public function beforeDelete($productId)
+    {
+        $product = $this->productRepository->find($productId);
+        
+        $this->indexer->deleteElasticSearch($product);
+    }
+
+    /**
+     * Update or create product inventory indices
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return void
+     */
+    public function refreshInventoryIndices($product)
+    {
+        $products = $this->getAllRelatedProducts($product);
+
+        foreach ($products as $product) {
+            $this->indexer->refreshInventory($product);
+        }
+    }
+
 
     /**
      * Update or create product price indices
@@ -58,23 +92,61 @@ class Product
      */
     public function refreshPriceIndices($product)
     {
-        $products = [$product];
-
-        if ($product->type == 'simple') {
-            if ($product->parent_id) {
-                $products[] = $product->parent;
-            }
-
-            $products = array_merge(
-                $products,
-                $this->getParentBundleProducts($product),
-                $this->getParentGroupProducts($product)
-            );
-        }
+        $products = $this->getAllRelatedProducts($product);
 
         foreach ($products as $product) {
             $this->indexer->refreshPrice($product);
         }
+    }
+
+    /**
+     * Update or create product ElasticSearch indices
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return void
+     */
+    public function refreshElasticSearchIndices($product)
+    {
+        $products = $this->getAllRelatedProducts($product);
+
+        foreach ($products as $product) {
+            $this->indexer->refreshElasticSearch($product);
+        }
+    }
+
+    /**
+     * Returns parents bundle products associated with simple product
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
+    public function getAllRelatedProducts($product)
+    {
+        static $products = [];
+
+        if (array_key_exists($product->id, $products)) {
+            return $products[$product->id];
+        }
+
+        $products[$product->id] = [$product];
+
+        if ($product->type == 'simple') {
+            if ($product->parent_id) {
+                $products[$product->id][] = $product->parent;
+            }
+
+            $products[$product->id] = array_merge(
+                $products[$product->id],
+                $this->getParentBundleProducts($product),
+                $this->getParentGroupProducts($product)
+            );
+        } elseif ($product->type == 'configurable') {
+            foreach ($product->variants as $variant) {
+                $products[$product->id][] = $variant;
+            }
+        }
+
+        return $products[$product->id];
     }
 
     /**
