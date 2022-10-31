@@ -22,10 +22,10 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\Product\Listeners\Product@beforeDelete',
         ],
         'checkout.order.save.after'     => [
-            'Webkul\Product\Listeners\Order@afterCreate',
+            'Webkul\Product\Listeners\Order@afterCancelOrCreate',
         ],
         'sales.order.cancel.after'      => [
-            'Webkul\Product\Listeners\Order@afterCancel',
+            'Webkul\Product\Listeners\Order@afterCancelOrCreate',
         ],
         'sales.refund.save.after'       => [
             'Webkul\Product\Listeners\Refund@afterCreate',

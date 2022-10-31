@@ -5,7 +5,6 @@ namespace Webkul\Product\Helpers\Indexers;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductInventoryIndexRepository;
-use Webkul\Product\Helpers\Indexers\Inventory\Product as InventoryIndexer;
 
 class Inventory extends AbstractIndexer
 {
@@ -15,33 +14,80 @@ class Inventory extends AbstractIndexer
     private $batchSize;
 
     /**
+     * Product instance.
+     *
+     * @var \Webkul\Product\Contracts\Product
+     */
+    protected $product;
+
+    /**
+     * Channel instance.
+     *
+     * @var \Webkul\Core\Contracts\Channel
+     */
+    protected $channel;
+
+    /**
      * Create a new indexer instance.
      *
      * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryIndexRepository  $productInventoryIndexRepository
-     * @param  \Webkul\Product\Helpers\Indexers\Inventory  $inventoryIndexer
      * @return void
      */
     public function __construct(
         protected ChannelRepository $channelRepository,
         protected ProductRepository $productRepository,
-        protected ProductInventoryIndexRepository $productInventoryIndexRepository,
-        protected InventoryIndexer $inventoryIndexer
+        protected ProductInventoryIndexRepository $productInventoryIndexRepository
     )
     {
         $this->batchSize = self::BATCH_SIZE;
     }
 
+    /**
+     * Set current product
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return \Webkul\Product\Helpers\Indexers\Inventory\Product
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Set channel
+     *
+     * @param  \Webkul\Core\Contracts\Channel  $channel
+     * @return \Webkul\Product\Helpers\Indexers\Inventory\Product
+     */
+    public function setChannel($channel)
+    {
+        $this->channel = $channel;
+
+        return $this;
+    }
+
+    /**
+     * Reindex all products
+     *
+     * @return void
+     */
     public function reindexFull()
     {
         while (true) {
             $paginator = $this->productRepository
-                ->with(['inventory_indices'])
+                ->with([
+                    'inventories',
+                    'ordered_inventories',
+                    'inventory_indices',
+                ])
                 ->whereIn('type', ['simple', 'virtual'])
                 ->cursorPaginate($this->batchSize);
  
-            $this->insertBatch($paginator->items());
+            $this->reindexBatch($paginator->items());
  
             if (! $cursor = $paginator->nextCursor()) {
                 break;
@@ -54,24 +100,26 @@ class Inventory extends AbstractIndexer
     }
     
     /**
-     * Execute the console command.
+     * Reindex products by batch size
      *
      * @return void
      */
-    public function insertBatch($products)
+    public function reindexBatch($products)
     {
         $newIndices = [];
 
         foreach ($products as $product) {
-            $indexer = $this->inventoryIndexer->setProduct($product);
+            $this->setProduct($product);
 
             foreach ($this->getChannels() as $channel) {
+                $this->setChannel($channel);
+
                 $channelIndex = $product->inventory_indices
                     ->where('channel_id', $channel->id)
                     ->where('product_id', $product->id)
                     ->first();
 
-                $newIndex = $indexer->setChannel($channel)->getIndices();
+                $newIndex = $this->getIndices();
 
                 if ($channelIndex) {
                     $oldIndex = collect($channelIndex->toArray())
@@ -96,19 +144,60 @@ class Inventory extends AbstractIndexer
     }
 
     /**
-     * Execute the console command.
+     * Check if index value changed
      *
-     * @return void
+     * @return boolean
      */
     public function isIndexChanged($oldIndex, $newIndex)
     {
         return (boolean) count(array_diff_assoc($oldIndex, $newIndex));
     }
+
+    /**
+     * Returns product specific indices
+     *
+     * @return array
+     */
+    public function getIndices()
+    {
+        return [
+            'qty'        => $this->getQuantity(),
+            'product_id' => $this->product->id,
+            'channel_id' => $this->channel->id,
+        ];
+    }
+
+    /**
+     * Returns product remaining quantity
+     *
+     * @return integer
+     */
+    public function getQuantity()
+    {
+        $channelInventorySourceIds = $this->channel->inventory_sources->where('status', 1)->pluck('id');
+
+        $qty = 0;
+
+        foreach ($this->product->inventories as $inventory) {
+            if (is_numeric($channelInventorySourceIds->search($inventory->inventory_source_id))) {
+                $qty += $inventory->qty;
+            }
+        }
+
+        $orderedInventory = $this->product->ordered_inventories
+            ->where('channel_id', $this->channel->id)->first();
+
+        if ($orderedInventory) {
+            $qty -= $orderedInventory->qty;
+        }
+
+        return $qty;
+    }
     
     /**
-     * Execute the console command.
+     * Returns all channels
      *
-     * @return void
+     * @return Collection
      */
     public function getChannels()
     {

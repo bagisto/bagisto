@@ -90,9 +90,11 @@ class Flat
             if (in_array($channel->code, $channels)) {
                 foreach ($channel->locales as $locale) {
                     $productFlat = $this->productFlatRepository->updateOrCreate([
-                        'product_id' => $product->id,
-                        'channel'    => $channel->code,
-                        'locale'     => $locale->code,
+                        'type'                => $product->type,
+                        'attribute_family_id' => $product->attribute_family_id,
+                        'product_id'          => $product->id,
+                        'channel'             => $channel->code,
+                        'locale'              => $locale->code,
                     ]);
 
                     foreach ($familyAttributes as $attribute) {

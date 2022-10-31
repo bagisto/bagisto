@@ -3,14 +3,14 @@
 namespace Webkul\Product\Console\Commands;
 
 use Illuminate\Console\Command;
-use Webkul\Product\Helpers\Indexers\{Inventory, Price, Elastic};
+use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch};
 
 class Indexer extends Command
 {
     protected $indexers = [
         'inventory' => Inventory::class,
         'price'     => Price::class,
-        'elastic'   => Elastic::class,
+        'elastic'   => ElasticSearch::class,
     ];
     
     /**
@@ -34,13 +34,15 @@ class Indexer extends Command
      */
     public function handle()
     {
+        $start = microtime(TRUE);
+        
         $indexerIds = ['inventory', 'price', 'elastic'];
 
         if (! empty($this->option('type'))) {
             $indexerIds = $this->option('type');
         }
 
-        $mode = 'full';
+        $mode = 'selective';
 
         if (! empty($this->option('mode'))) {
             $mode = current($this->option('mode'));
@@ -55,5 +57,9 @@ class Indexer extends Command
                 $indexer->reindexSelective();
             }
         }
+
+        $end = microtime(TRUE);
+
+        echo "The code took " . ($end - $start) . " seconds to complete.\n";
     }
 }

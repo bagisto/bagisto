@@ -30,14 +30,29 @@ class Price extends AbstractIndexer
         $this->batchSize = self::BATCH_SIZE;
     }
 
+    /**
+     * Reindex all products
+     *
+     * @return void
+     */
     public function reindexFull()
     {
         while (true) {
             $paginator = $this->productRepository
-                ->with(['price_indices'])
+                ->with([
+                    'variants',
+                    'attribute_values',
+                    'variants.attribute_values',
+                    'price_indices',
+                    'variants.price_indices',
+                    'customer_group_prices',
+                    'variants.customer_group_prices',
+                    'catalog_rule_prices',
+                    'variants.catalog_rule_prices',
+                ])
                 ->cursorPaginate($this->batchSize);
  
-            $this->insertBatch($paginator->items());
+            $this->reindexBatch($paginator->items());
  
             if (! $cursor = $paginator->nextCursor()) {
                 break;
@@ -50,11 +65,11 @@ class Price extends AbstractIndexer
     }
     
     /**
-     * Execute the console command.
+     * Reindex products by batch size
      *
      * @return void
      */
-    public function insertBatch($products)
+    public function reindexBatch($products)
     {
         $newIndices = [];
 
@@ -93,9 +108,9 @@ class Price extends AbstractIndexer
     }
 
     /**
-     * Execute the console command.
+     * Check if index value changed
      *
-     * @return void
+     * @return boolean
      */
     public function isIndexChanged($oldIndex, $newIndex)
     {
@@ -103,9 +118,9 @@ class Price extends AbstractIndexer
     }
 
     /**
-     * Execute the console command.
+     * Returns indexer for product type
      *
-     * @return void
+     * @return string
      */
     public function getTypeIndexer($product)
     {
@@ -119,9 +134,9 @@ class Price extends AbstractIndexer
     }
     
     /**
-     * Execute the console command.
+     * Returns all customer groups
      *
-     * @return void
+     * @return Collection
      */
     public function getCustomerGroups()
     {

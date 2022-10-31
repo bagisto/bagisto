@@ -2,9 +2,10 @@
 
 namespace Webkul\Product\Helpers\Indexers\Price;
 
+use Illuminate\Support\Carbon;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\CatalogRule\Helpers\CatalogRuleProductPrice;
+use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 
 abstract class AbstractType
 {
@@ -27,13 +28,13 @@ abstract class AbstractType
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
-     * @param  \Webkul\CatalogRule\Helpers\CatalogRuleProductPrice  $catalogRuleProductPriceHelper
+     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository  $catalogRuleProductPriceRepository
      * @return void
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
-        protected CatalogRuleProductPrice $catalogRuleProductPriceHelper
+        protected CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
     )
     {
     }
@@ -91,9 +92,7 @@ abstract class AbstractType
     {
         $customerGroupPrice = $this->getCustomerGroupPrice($qty ?? 1);
 
-        $rulePrice = $this->catalogRuleProductPriceHelper
-            ->setCustomerGroup($this->customerGroup)
-            ->getRulePrice($this->product);
+        $rulePrice = $this->getCatalogRulePrice();
 
         $discountedPrice = $this->product->special_price;
 
@@ -204,5 +203,19 @@ abstract class AbstractType
         }
 
         return $lastPrice;
+    }
+
+    /**
+     * Get catalog rules product price for specific date, channel and customer group.
+     *
+     * @return mixed
+     */
+    public function getCatalogRulePrice()
+    {
+        return $this->product->catalog_rule_prices
+            ->where('customer_group_id', $this->customerGroup->id)
+            ->where('channel_id', core()->getCurrentChannel()->id)
+            ->where('rule_date', Carbon::now()->format('Y-m-d'))
+            ->first();
     }
 }

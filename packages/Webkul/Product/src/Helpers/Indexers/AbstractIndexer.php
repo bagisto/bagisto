@@ -9,10 +9,33 @@ abstract class AbstractIndexer
      */
     protected const BATCH_SIZE = 100;
 
-    public function reindexSelective()
+    abstract public function reindexBatch(array $products);
+
+    /**
+     * Reindex all products
+     *
+     * @return void
+     */
+    public function reindexFull()
     {
     }
 
+    /**
+     * Reindex necessary products
+     *
+     * @return void
+     */
+    public function reindexSelective()
+    {
+        return $this->reindexFull();
+    }
+
+    /**
+     * Reindex products by preparing batches
+     *
+     * @param  array  $products
+     * @return void
+     */
     public function reindexRows(array $products)
     {
         $currentBatch = [];
@@ -23,7 +46,7 @@ abstract class AbstractIndexer
             $currentBatch[] = $product;
 
             if (++$i === self::BATCH_SIZE) {
-                $this->insertBatch($currentBatch);
+                $this->reindexBatch($currentBatch);
 
                 $i = 0;
 
@@ -32,12 +55,18 @@ abstract class AbstractIndexer
         }
 
         if (! empty($currentBatch)) {
-            $this->insertBatch($currentBatch);
+            $this->reindexBatch($currentBatch);
         }
     }
 
+    /**
+     * Reindex single product
+     *
+     * @param  array  $products
+     * @return void
+     */
     public function reindexRow($product)
     {
-        return $this->reindexRows([$product]);
+        $this->reindexBatch([$product]);
     }
 }
