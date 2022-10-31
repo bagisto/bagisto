@@ -590,7 +590,9 @@ body {
 
     .content {
         .page-header {
-            display: inline-block;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
             width: 100%;
             padding: 16px 10px 15px 16px;
             position: sticky;
@@ -601,6 +603,7 @@ body {
 
             .page-title {
                 float: left;
+                align-items: center;
 
                 .back-link {
                     float: left;
@@ -803,6 +806,12 @@ body {
     .switch-dark {
         width: 75%;
     }
+
+    .page-action {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -868,7 +877,7 @@ body {
                         margin-bottom: 0;
                         margin-left: 0px;
                         padding: 0px;
-                        margin-top: 40px;
+                        margin-top: 25px;
                     }
 
                     .page-title {
