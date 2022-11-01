@@ -86,6 +86,7 @@
             .sale-summary {
                 margin-top: 40px;
                 float: right;
+                background-color: blue;
             }
 
             .sale-summary tr td {
@@ -124,29 +125,44 @@
                 vertical-align: top;
                 margin: 0px 5px;
             }
+
+            .table-header {
+                color: blue;
+            }
         </style>
     </head>
 
-    <body style="background-image: none;background-color: #fff;">
+    <body style="background-image: none; background-color: #fff;">
         <div class="container">
-            <div class="header">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h1>{{ __('admin::app.sales.invoices.invoice') }}</h1>
-
+            <div>
+                <div class="row header">
+                    <div class="col-12" style="background-color: #1000ff; padding: 0px 2px; width:100%; position: relative;">
                         @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
-                            <div class="image">
+                            <div class="image" style="display:inline-block; vertical-align: middle;">
                                 <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}" alt=""/>
                             </div>
                         @endif
+                        <div class="invoice_text" style="font-size: 40px; color: #fff; position: absolute; width: 100%; left: 0; text-align: center; top: calc(50% - 40px);">
+                            <span>INVOICE</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="padding: 5px">
                     <div class="col-12">
                         <div class="col-6">
                             <div class="merchant-details">
-                                <div>
+                                <div class="row">
+                                    <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }}: </span>
+                                    <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
+                                </div>
+
+                                <div class="row">
+                                    <span class="label">{{ __('shop::app.customer.account.order.view.invoice-date') }}: </span>
+                                    <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
+                                </div>
+
+                                <div style="padding-top:20px">
                                     <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
                                 </div>
 
@@ -163,31 +179,23 @@
                             </div>
                             <div class="merchant-details">
                                 @if (core()->getConfigData('sales.shipping.origin.contact'))
-                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
+                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}: </span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
                                 @endif
 
                                 @if (core()->getConfigData('sales.shipping.origin.vat_number'))
-                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
+                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}: </span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
                                 @endif
                             </div>
                         </div>
 
                         <div class="col-6" style="padding-left:80px">
                             <div class="row">
-                                <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }} -</span>
+                                <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }}: </span>
                                 <span class="value">#{{ $invoice->order->increment_id }}</span>
                             </div>
+                           
                             <div class="row">
-                                <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }} -</span>
-                                <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
-                            </div>
-
-                            <div class="row">
-                                <span class="label">{{ __('shop::app.customer.account.order.view.invoice-date') }} -</span>
-                                <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
-                            </div>
-                            <div class="row">
-                                <span class="label">{{ __('shop::app.customer.account.order.view.order-date') }} -</span>
+                                <span class="label">{{ __('shop::app.customer.account.order.view.order-date') }}: </span>
                                 <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
                             </div>
 
@@ -202,7 +210,8 @@
                                 <div class="row" style="padding-top:20px">
                                     <span class="merchant-details-title">
                                         {{ __('admin::app.admin.system.bank-details') }}:
-                                    </span> {{ core()->getConfigData('sales.shipping.origin.bank_details') }}
+                                    </span> 
+                                    <div>{{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
                                 </div>
                             @endif
                         </div>
@@ -215,9 +224,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 50%">{{ __('shop::app.customer.account.order.view.bill-to') }}</th>
+                                <th class="table-header" style="width: 50%; text-align:left">{{ __('shop::app.customer.account.order.view.bill-to') }}</th>
                                 @if ($invoice->order->shipping_address)
-                                    <th>{{ __('shop::app.customer.account.order.view.ship-to') }}</th>
+                                    <th class="table-header" style="text-align:left">{{ __('shop::app.customer.account.order.view.ship-to') }}</th>
                                 @endif
                             </tr>
                         </thead>
@@ -259,10 +268,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 50%">{{ __('shop::app.customer.account.order.view.payment-method') }}</th>
+                                <th class="table-header" style="width: 50%; text-align:left">{{ __('shop::app.customer.account.order.view.payment-method') }}</th>
 
                                 @if ($invoice->order->shipping_address)
-                                    <th>{{ __('shop::app.customer.account.order.view.shipping-method') }}</th>
+                                    <th class="table-header" style="text-align:left">{{ __('shop::app.customer.account.order.view.shipping-method') }}</th>
                                 @endif
                             </tr>
                         </thead>
@@ -296,13 +305,13 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.SKU') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.product-name') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.price') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.qty') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.subtotal') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.tax-amount') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.grand-total') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.SKU') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.product-name') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.price') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.qty') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.subtotal') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.tax-amount') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.grand-total') }}</th>
                             </tr>
                         </thead>
 
@@ -340,7 +349,7 @@
                     </table>
                 </div>
 
-                <table class="sale-summary">
+                <table class="sale-summary" style="background-color: #005aff0d">
                     <tr>
                         <td>{{ __('shop::app.customer.account.order.view.subtotal') }}</td>
                         <td>-</td>
