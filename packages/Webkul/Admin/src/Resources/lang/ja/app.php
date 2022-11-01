@@ -629,6 +629,8 @@ return [
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
             'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [
@@ -1330,9 +1332,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'GO TO HOME',
-        'in-maitainace' => 'In Maintenance',
-        'right-back'    => 'Be Right Back',
+        'go-to-home'     => 'GO TO HOME',
+        'in-maintenance' => 'In Maintenance',
+        'right-back'     => 'Be Right Back',
 
         '404' => [
             'page-title' => '404 Page not found',
@@ -1588,7 +1590,7 @@ return [
             'oldest-first'                          => 'Oldest First',
             'cheapest-first'                        => 'Cheapest First',
             'expensive-first'                       => 'Expensive First',
-            'comma-seperated'                       => 'Comma Seperated',
+            'comma-separated'                       => 'Comma Seperated',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Rich Snippets',

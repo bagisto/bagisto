@@ -613,6 +613,9 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [
@@ -1305,9 +1308,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'TORNA ALLA HOME',
-        'in-maitainace' => 'In Manutezione',
-        'right-back'    => 'Torno subito',
+        'go-to-home'     => 'TORNA ALLA HOME',
+        'in-maintenance' => 'In Manutezione',
+        'right-back'     => 'Torno subito',
 
         '404' => [
             'page-title' => '404 Pagina non trovata',
@@ -1558,7 +1561,7 @@ return [
             'oldest-first'                          => 'I più vecchi prima',
             'cheapest-first'                        => 'I più convenienti prima',
             'expensive-first'                       => 'I più cari prima',
-            'comma-seperated'                       => 'Separato da virgola',
+            'comma-separated'                       => 'Separato da virgola',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Rich Snippets',

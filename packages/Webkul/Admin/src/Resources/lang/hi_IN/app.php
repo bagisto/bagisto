@@ -626,6 +626,8 @@ return [
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
             'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [
@@ -1327,9 +1329,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'घर जाओ',
-        'in-maitainace' => 'रखरखाव में',
-        'right-back'    => 'इसी समय वापस आओ',
+        'go-to-home'     => 'घर जाओ',
+        'in-maintenance' => 'रखरखाव में',
+        'right-back'     => 'इसी समय वापस आओ',
 
         '404' => [
             'page-title' => '404 पृष्ठ नहीं मिला',
@@ -1585,7 +1587,7 @@ return [
             'oldest-first'                          => 'सबसे पुराना पहले',
             'cheapest-first'                        => 'सबसे सस्ता पहला',
             'expensive-first'                       => 'महंगा पहले',
-            'comma-seperated'                       => 'अल्पविराम अलग',
+            'comma-separated'                       => 'अल्पविराम अलग',
             'favicon'                               => 'फेविकॉन',
             'seo'                                   => 'एसईओ',
             'rich-snippets'                         => 'समृद्ध निकम्मा आदमी',

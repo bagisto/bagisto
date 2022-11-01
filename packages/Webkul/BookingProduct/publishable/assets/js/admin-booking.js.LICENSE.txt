@@ -1,5 +1,11 @@
 /*!
- * Vue.js v2.6.14
- * (c) 2014-2021 Evan You
+ * Vue.js v2.7.13
+ * (c) 2014-2022 Evan You
  * Released under the MIT License.
  */
+
+/**
+  * vue-cal v3.11.0
+  * (c) 2022 Antoni Andre <antoniandre.web@gmail.com>
+  * @license MIT
+  */

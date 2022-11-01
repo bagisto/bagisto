@@ -54,7 +54,7 @@
                                             </span>
 
                                             <span class="value">
-                                                {{ $order->created_at }}
+                                                {{ core()->formatDate($order->created_at, 'Y-m-d H:i:s') }}
                                             </span>
                                         </div>
 
@@ -265,13 +265,10 @@
                                                         <td>{{ $item->qty_ordered }}</td>
                                                         <td>
                                                             <div class="control-group" :class="[errors.has('invoice[items][{{ $item->id }}]') ? 'has-error' : '']">
-                                                                <input type="text" v-validate="'required|numeric|min:0'" class="control" id="invoice[items][{{ $item->id }}]" name="invoice[items][{{ $item->id }}]" value="{{ $item->qty_to_invoice }}" data-vv-as="&quot;{{ __('admin::app.sales.invoices.qty-to-invoice') }}&quot;"/>
 
-                                                                <span class="control-error" v-if="errors.has('invoice[items][{{ $item->id }}]')">
-                                                                    @verbatim
-                                                                        {{ errors.first('invoice[items][<?php echo $item->id ?>]') }}
-                                                                    @endverbatim
-                                                                </span>
+                                                                <input type="text" v-validate="'required|numeric|min:0'" class="control" id="invoice[items][{{ $item->id }}]" name="invoice[items][{{ $item->id }}]" value="{{ $item->qty_to_invoice }}" data-vv-as="&quot;{{ __('admin::app.sales.invoices.qty-to-invoice') }}&quot;"/>
+                                                                <span class="control-error" v-if="errors.has('invoice[items][{{ $item->id }}]')" v-text="errors.first('invoice[items][{{ $item->id }}]')"></span>
+                                                                
                                                             </div>
                                                         </td>
                                                     </tr>

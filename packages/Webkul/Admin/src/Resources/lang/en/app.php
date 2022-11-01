@@ -629,6 +629,8 @@ return [
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
             'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [
@@ -1330,9 +1332,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'GO TO HOME',
-        'in-maitainace' => 'In Maintenance',
-        'right-back'    => 'Be Right Back',
+        'go-to-home'     => 'GO TO HOME',
+        'in-maintenance' => 'In Maintenance',
+        'right-back'     => 'Be Right Back',
 
         '404' => [
             'page-title' => '404 Page not found',
@@ -1577,6 +1579,9 @@ return [
             'all-locales'                           => 'All Locales',
             'all-customer-groups'                   => 'All Customer groups',
             'storefront'                            => 'Storefront',
+            'search-mode'                           => 'Search Mode',
+            'flat'                                  => 'Flat Table',
+            'elastic'                               => 'Elastic Search',
             'default-list-mode'                     => 'Default List Mode',
             'grid'                                  => 'Grid',
             'list'                                  => 'List',
@@ -1588,7 +1593,7 @@ return [
             'oldest-first'                          => 'Oldest First',
             'cheapest-first'                        => 'Cheapest First',
             'expensive-first'                       => 'Expensive First',
-            'comma-seperated'                       => 'Comma Seperated',
+            'comma-separated'                       => 'Comma Separated',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Rich Snippets',
@@ -1616,7 +1621,7 @@ return [
             'client-secret'                         => 'Client Secret',
             'client-secret-info'                    => 'Add your secret key here',
             'accepted-currencies'                   => 'Accepted currencies',
-            'accepted-currencies-info'              => 'Add currency code comma seperated e.g. USD,INR,...',
+            'accepted-currencies-info'              => 'Add currency code comma separated e.g. USD,INR,...',
             'buy-now-button-display'                => 'Allow customers to directly buy products',
             'show-search-input-field'               => 'Show Search Input Field',
             'allow-no-of-new-product-homepage'      => 'Allowed number of New Product in Homepage',

@@ -590,7 +590,9 @@ body {
 
     .content {
         .page-header {
-            display: inline-block;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
             width: 100%;
             padding: 16px 10px 15px 16px;
             position: sticky;
@@ -601,6 +603,7 @@ body {
 
             .page-title {
                 float: left;
+                align-items: center;
 
                 .back-link {
                     float: left;
@@ -620,8 +623,11 @@ body {
             }
 
             .page-action {
-                float: right;
                 margin-top: -5px;
+
+                button {
+                    margin-top: 10px;
+                }
 
                 * {
                     display: inline-block;
@@ -800,11 +806,23 @@ body {
     .switch-dark {
         width: 75%;
     }
+
+    .page-action {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
 @media only screen and (max-width: 768px) {
     h1 {
         font-size: 18px;
+    }
+
+    .page-action {
+        .btn.btn-primary {
+            margin-top: 20px;
+        }
     }
 
     .back-link {
@@ -859,12 +877,14 @@ body {
                         margin-bottom: 0;
                         margin-left: 0px;
                         padding: 0px;
-                        margin-top: 40px;
+                        margin-top: 25px;
                     }
 
                     .page-title {
                         float: left;
                         width: 100%;
+                        display: flex;
+                        grid-gap: 5px;
 
                         .back-link {
                             margin-top: 0px;
@@ -877,6 +897,9 @@ body {
                     .page-action {
                         right: 10px;
                         margin-top: 0px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
                     }
                 }
             }
@@ -911,15 +934,29 @@ body {
 
                 .page-action {
                     margin-top: -15px !important;
-                    float: right;
 
                     a {
                         margin-left: 0px !important;
+                        margin-top: 5px;
                     }
 
                     .export-import {
                         margin-top: 0px !important;
                         padding-right: 5px !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .content-container {
+        .content {
+            .page-header {
+                .page-action {
+                    a {
+                        margin-top: 20px;
                     }
                 }
             }
@@ -933,7 +970,7 @@ body {
             .page-header {
                 .page-action {
                     a {
-                        margin-top: 10px;
+                        margin-top: 20px;
                     }
                 }
             }

@@ -60,7 +60,7 @@ class CustomersInvoicesDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'created_at',
             'label'      => trans('admin::app.datagrid.invoice-date'),
-            'type'       => 'date',
+            'type'       => 'datetime',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,

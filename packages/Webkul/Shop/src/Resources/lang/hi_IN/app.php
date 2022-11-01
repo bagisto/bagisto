@@ -505,8 +505,8 @@ return [
             'continue-shopping'         => 'खरीदारी जारी रखें',
             'continue-registration'     => 'पंजीकरण जारी रखें',
             'proceed-to-checkout'       => 'चेक आउट करने के लिए आगे बढ़ें',
-            'remove'                    => 'निकालना',
-            'remove-link'               => 'निकालना',
+            'remove'                    => 'हटाना',
+            'remove-link'               => 'हटाना',
             'remove-all-items'          => 'सभी आइटम हटाएं',
             'confirm-action'            => 'इस क्रिया की पुष्टि करें?',
             'move-to-wishlist'          => 'इच्छा सूची की ओर बदें',
@@ -573,14 +573,6 @@ return [
             'shipping-method'     => 'जलयात्रा पद्धति का चयन करें',
             'payment-methods'     => 'भुगतान का तरीका चुनें',
             'payment-method'      => 'भुगतान विधि',
-            'payment-method-name' => [
-                'PayPal Smart Button' => 'पेपाल स्मार्ट बटन',
-                'PayPal'              => 'पेपाल',
-                'Cash On Delivery'    => 'डिलवरी पर नकदी',               
-                'Money Transfer'      => 'मनी ट्रांसफर',        
-                'PayPal Standard'     => 'पेपैल मानक'
-                
-            ],
             'summary'             => 'आदेश सारांश',
             'price'               => 'कीमत',
             'quantity'            => 'मात्रा',

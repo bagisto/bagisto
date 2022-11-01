@@ -9,19 +9,19 @@ return [
             'mass-update-status'      => 'آیا واقعاً می خواهید وضعیت انتخاب شده را به روز کنید :resource?',
             'delete'                  => 'آیا واقعاً می خواهید این عمل را انجام دهید؟',
             'edit'                    => 'آیا واقعاً می خواهید این را ویرایش کنید :resource?',
-            'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?',
+            'delete-category-product' => 'دسته های انتخاب شده شامل محصولات است. انجام این عمل باعث حذف محصولات مرتبط می شود. آیا واقعاً می خواهید این عمل را انجام دهید؟',
         ],
 
         'error' => [
-            'multiple-sort-keys-error'   => 'Fatal Error! Multiple sort keys found, please resolve the URL manually',
-            'multiple-search-keys-error' => 'Multiple search keys found, please resolve the URL manually',
-            'mapped-keys-error'          => 'Mapped key not found. Make sure you have given valid options.',
+            'multiple-sort-keys-error'   => 'خطای مرگبار! چندین کلید مرتب‌سازی پیدا شد، لطفاً URL را به صورت دستی حل کنید',
+            'multiple-search-keys-error' => 'چندین کلید جستجو پیدا شد، لطفاً URL را به صورت دستی حل کنید',
+            'mapped-keys-error'          => 'کلید نگاشت یافته یافت نشد. مطمئن شوید که گزینه های معتبری را ارائه کرده اید.',
         ],
 
         'zero-index'            => 'ستون های فهرست می توانند مقادیری بیشتر از صفر داشته باشند',
         'no-records'            => 'هیچ رکوردی یافت نشد',
         'filter-fields-missing' => 'برخی از زمینه های مورد نیاز خالی است ، لطفا ستون ، شرایط و ارزش را به درستی بررسی کنید',
-        'filter-exists'         => 'Filter value already exists.',
+        'filter-exists'         => 'مقدار فیلتر از قبل وجود دارد.',
         'click_on_action'       => 'آیا واقعاً می خواهید این عمل را انجام دهید؟',
         'search'                => 'جستجو در اینجا ...',
         'search-title'          => 'جستجو کردن',
@@ -57,6 +57,6 @@ return [
         'all-locales'           => 'همه افراد محلی',
         'all-customer-groups'   => 'همه گروه های مشتری',
         'records-found'         => 'رکورد(های) یافت شده',
-        'clear-all'             => 'Clear All'
+        'clear-all'             => 'همه را پاک کن'
     ],
 ];

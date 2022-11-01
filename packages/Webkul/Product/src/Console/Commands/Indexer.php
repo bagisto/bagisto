@@ -41,7 +41,7 @@ class Indexer extends Command
      */
     public function handle()
     {
-        $indexers = ['price', 'inventory'];
+        $indexers = ['inventory', 'price', 'elastic'];
 
         if (! empty($this->option('type'))) {
             $indexers = $this->option('type');
@@ -50,7 +50,7 @@ class Indexer extends Command
         $batch = Bus::batch([])->dispatch();
 
         while (true) {
-            $paginator = $this->productRepository->cursorPaginate(10);
+            $paginator = $this->productRepository->cursorPaginate(50);
 
             $batch->add(new IndexerJob($paginator->items(), $indexers));
 

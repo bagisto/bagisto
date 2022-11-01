@@ -105,7 +105,6 @@ return [
             'update-meta-data' => 'Aktualizuj metadane',
             'product-view-image' => 'Obraz widoku produktu',
             'advertisement-two' => 'Dwa obrazy reklamy',
-            'advertisement-one' => 'jeden obraz reklamy',
             'footer-middle-content' => 'Stopka treść środka',
             'advertisement-four' => 'Cztery obrazy reklamy',
             'advertisement-three' => 'Trzy obrazy reklamy',
@@ -309,7 +308,8 @@ return [
         'header' => [
             'done'      => 'Gotowe',
             'languages' => 'Języki',
-            'greeting'  => 'Witaj!, :customer !',
+            'greeting'  => 'Witaj!, :Customer !',
+            'greeting-for-guest' => 'Witaj gościu'
         ]
     ],
 ]
