@@ -1,5 +1,5 @@
 <?php
- 
+    
 return [
 
     /*
@@ -10,13 +10,13 @@ return [
     | All ACLs related to dashboard will be placed here.
     |
     */
-    [ 
+    [
         'key'   => 'dashboard',
         'name'  => 'admin::app.acl.dashboard',
         'route' => 'admin.dashboard.index',
         'sort'  => 1,
     ],
-
+  
     /*
     |--------------------------------------------------------------------------
     | Sales
