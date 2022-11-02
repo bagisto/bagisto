@@ -44,7 +44,8 @@
             }
 
             .table {
-                margin-top: 20px;
+                margin: 20px 6px 0px 6px;
+                border-spacing: 0px 0px 15px 0px;
             }
 
             .table table {
@@ -59,8 +60,8 @@
                 border-top: solid 1px #d3d3d3;
                 border-bottom: solid 1px #d3d3d3;
                 border-left: solid 1px #d3d3d3;
-                padding: 5px 10px;
-                background: #F4F4F4;
+                padding: 5px 12px;
+                background: #005aff0d;
             }
 
             .table thead th:last-child {
@@ -69,24 +70,20 @@
 
             .table tbody td {
                 padding: 5px 10px;
-                border-bottom: solid 1px #d3d3d3;
-                border-left: solid 1px #d3d3d3;
                 color: #3A3A3A;
                 vertical-align: middle;
+                border-bottom: solid 1px #d3d3d3;
             }
 
-            .table tbody td p {
+            .table tbody td, p {
                 margin: 0;
-            }
-
-            .table tbody td:last-child {
-                border-right: solid 1px #d3d3d3;
+                color: #000;
             }
 
             .sale-summary {
-                margin-top: 40px;
+                margin-top: 20px;
                 float: right;
-                background-color: blue;
+                background-color: #005aff0d;
             }
 
             .sale-summary tr td {
@@ -127,7 +124,21 @@
             }
 
             .table-header {
-                color: blue;
+                color: #0041FF;
+            }
+
+            .align-left {
+                text-align: left;
+            }
+
+            .invoice-text {
+                font-size: 40px; 
+                color: #fff; 
+                position: absolute; 
+                width: 100%; 
+                left: 0;
+                text-align: center;
+                top: -6px;
             }
         </style>
     </head>
@@ -136,14 +147,14 @@
         <div class="container">
             <div>
                 <div class="row header">
-                    <div class="col-12" style="background-color: #1000ff; padding: 0px 2px; width:100%; position: relative;">
+                    <div class="col-12" style="background-color: #3c41ff; padding: 0px 2px; width:100%; position: relative;">
                         @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
-                            <div class="image" style="display:inline-block; vertical-align: middle;">
+                            <div class="image" style="display:inline-block; vertical-align: middle; padding-top:8px">
                                 <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}" alt=""/>
                             </div>
                         @endif
-                        <div class="invoice_text" style="font-size: 40px; color: #fff; position: absolute; width: 100%; left: 0; text-align: center; top: calc(50% - 40px);">
-                            <span>INVOICE</span>
+                        <div class="invoice-text">
+                            <span>{{ strtoupper(__('admin::app.sales.invoices.invoice')) }}</span>
                         </div>
                     </div>
                 </div>
@@ -162,7 +173,7 @@
                                     <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
                                 </div>
 
-                                <div style="padding-top:20px">
+                                <div style="padding-top: 20px">
                                     <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
                                 </div>
 
@@ -188,7 +199,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6" style="padding-left:80px">
+                        <div class="col-6" style="padding-left: 80px">
                             <div class="row">
                                 <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }}: </span>
                                 <span class="value">#{{ $invoice->order->increment_id }}</span>
@@ -207,7 +218,7 @@
                             @endif
 
                             @if (core()->getConfigData('sales.shipping.origin.bank_details'))
-                                <div class="row" style="padding-top:20px">
+                                <div class="row" style="padding-top: 20px">
                                     <span class="merchant-details-title">
                                         {{ __('admin::app.admin.system.bank-details') }}:
                                     </span> 
@@ -224,9 +235,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="table-header" style="width: 50%; text-align:left">{{ __('shop::app.customer.account.order.view.bill-to') }}</th>
+                                <th class="table-header align-left" style="width: 50%;">{{ ucwords(trans('shop::app.customer.account.order.view.bill-to')) }}</th>
                                 @if ($invoice->order->shipping_address)
-                                    <th class="table-header" style="text-align:left">{{ __('shop::app.customer.account.order.view.ship-to') }}</th>
+                                    <th class="table-header align-left">{{ ucwords(trans('shop::app.customer.account.order.view.ship-to')) }}</th>
                                 @endif
                             </tr>
                         </thead>
@@ -268,10 +279,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="table-header" style="width: 50%; text-align:left">{{ __('shop::app.customer.account.order.view.payment-method') }}</th>
+                                <th class="table-header align-left" style="width: 50%;">{{ __('shop::app.customer.account.order.view.payment-method') }}</th>
 
                                 @if ($invoice->order->shipping_address)
-                                    <th class="table-header" style="text-align:left">{{ __('shop::app.customer.account.order.view.shipping-method') }}</th>
+                                    <th class="table-header align-left">{{ __('shop::app.customer.account.order.view.shipping-method') }}</th>
                                 @endif
                             </tr>
                         </thead>
@@ -349,7 +360,7 @@
                     </table>
                 </div>
 
-                <table class="sale-summary" style="background-color: #005aff0d">
+                <table class="sale-summary">
                     <tr>
                         <td>{{ __('shop::app.customer.account.order.view.subtotal') }}</td>
                         <td>-</td>
