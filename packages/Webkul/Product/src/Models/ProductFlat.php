@@ -3,14 +3,11 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Contracts\ProductFlat as ProductFlatContract;
 
 class ProductFlat extends Model implements ProductFlatContract
 {
-    use Searchable;
-
     /**
      * The table associated with the model.
      *
@@ -39,16 +36,6 @@ class ProductFlat extends Model implements ProductFlatContract
         'parent_id',
         'attribute_family_id',
     ];
-
-    /**
-     * Get the index name for the model.
-     *
-     * @return string
-     */
-    public function searchableAs()
-    {
-        return 'products_index';
-    }
 
     /**
      * Get an attribute from the model.

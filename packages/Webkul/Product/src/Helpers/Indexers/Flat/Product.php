@@ -46,21 +46,21 @@ class Product
     }
 
     /**
-     * Refresh product indexer indexes
+     * Refresh product flat indices
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function refresh($product)
     {
-        $this->updateCreate($product);
+        $this->updateOrCreate($product);
 
         if (! ProductType::hasVariants($product->type)) {
             return;
         }
 
         foreach ($product->variants()->get() as $variant) {
-            $this->updateCreate($variant, $product);
+            $this->updateOrCreate($variant, $product);
         }
     }
 
@@ -71,7 +71,7 @@ class Product
      * @param  \Webkul\Product\Contracts\Product  $parentProduct
      * @return void
      */
-    public function updateCreate($product, $parentProduct = null)
+    public function updateOrCreate($product, $parentProduct = null)
     {
         $familyAttributes = $this->getCachedFamilyAttributes($product);
 
