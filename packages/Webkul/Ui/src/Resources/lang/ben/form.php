@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'enter-attribute'  => 'Enter :attribute',
-    'select-attribute' => 'Select :attribute',
+    'enter-attribute'  => 'প্রবেশ করুন :attribute',
+    'select-attribute' => 'নির্বাচন করুন :attribute',
 ];
