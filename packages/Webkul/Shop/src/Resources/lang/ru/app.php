@@ -544,6 +544,7 @@ return [
             'specify-shipping-method'   => '«Укажите способ доставки».',
             'specify-payment-method'    => 'Укажите способ оплаты.',
             'rule-applied'              => 'Скидка была применена',
+            'paypal-payment-canceled'   => 'Платеж PayPal был отменен.',
         ],
 
         'onepage' => [
