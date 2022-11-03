@@ -61,28 +61,6 @@ class Product extends Model implements ProductContract
     public static $loadedAttributeValues = [];
 
     /**
-     * The `booted` method of the model.
-     *
-     * @return void
-     */
-    protected static function booted(): void
-    {
-        parent::boot();
-
-        static::deleting(function ($product) {
-            foreach ($product->product_flats as $productFlat) {
-                $productFlat->unsearchable();
-            }
-
-            foreach ($product->variants as $variant) {
-                foreach ($variant->product_flats as $productFlat) {
-                    $productFlat->unsearchable();
-                }
-            }
-        });
-    }
-
-    /**
      * Get the product flat entries that are associated with product.
      * May be one for each locale and each channel.
      *

@@ -1,0 +1,5 @@
+/**
+  * vue-cal v3.11.0
+  * (c) 2022 Antoni Andre <antoniandre.web@gmail.com>
+  * @license MIT
+  */

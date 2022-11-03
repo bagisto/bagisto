@@ -41,7 +41,7 @@ class Indexer extends Command
      */
     public function handle()
     {
-        $indexers = ['price', 'inventory'];
+        $indexers = ['inventory', 'price', 'elastic'];
 
         if (! empty($this->option('type'))) {
             $indexers = $this->option('type');
