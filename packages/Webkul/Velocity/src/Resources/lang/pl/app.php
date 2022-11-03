@@ -105,7 +105,6 @@ return [
             'update-meta-data' => 'Aktualizuj metadane',
             'product-view-image' => 'Obraz widoku produktu',
             'advertisement-two' => 'Dwa obrazy reklamy',
-            'advertisement-one' => 'jeden obraz reklamy',
             'footer-middle-content' => 'Stopka treść środka',
             'advertisement-four' => 'Cztery obrazy reklamy',
             'advertisement-three' => 'Trzy obrazy reklamy',
@@ -224,7 +223,7 @@ return [
             'login'             => 'Login',
             'become-user'       => 'Zostań użytkownikiem',
             'user-registration' => 'Rejestracja użytkownika',
-            'form-sginup-text'  => 'Cieszymy się, że jesteś z nami. Zarejestruj się by zostać członkiem',
+            'form-signup-text'  => 'Cieszymy się, że jesteś z nami. Zarejestruj się by zostać członkiem',
         ],
         'forget-password'   => [
             'login'                 => 'Login',

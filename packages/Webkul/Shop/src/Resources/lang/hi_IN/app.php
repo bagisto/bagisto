@@ -505,8 +505,8 @@ return [
             'continue-shopping'         => 'खरीदारी जारी रखें',
             'continue-registration'     => 'पंजीकरण जारी रखें',
             'proceed-to-checkout'       => 'चेक आउट करने के लिए आगे बढ़ें',
-            'remove'                    => 'निकालना',
-            'remove-link'               => 'निकालना',
+            'remove'                    => 'हटाना',
+            'remove-link'               => 'हटाना',
             'remove-all-items'          => 'सभी आइटम हटाएं',
             'confirm-action'            => 'इस क्रिया की पुष्टि करें?',
             'move-to-wishlist'          => 'इच्छा सूची की ओर बदें',
@@ -543,7 +543,8 @@ return [
             'check-billing-address'     => 'कृपया बिलिंग पता जांचें।',
             'specify-shipping-method'   => 'कृपया शिपिंग विधि निर्दिष्ट करें।',
             'specify-payment-method'    => 'कृपया भुगतान विधि निर्दिष्ट करें।',
-            'rule-applied'              => 'Cart rule applied',
+            'rule-applied'              => 'कार्ट नियम लागू',
+            'paypal-payment-canceled'   => 'पेपैल भुगतान रद्द कर दिया गया है।',
         ],
 
         'onepage' => [

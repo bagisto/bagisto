@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => 'अद्यतन',
             'product-view-image'        => 'उत्पाद देखें छवि',
             'advertisement-two'         => 'विज्ञापन दो छवियां',
-            'advertisement-one'         => 'विज्ञापन एक छवियाँ',
             'footer-middle-content'     => 'पाद मध्य सामग्री',
             'advertisement-four'        => 'विज्ञापन चार छवियां',
             'advertisement-three'       => 'विज्ञापन तीन छवियां',
@@ -246,7 +245,7 @@ return [
             'login'             => 'लॉग इन करें',
             'become-user'       => 'उपयोगकर्ता बनें',
             'user-registration' => 'उपयोगकर्ता पंजीकरण',
-            'form-sginup-text'  => 'यदि आप हमारे स्टोर में नए हैं, तो हम आपको सदस्य के रूप में पाकर प्रसन्न हैं।',
+            'form-signup-text'  => 'यदि आप हमारे स्टोर में नए हैं, तो हम आपको सदस्य के रूप में पाकर प्रसन्न हैं।',
         ],
         'forget-password'   => [
             'login'                 => 'लॉग इन करें',

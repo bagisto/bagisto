@@ -154,7 +154,7 @@ return [
             'forgot_pass' => '忘记密码?',
             'button_title' => '登入',
             'remember' => '登入',
-            'footer' => '© 版权 :year Webkul Software, 版权所有',
+            'footer' => '© 版权 :year 网络库 软件, 版权所有',
             'invalid-creds' => '请检查您的凭据并重试.',
             'verify-first' => '首先验证您的电子邮件帐户.',
             'not-activated' => '您的激活需要管理员批准',
@@ -183,8 +183,8 @@ return [
             'menu' => '菜单',
 
             'general' => [
-                'no' => 'No',
-                'yes' => 'Yes',
+                'no' => '不',
+                'yes' => '是的',
             ],
 
             'profile' => [
@@ -375,7 +375,7 @@ return [
                 'share-wishlist'       => '分享愿望清单',
                 'wishlist-sharing'     => '愿望清单分享',
                 'shared-link'          => '已共享链接',
-                'copy'                 => 'Copy',
+                'copy'                 => '复制',
                 'visibility'           => '可见度',
                 'public'               => '公开的',
                 'private'              => '私有的',
@@ -417,7 +417,7 @@ return [
                 ],
 
                 'delete-all' => [
-                    'title' => 'Delete All',
+                    'title' => '全部删除',
                     'confirmation-message' => '您确定要删除所有评论吗?',
                 ],
             ]
@@ -521,7 +521,7 @@ return [
                 'error_remove' => '没有要从购物车中删除的物品.',
                 'success' => '商品已成功添加到购物车.',
                 'success-remove' => '物品已成功从购物车中移除.',
-                'success-all-remove' => 'All items is successfully removed from the cart.',
+                'success-all-remove' => '所有商品均已成功从购物车中移除。',
                 'error-add' => '商品无法加入购物车, 请稍后再试.',
                 'inactive' => '商品处于非活动状态并已从购物车中移除.',
                 'inactive-add' => '不活跃商品无法添加到购物车.',
@@ -541,7 +541,8 @@ return [
             'check-billing-address'     => '请检查帐单地址.',
             'specify-shipping-method'   => '请指定送货方式.',
             'specify-payment-method'    => '请指定付款方式.',
-            'rule-applied'              => 'Cart rule applied',
+            'rule-applied'              => '已应用购物车规则',
+            'paypal-payment-canceled'   => 'Paypal 付款已被取消。',
         ],
 
         'onepage' => [
@@ -768,7 +769,7 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => '© 版权 :year Webkul Software, All rights reserved',
+        'copy-right' => '© 版权 :year 网络库 软件，保留所有权利',
     ],
 
     'response' => [

@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => 'עדכון',
             'product-view-image'        => 'תמונת תצוגת מוצר',
             'advertisement-two'         => 'מודעה שתי תמונות',
-            'advertisement-one'         => 'תמונות פרסומת אחת',
             'footer-middle-content'     => 'תוכן תחתונה באמצע',
             'advertisement-four'        => 'פרסומת ארבע תמונות',
             'advertisement-three'       => 'פרסומת שלוש תמונות',
@@ -247,7 +246,7 @@ return [
             'login'             => 'התחברות',
             'become-user'       => 'הפוך למשתמש',
             'user-registration' => 'רישום משתמש',
-            'form-sginup-text'  => 'אם אתה חדש בחנות שלנו, אנחנו שמחים לקבל אותך כחבר',
+            'form-signup-text'  => 'אם אתה חדש בחנות שלנו, אנחנו שמחים לקבל אותך כחבר',
         ],
         'forget-password'   => [
             'login'                 => 'התחברות',

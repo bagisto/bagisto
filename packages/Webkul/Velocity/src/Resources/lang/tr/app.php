@@ -105,7 +105,6 @@ return [
             'update-meta-data' => 'Meta Bilgisi Güncelle',
             'product-view-image' => 'Ürün Görselini Görüntüle',
             'advertisement-two' => 'İki Görselli Reklam',
-            'advertisement-one' => 'Rek Görsel Reklamı',
             'footer-middle-content' => 'Orta İçerikli Alt Kısım',
             'advertisement-four' => 'Dört Görselli Reklam',
             'advertisement-three' => 'Üç Görselli Reklam',
@@ -224,7 +223,7 @@ return [
             'login'             => 'Giriş Yap',
             'become-user'       => 'Kullanıcı Olun',
             'user-registration' => 'Kullanıcı Kaydı',
-            'form-sginup-text'  => 'Eğer mağazamızda yeniyseniz, sizleri üye olarak aramızda görmekten memnuniyet duyarız.',
+            'form-signup-text'  => 'Eğer mağazamızda yeniyseniz, sizleri üye olarak aramızda görmekten memnuniyet duyarız.',
         ],
         'forget-password'   => [
             'login'                 => 'Giriş Yap',

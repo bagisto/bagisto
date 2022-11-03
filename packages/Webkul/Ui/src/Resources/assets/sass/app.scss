@@ -528,6 +528,24 @@ h5 {
         width: 96vw;
         margin-right: 2vw;
     }
+
+    .table {
+        table {
+            thead {
+                tr {
+                    th {
+                        padding: 12px 4px !important;
+                    }
+                }
+            }
+
+            tbody {
+                td {
+                    padding: 4px !important;
+                }
+            }
+        }
+    }
 }
 
 .section {
@@ -601,7 +619,7 @@ h5 {
         }
 
         tbody td {
-            padding: 4px;
+            padding: 10px;
             border-bottom: solid 1px #d3d3d3;
             color: $font-color;
             vertical-align: top;
@@ -1621,3 +1639,18 @@ modal {
     top: 43%;
 }
 
+@media only screen and (max-width: 1040px) {
+    .grid-container {
+        .grid-top {
+            .datagrid-filters {
+                .filter-left {
+                    display: grid;
+                    grid-template-columns: 49.5% 49%;
+                    -moz-column-gap: 5px;
+                    column-gap: 5px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

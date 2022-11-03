@@ -108,7 +108,6 @@ return [
             'update-meta-data' => 'Aggiorna Meta Data',
             'product-view-image' => 'Immagine Vista Prodotto',
             'advertisement-two' => 'Advertisement Two Images',
-            'advertisement-one' => 'Advertisement One Images',
             'footer-middle-content' => 'Contenuto Footer Centrale',
             'advertisement-four' => 'Advertisement Four Images',
             'advertisement-three' => 'Advertisement Three Images',
@@ -228,7 +227,7 @@ return [
             'login' => 'Login',
             'become-user' => 'Diventa Utente',
             'user-registration' => 'Registrazione Utente',
-            'form-sginup-text' => 'Se sei nuovo nel nostro store, siamo lieti di averti come nuovo amico.',
+            'form-signup-text' => 'Se sei nuovo nel nostro store, siamo lieti di averti come nuovo amico.',
         ],
         'forget-password' => [
             'login' => 'Login',

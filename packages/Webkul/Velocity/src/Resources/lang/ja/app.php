@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => 'メタデータを更新',
             'product-view-image'        => '製品ビュー画像',
             'advertisement-two'         => '広告2つの画像',
-            'advertisement-one'         => '広告1つの画像',
             'footer-middle-content'     => 'フッターミドルコンテンツ',
             'advertisement-four'        => '広告4つの画像',
             'advertisement-three'       => '広告3つの画像',
@@ -227,7 +226,7 @@ return [
             'login'                 => 'ログインする',
             'become-user'           => 'ユーザーになる',
             'user-registration'     => 'ユーザー登録',
-            'form-sginup-text'      => 'あなたが私たちの店に初めている場合は、メンバーとして喜んでいます。',
+            'form-signup-text'      => 'あなたが私たちの店に初めている場合は、メンバーとして喜んでいます。',
         ],
         'forget-password'   => [
             'login'                 => 'ログインする',
@@ -311,7 +310,7 @@ return [
             'languages' => '言語',
             'greeting'  => 'ようこそ、:Customer !',
             'greeting-for-guest' => 'ようこそゲストさん'
-        
+
         ]
     ],
 ];

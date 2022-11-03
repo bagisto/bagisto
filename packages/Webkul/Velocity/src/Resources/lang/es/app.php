@@ -105,7 +105,6 @@ return [
             'update-meta-data'          => 'Actualizar Metadatos',
             'product-view-image'        => 'Imágen de Vista del Producto',
             'advertisement-two'         => 'Anuncio de Dos Imágenes',
-            'advertisement-one'         => 'Anuncio de Una Imágen',
             'footer-middle-content'     => 'Contenido Intermedio del Pié de Página',
             'advertisement-four'        => 'Anuncio de Cuatro Imágenes',
             'advertisement-three'       => 'Anuncio de Tres Imágenes',
@@ -226,7 +225,7 @@ return [
             'login'             => 'Iniciar Sesión',
             'become-user'       => 'Convertirse en Usuario',
             'user-registration' => 'Registro de Usuario',
-            'form-sginup-text'  => 'Si es nuevo en nuestra tienda, nos complace tenerlo como miembro.',
+            'form-signup-text'  => 'Si es nuevo en nuestra tienda, nos complace tenerlo como miembro.',
         ],
         'forget-password'   => [
             'login'                 => 'Iniciar Sesión',

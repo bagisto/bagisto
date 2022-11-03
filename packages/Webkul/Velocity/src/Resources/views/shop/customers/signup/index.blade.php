@@ -26,7 +26,7 @@
                     </h3>
 
                     <p class="fs16">
-                        {{ __('velocity::app.customer.signup-form.form-sginup-text')}}
+                        {{ __('velocity::app.customer.signup-form.form-signup-text')}}
                     </p>
 
                     {!! view_render_event('bagisto.shop.customers.signup.before') !!}

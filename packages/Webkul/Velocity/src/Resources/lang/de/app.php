@@ -105,7 +105,6 @@ return [
             'update-meta-data' => 'Metadaten aktualisieren',
             'product-view-image' => 'Produktansicht Bild',
             'advertisement-two' => 'Werbung Zwei Bilder',
-            'advertisement-one' => 'Werbung Eins Bilder',
             'footer-middle-content' => 'Fußzeile Mittlerer Inhalt',
             'advertisement-four' => 'Werbung Vier Bilder',
             'advertisement-three' => 'Werbung Drei Bilder',
@@ -226,7 +225,7 @@ return [
             'login'             => 'Anmelden',
             'become-user'       => 'Benutzer werden',
             'user-registration' => 'Benutzer Registration',
-            'form-sginup-text'  => 'Wenn Sie neu in unserem Shop sind, freuen wir uns, Sie als Mitglied zu begrüßen zu dürfen.',
+            'form-signup-text'  => 'Wenn Sie neu in unserem Shop sind, freuen wir uns, Sie als Mitglied zu begrüßen zu dürfen.',
         ],
         'forget-password'   => [
             'login'                 => 'Anmelden',

@@ -105,7 +105,6 @@ return [
             'update-meta-data' => 'Update Meta Data',
             'product-view-image' => 'Product View Image',
             'advertisement-two' => 'Advertisement Two Images',
-            'advertisement-one' => 'Advertisement One Images',
             'footer-middle-content' => 'Footer Middle Content',
             'advertisement-four' => 'Advertisement Four Images',
             'advertisement-three' => 'Advertisement Three Images',
@@ -226,7 +225,7 @@ return [
             'login' => 'Aanmelden',
             'become-user' => 'Klant worden',
             'user-registration' => 'User Registration',
-            'form-sginup-text' => 'Als u nieuw bent in onze winkel, willen we u graag als lid hebben.',
+            'form-signup-text' => 'Als u nieuw bent in onze winkel, willen we u graag als lid hebben.',
         ],
         'forget-password' => [
             'login' => 'Login',
