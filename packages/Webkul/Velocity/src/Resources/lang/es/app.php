@@ -225,7 +225,7 @@ return [
             'login'             => 'Iniciar Sesión',
             'become-user'       => 'Convertirse en Usuario',
             'user-registration' => 'Registro de Usuario',
-            'form-sginup-text'  => 'Si es nuevo en nuestra tienda, nos complace tenerlo como miembro.',
+            'form-signup-text'  => 'Si es nuevo en nuestra tienda, nos complace tenerlo como miembro.',
         ],
         'forget-password'   => [
             'login'                 => 'Iniciar Sesión',
