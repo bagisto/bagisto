@@ -541,6 +541,7 @@ return [
             'specify-shipping-method'   => 'කරුණාකර නැව්ගත කිරීමේ ක්‍රමය සඳහන් කරන්න.',
             'specify-payment-method'    => 'කරුණාකර ගෙවීමේ ක්‍රමය සඳහන් කරන්න.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
         ],
 
         'onepage' => [

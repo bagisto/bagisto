@@ -542,6 +542,7 @@ return [
             'specify-shipping-method'   => 'অনুগ্রহ করে শিপিং পদ্ধতি উল্লেখ করুন।',
             'specify-payment-method'    => 'অনুগ্রহ করে অর্থপ্রদানের পদ্ধতি উল্লেখ করুন।',
             'rule-applied'              => 'কার্ট নিয়ম প্রযোজ্য',
+            'paypal-payment-canceled'   => 'পেপ্যাল ​​পেমেন্ট বাতিল করা হয়েছে.',
         ],
 
         'onepage' => [

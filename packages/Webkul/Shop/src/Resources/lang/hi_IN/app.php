@@ -544,6 +544,7 @@ return [
             'specify-shipping-method'   => 'कृपया शिपिंग विधि निर्दिष्ट करें।',
             'specify-payment-method'    => 'कृपया भुगतान विधि निर्दिष्ट करें।',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
         ],
 
         'onepage' => [
