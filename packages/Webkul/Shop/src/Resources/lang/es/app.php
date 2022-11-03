@@ -543,6 +543,7 @@ return [
             'specify-shipping-method'   => 'Por favor especifique el metodo de envio.',
             'specify-payment-method'    => 'Por favor especifique el método de pago.',
             'rule-applied'              => 'Regla del carrito aplicada',
+            'paypal-payment-canceled'   => 'El pago de Paypal ha sido cancelado.',
         ],
 
         'onepage' => [
