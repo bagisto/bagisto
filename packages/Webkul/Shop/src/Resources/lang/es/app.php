@@ -85,7 +85,7 @@ return [
         'rating-reviews'            => 'Calificación y opiniones',
         'submit'                    => 'ENVIAR',
         'delete-all'                => 'Todas las opiniones se han eliminado con éxito',
-        'ratingreviews'             => ':rating calificaciones & :review opiniones',
+        'ratingreviews'             => ':rating calificaciones y :review opiniones',
         'star'                      => 'Inicio',
         'percentage'                => ':percentage %',
         'id-star'                   => 'inicio',
@@ -101,7 +101,7 @@ return [
             'already_added'         => 'Elemento ya agregado a la lista de comparación',
             'removed'               => 'Elemento eliminado con éxito de la lista de comparación',
             'removed-all'           => 'Todos los elementos eliminados correctamente de la lista de comparación',
-            'confirm-remove-all'    => 'Are you sure you want to delete all compare items?',
+            'confirm-remove-all'    => '¿Realmente quieres eliminar todos los elementos de comparación?',
             'empty-text'            => 'No tienes ningún artículo en tu lista de comparación',
             'product_image'         => 'Imagen del Producto',
             'actions'               => 'Acciones',
@@ -117,7 +117,7 @@ return [
             'title'                       => 'Regístrate',
             'firstname'                   => 'Nombre',
             'lastname'                    => 'Apellido',
-            'email'                       => 'Email',
+            'email'                       => 'Correo electrónico',
             'password'                    => 'Contraseña',
             'confirm_pass'                => 'Confirma la contraseña',
             'button_title'                => 'Registro',
@@ -153,12 +153,12 @@ return [
             'forgot_pass'         => '¿Has olvidado la contraseña?',
             'button_title'        => 'Entrar',
             'remember'            => 'Recuérdame',
-            'footer'              => '© Copyright :year Webkul Software, All rights reserved',
+            'footer'              => '© Derechos de autor :year Webkul Software, Todos los derechos reservados',
             'invalid-creds'       => 'Por favor, verifica tus credenciales e intenta de nuevo',
             'verify-first'        => 'Verifica tu correo electrónico primero',
-            'not-activated'       => 'La activación de la cuenta será aprovada por el administrador',
+            'not-activated'       => 'La activación de la cuenta será aprobada por el administrador',
             'resend-verification' => 'Se ha reenviado un correo de verificación',
-            'show-password'       => 'Montru Pasvorton',
+            'show-password'       => 'Mostrar Contraseña',
         ],
 
         'forgot-password' => [
@@ -179,11 +179,11 @@ return [
 
         'account' => [
             'dashboard' => 'Cliente - Editar perfil',
-            'menu'      => 'Menu',
+            'menu'      => 'Menú',
 
             'general' => [
                 'no'  => 'No',
-                'yes' => 'si',
+                'yes' => 'Sí',
             ],
 
             'profile' => [
@@ -202,7 +202,7 @@ return [
                 'gender'    => 'Género',
                 'other'     => 'Otro',
                 'male'      => 'Masculino',
-                'female'    => 'Hembra',
+                'female'    => 'Femenino',
                 'dob'       => 'Fecha de nacimiento',
                 'phone'     => 'Móvil',
                 'email'     => 'Correo electrónico',
@@ -223,13 +223,13 @@ return [
                     'title'          => 'Dirección',
                     'add'            => 'Añadir Dirección',
                     'edit'           => 'Editar',
-                    'empty'          => 'No tienes ninguna dirección guardada, por favor, crea una clicando en el enlace de abajo',
+                    'empty'          => 'No tienes ninguna dirección guardada, por favor, crea una dando clic en el enlace de abajo',
                     'create'         => 'Crear Dirección',
                     'delete'         => 'Eliminar',
                     'make-default'   => 'Elegir por defecto',
                     'default'        => 'Por defecto',
                     'contact'        => 'Contacto',
-                    'confirm-delete' => '¿Quieres eleminar esta dirección?',
+                    'confirm-delete' => '¿Quieres eliminar esta dirección?',
                     'default-delete' => 'La dirección por defecto no puede ser cambiada',
                     'enter-password' => 'Ingresa tu contraseña.',
                 ],
@@ -284,7 +284,7 @@ return [
                     'status'          => 'Estado',
                     'total'           => 'Total',
                     'order_number'    => 'Número de pedido',
-                    'processing'      => 'Porcesando',
+                    'processing'      => 'Procesando',
                     'completed'       => 'Completado',
                     'canceled'        => 'Cancelado',
                     'closed'          => 'Cerrado',
@@ -380,7 +380,7 @@ return [
                 'private'              => 'Privado',
                 'enable'               => 'Habilitar',
                 'disable'              => 'Deshabilitar',
-                'customer-name'        => ':name\'s lista de deseos compartida',
+                'customer-name'        => 'Lista de deseos compartida de :name',
                 'enable-wishlist-info' => 'Habilite el uso compartido de la lista de deseos para obtener el enlace.',
                 'update-message'       => 'La configuración de la lista de deseos compartida actualizado con éxito',
             ],
@@ -411,12 +411,12 @@ return [
                 ],
 
                 'delete' => [
-                    'confirmation-message' => '¿Seguro que quieres eliminar esta crítica?',
+                    'confirmation-message' => '¿Realmente quieres eliminar esta crítica?',
                 ],
 
                 'delete-all' => [
                     'title'                => 'Eliminar todos',
-                    'confirmation-message' => '¿Estás segura de que quieres eliminar todas las críticas?',
+                    'confirmation-message' => '¿Realmente quieres eliminar todas las críticas?',
                 ],
             ],
         ],
@@ -439,7 +439,7 @@ return [
         'description'              => 'Descripción',
         'specification'            => 'Especificaciones',
         'total-reviews'            => ':total Reseñas',
-        'total-rating'             => ':total_rating Calidifcaciones & :total_reviews Reseñas',
+        'total-rating'             => ':total_rating Calificaciones y :total_reviews Reseñas',
         'by'                       => 'Por :name',
         'up-sell-title'            => '¡Hemos encontrado otros productos que te pueden gustar!',
         'related-product-title'    => 'Productos relacionados',
@@ -449,7 +449,7 @@ return [
         'choose-option'            => 'Elige una opción',
         'sale'                     => 'En venta',
         'new'                      => 'Nuevo',
-        'empty'                    => 'No hay prodcutos disponibles en esta categoría',
+        'empty'                    => 'No hay productos disponibles en esta categoría',
         'add-to-cart'              => 'Añadir al carrito',
         'book-now'                 => 'reservar ahora',
         'buy-now'                  => 'Comprar ahora',
@@ -473,7 +473,7 @@ return [
         'none'                     => 'Ninguno',
         'available-for-order'      => 'Disponible para ordenar',
         'settings'                 => 'Ajustes',
-        'compare_options'          => 'Comparar Optiones',
+        'compare_options'          => 'Comparar Opciones',
         'wishlist-options'         => 'Opciones de Lista de Deseos',
         'offers'                   => 'Compre :qty por :price cada uno y ahorre :discount%',
         'tax-inclusive'            => 'Inclusivo de todos los impuestos',
@@ -502,7 +502,7 @@ return [
             'empty'                     => 'Tu carrito está vacía',
             'update-cart'               => 'Actualizar carrito',
             'continue-shopping'         => 'Seguir comprando',
-            'continue-registration'     => 'Daŭrigu Registradon',
+            'continue-registration'     => 'Continuar registro',
             'proceed-to-checkout'       => 'Continuar con el pago',
             'remove'                    => 'Eliminar',
             'remove-link'               => 'Eliminar',
@@ -523,7 +523,7 @@ return [
                 'error_remove'   => 'No hay artículos que eliminar en el carrito',
                 'success'        => 'El artículo se añadió al carrito',
                 'success-remove' => 'El artículo se eliminó del carrito',
-                'success-all-remove' => 'All items is successfully removed from the cart.',
+                'success-all-remove' => 'Todos los artículos se eliminaron con éxito del carrito.',
                 'error-add'      => 'El artículo no se puede añadir al carrito, inténtelo más tarde',
                 'inactive'       => 'Un artículo está inactivo y se eliminó del carrito.',
                 'inactive-add'   => 'El artículo inactivo no se puede agregar al carrito',
@@ -540,7 +540,7 @@ return [
             'inactive-account-message' =>  'Su cuenta ha estado inactiva.',
             'check-shipping-address'    => 'Por favor verifique la dirección de envío.',
             'check-billing-address'     => 'Por favor verifique la dirección de facturación.',
-            'specify-shipping-method'   => 'Por favor especifique el metodo de envio.',
+            'specify-shipping-method'   => 'Por favor especifique el método de envío.',
             'specify-payment-method'    => 'Por favor especifique el método de pago.',
             'rule-applied'              => 'Regla del carrito aplicada',
             'paypal-payment-canceled'   => 'El pago de Paypal ha sido cancelado.',
@@ -591,7 +591,7 @@ return [
             'back'                => 'Volver',
             'cash-desc'           => 'Pago en efectivo',
             'money-desc'          => 'Transferencia bancaria',
-            'paypal-desc'         => 'Paypal',
+            'paypal-desc'         => 'Paypal estándar',
             'free-desc'           => 'Envío gratuito',
             'flat-desc'           => 'Esta es una tarifa plana',
             'password'            => 'Contraseña',
@@ -728,7 +728,7 @@ return [
         'customer'        => [
             'new' => [
                 'dear'           => 'Estimado/a :customer_name',
-                'username-email' => 'Nombre de usuario/Email',
+                'username-email' => 'Nombre de usuario/Correo electrónico',
                 'subject'        => 'Nuevo registro de cliente',
                 'password'       => 'Contraseña',
                 'summary'        => 'Tu cuenta ha sido creada.
@@ -741,7 +741,7 @@ return [
                 'customer-registration' => 'Cliente registrado exitosamente',
                 'dear'                  => 'Estimado/a :customer_name',
                 'dear-admin'            => 'Estimado/a :admin_name',
-                'greeting'              => '¡Bienvenido y gracias por registrarte en Bassar!',
+                'greeting'              => '¡Bienvenido y gracias por registrarte con nosotros!',
                 'greeting-admin'        => 'Tiene un nuevo registro de cliente.',
                 'summary'               => 'Su cuenta se ha creado con éxito y puede iniciar sesión con su dirección de correo electrónico y su contraseña. Al iniciar sesión, podrá acceder a otros servicios, incluida la revisión de pedidos anteriores, listas de deseos y la edición de la información de su cuenta.',
                 'thanks'                => '¡Gracias!',
@@ -751,13 +751,13 @@ return [
                 'heading' => config('app.name') . ' - Verificación por correo',
                 'subject' => 'Verificación por correo',
                 'verify'  => 'Verifica tu cuenta',
-                'summary' => 'Este mensaje es para verificar que esta dirección de mail es tuya.
-                Por favor, hacer click al botón de abajo para verificar tu cuenta.',
+                'summary' => 'Este mensaje es para verificar que esta dirección de correo es tuya.
+                Por favor, da clic al botón de abajo para verificar tu cuenta.',
             ],
 
             'subscription' => [
-                'subject'     => 'Subscripción mail',
-                'greeting'    => ' Bienvenido a ' . config('app.name') . ' - Subscripción por mail',
+                'subject'     => 'Correo electrónico de suscripción',
+                'greeting'    => ' Bienvenido a ' . config('app.name') . ' - Suscripción por correo electrónico',
                 'unsubscribe' => 'Darse de baja',
                 'summary'     => 'Gracias por ponernos en tu bandeja de entrada. Ha pasado un tiempo desde que leyó el último correo electrónico de ' . config('app.name') . ', y no queremos abrumar su bandeja de entrada. Si ya no quiere recibir
                 las últimas noticias de marketing, haga clic en el botón de abajo.',
@@ -766,7 +766,7 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => '© Copyright :year Webkul Software, All rights reserved',
+        'copy-right' => '© Derechos de autor :year Webkul Software, Todos los derechos reservados',
     ],
 
     'response' => [

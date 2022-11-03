@@ -4,14 +4,14 @@ return [
     'admin' => [
         'system' => [
             'taxes' => [
-                'taxes'                        => 'Taxes',
-                'catalogue'                    => 'Catalog',
-                'pricing'                      => 'Pricing',
-                'tax-inclusive'                => 'Tax inclusive',
-                'default-location-calculation' => 'Default Location Calculation',
-                'default-country'              => 'Default Country',
-                'default-state'                => 'Default State',
-                'default-post-code'            => 'Default Post Code',
+                'taxes'                        => 'Impuestos',
+                'catalogue'                    => 'Catálogo',
+                'pricing'                      => 'Fijación de precios',
+                'tax-inclusive'                => 'Inclusivo de todos los impuestos',
+                'default-location-calculation' => 'Cálculo de ubicación predeterminada',
+                'default-country'              => 'País predeterminado',
+                'default-state'                => 'Estado predeterminado',
+                'default-post-code'            => 'Código postal predeterminado',
             ],
         ]
     ]
