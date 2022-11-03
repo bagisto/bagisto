@@ -246,7 +246,7 @@ return [
             'login'             => 'התחברות',
             'become-user'       => 'הפוך למשתמש',
             'user-registration' => 'רישום משתמש',
-            'form-sginup-text'  => 'אם אתה חדש בחנות שלנו, אנחנו שמחים לקבל אותך כחבר',
+            'form-signup-text'  => 'אם אתה חדש בחנות שלנו, אנחנו שמחים לקבל אותך כחבר',
         ],
         'forget-password'   => [
             'login'                 => 'התחברות',

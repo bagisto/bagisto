@@ -543,6 +543,7 @@ return [
             'specify-shipping-method'   => 'الرجاء تحديد طريقة الشحن.',
             'specify-payment-method'    => 'الرجاء تحديد طريقة الدفع.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'تم إلغاء دفع Paypal.',
         ],
 
         'onepage' => [
