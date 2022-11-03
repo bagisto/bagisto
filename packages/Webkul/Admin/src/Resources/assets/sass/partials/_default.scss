@@ -862,12 +862,6 @@ body {
         font-size: 18px;
     }
 
-    .page-action {
-        .btn.btn-primary {
-            margin-top: 20px;
-        }
-    }
-
     .back-link {
         margin-top: -2px !important;
     }
@@ -1019,12 +1013,6 @@ body {
                     margin-left: 20px;
                     margin-top: 24px;
                 }
-
-                .page-action {
-                    a {
-                        margin-top: 20px;
-                    }
-                }
             }
         }
     }
@@ -1040,12 +1028,6 @@ body {
                     margin-bottom: 0;
                     margin-left: 20px;
                     margin-top: 24px;
-                }
-
-                .page-action {
-                    a {
-                        margin-top: 20px;
-                    }
                 }
             }
         }
@@ -1132,4 +1114,8 @@ body {
             }
         }
     }
+}
+
+.export-import {
+    margin-top: -15px !important;
 }
