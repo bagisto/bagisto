@@ -45,7 +45,7 @@ Bagisto follows PSR-2 for coding standards and PSR-4 as of Laravel for autoloadi
 **PHPDoc:**
 
 Below is an example of a valid Bagisto doc block. Note that the @param attribute is followed by two spaces, the argument type, two more spaces, and finally, the variable name:
-
+  ``` php
     /**
     * Register a service with CoreServiceProvider.
     *
@@ -59,3 +59,4 @@ Below is an example of a valid Bagisto doc block. Note that the @param attribute
     {
         //
     }
+  ```
