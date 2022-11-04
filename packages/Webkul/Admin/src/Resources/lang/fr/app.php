@@ -683,7 +683,6 @@ return [
             'image'                       => 'Image',
             'file'                        => 'Déposer',
             'checkbox'                    => 'Case à cocher',
-            'use_in_flat'                 => 'Créer dans la table plate du produit',
             'is_comparable'               => 'L\'attribut est comparable',
             'default_null_option'         => 'Créer une option vide par défaut',
             'validation-messages'         => [

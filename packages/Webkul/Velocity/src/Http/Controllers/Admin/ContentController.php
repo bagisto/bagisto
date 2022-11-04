@@ -2,7 +2,6 @@
 
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Velocity\DataGrids\ContentDataGrid;
 use Webkul\Velocity\Repositories\ContentRepository;
 
@@ -11,14 +10,10 @@ class ContentController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Velocity\Repositories\ContentRepository  $contentRepository
      * @return void
      */
-    public function __construct(
-        protected ProductRepository $productRepository,
-        protected ContentRepository $contentRepository
-    )
+    public function __construct(protected ContentRepository $contentRepository)
     {
         $this->_config = request('_config');
     }
@@ -35,28 +30,6 @@ class ContentController extends Controller
         }
 
         return view($this->_config['view']);
-    }
-
-    /**
-     * Search for catalog.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function search()
-    {
-        $results = [];
-
-        $params = request()->input();
-
-        if (! empty($params['query'])) {
-            foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
-                $results[] = [
-                    'id'   => $row->product_id,
-                    'name' => $row->name,
-                ];
-            }
-        }
-        return response()->json($results);
     }
 
     /**
@@ -174,6 +147,7 @@ class ContentController extends Controller
     public function massUpdate()
     {
         $contentIds = explode(',', request()->input('indexes'));
+        
         $updateOption = request()->input('update-options');
 
         foreach ($contentIds as $contentId) {

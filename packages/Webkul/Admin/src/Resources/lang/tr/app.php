@@ -670,7 +670,6 @@ return [
             'image'                       => 'Görsel',
             'file'                        => 'Dosya',
             'checkbox'                    => 'Onay Kutusu',
-            'use_in_flat'                 => 'Ürün Tablosu Oluştur',
             'is_comparable'               => 'Nitelik kıyaslanabilir',
             'default_null_option'         => 'Varsayılan boş seçenek oluştur',
             'validation-messages'         => [

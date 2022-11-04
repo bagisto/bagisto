@@ -668,7 +668,6 @@ return [
             'image'                       => 'Image',
             'file'                        => 'File',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'Crea in tabella Product flat',
             'is_comparable'               => "L'attributo è comparabile",
             'default_null_option'         => 'Crea opzione predefinita vuota',
             'validation-messages'         => [

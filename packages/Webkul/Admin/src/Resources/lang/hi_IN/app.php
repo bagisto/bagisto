@@ -680,7 +680,6 @@ return [
             'image'                       => 'छवि',
             'file'                        => 'फाइल',
             'checkbox'                    => 'चेकबॉक्स',
-            'use_in_flat'                 => 'उत्पाद फ्लैट तालिका में बनाएँ',
             'is_comparable'               => 'विशेषता तुलनीय है',
             'default_null_option'         => 'डिफ़ॉल्ट खाली विकल्प बनाएं',
             'validation-messages'         => [

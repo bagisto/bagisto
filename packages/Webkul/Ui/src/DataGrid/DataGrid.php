@@ -317,7 +317,7 @@ abstract class DataGrid
     }
 
     /**
-     * Preprare mass actions.
+     * Prepare mass actions.
      *
      * @return void
      */

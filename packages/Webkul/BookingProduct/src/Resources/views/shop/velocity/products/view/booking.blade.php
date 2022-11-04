@@ -1,6 +1,6 @@
 @if ($product->type == 'booking')
 
-    @if ($bookingProduct = app('\Webkul\BookingProduct\Repositories\BookingProductRepository')->findOneByField('product_id', $product->product_id))
+    @if ($bookingProduct = app('\Webkul\BookingProduct\Repositories\BookingProductRepository')->findOneByField('product_id', $product->id))
 
         @push('css')
             <link rel="stylesheet" href="{{ bagisto_asset('css/velocity-booking.css') }}">

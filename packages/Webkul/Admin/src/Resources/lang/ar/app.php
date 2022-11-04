@@ -680,7 +680,6 @@ return [
             'image'                       => 'صورة',
             'file'                        => 'ملف',
             'checkbox'                    => 'خانة اختيار',
-            'use_in_flat'                 => 'إنشاء في جدول المنتجات المسطحة',
             'is_comparable'               => 'السمة قابلة للمقارنة',
             'default_null_option'         => 'إنشاء خيار فارغ افتراضي',
             'validation-messages'         => [

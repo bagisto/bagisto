@@ -683,7 +683,6 @@ return [
             'image'                       => 'ছবি',
             'file'                        => 'ফাইল',
             'checkbox'                    => 'চেকবক্স',
-            'use_in_flat'                 => 'পণ্য ফ্ল্যাট টেবিল তৈরি করুন',
             'is_comparable'               => 'বৈশিষ্ট্য তুলনীয়',
             'default_null_option'         => 'ডিফল্ট খালি বিকল্প তৈরি করুন',
             'validation-messages'         => [

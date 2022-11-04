@@ -4,7 +4,7 @@ return [
         'actions' => '行动',
         'id'      => '索引列的值仅大于零',
 
-        'massaction' => [
+        'mass-action' => [
             'mass-delete-confirm'     => '你真的要删除这些选定的 :resource?',
             'mass-update-status'      => '你真的要更新这些选定的状态吗 :resource?',
             'delete'                  => '你真的要执行这个动作吗?',
