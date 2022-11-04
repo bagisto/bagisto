@@ -287,6 +287,7 @@ class ProductRepository extends Repository
 
             #Filter the filterable attributes
             $attributes = $filterableAttributes->whereNotIn('code', [
+                'price',
                 'name',
                 'status',
                 'visible_individually',
