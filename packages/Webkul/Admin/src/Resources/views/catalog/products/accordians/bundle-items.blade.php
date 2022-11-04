@@ -15,9 +15,6 @@
 @push('scripts')
     <script type="text/x-template" id="bundle-option-list-template">
         <div class="">
-            <button type="button" class="btn btn-md btn-primary" @click="addOption" style="margin-bottom: 20px;">
-                {{ __('admin::app.catalog.products.add-option-btn-title') }}
-            </button>
 
             <bundle-option-item
                 v-for='(option, index) in options'
@@ -26,6 +23,11 @@
                 :index="index"
                 @onRemoveOption="removeOption($event)"
             ></bundle-option-item>
+
+            <button type="button" class="btn btn-md btn-primary" @click="addOption" style="margin-top: 20px;">
+                {{ __('admin::app.catalog.products.add-option-btn-title') }}
+            </button>
+
         </div>
     </script>
 
