@@ -76,6 +76,7 @@
 
         @php
             $defaultVariant = $product->getTypeInstance()->getDefaultVariant();
+            
             $config = $configurableOptionHelper->getConfigurationConfig($product);
         @endphp
 

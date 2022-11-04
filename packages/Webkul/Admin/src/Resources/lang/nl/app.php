@@ -664,7 +664,6 @@ return [
             'image'                       => 'Afbeelding',
             'file'                        => 'Bestand',
             'checkbox'                    => 'Selectievakje',
-            'use_in_flat'                 => 'Creëer in Product Flat Table',
             'is_comparable'               => 'Attribuut is vergelijkbaar ',
             'default_null_option'         => 'Standaard lege optie maken',
             'validation-messages'         => [

@@ -4,7 +4,7 @@ return [
         'actions' => 'Comportamiento',
         'id'      => 'Las columnas de índice solo tienen un valor mayor que cero',
 
-        'massaction' => [
+        'mass-action' => [
             'mass-delete-confirm'     => '¿Realmente desea eliminar estos elementos seleccionados :resource?',
             'mass-update-status'      => '¿Realmente desea actualizar el estado de estos elementos seleccionados :resource?',
             'delete'                  => '¿De verdad quieres eliminar esto :resource?',

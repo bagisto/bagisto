@@ -86,7 +86,7 @@
                     <div class="form-container">
                         @csrf()
 
-                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                         <div class="row">
                             {{-- product-gallery --}}
@@ -218,7 +218,7 @@
             id="product-form"
             @click="onSubmit($event)"
             @submit.enter.prevent="onSubmit($event)"
-            action="{{ route('shop.cart.add', $product->product_id) }}"
+            action="{{ route('shop.cart.add', $product->id) }}"
         >
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
 

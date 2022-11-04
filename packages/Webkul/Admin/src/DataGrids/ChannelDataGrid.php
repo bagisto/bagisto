@@ -104,7 +104,7 @@ class ChannelDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.channels.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
             'icon'         => 'icon trash-icon',
         ]);
     }

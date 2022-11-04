@@ -64,7 +64,6 @@ class AttributeFactory extends Factory
             'is_user_defined'     => true,
             'is_visible_on_front' => true,
             'swatch_type'         => null,
-            'use_in_flat'         => true,
         ];
     }
 

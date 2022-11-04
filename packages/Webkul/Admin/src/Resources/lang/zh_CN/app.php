@@ -665,7 +665,6 @@ return [
             'image'                       => '图片',
             'file'                        => '文件',
             'checkbox'                    => '多选框',
-            'use_in_flat'                 => '在产品平面表中创建',
             'is_comparable'               => '属性可比',
             'default_null_option'         => '创建默认空选项',
             'validation-messages'         => [

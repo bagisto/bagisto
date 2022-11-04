@@ -670,7 +670,6 @@ return [
             'image'                       => 'Bild',
             'file'                        => 'Datei',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'In Produkt Flat Tabelle erstellen',
             'is_comparable'               => 'Attribut ist vergleichbar',
             'default_null_option'         => 'Erstellen Sie eine leere Standardoption',
             'validation-messages'         => [

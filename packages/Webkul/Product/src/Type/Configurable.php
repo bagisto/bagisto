@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
-use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Helpers\Indexers\Price\Configurable as ConfigurableIndexer;
 
 class Configurable extends AbstractType
@@ -79,11 +78,6 @@ class Configurable extends AbstractType
      * @var boolean
      */
     protected $hasVariants = true;
-
-    /**
-     * Product options.
-     */
-    protected $productOptions = [];
 
     /**
      * Get default variant.
@@ -716,19 +710,6 @@ class Configurable extends AbstractType
         $item->save();
 
         return $result;
-    }
-
-    /**
-     * Get product options.
-     *
-     * @param  string  $product
-     * @return array
-     */
-    public function getProductOptions($product = '')
-    {
-        $options = app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($product);
-
-        return $options;
     }
 
     /**
