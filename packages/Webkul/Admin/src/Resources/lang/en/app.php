@@ -86,7 +86,7 @@ return [
         'cms'                      => 'CMS',
         'transactions'             => 'Transactions',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
-        'mode'                     => 'Mode',
+        'mode'                     => 'Dark Mode',
     ],
 
     'acl' => [

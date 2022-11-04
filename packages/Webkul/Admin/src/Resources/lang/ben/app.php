@@ -86,7 +86,7 @@ return [
         'cms'                      => 'সিএমএস',
         'transactions'             => 'লেনদেন',
         'newsletter-subscriptions' => 'নিউজলেটার সদস্যতা',
-        'mode'                     => 'মোড',
+        'mode'                     => 'ডার্ক মোড',
     ],
 
     'acl' => [

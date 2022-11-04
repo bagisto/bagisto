@@ -86,7 +86,7 @@ return [
         'cms'                      => 'सीएमएस',
         'transactions'             => 'लेनदेन',
         'newsletter-subscriptions' => 'न्यूज़लेटर सदस्यता',
-        'mode'                     => 'तरीका',
+        'mode'                     => 'डार्क मोड',
     ],
 
     'acl' => [

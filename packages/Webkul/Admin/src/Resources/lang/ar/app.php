@@ -85,7 +85,7 @@ return [
         'discount'                 => 'خصم',
         'cms'                      => 'CMS',
         'transactions'             => 'المعاملات',
-        'mode'                     => 'الوضع',
+        'mode'                     => 'الوضع الداكن',
         'account-title'            => 'حساب',
     ],
 

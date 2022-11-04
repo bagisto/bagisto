@@ -85,7 +85,7 @@ return [
         'cms'                      => 'CMS',
         'transactions'             => 'Transactions',
         'newsletter-subscriptions' => 'Abonnement à la Newsletter',
-        'mode'                     => 'mode',
+        'mode'                     => 'Mode sombre',
         'account-title'            => 'Compte',
     ],
 
