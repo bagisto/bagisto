@@ -514,6 +514,6 @@ class ProductRepository extends Repository
             ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
             ->where('product_price_indices.customer_group_id', $customerGroup->id)
             ->where('product_categories.category_id', $categoryId)
-            ->max('max_price');
+            ->max('min_price');
     }
 }
