@@ -589,6 +589,7 @@ return [
             'related-products'              => 'संबंधित उत्पाद',
             'product-search-hint'           => 'उत्पाद का नाम लिखना प्रारंभ करें',
             'no-result-found'               => 'उत्पाद समान नाम से नहीं मिले।',
+            'no-product-added'              => 'कोई उत्पाद नहीं जोड़ा गया',
             'searching'                     => 'खोज कर ...',
             'grouped-products'              => 'समूहीकृत उत्पाद',
             'search-products'               => 'उत्पादों को खोजना',

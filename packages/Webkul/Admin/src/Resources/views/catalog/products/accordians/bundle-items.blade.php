@@ -205,7 +205,7 @@
     <script type="text/x-template" id="no-product-added-template">
         <tr>
             <td colspan="10">
-                <p style="text-align:center;">No Product Found </p>
+                <p style="text-align:center;">{{ __('admin::app.catalog.products.no-product-added') }} </p>
             </td>
         </tr>
     </script>
