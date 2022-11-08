@@ -204,7 +204,9 @@
 
     <script type="text/x-template" id="no-product-added-template">
         <tr>
-            <p style="text-align:center;">No Product Found </p>
+            <td colspan="10">
+                <p style="text-align:center;">No Product Found </p>
+            </td>
         </tr>
     </script>
 
