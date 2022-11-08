@@ -148,6 +148,9 @@
                             @onCheckProduct="checkProduct($event)">
                         </bundle-product-item>
 
+                        <no-product-added v-if="!bundle_option_products.length">
+                        </no-product-added>
+
                     </tbody>
                 </table>
             </div>
@@ -196,6 +199,12 @@
             <td class="actions">
                 <i class="icon remove-icon" @click="removeProduct()"></i>
             </td>
+        </tr>
+    </script>
+
+    <script type="text/x-template" id="no-product-added-template">
+        <tr>
+            <p style="text-align:center;">No Product Found </p>
         </tr>
     </script>
 
@@ -379,6 +388,10 @@
                     this.$emit('onCheckProduct', this.product.product.id)
                 }
             }
+        });
+
+        Vue.component('no-product-added', {
+            template: '#no-product-added-template',
         });
     </script>
 @endpush
