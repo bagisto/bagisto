@@ -135,7 +135,7 @@
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody style="border-bottom: 1px solid #e8e8e8;">
 
                         <bundle-product-item
                             v-for='(product, index) in bundle_option_products'
