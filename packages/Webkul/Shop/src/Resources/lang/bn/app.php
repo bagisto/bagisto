@@ -180,7 +180,7 @@ return [
         ],
 
         'account' => [
-            'dashboard' => 'জীবন বৃত্তান্ত সম্পাদনা',
+            'dashboard' => 'প্রোফাইল সম্পাদনা',
             'menu'      => 'তালিকা',
 
             'general' => [
@@ -271,7 +271,7 @@ return [
                 'delete' => [
                     'success'        => 'ঠিকানা সফলভাবে মুছে ফেলা হয়েছে',
                     'failure'        => 'ঠিকানা মুছে ফেলা যাবে না',
-                    'wrong-password' => 'ভুল গোপন নম্বর !',
+                    'wrong-password' => 'ভুল পাসওয়ার্ড!',
                 ],
 
                 'default-address' => 'ডিফল্ট ঠিকানা',
@@ -296,12 +296,12 @@ return [
                 ],
 
                 'view' => [
-                    'page-tile'           => 'অর্ডার #:order_id',
+                    'page-tile'           => 'অর্ডার নং #:order_id',
                     'info'                => 'তথ্য',
                     'placed-on'           => 'স্থাপিত',
                     'products-ordered'    => 'প্রোডাক্ট অর্ডার করা হয়েছে',
                     'invoices'            => 'চালান',
-                    'shipments'           => 'চালনা',
+                    'shipments'           => 'শিপিং',
                     'SKU'                 => 'SKU',
                     'product-name'        => 'নাম',
                     'qty'                 => 'পরিমাণ',
