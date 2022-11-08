@@ -58,7 +58,7 @@ return [
         'products'                 => 'Products',
         'categories'               => 'Categories',
         'attributes'               => 'Attributes',
-        'attribute-families'       => 'Attribute Families',
+        'attribute-families'       => 'Attribute Families ',
         'customers'                => 'Customers',
         'groups'                   => 'Groups',
         'reviews'                  => 'Reviews',
