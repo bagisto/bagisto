@@ -20,7 +20,7 @@
                         method="POST"
                         class="review-form"
                         @submit.prevent="onSubmit"
-                        action="{{ route('shop.reviews.store', $product->product_id ) }}"
+                        action="{{ route('shop.reviews.store', $product->id ) }}"
                         enctype="multipart/form-data">
 
                         @csrf

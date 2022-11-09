@@ -340,25 +340,27 @@ class ProductController extends Controller
     /**
      * Result of search product.
      *
-     * @return \Illuminate\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function productLinkSearch()
     {
-        if (request()->ajax()) {
-            $results = [];
+        $results = [];
 
-            foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
-                $results[] = [
-                    'id'   => $row->product_id,
-                    'sku'  => $row->sku,
-                    'name' => $row->name,
-                ];
-            }
+        request()->query->add([
+            'name'  => request('query'),
+            'sort'  => 'created_at',
+            'order' => 'desc',
+        ]);
 
-            return response()->json($results);
-        } else {
-            return view($this->_config['view']);
+        foreach ($this->productRepository->getAll() as $product) {
+            $results[] = [
+                'id'   => $product->id,
+                'sku'  => $product->sku,
+                'name' => $product->name,
+            ];
         }
+
+        return response()->json($results);
     }
 
     /**
@@ -385,8 +387,16 @@ class ProductController extends Controller
      */
     public function searchSimpleProducts()
     {
-        return response()->json(
-            $this->productRepository->searchSimpleProducts(request()->input('query'))
-        );
+        request()->query->add([
+            'name'  => request('query'),
+            'type'  => 'simple',
+            'sort'  => 'created_at',
+            'order' => 'desc',
+            'limit' => 50,
+        ]);
+
+        $products = $this->productRepository->getAll();
+
+        return response()->json($products);
     }
 }

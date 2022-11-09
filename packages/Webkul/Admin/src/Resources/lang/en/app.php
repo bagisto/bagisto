@@ -683,7 +683,6 @@ return [
             'image'                       => 'Image',
             'file'                        => 'File',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'Create in Product Flat Table',
             'is_comparable'               => 'Attribute is comparable',
             'default_null_option'         => 'Create default empty option',
             'validation-messages'         => [

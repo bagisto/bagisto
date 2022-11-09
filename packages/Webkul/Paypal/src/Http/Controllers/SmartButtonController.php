@@ -274,22 +274,22 @@ class SmartButtonController extends Controller
             $cart->haveStockableItems()
             && ! $cart->shipping_address
         ) {
-            throw new \Exception(trans('Please check shipping address.'));
+            throw new \Exception(trans('shop::app.checkout.cart.check-shipping-address'));
         }
 
         if (! $cart->billing_address) {
-            throw new \Exception(trans('Please check billing address.'));
+            throw new \Exception(trans('shop::app.checkout.cart.check-billing-address'));
         }
 
         if (
             $cart->haveStockableItems()
             && ! $cart->selected_shipping_rate
         ) {
-            throw new \Exception(trans('Please specify shipping method.'));
+            throw new \Exception(trans('shop::app.checkout.cart.specify-shipping-method'));
         }
 
         if (! $cart->payment) {
-            throw new \Exception(trans('Please specify payment method.'));
+            throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
         }
     }
 }

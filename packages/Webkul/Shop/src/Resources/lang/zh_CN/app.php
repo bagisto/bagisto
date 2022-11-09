@@ -542,6 +542,7 @@ return [
             'specify-shipping-method'   => '请指定送货方式.',
             'specify-payment-method'    => '请指定付款方式.',
             'rule-applied'              => '已应用购物车规则',
+            'paypal-payment-canceled'   => 'Paypal 付款已被取消。',
         ],
 
         'onepage' => [

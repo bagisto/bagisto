@@ -663,7 +663,6 @@ return [
             'image'                       => 'Imagem',
             'file'                        => 'Arquivo',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'Criar na tabela plana do produto',
             'is_comparable'               => 'O atributo é comparável',
             'default_null_option'         => 'Criar opção vazia padrão',
             'validation-messages'         => [
