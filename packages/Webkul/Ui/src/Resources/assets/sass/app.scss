@@ -1656,12 +1656,14 @@ modal {
 }
 
 @media only screen and (min-width: 280px) and (max-width: 420px) {
-    .table{
-        .control-group {
-            &.date,
-            &.datetime {
-                &::after {
-                    top: 25px !important;
+    .appointment-booking-section {
+        .table{
+            .control-group {
+                &.date,
+                &.datetime {
+                    &::after {
+                        top: 25px !important;
+                    }
                 }
             }
         }
