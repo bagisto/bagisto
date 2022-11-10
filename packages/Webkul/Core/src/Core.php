@@ -660,6 +660,7 @@ class Core
 
         $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
+        $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal??2);
         if (! $currency) {
             return $formatter->formatCurrency($price, $currencyCode);
         }
