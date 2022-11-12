@@ -141,7 +141,7 @@ return [
     ],
 
     'dashboard' => [
-        'title'                     => 'Dashboard',
+        'title'                     => 'Dashboard Panel',
         'from'                      => 'From',
         'to'                        => 'To',
         'total-customers'           => 'Total Customers',
