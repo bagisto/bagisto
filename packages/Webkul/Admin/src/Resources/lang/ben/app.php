@@ -834,6 +834,7 @@ return [
             'code'              => 'কোড',
             'name'              => 'নাম',
             'symbol'            => 'প্রতীক',
+            'decimal'            => 'Decimal',
             'create-success'    => 'মুদ্রা সফলভাবে তৈরি করা হয়েছে।',
             'update-success'    => 'মুদ্রা সফলভাবে আপডেট করা হয়েছে।',
             'delete-success'    => 'মুদ্রা সফলভাবে মুছে ফেলা হয়েছে.',

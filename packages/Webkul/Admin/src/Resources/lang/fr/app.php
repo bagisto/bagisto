@@ -835,6 +835,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Nom',
             'symbol'            => 'symbole',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Devise créée avec succès.',
             'update-success'    => 'Devise mise à jour avec succès.',
             'delete-success'    => 'Devise supprimée avec succès.',

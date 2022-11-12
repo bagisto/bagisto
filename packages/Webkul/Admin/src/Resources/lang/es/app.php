@@ -829,6 +829,7 @@ return [
             'code'              => 'Código',
             'name'              => 'Nombre',
             'symbol'            => 'Símbolo',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Moneda creada con éxito.',
             'update-success'    => 'Moneda actualizada con éxito.',
             'delete-success'    => 'Moneda borrada con éxito.',

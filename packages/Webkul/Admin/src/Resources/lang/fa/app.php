@@ -813,6 +813,7 @@ return [
             'code'              => 'کد',
             'name'              => 'نام',
             'symbol'            => 'نماد',
+            'decimal'            => 'Decimal',
             'create-success'    => 'ارز باموففقیت ایجاد شد.',
             'update-success'    => 'ارز باموففقیت به روز شد.',
             'delete-success'    => 'ارز باموففقیت حذف شد.',

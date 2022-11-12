@@ -815,6 +815,7 @@ return [
             'code'              => 'Kod',
             'name'              => 'Nazwa',
             'symbol'            => 'Symbol',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Waluta utworzona pomyślnie.',
             'update-success'    => 'Waluta zaktualizowana pomyślnie.',
             'delete-success'    => 'Waluta została pomyślnie usunięta.',

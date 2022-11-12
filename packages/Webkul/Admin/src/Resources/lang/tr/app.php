@@ -818,6 +818,7 @@ return [
             'code'              => 'Birim Kodu',
             'name'              => 'Birim Adı',
             'symbol'            => 'Sembol',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Para birimi başarıyla oluşturuldu.',
             'update-success'    => 'Para birimi başarıyla güncellendi.',
             'delete-success'    => 'Para birimi başarıyla silindi.',
