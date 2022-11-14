@@ -26,7 +26,7 @@ return new class  extends Migration
     public function down()
     {
         Schema::table('currencies', function (Blueprint $table) {
-            $table->integer('decimal')->unsigned()->default(0);
+            $table->dropColumn('decimal');
         });
     }
 };
