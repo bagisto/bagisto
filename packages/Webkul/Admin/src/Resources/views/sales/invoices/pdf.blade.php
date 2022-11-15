@@ -133,7 +133,7 @@
 
             .invoice-text {
                 font-size: 40px; 
-                color: #fff; 
+                color: #3c41ff; 
                 position: absolute; 
                 width: 100%; 
                 left: 0;
@@ -142,9 +142,9 @@
             }
 
             .header {
-                background-color: #3c41ff;
                 padding: 0px 2px;
-                width:100%;
+                border-bottom
+                width: 100%;
                 position: relative;
             }
         </style>
