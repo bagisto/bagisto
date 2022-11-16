@@ -58,9 +58,9 @@
                                 @foreach($productTypes as $key => $productType)
                                     <option value="{{ $key }}" {{ request()->input('type') == $productType['key'] ? 'selected' : '' }}>
                                    {{ __('admin::app.catalog.products.type.'.strtolower($productType['name'])) }}
-                                   
-                                    </option>                                  
-                                 @endforeach                                
+
+                                    </option>
+                                 @endforeach
                             </select>
 
                             @if ($familyId)
@@ -71,9 +71,9 @@
                         </div>
 
                         <div class="control-group" :class="[errors.has('attribute_family_id') ? 'has-error' : '']">
-                            <label for="attribute_family_id" class="required">{{ __('admin::app.catalog.products.familiy') }}</label>
+                            <label for="attribute_family_id" class="required">{{ __('admin::app.catalog.products.family') }}</label>
 
-                            <select class="control" v-validate="'required'" id="attribute_family_id" name="attribute_family_id" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.familiy') }}&quot;">
+                            <select class="control" v-validate="'required'" id="attribute_family_id" name="attribute_family_id" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.family') }}&quot;">
                                 @foreach ($families as $family)
                                     <option value="{{ $family->id }}" {{ ($familyId == $family->id || old('attribute_family_id') == $family->id) ? 'selected' : '' }}>{{ $family->name }}</option>
                                 @endforeach

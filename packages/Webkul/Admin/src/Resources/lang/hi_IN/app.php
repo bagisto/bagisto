@@ -547,7 +547,7 @@ return [
                 'configurable'                  => 'कॉन्फ़िगर करने योग्य',
 
             ],
-            'familiy'                       => 'विशेषता परिवार',
+            'family'                       => 'विशेषता परिवार',
             'sku'                           => 'एसकेयू',
             'configurable-attributes'       => 'कॉन्फ़िगर करने योग्य गुण',
             'attribute-header'              => 'गुण)',
@@ -1192,7 +1192,7 @@ return [
             'code-prefix'                    => 'कोड उपसर्ग',
             'code-suffix'                    => 'कोड प्रत्यय',
             'generate'                       => 'उत्पन्न',
-            'cart-rule-not-defind-error'     => 'कार्ट नियम परिभाषित नहीं है',
+            'cart-rule-not-defined-error'    => 'कार्ट नियम परिभाषित नहीं है',
             'end-other-rules'                => 'अन्य नियम समाप्त करें',
             'children-categories'            => 'श्रेणियाँ (केवल बच्चे)',
             'parent-categories'              => 'श्रेणियाँ (केवल माता-पिता)',

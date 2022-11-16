@@ -550,7 +550,7 @@ return [
                 'configurable'                  => 'Configurable',
 
             ],
-            'familiy'                       => 'Attribute Family',
+            'family'                       => 'Attribute Family',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Configurable Attributes',
             'attribute-header'              => 'Attribute(s)',
@@ -1195,7 +1195,7 @@ return [
             'code-prefix'                    => 'Code Prefix',
             'code-suffix'                    => 'Code Suffix',
             'generate'                       => 'Generate',
-            'cart-rule-not-defind-error'     => 'Cart rule is not defined',
+            'cart-rule-not-defined-error'    => 'Cart rule is not defined',
             'end-other-rules'                => 'End Other Rules',
             'children-categories'            => 'Categories (Children Only)',
             'parent-categories'              => 'Categories (Parent Only)',

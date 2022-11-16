@@ -550,7 +550,7 @@ return [
                 'configurable'                  => 'কনফিগারযোগ্য',
 
             ],
-            'familiy'                       => 'বৈশিষ্ট্য পরিবার',
+            'family'                       => 'বৈশিষ্ট্য পরিবার',
             'sku'                           => 'এসকেইউ',
             'configurable-attributes'       => 'কনফিগারযোগ্য বৈশিষ্ট্য',
             'attribute-header'              => 'বৈশিষ্ট্য(গুলি)',
@@ -1196,7 +1196,7 @@ return [
             'code-prefix'                    => 'কোড উপসর্গ',
             'code-suffix'                    => 'কোড প্রত্যয়',
             'generate'                       => 'তৈরি করুন',
-            'cart-rule-not-defind-error'     => 'কার্ট নিয়ম সংজ্ঞায়িত করা হয় না',
+            'cart-rule-not-defined-error'    => 'কার্ট নিয়ম সংজ্ঞায়িত করা হয় না',
             'end-other-rules'                => 'অন্যান্য নিয়ম শেষ করুন',
             'children-categories'            => 'বিভাগ (শুধুমাত্র শিশু)',
             'parent-categories'              => 'বিভাগ (শুধু পিতামাতা)',
