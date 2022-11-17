@@ -1413,10 +1413,6 @@ return [
     'response' => [
         'being-used'              => ':name isimli kaynak :source isimli kaynakta kullanılıyor.',
         'cannot-change'           => ':name değiştirilemez.',
-        'cannot-delete-default'   => 'Varsayılan kanal silinemez.',
-        'create-success'          => ':name başarıyla oluşturuldu.',
-        'update-success'          => ':name başarıyla güncellendi.',
-        'delete-success'          => ':name başarıyla silindi.',
         'delete-failed'           => ':name silinirken hata oluştu.',
         'last-delete-error'       => 'En az bir :name zorunludur.',
         'user-define-error'       => 'Sistem :name silinemez!',
