@@ -141,11 +141,17 @@
                 top: -6px;
             }
 
+            .without_logo {
+                height: 60px;
+                width: 60px;
+            }
+            
             .header {
                 padding: 0px 2px;
-                border-bottom
                 width: 100%;
                 position: relative;
+                border-bottom: solid 1px #d3d3d3;
+                padding-bottom: 20px;
             }
         </style>
     </head>
@@ -159,6 +165,9 @@
                             <div class="image" style="display:inline-block; vertical-align: middle; padding-top:8px">
                                 <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}" alt=""/>
                             </div>
+                        @else
+                            <div class="without_logo" style="display:inline-block; vertical-align: middle; padding-top:8px">
+                            </div>
                         @endif
                         <div class="invoice-text">
                             <span>{{ strtoupper(__('admin::app.sales.invoices.invoice')) }}</span>
@@ -171,12 +180,12 @@
                         <div class="col-6">
                             <div class="merchant-details">
                                 <div class="row">
-                                    <span class="label">{{ __('admin::app.customer.account.order.view.invoice-id') }}: </span>
+                                    <span class="label">{{ __('admin::app.sales.invoices.invoice-id') }}: </span>
                                     <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
                                 </div>
 
                                 <div class="row">
-                                    <span class="label">{{ __('admin::app.customer.account.order.view.invoice-date') }}: </span>
+                                    <span class="label">{{ __('admin::app.sales.invoices.date') }}: </span>
                                     <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
                                 </div>
 
@@ -208,12 +217,12 @@
 
                         <div class="col-6" style="padding-left: 80px">
                             <div class="row">
-                                <span class="label">{{ __('admin::app.customer.account.order.view.order-id') }}: </span>
+                                <span class="label">{{ __('admin::app.sales.invoices.order-id') }}: </span>
                                 <span class="value">#{{ $invoice->order->increment_id }}</span>
                             </div>
                            
                             <div class="row">
-                                <span class="label">{{ __('admin::app.customer.account.order.view.order-date') }}: </span>
+                                <span class="label">{{ __('admin::app.sales.invoices.order-date') }}: </span>
                                 <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
                             </div>
 
