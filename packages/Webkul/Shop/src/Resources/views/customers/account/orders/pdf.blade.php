@@ -133,7 +133,7 @@
 
             .invoice-text {
                 font-size: 40px; 
-                color: #fff; 
+                color: #3c41ff; 
                 position: absolute; 
                 width: 100%; 
                 left: 0;
@@ -141,11 +141,17 @@
                 top: -6px;
             }
 
+            .without_logo {
+                height: 60px;
+                width: 60px;
+            }
+            
             .header {
-                background-color: #3c41ff;
                 padding: 0px 2px;
                 width:100%;
                 position: relative;
+                border-bottom: solid 1px #d3d3d3;
+                padding-bottom: 20px;
             }
         </style>
     </head>
@@ -158,6 +164,9 @@
                         @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
                             <div class="image" style="display:inline-block; vertical-align: middle; padding-top:8px">
                                 <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}" alt=""/>
+                            </div>
+                        @else
+                            <div class="without_logo" style="display:inline-block; vertical-align: middle; padding-top:8px">
                             </div>
                         @endif
                         <div class="invoice-text">
