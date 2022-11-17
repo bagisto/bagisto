@@ -4,7 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Str;
 use Elasticsearch;
-use Elasticsearch\Common\Exceptions\Missing404Exception;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
 class ElasticSearchRepository
@@ -12,10 +12,14 @@ class ElasticSearchRepository
     /**
      * Create a new repository instance.
      *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
-    public function __construct(protected AttributeRepository $attributeRepository)
+    public function __construct(
+        protected CustomerRepository $customerRepository,
+        protected AttributeRepository $attributeRepository
+    )
     {
     }
     
@@ -112,11 +116,13 @@ class ElasticSearchRepository
                     ]
                 ];
             case 'price':
+                $customerGroup = $this->customerRepository->getCurrentGroup();
+
                 $range = explode(',', $params[$attribute->code]);
 
                 return [
                     'range' => [
-                        $attribute->code => [
+                        $attribute->code . '_' . $customerGroup->id => [
                             'gte' => core()->convertToBasePrice(current($range)),
                             'lte' => core()->convertToBasePrice(end($range)),
                         ],

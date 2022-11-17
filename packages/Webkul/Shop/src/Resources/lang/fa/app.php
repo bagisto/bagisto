@@ -538,6 +538,7 @@ return [
             'specify-shipping-method'   => 'لطفا روش ارسال را مشخص کنید',
             'specify-payment-method'    => 'لطفا روش پرداخت را مشخص کنید',
             'rule-applied'              => 'قانون سبد خرید اعمال شد',
+            'paypal-payment-canceled'   => 'پرداخت پی پال لغو شده است.',
         ],
 
         'onepage' => [

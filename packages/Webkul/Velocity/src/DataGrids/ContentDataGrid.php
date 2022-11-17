@@ -133,7 +133,7 @@ class ContentDataGrid extends DataGrid
             'type'         => 'Delete',
             'method'       => 'POST',
             'route'        => 'velocity.admin.content.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'content']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'content']),
             'icon'         => 'icon trash-icon',
         ]);
     }

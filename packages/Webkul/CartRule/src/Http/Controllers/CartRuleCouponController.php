@@ -42,7 +42,7 @@ class CartRuleCouponController extends Controller
         ]);
 
         if (! request('id')) {
-            return response()->json(['message' => trans('admin::app.promotions.cart-rules.cart-rule-not-defind-error')], 400);
+            return response()->json(['message' => trans('admin::app.promotions.cart-rules.cart-rule-not-defined-error')], 400);
         }
 
         $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));

@@ -84,6 +84,13 @@
                                         alt=""
                                         v-if="locale.image_url"
                                     />
+
+                                    <img
+                                        class="language-logo"
+                                        :src="`${$root.baseUrl}/themes/velocity/assets/images/flags/default-locale-image.png`"
+                                        alt=""
+                                        v-else
+                                    />
                                 </div>
 
                                 <span v-text="locale.name">{{
@@ -231,6 +238,15 @@
                                         width="20"
                                         height="20"
                                         v-if="locale.image_url"
+                                    />
+
+                                    <img
+                                        class="category-icon"
+                                        :src="`${$root.baseUrl}/themes/velocity/assets/images/flags/default-locale-image.png`"
+                                        alt=""
+                                        width="20"
+                                        height="20"
+                                        v-else
                                     />
                                 </div>
 

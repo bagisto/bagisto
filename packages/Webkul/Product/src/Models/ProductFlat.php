@@ -3,7 +3,6 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Contracts\ProductFlat as ProductFlatContract;
 
 class ProductFlat extends Model implements ProductFlatContract
@@ -38,42 +37,6 @@ class ProductFlat extends Model implements ProductFlatContract
     ];
 
     /**
-     * Get an attribute from the model.
-     *
-     * @param  string  $key
-     * @return mixed
-     */
-    public function getAttribute($key)
-    {
-        if (
-            ! method_exists(static::class, $key)
-            && ! in_array($key, $this->ignorableAttributes)
-            && ! isset($this->attributes[$key])
-            && isset($this->id)
-        ) {
-            $attribute = core()
-                ->getSingletonInstance(AttributeRepository::class)
-                ->getAttributeByCode($key);
-
-            if (
-                $attribute
-                && (
-                    $attribute->value_per_channel
-                    || $attribute->value_per_locale
-                )
-            ) {
-                $defaultProduct = $this->getDefaultProduct();
-
-                $this->attributes[$key] = $defaultProduct->attributes[$key];
-
-                return $this->getAttributeValue($key);
-            }
-        }
-
-        return parent::getAttribute($key);
-    }
-
-    /**
      * Get the product that owns the attribute value.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -81,26 +44,6 @@ class ProductFlat extends Model implements ProductFlatContract
     public function product()
     {
         return $this->belongsTo(ProductProxy::modelClass());
-    }
-
-    /**
-     * Get default product.
-     *
-     * @return \Webkul\Product\Models\ProductFlat
-     */
-    public function getDefaultProduct()
-    {
-        static $loadedDefaultProducts = [];
-
-        if (array_key_exists($this->product_id, $loadedDefaultProducts)) {
-            return $loadedDefaultProducts[$this->product_id];
-        }
-
-        return $loadedDefaultProducts[$this->product_id] = $this->product
-            ->product_flats()
-            ->where('channel', core()->getDefaultChannelCode())
-            ->where('locale', config('app.fallback_locale'))
-            ->first();
     }
 
     /**
@@ -124,58 +67,6 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * The images that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function images()
-    {
-        return $this->hasMany(ProductImageProxy::modelClass(), 'product_id', 'product_id')
-            ->orderBy('position');
-    }
-
-    /**
-     * The videos that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function videos()
-    {
-        return $this->hasMany(ProductVideoProxy::modelClass(), 'product_id', 'product_id')
-            ->orderBy('position');
-    }
-
-    /**
-     * The reviews that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function getReviewsAttribute()
-    {
-        return $this->product->reviews;
-    }
-
-    /**
-     * The reviews that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function reviews()
-    {
-        return $this->product->reviews();
-    }
-
-    /**
-     * Get product type value from base product.
-     *
-     * @return string
-     */
-    public function getTypeAttribute()
-    {
-        return $this->product->type;
-    }
-
-    /**
      * Retrieve type instance.
      *
      * @return \Webkul\Product\Type\AbstractType
@@ -183,149 +74,5 @@ class ProductFlat extends Model implements ProductFlatContract
     public function getTypeInstance()
     {
         return $this->product->getTypeInstance();
-    }
-
-    /**
-     * Get the product attribute family that owns the product.
-     *
-     * @return \Webkul\Attribute\Models\AttributeFamily
-     */
-    public function getAttributeFamilyAttribute()
-    {
-        return $this->product->attribute_family;
-    }
-
-    /**
-     * Retrieve product attributes.
-     *
-     * @param  Group  $group
-     * @param  bool  $skipSuperAttribute
-     * @return Collection
-     */
-    public function getEditableAttributes($group = null, $skipSuperAttribute = true)
-    {
-        return $this->product->getEditableAttributes($group, $skipSuperAttribute);
-    }
-
-    /**
-     * Total quantity.
-     *
-     * @return integer
-     */
-    public function totalQuantity()
-    {
-        return $this->product->totalQuantity();
-    }
-
-    /**
-     * Is product have sufficient quantity.
-     *
-     * @param  int $qty
-     * @return bool
-     */
-    public function haveSufficientQuantity(int $qty): bool
-    {
-        return $this->product->haveSufficientQuantity($qty);
-    }
-
-    /**
-     * Is product saleable.
-     *
-     * @param  string  $key
-     * @return bool
-     */
-    public function isSaleable()
-    {
-        return $this->product->isSaleable();
-    }
-
-    /**
-     * Is product stockable.
-     *
-     * @return bool
-     */
-    public function isStockable()
-    {
-        return $this->product->isStockable();
-    }
-
-    /**
-     * The related products that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function related_products()
-    {
-        return $this->product->related_products();
-    }
-
-    /**
-     * The up sells that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function up_sells()
-    {
-        return $this->product->up_sells();
-    }
-
-    /**
-     * The cross sells that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function cross_sells()
-    {
-        return $this->product->cross_sells();
-    }
-
-    /**
-     * The images that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function downloadable_samples()
-    {
-        return $this->product->downloadable_samples();
-    }
-
-    /**
-     * The images that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function downloadable_links()
-    {
-        return $this->product->downloadable_links();
-    }
-
-    /**
-     * Get the grouped products that owns the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function grouped_products()
-    {
-        return $this->product->grouped_products();
-    }
-
-    /**
-     * Get the grouped products by `sort_order` key that owns the product.
-     *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function groupedProductsBySortOrder()
-    {
-        return $this->product->grouped_products()->orderBy('sort_order');
-    }
-
-    /**
-     * Get the bundle options that owns the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function bundle_options()
-    {
-        return $this->product->bundle_options();
     }
 }
