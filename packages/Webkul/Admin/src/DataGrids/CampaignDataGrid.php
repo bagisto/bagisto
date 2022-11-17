@@ -104,7 +104,7 @@ class CampaignDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.campaigns.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Campaign']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Campaign']),
             'icon'         => 'icon trash-icon',
         ]);
     }

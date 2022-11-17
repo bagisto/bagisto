@@ -1,7 +1,5 @@
-@inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
-
 @php
-    $productChannels = $productFlatRepository->findWhere([
+    $productChannels = app(\Webkul\Product\Repositories\ProductFlatRepository::class)->findWhere([
         'product_id' => $product->id
     ])->pluck('channel')->unique()->toArray();
 @endphp

@@ -535,6 +535,7 @@ return [
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
         ],
 
         'onepage' => [

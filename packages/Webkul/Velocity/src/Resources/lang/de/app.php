@@ -225,7 +225,7 @@ return [
             'login'             => 'Anmelden',
             'become-user'       => 'Benutzer werden',
             'user-registration' => 'Benutzer Registration',
-            'form-sginup-text'  => 'Wenn Sie neu in unserem Shop sind, freuen wir uns, Sie als Mitglied zu begrüßen zu dürfen.',
+            'form-signup-text'  => 'Wenn Sie neu in unserem Shop sind, freuen wir uns, Sie als Mitglied zu begrüßen zu dürfen.',
         ],
         'forget-password'   => [
             'login'                 => 'Anmelden',

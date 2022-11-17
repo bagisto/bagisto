@@ -3,7 +3,7 @@
 @auth('customer')
     {!! view_render_event('bagisto.shop.products.wishlist.before') !!}
 
-    <form id="wishlist-{{ $product->product_id }}" action="{{ route('shop.customer.wishlist.add', $product->product_id) }}" method="POST">
+    <form id="wishlist-{{ $product->id }}" action="{{ route('shop.customer.wishlist.add', $product->id) }}" method="POST">
         @csrf
     </form>
 
@@ -18,7 +18,7 @@
         id="wishlist-changer"
         style="margin-right: 15px;"
         href="javascript:void(0);"
-        onclick="document.getElementById('wishlist-{{ $product->product_id }}').submit();">
+        onclick="document.getElementById('wishlist-{{ $product->id }}').submit();">
 
         <span class="icon wishlist-icon"></span>
 
