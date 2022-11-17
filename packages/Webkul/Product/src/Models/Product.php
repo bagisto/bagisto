@@ -16,6 +16,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\BookingProduct\Models\BookingProductProxy;
 use Webkul\Category\Models\CategoryProxy;
 use Webkul\Inventory\Models\InventorySourceProxy;
+use Webkul\CatalogRule\Models\CatalogRuleProductPriceProxy;
 use Webkul\Product\Contracts\Product as ProductContract;
 use Webkul\Product\Database\Eloquent\Builder;
 use Webkul\Product\Database\Factories\ProductFactory;
@@ -119,6 +120,16 @@ class Product extends Model implements ProductContract
     public function customer_group_prices(): HasMany
     {
         return $this->hasMany(ProductCustomerGroupPriceProxy::modelClass());
+    }
+
+    /**
+     * Get the product customer group prices that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function catalog_rule_prices(): HasMany
+    {
+        return $this->hasMany(CatalogRuleProductPriceProxy::modelClass());
     }
 
     /**

@@ -30,7 +30,7 @@
             </div>
 
             <div class="review-form">
-                <form method="POST" action="{{ route('shop.reviews.store', $product->product_id ) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('shop.reviews.store', $product->id ) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
                     @csrf
 
                     <div class="heading mt-10 mb-25">
