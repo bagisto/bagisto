@@ -718,6 +718,11 @@ return [
             'filterable-attributes'    => 'Filtreerbare kenmerken',
             'attributes'               => 'Attributen',
             'mass-update-success'      => 'Alle geselecteerde categorieën zijn met succes bijgewerkt',
+            'create-success'           => 'familie wordt gebruikt in producten.',
+            'update-success'           => 'familie wordt gebruikt in producten.',
+            'delete-success'           => 'familie wordt gebruikt in producten.',
+            'delete-failed'            => 'familie wordt gebruikt in producten.',
+            'delete-category-root'     => 'familie wordt gebruikt in producten.',
         ],
     ],
 
