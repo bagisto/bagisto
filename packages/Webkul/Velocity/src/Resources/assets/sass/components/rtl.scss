@@ -2,6 +2,10 @@ body {
     &.rtl {
         text-align: right;
 
+        .table table {
+            text-align: right !important;
+        }
+
         .fs16 {
             font-size: 14px !important;
         }
