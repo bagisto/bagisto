@@ -134,6 +134,7 @@
             .invoice-text {
                 font-size: 40px; 
                 color: #3c41ff; 
+                font-weight: bold;
                 position: absolute; 
                 width: 100%; 
                 left: 0;
@@ -142,8 +143,8 @@
             }
 
             .without_logo {
-                height: 60px;
-                width: 60px;
+                height: 35px;
+                width: 35px;
             }
             
             .header {
