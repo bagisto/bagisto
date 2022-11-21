@@ -541,6 +541,7 @@ return [
             'specify-shipping-method'   => 'אנא ציין את שיטת המשלוח.',
             'specify-payment-method'    => 'אנא ציין אמצעי תשלום.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
         ],
 
         'onepage' => [

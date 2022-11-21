@@ -4,7 +4,7 @@ return [
         'actions' => 'Eylemler',
         'id'      => 'Index sütunları sadece sıfırdan daha büyük değere sahip olmalı',
 
-        'massaction' => [
+        'mass-action' => [
             'mass-delete-confirm'     => 'Seçili :resource kayıtlarını silmek istediğinizden emin misiniz?',
             'mass-update-status'      => 'Seçili :resource kayıtlarının durumunu güncellemek istediğinizden emin misiniz?',
             'delete'                  => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',

@@ -54,11 +54,11 @@
         @elseif(isset($addToCartForm) && ! $addToCartForm)
             <form
                 method="POST"
-                action="{{ route('shop.cart.add', $product->product_id) }}">
+                action="{{ route('shop.cart.add', $product->id) }}">
 
                 @csrf
 
-                <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <input type="hidden" name="quantity" value="1">
                 <button
                     type="submit"
@@ -78,8 +78,7 @@
             <add-to-cart
                 form="true"
                 csrf-token='{{ csrf_token() }}'
-                product-flat-id="{{ $product->id }}"
-                product-id="{{ $product->product_id }}"
+                product-id="{{ $product->id }}"
                 reload-page="{{ $reloadPage ?? false }}"
                 move-to-cart="{{ $moveToCart ?? false }}"
                 wishlist-move-route="{{ $wishlistMoveRoute ?? false }}"

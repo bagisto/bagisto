@@ -5,7 +5,6 @@ namespace Webkul\Velocity\Helpers;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Helpers\Review;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
-use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Velocity\Repositories\OrderBrandsRepository;
@@ -18,7 +17,6 @@ class Helper extends Review
      *
      * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
      * @param  \Webkul\Velocity\Repositories\OrderBrandsRepository  $productRepository
-     * @param  \Webkul\ProductFlatRepository\Repositories\ProductRepository  $productFlatRepository
      * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $orderBrands
      * @param  \Webkul\Velocity\Repositories\VelocityMetadataRepository  $velocityMetadataRepository
@@ -27,7 +25,6 @@ class Helper extends Review
     public function __construct(
         protected AttributeOptionRepository $attributeOptionRepository,
         protected ProductRepository $productRepository,
-        protected ProductFlatRepository $productFlatRepository,
         protected ProductReviewRepository $productReviewRepository,
         protected OrderBrandsRepository $orderBrandsRepository,
         protected VelocityMetadataRepository $velocityMetadataRepository
@@ -315,16 +312,16 @@ class Helper extends Review
         $productIds = collect(explode($separator, $items));
 
         return $productIds->map(function ($productId) use ($moveToCart) {
-            $productFlat = $this->productFlatRepository->findOneWhere(['id' => $productId]);
+            $product = $this->productRepository->find($productId);
 
-            if ($productFlat) {
-                $formattedProduct = $this->formatProduct($productFlat, false, [
+            if ($product) {
+                $formattedProduct = $this->formatProduct($product, false, [
                     'moveToCart' => $moveToCart,
                     'btnText'    => $moveToCart ? trans('shop::app.customer.account.wishlist.move-to-cart') : null,
                 ]);
 
-                return array_merge($productFlat->toArray(), [
-                    'slug'          => $productFlat->url_key,
+                return array_merge($product->toArray(), [
+                    'slug'          => $product->url_key,
                     'product_image' => $formattedProduct['image'],
                     'priceHTML'     => $formattedProduct['priceHTML'],
                     'new'           => $formattedProduct['new'],

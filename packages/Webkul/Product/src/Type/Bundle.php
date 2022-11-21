@@ -67,13 +67,6 @@ class Bundle extends AbstractType
     protected $isChildrenCalculated = true;
 
     /**
-     * Product options.
-     *
-     * @var array
-     */
-    protected $productOptions = [];
-
-    /**
      * Create a new product type instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
@@ -562,21 +555,6 @@ class Bundle extends AbstractType
         $item->save();
 
         return $result;
-    }
-
-    /**
-     * Get product options.
-     *
-     * @param  object  $product
-     * @return mixed
-     */
-    public function getProductOptions($product = '')
-    {
-        $bundleOption = app('Webkul\Product\Helpers\BundleOption');
-
-        $options = $bundleOption->getProductOptions($product);
-
-        return $options;
     }
 
     /**

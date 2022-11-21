@@ -502,8 +502,8 @@ return [
             'remove-all-items'          => 'Удалить все элементы',
             'update-cart'               => 'Обновить корзину',
             'continue-shopping'         => 'Продолжить покупки',
-            'remove-all-items'          => 'Remove all items',
-            'confirm-action'            => 'Confirm this action?',
+            'remove-all-items'          => 'Удалить все элементы',
+            'confirm-action'            => 'Подтвердить это действие?',
             'continue-registration'     => '«Продолжить регистрацию»',
             'proceed-to-checkout'       => 'Перейти к оформлению заказа',
             'remove'                    => 'Удалять',
@@ -544,6 +544,7 @@ return [
             'specify-shipping-method'   => '«Укажите способ доставки».',
             'specify-payment-method'    => 'Укажите способ оплаты.',
             'rule-applied'              => 'Скидка была применена',
+            'paypal-payment-canceled'   => 'Платеж PayPal был отменен.',
         ],
 
         'onepage' => [

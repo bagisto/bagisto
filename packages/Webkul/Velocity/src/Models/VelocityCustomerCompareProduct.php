@@ -3,7 +3,7 @@
 namespace Webkul\Velocity\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\ProductFlatProxy;
+use Webkul\Product\Models\ProductProxy;
 use Webkul\Customer\Models\CustomerProxy;
 use Webkul\Velocity\Contracts\VelocityCustomerCompareProduct as VelocityCustomerCompareProductContract;
 
@@ -12,11 +12,11 @@ class VelocityCustomerCompareProduct extends Model implements VelocityCustomerCo
     protected $guarded = [];
 
     /**
-     * The product_flat that belong to the compare product.
+     * The product that belong to the compare product.
      */
-    public function product_flat()
+    public function product()
     {
-        return $this->belongsTo(ProductFlatProxy::modelClass(), 'product_flat_id');
+        return $this->belongsTo(ProductProxy::modelClass(), 'product_id');
     }
 
     /**

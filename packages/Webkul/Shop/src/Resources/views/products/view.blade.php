@@ -49,7 +49,7 @@
                 <div class="form-container">
                     @csrf()
 
-                    <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                     @include ('shop::products.view.gallery')
 
@@ -146,7 +146,7 @@
 @push('scripts')
 
     <script type="text/x-template" id="product-view-template">
-        <form method="POST" id="product-form" action="{{ route('shop.cart.add', $product->product_id) }}" @click="onSubmit($event)">
+        <form method="POST" id="product-form" action="{{ route('shop.cart.add', $product->id) }}" @click="onSubmit($event)">
 
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
 

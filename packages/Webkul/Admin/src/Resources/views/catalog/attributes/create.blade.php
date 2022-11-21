@@ -173,7 +173,7 @@
 
                                     <input
                                         type="text"
-                                        name="@php echo $locale->code; @endphp[name]"
+                                        name="<?php echo $locale->code; ?>[name]"
                                         class="control"
                                         id="locale-{{ $locale->code }}"
                                         value="{{ old($locale->code)['name'] ?? '' }}"
@@ -188,7 +188,6 @@
                     </accordian>
 
                     {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.label.after') !!}
-
 
 
                     <div class="hide">
@@ -341,22 +340,6 @@
                                 <select name="is_visible_on_front" class="control" id="is_visible_on_front">
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
                                     <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
-                                </select>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="use_in_flat">
-                                    {{ __('admin::app.catalog.attributes.use_in_flat') }}
-                                </label>
-
-                                <select name="use_in_flat" class="control" id="use_in_flat">
-                                    <option value="0">
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
-
-                                    <option value="1">
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
                                 </select>
                             </div>
 
