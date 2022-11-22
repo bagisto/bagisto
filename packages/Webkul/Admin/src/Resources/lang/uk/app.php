@@ -834,7 +834,7 @@ return [
             'code'              => 'Код',
             'name'              => 'Имя',
             'symbol'            => 'Символ',
-            'decimal'            => 'Decimal',
+            'decimal'            => 'Десятковий',
             'create-success'    => 'Валюта успешно создана.',
             'update-success'    => 'Валюта успешно обновлена.',
             'delete-success'    => 'Валюта успешно удалена.',
