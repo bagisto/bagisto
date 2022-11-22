@@ -15,7 +15,7 @@
 
                         <div class="control-group">
                             <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="mass-action-type" required>
-                                <option v-for="(massAction, index) in massActions" :key="index" :value="{ id: index, value: massAction.type}">@{{ massAction.label }}</option>
+                                <option v-for="(massAction, index) in massActions" :key="index" :value="massAction.type">@{{ massAction.label }}</option>
                             </select>
                         </div>
 
