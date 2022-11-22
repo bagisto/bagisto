@@ -63,9 +63,7 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
             'redirect' => 'admin.catalog.products.index',
         ])->name('admin.catalog.products.mass_update');
 
-        Route::get('products/search', [ProductController::class, 'productLinkSearch'])->defaults('_config', [
-            'view' => 'admin::catalog.products.edit',
-        ])->name('admin.catalog.products.product_link_search');
+        Route::get('products/search', [ProductController::class, 'productLinkSearch'])->name('admin.catalog.products.product_link_search');
 
         Route::get('products/search-simple-products', [ProductController::class, 'searchSimpleProducts'])->name('admin.catalog.products.search_simple_product');
 

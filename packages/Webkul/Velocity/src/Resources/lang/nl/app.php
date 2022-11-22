@@ -225,7 +225,7 @@ return [
             'login' => 'Aanmelden',
             'become-user' => 'Klant worden',
             'user-registration' => 'User Registration',
-            'form-sginup-text' => 'Als u nieuw bent in onze winkel, willen we u graag als lid hebben.',
+            'form-signup-text' => 'Als u nieuw bent in onze winkel, willen we u graag als lid hebben.',
         ],
         'forget-password' => [
             'login' => 'Login',

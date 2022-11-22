@@ -4,7 +4,7 @@ return [
         'actions' => 'Aktionen',
         'id'      => 'Indexspalten haben nur einen Wert größer als Null',
 
-        'massaction' => [
+        'mass-action' => [
             'mass-delete-confirm'     => 'Möchten Sie die ausgewählten :resource wirklich löschen?',
             'mass-update-status'      => 'Möchten Sie den Status der ausgewählten :resource wirklich aktualisieren?',
             'delete'                  => 'Möchten Sie diese Aktion wirklich ausführen?',

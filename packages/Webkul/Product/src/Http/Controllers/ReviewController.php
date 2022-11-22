@@ -156,11 +156,10 @@ class ReviewController extends Controller
                 $review = $this->productReviewRepository->find($value);
 
                 try {
-                    if (! isset($data['mass-action-type'])) {
-                        return redirect()->back();
-                    }
-
-                    if (! $data['mass-action-type'] == 'update') {
+                    if (
+                        ! isset($data['mass-action-type'])
+                        || $data['mass-action-type'] != 'update'
+                    ) {
                         return redirect()->back();
                     }
 

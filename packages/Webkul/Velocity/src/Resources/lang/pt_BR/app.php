@@ -227,7 +227,7 @@ return [
             'login' => 'Conecte-se',
             'become-user' => 'Torne-se usuário',
             'user-registration' => 'Registro de Usuário',
-            'form-sginup-text' => 'Se você é novo em nossa loja, desejamos tê-lo como membro.',
+            'form-signup-text' => 'Se você é novo em nossa loja, desejamos tê-lo como membro.',
         ],
         'forget-password' => [
             'login' => 'Conecte-se',

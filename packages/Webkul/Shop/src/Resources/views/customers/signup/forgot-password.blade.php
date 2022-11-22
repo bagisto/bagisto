@@ -21,7 +21,7 @@
 
     {!! view_render_event('bagisto.shop.customers.forget_password.before') !!}
 
-    <form method="post" action="{{ route('shop.customer.forgot-password.store') }}" @submit.prevent="onSubmit">
+    <form method="post" action="{{ route('shop.customer.forgot_password.store') }}" @submit.prevent="onSubmit">
 
         {{ csrf_field() }}
 

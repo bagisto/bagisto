@@ -3,18 +3,22 @@
 namespace Webkul\Product\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Bus;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Jobs\Indexer as IndexerJob;
+use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch};
 
 class Indexer extends Command
 {
+    protected $indexers = [
+        'inventory' => Inventory::class,
+        'price'     => Price::class,
+        'elastic'   => ElasticSearch::class,
+    ];
+    
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'products:index {--type=*}';
+    protected $signature = 'indexer:index {--type=*} {--mode=*}';
 
     /**
      * The console command description.
@@ -24,41 +28,45 @@ class Indexer extends Command
     protected $description = 'Automatically updates product price and inventory indices';
 
     /**
-     * Create a new command instance.
-     *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @return void
-     */
-    public function __construct(protected ProductRepository $productRepository)
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return void
      */
     public function handle()
     {
-        $indexers = ['price', 'inventory'];
+        $start = microtime(TRUE);
+        
+        $indexerIds = ['inventory', 'price', 'elastic'];
 
         if (! empty($this->option('type'))) {
-            $indexers = $this->option('type');
+            $indexerIds = $this->option('type');
         }
 
-        $batch = Bus::batch([])->dispatch();
+        $mode = 'selective';
 
-        while (true) {
-            $paginator = $this->productRepository->cursorPaginate(50);
+        if (! empty($this->option('mode'))) {
+            $mode = current($this->option('mode'));
+        }
 
-            $batch->add(new IndexerJob($paginator->items(), $indexers));
-
-            if (! $cursor = $paginator->nextCursor()) {
-                break;
+        foreach ($indexerIds as $indexerId) {
+            if (
+                $indexerId == 'elastic'
+                && core()->getConfigData('catalog.products.storefront.search_mode') != 'elastic'
+            ) {
+                continue;
             }
+            
+            $indexer = app($this->indexers[$indexerId]);
 
-            request()->query->add(['cursor' => $cursor->encode()]);
+            if ($mode == 'full') {
+                $indexer->reindexFull();
+            } else {
+                $indexer->reindexSelective();
+            }
         }
+
+        $end = microtime(TRUE);
+
+        echo "The code took " . ($end - $start) . " seconds to complete.\n";
     }
 }

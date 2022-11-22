@@ -223,7 +223,7 @@ return [
             'login'             => 'Login',
             'become-user'       => 'Zostań użytkownikiem',
             'user-registration' => 'Rejestracja użytkownika',
-            'form-sginup-text'  => 'Cieszymy się, że jesteś z nami. Zarejestruj się by zostać członkiem',
+            'form-signup-text'  => 'Cieszymy się, że jesteś z nami. Zarejestruj się by zostać członkiem',
         ],
         'forget-password'   => [
             'login'                 => 'Login',

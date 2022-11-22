@@ -1010,7 +1010,7 @@
                             element = e.target.parentElement;
                         }
 
-                        message = message || '{{__('ui::app.datagrid.massaction.delete') }}';
+                        message = message || '{{__('ui::app.datagrid.mass-action.delete') }}';
 
                         if (confirm(message)) {
                             axios.post(element.getAttribute('data-action'), {

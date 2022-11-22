@@ -26,6 +26,8 @@ return new class extends Migration
             $table->integer('customer_group_id')->unsigned()->nullable();
             $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
 
+            $table->unique(['product_id', 'customer_group_id']);
+
             $table->timestamps();
         });
     }

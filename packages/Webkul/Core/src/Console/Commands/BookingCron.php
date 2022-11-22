@@ -44,21 +44,19 @@ class BookingCron extends Command
     public function handle()
     {
         $expiredEvents = BookingProduct::query()
-            ->join('product_flat', 'booking_products.product_id', '=', 'product_flat.product_id')
             ->where('booking_products.type', 'event')
             ->where('booking_products.available_to', '<=', Carbon::now())
-            ->where('product_flat.status', 1)
             ->get();
 
         if (count($expiredEvents) > 0) {
-            $attStatusId = Attribute::query()->select('id')
+            $statusAttributeId = Attribute::query()->select('id')
                 ->where('code', 'status')
                 ->first()
                 ->id;
 
             foreach ($expiredEvents as $expEvent) {
                 ProductAttributeValue::query()->where('product_id', $expEvent->product_id)
-                    ->where('attribute_id', $attStatusId)
+                    ->where('attribute_id', $statusAttributeId)
                     ->update(['boolean_value' => 0]);
 
                 ProductFlat::query()->where('product_id', $expEvent->product_id)

@@ -154,7 +154,7 @@ trait ProvideDataGridPlus
             'clickOnAction'       => __('ui::app.datagrid.click_on_action'),
             'recordsFound'        => __('ui::app.datagrid.records-found'),
             'norecords'           => __('ui::app.datagrid.no-records'),
-            'massActionDelete'    => __('ui::app.datagrid.massaction.delete'),
+            'massActionDelete'    => __('ui::app.datagrid.mass-action.delete'),
             'emptyField'          => __('ui::app.datagrid.empty-field'),
             'emptyValue'          => __('ui::app.datagrid.empty-value'),
             'active'              => __('ui::app.datagrid.active'),

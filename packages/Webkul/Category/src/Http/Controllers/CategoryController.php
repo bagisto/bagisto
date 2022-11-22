@@ -78,7 +78,7 @@ class CategoryController extends Controller
 
         Event::dispatch('catalog.category.create.after', $category);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Category']));
+        session()->flash('success', trans('admin::app.catalog.categories.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -128,7 +128,7 @@ class CategoryController extends Controller
 
         Event::dispatch('catalog.category.update.after', $category);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
+        session()->flash('success', trans('admin::app.catalog.categories.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -144,7 +144,7 @@ class CategoryController extends Controller
         $category = $this->categoryRepository->findOrFail($id);
 
         if ($this->isCategoryDeletable($category)) {
-            return response()->json(['message' => trans('admin::app.response.delete-category-root', ['name' => 'Category'])], 400);
+            return response()->json(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
         }
 
         try {
@@ -154,10 +154,10 @@ class CategoryController extends Controller
 
             Event::dispatch('catalog.category.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Category'])]);
+            return response()->json(['message' => trans('admin::app.catalog.categories.delete-success')]);
         } catch (\Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Category'])], 500);
+        return response()->json(['message' => trans('admin::app.catalog.categories.delete-failed')], 500);
     }
 
     /**
@@ -214,7 +214,10 @@ class CategoryController extends Controller
     {
         $data = request()->all();
 
-        if (! isset($data['mass-action-type']) || ! $data['mass-action-type'] == 'update') {
+        if (
+            ! isset($data['mass-action-type'])
+            || $data['mass-action-type'] != 'update'
+        ) {
             return redirect()->back();
         }
 

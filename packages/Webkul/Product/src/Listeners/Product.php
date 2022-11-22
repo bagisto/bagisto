@@ -2,82 +2,83 @@
 
 namespace Webkul\Product\Listeners;
 
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Helpers\Indexer;
+use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch, Flat};
 
 class Product
 {
+    protected $indexers = [
+        'inventory' => Inventory::class,
+        'price'     => Price::class,
+        'elastic'   => ElasticSearch::class,
+        'flat'      => Flat::class,
+    ];
+
     /**
      * Create a new listener instance.
      *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
-     * @param  \Webkul\Product\Helpers\Indexer  $indexer
      * @return void
      */
     public function __construct(
+        protected ProductRepository $productRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
-        protected ProductGroupedProductRepository $productGroupedProductRepository,
-        protected Indexer $indexer
+        protected ProductGroupedProductRepository $productGroupedProductRepository
     )
     {
     }
 
     /**
-     * Update or create product price indices
+     * Update or create product indices
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function afterCreate($product)
     {
-        $this->indexer->refreshFlat($product);
+        app($this->indexers['flat'])->refresh($product);
     }
 
     /**
-     * Update or create product price indices
+     * Update or create product indices
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function afterUpdate($product)
     {
-        $this->indexer->refreshFlat($product);
-
-        $this->refreshInventoryIndices($product);
-
-        $this->refreshPriceIndices($product);
-    }
-
-    /**
-     * Update or create product price indices
-     *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return void
-     */
-    public function refreshPriceIndices($product)
-    {
         $products = $this->getAllRelatedProducts($product);
 
-        foreach ($products as $product) {
-            $this->indexer->refreshPrice($product);
+        app($this->indexers['flat'])->refresh($product);
+
+        app($this->indexers['inventory'])->reindexRows($products);
+
+        app($this->indexers['price'])->reindexRows($products);
+
+        if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
+            app($this->indexers['elastic'])->reindexRows($products);
         }
     }
 
     /**
-     * Update or create product inventory indices
+     * Delete product indices
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  integer  $productId
      * @return void
      */
-    public function refreshInventoryIndices($product)
+    public function beforeDelete($productId)
     {
-        $products = $this->getAllRelatedProducts($product);
-
-        foreach ($products as $product) {
-            $this->indexer->refreshInventory($product);
+        if (core()->getConfigData('catalog.products.storefront.search_mode') != 'elastic') {
+            return;
         }
+
+        $product = $this->productRepository->find($productId);
+
+        app($this->indexers['elastic'])->reindexRow($product);
     }
 
     /**
@@ -88,31 +89,29 @@ class Product
      */
     public function getAllRelatedProducts($product)
     {
-        static $products = [];
-
-        if (array_key_exists($product->id, $products)) {
-            return $products[$product->id];
-        }
-
-        $products[$product->id] = [$product];
+        $products = [$product];
 
         if ($product->type == 'simple') {
             if ($product->parent_id) {
-                $products[$product->id][] = $product->parent;
+                $products[] = $product->parent;
             }
 
-            $products[$product->id] = array_merge(
-                $products[$product->id],
+            $products = array_merge(
+                $products,
                 $this->getParentBundleProducts($product),
                 $this->getParentGroupProducts($product)
             );
         } elseif ($product->type == 'configurable') {
+            $products = [];
+
             foreach ($product->variants as $variant) {
-                $products[$product->id][] = $variant;
+                $products[] = $variant;
             }
+
+            $products[] = $product;
         }
 
-        return $products[$product->id];
+        return $products;
     }
 
     /**

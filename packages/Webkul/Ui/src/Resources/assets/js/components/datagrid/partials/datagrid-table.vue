@@ -54,10 +54,7 @@
                                         index) in massActions"
                                         v-text="massAction.label"
                                         :key="index"
-                                        :value="{
-                                            id: index,
-                                            value: massAction.type
-                                        }"
+                                        :value="massAction.type"
                                     ></option>
                                 </select>
                             </div>
@@ -65,7 +62,7 @@
                             <div
                                 class="control-group"
                                 style="margin-left: 10px"
-                                v-if="massActionType.value == 'update'"
+                                v-if="massActionType == 'update'"
                             >
                                 <select
                                     class="control"
@@ -321,7 +318,7 @@ export default {
         },
 
         changeMassActionTarget: function() {
-            if (this.massActionType.value === 'delete') {
+            if (this.massActionType === 'delete') {
                 for (let i in this.massActionTargets) {
                     if (this.massActionTargets[i].type === 'delete') {
                         this.massActionTarget = this.massActionTargets[
@@ -337,11 +334,11 @@ export default {
                 }
             }
 
-            if (this.massActionType.value === 'update') {
+            if (this.massActionType === 'update') {
                 for (let i in this.massActionTargets) {
                     if (this.massActionTargets[i].type === 'update') {
                         this.massActionValues = this.massActions[
-                            this.massActionType.id
+                            i
                         ].options;
                         this.massActionTarget = this.massActionTargets[
                             i
