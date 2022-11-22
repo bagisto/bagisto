@@ -819,6 +819,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Naam',
             'symbol'            => 'Symbool',
+            'decimal'            => 'Engels',
             'create-success'    => 'Het valuta is toegevoegd.',
             'update-success'    => 'Het valuta is gewijzigd.',
             'delete-success'    => 'Het valuta is verwijderd.',

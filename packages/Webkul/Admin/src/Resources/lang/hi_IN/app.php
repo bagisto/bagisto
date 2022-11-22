@@ -830,6 +830,7 @@ return [
             'code'              => 'कोड',
             'name'              => 'नाम',
             'symbol'            => 'प्रतीक',
+            'decimal'            => 'Decimal',
             'create-success'    => 'मुद्रा सफलतापूर्वक बनाई गई।',
             'update-success'    => 'मुद्रा सफलतापूर्वक अपडेट की गई।',
             'delete-success'    => 'मुद्रा सफलतापूर्वक हटाई गई।',

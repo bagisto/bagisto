@@ -851,6 +851,7 @@ return [
             'code'              => 'الشفرة',
             'name'              => 'اسم',
             'symbol'            => 'رمز',
+            'decimal'            => 'عدد عشري',
             'create-success'    => 'تم إنشاء اللغة بنجاح',
             'update-success'    => 'تم تحديث اللغة بنجاح',
             'delete-success'    => 'تم حذف اللغة بنجاح',
