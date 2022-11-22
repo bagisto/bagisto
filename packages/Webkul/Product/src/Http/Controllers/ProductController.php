@@ -125,7 +125,7 @@ class ProductController extends Controller
 
         Event::dispatch('catalog.product.create.after', $product);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Product']));
+        session()->flash('success', trans('admin::app.catalog.products.create-success'));
 
         return redirect()->route($this->_config['redirect'], ['id' => $product->id]);
     }
@@ -162,7 +162,7 @@ class ProductController extends Controller
 
         Event::dispatch('catalog.product.update.after', $product);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
+        session()->flash('success', trans('admin::app.catalog.products.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -254,14 +254,14 @@ class ProductController extends Controller
             Event::dispatch('catalog.product.delete.after', $id);
 
             return response()->json([
-                'message' => trans('admin::app.response.delete-success', ['name' => 'Product']),
+                'message' => trans('admin::app.catalog.products.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
         return response()->json([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'Product']),
+            'message' => trans('admin::app.catalog.products.delete-failed'),
         ], 500);
     }
 
