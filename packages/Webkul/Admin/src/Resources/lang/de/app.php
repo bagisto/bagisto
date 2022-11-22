@@ -827,7 +827,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Name',
             'symbol'            => 'Symbol',
-            'decimal'            => 'Decimal',
+            'decimal'            => 'Dezimal',
             'create-success'    => 'Währung erfolgreich erstellt.',
             'update-success'    => 'Währung erfolgreich aktualisiert.',
             'delete-success'    => 'Währung erfolgreich gelöscht.',
