@@ -160,7 +160,7 @@ class ProductRepository extends Repository
      */
     public function findBySlug($slug)
     {
-        return $this->findByAttributeCode('url_key', $slug);
+        return $this->findByAttributeCode('name', $slug);
     }
 
     /**
