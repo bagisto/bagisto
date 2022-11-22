@@ -813,7 +813,7 @@ return [
             'code'              => '代码',
             'name'              => '名称',
             'symbol'            => '符号',
-            'decimal'            => 'Decimal',
+            'decimal'            => '十进制',
             'create-success'    => '货币创建成功.',
             'update-success'    => '货币更新成功.',
             'delete-success'    => '货币删除成功.',
