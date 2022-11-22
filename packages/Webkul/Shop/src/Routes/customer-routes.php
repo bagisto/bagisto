@@ -32,15 +32,15 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 'view' => 'shop::customers.signup.forgot-password',
             ])->name('shop.customer.forgot_password.create');
 
-            Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('shop.customer.forgot-password.store');
+            Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('shop.customer.forgot_password.store');
 
             Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->defaults('_config', [
                 'view' => 'shop::customers.signup.reset-password',
-            ])->name('customer.reset_password.create');
+            ])->name('shop.customer.reset_password.create');
 
             Route::post('/reset-password', [ResetPasswordController::class, 'store'])->defaults('_config', [
                 'redirect' => 'shop.customer.profile.index',
-            ])->name('_');
+            ])->name('shop.customer.reset_password.store');
 
             /**
              * Login routes.
