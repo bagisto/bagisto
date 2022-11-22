@@ -94,10 +94,16 @@ abstract class AbstractType
 
         $rulePrice = $this->getCatalogRulePrice();
 
-        $discountedPrice = Carbon::today()
+        $today = Carbon::today();
+
+        $special_from = $this->product->special_price_from ?? $today;
+
+        $special_to = $this->product->special_price_to ?? Carbon::tomorrow();
+
+        $discountedPrice = $today
             ->between(
-                $this->product->special_price_from,
-                $this->product->special_price_to
+                $special_from,
+                $special_to
             ) ? $this->product->special_price : null;
 
         if (
