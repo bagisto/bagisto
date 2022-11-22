@@ -820,6 +820,7 @@ return [
             'code'              => 'Codice',
             'name'              => 'Nome',
             'symbol'            => 'Simbolo',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Valuta creata con successo.',
             'update-success'    => 'Valuta aggiornata con successo.',
             'delete-success'    => 'Valuta eliminata con successo.',

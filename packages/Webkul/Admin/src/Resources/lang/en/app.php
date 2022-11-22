@@ -854,6 +854,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Name',
             'symbol'            => 'Symbol',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Currency created successfully.',
             'update-success'    => 'Currency updated successfully.',
             'delete-success'    => 'Currency deleted successfully.',
