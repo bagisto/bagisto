@@ -78,7 +78,7 @@ class AttributeFamilyController extends Controller
 
         Event::dispatch('catalog.attribute_family.create.after', $attributeFamily);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Family']));
+        session()->flash('success', trans('admin::app.catalog.families.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -117,7 +117,7 @@ class AttributeFamilyController extends Controller
 
         Event::dispatch('catalog.attribute_family.update.after', $attributeFamily);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Family']));
+        session()->flash('success', trans('admin::app.catalog.families.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -134,13 +134,13 @@ class AttributeFamilyController extends Controller
 
         if ($this->attributeFamilyRepository->count() == 1) {
             return response()->json([
-                'message' => trans('admin::app.response.last-delete-error', ['name' => 'Family']),
+                'message' => trans('admin::app.catalog.families.last-delete-error'),
             ], 400);
         }
 
         if ($attributeFamily->products()->count()) {
             return response()->json([
-                'message' => trans('admin::app.response.attribute-product-error', ['name' => 'Attribute family']),
+                'message' => trans('admin::app.catalog.families.attribute-product-error'),
             ], 400);
         }
 
@@ -152,14 +152,14 @@ class AttributeFamilyController extends Controller
             Event::dispatch('catalog.attribute_family.delete.after', $id);
 
             return response()->json([
-                'message' => trans('admin::app.response.delete-success', ['name' => 'Family']),
+                'message' => trans('admin::app.catalog.families.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
         return response()->json([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'Family']),
+            'message' => trans('admin::app.catalog.families.delete-failed', ['name' => 'Family']),
         ], 500);
     }
 

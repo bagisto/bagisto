@@ -146,13 +146,15 @@ class Flat
                 }
             } else {
                 if (request()->route()?->getName() == 'admin.catalog.products.update') {
-                    $productFlat = $this->productFlatRepository->findOneWhere([
+                    $productFlat = $this->productFlatRepository->findWhere([
                         'product_id' => $product->id,
                         'channel'    => $channel->code,
                     ]);
 
                     if ($productFlat) {
-                        $this->productFlatRepository->delete($productFlat->id);
+                        foreach ($productFlat as $productFlatByChannelLocale) {
+                            $this->productFlatRepository->delete($productFlatByChannelLocale->id);
+                        }
                     }
                 }
             }
