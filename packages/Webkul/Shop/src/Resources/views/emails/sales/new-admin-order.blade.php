@@ -1,6 +1,6 @@
 @component('shop::emails.layouts.master')
     <div style="text-align: center;">
-        <a href="{{ config('app.url') }}">
+        <a href="{{ route('admin.session.create') }}">
             @if (core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img src="{{ \Illuminate\Support\Facades\Storage::url(core()->getConfigData('general.design.admin_logo.logo_image')) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
             @else
@@ -16,13 +16,13 @@
             </span> <br>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-            {{ __('shop::app.mail.order.dear-admin', ['admin_name' => config('mail.from.name')]) }},
+                {{ __('shop::app.mail.order.dear-admin', ['admin_name' => core()->getAdminEmailDetails()['name']]) }},
             </p>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!! __('shop::app.mail.order.greeting-admin', [
-                    'order_id' => '<a href="' . route('shop.customer.orders.view', $order->id) . '" style="color: #0041FF; font-weight: bold;">#' . $order->increment_id . '</a>',
-                    'created_at' => core()->formatDate($order->created_at, 'Y-m-d H:i:s')
+                    'order_id' => '<a href="' . route('admin.sales.orders.view', $order->id) . '" style="color: #0041FF; font-weight: bold;">#' . $order->increment_id . '</a>',
+                    'created_at' => $order->created_at
                     ])
                 !!}
             </p>
