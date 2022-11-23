@@ -94,58 +94,47 @@ abstract class AbstractType
 
         $rulePrice = $this->getCatalogRulePrice();
 
-        $discountedPrice = $this->product->special_price;
-
         if (
-            empty($discountedPrice)
-            && ! $rulePrice
+            empty($this->product->special_price)
+            && empty($rulePrice)
             && $customerGroupPrice == $this->product->price
         ) {
             return $this->product->price;
         }
 
-        $haveDiscount = false;
-
-        if (! (float) $discountedPrice) {
-            if (
-                $rulePrice
-                && $rulePrice->price < $this->product->price
-            ) {
-                $discountedPrice = $rulePrice->price;
-
-                $haveDiscount = true;
+        if (! (float) $this->product->special_price) {
+            if ($rulePrice) {
+                $discountedPrice = min($rulePrice->price, $this->product->price);
+            } else {
+                $discountedPrice = $this->product->price;
             }
         } else {
-            if (
-                $rulePrice
-                && $rulePrice->price <= $discountedPrice
-            ) {
-                $discountedPrice = $rulePrice->price;
-
-                $haveDiscount = true;
-            } else {
-                if (core()->isChannelDateInInterval(
-                    $this->product->special_price_from,
-                    $this->product->special_price_to
-                )) {
-                    $haveDiscount = true;
-                } elseif ($rulePrice) {
+            if ($rulePrice) {
+                if (
+                    core()->isChannelDateInInterval(
+                        $this->product->special_price_from,
+                        $this->product->special_price_to
+                    )
+                ) {
+                    $discountedPrice = min($rulePrice->price, $this->product->special_price);
+                } else {
                     $discountedPrice = $rulePrice->price;
-
-                    $haveDiscount = true;
+                }
+            } else {
+                if (
+                    core()->isChannelDateInInterval(
+                        $this->product->special_price_from,
+                        $this->product->special_price_to
+                    )
+                ) {
+                    $discountedPrice = $this->product->special_price;
+                } else {
+                    $discountedPrice = $this->product->price;
                 }
             }
         }
 
-        if ($haveDiscount) {
-            $discountedPrice = min($discountedPrice, $customerGroupPrice);
-        } else {
-            if ($customerGroupPrice !== $this->product->price) {
-                $discountedPrice = $customerGroupPrice;
-            }
-        }
-
-        return $discountedPrice;
+        return min($discountedPrice, $customerGroupPrice);
     }
 
     /**

@@ -61,7 +61,9 @@ class Indexer extends Command
             if ($mode == 'full') {
                 $indexer->reindexFull();
             } else {
-                $indexer->reindexSelective();
+                if ($indexerId != 'inventory') {
+                    $indexer->reindexSelective();
+                }
             }
         }
 
