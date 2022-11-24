@@ -19,6 +19,7 @@ return [
         'error'              => 'Er is iets misgegaan, probeer het later opnieuw.',
         'image-upload-limit' => 'De maximale uploadgrootte van de afbeelding is 2 MB',
         'no-result-found'    => 'We hebben geen records kunnen vinden.',
+        'product-individual-view-inactive' => 'Product is niet afzonderlijk te bekijken',
     ],
 
     'home' => [

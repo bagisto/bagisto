@@ -19,6 +19,7 @@ return [
         'error'                 => 'কিছু ভুল হয়েছে। পরে আবার চেষ্টা করুন.',
         'image-upload-limit'    => 'ছবির সর্বোচ্চ আপলোড সাইজ 2MB',
         'no-result-found'       => 'আমরা কোনো রেকর্ড খুঁজে পাইনি।',
+        'product-individual-view-inactive' => 'পণ্য পৃথকভাবে দেখার জন্য উপলব্ধ নয়',
     ],
 
     'home' => [

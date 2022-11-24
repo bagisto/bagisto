@@ -19,6 +19,7 @@ return [
         'error'              => 'Algo ha ido mal, por favor prueba más tarde.',
         'image-upload-limit' => 'El tamaño máximo de carga de la imagen es de 2 MB',
         'no-result-found'    => 'No pudimos encontrar ningún registro.',
+        'product-individual-view-inactive' => 'El producto no está disponible para verlo individualmente',
     ],
 
     'home' => [

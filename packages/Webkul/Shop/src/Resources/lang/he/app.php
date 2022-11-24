@@ -19,6 +19,7 @@ return [
         'error'              =>'משהו השתבש, אנא נסה שוב מאוחר יותר.',
         'image-upload-limit' => 'גודל העלאת התמונה המקסימלי הוא 2MB',
         'no-result-found'    => 'לא הצלחנו למצוא רשומות',
+        'product-individual-view-inactive' => 'המוצר אינו זמין לצפייה בנפרד',
     ],
 
     'home' => [

@@ -19,6 +19,7 @@ return [
         'error'              => 'Coś poszło nie tak. Proszę spróbować później.',
         'image-upload-limit' => 'Maksymalny rozmiar przesyłanego obrazu to 2 MB',
         'no-result-found'    => 'Nie znaleźliśmy żadnych zapisów.',
+        'product-individual-view-inactive' => 'Produkt nie jest dostępny do obejrzenia pojedynczo',
     ],
 
     'home' => [

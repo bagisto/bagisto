@@ -19,6 +19,7 @@ return [
         'error'              => 'حدث خطأ. الرجاء المحاولة لاحقاً.',
         'image-upload-limit' => 'أقصى حجم لتحميل الصورة هو 2 ميغا بايت',
         'no-result-found'    => 'لا توجد نتائج.',
+        'product-individual-view-inactive' => 'المنتج غير متوفر للعرض بشكل فردي',
     ],
 
     'home' => [
