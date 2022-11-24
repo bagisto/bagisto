@@ -498,7 +498,7 @@ body {
         &.has-error {
             &.date {
                 &::after {
-                    top: 47px;
+                    top: 47px !important;
                 }
             }
         }
