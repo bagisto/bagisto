@@ -54,6 +54,13 @@ class CartController extends Controller
     public function add($id)
     {
         try {
+            if ($product = $this->productRepository->findOrFail($id)) {
+                if (! $product->visible_individually) {
+                    session()->flash('warning', trans('shop::app.common.product-individual-view-inactive'));
+                    return redirect()->back();
+                }
+            }
+
             Cart::deactivateCurrentCartIfBuyNowIsActive();
 
             $result = Cart::addProduct($id, request()->all());

@@ -70,6 +70,9 @@ class WishlistController extends Controller
             return redirect()->back();
         } elseif (! $product->status) {
             return redirect()->back();
+        } elseif (! $product->visible_individually) {
+            session()->flash('warning', trans('shop::app.common.product-individual-view-inactive'));
+            return redirect()->back();
         }
 
         $data = [
