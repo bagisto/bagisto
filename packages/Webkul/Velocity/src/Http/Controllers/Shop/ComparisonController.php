@@ -91,11 +91,11 @@ class ComparisonController extends Controller
 
         $customerId = auth()->guard('customer')->user()->id;
 
-        if ($product = $this->productRepository->findOrFail($productId)) {
-            if (! $product->visible_individually) {
-                session()->flash('warning', trans('shop::app.common.product-individual-view-inactive'));
-                return redirect()->back();
-            }
+        if (
+            $product = $this->productRepository->findOrFail($productId) 
+            && (! $product->visible_individually)
+        ) {
+            return redirect()->back();
         }
 
         $compareProduct = $this->compareProductsRepository->findOneByField([

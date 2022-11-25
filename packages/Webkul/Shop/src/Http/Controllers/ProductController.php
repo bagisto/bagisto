@@ -79,11 +79,11 @@ class ProductController extends Controller
             } else {
                 $productDownloadableSample = $this->productDownloadableSampleRepository->findOrFail(request('id'));
 
-                if ($product = $this->productRepository->findOrFail($productDownloadableSample->product_id)) {
-                    if (! $product->visible_individually) {
-                        session()->flash('warning', trans('shop::app.common.product-individual-view-inactive'));
-                        return redirect()->back();
-                    }
+                if (
+                    $product = $this->productRepository->findOrFail($productDownloadableSample->product_id) 
+                    && (! $product->visible_individually)
+                ) {
+                    return redirect()->back();
                 }
 
                 if ($productDownloadableSample->type == 'file') {
