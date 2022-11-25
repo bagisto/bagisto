@@ -11,7 +11,7 @@
     if ($channel !== 'all') {
         $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
 
-        if ($channelLocales->contains('code', $locale)) {
+        if ($channelLocales && $channelLocales->contains('code', $locale)) {
             $locales = $channelLocales;
         } else {
             $channel = 'all';
@@ -22,10 +22,7 @@
 <div class="table">
     <datagrid-filters></datagrid-filters>
 
-    @if (
-        isset($results['paginated'])
-        && $results['paginated']
-    )
+    @if (! empty($results['paginated']))
         @include('ui::datagrid.pagination', ['results' => $results['records']])
     @endif
 

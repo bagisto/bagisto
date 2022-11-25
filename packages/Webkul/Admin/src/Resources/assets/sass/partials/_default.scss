@@ -498,7 +498,7 @@ body {
         &.has-error {
             &.date {
                 &::after {
-                    top: 47px;
+                    top: 47px !important;
                 }
             }
         }
@@ -837,7 +837,6 @@ body {
     }
 
     .page-action {
-        display: flex;
         align-items: center;
         justify-content: space-between;
     }

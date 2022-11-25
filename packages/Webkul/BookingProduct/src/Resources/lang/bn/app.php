@@ -71,6 +71,8 @@ return [
         'sales' => [
             'bookings' => [
                 'title' => 'বুকিং',
+                'table-view' => "টেবিল ভিউ",
+                'calender-view' => "ক্যালেন্ডার ভিউ",
             ]
         ],
 
