@@ -54,11 +54,10 @@ class CartController extends Controller
     public function add($id)
     {
         try {
-            if (
-                $product = $this->productRepository->findOrFail($id) 
-                && (! $product->visible_individually)
-            ) {
-                return redirect()->back();
+            if ($product = $this->productRepository->findOrFail($id)) {
+                if (! $product->visible_individually) {
+                    return redirect()->back();
+                }
             }
 
             Cart::deactivateCurrentCartIfBuyNowIsActive();
