@@ -75,6 +75,12 @@ class CartController extends Controller
             $cart = Cart::getCart();
 
             $id = request()->get('product_id');
+            
+            if ($product = $this->productRepository->findOrFail($id)) {
+                if (! $product->visible_individually) {
+                    return redirect()->back();
+                }
+            }
 
             $cart = Cart::addProduct($id, request()->all());
 
