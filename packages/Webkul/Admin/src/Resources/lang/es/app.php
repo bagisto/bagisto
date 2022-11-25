@@ -1034,6 +1034,11 @@ return [
             'error-create'        => 'La dirección del cliente no fue creada.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'logige sisse kliendina',
+            'login-message'=>'logisite sisse kui :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Agregar nota',
             'save-note'  => 'Guardar nota',

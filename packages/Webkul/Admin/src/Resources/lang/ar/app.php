@@ -1036,6 +1036,11 @@ return [
             'error-create'        => 'لم يتم إنشاء عنوان العميل',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'سجل دخولك كعميل',
+            'login-message'=>'you login as :customer_name'
+        ],
+
         'note' => [
             'title'      => 'اضف ملاحظة',
             'save-note'  => 'حفظ الملاحظة',
