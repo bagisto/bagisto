@@ -550,7 +550,7 @@ return [
                 'configurable'                  => 'কনফিগারযোগ্য',
 
             ],
-            'familiy'                       => 'বৈশিষ্ট্য পরিবার',
+            'family'                       => 'বৈশিষ্ট্য পরিবার',
             'sku'                           => 'এসকেইউ',
             'configurable-attributes'       => 'কনফিগারযোগ্য বৈশিষ্ট্য',
             'attribute-header'              => 'বৈশিষ্ট্য(গুলি)',
@@ -834,6 +834,7 @@ return [
             'code'              => 'কোড',
             'name'              => 'নাম',
             'symbol'            => 'প্রতীক',
+            'decimal'            => 'দশমিক',
             'create-success'    => 'মুদ্রা সফলভাবে তৈরি করা হয়েছে।',
             'update-success'    => 'মুদ্রা সফলভাবে আপডেট করা হয়েছে।',
             'delete-success'    => 'মুদ্রা সফলভাবে মুছে ফেলা হয়েছে.',
@@ -1045,8 +1046,8 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'          => 'গ্রাহক হিসাবে লগইন করুন',
-            'login-message'       => 'আপনি হিসাবে লগ ইন করেছেন :customer_name'
+            'grid-title'=>'গ্রাহক হিসাবে লগইন করুন',
+            'login-message'=>'আপনি হিসাবে লগ ইন করেছেন :customer_name'
         ],
 
         'note' => [
@@ -1201,7 +1202,7 @@ return [
             'code-prefix'                    => 'কোড উপসর্গ',
             'code-suffix'                    => 'কোড প্রত্যয়',
             'generate'                       => 'তৈরি করুন',
-            'cart-rule-not-defind-error'     => 'কার্ট নিয়ম সংজ্ঞায়িত করা হয় না',
+            'cart-rule-not-defined-error'    => 'কার্ট নিয়ম সংজ্ঞায়িত করা হয় না',
             'end-other-rules'                => 'অন্যান্য নিয়ম শেষ করুন',
             'children-categories'            => 'বিভাগ (শুধুমাত্র শিশু)',
             'parent-categories'              => 'বিভাগ (শুধু পিতামাতা)',
@@ -1432,9 +1433,6 @@ return [
         'product-can-not-be-copied' => 'প্রকারের পণ্য: প্রকার কপি করা যাবে না',
         'cannot-change'             => ':নাম পরিবর্তন করা যাবে না।',
         'cannot-delete-default'     => 'ডিফল্ট চ্যানেল মুছে ফেলা যাবে না',
-        'create-success'            => ':নাম সফলভাবে তৈরি করা হয়েছে।',
-        'update-success'            => ':নাম সফলভাবে আপডেট করা হয়েছে।',
-        'delete-success'            => ':নাম সফলভাবে মুছে ফেলা হয়েছে।',
         'delete-failed'             => ':নাম মুছে ফেলার সময় ত্রুটির সম্মুখীন হয়েছে৷',
         'last-delete-error'         => 'অন্তত একটি :নাম প্রয়োজন৷',
         'user-define-error'         => 'সিস্টেম মুছে ফেলা যাবে না :নাম',
