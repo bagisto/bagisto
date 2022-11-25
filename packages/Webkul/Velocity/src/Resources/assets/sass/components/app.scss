@@ -2530,7 +2530,7 @@
 
         .btn-add-to-cart {
             white-space: pre-wrap;
-            max-width: 63%;
+            width:220px;
         }
 
         .close-btn {
@@ -2558,11 +2558,22 @@
         }
     }
 
-    .wishlist-icon {
-        top: 5px;
-        right: 52px;
-        position: absolute;
-        display: inline-block;
+    .wishlist {
+        display: flex;
+        padding: 7px;
+        width: max-content;
+        margin-left: 4px;
+    }
+
+    .wishlist span {
+        font-size: 14px;
+        margin-left: 4px;
+    }
+
+    .comparison-remove {
+        float: right;
+        margin-top: -31px;
+        margin-right: 14px;
     }
 }
 
