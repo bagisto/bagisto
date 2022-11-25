@@ -1045,8 +1045,8 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'গ্রাহক হিসাবে লগইন করুন',
-            'login-message'=>'আপনি হিসাবে লগ ইন করেছেন :customer_name'
+            'grid-title'          => 'গ্রাহক হিসাবে লগইন করুন',
+            'login-message'       => 'আপনি হিসাবে লগ ইন করেছেন :customer_name'
         ],
 
         'note' => [
