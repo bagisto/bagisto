@@ -19,7 +19,6 @@ return [
         'error'              => 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.',
         'image-upload-limit' => 'Die maximale Upload-Größe des Bildes beträgt 2 MB',
         'no-result-found'    => 'Wir konnten keine Aufzeichnungen finden.',
-        'product-individual-view-inactive' => 'Das Produkt kann nicht einzeln angezeigt werden',
     ],
 
     'home' => [

@@ -19,7 +19,6 @@ return [
         'error'              => 'Quelque chose c\'est mal passé. Merci d\'essayer plus tard.',
         'image-upload-limit' => 'La taille maximale de téléchargement de l\'image est de 2 Mo',
         'no-result-found'    => 'Nous n\'avons pu trouver aucun enregistrement.',
-        'product-individual-view-inactive' => 'Le produit n\'est pas disponible pour être vu individuellement',
     ],
 
     'home' => [

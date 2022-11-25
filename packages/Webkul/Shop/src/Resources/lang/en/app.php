@@ -19,7 +19,6 @@ return [
         'error'              => 'Something went wrong, please try again later.',
         'image-upload-limit' => 'Image max upload size is 2MB',
         'no-result-found'    => 'We could not find any records.',
-        'product-individual-view-inactive' => 'Product is not available to view individually',
     ],
 
     'home' => [

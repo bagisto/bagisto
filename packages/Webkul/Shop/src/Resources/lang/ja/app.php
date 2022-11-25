@@ -17,7 +17,6 @@ return [
     'common' => [
         'error'              => 'エラーが発生しました。しばらく待ってから、再度アクセスしてください。',
         'image-upload-limit' => '画像の最大アップロードサイズは2MBです',
-        'product-individual-view-inactive' => '製品を個別に表示することはできません',
     ],
 
     'home' => [
