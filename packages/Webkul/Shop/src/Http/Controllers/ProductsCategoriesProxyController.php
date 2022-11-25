@@ -48,8 +48,6 @@ class ProductsCategoriesProxyController extends Controller
                     $customer = auth()->guard('customer')->user();
 
                     return view($this->_config['product_view'], compact('product', 'customer'));
-                } else {
-                    session()->flash('warning', trans('shop::app.common.product-individual-view-inactive'));
                 }
             }
 
