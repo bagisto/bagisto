@@ -29,8 +29,7 @@ class ProductRepository extends Repository
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ElasticSearchRepository $elasticSearchRepository,
         Container $container
-    )
-    {
+    ) {
         parent::__construct($container);
     }
 
@@ -174,8 +173,9 @@ class ProductRepository extends Repository
         $product = $this->findByAttributeCode('url_key', $slug);
 
         if (! $product) {
-            throw (new ModelNotFoundException)->setModel(
-                get_class($this->model), $slug
+            throw (new ModelNotFoundException())->setModel(
+                get_class($this->model),
+                $slug
             );
         }
 
@@ -196,7 +196,7 @@ class ProductRepository extends Repository
             return $this->searchFromDatabase($categoryId);
         }
     }
-        
+
     /**
      * Search product from database
      *
@@ -233,7 +233,14 @@ class ProductRepository extends Repository
 
                     $join->on('products.id', '=', 'product_price_indices.product_id')
                         ->where('product_price_indices.customer_group_id', $customerGroup->id);
-                });
+                })
+
+                /**
+                 * Adding join for `product_flat` as needed channel based product.
+                 * Will remove it when `product_flat` get completely removed.
+                 */
+                ->leftJoin('product_flat', 'products.id', '=', 'product_flat.product_id')
+                ->where('product_flat.channel', '=', core()->getCurrentChannel()->code);
 
             if ($categoryId) {
                 $qb->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id')
@@ -256,7 +263,7 @@ class ProductRepository extends Repository
 
             #Retrieve all the filterable attributes
             $filterableAttributes = $this->attributeRepository->getProductDefaultAttributes(array_keys($params));
-            
+
             #Filter the required attributes
             $attributes = $filterableAttributes->whereIn('code', [
                 'name',
@@ -264,7 +271,7 @@ class ProductRepository extends Repository
                 'visible_individually',
                 'url_key',
             ]);
-            
+
             #Filter collection by required attributes
             foreach ($attributes as $attribute) {
                 $alias = $attribute->code . '_product_attribute_values';
@@ -328,7 +335,7 @@ class ProductRepository extends Repository
 
             if ($sortOptions['order'] != 'rand') {
                 $attribute = $this->attributeRepository->findOneByField('code', $sortOptions['sort']);
-        
+
                 if ($attribute) {
                     if ($attribute->code === 'price') {
                         $qb->orderBy('product_price_indices.min_price', $sortOptions['order']);
@@ -350,7 +357,7 @@ class ProductRepository extends Repository
             } else {
                 return $qb->inRandomOrder();
             }
-    
+
             return $qb->groupBy('products.id');
         });
 
@@ -360,8 +367,10 @@ class ProductRepository extends Repository
         $countQuery = clone $query->model;
 
         $count = collect(
-            DB::select("select count(id) as aggregate from ({$countQuery->select('products.id')->reorder('products.id')->toSql()}) c",
-            $countQuery->getBindings())
+            DB::select(
+                "select count(id) as aggregate from ({$countQuery->select('products.id')->reorder('products.id')->toSql()}) c",
+                $countQuery->getBindings()
+            )
         )->pluck('aggregate')->first();
 
         $items = [];
@@ -429,7 +438,12 @@ class ProductRepository extends Repository
 
         $items = $indices['total'] ? $query->get() : [];
 
-        $results = new LengthAwarePaginator($items, $indices['total'], $limit, $currentPage, [
+        $results = new LengthAwarePaginator(
+            $items,
+            $indices['total'],
+            $limit,
+            $currentPage,
+            [
                 'path'  => request()->url(),
                 'query' => request()->query(),
             ]
