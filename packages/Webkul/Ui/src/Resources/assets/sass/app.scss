@@ -1462,8 +1462,9 @@ modal {
 .image-wrapper {
     margin-bottom: 20px;
     margin-top: 10px;
+    margin-right: 14px;
     display: inline-block;
-    width: 100%;
+    position: relative;
 
     .image-item {
         width: 200px;

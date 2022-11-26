@@ -536,7 +536,8 @@ body {
     .trash-icon {
         position: absolute;
         cursor: pointer;
-        margin-top: 25%;
+        top: 50%;
+        right: -9px;
     }
 }
 
