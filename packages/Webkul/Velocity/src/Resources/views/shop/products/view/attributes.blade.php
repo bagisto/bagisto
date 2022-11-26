@@ -30,7 +30,7 @@
                                 && $attribute['value']
                             )
                                 <td>
-                                    <a  href="{{ route('shop.product.file.download', [$product->product_id, $attribute['id']])}}" style="color:black;">
+                                    <a  href="{{ route('shop.product.file.download', [$product->id, $attribute['id']])}}" style="color:black;">
                                         <i class="icon rango-download-1"></i>
                                     </a>
                                 </td>
@@ -39,7 +39,7 @@
                                 && $attribute['value']
                             )
                                 <td>
-                                    <a href="{{ route('shop.product.file.download', [$product->product_id, $attribute['id']])}}">
+                                    <a href="{{ route('shop.product.file.download', [$product->id, $attribute['id']])}}">
                                         <img src="{{ Storage::url($attribute['value']) }}" style="height: 20px; width: 20px;" alt=""/>
                                     </a>
                                 </td>

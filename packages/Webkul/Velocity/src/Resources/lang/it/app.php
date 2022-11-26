@@ -227,7 +227,7 @@ return [
             'login' => 'Login',
             'become-user' => 'Diventa Utente',
             'user-registration' => 'Registrazione Utente',
-            'form-sginup-text' => 'Se sei nuovo nel nostro store, siamo lieti di averti come nuovo amico.',
+            'form-signup-text' => 'Se sei nuovo nel nostro store, siamo lieti di averti come nuovo amico.',
         ],
         'forget-password' => [
             'login' => 'Login',

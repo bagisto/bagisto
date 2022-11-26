@@ -308,7 +308,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Helper'  => Konekt\Concord\Facades\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
         'ProductImage' => Webkul\Product\Facades\ProductImage::class,
         'ProductVideo' => Webkul\Product\Facades\ProductVideo::class,
         'Redis' => Illuminate\Support\Facades\Redis::class,

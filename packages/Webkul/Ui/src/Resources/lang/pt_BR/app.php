@@ -4,7 +4,7 @@ return [
         'actions' => 'Ações',
         'id'      => 'Colunas do índice têm valor maior que zero apenas',
 
-        'massaction' => [
+        'mass-action' => [
             'mass-delete-confirm'     => 'Você realmente deseja excluir esses itens selecionados :resource?',
             'mass-update-status'      => 'Você realmente deseja atualizar o status desses itens selecionados :resource?',
             'delete'                  => 'Você realmente deseja excluir este :resource?',

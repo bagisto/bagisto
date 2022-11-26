@@ -21,17 +21,19 @@
 
     <script type="text/x-template" id="ticket-list-template">
         <div class="ticket-list table">
-            <table>
-                <tbody>
-                    <ticket-item
-                        v-for="(ticket, index) in tickets"
-                        :key="index"
-                        :index="index"
-                        :ticket-item="ticket"
-                        @onRemoveTicket="removeTicket($event)"
-                    ></ticket-item>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table>
+                    <tbody>
+                        <ticket-item
+                            v-for="(ticket, index) in tickets"
+                            :key="index"
+                            :index="index"
+                            :ticket-item="ticket"
+                            @onRemoveTicket="removeTicket($event)"
+                        ></ticket-item>
+                    </tbody>
+                </table>
+            </div>
 
             <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px" @click="addTicket()">
                 {{ __('bookingproduct::app.admin.catalog.products.add-ticket') }}

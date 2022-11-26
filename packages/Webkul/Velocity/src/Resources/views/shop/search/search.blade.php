@@ -20,8 +20,7 @@
             right: 0;
             position: absolute;
         }
-
-
+        
         @media only screen and (max-width: 992px) {
             .main-content-wrapper .vc-header {
                 box-shadow: unset;
@@ -41,7 +40,6 @@
             .quick-view-in-list {
                 display: none;
             }
-
         }
     </style>
 @endpush

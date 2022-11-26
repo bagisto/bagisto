@@ -61,7 +61,7 @@ class EventDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.events.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Event']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Event']),
             'icon'         => 'icon trash-icon',
         ]);
     }

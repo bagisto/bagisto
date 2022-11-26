@@ -2,7 +2,7 @@
 
 namespace Webkul\Product\Helpers;
 
-class Toolbar extends AbstractProduct
+class Toolbar
 {
     /**
      * Returns available sort orders.
@@ -27,8 +27,8 @@ class Toolbar extends AbstractProduct
      */
     public function getAvailableLimits()
     {
-        if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
-            $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
+        if ($productsPerPage = core()->getConfigData('catalog.products.storefront.products_per_page')) {
+            $pages = explode(',', $productsPerPage);
 
             return $pages;
         }
@@ -95,9 +95,7 @@ class Toolbar extends AbstractProduct
         ) {
             return true;
         } elseif (! isset($params['sort'])) {
-            $sortBy = core()->getConfigData('catalog.products.storefront.sort_by')
-                ? core()->getConfigData('catalog.products.storefront.sort_by')
-                : 'name-desc';
+            $sortBy = core()->getConfigData('catalog.products.storefront.sort_by') ?: 'name-desc';
 
             if ($key == $sortBy) {
                 return true;
@@ -134,9 +132,7 @@ class Toolbar extends AbstractProduct
     {
         $params = request()->input();
 
-        $defaultMode = core()->getConfigData('catalog.products.storefront.mode')
-            ? core()->getConfigData('catalog.products.storefront.mode')
-            : 'grid';
+        $defaultMode = core()->getConfigData('catalog.products.storefront.mode') ?: 'grid';
 
         if (
             request()->input() == null
@@ -166,9 +162,7 @@ class Toolbar extends AbstractProduct
             return $params['mode'];
         }
 
-        return core()->getConfigData('catalog.products.storefront.mode')
-            ? core()->getConfigData('catalog.products.storefront.mode')
-            : 'grid';
+        return core()->getConfigData('catalog.products.storefront.mode') ?: 'grid';
     }
 
     /**

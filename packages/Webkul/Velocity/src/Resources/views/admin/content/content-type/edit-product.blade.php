@@ -29,31 +29,12 @@
                 <field-autocomplete
                     :fieldLabel="'{{ __('admin::app.catalog.attributes.options') }}'"
                     :fieldPlaceholder="'{{ __('velocity::app.admin.contents.search-hint') }}'"
-                    :routePath="'{{ route('velocity.admin.content.search') }}'"
+                    :routePath="'{{ route('admin.catalog.products.product_link_search') }}'"
                     :linkedResults='@json(app('Webkul\Velocity\Repositories\ContentRepository')->getProducts($content->id))'
                 ></field-autocomplete>
             </div>
         </div>
 
-    </script>
-
-    <script>
-        Vue.component('catalog-product', {
-            template: '#catalog-product-template',
-
-            inject: ['$validator'],
-
-            data() {
-                return {
-                    catalog_type: @json($catalogType),
-                }
-            },
-            methods: {
-                loadCatalogType(event) {
-                    this.catalog_type = event.target.value;
-                }
-            }
-        });
     </script>
 
     <script type="text/x-template" id="field-autocomplete-template">
@@ -96,8 +77,24 @@
     </script>
 
     <script>
-        Vue.component('field-autocomplete', {
+        Vue.component('catalog-product', {
+            template: '#catalog-product-template',
 
+            inject: ['$validator'],
+
+            data() {
+                return {
+                    catalog_type: @json($catalogType),
+                }
+            },
+            methods: {
+                loadCatalogType(event) {
+                    this.catalog_type = event.target.value;
+                }
+            }
+        });
+
+        Vue.component('field-autocomplete', {
             template: '#field-autocomplete-template',
 
             props: {

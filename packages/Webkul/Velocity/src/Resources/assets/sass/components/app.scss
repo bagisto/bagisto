@@ -1029,7 +1029,7 @@
             }
 
             input[type='search'] {
-                padding-left: 35px;
+                padding-right: 40px;
             }
 
             input:active,
@@ -1600,9 +1600,11 @@
 
 .product-price {
     display: inline-block;
+    font-weight: 600;
 
     .price-label {
         margin-right: 6px;
+        margin-top: 4px;
         float: right;
     }
 
@@ -1712,7 +1714,7 @@
 
     .lg-card-container {
         &.list-card {
-            margin: 0 15px;
+            margin: 0 15px 5px 15px;
         }
     }
 
@@ -2528,6 +2530,7 @@
 
         .btn-add-to-cart {
             white-space: pre-wrap;
+            max-width: 63%;
         }
 
         .close-btn {
