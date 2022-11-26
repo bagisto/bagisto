@@ -58,7 +58,7 @@
         <script type="text/javascript">
             window.flashMessages = [];
 
-            if(localStorage.getItem('dark-mode') == 'true'){
+            if (localStorage.getItem('dark-mode') == 'true') {
                 document.body.classList.toggle("dark-mode");
             }
 
