@@ -41,6 +41,7 @@ class ReviewController extends Controller
             
             if ($product == null) {
                 session()->flash('error', trans('customer::app.product-removed'));
+                
                 return redirect()->back();
             }
 

@@ -44,7 +44,7 @@
     <template v-slot:greetings>
         @guest('customer')
             <a class="unset" href="{{ route('shop.customer.session.index') }}">
-                {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
+                {{ __('velocity::app.responsive.header.greeting-for-guest') }}
             </a>
         @endguest
 
@@ -134,7 +134,7 @@
             @guest('customer')
                 <a
                     class="unset"
-                    href="{{ route('shop.customer.session.create') }}">
+                    href="{{ route('shop.customer.session.index') }}">
                     <span>{{ __('shop::app.customer.login-form.title') }}</span>
                 </a>
             @endguest
@@ -156,8 +156,6 @@
             <img class="logo" src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/velocity/assets/images/logo-text.png') }}" alt="" />
         </a>
     </template>
-
-    
 
     <template v-slot:search-bar>
         <div class="row">

@@ -146,6 +146,19 @@ return [
         'sort'   => 3,
         'fields' => [
             [
+                'name'          => 'search_mode',
+                'title'         => 'admin::app.admin.system.search-mode',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.admin.system.flat',
+                        'value' => 'flat',
+                    ], [
+                        'title' => 'admin::app.admin.system.elastic',
+                        'value' => 'elastic',
+                    ],
+                ],
+            ], [
                 'name'          => 'mode',
                 'title'         => 'admin::app.admin.system.default-list-mode',
                 'type'          => 'select',
@@ -163,7 +176,7 @@ return [
                 'name'          => 'products_per_page',
                 'title'         => 'admin::app.admin.system.products-per-page',
                 'type'          => 'text',
-                'info'          => 'admin::app.admin.system.comma-seperated',
+                'info'          => 'admin::app.admin.system.comma-separated',
                 'channel_based' => true,
             ], [
                 'name'          => 'sort_by',

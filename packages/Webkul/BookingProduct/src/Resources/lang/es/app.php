@@ -64,13 +64,15 @@ return [
                 'status' => 'Estado',
                 'open' => 'Abierto',
                 'close' => 'Cerrado',
-                'time-error' => 'The to time must be greater than the from time.'
+                'time-error' => 'The to time must be greater than the from time.',
             ]
         ],
 
         'sales' => [
             'bookings' => [
                 'title' => 'Información sobre Reservas',
+                'table-view' => "Vista de tabla",
+                'calender-view' => "Vista de calendario",
             ]
         ],
 
@@ -101,7 +103,7 @@ return [
             'book-an-appointment' => 'Reservar una Cita',
             'date' => 'Fecha',
             'slot' => 'Horario',
-            'no-slots-available' => 'No slots available',
+            'no-slots-available' => 'No espacios disponibles',
             'rent-an-item' => 'Alquilar un Artículo',
             'choose-rent-option' => 'Elija la Opción de Alquiler',
             'daily-basis' => 'Diariamente',

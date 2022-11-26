@@ -67,7 +67,6 @@
 
                     {!! view_render_event('bagisto.admin.cms.pages.create_form_accordian.general.after') !!}
 
-
                     {!! view_render_event('bagisto.admin.cms.pages.create_form_accordian.seo.before') !!}
 
                     <accordian title="{{ __('admin::app.cms.pages.seo') }}" :active="true">

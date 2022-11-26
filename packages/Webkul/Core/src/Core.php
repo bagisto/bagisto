@@ -660,6 +660,12 @@ class Core
 
         $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
+        $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal ?? 2);
+
+        if (! $currency) {
+            return $formatter->formatCurrency($price, $currencyCode);
+        }
+
         if ($symbol = $currency->symbol) {
             if ($this->currencySymbol($currency) == $symbol) {
                 return $formatter->formatCurrency($price, $currency->code);
@@ -778,7 +784,7 @@ class Core
     /**
      * Format date using current channel.
      *
-     * @param  \Illuminate\Support\Carbon|null  $date
+     * @param  \Illuminate\Support\Carbon|string|null  $date
      * @param  string  $format
      * @return string
      */
@@ -788,6 +794,10 @@ class Core
 
         if (is_null($date)) {
             $date = Carbon::now();
+        }
+
+        if (is_string($date)) {
+            $date = Carbon::parse($date);
         }
 
         $date->setTimezone($channel->timezone);
@@ -1097,7 +1107,7 @@ class Core
 
                 if (! count($level2['children'])) {
                     continue;
-                } 
+                }
 
                 foreach ($level2['children'] as $key3 => $level3) {
                     $temp3 = explode('.', $level3['key']);
@@ -1224,7 +1234,7 @@ class Core
      */
     public function getAdminEmailDetails()
     {
-        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ?: config('mail.admin.name');
+        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ?: (config('mail.admin.name') ?: config('mail.from.name'));
 
         $admin_email = $this->getConfigData('emails.configure.email_settings.admin_email') ?: config('mail.admin.address');
 

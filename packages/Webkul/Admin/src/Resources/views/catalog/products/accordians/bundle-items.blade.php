@@ -106,7 +106,7 @@
                 <div class="linked-product-search-result">
                     <ul>
                         <li v-for='(product, index) in searched_results' v-if='searched_results.length' @click="addProduct(product)">
-                            @{{ product.name }}
+                            @{{ product.name }} (@{{ product.sku }})
                         </li>
 
                         <li v-if='! searched_results.length && search_term.length && ! is_searching'>
@@ -328,7 +328,7 @@
 
                     this.$http.get ("{{ route('admin.catalog.products.search_simple_product') }}", {params: {query: this.search_term}})
                         .then (function(response) {
-                            self.searched_results = response.data;
+                            self.searched_results = response.data.data;
 
                             self.is_searching = false;
                         })

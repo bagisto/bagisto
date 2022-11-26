@@ -504,6 +504,8 @@ return [
             'proceed-to-checkout'       => 'התקדם לנקודת הביקורת',
             'remove'                    => 'לְהַסִיר',
             'remove-link'               => 'לְהַסִיר',
+            'remove-all-items'          => 'הסר את כל הפריטים',
+            'confirm-action'            => 'אשר פעולה',
             'move-to-wishlist'          => 'העבר לרשימת משאלות',
             'move-to-wishlist-success'  => 'הפריט הועבר לרשימת המשאלות בהצלחה.',
             'move-to-wishlist-error'    => 'לא ניתן להעביר פריט לרשימת המשאלות, אנא נסה שוב מאוחר יותר.',
@@ -539,6 +541,7 @@ return [
             'specify-shipping-method'   => 'אנא ציין את שיטת המשלוח.',
             'specify-payment-method'    => 'אנא ציין אמצעי תשלום.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
         ],
 
         'onepage' => [

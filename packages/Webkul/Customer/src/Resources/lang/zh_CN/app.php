@@ -12,7 +12,7 @@ return [
         'remove-all-success' => '您的愿望清单中的所有项目都已被删除',
     ],
 
-    'product-removed'  => 'لم يعد المنتج متاحًا كما تمت إزالته بواسطة المسؤول',
+    'product-removed'  => '产品不再可用，因为管理员已删除',
 
     'reviews' => [
         'empty' => '您还没有评论任何产品',

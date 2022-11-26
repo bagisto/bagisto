@@ -54,6 +54,7 @@ return [
             'title' => 'Content List',
             'select' => '-- Select --',
             'add-title' => 'Add Content',
+            'edit-title' => 'Edit Content',
             'btn-add-content' => 'Add Content',
             'save-btn-title' => 'Save Content',
             'autocomplete' => '[Autocomplete]',
@@ -106,16 +107,15 @@ return [
             'update-meta-data'          => 'Update',
             'product-view-image'        => 'Product View Image',
             'advertisement-two'         => 'Advertisement Two Images',
-            'advertisement-one'         => 'Advertisement One Images',
             'footer-middle-content'     => 'Footer Middle Content',
             'advertisement-four'        => 'Advertisement Four Images',
             'advertisement-three'       => 'Advertisement Three Images',
             'images'                    => 'Images',
             'general'                   => 'General',
             'add-image-btn-title'       => 'Add Image',
-            'image-four-resolution'     => 'First image resolutions should be like 427px X 410px , 
-                                            Second images resolutions should be like 397px X 180px , 
-                                            Third images resolutions should be like 397px X 180px , 
+            'image-four-resolution'     => 'First image resolutions should be like 427px X 410px ,
+                                            Second images resolutions should be like 397px X 180px ,
+                                            Third images resolutions should be like 397px X 180px ,
                                             Fouth image resolutions should be like 427px X 410px',
             'image-three-resolution'    => 'First image resolution should be like 635px X 465px ,
                                             Second image resolutions should be like 620px X 225px,
@@ -135,9 +135,9 @@ return [
             ]
         ],
         'category'  => [
-            'image-four-resolution'     => 'First image resolutions should be like 427px X 410px , 
-                                            Second images resolutions should be like 397px X 180px , 
-                                            Third images resolutions should be like 397px X 180px , 
+            'image-four-resolution'     => 'First image resolutions should be like 427px X 410px ,
+                                            Second images resolutions should be like 397px X 180px ,
+                                            Third images resolutions should be like 397px X 180px ,
                                             Fouth image resolutions should be like 427px X 410px',
             'image-three-resolution'    => 'First image resolution should be like 635px X 465px ,
                                             Second image resolutions should be like 620px X 225px,
@@ -247,7 +247,7 @@ return [
             'login'             => 'Login',
             'become-user'       => 'Become User',
             'user-registration' => 'User Registration',
-            'form-sginup-text'  => 'If you are new to our store, we glad to have you as member.',
+            'form-signup-text'  => 'If you are new to our store, we glad to have you as member.',
         ],
         'forget-password'   => [
             'login'                 => 'Login',
@@ -333,6 +333,7 @@ return [
             'done'      => 'Done',
             'languages' => 'Languages',
             'greeting'  => 'Welcome, :customer !',
+            'greeting-for-guest' => 'Welcome, Guest'
         ]
     ],
 ];

@@ -550,7 +550,7 @@ return [
                 'configurable'                  => 'Configurable',
 
             ],
-            'familiy'                       => 'Attribute Family',
+            'family'                       => 'Attribute Family',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Configurable Attributes',
             'attribute-header'              => 'Attribute(s)',
@@ -683,7 +683,6 @@ return [
             'image'                       => 'Image',
             'file'                        => 'File',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'Create in Product Flat Table',
             'is_comparable'               => 'Attribute is comparable',
             'default_null_option'         => 'Create default empty option',
             'validation-messages'         => [
@@ -834,6 +833,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Name',
             'symbol'            => 'Symbol',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Currency created successfully.',
             'update-success'    => 'Currency updated successfully.',
             'delete-success'    => 'Currency deleted successfully.',
@@ -1196,7 +1196,7 @@ return [
             'code-prefix'                    => 'Code Prefix',
             'code-suffix'                    => 'Code Suffix',
             'generate'                       => 'Generate',
-            'cart-rule-not-defind-error'     => 'Cart rule is not defined',
+            'cart-rule-not-defined-error'    => 'Cart rule is not defined',
             'end-other-rules'                => 'End Other Rules',
             'children-categories'            => 'Categories (Children Only)',
             'parent-categories'              => 'Categories (Parent Only)',
@@ -1332,9 +1332,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'GO TO HOME',
-        'in-maitainace' => 'In Maintenance',
-        'right-back'    => 'Be Right Back',
+        'go-to-home'     => 'GO TO HOME',
+        'in-maintenance' => 'In Maintenance',
+        'right-back'     => 'Be Right Back',
 
         '404' => [
             'page-title' => '404 Page not found',
@@ -1590,7 +1590,7 @@ return [
             'oldest-first'                          => 'Oldest First',
             'cheapest-first'                        => 'Cheapest First',
             'expensive-first'                       => 'Expensive First',
-            'comma-seperated'                       => 'Comma Seperated',
+            'comma-separated'                       => 'Comma Seperated',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Rich Snippets',

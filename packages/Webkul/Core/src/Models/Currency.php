@@ -22,6 +22,7 @@ class Currency extends Model implements CurrencyContract
         'code',
         'name',
         'symbol',
+        'decimal',
     ];
 
     /**

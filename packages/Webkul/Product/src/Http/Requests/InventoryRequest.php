@@ -25,7 +25,7 @@ class InventoryRequest extends FormRequest
     {
         return [
             'inventories'   => 'required|array',
-            'inventories.*' => 'required|integer|min:0',
+            'inventories.*' => 'required|numeric|min:0',
         ];
     }
 

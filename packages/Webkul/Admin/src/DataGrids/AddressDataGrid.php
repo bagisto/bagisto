@@ -173,7 +173,7 @@ class AddressDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.customer.addresses.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'address']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'address']),
             'icon'         => 'icon trash-icon',
         ]);
     }

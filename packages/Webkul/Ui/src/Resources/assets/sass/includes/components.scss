@@ -52,6 +52,7 @@
         align-items: end;
 
         .filter-right {
+            margin-top: 10px;
             justify-self: end;
             display: grid;
             grid-template-columns: auto auto;
@@ -267,9 +268,11 @@
                 }
 
                 .filter-left {
-                    display: grid;
-                    grid-template-columns: 49.5% 49%;
-                    column-gap: 5px;
+                    .filters {
+                        display: grid;
+                        grid-template-columns: 49.5% 49%;
+                        column-gap: 5px;    
+                    }
                 }
 
                 .filter-right {

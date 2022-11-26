@@ -3,7 +3,7 @@
 namespace Webkul\Core\Traits;
 
 use Illuminate\Support\Str;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 trait PDFHandler
 {

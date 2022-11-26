@@ -57,7 +57,7 @@ class AttributeCest
      */
     public function testEdit(FunctionalTester $I): void
     {
-        $attribute = $I->have(Attribute::class, ['use_in_flat' => 0]);
+        $attribute = $I->have(Attribute::class, []);
 
         $I->loginAsAdmin();
         $I->amOnAdminRoute('admin.catalog.attributes.index');
