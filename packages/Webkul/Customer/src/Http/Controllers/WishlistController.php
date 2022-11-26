@@ -130,34 +130,33 @@ class WishlistController extends Controller
                 'shared' => 'required|boolean'
             ]);
 
-            $updateCounts = $customer->wishlist_items();
+            if ($productIds && $data['shared'] && ! $selectedAll) {
+                $updateCounts = $customer->wishlist_items();
 
-            if ($productIds 
-                && $data['shared']
-            ) {
                 $updateCounts->whereIn('product_id', $productIds);
+
+                $updateCounts->update(['shared' => $data['shared']]);
             }
 
-            if ($productIds 
-                && ! $data['shared'] 
-                && ! $selectedAll
-            ) {
-                $updateCounts->whereNotIn('product_id', $productIds);
+            if ($productIds && ! $selectedAll) {
+                $notSharingProduct = $customer->wishlist_items();
+                
+                $notSharingProduct->whereNotIn('product_id', $productIds);
+
+                $notSharingProduct->update(['shared' => 0]);
             }
 
-            $updateCounts = $updateCounts->update(['shared' => $data['shared']]);
+            if ($selectedAll && $productIds) {
+                $selectAllProduct = $customer->wishlist_items();
 
-            $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);
+                $selectAllProduct->update(['shared' => 1]);
 
-            if (
-                $updateCounts
-                && $updateCounts > 0
-            ) {
-                return response()->json([
-                    'isWishlistShared'   => $data['shared'] ? 1 : 0,
-                    'wishlistSharedLink' => $customer->getWishlistSharedLink($productIds)
-                ]);
             }
+
+            return response()->json([
+                'isWishlistShared'   => $data['shared'] ? 1 : 0,
+                'wishlistSharedLink' => $customer->getWishlistSharedLink($productIds)
+            ]);
         }
 
         return response()->json([], 400);
