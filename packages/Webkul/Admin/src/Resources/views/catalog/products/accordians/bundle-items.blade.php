@@ -146,7 +146,7 @@
                             @onCheckProduct="checkProduct($event)">
                         </bundle-product-item>
 
-                        <tr v-if="!bundle_option_products.length">
+                        <tr v-if="! bundle_option_products.length">
                             <td colspan="10">
                                 <p class="no-product-item-found">{{ __('admin::app.catalog.products.no-product-added') }} </p>
                             </td>
