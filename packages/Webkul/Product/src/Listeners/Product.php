@@ -2,61 +2,92 @@
 
 namespace Webkul\Product\Listeners;
 
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Helpers\Indexer;
+use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch, Flat};
 
 class Product
 {
+    protected $indexers = [
+        'inventory' => Inventory::class,
+        'price'     => Price::class,
+        'elastic'   => ElasticSearch::class,
+        'flat'      => Flat::class,
+    ];
+
     /**
      * Create a new listener instance.
      *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
-     * @param  \Webkul\Product\Helpers\Indexer  $indexer
      * @return void
      */
     public function __construct(
+        protected ProductRepository $productRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
-        protected ProductGroupedProductRepository $productGroupedProductRepository,
-        protected Indexer $indexer
+        protected ProductGroupedProductRepository $productGroupedProductRepository
     )
     {
     }
 
     /**
-     * Update or create product price indices
+     * Update or create product indices
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function afterCreate($product)
     {
-        $this->indexer->refreshFlat($product);
+        app($this->indexers['flat'])->refresh($product);
     }
 
     /**
-     * Update or create product price indices
+     * Update or create product indices
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function afterUpdate($product)
     {
-        $this->indexer->refreshFlat($product);
+        $products = $this->getAllRelatedProducts($product);
 
-        $this->refreshPriceIndices($product);
+        app($this->indexers['flat'])->refresh($product);
 
-        $this->indexer->refreshInventory($product);
+        app($this->indexers['inventory'])->reindexRows($products);
+
+        app($this->indexers['price'])->reindexRows($products);
+
+        if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
+            app($this->indexers['elastic'])->reindexRows($products);
+        }
     }
 
     /**
-     * Update or create product price indices
+     * Delete product indices
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  integer  $productId
      * @return void
      */
-    public function refreshPriceIndices($product)
+    public function beforeDelete($productId)
+    {
+        if (core()->getConfigData('catalog.products.storefront.search_mode') != 'elastic') {
+            return;
+        }
+
+        $product = $this->productRepository->find($productId);
+
+        app($this->indexers['elastic'])->reindexRow($product);
+    }
+
+    /**
+     * Returns parents bundle products associated with simple product
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
+    public function getAllRelatedProducts($product)
     {
         $products = [$product];
 
@@ -70,11 +101,17 @@ class Product
                 $this->getParentBundleProducts($product),
                 $this->getParentGroupProducts($product)
             );
+        } elseif ($product->type == 'configurable') {
+            $products = [];
+
+            foreach ($product->variants as $variant) {
+                $products[] = $variant;
+            }
+
+            $products[] = $product;
         }
 
-        foreach ($products as $product) {
-            $this->indexer->refreshPrice($product);
-        }
+        return $products;
     }
 
     /**

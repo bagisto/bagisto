@@ -2,17 +2,17 @@
 
 namespace Webkul\Product\Listeners;
 
-use Webkul\Product\Helpers\Indexer;
+use Webkul\Product\Helpers\Indexers\Inventory;
 
 class Order
 {
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Product\Helpers\Indexer  $indexer
+     * @param  \Webkul\Product\Helpers\Indexers\Inventory  $inventoryIndexer
      * @return void
      */
-    public function __construct(protected Indexer $indexer)
+    public function __construct(protected Inventory $inventoryIndexer)
     {
     }
 
@@ -22,23 +22,14 @@ class Order
      * @param  \Webkul\Sale\Contracts\Order  $order
      * @return void
      */
-    public function afterCreate($order)
+    public function afterCancelOrCreate($order)
     {
-        foreach ($order->all_items as $item) {
-            $this->indexer->refreshInventory($item->product);
-        }
-    }
+        $products = [];
 
-    /**
-     * After order is cancelled
-     *
-     * @param  \Webkul\Sale\Contracts\Order  $order
-     * @return void
-     */
-    public function afterCancel($order)
-    {
         foreach ($order->all_items as $item) {
-            $this->indexer->refreshInventory($item->product);
+            $products[] = $item->product;
         }
+
+        $this->inventoryIndexer->reindexRows($products);
     }
 }

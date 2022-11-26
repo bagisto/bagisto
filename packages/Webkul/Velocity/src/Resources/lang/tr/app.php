@@ -223,7 +223,7 @@ return [
             'login'             => 'Giriş Yap',
             'become-user'       => 'Kullanıcı Olun',
             'user-registration' => 'Kullanıcı Kaydı',
-            'form-sginup-text'  => 'Eğer mağazamızda yeniyseniz, sizleri üye olarak aramızda görmekten memnuniyet duyarız.',
+            'form-signup-text'  => 'Eğer mağazamızda yeniyseniz, sizleri üye olarak aramızda görmekten memnuniyet duyarız.',
         ],
         'forget-password'   => [
             'login'                 => 'Giriş Yap',

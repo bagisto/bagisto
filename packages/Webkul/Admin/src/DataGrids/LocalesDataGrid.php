@@ -102,7 +102,7 @@ class LocalesDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.locales.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Locale']),
             'icon'         => 'icon trash-icon',
         ]);
     }

@@ -25,7 +25,7 @@
                             && $attribute['value']
                         )
                             <td>
-                                <a  href="{{ route('shop.product.file.download', [$product->product_id, $attribute['id']])}}">
+                                <a  href="{{ route('shop.product.file.download', [$product->id, $attribute['id']])}}">
                                     <i class="icon sort-down-icon download"></i>
                                 </a>
                             </td>
@@ -34,7 +34,7 @@
                             && $attribute['value']
                         )
                             <td>
-                                <a href="{{ route('shop.product.file.download', [$product->product_id, $attribute['id']])}}">
+                                <a href="{{ route('shop.product.file.download', [$product->id, $attribute['id']])}}">
                                     <img src="{{ Storage::url($attribute['value']) }}" style="height: 20px; width: 20px;" alt=""/>
                                 </a>
                             </td>

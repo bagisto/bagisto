@@ -64,13 +64,15 @@ return [
                 'status' => 'Durum',
                 'open' => 'Açık',
                 'close' => 'Kapalı',
-                'time-error' => 'Gidiş zamanı, başlangıç zamanından daha büyük olmalıdır.'
+                'time-error' => 'Gidiş zamanı, başlangıç zamanından daha büyük olmalıdır.',
             ]
         ],
 
         'sales' => [
             'bookings' => [
                 'title' => 'Rezervasyonlar',
+                'table-view' => "Tablo görünümü",
+                'calender-view' => "Takvim Görünümü",
             ]
         ],
 
