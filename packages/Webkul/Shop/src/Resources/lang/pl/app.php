@@ -502,9 +502,9 @@ return [
             'continue-registration'    => 'Kontynuuj rejestrację',
             'proceed-to-checkout'      => 'Przejdź do kasy”',
             'remove'                   => 'Usuń',
-            'remove-link'              => 'Usuń',
-            'remove-all-items'         => 'Remove all items',
-            'confirm-action'           => 'Confirm this action?',
+            'remove-link'              => 'Usuń link',
+            'remove-all-items'         => 'Usuń wszystkie elementy',
+            'confirm-action'           => 'Potwierdzić to działanie?',
             'move-to-wishlist'         => 'Przenieś na listę wyboru',
             'move-to-wishlist-success' => 'Produkt został pomyślnie przeniesiony na listę wyboru.',
             'move-to-wishlist-error'   => 'Nie można przenieść ptoduktu na listę życzeń, spróbuj ponownie później.',
@@ -541,6 +541,7 @@ return [
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Płatność PayPal została anulowana.',
         ],
 
         'onepage' => [

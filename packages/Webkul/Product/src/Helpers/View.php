@@ -2,14 +2,14 @@
 
 namespace Webkul\Product\Helpers;
 
-use Webkul\Product\Models\ProductFlat;
+use Webkul\Attribute\Repositories\AttributeOptionRepository;
 
-class View extends AbstractProduct
+class View
 {
     /**
      * Returns the visible custom attributes
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void|array
      */
     public function getAdditionalData($product)
@@ -18,14 +18,10 @@ class View extends AbstractProduct
 
         $attributes = $product->attribute_family->custom_attributes()->where('attributes.is_visible_on_front', 1)->get();
 
-        $attributeOptionRepository = app('Webkul\Attribute\Repositories\AttributeOptionRepository');
+        $attributeOptionRepository = app(AttributeOptionRepository::class);
 
         foreach ($attributes as $attribute) {
-            if ($product instanceof ProductFlat) {
-                $value = $product->product->{$attribute->code};
-            } else {
-                $value = $product->{$attribute->code};
-            }
+            $value = $product->{$attribute->code};
 
             if ($attribute->type == 'boolean') {
                 $value = $value ? 'Yes' : 'No';

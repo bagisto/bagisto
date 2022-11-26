@@ -76,7 +76,9 @@ class Channel extends TranslatableModel implements ChannelContract
     }
 
     /**
-     * Get the base currency
+     * Get the base currency.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function base_currency(): BelongsTo
     {
@@ -84,7 +86,9 @@ class Channel extends TranslatableModel implements ChannelContract
     }
 
     /**
-     * Get the base currency
+     * Get the root category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function root_category(): BelongsTo
     {

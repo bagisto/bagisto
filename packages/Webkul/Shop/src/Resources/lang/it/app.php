@@ -504,6 +504,8 @@ return [
             'continue-registration'    => 'Continua la registrazione',
             'proceed-to-checkout'      => 'Procedi alla Cassa',
             'remove'                   => 'Rimuovi',
+            'remove-all-items'         => 'Rimuovi tutti gli elementi',
+            'confirm-action'           => 'Conferma azione',
             'remove-link'              => 'Rimuovi',
             'move-to-wishlist'         => 'Sposta nella Wishlist',
             'move-to-wishlist-success' => 'Articolo spostato nella tua wishlist.',
@@ -541,6 +543,7 @@ return [
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Il pagamento con Paypal è stato annullato.',
         ],
 
         'onepage' => [

@@ -129,9 +129,9 @@ class CategoryDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return trans('admin::app.datagrid.active');
+                    return '<span class="badge badge-md badge-success">'. trans('admin::app.datagrid.active') . '</span>';
                 } else {
-                    return trans('admin::app.datagrid.inactive');
+                    return '<span class="badge badge-md badge-danger">'. trans('admin::app.datagrid.inactive') . '</span>';
                 }
             },
         ]);
@@ -164,7 +164,7 @@ class CategoryDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.catalog.categories.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
             'icon'         => 'icon trash-icon',
         ]);
 

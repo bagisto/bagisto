@@ -151,7 +151,7 @@ trait Mails
             }
 
             /**
-             * Email to admin.
+             * Email to inventory source.
              */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-inventory-source';
 

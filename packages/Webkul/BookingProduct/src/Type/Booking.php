@@ -98,9 +98,9 @@ class Booking extends Virtual
             $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $id);
 
             if ($bookingProduct) {
-                $this->bookingProductRepository->update(request('booking'), $bookingProduct->id);
+                $this->bookingProductRepository->update($data['booking'], $bookingProduct->id);
             } else {
-                $this->bookingProductRepository->create(array_merge(request('booking'), [
+                $this->bookingProductRepository->create(array_merge($data['booking'], [
                     'product_id' => $id,
                 ]));
             }

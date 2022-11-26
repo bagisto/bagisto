@@ -16,7 +16,7 @@
             <div class="error-box"  style="width: 50%">
 
                 <div class="error-title" style="font-size: 100px;color: #5E5E5E">
-                    {{ __('admin::app.error.in-maitainace') }}
+                    {{ __('admin::app.error.in-maintenance') }}
                 </div>
 
                 <div class="error-messgae" style="font-size: 24px;color: #5E5E5E">

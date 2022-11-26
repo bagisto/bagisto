@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
-use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Helpers\Indexers\Price\Configurable as ConfigurableIndexer;
 
 class Configurable extends AbstractType
@@ -79,11 +78,6 @@ class Configurable extends AbstractType
      * @var boolean
      */
     protected $hasVariants = true;
-
-    /**
-     * Product options.
-     */
-    protected $productOptions = [];
 
     /**
      * Get default variant.
@@ -670,21 +664,15 @@ class Configurable extends AbstractType
      */
     public function getBaseImage($item)
     {
+        $product = $item->product;
+
         if ($item instanceof \Webkul\Customer\Contracts\Wishlist) {
             if (isset($item->additional['selected_configurable_option'])) {
                 $product = $this->productRepository->find($item->additional['selected_configurable_option']);
-            } else {
-                $product = $item->product;
             }
         } else {
-            if ($item instanceof \Webkul\Checkout\Contracts\CartItem) {
+            if (count($item->child->product->images)) {
                 $product = $item->child->product;
-            } else {
-                if (count($item->child->product->images)) {
-                    $product = $item->child->product;
-                } else {
-                    $product = $item->product;
-                }
             }
         }
 
@@ -722,19 +710,6 @@ class Configurable extends AbstractType
         $item->save();
 
         return $result;
-    }
-
-    /**
-     * Get product options.
-     *
-     * @param  string  $product
-     * @return array
-     */
-    public function getProductOptions($product = '')
-    {
-        $options = app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($product);
-
-        return $options;
     }
 
     /**

@@ -2,17 +2,17 @@
 
 namespace Webkul\Product\Listeners;
 
-use Webkul\Product\Helpers\Indexer;
+use Webkul\Product\Helpers\Indexers\Inventory;
 
 class Refund
 {
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Product\Helpers\Indexer  $indexer
+     * @param  \Webkul\Product\Helpers\Indexers\Inventory  $inventoryIndexer
      * @return void
      */
-    public function __construct(protected Indexer $indexer)
+    public function __construct(protected Inventory $inventoryIndexer)
     {
     }
 
@@ -24,8 +24,12 @@ class Refund
      */
     public function afterCreate($refund)
     {
-        foreach ($refund->order->all_items as $item) {
-            $this->indexer->refreshInventory($item->product);
+        $products = [];
+
+        foreach ($refund->all_items as $item) {
+            $products[] = $item->product;
         }
+
+        $this->inventoryIndexer->reindexRows($products);
     }
 }
