@@ -622,7 +622,7 @@ h5 {
             padding: 10px;
             border-bottom: solid 1px #d3d3d3;
             color: $font-color;
-            vertical-align: inherit;
+            vertical-align: initial;
 
             &.actions {
                 .action {
@@ -646,7 +646,7 @@ h5 {
     }
 
     .control-group {
-        width: 100%;
+        width: max-content;
         margin-bottom: 0;
 
         .control {
