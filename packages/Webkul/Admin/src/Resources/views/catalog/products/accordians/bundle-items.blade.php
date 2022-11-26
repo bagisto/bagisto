@@ -179,7 +179,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(inputName + '[qty]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|min_value:1'" :name="[inputName + '[qty]']" v-model="product.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
+                    <input type="number" v-validate="{required: true, min_value: 1, ...(product.associated_product_qty > 0 ? {max_value: product.associated_product_qty} : {}) }" :name="[inputName + '[qty]']" v-model="product.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(inputName + '[qty]')">@{{ errors.first(inputName + '[qty]') }}</span>
                 </div>
             </td>
@@ -296,6 +296,7 @@
                     if (! alreadyAdded) {
                         this.bundle_option_products.push({
                                 product: item,
+                                associated_product_qty : item.inventory_indices[0].qty,
                                 qty: 0,
                                 is_default: 0,
                                 sort_order: 0
