@@ -578,6 +578,7 @@ return [
             'related-products'              => 'Gerelateerde producten',
             'product-search-hint'           => 'Start typing product name',
             'no-result-found'               => 'Er zijn geen producten gevonden met dezelfde naam.',
+            'no-product-added'              => 'Geen product toegevoegd',
             'searching'                     => 'Zoeken ...',
             'grouped-products'              => 'Gegroepeerde producten',
             'search-products'               => 'Zoek producten',

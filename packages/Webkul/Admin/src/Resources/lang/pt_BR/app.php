@@ -581,6 +581,7 @@ return [
             'grouped-products'              => 'Produtos Agrupados',
             'search-products'               => 'procurar produtos',
             'no-result-found'               => 'Produtos não encontrados com o mesmo nome.',
+            'no-product-added'              => 'Nenhum produto adicionado',
             'channel'                       => 'Canais',
             'bundle-items'                  => 'Itens do pacote',
             'add-option-btn-title'          => 'Adicionar opção',

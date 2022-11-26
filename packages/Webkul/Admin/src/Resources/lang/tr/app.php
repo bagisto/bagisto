@@ -589,6 +589,7 @@ return [
             'grouped-products'              => 'Gruplandırılmış Ürünler',
             'search-products'               => 'Ürünleri Ara',
             'no-result-found'               => 'Aynı isimde ürün bulunamadı.',
+            'no-product-added'              => 'Ürün Eklenmedi',
             'channel'                       => 'Kanallar',
             'bundle-items'                  => 'Paket İçerik',
             'add-option-btn-title'          => 'Seçenek Ekle',

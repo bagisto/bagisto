@@ -592,6 +592,7 @@ return [
             'related-products'              => 'সংশ্লিষ্ট পণ্য',
             'product-search-hint'           => 'পণ্যের নাম টাইপ করা শুরু করুন',
             'no-result-found'               => 'একই নামের পণ্য পাওয়া যায়নি.',
+            'no-product-added'              => 'কোন পণ্য যোগ করা হয়নি',
             'searching'                     => 'অনুসন্ধান করা হচ্ছে...',
             'grouped-products'              => 'দলবদ্ধ পণ্য',
             'search-products'               => 'পণ্য অনুসন্ধান করুন',

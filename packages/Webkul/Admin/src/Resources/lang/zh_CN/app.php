@@ -575,6 +575,7 @@ return [
             'related-products'              => '相关产品',
             'product-search-hint'           => '开始输入产品名称',
             'no-result-found'               => '找不到同名的产品.',
+            'no-product-added'              => '未添加产品',
             'searching'                     => '搜索中 ...',
             'grouped-products'              => '分组产品',
             'search-products'               => '搜索产品',
