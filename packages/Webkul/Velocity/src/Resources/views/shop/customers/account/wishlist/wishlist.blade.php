@@ -155,17 +155,6 @@
     <form method="POST">
         @csrf
 
-        <div class="form-group">
-            <label class="label-style mandatory">
-                {{ __('shop::app.customer.account.wishlist.wishlist-sharing') }}
-            </label>
-
-            <select name="shared" class="form-control" @change="shareWishlist($event.target.value)">
-                <option value="0" :selected="! isWishlistShared">{{ __('shop::app.customer.account.wishlist.disable') }}</option>
-                <option value="1" :selected="isWishlistShared">{{ __('shop::app.customer.account.wishlist.enable') }}</option>
-            </select>
-        </div>
-
         <div class="form-group select-container">
             <div>
                 <label class="label-style mandatory">
@@ -186,6 +175,17 @@
                 <input type='checkbox' id='check-all' ref='selectAll'>
                 <p>{{ __('shop::app.customer.account.wishlist.select-all') }}</p>
             </div>
+        </div>
+
+        <div class="form-group">
+            <label class="label-style mandatory">
+                {{ __('shop::app.customer.account.wishlist.wishlist-sharing') }}
+            </label>
+
+            <select name="shared" class="form-control" @change="shareWishlist($event.target.value)">
+                <option value="0" :selected="! isWishlistShared">{{ __('shop::app.customer.account.wishlist.disable') }}</option>
+                <option value="1" :selected="isWishlistShared">{{ __('shop::app.customer.account.wishlist.enable') }}</option>
+            </select>
         </div>
 
         <div class="form-group">
