@@ -23,7 +23,7 @@
                 @onRemoveOption="removeOption($event)"
             ></bundle-option-item>
 
-            <button type="button" class="btn btn-md btn-primary" @click="addOption" style="margin-bottom: 20px;">
+            <button type="button" class="btn btn-md btn-primary bundle-option-button" @click="addOption">
                 {{ __('admin::app.catalog.products.add-option-btn-title') }}
             </button>
         </div>
@@ -133,7 +133,7 @@
                         </tr>
                     </thead>
 
-                    <tbody style="border-bottom: 1px solid #e8e8e8;">
+                    <tbody class="bundle-product-item-with-options">
 
                         <bundle-product-item
                             v-for='(product, index) in bundle_option_products'
@@ -148,7 +148,7 @@
 
                         <tr v-if="!bundle_option_products.length">
                             <td colspan="10">
-                                <p style="text-align:center;">{{ __('admin::app.catalog.products.no-product-added') }} </p>
+                                <p class="no-product-item-found">{{ __('admin::app.catalog.products.no-product-added') }} </p>
                             </td>
                         </tr>
                     </tbody>
