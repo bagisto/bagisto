@@ -4,7 +4,7 @@ namespace Webkul\Product\Helpers;
 
 use Webkul\Product\Type\AbstractType;
 
-class ProductType extends AbstractProduct
+class ProductType
 {
     /**
      * Checks if a ProductType may have variants

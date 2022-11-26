@@ -33,7 +33,7 @@
 
                     <form
                         method="post"
-                        action="{{ route('shop.customer.forgot-password.store') }}"
+                        action="{{ route('shop.customer.forgot_password.store') }}"
                         @submit.prevent="onSubmit">
 
                         {{ csrf_field() }}

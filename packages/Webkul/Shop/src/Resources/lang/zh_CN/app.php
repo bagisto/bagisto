@@ -18,7 +18,7 @@ return [
     'common' => [
         'error' => '发生错误。请稍后再试.',
         'image-upload-limit' => '图片最大上传大小为2MB',
-        'no-result-found' => '我们找不到任何记录.'
+        'no-result-found' => '我们找不到任何记录.',
     ],
 
     'home' => [
@@ -542,6 +542,7 @@ return [
             'specify-shipping-method'   => '请指定送货方式.',
             'specify-payment-method'    => '请指定付款方式.',
             'rule-applied'              => '已应用购物车规则',
+            'paypal-payment-canceled'   => 'Paypal 付款已被取消。',
         ],
 
         'onepage' => [

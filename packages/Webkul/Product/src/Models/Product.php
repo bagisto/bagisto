@@ -16,6 +16,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\BookingProduct\Models\BookingProductProxy;
 use Webkul\Category\Models\CategoryProxy;
 use Webkul\Inventory\Models\InventorySourceProxy;
+use Webkul\CatalogRule\Models\CatalogRuleProductPriceProxy;
 use Webkul\Product\Contracts\Product as ProductContract;
 use Webkul\Product\Database\Eloquent\Builder;
 use Webkul\Product\Database\Factories\ProductFactory;
@@ -59,28 +60,6 @@ class Product extends Model implements ProductContract
      * @var array
      */
     public static $loadedAttributeValues = [];
-
-    /**
-     * The `booted` method of the model.
-     *
-     * @return void
-     */
-    protected static function booted(): void
-    {
-        parent::boot();
-
-        static::deleting(function ($product) {
-            foreach ($product->product_flats as $productFlat) {
-                $productFlat->unsearchable();
-            }
-
-            foreach ($product->variants as $variant) {
-                foreach ($variant->product_flats as $productFlat) {
-                    $productFlat->unsearchable();
-                }
-            }
-        });
-    }
 
     /**
      * Get the product flat entries that are associated with product.
@@ -141,6 +120,16 @@ class Product extends Model implements ProductContract
     public function customer_group_prices(): HasMany
     {
         return $this->hasMany(ProductCustomerGroupPriceProxy::modelClass());
+    }
+
+    /**
+     * Get the product customer group prices that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function catalog_rule_prices(): HasMany
+    {
+        return $this->hasMany(CatalogRuleProductPriceProxy::modelClass());
     }
 
     /**

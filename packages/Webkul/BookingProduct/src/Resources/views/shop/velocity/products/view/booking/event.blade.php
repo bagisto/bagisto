@@ -42,8 +42,10 @@
                             :min-quantity="defaultQty">
                         </quantity-changer>
                     </div>
-
-                    <p>@{{ ticket.description }}</p>
+                    
+                    <div class="ticket-item">
+                        <p>@{{ ticket.description }}</p>
+                    </div>
                 </div>
             </div>
         </div>

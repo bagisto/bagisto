@@ -2,6 +2,10 @@ body {
     &.rtl {
         text-align: right;
 
+        .table table {
+            text-align: right !important;
+        }
+
         .fs16 {
             font-size: 14px !important;
         }
@@ -346,7 +350,7 @@ body {
         }
 
         .account-content .account-layout .account-table-content input[type=search] {
-            padding-right: 35px;
+            padding-left: 40px;
         }
 
         .image-wrapper.image-wrapper .image-item {
