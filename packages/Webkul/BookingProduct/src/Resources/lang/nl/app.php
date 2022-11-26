@@ -64,13 +64,15 @@ return [
                 'status' => 'Toestand',
                 'open' => 'Open',
                 'close' => 'Dichtbij',
-                'time-error' => 'The to time must be greater than the from time.'
+                'time-error' => 'The to time must be greater than the from time.',
             ]
         ],
 
         'sales' => [
             'bookings' => [
                 'title' => 'Boekingsinformatie',
+                'table-view' => "Kalenderweergave",
+                'calender-view' => "Kalenderweergave",
             ]
         ],
 

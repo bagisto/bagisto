@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
 use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
 
 class ProductDataGrid extends DataGrid
 {
@@ -57,9 +59,14 @@ class ProductDataGrid extends DataGrid
     /**
      * Create datagrid instance.
      *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        protected ProductRepository $productRepository,
+        protected InventorySourceRepository $inventorySourceRepository
+    )
     {
         /* locale */
         $this->locale = core()->getRequestedLocaleCode();
@@ -92,17 +99,16 @@ class ProductDataGrid extends DataGrid
 
         /* query builder */
         $queryBuilder = DB::table('product_flat')
-            ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-            ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
+            ->leftJoin('attribute_families', 'product_flat.attribute_family_id', '=', 'attribute_families.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->select(
                 'product_flat.locale',
                 'product_flat.channel',
                 'product_flat.product_id',
-                'products.sku as product_sku',
+                'product_flat.sku as product_sku',
                 'product_flat.product_number',
                 'product_flat.name as product_name',
-                'products.type as product_type',
+                'product_flat.type as product_type',
                 'product_flat.status',
                 'product_flat.price',
                 'product_flat.url_key',
@@ -118,10 +124,10 @@ class ProductDataGrid extends DataGrid
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('product_name', 'product_flat.name');
-        $this->addFilter('product_sku', 'products.sku');
+        $this->addFilter('product_sku', 'product_flat.sku');
         $this->addFilter('product_number', 'product_flat.product_number');
         $this->addFilter('status', 'product_flat.status');
-        $this->addFilter('product_type', 'products.type');
+        $this->addFilter('product_type', 'product_flat.type');
         $this->addFilter('attribute_family', 'attribute_families.name');
 
         $this->setQueryBuilder($queryBuilder);
@@ -262,7 +268,7 @@ class ProductDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.catalog.products.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
             'icon'         => 'icon trash-icon',
         ]);
 
@@ -308,9 +314,9 @@ class ProductDataGrid extends DataGrid
      */
     private function renderQuantityView($row)
     {
-        $product = app(\Webkul\Product\Repositories\ProductRepository::class)->find($row->product_id);
+        $product = $this->productRepository->find($row->product_id);
 
-        $inventorySources = app(\Webkul\Inventory\Repositories\InventorySourceRepository::class)->findWhere(['status' => 1]);
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
 
         $totalQuantity = $row->quantity;
 

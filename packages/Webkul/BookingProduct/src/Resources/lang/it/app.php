@@ -65,13 +65,15 @@ return [
                 'status' => 'Stato',
                 'open' => 'Aperto',
                 'close' => 'Chiuso',
-                'time-error' => 'The to time must be greater than the from time.'
+                'time-error' => 'The to time must be greater than the from time.',
             ]
         ],
 
         'sales' => [
             'bookings' => [
                 'title' => 'Informazioni Prenotazione',
+                'table-view' => "Vista tabella",
+                'calender-view' => "Vista Calendario",
             ]
         ],
 

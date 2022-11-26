@@ -157,7 +157,8 @@ class AttributeRepository extends Repository
             'value_per_channel',
             'value_per_locale',
             'type',
-            'is_filterable'
+            'is_filterable',
+            'is_configurable',
         ];
 
         if (

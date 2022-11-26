@@ -241,7 +241,7 @@ return [
             'login' => 'Connexion',
             'become-user' => 'Devenir utilisateur',
             'user-registration' => 'Enregistrement de l\'utilisateur',
-            'form-sginup-text' => 'Si vous êtes nouveau dans notre magasin, nous sommes heureux de vous compter parmi nos membres.',
+            'form-signup-text' => 'Si vous êtes nouveau dans notre magasin, nous sommes heureux de vous compter parmi nos membres.',
         ],
 
         'forget-password' => [

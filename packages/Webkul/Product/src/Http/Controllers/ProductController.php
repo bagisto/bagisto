@@ -125,7 +125,7 @@ class ProductController extends Controller
 
         Event::dispatch('catalog.product.create.after', $product);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Product']));
+        session()->flash('success', trans('admin::app.catalog.products.create-success'));
 
         return redirect()->route($this->_config['redirect'], ['id' => $product->id]);
     }
@@ -162,7 +162,7 @@ class ProductController extends Controller
 
         Event::dispatch('catalog.product.update.after', $product);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
+        session()->flash('success', trans('admin::app.catalog.products.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -254,14 +254,14 @@ class ProductController extends Controller
             Event::dispatch('catalog.product.delete.after', $id);
 
             return response()->json([
-                'message' => trans('admin::app.response.delete-success', ['name' => 'Product']),
+                'message' => trans('admin::app.catalog.products.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
         return response()->json([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'Product']),
+            'message' => trans('admin::app.catalog.products.delete-failed'),
         ], 500);
     }
 
@@ -300,8 +300,9 @@ class ProductController extends Controller
     {
         $data = request()->all();
 
-        if (! isset($data['mass-action-type']) 
-            || ! $data['mass-action-type'] == 'update'
+        if (
+            ! isset($data['mass-action-type'])
+            || $data['mass-action-type'] != 'update'
         ) {
             return redirect()->back();
         }
@@ -340,25 +341,27 @@ class ProductController extends Controller
     /**
      * Result of search product.
      *
-     * @return \Illuminate\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function productLinkSearch()
     {
-        if (request()->ajax()) {
-            $results = [];
+        $results = [];
 
-            foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
-                $results[] = [
-                    'id'   => $row->product_id,
-                    'sku'  => $row->sku,
-                    'name' => $row->name,
-                ];
-            }
+        request()->query->add([
+            'name'  => request('query'),
+            'sort'  => 'created_at',
+            'order' => 'desc',
+        ]);
 
-            return response()->json($results);
-        } else {
-            return view($this->_config['view']);
+        foreach ($this->productRepository->getAll() as $product) {
+            $results[] = [
+                'id'   => $product->id,
+                'sku'  => $product->sku,
+                'name' => $product->name,
+            ];
         }
+
+        return response()->json($results);
     }
 
     /**
@@ -385,8 +388,16 @@ class ProductController extends Controller
      */
     public function searchSimpleProducts()
     {
-        return response()->json(
-            $this->productRepository->searchSimpleProducts(request()->input('query'))
-        );
+        request()->query->add([
+            'name'  => request('query'),
+            'type'  => 'simple',
+            'sort'  => 'created_at',
+            'order' => 'desc',
+            'limit' => 50,
+        ]);
+
+        $products = $this->productRepository->getAll();
+
+        return response()->json($products);
     }
 }

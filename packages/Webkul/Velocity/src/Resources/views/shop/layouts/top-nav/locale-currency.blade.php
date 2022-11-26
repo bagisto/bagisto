@@ -31,7 +31,11 @@
     <div class="d-inline-block">
         <div class="dropdown">
             <div class="locale-icon">
-                <img src="{{ core()->getCurrentLocale()->image_url }}" alt="" width="20" height="20" />
+                @if(! empty(core()->getCurrentLocale()->image_url))
+                    <img src="{{ core()->getCurrentLocale()->image_url }}" alt="" width="20" height="20" />
+                @else
+                    <img src="{{ asset('/themes/velocity/assets/images/flags/default-locale-image.png') }}" alt="" width="20" height="20" />
+                @endif
             </div>
 
             <select

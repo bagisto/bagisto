@@ -64,13 +64,15 @@ return [
                 'status' => '状态',
                 'open' => '开门',
                 'close' => '关门',
-                'time-error' => '这个时间必须大于开始时间.'
+                'time-error' => '这个时间必须大于开始时间.',
             ]
         ],
 
         'sales' => [
             'bookings' => [
                 'title' => '预订信息',
+                'table-view' => "表視圖",
+                'calender-view' => "日曆視圖",
             ]
         ],
 
