@@ -41,10 +41,20 @@
     background: #0041ff !important;
     color: #fff !important;
     cursor: pointer;
+    width: max-content !important;
+    left: 0 !important;
 
     &:hover {
         height: max-content !important;
     }
+}
+
+@media only screen and (max-width: 768px){
+    .vuecal__cell {
+        .vuecal__no-event {
+            padding-top: inherit !important;
+        }
+    }   
 }
 
 .rtl {
