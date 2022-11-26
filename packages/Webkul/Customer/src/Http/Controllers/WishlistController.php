@@ -138,10 +138,12 @@ class WishlistController extends Controller
                 $updateCounts->update(['shared' => $data['shared']]);
             }
 
-            if ($productIds && ! $selectedAll) {
+            if (! $selectedAll) {
                 $notSharingProduct = $customer->wishlist_items();
                 
-                $notSharingProduct->whereNotIn('product_id', $productIds);
+                if ($productIds) {
+                    $notSharingProduct->whereNotIn('product_id', $productIds);
+                }
 
                 $notSharingProduct->update(['shared' => 0]);
             }
