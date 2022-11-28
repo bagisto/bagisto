@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Helpers\Indexers;
 
+use Illuminate\Support\Carbon;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductPriceIndexRepository;
@@ -50,6 +51,53 @@ class Price extends AbstractIndexer
                     'catalog_rule_prices',
                     'variants.catalog_rule_prices',
                 ])
+                ->cursorPaginate($this->batchSize);
+ 
+            $this->reindexBatch($paginator->items());
+ 
+            if (! $cursor = $paginator->nextCursor()) {
+                break;
+            }
+ 
+            request()->query->add(['cursor' => $cursor->encode()]);
+        }
+
+        request()->query->remove('cursor');
+    }
+
+    /**
+     * Reindexed products with price which depends on date
+     *
+     * @return void
+     */
+    public function reindexSelective()
+    {
+        while (true) {
+            $paginator = $this->productRepository
+                ->select('products.*')
+                ->with([
+                    'variants',
+                    'attribute_values',
+                    'variants.attribute_values',
+                    'price_indices',
+                    'variants.price_indices',
+                    'customer_group_prices',
+                    'variants.customer_group_prices',
+                    'catalog_rule_prices',
+                    'variants.catalog_rule_prices',
+                ])
+                ->join('product_attribute_values as special_price_from_pav', function ($join) {
+                    $join->on('products.id', '=', 'special_price_from_pav.product_id')
+                        ->where('special_price_from_pav.attribute_id', self::SPECIAL_PRICE_FROM_ATTRIBUTE_ID);
+                })
+                ->join('product_attribute_values as special_price_to_pav', function ($join) {
+                    $join->on('products.id', '=', 'special_price_to_pav.product_id')
+                        ->where('special_price_to_pav.attribute_id', self::SPECIAL_PRICE_TO_ATTRIBUTE_ID);
+                })
+                ->where(function($query) {
+                    return $query->orWhere('special_price_from_pav.date_value', Carbon::now()->format('Y-m-d'))
+                        ->orWhere('special_price_to_pav.date_value', Carbon::now()->subDays(1)->format('Y-m-d'));
+                })
                 ->cursorPaginate($this->batchSize);
  
             $this->reindexBatch($paginator->items());

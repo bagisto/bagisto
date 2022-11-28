@@ -18,7 +18,7 @@ return [
     'common' => [
         'error' => '发生错误。请稍后再试.',
         'image-upload-limit' => '图片最大上传大小为2MB',
-        'no-result-found' => '我们找不到任何记录.'
+        'no-result-found' => '我们找不到任何记录.',
     ],
 
     'home' => [
