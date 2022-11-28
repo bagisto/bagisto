@@ -1045,6 +1045,11 @@ return [
             'error-create'        => 'Müşteri adresi silinirken hata oluştu!',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you login as :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Not Ekle',
             'save-note'  => 'Not Kaydet',

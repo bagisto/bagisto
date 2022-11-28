@@ -1019,6 +1019,11 @@ return [
             'error-create'        => '客户地址没有创建.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'以客户身份登录',
+            'login-message'=>'您登录为 :customer_name'
+        ],
+
         'note' => [
             'title'      => '添加备注',
             'save-note'  => '保存备注',

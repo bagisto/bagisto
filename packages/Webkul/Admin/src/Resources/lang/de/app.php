@@ -1038,6 +1038,12 @@ return [
             'success-mass-delete' => 'Erfolg: Die ausgewählten Adressen wurden erfolgreich gelöscht.',
             'error-create'        => 'Fehler: Kunde-Adresse nicht erstellt.',
         ],
+
+        'loginascustomer' => [
+            'grid-title'=>'inloggen als klant',
+            'login-message'=>'je bent ingelogd als :customer_name'
+        ],
+
         'note'        =>
         [
             'title'      => 'Notiz hinzufügen',
