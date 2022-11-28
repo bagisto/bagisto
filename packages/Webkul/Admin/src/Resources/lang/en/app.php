@@ -1066,6 +1066,11 @@ return [
             'error-create'        => 'Customer address not created.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you logged in as :customer_name'
+            ],
+
         'note' => [
             'title'      => 'Add Note',
             'save-note'  => 'Save Note',

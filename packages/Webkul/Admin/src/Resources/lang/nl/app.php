@@ -1027,6 +1027,11 @@ return [
             'error-create'        => 'Error: Klantadres niet aangemaakt.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you login as :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Notitie toevoegen',
             'save-note'  => 'Notitie opslaan',

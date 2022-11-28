@@ -176,7 +176,13 @@
             </td>
 
             <td>
-                @{{ product.product.name }}
+                <a
+                    :href="`${$root.baseUrl}/${product.product.url_key}`"
+                    v-text="product.product.name"
+                    target="_blank"
+                >
+                </a>
+
                 <input type="hidden" :name="[inputName + '[product_id]']" :value="product.product.id"/>
             </td>
 

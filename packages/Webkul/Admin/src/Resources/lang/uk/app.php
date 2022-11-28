@@ -1046,6 +1046,11 @@ return [
             'error-create'        => 'Адрес клиента не создан.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'увійти як клієнт',
+            'login-message'=>'ви ввійшли як :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Добавить заметку',
             'save-note'  => 'Сохранить заметку',
