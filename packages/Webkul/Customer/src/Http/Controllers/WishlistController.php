@@ -68,7 +68,10 @@ class WishlistController extends Controller
             session()->flash('error', trans('customer::app.product-removed'));
 
             return redirect()->back();
-        } elseif (! $product->status || ! $product->visible_individually) {
+        } elseif (
+            (! $product->status) 
+            || (! $product->visible_individually)
+        ) {
             abort(404);
         }
 
