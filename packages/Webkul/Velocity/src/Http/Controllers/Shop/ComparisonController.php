@@ -93,7 +93,7 @@ class ComparisonController extends Controller
 
         if ($product = $this->productRepository->findOrFail($productId)) {
             if (! $product->visible_individually) {
-                return redirect()->back();
+                abort(404);
             }
         }
 
