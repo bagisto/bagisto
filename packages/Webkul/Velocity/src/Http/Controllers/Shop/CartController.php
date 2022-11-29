@@ -78,7 +78,7 @@ class CartController extends Controller
             
             if ($product = $this->productRepository->findOrFail($id)) {
                 if (! $product->visible_individually) {
-                    return redirect()->back();
+                    abort(404);
                 }
             }
 
