@@ -1041,6 +1041,11 @@ return [
             'error-create'        => 'ग्राहक पता नहीं बनाया गया।',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'ग्राहक के रूप में लॉगिन करें',
+            'login-message'=>'आप के रूप में लॉग इन किया :customer_name'
+        ],
+
         'note' => [
             'title'      => 'नोट जोड़े',
             'save-note'  => 'नोट सहेजें',

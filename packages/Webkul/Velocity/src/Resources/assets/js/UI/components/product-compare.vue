@@ -13,7 +13,7 @@
 
         methods: {
             addProductToCompare: function () {
-                if (this.customer == "true" || this.customer == true) {
+                if (this.customer == "true") {                        
                     this.$http.put(
                         `${this.$root.baseUrl}/comparison`, {
                             productId: this.productId,
@@ -60,9 +60,8 @@
                             `${this.__('customer.compare.added')}`
                         );
                     }
+                    this.$root.headerItemsCount++;
                 }
-
-                this.$root.headerItemsCount++;
             }
         }
     }

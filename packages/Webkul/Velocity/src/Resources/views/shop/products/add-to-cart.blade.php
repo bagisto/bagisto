@@ -20,18 +20,6 @@
         ></compare-component>
     @endif
 
-    @if (
-        ! (
-            isset($showWishlist)
-            && ! $showWishlist
-        )
-        && (bool) core()->getConfigData('general.content.shop.wishlist_option')
-    )
-        @include('shop::products.wishlist', [
-            'addClass' => $addWishlistClass ?? ''
-        ])
-    @endif
-
     <div class="add-to-cart-btn pl0">
         @if (
             isset($form)
@@ -89,6 +77,18 @@
             </add-to-cart>
         @endif
     </div>
+
+        @if (
+        ! (
+            isset($showWishlist)
+            && ! $showWishlist
+        )
+        && (bool) core()->getConfigData('general.content.shop.wishlist_option')
+    )
+        @include('shop::products.wishlist', [
+            'addClass' => $addWishlistClass ?? ''
+        ])
+    @endif
 </div>
 
 {!! view_render_event('bagisto.shop.products.add_to_cart.after', ['product' => $product]) !!}

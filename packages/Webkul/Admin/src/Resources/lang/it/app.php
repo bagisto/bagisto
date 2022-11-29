@@ -1027,6 +1027,11 @@ return [
             'error-create'        => 'Indirizzo cliente non creato.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'accedi come cliente',
+            'login-message'=>'hai effettuato l accesso come :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Aggiungi Nota',
             'save-note'  => 'Salva Nota',

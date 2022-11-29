@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 export default {
-    props: ['isCustomer', 'isText', 'src'],
+    props: ['isCustomer', 'isText', 'src','wishlistItemCount'],
 
     data: function() {
         return {
@@ -20,30 +20,10 @@ export default {
         };
     },
 
-    watch: {
-        '$root.headerItemsCount': function() {
-            this.updateHeaderItemsCount();
-        }
-    },
-
     created: function() {
-        this.updateHeaderItemsCount();
+        setTimeout(function() {
+            this.wishlistCount = this.wishlistItemCount;
+        }.bind(this), 200);
     },
-
-    methods: {
-        updateHeaderItemsCount: function() {
-            if (this.isCustomer == 'true') {
-                this.$http
-                    .get(`${this.$root.baseUrl}/items-count`)
-                    .then(response => {
-                        this.wishlistCount =
-                            response.data.wishlistedProductsCount;
-                    })
-                    .catch(exception => {
-                        console.log(this.__('error.something_went_wrong'));
-                    });
-            }
-        }
-    }
 };
 </script>

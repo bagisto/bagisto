@@ -16,7 +16,7 @@
  */
 
 /*!
- * Vue.js v2.7.14
+ * Vue.js v2.7.3
  * (c) 2014-2022 Evan You
  * Released under the MIT License.
  */
@@ -33,7 +33,7 @@
  */
 
 /*!
- * jQuery JavaScript Library v3.6.1
+ * jQuery JavaScript Library v3.6.0
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -43,7 +43,7 @@
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2022-08-26T17:52Z
+ * Date: 2021-03-02T17:08Z
  */
 
 /*!

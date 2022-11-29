@@ -74,13 +74,11 @@
                                     @case('addToCartHtml')
                                         <div class="action">
                                             <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
-
-                                            <i
-                                                class="material-icons cross fs16"
-                                                @click="removeProductCompare(product.id)">
-
-                                                close
-                                            </i>
+                                            <div class="comparison-remove" style="">
+                                                <span class="rango-delete fs24" @click="removeProductCompare(product.id)"></span>
+                                        
+                                                <span class="align-vertical-top" @click="removeProductCompare(product.id)">{{ __('shop::app.checkout.cart.remove') }}</span>
+                                            </div>
                                         </div>
                                         @break
 
