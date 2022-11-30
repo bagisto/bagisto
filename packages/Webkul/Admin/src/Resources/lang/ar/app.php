@@ -598,6 +598,7 @@ return [
             'grouped-products'              => 'المنتجات المجمعة',
             'search-products'               => 'البحث عن المنتجات',
             'no-result-found'               => 'منتجات غير موجودة بنفس الاسم.',
+            'no-product-added'              => 'لا يوجد منتج مضاف',
             'channel'                       => 'القنوات',
             'bundle-items'                  => 'عناصر الحزمة',
             'add-option-btn-title'          => 'إضافة خيار',
