@@ -4,7 +4,7 @@
             <div class="mini-cart-content">
                 <i class="material-icons-outlined">shopping_cart</i>
                 <div class="badge-container">
-                    <span class="badge" v-text="cartTotal" v-if="cartTotal != 0"></span>
+                    <span class="badge" v-text="cartCount" v-if="cartCount != 0"></span>
                 </div>
                 <span class="fs18 fw6 cart-text" v-text="cartText"></span>
             </div>
@@ -130,7 +130,7 @@ export default {
         return {
             cartItems: [],
             cartInformation: [],
-            cartTotal:0
+            cartCount: 0
         };
     },
 
@@ -151,15 +151,17 @@ export default {
                 .then(response => {
                     if (response.data.status) {
                         this.cartItems = response.data.mini_cart.cart_items;
-                        this.cartTotal = 0;
+
+                        this.cartCount = 0;
+
                         for (const [idx, item] of response.data.mini_cart.cart_items.entries()) {
-                            this.cartTotal += item.quantity;
+                            this.cartCount += item.quantity;
                         }
                         
                         this.cartInformation =
                             response.data.mini_cart.cart_details;
                     } else {
-                        this.cartTotal = 0;
+                        this.cartCount = 0;
                     }
                 })
                 .catch(exception => {
