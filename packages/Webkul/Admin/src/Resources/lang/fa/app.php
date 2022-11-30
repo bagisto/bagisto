@@ -584,6 +584,7 @@ return [
             'grouped-products'              => 'محصولات گروه بندی شده',
             'search-products'               => 'جستجوی محصولات',
             'no-result-found'               => 'محصولاتی با همین نام یافت نشد',
+            'no-product-added'              => 'هیچ محصولی اضافه نشده است',
             'channel'                       => 'کانالها',
             'bundle-items'                  => 'موارد بسته بندی',
             'add-option-btn-title'          => 'گزینه را اضافه کنید',

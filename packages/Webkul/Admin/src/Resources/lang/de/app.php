@@ -586,6 +586,7 @@ return [
             'related-products'              => 'Verwandte Produkte',
             'product-search-hint'           => 'Geben Sie den Produktnamen ein',
             'no-result-found'               => 'Produkte nicht mit demselben Namen gefunden.',
+            'no-product-added'              => 'Kein Produkt hinzugefügt',
             'searching'                     => 'Suche ...',
             'grouped-products'              => 'Gruppierte Produkte',
             'search-products'               => 'Produkte suchen',
