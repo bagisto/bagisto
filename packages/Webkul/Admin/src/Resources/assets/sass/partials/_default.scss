@@ -526,26 +526,6 @@ body {
     }
 }
 
-.variant-image {
-    .image-item {
-        height: 100px !important;
-        width: 100px !important;
-        background-size: 100px 100px !important;
-    }
-
-    .trash-icon {
-        position: absolute;
-        cursor: pointer;
-        top: 50%;
-        right: -9px;
-    }
-}
-
-.btn.add-image {
-    display: inline-block;
-    width: auto;
-}
-
 .rtl {
     .navbar-left {
         right: 0 !important;

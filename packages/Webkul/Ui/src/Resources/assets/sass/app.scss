@@ -1523,6 +1523,63 @@ modal {
 
 .variant-image {
     margin-top: 0px;
+
+    .image-item {
+        height: 100px !important;
+        width: 100px !important;
+        background-size: 100px 100px !important;
+        margin: 0px 6px;
+    }
+
+    .trash-icon {
+        position: absolute;
+        cursor: pointer;
+        top: 50%;
+        right: -9px;
+    }
+}
+
+.add-variant-image {
+    width: 100px !important;
+    min-width: 100px;
+    height: 100px;
+    background: #f8f9fa;
+    border: 2px solid #C7C7C7;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.plus-icon {
+    text-align: center;
+    display: block;
+    padding: 24% 0px;
+}
+
+.variant-group{
+    display: flex;
+    max-width: 360px;
+    overflow: auto;
+}
+
+.media-wrapper-container {
+    display: inline-flex;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.add-product-video, .add-product-image {
+    width: 200px !important;
+    min-width: 200px;
+    height: 200px;
+    background: #f8f9fa;
+    border: 2px solid #C7C7C7;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.inl-flx {
+    display: inline-flex;
 }
 
 .vue-swatches__trigger {

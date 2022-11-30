@@ -194,7 +194,7 @@
             </td>
 
             <td>
-                <div :class="['control-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
+                <div :class="['control-group variant-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
                     <div v-for='(image, index) in items' class="image-wrapper variant-image">
                         <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
                             <input
@@ -216,12 +216,15 @@
                                 class="preview"
                                 :src="imageData[index]"
                                 v-if="imageData[index]">
+
+                                <label class="remove-image" @click="removeImage(image)">{{ __('shop::app.checkout.cart.remove') }}</label>
                         </label>
 
-                        <span class="icon trash-icon" @click="removeImage(image)"></span>
+                        
                     </div>
 
-                    <label class="btn btn-lg btn-primary add-image" @click="createFileType">
+                    <label class="add-variant-image" @click="createFileType">
+                    <span class="plus-icon">+</span>
                         {{ __('admin::app.catalog.products.add-image-btn-title') }}
                     </label>
                 </div>

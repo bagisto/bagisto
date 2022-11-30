@@ -29,6 +29,8 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
         'view' => 'admin::customers.edit',
     ])->name('admin.customer.edit');
 
+    Route::get('customers/loginascustomer/{id}', [CustomerController::class, 'loginAsCustomer'])->name('admin.customer.loginascustomer');
+
     Route::get('customers/note/{id}', [CustomerController::class, 'createNote'])->defaults('_config', [
         'view' => 'admin::customers.note',
     ])->name('admin.customer.note.create');

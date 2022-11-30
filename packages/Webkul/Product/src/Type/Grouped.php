@@ -179,6 +179,23 @@ class Grouped extends AbstractType
     }
 
     /**
+     * Is product have sufficient quantity.
+     *
+     * @param  int  $qty
+     * @return bool
+     */
+    public function haveSufficientQuantity(int $qty): bool
+    {
+        foreach ($this->product->grouped_products as $groupedProduct) {
+            if ($groupedProduct->associated_product->haveSufficientQuantity($qty)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Get product minimal price.
      *
      * @return string

@@ -1018,6 +1018,11 @@ return [
             'error-create'        => 'آدرس مشتری ایجاد نشده است Error:',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'به عنوان مشتری وارد شوید',
+            'login-message'=>'به عنوان مشتری وارد شدید :customer_name'
+        ],
+
         'note' => [
             'title'      => 'افزودن یادداشت',
             'save-note'  => 'ذخیره یادداشت',

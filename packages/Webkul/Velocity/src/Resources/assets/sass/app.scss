@@ -1028,7 +1028,7 @@ i.within-circle {
 .image-wrapper {
     margin-bottom: 20px;
     margin-top: 10px;
-    display: inline-block;
+    display: inline-flex;
     width: 100%;
 
     .image-item {
@@ -1220,6 +1220,29 @@ i.within-circle {
     span {
         vertical-align: middle;
     }
+}
+
+.media-wrapper-container {
+    display: inline-flex;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.add-product-image {
+    width: 150px;
+    min-width: 150px;
+    height: 150px;
+    background: #f8f9fa;
+    border: 2px solid #C7C7C7;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.plus-icon {
+    text-align: center;
+    display: block;
+    padding: 24% 0px;
 }
 
 @media only screen and (max-width: 280px) {
