@@ -13,22 +13,7 @@
             padding-left: 0px !important;
         }
 
-        .slot-list table tbody tr td .control-group label{
-                display: none;
-         }
-
         @media only screen and (max-width: 540px){
-            .slot-list table thead{
-                display: none;
-            }
-
-            .slot-list table tbody tr td{
-                display: block;
-            }
-
-            .slot-list table tbody tr td .control-group label{
-                display: block;
-            }
 
             .table .control-group.date:after, .table .control-group.datetime:after {
                 left: 100%;

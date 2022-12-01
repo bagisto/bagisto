@@ -622,7 +622,7 @@ h5 {
             padding: 10px;
             border-bottom: solid 1px #d3d3d3;
             color: $font-color;
-            vertical-align: inherit;
+            vertical-align: top;
 
             &.actions {
                 .action {
@@ -1384,13 +1384,6 @@ modal {
 
         .control {
             width: 100%;
-        }
-
-        &.date,
-        &.datetime {
-            .control {
-                padding-left: 40px;
-            }
         }
     }
 }
