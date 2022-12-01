@@ -1132,10 +1132,6 @@
             &.wishlist-container {
                 width: 100%;
                 margin: 0 auto;
-
-                .product-card-new {
-                    width: 19rem;
-                }
             }
         }
 
@@ -1604,7 +1600,6 @@
 
     .price-label {
         margin-right: 6px;
-        margin-top: 4px;
         float: right;
     }
 
@@ -1627,6 +1622,8 @@
        by using default behaviour i.e. inline
     */
     .price-from {
+        display: flex;
+
         .bundle-regular-price {
             font-size: 14px !important;
             font-weight: 500;
@@ -1640,11 +1637,9 @@
         }
 
         .bundle-to {
-            display: block;
             font-size: 15px !important;
             font-weight: 500;
-            margin-top: 1px;
-            margin-bottom: 1px;
+            margin: 0px 5px;
         }
     }
 
