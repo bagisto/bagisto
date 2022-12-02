@@ -952,6 +952,27 @@
     .slider-container {
         min-height: 220px;
     }
+
+    .btn-add-to-cart span {
+        display: none
+    }
+
+    .product-price {
+        white-space: nowrap;
+        width: 106px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        .price-from {
+            display: inline;
+        }
+
+        .price-label{
+            display: none;
+        }
+    }
+
+    
 }
 
 @media only screen and (max-width: 460px) {
