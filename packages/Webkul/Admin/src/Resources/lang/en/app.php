@@ -1469,6 +1469,7 @@ return [
         'already-taken'             => 'The :name has already been taken.',
         'order-pending'             => 'Cannot delete :name account because some Order(s) are pending or processing state.',
         'something-went-wrong'      => 'Something went wrong!',
+        'create-success'            => 'Refund Successfully',
     ],
 
     'validations' => [
