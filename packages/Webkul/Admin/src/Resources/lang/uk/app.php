@@ -592,6 +592,7 @@ return [
             'related-products'              => 'сопутствующие товары',
             'product-search-hint'           => 'Начните вводить название продукта',
             'no-result-found'               => 'Не найдены продукты с таким же названием.',
+            'no-product-added'              => 'Продукт не додано',
             'searching'                     => 'Идет поиск ...',
             'grouped-products'              => 'Сгруппированные продукты',
             'search-products'               => 'Поиск продуктов',
@@ -1043,6 +1044,11 @@ return [
             'success-delete'      => 'Адрес клиента успешно удален.',
             'success-mass-delete' => 'Выбранные адреса успешно удалены.',
             'error-create'        => 'Адрес клиента не создан.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'увійти як клієнт',
+            'login-message'=>'ви ввійшли як :customer_name'
         ],
 
         'note' => [

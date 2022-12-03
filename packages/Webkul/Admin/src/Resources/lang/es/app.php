@@ -592,6 +592,7 @@ return [
             'related-products'              => 'Productos relacionados',
             'product-search-hint'           => 'Inicie escribiendo un nombre de producto',
             'no-result-found'               => 'Productos con el mismo nombre no fueron encontrados.',
+            'no-product-added'              => 'Ningún producto agregado',
             'searching'                     => 'Buscando ...',
             'grouped-products'              => 'Productos Agrupados',
             'search-products'               => 'Buscar Productos',
@@ -1050,6 +1051,11 @@ return [
             'success-delete'      => 'Dirección del cliente borrada con éxito.',
             'success-mass-delete' => 'Las direcciones seleccionadas han sido borradas con éxito.',
             'error-create'        => 'La dirección del cliente no fue creada.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'logige sisse kliendina',
+            'login-message'=>'logisite sisse kui :customer_name'
         ],
 
         'note' => [

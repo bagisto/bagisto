@@ -578,6 +578,7 @@ return [
             'related-products'              => 'Pokrewne produkty',
             'product-search-hint'           => 'Wprowadź nazwę produktu',
             'no-result-found'               => 'Nie znaleziono produktów o tej samej nazwie.',
+            'no-product-added'              => 'Nie dodano produktu',
             'searching'                     => 'Wyszukiwanie ...',
             'grouped-products'              => 'Zgrupowane produkty',
             'search-products'               => 'Wyszukaj produkty',
@@ -1020,6 +1021,11 @@ return [
             'success-delete'      => 'Brawo: pomyślnie usunięto adres kienta.',
             'success-mass-delete' => 'Brawo: pomyślnie usunięto wybrane adresy.',
             'error-create'        => 'Błąd: nie utworzono adresu klienta.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'zaloguj się jako klient',
+            'login-message'=>'logujesz się jako :customer_name'
         ],
 
         'note' => [
