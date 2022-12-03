@@ -598,6 +598,7 @@ return [
             'grouped-products'              => 'المنتجات المجمعة',
             'search-products'               => 'البحث عن المنتجات',
             'no-result-found'               => 'منتجات غير موجودة بنفس الاسم.',
+            'no-product-added'              => 'لا يوجد منتج مضاف',
             'channel'                       => 'القنوات',
             'bundle-items'                  => 'عناصر الحزمة',
             'add-option-btn-title'          => 'إضافة خيار',
@@ -1056,6 +1057,11 @@ return [
             'success-delete'      => 'تم حذف عنوان العميل بنجاح',
             'success-mass-delete' => 'تم حذف العناوين المحددة بنجاح',
             'error-create'        => 'لم يتم إنشاء عنوان العميل',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'سجل دخولك كعميل',
+            'login-message'=>'you login as :customer_name'
         ],
 
         'note' => [

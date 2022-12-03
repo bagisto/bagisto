@@ -581,6 +581,7 @@ return [
             'grouped-products'              => 'Produtos Agrupados',
             'search-products'               => 'procurar produtos',
             'no-result-found'               => 'Produtos não encontrados com o mesmo nome.',
+            'no-product-added'              => 'Nenhum produto adicionado',
             'channel'                       => 'Canais',
             'bundle-items'                  => 'Itens do pacote',
             'add-option-btn-title'          => 'Adicionar opção',
@@ -1019,6 +1020,11 @@ return [
             'success-delete'      => 'Endereço do cliente excluído com sucesso.',
             'success-mass-delete' => 'endereços selecionados excluídos com sucesso.',
             'error-create'        => 'Error: Endereço do cliente não criado.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'entrar como cliente',
+            'login-message'=>'você se conectou como :customer_name'
         ],
 
         'note' => [

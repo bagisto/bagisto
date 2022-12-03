@@ -589,6 +589,7 @@ return [
             'related-products'              => 'संबंधित उत्पाद',
             'product-search-hint'           => 'उत्पाद का नाम लिखना प्रारंभ करें',
             'no-result-found'               => 'उत्पाद समान नाम से नहीं मिले।',
+            'no-product-added'              => 'कोई उत्पाद नहीं जोड़ा गया',
             'searching'                     => 'खोज कर ...',
             'grouped-products'              => 'समूहीकृत उत्पाद',
             'search-products'               => 'उत्पादों को खोजना',
@@ -1039,6 +1040,11 @@ return [
             'success-delete'      => 'ग्राहक का पता सफलतापूर्वक हटा दिया गया।',
             'success-mass-delete' => 'चयनित पते सफलतापूर्वक हटाए गए।',
             'error-create'        => 'ग्राहक पता नहीं बनाया गया।',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'ग्राहक के रूप में लॉगिन करें',
+            'login-message'=>'आप के रूप में लॉग इन किया :customer_name'
         ],
 
         'note' => [

@@ -575,6 +575,7 @@ return [
             'related-products'              => '相关产品',
             'product-search-hint'           => '开始输入产品名称',
             'no-result-found'               => '找不到同名的产品.',
+            'no-product-added'              => '未添加产品',
             'searching'                     => '搜索中 ...',
             'grouped-products'              => '分组产品',
             'search-products'               => '搜索产品',
@@ -1017,6 +1018,11 @@ return [
             'success-delete'      => '客户地址删除成功.',
             'success-mass-delete' => '已选择的地址删除成功.',
             'error-create'        => '客户地址没有创建.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'以客户身份登录',
+            'login-message'=>'您登录为 :customer_name'
         ],
 
         'note' => [
