@@ -91,6 +91,12 @@ class ComparisonController extends Controller
 
         $customerId = auth()->guard('customer')->user()->id;
 
+        if ($product = $this->productRepository->findOrFail($productId)) {
+            if (! $product->visible_individually) {
+                abort(404);
+            }
+        }
+
         $compareProduct = $this->compareProductsRepository->findOneByField([
             'customer_id' => $customerId,
             'product_id'  => $productId,
