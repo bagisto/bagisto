@@ -487,20 +487,8 @@ body {
 
 .ticket-list {
     .control-group {
-        &.date {
-            &::after {
-                left: unset;
-                right: 10px;
-                top: 34px;
-            }
-        }
-
-        &.has-error {
-            &.date {
-                &::after {
-                    top: 47px !important;
-                }
-            }
+        .cross-icon {
+            display: none;
         }
 
         @media only screen and (max-width: 425px) {
