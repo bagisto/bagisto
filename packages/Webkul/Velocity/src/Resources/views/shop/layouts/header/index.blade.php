@@ -17,8 +17,6 @@
 
                         @include('velocity::shop.layouts.particals.header-compts', ['isText' => true])
 
-                        @include('shop::checkout.cart.mini-cart')
-
                         {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
                     </div>
                 </div>
