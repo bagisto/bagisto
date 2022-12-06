@@ -282,8 +282,6 @@ input {
      * To Do: Start adjusting if equal height needed in default theme as well.
      */
     .price-from {
-        display: flex;
-        
         .bundle-regular-price {
             color: $font-light;
             text-decoration: line-through;
