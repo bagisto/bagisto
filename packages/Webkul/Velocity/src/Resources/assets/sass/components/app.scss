@@ -1595,7 +1595,6 @@
 }
 
 .product-price {
-    display: inline-block;
     font-weight: 600;
 
     .price-label {
@@ -1608,13 +1607,13 @@
         font-weight: 500;
         text-decoration: line-through;
         display: inline-block;
+        margin-right: 10px;
     }
 
     .special-price {
         font-weight: 600;
         font-size: 18px;
         margin-right: 10px;
-        float: left;
     }
 
     /*
@@ -1622,8 +1621,6 @@
        by using default behaviour i.e. inline
     */
     .price-from {
-        display: flex;
-
         .bundle-regular-price {
             font-size: 14px !important;
             font-weight: 500;
