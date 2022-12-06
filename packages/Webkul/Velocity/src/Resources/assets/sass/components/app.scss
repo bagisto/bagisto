@@ -314,6 +314,13 @@
         .product-price {
             margin-top: 5px;
             margin-bottom: 15px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+            .price-from {
+                display: inline;
+            }
         }
     }
 
@@ -1599,7 +1606,6 @@
 
     .price-label {
         margin-right: 6px;
-        float: right;
     }
 
     .regular-price {

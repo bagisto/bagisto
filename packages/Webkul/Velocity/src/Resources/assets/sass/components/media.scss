@@ -958,20 +958,10 @@
     }
 
     .product-price {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-
-        .price-from {
-            display: inline;
-        }
-
         .price-label{
             display: none;
         }
     }
-
-    
 }
 
 @media only screen and (max-width: 460px) {
