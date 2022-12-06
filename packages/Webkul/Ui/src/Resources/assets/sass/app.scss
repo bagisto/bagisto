@@ -1549,10 +1549,12 @@ modal {
     text-align: center;
 }
 
-.plus-icon {
-    text-align: center;
+.add-image-icon {
     display: block;
     padding: 24% 0px;
+    background-image: url('../images/add-image.svg');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .variant-group{

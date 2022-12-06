@@ -39,8 +39,8 @@
                 </draggable>
             </div>
 
-            <label class="add-product-video" @click="createFileType">
-            <span class="plus-icon">+</span>
+            <label class="add-product-image" @click="createFileType">
+            <span class="add-image-icon"></span>
                 {{ __('admin::app.catalog.products.add-image-btn-title') }}
             </label>
         </div>

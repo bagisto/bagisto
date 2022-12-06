@@ -1239,10 +1239,12 @@ i.within-circle {
     margin-top: 10px;
 }
 
-.plus-icon {
-    text-align: center;
+.add-image-icon {
     display: block;
     padding: 24% 0px;
+    background-image: url('../images/add-image.svg');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 @media only screen and (max-width: 280px) {

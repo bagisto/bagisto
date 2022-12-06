@@ -18,8 +18,8 @@
             v-if="!hideButton"
             >
             <span 
-            class="plus-icon"
-            >+</span>
+            class="add-image-icon"
+            ></span>
             {{ buttonLabel }}
         </label>
     </div>

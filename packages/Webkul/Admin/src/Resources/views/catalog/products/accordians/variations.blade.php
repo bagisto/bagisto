@@ -224,7 +224,7 @@
                     </div>
 
                     <label class="add-variant-image" @click="createFileType">
-                    <span class="plus-icon">+</span>
+                    <span class="add-image-icon"></span>
                         {{ __('admin::app.catalog.products.add-image-btn-title') }}
                     </label>
                 </div>
