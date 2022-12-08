@@ -62,6 +62,10 @@ return [
             'search-hint' => 'Search product here...',
             'mass-delete-success' => 'Selected content deleted successfully.',
             'mass-update-success' => 'Selected content updated successfully.',
+            'delete-success'      => 'content deleted successfully',
+            'delete-failed'       => 'Error! content cannot be deleted',
+            'update-success'      => 'content updated successfully',
+            'create-success'      => 'content created successfully',
             'tab' => [
                 'page' => 'Page Setting',
                 'content' => 'Content Setting',

@@ -61,6 +61,11 @@ return [
             'no-result-found' => 'لا يوجد سجلات.',
             'search-hint' => '... ابحث عن المنتج هنا',
             'mass-delete-success' => 'تم حذف المحتوى المحدد بنجاح.',
+            'delete-success'      => 'تم حذف المحتوى بنجاح',
+            'delete-failed'       => 'خطأ! لا يمكن حذف المحتوى',
+            'update-success'      => 'تم تحديث المحتوى بنجاح',
+            'create-success'      => 'تم إنشاء المحتوى بنجاح',
+            
             'tab' => [
                 'page' => 'إعداد الصفحة',
                 'content' => 'إعداد المحتوى',
