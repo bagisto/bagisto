@@ -26,7 +26,7 @@ export default {
     },
 
     methods: {
-        updateHeaderItemsCount: function () {       
+        updateHeaderItemsCount: function () {
 
             this.$http
                 .get(`${this.$root.baseUrl}/items-count`)

@@ -589,6 +589,7 @@ return [
             'grouped-products'              => 'Gruplandırılmış Ürünler',
             'search-products'               => 'Ürünleri Ara',
             'no-result-found'               => 'Aynı isimde ürün bulunamadı.',
+            'no-product-added'              => 'Ürün Eklenmedi',
             'channel'                       => 'Kanallar',
             'bundle-items'                  => 'Paket İçerik',
             'add-option-btn-title'          => 'Seçenek Ekle',
@@ -1043,6 +1044,11 @@ return [
             'success-delete'      => 'Müşteri adresi başarıyla silindi.',
             'success-mass-delete' => 'Seçili adres(ler) başarıyla silindi.',
             'error-create'        => 'Müşteri adresi silinirken hata oluştu!',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you login as :customer_name'
         ],
 
         'note' => [

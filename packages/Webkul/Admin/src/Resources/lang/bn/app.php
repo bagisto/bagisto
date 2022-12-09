@@ -592,6 +592,7 @@ return [
             'related-products'              => 'সংশ্লিষ্ট পণ্য',
             'product-search-hint'           => 'পণ্যের নাম টাইপ করা শুরু করুন',
             'no-result-found'               => 'একই নামের পণ্য পাওয়া যায়নি.',
+            'no-product-added'              => 'কোন পণ্য যোগ করা হয়নি',
             'searching'                     => 'অনুসন্ধান করা হচ্ছে...',
             'grouped-products'              => 'দলবদ্ধ পণ্য',
             'search-products'               => 'পণ্য অনুসন্ধান করুন',
@@ -1043,6 +1044,11 @@ return [
             'success-delete'      => 'গ্রাহক ঠিকানা সফলভাবে মুছে ফেলা হয়েছে.',
             'success-mass-delete' => 'নির্বাচিত ঠিকানা সফলভাবে মুছে ফেলা হয়েছে.',
             'error-create'        => 'গ্রাহক ঠিকানা তৈরি করা হয়নি.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'    => 'গ্রাহক হিসাবে লগইন করুন',
+            'login-message' => 'আপনি হিসাবে লগ ইন করেছেন :customer_name'
         ],
 
         'note' => [
