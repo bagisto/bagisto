@@ -57,7 +57,7 @@ class ContentController extends Controller
 
         $this->contentRepository->create($params);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => trans('velocity::app.admin.layouts.header-content')]));
+        session()->flash('success', trans('velocity::app.admin.contents.create-successs'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -92,7 +92,7 @@ class ContentController extends Controller
 
         $content = $this->contentRepository->update($params, $id);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => trans('velocity::app.admin.layouts.header-content')]));
+        session()->flash('success', trans('velocity::app.admin.contents.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -110,10 +110,10 @@ class ContentController extends Controller
         try {
             $this->contentRepository->delete($id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Content'])]);
+            return response()->json(['message' => trans('velocity::app.admin.contents.delete-success')]);
         } catch (\Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Content'])], 400);
+        return response()->json(['message' => trans('velocity::app.admin.contents.delete-failed')], 400);
     }
 
     /**

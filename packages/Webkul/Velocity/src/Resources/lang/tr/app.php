@@ -60,6 +60,10 @@ return [
             'no-result-found' => 'Kayıt bulunamadı.',
             'search-hint' => 'Ürün arayın...',
             'mass-delete-success' => 'Seçili içerik başarıyla silindi.',
+            'delete-success'      => 'içerik başarıyla silindi',
+            'delete-failed'       => 'Hata! içerik silinemez',
+            'update-success'      => 'içerik başarıyla güncellendi',
+            'create-success'      => 'içerik başarıyla oluşturuldu',
             'tab' => [
                 'page' => 'Sayfa Ayarları',
                 'content' => 'İçerik Ayarları',
