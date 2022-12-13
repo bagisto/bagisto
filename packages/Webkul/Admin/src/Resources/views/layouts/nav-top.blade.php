@@ -103,7 +103,7 @@
                             </li>
                             <li v-if="!isMobile()" style="display: flex;justify-content: space-between;">
                                 <div style="margin-top:7px">{{ __('admin::app.layouts.mode') }}</div>
-                                <dark style="margin-top: -9px;width: 83px;"></dark>
+                                <dark style="margin-top: -9px;width: 70px; height:0px"></dark>
                             </li>
                             <li>
                                 <a href="{{ route('admin.session.destroy') }}">{{ __('admin::app.layouts.logout') }}</a>
