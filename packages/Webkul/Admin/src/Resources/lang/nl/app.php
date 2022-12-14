@@ -84,7 +84,7 @@ return [
         'discount'                 => 'Korting',
         'cms'                      => 'CMS',
         'transactions'             => 'Transacties',
-        'mode'                     => 'modus',
+        'mode'                     => 'Donkere modus',
         'account-title'            => 'Rekening',
     ],
 

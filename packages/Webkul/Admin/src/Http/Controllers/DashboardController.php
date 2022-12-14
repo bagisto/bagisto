@@ -196,7 +196,7 @@ class DashboardController extends Controller
      */
     public function getStockThreshold()
     {
-        return $this->productInventoryRepository->getModel()
+        return $this->productInventoryRepository->getModel()->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->leftJoin('products', 'product_inventories.product_id', 'products.id')
             ->select(DB::raw('SUM(qty) as total_qty'))
             ->addSelect('product_inventories.product_id')
@@ -213,7 +213,7 @@ class DashboardController extends Controller
      */
     public function getTopSellingProducts()
     {
-        return $this->orderItemRepository->getModel()
+        return $this->orderItemRepository->getModel()->with(['product', 'product.images'])
             ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
             ->addSelect('id', 'product_id', 'product_type', 'name')
             ->where('order_items.created_at', '>=', $this->startDate)
@@ -226,7 +226,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Returns cutomer with most sales.
+     * Returns customer with most sales.
      *
      * @return \Illuminate\Support\Collection
      */
