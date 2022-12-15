@@ -612,6 +612,7 @@ h5 {
             padding: 12px 10px;
             background: #f8f9fa;
             color: $font-color;
+            vertical-align: top;
 
             &.sortable {
                 cursor: pointer;
@@ -1383,6 +1384,8 @@ modal {
 
         .control {
             width: 100%;
+            padding: 0px;
+            text-align: center;
         }
     }
 }
