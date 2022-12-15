@@ -528,24 +528,6 @@ h5 {
         width: 96vw;
         margin-right: 2vw;
     }
-
-    .table {
-        table {
-            thead {
-                tr {
-                    th {
-                        padding: 12px 4px !important;
-                    }
-                }
-            }
-
-            tbody {
-                td {
-                    padding: 4px !important;
-                }
-            }
-        }
-    }
 }
 
 .section {
@@ -1371,8 +1353,7 @@ modal {
     }
 }
 
-// responsive css for modal
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 768px) {
     .modal-container {
         max-width: 80%;
         left: 10%;
@@ -1386,6 +1367,24 @@ modal {
             width: 100%;
             padding: 0px;
             text-align: center;
+        }
+    }
+
+    .table {
+        table {
+            thead {
+                tr {
+                    th {
+                        padding: 5px 20px;
+                    }
+                }
+            }
+
+            tbody {
+                td {
+                    padding: 5px;
+                }
+            }
         }
     }
 }
