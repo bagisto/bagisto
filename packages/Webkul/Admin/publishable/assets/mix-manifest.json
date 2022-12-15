@@ -1,8 +1,4 @@
 {
-    "/js/admin.js": "/js/admin.js?id=412c628fd7f979cc1d9e",
-<<<<<<< HEAD
-    "/css/admin.css": "/css/admin.css?id=aedd6e010506162cdca4"
-=======
-    "/css/admin.css": "/css/admin.css?id=93f5f96ea0fff0b92f63"
->>>>>>> origin/fix-configurable
+    "/js/admin.js": "/js/admin.js?id=dd1f24a9dd640b621108",
+    "/css/admin.css": "/css/admin.css?id=871909d9c306a170852d"
 }
