@@ -73,11 +73,13 @@ class ProductRepository extends Repository
 
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
 
+        $updated_product = $this->find($id);
+
         if (isset($data['channels'])) {
-            $product['channels'] = $data['channels'];
+            $updated_product['channels'] = $data['channels'];
         }
 
-        return $product;
+        return $updated_product;
     }
 
     /**
