@@ -268,7 +268,7 @@
                                     : translations.select
                             }}
 
-                            <i class="icon arrow-down-icon"></i>
+                            <i class="drop-down-arrow icon arrow-down-icon"></i>
                         </button>
 
                         <div

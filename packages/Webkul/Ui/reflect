@@ -1,0 +1,37 @@
+
+> watch
+> cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js - the changes on ui
+
+ ERROR  Failed to compile with 5 errors15:03:42
+
+These dependencies were not found:
+
+* - in multi - the changes on ui
+* changes in multi - the changes on ui
+* on in multi - the changes on ui
+* the in multi - the changes on ui
+* ui in multi - the changes on ui
+
+To install them, you can run: npm install --save - changes on the ui
+  Asset      Size  Chunks             Chunk Names
+main.js  4.36 KiB    main  [emitted]  main
+
+ERROR in multi - the changes on ui
+Module not found: Error: Can't resolve '-' in '/home/users/amit.kumar/www/html/amit-bagisto/packages/Webkul/Ui'
+ @ multi - the changes on ui main[0]
+
+ERROR in multi - the changes on ui
+Module not found: Error: Can't resolve 'changes' in '/home/users/amit.kumar/www/html/amit-bagisto/packages/Webkul/Ui'
+ @ multi - the changes on ui main[2]
+
+ERROR in multi - the changes on ui
+Module not found: Error: Can't resolve 'on' in '/home/users/amit.kumar/www/html/amit-bagisto/packages/Webkul/Ui'
+ @ multi - the changes on ui main[3]
+
+ERROR in multi - the changes on ui
+Module not found: Error: Can't resolve 'the' in '/home/users/amit.kumar/www/html/amit-bagisto/packages/Webkul/Ui'
+ @ multi - the changes on ui main[1]
+
+ERROR in multi - the changes on ui
+Module not found: Error: Can't resolve 'ui' in '/home/users/amit.kumar/www/html/amit-bagisto/packages/Webkul/Ui'
+ @ multi - the changes on ui main[4]

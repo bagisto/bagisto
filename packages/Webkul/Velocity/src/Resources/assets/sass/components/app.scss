@@ -2768,3 +2768,13 @@
 .nested {
     display: none;
 }
+
+.drop-down-arrow {
+    margin-right: -30px;
+    border:1px solid black;
+    float:right;
+    border-width: 0 1px 1px 0;
+    padding: 3px;
+    transform: rotate(45deg);
+    margin-top: 4px;
+}
