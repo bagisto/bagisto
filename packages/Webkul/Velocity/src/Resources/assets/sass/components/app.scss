@@ -2774,8 +2774,8 @@
     width: 93%;
 }
 .drop-down-arrow {
-    border:1px solid black;
-    border-width: 0 1px 1px 0;
+    border:2px solid rgb(40, 40, 40);
+    border-width: 0 2px 2px 0 !important;
     padding: 2.5px;
     transform: rotate(45deg);
 }
