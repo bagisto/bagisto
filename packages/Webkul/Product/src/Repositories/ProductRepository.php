@@ -71,6 +71,23 @@ class ProductRepository extends Repository
     {
         $product = $this->findOrFail($id);
 
+        if (
+            $product->type == 'configurable'
+            && isset($data['tax_category_id'])
+            && $data['tax_category_id'] != ''
+        ) {
+            if (isset($data['variants']) && is_array($data['variants'])) {
+                foreach ($data['variants'] as $key => $variants) {
+                    $data['variants'][$key] = array_merge(
+                        $variants,
+                        [
+                            'tax_category_id' => $data['tax_category_id'],
+                        ]
+                    );
+                }
+            }
+        }
+        
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
 
         $updatedProduct = $this->find($id);
