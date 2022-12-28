@@ -262,13 +262,16 @@
                             class="dropdown-btn"
                             @click="toggleCheckboxDropdown"
                         >
+                        <span class="button-span">
                             {{
                                 types.checkbox.value.length > 0
                                     ? types.checkbox.value.join(', ')
                                     : translations.select
                             }}
-
+                        </span>
+                        <span>
                             <i class="drop-down-arrow icon arrow-down-icon"></i>
+                        </span>
                         </button>
 
                         <div
