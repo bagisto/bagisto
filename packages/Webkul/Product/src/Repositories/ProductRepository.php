@@ -87,16 +87,16 @@ class ProductRepository extends Repository
                 }
             }
         }
-        
-        $product = $product->getTypeInstance()->update($data, $id, $attribute);
 
-        $updatedProduct = $this->find($id);
+        $product = $product->getTypeInstance()->update($data, $id, $attribute);
+        
+        $product->refresh();
 
         if (isset($data['channels'])) {
-            $updatedProduct['channels'] = $data['channels'];
+            $product['channels'] = $data['channels'];
         }
 
-        return $updatedProduct;
+        return $product;
     }
 
     /**
