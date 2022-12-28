@@ -42,6 +42,7 @@ class Configurable extends AbstractType
         'price',
         'weight',
         'status',
+        'tax_category_id'
     ];
 
     /**
