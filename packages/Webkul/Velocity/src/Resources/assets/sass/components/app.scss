@@ -2458,9 +2458,15 @@
 
     .VueCarousel-navigation {
         position: absolute;
-        right: 12px;
-        top: -49px;
+        width: 100%;
+        top: 50%;
 
+        .VueCarousel-navigation-next {
+            left: 2px;
+        }
+        .VueCarousel-navigation-next {
+            right: 12px;
+        }
         .VueCarousel-navigation-button {
             position: unset !important;
             transform: none !important;
