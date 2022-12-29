@@ -51,7 +51,7 @@
                             this.compareCount = comparedItems.length;
                         }
                     } else {
-                        const response = await fetch("/items-count");
+                        const response = await fetch("{{url('/')}}/items-count");
                         const data = await response.json();
 
                         this.compareCount = data.compareProductsCount;
