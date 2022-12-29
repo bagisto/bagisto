@@ -199,7 +199,9 @@ class Configurable extends AbstractType
 
                     $variantData['locale'] = $data['locale'];
 
-                    $variantData['tax_category_id'] = isset($data['tax_category_id']) ? $data['tax_category_id'] : null;
+                    if(! empty($data['tax_category_id'])) {
+                        $variantData['tax_category_id'] = isset($data['tax_category_id']) ? $data['tax_category_id'] : null;
+                    }
 
                     $this->updateVariant($variantData, $variantId);
                 }
