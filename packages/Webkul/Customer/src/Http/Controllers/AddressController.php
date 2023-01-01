@@ -2,6 +2,7 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Http\Requests\CustomerAddressRequest;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
@@ -108,31 +109,28 @@ class AddressController extends Controller
      * Edit's the pre-made resource of customer called Address.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update($id, CustomerAddressRequest $request)
     {
         $customer = auth()->guard('customer')->user();
 
-        foreach ($customer->addresses as $address) {
-            if ($id != $address->id) {
-                continue;
-            }
-
-            Event::dispatch('customer.addresses.update.before', $id);
-
-            $customerAddress = $this->customerAddressRepository->update(array_merge($request->all(), [
-                'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            ]), $id);
-
-            Event::dispatch('customer.addresses.update.after', $customerAddress);
-
-            session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
-
+        try {
+            $customer->addresses()->findOrFail($id);
+        } catch (ModelNotFoundException) {
+            session()->flash('warning', trans('shop::app.security-warning'));
             return redirect()->route('shop.customer.addresses.index');
         }
 
-        session()->flash('warning', trans('shop::app.security-warning'));
+        Event::dispatch('customer.addresses.update.before', $id);
+
+        $customerAddress = $this->customerAddressRepository->update(array_merge($request->all(), [
+            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
+        ]), $id);
+
+        Event::dispatch('customer.addresses.update.after', $customerAddress);
+
+        session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
 
         return redirect()->route('shop.customer.addresses.index');
     }
