@@ -12,6 +12,10 @@
                 <div
                     class="col-md-12 no-padding carousel-products"
                     :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
+                    <div 
+                        class="overlayForProductSlider"
+                        v-bind:class="['{{ productCollections.length > slidesPerPage }}'  ? 'rightShadow' : 'leftShadow']"></div>
+                        {{ productCollections.length }}
                     <carousel-component
                         :slides-per-page="slidesPerPage"
                         pagination-enabled="hide"
@@ -23,7 +27,7 @@
                         <slide
                             :key="index"
                             :slot="`slide-${index}`"
-                            v-for="(product, index) in productCollections">
+                            v-for="(product, index) in productCollections" >
                             <product-card
                                 :list="list"
                                 :product="product">

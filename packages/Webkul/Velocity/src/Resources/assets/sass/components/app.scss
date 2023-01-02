@@ -2336,6 +2336,19 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
 }
 
+.overlayForProductSlider{
+    position: absolute; 
+    height: 100%; 
+    width: 100%; 
+    z-index: 9;
+    
+}
+.rightShadow{
+    background: linear-gradient( 270deg , white, transparent 12%);  
+}
+.leftShadow{
+    background: linear-gradient( 90deg , white, transparent 7%);  
+}
 .new-products-recent {
     top: -44px;
     position: relative;
@@ -2460,6 +2473,7 @@
         position: absolute;
         width: 100%;
         top: 30%;
+        z-index: 10;
         .VueCarousel-navigation-button {
             transform: none !important;
 
