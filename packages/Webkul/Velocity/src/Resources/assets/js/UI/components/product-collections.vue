@@ -15,7 +15,6 @@
                     <div 
                         class="overlayForProductSlider"
                         v-bind:class="['{{ productCollections.length > slidesPerPage }}'  ? 'rightShadow' : 'leftShadow']"></div>
-                        {{ productCollections.length }}
                     <carousel-component
                         :slides-per-page="slidesPerPage"
                         pagination-enabled="hide"
@@ -90,6 +89,7 @@
             this.getProducts();
             this.setWindowWidth();
             this.setSlidesPerPage(this.windowWidth);
+            this.getProductSlideShadow();
         },
 
         watch: {
@@ -144,6 +144,25 @@
                 this.waitForElement(windowClass, () => {
                     this.windowWidth = $(windowClass).width();
                 });
+            },
+            
+            getProductSlideShadow: function () {
+                setTimeout((assync)=>{
+                    $(".VueCarousel-navigation-button").click(function(){
+                        // Add shadow class in both left and right sides
+                        $('.overlayForProductSlider').addClass('leftShadow rightShadow');
+                        
+                        // get disabled carousal arrow button data
+                        var carousalButton = $('.VueCarousel-navigation--disabled');
+                        // Check condition for left and right arrow
+                        if(carousalButton[0].classList[1] == 'VueCarousel-navigation-prev'){
+                            carousalButton.parents().eq(2).children().removeClass('leftShadow')
+                        } 
+                        if (carousalButton[0].classList[1] == 'VueCarousel-navigation-next') {
+                            carousalButton.parents().eq(2).children().removeClass('rightShadow')
+                        }
+                    })
+                }, 500)
             },
 
             /* get window class */
