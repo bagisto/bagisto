@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Helpers\Indexers\Price\Configurable as ConfigurableIndexer;
 
 class Configurable extends AbstractType
@@ -518,6 +520,38 @@ class Configurable extends AbstractType
         ];
     }
 
+       /**
+     * Get configural product minimal price.
+     *
+     * @param  int  $qty
+     * @return float
+     */
+    public function getConfiguralMinimalPrice($qty = null)
+    {
+        static $minPrice = null;
+        if (! is_null($minPrice)) {
+            return $minPrice;
+        }
+        $tablePrefix = DB::getTablePrefix();
+        $result = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
+            ->distinct()
+            ->where('products.parent_id', $this->product->id)
+            ->selectRaw("{$tablePrefix}product_flat.price AS min_price")
+            ->where('product_flat.channel', core()->getCurrentChannelCode())
+            ->get();
+        $minPrices = [];
+        foreach ($result as $price) {
+            $minPrices[] = $price->min_price;
+        }
+
+        if (empty($minPrices)) {
+            return 0;
+        }
+
+        return $minPrice = min($minPrices);
+    }
+
+
     /**
      * Get product minimal price.
      *
@@ -532,7 +566,7 @@ class Configurable extends AbstractType
         } else {
             return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
                 . ' '
-                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span> <span class="regular-price"></span>';
+                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getConfiguralMinimalPrice())) . '</span> <span class="regular-price"></span>';
         }
     }
 
