@@ -538,17 +538,12 @@ class Configurable extends AbstractType
             ->where('products.parent_id', $this->product->id)
             ->selectRaw("{$tablePrefix}product_flat.price AS min_price")
             ->where('product_flat.channel', core()->getCurrentChannelCode())
-            ->get();
-        $minPrices = [];
-        foreach ($result as $price) {
-            $minPrices[] = $price->min_price;
-        }
+            ->first();
+          return $result->min_price;
 
         if (empty($minPrices)) {
             return 0;
         }
-
-        return $minPrice = min($minPrices);
     }
 
 
