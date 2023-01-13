@@ -112,25 +112,30 @@
                     </span>
                 </th>
 
-                <th
+               <th
                     :key="columnKey"
                     v-for="(column, columnKey) in columns"
                     v-if ="column.visibility != false"
-                    v-text="column.label"
-                    class="grid_head"
-                    :class="{ sortable: column.sortable }"
-                    :style="
-                        typeof column.width !== 'undefined' && column.width
-                            ? `width: ${column.width}`
-                            : ''
-                    "
-                    v-on:click="
-                        typeof column.sortable !== 'undefined' &&
-                        column.sortable
-                            ? sortCollection(column.index)
-                            : {}
-                    "
-                ></th>
+                    
+                >
+                    <span
+                        v-text="column.label"
+                        class="grid_head"
+                        :class="{ sortable: column.sortable }"
+                        :style="
+                            typeof column.width !== 'undefined' && column.width
+                                ? `width: ${column.width}`
+                                : ''
+                        "
+                        v-on:click="
+                            typeof column.sortable !== 'undefined' &&
+                            column.sortable
+                                ? sortCollection(column.index)
+                                : {}
+                        "
+                    >
+                    </span>
+                </th>
 
                 <th v-if="enableActions" v-text="translations.actions"></th>
             </tr>

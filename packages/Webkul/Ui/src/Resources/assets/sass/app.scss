@@ -613,7 +613,7 @@ h5 {
             background: #f8f9fa;
             color: $font-color;
 
-            &.sortable {
+            span{
                 cursor: pointer;
             }
         }
