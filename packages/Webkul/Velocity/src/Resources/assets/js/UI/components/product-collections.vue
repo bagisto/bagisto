@@ -12,9 +12,9 @@
                 <div
                     class="col-md-12 no-padding carousel-products"
                     :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
-                    <div 
+                    <!-- <div 
                         class="overlayForProductSlider"
-                        v-bind:class="['{{ productCollections.length > slidesPerPage }}'  ? 'rightShadow' : 'leftShadow']"></div>
+                        v-bind:class="['{{ productCollections.length > slidesPerPage }}'  ? 'rightShadow' : 'leftShadow']"></div> -->
                     <carousel-component
                         :slides-per-page="slidesPerPage"
                         pagination-enabled="hide"
@@ -148,19 +148,28 @@
             
             getProductSlideShadow: function () {
                 setTimeout((assync)=>{
+                    $('.VueCarousel').addClass('VueCarousel-shadow-right');
                     $(".VueCarousel-navigation-button").click(function(){
-                        // Add shadow class in both left and right sides
-                        $('.overlayForProductSlider').addClass('leftShadow rightShadow');
-                        
                         // get disabled carousal arrow button data
-                        var carousalButton = $('.VueCarousel-navigation--disabled');
-                        // Check condition for left and right arrow
-                        if(carousalButton[0].classList[1] == 'VueCarousel-navigation-prev'){
-                            carousalButton.parents().eq(2).children().removeClass('leftShadow')
-                        } 
-                        if (carousalButton[0].classList[1] == 'VueCarousel-navigation-next') {
-                            carousalButton.parents().eq(2).children().removeClass('rightShadow')
-                        }
+                        var carousalButton = document.querySelectorAll('.VueCarousel-navigation--disabled').parent
+                        // $('.VueCarousel-navigation--disabled').parents().eq(1);
+                        // $('.VueCarousel').addClass('VueCarousel-shadow-right');
+                        // $('.VueCarousel').addClass('VueCarousel-shadow-left');
+                        // if($('.VueCarousel'))
+
+
+                        console.log(carousalButton);
+                        
+                        carousalButton.forEach(function( index ) {
+                            console.log(carousalButton[index]);
+                            // Check condition for left and right arrow
+                            // if(carousalButton[index].classList[1] == 'VueCarousel-navigation-prev'){
+                            //     carousalButton.parents().eq(1).removeClass('VueCarousel-shadow-left').addClass('VueCarousel-shadow-right');
+                            // } 
+                            // if (carousalButton[index].classList[1] == 'VueCarousel-navigation-next') {
+                            //     carousalButton.parents().eq(1).removeClass('VueCarousel-shadow-right').addClass('VueCarousel-shadow-left');
+                            // }
+                        })
                     })
                 }, 500)
             },

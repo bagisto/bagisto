@@ -2245,6 +2245,27 @@
     }
 }
 
+.VueCarousel-shadow-left::before {
+    content: "";
+    width: 90px;
+    height: 100%;
+    display: inline-block;
+    background: linear-gradient(90deg, rgba(247,247,247,1) 8%, rgba(251,251,251,0) 100%);
+    position: absolute;
+    z-index: 1;
+}
+
+.VueCarousel-shadow-right::after {
+    content: "";
+    width: 90px;
+    height: 100%;
+    display: inline-block;
+    background: linear-gradient(90deg, rgba(247,247,247,0) 8%, rgba(251,251,251,1) 100%);
+    position: absolute;
+    z-index: 1;
+    right: 0;
+}
+
 .filter-attributes-item {
     font-size: 16px;
     margin-bottom: 10px;
@@ -2336,19 +2357,19 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
 }
 
-.overlayForProductSlider{
-    position: absolute; 
-    height: 100%; 
-    width: 100%; 
-    z-index: 9;
+// .overlayForProductSlider{
+//     position: absolute; 
+//     height: 100%; 
+//     width: 100%; 
+//     z-index: 9;
     
-}
-.rightShadow{
-    background: linear-gradient( 270deg , white, transparent 12%);  
-}
-.leftShadow{
-    background: linear-gradient( 90deg , white, transparent 7%);  
-}
+// }
+// .rightShadow{
+//     background: linear-gradient( 270deg , white, transparent 12%);  
+// }
+// .leftShadow{
+//     background: linear-gradient( 90deg , white, transparent 7%);  
+// }
 .new-products-recent {
     top: -44px;
     position: relative;
