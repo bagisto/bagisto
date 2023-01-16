@@ -751,6 +751,7 @@ return [
             'meta_description'         => 'Meta Description',
             'meta_keywords'            => 'Meta Keywords',
             'image'                    => 'Image',
+            'category_banner'          => 'Category Banner',
             'filterable-attributes'    => 'Filterable Attributes',
             'attributes'               => 'Attributes',
             'image-size'               => 'Image resolution should be like 300px X 168px',
