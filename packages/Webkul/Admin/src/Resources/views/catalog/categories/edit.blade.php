@@ -140,6 +140,17 @@
                                         @php echo str_replace($key, 'Image', $message[0]); @endphp
                                     @endforeach
                                 </span>
+
+                                <label>{{ __('admin::app.catalog.categories.category_banner') }}</label>
+                                <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="category_banner" :multiple="false" :images='"{{ $category->banner_url }}"'></image-wrapper>
+
+                                <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
+                                    @foreach ($errors->get('image.*') as $key => $message)
+                                        @php echo str_replace($key, 'Image', $message[0]); @endphp
+                                    @endforeach
+                                </span>
+
+                                <span class="control-info mt-10">{{ __('admin::app.catalog.categories.image-size') }}</span>   
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.controls.after', ['category' => $category]) !!}
