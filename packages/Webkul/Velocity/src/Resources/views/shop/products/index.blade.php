@@ -81,7 +81,7 @@
                     <div class="col-12 no-padding">
                         <div class="hero-image">
                             @if (!is_null($category->category_banner))
-                                <img class="logo" src="{{ $category->banner_url }}" alt="" width="20" height="20" />
+                                <img class="logo" src="{{ $category->banner_url }}" alt="" width="100%" height="350px" />
                             @endif
                         </div>
                     </div>

@@ -4,6 +4,7 @@
     {{ __('admin::app.catalog.categories.add-title') }}
 @stop
 
+
 @section('content')
     <div class="content">
         <form method="POST" action="{{ route('admin.catalog.categories.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
@@ -105,7 +106,7 @@
 
                                 <label>{{ __('admin::app.catalog.categories.category_banner') }}</label>
 
-                                <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="category_banner" :multiple="false"></image-wrapper>
+                                <large-image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="category_banner" :multiple="false"></large-image-wrapper>
 
                                 <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                                     @foreach ($errors->get('image.*') as $key => $message)
