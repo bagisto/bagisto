@@ -48,8 +48,7 @@ class CategoryRepository extends Repository
         $category = $this->model->create($data);
 
         $this->uploadImages($data, $category);
-        $this->uploadBanner($data,$category);
-
+         $this->uploadImages($category, $data, 'category_banner');
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);
         }
@@ -74,7 +73,7 @@ class CategoryRepository extends Repository
         $category->update($data);
 
         $this->uploadImages($data, $category);
-        $this->uploadBanner($data,$category);
+        $category = $this->uploadImage($category, $data, 'category_banner');
 
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);
@@ -211,12 +210,12 @@ class CategoryRepository extends Repository
      */
     public function uploadImages($data, $category, $type = 'image')
     {
+        
         if (isset($data[$type])) {
             $request = request();
-
+           
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type . '.' . $imageId;
-
                 $dir = 'category/' . $category->id;
 
                 if ($request->hasFile($file)) {
@@ -230,6 +229,7 @@ class CategoryRepository extends Repository
                 }
             }
         } else {
+            dd($category->{$type},"232");
             if ($category->{$type}) {
                 Storage::delete($category->{$type});
             }
