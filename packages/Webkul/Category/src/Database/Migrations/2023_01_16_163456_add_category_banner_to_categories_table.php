@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-
-            if(Schema::hasColumn('category_banner')){
-
-                $table->text('category_banner')->nullable();
-            }
-        });
+        if (Schema::hasColumn('categories', 'category_banner'))
+        {
+            Schema::table('categories', function (Blueprint $table)
+            {
+                $table->string('category_banner')->nullable();
+            });
+        }
     }
 
     /**
@@ -29,12 +29,12 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-
-            if(Schema::hasColumn('category_banner')){
-
-                $table->text('category_banner')->nullable();
-            }
-         });
+        if (Schema::hasColumn('categories', 'category_banner'))
+        {
+            Schema::table('categories', function (Blueprint $table)
+            {
+                $table->dropColumn('category_banner');
+            });
+        }
     }
 };
