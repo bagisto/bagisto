@@ -105,7 +105,6 @@ class ChannelRepository extends Repository
                 }
             }
         } else {
-            dd($channel,"108");
             if ($channel->{$type}) {
                 Storage::delete($channel->{$type});
             }
