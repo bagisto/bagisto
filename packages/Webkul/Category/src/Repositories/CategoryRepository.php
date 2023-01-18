@@ -239,37 +239,7 @@ class CategoryRepository extends Repository
             $category->save();
         }
     }
-
-    public function uploadBanner($data, $category, $type = 'category_banner')
-    {
-        if (isset($data[$type])) {
-            $request = request();
-
-            foreach ($data[$type] as $imageId => $image) {
-                $file = $type . '.' . $imageId;
-
-                $dir = 'category/' . $category->id;
-
-                if ($request->hasFile($file)) {
-                    if ($category->{$type}) {
-                        Storage::delete($category->{$type});
-                    }
-
-                    $category->{$type} = $request->file($file)->store($dir);
-
-                    $category->save();
-                }
-            }
-        } else {
-            if ($category->{$type}) {
-                Storage::delete($category->{$type});
-            }
-
-            $category->{$type} = null;
-            
-            $category->save();
-        }
-    }
+    
 
     /**
      * Get partials.

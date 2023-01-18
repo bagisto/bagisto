@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::hasColumn('categories', 'category_banner'))
+        if (!Schema::hasColumn('categories', 'category_banner'))
         {
             Schema::table('categories', function (Blueprint $table)
             {
