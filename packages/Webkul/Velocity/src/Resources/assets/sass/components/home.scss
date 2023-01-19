@@ -352,7 +352,7 @@ header #search-form > *:focus {
 
 .popular-categories-container {
     .popular-category-wrapper {
-        padding: 0 8px;
+        // padding: 0 8px;
 
         .card {
             height: 100%;
@@ -361,7 +361,7 @@ header #search-form > *:focus {
             // -webkit-box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
 
             .category-image {
-                height: 180px;
+                height: 300px;
 
                 img {
                     width: 100%;
@@ -386,7 +386,7 @@ header #search-form > *:focus {
     }
 
     .popular-category-wrapper:nth-last-child(2) {
-        padding-right: 0px;
+        // padding-right: 0px;
     }
 
     .popular-category-wrapper:last-child {
