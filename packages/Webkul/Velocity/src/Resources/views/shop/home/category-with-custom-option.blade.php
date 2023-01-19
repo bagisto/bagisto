@@ -21,14 +21,14 @@
             <div class="categories-collection">
                 <div class="category-text-content">
                     <h2 class="text-uppercase">
-                        <a href="{{ $category[0]->slug }}" class="remove-decoration normal-white-text">
+                        <a href="{{ $category[0]->slug }}" class="remove-decoration normal-white-text default-hover-text">
                             {{ $category[0]->name }}
                         </a>
                     </h2>
                     <ul type="none" class="fs14">
                         @foreach ($category[0]->children as $subCategory)
                             <li>
-                                <a href="{{ $category[0]->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text">
+                                <a href="{{ $category[0]->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text default-hover-text">
                                     {{ $subCategory->name }}
                                 </a>
                             </li>
@@ -50,14 +50,14 @@
             <div class="categories-collection">
                 <div class="category-text-content">
                     <h2 class="text-uppercase">
-                        <a href="{{ $category[1]->slug }}" class="remove-decoration normal-white-text">
+                        <a href="{{ $category[1]->slug }}" class="remove-decoration normal-white-text default-hover-text">
                             {{ $category[1]->name }}
                         </a>
                     </h2>
                     <ul type="none" class="fs14">
                         @foreach ($category[1]->children as $subCategory)
                             <li>
-                                <a href="{{ $category[1]->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text">
+                                <a href="{{ $category[1]->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text default-hover-text">
                                     {{ $subCategory->name }}
                                 </a>
                             </li>
@@ -77,14 +77,14 @@
             <div class="categories-collection">
                 <div class="category-text-content">
                     <h2 class="text-uppercase">
-                        <a href="{{ $category[2]->slug }}" class="remove-decoration normal-white-text">
+                        <a href="{{ $category[2]->slug }}" class="remove-decoration normal-white-text default-hover-text">
                             {{ $category[2]->name }}
                         </a>
                     </h2>
                     <ul type="none" class="fs14">
                         @foreach ($category[2]->children as $subCategory)
                             <li>
-                                <a href="{{ $category[2]->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text">
+                                <a href="{{ $category[2]->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text default-hover-text">
                                     {{ $subCategory->name }}
                                 </a>
                             </li>
@@ -105,14 +105,14 @@
             <div class="categories-collection">
                 <div class="category-text-content">
                     <h2 class="text-uppercase">
-                        <a href="{{ $category[3]->slug }}" class="remove-decoration normal-white-text">
+                        <a href="{{ $category[3]->slug }}" class="remove-decoration normal-white-text default-hover-text">
                             {{ $category[3]->name }}
                         </a>
                     </h2>
                     <ul type="none" class="fs14">
                         @foreach ($category[3]->children as $subCategory)
                             <li>
-                                <a href="{{ $category[3]->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text">
+                                <a href="{{ $category[3]->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text default-hover-text">
                                     {{ $subCategory->name }}
                                 </a>
                             </li>
@@ -144,14 +144,14 @@
                 <div class="categories-collection">
                     <div class="category-text-content">
                         <h2 class="text-uppercase">
-                            <a href="{{ $categoryItem->slug }}" class="remove-decoration normal-white-text">
+                            <a href="{{ $categoryItem->slug }}" class="remove-decoration normal-white-text default-hover-text">
                                 {{ $categoryItem->name }}
                             </a>
                         </h2>
                         <ul type="none" class="fs14">
                             @foreach ($categoryItem->children as $subCategory)
                                 <li>
-                                    <a href="{{ $categoryItem->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text">
+                                    <a href="{{ $categoryItem->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text default-hover-text">
                                         {{ $subCategory->name }}
                                     </a>
                                 </li>
