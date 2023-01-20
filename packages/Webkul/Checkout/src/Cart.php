@@ -50,8 +50,7 @@ class Cart
         protected TaxCategoryRepository $taxCategoryRepository,
         protected WishlistRepository $wishlistRepository,
         protected CustomerAddressRepository $customerAddressRepository
-    )
-    {
+    ) {
         $this->initCart();
     }
 
@@ -126,7 +125,7 @@ class Cart
 
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
-                if (! isset($data['additional']['parent_id'])) {
+                if (!isset($data['additional']['parent_id'])) {
                     return $item;
                 }
 
@@ -151,17 +150,17 @@ class Cart
 
         $cart = $this->getCart();
 
-        if (! $cart) {
+        if (!$cart) {
             $cart = $this->create($data);
         }
 
-        if (! $cart) {
+        if (!$cart) {
             return ['warning' => __('shop::app.checkout.cart.item.error-add')];
         }
 
         $product = $this->productRepository->find($productId);
 
-        if (! $product->status) {
+        if (!$product->status) {
             return ['info' => __('shop::app.checkout.cart.item.inactive-add')];
         }
 
@@ -185,7 +184,7 @@ class Cart
                     $cartProduct['parent_id'] = $parentCartItem->id;
                 }
 
-                if (! $cartItem) {
+                if (!$cartItem) {
                     $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
                 } else {
                     if (
@@ -200,7 +199,7 @@ class Cart
                     }
                 }
 
-                if (! $parentCartItem) {
+                if (!$parentCartItem) {
                     $parentCartItem = $cartItem;
                 }
             }
@@ -249,7 +248,7 @@ class Cart
 
         $cart = $this->cartRepository->create($cartData);
 
-        if (! $cart) {
+        if (!$cart) {
             session()->flash('error', __('shop::app.checkout.cart.create-error'));
 
             return;
@@ -273,13 +272,13 @@ class Cart
         foreach ($data['qty'] as $itemId => $quantity) {
             $item = $this->cartItemRepository->find($itemId);
 
-            if (! $item) {
+            if (!$item) {
                 continue;
             }
 
             if (
                 $item->product
-                && ! $item->product->status
+                && !$item->product->status
             ) {
                 throw new Exception(__('shop::app.checkout.cart.item.inactive'));
             }
@@ -292,7 +291,7 @@ class Cart
 
             $item->quantity = $quantity;
 
-            if (! $this->isItemHaveQuantity($item)) {
+            if (!$this->isItemHaveQuantity($item)) {
                 throw new Exception(__('shop::app.checkout.cart.quantity.inventory_warning'));
             }
 
@@ -324,14 +323,14 @@ class Cart
     {
         Event::dispatch('checkout.cart.delete.before', $itemId);
 
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return false;
         }
 
         if ($cartItem = $cart->items()->find($itemId)) {
             $cartItem->delete();
 
-            if (! $cart->items()->get()->count()) {
+            if (!$cart->items()->get()->count()) {
                 $this->removeCart($cart);
             } else {
                 Shipping::collectRates();
@@ -358,7 +357,7 @@ class Cart
 
         Event::dispatch('checkout.cart.delete.all.before', $cart);
 
-        if (! $cart) {
+        if (!$cart) {
             return $cart;
         }
 
@@ -384,7 +383,7 @@ class Cart
             if ($this->isCartItemInactive($item)) {
                 $this->cartItemRepository->delete($item->id);
 
-                if (! $cart->items->count()) {
+                if (!$cart->items->count()) {
                     $this->removeCart($cart);
                 }
 
@@ -402,7 +401,7 @@ class Cart
      */
     public function saveCustomerAddress($data): bool
     {
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return false;
         }
 
@@ -416,8 +415,7 @@ class Cart
 
         if (
             ($user = auth()->guard()->user())
-            && (
-                $user->email
+            && ($user->email
                 && $user->first_name
                 && $user->last_name
             )
@@ -446,11 +444,11 @@ class Cart
      */
     public function saveShippingMethod($shippingMethodCode): bool
     {
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return false;
         }
 
-        if (! Shipping::isMethodCodeExists($shippingMethodCode)) {
+        if (!Shipping::isMethodCodeExists($shippingMethodCode)) {
             return false;
         }
 
@@ -468,7 +466,7 @@ class Cart
      */
     public function savePaymentMethod($payment)
     {
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return false;
         }
 
@@ -492,11 +490,11 @@ class Cart
      */
     public function collectTotals(): void
     {
-        if (! $this->validateItems()) {
+        if (!$this->validateItems()) {
             return;
         }
 
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return;
         }
 
@@ -564,16 +562,35 @@ class Cart
      */
     public function calculateItemsTax(): void
     {
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return;
         }
 
         Event::dispatch('checkout.cart.calculate.items.tax.before', $cart);
 
-        foreach ($cart->items as $item) {
-            $taxCategory = $this->taxCategoryRepository->find($item->product->tax_category_id);
+        foreach ($cart->items as $key => $item) {
 
-            if (! $taxCategory) {
+            /**
+             * check if the product is configurable product then
+             * the tax_category_id used of variants 
+             * otherwise tax_category_id will be apply of simple product.
+             */
+            if ($item->product->type == 'configurable') {
+                /**
+                 * getting the particular variants tax_category_id
+                 */
+                $taxId = $item->product->variants->find($item->additional['selected_configurable_option'])->tax_category_id;
+            } else {
+                $taxId = $item->product->tax_category_id;
+            }
+
+            $taxCategory = $this->taxCategoryRepository->find($taxId);
+
+            /**
+             * check if the tax is applied then execution will not be skiped
+             * loop execution will skip if the tax return null.
+             */
+            if (is_null($taxCategory)) {
                 continue;
             }
 
@@ -582,7 +599,7 @@ class Cart
             } else {
                 $address = $cart->billing_address;
             }
-
+            
             if ($address === null && auth()->guard()->check()) {
                 $address = auth()->guard()->user()->addresses()
                     ->where('default_address', 1)->first();
@@ -615,13 +632,13 @@ class Cart
      */
     public function validateItems(): bool
     {
-        if (! $cart = $this->getCart()) {
+        if (!$cart = $this->getCart()) {
             return false;
         }
 
         $cartItems = $cart->items()->get();
 
-        if (! count($cartItems)) {
+        if (!count($cartItems)) {
             $this->removeCart($cart);
 
             return false;
@@ -639,7 +656,7 @@ class Cart
 
                 session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
             } else {
-                $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
+                $price = !is_null($item->custom_price) ? $item->custom_price : $item->base_price;
 
                 $this->cartItemRepository->update([
                     'price'      => core()->convertPrice($price),
@@ -652,7 +669,7 @@ class Cart
             $isInvalid |= $validationResult->isCartInvalid();
         }
 
-        return ! $isInvalid;
+        return !$isInvalid;
     }
 
     /**
@@ -747,7 +764,7 @@ class Cart
             'additional'           => is_array($data['additional']) ? array_merge($data['additional'], $locale) : $locale,
         ];
 
-        if (! empty($data['children'])) {
+        if (!empty($data['children'])) {
             foreach ($data['children'] as $child) {
                 /**
                  * - For bundle, child quantity will not be zero.
@@ -866,11 +883,11 @@ class Cart
     ): void {
         $shippingAddress['cart_id'] = $billingAddress['cart_id'] = null;
 
-        if (! empty($data['billing']['save_as_address'])) {
+        if (!empty($data['billing']['save_as_address'])) {
             $this->customerAddressRepository->create($billingAddress);
         }
 
-        if (! empty($data['shipping']['save_as_address'])) {
+        if (!empty($data['shipping']['save_as_address'])) {
             $this->customerAddressRepository->create($shippingAddress);
         }
     }
@@ -886,7 +903,7 @@ class Cart
     {
         $customerAddress = [];
 
-        if (! empty($data['billing']['address_id'])) {
+        if (!empty($data['billing']['address_id'])) {
             $customerAddress = $this->customerAddressRepository
                 ->findOneWhere(['id' => $data['billing']['address_id']])
                 ->toArray();
@@ -914,7 +931,7 @@ class Cart
     {
         $customerAddress = [];
 
-        if (! empty($data['shipping']['address_id'])) {
+        if (!empty($data['shipping']['address_id'])) {
             $customerAddress = $this->customerAddressRepository
                 ->findOneWhere(['id' => $data['shipping']['address_id']])
                 ->toArray();
@@ -955,7 +972,7 @@ class Cart
                 $shippingAddressModel = $cart->shipping_address;
 
                 if ($shippingAddressModel) {
-                    if (! empty($billingAddressData['use_for_shipping'])) {
+                    if (!empty($billingAddressData['use_for_shipping'])) {
                         $billingAddressData['address_type'] = CartAddress::ADDRESS_TYPE_SHIPPING;
 
                         $this->cartAddressRepository->update($billingAddressData, $shippingAddressModel->id);
@@ -965,7 +982,7 @@ class Cart
                         $this->cartAddressRepository->update($shippingAddressData, $shippingAddressModel->id);
                     }
                 } else {
-                    if (! empty($billingAddressData['use_for_shipping'])) {
+                    if (!empty($billingAddressData['use_for_shipping'])) {
                         $this->cartAddressRepository->create(array_merge(
                             $billingAddressData,
                             ['address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]
@@ -982,7 +999,7 @@ class Cart
             $this->cartAddressRepository->create(array_merge($billingAddressData, ['address_type' => CartAddress::ADDRESS_TYPE_BILLING]));
 
             if ($cart->haveStockableItems()) {
-                if (! empty($billingAddressData['use_for_shipping'])) {
+                if (!empty($billingAddressData['use_for_shipping'])) {
                     $this->cartAddressRepository->create(array_merge($billingAddressData, ['address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]));
                 } else {
                     $this->cartAddressRepository->create(array_merge($shippingAddressData, ['address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]));
