@@ -42,6 +42,7 @@ class Configurable extends AbstractType
         'price',
         'weight',
         'status',
+        'tax_category_id'
     ];
 
     /**
@@ -197,6 +198,10 @@ class Configurable extends AbstractType
                     $variantData['channel'] = $data['channel'];
 
                     $variantData['locale'] = $data['locale'];
+
+                    if(! empty($data['tax_category_id'])) {
+                        $variantData['tax_category_id'] = $data['tax_category_id'];
+                    }
 
                     $this->updateVariant($variantData, $variantId);
                 }
