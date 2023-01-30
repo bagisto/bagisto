@@ -400,6 +400,17 @@
                                     if (address.last_name) {
                                         this.address.billing.last_name = address.last_name;
                                     }
+                                    
+                                    if(address.city){
+                                        this.address.billing.city = address.city;
+                                    }
+                                    if(address.country){
+                                        this.address.billing.country = address.country;
+                                    }
+
+                                    if(address.state){
+                                        this.address.billing.state = address.state;
+                                    }
                                 }
 
                                 if (address.id == this.address.shipping.address_id) {
@@ -415,6 +426,17 @@
 
                                     if (address.last_name) {
                                         this.address.shipping.last_name = address.last_name;
+                                    }
+
+                                    if(address.city){
+                                        this.address.billing.city = address.city;
+                                    }
+                                    if(address.country){
+                                        this.address.billing.country = address.country;
+                                    }
+
+                                    if(address.state){
+                                        this.address.billing.state = address.state;
                                     }
                                 }
                             });
