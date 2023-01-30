@@ -62,6 +62,10 @@ return [
             'search-hint' => 'Search product here...',
             'mass-delete-success' => 'Selected content deleted successfully.',
             'mass-update-success' => 'Selected content updated successfully.',
+            'delete-success'      => 'Content deleted successfully',
+            'delete-failed'       => 'Error! content cannot be deleted',
+            'update-success'      => 'Content updated successfully',
+            'create-success'      => 'Content created successfully',
             'tab' => [
                 'page' => 'Page Setting',
                 'content' => 'Content Setting',
@@ -110,6 +114,7 @@ return [
             'footer-middle-content'     => 'Footer Middle Content',
             'advertisement-four'        => 'Advertisement Four Images',
             'advertisement-three'       => 'Advertisement Three Images',
+            'update-success'            => 'Meta data updated successfully',
             'images'                    => 'Images',
             'general'                   => 'General',
             'add-image-btn-title'       => 'Add Image',
