@@ -3,12 +3,12 @@
 namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
+use Webkul\Customer\Repositories\CustomerRepository;
 
 class ResetPasswordController extends Controller
 {
