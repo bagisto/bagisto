@@ -3,9 +3,11 @@
 namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
@@ -21,10 +23,14 @@ class ResetPasswordController extends Controller
 
     /**
      * Create a new controller instance.
+     * 
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
      *
-     * @return void
+     *  @return void
      */
-    public function __construct()
+    public function __construct(
+        protected CustomerRepository $customerRepository
+    )
     {
         $this->_config = request('_config');
     }
@@ -65,6 +71,9 @@ class ResetPasswordController extends Controller
             );
 
             if ($response == Password::PASSWORD_RESET) {
+                $user = $this->customerRepository->findOneByField('email', request('email'));
+                Event::dispatch('user.admin.update-password', $user);
+
                 return redirect()->route($this->_config['redirect']);
             }
 
