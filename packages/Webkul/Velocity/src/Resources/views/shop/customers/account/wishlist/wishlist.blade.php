@@ -243,10 +243,6 @@
             }
         },
 
-        mounted: function() {
-            console.log(this.isWishlistShared);
-        },
-
         methods: {
 
             shareWishlist: function(val) {
@@ -286,9 +282,7 @@
                     .catch(function(error) {
                         self.$root.hideLoader();
 
-                        console.log(error);
-
-                        // window.location.reload();
+                        window.location.reload();
                     })
             },
 
