@@ -105,11 +105,6 @@ class ResetPasswordController extends Controller
         $customer->save();
 
         event(new PasswordReset($customer));
-
-        /**
-         * Force login here
-         */
-        // auth()->guard('customer')->login($customer);
     }
 
     /**
