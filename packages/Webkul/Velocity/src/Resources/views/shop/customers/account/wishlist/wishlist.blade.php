@@ -171,10 +171,6 @@
                     </span>
                 </div>
             </div>
-            <div class='select-all'>
-                <input type='checkbox' id='check-all' ref='selectAll'>
-                <p>{{ __('shop::app.customer.account.wishlist.select-all') }}</p>
-            </div>
         </div>
 
         <div class="form-group">
@@ -183,8 +179,11 @@
             </label>
 
             <select name="shared" class="form-control" @change="shareWishlist($event.target.value)">
+                <option value="" :selected="isWishlistShared == 5">{{ __('shop::app.customer.account.wishlist.select') }}</option>
                 <option value="0" :selected="! isWishlistShared">{{ __('shop::app.customer.account.wishlist.disable') }}</option>
-                <option value="1" :selected="isWishlistShared">{{ __('shop::app.customer.account.wishlist.enable') }}</option>
+                <option value="1" :selected="isWishlistShared == 1">{{ __('shop::app.customer.account.wishlist.enable') }}</option>
+                <option value="2" :selected="isWishlistShared == 2">{{ __('shop::app.customer.account.wishlist.disable-all') }}</option>
+                <option value="3" :selected="isWishlistShared == 3">{{ __('shop::app.customer.account.wishlist.enable-all') }}</option>
             </select>
         </div>
 
@@ -193,7 +192,7 @@
                 {{ __('shop::app.customer.account.wishlist.shared-link') }}
             </label>
 
-            <div class="input-group" v-if="isWishlistShared">
+            <div class="input-group" v-if="isWishlistShared==1 || isWishlistShared==3">
                 <input
                     type="text"
                     class="form-control"
@@ -244,13 +243,20 @@
             }
         },
 
+        mounted: function() {
+            console.log(this.isWishlistShared);
+        },
+
         methods: {
 
             shareWishlist: function(val) {
 
                 let self = this;
+                let checked = false;
 
-                let checked = this.$refs.selectAll.checked;
+                if (val == 3 || val == 2) {
+                    checked = true;
+                }
 
                 this.$root.showLoader();
 
@@ -272,6 +278,7 @@
                     .then(function(response) {
                         self.$root.hideLoader();
 
+                        console.log(response);
                         self.isWishlistShared = response.data.isWishlistShared;
 
                         self.wishlistSharedLink = response.data.wishlistSharedLink;
@@ -279,7 +286,9 @@
                     .catch(function(error) {
                         self.$root.hideLoader();
 
-                        window.location.reload();
+                        console.log(error);
+
+                        // window.location.reload();
                     })
             },
 

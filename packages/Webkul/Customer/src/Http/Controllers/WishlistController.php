@@ -47,7 +47,7 @@ class WishlistController extends Controller
         return view($this->_config['view'], [
             'items'              => $this->wishlistRepository->getCustomerWishlist(),
             'isSharingEnabled'   => $this->isSharingEnabled(),
-            'isWishlistShared'   => 0,
+            'isWishlistShared'   => 4,
             'wishlistSharedLink' => $customer->getWishlistSharedLink()
         ]);
     }
@@ -130,36 +130,51 @@ class WishlistController extends Controller
 
         if ($this->isSharingEnabled()) {
             $data = $this->validate(request(), [
-                'shared' => 'required|boolean'
+                'shared' => 'required'
             ]);
 
-            if ($productIds && $data['shared'] && ! $selectedAll) {
+            /**
+             * Enables specific wishlist items
+             */
+            if ($productIds && $data['shared'] == 1 && ! $selectedAll) {
                 $updateCounts = $customer->wishlist_items();
 
                 $updateCounts->whereIn('product_id', $productIds);
 
-                $updateCounts->update(['shared' => $data['shared']]);
+                $updateCounts->update(['shared' => 1]);
             }
 
-            if (! $selectedAll) {
+            /**
+             * Disable specific wishlist items
+             */
+            if ($productIds && $data['shared'] == 0 && ! $selectedAll) {
                 $notSharingProduct = $customer->wishlist_items();
                 
-                if ($productIds) {
-                    $notSharingProduct->whereNotIn('product_id', $productIds);
-                }
+                $notSharingProduct->whereNotIn('product_id', $productIds);
 
                 $notSharingProduct->update(['shared' => 0]);
             }
 
-            if ($selectedAll && $productIds) {
+            /**
+             * Disable all wishlist items
+             */
+            if ($productIds && $data['shared'] == 2 && $selectedAll) {
+                $updateCounts = $customer->wishlist_items();
+
+                $updateCounts->update(['shared' => 0]);
+            }
+
+            /**
+             * Enable all wishlist items
+             */
+            if ($productIds && $data['shared'] == 3 && $selectedAll) {
                 $selectAllProduct = $customer->wishlist_items();
 
                 $selectAllProduct->update(['shared' => 1]);
-
             }
 
             return response()->json([
-                'isWishlistShared'   => $data['shared'] ? 1 : 0,
+                'isWishlistShared'   => $data['shared'],
                 'wishlistSharedLink' => $customer->getWishlistSharedLink($productIds)
             ]);
         }

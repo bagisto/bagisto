@@ -383,13 +383,15 @@ return [
                 'visibility'           => 'Visibility',
                 'public'               => 'Public',
                 'private'              => 'Private',
-                'enable'               => 'Enable',
-                'disable'              => 'Disable',
                 'customer-name'        => ':name\'s Shared Wishlist',
                 'enable-wishlist-info' => 'Enable wishlist sharing to get the link.',
                 'update-message'       => 'Shared wishlist settings updated successfully',
                 'share-product'        => 'Click to share the product',
-                'select-all'           => 'Share All',
+                'disable-all'          => 'Disable All',
+                'enable-all'           => 'Enable All',
+                'enable'               => 'Enable Selected',
+                'disable'              => 'Disable Unselected',
+                'select'               => '--Select--',
             ],
 
             'downloadable_products' => [
