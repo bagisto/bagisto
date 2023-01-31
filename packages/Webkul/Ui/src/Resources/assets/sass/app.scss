@@ -352,7 +352,7 @@ h5 {
     }
 
     .dropdown-container {
-        padding: 20px;
+        padding: 10px;
         overflow-y: auto;
 
         label {
@@ -622,7 +622,7 @@ h5 {
             padding: 10px;
             border-bottom: solid 1px #d3d3d3;
             color: $font-color;
-            vertical-align: inherit;
+            vertical-align: top;
 
             &.actions {
                 .action {
@@ -778,7 +778,6 @@ h5 {
 
 .control-group {
     display: block;
-    margin-bottom: 25px;
     font-size: 15px;
     color: $font-color;
     width: 750px;
@@ -1384,13 +1383,6 @@ modal {
 
         .control {
             width: 100%;
-        }
-
-        &.date,
-        &.datetime {
-            .control {
-                padding-left: 40px;
-            }
         }
     }
 }
