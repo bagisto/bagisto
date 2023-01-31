@@ -179,8 +179,7 @@
             </label>
 
             <select name="shared" class="form-control" @change="shareWishlist($event.target.value)">
-                <option value="" :selected="isWishlistShared == 5">{{ __('shop::app.customer.account.wishlist.select') }}</option>
-                <option value="0" :selected="! isWishlistShared">{{ __('shop::app.customer.account.wishlist.disable') }}</option>
+                <option value="" :selected="! isWishlistShared">{{ __('shop::app.customer.account.wishlist.select') }}</option>
                 <option value="1" :selected="isWishlistShared == 1">{{ __('shop::app.customer.account.wishlist.enable') }}</option>
                 <option value="2" :selected="isWishlistShared == 2">{{ __('shop::app.customer.account.wishlist.disable-all') }}</option>
                 <option value="3" :selected="isWishlistShared == 3">{{ __('shop::app.customer.account.wishlist.enable-all') }}</option>

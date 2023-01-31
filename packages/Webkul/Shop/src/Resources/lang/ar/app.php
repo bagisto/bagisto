@@ -386,7 +386,10 @@ return [
                 'enable-wishlist-info' => 'قم بتمكين مشاركة قائمة الرغبات للحصول على الرابط.',
                 'update-message'       => 'تم تحديث إعدادات قائمة الرغبات المشتركة بنجاح',
                 'share-product'        => 'انقر لمشاركة المنتج',
-                'select-all'           => 'شارك الكل',
+                'disable-all'          => 'أوقف عمل الكل',
+                'enable-all'           => 'تمكين الكل',
+                'enable'               => 'تمكين المحدد',
+                'select'               => '--يختار--',
             ],
 
             'downloadable_products' => [

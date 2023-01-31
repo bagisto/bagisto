@@ -385,6 +385,10 @@ return [
                 'customer-name'        => 'Общий список желаний :name ',
                 'enable-wishlist-info' => 'Включите общий доступ к списку желаний, чтобы получить ссылку.',
                 'update-message'       => 'Настройки общего списка желаний успешно обновлены',
+                'disable-all'          => 'Disable All',
+                'enable-all'           => 'Enable All',
+                'enable'               => 'Enable Selected',
+                'select'               => '--Select--',
             ],
 
             'downloadable_products' => [

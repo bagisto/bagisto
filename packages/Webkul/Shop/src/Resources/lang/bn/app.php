@@ -386,7 +386,10 @@ return [
                 'enable-wishlist-info' => "লিঙ্ক পেতে ইচ্ছা তালিকা শেয়ারিং সক্ষম করুন।",
                 'update-message'       => "শেয়ারড উইশলিস্ট সেটিংস সফলভাবে আপডেট হয়েছে",
                 'share-product'        => 'Click to share the product',
-                'select-all'           => 'Select All',
+                'disable-all'          => 'Disable All',
+                'enable-all'           => 'Enable All',
+                'enable'               => 'Enable Selected',
+                'select'               => '--Select--',
             ],
 
             'downloadable_products' => [

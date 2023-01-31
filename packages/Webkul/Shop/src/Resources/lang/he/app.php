@@ -386,6 +386,10 @@ return [
                 'update-message'       => 'הגדרות רשימת המשאלות המשותפת עודכנו בהצלחה',
                 'share-product'        => 'Click to share the product',
                 'select-all'           => 'Select All',
+                'disable-all'          => 'Disable All',
+                'enable-all'           => 'Enable All',
+                'enable'               => 'Enable Selected',
+                'select'               => '--Select--',
             ],
 
             'downloadable_products' => [

@@ -389,6 +389,10 @@ return [
                 'update-message'       => 'साझा इच्छा-सूची सेटिंग सफलतापूर्वक अपडेट की गईं',
                 'share-product'        => 'Click to share the product',
                 'select-all'           => 'Select All',
+                'disable-all'          => 'Disable All',
+                'enable-all'           => 'Enable All',
+                'enable'               => 'Enable Selected',
+                'select'               => '--Select--',
             ],
 
             'downloadable_products' => [

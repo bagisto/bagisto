@@ -47,7 +47,7 @@ class WishlistController extends Controller
         return view($this->_config['view'], [
             'items'              => $this->wishlistRepository->getCustomerWishlist(),
             'isSharingEnabled'   => $this->isSharingEnabled(),
-            'isWishlistShared'   => 4,
+            'isWishlistShared'   => 0,
             'wishlistSharedLink' => $customer->getWishlistSharedLink()
         ]);
     }
@@ -142,17 +142,6 @@ class WishlistController extends Controller
                 $updateCounts->whereIn('product_id', $productIds);
 
                 $updateCounts->update(['shared' => 1]);
-            }
-
-            /**
-             * Disable specific wishlist items
-             */
-            if ($productIds && $data['shared'] == 0 && ! $selectedAll) {
-                $notSharingProduct = $customer->wishlist_items();
-                
-                $notSharingProduct->whereNotIn('product_id', $productIds);
-
-                $notSharingProduct->update(['shared' => 0]);
             }
 
             /**

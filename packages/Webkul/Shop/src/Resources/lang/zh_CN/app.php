@@ -386,6 +386,10 @@ return [
                 'update-message'       => '已成功更新共享心愿单设置',
                 'share-product'        => 'Click to share the product',
                 'select-all'           => 'Select All',
+                'disable-all'          => 'Disable All',
+                'enable-all'           => 'Enable All',
+                'enable'               => 'Enable Selected',
+                'select'               => '--Select--',
             ],
 
             'downloadable_products' => [

@@ -390,7 +390,6 @@ return [
                 'disable-all'          => 'Disable All',
                 'enable-all'           => 'Enable All',
                 'enable'               => 'Enable Selected',
-                'disable'              => 'Disable Unselected',
                 'select'               => '--Select--',
             ],
 
