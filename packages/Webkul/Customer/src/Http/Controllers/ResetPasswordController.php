@@ -26,7 +26,7 @@ class ResetPasswordController extends Controller
      * 
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
      *
-     *  @return void
+     * @return void
      */
     public function __construct(
         protected CustomerRepository $customerRepository
@@ -72,6 +72,7 @@ class ResetPasswordController extends Controller
 
             if ($response == Password::PASSWORD_RESET) {
                 $user = $this->customerRepository->findOneByField('email', request('email'));
+                
                 Event::dispatch('user.admin.update-password', $user);
 
                 return redirect()->route($this->_config['redirect']);
