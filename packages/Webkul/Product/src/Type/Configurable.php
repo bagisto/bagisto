@@ -42,6 +42,7 @@ class Configurable extends AbstractType
         'price',
         'weight',
         'status',
+        'tax_category_id'
     ];
 
     /**
@@ -170,7 +171,6 @@ class Configurable extends AbstractType
     public function update(array $data, $id, $attribute = 'id')
     {
         $product = parent::update($data, $id, $attribute);
-
         $this->updateDefaultVariantId();
 
         if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
@@ -178,7 +178,7 @@ class Configurable extends AbstractType
         }
 
         $previousVariantIds = $product->variants->pluck('id');
-
+        
         if (isset($data['variants'])) {
             foreach ($data['variants'] as $variantId => $variantData) {
                 if (Str::contains($variantId, 'variant_')) {
@@ -198,6 +198,7 @@ class Configurable extends AbstractType
 
                     $variantData['locale'] = $data['locale'];
 
+                    $variantData['tax_category_id']=$data['tax_category_id'];
                     $this->updateVariant($variantData, $variantId);
                 }
             }
@@ -220,14 +221,16 @@ class Configurable extends AbstractType
      */
     public function createVariant($product, $permutation, $data = [])
     {
+       
         if (! count($data)) {
             $data = [
-                'sku'         => $product->sku . '-variant-' . implode('-', $permutation),
-                'name'        => '',
-                'inventories' => [],
-                'price'       => 0,
-                'weight'      => 0,
-                'status'      => 1,
+                'sku'           => $product->sku . '-variant-' . implode('-', $permutation),
+                'name'          => '',
+                'inventories'   => [],
+                'price'         => 0,
+                'weight'        => 0,
+                'status'        => 1,
+                'tax_category_id'   => ''
             ];
         }
 
@@ -321,7 +324,7 @@ class Configurable extends AbstractType
         $this->productInventoryRepository->saveInventories($data, $variant);
 
         $this->productImageRepository->upload($data, $variant, 'images');
-
+       
         return $variant;
     }
 
@@ -349,17 +352,14 @@ class Configurable extends AbstractType
     public function updateVariant(array $data, $id)
     {
         $variant = $this->productRepository->find($id);
-
         $variant->update(['sku' => $data['sku']]);
-
         foreach ($this->fillableTypes as $attributeCode) {
             if (! isset($data[$attributeCode])) {
                 continue;
             }
-
             $attribute = $this->getAttributeByCode($attributeCode);
-
             if ($attribute->value_per_channel) {
+
                 if ($attribute->value_per_locale) {
                     $productAttributeValue = $variant->attribute_values
                         ->where('channel', $attribute->value_per_channel ? $data['channel'] : null)
