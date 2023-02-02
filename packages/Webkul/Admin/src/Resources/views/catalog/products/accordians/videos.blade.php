@@ -4,7 +4,7 @@
     <div slot="body">
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.videos.controls.before', ['product' => $product]) !!}
 
-        <div class="control-group {{ $errors->has('videos.files.*') ? 'has-error' : '' }}">
+        <div class="control-group {{ $errors->has('videos.files.*') ? 'has-error' : '' }}" style="width: 100%">
             <label>{{ __('admin::app.catalog.products.video') }}</label>
 
             <product-video></product-video>
@@ -25,9 +25,9 @@
 
 @push('scripts')
     <script type="text/x-template" id="product-video-template">
-        <div>
+        <div class="media-wrapper-container">
             <div class="image-wrapper">
-                <draggable v-model="items" group="people" @end="onDragEnd">
+                <draggable v-model="items" group="people" @end="onDragEnd" class="inl-flx">
                     <product-video-item
                         v-for='(video, index) in items'
                         :key='video.id'
@@ -38,8 +38,9 @@
                 </draggable>
             </div>
 
-            <label class="btn btn-lg btn-primary" style="display: table; width: auto" @click="createFileType">
-                {{ __('admin::app.catalog.products.add-video-btn-title') }}
+            <label class="add-product-video" @click="createFileType">
+            <span class="add-image-icon"></span>
+            {{ __('admin::app.catalog.products.add-video-btn-title') }}
             </label>
         </div>
     </script>

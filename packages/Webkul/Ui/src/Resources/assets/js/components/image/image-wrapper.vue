@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="media-wrapper-container">
         <div class="image-wrapper">
             <image-item
                 v-for="image in items"
@@ -13,12 +13,15 @@
         </div>
 
         <label
-            class="btn btn-lg btn-primary"
-            style="display: inline-block; width: auto"
+            class="add-product-image"
             @click="createFileType"
             v-if="!hideButton"
-            >{{ buttonLabel }}</label
-        >
+            >
+            <span 
+            class="add-image-icon"
+            ></span>
+            {{ buttonLabel }}
+        </label>
     </div>
 </template>
 
@@ -34,7 +37,7 @@ export default {
         removeButtonLabel: {
             type: String,
             required: false,
-            default: 'Remove Image'
+            default: 'Remove'
         },
 
         inputName: {

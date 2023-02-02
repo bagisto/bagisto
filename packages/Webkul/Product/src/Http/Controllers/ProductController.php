@@ -156,6 +156,7 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
+        
         Event::dispatch('catalog.product.update.before', $id);
 
         $product = $this->productRepository->update(request()->all(), $id);

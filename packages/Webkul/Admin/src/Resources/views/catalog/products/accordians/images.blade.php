@@ -4,7 +4,7 @@
     <div slot="body">
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.controls.before', ['product' => $product]) !!}
 
-        <div class="control-group {{ $errors->has('images.files.*') ? 'has-error' : '' }}">
+        <div class="control-group {{ $errors->has('images.files.*') ? 'has-error' : '' }}" style="width: 100%">
             <label class="required">{{ __('admin::app.catalog.categories.image') }}</label>
 
             <product-image></product-image>
@@ -25,9 +25,9 @@
 
 @push('scripts')
     <script type="text/x-template" id="product-image-template">
-        <div>
+        <div class="media-wrapper-container">
             <div class="image-wrapper">
-                <draggable v-model="items" group="people" @end="onDragEnd">
+                <draggable v-model="items" group="people" @end="onDragEnd" class="inl-flx">
                     <product-image-item
                         v-for='(image, index) in items'
                         :key='image.id'
@@ -39,7 +39,8 @@
                 </draggable>
             </div>
 
-            <label class="btn btn-lg btn-primary" style="display: table; width: auto" @click="createFileType">
+            <label class="add-product-image" @click="createFileType">
+            <span class="add-image-icon"></span>
                 {{ __('admin::app.catalog.products.add-image-btn-title') }}
             </label>
         </div>

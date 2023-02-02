@@ -528,24 +528,6 @@ h5 {
         width: 96vw;
         margin-right: 2vw;
     }
-
-    .table {
-        table {
-            thead {
-                tr {
-                    th {
-                        padding: 12px 4px !important;
-                    }
-                }
-            }
-
-            tbody {
-                td {
-                    padding: 4px !important;
-                }
-            }
-        }
-    }
 }
 
 .section {
@@ -612,6 +594,7 @@ h5 {
             padding: 12px 10px;
             background: #f8f9fa;
             color: $font-color;
+            vertical-align: top;
 
             &.sortable {
                 cursor: pointer;
@@ -1370,8 +1353,7 @@ modal {
     }
 }
 
-// responsive css for modal
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 768px) {
     .modal-container {
         max-width: 80%;
         left: 10%;
@@ -1383,6 +1365,26 @@ modal {
 
         .control {
             width: 100%;
+            padding: 0px;
+            text-align: center;
+        }
+    }
+
+    .table {
+        table {
+            thead {
+                tr {
+                    th {
+                        padding: 5px 20px;
+                    }
+                }
+            }
+
+            tbody {
+                td {
+                    padding: 5px;
+                }
+            }
         }
     }
 }
@@ -1454,8 +1456,9 @@ modal {
 .image-wrapper {
     margin-bottom: 20px;
     margin-top: 10px;
+    margin-right: 14px;
     display: inline-block;
-    width: 100%;
+    position: relative;
 
     .image-item {
         width: 200px;
@@ -1510,6 +1513,70 @@ modal {
             background-image: none;
         }
     }
+}
+
+.variant-image {
+    margin-top: 0px;
+
+    .image-item {
+        height: 100px !important;
+        width: 100px !important;
+        background-size: 100px 100px !important;
+        margin: 0px 6px;
+    }
+
+    .trash-icon {
+        position: absolute;
+        cursor: pointer;
+        top: 50%;
+        right: -9px;
+    }
+}
+
+.add-variant-image {
+    width: 100px !important;
+    min-width: 100px;
+    height: 100px;
+    background: #f8f9fa;
+    border: 2px solid #C7C7C7;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.add-image-icon {
+    display: block;
+    padding: 24% 0px;
+    background-image: url('../images/Camera.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.variant-group{
+    display: flex;
+    max-width: 360px;
+    overflow: auto;
+}
+
+.media-wrapper-container {
+    display: inline-flex;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.add-product-video, .add-product-image {
+    width: 200px !important;
+    min-width: 200px;
+    height: 200px;
+    background: #f8f9fa;
+    border: 2px solid #C7C7C7;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.inl-flx {
+    display: inline-flex;
 }
 
 .vue-swatches__trigger {

@@ -1,6 +1,15 @@
 @push('css')
     <style>
-        .table th.price, .table th.weight {
+
+        .input-variant {
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+        }     
+        .table th.price,
+        .table th.weight {
             width: 100px;
         }
 
@@ -11,12 +20,13 @@
         .table td.actions .icon {
             margin-top: 8px;
         }
+   
     </style>
 @endpush
 
 @php
     $variantImages = [];
-
+    
     foreach ($product->variants as $variant) {
         foreach ($variant->images as $image) {
             $variantImages[$variant->id] = $image;
@@ -24,11 +34,15 @@
     }
 @endphp
 
-{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.before', ['product' => $product]) !!}
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.before', [
+    'product' => $product,
+]) !!}
 
 <accordian title="{{ __('admin::app.catalog.products.variations') }}" :active="true">
     <div slot="body">
-        {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.controls.before', ['product' => $product]) !!}
+        {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.controls.before', [
+            'product' => $product,
+        ]) !!}
 
         <button type="button" class="btn btn-md btn-primary" @click="showModal('addVariant')">
             {{ __('admin::app.catalog.products.add-variant-btn-title') }}
@@ -36,11 +50,15 @@
 
         <variant-list></variant-list>
 
-        {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.controls.after', ['product' => $product]) !!}
+        {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.controls.after', [
+            'product' => $product,
+        ]) !!}
     </div>
 </accordian>
 
-{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.after', ['product' => $product]) !!}
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.after', [
+    'product' => $product,
+]) !!}
 
 <modal id="addVariant" :is-open="modalIds.addVariant">
     <h3 slot="header">{{ __('admin::app.catalog.products.add-variant-title') }}</h3>
@@ -194,35 +212,36 @@
             </td>
 
             <td>
-                <div :class="['control-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
+             
+                <div :class="['control-group variant-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
                     <div v-for='(image, index) in items' class="image-wrapper variant-image">
                         <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
                             <input
-                                type="hidden"
-                                :name="[variantInputName + '[images][files][' + image.id + ']']"
-                                v-if="! new_image[index]"/>
-
-                            <input
-                                :ref="'imageInput' + index"
-                                :id="image.id"
                                 type="file"
                                 :name="[variantInputName + '[images][files][' + index + ']']"
-                                accept="image/*"
-                                multiple="multiple"
-                                v-validate="'mimes:image/*'"
-                                @change="addImageView($event, index)"/>
+                                v-if="new_image[index]"/>
 
                             <img
                                 class="preview"
                                 :src="imageData[index]"
                                 v-if="imageData[index]">
+
+                                <label class="remove-image" @click="removeImage(image)">{{ __('shop::app.checkout.cart.remove') }}</label>
                         </label>
 
-                        <span class="icon trash-icon" @click="removeImage(image)"></span>
                     </div>
 
-                    <label class="btn btn-lg btn-primary add-image" @click="createFileType">
+                    <label class="add-variant-image" >
+                        <span class="add-image-icon"></span>
+
+                            <input class="input-variant"
+                                type="file"
+                                accept="image/*"
+                                multiple="multiple"
+                                v-validate="'mimes:image/*'"
+                                @change="addImageView($event)"/>                       
                         {{ __('admin::app.catalog.products.add-image-btn-title') }}
+
                     </label>
                 </div>
             </td>
@@ -333,7 +352,7 @@
     </script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             Vue.config.ignoredElements = [
                 'variant-form',
                 'variant-list',
@@ -345,7 +364,7 @@
         let variants = @json($product->variants);
 
         Vue.component('variant-form', {
-            data: function () {
+            data: function() {
                 return {
                     variant: {},
                     super_attributes: super_attributes
@@ -354,17 +373,17 @@
 
             template: '#variant-form-template',
 
-            created: function () {
+            created: function() {
                 this.resetModel();
             },
 
             methods: {
-                addVariant: function (formScope) {
+                addVariant: function(formScope) {
                     this.$validator.validateAll(formScope).then((result) => {
                         if (result) {
                             let self = this;
 
-                            let filteredVariants = variants.filter(function (variant) {
+                            let filteredVariants = variants.filter(function(variant) {
                                 let matchCount = 0;
 
                                 for (let key in self.variant) {
@@ -392,7 +411,8 @@
                                 }
 
                                 variants.push(Object.assign({
-                                    sku: '{{ $product->sku }}' + '-variant-' + optionIds.join('-'),
+                                    sku: '{{ $product->sku }}' + '-variant-' + optionIds
+                                        .join('-'),
                                     name: '',
                                     price: 0,
                                     weight: 0,
@@ -407,10 +427,10 @@
                     });
                 },
 
-                resetModel: function () {
+                resetModel: function() {
                     let self = this;
 
-                    this.super_attributes.forEach(function (attribute) {
+                    this.super_attributes.forEach(function(attribute) {
                         self.variant[attribute.code] = '';
                     })
                 }
@@ -422,7 +442,7 @@
 
             inject: ['$validator'],
 
-            data: function () {
+            data: function() {
                 return {
                     variants: variants,
 
@@ -432,7 +452,7 @@
                 }
             },
 
-            created: function () {
+            created: function() {
                 let index = 0;
 
                 for (let key in this.old_variants) {
@@ -473,7 +493,7 @@
             },
 
             methods: {
-                removeVariant: function (variant) {
+                removeVariant: function(variant) {
                     let index = this.variants.indexOf(variant)
 
                     this.variants.splice(index, 1)
@@ -488,7 +508,7 @@
 
             inject: ['$validator'],
 
-            data: function () {
+            data: function() {
                 return {
                     default_variant_id: parseInt('{{ $product->additional['default_variant_id'] ?? null }}'),
                     inventorySources: @json($inventorySources),
@@ -500,19 +520,20 @@
                     images: {},
                     imageData: [],
                     new_image: [],
+                    totalImage: 0,
                 }
             },
 
-            created: function () {
+            created: function() {
                 let self = this;
 
-                this.inventorySources.forEach(function (inventorySource) {
+                this.inventorySources.forEach(function(inventorySource) {
                     self.inventories[inventorySource.id] = self.sourceInventoryQty(inventorySource.id)
                     self.totalQty += parseInt(self.inventories[inventorySource.id]);
                 })
             },
 
-            mounted () {
+            mounted() {
                 let self = this;
 
                 self.variant.images.forEach(function(image) {
@@ -528,7 +549,7 @@
             },
 
             computed: {
-                variantInputName: function () {
+                variantInputName: function() {
                     if (this.variant.id)
                         return "variants[" + this.variant.id + "]";
 
@@ -537,19 +558,19 @@
             },
 
             methods: {
-                removeVariant: function () {
+                removeVariant: function() {
                     this.$emit('onRemoveVariant', this.variant);
                 },
 
-                checkDefaultVariant: function (variantId) {
+                checkDefaultVariant: function(variantId) {
                     this.default_variant_id = variantId;
                 },
 
-                optionName: function (optionId) {
+                optionName: function(optionId) {
                     let optionName = '';
 
-                    this.superAttributes.forEach(function (attribute) {
-                        attribute.options.forEach(function (option) {
+                    this.superAttributes.forEach(function(attribute) {
+                        attribute.options.forEach(function(option) {
                             if (optionId == option.id) {
                                 optionName = option.admin_name;
                             }
@@ -559,11 +580,11 @@
                     return optionName;
                 },
 
-                sourceInventoryQty: function (inventorySourceId) {
+                sourceInventoryQty: function(inventorySourceId) {
                     if (!Array.isArray(this.variant.inventories))
                         return 0;
 
-                    let inventories = this.variant.inventories.filter(function (inventory) {
+                    let inventories = this.variant.inventories.filter(function(inventory) {
                         return inventorySourceId === parseInt(inventory.inventory_source_id);
                     })
 
@@ -573,7 +594,7 @@
                     return 0;
                 },
 
-                updateTotalQty: function () {
+                updateTotalQty: function() {
                     this.totalQty = 0;
 
                     for (let key in this.inventories) {
@@ -581,17 +602,7 @@
                     }
                 },
 
-                createFileType: function() {
-                    let self = this;
-
-                    this.imageCount++;
-
-                    this.items.push({'id': 'image_' + this.imageCount});
-
-                    this.imageData[this.imageData.length] = '';
-                },
-
-                removeImage (image) {
+                removeImage(image) {
                     let index = this.items.indexOf(image);
 
                     Vue.delete(this.items, index);
@@ -599,23 +610,27 @@
                     Vue.delete(this.imageData, index);
                 },
 
-                addImageView: function($event, index) {
-                    let ref = "imageInput" + index;
-                    let imageInput = this.$refs[ref][0];
-
-                    if (imageInput.files && imageInput.files[0]) {
-                        if (imageInput.files[0].type.includes('image/')) {
-                            this.readFile(imageInput.files[0], index);
-
+                addImageView: function($event) {
+                    this.imageCount++;
+                    this.items.push({ 'id': 'image_' + this.imageCount});
+                    this.imageData[this.imageData.length] = '';
+           
+                    let image = $event.target.files[0];
+                    if (image) {
+                        if (image.type.includes('image/')) {
+                            
+                            this.readFile(image, this.totalImage++);
+                            
                         } else {
                             imageInput.value = "";
-
+                          
                             alert('Only images (.jpeg, .jpg, .png, ..) are allowed.');
                         }
                     }
                 },
-
+                
                 readFile: function(image, index) {
+                    
                     let reader = new FileReader();
 
                     reader.onload = (e) => {
