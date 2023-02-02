@@ -220,8 +220,13 @@
         .offers-ct-panel {
             padding: 8px 0;
 
+            .offers-ct-top,
+            .offers-ct-bottom {
+                height: unset;
+            }
+
             a:first-child {
-                padding-bottom: 10px !important;
+                padding-bottom: 1px !important;
             }
         }
     }
@@ -980,10 +985,6 @@
 
     .advertisement-four-container {
         min-height: 992px;
-
-        .offers-ct-panel {
-            min-height: 425px;
-        }
     }
 
     .product-card-new {
@@ -1029,10 +1030,6 @@
 
     .advertisement-four-container {
         min-height: 992px;
-       
-        .offers-ct-panel {
-            min-height: 425px;
-        }
     }
 
     .product-card-new {
