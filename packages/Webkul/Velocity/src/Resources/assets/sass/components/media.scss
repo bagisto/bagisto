@@ -3,14 +3,12 @@
 }
 
 @media only screen and (max-width: 1192px) {
-    .advertisement-four-container {
-        .offers-ct-panel {
-            .offers-ct-top {
-                height: 118px;
-            }
-            
-            .offers-ct-bottom {
-                height: unset;
+    .popular-categories-container{
+        .popular-category-wrapper{
+            .card {
+                .category-image {
+                    height: 250px;
+                }
             }
         }
     }
@@ -238,7 +236,7 @@
             }
 
             a:first-child {
-                padding-bottom: 1px !important;
+                padding-bottom: 15px !important;
             }
         }
     }
