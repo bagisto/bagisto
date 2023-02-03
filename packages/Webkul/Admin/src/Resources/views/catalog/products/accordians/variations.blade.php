@@ -1,6 +1,5 @@
 @push('css')
     <style>
-
         .input-variant {
             opacity: 0;
             width: 100%;
@@ -212,7 +211,6 @@
             </td>
 
             <td>
-             
                 <div :class="['control-group variant-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
                     <div v-for='(image, index) in items' class="image-wrapper variant-image">
                         <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
@@ -226,22 +224,23 @@
                                 :src="imageData[index]"
                                 v-if="imageData[index]">
 
-                                <label class="remove-image" @click="removeImage(image)">{{ __('shop::app.checkout.cart.remove') }}</label>
+                                <label class="remove-image" @click="removeImage(image)">
+                                {{ __('shop::app.checkout.cart.remove') }} </label>
                         </label>
 
                     </div>
 
                     <label class="add-variant-image" >
                         <span class="add-image-icon"></span>
-
+                        
                             <input class="input-variant"
                                 type="file"
                                 accept="image/*"
                                 multiple="multiple"
                                 v-validate="'mimes:image/*'"
-                                @change="addImageView($event)"/>                       
-                        {{ __('admin::app.catalog.products.add-image-btn-title') }}
-
+                                @change="addImageView($event)"/>   
+                                
+                                {{ __('admin::app.catalog.products.add-image-btn-title') }}
                     </label>
                 </div>
             </td>
