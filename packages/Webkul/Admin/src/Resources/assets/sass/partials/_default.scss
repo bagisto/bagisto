@@ -461,7 +461,7 @@ body {
 
 .control-group {
     label {
-        width: auto;
+        width: max-content;
 
         .locale {
             float: right;
@@ -524,7 +524,7 @@ body {
     .trash-icon {
         position: absolute;
         cursor: pointer;
-        margin-top: 25%;
+        margin-top: 60%;
     }
 }
 

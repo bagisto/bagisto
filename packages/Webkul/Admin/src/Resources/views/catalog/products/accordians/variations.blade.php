@@ -1,5 +1,12 @@
-@push('css')
+@push('css')Image
     <style>
+        .image-wrapper {
+            margin-bottom: 20px;
+            margin-top: 10px;
+            display: table-row-group;
+            width: 100%;
+        }
+
         .table th.price, .table th.weight {
             width: 100px;
         }
@@ -207,7 +214,7 @@
                                 :id="image.id"
                                 type="file"
                                 :name="[variantInputName + '[images][files][' + index + ']']"
-                                accept="image/*"
+                                accept="image"
                                 multiple="multiple"
                                 v-validate="'mimes:image/*'"
                                 @change="addImageView($event, index)"/>
@@ -221,7 +228,7 @@
                         <span class="icon trash-icon" @click="removeImage(image)"></span>
                     </div>
 
-                    <label class="btn btn-lg btn-primary add-image" @click="createFileType">
+                    <label class="btn btn-lg btn-primary" @click="createFileType">
                         {{ __('admin::app.catalog.products.add-image-btn-title') }}
                     </label>
                 </div>
