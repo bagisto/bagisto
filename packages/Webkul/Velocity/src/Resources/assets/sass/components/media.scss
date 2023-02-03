@@ -3,6 +3,18 @@
 }
 
 @media only screen and (max-width: 1192px) {
+    .advertisement-four-container {
+        .offers-ct-panel {
+            .offers-ct-top {
+                height: 115px;
+            }
+            
+            .offers-ct-bottom {
+                height: unset;
+            }
+        }
+    }
+
     .sticky-header {
         display: block !important;
     }
