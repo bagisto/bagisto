@@ -115,6 +115,7 @@ export default {
             isDataLoaded: false,
             massActionTargets: [],
             url: this.src,
+            locales:'',
         };
     },
 
@@ -149,7 +150,11 @@ export default {
                 newParams = `${newParams}&${this.filters[i].column}${condition}=${this.filters[i].val}`;
             }
 
-            this.url = `${this.src}?v=1${newParams}`;
+            this.$nextTick(()=>{
+                this.locales = this.extraFilters.current.locale;
+                
+               this.url = `${this.src}?v=1${newParams}&locale=${this.locales}`;
+            });
 
             this.refresh();
         },
