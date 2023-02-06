@@ -1,6 +1,6 @@
 @push('css')Image
     <style>
-        .image-wrapper {
+        .variant-image {
             margin-bottom: 20px;
             margin-top: 10px;
             display: table-row-group;
