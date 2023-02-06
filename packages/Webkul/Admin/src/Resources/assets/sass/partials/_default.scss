@@ -592,7 +592,7 @@ body {
 
     .content {
         .page-header {
-            display: flex;
+            display: inline-block;
             justify-content: space-between;
             flex-wrap: wrap;
             width: 100%;
@@ -626,7 +626,7 @@ body {
 
             .page-action {
                 margin-top: -5px;
-                margin-left: auto;
+                float: right;
 
                 button {
                     margin-top: 10px;
@@ -836,7 +836,7 @@ body {
         .content {
             .page-header {
                 .control-group {
-                    width: 90%;
+                    width: 180px;
                     display: inline-block;
                     margin-bottom: 0;
                     margin-left: 20px;
@@ -847,7 +847,7 @@ body {
     }
 
     h1 {
-        font-size: 18px;
+        font-size: 30px;
     }
 
     .page-action {
@@ -950,11 +950,6 @@ body {
         margin-top: 12px !important;
         width: 100% !important;
         margin-left: inherit !important;
-    }
-
-    .page-action {
-        margin: inherit !important;
-        float: inherit !important;
     }
 
     .switch-dark {
