@@ -35,6 +35,7 @@ class SmartButtonController extends Controller
         try {
             return response()->json($this->smartButton->createOrder($this->buildRequestBody()));
         } catch (\Exception $e) {
+            $this->saveOrder('failed');
             return response()->json(json_decode($e->getMessage()), 400);
         }
     }
@@ -50,6 +51,7 @@ class SmartButtonController extends Controller
             $this->smartButton->captureOrder(request()->input('orderData.orderID'));
             return $this->saveOrder();
         } catch (\Exception $e) {
+            $this->saveOrder('failed');
             return response()->json(json_decode($e->getMessage()), 400);
         }
     }
@@ -205,7 +207,7 @@ class SmartButtonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected function saveOrder()
+    protected function saveOrder($status = null)
     {
         if (Cart::hasError()) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
@@ -218,10 +220,14 @@ class SmartButtonController extends Controller
 
             $order = $this->orderRepository->create(Cart::prepareDataForOrder());
 
-            $this->orderRepository->update(['status' => 'processing'], $order->id);
-
+            if ($status) {
+                $this->orderRepository->update(['status' => 'failed'], $order->id);
+            } else {
+                $this->orderRepository->update(['status' => 'processing'], $order->id);
+            }
+                
             if ($order->canInvoice()) {
-                $this->invoiceRepository->create($this->prepareInvoiceData($order));
+                $this->invoiceRepository->create($this->prepareInvoiceData($order), null , $status);
             }
 
             Cart::deActivateCart();

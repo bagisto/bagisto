@@ -133,6 +133,8 @@ class OrderDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending-payment') . '</span>';
                 } elseif ($value->status == 'fraud') {
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-fraud') . '</span>';
+                } elseif ($value->status == 'failed') {
+                    return '<span class="badge badge-md badge-danger">' . trans('shop::app.customer.account.order.index.failed') . '</span>';
                 }
             },
         ]);

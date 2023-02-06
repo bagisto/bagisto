@@ -293,6 +293,7 @@ return [
                     'pending'         => 'Pending',
                     'pending-payment' => 'Pending Payment',
                     'fraud'           => 'Fraud',
+                    'failed'           => 'Failed',
                 ],
 
                 'view' => [
