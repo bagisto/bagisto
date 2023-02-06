@@ -562,6 +562,7 @@
                     id="billing[save_as_address]"
                     type="checkbox"
                     name="billing[save_as_address]"
+                   :disabled='address.billing.save_as_address'
                     v-model="address.billing.save_as_address"
                     @change="validateForm('address-form')" />
 
