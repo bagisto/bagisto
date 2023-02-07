@@ -100,6 +100,8 @@ class OrderInvoicesDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.invoices.status-pending') . '</span>';
                 } elseif ($value->state == 'overdue') {
                     return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.invoices.status-overdue') . '</span>';
+                } elseif ($value->state == 'failed') {
+                    return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.invoices.status-failed') . '</span>';
                 } else {
                     return $value->state;
                 }

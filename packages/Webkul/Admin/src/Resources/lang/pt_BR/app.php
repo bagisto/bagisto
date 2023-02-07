@@ -443,6 +443,7 @@ return [
             'status-overdue'         => 'Overdue',
             'status-pending'         => 'Pagamento pendente',
             'status-paid'            => 'Pago',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1640,12 +1641,13 @@ return [
         'read-all'                    => 'Marcar como Lido',
         'notification-marked-success' => 'Notificação marcada com sucesso',
         'order-status-messages'       => [
-            'completed'  => 'Encomenda completa',
-            'closed'     => 'Pedido fechado',
-            'canceled'   => 'Pedido cancelado',
-            'pending'    => 'pedido pendente',
-            'processing' => 'processamento de pedido',
-            'pending_payment' => 'Pagamento Pendente',
+            'completed'         => 'Encomenda completa',
+            'closed'            => 'Pedido fechado',
+            'canceled'          => 'Pedido cancelado',
+            'pending'           => 'pedido pendente',
+            'processing'        => 'processamento de pedido',
+            'pending_payment'   => 'Pagamento Pendente',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

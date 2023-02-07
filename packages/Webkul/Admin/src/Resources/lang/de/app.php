@@ -445,7 +445,9 @@ return [
             'status-overdue'         => 'Overdue',
             'status-pending'         => 'Pending Payment',
             'status-paid'            => 'Paid',
+            'status-failed'          => 'Failed',
         ],
+        
         'shipments' =>
         [
             'title'             => 'Sendungen',
@@ -1638,12 +1640,13 @@ return [
         'read-all'                    => 'Als gelesen markieren',
         'notification-marked-success' => 'Benachrichtigung erfolgreich markiert',
         'order-status-messages'       => [
-            'completed'  => 'Bestellung abgeschlossen',
-            'closed'     => 'Bestellung geschlossen',
-            'canceled'   => 'Bestellung storniert',
-            'pending'    => 'Bestellung ausstehend',
-            'processing' => 'Auftragsabwicklung',
-            'pending_payment' => 'Ausstehende Zahlung',
+            'completed'         => 'Bestellung abgeschlossen',
+            'closed'            => 'Bestellung geschlossen',
+            'canceled'          => 'Bestellung storniert',
+            'pending'           => 'Bestellung ausstehend',
+            'processing'        => 'Auftragsabwicklung',
+            'failed'            => 'Failed Payment',
+            'pending_payment'   => 'Ausstehende Zahlung',
         ],
     ],
 ];

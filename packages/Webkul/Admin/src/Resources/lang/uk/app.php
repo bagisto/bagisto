@@ -453,6 +453,7 @@ return [
             'status-overdue'         => 'Просрочено',
             'status-pending'         => 'Ожидающий платежа',
             'status-paid'            => 'Оплаченный',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1681,12 +1682,13 @@ return [
         'read-all'                    => 'Пометить, как прочитанное',
         'notification-marked-success' => 'Уведомление отмечено успешно',
         'order-status-messages'       => [
-            'completed'  => 'Заказ завершен',
-            'closed'     => 'Заказ закрыт',
-            'canceled'   => 'Заказ отменен',
-            'pending'    => 'Ожидание заказа',
-            'processing' => 'Обработка заказов',
-            'pending_payment' => 'Ожидающий платеж',
+            'completed'         => 'Заказ завершен',
+            'closed'            => 'Заказ закрыт',
+            'canceled'          => 'Заказ отменен',
+            'pending'           => 'Ожидание заказа',
+            'processing'        => 'Обработка заказов',
+            'pending_payment'   => 'Ожидающий платеж',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

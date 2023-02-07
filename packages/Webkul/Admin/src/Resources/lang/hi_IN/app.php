@@ -450,6 +450,7 @@ return [
             'status-overdue'         => 'अतिदेय',
             'status-pending'         => 'लंबित भुगतान',
             'status-paid'            => 'भुगतान किया गया',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1674,12 +1675,13 @@ return [
         'read-all'                    => 'पढ़े हुए का चिह्न',
         'notification-marked-success' => 'अधिसूचना सफलतापूर्वक चिह्नित',
         'order-status-messages'       => [
-            'completed'  =>'आर्डर पूरा हुआ',
-            'closed'     => 'आदेश बंद',
-            'canceled'   => 'आदेश रद्द',
-            'pending'    => 'आदेश लम्बित',
-            'processing' => 'आदेश प्रसंस्करण',
-            'pending_payment' => 'एन अटेंशन डे पैमेंट',
+            'completed'         =>'आर्डर पूरा हुआ',
+            'closed'            => 'आदेश बंद',
+            'canceled'          => 'आदेश रद्द',
+            'pending'           => 'आदेश लम्बित',
+            'processing'        => 'आदेश प्रसंस्करण',
+            'pending_payment'   => 'एन अटेंशन डे पैमेंट',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

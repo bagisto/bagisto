@@ -31,6 +31,8 @@ class Order extends Model implements OrderContract
 
     public const STATUS_FRAUD = 'fraud';
 
+    public const STATUS_FAILED = 'failed';
+
     protected $guarded = [
         'id',
         'items',
@@ -51,6 +53,7 @@ class Order extends Model implements OrderContract
         self::STATUS_CANCELED        => 'Canceled',
         self::STATUS_CLOSED          => 'Closed',
         self::STATUS_FRAUD           => 'Fraud',
+        self::STATUS_FAILED          => 'Failed',
     ];
 
     /**

@@ -453,6 +453,7 @@ return [
             'status-overdue'         => 'En retard',
             'status-pending'         => 'En attente de paiement',
             'status-paid'            => 'Payé',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1695,12 +1696,13 @@ return [
         'read-all'                    => 'Merkitse luetuksi',
         'notification-marked-success' => 'Ilmoitus merkitty onnistuneesti',
         'order-status-messages'       => [
-            'completed'  => 'Tilaus valmis',
-            'closed'     => 'Tilaus suljettu',
-            'canceled'   => 'Tilaus peruutettu',
-            'pending'    => 'Tilaus vireillä',
-            'processing' => 'Tilausta Käsitellään',
-            'pending_payment' => 'En attente de paiement',
+            'completed'         => 'Tilaus valmis',
+            'closed'            => 'Tilaus suljettu',
+            'canceled'          => 'Tilaus peruutettu',
+            'pending'           => 'Tilaus vireillä',
+            'processing'        => 'Tilausta Käsitellään',
+            'pending_payment'   => 'En attente de paiement',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

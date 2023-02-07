@@ -82,7 +82,6 @@
                                                 <span class="title">
                                                     {{ __('admin::app.sales.orders.order-status') }}
                                                 </span>
-
                                                 <span class="value">
                                                     {{ $order->status_label }}
                                                 </span>

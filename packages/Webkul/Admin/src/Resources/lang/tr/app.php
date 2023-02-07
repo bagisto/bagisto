@@ -444,6 +444,7 @@ return [
             'status-overdue'         => 'Vadesi Geçmiş',
             'status-pending'         => 'Bekleyen Ödeme',
             'status-paid'            => 'Ödendi',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1657,12 +1658,13 @@ return [
         'read-all'                    => 'Okundu olarak işaretle',
         'notification-marked-success' => 'Bildirim Başarıyla İşaretlendi',
         'order-status-messages'       => [
-            'completed'  => 'Sipariş Tamamlandı',
-            'closed'     => 'Sipariş Kapandı',
-            'canceled'   => 'Sipariş İptal Edildi',
-            'pending'    => 'Sipariş beklemede',
-            'processing' => 'sipariş düzenleniyor',
-            'pending_payment' => 'bekleyen ödeme',
+            'completed'         => 'Sipariş Tamamlandı',
+            'closed'            => 'Sipariş Kapandı',
+            'canceled'          => 'Sipariş İptal Edildi',
+            'pending'           => 'Sipariş beklemede',
+            'processing'        => 'sipariş düzenleniyor',
+            'pending_payment'   => 'bekleyen ödeme',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

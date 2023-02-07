@@ -444,6 +444,7 @@ return [
             'status-overdue'         => 'Zaległe',
             'status-pending'         => 'Oczekiwanie na płatność',
             'status-paid'            => 'Opłacone',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1629,12 +1630,13 @@ return [
         'read-all'                    => 'Oznacz jako przeczytane',
         'notification-marked-success' => 'Powiadomienie oznaczone pomyślnie',
         'order-status-messages'       => [
-            'completed'  => 'Zamówienie zrealizowane',
-            'closed'     => 'Zamówienie zamknięte',
-            'canceled'   => 'Zamówienie anulowane',
-            'pending'    => 'Zamówienie w trakcie realizacji',
-            'processing' => 'przetwarzanie zamówienia',
-            'pending_payment' => 'oczekująca płatność',
+            'completed'         => 'Zamówienie zrealizowane',
+            'closed'            => 'Zamówienie zamknięte',
+            'canceled'          => 'Zamówienie anulowane',
+            'pending'           => 'Zamówienie w trakcie realizacji',
+            'processing'        => 'przetwarzanie zamówienia',
+            'pending_payment'   => 'oczekująca płatność',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

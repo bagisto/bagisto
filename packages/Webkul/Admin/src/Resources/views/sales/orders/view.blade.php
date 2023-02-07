@@ -93,7 +93,7 @@
                                                 <span class="title">
                                                     {{ __('admin::app.sales.orders.order-status') }}
                                                 </span>
-
+                                                
                                                 <span class="value">
                                                     {{ __('admin::app.notification.order-status-messages.'.strtolower($order->status)) }}
                                                 </span>

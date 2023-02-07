@@ -453,6 +453,7 @@ return [
             'status-overdue'         => 'ওভারডিউ',
             'status-pending'         => 'অপেক্ষারত পেমেন্ট',
             'status-paid'            => 'পেড',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1679,12 +1680,13 @@ return [
         'read-all'                    => 'পঠিত হিসেবে চিহ্নিত করুন',
         'notification-marked-success' => 'বিজ্ঞপ্তি সফলভাবে চিহ্নিত করা হয়েছে৷',
         'order-status-messages'       => [
-            'completed'  => 'আদেশ সম্পন্ন',
-            'closed'     => 'অর্ডার বন্ধ',
-            'canceled'   => 'অর্ডার বাতিল',
-            'pending'    => 'অর্ডার পেন্ডিং',
-            'processing' => 'অর্ডার প্রসেসিং',
-            'pending_payment' => 'অপেক্ষারত পেমেন্ট',
+            'completed'         => 'আদেশ সম্পন্ন',
+            'closed'            => 'অর্ডার বন্ধ',
+            'canceled'          => 'অর্ডার বাতিল',
+            'pending'           => 'অর্ডার পেন্ডিং',
+            'processing'        => 'অর্ডার প্রসেসিং',
+            'pending_payment'   => 'অপেক্ষারত পেমেন্ট',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

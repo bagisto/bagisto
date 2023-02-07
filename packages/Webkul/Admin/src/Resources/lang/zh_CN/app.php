@@ -444,6 +444,7 @@ return [
             'status-overdue' => '逾期',
             'status-pending' => '待批准支付',
             'status-paid'    => '已支付',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1632,12 +1633,13 @@ return [
         'read-all'                    => '标记为已读',
         'notification-marked-success' => '通知标记成功',
         'order-status-messages'       => [
-            'completed'  => '订单完成',
-            'closed'     => '订单已关闭',
-            'canceled'   => '订单取消',
-            'pending'    => '订单待处理',
-            'processing' => '订单处理',
-            'pending_payment' => '待付款',
+            'completed'         => '订单完成',
+            'closed'            => '订单已关闭',
+            'canceled'          => '订单取消',
+            'pending'           => '订单待处理',
+            'processing'        => '订单处理',
+            'pending_payment'   => '待付款',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

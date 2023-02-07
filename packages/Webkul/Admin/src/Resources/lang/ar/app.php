@@ -450,6 +450,7 @@ return [
             'status-overdue'         => 'متأخر',
             'status-pending'         => 'في انتظار الدفع',
             'status-paid'            => 'مدفوع',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1685,12 +1686,13 @@ return [
         'read-all'                    => 'ضع إشارة مقروء',
         'notification-marked-success' => 'تم تعليم الإخطار بنجاح',
         'order-status-messages'       => [
-            'completed'  => 'تم اكتمال الطلب',
-            'closed'     => 'الطلب مغلق',
-            'canceled'   => 'تم إلغاء الطلب',
-            'pending'    => 'انتظار الطلب',
-            'processing' => 'معالجة الطلب',
-            'pending_payment' => 'في انتظار الدفع',
+            'completed'         => 'تم اكتمال الطلب',
+            'closed'            => 'الطلب مغلق',
+            'canceled'          => 'تم إلغاء الطلب',
+            'pending'           => 'انتظار الطلب',
+            'processing'        => 'معالجة الطلب',
+            'pending_payment'   => 'في انتظار الدفع',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

@@ -453,6 +453,7 @@ return [
             'status-overdue'         => 'Overdue',
             'status-pending'         => 'Pending Payment',
             'status-paid'            => 'Paid',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1680,12 +1681,13 @@ return [
         'read-all'                    => 'Mark as Read',
         'notification-marked-success' => 'Notification Marked Successfully',
         'order-status-messages'       => [
-            'completed'  => 'Order Completed',
-            'closed'     => 'Order Closed',
-            'canceled'   => 'Order Canceled',
-            'pending'    => 'Order Pending',
-            'processing' => 'Order Processing',
-            'pending_payment' => 'Pending Payment',
+            'completed'         => 'Order Completed',
+            'closed'            => 'Order Closed',
+            'canceled'          => 'Order Canceled',
+            'pending'           => 'Order Pending',
+            'processing'        => 'Order Processing',
+            'pending_payment'   => 'Pending Payment',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

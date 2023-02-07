@@ -450,6 +450,7 @@ return [
             'status-overdue'         => 'Atrasado',
             'status-pending'         => 'Pendiente de pago',
             'status-paid'            => 'Pagado',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1673,12 +1674,13 @@ return [
         'read-all'                    => 'Marcar como leído',
         'notification-marked-success' => 'Notificación marcada con éxito',
         'order-status-messages'       => [
-            'completed'  => 'Pedido completado',
-            'closed'     => 'Orden Cerrada',
-            'canceled'   => 'Orden cancelada',
-            'pending'    => 'Orden pendiente',
-            'processing' => 'procesando orden',
-            'pending_payment' => 'Pago pendiente',
+            'completed'         => 'Pedido completado',
+            'closed'            => 'Orden Cerrada',
+            'canceled'          => 'Orden cancelada',
+            'pending'           => 'Orden pendiente',
+            'processing'        => 'procesando orden',
+            'pending_payment'   => 'Pago pendiente',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

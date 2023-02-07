@@ -448,6 +448,7 @@ return [
             'status-overdue'         => 'عقب افتاده',
             'status-pending'         => 'در انتظار پرداخت',
             'status-paid'            => 'پرداخت شده',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1637,12 +1638,13 @@ return [
         'read-all'                    => 'به عنوان خوانده شده علامت بزن',
         'notification-marked-success' => 'اعلان با موفقیت علامت گذاری شد',
         'order-status-messages'       => [
-            'completed'  => 'سفارش تکمیل شد',
-            'closed'     => 'سفارش بسته شد',
-            'canceled'   => 'سفارش لغو شد',
-            'pending'    => 'سفارش در انتظار',
-            'processing' => 'پردازش سفارش',
-            'pending_payment' => 'در انتظار پرداخت',
+            'completed'         => 'سفارش تکمیل شد',
+            'closed'            => 'سفارش بسته شد',
+            'canceled'          => 'سفارش لغو شد',
+            'pending'           => 'سفارش در انتظار',
+            'processing'        => 'پردازش سفارش',
+            'pending_payment'   => 'در انتظار پرداخت',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];

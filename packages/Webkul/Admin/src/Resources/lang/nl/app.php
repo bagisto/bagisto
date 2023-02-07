@@ -444,6 +444,7 @@ return [
             'status-overdue'         => 'Verlopen',
             'status-pending'         => 'Wachten op betaling',
             'status-paid'            => 'Betaald',
+            'status-failed'          => 'Failed',
         ],
 
         'shipments' => [
@@ -1642,12 +1643,13 @@ return [
         'read-all'                    => 'Markeer als gelezen',
         'notification-marked-success' => 'Melding succesvol gemarkeerd',
         'order-status-messages'       => [
-            'completed'  => 'Bestelling voltooid',
-            'closed'     => 'Bestelling gesloten',
-            'canceled'   => 'Bestelling geannuleerd',
-            'pending'    => 'Order in behandeling',
-            'processing' => 'Orderverwerking',
-            'pending_payment' => 'In afwachting van betaling',
+            'completed'         => 'Bestelling voltooid',
+            'closed'            => 'Bestelling gesloten',
+            'canceled'          => 'Bestelling geannuleerd',
+            'pending'           => 'Order in behandeling',
+            'processing'        => 'Orderverwerking',
+            'pending_payment'   => 'In afwachting van betaling',
+            'failed'            => 'Failed Payment',
         ],
     ],
 ];
