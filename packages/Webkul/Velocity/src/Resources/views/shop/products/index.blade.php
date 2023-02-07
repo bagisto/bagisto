@@ -87,6 +87,17 @@
                     </div>
                 </div>
 
+                <div class='childSubCategory'>
+                    @foreach ($childCategory as $childSubCategory)
+                        <a href='{{ $childSubCategory->url_path }}'>
+                            <div>
+                                <img src='{{ $childSubCategory->getCategoryIconUrlAttribute()?? url("/vendor/webkul/ui/assets/images/product/small-product-placeholder.png") }}'>
+                                <label>{{ $childSubCategory->name }}</label>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+
                 @if ($isProductsDisplayMode)
                     <div class="filters-container">
                         <template v-if="products.length >= 0">
