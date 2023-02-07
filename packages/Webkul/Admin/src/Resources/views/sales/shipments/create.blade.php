@@ -241,16 +241,15 @@
     <div>
             <div class="control-group" :class="[errors.has('shipment[source]') ? 'has-error' : '']">
                 <label for="shipment[source]" class="required">{{ __('admin::app.sales.shipments.source') }}</label>
-
-                <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source">
-                    <option value="">{{ __('admin::app.sales.shipments.select-source') }}</option>
+                    
+                <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" 
+                    data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source" @change="getvalue({{$order->items}})">
+                    <option value="" >{{ __('admin::app.sales.shipments.select-source') }}</option>
 
                     @foreach ($order->channel->inventory_sources as $key => $inventorySource)
                         <option value="{{ $inventorySource->id }}">{{ $inventorySource->name }}</option>
                     @endforeach
-
                 </select>
-
                 <span class="control-error" v-if="errors.has('shipment[source]')">
                     @{{ errors.first('shipment[source]') }}
                 </span>
@@ -320,17 +319,20 @@
                                                                     $sourceQty = $product->type == 'bundle' ? $item->qty_ordered : $product->inventory_source_qty($inventorySource->id);
                                                                 @endphp
 
+                                                                <input type="text"  value="{{$sourceQty}}" id="sourceqty" v-model="isQutyAvailable"/>
+
                                                                 {{ $sourceQty }}
                                                             </td>
 
                                                             <td>
                                                                 @php
-                                                                    $inputName = "shipment[items][$item->id][$inventorySource->id]";
+                                                                    $inputName = "shipment[items][$item->id][$inventorySource->id]";                                                                   
                                                                 @endphp
-
                                                                 <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
 
-                                                                    <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$item->qty_ordered}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_to_ship }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}'"/>
+                                                                    <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$item->qty_ordered}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_to_ship }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}' || '{{ $sourceQty }}' == 0"/>
+                                                                    <span v-if="isErrordisplay" v-for="shipment[items]">{{ "hello"}}</span>
+
                                                                     <span class="control-error" v-if="errors.has('{{ $inputName }}')" v-text="errors.first('{{ $inputName }}')"></span>
                                                                     
                                                                 </div>
@@ -360,9 +362,34 @@
 
         data: function() {
             return {
-                source: ""
+
+                source: "",
+
+                isQutyAvailable:false,
+                
+                isErrordisplay:false,
+
             }
+        },
+
+        methods:{
+
+            getvalue: function(order) {
+                // console.log("here");
+                // console.log(order,"374");
+                // var q = order['items']; 
+                // console.log(q,"376");
+            
+                console.log(this.isQutyAvailable,"382" )
+                    if (this.isQutyAvailable == true) {
+                        this.isErrordisplay = false; 
+                    } else{
+                        
+                        this.isErrordisplay = true;
+                    }
+              }
         }
+      
     });
 </script>
 

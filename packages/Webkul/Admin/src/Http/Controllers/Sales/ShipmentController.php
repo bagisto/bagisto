@@ -75,23 +75,24 @@ class ShipmentController extends Controller
      */
     public function store($orderId)
     {
-        $order = $this->orderRepository->findOrFail($orderId);
-
-        if (! $order->canShip()) {
-            session()->flash('error', trans('admin::app.sales.shipments.order-error'));
-
-            return redirect()->back();
-        }
-
         $this->validate(request(), [
             'shipment.source'    => 'required',
             'shipment.items.*.*' => 'required|numeric|min:0',
+            
         ]);
 
         $data = request()->all();
 
         if (! $this->isInventoryValidate($data)) {
             session()->flash('error', trans('admin::app.sales.shipments.quantity-invalid'));
+
+            return back();
+        }
+
+        $order = $this->orderRepository->findOrFail($orderId);
+      
+        if (! $order->canShip()) {
+            session()->flash('error', trans('admin::app.sales.shipments.order-error'));
 
             return redirect()->back();
         }
@@ -113,6 +114,7 @@ class ShipmentController extends Controller
      */
     public function isInventoryValidate(&$data)
     {
+        dd($data,"117");
         if (! isset($data['shipment']['items'])) {
             return;
         }
