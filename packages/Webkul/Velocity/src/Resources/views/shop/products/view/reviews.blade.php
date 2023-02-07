@@ -141,13 +141,26 @@
                         </div>
 
                         <div class="image col-lg-12">
-                            @if (count($review->images) > 0)
-                                @foreach ($review->images as $image)
-                                    <img class="image" src="{{ $image->url }}" style="height: 50px; width: 50px; margin: 5px;">
-                                @endforeach
-                            @endif
-                        </div>
+                            <div class="export-import" >
 
+                                @if (count($review->images) > 0)
+                                    @foreach ($review->images as $key => $image)
+                                        <img class="image" src="{{ $image->url }}" style="height: 50px; width: 50px; margin: 5px;" 
+                                        @click="showModal('downloadDataGrid')" />
+    
+                                        <modal id="downloadDataGrid{{$key}}" :is-open="modalIds.downloadDataGrid">
+                                            <h3 slot="header">Review Image</h3>
+                                            <div slot="body">
+                                                <img src="{{ $image->url }}" width="100%" class="downloadDataGrid{{$key}}" > 
+                                            </div>
+                                        </modal>
+
+                                    @endforeach
+                                @endif
+
+                            </div>
+                        </div>
+                
                         <div class="col-lg-12 mt5">
                             <span>{{ __('velocity::app.products.review-by') }} -</span>
 
