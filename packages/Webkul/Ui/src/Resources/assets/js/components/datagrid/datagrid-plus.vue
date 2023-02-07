@@ -150,6 +150,12 @@ export default {
             }
 
             this.url = `${this.src}?v=1${newParams}`;
+            
+            this.$nextTick(()=> {
+                this.locales = this.extraFilters.current.locale;
+                
+               this.url = `${this.src}?v=1${newParams}&locale=${this.locales}`;
+            });
 
             this.refresh();
         },
