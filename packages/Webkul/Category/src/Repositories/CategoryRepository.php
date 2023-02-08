@@ -118,6 +118,16 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Get child categories.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getChildCategories($parentId)
+    {
+        return $this->getModel()->where('parent_id', $parentId)->get();
+    }
+
+    /**
      * get visible category tree.
      *
      * @param  int  $id

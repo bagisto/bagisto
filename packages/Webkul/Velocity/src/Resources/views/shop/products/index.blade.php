@@ -87,16 +87,25 @@
                     </div>
                 </div>
 
-                <div class='childSubCategory'>
-                    @foreach ($childCategory as $childSubCategory)
-                        <a href='{{ $childSubCategory->url_path }}'>
-                            <div>
-                                <img src='{{ $childSubCategory->getCategoryIconUrlAttribute()?? url("/vendor/webkul/ui/assets/images/product/small-product-placeholder.png") }}'>
-                                <label>{{ $childSubCategory->name }}</label>
+                <carousel-component
+                    slides-per-page="6"
+                    navigation-enabled="show"
+                    pagination-enabled="hide"
+                    :slides-count="6">
+                    
+                    @foreach ($childCategory as $index => $childSubCategory)
+                        <slide slot="slide-{{ $index }}">
+                            <div class='childSubCategory'>
+                                <a href='{{ $childSubCategory->url_path }}'>
+                                    <div>
+                                        <img src='{{ $childSubCategory->getCategoryIconUrlAttribute()?? url("/vendor/webkul/ui/assets/images/product/small-product-placeholder.png") }}'>
+                                        <label>{{ $childSubCategory->name }}</label>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
+                        </slide>
                     @endforeach
-                </div>
+                </carousel-component>
 
                 @if ($isProductsDisplayMode)
                     <div class="filters-container">
