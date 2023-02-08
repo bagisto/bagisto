@@ -98,7 +98,7 @@
                             <div class='childSubCategory'>
                                 <a href='{{ $childSubCategory->url_path }}'>
                                     <div>
-                                        <img src='{{ $childSubCategory->getCategoryIconUrlAttribute()?? url("/vendor/webkul/ui/assets/images/product/small-product-placeholder.png") }}'>
+                                        <img src='{{ $childSubCategory->getImageUrlAttribute()?? url("/vendor/webkul/ui/assets/images/product/small-product-placeholder.png") }}'>
                                         <label>{{ $childSubCategory->name }}</label>
                                     </div>
                                 </a>
