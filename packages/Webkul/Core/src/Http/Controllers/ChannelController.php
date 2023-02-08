@@ -71,6 +71,7 @@ class ChannelController extends Controller
             'default_locale_id'     => 'required|in_array:locales.*',
             'currencies'            => 'required|array|min:1',
             'base_currency_id'      => 'required|in_array:currencies.*',
+            'translate_price'   => 'boolean',
 
             /* design */
             'theme'                 => 'nullable',
@@ -140,6 +141,7 @@ class ChannelController extends Controller
             'default_locale_id'                => 'required|in_array:locales.*',
             'currencies'                       => 'required|array|min:1',
             'base_currency_id'                 => 'required|in_array:currencies.*',
+            'translate_price'                  => 'boolean',
 
             /* design */
             'theme'                            => 'nullable',
