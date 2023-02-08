@@ -480,6 +480,7 @@ return [
             'creation-error'    => 'Shipment can not be created for this order.',
             'order-error'       => 'Order shipment creation is not allowed.',
             'quantity-invalid'  => 'Requested quantity is invalid or not available.',
+            'qty-ship-error'    => 'Quantity not available for this inventory source',
         ],
 
         'refunds' => [
