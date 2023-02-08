@@ -1126,7 +1126,7 @@ i.within-circle {
 
     .cart-details .cart-content .product-details-content .item-actions {
         gap: 20px;
-        width: 150%;
+        //width: 150%;
         display: grid;
         grid-template-columns: auto auto;
 
@@ -1278,7 +1278,7 @@ i.within-circle {
     .filters-container {
         .toolbar-wrapper {
             div {
-                margin: 0 0 0 0 !important;
+                margin: 0 0 10 0 !important;
                 padding-left: 4px !important;
                 padding-right: 4px !important;
 
@@ -1301,9 +1301,12 @@ i.within-circle {
                 }
                 
                 .vue-slider-dot-handle {
+                    width: 4px;
+                    height: 12px;
                     border: 2px solid #4D7EA8;
-                    height: 11px;
-                    width: 5px;
+                    border-radius: 50%;
+                    background-color: #FFFFFF;
+                    box-shadow: 0.5px 0.5px 2px 1px rgb(0 0 0 / 32%);
                 }
             }
         }

@@ -257,16 +257,23 @@ body {
             .toolbar-wrapper {
                 > div {
                     label {
-                        margin-right: 0px;
-                        margin-left: 10px;
+                        margin: 10 0 0 0 !important;
+                        padding-left: 4px !important;
+                        padding-right: 4px !important;
                     }
+
+                    .layered-filter-wrapper left{
+                        position: relative;
+                    }
+
                 }
             }
         }
 
         .filter-attributes-content {
             margin-left: 7px;
-            margin-right: 0px;
+            margin-right: 10px;
+            margin-top: 5px;
         }
 
         .filter-attributes-item {
@@ -656,7 +663,7 @@ body {
             .nav-container {
                 ul {
                     li {
-                        padding: 10px 20px 10px 0px;
+                        //padding: 10px 20px 10px 0px;
 
                         .rango-arrow-right {
                             float: left;
@@ -697,9 +704,11 @@ body {
 
             .velocity-divide-page {
                 .left {
-                    right: 35px;
-                    width: 150px;
+                    right: 10px;
+                    //width: 150px;
                     top: 4px;
+                    position: relative;
+                    
                 }
 
                 .right {
@@ -739,6 +748,11 @@ body {
                 }
             }
         }
+    }
+    .filters-container .toolbar-wrapper div {
+        // margin: 0 0 10 0 !important;
+        // padding-left: 4px !important;
+        padding-right: 0px !important;
     }
 }
 
