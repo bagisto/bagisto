@@ -993,10 +993,6 @@
         min-height: 100px;
     }
 
-    .advertisement-four-container {
-        min-height: 992px;
-    }
-
     .product-card-new {
         max-width: 9rem;
 
@@ -1038,10 +1034,6 @@
         min-height: 100px;
     }
 
-    .advertisement-four-container {
-        min-height: 992px;
-    }
-
     .product-card-new {
         max-width: 7rem;
 
@@ -1054,7 +1046,7 @@
 @media screen and (max-width: 1080px) {
     .advertisement-grid { 
         grid-template-columns: repeat(2, 1fr) !important;
-        grid-gap: 20px !important;
+        grid-gap: 15px !important;
     }
 
     .adv1 {
@@ -1067,6 +1059,11 @@
         grid-row: 3/4 !important;
     }
 
+    .adv3 {
+        grid-column: 3/2 !important;
+        grid-row: 1/2 !important;
+    }
+
     .adv4 {
         grid-column: 2/3 !important;
         grid-row: 2/4 !important;
@@ -1076,24 +1073,12 @@
 @media screen and (max-width: 480px) {
     .advertisement-grid {
         grid-template-columns: repeat(1, 1fr) !important;
-        grid-gap: 20px !important;
+        grid-gap: 15px !important;
     }
 
-    .adv1 {
-        grid-column: inherit !important;
-        grid-row: inherit !important;
-    }
-
-    .adv2 {
-        grid-column: inherit !important;
-        grid-row: inherit !important;
-    }
-
-    .adv3 {
-        grid-column: inherit !important;
-        grid-row: inherit !important;
-    }
-
+    .adv1,
+    .adv2,
+    .adv3,
     .adv4 {
         grid-column: inherit !important;
         grid-row: inherit !important;
