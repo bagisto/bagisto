@@ -134,7 +134,7 @@
 
                             <div class="control-group" :class="[errors.has('default_locale_id') ? 'has-error' : '']">
                                 <label for="default_locale_id" class="required">{{ __('admin::app.settings.channels.default-locale') }}</label>
-                                
+
                                 @php $selectedOption = old('default_locale_id') ?: $channel->default_locale_id @endphp
 
                                 <select v-validate="'required'" class="control" id="default_locale_id" name="default_locale_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.default-locale') }}&quot;">
@@ -176,7 +176,14 @@
                                 </select>
                                 <span class="control-error" v-if="errors.has('base_currency_id')">@{{ errors.first('base_currency_id') }}</span>
                             </div>
-
+                            <div class="control-group">
+                                <label for="translate-price-status">{{ __('admin::app.settings.channels.translate-price') }}</label>
+                                <label class="switch">
+                                    <input type="hidden" name="translate_price" value="0" />
+                                    <input type="checkbox" id="translate-price-status" name="translate_price" value="1" {{ $channel->translate_price ? 'checked' : ''}}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
                         </div>
                     </accordian>
 
@@ -217,7 +224,7 @@
                                 <label>{{ __('admin::app.settings.channels.logo') }}</label>
 
                                 <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="logo" :multiple="false" :images='"{{ $channel->logo_url }}"'></image-wrapper>
-                            
+
                                 <span class="control-info mt-10">{{ __('admin::app.settings.channels.logo-size') }}</span>
                             </div>
 
@@ -225,8 +232,8 @@
                                 <label>{{ __('admin::app.settings.channels.favicon') }}</label>
 
                                 <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="favicon" :multiple="false" :images='"{{ $channel->favicon_url }}"'></image-wrapper>
-                                
-                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.favicon-size') }}</span> 
+
+                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.favicon-size') }}</span>
                             </div>
 
                         </div>

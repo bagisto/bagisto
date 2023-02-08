@@ -658,7 +658,8 @@ class Core
             ? $this->getAllCurrencies()->where('code', $currencyCode)->first()
             : $this->getCurrentCurrency();
 
-        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+        $locale = (core()->getCurrentChannel()->translate_price) ? app()->getLocale() : 'en';
+        $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
 
         $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal ?? 2);
 

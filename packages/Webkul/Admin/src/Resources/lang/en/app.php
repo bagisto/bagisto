@@ -626,8 +626,8 @@ return [
             'image-size'                    => 'Image resolution should be like 640px X 640px',
             'create-success'                => 'Product created successfully.',
             'update-success'                => 'Product updated successfully.',
-            'delete-success'                => 'Product deleted successfully.',  
-            'delete-failed'                 => 'Error encountered while deleting Product.',          
+            'delete-success'                => 'Product deleted successfully.',
+            'delete-failed'                 => 'Error encountered while deleting Product.',
             'validations'                   => [
                 'quantity-required' => 'Quantity is required.',
                 'quantity-integer'  => 'Quantity should be integer.',
@@ -924,6 +924,7 @@ return [
             'default-locale'         => 'Default Locale',
             'currencies'             => 'Currencies',
             'base-currency'          => 'Default Currency',
+            'translate-price'        => 'Translate Price',
             'root-category'          => 'Root Category',
             'inventory_sources'      => 'Inventory Sources',
             'design'                 => 'Design',
