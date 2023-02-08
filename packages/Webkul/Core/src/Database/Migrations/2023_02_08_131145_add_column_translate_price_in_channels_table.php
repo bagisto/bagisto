@@ -26,7 +26,7 @@ class AddColumnTranslatePriceInChannelsTable extends Migration
     public function down()
     {
         Schema::table('channels', function (Blueprint $table) {
-            $table->dropColumn('is_maintenance_on');
+            $table->dropColumn('translate_price');
         });
     }
 };
