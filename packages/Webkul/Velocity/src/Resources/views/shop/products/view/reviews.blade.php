@@ -142,21 +142,33 @@
 
                         <div class="image col-lg-12">
                             <div class="export-import" @click="showModal('downloadDataGrid')">
-                            @if (count($review->images) > 0)
-                                @foreach ($review->images as $image)
-                                    <img class="image" src="{{ $image->url }}" style="height: 50px; width: 50px; margin: 5px;">
-                                @endforeach
-                            @endif
-                        </div>
-                        
-                        <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
-                            <h3 slot="header">Review Images</h3>
-                    
-                            <div slot="body">
-                               @foreach ($review->images as $image)
-                                    <img class="image" src="{{ $image->url }}" style="width: 100%; margin: 5px;">
-                                @endforeach
+                                @if (count($review->images) > 0)
+                                    @foreach ($review->images as $image)
+                                        <img class="image" src="{{ $image->url }}" style="height: 50px; width: 50px; margin: 5px;">
+                                    @endforeach
+                                @endif
                             </div>
+                        </div>
+
+                        <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
+                            <h3 slot="header"></h3>
+                            <div slot="body">
+                                @foreach ($review->images as $image)
+                                    <img class="image" src="{{ $image->url }}" style="width: 98%; margin: 5px;">
+                                @endforeach
+                            <div class="row">
+                                <h4 class="col-lg-12 fs18">{{ $review->title }}</h4>
+        
+                                <star-ratings
+                                    :ratings="{{ $review->rating }}"
+                                    push-class="mr10 fs16 col-lg-12"
+                                ></star-ratings>
+        
+                                <div class="review-description col-lg-12">
+                                    <span>{{ $review->comment }}</span>
+                                </div>
+                            </div>
+                                
                         </modal>
 
                         <div class="col-lg-12 mt5">
