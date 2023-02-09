@@ -88,11 +88,11 @@
                 </div>
 
                 <carousel-component
-                    slides-per-page="6"
+                    slides-per-page="10"
                     navigation-enabled="show"
                     pagination-enabled="hide"
-                    :slides-count="6">
-                    
+                    :slides-count="{{count($childCategory)}}">
+
                     @foreach ($childCategory as $index => $childSubCategory)
                         <slide slot="slide-{{ $index }}">
                             <div class='childSubCategory'>
