@@ -330,7 +330,8 @@
 
                                                                 <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
 
-                                                                    <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$item->qty_ordered}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_to_ship }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}'"/>
+                                                                    <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$item->qty_ordered}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_to_ship }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}' || '{{ $sourceQty }}' == 0"/>
+                                                                    <span v-if="source == '{{ $inventorySource->id }}' && '{{ $sourceQty }}' == 0" style="color:#fc6868">{{ __('admin::app.sales.shipments.qty-ship-error') }}</span>
                                                                     <span class="control-error" v-if="errors.has('{{ $inputName }}')" v-text="errors.first('{{ $inputName }}')"></span>
                                                                     
                                                                 </div>
