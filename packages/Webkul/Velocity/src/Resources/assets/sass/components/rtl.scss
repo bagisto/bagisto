@@ -263,7 +263,7 @@ body {
                     }
 
                     .layered-filter-wrapper left{
-                        position: relative;
+                        position: relative !important;
                     }
 
                 }
@@ -663,8 +663,6 @@ body {
             .nav-container {
                 ul {
                     li {
-                        //padding: 10px 20px 10px 0px;
-
                         .rango-arrow-right {
                             float: left;
                             padding-left: 40px;
@@ -704,12 +702,8 @@ body {
 
             .velocity-divide-page {
                 .left {
-                    right: 10px;
-                    //width: 150px;
-                    top: 4px;
-                    position: relative;
-                    
-                }
+                    right: -10px;
+                }   
 
                 .right {
                     padding: 0 20px !important;
@@ -753,6 +747,10 @@ body {
         // margin: 0 0 10 0 !important;
         // padding-left: 4px !important;
         padding-right: 0px !important;
+    }
+
+    .vue-slider-dot-handle {
+        float:left;
     }
 }
 
