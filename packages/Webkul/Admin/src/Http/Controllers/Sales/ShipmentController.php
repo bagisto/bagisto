@@ -114,7 +114,6 @@ class ShipmentController extends Controller
      */
     public function isInventoryValidate(&$data)
     {
-        dd($data,"117");
         if (! isset($data['shipment']['items'])) {
             return;
         }
