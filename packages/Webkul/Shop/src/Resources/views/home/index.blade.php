@@ -41,7 +41,7 @@
     {!! view_render_event('bagisto.shop.home.content.before') !!}
 
     @if (! is_null($channel->home_page_content))
-        {!! DbView::make($channel)->field('home_page_content')->with(['sliderData' => $sliderData])->render() !!}
+        {!! Blade::render($channel->home_page_content, ['sliderData' => $sliderData]) !!}
     @else
         @include('shop::home.slider', ['sliderData' => $sliderData])
         @include('shop::home.featured-products')

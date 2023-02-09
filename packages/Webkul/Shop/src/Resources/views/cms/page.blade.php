@@ -13,5 +13,5 @@
 @endsection
 
 @section('content-wrapper')
-    {!! DbView::make($page)->field('html_content')->render() !!}
+    {!! Blade::render($page->html_content) !!}
 @endsection
