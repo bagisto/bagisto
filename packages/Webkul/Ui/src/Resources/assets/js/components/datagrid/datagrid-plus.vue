@@ -44,6 +44,9 @@
                 <datagrid-filter-tags
                     :filters="filters"
                     :translations="translations"
+                    :mass-actions="massActions"
+                    :mass-action-targets="massActionTargets"
+                    :data-id="indexes"
                     @onRemoveFilter="removeFilter($event)"
                     @onRemoveAllFilter="clearAllFilters()"
                 ></datagrid-filter-tags>
@@ -68,6 +71,7 @@
                     :translations="translations"
                     @onSorting="filterData($event)"
                     @onActionSuccess="refresh()"
+                    @onSelect="getDataIds"
                 ></datagrid-table>
             </div>
 
@@ -115,6 +119,7 @@ export default {
             isDataLoaded: false,
             massActionTargets: [],
             url: this.src,
+            indexes: []
         };
     },
 
@@ -468,6 +473,10 @@ export default {
                 this.url = pageLink;
                 this.refresh();
             }
+        },
+
+        getDataIds(dataIds) {
+            this.indexes.push(dataIds.target.value);
         }
     }
 };

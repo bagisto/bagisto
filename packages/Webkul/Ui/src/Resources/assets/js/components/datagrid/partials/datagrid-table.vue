@@ -18,75 +18,6 @@
                         >
                             <span class="icon checkbox-dash-icon"></span>
                         </span>
-
-                        <form
-                            method="POST"
-                            id="mass-action-form"
-                            style="display: inline-flex"
-                            action=""
-                            :onsubmit="
-                                `return confirm('${massActionConfirmText}')`
-                            "
-                        >
-                            <input
-                                type="hidden"
-                                name="_token"
-                                :value="getCsrf()"
-                            />
-
-                            <input
-                                type="hidden"
-                                id="indexes"
-                                name="indexes"
-                                v-model="dataIds"
-                            />
-
-                            <div class="control-group">
-                                <select
-                                    class="control"
-                                    v-model="massActionType"
-                                    @change="changeMassActionTarget"
-                                    name="mass-action-type"
-                                    required
-                                >
-                                    <option
-                                        v-for="(massAction,
-                                        index) in massActions"
-                                        v-text="massAction.label"
-                                        :key="index"
-                                        :value="massAction.type"
-                                    ></option>
-                                </select>
-                            </div>
-
-                            <div
-                                class="control-group"
-                                style="margin-left: 10px"
-                                v-if="massActionType == 'update'"
-                            >
-                                <select
-                                    class="control"
-                                    v-model="massActionUpdateValue"
-                                    name="update-options"
-                                    required
-                                >
-                                    <option
-                                        :key="id"
-                                        v-for="(massActionValue,
-                                        id) in massActionValues"
-                                        :value="massActionValue"
-                                        v-text="id"
-                                    ></option>
-                                </select>
-                            </div>
-
-                            <button
-                                v-text="translations.submit"
-                                type="submit"
-                                class="btn btn-sm btn-primary"
-                                style="margin-left: 10px; white-space: nowrap;"
-                            ></button>
-                        </form>
                     </div>
                 </th>
             </tr>
@@ -258,7 +189,7 @@ export default {
     },
 
     methods: {
-        select() {
+        select(dataIds) {
             this.allSelected = false;
 
             if (this.dataIds.length === 0) {
@@ -267,6 +198,8 @@ export default {
             } else {
                 this.massActionsToggle = true;
             }
+
+            this.$emit('onSelect', dataIds);
         },
 
         selectAll() {
