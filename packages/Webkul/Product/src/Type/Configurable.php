@@ -86,6 +86,7 @@ class Configurable extends AbstractType
      */
     public function getDefaultVariant()
     {
+        
         return $this->product->variants()->find($this->getDefaultVariantId());
     }
 
@@ -462,6 +463,7 @@ class Configurable extends AbstractType
     public function getChildrenIds()
     {
         return $this->product->variants()->pluck('id')->toArray();
+
     }
 
     /**
@@ -501,19 +503,66 @@ class Configurable extends AbstractType
         return isset($item->additional['selected_configurable_option']);
     }
 
+    public function getAllowedProducts()
+    {
+        $product =  $this->product;
+        static $variants = [];
+
+        if (count($variants)) {
+            return $variants;
+        }
+
+        $variantCollection = $product->variants()
+            ->with([
+                'parent',
+                'attribute_values',
+                'price_indices',
+                'inventory_indices',
+                'images',
+                'videos',
+            ])
+            ->get();
+
+        foreach ($variantCollection as $variant) {
+            if ($variant->isSaleable()) {
+                $variants[] = $variant;
+            }
+        }
+
+        return $variants;
+    }
+
+    protected function getVariantPrices()
+    {
+        $product =  $this->product;
+
+        $prices = [];
+
+        foreach ($this->getAllowedProducts($product) as $variant) {
+            $prices[$variant->id] = $variant->getTypeInstance()->getProductPrices();
+        }
+    
+        return $prices;
+    }
+    
+
     /**
      * Get product prices.
      *
      * @return array
      */
     public function getProductPrices()
-    {
-        $minPrice = $this->getMinimalPrice();
+    { 
+        $regularMinimalPrice = $this->getVariantPrices();
 
         return [
             'regular_price' => [
-                'formatted_price' => core()->currency($this->evaluatePrice($minPrice)),
-                'price'           => $this->evaluatePrice($minPrice),
+                'price'           => $regularMinimalPrice,
+                'formatted_price' => $regularMinimalPrice,
+            ],
+            'final_price'   => [
+                'price'           => $regularMinimalPrice,
+                'formatted_price' => $regularMinimalPrice,
             ],
         ];
     }
@@ -525,16 +574,29 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        
+        $prices = $this->getProductPrices();
+
+        $priceHtml = '';
+
         if ($this->haveDiscount()) {
-            return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-                . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'.'<span class="regular-price"></span>';
-        } else {
-            return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                . ' '
-                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span> ';
+            $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
         }
+
+        $priceHtml .= '<div class="price-from">';
+
+        if ($prices['regular_price']['price'] != $prices['final_price']['price']) {
+
+            $priceHtml .= '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
+                . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>';
+
+        } else {
+            $priceHtml .= '<span class="special-price">' . $prices['regular_price']['formatted_price'] . '</span>';
+        }
+
+        $priceHtml .= '</div>';
+
+        return $priceHtml;
+        
     }
 
     /**
