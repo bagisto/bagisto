@@ -544,7 +544,7 @@ class Configurable extends AbstractType
             $prices[$variant->id] = $variant->getTypeInstance()->getProductPrices();           
         }
 
-        return $prices;
+        return min($prices);
     }
      
     public function getProductPrices()
@@ -573,10 +573,8 @@ class Configurable extends AbstractType
     public function getPriceHtml()
     {
         $prices = $this->getVariantPrices();
-        
-        $priceHtml = '';
 
-        foreach ($prices as $price['index'] ) {
+        $priceHtml = '';
 
             if ($this->haveDiscount()) {
                 $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
@@ -584,17 +582,16 @@ class Configurable extends AbstractType
 
             $priceHtml .= '<div class="price-from">';
 
-            if ($price['index']['regular_price']['price'] != $price['index']['final_price']['price']) {
+            if ($prices['regular_price']['price'] != $prices['final_price']['price']) {
 
-                $priceHtml .= '<span class="regular-price">' . $price['index']['regular_price']['formatted_price'] . '</span>'
-                           . '<span class="special-price">' . $price['index']['final_price']['formatted_price'] . '</span>';
+                $priceHtml .= '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
+                           . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>';
 
             } else {
-                $priceHtml .= '<span class="special-price">' . $price['index']['regular_price']['formatted_price'] . '</span>';
+                $priceHtml .= '<span class="special-price">' . $prices['regular_price']['formatted_price'] . '</span>';
             }
 
             $priceHtml .= '</div>';
-        }
         
         return $priceHtml;
     }
