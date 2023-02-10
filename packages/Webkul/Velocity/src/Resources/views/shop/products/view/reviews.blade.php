@@ -230,10 +230,8 @@
 <script type="text/x-template" id="review-image-template">
     <div>
         <product-review :get-details='reviewDetail'></product-review>
-
         <modal :is-open='showModal'>
             <h3 slot="header">Review</h3>
-
             <div slot="body">
                 <h1 v-text='reviewDetail.title'></h1>
             </div>
@@ -244,7 +242,6 @@
 <script>
     Vue.component('review-image', {
         template: '#review-image-template',
-
         props: ['reviewDetail'],
 
         data() {
@@ -257,19 +254,14 @@
 </script>
 
 <script type="text/x-template" id="review-template">
-
     <div>
         <button type="button"  @click='getModal()'>{{ $review->title }}</button>
     </div>
-
 </script>
 
 <script>
-
     Vue.component('product-review', {
-
         template: '#review-template',
- 
         props: ['getDetails'],
 
         data() {
@@ -278,17 +270,16 @@
                 review: []
             }
         },
-
+        
         methods: {
             getModal: function() {
                 this.showModal = true;
                 this.review = JSON.parse(this.getDetails);
-                console.log(this.review)
             }
         }
     });
-
 </script>
+
 @endpush
 
 
