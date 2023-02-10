@@ -88,7 +88,7 @@
                 </div>
 
                 <carousel-component
-                    slides-per-page="10"
+                    slides-per-page="6"
                     navigation-enabled="show"
                     pagination-enabled="hide"
                     :slides-count="{{count($childCategory)}}">
