@@ -506,6 +506,7 @@ class Configurable extends AbstractType
     public function getAllowedProducts()
     {
         $product =  $this->product;
+
         static $variants = [];
 
         if (count($variants)) {
@@ -532,6 +533,7 @@ class Configurable extends AbstractType
         return $variants;
     }
 
+
     protected function getVariantPrices()
     {
         $product =  $this->product;
@@ -539,30 +541,26 @@ class Configurable extends AbstractType
         $prices = [];
 
         foreach ($this->getAllowedProducts($product) as $variant) {
-            $prices[$variant->id] = $variant->getTypeInstance()->getProductPrices();
+            $prices[$variant->id] = $variant->getTypeInstance()->getProductPrices();           
         }
-    
+
         return $prices;
     }
-    
-
-    /**
-     * Get product prices.
-     *
-     * @return array
-     */
+     
     public function getProductPrices()
-    { 
-        $regularMinimalPrice = $this->getVariantPrices();
+    {
+        $minPrice = $this->getMinimalPrice();
 
+        $regularmin = $this -> getRegularMinimalPrice();
+        
         return [
             'regular_price' => [
-                'price'           => $regularMinimalPrice,
-                'formatted_price' => $regularMinimalPrice,
+                'price'           => core()->convertPrice($this->evaluatePrice($regularmin)),
+                'formatted_price' => core()->currency($this->evaluatePrice($regularmin )),
             ],
             'final_price'   => [
-                'price'           => $regularMinimalPrice,
-                'formatted_price' => $regularMinimalPrice,
+                'price'           => core()->convertPrice($this->evaluatePrice($minPrice)),
+                'formatted_price' => core()->currency($this->evaluatePrice($minPrice)),
             ],
         ];
     }
@@ -574,29 +572,31 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        $prices = $this->getProductPrices();
-
+        $prices = $this->getVariantPrices();
+        
         $priceHtml = '';
 
-        if ($this->haveDiscount()) {
-            $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
+        foreach ($prices as $price['index'] ) {
+
+            if ($this->haveDiscount()) {
+                $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
+            }
+
+            $priceHtml .= '<div class="price-from">';
+
+            if ($price['index']['regular_price']['price'] != $price['index']['final_price']['price']) {
+
+                $priceHtml .= '<span class="regular-price">' . $price['index']['regular_price']['formatted_price'] . '</span>'
+                           . '<span class="special-price">' . $price['index']['final_price']['formatted_price'] . '</span>';
+
+            } else {
+                $priceHtml .= '<span class="special-price">' . $price['index']['regular_price']['formatted_price'] . '</span>';
+            }
+
+            $priceHtml .= '</div>';
         }
-
-        $priceHtml .= '<div class="price-from">';
-
-        if ($prices['regular_price']['price'] != $prices['final_price']['price']) {
-
-            $priceHtml .= '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
-                . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>';
-
-        } else {
-            $priceHtml .= '<span class="special-price">' . $prices['regular_price']['formatted_price'] . '</span>';
-        }
-
-        $priceHtml .= '</div>';
-
-        return $priceHtml;
         
+        return $priceHtml;
     }
 
     /**
