@@ -129,7 +129,6 @@
             <div class="customer-reviews" slot="body">
                 @foreach ($reviews as $review)
                     <div class="row">
-                        <h4 class="col-lg-12 fs18">{{ $review->title }}</h4>
                         <review-image review-detail='{{$review}}' ></review-image>
                         <star-ratings
                             :ratings="{{ $review->rating }}"
@@ -171,7 +170,7 @@
         <h3 class="display-inbl mb20 col-lg-12 no-padding">
             {{ __('velocity::app.products.reviews-title') }}
         </h3>
-
+        product-quickreview-detail
         <div class="customer-reviews">
             @foreach ($reviews as $review)
                 <div class="row">
@@ -230,12 +229,13 @@
 
 <script type="text/x-template" id="review-image-template">
     <div>
-        <h4 class="col-lg-12 fs18"  @click='getModal()'>{{ $review->title }}</h4>
+        <product-review :get-details='reviewDetail'></product-review>
+
         <modal :is-open='showModal'>
             <h3 slot="header">Review</h3>
 
             <div slot="body">
-                <h1 v-text='reviewDetails.title'></h1>
+                <h1 v-text='reviewDetail.title'></h1>
             </div>
         </modal>
     </div>
@@ -250,16 +250,45 @@
         data() {
             return {
                 showModal: false,
-                reviewDetails: []
+                review: []
+            }
+        },
+    });
+</script>
+
+<script type="text/x-template" id="review-template">
+
+    <div>
+        <button type="button"  @click='getModal()'>{{ $review->title }}</button>
+    </div>
+
+</script>
+
+<script>
+
+    Vue.component('product-review', {
+
+        template: '#review-template',
+ 
+        props: ['getDetails'],
+
+        data() {
+            return {
+                showModal: false,
+                review: []
             }
         },
 
         methods: {
             getModal: function() {
                 this.showModal = true;
-                this.reviewDetails = JSON.parse(this.reviewDetail)
+                this.review = JSON.parse(this.getDetails);
+                console.log(this.review)
             }
         }
     });
+
 </script>
 @endpush
+
+
