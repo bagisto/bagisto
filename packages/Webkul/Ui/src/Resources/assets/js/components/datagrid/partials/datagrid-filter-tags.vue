@@ -1,6 +1,7 @@
 <template>
     <div class="filtered-tags">
         <form
+            v-if="massActionsToggle"
             method="POST"
             id="mass-action-form"
             style="display: inline-flex"
@@ -87,7 +88,14 @@
 import DatagridFilterTag from './datagrid-filter-tag.vue';
 
 export default {
-    props: ['filters', 'translations', 'massActions', 'massActionTargets', 'dataId'],
+    props: [
+        'filters', 
+        'translations',
+        'massActions',
+        'massActionTargets',
+        'dataId',
+        'massActionsToggle'
+    ],
 
     components: {
         DatagridFilterTag

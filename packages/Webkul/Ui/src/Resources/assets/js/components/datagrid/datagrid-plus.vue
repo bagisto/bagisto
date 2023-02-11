@@ -47,6 +47,7 @@
                     :mass-actions="massActions"
                     :mass-action-targets="massActionTargets"
                     :data-id="indexes"
+                    :mass-actions-toggle="massActionsToggle"
                     @onRemoveFilter="removeFilter($event)"
                     @onRemoveAllFilter="clearAllFilters()"
                 ></datagrid-filter-tags>
@@ -66,12 +67,12 @@
                     :enable-mass-actions="enableMassActions"
                     :index="index"
                     :mass-actions="massActions"
-                    :mass-action-targets="massActionTargets"
                     :records="records"
                     :translations="translations"
                     @onSorting="filterData($event)"
                     @onActionSuccess="refresh()"
                     @onSelect="getDataIds"
+                    @onSelectAll="massActionToggle"
                 ></datagrid-table>
             </div>
 
@@ -119,7 +120,8 @@ export default {
             isDataLoaded: false,
             massActionTargets: [],
             url: this.src,
-            indexes: []
+            indexes: [],
+            massActionsToggle:false
         };
     },
 
@@ -476,8 +478,14 @@ export default {
         },
 
         getDataIds(dataIds) {
-            this.indexes.push(dataIds.target.value);
+            this.indexes.push(dataIds[0].target.value);
+            this.massActionsToggle = dataIds[1];
+        },
+
+        massActionToggle(massAction) {
+            this.massActionsToggle = massAction;
         }
+
     }
 };
 </script>
