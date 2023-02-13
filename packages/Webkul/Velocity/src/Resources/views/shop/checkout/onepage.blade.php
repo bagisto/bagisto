@@ -26,7 +26,8 @@
                     <div
                         class="step-content shipping"
                         id="shipping-section"
-                        v-if="showShippingSection">
+                        v-if="showShippingSection"                      
+                        >
                         <shipping-section
                             :key="shippingComponentKey"
                             @onShippingMethodSelected="shippingMethodSelected($event)">
@@ -134,6 +135,7 @@
                         new_shipping_address: false,
                         selected_payment_method: '',
                         selected_shipping_method: '',
+                        isShippingMethod:false,
                         countries: [],
                         countryStates: [],
 
@@ -254,6 +256,7 @@
 
                                         case 'shipping-form':
                                             if (this.showShippingSection) {
+                                                this.isShippingMethod=true;
                                                 this.$root.showLoader();
                                                 this.saveShipping();
                                                 break;
@@ -425,9 +428,12 @@
                                 this.disable_button = false;
                                 this.isPlaceOrderEnabled = true;
 
-                                if (this.step_numbers[response.data.jump_to_section] == 2) {
+                                if (this.step_numbers[response.data.jump_to_section] == 2 ) {
                                     this.showShippingSection = true;
                                     shippingHtml = Vue.compile(response.data.html);
+
+                                    
+                                   
                                 } else {
                                     paymentHtml = Vue.compile(response.data.html)
                                 }
@@ -442,6 +448,17 @@
 
                                 shippingMethods = response.data.shippingMethods;
 
+                                if(shippingMethods.length = 1){
+                                  
+                                    var value = Object.keys(shippingMethods)[0];
+                                    // for (v in value){
+                                    //     var  test = Object.keys['rates'];
+                                    //     console.log(test,"457");
+                                    // }
+                                   
+                                    this.shippingMethodSelected('free_free');
+                                    console.log(shippingMethods,"458");
+                                }
                                 this.shippingComponentKey++;
 
                                 this.getOrderSummary();
@@ -558,6 +575,7 @@
                     },
 
                     shippingMethodSelected: function (shippingMethod) {
+                        console.log(shippingMethod,"580");
                         this.selected_shipping_method = shippingMethod;
                     },
 
@@ -572,7 +590,6 @@
                     },
 
                     newShippingAddress: function () {
-                        this.new_shipping_address = true;
                         this.isPlaceOrderEnabled = false;
                         this.address.shipping.address_id = null;
                     },
@@ -603,6 +620,8 @@
                         templateRender: null,
 
                         selected_shipping_method: '',
+
+                        isShippingMethod:false,
 
                         first_iteration : true,
                     }
