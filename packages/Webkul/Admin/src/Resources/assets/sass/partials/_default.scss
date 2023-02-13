@@ -515,22 +515,14 @@ body {
 }
 
 .variant-image {
-    margin-bottom: 20px;
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    align-items: baseline;
-}
-
-.variant-image {
     .image-item {
         height: 100px !important;
-        width: 100px !important;
+        width: inherit;
         background-size: 100px 100px !important;
     }
 
     .trash-icon {
-        position: inherit;
+        position: absolute;
         cursor: pointer;
         margin-top: 25%;
     }
@@ -538,7 +530,7 @@ body {
 
 .btn.add-image {
     display: inline-block;
-    width: auto;
+    width:max-content;
 }
 
 .rtl {
@@ -1100,10 +1092,6 @@ body {
         color: $role-text-color;
         font-size: 16px;
     }
-}
-
-.control-group .add-btn {
-    width: fit-content;
 }
 
 .table {
