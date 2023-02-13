@@ -70,9 +70,9 @@ class OrderController extends Controller
         $result = $this->orderRepository->cancel($id);
 
         if ($result) {
-            session()->flash('success', trans('admin::app.response.cancel-success', ['name' => 'Order']));
+            session()->flash('success', trans('admin::app.sales.orders.cancel-error'));
         } else {
-            session()->flash('error', trans('admin::app.response.cancel-error', ['name' => 'Order']));
+            session()->flash('error', trans('admin::app.sales.orders.create-success'));
         }
 
         return redirect()->back();
