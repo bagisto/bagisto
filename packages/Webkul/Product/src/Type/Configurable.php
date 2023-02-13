@@ -86,7 +86,6 @@ class Configurable extends AbstractType
      */
     public function getDefaultVariant()
     {
-        
         return $this->product->variants()->find($this->getDefaultVariantId());
     }
 
@@ -463,7 +462,6 @@ class Configurable extends AbstractType
     public function getChildrenIds()
     {
         return $this->product->variants()->pluck('id')->toArray();
-
     }
 
     /**
@@ -503,7 +501,11 @@ class Configurable extends AbstractType
         return isset($item->additional['selected_configurable_option']);
     }
 
-    public function getAllowedProducts()
+    /**
+     * Returns all variants of configurable product.
+     * @return array
+     */
+    public function getVariant()
     {
         $product =  $this->product;
 
@@ -533,20 +535,27 @@ class Configurable extends AbstractType
         return $variants;
     }
 
-
+    /**
+     * Get product prices for configurable variations.
+     * @return array
+     */
     protected function getVariantPrices()
     {
         $product =  $this->product;
 
         $prices = [];
 
-        foreach ($this->getAllowedProducts($product) as $variant) {
+        foreach ($this->getVariant($product) as $variant) {
             $prices[$variant->id] = $variant->getTypeInstance()->getProductPrices();           
         }
 
         return min($prices);
     }
      
+    /**
+     * Return price of variants.
+     * @return array
+    */
     public function getProductPrices()
     {
         $minPrice = $this->getMinimalPrice();
@@ -576,22 +585,21 @@ class Configurable extends AbstractType
 
         $priceHtml = '';
 
-            if ($this->haveDiscount()) {
-                $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
-            }
+        if ($this->haveDiscount()) {
+            $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
+        }
 
-            $priceHtml .= '<div class="price-from">';
+        $priceHtml .= '<div class="price-from">';
 
-            if ($prices['regular_price']['price'] != $prices['final_price']['price']) {
+        if ($prices['regular_price']['price'] != $prices['final_price']['price']) {
 
-                $priceHtml .= '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
-                           . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>';
+            $priceHtml .= '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
+                        . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>';
 
-            } else {
-                $priceHtml .= '<span class="special-price">' . $prices['regular_price']['formatted_price'] . '</span>';
-            }
-
-            $priceHtml .= '</div>';
+        } else {
+            $priceHtml .= '<span class="special-price">' . $prices['regular_price']['formatted_price'] . '</span>';
+        }
+        $priceHtml .= '</div>';
         
         return $priceHtml;
     }
