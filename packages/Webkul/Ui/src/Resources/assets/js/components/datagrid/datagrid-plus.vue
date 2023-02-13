@@ -48,6 +48,7 @@
                     :mass-action-targets="massActionTargets"
                     :data-id="indexes"
                     :mass-actions-toggle="massActionsToggle"
+                    :extra-filters="extraFilters"
                     @onRemoveFilter="removeFilter($event)"
                     @onRemoveAllFilter="clearAllFilters()"
                 ></datagrid-filter-tags>
@@ -478,14 +479,22 @@ export default {
         },
 
         getDataIds(dataIds) {
-            this.indexes.push(dataIds[0].target.value);
+            if (dataIds[0].target.checked) {
+                this.indexes.push(dataIds[0].target.value);
+            } else {
+                this.indexes.map((value, index) => {
+                    if (value ==  dataIds[0].target.value) {
+                        this.indexes.splice(index, 1);
+                    }
+                })
+            }
+
             this.massActionsToggle = dataIds[1];
         },
 
         massActionToggle(massAction) {
             this.massActionsToggle = massAction;
         }
-
     }
 };
 </script>

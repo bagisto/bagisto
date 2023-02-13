@@ -23,6 +23,18 @@
                 v-model="dataId"
             />
 
+            <input
+                type="hidden"
+                name="channel"
+                :value="extraFilters.current.channel"
+            />
+
+            <input
+                type="hidden"
+                name="locale"
+                :value="extraFilters.current.locale"
+            />
+
             <div class="control-group">
                 <select
                     class="control"
@@ -94,7 +106,8 @@ export default {
         'massActions',
         'massActionTargets',
         'dataId',
-        'massActionsToggle'
+        'massActionsToggle',
+        'extraFilters'
     ],
 
     components: {
