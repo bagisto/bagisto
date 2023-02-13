@@ -13,6 +13,7 @@
                 @mouseout="toggleSidebar(id, $event, 'mouseout')"
                 @mouseover="toggleSidebar(id, $event, 'mouseover')"
                 v-for="(category, categoryIndex) in slicedCategories"
+                v-if="category['name']"
             >
                 <a
                     :href="`${$root.baseUrl}/${category.slug}`"
