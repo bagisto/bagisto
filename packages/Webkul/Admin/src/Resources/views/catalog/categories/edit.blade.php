@@ -77,14 +77,13 @@
                                 <label for="name" class="required">{{ __('admin::app.catalog.categories.name') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
-                                
+
                                 <input 
                                     type="text" v-validate="'required'" 
                                     name="{{$locale}}[name]"
+                                    value="{{ old($locale)['name'] ?? ($category->translate($locale)['name'] ?? '') }}"
                                     class="control" 
                                     id="name" 
-                                    name="{{$locale}}[name]" 
-                                    value="{{ old($locale)['name'] ?? ($category->translate($locale)['name'] ?? '') }}" 
                                     data-vv-as="&quot;{{ __('admin::app.catalog.categories.name') }}&quot;"
                                 />
 
