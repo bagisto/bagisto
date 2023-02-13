@@ -192,11 +192,7 @@ class Core
      */
     public function getDefaultChannelLocaleCode(): string
     {
-        $defaultChannelCode  = $this->getDefaultChannelCode();
-
-        $defaultChannelLocaleCode = $this->channelRepository->findOneByField('code', $defaultChannelCode)->default_locale_id;
-
-        return  $this->localeRepository->findOneByField('id', $defaultChannelLocaleCode)->code;
+        return $this->getDefaultChannel()->default_locale->code; 
     }
 
     /**
