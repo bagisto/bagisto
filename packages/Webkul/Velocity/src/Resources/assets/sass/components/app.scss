@@ -2117,7 +2117,7 @@
                 }
 
                 label {
-                    font-size: 15px;
+                    font-size: 20px;
                     margin-top: 10px;
                     cursor: pointer;
                 }
@@ -2795,4 +2795,12 @@
 
 .nested {
     display: none;
+}
+
+.sub-category {
+    .VueCarousel-navigation {
+        position: absolute;
+        right: 0;
+        top: inherit;
+    }
 }
