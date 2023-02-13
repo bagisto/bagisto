@@ -224,13 +224,13 @@ class Configurable extends AbstractType
     {
         if (! count($data)) {
             $data = [
-                'sku'               => $product->sku . '-variant-' . implode('-', $permutation),
-                'name'              => '',
-                'inventories'       => [],
-                'price'             => 0,
-                'weight'            => 0,
-                'status'            => 1,
-                'tax_category_id'   => ''
+                'sku'             => $product->sku . '-variant-' . implode('-', $permutation),
+                'name'            => '',
+                'inventories'     => [],
+                'price'           => 0,
+                'weight'          => 0,
+                'status'          => 1,
+                'tax_category_id' => '',
             ];
         }
 
