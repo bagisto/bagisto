@@ -412,6 +412,8 @@ return [
             'submit-comment'               => 'Submit Opmerking',
             'notify-customer'              => 'Notify Customer',
             'transactions'                 => 'Transacties',
+            'create-success'               => 'Bestelling succesvol aangemaakt',
+            'cancel-error'                 => 'Bestelling niet te annuleren'
         ],
 
         'invoices' => [
@@ -444,6 +446,7 @@ return [
             'status-overdue'         => 'Verlopen',
             'status-pending'         => 'Wachten op betaling',
             'status-paid'            => 'Betaald',
+            'create-success'         => 'Factuur succesvol aangemaakt'
         ],
 
         'shipments' => [
@@ -471,6 +474,7 @@ return [
             'creation-error'    => 'Er kan geen verzending worden aangemaakt voor deze bestelling.',
             'order-error'       => 'Het aanmaken van een verzending is niet toegestaan.',
             'quantity-invalid'  => 'Requested quantity is invalid or not available.',
+            'create-success'    => 'Zendingen succesvol aangemaakt'
         ],
 
         'refunds' => [
@@ -494,6 +498,7 @@ return [
             'action'                      => 'Actie',
             'view-title'                  => 'Terugbetaling #:restitutie_id',
             'invalid-refund-amount-error' => 'Het restitutiebedrag mag niet nul zijn.',
+            'create-success'              => 'Terugbetaling succesvol aangemaakt'
 
         ],
 
@@ -995,6 +1000,12 @@ return [
             'name'            => 'Naam',
             'is_user_defined' => 'Door de gebruiker gedefinieerd',
             'yes'             => 'Ja',
+            'create-success'  => 'Klantengroep succesvol aangemaakt',
+            'update-success'  => 'Klantengroep succesvol bijgewerkt',
+            'delete-success'  => 'Klantengroep succesvol verwijderd',
+            'delete-failed'   => 'Fout! Klantengroep kan niet worden verwijderd',
+            'customer-associate' => 'Klant kan niet worden verwijderd omdat klant aan deze groep is gekoppeld.',
+       
         ],
 
         'addresses' => [
@@ -1096,6 +1107,13 @@ return [
             'delete'         => 'Abonnee is succesvol verwijderd',
             'delete-failed'  => 'Error! Abonnee kan niet worden verwijderd',
         ],
+
+        'create-success' => 'Klant succesvol aangemaakt',
+        'update-success' => 'Klant succesvol bijgewerkt',
+        'delete-success' => 'Klant succesvol verwijderd',
+        'order-pending'  => 'Kan klantaccount niet verwijderen omdat sommige bestelling(en) in behandeling zijn of in behandeling zijn.',
+        'delete-failed'  => 'Er is een fout opgetreden bij het verwijderen van de klant.',
+    
     ],
 
     'promotions' => [
