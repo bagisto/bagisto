@@ -217,7 +217,7 @@ export default {
                 this.removeMassActions();
             }
 
-            this.$emit('onSelectAll', this.massActionsToggle);
+            this.$emit('onSelectAll', [this.dataIds, this.massActionsToggle]);
         },
 
         getDefaultMassActionType: function() {

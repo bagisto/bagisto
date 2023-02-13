@@ -493,7 +493,8 @@ export default {
         },
 
         massActionToggle(massAction) {
-            this.massActionsToggle = massAction;
+            this.indexes = massAction[0];
+            this.massActionsToggle = massAction[1];
         }
     }
 };
