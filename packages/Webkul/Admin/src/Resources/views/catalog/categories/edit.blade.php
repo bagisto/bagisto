@@ -77,8 +77,22 @@
                                 <label for="name" class="required">{{ __('admin::app.catalog.categories.name') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" value="{{ old($locale)['name'] ?? ($category->translate($locale)['name'] ?? '') }}" data-vv-as="&quot;{{ __('admin::app.catalog.categories.name') }}&quot;" v-slugify-target/>
-                                <span class="control-error" v-if="errors.has('{{$locale}}[name]')">@{{ errors.first('{!!$locale!!}[name]') }}</span>
+                                
+                                <input 
+                                    type="text" v-validate="'required'" 
+                                    name="{{$locale}}[name]"
+                                    class="control" 
+                                    id="name" 
+                                    name="{{$locale}}[name]" 
+                                    value="{{ old($locale)['name'] ?? ($category->translate($locale)['name'] ?? '') }}" 
+                                    data-vv-as="&quot;{{ __('admin::app.catalog.categories.name') }}&quot;"
+                                />
+
+                                <span
+                                    class="control-error" 
+                                    v-text="errors.first('{!!$locale!!}[name]')"
+                                    v-if="errors.has('{{$locale}}[name]')">
+                                </span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
