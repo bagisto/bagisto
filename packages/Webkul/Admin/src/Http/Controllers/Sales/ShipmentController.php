@@ -10,7 +10,7 @@ use Webkul\Admin\DataGrids\OrderShipmentsDataGrid;
 
 class ShipmentController extends Controller
 {
-    /**
+    /** 
      * Display a listing of the resource.
      *
      * @return array
@@ -100,7 +100,7 @@ class ShipmentController extends Controller
             'order_id' => $orderId,
         ]));
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Shipment']));
+        session()->flash('success', trans('admin::app.sales.shipments.create-success'));
 
         return redirect()->route($this->_config['redirect'], $orderId);
     }
