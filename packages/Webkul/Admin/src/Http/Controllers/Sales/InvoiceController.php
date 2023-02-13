@@ -115,7 +115,7 @@ class InvoiceController extends Controller
             'order_id' => $orderId,
         ]));
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Invoice']));
+        session()->flash('success', trans('admin::app.sales.invoices.create-success'));
 
         return redirect()->route($this->_config['redirect'], $orderId);
     }
