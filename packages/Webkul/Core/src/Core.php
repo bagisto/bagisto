@@ -660,6 +660,8 @@ class Core
 
         $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
+        $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal ?? 2);
+
         if (! $currency) {
             return $formatter->formatCurrency($price, $currencyCode);
         }
@@ -1232,7 +1234,7 @@ class Core
      */
     public function getAdminEmailDetails()
     {
-        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ?: config('mail.admin.name');
+        $admin_name = $this->getConfigData('emails.configure.email_settings.admin_name') ?: (config('mail.admin.name') ?: config('mail.from.name'));
 
         $admin_email = $this->getConfigData('emails.configure.email_settings.admin_email') ?: config('mail.admin.address');
 

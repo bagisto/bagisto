@@ -589,6 +589,7 @@ return [
             'grouped-products'              => 'Gruplandırılmış Ürünler',
             'search-products'               => 'Ürünleri Ara',
             'no-result-found'               => 'Aynı isimde ürün bulunamadı.',
+            'no-product-added'              => 'Ürün Eklenmedi',
             'channel'                       => 'Kanallar',
             'bundle-items'                  => 'Paket İçerik',
             'add-option-btn-title'          => 'Seçenek Ekle',
@@ -610,6 +611,11 @@ return [
             'save'                          => 'Kaydet',
             'cancel'                        => 'İptal',
             'saved-inventory-message'       => 'Ürün envanteri başarıyla kaydedildi.',
+            'image-size'                    => 'Görüntü çözünürlüğü 640px X 640px gibi olmalıdır',
+            'create-success'                => 'Ürün başarıyla oluşturuldu.',
+            'update-success'                => 'Ürün başarıyla güncellendi.',
+            'delete-success'                => 'Ürün başarıyla silindi.',
+            'delete-failed'                 => 'Ürün silinirken hatayla karşılaşıldı.',    
             'validations'                   => [
                 'quantity-required' => 'Quantity is required.',
                 'quantity-integer'  => 'Quantity should be integer.',
@@ -672,6 +678,11 @@ return [
             'checkbox'                    => 'Onay Kutusu',
             'is_comparable'               => 'Nitelik kıyaslanabilir',
             'default_null_option'         => 'Varsayılan boş seçenek oluştur',
+            'create-success'              => 'Özellik başarıyla oluşturuldu.',
+            'update-success'              => 'Özellik başarıyla güncellendi.',
+            'delete-success'              => 'Özellik başarıyla silindi.',
+            'delete-failed'               => 'Öznitelik silinirken hatayla karşılaşıldı.',
+            'user-define-error'           => 'Sistem Özniteliği silinemez.',
             'validation-messages'         => [
                 'max-size' => 'Resim boyutu 600 KB\'den küçük olmalıdır',
             ],
@@ -695,6 +706,13 @@ return [
             'add-attribute-title'  => 'Nitelik Ekle',
             'search'               => 'Arama',
             'group-exist-error'    => 'Aynı isimde grup bulunuyor.',
+            'create-success'       => 'Aile başarıyla oluşturuldu.',
+            'update-success'       => 'Aile başarıyla güncellendi.',
+            'delete-success'       => 'Aile başarıyla silindi.',
+            'delete-failed'        => 'Aile silinirken hatayla karşılaşıldı.',
+            'user-define-error'    => 'Sistem Öznitelik ailesini silemezsiniz',
+            'last-delete-error'    => 'En az bir aile gereklidir.',
+            'attribute-product-error'   => 'ürünlerde kullanılan familya.',
         ],
         'categories' => [
             'title'                    => 'Kategoriler',
@@ -724,6 +742,11 @@ return [
             'filterable-attributes'    => 'Filtrelenebilir Nitelikler',
             'attributes'               => 'Nitelikler',
             'mass-update-success'      => 'All the selected categories have been updated successfully',
+            'create-success'           => 'kategori başarıyla oluşturuldu.',
+            'update-success'           => 'kategori başarıyla güncellendi.',
+            'delete-success'           => 'Kategori başarıyla silindi.',
+            'delete-failed'            => 'Kategori silinirken hatayla karşılaşıldı.',
+            'delete-category-root'     => 'Kök kategori silinemiyor.',
         ],
     ],
 
@@ -818,6 +841,7 @@ return [
             'code'              => 'Birim Kodu',
             'name'              => 'Birim Adı',
             'symbol'            => 'Sembol',
+            'decimal'            => 'Ondalık',
             'create-success'    => 'Para birimi başarıyla oluşturuldu.',
             'update-success'    => 'Para birimi başarıyla güncellendi.',
             'delete-success'    => 'Para birimi başarıyla silindi.',
@@ -1020,6 +1044,11 @@ return [
             'success-delete'      => 'Müşteri adresi başarıyla silindi.',
             'success-mass-delete' => 'Seçili adres(ler) başarıyla silindi.',
             'error-create'        => 'Müşteri adresi silinirken hata oluştu!',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you login as :customer_name'
         ],
 
         'note' => [
@@ -1391,10 +1420,6 @@ return [
     'response' => [
         'being-used'              => ':name isimli kaynak :source isimli kaynakta kullanılıyor.',
         'cannot-change'           => ':name değiştirilemez.',
-        'cannot-delete-default'   => 'Varsayılan kanal silinemez.',
-        'create-success'          => ':name başarıyla oluşturuldu.',
-        'update-success'          => ':name başarıyla güncellendi.',
-        'delete-success'          => ':name başarıyla silindi.',
         'delete-failed'           => ':name silinirken hata oluştu.',
         'last-delete-error'       => 'En az bir :name zorunludur.',
         'user-define-error'       => 'Sistem :name silinemez!',

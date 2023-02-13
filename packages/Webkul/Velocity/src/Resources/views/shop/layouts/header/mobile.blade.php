@@ -134,7 +134,7 @@
             @guest('customer')
                 <a
                     class="unset"
-                    href="{{ route('shop.customer.session.create') }}">
+                    href="{{ route('shop.customer.session.index') }}">
                     <span>{{ __('shop::app.customer.login-form.title') }}</span>
                 </a>
             @endguest

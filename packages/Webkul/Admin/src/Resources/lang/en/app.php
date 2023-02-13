@@ -86,7 +86,7 @@ return [
         'cms'                      => 'CMS',
         'transactions'             => 'Transactions',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
-        'mode'                     => 'Mode',
+        'mode'                     => 'Dark Mode',
     ],
 
     'acl' => [
@@ -592,6 +592,7 @@ return [
             'related-products'              => 'Related Products',
             'product-search-hint'           => 'Start typing product name',
             'no-result-found'               => 'Products not found with same name.',
+            'no-product-added'              => 'No Product Added',
             'searching'                     => 'Searching ...',
             'grouped-products'              => 'Grouped Products',
             'search-products'               => 'Search Products',
@@ -623,6 +624,10 @@ return [
             'cancel'                        => 'Cancel',
             'saved-inventory-message'       => 'Product inventory saved successfully.',
             'image-size'                    => 'Image resolution should be like 640px X 640px',
+            'create-success'                => 'Product created successfully.',
+            'update-success'                => 'Product updated successfully.',
+            'delete-success'                => 'Product deleted successfully.',  
+            'delete-failed'                 => 'Error encountered while deleting Product.',          
             'validations'                   => [
                 'quantity-required' => 'Quantity is required.',
                 'quantity-integer'  => 'Quantity should be integer.',
@@ -685,6 +690,11 @@ return [
             'checkbox'                    => 'Checkbox',
             'is_comparable'               => 'Attribute is comparable',
             'default_null_option'         => 'Create default empty option',
+            'create-success'              => 'Attribute created successfully.',
+            'update-success'              => 'Attribute updated successfully.',
+            'delete-success'              => 'Attribute deleted successfully.',
+            'delete-failed'               => 'Error encountered while deleting Attribute.',
+            'user-define-error'           => 'Can not delete system Attribute.',
             'validation-messages'         => [
                 'max-size' => 'The image size must be less than 600 KB',
             ],
@@ -708,6 +718,13 @@ return [
             'add-attribute-title'  => 'Add Attributes',
             'search'               => 'Search',
             'group-exist-error'    => 'Group with same name already exists.',
+            'create-success'       => 'Family created successfully.',
+            'update-success'       => 'Family updated successfully.',
+            'delete-success'       => 'Family deleted successfully.',
+            'delete-failed'        => 'Error encountered while deleting Family.',
+            'user-define-error'    => 'Can not delete system Attribute family',
+            'last-delete-error'    => 'At least one family is required.',
+            'attribute-product-error'   => 'family is used in products.',
         ],
         'categories' => [
             'title'                    => 'Categories',
@@ -739,6 +756,11 @@ return [
             'image-size'               => 'Image resolution should be like 300px X 168px',
             'image-size-logo'          => 'Image resolution should be like 20px X 20px',
             'mass-update-success'      => 'All the selected categories have been updated successfully',
+            'create-success'           => 'category created successfully.',
+            'update-success'           => 'category updated successfully.',
+            'delete-success'           => 'The category has been successfully deleted.',
+            'delete-failed'            => 'Error encountered while deleting category.',
+            'delete-category-root'     => 'Cannot delete the root category.',
         ],
     ],
 
@@ -833,6 +855,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Name',
             'symbol'            => 'Symbol',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Currency created successfully.',
             'update-success'    => 'Currency updated successfully.',
             'delete-success'    => 'Currency deleted successfully.',
@@ -1042,6 +1065,11 @@ return [
             'success-mass-delete' => 'Selected addresses deleted successfully.',
             'error-create'        => 'Customer address not created.',
         ],
+
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you logged in as :customer_name'
+            ],
 
         'note' => [
             'title'      => 'Add Note',
@@ -1426,9 +1454,6 @@ return [
         'product-can-not-be-copied' => 'Products of type :type can not be copied',
         'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'Cannot delete the default channel',
-        'create-success'            => ':name created successfully.',
-        'update-success'            => ':name updated successfully.',
-        'delete-success'            => ':name deleted successfully.',
         'delete-failed'             => 'Error encountered while deleting :name.',
         'last-delete-error'         => 'At least one :name is required.',
         'user-define-error'         => 'Can not delete system :name',

@@ -592,6 +592,7 @@ return [
             'related-products'              => 'Related Products',
             'product-search-hint'           => 'Start typing product name',
             'no-result-found'               => 'Products not found with same name.',
+            'no-product-added'              => 'No Product Added',
             'searching'                     => 'Searching ...',
             'grouped-products'              => 'Grouped Products',
             'search-products'               => 'Search Products',
@@ -833,6 +834,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Name',
             'symbol'            => 'Symbol',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Currency created successfully.',
             'update-success'    => 'Currency updated successfully.',
             'delete-success'    => 'Currency deleted successfully.',
@@ -1041,6 +1043,11 @@ return [
             'success-delete'      => 'Customer address deleted successfully.',
             'success-mass-delete' => 'Selected addresses deleted successfully.',
             'error-create'        => 'Customer address not created.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you logged in as :customer_name'
         ],
 
         'note' => [
@@ -1426,9 +1433,6 @@ return [
         'product-can-not-be-copied' => 'Products of type :type can not be copied',
         'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'Cannot delete the default channel',
-        'create-success'            => ':name created successfully.',
-        'update-success'            => ':name updated successfully.',
-        'delete-success'            => ':name deleted successfully.',
         'delete-failed'             => 'Error encountered while deleting :name.',
         'last-delete-error'         => 'At least one :name is required.',
         'user-define-error'         => 'Can not delete system :name',

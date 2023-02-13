@@ -584,6 +584,7 @@ return [
             'grouped-products'              => 'محصولات گروه بندی شده',
             'search-products'               => 'جستجوی محصولات',
             'no-result-found'               => 'محصولاتی با همین نام یافت نشد',
+            'no-product-added'              => 'هیچ محصولی اضافه نشده است',
             'channel'                       => 'کانالها',
             'bundle-items'                  => 'موارد بسته بندی',
             'add-option-btn-title'          => 'گزینه را اضافه کنید',
@@ -813,6 +814,7 @@ return [
             'code'              => 'کد',
             'name'              => 'نام',
             'symbol'            => 'نماد',
+            'decimal'            => 'اعشاری',
             'create-success'    => 'ارز باموففقیت ایجاد شد.',
             'update-success'    => 'ارز باموففقیت به روز شد.',
             'delete-success'    => 'ارز باموففقیت حذف شد.',
@@ -1015,6 +1017,11 @@ return [
             'success-delete'      => 'آدرس مشتری با موفقیت حذف شد ',
             'success-mass-delete' => 'آدرس های انتخاب شده با موفقیت حذف شدند ',
             'error-create'        => 'آدرس مشتری ایجاد نشده است Error:',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'به عنوان مشتری وارد شوید',
+            'login-message'=>'به عنوان مشتری وارد شدید :customer_name'
         ],
 
         'note' => [
@@ -1393,9 +1400,6 @@ return [
         'being-used'              => ' مورد استفاده قرار می گیرد :source در :name این منبع',
         'cannot-change'           => 'نمی تواند تغییر کند :name.',
         'cannot-delete-default'   => 'کانال پیش فرض حذف نمی شود',
-        'create-success'          => ' با موفقیت ایجاد شد :name',
-        'update-success'          => ' با موفقیت به روز شد :name',
-        'delete-success'          => 'با موفقیت حذف شد :name',
         'delete-failed'           => 'هنگام حذف :name خطایی روی داد.',
         'last-delete-error'       => 'حداقل یک :name لازم است.',
         'user-define-error'       => 'نمی توان :name سیستم را حذف کرد.',

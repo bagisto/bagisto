@@ -497,6 +497,10 @@ abstract class AbstractType
             return false;
         }
 
+        if (! $this->haveSufficientQuantity(1)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -1107,7 +1111,7 @@ abstract class AbstractType
     public function getCustomerGroupPricingOffers()
     {
         $offerLines = [];
-        
+
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
         $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroup) {

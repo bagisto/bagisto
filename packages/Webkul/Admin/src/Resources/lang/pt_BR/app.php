@@ -581,6 +581,7 @@ return [
             'grouped-products'              => 'Produtos Agrupados',
             'search-products'               => 'procurar produtos',
             'no-result-found'               => 'Produtos não encontrados com o mesmo nome.',
+            'no-product-added'              => 'Nenhum produto adicionado',
             'channel'                       => 'Canais',
             'bundle-items'                  => 'Itens do pacote',
             'add-option-btn-title'          => 'Adicionar opção',
@@ -813,6 +814,7 @@ return [
             'code'              => 'Código',
             'name'              => 'Nome',
             'symbol'            => 'Símbolo',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Moeda criada com sucesso.',
             'update-success'    => 'Moeda atualizada com sucesso.',
             'delete-success'    => 'Moeda excluída com sucesso.',
@@ -1018,6 +1020,11 @@ return [
             'success-delete'      => 'Endereço do cliente excluído com sucesso.',
             'success-mass-delete' => 'endereços selecionados excluídos com sucesso.',
             'error-create'        => 'Error: Endereço do cliente não criado.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'entrar como cliente',
+            'login-message'=>'você se conectou como :customer_name'
         ],
 
         'note' => [
@@ -1392,9 +1399,6 @@ return [
         'being-used'              => 'Este recurso :name está sendo usado em :source',
         'cannot-change'           => 'Cannot change the :name.',
         'cannot-delete-default'   => 'Não é possível excluir o canal padrão',
-        'create-success'          => ':name criado com sucesso.',
-        'update-success'          => ':name atualizaco com sucesso.',
-        'delete-success'          => ':name excluído com sucesso.',
         'delete-failed'           => 'Erro encontrado ao excluir :name.',
         'last-delete-error'       => 'Ao menos um :name é obrigatório.',
         'user-define-error'       => 'Não pode excluir o sistema :name',

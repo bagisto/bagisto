@@ -84,7 +84,7 @@ return [
         'discount'                 => 'Korting',
         'cms'                      => 'CMS',
         'transactions'             => 'Transacties',
-        'mode'                     => 'modus',
+        'mode'                     => 'Donkere modus',
         'account-title'            => 'Rekening',
     ],
 
@@ -578,6 +578,7 @@ return [
             'related-products'              => 'Gerelateerde producten',
             'product-search-hint'           => 'Start typing product name',
             'no-result-found'               => 'Er zijn geen producten gevonden met dezelfde naam.',
+            'no-product-added'              => 'Geen product toegevoegd',
             'searching'                     => 'Zoeken ...',
             'grouped-products'              => 'Gegroepeerde producten',
             'search-products'               => 'Zoek producten',
@@ -718,6 +719,11 @@ return [
             'filterable-attributes'    => 'Filtreerbare kenmerken',
             'attributes'               => 'Attributen',
             'mass-update-success'      => 'Alle geselecteerde categorieën zijn met succes bijgewerkt',
+            'create-success'           => 'familie wordt gebruikt in producten.',
+            'update-success'           => 'familie wordt gebruikt in producten.',
+            'delete-success'           => 'familie wordt gebruikt in producten.',
+            'delete-failed'            => 'familie wordt gebruikt in producten.',
+            'delete-category-root'     => 'familie wordt gebruikt in producten.',
         ],
     ],
 
@@ -814,6 +820,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Naam',
             'symbol'            => 'Symbool',
+            'decimal'            => 'Engels',
             'create-success'    => 'Het valuta is toegevoegd.',
             'update-success'    => 'Het valuta is gewijzigd.',
             'delete-success'    => 'Het valuta is verwijderd.',
@@ -1018,6 +1025,11 @@ return [
             'success-delete'      => 'Klantadres succesvol verwijderd.',
             'success-mass-delete' => 'geselecteerde adressen zijn succesvol verwijderd.',
             'error-create'        => 'Error: Klantadres niet aangemaakt.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you login as :customer_name'
         ],
 
         'note' => [
@@ -1392,9 +1404,6 @@ return [
         'being-used'              => 'Deze bron :name is wennen :source',
         'cannot-change'           => 'Cannot change the :name.',
         'cannot-delete-default'   => 'Kan het standaardkanaal niet verwijderen',
-        'create-success'          => ':name succesvol gemaakt.',
-        'update-success'          => ':name succesvol geupdatet.',
-        'delete-success'          => ':name met succes verwijderd.',
         'delete-failed'           => 'Er is een fout opgetreden bij het verwijderen :name.',
         'last-delete-error'       => 'Minstens een :name Is benodigd.',
         'user-define-error'       => 'Kan systeem niet verwijderen :name',

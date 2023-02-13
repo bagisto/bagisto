@@ -101,12 +101,12 @@
                             <li>
                                 <a href="{{ route('admin.account.edit') }}">{{ __('admin::app.layouts.my-account') }}</a>
                             </li>
-                            <li>
-                                <a href="{{ route('admin.session.destroy') }}">{{ __('admin::app.layouts.logout') }}</a>
-                            </li>
                             <li v-if="!isMobile()" style="display: flex;justify-content: space-between;">
                                 <div style="margin-top:7px">{{ __('admin::app.layouts.mode') }}</div>
                                 <dark style="margin-top: -9px;width: 83px;"></dark>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.session.destroy') }}">{{ __('admin::app.layouts.logout') }}</a>
                             </li>
                         </ul>
                     </div>

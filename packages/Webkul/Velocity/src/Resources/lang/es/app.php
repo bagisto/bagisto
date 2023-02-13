@@ -60,6 +60,10 @@ return [
             'no-result-found' => 'Ningún registro encontrado.',
             'search-hint' => 'Buscar producto aquí...',
             'mass-delete-success' => 'El contenido seleccionado se eliminó correctamente.',
+            'delete-success'      => 'contenido eliminado con éxito',
+            'delete-failed'       => '¡Error! el contenido no se puede borrared',
+            'update-success'      => 'contenido actualizado con éxito',
+            'create-success'      => 'contenido creado con éxito',
             'tab' => [
                 'page' => 'Configuración de Página',
                 'content' => 'Configuración de Contenido',

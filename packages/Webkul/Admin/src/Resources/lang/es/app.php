@@ -592,6 +592,7 @@ return [
             'related-products'              => 'Productos relacionados',
             'product-search-hint'           => 'Inicie escribiendo un nombre de producto',
             'no-result-found'               => 'Productos con el mismo nombre no fueron encontrados.',
+            'no-product-added'              => 'Ningún producto agregado',
             'searching'                     => 'Buscando ...',
             'grouped-products'              => 'Productos Agrupados',
             'search-products'               => 'Buscar Productos',
@@ -683,6 +684,11 @@ return [
             'checkbox'                    => 'Opción múltiple',
             'is_comparable'               => 'El atributo es comparable',
             'default_null_option'         => 'Crear opción vacía por defecto',
+            'create-success'              => 'Atributo creado con éxito.',
+            'update-success'              => 'Atributo actualizado con éxito.',
+            'delete-success'              => 'Atributo eliminado con éxito.',
+            'delete-failed'               => 'Se encontró un error al eliminar el atributo.',
+            'user-define-error'           => 'No se puede eliminar el atributo del sistema.',
             'validation-messages'         => [
                 'max-size' => 'El tamaño de la imagen debe ser menor a 600 KB',
             ],
@@ -706,6 +712,13 @@ return [
             'add-attribute-title'  => 'Agregar atributos',
             'search'               => 'Buscar',
             'group-exist-error'    => 'Ya existe un grupo con el mismo nombre.',
+            'create-success'       => 'Familia creada con éxito.',
+            'update-success'       => 'Familia actualizada con éxito.',
+            'delete-success'       => 'Familia eliminada con éxito.',
+            'delete-failed'        => 'Se encontró un error al eliminar la familia.',
+            'user-define-error'    => 'No se puede eliminar la familia de atributos del sistema',
+            'last-delete-error'    => 'Se requiere al menos una familia.',
+            'attribute-product-error' => 'familia se utiliza en productos.',
         ],
         'categories' => [
             'title'                    => 'Categorías',
@@ -735,6 +748,11 @@ return [
             'filterable-attributes'    => 'Atributos filtrables',
             'attributes'               => 'Atributos',
             'mass-update-success'      => 'Todas las categorías seleccionadas se han actualizado correctamente',
+            'create-success'           => 'categoría creada con éxito.',
+            'update-success'           => 'categoría actualizada con éxito.',
+            'delete-success'           => 'La categoría ha sido eliminada con éxito..',
+            'delete-failed'            => 'Se encontró un error al eliminar la categoría.',
+            'delete-category-root'     => 'No se puede eliminar la categoría raíz.',
         ],
     ],
 
@@ -829,6 +847,7 @@ return [
             'code'              => 'Código',
             'name'              => 'Nombre',
             'symbol'            => 'Símbolo',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Moneda creada con éxito.',
             'update-success'    => 'Moneda actualizada con éxito.',
             'delete-success'    => 'Moneda borrada con éxito.',
@@ -1032,6 +1051,11 @@ return [
             'success-delete'      => 'Dirección del cliente borrada con éxito.',
             'success-mass-delete' => 'Las direcciones seleccionadas han sido borradas con éxito.',
             'error-create'        => 'La dirección del cliente no fue creada.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'logige sisse kliendina',
+            'login-message'=>'logisite sisse kui :customer_name'
         ],
 
         'note' => [
@@ -1409,9 +1433,6 @@ return [
         'product-can-not-be-copied' => 'Productos del tipo :type no se pueden copiar',
         'cannot-change'             => 'No se puede cambiar el :name.',
         'cannot-delete-default'     => 'No puede borrar el canal predeterminado',
-        'create-success'            => ':name :name creado con éxito.',
-        'update-success'            => ':name actualizado con éxito.',
-        'delete-success'            => ':name borrado con éxito.',
         'delete-failed'             => 'Se encontró un error mientras borraba :name.',
         'last-delete-error'         => 'Se requiere al menos un :name.',
         'user-define-error'         => 'No puede borrar sistema :name',

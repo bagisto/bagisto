@@ -586,6 +586,7 @@ return [
             'related-products'              => 'Verwandte Produkte',
             'product-search-hint'           => 'Geben Sie den Produktnamen ein',
             'no-result-found'               => 'Produkte nicht mit demselben Namen gefunden.',
+            'no-product-added'              => 'Kein Produkt hinzugefügt',
             'searching'                     => 'Suche ...',
             'grouped-products'              => 'Gruppierte Produkte',
             'search-products'               => 'Produkte suchen',
@@ -827,6 +828,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Name',
             'symbol'            => 'Symbol',
+            'decimal'            => 'Dezimal',
             'create-success'    => 'Währung erfolgreich erstellt.',
             'update-success'    => 'Währung erfolgreich aktualisiert.',
             'delete-success'    => 'Währung erfolgreich gelöscht.',
@@ -1037,6 +1039,12 @@ return [
             'success-mass-delete' => 'Erfolg: Die ausgewählten Adressen wurden erfolgreich gelöscht.',
             'error-create'        => 'Fehler: Kunde-Adresse nicht erstellt.',
         ],
+
+        'loginascustomer' => [
+            'grid-title'=>'inloggen als klant',
+            'login-message'=>'je bent ingelogd als :customer_name'
+        ],
+
         'note'        =>
         [
             'title'      => 'Notiz hinzufügen',
@@ -1419,9 +1427,6 @@ return [
         'product-can-not-be-copied' => 'Produkte vom Typ :type können nicht kopiert werden.',
         'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'Der Standardkanal kann nicht gelöscht werden',
-        'create-success'            => ':name erfolgreich erstellt.',
-        'update-success'            => ':name erfolgreich aktualisiert.',
-        'delete-success'            => ':name erfolgreich gelöscht.',
         'delete-failed'             => 'Fehler beim löschen von :name.',
         'last-delete-error'         => 'Zumindest ein :name ist erforderlich.',
         'user-define-error'         => 'System :name kann nicht gelöscht werden',

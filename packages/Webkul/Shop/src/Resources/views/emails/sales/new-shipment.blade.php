@@ -1,6 +1,6 @@
 @component('shop::emails.layouts.master')
     <div style="text-align: center;">
-        <a href="{{ config('app.url') }}">
+        <a href="{{ route('shop.home.index') }}">
             @include ('shop::emails.layouts.logo')
         </a>
     </div>
@@ -181,7 +181,7 @@
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!!
                     __('shop::app.mail.order.help', [
-                        'support_email' => '<a style="color:#0041FF" href="mailto:' . config('mail.from.address') . '">' . config('mail.from.address'). '</a>'
+                        'support_email' => '<a style="color:#0041FF" href="mailto:' . core()->getSenderEmailDetails()['email'] . '">' . core()->getSenderEmailDetails()['email']. '</a>'
                         ])
                 !!}
             </p>

@@ -85,7 +85,7 @@ return [
         'cms'                      => 'CMS',
         'transactions'             => 'Transactions',
         'newsletter-subscriptions' => 'Abonnement à la Newsletter',
-        'mode'                     => 'mode',
+        'mode'                     => 'Mode sombre',
         'account-title'            => 'Compte',
     ],
 
@@ -593,6 +593,7 @@ return [
             'related-products'              => 'Produits connexes',
             'product-search-hint'           => 'Commencez à saisir le nom du produit',
             'no-result-found'               => 'Produits introuvables avec le même nom.',
+            'no-product-added'              => 'Aucun produit ajouté',
             'searching'                     => 'Recherche...',
             'grouped-products'              => 'Produits groupés',
             'search-products'               => 'Recherche de produits',
@@ -622,7 +623,11 @@ return [
             'variant-already-exist-message' => 'Une variante avec les mêmes options d\'attribut existe déjà.',
             'save'                          => 'Save',
             'cancel'                        => 'Cancel',
-            'saved-inventory-message'       => 'Product inventory saved successfully.',
+            'saved-inventory-message'       => 'Inventaire de produits enregistré avec succès.',
+            'create-success'                => 'Produit créé avec succès.',
+            'update-success'                => 'Produit mis à jour avec succès.',
+            'delete-success'                => 'Produit supprimé avec succès.',
+            'delete-failed'                 => 'Erreur rencontrée lors de la suppression du produit.',
             'validations'                   => [
                 'quantity-required' => 'Quantity is required.',
                 'quantity-integer'  => 'Quantity should be integer.',
@@ -685,6 +690,11 @@ return [
             'checkbox'                    => 'Case à cocher',
             'is_comparable'               => 'L\'attribut est comparable',
             'default_null_option'         => 'Créer une option vide par défaut',
+            'create-success'              => 'Attribut créé avec succès.',
+            'update-success'              => 'Attribut mis à jour avec succès.',
+            'delete-success'              => 'Attribut supprimé avec succès.',
+            'delete-failed'               => 'Erreur rencontrée lors de la suppression de l\'attribut.',
+            'user-define-error'           => 'Impossible de supprimer l\'attribut système.',
             'validation-messages'         => [
                 'max-size' => 'The image size must be less than 600 KB',
             ],
@@ -709,6 +719,13 @@ return [
             'add-attribute-title'  => 'Ajouter des attributs',
             'search'               => 'Rechercher',
             'group-exist-error'    => 'Le groupe du même nom existe déjà.',
+            'create-success'       => 'Family created successfully.',
+            'update-success'       => 'Famille mise à jour avec succès.',
+            'delete-success'       => 'Famille supprimée avec succès.',
+            'delete-failed'        => 'Erreur rencontrée lors de la suppression de la famille.',
+            'user-define-error'    => "Impossible de supprimer la famille d'attributs système",
+            'last-delete-error'    => 'Au moins une famille est requise.',
+            'attribute-product-error'   => 'la famille est utilisée dans les produits.',
         ],
 
         'categories' => [
@@ -739,6 +756,11 @@ return [
             'filterable-attributes'    => 'Attributs filtrables',
             'attributes'               => 'Les attributs',
             'mass-update-success'      => 'Toutes les catégories sélectionnées ont été mises à jour avec succès',
+            'create-success'           => 'catégorie créée avec succès.',
+            'update-success'           => 'catégorie mise à jour avec succès.',
+            'delete-success'           => 'La catégorie a été supprimée avec succès.',
+            'delete-failed'            => 'Erreur rencontrée lors de la suppression de la catégorie.',
+            'delete-category-root'     => 'Impossible de supprimer la catégorie racine.',
         ],
     ],
 
@@ -835,6 +857,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Nom',
             'symbol'            => 'symbole',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Devise créée avec succès.',
             'update-success'    => 'Devise mise à jour avec succès.',
             'delete-success'    => 'Devise supprimée avec succès.',
@@ -1042,6 +1065,11 @@ return [
             'success-delete'      => 'Succès : l\'adresse du client a été supprimée avec succès.',
             'success-mass-delete' => 'Succès : les adresses sélectionnées ont été supprimées avec succès.',
             'error-create'        => 'Erreur : L\'adresse du client n\'a pas été créée.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'se connecter en tant que client',
+            'login-message'=>'vous vous êtes connecté en tant que :customer_name'
         ],
 
         'note' => [
@@ -1427,9 +1455,6 @@ return [
         'product-can-not-be-copied' => 'Les produits de type :type ne peuvent pas être copiés',
         'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'Impossible de supprimer la chaîne par défaut',
-        'create-success'            => ':name créé avec succès.',
-        'update-success'            => ':name mis à jour avec succès.',
-        'delete-success'            => ':name supprimé avec succès.',
         'delete-failed'             => 'Erreur rencontrée lors de la suppression de :name.',
         'last-delete-error'         => 'Au moins un :name est requis.',
         'user-define-error'         => 'Impossible de supprimer le système :name',
