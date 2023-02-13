@@ -400,6 +400,10 @@
                                     if (address.last_name) {
                                         this.address.billing.last_name = address.last_name;
                                     }
+
+                                    if (address.country) {
+                                        this.address.shipping.country = address.country;
+                                    }
                                 }
 
                                 if (address.id == this.address.shipping.address_id) {
@@ -415,6 +419,10 @@
 
                                     if (address.last_name) {
                                         this.address.shipping.last_name = address.last_name;
+                                    }
+
+                                    if (address.country) {
+                                        this.address.shipping.country = address.country;
                                     }
                                 }
                             });

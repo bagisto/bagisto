@@ -230,7 +230,7 @@
                                 <label for="is_required">
                                     {{ __('admin::app.catalog.attributes.is_required') }}
                                 </label>
-
+                                
                                 <select
                                     name="is_required"
                                     class="control"
@@ -245,6 +245,8 @@
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
                                 </select>
+
+                                <input type="hidden" name="is_required" value="{{ $attribute->is_required }}"/>
                             </div>
 
                             <div class="control-group">

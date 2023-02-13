@@ -20,6 +20,6 @@
 
 @section('content-wrapper')
     <div class="cms-page-container p-2">
-        {!! DbView::make($page)->field('html_content')->render() !!}
+        {!! Blade::render($page->html_content) !!}
     </div>
 @endsection
