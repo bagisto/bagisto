@@ -502,10 +502,9 @@ class Configurable extends AbstractType
     }
 
     /**
-     * Returns all variants of configurable product.
-     * @return array
-     */
-    public function getVariant()
+     * Return variants of configurable product.
+    */
+    public function getAllowedProducts()
     {
         $product =  $this->product;
 
@@ -536,16 +535,15 @@ class Configurable extends AbstractType
     }
 
     /**
-     * Get product prices for configurable variations.
-     * @return array
-     */
-    protected function getVariantPrices()
+     * Return minimum price of variants.
+    */
+    protected function getVariantPrice()
     {
         $product =  $this->product;
 
         $prices = [];
 
-        foreach ($this->getVariant($product) as $variant) {
+        foreach ($this->getAllowedProducts($product) as $variant) {
             $prices[$variant->id] = $variant->getTypeInstance()->getProductPrices();           
         }
 
@@ -554,7 +552,6 @@ class Configurable extends AbstractType
      
     /**
      * Return price of variants.
-     * @return array
     */
     public function getProductPrices()
     {
@@ -581,7 +578,7 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        $prices = $this->getVariantPrices();
+        $prices = $this->getVariantPrice();
 
         $priceHtml = '';
 
@@ -599,6 +596,7 @@ class Configurable extends AbstractType
         } else {
             $priceHtml .= '<span class="special-price">' . $prices['regular_price']['formatted_price'] . '</span>';
         }
+
         $priceHtml .= '</div>';
         
         return $priceHtml;
