@@ -272,18 +272,43 @@
     Vue.component('review-image', {
         template: '#review-image-template',
         props: ['reviewDetail'],
+
+        data() {
+            return {
+                showModal: false,
+                review: []
+            }
+        },
+    });
+</script>
+
+<script type="text/x-template" id="review-template">
+    <div>
+        <button type="button"  @click='getModal()'>{{ $review->title }}</button>
+    </div>
+</script>
+
+<script>
+    Vue.component('product-review', {
+        template: '#review-template',
+        props: ['getDetails'],
+
         data() {
             return {
                 showModal: false,
                 reviewDetails: []
             }
         },
+        
         methods: {
             getModal: function() {
                 this.showModal = true;
-                this.reviewDetails = JSON.parse(this.reviewDetail)
+                this.review = JSON.parse(this.getDetails);
             }
         }
     });
 </script>
+
 @endpush
+
+
