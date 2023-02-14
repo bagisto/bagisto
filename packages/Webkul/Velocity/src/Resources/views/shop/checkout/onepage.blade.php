@@ -577,6 +577,7 @@
                     },
 
                     newShippingAddress: function () {
+                        this.new_shipping_address = true;
                         this.isPlaceOrderEnabled = false;
                         this.address.shipping.address_id = null;
                     },
