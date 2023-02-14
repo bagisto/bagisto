@@ -103,11 +103,13 @@
 
             methods: {
                 setFilterAttributes: function () {
-                    axios
-                        .get(this.attributeSrc)
-                        .then((response) => {
-                            this.attributes = response.data.filter_attributes;
-                        });
+                    if (this.attributeSrc) {
+                        axios
+                            .get(this.attributeSrc)
+                            .then((response) => {
+                                this.attributes = response.data.filter_attributes;
+                            });
+                    }
                 },
 
                 setAppliedFilters: function () {
