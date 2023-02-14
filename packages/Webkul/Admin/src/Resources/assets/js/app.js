@@ -84,8 +84,7 @@ $(function() {
         el: '#app',
 
         data: {
-            baseUrl: document.querySelector('meta[name="base-url"]').content,
-
+          
             modalIds: {},
 
             isMenuOpen: localStorage.getItem('bagisto-sidebar') == 'true',
