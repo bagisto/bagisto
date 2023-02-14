@@ -1,3 +1,13 @@
+@push('css')
+    <style>
+        .reviewModal{
+            display: flex;
+           
+            justify-content: space-around
+        }
+    </style>
+@endpush
+
 @php
     $reviewHelper = app('Webkul\Product\Helpers\Review');
 
@@ -130,6 +140,7 @@
                 @foreach ($reviews as $review)
                     <div class="row">
                         <review-image review-detail='{{$review}}' ></review-image>
+                        <h4 class="col-lg-12 fs18">{{ $review->title }}</h4>
                         <star-ratings
                             :ratings="{{ $review->rating }}"
                             push-class="mr10 fs16 col-lg-12"
@@ -224,71 +235,55 @@
 @endif
 
 {!! view_render_event('bagisto.shop.products.review.after', ['product' => $product]) !!}
-
 @push('scripts')
 
 <script type="text/x-template" id="review-image-template">
     <div>
-        <product-review :get-details='reviewDetail'></product-review>
+        <button class="theme-btn" type="button" @click='getModal()'>Show-Details</button>
+        <modal id="reviewDetails" :is-open='showModal'>
+            <h3 slot="header">Review-Details</h3>
+            
+            <div class="reviewModal" slot="body">
 
-        <modal :is-open='showModal'>
-            <h3 slot="header">Review</h3>
+                <div class="reviewImage">
+                    <img class="image zoom" src="{{ $image->url }}" style="height: 100px; width: 100px; margin: 5px;">
+                </div>
 
-            <div slot="body">
-                <h1 v-text='reviewDetail.title'></h1>
+                <div class="reviewText">
+                    <h2 class="reviewTitle" v-text='reviewDetails.title'></h2>
+
+                    <div class="stars mr5 fs16 " v-if="reviewDetails.rating">
+                        @if (! empty($review))
+                        <star-ratings
+                        :ratings="reviewDetails.rating"
+                        push-class="mr10 fs16 col-lg-12" >
+                        </star-ratings>
+                        @endif
+                    </div>
+                    <h4 class="reviewComment" v-text='reviewDetails.comment'></h4>
+                </div>
+                
             </div>
-        </modal>
+            </modal>           
     </div>
 </script>
 
 <script>
     Vue.component('review-image', {
         template: '#review-image-template',
-
         props: ['reviewDetail'],
-
         data() {
             return {
                 showModal: false,
-                review: []
+                reviewDetails: []
             }
         },
-    });
-</script>
-
-<script type="text/x-template" id="review-template">
-
-    <div>
-        <button type="button"  @click='getModal()'>{{ $review->title }}</button>
-    </div>
-
-</script>
-
-<script>
-
-    Vue.component('product-review', {
-
-        template: '#review-template',
- 
-        props: ['getDetails'],
-
-        data() {
-            return {
-                showModal: false,
-                review: []
-            }
-        },
-
         methods: {
             getModal: function() {
                 this.showModal = true;
-                this.review = JSON.parse(this.getDetails);
-                console.log(this.review)
+                this.reviewDetails = JSON.parse(this.reviewDetail)
             }
         }
     });
-
 </script>
 @endpush
-
-
