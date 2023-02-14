@@ -23,10 +23,11 @@
         }
 
         .image-group .control-group {
-                display: grid;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
         }
         
-
     </style>
 @endpush
 
