@@ -29,6 +29,7 @@
                         v-if="showShippingSection"                      
                         >
                         <shipping-section
+                            :methods="allShippingMethods"
                             :key="shippingComponentKey"
                             @onShippingMethodSelected="shippingMethodSelected($event)">
                         </shipping-section>
@@ -138,6 +139,7 @@
                         isShippingMethod:false,
                         countries: [],
                         countryStates: [],
+                        allShippingMethods: [],
 
                         step_numbers: {
                             'information': 1,
@@ -256,7 +258,6 @@
 
                                         case 'shipping-form':
                                             if (this.showShippingSection) {
-                                                this.isShippingMethod=true;
                                                 this.$root.showLoader();
                                                 this.saveShipping();
                                                 break;
@@ -342,7 +343,6 @@
                             this.$http.post("{{ route('shop.customer.checkout.exist') }}", {email: this.address.billing.email})
                             .then(response => {
                                 this.is_customer_exist = response.data ? 1 : 0;
-                                console.log(this.is_customer_exist);
 
                                 if (response.data)
                                     this.$root.hideLoader();
@@ -431,9 +431,6 @@
                                 if (this.step_numbers[response.data.jump_to_section] == 2 ) {
                                     this.showShippingSection = true;
                                     shippingHtml = Vue.compile(response.data.html);
-
-                                    
-                                   
                                 } else {
                                     paymentHtml = Vue.compile(response.data.html)
                                 }
@@ -448,17 +445,8 @@
 
                                 shippingMethods = response.data.shippingMethods;
 
-                                if(shippingMethods.length = 1){
-                                  
-                                    var value = Object.keys(shippingMethods)[0];
-                                    // for (v in value){
-                                    //     var  test = Object.keys['rates'];
-                                    //     console.log(test,"457");
-                                    // }
-                                   
-                                    this.shippingMethodSelected('free_free');
-                                    console.log(shippingMethods,"458");
-                                }
+                                this.allShippingMethods = shippingMethods;
+
                                 this.shippingComponentKey++;
 
                                 this.getOrderSummary();
@@ -575,7 +563,6 @@
                     },
 
                     shippingMethodSelected: function (shippingMethod) {
-                        console.log(shippingMethod,"580");
                         this.selected_shipping_method = shippingMethod;
                     },
 
@@ -615,13 +602,18 @@
             Vue.component('shipping-section', {
                 inject: ['$validator'],
 
+                props: {
+                    methods: {
+                        type: Object,
+                        default: {}
+                    },
+                },
+
                 data: function () {
                     return {
                         templateRender: null,
 
                         selected_shipping_method: '',
-
-                        isShippingMethod:false,
 
                         first_iteration : true,
                     }
@@ -631,11 +623,11 @@
 
                 mounted: function () {
                     this.templateRender = shippingHtml.render;
-
+                    
                     for (var i in shippingHtml.staticRenderFns) {
                         shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
                     }
-
+                    
                     eventBus.$emit('after-checkout-shipping-section-added');
                 },
 
@@ -645,6 +637,16 @@
                             this.templateRender() :
                             '')
                         ]);
+                },
+
+                created: function() {
+                    if (Object.keys(this.methods).length == 1) {
+                        var firstMethod = Object.keys(this.methods)[0];
+                            
+                        var methodRateObject = this.methods[firstMethod]['rates'][0];
+                        this.selected_shipping_method = methodRateObject.method;
+                        this.methodSelected();
+                    }
                 },
 
                 methods: {
