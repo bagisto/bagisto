@@ -526,12 +526,11 @@ class Configurable extends AbstractType
     public function getPriceHtml()
     {
         if ($this->haveDiscount()) {
-            $discountPercentage = round((($this->getRegularMinimalPrice() - $this->getMinimalPrice()) / $this->getRegularMinimalPrice()) * 100);
 
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'.'<span class="regular-price"></span>'
-            . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->getRegularMinimalPrice())) . '</span>'
-            . '<span class="card-discount">(' . $discountPercentage . '% off)</span>';
+                . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'.'<span class="regular-price"></span>'
+                . '<span class="card-discount"></span>';
         } else {
             return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
                 . ' '
