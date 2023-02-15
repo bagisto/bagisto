@@ -292,7 +292,7 @@
                     slides-per-page="3"
                     navigation-enabled="show"
                     paginationEnabled="hide"
-                    :slides-count="10">
+                    :slides-count="{{count($orderItems)}}">
 
                     @foreach($orderItems as $key => $orderItem)
                         <slide slot="slide-{{ $key }}">
