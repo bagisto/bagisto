@@ -24,6 +24,7 @@ return [
     'home' => [
         'page-title'          => config('app.name') . ' - Home',
         'featured-products'   => 'विशेष रुप से प्रदर्शित प्रोडक्टस',
+        'history'             => 'Recent History',
         'new-products'        => 'नये उत्पाद',
         'verify-email'        => 'अपना ईमेल खाता सत्यापित करें',
         'resend-verify-email' => 'सत्यापन ईमेल पुनः भेजे',

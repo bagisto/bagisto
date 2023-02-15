@@ -24,6 +24,7 @@ return [
     'home' => [
         'page-title'          => config('app.name') . ' - Ana Sayfa',
         'featured-products'   => 'Özel Ürünler',
+        'history'             => 'Recent History',
         'new-products'        => 'Yeni Ürünler',
         'verify-email'        => 'Mail hesabınızı doğrulayınız',
         'resend-verify-email' => 'Doğrulama Maili Gönder',

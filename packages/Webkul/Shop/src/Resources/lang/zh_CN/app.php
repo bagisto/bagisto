@@ -24,6 +24,7 @@ return [
     'home' => [
         'page-title' => config('app.name') . ' - 主页',
         'featured-products' => '特色产品',
+        'history'             => 'Recent History',
         'new-products' => '新产品',
         'verify-email' => '验证您的电子邮件帐户',
         'resend-verify-email' => '重新发送验证电子邮件'

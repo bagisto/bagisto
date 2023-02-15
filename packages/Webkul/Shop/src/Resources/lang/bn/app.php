@@ -24,6 +24,7 @@ return [
     'home' => [
         'page-title'          => "config('app.name')। ' - বাড়ি",
         'featured-products'   => 'বৈশিষ্ট্যযুক্ত পণ্য',
+        'history'             => 'Recent History',
         'new-products'        => 'নতুন পণ্য',
         'verify-email'        => 'আপনার ইমেল অ্যাকাউন্ট যাচাই করুন',
         'resend-verify-email' => 'যাচাইকরণ ইমেল পুনরায় পাঠান',

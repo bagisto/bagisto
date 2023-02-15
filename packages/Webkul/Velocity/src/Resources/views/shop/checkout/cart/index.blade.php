@@ -225,6 +225,8 @@
                             </form>
                         </div>
 
+                        <history></history>
+
                         @include ('shop::products.view.cross-sells')
                     </div>
                 @endif
@@ -277,5 +279,37 @@
                 }
             })
         })();
+    </script>
+
+    <script type="text/x-template" id='history-orders'>
+        <div>
+            <div class="carousel-products vc-full-screen">
+                <div class="customer-orders">
+                    <h2 class="fs20 fw6">{{ __('shop::app.home.history') }}</h2>
+                </div>
+
+                <carousel-component
+                    slides-per-page="3"
+                    navigation-enabled="show"
+                    paginationEnabled="hide"
+                    :slides-count="10">
+
+                    @foreach($orderItems as $key => $orderItem)
+                        <slide slot="slide-{{ $key }}">
+                            @include ('shop::products.list.card', [
+                                'product' => $orderItem->product,
+                                'addToCartBtnClass' => 'small-padding',
+                            ])
+                        </slide>
+                    @endforeach
+                </carousel-component>
+            </div>
+        </div>
+    </script>
+
+    <script>
+        Vue.component('history', {
+            template: "#history-orders"
+        })
     </script>
 @endpush

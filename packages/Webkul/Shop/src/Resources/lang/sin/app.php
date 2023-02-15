@@ -24,6 +24,7 @@ return [
     'home' => [
         'page-title'          => config('app.name') . ' - නිවස',
         'featured-products'   => 'විශේෂිත නිෂ්පාදන',
+        'history'             => 'Recent History',
         'new-products'        => 'නව නිෂ්පාදන',
         'verify-email'        => 'ඔබේ විද්‍යුත් තැපැල් ගිණුම සත්‍යාපනය කරන්න',
         'resend-verify-email' => 'සත්‍යාපන විද්‍යුත් තැපෑල නැවත යවන්න',

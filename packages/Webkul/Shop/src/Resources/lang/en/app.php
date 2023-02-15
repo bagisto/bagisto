@@ -24,6 +24,7 @@ return [
     'home' => [
         'page-title'          => config('app.name') . ' - Home',
         'featured-products'   => 'Featured Products',
+        'history'             => 'Recent History',
         'new-products'        => 'New Products',
         'verify-email'        => 'Verify your email account',
         'resend-verify-email' => 'Resend Verification Email',

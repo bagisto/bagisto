@@ -9,6 +9,8 @@ use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
 
 class CartController extends Controller
 {
@@ -23,7 +25,9 @@ class CartController extends Controller
     public function __construct(
         protected WishlistRepository $wishlistRepository,
         protected ProductRepository $productRepository,
-        protected CartRuleCouponRepository $cartRuleCouponRepository
+        protected CartRuleCouponRepository $cartRuleCouponRepository,
+        protected OrderRepository $orderRepository,
+        protected OrderItemRepository $orderItemRepository
     )
     {
         $this->middleware('throttle:5,1')->only('applyCoupon');
@@ -42,7 +46,16 @@ class CartController extends Controller
     {
         Cart::collectTotals();
 
-        return view($this->_config['view'])->with('cart', Cart::getCart());
+        $customerId = auth()->guard('customer')->user()->id;
+        $orders = $this->orderRepository->findWhere(['customer_id' => $customerId]);
+
+        foreach($orders as $order) {
+            $orderIds[] = $order->id;
+        }
+
+        $orderItems = $this->orderItemRepository->getCustomerHistory($orderIds);
+
+        return view($this->_config['view'], compact('orderItems'))->with('cart', Cart::getCart());
     }
 
     /**
