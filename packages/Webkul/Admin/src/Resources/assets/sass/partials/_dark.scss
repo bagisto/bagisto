@@ -281,6 +281,24 @@
                 color: $dark-mode-text-color;
                 border-bottom: 1px solid $seprator;
             }
+
+            .checkbox {
+                input {
+                    top: 1px;
+                    height: 16px;
+                    width: 16px;
+                }
+
+                .checkbox-view {
+                    background-image: url('../images/checked-checkbox.png');
+                }
+
+                input:checked + .checkbox-view {
+                    background-image: url('../images/Checkbox-Checked.svg');
+                    background-size: 24px 24px;
+                    background-repeat: no-repeat;
+                }
+            }
         }
     }
 
