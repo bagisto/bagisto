@@ -185,6 +185,16 @@ class Core
         return ($channel = $this->getDefaultChannel()) ? $channelCode = $channel->code : '';
     }
 
+     /**
+     * Returns default channel locale code.
+     *
+     * @return \Webkul\Core\Contracts\locale
+     */
+    public function getDefaultChannelLocaleCode(): string
+    {
+        return $this->getDefaultChannel()->default_locale->code; 
+    }
+
     /**
      * Get channel code from request.
      *
