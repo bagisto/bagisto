@@ -480,6 +480,7 @@ return [
             'creation-error'    => 'Shipment can not be created for this order.',
             'order-error'       => 'Order shipment creation is not allowed.',
             'quantity-invalid'  => 'Requested quantity is invalid or not available.',
+            'qty-ship-error'    => 'Quantity not available for this inventory source',
         ],
 
         'refunds' => [
@@ -1449,6 +1450,7 @@ return [
 
     'response' => [
         'being-used'                => 'This :name is getting used in :source',
+        'create-success'            => 'Shippement created successfully',
         'product-copied'            => 'The Product has been copied',
         'error-while-copying'       => 'Something went wrong while trying to copy the product',
         'product-can-not-be-copied' => 'Products of type :type can not be copied',
