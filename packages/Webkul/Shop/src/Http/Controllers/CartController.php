@@ -46,8 +46,8 @@ class CartController extends Controller
     {
         Cart::collectTotals();
 
-        if ($customerId = auth()->guard('customer')->user()->id) {
-            $orders = $this->orderRepository->findWhere(['customer_id' => $customerId]);
+        if ($customerId = auth()->guard('customer')->user()) {
+            $orders = $this->orderRepository->findWhere(['customer_id' => $customerId->id]);
 
             foreach($orders as $order) {
                 $orderIds[] = $order->id;
