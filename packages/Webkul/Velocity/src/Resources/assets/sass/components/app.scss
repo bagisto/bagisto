@@ -1650,8 +1650,9 @@
 
     span {
         &.price-label {
-            font-size: 14px !important;
+            font-size: 17px !important;
             font-weight: 500 !important;
+            margin-left: 6px;
         }
 
         &.final-price {
