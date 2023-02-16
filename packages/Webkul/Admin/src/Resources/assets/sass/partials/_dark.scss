@@ -646,15 +646,15 @@
     }
 
     .pagination .page-item {
-        background: $black;
+        background: transparent;
         border: 1px solid 000;
         color: $white;
     }
 
     .pagination .page-item.active {
-        background-color: $dark-mode-pagination-page-item-active-background-color !important;
+        background-color: $dashboard-stats-data !important;
         color: $white;
-        border-color: $dark-mode-pagination-page-item-active-border-color !important;
+        border-color: $white !important;
     }
 
     .filter-tag .wrapper {
