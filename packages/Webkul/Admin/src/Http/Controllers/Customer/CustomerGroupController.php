@@ -109,7 +109,7 @@ class CustomerGroupController extends Controller
 
         Event::dispatch('customer.customer_group.update.after', $customerGroup);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer Group']));
+        session()->flash('success', trans('admin::app.customers.groups.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -132,7 +132,7 @@ class CustomerGroupController extends Controller
 
         if ($customerGroup->customers->count()) {
             return response()->json([
-                'message' => trans('admin::app.response.customer-associate', ['name' => 'Customer Group']),
+                'message' => trans('admin::app.customers.groups.customer-associate'),
             ], 400);
         }
 
@@ -143,9 +143,9 @@ class CustomerGroupController extends Controller
 
             Event::dispatch('customer.customer_group.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Customer Group'])]);
+            return response()->json(['message' => trans('admin::app.customers.groups.delete-success')]);
         } catch (\Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Customer Group'])], 500);
+        return response()->json(['message' => trans('admin::app.customers.groups.delete-failed')], 500);
     }
 }
