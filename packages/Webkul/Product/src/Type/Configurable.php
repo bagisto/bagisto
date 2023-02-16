@@ -508,7 +508,6 @@ class Configurable extends AbstractType
     */
     public function getAllowedProducts()
     {
-
         static $variants = [];
 
         if (count($variants)) {
