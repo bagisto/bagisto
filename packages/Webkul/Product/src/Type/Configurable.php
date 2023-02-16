@@ -503,10 +503,11 @@ class Configurable extends AbstractType
 
     /**
      * Return variants of configurable product.
+     * @return array
+     * 
     */
     public function getAllowedProducts()
     {
-        $product =  $this->product;
 
         static $variants = [];
 
@@ -514,7 +515,7 @@ class Configurable extends AbstractType
             return $variants;
         }
 
-        $variantCollection = $product->variants()
+        $variantCollection = $this->product->variants()
             ->with([
                 'parent',
                 'attribute_values',
@@ -536,14 +537,13 @@ class Configurable extends AbstractType
 
     /**
      * Return minimum price of variants.
+     * @return array
     */
     protected function getVariantPrice()
     {
-        $product =  $this->product;
-
         $prices = [];
 
-        foreach ($this->getAllowedProducts($product) as $variant) {
+        foreach ($this->getAllowedProducts($this->product) as $variant) {
             $prices[$variant->id] = $variant->getTypeInstance()->getProductPrices();           
         }
 
