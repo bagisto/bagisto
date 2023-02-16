@@ -241,7 +241,7 @@
     <div>
             <div class="control-group" :class="[errors.has('shipment[source]') ? 'has-error' : '']">
                 <label for="shipment[source]" class="required">{{ __('admin::app.sales.shipments.source') }}</label>
-                <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source" @change="test">
+                <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source" @change="onChange">
                     <option value="">{{ __('admin::app.sales.shipments.select-source') }}</option>
                     
                     @foreach ($order->channel->inventory_sources as $key => $inventorySource)
@@ -329,7 +329,7 @@
 
                                                                 <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
 
-                                                                    <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$item->qty_ordered}}'" class="control test" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_to_ship }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" 
+                                                                    <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$item->qty_ordered}}'" class="control input-default" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_to_ship }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" 
                                                                     :disabled="source != '{{ $inventorySource->id }}' || '{{ $sourceQty }}' == 0"
 
                                                                     />
@@ -374,10 +374,10 @@
         },
 
         methods:{
-            test() {  
+            onChange() {  
                 $(document).ready(function () {
                     $('select').on('change', function () {
-                        $('.test').val(1); 
+                        $('.input-default').val(1); 
                     });
                 });   
                 this.$validator.reset();
