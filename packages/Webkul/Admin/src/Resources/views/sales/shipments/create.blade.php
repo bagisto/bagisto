@@ -241,10 +241,9 @@
     <div>
             <div class="control-group" :class="[errors.has('shipment[source]') ? 'has-error' : '']">
                 <label for="shipment[source]" class="required">{{ __('admin::app.sales.shipments.source') }}</label>
-
-                <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source">
+                <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source" @change="test">
                     <option value="">{{ __('admin::app.sales.shipments.select-source') }}</option>
-
+                    
                     @foreach ($order->channel->inventory_sources as $key => $inventorySource)
                         <option value="{{ $inventorySource->id }}">{{ $inventorySource->name }}</option>
                     @endforeach
@@ -330,8 +329,15 @@
 
                                                                 <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
 
-                                                                    <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$item->qty_ordered}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_to_ship }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}' || '{{ $sourceQty }}' == 0"/>
-                                                                    <span v-if="source == '{{ $inventorySource->id }}' && '{{ $sourceQty }}' == 0" style="color:#fc6868">{{ __('admin::app.sales.shipments.qty-ship-error') }}</span>
+                                                                    <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$item->qty_ordered}}'" class="control test" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_to_ship }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" 
+                                                                    :disabled="source != '{{ $inventorySource->id }}' || '{{ $sourceQty }}' == 0"
+
+                                                                    />
+                                                                    
+                                                                    <div :class="source == '{{ $inventorySource->id }}' && '{{ $sourceQty }}' == 0 ? 'control-group has-error' : '' ">
+                                                                        <span v-validate="'required'" class='control-error' v-if="source == '{{ $inventorySource->id }}' && '{{ $sourceQty }}' == 0" style="color:#fc6868">{{ __('admin::app.sales.shipments.qty-ship-error') }}</span>
+                                                                    </div>
+
                                                                     <span class="control-error" v-if="errors.has('{{ $inputName }}')" v-text="errors.first('{{ $inputName }}')"></span>
                                                                     
                                                                 </div>
@@ -353,6 +359,7 @@
     </script>
 
 <script>
+       
     Vue.component('order-item-list', {
 
         template: '#order-item-list-template',
@@ -360,8 +367,20 @@
         inject: ['$validator'],
 
         data: function() {
+        
             return {
-                source: ""
+                source: "",
+            }
+        },
+
+        methods:{
+            test() {  
+                $(document).ready(function () {
+                    $('select').on('change', function () {
+                        $('.test').val(1); 
+                    });
+                });   
+                this.$validator.reset();
             }
         }
     });

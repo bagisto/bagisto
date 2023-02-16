@@ -103,10 +103,9 @@ $(function() {
 
         methods: {
             onSubmit: function(e) {
-                this.toggleButtonDisable(true);
 
                 if (typeof tinyMCE !== 'undefined') tinyMCE.triggerSave();
-
+                
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         e.target.submit();
@@ -149,6 +148,7 @@ $(function() {
                  */
                 if (accordionElement) {
                     accordionElement.scrollIntoView(scrollConfigs);
+                    
                     return;
                 }
 
