@@ -103,6 +103,10 @@ $(function() {
 
         methods: {
             onSubmit: function(e) {
+                if (e.target.shiping.value != 'shiping') {
+                    this.toggleButtonDisable(true);
+                }
+
                 if (typeof tinyMCE !== 'undefined') tinyMCE.triggerSave();
 
                 this.$validator.validateAll().then(result => {

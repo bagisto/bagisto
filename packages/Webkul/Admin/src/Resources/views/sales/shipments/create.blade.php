@@ -8,7 +8,7 @@
 <div class="content full-page">
     <form method="POST" action="{{ route('admin.sales.shipments.store', $order->id) }}" @submit.prevent="onSubmit">
         @csrf()
-
+        <input type="hiden" name="shiping" value="shiping">
         <div class="page-header">
             <div class="page-title">
                 <h1>
