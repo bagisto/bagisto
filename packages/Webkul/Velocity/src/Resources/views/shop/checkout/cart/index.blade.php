@@ -283,13 +283,13 @@
 
     <script type="text/x-template" id='history-orders'>
         <div>
-            <div class="carousel-products vc-full-screen">
+            <div class="carousel-products recent-history">
                 <div class="customer-orders">
                     <h2 class="fs20 fw6">{{ __('shop::app.home.history') }}</h2>
                 </div>
 
                 <carousel-component
-                    slides-per-page="3"
+                    :slides-per-page="slidesPerPage"
                     navigation-enabled="show"
                     paginationEnabled="hide"
                     :slides-count="{{count($orderItems)}}">
@@ -309,7 +309,32 @@
 
     <script>
         Vue.component('history', {
-            template: "#history-orders"
+            template: "#history-orders",
+
+            data: function () {
+                return {
+                    'currentScreen': window.innerWidth,
+                    'slidesPerPage': 5,
+                }
+            },
+
+            created: function () {
+                this.setSlidesPerPage(this.currentScreen);
+            },
+
+            methods: {
+                setSlidesPerPage: function (width) {
+                    if (width >= 1200) {
+                        this.slidesPerPage = 3;
+                    } else if (width < 1200 && width >= 770) {
+                        this.slidesPerPage = 2;
+                    } else if (width < 770 && width >= 500) {
+                        this.slidesPerPage = 3;
+                    } else {
+                        this.slidesPerPage = 1;
+                    }
+                }
+            }
         })
     </script>
 @endpush

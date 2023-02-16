@@ -2771,3 +2771,11 @@
 .nested {
     display: none;
 }
+
+.recent-history {
+    .product-card-new {
+        max-width: inherit;
+        margin: auto;
+        margin-left: auto !important;
+    }
+}
