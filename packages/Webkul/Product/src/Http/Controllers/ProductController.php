@@ -313,8 +313,8 @@ class ProductController extends Controller
             Event::dispatch('catalog.product.update.before', $productId);
 
             $product = $this->productRepository->update([
-                'channel' => null,
-                'locale'  => null,
+                'channel' => $data['channel'],
+                'locale'  => $data['locale'],
                 'status'  => $data['update-options'],
             ], $productId);
 
