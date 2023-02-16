@@ -1,10 +1,32 @@
 @push('css')
     <style>
-        .reviewModal{
-            display: flex;
-           
-            justify-content: space-around
+        .VueCarousel .VueCarousel-navigation span {
+            display: none;
         }
+        .reviewRating{
+            padding-left: 0px;
+        }
+
+        .reviewDetails{
+            margin-left: auto;
+            margin-right: 90px;
+        }
+        .product-detail .right h4 {
+            font-weight: 100;
+        }
+        .col-lg-4{
+            margin-left: 50px;
+        }
+
+        .image-show{
+            display: inline-block!important;
+            height: 100%;
+            width: 100%;
+        }
+        .btn{
+            margin-left: 15px;
+        }
+   
     </style>
 @endpush
 
@@ -139,7 +161,7 @@
             <div class="customer-reviews" slot="body">
                 @foreach ($reviews as $review)
                     <div class="row">
-                        <review-image review-detail='{{$review}}' ></review-image>
+                        <review-image review-detail='{{$review}}' image-detail='{{$review->images}}'></review-image>
                         <h4 class="col-lg-12 fs18">{{ $review->title }}</h4>
                         <star-ratings
                             :ratings="{{ $review->rating }}"
@@ -181,7 +203,6 @@
         <h3 class="display-inbl mb20 col-lg-12 no-padding">
             {{ __('velocity::app.products.reviews-title') }}
         </h3>
-        product-quickreview-detail
         <div class="customer-reviews">
             @foreach ($reviews as $review)
                 <div class="row">
@@ -239,22 +260,33 @@
 
 <script type="text/x-template" id="review-image-template">
     <div>
-        <button class="theme-btn" type="button" @click='getModal()'>Show-Details</button>
-        <modal id="reviewDetails" :is-open='showModal'>
+        <button class="theme-btn btn" type="button" @click='getModal()'>Show-Details</button>
+        <modal id="reviewModal" :is-open='showModal'>
             <h3 slot="header">Review-Details</h3>
             
-            <div class="reviewModal" slot="body">
+            <div class="row" slot="body">
+                <div class="col-lg-4">
+                    <carousel-component
+                        slides-per-page="1"
+                        navigation-enabled="show"
+                        :slides-count="imageDetails.length">
 
-                <div class="reviewImage">
-                    <img class="image zoom" src="{{ $image->url }}" style="height: 100px; width: 100px; margin: 5px;">
+                        <slide
+                            :key="index"
+                            :slot="`slide-${index}`"
+                            title=" "
+                            v-for="(image, index) in imageDetails">
+                            <img class="image-show":src="`${$root.baseUrl}/storage/${image.path}`">
+                        </slide>
+                    </carousel-component>
                 </div>
 
-                <div class="reviewText">
+                <div class="reviewDetails">
                     <h2 class="reviewTitle" v-text='reviewDetails.title'></h2>
 
-                    <div class="stars mr5 fs16 " v-if="reviewDetails.rating">
+                    <div v-if="reviewDetails.rating">
                         @if (! empty($review))
-                        <star-ratings
+                        <star-ratings class="reviewRating"
                         :ratings="reviewDetails.rating"
                         push-class="mr10 fs16 col-lg-12" >
                         </star-ratings>
@@ -262,25 +294,29 @@
                     </div>
                     <h4 class="reviewComment" v-text='reviewDetails.comment'></h4>
                 </div>
-                
             </div>
-            </modal>           
+        </modal>           
     </div>
 </script>
 <script>
     Vue.component('review-image', {
         template: '#review-image-template',
-        props: ['reviewDetail'],
+
+        props: ['reviewDetail','imageDetail'],
+
         data() {
             return {
                 showModal: false,
-                reviewDetails: []
+                reviewDetails: [],
+                imageDetails: []
             }
         },
+
         methods: {
             getModal: function() {
                 this.showModal = true;
                 this.reviewDetails = JSON.parse(this.reviewDetail)
+                this.imageDetails = JSON.parse(this.imageDetail)
             }
         }
     });
