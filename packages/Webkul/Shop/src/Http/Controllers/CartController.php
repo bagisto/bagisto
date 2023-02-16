@@ -46,14 +46,15 @@ class CartController extends Controller
     {
         Cart::collectTotals();
 
-        $customerId = auth()->guard('customer')->user()->id;
-        $orders = $this->orderRepository->findWhere(['customer_id' => $customerId]);
+        if ($customerId = auth()->guard('customer')->user()->id) {
+            $orders = $this->orderRepository->findWhere(['customer_id' => $customerId]);
 
-        foreach($orders as $order) {
-            $orderIds[] = $order->id;
+            foreach($orders as $order) {
+                $orderIds[] = $order->id;
+            }
+
+            $orderItems = $this->orderItemRepository->getCustomerHistory($orderIds);
         }
-
-        $orderItems = $this->orderItemRepository->getCustomerHistory($orderIds);
 
         return view($this->_config['view'], compact('orderItems'))->with('cart', Cart::getCart());
     }
