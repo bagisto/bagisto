@@ -3,14 +3,7 @@
         .VueCarousel .VueCarousel-navigation span {
             display: none;
         }
-        .reviewRating{
-            padding-left: 0px;
-        }
-
-        .reviewDetails{
-            margin-left: auto;
-            margin-right: 90px;
-        }
+       
         .product-detail .right h4 {
             font-weight: 100;
         }
@@ -262,37 +255,44 @@
     <div>
         <button class="theme-btn btn" type="button" @click='getModal()'>Show-Details</button>
         <modal id="reviewModal" :is-open='showModal'>
-            <h3 slot="header">Review-Details</h3>
-            
+            <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
             <div class="row" slot="body">
-                <div class="col-lg-4">
-                    <carousel-component
-                        slides-per-page="1"
-                        navigation-enabled="show"
-                        :slides-count="imageDetails.length">
+                <div class="col-lg-6">
+                    <ul type="none" class="cd-slider">
+                        <div class="VueCarousel navigation-hide">
+                            <carousel-component
+                                slides-per-page="1"
+                                navigation-enabled="show"
+                                :slides-count="imageDetails.length">
 
-                        <slide
-                            :key="index"
-                            :slot="`slide-${index}`"
-                            title=" "
-                            v-for="(image, index) in imageDetails">
-                            <img class="image-show":src="`${$root.baseUrl}/storage/${image.path}`">
-                        </slide>
-                    </carousel-component>
+                                <slide
+                                    :key="index"
+                                    :slot="`slide-${index}`"
+                                    title=" "
+                                    v-for="(image, index) in imageDetails">
+                                    <div tabindex="-1" aria-hidden="true" role="tabpanel" class="VueCarousel-slide">
+                                        <li class="selected">
+                                            <img class="image-show":src="`${$root.baseUrl}/storage/${image.path}`">
+                                        </li>
+                                    </div>
+                                </slide>
+                            </carousel-component>
+                        </div>
+                    </ul>
                 </div>
 
-                <div class="reviewDetails">
-                    <h2 class="reviewTitle" v-text='reviewDetails.title'></h2>
-
-                    <div v-if="reviewDetails.rating">
-                        @if (! empty($review))
-                        <star-ratings class="reviewRating"
-                        :ratings="reviewDetails.rating"
-                        push-class="mr10 fs16 col-lg-12" >
-                        </star-ratings>
-                        @endif
+                <div class="col-lg-6 fs16">
+                    <h2 class="quick-view-name" v-text='reviewDetails.title'></h2>
+                    <div  class="product-rating">
+                        <div v-if="reviewDetails.rating" class="stars mr5 fs16 ">
+                            @if (! empty($review))
+                            <star-ratings 
+                            :ratings="reviewDetails.rating">
+                            </star-ratings>
+                            @endif
+                        </div>
                     </div>
-                    <h4 class="reviewComment" v-text='reviewDetails.comment'></h4>
+                    <p class="pt14 fs14 description-text" v-text='reviewDetails.comment'></p>
                 </div>
             </div>
         </modal>           
