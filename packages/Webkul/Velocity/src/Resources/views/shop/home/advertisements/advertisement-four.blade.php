@@ -76,7 +76,7 @@
 
 @if (! $isRendered)
     <div class="container-fluid advertisement-four-container">
-        <div class="row">
+        <div class="row advertisement-grid">
             <div class="advertisement-container-block adv1">
                 <a @if (isset($one)) href="{{ $one }}" @endif aria-label="Advertisement">
                     <img
