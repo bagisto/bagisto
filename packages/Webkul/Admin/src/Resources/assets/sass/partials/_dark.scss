@@ -290,12 +290,15 @@
                 }
 
                 .checkbox-view {
-                    background-image: url('../images/checked-checkbox.png');
+                    background-image: inherit;
+                    border: 1px solid white;
+                    height: 19px;
+                    width: 18px;
                 }
 
                 input:checked + .checkbox-view {
                     background-image: url('../images/Checkbox-Checked.svg');
-                    background-size: 24px 24px;
+                    background-size: 15px 17px;
                     background-repeat: no-repeat;
                 }
             }
