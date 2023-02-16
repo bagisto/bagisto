@@ -613,8 +613,11 @@
                     'address': {
                         handler: function(v) {
                             this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
-                            this.saveAddressCheckbox.removeAttr("disabled");
-                            this.saveAddressCheckbox.prop('checked', false);
+
+                            if (this.saveAddressCheckbox.attr('disabled')) {
+                                this.saveAddressCheckbox.removeAttr('disabled');
+                                this.saveAddressCheckbox.prop('checked', false);
+                            }
                         },
                         deep: true
                     }

@@ -11,8 +11,7 @@
             name="shipping[first_name]"
             v-model="address.shipping.first_name"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.first-name') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.first-name') }}&quot;" />
 
         <span
             class="control-error"
@@ -33,8 +32,7 @@
             name="shipping[last_name]"
             v-model="address.shipping.last_name"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.last-name') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.last-name') }}&quot;" />
 
         <span
             class="control-error"
@@ -55,8 +53,7 @@
             name="shipping[email]"
             v-model="address.shipping.email"
             v-validate="'required|email'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;" />
 
         <span
             class="control-error"
@@ -77,8 +74,7 @@
             name="shipping[address1][]"
             v-model="address.shipping.address1[0]"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;" />
 
         <span
             class="control-error"
@@ -98,8 +94,7 @@
                     id="shipping_address_{{ $i }}"
                     type="text"
                     name="shipping[address1][{{ $i }}]"
-                    v-model="address.shipping.address1[{{$i}}]"
-                    @change="validateForm('address-form')" />
+                    v-model="address.shipping.address1[{{$i}}]" />
             </div>
         @endfor
     @endif
@@ -116,8 +111,7 @@
             name="shipping[country]"
             v-model="address.shipping.country"
             v-validate="'{{ core()->isCountryRequired() ? 'required' : '' }}'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;"
-            @change="validateForm('address-form')">
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;" >
 
             <option value="" disabled>{{ __('ui::form.select-attribute', ['attribute' => __('shop::app.checkout.onepage.country')]) }}</option>
 
@@ -150,7 +144,6 @@
             v-model="address.shipping.state"
             v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;"
-            @change="validateForm('address-form')"
             v-if="! haveStates('shipping')" />
 
         <select
@@ -160,7 +153,6 @@
             v-model="address.shipping.state"
             v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;"
-            @change="validateForm('address-form')"
             v-if="haveStates('shipping')">
 
             <option value="">{{ __('shop::app.checkout.onepage.select-state') }}</option>
@@ -193,8 +185,7 @@
             name="shipping[city]"
             v-model="address.shipping.city"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;" />
 
         <span
             class="control-error"
@@ -215,8 +206,7 @@
             name="shipping[postcode]"
             v-model="address.shipping.postcode"
             v-validate="'{{ core()->isPostCodeRequired() ? 'required' : '' }}'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.postcode') }}&quot;"
-            @keyup="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.postcode') }}&quot;" />
 
         <span
             class="control-error"
@@ -237,8 +227,7 @@
             name="shipping[phone]"
             v-model="address.shipping.phone"
             v-validate="'required|numeric'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;" />
 
         <span
             class="control-error"
@@ -254,8 +243,7 @@
                     id="shipping[save_as_address]"
                     type="checkbox"
                     name="shipping[save_as_address]"
-                    v-model="address.shipping.save_as_address"
-                    @change="validateForm('address-form')" />
+                    v-model="address.shipping.save_as_address" />
 
                 
                 <label for="shipping[save_as_address]" class="checkbox-view"></label>
@@ -278,8 +266,7 @@
             type="text"
             name="billing[company_name]"
             v-model="address.billing.company_name"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.company-name') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.company-name') }}&quot;" />
 
         <span
             class="control-error"
@@ -300,8 +287,7 @@
             name="billing[first_name]"
             v-model="address.billing.first_name"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.first-name') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.first-name') }}&quot;" />
 
         <span
             class="control-error"
@@ -322,8 +308,7 @@
             name="billing[last_name]"
             v-model="address.billing.last_name"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.last-name') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.last-name') }}&quot;" />
 
         <span
             class="control-error"
@@ -345,8 +330,7 @@
             v-model="address.billing.email"
             v-validate="'required|email'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"
-            @blur="isCustomerExist"
-            @change="validateForm('address-form')" />
+            @blur="isCustomerExist" />
 
         <span
             class="control-error"
@@ -371,8 +355,7 @@
             name="billing[address1][]"
             v-model="address.billing.address1[0]"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;" />
 
         <span
             class="control-error"
@@ -409,8 +392,7 @@
             name="billing[country]"
             v-model="address.billing.country"
             v-validate="'{{ core()->isCountryRequired() ? 'required' : '' }}'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;"
-            @change="validateForm('address-form')">
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;" >
 
             <option value="" disabled>{{ __('ui::form.select-attribute', ['attribute' => __('shop::app.checkout.onepage.country')]) }}</option>
 
@@ -441,7 +423,6 @@
             v-model="address.billing.state"
             v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;"
-            @change="validateForm('address-form')"
             v-if="! haveStates('billing')" />
 
         <select
@@ -451,7 +432,6 @@
             v-model="address.billing.state"
             v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;"
-            @change="validateForm('address-form')"
             v-if="haveStates('billing')">
 
             <option value="">{{ __('shop::app.checkout.onepage.select-state') }}</option>
@@ -482,8 +462,7 @@
             name="billing[city]"
             v-model="address.billing.city"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;" />
 
         <span
             class="control-error"
@@ -504,8 +483,7 @@
             name="billing[postcode]"
             v-model="address.billing.postcode"
             v-validate="'{{ core()->isPostCodeRequired() ? 'required' : '' }}'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.postcode') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.postcode') }}&quot;" />
 
         <span
             class="control-error"
@@ -526,8 +504,7 @@
             name="billing[phone]"
             v-model="address.billing.phone"
             v-validate="'required|numeric'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;" />
 
         <span
             class="control-error"
