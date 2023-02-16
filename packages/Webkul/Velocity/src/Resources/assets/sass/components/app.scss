@@ -2458,15 +2458,13 @@
 
     .VueCarousel-navigation {
         position: absolute;
-        right: 12px;
-        top: -49px;
+        top: 30%;
+        width: 100%;
+        z-index: 9;
 
         .VueCarousel-navigation-button {
-            position: unset !important;
             transform: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-
+            
             span {
                 font-size: 24px;
             }
