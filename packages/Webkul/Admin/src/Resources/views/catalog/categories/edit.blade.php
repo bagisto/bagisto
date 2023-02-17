@@ -6,12 +6,22 @@
 
 @push('css')
     <style>
-        @media only screen and (max-width: 768px){
-            .content-container .content .page-header .page-title .control-group .control{
-                width: 100% !important;
-                margin-top:-25px !important;
+       @media only screen and (max-width: 728px){
+            .content-container .content .page-header .page-title{
+                width: 100%;
             }
-        }
+
+            .content-container .content .page-header .page-title .control-group {
+                margin-top: 20px!important;
+                width: 100%!important;
+                margin-left: 0!important;
+            }
+
+            .content-container .content .page-header .page-action {
+                margin-top: 10px!important;
+                float: left;
+            }
+       }
     </style>
 @endpush
 
@@ -41,6 +51,7 @@
                             @endforeach
                         </select>
                     </div>
+
                 </div>
 
                 <div class="page-action">
@@ -66,8 +77,21 @@
                                 <label for="name" class="required">{{ __('admin::app.catalog.categories.name') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" value="{{ old($locale)['name'] ?? ($category->translate($locale)['name'] ?? '') }}" data-vv-as="&quot;{{ __('admin::app.catalog.categories.name') }}&quot;" v-slugify-target="'slug'"/>
-                                <span class="control-error" v-if="errors.has('{{$locale}}[name]')">@{{ errors.first('{!!$locale!!}[name]') }}</span>
+
+                                <input 
+                                    type="text" v-validate="'required'" 
+                                    name="{{$locale}}[name]"
+                                    value="{{ old($locale)['name'] ?? ($category->translate($locale)['name'] ?? '') }}"
+                                    class="control" 
+                                    id="name" 
+                                    data-vv-as="&quot;{{ __('admin::app.catalog.categories.name') }}&quot;"
+                                />
+
+                                <span
+                                    class="control-error" 
+                                    v-text="errors.first('{!!$locale!!}[name]')"
+                                    v-if="errors.has('{{$locale}}[name]')">
+                                </span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">

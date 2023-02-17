@@ -72,7 +72,7 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Attribute']));
+        session()->flash('success', trans('admin::app.catalog.attributes.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -123,7 +123,7 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.update.after', $attribute);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Attribute']));
+        session()->flash('success', trans('admin::app.catalog.attributes.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -140,7 +140,7 @@ class AttributeController extends Controller
 
         if (! $attribute->is_user_defined) {
             return response()->json([
-                'message' => trans('admin::app.response.user-define-error', ['name' => 'Attribute']),
+                'message' => trans('admin::app.catalog.attributes.user-define-error'),
             ], 400);
         }
 
@@ -151,10 +151,10 @@ class AttributeController extends Controller
 
             Event::dispatch('catalog.attribute.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Attribute'])]);
+            return response()->json(['message' => trans('admin::app.catalog.attributes.delete-success')]);
         } catch (\Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Attribute'])], 500);
+        return response()->json(['message' => trans('admin::app.catalog.attributes.delete-failed')], 500);
     }
 
     /**
@@ -171,7 +171,7 @@ class AttributeController extends Controller
                 $attribute = $this->attributeRepository->find($index);
 
                 if (! $attribute->is_user_defined) {
-                    session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
+                    session()->flash('error', trans('admin::app.catalog.attributes.user-define-error'));
 
                     return redirect()->back();
                 }

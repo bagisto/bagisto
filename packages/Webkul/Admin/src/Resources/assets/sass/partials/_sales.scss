@@ -1,6 +1,6 @@
 .sale-container {
 
-    .sale{
+    .sale {
         display: flex;
         column-gap: 20px;
 
@@ -129,10 +129,13 @@
 }
 
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 768px) {
     .sale-container {
-
-        .sale{
+        .sale-summary {
+            float: none;
+        }
+        
+        .sale {
             display: block;
 
             .sale-section {
@@ -140,11 +143,12 @@
             } 
         }
 
-        .summary-comment-container{
-            .comment-container{
+        .summary-comment-container {
+            .comment-container {
                 width: 100%;
-                form{
-                    .control-group{
+
+                form {
+                    .control-group {
                         width: 100%;
                     }
                 }

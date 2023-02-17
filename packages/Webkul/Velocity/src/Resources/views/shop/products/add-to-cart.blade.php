@@ -20,18 +20,6 @@
         ></compare-component>
     @endif
 
-    @if (
-        ! (
-            isset($showWishlist)
-            && ! $showWishlist
-        )
-        && (bool) core()->getConfigData('general.content.shop.wishlist_option')
-    )
-        @include('shop::products.wishlist', [
-            'addClass' => $addWishlistClass ?? ''
-        ])
-    @endif
-
     <div class="add-to-cart-btn pl0">
         @if (
             isset($form)
@@ -54,11 +42,11 @@
         @elseif(isset($addToCartForm) && ! $addToCartForm)
             <form
                 method="POST"
-                action="{{ route('shop.cart.add', $product->product_id) }}">
+                action="{{ route('shop.cart.add', $product->id) }}">
 
                 @csrf
 
-                <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <input type="hidden" name="quantity" value="1">
                 <button
                     type="submit"
@@ -116,6 +104,18 @@
             @endif
         </div>
     </div>
+
+        @if (
+        ! (
+            isset($showWishlist)
+            && ! $showWishlist
+        )
+        && (bool) core()->getConfigData('general.content.shop.wishlist_option')
+    )
+        @include('shop::products.wishlist', [
+            'addClass' => $addWishlistClass ?? ''
+        ])
+    @endif
 </div>
 
 {!! view_render_event('bagisto.shop.products.add_to_cart.after', ['product' => $product]) !!}

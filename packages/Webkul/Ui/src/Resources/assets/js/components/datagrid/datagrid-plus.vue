@@ -2,14 +2,12 @@
     <div class="table" v-if="isDataLoaded" :key="dataGridIndex">
         <div class="grid-container">
             <div class="grid-top">
-                <div class="datagrid-filters">
-                    <div class="filter-left">
-                        <datagrid-extra-filters
-                            :extra-filters="extraFilters"
-                            :translations="translations"
-                            @onFilter="changeExtraFilter($event)"
-                        ></datagrid-extra-filters>
-                    </div>
+                <div class="datagrid-filters" id="datagrid-filters">
+                    <datagrid-extra-filters
+                        :extra-filters="extraFilters"
+                        :translations="translations"
+                        @onFilter="changeExtraFilter($event)"
+                    ></datagrid-extra-filters>
                 </div>
 
                 <div class="datagrid-filters" id="datagrid-filters">
@@ -46,6 +44,11 @@
                 <datagrid-filter-tags
                     :filters="filters"
                     :translations="translations"
+                    :mass-actions="massActions"
+                    :mass-action-targets="massActionTargets"
+                    :data-id="indexes"
+                    :mass-actions-toggle="massActionsToggle"
+                    :extra-filters="extraFilters"
                     @onRemoveFilter="removeFilter($event)"
                     @onRemoveAllFilter="clearAllFilters()"
                 ></datagrid-filter-tags>
@@ -65,11 +68,12 @@
                     :enable-mass-actions="enableMassActions"
                     :index="index"
                     :mass-actions="massActions"
-                    :mass-action-targets="massActionTargets"
                     :records="records"
                     :translations="translations"
                     @onSorting="filterData($event)"
                     @onActionSuccess="refresh()"
+                    @onSelect="getDataIds"
+                    @onSelectAll="massActionToggle"
                 ></datagrid-table>
             </div>
 
@@ -117,6 +121,8 @@ export default {
             isDataLoaded: false,
             massActionTargets: [],
             url: this.src,
+            indexes: [],
+            massActionsToggle:false
         };
     },
 
@@ -456,7 +462,7 @@ export default {
                 }
             }
         },
-        
+
         clearAllFilters() {
             this.filters = [];
 
@@ -470,6 +476,25 @@ export default {
                 this.url = pageLink;
                 this.refresh();
             }
+        },
+
+        getDataIds(dataIds) {
+            if (dataIds[0].target.checked) {
+                this.indexes.push(dataIds[0].target.value);
+            } else {
+                this.indexes.map((value, index) => {
+                    if (value ==  dataIds[0].target.value) {
+                        this.indexes.splice(index, 1);
+                    }
+                })
+            }
+
+            this.massActionsToggle = dataIds[1];
+        },
+
+        massActionToggle(massAction) {
+            this.indexes = massAction[0];
+            this.massActionsToggle = massAction[1];
         }
     }
 };

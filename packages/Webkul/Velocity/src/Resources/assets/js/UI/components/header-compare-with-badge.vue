@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 export default {
-    props: ['isCustomer', 'isText', 'src'],
+    props: ['isCustomer', 'isText', 'src','compareItemCount'],
 
     data: function() {
         return {
@@ -21,34 +21,15 @@ export default {
     },
 
     watch: {
-        '$root.headerItemsCount': function() {
-            this.updateHeaderItemsCount();
+        'compareItemCount': function() {
+            this.compareCount = this.compareItemCount;
         }
     },
 
     created: function() {
-        this.updateHeaderItemsCount();
+        setTimeout(function() {
+            this.compareCount = this.compareItemCount;
+        }.bind(this), 200);
     },
-
-    methods: {
-        updateHeaderItemsCount: function() {
-            if (this.isCustomer !== 'true') {
-                let comparedItems = this.getStorageValue('compared_product');
-
-                if (comparedItems) {
-                    this.compareCount = comparedItems.length;
-                }
-            } else {
-                this.$http
-                    .get(`${this.$root.baseUrl}/items-count`)
-                    .then(response => {
-                        this.compareCount = response.data.compareProductsCount;
-                    })
-                    .catch(exception => {
-                        console.log(this.__('error.something_went_wrong'));
-                    });
-            }
-        }
-    }
 };
 </script>

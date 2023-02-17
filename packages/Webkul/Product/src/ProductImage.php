@@ -3,10 +3,12 @@
 namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 use Webkul\Product\Helpers\AbstractProduct;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Customer\Contracts\Wishlist;
 
-class ProductImage extends AbstractProduct
+class ProductImage
 {
     /**
      * Create a new helper instance.
@@ -21,7 +23,7 @@ class ProductImage extends AbstractProduct
     /**
      * Retrieve collection of gallery images.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
     public function getGalleryImages($product)
@@ -67,20 +69,21 @@ class ProductImage extends AbstractProduct
     }
 
     /**
-     * Get product varient image if available otherwise product base image.
+     * Get product variant image if available otherwise product base image.
      *
      * @param  \Webkul\Customer\Contracts\Wishlist  $item
      * @return array
      */
     public function getProductImage($item)
     {
-        if ($item instanceof \Webkul\Customer\Contracts\Wishlist) {
+        if ($item instanceof Wishlist) {
             if (isset($item->additional['selected_configurable_option'])) {
                 $product = $this->productRepository->find($item->additional['selected_configurable_option']);
             } else {
                 $product = $item->product;
             }
         } else {
+            
             $product = $item->product;
         }
 
@@ -91,7 +94,7 @@ class ProductImage extends AbstractProduct
      * This method will first check whether the gallery images are already
      * present or not. If not then it will load from the product.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @param  array
      * @return array
      */
@@ -115,12 +118,12 @@ class ProductImage extends AbstractProduct
     /**
      * Load product's base image.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
     protected function otherwiseLoadFromProduct($product)
     {
-        $images = $product ? $product->images : null;
+        $images = $product?->images;
 
         return $images && $images->count()
             ? $this->getCachedImageUrls($images[0]->path)
@@ -174,6 +177,6 @@ class ProductImage extends AbstractProduct
      */
     private function isDriverLocal(): bool
     {
-        return Storage::getAdapter() instanceof \League\Flysystem\Local\LocalFilesystemAdapter;
+        return Storage::getAdapter() instanceof LocalFilesystemAdapter;
     }
 }

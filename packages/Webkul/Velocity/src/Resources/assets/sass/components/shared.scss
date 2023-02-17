@@ -475,9 +475,7 @@
 
         .product-image {
             float: left;
-            width: 30%;
             height: 270px;
-            max-width: 200px;
             position: relative;
 
             .quick-view-btn-container {
@@ -488,8 +486,8 @@
         }
 
         .product-information {
-            width: 70%;
             float: right;
+            line-height: 2;
             padding-left: 20px;
         }
 

@@ -185,7 +185,7 @@
 
                                     <input
                                         type="text"
-                                        name="@php echo $locale->code; @endphp[name]"
+                                        name="<?php echo $locale->code; ?>[name]"
                                         class="control"
                                         id="locale-{{ $locale->code }}"
                                         value="{{ old($locale->code)['name'] ?? ($attribute->translate($locale->code)->name ?? '') }}"
@@ -230,7 +230,7 @@
                                 <label for="is_required">
                                     {{ __('admin::app.catalog.attributes.is_required') }}
                                 </label>
-
+                                
                                 <select
                                     name="is_required"
                                     class="control"
@@ -245,6 +245,8 @@
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
                                 </select>
+
+                                <input type="hidden" name="is_required" value="{{ $attribute->is_required }}"/>
                             </div>
 
                             <div class="control-group">
@@ -391,22 +393,6 @@
                                     </option>
 
                                     <option value="1" {{ $attribute->is_visible_on_front ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="use_in_flat">
-                                    {{ __('admin::app.catalog.attributes.use_in_flat') }}
-                                </label>
-
-                                <select name="use_in_flat" class="control" id="use_in_flat">
-                                    <option value="0" {{ $attribute->use_in_flat ? '' : 'selected' }}>
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
-
-                                    <option value="1" {{ $attribute->use_in_flat ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
                                 </select>

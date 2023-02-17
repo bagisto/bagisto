@@ -56,7 +56,7 @@ class ProductForm extends FormRequest
 
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                => ['required', 'unique:products,sku,' . $this->id, new Slug],
-            'url_key'            => ['required', new ProductCategoryUniqueSlug('product_flat', $this->id)],
+            'url_key'            => ['required', new ProductCategoryUniqueSlug('products', $this->id)],
             'images.files.*'     => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
             'images.positions.*' => ['nullable', 'integer'],
             'videos.files.*'     => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:' . $maxVideoFileSize],
@@ -109,7 +109,14 @@ class ProductForm extends FormRequest
 
             if ($attribute->is_unique) {
                 array_push($validations, function ($field, $value, $fail) use ($attribute) {
-                    if (! $this->productAttributeValueRepository->isValueUnique($this->id, $attribute->id, $attribute->column_name, request($attribute->code))) {
+                    if (
+                        ! $this->productAttributeValueRepository->isValueUnique(
+                            $this->id,
+                            $attribute->id,
+                            $attribute->column_name,
+                            request($attribute->code)
+                        )
+                    ) {
                         $fail(__('admin::app.response.already-taken', ['name' => ':attribute']));
                     }
                 });

@@ -94,13 +94,6 @@ abstract class AbstractType
     protected $isChildrenCalculated = false;
 
     /**
-     * product options.
-     *
-     * @var array
-     */
-    protected $productOptions = [];
-
-    /**
      * Skip attribute for simple product type.
      *
      * @var array
@@ -212,33 +205,28 @@ abstract class AbstractType
                     : null;
             }
 
+            $attributeValues = $product->attribute_values
+                ->where('attribute_id', $attribute->id);
+
             if ($attribute->value_per_channel) {
                 if ($attribute->value_per_locale) {
-                    $productAttributeValue = $product->attribute_values
+                    $attributeValues = $attributeValues
                         ->where('channel', $attribute->value_per_channel ? $data['channel'] : null)
-                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null)
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
+                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null);
                 } else {
-                    $productAttributeValue = $product->attribute_values
-                        ->where('channel', $attribute->value_per_channel ? $data['channel'] : null)
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
+                    $attributeValues = $attributeValues
+                        ->where('channel', $attribute->value_per_channel ? $data['channel'] : null);
                 }
             } else {
                 if ($attribute->value_per_locale) {
-                    $productAttributeValue = $product->attribute_values
-                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null)
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
-                } else {
-                    $productAttributeValue = $product->attribute_values
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
+                    $attributeValues = $attributeValues
+                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null);
                 }
             }
 
-            if (! $productAttributeValue) {
+            $attributeValue = $attributeValues->first();
+
+            if (! $attributeValue) {
                 $this->attributeValueRepository->create([
                     'product_id'            => $product->id,
                     'attribute_id'          => $attribute->id,
@@ -247,7 +235,7 @@ abstract class AbstractType
                     'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
                 ]);
             } else {
-                $productAttributeValue->update([$attribute->column_name => $data[$attribute->code]]);
+                $attributeValue->update([$attribute->column_name => $data[$attribute->code]]);
 
                 if (
                     $attribute->type == 'image'
@@ -506,6 +494,10 @@ abstract class AbstractType
             is_callable(config('products.isSaleable')) &&
             call_user_func(config('products.isSaleable'), $this->product) === false
         ) {
+            return false;
+        }
+
+        if (! $this->haveSufficientQuantity(1)) {
             return false;
         }
 
@@ -1078,16 +1070,6 @@ abstract class AbstractType
     }
 
     /**
-     * Get product options.
-     *
-     * @return array
-     */
-    public function getProductOptions()
-    {
-        return $this->productOptions;
-    }
-
-    /**
      * Returns true, if cart item is inactive.
      *
      * @param  \Webkul\Checkout\Contracts\CartItem  $item
@@ -1129,7 +1111,7 @@ abstract class AbstractType
     public function getCustomerGroupPricingOffers()
     {
         $offerLines = [];
-        
+
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
         $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroup) {

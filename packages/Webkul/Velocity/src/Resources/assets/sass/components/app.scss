@@ -259,6 +259,7 @@
 
         img {
             max-width: 100%;
+            width: auto;
             max-height: 100%;
             margin: auto;
         }
@@ -1054,7 +1055,7 @@
             }
 
             input[type='search'] {
-                padding-left: 35px;
+                padding-right: 40px;
             }
 
             input:active,
@@ -1630,6 +1631,7 @@
 
     .price-label {
         margin-right: 6px;
+        margin-top: 4px;
         float: right;
     }
 
@@ -1739,7 +1741,7 @@
 
     .lg-card-container {
         &.list-card {
-            margin: 0 15px;
+            margin: 0 15px 5px 15px;
         }
     }
 
@@ -1868,8 +1870,7 @@
     .sub-categories {
         top: -1px;
         left: 100%;
-        height: 100%;
-        min-height: 330px;
+        height: fit-content;
         z-index: 100;
         padding-top: 10px;
         position: absolute;
@@ -2304,7 +2305,7 @@
 
         ul.items {
             li.item {
-                margin-bottom: 10px;
+                margin-bottom: 0px;
             }
         }
     }
@@ -2590,6 +2591,7 @@
 
         .btn-add-to-cart {
             white-space: pre-wrap;
+            width:220px;
         }
 
         .close-btn {
@@ -2617,11 +2619,22 @@
         }
     }
 
-    .wishlist-icon {
-        top: 5px;
-        right: 52px;
-        position: absolute;
-        display: inline-block;
+    .wishlist {
+        display: flex;
+        padding: 7px;
+        width: max-content;
+        margin-left: 4px;
+    }
+
+    .wishlist span {
+        font-size: 14px;
+        margin-left: 4px;
+    }
+
+    .comparison-remove {
+        float: right;
+        margin-top: -31px;
+        margin-right: 14px;
     }
 }
 

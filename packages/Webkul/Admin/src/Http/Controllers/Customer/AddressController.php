@@ -5,6 +5,8 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Rules\VatIdRule;
+use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
+use Webkul\Core\Contracts\Validations\PhoneNumber;
 use Webkul\Admin\DataGrids\AddressDataGrid;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
@@ -70,21 +72,21 @@ class AddressController extends Controller
      */
     public function store()
     {
+        $this->validate(request(), [
+            'company_name' => [new AlphaNumericSpace],
+            'address1'     => ['required', 'array'],
+            'country'      => ['required', new AlphaNumericSpace],
+            'state'        => ['required', new AlphaNumericSpace],
+            'city'         => ['required', 'string'],
+            'postcode'     => ['required', 'numeric'],
+            'phone'        => ['required', new PhoneNumber],
+            'vat_id'       => [new VatIdRule()],
+        ]);
+
         request()->merge([
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
         ]);
-
-        $this->validate(request(), [
-            'company_name' => 'string',
-            'address1'     => 'string|required',
-            'country'      => 'string|required',
-            'state'        => 'string|required',
-            'city'         => 'string|required',
-            'postcode'     => 'required',
-            'phone'        => 'required',
-            'vat_id'       => new VatIdRule(),
-        ]);
-
+        
         Event::dispatch('customer.addresses.create.before');
 
         $customerAddress = $this->customerAddressRepository->create(request()->all());
@@ -117,19 +119,21 @@ class AddressController extends Controller
      */
     public function update($id)
     {
-        request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
-
         $this->validate(request(), [
-            'company_name' => 'string',
-            'address1'     => 'string|required',
-            'country'      => 'string|required',
-            'state'        => 'string|required',
-            'city'         => 'string|required',
-            'postcode'     => 'required',
-            'phone'        => 'required',
-            'vat_id'       => new VatIdRule(),
+            'company_name' => [new AlphaNumericSpace],
+            'address1'     => ['required', 'array'],
+            'country'      => ['required', new AlphaNumericSpace],
+            'state'        => ['required', new AlphaNumericSpace],
+            'city'         => ['required', 'string'],
+            'postcode'     => ['required', 'numeric'],
+            'phone'        => ['required', new PhoneNumber],
+            'vat_id'       => [new VatIdRule()],
         ]);
-
+        
+        request()->merge([
+            'address1' => implode(PHP_EOL, array_filter(request()->input('address1')))
+        ]);
+        
         Event::dispatch('customer.addresses.update.before', $id);
 
         $customerAddress = $this->customerAddressRepository->update(request()->all(), $id);

@@ -259,7 +259,7 @@ $(function() {
                 window.localStorage.setItem(key, JSON.stringify(value));
 
                 return true;
-            }
+            },
         }
     });
 
@@ -273,12 +273,12 @@ $(function() {
                 miniCartKey: 0,
                 quickView: false,
                 productDetails: [],
+                currentScreen: window.innerWidth,
             };
         },
 
         mounted: function() {
             this.$validator.localize(document.documentElement.lang);
-
             this.addServerErrors();
             this.loadCategories();
             this.addIntersectionObserver();
