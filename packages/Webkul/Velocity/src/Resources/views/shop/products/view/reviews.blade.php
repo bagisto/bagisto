@@ -1,25 +1,32 @@
 @push('css')
     <style>
-        .VueCarousel .VueCarousel-navigation span {
-            display: none;
-        }
-       
-        .product-detail .right h4 {
-            font-weight: 100;
-        }
-        .col-lg-4{
-            margin-left: 50px;
+
+        .col-lg-6{
+            margin-top: 20px;
         }
 
         .image-show{
             display: inline-block!important;
-            height: 100%;
-            width: 100%;
+            height: 90%;
+            width: 90%;
         }
-        .btn{
-            margin-left: 15px;
+
+        .modal-header {
+            display: none;
         }
-   
+
+        .close-btn {
+            display: flex;
+            position: absolute;
+            right: 0;
+            margin-right: 10px;
+            margin-top: -10px;
+        }
+
+        .modal-parent{
+            background: rgba(0,0,0,.7);
+        }
+
     </style>
 @endpush
 
@@ -154,25 +161,12 @@
             <div class="customer-reviews" slot="body">
                 @foreach ($reviews as $review)
                     <div class="row">
-                        <review-image review-detail='{{$review}}' image-detail='{{$review->images}}'></review-image>
-                        <h4 class="col-lg-12 fs18">{{ $review->title }}</h4>
-                        <star-ratings
-                            :ratings="{{ $review->rating }}"
-                            push-class="mr10 fs16 col-lg-12"
-                        ></star-ratings>
 
-                        <div class="review-description col-lg-12">
-                            <span>{{ $review->comment }}</span>
-                        </div>
-
-                        <div class="image col-lg-12">
-                            @if (count($review->images) > 0)
-                                @foreach ($review->images as $image)
-                                    <img class="image" src="{{ $image->url }}" style="height: 50px; width: 50px; margin: 5px;">
-                                @endforeach
-                            @endif
-                        </div>
-
+                        <review-image 
+                        review-detail='{{$review}}' 
+                        image-detail='{{$review->images}}'>
+                        </review-image>
+                        
                         <div class="col-lg-12 mt5">
                             <span>{{ __('velocity::app.products.review-by') }} -</span>
 
@@ -253,10 +247,31 @@
 
 <script type="text/x-template" id="review-image-template">
     <div>
-        <button class="theme-btn btn" type="button" @click='getModal()'>Show-Details</button>
-        <modal id="reviewModal" :is-open='showModal'>
-            <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
+        <h4 class="col-lg-12 fs18" v-text=reviewData.title></h4>
+
+        <div v-if="reviewData.rating" class="stars mr5 fs16 mr10 fs16 col-lg-12">
+            @if (! empty($review))
+            <star-ratings 
+            :ratings="reviewData.rating">
+            </star-ratings>
+            @endif
+        </div>
+
+        <div class="review-description col-lg-12">
+            <span  v-text='reviewData.comment'></span>
+        </div>
+
+        <div class="image col-lg-12" >  
+            <img  class="image" style="height: 50px; width: 50px; margin: 5px;" 
+            v-for="(image, index) in imageData"
+            :src="`${$root.baseUrl}/storage/${image.path}`"  
+            @click="getModal()">
+        </div>
+
+        <modal id="modal-parent scrollable" class="reviewModal":is-open='showModal'>
             <div class="row" slot="body">
+                <div @click="closeModal()" class="close-btn rango-close fs18 cursor-pointer">
+                </div>
                 <div class="col-lg-6">
                     <ul type="none" class="cd-slider">
                         <div class="VueCarousel navigation-hide">
@@ -264,7 +279,6 @@
                                 slides-per-page="1"
                                 navigation-enabled="show"
                                 :slides-count="imageDetails.length">
-
                                 <slide
                                     :key="index"
                                     :slot="`slide-${index}`"
@@ -272,7 +286,7 @@
                                     v-for="(image, index) in imageDetails">
                                     <div tabindex="-1" aria-hidden="true" role="tabpanel" class="VueCarousel-slide">
                                         <li class="selected">
-                                            <img class="image-show":src="`${$root.baseUrl}/storage/${image.path}`">
+                                            <img class="image-show" :src="`${$root.baseUrl}/storage/${image.path}`">
                                         </li>
                                     </div>
                                 </slide>
@@ -280,7 +294,6 @@
                         </div>
                     </ul>
                 </div>
-
                 <div class="col-lg-6 fs16">
                     <h2 class="quick-view-name" v-text='reviewDetails.title'></h2>
                     <div  class="product-rating">
@@ -308,17 +321,31 @@
             return {
                 showModal: false,
                 reviewDetails: [],
-                imageDetails: []
+                imageDetails: [],
+                reviewData: [],
+                imageData: [],
+                
             }
         },
+            mounted: function() {
+                this.reviewData = JSON.parse(this.reviewDetail)
+                this.imageData = JSON.parse(this.imageDetail)
+            },
 
         methods: {
             getModal: function() {
                 this.showModal = true;
                 this.reviewDetails = JSON.parse(this.reviewDetail)
                 this.imageDetails = JSON.parse(this.imageDetail)
+            },
+
+            closeModal: function() {
+                this.showModal= false;
+                this.imageDetails = [];
+                this.reviewDetails = [];
+               
             }
         }
     });
 </script>
-@endpush
+@endpush 
