@@ -428,7 +428,7 @@
                                 this.disable_button = false;
                                 this.isPlaceOrderEnabled = true;
 
-                                if (this.step_numbers[response.data.jump_to_section] == 2 ) {
+                                if (this.step_numbers[response.data.jump_to_section] == 2) {
                                     this.showShippingSection = true;
                                     shippingHtml = Vue.compile(response.data.html);
                                 } else {
@@ -625,7 +625,7 @@
                 mounted: function () {
                     this.templateRender = shippingHtml.render;
                     
-                    for (var i in shippingHtml.staticRenderFns) {
+                    for (let i in shippingHtml.staticRenderFns) {
                         shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
                     }
                     
@@ -642,9 +642,9 @@
 
                 created: function() {
                     if (Object.keys(this.methods).length == 1) {
-                        var firstMethod = Object.keys(this.methods)[0];
+                        let firstMethod = Object.keys(this.methods)[0];
                             
-                        var methodRateObject = this.methods[firstMethod]['rates'][0];
+                        let methodRateObject = this.methods[firstMethod]['rates'][0];
                         this.selected_shipping_method = methodRateObject.method;
                         this.methodSelected();
                     }
