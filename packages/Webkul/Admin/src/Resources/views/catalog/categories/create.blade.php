@@ -102,6 +102,18 @@
                                 </span>
 
                                 <span class="control-info mt-10">{{ __('admin::app.catalog.categories.image-size') }}</span>   
+
+                                <label>{{ __('admin::app.catalog.categories.category_banner') }}</label>
+
+                                <large-image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="category_banner" :multiple="false"></large-image-wrapper>
+
+                                <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
+                                    @foreach ($errors->get('image.*') as $key => $message)
+                                        @php echo str_replace($key, 'Image', $message[0]); @endphp
+                                    @endforeach
+                                </span>
+
+                                <span class="control-info mt-10">{{ __('admin::app.catalog.categories.banner_size') }}</span>   
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.controls.after') !!}

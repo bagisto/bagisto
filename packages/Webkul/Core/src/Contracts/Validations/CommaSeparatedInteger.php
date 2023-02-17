@@ -18,7 +18,7 @@ class CommaSeparatedInteger implements Rule
         $integerValues = explode(',', $value);
 
         foreach ($integerValues as $integerValue) {
-            if (! is_numeric($integerValue)) {
+            if (! preg_match('/^[0-9]+$/', $integerValue)) {
                 return false;
             }
         }
