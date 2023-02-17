@@ -243,7 +243,7 @@
             <div class="control-group" :class="[errors.has('shipment[source]') ? 'has-error' : '']">
                 <label for="shipment[source]" class="required">{{ __('admin::app.sales.shipments.source') }}</label>
 
-                <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source" @change="onChange>
+                <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source" @change="onChange">
                     <option value="">{{ __('admin::app.sales.shipments.select-source') }}</option>
 
                     @foreach ($order->channel->inventory_sources as $key => $inventorySource)
