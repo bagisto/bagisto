@@ -48,7 +48,7 @@ class CategoryRepository extends Repository
         $category = $this->model->create($data);
 
         $this->uploadImages($data, $category);
-         $this->uploadImages($data, $category, 'category_banner');
+        $this->uploadImages($data, $category, 'category_banner');
          
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);

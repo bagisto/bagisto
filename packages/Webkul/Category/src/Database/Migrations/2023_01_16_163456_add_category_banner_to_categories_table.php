@@ -15,8 +15,7 @@ return new class extends Migration
     {
         if (!Schema::hasColumn('categories', 'category_banner'))
         {
-            Schema::table('categories', function (Blueprint $table)
-            {
+            Schema::table('categories', function (Blueprint $table) {
                 $table->string('category_banner')->nullable();
             });
         }
@@ -31,8 +30,7 @@ return new class extends Migration
     {
         if (Schema::hasColumn('categories', 'category_banner'))
         {
-            Schema::table('categories', function (Blueprint $table)
-            {
+            Schema::table('categories', function (Blueprint $table) {
                 $table->dropColumn('category_banner');
             });
         }

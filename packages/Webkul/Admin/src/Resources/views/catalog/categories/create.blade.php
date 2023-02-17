@@ -4,7 +4,6 @@
     {{ __('admin::app.catalog.categories.add-title') }}
 @stop
 
-
 @section('content')
     <div class="content">
         <form method="POST" action="{{ route('admin.catalog.categories.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
@@ -114,7 +113,7 @@
                                     @endforeach
                                 </span>
 
-                                <span class="control-info mt-10">{{ __('admin::app.catalog.categories.banner-size') }}</span>   
+                                <span class="control-info mt-10">{{ __('admin::app.catalog.categories.banner_size') }}</span>   
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.controls.after') !!}
