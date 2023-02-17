@@ -315,9 +315,11 @@
                             });
 
                             let priceLabelElement = document.querySelector('.price-label');
-                            let priceElement = document.querySelector('.special-price') ? document.querySelector('.special-price') : document.querySelector('.final-price');
-                            let regularPriceElement = document.querySelector('.regular-price');
 
+                            let priceElement = document.querySelector('.special-price') ? document.querySelector('.special-price') : document.querySelector('.final-price');
+                            
+                            let regularPriceElement = document.querySelector('.regular-price');
+                            
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
 
@@ -345,10 +347,12 @@
 
                                 eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                             } else {
+                                regularPriceElement.innerHTML = "";
+                               
                                 priceLabelElement.style.display = 'inline-block';
-
+                                
                                 priceElement.innerHTML = this.config.regular_price.formatted_price;
-
+                                
                                 eventBus.$emit('configurable-variant-selected-event', 0)
                             }
                         },

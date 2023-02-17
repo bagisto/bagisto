@@ -578,7 +578,6 @@ class Configurable extends AbstractType
     public function getPriceHtml()
     {
         $prices = $this->getVariantPrice();
-
         $priceHtml = '';
 
         if ($this->haveDiscount()) {
@@ -593,7 +592,6 @@ class Configurable extends AbstractType
                         . '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
                         . '  '
                         . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>';
-
         } else {
             $priceHtml .= '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
                          . '  '
