@@ -783,6 +783,7 @@ h5 {
     width: 750px;
     max-width: 100%;
     position: relative;
+    margin-bottom: 10px;
 
     label {
         display: block;
@@ -1508,6 +1509,26 @@ modal {
 
         &.has-image {
             background-image: none;
+        }
+    }
+}
+
+
+.large-image-wrapper {
+    .image-item {
+        width: 100%;
+        height: 350px;
+
+        .remove-image{
+            display: none;
+            background-image: linear-gradient(-180deg,rgba(0, 0, 0, 0.761),rgba(0,0,0,.24));
+            width: 30%;
+            height: 15%;
+            right: 0;
+            margin-right: 0;
+            text-align: center;
+            font-size: larger;
+            padding-top: 15px;
         }
     }
 }
