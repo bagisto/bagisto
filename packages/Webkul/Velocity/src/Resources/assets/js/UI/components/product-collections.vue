@@ -13,6 +13,7 @@
                     class="col-md-12 no-padding carousel-products"
                     :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
                     <carousel-component
+                        add-class="blur-effect"
                         :slides-per-page="slidesPerPage"
                         pagination-enabled="hide"
                         :id="isCategory ? `${categoryDetails.name}-carousel` : productId"
@@ -86,6 +87,7 @@
             this.getProducts();
             this.setWindowWidth();
             this.setSlidesPerPage(this.windowWidth);
+            this.getProductSlideBlurEffect();
         },
 
         watch: {
@@ -121,7 +123,9 @@
                     console.log(this.__('error.something_went_wrong'));
                 })
             },
-
+            getProductSlideShadow: function () {
+                
+            },
             /* waiting for element */
             waitForElement: function (selector, callback) {
                 if (jQuery(selector).length) {
