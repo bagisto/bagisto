@@ -536,14 +536,15 @@ class Configurable extends AbstractType
 
     /**
      * Return minimum price of variants.
-     * @return array
+     * 
+     * @return float
     */
     protected function getVariantPrice()
     {
         $prices = [];
 
         foreach ($this->getAllowedProducts($this->product) as $variant) {
-            $prices[$variant->id] = $variant->getTypeInstance()->getProductPrices();           
+            $prices[] = $variant->getTypeInstance()->getProductPrices();           
         }
 
         return min($prices);
