@@ -417,6 +417,8 @@ return [
             'customer-notified'            => ':date | Cliente <b>Notificato</b>',
             'customer-not-notified'        => ':date | Cliente <b>Non Notificato</b>',
             'transactions'                 => 'Transactions',
+            'create-success'               => 'Ordine creato con successo',
+            'cancel-error'                 => 'Ordine non cancellabile'
         ],
 
         'invoices' => [
@@ -449,6 +451,7 @@ return [
             'status-overdue'         => 'Pending',
             'status-pending'         => 'Pending Payment',
             'status-paid'            => 'Paid',
+            'create-success'         => 'Fattura creata con successo'
         ],
 
         'shipments' => [
@@ -475,6 +478,7 @@ return [
             'creation-error'    => 'La spedizione non può essere creata per questo ordine.',
             'order-error'       => 'La creazione della spedizione dell\'Ordine non è consentita.',
             'quantity-invalid'  => 'La quantità richiesta non è valida  non è disponibile.',
+            'create-success'    => 'Spedizioni create con successo'
         ],
 
         'refunds' => [
@@ -498,6 +502,7 @@ return [
             'action'                      => 'Azione',
             'view-title'                  => 'Rimborso #:refund_id',
             'invalid-refund-amount-error' => 'La somma rimborsata dovrebbe essere diversa da zero.',
+            'create-success'              => 'Rimborso creato con successo'
 
         ],
 
@@ -996,6 +1001,12 @@ return [
             'name'            => 'Nome',
             'is_user_defined' => 'Utente Definito',
             'yes'             => 'Sì',
+            'create-success'  => 'Gruppo di clienti creato con successo',
+            'update-success'  => 'Gruppo clienti aggiornato con successo',
+            'delete-success'  => 'Gruppo clienti eliminato correttamente',
+            'delete-failed'   => 'Errore! Il gruppo di clienti non può essere eliminato',
+            'customer-associate' => 'Il cliente non può essere eliminato perché il cliente è associato a questo gruppo.',
+       
         ],
 
         'addresses' => [
@@ -1098,6 +1109,11 @@ return [
             'delete'         => 'Iscritto eliminato correttamente',
             'delete-failed'  => 'Errore! L\'iscritto non può essere eliminato',
         ],
+        'create-success' => 'Cliente creato con successo',
+        'update-success' => 'Cliente aggiornato correttamente',
+        'delete-success' => 'Cliente eliminato correttamente',
+        'order-pending'  => 'Impossibile eliminare l\'account cliente perché alcuni ordini sono in sospeso o in fase di elaborazione.',
+        'delete-failed'  => 'Errore riscontrato durante l\'eliminazione del cliente.',
     ],
 
     'promotions' => [
