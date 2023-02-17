@@ -13,8 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('categories', 'category_banner'))
-        {
+        if (! Schema::hasColumn('categories', 'category_banner')) {
             Schema::table('categories', function (Blueprint $table) {
                 $table->string('category_banner')->nullable();
             });
@@ -28,8 +27,7 @@ return new class extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('categories', 'category_banner'))
-        {
+        if (Schema::hasColumn('categories', 'category_banner')) {
             Schema::table('categories', function (Blueprint $table) {
                 $table->dropColumn('category_banner');
             });
