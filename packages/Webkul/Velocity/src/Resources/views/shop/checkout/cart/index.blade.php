@@ -283,7 +283,7 @@
 
     <script type="text/x-template" id='history-orders'>
         <div>
-            <div class="carousel-products recent-history">
+            <div class="carousel-products recent-history" v-if='this.orderItems.length'>
                 <div class="customer-orders">
                     <h2 class="fs20 fw6">{{ __('shop::app.home.history') }}</h2>
                 </div>
@@ -315,6 +315,7 @@
                 return {
                     'currentScreen': window.innerWidth,
                     'slidesPerPage': 5,
+                    'orderItems': @json($orderItems)
                 }
             },
 

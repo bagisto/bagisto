@@ -47,6 +47,18 @@ class ProductsCategoriesProxyController extends Controller
                 if ($product->visible_individually && $product->url_key) {
                     $customer = auth()->guard('customer')->user();
 
+                    $productArr = json_encode([$product->sku]);
+                    if (! isset($_COOKIE['product'])) {
+                        setcookie('product', $productArr, time() + (86400 * 30), "/");
+                        
+                    } else {
+                        $productArr = json_decode($_COOKIE['product']);
+                        array_push($productArr, $product->sku);
+                        $productArr = json_encode($productArr);
+
+                        setcookie('product', $productArr, time() + (86400 * 30), "/");
+                    }
+
                     return view($this->_config['product_view'], compact('product', 'customer'));
                 }
             }

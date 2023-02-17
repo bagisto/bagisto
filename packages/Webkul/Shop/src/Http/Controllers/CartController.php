@@ -54,6 +54,10 @@ class CartController extends Controller
             }
 
             $orderItems = $this->orderItemRepository->getCustomerHistory($orderIds);
+        } else {
+            $products = isset($_COOKIE['product']) ? json_decode($_COOKIE['product']) : [];
+            
+            $orderItems = $this->productRepository->findWhereIn('sku', $products);
         }
 
         return view($this->_config['view'], compact('orderItems'))->with('cart', Cart::getCart());
