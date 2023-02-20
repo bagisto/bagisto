@@ -80,7 +80,7 @@
             </div>
 
             <div class="product-rating col-12 no-padding" v-else>
-                <span class="fs14" v-text="product.firstReviewText"></span>
+                <span style="cursor: pointer;" @click="redirectToReview" v-text="product.firstReviewText"></span>
             </div>
 
             <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
@@ -109,6 +109,10 @@
                 } else {
                     return false;
                 }
+            },
+
+            'redirectToReview': function() {
+                window.location.href = `product/${this.product.slug}/review`
             }
         }
     }
