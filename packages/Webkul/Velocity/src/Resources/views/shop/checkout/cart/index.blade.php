@@ -225,7 +225,7 @@
                             </form>
                         </div>
 
-                        <history></history>
+                        <wishlist-recent-orders></wishlist-recent-orders>
 
                         @include ('shop::products.view.cross-sells')
                     </div>
@@ -281,11 +281,33 @@
         })();
     </script>
 
-    <script type="text/x-template" id='history-orders'>
+    <script type="text/x-template" id='wishlist-recent-orders-template'>
         <div>
-            <div class="carousel-products recent-history" v-if='this.orderItems.length'>
+            <div class="carousel-products" v-if='{{count($productItems)}} != 0'>
                 <div class="customer-orders">
-                    <h2 class="fs20 fw6">{{ __('shop::app.home.history') }}</h2>
+                    <h2 class="fs20 fw6">{{ __('shop::app.home.wishlist') }}</h2>
+                </div>
+
+                <carousel-component
+                    :slides-per-page="slidesPerPage"
+                    navigation-enabled="show"
+                    paginationEnabled="hide"
+                    :slides-count="{{count($productItems)}}">
+
+                    @foreach($productItems as $key => $productItem)
+                        <slide slot="slide-{{ $key }}">
+                            @include ('shop::products.list.card', [
+                                'product' => $productItem->product,
+                                'addToCartBtnClass' => 'small-padding',
+                            ])
+                        </slide>
+                    @endforeach
+                </carousel-component>
+            </div>
+
+            <div class="carousel-products recent-history" v-if='{{count($orderItems)}} != 0'>
+                <div class="customer-orders">
+                    <h2 class="fs20 fw6">{{ __('shop::app.home.recent-item') }}</h2>
                 </div>
 
                 <carousel-component
@@ -308,14 +330,13 @@
     </script>
 
     <script>
-        Vue.component('history', {
-            template: "#history-orders",
+        Vue.component('wishlist-recent-orders', {
+            template: "#wishlist-recent-orders-template",
 
             data: function () {
                 return {
                     'currentScreen': window.innerWidth,
                     'slidesPerPage': 5,
-                    'orderItems': @json($orderItems)
                 }
             },
 

@@ -11,6 +11,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
+use Cookie;
 
 class CartController extends Controller
 {
@@ -27,7 +28,7 @@ class CartController extends Controller
         protected ProductRepository $productRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository,
         protected OrderRepository $orderRepository,
-        protected OrderItemRepository $orderItemRepository
+        protected OrderItemRepository $orderItemRepository,
     )
     {
         $this->middleware('throttle:5,1')->only('applyCoupon');
@@ -46,6 +47,10 @@ class CartController extends Controller
     {
         Cart::collectTotals();
 
+        $orderItems = [];
+
+        $productItems = [];
+
         if ($customerId = auth()->guard('customer')->user()) {
             $orders = $this->orderRepository->findWhere(['customer_id' => $customerId->id]);
 
@@ -54,13 +59,24 @@ class CartController extends Controller
             }
 
             $orderItems = $this->orderItemRepository->getCustomerHistory($orderIds);
+
+            $wishlists = $this->wishlistRepository->findWhere(['customer_id' => $customerId->id]);
+
+            foreach($wishlists as $wishlist) {
+                $productsIds[] = $wishlist->product_id;
+            }
+
+            $productItems = $this->productRepository->findWhereIn('id', $productsIds);
+
         } else {
-            $products = isset($_COOKIE['product']) ? json_decode($_COOKIE['product']) : [];
+            $productsData = Cookie::get('product');
+
+            $products = isset($productsData) ? json_decode($productsData) : [];
             
             $orderItems = $this->productRepository->findWhereIn('sku', $products);
         }
 
-        return view($this->_config['view'], compact('orderItems'))->with('cart', Cart::getCart());
+        return view($this->_config['view'], compact('orderItems','productItems'))->with('cart', Cart::getCart());
     }
 
     /**
