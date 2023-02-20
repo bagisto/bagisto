@@ -16,6 +16,8 @@ $locale = core()->getRequestedLocaleCode();
             </div>
 
             <div class="page-action">
+                {!! view_render_event('bagisto.admin.catalog.categories.create.before') !!}
+                
                 @if (bouncer()->hasPermission('catalog.categories.create'))
                     <a
                         href="{{ route('admin.catalog.categories.create') }}"
@@ -24,6 +26,8 @@ $locale = core()->getRequestedLocaleCode();
                         {{ __('admin::app.catalog.categories.add-title') }}
                     </a>
                 @endif
+
+                {!! view_render_event('bagisto.admin.catalog.categories.create.after') !!}
             </div>
         </div>
 
