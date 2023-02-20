@@ -112,10 +112,6 @@
                     return false;
                 }
             },
-
-            'redirectToReview': function() {
-                window.location.href = `product/${this.product.slug}/review`
-            }
         }
     }
 </script>
