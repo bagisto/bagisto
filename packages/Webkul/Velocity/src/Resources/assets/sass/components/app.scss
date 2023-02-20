@@ -2104,6 +2104,34 @@
     margin-left: 15px;
     padding: 40px 15px !important;
 
+    .childSubCategory {
+        display: flex;
+        margin: 15px 0px;
+
+        a {
+            margin: 0px 20px;
+            color: black;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                img {
+                    height: 160px;
+                    width: 160px;
+                    border-radius: 100%;
+                }
+
+                label {
+                    font-size: 20px;
+                    margin-top: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
     .hero-image {
         display: inline-block;
 
@@ -2774,4 +2802,12 @@
 
 .nested {
     display: none;
+}
+
+.sub-category {
+    .VueCarousel-navigation {
+        position: absolute;
+        right: 0;
+        top: inherit;
+    }
 }
