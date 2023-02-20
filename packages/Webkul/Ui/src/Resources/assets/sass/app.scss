@@ -1461,7 +1461,7 @@ modal {
     .image-item {
         width: 200px;
         height: 200px;
-        margin-right: 0px;
+        margin-right: 20px;
         background: #f8f9fa;
         @include border-radius(3px);
         display: inline-block;
@@ -1509,6 +1509,10 @@ modal {
 
         &.has-image {
             background-image: none;
+        }
+
+        &.variant-image{
+            margin-right: 0px;
         }
     }
 }

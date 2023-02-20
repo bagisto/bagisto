@@ -28,6 +28,7 @@
                 align-items: center;
         }
         
+    
     </style>
 @endpush
 
@@ -213,7 +214,7 @@
             <td>
                 <div :class="['control-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
                     <div v-for='(image, index) in items' class="image-wrapper variant-image image-position">
-                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
+                        <label class="image-item variant-image" v-bind:class="{ 'has-image': imageData[index] }">
                             <input
                                 type="hidden"
                                 :name="[variantInputName + '[images][files][' + image.id + ']']"
