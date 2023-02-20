@@ -627,6 +627,9 @@ h5 {
             &.actions {
                 .action {
                     display: inline-flex;
+                    a {
+                        padding-right: 5px;   
+                    }
                 }
 
                 .icon {
