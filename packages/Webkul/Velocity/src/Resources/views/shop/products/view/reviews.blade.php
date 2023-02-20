@@ -1,6 +1,5 @@
 @push('css')
     <style>
-
         .col-lg-6{
             margin-top: 20px;
         }
@@ -23,21 +22,42 @@
             margin-top: -10px;
         }
 
-        .modal-parent{
-            background: rgba(0,0,0,.7);
+        .reviewModal .mt5{
+            display: table-row;
         }
 
-    </style>
-@endpush
+        .modal-overlay {
+            display: none;
+            overflow-y: auto;
+            z-index: 100;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            background: #000;
+            opacity: .7;
+        }
 
+        .modal-open .modal-overlay {
+            display: block;
+        }
+
+        .modal-open .vue-go-top{
+            display: none;
+        }
+    </style> 
+    
+@endpush
 @php
     $reviewHelper = app('Webkul\Product\Helpers\Review');
 
     $total = $reviewHelper->getTotalReviews($product);
 @endphp
 
-{!! view_render_event('bagisto.shop.products.review.before', ['product' => $product]) !!}
+<div class="modal-overlay"></div>
 
+{!! view_render_event('bagisto.shop.products.review.before', ['product' => $product]) !!}
 @if ($total)
     @php
         $reviews = $reviewHelper->getReviews($product)->paginate(10);
@@ -166,17 +186,6 @@
                         review-detail='{{$review}}' 
                         image-detail='{{$review->images}}'>
                         </review-image>
-                        
-                        <div class="col-lg-12 mt5">
-                            <span>{{ __('velocity::app.products.review-by') }} -</span>
-
-                            <span class="fs16 fw6">
-                                {{ $review->name }},
-                            </span>
-
-                            <span>{{ core()->formatDate($review->created_at, 'F d, Y') }}
-                            </span>
-                        </div>
                     </div>
                 @endforeach
 
@@ -228,7 +237,7 @@
             @endforeach
         </div>
     @endif
-
+   
 @else
     @if (
         core()->getConfigData('catalog.products.review.guest_review')
@@ -262,13 +271,21 @@
         </div>
 
         <div class="image col-lg-12" >  
-            <img  class="image" style="height: 50px; width: 50px; margin: 5px;" 
+            <img  class="image" style="height: 50px; width: 50px; margin: 5px; cursor: pointer;" 
             v-for="(image, index) in imageData"
             :src="`${$root.baseUrl}/storage/${image.path}`"  
             @click="getModal()">
         </div>
+        <div class="col-lg-12 mt5">
+            <span>{{ __('velocity::app.products.review-by') }} -</span>
+            <span class="fs16 fw6" v-text='reviewData.name'></span>
+            <span>
+                @{{ new Date(reviewData.created_at).toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"}) }}
+            </span>
+            
+        </div>
 
-        <modal id="modal-parent scrollable" class="reviewModal":is-open='showModal'>
+        <modal class="reviewModal" :is-open='showModal'>
             <div class="row" slot="body">
                 <div @click="closeModal()" class="close-btn rango-close fs18 cursor-pointer">
                 </div>
@@ -306,6 +323,12 @@
                         </div>
                     </div>
                     <p class="pt14 fs14 description-text" v-text='reviewDetails.comment'></p>
+                    <div class="col-lg-12 mt5">
+                        <span>{{ __('velocity::app.products.review-by') }} -</span>
+                        <span class="fs16 fw6" v-text='reviewDetails.name'></span>
+                        <span class="reviewDate"> @{{ new Date(reviewDetails.created_at).toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"}) }}
+                        </span>
+                    </div>
                 </div>
             </div>
         </modal>           
@@ -327,6 +350,7 @@
                 
             }
         },
+        
             mounted: function() {
                 this.reviewData = JSON.parse(this.reviewDetail)
                 this.imageData = JSON.parse(this.imageDetail)
@@ -344,6 +368,15 @@
                 this.imageDetails = [];
                 this.reviewDetails = [];
                
+            },
+
+            addClassToBody: function () {
+                var body = document.querySelector("body");
+                if(this.isOpen) {
+                    body.classList.add("modal-open");
+                } else {
+                    body.classList.remove("modal-open");
+                }
             }
         }
     });
