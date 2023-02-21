@@ -101,15 +101,15 @@
                             <li>
                                 <a href="{{ route('admin.account.edit') }}">{{ __('admin::app.layouts.my-account') }}</a>
                             </li>
-                            <li v-if="!isMobile()" style="display: flex;justify-content: space-between;">
-                                <div style="margin-top:7px">{{ __('admin::app.layouts.mode') }}</div>
-                                <dark style="margin-top: -9px;width: 70px; height:0px"></dark>
+                            <li v-if="!isMobile()">
+                                <div>{{ __('admin::app.layouts.mode') }}</div>
+                                <dark></dark>
                             </li>
                             <li>
                                 <a href="{{ route('admin.session.destroy') }}">{{ __('admin::app.layouts.logout') }}</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <template>
 
-    <div :class="`row mb15 col-12 carousel-products-header ${rowClass}`">
+    <div :class="`row mt25 mb15 col-12 carousel-products-header ${rowClass}`">
         <div class="col-4 no-padding" v-if="tabs || viewAll || scrollable">
             <h2 class="fs20 fw6">{{ headerHeading }}</h2>
         </div>
