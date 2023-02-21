@@ -164,9 +164,7 @@
             data: function() {
                 return {
                     imageData: '',
-
                     newImage: 0,
-
                     isDragging: false,
                 }
             },
