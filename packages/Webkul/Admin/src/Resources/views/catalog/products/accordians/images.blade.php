@@ -14,6 +14,8 @@
                 v-text="'{{ $errors->first('images.files.*') }}'">
             </span>
 
+            <span class="control-info mt-10">{{ __('admin::app.catalog.products.image-drop') }}</span>
+
             <span class="control-info mt-10">{{ __('admin::app.catalog.products.image-size') }}</span>
         </div>
 
@@ -46,11 +48,11 @@
     </script>
 
     <script type="text/x-template" id="product-image-item-template">
-        <label class="image-item" v-bind:class="{ 'has-image': imageData.length > 0 }">
+        <label class="image-item" v-bind:class="{ 'has-image': imageData.length > 0, dropzone: isDragging }">
             <input
                 type="hidden"
                 :name="'images[files][' + image.id + ']'"
-                v-if="! new_image"/>
+                v-if="! newImage"/>
 
             <input
                 type="hidden"
@@ -64,7 +66,11 @@
                 accept="image/*"
                 multiple="multiple"
                 v-validate="'mimes:image/*'"
-                @change="addImageView($event)"/>
+                class="drag-image "
+                @change="addImageView($event)"
+                @drop="isDragging = false"
+                @dragleave="isDragging = false" 
+                @dragenter="isDragging = true" />
 
             <img
                 class="preview"
@@ -159,7 +165,9 @@
                 return {
                     imageData: '',
 
-                    new_image: 0
+                    newImage: 0,
+
+                    isDragging: false,
                 }
             },
 
@@ -195,7 +203,6 @@
                         }
                     }
                 },
-
                 readFile: function(image) {
                     let reader = new FileReader();
 
@@ -205,7 +212,7 @@
 
                     reader.readAsDataURL(image);
 
-                    this.new_image = 1;
+                    this.newImage = 1;
                 },
 
                 removeImage: function() {
