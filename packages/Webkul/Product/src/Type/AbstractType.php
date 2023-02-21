@@ -835,10 +835,13 @@ abstract class AbstractType
     {
         $minPrice = $this->getMinimalPrice();
 
+        $discountPercentage = round((($this->product->price - $minPrice) / $this->product->price) * 100);
+
         if ($minPrice < $this->product->price) {
             $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>'
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($minPrice)) . '</span>';
+            . '<span class="special-price">' . core()->currency($this->evaluatePrice($minPrice)) . '</span>'
+            . '<span class="card-discount">(' . $discountPercentage . '% off)</span>';
         } else {
             $html = '<span>' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>';
         }

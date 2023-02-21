@@ -317,6 +317,7 @@
                             let priceLabelElement = document.querySelector('.price-label');
                             let priceElement = document.querySelector('.special-price') ? document.querySelector('.special-price') : document.querySelector('.final-price');
                             let regularPriceElement = document.querySelector('.regular-price');
+                            let cardDiscountElement = document.querySelector('.card-discount');
 
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
@@ -331,6 +332,7 @@
                                     this.config.variant_prices[this.simpleProduct].regular_price.formatted_price == "$0.00" 
                                     || this.config.variant_prices[this.simpleProduct].regular_price.formatted_price == this.config.variant_prices[this.simpleProduct].final_price.formatted_price
                                 ) {
+                                    cardDiscountElement.innerHTML = "";
                                     regularPriceElement.innerHTML = "";
                                 }
                                 
@@ -340,11 +342,17 @@
                                     && this.config.variant_prices[this.simpleProduct].regular_price.formatted_price != this.config.variant_prices[this.simpleProduct].final_price.formatted_price 
                                 ) {
                                     regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formatted_price;
+
+                                    let cardDiscountPercentage = ((Number(this.config.variant_prices[this.simpleProduct].regular_price.price) - Number(this.config.variant_prices[this.simpleProduct].final_price.price)) / Number(this.config.variant_prices[this.simpleProduct].regular_price.price)) * 100;
+                                    cardDiscountElement.innerHTML = Math.round(cardDiscountPercentage) + "% off";
+
                                     regularPriceElement.style.display = 'inline-block';
                                 }
 
                                 eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                             } else {
+                                cardDiscountElement.style.display = 'none';
+
                                 priceLabelElement.style.display = 'inline-block';
 
                                 priceElement.innerHTML = this.config.regular_price.formatted_price;
