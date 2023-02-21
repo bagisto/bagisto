@@ -48,7 +48,7 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
+            'collation' => 'utf8mb4_general_ci',
             'prefix' => env('DB_PREFIX', ''),
             'strict' => false,
             'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',
