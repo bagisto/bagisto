@@ -238,6 +238,8 @@
                             @include('shop::checkout.total.summary', ['cart' => $cart])
 
                             <coupon-component></coupon-component>
+                            
+                            <category-products></category-products>
                         </div>
                     @else
                         <div class="fs16 col-12 empty-cart-message">
@@ -357,6 +359,43 @@
                     }
                 }
             }
+        })
+    </script>
+
+    <script type="text/x-template" id='category-products-template'>
+        <div>
+            <div class="row remove-padding-margin">
+                <div class="col-12 no-padding">
+                    <h2 class="fs20 fw6 mb15">Popular Catagories</h2>
+                </div>
+            </div>
+
+            <div :class="`recently-viewed-products-wrapper`">
+                <div class="row small-card-container"
+
+                    <div class="col-4 product-image-container mr15">
+                        <a href="`http://127.0.0.1:8000/checkout/cart`" class="unset">
+                            <div class="product-image"></div>
+                        </a>
+                    </div>
+
+                    <div class="col-8 no-padding card-body align-vertical-top" >
+                        <a :href="`http://127.0.0.1:8000/checkout/cart`" class="unset no-padding">
+                            <div class="product-name">
+                                <span class="fs16 text-nowrap">Product Name</span>
+                            </div>
+
+                            <div class="fs18 card-current-price fw6">Hii</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script>
+        Vue.component('category-products', {
+            template: "#category-products-template",
         })
     </script>
 @endpush
