@@ -19,6 +19,8 @@
                 src="{{ auth()->guard('customer')->check() ? route('velocity.customer.product.compare') : route('velocity.product.compare') }}"
                 :compare-item-count='compareCount'>
             </compare-component-with-badge>
+            
+            @include('shop::checkout.cart.mini-cart')
         </div>
     </script>
 
