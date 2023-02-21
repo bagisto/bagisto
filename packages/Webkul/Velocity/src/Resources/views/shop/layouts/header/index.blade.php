@@ -12,7 +12,6 @@
 
                 <div class="col-lg-7 col-md-12 vc-full-screen">
                     <div class="left-wrapper">
-
                         {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
 
                         @include('velocity::shop.layouts.particals.header-compts', ['isText' => true])

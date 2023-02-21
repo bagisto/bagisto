@@ -20,6 +20,7 @@
             $title = $wishlist ? __('velocity::app.shop.wishlist.remove-wishlist-text') : __('velocity::app.shop.wishlist.add-wishlist-text');     
             $showText = request()->routeIs("velocity.product.compare");
         @endphp
+        
         <a
             class="unset wishlist-icon wishlist{{ $addWishlistClass ?? '' }} text-right"
             href="javascript:void(0);"
