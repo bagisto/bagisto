@@ -1162,6 +1162,18 @@ i.within-circle {
     }
 }
 
+.modal-overlay {
+    display: none;
+    overflow-y: auto;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    background: #000;
+    opacity: .7;
+}
 
 .checkbox,
 .radio {

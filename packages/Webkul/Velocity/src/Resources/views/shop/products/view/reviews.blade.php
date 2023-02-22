@@ -26,19 +26,6 @@
             display: table-row;
         }
 
-        .modal-overlay {
-            display: none;
-            overflow-y: auto;
-            z-index: 100;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            position: fixed;
-            background: #000;
-            opacity: .7;
-        }
-
         .modal-open .modal-overlay {
             display: block;
         }
@@ -100,8 +87,9 @@
                                 auth()->guard('customer')->check())
 
                             <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key]) }}">
-                                <button type="button"
-                                    class="theme-btn light">{{ __('velocity::app.products.write-your-review') }}</button>
+                                <button type="button" class="theme-btn light">
+                                    {{ __('velocity::app.products.write-your-review') }}
+                                </button>
                             </a>
                         @endif
                     </div>
@@ -111,8 +99,9 @@
                         @for ($i = 5; $i >= 1; $i--)
         
                             <div class="row">
-                                <span class="col-3 no-padding fs16 fw6">{{ $i }}
-                                    {{ __('shop::app.reviews.star') }}</span>
+                                <span class="col-3 no-padding fs16 fw6">
+                                    {{ $i }}{{ __('shop::app.reviews.star') }}
+                                </span>
 
                                 <div class="col-7 rating-bar" title="{{ $percentageRatings[$i] }}%">
                                     <div style="width: {{ $percentageRatings[$i] }}%"></div>
@@ -145,8 +134,9 @@
                             auth()->guard('customer')->check())
 
                         <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key]) }}">
-                            <button type="button"
-                                class="theme-btn light">{{ __('velocity::app.products.write-your-review') }}</button>
+                            <button type="button" class="theme-btn light">
+                                {{ __('velocity::app.products.write-your-review') }}
+                            </button>
                         </a>
                     @endif
 
@@ -216,8 +206,7 @@
     @endif
 
 @else
-    @if (core()->getConfigData('catalog.products.review.guest_review') ||
-            auth()->guard('customer')->check())
+    @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
         <div class="customer-rating" style="border: none">
 
             <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key]) }}">
@@ -305,7 +294,8 @@
                             <span>{{ __('velocity::app.products.review-by') }} -</span>
                             <span class="fs16 fw6" v-text='reviewData.name'></span>
                             
-                            <span class="reviewDate"> @{{ new Date(reviewData.created_at).toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"}) }}
+                            <span class="reviewDate"> 
+                                @{{ new Date(reviewData.created_at).toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"}) }}
                             </span>
                         </div>
                     </div>

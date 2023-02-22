@@ -60,4 +60,3 @@
 <script>
     {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
 </script>
-<script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
