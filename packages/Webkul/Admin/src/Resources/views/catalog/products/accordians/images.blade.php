@@ -48,7 +48,7 @@
     </script>
 
     <script type="text/x-template" id="product-image-item-template">
-        <label class="image-item" v-bind:class="{ 'has-image': imageData.length > 0, dropzone: isDragging }">
+        <label class="image-item" v-bind:class="{ 'has-image': imageData.length > 0, 'dropzone': isDragging }">
             <input
                 type="hidden"
                 :name="'images[files][' + image.id + ']'"
@@ -66,7 +66,7 @@
                 accept="image/*"
                 multiple="multiple"
                 v-validate="'mimes:image/*'"
-                class="drag-image "
+                class="drag-image"
                 @change="addImageView($event)"
                 @drop="isDragging = false"
                 @dragleave="isDragging = false" 
