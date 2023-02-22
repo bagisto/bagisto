@@ -27,7 +27,6 @@
         <div class="container">
             <section class="cart-details row no-margin col-12">
                 <h2 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h2>
-
                 @if ($cart)
                     <div class="cart-details-header col-lg-7 col-md-12">
                         <div class="row cart-header col-12 no-padding">
@@ -239,7 +238,7 @@
 
                             <coupon-component></coupon-component>
                             
-                            <category-products></category-products>
+                            <category-products category-id='{{$cart->items[$key]->product->categories[0]->id}}'></category-products>
                         </div>
                     @else
                         <div class="fs16 col-12 empty-cart-message">
@@ -364,28 +363,37 @@
 
     <script type="text/x-template" id='category-products-template'>
         <div>
-            <div class="row remove-padding-margin">
+            <div class="row remove-padding-margin">`
                 <div class="col-12 no-padding">
-                    <h2 class="fs20 fw6 mb15">Popular Catagories</h2>
+                    <h2 class="fs20 fw6 mb15 mt-5">
+                        {{ __('shop::app.checkout.cart.product-related') }}
+                    </h2>
                 </div>
             </div>
 
             <div :class="`recently-viewed-products-wrapper`">
-                <div class="row small-card-container"
-
-                    <div class="col-4 product-image-container mr15">
-                        <a href="`http://127.0.0.1:8000/checkout/cart`" class="unset">
-                            <div class="product-image"></div>
+                <div class="row small-card-container" v-for='product in categoryProducts' style="padding: 10px 0px 10px 0px;">
+                    <div class="col-2 product-image-container mr15">
+                        <a :href="`${baseUrl}/${product.slug}`" class="unset">
+                            <div class="product-image" :style="`background-image: url(${product.image})`">
+                            </div>
                         </a>
                     </div>
-
-                    <div class="col-8 no-padding card-body align-vertical-top" >
-                        <a :href="`http://127.0.0.1:8000/checkout/cart`" class="unset no-padding">
+                    <div class="col-10 no-padding card-body align-vertical-top" style='padding: initial !important' >
+                        <a :href="`${baseUrl}/${product.slug}`" class="unset no-padding">
                             <div class="product-name">
-                                <span class="fs16 text-nowrap">Product Name</span>
+                                <span class="fs16 text-nowrap" v-text='product.name'></span>
                             </div>
 
-                            <div class="fs18 card-current-price fw6">Hii</div>
+                            <div
+                                v-html="product.priceHTML"
+                                class="fs18 card-current-price fw6">
+                            </div>
+
+                            <star-ratings v-if="product.avgRating > 0"
+                                push-class="display-inbl"
+                                :ratings="product.avgRating">
+                            </star-ratings>
                         </a>
                     </div>
                 </div>
@@ -396,6 +404,31 @@
     <script>
         Vue.component('category-products', {
             template: "#category-products-template",
+
+            props: ['categoryId'],
+            
+            data: function () {
+                return {
+                    'categoryProducts': [],
+                }
+            },
+
+            created() {
+                this.getCategoryProducts();
+            },
+
+            methods: {
+                getCategoryProducts: function() {
+                    this.$http.get(`${this.$root.baseUrl}/category-products/${this.categoryId}`)
+                    .then((response) => {
+                        if (response.status == 200) {
+                            this.categoryProducts = response.data.products;
+                        }
+                    }).catch((error)=>{
+                        console.log(error);
+                    });
+                }
+            }
         })
     </script>
 @endpush

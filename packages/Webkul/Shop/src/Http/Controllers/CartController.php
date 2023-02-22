@@ -54,7 +54,7 @@ class CartController extends Controller
         if ($customerId = auth()->guard('customer')->user()) {
             $orders = $this->orderRepository->findWhere(['customer_id' => $customerId->id]);
 
-            foreach($orders as $order) {
+            foreach ($orders as $order) {
                 $orderIds[] = $order->id;
             }
 
@@ -62,12 +62,11 @@ class CartController extends Controller
 
             $wishlists = $this->wishlistRepository->findWhere(['customer_id' => $customerId->id]);
 
-            foreach($wishlists as $wishlist) {
+            foreach ($wishlists as $wishlist) {
                 $productsIds[] = $wishlist->product_id;
             }
 
             $productItems = $this->productRepository->findWhereIn('id', $productsIds);
-
         } else {
             $productsData = Cookie::get('product');
 
@@ -76,7 +75,7 @@ class CartController extends Controller
             $orderItems = $this->productRepository->findWhereIn('sku', $products);
         }
 
-        return view($this->_config['view'], compact('orderItems','productItems'))->with('cart', Cart::getCart());
+        return view($this->_config['view'], compact('orderItems', 'productItems'))->with('cart', Cart::getCart());
     }
 
     /**

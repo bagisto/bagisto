@@ -549,6 +549,7 @@ return [
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
             'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
+            'product-related'           => 'Product related to item in cart',
         ],
 
         'onepage' => [
