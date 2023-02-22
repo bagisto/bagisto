@@ -593,10 +593,11 @@ class Configurable extends AbstractType
 
         if ($prices['regular_price']['price'] != $prices['final_price']['price']) {
 
-            $priceHtml .= '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                        . '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
+            $priceHtml .= '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
+                        . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>'
                         . '  '
-                        . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>';
+                        .'<span class="price-label">' . trans('shop::app.products.price-label') . '</span>';
+                    
         } else {
             $priceHtml .= '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
                          . '  '
