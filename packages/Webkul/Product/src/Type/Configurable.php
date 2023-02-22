@@ -512,11 +512,7 @@ class Configurable extends AbstractType
     */
     public function getAllowedProducts()
     {
-        static $variants = [];
-
-        if (count($variants)) {
-            return $variants;
-        }
+        $variants = [];
 
         $variantCollection = $this->product->variants()
             ->with([
@@ -582,7 +578,8 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        $prices = $this->getVariantPrice();
+        $prices = $this->getVariantPrice(); 
+
         $priceHtml = '';
 
         if ($this->haveDiscount()) {

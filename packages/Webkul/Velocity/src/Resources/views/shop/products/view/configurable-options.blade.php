@@ -342,6 +342,7 @@
                                     && this.config.variant_prices[this.simpleProduct].regular_price.formatted_price != this.config.variant_prices[this.simpleProduct].final_price.formatted_price 
                                 ) {
                                     regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formatted_price;
+                                    
                                     regularPriceElement.style.display = 'inline-block';
                                 }
 
