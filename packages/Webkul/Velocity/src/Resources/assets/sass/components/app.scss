@@ -274,7 +274,7 @@
     .product-rating {
         @extend .text-nowrap;
         color: #212529;
-
+        margin-top: -30px;
         .stars {
             display: inline-block;
         }
@@ -313,9 +313,9 @@
         }
 
         .product-price {
-            margin-top: 5px;
-            margin-bottom: 15px;
-            height: 2.5rem;
+            margin-top: 4px;
+            margin-bottom: 18px;
+            height: 3.5rem;
         }
     }
 
