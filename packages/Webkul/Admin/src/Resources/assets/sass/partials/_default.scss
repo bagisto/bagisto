@@ -100,7 +100,7 @@ body {
             border-left: 1px solid $seprator;
 
             .app-version {
-                padding: 10px 20px 0px 20px;
+                padding: 10px 10px 0px;
                 margin-bottom: -10px;
                 display: block;
                 cursor: default;
@@ -487,20 +487,8 @@ body {
 
 .ticket-list {
     .control-group {
-        &.date {
-            &::after {
-                left: unset;
-                right: 10px;
-                top: 34px;
-            }
-        }
-
-        &.has-error {
-            &.date {
-                &::after {
-                    top: 47px !important;
-                }
-            }
+        .cross-icon {
+            display: none;
         }
 
         @media only screen and (max-width: 425px) {
@@ -833,7 +821,7 @@ body {
     }
 
     .switch-dark {
-        width: 75%;
+        width: 80%;
     }
 
     .page-action {

@@ -110,7 +110,7 @@ class ConfigurationController extends Controller
         /* update row */
         $this->velocityMetadataRepository->update($params, $id);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => trans('velocity::app.admin.meta-data.title')]));
+        session()->flash('success', trans('velocity::app.admin.meta-data.update-success'));
 
         return redirect()->route($this->_config['redirect'], ['locale' => $locale]);
     }

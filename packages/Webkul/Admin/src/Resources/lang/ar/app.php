@@ -85,7 +85,7 @@ return [
         'discount'                 => 'خصم',
         'cms'                      => 'CMS',
         'transactions'             => 'المعاملات',
-        'mode'                     => 'الوضع',
+        'mode'                     => 'الوضع الداكن',
         'account-title'            => 'حساب',
     ],
 
@@ -418,6 +418,8 @@ return [
             'submit-comment'               => 'إرسال تعليق',
             'notify-customer'              => 'بإخطار العملاء',
             'transactions'                 => 'المعاملات',
+            'create-success'               => 'تم إنشاء الطلب بنجاح',
+            'cancel-error'                 => "لم يتم إلغاء الطلب"
         ],
 
         'invoices' => [
@@ -450,6 +452,7 @@ return [
             'status-overdue'         => 'متأخر',
             'status-pending'         => 'في انتظار الدفع',
             'status-paid'            => 'مدفوع',
+            'create-success'         => 'تم إنشاء الفاتورة بنجاح'
         ],
 
         'shipments' => [
@@ -477,6 +480,7 @@ return [
             'creation-error'    => 'لا يمكن إنشاء الشحنة لهذا الطلب.',
             'order-error'       => 'لا يسمح بإنشاء شحنة الطلب.',
             'quantity-invalid'  => 'الكمية المطلوبة غير صالحة أو غير متاحة.',
+            'create-success'    => 'تم إنشاء الشحنات بنجاح'
         ],
 
         'refunds' => [
@@ -501,6 +505,7 @@ return [
             'action'                      => 'عمل',
             'view-title'                  => '#:refund_id إعادة مال',
             'invalid-refund-amount-error' => 'يجب ألا يكون المبلغ المسترد صفرًا',
+            'create-success'              => 'تم إنشاء رد الأموال بنجاح'
         ],
 
         'transactions' => [
@@ -1027,6 +1032,12 @@ return [
             'name'            => 'اسم',
             'is_user_defined' => 'تعريف المستخدم',
             'yes'             => 'نعم.',
+            'create-success'  => 'تم إنشاء مجموعة العملاء بنجاح',
+            'update-success'  => 'تم تحديث مجموعة العملاء بنجاح',
+            'delete-success'  => 'تم حذف مجموعة العملاء بنجاح',
+            'delete-failed'   => 'خطأ! لا يمكن حذف مجموعة العملاء',
+            'customer-associate'  => 'لا يمكن حذف العميل لأن العميل مرتبط بهذه المجموعة.',
+        
         ],
 
         'addresses' => [
@@ -1133,6 +1144,11 @@ return [
             'list'  => ':customer_name\'s قائمة الطلبات',
             'title' => 'ترتيب' ,
         ],
+        'create-success' => 'تم إنشاء العميل بنجاح',
+        'update-success' => 'تم تحديث العميل بنجاح',
+        'delete-success' => 'تم حذف العميل بنجاح',
+        'order-pending'  => 'لا يمكن حذف حساب العميل لأن بعض الطلبات معلقة أو حالة المعالجة.',
+        'delete-failed'  => 'حدث خطأ أثناء حذف العميل.',
     ],
 
     'promotions' => [

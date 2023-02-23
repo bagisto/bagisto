@@ -86,7 +86,7 @@ return [
         'cms'                      => 'CMS',
         'transactions'             => 'Transactions',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
-        'mode'                     => 'Mode',
+        'mode'                     => 'Dark Mode',
     ],
 
     'acl' => [
@@ -421,6 +421,8 @@ return [
             'customer-notified'            => ':date | Customer <b>Notified</b>',
             'customer-not-notified'        => ':date | Customer <b>Not Notified</b>',
             'transactions'                 => 'Transactions',
+            'create-success'               => 'Order created successfully',
+            'cancel-error'                 => 'Order not be canceled'
         ],
 
         'invoices' => [
@@ -453,6 +455,7 @@ return [
             'status-overdue'         => 'Overdue',
             'status-pending'         => 'Pending Payment',
             'status-paid'            => 'Paid',
+            'create-success'         => 'Invoice created successfully'
         ],
 
         'shipments' => [
@@ -480,6 +483,7 @@ return [
             'creation-error'    => 'Shipment can not be created for this order.',
             'order-error'       => 'Order shipment creation is not allowed.',
             'quantity-invalid'  => 'Requested quantity is invalid or not available.',
+            'create-success'    => 'Shipments created successfully'
         ],
 
         'refunds' => [
@@ -503,6 +507,7 @@ return [
             'action'                      => 'Action',
             'view-title'                  => 'Refund #:refund_id',
             'invalid-refund-amount-error' => 'Refund amount should be non zero.',
+            'create-success'              => 'Refund created successfully'
 
         ],
 
@@ -751,6 +756,8 @@ return [
             'meta_description'         => 'Meta Description',
             'meta_keywords'            => 'Meta Keywords',
             'image'                    => 'Image',
+            'category_banner'          => 'Category Banner',
+            'banner_size'              => 'Banner resolution should be like 1920*350',
             'filterable-attributes'    => 'Filterable Attributes',
             'attributes'               => 'Attributes',
             'image-size'               => 'Image resolution should be like 300px X 168px',
@@ -1033,6 +1040,11 @@ return [
             'name'            => 'Name',
             'is_user_defined' => 'User Defined',
             'yes'             => 'Yes',
+            'create-success'  => 'Customer Group created successfully',
+            'update-success'  => 'Customer Group updated successfully',
+            'delete-success'  => 'Customer Group deleted successfully',
+            'delete-failed'   => 'Error! Customer Group cannot be deleted',
+            'customer-associate'        => 'Customer can not be deleted because customer is associated with this group.',
         ],
 
         'addresses' => [
@@ -1136,13 +1148,17 @@ return [
             'delete-failed'  => 'Error! Subscriber cannot be deleted',
             'update-failed'  => 'Error! You cannot unsubscribe the subscriber',
             'delete'         => 'Subscriber was successfully deleted',
-            'delete-failed'  => 'Error! Subscriber cannot be deleted',
         ],
 
         'orders' => [
             'list'  => ':customer_name\'s orders List',
             'title' => 'Orders',
         ],
+        'create-success' => 'Customer created successfully',
+        'update-success' => 'Customer updated successfully',
+        'delete-success' => 'Customer deleted successfully',
+        'order-pending'  => 'Cannot delete customer account because some Order(s) are pending or processing state.',
+        'delete-failed'  => 'Error encountered while deleting customer.',
     ],
 
     'promotions' => [

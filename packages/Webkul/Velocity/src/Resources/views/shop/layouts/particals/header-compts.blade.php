@@ -1,5 +1,7 @@
 
-<header-component></header-component>
+<header-component
+    items-count-src="{{ route('velocity.product.item-count') }}"
+></header-component>
 
 @push('scripts')
     <script type="text/x-template" id='header-component-template'>
@@ -17,12 +19,16 @@
                 src="{{ auth()->guard('customer')->check() ? route('velocity.customer.product.compare') : route('velocity.product.compare') }}"
                 :compare-item-count='compareCount'>
             </compare-component-with-badge>
+            
+            @include('shop::checkout.cart.mini-cart')
         </div>
     </script>
 
     <script>
         Vue.component('header-component',{
             template: '#header-component-template',
+
+            props: ['itemsCountSrc'],
 
             data: function() {
                 return {
@@ -51,7 +57,7 @@
                             this.compareCount = comparedItems.length;
                         }
                     } else {
-                        const response = await fetch("/items-count");
+                        const response = await fetch(this.itemsCountSrc);
                         const data = await response.json();
 
                         this.compareCount = data.compareProductsCount;
