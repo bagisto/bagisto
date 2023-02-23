@@ -24,7 +24,6 @@
                     :key="columnKey"
                     v-for="(column, columnKey) in columns"
                     v-if ="column.visibility != false"
-                    
                 >
                     <span
                         v-text="column.label"
