@@ -23,6 +23,7 @@ return [
     'home' => [
         'page-title'          => 'فروشگاه - خانه',
         'featured-products'   => 'محصولات برجسته',
+        'history'             => 'Recent History',
         'new-products'        => 'محصولات جدید',
         'verify-email'        => 'حساب ایمیل خود را تأیید کنید',
         'resend-verify-email' => 'ایمیل تایید را دوباره بفرست',

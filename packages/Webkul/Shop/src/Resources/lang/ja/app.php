@@ -22,6 +22,7 @@ return [
     'home' => [
         'page-title'          => config('app.name') . ' - ホーム',
         'featured-products'   => 'おすすめ',
+        'history'             => 'Recent History',
         'new-products'        => 'New',
         'verify-email'        => 'メールアドレスを確認します',
         'resend-verify-email' => '確認メールを再送信',

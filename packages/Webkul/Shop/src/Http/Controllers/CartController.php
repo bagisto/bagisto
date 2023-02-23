@@ -9,6 +9,9 @@ use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Cookie;
 
 class CartController extends Controller
 {
@@ -23,7 +26,9 @@ class CartController extends Controller
     public function __construct(
         protected WishlistRepository $wishlistRepository,
         protected ProductRepository $productRepository,
-        protected CartRuleCouponRepository $cartRuleCouponRepository
+        protected CartRuleCouponRepository $cartRuleCouponRepository,
+        protected OrderRepository $orderRepository,
+        protected OrderItemRepository $orderItemRepository,
     )
     {
         $this->middleware('throttle:5,1')->only('applyCoupon');
@@ -42,7 +47,35 @@ class CartController extends Controller
     {
         Cart::collectTotals();
 
-        return view($this->_config['view'])->with('cart', Cart::getCart());
+        $orderItems = [];
+
+        $productItems = [];
+
+        if ($customerId = auth()->guard('customer')->user()) {
+            $orders = $this->orderRepository->findWhere(['customer_id' => $customerId->id]);
+
+            foreach ($orders as $order) {
+                $orderIds[] = $order->id;
+            }
+
+            $orderItems = $this->orderItemRepository->getCustomerHistory($orderIds);
+
+            $wishlists = $this->wishlistRepository->findWhere(['customer_id' => $customerId->id]);
+
+            foreach ($wishlists as $wishlist) {
+                $productsIds[] = $wishlist->product_id;
+            }
+
+            $productItems = $this->productRepository->findWhereIn('id', $productsIds);
+        } else {
+            $productsData = Cookie::get('product');
+
+            $products = isset($productsData) ? json_decode($productsData) : [];
+            
+            $orderItems = $this->productRepository->findWhereIn('sku', $products);
+        }
+
+        return view($this->_config['view'], compact('orderItems', 'productItems'))->with('cart', Cart::getCart());
     }
 
     /**

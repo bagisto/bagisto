@@ -226,4 +226,18 @@ class OrderItemRepository extends Repository
 
         $orderedInventory->update(['qty' => $qty]);
     }
+
+    /**
+     * Get customer order history
+     *
+     * @param array $orderIds
+     * @return Webkul\Sales\Repositories\OrderItemRepository
+     */
+    public function getCustomerHistory($orderIds) 
+    {
+        return $this->model->whereIn('order_id', $orderIds)
+                            ->distinct()
+                            ->groupBy('product_id')
+                            ->get();
+    }
 }
