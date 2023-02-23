@@ -369,6 +369,22 @@ h5 {
             list-style-type: none;
             padding: 0px;
 
+            li:nth-child(2) {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .dark-switch {
+                    margin-top: -9px;
+                    width: 83px;
+
+                    .control-group {
+                        margin-bottom: inherit;
+                    }
+                }
+                            
+            }
+
             li {
                 padding: 5px 0px;
 
