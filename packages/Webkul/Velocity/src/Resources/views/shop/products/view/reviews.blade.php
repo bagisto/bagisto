@@ -4,22 +4,19 @@
             margin-top: 20px;
         }
 
-        .image-show {
-            display: inline-block !important;
-            height: 90%;
-            width: 90%;
-        }
-
         .modal-header {
-            display: none;
+            background: white;
+            position: fixed;
+            width: 600px;
+            max-width: 80%;
+            z-index: 102;
+            border-bottom: none; 
+            justify-content: right;
+            border-top-right-radius: 0px;
         }
 
-        .close-btn {
-            display: flex;
-            position: absolute;
-            right: 0;
-            margin-right: 10px;
-            margin-top: -10px;
+        .modal-body {
+            margin-top: 30px;
         }
 
         .reviewModal .mt5 {
@@ -32,6 +29,14 @@
 
         .modal-open .vue-go-top {
             display: none;
+        }
+
+        .modal-header i:nth-child(2){
+            display: none;
+        }
+
+        .modal-container{
+            border-radius: 0px;
         }
     </style>
 @endpush
@@ -251,10 +256,10 @@
             </div>
 
             <modal class="reviewModal" :is-open='showModal'>
+                <h3 slot="header">
+                    <i @click="closeModal()" class="icon remove-icon "></i>
+                </h3>
                 <div class="row" slot="body">
-                    <div @click="closeModal()" class="close-btn rango-close fs18 cursor-pointer">
-                    </div>
-
                     <div class="col-lg-6">
                         <ul type="none" class="cd-slider">
                             <div class="VueCarousel navigation-hide">

@@ -1150,7 +1150,7 @@ i.within-circle {
 
 .category {
     line-height: 2.0rem !important;
-}
+}z
 
 .sub-category {
     padding-left: 0 !important;
@@ -1173,6 +1173,17 @@ i.within-circle {
     position: fixed;
     background: #000;
     opacity: .7;
+}
+
+.description-text{
+    overflow-y: auto;
+    max-height: 150px;
+}
+
+.image-show {
+    display: inline-block !important;
+    height: 90%;
+    width: 90%;
 }
 
 .checkbox,
