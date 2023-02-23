@@ -123,8 +123,39 @@
                     console.log(this.__('error.something_went_wrong'));
                 })
             },
-            getProductSlideShadow: function () {
-                
+            getProductSlideBlurEffect: function () {
+                $(".VueCarousel-navigation-next").each(function( index ) {
+                    var carousalButton = $(this).attr('class');
+                    if(carousalButton){
+                        carousalButton = carousalButton.split(" ");
+                        if($.inArray("VueCarousel-navigation--disabled",carousalButton) == -1){
+                            $(this).parents().eq(1).addClass('VueCarousel-shadow-right');
+                            $(this).parents().eq(1).removeClass('VueCarousel-shadow-left');
+                        }  
+                    }
+                });   
+                $(".VueCarousel-navigation-next").click(function(){
+                    var carousalButton = $(this).attr('class');
+                    carousalButton = carousalButton.split(" ");
+                    if($.inArray("VueCarousel-navigation--disabled",carousalButton) == 2){
+                        $(this).parents().eq(1).removeClass('VueCarousel-shadow-right');
+                        $(this).parents().eq(1).addClass('VueCarousel-shadow-left');
+                    } else {
+                        $(this).parents().eq(1).addClass('VueCarousel-shadow-right');
+                        $(this).parents().eq(1).addClass('VueCarousel-shadow-left');
+                    }
+                })
+                $(".VueCarousel-navigation-prev").click(function(){
+                    var carousalButton = $(this).attr('class');
+                    carousalButton = carousalButton.split(" ");
+                    if($.inArray("VueCarousel-navigation--disabled",carousalButton) == 2){
+                        $(this).parents().eq(1).addClass('VueCarousel-shadow-right');
+                        $(this).parents().eq(1).removeClass('VueCarousel-shadow-left');
+                    } else {
+                        $(this).parents().eq(1).addClass('VueCarousel-shadow-right');
+                        $(this).parents().eq(1).addClass('VueCarousel-shadow-left');
+                    }
+                });
             },
             /* waiting for element */
             waitForElement: function (selector, callback) {

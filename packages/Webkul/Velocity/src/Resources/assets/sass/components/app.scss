@@ -233,7 +233,7 @@
 }
 
 .product-card-new {
-    width: 225px;
+    width: 12rem;
     border: none !important;
     margin: 0 5px 10px 10px;
 
@@ -2243,6 +2243,27 @@
             }
         }
     }
+}
+
+.VueCarousel-shadow-left::before {
+    content: "";
+    width: 20%;
+    height: 100%;
+    display: inline-block;
+    background: linear-gradient(90deg, rgba(247,247,247,1) 8%, rgba(251,251,251,0) 100%);
+    position: absolute;
+    z-index: 1;
+}
+
+.VueCarousel-shadow-right::after {
+    content: "";
+    width: 20%;
+    height: 100%;
+    display: inline-block;
+    background: linear-gradient(90deg, rgba(247,247,247,0) 8%, rgba(251,251,251,1) 100%);
+    position: absolute;
+    z-index: 1;
+    right: 0;
 }
 
 .filter-attributes-item {
