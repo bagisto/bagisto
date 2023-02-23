@@ -59,7 +59,7 @@
             <div class="page-content">
                 <div class="form-container">
                     <div
-                        v-for='(attribute, index) in super_attributes'
+                        v-for='(attribute, index) in superAttributes'
                         :class="['control-group', errors.has('add-variant-form.' + attribute.code) ? 'has-error' : '']">
                         <label
                             class="required"
@@ -132,13 +132,13 @@
                 <div class="control-group">
                     <span class="radio">
                         <input
-                            id="default_variant_id"
+                            id="defaultVariantId"
                             type="radio"
-                            name="default_variant_id"
+                            name="defaultVariantId"
                             :value="variant.id"
                             v-on:change="checkDefaultVariant(variant.id)"
-                            :checked="variant.id == default_variant_id">
-                        <label class="radio-view" :for="[variantInputName + '[default_variant_id]']"></label>
+                            :checked="variant.id == defaultVariantId">
+                        <label class="radio-view" :for="[variantInputName + '[defaultVariantId]']"></label>
                     </span>
                 </div>
             </td>
@@ -200,7 +200,7 @@
                             <input
                                 type="hidden"
                                 :name="[variantInputName + '[images][files][' + image.id + ']']"
-                                v-if="! new_image[index]"/>
+                                v-if="! newImage[index]"/>
 
                             <input
                                 :ref="'imageInput' + index"
@@ -210,7 +210,11 @@
                                 accept="image/*"
                                 multiple="multiple"
                                 v-validate="'mimes:image/*'"
-                                @change="addImageView($event, index)"/>
+                                class="drag-image"
+                                @change="addImageView($event, index)"
+                                @drop="(event) => event.target.parentElement.classList.remove('dropzone')"
+                                @dragleave="(event) => event.target.parentElement.classList.remove('dropzone')" 
+                                @dragenter="(event) => event.target.parentElement.classList.add('dropzone')" />
 
                             <img
                                 class="preview"
@@ -341,14 +345,14 @@
             ];
         });
 
-        let super_attributes = @json(app('\Webkul\Product\Repositories\ProductRepository')->getSuperAttributes($product));
+        let superAttributes = @json(app('\Webkul\Product\Repositories\ProductRepository')->getSuperAttributes($product));
         let variants = @json($product->variants);
 
         Vue.component('variant-form', {
             data: function () {
                 return {
                     variant: {},
-                    super_attributes: super_attributes
+                    superAttributes: superAttributes
                 }
             },
 
@@ -373,7 +377,7 @@
                                     }
                                 }
 
-                                return matchCount == self.super_attributes.length;
+                                return matchCount == self.superAttributes.length;
                             })
 
                             if (filteredVariants.length) {
@@ -410,7 +414,7 @@
                 resetModel: function () {
                     let self = this;
 
-                    this.super_attributes.forEach(function (attribute) {
+                    this.superAttributes.forEach(function (attribute) {
                         self.variant[attribute.code] = '';
                     })
                 }
@@ -428,7 +432,7 @@
 
                     old_variants: @json(old('variants')),
 
-                    superAttributes: super_attributes
+                    superAttributes: superAttributes
                 }
             },
 
@@ -490,16 +494,16 @@
 
             data: function () {
                 return {
-                    default_variant_id: parseInt('{{ $product->additional['default_variant_id'] ?? null }}'),
+                    defaultVariantId: parseInt('{{ $product->additional['default_variant_id'] ?? null }}'),
                     inventorySources: @json($inventorySources),
                     inventories: {},
                     totalQty: 0,
-                    superAttributes: super_attributes,
+                    superAttributes: superAttributes,
                     items: [],
                     imageCount: 0,
                     images: {},
                     imageData: [],
-                    new_image: [],
+                    newImage: [],
                 }
             },
 
@@ -542,7 +546,7 @@
                 },
 
                 checkDefaultVariant: function (variantId) {
-                    this.default_variant_id = variantId;
+                    this.defaultVariantId = variantId;
                 },
 
                 optionName: function (optionId) {
@@ -624,7 +628,7 @@
 
                     reader.readAsDataURL(image);
 
-                    this.new_image[index] = 1;
+                    this.newImage[index] = 1;
                 },
             }
         });
