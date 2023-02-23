@@ -4,7 +4,7 @@
             margin-top: 20px;
         }
 
-        .modal-header {
+        .reviewModal .modal-header {
             background: white;
             position: fixed;
             width: 600px;
