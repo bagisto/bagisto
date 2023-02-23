@@ -136,6 +136,15 @@ label {
     text-decoration: none;
 }
 
+/*
+    default hover theme
+*/
+.default-hover-text{
+    &:hover {
+        color: #26A37C;
+    }
+}
+
 #top {
     @include box-shadow(0 0 0 0 rgba(0, 0, 0, 0.24));
 
