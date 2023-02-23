@@ -5,14 +5,14 @@
  */
 
 /*!
- * Sizzle CSS Selector Engine v2.3.6
+ * Sizzle CSS Selector Engine v2.3.9
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://js.foundation/
  *
- * Date: 2021-02-16
+ * Date: 2022-12-19
  */
 
 /*!
@@ -33,7 +33,7 @@
  */
 
 /*!
- * jQuery JavaScript Library v3.6.1
+ * jQuery JavaScript Library v3.6.3
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -43,7 +43,7 @@
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2022-08-26T17:52Z
+ * Date: 2022-12-20T21:28Z
  */
 
 /*!

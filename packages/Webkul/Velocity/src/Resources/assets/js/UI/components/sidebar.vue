@@ -5,7 +5,7 @@
         :class="`sidebar ${addClass ? addClass : ''}`"
         v-if="slicedCategories && slicedCategories.length > 0"
     >
-        <ul type="none" style="margin-bottom: 0">
+        <ul type="none" class="main-category">
             <li
                 :key="categoryIndex"
                 :id="`category-${category.id}`"
@@ -13,6 +13,7 @@
                 @mouseout="toggleSidebar(id, $event, 'mouseout')"
                 @mouseover="toggleSidebar(id, $event, 'mouseover')"
                 v-for="(category, categoryIndex) in slicedCategories"
+                v-if="category['name']"
             >
                 <a
                     :href="`${$root.baseUrl}/${category.slug}`"

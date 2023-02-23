@@ -26,8 +26,10 @@
                     <div
                         class="step-content shipping"
                         id="shipping-section"
-                        v-if="showShippingSection">
+                        v-if="showShippingSection"                      
+                        >
                         <shipping-section
+                            :methods="allShippingMethods"
                             :key="shippingComponentKey"
                             @onShippingMethodSelected="shippingMethodSelected($event)">
                         </shipping-section>
@@ -134,8 +136,10 @@
                         new_shipping_address: false,
                         selected_payment_method: '',
                         selected_shipping_method: '',
+                        isShippingMethod:false,
                         countries: [],
                         countryStates: [],
+                        allShippingMethods: [],
 
                         step_numbers: {
                             'information': 1,
@@ -339,7 +343,6 @@
                             this.$http.post("{{ route('shop.customer.checkout.exist') }}", {email: this.address.billing.email})
                             .then(response => {
                                 this.is_customer_exist = response.data ? 1 : 0;
-                                console.log(this.is_customer_exist);
 
                                 if (response.data)
                                     this.$root.hideLoader();
@@ -400,6 +403,10 @@
                                     if (address.last_name) {
                                         this.address.billing.last_name = address.last_name;
                                     }
+
+                                    if (address.country) {
+                                        this.address.shipping.country = address.country;
+                                    }
                                 }
 
                                 if (address.id == this.address.shipping.address_id) {
@@ -415,6 +422,10 @@
 
                                     if (address.last_name) {
                                         this.address.shipping.last_name = address.last_name;
+                                    }
+
+                                    if (address.country) {
+                                        this.address.shipping.country = address.country;
                                     }
                                 }
                             });
@@ -441,6 +452,8 @@
                                 }
 
                                 shippingMethods = response.data.shippingMethods;
+
+                                this.allShippingMethods = shippingMethods;
 
                                 this.shippingComponentKey++;
 
@@ -598,6 +611,13 @@
             Vue.component('shipping-section', {
                 inject: ['$validator'],
 
+                props: {
+                    methods: {
+                        type: Object,
+                        default: {}
+                    },
+                },
+
                 data: function () {
                     return {
                         templateRender: null,
@@ -612,11 +632,11 @@
 
                 mounted: function () {
                     this.templateRender = shippingHtml.render;
-
-                    for (var i in shippingHtml.staticRenderFns) {
+                    
+                    for (let i in shippingHtml.staticRenderFns) {
                         shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
                     }
-
+                    
                     eventBus.$emit('after-checkout-shipping-section-added');
                 },
 
@@ -626,6 +646,16 @@
                             this.templateRender() :
                             '')
                         ]);
+                },
+
+                created: function() {
+                    if (Object.keys(this.methods).length == 1) {
+                        let firstMethod = Object.keys(this.methods)[0];
+                            
+                        let methodRateObject = this.methods[firstMethod]['rates'][0];
+                        this.selected_shipping_method = methodRateObject.method;
+                        this.methodSelected();
+                    }
                 },
 
                 methods: {
