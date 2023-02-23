@@ -17,29 +17,34 @@
             $isConfirm = isset($route) ? 'true' : 'false';
 
             /* title */
-            $title = $wishlist ? __('velocity::app.shop.wishlist.remove-wishlist-text') : __('velocity::app.shop.wishlist.add-wishlist-text');
+            $title = $wishlist ? __('velocity::app.shop.wishlist.remove-wishlist-text') : __('velocity::app.shop.wishlist.add-wishlist-text');     
         @endphp
-        <div>
-            <a
-                class="unset wishlist-icon wishlist{{ $addWishlistClass ?? '' }} text-right"
-                href="javascript:void(0);"
-                title="{{ $title }}"
-                onclick="submitWishlistForm(
-                    '{{ $href }}',
-                    '{{ $method }}',
-                    {{ $isConfirm }},
-                    '{{ csrf_token() }}'
-                )"
+        
+        <a
+            class="unset wishlist-icon wishlist{{ $addWishlistClass ?? '' }} text-right"
+            href="javascript:void(0);"
+            title="{{ $title }}"
+            onclick="submitWishlistForm(
+                '{{ $href }}',
+                '{{ $method }}',
+                {{ $isConfirm }},
+                '{{ csrf_token() }}'
+            )"
             >
+
+            @if (request()->routeIs('shop.customer.wishlist.index'))
+                <wishlist-component add-class="rango-delete fs24"></wishlist-component>
+            @else
                 <wishlist-component active="{{ $wishlist ? false : true }}"></wishlist-component>
-                
-                @if (isset($text))
-                    {!! $text !!}
-                @else
-                    <span>{{__('admin::app.admin.system.wishlist')}}</span>
-                @endif
-            </a>
-        </div>
+            @endif
+            
+            
+            @if (isset($text))
+                {!! $text !!}
+            @elseif ($showText ?? false)
+                <span>{{__('admin::app.admin.system.wishlist')}}</span>
+            @endif
+        </a>        
     @endauth
 
     @guest('customer')
@@ -53,9 +58,15 @@
                     class="unset wishlist-icon wishlist {{ $addWishlistClass ?? '' }} text-right"
                     href="javascript:void(0);"
                     title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
-                    onclick="document.getElementById('wishlist-{{ $product->id }}').submit();">
-
+                    onclick="document.getElementById('wishlist-{{ $product->id }}').submit();"
+                >
                     <wishlist-component active="false"></wishlist-component>
+
+                    @if (isset($text))
+                        {!! $text !!}
+                    @elseif ($showText ?? false)
+                        <span>{{__('admin::app.admin.system.wishlist')}}</span>
+                    @endif
                 </a>
             </div>
         </form>
