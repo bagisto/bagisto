@@ -315,6 +315,7 @@
         .product-price {
             margin-top: 5px;
             margin-bottom: 15px;
+            height: 2.5rem;
         }
     }
 
@@ -1606,7 +1607,6 @@
     .price-label {
         margin-right: 6px;
         margin-top: 4px;
-        float: right;
     }
 
     .regular-price {
@@ -1633,6 +1633,11 @@
             font-weight: 500;
             margin-right: 10px;
             text-decoration: line-through;
+            margin-left: 6px !important;
+        }
+
+        .bundle-special-price-from{
+            margin-left:5px ;
         }
 
         .bundle-special-price {
@@ -1641,11 +1646,11 @@
         }
 
         .bundle-to {
-            display: block;
             font-size: 15px !important;
             font-weight: 500;
-            margin-top: 1px;
             margin-bottom: 1px;
+            display: flex;
+            flex-wrap: wrap;
         }
     }
 

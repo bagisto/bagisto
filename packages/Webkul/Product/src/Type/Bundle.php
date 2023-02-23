@@ -232,24 +232,29 @@ class Bundle extends AbstractType
         }
 
         $priceHtml .= '<div class="price-from">';
+         
+        $priceHtml .= '<div class="bundle-to">From';
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
+
             $priceHtml .= '<span class="bundle-regular-price">' . $prices['from']['regular_price']['formatted_price'] . '</span>'
                 . '<span class="bundle-special-price">' . $prices['from']['final_price']['formatted_price'] . '</span>';
+            $priceHtml .= '</div>';
         } else {
-            $priceHtml .= '<span>' . $prices['from']['regular_price']['formatted_price'] . '</span>';
+            $priceHtml .= '<span  class="bundle-special-price-from">' . $prices['from']['regular_price']['formatted_price'] . '</span>';
         }
 
         if ($prices['from']['regular_price']['price'] != $prices['to']['regular_price']['price']
             || $prices['from']['final_price']['price'] != $prices['to']['final_price']['price']
         ) {
-            $priceHtml .= '<span class="bundle-to">To</span>';
+            $priceHtml .= '<div class="bundle-to">To';
 
             if ($prices['to']['regular_price']['price'] != $prices['to']['final_price']['price']) {
                 $priceHtml .= '<span class="bundle-regular-price">' . $prices['to']['regular_price']['formatted_price'] . '</span>'
                     . '<span class="bundle-special-price">' . $prices['to']['final_price']['formatted_price'] . '</span>';
+                $priceHtml .= '</div>';
             } else {
-                $priceHtml .= '<span>' . $prices['to']['regular_price']['formatted_price'] . '</span>';
+                $priceHtml .= '<span class="bundle-special-price">' . $prices['to']['regular_price']['formatted_price'] . '</span>';
             }
         }
 
