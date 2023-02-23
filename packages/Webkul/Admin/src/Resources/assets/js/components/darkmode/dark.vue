@@ -1,5 +1,5 @@
 <template>   
-    <div>
+    <div class="dark-switch">
         <div class="control-group">                            
             <label class="switch">
                 <input id="dark" class="control" type="checkbox" :checked="isDarkMode" @click="toggle">
