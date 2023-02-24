@@ -62,7 +62,7 @@
         $percentageRatings = $reviewHelper->getPercentageRating($product);
     @endphp
 
-    @if (!empty($accordian))
+    @if (! empty($accordian))
         <accordian :active="true">
 
             {{-- customer ratings --}}
@@ -88,8 +88,7 @@
                             ]) }}
                         </span>
 
-                        @if (core()->getConfigData('catalog.products.review.guest_review') ||
-                                auth()->guard('customer')->check())
+                        @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
 
                             <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key]) }}">
                                 <button type="button" class="theme-btn light">
@@ -166,7 +165,7 @@
         </div>
     @endif
 
-    @if (!empty($accordian))
+    @if (! empty($accordian))
         <accordian :title="'{{ __('shop::app.products.total-reviews') }}'" :active="true">
 
             {{-- customer reviews --}}
