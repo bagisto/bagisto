@@ -139,7 +139,7 @@ label {
 /*
     default hover theme
 */
-.default-hover-text{
+.default-hover-text {
     &:hover {
         color: #26A37C;
     }
@@ -1135,7 +1135,6 @@ i.within-circle {
 
     .cart-details .cart-content .product-details-content .item-actions {
         gap: 20px;
-        //width: 150%;
         display: grid;
         grid-template-columns: auto auto;
 
