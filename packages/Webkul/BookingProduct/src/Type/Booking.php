@@ -22,10 +22,10 @@ use Webkul\Product\Helpers\Indexers\Price\Virtual as VirtualIndexer;
 
 class Booking extends Virtual
 {
-    /** @var bool
+    /**
+     * Do not allow booking products to be copied, it would be too complicated.
      *
-     * do not allow booking products to be copied, it would be too complicated.
-     *
+     * @var bool
      */
     protected $canBeCopied = false;
 
@@ -213,7 +213,8 @@ class Booking extends Virtual
                 return trans('shop::app.checkout.cart.integrity.missing_options');
             }
 
-            $tmp = [];
+            $cartProductsList = [];
+
             foreach ($data['booking']['qty'] as $ticketId => $qty) {
                 if (! $qty) {
                     continue;
@@ -228,9 +229,10 @@ class Booking extends Virtual
                     return $cartProducts;
                 }
 
-                $tmp[] = $cartProducts;
+                $cartProductsList[] = $cartProducts;
             }
-            $products = array_merge(...$tmp);
+
+            $products = array_merge(...$cartProductsList);
         } else {
             $products = parent::prepareForCart($data);
         }
