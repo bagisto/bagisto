@@ -63,6 +63,10 @@ return [
             'no-result-found' => 'Aucun Enregistrement Trouvé.',
             'search-hint' => 'Rechercher un produit ici...',
             'mass-delete-success' => 'Contenu sélectionné supprimé avec succès.',
+            'delete-success'      => 'contenu supprimé avec succès',
+            'delete-failed'       => 'Erreur! le contenu ne peut pas être suppriméed',
+            'update-success'      => 'contenu mis à jour avec succès',
+            'create-success'      => 'contenu créé avec succès',
 
             'tab' => [
                 'page' => 'Paramétrage des pages',
@@ -241,7 +245,7 @@ return [
             'login' => 'Connexion',
             'become-user' => 'Devenir utilisateur',
             'user-registration' => 'Enregistrement de l\'utilisateur',
-            'form-sginup-text' => 'Si vous êtes nouveau dans notre magasin, nous sommes heureux de vous compter parmi nos membres.',
+            'form-signup-text' => 'Si vous êtes nouveau dans notre magasin, nous sommes heureux de vous compter parmi nos membres.',
         ],
 
         'forget-password' => [

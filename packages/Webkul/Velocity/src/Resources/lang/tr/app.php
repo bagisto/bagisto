@@ -60,6 +60,10 @@ return [
             'no-result-found' => 'Kayıt bulunamadı.',
             'search-hint' => 'Ürün arayın...',
             'mass-delete-success' => 'Seçili içerik başarıyla silindi.',
+            'delete-success'      => 'içerik başarıyla silindi',
+            'delete-failed'       => 'Hata! içerik silinemez',
+            'update-success'      => 'içerik başarıyla güncellendi',
+            'create-success'      => 'içerik başarıyla oluşturuldu',
             'tab' => [
                 'page' => 'Sayfa Ayarları',
                 'content' => 'İçerik Ayarları',
@@ -223,7 +227,7 @@ return [
             'login'             => 'Giriş Yap',
             'become-user'       => 'Kullanıcı Olun',
             'user-registration' => 'Kullanıcı Kaydı',
-            'form-sginup-text'  => 'Eğer mağazamızda yeniyseniz, sizleri üye olarak aramızda görmekten memnuniyet duyarız.',
+            'form-signup-text'  => 'Eğer mağazamızda yeniyseniz, sizleri üye olarak aramızda görmekten memnuniyet duyarız.',
         ],
         'forget-password'   => [
             'login'                 => 'Giriş Yap',

@@ -550,7 +550,7 @@ return [
                 'configurable'                  => 'Configurable',
 
             ],
-            'familiy'                       => 'Attribute Family',
+            'family'                       => 'Attribute Family',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Configurable Attributes',
             'attribute-header'              => 'Attribute(s)',
@@ -592,6 +592,7 @@ return [
             'related-products'              => 'Related Products',
             'product-search-hint'           => 'Start typing product name',
             'no-result-found'               => 'Products not found with same name.',
+            'no-product-added'              => 'No Product Added',
             'searching'                     => 'Searching ...',
             'grouped-products'              => 'Grouped Products',
             'search-products'               => 'Search Products',
@@ -683,7 +684,6 @@ return [
             'image'                       => 'Image',
             'file'                        => 'File',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'Create in Product Flat Table',
             'is_comparable'               => 'Attribute is comparable',
             'default_null_option'         => 'Create default empty option',
             'validation-messages'         => [
@@ -834,6 +834,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Name',
             'symbol'            => 'Symbol',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Currency created successfully.',
             'update-success'    => 'Currency updated successfully.',
             'delete-success'    => 'Currency deleted successfully.',
@@ -1044,6 +1045,11 @@ return [
             'error-create'        => 'Customer address not created.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you logged in as :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Add Note',
             'save-note'  => 'Save Note',
@@ -1196,7 +1202,7 @@ return [
             'code-prefix'                    => 'Code Prefix',
             'code-suffix'                    => 'Code Suffix',
             'generate'                       => 'Generate',
-            'cart-rule-not-defind-error'     => 'Cart rule is not defined',
+            'cart-rule-not-defined-error'    => 'Cart rule is not defined',
             'end-other-rules'                => 'End Other Rules',
             'children-categories'            => 'Categories (Children Only)',
             'parent-categories'              => 'Categories (Parent Only)',
@@ -1427,9 +1433,6 @@ return [
         'product-can-not-be-copied' => 'Products of type :type can not be copied',
         'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'Cannot delete the default channel',
-        'create-success'            => ':name created successfully.',
-        'update-success'            => ':name updated successfully.',
-        'delete-success'            => ':name deleted successfully.',
         'delete-failed'             => 'Error encountered while deleting :name.',
         'last-delete-error'         => 'At least one :name is required.',
         'user-define-error'         => 'Can not delete system :name',

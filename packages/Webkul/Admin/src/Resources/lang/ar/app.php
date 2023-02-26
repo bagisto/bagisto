@@ -85,7 +85,7 @@ return [
         'discount'                 => 'خصم',
         'cms'                      => 'CMS',
         'transactions'             => 'المعاملات',
-        'mode'                     => 'الوضع',
+        'mode'                     => 'الوضع الداكن',
         'account-title'            => 'حساب',
     ],
 
@@ -418,6 +418,8 @@ return [
             'submit-comment'               => 'إرسال تعليق',
             'notify-customer'              => 'بإخطار العملاء',
             'transactions'                 => 'المعاملات',
+            'create-success'               => 'تم إنشاء الطلب بنجاح',
+            'cancel-error'                 => "لم يتم إلغاء الطلب"
         ],
 
         'invoices' => [
@@ -450,6 +452,7 @@ return [
             'status-overdue'         => 'متأخر',
             'status-pending'         => 'في انتظار الدفع',
             'status-paid'            => 'مدفوع',
+            'create-success'         => 'تم إنشاء الفاتورة بنجاح'
         ],
 
         'shipments' => [
@@ -477,6 +480,7 @@ return [
             'creation-error'    => 'لا يمكن إنشاء الشحنة لهذا الطلب.',
             'order-error'       => 'لا يسمح بإنشاء شحنة الطلب.',
             'quantity-invalid'  => 'الكمية المطلوبة غير صالحة أو غير متاحة.',
+            'create-success'    => 'تم إنشاء الشحنات بنجاح'
         ],
 
         'refunds' => [
@@ -501,6 +505,7 @@ return [
             'action'                      => 'عمل',
             'view-title'                  => '#:refund_id إعادة مال',
             'invalid-refund-amount-error' => 'يجب ألا يكون المبلغ المسترد صفرًا',
+            'create-success'              => 'تم إنشاء رد الأموال بنجاح'
         ],
 
         'transactions' => [
@@ -549,7 +554,7 @@ return [
             ],
             'simple'                        => 'بسيط',
             'configurable'                  => 'مهيء',
-            'familiy'                       => 'الصفة الأسرة',
+            'family'                       => 'الصفة الأسرة',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'خصائص قابلة للتهيئة',
             'attribute-header'              => '(السمات (السمة',
@@ -598,6 +603,7 @@ return [
             'grouped-products'              => 'المنتجات المجمعة',
             'search-products'               => 'البحث عن المنتجات',
             'no-result-found'               => 'منتجات غير موجودة بنفس الاسم.',
+            'no-product-added'              => 'لا يوجد منتج مضاف',
             'channel'                       => 'القنوات',
             'bundle-items'                  => 'عناصر الحزمة',
             'add-option-btn-title'          => 'إضافة خيار',
@@ -619,6 +625,10 @@ return [
             'save'                          => 'يحفظ',
             'cancel'                        => 'يلغي',
             'saved-inventory-message'       => 'تم حفظ مخزون المنتج بنجاح.',
+            'create-success'                => 'تم إنشاء المنتج بنجاح.،',
+            'update-success'                => 'تم تحديث المنتج بنجاح.',
+            'delete-success'                => 'تم حذف المنتج بنجاح.',   
+            'delete-failed'                 => 'حدث خطأ أثناء حذف المنتج.', 
             'validations'                   => [
                 'quantity-required' => 'الكمية مطلوبة.',
                 'quantity-integer'  => 'يجب أن تكون الكمية عددًا صحيحًا.',
@@ -680,9 +690,13 @@ return [
             'image'                       => 'صورة',
             'file'                        => 'ملف',
             'checkbox'                    => 'خانة اختيار',
-            'use_in_flat'                 => 'إنشاء في جدول المنتجات المسطحة',
             'is_comparable'               => 'السمة قابلة للمقارنة',
             'default_null_option'         => 'إنشاء خيار فارغ افتراضي',
+            'create-success'              => 'تم إنشاء السمة بنجاح.',
+            'update-success'              => 'تم تحديث السمة بنجاح.',
+            'delete-success'              => 'تم حذف السمة بنجاح.',
+            'delete-failed'               => 'حدث خطأ أثناء حذف السمة.',
+            'user-define-error'           => 'لا يمكن حذف سمة النظام.',
             'validation-messages'         => [
                 'max-size' => 'يجب أن يكون حجم الصورة أقل من 600 كيلو بايت',
             ],
@@ -706,6 +720,13 @@ return [
             'add-attribute-title'  => 'إضافة خصائص',
             'search'               => 'ابحث',
             'group-exist-error'    => 'المجموعة مع الاسم موجود.',
+            'create-success'       => 'تم إنشاء العائلة بنجاح.',
+            'update-success'       => 'تم تحديث العائلة بنجاح.',
+            'delete-success'       => 'تم حذف العائلة بنجاح.',
+            'delete-failed'        => 'حدث خطأ أثناء حذف العائلة.',
+            'user-define-error'    => 'لا يمكن حذف عائلة سمات النظام',
+            'last-delete-error'    => 'مطلوب عائلة واحدة على الأقل.',
+            'attribute-product-error'   => 'الأسرة المستخدمة في المنتجات.',
         ],
         'categories' => [
             'title'                    => 'الفئات',
@@ -735,6 +756,11 @@ return [
             'filterable-attributes'    => 'سمات قابلة للفلترة',
             'attributes'               => 'السمات',
             'mass-update-success'      => 'تم تحديث جميع الفئات المحددة بنجاح',
+            'create-success'           => 'تم إنشاء الفئة بنجاح.',
+            'update-success'           => 'تم تحديث الفئة بنجاح.',
+            'delete-success'           => 'تم حذف الفئة بنجاح.',
+            'delete-failed'            => 'حدث خطأ أثناء حذف الفئة.',
+            'delete-category-root'     => 'لا يمكن حذف فئة الجذر.',
         ],
     ],
 
@@ -831,6 +857,7 @@ return [
             'code'              => 'الشفرة',
             'name'              => 'اسم',
             'symbol'            => 'رمز',
+            'decimal'            => 'عدد عشري',
             'create-success'    => 'تم إنشاء اللغة بنجاح',
             'update-success'    => 'تم تحديث اللغة بنجاح',
             'delete-success'    => 'تم حذف اللغة بنجاح',
@@ -1005,6 +1032,12 @@ return [
             'name'            => 'اسم',
             'is_user_defined' => 'تعريف المستخدم',
             'yes'             => 'نعم.',
+            'create-success'  => 'تم إنشاء مجموعة العملاء بنجاح',
+            'update-success'  => 'تم تحديث مجموعة العملاء بنجاح',
+            'delete-success'  => 'تم حذف مجموعة العملاء بنجاح',
+            'delete-failed'   => 'خطأ! لا يمكن حذف مجموعة العملاء',
+            'customer-associate'  => 'لا يمكن حذف العميل لأن العميل مرتبط بهذه المجموعة.',
+        
         ],
 
         'addresses' => [
@@ -1035,6 +1068,11 @@ return [
             'success-delete'      => 'تم حذف عنوان العميل بنجاح',
             'success-mass-delete' => 'تم حذف العناوين المحددة بنجاح',
             'error-create'        => 'لم يتم إنشاء عنوان العميل',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'سجل دخولك كعميل',
+            'login-message'=>'you login as :customer_name'
         ],
 
         'note' => [
@@ -1106,6 +1144,11 @@ return [
             'list'  => ':customer_name\'s قائمة الطلبات',
             'title' => 'ترتيب' ,
         ],
+        'create-success' => 'تم إنشاء العميل بنجاح',
+        'update-success' => 'تم تحديث العميل بنجاح',
+        'delete-success' => 'تم حذف العميل بنجاح',
+        'order-pending'  => 'لا يمكن حذف حساب العميل لأن بعض الطلبات معلقة أو حالة المعالجة.',
+        'delete-failed'  => 'حدث خطأ أثناء حذف العميل.',
     ],
 
     'promotions' => [
@@ -1186,7 +1229,7 @@ return [
             'code-prefix'                    => 'بادئة الرمز',
             'code-suffix'                    => 'لاحقة الرمز',
             'generate'                       => 'انشاء',
-            'cart-rule-not-defind-error'     => 'لم يتم تحديد قاعدة سلة التسوق',
+            'cart-rule-not-defined-error'    => 'لم يتم تحديد قاعدة سلة التسوق',
             'mass-delete-success'            => 'تم حذف جميع القسائم المحددة بنجاح',
             'end-other-rules'                => 'إنهاء القواعد الأخرى',
             'children-categories'            => '( الفئات (للأطفال فقط',
@@ -1364,13 +1407,13 @@ return [
         'format'           => 'انتق تنسيق',
         'download'         => 'نزل',
         'upload'           => 'الارسال',
-        'csv'              => 'CSV',
-        'xls'              => 'XLS',
+        'csv'              => 'كسف',
+        'xls'              => 'سي إس الخامس',
         'file'             => 'ملف',
         'upload-error'     => ' xls, xlsx, csv: الملف يجب أن يكون ملف من نوع',
         'duplicate-error'  => ':position عند الصف :identifier  يجب أن يكون المعرف فريدًا ومكررًا',
         'enough-row-error' => 'لا يحتوي الملف على صفوف كافية',
-        'allowed-type'     => 'Allowed Type :',
+        'allowed-type'     => 'النوع المسموح به :',
         'file-type'        => 'csv, xls, xlsx.',
         'no-records'       => 'لا شيء للتصدير',
         'illegal-format'   => 'خطأ! هذا النوع من التنسيق إما غير معتمد أو تنسيقه غير القانوني',
@@ -1417,10 +1460,6 @@ return [
         'product-can-not-be-copied' => 'لا يمكن نسخ منتجات الحجز',
         'cannot-change'             => 'لا يمكن تغيير :name.',
         'cannot-delete-default'     => 'لا يمكن حذف القناة الافتراضية',
-        'create-success'            => 'إنشاء الاسم بنجاح:name',
-        'update-success'            => 'تحديث الاسم بنجاح :name ',
-        'delete-success'            => 'حذف الاسم بنجاح :name',
-        'delete-failed'             => ':name حدث خطأ أثناء حذف',
         'last-delete-error'         => 'مطلوب name: واحد على الأقل',
         'user-define-error'         => 'لا يستطيع حذف نظام :name',
         'attribute-error'           => 'في المنتجات القابلة للتكوين :name يستخدم ',

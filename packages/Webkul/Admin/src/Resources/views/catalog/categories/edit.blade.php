@@ -77,8 +77,21 @@
                                 <label for="name" class="required">{{ __('admin::app.catalog.categories.name') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" value="{{ old($locale)['name'] ?? ($category->translate($locale)['name'] ?? '') }}" data-vv-as="&quot;{{ __('admin::app.catalog.categories.name') }}&quot;" v-slugify-target="'slug'"/>
-                                <span class="control-error" v-if="errors.has('{{$locale}}[name]')">@{{ errors.first('{!!$locale!!}[name]') }}</span>
+
+                                <input 
+                                    type="text" v-validate="'required'" 
+                                    name="{{$locale}}[name]"
+                                    value="{{ old($locale)['name'] ?? ($category->translate($locale)['name'] ?? '') }}"
+                                    class="control" 
+                                    id="name" 
+                                    data-vv-as="&quot;{{ __('admin::app.catalog.categories.name') }}&quot;"
+                                />
+
+                                <span
+                                    class="control-error" 
+                                    v-text="errors.first('{!!$locale!!}[name]')"
+                                    v-if="errors.has('{{$locale}}[name]')">
+                                </span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
@@ -140,6 +153,17 @@
                                         @php echo str_replace($key, 'Image', $message[0]); @endphp
                                     @endforeach
                                 </span>
+
+                                <label>{{ __('admin::app.catalog.categories.category_banner') }}</label>
+                                <large-image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="category_banner" :multiple="false" :images='"{{ $category->banner_url }}"'></large-image-wrapper>
+
+                                <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
+                                    @foreach ($errors->get('image.*') as $key => $message)
+                                        @php echo str_replace($key, 'Image', $message[0]); @endphp
+                                    @endforeach
+                                </span>
+
+                                <span class="control-info mt-10">{{ __('admin::app.catalog.categories.banner_size') }}</span>   
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.controls.after', ['category' => $category]) !!}

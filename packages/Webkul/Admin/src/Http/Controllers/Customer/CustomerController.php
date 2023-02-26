@@ -95,7 +95,7 @@ class CustomerController extends Controller
             }
         }
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer']));
+        session()->flash('success', trans('admin::app.customers.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -140,7 +140,7 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.update.after', $customer);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer']));
+        session()->flash('success', trans('admin::app.customers.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -159,14 +159,30 @@ class CustomerController extends Controller
             if (! $this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
                 $this->customerRepository->delete($id);
 
-                return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Customer'])]);
+                return response()->json(['message' => trans('admin::app.customers.delete-success')]);
             }
 
-            return response()->json(['message' => trans('admin::app.response.order-pending', ['name' => 'Customer'])], 400);
+            return response()->json(['message' => trans('admin::app.customers.order-pending')], 400);
         } catch (\Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Customer'])], 400);
+        return response()->json(['message' => trans('admin::app.customers.delete-failed')], 400);
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function loginAsCustomer($id)
+    {
+        $customer = $this->customerRepository->findOrFail($id);
+
+        auth()->guard('customer')->login($customer);
+
+        session()->flash('success',trans('admin::app.customers.loginascustomer.login-message',['customer_name' => $customer->name]));
+
+        return redirect(route('shop.customer.profile.index'));
+    }
+
 
     /**
      * To load the note taking screen for the customers.
@@ -254,7 +270,7 @@ class CustomerController extends Controller
             return redirect()->back();
         }
 
-        session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customers']));
+        session()->flash('error', trans('admin::app.customers.order-pending'));
 
         return redirect()->back();
     }

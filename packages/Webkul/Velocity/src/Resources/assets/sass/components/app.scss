@@ -256,6 +256,7 @@
 
         img {
             max-width: 100%;
+            width: auto;
             max-height: 100%;
             position: absolute;
             top: 0;
@@ -1029,7 +1030,7 @@
             }
 
             input[type='search'] {
-                padding-left: 35px;
+                padding-right: 40px;
             }
 
             input:active,
@@ -1604,6 +1605,7 @@
 
     .price-label {
         margin-right: 6px;
+        margin-top: 4px;
         float: right;
     }
 
@@ -1713,7 +1715,7 @@
 
     .lg-card-container {
         &.list-card {
-            margin: 0 15px;
+            margin: 0 15px 5px 15px;
         }
     }
 
@@ -1819,7 +1821,7 @@
             position: relative;
         }
     }
-
+    
     li {
         a {
             padding: 7px 0 5px 15px;
@@ -1830,19 +1832,25 @@
         }
     }
 
+    .sidebar {
+        .main-category {
+            box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+            margin: 0;
+        }
+    }
+
     .sub-categories {
         top: -1px;
         left: 100%;
         height: 100%;
         min-height: 330px;
-        z-index: 100;
+        z-index: -1;
         padding-top: 10px;
         position: absolute;
         background: $white-color;
         border-left: 1px solid $border-common;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
-            0 6px 6px rgba(0, 0, 0, 0.23);
         overflow-y: scroll;
+        padding-left: 4px;
 
         li:nth-last-of-type(1) {
             margin-bottom: 10px;
@@ -2096,6 +2104,34 @@
     margin-left: 15px;
     padding: 40px 15px !important;
 
+    .childSubCategory {
+        display: flex;
+        margin: 15px 0px;
+
+        a {
+            margin: 0px 20px;
+            color: black;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                img {
+                    height: 160px;
+                    width: 160px;
+                    border-radius: 100%;
+                }
+
+                label {
+                    font-size: 20px;
+                    margin-top: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
     .hero-image {
         display: inline-block;
 
@@ -2259,7 +2295,7 @@
 
         ul.items {
             li.item {
-                margin-bottom: 10px;
+                margin-bottom: 0px;
             }
         }
     }
@@ -2529,6 +2565,7 @@
 
         .btn-add-to-cart {
             white-space: pre-wrap;
+            width:220px;
         }
 
         .close-btn {
@@ -2556,11 +2593,22 @@
         }
     }
 
-    .wishlist-icon {
-        top: 5px;
-        right: 52px;
-        position: absolute;
-        display: inline-block;
+    .wishlist {
+        display: flex;
+        padding: 7px;
+        width: max-content;
+        margin-left: 4px;
+    }
+
+    .wishlist span {
+        font-size: 14px;
+        margin-left: 4px;
+    }
+
+    .comparison-remove {
+        float: right;
+        margin-top: -31px;
+        margin-right: 14px;
     }
 }
 
@@ -2754,4 +2802,12 @@
 
 .nested {
     display: none;
+}
+
+.sub-category {
+    .VueCarousel-navigation {
+        position: absolute;
+        right: 0;
+        top: inherit;
+    }
 }

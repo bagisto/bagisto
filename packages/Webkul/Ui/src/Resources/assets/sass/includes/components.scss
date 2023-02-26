@@ -52,6 +52,7 @@
         align-items: end;
 
         .filter-right {
+            margin-top: 10px;
             justify-self: end;
             display: grid;
             grid-template-columns: auto auto;
@@ -160,6 +161,8 @@
 .filter-advance {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
+    align-items: center;
 
     .datagrid-count {
         margin-bottom: 10px;
@@ -176,6 +179,7 @@
     height: 40px;
     border-radius: 2px;
     margin-right: 20px;
+    margin-left: 10px;
 
     .wrapper {
         margin-left: 4px;

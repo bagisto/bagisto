@@ -1,101 +1,6 @@
 <template>
     <table class="table">
-        <thead v-if="massActionsToggle">
-            <tr
-                class="mass-action"
-                v-if="massActionsToggle"
-                style="height: 65px"
-            >
-                <th colspan="100%">
-                    <div
-                        class="mass-action-wrapper"
-                        style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;"
-                    >
-                        <span
-                            class="massaction-remove"
-                            v-on:click="removeMassActions"
-                            style="margin-right: 10px; margin-top: 5px"
-                        >
-                            <span class="icon checkbox-dash-icon"></span>
-                        </span>
-
-                        <form
-                            method="POST"
-                            id="mass-action-form"
-                            style="display: inline-flex"
-                            action=""
-                            :onsubmit="
-                                `return confirm('${massActionConfirmText}')`
-                            "
-                        >
-                            <input
-                                type="hidden"
-                                name="_token"
-                                :value="getCsrf()"
-                            />
-
-                            <input
-                                type="hidden"
-                                id="indexes"
-                                name="indexes"
-                                v-model="dataIds"
-                            />
-
-                            <div class="control-group">
-                                <select
-                                    class="control"
-                                    v-model="massActionType"
-                                    @change="changeMassActionTarget"
-                                    name="mass-action-type"
-                                    required
-                                >
-                                    <option
-                                        v-for="(massAction,
-                                        index) in massActions"
-                                        v-text="massAction.label"
-                                        :key="index"
-                                        :value="{
-                                            id: index,
-                                            value: massAction.type
-                                        }"
-                                    ></option>
-                                </select>
-                            </div>
-
-                            <div
-                                class="control-group"
-                                style="margin-left: 10px"
-                                v-if="massActionType.value == 'update'"
-                            >
-                                <select
-                                    class="control"
-                                    v-model="massActionUpdateValue"
-                                    name="update-options"
-                                    required
-                                >
-                                    <option
-                                        :key="id"
-                                        v-for="(massActionValue,
-                                        id) in massActionValues"
-                                        :value="massActionValue"
-                                        v-text="id"
-                                    ></option>
-                                </select>
-                            </div>
-
-                            <button
-                                v-text="translations.submit"
-                                type="submit"
-                                class="btn btn-sm btn-primary"
-                                style="margin-left: 10px; white-space: nowrap;"
-                            ></button>
-                        </form>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-
-        <thead v-if="massActionsToggle == false">
+        <thead>
             <tr style="height: 65px">
                 <th
                     v-if="enableMassActions"
@@ -241,7 +146,6 @@ export default {
         'enableMassActions',
         'index',
         'massActions',
-        'massActionTargets',
         'records',
         'translations'
     ],
@@ -254,14 +158,11 @@ export default {
             massActionTarget: null,
             massActionsToggle: false,
             massActionType: this.getDefaultMassActionType(),
-            massActionUpdateValue: null,
-            massActionValues: [],
-            massActionConfirmText: this.translations.clickOnAction
         };
     },
 
     methods: {
-        select() {
+        select(dataIds) {
             this.allSelected = false;
 
             if (this.dataIds.length === 0) {
@@ -270,6 +171,8 @@ export default {
             } else {
                 this.massActionsToggle = true;
             }
+
+            this.$emit('onSelect', [dataIds, this.massActionsToggle]);
         },
 
         selectAll() {
@@ -310,7 +213,11 @@ export default {
                         }
                     }
                 }
+            } else {
+                this.removeMassActions();
             }
+
+            this.$emit('onSelectAll', [this.dataIds, this.massActionsToggle]);
         },
 
         getDefaultMassActionType: function() {
@@ -318,47 +225,6 @@ export default {
                 id: null,
                 value: null
             };
-        },
-
-        changeMassActionTarget: function() {
-            if (this.massActionType.value === 'delete') {
-                for (let i in this.massActionTargets) {
-                    if (this.massActionTargets[i].type === 'delete') {
-                        this.massActionTarget = this.massActionTargets[
-                            i
-                        ].action;
-                        this.massActionConfirmText = this.massActionTargets[i]
-                            .confirm_text
-                            ? this.massActionTargets[i].confirm_text
-                            : this.massActionConfirmText;
-
-                        break;
-                    }
-                }
-            }
-
-            if (this.massActionType.value === 'update') {
-                for (let i in this.massActionTargets) {
-                    if (this.massActionTargets[i].type === 'update') {
-                        this.massActionValues = this.massActions[
-                            this.massActionType.id
-                        ].options;
-                        this.massActionTarget = this.massActionTargets[
-                            i
-                        ].action;
-                        this.massActionConfirmText = this.massActionTargets[i]
-                            .confirm_text
-                            ? this.massActionTargets[i].confirm_text
-                            : this.massActionConfirmText;
-
-                        break;
-                    }
-                }
-            }
-
-            document.getElementById(
-                'mass-action-form'
-            ).action = this.massActionTarget;
         },
 
         removeMassActions() {
@@ -369,6 +235,8 @@ export default {
             this.allSelected = false;
 
             this.massActionType = this.getDefaultMassActionType();
+
+            this.$emit('onSelectAll', this.massActionsToggle);
         },
 
         sortCollection(alias) {

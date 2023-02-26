@@ -249,7 +249,6 @@ return [
          */
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Konekt\Concord\ConcordServiceProvider::class,
-        Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
         /**
@@ -303,12 +302,11 @@ return [
         'Concord' => Konekt\Concord\Facades\Concord::class,
         'Core' => Webkul\Core\Facades\Core::class,
         'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
-        'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Helper'  => Konekt\Concord\Facades\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
         'ProductImage' => Webkul\Product\Facades\ProductImage::class,
         'ProductVideo' => Webkul\Product\Facades\ProductVideo::class,
         'Redis' => Illuminate\Support\Facades\Redis::class,

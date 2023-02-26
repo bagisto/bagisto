@@ -49,6 +49,11 @@
                                 <label for="symbol">{{ __('admin::app.settings.currencies.symbol') }}</label>
                                 <input class="control" id="symbol" name="symbol" value="{{ old('symbol') }}"/>
                             </div>
+
+                            <div class="control-group">
+                                <label for="decimal">{{ __('admin::app.settings.currencies.decimal') }}</label>
+                                <input class="control" id="decimal" name="decimal" value="{{ old('decimal') }}"/>
+                            </div>
                         </div>
                     </accordian>
 

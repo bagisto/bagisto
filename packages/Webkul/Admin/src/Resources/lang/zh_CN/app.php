@@ -533,7 +533,7 @@ return [
             'product-type'                  => '产品类型',
             'simple'                        => '简单的',
             'configurable'                  => '可配置',
-            'familiy'                       => '家庭属性',
+            'family'                       => '家庭属性',
             'sku'                           => 'SKU',
             'configurable-attributes'       => '可配置属性',
             'attribute-header'              => '属性(s)',
@@ -575,6 +575,7 @@ return [
             'related-products'              => '相关产品',
             'product-search-hint'           => '开始输入产品名称',
             'no-result-found'               => '找不到同名的产品.',
+            'no-product-added'              => '未添加产品',
             'searching'                     => '搜索中 ...',
             'grouped-products'              => '分组产品',
             'search-products'               => '搜索产品',
@@ -665,7 +666,6 @@ return [
             'image'                       => '图片',
             'file'                        => '文件',
             'checkbox'                    => '多选框',
-            'use_in_flat'                 => '在产品平面表中创建',
             'is_comparable'               => '属性可比',
             'default_null_option'         => '创建默认空选项',
             'validation-messages'         => [
@@ -814,6 +814,7 @@ return [
             'code'              => '代码',
             'name'              => '名称',
             'symbol'            => '符号',
+            'decimal'            => '十进制',
             'create-success'    => '货币创建成功.',
             'update-success'    => '货币更新成功.',
             'delete-success'    => '货币删除成功.',
@@ -1019,6 +1020,11 @@ return [
             'error-create'        => '客户地址没有创建.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'以客户身份登录',
+            'login-message'=>'您登录为 :customer_name'
+        ],
+
         'note' => [
             'title'      => '添加备注',
             'save-note'  => '保存备注',
@@ -1167,7 +1173,7 @@ return [
             'code-prefix'                    => '代码前缀',
             'code-suffix'                    => '代码后缀',
             'generate'                       => '生成',
-            'cart-rule-not-defind-error'     => '未定义购物车规则',
+            'cart-rule-not-defined-error'    => '未定义购物车规则',
             'end-other-rules'                => '结束其他规则',
             'children-categories'            => '分类列表 (仅限儿童)',
             'parent-categories'              => '分类列表 (仅限家长)',
@@ -1397,9 +1403,6 @@ return [
         'error-while-copying'       => '尝试复制产品时出现问题',
         'product-can-not-be-copied' => '产品类型 :type 无法复制',
         'cannot-delete-default'     => '无法删除默认频道',
-        'create-success'            => ':name 创建成功.',
-        'update-success'            => ':name 更新成功.',
-        'delete-success'            => ':name 删除成功.',
         'delete-failed'             => '删除 :name 时遇到错误.',
         'last-delete-error'         => '最后一个 :name 是必须的.',
         'user-define-error'         => '无法删除系统 :name',

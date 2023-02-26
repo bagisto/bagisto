@@ -39,7 +39,7 @@ class StandardController extends Controller
      */
     public function cancel()
     {
-        session()->flash('error', 'Paypal payment has been canceled.');
+        session()->flash('error', trans('shop::app.checkout.cart.paypal-payment-canceled'));
 
         return redirect()->route('shop.checkout.cart.index');
     }

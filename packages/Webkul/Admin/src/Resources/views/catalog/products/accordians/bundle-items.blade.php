@@ -15,10 +15,6 @@
 @push('scripts')
     <script type="text/x-template" id="bundle-option-list-template">
         <div class="">
-            <button type="button" class="btn btn-md btn-primary" @click="addOption" style="margin-bottom: 20px;">
-                {{ __('admin::app.catalog.products.add-option-btn-title') }}
-            </button>
-
             <bundle-option-item
                 v-for='(option, index) in options'
                 :option="option"
@@ -26,6 +22,10 @@
                 :index="index"
                 @onRemoveOption="removeOption($event)"
             ></bundle-option-item>
+
+            <button type="button" class="btn btn-md btn-primary bundle-option-button" @click="addOption">
+                {{ __('admin::app.catalog.products.add-option-btn-title') }}
+            </button>
         </div>
     </script>
 
@@ -133,7 +133,7 @@
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody class="bundle-product-item-with-options">
 
                         <bundle-product-item
                             v-for='(product, index) in bundle_option_products'
@@ -146,6 +146,11 @@
                             @onCheckProduct="checkProduct($event)">
                         </bundle-product-item>
 
+                        <tr v-if="! bundle_option_products.length">
+                            <td colspan="10">
+                                <p class="no-product-item-found">{{ __('admin::app.catalog.products.no-product-added') }} </p>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -171,7 +176,13 @@
             </td>
 
             <td>
-                @{{ product.product.name }}
+                <a
+                    :href="`${$root.baseUrl}/${product.product.url_key}`"
+                    v-text="product.product.name"
+                    target="_blank"
+                >
+                </a>
+
                 <input type="hidden" :name="[inputName + '[product_id]']" :value="product.product.id"/>
             </td>
 
@@ -328,7 +339,7 @@
 
                     this.$http.get ("{{ route('admin.catalog.products.search_simple_product') }}", {params: {query: this.search_term}})
                         .then (function(response) {
-                            self.searched_results = response.data;
+                            self.searched_results = response.data.data;
 
                             self.is_searching = false;
                         })

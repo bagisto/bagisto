@@ -57,7 +57,7 @@
 
                 @auth('customer')
                     @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
-                        <form id="wishlist-{{ $product->product_id }}" action="{{ route('shop.customer.wishlist.add', $product->product_id) }}" method="POST">
+                        <form id="wishlist-{{ $product->id }}" action="{{ route('shop.customer.wishlist.add', $product->id) }}" method="POST">
                             @csrf
                         </form>
 
@@ -68,7 +68,7 @@
                                 class="add-to-wishlist"
                             @endif
                             href="javascript:void(0);"
-                            onclick="document.getElementById('wishlist-{{ $product->product_id }}').submit();">
+                            onclick="document.getElementById('wishlist-{{ $product->id }}').submit();">
                         </a>
                     @endif
                 @endauth

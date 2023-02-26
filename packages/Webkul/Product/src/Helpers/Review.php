@@ -4,12 +4,12 @@ namespace Webkul\Product\Helpers;
 
 use Illuminate\Support\Facades\DB;
 
-class Review extends AbstractProduct
+class Review
 {
     /**
      * Returns the product's avg rating
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return \Illuminate\Support\Collection
      */
     public function getReviews($product)
@@ -26,7 +26,7 @@ class Review extends AbstractProduct
     /**
      * Returns the product's avg rating
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return float
      */
     public function getAverageRating($product)
@@ -43,7 +43,7 @@ class Review extends AbstractProduct
     /**
      * Returns the total review of the product
      *
-    * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+    * @param  \Webkul\Product\Contracts\Product  $product
      * @return int
      */
     public function getTotalReviews($product)
@@ -60,7 +60,7 @@ class Review extends AbstractProduct
      /**
      * Returns the total rating of the product
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return int
      */
     public function getTotalRating($product)
@@ -77,7 +77,7 @@ class Review extends AbstractProduct
     /**
      * Returns reviews with ratings.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return \Illuminate\Support\Collection
      */
     public function getReviewsWithRatings($product)
@@ -99,7 +99,7 @@ class Review extends AbstractProduct
      /**
      * Returns the Percentage rating of the product
      *
-    * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+    * @param  \Webkul\Product\Contracts\Product  $product
      * @return int
      */
     public function getPercentageRating($product)

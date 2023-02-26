@@ -320,7 +320,7 @@ class ShopController extends Controller
         return [
             'id'                => $category->id,
             'slug'              => $category->slug,
-            'name'              => $category->name,
+            'name'              => $category->name ?? $category->translate(core()->getDefaultChannel()->default_locale->code)['name'],
             'children'          => $formattedChildCategory,
             'category_icon_url' => $category->category_icon_url,
             'image_url'         => $category->image_url,

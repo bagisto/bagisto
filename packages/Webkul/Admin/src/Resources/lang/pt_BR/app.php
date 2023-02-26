@@ -532,7 +532,7 @@ return [
             'product-type'                  => 'Tipo de Produto',
             'simple'                        => 'Simples',
             'configurable'                  => 'Configurável',
-            'familiy'                       => 'Grupo de Atributos',
+            'family'                       => 'Grupo de Atributos',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Atributos Configuráveis',
             'attribute-header'              => 'Atributos(s)',
@@ -581,6 +581,7 @@ return [
             'grouped-products'              => 'Produtos Agrupados',
             'search-products'               => 'procurar produtos',
             'no-result-found'               => 'Produtos não encontrados com o mesmo nome.',
+            'no-product-added'              => 'Nenhum produto adicionado',
             'channel'                       => 'Canais',
             'bundle-items'                  => 'Itens do pacote',
             'add-option-btn-title'          => 'Adicionar opção',
@@ -663,7 +664,6 @@ return [
             'image'                       => 'Imagem',
             'file'                        => 'Arquivo',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'Criar na tabela plana do produto',
             'is_comparable'               => 'O atributo é comparável',
             'default_null_option'         => 'Criar opção vazia padrão',
             'validation-messages'         => [
@@ -814,6 +814,7 @@ return [
             'code'              => 'Código',
             'name'              => 'Nome',
             'symbol'            => 'Símbolo',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Moeda criada com sucesso.',
             'update-success'    => 'Moeda atualizada com sucesso.',
             'delete-success'    => 'Moeda excluída com sucesso.',
@@ -1021,6 +1022,11 @@ return [
             'error-create'        => 'Error: Endereço do cliente não criado.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'entrar como cliente',
+            'login-message'=>'você se conectou como :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Adicionar nota',
             'save-note'  => 'Salvar nota',
@@ -1165,7 +1171,7 @@ return [
             'code-prefix'                    => 'Prefixo do código',
             'code-suffix'                    => 'Sufixo de código',
             'generate'                       => 'Gerar',
-            'cart-rule-not-defind-error'     => 'A regra do carrinho não está definida',
+            'cart-rule-not-defined-error'    => 'A regra do carrinho não está definida',
             'mass-delete-success'            => 'Todos os cupons selecionados foram excluídos com sucesso.',
             'end-other-rules'                => 'Terminar outras regras',
             'children-categories'            => 'Categorias (Somente Crianças)',
@@ -1393,9 +1399,6 @@ return [
         'being-used'              => 'Este recurso :name está sendo usado em :source',
         'cannot-change'           => 'Cannot change the :name.',
         'cannot-delete-default'   => 'Não é possível excluir o canal padrão',
-        'create-success'          => ':name criado com sucesso.',
-        'update-success'          => ':name atualizaco com sucesso.',
-        'delete-success'          => ':name excluído com sucesso.',
         'delete-failed'           => 'Erro encontrado ao excluir :name.',
         'last-delete-error'       => 'Ao menos um :name é obrigatório.',
         'user-define-error'       => 'Não pode excluir o sistema :name',

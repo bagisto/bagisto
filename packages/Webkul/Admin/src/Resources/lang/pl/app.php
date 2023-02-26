@@ -533,7 +533,7 @@ return [
             'product-type'                  => 'Rodzaj produktu',
             'simple'                        => 'Prosty',
             'configurable'                  => 'Konfigurowalny',
-            'familiy'                       => 'Rodzina atrybutów',
+            'family'                       => 'Rodzina atrybutów',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Konfigurowalne atrybuty',
             'attribute-header'              => 'Atrybut(y)',
@@ -578,6 +578,7 @@ return [
             'related-products'              => 'Pokrewne produkty',
             'product-search-hint'           => 'Wprowadź nazwę produktu',
             'no-result-found'               => 'Nie znaleziono produktów o tej samej nazwie.',
+            'no-product-added'              => 'Nie dodano produktu',
             'searching'                     => 'Wyszukiwanie ...',
             'grouped-products'              => 'Zgrupowane produkty',
             'search-products'               => 'Wyszukaj produkty',
@@ -664,7 +665,6 @@ return [
             'image'                       => 'Obraz',
             'file'                        => 'Plik',
             'checkbox'                    => 'Pole wyboru',
-            'use_in_flat'                 => 'Utwórz w płaskiej tabeli produktu',
             'is_comparable'               => 'Atrybut jest porównywalny',
             'default_null_option'         => 'Utwórz domyślną pustą opcję',
             'validation-messages'         => [
@@ -816,6 +816,7 @@ return [
             'code'              => 'Kod',
             'name'              => 'Nazwa',
             'symbol'            => 'Symbol',
+            'decimal'            => 'اعشاری',
             'create-success'    => 'Waluta utworzona pomyślnie.',
             'update-success'    => 'Waluta zaktualizowana pomyślnie.',
             'delete-success'    => 'Waluta została pomyślnie usunięta.',
@@ -1022,6 +1023,11 @@ return [
             'error-create'        => 'Błąd: nie utworzono adresu klienta.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'zaloguj się jako klient',
+            'login-message'=>'logujesz się jako :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Dodaj notatkę',
             'save-note'  => 'Zapisz notatkę ',
@@ -1166,7 +1172,7 @@ return [
             'code-prefix'                    => 'Prefiks kodu',
             'code-suffix'                    => 'Sufiks kodu',
             'generate'                       => 'Generuj',
-            'cart-rule-not-defind-error'     => 'Reguła koszyka nie jest zdefiniowana',
+            'cart-rule-not-defined-error'    => 'Reguła koszyka nie jest zdefiniowana',
             'mass-delete-success'            => 'Wszystkie wybrane kupony zostały pomyślnie usunięte.',
             'end-other-rules'                => 'Zakończ inne zasady',
             'children-categories'            => 'Kategorie (tylko podrzędne)',

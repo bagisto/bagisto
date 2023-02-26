@@ -60,6 +60,11 @@ return [
             'no-result-found' => 'Geen record gevonden.',
             'search-hint' => 'Zoek hier het product...',
             'mass-delete-success' => 'Geselecteerde inhoud is succesvol verwijderd.',
+            'delete-success'      => 'inhoud succesvol verwijderd',
+            'delete-failed'       => 'Fout! inhoud kan niet worden verwijderd',
+            'update-success'      => 'inhoud succesvol bijgewerkt',
+            'create-success'      => 'inhoud succesvol gemaakt',
+            
             'tab' => [
                 'page' => 'Pagina-instelling',
                 'content' => 'Inhoudsinstelling',
@@ -225,7 +230,7 @@ return [
             'login' => 'Aanmelden',
             'become-user' => 'Klant worden',
             'user-registration' => 'User Registration',
-            'form-sginup-text' => 'Als u nieuw bent in onze winkel, willen we u graag als lid hebben.',
+            'form-signup-text' => 'Als u nieuw bent in onze winkel, willen we u graag als lid hebben.',
         ],
         'forget-password' => [
             'login' => 'Login',

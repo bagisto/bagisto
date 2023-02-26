@@ -81,7 +81,13 @@
     <script type="text/x-template" id="grouped-product-item-template">
         <tr>
             <td>
-                @{{ groupedProduct.associated_product.name }}
+                <a
+                    :href="`${$root.baseUrl}/${groupedProduct.associated_product.url_key}`"
+                    v-text="groupedProduct.associated_product.name"
+                    target="_blank"
+                >
+                </a>
+
                 <input type="hidden" :name="[inputName + '[associated_product_id]']" :value="groupedProduct.associated_product.id"/>
             </td>
 
@@ -175,7 +181,7 @@
 
                     this.$http.get ("{{ route('admin.catalog.products.search_simple_product') }}", {params: {query: this.search_term}})
                         .then (function(response) {
-                            self.searched_results = response.data;
+                            self.searched_results = response.data.data;
 
                             self.is_searching = false;
                         })

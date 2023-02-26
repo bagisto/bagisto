@@ -12,7 +12,6 @@ use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Helpers\Indexers\Price\Grouped as GroupedIndexer;
 
 class Grouped extends AbstractType
@@ -170,11 +169,30 @@ class Grouped extends AbstractType
             return false;
         }
 
-        if (ProductFlat::query()->select('id')->whereIn('product_id', $this->getChildrenIds())->where('status', 1)->first()) {
-            return true;
+        foreach ($this->product->grouped_products as $groupedProduct) {
+            if ($groupedProduct->associated_product->isSaleable()) {
+                return true;
+            }
         }
 
-        return true;
+        return false;
+    }
+
+    /**
+     * Is product have sufficient quantity.
+     *
+     * @param  int  $qty
+     * @return bool
+     */
+    public function haveSufficientQuantity(int $qty): bool
+    {
+        foreach ($this->product->grouped_products as $groupedProduct) {
+            if ($groupedProduct->associated_product->haveSufficientQuantity($qty)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

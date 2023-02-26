@@ -13,7 +13,7 @@ return [
 
             'settings' => [
                 'channels'=> [
-                    'subscription_bar' => 'Contenido de la barra de subscripción'
+                    'subscription_bar' => 'Contenido de la barra de suscripción'
                 ],
             ],
 
@@ -29,12 +29,12 @@ return [
                 'active' => 'Activo',
                 'custom' => 'Personalizado',
                 'inactive' => 'Inactivo',
-                'image-alignment' => 'Alineación de Imágen',
+                'image-alignment' => 'Alineación de Imagen',
                 'icon-status' => 'Estado del Icono de Categoría',
-                'image-status' => 'Estado de Imágen de Categoría',
+                'image-status' => 'Estado de Imagen de Categoría',
                 'sub-category-show' => 'Mostrar Subcategoría',
-                'image-height' => 'Altura de la Imágen [en Píxeles]',
-                'image-width' => 'Ancho de la Imágen [en Píxeles]',
+                'image-height' => 'Altura de la Imagen [en Pixeles]',
+                'image-width' => 'Ancho de la Imagen [en Pixeles]',
                 'show-tooltip' => 'Mostrar Descripción Emergente de la Categoría',
                 'num-sub-category' => 'Número de Categoría',
             ]
@@ -60,6 +60,10 @@ return [
             'no-result-found' => 'Ningún registro encontrado.',
             'search-hint' => 'Buscar producto aquí...',
             'mass-delete-success' => 'El contenido seleccionado se eliminó correctamente.',
+            'delete-success'      => 'contenido eliminado con éxito',
+            'delete-failed'       => '¡Error! el contenido no se puede borrared',
+            'update-success'      => 'contenido actualizado con éxito',
+            'create-success'      => 'contenido creado con éxito',
             'tab' => [
                 'page' => 'Configuración de Página',
                 'content' => 'Configuración de Contenido',
@@ -103,22 +107,22 @@ return [
             'category-logo'             => 'Logotipo de Categoría',
             'product-policy'            => 'Política de Producto',
             'update-meta-data'          => 'Actualizar Metadatos',
-            'product-view-image'        => 'Imágen de Vista del Producto',
+            'product-view-image'        => 'Imagen de Vista del Producto',
             'advertisement-two'         => 'Anuncio de Dos Imágenes',
             'footer-middle-content'     => 'Contenido Intermedio del Pié de Página',
             'advertisement-four'        => 'Anuncio de Cuatro Imágenes',
             'advertisement-three'       => 'Anuncio de Tres Imágenes',
             'images'                    => 'Imágenes',
             'general'                   => 'General',
-            'add-image-btn-title'       => 'Añadir Imágen',
+            'add-image-btn-title'       => 'Añadir Imagen',
             'footer-middle' => [
                 'about-us'  => 'Nosotros',
                 'customer-service' => 'Servicio al Cliente',
                 'whats-new' => 'Lo Nuevo',
-                'contact-us' => 'Contactanos',
+                'contact-us' => 'Contáctanos',
                 'order-and-returns' => 'Pedidos y Devoluciones',
                 'payment-policy' => 'Política de Pago',
-                'shipping-policy' => 'Política de Envios',
+                'shipping-policy' => 'Política de Envíos',
                 'privacy-and-cookies-policy' => 'Política de privacidad y cookies'
             ]
         ],
@@ -129,7 +133,7 @@ return [
             'edit-title' => 'Edita Contenido del Menú',
             'btn-add-category' => 'Agregar Contenido de Categoría',
             'datagrid' => [
-                'category-id' => 'Categoría Id',
+                'category-id' => 'Id de Categoría',
                 'category-name' => 'Nombre de Categoría',
                 'category-icon' => 'Icono de Categoría',
                 'category-status' => 'Estado',
@@ -173,7 +177,7 @@ return [
         'all-categories'    => 'Todas las Categorías',
         'search-text'       => 'Buscar productos aquí',
         'welcome-message'   => 'Bienvenido, :customer_name',
-        'dropdown-text'     => 'Administrar Carrito, Pedidos & Lista de Deseos',
+        'dropdown-text'     => 'Administrar Carrito, Pedidos y Lista de Deseos',
     ],
 
     'menu-navbar'   => [
@@ -210,7 +214,7 @@ return [
             'removed'               => 'Elemento eliminado correctamente de la lista de comparación',
             'removed-all'           => 'Todos los artículos se eliminaron correctamente de la lista de comparación',
             'empty-text'            => "No tienes ningún artículo en tu lista de comparación",
-            'product_image'         => 'Imágen del Producto',
+            'product_image'         => 'Imagen del Producto',
             'actions'               => 'Acción',
         ],
         'login-form'        => [
@@ -225,7 +229,7 @@ return [
             'login'             => 'Iniciar Sesión',
             'become-user'       => 'Convertirse en Usuario',
             'user-registration' => 'Registro de Usuario',
-            'form-sginup-text'  => 'Si es nuevo en nuestra tienda, nos complace tenerlo como miembro.',
+            'form-signup-text'  => 'Si es nuevo en nuestra tienda, nos complace tenerlo como miembro.',
         ],
         'forget-password'   => [
             'login'                 => 'Iniciar Sesión',
@@ -263,7 +267,7 @@ return [
         'short-description' => 'Descripción Breve',
         'recently-viewed'   => 'Productos Vistos Recientemente',
         'be-first-review'   => 'Sé el primero en escribir una reseña',
-        'tax-inclusive'     => 'Inclusive of all taxes',
+        'tax-inclusive'     => 'Inclusivo de todos los impuestos',
     ],
 
     'shop'          => [
@@ -274,7 +278,7 @@ return [
         ],
         'general'   => [
             'no'                     => 'No',
-            'yes'                    => 'Si',
+            'yes'                    => 'Sí',
             'view'                   => 'Ver',
             'filter'                 => 'Filtrar',
             'orders'                 => 'Pedidos',

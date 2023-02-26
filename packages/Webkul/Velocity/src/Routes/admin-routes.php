@@ -11,8 +11,6 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'velocity::admin.content.index',
             ])->name('velocity.admin.content.index');
 
-            Route::get('content/search', [ContentController::class, 'search'])->name('velocity.admin.content.search');
-
             Route::get('content/create', [ContentController::class, 'create'])->defaults('_config', [
                 'view' => 'velocity::admin.content.create',
             ])->name('velocity.admin.content.create');

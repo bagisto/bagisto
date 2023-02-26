@@ -44,7 +44,8 @@
             }
 
             .table {
-                margin-top: 20px;
+                margin: 20px 6px 0px 6px;
+                border-spacing: 0px 0px 15px 0px;
             }
 
             .table table {
@@ -59,8 +60,8 @@
                 border-top: solid 1px #d3d3d3;
                 border-bottom: solid 1px #d3d3d3;
                 border-left: solid 1px #d3d3d3;
-                padding: 5px 10px;
-                background: #F4F4F4;
+                padding: 5px 12px;
+                background: #005aff0d;
             }
 
             .table thead th:last-child {
@@ -69,23 +70,20 @@
 
             .table tbody td {
                 padding: 5px 10px;
-                border-bottom: solid 1px #d3d3d3;
-                border-left: solid 1px #d3d3d3;
                 color: #3A3A3A;
                 vertical-align: middle;
+                border-bottom: solid 1px #d3d3d3;
             }
 
-            .table tbody td p {
+            .table tbody td, p {
                 margin: 0;
-            }
-
-            .table tbody td:last-child {
-                border-right: solid 1px #d3d3d3;
+                color: #000;
             }
 
             .sale-summary {
-                margin-top: 40px;
+                margin-top: 20px;
                 float: right;
+                background-color: #005aff0d;
             }
 
             .sale-summary tr td {
@@ -117,91 +115,146 @@
             .text-center {
                 text-align: center;
             }
+
+            .col-6 {
+                width: 42%;
+                display: inline-block;
+                vertical-align: top;
+                margin: 0px 5px;
+            }
+
+            .table-header {
+                color: #0041FF;
+            }
+
+            .align-left {
+                text-align: left;
+            }
+
+            .invoice-text {
+                font-size: 40px; 
+                color: #3c41ff; 
+                font-weight: bold;
+                position: absolute; 
+                width: 100%; 
+                left: 0;
+                text-align: center;
+                top: -6px;
+            }
+
+            .without_logo {
+                height: 35px;
+                width: 35px;
+            }
+            
+            .header {
+                padding: 0px 2px;
+                width:100%;
+                position: relative;
+                border-bottom: solid 1px #d3d3d3;
+                padding-bottom: 20px;
+            }
         </style>
     </head>
 
-    <body style="background-image: none;background-color: #fff;">
+    <body style="background-image: none; background-color: #fff;">
         <div class="container">
-            <div class="header">
+            <div>
                 <div class="row">
+                    <div class="col-12 header">
+                        @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
+                            <div class="image" style="display:inline-block; vertical-align: middle; padding-top:8px">
+                                <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}" alt=""/>
+                            </div>
+                        @else
+                            <div class="without_logo" style="display:inline-block; vertical-align: middle; padding-top:8px">
+                            </div>
+                        @endif
+                        <div class="invoice-text">
+                            <span>{{ strtoupper(__('admin::app.sales.invoices.invoice')) }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="padding: 5px">
                     <div class="col-12">
-                        <h1 class="text-center">{{ __('admin::app.sales.invoices.invoice') }}</h1>
+                        <div class="col-6">
+                            <div class="merchant-details">
+                                <div class="row">
+                                    <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }}: </span>
+                                    <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
+                                </div>
+
+                                <div class="row">
+                                    <span class="label">{{ __('shop::app.customer.account.order.view.invoice-date') }}: </span>
+                                    <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
+                                </div>
+
+                                <div style="padding-top: 20px">
+                                    <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
+                                </div>
+
+                                <div>{{ core()->getConfigData('sales.shipping.origin.address1') ?? '' }}</div>
+
+                                <div>
+                                    <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ?? '' }}</span>
+                                    <span>{{ core()->getConfigData('sales.shipping.origin.city') ?? '' }}</span>
+                                </div>
+
+                                <div>{{ core()->getConfigData('sales.shipping.origin.state') ?? '' }}</div>
+
+                                <div>{{ core()->getConfigData('sales.shipping.origin.country') ?? '' }}</div>
+                            </div>
+                            <div class="merchant-details">
+                                @if (core()->getConfigData('sales.shipping.origin.contact'))
+                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}: </span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
+                                @endif
+
+                                @if (core()->getConfigData('sales.shipping.origin.vat_number'))
+                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}: </span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-6" style="padding-left: 80px">
+                            <div class="row">
+                                <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }}: </span>
+                                <span class="value">#{{ $invoice->order->increment_id }}</span>
+                            </div>
+                           
+                            <div class="row">
+                                <span class="label">{{ __('shop::app.customer.account.order.view.order-date') }}: </span>
+                                <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
+                            </div>
+
+                            @if ($invoice->hasPaymentTerm())
+                                <div class="row">
+                                    <span class="label">{{ __('shop::app.customer.account.order.view.payment-terms') }} -</span>
+                                    <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
+                                </div>
+                            @endif
+
+                            @if (core()->getConfigData('sales.shipping.origin.bank_details'))
+                                <div class="row" style="padding-top: 20px">
+                                    <span class="merchant-details-title">
+                                        {{ __('admin::app.admin.system.bank-details') }}:
+                                    </span> 
+                                    <div>{{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
+                                </div>
+                            @endif
+                        </div>
                     </div>
-                </div>
-
-                @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
-                    <div class="image">
-                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}" alt=""/>
-                    </div>
-                @endif
-
-                <div class="merchant-details">
-                    <div>
-                        <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
-                    </div>
-
-                    <div>{{ core()->getConfigData('sales.shipping.origin.address1') ? core()->getConfigData('sales.shipping.origin.address1') : '' }}</div>
-
-                    <div>
-                        <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ? core()->getConfigData('sales.shipping.origin.zipcode') : '' }}</span>
-                        <span>{{ core()->getConfigData('sales.shipping.origin.city') ? core()->getConfigData('sales.shipping.origin.city') : '' }}</span>
-                    </div>
-
-                    <div>{{ core()->getConfigData('sales.shipping.origin.state') ? core()->getConfigData('sales.shipping.origin.state') : '' }}</div>
-
-                    <div>{{ core()->getConfigData('sales.shipping.origin.country') ?  core()->country_name(core()->getConfigData('sales.shipping.origin.country')) : '' }}</div>
-                </div>
-
-                <div class="merchant-details">
-                    @if (core()->getConfigData('sales.shipping.origin.contact'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
-                    @endif
-
-                    @if (core()->getConfigData('sales.shipping.origin.vat_number'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
-                    @endif
-
-                    @if (core()->getConfigData('sales.shipping.origin.bank_details'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.bank-details') }}:</span> {{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
-                    @endif
                 </div>
             </div>
 
             <div class="invoice-summary">
-                <div class="row">
-                    <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }} -</span>
-                    <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
-                </div>
-
-                <div class="row">
-                    <span class="label">{{ __('shop::app.customer.account.order.view.invoice-date') }} -</span>
-                    <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
-                </div>
-
-                <div class="row">
-                    <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }} -</span>
-                    <span class="value">#{{ $invoice->order->increment_id }}</span>
-                </div>
-
-                <div class="row">
-                    <span class="label">{{ __('shop::app.customer.account.order.view.order-date') }} -</span>
-                    <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
-                </div>
-
-                @if ($invoice->hasPaymentTerm())
-                    <div class="row">
-                        <span class="label">{{ __('shop::app.customer.account.order.view.payment-terms') }} -</span>
-                        <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
-                    </div>
-                @endif
-
                 <div class="table address">
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 50%">{{ __('shop::app.customer.account.order.view.bill-to') }}</th>
+                                <th class="table-header align-left" style="width: 50%;">{{ ucwords(trans('shop::app.customer.account.order.view.bill-to')) }}</th>
                                 @if ($invoice->order->shipping_address)
-                                    <th>{{ __('shop::app.customer.account.order.view.ship-to') }}</th>
+                                    <th class="table-header align-left">{{ ucwords(trans('shop::app.customer.account.order.view.ship-to')) }}</th>
                                 @endif
                             </tr>
                         </thead>
@@ -243,10 +296,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 50%">{{ __('shop::app.customer.account.order.view.payment-method') }}</th>
+                                <th class="table-header align-left" style="width: 50%;">{{ __('shop::app.customer.account.order.view.payment-method') }}</th>
 
                                 @if ($invoice->order->shipping_address)
-                                    <th>{{ __('shop::app.customer.account.order.view.shipping-method') }}</th>
+                                    <th class="table-header align-left">{{ __('shop::app.customer.account.order.view.shipping-method') }}</th>
                                 @endif
                             </tr>
                         </thead>
@@ -280,13 +333,13 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.SKU') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.product-name') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.price') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.qty') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.subtotal') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.tax-amount') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.grand-total') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.SKU') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.product-name') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.price') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.qty') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.subtotal') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.tax-amount') }}</th>
+                                <th class="text-center table-header">{{ __('shop::app.customer.account.order.view.grand-total') }}</th>
                             </tr>
                         </thead>
 
