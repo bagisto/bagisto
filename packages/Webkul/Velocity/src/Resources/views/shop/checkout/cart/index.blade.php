@@ -237,8 +237,8 @@
                             @include('shop::checkout.total.summary', ['cart' => $cart])
 
                             <coupon-component></coupon-component>
-                            
-                            <category-products category-id='{{$cart->items[$key]->product->categories[0]->id}}'></category-products>
+
+                            <related-products wishlist-items='{{ $wishlistItems }}' category-id='{{ $cart->items[$key]->product->categories->first()->id??0 }}'></related-products>
                         </div>
                     @else
                         <div class="fs16 col-12 empty-cart-message">
@@ -284,7 +284,7 @@
 
     <script type="text/x-template" id='wishlist-recent-orders-template'>
         <div>
-            <div class="carousel-products" v-if='{{count($productItems)}} != 0'>
+            <div class="carousel-products" v-if='{{count($wishlistItems)}} != 0'>
                 <div class="customer-orders">
                     <h2 class="fs20 fw6">{{ __('shop::app.home.wishlist') }}</h2>
                 </div>
@@ -293,9 +293,9 @@
                     :slides-per-page="slidesPerPage"
                     navigation-enabled="show"
                     paginationEnabled="hide"
-                    :slides-count="{{count($productItems)}}">
+                    :slides-count="{{count($wishlistItems)}}">
 
-                    @foreach($productItems as $key => $productItem)
+                    @foreach($wishlistItems as $key => $productItem)
                         <slide slot="slide-{{ $key }}">
                             @include ('shop::products.list.card', [
                                 'product' => $productItem->product,
@@ -361,74 +361,95 @@
         })
     </script>
 
-    <script type="text/x-template" id='category-products-template'>
+    <script type="text/x-template" id='related-products-template'>
         <div>
-            <div class="row remove-padding-margin">`
-                <div class="col-12 no-padding">
-                    <h2 class="fs20 fw6 mb15 mt-5">
-                        {{ __('shop::app.checkout.cart.product-related') }}
-                    </h2>
+            <div v-if='this.$root.products.length'>
+                <div class="row remove-padding-margin">`
+                    <div class="col-12 no-padding">
+                        <h2 class="fs20 fw6 mb15 mt-5">
+                            {{ __('shop::app.checkout.cart.product-related') }}
+                        </h2>
+                    </div>
+                </div>
+
+                <div :class="`recently-viewed-products-wrapper`">
+                    <div class="row small-card-container" v-for='product in this.$root.products' style="padding: 10px 0px 10px 0px;">
+                        <div class="col-2 product-image-container mr15">
+                            <a :href="`${baseUrl}/${product.slug}`" class="unset">
+                                <div class="product-image" :style="`background-image: url(${product.image})`">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-10 no-padding card-body align-vertical-top" style='padding: initial !important' >
+                            <a :href="`${baseUrl}/${product.slug}`" class="unset no-padding">
+                                <div class="product-name">
+                                    <span class="fs16 text-nowrap" v-text='product.name'></span>
+                                </div>
+
+                                <div
+                                    v-html="product.priceHTML"
+                                    class="fs18 card-current-price fw6">
+                                </div>
+
+                                <star-ratings v-if="product.avgRating > 0"
+                                    push-class="display-inbl"
+                                    :ratings="product.avgRating">
+                                </star-ratings>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div :class="`recently-viewed-products-wrapper`">
-                <div class="row small-card-container" v-for='product in categoryProducts' style="padding: 10px 0px 10px 0px;">
-                    <div class="col-2 product-image-container mr15">
-                        <a :href="`${baseUrl}/${product.slug}`" class="unset">
-                            <div class="product-image" :style="`background-image: url(${product.image})`">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-10 no-padding card-body align-vertical-top" style='padding: initial !important' >
-                        <a :href="`${baseUrl}/${product.slug}`" class="unset no-padding">
-                            <div class="product-name">
-                                <span class="fs16 text-nowrap" v-text='product.name'></span>
-                            </div>
-
-                            <div
-                                v-html="product.priceHTML"
-                                class="fs18 card-current-price fw6">
-                            </div>
-
-                            <star-ratings v-if="product.avgRating > 0"
-                                push-class="display-inbl"
-                                :ratings="product.avgRating">
-                            </star-ratings>
-                        </a>
+            <div v-if='this.$root.products.length <= 0'>
+                <div class="row remove-padding-margin">`
+                    <div class="col-12 no-padding">
+                        <h2 class="fs20 fw6 mb15 mt-5">
+                            {{ __('shop::app.checkout.cart.product-related') }}
+                        </h2>
                     </div>
                 </div>
+
+                @foreach ($wishlistItems->take(5) as $wishlistItem)
+                    <div :class="`recently-viewed-products-wrapper`">
+                        <div class="row small-card-container" style="padding: 10px 0px 10px 0px;">
+                            <div class="col-2 product-image-container mr15">
+                                <a href='{{ url($wishlistItem->url_key) }}' class="unset">
+                                    <img src='{{ $wishlistItem->images->first() ? Storage::url($wishlistItem->images->first()->path) : url("themes/velocity/assets/images/product/small-product-placeholder.png") }}' height='70'>
+                                </a>
+                            </div>
+                            <div class="col-10 no-padding card-body align-vertical-top" style='padding: initial !important' >
+                                <a class="unset no-padding" href='{{ url($wishlistItem->url_key) }}'>
+                                    <div class="product-name">
+                                        <span class="fs16 text-nowrap">{{ $wishlistItem->name }}</span>
+                                    </div>
+
+                                    <div class="fs18 card-current-price fw6">{!! $wishlistItem->getTypeInstance()->getPriceHtml() !!}</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </script>
 
     <script>
-        Vue.component('category-products', {
-            template: "#category-products-template",
+        Vue.component('related-products', {
+            template: "#related-products-template",
 
-            props: ['categoryId'],
-            
+            props: ['categoryId', 'wishlistItems'],
+
             data: function () {
                 return {
-                    'categoryProducts': [],
+                    'wishlistItemsDetails': [],
                 }
             },
 
-            created() {
-                this.getCategoryProducts();
+            mounted() {
+                this.$root.getCategoryProducts(this.categoryId);
+                this.wishlistItemsDetails = JSON.parse(this.wishlistItems)
             },
-
-            methods: {
-                getCategoryProducts: function() {
-                    this.$http.get(`${this.$root.baseUrl}/category-products/${this.categoryId}`)
-                    .then((response) => {
-                        if (response.status == 200) {
-                            this.categoryProducts = response.data.products;
-                        }
-                    }).catch((error)=>{
-                        console.log(error);
-                    });
-                }
-            }
         })
     </script>
 @endpush

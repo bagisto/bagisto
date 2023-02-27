@@ -66,7 +66,8 @@ class CartController extends Controller
                 $productsIds[] = $wishlist->product_id;
             }
 
-            $productItems = $this->productRepository->findWhereIn('id', $productsIds);
+            $wishlistItems = $this->productRepository->findWhereIn('id', $productsIds);
+            
         } else {
             $productsData = Cookie::get('product');
 
@@ -75,7 +76,7 @@ class CartController extends Controller
             $orderItems = $this->productRepository->findWhereIn('sku', $products);
         }
 
-        return view($this->_config['view'], compact('orderItems', 'productItems'))->with('cart', Cart::getCart());
+        return view($this->_config['view'], compact('orderItems', 'wishlistItems'))->with('cart', Cart::getCart());
     }
 
     /**
