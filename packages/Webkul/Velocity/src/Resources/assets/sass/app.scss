@@ -217,6 +217,14 @@ label {
             padding-left: 5px;
         }
 
+        .profile-small-icon {
+            width: 20px;
+            margin-right: 5px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: top;
+        }
+
         .welcome-content {
             @extend .unselectable;
 
@@ -1095,6 +1103,17 @@ i.within-circle {
     box-shadow: none;
 }
 
+.filters-container .toolbar-wrapper > div select {
+    cursor: pointer;
+    padding: 6px 8px;
+    color: rgba(0, 0, 0, 0.83);
+    background-color: #fff;
+}
+
+.filters-container .toolbar-wrapper > div {
+    margin: 0 8px 0 0;
+}
+
 @media (max-width: 600px) {
     .selective-div {
         width: 97px;
@@ -1126,6 +1145,20 @@ i.within-circle {
 
 .show-password {
     margin-top:10px !important;
+}
+
+.category {
+    line-height: 2.0rem !important;
+}
+
+.sub-category {
+    padding-left: 0 !important;
+    padding-top: 0 !important;
+    line-height: 2.0rem !important;
+    
+    i {
+        margin-top: 8px !important;
+    }
 }
 
 .compare-products {
