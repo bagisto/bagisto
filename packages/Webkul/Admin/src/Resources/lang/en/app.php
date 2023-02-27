@@ -630,6 +630,7 @@ return [
             'saved-inventory-message'       => 'Product inventory saved successfully.',
             'image-size'                    => 'Image resolution should be like 640px X 640px',
             'image-drop'                    => 'Browse to find or drag image.',
+            'video-drop'                    => 'Browse to find or drag video.',
             'create-success'                => 'Product created successfully.',
             'update-success'                => 'Product updated successfully.',
             'delete-success'                => 'Product deleted successfully.',  
