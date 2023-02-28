@@ -49,10 +49,7 @@ class AttributeRepository extends Repository
 
         $attribute = $this->model->create($data);
 
-        if (
-            in_array($attribute->type, ['select', 'multiselect', 'checkbox'])
-            && count($options)
-        ) {
+        if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
             foreach ($options as $optionInputs) {
                 $this->attributeOptionRepository->create(array_merge([
                     'attribute_id' => $attribute->id,

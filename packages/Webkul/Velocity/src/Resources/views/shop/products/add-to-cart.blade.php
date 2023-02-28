@@ -86,7 +86,11 @@
         && (bool) core()->getConfigData('general.content.shop.wishlist_option')
     )
         @include('shop::products.wishlist', [
-            'addClass' => $addWishlistClass ?? ''
+            'addClass' => $addWishlistClass ?? '',
+            'showText' => request()->routeIs([
+                'velocity.product.compare',
+                'velocity.product.details',
+            ])
         ])
     @endif
 </div>
