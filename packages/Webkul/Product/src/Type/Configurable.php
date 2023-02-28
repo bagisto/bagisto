@@ -588,19 +588,25 @@ class Configurable extends AbstractType
 
         $priceHtml .= '<div class="price-from">';
 
-        if ($prices['regular_price']['price'] != $prices['final_price']['price']) {
+        if ($prices['regular_price']['price'] != $prices['final_price']['price']) { 
 
+           if(request()->routeIs("velocity.category.details")){
+
+                $priceHtml .=  '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>'
+                            . '  '
+                            .'<span class="price-label">' . trans('shop::app.products.price-label') . '</span>';
+           } else {
+            
             $priceHtml .= '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
                         . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>'
                         . '  '
-                        .'<span class="price-label">' . trans('shop::app.products.price-label') . '</span>';
-                    
+                        .'<span class="price-label">' . trans('shop::app.products.price-label') . '</span>';  
+           }       
         } else {
             $priceHtml .= '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
                          . '  '
                          .'<span class="special-price">' . $prices['regular_price']['formatted_price'] . '</span>';
         }
-
         $priceHtml .= '</div>';
         
         return $priceHtml;

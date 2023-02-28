@@ -310,6 +310,7 @@
 
                             this.childAttributes.forEach(function(attribute) {
                                 if (attribute.selectedIndex) {
+                                    console.log(attribute.selectedIndex,"313");
                                     selectedOptionCount++;
                                 }
                             });
@@ -317,9 +318,9 @@
                             let priceLabelElement = document.querySelector('.price-label');
 
                             let priceElement = document.querySelector('.special-price') ? document.querySelector('.special-price') : document.querySelector('.final-price');
-                            
+                            console.log(priceElement,"321");
                             let regularPriceElement = document.querySelector('.regular-price');
-                            
+                            console.log(regularPriceElement,"321");
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
 
@@ -348,7 +349,6 @@
 
                                 eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                             } else {
-                                regularPriceElement.innerHTML = "";
                                
                                 priceLabelElement.style.display = 'inline-block';
                                 

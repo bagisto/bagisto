@@ -18,7 +18,6 @@
 
             /* title */
             $title = $wishlist ? __('velocity::app.shop.wishlist.remove-wishlist-text') : __('velocity::app.shop.wishlist.add-wishlist-text');     
-            $showText = request()->routeIs("velocity.product.compare");
         @endphp
         
         <a
@@ -32,11 +31,17 @@
                 '{{ csrf_token() }}'
             )"
             >
-            <wishlist-component active="{{ $wishlist ? false : true }}"></wishlist-component>
+
+            @if (request()->routeIs('shop.customer.wishlist.index'))
+                <wishlist-component add-class="rango-delete fs24"></wishlist-component>
+            @else
+                <wishlist-component active="{{ $wishlist ? false : true }}"></wishlist-component>
+            @endif
+            
             
             @if (isset($text))
                 {!! $text !!}
-            @elseif ($showText)
+            @elseif ($showText ?? false)
                 <span>{{__('admin::app.admin.system.wishlist')}}</span>
             @endif
         </a>        
@@ -53,9 +58,15 @@
                     class="unset wishlist-icon wishlist {{ $addWishlistClass ?? '' }} text-right"
                     href="javascript:void(0);"
                     title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
-                    onclick="document.getElementById('wishlist-{{ $product->id }}').submit();">
-
+                    onclick="document.getElementById('wishlist-{{ $product->id }}').submit();"
+                >
                     <wishlist-component active="false"></wishlist-component>
+
+                    @if (isset($text))
+                        {!! $text !!}
+                    @elseif ($showText ?? false)
+                        <span>{{__('admin::app.admin.system.wishlist')}}</span>
+                    @endif
                 </a>
             </div>
         </form>
