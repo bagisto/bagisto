@@ -37,8 +37,6 @@ class BookingProductController extends Controller
         TableSlotHelper $tableSlotHelper
     )
     {
-        $this->bookingProductRepository = $bookingProductRepository;
-        
         $this->bookingHelpers['default'] = $defaultSlotHelper;
 
         $this->bookingHelpers['appointment'] = $appointmentSlotHelper;
