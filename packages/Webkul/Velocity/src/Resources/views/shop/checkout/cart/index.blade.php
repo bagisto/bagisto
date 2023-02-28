@@ -375,14 +375,14 @@
                 </div>
 
                 <div :class="`recently-viewed-products-wrapper`">
-                    <div class="row small-card-container" v-for='product in this.$root.products' style="padding: 10px 0px 10px 0px;">
+                    <div class="row small-card-container related-product" v-for='product in this.$root.products'>
                         <div class="col-2 product-image-container mr15">
                             <a :href="`${baseUrl}/${product.slug}`" class="unset">
                                 <div class="product-image" :style="`background-image: url(${product.image})`">
                                 </div>
                             </a>
                         </div>
-                        <div class="col-10 no-padding card-body align-vertical-top" style='padding: initial !important' >
+                        <div class="col-10 no-padding card-body align-vertical-top">
                             <a :href="`${baseUrl}/${product.slug}`" class="unset no-padding">
                                 <div class="product-name">
                                     <span class="fs16 text-nowrap" v-text='product.name'></span>
@@ -415,13 +415,13 @@
                 @if ($wishlistItems)
                     @foreach ($wishlistItems->take(5) as $wishlistItem)
                         <div :class="`recently-viewed-products-wrapper`">
-                            <div class="row small-card-container" style="padding: 10px 0px 10px 0px;">
+                            <div class="row small-card-container related-product">
                                 <div class="col-2 product-image-container mr15">
                                     <a href='{{ url($wishlistItem->url_key) }}' class="unset">
                                         <img src='{{ $wishlistItem->images->first() ? Storage::url($wishlistItem->images->first()->path) : url("themes/velocity/assets/images/product/small-product-placeholder.png") }}' height='70'>
                                     </a>
                                 </div>
-                                <div class="col-10 no-padding card-body align-vertical-top" style='padding: initial !important' >
+                                <div class="col-10 no-padding card-body align-vertical-top" >
                                     <a class="unset no-padding" href='{{ url($wishlistItem->url_key) }}'>
                                         <div class="product-name">
                                             <span class="fs16 text-nowrap">{{ $wishlistItem->name }}</span>
@@ -448,13 +448,13 @@
                 @if ($orderItems)
                     @foreach ($orderItems->take(5) as $orderItem)
                         <div :class="`recently-viewed-products-wrapper`">
-                            <div class="row small-card-container" style="padding: 10px 0px 10px 0px;">
+                            <div class="row small-card-container related-product">
                                 <div class="col-2 product-image-container mr15">
                                     <a href='{{ url($orderItem->product->url_key) }}' class="unset">
                                         <img src='{{ $orderItem->product->images->first() ? Storage::url($orderItem->product->images->first()->path) : url("themes/velocity/assets/images/product/small-product-placeholder.png") }}' height='70'>
                                     </a>
                                 </div>
-                                <div class="col-10 no-padding card-body align-vertical-top" style='padding: initial !important' >
+                                <div class="col-10 no-padding card-body align-vertical-top">
                                     <a class="unset no-padding" href='{{ url($orderItem->product->url_key) }}'>
                                         <div class="product-name">
                                             <span class="fs16 text-nowrap">{{ $orderItem->name }}</span>
