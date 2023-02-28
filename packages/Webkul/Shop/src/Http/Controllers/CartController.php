@@ -48,8 +48,9 @@ class CartController extends Controller
         Cart::collectTotals();
 
         $orderItems = [];
-
         $productItems = [];
+        $wishlistItems = [];
+        $productsIds = [];
 
         if ($customerId = auth()->guard('customer')->user()) {
             $orders = $this->orderRepository->findWhere(['customer_id' => $customerId->id]);
