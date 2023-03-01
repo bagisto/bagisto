@@ -24,6 +24,7 @@ return [
     'home' => [
         'page-title'          => config('app.name') . ' - בית',
         'featured-products'   => 'מוצרים נבחרים',
+        'history'             => 'Recent History',
         'new-products'        => 'מוצרים חדשים',
         'verify-email'        => 'אמת את חשבון הדוא"ל שלך',
         'resend-verify-email' => 'שלח מחדש דוא"ל אימות',

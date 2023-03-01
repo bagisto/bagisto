@@ -52,7 +52,7 @@
 @endphp
 
 @section('content-wrapper')
-    <category-component></category-component>
+    <category-component category-id='{{ $category->id??0 }}'></category-component>
 @stop
 
 @push('scripts')
@@ -112,7 +112,7 @@
 
                 @if ($isProductsDisplayMode)
                     <div class="filters-container">
-                        <template v-if="products.length >= 0">
+                        <template v-if="this.$root.products.length >= 0">
                             @include ('shop::products.list.toolbar')
                         </template>
                     </div>
@@ -125,13 +125,13 @@
 
                         <shimmer-component v-if="isLoading" shimmer-count="4"></shimmer-component>
 
-                        <template v-else-if="products.length > 0">
+                        <template v-else-if="this.$root.products.length > 0">
                             @if ($toolbarHelper->getCurrentMode() == 'grid')
                                 <div class="row col-12 remove-padding-margin">
                                     <product-card
                                         :key="index"
                                         :product="product"
-                                        v-for="(product, index) in products">
+                                        v-for="(product, index) in this.$root.products">
                                     </product-card>
                                 </div>
                             @else
@@ -140,7 +140,7 @@
                                         list=true
                                         :key="index"
                                         :product="product"
-                                        v-for="(product, index) in products">
+                                        v-for="(product, index) in this.$root.products">
                                     </product-card>
                                 </div>
                             @endif
@@ -168,9 +168,10 @@
         Vue.component('category-component', {
             template: '#category-template',
 
+            props: ['categoryId'],
+
             data: function () {
                 return {
-                    'products': [],
                     'isLoading': true,
                     'paginationHTML': '',
                     'currentScreen': window.innerWidth,
@@ -178,25 +179,15 @@
                 }
             },
 
-            created: function () {
-                this.getCategoryProducts();
-                this.setSlidesPerPage(this.currentScreen);
+            mounted() {
+                this.$root.getCategoryProducts(this.categoryId);
+                if (this.$root.products) {
+                    this.isLoading = false;
+                    this.paginationHTML = this.$root.paginationHTML;
+                }
             },
 
             methods: {
-                'getCategoryProducts': function () {
-                    this.$http.get(`${this.$root.baseUrl}/category-products/{{ $category->id }}${window.location.search}`)
-                    .then(response => {
-                        this.isLoading = false;
-                        this.products = response.data.products;
-                        this.paginationHTML = response.data.paginationHTML;
-                    })
-                    .catch(error => {
-                        this.isLoading = false;
-                        console.log(this.__('error.something_went_wrong'));
-                    })
-                },
-
                 setSlidesPerPage: function (width) {
                     if (width >= 1200) {
                         this.slidesPerPage = 5;

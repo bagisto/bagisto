@@ -29,11 +29,17 @@ class CartItem extends Model implements CartItemContract
         'updated_at',
     ];
 
+    /**
+     * Get Product
+     */
     public function product(): HasOne
     {
         return $this->hasOne(ProductProxy::modelClass(), 'id', 'product_id');
     }
 
+    /**
+     * Get Cart
+     */
     public function cart(): HasOne
     {
         return $this->hasOne(CartProxy::modelClass(), 'id', 'cart_id');

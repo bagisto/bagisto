@@ -273,6 +273,8 @@ $(function() {
                 quickView: false,
                 productDetails: [],
                 currentScreen: window.innerWidth,
+                products:[],
+                paginationHTML: ""
             };
         },
 
@@ -383,6 +385,18 @@ $(function() {
 
             hideLoader: function() {
                 this.loading = false;
+            },
+
+            getCategoryProducts: function(categoryId) {
+                this.$http.get(`${this.$root.baseUrl}/category-products/${categoryId}`)
+                .then((response) => {
+                    if (response.status == 200) {
+                        this.products = response.data.products;
+                        this.paginationHTML = response.data.paginationHTML;
+                    }
+                }).catch((error)=>{
+                    console.log(error);
+                });
             },
         }
     });

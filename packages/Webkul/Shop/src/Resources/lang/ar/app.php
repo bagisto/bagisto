@@ -24,6 +24,7 @@ return [
     'home' => [
         'page-title'          => 'عنوان الصفحة',
         'featured-products'   => 'المنتجات المميزة',
+        'history'             => 'Recent History',
         'new-products'        => 'المنتجات الجديدة',
         'verify-email'        => 'تحقق من حساب بريدك الإلكتروني',
         'resend-verify-email' => 'إعادة التحقق من البريد الإلكتروني',

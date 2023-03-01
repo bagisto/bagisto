@@ -27,7 +27,6 @@
         <div class="container">
             <section class="cart-details row no-margin col-12">
                 <h2 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h2>
-
                 @if ($cart)
                     <div class="cart-details-header col-lg-7 col-md-12">
                         <div class="row cart-header col-12 no-padding">
@@ -225,6 +224,8 @@
                             </form>
                         </div>
 
+                        <wishlist-recent-orders></wishlist-recent-orders>
+
                         @include ('shop::products.view.cross-sells')
                     </div>
                 @endif
@@ -236,6 +237,10 @@
                             @include('shop::checkout.total.summary', ['cart' => $cart])
 
                             <coupon-component></coupon-component>
+
+                            @php $items = $wishlistItems ? $wishlistItems : "" @endphp
+
+                            <related-products wishlist-items='{{ $wishlistItems }}' category-id='{{ $cart->items[$key]->product->categories->first()->id??0 }}'></related-products>
                         </div>
                     @else
                         <div class="fs16 col-12 empty-cart-message">
@@ -277,5 +282,211 @@
                 }
             })
         })();
+    </script>
+
+    <script type="text/x-template" id='wishlist-recent-orders-template'>
+        <div>
+            <div class="carousel-products" v-if='{{count($wishlistItems)}} != 0'>
+                <div class="customer-orders">
+                    <h2 class="fs20 fw6">{{ __('shop::app.home.wishlist') }}</h2>
+                </div>
+
+                <carousel-component
+                    :slides-per-page="slidesPerPage"
+                    navigation-enabled="show"
+                    paginationEnabled="hide"
+                    :slides-count="{{count($wishlistItems)}}">
+
+                    @foreach($wishlistItems as $key => $productItem)
+                        <slide slot="slide-{{ $key }}">
+                            @include ('shop::products.list.card', [
+                                'product' => $productItem->product,
+                                'addToCartBtnClass' => 'small-padding',
+                            ])
+                        </slide>
+                    @endforeach
+                </carousel-component>
+            </div>
+
+            <div class="carousel-products recent-history" v-if='{{count($orderItems)}} != 0'>
+                <div class="customer-orders">
+                    <h2 class="fs20 fw6">{{ __('shop::app.home.recent-item') }}</h2>
+                </div>
+
+                <carousel-component
+                    :slides-per-page="slidesPerPage"
+                    navigation-enabled="show"
+                    paginationEnabled="hide"
+                    :slides-count="{{count($orderItems)}}">
+
+                    @foreach($orderItems as $key => $orderItem)
+                        <slide slot="slide-{{ $key }}">
+                            @include ('shop::products.list.card', [
+                                'product' => $orderItem->product,
+                                'addToCartBtnClass' => 'small-padding',
+                            ])
+                        </slide>
+                    @endforeach
+                </carousel-component>
+            </div>
+        </div>
+    </script>
+
+    <script>
+        Vue.component('wishlist-recent-orders', {
+            template: "#wishlist-recent-orders-template",
+
+            data: function () {
+                return {
+                    'currentScreen': window.innerWidth,
+                    'slidesPerPage': 5,
+                }
+            },
+
+            created: function () {
+                this.setSlidesPerPage(this.currentScreen);
+            },
+
+            methods: {
+                setSlidesPerPage: function (width) {
+                    if (width >= 1200) {
+                        this.slidesPerPage = 3;
+                    } else if (width < 1200 && width >= 770) {
+                        this.slidesPerPage = 2;
+                    } else if (width < 770 && width >= 500) {
+                        this.slidesPerPage = 3;
+                    } else {
+                        this.slidesPerPage = 1;
+                    }
+                }
+            }
+        })
+    </script>
+
+    <script type="text/x-template" id='related-products-template'>
+        <div>
+            <div v-if='this.$root.products.length'>
+                <div class="row remove-padding-margin">`
+                    <div class="col-12 no-padding">
+                        <h2 class="fs20 fw6 mb15 mt-5">
+                            {{ __('shop::app.checkout.cart.product-related') }}
+                        </h2>
+                    </div>
+                </div>
+
+                <div :class="`recently-viewed-products-wrapper`">
+                    <div class="row small-card-container related-product" v-for='product in this.$root.products'>
+                        <div class="col-2 product-image-container mr15">
+                            <a :href="`${baseUrl}/${product.slug}`" class="unset">
+                                <div class="product-image" :style="`background-image: url(${product.image})`">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-10 no-padding card-body align-vertical-top">
+                            <a :href="`${baseUrl}/${product.slug}`" class="unset no-padding">
+                                <div class="product-name">
+                                    <span class="fs16 text-nowrap" v-text='product.name'></span>
+                                </div>
+
+                                <div
+                                    v-html="product.priceHTML"
+                                    class="fs18 card-current-price fw6">
+                                </div>
+
+                                <star-ratings v-if="product.avgRating > 0"
+                                    push-class="display-inbl"
+                                    :ratings="product.avgRating">
+                                </star-ratings>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if='{{ count($wishlistItems) }} > 0 && this.$root.products.length <= 0'>
+                <div class="row remove-padding-margin">`
+                    <div class="col-12 no-padding">
+                        <h2 class="fs20 fw6 mb15 mt-5">
+                            {{ __('shop::app.checkout.cart.product-related') }}
+                        </h2>
+                    </div>
+                </div>
+
+                @if ($wishlistItems)
+                    @foreach ($wishlistItems->take(5) as $wishlistItem)
+                        <div :class="`recently-viewed-products-wrapper`">
+                            <div class="row small-card-container related-product">
+                                <div class="col-2 product-image-container mr15">
+                                    <a href='{{ url($wishlistItem->url_key) }}' class="unset">
+                                        <img src='{{ $wishlistItem->images->first() ? Storage::url($wishlistItem->images->first()->path) : url("themes/velocity/assets/images/product/small-product-placeholder.png") }}' height='70'>
+                                    </a>
+                                </div>
+                                <div class="col-10 no-padding card-body align-vertical-top" >
+                                    <a class="unset no-padding" href='{{ url($wishlistItem->url_key) }}'>
+                                        <div class="product-name">
+                                            <span class="fs16 text-nowrap">{{ $wishlistItem->name }}</span>
+                                        </div>
+
+                                        <div class="fs18 card-current-price fw6">{!! $wishlistItem->getTypeInstance()->getPriceHtml() !!}</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+            
+            <div v-if='{{ count($orderItems) }} > 0 && ({{ count($wishlistItems) }} <= 0 && this.$root.products.length <= 0)'>
+                <div class="row remove-padding-margin">`
+                    <div class="col-12 no-padding">
+                        <h2 class="fs20 fw6 mb15 mt-5">
+                            {{ __('shop::app.checkout.cart.product-related') }}
+                        </h2>
+                    </div>
+                </div>
+                
+                @if ($orderItems)
+                    @foreach ($orderItems->take(5) as $orderItem)
+                        <div :class="`recently-viewed-products-wrapper`">
+                            <div class="row small-card-container related-product">
+                                <div class="col-2 product-image-container mr15">
+                                    <a href='{{ url($orderItem->product->url_key) }}' class="unset">
+                                        <img src='{{ $orderItem->product->images->first() ? Storage::url($orderItem->product->images->first()->path) : url("themes/velocity/assets/images/product/small-product-placeholder.png") }}' height='70'>
+                                    </a>
+                                </div>
+                                <div class="col-10 no-padding card-body align-vertical-top">
+                                    <a class="unset no-padding" href='{{ url($orderItem->product->url_key) }}'>
+                                        <div class="product-name">
+                                            <span class="fs16 text-nowrap">{{ $orderItem->name }}</span>
+                                        </div>
+
+                                        <div class="fs18 card-current-price fw6">{!! $orderItem->product->getTypeInstance()->getPriceHtml() !!}</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </script>
+
+    <script>
+        Vue.component('related-products', {
+            template: "#related-products-template",
+
+            props: ['categoryId', 'wishlistItems'],
+
+            data: function () {
+                return {
+                    'wishlistItemsDetails': [],
+                }
+            },
+
+            mounted() {
+                this.$root.getCategoryProducts(this.categoryId);
+                this.wishlistItemsDetails = JSON.parse(this.wishlistItems)
+            }
+        })
     </script>
 @endpush

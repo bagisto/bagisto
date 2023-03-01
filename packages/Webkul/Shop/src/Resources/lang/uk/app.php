@@ -24,6 +24,7 @@ return [
     'home' => [
         'page-title'          => config('app.name') . ' - Home',
         'featured-products'   => 'Рекомендуемые товары',
+        'history'             => 'Recent History',
         'new-products'        => 'Новые продукты',
         'verify-email'        => 'Подтвердите свою учетную запись электронной почты',
         'resend-verify-email' => 'Выслать повторно письмо для подтверждения',

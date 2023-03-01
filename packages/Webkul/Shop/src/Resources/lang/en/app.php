@@ -24,6 +24,8 @@ return [
     'home' => [
         'page-title'          => config('app.name') . ' - Home',
         'featured-products'   => 'Featured Products',
+        'recent-item'         => 'Recent Items',
+        'wishlist'            => 'Wishlist Items',
         'new-products'        => 'New Products',
         'verify-email'        => 'Verify your email account',
         'resend-verify-email' => 'Resend Verification Email',
@@ -547,6 +549,7 @@ return [
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
             'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
+            'product-related'           => 'Product related to item in cart',
         ],
 
         'onepage' => [

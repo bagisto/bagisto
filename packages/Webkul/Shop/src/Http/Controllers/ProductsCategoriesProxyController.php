@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Webkul\Core\Repositories\SliderRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Category\Repositories\CategoryRepository;
+use Cookie;
 
 class ProductsCategoriesProxyController extends Controller
 {
@@ -48,6 +49,19 @@ class ProductsCategoriesProxyController extends Controller
             if ($product = $this->productRepository->findBySlug($slugOrPath)) {
                 if ($product->visible_individually && $product->url_key) {
                     $customer = auth()->guard('customer')->user();
+
+                    $productArr = json_encode([$product->sku]);
+                    $productsData = Cookie::get('product');
+
+                    if (! isset($productsData)) {
+                        Cookie::queue(Cookie::make('product', $productArr, time() + (86400 * 30), "/"));
+                        
+                    } else {
+                        $productArr = json_decode($productsData);
+                        array_push($productArr, $product->sku);
+                        $productArr = json_encode($productArr);
+                        Cookie::queue(Cookie::make('product', $productArr, time() + (86400 * 30), "/"));
+                    }
 
                     return view($this->_config['product_view'], compact('product', 'customer'));
                 }

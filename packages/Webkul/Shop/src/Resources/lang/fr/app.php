@@ -24,6 +24,7 @@ return [
     'home' => [
         'page-title'          => 'APP_NAME - Accueil',
         'featured-products'   => 'Produits populaires',
+        'history'             => 'Recent History',
         'new-products'        => 'Nouveaux produits',
         'verify-email'        => 'Vérifiez votre compte de messagerie',
         'resend-verify-email' => 'Renvoyer l\'e-mail de vérification',
