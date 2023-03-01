@@ -243,7 +243,7 @@
 
                             @elseif (! empty($wishlistItems->first()))
                                 @php $categoryId = $wishlistItems->random(1)->first()->product->categories->first()->id??2 @endphp
-                                
+
                             @elseif (! empty($orderItems->first()))
                                 @php $categoryId = $orderItems->random(1)->first()->product->categories->first()->id??2 @endphp
                             @endif
@@ -383,7 +383,7 @@
                 </div>
 
                 <div :class="`recently-viewed-products-wrapper`">
-                    <div class="row small-card-container related-product" v-for='product in this.$root.products'>
+                    <div class="row small-card-container related-product" v-for='(product, index) in this.$root.products' v-if='index < 5'>
                         <div class="col-2 product-image-container mr15">
                             <a :href="`${baseUrl}/${product.slug}`" class="unset">
                                 <div class="product-image" :style="`background-image: url(${product.image})`">
@@ -417,17 +417,10 @@
         Vue.component('related-products', {
             template: "#related-products-template",
 
-            props: ['categoryId', 'wishlistItems'],
-
-            data: function () {
-                return {
-                    'wishlistItemsDetails': [],
-                }
-            },
+            props: ['categoryId'],
 
             mounted() {
                 this.$root.getCategoryProducts(this.categoryId);
-                this.wishlistItemsDetails = JSON.parse(this.wishlistItems)
             }
         })
     </script>
