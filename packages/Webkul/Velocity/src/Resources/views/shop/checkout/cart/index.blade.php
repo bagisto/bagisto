@@ -235,12 +235,20 @@
                     @if ($cart)
                         <div class="col-lg-4 col-md-12 offset-lg-1 row order-summary-container">
                             @include('shop::checkout.total.summary', ['cart' => $cart])
-
+                            
                             <coupon-component></coupon-component>
 
-                            @php $items = $wishlistItems ? $wishlistItems : "" @endphp
+                            @if ($cart->items->first()->product->categories->first())
+                                @php $categoryId = $cart->items->random(1)->first()->product->categories->first()->id??2 @endphp
 
-                            <related-products wishlist-items='{{ $wishlistItems }}' category-id='{{ $cart->items[$key]->product->categories->first()->id??0 }}'></related-products>
+                            @elseif (! empty($wishlistItems->first()))
+                                @php $categoryId = $wishlistItems->random(1)->first()->product->categories->first()->id??2 @endphp
+                                
+                            @elseif (! empty($orderItems->first()))
+                                @php $categoryId = $orderItems->random(1)->first()->product->categories->first()->id??2 @endphp
+                            @endif
+
+                            <related-products category-id='{{ $categoryId??2 }}'></related-products>
                         </div>
                     @else
                         <div class="fs16 col-12 empty-cart-message">
@@ -401,72 +409,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div v-if='{{ count($wishlistItems) }} > 0 && this.$root.products.length <= 0'>
-                <div class="row remove-padding-margin">`
-                    <div class="col-12 no-padding">
-                        <h2 class="fs20 fw6 mb15 mt-5">
-                            {{ __('shop::app.checkout.cart.product-related') }}
-                        </h2>
-                    </div>
-                </div>
-
-                @if ($wishlistItems)
-                    @foreach ($wishlistItems->take(5) as $wishlistItem)
-                        <div :class="`recently-viewed-products-wrapper`">
-                            <div class="row small-card-container related-product">
-                                <div class="col-2 product-image-container mr15">
-                                    <a href='{{ url($wishlistItem->url_key) }}' class="unset">
-                                        <img src='{{ $wishlistItem->images->first() ? Storage::url($wishlistItem->images->first()->path) : url("themes/velocity/assets/images/product/small-product-placeholder.png") }}' height='70'>
-                                    </a>
-                                </div>
-                                <div class="col-10 no-padding card-body align-vertical-top" >
-                                    <a class="unset no-padding" href='{{ url($wishlistItem->url_key) }}'>
-                                        <div class="product-name">
-                                            <span class="fs16 text-nowrap">{{ $wishlistItem->name }}</span>
-                                        </div>
-
-                                        <div class="fs18 card-current-price fw6">{!! $wishlistItem->getTypeInstance()->getPriceHtml() !!}</div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-            
-            <div v-if='{{ count($orderItems) }} > 0 && ({{ count($wishlistItems) }} <= 0 && this.$root.products.length <= 0)'>
-                <div class="row remove-padding-margin">`
-                    <div class="col-12 no-padding">
-                        <h2 class="fs20 fw6 mb15 mt-5">
-                            {{ __('shop::app.checkout.cart.product-related') }}
-                        </h2>
-                    </div>
-                </div>
-                
-                @if ($orderItems)
-                    @foreach ($orderItems->take(5) as $orderItem)
-                        <div :class="`recently-viewed-products-wrapper`">
-                            <div class="row small-card-container related-product">
-                                <div class="col-2 product-image-container mr15">
-                                    <a href='{{ url($orderItem->product->url_key) }}' class="unset">
-                                        <img src='{{ $orderItem->product->images->first() ? Storage::url($orderItem->product->images->first()->path) : url("themes/velocity/assets/images/product/small-product-placeholder.png") }}' height='70'>
-                                    </a>
-                                </div>
-                                <div class="col-10 no-padding card-body align-vertical-top">
-                                    <a class="unset no-padding" href='{{ url($orderItem->product->url_key) }}'>
-                                        <div class="product-name">
-                                            <span class="fs16 text-nowrap">{{ $orderItem->name }}</span>
-                                        </div>
-
-                                        <div class="fs18 card-current-price fw6">{!! $orderItem->product->getTypeInstance()->getPriceHtml() !!}</div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
             </div>
         </div>
     </script>
