@@ -246,6 +246,9 @@
 
                             @elseif (! empty($orderItems->first()))
                                 @php $categoryId = $orderItems->random(1)->first()->product->categories->first()->id??2 @endphp
+                            
+                            @elseif (! empty($topSellingProducts->first()))
+                                @php $categoryId =$topSellingProducts->random(1)->first()->product->categories->first()->id @endphp
                             @endif
 
                             <related-products category-id='{{ $categoryId??2 }}'></related-products>
@@ -331,6 +334,28 @@
                         <slide slot="slide-{{ $key }}">
                             @include ('shop::products.list.card', [
                                 'product' => $orderItem->product,
+                                'addToCartBtnClass' => 'small-padding',
+                            ])
+                        </slide>
+                    @endforeach
+                </carousel-component>
+            </div>
+
+            <div class="carousel-products recent-history" v-if='{{count($topSellingProducts)}} != 0'>
+                <div class="customer-orders">
+                    <h2 class="fs20 fw6">{{ __('shop::app.home.top-selling-product') }}</h2>
+                </div>
+
+                <carousel-component
+                    :slides-per-page="slidesPerPage"
+                    navigation-enabled="show"
+                    paginationEnabled="hide"
+                    :slides-count="{{count($topSellingProducts)}}">
+
+                    @foreach($topSellingProducts as $key => $topSellingProduct)
+                        <slide slot="slide-{{ $key }}">
+                            @include ('shop::products.list.card', [
+                                'product' => $topSellingProduct->product,
                                 'addToCartBtnClass' => 'small-padding',
                             ])
                         </slide>
