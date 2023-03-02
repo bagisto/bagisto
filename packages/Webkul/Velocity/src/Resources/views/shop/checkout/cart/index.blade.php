@@ -241,7 +241,7 @@
                             @if ($cart->items->first()->product->categories->first())
                                 @php $categoryId = $cart->items->random(1)->first()->product->categories->first()->id??2 @endphp
 
-                            @elseif (! empty($wishlistItems->first()))
+                            @elseif ($wishlistItems)
                                 @php $categoryId = $wishlistItems->random(1)->first()->product->categories->first()->id??2 @endphp
 
                             @elseif (! empty($orderItems->first()))
