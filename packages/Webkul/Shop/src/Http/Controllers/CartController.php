@@ -51,6 +51,7 @@ class CartController extends Controller
         $productItems = [];
         $wishlistItems = [];
         $productsIds = [];
+        $orderIds = [];
 
         if ($customerId = auth()->guard('customer')->user()) {
             $orders = $this->orderRepository->findWhere(['customer_id' => $customerId->id]);
