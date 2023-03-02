@@ -3,15 +3,15 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Cart;
+use Cookie;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
-use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
-use Cookie;
+use Webkul\Admin\Http\Controllers\DashboardController;
 
 class CartController extends Controller
 {
@@ -53,6 +53,8 @@ class CartController extends Controller
         $productsIds = [];
         $orderIds = [];
 
+        $topSellingProducts = $this->orderItemRepository->getTopSellingProducts();
+
         if ($customerId = auth()->guard('customer')->user()) {
             $orders = $this->orderRepository->findWhere(['customer_id' => $customerId->id]);
 
@@ -78,7 +80,7 @@ class CartController extends Controller
             $orderItems = $this->productRepository->findWhereIn('sku', $products);
         }
 
-        return view($this->_config['view'], compact('orderItems', 'wishlistItems'))->with('cart', Cart::getCart());
+        return view($this->_config['view'], compact('orderItems', 'wishlistItems', 'topSellingProducts'))->with('cart', Cart::getCart());
     }
 
     /**

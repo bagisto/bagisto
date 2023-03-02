@@ -2,6 +2,7 @@
 
 namespace Webkul\Sales\Repositories;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\OrderItem;
@@ -239,5 +240,22 @@ class OrderItemRepository extends Repository
                             ->distinct()
                             ->groupBy('product_id')
                             ->get();
+    }
+
+    /**
+     * Top Selling Products
+     *
+     * @return void
+     */
+    public function getTopSellingProducts()
+    {
+        return $this->getModel()->with(['product', 'product.images'])
+            ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+            ->addSelect('id', 'product_id', 'product_type', 'name')
+            ->whereNull('parent_id')
+            ->groupBy('product_id')
+            ->orderBy('total_qty_ordered', 'DESC')
+            ->limit(5)
+            ->get();
     }
 }
