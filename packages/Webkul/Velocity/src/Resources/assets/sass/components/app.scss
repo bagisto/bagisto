@@ -249,21 +249,12 @@
     }
 
     .product-image-container {
-        width: 100%;
-        padding-top: 280px;
+        max-height: 190px;
         position: relative;
-        display: block;
-
         img {
-            max-width: 100%;
-            width: auto;
-            max-height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            margin: auto;
+            width: 100%;	
+            min-height: 190px;	
+            max-height: 190px;
         }
     }
 

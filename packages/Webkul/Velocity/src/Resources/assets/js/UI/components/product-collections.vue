@@ -13,7 +13,6 @@
                     class="col-md-12 no-padding carousel-products"
                     :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
                     <carousel-component
-                        add-class="blur-effect"
                         :slides-per-page="slidesPerPage"
                         pagination-enabled="hide"
                         :id="isCategory ? `${categoryDetails.name}-carousel` : productId"
@@ -78,7 +77,9 @@
                 windowWidth: window.innerWidth,
             }
         },
-
+        updated() {
+            this.getProductSlideBlurEffect()
+        },
         mounted: function () {
             this.$nextTick(() => {
                 window.addEventListener('resize', this.onResize);
@@ -87,7 +88,6 @@
             this.getProducts();
             this.setWindowWidth();
             this.setSlidesPerPage(this.windowWidth);
-            this.getProductSlideBlurEffect();
         },
 
         watch: {
