@@ -77,9 +77,11 @@
                 windowWidth: window.innerWidth,
             }
         },
+
         updated() {
-            this.getProductSlideBlurEffect()
+            this.getProductSlideBlurEffect();
         },
+
         mounted: function () {
             this.$nextTick(() => {
                 window.addEventListener('resize', this.onResize);
