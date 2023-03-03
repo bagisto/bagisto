@@ -1,8 +1,20 @@
 <template>
-    <label class="image-item" :for="_uid" v-bind:class="{ 'has-image': imageData.length > 0 }">
+    <label class="image-item" :for="_uid" v-bind:class="{ 'has-image': imageData.length > 0, 'dropzone': isDragging }">
         <input type="hidden" :name="finalInputName"/>
 
-        <input type="file" v-validate="'mimes:image/*'" accept="image/*" :name="finalInputName" ref="imageInput" :id="_uid" @change="addImageView($event)" :required="required ? true : false" />
+        <input 
+            class="drag-image"
+            type="file" 
+            v-validate="'mimes:image/*'" 
+            accept="image/*" 
+            :name="finalInputName" 
+            ref="imageInput" 
+            :id="_uid" 
+            :required="required ? true : false"
+            @change="addImageView($event)" 
+            @drop="isDragging = false"
+            @dragleave="isDragging = false" 
+            @dragenter="isDragging = true" />
 
         <img class="preview" :src="imageData" v-if="imageData.length > 0">
 
@@ -38,7 +50,8 @@
 
         data: function() {
             return {
-                imageData: ''
+                imageData: '',
+                isDragging: false,
             }
         },
 
