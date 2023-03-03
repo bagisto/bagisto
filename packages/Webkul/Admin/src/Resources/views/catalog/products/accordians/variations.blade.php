@@ -39,7 +39,6 @@
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.controls.after', ['product' => $product]) !!}
     </div>
 </accordian>
-
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.after', ['product' => $product]) !!}
 
 <modal id="addVariant" :is-open="modalIds.addVariant">
@@ -119,7 +118,9 @@
                         v-for='(variant, index) in variants'
                         :key="index"
                         :index="index"
-                        :variant="variant" @onRemoveVariant="removeVariant($event)">
+                        :variant="variant" @onRemoveVariant="removeVariant($event)"
+                        :attributes="superAttributes"
+                        >
                     </variant-item>
                 </tbody>
             </table>
@@ -181,7 +182,7 @@
                 </div>
 
                 <div class="item-options" style="margin-top: 10px">
-                    <div v-for='(attribute, index) in superAttributes'>
+                    <div v-for='(attribute, index) in attributes'>
                         <b>@{{ attribute.admin_name }} : </b>@{{ optionName(variant[attribute.code]) }}
 
                         <input
@@ -345,14 +346,13 @@
             ];
         });
 
-        let superAttributes = @json(app('\Webkul\Product\Repositories\ProductRepository')->getSuperAttributes($product));
         let variants = @json($product->variants);
 
         Vue.component('variant-form', {
             data: function () {
                 return {
                     variant: {},
-                    superAttributes: superAttributes
+                    superAttributes: {},
                 }
             },
 
@@ -360,6 +360,7 @@
 
             created: function () {
                 this.resetModel();
+                this.getSuperAttributes();
             },
 
             methods: {
@@ -414,9 +415,19 @@
                 resetModel: function () {
                     let self = this;
 
-                    this.superAttributes.forEach(function (attribute) {
-                        self.variant[attribute.code] = '';
-                    })
+                    setTimeout(() => {
+                        (this.superAttributes).forEach(function (attribute) {
+                            self.variant[attribute.code] = '';
+                        })
+                    }, 1000);
+                },
+
+                getSuperAttributes: function() {
+                    this.$http.get ("{{ route('admin.catalog.product.super-attributes', $product) }}")
+                        .then ((response) => {
+                            this.superAttributes = response.data.data;
+                        })
+                        .catch ((error) => { })
                 }
             }
         });
@@ -429,18 +440,16 @@
             data: function () {
                 return {
                     variants: variants,
-
-                    old_variants: @json(old('variants')),
-
-                    superAttributes: superAttributes
+                    oldVariants: @json(old('variants')),
+                    superAttributes: {}
                 }
             },
 
             created: function () {
                 let index = 0;
 
-                for (let key in this.old_variants) {
-                    let variant = this.old_variants[key];
+                for (let key in this.oldVariants) {
+                    let variant = this.oldVariants[key];
 
                     if (key.indexOf('variant_') !== -1) {
                         let inventories = [];
@@ -474,6 +483,8 @@
 
                     index++;
                 }
+                
+                this.getSuperAttributes();
             },
 
             methods: {
@@ -482,13 +493,21 @@
 
                     this.variants.splice(index, 1)
                 },
+
+                getSuperAttributes: function() {
+                    this.$http.get ("{{ route('admin.catalog.product.super-attributes', $product) }}")
+                        .then ((response) => {
+                            this.superAttributes = response.data.data;
+                        })
+                        .catch ((error) => { })
+                }
             }
         });
 
         Vue.component('variant-item', {
             template: '#variant-item-template',
 
-            props: ['index', 'variant'],
+            props: ['index', 'variant', 'attributes'],
 
             inject: ['$validator'],
 
@@ -498,7 +517,6 @@
                     inventorySources: @json($inventorySources),
                     inventories: {},
                     totalQty: 0,
-                    superAttributes: superAttributes,
                     items: [],
                     imageCount: 0,
                     images: {},
@@ -552,7 +570,7 @@
                 optionName: function (optionId) {
                     let optionName = '';
 
-                    this.superAttributes.forEach(function (attribute) {
+                    this.attributes.forEach(function (attribute) {
                         attribute.options.forEach(function (option) {
                             if (optionId == option.id) {
                                 optionName = option.admin_name;
