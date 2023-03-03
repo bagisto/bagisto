@@ -241,14 +241,14 @@
                             @if ($cart->items->first()->product->categories->first())
                                 @php $categoryId = $cart->items->random(1)->first()->product->categories->first()->id??2 @endphp
 
-                            @elseif ($wishlistItems)
+                            @elseif ($wishlistItems && ! empty($wishlistItems->first()))
                                 @php $categoryId = $wishlistItems->random(1)->first()->product->categories->first()->id??2 @endphp
 
                             @elseif (! empty($orderItems->first()))
                                 @php $categoryId = $orderItems->random(1)->first()->product->categories->first()->id??2 @endphp
                             
                             @elseif (! empty($topSellingProducts->first()))
-                                @php $categoryId =$topSellingProducts->random(1)->first()->product->categories->first()->id @endphp
+                                @php $categoryId =$topSellingProducts->random(1)->first()->product->categories->first()->id??2 @endphp
                             @endif
 
                             <related-products category-id='{{ $categoryId??2 }}'></related-products>
