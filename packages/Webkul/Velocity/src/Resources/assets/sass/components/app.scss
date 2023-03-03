@@ -1855,6 +1855,15 @@
         li:nth-last-of-type(1) {
             margin-bottom: 10px;
         }
+        
+        .category-title {
+            color: #28557B;
+            text-decoration: none;
+        }
+
+        .child-category {
+            display: none;
+        }
     }
 }
 

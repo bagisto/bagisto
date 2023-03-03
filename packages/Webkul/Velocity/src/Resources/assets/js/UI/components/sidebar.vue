@@ -86,6 +86,7 @@
                                     ) in category.children"
                                 >
                                     <a
+                                        @click="showChildCategory('ul' + subCategoryIndex)"
                                         :id="`sidebar-level-link-2-${subCategoryIndex}`"
                                         @mouseout="
                                             toggleSidebar(
@@ -94,7 +95,7 @@
                                                 'mouseout'
                                             )
                                         "
-                                        :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}`"
+                                        
                                         :class="`category sub-category unset ${
                                             subCategory.children.length > 0
                                                 ? 'fw6'
@@ -127,9 +128,10 @@
                                                 "
                                             />
                                         </div>
-                                        <span class="category-title">{{
-                                            subCategory['name']
-                                        }}</span>
+
+                                        <a class="category-title" :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}`">
+                                            {{ subCategory['name'] }}
+                                        </a>
 
                                         <i
                                             class="rango-arrow-down pr15 float-right"
@@ -140,7 +142,7 @@
                                         </i>
                                     </a>
 
-                                    <ul type="none" class="nested">
+                                    <ul type="none" :ref="'ul' + subCategoryIndex" class="child-category">
                                         <li
                                             :key="`${childSubCategoryIndex}-${subCategoryIndex}-${categoryIndex}`"
                                             v-for="(
@@ -224,6 +226,24 @@ export default {
 
             this.slicedCategories = slicedCategories;
         },
+
+        showChildCategory: function (ref) {
+            $(this.$refs[ref][0].children[0].children).css({
+                "padding": "0px 0 0px 50px",
+            });
+
+            $(this.$refs[ref][0].children[0].children[0].children).css({
+                "fontWeight": "500",
+            });
+
+            if (this.$refs[ref][0].style.display == "none" || this.$refs[ref][0].style.display == "") {
+                this.$refs[ref][0].style.display = 'block';
+            } else {
+                this.$refs[ref][0].style.display = 'none';
+            }
+
+            
+        }
     },
 };
 </script>
