@@ -47,30 +47,26 @@ class CartController extends Controller
     {
         Cart::collectTotals();
 
-        $orderItems = [];
-        $productItems = [];
-        $wishlistItems = [];
-        $productsIds = [];
-        $orderIds = [];
+        $orderItems = $wishlistItems = $orderIds = array();
 
         $topSellingProducts = $this->orderItemRepository->getTopSellingProducts();
 
-        if ($customerId = auth()->guard('customer')->user()) {
-            $orders = $this->orderRepository->findWhere(['customer_id' => $customerId->id]);
+        if ($customer = auth()->guard('customer')->user()) {
+            $orders = $customer->all_orders->take(10);
 
             foreach ($orders as $order) {
                 $orderIds[] = $order->id;
             }
 
-            $orderItems = $this->orderItemRepository->getCustomerHistory($orderIds);
+            $orderItems = $this->orderItemRepository->getOrderItems($orderIds);
 
-            $wishlists = $this->wishlistRepository->findWhere(['customer_id' => $customerId->id]);
+            $wishlistProducts = $customer->with('wishlist_items.product')
+                                ->limit(10)
+                                ->first();
 
-            foreach ($wishlists as $wishlist) {
-                $productsIds[] = $wishlist->product_id;
+            foreach ($wishlistProducts->wishlist_items as $wishlist) {
+                $wishlistItems[] = $wishlist->product;
             }
-
-            $wishlistItems = $this->productRepository->findWhereIn('id', $productsIds);
             
         } else {
             $productsData = Cookie::get('product');

@@ -5,7 +5,6 @@ namespace Webkul\Sales\Repositories;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\OrderItem;
 
 class OrderItemRepository extends Repository
 {
@@ -234,12 +233,12 @@ class OrderItemRepository extends Repository
      * @param array $orderIds
      * @return Webkul\Sales\Repositories\OrderItemRepository
      */
-    public function getCustomerHistory($orderIds) 
+    public function getOrderItems($orderIds) 
     {
         return $this->model->whereIn('order_id', $orderIds)
-                            ->distinct()
-                            ->groupBy('product_id')
-                            ->get();
+               ->distinct()
+               ->groupBy('product_id')
+               ->get();
     }
 
     /**
