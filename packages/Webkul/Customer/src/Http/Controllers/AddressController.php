@@ -115,9 +115,7 @@ class AddressController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        try {
-            $customer->addresses()->findOrFail($id);
-        } catch (ModelNotFoundException) {
+        if (!$customer->addresses()->find($id)) {
             session()->flash('warning', trans('shop::app.security-warning'));
             return redirect()->route('shop.customer.addresses.index');
         }
