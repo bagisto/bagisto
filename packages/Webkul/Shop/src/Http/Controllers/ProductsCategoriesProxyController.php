@@ -50,17 +50,17 @@ class ProductsCategoriesProxyController extends Controller
                 if ($product->visible_individually && $product->url_key) {
                     $customer = auth()->guard('customer')->user();
 
-                    $productArr = json_encode([$product->sku]);
+                    $products = json_encode([$product->sku]);
                     $productsData = Cookie::get('product');
 
                     if (! isset($productsData)) {
-                        Cookie::queue(Cookie::make('product', $productArr, time() + (86400 * 30), "/"));
+                        Cookie::queue(Cookie::make('product', $products, time() + (86400 * 30), "/"));
                         
                     } else {
-                        $productArr = json_decode($productsData);
-                        array_push($productArr, $product->sku);
-                        $productArr = json_encode($productArr);
-                        Cookie::queue(Cookie::make('product', $productArr, time() + (86400 * 30), "/"));
+                        $products = json_decode($productsData);
+                        array_push($products, $product->sku);
+                        $products = json_encode($products);
+                        Cookie::queue(Cookie::make('product', $products, time() + (86400 * 30), "/"));
                     }
 
                     return view($this->_config['product_view'], compact('product', 'customer'));

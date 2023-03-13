@@ -238,20 +238,7 @@
                             
                             <coupon-component></coupon-component>
 
-                            @if ($cart->items->first()->product->categories->first())
-                                @php $categoryId = $cart->items->random(1)->first()->product->categories->first()->id??2 @endphp
-
-                            @elseif ($wishlistItems && ! empty($wishlistItems->first()))
-                                @php $categoryId = $wishlistItems->random(1)->first()->product->categories->first()->id??2 @endphp
-
-                            @elseif (! empty($orderItems->first()))
-                                @php $categoryId = $orderItems->random(1)->first()->product->categories->first()->id??2 @endphp
-                            
-                            @elseif (! empty($topSellingProducts->first()))
-                                @php $categoryId =$topSellingProducts->random(1)->first()->product->categories->first()->id??2 @endphp
-                            @endif
-
-                            <related-products category-id='{{ $categoryId??2 }}'></related-products>
+                            <related-products category-id='{{ $categoryIds ? $categoryIds : 2 }}'></related-products>
                         </div>
                     @else
                         <div class="fs16 col-12 empty-cart-message">
@@ -446,6 +433,7 @@
 
             mounted() {
                 this.$root.getCategoryProducts(this.categoryId);
+                console.log(this.categoryId);
             }
         })
     </script>

@@ -47,27 +47,17 @@ class CartController extends Controller
     {
         Cart::collectTotals();
 
-        $orderItems = $wishlistItems = $orderIds = array();
+        $cart = Cart::getCart();
+
+        $orderItems = $wishlistItems = $categoryIds = [];
 
         $topSellingProducts = $this->orderItemRepository->getTopSellingProducts();
 
         if ($customer = auth()->guard('customer')->user()) {
-            $orders = $customer->all_orders->take(10);
+            $orderItems = $this->orderItemRepository->getCustomerOrderedItems($customer->id);
 
-            foreach ($orders as $order) {
-                $orderIds[] = $order->id;
-            }
+            $wishlistItems = $customer->wishlist_items->take(10)->map(fn ($item) => $item->product );
 
-            $orderItems = $this->orderItemRepository->getOrderItems($orderIds);
-
-            $wishlistProducts = $customer->with('wishlist_items.product')
-                                ->limit(10)
-                                ->first();
-
-            foreach ($wishlistProducts->wishlist_items as $wishlist) {
-                $wishlistItems[] = $wishlist->product;
-            }
-            
         } else {
             $productsData = Cookie::get('product');
 
@@ -76,7 +66,21 @@ class CartController extends Controller
             $orderItems = $this->productRepository->findWhereIn('sku', $products);
         }
 
-        return view($this->_config['view'], compact('orderItems', 'wishlistItems', 'topSellingProducts'))->with('cart', Cart::getCart());
+        $cart ? $categoryIds[] = $cart->items->random(1)->first()->product->categories->first()->id ?? 0 : '';
+
+        (! $wishlistItems->isEmpty()) ? $categoryIds[] = $wishlistItems->random(1)->first()->product->categories->first()->id ?? 0 : '';
+
+        (! $orderItems->isEmpty()) ? $categoryIds[] = $orderItems->random(1)->first()->product->categories->first()->id ?? 0 : '';
+
+        foreach ($categoryIds as $key => $categoryId) {
+            if (! $categoryId) {
+                unset($categoryIds[$key]);
+            }
+        }
+
+        $categoryIds = head($categoryIds);
+
+        return view($this->_config['view'], compact('orderItems', 'wishlistItems', 'topSellingProducts', 'cart', 'categoryIds'));
     }
 
     /**

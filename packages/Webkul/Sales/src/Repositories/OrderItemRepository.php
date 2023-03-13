@@ -233,11 +233,13 @@ class OrderItemRepository extends Repository
      * @param array $orderIds
      * @return Webkul\Sales\Repositories\OrderItemRepository
      */
-    public function getOrderItems($orderIds) 
+    public function getCustomerOrderedItems($customerId, $limit = 10)
     {
-        return $this->model->whereIn('order_id', $orderIds)
+        return $this->model->join("orders", 'orders.id', '=', 'order_items.order_id')
+               ->where('orders.customer_id', $customerId)
                ->distinct()
                ->groupBy('product_id')
+               ->limit($limit)
                ->get();
     }
 

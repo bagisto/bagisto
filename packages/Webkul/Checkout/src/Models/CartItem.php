@@ -31,6 +31,8 @@ class CartItem extends Model implements CartItemContract
 
     /**
      * Get Product
+     * 
+     * @return Webkul\Product\Models\ProductProxy;
      */
     public function product(): HasOne
     {
@@ -39,6 +41,8 @@ class CartItem extends Model implements CartItemContract
 
     /**
      * Get Cart
+     * 
+     * @return CartProxy;
      */
     public function cart(): HasOne
     {
