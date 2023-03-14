@@ -27,17 +27,21 @@ class Shipping
 
         $this->removeAllShippingRates();
 
+        $ratesList = [];
+
         foreach (Config::get('carriers') as $shippingMethod) {
             $object = new $shippingMethod['class'];
 
             if ($rates = $object->calculate()) {
                 if (is_array($rates)) {
-                    $this->rates = array_merge($this->rates, $rates);
+                    $ratesList[] = $rates;
                 } else {
-                    $this->rates[] = $rates;
+                    $ratesList[] = [$rates];
                 }
             }
         }
+
+        $this->rates = array_merge(...$ratesList);
 
         $this->saveAllShippingRates();
 

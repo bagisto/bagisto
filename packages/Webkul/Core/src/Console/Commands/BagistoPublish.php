@@ -27,14 +27,6 @@ class BagistoPublish extends Command
      */
     protected $providers = [
         /**
-         * Package providers.
-         */
-        [
-            'name'     => 'DB Blade Compiler',
-            'provider' => \Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider::class,
-        ],
-
-        /**
          * Bagisto providers.
          */
         [

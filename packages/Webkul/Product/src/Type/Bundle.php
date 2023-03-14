@@ -410,7 +410,7 @@ class Bundle extends AbstractType
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $data[$key] = $this->validateBundleOptionForCart($value);
-            } elseif ($value && $value) {
+            } elseif ($value) {
                 $data[$key] = (int) $value;
             } else {
                 unset($data[$key]);
@@ -521,7 +521,7 @@ class Bundle extends AbstractType
 
             return $result;
         }
-        
+
         $price = 0;
 
         foreach ($item->children as $childItem) {

@@ -80,9 +80,32 @@
 
                     <div class="col-12 no-padding">
                         <div class="hero-image">
-                            @if (!is_null($category->image))
-                                <img class="logo" src="{{ $category->image_url }}" alt="" width="20" height="20" />
+                            @if (!is_null($category->category_banner))
+                                <img class="logo" src="{{ $category->banner_url }}" alt="" width="100%" height="350px" />
                             @endif
+                        </div>
+                    </div>
+
+                    <div class='col-md-12'>
+                        <div class='carousel-products sub-category'>
+                            <carousel-component
+                                :slides-per-page="slidesPerPage"
+                                pagination-enabled="hide"
+                                :slides-count="{{count($childCategory)}}">
+
+                                @foreach ($childCategory as $index => $childSubCategory)
+                                    <slide slot="slide-{{ $index }}">
+                                        <div class='childSubCategory'>
+                                            <a href='{{ $childSubCategory->url_path }}'>
+                                                <div>
+                                                    <img src='{{ $childSubCategory->getImageUrlAttribute()?? url("/vendor/webkul/ui/assets/images/product/small-product-placeholder.png") }}'>
+                                                    <label>{{ $childSubCategory->name }}</label>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </slide>
+                                @endforeach
+                            </carousel-component>
                         </div>
                     </div>
                 </div>
@@ -150,11 +173,14 @@
                     'products': [],
                     'isLoading': true,
                     'paginationHTML': '',
+                    'currentScreen': window.innerWidth,
+                    'slidesPerPage': 5,
                 }
             },
 
             created: function () {
                 this.getCategoryProducts();
+                this.setSlidesPerPage(this.currentScreen);
             },
 
             methods: {
@@ -169,6 +195,18 @@
                         this.isLoading = false;
                         console.log(this.__('error.something_went_wrong'));
                     })
+                },
+
+                setSlidesPerPage: function (width) {
+                    if (width >= 1200) {
+                        this.slidesPerPage = 5;
+                    } else if (width < 1200 && width >= 626) {
+                        this.slidesPerPage = 3;
+                    } else if (width < 626 && width >= 400) {
+                        this.slidesPerPage = 2;
+                    } else {
+                        this.slidesPerPage = 1;
+                    }
                 }
             }
         })

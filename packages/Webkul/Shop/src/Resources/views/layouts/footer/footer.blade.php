@@ -25,7 +25,7 @@
                 </div>
             @endif
 
-            {!! DbView::make(core()->getCurrentChannel())->field('footer_content')->render() !!}
+            {!! Blade::render(core()->getCurrentChannel()->footer_content) !!}
 
             <div class="list-container">
                 @if(core()->getConfigData('customer.settings.newsletter.subscription'))

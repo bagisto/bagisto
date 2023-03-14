@@ -257,16 +257,23 @@ body {
             .toolbar-wrapper {
                 > div {
                     label {
-                        margin-right: 0px;
-                        margin-left: 10px;
+                        margin: 10 0 0 0 !important;
+                        padding-left: 4px !important;
+                        padding-right: 4px !important;
                     }
+
+                    .layered-filter-wrapper left{
+                        position: relative !important;
+                    }
+
                 }
             }
         }
 
         .filter-attributes-content {
             margin-left: 7px;
-            margin-right: 0px;
+            margin-right: 10px;
+            margin-top: 5px;
         }
 
         .filter-attributes-item {
@@ -366,6 +373,12 @@ body {
          */
         .product-detail {
             .product-actions {
+                > div {
+                    .add-to-cart-btn {
+                        float: right;
+                    }
+                }
+
                 .compare-icon {
                     float: left;
                 }
@@ -416,6 +429,10 @@ body {
             .wishlist-icon {
                 left: 30px;
                 right: unset;
+            }
+
+            .comparison-remove {
+                float: left;
             }
 
             .material-icons.cross {
@@ -656,8 +673,6 @@ body {
             .nav-container {
                 ul {
                     li {
-                        padding: 10px 20px 10px 0px;
-
                         .rango-arrow-right {
                             float: left;
                             padding-left: 40px;
@@ -697,10 +712,8 @@ body {
 
             .velocity-divide-page {
                 .left {
-                    right: 35px;
-                    width: 150px;
-                    top: 4px;
-                }
+                    right: -10px;
+                }   
 
                 .right {
                     padding: 0 20px !important;
@@ -739,6 +752,14 @@ body {
                 }
             }
         }
+    }
+
+    .filters-container .toolbar-wrapper div {
+        padding-right: 0px !important;
+    }
+
+    .vue-slider-dot-handle {
+        float:left;
     }
 }
 

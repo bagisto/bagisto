@@ -42,6 +42,7 @@ class Configurable extends AbstractType
         'price',
         'weight',
         'status',
+        'tax_category_id'
     ];
 
     /**
@@ -178,7 +179,7 @@ class Configurable extends AbstractType
         }
 
         $previousVariantIds = $product->variants->pluck('id');
-
+        
         if (isset($data['variants'])) {
             foreach ($data['variants'] as $variantId => $variantData) {
                 if (Str::contains($variantId, 'variant_')) {
@@ -198,6 +199,8 @@ class Configurable extends AbstractType
 
                     $variantData['locale'] = $data['locale'];
 
+                    $variantData['tax_category_id'] = $data['tax_category_id'];
+                    
                     $this->updateVariant($variantData, $variantId);
                 }
             }
@@ -222,12 +225,13 @@ class Configurable extends AbstractType
     {
         if (! count($data)) {
             $data = [
-                'sku'         => $product->sku . '-variant-' . implode('-', $permutation),
-                'name'        => '',
-                'inventories' => [],
-                'price'       => 0,
-                'weight'      => 0,
-                'status'      => 1,
+                'sku'             => $product->sku . '-variant-' . implode('-', $permutation),
+                'name'            => '',
+                'inventories'     => [],
+                'price'           => 0,
+                'weight'          => 0,
+                'status'          => 1,
+                'tax_category_id' => '',
             ];
         }
 
@@ -349,7 +353,7 @@ class Configurable extends AbstractType
     public function updateVariant(array $data, $id)
     {
         $variant = $this->productRepository->find($id);
-
+        
         $variant->update(['sku' => $data['sku']]);
 
         foreach ($this->fillableTypes as $attributeCode) {
@@ -358,7 +362,7 @@ class Configurable extends AbstractType
             }
 
             $attribute = $this->getAttributeByCode($attributeCode);
-
+    
             if ($attribute->value_per_channel) {
                 if ($attribute->value_per_locale) {
                     $productAttributeValue = $variant->attribute_values
@@ -773,3 +777,5 @@ class Configurable extends AbstractType
         return app(ConfigurableIndexer::class);
     }
 }
+
+

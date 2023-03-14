@@ -506,7 +506,6 @@ header {
 
     .left-wrapper {
         float: right;
-        display: flex;
 
         .compare-btn,
         .wishlist-btn,
@@ -1104,6 +1103,17 @@ i.within-circle {
     box-shadow: none;
 }
 
+.filters-container .toolbar-wrapper > div select {
+    cursor: pointer;
+    padding: 6px 8px;
+    color: rgba(0, 0, 0, 0.83);
+    background-color: #fff;
+}
+
+.filters-container .toolbar-wrapper > div {
+    margin: 0 8px 0 0;
+}
+
 @media (max-width: 600px) {
     .selective-div {
         width: 97px;
@@ -1122,17 +1132,6 @@ i.within-circle {
         overflow-y: scroll;
         box-shadow: 5px 0 5px -5px #333;
         background-color: #ffffff;
-    }
-
-    .cart-details .cart-content .product-details-content .item-actions {
-        gap: 20px;
-        width: 150%;
-        display: grid;
-        grid-template-columns: auto auto;
-
-        > div:first-child {
-            margin-right: 0px !important;
-        }
     }
 }
 
@@ -1156,151 +1155,20 @@ i.within-circle {
     padding-left: 0 !important;
     padding-top: 0 !important;
     line-height: 2.0rem !important;
-
+    
     i {
         margin-top: 8px !important;
     }
 }
 
-
-.checkbox,
-.radio {
+.compare-products {
+    transform: translateZ(45px);
     position: relative;
-    display: block;
-
-    input {
-        left: 3px;
-        opacity: 0;
-        position: absolute !important;
-        top: 4px !important;
-        z-index: 100;
-
-        &:checked {
-            &+ .checkbox-view {
-                background-position: 0px -21px;
-            }
-
-            &+ .radio-view {
-                background-position: -21px -21px;
-            }
-
-        }
-
-        &:disabled {
-            &+ .checkbox-view {
-                opacity: 0.5;
-                cursor: not-allowed;
-            }
-
-            &+ .radio-view {
-                opacity: 0.5;
-                cursor: not-allowed;
-            }
-        }
-    }
-
-    label {
-        height: 20px;
-        width: 20px;
-        margin: 0;
-        display: inline-block !important;
-        vertical-align: middle;
-        margin-right: 10px;
-
-        &.checkbox-view {
-            background-image: url('../images/controls.svg');
-            background-position: 0px 0px;
-        }
-
-        &.radio-view {
-            background-image: url('../images/controls.svg');
-            background-position: -21px 0px;
-        }
-    }
-
-    span {
-        vertical-align: middle;
-    }
+    overflow: hidden;
+    animation: 3s linear .1s colorIt;
+    scroll-behavior: smooth;
 }
 
-@media only screen and (max-width: 280px) {
-    .filters-container {
-        .toolbar-wrapper {
-            div {
-                #sort-by {
-                    select {
-                        margin-left: -6px !important;
-                        top: -6px !important;
-                        padding: 5px 0px !important;
-                    }
-
-                    .selective-div {
-                        width: 75px !important;
-                    }
-
-                    .select-icon-container {
-                        .select-icon {
-                            left: 53px !important;
-                        }
-                    }
-                }
-
-                #limit-by {
-                    select {
-                        margin-left: -6px !important;
-                        top: -6px !important;
-                        padding: 5px 0px !important;
-                    }
-
-                    .selective-div {
-                        width: 45px !important;
-                    }
-
-                    .select-icon-container {
-                        .select-icon {
-                            left: 43px !important;
-                        }
-                    }
-                }
-
-            }
-        }
-    }
+.cart-details .mr-2 i {
+    cursor: pointer;
 }
-
-@media only screen and (max-width: 420px) {
-    .sale-summary {
-        .dash-icon {
-            margin-right: -20% !important;
-        }
-    }
-
-    .filters-container {
-        .toolbar-wrapper {
-            div {
-                margin: 0 0 0 0 !important;
-                padding-left: 4px !important;
-                padding-right: 4px !important;
-
-                #sort-by {
-                    select {
-                        margin-left: -25px;
-                        position: unset !important;
-                        left: 15% !important;
-                        top: -5px;
-                        padding: 7px 9px;
-                    }
-                }
-
-                #limit-by {
-                    select {
-                        margin-left: 16px!important;
-                        top: -5px !important;
-                        padding: 7px 9px;
-                    }
-                }
-            }
-        }
-    }
-}
-
