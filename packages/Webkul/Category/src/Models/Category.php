@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
+use Kalnoy\Nestedset\Collection as NestedCollection;
 use Kalnoy\Nestedset\NodeTrait;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webkul\Attribute\Models\AttributeProxy;
@@ -15,16 +16,9 @@ use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Product\Models\ProductProxy;
 
-/**
- * Category class.
- *
- * @package Webkul\Category\Models
- *
- * @property-read string (`$url_path` maintained by database triggers.)
- */
 class Category extends TranslatableModel implements CategoryContract
 {
-    use NodeTrait, HasFactory;
+    use HasFactory, NodeTrait;
 
     /**
      * Translated attributes.
@@ -163,11 +157,48 @@ class Category extends TranslatableModel implements CategoryContract
 
         while (isset($category->parent)) {
             $category = $category->parent;
-            
+
             $categories[] = $category;
         }
 
         return array_reverse($categories);
+    }
+
+    /**
+     * Get full slug.
+     *
+     * @return void
+     */
+    public function getFullSlug()
+    {
+        $ancestors = $this->ancestors()->get();
+
+        $categories = (new NestedCollection())
+            ->merge($ancestors)
+            ->push($this);
+
+        $categories->shift();
+
+        return $categories->pluck('slug')->join('/');
+    }
+
+    /**
+     * This is updating the full url path for all locale.
+     *
+     * To Do (@devansh-webkul): If support is multi url per slug then
+     * loops need to be change.
+     *
+     * @return void
+     */
+    public function updateFullSlug()
+    {
+        $categoryFullUrl = $this->getFullSlug();
+
+        foreach (core()->getAllLocales() as $locale) {
+            $this->translate($locale->code)->url_path = $categoryFullUrl;
+        }
+
+        $this->save();
     }
 
     /**
@@ -184,6 +215,11 @@ class Category extends TranslatableModel implements CategoryContract
         return Storage::url($this->image);
     }
 
+    /**
+     * Get banner url attribute.
+     *
+     * @return string
+     */
     public function getBannerUrlAttribute()
     {
         if (! $this->category_banner) {
@@ -214,6 +250,6 @@ class Category extends TranslatableModel implements CategoryContract
      */
     protected static function newFactory(): Factory
     {
-        return CategoryFactory::new ();
+        return CategoryFactory::new();
     }
 }
