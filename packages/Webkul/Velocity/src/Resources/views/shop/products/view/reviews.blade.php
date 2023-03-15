@@ -4,6 +4,11 @@
             margin-top: 20px;
         }
 
+        .description-text{
+            overflow-y: auto;
+            max-height: 150px;
+        }
+
         .reviewModal .modal-header {
             background: white;
             position: fixed;

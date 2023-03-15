@@ -1161,6 +1161,18 @@ i.within-circle {
     }
 }
 
+.compare-products {
+    transform: translateZ(45px);
+    position: relative;
+    overflow: hidden;
+    animation: 3s linear .1s colorIt;
+    scroll-behavior: smooth;
+}
+
+.cart-details .mr-2 i {
+    cursor: pointer;
+}
+
 .modal-overlay {
     display: none;
     overflow-y: auto;
@@ -1174,25 +1186,8 @@ i.within-circle {
     opacity: .7;
 }
 
-.description-text{
-    overflow-y: auto;
-    max-height: 150px;
-}
-
 .image-show {
     display: inline-block !important;
     height: 90%;
     width: 90%;
-}
-
-.checkbox,
-.radio {
-    position: relative;
-    overflow: hidden;
-    animation: 3s linear .1s colorIt;
-    scroll-behavior: smooth;
-}
-
-.cart-details .mr-2 i {
-    cursor: pointer;
 }
