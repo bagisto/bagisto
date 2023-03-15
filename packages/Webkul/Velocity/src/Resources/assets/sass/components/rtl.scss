@@ -373,6 +373,12 @@ body {
          */
         .product-detail {
             .product-actions {
+                > div {
+                    .add-to-cart-btn {
+                        float: right;
+                    }
+                }
+
                 .compare-icon {
                     float: left;
                 }
@@ -423,6 +429,10 @@ body {
             .wishlist-icon {
                 left: 30px;
                 right: unset;
+            }
+
+            .comparison-remove {
+                float: left;
             }
 
             .material-icons.cross {
