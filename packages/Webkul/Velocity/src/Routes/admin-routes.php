@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Velocity\Http\Controllers\Admin\ConfigurationController;
 use Webkul\Velocity\Http\Controllers\Admin\ContentController;
 
-Route::group(['middleware' => ['web']], function () {
+Route::group([], function () {
     Route::prefix(config('app.admin_url') . '/velocity')->group(function () {
         Route::group(['middleware' => ['admin']], function () {
             Route::get('content', [ContentController::class, 'index'])->defaults('_config', [
