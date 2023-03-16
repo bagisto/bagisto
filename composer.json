@@ -110,7 +110,6 @@
         "psr-4": {
             "Tests\\API\\": "tests/api/",
             "Tests\\Functional\\": "tests/functional/",
-            "Tests\\Trigger\\": "tests/trigger/",
             "Tests\\Unit\\": "tests/unit/"
         }
     },
