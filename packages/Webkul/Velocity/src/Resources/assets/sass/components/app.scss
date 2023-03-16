@@ -2810,10 +2810,11 @@
 }
 
 .dropdown-btn span:nth-child(2) i {
-    border:2px solid rgb(40, 40, 40);
-    border-width: 0 3px 3px 0 !important;
+    border: 1px solid #313131;
+    border-width: 0 2px 2px 0!important;
     padding: 2.6px;
-    transform: rotate(45deg);
+    transform-origin: left;
+    transform: translate(3px, -5px) rotate(45deg);
 }
 
 @media only screen and (max-width: 1440px) {
