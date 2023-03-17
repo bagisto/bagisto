@@ -4,6 +4,11 @@
             width: 100px;
         }
 
+        .variant-image
+            .image-item {
+                margin-right: 0px;
+        }
+     
         .table th.actions {
             width: 85px;
         }
@@ -11,11 +16,10 @@
         .table td.actions .icon {
             margin-top: 8px;
         }
-
-        .icon{
-         font-size: 10px;
-         font-weight: bold;
-         padding: 3px !important;
+        .varient {
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px !important;
         }
 
         .image-position {
@@ -27,7 +31,6 @@
                 flex-direction: column;
                 align-items: center;
         }
-        
     
     </style>
 @endpush
@@ -235,7 +238,7 @@
                                 :src="imageData[index]"
                                 v-if="imageData[index]">
 
-                            <label class="remove-image icon" @click="removeImage(image)">
+                            <label class="remove-image varient" @click="removeImage(image)">
                                 {{ __('admin::app.catalog.products.remove-image-btn-title') }}
                             </label>
                         </label>
