@@ -26,6 +26,11 @@
             display: contents;
         }
 
+        .btn.add-image {
+            display: inline-block;
+            width:max-content;
+        }
+
         .image-group .control-group {
                 display: flex;
                 flex-direction: column;
