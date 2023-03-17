@@ -9,7 +9,7 @@
             max-height: 150px;
         }
 
-        .reviewModal .modal-header {
+        .review-modal .modal-header {
             background: white;
             position: fixed;
             width: 600px;
@@ -24,7 +24,7 @@
             margin-top: 30px;
         }
 
-        .reviewModal .mt5 {
+        .review-modal .mt5 {
             display: table-row;
         }
 
@@ -43,6 +43,20 @@
         .modal-container{
             border-radius: 0px;
         }
+
+        .modal-overlay {
+            display: none;
+            overflow-y: auto;
+            z-index: 100;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            background: #000;
+            opacity: .7;
+        }
+        
     </style>
 @endpush
 
@@ -135,7 +149,7 @@
                     <span class="fs16 display-block">
                         {{ __('shop::app.reviews.ratingreviews', [
                             'rating' => $avgRatings,
-                            'review' => $total,
+                            'review' => $total, 
                         ]) }}
                     </span>
 
@@ -259,7 +273,7 @@
                 </span>                
             </div>
 
-            <modal class="reviewModal" :is-open='showModal'>
+            <modal class="review-modal" :is-open='showModal'>
                 <h3 slot="header">
                     <i @click="closeModal()" class="icon remove-icon "></i>
                 </h3>
