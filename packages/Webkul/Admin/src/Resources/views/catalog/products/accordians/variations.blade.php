@@ -11,6 +11,29 @@
         .table td.actions .icon {
             margin-top: 8px;
         }
+
+        .variant-image
+            .image-item {
+                margin-right: 0px;
+        }
+
+        .varient {
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px !important;
+        }
+        .image-position {
+            display: contents;
+        }
+        .btn.add-image {
+            display: inline-block;
+            width:max-content;
+        }
+        .image-group .control-group {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+        }
     </style>
 @endpush
 
@@ -127,7 +150,7 @@
     </script>
 
     <script type="text/x-template" id="variant-item-template">
-        <tr>
+        <tr class="image-group">
             <td>
                 <div class="control-group">
                     <span class="radio">
@@ -195,8 +218,8 @@
 
             <td>
                 <div :class="['control-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
-                    <div v-for='(image, index) in items' class="image-wrapper variant-image">
-                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
+                    <div v-for='(image, index) in items' class="image-wrapper variant-image image-position">
+                        <label class="image-item variant-image" v-bind:class="{ 'has-image': imageData[index] }">
                             <input
                                 type="hidden"
                                 :name="[variantInputName + '[images][files][' + image.id + ']']"
@@ -216,9 +239,11 @@
                                 class="preview"
                                 :src="imageData[index]"
                                 v-if="imageData[index]">
-                        </label>
 
-                        <span class="icon trash-icon" @click="removeImage(image)"></span>
+                                <label class="remove-image varient" @click="removeImage(image)">
+                                    {{ __('admin::app.catalog.products.remove-image-btn-title') }}
+                                </label>
+                        </label>
                     </div>
 
                     <label class="btn btn-lg btn-primary add-image" @click="createFileType">
