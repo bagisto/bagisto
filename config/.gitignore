@@ -1,11 +1,9 @@
-db-blade-compiler.php
 debugbar.php
 dompdf.php
 excel.php
 flare.php
 ignition.php
 image.php
-imagecache.php
 jwt.php
 repository.php
 scout.php
