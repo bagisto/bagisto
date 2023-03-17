@@ -405,7 +405,7 @@
                                     }
 
                                     if (address.country) {
-                                        this.address.shipping.country = address.country;
+                                        this.address.billing.country = address.country;
                                     }
                                 }
 
