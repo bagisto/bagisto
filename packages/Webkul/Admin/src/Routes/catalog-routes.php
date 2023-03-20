@@ -9,7 +9,7 @@ use Webkul\Product\Http\Controllers\ProductController;
 /**
  * Catalog routes.
  */
-Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('catalog')->group(function () {
         /**
          * Sync route.
