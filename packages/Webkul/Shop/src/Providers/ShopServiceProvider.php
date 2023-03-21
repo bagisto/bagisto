@@ -4,6 +4,7 @@ namespace Webkul\Shop\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Tree;
 use Webkul\Shop\Http\Middleware\Currency;
@@ -27,7 +28,7 @@ class ShopServiceProvider extends ServiceProvider
         ]);
 
         /* loaders */
-        $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
+        Route::middleware('web')->group(__DIR__ . '/../Routes/web.php');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'shop');
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
