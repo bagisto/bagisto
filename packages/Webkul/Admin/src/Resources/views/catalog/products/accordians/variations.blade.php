@@ -16,8 +16,6 @@
             display: contents;
         }
         
-       
-
         .varient {
             font-size: 10px;
             font-weight: bold;
