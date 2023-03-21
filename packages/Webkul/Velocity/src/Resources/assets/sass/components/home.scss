@@ -118,45 +118,31 @@ header #search-form > *:focus {
 }
 
 /* advertisements */
-.advertisement-four-container {
-    .offers-ct-panel {
-        > .row {
-            padding: 0 10px;
-        }
-
-        a:first-child {
-            padding-bottom: 15px !important;
-        }
-
-        .offers-ct-top {
-            height: 180px;
-        }
-
-        .offers-ct-bottom {
-            height: 220px;
-        }
-    }
-
-    > .row:first-child {
-        padding: 0 10px !important;
-    }
-
-    .col-4:nth-child(2) {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-        max-height: 425px;
-    }
-
-    img:nth-of-type(1),
-    img:last-child {
-        padding: 0;
-    }
+.advertisement-grid {
+    display: grid !important; 
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-gap: 15px !important;    
 }
+
+.advertisement-first {
+    grid-column: 1/2 !important;
+    grid-row: 1/3 !important;
+}
+
+.advertisement-second {
+    grid-column: 2/2 !important;
+    grid-row: 1/2 !important;
+}
+
+.advertisement-third {
+    grid-column: 2/3 !important;
+    grid-row: 3/2 !important;
+}
+
+.advertisement-forth {
+    grid-column: 3/4 !important;
+    grid-row: 1/3 !important;
+}  
 
 .advertisement-two-container {
     img {
@@ -178,6 +164,14 @@ header #search-form > *:focus {
 
     .bottom-container {
         padding-top: 15px;
+    }
+}
+
+.advertisement-four-container {
+    img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
     }
 }
 /* advertisements */
@@ -275,7 +269,7 @@ header #search-form > *:focus {
         width: 100%;
         height: 100%;
         display: table;
-        min-height: 310px;
+        min-height: 240px;
         max-height: 345px;
         padding-left: 36px;
         background:#2B2B2B;
@@ -361,11 +355,12 @@ header #search-form > *:focus {
             // -webkit-box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
 
             .category-image {
-                height: 180px;
+                height: 300px;
 
                 img {
                     width: 100%;
                     height: 100%;
+                    object-fit: cover;
                 }
             }
         }
