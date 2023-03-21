@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Providers;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Admin\Http\Middleware\Locale;
 use Webkul\Core\Tree;
@@ -16,7 +17,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
+        Route::middleware('web')->group(__DIR__ . '/../Routes/web.php');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'admin');
 

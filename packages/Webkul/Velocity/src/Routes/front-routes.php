@@ -5,7 +5,7 @@ use Webkul\Velocity\Http\Controllers\Shop\CartController;
 use Webkul\Velocity\Http\Controllers\Shop\ComparisonController;
 use Webkul\Velocity\Http\Controllers\Shop\ShopController;
 
-Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function () {
+Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Cart merger middleware. This middleware will take care of the items
      * which are deactivated at the time of buy now functionality. If somehow
