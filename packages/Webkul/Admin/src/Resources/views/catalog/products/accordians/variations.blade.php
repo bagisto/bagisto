@@ -12,28 +12,18 @@
             margin-top: 8px;
         }
 
-        .variant-image
-            .image-item {
-                margin-right: 0px;
+        .image-position {
+            display: contents;
         }
+        
+       
 
         .varient {
             font-size: 10px;
             font-weight: bold;
-            padding: 3px !important;
+            padding: 4px !important;
         }
-        .image-position {
-            display: contents;
-        }
-        .btn.add-image {
-            display: inline-block;
-            width:max-content;
-        }
-        .image-group .control-group {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-        }
+        
     </style>
 @endpush
 
@@ -150,7 +140,7 @@
     </script>
 
     <script type="text/x-template" id="variant-item-template">
-        <tr class="image-group">
+        <tr>
             <td>
                 <div class="control-group">
                     <span class="radio">
@@ -216,7 +206,7 @@
                 </div>
             </td>
 
-            <td>
+            <td class="image-group">
                 <div :class="['control-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
                     <div v-for='(image, index) in items' class="image-wrapper variant-image image-position">
                         <label class="image-item variant-image" v-bind:class="{ 'has-image': imageData[index] }">
