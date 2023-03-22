@@ -4,7 +4,6 @@
             <tr style="height: 65px">
                 <th
                     v-if="enableMassActions"
-                    class="grid_head"
                     id="mastercheckbox"
                     style="width: 50px"
                 >

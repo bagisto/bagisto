@@ -192,7 +192,7 @@
     cursor: pointer;
     position: absolute;
     top: 0;
-    right: 4px;
+    right: 10px;
 }
 
 #date-start {
@@ -248,7 +248,7 @@
 }
 
 // responsive css for modal
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 480px) {
 
     .dashboard {
 

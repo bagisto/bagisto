@@ -230,7 +230,7 @@ class Grouped extends AbstractType
             return trans('shop::app.checkout.cart.integrity.missing_options');
         }
 
-        $products = [];
+        $cartProductsList = [];
 
         foreach ($data['qty'] as $productId => $qty) {
             if (! $qty) {
@@ -248,8 +248,10 @@ class Grouped extends AbstractType
                 return $cartProducts;
             }
 
-            $products = array_merge($products, $cartProducts);
+            $cartProductsList[] = $cartProducts;
         }
+
+        $products = array_merge(...$cartProductsList);
 
         if (! count($products)) {
             return trans('shop::app.checkout.cart.integrity.qty_missing');

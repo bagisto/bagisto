@@ -2804,6 +2804,25 @@
     display: none;
 }
 
+.dropdown-btn span:nth-child(1) {
+    display: inline-flex;
+    width: 92%;
+}
+
+.dropdown-btn span:nth-child(2) i {
+    border: 1px solid #313131;
+    border-width: 0 2px 2px 0!important;
+    padding: 2.6px;
+    transform-origin: left;
+    transform: translate(3px, -5px) rotate(45deg);
+}
+
+@media only screen and (max-width: 1440px) {
+    .dropdown-btn span:nth-child(2) i {
+        border-width: 0 2px 2px 0 !important;
+    }
+}
+
 .sub-category {
     .VueCarousel-navigation {
         position: absolute;
