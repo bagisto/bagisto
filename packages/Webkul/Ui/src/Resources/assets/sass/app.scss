@@ -382,7 +382,10 @@ h5 {
                         margin-bottom: inherit;
                     }
                 }
-                            
+
+                a {
+                    width: 100%;
+                }                            
             }
 
             li {
@@ -643,6 +646,10 @@ h5 {
             &.actions {
                 .action {
                     display: inline-flex;
+                    
+                    a {
+                        padding-right: 5px;   
+                    }
                 }
 
                 .icon {
