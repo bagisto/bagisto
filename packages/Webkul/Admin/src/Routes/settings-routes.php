@@ -15,7 +15,7 @@ use Webkul\User\Http\Controllers\UserController;
 /**
  * Settings routes.
  */
-Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     /**
      * Roles routes.
      */

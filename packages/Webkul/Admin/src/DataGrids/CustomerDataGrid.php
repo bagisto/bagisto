@@ -195,8 +195,8 @@ class CustomerDataGrid extends DataGrid
         $this->addAction([
             'method' => 'GET',
             'route'  => 'admin.customer.loginascustomer',
-            'icon'   => 'icon lock-icon',
-            'target'=>'blank',
+            'icon'   => 'icon login-icon',
+            'target' => 'blank',
             'title'  => trans('admin::app.customers.loginascustomer.grid-title'),
         ]);
 
