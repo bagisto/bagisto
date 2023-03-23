@@ -161,6 +161,7 @@
                                 country: '',
                             },
                         },
+                        saveAddressCheckbox: undefined,
                     }
                 },
 
@@ -381,7 +382,7 @@
                     saveAddress: async function () {
                         this.disable_button = true;
                         this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
-
+                        
                         if (this.saveAddressCheckbox.prop('checked') == true) {
                             this.saveAddressCheckbox.attr('disabled', 'disabled');
                             this.saveAddressCheckbox.prop('checked', true);
@@ -430,7 +431,6 @@
                                 }
                             });
                         }
-
                         this.$http.post("{{ route('shop.checkout.save_address') }}", this.address)
                             .then(response => {
                                 this.disable_button = false;
@@ -582,6 +582,15 @@
                         this.new_billing_address = true;
                         this.isPlaceOrderEnabled = false;
                         this.address.billing.address_id = null;
+
+                        setTimeout(() => {
+                            this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
+                            
+                            if (this.saveAddressCheckbox.prop('checked')) {
+                                this.saveAddressCheckbox.attr('disabled', 'disabled');
+                            }
+                        }, 0);
+
                     },
 
                     newShippingAddress: function () {
@@ -605,7 +614,20 @@
                             this.validateForm('address-form');
                         }, 0);
                     }
-                }
+                },
+                watch: {
+                    'address': {
+                        handler: function(v) {
+                            this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
+
+                            if (this.saveAddressCheckbox.attr('disabled')) {
+                                this.saveAddressCheckbox.removeAttr('disabled');
+                                this.saveAddressCheckbox.prop('checked', false);
+                            }
+                        },
+                        deep: true
+                    }
+                },
             });
 
             Vue.component('shipping-section', {
