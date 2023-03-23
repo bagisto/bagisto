@@ -161,7 +161,6 @@
                                 country: '',
                             },
                         },
-                        saveAddressCheckbox: null,
                     }
                 },
 
@@ -582,13 +581,10 @@
                         this.address.billing.address_id = null;
 
                         setTimeout(() => {
-                            this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
-                            
-                            if (this.saveAddressCheckbox.prop('checked')) {
-                                this.saveAddressCheckbox.attr('disabled', 'disabled');
+                            if (this.$refs.billingSaveAsAddress && this.$refs.billingSaveAsAddress.checked) {
+                                this.$refs.billingSaveAsAddress.setAttribute('disabled', 'disabled');
                             }
                         }, 0);
-
                     },
 
                     newShippingAddress: function () {
