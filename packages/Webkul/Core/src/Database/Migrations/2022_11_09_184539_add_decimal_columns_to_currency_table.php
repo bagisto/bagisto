@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('currencies', function (Blueprint $table) {
-             $table->integer('decimal')->unsigned()->default(2);
+            $table->integer('decimal')->unsigned()->default(2);
         });
     }
 

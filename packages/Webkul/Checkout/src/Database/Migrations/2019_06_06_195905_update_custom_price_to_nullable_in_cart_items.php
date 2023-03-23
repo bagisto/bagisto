@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -18,7 +18,7 @@ return new class extends Migration
         });
 
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->decimal('custom_price', 12,4)->nullable();
+            $table->decimal('custom_price', 12, 4)->nullable();
         });
     }
 
@@ -34,7 +34,7 @@ return new class extends Migration
         });
 
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->decimal('custom_price', 12,4)->default(0);
+            $table->decimal('custom_price', 12, 4)->default(0);
         });
     }
 };

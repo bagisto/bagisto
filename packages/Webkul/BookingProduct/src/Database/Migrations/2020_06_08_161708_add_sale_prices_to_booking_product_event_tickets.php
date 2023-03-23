@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('booking_product_event_tickets', function (Blueprint $table) {
-            $table->decimal('special_price', 12,4)->after('qty')->nullable();
+            $table->decimal('special_price', 12, 4)->after('qty')->nullable();
             $table->dateTime('special_price_from')->after('special_price')->nullable();
             $table->dateTime('special_price_to')->after('special_price_from')->nullable();
         });

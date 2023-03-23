@@ -22,7 +22,7 @@ return new class extends Migration
         });
 
         DB::table('marketing_events')->insert([
-            'name'        => 'Birthday',
+            'name' => 'Birthday',
             'description' => 'Birthday',
         ]);
     }

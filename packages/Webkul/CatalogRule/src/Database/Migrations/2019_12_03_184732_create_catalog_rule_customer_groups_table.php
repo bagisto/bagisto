@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('catalog_rule_customer_groups', function (Blueprint $table) {
             $table->integer('catalog_rule_id')->unsigned();
             $table->integer('customer_group_id')->unsigned();
-
 
             $table->primary(['catalog_rule_id', 'customer_group_id'], 'catalog_rule_id_customer_group_id_primary');
 

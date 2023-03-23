@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            if ( Schema::hasColumn('customers', 'phone')) {
+            if (Schema::hasColumn('customers', 'phone')) {
                 $table->dropUnique('customers_phone_unique');
             }
         });
@@ -28,7 +28,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('customers', function (Blueprint $table) {
-            if ( Schema::hasColumn('customers', 'phone')) {
+            if (Schema::hasColumn('customers', 'phone')) {
                 $table->unique('phone');
             }
         });
