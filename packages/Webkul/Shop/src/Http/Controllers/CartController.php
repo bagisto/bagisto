@@ -68,7 +68,7 @@ class CartController extends Controller
 
         $cart ? $categoryIds[] = $cart->items->random(1)->first()->product->categories->first()->id ?? 0 : '';
 
-        (! $wishlistItems->isEmpty()) ? $categoryIds[] = $wishlistItems->random(1)->first()->product->categories->first()->id ?? 0 : '';
+        (! empty($wishlistItems) && $wishlistItems->isNotEmpty() ) ? $categoryIds[] = $wishlistItems->random(1)->first()->product->categories->first()->id ?? 0 : '';
 
         (! $orderItems->isEmpty()) ? $categoryIds[] = $orderItems->random(1)->first()->product->categories->first()->id ?? 0 : '';
 

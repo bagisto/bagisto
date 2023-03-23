@@ -1546,7 +1546,6 @@
     height: max-content;
     position: sticky !important;
     max-width: 500px !important;
-    margin-left: 90px;
 
     > div {
         width: 100%;
@@ -2682,6 +2681,12 @@
         margin-left: -24px;
         top: 50%;
         margin-top: -24px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .order-summary-container {
+        margin-left: 90px;
     }
 }
 

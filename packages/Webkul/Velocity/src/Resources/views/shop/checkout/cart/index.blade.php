@@ -17,6 +17,10 @@
                 margin-left: -10px !important;
             }
         }
+
+        .product-card-new {
+            max-width: inherit;
+        }
     </style>
 @endpush
 
@@ -433,7 +437,6 @@
 
             mounted() {
                 this.$root.getCategoryProducts(this.categoryId);
-                console.log(this.categoryId);
             }
         })
     </script>
