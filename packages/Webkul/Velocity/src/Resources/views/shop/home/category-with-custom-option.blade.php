@@ -95,41 +95,11 @@
                     <div class="card-arrow card-arrow-tp"></div>
                 </div>
 
-<<<<<<< HEAD
 <div class="container-fluid category-with-custom-options vc-small-screen" v-if='width < 768'  >
     @foreach ($category as $categoryItem)
         <div class="smart-category-container">
             <div class="col-12">
                 <img data-src="{{ $categoryItem->image_url }}" class="lazyload" alt="" />
-=======
-                <div class="categories-collection">
-                    <div class="category-text-content">
-                        <h2 class="text-uppercase">
-                            <a href="{{ $categories[2]->slug }}" class="remove-decoration normal-white-text">
-                                {{ $categories[2]->name }}
-                            </a>
-                        </h2>
-                        <ul type="none" class="fs14">
-                            @foreach ($categories[2]->children as $subCategory)
-                                <li>
-                                    <a href="{{ $categories[2]->slug . '/' . $subCategory->slug }}" class="remove-decoration normal-white-text">
-                                        {{ $subCategory->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col mt15">
-                @if (isset($categoryList[3]))
-                    <a href="{{ $categoryList[3] }}" target="_blank">
-                        <img data-src="{{ $categories[3]->image_url }}" class="lazyload" alt=""/>
-                    </a>
-                @else
-                    <img data-src="{{ $categories[3]->image_url }}" class="lazyload" alt=""/>
-                @endif
->>>>>>> upstream/master
             </div>
 
             <div class="col mt15 mr15">
