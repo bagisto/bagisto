@@ -20,7 +20,7 @@ class ExportController extends Controller
 
         $gridName = explode('\\', $criteria['gridName']);
 
-        $gridInstance = app('\Webkul\Admin\DataGrids' . '\\' . last($gridName));
+        $gridInstance = app($criteria['gridName']);
 
         $records = $gridInstance->export();
 
