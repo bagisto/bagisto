@@ -161,7 +161,7 @@
                                 country: '',
                             },
                         },
-                        saveAddressCheckbox: undefined,
+                        saveAddressCheckbox: null,
                     }
                 },
 
@@ -381,11 +381,9 @@
 
                     saveAddress: async function () {
                         this.disable_button = true;
-                        this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
-                        
-                        if (this.saveAddressCheckbox.prop('checked') == true) {
-                            this.saveAddressCheckbox.attr('disabled', 'disabled');
-                            this.saveAddressCheckbox.prop('checked', true);
+                   
+                        if (this.$refs.billingSaveAsAddress && this.$refs.billingSaveAsAddress.checked) {
+                            this.$refs.billingSaveAsAddress.setAttribute('disabled', 'disabled');
                         }
 
                         if (this.allAddress.length > 0) {
@@ -615,14 +613,16 @@
                         }, 0);
                     }
                 },
+          
                 watch: {
-                    'address': {
+                    address : {
                         handler: function(v) {
-                            this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
-
-                            if (this.saveAddressCheckbox.attr('disabled')) {
-                                this.saveAddressCheckbox.removeAttr('disabled');
-                                this.saveAddressCheckbox.prop('checked', false);
+                            if (
+                                this.$refs.billingSaveAsAddress 
+                                && this.$refs.billingSaveAsAddress.hasAttribute('disabled')
+                            ) {
+                                this.$refs.billingSaveAsAddress.removeAttribute('disabled');
+                                this.$refs.billingSaveAsAddress.checked = false;
                             }
                         },
                         deep: true
