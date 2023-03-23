@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateWeightColumnDeafultValueInCartItemsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -29,4 +29,4 @@ class UpdateWeightColumnDeafultValueInCartItemsTable extends Migration
             $table->decimal('weight', 12,4)->default(1)->change();
         });
     }
-}
+};

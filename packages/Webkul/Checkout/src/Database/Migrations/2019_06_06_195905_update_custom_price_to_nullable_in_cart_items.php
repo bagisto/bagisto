@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateCustomPriceToNullableInCartItems extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -37,4 +37,4 @@ class UpdateCustomPriceToNullableInCartItems extends Migration
             $table->decimal('custom_price', 12,4)->default(0);
         });
     }
-}
+};

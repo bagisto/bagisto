@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvoiceItemsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -51,4 +51,4 @@ class CreateInvoiceItemsTable extends Migration
     {
         Schema::dropIfExists('invoice_items');
     }
-}
+};

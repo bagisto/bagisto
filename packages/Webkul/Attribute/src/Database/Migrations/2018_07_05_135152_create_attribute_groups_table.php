@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttributeGroupsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -44,4 +44,4 @@ class CreateAttributeGroupsTable extends Migration
 
         Schema::dropIfExists('attribute_groups');
     }
-}
+};

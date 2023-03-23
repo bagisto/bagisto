@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttributesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -41,4 +41,4 @@ class CreateAttributesTable extends Migration
     {
         Schema::dropIfExists('attributes');
     }
-}
+};

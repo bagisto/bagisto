@@ -8,7 +8,7 @@ use Illuminate\Database\Migrations\Migration;
  * Hack core: Change the migration
  * Added by AuTN
  */
-class UpdateCmsPageTranslationsTableFieldHtmlContent extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -33,4 +33,4 @@ class UpdateCmsPageTranslationsTableFieldHtmlContent extends Migration
             $table->text('html_content')->nullable()->change();
         });
     }
-}
+};

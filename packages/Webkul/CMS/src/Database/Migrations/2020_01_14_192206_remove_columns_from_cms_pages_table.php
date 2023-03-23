@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveColumnsFromCmsPagesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -31,4 +31,4 @@ class RemoveColumnsFromCmsPagesTable extends Migration
             //
         });
     }
-}
+};

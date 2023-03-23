@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChannelTranslationsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -39,4 +39,4 @@ class CreateChannelTranslationsTable extends Migration
     {
         Schema::dropIfExists('channel_translations');
     }
-}
+};

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSlidersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -36,4 +36,4 @@ class CreateSlidersTable extends Migration
         Schema::dropIfExists('sliders');
         Schema::enableForeignKeyConstraints();
     }
-}
+};

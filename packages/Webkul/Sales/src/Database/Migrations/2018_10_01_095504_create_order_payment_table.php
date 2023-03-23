@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderPaymentTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -32,4 +32,4 @@ class CreateOrderPaymentTable extends Migration
     {
         Schema::dropIfExists('order_payment');
     }
-}
+};

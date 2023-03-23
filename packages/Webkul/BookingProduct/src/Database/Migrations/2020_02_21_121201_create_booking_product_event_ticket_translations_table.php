@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookingProductEventTicketTranslationsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -33,4 +33,4 @@ class CreateBookingProductEventTicketTranslationsTable extends Migration
     {
         Schema::dropIfExists('booking_product_event_ticket_translations');
     }
-}
+};

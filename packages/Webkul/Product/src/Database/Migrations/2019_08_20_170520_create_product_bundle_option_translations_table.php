@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductBundleOptionTranslationsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -32,4 +32,4 @@ class CreateProductBundleOptionTranslationsTable extends Migration
     {
         Schema::dropIfExists('product_bundle_option_translations');
     }
-}
+};

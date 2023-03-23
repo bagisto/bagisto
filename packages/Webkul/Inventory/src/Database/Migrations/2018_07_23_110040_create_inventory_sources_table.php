@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInventorySourcesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -44,4 +44,4 @@ class CreateInventorySourcesTable extends Migration
     {
         Schema::dropIfExists('inventory_sources');
     }
-}
+};

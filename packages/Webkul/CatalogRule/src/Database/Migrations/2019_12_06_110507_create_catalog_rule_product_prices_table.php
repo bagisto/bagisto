@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCatalogRuleProductPricesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -19,13 +19,13 @@ class CreateCatalogRuleProductPricesTable extends Migration
             $table->date('rule_date');
             $table->datetime('starts_from')->nullable();
             $table->datetime('ends_till')->nullable();
-            
+
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            
+
             $table->integer('customer_group_id')->unsigned();
             $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
-            
+
             $table->integer('catalog_rule_id')->unsigned();
             $table->foreign('catalog_rule_id')->references('id')->on('catalog_rules')->onDelete('cascade');
 
@@ -43,4 +43,4 @@ class CreateCatalogRuleProductPricesTable extends Migration
     {
         Schema::dropIfExists('catalog_rule_product_prices');
     }
-}
+};

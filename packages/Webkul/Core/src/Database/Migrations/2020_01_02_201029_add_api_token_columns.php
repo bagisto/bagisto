@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddApiTokenColumns extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -49,4 +49,4 @@ class AddApiTokenColumns extends Migration
             $table->dropColumn('api_token');
         });
     }
-}
+};

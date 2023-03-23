@@ -10,7 +10,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Webkul\Checkout\Models\CartShippingRate;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTableAddresses extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -285,4 +285,4 @@ SQL;
                 ->onDelete('cascade');
         });
     }
-}
+};

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductFlatTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -55,4 +55,4 @@ class CreateProductFlatTable extends Migration
     {
         Schema::dropIfExists('product_flat');
     }
-}
+};

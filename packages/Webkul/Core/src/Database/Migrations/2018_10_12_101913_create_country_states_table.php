@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCountryStatesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateCountryStatesTable extends Migration
             $table->string('country_code')->nullable();
             $table->string('code')->nullable();
             $table->string('default_name')->nullable();
-            
+
             $table->integer('country_id')->nullable()->unsigned();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
@@ -33,4 +33,4 @@ class CreateCountryStatesTable extends Migration
     {
         Schema::dropIfExists('country_states');
     }
-}
+};

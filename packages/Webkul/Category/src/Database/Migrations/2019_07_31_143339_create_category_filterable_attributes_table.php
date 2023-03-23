@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryFilterableAttributesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -30,4 +30,4 @@ class CreateCategoryFilterableAttributesTable extends Migration
     {
         Schema::dropIfExists('category_filterable_attributes');
     }
-}
+};

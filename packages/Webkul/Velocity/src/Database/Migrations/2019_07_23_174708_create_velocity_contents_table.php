@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVelocityContentsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -19,7 +19,7 @@ class CreateVelocityContentsTable extends Migration
             $table->string('content_type', 100)->nullable();
             $table->integer('position')->unsigned()->nullable();
             $table->boolean('status')->default(0);
-            
+
             $table->timestamps();
         });
     }
@@ -33,4 +33,4 @@ class CreateVelocityContentsTable extends Migration
     {
         Schema::dropIfExists('velocity_contents');
     }
-}
+};

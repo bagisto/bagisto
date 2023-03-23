@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCmsPageTranslationsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -38,4 +38,4 @@ class CreateCmsPageTranslationsTable extends Migration
     {
         Schema::dropIfExists('cms_page_translations');
     }
-}
+};

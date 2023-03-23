@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookingProductAppointmentSlotsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -34,4 +34,4 @@ class CreateBookingProductAppointmentSlotsTable extends Migration
     {
         Schema::dropIfExists('booking_product_appointment_slots');
     }
-}
+};
