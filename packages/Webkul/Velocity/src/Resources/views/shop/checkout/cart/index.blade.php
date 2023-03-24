@@ -390,7 +390,7 @@
     <script type="text/x-template" id='related-products-template'>
         <div>
             <div v-if='this.$root.products.length'>
-                <div class="row remove-padding-margin">`
+                <div class="row remove-padding-margin">
                     <div class="col-12 no-padding">
                         <h2 class="fs20 fw6 mb15 mt-5">
                             {{ __('shop::app.checkout.cart.product-related') }}
