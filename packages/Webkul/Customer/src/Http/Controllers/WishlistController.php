@@ -123,12 +123,14 @@ class WishlistController extends Controller
                 'shared' => 'required|boolean'
             ]);
 
-            $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);
+            if (! empty(request()->productsIds)) {
+                $updateCounts = $customer->wishlist_items()->whereIn('product_id' ,request()->productsIds);
+                $updateCounts->update(['shared' => $data['shared']]);
+            } else {
+                $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);    
+            }
 
-            if (
-                $updateCounts
-                && $updateCounts > 0
-            ) {
+            if ($updateCounts) {
                 return response()->json([
                     'isWishlistShared'   => $customer->isWishlistShared(),
                     'wishlistSharedLink' => $customer->getWishlistSharedLink()
