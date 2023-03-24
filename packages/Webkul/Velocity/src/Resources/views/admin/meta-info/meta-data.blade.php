@@ -18,25 +18,40 @@
 
 @push('css')
     <style>
-        @media only screen and (max-width: 680px){
+        @media only screen and (max-width: 680px) {
             .content-container .content .page-header .page-title {
                 float: left;
                 width: 100%;
-                margin-bottom: 12px;
+                margin: 6px 0 0 0;
+            }
+
+            .content-container .content .page-header .page-title h1 {
+                font-size: 24px;
             }
 
             .content-container .content .page-header .page-action button {
+                right: 10px;
                 position: absolute;
-                right: 2px;
                 top: 10px !important;
             }
 
             .content-container .content .page-header .control-group {
-                margin-top:16px !important;
                 width: 100% !important;
                 margin-left: 0px !important;
+                margin-top: 25px !important;
             }
         }
+
+        @media only screen and (min-width: 768px) { 
+            .content-container .content .page-header .page-title {
+                margin: 6px 0 0 0;
+            }
+
+            .content-container .content .page-header .control-group {
+                width: 150px !important;
+                margin-top: 5px !important;
+            }
+        } 
     </style>
 @endpush
 
