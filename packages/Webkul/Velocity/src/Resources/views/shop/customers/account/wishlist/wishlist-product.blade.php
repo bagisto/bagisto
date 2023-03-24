@@ -71,9 +71,9 @@
                         'showCompare'       => false
                     ])
                 </div>
-                
+
                 <div class="d-flex align-items-center">
-                    <input type="checkbox" name="share" class="w-auto">
+                    <input type="checkbox" name="share" class="w-auto" value="{{ $item->product->id }}" onclick="getShareProductIds(event)">
                     <label for="share">Share</label>
                 </div>
             </div>
