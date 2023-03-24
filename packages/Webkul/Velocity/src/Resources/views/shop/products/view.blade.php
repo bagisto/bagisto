@@ -162,7 +162,10 @@
                                     @include ('shop::products.view.bundle-options')
 
                                     <div class="col-12 product-actions">
-                                        @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
+                                        @if (
+                                            core()->getConfigData('catalog.products.storefront.buy_now_button_display') && 
+                                            $product->type != 'booking'
+                                        )
                                             @include ('shop::products.buy-now', [
                                                 'product' => $product,
                                             ])
