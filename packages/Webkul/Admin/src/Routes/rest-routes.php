@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Admin\Http\Controllers\DashboardController;
 use Webkul\Admin\Http\Controllers\ExportController;
-use Webkul\Admin\Http\Controllers\TinyMCEController;
 use Webkul\User\Http\Controllers\AccountController;
 use Webkul\User\Http\Controllers\SessionController;
+use Webkul\Admin\Http\Controllers\TinyMCEController;
+use Webkul\Admin\Http\Controllers\DashboardController;
 
 /**
  * Extra routes.

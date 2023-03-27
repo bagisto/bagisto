@@ -1,17 +1,17 @@
 <template>
-   <div class="notifications">
-       <div class="dropdown-toggle" data-toggle="tooltip" data-placement="bottom" :title="notifTitle">
-           <span class="notification-badge" v-if="totalUnRead">{{ totalUnRead }}</span>
-           <i class="icon notification-icon active" style="margin-left:0px"></i>
-       </div>
+    <div class="notifications">
+        <div class="dropdown-toggle" data-toggle="tooltip" data-placement="bottom" :title="notifTitle">
+            <span class="notification-badge" v-if="totalUnRead">{{ totalUnRead }}</span>
+            <i class="icon notification-icon active" style="margin-left:0px"></i>
+        </div>
 
-       <div class="dropdown-list bottom-right notification" ref="dropdownList">
-           <div class="dropdown-container">
-               <ul class="notif">
-                   <div id="notif-title">{{ title }}</div>
+        <div class="dropdown-list bottom-right notification" ref="dropdownList">
+            <div class="dropdown-container">
+                <ul class="notif">
+                    <div id="notif-title">{{ title }}</div>
 
-                   <li v-for="notification in notifications" :key="notification.id" :class="notification.read ? 'read': ' '">
-                       <div>
+                    <li v-for="notification in notifications" :key="notification.id" :class="notification.read ? 'read': ' '">
+                        <div>
                             <span hidden>{{ moment.locale(localeCode) }}</span>
                         </div>
                         
@@ -28,24 +28,24 @@
                                 {{ moment(notification.order.created_at).fromNow() }}
                             </div>
                         </a>
-                   </li>
+                    </li>
 
-                   <li class="bottom-li">
-                       <a :href="viewAll">{{ viewAllTitle }}</a>
+                    <li class="bottom-li">
+                        <a :href="viewAll">{{ viewAllTitle }}</a>
 
-                       <button
+                        <button
                             class="read-all"
                             :style="totalUnRead == 0 ? 'opacity: .5' : ''"
                             :disabled="totalUnRead == 0"
                             @click="readAll()"
                         >
-                            {{ readAllTitle }}
+                        {{ readAllTitle }}
                         </button>
-                   </li>
-               </ul>
-           </div>
-       </div>
-   </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>

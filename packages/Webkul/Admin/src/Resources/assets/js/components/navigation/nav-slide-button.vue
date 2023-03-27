@@ -1,5 +1,5 @@
 <template>   
-     <div class="menubar-bottom" @click="toggle">
+    <div class="menubar-bottom" @click="toggle">
         <i class="icon" :class="iconClass"></i>
     </div>
 </template>

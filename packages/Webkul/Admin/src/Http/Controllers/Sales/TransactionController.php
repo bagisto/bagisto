@@ -3,13 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
+use Webkul\Payment\Facades\Payment;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
-use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Admin\DataGrids\OrderTransactionsDataGrid;
-use Webkul\Payment\Facades\Payment;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
 
 class TransactionController extends Controller
 {
@@ -47,6 +47,7 @@ class TransactionController extends Controller
     public function index()
     {
         if (request()->ajax()) {
+            
             return app(OrderTransactionsDataGrid::class)->toJson();
         }
 

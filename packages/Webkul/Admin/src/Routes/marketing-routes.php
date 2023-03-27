@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Marketing\Http\Controllers\EventController;
 use Webkul\CartRule\Http\Controllers\CartRuleController;
-use Webkul\CartRule\Http\Controllers\CartRuleCouponController;
-use Webkul\CatalogRule\Http\Controllers\CatalogRuleController;
 use Webkul\Core\Http\Controllers\SubscriptionController;
 use Webkul\Marketing\Http\Controllers\CampaignController;
-use Webkul\Marketing\Http\Controllers\EventController;
 use Webkul\Marketing\Http\Controllers\TemplateController;
 use Webkul\Sitemap\Http\Controllers\Admin\SitemapController;
+use Webkul\CartRule\Http\Controllers\CartRuleCouponController;
+use Webkul\CatalogRule\Http\Controllers\CatalogRuleController;
 
 /**
  * Marketing routes.

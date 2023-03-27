@@ -4,9 +4,9 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\OrderItemRepository;
-use Webkul\Sales\Repositories\RefundRepository;
 use Webkul\Admin\DataGrids\OrderRefundDataGrid;
+use Webkul\Sales\Repositories\RefundRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
 
 class RefundController extends Controller
 {
@@ -42,6 +42,7 @@ class RefundController extends Controller
     public function index()
     {
         if (request()->ajax()) {
+
             return app(OrderRefundDataGrid::class)->toJson();
         }
 
@@ -129,6 +130,7 @@ class RefundController extends Controller
         $data = $this->refundRepository->getOrderItemsRefundSummary(request()->all(), $orderId);
 
         if (! $data) {
+            
             return response('');
         }
 

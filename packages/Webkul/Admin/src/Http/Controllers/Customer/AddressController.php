@@ -3,12 +3,12 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Rules\VatIdRule;
-use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
-use Webkul\Core\Contracts\Validations\PhoneNumber;
 use Webkul\Admin\DataGrids\AddressDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Contracts\Validations\PhoneNumber;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 
 class AddressController extends Controller
@@ -46,6 +46,7 @@ class AddressController extends Controller
         $customer = $this->customerRepository->find($id);
 
         if (request()->ajax()) {
+            
             return app(AddressDataGrid::class)->toJson();
         }
 

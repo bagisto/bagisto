@@ -2,15 +2,15 @@
 
 namespace Webkul\Admin\Http\Controllers\Customer;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Admin\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\CustomerDataGrid;
-use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
-use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Mail\NewCustomerNotification;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class CustomerController extends Controller
 {
@@ -43,6 +43,7 @@ class CustomerController extends Controller
     public function index()
     {
         if (request()->ajax()) {
+            
             return app(CustomerDataGrid::class)->toJson();
         }
 
@@ -284,6 +285,7 @@ class CustomerController extends Controller
     public function invoices($id)
     {
         if (request()->ajax()) {
+
             return app(CustomersInvoicesDataGrid::class)->toJson();
         }
     }
@@ -297,6 +299,7 @@ class CustomerController extends Controller
     public function orders($id)
     {
         if (request()->ajax()) {
+
             return app(CustomerOrderDataGrid::class)->toJson();
         }
 

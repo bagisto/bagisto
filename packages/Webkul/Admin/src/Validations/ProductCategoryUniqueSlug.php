@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\Validations;
 
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Validation\Rule;
 use Webkul\Category\Models\CategoryTranslationProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -49,6 +49,7 @@ class ProductCategoryUniqueSlug implements Rule
     public function passes($attribute, $value)
     {
         if (in_array($value, $this->reservedSlugs)) {
+
             return ! ($this->isSlugReserved = true);
         }
 
@@ -63,6 +64,7 @@ class ProductCategoryUniqueSlug implements Rule
     public function message()
     {
         if ($this->isSlugReserved) {
+            
             return trans('admin::app.validations.slug-reserved');
         }
 

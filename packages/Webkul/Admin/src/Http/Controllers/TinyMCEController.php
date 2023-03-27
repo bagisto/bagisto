@@ -23,6 +23,7 @@ class TinyMCEController extends Controller
         $media = $this->storeMedia();
 
         if (! empty($media)) {
+
             return response()->json([
                 'location' => $media['file_url']
             ]);
@@ -39,6 +40,7 @@ class TinyMCEController extends Controller
     public function storeMedia()
     {
         if (! request()->hasFile('file')) {
+            
             return [];
         }
 

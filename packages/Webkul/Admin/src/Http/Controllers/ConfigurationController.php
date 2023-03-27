@@ -3,9 +3,9 @@
 namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Core\Repositories\CoreConfigRepository;
-use Webkul\Admin\Http\Requests\ConfigurationForm;
 use Webkul\Core\Tree;
+use Webkul\Admin\Http\Requests\ConfigurationForm;
+use Webkul\Core\Repositories\CoreConfigRepository;
 
 class ConfigurationController extends Controller
 {
@@ -64,6 +64,7 @@ class ConfigurationController extends Controller
         $slugs = $this->getDefaultConfigSlugs();
 
         if (count($slugs)) {
+            
             return redirect()->route('admin.configuration.index', $slugs);
         }
 

@@ -5,8 +5,8 @@ namespace Webkul\Admin\Providers;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Admin\Http\Middleware\Locale;
 use Webkul\Core\Tree;
+use Webkul\Admin\Http\Middleware\Locale;
 
 class AdminServiceProvider extends ServiceProvider
 {

@@ -3,10 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Core\Contracts\Validations\Code;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\DataGrids\CustomerGroupDataGrid;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Core\Contracts\Validations\Code;
 
 class CustomerGroupController extends Controller
 {
@@ -36,6 +36,7 @@ class CustomerGroupController extends Controller
     public function index()
     {
         if (request()->ajax()) {
+            
             return app(CustomerGroupDataGrid::class)->toJson();
         }
 

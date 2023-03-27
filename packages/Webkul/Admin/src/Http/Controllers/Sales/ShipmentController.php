@@ -4,9 +4,9 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
 use Webkul\Admin\DataGrids\OrderShipmentsDataGrid;
+use Webkul\Sales\Repositories\OrderItemRepository;
 
 class ShipmentController extends Controller
 {
@@ -42,6 +42,7 @@ class ShipmentController extends Controller
     public function index()
     {
         if (request()->ajax()) {
+
             return app(OrderShipmentsDataGrid::class)->toJson();
         }
 
@@ -114,6 +115,7 @@ class ShipmentController extends Controller
     public function isInventoryValidate(&$data)
     {
         if (! isset($data['shipment']['items'])) {
+            
             return;
         }
 

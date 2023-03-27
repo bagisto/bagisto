@@ -3,16 +3,16 @@
 namespace Webkul\Admin\Traits;
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\Admin\Mail\CancelOrderAdminNotification;
-use Webkul\Admin\Mail\CancelOrderNotification;
-use Webkul\Admin\Mail\DuplicateInvoiceNotification;
 use Webkul\Admin\Mail\NewAdminNotification;
-use Webkul\Admin\Mail\NewInventorySourceNotification;
-use Webkul\Admin\Mail\NewInvoiceNotification;
 use Webkul\Admin\Mail\NewOrderNotification;
 use Webkul\Admin\Mail\NewRefundNotification;
+use Webkul\Admin\Mail\NewInvoiceNotification;
+use Webkul\Admin\Mail\CancelOrderNotification;
 use Webkul\Admin\Mail\NewShipmentNotification;
 use Webkul\Admin\Mail\OrderCommentNotification;
+use Webkul\Admin\Mail\CancelOrderAdminNotification;
+use Webkul\Admin\Mail\DuplicateInvoiceNotification;
+use Webkul\Admin\Mail\NewInventorySourceNotification;
 
 trait Mails
 {

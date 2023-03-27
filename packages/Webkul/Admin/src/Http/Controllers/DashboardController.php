@@ -2,13 +2,13 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
+use Illuminate\Support\Facades\DB;
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
-use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
 
 class DashboardController extends Controller
 {
@@ -158,6 +158,7 @@ class DashboardController extends Controller
     public function getPercentageChange($previous, $current)
     {
         if (! $previous) {
+            
             return $current ? 100 : 0;
         }
 

@@ -31,8 +31,10 @@ class ExportController extends Controller
         }
 
         if ($format == 'csv') {
+
             return Excel::download(new DataGridExport($records), last($gridName) . '.csv');
         } elseif ($format == 'xls') {
+            
             return Excel::download(new DataGridExport($records), last($gridName) . '.xlsx');
         }
 
