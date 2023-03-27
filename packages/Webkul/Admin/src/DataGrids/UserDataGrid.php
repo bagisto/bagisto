@@ -66,10 +66,11 @@ class UserDataGrid extends DataGrid
             'filterable' => true,
             'closure'  => function ($row) {
                 if ($row->user_image) {
+
                     return '<div class="avatar"><img src="' . Storage::url($row->user_image) . '"></div>' . $row->user_name;
-                } else {
-                    return '<div class="avatar"><span class="icon profile-pic-icon"></span></div>' . $row->user_name;
                 }
+                
+                return '<div class="avatar"><span class="icon profile-pic-icon"></span></div>' . $row->user_name;
             },
         ]);
 
@@ -82,10 +83,11 @@ class UserDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status) {
+
                     return trans('admin::app.datagrid.active');
-                } else {
-                    return trans('admin::app.datagrid.inactive');
                 }
+                
+                return trans('admin::app.datagrid.inactive');
             },
         ]);
 

@@ -57,6 +57,7 @@ class SitemapDataGrid extends DataGrid
             'sortable'   => false,
             'filterable' => false,
             'closure'    => function ($row) {
+                
                 return '<a href="' . ($url = Storage::url($row->path . '/' . $row->file_name)) . '" target="_blank">' . $url . '</a>';
             },
         ]);

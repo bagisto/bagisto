@@ -147,10 +147,11 @@ class AddressDataGrid extends DataGrid
             'searchable' => false,
             'closure'    => function ($row) {
                 if ($row->default_address) {
+
                     return '<span class="badge badge-md badge-success"">' . trans('admin::app.customers.addresses.yes') . '</span>';
-                } else {
-                    return trans('admin::app.customers.addresses.dash');
                 }
+                
+                return trans('admin::app.customers.addresses.dash');
             },
         ]);
     }

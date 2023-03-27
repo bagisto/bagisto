@@ -67,8 +67,10 @@ class TaxRateDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if (empty($value->state)) {
+
                     return '*';
                 } else {
+                    
                     return $value->state;
                 }
             },

@@ -112,18 +112,25 @@ class CustomerOrderDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status == 'processing') {
+
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.orders.order-status-processing') . '</span>';
                 } elseif ($value->status == 'completed') {
+
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.orders.order-status-success') . '</span>';
                 } elseif ($value->status == 'canceled') {
+
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-canceled') . '</span>';
                 } elseif ($value->status == 'closed') {
+
                     return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.orders.order-status-closed') . '</span>';
                 } elseif ($value->status == 'pending') {
+
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending') . '</span>';
                 } elseif ($value->status == 'pending_payment') {
+
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending-payment') . '</span>';
                 } elseif ($value->status == 'fraud') {
+                    
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-fraud') . '</span>';
                 }
             },

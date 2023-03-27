@@ -175,7 +175,11 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                if (! empty($row->visible_individually) && ! empty($row->url_key)) {
+                if (
+                    ! empty($row->visible_individually) 
+                    && ! empty($row->url_key)
+                ) {
+
                     return "<a href='" . route('shop.productOrCategory.index', $row->url_key) . "' target='_blank'>" . $row->product_name . "</a>";
                 }
 
@@ -239,10 +243,11 @@ class ProductDataGrid extends DataGrid
             'filterable' => false,
             'closure'    => function ($row) {
                 if (is_null($row->quantity)) {
+
                     return 0;
-                } else {
-                    return $this->renderQuantityView($row);
                 }
+                
+                return $this->renderQuantityView($row);
             },
         ]);
     }
@@ -260,6 +265,7 @@ class ProductDataGrid extends DataGrid
             'route'     => 'admin.catalog.products.edit',
             'icon'      => 'icon pencil-lg-icon',
             'condition' => function () {
+                
                 return true;
             },
         ]);
