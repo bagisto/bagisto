@@ -209,7 +209,7 @@ class Customer extends Authenticatable implements CustomerContract
      *
      * @return string|null
      */
-    public function getWishlistSharedLink($productIds)
+    public function getWishlistSharedLink($productIds = [])
     {
         return $this->isWishlistShared()
             ? URL::signedRoute('shop.customer.wishlist.shared', ['id' => $this->id, 'products' => $productIds])

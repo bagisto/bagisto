@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="d-flex align-items-center">
-                    <input type="checkbox" name="share" class="w-auto" value="{{ $item->product->id }}" onclick="getShareProductIds(event)">
+                    <input type="checkbox" name="share" class="w-auto share-wishlist" value="{{ $item->product->id }}">
                     <label for="share">Share</label>
                 </div>
             </div>

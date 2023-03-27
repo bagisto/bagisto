@@ -47,8 +47,8 @@ class WishlistController extends Controller
         return view($this->_config['view'], [
             'items'              => $this->wishlistRepository->getCustomerWishlist(),
             'isSharingEnabled'   => $this->isSharingEnabled(),
-            'isWishlistShared'   => $customer->isWishlistShared(),
-            'wishlistSharedLink' => $customer->getWishlistSharedLink([17])
+            'isWishlistShared'   => 0,
+            'wishlistSharedLink' => $customer->getWishlistSharedLink()
         ]);
     }
 
@@ -157,7 +157,7 @@ class WishlistController extends Controller
         }
         if (! empty(request()->get('products'))) {
             $customer = $customerRepository->find(request()->get('id'));
-            $items = $customer->wishlist_items()->where('shared', 1)->get();
+            $items = $customer->wishlist_items()->whereIn('product_id', request()->get('products'))->get();
             
         } else {
             $customer = $customerRepository->find(request()->get('id'));

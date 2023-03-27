@@ -91,8 +91,8 @@
                     </label>
 
                     <select name="shared" class="form-control" @change="shareWishlist($event.target.value)">
-                        <option value="0" :selected="! isWishlistShared">{{ __('shop::app.customer.account.wishlist.disable') }}</option>
-                        <option value="1" :selected="isWishlistShared">{{ __('shop::app.customer.account.wishlist.enable') }}</option>
+                        <option value="0">{{ __('shop::app.customer.account.wishlist.disable') }}</option>
+                        <option value="1">{{ __('shop::app.customer.account.wishlist.enable') }}</option>
                     </select>
                 </div>
 
@@ -175,6 +175,8 @@
 
                         this.$root.showLoader();
 
+                        getShareProductIds();
+
                         this.$http.post("{{ route('shop.customer.wishlist.share') }}", {
                             shared: val,
                             productsIds: productsId
@@ -185,6 +187,8 @@
                             self.isWishlistShared = response.data.isWishlistShared;
 
                             self.wishlistSharedLink = response.data.wishlistSharedLink;
+
+                            productsId = [];
                         })
                         .catch(function (error) {
                             self.$root.hideLoader();
@@ -202,8 +206,12 @@
             });
 
             var productsId = [];
-            function getShareProductIds(product) {
-                productsId.push(product.target.value);
+            function getShareProductIds() {
+                $(".share-wishlist").each(function() {
+                    if ($(this).prop('checked')) {
+                        productsId.push($(this).val());
+                    }
+                });
             }
 
         </script>
