@@ -69,10 +69,13 @@ class EmailTemplateDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status == 'active') {
+
                     return trans('admin::app.datagrid.active');
                 } elseif ($value->status == 'inactive') {
+
                     return trans('admin::app.datagrid.inactive');
                 } elseif ($value->status == 'draft') {
+                    
                     return trans('admin::app.datagrid.draft');
                 }
             },

@@ -3,13 +3,13 @@
 namespace Webkul\Admin\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Webkul\Category\Database\Seeders\DatabaseSeeder as CategorySeeder;
-use Webkul\Attribute\Database\Seeders\DatabaseSeeder as AttributeSeeder;
+use Webkul\CMS\Database\Seeders\DatabaseSeeder as CMSSeeder;
 use Webkul\Core\Database\Seeders\DatabaseSeeder as CoreSeeder;
 use Webkul\User\Database\Seeders\DatabaseSeeder as UserSeeder;
+use Webkul\Category\Database\Seeders\DatabaseSeeder as CategorySeeder;
 use Webkul\Customer\Database\Seeders\DatabaseSeeder as CustomerSeeder;
+use Webkul\Attribute\Database\Seeders\DatabaseSeeder as AttributeSeeder;
 use Webkul\Inventory\Database\Seeders\DatabaseSeeder as InventorySeeder;
-use Webkul\CMS\Database\Seeders\DatabaseSeeder as CMSSeeder;
 use Webkul\SocialLogin\Database\Seeders\DatabaseSeeder as SocialLoginSeeder;
 
 class DatabaseSeeder extends Seeder

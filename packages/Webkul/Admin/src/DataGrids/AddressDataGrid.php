@@ -2,10 +2,10 @@
 
 namespace Webkul\Admin\DataGrids;
 
+use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Ui\DataGrid\DataGrid;
 
 class AddressDataGrid extends DataGrid
 {
@@ -52,7 +52,7 @@ class AddressDataGrid extends DataGrid
 
         $queryBuilder = $queryBuilder->leftJoin('country_states', function ($qb) {
             $qb->on('ca.state', 'country_states.code')
-                ->on('countries.id', 'country_states.country_id');
+               ->on('countries.id', 'country_states.country_id');
         });
 
         $queryBuilder->groupBy('ca.id')
@@ -147,10 +147,10 @@ class AddressDataGrid extends DataGrid
             'searchable' => false,
             'closure'    => function ($row) {
                 if ($row->default_address) {
+                    
                     return '<span class="badge badge-md badge-success"">' . trans('admin::app.customers.addresses.yes') . '</span>';
-                } else {
-                    return trans('admin::app.customers.addresses.dash');
                 }
+                return trans('admin::app.customers.addresses.dash');
             },
         ]);
     }
