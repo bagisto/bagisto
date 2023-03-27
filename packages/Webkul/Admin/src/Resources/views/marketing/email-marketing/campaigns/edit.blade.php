@@ -66,12 +66,13 @@
                                 @php $selectedOption = old('marketing_template_id') ?: $campaign->marketing_template_id @endphp
 
                                 <select v-validate="'required'" class="control" id="marketing_template_id" name="marketing_template_id" data-vv-as="&quot;{{ __('admin::app.marketing.campaigns.email-template') }}&quot;">
-                                    @foreach (app('Webkul\Marketing\Repositories\TemplateRepository')->all() as $template)
+                                    @foreach ($templates as $template)
                                         <option value="{{ $template->id }}" {{ $selectedOption == $template->id ? 'selected' : '' }}>
                                             {{ $template->name }}
                                         </option>
                                     @endforeach
                                 </select>
+                                
                                 <span class="control-error" v-if="errors.has('marketing_template_id')">@{{ errors.first('marketing_template_id') }}</span>
                             </div>
 
