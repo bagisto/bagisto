@@ -43,7 +43,7 @@
 
     <div class="wishlist-container">
         @if ($items->count())
-            @foreach ($items as $item)
+            @foreach ($items as $key => $item)
                 @include ('shop::customers.account.wishlist.wishlist-product', [
                     'item' => $item,
                     'visibility' => $isSharingEnabled
@@ -70,7 +70,7 @@
                 <i class="rango-close"></i>
 
                 <div slot="body">
-                    <share-component></share-component>
+                    <share-component product-id='productsId'></share-component>
                 </div>
             </modal>
         </div>
@@ -153,7 +153,6 @@
              */
             function showShareWishlistModal() {
                 document.getElementById('shareWishlistModal').classList.remove('d-none');
-
                 window.app.showModal('shareWishlist');
             }
 
@@ -177,7 +176,8 @@
                         this.$root.showLoader();
 
                         this.$http.post("{{ route('shop.customer.wishlist.share') }}", {
-                            shared: val
+                            shared: val,
+                            productsIds: productsId
                         })
                         .then(function(response) {
                             self.$root.hideLoader();
@@ -200,6 +200,12 @@
                     }
                 }
             });
+
+            var productsId = [];
+            function getShareProductIds(product) {
+                productsId.push(product.target.value);
+            }
+
         </script>
     @endif
 

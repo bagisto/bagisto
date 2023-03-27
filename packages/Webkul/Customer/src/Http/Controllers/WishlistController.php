@@ -48,7 +48,7 @@ class WishlistController extends Controller
             'items'              => $this->wishlistRepository->getCustomerWishlist(),
             'isSharingEnabled'   => $this->isSharingEnabled(),
             'isWishlistShared'   => $customer->isWishlistShared(),
-            'wishlistSharedLink' => $customer->getWishlistSharedLink()
+            'wishlistSharedLink' => $customer->getWishlistSharedLink([17])
         ]);
     }
 
@@ -123,15 +123,17 @@ class WishlistController extends Controller
                 'shared' => 'required|boolean'
             ]);
 
-            $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);
+            if (! empty(request()->productsIds)) {
+                $updateCounts = $customer->wishlist_items()->whereIn('product_id' ,request()->productsIds);
+                $updateCounts->update(['shared' => $data['shared']]);
+            } else {
+                $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);    
+            }
 
-            if (
-                $updateCounts
-                && $updateCounts > 0
-            ) {
+            if ($updateCounts) {
                 return response()->json([
                     'isWishlistShared'   => $customer->isWishlistShared(),
-                    'wishlistSharedLink' => $customer->getWishlistSharedLink()
+                    'wishlistSharedLink' => $customer->getWishlistSharedLink(request()->productsIds)
                 ]);
             }
         }
@@ -153,10 +155,14 @@ class WishlistController extends Controller
         ) {
             abort(404);
         }
-
-        $customer = $customerRepository->find(request()->get('id'));
-
-        $items = $customer->wishlist_items()->where('shared', 1)->get();
+        if (! empty(request()->get('products'))) {
+            $customer = $customerRepository->find(request()->get('id'));
+            $items = $customer->wishlist_items()->where('shared', 1)->get();
+            
+        } else {
+            $customer = $customerRepository->find(request()->get('id'));
+            $items = $customer->wishlist_items()->where('shared', 1)->get();
+        }
 
         if (
             $customer

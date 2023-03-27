@@ -10,10 +10,9 @@
 
             <img
                 src="{{ $image['medium_image_url'] }}"
-                :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" alt="" />
+                :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`"/>
 
-                <div class="quick-view-in-list">
-            </div>
+            <div class="quick-view-in-list"></div>
         </a>
     </div>
 
@@ -25,7 +24,6 @@
                     title="{{ $item->product->name }}" class="unset">
 
                     <span class="fs16">{{ $item->product->name }}</span>
-
 
                     @if (isset($item->additional['attributes']))
                         <div class="item-options">
@@ -72,6 +70,11 @@
                         'addToCartBtnClass' => 'medium-padding',
                         'showCompare'       => false
                     ])
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" name="share" class="w-auto" value="{{ $item->product->id }}" onclick="getShareProductIds(event)">
+                    <label for="share">Share</label>
                 </div>
             </div>
         </div>
