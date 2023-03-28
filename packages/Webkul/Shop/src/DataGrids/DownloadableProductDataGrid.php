@@ -74,10 +74,9 @@ class DownloadableProductDataGrid extends DataGrid
                 ) {
 
                     return $value->product_name;
-                } else {
-
-                    return $value->product_name . ' ' . '<a href="' . route('shop.customer.downloadable_products.download', $value->id) . '" target="_blank">' . $value->name . '</a>';
                 }
+
+                return $value->product_name . ' ' . '<a href="' . route('shop.customer.downloadable_products.download', $value->id) . '" target="_blank">' . $value->name . '</a>';
             },
         ]);
 

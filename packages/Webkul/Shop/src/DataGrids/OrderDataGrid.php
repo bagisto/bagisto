@@ -99,6 +99,7 @@ class OrderDataGrid extends DataGrid
 
                     return '<span class="badge badge-md badge-danger">' . trans('shop::app.customer.account.order.index.canceled') . '</span>';
                 } elseif ($value->status == 'closed') {
+                    
                     return '<span class="badge badge-md badge-info">' . trans('shop::app.customer.account.order.index.closed') . '</span>';
                 } elseif ($value->status == 'pending') {
 
