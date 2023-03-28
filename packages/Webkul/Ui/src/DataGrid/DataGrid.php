@@ -454,6 +454,7 @@ abstract class DataGrid
             ->first();
 
         if ($key && isset($column[$key])) {
+            
             return $column[$key];
         }
 

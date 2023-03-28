@@ -76,6 +76,7 @@ class CategoryDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'closure'    => function ($row) {
+
                 return '<span class="wk-icon ' . $row->icon . '"></span>';
             },
         ]);
@@ -89,10 +90,11 @@ class CategoryDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($row) {
                 if ($row->status) {
+
                     return '<span class="badge badge-md badge-success">Enabled</span>';
-                } else {
-                    return '<span class="badge badge-md badge-danger">Disabled</span>';
                 }
+                
+                return '<span class="badge badge-md badge-danger">Disabled</span>';
             },
         ]);
     }
