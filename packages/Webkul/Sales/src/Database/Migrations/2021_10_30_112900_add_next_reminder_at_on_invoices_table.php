@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNextReminderAtOnInvoicesTable extends Migration
+return new class extends Migration
 {
     /**
      * Add next_reminder_at column on invoices table.
@@ -29,4 +29,4 @@ class AddNextReminderAtOnInvoicesTable extends Migration
             $table->dropColumn('next_reminder_at');
         });
     }
-}
+};

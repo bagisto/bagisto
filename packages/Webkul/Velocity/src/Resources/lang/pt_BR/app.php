@@ -91,7 +91,7 @@ return [
         ],
         'meta-data' => [
             'footer' => 'Rodapé',
-            'title' => 'Velocity meta data',
+            'title' => 'Velocity Meta Data',
             'activate-slider' => 'Ativar Slider',
             'home-page-content' => 'Conteúdo da Página Inicial',
             'footer-left-content' => 'Conteúdo Rodapé Esquerdo',

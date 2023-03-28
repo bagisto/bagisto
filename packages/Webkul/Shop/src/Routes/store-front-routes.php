@@ -9,7 +9,7 @@ use Webkul\Shop\Http\Controllers\ReviewController;
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
 
-Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function () {
+Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Cart merger middleware. This middleware will take care of the items
      * which are deactivated at the time of buy now functionality. If somehow

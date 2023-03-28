@@ -159,12 +159,7 @@ class ElasticSearchRepository
             return [
                 '_script' => [
                     'type'   => 'number',
-                    'script' => [
-                        'source' => '(doc[\'_id\'].value + params.salt).hashCode()',
-                        'params' => [
-                            'salt' => Str::random(40),
-                        ],
-                    ],
+                    'script' => 'Math.random()',
                     'order'  => 'asc',
                 ],
             ];

@@ -92,7 +92,7 @@ return [
         ],
         'meta-data' => [
             'footer' => 'Footer',
-            'title' => 'Velocity meta data',
+            'title' => 'Velocity Meta Data',
             'activate-slider' => 'Attiva Slider',
             'home-page-content' => 'Contenuti Home Page',
             'footer-left-content' => 'Contenuti Footer Sinistra',
