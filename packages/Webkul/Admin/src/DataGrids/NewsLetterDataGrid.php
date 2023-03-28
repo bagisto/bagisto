@@ -61,9 +61,9 @@ class NewsLetterDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
                 }
+                
+                return trans('admin::app.datagrid.false');
             },
         ]);
 

@@ -163,9 +163,9 @@ class CategoryProductDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
-                } else {
-                    return trans('admin::app.datagrid.inactive');
                 }
+                
+                return trans('admin::app.datagrid.inactive');
             },
         ]);
 
@@ -191,7 +191,7 @@ class CategoryProductDataGrid extends DataGrid
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
             'icon'      => 'icon pencil-lg-icon',
-            'condition' => function () {
+            'condition' => function () {                
                 return true;
             },
         ]);
