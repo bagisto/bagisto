@@ -104,13 +104,10 @@ class CustomerReviewDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->product_review_status == 'approved') {
-
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.approved') . '</span>';
                 } elseif ($value->product_review_status == "pending") {
-
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.datagrid.pending') . '</span>';
-                } elseif ($value->product_review_status == "disapproved") {
-                    
+                } elseif ($value->product_review_status == "disapproved") {  
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.disapproved') . '</span>';
                 }
             },

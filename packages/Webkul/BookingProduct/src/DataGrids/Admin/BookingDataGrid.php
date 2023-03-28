@@ -85,7 +85,6 @@ class BookingDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => false,
             'closure'    => function ($value) {
-
                 return Carbon::createFromTimestamp($value->from)->format('d F, Y H:iA');
             }
         ]);
@@ -97,8 +96,7 @@ class BookingDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => false,
-            'closure'    => function ($value) {
-                
+            'closure'    => function ($value) {                
                 return Carbon::createFromTimestamp($value->to)->format('d F, Y H:iA');
             }
         ]);

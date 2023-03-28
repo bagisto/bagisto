@@ -172,10 +172,8 @@ class CartRuleDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status == 1) {
-
                     return trans('admin::app.datagrid.active');
                 } elseif ($value->status == 0) {
-
                     return trans('admin::app.datagrid.inactive');
                 }
                 

@@ -129,7 +129,6 @@ class CategoryDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-
                     return '<span class="badge badge-md badge-success">'. trans('admin::app.datagrid.active') . '</span>';
                 }
 

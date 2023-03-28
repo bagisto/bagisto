@@ -72,7 +72,6 @@ class DownloadableProductDataGrid extends DataGrid
                     || $value->status == 'expired'
                     || $value->invoice_state !== 'paid'
                 ) {
-
                     return $value->product_name;
                 }
 
@@ -98,13 +97,10 @@ class DownloadableProductDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status == 'pending') {
-
                     return '<span class="badge badge-md badge-warning">' .trans('shop::app.customer.account.downloadable_products.pending'). '</span>';
                 } elseif ($value->status == 'available') {
-
                     return '<span class="badge badge-md badge-success">' .trans('shop::app.customer.account.downloadable_products.available'). '</span>';
                 } elseif ($value->status == 'expired') {
-
                     return '<span class="badge badge-md badge-danger">' .trans('shop::app.customer.account.downloadable_products.expired'). '</span>';
                 }
             },
@@ -118,8 +114,7 @@ class DownloadableProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => false,
             'closure'    => function ($value) {
-                if (! $value->download_bought) {
-                    
+                if (! $value->download_bought) {                    
                     return trans('shop::app.customer.account.downloadable_products.unlimited');
                 }
 

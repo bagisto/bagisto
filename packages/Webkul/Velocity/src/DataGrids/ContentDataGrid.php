@@ -85,7 +85,6 @@ class ContentDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-
                     return 'Active';
                 }
                 
@@ -102,16 +101,12 @@ class ContentDataGrid extends DataGrid
             'filterable' => false,
             'closure'    => function ($value) {
                 if ($value->content_type == 'category') {
-
                     return 'Category Slug';
                 } elseif ($value->content_type == 'link') {
-
                     return 'Link';
                 } elseif ($value->content_type == 'product') {
-
                     return 'Product';
-                } elseif ($value->content_type == 'static') {
-                    
+                } elseif ($value->content_type == 'static') {                    
                     return 'Static';
                 }
             },

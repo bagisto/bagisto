@@ -44,7 +44,6 @@ trait ProvideCollection
             $columnName = $this->findColumnType($key)[1] ?? null;
 
             if ($this->exceptionCheckInColumns($columnName)) {
-
                 return $collection;
             }
 
@@ -84,7 +83,6 @@ trait ProvideCollection
     {
         foreach ($this->completeColumnDetails as $column) {
             if ($column['index'] == $columnAlias) {
-
                 return [$column['type'], $column['index']];
             }
         }
@@ -100,7 +98,6 @@ trait ProvideCollection
     {
         if ($this->paginate) {
             if ($this->itemsPerPage > 0) {
-
                 return $this->paginatedResults($queryBuilderOrCollection);
             }
         }
@@ -310,8 +307,7 @@ trait ProvideCollection
             if (
                 $column['index'] === $columnName
                 && ! $column['filterable']
-            ) {
-                
+            ) {                
                 return true;
             }
         }

@@ -95,16 +95,13 @@ class OrderInvoicesDataGrid extends DataGrid
             'filterable' => true,
             'closure' => function ($value) {
                 if ($value->state == 'paid') {
-
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.invoices.status-paid') . '</span>';
                 } elseif (
                     $value->state == 'pending' 
                     || $value->state == 'pending_payment'
                 ) {
-
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.invoices.status-pending') . '</span>';
                 } elseif ($value->state == 'overdue') {
-
                     return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.invoices.status-overdue') . '</span>';
                 }
                 

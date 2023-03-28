@@ -113,7 +113,6 @@ class CustomerDataGrid extends DataGrid
             'filterable' => false,
             'closure'    => function ($row) {
                 if (! $row->phone) {
-
                     return '-';
                 }
                 
@@ -130,7 +129,6 @@ class CustomerDataGrid extends DataGrid
             'filterable' => false,
             'closure'    => function ($row) {
                 if (! $row->gender) {
-
                     return '-';
                 }
                 

@@ -87,7 +87,6 @@ class InventorySourcesDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-
                     return trans('admin::app.datagrid.active');
                 }
                 
