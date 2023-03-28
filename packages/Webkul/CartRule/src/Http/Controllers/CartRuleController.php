@@ -107,8 +107,8 @@ class CartRuleController extends Controller
             $cartRule = $this->cartRuleRepository->create($cartRuleRequest->all());
 
             Event::dispatch('promotions.cart_rule.create.after', $cartRule);
-
-            session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Cart Rule']));
+ 
+            session()->flash('success', trans('admin::app.promotions.cart-rules.create-success'));
 
             return redirect()->route($this->_config['redirect']);
         } catch (ValidationException $e) {
@@ -163,7 +163,7 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.update.after', $cartRule);
 
-            session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Cart Rule']));
+            session()->flash('success', trans('admin::app.promotions.cart-rules.update-success'));
 
             return redirect()->route($this->_config['redirect']);
         } catch (ValidationException $e) {
@@ -192,9 +192,9 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Cart Rule'])]);
+            return response()->json(['message' => trans('admin::app.promotions.cart-rules.delete-success')]);
         } catch (Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Cart Rule'])], 400);
+        return response()->json(['message' => trans('admin::app.promotions.cart-rules.delete-failed')], 400);
     }
 }
