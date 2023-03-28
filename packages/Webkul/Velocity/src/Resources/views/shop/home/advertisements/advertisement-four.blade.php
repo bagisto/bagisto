@@ -25,8 +25,8 @@
         @endphp
 
         <div class="container-fluid advertisement-four-container">
-            <div class="row">
-                <div class="col-lg-4 col-12 advertisement-container-block no-padding">
+            <div class="row advertisement-grid">
+                <div class="advertisement-container-block advertisement-first">
                     @if (isset($advertisementFour[0]))
                         <a @if (isset($one)) href="{{ $one }}" @endif aria-label="Advertisement">
                             <img
@@ -37,7 +37,7 @@
                     @endif
                 </div>
 
-                <div class="col-lg-4 col-12 advertisement-container-block offers-ct-panel">
+                <div class="advertisement-container-block advertisement-second">
                     @if (isset($advertisementFour[1]))
                         <a @if (isset($two)) href="{{ $two }}" @endif class="row col-12 remove-padding-margin" aria-label="Advertisement">
                             <img
@@ -46,9 +46,9 @@
                                 data-src="{{ Storage::url($advertisementFour[1]) }}" alt="" />
                         </a>
                     @endif
+                </div>
 
-                    <div style="height: 10px;"></div>
-
+                <div class="advertisement-container-block advertisement-third">
                     @if (isset($advertisementFour[2]))
                         <a @if (isset($three)) href="{{ $three }}" @endif class="row col-12 remove-padding-margin" aria-label="Advertisement">
                             <img
@@ -59,7 +59,7 @@
                     @endif
                 </div>
 
-                <div class="col-lg-4 col-12 advertisement-container-block no-padding">
+                <div class="advertisement-container-block advertisement-forth">
                     @if (isset($advertisementFour[3]))
                         <a @if (isset($four)) href="{{ $four }}" @endif aria-label="Advertisement">
                             <img
@@ -76,8 +76,8 @@
 
 @if (! $isRendered)
     <div class="container-fluid advertisement-four-container">
-        <div class="row">
-            <div class="col-lg-4 col-12 advertisement-container-block no-padding">
+        <div class="row advertisement-grid">
+            <div class="advertisement-container-block advertisement-first">
                 <a @if (isset($one)) href="{{ $one }}" @endif aria-label="Advertisement">
                     <img
                         class="{{ $isLazyLoad ? 'lazyload' : '' }}"
@@ -86,16 +86,16 @@
                 </a>
             </div>
 
-            <div class="col-lg-4 col-12 advertisement-container-block offers-ct-panel">
+            <div class="advertisement-container-block advertisement-second">
                 <a @if (isset($two)) href="{{ $two }}" @endif aria-label="Advertisement">
                     <img
                         class="offers-ct-top {{ $isLazyLoad ? 'lazyload' : '' }}"
                         @if (! $isLazyLoad) src="{{ asset('/themes/velocity/assets/images/seasons.webp') }}" @endif
                         data-src="{{ asset('/themes/velocity/assets/images/seasons.webp') }}" alt="" />
                 </a>
+            </div>
 
-                <div style="height: 10px;"></div>
-
+            <div class="advertisement-container-block advertisement-third">
                 <a @if (isset($three)) href="{{ $three }}" @endif aria-label="Advertisement">
                     <img
                         class="offers-ct-bottom {{ $isLazyLoad ? 'lazyload' : '' }}"
@@ -104,7 +104,7 @@
                 </a>
             </div>
 
-            <div class="col-lg-4 col-12 advertisement-container-block no-padding">
+            <div class="advertisement-container-block advertisement-forth">
                 <a @if (isset($four)) href="{{ $four }}" @endif aria-label="Advertisement">
                     <img
                         class="{{ $isLazyLoad ? 'lazyload' : '' }}"

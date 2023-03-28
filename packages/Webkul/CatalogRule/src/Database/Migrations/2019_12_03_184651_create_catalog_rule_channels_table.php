@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateCatalogRuleChannelsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ class CreateCatalogRuleChannelsTable extends Migration
         Schema::create('catalog_rule_channels', function (Blueprint $table) {
             $table->integer('catalog_rule_id')->unsigned();
             $table->integer('channel_id')->unsigned();
-            
+
             $table->primary(['catalog_rule_id', 'channel_id']);
 
             $table->foreign('catalog_rule_id')->references('id')->on('catalog_rules')->onDelete('cascade');
@@ -33,4 +33,4 @@ class CreateCatalogRuleChannelsTable extends Migration
     {
         Schema::dropIfExists('catalog_rule_channels');
     }
-}
+};

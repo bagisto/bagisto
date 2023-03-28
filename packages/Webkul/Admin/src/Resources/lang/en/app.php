@@ -1246,6 +1246,10 @@ return [
             'categories'                     => 'Categories',
             'attribute_family'               => 'Attribute Family',
             'mass-delete-success'            => 'All the selected coupons have been deleted successfully.',
+            'create-success'                 => 'Cart rule created successfully',
+            'update-success'                 => 'Cart rule updated successfully',
+            'delete-success'                 => 'Cart rule deleted successfully',
+            'delete-failed'                  => 'Error encountered while deleting Cart rule.',
         ],
 
         'catalog-rules' => [
@@ -1293,6 +1297,10 @@ return [
             'fixed-amount-whole-cart'      => 'Fixed Amount to Whole Catalog',
             'buy-x-get-y-free'             => 'Buy X Get Y Free',
             'discount-amount'              => 'Discount Amount',
+            'create-success'               => 'Catalog rule created successfully',
+            'update-success'               => 'Catalog rule updated successfully',
+            'delete-success'               => 'Catalog rule deleted successfully',
+            'delete-failed'                => 'Error encountered while deleting Catalog rule.',
             'mass-delete-success'          => 'All the selected index of coupons have been deleted successfully.',
         ],
     ],
