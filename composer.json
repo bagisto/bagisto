@@ -18,7 +18,7 @@
         "cviebrock/laravel-elasticsearch": "^9.0",
         "diglactic/laravel-breadcrumbs": "^7.0",
         "doctrine/dbal": "^2.9",
-        "enshrined/svg-sanitize": "^0.15.0",
+        "enshrined/svg-sanitize": "^0.16.0",
         "fakerphp/faker": "^1.14",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.4",

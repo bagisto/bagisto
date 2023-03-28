@@ -5,7 +5,7 @@ use Webkul\Core\Http\Controllers\CountryStateController;
 use Webkul\Shop\Http\Controllers\CartController;
 use Webkul\Shop\Http\Controllers\OnepageController;
 
-Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function () {
+Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Country-State selector.
      */
