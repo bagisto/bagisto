@@ -26,7 +26,7 @@ class Refund
     {
         $products = [];
 
-        foreach ($refund->all_items as $item) {
+        foreach ($refund->items as $item) {
             $products[] = $item->product;
         }
 
