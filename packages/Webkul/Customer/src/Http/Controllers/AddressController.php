@@ -115,8 +115,9 @@ class AddressController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        if (!$customer->addresses()->find($id)) {
+        if (! $customer->addresses()->find($id)) {
             session()->flash('warning', trans('shop::app.security-warning'));
+            
             return redirect()->route('shop.customer.addresses.index');
         }
 
