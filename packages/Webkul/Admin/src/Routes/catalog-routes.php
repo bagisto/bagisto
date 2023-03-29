@@ -139,6 +139,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::post('attributes/mass-delete', [AttributeController::class, 'massDestroy'])->name('admin.catalog.attributes.mass_delete');
 
+        Route::get('product/super-attributes/{product}', [AttributeController::class, 'productSuperAttributes'])->name('admin.catalog.product.super-attributes');
+
         /**
          * Attribute families routes.
          */
