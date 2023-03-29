@@ -53,6 +53,12 @@ class CartController extends Controller
 
         $topSellingProducts = $this->orderItemRepository->getTopSellingProducts();
 
+        foreach ($topSellingProducts as $key => $topProducts) {
+            if (! $topProducts->product) {
+                unset($topSellingProducts[$key]);
+            }
+        }
+        
         if ($customer = auth()->guard('customer')->user()) {
             $orderItems = $this->orderItemRepository->getCustomerOrderedItems($customer->id);
 
@@ -64,11 +70,13 @@ class CartController extends Controller
             $products = isset($productsData) ? json_decode($productsData) : [];
             
             $orderItems = $this->productRepository->findWhereIn('sku', $products);
+
+            $wishlistItems = collect();
         }
 
         $cart ? $categoryIds[] = $cart->items->random(1)->first()->product->categories->first()->id ?? 0 : '';
 
-        (! empty($wishlistItems) && $wishlistItems->isNotEmpty() ) ? $categoryIds[] = $wishlistItems->random(1)->first()->product->categories->first()->id ?? 0 : '';
+        ($wishlistItems->isNotEmpty() ) ? $categoryIds[] = $wishlistItems->random(1)->first()->product->categories->first()->id ?? 0 : '';
 
         (! $orderItems->isEmpty()) ? $categoryIds[] = $orderItems->random(1)->first()->product->categories->first()->id ?? 0 : '';
 
