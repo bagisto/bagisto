@@ -183,12 +183,17 @@ export default {
                         response.data.label,
                         response.data.message
                     );
+                    
+                    if(this.cartItems == 0 && window.location.href.includes("checkout")) {
+                        window.location.href = this.checkoutRoute;  
+                    }
+
                 })
                 .catch(exception => {
-                    console.log(this.__('error.something_went_wrong'));
-                });
+                    console.log(this.__('error.something_went_wrong')); 
+                });      
         },
-
+     
         checkMinimumOrder: function(e) {
             e.preventDefault();
 
