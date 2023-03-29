@@ -625,11 +625,9 @@ body {
             }
 
             .page-action {
-                margin-top: -5px;
                 float: right;
 
                 button {
-                    margin-top: 10px;
                 }
 
                 * {
@@ -826,6 +824,7 @@ body {
     .page-action {
         align-items: center;
         justify-content: space-between;
+        margin-top: -4px;
     }
 }
 
@@ -837,7 +836,6 @@ body {
                     width: 180px;
                     display: inline-block;
                     margin-bottom: 0;
-                    margin-left: 20px;
                     margin-top: 24px;
                 }
             }
@@ -960,7 +958,6 @@ body {
         .content {
             .page-header {
                 .control-group {
-                    width: 90%;
                     display: inline-block;
                     margin-bottom: 0;
                     margin-left: 20px;
@@ -972,7 +969,6 @@ body {
                 }
 
                 .page-action {
-                    margin-top: -15px !important;
 
                     a {
                         margin-left: 0px !important;
@@ -994,7 +990,6 @@ body {
         .content {
             .page-header {
                 .control-group {
-                    width: 90%;
                     display: inline-block;
                     margin-bottom: 0;
                     margin-left: 20px;
@@ -1016,7 +1011,7 @@ body {
         .content {
             .page-header {
                 .control-group {
-                    width: 90%;
+                    width: 140px;
                     display: inline-block;
                     margin-bottom: 0;
                     margin-left: 20px;
@@ -1027,6 +1022,27 @@ body {
                     a {
                         margin-top: 20px;
                     }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 330px) {
+    .content-container {
+        .content {
+            .page-header {
+                .control-group {
+                    width: 120px;
+                    display: inline-block;
+                    margin-bottom: 0;
+                    margin-left: 0px;
+                    margin-top: 24px;
+                }
+
+                .page-action button{
+                    padding: 9px 10px !important;
+                    margin-top: 24px;
                 }
             }
         }

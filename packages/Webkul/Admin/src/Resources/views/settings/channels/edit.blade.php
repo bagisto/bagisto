@@ -10,13 +10,11 @@
 
         <form method="POST" action="{{ route('admin.channels.update', ['id' => $channel->id, 'locale' => $locale]) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
-                <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.channels.index') }}'"></i>
-
                         {{ __('admin::app.settings.channels.edit-title') }}
                     </h1>
-
+                <div class="page-title">
                     <div class="control-group">
                         <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
                             @foreach (core()->getAllLocales() as $localeModel)
