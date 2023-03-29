@@ -52,12 +52,6 @@ class CartController extends Controller
         $orderItems = $wishlistItems = $categoryIds = [];
 
         $topSellingProducts = $this->orderItemRepository->getTopSellingProducts();
-
-        foreach ($topSellingProducts as $key => $topProducts) {
-            if (! $topProducts->product) {
-                unset($topSellingProducts[$key]);
-            }
-        }
         
         if ($customer = auth()->guard('customer')->user()) {
             $orderItems = $this->orderItemRepository->getCustomerOrderedItems($customer->id);
@@ -72,6 +66,18 @@ class CartController extends Controller
             $orderItems = $this->productRepository->findWhereIn('sku', $products);
 
             $wishlistItems = collect();
+        }
+
+        foreach ($topSellingProducts as $key => $topProducts) {
+            if (! $topProducts->product) {
+                unset($topSellingProducts[$key]);
+            }
+        }
+
+        foreach ($orderItems as $key => $items) {
+            if (! $items->product) {
+                unset($orderItems[$key]);
+            }
         }
 
         $cart ? $categoryIds[] = $cart->items->random(1)->first()->product->categories->first()->id ?? 0 : '';
