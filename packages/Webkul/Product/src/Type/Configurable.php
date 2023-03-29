@@ -506,18 +506,67 @@ class Configurable extends AbstractType
     }
 
     /**
-     * Get product prices.
-     *
+     * Return variants of configurable product.
      * @return array
-     */
+     * 
+    */
+    public function getAllowedProducts()
+    {
+        $variants = [];
+
+        $variantCollection = $this->product->variants()
+            ->with([
+                'parent',
+                'attribute_values',
+                'price_indices',
+                'inventory_indices',
+                'images',
+                'videos',
+            ])
+            ->get();
+
+        foreach ($variantCollection as $variant) {
+            if ($variant->isSaleable()) {
+                $variants[] = $variant;
+            }
+        }
+
+        return $variants;
+    }
+
+    /**
+     * Return minimum price of variants.
+     * 
+     * @return float
+    */
+    protected function getVariantPrice()
+    {
+        $prices = [];
+
+        foreach ($this->getAllowedProducts($this->product) as $variant) {
+            $prices[] = $variant->getTypeInstance()->getProductPrices();           
+        }
+
+        return min($prices);
+    }
+     
+    /**
+     * Return price of variants.
+    */
     public function getProductPrices()
     {
         $minPrice = $this->getMinimalPrice();
 
+        $regularmin = $this -> getRegularMinimalPrice();
+        
         return [
             'regular_price' => [
+                'price'           => core()->convertPrice($this->evaluatePrice($regularmin)),
+                'formatted_price' => core()->currency($this->evaluatePrice($regularmin )),
+            ],
+            'final_price'   => [
+                'price'           => core()->convertPrice($this->evaluatePrice($minPrice)),
                 'formatted_price' => core()->currency($this->evaluatePrice($minPrice)),
-                'price'           => $this->evaluatePrice($minPrice),
             ],
         ];
     }
@@ -529,15 +578,38 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
+        $prices = $this->getVariantPrice(); 
+
+        $priceHtml = '';
+
         if ($this->haveDiscount()) {
-            return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-                . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'.'<span class="regular-price"></span>';
-        } else {
-            return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                . ' '
-                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span> <span class="regular-price"></span>';
+            $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
         }
+
+        $priceHtml .= '<div class="price-from">';
+
+        if ($prices['regular_price']['price'] != $prices['final_price']['price']) { 
+
+           if(request()->routeIs("velocity.category.details")){
+
+                $priceHtml .=  '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>'
+                            . '  '
+                            .'<span class="price-label">' . trans('shop::app.products.price-label') . '</span>';
+           } else {
+            
+            $priceHtml .= '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
+                        . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>'
+                        . '  '
+                        .'<span class="price-label">' . trans('shop::app.products.price-label') . '</span>';  
+           }       
+        } else {
+            $priceHtml .= '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+                         . '  '
+                         .'<span class="special-price">' . $prices['regular_price']['formatted_price'] . '</span>';
+        }
+        $priceHtml .= '</div>';
+        
+        return $priceHtml;
     }
 
     /**
