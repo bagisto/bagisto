@@ -25,6 +25,11 @@
 <script>
 export default {
     props: {
+        count: {
+            type: Number,
+            required: false
+        },
+
         buttonLabel: {
             type: String,
             required: false,
@@ -141,12 +146,24 @@ export default {
             this.items.push({ id: 'image_' + this.imageCount });
         },
 
-        removeImage: function(image) {
+        removeImage: function(image) {            
             let index = this.items.indexOf(image);
 
             if (!this.multiple) this.hideButton = false;
 
             Vue.delete(this.items, index);
+
+            this.imageCount--;
+        }
+    },
+
+    watch: {
+        imageCount: function() {
+            if (this.imageCount == this.count) {
+                this.hideButton = true;
+            } else {
+                this.hideButton = false;
+            }
         }
     }
 };
