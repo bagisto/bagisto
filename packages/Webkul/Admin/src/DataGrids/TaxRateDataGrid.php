@@ -68,9 +68,9 @@ class TaxRateDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if (empty($value->state)) {
                     return '*';
-                } else {
-                    return $value->state;
                 }
+                
+                return $value->state;
             },
         ]);
 

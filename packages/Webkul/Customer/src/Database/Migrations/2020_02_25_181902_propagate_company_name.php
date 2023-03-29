@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class PropagateCompanyName extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,6 @@ class PropagateCompanyName extends Migration
         Schema::table('cart_address', function (Blueprint $table) {
             $table->string('company_name')->nullable()->after('email');
             $table->string('vat_id')->nullable()->after('company_name');
-
         });
 
         Schema::table('order_address', function (Blueprint $table) {
@@ -42,4 +41,4 @@ class PropagateCompanyName extends Migration
             $table->dropColumn('vat_id');
         });
     }
-}
+};

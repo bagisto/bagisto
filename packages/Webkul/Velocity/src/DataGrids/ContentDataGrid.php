@@ -86,9 +86,9 @@ class ContentDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->status) {
                     return 'Active';
-                } else {
-                    return 'Inactive';
                 }
+                
+                return 'Inactive';
             },
         ]);
 
@@ -106,7 +106,7 @@ class ContentDataGrid extends DataGrid
                     return 'Link';
                 } elseif ($value->content_type == 'product') {
                     return 'Product';
-                } elseif ($value->content_type == 'static') {
+                } elseif ($value->content_type == 'static') {                    
                     return 'Static';
                 }
             },

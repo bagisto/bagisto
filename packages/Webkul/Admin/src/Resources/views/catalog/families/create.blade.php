@@ -183,7 +183,7 @@
                 <input type="hidden" :name="[groupInputName + '[is_user_defined]']" :value="group.is_user_defined"/>
 
                 <div class="table" v-if="group.custom_attributes.length" style="margin-bottom: 20px;">
-                    <div class="table-responsive">
+                    <div class="table-responsive attributes-table">
                         <table>
                             <thead>
                                 <tr>

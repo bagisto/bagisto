@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateCountryTranslationsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class CreateCountryTranslationsTable extends Migration
             $table->increments('id');
             $table->string('locale');
             $table->text('name')->nullable();
-            
+
             $table->integer('country_id')->unsigned();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
@@ -32,4 +32,4 @@ class CreateCountryTranslationsTable extends Migration
     {
         Schema::dropIfExists('country_translations');
     }
-}
+};
