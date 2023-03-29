@@ -214,7 +214,7 @@
             type="text"
             name="shipping[postcode]"
             v-model="address.shipping.postcode"
-            v-validate="'{{ core()->isPostCodeRequired() ? 'required' : '' }}'"
+            v-validate="'{{ core()->isPostCodeRequired() ? 'required' : '' }}|numeric|max:10'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.postcode') }}&quot;"
             @keyup="validateForm('address-form')" />
 
@@ -236,7 +236,7 @@
             type="text"
             name="shipping[phone]"
             v-model="address.shipping.phone"
-            v-validate="'required|numeric'"
+            v-validate="'required|numeric|max:15|min:10'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"
             @change="validateForm('address-form')" />
 
@@ -503,7 +503,7 @@
             type="text"
             name="billing[postcode]"
             v-model="address.billing.postcode"
-            v-validate="'{{ core()->isPostCodeRequired() ? 'required' : '' }}'"
+            v-validate="'{{ core()->isPostCodeRequired() ? 'required' : '' }}|numeric|max:10'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.postcode') }}&quot;"
             @change="validateForm('address-form')" />
 
@@ -525,7 +525,7 @@
             type="text"
             name="billing[phone]"
             v-model="address.billing.phone"
-            v-validate="'required|numeric'"
+            v-validate="'required|numeric|max:15|min:10'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"
             @change="validateForm('address-form')" />
 
