@@ -169,7 +169,6 @@
 
                                 <span class="control-info mt-10">{{ __('admin::app.catalog.categories.banner_size') }}</span>   
                             </div>
-                            packages/Webkul/Admin/src/Resources/views/catalog/categories/edit.blade.php
                             
                             {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.controls.after', ['category' => $category]) !!}
                         </div>
