@@ -12,7 +12,7 @@ trait ProvideRouteResolver
      */
     private function fetchCurrentRouteACL($action)
     {
-        return collect(config('acl'))->filter(function ($acl) use ($action) {
+        return collect(config('acl'))->filter(function ($acl) use ($action) {            
             return $acl['route'] === $action['route'];
         })->first();
     }
