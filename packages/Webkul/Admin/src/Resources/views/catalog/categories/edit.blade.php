@@ -148,6 +148,8 @@
 
                                 <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="image" :multiple="false"  :images='"{{ $category->image_url }}"'></image-wrapper>
 
+                                <span class="control-info mb-5">{{ __('admin::app.catalog.products.image-drop') }}</span>
+
                                 <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                                     @foreach ($errors->get('image.*') as $key => $message)
                                         @php echo str_replace($key, 'Image', $message[0]); @endphp
@@ -163,9 +165,12 @@
                                     @endforeach
                                 </span>
 
+                                <span class="control-info">{{ __('admin::app.catalog.products.image-drop') }}</span>
+
                                 <span class="control-info mt-10">{{ __('admin::app.catalog.categories.banner_size') }}</span>   
                             </div>
-
+                            packages/Webkul/Admin/src/Resources/views/catalog/categories/edit.blade.php
+                            
                             {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.controls.after', ['category' => $category]) !!}
                         </div>
                     </accordian>
