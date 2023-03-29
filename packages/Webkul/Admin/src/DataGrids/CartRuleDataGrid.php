@@ -175,9 +175,9 @@ class CartRuleDataGrid extends DataGrid
                     return trans('admin::app.datagrid.active');
                 } elseif ($value->status == 0) {
                     return trans('admin::app.datagrid.inactive');
-                } else {
-                    return trans('admin::app.datagrid.draft');
                 }
+                
+                return trans('admin::app.datagrid.draft');
             },
         ]);
 

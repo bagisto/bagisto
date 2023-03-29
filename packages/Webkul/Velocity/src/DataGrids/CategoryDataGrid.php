@@ -90,9 +90,9 @@ class CategoryDataGrid extends DataGrid
             'closure'    => function ($row) {
                 if ($row->status) {
                     return '<span class="badge badge-md badge-success">Enabled</span>';
-                } else {
-                    return '<span class="badge badge-md badge-danger">Disabled</span>';
                 }
+                
+                return '<span class="badge badge-md badge-danger">Disabled</span>';
             },
         ]);
     }

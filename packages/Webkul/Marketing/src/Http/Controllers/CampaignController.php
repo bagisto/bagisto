@@ -3,8 +3,9 @@
 namespace Webkul\Marketing\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Marketing\Repositories\CampaignRepository;
 use Webkul\Admin\DataGrids\CampaignDataGrid;
+use Webkul\Marketing\Repositories\CampaignRepository;
+use Webkul\Marketing\Repositories\TemplateRepository;
 
 class CampaignController extends Controller
 {
@@ -19,9 +20,13 @@ class CampaignController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Marketing\Repositories\CampaignRepository  $campaignRepository
+     * @param  \Webkul\Marketing\Repositories\TemplateRepository  $templateRepository
      * @return void
      */
-    public function __construct(protected CampaignRepository $campaignRepository)
+    public function __construct(
+        protected CampaignRepository $campaignRepository,
+        protected TemplateRepository $templateRepository,
+    )
     {
         $this->_config = request('_config');
     }
@@ -47,7 +52,9 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        $templates = $this->templateRepository->findByField('status', 'active');
+
+        return view($this->_config['view'], compact('templates'));
     }
 
     /**
@@ -86,7 +93,9 @@ class CampaignController extends Controller
     {
         $campaign = $this->campaignRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('campaign'));
+        $templates = $this->templateRepository->findByField('status', 'active');
+
+        return view($this->_config['view'], compact('campaign', 'templates'));
     }
 
     /**
