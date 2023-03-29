@@ -1,16 +1,16 @@
 <?php
 
-use Webkul\Sales\Models\Invoice;
-use Webkul\Sales\Models\Shipment;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
-use Webkul\Sales\Models\OrderAddress;
 use Illuminate\Support\Facades\Schema;
 use Webkul\Checkout\Models\CartAddress;
-use Illuminate\Database\Schema\Blueprint;
 use Webkul\Checkout\Models\CartShippingRate;
-use Illuminate\Database\Migrations\Migration;
+use Webkul\Sales\Models\Invoice;
+use Webkul\Sales\Models\OrderAddress;
+use Webkul\Sales\Models\Shipment;
 
-class AddTableAddresses extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -285,4 +285,4 @@ SQL;
                 ->onDelete('cascade');
         });
     }
-}
+};

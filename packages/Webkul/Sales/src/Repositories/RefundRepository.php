@@ -160,13 +160,13 @@ class RefundRepository extends Repository
             $this->orderRepository->updateOrderStatus($order);
 
             Event::dispatch('sales.refund.save.after', $refund);
+
+            DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
 
             throw $e;
         }
-
-        DB::commit();
 
         return $refund;
     }

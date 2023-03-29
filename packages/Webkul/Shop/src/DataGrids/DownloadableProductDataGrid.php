@@ -73,9 +73,9 @@ class DownloadableProductDataGrid extends DataGrid
                     || $value->invoice_state !== 'paid'
                 ) {
                     return $value->product_name;
-                } else {
-                    return $value->product_name . ' ' . '<a href="' . route('shop.customer.downloadable_products.download', $value->id) . '" target="_blank">' . $value->name . '</a>';
                 }
+
+                return $value->product_name . ' ' . '<a href="' . route('shop.customer.downloadable_products.download', $value->id) . '" target="_blank">' . $value->name . '</a>';
             },
         ]);
 
@@ -114,7 +114,7 @@ class DownloadableProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => false,
             'closure'    => function ($value) {
-                if (! $value->download_bought) {
+                if (! $value->download_bought) {                    
                     return trans('shop::app.customer.account.downloadable_products.unlimited');
                 }
 
