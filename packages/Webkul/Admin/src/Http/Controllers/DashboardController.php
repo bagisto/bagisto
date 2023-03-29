@@ -2,13 +2,14 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
-use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
 
 class DashboardController extends Controller
 {
@@ -274,7 +275,7 @@ class DashboardController extends Controller
      *
      * @param  \Illuminate\Support\Carbon  $start
      * @param  \Illuminate\Support\Carbon  $end
-     * @return Illuminate\Database\Query\Builder
+     * @return Builder
      */
     private function getOrdersBetweenDate($start, $end)
     {
