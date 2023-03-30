@@ -172,13 +172,24 @@ class Product
     {
         $cartItems = $this->cartItemsRepository->findWhere(['product_id' => $product->id]);
 
-        $this->productItem = $product->price;
+        $this->productItem = $product;
 
-        $cartItems->each(function ($cartItem) { $cartItem->update([
-                'price'      => $this->productItem, 
-                'base_price' => $this->productItem, 
-                'total'      => $this->productItem,
-                'base_total' => $this->productItem
+        $cartItems->each(function ($cartItem) {
+            $cart = $this->cartRepository->find($cartItem->cart_id);
+
+            if ($customer = $cart->customer) {
+                $groupIdFromCart = $customer->group->id;
+
+                $priceIndexPrice = $this->productItem->price_indices->where('customer_group_id' ,$groupIdFromCart)->first();
+            } else {
+                $priceIndexPrice = $this->productItem->price_indices->where('customer_group_id' ,1)->first();
+            }
+            
+            $cartItem->update([
+                'price'      => $priceIndexPrice->min_price,
+                'base_price' => $priceIndexPrice->min_price,
+                'total'      => $priceIndexPrice->min_price,
+                'base_total' => $priceIndexPrice->min_price,
             ]);
 
             $cartTotal = $this->cartItemsRepository->findWhere(['cart_id' => $cartItem->cart_id])->sum('total');
