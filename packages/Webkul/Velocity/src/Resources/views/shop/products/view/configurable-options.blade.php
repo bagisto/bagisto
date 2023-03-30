@@ -346,7 +346,6 @@
                                 eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                             } else {                            
                                 priceLabelElement.style.display = 'inline-block';
-                                
                                 eventBus.$emit('configurable-variant-selected-event', 0)
                             }
                         },
