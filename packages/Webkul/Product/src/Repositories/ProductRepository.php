@@ -404,6 +404,7 @@ class ProductRepository extends Repository
         $sortOptions = $this->getSortOptions($params);
 
         $indices = $this->elasticSearchRepository->search($categoryId, [
+            'type'  => $params['type'] ?? '',
             'page'  => $currentPage,
             'limit' => $limit,
             'sort'  => $sortOptions['sort'],
