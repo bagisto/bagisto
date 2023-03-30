@@ -11,6 +11,11 @@
         .grid-container .datagrid-filters .filter-right {
             grid-template-columns: auto auto auto;
         }
+        @media only screen and (max-width: 768px){
+        .vuecal__no-event {
+            padding-top: 0rem!important;
+        }
+        }
     </style>
 @endpush
 
