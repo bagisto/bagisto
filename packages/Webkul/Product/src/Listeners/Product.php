@@ -6,9 +6,12 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch, Flat};
+use Webkul\Checkout\Repositories\{CartItemRepository ,CartRepository};
 
 class Product
 {
+    public $productItem = 0;
+
     protected $indexers = [
         'inventory' => Inventory::class,
         'price'     => Price::class,
@@ -27,7 +30,9 @@ class Product
     public function __construct(
         protected ProductRepository $productRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
-        protected ProductGroupedProductRepository $productGroupedProductRepository
+        protected ProductGroupedProductRepository $productGroupedProductRepository,
+        protected CartItemRepository $cartItemsRepository,
+        protected CartRepository $cartRepository
     )
     {
     }
@@ -62,6 +67,8 @@ class Product
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
             app($this->indexers['elastic'])->reindexRows($products);
         }
+
+        $this->updateCartItems($product);
     }
 
     /**
@@ -154,5 +161,34 @@ class Product
         }
 
         return $products;
+    }
+
+    /**
+     * Update Cart items
+     *
+     * @return void
+     */
+    public function updateCartItems($product)
+    {
+        $cartItems = $this->cartItemsRepository->findWhere(['product_id' => $product->id]);
+
+        $this->productItem = $product->price;
+
+        $cartItems->each(function ($cartItem) { $cartItem->update([
+                'price'      => $this->productItem, 
+                'base_price' => $this->productItem, 
+                'total'      => $this->productItem,
+                'base_total' => $this->productItem
+            ]);
+
+            $cartTotal = $this->cartItemsRepository->findWhere(['cart_id' => $cartItem->cart_id])->sum('total');
+
+            $this->cartRepository->update([
+                'grand_total'      => $cartTotal,
+                'base_grand_total' => $cartTotal,
+                'sub_total'        => $cartTotal,
+                'base_sub_total'   => $cartTotal,
+            ], $cartItem->cart_id);
+        });
     }
 }
