@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.review.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.campaigns.index') }}'"></i>
 
                         {{ __('admin::app.marketing.campaigns.add-title') }}
                     </h1>
