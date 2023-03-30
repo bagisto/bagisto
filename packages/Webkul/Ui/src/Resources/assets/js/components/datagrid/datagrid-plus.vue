@@ -1,4 +1,3 @@
-
 <template>
     <div class="table" v-if="isDataLoaded" :key="dataGridIndex">
         <div class="grid-container">
