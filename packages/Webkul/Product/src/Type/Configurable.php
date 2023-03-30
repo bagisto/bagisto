@@ -543,10 +543,8 @@ class Configurable extends AbstractType
     {
         $prices = [];
 
-        foreach ($this->getAllowedProducts($this->product) as $variant) {
-            if ($variant) {
-                $prices[] = $this->getProductPrices();      
-            }             
+        foreach ($this->getAllowedProducts($this->product) as $variant) {           
+                $prices[] = $this->getProductPrices();                            
         }
 
         return min($prices);
