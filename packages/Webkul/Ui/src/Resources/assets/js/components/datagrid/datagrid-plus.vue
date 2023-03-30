@@ -1,3 +1,4 @@
+
 <template>
     <div class="table" v-if="isDataLoaded" :key="dataGridIndex">
         <div class="grid-container">
@@ -157,7 +158,9 @@ export default {
                 newParams = `${newParams}&${this.filters[i].column}${condition}=${this.filters[i].val}`;
             }
 
-            this.url = `${this.src}?v=1${newParams}`;
+            this.url = this.extraFilters
+                           ?`${this.src}?v=1${newParams}&locale=${this.extraFilters.current.locale}`
+                           :`${this.src}?v=1${newParams}`;
 
             this.refresh();
         },
