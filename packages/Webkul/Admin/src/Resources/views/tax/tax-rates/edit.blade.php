@@ -43,19 +43,19 @@
 
                         <div class="control-group" :class="[errors.has('zip_from') ? 'has-error' : '']">
                             <label for="zip_from" class="required">{{ __('admin::app.configuration.tax-rates.zip_from') }}</label>
-                            <input v-validate="'required'" class="control" id="zip_from" name="zip_from" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_from') }}&quot;" value="{{ old('zip_form') ?: $taxRate->zip_from }}" />
+                            <input v-validate="'required|numeric|digits:6'" class="control" id="zip_from" name="zip_from" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_from') }}&quot;" value="{{ old('zip_form') ?: $taxRate->zip_from }}" />
                             <span class="control-error" v-if="errors.has('zip_from')">@{{ errors.first('zip_from') }}</span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('zip_to') ? 'has-error' : '']">
                             <label for="zip_to" class="required">{{ __('admin::app.configuration.tax-rates.zip_to') }}</label>
-                            <input v-validate="'required'" class="control" id="zip_to" name="zip_to" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_to') }}&quot;" value="{{ old('zip_to') ?: $taxRate->zip_to }}" />
+                            <input v-validate="'required|numeric|digits:6'" class="control" id="zip_to" name="zip_to" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_to') }}&quot;" value="{{ old('zip_to') ?: $taxRate->zip_to }}" />
                             <span class="control-error" v-if="errors.has('zip_to')">@{{ errors.first('zip_to') }}</span>
                         </div>
                     @else
                         <div class="control-group" :class="[errors.has('zip_code') ? 'has-error' : '']">
                             <label for="zip_code">{{ __('admin::app.configuration.tax-rates.zip_code') }}</label>
-                            <input class="control" id="zip_code" name="zip_code" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_code') }}&quot;" value="{{ old('zip_code') ?: $taxRate->zip_code }}" />
+                            <input v-validate="'numeric|digits:6'" class="control" id="zip_code" name="zip_code" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_code') }}&quot;" value="{{ old('zip_code') ?: $taxRate->zip_code }}" />
                             <span class="control-error" v-if="errors.has('zip_code')">@{{ errors.first('zip_code') }}</span>
                         </div>
                     @endif
