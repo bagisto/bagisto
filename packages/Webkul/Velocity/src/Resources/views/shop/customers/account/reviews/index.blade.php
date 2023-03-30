@@ -67,7 +67,7 @@
                                 <a class="unset" href="javascript:void(0);" onclick="deleteReview('{{ $review->id }}')">
                                     <span class="rango-delete fs24"></span>
                                     
-                                    <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
+                                    <span class="align-vertical-top" style="display: flex">{{ __('shop::app.checkout.cart.remove') }}</span>
                                 </a>
                             </div>                      
                         </div>
