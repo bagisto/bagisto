@@ -46,7 +46,11 @@ class ProductsCategoriesProxyController extends Controller
             }
 
             if ($product = $this->productRepository->findBySlug($slugOrPath)) {
-                if ($product->visible_individually && $product->url_key) {
+                if (
+                    $product->visible_individually 
+                    && $product->url_key
+                    && $product->status
+                ) {
                     $customer = auth()->guard('customer')->user();
 
                     return view($this->_config['product_view'], compact('product', 'customer'));
