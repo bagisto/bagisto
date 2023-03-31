@@ -71,7 +71,7 @@ class CatalogRuleDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if (! $value->starts_from ) {
-                    return " ";
+                    return "-";
                 }
                 else {
                     return "$value->starts_from";
@@ -88,7 +88,7 @@ class CatalogRuleDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if (! $value->ends_till) {
-                    return " ";
+                    return "-";
                 }
                 else {
                     return "$value->ends_till";
