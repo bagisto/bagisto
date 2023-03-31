@@ -14,7 +14,7 @@
         
         @media only screen and (max-width: 768px) {
             .vuecal__no-event {
-                padding-top: 0rem!important;
+                padding-top: 0rem !important;
             }
         }
     </style>
