@@ -153,12 +153,11 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->starts_from == "0000-00-00 00:00:00") {
+                if ($value->starts_from == null) {
                     return "-";
                 }
-                else {
-                    return "$value->starts_from";
-                }
+
+                return $value->starts_from;
             },
         ]);
 
@@ -170,12 +169,11 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->ends_till == "0000-00-00 00:00:00") {
+                if ($value->ends_till == null) {
                     return "-";
                 }
-                else {
-                    return "$value->ends_till";
-                }
+
+                return $value->ends_till;
             },
         ]);
 

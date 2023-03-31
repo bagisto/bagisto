@@ -85,7 +85,7 @@ class ConfigurationForm extends FormRequest
         return [
             'general.design.admin_logo.logo_image'             => 'Logo Image',
             'general.design.admin_logo.favicon'                => 'Favicon Image',
-            'sales.invoice_settings.invoice_slip_design.logo' => 'Invoice Logo',
+            'sales.invoice_settings.invoice_slip_design.logo'  => 'Invoice Logo',
             'catalog.products.storefront.products_per_page'    => 'Product Per Page',
         ];
     }

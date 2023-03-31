@@ -19,6 +19,11 @@ class CancelOrderNotification extends Mailable
     {
     }
 
+     /**
+     * Build the message.
+     *
+     * @return $this
+     */
     public function build()
     {
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])

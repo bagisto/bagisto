@@ -155,7 +155,6 @@
 
                                 <div class="control-group date">
                                     <label for="starts_from">{{ __('admin::app.promotions.cart-rules.from') }}</label>
-
                                     <datetime>
                                         <input type="text" name="starts_from" class="control" value="{{ old('starts_from') ?: $cartRule->starts_from }}"/>
                                     </datetime>

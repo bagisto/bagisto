@@ -78,7 +78,7 @@ class CartRuleRepository extends Repository
                 'usage_limit'        => $data['uses_per_coupon'] ?? 0,
                 'usage_per_customer' => $data['usage_per_customer'] ?? 0,
                 'is_primary'         => 1,
-                'expired_at'         => $data['ends_till'] ?: null,
+                'expired_at'         => $data['ends_till'] ?? null,
             ]);
         }
 
@@ -94,12 +94,12 @@ class CartRuleRepository extends Repository
     public function update(array $data, $id, $attribute = 'id')
     {
         $data = array_merge($data, [
-            'starts_from' => $data['starts_from'] ?: null,
-            'ends_till'   => $data['ends_till'] ?: null,
+            'starts_from' => $data['starts_from'] ?? null,
+            'ends_till'   => $data['ends_till'] ?? null,
             'status'      => isset($data['status']),
             'conditions'  => $data['conditions'] ?? [],
         ]);
-
+       
         $cartRule = $this->find($id);
 
         parent::update($data, $id, $attribute);
