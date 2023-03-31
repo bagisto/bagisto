@@ -71,7 +71,7 @@
                     <tbody>
 
                         <grouped-product-item v-for='(groupedProduct, index) in grouped_products' :grouped-product="groupedProduct" :key="index" :index="index" @onRemoveGroupedProduct="removeGroupedProduct($event)"></grouped-product-item>
-
+                        
                     </tbody>
                 </table>
             </div>
@@ -92,14 +92,13 @@
             </td>
 
             <td>@{{ groupedProduct.associated_product.sku }}</td>
-
+                
             <td>
                 <div class="control-group" :class="[errors.has(inputName + '[qty]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|min_value:0'" :name="[inputName + '[qty]']" v-model="groupedProduct.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
+                    <input type="number" v-validate="'required|numeric|min_value:0|max_value:`quentity`'" :name="[inputName + '[qty]']" v-model="groupedProduct.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(inputName + '[qty]')">@{{ errors.first(inputName + '[qty]') }}</span>
                 </div>
             </td>
-
             <td>
                 <div class="control-group" :class="[errors.has(inputName + '[sort_order]') ? 'has-error' : '']">
                     <input type="number" v-validate="'required|min_value:0'" :name="[inputName + '[sort_order]']" v-model="groupedProduct.sort_order" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
@@ -118,14 +117,17 @@
             template: '#grouped-product-list-template',
 
             inject: ['$validator'],
-
+           
             data: function() {
+                console.log( @json($product->grouped_products()->with('associated_product')->get()),"122");
                 return {
                     search_term: '',
 
                     is_searching: false,
 
                     searched_results: [],
+
+                    quentity: '',
 
                     grouped_products: @json($product->grouped_products()->with('associated_product')->get())
                 }
@@ -139,20 +141,26 @@
 
             methods: {
                 addGroupedProduct: function(item, key) {
-                    let alreadyAdded = false;
+                    let alreadyAdded = false;                    
+
+                    $.each(item.inventory_indices, (key, value) => {
+                        this.quentity = value.qty;
+                        console.log(this.quentity,"147");
+                    });
 
                     this.grouped_products.forEach(function(groupProduct) {
                         if (item.id == groupProduct.associated_product.id) {
                             alreadyAdded = true;
                         }
                     });
-
+                    
                     if (! alreadyAdded) {
                         this.grouped_products.push({
                                 associated_product: item,
                                 qty: 0,
                                 sort_order: 0
                             });
+                            // console.log( this.grouped_products.associated_product,"157");
                     }
 
                     this.search_term = '';
@@ -162,26 +170,26 @@
 
                 removeGroupedProduct: function(groupedProduct) {
                     let index = this.grouped_products.indexOf(groupedProduct)
-
                     this.grouped_products.splice(index, 1)
                 },
-
+                
                 search: function (key) {
                     this.is_searching = true;
 
                     if (this.search_term.length < 3) {
                         this.searched_results = [];
-
+                        
                         this.is_searching = false;
 
                         return;
                     }
-
+                    
                     let self = this;
-
+                    
                     this.$http.get ("{{ route('admin.catalog.products.search_simple_product') }}", {params: {query: this.search_term}})
                         .then (function(response) {
                             self.searched_results = response.data.data;
+                            // console.log(response.data.data ,"184");
 
                             self.is_searching = false;
                         })
@@ -196,10 +204,10 @@
             template: '#grouped-product-item-template',
 
             props: ['index', 'groupedProduct'],
-
             inject: ['$validator'],
 
             computed: {
+                
                 inputName: function () {
                     if (this.groupedProduct.id)
                         return 'links[' + this.groupedProduct.id + ']';
