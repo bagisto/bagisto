@@ -34,7 +34,7 @@ class ExchangeRates extends ExchangeRate
         protected ExchangeRateRepository $exchangeRateRepository
     )
     {
-        $this->apiEndPoint = 'https://api.exchangeratesapi.io/latest';
+        $this->apiEndPoint = 'https://api.apilayer.com/exchangerates_data/convert';
 
         $this->apiKey = config('services.exchange-api.exchange_rates.key');
     }
@@ -53,7 +53,15 @@ class ExchangeRates extends ExchangeRate
                 continue;
             }
 
-            $result = $client->request('GET', $this->apiEndPoint . '?access_key='. $this->apiKey . '&base=' . config('app.currency') . '&symbols=' . $currency->code);
+            $result = $client->request(
+                'GET',
+                $this->apiEndPoint . '?to=' . $currency->code . '&from=' . config('app.currency') . '&amount=' . config('app.amount'), [
+                    'headers' => [
+                        'Content-Type' => "text/plain",
+                        'apikey'       => $this->apiKey
+                    ]
+                ]
+            );
 
             $result = json_decode($result->getBody()->getContents(), true);
 
@@ -66,11 +74,11 @@ class ExchangeRates extends ExchangeRate
 
             if ($exchangeRate = $currency->exchange_rate) {
                 $this->exchangeRateRepository->update([
-                    'rate' => $result['rates'][$currency->code],
+                    'rate' => $result['result'],
                 ], $exchangeRate->id);
             } else {
                 $this->exchangeRateRepository->create([
-                    'rate'            => $result['rates'][$currency->code],
+                    'rate'            => $result['result'],
                     'target_currency' => $currency->id,
                 ]);
             }
