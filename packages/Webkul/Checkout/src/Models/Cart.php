@@ -27,7 +27,7 @@ class Cart extends Model implements CartContract
      */
     public function customer()
     {
-        return $this->hasOne(CustomerProxy::modelClass(), 'id', 'customer_id');
+        return $this->belongsTo(CustomerProxy::modelClass());
     }
 
     /**

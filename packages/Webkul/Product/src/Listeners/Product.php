@@ -10,8 +10,6 @@ use Webkul\Checkout\Repositories\{CartItemRepository ,CartRepository};
 
 class Product
 {
-    public $productItem = 0;
-
     protected $indexers = [
         'inventory' => Inventory::class,
         'price'     => Price::class,
@@ -172,17 +170,15 @@ class Product
     {
         $cartItems = $this->cartItemsRepository->findWhere(['product_id' => $product->id]);
 
-        $this->productItem = $product;
-
-        $cartItems->each(function ($cartItem) {
+        $cartItems->each(function ($cartItem) use ($product){
             $cart = $this->cartRepository->find($cartItem->cart_id);
 
             if ($customer = $cart->customer) {
                 $groupIdFromCart = $customer->group->id;
 
-                $priceIndexPrice = $this->productItem->price_indices->where('customer_group_id' ,$groupIdFromCart)->first();
+                $priceIndexPrice = $product->price_indices->where('customer_group_id' ,$groupIdFromCart)->first();
             } else {
-                $priceIndexPrice = $this->productItem->price_indices->where('customer_group_id' ,1)->first();
+                $priceIndexPrice = $product->price_indices->where('customer_group_id' ,1)->first();
             }
             
             $cartItem->update([
@@ -195,10 +191,10 @@ class Product
             $cartTotal = $this->cartItemsRepository->findWhere(['cart_id' => $cartItem->cart_id])->sum('total');
 
             $this->cartRepository->update([
-                'grand_total'      => $cartTotal,
-                'base_grand_total' => $cartTotal,
                 'sub_total'        => $cartTotal,
                 'base_sub_total'   => $cartTotal,
+                'grand_total'      => $cartTotal,
+                'base_grand_total' => $cartTotal,
             ], $cartItem->cart_id);
         });
     }
