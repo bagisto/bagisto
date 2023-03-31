@@ -180,7 +180,7 @@
                 <input type="hidden":name="[groupInputName + '[position]']" :value="group.position"/>
 
                 <div class="table" v-if="group.custom_attributes.length" style="margin-bottom: 20px;">
-                    <div class="table-responsive">
+                    <div class="table-responsive attributes-table">
                         <table>
                             <thead>
                                 <tr>

@@ -178,11 +178,12 @@
 
     .footer-copy-right {
         width: 100%;
-        height: 60px;
-        font-size: 16px;
-        line-height: 6rem;
+        height: 50px;
+        font-size: 15px;
+        line-height: 3rem;
         text-align: center;
-        background: #30383F;;
+        background: #30383F;
+        border-top: 1px solid #a8a8a8;
         color: rgba(255,255,255,0.83);
 
         p {

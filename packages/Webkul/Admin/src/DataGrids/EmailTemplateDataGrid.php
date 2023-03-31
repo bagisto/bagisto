@@ -72,7 +72,7 @@ class EmailTemplateDataGrid extends DataGrid
                     return trans('admin::app.datagrid.active');
                 } elseif ($value->status == 'inactive') {
                     return trans('admin::app.datagrid.inactive');
-                } elseif ($value->status == 'draft') {
+                } elseif ($value->status == 'draft') {                    
                     return trans('admin::app.datagrid.draft');
                 }
             },
