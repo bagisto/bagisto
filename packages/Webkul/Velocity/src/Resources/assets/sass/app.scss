@@ -1172,3 +1172,24 @@ i.within-circle {
 .cart-details .mr-2 i {
     cursor: pointer;
 }
+
+@media only screen and (max-width: 768px) {
+    .product-actions {
+        button {
+            position: fixed;
+            bottom: 0;
+        }
+
+        .buynow {
+            left: 0;
+            width: 50%;
+        }
+
+        .add-to-cart-btn {
+            .theme-btn {
+                right: 0;
+                width: 48%;
+            }    
+        }
+    }
+}
