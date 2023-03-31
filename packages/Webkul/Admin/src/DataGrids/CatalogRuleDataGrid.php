@@ -70,8 +70,8 @@ class CatalogRuleDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->starts_from == "created_at") {
-                    return "-";
+                if (! $value->starts_from ) {
+                    return " ";
                 }
                 else {
                     return "$value->starts_from";
@@ -87,8 +87,8 @@ class CatalogRuleDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->ends_till == "created_at") {
-                    return "-";
+                if (! $value->ends_till) {
+                    return " ";
                 }
                 else {
                     return "$value->ends_till";
