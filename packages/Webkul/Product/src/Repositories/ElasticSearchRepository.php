@@ -50,6 +50,8 @@ class ElasticSearchRepository
             $filters['filter'][]['term']['category_ids'] = $categoryId;
         }
 
+        $filters['filter'][]['term']['status'] = 1;
+
         $params = [
             'index' => $this->getIndexName(),
             'body'  => [
