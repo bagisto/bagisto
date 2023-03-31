@@ -50,6 +50,10 @@ class ElasticSearchRepository
             $filters['filter'][]['term']['category_ids'] = $categoryId;
         }
 
+        if (! empty($options['type'])) {
+            $filters['filter'][]['term']['type'] = $options['type'];
+        }
+
         $params = [
             'index' => $this->getIndexName(),
             'body'  => [
