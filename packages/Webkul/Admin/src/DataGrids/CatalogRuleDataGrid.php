@@ -69,6 +69,14 @@ class CatalogRuleDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'closure'    => function ($value) {
+                if ($value->starts_from == "created_at") {
+                    return "-";
+                }
+                else {
+                    return "$value->starts_from";
+                }
+            },
         ]);
 
         $this->addColumn([
@@ -78,6 +86,14 @@ class CatalogRuleDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'closure'    => function ($value) {
+                if ($value->ends_till == "created_at") {
+                    return "-";
+                }
+                else {
+                    return "$value->ends_till";
+                }
+            },
         ]);
 
         $this->addColumn([
