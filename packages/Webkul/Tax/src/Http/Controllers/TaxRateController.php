@@ -64,21 +64,15 @@ class TaxRateController extends Controller
      */
     public function create()
     {
-        $rules = [
+        $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier',
             'is_zip'     => 'sometimes',
             'zip_code'   => 'nullable',
-            'zip_from'   => 'nullable|numeric|digits:6|lt:zip_to|required_with:is_zip',
-            'zip_to'     => 'nullable|numeric|digits:6|required_with:is_zip,zip_from',
+            'zip_from'   => 'nullable|required_with:is_zip',
+            'zip_to'     => 'nullable|required_with:is_zip,zip_from',
             'country'    => 'required|string',
             'tax_rate'   => 'required|numeric|min:0.0001',
-        ];
-
-        $customMsg = [
-            'zip_from.lt' => 'The zip from value should be your starting zip code.'
-        ];
-    
-        $this->validate(request(), $rules, $customMsg);
+        ]);
 
         $data = request()->all();
 
@@ -120,21 +114,15 @@ class TaxRateController extends Controller
      */
     public function update($id)
     {
-        $rules = [
+        $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier,' . $id,
             'is_zip'     => 'sometimes',
             'zip_code'   => 'nullable',
-            'zip_from'   => 'nullable|numeric|digits:6|lt:zip_to|required_with:is_zip',
-            'zip_to'     => 'nullable|numeric|digits:6|required_with:is_zip,zip_from',
+            'zip_from'   => 'nullable|required_with:is_zip',
+            'zip_to'     => 'nullable|required_with:is_zip,zip_from',
             'country'    => 'required|string',
             'tax_rate'   => 'required|numeric|min:0.0001',
-        ];
-
-        $customMsg = [
-            'zip_from.lt' => 'The zip from value should be your starting zip code.'
-        ];
-    
-        $this->validate(request(), $rules, $customMsg);
+        ]);
 
         Event::dispatch('tax.tax_rate.update.before', $id);
 

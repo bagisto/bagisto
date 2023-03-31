@@ -149,8 +149,10 @@ class Tax
                 }
             } else {
                 if (
-                    $address->postcode >= $rate->zip_from
-                    && $address->postcode <= $rate->zip_to
+                    ($address->postcode >= $rate->zip_from
+                    && $address->postcode <= $rate->zip_to)
+                    || ($address->postcode <= $rate->zip_from
+                    && $address->postcode >= $rate->zip_to)
                 ) {
                     $haveTaxRate = true;
                 }
