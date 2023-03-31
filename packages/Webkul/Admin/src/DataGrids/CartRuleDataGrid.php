@@ -174,7 +174,7 @@ class CartRuleDataGrid extends DataGrid
                     return "-";
                 }
                 else {
-                    return "$value->starts_from";
+                    return "$value->ends_till";
                 }
             },
         ]);
