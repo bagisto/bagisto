@@ -95,7 +95,7 @@
                 
             <td>
                 <div class="control-group" :class="[errors.has(inputName + '[qty]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|numeric|min_value:0|max_value:`quentity`'" :name="[inputName + '[qty]']" v-model="groupedProduct.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
+                    <input type="number" v-validate="`required|numeric|min_value:0|max_value:${quentity}`" :name="[inputName + '[qty]']" v-model="groupedProduct.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(inputName + '[qty]')">@{{ errors.first(inputName + '[qty]') }}</span>
                 </div>
             </td>
@@ -119,15 +119,12 @@
             inject: ['$validator'],
            
             data: function() {
-                console.log( @json($product->grouped_products()->with('associated_product')->get()),"122");
                 return {
                     search_term: '',
 
                     is_searching: false,
 
                     searched_results: [],
-
-                    quentity: '',
 
                     grouped_products: @json($product->grouped_products()->with('associated_product')->get())
                 }
@@ -141,12 +138,7 @@
 
             methods: {
                 addGroupedProduct: function(item, key) {
-                    let alreadyAdded = false;                    
-
-                    $.each(item.inventory_indices, (key, value) => {
-                        this.quentity = value.qty;
-                        console.log(this.quentity,"147");
-                    });
+                    let alreadyAdded = false;
 
                     this.grouped_products.forEach(function(groupProduct) {
                         if (item.id == groupProduct.associated_product.id) {
@@ -160,7 +152,6 @@
                                 qty: 0,
                                 sort_order: 0
                             });
-                            // console.log( this.grouped_products.associated_product,"157");
                     }
 
                     this.search_term = '';
@@ -189,8 +180,6 @@
                     this.$http.get ("{{ route('admin.catalog.products.search_simple_product') }}", {params: {query: this.search_term}})
                         .then (function(response) {
                             self.searched_results = response.data.data;
-                            // console.log(response.data.data ,"184");
-
                             self.is_searching = false;
                         })
                         .catch (function (error) {
@@ -206,9 +195,19 @@
             props: ['index', 'groupedProduct'],
             inject: ['$validator'],
 
+            data: function() {
+                return {
+                    quentity: 0,                    
+                }
+            },
+
             computed: {
-                
                 inputName: function () {
+
+                    $.each(this.groupedProduct.associated_product.inventory_indices, (key, value) => {
+                        this.quentity = value.qty;
+                    });
+                    
                     if (this.groupedProduct.id)
                         return 'links[' + this.groupedProduct.id + ']';
 
