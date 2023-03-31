@@ -123,7 +123,7 @@ class CustomerOrderDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending') . '</span>';
                 } elseif ($value->status == 'pending_payment') {
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending-payment') . '</span>';
-                } elseif ($value->status == 'fraud') {
+                } elseif ($value->status == 'fraud') {                    
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-fraud') . '</span>';
                 }
             },

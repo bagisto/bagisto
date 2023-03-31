@@ -96,7 +96,7 @@
                                 @foreach ($childCategory as $index => $childSubCategory)
                                     <slide slot="slide-{{ $index }}">
                                         <div class='childSubCategory'>
-                                            <a href='{{ $childSubCategory->url_path }}'>
+                                            <a href='{{ url($childSubCategory->url_path) }}'>
                                                 <div>
                                                     <img src='{{ $childSubCategory->getImageUrlAttribute()?? url("/vendor/webkul/ui/assets/images/product/small-product-placeholder.png") }}'>
                                                     <label>{{ $childSubCategory->name }}</label>

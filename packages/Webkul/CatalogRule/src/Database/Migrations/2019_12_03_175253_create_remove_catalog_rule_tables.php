@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
-class CreateRemoveCatalogRuleTables extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -33,4 +32,4 @@ class CreateRemoveCatalogRuleTables extends Migration
     {
         //
     }
-}
+};

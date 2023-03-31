@@ -1126,14 +1126,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Reviews',
-            'edit-title'  => 'Edit Review',
-            'rating'      => 'Rating',
-            'status'      => 'Status',
-            'comment'     => 'Comment',
-            'pending'     => 'Pending',
-            'approved'    => 'Approve',
-            'disapproved' => 'Disapprove',
+            'title'          => 'Reviews',
+            'edit-title'     => 'Edit Review',
+            'rating'         => 'Rating',
+            'status'         => 'Status',
+            'comment'        => 'Comment',
+            'pending'        => 'Pending',
+            'approved'       => 'Approve',
+            'disapproved'    => 'Disapprove',
+            'update-success' => 'Review updated successfully',
+            'delete-success' => 'Review deleted successfully',            
         ],
 
         'subscribers' => [
@@ -1246,6 +1248,10 @@ return [
             'categories'                     => 'Categories',
             'attribute_family'               => 'Attribute Family',
             'mass-delete-success'            => 'All the selected coupons have been deleted successfully.',
+            'create-success'                 => 'Cart rule created successfully',
+            'update-success'                 => 'Cart rule updated successfully',
+            'delete-success'                 => 'Cart rule deleted successfully',
+            'delete-failed'                  => 'Error encountered while deleting Cart rule.',
         ],
 
         'catalog-rules' => [
@@ -1293,6 +1299,10 @@ return [
             'fixed-amount-whole-cart'      => 'Fixed Amount to Whole Catalog',
             'buy-x-get-y-free'             => 'Buy X Get Y Free',
             'discount-amount'              => 'Discount Amount',
+            'create-success'               => 'Catalog rule created successfully',
+            'update-success'               => 'Catalog rule updated successfully',
+            'delete-success'               => 'Catalog rule deleted successfully',
+            'delete-failed'                => 'Error encountered while deleting Catalog rule.',
             'mass-delete-success'          => 'All the selected index of coupons have been deleted successfully.',
         ],
     ],
@@ -1485,6 +1495,7 @@ return [
         'already-taken'             => 'The :name has already been taken.',
         'order-pending'             => 'Cannot delete :name account because some Order(s) are pending or processing state.',
         'something-went-wrong'      => 'Something went wrong!',
+        'create-success'            => 'Refund added Successfully',
     ],
 
     'validations' => [

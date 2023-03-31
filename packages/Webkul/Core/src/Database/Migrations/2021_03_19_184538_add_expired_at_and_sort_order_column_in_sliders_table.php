@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddExpiredAtAndSortOrderColumnInSlidersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -31,4 +31,4 @@ class AddExpiredAtAndSortOrderColumnInSlidersTable extends Migration
             $table->integer('sort_order')->unsigned()->default(0);
         });
     }
-}
+};

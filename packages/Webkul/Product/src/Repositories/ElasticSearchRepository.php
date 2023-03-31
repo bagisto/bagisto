@@ -50,6 +50,10 @@ class ElasticSearchRepository
             $filters['filter'][]['term']['category_ids'] = $categoryId;
         }
 
+        if (! empty($options['type'])) {
+            $filters['filter'][]['term']['type'] = $options['type'];
+        }
+
         $params = [
             'index' => $this->getIndexName(),
             'body'  => [
@@ -131,7 +135,7 @@ class ElasticSearchRepository
             
             case 'text':
                 return [
-                    'term' => [
+                    'match_phrase_prefix' => [
                         $attribute->code => $params[$attribute->code],
                     ]
                 ];

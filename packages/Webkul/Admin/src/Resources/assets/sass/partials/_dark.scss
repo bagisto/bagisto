@@ -758,6 +758,11 @@
         fill: $white;
     }
 
+    .flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+        color: $white;
+        background-color: $dark-mode-body-background-color;
+    }
+
     .flatpickr-day.endRange,
     .flatpickr-day.endRange.inRange,
     .flatpickr-day.endRange.nextMonthDay,

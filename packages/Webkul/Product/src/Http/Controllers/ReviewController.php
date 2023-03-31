@@ -67,7 +67,7 @@ class ReviewController extends Controller
 
         Event::dispatch('customer.review.update.after', $review);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Review']));
+        session()->flash('success', trans('admin::app.customers.reviews.update-success', ['name' => 'Review']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -89,7 +89,7 @@ class ReviewController extends Controller
 
             Event::dispatch('customer.review.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Review'])]);
+            return response()->json(['message' => trans('admin::app.customers.reviews.delete-success', ['name' => 'Review'])]);
         } catch (\Exception $e) {
             report($e);
         }

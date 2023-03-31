@@ -453,7 +453,7 @@ abstract class DataGrid
             ->filter(fn($column) => $column['index'] === $columnName)
             ->first();
 
-        if ($key && isset($column[$key])) {
+        if ($key && isset($column[$key])) {            
             return $column[$key];
         }
 

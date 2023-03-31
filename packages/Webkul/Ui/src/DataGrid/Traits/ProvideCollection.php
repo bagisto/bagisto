@@ -100,9 +100,9 @@ trait ProvideCollection
             if ($this->itemsPerPage > 0) {
                 return $this->paginatedResults($queryBuilderOrCollection);
             }
-        } else {
-            return $this->defaultResults($queryBuilderOrCollection);
         }
+        
+        return $this->defaultResults($queryBuilderOrCollection);
     }
 
     /**
@@ -307,7 +307,7 @@ trait ProvideCollection
             if (
                 $column['index'] === $columnName
                 && ! $column['filterable']
-            ) {
+            ) {                
                 return true;
             }
         }
