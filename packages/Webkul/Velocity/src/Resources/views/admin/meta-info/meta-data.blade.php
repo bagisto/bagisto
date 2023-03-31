@@ -37,6 +37,12 @@
                 margin-left: 0px !important;
             }
         }
+
+        @media only screen and (max-width: 309px){
+            #subscription-bar-content-label {
+                margin-bottom: 25px 
+             } 
+        }
     </style>
 @endpush
 
@@ -330,7 +336,7 @@
             <accordian :title="'{{ __('velocity::app.admin.meta-data.footer') }}'" :active="false">
                 <div slot="body">
                     <div class="control-group">
-                        <label style="width:100%;">
+                        <label id="subscription-bar-content-label">
                             {{ __('velocity::app.admin.meta-data.subscription-content') }}
                             <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
