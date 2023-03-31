@@ -55,7 +55,7 @@ class ExchangeRates extends ExchangeRate
 
             $result = $client->request(
                 'GET',
-                $this->apiEndPoint . '?to=' . $currency->code . '&from=' . config('app.currency') . '&amount=' . config('app.amount'), [
+                $this->apiEndPoint . '?to=' . $currency->code . '&from=' . config('app.currency') . '&amount=1', [
                     'headers' => [
                         'Content-Type' => "text/plain",
                         'apikey'       => $this->apiKey
