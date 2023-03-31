@@ -34,9 +34,9 @@ class ExchangeRates extends ExchangeRate
         protected ExchangeRateRepository $exchangeRateRepository
     )
     {
-        $this->apiEndPoint = 'https://api.apilayer.com/exchangerates_data/convert';
+        $this->apiEndPoint = config('services.exchange_api.exchange_rates.url');
 
-        $this->apiKey = config('services.exchange-api.exchange_rates.key');
+        $this->apiKey = config('services.exchange_api.exchange_rates.key');
     }
 
     /**
@@ -55,10 +55,15 @@ class ExchangeRates extends ExchangeRate
 
             $result = $client->request(
                 'GET',
-                $this->apiEndPoint . '?to=' . $currency->code . '&from=' . config('app.currency') . '&amount=1', [
+                $this->apiEndPoint, [
                     'headers' => [
                         'Content-Type' => "text/plain",
-                        'apikey'       => $this->apiKey
+                        'apikey'       => $this->apiKey,
+                    ], 
+                    'query' => [
+                        'to'     => $currency->code, 
+                        'from'   => config('app.currency'),
+                        'amount' => 1
                     ]
                 ]
             );

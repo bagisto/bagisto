@@ -36,7 +36,7 @@ class FixerExchange extends ExchangeRate
     {
         $this->apiEndPoint = 'http://data.fixer.io/api';
 
-        $this->apiKey = config('services.exchange-api')['fixer']['key'];
+        $this->apiKey = config('services.exchange_api')['fixer']['key'];
     }
 
     /**
