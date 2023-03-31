@@ -184,7 +184,7 @@ export default {
                         response.data.message
                     );
                     
-                    if(this.cartItems == 0 && window.location.href.includes("checkout")) {
+                    if(! this.cartItems.length && this.isCheckoutPage()) {
                         window.location.href = this.checkoutRoute;  
                     }
 
@@ -194,6 +194,10 @@ export default {
                 });      
         },
      
+        isCheckoutPage() {
+            return window.location.href.includes("checkout");
+        },
+
         checkMinimumOrder: function(e) {
             e.preventDefault();
 
