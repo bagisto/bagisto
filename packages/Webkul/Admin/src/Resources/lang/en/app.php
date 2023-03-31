@@ -1126,14 +1126,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Reviews',
-            'edit-title'  => 'Edit Review',
-            'rating'      => 'Rating',
-            'status'      => 'Status',
-            'comment'     => 'Comment',
-            'pending'     => 'Pending',
-            'approved'    => 'Approve',
-            'disapproved' => 'Disapprove',
+            'title'          => 'Reviews',
+            'edit-title'     => 'Edit Review',
+            'rating'         => 'Rating',
+            'status'         => 'Status',
+            'comment'        => 'Comment',
+            'pending'        => 'Pending',
+            'approved'       => 'Approve',
+            'disapproved'    => 'Disapprove',
+            'update-success' => 'Review updated successfully',
+            'delete-success' => 'Review deleted successfully',            
         ],
 
         'subscribers' => [
