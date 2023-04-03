@@ -82,7 +82,7 @@
             ></button>
         </form>
 
-        <div class="item-count"> {{ itemCount }} of {{ total }} selected</div>
+        <div class="item-count" v-if="itemCount"> {{ itemCount }} of {{ total }} selected</div>
         
         <template v-if="filters.length > 0">
             <datagrid-filter-tag
