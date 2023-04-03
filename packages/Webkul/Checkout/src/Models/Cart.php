@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Webkul\Checkout\Contracts\Cart as CartContract;
 use Webkul\Checkout\Database\Factories\CartFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Customer\Models\CustomerProxy;
 
 class Cart extends Model implements CartContract
 {
@@ -19,6 +20,15 @@ class Cart extends Model implements CartContract
         'created_at',
         'updated_at',
     ];
+
+    /**
+     * Get cart customer
+     *
+     */
+    public function customer()
+    {
+        return $this->belongsTo(CustomerProxy::modelClass());
+    }
 
     /**
      * To get relevant associated items with the cart instance

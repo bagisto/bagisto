@@ -29,14 +29,24 @@ class CartItem extends Model implements CartItemContract
         'updated_at',
     ];
 
-    public function product(): HasOne
+    /**
+     * Get Product from cart items
+     *
+     * @return BelongsTo
+     */
+    public function product(): BelongsTo
     {
-        return $this->hasOne(ProductProxy::modelClass(), 'id', 'product_id');
+        return $this->belongsTo(ProductProxy::modelClass());
     }
 
-    public function cart(): HasOne
+    /**
+     * Get Cart from Cart Item
+     *
+     * @return BelongsTo
+     */
+    public function cart(): BelongsTo
     {
-        return $this->hasOne(CartProxy::modelClass(), 'id', 'cart_id');
+        return $this->belongsTo(CartProxy::modelClass());
     }
 
     /**

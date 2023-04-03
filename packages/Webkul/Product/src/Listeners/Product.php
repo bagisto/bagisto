@@ -6,6 +6,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch, Flat};
+use Webkul\Checkout\Repositories\{CartItemRepository ,CartRepository};
 
 class Product
 {
@@ -27,7 +28,9 @@ class Product
     public function __construct(
         protected ProductRepository $productRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
-        protected ProductGroupedProductRepository $productGroupedProductRepository
+        protected ProductGroupedProductRepository $productGroupedProductRepository,
+        protected CartItemRepository $cartItemsRepository,
+        protected CartRepository $cartRepository
     )
     {
     }
@@ -62,6 +65,8 @@ class Product
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
             app($this->indexers['elastic'])->reindexRows($products);
         }
+
+        $this->updateCartItems($product);
     }
 
     /**
@@ -154,5 +159,43 @@ class Product
         }
 
         return $products;
+    }
+
+    /**
+     * Update Cart items
+     *
+     * @return void
+     */
+    public function updateCartItems($product)
+    {
+        $cartItems = $this->cartItemsRepository->findWhere(['product_id' => $product->id]);
+
+        $cartItems->each(function ($cartItem) use ($product){
+            $cart = $this->cartRepository->find($cartItem->cart_id);
+
+            if ($customer = $cart->customer) {
+                $groupIdFromCart = $customer->group->id;
+
+                $priceIndexPrice = $product->price_indices->where('customer_group_id' ,$groupIdFromCart)->first();
+            } else {
+                $priceIndexPrice = $product->price_indices->where('customer_group_id' ,1)->first();
+            }
+            
+            $cartItem->update([
+                'price'      => $priceIndexPrice->min_price,
+                'base_price' => $priceIndexPrice->min_price,
+                'total'      => $priceIndexPrice->min_price,
+                'base_total' => $priceIndexPrice->min_price,
+            ]);
+
+            $cartTotal = $this->cartItemsRepository->findWhere(['cart_id' => $cartItem->cart_id])->sum('total');
+
+            $this->cartRepository->update([
+                'sub_total'        => $cartTotal,
+                'base_sub_total'   => $cartTotal,
+                'grand_total'      => $cartTotal,
+                'base_grand_total' => $cartTotal,
+            ], $cartItem->cart_id);
+        });
     }
 }
