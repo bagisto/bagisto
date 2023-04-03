@@ -1222,3 +1222,34 @@
         }
     }
 }
+
+@media only screen and (max-width: 296px) {
+	#app {
+
+		>div {
+
+			>div.main-content-wrapper.col-12.no-padding {
+
+				>header {
+
+					>div {
+
+						>div {
+
+							>div.right-vc-header.col-6 {
+
+								>a.unset.cursor-pointer {
+
+									>i {
+										margin-right: -68px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
