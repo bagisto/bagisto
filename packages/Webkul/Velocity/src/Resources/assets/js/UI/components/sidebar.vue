@@ -5,7 +5,7 @@
         :class="`sidebar ${addClass ? addClass : ''}`"
         v-if="slicedCategories && slicedCategories.length > 0"
     >
-        <ul type="none" class="main-category">
+        <ul type="none" class="sidebar-main-category">
             <li
                 :key="categoryIndex"
                 :id="`category-${category.id}`"
@@ -37,7 +37,7 @@
                     <span class="category-title">{{ category['name'] }}</span>
 
                     <i
-                        class="rango-arrow-right pr15 float-right"
+                        class="rango-arrow-right pr15 float-right mt-1"
                         @mouseout="toggleSidebar(id, $event, 'mouseout')"
                         @mouseover="toggleSidebar(id, $event, 'mouseover')"
                         v-if="
@@ -86,6 +86,7 @@
                                     ) in category.children"
                                 >
                                     <a
+                                        @click="showChildCategory('ul' + subCategoryIndex)"
                                         :id="`sidebar-level-link-2-${subCategoryIndex}`"
                                         @mouseout="
                                             toggleSidebar(
@@ -94,7 +95,7 @@
                                                 'mouseout'
                                             )
                                         "
-                                        :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}`"
+                                        
                                         :class="`category sub-category unset ${
                                             subCategory.children.length > 0
                                                 ? 'fw6'
@@ -127,12 +128,13 @@
                                                 "
                                             />
                                         </div>
-                                        <span class="category-title">{{
-                                            subCategory['name']
-                                        }}</span>
+
+                                        <a class="category-title" :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}`">
+                                            {{ subCategory['name'] }}
+                                        </a>
 
                                         <i
-                                            class="rango-arrow-down pr15 float-right"
+                                            :class="`rango-arrow-${direction} pr15 float-right`"
                                             @mouseout="toggleSidebar(id, $event, 'mouseout')"
                                             @mouseover="toggleSidebar(id, $event, 'mouseover')"
                                             v-if="subCategory.children.length > 0"
@@ -140,7 +142,7 @@
                                         </i>
                                     </a>
 
-                                    <ul type="none" class="nested">
+                                    <ul type="none" hidden :ref="'ul' + subCategoryIndex" class="child-category">
                                         <li
                                             :key="`${childSubCategoryIndex}-${subCategoryIndex}-${categoryIndex}`"
                                             v-for="(
@@ -182,6 +184,7 @@ export default {
         return {
             slicedCategories: [],
             sidebarLevel: Math.floor(Math.random() * 1000),
+            direction:"down"
         };
     },
 
@@ -224,6 +227,16 @@ export default {
 
             this.slicedCategories = slicedCategories;
         },
+
+        showChildCategory: function (ref) {
+            if (this.$refs[ref][0].hidden) {
+                this.$refs[ref][0].hidden = false;
+                this.direction = "up";
+            } else {
+                this.$refs[ref][0].hidden = true;
+                this.direction = "down";
+            }
+        }
     },
 };
 </script>

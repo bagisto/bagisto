@@ -135,7 +135,7 @@ class ElasticSearchRepository
             
             case 'text':
                 return [
-                    'term' => [
+                    'match_phrase_prefix' => [
                         $attribute->code => $params[$attribute->code],
                     ]
                 ];
