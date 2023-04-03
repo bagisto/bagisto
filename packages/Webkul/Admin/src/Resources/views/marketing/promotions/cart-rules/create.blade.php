@@ -307,9 +307,9 @@
                         </div>
 
                         <div class="control-group date" v-if="matchedAttribute.type == 'date'">
-                            <date>
+                            <datetime>
                                 <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
-                            </date>
+                            </datetime>
                         </div>
 
                         <div class="control-group date" v-if="matchedAttribute.type == 'datetime'">
