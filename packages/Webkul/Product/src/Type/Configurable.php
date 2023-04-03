@@ -514,7 +514,7 @@ class Configurable extends AbstractType
     {
         $variants = [];
 
-        $variantCollection = $this->product->variants()
+        $variantCollection = $this->product->variants($variants)
             ->with([
                 'parent',
                 'attribute_values',
@@ -530,7 +530,6 @@ class Configurable extends AbstractType
                 $variants[] = $variant;
             }
         }
-
         return $variants;
     }
 
@@ -543,8 +542,8 @@ class Configurable extends AbstractType
     {
         $prices = [];
 
-        foreach ($this->getAllowedProducts($this->product) as $variant) {           
-                $prices[] = $this->getProductPrices();                            
+        foreach ($this->getAllowedProducts() as $variant) {
+            $prices[$variant->id] =$this->getProductPrices();
         }
 
         return min($prices);
@@ -557,11 +556,11 @@ class Configurable extends AbstractType
     {
         $minPrice = $this->getMinimalPrice();
         $regularmin = $this -> getRegularMinimalPrice();
-   
+    
         return [
             'regular_price' => [
                 'price'           => core()->convertPrice($this->evaluatePrice($regularmin)),
-                'formatted_price' => core()->currency($this->evaluatePrice($regularmin )),
+                'formatted_price' => core()->currency($this->evaluatePrice($regularmin)),
             ],
             'final_price'   => [
                 'price'           => core()->convertPrice($this->evaluatePrice($minPrice)),
@@ -578,7 +577,6 @@ class Configurable extends AbstractType
     public function getPriceHtml()
     {
         $prices = $this->getVariantPrice(); 
-
         $priceHtml = '';
 
         if ($this->haveDiscount()) {
@@ -596,15 +594,15 @@ class Configurable extends AbstractType
                             .'<span class="price-label">' . trans('shop::app.products.price-label') . '</span>';
            } else {
             
-            $priceHtml .= '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
-                        . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>'
-                        . '  '
-                        .'<span class="price-label">' . trans('shop::app.products.price-label') . '</span>';  
+                $priceHtml .= '<span class="regular-price">' . $prices['regular_price']['formatted_price'] . '</span>'
+                            . '<span class="special-price">' . $prices['final_price']['formatted_price'] . '</span>'
+                            . '  '
+                            .'<span class="price-label">' . trans('shop::app.products.price-label') . '</span>';  
            }       
         } else {
             $priceHtml .= '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                         . '  '
-                         .'<span class="special-price">' . $prices['regular_price']['formatted_price'] . '</span>';
+                        . '  '
+                        .'<span class="special-price">' . $prices['regular_price']['formatted_price'] . '</span>';
         }
         $priceHtml .= '</div>';
         
