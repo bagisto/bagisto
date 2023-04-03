@@ -15,13 +15,7 @@
         .image-position {
             display: contents;
         }
-        
-        .varient {
-            font-size: 10px;
-            font-weight: bold;
-            padding: 4px !important;
-        }
-        
+             
     </style>
 @endpush
 
@@ -201,7 +195,7 @@
                             :value="variant[attribute.code]"
                         />
                     </div>
-                </div>
+                </div
             </td>
 
             <td class="image-group">
@@ -228,7 +222,7 @@
                                 :src="imageData[index]"
                                 v-if="imageData[index]">
 
-                                <label class="remove-image varient" @click="removeImage(image)">
+                                <label class="remove-image variant" @click="removeImage(image)">
                                     {{ __('admin::app.catalog.products.remove-image-btn-title') }}
                                 </label>
                         </label>

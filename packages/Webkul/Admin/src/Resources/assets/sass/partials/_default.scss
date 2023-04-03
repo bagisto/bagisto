@@ -533,6 +533,11 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        .variant {
+            font-size: 10px;
+            font-weight: bold;
+            padding: 4px;
+        }
     }
 }
 
