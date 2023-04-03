@@ -101,16 +101,16 @@
 
                                 <div class="control-group date">
                                     <label for="starts_from">{{ __('admin::app.promotions.catalog-rules.from') }}</label>
-                                    <date>
+                                    <datetime>
                                         <input type="text" name="starts_from" class="control" value="{{ old('starts_from') ?: $catalogRule->starts_from }}"/>
-                                    </date>
+                                    </datetime>
                                 </div>
 
                                 <div class="control-group date">
                                     <label for="ends_till">{{ __('admin::app.promotions.catalog-rules.to') }}</label>
-                                    <date>
+                                    <datetime>
                                         <input type="text" name="ends_till" class="control" value="{{ old('ends_till') ?: $catalogRule->ends_till }}"/>
-                                    </date>
+                                    </datetime>
                                 </div>
 
                                 <div class="control-group">
@@ -240,9 +240,9 @@
                         </div>
 
                         <div class="control-group date" v-if="matchedAttribute.type == 'date'">
-                            <date>
+                            <datetime>
                                 <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
-                            </date>
+                            </datetime>
                         </div>
 
                         <div class="control-group date" v-if="matchedAttribute.type == 'datetime'">

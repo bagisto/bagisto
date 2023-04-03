@@ -152,6 +152,13 @@ class CartRuleDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'closure'    => function ($value) {
+                if ($value->starts_from == null) {
+                    return "-";
+                }
+                
+                return "$value->starts_from";
+            },
         ]);
 
         $this->addColumn([
@@ -161,6 +168,13 @@ class CartRuleDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'closure'    => function ($value) {
+                if ($value->ends_till == null) {
+                    return "-";
+                }
+                
+                return "$value->ends_till";
+            },
         ]);
 
         $this->addColumn([
