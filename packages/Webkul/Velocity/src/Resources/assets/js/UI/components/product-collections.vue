@@ -26,6 +26,7 @@
                             v-for="(product, index) in productCollections">
                             <product-card
                                 :list="list"
+                                :review="review"
                                 :product="product">
                             </product-card>
                         </slide>
@@ -55,6 +56,10 @@
             productId: {
                 type: String,
                 default: ''
+            },
+            review: {
+                type: Boolean,
+                default: 'false'
             },
             productTitle: String,
             productRoute: String,

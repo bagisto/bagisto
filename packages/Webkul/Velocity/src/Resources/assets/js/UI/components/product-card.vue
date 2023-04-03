@@ -79,7 +79,7 @@
                 </a>
             </div>
 
-            <div class="product-rating col-12 no-padding" v-else>
+            <div class="product-rating col-12 no-padding" v-else-if="review">
                 <a :href="`${$root.baseUrl}/product/${product.slug}/review`" class="unset">
                     <span class="fs14" v-text="product.firstReviewText"></span>
                 </a>
@@ -94,10 +94,12 @@
     export default {
         props: [
             'list',
+            'review',
             'product',
         ],
 
         data: function () {
+            console.warn(this.review);
             return {
                 'addToCart': 0,
                 'addToCartHtml': '',
