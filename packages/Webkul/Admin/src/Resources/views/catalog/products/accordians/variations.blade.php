@@ -15,7 +15,6 @@
         .image-position {
             display: contents;
         }
-             
     </style>
 @endpush
 
