@@ -95,7 +95,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(inputName + '[qty]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|min_value:0'" :name="[inputName + '[qty]']" v-model="groupedProduct.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
+                    <input type="number" v-validate="`required|numeric|min_value:0|max_value:${quantity}`" :name="[inputName + '[qty]']" v-model="groupedProduct.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(inputName + '[qty]')">@{{ errors.first(inputName + '[qty]') }}</span>
                 </div>
             </td>
@@ -197,10 +197,20 @@
 
             props: ['index', 'groupedProduct'],
 
+           data: function() {
+                return {
+                    quantity: 0,        
+                }
+           },
+
             inject: ['$validator'],
 
             computed: {
                 inputName: function () {
+                    $.each (this.groupedProduct.associated_product.inventory_indices, (key, value) => {
+                        this.quantity = value.qty;
+                    });
+
                     if (this.groupedProduct.id)
                         return 'links[' + this.groupedProduct.id + ']';
 
@@ -211,7 +221,7 @@
             methods: {
                 removeGroupedProduct: function () {
                     this.$emit('onRemoveGroupedProduct', this.groupedProduct)
-                }
+                },
             }
         });
     </script>
