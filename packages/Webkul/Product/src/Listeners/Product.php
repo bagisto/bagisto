@@ -188,13 +188,13 @@ class Product
                 'base_total' => $priceIndexPrice->min_price,
             ]);
 
-            $cartTotal = $this->cartItemsRepository->findWhere(['cart_id' => $cartItem->cart_id])->sum('total');
-
+            $cartTotal = $this->cartItemsRepository->getSumOfColumns($cartItem->cart_id);
+            
             $this->cartRepository->update([
-                'sub_total'        => $cartTotal,
-                'base_sub_total'   => $cartTotal,
-                'grand_total'      => $cartTotal,
-                'base_grand_total' => $cartTotal,
+                'sub_total'        => $cartTotal->sub_total,
+                'base_sub_total'   => $cartTotal->base_sub_total,
+                'base_grand_total' => $cartTotal->base_grand_total,
+                'grand_total'      => $cartTotal->grand_total,
             ], $cartItem->cart_id);
         });
     }
