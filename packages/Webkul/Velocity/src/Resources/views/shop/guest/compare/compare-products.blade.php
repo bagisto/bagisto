@@ -14,15 +14,10 @@
                 {{ __('velocity::app.customer.compare.compare_similar_items') }}
             </h2>
 
-            <div class="col-6 d-flex justify-content-end align-items-center" v-if="products.length > 0">
-                <div class="mr-2">
-                    <i class="rango-arrow-left slide-left" @click="prevSlider(sliderDecrement)"></i>
-                    <i class="rango-arrow-right slide-right" @click="nextSlider(sliderIncrement)"></i>
-                </div>
-
+            <div class="col-6" v-if="products.length > 0">
                 <button
                     class="theme-btn light float-right"
-                    @click="removeProductCompare('all')">   
+                    @click="removeProductCompare('all')">
                     {{ __('shop::app.customer.account.wishlist.deleteall') }}
                 </button>
             </div>
@@ -50,7 +45,7 @@
                     @foreach ($comparableAttributes as $attribute)
                         <tr>
                             <td class="header">
-                                <span class="fs16 font-weight-bold">{{ isset($attribute['name']) ? $attribute['name'] : $attribute['admin_name'] }}</span>
+                                <span class="fs16 font-weight-bold">{{ empty($attribute['name']) ? $attribute['admin_name'] : $attribute['name'] }}</span>
                             </td>
 
                             <td :key="`title-${index}`" v-for="(product, index) in products">
@@ -164,13 +159,11 @@
 
             data: function () {
                 return {
-                    products: [],
-                    storageUrl: '{{ Storage::url('/') }}',
-                    isCustomer: '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
-                    sliderIncrement: 160,
-                    sliderDecrement: 160,
-                    attributeOptions: @json($attributeOptionTranslations),
-                    isProductListLoaded: false,
+                    'products': [],
+                    'storageUrl': '{{ Storage::url('/') }}',
+                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                    'isProductListLoaded': false,
+                    'attributeOptions': @json($attributeOptionTranslations),
                 };
             },
 
@@ -337,26 +330,10 @@
 
                         e.preventDefault();
 
-                        const x =  e.pageX - slider.offsetLeft;
+                        const x = e.pageX - slider.offsetLeft;
                         const walk = (x - startX) * 3;
                         slider.scrollLeft = scrollLeft - walk;
                     });
-                },
-
-                nextSlider: function(getScrollLeft){
-                    const slider = document.querySelector('.compare-products');
-
-                    slider.scrollLeft = getScrollLeft;
-                    
-                    this.sliderIncrement = getScrollLeft + 200;
-                },
-
-                prevSlider: function(getScrollRight){
-                    const slider = document.querySelector('.compare-products');
-
-                    slider.scrollLeft = getScrollRight;
-
-                    this.sliderDecrement = getScrollRight - 200;
                 }
             }
         });

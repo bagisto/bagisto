@@ -3,6 +3,12 @@
     items-count-src="{{ route('velocity.product.item-count') }}"
 ></header-component>
 
+@php
+$showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
+
+$showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
+@endphp
+
 @push('scripts')
     <script type="text/x-template" id='header-component-template'>
         <div>
@@ -10,6 +16,7 @@
                 is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
                 is-text="{{ isset($isText) && $isText ? 'true' : 'false' }}"
                 src="{{ route('shop.customer.wishlist.index') }}"
+                v-if="{{ $showWishlist ? 'true' : 'false' }}"
                 :wishlist-item-count='wishlistCount'>
             </wishlist-component-with-badge>
 
@@ -17,6 +24,7 @@
                 is-customer="{{ auth()->guard('customer')->check() ? 'true' : 'false' }}"
                 is-text="{{ isset($isText) && $isText ? 'true' : 'false' }}"
                 src="{{ auth()->guard('customer')->check() ? route('velocity.customer.product.compare') : route('velocity.product.compare') }}"
+                v-if="{{ $showCompare ? 'true' : 'false' }}"
                 :compare-item-count='compareCount'>
             </compare-component-with-badge>
             
