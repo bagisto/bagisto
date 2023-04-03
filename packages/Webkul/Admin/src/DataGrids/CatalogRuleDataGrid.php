@@ -72,8 +72,7 @@ class CatalogRuleDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if (! $value->starts_from ) {
                     return "-";
-                }
-                else {
+                } else {
                     return "$value->starts_from";
                 }
             },
@@ -89,8 +88,7 @@ class CatalogRuleDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if (! $value->ends_till) {
                     return "-";
-                }
-                else {
+                } else {
                     return "$value->ends_till";
                 }
             },
