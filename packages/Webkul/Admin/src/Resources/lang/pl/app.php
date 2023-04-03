@@ -1071,14 +1071,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Recenzje',
-            'edit-title'  => 'Edytuj recenzję',
-            'rating'      => 'Ocena',
-            'status'      => 'Status',
-            'comment'     => 'Komentarz',
-            'pending'     => 'w toku',
-            'approved'    => 'Zatwierdź',
-            'disapproved' => 'Odrzuć',
+            'title'          => 'Recenzje',
+            'edit-title'     => 'Edytuj recenzję',
+            'rating'         => 'Ocena',
+            'status'         => 'Status',
+            'comment'        => 'Komentarz',
+            'pending'        => 'w toku',
+            'approved'       => 'Zatwierdź',
+            'disapproved'    => 'Odrzuć',
+            'update-success' => 'Pomyślnie zaktualizowano recenzję',
+            'delete-success' => 'Pomyślnie usunięto recenzję',
         ],
 
         'subscribers' => [

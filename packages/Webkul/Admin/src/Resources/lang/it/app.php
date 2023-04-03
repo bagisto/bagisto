@@ -1088,14 +1088,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Recensioni',
-            'edit-title'  => 'Modifica Recensione',
-            'rating'      => 'Rating',
-            'status'      => 'Stato',
-            'comment'     => 'Commento',
-            'pending'     => 'In attesa',
-            'approved'    => 'Approva',
-            'disapproved' => 'Rifiuta',
+            'title'          => 'Recensioni',
+            'edit-title'     => 'Modifica Recensione',
+            'rating'         => 'Rating',
+            'status'         => 'Stato',
+            'comment'        => 'Commento',
+            'pending'        => 'In attesa',
+            'approved'       => 'Approva',
+            'disapproved'    => 'Rifiuta',
+            'update-success' => 'Recensione aggiornata con successo',
+            'delete-success' => 'Recensione eliminata con successo',
         ],
 
         'subscribers' => [

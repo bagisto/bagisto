@@ -1085,17 +1085,19 @@ return [
             'is-suspended'         => 'Is Suspended',
             'suspend'              => 'Suspend',
             'suspended'            => 'Suspended',
-        ],
-        'reviews'     =>
-        [
-            'title'       => 'Bewertungen',
-            'edit-title'  => 'Bewertung bearbeiten',
-            'rating'      => 'Bewertung',
-            'status'      => 'Status',
-            'comment'     => 'Kommentar',
-            'pending'     => 'Ausstehend',
-            'approved'    => 'Genehmigen',
-            'disapproved' => 'Missbilligen',
+        ],   
+        'reviews'     =>   
+        [   
+            'title'          => 'Bewertungen',
+            'edit-title'     => 'Bewertung bearbeiten',
+            'rating'         => 'Bewertung',
+            'status'         => 'Status',
+            'comment'        => 'Kommentar',
+            'pending'        => 'Ausstehend',
+            'approved'       => 'Genehmigen',
+            'disapproved'    => 'Missbilligen',
+            'update-success' => 'Bewertung erfolgreich aktualisiert',
+            'delete-success' => 'Bewertung erfolgreich gelöscht',
         ],
         'subscribers' =>
         [

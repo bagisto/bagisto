@@ -1094,14 +1094,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Отзывы',
-            'edit-title'  => 'Редактировать обзор',
-            'rating'      => 'Рейтинг',
-            'status'      => 'Статус',
-            'comment'     => 'Комментарий',
-            'pending'     => 'В ожидании',
-            'approved'    => 'Одобрить',
-            'disapproved' => 'Не одобрять',
+            'title'          => 'Отзывы',
+            'edit-title'     => 'Редактировать обзор',
+            'rating'         => 'Рейтинг',
+            'status'         => 'Статус',
+            'comment'        => 'Комментарий',
+            'pending'        => 'В ожидании',
+            'approved'       => 'Одобрить',
+            'disapproved'    => 'Не одобрять',
+            'update-success' => 'Відгук успішно оновлено',
+            'delete-success' => 'Відгук успішно видалено',
         ],
 
         'subscribers' => [

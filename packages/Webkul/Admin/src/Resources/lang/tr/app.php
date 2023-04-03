@@ -1093,14 +1093,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'İncelemeler',
-            'edit-title'  => 'İnceleme Düzenle',
-            'rating'      => 'Oylama',
-            'status'      => 'Durum',
-            'comment'     => 'Yorum',
-            'pending'     => 'Bekliyor',
-            'approved'    => 'Onayla',
-            'disapproved' => 'Reddet',
+            'title'          => 'İncelemeler',
+            'edit-title'     => 'İnceleme Düzenle',
+            'rating'         => 'Oylama',
+            'status'         => 'Durum',
+            'comment'        => 'Yorum',
+            'pending'        => 'Bekliyor',
+            'approved'       => 'Onayla',
+            'disapproved'    => 'Reddet',
+            'update-success' => 'İnceleme başarıyla güncellendi',
+            'delete-success' => 'İnceleme başarıyla silindi',
         ],
 
         'subscribers' => [
