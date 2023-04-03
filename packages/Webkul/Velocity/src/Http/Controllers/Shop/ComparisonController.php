@@ -44,6 +44,8 @@ class ComparisonController extends Controller
             abort(404);
         }
 
+        $this->removeInactiveItems();
+
         if (! request()->get('data')) {
             return view($this->_config['view']);;
         }
@@ -78,6 +80,36 @@ class ComparisonController extends Controller
             'status'   => 'success',
             'products' => $productCollection,
         ];
+    }
+
+    /**
+     * Removing inactive wishlist item.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function removeInactiveItems()
+    {
+        if (auth()->guard('customer')->user()) {
+            $productCollection = $this->compareProductsRepository->findWhere([
+                'customer_id' => auth()->guard('customer')->user()->id
+            ]);
+    
+            foreach ($productCollection as $item) {
+                $product = $this->productRepository->find($item->product_id);
+    
+                if (
+                    $product 
+                    && ! $product->status
+                ) {
+                    $this->compareProductsRepository->deleteWhere([
+                        'product_id'  => $item->product_id,
+                        'customer_id' => auth()->guard('customer')->user()->id,
+                    ]);
+    
+                    session()->flash('info', trans('customer::app.product-removed'));
+                }
+            }
+        }        
     }
 
     /**
