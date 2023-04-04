@@ -23,6 +23,7 @@
                             <option
                                 v-text="translations.column"
                                 selected
+                                value="null"
                                 disabled
                             ></option>
 
@@ -49,6 +50,7 @@
                             <option
                                 v-text="translations.condition"
                                 selected
+                                value="null"
                                 disabled
                             ></option>
 
@@ -95,6 +97,7 @@
                             <option
                                 v-text="translations.condition"
                                 selected
+                                value="null"
                                 disabled
                             ></option>
 
@@ -152,6 +155,7 @@
                             <option
                                 v-text="translations.condition"
                                 selected
+                                value="null"
                                 disabled
                             ></option>
 
@@ -174,6 +178,7 @@
                             <option
                                 v-text="translations.value"
                                 selected
+                                value="null"
                                 disabled
                             ></option>
 
@@ -199,6 +204,7 @@
                             <option
                                 v-text="translations.condition"
                                 selected
+                                value="null"
                                 disabled
                             ></option>
 
@@ -238,6 +244,7 @@
                             <option
                                 v-text="translations.condition"
                                 selected
+                                value="null"
                                 disabled
                             ></option>
 
@@ -318,6 +325,7 @@
                             <option
                                 v-text="translations.condition"
                                 selected
+                                value="null"
                                 disabled
                             ></option>
 
@@ -390,6 +398,8 @@ export default {
             type: null,
 
             columnOrAlias: '',
+
+            filterColumn: null,
 
             types: {
                 string: {
