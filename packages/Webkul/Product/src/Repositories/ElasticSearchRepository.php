@@ -53,6 +53,7 @@ class ElasticSearchRepository
         if (! empty($options['type'])) {
             $filters['filter'][]['term']['type'] = $options['type'];
         }
+        $filters['filter'][]['term']['status'] = 1;
 
         $params = [
             'index' => $this->getIndexName(),
@@ -135,7 +136,7 @@ class ElasticSearchRepository
             
             case 'text':
                 return [
-                    'match_phrase_prefix' => [
+                    'term' => [
                         $attribute->code => $params[$attribute->code],
                     ]
                 ];

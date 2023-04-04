@@ -293,6 +293,7 @@ class ElasticSearch extends AbstractIndexer
         $attributes = $this->attributeRepository->scopeQuery(function ($query) {
             return $query->where(function ($qb) {
                 return $qb->orWhereIn('code', [
+                    'status',
                     'name',
                     'new',
                     'featured',

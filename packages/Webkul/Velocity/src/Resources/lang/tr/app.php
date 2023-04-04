@@ -155,6 +155,8 @@ return [
         ],
     ],
 
+    'product-removed'  => 'Ürün Yönetici Tarafından Kaldırıldığı İçin Artık Mevcut Değil',
+
     'home'          => [
         'view-all'           => 'Tümünü Görüntüle',
         'add-to-cart'        => 'Sepete Ekle',

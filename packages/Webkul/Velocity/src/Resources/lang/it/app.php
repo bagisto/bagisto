@@ -154,6 +154,8 @@ return [
         ],
     ],
 
+    'product-removed'  => 'Il prodotto non è più disponibile in quanto rimosso dall amministratore',
+
     'home' => [
         'view-all' => 'Mostra tutto',
         'add-to-cart' => 'Aggiungi al Carrello',

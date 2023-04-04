@@ -169,6 +169,8 @@ return [
         ],
     ],
 
+    'product-removed'  => "Le produit n'est plus disponible car supprimé par l'administrateur",
+
     'home' => [
         'view-all' => 'Voir tout',
         'add-to-cart' => 'Ajouter au panier',

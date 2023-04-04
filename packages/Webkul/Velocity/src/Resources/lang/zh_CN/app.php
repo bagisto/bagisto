@@ -172,6 +172,8 @@ return [
         ],
     ],
 
+    'product-removed'  => '产品不再可用，因为管理员已删除',
+
     'home'          => [
         'view-all'           => '查看所有',
         'add-to-cart'        => '添加到购物车',

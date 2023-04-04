@@ -159,6 +159,7 @@
 
             data: function () {
                 return {
+                    'count': 0,
                     'products': [],
                     'storageUrl': '{{ Storage::url('/') }}',
                     'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
@@ -168,12 +169,72 @@
             },
 
             mounted: function () {
-                this.getComparedProducts();
+                this.removeInactiveItems();
 
                 this.activateSlider();
             },
 
             methods: {
+                'removeInactiveItems': function () {
+                    let items = '';
+                    let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
+
+                    let data = {
+                        params: {'data': true}
+                    }
+
+                    if (! this.isCustomer) {
+                        items = this.getStorageValue('compared_product');
+                        items = items ? items.join('&') : '';
+
+                        data = {
+                            params: {
+                                items
+                            }
+                        };
+                    }
+
+                    if (this.isCustomer || (! this.isCustomer && items != "")) {
+                        this.$http.get(url, data)
+                        .then(response => {
+                            this.isProductListLoaded = true;
+
+                            this.products = response.data.products;
+
+                            this.products.forEach(product => {
+                                if (product.status != 1) {
+                                    let existingItems = this.getStorageValue('compared_product');
+                                    let updatedItems = existingItems.filter(item => item != product.id);
+                                    
+                                    this.$set(this, 'products', this.products.filter(product => product.id != product.id));
+
+                                    this.setStorageValue('compared_product', updatedItems);
+                                    
+                                    this.$root.headerItemsCount++;
+
+                                    this.count++;
+                                } 
+                            });
+
+                            if (this.count > 0) {
+                                window.showAlert(
+                                    `alert-info`,
+                                    this.__('shop.general.alert.info'),
+                                    `${this.__('product-removed')}`
+                                );
+                            }
+
+                            this.getComparedProducts();
+                        })
+                        .catch(error => {
+                            this.isProductListLoaded = true;
+                            console.log(this.__('error.something_went_wrong'));
+                        });
+                    } else {
+                        this.isProductListLoaded = true;
+                    }
+                },
+                
                 'getComparedProducts': function () {
                     let items = '';
                     let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;

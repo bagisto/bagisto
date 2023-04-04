@@ -178,6 +178,8 @@ return [
         ],
     ],
 
+    'product-removed'  => 'Product Is No More Available As Removed By Admin',
+
     'home'          => [
         'view-all'           => 'View All',
         'add-to-cart'        => 'Add To Cart',
