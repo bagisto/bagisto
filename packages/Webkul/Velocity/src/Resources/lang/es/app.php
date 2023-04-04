@@ -155,6 +155,8 @@ return [
         ],
     ],
 
+    'product-removed'  => 'El producto ya no está disponible porque lo eliminó el administrador',
+
     'home'          => [
         'view-all'           => 'Ver Todo',
         'add-to-cart'        => 'Añadir al Carrito',

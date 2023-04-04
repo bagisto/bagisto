@@ -151,6 +151,8 @@ return [
         ],
     ],
 
+    'product-removed'  => 'Product Is No More Available As Removed By Admin',
+
     'home' => [
         'view-all' => 'Ver tudo',
         'add-to-cart' => 'Adicionar ao carrinho',

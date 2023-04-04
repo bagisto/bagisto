@@ -156,6 +156,8 @@ return [
         ],
     ],
 
+    'product-removed'  => 'Product is niet meer beschikbaar zoals verwijderd door beheerder',
+
     'home' => [
         'view-all' => 'Bekijk alles',
         'add-to-cart' => 'In Winkelwagen',

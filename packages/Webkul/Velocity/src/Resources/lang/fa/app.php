@@ -151,6 +151,8 @@ return [
         ],
     ],
 
+    'product-removed'  => 'Le produit n est plus disponible car supprimé par l administrateur',
+
     'home' => [
         'view-all' => 'مشاهده همه',
         'add-to-cart' => 'افزودن به سبد خرید',
