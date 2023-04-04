@@ -161,12 +161,14 @@
                                     </datetime>
                                 </div>
 
-                                <div class="control-group date">
+                                <div class="control-group date" :class="[errors.has('ends_till') ? 'has-error' : '']">
                                     <label for="ends_till">{{ __('admin::app.promotions.cart-rules.to') }}</label>
 
                                     <datetime>
-                                        <input type="text" name="ends_till" class="control" value="{{ old('ends_till') ?: $cartRule->ends_till }}"/>
+                                        <input type="text" v-validate="" class="control" name="ends_till" value="{{ old('ends_till') ?: $cartRule->ends_till }}"/>
                                     </datetime>
+
+                                    <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
                                 </div>
 
                                 <div class="control-group">

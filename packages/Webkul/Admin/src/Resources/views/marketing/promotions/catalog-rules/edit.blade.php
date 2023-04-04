@@ -111,7 +111,7 @@
                                     <label for="ends_till">{{ __('admin::app.promotions.catalog-rules.to') }}</label>
                     
                                     <date>
-                                        <input type="text" v-validate="" class="control" id="ends_till" name="ends_till" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.to') }}&quot;" value="{{ old('ends_till') ?: $catalogRule->ends_till }}"/>
+                                        <input type="text" v-validate="" class="control" id="ends_till" name="ends_till" value="{{ old('ends_till') ?: $catalogRule->ends_till }}"/>
                                     </date>
 
                                     <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
