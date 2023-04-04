@@ -1675,6 +1675,7 @@ return [
             'show-search-input-field'               => 'Show Search Input Field',
             'allow-no-of-new-product-homepage'      => 'Allowed number of New Product in Homepage',
             'allow-no-of-featured-product-homepage' => 'Allowed number of Featured Product in Homepage',
+            'allow-no-of-cross-product-productpage' => 'Allowed number of Product in Productpage',
             'width'                                 => 'Width',
             'height'                                => 'Height',
             'cache-small-image'                     => 'Small Image',

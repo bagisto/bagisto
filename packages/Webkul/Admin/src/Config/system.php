@@ -132,10 +132,14 @@ return [
                 'title'      => 'admin::app.admin.system.allow-no-of-new-product-homepage',
                 'type'       => 'number',
                 'validation' => 'min:0',
-            ],
-            [
+            ],[
                 'name'       => 'no_of_featured_product_homepage',
                 'title'      => 'admin::app.admin.system.allow-no-of-featured-product-homepage',
+                'type'       => 'number',
+                'validation' => 'min:0',
+            ],[
+                'name'       => 'no-of-cross-product_productpage',
+                'title'      => 'admin::app.admin.system.allow-no-of-cross-product-productpage',
                 'type'       => 'number',
                 'validation' => 'min:0',
             ],

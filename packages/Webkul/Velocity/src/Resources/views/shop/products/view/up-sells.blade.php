@@ -1,6 +1,9 @@
-@php $productUpSells = $product->up_sells()->get(); @endphp
+@php 
+$productCount = core()->getConfigData('catalog.products.homepage.no-of-cross-product_productpage'); 
+$productUpSells = $product->up_sells()->take($productCount)->get();
+@endphp
 
-@if ($productUpSells->count())
+@if ($productUpSells->count())      
     <card-list-header
         heading="{{ __('shop::app.products.up-sell-title') }}"
         view-all="false"
@@ -41,6 +44,7 @@
                         'addToCartBtnClass' => 'small-padding',
                     ])
                 </slide>
+              
             @endforeach
         </carousel-component>
     </div>
