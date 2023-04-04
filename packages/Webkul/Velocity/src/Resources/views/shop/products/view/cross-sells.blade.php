@@ -1,15 +1,9 @@
-@foreach ($cart->items as $item)
-    @php
-        $product = $item->product;
+@php
+$productCount = core()->getConfigData('catalog.products.product-view-page.no-of-cross-sells-product_productpage'); 
+$products = $product->cross_sells()->take($productCount)->get();
+@endphp
 
-        if ($product->cross_sells()->count()) {
-            $products[] = $product;
-            $products = array_unique($products);
-        }
-    @endphp
-@endforeach
-
-@if (isset($products))
+@if ($products->count())   
     <card-list-header
         heading="{{ __('shop::app.products.cross-sell-title') }}"
         view-all="false"
@@ -23,9 +17,7 @@
             pagination-enabled="hide"
             id="upsell-products-carousel"
             :slides-count="{{ $product->cross_sells()->count() }}">
-            
-            @foreach($products as $product)
-                @foreach ($product->cross_sells()->paginate(2) as $index => $crossSellProduct)
+                @foreach ($products as $index => $crossSellProduct)
                     <slide slot="slide-{{ $index }}">
                         @include ('shop::products.list.card', [
                             'product' => $crossSellProduct,
@@ -33,7 +25,6 @@
                         ])
                     </slide>
                 @endforeach
-            @endforeach
         </carousel-component>
     </div>
 
@@ -44,9 +35,7 @@
             id="upsell-products-carousel"
             navigation-enabled="hide"
             pagination-enabled="hide">
-
-            @foreach($products as $product)
-                @foreach ($product->cross_sells()->paginate(2) as $index => $crossSellProduct)
+                @foreach ($products as $index => $crossSellProduct)
                     <slide slot="slide-{{ $index }}">
                         @include ('shop::products.list.card', [
                             'product' => $crossSellProduct,
@@ -54,7 +43,6 @@
                         ])
                     </slide>
                 @endforeach
-            @endforeach
         </carousel-component>
     </div>
 @endif

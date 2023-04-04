@@ -197,8 +197,8 @@
 
         <div class="related-products">
             @include('shop::products.view.related-products')
-            
             @include('shop::products.view.up-sells')
+            @include('shop::products.view.cross-sells')
         </div>
     </div>
 

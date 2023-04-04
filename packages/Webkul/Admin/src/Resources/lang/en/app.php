@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -1126,14 +1127,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Reviews',
-            'edit-title'  => 'Edit Review',
-            'rating'      => 'Rating',
-            'status'      => 'Status',
-            'comment'     => 'Comment',
-            'pending'     => 'Pending',
-            'approved'    => 'Approve',
-            'disapproved' => 'Disapprove',
+            'title'          => 'Reviews',
+            'edit-title'     => 'Edit Review',
+            'rating'         => 'Rating',
+            'status'         => 'Status',
+            'comment'        => 'Comment',
+            'pending'        => 'Pending',
+            'approved'       => 'Approve',
+            'disapproved'    => 'Disapprove',
+            'update-success' => 'Review updated successfully',
+            'delete-success' => 'Review deleted successfully',            
         ],
 
         'subscribers' => [
@@ -1528,6 +1531,7 @@ return [
         'system' => [
             'catalog'                               => 'Catalog',
             'homepage'                              => 'Homepage configuration',
+            'product-view-page'                     => 'Product view page configuration',
             'allow-out-of-stock-items'              => 'Allow out of stock items',
             'products'                              => 'Products',
             'guest-checkout'                        => 'Guest Checkout',
@@ -1675,6 +1679,9 @@ return [
             'show-search-input-field'               => 'Show Search Input Field',
             'allow-no-of-new-product-homepage'      => 'Allowed number of New Product in Homepage',
             'allow-no-of-featured-product-homepage' => 'Allowed number of Featured Product in Homepage',
+            'allow-no-of-related-productpage'       => 'Allowed number of Related Product in Productpage',
+            'allow-no-of-up-sells-productpage'      => 'Allowed number of Up-Sells Product in Productpage',
+            'allow-no-of-cross-sells-productpage'   => 'Allowed number of Cross-Sells Product in Productpage',
             'width'                                 => 'Width',
             'height'                                => 'Height',
             'cache-small-image'                     => 'Small Image',
