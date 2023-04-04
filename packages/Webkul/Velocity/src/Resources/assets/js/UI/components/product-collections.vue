@@ -26,7 +26,7 @@
                             v-for="(product, index) in productCollections">
                             <product-card
                                 :list="list"
-                                :guestReviewStatus="guestReviewStatus"
+                                :guest-review-status="guestReviewStatus"
                                 :product="product">
                             </product-card>
                         </slide>
@@ -41,7 +41,7 @@
                     add-class-wrapper=""
                     v-if="showRecentlyViewed === 'true'">
                 </recently-viewed>
-            </div>
+            </div>  
         </template>
     </div>
 </template>
