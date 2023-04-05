@@ -63,9 +63,9 @@
                             </div>
 
                             {{-- desktop header --}}
-                            <div class="vc-small-screen container" v-if='$root.currentScreen > 992'>
-                                @include('shop::layouts.header.desktop')
-                            </div>
+
+                            @include('shop::layouts.header.desktop')
+
 
                         </header>
 

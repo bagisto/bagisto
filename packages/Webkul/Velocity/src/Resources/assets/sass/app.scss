@@ -1234,50 +1234,50 @@ i.within-circle {
     }
 }
 
-@media only screen and (max-width: 280px) {
-    .filters-container {
-        .toolbar-wrapper {
-            div {
-                #sort-by {
-                    select {
-                        margin-left: -6px !important;
-                        top: -6px !important;
-                        padding: 5px 0px !important;
-                    }
+// @media only screen and (max-width: 280px) {
+//     .filters-container {
+//         .toolbar-wrapper {
+//             div {
+//                 #sort-by {
+//                     select {
+//                         margin-left: -6px !important;
+//                         top: -6px !important;
+//                         padding: 5px 0px !important;
+//                     }
 
-                    .selective-div {
-                        width: 75px !important;
-                    }
+//                     .selective-div {
+//                         width: 75px !important;
+//                     }
 
-                    .select-icon-container {
-                        .select-icon {
-                            left: 53px !important;
-                        }
-                    }
-                }
+//                     .select-icon-container {
+//                         .select-icon {
+//                             left: 53px !important;
+//                         }
+//                     }
+//                 }
 
-                #limit-by {
-                    select {
-                        margin-left: -6px !important;
-                        top: -6px !important;
-                        padding: 5px 0px !important;
-                    }
+//                 #limit-by {
+//                     select {
+//                         margin-left: -6px !important;
+//                         top: -6px !important;
+//                         padding: 5px 0px !important;
+//                     }
 
-                    .selective-div {
-                        width: 45px !important;
-                    }
+//                     .selective-div {
+//                         // width: 45px !important;
+//                     }
 
-                    .select-icon-container {
-                        .select-icon {
-                            left: 43px !important;
-                        }
-                    }
-                }
+//                     .select-icon-container {
+//                         .select-icon {
+//                             left: 43px !important;
+//                         }
+//                     }
+//                 }
 
-            }
-        }
-    }
-}
+//             }
+//         }
+//     }
+// }
 
 @media only screen and (max-width: 420px) {
     .sale-summary {
