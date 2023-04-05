@@ -581,7 +581,10 @@
                         this.address.billing.address_id = null;
 
                         setTimeout(() => {
-                            if (this.$refs.billingSaveAsAddress && this.$refs.billingSaveAsAddress.checked) {
+                            if (
+                                this.$refs.billingSaveAsAddress 
+                                && this.$refs.billingSaveAsAddress.checked
+                            ) {
                                 this.$refs.billingSaveAsAddress.setAttribute('disabled', 'disabled');
                             }
                         }, 0);
