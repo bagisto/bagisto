@@ -1103,8 +1103,6 @@ return [
             'disapproved'    => 'Disapprove',
             'update-success' => 'Review updated successfully',
             'delete-success' => 'Review deleted successfully',
-
-
         ],
 
         'subscribers' => [
