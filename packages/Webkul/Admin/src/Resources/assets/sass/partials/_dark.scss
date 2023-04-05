@@ -305,6 +305,12 @@
         }
     }
 
+    .dropdown-btn.dropdown-toggle {
+        background-color: #02080d;
+        color: hsla(0,0%,100%,.8);
+        border: 1px solid #24384c;
+    }
+
     .modal-container {
         background: $dark-mode-body-background-color;
 
