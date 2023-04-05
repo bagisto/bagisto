@@ -106,6 +106,7 @@
                         </li>
 
                         <li>
+                            <span v-text="currency.symbol"></span>
                             <span v-text="currency.code"></span>
 
                             <i
