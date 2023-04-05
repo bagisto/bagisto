@@ -184,10 +184,9 @@ export default {
                         response.data.message
                     );
                     
-                    if(! this.cartItems.length && this.isCheckoutPage()) {
+                    if (! this.cartItems.length && this.isCheckoutPage()) {
                         window.location.href = this.checkoutRoute;  
                     }
-
                 })
                 .catch(exception => {
                     console.log(this.__('error.something_went_wrong')); 
