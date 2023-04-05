@@ -1,6 +1,6 @@
 @php
-$productCount = core()->getConfigData('catalog.products.product-view-page.no-of-cross-sells-product_productpage'); 
-$products = $product->cross_sells()->take($productCount)->get();
+    $productCount = core()->getConfigData('catalog.products.product-view-page.no_of_cross_sells_product_productpage'); 
+    $products     = $product->cross_sells()->take($productCount)->get();
 @endphp
 
 @if ($products->count())   

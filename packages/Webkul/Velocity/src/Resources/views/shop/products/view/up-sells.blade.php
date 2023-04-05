@@ -1,5 +1,5 @@
 @php 
-    $productCount = core()->getConfigData('catalog.products.product-view-page.no_of_up_sells_product_productpage'); 
+    $productCount   = core()->getConfigData('catalog.products.product-view-page.no_of_up_sells_product_productpage'); 
     $productUpSells = $product->up_sells()->take($productCount)->get();
 @endphp
 

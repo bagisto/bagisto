@@ -155,7 +155,7 @@ return [
                 'type'       => 'number', 
                 'validation' => 'min:0',
             ], [
-                'name'       => 'no-of-cross-sells-product_productpage',
+                'name'       => 'no_of_cross_sells_product_productpage',
                 'title'      => 'admin::app.admin.system.allow-no-of-cross-sells-productpage',
                 'type'       => 'number',
                 'validation' => 'min:0',

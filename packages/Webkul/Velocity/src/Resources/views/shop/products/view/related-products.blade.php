@@ -1,6 +1,6 @@
 @php
-$productCount = core()->getConfigData('catalog.products.product-view-page.no_of_related_product_productpage'); 
-$relatedProducts = $product->related_products()->take($productCount)->get();
+    $productCount    = core()->getConfigData('catalog.products.product-view-page.no_of_related_product_productpage'); 
+    $relatedProducts = $product->related_products()->take($productCount)->get();
 @endphp
 
 @if ($relatedProducts->count())
