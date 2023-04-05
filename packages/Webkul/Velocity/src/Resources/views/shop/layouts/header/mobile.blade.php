@@ -35,7 +35,7 @@
             <a href="{{ route('shop.checkout.cart.index') }}" class="unset">
                 <i class="material-icons text-down-3">shopping_cart</i>
                 <div class="badge-wrapper">
-                    <span class="badge">{{ $cartItemsCount }}</span>
+                    <span class="badge">{{ $cartItemsCount > 0 ? $cartItemsCount : '' }}</span>
                 </div>
             </a>
         </div>
