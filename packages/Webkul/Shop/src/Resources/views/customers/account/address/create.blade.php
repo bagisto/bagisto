@@ -200,7 +200,7 @@
                         type="text"
                         name="phone"
                         value="{{ old('phone') }}"
-                        v-validate="'required'"
+                        v-validate="'required|numeric|max:15|min:6'"
                         data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.phone') }}&quot;">
 
                     <span

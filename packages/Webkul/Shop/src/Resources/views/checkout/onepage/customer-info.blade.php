@@ -322,7 +322,7 @@
                 id="billing[phone]"
                 type="text"
                 name="billing[phone]"
-                v-validate="'required|numeric'"
+                v-validate="'required|numeric|max:15|min:6'"
                 v-model="address.billing.phone"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"/>
 
@@ -660,7 +660,7 @@
                     type="text"
                     name="shipping[phone]"
                     v-model="address.shipping.phone"
-                    v-validate="'required|numeric'"
+                    v-validate="'required|numeric|max:15|min:6'"
                     data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"/>
 
                 <span

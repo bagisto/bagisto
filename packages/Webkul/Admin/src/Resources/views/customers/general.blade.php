@@ -150,7 +150,7 @@
                         id="phone"
                         name="phone"
                         value="{{ $customer->phone }}"
-                        v-validate="'numeric'"
+                        v-validate="'numeric|max:15|min:6'"
                         data-vv-as="&quot;{{ __('admin::app.customers.customers.phone') }}&quot;">
 
                     <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>

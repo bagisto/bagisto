@@ -236,7 +236,7 @@
             type="text"
             name="shipping[phone]"
             v-model="address.shipping.phone"
-            v-validate="'required|numeric|max:15|min:10'"
+            v-validate="'required|numeric|max:15|min:6'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"
             @change="validateForm('address-form')" />
 
@@ -525,7 +525,7 @@
             type="text"
             name="billing[phone]"
             v-model="address.billing.phone"
-            v-validate="'required|numeric|max:15|min:10'"
+            v-validate="'required|numeric|max:15|min:6'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;"
             @change="validateForm('address-form')" />
 
