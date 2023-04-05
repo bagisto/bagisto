@@ -143,7 +143,7 @@
                 </label>
 
                 <div class="col-12">
-                    <input value="{{ old('phone') ?? $customer->phone }}" name="phone" type="text"/>
+                    <input value="{{ old('phone') ?? $customer->phone }}" v-validate="'numeric|max:15|min:6'"  name="phone" type="text"/>
                     <span class="control-error" v-if="errors.has('phone')" v-text="errors.first('phone')"></span>
                 </div>
             </div>
