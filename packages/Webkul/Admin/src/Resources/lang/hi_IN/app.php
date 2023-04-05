@@ -1090,14 +1090,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'समीक्षा',
-            'edit-title'  => 'समीक्षा संपादित करें',
-            'rating'      => 'रेटिंग',
-            'status'      => 'स्थिति',
-            'comment'     => 'टिप्पणी',
-            'pending'     => 'लंबित',
-            'approved'    => 'मंजूर',
-            'disapproved' => 'अस्वीकार',
+            'title'          => 'समीक्षा',
+            'edit-title'     => 'समीक्षा संपादित करें',
+            'rating'         => 'रेटिंग',
+            'status'         => 'स्थिति',
+            'comment'        => 'टिप्पणी',
+            'pending'        => 'लंबित',
+            'approved'       => 'मंजूर',
+            'disapproved'    => 'अस्वीकार',
+            'update-success' => 'समीक्षा सफलतापूर्वक अपडेट की गई',
+            'delete-success' => 'समीक्षा सफलतापूर्वक हटाई गई',
         ],
 
         'subscribers' => [

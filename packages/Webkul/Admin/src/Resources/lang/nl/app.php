@@ -1086,14 +1086,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Recensies',
-            'edit-title'  => 'Review bewerken',
-            'rating'      => 'Beoordeling',
-            'status'      => 'Status',
-            'comment'     => 'Commentaar',
-            'pending'     => 'In afwachting',
-            'approved'    => 'Goedkeuren',
-            'disapproved' => 'Afkeuren',
+            'title'          => 'Recensies',
+            'edit-title'     => 'Review bewerken',
+            'rating'         => 'Beoordeling',
+            'status'         => 'Status',
+            'comment'        => 'Commentaar',
+            'pending'        => 'In afwachting',
+            'approved'       => 'Goedkeuren',
+            'disapproved'    => 'Afkeuren',
+            'update-success' => 'Beoordeling succesvol bijgewerkt',
+            'delete-success' => 'Beoordeling succesvol verwijderd',
         ],
 
         'subscribers' => [

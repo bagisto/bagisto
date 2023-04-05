@@ -1094,14 +1094,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Reviews',
-            'edit-title'  => 'Edit Review',
-            'rating'      => 'Rating',
-            'status'      => 'Status',
-            'comment'     => 'Comment',
-            'pending'     => 'Pending',
-            'approved'    => 'Approve',
-            'disapproved' => 'Disapprove',
+            'title'          => 'রিভিউ',
+            'edit-title'     => 'পর্যালোচনা সম্পাদনা করুন',
+            'rating'         => 'রেটিং',
+            'status'         => 'স্ট্যাটাস',
+            'comment'        => 'মন্তব্য করুন',
+            'pending'        => 'বিচারাধীন',
+            'approved'       => 'অনুমোদন করুন',
+            'disapproved'    => 'অস্বীকৃতি',
+            'update-success' => 'পর্যালোচনা সফলভাবে আপডেট করা হয়েছে',
+            'delete-success' => 'পর্যালোচনা সফলভাবে মুছে ফেলা হয়েছে',
         ],
 
         'subscribers' => [
@@ -1199,7 +1201,7 @@ return [
             'code-format'                    => 'কোড ফরম্যাট',
             'alphanumeric'                   => 'আলফানিউমেরিক',
             'alphabetical'                   => 'বর্ণানুক্রমিক',
-            'numeric'                        => 'সংখ্যাসূচক',
+            'numeric'                         => 'সংখ্যাসূচক',
             'code-prefix'                    => 'কোড উপসর্গ',
             'code-suffix'                    => 'কোড প্রত্যয়',
             'generate'                       => 'তৈরি করুন',
@@ -1463,8 +1465,8 @@ return [
 
     'admin' => [
         'emails' => [
-            'email'              => 'email',
-            'notification_label' => 'Notifications',
+            'email'              => 'ইমেইল',
+            'notification_label' => 'বিজ্ঞপ্তি',
             'notifications'      => [
                 'verification'                                     => 'গ্রাহক নিবন্ধনের পরে একটি যাচাইকরণ ই-মেইল পাঠান',
                 'registration'                                     => 'গ্রাহক নিবন্ধনের পরে একটি নিশ্চিতকরণ ই-মেইল পাঠান',

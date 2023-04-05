@@ -1070,14 +1070,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Avaliações',
-            'edit-title'  => 'Editar Avaliação',
-            'rating'      => 'Classificação',
-            'status'      => 'Status',
-            'comment'     => 'Comentar',
-            'pending'     => 'Pendente',
-            'approved'    => 'Aprovado',
-            'disapproved' => 'Desaprovar',
+            'title'          => 'Avaliações',
+            'edit-title'     => 'Editar Avaliação',
+            'rating'         => 'Classificação',
+            'status'         => 'Status',
+            'comment'        => 'Comentar',
+            'pending'        => 'Pendente',
+            'approved'       => 'Aprovado',
+            'disapproved'    => 'Desaprovar',
+            'update-success' => 'Revisão atualizada com sucesso',
+            'delete-success' => 'Comentário excluído com sucesso',
         ],
 
         'subscribers' => [

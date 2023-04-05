@@ -1112,14 +1112,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Opiniones',
-            'edit-title'  => 'Editar opinión',
-            'rating'      => 'Calificación',
-            'status'      => 'Estado',
-            'comment'     => 'Comentario',
-            'pending'     => 'Pendiente',
-            'approved'    => 'Aprobado',
-            'disapproved' => 'Desaprobado',
+            'title'          => 'Opiniones',
+            'edit-title'     => 'Editar opinión',
+            'rating'         => 'Calificación',
+            'status'         => 'Estado',
+            'comment'        => 'Comentario',
+            'pending'        => 'Pendiente',
+            'approved'       => 'Aprobado',
+            'disapproved'    => 'Desaprobado',
+            'update-success' => 'Revisión actualizada con éxito',
+            'delete-success' => 'Reseña eliminada con éxito',
         ],
 
         'subscribers' => [
