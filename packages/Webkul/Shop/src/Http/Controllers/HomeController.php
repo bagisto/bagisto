@@ -30,9 +30,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
         $sliderData = $this->sliderRepository->getActiveSliders();
+        $guestReviewStatus = core()->getConfigData('catalog.products.review.guest_review');
+        $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage') ?: 10;
+        $direction = core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr';
 
-        return view($this->_config['view'], compact('sliderData'));
+        $config = ['guestReviewStatus' => $guestReviewStatus , 'count' => $count , 'direction' => $direction];
+
+        return view($this->_config['view'], compact('sliderData','config'));
     }
 
     /**
