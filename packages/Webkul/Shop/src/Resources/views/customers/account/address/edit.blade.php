@@ -129,7 +129,7 @@
                     core()->getConfigData('customer.address.information.street_lines')
                     && core()->getConfigData('customer.address.information.street_lines') > 1
                 )
-                    <div class="control-group" style="margin-top: -25px;">
+                    <div class="control-group" style="margin-top: -10px;">
                         @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                             <input
                                 class="control"
