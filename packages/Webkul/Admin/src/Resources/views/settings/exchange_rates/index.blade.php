@@ -12,7 +12,7 @@
             </div>
 
             <div class="page-action">
-                @if(core()->getAllCurrencies()->count() > 1) 
+                @if (core()->getAllCurrencies()->count() > 1) 
                     <a href="{{ route('admin.exchange_rates.update_rates') }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.exchange_rates.update-rates') }}
                     </a>
