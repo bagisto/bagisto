@@ -1230,6 +1230,12 @@ return [
             'categories'                     => 'Catégories',
             'attribute_family'               => 'Famille d\'attributs',
             'mass-delete-success'            => 'Tous les coupons sélectionnés ont été supprimés avec succès.',
+         
+            'coupons' => [
+                'create-success' => 'Coupon créé avec succès',
+                'update-success' => 'Coupon mis à jour avec succès',
+                'delete-success' => 'Coupon supprimé avec succès',
+            ],
         ],
 
         'catalog-rules' => [
@@ -1472,6 +1478,8 @@ return [
         'already-taken'             => 'Le :name a déjà été pris.',
         'order-pending'             => 'Impossible de supprimer le compte :name car certaines commandes sont en attente ou en cours de traitement.',
         'something-went-wrong'      => 'Something went wrong!',
+        'create-success'            => ':name créé avec succès.',
+        
     ],
 
     'validations' => [

@@ -1203,6 +1203,12 @@ return [
             'parent-categories'              => 'Categorieën (Alleen ouder)',
             'categories'                     => 'Categorieën',
             'attribute_family'               => 'Kenmerk Familie',
+
+            'coupons' => [
+                'create-success' => 'Coupon succesvol aangemaakt',
+                'update-success' => 'Coupon succesvol bijgewerkt',
+                'delete-success' => 'Coupon succesvol verwijderd',
+            ],
         ],
 
         'catalog-rules' => [
@@ -1439,6 +1445,8 @@ return [
         'already-taken'           => 'The :name is al bezet.',
         'order-pending'           => 'Kan account niet verwijderen omdat sommige bestelling (en) in behandeling of in behandeling zijn.',
         'something-went-wrong'    => 'Something went wrong!',
+        'create-success'          => ':name succesvol aangemaakt.',
+
     ],
 
     'validations' => [
