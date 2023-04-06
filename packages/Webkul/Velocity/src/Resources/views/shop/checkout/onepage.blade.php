@@ -379,6 +379,12 @@
                     },
 
                     saveAddress: async function () {
+                        if (this.showPaymentSection || this.showSummarySection) {
+                            this.showPaymentSection = false;
+                            
+                            this.showSummarySection = false;
+                        }
+                        
                         this.disable_button = true;
                         this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
 
