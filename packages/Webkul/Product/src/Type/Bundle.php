@@ -75,7 +75,7 @@ class Bundle extends AbstractType
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
-     * @param \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
+     * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
      * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionRepository  $productBundleOptionRepository
@@ -234,8 +234,11 @@ class Bundle extends AbstractType
         $priceHtml .= '<div class="price-from">';
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
+            $discountPercentage = round(((((int) $prices['from']['regular_price']['price']) - ((int) $prices['from']['final_price']['price'])) / ((int) $prices['from']['regular_price']['price'])) * 100);
+
             $priceHtml .= '<span class="bundle-regular-price">' . $prices['from']['regular_price']['formatted_price'] . '</span>'
-                . '<span class="bundle-special-price">' . $prices['from']['final_price']['formatted_price'] . '</span>';
+                . '<span class="bundle-special-price">' . $prices['from']['final_price']['formatted_price'] . '</span>'
+                . '<span class="card-discount">(' . $discountPercentage . '% off)</span>';
         } else {
             $priceHtml .= '<span>' . $prices['from']['regular_price']['formatted_price'] . '</span>';
         }
@@ -246,8 +249,11 @@ class Bundle extends AbstractType
             $priceHtml .= '<span class="bundle-to">To</span>';
 
             if ($prices['to']['regular_price']['price'] != $prices['to']['final_price']['price']) {
+                $discountPercentage = round(((((int) $prices['to']['regular_price']['price']) - ((int)  $prices['to']['final_price']['price'] )) / ((int) $prices['to']['regular_price']['price'])) * 100);
+
                 $priceHtml .= '<span class="bundle-regular-price">' . $prices['to']['regular_price']['formatted_price'] . '</span>'
-                    . '<span class="bundle-special-price">' . $prices['to']['final_price']['formatted_price'] . '</span>';
+                    . '<span class="bundle-special-price">' . $prices['to']['final_price']['formatted_price'] . '</span>'
+                    . '<span class="card-discount">(' . $discountPercentage . '% off)</span>';
             } else {
                 $priceHtml .= '<span>' . $prices['to']['regular_price']['formatted_price'] . '</span>';
             }
