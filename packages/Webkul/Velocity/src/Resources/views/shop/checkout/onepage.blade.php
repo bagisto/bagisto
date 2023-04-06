@@ -386,11 +386,9 @@
                         }
                         
                         this.disable_button = true;
-                        this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
-
-                        if (this.saveAddressCheckbox.prop('checked') == true) {
-                            this.saveAddressCheckbox.attr('disabled', 'disabled');
-                            this.saveAddressCheckbox.prop('checked', true);
+                   
+                        if (this.$refs.billingSaveAsAddress && this.$refs.billingSaveAsAddress.checked) {
+                            this.$refs.billingSaveAsAddress.setAttribute('disabled', 'disabled');
                         }
 
                         if (this.allAddress.length > 0) {
@@ -436,7 +434,6 @@
                                 }
                             });
                         }
-
                         this.$http.post("{{ route('shop.checkout.save_address') }}", this.address)
                             .then(response => {
                                 this.disable_button = false;
@@ -588,6 +585,15 @@
                         this.new_billing_address = true;
                         this.isPlaceOrderEnabled = false;
                         this.address.billing.address_id = null;
+
+                        setTimeout(() => {
+                            if (
+                                this.$refs.billingSaveAsAddress 
+                                && this.$refs.billingSaveAsAddress.checked
+                            ) {
+                                this.$refs.billingSaveAsAddress.setAttribute('disabled', 'disabled');
+                            }
+                        }, 0);
                     },
 
                     newShippingAddress: function () {
@@ -611,7 +617,22 @@
                             this.validateForm('address-form');
                         }, 0);
                     }
-                }
+                },
+          
+                watch: {
+                    address : {
+                        handler: function(v) {
+                            if (
+                                this.$refs.billingSaveAsAddress 
+                                && this.$refs.billingSaveAsAddress.hasAttribute('disabled')
+                            ) {
+                                this.$refs.billingSaveAsAddress.removeAttribute('disabled');
+                                this.$refs.billingSaveAsAddress.checked = false;
+                            }
+                        },
+                        deep: true
+                    }
+                },
             });
 
             Vue.component('shipping-section', {
