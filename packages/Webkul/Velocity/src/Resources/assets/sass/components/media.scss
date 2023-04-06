@@ -3,7 +3,7 @@
 }
 
 @media screen and (max-width: 1080px) {
-    .advertisement-grid { 
+    .advertisement-grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 
@@ -451,8 +451,6 @@
                 width: 100%;
 
                 .selectdiv {
-                    display: none;
-
                     + input {
                         width: calc(100% - 40px);
                         border: 1px solid $theme-color;
