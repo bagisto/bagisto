@@ -9,11 +9,17 @@
     "type": "project",
     "require": {
         "php": "^8.1",
+        "ext-curl": "*",
+        "ext-intl": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-tokenizer": "*",
         "astrotomic/laravel-translatable": "^11.0.0",
         "bagisto/laravel-datafaker": "^2.0@alpha",
         "bagisto/rest-api": "^1.0",
         "bagistobrasil/bagisto-product-social-share": "^0.1.2",
-        "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "^2.0.0",
         "cviebrock/laravel-elasticsearch": "^9.0",
         "diglactic/laravel-breadcrumbs": "^7.0",
@@ -39,6 +45,7 @@
         "spatie/laravel-sitemap": "^6.1"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
         "codeception/codeception": "*@dev",
         "codeception/module-asserts": "^3.0.0",
         "codeception/module-filesystem": "^3.0.0",
@@ -46,6 +53,7 @@
         "codeception/module-rest": "^3.0.0",
         "codeception/module-webdriver": "^3.0.0",
         "filp/whoops": "^2.0",
+        "laravel/pint": "^1.8",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5"
