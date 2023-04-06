@@ -106,6 +106,7 @@
                         </li>
 
                         <li>
+                            <span v-text="currency.symbol"></span>
                             <span v-text="currency.code"></span>
 
                             <i
@@ -284,6 +285,7 @@
                                 class="unset"
                                 :href="`?currency=${currency.code}`"
                             >
+                                <span v-text="currency.symbol"></span>
                                 <span v-text="currency.code"></span>
                             </a>
                         </li>
