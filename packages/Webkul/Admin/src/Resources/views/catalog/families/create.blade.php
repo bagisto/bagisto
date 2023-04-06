@@ -289,9 +289,9 @@
                 addGroup: function (formScope) {
                     var self = this;
 
-                    this.$validator.validateAll(formScope).then(function (result) {
+                    self.$validator.validateAll(formScope).then(function (result) {
                         if (result) {
-
+                            
                             var filteredGroups = groups.filter(function(group) {
                                 return self.group.name.trim() === group.name.trim()
                             })
@@ -312,10 +312,13 @@
 
                                 groups = self.sortGroups();
 
-                                this.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
+                                self.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
-                                self.$set(self.$root.modalIds, 'addGroupForm', false);
+                                 self.$validator.pause();
+                                 self.$set(self.$root.modalIds,'addGroupForm', false);
+                               
                             }
+                            
                         }
                     });
                 },
@@ -350,6 +353,7 @@
 
                                 this.editGroup = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
+                                self.$validator.pause();
                                 self.$set(self.$root.modalIds, 'editGroupForm', false);
                             }
                         }
