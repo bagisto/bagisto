@@ -26,6 +26,7 @@
                             v-for="(product, index) in productCollections">
                             <product-card
                                 :list="list"
+                                :can-guest-review="canGuestReview"
                                 :product="product">
                             </product-card>
                         </slide>
@@ -40,7 +41,7 @@
                     add-class-wrapper=""
                     v-if="showRecentlyViewed === 'true'">
                 </recently-viewed>
-            </div>
+            </div>  
         </template>
     </div>
 </template>
@@ -55,6 +56,10 @@
             productId: {
                 type: String,
                 default: ''
+            },
+            canGuestReview: {
+                type: Boolean,
+                default: 'false'
             },
             productTitle: String,
             productRoute: String,

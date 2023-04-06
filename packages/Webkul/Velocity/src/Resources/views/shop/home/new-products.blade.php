@@ -1,13 +1,8 @@
-@php
-    $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage') ?: 10;
-
-    $direction = core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr';
-@endphp
-
 {!! view_render_event('bagisto.shop.new-products.before') !!}
 
 <product-collections
     count="{{ (int) $count }}"
+    :can-guest-review="{{ (bool) $guest_review_status ? 'true' : 'false'}}"
     product-id="new-products-carousel"
     product-title="{{ __('shop::app.home.new-products') }}"
     product-route="{{ route('velocity.category.details', ['category-slug' => 'new-products', 'count' => $count]) }}"
