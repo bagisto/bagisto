@@ -423,7 +423,7 @@
                 },
 
                 getSuperAttributes: function() {
-                    this.$http.get ("{{ route('admin.catalog.product.super-attributes', $product) }}")
+                    this.$http.get ("{{ route('admin.catalog.product.super-attributes', $product->id) }}")
                         .then ((response) => {
                             this.superAttributes = response.data.data;
                         })
@@ -495,7 +495,7 @@
                 },
 
                 getSuperAttributes: function() {
-                    this.$http.get ("{{ route('admin.catalog.product.super-attributes', $product) }}")
+                    this.$http.get ("{{ route('admin.catalog.product.super-attributes', $product->id) }}")
                         .then ((response) => {
                             this.superAttributes = response.data.data;
                         })

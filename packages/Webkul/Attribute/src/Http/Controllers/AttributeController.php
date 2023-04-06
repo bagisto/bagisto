@@ -200,10 +200,12 @@ class AttributeController extends Controller
     /**
      * Get super attributes of product.
      *
-     * @param object $product
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
+     * @return  \Illuminate\Http\JsonResponse
      */
-    public function productSuperAttributes($product) {
+    public function productSuperAttributes($id) {
+        $product = $this->productRepository->findOrFail($id);
+
         $superAttributes = $this->productRepository->getSuperAttributes($product);
 
         return response()->json([
