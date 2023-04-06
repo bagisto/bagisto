@@ -314,8 +314,8 @@
 
                                 self.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
-                                 self.$validator.pause();
-                                 self.$set(self.$root.modalIds,'addGroupForm', false);
+                                self.$set(self.$root.modalIds,'addGroupForm', false);
+                                self.$validator.pause();
                                
                             }
                             
