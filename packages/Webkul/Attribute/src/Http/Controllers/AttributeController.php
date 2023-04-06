@@ -203,7 +203,8 @@ class AttributeController extends Controller
      * @param  int  $id
      * @return  \Illuminate\Http\JsonResponse
      */
-    public function productSuperAttributes($id) {
+    public function productSuperAttributes($id) 
+    {
         $product = $this->productRepository->findOrFail($id);
 
         $superAttributes = $this->productRepository->getSuperAttributes($product);
