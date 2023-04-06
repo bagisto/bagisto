@@ -66,7 +66,6 @@
 
                             @include('shop::layouts.header.desktop')
 
-
                         </header>
 
                         <div class="">

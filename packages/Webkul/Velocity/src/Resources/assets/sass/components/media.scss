@@ -57,7 +57,6 @@
         }
     }
 
-
     .vc-full-screen {
         display: block !important;
     }
@@ -199,7 +198,6 @@
                             }
                         }
                     }
-
 
                     .badge-wrapper,
                     .badge-container {
@@ -475,7 +473,7 @@
                 width: 100%;
 
                 .selectdiv {
-
+                    display: none;
 
                     + input {
                         width: calc(100% - 40px);
@@ -655,7 +653,6 @@
                             z-index: 2;
                         }
                     }
-
 
                     @media only screen and (max-width: 700px) {
 
@@ -1061,9 +1058,6 @@
     #home-right-bar-container {
         position: unset;
         top: unset;
-
-
-
     }
 
     .modal-container {
@@ -1179,7 +1173,6 @@
 
 @media only screen and (max-width: 3092px) {
     .selective-div {
-
         width: -webkit-fill-available !important;
         -webkit-appearance: none !important;
 

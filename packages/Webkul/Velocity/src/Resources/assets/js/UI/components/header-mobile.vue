@@ -697,10 +697,9 @@ export default {
         },
 
         screenSize: function () {
-            if(this.screenSize >= 600 && this.screenSize <992) {
+            if(this.screenSize >= 600 && this.screenSize < 992) {
                 this.isTabletMobileScreenSearch=true;
-            }
-            else {
+            } else {
             this.isTabletMobileScreenSearch=false;
             }
 
