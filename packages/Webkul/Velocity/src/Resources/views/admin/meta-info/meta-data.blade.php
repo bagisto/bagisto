@@ -18,6 +18,7 @@
 
 @push('css')
     <style>
+     
         @media only screen and (max-width: 680px){
             .content-container .content .page-header .page-title {
                 float: left;
@@ -37,6 +38,7 @@
                 margin-left: 0px !important;
             }
         }
+
     </style>
 @endpush
 

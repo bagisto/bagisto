@@ -295,10 +295,10 @@
                             })
 
                             if (filteredGroups.length) {
-                                const field = this.$validator.fields.find({ name: 'name', scope: 'add-group-form' });
+                                const field = this_this.$validator.fields.find({ name: 'name', scope: 'add-group-form' });
 
                                 if (field) {
-                                    this.$validator.errors.add({
+                                    this_this.$validator.errors.add({
                                         id: field.id,
                                         field: 'name',
                                         msg: "{{ __('admin::app.catalog.families.group-exist-error') }}",
@@ -310,9 +310,9 @@
 
                                 groups = this_this.sortGroups();
 
-                                this.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
+                                this_this.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
-                                self.$set(self.$root.modalIds, 'addGroupForm', false);
+                                this_this.$set(this_this.$root.modalIds, 'addGroupForm', false);
                             }
                         }
                     });
