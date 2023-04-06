@@ -61,10 +61,15 @@
 
     <div class="full-content-wrapper">
         {!! view_render_event('bagisto.shop.home.content.before') !!}
-
+     
             @if ($velocityMetaData)
-       
-                {!! Blade::render($velocityMetaData->home_page_content, ['guest_review_status' => $config['guestReviewStatus'], 'count' => $config['count'],'direction' => $config['direction']]) !!}
+            {!!
+                Blade::render($velocityMetaData->home_page_content, [
+                'guestReviewStatus' => $config['guestReviewStatus'],
+                'count' => $config['count'],
+                'direction' => $config['direction'],
+                ])
+            !!}
             @else
                 @include('shop::home.advertisements.advertisement-four')
                 @include('shop::home.featured-products')

@@ -29,16 +29,12 @@ class HomeController extends Controller
      * @return \Illuminate\View\View
      */
     public function index()
-    {
-        
-        $sliderData = $this->sliderRepository->getActiveSliders();
-        $guestReviewStatus = core()->getConfigData('catalog.products.review.guest_review');
-        $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage') ?: 10;
-        $direction = core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr';
-
-        $config = ['guestReviewStatus' => $guestReviewStatus , 'count' => $count , 'direction' => $direction];
-
-        return view($this->_config['view'], compact('sliderData','config'));
+    {        
+        return view($this->_config['view'],['sliderData' => $this->sliderRepository->getActiveSliders(),
+                                            'config'     => ['guestReviewStatus' => core()->getConfigData('catalog.products.review.guest_review'),
+                                            'count'      => core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage') ?: 10, 
+                                            'direction'  => core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr']
+                                            ]);
     }
 
     /**
