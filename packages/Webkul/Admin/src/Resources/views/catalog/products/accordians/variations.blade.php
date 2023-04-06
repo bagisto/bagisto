@@ -413,12 +413,8 @@
                 },
 
                 resetModel: function () {
-                    let self = this;
-
                     setTimeout(() => {
-                        (this.superAttributes).forEach(function (attribute) {
-                            self.variant[attribute.code] = '';
-                        })
+                        this.superAttributes.forEach(attribute => this.variant[attribute.code] = '')
                     }, 1000);
                 },
 
@@ -427,7 +423,7 @@
                         .then ((response) => {
                             this.superAttributes = response.data.data;
                         })
-                        .catch ((error) => { })
+                        .catch ((error) => {})
                 }
             }
         });
@@ -499,7 +495,7 @@
                         .then ((response) => {
                             this.superAttributes = response.data.data;
                         })
-                        .catch ((error) => { })
+                        .catch ((error) => {})
                 }
             }
         });

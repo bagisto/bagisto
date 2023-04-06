@@ -210,7 +210,6 @@ class AttributeController extends Controller
         $superAttributes = $this->productRepository->getSuperAttributes($product);
 
         return response()->json([
-            'error' => false,
             'data'  => $superAttributes
         ]);
     }
