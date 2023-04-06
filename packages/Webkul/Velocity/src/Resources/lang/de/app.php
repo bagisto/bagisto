@@ -151,8 +151,6 @@ return [
         ],
     ],
 
-    'product-removed'  => 'Das Produkt ist nicht mehr verfügbar, da es vom Administrator entfernt wurde',
-
     'home'          => [
         'view-all'           => 'Alle ansehen',
         'add-to-cart'        => 'In den Warenkorb legen',
@@ -266,6 +264,7 @@ return [
         'recently-viewed'   => 'Kürzlich angesehene Produkte',
         'be-first-review'   => 'Sei der erste der eine Bewertung schreibt',
         'tax-inclusive'     => 'Inclusive of all taxes',
+        'product-removed'  => 'Das Produkt ist nicht mehr verfügbar, da es vom Administrator entfernt wurde',
     ],
 
     'shop'          => [

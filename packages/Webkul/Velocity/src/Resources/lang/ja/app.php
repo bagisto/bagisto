@@ -154,8 +154,6 @@ return [
         ],
     ],
 
-    'product-removed'  => '管理者によって削除されたため、製品は利用できなくなりました',
-
     'home'        => [
         'view-all'           => 'すべてを見る',
         'add-to-cart'        => 'カートに追加',
@@ -266,7 +264,8 @@ return [
         'short-description' => '短い説明',
         'recently-viewed'   => '最近見た製品',
         'be-first-review'   => '最初のレビューを書く',
-        'tax-inclusive'     => 'Inclusive of all taxes',
+        'tax-inclusive'     => 'すべての税金を含む',
+        'product-removed'  => '管理者によって削除されたため、製品は利用できなくなりました',
     ],
 
     'shop'        => [

@@ -220,7 +220,7 @@
                                 window.showAlert(
                                     `alert-info`,
                                     this.__('shop.general.alert.info'),
-                                    `${this.__('product-removed')}`
+                                    `${this.__('products.product-removed')}`
                                 );
                             }
 

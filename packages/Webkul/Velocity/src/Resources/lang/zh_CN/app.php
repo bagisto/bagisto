@@ -172,8 +172,6 @@ return [
         ],
     ],
 
-    'product-removed'  => '产品不再可用，因为管理员已删除',
-
     'home'          => [
         'view-all'           => '查看所有',
         'add-to-cart'        => '添加到购物车',
@@ -287,6 +285,7 @@ return [
         'recently-viewed'   => '最近浏览的产品',
         'be-first-review'   => '成为第一个写评论的人',
         'tax-inclusive'     => '包括所有税费',
+        'product-removed'  => '产品不再可用，因为管理员已删除',
     ],
 
     'shop'          => [

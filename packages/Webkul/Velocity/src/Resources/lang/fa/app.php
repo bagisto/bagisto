@@ -151,8 +151,6 @@ return [
         ],
     ],
 
-    'product-removed'  => 'Le produit n est plus disponible car supprimé par l administrateur',
-
     'home' => [
         'view-all' => 'مشاهده همه',
         'add-to-cart' => 'افزودن به سبد خرید',
@@ -265,6 +263,7 @@ return [
         'recently-viewed' => 'محصولات اخیرا مشاهده شده',
         'be-first-review' => 'اولین نفری باشید که نظر می دهد',
         'tax-inclusive' => 'با احتساب کلیه مالیات ها',
+        'product-removed'  => 'محصول دیگر در دسترس نیست زیرا توسط مدیر حذف شده است',
     ],
 
     'shop' => [

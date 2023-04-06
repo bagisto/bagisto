@@ -44,7 +44,11 @@ class ComparisonController extends Controller
             abort(404);
         }
 
-        $this->removeInactiveItems();
+        $deletedItemsCount = $this->removeInactiveItems();
+
+        if ($deletedItemsCount) {
+            session()->flash('info', trans('customer::app.product-removed'));
+        }
 
         if (! request()->get('data')) {
             return view($this->_config['view']);;
@@ -83,33 +87,26 @@ class ComparisonController extends Controller
     }
 
     /**
-     * Removing inactive wishlist item.
+     * Removing inactive compared item.
      *
-     * @return \Illuminate\Http\Response
+     * @return void|int
      */
     public function removeInactiveItems()
     {
         if (auth()->guard('customer')->user()) {
-            $productCollection = $this->compareProductsRepository->findWhere([
+            $products = $this->compareProductsRepository->with('product')->findWhere([
                 'customer_id' => auth()->guard('customer')->user()->id
             ]);
-    
-            foreach ($productCollection as $item) {
-                $product = $this->productRepository->find($item->product_id);
-    
-                if (
-                    $product 
-                    && ! $product->status
-                ) {
-                    $this->compareProductsRepository->deleteWhere([
-                        'product_id'  => $item->product_id,
-                        'customer_id' => auth()->guard('customer')->user()->id,
-                    ]);
-    
-                    session()->flash('info', trans('customer::app.product-removed'));
-                }
-            }
-        }        
+
+            $inactiveItemIds = $products
+                ->filter(fn ($item) => ! $item->product->status)
+                ->pluck('id')
+                ->toArray();
+
+            return $this->compareProductsRepository
+                ->whereIn('id', $inactiveItemIds)
+                ->delete();
+        }
     }
 
     /**

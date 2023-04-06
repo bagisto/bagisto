@@ -169,8 +169,6 @@ return [
         ],
     ],
 
-    'product-removed'  => "Le produit n'est plus disponible car supprimé par l'administrateur",
-
     'home' => [
         'view-all' => 'Voir tout',
         'add-to-cart' => 'Ajouter au panier',
@@ -288,6 +286,7 @@ return [
         'recently-viewed' => 'Derniers produits consultés',
         'be-first-review' => 'Soyez le premier à rédiger un avis',
         'tax-inclusive' => 'Toutes taxes comprises',
+        'product-removed'  => "Le produit n'est plus disponible car supprimé par l'administrateur",
     ],
 
     'shop' => [

@@ -178,8 +178,6 @@ return [
         ],
     ],
 
-    'product-removed'  => 'Product Is No More Available As Removed By Admin',
-
     'home'          => [
         'view-all'           => 'View All',
         'add-to-cart'        => 'Add To Cart',
@@ -293,6 +291,7 @@ return [
         'recently-viewed'   => 'Recently Viewed Products',
         'be-first-review'   => 'Be the first to write a review',
         'tax-inclusive'     => 'Inclusive of all taxes',
+        'product-removed'  => 'Product Is No More Available As Removed By Admin',
     ],
 
     'shop'          => [

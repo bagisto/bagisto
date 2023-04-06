@@ -44,7 +44,11 @@ class WishlistController extends Controller
             abort(404);
         }
 
-        $this->removeInactiveItems();
+        $deletedItemsCount = $this->removeInactiveItems();
+
+        if ($deletedItemsCount) {
+            session()->flash('info', trans('customer::app.product-removed'));
+        }
 
         return view($this->_config['view'], [
             'items'              => $this->wishlistRepository->getCustomerWishlist(),
@@ -57,29 +61,22 @@ class WishlistController extends Controller
     /**
      * Removing inactive wishlist item.
      *
-     * @return \Illuminate\Http\Response
+     * @return void|int
      */
     public function removeInactiveItems()
     {
         $customer = auth()->guard('customer')->user();
 
-        $wishlistItems = $customer->wishlist_items;
+        $customer->load(['wishlist_items.product']);
 
-        foreach ($wishlistItems as $wishlistItem) {
-            $product = $this->productRepository->find($wishlistItem->product_id);
+        $inactiveItemIds = $customer->wishlist_items
+            ->filter(fn ($item) => ! $item->product->status)
+            ->pluck('product_id')
+            ->toArray();
 
-            if (
-                $product 
-                && ! $product->status
-            ) {
-                $this->wishlistRepository->deleteWhere([
-                    'product_id'  => $wishlistItem->product_id,
-                    'customer_id' => auth()->guard('customer')->user()->id,
-                ]);
-
-                session()->flash('info', trans('customer::app.product-removed'));
-            }
-        }
+        return $customer->wishlist_items()
+            ->whereIn('product_id', $inactiveItemIds)
+            ->delete();
     }
 
     /**
