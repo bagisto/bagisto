@@ -1254,6 +1254,11 @@ return [
             'update-success'                 => 'Cart rule updated successfully',
             'delete-success'                 => 'Cart rule deleted successfully',
             'delete-failed'                  => 'Error encountered while deleting Cart rule.',
+            'coupons' => [
+                'create-success'             => 'Coupon created successfully',
+                'update-success'             => 'Coupon updated successfully',
+                'delete-success'             => 'Coupon deleted successfully',
+                ]
         ],
 
         'catalog-rules' => [
@@ -1497,7 +1502,7 @@ return [
         'already-taken'             => 'The :name has already been taken.',
         'order-pending'             => 'Cannot delete :name account because some Order(s) are pending or processing state.',
         'something-went-wrong'      => 'Something went wrong!',
-        'create-success'            => 'Refund added Successfully',
+        'create-success'            => ':name created successfully.',
     ],
 
     'validations' => [

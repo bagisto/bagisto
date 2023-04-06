@@ -1242,6 +1242,11 @@ return [
             'update-success'                 => 'تم تحديث قاعدة سلة التسوّق بنجاح',
             'delete-success'                 => 'تم حذف قاعدة سلة التسوّق بنجاح',
             'delete-failed'                  => 'حدث خطأ أثناء حذف قاعدة سلة التسوق.',
+            'coupons' => [
+                'create-success'             => 'تم إنشاء القسيمة بنجاح',
+                'update-success'             => 'تم تحديث القسيمة بنجاح',
+                'delete-success'             => 'تم حذف القسيمة بنجاح',
+            ],
             
         ],
 
@@ -1485,6 +1490,7 @@ return [
         'already-taken'             => 'بالفعل :name تم أخذ ',
         'order-pending'             => 'لا يمكن حذف الحساب لأن بعض الطلبات (الطلبات) معلقة أو قيد المعالجة.',
         'something-went-wrong'      => 'هناك خطأ ما!',
+        'create-success'            => ':name تم إنشاؤها بنجاح',
     ],
 
     'validations' => [
