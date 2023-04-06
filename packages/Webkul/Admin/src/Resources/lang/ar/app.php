@@ -1118,14 +1118,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'باء-الاستعراضات',
-            'edit-title'  => 'حرر الاستعراض',
-            'rating'      => 'التقييم',
-            'status'      => 'الحالة',
-            'comment'     => 'تعليق',
-            'pending'     => 'معلقة',
-            'approved'    => 'الموافقة',
-            'disapproved' => 'رفض',
+            'title'          => 'باء-الاستعراضات',
+            'edit-title'     => 'حرر الاستعراض',
+            'rating'         => 'التقييم',
+            'status'         => 'الحالة',
+            'comment'        => 'تعليق',
+            'pending'        => 'معلقة',
+            'approved'       => 'الموافقة',
+            'disapproved'    => 'رفض',
+            'update-success' => 'تم تحديث المراجعة بنجاح',
+            'delete-success' => 'تم حذف المراجعة بنجاح',
         ],
 
         'subscribers' => [

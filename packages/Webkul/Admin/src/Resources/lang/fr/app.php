@@ -1115,14 +1115,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Commentaires',
-            'edit-title'  => 'Modifier l\'avis',
-            'rating'      => 'Notation',
-            'status'      => 'Statut',
-            'comment'     => 'Commenter',
-            'pending'     => 'En attente',
-            'approved'    => 'Approuver',
-            'disapproved' => 'Désapprouver',
+            'title'          => 'Commentaires',
+            'edit-title'     => 'Modifier l\'avis',
+            'rating'         => 'Notation',
+            'status'         => 'Statut',
+            'comment'        => 'Commenter',
+            'pending'        => 'En attente',
+            'approved'       => 'Approuver',
+            'disapproved'    => 'Désapprouver',
+            'update-success' => 'Avis mis à jour avec succès',
+            'delete-success' => 'Avis supprimé avec succès',
         ],
 
         'subscribers' => [

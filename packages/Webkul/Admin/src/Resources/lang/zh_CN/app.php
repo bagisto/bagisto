@@ -1064,14 +1064,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => '评论列表',
-            'edit-title'  => '编辑审查',
-            'rating'      => '评分',
-            'status'      => '状态',
-            'comment'     => '评论',
-            'pending'     => '待批准',
-            'approved'    => '批准',
-            'disapproved' => '不赞成',
+            'title'          => '评论列表',
+            'edit-title'     => '编辑审查',
+            'rating'         => '评分',
+            'status'         => '状态',
+            'comment'        => '评论',
+            'pending'        => '待批准',
+            'approved'       => '批准',
+            'disapproved'    => '不赞成',
+            'update-success' => '评论更新成功',
+            'delete-success' => '评价删除成功',
         ],
 
         'subscribers' => [
