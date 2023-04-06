@@ -88,10 +88,10 @@
     </div>
 
     @if (
-        core()->getConfigData('customer.settings.address.street_lines')
-        && core()->getConfigData('customer.settings.address.street_lines') > 1
+        core()->getConfigData('customer.address.information.street_lines')
+        && core()->getConfigData('customer.address.information.street_lines') > 1
     )
-        @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+        @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
             <div class="col-12 form-field" style="margin-top: 10px; margin-bottom: 0">
                 <input
                     class="control"
@@ -382,10 +382,10 @@
     </div>
 
     @if (
-        core()->getConfigData('customer.settings.address.street_lines')
-        && core()->getConfigData('customer.settings.address.street_lines') > 1
+        core()->getConfigData('customer.address.information.street_lines')
+        && core()->getConfigData('customer.address.information.street_lines') > 1
     )
-        @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+        @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
             <div class="col-12 form-field" style="margin-top: 10px; margin-bottom: 0">
                     <input
                         class="control"

@@ -225,6 +225,7 @@
                                 @click="closeDrawer()"
                                 >cancel</i
                             >
+<<<<<<< HEAD
                         </div>
 
                         <ul type="none">
@@ -255,6 +256,14 @@
                             </li>
                         </ul>
                     </div>
+=======
+                            </i>
+                        </li>
+
+                        <li>
+                            <span v-text="currency.symbol"></span>
+                            <span v-text="currency.code"></span>
+>>>>>>> upstream/master
 
                     <div class="wrapper" v-else-if="currencies">
                         <div class="drawer-section">
@@ -546,6 +555,7 @@
                                 @click="closeDrawer()"
                                 >cancel</i
                             >
+<<<<<<< HEAD
                         </div>
 
                         <ul type="none">
@@ -614,6 +624,13 @@
 
                 <div class="hamburger-wrapper" @click="toggleHamburger">
                     <i class="rango-toggle hamburger"></i>
+=======
+                                <span v-text="currency.symbol"></span>
+                                <span v-text="currency.code"></span>
+                            </a>
+                        </li>
+                    </ul>
+>>>>>>> upstream/master
                 </div>
 
                 <slot name="logo"></slot>
