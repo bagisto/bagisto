@@ -193,11 +193,11 @@
         </div>
 
         @if (
-            core()->getConfigData('customer.settings.address.street_lines')
-            && core()->getConfigData('customer.settings.address.street_lines') > 1
+            core()->getConfigData('customer.address.information.street_lines')
+            && core()->getConfigData('customer.address.information.street_lines') > 1
         )
             <div class="control-group" style="margin-top: -25px;">
-                @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                     <input
                         class="control"
                         id="billing_address_{{ $i }}"
@@ -529,11 +529,11 @@
             </div>
 
             @if (
-                core()->getConfigData('customer.settings.address.street_lines')
-                && core()->getConfigData('customer.settings.address.street_lines') > 1
+                core()->getConfigData('customer.address.information.street_lines')
+                && core()->getConfigData('customer.address.information.street_lines') > 1
             )
                 <div class="control-group" style="margin-top: -25px;">
-                    @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                    @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                         <input
                             class="control"
                             id="shipping_address_{{ $i }}"
