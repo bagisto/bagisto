@@ -4,6 +4,7 @@ namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Admin\DataGrids\AttributeDataGrid;
 use Webkul\Core\Contracts\Validations\Code;
 
@@ -20,10 +21,13 @@ class AttributeController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository  
      * @return void
      */
-    public function __construct(protected AttributeRepository $attributeRepository)
-    {
+    public function __construct(
+        protected AttributeRepository $attributeRepository,
+        protected ProductRepository $productRepository
+    ) {
         $this->_config = request('_config');
     }
 
@@ -191,5 +195,22 @@ class AttributeController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * Get super attributes of product.
+     *
+     * @param  int  $id
+     * @return  \Illuminate\Http\JsonResponse
+     */
+    public function productSuperAttributes($id) 
+    {
+        $product = $this->productRepository->findOrFail($id);
+
+        $superAttributes = $this->productRepository->getSuperAttributes($product);
+
+        return response()->json([
+            'data'  => $superAttributes
+        ]);
     }
 }

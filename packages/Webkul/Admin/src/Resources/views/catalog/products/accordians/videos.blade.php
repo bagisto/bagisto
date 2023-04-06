@@ -14,6 +14,8 @@
                 v-text="'{{ $errors->first('videos.files.*') }}'">
             </span>
             
+            <span class="control-info mt-10">{{ __('admin::app.catalog.products.video-drop') }}</span>
+
             <span class="control-info mt-10">{{ __('admin::app.catalog.products.video-size', ['size' => core()->getMaxUploadSize()]) }}</span>
         </div>
 
@@ -45,11 +47,12 @@
     </script>
 
     <script type="text/x-template" id="product-video-item-template">
-        <label class="image-item" v-bind:class="{ 'has-image': videoData.length > 0 }">
+
+        <label class="image-item" v-bind:class="{ 'has-image': videoData.length > 0, 'dropzone': isDragging }">
             <input
                 type="hidden"
                 :name="'videos[files][' + video.id + ']'"
-                v-if="! new_video"/>
+                v-if="! newVideo"/>
 
             <input
                 type="hidden"
@@ -63,7 +66,11 @@
                 accept="video/*"
                 multiple="multiple"
                 v-validate="'mimes:video/*'"
-                @change="addVideoView($event)"/>
+                class="drag-image"
+                @change="addVideoView($event)"
+                @drop="isDragging = false"
+                @dragleave="isDragging = false" 
+                @dragenter="isDragging = true" />
 
             <video class="preview" v-if="videoData.length > 0" width="200" height="160" controls>
                 <source :src="videoData"  type="video/mp4">
@@ -84,9 +91,7 @@
             data: function() {
                 return {
                     videos: @json($product->videos),
-
                     videoCount: 0,
-
                     items: [],
                 }
             },
@@ -98,18 +103,15 @@
             },
 
             created: function() {
-                let self = this;
+                this.videos.forEach((video) => {
+                    this.items.push(video);
 
-                this.videos.forEach(function(video) {
-                    self.items.push(video);
-
-                    self.videoCount++;
+                    this.videoCount++;
                 });
             },
 
             methods: {
                 createFileType: function() {
-                    let self = this;
 
                     this.videoCount++;
 
@@ -123,13 +125,12 @@
                 },
 
                 videoSelected: function(event) {
-                    let self = this;
 
-                    Array.from(event.files).forEach(function(video, index) {
+                    Array.from(event.files).forEach((video, index) => {
                         if (index) {
-                            self.videoCount++;
+                            this.videoCount++;
 
-                            self.items.push({'id': 'video_' + self.videoCount, file: video});
+                            this.items.push({'id': 'video_' + this.videoCount, file: video});
                         }
                     });
                 },
@@ -158,8 +159,8 @@
             data: function() {
                 return {
                     videoData: '',
-
-                    new_video: 0,
+                    newVideo: 0,
+                    isDragging: false,
                 };
             },
 
@@ -205,7 +206,7 @@
 
                     reader.readAsDataURL(video);
 
-                    this.new_video = 1;
+                    this.newVideo = 1;
                 },
 
                 removeVideo: function() {
