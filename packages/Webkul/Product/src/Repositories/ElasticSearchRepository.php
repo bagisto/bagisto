@@ -53,7 +53,6 @@ class ElasticSearchRepository
         if (! empty($options['type'])) {
             $filters['filter'][]['term']['type'] = $options['type'];
         }
-        $filters['filter'][]['term']['status'] = 1;
 
         $params = [
             'index' => $this->getIndexName(),

@@ -159,12 +159,12 @@
 
             data: function () {
                 return {
-                    'count': 0,
-                    'products': [],
-                    'storageUrl': '{{ Storage::url('/') }}',
-                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
-                    'isProductListLoaded': false,
-                    'attributeOptions': @json($attributeOptionTranslations),
+                    count: 0,
+                    products: [],
+                    storageUrl: '{{ Storage::url('/') }}',
+                    isCustomer: '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                    isProductListLoaded: false,
+                    attributeOptions: @json($attributeOptionTranslations),
                 };
             },
 
@@ -175,7 +175,7 @@
             },
 
             methods: {
-                'removeInactiveItems': function () {
+                removeInactiveItems: function () {
                     let items = '';
                     let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
 
@@ -235,7 +235,7 @@
                     }
                 },
                 
-                'getComparedProducts': function () {
+                getComparedProducts: function () {
                     let items = '';
                     let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
 
@@ -270,7 +270,7 @@
                     }
                 },
 
-                'removeProductCompare': function (productId) {
+                removeProductCompare: function (productId) {
                     if (productId == 'all' && ! confirm('{{ __('shop::app.customer.compare.confirm-remove-all') }}')) {
                         return;
                     }
@@ -320,7 +320,7 @@
                     this.$root.headerItemsCount++;
                 },
 
-                'getAttributeOptions': function (productDetails, attributeValues, type) {
+                getAttributeOptions: function (productDetails, attributeValues, type) {
                     var attributeOptions = '__';
 
                     if (productDetails && attributeValues) {

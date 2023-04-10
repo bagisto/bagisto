@@ -64,10 +64,7 @@ class ShopController extends Controller
     {
         $product = $this->productRepository->findBySlug($slug);
 
-        if (
-            $product 
-            && $product->status
-        ) {
+        if ($product?->status) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
 
             $galleryImages = ProductImage::getProductBaseImage($product);
