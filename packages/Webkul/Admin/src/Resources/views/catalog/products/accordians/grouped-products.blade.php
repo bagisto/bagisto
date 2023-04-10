@@ -95,7 +95,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(inputName + '[qty]') ? 'has-error' : '']">
-                    <input type="number" v-validate="`required|numeric|min_value:0|max_value:${quantity}`" :name="[inputName + '[qty]']" v-model="groupedProduct.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
+                    <input type="number" v-validate="`required|numeric|min_value:0|max_value:${available_qty}`" :name="[inputName + '[qty]']" v-model="groupedProduct.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(inputName + '[qty]')">@{{ errors.first(inputName + '[qty]') }}</span>
                 </div>
             </td>
@@ -199,7 +199,9 @@
 
            data: function() {
                 return {
-                    quantity: 0,        
+                    quantity: [],
+                    
+                    available_qty: 0        
                 }
            },
 
@@ -207,10 +209,11 @@
 
             computed: {
                 inputName: function () {
-                    $.each (this.groupedProduct.associated_product.inventory_indices, (key, value) => {
-                        this.quantity = value.qty;
-                    });
 
+                    let self = this;
+                    self.quantity = self.quantity.concat(self.groupedProduct.associated_product.inventory_indices);
+                    self.available_qty = self.quantity[0].qty ;
+                  
                     if (this.groupedProduct.id)
                         return 'links[' + this.groupedProduct.id + ']';
 
