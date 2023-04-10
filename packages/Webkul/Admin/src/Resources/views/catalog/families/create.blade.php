@@ -287,20 +287,19 @@
 
             methods: {
                 addGroup: function (formScope) {
-                    var self = this;
 
-                    self.$validator.validateAll(formScope).then(function (result) {
+                    this.$validator.validateAll(formScope).then((result)=> {
                         if (result) {
                             
-                            var filteredGroups = groups.filter(function(group) {
-                                return self.group.name.trim() === group.name.trim()
+                            var filteredGroups = groups.filter((group)=> {
+                                return this.group.name.trim() === group.name.trim()
                             })
 
                             if (filteredGroups.length) {
-                                const field = self.$validator.fields.find({ name: 'name', scope: 'add-group-form' });
+                                const field = this.$validator.fields.find({ name: 'name', scope: 'add-group-form' });
 
                                 if (field) {
-                                    self.$validator.errors.add({
+                                    this.$validator.errors.add({
                                         id: field.id,
                                         field: 'name',
                                         msg: "{{ __('admin::app.catalog.families.group-exist-error') }}",
@@ -308,14 +307,11 @@
                                     });
                                 }
                             } else {
-                                groups.push(self.group);
-
-                                groups = self.sortGroups();
-
-                                self.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
-
-                                self.$set(self.$root.modalIds,'addGroupForm', false);
-                                self.$validator.pause();
+                                groups.push(this.group);
+                                groups = this.sortGroups();
+                                this.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
+                                this.$set(this.$root.modalIds,'addGroupForm', false);
+                                this.$validator.pause();
                                
                             }
                             
@@ -324,20 +320,18 @@
                 },
 
                 updateGroup: function(formScope) {
-                    var self = this;
-
-                    this.$validator.validateAll(formScope).then(function (result) {
+                    this.$validator.validateAll(formScope).then((result)=> {
                         if (result) {
 
                             var filteredGroups = groups.filter(function(group) {
-                                return self.editGroup.name.trim() === group.name.trim()
+                                return this.editGroup.name.trim() === group.name.trim()
                             })
 
                             if (filteredGroups.length > 1) {
-                                const field = self.$validator.fields.find({ name: 'name', scope: 'edit-group-form' });
+                                const field = this.$validator.fields.find({ name: 'name', scope: 'edit-group-form' });
 
                                 if (field) {
-                                    self.$validator.errors.add({
+                                    this.$validator.errors.add({
                                         id: field.id,
                                         field: 'name',
                                         msg: "{{ __('admin::app.catalog.families.group-exist-error') }}",
@@ -345,16 +339,16 @@
                                     });
                                 }
                             } else {
-                                let index = groups.indexOf(self.editGroup)
+                                let index = groups.indexOf(this.editGroup)
 
-                                groups[index] = self.editGroup;
+                                groups[index] = this.editGroup;
 
-                                groups = self.sortGroups();
+                                groups = this.sortGroups();
 
                                 this.editGroup = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
-                                self.$validator.pause();
-                                self.$set(self.$root.modalIds, 'editGroupForm', false);
+                                this.$set(this.$root.modalIds, 'editGroupForm', false);
+                                this.$validator.pause();
                             }
                         }
                     });
