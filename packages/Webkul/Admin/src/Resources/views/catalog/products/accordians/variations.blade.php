@@ -11,6 +11,10 @@
         .table td.actions .icon {
             margin-top: 8px;
         }
+
+        .image-position {
+            display: contents;
+        }
     </style>
 @endpush
 
@@ -191,13 +195,13 @@
                             :value="variant[attribute.code]"
                         />
                     </div>
-                </div>
+                </div
             </td>
 
-            <td>
+            <td class="image-group">
                 <div :class="['control-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
-                    <div v-for='(image, index) in items' class="image-wrapper variant-image">
-                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
+                    <div v-for='(image, index) in items' class="image-wrapper variant-image image-position">
+                        <label class="image-item variant-image" v-bind:class="{ 'has-image': imageData[index] }">
                             <input
                                 type="hidden"
                                 :name="[variantInputName + '[images][files][' + image.id + ']']"
@@ -221,9 +225,11 @@
                                 class="preview"
                                 :src="imageData[index]"
                                 v-if="imageData[index]">
-                        </label>
 
-                        <span class="icon trash-icon" @click="removeImage(image)"></span>
+                                <label class="remove-image variant" @click="removeImage(image)">
+                                    {{ __('admin::app.catalog.products.remove-image-btn-title') }}
+                                </label>
+                        </label>
                     </div>
 
                     <label class="btn btn-lg btn-primary add-image" @click="createFileType">
