@@ -159,11 +159,7 @@ export default {
 
     watch: {
         imageCount: function() {
-            if (this.imageCount == this.count) {
-                this.hideButton = (this.imageCount == this.count);
-            } else {
-                this.hideButton = false;
-            }
+            this.hideButton = (this.imageCount == this.count);
         }
     }
 };
