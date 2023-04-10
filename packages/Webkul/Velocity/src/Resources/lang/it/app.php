@@ -266,6 +266,7 @@ return [
         'recently-viewed' => 'Prodotti visti di recente',
         'be-first-review' => 'Sii il primo a scrivere una review',
         'tax-inclusive' => 'Inclusive of all taxes',
+        'product-removed'  => 'Il prodotto non è più disponibile in quanto rimosso dall amministratore',
     ],
 
     'shop' => [
