@@ -1242,10 +1242,10 @@ return [
             'update-success'                 => 'تم تحديث قاعدة سلة التسوّق بنجاح',
             'delete-success'                 => 'تم حذف قاعدة سلة التسوّق بنجاح',
             'delete-failed'                  => 'حدث خطأ أثناء حذف قاعدة سلة التسوق.',
-            'coupons' => [
-                'create-success'             => 'تم إنشاء القسيمة بنجاح',
-                'update-success'             => 'تم تحديث القسيمة بنجاح',
-                'delete-success'             => 'تم حذف القسيمة بنجاح',
+            'coupons'                        => [
+                'create-success' => 'تم إنشاء القسيمة بنجاح',
+                'update-success' => 'تم تحديث القسيمة بنجاح',
+                'delete-success' => 'تم حذف القسيمة بنجاح',
             ],
             
         ],

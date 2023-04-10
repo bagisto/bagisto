@@ -1234,10 +1234,10 @@ return [
             'parent-categories'              => 'Categorías (Solo padre)',
             'categories'                     => 'Categorías',
             'attribute_family'               => 'Familia de atributos',
-            'coupons' => [
-                'create-success'             => 'Cupón creado con éxito',
-                'update-success'             => 'Cupón actualizado con éxito',
-                'delete-success'             => 'Cupón eliminado con éxito',
+            'coupons'                        => [
+                'create-success' => 'Cupón creado con éxito',
+                'update-success' => 'Cupón actualizado con éxito',
+                'delete-success' => 'Cupón eliminado con éxito',
             ],
         ],
 

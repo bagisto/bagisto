@@ -1230,10 +1230,10 @@ return [
             'categories'                     => 'Catégories',
             'attribute_family'               => 'Famille d\'attributs',
             'mass-delete-success'            => 'Tous les coupons sélectionnés ont été supprimés avec succès.',
-            'coupons' => [
-                'create-success'             => 'Coupon créé avec succès',
-                'update-success'             => 'Coupon mis à jour avec succès',
-                'delete-success'             => 'Coupon supprimé avec succès',
+            'coupons'                        => [
+                'create-success' => 'Coupon créé avec succès',
+                'update-success' => 'Coupon mis à jour avec succès',
+                'delete-success' => 'Coupon supprimé avec succès',
             ],
         ],
 

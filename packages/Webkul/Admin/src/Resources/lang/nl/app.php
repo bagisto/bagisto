@@ -1203,10 +1203,10 @@ return [
             'parent-categories'              => 'Categorieën (Alleen ouder)',
             'categories'                     => 'Categorieën',
             'attribute_family'               => 'Kenmerk Familie',
-            'coupons' => [
-                'create-success'            => 'Coupon succesvol aangemaakt',
-                'update-success'            => 'Coupon succesvol bijgewerkt',
-                'delete-success'            => 'Coupon succesvol verwijderd',
+            'coupons'                        => [
+                'create-success' => 'Coupon succesvol aangemaakt',
+                'update-success' => 'Coupon succesvol bijgewerkt',
+                'delete-success' => 'Coupon succesvol verwijderd',
             ],
         ],
 

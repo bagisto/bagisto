@@ -1202,10 +1202,10 @@ return [
             'parent-categories'              => 'Kategoriler (Sadece Üst)',
             'categories'                     => 'Kategoriler',
             'attribute_family'               => 'Nitelik Grubu',
-            'coupons' => [
-                'create-success'             => 'Kupon başarıyla oluşturuldu',
-                'update-success'             => 'Kupon başarıyla güncellendi',
-                'delete-success'             => 'Kupon başarıyla silindi',
+            'coupons'                        => [
+                'create-success' => 'Kupon başarıyla oluşturuldu',
+                'update-success' => 'Kupon başarıyla güncellendi',
+                'delete-success' => 'Kupon başarıyla silindi',
             ],
         ],
 
