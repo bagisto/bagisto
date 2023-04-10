@@ -285,20 +285,19 @@
 
             methods: {
                 addGroup: function (formScope) {
-                    var this_this = this;
-
-                    this.$validator.validateAll(formScope).then(function (result) {
+                   
+                    this.$validator.validateAll(formScope).then((result)=> {
                         if (result) {
 
-                            var filteredGroups = groups.filter(function(group) {
-                                return this_this.group.name.trim() === group.name.trim()
+                            var filteredGroups = groups.filter((group)=> {
+                                return this.group.name.trim() === group.name.trim()
                             })
 
                             if (filteredGroups.length) {
-                                const field = this_this.$validator.fields.find({ name: 'name', scope: 'add-group-form' });
+                                const field = this.$validator.fields.find({ name: 'name', scope: 'add-group-form' });
 
                                 if (field) {
-                                    this_this.$validator.errors.add({
+                                    this.$validator.errors.add({
                                         id: field.id,
                                         field: 'name',
                                         msg: "{{ __('admin::app.catalog.families.group-exist-error') }}",
@@ -306,13 +305,14 @@
                                     });
                                 }
                             } else {
-                                groups.push(this_this.group);
+                                groups.push(this.group);
 
-                                groups = this_this.sortGroups();
+                                groups = this.sortGroups();
 
-                                this_this.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
+                                this.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
-                                this_this.$set(this_this.$root.modalIds, 'addGroupForm', false);
+                                this.$set(this.$root.modalIds, 'addGroupForm', false);
+                                this.$validator.pause();
                             }
                         }
                     });
