@@ -218,6 +218,7 @@
                             @endphp
 
                             <image-wrapper
+                                :count="4"
                                 :multiple="true"
                                 input-name="images[4]"
                                 :images='@json($images[4])'
@@ -234,6 +235,7 @@
                             @endforeach
 
                             <image-wrapper
+                                :count="4"
                                 :multiple="true"
                                 input-name="images[4]"
                                 :images='@json($images[4])'
@@ -263,6 +265,7 @@
                             @endphp
 
                             <image-wrapper
+                                :count="3"
                                 input-name="images[3]"
                                 :images='@json($images[3])'
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
@@ -278,6 +281,7 @@
                             @endforeach
 
                             <image-wrapper
+                                :count="3"
                                 input-name="images[3]"
                                 :images='@json($images[3])'
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
@@ -302,6 +306,7 @@
                             @endphp
 
                             <image-wrapper
+                                :count="2"
                                 input-name="images[2]"
                                 :images='@json($images[2])'
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
@@ -317,6 +322,7 @@
                             @endforeach
 
                             <image-wrapper
+                                :count="2"
                                 input-name="images[2]"
                                 :images='@json($images[2])'
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
