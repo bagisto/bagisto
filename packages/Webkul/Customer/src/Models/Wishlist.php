@@ -43,7 +43,7 @@ class Wishlist extends Model implements WishlistContract
     /**
      * The product that belong to the wishlist.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()
     {
