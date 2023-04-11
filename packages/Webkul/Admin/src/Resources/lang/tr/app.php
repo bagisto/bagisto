@@ -1202,6 +1202,11 @@ return [
             'parent-categories'              => 'Kategoriler (Sadece Üst)',
             'categories'                     => 'Kategoriler',
             'attribute_family'               => 'Nitelik Grubu',
+            'coupons'                        => [
+                'create-success' => 'Kupon başarıyla oluşturuldu',
+                'update-success' => 'Kupon başarıyla güncellendi',
+                'delete-success' => 'Kupon başarıyla silindi',
+            ],
         ],
 
         'catalog-rules' => [
@@ -1437,6 +1442,7 @@ return [
         'already-taken'           => ':name daha önceden girilmiş.',
         'order-pending'           => 'Bu hesaba ait işlem bekleyen siparişler bulunduğundan hesap silinemez.',
         'something-went-wrong'    => 'Bir şeyler yanlış gitti!',
+        'create-success'          => ':name başarıyla oluşturuldu.',
     ],
 
     'validations' => [
