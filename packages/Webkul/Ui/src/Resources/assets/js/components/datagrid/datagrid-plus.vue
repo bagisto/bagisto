@@ -175,7 +175,6 @@ export default {
                 .then(function (response) {
                     if (response.status === 200) {
                         let results = response.data;
-                        console.log(results);
 
                         if (
                             ! results.records.data.length &&
