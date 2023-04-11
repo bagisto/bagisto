@@ -202,7 +202,7 @@ abstract class AbstractType
             ) {
                 $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
                     ? request()->file($attribute->code)->store('product/' . $product->id)
-                    : null;
+                    : $data['Image']['path'];
             }
 
             $attributeValues = $product->attribute_values
@@ -238,9 +238,11 @@ abstract class AbstractType
                 $attributeValue->update([$attribute->column_name => $data[$attribute->code]]);
 
                 if (
-                    $attribute->type == 'image'
-                    || $attribute->type == 'file'
+                    ($attribute->type == 'image'
+                    || $attribute->type == 'file')
+                    && isset($data['Image']['delete'])
                 ) {
+                    dd("ad");    
                     Storage::delete($attributeValue->text_value);
                 }
             }

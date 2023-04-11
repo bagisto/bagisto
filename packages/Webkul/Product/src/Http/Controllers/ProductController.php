@@ -154,7 +154,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductForm $request, $id)
+    public function update($id)
     {
         Event::dispatch('catalog.product.update.before', $id);
 

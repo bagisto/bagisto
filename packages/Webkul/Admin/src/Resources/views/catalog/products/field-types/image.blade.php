@@ -4,6 +4,7 @@
     </a>
 @endif
 
+<input type="hidden" name="Image[path]" value="{{ old($attribute->code) ?: $product[$attribute->code] }}">
 <input type="file" v-validate="'{{$validations}}'" class="control" id="{{ $attribute->code }}" name="{{ $attribute->code }}" value="{{ old($attribute->code) ?: $product[$attribute->code] }}" data-vv-as="&quot;{{ $attribute->admin_name }}&quot;" style="padding-top: 5px;"/>
 
 @if ($product[$attribute->code])
