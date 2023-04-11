@@ -124,7 +124,7 @@ export default {
             massActionTargets: [],
             url: this.src,
             indexes: [],
-            massActionsToggle:false,
+            massActionsToggle: false,
             itemCount: 0
         };
     },
