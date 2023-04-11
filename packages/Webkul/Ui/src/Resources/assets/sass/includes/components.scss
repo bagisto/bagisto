@@ -70,12 +70,16 @@
 
 .filtered-tags {
     display: inline-flex;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     margin-bottom: 10px;
     
     p {
         cursor: pointer;
+    }
+
+    .item-count {
+        margin-left: 10px;
     }
 }
 
