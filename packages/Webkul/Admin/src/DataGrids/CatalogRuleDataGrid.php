@@ -69,6 +69,9 @@ class CatalogRuleDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'closure'    => function ($value) {
+              return $value->starts_from ?? '-';
+            },
         ]);
 
         $this->addColumn([
@@ -78,6 +81,9 @@ class CatalogRuleDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'closure'    => function ($value) {
+               return $value->ends_till ?? '-'; 
+            },
         ]);
 
         $this->addColumn([
@@ -90,9 +96,9 @@ class CatalogRuleDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
-                } else {
-                    return trans('admin::app.datagrid.inactive');
                 }
+
+                return trans('admin::app.datagrid.inactive');
             },
         ]);
 

@@ -29,7 +29,7 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
-    'exchange-api' => [
+    'exchange_api' => [
         'default' => 'exchange_rates',
 
         'fixer' => [
@@ -39,7 +39,8 @@ return [
 
         'exchange_rates' => [
             'key' => env('EXCHANGE_RATES_API_KEY'),
-            'class' => 'Webkul\Core\Helpers\Exchange\ExchangeRates'
+            'class' => 'Webkul\Core\Helpers\Exchange\ExchangeRates',
+            'url' => env('EXCHANGE_RATES_API_ENDPOINT')
         ],
     ],
 

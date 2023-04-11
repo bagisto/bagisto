@@ -106,6 +106,7 @@
                         </li>
 
                         <li>
+                            <span v-text="currency.symbol"></span>
                             <span v-text="currency.code"></span>
 
                             <i
@@ -284,6 +285,7 @@
                                 class="unset"
                                 :href="`?currency=${currency.code}`"
                             >
+                                <span v-text="currency.symbol"></span>
                                 <span v-text="currency.code"></span>
                             </a>
                         </li>
@@ -309,7 +311,7 @@
                 <i class="material-icons text-down-3">shopping_cart</i>
 
                 <div class="badge-wrapper">
-                    <span class="badge" v-text="updatedCartItemsCount"></span>
+                    <span class="badge" v-text="updatedCartItemsCount" v-if="updatedCartItemsCount > 0 ? updatedCartItemsCount : ''"></span>
                 </div>
             </a>
         </div>
@@ -371,7 +373,7 @@ export default {
             this.formatCategories(categories);
         },
     },
-
+    
     created: function () {
         this.getMiniCartDetails();
 

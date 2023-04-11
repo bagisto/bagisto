@@ -17,7 +17,7 @@
                     <div
                         :key="index"
                         class="col-lg-6 col-md-12 address-holder pl0"
-                        v-for='(addresses, index) in this.allAddress'>
+                        v-for='(addresses, index) in allAddress'>
                         <div class="card">
                             <div class="card-body row">
                                 <div class="col-1">

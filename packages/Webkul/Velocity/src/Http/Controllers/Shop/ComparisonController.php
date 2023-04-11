@@ -44,6 +44,12 @@ class ComparisonController extends Controller
             abort(404);
         }
 
+        $deletedItemsCount = $this->removeInactiveItems();
+
+        if ($deletedItemsCount) {
+            session()->flash('info', trans('customer::app.product-removed'));
+        }
+
         if (! request()->get('data')) {
             return view($this->_config['view']);;
         }
@@ -78,6 +84,29 @@ class ComparisonController extends Controller
             'status'   => 'success',
             'products' => $productCollection,
         ];
+    }
+
+    /**
+     * Removing inactive compared item.
+     *
+     * @return void|int
+     */
+    public function removeInactiveItems()
+    {
+        if (auth()->guard('customer')->user()) {
+            $products = $this->compareProductsRepository->with('product')->findWhere([
+                'customer_id' => auth()->guard('customer')->user()->id
+            ]);
+
+            $inactiveItemIds = $products
+                ->filter(fn ($item) => ! $item->product->status)
+                ->pluck('id')
+                ->toArray();
+
+            return $this->compareProductsRepository
+                ->whereIn('id', $inactiveItemIds)
+                ->delete();
+        }
     }
 
     /**

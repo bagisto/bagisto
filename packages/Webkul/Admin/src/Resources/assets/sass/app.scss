@@ -56,3 +56,21 @@
 .bundle-option-button {
     margin-bottom: 20px;
 }
+
+.drag-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: block !important;
+    opacity: 0;
+}
+
+.dropzone {
+    background: white;
+    border-radius: 5px;
+    border: 2px dashed rgb(0, 135, 247);
+    border-image: none;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}

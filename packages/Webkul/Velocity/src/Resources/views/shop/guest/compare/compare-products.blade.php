@@ -14,15 +14,10 @@
                 {{ __('velocity::app.customer.compare.compare_similar_items') }}
             </h2>
 
-            <div class="col-6 d-flex justify-content-end align-items-center" v-if="products.length > 0">
-                <div class="mr-2">
-                    <i class="rango-arrow-left slide-left" @click="prevSlider(sliderDecrement)"></i>
-                    <i class="rango-arrow-right slide-right" @click="nextSlider(sliderIncrement)"></i>
-                </div>
-
+            <div class="col-6" v-if="products.length > 0">
                 <button
                     class="theme-btn light float-right"
-                    @click="removeProductCompare('all')">   
+                    @click="removeProductCompare('all')">
                     {{ __('shop::app.customer.account.wishlist.deleteall') }}
                 </button>
             </div>
@@ -50,7 +45,7 @@
                     @foreach ($comparableAttributes as $attribute)
                         <tr>
                             <td class="header">
-                                <span class="fs16 font-weight-bold">{{ isset($attribute['name']) ? $attribute['name'] : $attribute['admin_name'] }}</span>
+                                <span class="fs16 font-weight-bold">{{ empty($attribute['name']) ? $attribute['admin_name'] : $attribute['name'] }}</span>
                             </td>
 
                             <td :key="`title-${index}`" v-for="(product, index) in products">
@@ -164,24 +159,83 @@
 
             data: function () {
                 return {
+                    count: 0,
                     products: [],
                     storageUrl: '{{ Storage::url('/') }}',
                     isCustomer: '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
-                    sliderIncrement: 160,
-                    sliderDecrement: 160,
-                    attributeOptions: @json($attributeOptionTranslations),
                     isProductListLoaded: false,
+                    attributeOptions: @json($attributeOptionTranslations),
                 };
             },
 
             mounted: function () {
-                this.getComparedProducts();
+                this.removeInactiveItems();
 
                 this.activateSlider();
             },
 
             methods: {
-                'getComparedProducts': function () {
+                removeInactiveItems: function () {
+                    let items = '';
+                    let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
+
+                    let data = {
+                        params: {'data': true}
+                    }
+
+                    if (! this.isCustomer) {
+                        items = this.getStorageValue('compared_product');
+                        items = items ? items.join('&') : '';
+
+                        data = {
+                            params: {
+                                items
+                            }
+                        };
+                    }
+
+                    if (this.isCustomer || (! this.isCustomer && items != "")) {
+                        this.$http.get(url, data)
+                        .then(response => {
+                            this.isProductListLoaded = true;
+
+                            this.products = response.data.products;
+
+                            this.products.forEach(product => {
+                                if (product.status != 1) {
+                                    let existingItems = this.getStorageValue('compared_product');
+                                    let updatedItems = existingItems.filter(item => item != product.id);
+                                    
+                                    this.$set(this, 'products', this.products.filter(product => product.id != product.id));
+
+                                    this.setStorageValue('compared_product', updatedItems);
+                                    
+                                    this.$root.headerItemsCount++;
+
+                                    this.count++;
+                                } 
+                            });
+
+                            if (this.count > 0) {
+                                window.showAlert(
+                                    `alert-info`,
+                                    this.__('shop.general.alert.info'),
+                                    `${this.__('products.product-removed')}`
+                                );
+                            }
+
+                            this.getComparedProducts();
+                        })
+                        .catch(error => {
+                            this.isProductListLoaded = true;
+                            console.log(this.__('error.something_went_wrong'));
+                        });
+                    } else {
+                        this.isProductListLoaded = true;
+                    }
+                },
+                
+                getComparedProducts: function () {
                     let items = '';
                     let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
 
@@ -216,7 +270,7 @@
                     }
                 },
 
-                'removeProductCompare': function (productId) {
+                removeProductCompare: function (productId) {
                     if (productId == 'all' && ! confirm('{{ __('shop::app.customer.compare.confirm-remove-all') }}')) {
                         return;
                     }
@@ -266,7 +320,7 @@
                     this.$root.headerItemsCount++;
                 },
 
-                'getAttributeOptions': function (productDetails, attributeValues, type) {
+                getAttributeOptions: function (productDetails, attributeValues, type) {
                     var attributeOptions = '__';
 
                     if (productDetails && attributeValues) {
@@ -337,26 +391,10 @@
 
                         e.preventDefault();
 
-                        const x =  e.pageX - slider.offsetLeft;
+                        const x = e.pageX - slider.offsetLeft;
                         const walk = (x - startX) * 3;
                         slider.scrollLeft = scrollLeft - walk;
                     });
-                },
-
-                nextSlider: function(getScrollLeft){
-                    const slider = document.querySelector('.compare-products');
-
-                    slider.scrollLeft = getScrollLeft;
-                    
-                    this.sliderIncrement = getScrollLeft + 200;
-                },
-
-                prevSlider: function(getScrollRight){
-                    const slider = document.querySelector('.compare-products');
-
-                    slider.scrollLeft = getScrollRight;
-
-                    this.sliderDecrement = getScrollRight - 200;
                 }
             }
         });

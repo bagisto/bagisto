@@ -158,6 +158,7 @@ export default {
             massActionTarget: null,
             massActionsToggle: false,
             massActionType: this.getDefaultMassActionType(),
+            itemSelected: 0
         };
     },
 
@@ -172,7 +173,9 @@ export default {
                 this.massActionsToggle = true;
             }
 
-            this.$emit('onSelect', [dataIds, this.massActionsToggle]);
+            this.itemSelected = this.dataIds.length;
+
+            this.$emit('onSelect', [dataIds, this.massActionsToggle, this.itemSelected]);
         },
 
         selectAll() {
@@ -217,7 +220,9 @@ export default {
                 this.removeMassActions();
             }
 
-            this.$emit('onSelectAll', [this.dataIds, this.massActionsToggle]);
+            this.itemSelected = this.dataIds.length;
+
+            this.$emit('onSelectAll', [this.dataIds, this.massActionsToggle, this.itemSelected]);
         },
 
         getDefaultMassActionType: function() {

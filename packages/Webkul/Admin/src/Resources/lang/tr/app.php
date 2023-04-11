@@ -1093,14 +1093,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'İncelemeler',
-            'edit-title'  => 'İnceleme Düzenle',
-            'rating'      => 'Oylama',
-            'status'      => 'Durum',
-            'comment'     => 'Yorum',
-            'pending'     => 'Bekliyor',
-            'approved'    => 'Onayla',
-            'disapproved' => 'Reddet',
+            'title'          => 'İncelemeler',
+            'edit-title'     => 'İnceleme Düzenle',
+            'rating'         => 'Oylama',
+            'status'         => 'Durum',
+            'comment'        => 'Yorum',
+            'pending'        => 'Bekliyor',
+            'approved'       => 'Onayla',
+            'disapproved'    => 'Reddet',
+            'update-success' => 'İnceleme başarıyla güncellendi',
+            'delete-success' => 'İnceleme başarıyla silindi',
         ],
 
         'subscribers' => [
@@ -1200,6 +1202,11 @@ return [
             'parent-categories'              => 'Kategoriler (Sadece Üst)',
             'categories'                     => 'Kategoriler',
             'attribute_family'               => 'Nitelik Grubu',
+            'coupons'                        => [
+                'create-success' => 'Kupon başarıyla oluşturuldu',
+                'update-success' => 'Kupon başarıyla güncellendi',
+                'delete-success' => 'Kupon başarıyla silindi',
+            ],
         ],
 
         'catalog-rules' => [
@@ -1435,6 +1442,7 @@ return [
         'already-taken'           => ':name daha önceden girilmiş.',
         'order-pending'           => 'Bu hesaba ait işlem bekleyen siparişler bulunduğundan hesap silinemez.',
         'something-went-wrong'    => 'Bir şeyler yanlış gitti!',
+        'create-success'          => ':name başarıyla oluşturuldu.',
     ],
 
     'validations' => [

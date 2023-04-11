@@ -114,9 +114,9 @@ class CustomerDataGrid extends DataGrid
             'closure'    => function ($row) {
                 if (! $row->phone) {
                     return '-';
-                } else {
-                    return $row->phone;
                 }
+                
+                return $row->phone;
             },
         ]);
 
@@ -130,9 +130,9 @@ class CustomerDataGrid extends DataGrid
             'closure'    => function ($row) {
                 if (! $row->gender) {
                     return '-';
-                } else {
-                    return $row->gender;
                 }
+                
+                return $row->gender;
             },
         ]);
 
@@ -195,8 +195,8 @@ class CustomerDataGrid extends DataGrid
         $this->addAction([
             'method' => 'GET',
             'route'  => 'admin.customer.loginascustomer',
-            'icon'   => 'icon lock-icon',
-            'target'=>'blank',
+            'icon'   => 'icon login-icon',
+            'target' => 'blank',
             'title'  => trans('admin::app.customers.loginascustomer.grid-title'),
         ]);
 

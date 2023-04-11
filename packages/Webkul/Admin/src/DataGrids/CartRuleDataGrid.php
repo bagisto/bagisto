@@ -152,6 +152,9 @@ class CartRuleDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'closure'    => function ($value) {
+                return $value->starts_from ?? '-';
+              },            
         ]);
 
         $this->addColumn([
@@ -161,6 +164,9 @@ class CartRuleDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'closure'    => function ($value) {
+               return $value->ends_till ?? '-'; 
+            },
         ]);
 
         $this->addColumn([
@@ -175,9 +181,9 @@ class CartRuleDataGrid extends DataGrid
                     return trans('admin::app.datagrid.active');
                 } elseif ($value->status == 0) {
                     return trans('admin::app.datagrid.inactive');
-                } else {
-                    return trans('admin::app.datagrid.draft');
                 }
+                
+                return trans('admin::app.datagrid.draft');
             },
         ]);
 

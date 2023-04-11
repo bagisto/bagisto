@@ -16,5 +16,7 @@
         </image-wrapper>
     @endif
 
+    <span class="control-info">{{ __('admin::app.catalog.products.image-drop') }}</span>
+
     <span class="control-info mt-10">{{ __('admin::app.catalog.categories.image-size-logo') }}</span>
 </div>

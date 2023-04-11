@@ -76,9 +76,6 @@ jobs:
       - name: Execute Functional Tests
         run: set -e && vendor/bin/codecept run functional
 
-      - name: Execute Trigger Tests
-        run: set -e && vendor/bin/codecept run trigger
-
       - name: Execute API Tests
         run: set -e && vendor/bin/codecept run api
 

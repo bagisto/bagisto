@@ -77,9 +77,9 @@ class LocalesDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->direction == 'ltr') {
                     return trans('admin::app.datagrid.ltr');
-                } else {
-                    return trans('admin::app.datagrid.rtl');
                 }
+                
+                return trans('admin::app.datagrid.rtl');
             },
         ]);
     }

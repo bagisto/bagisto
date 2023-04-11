@@ -92,7 +92,7 @@ return [
         ],
         'meta-data' => [
             'footer' => 'Footer',
-            'title' => 'Velocity meta data',
+            'title' => 'Velocity Meta Data',
             'activate-slider' => 'Attiva Slider',
             'home-page-content' => 'Contenuti Home Page',
             'footer-left-content' => 'Contenuti Footer Sinistra',
@@ -266,6 +266,7 @@ return [
         'recently-viewed' => 'Prodotti visti di recente',
         'be-first-review' => 'Sii il primo a scrivere una review',
         'tax-inclusive' => 'Inclusive of all taxes',
+        'product-removed'  => 'Il prodotto non è più disponibile in quanto rimosso dall amministratore',
     ],
 
     'shop' => [

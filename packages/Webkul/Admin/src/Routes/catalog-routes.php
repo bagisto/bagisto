@@ -9,7 +9,7 @@ use Webkul\Product\Http\Controllers\ProductController;
 /**
  * Catalog routes.
  */
-Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('catalog')->group(function () {
         /**
          * Sync route.
@@ -138,6 +138,8 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
         Route::post('attributes/delete/{id}', [AttributeController::class, 'destroy'])->name('admin.catalog.attributes.delete');
 
         Route::post('attributes/mass-delete', [AttributeController::class, 'massDestroy'])->name('admin.catalog.attributes.mass_delete');
+
+        Route::get('attributes/products/{productId}/super-attributes', [AttributeController::class, 'productSuperAttributes'])->name('admin.catalog.product.super-attributes');
 
         /**
          * Attribute families routes.

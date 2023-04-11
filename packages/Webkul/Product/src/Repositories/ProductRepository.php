@@ -72,11 +72,13 @@ class ProductRepository extends Repository
         $product = $this->findOrFail($id);
 
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
+        
+        $product->refresh();
 
         if (isset($data['channels'])) {
             $product['channels'] = $data['channels'];
         }
-
+        
         return $product;
     }
 
@@ -404,6 +406,7 @@ class ProductRepository extends Repository
         $sortOptions = $this->getSortOptions($params);
 
         $indices = $this->elasticSearchRepository->search($categoryId, [
+            'type'  => $params['type'] ?? '',
             'page'  => $currentPage,
             'limit' => $limit,
             'sort'  => $sortOptions['sort'],

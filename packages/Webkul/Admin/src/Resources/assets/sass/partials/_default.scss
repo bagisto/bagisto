@@ -329,7 +329,7 @@ body {
 
         ul.menubar {
             overflow-y: auto;
-            height: 86%;
+            height: 84%;
 
             &::-webkit-scrollbar {
                 width: 0px !important;
@@ -516,21 +516,29 @@ body {
 
 .variant-image {
     .image-item {
-        height: 100px !important;
-        width: 100px !important;
-        background-size: 100px 100px !important;
-    }
-
-    .trash-icon {
-        position: absolute;
-        cursor: pointer;
-        margin-top: 25%;
+        height: 120px ;
+        width: 120px ;
+        background-size: 100px 100px;
+        margin-right: 0px;
     }
 }
 
 .btn.add-image {
     display: inline-block;
-    width: auto;
+    width: max-content;
+}
+
+.image-group {
+    .control-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .variant {
+            font-size: 10px;
+            font-weight: bold;
+            padding: 4px;
+        }
+    }
 }
 
 .rtl {
@@ -646,7 +654,6 @@ body {
                 display: inline-block;
                 margin-bottom: 0;
                 margin-left: 20px;
-                margin-top: 24px;
             }
 
             .control {
@@ -797,7 +804,6 @@ body {
                     display: inline-block;
                     margin-bottom: 0;
                     margin-left: 20px;
-                    margin-top: 24px;
                 }
             }
         }

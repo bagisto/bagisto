@@ -629,10 +629,12 @@ return [
             'cancel'                        => 'Cancel',
             'saved-inventory-message'       => 'Product inventory saved successfully.',
             'image-size'                    => 'Image resolution should be like 640px X 640px',
+            'image-drop'                    => 'Browse to find or drag image.',
+            'video-drop'                    => 'Browse to find or drag video.',
             'create-success'                => 'Product created successfully.',
             'update-success'                => 'Product updated successfully.',
-            'delete-success'                => 'Product deleted successfully.',  
-            'delete-failed'                 => 'Error encountered while deleting Product.',          
+            'delete-success'                => 'Product deleted successfully.',
+            'delete-failed'                 => 'Error encountered while deleting Product.',
             'validations'                   => [
                 'quantity-required' => 'Quantity is required.',
                 'quantity-integer'  => 'Quantity should be integer.',
@@ -1079,9 +1081,9 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'login as customer',
-            'login-message'=>'you logged in as :customer_name'
-            ],
+            'grid-title'    => 'login as customer',
+            'login-message' => 'you logged in as :customer_name'
+        ],
 
         'note' => [
             'title'      => 'Add Note',
@@ -1126,14 +1128,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Reviews',
-            'edit-title'  => 'Edit Review',
-            'rating'      => 'Rating',
-            'status'      => 'Status',
-            'comment'     => 'Comment',
-            'pending'     => 'Pending',
-            'approved'    => 'Approve',
-            'disapproved' => 'Disapprove',
+            'title'          => 'Reviews',
+            'edit-title'     => 'Edit Review',
+            'rating'         => 'Rating',
+            'status'         => 'Status',
+            'comment'        => 'Comment',
+            'pending'        => 'Pending',
+            'approved'       => 'Approve',
+            'disapproved'    => 'Disapprove',
+            'update-success' => 'Review updated successfully',
+            'delete-success' => 'Review deleted successfully',
         ],
 
         'subscribers' => [
@@ -1246,6 +1250,15 @@ return [
             'categories'                     => 'Categories',
             'attribute_family'               => 'Attribute Family',
             'mass-delete-success'            => 'All the selected coupons have been deleted successfully.',
+            'create-success'                 => 'Cart rule created successfully',
+            'update-success'                 => 'Cart rule updated successfully',
+            'delete-success'                 => 'Cart rule deleted successfully',
+            'delete-failed'                  => 'Error encountered while deleting Cart rule.',
+            'coupons'                        => [
+                'create-success' => 'Coupon created successfully',
+                'update-success' => 'Coupon updated successfully',
+                'delete-success' => 'Coupon deleted successfully',
+            ]
         ],
 
         'catalog-rules' => [
@@ -1293,6 +1306,10 @@ return [
             'fixed-amount-whole-cart'      => 'Fixed Amount to Whole Catalog',
             'buy-x-get-y-free'             => 'Buy X Get Y Free',
             'discount-amount'              => 'Discount Amount',
+            'create-success'               => 'Catalog rule created successfully',
+            'update-success'               => 'Catalog rule updated successfully',
+            'delete-success'               => 'Catalog rule deleted successfully',
+            'delete-failed'                => 'Error encountered while deleting Catalog rule.',
             'mass-delete-success'          => 'All the selected index of coupons have been deleted successfully.',
         ],
     ],
@@ -1485,6 +1502,7 @@ return [
         'already-taken'             => 'The :name has already been taken.',
         'order-pending'             => 'Cannot delete :name account because some Order(s) are pending or processing state.',
         'something-went-wrong'      => 'Something went wrong!',
+        'create-success'            => ':name created successfully.',
     ],
 
     'validations' => [

@@ -1066,14 +1066,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'بررسی ها',
-            'edit-title'  => 'ویرایش بررسی',
-            'rating'      => 'رتبه بندی',
-            'status'      => 'وضعیت',
-            'comment'     => 'نظر',
-            'pending'     => 'در انتظار',
-            'approved'    => 'تایید',
-            'disapproved' => 'رد',
+            'title'          => 'بررسی ها',
+            'edit-title'     => 'ویرایش بررسی',
+            'rating'         => 'رتبه بندی',
+            'status'         => 'وضعیت',
+            'comment'        => 'نظر',
+            'pending'        => 'در انتظار',
+            'approved'       => 'تایید',
+            'disapproved'    => 'رد',
+            'update-success' => 'مرور با موفقیت به روز شد',
+            'delete-success' => 'بررسی با موفقیت حذف شد',
         ],
 
         'subscribers' => [

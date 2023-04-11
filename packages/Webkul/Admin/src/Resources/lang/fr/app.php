@@ -1115,14 +1115,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Commentaires',
-            'edit-title'  => 'Modifier l\'avis',
-            'rating'      => 'Notation',
-            'status'      => 'Statut',
-            'comment'     => 'Commenter',
-            'pending'     => 'En attente',
-            'approved'    => 'Approuver',
-            'disapproved' => 'Désapprouver',
+            'title'          => 'Commentaires',
+            'edit-title'     => 'Modifier l\'avis',
+            'rating'         => 'Notation',
+            'status'         => 'Statut',
+            'comment'        => 'Commenter',
+            'pending'        => 'En attente',
+            'approved'       => 'Approuver',
+            'disapproved'    => 'Désapprouver',
+            'update-success' => 'Avis mis à jour avec succès',
+            'delete-success' => 'Avis supprimé avec succès',
         ],
 
         'subscribers' => [
@@ -1228,6 +1230,11 @@ return [
             'categories'                     => 'Catégories',
             'attribute_family'               => 'Famille d\'attributs',
             'mass-delete-success'            => 'Tous les coupons sélectionnés ont été supprimés avec succès.',
+            'coupons'                        => [
+                'create-success' => 'Coupon créé avec succès',
+                'update-success' => 'Coupon mis à jour avec succès',
+                'delete-success' => 'Coupon supprimé avec succès',
+            ],
         ],
 
         'catalog-rules' => [
@@ -1465,6 +1472,7 @@ return [
         'upload-success'            => ':name téléchargé avec succès.',
         'delete-category-root'      => 'Impossible de supprimer la catégorie racine',
         'create-root-failure'       => 'La catégorie avec le nom root existe déjà',
+        'create-success'            => ':name créé avec succès.',
         'cancel-success'            => ':name annulé avec succès.',
         'cancel-error'              => ':name ne peut pas être annulé.',
         'already-taken'             => 'Le :name a déjà été pris.',

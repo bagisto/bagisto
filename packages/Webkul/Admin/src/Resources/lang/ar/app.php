@@ -1118,14 +1118,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'باء-الاستعراضات',
-            'edit-title'  => 'حرر الاستعراض',
-            'rating'      => 'التقييم',
-            'status'      => 'الحالة',
-            'comment'     => 'تعليق',
-            'pending'     => 'معلقة',
-            'approved'    => 'الموافقة',
-            'disapproved' => 'رفض',
+            'title'          => 'باء-الاستعراضات',
+            'edit-title'     => 'حرر الاستعراض',
+            'rating'         => 'التقييم',
+            'status'         => 'الحالة',
+            'comment'        => 'تعليق',
+            'pending'        => 'معلقة',
+            'approved'       => 'الموافقة',
+            'disapproved'    => 'رفض',
+            'update-success' => 'تم تحديث المراجعة بنجاح',
+            'delete-success' => 'تم حذف المراجعة بنجاح',
         ],
 
         'subscribers' => [
@@ -1236,6 +1238,16 @@ return [
             'parent-categories'              => '(الفئات (الوالدين فقط',
             'categories'                     => 'التصنيفات',
             'attribute_family'               => 'عائلة السمة',
+            'create-success'                 => 'تم إنشاء قاعدة سلة التسوّق بنجاح',
+            'update-success'                 => 'تم تحديث قاعدة سلة التسوّق بنجاح',
+            'delete-success'                 => 'تم حذف قاعدة سلة التسوّق بنجاح',
+            'delete-failed'                  => 'حدث خطأ أثناء حذف قاعدة سلة التسوق.',
+            'coupons'                        => [
+                'create-success' => 'تم إنشاء القسيمة بنجاح',
+                'update-success' => 'تم تحديث القسيمة بنجاح',
+                'delete-success' => 'تم حذف القسيمة بنجاح',
+            ],
+            
         ],
 
         'catalog-rules' => [
@@ -1284,6 +1296,10 @@ return [
             'end-other-rules'              => 'إنهاء القواعد الأخرى',
             'categories'                   => 'التصنيفات',
             'attribute_family'             => 'عائلة السمة',
+            'create-success'               => 'تم إنشاء قاعدة الكتالوج بنجاح',
+            'update-success'               => 'تم تحديث قاعدة الكتالوج بنجاح',
+            'delete-success'               => 'تم حذف قاعدة الكتالوج بنجاح',
+            'delete-failed'                => 'حدث خطأ أثناء حذف قاعدة الكتالوج.',
         ],
     ],
 
@@ -1474,6 +1490,7 @@ return [
         'already-taken'             => 'بالفعل :name تم أخذ ',
         'order-pending'             => 'لا يمكن حذف الحساب لأن بعض الطلبات (الطلبات) معلقة أو قيد المعالجة.',
         'something-went-wrong'      => 'هناك خطأ ما!',
+        'create-success'            => ':name تم إنشاؤها بنجاح',
     ],
 
     'validations' => [
