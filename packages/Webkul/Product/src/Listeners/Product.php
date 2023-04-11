@@ -170,15 +170,24 @@ class Product
     {
         $cartItems = $this->cartItemsRepository->findWhere(['product_id' => $product->id]);
 
-        $cartItems->each(function ($cartItem) use ($product){
+        $cartItems->each(function ($cartItem) use ($product) {
             $cart = $this->cartRepository->find($cartItem->cart_id);
 
             if ($customer = $cart->customer) {
                 $groupIdFromCart = $customer->group->id;
 
-                $priceIndexPrice = $product->price_indices->where('customer_group_id' ,$groupIdFromCart)->first();
+                $priceIndexPrice = $product->price_indices->where('customer_group_id', $groupIdFromCart)->first();
             } else {
-                $priceIndexPrice = $product->price_indices->where('customer_group_id' ,1)->first();
+                $priceIndexPrice = $product->price_indices->where('customer_group_id', 1)->first();
+            }
+
+            if ($cartItem->parent_id) {
+                $this->cartItemsRepository->update([
+                    'price'      => $priceIndexPrice->min_price,
+                    'base_price' => $priceIndexPrice->min_price,
+                    'total'      => $priceIndexPrice->min_price,
+                    'base_total' => $priceIndexPrice->min_price,
+                ], $cartItem->parent_id);
             }
             
             $cartItem->update([
@@ -188,7 +197,9 @@ class Product
                 'base_total' => $priceIndexPrice->min_price,
             ]);
 
-            $cartTotal = $this->cartItemsRepository->getSumOfColumns($cartItem->cart_id);
+            $productId = $cartItem->parent_id ? $product->id : null;
+
+            $cartTotal = $this->cartItemsRepository->getSumOfColumns($cartItem->cart_id, $productId);
             
             $this->cartRepository->update([
                 'sub_total'        => $cartTotal->sub_total,

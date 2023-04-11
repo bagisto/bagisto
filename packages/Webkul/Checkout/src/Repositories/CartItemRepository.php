@@ -30,11 +30,16 @@ class CartItemRepository extends Repository
      *
      * @return Collection
      */
-    public function getSumOfColumns($id)
+    public function getSumOfColumns($id, $productId = null)
     {
-        return $this->model
+        $query = $this->model
             ->selectRaw("sum(base_total) as base_grand_total, sum(total) as grand_total, sum(base_price) as base_sub_total, sum(price) as sub_total")
-            ->where("cart_id", $id)
-            ->first();
+            ->where("cart_id", $id);
+        
+        if ($productId) {
+            $query->where("product_id", $productId);
+        }
+
+        return $query->first();
     }
 }
