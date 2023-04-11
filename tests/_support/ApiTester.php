@@ -30,7 +30,7 @@ class ApiTester extends \Codeception\Actor implements ProductActionContract
     /**
      * Sanctum authenticated customer.
      *
-     * @return \Webkul\Customer\Models\Customer
+     * @return \Illuminate\Contracts\Auth\Authenticatable|\Laravel\Sanctum\HasApiTokens
      */
     public function amSanctumAuthenticatedCustomer()
     {
