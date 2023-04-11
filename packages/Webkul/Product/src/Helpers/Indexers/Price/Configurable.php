@@ -11,6 +11,8 @@ class Configurable extends AbstractType
      */
     public function getIndices()
     {
+        $this->product->refresh();
+        
         return [
             'min_price'         => $this->getMinimalPrice() ?? 0,
             'regular_min_price' => $this->getRegularMinimalPrice() ?? 0,
