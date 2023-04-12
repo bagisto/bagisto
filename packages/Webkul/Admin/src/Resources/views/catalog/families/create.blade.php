@@ -296,7 +296,7 @@
 
                             if (filteredGroups.length) {
                                 const field = this.$validator.fields.find({ name: 'name', scope: 'add-group-form' });
-                                
+
                                 if (field) {
                                     this.$validator.errors.add({
                                         id: field.id,
