@@ -147,6 +147,8 @@
                         }
                     });
 
+                    console.log(item);
+
                     if (! alreadyAdded) {
                         this.grouped_products.push({
                                 associated_product: item,
@@ -210,9 +212,8 @@
             computed: {
                 inputName: function () {
 
-                    let self = this;
-                    self.quantity = self.quantity.concat(self.groupedProduct.associated_product.inventory_indices);
-                    self.available_qty = self.quantity[0].qty ;
+                    this.quantity = this.groupedProduct.associated_product.inventory_indices[0];
+                    this.available_qty = this.quantity.qty ;
                   
                     if (this.groupedProduct.id)
                         return 'links[' + this.groupedProduct.id + ']';
