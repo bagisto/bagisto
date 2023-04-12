@@ -197,8 +197,8 @@ abstract class AbstractType
             }
 
             if (
-                ($attribute->type === 'image'
-                || $attribute->type === 'file')
+                $attribute->type === 'image'
+                || $attribute->type === 'file'
             ) {
                 if (gettype($data[$attribute->code]) !== 'object') {
                     $path = $attribute->type === 'image' ? $data['Image']['path'] : $data['File']['path'];
