@@ -91,6 +91,7 @@ return [
         'percentage'                => ': ප්‍රතිශතය %',
         'id-star'                   => 'තරුව',
         'name'                      => 'නම',
+        'login-to-review'           => 'පිටුව සඳහා පෙර පවතීරු වීමට පෙර පිවිසෙන්න',
     ],
 
     'customer' => [
