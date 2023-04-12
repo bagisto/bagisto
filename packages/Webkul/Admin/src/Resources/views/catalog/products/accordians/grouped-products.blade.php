@@ -147,8 +147,6 @@
                         }
                     });
 
-                    console.log(item);
-
                     if (! alreadyAdded) {
                         this.grouped_products.push({
                                 associated_product: item,
