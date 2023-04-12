@@ -90,6 +90,7 @@ return [
         'percentage'                => ':%%',
         'id-star'                   => 'כוכב',
         'name'                      => 'שֵׁם',
+        'login-to-review'           => 'נא להתחבר תחילה כדי לבדוק את המוצר',
     ],
 
     'customer' => [

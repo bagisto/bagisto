@@ -91,6 +91,7 @@ return [
         'percentage'                => ':percentage %',
         'id-star'                   => 'نجم',
         'name'                      => 'اسم',
+        'login-to-review'           => 'يرجى تسجيل الدخول أولاً لمراجعة المنتج',
     ],
 
     'customer' => [

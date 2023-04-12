@@ -88,6 +88,7 @@ return [
         'percentage'                => ':percentage %',
         'id-star'                   => '星',
         'name'                      => '名前',
+        'login-to-review'           => '製品を確認するには、まずログインしてください。',
     ],
 
     'customer' => [

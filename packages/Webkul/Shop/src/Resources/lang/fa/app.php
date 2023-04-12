@@ -88,6 +88,7 @@ return [
         'percentage'                => ':percentage %',
         'id-star'                   => 'ستاره',
         'name'                      => 'نام',
+        'login-to-review'           => 'لطفاً ابتدا وارد شوید تا بتوانید محصول را بررسی کنید',
     ],
 
     'customer' => [
