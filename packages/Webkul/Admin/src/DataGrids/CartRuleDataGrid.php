@@ -143,6 +143,9 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
+            'closure'    => function ($value) {
+                return $value->coupon_code ?? '-';
+            },
         ]);
 
         $this->addColumn([
