@@ -288,16 +288,13 @@
             methods: {
                 addGroup: function (formScope) {
 
-                    this.$validator.validateAll(formScope).then((result)=> {
+                    this.$validator.validateAll(formScope).then((result) => {
                         if (result) {
-                            
-                            var filteredGroups = groups.filter((group)=> {
+                            var filteredGroups = groups.filter((group) => {
                                 return this.group.name.trim() === group.name.trim()
                             })
-
                             if (filteredGroups.length) {
                                 const field = this.$validator.fields.find({ name: 'name', scope: 'add-group-form' });
-
                                 if (field) {
                                     this.$validator.errors.add({
                                         id: field.id,
@@ -312,24 +309,19 @@
                                 this.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
                                 this.$set(this.$root.modalIds,'addGroupForm', false);
                                 this.$validator.pause();
-                               
                             }
-                            
                         }
                     });
                 },
 
                 updateGroup: function(formScope) {
-                    this.$validator.validateAll(formScope).then((result)=> {
+                    this.$validator.validateAll(formScope).then((result) => {
                         if (result) {
-
-                            var filteredGroups = groups.filter(function(group) {
+                            var filteredGroups = groups.filter((group) => {
                                 return this.editGroup.name.trim() === group.name.trim()
                             })
-
                             if (filteredGroups.length > 1) {
                                 const field = this.$validator.fields.find({ name: 'name', scope: 'edit-group-form' });
-
                                 if (field) {
                                     this.$validator.errors.add({
                                         id: field.id,
@@ -340,13 +332,9 @@
                                 }
                             } else {
                                 let index = groups.indexOf(this.editGroup)
-
                                 groups[index] = this.editGroup;
-
                                 groups = this.sortGroups();
-
                                 this.editGroup = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
-
                                 this.$set(this.$root.modalIds, 'editGroupForm', false);
                                 this.$validator.pause();
                             }
