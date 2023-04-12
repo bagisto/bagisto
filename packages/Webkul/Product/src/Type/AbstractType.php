@@ -197,12 +197,16 @@ abstract class AbstractType
             }
 
             if (
-                $attribute->type === 'image'
-                || $attribute->type === 'file'
+                ($attribute->type === 'image'
+                || $attribute->type === 'file')
             ) {
+                if (gettype($data[$attribute->code]) !== 'object') {
+                    $path = $attribute->type === 'image' ? $data['Image']['path'] : $data['File']['path'];
+                }
+
                 $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
                     ? request()->file($attribute->code)->store('product/' . $product->id)
-                    : $data['Image']['path'];
+                    : $path;
             }
 
             $attributeValues = $product->attribute_values
@@ -237,13 +241,19 @@ abstract class AbstractType
             } else {
                 $attributeValue->update([$attribute->column_name => $data[$attribute->code]]);
 
-                if (
-                    ($attribute->type == 'image'
-                    || $attribute->type == 'file')
-                    && isset($data['Image']['delete'])
+                if ($attribute->type == 'image'
+                    && isset($data['image_delete'])
                 ) {
-                    dd("ad");    
                     Storage::delete($attributeValue->text_value);
+                    $attributeValue->update(['text_value' => null]);
+                } 
+                
+                if (
+                    $attribute->type == 'file'
+                    && isset($data['file_delete'])
+                ) {
+                    Storage::delete($attributeValue->text_value);
+                    $attributeValue->update(['text_value' => null]);
                 }
             }
         }

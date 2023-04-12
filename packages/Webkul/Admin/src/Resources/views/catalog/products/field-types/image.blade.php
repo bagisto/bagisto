@@ -10,7 +10,7 @@
 @if ($product[$attribute->code])
     <div class="control-group" style="margin-top: 5px;">
         <span class="checkbox">
-            <input type="checkbox" id="{{ $attribute->code }}[delete]"  name="{{ $attribute->code }}[delete]" value="1">
+            <input type="checkbox" id="{{ $attribute->code }}[delete]"  name="image_delete" value="1">
 
             <label class="checkbox-view" for="delete"></label>
                 {{ __('admin::app.configuration.delete') }}
