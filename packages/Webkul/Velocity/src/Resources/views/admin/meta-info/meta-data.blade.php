@@ -41,6 +41,7 @@
                 margin-top: 25px !important;
             }
         }
+        
         @media only screen and (min-width: 768px) { 
             .content-container .content .page-header .page-title {
                 margin: 6px 0 0 0;
