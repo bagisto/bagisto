@@ -104,7 +104,10 @@ class Product
         } elseif ($product->type == 'configurable') {
             $products = [];
 
-            foreach ($product->variants as $variant) {
+            /**
+             * Fetching fresh variants.
+             */
+            foreach ($product->variants()->get() as $variant) {
                 $products[] = $variant;
             }
 
