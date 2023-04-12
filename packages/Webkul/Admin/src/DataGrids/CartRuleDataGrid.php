@@ -144,10 +144,7 @@ class CartRuleDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($value) {
-                if ($value->coupon_code) {
-                   return $value->coupon_code; 
-                }
-                return '-';   
+                return $value->coupon_code ?? '-';
             },
         ]);
 
