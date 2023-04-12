@@ -33,7 +33,7 @@ class Toolbar
             return $pages;
         }
 
-        return [9, 15, 21, 28];
+        return [12, 24, 36, 48];
     }
 
     /**
