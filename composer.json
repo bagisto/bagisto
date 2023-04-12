@@ -37,15 +37,15 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^4.0",
-        "maatwebsite/excel": "^3.1.26",
+        "maatwebsite/excel": "^3.1.46",
         "paypal/paypal-checkout-sdk": "1.0.1",
         "prettus/l5-repository": "^2.6",
         "pusher/pusher-php-server": "^7.0",
         "spatie/laravel-ignition": "^2.0",
-        "spatie/laravel-sitemap": "^6.1"
+        "spatie/laravel-sitemap": "^6.2"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "*",
+        "barryvdh/laravel-debugbar": "^3.8",
         "codeception/codeception": "*@dev",
         "codeception/module-asserts": "^3.0.0",
         "codeception/module-filesystem": "^3.0.0",
