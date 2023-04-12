@@ -49,6 +49,8 @@
                     :data-id="indexes"
                     :mass-actions-toggle="massActionsToggle"
                     :extra-filters="extraFilters"
+                    :item-count="itemCount"
+                    :total = records.total
                     @onRemoveFilter="removeFilter($event)"
                     @onRemoveAllFilter="clearAllFilters()"
                 ></datagrid-filter-tags>
@@ -122,7 +124,8 @@ export default {
             massActionTargets: [],
             url: this.src,
             indexes: [],
-            massActionsToggle:false
+            massActionsToggle: false,
+            itemCount: 0
         };
     },
 
@@ -194,6 +197,8 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 });
+
+                this.itemCount = 0;
         },
 
         initResponseProps(results) {
@@ -489,12 +494,15 @@ export default {
                 })
             }
 
+            this.itemCount = dataIds[2];
+            
             this.massActionsToggle = dataIds[1];
         },
 
         massActionToggle(massAction) {
             this.indexes = massAction[0];
             this.massActionsToggle = massAction[1];
+            this.itemCount = massAction[2];
         }
     }
 };

@@ -311,7 +311,7 @@
                 <i class="material-icons text-down-3">shopping_cart</i>
 
                 <div class="badge-wrapper">
-                    <span class="badge" v-text="updatedCartItemsCount"></span>
+                    <span class="badge" v-text="updatedCartItemsCount" v-if="updatedCartItemsCount > 0 ? updatedCartItemsCount : ''"></span>
                 </div>
             </a>
         </div>
@@ -373,7 +373,7 @@ export default {
             this.formatCategories(categories);
         },
     },
-
+    
     created: function () {
         this.getMiniCartDetails();
 

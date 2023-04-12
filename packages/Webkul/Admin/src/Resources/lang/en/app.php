@@ -633,8 +633,8 @@ return [
             'video-drop'                    => 'Browse to find or drag video.',
             'create-success'                => 'Product created successfully.',
             'update-success'                => 'Product updated successfully.',
-            'delete-success'                => 'Product deleted successfully.',  
-            'delete-failed'                 => 'Error encountered while deleting Product.',          
+            'delete-success'                => 'Product deleted successfully.',
+            'delete-failed'                 => 'Error encountered while deleting Product.',
             'validations'                   => [
                 'quantity-required' => 'Quantity is required.',
                 'quantity-integer'  => 'Quantity should be integer.',
@@ -1081,9 +1081,9 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'login as customer',
-            'login-message'=>'you logged in as :customer_name'
-            ],
+            'grid-title'    => 'login as customer',
+            'login-message' => 'you logged in as :customer_name'
+        ],
 
         'note' => [
             'title'      => 'Add Note',
@@ -1137,7 +1137,7 @@ return [
             'approved'       => 'Approve',
             'disapproved'    => 'Disapprove',
             'update-success' => 'Review updated successfully',
-            'delete-success' => 'Review deleted successfully',            
+            'delete-success' => 'Review deleted successfully',
         ],
 
         'subscribers' => [
@@ -1254,6 +1254,11 @@ return [
             'update-success'                 => 'Cart rule updated successfully',
             'delete-success'                 => 'Cart rule deleted successfully',
             'delete-failed'                  => 'Error encountered while deleting Cart rule.',
+            'coupons'                        => [
+                'create-success' => 'Coupon created successfully',
+                'update-success' => 'Coupon updated successfully',
+                'delete-success' => 'Coupon deleted successfully',
+            ]
         ],
 
         'catalog-rules' => [
@@ -1497,7 +1502,7 @@ return [
         'already-taken'             => 'The :name has already been taken.',
         'order-pending'             => 'Cannot delete :name account because some Order(s) are pending or processing state.',
         'something-went-wrong'      => 'Something went wrong!',
-        'create-success'            => 'Refund added Successfully',
+        'create-success'            => ':name created successfully.',
     ],
 
     'validations' => [

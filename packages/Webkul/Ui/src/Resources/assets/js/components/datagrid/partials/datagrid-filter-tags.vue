@@ -81,6 +81,8 @@
                 style="margin-left: 10px; white-space: nowrap;"
             ></button>
         </form>
+
+        <div class="item-count" v-if="itemCount"> {{ itemCount }} {{ translations.of }} {{ total }} {{ translations.selected }}</div>
         
         <template v-if="filters.length > 0">
             <datagrid-filter-tag
@@ -107,7 +109,9 @@ export default {
         'massActionTargets',
         'dataId',
         'massActionsToggle',
-        'extraFilters'
+        'extraFilters',
+        'itemCount',
+        'total'
     ],
 
     components: {

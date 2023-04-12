@@ -1234,6 +1234,11 @@ return [
             'parent-categories'              => 'Categorías (Solo padre)',
             'categories'                     => 'Categorías',
             'attribute_family'               => 'Familia de atributos',
+            'coupons'                        => [
+                'create-success' => 'Cupón creado con éxito',
+                'update-success' => 'Cupón actualizado con éxito',
+                'delete-success' => 'Cupón eliminado con éxito',
+            ],
         ],
 
         'catalog-rules' => [
@@ -1473,6 +1478,7 @@ return [
         'already-taken'             => 'El :name ya ha sido tomado.',
         'order-pending'             => 'No puede borrar la cuenta porque algun(os) pedido(s) están en estado pendiente o procesando.',
         'something-went-wrong'      => 'Algo salió mal!',
+        'create-success'            => ':name creado con éxito.',
     ],
 
     'validations' => [

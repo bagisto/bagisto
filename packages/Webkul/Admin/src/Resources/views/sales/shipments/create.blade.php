@@ -369,7 +369,6 @@
                                                                         :disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
                                                                     />
 
-                                                                    <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$sourceQty > 0 ? $item->qty_ordered : 0}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="{{$sourceQty > 0 ? $item->qty_to_ship : 0 }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}'"/>
                                                                     <span class="control-error" v-if="errors.has('{{ $inputName }}')" v-text="errors.first('{{ $inputName }}')"></span>
                                                                 </div>
                                                             </td>
