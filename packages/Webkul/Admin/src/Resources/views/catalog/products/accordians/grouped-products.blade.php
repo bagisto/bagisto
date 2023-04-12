@@ -211,7 +211,6 @@
 
             computed: {
                 inputName: function () {
-
                     this.quantity = this.groupedProduct.associated_product.inventory_indices[0];
                     this.available_qty = this.quantity.qty ;
                   
@@ -225,7 +224,7 @@
             methods: {
                 removeGroupedProduct: function () {
                     this.$emit('onRemoveGroupedProduct', this.groupedProduct)
-                },
+                }
             }
         });
     </script>
