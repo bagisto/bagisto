@@ -285,7 +285,6 @@
 
             methods: {
                 addGroup: function (formScope) {
-                   
                     this.$validator.validateAll(formScope).then((result) => {
                         if (result) {
                             var filteredGroups = groups.filter((group) => {
