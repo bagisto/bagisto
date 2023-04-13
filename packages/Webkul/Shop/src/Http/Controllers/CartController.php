@@ -44,11 +44,11 @@ class CartController extends Controller
 
         $cart = Cart::getCart();
 
-        $cart->load('items.product.cross_sells');
-
+        $cart?->load('items.product.cross_sells');
+       
         return view($this->_config['view'], [
             'cart' => $cart,
-            'crossSellProducts' => $cart->items
+            'crossSellProducts' => $cart?->items
                 ->map(fn ($item) => $item->product->cross_sells)
                 ->collapse()
                 ->unique('id')
