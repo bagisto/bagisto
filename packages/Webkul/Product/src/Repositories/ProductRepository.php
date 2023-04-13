@@ -72,13 +72,13 @@ class ProductRepository extends Repository
         $product = $this->findOrFail($id);
 
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
-        
+
         $product->refresh();
 
         if (isset($data['channels'])) {
             $product['channels'] = $data['channels'];
         }
-        
+
         return $product;
     }
 
@@ -198,7 +198,7 @@ class ProductRepository extends Repository
             return $this->searchFromDatabase($categoryId);
         }
     }
-        
+
     /**
      * Search product from database
      *
@@ -258,7 +258,7 @@ class ProductRepository extends Repository
 
             #Retrieve all the filterable attributes
             $filterableAttributes = $this->attributeRepository->getProductDefaultAttributes(array_keys($params));
-            
+
             #Filter the required attributes
             $attributes = $filterableAttributes->whereIn('code', [
                 'name',
@@ -266,7 +266,7 @@ class ProductRepository extends Repository
                 'visible_individually',
                 'url_key',
             ]);
-            
+
             #Filter collection by required attributes
             foreach ($attributes as $attribute) {
                 $alias = $attribute->code . '_product_attribute_values';
@@ -330,7 +330,7 @@ class ProductRepository extends Repository
 
             if ($sortOptions['order'] != 'rand') {
                 $attribute = $this->attributeRepository->findOneByField('code', $sortOptions['sort']);
-        
+
                 if ($attribute) {
                     if ($attribute->code === 'price') {
                         $qb->orderBy('product_price_indices.min_price', $sortOptions['order']);
@@ -352,7 +352,7 @@ class ProductRepository extends Repository
             } else {
                 return $qb->inRandomOrder();
             }
-    
+
             return $qb->groupBy('products.id');
         });
 
@@ -449,7 +449,7 @@ class ProductRepository extends Repository
      */
     public function getPerPageLimit($params)
     {
-        $limit = $params['limit'] ?? 9;
+        $limit = $params['limit'] ?? 12;
 
         if ($productsPerPage = core()->getConfigData('catalog.products.storefront.products_per_page')) {
             $pages = explode(',', $productsPerPage);
