@@ -42,7 +42,18 @@ class CartController extends Controller
     {
         Cart::collectTotals();
 
-        return view($this->_config['view'])->with('cart', Cart::getCart());
+        $cart = Cart::getCart();
+
+        $cart->load('items.product.cross_sells');
+
+        return view($this->_config['view'], [
+            'cart' => $cart,
+            'crossSellProducts' => $cart->items
+                ->map(fn ($item) => $item->product->cross_sells)
+                ->collapse()
+                ->unique('id')
+                ->take(core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products')),
+        ]);
     }
 
     /**

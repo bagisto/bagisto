@@ -1450,8 +1450,13 @@ return [
         'system'             => [
             'catalog'                               => 'کاتالوگ',
             'homepage'                              => 'پیکربندی صفحه اصلی',
+            'product-view-page'                     => 'پیکربندی صفحه نمایش محصول',
+            'cart-view-page'                        => 'تنظیمات صفحه نمایش سبد خرید',
             'allow-no-of-new-product-homepage'      => 'تعداد مجاز محصول جدید در صفحه اصلی',
             'allow-no-of-featured-product-homepage' => 'تعداد مجاز محصولات ویژه در صفحه اصلی',
+            'allow-no-of-related-products'          => 'تعداد مجاز محصولات مرتبط',
+            'allow-no-of-up-sells-products'         => 'تعداد مجاز محصولات با فروش بالا',
+            'allow-no-of-cross-sells-products'      => 'تعداد مجاز محصولات متقابل فروش',
             'allow-out-of-stock-items'              => 'اقلام موجود در انبار را مجاز کنید',
             'products'                              => 'محصولات',
             'guest-checkout'                        => 'وارسی میهمان',

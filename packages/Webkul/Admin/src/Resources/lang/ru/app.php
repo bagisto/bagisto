@@ -1487,6 +1487,8 @@ return [
         'system' => [
             'catalog'                               => 'Каталог',
             'homepage'                              => 'Конфигурация домашней страницы',
+            'product-view-page'                     => 'Конфигурация страницы просмотра продукта',
+            'cart-view-page'                        => 'Конфигурация страницы просмотра корзины',
             'allow-out-of-stock-items'              => 'Разрешить товары, которых нет в наличии',
             'products'                              => 'Товары',
             'guest-checkout'                        => 'Гостевая касса',
@@ -1631,6 +1633,9 @@ return [
             'show-search-input-field'               => 'Показать поле ввода поиска',
             'allow-no-of-new-product-homepage'      => 'Разрешенное количество новых продуктов на главной странице',
             'allow-no-of-featured-product-homepage' => 'Разрешено отсутствие рекомендуемого продукта на главной странице',
+            'allow-no-of-related-products'          => 'Допустимое количество сопутствующих товаров',
+            'allow-no-of-up-sells-products'         => 'Допустимое количество продуктов Допродажа',
+            'allow-no-of-cross-sells-products'      => 'Допустимое количество продуктов для перекрестных продаж',
             'width'                                 => 'ширина',
             'height'                                => 'высоа',
             'cache-small-image'                     => 'Маленькое изображение',

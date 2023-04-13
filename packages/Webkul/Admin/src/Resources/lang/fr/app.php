@@ -1511,6 +1511,8 @@ return [
         'system' => [
             'catalog'                               => 'Catalogue',
             'homepage'                              => 'Configuration de la page d\'accueil',
+            'product-view-page'                     => 'Configuration de la page d\'affichage du produit',
+            'cart-view-page'                        => 'Configuration de la page d\'affichage du panier',
             'allow-out-of-stock-items'              => 'Autoriser les articles en rupture de stock',
             'products'                              => 'Des produits',
             'guest-checkout'                        => 'Paiement des invités',
@@ -1655,6 +1657,9 @@ return [
             'show-search-input-field'               => 'Afficher le champ de saisie de la recherche',
             'allow-no-of-new-product-homepage'      => 'Nombre autorisé de nouveaux produits sur la page d\'accueil',
             'allow-no-of-featured-product-homepage' => 'Nombre autorisé de produits en vedette sur la page d\'accueil',
+            'allow-no-of-related-products'          => 'Nombre autorisé de produits associés',
+            'allow-no-of-up-sells-products'         => 'Nombre autorisé de produits de vente incitative',
+            'allow-no-of-cross-sells-products'      => 'Nombre autorisé de produits de vente croisée',
             'width'                                 => 'Largeur',
             'height'                                => 'Hauteur',
             'cache-small-image'                     => 'Petite image',
