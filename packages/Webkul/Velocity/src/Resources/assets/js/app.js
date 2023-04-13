@@ -276,10 +276,21 @@ $(function() {
             };
         },
 
+        created: function () {
+            window.addEventListener('resize', this.handleResize);
+        },
+
+        destroyed: function () {
+            window.removeEventListener('resize', this.handleResize);
+        },
+
         mounted: function() {
             this.$validator.localize(document.documentElement.lang);
+
             this.addServerErrors();
+
             this.loadCategories();
+
             this.addIntersectionObserver();
         },
 
@@ -384,6 +395,10 @@ $(function() {
             hideLoader: function() {
                 this.loading = false;
             },
+
+            handleResize: function () {
+                this.currentScreen = window.innerWidth;
+            }
         }
     });
 });

@@ -58,11 +58,12 @@
                         <header class="row velocity-divide-page vc-header header-shadow active">
 
                             {{-- mobile header --}}
-                            <div class="vc-small-screen container" v-if='$root.currentScreen <= 768'>
+                            <div class="vc-small-screen container" v-if='$root.currentScreen <= 992'>
                                 @include('shop::layouts.header.mobile')
                             </div>
 
                             {{-- desktop header --}}
+
                             @include('shop::layouts.header.desktop')
 
                         </header>

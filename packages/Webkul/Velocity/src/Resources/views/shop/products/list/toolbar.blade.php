@@ -6,7 +6,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="toolbar-template">
-        <div class="toolbar-wrapper" v-if='!isMobile()'>
+        <div class="toolbar-wrapper" v-if='currentScreen >= 992'>
             <div class="view-mode">
                 @php
                   $viewOption = $toolbarHelper->getViewOption();
@@ -88,14 +88,14 @@
                 @endif
             </div>
 
-            <div class="col-3" @click="toggleLayeredNavigation({event: $event, actionType: 'open'})">
+            <div class="col-2" @click="toggleLayeredNavigation({event: $event, actionType: 'open'})">
                 <a class="unset">
                     <i class="material-icons">filter_list</i>
                     <span>{{ __('velocity::app.shop.general.filter') }}</span>
                 </a>
             </div>
 
-            <div class="col-3">
+            <div class="col-5">
                 <div class="sorter" id="sort-by">
 
                     <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value">
@@ -133,7 +133,7 @@
                 </div>
             </div>
 
-            <div class="col-3">
+            <div class="col-2">
                 @php
                     $isList = $toolbarHelper->isModeActive('list');
                 @endphp
@@ -162,7 +162,18 @@
                 data: function () {
                     return {
                         'layeredNavigation': false,
+                        currentScreen : 0,
                     }
+                },
+
+                created: function () {
+                    window.addEventListener('resize', this.handleResize);
+
+                    this.handleResize();
+                },
+
+                destroyed: function () {
+                    window.removeEventListener('resize', this.handleResize);
                 },
 
                 watch: {
@@ -179,6 +190,10 @@
                     toggleLayeredNavigation: function ({event, actionType}) {
                         this.layeredNavigation = !this.layeredNavigation;
                     },
+
+                    handleResize: function () {
+                        this.currentScreen = window.innerWidth;
+                    }
                 }
             })
         })()
