@@ -235,13 +235,18 @@ abstract class AbstractType
                     'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
                 ]);
             } else {
+                $previousTextValue = $attributeValue->text_value;
+
                 $attributeValue->update([$attribute->column_name => $data[$attribute->code]]);
 
                 if (
-                    $attribute->type == 'image'
-                    || $attribute->type == 'file'
+                    ! $data[$attribute->code]
+                    && (
+                        $attribute->type == 'image'
+                        || $attribute->type == 'file'
+                    )
                 ) {
-                    Storage::delete($attributeValue->text_value);
+                    Storage::delete($previousTextValue);
                 }
             }
         }
