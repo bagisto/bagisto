@@ -92,7 +92,7 @@ return [
     */
 
     'from' => [
-        'address' => env('SHOP_MAIL_FROM'),
+        'address' => env('MAIL_FROM_ADDRESS'),
         'name' => env('MAIL_FROM_NAME')
     ],
 
@@ -106,7 +106,7 @@ return [
     */
 
     'admin' => [
-        'address' => env('ADMIN_MAIL_TO'),
+        'address' => env('ADMIN_MAIL_ADDRESS'),
         'name' => env('ADMIN_MAIL_NAME', 'Admin')
     ],
 
