@@ -714,7 +714,7 @@
                         }
 
                         >div {
-                            &:nth-child(1) {
+                            .col-filter {
                                 padding-left: 19px !important;
 
                                 i {
@@ -726,11 +726,11 @@
                                 }
                             }
 
-                            &:nth-child(2) {
+                            .col-order {
                                 margin-left: 3% !important;
                             }
 
-                            &:nth-child(3) {
+                            .col-count {
                                 margin: 0;
                                 padding: 0;
                                 display: table;
@@ -739,7 +739,7 @@
                                 padding-right: 4% !important;
                             }
 
-                            &:nth-child(4) {
+                            .col-view {
                                 margin-right: -3% !important;
                                 right: 3%;
 
@@ -751,6 +751,10 @@
                                     display: block;
                                 }
                             }
+                        }
+
+                        .layered-filter-wrapper {
+                            padding-right: 11px !important;
                         }
                     }
                 }
