@@ -662,29 +662,25 @@
                     }
 
                     @media only screen and (max-width: 550px) {
-                        >div {
-                            &:nth-child(1) {
-                                span {
-                                    display: block;
-                                }
+                        .col-filter {
+                            span {
+                                display: block;
                             }
+                        }
 
-                            &:nth-child(4) {
-                                span {
-                                    display: block;
-                                }
+                        .col-view {
+                            span {
+                                display: block;
                             }
                         }
                     }
 
                     @media only screen and (max-width: 500px) {
-                        >div {
-                            &:nth-child(3) {
-                                margin: 0;
-                                padding: 0;
-                                display: table;
-                                text-align: center;
-                            }
+                        .col-count {
+                            margin: 0;
+                            padding: 0;
+                            display: table;
+                            text-align: center;
                         }
                     }
 
@@ -713,48 +709,42 @@
                             }
                         }
 
-                        >div {
-                            .col-filter {
-                                padding-left: 19px !important;
+                        .col-filter {
+                            padding-left: 19px !important;
 
-                                i {
-                                    font-size: 18px !important;
-                                }
-
-                                span {
-                                    display: block;
-                                }
+                            i {
+                                font-size: 18px !important;
                             }
 
-                            .col-order {
-                                margin-left: 3% !important;
-                            }
-
-                            .col-count {
-                                margin: 0;
-                                padding: 0;
-                                display: table;
-                                text-align: center;
-                                padding-left: 5% !important;
-                                padding-right: 4% !important;
-                            }
-
-                            .col-view {
-                                margin-right: -3% !important;
-                                right: 3%;
-
-                                i {
-                                    font-size: 19px !important;
-                                }
-
-                                span {
-                                    display: block;
-                                }
+                            span {
+                                display: block;
                             }
                         }
 
-                        .layered-filter-wrapper {
-                            padding-right: 11px !important;
+                        .col-order {
+                            margin-left: 3% !important;
+                        }
+
+                        .col-count {
+                            margin: 0;
+                            padding: 0;
+                            display: table;
+                            text-align: center;
+                            padding-left: 5% !important;
+                            padding-right: 4% !important;
+                        }
+
+                        .col-view {
+                            margin-right: -3% !important;
+                            right: 3%;
+
+                            i {
+                                font-size: 19px !important;
+                            }
+
+                            span {
+                                display: block;
+                            }
                         }
                     }
                 }
