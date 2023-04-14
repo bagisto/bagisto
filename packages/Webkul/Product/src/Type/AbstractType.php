@@ -240,13 +240,25 @@ abstract class AbstractType
                 $attributeValue->update([$attribute->column_name => $data[$attribute->code]]);
 
                 if (
-                    ! $data[$attribute->code]
-                    && (
-                        $attribute->type == 'image'
-                        || $attribute->type == 'file'
-                    )
+                    $attribute->type == 'image'
+                    || $attribute->type == 'file'
                 ) {
-                    Storage::delete($previousTextValue);
+                    /**
+                     * If $data[$attribute->code] is null, that means someone selected the "delete" option.
+                     */
+                    if (! $data[$attribute->code]) {
+                        Storage::delete($previousTextValue);
+
+                    /**
+                     * If $data[$attribute->code] is not equal to the previous one, that means someone has
+                     * updated the file or image. In that case, we will remove the previous file.
+                     */
+                    } else if (
+                        ! empty($previousTextValue)
+                        && $data[$attribute->code] != $previousTextValue
+                    ) {
+                        Storage::delete($previousTextValue);
+                    }
                 }
             }
         }
