@@ -222,6 +222,7 @@ class ProductRepository extends Repository
             'videos',
             'attribute_values',
             'price_indices',
+            'inventories',
             'inventory_indices',
             'reviews',
         ])->scopeQuery(function ($query) use ($params, $categoryId) {
