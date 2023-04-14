@@ -42,7 +42,7 @@ Vue.use(VeeValidate, {
 /**
  * Filters.
  */
-Vue.filter('currency', (value, argument) => {
+Vue.filter('currency', function(value, argument) {
     return Accounting.formatMoney(value, argument);
 });
 
@@ -325,7 +325,7 @@ $(function() {
             addServerErrors(scope = null) {
                 for (let key in serverErrors) {
                     let inputNames = [];
-                    key.split('.').forEach((chunk, index) => {
+                    key.split('.').forEach(function(chunk, index) {
                         if (index) {
                             inputNames.push('[' + chunk + ']');
                         } else {
