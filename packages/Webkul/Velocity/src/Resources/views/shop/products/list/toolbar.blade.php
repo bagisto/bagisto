@@ -159,25 +159,23 @@
         (() => {
             Vue.component('toolbar-component', {
                 template: '#toolbar-template',
-                data: function () {
+                data() {
                     return {
-                        'layeredNavigation': false,
+                        layeredNavigation: false,
                         currentScreen : window.innerWidth,
                     }
                 },
 
-                created: function () {
+                created() {
                     window.addEventListener('resize', this.handleResize);
-
-                    this.handleResize();
                 },
 
-                destroyed: function () {
+                destroyed() {
                     window.removeEventListener('resize', this.handleResize);
                 },
 
                 watch: {
-                    layeredNavigation: function (value) {
+                    layeredNavigation(value) {
                         if (value) {
                             document.body.classList.add('open-hamburger');
                         } else {
@@ -187,11 +185,11 @@
                 },
 
                 methods: {
-                    toggleLayeredNavigation: function ({event, actionType}) {
+                    toggleLayeredNavigation({event, actionType}) {
                         this.layeredNavigation = !this.layeredNavigation;
                     },
 
-                    handleResize: function () {
+                    handleResize() {
                         this.currentScreen = window.innerWidth;
                     }
                 }
