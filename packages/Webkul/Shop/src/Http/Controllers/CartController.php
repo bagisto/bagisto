@@ -3,7 +3,6 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Cart;
-use Hamcrest\Type\IsString;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Webkul\Checkout\Contracts\Cart as CartModel;
