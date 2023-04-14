@@ -202,7 +202,7 @@
             computed: {
                 inputName: function () {
                 
-                    const arr=this.available_qty = this.groupedProduct.associated_product.inventories;
+                    const arr= this.groupedProduct.associated_product.inventories;
                     let sum = 0;
                     arr.forEach(element => {
                      sum += element.qty;
