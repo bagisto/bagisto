@@ -46,19 +46,15 @@ class CartController extends Controller
 
         $cart?->load('items.product.cross_sells');
        
-        $crossSellProductCount=((core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products')));
-
-        if (empty($crossSellProductCount)) {
-            $crossSellProductCount = 0;
-        }
-       
+        $crossSellProductCount = core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products');
+           
         return view($this->_config['view'], [
             'cart' => $cart,
             'crossSellProducts' => $cart?->items
                 ->map(fn ($item) => $item->product->cross_sells)
                 ->collapse()
                 ->unique('id')
-                ->take($crossSellProductCount),
+                ->take(! empty($crossSellProductCount) ? $crossSellProductCount : 12),
         ]);
     }
 
