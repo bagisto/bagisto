@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Cart;
+use Hamcrest\Type\IsString;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Webkul\Checkout\Contracts\Cart as CartModel;
@@ -46,13 +47,19 @@ class CartController extends Controller
 
         $cart?->load('items.product.cross_sells');
        
+        $crossSellProductCount=((core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products')));
+
+        if (empty($crossSellProductCount)) {
+            $crossSellProductCount = 0;
+        }
+       
         return view($this->_config['view'], [
             'cart' => $cart,
             'crossSellProducts' => $cart?->items
                 ->map(fn ($item) => $item->product->cross_sells)
                 ->collapse()
                 ->unique('id')
-                ->take(core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products')),
+                ->take($crossSellProductCount),
         ]);
     }
 
