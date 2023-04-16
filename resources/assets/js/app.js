@@ -5,9 +5,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+import './bootstrap';
+import * as bootstrap from 'bootstrap';
 
-window.Vue = require('vue');
+import Vue from 'vue'
+window.Vue = Vue;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
