@@ -2,7 +2,309 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.4.5 (21th of September 2022)** - *Release*
+## **v1.5.0 (21st of April 2023)** - *Release*
+
+* #7100 [feature] - The count of selected items should be visible if the user is performing the mass action.
+
+* #7157 [feature] - Ability to drag product image to upload.
+
+* #6972 [feature] - Compare product page can be enhanced.
+
+* #7202 [feature] - There should be an option for upload category banner.
+
+* #7182 [feature] - The sub-categories should be visible on the product list page.
+
+* #7426 [enhancement] - We can use (-) icon in Coupon Code Column.
+
+* #7402 [enhancement] - Multiple Photos are Added on the Velocity page.
+
+* #7449 [enhancement] - By default, the placeholder value should be selected for the filter dropdown.
+
+* #7208 [enhancement] - There should be an arrow icon if the customer is trying to filter the orders by status.
+
+* #7191 [enhancement] - The Product listing page should be improved.
+
+* #7189 [enhancement] - The shadow of the subcategory is overriding on the parent category.
+
+* #3454 [enhancement] - Shipping rules at checkout.
+
+* #7185 [enhancement] - The table headers should be fixed in admin panel.
+
+* #7196 [enhancement] - The Checkboxes should be enhanced in dark theme in admin panel.
+
+* #6771 [enhancement] - The page should be redirected to the product-view page after clicking on the product's name
+
+* #6838 [enhancement] - Invoice design can be enhanced.
+
+* #6987 [enhancement] - Add tool tip on calendar and table icons on bookings in admin panel.
+
+* #6913 [enhancement] - There should be default image for the Locale in the store front.
+
+* #6729 [enhancement] - The SKU should be visible if the admin is adding any product to the bundle product. 
+
+* #6835 [enhancement] - The discount information should be visible properly on the order information page.
+
+* #7507 [fixed] - For the guest users single page checkout is not working without clicking on ship to this address.
+
+* #7216 [fixed] - The configurable product price is visible as 0 on the home page.
+
+* #7475 [fixed] - While creating an attribute group in attribute family in the admin. It is adding the group but the container not removing.
+
+* #7432 [fixed] - The write-review option should not be visible on product card if Allow Guest Review is disabled.
+
+* #7332 [fixed] - The wishlist and compare options should not be visible if they disabled by the admin.
+
+* #7230 [fixed] - Sorting should be work only after clicking on the tax of table header.
+
+* #7180 [fixed] - By default 12 should be selected in the item per page dropdown on the products listing page.
+
+* #6709 [fixed] - Undefined array key "sort".
+
+* #7476 [fixed] - While auto generating the cart coupon is not showing correct notification. 
+
+* #7450 [fixed] - Search By Category Option is not visible On Mobile.
+
+* #7417 [fixed] - The inactive products should not be visible on the product view page.
+
+* #7419 [fixed] - It is taking the current date as the date range. if the date range is not selected for the cart rule.
+
+* #7360 [fixed] - In Mobile view-> on the admin panel, It is hiding the velocity Title in the velocity page.
+
+* #7264 [fixed] - Duplicate Address Creating in checkout page.
+
+* #7136 [fixed] - UI issue in mobile inspect and Desktop view -> Configurable product variants add section.
+
+* #7467 [fixed] - The count of cart items should not be visible in mobile view if the cart is empty.  
+
+* #7466 [fixed] - On the homepage -> in the header option, currency sign is missing in the mobile view.
+
+* #7464 [fixed] - Customer -> Lines in a Street Address option is not working.
+
+* #7459 [fixed] - Variants quantity field is not in dark mode.
+
+* #7442 [fixed] - There should be a warning message if the admin is adding invalid date range for catalog rule.
+
+* #7420 [fixed] - Back icon is not working after clicking on add campaign button.
+
+* #7407 [fixed] - In the admin panel, review saved notification is not showing proper.
+
+* #7395 [fixed] - Elastic search is not working properly in the product search bar of the Grouped,Bundle products on the admin panel.
+
+* #7394 [fixed] - Getting exception while trying to create configurable product.
+
+* #7383 [fixed] - In the Bundle product it is accepting bundle product and grouped product.
+
+* #7381 [fixed] - On the checkout page, If I removed product from the cart it should redirect to cart page from checkout page.
+
+* #7375 [fixed] - No need to show BUY NOW button in the Booking product.
+
+* #7363 [fixed] - In the velocity metadata option the channels and language option should be in the center same as the title.
+
+* #7356 [fixed] - It should not hide the menu options in the admin panel.
+
+* #6989 [fixed] - No Events details are overlapping at bookings in admin panel.
+
+* #7368 [fixed] - The inactive email template should not be listed in the email-template dropdown if the admin is creating the campaigns email template. 
+
+* #7364 [fixed] - On the admin panel, Capitalize each words of the title in the velocity page. 
+
+* #7361 [fixed] - In the category sub-division sign is not in the center.
+
+* #7358 [fixed] - While filtering dashboard sales and The month option should be dark in the Dark theme. 
+
+* #7355 [fixed] - It should not took extra spacing in the homepage after enabled toggle. 
+
+* #7354 [fixed] - Products are not listed on the home page if elastic search enable. 
+
+* #7331 [fixed] - Mouse hover on category to reach child category is not suffecient hover in right side. 
+
+* #7330 [fixed] - It is not showing page content of child category.  
+
+* #7190 [fixed] - The Advertisement images are stretching in mobile view. 
+
+* #7170 [fixed] - Getting exception while trying create refund. 
+
+* #6743 [fixed] - The blank dropdown is showing on the shop by category section if there are no categories for any locale.
+
+* #7346 [fixed] - Unable to export a datagrid from an extension.
+
+* #7201 [fixed] - The applied tax-category should be selected if the admin is trying to edit any variant.
+
+* #7200 [fixed] - The tax is not applied if the customer is selecting the saved address on the checkout page.
+
+* #7181 [fixed] - Validation Issue when editing Or creating new address.
+
+* #7171 [fixed] - The date filter should be in the top right corner in the dashboard.
+
+* #7320 [fixed] - There should be a trash icon instead if wishlist icon on the wishlist page. 
+
+* #7281 [fixed] - The quantity box should be disabled if there is no quantity available on the selected inventory.
+
+* #7286 [fixed] - The product images are stretching in product listing page. 
+
+* #7177 [fixed] - Getting the blank page if trying to edit the product.
+
+* #7067 [fixed] - Getting exception after run composer update.
+
+* #7217 [fixed] - The submit button should be slightly down of comment box if the admin is sending the message to the customer. 
+
+* #7295 [fixed] - Flash message should be appearing if admin is trying to login with invalid credentials.
+
+* #7283 [fixed] - getDefaultChannelLocaleCode() is undefined.
+
+* #7235 [fixed] - The admin should not be able the edit the disabled fields by inspect element.
+
+* #7227 [fixed] - Missing update password notification. 
+
+* #7178 [fixed] - The country in not visible in shipping and billing address.
+
+* #7276 [fixed] - UI issue if the customer is trying filter the products by price filter on mobile view. 
+
+* #7203 [fixed] - Getting the exception while enabling the Share in Pinterest from the backend.
+
+* #7161 [fixed] - The counting of wishlist and compare products should be visible over the compare and wishlist icon in the top right corner. 
+
+* #7206 [fixed] - UI issue on the velocity home page.
+
+* #7072 [fixed] - Dark Mode Name should be used. 
+
+
+* #6991 [fixed] - Mobile view UI issue in booking product creating and editing them. Same slots all days, slot details.
+
+* #7137 [fixed] - There should be warning message if the user is trying add the product to cart for which Visible Individually is disabled. 
+
+* #6953 [fixed] - The add to cart should be disabled if the Bundle product is out of stock.
+
+* #6823 [fixed] - The product's image is cropped in mobile view in wishlist page.
+
+* #6756 [fixed] - The customer should not be able to view the product if the Visible Individually is disabled.
+
+* #7160 [fixed] - Counting of cart item is wrong.
+
+* #7080 [fixed] - Add Option button should shift downward for adding a new option in Bundle Product.
+
+* #7154 [fixed] - Getting exception while trying to access the shop.
+
+* #7142 [fixed] - vue-cal calendar view issue.
+
+* #6759 [fixed] - The filters are not working on the shop by category page .
+
+* #7128 [fixed] - Event Product UI issue in the ticket description.
+
+* #7113 [fixed] - Special price is visible on shop after expired. 
+
+* #7104 [fixed] - The products is visible in all channels if assigned for only one channel.
+
+* #7097 [fixed] - Getting exception while the customer is trying to reset password.
+
+* #7085 [fixed] - Change the language code of bengali.
+
+* #6739 [fixed] - There should not be any translation issue when the admin is creating the product.
+
+* #7119 [fixed] - Translation issue on sitemap in admin panel.
+
+* #7091 [fixed] - Allignment should be in straight line in Bundle Product Name text.
+
+* #6840 [fixed] - Need Space in Product details in Category List View.
+
+* #6767 [fixed] - The address sequence should be correct on the checkout page.
+
+* #6985 [fixed] -Getting the UI issue if admin is trying to view bookings. 
+
+* #6976 [fixed] - The configurable product is showing Out of stock if all the variants are available.
+
+* #6797 [fixed] - Translation issue on footer section in default there.
+
+* #6793 [fixed] - There should be a proper space between the cross and wishlist icon on the compare product's page.
+
+* #6765 [fixed] - Cart item image have issue when child image not uploaded. 
+
+* #6959 [fixed] - Translation issue on the export model box in the admin panel in Arabic locale. 
+
+* #6841 [fixed] - Product price should be bold in Compare Similar Items page 
+
+* #6782 [fixed] - Remove unnecessary labels while shoring the table in the admin panel. 
+
+* #6779 [fixed] - UI issue on the trash and wishlist icons on the cart page in mobile view.
+
+* #6778 [fixed] - Clear all text should be in the center of the filter liable if the customer is trying to filter the orders. 
+
+* #6777 [fixed] - The placeholder is overriding the search icon in the search box on the customer orders page.
+
+* #6776 [fixed] - Translation issue with per Page filter on the customer's order page.
+
+* #6775 [fixed] - The cart summary should be on the left side of the billing address on the checkout page.
+
+* #6770 [fixed] - The inactive and out-of-stock products are also visible on the search result if the admin is adding products on group and bundle product.
+
+* #6757 [fixed] - The footer middle content should be visible on the velocity theme.
+
+* #6753 [fixed] - The cart summary should be on the left side of the order summary on the checkout page.
+
+* #6749 [fixed] - On Customer end other locale PDF is not translated properly.
+
+* #6747 [fixed] - There is a translation issue if the customer is creating/editing the address.
+
+* #6955 [fixed] - The validation error should be just below of forget password in mobile view.
+
+* #6926 [fixed] - Alignment of the Table Heading is not appropriate in Catalog Section.
+
+* #6922 [fixed] - The Edit Category Page is not responsive in mobile view.
+
+* #6917 [fixed] - Translation issue on the shopping cart page in the hindi locale.
+
+* #6914 [fixed] - The CMS Pages section is not responsive in mobile view.
+
+* #6908 [fixed] - Guest welcome message translation missing in mobile view. 
+
+* #6907 [fixed] - The customer order's view page is not responsive in mobile view. 
+
+* #6905 [fixed] - The warning message should be visible if the admin is trying to create shipping with an invalid product's quantity. 
+
+* #6900 [fixed] - Not able to update product quantity from the products table. 
+
+* #6898 [fixed] - Record per page option is not visible in mobile, if the customer is trying to shop by category.
+
+* #6860 [fixed] - The product's weight can not be in a negative value. 
+ 
+* #6844 [fixed] - The orders status should be highlighted on the customer's Downloadable Products. 
+
+* #6880 [fixed] - The product's name should be visible properly in quick view. 
+
+* #6886 [fixed] - The locale dropdown should be just the right side of the channel's dropdown on the product's page in mobile view.
+
+* #6813 [fixed] - There is a translation issue on the product's view page. if tax includes any product.
+
+* #6957 [fixed] - Translation issue on the customers order section in the arabic locale.
+
+* #6761 [fixed] - Order table blank on customer's panel. If the currency is deleted by the admin in which the order is created. 
+
+* #6755 [fixed] - There should not be any warning if the admin is creating the catalog rule with the product's name.
+
+* #6738 [fixed] - The advertisement images should be clickable on the home page.
+
+* #6892 [fixed] - Couple of missed translations in RU localisation for Shop app.
+
+* #6884 [fixed] - The countries are not listed in the country dropdown while the customer is adding the billing address on the checkout page.
+
+* #6873 [fixed] - The product should not be out of stock if the quantity is available in the product inventory.
+
+* #6814 [fixed] - Mobile View -> Product Special Price Default Text and Calendar Icon UI Issue.
+
+* #6864 [fixed] - The Refund, cancel and ship buttons should be slightly down of order id on the invoice page on in mobile view. 
+
+* #6889 [fixed] - Russian Language Translation Issue - Main Cart - Remove All Items.
+
+* #6820 [fixed] - UI Issue -> Mobile Inspect View -> Customer Group Price adding details in price section is having less Space. 
+
+* #6799 [fixed] - The warning message should be meaningful if the inactive user is trying to place an order. 
+
+* #6861 [fixed] - Grammer issue / Spelling mistakes in readme.md 
+
+* #6822 [fixed] - The invoice table should be responsive in customer panel on mobile view.
+
+
+## **v1.4.5 (21st of September 2022)** - *Release*
 
 * #6690 [enhancement] - Mass update option should be available for the categories section.
 
