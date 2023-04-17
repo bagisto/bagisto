@@ -195,19 +195,21 @@
         Vue.component('grouped-product-item', {
             template: '#grouped-product-item-template',
 
-            props: ['index', 'groupedProduct','available_qty'],
+            props: ['index', 'groupedProduct'],
+
+            data: function() {
+                return {
+                    
+                    available_qty: 0        
+                }
+              },
 
             inject: ['$validator'],
 
             computed: {
                 inputName: function () {
-                
-                    const arr=this.available_qty = this.groupedProduct.associated_product.inventories;
-                    let sum = 0;
-                    arr.forEach(element => {
-                     sum += element.qty;
-                     });
-                     this.available_qty=sum;
+
+                  this.available_qty=this.groupedProduct.associated_product.inventory_indices[0].qty;
 
                     if (this.groupedProduct.id)
                    
