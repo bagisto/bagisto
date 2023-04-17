@@ -126,7 +126,7 @@
 
                     searched_results: [],
 
-                    grouped_products: @json($product->grouped_products()->with('associated_product')->get())
+                    grouped_products: @json($product->grouped_products()->with('associated_product.inventory_indices')->get())
                 }
             },
 
@@ -199,7 +199,6 @@
 
             data: function() {
                 return {
-                    
                     available_qty: 0        
                 }
               },
@@ -208,8 +207,8 @@
 
             computed: {
                 inputName: function () {
-
-                  this.available_qty=this.groupedProduct.associated_product.inventory_indices[0].qty;
+                    
+                  this.available_qty = this.groupedProduct.associated_product.inventory_indices[0].qty;
 
                     if (this.groupedProduct.id)
                    
