@@ -199,7 +199,7 @@
                     @media only screen and (max-width: 296px) {
                         .cursor-pointer {
                             > i {
-                                margin-left: 99% !important;
+                                margin-left: 99%;
                             }
                         }
                     }
@@ -822,7 +822,7 @@
 
                 li {
                     font-size: 16px;
-                    padding: 10px 0px 10px 20px;
+                    padding: 10px;
 
                     &:hover {
                         background-color: $border-light;

@@ -42,11 +42,15 @@ body {
                     .selectdiv {
                         select {
                             float: unset;
+                            padding-right: 7px;
 
                             ~ .select-icon-container {
-                                top: 0;
-                                right: 100px;
-                                position: absolute;
+                                top: -40px;
+                                right: -33px;
+                                z-index: 10;
+                                font-size: 18px;
+                                background-color: #FFFFFF;
+                                height: 20px;
                             }
                         }
 
@@ -131,6 +135,92 @@ body {
                         .right-vc-header {
                             .badge-container {
                                 left: -4px;
+                            }
+                        }
+
+                        @media only screen and (max-width: 420px) {
+                            .cursor-pointer {
+                                > i {
+                                    padding-right: 66px;
+                                }
+                            }
+                        }
+
+                        @media only screen and (max-width: 296px) {
+                            .cursor-pointer {
+                                > i {
+                                    margin: 0px;
+                                }
+                            }
+                        }
+
+                        .mobile-screen-header-col-1 {
+                            .hamburger-wrapper {
+                                i {
+                                    z-index: 2;
+                                }
+                            }
+                        }
+
+                        @media only screen and (min-width: 601px) {
+                            .mobile-screen-header-col-1 {
+                                flex: 0025%;
+                                max-width: 25%;
+                            }
+
+                            .mobile-screen-header-col-2 {
+                                flex: 0058.333333%;
+                                max-width: 58.333333%;
+
+                                >div {
+                                    margin-left: -19%;
+                                    margin-right: 0%;
+                                }
+
+                                #search-form > div {
+                                    width: 87%;
+                                    margin-right: 10%;
+                                }
+                            }
+
+                            .mobile-screen-header-col-3 {
+                                flex: 0016.666666%;
+                                max-width: 5.666666%;
+                                left: -11%;
+
+                                .cursor-pointer {
+                                    >i {
+                                        display: none!important;
+                                    }
+                                }
+                            }
+
+                            .mobile-screen-header-col-4 {
+                                display: none!important;
+                            }
+                        }
+
+                        @media only screen and (max-width: 600px) {
+                            .mobile-screen-header-col-1 {
+                                flex: 0 0 50%;
+                                max-width: 50%;
+                            }
+
+                            .mobile-screen-header-col-2 {
+                                display: none !important;
+                            }
+
+                            .mobile-screen-header-col-3 {
+                                flex: 0 0 50%;
+                                max-width: 50%;
+
+                                a {
+                                    text-align: end;
+
+                                    span {
+                                        left: 10px;
+                                    }
+                                }
                             }
                         }
                     }
@@ -267,6 +357,14 @@ body {
                     }
 
                 }
+
+                @media only screen and (max-width: 420px) {
+                    #sort-by > div {
+                        right: 97% !important;
+                        width: 100%;
+                    }
+                }
+
             }
         }
 
@@ -331,7 +429,7 @@ body {
                     }
                 }
             }
-            
+
             .account-action {
                 float: left !important;
             }
@@ -632,7 +730,7 @@ body {
                 right: unset;
                 left: 34px;
             }
-            
+
             &:after {
                 right: unset;
                 left: 8px;
@@ -643,14 +741,14 @@ body {
             padding-left: 0 !important;
             padding-right: 20px !important;
         }
-    
+
         .radio {
             .radio-view {
                 margin-right: 0;
                 margin-left: 10px;
             }
         }
-    
+
         .checkbox {
             .checkbox-view {
                 margin-right: 0;
@@ -675,7 +773,7 @@ body {
                     li {
                         .rango-arrow-right {
                             float: left;
-                            padding-left: 40px;
+                            padding-left: 5px;
                         }
                     }
                 }
@@ -712,8 +810,8 @@ body {
 
             .velocity-divide-page {
                 .left {
-                    right: -10px;
-                }   
+                    right: 0px;
+                }
 
                 .right {
                     padding: 0 20px !important;
@@ -789,6 +887,14 @@ body {
             .velocity-divide-page {
                 .right {
                     padding: 0 20px !important;
+                }
+            }
+
+            .selectdiv {
+                width: 300px !important;
+
+                > div {
+                    right: -23px !important;
                 }
             }
         }
