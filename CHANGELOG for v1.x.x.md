@@ -44,6 +44,14 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #6835 [enhancement] - The discount information should be visible properly on the order information page.
 
+* #7410 [fixed] - I am adding more than 4 products in the related and cross-sell bar in the product and on the homepage in the product page it is showing only 4 products.
+
+* #7397 [fixed] - The filter options are not in proper alignment in the mobile view. if the user is trying to filter products on the products listing page.
+
+* #7079 [fixed] - QTY check should be applied on the simple product which are added in Group Product.
+
+* #6849 [fixed] - UI issue on shop by category page in Arabic locale.
+
 * #7507 [fixed] - For the guest users single page checkout is not working without clicking on ship to this address.
 
 * #7216 [fixed] - The configurable product price is visible as 0 on the home page.
@@ -301,6 +309,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #6861 [fixed] - Grammer issue / Spelling mistakes in readme.md 
 
 * #6822 [fixed] - The invoice table should be responsive in customer panel on mobile view.
+
+* #6780 [fixed] - The checkbox should be just below the input box on the checkout page.
 
 
 ## **v1.4.5 (21st of September 2022)** - *Release*
