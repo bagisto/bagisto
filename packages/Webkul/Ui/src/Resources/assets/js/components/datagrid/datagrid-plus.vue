@@ -135,7 +135,8 @@ export default {
 
     methods: {
         makeURL() {
-            let newParams = '';
+            let url = new URL(this.src);
+            url.searchParams.set('v', 1);
 
             for (let i = 0; i < this.filters.length; i++) {
                 if (
@@ -157,11 +158,15 @@ export default {
                     condition = '[' + this.filters[i].cond + ']';
                 }
 
-                newParams = `${newParams}&${this.filters[i].column}${condition}=${this.filters[i].val}`;
+                url.searchParams.set(`${this.filters[i].column}${condition}`, this.filters[i].val);
             }
 
-            this.url = `${this.src}?v=1${newParams}`;
+            if (this.extraFilters) {
+                url.searchParams.set('channel', this.extraFilters.current.channel);
+                url.searchParams.set('locale', this.extraFilters.current.locale);
+            }
 
+            this.url = url.href;
             this.refresh();
         },
 
@@ -173,26 +178,24 @@ export default {
             axios
                 .get(this.url)
                 .then(function (response) {
-                    if (response.status === 200) {
-                        let results = response.data;
+                    let results = response.data;
 
-                        if (
-                            ! results.records.data.length &&
-                            results.records.prev_page_url
-                        ) {
-                            self.url = results.records.prev_page_url;
+                    if (
+                        ! results.records.data.length &&
+                        results.records.prev_page_url
+                    ) {
+                        self.url = results.records.prev_page_url;
 
-                            self.refresh();
+                        self.refresh();
 
-                            return;
-                        }
-
-                        self.initResponseProps(results);
-
-                        self.initDatagrid();
-
-                        self.dataGridIndex += 1;
+                        return;
                     }
+
+                    self.initResponseProps(results);
+
+                    self.initDatagrid();
+
+                    self.dataGridIndex += 1;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -495,7 +498,7 @@ export default {
             }
 
             this.itemCount = dataIds[2];
-            
+
             this.massActionsToggle = dataIds[1];
         },
 
