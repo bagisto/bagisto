@@ -112,7 +112,7 @@
 
     .toolbar-wrapper {
         > div {
-            margin: 0 8px 0 0;
+            margin: 0 0 0 0;
             display: inline-block;
 
             label {
@@ -881,7 +881,7 @@
         .customer-sidebar {
             position: sticky;
             top: 40px;
-            
+
             .account-details {
                 text-align: center;
                 padding: 25px 20px;
@@ -1779,7 +1779,7 @@
 
         .category {
             padding: 0px 0 4px 15px;
-            
+
             + .nested {
                 color: $font-color;
 
@@ -1821,7 +1821,7 @@
             position: relative;
         }
     }
-    
+
     li {
         a {
             padding: 7px 0 5px 15px;
@@ -1831,7 +1831,7 @@
             }
         }
     }
-    
+
     .sidebar-main-category {
         box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
         margin: 0;
@@ -1852,7 +1852,7 @@
         li:nth-last-of-type(1) {
             margin-bottom: 10px;
         }
-        
+
         .category-title {
             color: #28557B;
             text-decoration: none;
@@ -1976,7 +1976,7 @@
                 font-size: inherit !important;
                 vertical-align: text-bottom;
             }
-            
+
             .control-group {
                 margin-bottom: 0;
                 color: #5e5e5e;

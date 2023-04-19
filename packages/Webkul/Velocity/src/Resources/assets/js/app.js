@@ -106,7 +106,7 @@ $(function() {
     Vue.mixin(translate);
 
     Vue.mixin({
-        data: function() {
+        data() {
             return {
                 imageObserver: null,
                 navContainer: false,
@@ -119,15 +119,15 @@ $(function() {
         },
 
         methods: {
-            redirect: function(route) {
+            redirect(route) {
                 route ? (window.location.href = route) : '';
             },
 
-            debounceToggleSidebar: function(id, { target }, type) {
+            debounceToggleSidebar(id, { target }, type) {
                 this.toggleSidebar(id, target, type);
             },
 
-            toggleSidebar: function(id, { target }, type) {
+            toggleSidebar(id, { target }, type) {
                 if (
                     Array.from(target.classList)[0] === 'main-category'
                     || Array.from(target.parentElement.classList)[0] === 'main-category'
@@ -180,14 +180,14 @@ $(function() {
                 }
             },
 
-            show: function(element) {
+            show(element) {
                 element.show();
                 element.mouseleave(({ target }) => {
                     $(target.closest('.sidebar')).hide();
                 });
             },
 
-            hide: function(element) {
+            hide(element) {
                 element.hide();
             },
 
@@ -197,7 +197,7 @@ $(function() {
                 button ? (button.disabled = actionType) : '';
             },
 
-            onSubmit: function(event) {
+            onSubmit(event) {
                 this.toggleButtonDisability({ event, actionType: true });
 
                 if (typeof tinyMCE !== 'undefined') tinyMCE.triggerSave();
@@ -218,11 +218,11 @@ $(function() {
 
             isMobile: isMobile,
 
-            loadDynamicScript: function(src, onScriptLoaded) {
+            loadDynamicScript(src, onScriptLoaded) {
                 loadDynamicScript(src, onScriptLoaded);
             },
 
-            getDynamicHTML: function(input) {
+            getDynamicHTML(input) {
                 let _staticRenderFns, output;
 
                 const { render, staticRenderFns } = Vue.compile(input);
@@ -244,7 +244,7 @@ $(function() {
                 return output;
             },
 
-            getStorageValue: function(key) {
+            getStorageValue(key) {
                 let value = window.localStorage.getItem(key);
 
                 if (value) {
@@ -254,7 +254,7 @@ $(function() {
                 return value;
             },
 
-            setStorageValue: function(key, value) {
+            setStorageValue(key, value) {
                 window.localStorage.setItem(key, JSON.stringify(value));
 
                 return true;
@@ -265,7 +265,7 @@ $(function() {
     window.app = new Vue({
         el: '#app',
 
-        data: function() {
+        data() {
             return {
                 loading: false,
                 modalIds: {},
@@ -276,15 +276,26 @@ $(function() {
             };
         },
 
-        mounted: function() {
+        created() {
+            window.addEventListener('resize', this.handleResize);
+        },
+
+        destroyed() {
+            window.removeEventListener('resize', this.handleResize);
+        },
+
+        mounted() {
             this.$validator.localize(document.documentElement.lang);
+
             this.addServerErrors();
+
             this.loadCategories();
+
             this.addIntersectionObserver();
         },
 
         methods: {
-            onSubmit: function(event) {
+            onSubmit(event) {
                 this.toggleButtonDisability({ event, actionType: true });
 
                 if (typeof tinyMCE !== 'undefined') tinyMCE.triggerSave();
@@ -311,7 +322,7 @@ $(function() {
                 }
             },
 
-            addServerErrors: function(scope = null) {
+            addServerErrors(scope = null) {
                 for (let key in serverErrors) {
                     let inputNames = [];
                     key.split('.').forEach(function(chunk, index) {
@@ -340,16 +351,16 @@ $(function() {
                 }
             },
 
-            addFlashMessages: function() {
+            addFlashMessages() {
                 if (window.flashMessages.alertMessage)
                     window.alert(window.flashMessages.alertMessage);
             },
 
-            showModal: function(id) {
+            showModal(id) {
                 this.$set(this.modalIds, id, true);
             },
 
-            loadCategories: function() {
+            loadCategories() {
                 this.$http
                     .get(`${this.baseUrl}/categories`)
                     .then(response => {
@@ -364,7 +375,7 @@ $(function() {
                     });
             },
 
-            addIntersectionObserver: function() {
+            addIntersectionObserver() {
                 this.imageObserver = new IntersectionObserver(
                     (entries, imgObserver) => {
                         entries.forEach(entry => {
@@ -377,13 +388,17 @@ $(function() {
                 );
             },
 
-            showLoader: function() {
+            showLoader() {
                 this.loading = true;
             },
 
-            hideLoader: function() {
+            hideLoader() {
                 this.loading = false;
             },
+
+            handleResize() {
+                this.currentScreen = window.innerWidth;
+            }
         }
     });
 });

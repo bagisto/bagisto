@@ -1090,18 +1090,35 @@ i.within-circle {
 }
 
 /* Category Filter UI Responsivenes */
-.category-page-wrapper .category-container .filters-container {
-    left: 0;
-    top: 30px;
-    padding: 0;
-    width: 96%;
-    z-index: 9;
-    position: unset;
-    margin-left: 7px;
-    padding-bottom: 7px;
-    background-color: #fff;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+.category-page-wrapper {
+    .category-container {
+        .filters-container {
+            left: 0;
+            top: 30px;
+            padding: 0;
+            width: 96%;
+            z-index: 9;
+            position: unset;
+            margin-left: 7px;
+            padding-bottom: 7px;
+            background-color: #fff;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+
+            .toolbar-wrapper {
+                >div {
+                    select {
+                        cursor: pointer;
+                        padding: 6px 8px;
+                        color: rgba(0, 0, 0, 0.83);
+                        background-color: #fff;
+                    }
+
+                    margin: 0 0 0 0;
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: 600px) {
@@ -1126,7 +1143,6 @@ i.within-circle {
 
     .cart-details .cart-content .product-details-content .item-actions {
         gap: 20px;
-        //width: 150%;
         display: grid;
         grid-template-columns: auto auto;
 
@@ -1161,7 +1177,6 @@ i.within-circle {
         margin-top: 8px !important;
     }
 }
-
 
 .checkbox,
 .radio {
@@ -1223,51 +1238,6 @@ i.within-circle {
     }
 }
 
-@media only screen and (max-width: 280px) {
-    .filters-container {
-        .toolbar-wrapper {
-            div {
-                #sort-by {
-                    select {
-                        margin-left: -6px !important;
-                        top: -6px !important;
-                        padding: 5px 0px !important;
-                    }
-
-                    .selective-div {
-                        width: 75px !important;
-                    }
-
-                    .select-icon-container {
-                        .select-icon {
-                            left: 53px !important;
-                        }
-                    }
-                }
-
-                #limit-by {
-                    select {
-                        margin-left: -6px !important;
-                        top: -6px !important;
-                        padding: 5px 0px !important;
-                    }
-
-                    .selective-div {
-                        width: 45px !important;
-                    }
-
-                    .select-icon-container {
-                        .select-icon {
-                            left: 43px !important;
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-}
-
 @media only screen and (max-width: 420px) {
     .sale-summary {
         .dash-icon {
@@ -1279,8 +1249,6 @@ i.within-circle {
         .toolbar-wrapper {
             div {
                 margin: 0 0 10 0 !important;
-                padding-left: 4px !important;
-                padding-right: 4px !important;
 
                 #sort-by {
                     select {
@@ -1294,12 +1262,11 @@ i.within-circle {
 
                 #limit-by {
                     select {
-                        margin-left: 16px!important;
                         top: -5px !important;
-                        padding: 7px 9px;
+                        padding: 7px 4px;
                     }
                 }
-                
+
                 .vue-slider-dot-handle {
                     width: 4px;
                     height: 12px;
@@ -1313,3 +1280,19 @@ i.within-circle {
     }
 }
 
+@media only screen and (max-width: 600px) {
+    .mobile-screen-header-col-1 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .mobile-screen-header-col-2 {
+        display: none !important;
+    }
+
+    .mobile-screen-header-col-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        margin-left: inherit;
+    }
+}
