@@ -415,6 +415,26 @@ export default {
             let url = new URL(this.src);
             url.searchParams.set(type, value);
 
+            /**
+             * For channel, given a quick fix because the long term solution is time taking. Will
+             * implement in the new theme with new datagrid.
+             */
+            let channel = document.querySelector('select[name=channel]')?.value;
+
+            if (channel) {
+                url.searchParams.set('channel', channel);
+            }
+
+            /**
+             * For locale, given a quick fix because the long term solution is time taking. Will
+             * implement in the new theme with new datagrid.
+             */
+            let locale = document.querySelector('select[name=locale]')?.value;
+
+            if (locale) {
+                url.searchParams.set('locale', locale);
+            }
+
             this.url = url.href;
             this.refresh();
         },
