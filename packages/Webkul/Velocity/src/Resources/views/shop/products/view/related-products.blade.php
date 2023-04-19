@@ -1,6 +1,4 @@
-@php $relatedProducts = $product->related_products()->get(); @endphp
-
-@if ($relatedProducts->count())
+@if ($relatedProductsCount = $relatedProducts->count())
     <card-list-header
         heading="{{ __('shop::app.products.related-product-title') }}"
         view-all="false"
@@ -13,7 +11,7 @@
             navigation-enabled="hide"
             pagination-enabled="hide"
             id="related-products-carousel"
-            :slides-count="{{ sizeof($relatedProducts) }}">
+            :slides-count="{{ $relatedProductsCount }}">
 
             @foreach ($relatedProducts as $index => $relatedProduct)
                 <slide slot="slide-{{ $index }}">
@@ -28,7 +26,7 @@
 
     <div class="carousel-products vc-small-screen">
         <carousel-component
-            :slides-count="{{ sizeof($relatedProducts) }}"
+            :slides-count="{{ $relatedProductsCount }}"
             slides-per-page="2"
             id="related-products-carousel"
             navigation-enabled="hide"

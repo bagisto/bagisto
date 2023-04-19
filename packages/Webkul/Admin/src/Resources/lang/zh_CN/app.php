@@ -1447,6 +1447,8 @@ return [
         'system'             => [
             'catalog'                               => '商品目录',
             'homepage'                              => '主页配置',
+            'product-view-page'                     => '产品查看页面配置',
+            'cart-view-page'                        => '购物车视图页面配置',
             'allow-out-of-stock-items'              => '允许缺货商品',
             'products'                              => '产品列表',
             'guest-checkout'                        => '客户结帐',
@@ -1584,6 +1586,9 @@ return [
             'show-search-input-field'               => '显示搜索输入字段',
             'allow-no-of-new-product-homepage'      => '首页允许的新产品数量',
             'allow-no-of-featured-product-homepage' => '主页中允许的特色产品数量',
+            'allow-no-of-related-products'          => '允许的相关产品数量',
+            'allow-no-of-up-sells-products'         => '允许的追加销售产品数量',
+            'allow-no-of-cross-sells-products'      => '允许的交叉销售产品数量',
             'width'                                 => '宽度',
             'height'                                => '高度',
             'cache-small-image'                     => '小图片',
