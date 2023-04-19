@@ -168,7 +168,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #7072 [fixed] - Dark Mode Name should be used. 
 
-
 * #6991 [fixed] - Mobile view UI issue in booking product creating and editing them. Same slots all days, slot details.
 
 * #7137 [fixed] - There should be warning message if the user is trying add the product to cart for which Visible Individually is disabled. 
