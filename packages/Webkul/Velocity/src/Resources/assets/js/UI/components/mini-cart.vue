@@ -91,9 +91,10 @@
             <div class="modal-footer">
                 <a
                     class="col text-left fs16 link-color remove-decoration"
-                    :href="viewCartRoute"
-                    >{{ viewCartText }}</a
-                >
+                    :href="viewCartRoute">
+                    <span v-html="viewCartText"></span>
+                </a>
+
 
                 <div class="col text-right no-padding">
                     <a :href="checkoutRoute" @click="checkMinimumOrder($event)">
