@@ -93,10 +93,13 @@ trait ProvideDataGridPlus
         if ($channel !== 'all') {
             $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales()->orderBy('name')->get();
 
-            if ($channelLocales->contains('code', $locale)) {
+            if (
+                $locale === 'all'
+                || $channelLocales->contains('code', $locale)
+            ) {
                 $locales = $channelLocales;
             } else {
-                $channel = 'all';
+                $channel = $locale = 'all';
             }
         }
 
