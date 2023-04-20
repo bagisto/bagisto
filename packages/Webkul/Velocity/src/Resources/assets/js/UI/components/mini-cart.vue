@@ -95,7 +95,6 @@
                     <span v-html="viewCartText"></span>
                 </a>
 
-
                 <div class="col text-right no-padding">
                     <a :href="checkoutRoute" @click="checkMinimumOrder($event)">
                         <button type="button" class="theme-btn fs16 fw6">
