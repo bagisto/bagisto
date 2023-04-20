@@ -80,7 +80,7 @@
 
                                         <div class="row col-12">
                                             <a
-                                                title="{{ $product->name }}"
+                                                title="{{ $product->name??$item->name }}"
                                                 class="product-image-container col-2"
                                                 href="{{ route('shop.productOrCategory.index', $url_key) }}">
 
@@ -98,7 +98,7 @@
                                                         title="{{ $product->name }}"
                                                         class="unset col-12 no-padding">
 
-                                                        <span class="fs20 fw6 link-color">{{ $product->name }}</span>
+                                                        <span class="fs20 fw6 link-color">{{ $product->name??$item->name }}</span>
                                                     </a>
                                                 </div>
 
