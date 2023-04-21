@@ -2,12 +2,12 @@
 
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
-use Webkul\Velocity\Helpers\Helper;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Velocity\Helpers\Helper;
+use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
 
 class ShopController extends Controller
 {
@@ -17,26 +17,24 @@ class ShopController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Velocity\Helpers\Helper  $velocityHelper
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\WishlistRepository  $wishlistRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository,
+     * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository,
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository,
+     * @param  \Webkul\Velocity\Helpers\Helper  $velocityHelper,
      * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $compareProductsRepository
-     *
      * @return void
      */
     public function __construct(
-        protected Helper $velocityHelper,
-        protected ProductRepository $productRepository,
-        protected WishlistRepository $wishlistRepository,
         protected CategoryRepository $categoryRepository,
+        protected WishlistRepository $wishlistRepository,
+        protected ProductRepository $productRepository,
+        protected Helper $velocityHelper,
         protected CustomerCompareProductRepository $compareProductsRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
     }
 
@@ -274,7 +272,6 @@ class ShopController extends Controller
      * This method will fetch products from category.
      *
      * @param  int  $categoryId
-     *
      * @return \Illuminate\Http\Response
      */
     public function getCategoryProducts($categoryId)
@@ -296,7 +293,7 @@ class ShopController extends Controller
 
         /* sending response */
         return response()->json([
-            'products'       => collect($products->items())->map(function ($product) {
+            'products' => collect($products->items())->map(function ($product) {
                 return $this->velocityHelper->formatProduct($product);
             }),
             'paginationHTML' => $products->appends(request()->input())->links()->toHtml(),
@@ -320,7 +317,7 @@ class ShopController extends Controller
         return [
             'id'                => $category->id,
             'slug'              => $category->slug,
-            'name'              => $category->name ?? $category->translate(core()->getDefaultChannel()->default_locale->code)['name'],
+            'name'              => $category->name,
             'children'          => $formattedChildCategory,
             'category_icon_url' => $category->category_icon_url,
             'image_url'         => $category->image_url,

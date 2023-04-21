@@ -169,8 +169,11 @@ class Category extends TranslatableModel implements CategoryContract
      *
      * @return void
      */
-    public function getFullSlug()
+    public function getFullSlug($localeCode)
     {
+        /**
+         * Getting all ancestors for url preparation.
+         */
         $ancestors = $this->ancestors()->get();
 
         $categories = (new NestedCollection())
@@ -179,26 +182,46 @@ class Category extends TranslatableModel implements CategoryContract
 
         $categories->shift();
 
-        return $categories->pluck('slug')->join('/');
+        /**
+         * In case of new locale which is not yet updated we need to filter out that one.
+         *
+         * To Do (@devansh): Need to monitor this more and improvisation also needed.
+         */
+        return $categories->map(fn ($category) => $category->translate($localeCode))
+            ->filter(fn ($category) => $category)
+            ->pluck('slug')->join('/');
     }
 
     /**
      * This is updating the full url path for all locale.
      *
-     * To Do (@devansh-webkul): If support is multi url per slug then
-     * loops need to be change.
-     *
      * @return void
      */
     public function updateFullSlug()
     {
-        $categoryFullUrl = $this->getFullSlug();
+        /**
+         * Self and descendants categories.
+         */
+        $selfAndDescendants = $this->getDescendants()->prepend($this);
 
-        foreach (core()->getAllLocales() as $locale) {
-            $this->translate($locale->code)->url_path = $categoryFullUrl;
+        /**
+         * This loop will check all the descandant and update all the slug because parent slug got changed.
+         *
+         * To Do (@devansh): Need to monitor this more.
+         */
+        foreach ($selfAndDescendants as $category) {
+            foreach (core()->getAllLocales() as $locale) {
+                $categoryFullUrl = $category->getFullSlug($locale->code);
+
+                $transalatedCategory = $category->translate($locale->code);
+
+                if ($transalatedCategory) {
+                    $transalatedCategory->url_path = $categoryFullUrl;
+                }
+            }
+
+            $category->save();
         }
-
-        $this->save();
     }
 
     /**
@@ -241,6 +264,31 @@ class Category extends TranslatableModel implements CategoryContract
         }
 
         return Storage::url($this->category_icon_path);
+    }
+
+    /**
+     * Use fallback for category.
+     *
+     * @return bool
+     */
+    protected function useFallback(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get fallback locale for category.
+     *
+     * @param  string|null  $locale
+     * @return string|null
+     */
+    protected function getFallbackLocale(?string $locale = null): ?string
+    {
+        if ($fallback = core()->getDefaultChannelLocaleCode()) {
+            return $fallback;
+        }
+
+        return parent::getFallbackLocale();
     }
 
     /**
