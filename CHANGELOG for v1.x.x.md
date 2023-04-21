@@ -14,6 +14,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #7182 [feature] - The sub-categories should be visible on the product list page.
 
+* #7139 [feature] - Add customer loging to the admin panel.
+
+* #7096 [feature] - Add decimal to currency.
+
 * #7426 [enhancement] - We can use (-) icon in Coupon Code Column.
 
 * #7402 [enhancement] - Multiple Photos are Added on the Velocity page.
@@ -44,9 +48,29 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #6835 [enhancement] - The discount information should be visible properly on the order information page.
 
+* #7314 [enhancement] - The page should be redirected to the write-review page if the user is clicking on "Be the first to write a review".
+
+* #7194 [enhancement] - Login as customer icon should be change in the admin panel.
+
+* #6893 [enhancement] - Ukrainian localisation for all apps does not exist.
+
+* #6895 [enhancement] - Localisation of Admin app does not exist.
+
+* #6810 [enhancement] - Updates : New issue templates using .yml instead of .md hammer_and_wrench.
+
+* #6744 [enhancement] - There should be a mouse-hover effect for the admin submenu in the dark theme.
+
+* #7520 [fixed] - In the French language, it is showing (&#039;) code view shopping cart in mini cart.
+
+* #7521 [fixed] - Not showing dropdown sign in the filter at customer end.
+
 * #7410 [fixed] - I am adding more than 4 products in the related and cross-sell bar in the product and on the homepage in the product page it is showing only 4 products.
 
 * #7397 [fixed] - The filter options are not in proper alignment in the mobile view. if the user is trying to filter products on the products listing page.
+
+* #7518 [fixed] - Not able to delete the auto generated coupon. 
+
+* #7492 [fixed] - It is showing exception While removing the image and file attribute values and save the product.
 
 * #7079 [fixed] - QTY check should be applied on the simple product which are added in Group Product.
 
@@ -67,6 +91,24 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #7180 [fixed] - By default 12 should be selected in the item per page dropdown on the products listing page.
 
 * #6709 [fixed] - Undefined array key "sort".
+
+* #7422 [fixed] - Generate Automatically Date and Time.
+
+* #7397 [fixed] - The filter options are not in proper alignment in the mobile view. if the user is trying to filter products on the products listing page.
+
+* #7452 [fixed] - In Checkout Page, after address change we are able to place order without selecting the Select Shipping Method.
+
+* #7371 [fixed] - On the admin panel in the Attribute family set the aligment of the name and type column.
+
+* #7370 [fixed] - Calendar should be same for new or edit the customer from admin panel.
+
+* #7329 [fixed] - Exchange rate endpoint API has been updated... 
+
+* #7273 [fixed] - Layered navigation filters not working .
+
+*#7244 [fixed] - shop.js Cannot read properties of undefined (reading 'protocol') 
+
+* #7284 [fixed] - Category slug is getting updated if you are only providing translation for another enabled locale.
 
 * #7476 [fixed] - While auto generating the cart coupon is not showing correct notification. 
 
@@ -312,6 +354,27 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #6780 [fixed] - The checkbox should be just below the input box on the checkout page.
 
+* #7133 [fixed] - UI issue in the Event Booking Product Tickets section after validation message appears.
+
+* #7117 [fixed] - Overlapping of cross icon in Search bar in customer profile.
+
+* #7188 [fixed] - Performance - Dashboard Controller.
+
+* #7103 [fixed] - Admin Dash has way too many queries. 
+
+* #7105 [fixed] - In Arabic Translation, RTL view, table content should also be in RTL.
+
+* #6821 [fixed] - The add page button should be slightly right side in the mobile view.
+
+* #6750 [fixed] - The cart summary should be on the left side of the product's details.
+
+* #6745 [fixed] - The admin should be able to Approve/disapprove the guest customers review.
+
+* #6735 [fixed] - In Mobile product showing only on click. 
+
+* #6723 [fixed] - ui-kit route hide or block using configuration.
+
+* #6703 [fixed] - Cms pages datagrid not diplay any rows when Change locale. 
 
 ## **v1.4.5 (21st of September 2022)** - *Release*
 
