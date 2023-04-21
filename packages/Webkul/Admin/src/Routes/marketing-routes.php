@@ -51,7 +51,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::post('cart-rule-coupons/{id}', [CartRuleCouponController::class, 'store'])->name('admin.cart_rules-coupons.store');
 
-        Route::post('cart-rule-coupons/mass-delete', [CartRuleCouponController::class, 'massDelete'])->name('admin.cart_rule_coupons.mass_delete');
+        Route::post('cart-rule-coupon/mass-delete', [CartRuleCouponController::class, 'massDelete'])->name('admin.cart_rule_coupon.mass_delete');
 
         /**
          * Catalog rules routes.
