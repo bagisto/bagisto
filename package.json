@@ -5,22 +5,8 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@vitejs/plugin-vue2": "^2.2.0",
-        "axios": "^0.21.4",
-        "bootstrap": "^4.0.0",
-        "cross-env": "^6.0.3",
-        "jquery": "^3.4.1",
-        "laravel-vite-plugin": "^0.7.4",
-        "lodash": "^4.17.19",
-        "popper.js": "^1.12",
-        "resolve-url-loader": "^3.1.0",
-        "sass": "^1.49.7",
-        "sass-loader": "^8.0.2",
-        "vite": "^4.2.1",
-        "vue": "^2.7.14",
-        "vue-template-compiler": "^2.7.14"
-    },
-    "dependencies": {
-        "vee-validate": "^3.3.0"
+        "axios": "^1.1.2",
+        "laravel-vite-plugin": "^0.7.2",
+        "vite": "^4.0.0"
     }
 }
