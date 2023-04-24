@@ -200,11 +200,9 @@ return [
     */
 
     'providers' => \Illuminate\Support\ServiceProvider::defaultProviders()->merge([
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        /**
+         * Package service providers.
+         */
 
         Astrotomic\Translatable\TranslatableServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
@@ -213,6 +211,18 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
+        /**
+         * Application service providers.
+         */
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+
+        /**
+         * Webkul package service providers.
+         */
         Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
@@ -263,7 +273,7 @@ return [
         'Core' => Webkul\Core\Facades\Core::class,
         'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Helper' => Konekt\Concord\Facades\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
         'ProductImage' => Webkul\Product\Facades\ProductImage::class,
