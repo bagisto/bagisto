@@ -7,17 +7,33 @@ use Webkul\Ui\DataGrid\DataGrid;
 
 class CMSPageDataGrid extends DataGrid
 {
-    protected $index = 'id';
+    /**
+     * Contains the keys for which extra filters to show.
+     *
+     * @var string[]
+     */
+    protected $extraFilters = [
+        'locales',
+    ];
 
-    protected $sortOrder = 'desc';
-
+    /**
+     * Prepare query builder.
+     *
+     * @return void
+     */
     public function prepareQueryBuilder()
     {
+        $locale = core()->getRequestedLocaleCode();
+
+        $whereInLocales = $locale === 'all'
+            ? core()->getAllLocales()->pluck('code')->toArray()
+            : [$locale];
+
         $queryBuilder = DB::table('cms_pages')
             ->select('cms_pages.id', 'cms_page_translations.page_title', 'cms_page_translations.url_key')
-            ->leftJoin('cms_page_translations', function($leftJoin) {
+            ->join('cms_page_translations', function ($leftJoin) use ($whereInLocales) {
                 $leftJoin->on('cms_pages.id', '=', 'cms_page_translations.cms_page_id')
-                         ->where('cms_page_translations.locale', app()->getLocale());
+                    ->whereIn('cms_page_translations.locale', $whereInLocales);
             });
 
         $this->addFilter('id', 'cms_pages.id');
@@ -25,6 +41,11 @@ class CMSPageDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function addColumns()
     {
         $this->addColumn([
@@ -55,9 +76,14 @@ class CMSPageDataGrid extends DataGrid
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
-        $this->addAction([ 
+        $this->addAction([
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'route'  => 'shop.cms.page',
@@ -72,15 +98,20 @@ class CMSPageDataGrid extends DataGrid
             'route'  => 'admin.cms.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
- 
+
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.cms.delete',
             'icon'   => 'icon trash-icon',
         ]);
-    } 
+    }
 
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
     public function prepareMassActions()
     {
         $this->addMassAction([

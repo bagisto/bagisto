@@ -6,7 +6,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="toolbar-template">
-        <div class="toolbar-wrapper" v-if='!isMobile()'>
+        <div class="toolbar-wrapper" v-if='currentScreen > 992'>
             <div class="view-mode">
                 @php
                   $viewOption = $toolbarHelper->getViewOption();
@@ -88,14 +88,14 @@
                 @endif
             </div>
 
-            <div class="col-3" @click="toggleLayeredNavigation({event: $event, actionType: 'open'})">
+            <div class="col-2 col-filter" @click="toggleLayeredNavigation({event: $event, actionType: 'open'})">
                 <a class="unset">
                     <i class="material-icons">filter_list</i>
                     <span>{{ __('velocity::app.shop.general.filter') }}</span>
                 </a>
             </div>
 
-            <div class="col-3">
+            <div class="col-5 col-order">
                 <div class="sorter" id="sort-by">
 
                     <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value">
@@ -112,7 +112,7 @@
                 </div>
             </div>
 
-            <div class="col-3">
+            <div class="col-3 col-count">
                 <div class="limiter" id="limit-by">
 
                     <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value" style="width: 57px;" aria-label="Show">
@@ -133,7 +133,7 @@
                 </div>
             </div>
 
-            <div class="col-3">
+            <div class="col-2 col-view">
                 @php
                     $isList = $toolbarHelper->isModeActive('list');
                 @endphp
@@ -159,14 +159,23 @@
         (() => {
             Vue.component('toolbar-component', {
                 template: '#toolbar-template',
-                data: function () {
+                data() {
                     return {
-                        'layeredNavigation': false,
+                        layeredNavigation: false,
+                        currentScreen : window.innerWidth,
                     }
                 },
 
+                created() {
+                    window.addEventListener('resize', this.handleResize);
+                },
+
+                destroyed() {
+                    window.removeEventListener('resize', this.handleResize);
+                },
+
                 watch: {
-                    layeredNavigation: function (value) {
+                    layeredNavigation(value) {
                         if (value) {
                             document.body.classList.add('open-hamburger');
                         } else {
@@ -176,9 +185,13 @@
                 },
 
                 methods: {
-                    toggleLayeredNavigation: function ({event, actionType}) {
+                    toggleLayeredNavigation({event, actionType}) {
                         this.layeredNavigation = !this.layeredNavigation;
                     },
+
+                    handleResize() {
+                        this.currentScreen = window.innerWidth;
+                    }
                 }
             })
         })()

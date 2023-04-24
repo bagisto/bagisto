@@ -285,13 +285,11 @@
 
             methods: {
                 addGroup: function (formScope) {
-                    var this_this = this;
-
-                    this.$validator.validateAll(formScope).then(function (result) {
+                    this.$validator.validateAll(formScope).then((result) => {
                         if (result) {
 
-                            var filteredGroups = groups.filter(function(group) {
-                                return this_this.group.name.trim() === group.name.trim()
+                            var filteredGroups = groups.filter((group) => {
+                                return this.group.name.trim() === group.name.trim()
                             })
 
                             if (filteredGroups.length) {
@@ -306,13 +304,15 @@
                                     });
                                 }
                             } else {
-                                groups.push(this_this.group);
+                                groups.push(this.group);
 
-                                groups = this_this.sortGroups();
+                                groups = this.sortGroups();
 
                                 this.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
-                                self.$set(self.$root.modalIds, 'addGroupForm', false);
+                                this.$set(this.$root.modalIds, 'addGroupForm', false);
+                                
+                                this.$validator.pause();
                             }
                         }
                     });

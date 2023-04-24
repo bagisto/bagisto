@@ -18,7 +18,7 @@
 
 @push('css')
     <style>
-        @media only screen and (max-width: 680px) {
+        @media only screen and (max-width: 680px){
             .content-container .content .page-header .page-title {
                 float: left;
                 width: 100%;
@@ -41,12 +41,11 @@
                 margin-top: 25px !important;
             }
         }
-
+        
         @media only screen and (min-width: 768px) { 
             .content-container .content .page-header .page-title {
                 margin: 6px 0 0 0;
             }
-
             .content-container .content .page-header .control-group {
                 width: 150px !important;
                 margin-top: 5px !important;

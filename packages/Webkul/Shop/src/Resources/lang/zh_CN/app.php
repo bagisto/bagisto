@@ -91,6 +91,7 @@ return [
         'percentage' => ':percentage %',
         'id-star' => '星',
         'name' => '名称',
+        'login-to-review' => '请先登录以查看产品',
     ],
 
     'customer' => [

@@ -1486,6 +1486,8 @@ return [
         'system' => [
             'catalog'                               => 'ক্যাটালগ',
             'homepage'                              => 'হোমপেজ কনফিগারেশন',
+            'product-view-page'                     => 'পণ্য দর্শন পৃষ্ঠা কনফিগারেশন',
+            'cart-view-page'                        => 'কার্ট ভিউ পৃষ্ঠা কনফিগারেশন',
             'allow-out-of-stock-items'              => 'স্টক আইটেম আউট অনুমতি',
             'products'                              => 'পণ্য',
             'guest-checkout'                        => 'অতিথি পাস',
@@ -1630,6 +1632,9 @@ return [
             'show-search-input-field'               => 'অনুসন্ধান ইনপুট ক্ষেত্র দেখান',
             'allow-no-of-new-product-homepage'      => 'হোমপেজে নতুন পণ্যের অনুমোদিত সংখ্যা',
             'allow-no-of-featured-product-homepage' => 'হোমপেজে বৈশিষ্ট্যযুক্ত পণ্যের অনুমোদিত সংখ্যা',
+            'allow-no-of-related-products'          => 'সম্পর্কিত পণ্য অনুমোদিত সংখ্যা',
+            'allow-no-of-up-sells-products'         => 'আপ-বিক্রয় পণ্য অনুমোদিত সংখ্যা',
+            'allow-no-of-cross-sells-products'      => 'ক্রস-সেল পণ্যের অনুমোদিত সংখ্যা',
             'width'                                 => 'প্রস্থ',
             'height'                                => 'উচ্চতা',
             'cache-small-image'                     => 'ছোট ইমেজ',

@@ -305,8 +305,7 @@ class Product extends Model implements ProductContract
      */
     public function related_products(): BelongsToMany
     {
-        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id')
-            ->limit(4);
+        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id');
     }
 
     /**
@@ -316,8 +315,7 @@ class Product extends Model implements ProductContract
      */
     public function up_sells(): BelongsToMany
     {
-        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id')
-            ->limit(4);
+        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id');
     }
 
     /**
@@ -327,8 +325,7 @@ class Product extends Model implements ProductContract
      */
     public function cross_sells(): BelongsToMany
     {
-        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id')
-            ->limit(4);
+        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id');
     }
 
     /**

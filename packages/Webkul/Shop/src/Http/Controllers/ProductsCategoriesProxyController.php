@@ -51,9 +51,12 @@ class ProductsCategoriesProxyController extends Controller
                     && $product->url_key
                     && $product->status
                 ) {
-                    $customer = auth()->guard('customer')->user();
-
-                    return view($this->_config['product_view'], compact('product', 'customer'));
+                    return view($this->_config['product_view'], [
+                        'product'          => $product,
+                        'customer'         => auth()->guard('customer')->user(),
+                        'relatedProducts'  => $product->related_products()->take(core()->getConfigData('catalog.products.product_view_page.no_of_related_products'))->get(),
+                        'upSellProducts'  => $product->up_sells()->take(core()->getConfigData('catalog.products.product_view_page.no_of_up_sells_products'))->get(),
+                    ]);
                 }
             }
 
