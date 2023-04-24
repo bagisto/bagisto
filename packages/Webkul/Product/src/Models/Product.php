@@ -516,7 +516,7 @@ class Product extends Model implements ProductContract
                     ->where('attribute_id', $attribute->id)
                     ->first();
 
-                if (! $attributeValue) {
+                if (empty($attributeValue->text_value)) {
                     $attributeValue = $this->attribute_values
                         ->where('channel', core()->getDefaultChannelCode())
                         ->where('locale', core()->getDefaultChannelLocaleCode())
