@@ -9,6 +9,7 @@
     "type": "project",
     "require": {
         "php": "^8.1",
+        "ext-calendar": "*",
         "ext-curl": "*",
         "ext-intl": "*",
         "ext-mbstring": "*",
