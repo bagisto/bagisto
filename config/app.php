@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
 
 return [
 
@@ -159,34 +160,15 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    /**
-     * Code editor.
-     */
-    'editor' => 'vscode',
-
     /*
-     *Application Version
-     */
+    |--------------------------------------------------------------------------
+    | Application Version
+    |--------------------------------------------------------------------------
+    | To Do (@devansh): Add this pull request (https://github.com/bagisto/bagisto/pull/5561) again and
+    | remove this config.
+    */
+
     'version' => env('APP_VERSION', '1.x-dev'),
-
-    /**
-     * Blacklisting attributes while debugging
-     */
-    'debug_blacklist' => [
-        '_ENV' => [
-            'APP_KEY',
-            'DB_PASSWORD'
-        ],
-
-        '_SERVER' => [
-            'APP_KEY',
-            'DB_PASSWORD'
-        ],
-
-        '_POST' => [
-            'password'
-        ],
-    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -199,11 +181,10 @@ return [
     |
     */
 
-    'providers' => \Illuminate\Support\ServiceProvider::defaultProviders()->merge([
+    'providers' => ServiceProvider::defaultProviders()->merge([
         /**
          * Package service providers.
          */
-
         Astrotomic\Translatable\TranslatableServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
@@ -252,7 +233,6 @@ return [
         Webkul\Marketing\Providers\MarketingServiceProvider::class,
         Webkul\Notification\Providers\NotificationServiceProvider::class,
         Webkul\Sitemap\Providers\SitemapServiceProvider::class
-
     ])->toArray(),
 
     /*
