@@ -3,7 +3,6 @@ import laravel from "laravel-vite-plugin";
 import {defineConfig} from "vite";
 import path from 'path';
 
-
 export default defineConfig({
     plugins: [
         vue({
