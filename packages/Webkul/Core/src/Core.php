@@ -21,7 +21,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '1.x-dev';
+    const BAGISTO_VERSION = '1.5.0';
 
     /**
      * Channel.
@@ -78,7 +78,7 @@ class Core
      */
     public function version()
     {
-        return config('app.version');
+        return static::BAGISTO_VERSION;
     }
 
     /**
@@ -192,7 +192,7 @@ class Core
      */
     public function getDefaultChannelLocaleCode(): string
     {
-        return $this->getDefaultChannel()->default_locale->code; 
+        return $this->getDefaultChannel()->default_locale->code;
     }
 
     /**
