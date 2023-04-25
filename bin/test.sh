@@ -1,25 +1,29 @@
 #!/bin/bash
 
-printf "### start preparation ###\n"
+output_message() {
+  printf "%s\n" "$1"
+}
+
+output_message "### start preparation ###"
 
     WORKPATH=$(dirname ${0})
-    printf ">> workpath is %s\n" ${WORKPATH}
+    output_message ">> workpath is %s" ${WORKPATH}
 
     LOG_DIR="${WORKPATH}/../storage/logs/tests"
-    printf ">> log-dir is %s\n" ${LOG_DIR}
+    output_message ">> log-dir is %s" ${LOG_DIR}
 
-    printf ">> create and truncate log dir\n"
+    output_message ">> create and truncate log dir"
     mkdir -p ${LOG_DIR}
     rm -rf ${LOG_DIR}/*
 
-    printf ">> truncate and migrate database\n"
+    output_message ">> truncate and migrate database"
     php artisan migrate:fresh --env=testing --quiet
 
-    printf ">> cleaning previous tests ###\n"
+    output_message ">> cleaning previous tests ###"
     ${WORKPATH}/../vendor/bin/codecept clean
-printf "### finish preparation ###\n"
+output_message "### finish preparation ###"
 
-printf "### start tests ###\n"
+output_message "### start tests ###"
 
     SUCCESS=1
     execSuite() {
@@ -39,13 +43,13 @@ printf "### start tests ###\n"
         SUCCESS=0
     fi
 
-printf "### finish tests ###\n"
+output_message "### finish tests ###"
 
 if [[ ${SUCCESS} -eq 1 ]]
 then
-    printf ">> all tests are \e[01;32mgreen\e[0m\n"
+    output_message ">> all tests are \e[01;32mgreen\e[0m"
     exit 0
 else
-    printf ">> at least one test is \e[01;31mred\e[0m\n"
+    output_message ">> at least one test is \e[01;31mred\e[0m"
     exit 1
 fi
