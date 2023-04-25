@@ -129,8 +129,10 @@ class ElasticSearchRepository
 
             case 'text':
                 return [
-                    'match_phrase_prefix' => [
-                        $attribute->code => $params[$attribute->code],
+                    'wildcard' => [
+                        $attribute->code => [
+                            'value' => '*' . $params[$attribute->code] . '*',
+                        ],
                     ],
                 ];
 
