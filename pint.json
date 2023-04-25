@@ -1,0 +1,14 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "binary_operator_spaces": {
+            "operators": {
+                "=>": "align"
+            }
+        },
+        "concat_space": {
+            "spacing": "one"
+        },
+        "no_superfluous_phpdoc_tags": false
+    }
+}
