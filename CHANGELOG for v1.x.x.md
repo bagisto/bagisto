@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.5.0 (21st of April 2023)** - *Release*
+## **v1.5.0 (26th of April 2023)** - *Release*
 
 * #7100 [feature] - The count of selected items should be visible if the user is performing the mass action.
 
