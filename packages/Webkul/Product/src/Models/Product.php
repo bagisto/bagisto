@@ -528,13 +528,6 @@ class Product extends Model implements ProductContract
                     ->where('channel', $channel)
                     ->where('attribute_id', $attribute->id)
                     ->first();
-
-                    if (empty($attributeValue[$attribute->column_name])) {
-                        $attributeValue = $this->attribute_values
-                            ->where('channel', core()->getDefaultChannelCode())
-                            ->where('attribute_id', $attribute->id)
-                            ->first();
-                    }
             }
         } else {
             if ($attribute->value_per_locale) {
