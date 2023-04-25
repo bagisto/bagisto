@@ -3,7 +3,7 @@
 namespace Webkul\Attribute\Repositories;
 
 use Illuminate\Container\Container;
-use Webkul\Attribute\Repositories\AttributeOptionRepository;
+use Webkul\Attribute\Contracts\Attribute;
 use Webkul\Core\Eloquent\Repository;
 
 class AttributeRepository extends Repository
@@ -18,8 +18,7 @@ class AttributeRepository extends Repository
     public function __construct(
         protected AttributeOptionRepository $attributeOptionRepository,
         Container $container
-    )
-    {
+    ) {
         parent::__construct($container);
     }
 
@@ -30,7 +29,7 @@ class AttributeRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Attribute\Contracts\Attribute';
+        return Attribute::class;
     }
 
     /**
@@ -68,7 +67,7 @@ class AttributeRepository extends Repository
      * @param  string  $attribute
      * @return \Webkul\Attribute\Contracts\Attribute
      */
-    public function update(array $data, $id, $attribute = "id")
+    public function update(array $data, $id, $attribute = 'id')
     {
         $data = $this->validateUserInput($data);
 
@@ -144,11 +143,11 @@ class AttributeRepository extends Repository
      * Get product default attributes.
      *
      * @param  array  $codes
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getProductDefaultAttributes($codes = null)
     {
-        $attributeColumns  = [
+        $attributeColumns = [
             'id',
             'code',
             'value_per_channel',
@@ -161,7 +160,7 @@ class AttributeRepository extends Repository
         if (
             ! is_array($codes)
             && ! $codes
-        )
+        ) {
             return $this->findWhereIn('code', [
                 'name',
                 'description',
@@ -173,6 +172,7 @@ class AttributeRepository extends Repository
                 'special_price_to',
                 'status',
             ], $attributeColumns);
+        }
 
         if (in_array('*', $codes)) {
             return $this->all($attributeColumns);
@@ -201,7 +201,7 @@ class AttributeRepository extends Repository
     /**
      * Get attribute by id.
      *
-     * @param  integer  $id
+     * @param  int  $id
      * @return \Webkul\Attribute\Contracts\Attribute
      */
     public function getAttributeById($id)
@@ -247,7 +247,7 @@ class AttributeRepository extends Repository
             if (
                 $attribute->code != 'tax_category_id'
                 && (
-                    in_array($attribute->type ,['select', 'multiselect'])
+                    in_array($attribute->type, ['select', 'multiselect'])
                     || $attribute->code == 'sku'
                 )
             ) {

@@ -2,10 +2,9 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Support\Str;
 use Elasticsearch;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 
 class ElasticSearchRepository
 {
@@ -19,10 +18,9 @@ class ElasticSearchRepository
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository
-    )
-    {
+    ) {
     }
-    
+
     /**
      * Return elastic search index name
      *
@@ -36,14 +34,12 @@ class ElasticSearchRepository
     /**
      * Returns product ids from Elasticsearch
      *
-     * @param  integer  $categoryId
+     * @param  int  $categoryId
      * @param  array  $options
      * @return array
      */
     public function search($categoryId, $options)
     {
-        $from = ($options['page'] * $options['limit']) - $options['limit'];
-
         $filters = $this->getFilters();
 
         if ($categoryId) {
@@ -54,10 +50,10 @@ class ElasticSearchRepository
             $filters['filter'][]['term']['type'] = $options['type'];
         }
 
-        $params = [
+        $results = Elasticsearch::search([
             'index' => $this->getIndexName(),
             'body'  => [
-                'from'          => $from,
+                'from'          => $options['from'],
                 'size'          => $options['limit'],
                 'stored_fields' => [],
                 'query'         => [
@@ -65,16 +61,14 @@ class ElasticSearchRepository
                 ],
                 'sort'          => $this->getSortOptions($options),
             ],
-        ];
-
-        $results = Elasticsearch::search($params);
+        ]);
 
         return [
             'total' => $results['hits']['total']['value'],
-            'ids'   => collect($results['hits']['hits'])->pluck('_id')->toArray()
+            'ids'   => collect($results['hits']['hits'])->pluck('_id')->toArray(),
         ];
     }
-    
+
     /**
      * Return filters
      *
@@ -117,7 +111,7 @@ class ElasticSearchRepository
                 return [
                     'term' => [
                         $attribute->code => intval($params[$attribute->code]),
-                    ]
+                    ],
                 ];
             case 'price':
                 $customerGroup = $this->customerRepository->getCurrentGroup();
@@ -132,14 +126,14 @@ class ElasticSearchRepository
                         ],
                     ],
                 ];
-            
+
             case 'text':
                 return [
                     'match_phrase_prefix' => [
                         $attribute->code => $params[$attribute->code],
-                    ]
+                    ],
                 ];
-            
+
             case 'select':
                 $filter[]['terms'][$attribute->code] = explode(',', $params[$attribute->code]);
 
@@ -150,7 +144,7 @@ class ElasticSearchRepository
                 return $filter;
         }
     }
-    
+
     /**
      * Returns sort options
      *

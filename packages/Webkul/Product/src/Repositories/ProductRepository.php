@@ -3,13 +3,13 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Attribute\Repositories\AttributeRepository;
 
 class ProductRepository extends Repository
 {
@@ -29,8 +29,7 @@ class ProductRepository extends Repository
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ElasticSearchRepository $elasticSearchRepository,
         Container $container
-    )
-    {
+    ) {
         parent::__construct($container);
     }
 
@@ -200,7 +199,7 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Search product from database
+     * Search product from database.
      *
      * @param  string  $categoryId
      * @return \Illuminate\Support\Collection
@@ -246,7 +245,9 @@ class ProductRepository extends Repository
                 $qb->where('products.type', $params['type']);
             }
 
-            #Filter collection by price
+            /**
+             * Filter query by price.
+             */
             if (! empty($params['price'])) {
                 $priceRange = explode(',', $params['price']);
 
@@ -256,10 +257,14 @@ class ProductRepository extends Repository
                 ]);
             }
 
-            #Retrieve all the filterable attributes
+            /**
+             * Retrieve all the filterable attributes.
+             */
             $filterableAttributes = $this->attributeRepository->getProductDefaultAttributes(array_keys($params));
 
-            #Filter the required attributes
+            /**
+             * Filter the required attributes.
+             */
             $attributes = $filterableAttributes->whereIn('code', [
                 'name',
                 'status',
@@ -267,7 +272,9 @@ class ProductRepository extends Repository
                 'url_key',
             ]);
 
-            #Filter collection by required attributes
+            /**
+             * Filter collection by required attributes.
+             */
             foreach ($attributes as $attribute) {
                 $alias = $attribute->code . '_product_attribute_values';
 
@@ -287,7 +294,9 @@ class ProductRepository extends Repository
                 }
             }
 
-            #Filter the filterable attributes
+            /**
+             * Filter the filterable attributes.
+             */
             $attributes = $filterableAttributes->whereNotIn('code', [
                 'price',
                 'name',
@@ -296,9 +305,11 @@ class ProductRepository extends Repository
                 'url_key',
             ]);
 
-            #Filter collection by attributes
+            /**
+             * Filter query by attributes.
+             */
             if ($attributes->isNotEmpty()) {
-                $qb->leftJoin('product_attribute_values', 'variants.id', '=', 'product_attribute_values.product_id');
+                $qb->leftJoin('product_attribute_values', 'products.id', '=', 'product_attribute_values.product_id');
 
                 $qb->where(function ($filterQuery) use ($params, $attributes) {
                     foreach ($attributes as $attribute) {
@@ -319,13 +330,19 @@ class ProductRepository extends Repository
                     }
                 });
 
-                # this is key! if a product has been filtered down to the same number of attributes that we filtered on,
-                # we know that it has matched all of the requested filters.
-                $qb->groupBy('variants.id');
+                /**
+                 * This is key! if a product has been filtered down to the same number of attributes that we filtered on,
+                 * we know that it has matched all of the requested filters.
+                 *
+                 * To Do (@devansh): Need to monitor this.
+                 */
+                $qb->groupBy('products.id');
                 $qb->havingRaw('COUNT(*) = ' . count($attributes));
             }
 
-            #Sort collection
+            /**
+             * Sort collection.
+             */
             $sortOptions = $this->getSortOptions($params);
 
             if ($sortOptions['order'] != 'rand') {
@@ -343,7 +360,7 @@ class ProductRepository extends Repository
                                 ->where($alias . '.channel', core()->getRequestedChannelCode())
                                 ->where($alias . '.locale', core()->getRequestedLocaleCode());
                         })
-                        ->orderBy($alias . '.' .  $attribute->column_name, $sortOptions['order']);
+                            ->orderBy($alias . '.' . $attribute->column_name, $sortOptions['order']);
                     }
                 } else {
                     /* `created_at` is not an attribute so it will be in else case */
@@ -356,7 +373,9 @@ class ProductRepository extends Repository
             return $qb->groupBy('products.id');
         });
 
-        # apply scope query so we can fetch the raw sql and perform a count
+        /**
+         * Apply scope query so we can fetch the raw sql and perform a count.
+         */
         $query->applyScope();
 
         $countQuery = clone $query->model;
@@ -373,7 +392,6 @@ class ProductRepository extends Repository
         $currentPage = Paginator::resolveCurrentPage('page');
 
         if ($count > 0) {
-            # apply a new scope query to limit results to one page
             $query->scopeQuery(function ($query) use ($currentPage, $limit) {
                 return $query->forPage($currentPage, $limit);
             });
@@ -381,12 +399,10 @@ class ProductRepository extends Repository
             $items = $query->get();
         }
 
-        $results = new LengthAwarePaginator($items, $count, $limit, $currentPage, [
+        return new LengthAwarePaginator($items, $count, $limit, $currentPage, [
             'path'  => request()->url(),
             'query' => request()->query(),
         ]);
-
-        return $results;
     }
 
     /**
@@ -407,7 +423,7 @@ class ProductRepository extends Repository
 
         $indices = $this->elasticSearchRepository->search($categoryId, [
             'type'  => $params['type'] ?? '',
-            'page'  => $currentPage,
+            'from'  => ($currentPage * $limit) - $limit,
             'limit' => $limit,
             'sort'  => $sortOptions['sort'],
             'order' => $sortOptions['order'],
@@ -424,7 +440,7 @@ class ProductRepository extends Repository
             $qb = $query->distinct()
                 ->whereIn('products.id', $indices['ids']);
 
-            #Sort collection
+            //Sort collection
             $qb->orderBy(DB::raw('FIELD(id, ' . implode(',', $indices['ids']) . ')'));
 
             return $qb;
@@ -433,9 +449,9 @@ class ProductRepository extends Repository
         $items = $indices['total'] ? $query->get() : [];
 
         $results = new LengthAwarePaginator($items, $indices['total'], $limit, $currentPage, [
-                'path'  => request()->url(),
-                'query' => request()->query(),
-            ]
+            'path'  => request()->url(),
+            'query' => request()->query(),
+        ]
         );
 
         return $results;
@@ -445,7 +461,7 @@ class ProductRepository extends Repository
      * Products to show per page
      *
      * @param  array  $params
-     * @return integer
+     * @return int
      */
     public function getPerPageLimit($params)
     {
@@ -505,7 +521,7 @@ class ProductRepository extends Repository
     /**
      * Return category product maximum price.
      *
-     * @param  integer  $categoryId
+     * @param  int  $categoryId
      * @return float
      */
     public function getCategoryProductMaximumPrice($categoryId)
