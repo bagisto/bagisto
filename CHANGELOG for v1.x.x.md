@@ -60,6 +60,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #6744 [enhancement] - There should be a mouse-hover effect for the admin submenu in the dark theme.
 
+* #7532 [fixed] - It is showing exception while entering duplicate SKU in the configure product.
+
+* #7523 [fixed] - If the product name is not added name with other language it should be shown as default language on the homepage while selecting other languages. 
+
+* #7522 [fixed] - In other language, it is showing null instead of product name in the bundle product's options on the Product page.
+
 * #7520 [fixed] - In the French language, it is showing (&#039;) code view shopping cart in mini cart.
 
 * #7521 [fixed] - Not showing dropdown sign in the filter at customer end.
