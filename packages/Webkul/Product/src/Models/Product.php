@@ -516,7 +516,7 @@ class Product extends Model implements ProductContract
                     ->where('attribute_id', $attribute->id)
                     ->first();
 
-                if (empty($attributeValue->text_value)) {
+                if (empty($attributeValue[$attribute->column_name])) {
                     $attributeValue = $this->attribute_values
                         ->where('channel', core()->getDefaultChannelCode())
                         ->where('locale', core()->getDefaultChannelLocaleCode())
@@ -528,6 +528,13 @@ class Product extends Model implements ProductContract
                     ->where('channel', $channel)
                     ->where('attribute_id', $attribute->id)
                     ->first();
+
+                    if (empty($attributeValue[$attribute->column_name])) {
+                        $attributeValue = $this->attribute_values
+                            ->where('channel', core()->getDefaultChannelCode())
+                            ->where('attribute_id', $attribute->id)
+                            ->first();
+                    }
             }
         } else {
             if ($attribute->value_per_locale) {
@@ -535,6 +542,13 @@ class Product extends Model implements ProductContract
                     ->where('locale', $locale)
                     ->where('attribute_id', $attribute->id)
                     ->first();
+
+                    if (empty($attributeValue[$attribute->column_name])) {
+                        $attributeValue = $this->attribute_values
+                            ->where('locale', core()->getDefaultChannelLocaleCode())
+                            ->where('attribute_id', $attribute->id)
+                            ->first();
+                    }
             } else {
                 $attributeValue = $this->attribute_values
                     ->where('attribute_id', $attribute->id)
