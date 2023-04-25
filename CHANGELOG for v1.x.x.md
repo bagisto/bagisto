@@ -112,7 +112,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #7273 [fixed] - Layered navigation filters not working .
 
-*#7244 [fixed] - shop.js Cannot read properties of undefined (reading 'protocol') 
+* #7244 [fixed] - shop.js Cannot read properties of undefined (reading 'protocol') 
 
 * #7284 [fixed] - Category slug is getting updated if you are only providing translation for another enabled locale.
 
