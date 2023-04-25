@@ -44,7 +44,7 @@ return [
 
     /*
      * The package will make an educated guess as to where Google Chrome is installed.
-     * You can also manually pass it's location here.
+     * You can also manually pass its location here.
      */
     'chrome_binary_path' => null,
 

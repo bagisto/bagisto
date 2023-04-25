@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
 
 return [
 
@@ -159,34 +160,15 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    /**
-     * Code editor.
-     */
-    'editor' => 'vscode',
-
     /*
-     *Application Version
-     */
+    |--------------------------------------------------------------------------
+    | Application Version
+    |--------------------------------------------------------------------------
+    | To Do (@devansh): Add this pull request (https://github.com/bagisto/bagisto/pull/5561) again and
+    | remove this config.
+    */
+
     'version' => env('APP_VERSION', '1.x-dev'),
-
-    /**
-     * Blacklisting attributes while debugging
-     */
-    'debug_blacklist' => [
-        '_ENV' => [
-            'APP_KEY',
-            'DB_PASSWORD'
-        ],
-
-        '_SERVER' => [
-            'APP_KEY',
-            'DB_PASSWORD'
-        ],
-
-        '_POST' => [
-            'password'
-        ],
-    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -199,44 +181,19 @@ return [
     |
     */
 
-    'providers' => [
-
-        /*
-         * Laravel Framework Service Providers.
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        /**
+         * Package service providers.
          */
-        Illuminate\Auth\AuthServiceProvider::class,
-        Illuminate\Broadcasting\BroadcastServiceProvider::class,
-        Illuminate\Bus\BusServiceProvider::class,
-        Illuminate\Cache\CacheServiceProvider::class,
-        Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        Illuminate\Cookie\CookieServiceProvider::class,
-        Illuminate\Database\DatabaseServiceProvider::class,
-        Illuminate\Encryption\EncryptionServiceProvider::class,
-        Illuminate\Filesystem\FilesystemServiceProvider::class,
-        Illuminate\Foundation\Providers\FoundationServiceProvider::class,
-        Illuminate\Hashing\HashServiceProvider::class,
-        Illuminate\Mail\MailServiceProvider::class,
-        Illuminate\Notifications\NotificationServiceProvider::class,
-        Illuminate\Pagination\PaginationServiceProvider::class,
-        Illuminate\Pipeline\PipelineServiceProvider::class,
-        Illuminate\Queue\QueueServiceProvider::class,
-        Illuminate\Redis\RedisServiceProvider::class,
-        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
-        Illuminate\Session\SessionServiceProvider::class,
-        Illuminate\Translation\TranslationServiceProvider::class,
-        Illuminate\Validation\ValidationServiceProvider::class,
-        Illuminate\View\ViewServiceProvider::class,
-
-        /*
-         * Package Service Providers.
-         */
-
         Astrotomic\Translatable\TranslatableServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Konekt\Concord\ConcordServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
-        /*
-         * Application Service Providers.
+        /**
+         * Application service providers.
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -245,14 +202,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /**
-         * Repository Service Providers.
-         */
-        Prettus\Repository\Providers\RepositoryServiceProvider::class,
-        Konekt\Concord\ConcordServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
-
-        /**
-         * Webkul Package Service Providers.
+         * Webkul package service providers.
          */
         Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\User\Providers\UserServiceProvider::class,
@@ -283,7 +233,7 @@ return [
         Webkul\Marketing\Providers\MarketingServiceProvider::class,
         Webkul\Notification\Providers\NotificationServiceProvider::class,
         Webkul\Sitemap\Providers\SitemapServiceProvider::class
-    ],
+    ])->toArray(),
 
     /*
     |--------------------------------------------------------------------------
@@ -303,7 +253,7 @@ return [
         'Core' => Webkul\Core\Facades\Core::class,
         'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Helper' => Konekt\Concord\Facades\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
         'ProductImage' => Webkul\Product\Facades\ProductImage::class,
