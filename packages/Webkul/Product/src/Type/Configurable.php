@@ -2,8 +2,8 @@
 
 namespace Webkul\Product\Type;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Webkul\Admin\Validations\ConfigurableUniqueSku;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
@@ -42,7 +42,7 @@ class Configurable extends AbstractType
         'price',
         'weight',
         'status',
-        'tax_category_id'
+        'tax_category_id',
     ];
 
     /**
@@ -62,21 +62,21 @@ class Configurable extends AbstractType
     /**
      * Is a composite product type.
      *
-     * @var boolean
+     * @var bool
      */
     protected $isComposite = true;
 
     /**
      * Show quantity box.
      *
-     * @var boolean
+     * @var bool
      */
     protected $showQuantityBox = true;
 
     /**
      * Has child products i.e. variants.
      *
-     * @var boolean
+     * @var bool
      */
     protected $hasVariants = true;
 
@@ -163,8 +163,8 @@ class Configurable extends AbstractType
     /**
      * Update configurable product.
      *
-     * @param  array   $data
-     * @param  int     $id
+     * @param  array  $data
+     * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Product\Contracts\Product
      */
@@ -179,7 +179,7 @@ class Configurable extends AbstractType
         }
 
         $previousVariantIds = $product->variants->pluck('id');
-        
+
         if (isset($data['variants'])) {
             foreach ($data['variants'] as $variantId => $variantData) {
                 if (Str::contains($variantId, 'variant_')) {
@@ -200,7 +200,7 @@ class Configurable extends AbstractType
                     $variantData['locale'] = $data['locale'];
 
                     $variantData['tax_category_id'] = $data['tax_category_id'];
-                    
+
                     $this->updateVariant($variantData, $variantId);
                 }
             }
@@ -217,8 +217,8 @@ class Configurable extends AbstractType
      * Create variant.
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @param  array                              $permutation
-     * @param  array                              $data
+     * @param  array  $permutation
+     * @param  array  $data
      * @return \Webkul\Product\Contracts\Product
      */
     public function createVariant($product, $permutation, $data = [])
@@ -347,13 +347,13 @@ class Configurable extends AbstractType
      * Update variant.
      *
      * @param  array  $data
-     * @param  int    $id
+     * @param  int  $id
      * @return \Webkul\Product\Contracts\Product
      */
     public function updateVariant(array $data, $id)
     {
         $variant = $this->productRepository->find($id);
-        
+
         $variant->update(['sku' => $data['sku']]);
 
         foreach ($this->fillableTypes as $attributeCode) {
@@ -362,7 +362,7 @@ class Configurable extends AbstractType
             }
 
             $attribute = $this->getAttributeByCode($attributeCode);
-    
+
             if ($attribute->value_per_channel) {
                 if ($attribute->value_per_locale) {
                     $productAttributeValue = $variant->attribute_values
@@ -429,7 +429,7 @@ class Configurable extends AbstractType
         foreach ($this->product->super_attributes as $superAttribute) {
             $product->super_attributes()->save($superAttribute);
         }
-        
+
         foreach ($this->product->variants as $variant) {
             $newVariant = $variant->getTypeInstance()->copy();
 
@@ -488,7 +488,10 @@ class Configurable extends AbstractType
     {
         return [
             'variants.*.name'   => 'required',
-            'variants.*.sku'    => 'required',
+            'variants.*.sku'    => [
+                'required',
+                new ConfigurableUniqueSku($this->getChildrenIds()),
+            ],
             'variants.*.price'  => 'required',
             'variants.*.weight' => 'required',
         ];
@@ -532,7 +535,7 @@ class Configurable extends AbstractType
         if ($this->haveDiscount()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
                 . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'.'<span class="regular-price"></span>';
+                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>' . '<span class="regular-price"></span>';
         } else {
             return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
                 . ' '
@@ -549,7 +552,7 @@ class Configurable extends AbstractType
     public function prepareForCart($data)
     {
         $data['quantity'] = parent::handleQuantity((int) $data['quantity']);
-        
+
         if (empty($data['selected_configurable_option'])) {
             if ($this->getDefaultVariantId()) {
                 $data['selected_configurable_option'] = $this->getDefaultVariantId();
@@ -777,5 +780,3 @@ class Configurable extends AbstractType
         return app(ConfigurableIndexer::class);
     }
 }
-
-
