@@ -12,12 +12,23 @@ class Requirement {
         // Server Requirements
         $requirements =  [
             'php' => [
-                'openssl',
-                'pdo',
-                'mbstring',
-                'tokenizer',
-                'JSON',
+                'calendar',
+                'ctype',
                 'cURL',
+                'dom',
+                'fileinfo',
+                'filter',
+                'gd',
+                'hash',
+                'intl',
+                'JSON',
+                'mbstring',
+                'openssl',
+                'pcre',
+                'pdo',
+                'session',
+                'tokenizer',
+                'xml',
             ],
             // 'apache' => [
             //     'mod_rewrite',
@@ -79,7 +90,7 @@ class Requirement {
          *
          * @var string _minPhpVersion
          */
-        $_minPhpVersion = '8.0.2';
+        $_minPhpVersion = '8.1';
 
         $currentPhpVersion = $this->getPhpVersionInfo();
         $supported = false;
