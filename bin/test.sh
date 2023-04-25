@@ -3,6 +3,7 @@
 output_message() {
   printf "%s\n" "$1"
 }
+
 output_message "### start preparation ###"
 
     WORKPATH=$(dirname ${0})
