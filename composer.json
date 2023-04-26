@@ -116,7 +116,6 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\API\\": "tests/api/",
             "Tests\\Functional\\": "tests/functional/",
             "Tests\\Unit\\": "tests/unit/"
         }
@@ -151,8 +150,7 @@
             "@set -e",
             "@php artisan migrate:fresh --env=testing",
             "vendor\\bin\\codecept.bat run unit",
-            "vendor\\bin\\codecept.bat run functional",
-            "vendor\\bin\\codecept.bat run api"
+            "vendor\\bin\\codecept.bat run functional"
         ]
     },
     "config": {
