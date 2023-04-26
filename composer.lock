@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "88720d0b1b3ff4763329e1a49d7a085d",
+    "content-hash": "9048b58b919427341622bee27567124b",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -149,49 +149,6 @@
                 "source": "https://github.com/bagisto/laravel-data-faker/tree/v2.0.0-ALPHA1"
             },
             "time": "2022-10-14T10:10:16+00:00"
-        },
-        {
-            "name": "bagisto/rest-api",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bagisto/rest-api.git",
-                "reference": "9fbfea5215e1dc1e7158819905d3ea6d7ae71a02"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/rest-api/zipball/9fbfea5215e1dc1e7158819905d3ea6d7ae71a02",
-                "reference": "9fbfea5215e1dc1e7158819905d3ea6d7ae71a02",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Webkul\\RestApi\\Providers\\RestApiServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Webkul\\RestApi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Devansh Bawari",
-                    "email": "devansh.bawari419@webkul.com"
-                }
-            ],
-            "support": {
-                "issues": "https://github.com/bagisto/rest-api/issues",
-                "source": "https://github.com/bagisto/rest-api/tree/v1.0.0"
-            },
-            "time": "2022-10-06T11:02:12+00:00"
         },
         {
             "name": "bagistobrasil/bagisto-product-social-share",
