@@ -76,9 +76,6 @@ jobs:
       - name: Execute Functional Tests
         run: set -e && vendor/bin/codecept run functional
 
-      - name: Execute API Tests
-        run: set -e && vendor/bin/codecept run api
-
       - name: Persist Test Artifacts
         uses: actions/upload-artifact@v1
         if: always()

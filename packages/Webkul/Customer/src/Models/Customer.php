@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
-use Laravel\Sanctum\HasApiTokens;
 use Webkul\Checkout\Models\CartProxy;
 use Webkul\Core\Models\SubscribersListProxy;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
@@ -18,7 +17,7 @@ use Webkul\Sales\Models\OrderProxy;
 
 class Customer extends Authenticatable implements CustomerContract
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     /**
      * The table associated with the model.
@@ -68,7 +67,7 @@ class Customer extends Authenticatable implements CustomerContract
      */
     protected static function newFactory()
     {
-        return CustomerFactory::new ();
+        return CustomerFactory::new();
     }
 
     /**
@@ -80,26 +79,6 @@ class Customer extends Authenticatable implements CustomerContract
     public function sendPasswordResetNotification($token): void
     {
         $this->notify(new CustomerResetPassword($token));
-    }
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims(): array
-    {
-        return [];
     }
 
     /**
