@@ -27,14 +27,12 @@ class CountryStateController extends Controller
      */
     public function getCountries()
     {
-        $countries = core()->countries()->map(fn ($country) => [
-            'id'   => $country->id,
-            'code' => $country->code,
-            'name' => $country->name,
-        ]);
-
         return response()->json([
-            'data' => $countries,
+            'data' => core()->countries()->map(fn ($country) => [
+                'id'   => $country->id,
+                'code' => $country->code,
+                'name' => $country->name,
+            ]),
         ]);
     }
 
@@ -45,10 +43,8 @@ class CountryStateController extends Controller
      */
     public function getStates()
     {
-        $resources = core()->groupedStatesByCountries();
-
         return response()->json([
-            'data' => $resources,
+            'data' => core()->groupedStatesByCountries(),
         ]);
     }
 }
