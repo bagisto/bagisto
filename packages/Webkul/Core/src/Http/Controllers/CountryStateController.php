@@ -8,13 +8,6 @@ use Webkul\Core\Repositories\CountryStateRepository;
 class CountryStateController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\CountryRepository  $countryRepository
@@ -24,55 +17,34 @@ class CountryStateController extends Controller
     public function __construct(
         protected CountryRepository $countryRepository,
         protected CountryStateRepository $countryStateRepository
-    )
-    {
-        $this->_config = request('_config');
+    ) {
     }
 
     /**
-     * Function to retrieve states with respect to countries with codes and names for both of the countries and states.
+     * Get countries.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getCountries()
     {
-        $countries = $this->countryRepository->all();
-
-        $states = $this->countryStateRepository->all();
-
-        $nestedArray = [];
-
-        foreach ($countries as $keyCountry => $country) {
-            foreach ($states as $keyState => $state) {
-                if ($country->code == $state->country_code) {
-                    $nestedArray[$country->name][$state->code] = $state->default_name;
-                }
-            }
-        }
-
-        return view($this->_config['view'])->with('statesCountries', $nestedArray);
+        return response()->json([
+            'data' => core()->countries()->map(fn ($country) => [
+                'id'   => $country->id,
+                'code' => $country->code,
+                'name' => $country->name,
+            ]),
+        ]);
     }
 
     /**
+     * Get states.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function getStates($country)
+    public function getStates()
     {
-        $countries = $this->countryRepository->all();
-        
-        $states = $this->countryStateRepository->all();
-
-        $nestedArray = [];
-
-        foreach ($countries as $keyCountry => $country) {
-            foreach ($states as $keyState => $state) {
-                if ($country->code == $state->country_code) {
-                    $nestedArray[$country->name][$state->code] = $state->default_name;
-                }
-            }
-        }
-
-        return view($this->_config['view'])->with('statesCountries', $nestedArray);
+        return response()->json([
+            'data' => core()->groupedStatesByCountries(),
+        ]);
     }
 }
