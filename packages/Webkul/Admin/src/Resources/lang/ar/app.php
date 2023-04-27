@@ -1524,8 +1524,13 @@ return [
         'system'             => [
             'catalog'                               => 'فهرس',
             'homepage'                              => 'تكوين الصفحة الرئيسية',
+            'product-view-page'                     => 'تكوين صفحة عرض المنتج',
+            'cart-view-page'                        => 'تكوين صفحة عرض السلة',
             'allow-no-of-new-product-homepage'      => 'عدد المنتجات الجديدة المسموح بها في الصفحة الرئيسية',
             'allow-no-of-featured-product-homepage' => 'عدد المنتجات المميزة المسموح بها في الصفحة الرئيسية',
+            'allow-no-of-related-products'          => 'عدد المنتجات ذات الصلة المسموح به',
+            'allow-no-of-up-sells-products'         => 'عدد منتجات البيع الصعودي المسموح به',
+            'allow-no-of-cross-sells-products'      => 'عدد منتجات البيع المتقاطع المسموح بها',
             'allow-out-of-stock-items'              => 'السماح بعناصر من المخزون',
             'products'                              => 'منتجات',
             'guest-checkout'                        => 'ضيف المحاسبة',

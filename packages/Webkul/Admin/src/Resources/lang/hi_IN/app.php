@@ -1481,6 +1481,8 @@ return [
         'system' => [
             'catalog'                               =>'कैटलॉग',
             'homepage'                              => 'मुखपृष्ठ विन्यास',
+            'product-view-page'                     => 'उत्पाद दृश्य पृष्ठ कॉन्फ़िगरेशन',
+            'cart-view-page'                        => 'कार्ट व्यू पेज कॉन्फ़िगरेशन',
             'allow-out-of-stock-items'              => 'स्टॉक में नहीं होने वाली वस्तुओं की अनुमति दें',
             'products'                              => 'उत्पाद',
             'guest-checkout'                        => 'मेहमान के होटल छोड़ने का समय',
@@ -1625,6 +1627,9 @@ return [
             'show-search-input-field'               => 'खोज इनपुट फ़ील्ड दिखाएं',
             'allow-no-of-new-product-homepage'      => 'मुखपृष्ठ में नए उत्पाद की अनुमत संख्या',
             'allow-no-of-featured-product-homepage' => 'मुखपृष्ठ में विशेष रुप से प्रदर्शित उत्पाद की अनुमत संख्या',
+            'allow-no-of-related-products'          => 'संबंधित उत्पादों की अनुमत संख्या',
+            'allow-no-of-up-sells-products'         => 'अप-सेल उत्पादों की अनुमत संख्या',
+            'allow-no-of-cross-sells-products'      => 'क्रॉस-सेल उत्पादों की अनुमत संख्या',
             'width'                                 => 'चौड़ाई',
             'height'                                => 'ऊंचाई',
             'cache-small-image'                     => 'छोटी छवि',

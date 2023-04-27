@@ -1487,6 +1487,8 @@ return [
         'system' => [
             'catalog'                               => 'Catalog',
             'homepage'                              => 'Homepage configuration',
+            'product-view-page'                     => 'Product view page configuration',
+            'cart-view-page'                        => 'Cart view page confguration',
             'allow-out-of-stock-items'              => 'Allow out of stock items',
             'products'                              => 'Products',
             'guest-checkout'                        => 'Guest Checkout',
@@ -1631,6 +1633,9 @@ return [
             'show-search-input-field'               => 'Show Search Input Field',
             'allow-no-of-new-product-homepage'      => 'Allowed No of New Product in Homepage',
             'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-no-of-related-products'          => 'Allowed number of Related Products',
+            'allow-no-of-up-sells-products'         => 'Allowed number of Up-Sell Products',
+            'allow-no-of-cross-sells-products'      => 'Allowed number of Cross-Sell Products',
             'width'                                 => 'Width',
             'height'                                => 'Height',
             'cache-small-image'                     => 'Small Image',

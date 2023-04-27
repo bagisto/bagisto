@@ -486,7 +486,7 @@
                 </div>
             </modal>
 
-            <datagrid-plus src="{{ route('admin.cart_rules-coupons.index', $cartRule->id) }}"></datagrid-plus>
+            <datagrid-plus src="{{ route('admin.cart_rules.coupons.index', $cartRule->id) }}"></datagrid-plus>
         </div>
     </script>
 
@@ -763,7 +763,7 @@
 
                     this.$validator.validateAll(formScope).then(function (result) {
                         if (result) {
-                            self.$http.post("{{ route('admin.cart_rules-coupons.store', $cartRule->id) }}", self.coupon_format)
+                            self.$http.post("{{ route('admin.cart_rules.coupons.store', $cartRule->id) }}", self.coupon_format)
                                 .then(function(response) {
                                     window.flashMessages = [{
                                         'type': 'alert-success',

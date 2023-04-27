@@ -1512,8 +1512,13 @@ return [
         'system'             => [
             'catalog'                               => 'Catálogo',
             'homepage'                              => 'Configuración de Página de Inicio',
+            'product-view-page'                     => 'Configuración de la página de visualización del producto',
+            'cart-view-page'                        => 'Configuración de página de vista de carrito',
             'allow-no-of-new-product-homepage'      => 'No permitido Nuevo Producto en la Página de Inicio',
             'allow-no-of-featured-product-homepage' => 'No Permitido Producto Destacado en Página de Inicio',
+            'allow-no-of-related-products'          => 'Número permitido de productos relacionados',
+            'allow-no-of-up-sells-products'         => 'Número permitido de productos de venta adicional',
+            'allow-no-of-cross-sells-products'      => 'Número permitido de productos de venta cruzada',
             'allow-out-of-stock-items'              => 'Permitir Artículos Agotados',
             'products'                              => 'Productos',
             'guest-checkout'                        => 'Compras como invitado',

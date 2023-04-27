@@ -10,13 +10,6 @@ return [
             'name' => 'Default'
         ],
 
-        // 'bliss' => [
-        //     'views_path' => 'resources/themes/bliss/views',
-        //     'assets_path' => 'public/themes/bliss/assets',
-        //     'name' => 'Bliss',
-        //     'parent' => 'default'
-        // ]
-
         'velocity' => [
             'views_path' => 'resources/themes/velocity/views',
             'assets_path' => 'public/themes/velocity/assets',

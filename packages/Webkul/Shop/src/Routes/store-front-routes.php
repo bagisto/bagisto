@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\CMS\Http\Controllers\Shop\PagePresenterController;
+use Webkul\Core\Http\Controllers\CountryStateController;
+use Webkul\Shop\Http\Controllers\CategoryController;
 use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\ProductController;
-use Webkul\Shop\Http\Controllers\CategoryController;
 use Webkul\Shop\Http\Controllers\ReviewController;
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
@@ -51,6 +52,12 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     ])->name('shop.search.index');
 
     Route::post('upload-search-image', [HomeController::class, 'upload'])->name('shop.image.search.upload');
+
+    /**
+     * Countries and states.
+     */
+    Route::get('countries', [CountryStateController::class, 'getCountries'])->name('shop.countries');
+    Route::get('countries/states', [CountryStateController::class, 'getStates'])->name('shop.countries.states');
 
     /**
      * Subscription routes.

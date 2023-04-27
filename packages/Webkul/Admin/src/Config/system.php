@@ -141,6 +141,35 @@ return [
             ],
         ],
     ], [
+        'key'    => 'catalog.products.product_view_page',
+        'name'   => 'admin::app.admin.system.product-view-page',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'       => 'no_of_related_products',
+                'title'      => 'admin::app.admin.system.allow-no-of-related-products',
+                'type'       => 'number',
+                'validation' => 'min:0',
+            ], [
+                'name'       => 'no_of_up_sells_products',
+                'title'      => 'admin::app.admin.system.allow-no-of-up-sells-products',
+                'type'       => 'number', 
+                'validation' => 'min:0',
+            ], 
+        ],
+    ], [
+            'key'    => 'catalog.products.cart_view_page',
+            'name'   => 'admin::app.admin.system.cart-view-page',
+            'sort'   => 3,
+            'fields' => [
+                [
+                    'name'       => 'no_of_cross_sells_products',
+                    'title'      => 'admin::app.admin.system.allow-no-of-cross-sells-products',
+                    'type'       => 'number',
+                    'validation' => 'min:0',
+                ],
+            ],
+    ], [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.admin.system.storefront',
         'sort'   => 3,

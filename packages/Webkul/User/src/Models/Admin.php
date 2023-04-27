@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Storage;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
@@ -14,7 +13,7 @@ use Webkul\User\Notifications\AdminResetPassword;
 
 class Admin extends Authenticatable implements AdminContract
 {
-    use HasFactory, HasApiTokens, Notifiable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -87,8 +86,8 @@ class Admin extends Authenticatable implements AdminContract
     /**
      * Checks if admin has permission to perform certain action.
      *
-     * @param  String  $permission
-     * @return Boolean
+     * @param  string  $permission
+     * @return bool
      */
     public function hasPermission($permission)
     {
@@ -120,26 +119,6 @@ class Admin extends Authenticatable implements AdminContract
      */
     protected static function newFactory(): Factory
     {
-        return AdminFactory::new ();
-    }
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims(): array
-    {
-        return [];
+        return AdminFactory::new();
     }
 }

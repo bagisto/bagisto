@@ -1476,8 +1476,13 @@ return [
         'system'             => [
             'catalog'                               => 'Katalog',
             'homepage'                              => 'Ana sayfa yapılandırması',
+            'product-view-page'                     => 'Ürün görüntüleme sayfası yapılandırması',
+            'cart-view-page'                        => 'Sepet görünümü sayfası yapılandırması',
             'allow-no-of-new-product-homepage'      => 'Ana Sayfada İzin Verilen Yeni Ürün Sayısı',
             'allow-no-of-featured-product-homepage' => 'Ana Sayfada İzin Verilen Öne Çıkan Ürün Sayısı',
+            'allow-no-of-related-products'          => 'İzin verilen İlgili Ürün sayısı',
+            'allow-no-of-up-sells-products'         => 'İzin verilen Ek Satış Ürünleri sayısı',
+            'allow-no-of-cross-sells-products'      => 'İzin verilen Çapraz Satış Ürünleri sayısı',
             'allow-out-of-stock-items'              => 'Stokta olmayan ürünlere izin ver',
             'products'                              => 'Ürünler',
             'guest-checkout'                        => 'Ziyaretçi Satışı',

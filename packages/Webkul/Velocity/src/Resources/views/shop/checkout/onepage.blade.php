@@ -26,8 +26,8 @@
                     <div
                         class="step-content shipping"
                         id="shipping-section"
-                        v-if="showShippingSection"                      
-                        >
+                        v-if="showShippingSection"
+                    >
                         <shipping-section
                             :methods="allShippingMethods"
                             :key="shippingComponentKey"
@@ -207,7 +207,7 @@
                     },
 
                     fetchCountries: function () {
-                        let countriesEndPoint = `${this.$root.baseUrl}/api/v1/countries?pagination=0&sort=id&order=asc`;
+                        let countriesEndPoint = '{{ route('shop.countries') }}';
 
                         this.$http.get(countriesEndPoint)
                             .then(response => {
@@ -217,7 +217,7 @@
                     },
 
                     fetchCountryStates: function () {
-                        let countryStateEndPoint = `${this.$root.baseUrl}/api/v1/countries/states/groups?pagination=0`;
+                        let countryStateEndPoint = '{{ route('shop.countries.states') }}';
 
                         this.$http.get(countryStateEndPoint)
                             .then(response => {
@@ -381,12 +381,12 @@
                     saveAddress: async function () {
                         if (this.showPaymentSection || this.showSummarySection) {
                             this.showPaymentSection = false;
-                            
+
                             this.showSummarySection = false;
                         }
-                        
+
                         this.disable_button = true;
-                   
+
                         if (this.$refs.billingSaveAsAddress && this.$refs.billingSaveAsAddress.checked) {
                             this.$refs.billingSaveAsAddress.setAttribute('disabled', 'disabled');
                         }
@@ -588,7 +588,7 @@
 
                         setTimeout(() => {
                             if (
-                                this.$refs.billingSaveAsAddress 
+                                this.$refs.billingSaveAsAddress
                                 && this.$refs.billingSaveAsAddress.checked
                             ) {
                                 this.$refs.billingSaveAsAddress.setAttribute('disabled', 'disabled');
@@ -618,12 +618,12 @@
                         }, 0);
                     }
                 },
-          
+
                 watch: {
                     address : {
                         handler: function(v) {
                             if (
-                                this.$refs.billingSaveAsAddress 
+                                this.$refs.billingSaveAsAddress
                                 && this.$refs.billingSaveAsAddress.hasAttribute('disabled')
                             ) {
                                 this.$refs.billingSaveAsAddress.removeAttribute('disabled');
@@ -659,11 +659,11 @@
 
                 mounted: function () {
                     this.templateRender = shippingHtml.render;
-                    
+
                     for (let i in shippingHtml.staticRenderFns) {
                         shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
                     }
-                    
+
                     eventBus.$emit('after-checkout-shipping-section-added');
                 },
 
@@ -678,7 +678,7 @@
                 created: function() {
                     if (Object.keys(this.methods).length == 1) {
                         let firstMethod = Object.keys(this.methods)[0];
-                            
+
                         let methodRateObject = this.methods[firstMethod]['rates'][0];
                         this.selected_shipping_method = methodRateObject.method;
                         this.methodSelected();

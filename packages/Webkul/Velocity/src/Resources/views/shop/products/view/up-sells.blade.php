@@ -1,6 +1,4 @@
-@php $productUpSells = $product->up_sells()->get(); @endphp
-
-@if ($productUpSells->count())
+@if ($upSellProductsCount = $upSellProducts->count())
     <card-list-header
         heading="{{ __('shop::app.products.up-sell-title') }}"
         view-all="false"
@@ -13,9 +11,9 @@
             navigation-enabled="hide"
             pagination-enabled="hide"
             id="upsell-products-carousel"
-            :slides-count="{{ sizeof($productUpSells) }}">
+            :slides-count="{{ $upSellProductsCount }}">
 
-            @foreach ($productUpSells as $index => $upSellProduct)
+            @foreach ($upSellProducts as $index => $upSellProduct)
                 <slide slot="slide-{{ $index }}">
                     @include ('shop::products.list.card', [
                         'product' => $upSellProduct,
@@ -28,13 +26,13 @@
 
     <div class="carousel-products vc-small-screen">
         <carousel-component
-            :slides-count="{{ sizeof($productUpSells) }}"
+            :slides-count="{{ $upSellProductsCount }}"
             slides-per-page="2"
             id="upsell-products-carousel"
             navigation-enabled="hide"
             pagination-enabled="hide">
 
-            @foreach ($productUpSells as $index => $upSellProduct)
+            @foreach ($upSellProducts as $index => $upSellProduct)
                 <slide slot="slide-{{ $index }}">
                     @include ('shop::products.list.card', [
                         'product' => $upSellProduct,
