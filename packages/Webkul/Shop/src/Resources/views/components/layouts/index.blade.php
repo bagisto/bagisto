@@ -22,7 +22,7 @@
 
         {{-- Head Slot to insert custom SEO tags, CSS etc --}}
         {{ $head ?? '' }}
-        
+
         <style>
             {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
         </style>

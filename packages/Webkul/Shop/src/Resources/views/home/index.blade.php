@@ -2,7 +2,7 @@
     <x-slot:title>
         {{ isset($metaTitle) ? $metaTitle : "" }}
     </x-slot>
- 
+
     <!-- Hero section -->
 	<div class="bs-hero-section">
 		<picture>
