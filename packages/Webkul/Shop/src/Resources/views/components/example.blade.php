@@ -115,3 +115,8 @@
 
     <x-slot:body>Panel Body</x-slot:body>
 </x-panel>
+
+
+<?php $products = [1,2,3,3,4]  ?>
+
+<x-products.carousel title="Men’s Collections" :products="$products" :navigation-link="route('shop.home.index')"></x-products.carousel>

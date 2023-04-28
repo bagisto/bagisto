@@ -40,7 +40,6 @@ const app = new Vue({
     data: {
         modalIds: {},
 
-        show_loader: false,
         baseUrl: document.querySelector('meta[name="base-url"]').content
     },
 
@@ -112,19 +111,9 @@ const app = new Vue({
             }, this);
         },
 
-        responsiveHeader: function () { },
-
         showModal(id) {
             this.$set(this.modalIds, id, true);
         },
-
-        showLoader() {
-            this.show_loader = true;
-        },
-
-        hideLoader() {
-            this.show_loader = false;
-        }
     }
 });
 
