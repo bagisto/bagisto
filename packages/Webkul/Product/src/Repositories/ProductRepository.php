@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Helpers\Toolbar;
 
 class ProductRepository extends Repository
 {
@@ -465,7 +466,25 @@ class ProductRepository extends Repository
      */
     public function getPerPageLimit($params)
     {
-        $limit = $params['limit'] ?? 12;
+        /**
+         * Currently container binding not injecting in constructor.
+         *
+         * To Do (@devansh): Need a global helper or static helper
+         * or a one place constant array to handle this.
+         */
+        $availableLimits = app(Toolbar::class)->getAvailableLimits();
+
+        /**
+         * Set a default value of 12 for the 'limit' parameter,
+         * in case it is not provided or is not a valid integer.
+         */
+        $limit = (int) ($params['limit'] ?? 12);
+
+        /**
+         * If the 'limit' parameter is present but value not present
+         * in available limits, use the default value of 12 instead.
+         */
+        $limit = in_array($limit, $availableLimits) ? $limit : 12;
 
         if ($productsPerPage = core()->getConfigData('catalog.products.storefront.products_per_page')) {
             $pages = explode(',', $productsPerPage);

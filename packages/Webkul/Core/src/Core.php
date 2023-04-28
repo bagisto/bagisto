@@ -21,7 +21,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '1.5.0';
+    const BAGISTO_VERSION = '1.5.1';
 
     /**
      * Channel.
@@ -185,7 +185,7 @@ class Core
         return ($channel = $this->getDefaultChannel()) ? $channelCode = $channel->code : '';
     }
 
-     /**
+    /**
      * Returns default channel locale code.
      *
      * @return \Webkul\Core\Contracts\locale
@@ -724,8 +724,8 @@ class Core
      * Checks if current date of the given channel (in the channel timezone) is within the range.
      *
      * @param  int|string|\Webkul\Core\Contracts\Channel  $channel
-     * @param  string|null                                $dateFrom
-     * @param  string|null                                $dateTo
+     * @param  string|null  $dateFrom
+     * @param  string|null  $dateTo
      * @return bool
      */
     public function isChannelDateInInterval($dateFrom = null, $dateTo = null)
@@ -818,9 +818,9 @@ class Core
     /**
      * Retrieve information from payment configuration.
      *
-     * @param  string           $field
+     * @param  string  $field
      * @param  int|string|null  $channelId
-     * @param  string|null      $locale
+     * @param  string|null  $locale
      * @return mixed
      */
     public function getConfigData($field, $channel = null, $locale = null)
@@ -1022,8 +1022,8 @@ class Core
     /**
      * Week range.
      *
-     * @param  string $date
-     * @param  int    $day
+     * @param  string  $date
+     * @param  int  $day
      * @return string
      */
     public function xWeekRange($date, $day)
@@ -1069,7 +1069,7 @@ class Core
     /**
      * Get config field.
      *
-     * @param string $fieldName
+     * @param  string  $fieldName
      * @return array
      */
     public function getConfigField($fieldName)
@@ -1092,7 +1092,7 @@ class Core
     /**
      * Convert to associative array.
      *
-     * @param array $items
+     * @param  array  $items
      * @return array
      */
     public function convertToAssociativeArray($items)
@@ -1261,7 +1261,7 @@ class Core
      * @param  array  $array2
      * @return array
      */
-    protected function arrayMerge(array&$array1, array&$array2)
+    protected function arrayMerge(array &$array1, array &$array2)
     {
         $merged = $array1;
 
