@@ -12,6 +12,7 @@
                     Lorem Ipsum is dummy text</p>
             </div>
         </div>
+
         <div class="flex items-center gap-[20px]">
             <span
                 class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer before:content[' '] before:block before:bg-[position:-43px_-166px] before:bs-main-sprite before:w-[34px] before:h-[27px] min-w-[60px] min-h-[60px]"></span>
@@ -21,6 +22,7 @@
                     Lorem Ipsum is dummy text </p>
             </div>
         </div>
+
         <div class="flex items-center gap-[20px]">
             <span
                 class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer before:content[' '] before:block before:bg-[position:-83px_-166px] before:bs-main-sprite before:w-[34px] before:h-[27px] min-w-[60px] min-h-[60px]"></span>
@@ -30,6 +32,7 @@
                     Lorem Ipsum is dummy text </p>
             </div>
         </div>
+        
         <div class="flex items-center gap-[20px]">
             <span
                 class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer before:content[' '] before:block before:bg-[position:-123px_-166px] before:bs-main-sprite before:w-[34px] before:h-[27px] min-w-[60px] min-h-[60px]"></span>

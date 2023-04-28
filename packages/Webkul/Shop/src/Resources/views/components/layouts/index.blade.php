@@ -1,6 +1,5 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-
     <head>
         <title>{{ $title ?? '' }}</title>
 
@@ -29,7 +28,6 @@
         </style>
 
         {!! view_render_event('bagisto.shop.layout.head') !!}
-
     </head>
 
     <body>
