@@ -6,8 +6,9 @@
     <!-- Hero section -->
 	<div class="bs-hero-section">
 		<picture>
-			<img alt="" src="http://localhost/laravel/bagisto/public/themes/default/assets/images/hero-image.webp" />
+			<img alt="" src="http://localhost/bagisto/public/themes/default/assets/images/hero-image.webp" />
 		</picture>
+
 		<div class="">
 			<a href="/" class="block text-[22px] py-[20px] font-medium text-center bg-[#E8EDFE] font-dmserif">Get UPTO 40% OFF on
 				your 1st order SHOP NOW</a>
