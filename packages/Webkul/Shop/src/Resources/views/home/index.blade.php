@@ -6,7 +6,7 @@
     <!-- Hero section -->
 	<div class="bs-hero-section">
 		<picture>
-			<img alt="" src="http://localhost/bagisto/public/themes/default/assets/images/hero-image.webp" />
+			<img alt="" src="{{ Vite::useHotFile('shop-vite.hot')->useBuildDirectory('themes/default/build')->asset('src/Resources/assets/images/hero-image.webp') }}" />
 		</picture>
 
 		<div class="">

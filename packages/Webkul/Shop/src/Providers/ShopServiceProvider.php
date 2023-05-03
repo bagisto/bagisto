@@ -6,12 +6,12 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Tree;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;
-use Webkul\Shop\View\Composers\CategoryComposer;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -24,9 +24,8 @@ class ShopServiceProvider extends ServiceProvider
     {
         /* publishers */
         $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
-            __DIR__ . '/../Resources/views'       => resource_path('themes/default/views'),
-            __DIR__ . '/../Resources/lang'        => lang_path('vendor/shop'),
+            __DIR__ . '/../../publishable'  => public_path('themes/default'),
+            // __DIR__ . '/../Resources/views' => resource_path('themes/default/views'),
         ]);
 
         /* loaders */
@@ -91,11 +90,13 @@ class ShopServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/menu.php', 'menu.customer'
+            dirname(__DIR__) . '/Config/menu.php',
+            'menu.customer'
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php', 'core'
+            dirname(__DIR__) . '/Config/system.php',
+            'core'
         );
     }
 }
