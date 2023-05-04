@@ -18,7 +18,6 @@ package-lock.json
 /public/js
 /public/hot
 /public/storage
-/public/themes
 /public/vendor
 /lang/vendor
 /storage/*.key

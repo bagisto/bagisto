@@ -6,7 +6,6 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Tree;
 use Webkul\Shop\Http\Middleware\Currency;
@@ -24,7 +23,6 @@ class ShopServiceProvider extends ServiceProvider
     {
         /* publishers */
         $this->publishes([
-            __DIR__ . '/../../publishable'  => public_path('themes/default'),
             // __DIR__ . '/../Resources/views' => resource_path('themes/default/views'),
         ]);
 

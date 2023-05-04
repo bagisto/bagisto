@@ -113,4 +113,24 @@ class Theme
             ->useBuildDirectory($buildPath)
             ->asset($viteUrl);
     }
+
+    public function setBagistoVite($entryPoints)
+    {
+        /**
+         * Hot file for dev.
+         */
+        $hotFile = $this->code . '-vite.hot';
+
+        /**
+         * Testing build path, will refactor and give good configuration.
+         */
+        $buildPath = str_replace('public/', '', $this->assetsPath) . '/build';
+
+        /**
+         * Activated vite here. For dev and prod.
+         */
+        return Vite::useHotFile($hotFile)
+            ->useBuildDirectory($buildPath)
+            ->withEntryPoints($entryPoints);
+    }
 }

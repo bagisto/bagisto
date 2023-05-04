@@ -4,7 +4,6 @@ namespace Webkul\Theme;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
-use Webkul\Theme\Theme;
 
 class Themes
 {
@@ -29,7 +28,7 @@ class Themes
      */
     protected $laravelViewsPath;
 
-     /**
+    /**
      * Contains default theme code
      *
      * @var string
@@ -82,7 +81,7 @@ class Themes
                 $data['views_path'] ?? ''
             );
 
-            if (! empty($data['parent'])            ) {
+            if (! empty($data['parent'])) {
                 $parentThemes[$code] = $data['parent'];
             }
         }
@@ -242,5 +241,10 @@ class Themes
         }
 
         return $this->current()->url($filename, $secure);
+    }
+
+    public function setBagistoVite($entryPoints)
+    {
+        return $this->current()->setBagistoVite($entryPoints);
     }
 }

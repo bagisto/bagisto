@@ -14,10 +14,8 @@ export default defineConfig(({ mode }) => {
         plugins: [
             laravel({
                 hotFile: "../../../public/default-vite.hot",
-                publicDirectory: mode === "development"
-                    ? "../../../public"
-                    : "./",
-                buildDirectory: "publishable/build",
+                publicDirectory: "../../../public",
+                buildDirectory: "themes/default/build",
                 input: [
                     "src/Resources/assets/css/app.css",
                     "src/Resources/assets/js/app.js",

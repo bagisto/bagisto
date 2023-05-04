@@ -11,13 +11,7 @@
     <meta name="base-url" content="{{ url()->to('/') }}">
     <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
 
-    {{
-        Vite::useHotFile('default-vite.hot')
-            ->useBuildDirectory('themes/default/build')
-            ->withEntryPoints(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
-    }}
-
-    {{-- <link rel="stylesheet" href="{{ bagisto_asset('css/app.css') }}"> --}}
+    @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
