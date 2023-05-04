@@ -6,7 +6,7 @@
     <!-- Hero section -->
 	<div class="bs-hero-section">
 		<picture>
-			<img alt="" src="{{ Vite::useHotFile('shop-vite.hot')->useBuildDirectory('themes/default/build')->asset('src/Resources/assets/images/hero-image.webp') }}" />
+			<img alt="" src="{{ bagisto_asset('images/hero-image.webp') }}" />
 		</picture>
 
 		<div class="">
@@ -190,19 +190,13 @@
 	<div class="container mt-[60px] max-lg:px-[30px] max-sm:mt-[20px]">
 		<div class="flex justify-center gap-8 flex-wrap max-sm:gap-[15px]">
 			<div class="relative">
-				<img class="max-w-[396px] min-h-[396px] rounded-2xl bg-[#F5F5F5] max-sm:max-w-full max-sm:min-h-full" src="{{ bagisto_asset('/images/our-collection.jpg') }}"
+				<img class="max-w-[396px] min-h-[396px] rounded-2xl bg-[#F5F5F5] max-sm:max-w-full max-sm:min-h-full" src="{{ bagisto_asset('/images/our-collection-2.jpg') }}"
 					alt="" title="">
 				<h3 class="w-max text-[30px] text-navyBlue absolute bottom-[30px] left-[50%] -translate-x-[50%] font-dmserif">Our
 					Collections</h3>
 			</div>
 			<div class="relative">
-				<img class="max-w-[396px] min-h-[396px] rounded-2xl bg-[#F5F5F5] max-sm:max-w-full max-sm:min-h-full" src="{{ bagisto_asset('/images/our-collection') }}-2.jpg"
-					alt="" title="">
-				<h3 class="w-max text-[30px] text-navyBlue absolute bottom-[30px] left-[50%] -translate-x-[50%] font-dmserif">Our
-					Collections </h3>
-			</div>
-			<div class="relative">
-				<img class="max-w-[396px] min-h-[396px] rounded-2xl bg-[#F5F5F5] max-sm:max-w-full max-sm:min-h-full" src="{{ bagisto_asset('/images/our-collection.jpg') }}"
+				<img class="max-w-[396px] min-h-[396px] rounded-2xl bg-[#F5F5F5] max-sm:max-w-full max-sm:min-h-full" src="{{ bagisto_asset('/images/our-collection-2.jpg') }}"
 					alt="" title="">
 				<h3 class="w-max text-[30px] text-navyBlue absolute bottom-[30px] left-[50%] -translate-x-[50%] font-dmserif">Our
 					Collections </h3>
@@ -214,7 +208,13 @@
 					Collections </h3>
 			</div>
 			<div class="relative">
-				<img class="max-w-[396px] min-h-[396px] rounded-2xl bg-[#F5F5F5] max-sm:max-w-full max-sm:min-h-full" src="{{ bagisto_asset('/images/our-collection.jpg') }}"
+				<img class="max-w-[396px] min-h-[396px] rounded-2xl bg-[#F5F5F5] max-sm:max-w-full max-sm:min-h-full" src="{{ bagisto_asset('/images/our-collection-2.jpg') }}"
+					alt="" title="">
+				<h3 class="w-max text-[30px] text-navyBlue absolute bottom-[30px] left-[50%] -translate-x-[50%] font-dmserif">Our
+					Collections </h3>
+			</div>
+			<div class="relative">
+				<img class="max-w-[396px] min-h-[396px] rounded-2xl bg-[#F5F5F5] max-sm:max-w-full max-sm:min-h-full" src="{{ bagisto_asset('/images/our-collection-2.jpg') }}"
 					alt="" title="">
 				<h3 class="w-max text-[30px] text-navyBlue absolute bottom-[30px] left-[50%] -translate-x-[50%] font-dmserif">Our
 					Collections </h3>

@@ -12,10 +12,12 @@
     <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
 
     {{
-        Vite::useHotFile('shop-vite.hot')
+        Vite::useHotFile('default-vite.hot')
             ->useBuildDirectory('themes/default/build')
             ->withEntryPoints(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
     }}
+
+    {{-- <link rel="stylesheet" href="{{ bagisto_asset('css/app.css') }}"> --}}
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -24,7 +26,7 @@
     @if ($favicon = core()->getCurrentChannel()->favicon_url)
         <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
     @else
-        <link rel="icon" sizes="16x16" href="{{ bagisto_asset('images/favicon.ico') }}" />
+        {{-- <link rel="icon" sizes="16x16" href="{{ bagisto_asset('images/favicon.ico') }}" /> --}}
     @endif
 
     {{-- Head Slot to insert custom SEO tags, CSS etc --}}

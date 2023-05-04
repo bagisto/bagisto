@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
 
         plugins: [
             laravel({
-                hotFile: "../../../public/shop-vite.hot",
+                hotFile: "../../../public/default-vite.hot",
                 publicDirectory: mode === "development"
                     ? "../../../public"
                     : "./",
