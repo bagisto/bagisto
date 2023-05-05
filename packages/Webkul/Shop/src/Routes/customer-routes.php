@@ -46,7 +46,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
              * Login routes.
              */
             Route::get('login', [SessionController::class, 'show'])->defaults('_config', [
-                'view' => 'shop::customers.session.index',
+                'view' => 'shop::customers.sign-in',
             ])->name('shop.customer.session.index');
 
             Route::post('login', [SessionController::class, 'create'])->defaults('_config', [

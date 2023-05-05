@@ -84,10 +84,9 @@ class Theme
      * Convert to asset url based on current theme.
      *
      * @param  string  $url
-     * @param  bool|null  $secure
      * @return string
      */
-    public function url($url, $secure = null)
+    public function url($url)
     {
         $url = trim($url, '/');
 

@@ -1,17 +1,13 @@
 @props(['label', 'control', 'error'])
 
 <div
-    {{-- Merge Class Attributes --}}
-    {{ $attributes->merge(['class' => 'control-group']) }}
+    {{ $attributes->merge(['class' => '']) }}
     :class="[errors.has('{{ $control->attributes->get('name') }}') ? 'has-error' : '']"
 >
     @if (! empty($label))
         <label
-            {{-- Add "for" attrbute if "id" passed else add "name" as "for" --}}
             for="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
-            {{-- Merge Class Attributes --}}
-            {{ $label->attributes->merge(['class' => '']) }}
-            {{-- Attach Other Attributes --}}
+            {{ $label->attributes->merge(['class' => 'block text-[16px] mb-[15px] mt-[30px]']) }}
             {{ $label->attributes }}
         >
             {{ $label }}
@@ -19,92 +15,100 @@
     @endif
 
     @switch($control->attributes->get('type'))
-        @case('input')
+        @case('text')
             <input
                 type="text"
                 name="{{ $control->attributes->get('name') }}"
-                {{-- Add "id" attrbute if passed else add "name" as "id" --}}
                 id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
-                {{-- Merge Class Attributes --}}
-                {{ $control->attributes->merge(['class' => 'control']) }}
+                {{ $control->attributes->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline']) }}
                 value="{{ $control->attributes->get('value') ?? '' }}"
-                {{-- Add "data-vv-as" attrbute if passed else add "$label" as "data-vv-as" --}}
                 data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
-                {{-- Attach Other Attributes --}}
                 {{ $control->attributes }}
             >
 
             @break
-    
+
+        @case('email')
+            <input
+                type="email"
+                name="{{ $control->attributes->get('name') }}"
+                id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
+                {{ $control->attributes->merge(['class' => 'control']) }}
+                value="{{ $control->attributes->get('value') ?? '' }}"
+                data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
+                {{ $control->attributes }}
+            >
+
+            @break
+
+        @case('password')
+            <input
+                type="password"
+                name="{{ $control->attributes->get('name') }}"
+                id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
+                {{ $control->attributes->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline']) }}
+                value="{{ $control->attributes->get('value') ?? '' }}"
+                data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
+                {{ $control->attributes }}
+            >
+
+            @break
+
         @case('select')
             <select
                 name="{{ $control->attributes->get('name') }}"
-                {{-- Add "id" attrbute if passed else add "name" as "id" --}}
                 id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
-                {{-- Merge Class Attributes --}}
                 {{ $control->attributes->merge(['class' => 'control']) }}
-                {{-- Add "data-vv-as" attrbute if passed else add "$label" as "data-vv-as" --}}
                 data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
-                {{-- Attach Other Attributes --}}
                 {{ $control->attributes }}
             >
                 {{ $control }}
             </select>
 
             @break
-    
+
         @case('checkbox')
-            <span class="checkbox">
+            <span class="">
                 <input
                     type="checkbox"
                     name="{{ $control->attributes->get('name') }}"
-                    {{-- Add "id" attrbute if passed else add "name" as "id" --}}
                     id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
+                    {{ $control->attributes->merge(['class' => '']) }}
                     value="{{ $control->attributes->get('value') ?? '' }}"
-                    {{-- Add "data-vv-as" attrbute if passed else add "$label" as "data-vv-as" --}}
                     data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
-                    {{-- Attach Other Attributes --}}
                     {{ $control->attributes }}
                 >
 
-                <label class="checkbox-view"></label>
-
                 {{ $control }}
             </span>
-            
+
             @break
-    
+
         @case('radio')
             <span class="radio">
                 <input
                     type="radio"
                     name="{{ $control->attributes->get('name') }}"
-                    {{-- Add "id" attrbute if passed else add "name" as "id" --}}
                     id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
                     value="{{ $control->attributes->get('value') ?? '' }}"
-                    {{-- Add "data-vv-as" attrbute if passed else add "$label" as "data-vv-as" --}}
                     data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
-                    {{-- Attach Other Attributes --}}
                     {{ $control->attributes }}
                 >
 
-                <label class="radio-view"></label>
-
                 {{ $control }}
             </span>
-            
+
             @break
     @endswitch
 
     <span
         @if (! empty($error))
-            {{-- Merge Class Attributes --}}
             {{ $error->attributes->merge(['class' => 'error-class']) }}
         @else
             class="error-class"
         @endif
         v-if="errors.has('{{ $control->attributes->get('name') }}')"
+        v-text="errors.first('{!! $control->attributes->get('name') !!}')"
     >
-        @{{ errors.first('{!! $control->attributes->get('name') !!}') }}
     </span>
 </div>
