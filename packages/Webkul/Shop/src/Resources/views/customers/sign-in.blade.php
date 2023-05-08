@@ -8,14 +8,21 @@
                 If you have an account, sign in with your email address.
             </p>
 
-            <form class="rounded mt-[60px] max-sm:mt-[30px]">
+            <v-form
+                class="rounded mt-[60px] max-sm:mt-[30px]"
+                method="POST"
+                action="{{ route('shop.customer.session.create') }}"
+                v-slot="{ meta, errors }"
+            >
+                @csrf
+
                 <x-shop::form.control class="mb-4">
                     <x-slot:label>
                         Email
                     </x-slot:label>
 
-                    <x-slot:control type="text" name="email" value="" v-validate="'required'" placeholder="Email"
-                        class=""></x-slot:control>
+                    <x-slot:control type="text" name="email" value="" rules="required|email" placeholder="Email">
+                    </x-slot:control>
                 </x-shop::form.control>
 
                 <x-shop::form.control class="mb-6">
@@ -23,8 +30,8 @@
                         Password
                     </x-slot:label>
 
-                    <x-slot:control type="password" name="password" value="" v-validate="'required'"
-                        placeholder="Email"></x-slot:control>
+                    <x-slot:control type="password" name="password" value="" rules="required" placeholder="Password">
+                    </x-slot:control>
                 </x-shop::form.control>
 
                 <div class="flex justify-between">
@@ -48,7 +55,7 @@
                 <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                     <button
                         class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
-                        type="button">
+                        type="submit">
                         Sign In
                     </button>
 
@@ -65,7 +72,7 @@
                             aria-label="Linkdln"></a>
                     </div>
                 </div>
-            </form>
+            </v-form>
 
             <p class="text-[#7D7D7D] font-medium mt-[20px]">
                 New customer? <a class="text-navyBlue" href="#">Create your account</a>
@@ -76,4 +83,6 @@
             © Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.
         </p>
     </div>
+
+    <x-slot:footer></x-slot:footer>
 </x-shop::layouts>

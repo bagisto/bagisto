@@ -38,7 +38,7 @@
 
     <div id="app">
         {{-- Flash Message Blade Component --}}
-        <x-flash-group></x-flash-group>
+        {{-- <x-flash-group></x-flash-group> --}}
 
         {{-- Page Header Blade Component --}}
         <x-layouts.header />
@@ -68,7 +68,7 @@
     </script>
 
     {{-- Footer Slot, here you can add custom scripts --}}
-    {{ $head ?? '' }}
+    {{ $footer ?? '' }}
 </body>
 
 </html>

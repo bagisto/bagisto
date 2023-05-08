@@ -9,7 +9,7 @@
     <script type="text/x-template" id="flash-item-template">
         <div class="alert" v-bind:class="flash.type">
             <span class="icon white-cross-sm-icon" @click="remove"></span>
-            
+
             <p>@{{ flash.message }}</p>
         </div>
     </script>

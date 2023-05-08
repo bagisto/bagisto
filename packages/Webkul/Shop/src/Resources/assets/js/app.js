@@ -1,3 +1,44 @@
+/**
+ * This will track all the images and fonts for publishing.
+ */
+import.meta.glob(["../images/**", "../fonts/**"]);
+
+/**
+ * We'll load the axios HTTP library which allows us to easily issue requests
+ * to our Laravel back-end. This library automatically handles sending the
+ * CSRF token as a header based on the value of the "XSRF" token cookie.
+ */
+import axios from "axios";
+window.axios = axios;
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+
+/**
+ * Main vue bundler.
+ */
+import { createApp } from "vue/dist/vue.esm-bundler";
+
+/**
+ * We are defining all the global rules here and configuring
+ * all the `vee-validate` settings.
+ */
+import { configure, defineRule, Field, Form, ErrorMessage } from "vee-validate";
+import { localize } from "@vee-validate/i18n";
+import en from "@vee-validate/i18n/dist/locale/en.json";
+import AllRules from "@vee-validate/rules";
+
+configure({
+    generateMessage: localize({
+        en,
+    }),
+    validateOnBlur: true,
+    validateOnInput: true,
+    validateOnChange: true,
+});
+
+Object.keys(AllRules).forEach((rule) => {
+    defineRule(rule, AllRules[rule]);
+});
+
 // import Vue from 'vue';
 // import VeeValidate from 'vee-validate';
 // import de from 'vee-validate/dist/locale/de';
@@ -13,8 +54,6 @@
 // window.Vue = Vue;
 // window.VeeValidate = VeeValidate;
 // window.axios = axios;
-
-// require("./bootstrap");
 
 // Vue.use(VeeValidate, {
 //     dictionary: {
@@ -119,4 +158,20 @@
 
 // window.app = app;
 
-import.meta.glob(["../images/**", "../fonts/**"]);
+createApp({
+    components: {
+        VForm: Form,
+        VField: Field,
+        VErrorMessage: ErrorMessage,
+    },
+
+    data() {
+        return {};
+    },
+
+    methods: {
+        onSubmit() {},
+
+        onInvalidSubmit() {},
+    },
+}).mount("#app");

@@ -45,13 +45,9 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             /**
              * Login routes.
              */
-            Route::get('login', [SessionController::class, 'show'])->defaults('_config', [
-                'view' => 'shop::customers.sign-in',
-            ])->name('shop.customer.session.index');
+            Route::get('login', [SessionController::class, 'show'])->name('shop.customer.session.index');
 
-            Route::post('login', [SessionController::class, 'create'])->defaults('_config', [
-                'redirect' => 'shop.customer.profile.index',
-            ])->name('shop.customer.session.create');
+            Route::post('login', [SessionController::class, 'create'])->name('shop.customer.session.create');
 
             /**
              * Registration routes.

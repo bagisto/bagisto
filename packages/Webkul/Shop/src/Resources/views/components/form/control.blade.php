@@ -2,7 +2,7 @@
 
 <div
     {{ $attributes->merge(['class' => '']) }}
-    :class="[errors.has('{{ $control->attributes->get('name') }}') ? 'has-error' : '']"
+    {{ $attributes }}
 >
     @if (! empty($label))
         <label
@@ -14,101 +14,66 @@
         </label>
     @endif
 
-    @switch($control->attributes->get('type'))
-        @case('text')
-            <input
-                type="text"
-                name="{{ $control->attributes->get('name') }}"
-                id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
-                {{ $control->attributes->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline']) }}
-                value="{{ $control->attributes->get('value') ?? '' }}"
-                data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
-                {{ $control->attributes }}
-            >
+    @if (! empty($control))
+        @switch($control->attributes->get('type'))
+            @case('text')
+            @case('email')
+            @case('password')
+                <v-field
+                    type="{{ $control->attributes->get('type') }}"
+                    {{ $control->attributes->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full mb-3 py-2 px-3 focus:outline-none focus:shadow-outline']) }}
+                    {{ $control->attributes }}
+                    :class="[errors['{{ $control->attributes->get('name') }}'] ? 'border border-red-500' : '']"
+                ></v-field>
 
-            @break
+                @break
 
-        @case('email')
-            <input
-                type="email"
-                name="{{ $control->attributes->get('name') }}"
-                id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
-                {{ $control->attributes->merge(['class' => 'control']) }}
-                value="{{ $control->attributes->get('value') ?? '' }}"
-                data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
-                {{ $control->attributes }}
-            >
+            @case('checkbox')
+                <span class="">
+                    <input
+                        type="checkbox"
+                        name="{{ $control->attributes->get('name') }}"
+                        id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
+                        {{ $control->attributes->merge(['class' => '']) }}
+                        value="{{ $control->attributes->get('value') ?? '' }}"
+                        {{ $control->attributes }}
+                    >
 
-            @break
+                    {{ $control }}
+                </span>
 
-        @case('password')
-            <input
-                type="password"
-                name="{{ $control->attributes->get('name') }}"
-                id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
-                {{ $control->attributes->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline']) }}
-                value="{{ $control->attributes->get('value') ?? '' }}"
-                data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
-                {{ $control->attributes }}
-            >
+                @break
 
-            @break
+            @case('radio')
+                <span class="radio">
+                    <input
+                        type="radio"
+                        {{ $control->attributes->merge(['class' => '']) }}
+                        {{ $control->attributes }}
+                    >
 
-        @case('select')
-            <select
-                name="{{ $control->attributes->get('name') }}"
-                id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
-                {{ $control->attributes->merge(['class' => 'control']) }}
-                data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
-                {{ $control->attributes }}
-            >
-                {{ $control }}
-            </select>
+                    {{ $control }}
+                </span>
 
-            @break
+                @break
 
-        @case('checkbox')
-            <span class="">
-                <input
-                    type="checkbox"
-                    name="{{ $control->attributes->get('name') }}"
-                    id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
+            @case('select')
+                <select
                     {{ $control->attributes->merge(['class' => '']) }}
-                    value="{{ $control->attributes->get('value') ?? '' }}"
-                    data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
                     {{ $control->attributes }}
                 >
+                    {{ $control }}
+                </select>
 
-                {{ $control }}
-            </span>
+                @break
+        @endswitch
 
-            @break
-
-        @case('radio')
-            <span class="radio">
-                <input
-                    type="radio"
-                    name="{{ $control->attributes->get('name') }}"
-                    id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
-                    value="{{ $control->attributes->get('value') ?? '' }}"
-                    data-vv-as="&quot;{{ $control->attributes->get('data-vv-as') ?? ($label ?? '') }}&quot;"
-                    {{ $control->attributes }}
-                >
-
-                {{ $control }}
-            </span>
-
-            @break
-    @endswitch
-
-    <span
-        @if (! empty($error))
-            {{ $error->attributes->merge(['class' => 'error-class']) }}
-        @else
-            class="error-class"
-        @endif
-        v-if="errors.has('{{ $control->attributes->get('name') }}')"
-        v-text="errors.first('{!! $control->attributes->get('name') !!}')"
-    >
-    </span>
+        <v-error-message name="{{ $control->attributes->get('name') }}" v-slot="{ message }">
+            <p
+                class="text-red-500 text-xs italic"
+                v-text="message"
+            >
+            </p>
+        </v-error-message>
+    @endif
 </div>

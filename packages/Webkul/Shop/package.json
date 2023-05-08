@@ -17,7 +17,9 @@
     "vue": "^3.2.47"
   },
   "dependencies": {
-    "vee-validate": "^2.2.15",
+    "@vee-validate/i18n": "^4.9.1",
+    "@vee-validate/rules": "^4.9.1",
+    "vee-validate": "^4.9.1",
     "vue-flatpickr": "^2.3.0"
   }
 }
