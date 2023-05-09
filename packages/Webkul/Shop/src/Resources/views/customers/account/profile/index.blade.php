@@ -1,98 +1,45 @@
-@extends('shop::customers.account.index')
+<x-shop::layouts.account>
+    <div class="flex justify-between">
+        <h2 class="text-[26px] font-medium">Profile</h2>
 
-@section('page_title')
-    {{ __('shop::app.customer.account.profile.index.title') }}
-@endsection
-
-@section('account-content')
-    <div class="account-layout">
-        <div class="account-head">
-            <span class="back-icon"><a href="{{ route('shop.customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
-
-            <span class="account-heading">{{ __('shop::app.customer.account.profile.index.title') }}</span>
-
-            <span class="account-action">
-                <a href="{{ route('shop.customer.profile.edit') }}">{{ __('shop::app.customer.account.profile.index.edit') }}</a>
-            </span>
-
-            <div class="horizontal-rule"></div>
-        </div>
-
-        {!! view_render_event('bagisto.shop.customers.account.profile.view.before', ['customer' => $customer]) !!}
-
-        <div class="account-table-content" style="width: 50%;">
-            <table style="color: #5E5E5E;">
-                <tbody>
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.before', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.fname') }}</td>
-                        <td>{{ $customer->first_name }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.first_name.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.lname') }}</td>
-                        <td>{{ $customer->last_name }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.last_name.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.gender') }}</td>
-                        <td>{{ __($customer->gender) }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.gender.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.dob') }}</td>
-                        <td>{{ $customer->date_of_birth }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.date_of_birth.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.email') }}</td>
-                        <td>{{ $customer->email }}</td>
-                    </tr>
-
-                    <tr>
-                        <td> 
-                            <button type="submit" @click="showModal('deleteProfile')" class="btn btn-lg btn-primary mt-10">
-                                {{ __('shop::app.customer.account.address.index.delete') }}
-                            </button>
-                        </td>                        
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer]) !!}
-                </tbody>
-            </table>           
-
-            <form method="POST" action="{{ route('shop.customer.profile.destroy') }}" @submit.prevent="onSubmit">
-                @csrf
-
-                <modal id="deleteProfile" :is-open="modalIds.deleteProfile">
-                    <h3 slot="header">{{ __('shop::app.customer.account.address.index.enter-password') }}</h3>
-
-                    <div slot="body">
-                        <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                            <label for="password" class="required">{{ __('admin::app.users.users.password') }}</label>
-                            <input type="password" v-validate="'required|min:6|max:18'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.users.password') }}&quot;"/>
-                            <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
-                        </div>
-
-                        <div class="page-action">
-                            <button type="submit"  class="btn btn-lg btn-primary mt-10">
-                            {{ __('shop::app.customer.account.address.index.delete') }}
-                            </button>
-                        </div>
-                    </div>
-                </modal>
-            </form>
-        </div>
-
-        {!! view_render_event('bagisto.shop.customers.account.profile.view.after', ['customer' => $customer]) !!}
+        <div class="border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer">Edit</div>
     </div>
-@endsection
+
+    <div class="grid grid-cols-1 gap-y-[25px] mt-[30px]">
+        <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
+            <p class="text-[14px] font-medium">First Name</p>
+
+            <p class="text-[14px] font-medium text-[#7D7D7D]">Anie</p>
+        </div>
+
+        <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
+            <p class="text-[14px] font-medium">Last Name</p>
+
+            <p class="text-[14px] font-medium text-[#7D7D7D]">Doe</p>
+        </div>
+
+        <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
+            <p class="text-[14px] font-medium">Gender</p>
+
+            <p class="text-[14px] font-medium text-[#7D7D7D]">Male</p>
+        </div>
+
+        <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
+            <p class="text-[14px] font-medium">Date of Birth</p>
+
+            <p class="text-[14px] font-medium text-[#7D7D7D]">1996-08-26</p>
+        </div>
+
+        <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
+            <p class="text-[14px] font-medium">Email</p>
+
+            <p class="text-[14px] font-medium text-[#7D7D7D]">JhonDoe@gmail.com</p>
+        </div>
+
+        <div
+            class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+        >
+            Delete Profile
+        </div>
+    </div>
+</x-shop::layouts.account>

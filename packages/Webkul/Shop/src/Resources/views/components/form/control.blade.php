@@ -6,7 +6,6 @@
 >
     @if (! empty($label))
         <label
-            for="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
             {{ $label->attributes->merge(['class' => 'block text-[16px] mb-[15px] mt-[30px]']) }}
             {{ $label->attributes }}
         >
@@ -32,10 +31,7 @@
                 <span class="">
                     <input
                         type="checkbox"
-                        name="{{ $control->attributes->get('name') }}"
-                        id="{{ $control->attributes->get('id') ?? $control->attributes->get('name') }}"
                         {{ $control->attributes->merge(['class' => '']) }}
-                        value="{{ $control->attributes->get('value') ?? '' }}"
                         {{ $control->attributes }}
                     >
 
@@ -45,7 +41,7 @@
                 @break
 
             @case('radio')
-                <span class="radio">
+                <span class="">
                     <input
                         type="radio"
                         {{ $control->attributes->merge(['class' => '']) }}

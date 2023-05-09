@@ -32,8 +32,7 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected ProductReviewRepository $productReviewRepository,
         protected SubscribersListRepository $subscriptionRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
     }
 
@@ -46,7 +45,7 @@ class CustomerController extends Controller
     {
         $customer = $this->customerRepository->find(auth()->guard('customer')->user()->id);
 
-        return view($this->_config['view'], compact('customer'));
+        return view('shop::customers.account.profile.index', compact('customer'));
     }
 
     /**
@@ -159,7 +158,7 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

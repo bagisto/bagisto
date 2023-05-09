@@ -8,12 +8,8 @@
                 If you have an account, sign in with your email address.
             </p>
 
-            <v-form
-                class="rounded mt-[60px] max-sm:mt-[30px]"
-                method="POST"
-                action="{{ route('shop.customer.session.create') }}"
-                v-slot="{ meta, errors }"
-            >
+            <v-form class="rounded mt-[60px] max-sm:mt-[30px]" method="POST"
+                action="{{ route('shop.customer.session.create') }}" v-slot="{ meta, errors }">
                 @csrf
 
                 <x-shop::form.control class="mb-4">
@@ -21,7 +17,8 @@
                         Email
                     </x-slot:label>
 
-                    <x-slot:control type="text" name="email" value="" rules="required|email" placeholder="Email">
+                    <x-slot:control type="text" name="email" value="" rules="required|email"
+                        placeholder="Email">
                     </x-slot:control>
                 </x-shop::form.control>
 
@@ -30,7 +27,8 @@
                         Password
                     </x-slot:label>
 
-                    <x-slot:control type="password" name="password" value="" rules="required" placeholder="Password">
+                    <x-slot:control type="password" name="password" value="" rules="required"
+                        placeholder="Password">
                     </x-slot:control>
                 </x-shop::form.control>
 

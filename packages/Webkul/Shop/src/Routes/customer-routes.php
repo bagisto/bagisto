@@ -114,9 +114,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Profile.
                      */
-                    Route::get('profile', [CustomerController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.profile.index',
-                    ])->name('shop.customer.profile.index');
+                    Route::get('profile', [CustomerController::class, 'index'])->name('shop.customer.profile.index');
 
                     Route::get('profile/edit', [CustomerController::class, 'edit'])->defaults('_config', [
                         'view' => 'shop::customers.account.profile.edit',
