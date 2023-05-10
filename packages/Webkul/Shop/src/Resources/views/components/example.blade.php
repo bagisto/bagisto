@@ -120,3 +120,19 @@
 <?php $products = [1,2,3,3,4]  ?>
 
 <x-products.carousel title="Men’s Collections" :products="$products" :navigation-link="route('shop.home.index')"></x-products.carousel>
+
+<x-form method="post" action="">
+    <x-form.control-group>
+        <x-form.control-group.label>
+            Email
+        </x-form.control-group.label>
+
+
+        <x-form.control-group.control type="text" name="email" />
+
+
+        <x-form.control-group.error>
+            This is error
+        </x-form.control-group.error>
+    </x-form.control-group>
+</x-form>

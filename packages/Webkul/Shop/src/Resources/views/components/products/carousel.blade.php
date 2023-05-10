@@ -1,7 +1,7 @@
 <products-carousel>
 
     @foreach ($products as $product)
-        <x-products.card :product="$product"></x-products.card>
+        <x-shop::products.card :product="$product"></x-shop::products.card>
     @endforeach
 
 </products-carousel>
@@ -35,8 +35,8 @@
         </div>
     </script>
 
-    <script>
-        Vue.component('products-carousel', {
+    <script type="module">
+        app.component('products-carousel', {
             template: '#products-carousel-template',
 
             data() {

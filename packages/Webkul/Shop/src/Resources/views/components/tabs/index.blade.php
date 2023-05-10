@@ -25,8 +25,8 @@
         </div>
     </script>
 
-    <script>
-        Vue.component('tabs', {
+    <script type="module">
+        app.component('tabs', {
             template: '#tabs-template',
 
             inject: ['$validator'],

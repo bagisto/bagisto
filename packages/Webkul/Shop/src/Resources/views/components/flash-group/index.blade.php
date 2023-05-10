@@ -7,12 +7,12 @@
             name="flash-group"
             class='alert-wrapper'
         >
-            <x-flash-group.item></x-flash-group.item>
+            <x-shop::flash-group.item></x-shop::flash-group.item>
         </transition-group>
     </script>
 
-    <script>
-        Vue.component('flash-group', {
+    <script type="module">
+        app.component('flash-group', {
             template: '#flash-group-template',
 
             data() {

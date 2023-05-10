@@ -45,10 +45,10 @@
 
     <div id="app">
         {{-- Flash Message Blade Component --}}
-        {{-- <x-flash-group></x-flash-group> --}}
+        <x-shop::flash-group />
 
         {{-- Page Header Blade Component --}}
-        <x-layouts.header />
+        <x-shop::layouts.header />
 
         {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
@@ -58,10 +58,10 @@
         {!! view_render_event('bagisto.shop.layout.content.after') !!}
 
         {{-- Page Features Blade Component --}}
-        <x-layouts.features />
+        <x-shop::layouts.features />
 
         {{-- Page Footer Blade Component --}}
-        <x-layouts.footer />
+        <x-shop::layouts.footer />
     </div>
 
     {!! view_render_event('bagisto.shop.layout.body.after') !!}

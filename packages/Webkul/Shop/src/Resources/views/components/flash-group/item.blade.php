@@ -14,8 +14,8 @@
         </div>
     </script>
 
-    <script>
-        Vue.component('flash-item', {
+    <script type="module">
+        app.component('flash-item', {
             template: '#flash-item-template',
 
             props: ['flash'],

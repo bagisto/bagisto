@@ -21,11 +21,6 @@ class ShopServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        /* publishers */
-        $this->publishes([
-            // __DIR__ . '/../Resources/views' => resource_path('themes/default/views'),
-        ]);
-
         /* loaders */
         Route::middleware('web')->group(__DIR__ . '/../Routes/web.php');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');

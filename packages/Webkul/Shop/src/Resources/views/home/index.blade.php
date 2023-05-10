@@ -1,8 +1,4 @@
-<x-layouts>
-    <x-slot:title>
-        {{ isset($metaTitle) ? $metaTitle : "" }}
-    </x-slot>
-
+<x-shop::layouts>
     <!-- Hero section -->
 	<div class="bs-hero-section">
 		<picture>
@@ -462,5 +458,4 @@
 			</div>
 		</div>
 	</div>
-
-</x-layouts>
+</x-shop::layouts>
