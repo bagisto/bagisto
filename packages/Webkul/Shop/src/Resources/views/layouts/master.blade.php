@@ -41,7 +41,6 @@
 
 
 <body @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif style="scroll-behavior: smooth;">
-
     {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
     <div id="app">
@@ -126,7 +125,6 @@
     <script>
         {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
     </script>
-
 </body>
 
 </html>

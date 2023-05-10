@@ -40,12 +40,28 @@
                 <input type="text"
                     class="bg-[#F5F5F5] rounded-lg block w-full px-11 py-3.5 text-gray-900 text-xs font-medium"
                     placeholder="Search for products" required>
-                    
+
                 <button type="button"
                     class="bg-[position:0px_-88px] bs-main-sprite w-[24px] h-[22px] absolute top-[12px] right-[12px] flex items-center pr-3">
                 </button>
             </div>
         </form>
+
+        {{-- Will remove it. --}}
+        @auth('customer')
+            <form id="customerLogout" action="{{ route('shop.customer.session.destroy') }}" method="POST">
+                @csrf
+
+                @method('DELETE')
+            </form>
+
+            <a
+                class="border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+                href="{{ route('shop.customer.session.destroy') }}"
+                onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
+                {{ __('shop::app.header.logout') }}
+            </a>
+        @endauth
 
         <span class="bg-[position:-169px_-65px] bs-main-sprite w-[21px] h-[20px] inline-block cursor-pointer"></span>
         <span class="bg-[position:-100px_-138px] bs-main-sprite w-[18px] h-[20px] inline-block cursor-pointer"></span>

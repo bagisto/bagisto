@@ -55,7 +55,7 @@
 
             @case('select')
                 <select
-                    {{ $control->attributes->merge(['class' => '']) }}
+                    {{ $control->attributes->merge(['class' => 'custom-select shadow appearance-none bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px]']) }}
                     {{ $control->attributes }}
                 >
                     {{ $control }}

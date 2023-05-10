@@ -8,8 +8,12 @@
                 If you have an account, sign in with your email address.
             </p>
 
-            <v-form class="rounded mt-[60px] max-sm:mt-[30px]" method="POST"
-                action="{{ route('shop.customer.session.create') }}" v-slot="{ meta, errors }">
+            <v-form
+                class="rounded mt-[60px] max-sm:mt-[30px]"
+                method="POST"
+                action="{{ route('shop.customer.session.create') }}"
+                v-slot="{ meta, errors }"
+            >
                 @csrf
 
                 <x-shop::form.control class="mb-4">
@@ -81,6 +85,4 @@
             © Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.
         </p>
     </div>
-
-    <x-slot:footer></x-slot:footer>
 </x-shop::layouts>

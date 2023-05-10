@@ -2,7 +2,12 @@
     <div class="flex justify-between">
         <h2 class="text-[26px] font-medium">Profile</h2>
 
-        <div class="border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer">Edit</div>
+        <a
+            href="{{ route('shop.customer.profile.edit') }}"
+            class="border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+        >
+            Edit
+        </a>
     </div>
 
     <div class="grid grid-cols-1 gap-y-[25px] mt-[30px]">
@@ -41,5 +46,27 @@
         >
             Delete Profile
         </div>
+
+        {{-- sample --}}
+        <my-component></my-component>
     </div>
+
+    {{-- sample --}}
+    @pushOnce('scripts')
+        <script type="text/x-template" id="test-template">
+            <p v-text="message"></p>
+        </script>
+
+        <script type="module">
+            app.component("my-component", {
+                template: '#test-template',
+
+                data() {
+                    return {
+                        message: "This is a message from MyComponent",
+                    };
+                },
+            });
+        </script>
+    @endpushOnce
 </x-shop::layouts.account>

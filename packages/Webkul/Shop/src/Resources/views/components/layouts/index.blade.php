@@ -11,20 +11,27 @@
     <meta name="base-url" content="{{ url()->to('/') }}">
     <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
 
+    @stack('meta')
+
+    {{-- <link
+        rel="icon"
+        sizes="16x16"
+        href="{{ core()->getCurrentChannel()->favicon_url ?? bagisto_asset('images/favicon.ico') }}"
+    /> --}}
+
     @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
 
-    @if ($favicon = core()->getCurrentChannel()->favicon_url)
-        <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
-    @else
-        {{-- <link rel="icon" sizes="16x16" href="{{ bagisto_asset('images/favicon.ico') }}" /> --}}
-    @endif
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap"
+        rel="stylesheet"
+    />
 
-    {{-- Head Slot to insert custom SEO tags, CSS etc --}}
-    {{ $head ?? '' }}
+    @stack('styles')
 
     <style>
         {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
@@ -67,8 +74,11 @@
         @endif
     </script>
 
-    {{-- Footer Slot, here you can add custom scripts --}}
-    {{ $footer ?? '' }}
+    @stack('scripts')
+
+    <script type="text/javascript">
+        {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
+    </script>
 </body>
 
 </html>
