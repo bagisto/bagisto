@@ -1,49 +1,36 @@
 <x-shop::layouts.account>
     <h2 class="text-[26px] font-medium">Edit Profile</h2>
 
-    <v-form
-        class="rounded mt-[30px]"
-        method="POST"
+    <x-shop::form
         action="{{ route('shop.customer.profile.store') }}"
-        v-slot="{ meta, errors }"
+        class="rounded mt-[30px]"
     >
-        @csrf
-
-        <div class="flex items-center w-full gap-[30px]">
-            <div class="w-[200px] h-[200px] rounded-[12px] cursor-pointer bg-[#F5F5F5]">
-                <img class="" src="../images/user-placeholder.png" title="" alt="">
-            </div>
-
-            <label
-                for="dropzone-file"
-                class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
-            >
-                Add Image <input id="dropzone-file" type="file" class="hidden">
-            </label>
-        </div>
-
-        <x-shop::form.control class="mb-4">
-            <x-slot:label>
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
                 First Name
-            </x-slot:label>
+            </x-shop::form.control-group.label>
 
-            <x-slot:control
+            <x-shop::form.control-group.control
                 type="text"
                 name="first_name"
-                value=""
                 rules="required"
                 label="First Name"
                 placeholder="First Name"
             >
-            </x-slot:control>
-        </x-shop::form.control>
+            </x-shop::form.control-group.control>
 
-        <x-shop::form.control class="mb-4">
-            <x-slot:label>
+            <x-shop::form.control-group.error
+                control-name="first_name"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
                 Last Name
-            </x-slot:label>
+            </x-shop::form.control-group.label>
 
-            <x-slot:control
+            <x-shop::form.control-group.control
                 type="text"
                 name="last_name"
                 value=""
@@ -51,15 +38,20 @@
                 label="Last Name"
                 placeholder="Last Name"
             >
-            </x-slot:control>
-        </x-shop::form.control>
+            </x-shop::form.control-group.control>
 
-        <x-shop::form.control class="mb-4">
-            <x-slot:label>
+            <x-shop::form.control-group.error
+                control-name="last_name"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
                 Email
-            </x-slot:label>
+            </x-shop::form.control-group.label>
 
-            <x-slot:control
+            <x-shop::form.control-group.control
                 type="text"
                 name="email"
                 value=""
@@ -67,15 +59,20 @@
                 label="Email"
                 placeholder="Email"
             >
-            </x-slot:control>
-        </x-shop::form.control>
+            </x-shop::form.control-group.control>
 
-        <x-shop::form.control class="mb-4">
-            <x-slot:label>
+            <x-shop::form.control-group.error
+                control-name="email"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
                 Phone
-            </x-slot:label>
+            </x-shop::form.control-group.label>
 
-            <x-slot:control
+            <x-shop::form.control-group.control
                 type="text"
                 name="phone"
                 value=""
@@ -83,85 +80,116 @@
                 label="Phone"
                 placeholder="Phone"
             >
-            </x-slot:control>
-        </x-shop::form.control>
+            </x-shop::form.control-group.control>
 
-        <x-shop::form.control class="mb-4">
-            <x-slot:label>
+            <x-shop::form.control-group.error
+                control-name="phone"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
                 Gender
-            </x-slot:label>
+            </x-shop::form.control-group.label>
 
-            <x-slot:control
+            <x-shop::form.control-group.control
                 type="select"
+                name="gender"
+                value=""
+                class="mb-4"
+                rules="required"
+                label="Gender"
             >
                 <option value="">@lang('Select Gender')</option>
                 <option value="Other">@lang('shop::app.customer.account.profile.other')</option>
                 <option value="Male">@lang('shop::app.customer.account.profile.male')</option>
                 <option value="Female">@lang('shop::app.customer.account.profile.female')</option>
-            </x-slot:control>
-        </x-shop::form.control>
+            </x-shop::form.control-group.control>
 
-        <x-shop::form.control class="mb-4">
-            <x-slot:label>
+            <x-shop::form.control-group.error
+                control-name="gender"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
                 Current Password
-            </x-slot:label>
+            </x-shop::form.control-group.label>
 
-            <x-slot:control
+            <x-shop::form.control-group.control
                 type="password"
                 name="current_password"
                 value=""
-                rules="required"
                 label="Current Password"
                 placeholder="Current Password"
             >
-            </x-slot:control>
-        </x-shop::form.control>
+            </x-shop::form.control-group.control>
 
-        <x-shop::form.control class="mb-4">
-            <x-slot:label>
+            <x-shop::form.control-group.error
+                control-name="current_password"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
                 New Password
-            </x-slot:label>
+            </x-shop::form.control-group.label>
 
-            <x-slot:control
+            <x-shop::form.control-group.control
                 type="password"
                 name="new_password"
                 value=""
-                rules="required"
                 label="New Password"
                 placeholder="New Password"
             >
-            </x-slot:control>
-        </x-shop::form.control>
+            </x-shop::form.control-group.control>
 
-        <x-shop::form.control class="mb-4">
-            <x-slot:label>
+            <x-shop::form.control-group.error
+                control-name="new_password"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
                 Confirm Password
-            </x-slot:label>
+            </x-shop::form.control-group.label>
 
-            <x-slot:control
+            <x-shop::form.control-group.control
                 type="password"
-                name="confirm_password"
+                name="new_password_confirmation"
                 value=""
-                rules="required|confirmed:@new_password"
+                rules="confirmed:@new_password"
                 label="Confirm Password"
                 placeholder="Confirm Password"
             >
-            </x-slot:control>
-        </x-shop::form.control>
+            </x-shop::form.control-group.control>
 
-        <x-shop::form.control class="mb-4">
-            <x-slot:control type="checkbox">
+            <x-shop::form.control-group.error
+                control-name="new_password_confirmation"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.control
+                type="checkbox"
+                name="subscribed_to_news_letter"
+            >
                 <span class="select-none text-[16] text-[#7d7d7d] max-sm:text-[12px]">
                     @lang('shop::app.customer.signup-form.subscribe-to-newsletter')
                 </span>
-            </x-slot:control>
-        </x-shop::form.control>
+            </x-shop::form.control-group.control>
+        </x-shop::form.control-group>
 
         <button
-            class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
             type="submit"
+            class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
         >
             Save
         </button>
-    </v-form>
+    </x-shop::form>
 </x-shop::layouts.account>

@@ -27,16 +27,16 @@ class CustomerProfileRequest extends FormRequest
         $id = auth()->guard('customer')->user()->id;
 
         return [
-            'first_name'            => ['required', new AlphaNumericSpace],
-            'last_name'             => ['required', new AlphaNumericSpace],
-            'gender'                => 'required|in:Other,Male,Female',
-            'date_of_birth'         => 'date|before:today',
-            'email'                 => 'email|unique:customers,email,' . $id,
-            'password'              => 'confirmed|min:6|required_with:oldpassword',
-            'oldpassword'           => 'required_with:password',
-            'password_confirmation' => 'required_with:password',
-            'image.*'               => 'mimes:bmp,jpeg,jpg,png,webp',
-            'phone'                 => 'numeric',
+            'first_name'                => ['required', new AlphaNumericSpace()],
+            'last_name'                 => ['required', new AlphaNumericSpace()],
+            'gender'                    => 'required|in:Other,Male,Female',
+            'date_of_birth'             => 'date|before:today',
+            'email'                     => 'email|unique:customers,email,' . $id,
+            'new_password'              => 'confirmed|min:6',
+            'new_password_confirmation' => 'required_with:new_password',
+            'current_password'          => 'required_with:new_password',
+            'image.*'                   => 'mimes:bmp,jpeg,jpg,png,webp',
+            'phone'                     => 'numeric',
         ];
     }
 }

@@ -8,43 +8,59 @@
                 If you have an account, sign in with your email address.
             </p>
 
-            <v-form
-                class="rounded mt-[60px] max-sm:mt-[30px]"
-                method="POST"
+            <x-shop::form
                 action="{{ route('shop.customer.session.create') }}"
-                v-slot="{ meta, errors }"
+                class="rounded mt-[60px] max-sm:mt-[30px]"
             >
-                @csrf
-
-                <x-shop::form.control class="mb-4">
-                    <x-slot:label>
+                <x-shop::form.control-group class="mb-4">
+                    <x-shop::form.control-group.label>
                         Email
-                    </x-slot:label>
+                    </x-shop::form.control-group.label>
 
-                    <x-slot:control type="text" name="email" value="" rules="required|email"
-                        placeholder="Email">
-                    </x-slot:control>
-                </x-shop::form.control>
+                    <x-shop::form.control-group.control
+                        type="text"
+                        name="email"
+                        value=""
+                        rules="required|email"
+                        placeholder="Email"
+                    >
+                    </x-shop::form.control-group.control>
 
-                <x-shop::form.control class="mb-6">
-                    <x-slot:label>
+                    <x-shop::form.control-group.error
+                        control-name="email"
+                    >
+                    </x-shop::form.control-group.error>
+                </x-shop::form.control-group>
+
+                <x-shop::form.control-group class="mb-6">
+                    <x-shop::form.control-group.label>
                         Password
-                    </x-slot:label>
+                    </x-shop::form.control-group.label>
 
-                    <x-slot:control type="password" name="password" value="" rules="required"
-                        placeholder="Password">
-                    </x-slot:control>
-                </x-shop::form.control>
+                    <x-shop::form.control-group.control
+                        type="password"
+                        name="password"
+                        value=""
+                        rules="required"
+                        placeholder="Password"
+                    >
+                    </x-shop::form.control-group.control>
+
+                    <x-shop::form.control-group.error
+                        control-name="password"
+                    >
+                    </x-shop::form.control-group.error>
+                </x-shop::form.control-group>
 
                 <div class="flex justify-between">
                     <div class="text-[##7D7D7D] flex items-center gap-[6px]">
-                        <x-shop::form.control>
-                            <x-slot:control type="checkbox">
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.control type="checkbox">
                                 <span class="select-none  text-[16] text-[#7d7d7d] max-sm:text-[12px]">
                                     Show Password
                                 </span>
-                            </x-slot:control>
-                        </x-shop::form.control>
+                            </x-shop::form.control-group.control>
+                        </x-shop::form.control-group>
                     </div>
 
                     <div class="block">
@@ -74,7 +90,7 @@
                             aria-label="Linkdln"></a>
                     </div>
                 </div>
-            </v-form>
+            </x-shop::form>
 
             <p class="text-[#7D7D7D] font-medium mt-[20px]">
                 New customer? <a class="text-navyBlue" href="#">Create your account</a>
