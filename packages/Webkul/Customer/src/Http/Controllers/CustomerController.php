@@ -84,18 +84,18 @@ class CustomerController extends Controller
 
         $data['subscribed_to_news_letter'] = isset($data['subscribed_to_news_letter']);
 
-        if (! empty($data['oldpassword'])) {
-            if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
+        if (! empty($data['current_password'])) {
+            if (Hash::check($data['current_password'], auth()->guard('customer')->user()->password)) {
                 $isPasswordChanged = true;
 
-                $data['password'] = bcrypt($data['password']);
+                $data['password'] = bcrypt($data['new_password']);
             } else {
                 session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
 
                 return redirect()->back();
             }
         } else {
-            unset($data['password']);
+            unset($data['new_password']);
         }
 
         Event::dispatch('customer.update.before');

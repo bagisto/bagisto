@@ -14,31 +14,31 @@
         <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
             <p class="text-[14px] font-medium">First Name</p>
 
-            <p class="text-[14px] font-medium text-[#7D7D7D]">Anie</p>
+            <p class="text-[14px] font-medium text-[#7D7D7D]">{{ $customer->first_name }}</p>
         </div>
 
         <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
             <p class="text-[14px] font-medium">Last Name</p>
 
-            <p class="text-[14px] font-medium text-[#7D7D7D]">Doe</p>
+            <p class="text-[14px] font-medium text-[#7D7D7D]">{{ $customer->last_name }}</p>
         </div>
 
         <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
             <p class="text-[14px] font-medium">Gender</p>
 
-            <p class="text-[14px] font-medium text-[#7D7D7D]">Male</p>
+            <p class="text-[14px] font-medium text-[#7D7D7D]">{{ $customer->gender }}</p>
         </div>
 
         <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
             <p class="text-[14px] font-medium">Date of Birth</p>
 
-            <p class="text-[14px] font-medium text-[#7D7D7D]">1996-08-26</p>
+            <p class="text-[14px] font-medium text-[#7D7D7D]">{{ $customer->date_of_birth }}</p>
         </div>
 
         <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
             <p class="text-[14px] font-medium">Email</p>
 
-            <p class="text-[14px] font-medium text-[#7D7D7D]">JhonDoe@gmail.com</p>
+            <p class="text-[14px] font-medium text-[#7D7D7D]">{{ $customer->email }}</p>
         </div>
 
         <div

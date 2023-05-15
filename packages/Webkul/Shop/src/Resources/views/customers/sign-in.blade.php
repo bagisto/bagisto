@@ -55,7 +55,10 @@
                 <div class="flex justify-between">
                     <div class="text-[##7D7D7D] flex items-center gap-[6px]">
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.control type="checkbox">
+                            <x-shop::form.control-group.control
+                                name="show_password"
+                                type="checkbox"
+                            >
                                 <span class="select-none  text-[16] text-[#7d7d7d] max-sm:text-[12px]">
                                     Show Password
                                 </span>

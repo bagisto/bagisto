@@ -4,6 +4,7 @@ namespace Webkul\Customer\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
+use Webkul\Core\Contracts\Validations\PhoneNumber;
 
 class CustomerProfileRequest extends FormRequest
 {
@@ -32,11 +33,12 @@ class CustomerProfileRequest extends FormRequest
             'gender'                    => 'required|in:Other,Male,Female',
             'date_of_birth'             => 'date|before:today',
             'email'                     => 'email|unique:customers,email,' . $id,
-            'new_password'              => 'confirmed|min:6',
+            'new_password'              => 'confirmed|min:6|required_with:current_password',
             'new_password_confirmation' => 'required_with:new_password',
             'current_password'          => 'required_with:new_password',
             'image.*'                   => 'mimes:bmp,jpeg,jpg,png,webp',
-            'phone'                     => 'numeric',
+            'phone'                     => ['required', new PhoneNumber],
+            'subscribed_to_news_letter' => 'nullable',
         ];
     }
 }

@@ -19,13 +19,12 @@
 
     @case('checkbox')
         <span class="">
-            <v-field
+            <input
                 type="checkbox"
                 name="{{ $name }}"
                 {{ $attributes->merge(['class' => '']) }}
                 {{ $attributes }}
             >
-            </v-field>
 
             {{ $slot }}
         </span>
@@ -34,7 +33,7 @@
 
     @case('radio')
         <span class="">
-            <v-field
+            <input
                 type="radio"
                 name="{{ $name }}"
                 {{ $attributes->merge(['class' => '']) }}

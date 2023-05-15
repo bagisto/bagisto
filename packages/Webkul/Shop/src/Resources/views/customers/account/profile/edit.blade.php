@@ -2,7 +2,7 @@
     <h2 class="text-[26px] font-medium">Edit Profile</h2>
 
     <x-shop::form
-        action="{{ route('shop.customer.profile.store') }}"
+        :action="route('shop.customer.profile.store')"
         class="rounded mt-[30px]"
     >
         <x-shop::form.control-group class="mb-4">
@@ -13,6 +13,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="first_name"
+                :value="old('first_name') ?? $customer->first_name"
                 rules="required"
                 label="First Name"
                 placeholder="First Name"
@@ -33,7 +34,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="last_name"
-                value=""
+                :value="old('last_name') ?? $customer->last_name"
                 rules="required"
                 label="Last Name"
                 placeholder="Last Name"
@@ -54,7 +55,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="email"
-                value=""
+                :value="old('email') ?? $customer->email"
                 rules="required|email"
                 label="Email"
                 placeholder="Email"
@@ -75,8 +76,8 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="phone"
-                value=""
-                rules=""
+                :value="old('phone') ?? $customer->phone"
+                rules="required|phone"
                 label="Phone"
                 placeholder="Phone"
             >
@@ -96,7 +97,7 @@
             <x-shop::form.control-group.control
                 type="select"
                 name="gender"
-                value=""
+                :value="old('gender') ?? $customer->gender"
                 class="mb-4"
                 rules="required"
                 label="Gender"
@@ -178,11 +179,17 @@
             <x-shop::form.control-group.control
                 type="checkbox"
                 name="subscribed_to_news_letter"
+                :checked="$customer->subscribed_to_news_letter"
             >
                 <span class="select-none text-[16] text-[#7d7d7d] max-sm:text-[12px]">
                     @lang('shop::app.customer.signup-form.subscribe-to-newsletter')
                 </span>
             </x-shop::form.control-group.control>
+
+            <x-shop::form.control-group.error
+                control-name="subscribed_to_news_letter"
+            >
+            </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
         <button
