@@ -13,18 +13,18 @@
         </div>
     </script>
 
-    <script>
-        Vue.component('tab-item', {
+    <script type="module">
+        app.component('tab-item', {
             template: '#tab-item-template',
 
             props: ['name', 'isSelected'],
-            
+
             data() {
                 return {
                     isActive: false
                 }
             },
-            
+
             mounted() {
                 this.isActive = this.isSelected;
             }

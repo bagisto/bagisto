@@ -14,7 +14,7 @@ class ChannelTableSeeder extends Seeder
         DB::table('channels')->insert([
             'id'                => 1,
             'code'              => 'default',
-            'theme'             => 'velocity',
+            'theme'             => 'default',
             'hostname'          => config('app.url'),
             'root_category_id'  => 1,
             'default_locale_id' => 1,

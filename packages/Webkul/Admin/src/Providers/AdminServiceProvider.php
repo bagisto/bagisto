@@ -75,8 +75,6 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function loadPublishers(): void
     {
-        $this->publishes([__DIR__ . '/../Resources/lang' => lang_path('vendor/admin')]);
-
         $this->publishes([__DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets')], 'public');
     }
 

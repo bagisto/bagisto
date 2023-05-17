@@ -2,11 +2,11 @@
 
 namespace Webkul\Shop\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Tree;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Http\Middleware\Locale;
@@ -21,13 +21,6 @@ class ShopServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        /* publishers */
-        $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
-            __DIR__ . '/../Resources/views'       => resource_path('themes/default/views'),
-            __DIR__ . '/../Resources/lang'        => lang_path('vendor/shop'),
-        ]);
-
         /* loaders */
         Route::middleware('web')->group(__DIR__ . '/../Routes/web.php');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
@@ -46,7 +39,7 @@ class ShopServiceProvider extends ServiceProvider
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
 
-        Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'shop');
+        Blade::anonymousComponentPath(__DIR__ . '/../Resources/views/components', 'shop');
 
         /* Breadcrumbs */
         require __DIR__ . '/../Routes/breadcrumbs.php';
@@ -90,11 +83,13 @@ class ShopServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/menu.php', 'menu.customer'
+            dirname(__DIR__) . '/Config/menu.php',
+            'menu.customer'
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php', 'core'
+            dirname(__DIR__) . '/Config/system.php',
+            'core'
         );
     }
 }

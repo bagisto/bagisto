@@ -34,8 +34,8 @@
         </div>
     </script>
 
-    <script>
-        Vue.component('accordion', {
+    <script type="module">
+        app.component('accordion', {
             template: '#accordion-template',
 
             inject: ['$validator'],

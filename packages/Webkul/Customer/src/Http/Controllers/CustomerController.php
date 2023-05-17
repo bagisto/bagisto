@@ -32,8 +32,7 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected ProductReviewRepository $productReviewRepository,
         protected SubscribersListRepository $subscriptionRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
     }
 
@@ -46,7 +45,7 @@ class CustomerController extends Controller
     {
         $customer = $this->customerRepository->find(auth()->guard('customer')->user()->id);
 
-        return view($this->_config['view'], compact('customer'));
+        return view('shop::customers.account.profile.index', compact('customer'));
     }
 
     /**
@@ -85,18 +84,18 @@ class CustomerController extends Controller
 
         $data['subscribed_to_news_letter'] = isset($data['subscribed_to_news_letter']);
 
-        if (! empty($data['oldpassword'])) {
-            if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
+        if (! empty($data['current_password'])) {
+            if (Hash::check($data['current_password'], auth()->guard('customer')->user()->password)) {
                 $isPasswordChanged = true;
 
-                $data['password'] = bcrypt($data['password']);
+                $data['password'] = bcrypt($data['new_password']);
             } else {
                 session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
 
                 return redirect()->back();
             }
         } else {
-            unset($data['password']);
+            unset($data['new_password']);
         }
 
         Event::dispatch('customer.update.before');
@@ -159,7 +158,7 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

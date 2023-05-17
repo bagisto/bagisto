@@ -5,9 +5,9 @@ return [
 
     'themes' => [
         'default' => [
-            'views_path' => 'resources/themes/default/views',
-            'assets_path' => 'public/themes/default/assets',
-            'name' => 'Default'
+            'views_path'  => 'resources/themes/default/views',
+            'assets_path' => 'public/themes/default',
+            'name'        => 'Default',
         ],
     ],
 
@@ -15,9 +15,9 @@ return [
 
     'admin-themes' => [
         'default' => [
-            'views_path' => 'resources/admin-themes/default/views',
+            'views_path'  => 'resources/admin-themes/default/views',
             'assets_path' => 'public/admin-themes/default/assets',
-            'name' => 'Default'
-        ]
-    ]
+            'name'        => 'Default',
+        ],
+    ],
 ];

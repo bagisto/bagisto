@@ -27,6 +27,15 @@ class Customer extends Authenticatable implements CustomerContract
     protected $table = 'customers';
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'subscribed_to_news_letter' => 'boolean',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

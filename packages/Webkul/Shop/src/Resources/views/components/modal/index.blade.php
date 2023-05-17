@@ -17,7 +17,7 @@
                 <slot name="header">
                     Default header
                 </slot>
-                
+
                 <i class="icon remove-icon" @click="close"></i>
             </div>
 
@@ -29,8 +29,8 @@
         </div>
     </script>
 
-    <script>
-        Vue.component('modal', {
+    <script type="module">
+        app.component('modal', {
             template: '#modal-template',
 
             props: ['id', 'isOpen'],

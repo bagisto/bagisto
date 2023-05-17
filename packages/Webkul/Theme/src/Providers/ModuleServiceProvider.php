@@ -6,6 +6,10 @@ use Webkul\Core\Providers\CoreModuleServiceProvider;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
-    protected $models = [
-    ];
+    /**
+     * Models.
+     *
+     * @var array
+     */
+    protected $models = [];
 }
