@@ -1,11 +1,4 @@
-<products-carousel>
-
-    @foreach ($products as $product)
-        <x-shop::products.card :product="$product"></x-shop::products.card>
-    @endforeach
-
-</products-carousel>
-
+<products-carousel></products-carousel>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="products-carousel-template">
@@ -22,15 +15,17 @@
 
             <div class="flex gap-8 mt-[60px] overflow-auto scrollbar-hide max-sm:mt-[20px]">
 
-                <slot></slot>
+                <x-shop::products.card v-for="product in products"></x-shop::products.card>
 
             </div>
 
             @if (isset($navigationLink))
                 <a
-                href="{{ $navigationLink } }}"
-                class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center">View
-                All</a>
+                    href="{{ $navigationLink }}"
+                    class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
+                >
+                    View All
+                </a>
             @endif
         </div>
     </script>
@@ -41,15 +36,8 @@
 
             data() {
                 return {
-
+                    products: @json($products)
                 }
-            },
-
-            created() {
-
-            },
-
-            methods: {
             }
         });
     </script>

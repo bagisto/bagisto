@@ -7,10 +7,6 @@ dotenv.config({ path: "../../../.env" });
 
 export default defineConfig(({ mode }) => {
     return {
-        server: {
-            host: "172.16.0.2",
-        },
-
         plugins: [
             laravel({
                 hotFile: "../../../public/default-vite.hot",
