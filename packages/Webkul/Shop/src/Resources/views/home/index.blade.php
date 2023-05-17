@@ -11,10 +11,23 @@
 		</div>
 	</div>
 
+	@php
+		$products = [
+			[
+				'name' => 'Test 1'
+			], [
+				'name' => 'Test 2'
+			]
+		]
+	@endphp
+
+	<x-shop::products.carousel title="Men’s Collections" :products="$products" :navigation-link="route('shop.home.index')"></x-shop::products.carousel>
+
 	<!-- The game with our new additions! section -->
 	<div class="section-title mt-20 max-sm:mt-[30px]">
 		<h2 class="max-w-[595px] mx-auto font-dmserif">The game with our new additions!</h2>
 	</div>
+	
 
 	<div class="container mt-[60px] max-lg:px-[30px] max-sm:mt-[20px]">
 		<div class="bs-item-carousal-wrapper relative">

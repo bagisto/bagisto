@@ -107,17 +107,11 @@
 
     <script>
         let shippingHtml = '';
-
         let paymentHtml = '';
-
         let reviewHtml = '';
-
         let summaryHtml = '';
-
         let customerAddress = '';
-
         let shippingMethods = '';
-        
         let paymentMethods = '';
 
         @auth('customer')
@@ -137,15 +131,12 @@
                 return {
                     step_numbers: {
                         'information': 1,
-
                         'shipping': 2,
-
                         'payment': 3,
-
                         'review': 4
                     },
 
-                    currentStep: 1,
+                    current_step: 1,
 
                     completed_step: 0,
 
