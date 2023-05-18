@@ -5,22 +5,18 @@
         <div class="container mt-20 max-lg:px-[30px] max-sm:mt-[30px]">
             <div class="flex justify-between">
                 <h3 class="text-[30px] max-sm:text-[25px] font-dmserif">{{ $title }}</h3>
-
                 <div class="flex justify-between items-center gap-8">
                     <span
-                        class="icon-arrow-left-stylish text-[24px] inline-block cursor-pointer"
-                    >
-                    </span>
-
+                        class="bg-[position:-122px_-137px] bs-main-sprite w-[21px] h-[20px] inline-block cursor-pointer"></span>
                     <span
-                        class="icon-arrow-right-stylish text-[24px] inline-block cursor-pointer"
-                    >
-                    </span>
+                        class="bg-[position:-147px_-137px] bs-main-sprite w-[21px] h-[20px] inline-block cursor-pointer"></span>
                 </div>
             </div>
 
             <div class="flex gap-8 mt-[60px] overflow-auto scrollbar-hide max-sm:mt-[20px]">
+
                 <x-shop::products.card v-for="product in products"></x-shop::products.card>
+
             </div>
 
             @if (isset($navigationLink))
@@ -40,7 +36,24 @@
 
             data() {
                 return {
-                    products: @json($products)
+                    products: [],
+                    
+                    url: "{{ route('shop.products', 'simple-product') }}"
+                }
+            },
+
+            mounted() {
+                this.getProductDetails();
+            },
+
+            methods: {
+                getProductDetails() {
+                    this.$axios.get(this.url).then(response => {
+                        console.log(response);
+;
+                    }).catch(error => {
+                        console.log(error);
+                    });
                 }
             }
         });

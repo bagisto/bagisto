@@ -10,7 +10,6 @@ use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Tree;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Http\Middleware\Locale;
-use Webkul\Shop\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Shop\Http\Middleware\Theme;
 
 class ShopServiceProvider extends ServiceProvider
@@ -24,15 +23,15 @@ class ShopServiceProvider extends ServiceProvider
     {
         /* loaders */
         Route::middleware('web')->group(__DIR__ . '/../Routes/web.php');
+        $this->mapApiRoutes();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'shop');
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
 
         /* aliases */
-        $router->aliasMiddleware('currency', Currency::class);
         $router->aliasMiddleware('locale', Locale::class);
-        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
         $router->aliasMiddleware('theme', Theme::class);
+        $router->aliasMiddleware('currency', Currency::class);
 
         /* View Composers */
         $this->composeView();
@@ -45,6 +44,7 @@ class ShopServiceProvider extends ServiceProvider
 
         /* Breadcrumbs */
         require __DIR__ . '/../Routes/breadcrumbs.php';
+        
     }
 
     /**
@@ -93,5 +93,17 @@ class ShopServiceProvider extends ServiceProvider
             dirname(__DIR__) . '/Config/system.php',
             'core'
         );
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * @return void
+     */
+    protected function mapApiRoutes()
+    {
+        Route::prefix('api')
+            ->middleware('web')
+            ->group(__DIR__ . '/../Routes/api.php');
     }
 }

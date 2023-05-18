@@ -3,11 +3,12 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
-use Webkul\Product\Repositories\ProductRepository;
 
 
 class ProductController extends Controller
@@ -100,5 +101,41 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             abort(404);
         }
+    }
+
+    /**
+     * Fetch product details.
+     *
+     * @param  string  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function fetchProductDetails($slug)
+    {
+        $product = $this->productRepository->findBySlug($slug);
+
+        if ($product?->status) {
+            $productReviewHelper = app('Webkul\Product\Helpers\Review');
+
+            // $galleryImages = ProductImage::getProductBaseImage($product);
+
+            $response = [
+                'status'  => true,
+                'details' => [
+                    'name'         => $product->name,
+                    'urlKey'       => $product->url_key,
+                    'priceHTML'    => view('shop::products.price', ['product' => $product])->render(),
+                    'totalReviews' => $productReviewHelper->getTotalReviews($product),
+                    'rating'       => ceil($productReviewHelper->getAverageRating($product)),
+                    // 'image'        => $galleryImages['small_image_url'],
+                ],
+            ];
+        } else {
+            $response = [
+                'status' => false,
+                'slug'   => $slug,
+            ];
+        }
+
+        return $response;
     }
 }
