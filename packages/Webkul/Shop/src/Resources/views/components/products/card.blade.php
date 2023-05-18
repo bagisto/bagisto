@@ -1,4 +1,4 @@
-<product-card {{ $attributes }} :product="product"></products-card>
+<product-card {{ $attributes }} :product="product"></product-card>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="product-card-template">
@@ -21,7 +21,7 @@
             </div>
 
             <p class="text-base">@{{ product.name }}</p>
-            
+
             <div class="price-block">
                 <p class="offer-price">$20.00</p>
                 <p class="original-price">$30.00</p>
@@ -41,8 +41,7 @@
             props: ['product'],
 
             data() {
-                return {
-                };
+                return {};
             },
         });
     </script>

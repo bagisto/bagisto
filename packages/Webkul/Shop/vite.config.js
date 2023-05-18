@@ -7,6 +7,11 @@ dotenv.config({ path: "../../../.env" });
 
 export default defineConfig(({ mode }) => {
     return {
+        server: {
+            host: process.env.SHOP_VITE_HOST || "localhost",
+            port: process.env.SHOP_VITE_PORT || 5173,
+        },
+
         plugins: [
             laravel({
                 hotFile: "../../../public/default-vite.hot",
