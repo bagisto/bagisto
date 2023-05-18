@@ -1,11 +1,11 @@
 <?php
 
-namespace Webkul\Customer\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\Customer;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Event;
-use Webkul\Customer\Http\Requests\CustomerAddressRequest;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Shop\Http\Requests\Customer\AddressRequest;
 
 class AddressController extends Controller
 {
@@ -63,7 +63,7 @@ class AddressController extends Controller
      *
      * @return view
      */
-    public function store(CustomerAddressRequest $request)
+    public function store(AddressRequest $request)
     {
         $customer = auth()->guard('customer')->user();
 
@@ -111,13 +111,13 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id, CustomerAddressRequest $request)
+    public function update($id, AddressRequest $request)
     {
         $customer = auth()->guard('customer')->user();
 
         if (! $customer->addresses()->find($id)) {
             session()->flash('warning', trans('shop::app.security-warning'));
-            
+
             return redirect()->route('shop.customer.addresses.index');
         }
 

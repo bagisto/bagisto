@@ -1,11 +1,12 @@
 <?php
 
-namespace Webkul\Customer\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Cart;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\Http\Controllers\Controller;
 
 class WishlistController extends Controller
 {
@@ -26,8 +27,7 @@ class WishlistController extends Controller
     public function __construct(
         protected WishlistRepository $wishlistRepository,
         protected ProductRepository $productRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
     }
 
@@ -54,7 +54,7 @@ class WishlistController extends Controller
             'items'              => $this->wishlistRepository->getCustomerWishlist(),
             'isSharingEnabled'   => $this->isSharingEnabled(),
             'isWishlistShared'   => $customer->isWishlistShared(),
-            'wishlistSharedLink' => $customer->getWishlistSharedLink()
+            'wishlistSharedLink' => $customer->getWishlistSharedLink(),
         ]);
     }
 
@@ -96,7 +96,7 @@ class WishlistController extends Controller
 
             return redirect()->back();
         } elseif (
-            (! $product->status) 
+            (! $product->status)
             || (! $product->visible_individually)
         ) {
             abort(404);
@@ -127,7 +127,7 @@ class WishlistController extends Controller
             return redirect()->back();
         } else {
             $this->wishlistRepository->findOneWhere([
-                'product_id' => $data['product_id']
+                'product_id' => $data['product_id'],
             ])->delete();
 
             session()->flash('success', trans('customer::app.wishlist.removed'));
@@ -147,7 +147,7 @@ class WishlistController extends Controller
 
         if ($this->isSharingEnabled()) {
             $data = $this->validate(request(), [
-                'shared' => 'required|boolean'
+                'shared' => 'required|boolean',
             ]);
 
             $updateCounts = $customer->wishlist_items()->update(['shared' => $data['shared']]);
@@ -158,7 +158,7 @@ class WishlistController extends Controller
             ) {
                 return response()->json([
                     'isWishlistShared'   => $customer->isWishlistShared(),
-                    'wishlistSharedLink' => $customer->getWishlistSharedLink()
+                    'wishlistSharedLink' => $customer->getWishlistSharedLink(),
                 ]);
             }
         }
@@ -236,7 +236,7 @@ class WishlistController extends Controller
     public function move($itemId)
     {
         $customer = auth()->guard('customer')->user();
-        
+
         $wishlistItem = $this->wishlistRepository->findOneWhere([
             'id'          => $itemId,
             'customer_id' => $customer->id,
@@ -263,7 +263,7 @@ class WishlistController extends Controller
 
             session()->flash('warning', $e->getMessage());
 
-            return redirect()->route('shop.productOrCategory.index',  $wishlistItem->product->url_key);
+            return redirect()->route('shop.productOrCategory.index', $wishlistItem->product->url_key);
         }
     }
 

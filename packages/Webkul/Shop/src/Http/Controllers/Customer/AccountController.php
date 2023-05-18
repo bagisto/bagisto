@@ -1,6 +1,8 @@
 <?php
 
-namespace Webkul\Customer\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\Customer;
+
+use Webkul\Shop\Http\Controllers\Controller;
 
 class AccountController extends Controller
 {

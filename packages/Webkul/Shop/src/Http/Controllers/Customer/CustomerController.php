@@ -1,14 +1,15 @@
 <?php
 
-namespace Webkul\Customer\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Core\Repositories\SubscribersListRepository;
-use Webkul\Customer\Http\Requests\CustomerProfileRequest;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Shop\Http\Requests\Customer\ProfileRequest;
 use Webkul\Shop\Mail\SubscriptionEmail;
 
 class CustomerController extends Controller
@@ -65,11 +66,11 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerProfileRequest $customerProfileRequest)
+    public function update(ProfileRequest $profileRequest)
     {
         $isPasswordChanged = false;
 
-        $data = $customerProfileRequest->validated();
+        $data = $profileRequest->validated();
 
         if (empty($data['date_of_birth'])) {
             unset($data['date_of_birth']);

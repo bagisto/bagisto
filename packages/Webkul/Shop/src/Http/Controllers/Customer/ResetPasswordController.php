@@ -1,14 +1,15 @@
 <?php
 
-namespace Webkul\Customer\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\Customer;
 
-use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Shop\Http\Controllers\Controller;
 
 class ResetPasswordController extends Controller
 {
@@ -23,15 +24,13 @@ class ResetPasswordController extends Controller
 
     /**
      * Create a new controller instance.
-     * 
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
      *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
      * @return void
      */
     public function __construct(
         protected CustomerRepository $customerRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
     }
 
@@ -72,7 +71,7 @@ class ResetPasswordController extends Controller
 
             if ($response == Password::PASSWORD_RESET) {
                 $user = $this->customerRepository->findOneByField('email', request('email'));
-                
+
                 Event::dispatch('user.admin.update-password', $user);
 
                 return redirect()->route($this->_config['redirect']);
@@ -83,7 +82,7 @@ class ResetPasswordController extends Controller
                 ->withErrors([
                     'email' => trans($response),
                 ]);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
 
             return redirect()->back();
@@ -117,5 +116,4 @@ class ResetPasswordController extends Controller
     {
         return Password::broker('customers');
     }
-
 }

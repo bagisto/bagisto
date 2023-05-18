@@ -1,10 +1,11 @@
 <?php
 
-namespace Webkul\Customer\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
-use Webkul\Customer\Http\Requests\CustomerForgotPasswordRequest;
+use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Shop\Http\Requests\Customer\ForgotPasswordRequest;
 
 class ForgotPasswordController extends Controller
 {
@@ -42,7 +43,7 @@ class ForgotPasswordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(CustomerForgotPasswordRequest $request)
+    public function store(ForgotPasswordRequest $request)
     {
         $request->validated();
 
@@ -66,7 +67,7 @@ class ForgotPasswordController extends Controller
             return redirect()->back();
         } catch (\Exception $e) {
             report($e);
-            
+
             session()->flash('error', trans($e->getMessage()));
 
             return redirect()->back();

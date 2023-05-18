@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Customer\Http\Requests;
+namespace Webkul\Shop\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Contracts\Validations\Address;
@@ -8,7 +8,7 @@ use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
 use Webkul\Core\Contracts\Validations\PhoneNumber;
 use Webkul\Customer\Rules\VatIdRule;
 
-class CustomerAddressRequest extends FormRequest
+class AddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -1,11 +1,11 @@
 <?php
 
-namespace Webkul\Customer\Http\Requests;
+namespace Webkul\Shop\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Customer\Facades\Captcha;
 
-class CustomerLoginRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Define your rules.

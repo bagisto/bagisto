@@ -1,18 +1,19 @@
 <?php
 
-namespace Webkul\Customer\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Cookie;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Webkul\Core\Repositories\SubscribersListRepository;
-use Webkul\Customer\Http\Requests\CustomerRegistrationRequest;
-use Webkul\Customer\Mail\RegistrationEmail;
-use Webkul\Customer\Mail\VerificationEmail;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Shop\Http\Requests\Customer\RegistrationRequest;
+use Webkul\Shop\Mail\RegistrationEmail;
 use Webkul\Shop\Mail\SubscriptionEmail;
+use Webkul\Shop\Mail\VerificationEmail;
 
 class RegistrationController extends Controller
 {
@@ -35,8 +36,7 @@ class RegistrationController extends Controller
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected SubscribersListRepository $subscriptionRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
     }
 
@@ -53,13 +53,10 @@ class RegistrationController extends Controller
     /**
      * Method to store user's sign up form data to DB.
      *
-     * @param  \Webkul\Customer\Http\Requests\CustomerRegistrationRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(CustomerRegistrationRequest $request)
+    public function create(RegistrationRequest $registrationRequest)
     {
-        $request->validated();
-
         $data = array_merge(request()->input(), [
             'password'                  => bcrypt(request()->input('password')),
             'api_token'                 => Str::random(80),
@@ -102,7 +99,8 @@ class RegistrationController extends Controller
                         'email' => $data['email'],
                         'token' => $token,
                     ]));
-                } catch (\Exception $e) {}
+                } catch (\Exception $e) {
+                }
             }
         }
 

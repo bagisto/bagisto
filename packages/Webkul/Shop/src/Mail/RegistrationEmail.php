@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Customer\Mail;
+namespace Webkul\Shop\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -34,8 +34,7 @@ class RegistrationEmail extends Mailable
     public function __construct(
         public $data,
         $mailType
-    )
-    {
+    ) {
         $this->data = $data;
 
         $this->selectedMailType = in_array($mailType, $this->mailType) ? $mailType : 'customer';

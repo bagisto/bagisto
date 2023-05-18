@@ -1,10 +1,11 @@
 <?php
 
-namespace Webkul\Customer\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Event;
-use Webkul\Customer\Http\Requests\CustomerLoginRequest;
+use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Shop\Http\Requests\Customer\LoginRequest;
 
 class SessionController extends Controller
 {
@@ -23,12 +24,11 @@ class SessionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \Webkul\Customer\Http\Requests\CustomerLoginRequest $customerLoginRequest
      * @return \Illuminate\Http\Response
      */
-    public function create(CustomerLoginRequest $customerLoginRequest)
+    public function create(LoginRequest $loginRequest)
     {
-        if (! auth()->guard('customer')->attempt($customerLoginRequest->only(['email', 'password']))) {
+        if (! auth()->guard('customer')->attempt($loginRequest->only(['email', 'password']))) {
             session()->flash('error', trans('shop::app.customer.login-form.invalid-creds'));
 
             return redirect()->back();
@@ -47,7 +47,7 @@ class SessionController extends Controller
 
             Cookie::queue(Cookie::make('enable-resend', 'true', 1));
 
-            Cookie::queue(Cookie::make('email-for-resend', $customerLoginRequest->get('email'), 1));
+            Cookie::queue(Cookie::make('email-for-resend', $loginRequest->get('email'), 1));
 
             auth()->guard('customer')->logout();
 
@@ -57,7 +57,7 @@ class SessionController extends Controller
         /**
          * Event passed to prepare cart after login.
          */
-        Event::dispatch('customer.after.login', $customerLoginRequest->get('email'));
+        Event::dispatch('customer.after.login', $loginRequest->get('email'));
 
         return redirect()->route('shop.home.index');
     }
