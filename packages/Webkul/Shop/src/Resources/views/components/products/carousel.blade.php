@@ -8,12 +8,12 @@
 
                 <div class="flex justify-between items-center gap-8">
                     <span
-                        class="bg-[position:-122px_-137px] bs-main-sprite w-[21px] h-[20px] inline-block cursor-pointer"
+                        class="icon-arrow-left-stylish text-[24px] inline-block cursor-pointer"
                     >
                     </span>
 
                     <span
-                        class="bg-[position:-147px_-137px] bs-main-sprite w-[21px] h-[20px] inline-block cursor-pointer"
+                        class="icon-arrow-right-stylish text-[24px] inline-block cursor-pointer"
                     >
                     </span>
                 </div>
