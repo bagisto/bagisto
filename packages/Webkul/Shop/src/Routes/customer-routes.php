@@ -131,26 +131,15 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Addresses.
                      */
-                    Route::get('addresses', [AddressController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.address.index',
-                    ])->name('shop.customer.addresses.index');
+                    Route::get('addresses', [AddressController::class, 'index'])->name('shop.customer.addresses.index');
 
-                    Route::get('addresses/create', [AddressController::class, 'create'])->defaults('_config', [
-                        'view' => 'shop::customers.account.address.create',
-                    ])->name('shop.customer.addresses.create');
+                    Route::get('addresses/create', [AddressController::class, 'create'])->name('shop.customer.addresses.create');
 
-                    Route::post('addresses/create', [AddressController::class, 'store'])->defaults('_config', [
-                        'view'     => 'shop::customers.account.address.address',
-                        'redirect' => 'shop.customer.addresses.index',
-                    ])->name('shop.customer.addresses.store');
+                    Route::post('addresses/create', [AddressController::class, 'store'])->name('shop.customer.addresses.store');
 
-                    Route::get('addresses/edit/{id}', [AddressController::class, 'edit'])->defaults('_config', [
-                        'view' => 'shop::customers.account.address.edit',
-                    ])->name('shop.customer.addresses.edit');
+                    Route::get('addresses/edit/{id}', [AddressController::class, 'edit'])->name('shop.customer.addresses.edit');
 
-                    Route::post('addresses/edit/{id}', [AddressController::class, 'update'])->defaults('_config', [
-                        'redirect' => 'shop.customer.addresses.index',
-                    ])->name('shop.customer.addresses.update');
+                    Route::post('addresses/edit/{id}', [AddressController::class, 'update'])->name('shop.customer.addresses.update');
 
                     Route::get('addresses/default/{id}', [AddressController::class, 'makeDefault'])->name('shop.customer.make.default.address');
 

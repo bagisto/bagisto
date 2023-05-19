@@ -10,13 +10,6 @@ use Webkul\Shop\Http\Requests\Customer\AddressRequest;
 class AddressController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Current customer.
      *
      * @var \Webkul\Customer\Models\Customer
@@ -29,9 +22,7 @@ class AddressController extends Controller
      * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      * @return void
      */
-    public function __construct(protected CustomerAddressRepository $customerAddressRepository)
-    {
-        $this->_config = request('_config');
+    public function __construct(protected CustomerAddressRepository $customerAddressRepository) {
     }
 
     /**
@@ -43,7 +34,7 @@ class AddressController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        return view($this->_config['view'])->with('addresses', $customer->addresses);
+        return view('shop::customers.account.address.index')->with('addresses', $customer->addresses);
     }
 
     /**
@@ -53,7 +44,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view'], [
+        return view('shop::customers.account.address.create', [
             'defaultCountry' => config('app.default_country'),
         ]);
     }
@@ -67,17 +58,19 @@ class AddressController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
+        // $requestInput = request()->only('_token','company_name' , 'first_name' , 'last_name' , 'vat_id' , 'address1' , 'country' , 'state' , 'city' , 'postcode' , 'phone');
+
         $request->mergeRequest($customer);
 
         Event::dispatch('customer.addresses.create.before');
 
-        $customerAddress = $this->customerAddressRepository->create(request()->all());
+        $customerAddress = $this->customerAddressRepository->create(request()->input());
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
         session()->flash('success', trans('shop::app.customers.account.address.create.success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('shop.customer.addresses.index');
     }
 
     /**
@@ -89,7 +82,7 @@ class AddressController extends Controller
     {
         $address = $this->customerAddressRepository->find(auth()->guard('customer')->user()->id);
 
-        return view($this->_config['view'], array_merge(compact('address'), [
+        return view('shop::customers.account.address.edit', array_merge(compact('address'), [
             'defaultCountry' => config('app.default_country'),
         ]));
     }
@@ -112,7 +105,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.update.before', $id);
 
-        $customerAddress = $this->customerAddressRepository->update(array_merge($request->all(), [
+        $customerAddress = $this->customerAddressRepository->update(array_merge($request->input(), [
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
         ]), $id);
 

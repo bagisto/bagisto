@@ -1,5 +1,4 @@
 <x-shop::layouts.account>
-
     <div class="flex justify-between items-center">
         <div class="">
             <div class="flex gap-x-[4px] items-center mb-[10px]">
@@ -24,9 +23,11 @@
                         {{ $address->company_name }}
                     </p>
                     <div class="flex gap-[25px] items-center">
+
                         @if ($address->default_address)
                             <div class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white w-max font-medium p-[5px] rounded-[10px] text-center text-[12px]">Default Address</div>
-                            @endif
+                        @endif
+
                         <span class="icon-more text-[24px] text-[#7D7D7D]"></span>
                     </div>
                 </div>
