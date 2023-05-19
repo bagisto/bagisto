@@ -3,7 +3,6 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Core\Repositories\SliderRepository;
 use Webkul\Product\Repositories\SearchRepository;
 
 class HomeController extends Controller
@@ -11,14 +10,10 @@ class HomeController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SliderRepository  $sliderRepository
      * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
      * @return void
      */
-    public function __construct(
-        protected SliderRepository $sliderRepository,
-        protected SearchRepository $searchRepository
-    )
+    public function __construct(protected SearchRepository $searchRepository)
     {
         parent::__construct();
     }
@@ -30,9 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sliderData = $this->sliderRepository->getActiveSliders();
-
-        return view($this->_config['view'], compact('sliderData'));
+        return view($this->_config['view']);
     }
 
     /**

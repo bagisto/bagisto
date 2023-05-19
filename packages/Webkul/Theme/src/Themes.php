@@ -4,40 +4,39 @@ namespace Webkul\Theme;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
-use Webkul\Theme\Theme;
 
 class Themes
 {
     /**
-     * Contains current activated theme code
+     * Contains current activated theme code.
      *
      * @var string
      */
     protected $activeTheme = null;
 
     /**
-     * Contains all themes
+     * Contains all themes.
      *
      * @var array
      */
     protected $themes = [];
 
     /**
-     * Contains laravel default view paths
+     * Contains laravel default view paths.
      *
      * @var array
      */
     protected $laravelViewsPath;
 
-     /**
-     * Contains default theme code
+    /**
+     * Contains default theme code.
      *
      * @var string
      */
     protected $defaultThemeCode = 'default';
 
     /**
-     * Create a new Themes instance.
+     * Create a new themes instance.
      *
      * @return void
      */
@@ -55,7 +54,7 @@ class Themes
     }
 
     /**
-     * Return list of registered themes
+     * Return list of all registered themes.
      *
      * @return array
      */
@@ -65,13 +64,14 @@ class Themes
     }
 
     /**
-     * Return list of registered themes
+     * Return list of registered themes.
      *
      * @return array
      */
     public function getChannelThemes()
     {
         $themes = config('themes.themes', []);
+
         $channelThemes = [];
 
         foreach ($themes as $code => $data) {
@@ -82,7 +82,7 @@ class Themes
                 $data['views_path'] ?? ''
             );
 
-            if (! empty($data['parent'])            ) {
+            if (! empty($data['parent'])) {
                 $parentThemes[$code] = $data['parent'];
             }
         }
@@ -91,7 +91,7 @@ class Themes
     }
 
     /**
-     * Check if specified exists
+     * Check if specified exists.
      *
      * @param  string  $themeName
      * @return bool
@@ -149,7 +149,7 @@ class Themes
     }
 
     /**
-     * Enable theme
+     * Enable theme.
      *
      * @param  string  $themeName
      * @return \Webkul\Theme\Theme
@@ -182,7 +182,7 @@ class Themes
     }
 
     /**
-     * Get current theme
+     * Get current theme.
      *
      * @return \Webkul\Theme\Theme
      */
@@ -192,7 +192,7 @@ class Themes
     }
 
     /**
-     * Get current theme's name
+     * Get current theme's name.
      *
      * @return string
      */
@@ -202,7 +202,7 @@ class Themes
     }
 
     /**
-     * Find a theme by it's name
+     * Find a theme by it's name.
      *
      * @param  string  $themeName
      * @return \Webkul\Theme\Theme
@@ -219,7 +219,7 @@ class Themes
     }
 
     /**
-     * Original view paths defined in config.view.php
+     * Original view paths defined in `config.view.php`.
      *
      * @return array
      */
@@ -229,18 +229,24 @@ class Themes
     }
 
     /**
-     * Return asset url of current theme
+     * Return asset url of current theme.
      *
      * @param  string  $themeName
-     * @param  bool|null  $secure
      * @return string
      */
-    public function url($filename, $secure = null)
+    public function url($filename)
     {
-        if (! $this->current()) {
-            return asset($filename, $secure);
-        }
+        return $this->current()->url($filename);
+    }
 
-        return $this->current()->url($filename, $secure);
+    /**
+     * Set bagisto vite in current theme.
+     *
+     * @param  mixed  $entryPoints
+     * @return mixed
+     */
+    public function setBagistoVite($entryPoints)
+    {
+        return $this->current()->setBagistoVite($entryPoints);
     }
 }

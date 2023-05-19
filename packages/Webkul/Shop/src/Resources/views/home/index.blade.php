@@ -1,53 +1,31 @@
-@extends('shop::layouts.master')
+<x-shop::layouts>
+    {{-- hero section --}}
+	<div class="bs-hero-section">
+		<picture>
+			<img alt="" src="{{ bagisto_asset('images/hero-image.webp') }}" />
+		</picture>
 
-@php
-    $channel = core()->getCurrentChannel();
+		<div class="">
+			<a href="/" class="block text-[22px] py-[20px] font-medium text-center bg-[#E8EDFE] font-dmserif">Get UPTO 40% OFF on
+				your 1st order SHOP NOW</a>
+		</div>
+	</div>
 
-    $homeSEO = $channel->home_seo;
+    {{-- product collection --}}
+	@php
+		$products = [
+			[
+				'name' => 'Test 1'
+			], [
+				'name' => 'Test 2'
+			]
+		]
+	@endphp
 
-    if (isset($homeSEO)) {
-        $homeSEO = json_decode($channel->home_seo);
-
-        $metaTitle = $homeSEO->meta_title;
-
-        $metaDescription = $homeSEO->meta_description;
-
-        $metaKeywords = $homeSEO->meta_keywords;
-    }
-@endphp
-
-@section('page_title')
-    {{ isset($metaTitle) ? $metaTitle : "" }}
-@endsection
-
-@section('head')
-
-    @if (isset($homeSEO))
-        @isset($metaTitle)
-            <meta name="title" content="{{ $metaTitle }}" />
-        @endisset
-
-        @isset($metaDescription)
-            <meta name="description" content="{{ $metaDescription }}" />
-        @endisset
-
-        @isset($metaKeywords)
-            <meta name="keywords" content="{{ $metaKeywords }}" />
-        @endisset
-    @endif
-@endsection
-
-@section('content-wrapper')
-    {!! view_render_event('bagisto.shop.home.content.before') !!}
-
-    @if (! is_null($channel->home_page_content))
-        {!! Blade::render($channel->home_page_content) !!}
-    @else
-        @include('shop::home.slider', ['sliderData' => $sliderData])
-        @include('shop::home.featured-products')
-        @include('shop::home.new-products')
-    @endif
-
-    {{ view_render_event('bagisto.shop.home.content.after') }}
-
-@endsection
+	<x-shop::products.carousel
+        title="Men’s Collections"
+        :products="$products"
+        :navigation-link="route('shop.home.index')"
+    >
+    </x-shop::products.carousel>
+</x-shop::layouts>

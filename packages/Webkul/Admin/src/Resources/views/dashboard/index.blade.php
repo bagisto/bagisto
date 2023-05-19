@@ -22,6 +22,8 @@
 
         <div class="page-content">
 
+            <x-example></x-example>
+
             <div class="dashboard-stats">
 
                 <div class="dashboard-card">

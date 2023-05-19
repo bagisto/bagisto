@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Customer\Http\Controllers\AccountController;
-use Webkul\Customer\Http\Controllers\AddressController;
-use Webkul\Customer\Http\Controllers\CustomerController;
-use Webkul\Customer\Http\Controllers\ForgotPasswordController;
-use Webkul\Customer\Http\Controllers\RegistrationController;
-use Webkul\Customer\Http\Controllers\ResetPasswordController;
-use Webkul\Customer\Http\Controllers\SessionController;
-use Webkul\Customer\Http\Controllers\WishlistController;
+use Webkul\Shop\Http\Controllers\Customer\AccountController;
+use Webkul\Shop\Http\Controllers\Customer\AddressController;
+use Webkul\Shop\Http\Controllers\Customer\CustomerController;
+use Webkul\Shop\Http\Controllers\Customer\ForgotPasswordController;
+use Webkul\Shop\Http\Controllers\Customer\RegistrationController;
+use Webkul\Shop\Http\Controllers\Customer\ResetPasswordController;
+use Webkul\Shop\Http\Controllers\Customer\SessionController;
+use Webkul\Shop\Http\Controllers\Customer\WishlistController;
 use Webkul\Shop\Http\Controllers\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\OrderController;
 use Webkul\Shop\Http\Controllers\ReviewController;
@@ -45,13 +45,9 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             /**
              * Login routes.
              */
-            Route::get('login', [SessionController::class, 'show'])->defaults('_config', [
-                'view' => 'shop::customers.session.index',
-            ])->name('shop.customer.session.index');
+            Route::get('login', [SessionController::class, 'show'])->name('shop.customer.session.index');
 
-            Route::post('login', [SessionController::class, 'create'])->defaults('_config', [
-                'redirect' => 'shop.customer.profile.index',
-            ])->name('shop.customer.session.create');
+            Route::post('login', [SessionController::class, 'create'])->name('shop.customer.session.create');
 
             /**
              * Registration routes.
@@ -118,9 +114,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Profile.
                      */
-                    Route::get('profile', [CustomerController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.profile.index',
-                    ])->name('shop.customer.profile.index');
+                    Route::get('profile', [CustomerController::class, 'index'])->name('shop.customer.profile.index');
 
                     Route::get('profile/edit', [CustomerController::class, 'edit'])->defaults('_config', [
                         'view' => 'shop::customers.account.profile.edit',

@@ -36,81 +36,81 @@
 </style>
 
 <script>
-    window.addEventListener("load", function(event) {
-        $('.testing').each(function(index) {
-            if ($(this).siblings(':not(.path-hint)').length == 1
-                && $(this).next().prop("tagName") != 'INPUT'
-                && $(this).next().prop("tagName") != 'TEXTAREA'
-                && $(this).next().prop("tagName") != 'SELECT'
-            ) {
-                $(this).next().addClass('path-hint');
+    // window.addEventListener("load", function(event) {
+    //     $('.testing').each(function(index) {
+    //         if ($(this).siblings(':not(.path-hint)').length == 1
+    //             && $(this).next().prop("tagName") != 'INPUT'
+    //             && $(this).next().prop("tagName") != 'TEXTAREA'
+    //             && $(this).next().prop("tagName") != 'SELECT'
+    //         ) {
+    //             $(this).next().addClass('path-hint');
 
-                $(this).next().attr({
-                    'data-toggle': 'tooltip',
-                    'data-title': $(this).parent('.path-hint').attr('data-title'),
-                    'data-id': $(this).parent('.path-hint').attr('data-id')
-                });
+    //             $(this).next().attr({
+    //                 'data-toggle': 'tooltip',
+    //                 'data-title': $(this).parent('.path-hint').attr('data-title'),
+    //                 'data-id': $(this).parent('.path-hint').attr('data-id')
+    //             });
 
-                $(this).unwrap();
-            }
+    //             $(this).unwrap();
+    //         }
 
-            $(this).remove();
-        });
+    //         $(this).remove();
+    //     });
 
-        $('.path-hint').on('mouseover', function(e) {
-            e.stopPropagation();
+    //     $('.path-hint').on('mouseover', function(e) {
+    //         e.stopPropagation();
 
-            var currentElement = $(e.currentTarget);
+    //         var currentElement = $(e.currentTarget);
 
-            var tooltipContent = '<h4>{{ __("core::app.path-hint.template") }}</h4>' + currentElement.attr('data-title');
+    //         var tooltipContent = '<h4>{{ __("core::app.path-hint.template") }}</h4>' + currentElement.attr('data-title');
 
-            if ($(this).parents('.path-hint').length) {
-                tooltipContent += '<h4>{{ __("core::app.path-hint.parents") }}</h4>';
+    //         if ($(this).parents('.path-hint').length) {
+    //             tooltipContent += '<h4>{{ __("core::app.path-hint.parents") }}</h4>';
 
-                tooltipContent += '<ul>';
+    //             tooltipContent += '<ul>';
 
-                $(this).parents('.path-hint').each(function(index) {
-                    tooltipContent += '<li>' + $(this).attr('data-title')  + '</li>';
-                });
+    //             $(this).parents('.path-hint').each(function(index) {
+    //                 tooltipContent += '<li>' + $(this).attr('data-title')  + '</li>';
+    //             });
 
-                tooltipContent += '</ul>';
-            }
+    //             tooltipContent += '</ul>';
+    //         }
 
-            $('body').append("<span class='path-hint-tooltip' id='" + currentElement.attr('data-id') + "'>" + tooltipContent + "</span>")
+    //         $('body').append("<span class='path-hint-tooltip' id='" + currentElement.attr('data-id') + "'>" + tooltipContent + "</span>")
 
-            var elementWidth = currentElement.outerWidth()
+    //         var elementWidth = currentElement.outerWidth()
 
-            var tooltipWidth = $('.path-hint-tooltip').outerWidth()
+    //         var tooltipWidth = $('.path-hint-tooltip').outerWidth()
 
-            var leftOffset = currentElement.offset().left;
+    //         var leftOffset = currentElement.offset().left;
 
-            minus = 0;
+    //         minus = 0;
 
-            temp = leftOffset + (elementWidth / 2) + (tooltipWidth / 2)
+    //         temp = leftOffset + (elementWidth / 2) + (tooltipWidth / 2)
 
-            if (temp > $(window).outerWidth()) {
-                minus = temp - $(window).outerWidth();
-            }
+    //         if (temp > $(window).outerWidth()) {
+    //             minus = temp - $(window).outerWidth();
+    //         }
 
-            if (elementWidth > tooltipWidth) {
-                var left = leftOffset + ((elementWidth / 2) - (tooltipWidth / 2));
-            } else {
-                var left = leftOffset - ((tooltipWidth / 2) - (elementWidth / 2));
-            }
+    //         if (elementWidth > tooltipWidth) {
+    //             var left = leftOffset + ((elementWidth / 2) - (tooltipWidth / 2));
+    //         } else {
+    //             var left = leftOffset - ((tooltipWidth / 2) - (elementWidth / 2));
+    //         }
 
-            if (left <= 0) {
-                left = 10;
-            }
+    //         if (left <= 0) {
+    //             left = 10;
+    //         }
 
-            $('.path-hint-tooltip').css('left', left - minus)
+    //         $('.path-hint-tooltip').css('left', left - minus)
 
-            $('.path-hint-tooltip').css('top', currentElement.offset().top + 20)
-        })
+    //         $('.path-hint-tooltip').css('top', currentElement.offset().top + 20)
+    //     })
 
-        $('[data-toggle="tooltip"]').on('mouseout', function(e) {
-            var currentElement = $(e.currentTarget);
+    //     $('[data-toggle="tooltip"]').on('mouseout', function(e) {
+    //         var currentElement = $(e.currentTarget);
 
-            $("#" + currentElement.attr('data-id')).remove();
-        })
-    })
+    //         $("#" + currentElement.attr('data-id')).remove();
+    //     })
+    // })
 </script>
