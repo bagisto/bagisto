@@ -148,13 +148,13 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                         'view' => 'shop::customers.account.address.edit',
                     ])->name('shop.customer.addresses.edit');
 
-                    Route::put('addresses/edit/{id}', [AddressController::class, 'update'])->defaults('_config', [
+                    Route::post('addresses/edit/{id}', [AddressController::class, 'update'])->defaults('_config', [
                         'redirect' => 'shop.customer.addresses.index',
                     ])->name('shop.customer.addresses.update');
 
                     Route::get('addresses/default/{id}', [AddressController::class, 'makeDefault'])->name('shop.customer.make.default.address');
 
-                    Route::delete('addresses/delete/{id}', [AddressController::class, 'destroy'])->name('shop.customer.addresses.delete');
+                    Route::get('addresses/delete/{id}', [AddressController::class, 'destroy'])->name('shop.customer.addresses.delete');
 
                     /**
                      * Wishlist.

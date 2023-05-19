@@ -67,17 +67,15 @@ class AddressController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
+        $request->mergeRequest($customer);
+
         Event::dispatch('customer.addresses.create.before');
 
-        $customerAddress = $this->customerAddressRepository->create(array_merge($request->all(), [
-            'customer_id'     => $customer->id,
-            'address1'        => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'default_address' => ! $customer->addresses->count(),
-        ]));
+        $customerAddress = $this->customerAddressRepository->create(request()->all());
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
-        session()->flash('success', trans('shop::app.customer.account.address.create.success'));
+        session()->flash('success', trans('shop::app.customers.account.address.create.success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -89,16 +87,7 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
-        $customer = auth()->guard('customer')->user();
-
-        $address = $this->customerAddressRepository->findOneWhere([
-            'id'          => $id,
-            'customer_id' => $customer->id,
-        ]);
-
-        if (! $address) {
-            abort(404);
-        }
+        $address = $this->customerAddressRepository->find(auth()->guard('customer')->user()->id);
 
         return view($this->_config['view'], array_merge(compact('address'), [
             'defaultCountry' => config('app.default_country'),
@@ -167,14 +156,10 @@ class AddressController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        $address = $this->customerAddressRepository->findOneWhere([
+        $this->customerAddressRepository->findOneWhere([
             'id'          => $id,
             'customer_id' => $customer->id,
         ]);
-
-        if (! $address) {
-            abort(404);
-        }
 
         Event::dispatch('customer.addresses.delete.before', $id);
 
