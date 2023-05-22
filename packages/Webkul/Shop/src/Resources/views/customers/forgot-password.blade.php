@@ -14,7 +14,6 @@
             {!! view_render_event('bagisto.shop.customers.forget_password.before') !!}
 
             <x-shop::form
-                method="post" 
                 :action="route('shop.customer.forgot_password.store')"
                 class="rounded mt-[60px] max-sm:mt-[30px]"
             >
@@ -29,6 +28,7 @@
                     <x-shop::form.control-group.control
                         type="email"
                         name="email"
+                        value=""
                         rules="required|email"
                         label="Email"
                         placeholder="email@example.com"
@@ -42,6 +42,12 @@
                 </x-shop::form.control-group>
 
                 {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
+
+                <x-shop::form.control-group>
+
+                    {!! Captcha::render() !!}
+
+                </x-shop::form.control-group>
 
                 <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                     <button
@@ -62,4 +68,11 @@
             @lang('shop::app.customer.login-form.footer')
         </p>
     </div>
+
+    @push('scripts')
+
+        {!! Captcha::renderJS() !!}
+    
+    @endpush
+
 </x-shop::layouts>

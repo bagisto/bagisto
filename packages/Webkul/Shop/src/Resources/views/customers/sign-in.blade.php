@@ -48,7 +48,7 @@
                         name="password"
                         value=""
                         id="password"
-                        rules="required"
+                        rules="required|min:6"
                         label="Password"
                         placeholder="Password"
                     >
@@ -76,8 +76,13 @@
                     </div>
 
                     <div class="block">
-                        <a href="{{ route('shop.customer.forgot_password.create') }}" class="text-[16px] cursor-pointer text-black max-sm:text-[12px]">
-                            <span>@lang('shop::app.customer.login-form.forgot_pass')</span>
+                        <a 
+                            href="{{ route('shop.customer.forgot_password.create') }}" 
+                            class="text-[16px] cursor-pointer text-black max-sm:text-[12px]"
+                        >
+                            <span>
+                                @lang('shop::app.customer.login-form.forgot_pass')
+                            </span>
                         </a>
                     </div>
                 </div>
@@ -87,7 +92,8 @@
                 <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                     <button
                         class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
-                        type="submit">
+                        type="submit"
+                    >
                         @lang('shop::app.customer.login-form.button_title')
                     </button>
 
@@ -110,7 +116,10 @@
 
             <p class="text-[#7D7D7D] font-medium mt-[20px]">
                 @lang('shop::app.customer.login-form.new-customer') 
-                    <a class="text-navyBlue" href="{{ route('shop.customer.register.index') }}">
+                    <a 
+                        class="text-navyBlue" 
+                        href="{{ route('shop.customer.register.index') }}"
+                    >
                         @lang('shop::app.customer.login-form.create-your-account')
                     </a>
             </p>
@@ -134,5 +143,4 @@
             }
         </script>
     @endpush
-
 </x-shop::layouts>

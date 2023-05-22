@@ -12,7 +12,6 @@
             </p>
 
             <x-shop::form
-                method="post"
                 :action="route('shop.customer.register.create')"  
                 class="rounded mt-[60px] max-sm:mt-[30px]"
             >
@@ -120,6 +119,7 @@
                     <x-shop::form.control-group.control
                         type="password"
                         name="password_confirmation"
+                        value=""
                         rules="confirmed:@password"
                         label="Password"
                         placeholder="Confirm Password"
@@ -134,6 +134,11 @@
 
                 {!! view_render_event('bagisto.shop.customers.signup_form_controls.password_confirmation.after') !!}
           
+
+                <x-shop::form.control-group>
+                    {!! Captcha::render() !!}
+                </x-shop::form.control-group>
+
 				<!-- Forget pass block -->
                 
                 @if (core()->getConfigData('customer.settings.newsletter.subscription'))
@@ -144,7 +149,9 @@
                                     name="is_subscribed"
                                     id="checkbox2"
                                 >
-                                <span class="select-none  text-[16] text-navyBlue max-sm:text-[12px]"> 
+                                <span 
+                                    class="select-none  text-[16] text-navyBlue max-sm:text-[12px]"
+                                > 
                                     @lang('shop::app.customer.signup-form.subscribe-to-newsletter')
                                 </span>
                                 </x-shop::form.control-group.control>
@@ -179,7 +186,9 @@
 
 			<p class="text-[#7D7D7D] font-medium mt-[20px]">
                 @lang('shop::app.customer.signup-text.account_exists') 
-                <a class="text-navyBlue" href="{{ route('shop.customer.session.index') }}">
+                <a class="text-navyBlue" 
+                    href="{{ route('shop.customer.session.index') }}"
+                >
                     @lang('shop::app.customer.signup-text.title')
                 </a>
             </p>
@@ -189,4 +198,10 @@
             @lang('shop::app.customer.signup-form.footer') 
         </p>
 	</div>
+
+    @push('scripts')
+   
+        {!! Captcha::renderJS() !!}
+
+    @endpush
 </x-shop::layouts>

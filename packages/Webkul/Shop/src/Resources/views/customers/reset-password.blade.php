@@ -10,11 +10,16 @@
             {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
 
             <x-shop::form
-                method="post" 
                 :action="route('shop.customer.reset_password.store')"
                 class="rounded mt-[60px] max-sm:mt-[30px]"
             >
-               
+                <x-shop::form.control-group.control
+                    type="hidden"
+                    name="token"
+                    :value="$token"       
+                >
+                </x-shop::form.control-group.control>
+
                 {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.before') !!}
 
                 <x-shop::form.control-group class="mb-4">
@@ -48,7 +53,6 @@
                         type="password"
                         name="password"
                         value=""
-                        id="password"
                         ref="password"
                         rules="required|min:6"
                         label="Password"
@@ -70,9 +74,7 @@
                     <x-shop::form.control-group.control
                         type="password"
                         name="password_confirmation"
-                        
-                        id="password"
-                        ref="password"
+                        value=""
                         rules="confirmed:@password"
                         label="Confirm Password"
                         placeholder="Confirm Password"
