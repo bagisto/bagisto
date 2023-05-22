@@ -1,16 +1,20 @@
 <x-shop::layouts>
     <div class="container mt-20 max-1180:px-[20px]">
         <div
-            class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]">
-            <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">@lang('shop::app.customer.login-form.page-title')</h1>
+            class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
+        >
+            <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
+                @lang('shop::app.customer.login-form.page-title')
+            </h1>
 
             <p class="text-[#7D7D7D] text-[20px] mt-[15px] max-sm:text-[16px]">
                 @lang('shop::app.customer.login-form.form-login-text')
             </p>
 
             {!! view_render_event('bagisto.shop.customers.login.before') !!}
+
             <x-shop::form
-                action="{{ route('shop.customer.session.create') }}"
+                :action="route('shop.customer.session.create')"
                 class="rounded mt-[60px] max-sm:mt-[30px]"
             >
                 <x-shop::form.control-group class="mb-4">
@@ -19,12 +23,12 @@
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
-                        type="text"
+                        type="email"
                         name="email"
                         value=""
                         rules="required|email"
                         label="Email"
-                        placeholder="Email"
+                        placeholder="email@example.com"
                     >
                     </x-shop::form.control-group.control>
 
@@ -117,17 +121,18 @@
         </p>
     </div>
 
-@push('scripts')
-    <script>
+    @push('scripts')
+        <script>
             function switchVisibility() {
             var passwordField = document.getElementById("password");
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-            } else {
-                passwordField.type = "password";
+            
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                } else {
+                    passwordField.type = "password";
+                }
             }
-        }
-    </script>
-@endpush
+        </script>
+    @endpush
 
 </x-shop::layouts>

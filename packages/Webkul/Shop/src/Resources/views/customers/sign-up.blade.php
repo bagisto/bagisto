@@ -1,16 +1,23 @@
 <x-shop::layouts>
 	<div class="container mt-20 max-1180:px-[20px]">
 		<div
-			class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]">
-			<h1 class="text-[40px] font-dmserif max-sm:text-[25px]">@lang('shop::app.customer.signup-form.page-title')</h1>
-			<p class="text-[#7D7D7D] text-[20px] mt-[15px] max-sm:text-[16px]"> @lang('shop::app.customer.signup-form.form-signup-text')</p>
+			class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
+        >
+			<h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
+                @lang('shop::app.customer.signup-form.page-title')
+            </h1>
+
+			<p class="text-[#7D7D7D] text-[20px] mt-[15px] max-sm:text-[16px]"> 
+                @lang('shop::app.customer.signup-form.form-signup-text')
+            </p>
+
             <x-shop::form
                 method="post"
-                action="{{ route('shop.customer.register.create') }}"  
+                :action="route('shop.customer.register.create')"  
                 class="rounded mt-[60px] max-sm:mt-[30px]"
             >
 
-            {!! view_render_event('bagisto.shop.customers.signup_form_controls.before') !!}
+                {!! view_render_event('bagisto.shop.customers.signup_form_controls.before') !!}
 
                 <x-shop::form.control-group class="mb-4">
                     <x-shop::form.control-group.label>
@@ -64,12 +71,12 @@
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
-                        type="text"
+                        type="email"
                         name="email"
                         :value="old('email')"
                         rules="required|email"
                         label="Email"
-                        placeholder="Email"
+                        placeholder="email@example.com"
                     >
                     </x-shop::form.control-group.control>
 
@@ -113,9 +120,9 @@
                     <x-shop::form.control-group.control
                         type="password"
                         name="password_confirmation"
-                        rules="required|min:6"
-                        placeholder="Password"
+                        rules="confirmed:@password"
                         label="Password"
+                        placeholder="Confirm Password"
                     >
                     </x-shop::form.control-group.control>
 
@@ -128,21 +135,33 @@
                 {!! view_render_event('bagisto.shop.customers.signup_form_controls.password_confirmation.after') !!}
           
 				<!-- Forget pass block -->
-				<div class="flex justify-between">
-					<label class="text-[##7D7D7D] flex items-center gap-[6px]"><input type="checkbox"
-							class="leading-loose text-pink-600" /> <span
-							class="select-none  text-[16] text-navyBlue max-sm:text-[12px]"> Subscribe to newsletter
-						</span></label>
-				</div>
+                
+                @if (core()->getConfigData('customer.settings.newsletter.subscription'))
+                    <div class="flex justify-between">
+                            <x-shop::form.control-group>
+                                <x-shop::form.control-group.control
+                                    type="checkbox"
+                                    name="is_subscribed"
+                                    id="checkbox2"
+                                >
+                                <span class="select-none  text-[16] text-navyBlue max-sm:text-[12px]"> 
+                                    @lang('shop::app.customer.signup-form.subscribe-to-newsletter')
+                                </span>
+                                </x-shop::form.control-group.control>
+                            </x-shop::form.control-group> 
+                    </div>
+                @endif
 
                 {!! view_render_event('bagisto.shop.customers.signup_form_controls.after') !!}
 
 				<div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
 					<button
 						class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
-						type="submit">
+						type="submit"
+                    >
                         @lang('shop::app.customer.signup-form.button_title')
                     </button>
+
 					<div class="flex gap-[15px] flex-wrap">
 						<a href="" class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
 							aria-label="Facebook"></a>
@@ -157,8 +176,17 @@
 					</div>
 				</div>
             </x-shop::form>
-			<p class="text-[#7D7D7D] font-medium mt-[20px]">@lang('shop::app.customer.signup-text.account_exists') <a class="text-navyBlue" href="{{ route('shop.customer.session.index') }}">@lang('shop::app.customer.signup-text.title')</a></p>
+
+			<p class="text-[#7D7D7D] font-medium mt-[20px]">
+                @lang('shop::app.customer.signup-text.account_exists') 
+                <a class="text-navyBlue" href="{{ route('shop.customer.session.index') }}">
+                    @lang('shop::app.customer.signup-text.title')
+                </a>
+            </p>
 		</div>
-		<p class="mt-[30px]  mb-[15px] text-center text-[#7d7d7d] text-xs">@lang('shop::app.customer.signup-form.footer') </p>
+
+        <p class="mt-[30px]  mb-[15px] text-center text-[#7d7d7d] text-xs">
+            @lang('shop::app.customer.signup-form.footer') 
+        </p>
 	</div>
 </x-shop::layouts>
