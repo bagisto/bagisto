@@ -22,7 +22,9 @@ class AddressController extends Controller
      * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      * @return void
      */
-    public function __construct(protected CustomerAddressRepository $customerAddressRepository) {
+    public function __construct(
+        protected CustomerAddressRepository $customerAddressRepository
+    ) {
     }
 
     /**
@@ -34,7 +36,7 @@ class AddressController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        return view('shop::customers.account.address.index')->with('addresses', $customer->addresses);
+        return view('shop::customers.account.addresses.index')->with('addresses', $customer->addresses);
     }
 
     /**
@@ -44,7 +46,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        return view('shop::customers.account.address.create', [
+        return view('shop::customers.account.addresses.create', [
             'defaultCountry' => config('app.default_country'),
         ]);
     }
@@ -68,7 +70,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
-        session()->flash('success', trans('shop::app.customers.account.address.create.success'));
+        session()->flash('success', trans('shop::app.customers.account.addresses.create.success'));
 
         return redirect()->route('shop.customer.addresses.index');
     }
@@ -133,7 +135,7 @@ class AddressController extends Controller
         if ($address = $this->customerAddressRepository->find($id)) {
             $address->update(['default_address' => 1]);
         } else {
-            session()->flash('success', trans('shop::app.customer.account.address.index.default-delete'));
+            session()->flash('success', trans('shop::app.customer.account.addresses.index.default-delete'));
         }
 
         return redirect()->back();
@@ -160,7 +162,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.delete.after', $id);
 
-        session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
+        session()->flash('success', trans('shop::app.customer.account.addresses.delete.success'));
 
         return redirect()->route('shop.customer.addresses.index');
     }

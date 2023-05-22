@@ -131,19 +131,21 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Addresses.
                      */
-                    Route::get('addresses', [AddressController::class, 'index'])->name('shop.customer.addresses.index');
-
-                    Route::get('addresses/create', [AddressController::class, 'create'])->name('shop.customer.addresses.create');
-
-                    Route::post('addresses/create', [AddressController::class, 'store'])->name('shop.customer.addresses.store');
-
-                    Route::get('addresses/edit/{id}', [AddressController::class, 'edit'])->name('shop.customer.addresses.edit');
-
-                    Route::post('addresses/edit/{id}', [AddressController::class, 'update'])->name('shop.customer.addresses.update');
-
-                    Route::get('addresses/default/{id}', [AddressController::class, 'makeDefault'])->name('shop.customer.make.default.address');
-
-                    Route::get('addresses/delete/{id}', [AddressController::class, 'destroy'])->name('shop.customer.addresses.delete');
+                    Route::controller(AddressController::class)->prefix('addresses')->group(function () {
+                        Route::get('', 'index')->name('shop.customer.addresses.index');
+    
+                        Route::get('create', 'create')->name('shop.customer.addresses.create');
+    
+                        Route::post('create', 'store')->name('shop.customer.addresses.store');
+    
+                        Route::get('edit/{id}', 'edit')->name('shop.customer.addresses.edit');
+    
+                        Route::put('edit/{id}', 'update')->name('shop.customer.addresses.update');
+    
+                        Route::patch('edit/{id}/default', 'makeDefault')->name('shop.customer.addresses.update.default');
+    
+                        Route::delete('delete/{id}', 'destroy')->name('shop.customer.addresses.delete');
+                    });
 
                     /**
                      * Wishlist.

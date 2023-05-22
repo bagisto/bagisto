@@ -5,7 +5,7 @@ return [
 
         'account' => [
             
-            'address' => [
+            'addresses' => [
                 'title'           => 'Address',
                 'edit'            => 'Edit',
                 'add-address'     => 'Add Address',

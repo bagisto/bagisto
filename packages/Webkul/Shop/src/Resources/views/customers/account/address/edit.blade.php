@@ -1,13 +1,13 @@
 <x-shop::layouts.account>
     <h2 class="text-[26px] font-medium">Edit Address</h2>
-{{-- @dd($address); --}}
     <x-shop::form
+        method="PUT"
         :action="route('shop.customer.addresses.update',  $address->id)"
         class="rounded mt-[30px]"
     >
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.address.comapny-name')}}
+                {{trans('shop::app.customers.account.addresses.comapny-name')}}
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -27,7 +27,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.address.first-name')}}
+                {{trans('shop::app.customers.account.addresses.first-name')}}
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -48,7 +48,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.address.last-name')}}
+                {{trans('shop::app.customers.account.addresses.last-name')}}
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -69,7 +69,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.address.vat-id')}}
+                {{trans('shop::app.customers.account.addresses.vat-id')}}
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -89,12 +89,12 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.address.street-address')}}
+                {{trans('shop::app.customers.account.addresses.street-address')}}
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
                 type="text"
-                name="address1"
+                name="address1[]"
                 :value="old('address1') ?? $address->address1"
                 rules="required"
                 label="Street Address"
@@ -103,14 +103,14 @@
             </x-shop::form.control-group.control>
 
             <x-shop::form.control-group.error
-                control-name="address1"
+                control-name="address1[]"
             >
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.address.country')}}
+                {{trans('shop::app.customers.account.addresses.country')}}
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -136,7 +136,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.address.state')}}
+                {{trans('shop::app.customers.account.addresses.state')}}
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -157,7 +157,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.address.city')}}
+                {{trans('shop::app.customers.account.addresses.city')}}
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -178,7 +178,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.address.post-code')}}
+                {{trans('shop::app.customers.account.addresses.post-code')}}
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
