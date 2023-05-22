@@ -23,6 +23,8 @@ class UiServiceProvider extends ServiceProvider
         Paginator::defaultView('ui::partials.pagination');
 
         Paginator::defaultSimpleView('ui::partials.pagination');
+
+        $this->publishes([__DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/ui/assets')], 'public');
     }
 
     /**
