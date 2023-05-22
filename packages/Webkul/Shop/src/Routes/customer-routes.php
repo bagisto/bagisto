@@ -1,16 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Shop\Http\Controllers\Customer\{
-    AccountController,
-    AddressController,
-    CustomerController,
-    ForgotPasswordController,
-    RegistrationController,
-    ResetPasswordController,
-    SessionController,
-    WishlistController
-};
+use Webkul\Shop\Http\Controllers\Customer\AccountController;
+use Webkul\Shop\Http\Controllers\Customer\AddressController;
+use Webkul\Shop\Http\Controllers\Customer\CustomerController;
+use Webkul\Shop\Http\Controllers\Customer\ForgotPasswordController;
+use Webkul\Shop\Http\Controllers\Customer\RegistrationController;
+use Webkul\Shop\Http\Controllers\Customer\ResetPasswordController;
+use Webkul\Shop\Http\Controllers\Customer\SessionController;
+use Webkul\Shop\Http\Controllers\Customer\WishlistController;
 use Webkul\Shop\Http\Controllers\{
     DownloadableProductController,
     OrderController,
