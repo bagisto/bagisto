@@ -84,7 +84,7 @@ class AddressController extends Controller
     {
         $address = $this->customerAddressRepository->find(auth()->guard('customer')->user()->id);
 
-        return view('shop::customers.account.address.edit', array_merge(compact('address'), [
+        return view('shop::customers.account.addresses.edit', array_merge(compact('address'), [
             'defaultCountry' => config('app.default_country'),
         ]));
     }
