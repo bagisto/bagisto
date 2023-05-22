@@ -1,17 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Shop\Http\Controllers\Customer\AccountController;
-use Webkul\Shop\Http\Controllers\Customer\AddressController;
-use Webkul\Shop\Http\Controllers\Customer\CustomerController;
-use Webkul\Shop\Http\Controllers\Customer\ForgotPasswordController;
-use Webkul\Shop\Http\Controllers\Customer\RegistrationController;
-use Webkul\Shop\Http\Controllers\Customer\ResetPasswordController;
-use Webkul\Shop\Http\Controllers\Customer\SessionController;
-use Webkul\Shop\Http\Controllers\Customer\WishlistController;
-use Webkul\Shop\Http\Controllers\DownloadableProductController;
-use Webkul\Shop\Http\Controllers\OrderController;
-use Webkul\Shop\Http\Controllers\ReviewController;
+use Webkul\Shop\Http\Controllers\Customer\{
+    AccountController,
+    AddressController,
+    CustomerController,
+    ForgotPasswordController,
+    RegistrationController,
+    ResetPasswordController,
+    SessionController,
+    WishlistController
+};
+use Webkul\Shop\Http\Controllers\{
+    DownloadableProductController,
+    OrderController,
+    ReviewController
+};
 
 Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
@@ -157,19 +161,17 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Orders.
                      */
-                    Route::get('orders', [OrderController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.orders.index',
-                    ])->name('shop.customer.orders.index');
+                     Route::controller(OrderController::class)->prefix('orders')->group(function () {
+                         Route::get('', 'index')->name('shop.customer.orders.index');
 
-                    Route::get('orders/view/{id}', [OrderController::class, 'view'])->defaults('_config', [
-                        'view' => 'shop::customers.account.orders.view',
-                    ])->name('shop.customer.orders.view');
+                         Route::get('view/{id}', 'view')->name('shop.customer.orders.view');
+                         
+                         Route::get('print/{id}', 'printInvoice')->defaults('_config', [
+                             'view' => 'shop::customers.account.orders.print',
+                         ])->name('shop.customer.orders.print');
 
-                    Route::get('orders/print/{id}', [OrderController::class, 'printInvoice'])->defaults('_config', [
-                        'view' => 'shop::customers.account.orders.print',
-                    ])->name('shop.customer.orders.print');
-
-                    Route::post('/orders/cancel/{id}', [OrderController::class, 'cancel'])->name('shop.customer.orders.cancel');
+                         Route::post('cancel/{id}', 'cancel')->name('shop.customer.orders.cancel');
+                     });
 
                     /**
                      * Downloadable products.
