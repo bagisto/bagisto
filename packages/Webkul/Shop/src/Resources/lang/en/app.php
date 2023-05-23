@@ -51,10 +51,21 @@ return [
     ],
 
     'footer' => [
-        'subscribe-newsletter' => 'Subscribe Newsletter',
-        'subscribe'            => 'Subscribe',
-        'locale'               => 'Locale',
-        'currency'             => 'Currency',
+        'subscribe-newsletter'   => 'Subscribe Newsletter',
+        'subscribe'              => 'Subscribe',
+        'locale'                 => 'Locale',
+        'currency'               => 'Currency',
+        'about-us'               => 'About Us',
+        'customer-service'       => 'Customer Service',
+        'whats-new'              => 'What’s New',
+        'contact-us'             => 'Contact Us',
+        'order-return'           => 'Order and Returns',
+        'payment-policy'         => 'Payment Policy',
+        'shipping-policy'        => 'Shipping Policy',
+        'privacy-cookies-policy' => 'Privacy and Cookies Policy',
+        'subscribe-stay-touch'   => 'Subscribe to stay in touch.',
+        'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
+        'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (Registered in India). All rights reserved.'
     ],
 
     'subscription' => [
@@ -110,12 +121,12 @@ return [
         ],
 
         'signup-text' => [
-            'account_exists' => 'Already have an account',
+            'account_exists' => 'Already have an account ?',
             'title'          => 'Sign In',
         ],
 
         'signup-form' => [
-            'page-title'                  => 'Create New Customer Account',
+            'page-title'                  => 'Become User',
             'title'                       => 'Sign Up',
             'firstname'                   => 'First Name',
             'lastname'                    => 'Last Name',
@@ -140,6 +151,8 @@ return [
             'verify-failed'               => 'We cannot verify your mail account.',
             'dont-have-account'           => 'You do not have account with us.',
             'customer-registration'       => 'Customer Registered Successfully',
+            'form-signup-text'            => 'If you are new to our store, we glad to have you as member.',
+            'footer'                      => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
         ],
 
         'login-text' => [
@@ -161,14 +174,19 @@ return [
             'not-activated'       => 'Your activation seeks admin approval',
             'resend-verification' => 'Resend verification mail again',
             'show-password'       => 'Show Password',
+            'footer'              => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
+            'new-customer'        => 'New customer?',
+            'create-your-account' => 'Create your account',
+            'form-login-text'     => 'If you have an account, sign in with your email address.',
 
         ],
 
         'forgot-password' => [
-            'title'      => 'Recover Password',
-            'email'      => 'Email',
-            'submit'     => 'Send Password Reset Email',
-            'page_title' => 'Forgot your password ?',
+            'title'                => 'Recover Password',
+            'email'                => 'Email',
+            'forgot-password-text' => 'If you forgot your password, recover it by entering your email address.',
+            'submit'               => 'Reset Password',
+            'page_title'           => 'Forgot your password ?',
         ],
 
         'reset-password' => [
