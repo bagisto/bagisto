@@ -74,5 +74,4 @@
         {!! Captcha::renderJS() !!}
     
     @endpush
-
 </x-shop::layouts>

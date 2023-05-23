@@ -28,19 +28,16 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             /**
              * Forgot password routes.
              */
-            Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->defaults('_config', [
-                'view' => 'shop::customers.signup.forgot-password',
-            ])->name('shop.customer.forgot_password.create');
+            Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('shop.customer.forgot_password.create');
 
             Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('shop.customer.forgot_password.store');
 
-            Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->defaults('_config', [
-                'view' => 'shop::customers.signup.reset-password',
-            ])->name('shop.customer.reset_password.create');
+            /**
+             * Reset password routes.
+             */
+            Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->name('shop.customer.reset_password.create');
 
-            Route::post('/reset-password', [ResetPasswordController::class, 'store'])->defaults('_config', [
-                'redirect' => 'shop.customer.profile.index',
-            ])->name('shop.customer.reset_password.store');
+            Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('shop.customer.reset_password.store');
 
             /**
              * Login routes.
@@ -52,13 +49,9 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             /**
              * Registration routes.
              */
-            Route::get('register', [RegistrationController::class, 'show'])->defaults('_config', [
-                'view' => 'shop::customers.signup.index',
-            ])->name('shop.customer.register.index');
+            Route::get('register', [RegistrationController::class, 'show'])->name('shop.customer.register.index');
 
-            Route::post('register', [RegistrationController::class, 'create'])->defaults('_config', [
-                'redirect' => 'shop.customer.session.index',
-            ])->name('shop.customer.register.create');
+            Route::post('register', [RegistrationController::class, 'create'])->name('shop.customer.register.create');
 
             /**
              * Customer verification routes.

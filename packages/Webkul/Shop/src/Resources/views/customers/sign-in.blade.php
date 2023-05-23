@@ -133,7 +133,7 @@
     @push('scripts')
         <script>
             function switchVisibility() {
-            var passwordField = document.getElementById("password");
+                var passwordField = document.getElementById("password");
             
                 if (passwordField.type === "password") {
                     passwordField.type = "text";

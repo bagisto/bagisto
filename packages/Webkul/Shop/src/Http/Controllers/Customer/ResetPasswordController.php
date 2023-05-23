@@ -16,13 +16,6 @@ class ResetPasswordController extends Controller
     use ResetsPasswords;
 
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
@@ -31,7 +24,6 @@ class ResetPasswordController extends Controller
     public function __construct(
         protected CustomerRepository $customerRepository
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -44,7 +36,7 @@ class ResetPasswordController extends Controller
      */
     public function create($token = null)
     {
-        return view($this->_config['view'])->with(
+        return view('shop::customers.reset-password')->with(
             ['token' => $token, 'email' => request('email')]
         );
     }
@@ -74,7 +66,7 @@ class ResetPasswordController extends Controller
 
                 Event::dispatch('user.admin.update-password', $user);
 
-                return redirect()->route($this->_config['redirect']);
+                return redirect()->route('shop.customer.profile.index');
             }
 
             return back()

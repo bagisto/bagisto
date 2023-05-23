@@ -18,13 +18,6 @@ use Webkul\Shop\Mail\VerificationEmail;
 class RegistrationController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
@@ -36,8 +29,7 @@ class RegistrationController extends Controller
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected SubscribersListRepository $subscriptionRepository
-    ) {
-        $this->_config = request('_config');
+    ) { 
     }
 
     /**
@@ -47,7 +39,7 @@ class RegistrationController extends Controller
      */
     public function show()
     {
-        return view($this->_config['view']);
+        return view('shop::customers.sign-up');
     }
 
     /**
@@ -135,7 +127,7 @@ class RegistrationController extends Controller
             session()->flash('success', trans('shop::app.customer.signup-form.success'));
         }
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('shop.customer.session.index');
     }
 
     /**
