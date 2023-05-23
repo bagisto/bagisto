@@ -57,7 +57,7 @@ class LocaleController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code'      => ['required', 'unique:locales,code', new \Webkul\Core\Contracts\Validations\Code],
+            'code'      => ['required', 'unique:locales,code', new \Webkul\Core\Rules\Code],
             'name'      => 'required',
             'direction' => 'in:ltr,rtl',
         ]);
@@ -91,7 +91,7 @@ class LocaleController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code'      => ['required', 'unique:locales,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'code'      => ['required', 'unique:locales,code,' . $id, new \Webkul\Core\Rules\Code],
             'name'      => 'required',
             'direction' => 'in:ltr,rtl',
         ]);
@@ -121,7 +121,8 @@ class LocaleController extends Controller
             $this->localeRepository->delete($id);
 
             return response()->json(['message' => trans('admin::app.settings.locales.delete-success')]);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Locale'])], 500);
     }

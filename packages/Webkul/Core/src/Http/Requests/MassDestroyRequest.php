@@ -3,7 +3,7 @@
 namespace Webkul\Core\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Contracts\Validations\CommaSeparatedInteger;
+use Webkul\Core\Rules\CommaSeparatedInteger;
 
 class MassDestroyRequest extends FormRequest
 {
