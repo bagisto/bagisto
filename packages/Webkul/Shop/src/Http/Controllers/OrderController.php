@@ -21,8 +21,7 @@ class OrderController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -33,11 +32,17 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $customer = auth()->guard('customer')->user();
+        
         if (request()->ajax()) {
             return app(OrderDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        $orders = $this->orderRepository->findOneWhere([
+            'customer_id' => $customer->id,
+        ]);
+
+        return view('shop::customers.account.orders.index', compact('orders'));
     }
 
     /**
@@ -59,7 +64,7 @@ class OrderController extends Controller
             abort(404);
         }
 
-        return view($this->_config['view'], compact('order'));
+        return view('shop::customers.account.orders.view', compact('order'));
     }
 
     /**
