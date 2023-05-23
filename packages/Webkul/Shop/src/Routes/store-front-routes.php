@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\CMS\Http\Controllers\Shop\PagePresenterController;
-use Webkul\Core\Http\Controllers\CountryStateController;
 use Webkul\Shop\Http\Controllers\CategoryController;
+use Webkul\Shop\Http\Controllers\CMS\PagePresenterController;
+use Webkul\Shop\Http\Controllers\CountryStateController;
 use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\ReviewController;
