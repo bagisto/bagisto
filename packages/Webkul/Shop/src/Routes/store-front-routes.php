@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Shop\Http\Controllers\BookingProduct\BookingProductController;
 use Webkul\Shop\Http\Controllers\CategoryController;
 use Webkul\Shop\Http\Controllers\CMS\PagePresenterController;
 use Webkul\Shop\Http\Controllers\CountryStateController;
@@ -86,6 +87,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     Route::get('product/{id}/{attribute_id}', [ProductController::class, 'download'])->defaults('_config', [
         'view' => 'shop.products.index',
     ])->name('shop.product.file.download');
+
+    Route::get('booking-slots/{id}', [BookingProductController::class, 'index'])->name('booking_product.slots.index');
 
     Route::get('categories/filterable-attributes/{categoryId?}', [CategoryController::class, 'getFilterableAttributes'])->name('shop.catalog.categories.filterable_attributes');
 

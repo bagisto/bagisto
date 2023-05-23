@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Admin\Http\Controllers\BookingProduct\BookingController;
 use Webkul\Admin\Http\Controllers\Sales\InvoiceController;
 use Webkul\Admin\Http\Controllers\Sales\OrderController;
 use Webkul\Admin\Http\Controllers\Sales\RefundController;
@@ -116,5 +117,14 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::get('transactions/view/{id}', [TransactionController::class, 'view'])->defaults('_config', [
             'view' => 'admin::sales.transactions.view',
         ])->name('admin.sales.transactions.view');
+
+        /**
+         * Bookings routes.
+         */
+        Route::get('bookings', [BookingController::class, 'index'])->defaults('_config', [
+            'view' => 'bookingproduct::admin.sales.bookings.index',
+        ])->name('admin.sales.bookings.index');
+
+        Route::get('bookings/get', [BookingController::class, 'get'])->name('admin.sales.bookings.get');
     });
 });

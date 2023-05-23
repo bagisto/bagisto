@@ -1,14 +1,14 @@
 <?php
 
-namespace Webkul\BookingProduct\Http\Controllers\Shop;
+namespace Webkul\Shop\Http\Controllers\BookingProduct;
 
-use Webkul\BookingProduct\Http\Controllers\Controller;
-use Webkul\BookingProduct\Repositories\BookingProductRepository;
-use Webkul\BookingProduct\Helpers\DefaultSlot as DefaultSlotHelper;
 use Webkul\BookingProduct\Helpers\AppointmentSlot as AppointmentSlotHelper;
-use Webkul\BookingProduct\Helpers\RentalSlot as RentalSlotHelper;
+use Webkul\BookingProduct\Helpers\DefaultSlot as DefaultSlotHelper;
 use Webkul\BookingProduct\Helpers\EventTicket as EventTicketHelper;
+use Webkul\BookingProduct\Helpers\RentalSlot as RentalSlotHelper;
 use Webkul\BookingProduct\Helpers\TableSlot as TableSlotHelper;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
+use Webkul\Shop\Http\Controllers\Controller;
 
 class BookingProductController extends Controller
 {
@@ -21,10 +21,10 @@ class BookingProductController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
-     * @param  \Webkul\BookingProduct\Helpers\DefaultSlot $defaultSlotHelper
+     * @param  \Webkul\BookingProduct\Helpers\DefaultSlot  $defaultSlotHelper
      * @param  \Webkul\BookingProduct\Helpers\AppointmentSlot  $appointmentSlotHelper
      * @param  \Webkul\BookingProduct\Helpers\RentalSlot  $rentalSlotHelper
-     * @param  \Webkul\BookingProduct\Helpers\EventTicket   $EventTicketHelper
+     * @param  \Webkul\BookingProduct\Helpers\EventTicket  $EventTicketHelper
      * @param  \Webkul\BookingProduct\Helpers\TableSlot  $tableSlotHelper
      * @return void
      */
@@ -35,8 +35,7 @@ class BookingProductController extends Controller
         RentalSlotHelper $rentalSlotHelper,
         EventTicketHelper $eventTicketHelper,
         TableSlotHelper $tableSlotHelper
-    )
-    {
+    ) {
         $this->bookingHelpers['default'] = $defaultSlotHelper;
 
         $this->bookingHelpers['appointment'] = $appointmentSlotHelper;
