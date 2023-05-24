@@ -64,7 +64,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
      */
     Route::post('subscribe', [SubscriptionController::class, 'subscribe'])->name('shop.subscribe');
 
-    Route::post('unsubscribe/{token}', [SubscriptionController::class, 'unsubscribe'])->name('shop.unsubscribe');
+    Route::get('unsubscribe/{token}', [SubscriptionController::class, 'unsubscribe'])->name('shop.unsubscribe');
 
     /**
      * Product and categories routes.
