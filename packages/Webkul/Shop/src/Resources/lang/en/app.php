@@ -27,9 +27,20 @@ return [
                 ]
             ],
 
+            'orders' => [
+                'title'      => 'Orders',
+                'order_id'   => 'Order Id',
+                'order_date' => 'Order Date',
+                'total'      => 'Total',
+                'status'     => 'Status',
+                'action'     => 'Action',
+            ],
+
             'reviews'    => [
-                'title'  => 'Review',
-            ]
+                'title'  => 'Reviews',
+            ],
+
+            'profile' => 'Profile',
 
         ]
 
