@@ -26,11 +26,17 @@ class DownloadableProductController extends Controller
     */
     public function index()
     {
+        $customer = auth()->guard('customer')->user();
+        
         if (request()->ajax()) {
             return app(DownloadableProductDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        $downloadableLinkPurchased = $this->downloadableLinkPurchasedRepository->findWhere([
+            'customer_id' => $customer->id,
+        ]);
+
+        return view('shop::customers.account.downloadable_products.index', compact('downloadableLinkPurchased'));
     }
 
     /**
