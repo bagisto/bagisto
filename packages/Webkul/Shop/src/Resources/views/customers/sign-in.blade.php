@@ -89,6 +89,12 @@
 
                 {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
 
+                <div class=mt-[20px]>
+
+                    {!! Captcha::render() !!}
+
+                </div>
+
                 <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                     <button
                         class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
@@ -131,6 +137,9 @@
     </div>
 
     @push('scripts')
+
+        {!! Captcha::renderJS() !!}
+
         <script>
             function switchVisibility() {
                 var passwordField = document.getElementById("password");
@@ -142,5 +151,6 @@
                 }
             }
         </script>
+
     @endpush
 </x-shop::layouts>

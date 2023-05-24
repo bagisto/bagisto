@@ -135,9 +135,11 @@
                 {!! view_render_event('bagisto.shop.customers.signup_form_controls.password_confirmation.after') !!}
           
 
-                <x-shop::form.control-group>
+                <div class=mb-[20px]>
+
                     {!! Captcha::render() !!}
-                </x-shop::form.control-group>
+
+                </div>
 
 				<!-- Forget pass block -->
                 

@@ -43,11 +43,11 @@
 
                 {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
 
-                <x-shop::form.control-group>
+                <div>
 
                     {!! Captcha::render() !!}
 
-                </x-shop::form.control-group>
+                </div>
 
                 <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                     <button
