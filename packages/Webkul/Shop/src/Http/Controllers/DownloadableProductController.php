@@ -31,6 +31,10 @@ class DownloadableProductController extends Controller
             'customer_id' => $customerId,
         ]);
 
+        if ($downloadableLinkPurchased->isEmpty()) {
+            return view('shop::customers.account.downloadable_products.empty');    
+        }
+
         return view('shop::customers.account.downloadable_products.index', compact('downloadableLinkPurchased'));
     }
 

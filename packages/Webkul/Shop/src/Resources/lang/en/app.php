@@ -41,13 +41,14 @@ return [
             ],
 
             'downloadable-products'  => [
-                'name' => 'Downloadable Products',
-                'orderId' => 'Order Id',
-                'title'   => 'Title',
-                'date'   => 'Date',
-                'status'  => 'Status',
+                'name'                => 'Downloadable Products',
+                'orderId'             => 'Order Id',
+                'title'               => 'Title',
+                'date'                => 'Date',
+                'status'              => 'Status',
                 'remaining-downloads' => 'Remaining Downloads',
-                'records-found'  => 'Record(s) found',
+                'records-found'       => 'Record(s) found',
+                'empty-product'       => 'You don’t have a product to download'
             ],
 
             'profile' => 'Profile',
