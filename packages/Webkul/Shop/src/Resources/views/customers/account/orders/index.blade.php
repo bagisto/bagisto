@@ -17,27 +17,42 @@
         </div>
     </div>
 
-    <div class="relative overflow-x-auto border  rounded-[12px] mt-[30px]">
+    <div class="relative overflow-x-auto border rounded-[12px] mt-[30px]">
         <table class="w-full text-sm text-left">
             <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
                 <tr>
-                    <th scope="col" class="px-6 py-[16px] font-medium">
+                    <th 
+                        scope="col" 
+                        class="px-6 py-[16px] font-medium"
+                    >
                         @lang('shop::app.customers.account.orders.order_id')
                     </th>
 
-                    <th scope="col" class="px-6 py-[16px] font-medium">
+                    <th 
+                        scope="col" 
+                        class="px-6 py-[16px] font-medium"
+                    >
                         @lang('shop::app.customers.account.orders.order_date')
                     </th>
 
-                    <th scope="col" class="px-6 py-[16px] font-medium">
+                    <th 
+                        scope="col" 
+                        class="px-6 py-[16px] font-medium"
+                    >
                         @lang('shop::app.customers.account.orders.total')
                     </th>
 
-                    <th scope="col" class="px-6 py-[16px] font-medium">
+                    <th 
+                        scope="col" 
+                        class="px-6 py-[16px] font-medium"
+                    >
                         @lang('shop::app.customers.account.orders.status')
                     </th>
 
-                    <th scope="col" class="px-6 py-[16px] font-medium">
+                    <th 
+                        scope="col" 
+                        class="px-6 py-[16px] font-medium"
+                    >
                         @lang('shop::app.customers.account.orders.action')
                     </th>
                 </tr>
@@ -45,7 +60,7 @@
 
             <tbody>
                 @foreach ($orders as $order)
-                    <tr class="bg-white border-b ">
+                    <tr class="bg-white border-b">
                         <th 
                             scope="row" 
                             class="px-6 py-[16px] font-medium whitespace-nowrap text-black"
@@ -54,19 +69,19 @@
                         </th>
 
                         <td 
-                            class="px-6 py-[16px] text-black font-medium "
+                            class="px-6 py-[16px] text-black font-medium"
                         >
                             {{ $order->created_at}}
                         </td>
 
                         <td 
-                            class="px-6 py-[16px] text-black font-medium "
+                            class="px-6 py-[16px] text-black font-medium"
                         >
                             ₹ {{ $order->grand_total}}
                         </td>
 
                         <td 
-                            class="px-6 py-[16px] text-black font-medium "
+                            class="px-6 py-[16px] text-black font-medium"
                         > 
                             @switch($order->status)
                                 @case('processing')
@@ -114,7 +129,7 @@
             </tbody>
         </table>
 
-        <div class="flex justify-between items-center p-[30px] ">
+        <div class="flex justify-between items-center p-[30px]">
             <p class="text-[12px] font-medium">
                 Showing 1 to 8 of 40 entries
             </p>
