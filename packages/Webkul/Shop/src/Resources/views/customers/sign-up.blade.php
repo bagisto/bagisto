@@ -136,13 +136,9 @@
           
 
                 <div class="mb-[20px]">
-
                     {!! Captcha::render() !!}
-
                 </div>
-
-				<!-- Forget pass block -->
-                
+               
                 @if (core()->getConfigData('customer.settings.newsletter.subscription'))
                     <div class="flex justify-between">
                             <x-shop::form.control-group>
@@ -172,22 +168,38 @@
                     </button>
 
 					<div class="flex gap-[15px] flex-wrap">
-						<a href="" class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
-							aria-label="Facebook"></a>
-						<a href="" class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
-							aria-label="Twitter"></a>
-						<a href="" class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
-							aria-label="Pintrest"></a>
-						<a href="" class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
-							aria-label="Linkdln"></a>
-						<a href="" class="bg-[position:0px_-314px] bs-main-sprite w-[40px] h-[40px]"
-							aria-label="Linkdln"></a>
+						<a 
+                            href="" class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
+							aria-label="Facebook"
+                        >
+                        </a>
+                        
+						<a 
+                            href=""
+                            class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
+							aria-label="Twitter"
+                        >
+                        </a>
+                        
+						<a 
+                            href="" class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
+							aria-label="Pintrest"
+                        >
+                        </a>
+						
+                        <a 
+                            href="" 
+                            class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
+							aria-label="LinkedIn"
+                        >
+                        </a>
 					</div>
 				</div>
             </x-shop::form>
 
 			<p class="text-[#7D7D7D] font-medium mt-[20px]">
-                @lang('shop::app.customer.signup-text.account_exists') 
+                @lang('shop::app.customer.signup-text.account_exists')
+                
                 <a class="text-navyBlue" 
                     href="{{ route('shop.customer.session.index') }}"
                 >
@@ -202,8 +214,6 @@
 	</div>
 
     @push('scripts')
-   
         {!! Captcha::renderJS() !!}
-
     @endpush
 </x-shop::layouts>
