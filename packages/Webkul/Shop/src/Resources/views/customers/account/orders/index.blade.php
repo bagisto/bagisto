@@ -3,13 +3,13 @@
         <div class="">
             <div class="flex gap-x-[4px] items-center mb-[10px]">
                 <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']">
-                    {{ trans('shop::app.customers.account.profile')}}
+                    @lang('shop::app.customers.account.profile')
                 </p>
                 <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">
-                    {{ trans('shop::app.customers.account.orders.title')}}
+                    @lang('shop::app.customers.account.orders.title')
                 </p>
             </div>
-            <h2 class="text-[26px] font-medium">{{ trans('shop::app.customers.account.orders.title')}}</h2>
+            <h2 class="text-[26px] font-medium">@lang('shop::app.customers.account.orders.title')</h2>
         </div>
     </div>
 
@@ -18,11 +18,11 @@
 
             <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
                 <tr>
-                    <th scope="col" class="px-6 py-[16px] font-medium"> {{ trans('shop::app.customers.account.orders.order_id')}} </th>
-                    <th scope="col" class="px-6 py-[16px] font-medium"> {{ trans('shop::app.customers.account.orders.order_date')}} </th>
-                    <th scope="col" class="px-6 py-[16px] font-medium"> {{ trans('shop::app.customers.account.orders.total')}} </th>
-                    <th scope="col" class="px-6 py-[16px] font-medium"> {{ trans('shop::app.customers.account.orders.status')}} </th>
-                    <th scope="col" class="px-6 py-[16px] font-medium"> {{ trans('shop::app.customers.account.orders.action')}} </th>
+                    <th scope="col" class="px-6 py-[16px] font-medium"> @lang('shop::app.customers.account.orders.order_id') </th>
+                    <th scope="col" class="px-6 py-[16px] font-medium"> @lang('shop::app.customers.account.orders.order_date') </th>
+                    <th scope="col" class="px-6 py-[16px] font-medium"> @lang('shop::app.customers.account.orders.total') </th>
+                    <th scope="col" class="px-6 py-[16px] font-medium"> @lang('shop::app.customers.account.orders.status') </th>
+                    <th scope="col" class="px-6 py-[16px] font-medium"> @lang('shop::app.customers.account.orders.action') </th>
                 </tr>
             </thead>
 

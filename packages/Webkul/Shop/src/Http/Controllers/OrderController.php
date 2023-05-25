@@ -32,14 +32,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $customer = auth()->guard('customer')->user();
-        
-        if (request()->ajax()) {
-            return app(OrderDataGrid::class)->toJson();
-        }
+        $customerId = auth()->guard('customer')->id();
 
-        $orders = $this->orderRepository->findOneWhere([
-            'customer_id' => $customer->id,
+        $orders = $this->orderRepository->findWhere([
+            'customer_id' => $customerId,
         ]);
 
         return view('shop::customers.account.orders.index', compact('orders'));
@@ -53,16 +49,12 @@ class OrderController extends Controller
      */
     public function view($id)
     {
-        $customer = auth()->guard('customer')->user();
+        $customerId = auth()->guard('customer')->id();
 
         $order = $this->orderRepository->findOneWhere([
-            'customer_id' => $customer->id,
+            'customer_id' => $customerId,
             'id'          => $id,
         ]);
-
-        if (! $order) {
-            abort(404);
-        }
 
         return view('shop::customers.account.orders.view', compact('order'));
     }
