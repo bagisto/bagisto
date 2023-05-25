@@ -5,11 +5,15 @@
                 <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']">
                     @lang('shop::app.customers.account.profile')
                 </p>
+
                 <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">
                     @lang('shop::app.customers.account.addresses.title')
                 </p>
             </div>
-            <h2 class="text-[26px] font-medium">{{ trans('shop::app.customers.account.addresses.add-address')}}</h2>
+
+            <h2 class="text-[26px] font-medium">
+                @lang('shop::app.customers.account.addresses.add-address')
+            </h2>
         </div>
     </div>
 
@@ -136,7 +140,12 @@
                 <option value="">@lang('Select Country')</option>
 
                 @foreach (core()->countries() as $country)
-                    <option {{ $country->code === $defaultCountry ? 'selected' : '' }}  value="{{ $country->code }}">{{ $country->name }}</option>
+                    <option 
+                        {{ $country->code === $defaultCountry ? 'selected' : '' }}  
+                        value="{{ $country->code }}"
+                    >
+                        {{ $country->name }}
+                    </option>
                 @endforeach
             </x-shop::form.control-group.control>
 
