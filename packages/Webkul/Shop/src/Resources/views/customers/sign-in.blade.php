@@ -137,12 +137,11 @@
     </div>
 
     @push('scripts')
-
         {!! Captcha::renderJS() !!}
 
         <script>
             function switchVisibility() {
-                var passwordField = document.getElementById("password");
+                let passwordField = document.getElementById("password");
             
                 if (passwordField.type === "password") {
                     passwordField.type = "text";
@@ -151,6 +150,5 @@
                 }
             }
         </script>
-
     @endpush
 </x-shop::layouts>
