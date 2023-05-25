@@ -36,7 +36,7 @@ return [
                 'action'     => 'Action',
             ],
 
-             'reviews'    => [
+            'reviews'    => [
                 'title'  => 'Reviews',
                 'empty-review'  => 'You have not reviewed any product yet',
             ],
