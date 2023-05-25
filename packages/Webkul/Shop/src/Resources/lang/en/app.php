@@ -97,10 +97,21 @@ return [
     ],
 
     'footer' => [
-        'subscribe-newsletter' => 'Subscribe Newsletter',
-        'subscribe'            => 'Subscribe',
-        'locale'               => 'Locale',
-        'currency'             => 'Currency',
+        'subscribe-newsletter'   => 'Subscribe Newsletter',
+        'subscribe'              => 'Subscribe',
+        'locale'                 => 'Locale',
+        'currency'               => 'Currency',
+        'about-us'               => 'About Us',
+        'customer-service'       => 'Customer Service',
+        'whats-new'              => 'What’s New',
+        'contact-us'             => 'Contact Us',
+        'order-return'           => 'Order and Returns',
+        'payment-policy'         => 'Payment Policy',
+        'shipping-policy'        => 'Shipping Policy',
+        'privacy-cookies-policy' => 'Privacy and Cookies Policy',
+        'subscribe-stay-touch'   => 'Subscribe to stay in touch.',
+        'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
+        'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (Registered in India). All rights reserved.'
     ],
 
     'subscription' => [
