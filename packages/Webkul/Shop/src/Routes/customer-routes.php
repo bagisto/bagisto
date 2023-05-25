@@ -177,9 +177,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     Route::controller(DownloadableProductController::class)->prefix('downloadable-products')->group(function () {
                         Route::get('', 'index')->name('shop.customer.downloadable_products.index');
 
-                        Route::get('download/{id}', 'download')->defaults('_config', [
-                            'view' => 'shop::customers.account.downloadable_products.index',
-                        ])->name('shop.customer.downloadable_products.download');
+                        Route::get('download/{id}', 'download')->name('shop.customer.downloadable_products.download');
                     });
 
 

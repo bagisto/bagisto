@@ -60,11 +60,16 @@
                         <tbody>
                             @foreach ($downloadableLinkPurchased as $item)
                                 <tr class="bg-white border-b">
-                                    <th scope="row" class="px-6 py-[16px] font-medium whitespace-nowrap text-black">
+                                    <th 
+                                        scope="row" 
+                                        class="px-6 py-[16px] font-medium whitespace-nowrap text-black"
+                                    >
                                         {{ $item->order_id }}
                                     </th>
 
-                                    <td class="px-6 py-[16px] text-black font-medium ">
+                                    <td 
+                                        class="px-6 py-[16px] text-black font-medium "
+                                    >
                                         {{ $item->product_name }}
                                     </td>
 
@@ -72,7 +77,9 @@
                                         {{ $item->created_at }}
                                     </td>
 
-                                    <td class="px-6 py-[16px] text-black font-medium "> 
+                                    <td 
+                                        class="px-6 py-[16px] text-black font-medium "
+                                    > 
                                         @switch($item->status)
                                             @case('completed')
 
@@ -91,7 +98,9 @@
                                         @endswitch
                                     </td>
 
-                                    <td class="px-6 py-[16px] text-black font-medium "> 
+                                    <td 
+                                        class="px-6 py-[16px] text-black font-medium "
+                                    > 
                                         {{ $item->download_bought }} - {{ $item->download_used }}
                                     </td>
                                 </tr>

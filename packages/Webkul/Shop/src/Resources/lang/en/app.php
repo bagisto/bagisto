@@ -49,7 +49,9 @@ return [
                 'status'              => 'Status',
                 'remaining-downloads' => 'Remaining Downloads',
                 'records-found'       => 'Record(s) found',
-                'empty-product'       => 'You don’t have a product to download'
+                'empty-product'       => 'You don’t have a product to download',
+                'download-error'      => 'Download link has been expired.',
+                'payment-error'       => 'Payment has not been done for this download.',
             ],
 
             'profile' => 'Profile',
