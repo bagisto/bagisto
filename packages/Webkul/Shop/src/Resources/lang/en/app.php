@@ -30,6 +30,7 @@ return [
             'orders' => [
                 'title'      => 'Orders',
                 'order_id'   => 'Order Id',
+                'order'      => 'Order',
                 'order_date' => 'Order Date',
                 'total'      => 'Total',
                 'status'     => 'Status',
@@ -45,6 +46,11 @@ return [
 
         ],
 
+    ],
+
+    'response' => [
+        'cancel-success'            => ':name canceled successfully.',
+        'cancel-error'              => ':name can not be canceled.',
     ],
 
     'invalid_vat_format' => 'The given vat id has a wrong format',

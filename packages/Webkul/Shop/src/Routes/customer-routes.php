@@ -122,30 +122,21 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Addresses.
                      */
-                    Route::get('addresses', [AddressController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.address.index',
-                    ])->name('shop.customer.addresses.index');
-
-                    Route::get('addresses/create', [AddressController::class, 'create'])->defaults('_config', [
-                        'view' => 'shop::customers.account.address.create',
-                    ])->name('shop.customer.addresses.create');
-
-                    Route::post('addresses/create', [AddressController::class, 'store'])->defaults('_config', [
-                        'view'     => 'shop::customers.account.address.address',
-                        'redirect' => 'shop.customer.addresses.index',
-                    ])->name('shop.customer.addresses.store');
-
-                    Route::get('addresses/edit/{id}', [AddressController::class, 'edit'])->defaults('_config', [
-                        'view' => 'shop::customers.account.address.edit',
-                    ])->name('shop.customer.addresses.edit');
-
-                    Route::put('addresses/edit/{id}', [AddressController::class, 'update'])->defaults('_config', [
-                        'redirect' => 'shop.customer.addresses.index',
-                    ])->name('shop.customer.addresses.update');
-
-                    Route::get('addresses/default/{id}', [AddressController::class, 'makeDefault'])->name('shop.customer.make.default.address');
-
-                    Route::delete('addresses/delete/{id}', [AddressController::class, 'destroy'])->name('shop.customer.addresses.delete');
+                    Route::controller(AddressController::class)->prefix('addresses')->group(function () {
+                        Route::get('', 'index')->name('shop.customer.addresses.index');
+    
+                        Route::get('create', 'create')->name('shop.customer.addresses.create');
+    
+                        Route::post('create', 'store')->name('shop.customer.addresses.store');
+    
+                        Route::get('edit/{id}', 'edit')->name('shop.customer.addresses.edit');
+    
+                        Route::put('edit/{id}', 'update')->name('shop.customer.addresses.update');
+    
+                        Route::patch('edit/{id}/default', 'makeDefault')->name('shop.customer.addresses.update.default');
+    
+                        Route::delete('delete/{id}', 'destroy')->name('shop.customer.addresses.delete');
+                    });
 
                     /**
                      * Wishlist.
@@ -157,19 +148,15 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Orders.
                      */
-                    Route::get('orders', [OrderController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.orders.index',
-                    ])->name('shop.customer.orders.index');
+                     Route::controller(OrderController::class)->prefix('orders')->group(function () {
+                         Route::get('', 'index')->name('shop.customer.orders.index');
 
-                    Route::get('orders/view/{id}', [OrderController::class, 'view'])->defaults('_config', [
-                        'view' => 'shop::customers.account.orders.view',
-                    ])->name('shop.customer.orders.view');
+                         Route::get('view/{id}', 'view')->name('shop.customer.orders.view');
+                         
+                         Route::get('print/{id}', 'printInvoice')->name('shop.customer.orders.print');
 
-                    Route::get('orders/print/{id}', [OrderController::class, 'printInvoice'])->defaults('_config', [
-                        'view' => 'shop::customers.account.orders.print',
-                    ])->name('shop.customer.orders.print');
-
-                    Route::post('/orders/cancel/{id}', [OrderController::class, 'cancel'])->name('shop.customer.orders.cancel');
+                         Route::post('cancel/{id}', 'cancel')->name('shop.customer.orders.cancel');
+                     });
 
                     /**
                      * Downloadable products.
