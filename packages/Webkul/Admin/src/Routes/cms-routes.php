@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\CMS\Http\Controllers\Admin\PageController;
+use Webkul\Admin\Http\Controllers\CMS\PageController;
 
 /**
  * CMS routes.

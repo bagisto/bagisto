@@ -4,7 +4,6 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
-use Webkul\Shop\DataGrids\DownloadableProductDataGrid;
 
 class DownloadableProductController extends Controller
 {
@@ -14,8 +13,9 @@ class DownloadableProductController extends Controller
      * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
      * @return void
      */
-    public function __construct(protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository)
-    {
+    public function __construct(
+        protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
+    ) {
         parent::__construct();
     }
 
@@ -26,11 +26,11 @@ class DownloadableProductController extends Controller
     */
     public function index()
     {
-        if (request()->ajax()) {
-            return app(DownloadableProductDataGrid::class)->toJson();
-        }
+        $downloadableLinkPurchased = $this->downloadableLinkPurchasedRepository->findWhere([
+            'customer_id' => auth()->guard('customer')->id(),
+        ]);
 
-        return view($this->_config['view']);
+        return view('shop::customers.account.downloadable_products.index', compact('downloadableLinkPurchased'));
     }
 
     /**
@@ -64,7 +64,7 @@ class DownloadableProductController extends Controller
             $downloadableLinkPurchased->download_used == $totalInvoiceQty
             || $downloadableLinkPurchased->download_used > $totalInvoiceQty
         ) {
-            session()->flash('warning', trans('shop::app.customer.account.downloadable_products.payment-error'));
+            session()->flash('warning', trans('shop::app.customers.account.downloadable_products.payment-error'));
 
             return redirect()->route('shop.customer.downloadable_products.index');
         }
@@ -74,7 +74,7 @@ class DownloadableProductController extends Controller
             && ($downloadableLinkPurchased->download_bought - ($downloadableLinkPurchased->download_used + $downloadableLinkPurchased->download_canceled)) <= 0
         ) {
 
-            session()->flash('warning', trans('shop::app.customer.account.downloadable_products.download-error'));
+            session()->flash('warning', trans('shop::app.customers.account.downloadable-products.download-error'));
 
             return redirect()->route('shop.customer.downloadable_products.index');
         }

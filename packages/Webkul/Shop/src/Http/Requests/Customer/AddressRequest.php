@@ -3,9 +3,9 @@
 namespace Webkul\Shop\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Contracts\Validations\Address;
-use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
-use Webkul\Core\Contracts\Validations\PhoneNumber;
+use Webkul\Core\Rules\Address;
+use Webkul\Core\Rules\AlphaNumericSpace;
+use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Customer\Rules\VatIdRule;
 
 class AddressRequest extends FormRequest

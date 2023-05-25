@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Notification\Http\Controllers\Admin\NotificationController;
+use Webkul\Admin\Http\Controllers\Notification\NotificationController;
 
 /**
  * Notification routes.

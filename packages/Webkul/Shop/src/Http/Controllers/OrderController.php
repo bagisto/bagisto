@@ -5,7 +5,6 @@ namespace Webkul\Shop\Http\Controllers;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Shop\DataGrids\OrderDataGrid;
 
 class OrderController extends Controller
 {
@@ -21,8 +20,7 @@ class OrderController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -33,11 +31,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        if (request()->ajax()) {
-            return app(OrderDataGrid::class)->toJson();
-        }
+        $orders = $this->orderRepository->findWhere([
+            'customer_id' => auth()->guard('customer')->id(),
+        ]);
 
-        return view($this->_config['view']);
+        return view('shop::customers.account.orders.index', compact('orders'));
     }
 
     /**
@@ -48,18 +46,12 @@ class OrderController extends Controller
      */
     public function view($id)
     {
-        $customer = auth()->guard('customer')->user();
-
         $order = $this->orderRepository->findOneWhere([
-            'customer_id' => $customer->id,
+            'customer_id' => auth()->guard('customer')->id(),
             'id'          => $id,
         ]);
 
-        if (! $order) {
-            abort(404);
-        }
-
-        return view($this->_config['view'], compact('order'));
+        return view('shop::customers.account.orders.view', compact('order'));
     }
 
     /**
@@ -70,11 +62,9 @@ class OrderController extends Controller
      */
     public function printInvoice($id)
     {
-        $customer = auth()->guard('customer')->user();
-
         $invoice = $this->invoiceRepository->findOrFail($id);
 
-        if ($invoice->order->customer_id !== $customer->id) {
+        if ($invoice->order->customer_id !== auth()->guard('customer')->id()) {
             abort(404);
         }
 
@@ -105,9 +95,9 @@ class OrderController extends Controller
         $result = $this->orderRepository->cancel($order);
 
         if ($result) {
-            session()->flash('success', trans('admin::app.response.cancel-success', ['name' => 'Order']));
+            session()->flash('success', trans('shop::app.response.cancel-success', ['name' => trans('admin::app.customers.account.orders.order')]));
         } else {
-            session()->flash('error', trans('admin::app.response.cancel-error', ['name' => 'Order']));
+            session()->flash('error', trans('shop::app.response.cancel-error', ['name' => trans('admin::app.customers.account.orders.order')]));
         }
 
         return redirect()->back();

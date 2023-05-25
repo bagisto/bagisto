@@ -20,10 +20,6 @@ class SocialLoginServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'sociallogin');
 
-        $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
-        ], 'public');
-
         $this->app->register(EventServiceProvider::class);
     }
 

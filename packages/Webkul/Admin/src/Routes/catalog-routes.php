@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Attribute\Http\Controllers\AttributeController;
-use Webkul\Attribute\Http\Controllers\AttributeFamilyController;
-use Webkul\Category\Http\Controllers\CategoryController;
-use Webkul\Product\Http\Controllers\ProductController;
+use Webkul\Admin\Http\Controllers\Attribute\AttributeController;
+use Webkul\Admin\Http\Controllers\Attribute\AttributeFamilyController;
+use Webkul\Admin\Http\Controllers\Category\CategoryController;
+use Webkul\Admin\Http\Controllers\Product\ProductController;
 
 /**
  * Catalog routes.
