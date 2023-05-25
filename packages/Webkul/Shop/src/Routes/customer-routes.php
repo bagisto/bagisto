@@ -107,7 +107,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Profile.
                      */
-
                     Route::controller(CustomerController::class)->prefix('profile')->group(function () {
                         Route::get('', 'index')->name('shop.customer.profile.index');
 
