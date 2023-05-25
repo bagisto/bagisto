@@ -123,7 +123,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
                         Route::post('destroy', 'destroy')->name('shop.customer.profile.destroy');
 
-                        // product reviews 
                         Route::get('reviews', 'reviews')->name('shop.customer.reviews.index');
                     });
 
@@ -193,7 +192,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Reviews.
                      */
-
                     Route::delete('reviews/delete/{id}', [ReviewController::class, 'destroy'])->defaults('_config', [
                         'redirect' => 'shop.customer.reviews.index',
                     ])->name('shop.customer.review.delete');
