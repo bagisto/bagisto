@@ -152,7 +152,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                          Route::get('', 'index')->name('shop.customer.orders.index');
 
                          Route::get('view/{id}', 'view')->name('shop.customer.orders.view');
-                         
+
                          Route::get('print/{id}', 'printInvoice')->name('shop.customer.orders.print');
 
                          Route::post('cancel/{id}', 'cancel')->name('shop.customer.orders.cancel');
