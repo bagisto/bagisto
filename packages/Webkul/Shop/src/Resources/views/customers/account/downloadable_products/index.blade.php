@@ -107,7 +107,12 @@
                 </p>
             @else
                 <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
-                    <img class="" src="{{ bagisto_asset('images/empty-dwn-product.png')}}" alt="" title="">
+                    <img
+                        src="{{ bagisto_asset('images/empty-dwn-product.png')}}"
+                        class=""
+                        alt=""
+                        title=""
+                    >
 
                     <p class="text-[20px]">
                         @lang('shop::app.customers.account.downloadable-products.empty-product')
