@@ -295,4 +295,9 @@
     .direction-rtl {
         direction: rtl;
     }
+
+    .bs-main-sprite {
+        background-image: url('../images/bs-main-sprite.png');
+        background-repeat: no-repeat;
+    }
 }
