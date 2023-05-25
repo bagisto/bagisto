@@ -120,7 +120,8 @@
                         >
                             <a 
                                 href="{{ route('shop.customer.orders.view', $order->id) }}" 
-                                class=" block bg-[position:-74px_-66px] bs-main-sprite w-[20px] h-[20px] font-medium" aria-label="action"
+                                class=" block bg-[position:-74px_-66px] bs-main-sprite w-[20px] h-[20px] font-medium" 
+                                aria-label="action"
                             >
                             </a>
                         </td>

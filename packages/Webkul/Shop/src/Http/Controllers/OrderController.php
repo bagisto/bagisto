@@ -62,11 +62,9 @@ class OrderController extends Controller
      */
     public function printInvoice($id)
     {
-        $customer = auth()->guard('customer')->user();
-
         $invoice = $this->invoiceRepository->findOrFail($id);
 
-        if ($invoice->order->customer_id !== $customer->id) {
+        if ($invoice->order->customer_id !== auth()->guard('customer')->id()) {
             abort(404);
         }
 
@@ -97,9 +95,9 @@ class OrderController extends Controller
         $result = $this->orderRepository->cancel($order);
 
         if ($result) {
-            session()->flash('success', trans('admin::app.response.cancel-success', ['name' => 'Order']));
+            session()->flash('success', trans('shop::app.response.cancel-success', ['name' => trans('admin::app.customers.account.orders.order')]));
         } else {
-            session()->flash('error', trans('admin::app.response.cancel-error', ['name' => 'Order']));
+            session()->flash('error', trans('shop::app.response.cancel-error', ['name' => trans('admin::app.customers.account.orders.order')]));
         }
 
         return redirect()->back();
