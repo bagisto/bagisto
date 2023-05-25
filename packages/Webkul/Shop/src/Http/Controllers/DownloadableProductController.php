@@ -25,15 +25,9 @@ class DownloadableProductController extends Controller
     */
     public function index()
     {
-        $customerId = auth()->guard('customer')->id();    
-
         $downloadableLinkPurchased = $this->downloadableLinkPurchasedRepository->findWhere([
-            'customer_id' => $customerId,
+            'customer_id' => auth()->guard('customer')->id(),
         ]);
-
-        if ($downloadableLinkPurchased->isEmpty()) {
-            return view('shop::customers.account.downloadable_products.empty');    
-        }
 
         return view('shop::customers.account.downloadable_products.index', compact('downloadableLinkPurchased'));
     }

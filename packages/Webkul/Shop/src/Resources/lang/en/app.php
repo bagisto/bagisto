@@ -57,7 +57,6 @@ return [
 
     ],
 
-
     'invalid_vat_format' => 'The given vat id has a wrong format',
     'security-warning'   => 'Suspicious activity found!!!',
     'nothing-to-delete'  => 'Nothing to delete',
