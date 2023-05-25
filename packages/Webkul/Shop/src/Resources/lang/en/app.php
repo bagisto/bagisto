@@ -4,7 +4,7 @@ return [
     'customers' => [
 
         'account' => [
-            
+
             'addresses' => [
                 'title'           => 'Address',
                 'edit'            => 'Edit',
@@ -24,7 +24,7 @@ return [
                 'post-code'       => 'Post Code',
                 'create'          => [
                     'success' => 'Address have been successfully added.',
-                ]
+                ],
             ],
 
             'orders' => [
@@ -37,13 +37,15 @@ return [
             ],
 
             'reviews'    => [
-                'title'  => 'Review',
-            ]
+                'title'         => 'Reviews',
+                'empty-review'  => 'You have not reviewed any product yet',
+            ],
 
-        ]
+            'profile' => 'Profile',
+
+        ],
 
     ],
-
 
     'invalid_vat_format' => 'The given vat id has a wrong format',
     'security-warning'   => 'Suspicious activity found!!!',
@@ -95,10 +97,21 @@ return [
     ],
 
     'footer' => [
-        'subscribe-newsletter' => 'Subscribe Newsletter',
-        'subscribe'            => 'Subscribe',
-        'locale'               => 'Locale',
-        'currency'             => 'Currency',
+        'subscribe-newsletter'   => 'Subscribe Newsletter',
+        'subscribe'              => 'Subscribe',
+        'locale'                 => 'Locale',
+        'currency'               => 'Currency',
+        'about-us'               => 'About Us',
+        'customer-service'       => 'Customer Service',
+        'whats-new'              => 'What’s New',
+        'contact-us'             => 'Contact Us',
+        'order-return'           => 'Order and Returns',
+        'payment-policy'         => 'Payment Policy',
+        'shipping-policy'        => 'Shipping Policy',
+        'privacy-cookies-policy' => 'Privacy and Cookies Policy',
+        'subscribe-stay-touch'   => 'Subscribe to stay in touch.',
+        'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
+        'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (Registered in India). All rights reserved.',
     ],
 
     'subscription' => [
@@ -154,12 +167,12 @@ return [
         ],
 
         'signup-text' => [
-            'account_exists' => 'Already have an account',
+            'account_exists' => 'Already have an account ?',
             'title'          => 'Sign In',
         ],
 
         'signup-form' => [
-            'page-title'                  => 'Create New Customer Account',
+            'page-title'                  => 'Become User',
             'title'                       => 'Sign Up',
             'firstname'                   => 'First Name',
             'lastname'                    => 'Last Name',
@@ -184,6 +197,8 @@ return [
             'verify-failed'               => 'We cannot verify your mail account.',
             'dont-have-account'           => 'You do not have account with us.',
             'customer-registration'       => 'Customer Registered Successfully',
+            'form-signup-text'            => 'If you are new to our store, we glad to have you as member.',
+            'footer'                      => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
         ],
 
         'login-text' => [
@@ -205,14 +220,19 @@ return [
             'not-activated'       => 'Your activation seeks admin approval',
             'resend-verification' => 'Resend verification mail again',
             'show-password'       => 'Show Password',
+            'footer'              => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
+            'new-customer'        => 'New customer?',
+            'create-your-account' => 'Create your account',
+            'form-login-text'     => 'If you have an account, sign in with your email address.',
 
         ],
 
         'forgot-password' => [
-            'title'      => 'Recover Password',
-            'email'      => 'Email',
-            'submit'     => 'Send Password Reset Email',
-            'page_title' => 'Forgot your password ?',
+            'title'                => 'Recover Password',
+            'email'                => 'Email',
+            'forgot-password-text' => 'If you forgot your password, recover it by entering your email address.',
+            'submit'               => 'Reset Password',
+            'page_title'           => 'Forgot your password ?',
         ],
 
         'reset-password' => [
@@ -537,11 +557,11 @@ return [
     'checkout' => [
         'cart' => [
             'integrity'                 => [
-                'missing_fields'  => 'Some required fields missing for this product.',
-                'missing_options' => 'Options are missing for this product.',
-                'missing_links'   => 'Downloadable links are missing for this product.',
-                'qty_missing'     => 'Atleast one product should have more than 1 quantity.',
-                'qty_impossible'  => 'Cannot add more than one of these products to cart.',
+                'missing_fields'         => 'Some required fields missing for this product.',
+                'missing_options'        => 'Options are missing for this product.',
+                'missing_links'          => 'Downloadable links are missing for this product.',
+                'qty_missing'            => 'Atleast one product should have more than 1 quantity.',
+                'qty_impossible'         => 'Cannot add more than one of these products to cart.',
                 'select_hourly_duration' => 'Select a slot duration of one hour.',
             ],
             'create-error'              => 'Encountered some issue while making cart instance.',
@@ -567,13 +587,13 @@ return [
                 'error'             => 'Cannot update the item(s) at the moment, please try again later.',
             ],
             'item'                      => [
-                'error_remove'   => 'No items to remove from the cart.',
-                'success'        => 'Item is successfully added to cart.',
-                'success-remove' => 'Item is successfully removed from the cart.',
+                'error_remove'       => 'No items to remove from the cart.',
+                'success'            => 'Item is successfully added to cart.',
+                'success-remove'     => 'Item is successfully removed from the cart.',
                 'success-all-remove' => 'All items is successfully removed from the cart.',
-                'error-add'      => 'Item cannot be added to cart, please try again later.',
-                'inactive'       => 'An item is inactive and was removed from cart.',
-                'inactive-add'   => 'Inactive item cannot be added to cart.',
+                'error-add'          => 'Item cannot be added to cart, please try again later.',
+                'inactive'           => 'An item is inactive and was removed from cart.',
+                'inactive-add'       => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error'            => 'Requested quantity is not available.',
             'cart-subtotal'             => 'Cart Subtotal',
@@ -585,7 +605,7 @@ return [
             ],
             'minimum-order-message'     => 'Minimum order amount is :amount',
             'suspended-account-message' => 'Your account has been suspended.',
-            'inactive-account-message' =>  'Your account has been inactive.',
+            'inactive-account-message'  => 'Your account has been inactive.',
             'check-shipping-address'    => 'Please check shipping address.',
             'check-billing-address'     => 'Please check billing address.',
             'specify-shipping-method'   => 'Please specify shipping method.',
@@ -648,22 +668,22 @@ return [
         ],
 
         'total' => [
-            'order-summary'       => 'Order Summary',
-            'sub-total'           => 'Items',
-            'grand-total'         => 'Grand Total',
-            'delivery-charges'    => 'Delivery Charges',
-            'tax'                 => 'Tax',
-            'discount'            => 'Discount',
-            'price'               => 'price',
-            'disc-amount'         => 'Amount discounted',
-            'new-grand-total'     => 'New Grand Total',
-            'coupon'              => 'Coupon',
-            'coupon-applied'      => 'Applied Coupon',
-            'remove-coupon'       => 'Remove Coupon',
-            'cannot-apply-coupon' => 'Cannot Apply Coupon',
-            'invalid-coupon'      => 'Coupon code is invalid.',
-            'success-coupon'      => 'Coupon code applied successfully.',
-            'coupon-apply-issue'  => 'Coupon code can\'t be applied.',
+            'order-summary'          => 'Order Summary',
+            'sub-total'              => 'Items',
+            'grand-total'            => 'Grand Total',
+            'delivery-charges'       => 'Delivery Charges',
+            'tax'                    => 'Tax',
+            'discount'               => 'Discount',
+            'price'                  => 'price',
+            'disc-amount'            => 'Amount discounted',
+            'new-grand-total'        => 'New Grand Total',
+            'coupon'                 => 'Coupon',
+            'coupon-applied'         => 'Applied Coupon',
+            'remove-coupon'          => 'Remove Coupon',
+            'cannot-apply-coupon'    => 'Cannot Apply Coupon',
+            'invalid-coupon'         => 'Coupon code is invalid.',
+            'success-coupon'         => 'Coupon code applied successfully.',
+            'coupon-apply-issue'     => 'Coupon code can\'t be applied.',
             'coupon-already-applied' => 'Coupon code already applied.',
         ],
 

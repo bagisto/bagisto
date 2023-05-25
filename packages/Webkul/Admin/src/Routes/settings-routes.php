@@ -1,16 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Core\Http\Controllers\ChannelController;
-use Webkul\Core\Http\Controllers\CurrencyController;
-use Webkul\Core\Http\Controllers\ExchangeRateController;
-use Webkul\Core\Http\Controllers\LocaleController;
-use Webkul\Core\Http\Controllers\SliderController;
-use Webkul\Inventory\Http\Controllers\InventorySourceController;
-use Webkul\Tax\Http\Controllers\TaxCategoryController;
-use Webkul\Tax\Http\Controllers\TaxRateController;
-use Webkul\User\Http\Controllers\RoleController;
-use Webkul\User\Http\Controllers\UserController;
+use Webkul\Admin\Http\Controllers\Core\ChannelController;
+use Webkul\Admin\Http\Controllers\Core\CurrencyController;
+use Webkul\Admin\Http\Controllers\Core\ExchangeRateController;
+use Webkul\Admin\Http\Controllers\Core\LocaleController;
+use Webkul\Admin\Http\Controllers\Core\SliderController;
+use Webkul\Admin\Http\Controllers\Inventory\InventorySourceController;
+use Webkul\Admin\Http\Controllers\Tax\TaxCategoryController;
+use Webkul\Admin\Http\Controllers\Tax\TaxRateController;
+use Webkul\Admin\Http\Controllers\User\RoleController;
+use Webkul\Admin\Http\Controllers\User\UserController;
 
 /**
  * Settings routes.

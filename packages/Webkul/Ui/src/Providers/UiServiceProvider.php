@@ -16,10 +16,6 @@ class UiServiceProvider extends ServiceProvider
     {
         include __DIR__ . '/../Http/routes.php';
 
-        $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/ui/assets'),
-        ], 'public');
-
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'ui');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'ui');
@@ -27,6 +23,8 @@ class UiServiceProvider extends ServiceProvider
         Paginator::defaultView('ui::partials.pagination');
 
         Paginator::defaultSimpleView('ui::partials.pagination');
+
+        $this->publishes([__DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/ui/assets')], 'public');
     }
 
     /**

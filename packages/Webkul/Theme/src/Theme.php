@@ -2,20 +2,19 @@
 
 namespace Webkul\Theme;
 
-use Illuminate\Support\Facades\Config;
-use Webkul\Theme\Facades\Themes as Themes;
+use Illuminate\Support\Facades\Vite;
 
 class Theme
 {
     /**
-     * Contains theme parent
+     * Contains theme parent.
      *
-     * @var Theme
+     * @var \Webkul\Theme\Theme
      */
     public $parent;
 
     /**
-     * Create a new Theme instance.
+     * Create a new theme instance.
      *
      * @param  string  $code
      * @param  string  $name
@@ -28,15 +27,14 @@ class Theme
         public $name = null,
         public $assetsPath = null,
         public $viewsPath = null
-    )
-    {
+    ) {
         $this->assetsPath = $assetsPath === null ? $code : $assetsPath;
 
         $this->viewsPath = $viewsPath === null ? $code : $viewsPath;
     }
 
     /**
-     * Sets the parent
+     * Sets the parent.
      *
      * @param  \Webkul\Theme\Theme
      * @return void
@@ -47,7 +45,7 @@ class Theme
     }
 
     /**
-     * Return the parent
+     * Return the parent.
      *
      * @return \Webkul\Theme\Theme
      */
@@ -55,9 +53,9 @@ class Theme
     {
         return $this->parent;
     }
-    
+
     /**
-     * Return all the possible view paths
+     * Return all the possible view paths.
      *
      * @return array
      */
@@ -83,34 +81,55 @@ class Theme
     }
 
     /**
-     * Convert to asset url based on current theme
+     * Convert to asset url based on current theme.
      *
      * @param  string  $url
-     * @param  bool|null  $secure
      * @return string
      */
-    public function url($url, $secure = null)
+    public function url($url)
     {
-        $url = ltrim($url, '/');
+        $url = trim($url, '/');
 
-        if (preg_match('/^((http(s?):)?\/\/)/i', $url)) {
-            return $url;
-        }
-        
-        if (preg_match('/^((http(s?):)?\/\/)/i', $this->assetsPath)) {
-            return $this->assetsPath . '/' . $url;
-        }
+        /**
+         * Hot file for dev.
+         */
+        $hotFile = $this->code . '-vite.hot';
 
-        $fullUrl = str_replace("public/", "", $this->assetsPath) . '/' . $url;
+        /**
+         * Testing vite url, will refactor and give good configuration.
+         */
+        $viteUrl = 'src/Resources/assets/' . $url;
 
-        if (file_exists(public_path($fullUrl))) {
-            return asset($fullUrl, $secure);
-        }
+        /**
+         * Testing build path, will refactor and give good configuration.
+         */
+        $buildPath = str_replace('public/', '', $this->assetsPath) . '/build';
 
-        if ($parentTheme = $this->getParent()) {
-            return $parentTheme->url($url);
-        }
+        /**
+         * Activated vite here. For dev and prod.
+         */
+        return Vite::useHotFile($hotFile)
+            ->useBuildDirectory($buildPath)
+            ->asset($viteUrl);
+    }
 
-        return asset($url, $secure);
+    public function setBagistoVite($entryPoints)
+    {
+        /**
+         * Hot file for dev.
+         */
+        $hotFile = $this->code . '-vite.hot';
+
+        /**
+         * Testing build path, will refactor and give good configuration.
+         */
+        $buildPath = str_replace('public/', '', $this->assetsPath) . '/build';
+
+        /**
+         * Activated vite here. For dev and prod.
+         */
+        return Vite::useHotFile($hotFile)
+            ->useBuildDirectory($buildPath)
+            ->withEntryPoints($entryPoints);
     }
 }

@@ -1,0 +1,173 @@
+<x-accordion title="Test Accordion">
+    <x-slot:header>Accordion Header</x-slot:header>
+
+    <x-slot:body>Accordion Body</x-slot:body>
+</x-accordion>
+
+<x-table>
+    <x-table.thead>
+        <x-table.tr>
+            <x-table.th>Column 1</x-table.th>
+            <x-table.th>Column 2</x-table.th>
+            <x-table.th class="action">Column 3</x-table.th>
+        </x-table.tr>
+    </x-table.thead>
+
+    <x-table.tbody>
+        <x-table.tr>
+            <x-table.td>Row 1 Value 1</x-table.td>
+            <x-table.td>Row 1 Value 3</x-table.td>
+            <x-table.td class="w-[50px]">Row 1 Value 3</x-table.td>
+        </x-table.tr>
+
+        <x-table.tr>
+            <x-table.td>Row 2 Value 1</x-table.td>
+            <x-table.td>Row 2 Value 3</x-table.td>
+            <x-table.td class="action">Row 2 Value 3</x-table.td>
+        </x-table.tr>
+    </x-table.tbody>
+</x-table>
+
+<x-tabs>
+    <x-tabs.item
+        name="Tab 1"
+        is-selected="true"
+    >
+        Tab 1 Content
+    </x-tabs.item>
+
+    <x-tabs.item name="Tab 2">Tab 2 Content</x-tabs.item>
+</x-tabs>
+
+<x-form.control>
+    <x-slot:label class="required">
+        Input Control
+    </x-slot:label>
+
+    <x-slot:control
+        type="input"
+        name="input"
+        class="just-checking"
+        value="Input Value"
+        v-validate="'required'"
+    ></x-slot:control>
+</x-form.control>
+
+<x-form.control>
+    <x-slot:control
+        type="select"
+        name="select"
+        v-validate="'required'"
+    >
+        <option value=""></option>
+        <option value="1">Option 1</option>
+    </x-slot:control>
+
+    <x-slot:error class="custom-error-class"></x-slot:error>
+</x-form.control>
+
+<x-form.control>
+    <x-slot:label
+        class="required"
+    >
+        Multi Select Control
+    </x-slot:label>
+
+    <x-slot:control
+        type="select"
+        name="multiselect"
+        v-validate="'required'"
+        multiple
+    >
+        <option value="1" selected>Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+    </x-slot:control>
+</x-form.control>
+
+<x-form.control>
+    <x-slot:label class="required">Checkbox Control</x-slot:label>
+
+    <x-slot:control
+        type="checkbox"
+        name="checkbox"
+        value="1"
+        checked
+    >
+        Checkbox Label
+    </x-slot:control>
+</x-form.control>
+
+<x-form.control>
+    <x-slot:label class="required">Radio Control</x-slot:label>
+
+    <x-slot:control
+        type="radio"
+        name="radio[]"
+        value="1"
+    >
+        Radio Label
+    </x-slot:control>
+</x-form.control>
+
+<button @click="$root.showModal('testModal')">Open Modal</button>
+
+<x-modal id="testModal" is-open="$root.modalIds.testModal">
+    <x-slot:header>Modal Title</x-slot:header>
+
+    <x-slot:body>Modal Body</x-slot:body>
+</x-modal>
+
+<x-flash-group></x-flash-group>
+
+<x-panel>
+    <x-slot:header>Panel Title</x-slot:header>
+
+    <x-slot:body>Panel Body</x-slot:body>
+</x-panel>
+
+<?php $products = [1,2,3,3,4]  ?>
+
+<x-products.carousel
+    title="Men’s Collections"
+    :products="$products"
+    :navigation-link="route('shop.home.index')"
+>
+</x-products.carousel>
+
+<x-form
+    method="post"
+    action=""
+>
+    <x-form.control-group>
+        <x-form.control-group.label>
+            Email
+        </x-form.control-group.label>
+
+        <x-form.control-group.control type="text" name="email" />
+
+        <x-form.control-group.error>
+            This is error
+        </x-form.control-group.error>
+    </x-form.control-group>
+</x-form>
+
+<x-shop::dropdown>
+    <x-shop::dropdown.toggle>
+        Toggle
+    </x-shop::dropdown.toggle>
+
+    <x-shop::dropdown.menu>
+        <x-shop::dropdown.menu.item>
+            Item 1
+        </x-shop::dropdown.menu.item>
+
+        <x-shop::dropdown.menu.item>
+            Item 2
+        </x-shop::dropdown.menu.item>
+
+        <x-shop::dropdown.menu.item>
+            Item 3
+        </x-shop::dropdown.menu.item>
+    </x-shop::dropdown.menu>
+</x-shop::dropdown>

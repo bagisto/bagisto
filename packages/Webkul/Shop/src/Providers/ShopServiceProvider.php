@@ -4,11 +4,13 @@ namespace Webkul\Shop\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Tree;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Http\Middleware\Locale;
+use Webkul\Shop\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Shop\Http\Middleware\Theme;
 
 class ShopServiceProvider extends ServiceProvider
@@ -20,13 +22,6 @@ class ShopServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        /* publishers */
-        $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
-            __DIR__ . '/../Resources/views'       => resource_path('themes/default/views'),
-            __DIR__ . '/../Resources/lang'        => lang_path('vendor/shop'),
-        ]);
-
         /* loaders */
         Route::middleware('web')->group(__DIR__ . '/../Routes/web.php');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
@@ -34,9 +29,10 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
 
         /* aliases */
-        $router->aliasMiddleware('locale', Locale::class);
-        $router->aliasMiddleware('theme', Theme::class);
         $router->aliasMiddleware('currency', Currency::class);
+        $router->aliasMiddleware('locale', Locale::class);
+        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
+        $router->aliasMiddleware('theme', Theme::class);
 
         /* View Composers */
         $this->composeView();
@@ -44,6 +40,8 @@ class ShopServiceProvider extends ServiceProvider
         /* Paginator */
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
+
+        Blade::anonymousComponentPath(__DIR__ . '/../Resources/views/components', 'shop');
 
         /* Breadcrumbs */
         require __DIR__ . '/../Routes/breadcrumbs.php';
@@ -87,11 +85,13 @@ class ShopServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/menu.php', 'menu.customer'
+            dirname(__DIR__) . '/Config/menu.php',
+            'menu.customer'
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php', 'core'
+            dirname(__DIR__) . '/Config/system.php',
+            'core'
         );
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\CMS\Http\Controllers\Shop\PagePresenterController;
-use Webkul\Core\Http\Controllers\CountryStateController;
+use Webkul\Shop\Http\Controllers\BookingProduct\BookingProductController;
 use Webkul\Shop\Http\Controllers\CategoryController;
+use Webkul\Shop\Http\Controllers\CMS\PagePresenterController;
+use Webkul\Shop\Http\Controllers\CountryStateController;
 use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\ReviewController;
@@ -62,7 +63,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Subscription routes.
      */
-    Route::get('subscribe', [SubscriptionController::class, 'subscribe'])->name('shop.subscribe');
+    Route::post('subscribe', [SubscriptionController::class, 'subscribe'])->name('shop.subscribe');
 
     Route::get('unsubscribe/{token}', [SubscriptionController::class, 'unsubscribe'])->name('shop.unsubscribe');
 
@@ -86,6 +87,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     Route::get('product/{id}/{attribute_id}', [ProductController::class, 'download'])->defaults('_config', [
         'view' => 'shop.products.index',
     ])->name('shop.product.file.download');
+
+    Route::get('booking-slots/{id}', [BookingProductController::class, 'index'])->name('booking_product.slots.index');
 
     Route::get('categories/filterable-attributes/{categoryId?}', [CategoryController::class, 'getFilterableAttributes'])->name('shop.catalog.categories.filterable_attributes');
 

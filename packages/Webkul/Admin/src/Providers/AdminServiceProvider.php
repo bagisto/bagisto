@@ -5,6 +5,7 @@ namespace Webkul\Admin\Providers;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 use Webkul\Admin\Http\Middleware\Locale;
 use Webkul\Core\Tree;
 
@@ -22,6 +23,8 @@ class AdminServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'admin');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
+
+        Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'admin');
 
         $this->loadPublishers();
 
@@ -72,8 +75,6 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function loadPublishers(): void
     {
-        $this->publishes([__DIR__ . '/../Resources/lang' => lang_path('vendor/admin')]);
-
         $this->publishes([__DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets')], 'public');
     }
 
