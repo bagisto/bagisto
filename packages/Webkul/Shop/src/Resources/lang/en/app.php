@@ -1,6 +1,52 @@
 <?php
 
 return [
+    'customers' => [
+
+        'account' => [
+            
+            'addresses' => [
+                'title'           => 'Address',
+                'edit'            => 'Edit',
+                'add-address'     => 'Add Address',
+                'comapny-name'    => 'Company Name',
+                'vat-id'          => 'Vat ID',
+                'address-1'       => 'Address 1',
+                'address-2'       => 'Address 2',
+                'city'            => 'City',
+                'state'           => 'State',
+                'country'         => 'Country',
+                'default-address' => 'Default Address',
+                'first-name'      => 'First Name',
+                'last-name'       => 'Last Name',
+                'phone'           => 'Phone',
+                'street-address'  => 'Street Address',
+                'post-code'       => 'Post Code',
+                'create'          => [
+                    'success' => 'Address have been successfully added.',
+                ]
+            ],
+
+            'orders' => [
+                'title'      => 'Orders',
+                'order_id'   => 'Order Id',
+                'order_date' => 'Order Date',
+                'total'      => 'Total',
+                'status'     => 'Status',
+                'action'     => 'Action',
+            ],
+
+            'reviews'    => [
+                'title'  => 'Reviews',
+            ],
+
+            'profile' => 'Profile',
+
+        ]
+
+    ],
+
+
     'invalid_vat_format' => 'The given vat id has a wrong format',
     'security-warning'   => 'Suspicious activity found!!!',
     'nothing-to-delete'  => 'Nothing to delete',

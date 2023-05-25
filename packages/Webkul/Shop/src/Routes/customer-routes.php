@@ -114,19 +114,18 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Profile.
                      */
-                    Route::get('profile', [CustomerController::class, 'index'])->name('shop.customer.profile.index');
+                    Route::controller(CustomerController::class)->prefix('profile')->group(function () {
+                        Route::get('', 'index')->name('shop.customer.profile.index');
 
-                    Route::get('profile/edit', [CustomerController::class, 'edit'])->defaults('_config', [
-                        'view' => 'shop::customers.account.profile.edit',
-                    ])->name('shop.customer.profile.edit');
+                        Route::get('edit', 'edit')->name('shop.customer.profile.edit');
 
-                    Route::post('profile/edit', [CustomerController::class, 'update'])->defaults('_config', [
-                        'redirect' => 'shop.customer.profile.index',
-                    ])->name('shop.customer.profile.store');
+                        Route::post('edit', 'update')->name('shop.customer.profile.store');
 
-                    Route::post('profile/destroy', [CustomerController::class, 'destroy'])->defaults('_config', [
-                        'redirect' => 'shop.customer.profile.index',
-                    ])->name('shop.customer.profile.destroy');
+                        Route::post('destroy', 'destroy')->name('shop.customer.profile.destroy');
+
+                        // product reviews 
+                        Route::get('reviews', 'reviews')->name('shop.customer.reviews.index');
+                    });
 
                     /**
                      * Addresses.
@@ -194,9 +193,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Reviews.
                      */
-                    Route::get('reviews', [CustomerController::class, 'reviews'])->defaults('_config', [
-                        'view' => 'shop::customers.account.reviews.index',
-                    ])->name('shop.customer.reviews.index');
 
                     Route::delete('reviews/delete/{id}', [ReviewController::class, 'destroy'])->defaults('_config', [
                         'redirect' => 'shop.customer.reviews.index',
