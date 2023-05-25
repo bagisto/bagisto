@@ -20,9 +20,8 @@
                 </p>
                 
                 <x-shop::form
-               
-                :action="route('shop.subscribe')"
-                class="rounded mt-[10px] max-sm:mt-[30px]"
+                    :action="route('shop.subscribe')"
+                    class="rounded mt-[10px] max-sm:mt-[30px]"
                 >
                     <label for="organic-search" class="sr-only">Search</label>
 
@@ -43,7 +42,8 @@
                     >
                     </x-shop::form.control-group.error>
 
-                        <button type="submit"
+                        <button 
+                            type="submit"
                             class="w-max px-[26px] py-[13px] bg-white rounded-[12px] text-[12px] font-medium absolute top-[8px] right-[8px] flex items-center"
                         >
                             @lang('shop::app.subscription.subscribe') 
