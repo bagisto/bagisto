@@ -28,19 +28,16 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             /**
              * Forgot password routes.
              */
-            Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->defaults('_config', [
-                'view' => 'shop::customers.signup.forgot-password',
-            ])->name('shop.customer.forgot_password.create');
+            Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('shop.customer.forgot_password.create');
 
             Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('shop.customer.forgot_password.store');
 
-            Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->defaults('_config', [
-                'view' => 'shop::customers.signup.reset-password',
-            ])->name('shop.customer.reset_password.create');
+            /**
+             * Reset password routes.
+             */
+            Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->name('shop.customer.reset_password.create');
 
-            Route::post('/reset-password', [ResetPasswordController::class, 'store'])->defaults('_config', [
-                'redirect' => 'shop.customer.profile.index',
-            ])->name('shop.customer.reset_password.store');
+            Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('shop.customer.reset_password.store');
 
             /**
              * Login routes.
@@ -52,13 +49,9 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             /**
              * Registration routes.
              */
-            Route::get('register', [RegistrationController::class, 'show'])->defaults('_config', [
-                'view' => 'shop::customers.signup.index',
-            ])->name('shop.customer.register.index');
+            Route::get('register', [RegistrationController::class, 'show'])->name('shop.customer.register.index');
 
-            Route::post('register', [RegistrationController::class, 'create'])->defaults('_config', [
-                'redirect' => 'shop.customer.session.index',
-            ])->name('shop.customer.register.create');
+            Route::post('register', [RegistrationController::class, 'create'])->name('shop.customer.register.create');
 
             /**
              * Customer verification routes.
@@ -114,19 +107,17 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Profile.
                      */
-                    Route::get('profile', [CustomerController::class, 'index'])->name('shop.customer.profile.index');
+                    Route::controller(CustomerController::class)->prefix('profile')->group(function () {
+                        Route::get('', 'index')->name('shop.customer.profile.index');
 
-                    Route::get('profile/edit', [CustomerController::class, 'edit'])->defaults('_config', [
-                        'view' => 'shop::customers.account.profile.edit',
-                    ])->name('shop.customer.profile.edit');
+                        Route::get('edit', 'edit')->name('shop.customer.profile.edit');
 
-                    Route::post('profile/edit', [CustomerController::class, 'update'])->defaults('_config', [
-                        'redirect' => 'shop.customer.profile.index',
-                    ])->name('shop.customer.profile.store');
+                        Route::post('edit', 'update')->name('shop.customer.profile.store');
 
-                    Route::post('profile/destroy', [CustomerController::class, 'destroy'])->defaults('_config', [
-                        'redirect' => 'shop.customer.profile.index',
-                    ])->name('shop.customer.profile.destroy');
+                        Route::post('destroy', 'destroy')->name('shop.customer.profile.destroy');
+
+                        Route::get('reviews', 'reviews')->name('shop.customer.reviews.index');
+                    });
 
                     /**
                      * Addresses.
@@ -195,10 +186,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Reviews.
                      */
-                    Route::get('reviews', [CustomerController::class, 'reviews'])->defaults('_config', [
-                        'view' => 'shop::customers.account.reviews.index',
-                    ])->name('shop.customer.reviews.index');
-
                     Route::delete('reviews/delete/{id}', [ReviewController::class, 'destroy'])->defaults('_config', [
                         'redirect' => 'shop.customer.reviews.index',
                     ])->name('shop.customer.review.delete');

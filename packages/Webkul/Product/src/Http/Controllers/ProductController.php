@@ -4,19 +4,19 @@ namespace Webkul\Product\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Admin\DataGrids\ProductDataGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Core\Rules\Slug;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Helpers\ProductType;
+use Webkul\Product\Http\Requests\InventoryRequest;
+use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Admin\DataGrids\ProductDataGrid;
-use Webkul\Product\Helpers\ProductType;
-use Webkul\Product\Http\Requests\ProductForm;
-use Webkul\Product\Http\Requests\InventoryRequest;
-use Webkul\Core\Contracts\Validations\Slug;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {
@@ -49,8 +49,7 @@ class ProductController extends Controller
         protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         protected ProductInventoryRepository $productInventoryRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
     }
 

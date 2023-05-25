@@ -1,61 +1,77 @@
-@extends('shop::layouts.master')
+<x-shop::layouts>
+    <div class="container mt-20 max-1180:px-[20px]">
+        <div
+            class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
+        >
+            <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
+                @lang('shop::app.customer.forgot-password.title')
+            </h1>
 
-@section('page_title')
- {{ __('shop::app.customer.forgot-password.page_title') }}
-@stop
+            <p class="text-[#7D7D7D] text-[20px] mt-[15px] max-sm:text-[16px]">
+                @lang('shop::app.customer.forgot-password.forgot-password-text')
+            </p>
 
-@push('css')
-    <style>
-        .button-group {
-            margin-bottom: 25px;
-        }
-        .primary-back-icon {
-            vertical-align: middle;
-        }
-    </style>
-@endpush
+            {!! view_render_event('bagisto.shop.customers.forget_password.before') !!}
 
-@section('content-wrapper')
+            <x-shop::form
+                :action="route('shop.customer.forgot_password.store')"
+                class="rounded mt-[60px] max-sm:mt-[30px]"
+            >
 
-<div class="auth-content">
+                {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
 
-    {!! view_render_event('bagisto.shop.customers.forget_password.before') !!}
+                <x-shop::form.control-group class="mb-4">
+                    <x-shop::form.control-group.label>
+                        @lang('shop::app.customer.login-form.email')
+                    </x-shop::form.control-group.label>
 
-    <form method="post" action="{{ route('shop.customer.forgot_password.store') }}" @submit.prevent="onSubmit">
+                    <x-shop::form.control-group.control
+                        type="email"
+                        name="email"
+                        value=""
+                        rules="required|email"
+                        label="Email"
+                        placeholder="email@example.com"
+                    >
+                    </x-shop::form.control-group.control>
 
-        {{ csrf_field() }}
+                    <x-shop::form.control-group.error
+                        control-name="email"
+                    >
+                    </x-shop::form.control-group.error>
+                </x-shop::form.control-group>
 
-        <div class="login-form">
+                {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
 
-            <div class="login-text">{{ __('shop::app.customer.forgot-password.title') }}</div>
+                <div>
 
-            {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
+                    {!! Captcha::render() !!}
 
-            <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                <label for="email">{{ __('shop::app.customer.forgot-password.email') }}</label>
-                <input type="email" class="control" name="email" v-validate="'required|email'">
-                <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
-            </div>
+                </div>
 
-            {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
+                <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
+                    <button
+                        class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                        type="submit"
+                    >
+                        @lang('shop::app.customer.forgot-password.submit')
+                    </button>
+                </div>
 
-            <div class="button-group">
-                <button type="submit" class="btn btn-lg btn-primary">
-                    {{ __('shop::app.customer.forgot-password.submit') }}
-                </button>
-            </div>
+                {!! view_render_event('bagisto.shop.customers.forget_password.after') !!}
 
-            <div class="control-group" style="margin-bottom: 0px;">
-                <a href="{{ route('shop.customer.session.index') }}">
-                    <i class="icon primary-back-icon"></i>
-                    {{ __('shop::app.customer.reset-password.back-link-title') }}
-                </a>
-            </div>
+            </x-shop::form>
 
         </div>
-    </form>
 
-    {!! view_render_event('bagisto.shop.customers.forget_password.before') !!}
+        <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
+            @lang('shop::app.customer.login-form.footer')
+        </p>
+    </div>
 
-</div>
-@endsection
+    @push('scripts')
+
+        {!! Captcha::renderJS() !!}
+    
+    @endpush
+</x-shop::layouts>

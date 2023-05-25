@@ -1,52 +1,111 @@
-@extends('shop::layouts.master')
+<x-shop::layouts>
+    <div class="container mt-20 max-1180:px-[20px]">
+        <div
+            class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
+        >
+            <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
+                @lang('shop::app.customer.reset-password.title')
+            </h1>
 
-@section('page_title')
- {{ __('shop::app.customer.reset-password.title') }}
-@endsection
+            {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
 
-@section('content-wrapper')
+            <x-shop::form
+                :action="route('shop.customer.reset_password.store')"
+                class="rounded mt-[60px] max-sm:mt-[30px]"
+            >
+                <x-shop::form.control-group.control
+                    type="hidden"
+                    name="token"
+                    :value="$token"       
+                >
+                </x-shop::form.control-group.control>
 
-<div class="auth-content">
+                {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.before') !!}
 
-    {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
+                <x-shop::form.control-group class="mb-4">
+                    <x-shop::form.control-group.label>
+                        @lang('shop::app.customer.reset-password.email')
+                    </x-shop::form.control-group.label>
 
-    <form method="post" action="{{ route('shop.customer.reset_password.store') }}" >
+                    <x-shop::form.control-group.control
+                        type="email"
+                        name="email"
+                        :value="old('email')"
+                        id="email" 
+                        rules="required|email"
+                        label="Email"
+                        placeholder="email@example.com"
+                    >
+                    </x-shop::form.control-group.control>
 
-        {{ csrf_field() }}
+                    <x-shop::form.control-group.error
+                        control-name="email"
+                    >
+                    </x-shop::form.control-group.error>
+                </x-shop::form.control-group>
 
-        <div class="login-form">
+                <x-shop::form.control-group class="mb-6">
+                    <x-shop::form.control-group.label>
+                        @lang('shop::app.customer.reset-password.password')
+                    </x-shop::form.control-group.label>
 
-            <div class="login-text">{{ __('shop::app.customer.reset-password.title') }}</div>
+                    <x-shop::form.control-group.control
+                        type="password"
+                        name="password"
+                        value=""
+                        ref="password"
+                        rules="required|min:6"
+                        label="Password"
+                        placeholder="Password"
+                    >
+                    </x-shop::form.control-group.control>
 
-            <input type="hidden" name="token" value="{{ old('token') ?: $token }}">
+                    <x-shop::form.control-group.error
+                        control-name="password"
+                    >
+                    </x-shop::form.control-group.error>
+                </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.before') !!}
+                <x-shop::form.control-group class="mb-6">
+                    <x-shop::form.control-group.label>
+                        @lang('shop::app.customer.reset-password.confirm-password')
+                    </x-shop::form.control-group.label>
 
-            <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                <label for="email">{{ __('shop::app.customer.reset-password.email') }}</label>
-                <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ old('email') }}"/>
-                <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
-            </div>
+                    <x-shop::form.control-group.control
+                        type="password"
+                        name="password_confirmation"
+                        value=""
+                        rules="confirmed:@password"
+                        label="Confirm Password"
+                        placeholder="Confirm Password"
+                    >
+                    </x-shop::form.control-group.control>
 
-            <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                <label for="password">{{ __('shop::app.customer.reset-password.password') }}</label>
-                <input type="password" class="control" name="password" v-validate="'required|min:6'" ref="password">
-                <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
-            </div>
+                    <x-shop::form.control-group.error
+                        control-name="password"
+                    >
+                    </x-shop::form.control-group.error>
+                </x-shop::form.control-group>
 
-            <div class="control-group" :class="[errors.has('confirm_password') ? 'has-error' : '']">
-                <label for="confirm_password">{{ __('shop::app.customer.reset-password.confirm-password') }}</label>
-                <input type="password" class="control" name="password_confirmation"  v-validate="'required|min:6|confirmed:password'">
-                <span class="control-error" v-if="errors.has('confirm_password')">@{{ errors.first('confirm_password') }}</span>
-            </div>
+               {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.before') !!}
 
-            {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.before') !!}
+                <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
+                    <button
+                        class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                        type="submit"
+                    >
+                        @lang('shop::app.customer.reset-password.submit-btn-title')
+                    </button>
+                </div>
 
-            <input class="btn btn-primary btn-lg" type="submit" value="{{ __('shop::app.customer.reset-password.submit-btn-title') }}">
+            </x-shop::form>
+
+            {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
 
         </div>
-    </form>
 
-    {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
-</div>
-@endsection
+        <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
+            @lang('shop::app.customer.login-form.footer')
+        </p>
+    </div>
+</x-shop::layouts>
