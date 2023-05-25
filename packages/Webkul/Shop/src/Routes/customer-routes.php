@@ -161,13 +161,12 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Downloadable products.
                      */
-                    Route::get('downloadable-products', [DownloadableProductController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.downloadable_products.index',
-                    ])->name('shop.customer.downloadable_products.index');
+                    Route::controller(DownloadableProductController::class)->prefix('downloadable-products')->group(function () {
+                        Route::get('', 'index')->name('shop.customer.downloadable_products.index');
 
-                    Route::get('downloadable-products/download/{id}', [DownloadableProductController::class, 'download'])->defaults('_config', [
-                        'view' => 'shop::customers.account.downloadable_products.index',
-                    ])->name('shop.customer.downloadable_products.download');
+                        Route::get('download/{id}', 'download')->name('shop.customer.downloadable_products.download');
+                    });
+
 
                     /**
                      * Reviews.

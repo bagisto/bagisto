@@ -42,6 +42,19 @@ return [
                 'empty-review'  => 'You have not reviewed any product yet',
             ],
 
+            'downloadable-products'  => [
+                'name'                => 'Downloadable Products',
+                'orderId'             => 'Order Id',
+                'title'               => 'Title',
+                'date'                => 'Date',
+                'status'              => 'Status',
+                'remaining-downloads' => 'Remaining Downloads',
+                'records-found'       => 'Record(s) found',
+                'empty-product'       => 'You don’t have a product to download',
+                'download-error'      => 'Download link has been expired.',
+                'payment-error'       => 'Payment has not been done for this download.',
+            ],
+
             'profile' => 'Profile',
 
         ],
