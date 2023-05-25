@@ -3,13 +3,13 @@
         <div class=max-lg:hidden">
             <div class="flex gap-x-[4px] items-center mb-[10px]">
                 <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']">
-                    {{ trans('shop::app.customers.account.profile')}}
+                    @lang('shop::app.customers.account.profile')
                 </p>
                 <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">
-                    {{ trans('shop::app.customers.account.downloadable-products.name')}}
+                    @lang('shop::app.customers.account.downloadable-products.name')
                 </p>
             </div>
-            <h2 class="text-[26px] font-medium">{{ trans('shop::app.customers.account.downloadable-products.name')}}</h2>
+            <h2 class="text-[26px] font-medium"> @lang('shop::app.customers.account.downloadable-products.name') </h2>
 
             <div class="relative overflow-x-auto border border-b-0  rounded-[12px] mt-[30px]">
                 <table class="w-full text-sm text-left">
@@ -17,19 +17,19 @@
                     <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
                         <tr>
                             <th scope="col" class="px-6 py-[16px] font-medium">
-                                {{ trans('shop::app.customers.account.downloadable-products.orderId')}}
+                                @lang('shop::app.customers.account.downloadable-products.orderId')
                             </th>
                             <th scope="col" class="px-6 py-[16px] font-medium">
-                                {{ trans('shop::app.customers.account.downloadable-products.title')}}
+                                @lang('shop::app.customers.account.downloadable-products.title')
                             </th>
                             <th scope="col" class="px-6 py-[16px] font-medium">
-                                {{ trans('shop::app.customers.account.downloadable-products.date')}}
+                                @lang('shop::app.customers.account.downloadable-products.date')
                             </th>
                             <th scope="col" class="px-6 py-[16px] font-medium">
-                                {{ trans('shop::app.customers.account.downloadable-products.status')}}
+                                @lang('shop::app.customers.account.downloadable-products.status')
                             </th>
                             <th scope="col" class="px-6 py-[16px] font-medium">
-                                {{ trans('shop::app.customers.account.downloadable-products.remaining-downloads')}}
+                                @lang('shop::app.customers.account.downloadable-products.remaining-downloads')
                             </th>
                         </tr>
                     </thead>
@@ -62,7 +62,7 @@
 
             <p class="text-[14px] text-right font-medium mt-[20px]"> 
                 {{ $downloadableLinkPurchased->count() }}
-                {{ trans('shop::app.customers.account.downloadable-products.records-found')}}
+                @lang('shop::app.customers.account.downloadable-products.records-found')
             </p>
         </div>
     </div>
