@@ -206,6 +206,10 @@ class CustomerController extends Controller
     {
         $reviews = $this->productReviewRepository->getCustomerReview();
 
+        if ($reviews->isEmpty()) {
+            return view('shop::customers.account.reviews.empty');
+        }
+
         return view('shop::customers.account.reviews.index', compact('reviews'));
     }
 }

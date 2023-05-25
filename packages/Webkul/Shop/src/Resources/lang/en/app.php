@@ -38,6 +38,7 @@ return [
 
             'reviews'    => [
                 'title'  => 'Reviews',
+                'empty-review'  => 'You have not reviewed any product yet',
             ],
 
             'profile' => 'Profile',
