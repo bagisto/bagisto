@@ -3,10 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\DataGrids\CustomerGroupDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Rules\Code;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Core\Contracts\Validations\Code;
 
 class CustomerGroupController extends Controller
 {
@@ -66,7 +66,7 @@ class CustomerGroupController extends Controller
 
         Event::dispatch('customer.customer_group.create.before');
 
-        $customerGroup = $this->customerGroupRepository->create(array_merge(request()->all() , [
+        $customerGroup = $this->customerGroupRepository->create(array_merge(request()->all(), [
             'is_user_defined' => 1,
         ]));
 
@@ -144,7 +144,8 @@ class CustomerGroupController extends Controller
             Event::dispatch('customer.customer_group.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.customers.groups.delete-success')]);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         return response()->json(['message' => trans('admin::app.customers.groups.delete-failed')], 500);
     }

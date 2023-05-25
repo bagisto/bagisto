@@ -3,10 +3,10 @@
 namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Admin\DataGrids\AttributeDataGrid;
-use Webkul\Core\Contracts\Validations\Code;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Rules\Code;
+use Webkul\Product\Repositories\ProductRepository;
 
 class AttributeController extends Controller
 {
@@ -21,7 +21,7 @@ class AttributeController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository  
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(
@@ -156,7 +156,8 @@ class AttributeController extends Controller
             Event::dispatch('catalog.attribute.delete.after', $id);
 
             return response()->json(['message' => trans('admin::app.catalog.attributes.delete-success')]);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         return response()->json(['message' => trans('admin::app.catalog.attributes.delete-failed')], 500);
     }
@@ -203,14 +204,14 @@ class AttributeController extends Controller
      * @param  int  $id
      * @return  \Illuminate\Http\JsonResponse
      */
-    public function productSuperAttributes($id) 
+    public function productSuperAttributes($id)
     {
         $product = $this->productRepository->findOrFail($id);
 
         $superAttributes = $this->productRepository->getSuperAttributes($product);
 
         return response()->json([
-            'data'  => $superAttributes
+            'data'  => $superAttributes,
         ]);
     }
 }
