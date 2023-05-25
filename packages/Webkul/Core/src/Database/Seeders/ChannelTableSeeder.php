@@ -29,27 +29,57 @@ class ChannelTableSeeder extends Seeder
                 'name'              => 'Default',
                 'home_page_content' => '',
                 'footer_content'    => '
-                    <div class="list-container">
-                        <span class="list-heading">Quick Links</span>
-                        <ul class="list-group">
-                            <li><a href="'.route('shop.cms.page', 'about-us').'">About Us</a></li>
-                            <li><a href="'.route('shop.cms.page', 'return-policy').'">Return Policy</a></li>
-                            <li><a href="'.route('shop.cms.page', 'refund-policy') .'">Refund Policy</a></li>
-                            <li><a href="'.route('shop.cms.page', 'terms-conditions').'">Terms and conditions</a></li>
-                            <li><a href="'.route('shop.cms.page', 'terms-of-use').'">Terms of Use</a></li>
-                            <li><a href="'.route('shop.cms.page', 'contact-us') .'">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="list-container">
-                        <span class="list-heading">Connect With Us</span>
-                            <ul class="list-group">
-                                <li><a href="#"><span class="icon icon-facebook"></span>Facebook </a></li>
-                                <li><a href="#"><span class="icon icon-twitter"></span> Twitter </a></li>
-                                <li><a href="#"><span class="icon icon-instagram"></span> Instagram </a></li>
-                                <li><a href="#"> <span class="icon icon-google-plus"></span>Google+ </a></li>
-                                <li><a href="#"> <span class="icon icon-linkedin"></span>LinkedIn </a></li>
-                            </ul>
-                        </div>
+                    <ul class="grid gap-[20px] text-[14px]">
+                        <li>
+                            <a href="' . route('shop.cms.page', 'about-us') . '">
+                                ' . trans('shop::app.footer.about-us') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'customer-service') . '">
+                                ' . trans('shop::app.footer.customer-service') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'whats-new') . '">
+                                ' . trans('shop::app.footer.whats-new') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'contact-us') . '">
+                                ' . trans('shop::app.footer.contact-us') . '
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="grid gap-[20px] text-[14px]">
+                        <li>
+                            <a href="' . route('shop.cms.page', 'order-return') . '">
+                                ' . trans('shop::app.footer.order-return') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'payment-policy') . '">
+                                ' . trans('shop::app.footer.payment-policy') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'shipping-policy') . '">
+                                ' . trans('shop::app.footer.shipping-policy') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
+                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
+                            </a>
+                        </li>
+                    </ul>
                 ',
                 'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
             ], [
@@ -61,36 +91,66 @@ class ChannelTableSeeder extends Seeder
                     <p>@include("shop::home.slider") @include("shop::home.featured-products") @include("shop::home.new-products")</p>
                         <div class="banner-container">
                         <div class="left-banner">
-                            <img src='.asset("/themes/default/assets/images/1.webp").' data-src='.asset("/themes/default/assets/images/1.webp").' class="lazyload" alt="test" width="720" height="720" />
+                            <img src=' . asset('/themes/default/assets/images/1.webp') . ' data-src=' . asset('/themes/default/assets/images/1.webp') . ' class="lazyload" alt="test" width="720" height="720" />
                         </div>
                         <div class="right-banner">
-                            <img src='. asset("/themes/default/assets/images/2.webp").' data-src='. asset("/themes/default/assets/images/2.webp").' class="lazyload" alt="test" width="460" height="330" />
-                            <img src='.asset("/themes/default/assets/images/3.webp").' data-src='.asset("/themes/default/assets/images/3.webp").'  class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/2.webp') . ' data-src=' . asset('/themes/default/assets/images/2.webp') . ' class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/3.webp') . ' data-src=' . asset('/themes/default/assets/images/3.webp') . '  class="lazyload" alt="test" width="460" height="330" />
                         </div>
                     </div>
                 ',
                 'footer_content'    => '
-                    <div class="list-container">
-                        <span class="list-heading">Quick Links</span>
-                        <ul class="list-group">
-                            <li><a href="'.route('shop.cms.page', 'about-us').'">About Us</a></li>
-                            <li><a href="'.route('shop.cms.page', 'return-policy').'">Return Policy</a></li>
-                            <li><a href="'.route('shop.cms.page', 'refund-policy') .'">Refund Policy</a></li>
-                            <li><a href="'.route('shop.cms.page', 'terms-conditions').'">Terms and conditions</a></li>
-                            <li><a href="'.route('shop.cms.page', 'terms-of-use').'">Terms of Use</a></li>
-                            <li><a href="'.route('shop.cms.page', 'contact-us') .'">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="list-container">
-                        <span class="list-heading">Connect With Us</span>
-                            <ul class="list-group">
-                                <li><a href="#"><span class="icon icon-facebook"></span>Facebook </a></li>
-                                <li><a href="#"><span class="icon icon-twitter"></span> Twitter </a></li>
-                                <li><a href="#"><span class="icon icon-instagram"></span> Instagram </a></li>
-                                <li><a href="#"> <span class="icon icon-google-plus"></span>Google+ </a></li>
-                                <li><a href="#"> <span class="icon icon-linkedin"></span>LinkedIn </a></li>
-                            </ul>
-                        </div>
+                    <ul class="grid gap-[20px] text-[14px]">
+                        <li>
+                            <a href="' . route('shop.cms.page', 'about-us') . '">
+                                ' . trans('shop::app.footer.about-us') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'customer-service') . '">
+                                ' . trans('shop::app.footer.customer-service') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'whats-new') . '">
+                                ' . trans('shop::app.footer.whats-new') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'contact-us') . '">
+                                ' . trans('shop::app.footer.contact-us') . '
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="grid gap-[20px] text-[14px]">
+                        <li>
+                            <a href="' . route('shop.cms.page', 'order-return') . '">
+                                ' . trans('shop::app.footer.order-return') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'payment-policy') . '">
+                                ' . trans('shop::app.footer.payment-policy') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'shipping-policy') . '">
+                                ' . trans('shop::app.footer.shipping-policy') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
+                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
+                            </a>
+                        </li>
+                    </ul>
                 ',
                 'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
             ], [
@@ -102,36 +162,66 @@ class ChannelTableSeeder extends Seeder
                     <p>@include("shop::home.slider") @include("shop::home.featured-products") @include("shop::home.new-products")</p>
                         <div class="banner-container">
                         <div class="left-banner">
-                            <img src='.asset("/themes/default/assets/images/1.webp").' data-src='.asset("/themes/default/assets/images/1.webp").' class="lazyload" alt="test" width="720" height="720" />
+                            <img src=' . asset('/themes/default/assets/images/1.webp') . ' data-src=' . asset('/themes/default/assets/images/1.webp') . ' class="lazyload" alt="test" width="720" height="720" />
                         </div>
                         <div class="right-banner">
-                            <img src='. asset("/themes/default/assets/images/2.webp").' data-src='. asset("/themes/default/assets/images/2.webp").' class="lazyload" alt="test" width="460" height="330" />
-                            <img src='.asset("/themes/default/assets/images/3.webp").' data-src='.asset("/themes/default/assets/images/3.webp").'  class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/2.webp') . ' data-src=' . asset('/themes/default/assets/images/2.webp') . ' class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/3.webp') . ' data-src=' . asset('/themes/default/assets/images/3.webp') . '  class="lazyload" alt="test" width="460" height="330" />
                         </div>
                     </div>
                 ',
                 'footer_content'    => '
-                    <div class="list-container">
-                        <span class="list-heading">Quick Links</span>
-                        <ul class="list-group">
-                            <li><a href="'.route('shop.cms.page', 'about-us').'">About Us</a></li>
-                            <li><a href="'.route('shop.cms.page', 'return-policy').'">Return Policy</a></li>
-                            <li><a href="'.route('shop.cms.page', 'refund-policy') .'">Refund Policy</a></li>
-                            <li><a href="'.route('shop.cms.page', 'terms-conditions').'">Terms and conditions</a></li>
-                            <li><a href="'.route('shop.cms.page', 'terms-of-use').'">Terms of Use</a></li>
-                            <li><a href="'.route('shop.cms.page', 'contact-us') .'">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="list-container">
-                        <span class="list-heading">Connect With Us</span>
-                            <ul class="list-group">
-                                <li><a href="#"><span class="icon icon-facebook"></span>Facebook </a></li>
-                                <li><a href="#"><span class="icon icon-twitter"></span> Twitter </a></li>
-                                <li><a href="#"><span class="icon icon-instagram"></span> Instagram </a></li>
-                                <li><a href="#"> <span class="icon icon-google-plus"></span>Google+ </a></li>
-                                <li><a href="#"> <span class="icon icon-linkedin"></span>LinkedIn </a></li>
-                            </ul>
-                        </div>
+                    <ul class="grid gap-[20px] text-[14px]">
+                        <li>
+                            <a href="' . route('shop.cms.page', 'about-us') . '">
+                                ' . trans('shop::app.footer.about-us') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'customer-service') . '">
+                                ' . trans('shop::app.footer.customer-service') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'whats-new') . '">
+                                ' . trans('shop::app.footer.whats-new') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'contact-us') . '">
+                                ' . trans('shop::app.footer.contact-us') . '
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="grid gap-[20px] text-[14px]">
+                        <li>
+                            <a href="' . route('shop.cms.page', 'order-return') . '">
+                                ' . trans('shop::app.footer.order-return') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'payment-policy') . '">
+                                ' . trans('shop::app.footer.payment-policy') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'shipping-policy') . '">
+                                ' . trans('shop::app.footer.shipping-policy') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
+                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
+                            </a>
+                        </li>
+                    </ul>
                 ',
                 'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
             ], [
@@ -143,36 +233,66 @@ class ChannelTableSeeder extends Seeder
                     <p>@include("shop::home.slider") @include("shop::home.featured-products") @include("shop::home.new-products")</p>
                         <div class="banner-container">
                         <div class="left-banner">
-                            <img src='.asset("/themes/default/assets/images/1.webp").' data-src='.asset("/themes/default/assets/images/1.webp").' class="lazyload" alt="test" width="720" height="720" />
+                            <img src=' . asset('/themes/default/assets/images/1.webp') . ' data-src=' . asset('/themes/default/assets/images/1.webp') . ' class="lazyload" alt="test" width="720" height="720" />
                         </div>
                         <div class="right-banner">
-                            <img src='. asset("/themes/default/assets/images/2.webp").' data-src='. asset("/themes/default/assets/images/2.webp").' class="lazyload" alt="test" width="460" height="330" />
-                            <img src='.asset("/themes/default/assets/images/3.webp").' data-src='.asset("/themes/default/assets/images/3.webp").'  class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/2.webp') . ' data-src=' . asset('/themes/default/assets/images/2.webp') . ' class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/3.webp') . ' data-src=' . asset('/themes/default/assets/images/3.webp') . '  class="lazyload" alt="test" width="460" height="330" />
                         </div>
                     </div>
                 ',
                 'footer_content'    => '
-                    <div class="list-container">
-                        <span class="list-heading">Quick Links</span>
-                        <ul class="list-group">
-                            <li><a href="'.route('shop.cms.page', 'about-us').'">About Us</a></li>
-                            <li><a href="'.route('shop.cms.page', 'return-policy').'">Return Policy</a></li>
-                            <li><a href="'.route('shop.cms.page', 'refund-policy') .'">Refund Policy</a></li>
-                            <li><a href="'.route('shop.cms.page', 'terms-conditions').'">Terms and conditions</a></li>
-                            <li><a href="'.route('shop.cms.page', 'terms-of-use').'">Terms of Use</a></li>
-                            <li><a href="'.route('shop.cms.page', 'contact-us') .'">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="list-container">
-                        <span class="list-heading">Connect With Us</span>
-                            <ul class="list-group">
-                                <li><a href="#"><span class="icon icon-facebook"></span>Facebook </a></li>
-                                <li><a href="#"><span class="icon icon-twitter"></span> Twitter </a></li>
-                                <li><a href="#"><span class="icon icon-instagram"></span> Instagram </a></li>
-                                <li><a href="#"> <span class="icon icon-google-plus"></span>Google+ </a></li>
-                                <li><a href="#"> <span class="icon icon-linkedin"></span>LinkedIn </a></li>
-                            </ul>
-                        </div>
+                    <ul class="grid gap-[20px] text-[14px]">
+                        <li>
+                            <a href="' . route('shop.cms.page', 'about-us') . '">
+                                ' . trans('shop::app.footer.about-us') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'customer-service') . '">
+                                ' . trans('shop::app.footer.customer-service') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'whats-new') . '">
+                                ' . trans('shop::app.footer.whats-new') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'contact-us') . '">
+                                ' . trans('shop::app.footer.contact-us') . '
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="grid gap-[20px] text-[14px]">
+                        <li>
+                            <a href="' . route('shop.cms.page', 'order-return') . '">
+                                ' . trans('shop::app.footer.order-return') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'payment-policy') . '">
+                                ' . trans('shop::app.footer.payment-policy') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'shipping-policy') . '">
+                                ' . trans('shop::app.footer.shipping-policy') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
+                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
+                            </a>
+                        </li>
+                    </ul>
                 ',
                 'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
             ], [
@@ -184,39 +304,69 @@ class ChannelTableSeeder extends Seeder
                     <p>@include("shop::home.slider") @include("shop::home.featured-products") @include("shop::home.new-products")</p>
                         <div class="banner-container">
                         <div class="left-banner">
-                            <img src='.asset("/themes/default/assets/images/1.webp").' data-src='.asset("/themes/default/assets/images/1.webp").' class="lazyload" alt="test" width="720" height="720" />
+                            <img src=' . asset('/themes/default/assets/images/1.webp') . ' data-src=' . asset('/themes/default/assets/images/1.webp') . ' class="lazyload" alt="test" width="720" height="720" />
                         </div>
                         <div class="right-banner">
-                            <img src='. asset("/themes/default/assets/images/2.webp").' data-src='. asset("/themes/default/assets/images/2.webp").' class="lazyload" alt="test" width="460" height="330" />
-                            <img src='.asset("/themes/default/assets/images/3.webp").' data-src='.asset("/themes/default/assets/images/3.webp").'  class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/2.webp') . ' data-src=' . asset('/themes/default/assets/images/2.webp') . ' class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/3.webp') . ' data-src=' . asset('/themes/default/assets/images/3.webp') . '  class="lazyload" alt="test" width="460" height="330" />
                         </div>
                     </div>
                 ',
                 'footer_content'    => '
-                    <div class="list-container">
-                        <span class="list-heading">Quick Links</span>
-                        <ul class="list-group">
-                            <li><a href="'.route('shop.cms.page', 'about-us').'">About Us</a></li>
-                            <li><a href="'.route('shop.cms.page', 'return-policy').'">Return Policy</a></li>
-                            <li><a href="'.route('shop.cms.page', 'refund-policy') .'">Refund Policy</a></li>
-                            <li><a href="'.route('shop.cms.page', 'terms-conditions').'">Terms and conditions</a></li>
-                            <li><a href="'.route('shop.cms.page', 'terms-of-use').'">Terms of Use</a></li>
-                            <li><a href="'.route('shop.cms.page', 'contact-us') .'">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="list-container">
-                        <span class="list-heading">Connect With Us</span>
-                            <ul class="list-group">
-                                <li><a href="#"><span class="icon icon-facebook"></span>Facebook </a></li>
-                                <li><a href="#"><span class="icon icon-twitter"></span> Twitter </a></li>
-                                <li><a href="#"><span class="icon icon-instagram"></span> Instagram </a></li>
-                                <li><a href="#"> <span class="icon icon-google-plus"></span>Google+ </a></li>
-                                <li><a href="#"> <span class="icon icon-linkedin"></span>LinkedIn </a></li>
-                            </ul>
-                        </div>
+                    <ul class="grid gap-[20px] text-[14px]">
+                        <li>
+                            <a href="' . route('shop.cms.page', 'about-us') . '">
+                                ' . trans('shop::app.footer.about-us') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'customer-service') . '">
+                                ' . trans('shop::app.footer.customer-service') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'whats-new') . '">
+                                ' . trans('shop::app.footer.whats-new') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'contact-us') . '">
+                                ' . trans('shop::app.footer.contact-us') . '
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="grid gap-[20px] text-[14px]">
+                        <li>
+                            <a href="' . route('shop.cms.page', 'order-return') . '">
+                                ' . trans('shop::app.footer.order-return') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'payment-policy') . '">
+                                ' . trans('shop::app.footer.payment-policy') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'shipping-policy') . '">
+                                ' . trans('shop::app.footer.shipping-policy') . '
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
+                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
+                            </a>
+                        </li>
+                    </ul>
                 ',
                 'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
-            ]
+            ],
         ]);
 
         DB::table('channel_currencies')->insert([

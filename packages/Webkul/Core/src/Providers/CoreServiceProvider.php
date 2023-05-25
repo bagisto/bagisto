@@ -5,7 +5,6 @@ namespace Webkul\Core\Providers;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Core;
 use Webkul\Core\Exceptions\Handler;
@@ -29,12 +28,6 @@ class CoreServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
-
-        Validator::extend('slug', 'Webkul\Core\Contracts\Validations\Slug@passes');
-
-        Validator::extend('code', 'Webkul\Core\Contracts\Validations\Code@passes');
-
-        Validator::extend('decimal', 'Webkul\Core\Contracts\Validations\Decimal@passes');
 
         $this->publishes([
             dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),

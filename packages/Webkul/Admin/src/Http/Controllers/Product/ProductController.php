@@ -8,7 +8,7 @@ use Webkul\Admin\DataGrids\ProductDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Core\Contracts\Validations\Slug;
+use Webkul\Core\Rules\Slug;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Http\Requests\InventoryRequest;

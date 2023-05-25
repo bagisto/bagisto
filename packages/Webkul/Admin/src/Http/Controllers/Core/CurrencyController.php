@@ -91,7 +91,7 @@ class CurrencyController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:currencies,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'code' => ['required', 'unique:currencies,code,' . $id, new \Webkul\Core\Rules\Code],
             'name' => 'required',
         ]);
 

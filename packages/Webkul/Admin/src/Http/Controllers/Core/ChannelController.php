@@ -60,7 +60,7 @@ class ChannelController extends Controller
     {
         $data = $this->validate(request(), [
             /* general */
-            'code'                  => ['required', 'unique:channels,code', new \Webkul\Core\Contracts\Validations\Code],
+            'code'                  => ['required', 'unique:channels,code', new \Webkul\Core\Rules\Code],
             'name'                  => 'required',
             'description'           => 'nullable',
             'inventory_sources'     => 'required|array|min:1',
@@ -129,7 +129,7 @@ class ChannelController extends Controller
 
         $data = $this->validate(request(), [
             /* general */
-            'code'                             => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'code'                             => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Rules\Code],
             $locale . '.name'                  => 'required',
             $locale . '.description'           => 'nullable',
             'inventory_sources'                => 'required|array|min:1',

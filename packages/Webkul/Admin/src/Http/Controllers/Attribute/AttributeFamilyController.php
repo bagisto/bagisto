@@ -7,7 +7,7 @@ use Webkul\Admin\DataGrids\AttributeFamilyDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Core\Contracts\Validations\Code;
+use Webkul\Core\Rules\Code;
 
 class AttributeFamilyController extends Controller
 {

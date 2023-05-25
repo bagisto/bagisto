@@ -3,10 +3,10 @@
 namespace Webkul\Inventory\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Contracts\Validations\Address;
-use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
-use Webkul\Core\Contracts\Validations\Code;
-use Webkul\Core\Contracts\Validations\PhoneNumber;
+use Webkul\Core\Rules\Address;
+use Webkul\Core\Rules\AlphaNumericSpace;
+use Webkul\Core\Rules\Code;
+use Webkul\Core\Rules\PhoneNumber;
 
 class InventorySourceRequest extends FormRequest
 {
