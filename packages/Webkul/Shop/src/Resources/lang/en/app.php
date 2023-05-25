@@ -4,7 +4,7 @@ return [
     'customers' => [
 
         'account' => [
-            
+
             'addresses' => [
                 'title'           => 'Address',
                 'edit'            => 'Edit',
@@ -24,7 +24,7 @@ return [
                 'post-code'       => 'Post Code',
                 'create'          => [
                     'success' => 'Address have been successfully added.',
-                ]
+                ],
             ],
 
             'orders' => [
@@ -37,13 +37,13 @@ return [
             ],
 
             'reviews'    => [
-                'title'  => 'Reviews',
+                'title'         => 'Reviews',
                 'empty-review'  => 'You have not reviewed any product yet',
             ],
 
             'profile' => 'Profile',
 
-        ]
+        ],
 
     ],
 
@@ -111,7 +111,7 @@ return [
         'privacy-cookies-policy' => 'Privacy and Cookies Policy',
         'subscribe-stay-touch'   => 'Subscribe to stay in touch.',
         'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
-        'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (Registered in India). All rights reserved.'
+        'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (Registered in India). All rights reserved.',
     ],
 
     'subscription' => [
@@ -557,11 +557,11 @@ return [
     'checkout' => [
         'cart' => [
             'integrity'                 => [
-                'missing_fields'  => 'Some required fields missing for this product.',
-                'missing_options' => 'Options are missing for this product.',
-                'missing_links'   => 'Downloadable links are missing for this product.',
-                'qty_missing'     => 'Atleast one product should have more than 1 quantity.',
-                'qty_impossible'  => 'Cannot add more than one of these products to cart.',
+                'missing_fields'         => 'Some required fields missing for this product.',
+                'missing_options'        => 'Options are missing for this product.',
+                'missing_links'          => 'Downloadable links are missing for this product.',
+                'qty_missing'            => 'Atleast one product should have more than 1 quantity.',
+                'qty_impossible'         => 'Cannot add more than one of these products to cart.',
                 'select_hourly_duration' => 'Select a slot duration of one hour.',
             ],
             'create-error'              => 'Encountered some issue while making cart instance.',
@@ -587,13 +587,13 @@ return [
                 'error'             => 'Cannot update the item(s) at the moment, please try again later.',
             ],
             'item'                      => [
-                'error_remove'   => 'No items to remove from the cart.',
-                'success'        => 'Item is successfully added to cart.',
-                'success-remove' => 'Item is successfully removed from the cart.',
+                'error_remove'       => 'No items to remove from the cart.',
+                'success'            => 'Item is successfully added to cart.',
+                'success-remove'     => 'Item is successfully removed from the cart.',
                 'success-all-remove' => 'All items is successfully removed from the cart.',
-                'error-add'      => 'Item cannot be added to cart, please try again later.',
-                'inactive'       => 'An item is inactive and was removed from cart.',
-                'inactive-add'   => 'Inactive item cannot be added to cart.',
+                'error-add'          => 'Item cannot be added to cart, please try again later.',
+                'inactive'           => 'An item is inactive and was removed from cart.',
+                'inactive-add'       => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error'            => 'Requested quantity is not available.',
             'cart-subtotal'             => 'Cart Subtotal',
@@ -605,7 +605,7 @@ return [
             ],
             'minimum-order-message'     => 'Minimum order amount is :amount',
             'suspended-account-message' => 'Your account has been suspended.',
-            'inactive-account-message' =>  'Your account has been inactive.',
+            'inactive-account-message'  => 'Your account has been inactive.',
             'check-shipping-address'    => 'Please check shipping address.',
             'check-billing-address'     => 'Please check billing address.',
             'specify-shipping-method'   => 'Please specify shipping method.',
@@ -668,22 +668,22 @@ return [
         ],
 
         'total' => [
-            'order-summary'       => 'Order Summary',
-            'sub-total'           => 'Items',
-            'grand-total'         => 'Grand Total',
-            'delivery-charges'    => 'Delivery Charges',
-            'tax'                 => 'Tax',
-            'discount'            => 'Discount',
-            'price'               => 'price',
-            'disc-amount'         => 'Amount discounted',
-            'new-grand-total'     => 'New Grand Total',
-            'coupon'              => 'Coupon',
-            'coupon-applied'      => 'Applied Coupon',
-            'remove-coupon'       => 'Remove Coupon',
-            'cannot-apply-coupon' => 'Cannot Apply Coupon',
-            'invalid-coupon'      => 'Coupon code is invalid.',
-            'success-coupon'      => 'Coupon code applied successfully.',
-            'coupon-apply-issue'  => 'Coupon code can\'t be applied.',
+            'order-summary'          => 'Order Summary',
+            'sub-total'              => 'Items',
+            'grand-total'            => 'Grand Total',
+            'delivery-charges'       => 'Delivery Charges',
+            'tax'                    => 'Tax',
+            'discount'               => 'Discount',
+            'price'                  => 'price',
+            'disc-amount'            => 'Amount discounted',
+            'new-grand-total'        => 'New Grand Total',
+            'coupon'                 => 'Coupon',
+            'coupon-applied'         => 'Applied Coupon',
+            'remove-coupon'          => 'Remove Coupon',
+            'cannot-apply-coupon'    => 'Cannot Apply Coupon',
+            'invalid-coupon'         => 'Coupon code is invalid.',
+            'success-coupon'         => 'Coupon code applied successfully.',
+            'coupon-apply-issue'     => 'Coupon code can\'t be applied.',
             'coupon-already-applied' => 'Coupon code already applied.',
         ],
 

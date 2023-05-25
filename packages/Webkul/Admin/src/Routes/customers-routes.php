@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Customer\AddressController;
 use Webkul\Admin\Http\Controllers\Customer\CustomerController;
 use Webkul\Admin\Http\Controllers\Customer\CustomerGroupController;
-use Webkul\Product\Http\Controllers\ReviewController;
+use Webkul\Admin\Http\Controllers\Product\ReviewController;
 
 /**
  * Customers routes.

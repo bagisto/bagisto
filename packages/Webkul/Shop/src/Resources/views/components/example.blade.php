@@ -29,12 +29,20 @@
 </x-table>
 
 <x-tabs>
-    <x-tabs.item name="Tab 1" is-selected="true">Tab 1 Content</x-tabs.item>
+    <x-tabs.item
+        name="Tab 1"
+        is-selected="true"
+    >
+        Tab 1 Content
+    </x-tabs.item>
+
     <x-tabs.item name="Tab 2">Tab 2 Content</x-tabs.item>
 </x-tabs>
 
 <x-form.control>
-    <x-slot:label class="required">Input Control</x-slot:label>
+    <x-slot:label class="required">
+        Input Control
+    </x-slot:label>
 
     <x-slot:control
         type="input"
@@ -46,7 +54,11 @@
 </x-form.control>
 
 <x-form.control>
-    <x-slot:control type="select" name="select" v-validate="'required'">
+    <x-slot:control
+        type="select"
+        name="select"
+        v-validate="'required'"
+    >
         <option value=""></option>
         <option value="1">Option 1</option>
     </x-slot:control>
@@ -55,7 +67,11 @@
 </x-form.control>
 
 <x-form.control>
-    <x-slot:label class="required">Multi Select Control</x-slot:label>
+    <x-slot:label
+        class="required"
+    >
+        Multi Select Control
+    </x-slot:label>
 
     <x-slot:control
         type="select"
@@ -94,9 +110,7 @@
     </x-slot:control>
 </x-form.control>
 
-
 <button @click="$root.showModal('testModal')">Open Modal</button>
-
 
 <x-modal id="testModal" is-open="$root.modalIds.testModal">
     <x-slot:header>Modal Title</x-slot:header>
@@ -104,11 +118,7 @@
     <x-slot:body>Modal Body</x-slot:body>
 </x-modal>
 
-
 <x-flash-group></x-flash-group>
-
-
-
 
 <x-panel>
     <x-slot:header>Panel Title</x-slot:header>
@@ -116,23 +126,48 @@
     <x-slot:body>Panel Body</x-slot:body>
 </x-panel>
 
-
 <?php $products = [1,2,3,3,4]  ?>
 
-<x-products.carousel title="Men’s Collections" :products="$products" :navigation-link="route('shop.home.index')"></x-products.carousel>
+<x-products.carousel
+    title="Men’s Collections"
+    :products="$products"
+    :navigation-link="route('shop.home.index')"
+>
+</x-products.carousel>
 
-<x-form method="post" action="">
+<x-form
+    method="post"
+    action=""
+>
     <x-form.control-group>
         <x-form.control-group.label>
             Email
         </x-form.control-group.label>
 
-
         <x-form.control-group.control type="text" name="email" />
-
 
         <x-form.control-group.error>
             This is error
         </x-form.control-group.error>
     </x-form.control-group>
 </x-form>
+
+<x-shop::dropdown>
+    <x-shop::dropdown.toggle>
+        Toggle
+    </x-shop::dropdown.toggle>
+
+    <x-shop::dropdown.menu>
+        <x-shop::dropdown.menu.item>
+            Item 1
+        </x-shop::dropdown.menu.item>
+
+        <x-shop::dropdown.menu.item>
+            Item 2
+        </x-shop::dropdown.menu.item>
+
+        <x-shop::dropdown.menu.item>
+            Item 3
+        </x-shop::dropdown.menu.item>
+    </x-shop::dropdown.menu>
+</x-shop::dropdown>

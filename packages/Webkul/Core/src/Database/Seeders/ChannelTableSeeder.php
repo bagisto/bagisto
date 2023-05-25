@@ -31,52 +31,52 @@ class ChannelTableSeeder extends Seeder
                 'footer_content'    => '
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
-                            <a href="'.route('shop.cms.page', 'about-us').'">
-                                '.trans('shop::app.footer.about-us').'
+                            <a href="' . route('shop.cms.page', 'about-us') . '">
+                                ' . trans('shop::app.footer.about-us') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'customer-service').'">
-                                '.trans('shop::app.footer.customer-service').'
+                            <a href="' . route('shop.cms.page', 'customer-service') . '">
+                                ' . trans('shop::app.footer.customer-service') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'whats-new').'">
-                                '.trans('shop::app.footer.whats-new').'
+                            <a href="' . route('shop.cms.page', 'whats-new') . '">
+                                ' . trans('shop::app.footer.whats-new') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'contact-us').'">
-                                '.trans('shop::app.footer.contact-us').'
+                            <a href="' . route('shop.cms.page', 'contact-us') . '">
+                                ' . trans('shop::app.footer.contact-us') . '
                             </a>
                         </li>
                     </ul>
 
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
-                            <a href="'.route('shop.cms.page', 'order-return').'">
-                                '.trans('shop::app.footer.order-return').'
+                            <a href="' . route('shop.cms.page', 'order-return') . '">
+                                ' . trans('shop::app.footer.order-return') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'payment-policy').'">
-                                '.trans('shop::app.footer.payment-policy').'
+                            <a href="' . route('shop.cms.page', 'payment-policy') . '">
+                                ' . trans('shop::app.footer.payment-policy') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'shipping-policy').'">
-                                '.trans('shop::app.footer.shipping-policy').'
+                            <a href="' . route('shop.cms.page', 'shipping-policy') . '">
+                                ' . trans('shop::app.footer.shipping-policy') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'privacy-cookies-policy').'">
-                                '.trans('shop::app.footer.privacy-cookies-policy').'
+                            <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
+                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
                             </a>
                         </li>
                     </ul>
@@ -91,63 +91,63 @@ class ChannelTableSeeder extends Seeder
                     <p>@include("shop::home.slider") @include("shop::home.featured-products") @include("shop::home.new-products")</p>
                         <div class="banner-container">
                         <div class="left-banner">
-                            <img src='.asset("/themes/default/assets/images/1.webp").' data-src='.asset("/themes/default/assets/images/1.webp").' class="lazyload" alt="test" width="720" height="720" />
+                            <img src=' . asset('/themes/default/assets/images/1.webp') . ' data-src=' . asset('/themes/default/assets/images/1.webp') . ' class="lazyload" alt="test" width="720" height="720" />
                         </div>
                         <div class="right-banner">
-                            <img src='. asset("/themes/default/assets/images/2.webp").' data-src='. asset("/themes/default/assets/images/2.webp").' class="lazyload" alt="test" width="460" height="330" />
-                            <img src='.asset("/themes/default/assets/images/3.webp").' data-src='.asset("/themes/default/assets/images/3.webp").'  class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/2.webp') . ' data-src=' . asset('/themes/default/assets/images/2.webp') . ' class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/3.webp') . ' data-src=' . asset('/themes/default/assets/images/3.webp') . '  class="lazyload" alt="test" width="460" height="330" />
                         </div>
                     </div>
                 ',
                 'footer_content'    => '
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
-                            <a href="'.route('shop.cms.page', 'about-us').'">
-                                '.trans('shop::app.footer.about-us').'
+                            <a href="' . route('shop.cms.page', 'about-us') . '">
+                                ' . trans('shop::app.footer.about-us') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'customer-service').'">
-                                '.trans('shop::app.footer.customer-service').'
+                            <a href="' . route('shop.cms.page', 'customer-service') . '">
+                                ' . trans('shop::app.footer.customer-service') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'whats-new').'">
-                                '.trans('shop::app.footer.whats-new').'
+                            <a href="' . route('shop.cms.page', 'whats-new') . '">
+                                ' . trans('shop::app.footer.whats-new') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'contact-us').'">
-                                '.trans('shop::app.footer.contact-us').'
+                            <a href="' . route('shop.cms.page', 'contact-us') . '">
+                                ' . trans('shop::app.footer.contact-us') . '
                             </a>
                         </li>
                     </ul>
 
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
-                            <a href="'.route('shop.cms.page', 'order-return').'">
-                                '.trans('shop::app.footer.order-return').'
+                            <a href="' . route('shop.cms.page', 'order-return') . '">
+                                ' . trans('shop::app.footer.order-return') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'payment-policy').'">
-                                '.trans('shop::app.footer.payment-policy').'
+                            <a href="' . route('shop.cms.page', 'payment-policy') . '">
+                                ' . trans('shop::app.footer.payment-policy') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'shipping-policy').'">
-                                '.trans('shop::app.footer.shipping-policy').'
+                            <a href="' . route('shop.cms.page', 'shipping-policy') . '">
+                                ' . trans('shop::app.footer.shipping-policy') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'privacy-cookies-policy').'">
-                                '.trans('shop::app.footer.privacy-cookies-policy').'
+                            <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
+                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
                             </a>
                         </li>
                     </ul>
@@ -162,63 +162,63 @@ class ChannelTableSeeder extends Seeder
                     <p>@include("shop::home.slider") @include("shop::home.featured-products") @include("shop::home.new-products")</p>
                         <div class="banner-container">
                         <div class="left-banner">
-                            <img src='.asset("/themes/default/assets/images/1.webp").' data-src='.asset("/themes/default/assets/images/1.webp").' class="lazyload" alt="test" width="720" height="720" />
+                            <img src=' . asset('/themes/default/assets/images/1.webp') . ' data-src=' . asset('/themes/default/assets/images/1.webp') . ' class="lazyload" alt="test" width="720" height="720" />
                         </div>
                         <div class="right-banner">
-                            <img src='. asset("/themes/default/assets/images/2.webp").' data-src='. asset("/themes/default/assets/images/2.webp").' class="lazyload" alt="test" width="460" height="330" />
-                            <img src='.asset("/themes/default/assets/images/3.webp").' data-src='.asset("/themes/default/assets/images/3.webp").'  class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/2.webp') . ' data-src=' . asset('/themes/default/assets/images/2.webp') . ' class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/3.webp') . ' data-src=' . asset('/themes/default/assets/images/3.webp') . '  class="lazyload" alt="test" width="460" height="330" />
                         </div>
                     </div>
                 ',
                 'footer_content'    => '
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
-                            <a href="'.route('shop.cms.page', 'about-us').'">
-                                '.trans('shop::app.footer.about-us').'
+                            <a href="' . route('shop.cms.page', 'about-us') . '">
+                                ' . trans('shop::app.footer.about-us') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'customer-service').'">
-                                '.trans('shop::app.footer.customer-service').'
+                            <a href="' . route('shop.cms.page', 'customer-service') . '">
+                                ' . trans('shop::app.footer.customer-service') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'whats-new').'">
-                                '.trans('shop::app.footer.whats-new').'
+                            <a href="' . route('shop.cms.page', 'whats-new') . '">
+                                ' . trans('shop::app.footer.whats-new') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'contact-us').'">
-                                '.trans('shop::app.footer.contact-us').'
+                            <a href="' . route('shop.cms.page', 'contact-us') . '">
+                                ' . trans('shop::app.footer.contact-us') . '
                             </a>
                         </li>
                     </ul>
 
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
-                            <a href="'.route('shop.cms.page', 'order-return').'">
-                                '.trans('shop::app.footer.order-return').'
+                            <a href="' . route('shop.cms.page', 'order-return') . '">
+                                ' . trans('shop::app.footer.order-return') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'payment-policy').'">
-                                '.trans('shop::app.footer.payment-policy').'
+                            <a href="' . route('shop.cms.page', 'payment-policy') . '">
+                                ' . trans('shop::app.footer.payment-policy') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'shipping-policy').'">
-                                '.trans('shop::app.footer.shipping-policy').'
+                            <a href="' . route('shop.cms.page', 'shipping-policy') . '">
+                                ' . trans('shop::app.footer.shipping-policy') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'privacy-cookies-policy').'">
-                                '.trans('shop::app.footer.privacy-cookies-policy').'
+                            <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
+                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
                             </a>
                         </li>
                     </ul>
@@ -233,63 +233,63 @@ class ChannelTableSeeder extends Seeder
                     <p>@include("shop::home.slider") @include("shop::home.featured-products") @include("shop::home.new-products")</p>
                         <div class="banner-container">
                         <div class="left-banner">
-                            <img src='.asset("/themes/default/assets/images/1.webp").' data-src='.asset("/themes/default/assets/images/1.webp").' class="lazyload" alt="test" width="720" height="720" />
+                            <img src=' . asset('/themes/default/assets/images/1.webp') . ' data-src=' . asset('/themes/default/assets/images/1.webp') . ' class="lazyload" alt="test" width="720" height="720" />
                         </div>
                         <div class="right-banner">
-                            <img src='. asset("/themes/default/assets/images/2.webp").' data-src='. asset("/themes/default/assets/images/2.webp").' class="lazyload" alt="test" width="460" height="330" />
-                            <img src='.asset("/themes/default/assets/images/3.webp").' data-src='.asset("/themes/default/assets/images/3.webp").'  class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/2.webp') . ' data-src=' . asset('/themes/default/assets/images/2.webp') . ' class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/3.webp') . ' data-src=' . asset('/themes/default/assets/images/3.webp') . '  class="lazyload" alt="test" width="460" height="330" />
                         </div>
                     </div>
                 ',
                 'footer_content'    => '
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
-                            <a href="'.route('shop.cms.page', 'about-us').'">
-                                '.trans('shop::app.footer.about-us').'
+                            <a href="' . route('shop.cms.page', 'about-us') . '">
+                                ' . trans('shop::app.footer.about-us') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'customer-service').'">
-                                '.trans('shop::app.footer.customer-service').'
+                            <a href="' . route('shop.cms.page', 'customer-service') . '">
+                                ' . trans('shop::app.footer.customer-service') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'whats-new').'">
-                                '.trans('shop::app.footer.whats-new').'
+                            <a href="' . route('shop.cms.page', 'whats-new') . '">
+                                ' . trans('shop::app.footer.whats-new') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'contact-us').'">
-                                '.trans('shop::app.footer.contact-us').'
+                            <a href="' . route('shop.cms.page', 'contact-us') . '">
+                                ' . trans('shop::app.footer.contact-us') . '
                             </a>
                         </li>
                     </ul>
 
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
-                            <a href="'.route('shop.cms.page', 'order-return').'">
-                                '.trans('shop::app.footer.order-return').'
+                            <a href="' . route('shop.cms.page', 'order-return') . '">
+                                ' . trans('shop::app.footer.order-return') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'payment-policy').'">
-                                '.trans('shop::app.footer.payment-policy').'
+                            <a href="' . route('shop.cms.page', 'payment-policy') . '">
+                                ' . trans('shop::app.footer.payment-policy') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'shipping-policy').'">
-                                '.trans('shop::app.footer.shipping-policy').'
+                            <a href="' . route('shop.cms.page', 'shipping-policy') . '">
+                                ' . trans('shop::app.footer.shipping-policy') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'privacy-cookies-policy').'">
-                                '.trans('shop::app.footer.privacy-cookies-policy').'
+                            <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
+                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
                             </a>
                         </li>
                     </ul>
@@ -304,69 +304,69 @@ class ChannelTableSeeder extends Seeder
                     <p>@include("shop::home.slider") @include("shop::home.featured-products") @include("shop::home.new-products")</p>
                         <div class="banner-container">
                         <div class="left-banner">
-                            <img src='.asset("/themes/default/assets/images/1.webp").' data-src='.asset("/themes/default/assets/images/1.webp").' class="lazyload" alt="test" width="720" height="720" />
+                            <img src=' . asset('/themes/default/assets/images/1.webp') . ' data-src=' . asset('/themes/default/assets/images/1.webp') . ' class="lazyload" alt="test" width="720" height="720" />
                         </div>
                         <div class="right-banner">
-                            <img src='. asset("/themes/default/assets/images/2.webp").' data-src='. asset("/themes/default/assets/images/2.webp").' class="lazyload" alt="test" width="460" height="330" />
-                            <img src='.asset("/themes/default/assets/images/3.webp").' data-src='.asset("/themes/default/assets/images/3.webp").'  class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/2.webp') . ' data-src=' . asset('/themes/default/assets/images/2.webp') . ' class="lazyload" alt="test" width="460" height="330" />
+                            <img src=' . asset('/themes/default/assets/images/3.webp') . ' data-src=' . asset('/themes/default/assets/images/3.webp') . '  class="lazyload" alt="test" width="460" height="330" />
                         </div>
                     </div>
                 ',
                 'footer_content'    => '
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
-                            <a href="'.route('shop.cms.page', 'about-us').'">
-                                '.trans('shop::app.footer.about-us').'
+                            <a href="' . route('shop.cms.page', 'about-us') . '">
+                                ' . trans('shop::app.footer.about-us') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'customer-service').'">
-                                '.trans('shop::app.footer.customer-service').'
+                            <a href="' . route('shop.cms.page', 'customer-service') . '">
+                                ' . trans('shop::app.footer.customer-service') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'whats-new').'">
-                                '.trans('shop::app.footer.whats-new').'
+                            <a href="' . route('shop.cms.page', 'whats-new') . '">
+                                ' . trans('shop::app.footer.whats-new') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'contact-us').'">
-                                '.trans('shop::app.footer.contact-us').'
+                            <a href="' . route('shop.cms.page', 'contact-us') . '">
+                                ' . trans('shop::app.footer.contact-us') . '
                             </a>
                         </li>
                     </ul>
 
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
-                            <a href="'.route('shop.cms.page', 'order-return').'">
-                                '.trans('shop::app.footer.order-return').'
+                            <a href="' . route('shop.cms.page', 'order-return') . '">
+                                ' . trans('shop::app.footer.order-return') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'payment-policy').'">
-                                '.trans('shop::app.footer.payment-policy').'
+                            <a href="' . route('shop.cms.page', 'payment-policy') . '">
+                                ' . trans('shop::app.footer.payment-policy') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'shipping-policy').'">
-                                '.trans('shop::app.footer.shipping-policy').'
+                            <a href="' . route('shop.cms.page', 'shipping-policy') . '">
+                                ' . trans('shop::app.footer.shipping-policy') . '
                             </a>
                         </li>
 
                         <li>
-                            <a href="'.route('shop.cms.page', 'privacy-cookies-policy').'">
-                                '.trans('shop::app.footer.privacy-cookies-policy').'
+                            <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
+                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
                             </a>
                         </li>
                     </ul>
                 ',
                 'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
-            ]
+            ],
         ]);
 
         DB::table('channel_currencies')->insert([

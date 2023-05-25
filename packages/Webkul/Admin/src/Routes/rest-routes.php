@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\DashboardController;
 use Webkul\Admin\Http\Controllers\ExportController;
 use Webkul\Admin\Http\Controllers\TinyMCEController;
-use Webkul\User\Http\Controllers\AccountController;
-use Webkul\User\Http\Controllers\SessionController;
+use Webkul\Admin\Http\Controllers\User\AccountController;
+use Webkul\Admin\Http\Controllers\User\SessionController;
 
 /**
  * Extra routes.

@@ -13,10 +13,6 @@ class BookingProductServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadRoutesFrom(__DIR__ . '/../Http/admin-routes.php');
-
-        $this->loadRoutesFrom(__DIR__ . '/../Http/front-routes.php');
-
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'bookingproduct');

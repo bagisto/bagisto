@@ -29,7 +29,7 @@ class RegistrationController extends Controller
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected SubscribersListRepository $subscriptionRepository
-    ) { 
+    ) {
     }
 
     /**
