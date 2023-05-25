@@ -82,7 +82,7 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
-        $address = $this->customerAddressRepository->find(auth()->guard('customer')->user()->id);
+        $address = $this->customerAddressRepository->find(auth()->guard('customer')->id());
 
         return view('shop::customers.account.addresses.edit', array_merge(compact('address'), [
             'defaultCountry' => config('app.default_country'),
@@ -113,7 +113,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.update.after', $customerAddress);
 
-        session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
+        session()->flash('success', trans('shop::app.customers.account.addresses.edit.success'));
 
         return redirect()->route('shop.customer.addresses.index');
     }
@@ -135,7 +135,7 @@ class AddressController extends Controller
         if ($address = $this->customerAddressRepository->find($id)) {
             $address->update(['default_address' => 1]);
         } else {
-            session()->flash('success', trans('shop::app.customer.account.addresses.index.default-delete'));
+            session()->flash('success', trans('shop::app.customers.account.addresses.index.default-delete'));
         }
 
         return redirect()->back();
@@ -162,7 +162,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.delete.after', $id);
 
-        session()->flash('success', trans('shop::app.customer.account.addresses.delete.success'));
+        session()->flash('success', trans('shop::app.customers.account.addresses.delete.success'));
 
         return redirect()->route('shop.customer.addresses.index');
     }

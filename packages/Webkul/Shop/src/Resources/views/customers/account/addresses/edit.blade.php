@@ -1,5 +1,9 @@
 <x-shop::layouts.account>
-    <h2 class="text-[26px] font-medium">Edit Address</h2>
+    <h2 class="text-[26px] font-medium">
+        @lang('shop::app.customers.account.addresses.edit')
+        @lang('shop::app.customers.account.addresses.title')
+    </h2>
+
     <x-shop::form
         method="PUT"
         :action="route('shop.customer.addresses.update',  $address->id)"
@@ -7,7 +11,7 @@
     >
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.comapny-name')}}
+                @lang('shop::app.customers.account.addresses.comapny-name')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -27,7 +31,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.first-name')}}
+                @lang('shop::app.customers.account.addresses.first-name')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -48,7 +52,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.last-name')}}
+                @lang('shop::app.customers.account.addresses.last-name')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -69,7 +73,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.vat-id')}}
+                @lang('shop::app.customers.account.addresses.vat-id')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -89,7 +93,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.street-address')}}
+                @lang('shop::app.customers.account.addresses.street-address')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -110,7 +114,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.country')}}
+                @lang('shop::app.customers.account.addresses.country')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -121,10 +125,17 @@
                 rules="required"
                 label="Country"
             >
-                <option value="">@lang('Select Country')</option>
+                <option value="">
+                    @lang('Select Country')
+                </option>
 
                 @foreach (core()->countries() as $country)
-                    <option {{ $country->code === $defaultCountry ? 'selected' : '' }}  value="{{ $country->code }}">{{ $country->name }}</option>
+                    <option 
+                        {{ $country->code === $defaultCountry ? 'selected' : '' }}  
+                        value="{{ $country->code }}"
+                    >
+                        {{ $country->name }}
+                    </option>
                 @endforeach
             </x-shop::form.control-group.control>
 
@@ -136,7 +147,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.state')}}
+                @lang('shop::app.customers.account.addresses.state')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -157,7 +168,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.city')}}
+                @lang('shop::app.customers.account.addresses.city')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -178,7 +189,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.post-code')}}
+                @lang('shop::app.customers.account.addresses.post-code')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -201,7 +212,7 @@
             type="submit"
             class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
         >
-            Save
+            @lang('shop::app.customers.account.save')
         </button>
 
     </x-shop::form>
