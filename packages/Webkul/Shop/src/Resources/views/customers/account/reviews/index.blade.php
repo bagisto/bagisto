@@ -1,16 +1,19 @@
 <x-shop::layouts.account>
-
     <div class="flex-auto">
         <div class="max-lg:hidden">
             <div class="flex gap-x-[4px] items-center mb-[10px]">
                 <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']">
-                    {{ trans('shop::app.customers.account.profile')}}
+                    {{ trans('shop::app.customers.account.profile') }}
                 </p>
+                
                 <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">
-                    {{ trans('shop::app.customers.account.reviews.title')}}
+                    {{ trans('shop::app.customers.account.reviews.title') }}
                 </p>
             </div>
-            <h2 class="text-[26px] font-medium">{{ trans('shop::app.customers.account.reviews.title')}}</h2>
+            
+            <h2 class="text-[26px] font-medium">
+                {{ trans('shop::app.customers.account.reviews.title') }}
+            </h2>
 
             <div class="grid mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
                 @foreach($reviews as $review)
@@ -27,7 +30,6 @@
                                     <p class="text-[20px] font-medium max-sm:text-[16px]"> {{ $review->title}} </p>
 
                                     <div class="flex gap-[10px] items-center">
-
                                         {{-- For Active stars --}}
                                         @if ($review->rating)
                                             @for($i = 1; $i <= $review->rating; $i++)
@@ -43,21 +45,21 @@
                                                 <span class="bg-[position:-151px_-253px] bs-main-sprite w-[14px] h-[14px]"></span>
                                             @endfor
                                         @endif
-
                                     </div>
                                 </div>
 
-                                <p class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]"> {{ $review->created_at }} </p>
-                                <p class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]"> {{ $review->comment }} </p>
-
+                                <p class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]">
+                                    {{ $review->created_at }}
+                                </p>
+                                
+                                <p class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]">
+                                    {{ $review->comment }}
+                                </p>
                             </div>
-
                         </div>
                     </a>
                 @endforeach
             </div>
-
         </div>
     </div>
-
 </x-shop::layouts.account>
