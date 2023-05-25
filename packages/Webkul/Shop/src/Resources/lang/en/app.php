@@ -7,7 +7,7 @@ return [
 
             'addresses' => [
                 'title'           => 'Address',
-                'edit'            => 'Edit',
+                'edit-page'       => 'Edit',
                 'add-address'     => 'Add Address',
                 'comapny-name'    => 'Company Name',
                 'vat-id'          => 'Vat ID',
