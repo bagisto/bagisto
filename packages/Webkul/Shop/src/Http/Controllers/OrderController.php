@@ -5,7 +5,6 @@ namespace Webkul\Shop\Http\Controllers;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Shop\DataGrids\OrderDataGrid;
 
 class OrderController extends Controller
 {
@@ -32,10 +31,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $customerId = auth()->guard('customer')->id();
-
         $orders = $this->orderRepository->findWhere([
-            'customer_id' => $customerId,
+            'customer_id' => auth()->guard('customer')->id(),
         ]);
 
         return view('shop::customers.account.orders.index', compact('orders'));
@@ -49,10 +46,8 @@ class OrderController extends Controller
      */
     public function view($id)
     {
-        $customerId = auth()->guard('customer')->id();
-
         $order = $this->orderRepository->findOneWhere([
-            'customer_id' => $customerId,
+            'customer_id' => auth()->guard('customer')->id(),
             'id'          => $id,
         ]);
 
