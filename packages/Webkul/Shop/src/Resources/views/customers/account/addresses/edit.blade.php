@@ -1,6 +1,6 @@
 <x-shop::layouts.account>
     <h2 class="text-[26px] font-medium">
-        @lang('shop::app.customers.account.addresses.edit')
+        @lang('shop::app.customers.account.addresses.edit-page')
         @lang('shop::app.customers.account.addresses.title')
     </h2>
 
