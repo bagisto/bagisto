@@ -18,25 +18,40 @@
             @if (! $downloadableLinkPurchased->isEmpty())
                 <div class="relative overflow-x-auto border border-b-0  rounded-[12px] mt-[30px]">
                     <table class="w-full text-sm text-left">
-                        <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
+                        <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]">
                             <tr>
-                                <th scope="col" class="px-6 py-[16px] font-medium">
+                                <th
+                                    scope="col"
+                                    class="px-6 py-[16px] font-medium"
+                                >
                                     @lang('shop::app.customers.account.downloadable-products.orderId')
                                 </th>
 
-                                <th scope="col" class="px-6 py-[16px] font-medium">
+                                <th
+                                    scope="col"
+                                    class="px-6 py-[16px] font-medium"
+                                >
                                     @lang('shop::app.customers.account.downloadable-products.title')
                                 </th>
 
-                                <th scope="col" class="px-6 py-[16px] font-medium">
+                                <th
+                                    scope="col"
+                                    class="px-6 py-[16px] font-medium"
+                                >
                                     @lang('shop::app.customers.account.downloadable-products.date')
                                 </th>
 
-                                <th scope="col" class="px-6 py-[16px] font-medium">
+                                <th
+                                    scope="col"
+                                    class="px-6 py-[16px] font-medium"
+                                >
                                     @lang('shop::app.customers.account.downloadable-products.status')
                                 </th>
 
-                                <th scope="col" class="px-6 py-[16px] font-medium">
+                                <th
+                                    scope="col"
+                                    class="px-6 py-[16px] font-medium"
+                                >
                                     @lang('shop::app.customers.account.downloadable-products.remaining-downloads')
                                 </th>
                             </tr>
@@ -44,7 +59,7 @@
 
                         <tbody>
                             @foreach ($downloadableLinkPurchased as $item)
-                                <tr class="bg-white border-b ">
+                                <tr class="bg-white border-b">
                                     <th scope="row" class="px-6 py-[16px] font-medium whitespace-nowrap text-black">
                                         {{ $item->order_id }}
                                     </th>
@@ -87,6 +102,7 @@
 
                 <p class="text-[14px] text-right font-medium mt-[20px]"> 
                     {{ $downloadableLinkPurchased->count() }}
+                    
                     @lang('shop::app.customers.account.downloadable-products.records-found')
                 </p>
             @else
