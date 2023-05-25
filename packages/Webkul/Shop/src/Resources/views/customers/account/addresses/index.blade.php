@@ -2,16 +2,22 @@
     <div class="flex justify-between items-center">
         <div class="">
             <div class="flex gap-x-[4px] items-center mb-[10px]">
-                <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']"> Profile</p>
-                <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">Address</p>
+                <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']">
+                    @lang('shop::app.customers.account.profile')
+                </p>
+                <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">
+                    @lang('shop::app.customers.account.addresses.title')
+                </p>
             </div>
-            <h2 class="text-[26px] font-medium">{{ trans('shop::app.customers.account.addresses.title')}}</h2>
+            <h2 class="text-[26px] font-medium">
+                @lang('shop::app.customers.account.addresses.title')
+            </h2>
         </div>
         <a
             href="{{ route('shop.customer.addresses.create') }}"
             class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
         >
-        {{ trans('shop::app.customers.account.addresses.add-address') }}
+        @lang('shop::app.customers.account.addresses.add-address') 
         </a>
     </div>
 

@@ -2,8 +2,12 @@
     <div class="flex justify-between items-center">
         <div class="">
             <div class="flex gap-x-[4px] items-center mb-[10px]">
-                <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']"> Profile</p>
-                <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">Address</p>
+                <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']">
+                    @lang('shop::app.customers.account.profile')
+                </p>
+                <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">
+                    @lang('shop::app.customers.account.addresses.title')
+                </p>
             </div>
             <h2 class="text-[26px] font-medium">{{ trans('shop::app.customers.account.addresses.add-address')}}</h2>
         </div>
@@ -15,7 +19,7 @@
     >
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.comapny-name')}}
+                @lang('shop::app.customers.account.addresses.comapny-name')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -35,7 +39,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.first-name')}}
+                @lang('shop::app.customers.account.addresses.first-name')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -56,7 +60,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.last-name')}}
+                @lang('shop::app.customers.account.addresses.last-name')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -77,7 +81,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.vat-id')}}
+                @lang('shop::app.customers.account.addresses.vat-id')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -97,7 +101,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.street-address')}}
+                @lang('shop::app.customers.account.addresses.street-address')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -118,7 +122,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.country')}}
+                @lang('shop::app.customers.account.addresses.country')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -144,7 +148,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.state')}}
+                @lang('shop::app.customers.account.addresses.state')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -165,7 +169,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.city')}}
+                @lang('shop::app.customers.account.addresses.city')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -186,7 +190,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.post-code')}}
+                @lang('shop::app.customers.account.addresses.post-code')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -207,7 +211,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                {{trans('shop::app.customers.account.addresses.phone')}}
+                @lang('shop::app.customers.account.addresses.phone')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -230,7 +234,7 @@
             type="submit"
             class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
         >
-            Save
+            @lang('shop::app.customers.account.save')
         </button>
 
     </x-shop::form>

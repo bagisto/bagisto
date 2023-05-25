@@ -28,8 +28,11 @@ return [
             ],
 
             'reviews'    => [
-                'title'  => 'Review',
-            ]
+                'title'  => 'Reviews',
+            ],
+
+            'profile' => 'Profile',
+            'save'    => 'Save',
 
         ]
 
