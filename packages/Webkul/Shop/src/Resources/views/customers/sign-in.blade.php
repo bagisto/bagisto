@@ -89,7 +89,7 @@
 
                 {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
 
-                <div class=mt-[20px]>
+                <div class="mt-[20px]">
 
                     {!! Captcha::render() !!}
 

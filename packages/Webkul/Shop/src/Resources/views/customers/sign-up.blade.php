@@ -135,7 +135,7 @@
                 {!! view_render_event('bagisto.shop.customers.signup_form_controls.password_confirmation.after') !!}
           
 
-                <div class=mb-[20px]>
+                <div class="mb-[20px]">
 
                     {!! Captcha::render() !!}
 
