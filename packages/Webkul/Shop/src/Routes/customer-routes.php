@@ -9,8 +9,8 @@ use Webkul\Shop\Http\Controllers\Customer\RegistrationController;
 use Webkul\Shop\Http\Controllers\Customer\ResetPasswordController;
 use Webkul\Shop\Http\Controllers\Customer\SessionController;
 use Webkul\Shop\Http\Controllers\Customer\WishlistController;
-use Webkul\Shop\Http\Controllers\DownloadableProductController;
-use Webkul\Shop\Http\Controllers\OrderController;
+use Webkul\Shop\Http\Controllers\Customer\OrderController;
+use Webkul\Shop\Http\Controllers\Customer\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\ReviewController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
@@ -108,34 +108,34 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                      * Profile.
                      */
                     Route::controller(CustomerController::class)->prefix('profile')->group(function () {
-                        Route::get('', 'index')->name('shop.customer.profile.index');
+                        Route::get('', 'index')->name('shop.customers.account.profile.index');
 
-                        Route::get('edit', 'edit')->name('shop.customer.profile.edit');
+                        Route::get('edit', 'edit')->name('shop.customers.account.profile.edit');
 
-                        Route::post('edit', 'update')->name('shop.customer.profile.store');
+                        Route::post('edit', 'update')->name('shop.customers.account.profile.store');
 
-                        Route::post('destroy', 'destroy')->name('shop.customer.profile.destroy');
+                        Route::post('destroy', 'destroy')->name('shop.customers.account.profile.destroy');
 
-                        Route::get('reviews', 'reviews')->name('shop.customer.reviews.index');
+                        Route::get('reviews', 'reviews')->name('shop.customers.account.reviews.index');
                     });
 
                     /**
                      * Addresses.
                      */
                     Route::controller(AddressController::class)->prefix('addresses')->group(function () {
-                        Route::get('', 'index')->name('shop.customer.addresses.index');
+                        Route::get('', 'index')->name('shop.customers.account.addresses.index');
     
-                        Route::get('create', 'create')->name('shop.customer.addresses.create');
+                        Route::get('create', 'create')->name('shop.customers.account.addresses.create');
     
-                        Route::post('create', 'store')->name('shop.customer.addresses.store');
+                        Route::post('create', 'store')->name('shop.customers.account.addresses.store');
     
-                        Route::get('edit/{id}', 'edit')->name('shop.customer.addresses.edit');
+                        Route::get('edit/{id}', 'edit')->name('shop.customers.account.addresses.edit');
     
-                        Route::put('edit/{id}', 'update')->name('shop.customer.addresses.update');
+                        Route::put('edit/{id}', 'update')->name('shop.customers.account.addresses.update');
     
-                        Route::patch('edit/{id}/default', 'makeDefault')->name('shop.customer.addresses.update.default');
+                        Route::patch('edit/{id}', 'makeDefault')->name('shop.customers.account.addresses.update.default');
     
-                        Route::delete('delete/{id}', 'destroy')->name('shop.customer.addresses.delete');
+                        Route::delete('delete/{id}', 'destroy')->name('shop.customers.account.addresses.delete');
                     });
 
                     /**
@@ -149,22 +149,22 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                      * Orders.
                      */
                      Route::controller(OrderController::class)->prefix('orders')->group(function () {
-                         Route::get('', 'index')->name('shop.customer.orders.index');
+                         Route::get('', 'index')->name('shop.customers.account.orders.index');
 
-                         Route::get('view/{id}', 'view')->name('shop.customer.orders.view');
-                         
-                         Route::get('print/{id}', 'printInvoice')->name('shop.customer.orders.print');
+                         Route::get('view/{id}', 'view')->name('shop.customers.account.orders.view');
 
-                         Route::post('cancel/{id}', 'cancel')->name('shop.customer.orders.cancel');
+                         Route::post('cancel/{id}', 'cancel')->name('shop.customers.account.orders.cancel');
+
+                         Route::get('print/Invoice/{id}', 'printInvoice')->name('shop.customers.account.orders.print-invoice');
                      });
 
                     /**
                      * Downloadable products.
                      */
                     Route::controller(DownloadableProductController::class)->prefix('downloadable-products')->group(function () {
-                        Route::get('', 'index')->name('shop.customer.downloadable_products.index');
+                        Route::get('', 'index')->name('shop.customers.account.downloadable_products.index');
 
-                        Route::get('download/{id}', 'download')->name('shop.customer.downloadable_products.download');
+                        Route::get('download/{id}', 'download')->name('shop.customers.account.downloadable_products.download');
                     });
 
 

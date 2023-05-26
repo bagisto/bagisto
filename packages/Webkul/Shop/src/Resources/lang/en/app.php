@@ -5,6 +5,21 @@ return [
 
         'account' => [
 
+            'profile'   => [
+                'first-name' => 'First Name',
+                'last-name'  => 'Last Name',
+                'gender'     => 'Gender',
+                'dob'        => 'Date of Birth',
+                'Email'      => 'Email',
+                'delete-profile' => 'Delete Profile',
+                'edit-profile' => 'Edit Profile',
+                'edit'        => 'Edit',
+                'phone'       => 'Phone',
+                'current-password'  => 'Current Password',
+                'new-password'  => 'New Password',
+                'confirm-password'  => 'Confirm Password',
+            ],
+
             'addresses' => [
                 'title'           => 'Address',
                 'edit'            => 'Edit',
@@ -22,9 +37,10 @@ return [
                 'phone'           => 'Phone',
                 'street-address'  => 'Street Address',
                 'post-code'       => 'Post Code',
-                'create'          => [
-                    'success' => 'Address have been successfully added.',
-                ],
+                'create-success'  => 'Address have been successfully added.',
+                'edit-success'    => 'Address updated successfully.',
+                'default-delete'  => 'Default address cannot be changed.',
+                'delete-success'  => 'Address successfully deleted',
             ],
 
             'orders' => [
@@ -35,6 +51,7 @@ return [
                 'total'      => 'Total',
                 'status'     => 'Status',
                 'action'     => 'Action',
+                'view'       => 'View',
             ],
 
             'reviews'    => [
@@ -55,19 +72,19 @@ return [
                 'payment-error'       => 'Payment has not been done for this download.',
             ],
 
-            'profile' => 'Profile',
-
+            'title'   => 'Profile',
+            'save'    => 'Save',
         ],
-
     ],
 
     'response' => [
-        'cancel-success'            => ':name canceled successfully.',
-        'cancel-error'              => ':name can not be canceled.',
+        'cancel-success'     => ':name canceled successfully.',
+        'cancel-error'       => ':name can not be canceled.',
     ],
 
-    'invalid_vat_format' => 'The given vat id has a wrong format',
     'security-warning'   => 'Suspicious activity found!!!',
+
+    'invalid_vat_format' => 'The given vat id has a wrong format',
     'nothing-to-delete'  => 'Nothing to delete',
 
     'layouts' => [
@@ -316,7 +333,6 @@ return [
                     'default'        => 'Default',
                     'contact'        => 'Contact',
                     'confirm-delete' => 'Do you really want to delete this address?',
-                    'default-delete' => 'Default address cannot be changed.',
                     'enter-password' => 'Enter Your Password.',
                 ],
 
@@ -336,7 +352,6 @@ return [
                     'postcode'       => 'Postal Code',
                     'phone'          => 'Phone',
                     'submit'         => 'Save Address',
-                    'success'        => 'Address have been successfully added.',
                     'error'          => 'Address cannot be added.',
                 ],
 
@@ -349,16 +364,12 @@ return [
                     'title'          => 'Edit Address',
                     'street-address' => 'Street Address',
                     'submit'         => 'Save Address',
-                    'success'        => 'Address updated successfully.',
                 ],
 
                 'delete' => [
-                    'success'        => 'Address successfully deleted',
                     'failure'        => 'Address cannot be deleted',
                     'wrong-password' => 'Wrong Password !',
                 ],
-
-                'default-address' => 'Default Address',
             ],
 
             'order' => [

@@ -3,7 +3,7 @@
         <div class="">
             <div class="flex gap-x-[4px] items-center mb-[10px]">
                 <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']">
-                    @lang('shop::app.customers.account.profile')
+                    @lang('shop::app.customers.account.title')
                 </p>
 
                 <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">
@@ -119,7 +119,7 @@
                             class="px-6 py-[16px] text-black"
                         >
                             <a 
-                                href="{{ route('shop.customer.orders.view', $order->id) }}" 
+                                href="{{ route('shop.customers.account.orders.view', $order->id) }}" 
                                 class=" block bg-[position:-74px_-66px] bs-main-sprite w-[20px] h-[20px] font-medium" 
                                 aria-label="action"
                             >

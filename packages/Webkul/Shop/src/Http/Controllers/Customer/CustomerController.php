@@ -148,12 +148,12 @@ class CustomerController extends Controller
 
             session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
-            return redirect()->route('shop.customer.profile.index');
+            return redirect()->route('shop.customers.account.profile.index');
         }
 
         session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
 
-        return redirect()->back('shop.customer.profile.edit');
+        return redirect()->back('shop.customers.account.profile.edit');
     }
 
     /**
@@ -177,7 +177,7 @@ class CustomerController extends Controller
                 if ($orders) {
                     session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customer']));
 
-                    return redirect()->route('shop.customer.profile.index');
+                    return redirect()->route('shop.customers.account.profile.index');
                 } else {
                     $this->customerRepository->delete($id);
 
