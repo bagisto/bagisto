@@ -104,7 +104,7 @@ class AddressController extends Controller
 
         if (! $address) {
             abort(404);
-        }        
+        }
 
         return view('shop::customers.account.addresses.edit')->with('address', $address);
     }
