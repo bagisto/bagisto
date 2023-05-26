@@ -46,7 +46,7 @@ class CustomerController extends Controller
     {
         $customer = $this->customerRepository->find(auth()->guard('customer')->user()->id);
 
-        return view('shop::customers.account.profile.index', compact('customer'));
+        return view('shop::customers.account.profile.index')->with('customer', $customer);
     }
 
     /**
@@ -58,7 +58,7 @@ class CustomerController extends Controller
     {
         $customer = $this->customerRepository->find(auth()->guard('customer')->user()->id);
 
-        return view('shop::customers.account.profile.edit', compact('customer'));
+        return view('shop::customers.account.profile.edit')->with('customer', $customer);
     }
 
     /**
@@ -148,12 +148,12 @@ class CustomerController extends Controller
 
             session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
-            return redirect()->route('shop.customer.profile.index');
+            return redirect()->route('shop.customers.account.profile.index');
         }
 
         session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
 
-        return redirect()->back('shop.customer.profile.edit');
+        return redirect()->back('shop.customers.account.profile.edit');
     }
 
     /**
@@ -177,7 +177,7 @@ class CustomerController extends Controller
                 if ($orders) {
                     session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customer']));
 
-                    return redirect()->route('shop.customer.profile.index');
+                    return redirect()->route('shop.customers.account.profile.index');
                 } else {
                     $this->customerRepository->delete($id);
 
@@ -206,6 +206,6 @@ class CustomerController extends Controller
     {
         $reviews = $this->productReviewRepository->getCustomerReview();
 
-        return view('shop::customers.account.reviews.index', compact('reviews'));
+        return view('shop::customers.account.reviews.index')->with('reviews', $reviews);
     }
 }

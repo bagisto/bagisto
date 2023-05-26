@@ -108,15 +108,15 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                      * Profile.
                      */
                     Route::controller(CustomerController::class)->prefix('profile')->group(function () {
-                        Route::get('', 'index')->name('shop.customer.profile.index');
+                        Route::get('', 'index')->name('shop.customers.account.profile.index');
 
-                        Route::get('edit', 'edit')->name('shop.customer.profile.edit');
+                        Route::get('edit', 'edit')->name('shop.customers.account.profile.edit');
 
-                        Route::post('edit', 'update')->name('shop.customer.profile.store');
+                        Route::post('edit', 'update')->name('shop.customers.account.profile.store');
 
-                        Route::post('destroy', 'destroy')->name('shop.customer.profile.destroy');
+                        Route::post('destroy', 'destroy')->name('shop.customers.account.profile.destroy');
 
-                        Route::get('reviews', 'reviews')->name('shop.customer.reviews.index');
+                        Route::get('reviews', 'reviews')->name('shop.customers.account.reviews.index');
                     });
 
                     /**

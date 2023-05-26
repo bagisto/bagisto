@@ -5,6 +5,21 @@ return [
 
         'account' => [
 
+            'profile'   => [
+                'first-name' => 'First Name',
+                'last-name'  => 'Last Name',
+                'gender'     => 'Gender',
+                'dob'        => 'Date of Birth',
+                'Email'      => 'Email',
+                'delete-profile' => 'Delete Profile',
+                'edit-profile' => 'Edit Profile',
+                'edit'        => 'Edit',
+                'phone'       => 'Phone',
+                'current-password'  => 'Current Password',
+                'new-password'  => 'New Password',
+                'confirm-password'  => 'Confirm Password',
+            ],
+
             'addresses' => [
                 'title'           => 'Address',
                 'edit'            => 'Edit',
@@ -36,6 +51,7 @@ return [
                 'total'      => 'Total',
                 'status'     => 'Status',
                 'action'     => 'Action',
+                'view'       => 'View',
             ],
 
             'reviews'    => [
@@ -56,7 +72,7 @@ return [
                 'payment-error'       => 'Payment has not been done for this download.',
             ],
 
-            'profile' => 'Profile',
+            'title'   => 'Profile',
             'save'    => 'Save',
         ],
     ],

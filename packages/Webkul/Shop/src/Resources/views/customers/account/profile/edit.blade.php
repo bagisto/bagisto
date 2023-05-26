@@ -1,13 +1,15 @@
 <x-shop::layouts.account>
-    <h2 class="text-[26px] font-medium">Edit Profile</h2>
+    <h2 class="text-[26px] font-medium">
+        @lang('shop::app.customers.account.profile.edit-profile')
+    </h2>
 
     <x-shop::form
-        :action="route('shop.customer.profile.store')"
+        :action="route('shop.customers.account.profile.store')"
         class="rounded mt-[30px]"
     >
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                First Name
+                @lang('shop::app.customers.account.profile.first-name')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -28,7 +30,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                Last Name
+                @lang('shop::app.customers.account.profile.last-name')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -49,7 +51,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                Email
+                @lang('shop::app.customers.account.profile.email')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -70,7 +72,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                Phone
+                @lang('shop::app.customers.account.profile.phone')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -91,7 +93,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                Gender
+                @lang('shop::app.customers.account.profile.gender')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -116,7 +118,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                Current Password
+                @lang('shop::app.customers.account.profile.current-password')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -136,7 +138,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                New Password
+                @lang('shop::app.customers.account.profile.new-password')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -156,7 +158,7 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                Confirm Password
+                @lang('shop::app.customers.account.profile.confirm-password')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -196,7 +198,7 @@
             type="submit"
             class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
         >
-            Save
+            @lang('shop::app.customers.account.save')
         </button>
     </x-shop::form>
 </x-shop::layouts.account>

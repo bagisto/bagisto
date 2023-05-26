@@ -4,13 +4,13 @@ return [
     [
         'key'   => 'account',
         'name'  => 'shop::app.layouts.my-account',
-        'route' => 'shop.customer.profile.index',
+        'route' => 'shop.customers.account.profile.index',
         'icon'  => '',
         'sort'  => 1,
     ], [
         'key'   => 'account.profile',
         'name'  => 'shop::app.layouts.profile',
-        'route' => 'shop.customer.profile.index',
+        'route' => 'shop.customers.account.profile.index',
         'icon'  => '',
         'sort'  => 1,
     ], [
@@ -34,7 +34,7 @@ return [
     ], [
         'key'   => 'account.reviews',
         'name'  => 'shop::app.layouts.reviews',
-        'route' => 'shop.customer.reviews.index',
+        'route' => 'shop.customers.account.reviews.index',
         'icon'  => '',
         'sort'  => 5,
     ], [
