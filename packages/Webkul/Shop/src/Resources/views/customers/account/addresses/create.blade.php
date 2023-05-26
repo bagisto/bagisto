@@ -245,6 +245,5 @@
         >
             @lang('shop::app.customers.account.save')
         </button>
-
     </x-shop::form>
 </x-shop::layouts.account>
