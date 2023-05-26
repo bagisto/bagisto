@@ -1,8 +1,11 @@
 import { defineConfig } from "vite";
 import dotenv from "dotenv";
+import dotenvExpand from "dotenv-expand";
 import laravel from "laravel-vite-plugin";
+import path from "path";
 
-dotenv.config({ path: "../../../.env" });
+const config = dotenv.config({ path: "../../../.env" });
+dotenvExpand(config);
 
 export default defineConfig(({ mode }) => {
     return {
@@ -26,16 +29,14 @@ export default defineConfig(({ mode }) => {
                 ],
                 refresh: true,
             }),
-            // {
-            //     name: "process-css-url",
-            //     transform(code, id) {
-            //         if (id.endsWith(".css")) {
-
-            //         }
-
-            //         return code;
-            //     },
-            // },
         ],
+
+        experimental: {
+            renderBuiltUrl(filename, { hostId, hostType, type }) {
+                if (hostType === "css") {
+                    return path.basename(filename);
+                }
+            },
+        },
     };
 });
