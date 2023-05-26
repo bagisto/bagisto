@@ -1,8 +1,9 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\customer;
 
 use Webkul\Core\Traits\PDFHandler;
+use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 
