@@ -141,9 +141,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Wishlist.
                      */
-                    Route::get('wishlist', [WishlistController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.wishlist.wishlist',
-                    ])->name('shop.customer.wishlist.index');
+                        Route::get('wishlist', [WishlistController::class, 'index'])->name('shop.customer.wishlist.index');
 
                     /**
                      * Orders.

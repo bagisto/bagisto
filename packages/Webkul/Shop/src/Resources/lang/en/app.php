@@ -435,6 +435,9 @@ return [
             ],
 
             'wishlist' => [
+                'color'                => 'Color:',
+                'remove'               => 'Remove',
+
                 'page-title'           => 'Wishlist',
                 'title'                => 'Wishlist',
                 'deleteall'            => 'Delete All',
@@ -443,7 +446,6 @@ return [
                 'move-to-cart'         => 'Move To Cart',
                 'error'                => 'Cannot add product to wishlist due to unknown problems, please checkback later',
                 'add'                  => 'Item successfully added to wishlist',
-                'remove'               => 'Item successfully removed from wishlist',
                 'add-wishlist-text'    => 'Add product to wishlist',
                 'remove-wishlist-text' => 'Remove product from wishlist',
                 'moved'                => 'Item successfully moved To cart',
