@@ -1,8 +1,9 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
 
 class DownloadableProductController extends Controller
@@ -30,7 +31,7 @@ class DownloadableProductController extends Controller
             'customer_id' => auth()->guard('customer')->id(),
         ]);
 
-        return view('shop::customers.account.downloadable_products.index', compact('downloadableLinkPurchased'));
+        return view('shop::customers.account.downloadable_products.index')->with('downloadableLinkPurchased', $downloadableLinkPurchased);
     }
 
     /**

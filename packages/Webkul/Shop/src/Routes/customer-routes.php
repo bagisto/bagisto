@@ -9,7 +9,7 @@ use Webkul\Shop\Http\Controllers\Customer\RegistrationController;
 use Webkul\Shop\Http\Controllers\Customer\ResetPasswordController;
 use Webkul\Shop\Http\Controllers\Customer\SessionController;
 use Webkul\Shop\Http\Controllers\Customer\WishlistController;
-use Webkul\Shop\Http\Controllers\DownloadableProductController;
+use Webkul\Shop\Http\Controllers\Customer\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\OrderController;
 use Webkul\Shop\Http\Controllers\ReviewController;
 
@@ -175,9 +175,9 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                      * Downloadable products.
                      */
                     Route::controller(DownloadableProductController::class)->prefix('downloadable-products')->group(function () {
-                        Route::get('', 'index')->name('shop.customer.downloadable_products.index');
+                        Route::get('', 'index')->name('shop.customers.account.downloadable_products.index');
 
-                        Route::get('download/{id}', 'download')->name('shop.customer.downloadable_products.download');
+                        Route::get('download/{id}', 'download')->name('shop.customers.account.downloadable_products.download');
                     });
 
 

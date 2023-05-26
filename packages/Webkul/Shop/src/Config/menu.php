@@ -28,7 +28,7 @@ return [
     ], [
         'key'   => 'account.downloadables',
         'name'  => 'shop::app.layouts.downloadable-products',
-        'route' => 'shop.customer.downloadable_products.index',
+        'route' => 'shop.customers.account.downloadable_products.index',
         'icon'  => '',
         'sort'  => 4,
     ], [
