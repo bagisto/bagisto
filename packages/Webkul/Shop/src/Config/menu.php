@@ -22,7 +22,7 @@ return [
     ], [
         'key'   => 'account.orders',
         'name'  => 'shop::app.layouts.orders',
-        'route' => 'shop.customer.orders.index',
+        'route' => 'shop.customers.account.orders.index',
         'icon'  => '',
         'sort'  => 3,
     ], [
@@ -46,7 +46,7 @@ return [
     ], [
         'key'   => 'account.compare',
         'name'  => 'shop::app.customer.compare.text',
-        'route' => 'shop.customer.orders.index',
+        'route' => 'shop.customers.account.orders.index',
         'icon'  => '',
         'sort'  => 7,
     ],
