@@ -29,7 +29,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="company_name"
-                value=""
+                :value="old('company_name')"
                 label="Company name"
                 placeholder="Company Name"
             >
@@ -49,7 +49,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="first_name"
-                value=""
+                :value="old('first_name')"
                 rules="required"
                 label="First Name"
                 placeholder="First Name"
@@ -70,7 +70,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="last_name"
-                value=""
+                :value="old('last_name')"
                 rules="required"
                 label="Last Name"
                 placeholder="Last Name"
@@ -91,7 +91,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="vat_id"
-                value=""
+                :value="old('vat_id')"
                 label="Vat Id"
                 placeholder="Vat Id"
             >
@@ -111,7 +111,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="address1[]"
-                value=""
+                :value="old('address1[]')"
                 rules="required"
                 label="Street Address"
                 placeholder="Street Address"
@@ -132,7 +132,7 @@
             <x-shop::form.control-group.control
                 type="select"
                 name="country"
-                value=""
+                :value="old('country')"
                 class="mb-4"
                 rules="required"
                 label="Country"
@@ -163,7 +163,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="state"
-                value=""
+                :value="old('state')"
                 rules="required"
                 label="State"
                 placeholder="State"
@@ -184,7 +184,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="city"
-                value=""
+                :value="old('city')"
                 rules="required"
                 label="City"
                 placeholder="City"
@@ -205,7 +205,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="postcode"
-                value=""
+                :value="old('postcode')"
                 rules="required|integer"
                 label="Post Code"
                 placeholder="Post Code"
@@ -226,7 +226,7 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="phone"
-                value=""
+                :value="old('phone')"
                 rules="required|integer"
                 label="Phone"
                 placeholder="Phone"
