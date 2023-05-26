@@ -123,19 +123,19 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                      * Addresses.
                      */
                     Route::controller(AddressController::class)->prefix('addresses')->group(function () {
-                        Route::get('', 'index')->name('shop.customer.addresses.index');
+                        Route::get('', 'index')->name('shop.customers.account.addresses.index');
     
-                        Route::get('create', 'create')->name('shop.customer.addresses.create');
+                        Route::get('create', 'create')->name('shop.customers.account.addresses.create');
     
-                        Route::post('create', 'store')->name('shop.customer.addresses.store');
+                        Route::post('create', 'store')->name('shop.customers.account.addresses.store');
     
-                        Route::get('edit/{id}', 'edit')->name('shop.customer.addresses.edit');
+                        Route::get('edit/{id}', 'edit')->name('shop.customers.account.addresses.edit');
     
-                        Route::put('edit/{id}', 'update')->name('shop.customer.addresses.update');
+                        Route::put('edit/{id}', 'update')->name('shop.customers.account.addresses.update');
     
-                        Route::patch('edit/{id}/default', 'makeDefault')->name('shop.customer.addresses.update.default');
+                        Route::patch('edit/{id}', 'makeDefault')->name('shop.customers.account.addresses.update.default');
     
-                        Route::delete('delete/{id}', 'destroy')->name('shop.customer.addresses.delete');
+                        Route::delete('delete/{id}', 'destroy')->name('shop.customers.account.addresses.delete');
                     });
 
                     /**

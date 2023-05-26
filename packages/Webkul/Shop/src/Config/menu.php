@@ -16,7 +16,7 @@ return [
     ], [
         'key'   => 'account.address',
         'name'  => 'shop::app.layouts.address',
-        'route' => 'shop.customer.addresses.index',
+        'route' => 'shop.customers.account.addresses.index',
         'icon'  => '',
         'sort'  => 2,
     ], [

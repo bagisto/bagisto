@@ -17,7 +17,7 @@
         </div>
 
         <a
-            href="{{ route('shop.customer.addresses.create') }}"
+            href="{{ route('shop.customers.account.addresses.create') }}"
             class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
         >
             @lang('shop::app.customers.account.addresses.add-address') 

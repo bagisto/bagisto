@@ -6,7 +6,7 @@
 
     <x-shop::form
         method="PUT"
-        :action="route('shop.customer.addresses.update',  $address->id)"
+        :action="route('shop.customers.account.addresses.update',  $address->id)"
         class="rounded mt-[30px]"
     >
         <x-shop::form.control-group class="mb-4">

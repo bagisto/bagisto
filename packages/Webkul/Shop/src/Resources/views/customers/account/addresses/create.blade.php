@@ -18,7 +18,7 @@
     </div>
 
     <x-shop::form
-        :action="route('shop.customer.addresses.store')"
+        :action="route('shop.customers.account.addresses.store')"
         class="rounded mt-[30px]"
     >
         <x-shop::form.control-group class="mb-4">
